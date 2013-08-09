@@ -98,6 +98,10 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 * The invalid Email message label should now properly populate upon plugin activation.
 * Fixed a bug that caused the CSV files attached to admin emails to only contain the date.
 
+*Changes:*
+
+* Added an "alt" tag to the loading ajax image.
+
 = 2.2.37 =
 
 *Changes:*
