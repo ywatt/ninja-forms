@@ -33,7 +33,7 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 	www.drewwilson.com
 	Copyright 2010 Drew Wilson
 
-	jQuery MaskedInput v.1.3
+	jQuery MaskedInput v.1.3.1
 	http://digitalbush.co
 	Copyright (c) 2007-2011 Josh Bush
 
@@ -41,7 +41,7 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 	http://tablesorter.com
 	Copyright (c) Christian Bach 2012
 
-	jQuery AutoNumeric Plugin v.1.7.4-B
+	jQuery AutoNumeric Plugin v.1.9.15
 	http://www.decorplanit.com/plugin/
 	By: Bob Knothe And okolov Yura aka funny_falcon
 
