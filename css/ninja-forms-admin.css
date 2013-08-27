@@ -80,7 +80,7 @@ margin: 0;
 	clear: none;
 	float: left;
 	width: 46%;
-	margin: 0 2% 3px 2%;
+	margin: 0 2% 3px 2% !important;
 	padding: 0;
 }
 
