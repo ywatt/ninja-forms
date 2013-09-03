@@ -7,11 +7,11 @@
 }
 
 /* dashboard icon */
-#toplevel_page_ninja-forms .wp-menu-image {
-  background: none!important;
+#toplevel_page_ninja-forms .wp-menu-image img {
+  display: none;
 }
 #toplevel_page_ninja-forms .wp-menu-image:before {
-	font-family: 'Genericons'!important; /* this assumes you've loaded Genericons in your admin */
+	font-family: 'ninjaforms'!important; /* this assumes you've loaded Genericons in your admin */
 	content: 'a'; /* replace this with your icon */
 	font-size: 20px;
 	position: relative;
