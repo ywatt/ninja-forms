@@ -69,7 +69,6 @@ This section describes how to install the plugin and get it working.
 
 Shortcodes have been re-implemented. They are used like so: [ninja_forms_display_form id=3] where 3 is the ID number of the form you want to display.
 
-
 == Use ==
 
 For help and video tutorials, please visit our website: [Ninja Forms Documentation](http://ninjaforms.com/documentation/intro/)
