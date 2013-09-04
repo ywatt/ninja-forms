@@ -8,7 +8,6 @@ Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
 Domain Path: /lang/
-Contributors: kstover, jameslaws, daveshine
 
 Copyright 2011 WP Ninjas/Kevin Stover.
 
