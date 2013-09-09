@@ -30,7 +30,7 @@ function ninja_forms_edit_field_desc($field_id){
 			$display_span = ' style="display:none;"';
 		}
 
-		if( !$desc_pos_options OR $desc_pos_options == '' ){
+		if( !isset ( $desc_pos_options ) OR $desc_pos_options == '' ){
 			$options = array(
 				array('name' => __( 'None', 'ninja-forms' ), 'value' => 'none'),
 				array('name' => __( 'Before Everything', 'ninja-forms' ), 'value' => 'before_everything'),
