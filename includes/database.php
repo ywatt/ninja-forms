@@ -382,6 +382,9 @@ function ninja_forms_update_sub($args){
 	$update_array = array();
 	$sub_id = $args['sub_id'];
 	unset( $args['sub_id'] );
+	if ( !is_serialized( $args['data'] ) ) {
+		$args['data'] = serialize( $args['data'] );
+	}
 	$update_array = $args;
 
 	$wpdb->update(NINJA_FORMS_SUBS_TABLE_NAME, $update_array, array('id' => $sub_id));

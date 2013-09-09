@@ -25,7 +25,25 @@ function ninja_forms_post_process(){
 			}else{
 
 				if( $ninja_forms_processing->get_form_setting( 'landing_page' ) != '' ){
+					// Setup our $_SESSION variables
+
+					$_SESSION['ninja_forms_form_id'] = $form_id;
 					$_SESSION['ninja_forms_values'] = $ninja_forms_processing->get_all_fields();
+					$_SESSION['ninja_forms_form_settings'] = $ninja_forms_processing->get_all_form_settings();
+					$all_fields_settings = array();
+					foreach ( $ninja_forms_processing->get_all_fields() as $field_id => $user_value ) {
+						$field_settings = $ninja_forms_processing->get_field_settings( $field_id );
+						$all_fields_settings[$field_id] = $field_settings; 
+					}
+					$_SESSION['ninja_forms_fields_settings'] = $all_fields_settings;
+
+					// Set errors and success messages as $_SESSION variables.
+					$success = $ninja_forms_processing->get_all_success_msgs();
+					$errors = $ninja_forms_processing->get_all_errors();
+
+					$_SESSION['ninja_forms_success_msgs'] = $success;
+					$_SESSION['ninja_forms_error_msgs'] = $errors;
+
 					header( 'Location: '.$ninja_forms_processing->get_form_setting( 'landing_page' ) );
 					die();
 				}

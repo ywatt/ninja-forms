@@ -1,8 +1,14 @@
 <?php
-function ninja_forms_setup_processing_class(){
+function ninja_forms_setup_processing_class( $form_id = '' ){
 	global $ninja_forms_processing;
 	//Set the form id
-	$form_id = $_REQUEST['_form_id'];
+	if ( $form_id == '' ) {
+		if ( isset ( $_REQUEST['_form_id'] ) ) {
+			$form_id = $_REQUEST['_form_id'];
+		} else if ( isset ( $_SESSION['ninja_forms_form_id'] ) ) {
+			$form_id = $_SESSION['ninja_forms_form_id'];
+		}
+	}
 
 	//Initiate our processing class with our designated global variable.
 	$ninja_forms_processing = new Ninja_Forms_Processing($form_id);
