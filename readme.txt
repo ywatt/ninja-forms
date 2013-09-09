@@ -75,6 +75,12 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
+= 2.2.45 =
+
+*Features:*
+
+* Added a new fields description option. Using the rich text editor add text or images to your common field types and display the before or after the field output or before or after the label.
+
 = 2.2.44 =
 
 *Changes:*
@@ -193,7 +199,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 *Changes:*
 
-* Added translation ability to many, many previously untranslatable strings. 
+* Added translation ability to many, many previously untranslatable strings.
 * Added an improved German translation file.
 * Improved the way that Ninja Forms handles translations so that translation files may be placed in the WP_LANG_DIR/ninja-forms/ directory rather than the main plugin directory. This will make them safe from plugin updates.
 * Thank you very much to David Decker for these changes!
@@ -342,7 +348,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 = 2.2.17 =
 
 *Changes:*
-	
+
 * Added a new div that wraps all the fields when a form is displayed.
 
 *Bugs:*
