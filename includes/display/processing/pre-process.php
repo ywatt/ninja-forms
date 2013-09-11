@@ -5,8 +5,11 @@ function ninja_forms_setup_processing_class( $form_id = '' ){
 	if ( $form_id == '' ) {
 		if ( isset ( $_REQUEST['_form_id'] ) ) {
 			$form_id = $_REQUEST['_form_id'];
-		} else if ( isset ( $_SESSION['ninja_forms_form_id'] ) ) {
-			$form_id = $_SESSION['ninja_forms_form_id'];
+		} else if ( isset ( $_SESSION['ninja_forms_transient_id'] ) ) {
+			$cache = get_transient( $_SESSION['ninja_forms_transient_id'] );
+			if ( $cache !== false ) {
+				$form_id = $cache['form_id'];
+			}
 		}
 	}
 
