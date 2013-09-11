@@ -253,8 +253,23 @@ require_once( NINJA_FORMS_DIR . "/includes/admin/save.php" );
 if(session_id() == '') {
 	session_start();
 }
+
 $_SESSION['NINJA_FORMS_DIR'] = NINJA_FORMS_DIR;
 $_SESSION['NINJA_FORMS_URL'] = NINJA_FORMS_URL;
+
+// Set $_SESSION variable used for storing items in transient variables
+function ninja_forms_set_transient_id(){
+	if ( !isset ( $_SESSION['ninja_forms_transient_id'] ) AND !is_admin() ) {
+		$t_id = ninja_forms_random_string();
+		// Make sure that our transient ID isn't currently in use.
+		while ( get_transient( $t_id ) !== false ) {
+			$_id = ninja_forms_random_string();
+		}
+		$_SESSION['ninja_forms_transient_id'] = $t_id;		
+	}
+}
+
+add_action( 'init', 'ninja_forms_set_transient_id', 1 );
 
 function ninja_forms_load_lang() {
 
