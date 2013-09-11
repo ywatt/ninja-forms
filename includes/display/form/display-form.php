@@ -26,30 +26,34 @@ if( isset( $_POST['_ninja_forms_display_submit'] ) AND $_POST['_ninja_forms_disp
  */
 
 function ninja_forms_session_class_setup(){
-	if ( isset ( $_SESSION['ninja_forms_values'] ) AND is_array ( $_SESSION['ninja_forms_values'] ) AND !isset( $_POST['_ninja_forms_display_submit'] ) ) {
-		add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
+	if ( isset ( $_SESSION['ninja_forms_transient_id'] ) ) {
+		if ( get_transient( $_SESSION['ninja_forms_transient_id'] ) !== false ) {
+			add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
+		}
 	}
 }
 
-add_action( 'init', 'ninja_forms_session_class_setup', 1 );
+add_action( 'init', 'ninja_forms_session_class_setup', 4 );
 
+/*
+ *
+ * Function that clears any transient values that have been stored in cache for this user.
+ *
+ * @since 2.2.45
+ * @return void
+ */
 
-function my_cool_test(){
-	/*
-	var_dump( $_SESSION['ninja_forms_values'] );
-	var_dump( $_SESSION['ninja_forms_fields_settings'] );
-	var_dump( $_SESSION['ninja_forms_form_settings'] );
-	var_dump( $_SESSION['ninja_forms_success_msgs'] );
-	var_dump( $_SESSION['ninja_forms_error_msgs'] );
-	*/
+function ninja_forms_clear_transient() {
+	//set_transient( 'ninja_forms_test', 'TEST', DAY_IN_SECONDS );
+	ninja_forms_delete_transient();
 }
 
-add_action( 'init', 'my_cool_test', 1500 );
-
-add_action('wp_head', 'ninja_forms_page_append_check');
+add_action( 'wp_head', 'ninja_forms_clear_transient' );
 
 function ninja_forms_page_append_check(){
 	global $post, $ninja_forms_append_page_form_id;
+
+
 
 	if(is_array($ninja_forms_append_page_form_id)){
 		unset($ninja_forms_append_page_form_id);
@@ -69,6 +73,8 @@ function ninja_forms_page_append_check(){
 		}
 	}
 }
+
+add_action('wp_head', 'ninja_forms_page_append_check');
 
 function remove_bad_br_tags($content) {
 	$content = str_ireplace( '</label><br />', '</label>', $content );

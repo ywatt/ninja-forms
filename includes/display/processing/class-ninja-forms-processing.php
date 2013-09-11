@@ -124,6 +124,7 @@ class Ninja_Forms_Processing {
 			return '';
 		
 		$this->data['action'] = 'submit';
+		$cache = get_transient( $_SESSION['ninja_forms_transient_id'] );
 
 		// If we have fields in our $_POST object, then loop through the $_POST'd field values and add them to our global variable.
 		if ( isset ( $_POST['_ninja_forms_display_submit'] ) ) {
@@ -182,12 +183,13 @@ class Ninja_Forms_Processing {
 				}
 				$this->data['form']['admin_attachments'] = array();
 				$this->data['form']['user_attachments'] = array();
+				$this->data['form']['form_url'] = wp_guess_url();
 			}
 
-		} else if ( isset ( $_SESSION['ninja_forms_values'] ) AND $_SESSION['ninja_forms_values'] ) { // Check to see if we have $_SESSION values from a submission.
-			if ( is_array ( $_SESSION['ninja_forms_values'] ) ) {
+		} else if ( $cache !== false ) { // Check to see if we have $_SESSION values from a submission.
+			if ( is_array ( $cache['field_values'] ) ) {
 				// We do have a submission contained in our $_SESSION variable. We'll populate the field values with that data.
-				foreach ( $_SESSION['ninja_forms_values'] as $field_id => $val ) {
+				foreach ( $cache['field_values'] as $field_id => $val ) {
 					$field_row = ninja_forms_get_field_by_id($field_id);
 					if(is_array($field_row) AND !empty($field_row)){
 						if(isset($field_row['type'])){
@@ -205,8 +207,8 @@ class Ninja_Forms_Processing {
 						//$val = ninja_forms_esc_html_deep( $val );
 
 						$this->data['fields'][$field_id] = $val;
-						if ( isset ( $_SESSION['ninja_forms_fields_settings'][$field_id] ) ) {
-							$field_row = $_SESSION['ninja_forms_fields_settings'][$field_id];
+						if ( isset ( $cache['field_settings'][$field_id] ) ) {
+							$field_row = $cache['field_settings'][$field_id];
 						} else {
 							$field_row = ninja_forms_get_field_by_id( $field_id );
 						}
@@ -215,17 +217,9 @@ class Ninja_Forms_Processing {
 					}
 				}
 
-				$this->data['form'] = $_SESSION['ninja_forms_form_settings'];
-				$this->data['success'] = $_SESSION['ninja_forms_success_msgs'];
-				$this->data['errors'] = $_SESSION['ninja_forms_error_msgs'];
-				// Remove our $_SESSION variables so that they don't populate our form on later pages.
-
-				unset( $_SESSION['ninja_forms_form_id'] );
-				unset( $_SESSION['ninja_forms_values'] );
-				unset( $_SESSION['ninja_forms_fields_settings'] );
-				unset( $_SESSION['ninja_forms_form_settings'] );
-				unset( $_SESSION['ninja_forms_success_msgs'] );
-				unset( $_SESSION['ninja_forms_error_msgs'] );
+				$this->data['form'] = $cache['form_settings'];
+				$this->data['success'] = $cache['success_msgs'];
+				$this->data['errors'] = $cache['error_msgs'];
 			}
 		}
 
@@ -851,9 +845,7 @@ class Ninja_Forms_Processing {
 				$field_settings = $this->get_field_settings( $field_id );
 				$field_value = $this->get_field_value( $field_id );
 				$data = $field_settings['data'];
-				if ( isset ( $data['calc_option'] ) AND $data['calc_option'] == 1 ) {
-					$tmp_array[$field_id] = $value;
-				}
+				$tmp_array[$field_id] = $value;
 			}
 			$fields = $tmp_array;
 			$total = array();
@@ -934,9 +926,7 @@ class Ninja_Forms_Processing {
 				$field_settings = $this->get_field_settings( $field_id );
 				$field_value = $this->get_field_value( $field_id );
 				$data = $field_settings['data'];
-				if ( isset ( $data['calc_option'] ) AND $data['calc_option'] == 1 ) {
-					$tmp_array[$field_id] = $value;
-				}
+				$tmp_array[$field_id] = $value;
 			}
 			$fields = $tmp_array;
 			
