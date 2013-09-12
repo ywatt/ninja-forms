@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.2.44
+Stable tag: 2.2.45
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -81,17 +81,25 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 * Added a new fields description option. Using the rich text editor add text or images to your common field types and display the before or after the field output or before or after the label.
 
-= 2.2.44 =
-
 *Changes:*
 
-* Fixed many previously untranslated strings. Big thanks to daveshine for the hard work in making Ninja Forms translation friendly.
+* Ninja Forms form field values will no longer be available in a $_SESSION variable. Instead, a form's success page may use the global $ninja_forms_processing object to access submitted values.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.2.45 =
+
+*Features:*
+
+* Added a new fields description option. Using the rich text editor add text or images to your common field types and display the before or after the field output or before or after the label.
+
+*Changes:*
+
+* Ninja Forms form field values will no longer be available in a $_SESSION variable. Instead, a form's success page may use the global $ninja_forms_processing object to access submitted values.
 
 = 2.2.44 =
 
