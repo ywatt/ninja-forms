@@ -10,7 +10,7 @@ function ninja_forms_field_filter_populate_term( $data, $field_id ){
 
     $add_field = apply_filters( 'ninja_forms_use_post_fields', false );
     if ( !$add_field )
-        return false;
+        return $data;
 
     $field_row = ninja_forms_get_field_by_id( $field_id );
     $field_type = $field_row['type'];

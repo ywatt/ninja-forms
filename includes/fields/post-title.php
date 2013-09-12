@@ -57,7 +57,7 @@ function ninja_forms_field_post_title_display($field_id, $data){
 		$label = '';
 	}
 	
-	if($label_pos == 'inside'){
+	if ( $label_pos == 'inside' AND $default_value == '' ) {
 		$default_value = $label;
 	}	
 	

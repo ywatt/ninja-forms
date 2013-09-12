@@ -11,7 +11,7 @@ function ninja_forms_filter_term_ids_for_name( $val, $field_id ){
 
 	$add_field = apply_filters( 'ninja_forms_use_post_fields', false );
 	if ( !$add_field )
-		return false;
+		return $val;
 
 	$field_row = ninja_forms_get_field_by_id( $field_id );
 	if ( $field_row['type'] == '_list' ) {
@@ -65,7 +65,7 @@ function ninja_forms_filter_term_ids_for_name_sub_td( $val, $field_id, $sub_id )
 	
 	$add_field = apply_filters( 'ninja_forms_use_post_fields', false );
 	if ( !$add_field )
-		return false;
+		return $val;
 
 	return ninja_forms_filter_term_ids_for_name( $val, $field_id );
 }

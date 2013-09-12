@@ -227,7 +227,6 @@ function ninja_forms_field_list_display( $field_id, $data ){
 		$list_type = '';
 	}
 
-
 	if(isset($data['list_show_value'])){
 		$list_show_value = $data['list_show_value'];
 	}else{

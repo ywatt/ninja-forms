@@ -536,10 +536,13 @@ function ninja_forms_set_transient(){
 	$transient['field_values'] = $ninja_forms_processing->get_all_fields();
 	$transient['form_settings'] = $ninja_forms_processing->get_all_form_settings();
 	$all_fields_settings = array();
-	foreach ( $ninja_forms_processing->get_all_fields() as $field_id => $user_value ) {
-		$field_settings = $ninja_forms_processing->get_field_settings( $field_id );
-		$all_fields_settings[$field_id] = $field_settings; 
+	if ( $ninja_forms_processing->get_all_fields() ) {
+		foreach ( $ninja_forms_processing->get_all_fields() as $field_id => $user_value ) {
+			$field_settings = $ninja_forms_processing->get_field_settings( $field_id );
+			$all_fields_settings[$field_id] = $field_settings; 
+		}		
 	}
+
 	$transient['field_settings'] = $all_fields_settings;
 
 	// Set errors and success messages as $_SESSION variables.

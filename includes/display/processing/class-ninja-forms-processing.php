@@ -127,7 +127,7 @@ class Ninja_Forms_Processing {
 		$cache = get_transient( $_SESSION['ninja_forms_transient_id'] );
 
 		// If we have fields in our $_POST object, then loop through the $_POST'd field values and add them to our global variable.
-		if ( isset ( $_POST['_ninja_forms_display_submit'] ) ) {
+		if ( isset ( $_POST['_ninja_forms_display_submit'] ) OR isset ( $_POST['_ninja_forms_edit_sub'] ) ) {
 			foreach($_POST as $key => $val){
 				if(substr($key, 0, 1) != '_'){
 					$process_field = strpos($key, 'ninja_forms_field_');
@@ -216,11 +216,11 @@ class Ninja_Forms_Processing {
 						$this->data['field_data'][$field_id] = $field_row;
 					}
 				}
-
-				$this->data['form'] = $cache['form_settings'];
-				$this->data['success'] = $cache['success_msgs'];
-				$this->data['errors'] = $cache['error_msgs'];
 			}
+			$this->data['form'] = $cache['form_settings'];
+			$this->data['success'] = $cache['success_msgs'];
+			$this->data['errors'] = $cache['error_msgs'];
+			
 		}
 
 	} // Submitted Vars function
