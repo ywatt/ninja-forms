@@ -46,6 +46,7 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 	By: Bob Knothe And okolov Yura aka funny_falcon
 
 */
+	
 global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
