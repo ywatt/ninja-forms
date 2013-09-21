@@ -21,6 +21,8 @@ class NF_Extension_Updater
 	public $product_name = '';
 	public $version = '';
 	public $store_url = 'http://ninjaforms.com';
+	public $file = '';
+	public $author = '';
 
 	/*
 	 *
@@ -30,11 +32,13 @@ class NF_Extension_Updater
 	 * @return void
 	 */
 
-	function __construct( $product_name, $version ) {
+	function __construct( $product_name, $version, $author, $file ) {
 		$this->product_nice_name = $product_name;
 		$this->product_name = strtolower( $product_name );
 		$this->product_name = preg_replace( "/[^a-zA-Z]+/", "", $this->product_name );
 		$this->version = $version;
+		$this->file = $file;
+		$this->author = $author;
 
 		$this->add_license_fields();
 		$this->license_status();
@@ -93,66 +97,99 @@ class NF_Extension_Updater
 			$old_license = '';
 		}
 
-		// If we are changing licenses, deactivate the current one if it is valid.
 		if ( $old_license != '' AND $old_license != $data[ $this->product_name.'_license' ] AND $status == 'valid' ) {
-			// retrieve the license from the database
-			$license = $data[ $this->product_name.'_license' ];
-
-			// data to send in our API request
-			$api_params = array( 
-				'edd_action'=> 'deactivate_license', 
-				'license' 	=> $license, 
-				'item_name' => urlencode( $this->product_nice_name ) // the name of our product in EDD
-			);
-	 
-			// Call the custom API.
-			$response = wp_remote_get( add_query_arg( $api_params, $this->store_url ), array( 'timeout' => 15, 'sslverify' => false ) );
-
-	 		// make sure the response came back okay
-			if ( is_wp_error( $response ) )
-				return false;
-
-			// decode the license data
-			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-			var_dump( $license_data->license );
-			// $license_data->license will be either "deactivated" or "failed"
-			if( $license_data->license == 'deactivated' ) {
-				// $license_data->license will be either "valid" or "invalid"
-		 		$plugin_settings[  $this->product_name.'_license_status' ] = 'invalid';
-		 		$status = 'invalid';
-				update_option( 'ninja_forms_settings', $plugin_settings );
-			}
+			$this->deactivate_license();
 		}
-
-
 
 		if( $old_license == '' OR ( $old_license != $data[ $this->product_name.'_license' ] ) OR $status == 'invalid' ){
-	 		// retrieve the license from the database
-			$license = $data[ $this->product_name.'_license' ];
-
-			// data to send in our API request
-			$api_params = array( 
-				'edd_action'=> 'activate_license', 
-				'license' 	=> $license, 
-				'item_name' => urlencode( $this->product_nice_name ) // the name of our product in EDD
-			);
-	 
-			// Call the custom API.
-			$response = wp_remote_get( add_query_arg( $api_params, $this->store_url ) );
-	 
-			// make sure the response came back okay
-			if ( is_wp_error( $response ) )
-				return false;
-	 
-			// decode the license data
-			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
-			// $license_data->license will be either "valid" or "invalid"
-	 		$plugin_settings[  $this->product_name.'_license_status' ] = $license_data->license;
-
-			update_option( 'ninja_forms_settings', $plugin_settings );
+	 		$this->activate_license( $data );
 		}
 	} // function check_license
+
+	/*
+	 *
+	 * Function that activates our license
+	 *
+	 * @since 2.2.47
+	 * @return void
+	 */
+
+	function activate_license( $data ) {
+		$plugin_settings = get_option( 'ninja_forms_settings' );
+		// retrieve the license from the database
+		$license = $data[ $this->product_name.'_license' ];
+
+		// data to send in our API request
+		$api_params = array( 
+			'edd_action'=> 'activate_license', 
+			'license' 	=> $license, 
+			'item_name' => urlencode( $this->product_nice_name ) // the name of our product in EDD
+		);
+ 
+		// Call the custom API.
+		$response = wp_remote_get( add_query_arg( $api_params, $this->store_url ) );
+ 
+		// make sure the response came back okay
+		if ( is_wp_error( $response ) )
+			return false;
+ 
+		// decode the license data
+		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+		// $license_data->license will be either "valid" or "invalid"
+ 		$plugin_settings[  $this->product_name.'_license_status' ] = $license_data->license;
+
+		update_option( 'ninja_forms_settings', $plugin_settings );
+	}
+
+	/*
+	 *
+	 * Function that deactivates our license if the user clicks the "Deactivate License" button.
+	 *
+	 * @since 2.2.47
+	 * @return void
+	 */
+
+	function deactivate_license() {
+		$plugin_settings = get_option( 'ninja_forms_settings' );
+
+		if( isset( $plugin_settings[ $this->product_name.'_license_status' ] ) ){
+			$status = $plugin_settings[ $this->product_name.'_license_status' ];
+		}else{
+			$status = 'invalid';
+		}
+
+		if( isset( $plugin_settings[ $this->product_name.'_license' ] ) ){
+			$license = $plugin_settings[ $this->product_name.'_license'];
+		}else{
+			$license = '';
+		}
+		
+		// data to send in our API request
+		$api_params = array( 
+			'edd_action'=> 'deactivate_license', 
+			'license' 	=> $license, 
+			'item_name' => urlencode( $this->product_nice_name ) // the name of our product in EDD
+		);
+
+		// Call the custom API.
+		$response = wp_remote_get( add_query_arg( $api_params, $this->store_url ), array( 'timeout' => 15, 'sslverify' => false ) );
+
+ 		// make sure the response came back okay
+		if ( is_wp_error( $response ) )
+			return false;
+
+		// decode the license data
+		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+		
+		// $license_data->license will be either "deactivated" or "failed"
+		if( $license_data->license == 'deactivated' ) {
+			// $license_data->license will be either "valid" or "invalid"
+			$plugin_settings[  $this->product_name.'_license_status' ] = 'invalid';
+	 		$plugin_settings[  $this->product_name.'_license' ] = '';
+			update_option( 'ninja_forms_settings', $plugin_settings );
+		}
+	}
 
 	/*
 	 *
@@ -197,11 +234,11 @@ class NF_Extension_Updater
 		}
 
 		// setup the updater
-		$edd_updater = new EDD_SL_Plugin_Updater( $this->store_url, 'test.php', array(
+		$edd_updater = new EDD_SL_Plugin_Updater( $this->store_url, $this->file, array(
 		    'version'   => $this->version,     // current version number
 		    'license'   => $license,  // license key (used get_option above to retrieve from DB)
 		    'item_name'     => $this->product_nice_name,  // name of this plugin
-		    'author'  => 'WP Ninjas'  // author of this plugin
+		    'author'  => $this->author,  // author of this plugin
 		  )
 		);
 	} // function auto_update
