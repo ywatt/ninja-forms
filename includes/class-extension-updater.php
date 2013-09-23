@@ -32,10 +32,15 @@ class NF_Extension_Updater
 	 * @return void
 	 */
 
-	function __construct( $product_name, $version, $author, $file ) {
+	function __construct( $product_name, $version, $author, $file, $slug = '' ) {
 		$this->product_nice_name = $product_name;
-		$this->product_name = strtolower( $product_name );
-		$this->product_name = preg_replace( "/[^a-zA-Z]+/", "", $this->product_name );
+		if ( $slug == '' ) {
+			$this->product_name = strtolower( $product_name );
+			$this->product_name = preg_replace( "/[^a-zA-Z]+/", "", $this->product_name );			
+		} else {
+			$this->product_name = $slug;
+		}
+
 		$this->version = $version;
 		$this->file = $file;
 		$this->author = $author;
