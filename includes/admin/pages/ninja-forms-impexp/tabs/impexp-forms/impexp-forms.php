@@ -240,6 +240,16 @@ function ninja_forms_calc_after_import_form( $form ){
 						}
 					}
 				}
+
+				if ( isset ( $field_rows[$y]['data']['calc_eq'] ) AND $field_rows[$y]['data']['calc_eq'] != '' ) {
+					$calc_eq = $field_rows[$y]['data']['calc_eq'];
+					foreach( $form['field'] as $inserted_field ){
+						$calc_eq = str_replace( 'field_'.$inserted_field['old_id'], 'field_'.$inserted_field['id'], $calc_eq );
+					}
+					$field_rows[$y]['data']['calc_eq'] = $calc_eq;
+				}
+
+
 				$field_rows[$y]['data'] = serialize( $field_rows[$y]['data'] );
 				$args = array(
 					'update_array' => array(
