@@ -828,6 +828,7 @@ class Ninja_Forms_Processing {
 				$calc_eq = $data['calc_eq'];
 				$places = $data['calc_places'];
 				$total_field = $field_id;
+				
 				$total_value = number_format( round( $user_value, $places ), $places );					
 				
 				break;
