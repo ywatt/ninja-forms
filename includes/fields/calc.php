@@ -587,6 +587,7 @@ function ninja_forms_field_calc_pre_process(){
 				if ( isset ( $calc_places ) ) {
 					$result = number_format( round( $result, $calc_places ), $calc_places );
 				}
+				$result = str_replace( ',', '', $result );
 				$ninja_forms_processing->update_field_value( $field_id, $result );		
 			}
 		}

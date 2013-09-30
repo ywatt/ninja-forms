@@ -220,7 +220,7 @@ jQuery(document).ready(function(jQuery) {
 							var new_value = '';
 							// Set our old_value to the previous one for this field.
 							old_value = jQuery(this).data('oldValue');
-														
+								
 							// Check to see if we are in a list field. If we are, we can grab the calc values.
 							if ( jQuery('#ninja_forms_field_' + field_id + '_type' ).val() == 'list' ) {
 								var key = jQuery(this).val();
@@ -374,6 +374,7 @@ jQuery(document).ready(function(jQuery) {
 								new_value = parseFloat( new_value );
 								tmp = new ninja_forms_var_operator(new_op);
 								var calc_value = tmp.evaluate( current_value, new_value );
+								//console.log( current_value + ' ' + new_op + ' ' + new_value + ' = ' + calc_value );
 							} else {
 								// We don't have any calculations to do, so set calc_value to our current_value.
 								var calc_value = current_value;
@@ -482,7 +483,7 @@ jQuery(document).ready(function(jQuery) {
 						}
 
 						if ( current_value !== calc_value ) {
-
+							jQuery(this).removeClass('ninja-forms-field-calc-no-old-op');
 							calc_value = calc_value.toFixed(calc_places);
 							// Set the value of our calculation field.							
 							if(jQuery("#ninja_forms_field_" + calc_id).attr("type") == 'text' ){
