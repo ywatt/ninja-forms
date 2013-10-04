@@ -203,7 +203,7 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 	$msg_format = 'inline';
 
 	wp_enqueue_script( 'ninja-forms-display',
-		NINJA_FORMS_URL .'/js/min/ninja-forms-display.min.js',
+		NINJA_FORMS_URL .'/js/dev/ninja-forms-display.js',
 		array( 'jquery', 'jquery-form' ) );
 
 	if( !isset( $ninja_forms_display_localize_js ) OR !$ninja_forms_display_localize_js ){
