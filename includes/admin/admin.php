@@ -8,6 +8,7 @@ function ninja_forms_add_menu(){
 	$capabilities = apply_filters( 'ninja_forms_admin_menu_capabilities', $capabilities );
 
 	$page = add_menu_page("Ninja Forms" , __( 'Forms', 'ninja-forms' ), $capabilities, "ninja-forms", "ninja_forms_admin", NINJA_FORMS_URL."/images/ninja-head-ico-small.png" );
+	/*
 	$all_forms = add_submenu_page("ninja-forms", __( 'Forms', 'ninja-forms' ), __( 'All Forms', 'ninja-forms' ), $capabilities, "ninja-forms", "ninja_forms_admin");
 	$new_form = add_submenu_page("ninja-forms", __( 'Add New', 'ninja-forms' ), __( 'Add New', 'ninja-forms' ), $capabilities, "ninja-forms&tab=form_settings&form_id=new", "ninja_forms_admin");
 	$subs = add_submenu_page("ninja-forms", __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), $capabilities, "ninja-forms-subs", "ninja_forms_admin");
@@ -34,15 +35,18 @@ function ninja_forms_add_menu(){
 	add_action('admin_print_styles-' . $extend, 'ninja_forms_admin_css');
 
 	add_action( 'load-' . $page, 'ninja_forms_load_screen_options_tab' );
-	add_action( 'load-' . $all_forms, 'ninja_forms_load_screen_options_tab' );
+	//add_action( 'load-' . $all_forms, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $settings, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $import, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $subs, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $extend, 'ninja_forms_load_screen_options_tab' );
+	*/
 }
 
 function ninja_forms_admin(){
 	global $wpdb, $ninja_forms_tabs, $ninja_forms_sidebars, $current_tab, $ninja_forms_tabs_metaboxes, $ninja_forms_admin_update_message;
+
+	/*
 
 	$current_tab = ninja_forms_get_current_tab();
 	$current_page = $_REQUEST['page'];
@@ -151,6 +155,7 @@ function ninja_forms_admin(){
 	<!-- </div>/.wrap-->
 </form>
 <?php
+	*/
 } //End ninja_edit_forms function
 
 if(is_admin()){
