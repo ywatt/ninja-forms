@@ -351,3 +351,5 @@ function ninja_forms_remove_from_array($arr, $key, $val, $within = FALSE) {
 
     return array_values($arr);
 }
+
+require_once( NINJA_FORMS_DIR . "/media-modal-demo/media-modal-demo.php" );

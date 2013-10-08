@@ -52,6 +52,27 @@ function ninja_forms_admin(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/*
 	$current_tab = ninja_forms_get_current_tab();
 	$current_page = $_REQUEST['page'];
