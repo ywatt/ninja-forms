@@ -46,8 +46,13 @@ function ninja_forms_add_menu(){
 function ninja_forms_admin(){
 	global $wpdb, $ninja_forms_tabs, $ninja_forms_sidebars, $current_tab, $ninja_forms_tabs_metaboxes, $ninja_forms_admin_update_message;
 
-	/*
 
+
+
+
+
+
+	/*
 	$current_tab = ninja_forms_get_current_tab();
 	$current_page = $_REQUEST['page'];
 
