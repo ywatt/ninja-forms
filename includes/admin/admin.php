@@ -312,8 +312,11 @@ function ninja_forms_admin(){
 	}
 	.ninja-forms-admin-field {
 		background: #f1f1f1;
-		border: 1px solid #ccc;
+		/*border: 1px solid #ccc;*/
 		padding: 5px 20px;
+	}
+	.ninja-forms-admin-field:hover {
+		background: #ddd;
 	}
 	.ninja-forms-admin-field label {
 		font-weight: bold;
@@ -349,7 +352,7 @@ function ninja_forms_admin(){
 	.nf-left-handlebar,
 	.nf-right-handlebar {
 		background: #ccc;
-		width: 5px;
+		width: 6px;
 	}
 	.nf-left-handlebar:before,
 	.nf-right-handlebar:before {
@@ -362,10 +365,10 @@ function ninja_forms_admin(){
 		right: 1px;
 	}
 	.nf-left-handlebar:before {
-		left: 1px;
+		left: 2px;
 	}
 	.nf-right-handlebar:before {
-		right: 1px;
+		right: 2px;
 	}
 	.nf-left-handlebar {
 		position: absolute;
