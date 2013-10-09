@@ -46,6 +46,370 @@ function ninja_forms_add_menu(){
 function ninja_forms_admin(){
 	global $wpdb, $ninja_forms_tabs, $ninja_forms_sidebars, $current_tab, $ninja_forms_tabs_metaboxes, $ninja_forms_admin_update_message;
 
+	?>
+
+	<div id="nav-menus-frame">
+	<div id="menu-settings-column" class="metabox-holder">
+
+		<div class="clear"></div>
+
+		<div id="side-sortables" class="accordion-container">
+
+			<ul class="outer-border">
+
+				<li class="control-section accordion-section  open add-page top" id="add-page">
+					<h3 class="accordion-section-title hndle" tabindex="0" title="Pages">General Fields</h3>
+					<div class="accordion-section-content ">
+						<div class="inside">
+							<input type="submit" name="submit" id="submit" class="button button-secondary" value="Single Line Text">
+							<input type="submit" name="submit" id="submit" class="button button-secondary" value="Multi Line Text">
+							<input type="submit" name="submit" id="submit" class="button button-secondary" value="Checkbox">
+							<input type="submit" name="submit" id="submit" class="button button-secondary" value="Dropdown List">
+						</div><!-- .inside -->
+					</div><!-- .accordion-section-content -->
+				</li><!-- .accordion-section -->
+
+				<li class="control-section accordion-section   add-custom-links" id="add-custom-links">
+					<h3 class="accordion-section-title hndle" tabindex="0" title="Links">Advanced Fields</h3>
+					<div class="accordion-section-content ">
+						<div class="inside">
+						</div><!-- .inside -->
+					</div><!-- .accordion-section-content -->
+				</li><!-- .accordion-section -->
+
+				<li class="control-section accordion-section   add-category" id="add-category">
+					<h3 class="accordion-section-title hndle" tabindex="0" title="Categories">Calculation Fields</h3>
+					<div class="accordion-section-content ">
+						<div class="inside">
+						</div><!-- .inside -->
+					</div><!-- .accordion-section-content -->
+				</li><!-- .accordion-section -->
+
+				<li class="control-section accordion-section   add-post_format bottom" id="add-post_format">
+					<h3 class="accordion-section-title hndle" tabindex="0" title="Format">Layout Elements</h3>
+					<div class="accordion-section-content  bottom">
+						<div class="inside">
+						</div><!-- .inside -->
+					</div><!-- .accordion-section-content -->
+				</li><!-- .accordion-section -->
+
+			</ul><!-- .outer-border -->
+		</div><!-- .accordion-container -->
+	</div><!-- /#menu-settings-column -->
+
+	<div id="menu-management-liquid">
+		<div id="menu-management">
+			<div class="menu-edit ">
+				<div id="nav-menu-header">
+					<div class="major-publishing-actions">
+						<div class="publishing-action">
+							<input type="submit" name="submit" id="submit" class="button button-secondary" value="Form Settings">
+						</div><!-- END .publishing-action -->
+					</div><!-- END .major-publishing-actions -->
+				</div><!-- END .nav-menu-header -->
+				<div id="post-body">
+					<div id="post-body-content">
+						<h3>Forms Structure</h3>
+						<p>Drag each item into the order you prefer. Click edit to reveal additional options.</p>
+
+						<div class="ninja-row">
+							<div class="ninja-col-4-4">
+								<div class="ninja-forms-admin-field label-above">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										Single Line Text - ID : 20
+									</div>
+									<div class="nf-footer-right">
+										<a href="#">Edit</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="ninja-row">
+							<div class="ninja-col-2-4">
+								<div class="nf-left-handlebar"></div>
+								<div class="ninja-forms-admin-field label-above">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										Single Line Text - ID : 20
+									</div>
+									<div class="nf-footer-right">
+										<a href="#">Edit</a>
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
+
+							<div class="ninja-col-2-4">
+								<div class="ninja-forms-admin-field label-above">
+									<div class="nf-left-handlebar"></div>
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										Single Line Text - ID : 20
+									</div>
+									<div class="nf-footer-right">
+										<a href="#">Edit</a>
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
+						</div>
+
+						<div class="ninja-row">
+							<div class="ninja-col-1-3">
+								<div class="nf-left-handlebar"></div>
+								<div class="ninja-forms-admin-field label-above">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										Single Line Text - ID : 20
+									</div>
+									<div class="nf-footer-right">
+										<a href="#">Edit</a>
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
+
+							<div class="ninja-col-1-3">
+								<div class="nf-left-handlebar"></div>
+								<div class="ninja-forms-admin-field label-above">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										Single Line Text - ID : 20
+									</div>
+									<div class="nf-footer-right">
+										<a href="#">Edit</a>
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
+
+							<div class="ninja-col-1-3">
+								<div class="nf-left-handlebar"></div>
+								<div class="ninja-forms-admin-field label-above">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										Single Line Text - ID : 20
+									</div>
+									<div class="nf-footer-right">
+										<a href="#">Edit</a>
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
+						</div>
+
+						<div class="ninja-row">
+							<div class="ninja-col-1-4">
+								<div class="nf-left-handlebar"></div>
+								<div class="ninja-forms-admin-field label-above">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										Single Line Text - ID : 20
+									</div>
+									<div class="nf-footer-right">
+										<a href="#">Edit</a>
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
+
+							<div class="ninja-col-1-4">
+								<div class="nf-left-handlebar"></div>
+								<div class="ninja-forms-admin-field label-above">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										Single Line Text - ID : 20
+									</div>
+									<div class="nf-footer-right">
+										<a href="#">Edit</a>
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
+
+							<div class="ninja-col-1-4">
+								<div class="nf-left-handlebar"></div>
+								<div class="ninja-forms-admin-field label-above">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										Single Line Text - ID : 20
+									</div>
+									<div class="nf-footer-right">
+										<a href="#">Edit</a>
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
+
+							<div class="ninja-col-1-4">
+								<div class="nf-left-handlebar"></div>
+								<div class="ninja-forms-admin-field label-above">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										Single Line Text - ID : 20
+									</div>
+									<div class="nf-footer-right">
+										<a href="#">Edit</a>
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
+						</div>
+
+
+
+
+
+
+					</div><!-- /#post-body-content -->
+				</div><!-- /#post-body -->
+				<div id="nav-menu-footer">
+					<div class="major-publishing-actions">
+						<div class="publishing-action">
+							<a class="submitdelete deletion menu-delete" href="/wp-admin/nav-menus.php?action=delete&amp;menu=6&amp;0=http%3A%2F%2Fnf.com%2Fwp-admin%2F&amp;_wpnonce=27e3bc67f9">Delete Form</a>
+						</div><!-- END .publishing-action -->
+					</div><!-- END .major-publishing-actions -->
+				</div><!-- /#nav-menu-footer -->
+			</div><!-- /.menu-edit -->
+		</div><!-- /#menu-management -->
+	</div><!-- /#menu-management-liquid -->
+	</div>
+
+
+<style>
+	#nav-menus-frame {
+		padding-right: 20px;
+	}
+	.toplevel_page_ninja-forms #post-body {
+		padding: 0 10px 10px;
+		border-width: 1px 0;
+		border-style: solid;
+	}
+	.toplevel_page_ninja-forms #post-body:after,
+	.ninja-forms-admin-field:after {
+		clear: both;
+		content: "";
+		display: block;
+	}
+	.toplevel_page_ninja-forms .publishing-action {
+		padding: 8px 0;
+	}
+	.toplevel_page_ninja-forms .accordion-container .button {
+		width: 49%;
+		margin-bottom: 3px;
+	}
+	.ninja-forms-admin-field {
+		background: #f1f1f1;
+		border: 1px solid #ccc;
+		padding: 5px 20px;
+	}
+	.ninja-forms-admin-field label {
+		font-weight: bold;
+	}
+	.label-above label {
+		display: block;
+	}
+	.label-above input[type=text] {
+		width: 100%;
+	}
+	.nf-footer-left {
+		color: #777;
+		float: left;
+	}
+	.nf-footer-right {
+		float: right;
+	}
+
+	.toplevel_page_ninja-forms #post-body *,
+	.toplevel_page_ninja-forms #post-body *:after,
+	.toplevel_page_ninja-forms #post-body *:before {
+	    -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	}
+
+	[class*='ninja-col-'] {
+	    float: left;
+	    padding: 0 5px;
+	    position: relative;
+	}
+	.nf-left-handlebar,
+	.nf-right-handlebar {
+		background: #ccc;
+		width: 5px;
+	}
+	.nf-left-handlebar:before,
+	.nf-right-handlebar:before {
+		background: #f1f1f1;
+		content: "";
+		position: absolute;
+		width: 2px;
+		top: 5px;
+		bottom: 5px;
+		right: 1px;
+	}
+	.nf-left-handlebar:before {
+		left: 1px;
+	}
+	.nf-right-handlebar:before {
+		right: 1px;
+	}
+	.nf-left-handlebar {
+		position: absolute;
+		left: 6px;
+		top: 0;
+		bottom: 0;
+	}
+	.nf-right-handlebar {
+		position: absolute;
+		right: 6px;
+		top: 0;
+		bottom: 0;
+	}
+
+	/*[class*='ninja-col-']:last-of-type {
+	    padding-right: 0;
+	}*/
+
+	.ninja-col-1-2 { width: 50%; }
+	.ninja-col-2-2 { width: 100%; }
+
+	.ninja-col-1-3 { width: 33.33%; }
+	.ninja-col-2-3 { width: 66.66%; }
+	.ninja-col-3-3 { width: 100%; }
+
+	.ninja-col-1-4 { width: 25%; }
+	.ninja-col-2-4 { width: 50%; }
+	.ninja-col-3-4 { width: 75%; }
+	.ninja-col-4-4 { width: 100%; }
+
+	.ninja-row { width: auto; margin: 0 auto 10px; padding: 0; }
+
+	.ninja-row:after {
+	    content: "";
+	    display: table;
+	    clear: both;
+	}
+
+
+
+
+
+
+</style>
 
 
 
@@ -70,9 +434,7 @@ function ninja_forms_admin(){
 
 
 
-
-
-
+<?php
 	/*
 	$current_tab = ninja_forms_get_current_tab();
 	$current_page = $_REQUEST['page'];
