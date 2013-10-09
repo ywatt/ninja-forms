@@ -1096,7 +1096,7 @@ var ds = ds || {};
 		}
 	} );
 
-	media.buttonId = '#open-media-modal',
+	media.buttonId = '.open-settings-modal',
 
 	_.extend( media, {
 		frame: function() {
@@ -1136,8 +1136,9 @@ var ds = ds || {};
 					controller: media.frame(),
 					model:      media.frame().state()
 				} );
-
+				
 				media.frame().content.set( view );
+	
 			} );			
 
 			this._frame.on( 'content:create:email_settings_state', function() {
@@ -1173,10 +1174,13 @@ var ds = ds || {};
 
 		open: function() {
 			$( '.media-modal' ).addClass( 'smaller' );
+
 		},
 
 		ready: function() {
 			console.log( 'Frame ready' );
+			var init = tinyMCEPreInit.mceInit['success_msg'];
+    		tinymce.init(init);
 		},
 
 		close: function() {
@@ -1237,3 +1241,36 @@ var ds = ds || {};
 
 	$( media.init );
 } )( jQuery );
+
+function tinyMCE_bulk_init( editor_ids ) {
+    var init, ed, qt, first_init, DOM, el, i;
+
+    if ( typeof(tinymce) == 'object' ) {
+
+        var editor;
+        for ( e in tinyMCEPreInit.mceInit ) {
+            editor = e;
+            break;
+        }
+        for ( i in editor_ids ) {
+            var ed_id = editor_ids[i];
+            tinyMCEPreInit.mceInit[ed_id] = tinyMCEPreInit.mceInit[editor];
+            tinyMCEPreInit.mceInit[ed_id]['elements'] = ed_id;
+            tinyMCEPreInit.mceInit[ed_id]['body_class'] = ed_id;
+            tinyMCEPreInit.mceInit[ed_id]['succesful'] =  false;
+        }
+
+        for ( ed in tinyMCEPreInit.mceInit ) {
+            // check if there is an adjacent span with the class mceEditor
+            if ( ! jQuery('#'+ed).next().hasClass('mceEditor') ) {
+                init = tinyMCEPreInit.mceInit[ed];
+                try {
+                    tinymce.init(init);
+                } catch(e){
+                    console.log('fail');
+                }
+            }
+        }
+
+    }
+}

@@ -106,7 +106,7 @@ function ninja_forms_admin(){
 				<div id="nav-menu-header">
 					<div class="major-publishing-actions">
 						<div class="publishing-action">
-							<input type="button" id="open-media-modal" class="button button-secondary" value="Form Settings">
+							<input type="button" id="form_settings" class="open-settings-modal button button-secondary" value="Form Settings">
 						</div><!-- END .publishing-action -->
 					</div><!-- END .major-publishing-actions -->
 				</div><!-- END .nav-menu-header -->
@@ -117,14 +117,14 @@ function ninja_forms_admin(){
 
 						<div class="ninja-row">
 							<div class="ninja-col-4-4">
-								<div class="ninja-forms-admin-field label-above">
+								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										Single Line Text - ID : 20
 									</div>
 									<div class="nf-footer-right">
-										<a href="#">Edit</a>
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 								</div>
 							</div>
@@ -133,14 +133,14 @@ function ninja_forms_admin(){
 						<div class="ninja-row">
 							<div class="ninja-col-2-4">
 								<div class="nf-left-handlebar"></div>
-								<div class="ninja-forms-admin-field label-above">
+								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										Single Line Text - ID : 20
 									</div>
 									<div class="nf-footer-right">
-										<a href="#">Edit</a>
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
@@ -289,31 +289,73 @@ function ninja_forms_admin(){
 		</div><!-- /#menu-management -->
 	</div><!-- /#menu-management-liquid -->
 	</div>
+	<div id="render">
 
+	</div>
 	<script type="text/html" id="tmpl-basic-settings">
 		<br />
 		<div>
 			<label>
-				Label: 
-				<input type="textbox" name="" value="Test">
+				<input type="checkbox" name="" value="">
+				Display Form Title
+			</label>
+		</div>
+		<div>
+			<label>
+				<input type="checkbox" name="" value="">
+				Save Form Submissions
+			</label>
+		</div>			
+		<div>
+			<label>
+				<input type="checkbox" name="" value="">
+				Require the user to be logged in to see the form
 			</label>
 		</div>				
 		<div>
 			<label>
-				Label Position: 
+				Append to page: 
 				<select id="" name="" class="">
-					<option value="left">Left of Element</option>
-					<option value="above">Above Element</option>
-					<option value="below">Below Element</option>
-					<option value="right">Right of Element</option>
-					<option value="inside">Inside Element</option>
+					<option>About Us</option>
+					<option>Contact Us</option>
+					<option>Employees</option>
+					<option>Careers</option>
 				</select>
 			</label>
 		</div>	
 		<div>
 			<label>
-				Default Value: 
-				<input type="textbox" name="" value="Test">
+				<input type="checkbox" name="" value="">
+				Submit via ajax
+			</label>
+		</div>
+		<div>
+			<label>
+				Show this page after successful submission: 
+				<select id="" name="" class="">
+					<option>About Us</option>
+					<option>Contact Us</option>
+					<option>Employees</option>
+					<option>Careers</option>
+				</select>
+			</label>
+		</div>
+		<div>
+			<label>
+				<input type="checkbox" name="" value="">
+				Clear this form after a user submits it
+			</label>
+		</div>			
+		<div>
+			<label>
+				<input type="checkbox" name="" value="">
+				Hide this form after a user submits it
+			</label>
+		</div>
+		<div>
+			<label>
+				Message to display after a user submits this form successfully
+				<?php wp_editor( 'Hello World', 'success_msg' ) ;?>
 			</label>
 		</div>
 	</script>		
