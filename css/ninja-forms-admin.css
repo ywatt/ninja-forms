@@ -695,6 +695,14 @@ a.tooltip span
 / 3.0 UI Changes
 */
 
+.icon32 {
+	display: inline-block;
+	float: left;
+	height: 34px;
+	margin: 7px 8px 0 0;
+	width: 35px;
+}
+
 #nav-menus-frame {
 	padding-right: 20px;
 }
@@ -711,7 +719,7 @@ a.tooltip span
 }
 .toplevel_page_ninja-forms .major-publishing-actions .publishing-action {
 	float: none;
-	padding: 8px 0;
+	padding: 5px 0;
 	text-align: left;
 }
 .toplevel_page_ninja-forms .accordion-container .button {
