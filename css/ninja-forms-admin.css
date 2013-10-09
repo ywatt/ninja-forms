@@ -709,8 +709,10 @@ a.tooltip span
 	content: "";
 	display: block;
 }
-.toplevel_page_ninja-forms .publishing-action {
+.toplevel_page_ninja-forms .major-publishing-actions .publishing-action {
+	float: none;
 	padding: 8px 0;
+	text-align: left;
 }
 .toplevel_page_ninja-forms .accordion-container .button {
 	width: 49%;
