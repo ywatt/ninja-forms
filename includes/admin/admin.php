@@ -211,7 +211,6 @@ function ninja_forms_admin(){
 
 						<div class="ninja-row">
 							<div class="ninja-col-1-4">
-								<div class="nf-left-handlebar"></div>
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -222,11 +221,9 @@ function ninja_forms_admin(){
 										<a href="#">Edit</a>
 									</div>
 								</div>
-								<div class="nf-right-handlebar"></div>
 							</div>
 
 							<div class="ninja-col-1-4">
-								<div class="nf-left-handlebar"></div>
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -237,11 +234,9 @@ function ninja_forms_admin(){
 										<a href="#">Edit</a>
 									</div>
 								</div>
-								<div class="nf-right-handlebar"></div>
 							</div>
 
 							<div class="ninja-col-1-4">
-								<div class="nf-left-handlebar"></div>
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -252,11 +247,9 @@ function ninja_forms_admin(){
 										<a href="#">Edit</a>
 									</div>
 								</div>
-								<div class="nf-right-handlebar"></div>
 							</div>
 
 							<div class="ninja-col-1-4">
-								<div class="nf-left-handlebar"></div>
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -267,7 +260,6 @@ function ninja_forms_admin(){
 										<a href="#">Edit</a>
 									</div>
 								</div>
-								<div class="nf-right-handlebar"></div>
 							</div>
 						</div>
 

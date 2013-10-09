@@ -719,7 +719,7 @@ a.tooltip span
 }
 .toplevel_page_ninja-forms .major-publishing-actions .publishing-action {
 	float: none;
-	padding: 5px 0;
+	padding: 3px 0;
 	text-align: left;
 }
 .toplevel_page_ninja-forms .accordion-container .button {
@@ -727,14 +727,17 @@ a.tooltip span
 	margin-bottom: 3px;
 }
 .ninja-forms-admin-field {
-	background: #f1f1f1;
+	background: #ccc;
+	cursor:move;
 	/*border: 1px solid #ccc;*/
 	padding: 5px 20px;
 }
 .ninja-forms-admin-field:hover {
 	background: #ddd;
 }
-.ninja-forms-admin-field label {
+.ninja-forms-admin-field label,
+.ninja-forms-admin-field input {
+	cursor:move;
 	font-weight: bold;
 }
 .label-above label {
@@ -768,6 +771,7 @@ a.tooltip span
 .nf-left-handlebar,
 .nf-right-handlebar {
 	background: #ccc;
+	cursor:e-resize;
 	width: 6px;
 }
 .nf-left-handlebar:before,
@@ -781,10 +785,10 @@ a.tooltip span
 	right: 1px;
 }
 .nf-left-handlebar:before {
-	left: 2px;
+	left: 1px;
 }
 .nf-right-handlebar:before {
-	right: 2px;
+	right: 1px;
 }
 .nf-left-handlebar {
 	position: absolute;
@@ -826,6 +830,10 @@ a.tooltip span
 /********************************************************************************
 / 3.0 UI Modal
 */
+
+.media-frame-content {
+	padding: 0 20px;
+}
 
 #wrap {
 	width: 100%;
