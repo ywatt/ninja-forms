@@ -48,6 +48,9 @@ function ninja_forms_admin(){
 
 	?>
 
+	<div id="icon-ninja-custom-forms" class="icon32"><br></div>
+	<h2>Form Editor - Your Form Title - ID : 16</h2>
+
 	<div id="nav-menus-frame">
 	<div id="menu-settings-column" class="metabox-holder">
 
