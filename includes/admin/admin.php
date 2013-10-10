@@ -358,7 +358,40 @@ function ninja_forms_admin(){
 	</div>
 
   <div id="ex1" style="display:none;">
-    <p>Thanks for clicking.  That felt good.  <a href="#" rel="modal:close">Close</a> or press ESC</p>
+  	<a class="media-modal-close" href="#" title="Close">
+  		<span class="media-modal-icon"></span>
+  	</a>
+  	<div class="media-frame wp-core-ui" id="__wp-uploader-id-0">
+
+		<div class="media-frame-menu">
+			<div class="media-menu">
+				<a href="#" class="media-menu-item active">Basic Settings</a>
+				<a href="#" class="media-menu-item">User Emails</a>
+				<a href="#" class="media-menu-item">Admin Emails</a>
+				<div class="separator"></div>
+				<a href="#" class="media-menu-item">Misc.</a>
+			</div>
+		</div>
+		
+		<div class="media-frame-title">
+			<h1>Basic Settings</h1>
+		</div>
+
+		<div class="media-frame-router">
+			<div class="media-router">
+				<a href="#" class="media-menu-item">Tab #1</a>
+				<a href="#" class="media-menu-item active">Tab #2</a>
+			</div>
+		</div>
+
+		<div class="media-frame-content">
+
+			<p>Place your settings here.</p>
+			
+		</div>
+
+	</div>
+
  
   </div>
 

@@ -964,3 +964,16 @@ a.tooltip span
 	bottom: 10%;
 	left:   15%;
 }
+
+.modal {
+	position: fixed;
+	background: #fff;
+	border-radius: 0;
+	top: 30px !important;
+	left: 30px !important;
+	right: 30px;
+	bottom: 30px;
+	margin: auto !important;
+	width: auto;
+	z-index: 160000 !important;
+}
