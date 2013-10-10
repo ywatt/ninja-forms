@@ -855,7 +855,7 @@ a.tooltip span
 .ninja-col-4-4 { width: 100%; }
 
 .ninja-row { width: auto; margin: 0 auto; padding: 0; }
-
+.ninja-row li { margin-bottom: 0; }
 .ninja-row:after {
     content: "";
     display: table;

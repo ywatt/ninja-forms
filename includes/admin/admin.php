@@ -115,8 +115,8 @@ function ninja_forms_admin(){
 						<h3>Forms Structure</h3>
 						<p>Drag each item into the order you prefer. Click edit to reveal additional options.</p>
 
-						<div class="ninja-row">
-							<div class="ninja-col-4-4">
+						<ul class="ninja-row">
+							<li class="ninja-col-4-4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -127,11 +127,11 @@ function ninja_forms_admin(){
 										Single Line Text - ID : 20
 									</div>
 								</div>
-							</div>
-						</div>
+							</li>
+						</ul>
 
-						<div class="ninja-row">
-							<div class="ninja-col-2-4">
+						<ul class="ninja-row">
+							<li class="ninja-col-2-4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -143,9 +143,9 @@ function ninja_forms_admin(){
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
-							</div>
+							</li>
 
-							<div class="ninja-col-2-4">
+							<li class="ninja-col-2-4">
 								<div class="ninja-forms-admin-field label-above">
 									<div class="nf-left-handlebar"></div>
 									<label>Label</label>
@@ -157,11 +157,11 @@ function ninja_forms_admin(){
 										Single Line Text - ID : 20
 									</div>
 								</div>
-							</div>
-						</div>
+							</li>
+						</ul>
 
-						<div class="ninja-row">
-							<div class="ninja-col-1-3">
+						<ul class="ninja-row">
+							<li class="ninja-col-1-3">
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -173,9 +173,9 @@ function ninja_forms_admin(){
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
-							</div>
+							</li>
 
-							<div class="ninja-col-1-3">
+							<li class="ninja-col-1-3">
 								<div class="nf-left-handlebar"></div>
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
@@ -188,9 +188,9 @@ function ninja_forms_admin(){
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
-							</div>
+							</li>
 
-							<div class="ninja-col-1-3">
+							<li class="ninja-col-1-3">
 								<div class="nf-left-handlebar"></div>
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
@@ -202,11 +202,11 @@ function ninja_forms_admin(){
 										Single Line Text - ID : 20
 									</div>
 								</div>
-							</div>
-						</div>
+							</li>
+						</ul>
 
-						<div class="ninja-row">
-							<div class="ninja-col-1-4">
+						<ul class="ninja-row">
+							<li class="ninja-col-1-4">
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -217,9 +217,9 @@ function ninja_forms_admin(){
 										Single Line Text - ID : 20
 									</div>
 								</div>
-							</div>
+							</li>
 
-							<div class="ninja-col-1-4">
+							<li class="ninja-col-1-4">
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -230,9 +230,9 @@ function ninja_forms_admin(){
 										Single Line Text - ID : 20
 									</div>
 								</div>
-							</div>
+							</li>
 
-							<div class="ninja-col-1-4">
+							<li class="ninja-col-1-4">
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -243,9 +243,9 @@ function ninja_forms_admin(){
 										Single Line Text - ID : 20
 									</div>
 								</div>
-							</div>
+							</li>
 
-							<div class="ninja-col-1-4">
+							<li class="ninja-col-1-4">
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -256,11 +256,11 @@ function ninja_forms_admin(){
 										Single Line Text - ID : 20
 									</div>
 								</div>
-							</div>
-						</div>
+							</li>
+						</ul>
 
-						<div class="ninja-row">
-							<div class="ninja-col-1-3">
+						<ul class="ninja-row">
+							<li class="ninja-col-1-3">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -272,9 +272,9 @@ function ninja_forms_admin(){
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
-							</div>
+							</li>
 
-							<div class="ninja-col-2-3">
+							<li class="ninja-col-2-3">
 								<div class="ninja-forms-admin-group label-above">
 									<div class="nf-left-handlebar"></div>
 									<label>Contact Info</label>
@@ -308,11 +308,11 @@ function ninja_forms_admin(){
 										Group - ID : 20
 									</div>
 								</div>
-							</div>
-						</div>
+							</li>
+						</ul>
 
-						<div class="ninja-row">
-							<div class="ninja-col-2-4">
+						<ul class="ninja-row">
+							<li class="ninja-col-2-4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -324,9 +324,9 @@ function ninja_forms_admin(){
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
-							</div>
+							</li>
 
-							<div class="ninja-col-2-4">
+							<li class="ninja-col-2-4">
 								<div class="ninja-forms-admin-field label-above">
 									<div class="nf-left-handlebar"></div>
 									<label>Label</label>
@@ -338,8 +338,8 @@ function ninja_forms_admin(){
 										Single Line Text - ID : 20
 									</div>
 								</div>
-							</div>
-						</div>
+							</li>
+						</ul>
 
 
 
