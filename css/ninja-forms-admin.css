@@ -695,6 +695,15 @@ a.tooltip span
 / 3.0 UI Changes
 */
 
+.toplevel_page_ninja-forms #post-body *,
+.toplevel_page_ninja-forms #post-body *:after,
+.toplevel_page_ninja-forms #post-body *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 .icon32 {
 	display: inline-block;
 	float: left;
@@ -838,9 +847,6 @@ a.tooltip span
 	bottom: 10px;
 }
 
-[class*='ninja-col-'] {
-
-}
 
 .ninja-col-1-2 { width: 50%; }
 .ninja-col-2-2 { width: 100%; }
@@ -864,7 +870,10 @@ a.tooltip span
 
 [class*='ninja-placeholder-'] {
 	background: #f1f1f1;
-	height: 70px;
+	height: 80px;
+    float: left;
+    padding: 0 5px;
+    position: relative;
 }
 
 .ninja-placeholder-1-2 { width: 50%; }
