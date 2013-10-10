@@ -1045,11 +1045,48 @@ function ninja_forms_escape_html(html) {
     return escape.innerHTML;
 }
 
+/*
+ *
+ * Define our Form data model. Each form setting will be a setting within this data.
+ *
+ */
+
+formSettings = Backbone.Model.extend();
+
+thisForm = new formSettings({
+	title: 'My First Form',
+	displayTitle: 0,
+	saveSub: 1,
+	requireLogin: 0,
+	appendPage: '',
+	ajax: 0,
+	successPage: '',
+	clearForm: 1,
+	hideForm: 1,
+	successMsg: 'Thanks for filling in my form!' 
+});
+
+HomeView = Backbone.View.extend({
+
+	el: "#my-content-id",
+
+	initialize: function() {
+		this.render();
+	},
+
+	render: function() {
+		this.$el.append("<h1>My App</h1>");
+
+		return this;
+	}
+});
+
+
+
+
+/*
 var ds = ds || {};
 
-/**
- * Demo 5
- */
 ( function( $ ) {
 	var media;
 
@@ -1059,7 +1096,14 @@ var ds = ds || {};
 
 	media.view.basicSettings = wp.media.View.extend( {
 		className: 'basic-settings-frame',
-		template:  wp.media.template( 'basic-settings' ) // <script type="text/html" id="tmpl-basic-settings">
+		template:  wp.media.template( 'basic-settings' ), // <script type="text/html" id="tmpl-basic-settings">
+		render: function() {
+			// Compile the template using underscore
+            var template = this.template;
+            // Load the compiled HTML into the Backbone "el"
+            this.$el.html( template );
+			tinyMCE.execCommand( 'mceAddControl', true, 'success_msg' );
+		}
 	} );
 
 	media.controller.basicSettings = wp.media.controller.State.extend( {
@@ -1073,6 +1117,7 @@ var ds = ds || {};
 	media.view.emailSettings = wp.media.View.extend( {
 		className: 'email-settings-frame',
 		template:  wp.media.template( 'email-settings' ) // <script type="text/html" id="tmpl-email-settings">
+
 	} );
 
 	media.controller.emailSettings = wp.media.controller.State.extend( {
@@ -1179,8 +1224,7 @@ var ds = ds || {};
 
 		ready: function() {
 			console.log( 'Frame ready' );
-			var init = tinyMCEPreInit.mceInit['success_msg'];
-    		tinymce.init(init);
+			
 		},
 
 		close: function() {
@@ -1209,31 +1253,9 @@ var ds = ds || {};
 			selection.map( media.showAttachmentDetails );
 		},
 
-		showAttachmentDetails: function( attachment ) {
-			var details_tmpl = $( '#attachment-details-tmpl' ),
-				details = details_tmpl.clone();
-
-			details.addClass( 'added' );
-
-			$( 'input', details ).each( function() {
-				var key = $( this ).attr( 'id' ).replace( 'attachment-', '' );
-				$( this ).val( attachment.get( key ) );
-			} );
-
-			details.attr( 'id', 'attachment-details-' + attachment.get( 'id' ) );
-
-			var sizes = attachment.get( 'sizes' );
-			$( 'img', details ).attr( 'src', sizes.thumbnail.url );
-
-			$( 'textarea', details ).val( JSON.stringify( attachment, null, 2 ) );
-
-			details_tmpl.after( details );
-		},
-
 		init: function() {
 			$( media.buttonId ).on( 'click', function( e ) {
 				e.preventDefault();
-
 				media.frame().open();
 			});
 		}
@@ -1274,3 +1296,4 @@ function tinyMCE_bulk_init( editor_ids ) {
 
     }
 }
+*/
