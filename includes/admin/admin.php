@@ -340,7 +340,9 @@ function ninja_forms_admin(){
 								</div>
 							</li>
 						</ul>
+						<ul class="ninja-row">
 
+						</ul>
 
 
 					</div><!-- /#post-body-content -->

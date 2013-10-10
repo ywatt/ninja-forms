@@ -1013,6 +1013,12 @@ jQuery(document).ready(function($) {
 
 	/* * * End Form Settings JS * * */
 
+
+	$(".ninja-row").sortable({
+		connectWith: '.ninja-row',
+		placeholder: 'ninja-placeholder-1-2'
+	});
+
 }); //Document.read();
 
 function ninja_forms_new_field_response( response ){
