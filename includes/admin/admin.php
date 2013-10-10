@@ -121,10 +121,10 @@ function ninja_forms_admin(){
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
-										Single Line Text - ID : 20
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										<a href="#" class="open-settings-modal">Edit</a>
+										Single Line Text - ID : 20
 									</div>
 								</div>
 							</div>
@@ -132,15 +132,14 @@ function ninja_forms_admin(){
 
 						<div class="ninja-row">
 							<div class="ninja-col-2-4">
-								<div class="nf-left-handlebar"></div>
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
-										Single Line Text - ID : 20
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										<a href="#" class="open-settings-modal">Edit</a>
+										Single Line Text - ID : 20
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
@@ -152,27 +151,25 @@ function ninja_forms_admin(){
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
-										Single Line Text - ID : 20
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										<a href="#">Edit</a>
+										Single Line Text - ID : 20
 									</div>
 								</div>
-								<div class="nf-right-handlebar"></div>
 							</div>
 						</div>
 
 						<div class="ninja-row">
 							<div class="ninja-col-1-3">
-								<div class="nf-left-handlebar"></div>
 								<div class="ninja-forms-admin-field label-above">
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
-										Single Line Text - ID : 20
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										<a href="#">Edit</a>
+										Single Line Text - ID : 20
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
@@ -184,10 +181,10 @@ function ninja_forms_admin(){
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
-										Single Line Text - ID : 20
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										<a href="#">Edit</a>
+										Single Line Text - ID : 20
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
@@ -199,13 +196,12 @@ function ninja_forms_admin(){
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
-										Single Line Text - ID : 20
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										<a href="#">Edit</a>
+										Single Line Text - ID : 20
 									</div>
 								</div>
-								<div class="nf-right-handlebar"></div>
 							</div>
 						</div>
 
@@ -215,10 +211,10 @@ function ninja_forms_admin(){
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
-										Single Line Text - ID : 20
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										<a href="#">Edit</a>
+										Single Line Text - ID : 20
 									</div>
 								</div>
 							</div>
@@ -228,10 +224,10 @@ function ninja_forms_admin(){
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
-										Single Line Text - ID : 20
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										<a href="#">Edit</a>
+										Single Line Text - ID : 20
 									</div>
 								</div>
 							</div>
@@ -241,10 +237,10 @@ function ninja_forms_admin(){
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
-										Single Line Text - ID : 20
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										<a href="#">Edit</a>
+										Single Line Text - ID : 20
 									</div>
 								</div>
 							</div>
@@ -254,17 +250,96 @@ function ninja_forms_admin(){
 									<label>Label</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
-										Single Line Text - ID : 20
+										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										<a href="#">Edit</a>
+										Single Line Text - ID : 20
 									</div>
 								</div>
 							</div>
 						</div>
 
+						<div class="ninja-row">
+							<div class="ninja-col-1-3">
+								<div class="ninja-forms-admin-field label-above open-settings-modal">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										<a href="#" class="open-settings-modal">Edit</a>
+									</div>
+									<div class="nf-footer-right">
+										Single Line Text - ID : 20
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
 
+							<div class="ninja-col-2-3">
+								<div class="ninja-forms-admin-group label-above">
+									<div class="nf-left-handlebar"></div>
+									<label>Contact Info</label>
 
+									<div class="ninja-forms-admin-field label-above open-settings-modal">
+										<label>Label</label>
+										<input type="text" disabled />
+										<div class="nf-footer-left">
+											<a href="#" class="open-settings-modal">Edit</a>
+										</div>
+										<div class="nf-footer-right">
+											Single Line Text - ID : 20
+										</div>
+									</div>
+
+									<div class="ninja-forms-admin-field label-above open-settings-modal">
+										<label>Label</label>
+										<input type="text" disabled />
+										<div class="nf-footer-left">
+											<a href="#" class="open-settings-modal">Edit</a>
+										</div>
+										<div class="nf-footer-right">
+											Single Line Text - ID : 20
+										</div>
+									</div>
+
+									<div class="nf-footer-left">
+										<a href="#" class="open-settings-modal">Edit</a>
+									</div>
+									<div class="nf-footer-right">
+										Group - ID : 20
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="ninja-row">
+							<div class="ninja-col-2-4">
+								<div class="ninja-forms-admin-field label-above open-settings-modal">
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										<a href="#" class="open-settings-modal">Edit</a>
+									</div>
+									<div class="nf-footer-right">
+										Single Line Text - ID : 20
+									</div>
+								</div>
+								<div class="nf-right-handlebar"></div>
+							</div>
+
+							<div class="ninja-col-2-4">
+								<div class="ninja-forms-admin-field label-above">
+									<div class="nf-left-handlebar"></div>
+									<label>Label</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										<a href="#" class="open-settings-modal">Edit</a>
+									</div>
+									<div class="nf-footer-right">
+										Single Line Text - ID : 20
+									</div>
+								</div>
+							</div>
+						</div>
 
 
 
@@ -297,16 +372,16 @@ function ninja_forms_admin(){
 				<input type="checkbox" name="" value="">
 				Save Form Submissions
 			</label>
-		</div>			
+		</div>
 		<div>
 			<label>
 				<input type="checkbox" name="" value="">
 				Require the user to be logged in to see the form
 			</label>
-		</div>				
+		</div>
 		<div>
 			<label>
-				Append to page: 
+				Append to page:
 				<select id="" name="" class="">
 					<option>About Us</option>
 					<option>Contact Us</option>
@@ -314,7 +389,7 @@ function ninja_forms_admin(){
 					<option>Careers</option>
 				</select>
 			</label>
-		</div>	
+		</div>
 		<div>
 			<label>
 				<input type="checkbox" name="" value="">
@@ -323,7 +398,7 @@ function ninja_forms_admin(){
 		</div>
 		<div>
 			<label>
-				Show this page after successful submission: 
+				Show this page after successful submission:
 				<select id="" name="" class="">
 					<option>About Us</option>
 					<option>Contact Us</option>
@@ -337,7 +412,7 @@ function ninja_forms_admin(){
 				<input type="checkbox" name="" value="">
 				Clear this form after a user submits it
 			</label>
-		</div>			
+		</div>
 		<div>
 			<label>
 				<input type="checkbox" name="" value="">
@@ -350,7 +425,7 @@ function ninja_forms_admin(){
 				<?php wp_editor( 'Hello World', 'success_msg' ) ;?>
 			</label>
 		</div>
-	</script>		
+	</script>
 
 	<script type="text/html" id="tmpl-email-settings">
 		<br />
@@ -359,14 +434,14 @@ function ninja_forms_admin(){
 				<input type="checkbox" name="" value="1">
 				Use this as the <strong>from address</strong> for administrator emails.
 			</label>
-		</div>			
+		</div>
 		<div>
 			<label>
 				<input type="checkbox" name="" value="1">
 				Use this as the <strong>from name</strong> for administrator emails.
 			</label>
 		</div>
-	</script>		
+	</script>
 
 	<script type="text/html" id="tmpl-conditional-settings">
 		<br />
@@ -439,7 +514,7 @@ function ninja_forms_admin(){
 
 
 <?php
-	
+
 }
 
 if(is_admin()){
