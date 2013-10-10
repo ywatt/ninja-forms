@@ -106,7 +106,7 @@ function ninja_forms_admin(){
 				<div id="nav-menu-header">
 					<div class="major-publishing-actions">
 						<div class="publishing-action">
-							<input type="button" id="form_settings" class="open-settings-modal button button-secondary" value="Form Settings">
+							<a href="#ex1" rel="modal:open"><input type="button" id="form_settings" class="open-settings-modal button button-secondary" value="Form Settings"></a>
 						</div><!-- END .publishing-action -->
 					</div><!-- END .major-publishing-actions -->
 				</div><!-- END .nav-menu-header -->
@@ -356,9 +356,12 @@ function ninja_forms_admin(){
 		</div><!-- /#menu-management -->
 	</div><!-- /#menu-management-liquid -->
 	</div>
-	<div id="render">
 
-	</div>
+  <div id="ex1" style="display:none;">
+    <p>Thanks for clicking.  That felt good.  <a href="#" rel="modal:close">Close</a> or press ESC</p>
+ 
+  </div>
+
 	<script type="text/html" id="tmpl-basic-settings">
 		<br />
 		<div>
