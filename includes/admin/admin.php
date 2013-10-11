@@ -115,8 +115,8 @@ function ninja_forms_admin(){
 						<h3>Forms Structure</h3>
 						<p>Drag each item into the order you prefer. Click edit to reveal additional options.</p>
 
-						<ul class="ninja-row">
-							<li class="ninja-col-4-4" data-size="4-4" id="4x4">
+						<ul class="ninja-row" data-cols="1">
+							<li class="ninja-col-1-1" data-size="1-1" id="4x4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>First Name</label>
 									<input type="text" disabled />
@@ -130,8 +130,8 @@ function ninja_forms_admin(){
 							</li>
 						</ul>
 
-						<ul class="ninja-row">
-							<li class="ninja-col-2-4" data-size="2-4" id="1 - 2x4">
+						<ul class="ninja-row" data-cols="2">
+							<li class="ninja-col-1-2" data-size="1-2" id="1 - 2x4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Last Name</label>
 									<input type="text" disabled />
@@ -145,7 +145,7 @@ function ninja_forms_admin(){
 								<div class="nf-right-handlebar"></div>
 							</li>
 
-							<li class="ninja-col-2-4" data-size="2-4" id="2 - 2x4">
+							<li class="ninja-col-1-2" data-size="1-2" id="2 - 2x4">
 								<div class="ninja-forms-admin-field label-above">
 									<div class="nf-left-handlebar"></div>
 									<label>Email Address</label>
@@ -160,7 +160,7 @@ function ninja_forms_admin(){
 							</li>
 						</ul>
 
-						<ul class="ninja-row">
+						<ul class="ninja-row" data-cols="3">
 							<li class="ninja-col-1-3" data-size="1-3" id="1 - 1x3">
 								<div class="ninja-forms-admin-field label-above">
 									<label>Phone Number</label>
@@ -205,7 +205,7 @@ function ninja_forms_admin(){
 							</li>
 						</ul>
 
-						<ul class="ninja-row">
+						<ul class="ninja-row" data-cols="4">
 							<li class="ninja-col-1-4" data-size="1-4" id="1 - 1x4">
 								<div class="ninja-forms-admin-field label-above">
 									<label>City</label>
@@ -311,8 +311,8 @@ function ninja_forms_admin(){
 							-->
 						</ul>
 
-						<ul class="ninja-row">
-							<li class="ninja-col-2-4" data-size="2-4">
+						<ul class="ninja-row" data-cols="2">
+							<li class="ninja-col-1-2" data-size="1-2">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Profile Name</label>
 									<input type="text" disabled />
@@ -326,7 +326,7 @@ function ninja_forms_admin(){
 								<div class="nf-right-handlebar"></div>
 							</li>
 
-							<li class="ninja-col-2-4" data-size="2-4">
+							<li class="ninja-col-1-2" data-size="1-2">
 								<div class="ninja-forms-admin-field label-above">
 									<div class="nf-left-handlebar"></div>
 									<label>Website</label>
@@ -340,7 +340,7 @@ function ninja_forms_admin(){
 								</div>
 							</li>
 						</ul>
-						<ul class="ninja-row">
+						<ul class="ninja-row" cols="1">
 
 						</ul>
 
