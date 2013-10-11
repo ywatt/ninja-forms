@@ -1012,11 +1012,109 @@ jQuery(document).ready(function($) {
 	});
 
 	/* * * End Form Settings JS * * */
-
-
+	var old_size, new_size, drag_li_size;
 	$(".ninja-row").sortable({
 		connectWith: '.ninja-row',
-		placeholder: 'ninja-placeholder-1-2'
+		placeholder: 'ninja-placeholder-1-2',
+
+		over: function( event, ui ) {
+			// When we drag an item over another list, we have to check how many lis are in that list
+			// and test whether or not we should change the sizes.
+			// Figure out how many <li>s exist in our drop area.
+			
+			var lis = $(this).children( 'li' ).not( '.ninja-placeholder-4-4' );
+			var li_count = $(lis).length;
+			// Get all of the sizes for our li elements.
+			$(lis).each( function() {
+				old_size = $(this).data( 'size' );
+
+				if ( typeof old_size !== 'undefined' ) {
+					drag_li_size = $(ui.item).data( 'size' );
+					
+					if ( old_size == '4-4' ) {
+						new_size = '2-4';
+					} else if ( old_size == '2-4' ) {
+						new_size = '1-3';
+					} else if ( old_size == '1-3' ) {
+						new_size = '1-4';
+					}
+
+					
+					$(this).removeClass( 'ninja-col-' + old_size );
+					$(this).addClass( 'ninja-col-' + new_size );
+					$(this).data( 'size', new_size );					
+				}
+
+				/*
+				$(ui.item).removeClass( 'ninja-col-' + drag_li_size );
+				$(ui.item).addClass( 'ninja-col-' + new_size );
+				$(ui.item).data( 'size', new_size );
+				*/
+			});
+			ui.placeholder[0].className = 'ninja-placeholder-' + new_size;
+		},
+
+		receive: function( event, ui ) {
+			// When we drag an item over another list, we have to check how many lis are in that list
+			// and test whether or not we should change the sizes.
+			// Figure out how many <li>s exist in our drop area.
+			
+			var lis = $(this).children( 'li' ).not( '.ninja-placeholder-4-4' );
+			var li_count = $(lis).length;
+			// Get all of the sizes for our li elements.
+			$(lis).each( function() {
+				
+				$(this).removeClass( 'ninja-col-' + old_size );
+				$(this).addClass( 'ninja-col-' + new_size );
+				$(this).data( 'size', new_size );
+
+				$(ui.item).removeClass( 'ninja-col-' + drag_li_size );
+				$(ui.item).addClass( 'ninja-col-' + new_size );
+				$(ui.item).data( 'size', new_size );
+			});
+		},
+		/*
+		out: function( event, ui ) {
+			// When we drag an item over another list, we have to check how many lis are in that list
+			// and test whether or not we should change the sizes.
+			// Figure out how many <li>s exist in our drop area.
+			console.log('old_size: ' + old_size );
+			console.log('new_size: ' + new_size );
+			var lis = $(this).children( 'li' ).not( '.ninja-placeholder-1-2' );
+			var li_count = $(lis).length;
+			// Get all of the sizes for our li elements.
+			$(lis).each( function() {
+				$(this).removeClass( 'ninja-col-' + new_size );
+				$(this).addClass( 'ninja-col-' + old_size );
+				$(this).data( 'size', old_size );
+
+				$(ui.item).removeClass( 'ninja-col-' + new_size );
+				$(ui.item).addClass( 'ninja-col-' + drag_li_size );
+				$(ui.item).data( 'size', drag_li_size );
+			});
+		},
+		*/
+		remove: function( event, ui ) {
+			// When we drag an item over another list, we have to check how many lis are in that list
+			// and test whether or not we should change the sizes.
+			// Figure out how many <li>s exist in our drop area.
+
+			var lis = $(this).children( 'li' ).not( '.ninja-placeholder-4-4' );
+			var li_count = $(lis).length;
+			// Get all of the sizes for our li elements.
+			$(lis).each( function() {
+				if ( typeof old_size != 'undefined' ) {
+					$(this).removeClass( 'ninja-col-' + new_size );
+					$(this).addClass( 'ninja-col-' + old_size );
+					$(this).data( 'size', old_size );
+
+					$(ui.item).removeClass( 'ninja-col-' + new_size );
+					$(ui.item).addClass( 'ninja-col-' + drag_li_size );
+					$(ui.item).data( 'size', drag_li_size );					
+				}
+			});
+		}
+	
 	});
 
 }); //Document.read();

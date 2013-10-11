@@ -116,151 +116,151 @@ function ninja_forms_admin(){
 						<p>Drag each item into the order you prefer. Click edit to reveal additional options.</p>
 
 						<ul class="ninja-row">
-							<li class="ninja-col-4-4">
+							<li class="ninja-col-4-4" data-size="4-4" id="4x4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
-									<label>Label</label>
+									<label>First Name</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										Single Line Text - ID : 20
+										Single Line Text - ID : 1
 									</div>
 								</div>
 							</li>
 						</ul>
 
 						<ul class="ninja-row">
-							<li class="ninja-col-2-4">
+							<li class="ninja-col-2-4" data-size="2-4" id="1 - 2x4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
-									<label>Label</label>
+									<label>Last Name</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										Single Line Text - ID : 20
+										Single Line Text - ID : 2
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
 							</li>
 
-							<li class="ninja-col-2-4">
+							<li class="ninja-col-2-4" data-size="2-4" id="2 - 2x4">
 								<div class="ninja-forms-admin-field label-above">
 									<div class="nf-left-handlebar"></div>
-									<label>Label</label>
+									<label>Email Address</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										Single Line Text - ID : 20
+										Single Line Text - ID : 3
 									</div>
 								</div>
 							</li>
 						</ul>
 
 						<ul class="ninja-row">
-							<li class="ninja-col-1-3">
+							<li class="ninja-col-1-3" data-size="1-3" id="1 - 1x3">
 								<div class="ninja-forms-admin-field label-above">
-									<label>Label</label>
+									<label>Phone Number</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										Single Line Text - ID : 20
+										Single Line Text - ID : 4
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
 							</li>
 
-							<li class="ninja-col-1-3">
+							<li class="ninja-col-1-3" data-size="1-3" id="2 - 1x3">
 								<div class="nf-left-handlebar"></div>
 								<div class="ninja-forms-admin-field label-above">
-									<label>Label</label>
+									<label>Address 1</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										Single Line Text - ID : 20
+										Single Line Text - ID : 5
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
 							</li>
 
-							<li class="ninja-col-1-3">
+							<li class="ninja-col-1-3" data-size="1-3" id="3 - 1x3">
 								<div class="nf-left-handlebar"></div>
 								<div class="ninja-forms-admin-field label-above">
-									<label>Label</label>
+									<label>Address 2</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										Single Line Text - ID : 20
+										Single Line Text - ID : 6
 									</div>
 								</div>
 							</li>
 						</ul>
 
 						<ul class="ninja-row">
-							<li class="ninja-col-1-4">
+							<li class="ninja-col-1-4" data-size="1-4" id="1 - 1x4">
 								<div class="ninja-forms-admin-field label-above">
-									<label>Label</label>
+									<label>City</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										Single Line Text - ID : 20
+										Single Line Text - ID : 7
 									</div>
 								</div>
 							</li>
 
-							<li class="ninja-col-1-4">
+							<li class="ninja-col-1-4" data-size="1-4" id="2 - 1x4">
 								<div class="ninja-forms-admin-field label-above">
-									<label>Label</label>
+									<label>State</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										Single Line Text - ID : 20
+										Single Line Text - ID : 8
 									</div>
 								</div>
 							</li>
 
-							<li class="ninja-col-1-4">
+							<li class="ninja-col-1-4" data-size="1-4" id="3 - 1x4">
 								<div class="ninja-forms-admin-field label-above">
-									<label>Label</label>
+									<label>Zip</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										Single Line Text - ID : 20
+										Single Line Text - ID : 9
 									</div>
 								</div>
 							</li>
 
-							<li class="ninja-col-1-4">
+							<li class="ninja-col-1-4" data-size="1-4" id="4 - 1x4">
 								<div class="ninja-forms-admin-field label-above">
-									<label>Label</label>
+									<label>Country</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
 									</div>
 									<div class="nf-footer-right">
-										Single Line Text - ID : 20
+										Single Line Text - ID : 10
 									</div>
 								</div>
 							</li>
 						</ul>
-
+						<!--
 						<ul class="ninja-row">
-							<li class="ninja-col-1-3">
+							<li class="ninja-col-1-3" data-size="1-3">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Label</label>
 									<input type="text" disabled />
@@ -272,9 +272,8 @@ function ninja_forms_admin(){
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
-							</li>
-
-							<li class="ninja-col-2-3">
+							</li>							
+							<li class="ninja-col-2-3" data-size="2-3">
 								<div class="ninja-forms-admin-group label-above">
 									<div class="nf-left-handlebar"></div>
 									<label>Contact Info</label>
@@ -309,12 +308,13 @@ function ninja_forms_admin(){
 									</div>
 								</div>
 							</li>
+							-->
 						</ul>
 
 						<ul class="ninja-row">
-							<li class="ninja-col-2-4">
+							<li class="ninja-col-2-4" data-size="2-4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
-									<label>Label</label>
+									<label>Profile Name</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
@@ -326,10 +326,10 @@ function ninja_forms_admin(){
 								<div class="nf-right-handlebar"></div>
 							</li>
 
-							<li class="ninja-col-2-4">
+							<li class="ninja-col-2-4" data-size="2-4">
 								<div class="ninja-forms-admin-field label-above">
 									<div class="nf-left-handlebar"></div>
-									<label>Label</label>
+									<label>Website</label>
 									<input type="text" disabled />
 									<div class="nf-footer-left">
 										<a href="#" class="open-settings-modal">Edit</a>
