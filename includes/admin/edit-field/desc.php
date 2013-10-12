@@ -37,7 +37,7 @@ function ninja_forms_edit_field_desc($field_id){
 
 		if( !isset ( $desc_pos_options ) OR $desc_pos_options == '' ){
 			$options = array(
-				array('name' => __( 'None', 'ninja-forms' ), 'value' => 'none'),
+				array('name' => __( 'Hidden', 'ninja-forms' ), 'value' => 'none'),
 				array('name' => __( 'Before Everything', 'ninja-forms' ), 'value' => 'before_everything'),
 				array('name' => __( 'Before Label', 'ninja-forms' ), 'value' => 'before_label'),
 				array('name' => __( 'After Label', 'ninja-forms' ), 'value' => 'after_label'),
