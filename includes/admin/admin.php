@@ -114,8 +114,10 @@ function ninja_forms_admin(){
 					<div id="post-body-content">
 						<h3>Forms Structure</h3>
 						<p>Drag each item into the order you prefer. Click edit to reveal additional options.</p>
+						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:1px;">
 
-						<ul class="ninja-row" data-cols="1">
+						</ul>
+						<ul class="ninja-row ninja-drop" data-cols="1" style="padding:1px;">
 							<li class="ninja-col-1-1" data-size="1-1" id="4x4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>First Name</label>
@@ -129,8 +131,10 @@ function ninja_forms_admin(){
 								</div>
 							</li>
 						</ul>
+						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:1px;">
 
-						<ul class="ninja-row" data-cols="2">
+						</ul>
+						<ul class="ninja-row ninja-drop" data-cols="2" style="padding:1px;">
 							<li class="ninja-col-1-2" data-size="1-2" id="1 - 2x4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Last Name</label>
@@ -159,8 +163,10 @@ function ninja_forms_admin(){
 								</div>
 							</li>
 						</ul>
+						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:1px;">
 
-						<ul class="ninja-row" data-cols="3">
+						</ul>
+						<ul class="ninja-row ninja-drop" data-cols="3" style="padding:1px;">
 							<li class="ninja-col-1-3" data-size="1-3" id="1 - 1x3">
 								<div class="ninja-forms-admin-field label-above">
 									<label>Phone Number</label>
@@ -204,8 +210,10 @@ function ninja_forms_admin(){
 								</div>
 							</li>
 						</ul>
+						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:1px;">
 
-						<ul class="ninja-row" data-cols="4">
+						</ul>
+						<ul class="ninja-row" data-cols="4" style="padding:1px;">
 							<li class="ninja-col-1-4" data-size="1-4" id="1 - 1x4">
 								<div class="ninja-forms-admin-field label-above">
 									<label>City</label>
@@ -258,8 +266,8 @@ function ninja_forms_admin(){
 								</div>
 							</li>
 						</ul>
-						<!--
-						<ul class="ninja-row">
+						
+						<!-- <ul class="ninja-row">
 							<li class="ninja-col-1-3" data-size="1-3">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Label</label>
@@ -308,10 +316,12 @@ function ninja_forms_admin(){
 									</div>
 								</div>
 							</li>
-							-->
-						</ul>
+							
+						</ul>-->
+						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:1px;">
 
-						<ul class="ninja-row" data-cols="2">
+						</ul>
+						<ul class="ninja-row ninja-drop" data-cols="2" style="padding:1px;">
 							<li class="ninja-col-1-2" data-size="1-2">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
 									<label>Profile Name</label>
@@ -340,7 +350,7 @@ function ninja_forms_admin(){
 								</div>
 							</li>
 						</ul>
-						<ul class="ninja-row" cols="1">
+						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:1px;">
 
 						</ul>
 
