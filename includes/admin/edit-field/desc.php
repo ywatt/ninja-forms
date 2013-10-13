@@ -19,19 +19,19 @@ function ninja_forms_edit_field_desc( $field_id ) {
 	if ( $edit_desc ) {
 		if ( isset( $field_data['desc_text'] ) ) {
 			$desc_text = $field_data['desc_text'];
-		}else {
+		} else {
 			$desc_text = '';
 		}
 
 		if ( isset( $field_data['show_desc'] ) ) {
 			$show_desc = $field_data['show_desc'];
-		}else {
+		} else {
 			$show_desc = '';
 		}
 
 		if ( $show_desc == 1 ) {
 			$display_span = '';
-		}else {
+		} else {
 			$display_span = ' style="display:none;"';
 		}
 
@@ -46,7 +46,7 @@ function ninja_forms_edit_field_desc( $field_id ) {
 			}
 			$options[] = array( 'name' => __( 'After Everything', 'ninja-forms' ), 'value' => 'after_everything' );
 
-		}else {
+		} else {
 			$options = $desc_pos_options;
 		}
 
@@ -57,7 +57,7 @@ function ninja_forms_edit_field_desc( $field_id ) {
 			<?php
 		if ( isset( $field_data['desc_pos'] ) ) {
 			$desc_pos = $field_data['desc_pos'];
-		}else {
+		} else {
 			$desc_pos = '';
 		}
 		ninja_forms_edit_field_el_output( $field_id, 'select', __( 'Description Position', 'ninja-forms' ), 'desc_pos', $desc_pos, 'wide', $options, 'wide' );
