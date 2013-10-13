@@ -1049,8 +1049,6 @@ jQuery(document).ready(function($) {
 				var new_size = '1-' + new_target_cols;
 				$(ui.item).data( 'size', new_size );
 
-				console.log(new_size);
-
 				// Remove the old size class definition from the item being dragged.
 				$(ui.item).removeClass( 'ninja-col-' + current_drag_size );
 
@@ -1063,12 +1061,6 @@ jQuery(document).ready(function($) {
 
 				$(this).data( 'cols', new_target_cols );
 				$(this).data( 'old_cols', target_cols );
-
-				if ( new_target_cols == 4 ) {
-					$(this).removeClass( 'ninja-drop' );
-				} else {
-					$(this).addClass( 'ninja-drop' );
-				}
 
 				// Loop through each LI in our target UL and set the size.
 				var target_lis = $(this).children( 'li' ).not( '.' + placeholder_class );
@@ -1165,21 +1157,19 @@ jQuery(document).ready(function($) {
 		beforeStop: function( event, ui ) {
 			$( ".ninja-row" ).off( "sortout", test_function );
 		},
-		/*
+
 		receive: function(event, ui) {
-            // so if > 10
-            if ($(this).children().length >= 4) {
-                //ui.sender: will cancel the change.
-                //Useful in the 'receive' callback.
-                $(ui.sender).sortable('cancel');
-            	$(this).before( '<ul class="ninja-row" data-cols="1"></ul>' );
-            	$(ui.item).removeClass('ninja-col-1-2');
-            	$(ui.item).addClass( 'ninja-col-1-1' );
-            	$(this).prev().append(ui.item);
-            	ninja_forms_setup_sortable();	            	
-            }
+			if ( new_target_cols == 4 ) {
+				$(this).removeClass( 'ninja-drop' );
+			} else {
+				$(this).addClass( 'ninja-drop' );
+			}
+
+			if ( new_sender_cols < 4 ) {
+				$(ui.sender).addClass( 'ninja-drop' );
+			}
         }
-        */
+
 	});
 
 function test_function( event, ui ) {
