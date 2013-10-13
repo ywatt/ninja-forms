@@ -1015,13 +1015,19 @@ jQuery(document).ready(function($) {
 
 	/* * * End Form Settings JS * * */
 
-
+	var over_count = 0;
 	var target_cols, new_target_cols, current_drag_size, sender_cols, new_sender_cols;
 	$('.ninja-row').sortable({
 		connectWith: '.ninja-drop',
-		placeholder: 'ninja-placeholder-1-1',
+		placeholder: 'ninja-placeholder',
+		tolerance: 'pointer',
 		start: function( event, ui ) {
 			$( ".ninja-row" ).on( "sortout", test_function );
+			target_cols = parseInt( $(this).data( 'cols' ) );
+
+			var placeholder_class = 'ninja-placeholder-1-' + target_cols;
+			ui.placeholder[0].className = placeholder_class;
+
 		},
 		over: function( event, ui ) {
 			// Get our current column count for the target UL, sender UL.
@@ -1031,63 +1037,41 @@ jQuery(document).ready(function($) {
 			// Get the size of the element currently being dragged.
 			current_drag_size = $(ui.item).data( 'size' );
 
-			// Get the ID of the element currently being dragged.
-			current_drag_id = $(ui.item).prop( 'id' );
-
 			// Increase our target UL column size by one.
 			if ( target_cols < 4 ) {
 				new_target_cols = target_cols + 1;
+			}
 
-				// Set our placeholder to the proper size.
-				var placeholder_class = 'ninja-placeholder-1-' + new_target_cols;
-				ui.placeholder[0].className = placeholder_class;
+			// Set our placeholder to the proper size.
+			var placeholder_class = 'ninja-placeholder-1-' + new_target_cols;
+			ui.placeholder[0].className = placeholder_class;
+			
+			// Set the size of the element currently being dragged.
+			$(ui.item).removeClass();
+			$(ui.item).addClass( 'ninja-col-1-' + new_target_cols );
+
+			// Loop through each LI in our target UL and set the size.
+			var target_lis = $(this).children( 'li' ).not( '.' + placeholder_class ).not( ui.item );
+			$(target_lis).each( function() {
 				
-				/* 
-				 * Set the element being dragged to the proper size.
-				 */
+				// Get our current size for this LI element.
+				var current_size = $(this).data( 'size' );
+				// Set the current size as the old size so that we can undo later.
 				
-				var new_size = '1-' + new_target_cols;
-				$(ui.item).data( 'size', new_size );
-
-				// Remove the old size class definition from the item being dragged.
-				$(ui.item).removeClass( 'ninja-col-' + current_drag_size );
-
-				// Add the new size class definition to the item being dragged.
-				$(ui.item).addClass( 'ninja-col-' + new_size );
-
-				/*
-				 * Set the target UL to the proper number of columns and set each LI within the UL to the proper size.
-				 */
-
-				$(this).data( 'cols', new_target_cols );
-				$(this).data( 'old_cols', target_cols );
-
-				// Loop through each LI in our target UL and set the size.
-				var target_lis = $(this).children( 'li' ).not( '.' + placeholder_class );
-				$(target_lis).each( function() {
-					
-					// Get our current size for this LI element.
-					var current_size = $(this).data( 'size' );
-					// Set the current size as the old size so that we can undo later.
-					$(this).data( 'old_size', current_size );
-					// Get the new size of the LI.
-					var tmp = current_size.split( '-' );
-					var colspan = tmp[0];
-					var new_size = colspan + '-' + new_target_cols;
-					
-					// Set the new size as the size setting.
-					$(this).data( 'size', new_size );
-
-					// Remove the current size class.
-					$(this).removeClass( 'ninja-col-' + current_size );
-					// Add the new size class.
-					$(this).addClass( 'ninja-col-' + new_size );
-				});
-
-				/*
-				 * Set the sender UL to the proper number of columns and set each LI within the UL to the proper size.
-				 */
-
+				// Get the new size of the LI.
+				var tmp = current_size.split( '-' );
+				var colspan = tmp[0];
+				var new_size = colspan + '-' + new_target_cols;
+				
+				// Remove the current size class.
+				$(this).removeClass();
+				// Add the new size class.
+				$(this).addClass( 'ninja-col-' + new_size );
+			});
+			
+			//Set each LI within the sender UL to the proper size, but only if this is the first "over" event.
+			
+			if ( over_count == 0 ) {
 				var sender_lis = $(ui.sender).children( 'li' ).not( ui.item );
 
 				if ( $(sender_lis).length <= 1 ) {
@@ -1126,39 +1110,40 @@ jQuery(document).ready(function($) {
 					}
 				}
 
-				$(ui.sender).data( 'cols', new_sender_cols );
-				$(ui.sender).data( 'old_cols', sender_cols );
-
 				// Loop through each LI in our sender UL and set the size.
-
+				
 				$(sender_lis).each( function() {
 					// Get the current size for this LI element.
 					var current_size = $(this).data( 'size' );
 					if ( typeof current_size !== 'undefined' ) {
-						// Set the current size as the old size so that we can undo later.
-						$(this).data( 'old_size', current_size );
 						// Get the new size of the LI.
 						var tmp = current_size.split( '-' );
 						var colspan = parseInt( tmp[0] );
 						var new_size = colspan + '-' + new_sender_cols;
-						
-						// Set the new size.
-						$(this).data( 'size', new_size );
-
+						console.log(new_size);
 						// Remove the old size class.
-						$(this).removeClass( 'ninja-col-' + current_size );
+						$(this).removeClass();
 						// Add the new size class.
 						$(this).addClass( 'ninja-col-' + new_size );					
 					}
 
-				});
+				});				
 			}
+
+			over_count++;
 		},
 		beforeStop: function( event, ui ) {
 			$( ".ninja-row" ).off( "sortout", test_function );
+			over_count = 0;
 		},
 
-		receive: function(event, ui) {
+		receive: function( event, ui) {
+			console.log( 'receive' );
+			// Set the cols data attribute for our  target UL and sender UL
+			$(this).data( 'cols', new_target_cols );
+			$(ui.sender).data( 'cols', new_sender_cols );
+
+
 			if ( new_target_cols == 4 ) {
 				$(this).removeClass( 'ninja-drop' );
 			} else {
@@ -1168,31 +1153,85 @@ jQuery(document).ready(function($) {
 			if ( new_sender_cols < 4 ) {
 				$(ui.sender).addClass( 'ninja-drop' );
 			}
-        }
 
+			if ( $(ui.sender).children( 'li' ).not( ui.item ).length == 0 ) {
+				$(ui.sender).data( 'cols', 0 );
+			}
+
+			//Set the element being dragged to the proper size.
+			var new_size = '1-' + new_target_cols;
+			$(ui.item).data( 'size', new_size );
+
+			// Loop through each LI in our target UL and set the size.
+			var target_lis = $(this).children( 'li' );
+			$(target_lis).each( function() {
+				var current_size = $(this).data( 'size' );
+				// Get the new size of the LI.
+				var tmp = current_size.split( '-' );
+				var colspan = tmp[0];
+				var new_size = colspan + '-' + new_target_cols;
+				
+				// Set the new size as the size setting.
+				$(this).data( 'size', new_size );
+
+			});
+
+			var sender_lis = $(ui.sender).children( 'li' ).not( ui.item );
+
+			// Loop through each LI in our target UL and set the size.
+			var sender_lis = $(this).children( 'li' );
+			$(sender_lis).each( function() {
+				var current_size = $(this).data( 'size' );
+				// Get the new size of the LI.
+				var tmp = current_size.split( '-' );
+				var colspan = tmp[0];
+				var new_size = colspan + '-' + new_target_cols;
+				
+				// Set the new size as the size setting.
+				$(this).data( 'size', new_size );
+
+			});
+        }
+		
 	});
 
-function test_function( event, ui ) {
-	if ( target_cols < 4 ) {
-		// Reset our target UL's col data attribute.
-		var old_cols = $(this).data( 'old_cols' );
-		$(this).data( 'cols', old_cols );
-
+	function test_function( event, ui ) {
+		
 		// Loop through each of the children of our target UL and reset them.
-		var target_lis = $(this).children( 'li' );
+		var target_lis = $(this).children( 'li' ).not( ui.placeholder );
 		$(target_lis).each( function() {
-			// Get our current size.
-			var current_size = $(this).data( 'size' );
 			// Get our previous size.
-			var old_size = $(this).data( 'old_size' );
-			// Reset our data attribute.
-			$(this).data( 'size', old_size );
-			// Remove our current size class.
-			$(this).removeClass( 'ninja-col-' + current_size );
-			// Add our previous size class.
-			$(this).addClass( 'ninja-col-' + old_size );
-		});
+			var old_size = $(this).data( 'size' );
+			console.log( 'li id: ' + this.id + 'old size: ' + old_size );
+			if ( typeof old_size !== 'undefined' ) {
+				// Reset our data attribute.
+				$(this).data( 'size', old_size );
+				// Remove our current size class.
+				$(this).removeClass();
+				// Add our previous size class.
+				$(this).addClass( 'ninja-col-' + old_size );				
+			}
 
+		});
+		if ( over_count == 0 ) {
+			
+			// Loop through each of the children of our sender UL and reset them.
+			var sender_lis = $(ui.sender).children( 'li' ).not( ui.item );
+			$(sender_lis).each( function() {
+				// Get our previous size.
+				var old_size = $(this).data( 'size' );
+				// Reset our data attribute.
+				$(this).data( 'size', old_size );
+				// Remove our current size class.
+				$(this).removeClass();
+				// Add our previous size class.
+				console.log( 'set oldsize: ' + old_size );
+				$(this).addClass( 'ninja-col-' + old_size );
+			});			
+		}
+
+
+		/*
 		// Get the current size for the element we're dragging.
 		var current_size = $(ui.item).data( 'size' );
 		// Get the previous size for the element we're dragging.
@@ -1202,18 +1241,19 @@ function test_function( event, ui ) {
 			$(ui.item).data( 'size', old_size );
 			// Remove the current size class for the element we're dragging.
 			$(ui.item).removeClass( 'ninja-col-' + current_size );
+			//$(ui.helper).removeClass( 'ninja-col-' + current_size );
 			// Add the previous size class for the element we're dragging.
 			$(ui.item).addClass( 'ninja-col-' + old_size );
+			//$(ui.helper).addClass( 'ninja-col-' + old_size );
 		}
-		/*
+		
 		// Reset our sender UL's col data attribute.
 		var old_cols = $(ui.sender).data( 'old_cols' );
-		$(this).data( 'cols', old_cols );
-
-		// Loop through each of the children of our sender UL and reset them.
+		$(ui.sender).data( 'cols', old_cols );
+		
+		
 		*/
 	}
-}
 
 
 
