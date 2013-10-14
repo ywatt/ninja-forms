@@ -237,6 +237,9 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.p
 
 	/* Manage Addons */
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php" );
+
+	/* System Status */
+	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/system-status.php" );
 //}
 
 /* Require Pre-Registered Fields */
