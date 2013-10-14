@@ -239,7 +239,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.p
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php" );
 
 	/* System Status */
-	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/system-status.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/classes/class-nf-system-status.php" );
 //}
 
 /* Require Pre-Registered Fields */
