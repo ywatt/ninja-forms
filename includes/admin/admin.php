@@ -114,7 +114,7 @@ function ninja_forms_admin(){
 					<div id="post-body-content">
 						<h3>Forms Structure</h3>
 						<p>Drag each item into the order you prefer. Click edit to reveal additional options.</p>
-
+						
 						<ul class="ninja-row ninja-drop" data-cols="1" style="padding:5px;">
 							<li class="ninja-col-1-1" data-size="1-1" id="4x4">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
