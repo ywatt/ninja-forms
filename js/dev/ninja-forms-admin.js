@@ -1015,8 +1015,7 @@ jQuery(document).ready(function($) {
 
 	/* * * End Form Settings JS * * */
 	var sender_mod = false;
-	//var target_cols, new_target_cols, current_drag_size, sender_cols, new_sender_cols;
-	$('.ninja-row').sortable({
+	var sortable_options = {
 		connectWith: '.ninja-drop',
 		placeholder: 'ninja-placeholder',
 		tolerance: 'pointer',
@@ -1182,7 +1181,7 @@ jQuery(document).ready(function($) {
 				$(ui.sender).data( 'cols', 0 );
 			}
 
-			$(this).css('padding', '5px');
+			$(this).css('padding', '2px');
 
 			//Set the element being dragged to the proper size.
 			var new_size = '1-' + target_cols;
@@ -1218,26 +1217,26 @@ jQuery(document).ready(function($) {
 			});
 
 			// After an item is dropped, we want to make sure that we keep just one empty UL between our rows.
-
+			var empty_ul_html = '<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>';
 			// Check to see that we have an empty UL on each side of our receiving UL.
 			if ( $(this).prev('.ninja-row').children( 'li' ).length > 0 ) {
 				// If our previous UL has children, insert an empty UL just before this one.
-				$(this).before('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>');
+				$(this).before(empty_ul_html);
 			}
 
 			if ( $(this).next('.ninja-row').children( 'li' ).length > 0 ) {
 				// If our next UL has children, insert an empty UL just after this one.
-				$(this).after('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>');
+				$(this).after(empty_ul_html);
 			}
 
 			// If this is our first UL, make sure that we insert a new empty row before it.
 			if ( $(this).prev('.ninja-row').length == 0 ) {
-				$(this).before('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>');
+				$(this).before(empty_ul_html);
 			}
 
 			// If this is our last UL, make sure that we insert a new empty row after it.
 			if ( $(this).next('.ninja-row').length == 0 ) {
-				$(this).after('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>');
+				$(this).after(empty_ul_html);
 			}
 
 			// Check to see if the sending UL is empty.
@@ -1261,12 +1260,23 @@ jQuery(document).ready(function($) {
 					// If just one of the siblings are empty, remove this UL.
 					$(ui.sender).remove();
 				}
+			} else {
+				// Check to see that we have an empty UL on each side of our receiving UL.
+				if ( $(ui.sender).prev('.ninja-row').children( 'li' ).length > 0 ) {
+					// If our previous UL has children, insert an empty UL just before this one.
+					$(ui.sender).before(empty_ul_html);
+				}
+
+				if ( $(ui.sender).next('.ninja-row').children( 'li' ).length > 0 ) {
+					// If our next UL has children, insert an empty UL just after this one.
+					$(ui.sender).after(empty_ul_html);
+				}
 			}
-
-
+			$('.ninja-row').sortable( sortable_options );
         }
-		
-	});
+	};
+
+	$('.ninja-row').sortable( sortable_options );
 
 	function test_function( event, ui ) {
 		
