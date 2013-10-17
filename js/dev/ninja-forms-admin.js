@@ -1011,10 +1011,10 @@ jQuery(document).ready(function($) {
 		$(this).parent().remove();
 	});
 
-
-
 	/* * * End Form Settings JS * * */
+
 	var sender_mod = false;
+	var empty_ul_html = '<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>';
 	var sortable_options = {
 		connectWith: '.ninja-drop',
 		placeholder: 'ninja-placeholder',
@@ -1031,7 +1031,6 @@ jQuery(document).ready(function($) {
 			// Set our sender Ul's old cols.
 			$(ui.sender).data( 'old_cols', sender_cols );
 			sender_mod = false;
-
 		},
 		over: function( event, ui ) {
 			
@@ -1163,23 +1162,13 @@ jQuery(document).ready(function($) {
 		receive: function( event, ui) {
 			//console.log( 'receive' );
 			var target_cols = $(this).data( 'cols' );
-			var sender_cols = $(ui.sender).data( 'cols' );
-
+			
 			$(this).removeData( 'old_cols' );
-			$(ui.sender).removeData( 'old_cols' );
-
+			
 			if ( target_cols == 4 ) {
 				$(this).removeClass( 'ninja-drop' );
 			} else {
 				$(this).addClass( 'ninja-drop' );
-			}
-
-			if ( sender_cols < 4 ) {
-				$(ui.sender).addClass( 'ninja-drop' );
-			}
-
-			if ( $(ui.sender).children( 'li' ).not( ui.item ).length == 0 ) {
-				$(ui.sender).data( 'cols', 0 );
 			}
 
 			$(this).css('padding', '2px');
@@ -1201,25 +1190,8 @@ jQuery(document).ready(function($) {
 				$(this).data( 'size', new_size );
 
 			});
-
-			var sender_lis = $(ui.sender).children( 'li' ).not( ui.item );
-
-			// Loop through each LI in our target UL and set the size.
-			var sender_lis = $(ui.sender).children( 'li' );
-			$(sender_lis).each( function() {
-				var current_size = $(this).data( 'size' );
-				// Get the new size of the LI.
-				var tmp = current_size.split( '-' );
-				var colspan = tmp[0];
-				var new_size = colspan + '-' + sender_cols;
-				
-				// Set the new size as the size setting.
-				$(this).data( 'size', new_size );
-				//console.log( 'UPDATE ' + this.id + ' SIZE TO: ' + new_size );
-			});
-
+			/*
 			// After an item is dropped, we want to make sure that we keep just one empty UL between our rows.
-			var empty_ul_html = '<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>';
 			// Check to see that we have an empty UL on each side of our receiving UL.
 			if ( $(this).prev('.ninja-row').children( 'li' ).length > 0 ) {
 				// If our previous UL has children, insert an empty UL just before this one.
@@ -1233,6 +1205,7 @@ jQuery(document).ready(function($) {
 
 			// If this is our first UL, make sure that we insert a new empty row before it.
 			if ( $(this).prev('.ninja-row').length == 0 ) {
+				console.log( 'insert new row above' );
 				$(this).before(empty_ul_html);
 			}
 
@@ -1240,46 +1213,99 @@ jQuery(document).ready(function($) {
 			if ( $(this).next('.ninja-row').length == 0 ) {
 				$(this).after(empty_ul_html);
 			}
+			$('.ninja-row').sortable( sortable_options );
+			$('.ninja-row').disableSelection();
+			*/
+			
+        },
+        remove: function( event, ui ) {
+        	var sender_cols = $(ui.sender).data( 'cols' );
 
+        	$(this).removeData( 'old_cols' );
+
+			if ( sender_cols < 4 ) {
+				$(ui.sender).addClass( 'ninja-drop' );
+			}
+
+			if ( $(ui.sender).children( 'li' ).not( ui.item ).length == 0 ) {
+				$(ui.sender).data( 'cols', 0 );
+			}
+
+        	// Loop through each LI in our Sending UL and set the size.
+			var sender_lis = $(ui.sender).children( 'li' );
+			$(sender_lis).each( function() {
+				var current_size = $(this).data( 'size' );
+				// Get the new size of the LI.
+				var tmp = current_size.split( '-' );
+				var colspan = tmp[0];
+				var new_size = colspan + '-' + sender_cols;
+				
+				// Set the new size as the size setting.
+				$(this).data( 'size', new_size );
+				//console.log( 'UPDATE ' + this.id + ' SIZE TO: ' + new_size );
+			});
+			/*
 			// Check to see if the sending UL is empty.
-			if ( $(ui.sender).children('li').length == 0 ) {
+			if ( $(this).children('li').length == 0 ) {
 				var prev_empty = false;
 				var next_empty = true;
 				// If it is empty, check to see if the previous UL is empty.
-				if ( $(ui.sender).prev('.ninja-row').children('li').length == 0 ) {
+				if ( $(this).prev('.ninja-row').children('li').length == 0 ) {
 					prev_empty = true;
 				}
 				// If it is empty, check to see if the next UL is empty.
-				if ( $(ui.sender).next('.ninja-row').children('li').length == 0 ) {
+				if ( $(this).next('.ninja-row').children('li').length == 0 ) {
 					next_empty = true;
 				}
 
 				if ( prev_empty && next_empty ) {
 					// If both previous and next ULs are empty, then remove the previous UL and this one.
-					$(ui.sender).prev('.ninja-row').remove();
-					$(ui.sender).remove();
+					$(this).remove();
+					$(this).prev('.ninja-row').remove();
+					
 				} else if ( prev_empty || next_empty ) {
 					// If just one of the siblings are empty, remove this UL.
-					$(ui.sender).remove();
+					$(this).remove();
 				}
 			} else {
 				// Check to see that we have an empty UL on each side of our receiving UL.
-				if ( $(ui.sender).prev('.ninja-row').children( 'li' ).length > 0 ) {
+				if ( $(this).prev('.ninja-row').children( 'li' ).length > 0 ) {
 					// If our previous UL has children, insert an empty UL just before this one.
-					$(ui.sender).before(empty_ul_html);
+					$(this).before(empty_ul_html);
 				}
 
-				if ( $(ui.sender).next('.ninja-row').children( 'li' ).length > 0 ) {
+				if ( $(this).next('.ninja-row').children( 'li' ).length > 0 ) {
 					// If our next UL has children, insert an empty UL just after this one.
-					$(ui.sender).after(empty_ul_html);
+					$(this).after(empty_ul_html);
 				}
 			}
 			$('.ninja-row').sortable( sortable_options );
+			$('.ninja-row').disableSelection();
+			*/
+        },
+        stop: function( event, ui ) {
+        	var tmp = 0;
+			$('.ninja-row').each( function(){
+				var children = $( this ).children( 'li' ).length;
+				// Our first row should be empty.
+				if ( tmp == 0 ) {
+					if ( children  > 0 ) {
+						$( this ).before(empty_ul_html);
+					}
+				} else {
+					if ( children  %2 == 0) {
+						$( this ).before(empty_ul_html);
+					}
+				}
+				tmp++;
+			});
+			$('.ninja-row').sortable( sortable_options );
+			$('.ninja-row').disableSelection();
         }
 	};
 
 	$('.ninja-row').sortable( sortable_options );
-
+	$('.ninja-row').disableSelection();
 	function test_function( event, ui ) {
 		
 		var placeholder_class = ui.placeholder[0].className;
