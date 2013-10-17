@@ -1073,7 +1073,7 @@ jQuery(document).ready(function($) {
 				var colspan = tmp[0];
 				var new_size = colspan + '-' + new_target_cols;
 				$(this).data( 'size', new_size );
-				//console.log( this.id + ' : ' + 'ninja-col-' + new_size );
+
 				// Remove the current size class.
 				$(this).removeClass();
 				// Add the new size class.
@@ -1130,7 +1130,7 @@ jQuery(document).ready(function($) {
 				}
 
 				// Update our sender UL's cols data attribute.
-				//console.log( 'OVER - set sender cols: ' + new_sender_cols );
+
 				$(ui.sender).data( 'cols', new_sender_cols );
 
 				// Loop through each LI in our sender UL and set the size.
@@ -1144,7 +1144,7 @@ jQuery(document).ready(function($) {
 						var tmp = current_size.split( '-' );
 						var colspan = parseInt( tmp[0] );
 						var new_size = colspan + '-' + new_sender_cols;
-						//console.log( 'remove class: ninja-col-' + current_size );
+
 						// Remove the old size class.
 						$(this).removeClass();
 						// Add the new size class.
@@ -1161,7 +1161,7 @@ jQuery(document).ready(function($) {
 		},
 
 		receive: function( event, ui) {
-			
+			//console.log( 'receive' );
 			var target_cols = $(this).data( 'cols' );
 			var sender_cols = $(ui.sender).data( 'cols' );
 
@@ -1205,7 +1205,7 @@ jQuery(document).ready(function($) {
 			var sender_lis = $(ui.sender).children( 'li' ).not( ui.item );
 
 			// Loop through each LI in our target UL and set the size.
-			var sender_lis = $(this).children( 'li' );
+			var sender_lis = $(ui.sender).children( 'li' );
 			$(sender_lis).each( function() {
 				var current_size = $(this).data( 'size' );
 				// Get the new size of the LI.
@@ -1215,7 +1215,7 @@ jQuery(document).ready(function($) {
 				
 				// Set the new size as the size setting.
 				$(this).data( 'size', new_size );
-				//console.log( "THIS DATA: " + $(this).data('size') );
+				//console.log( 'UPDATE ' + this.id + ' SIZE TO: ' + new_size );
 			});
 
 			// After an item is dropped, we want to make sure that we keep just one empty UL between our rows.
@@ -1297,20 +1297,16 @@ jQuery(document).ready(function($) {
 			var target_lis = $(this).children( 'li' ).not( '.' + placeholder_class );
 			$(target_lis).each( function() {
 				// Get our previous size.
-				var current_size = $(this).data( 'size' );
 				var old_size = $(this).data( 'old_size' );
 				
 				if ( typeof old_size !== 'undefined' ) {
 					// Reset our data attribute.
 					$(this).data( 'size', old_size );
 					// Remove our current size class.
-					$(this).addClass( 'ninja-col-' + old_size );
 					$(this).removeClass();
-					
 					// Add our previous size class.
-									
+					$(this).addClass( 'ninja-col-' + old_size );
 				}
-				
 			});
 				
 		}
