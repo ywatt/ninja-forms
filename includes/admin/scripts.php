@@ -34,10 +34,15 @@ function ninja_forms_admin_js(){
 		$date_format = 'm/d/Y';
 	}
 
+	wp_enqueue_script( 'jquery-modal',
+	NINJA_FORMS_URL .'/js/min/jquery.modal.min.js',
+	array( 'jquery', 'jquery-ui-core' ) );
+
+
 	$date_format = ninja_forms_date_to_datepicker($date_format);
 
 	wp_enqueue_script('ninja-forms-admin',
-	NINJA_FORMS_URL .'/js/min/ninja-forms-admin.min.js',
+	NINJA_FORMS_URL .'/js/dev/ninja-forms-admin.js',
 	array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable'));
 
 	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array('date_format' => $date_format));
