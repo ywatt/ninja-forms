@@ -1019,7 +1019,7 @@ jQuery(document).ready(function($) {
 	$('.ninja-row').sortable({
 		connectWith: '.ninja-drop',
 		placeholder: 'ninja-placeholder',
-		tolerance: 'intersect',
+		tolerance: 'pointer',
 		start: function( event, ui ) {
 			$( ".ninja-row" ).on( "sortout", test_function );
 			// Get our target UL's current cols.
@@ -1046,7 +1046,9 @@ jQuery(document).ready(function($) {
 			// Increase our target UL column size by one.
 			if ( target_cols < 4 ) {
 				var new_target_cols = target_cols + 1;
-			}			
+			}
+
+			console.log( "OVER - new target cols: " + new_target_cols )
 			
 			$(this).data( 'cols', new_target_cols );
 			$(this).data( 'old_cols', target_cols );
@@ -1211,8 +1213,55 @@ jQuery(document).ready(function($) {
 				
 				// Set the new size as the size setting.
 				$(this).data( 'size', new_size );
-
 			});
+
+			// After an item is dropped, we want to make sure that we keep just one empty UL between our rows.
+
+			// Check to see that we have an empty UL on each side of our receiving UL.
+			if ( $(this).prev('.ninja-row').children( 'li' ).length > 0 ) {
+				// If our previous UL has children, insert an empty UL just before this one.
+				$(this).before('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:5px;"></ul>');
+			}
+
+			if ( $(this).next('.ninja-row').children( 'li' ).length > 0 ) {
+				// If our next UL has children, insert an empty UL just after this one.
+				$(this).after('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:5px;"></ul>');
+			}
+
+			// If this is our first UL, make sure that we insert a new empty row before it.
+			if ( $(this).prev('.ninja-row').length == 0 ) {
+				$(this).before('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:5px;"></ul>');
+			}
+
+			// If this is our last UL, make sure that we insert a new empty row after it.
+			if ( $(this).next('.ninja-row').length == 0 ) {
+				$(this).after('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:5px;"></ul>');
+			}
+
+			// Check to see if the sending UL is empty.
+			if ( $(ui.sender).children('li').length == 0 ) {
+				var prev_empty = false;
+				var next_empty = true;
+				// If it is empty, check to see if the previous UL is empty.
+				if ( $(ui.sender).prev('.ninja-row').children('li').length == 0 ) {
+					prev_empty = true;
+				}
+				// If it is empty, check to see if the next UL is empty.
+				if ( $(ui.sender).next('.ninja-row').children('li').length == 0 ) {
+					next_empty = true;
+				}
+
+				if ( prev_empty && next_empty ) {
+					// If both previous and next ULs are empty, then remove the previous UL and this one.
+					$(ui.sender).prev('.ninja-row').remove();
+					$(ui.sender).remove();
+				} else if ( prev_empty || next_empty ) {
+					// If just one of the siblings are empty, remove this UL.
+					$(ui.sender).remove();
+				}
+			}
+
+
         }
 		
 	});
@@ -1229,7 +1278,7 @@ jQuery(document).ready(function($) {
 			//var old_cols = $(ui.sender).data( 'old_cols' );
 			//$(ui.sender).data( 'cols', old_cols );
 			//$(ui.sender).removeData( 'old_cols' );
-			
+			console.log( $(this).children('.' + placeholder_class ).length );
 			// Loop through each of the children of our target UL and reset them.
 			var target_lis = $(this).children( 'li' ).not( '.' + placeholder_class );
 			$(target_lis).each( function() {
@@ -1244,6 +1293,7 @@ jQuery(document).ready(function($) {
 					//console.log( 'OUT - ' + this.id + ' : ' + 'ninja-col-' + old_size );
 					// Remove our current size class.
 					$(this).addClass( 'ninja-col-' + old_size );
+					console.log( 'Remove class: ' + 'ninja-col-' + current_size );
 					$(this).removeClass( 'ninja-col-' + current_size );
 					
 					// Add our previous size class.
