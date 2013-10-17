@@ -1075,7 +1075,7 @@ jQuery(document).ready(function($) {
 				$(this).data( 'size', new_size );
 				//console.log( this.id + ' : ' + 'ninja-col-' + new_size );
 				// Remove the current size class.
-				$(this).removeClass( 'ninja-col-' + current_size );
+				$(this).removeClass();
 				// Add the new size class.
 				$(this).addClass( 'ninja-col-' + new_size );
 
