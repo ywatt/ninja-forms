@@ -8,7 +8,6 @@
  */
 
 function ninja_forms_tab_system_status(){
-	// TODO Display the system status!
-
-	echo "hello there!";
+	// Display the system status!
+	include("system-status-html.php");
 }
