@@ -1182,6 +1182,8 @@ jQuery(document).ready(function($) {
 				$(ui.sender).data( 'cols', 0 );
 			}
 
+			$(this).css('padding', '5px');
+
 			//Set the element being dragged to the proper size.
 			var new_size = '1-' + target_cols;
 			$(ui.item).data( 'size', new_size );
@@ -1220,22 +1222,22 @@ jQuery(document).ready(function($) {
 			// Check to see that we have an empty UL on each side of our receiving UL.
 			if ( $(this).prev('.ninja-row').children( 'li' ).length > 0 ) {
 				// If our previous UL has children, insert an empty UL just before this one.
-				$(this).before('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:5px;"></ul>');
+				$(this).before('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>');
 			}
 
 			if ( $(this).next('.ninja-row').children( 'li' ).length > 0 ) {
 				// If our next UL has children, insert an empty UL just after this one.
-				$(this).after('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:5px;"></ul>');
+				$(this).after('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>');
 			}
 
 			// If this is our first UL, make sure that we insert a new empty row before it.
 			if ( $(this).prev('.ninja-row').length == 0 ) {
-				$(this).before('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:5px;"></ul>');
+				$(this).before('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>');
 			}
 
 			// If this is our last UL, make sure that we insert a new empty row after it.
 			if ( $(this).next('.ninja-row').length == 0 ) {
-				$(this).after('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:5px;"></ul>');
+				$(this).after('<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>');
 			}
 
 			// Check to see if the sending UL is empty.
