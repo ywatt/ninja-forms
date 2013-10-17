@@ -1047,7 +1047,7 @@ jQuery(document).ready(function($) {
 				var new_target_cols = target_cols + 1;
 			}
 
-			console.log( "OVER - new target cols: " + new_target_cols )
+			//console.log( "OVER - new target cols: " + new_target_cols )
 			
 			$(this).data( 'cols', new_target_cols );
 			$(this).data( 'old_cols', target_cols );
@@ -1143,7 +1143,7 @@ jQuery(document).ready(function($) {
 						var tmp = current_size.split( '-' );
 						var colspan = parseInt( tmp[0] );
 						var new_size = colspan + '-' + new_sender_cols;
-						//console.log( this.id + ' : ' + 'ninja-col-' + new_size );
+						//console.log( 'remove class: ninja-col-' + current_size );
 						// Remove the old size class.
 						$(this).removeClass();
 						// Add the new size class.
@@ -1214,6 +1214,7 @@ jQuery(document).ready(function($) {
 				
 				// Set the new size as the size setting.
 				$(this).data( 'size', new_size );
+				//console.log( "THIS DATA: " + $(this).data('size') );
 			});
 
 			// After an item is dropped, we want to make sure that we keep just one empty UL between our rows.
@@ -1290,7 +1291,7 @@ jQuery(document).ready(function($) {
 			//var old_cols = $(ui.sender).data( 'old_cols' );
 			//$(ui.sender).data( 'cols', old_cols );
 			//$(ui.sender).removeData( 'old_cols' );
-			console.log( $(this).children('.' + placeholder_class ).length );
+			
 			// Loop through each of the children of our target UL and reset them.
 			var target_lis = $(this).children( 'li' ).not( '.' + placeholder_class );
 			$(target_lis).each( function() {
@@ -1298,14 +1299,11 @@ jQuery(document).ready(function($) {
 				var current_size = $(this).data( 'size' );
 				var old_size = $(this).data( 'old_size' );
 				
-				//console.log( 'li id: ' + this.id + 'old size: ' + old_size );
 				if ( typeof old_size !== 'undefined' ) {
 					// Reset our data attribute.
 					$(this).data( 'size', old_size );
-					//console.log( 'OUT - ' + this.id + ' : ' + 'ninja-col-' + old_size );
 					// Remove our current size class.
 					$(this).addClass( 'ninja-col-' + old_size );
-					console.log( 'Remove class: ' + 'ninja-col-' + current_size );
 					$(this).removeClass( 'ninja-col-' + current_size );
 					
 					// Add our previous size class.
