@@ -1138,6 +1138,7 @@ jQuery(document).ready(function($) {
 				$(sender_lis).each( function() {
 					// Get the current size for this LI element.
 					var current_size = $(this).data( 'size' );
+					
 					if ( typeof current_size !== 'undefined' ) {
 						// Get the new size of the LI.
 						var tmp = current_size.split( '-' );
@@ -1304,7 +1305,7 @@ jQuery(document).ready(function($) {
 					$(this).data( 'size', old_size );
 					// Remove our current size class.
 					$(this).addClass( 'ninja-col-' + old_size );
-					$(this).removeClass( 'ninja-col-' + current_size );
+					$(this).removeClass();
 					
 					// Add our previous size class.
 									
