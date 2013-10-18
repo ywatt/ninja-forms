@@ -14,6 +14,7 @@ function ninja_forms_add_menu(){
 	$subs = add_submenu_page("ninja-forms", __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), $capabilities, "ninja-forms-subs", "ninja_forms_admin");
 	$import = add_submenu_page("ninja-forms", __( 'Import/Export', 'ninja-forms' ), __( 'Import / Export', 'ninja-forms' ), $capabilities, "ninja-forms-impexp", "ninja_forms_admin");
 	$settings = add_submenu_page("ninja-forms", __( 'Ninja Form Settings', 'ninja-forms' ), __( 'Settings', 'ninja-forms' ), $capabilities, "ninja-forms-settings", "ninja_forms_admin");
+	$system_status = add_submenu_page("ninja-forms", __( 'System Status', 'ninja-forms' ), __( 'System Status', 'ninja-forms' ), $capabilities, "ninja-forms-system-status", "ninja_forms_admin");
 	$extend = add_submenu_page("ninja-forms", __( 'Ninja Form Extensions', 'ninja-forms' ), __( 'Extend', 'ninja-forms' ), $capabilities, "ninja-forms-extend", "ninja_forms_admin");
 	*/
 	add_action('admin_print_styles-' . $page, 'ninja_forms_admin_css');
@@ -31,6 +32,9 @@ function ninja_forms_add_menu(){
 	add_action('admin_print_styles-' . $subs, 'ninja_forms_admin_js');
 	add_action('admin_print_styles-' . $subs, 'ninja_forms_admin_css');
 
+	add_action('admin_print_styles-' . $system_status, 'ninja_forms_admin_js');
+	add_action('admin_print_styles-' . $system_status, 'ninja_forms_admin_css');
+
 	add_action('admin_print_styles-' . $extend, 'ninja_forms_admin_js');
 	add_action('admin_print_styles-' . $extend, 'ninja_forms_admin_css');
 
@@ -39,6 +43,7 @@ function ninja_forms_add_menu(){
 	add_action( 'load-' . $settings, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $import, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $subs, 'ninja_forms_load_screen_options_tab' );
+	add_action( 'load-' . $system_status, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $extend, 'ninja_forms_load_screen_options_tab' );
 	*/
 }

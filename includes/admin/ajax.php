@@ -431,7 +431,7 @@ function ninja_forms_array_merge_recursive() {
 function ninja_forms_import_list_options(){
 	$options = $_REQUEST['options'];
 	$field_id = absint( $_REQUEST['field_id'] );
-
+	$options = str_replace('\,', '-comma-replace-placeholder-', $options );
 	$options = csv_explode( $options );
 
 	if( is_array( $options ) ){
@@ -441,7 +441,9 @@ function ninja_forms_import_list_options(){
 			$label = stripslashes( $option[0] );
 			$value = stripslashes( $option[1] );
 			$label = str_replace( "''", "", $label );
+			$label = str_replace( "-comma-replace-placeholder-", ",", $label );
 			$value = str_replace( "''", "", $value );
+			$value = str_replace( "-comma-replace-placeholder-", ",", $value );
 			$tmp_array[$x]['label'] = $label;
 			$tmp_array[$x]['value'] = $value;
 			$x++;

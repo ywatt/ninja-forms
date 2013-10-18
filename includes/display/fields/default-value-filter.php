@@ -66,4 +66,4 @@ function ninja_forms_default_value_filter( $data, $field_id ) {
 	return $data;
 }
 
-add_filter( 'ninja_forms_field', 'ninja_forms_default_value_filter', 9, 2 );
+add_filter( 'ninja_forms_field', 'ninja_forms_default_value_filter', 7, 2 );
