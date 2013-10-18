@@ -64,7 +64,7 @@
 		</tr>
 		<tr>
 			<td><?php _e( 'WP Debug Mode', 'ninja-forms' ); ?>:</td>
-			<td><?php if ( defined('WP_DEBUG') && WP_DEBUG ) echo '<mark class="yes">' . __( 'Yes', 'ninja-forms' ) . '</mark>'; else echo '<mark class="no">' . __( 'No', 'ninja-forms' ) . '</mark>'; ?></td>
+			<td><?php if ( defined('WP_DEBUG') && WP_DEBUG ) echo __( 'Yes', 'ninja-forms' ); else echo __( 'No', 'ninja-forms' ); ?></td>
 		</tr>
 		<tr>
 			<td><?php _e( 'WP Language', 'ninja-forms' ); ?>:</td>
@@ -97,9 +97,9 @@
 			<td><?php
 				$default_timezone = date_default_timezone_get();
 				if ( 'UTC' !== $default_timezone ) {
-					echo '<mark class="error">' . sprintf( __( 'Default timezone is %s - it should be UTC', 'ninja-forms' ), $default_timezone ) . '</mark>';
+					echo sprintf( __( 'Default timezone is %s - it should be UTC', 'ninja-forms' ), $default_timezone );
 				} else {
-					echo '<mark class="yes">' . sprintf( __( 'Default timezone is %s', 'ninja-forms' ), $default_timezone ) . '</mark>';
+					echo sprintf( __( 'Default timezone is %s', 'ninja-forms' ), $default_timezone );
 				} ?>
 			</td>
 		</tr>
@@ -118,7 +118,7 @@
 				}
 				$posting['fsockopen_curl']['success'] = true;
 			} else {
-				$posting['fsockopen_curl']['note'] = __( 'Your server does not have fsockopen or cURL enabled - PayPal IPN and other scripts which communicate with other servers will not work. Contact your hosting provider.', 'ninja-forms' ). '</mark>';
+				$posting['fsockopen_curl']['note'] = __( 'Your server does not have fsockopen or cURL enabled - PayPal IPN and other scripts which communicate with other servers will not work. Contact your hosting provider.', 'ninja-forms' );
 				$posting['fsockopen_curl']['success'] = false;
 			}
 
@@ -128,7 +128,7 @@
 				$posting['soap_client']['note'] = __('Your server has the SOAP Client class enabled.', 'ninja-forms' );
 				$posting['soap_client']['success'] = true;
 			} else {
-				$posting['soap_client']['note'] = sprintf( __( 'Your server does not have the <a href="%s">SOAP Client</a> class enabled - some gateway plugins which use SOAP may not work as expected.', 'ninja-forms' ), 'http://php.net/manual/en/class.soapclient.php' ) . '</mark>';
+				$posting['soap_client']['note'] = sprintf( __( 'Your server does not have the <a href="%s">SOAP Client</a> class enabled - some gateway plugins which use SOAP may not work as expected.', 'ninja-forms' ), 'http://php.net/manual/en/class.soapclient.php' );
 				$posting['soap_client']['success'] = false;
 			}
 
