@@ -1,19 +1,17 @@
-<div class="ninja-forms-message">
+<div class="nf-box">
 	<div>
 		<h4><?php _e( 'Please include this information when requesting support:', 'ninja-forms' ); ?> </h4>
-		<p class="submit debug-report"><a href="#"><?php _e( 'Get System Report', 'ninja-forms' ); ?></a></p>
+		<p class="submit debug-report"><a href="#" class="button-primary"><?php _e( 'Get System Report', 'ninja-forms' ); ?></a></p>
 	</div>
 	<div id="debug-report"><textarea readonly="readonly"></textarea></div>
 </div>
 <br/>
 <table class="nf-status-table" cellspacing="0">
-
 	<thead>
 		<tr>
 			<th colspan="2"><?php _e( 'Environment', 'ninja-forms' ); ?></th>
 		</tr>
 	</thead>
-
 	<tbody>
 		<tr>
 			<td><?php _e( 'Home URL','ninja-forms' ); ?>:</td>
@@ -155,30 +153,13 @@
 				$posting['wp_remote_post']['note'] = __( 'wp_remote_post() failed. PayPal IPN may not work with your server.', 'ninja-forms' );
 				$posting['wp_remote_post']['success'] = false;
 			}
-
-			$posting = apply_filters( 'woocommerce_debug_posting', $posting );
-
-			foreach( $posting as $post ) { $mark = ( isset( $post['success'] ) && $post['success'] == true ) ? 'yes' : 'error';
-				?>
-				<tr>
-					<td><?php echo esc_html( $post['name'] ); ?>:</td>
-					<td>
-						<mark class="<?php echo $mark; ?>">
-							<?php echo wp_kses_data( $post['note'] ); ?>
-						</mark>
-					</td>
-				</tr>
-				<?php
-			}
 		?>
 	</tbody>
-
 	<thead>
 		<tr>
 			<th colspan="2"><?php _e( 'Plugins', 'ninja-forms' ); ?></th>
 		</tr>
 	</thead>
-
 	<tbody>
 		<tr>
 			<td><?php _e( 'Installed Plugins','ninja-forms' ); ?>:</td>
@@ -188,7 +169,7 @@
 				if ( is_multisite() )
 					$active_plugins = array_merge( $active_plugins, get_site_option( 'active_sitewide_plugins', array() ) );
 
-				$wc_plugins = array();
+				$all_plugins = array();
 
 				foreach ( $active_plugins as $plugin ) {
 
@@ -204,39 +185,15 @@
 							$plugin_name = '<a href="' . $plugin_data['PluginURI'] . '" title="' . __( 'Visit plugin homepage' , 'ninja-forms' ) . '">' . $plugin_name . '</a>';
 						}
 
-						if ( strstr( $dirname, 'ninja-forms' ) ) {
-
-							if ( false === ( $version_data = get_transient( $plugin . '_version_data' ) ) ) {
-								$changelog = wp_remote_get( 'http://dzv365zjfbd8v.cloudfront.net/changelogs/' . $dirname . '/changelog.txt' );
-								$cl_lines  = explode( "\n", wp_remote_retrieve_body( $changelog ) );
-								if ( ! empty( $cl_lines ) ) {
-									foreach ( $cl_lines as $line_num => $cl_line ) {
-										if ( preg_match( '/^[0-9]/', $cl_line ) ) {
-
-											$date         = str_replace( '.' , '-' , trim( substr( $cl_line , 0 , strpos( $cl_line , '-' ) ) ) );
-											$version      = preg_replace( '~[^0-9,.]~' , '' ,stristr( $cl_line , "version" ) );
-											$update       = trim( str_replace( "*" , "" , $cl_lines[ $line_num + 1 ] ) );
-											$version_data = array( 'date' => $date , 'version' => $version , 'update' => $update , 'changelog' => $changelog );
-											set_transient( $plugin . '_version_data', $version_data , 60*60*12 );
-											break;
-										}
-									}
-								}
-							}
-
-							if ( ! empty( $version_data['version'] ) && version_compare( $version_data['version'], $plugin_data['Version'], '!=' ) )
-								$version_string = ' &ndash; <strong style="color:red;">' . $version_data['version'] . ' ' . __( 'is available', 'ninja-forms' ) . '</strong>';
-						}
-
-						$wc_plugins[] = $plugin_name . ' ' . __( 'by', 'ninja-forms' ) . ' ' . $plugin_data['Author'] . ' ' . __( 'version', 'ninja-forms' ) . ' ' . $plugin_data['Version'] . $version_string;
+						$all_plugins[] = $plugin_name . ' ' . __( 'by', 'ninja-forms' ) . ' ' . $plugin_data['Author'] . ' ' . __( 'version', 'ninja-forms' ) . ' ' . $plugin_data['Version'] . $version_string;
 
 					}
 				}
 
-				if ( sizeof( $wc_plugins ) == 0 )
+				if ( sizeof( $all_plugins ) == 0 )
 					echo '-';
 				else
-					echo implode( ', <br/>', $wc_plugins );
+					echo implode( ', <br/>', $all_plugins );
 
 			?></td>
 		</tr>
