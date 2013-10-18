@@ -45,10 +45,10 @@ function ninja_forms_admin(){
 	global $wpdb, $ninja_forms_tabs, $ninja_forms_sidebars, $current_tab, $ninja_forms_tabs_metaboxes, $ninja_forms_admin_update_message;
 
 	$current_tab = ninja_forms_get_current_tab();
-	$current_page = $_REQUEST['page'];
+	$current_page = esc_html( $_REQUEST['page'] );
 
 	if(isset($_REQUEST['form_id'])){
-		$form_id = $_REQUEST['form_id'];
+		$form_id = absint( $_REQUEST['form_id'] );
 		$form_row = ninja_forms_get_form_by_id($form_id);
 		$data = $form_row['data'];
 	}else{
@@ -160,11 +160,11 @@ if(is_admin()){
 function ninja_forms_get_current_tab(){
 	global $ninja_forms_tabs;
 	if(isset($_REQUEST['page'])){
-		$current_page = $_REQUEST['page'];
+		$current_page = esc_html( $_REQUEST['page'] );
 
 
 		if(isset($_REQUEST['tab'])){
-			$current_tab = $_REQUEST['tab'];
+			$current_tab = esc_html( $_REQUEST['tab'] );
 		}else{
 			if(isset($ninja_forms_tabs[$current_page]) AND is_array($ninja_forms_tabs[$current_page])){
 				$first_tab = array_slice($ninja_forms_tabs[$current_page], 0, 1);
