@@ -94,6 +94,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 *Changes:*
 
 * Added new options to the default value setting: Post ID, Post Title, and Post URL.
+* Changed the date format in ninja_forms_get_subs() to allow 24 hour date selection.
 * Improved performance with the MP6 plugin.
 
 = 2.2.51 =
