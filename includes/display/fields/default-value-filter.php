@@ -23,10 +23,16 @@ function ninja_forms_default_value_filter( $data, $field_id ) {
     $user_lastname 		= $current_user->user_lastname;
     $user_display_name 	= $current_user->display_name;
     $user_email 		= $current_user->user_email;
+    if ( is_object ( $post ) ) {
+	    $post_ID 			= $post->ID;
+	    $post_title 		= $post->post_title;
+	    $post_url			= get_permalink( $post_ID );
+    } else {
+    	$post_ID      		= '';
+    	$post_title 		= '';
+    	$post_url 			= '';
+    }
 
-    $post_ID 			= $post->ID;
-    $post_title 		= $post->post_title;
-    $post_url			= get_permalink( $post_ID );
 
     switch( $default_value ){
 		case '_user_id':
