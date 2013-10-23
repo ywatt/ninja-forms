@@ -154,7 +154,7 @@ function ninja_forms_tab_addons(){
             'docs' => '',
         ),       
         array (
-            'title' => __( 'MailPoet (formerly Wysija', 'ninja-forms' ),
+            'title' => __( 'MailPoet (formerly Wysija)', 'ninja-forms' ),
             'image' => 'http://ninjaforms.com/wp-content/uploads/edd/2013/09/mailpoet-300x121.png',
             'content' => __( 'The MailPoet (formerly Wysija) extension allows you to quickly create newsletter signup forms for your MailPoet mailing lists using the power and flexibility that Ninja Forms provides.', 'ninja-forms' ),
             'link' => 'http://ninjaforms.com/downloads/mailpoet/',
