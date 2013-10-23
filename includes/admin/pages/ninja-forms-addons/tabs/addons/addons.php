@@ -10,7 +10,6 @@ function ninja_forms_register_tab_addons(){
         'show_save' => false,
     );
     ninja_forms_register_tab('extend', $args);
-
 }
 
 function ninja_forms_tab_addons(){
@@ -172,7 +171,7 @@ function ninja_forms_tab_addons(){
     );
 
     foreach ($items as $item) {
-        echo '<div class="nf-extend">';
+        echo '<div class="nf-extend nf-box">';
             echo '<img src="' . $item['image'] . '" />';
             echo '<h2>' . $item['title'] . '</h2>';
             echo '<div>';
@@ -201,5 +200,4 @@ function ninja_forms_tab_addons(){
 
 function ninja_forms_save_addons($data){
     global $wpdb;
-
 }
