@@ -5,11 +5,18 @@
 **/
 
 function ninja_forms_display_field_label( $field_id, $data ){
+	global $ninja_forms_fields;
+
 	$plugin_settings = get_option("ninja_forms_settings");
+
+	$field_row = ninja_forms_get_field_by_id( $field_id );
+	$field_type = $field_row['type'];
 
 	if(isset($data['label'])){
 		$label = stripslashes($data['label']);
-	}else{
+	}else if ( isset ( $ninja_forms_fields[$field_type]['default_label'] ) ){
+		$label = $ninja_forms_fields[$field_type]['default_label'];
+	} else {
 		$label = '';
 	}
 
