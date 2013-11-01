@@ -1068,7 +1068,7 @@ jQuery(document).ready(function($) {
 				var tmp = current_size.split( '-' );
 				var colspan = tmp[0];
 				var new_size = colspan + '-' + new_target_cols;
-				$(this).data( 'size', new_size );
+				//$(this).data( 'size', new_size );
 				//console.log( 'OVER - New Target Cols: ' + new_target_cols );
 				// Remove the current size class.
 				$(this).removeClass();
@@ -1271,7 +1271,7 @@ jQuery(document).ready(function($) {
 				var new_size = colspan + '-' + new_sender_cols;
 				
 				// Set the new size as the size setting.
-				$(this).data( 'size', new_size );
+				//$(this).data( 'size', new_size );
 				//console.log( 'UPDATE ' + this.id + ' SIZE TO: ' + new_size );
 			});
 			
@@ -1347,11 +1347,9 @@ jQuery(document).ready(function($) {
 			var target_lis = $(this).children( 'li' ).not( '.' + placeholder_class );
 			$(target_lis).each( function() {
 				// Get our previous size.
-				var old_size = $(this).data( 'old_size' );
+				var old_size = $(this).data( 'size' );
 				
 				if ( typeof old_size !== 'undefined' ) {
-					// Reset our data attribute.
-					$(this).data( 'size', old_size );
 					// Remove our current size class.
 					$(this).removeClass();
 					// Add our previous size class.
