@@ -1045,8 +1045,8 @@ jQuery(document).ready(function($) {
 
 			//console.log( "OVER - new target cols: " + new_target_cols )
 			
-			$(this).data( 'cols', new_target_cols );
-			$(this).data( 'old_cols', target_cols );
+			//$(this).data( 'cols', new_target_cols );
+			//$(this).data( 'old_cols', target_cols );
 
 			// Set our placeholder to the proper size.
 			var placeholder_class = 'ninja-placeholder-1-' + new_target_cols;
@@ -1069,7 +1069,7 @@ jQuery(document).ready(function($) {
 				var colspan = tmp[0];
 				var new_size = colspan + '-' + new_target_cols;
 				$(this).data( 'size', new_size );
-				console.log( 'OVER - New Target Cols: ' + new_target_cols );
+				//console.log( 'OVER - New Target Cols: ' + new_target_cols );
 				// Remove the current size class.
 				$(this).removeClass();
 				// Add the new size class.
@@ -1082,11 +1082,12 @@ jQuery(document).ready(function($) {
 			if ( this != ui.sender[0] ) {
 				var sender_cols = parseInt( $(ui.sender).data( 'cols' ) );
 				var sender_lis = $(ui.sender).children( 'li' ).not( ui.item ).not( '.' + placeholder_class );
-				
-				if ( !sender_mod ) {
-					//console.log( 'mod' );
+
+				//if ( !sender_mod ) {
+					
 					if ( $(sender_lis).length <= 1 ) {
 						var new_sender_cols = 1;
+						
 					} else if ( $(sender_lis).length == 2 ) {
 						// Loop through our remaining LI items. 
 						// If we don't have any colspans that are greater than one, then our new column is current col - 1.
@@ -1121,15 +1122,15 @@ jQuery(document).ready(function($) {
 						}
 					}
 					sender_mod = true;
-				} else {
-					var new_sender_cols = sender_cols;
-				}
+				//} else {
+					//var new_sender_cols = sender_cols;
+				//}
 
 				// Update our sender UL's cols data attribute.
 
-				$(ui.sender).data( 'cols', new_sender_cols );
+				//$(ui.sender).data( 'cols', new_sender_cols );
 				// Set our sender Ul's old cols.
-				$(ui.sender).data( 'old_cols', sender_cols );
+				//$(ui.sender).data( 'old_cols', sender_cols );
 
 				// Loop through each LI in our sender UL and set the size.
 				
@@ -1142,7 +1143,7 @@ jQuery(document).ready(function($) {
 						var tmp = current_size.split( '-' );
 						var colspan = parseInt( tmp[0] );
 						var new_size = colspan + '-' + new_sender_cols;
-						console.log( 'OVER - Set Sender Cols: ' + new_sender_cols );
+						//console.log( 'OVER - Set Sender Cols: ' + new_sender_cols );
 						// Remove the old size class.
 						$(this).removeClass();
 						// Add the new size class.
@@ -1162,18 +1163,24 @@ jQuery(document).ready(function($) {
 			//console.log( 'receive' );
 			var target_cols = $(this).data( 'cols' );
 			
-			$(this).removeData( 'old_cols' );
+			//$(this).removeData( 'old_cols' );
 			
-			if ( target_cols == 4 ) {
+			// Increase our target UL column size by one.
+			if ( target_cols < 4 ) {
+				var new_target_cols = target_cols + 1;
+			}
+
+			if ( new_target_cols == 4 ) {
 				$(this).removeClass( 'ninja-drop' );
 			} else {
 				$(this).addClass( 'ninja-drop' );
 			}
 
 			$(this).css('padding', '2px');
+			$(this).data( 'cols', new_target_cols );
 
 			//Set the element being dragged to the proper size.
-			var new_size = '1-' + target_cols;
+			var new_size = '1-' + new_target_cols;
 			$(ui.item).data( 'size', new_size );
 
 			// Loop through each LI in our target UL and set the size.
@@ -1183,7 +1190,7 @@ jQuery(document).ready(function($) {
 				// Get the new size of the LI.
 				var tmp = current_size.split( '-' );
 				var colspan = tmp[0];
-				var new_size = colspan + '-' + target_cols;
+				var new_size = colspan + '-' + new_target_cols;
 				
 				// Set the new size as the size setting.
 				$(this).data( 'size', new_size );
@@ -1192,11 +1199,61 @@ jQuery(document).ready(function($) {
 
         },
         remove: function( event, ui ) {
-        	var sender_cols = $(this).data( 'cols' );
+        	//var sender_cols = $(this).data( 'cols' );
 
-        	$(this).removeData( 'old_cols' );
+        	//$(this).removeData( 'old_cols' );
 
-			if ( sender_cols < 4 ) {
+
+
+			var sender_cols = parseInt( $(this).data( 'cols' ) );
+			var sender_lis = $(this).children( 'li' ).not( ui.item );
+
+			
+			//if ( !sender_mod ) {
+				//console.log( 'mod' );
+				if ( $(sender_lis).length <= 1 ) {
+					var new_sender_cols = 1;
+				} else if ( $(sender_lis).length == 2 ) {
+					// Loop through our remaining LI items. 
+					// If we don't have any colspans that are greater than one, then our new column is current col - 1.
+					var tmp_colspan = 1;
+					$(sender_lis).each( function() {
+						// Get the current size for this LI element.
+						var current_size = $(this).data( 'size' );
+						if ( typeof current_size !== 'undefined' ) {
+							var tmp = current_size.split( '-' );
+							var colspan = parseInt( tmp[0] );
+							if ( colspan > 1 ) {
+								tmp_colspan = colspan;
+							}						
+						}
+					});
+					// If the largest colspan is greater than one, then we can subtract one from the old col size.
+					if ( tmp_colspan > 1 ) {
+						// Decrease our sender UL column size by one.
+						if ( sender_cols > 1 ) {
+							var new_sender_cols = sender_cols - 1;
+						} else {
+							var new_sender_cols = 1;
+						}
+					} else {
+						// The largest colspan is 1, and we have two items. Set the columns to two.
+						var new_sender_cols = 2;
+					}
+				} else if ( $(sender_lis).length > 2 ) {
+					// Decrease our sender UL column size by one.
+					if ( sender_cols > 1 ) {
+						var new_sender_cols = sender_cols - 1;
+					}
+				}
+				//sender_mod = true;
+			//} else {
+				//var new_sender_cols = sender_cols;
+			//}
+
+			$(this).data( 'cols', new_sender_cols );
+
+			if ( new_sender_cols < 4 ) {
 				$(this).addClass( 'ninja-drop' );
 			}
 
@@ -1211,7 +1268,7 @@ jQuery(document).ready(function($) {
 				// Get the new size of the LI.
 				var tmp = current_size.split( '-' );
 				var colspan = tmp[0];
-				var new_size = colspan + '-' + sender_cols;
+				var new_size = colspan + '-' + new_sender_cols;
 				
 				// Set the new size as the size setting.
 				$(this).data( 'size', new_size );
@@ -1277,9 +1334,9 @@ jQuery(document).ready(function($) {
 		
 		var placeholder_class = ui.placeholder[0].className;
 
-		var old_cols = $(this).data( 'old_cols' );
-		$(this).data( 'cols', old_cols );
-		$(this).removeData( 'old_cols' );
+		//var old_cols = $(this).data( 'old_cols' );
+		//$(this).data( 'cols', old_cols );
+		//$(this).removeData( 'old_cols' );
 		
 		if ( this != ui.sender[0] ) {
 			//var old_cols = $(ui.sender).data( 'old_cols' );
@@ -1298,7 +1355,7 @@ jQuery(document).ready(function($) {
 					// Remove our current size class.
 					$(this).removeClass();
 					// Add our previous size class.
-					console.log( 'OUT - Set Target Cols: ' + old_size );
+					//console.log( 'OUT - Set Target Cols: ' + old_size );
 					$(this).addClass( 'ninja-col-' + old_size );
 				}
 			});
