@@ -46,7 +46,7 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 	By: Bob Knothe And okolov Yura aka funny_falcon
 
 */
-	
+
 global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
@@ -100,6 +100,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/form/process-message.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-error-message.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-wrap.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/fields-wrap.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/fields/honeypot.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/required-label.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/open-form-tag.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/close-form-tag.php" );
@@ -250,6 +251,7 @@ require_once( NINJA_FORMS_DIR . "/includes/fields/hidden.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/organizer.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/submit.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/spam.php" );
+require_once( NINJA_FORMS_DIR . "/includes/fields/honeypot.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/hr.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/desc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/textarea.php" );
@@ -283,7 +285,7 @@ function ninja_forms_set_transient_id(){
 		while ( get_transient( $t_id ) !== false ) {
 			$_id = ninja_forms_random_string();
 		}
-		$_SESSION['ninja_forms_transient_id'] = $t_id;		
+		$_SESSION['ninja_forms_transient_id'] = $t_id;
 	}
 }
 
