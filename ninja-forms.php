@@ -251,6 +251,7 @@ require_once( NINJA_FORMS_DIR . "/includes/fields/organizer.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/submit.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/spam.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/honeypot.php" );
+require_once( NINJA_FORMS_DIR . "/includes/fields/timed-submit.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/hr.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/desc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/textarea.php" );
