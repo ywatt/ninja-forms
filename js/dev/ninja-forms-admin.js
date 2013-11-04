@@ -1144,6 +1144,8 @@ jQuery(document).ready(function($) {
 						var colspan = parseInt( tmp[0] );
 						var new_size = colspan + '-' + new_sender_cols;
 						//console.log( 'OVER - Set Sender Cols: ' + new_sender_cols );
+						$(this).data( 'old_size', current_size );
+						$(this).data( 'size', new_size );
 						// Remove the old size class.
 						$(this).removeClass();
 						// Add the new size class.
@@ -1347,9 +1349,11 @@ jQuery(document).ready(function($) {
 			var target_lis = $(this).children( 'li' ).not( '.' + placeholder_class );
 			$(target_lis).each( function() {
 				// Get our previous size.
-				var old_size = $(this).data( 'size' );
+				var old_size = $(this).data( 'old_size' );
 				
 				if ( typeof old_size !== 'undefined' ) {
+					$(this).removeData( 'old_size' );
+					$(this).data( 'size', old_size );
 					// Remove our current size class.
 					$(this).removeClass();
 					// Add our previous size class.
