@@ -173,7 +173,7 @@ function ninja_forms_activation(){
 			'currency_symbol' => '$',
 			'clear_complete' => 1,
 			'hide_complete' => 1,
-			'req_div_label' => __('Fields marked with a * are required', 'ninja-forms'),
+			'req_div_label' => __('Fields marked with a * are required.', 'ninja-forms'),
 			'req_field_symbol' => '*',
 			'req_error_label' => __( 'Please ensure all required fields are completed.', 'ninja-forms' ),
 			'req_field_error' => __('This is a required field', 'ninja-forms'),
