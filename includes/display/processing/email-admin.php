@@ -17,10 +17,7 @@ function ninja_forms_email_admin() {
 	$email_type 		= $ninja_forms_processing->get_form_setting( 'email_type' );
 	$subject 			= $ninja_forms_processing->get_form_setting( 'admin_subject' );
 	$message 			= $ninja_forms_processing->get_form_setting( 'admin_email_msg' );
-
-	if ( $ninja_forms_processing->get_form_setting( 'admin_email_replyto' ) ){
-		$email_reply 	= $ninja_forms_processing->get_form_setting( 'admin_email_replyto' );
-	}
+	$email_reply 		= $ninja_forms_processing->get_form_setting( 'admin_email_replyto' );
 
 	if ( $ninja_forms_processing->get_form_setting( 'admin_email_name' ) ){
 		$email_from_name = $ninja_forms_processing->get_form_setting( 'admin_email_name' );
@@ -44,14 +41,15 @@ function ninja_forms_email_admin() {
 		$message = wpautop( $message );
 	}
 
-	$email_from = $email_from_name . ' <' . $email_from . '>';
+	$email_from = $email_from_name.' <'.$email_from.'>';
 
-	$headers = '\nMIME-Version: 1.0\n';
-	$headers .= 'From: ' . $email_from . '\r\n';
+	$headers = array();
+	$headers[] = 'From: ' . $email_from;
 	if( $email_reply ) {
-		$headers .= 'Reply-To: ' . $email_reply . '\r\n';
+		$headers[] = 'Reply-To: ' . $email_reply;
 	}
-	$headers .= 'Content-Type: text/' . $email_type . '; charset=utf-8\r\n';
+	$headers[] = 'Content-Type: text/' . $email_type; 
+	$headers[] = 'charset=utf-8';
 
 	if ($ninja_forms_processing->get_form_setting( 'admin_attachments' ) ) {
 		$attachments = $ninja_forms_processing->get_form_setting( 'admin_attachments' );

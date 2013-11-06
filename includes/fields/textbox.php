@@ -257,7 +257,7 @@ function ninja_forms_field_text_pre_process( $field_id, $user_value ){
 		}
 	}
 
-	if( ( isset( $data['replyto_email'] ) AND $data['replyto_email'] == 1 ) OR isset( $data['from_email'] ) AND $data['from_email'] == 1 ){
+	if( ( isset( $data['replyto_email'] ) AND $data['replyto_email'] == 1 ) OR ( isset( $data['from_email'] ) AND $data['from_email'] == 1 ) ) {
 		$user_value = $ninja_forms_processing->get_field_value( $field_id );
 		$ninja_forms_processing->update_form_setting( 'admin_email_replyto', $user_value );
 	}
