@@ -96,15 +96,19 @@ function ninja_forms_field_timed_submit_pre_process( $field_id, $user_value ){
 	global $ninja_forms_processing;
 
 	$plugin_settings = get_option( 'ninja_forms_settings' );
-	if(isset($plugin_settings['timed_submit_error'])){
+	if ( isset ( $plugin_settings['timed_submit_error'] ) ) {
 		$timed_submit_error = $plugin_settings['timed_submit_error'];
+	} else {
+		$timed_submit_error = __('If you are a human, please slow down.', 'ninja-forms');
 	}
 
-	if(isset($plugin_settings['javascript_error'])){
+	if ( isset ( $plugin_settings['javascript_error'] ) ) {
 		$javascript_error = $plugin_settings['javascript_error'];
+	} else {
+		$javascript_error = __( 'You need JavaScript to submit this form. Please enable it and try again.', 'ninja-forms' );
 	}
 
-	if( isset( $user_value['no-js'] ) ){
+	if ( isset ( $user_value['no-js'] ) ){
 		$ninja_forms_processing->add_error('javascript-general', $javascript_error, 'general' );
 	} else {
 		$timer = isset( $user_value['timer'] ) ? $user_value['timer'] : 10;
