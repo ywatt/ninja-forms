@@ -65,6 +65,8 @@ require_once( NINJA_FORMS_DIR . "/includes/shortcode.php" );
 require_once( NINJA_FORMS_DIR . "/includes/widget.php" );
 require_once( NINJA_FORMS_DIR . "/includes/field-type-groups.php" );
 require_once( NINJA_FORMS_DIR . "/includes/eos.class.php" );
+require_once( NINJA_FORMS_DIR . "/includes/from-setting-check.php" );
+require_once( NINJA_FORMS_DIR . "/includes/reply-to-check.php" );
 
 require_once( NINJA_FORMS_DIR . "/includes/display/scripts.php" );
 
@@ -171,7 +173,6 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.p
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/empty-rte.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/edit-field-ul.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/help.php" );
-	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/replyto-change.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/def-fields.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/fav-fields.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/template-fields.php" );

@@ -1,16 +1,18 @@
 <?php
 
 function ninja_forms_replyto_change() {
-	if ( $_REQUEST['page'] == 'ninja-forms' AND $_REQUEST['tab'] == 'field_settings' ) {
-		$form_id = $_REQUEST['form_id'];
-		$fields = ninja_forms_get_fields_by_form_id( $form_id );
+
+	$plugin_settings = get_option( 'ninja_forms_settings' );
+	if ( !isset ( $plugin_settings['fix_field_reply_to'] ) or $plugin_settings['fix_field_reply_to'] != 1 ) {
+		$fields = ninja_forms_get_all_fields();
 		foreach ($fields as $field) {
 			if ( $field['type'] = '_text' ) {
-				if ( isset( $field['data']['from_email'] ) AND $field['data']['from_email'] == 1 ) {
+				$change_required = false;
+				if ( isset( $field['data']['from_email'] ) and $field['data']['from_email'] == 1 ) {
 					$field['data']['replyto_email'] = 1;
 					unset( $field['data']['from_email'] );
 					$change_required = true;
-				} elseif ( isset( $field['data']['from_email'] ) AND $field['data']['from_email'] == 0 ) {
+				} elseif ( isset( $field['data']['from_email'] ) and $field['data']['from_email'] == 0 ) {
 					$field['data']['replyto_email'] = 0;
 					unset( $field['data']['from_email'] );
 					$change_required = true;
@@ -29,6 +31,9 @@ function ninja_forms_replyto_change() {
 				}
 			}
 		}
+		$plugin_settings['fix_field_reply_to'] = 1;
+		update_option( 'ninja_forms_settings', $plugin_settings );
 	}
 }
-add_action( 'admin_init', 'ninja_forms_replyto_change' );
+
+add_action( 'init', 'ninja_forms_replyto_change' );
