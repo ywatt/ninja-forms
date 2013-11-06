@@ -47,7 +47,6 @@ function ninja_forms_register_form_settings_basic_email_metabox(){
 		'slug' => 'email_settings',
 		'title' => __( 'From Email Settings', 'ninja-forms' ),
 		'display_function' => '',
-		'state' => 'closed',
 		'settings' => array(
 			//array(
 				//'name' => 'send_email',
@@ -220,6 +219,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 		'slug' => 'basic_settings',
 		'title' => __( 'Basic Form Behavior Settings', 'ninja-forms' ),
 		//'display_function' => 'ninja_forms_form_settings_basic_metabox',
+		'state' => 'closed',
 		'settings' => array(
 			array(
 				'name' => 'show_title',
