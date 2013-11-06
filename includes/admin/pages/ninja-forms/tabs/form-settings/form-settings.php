@@ -357,16 +357,12 @@ function ninja_forms_save_form_settings( $form_id, $data ){
 	}
 
 	if ( $form_id != 'new' ){
-		$pat = '/\<([^\"]*?)\>/'; // text between quotes excluding quotes
-		$value = $form_data['email_from'];
 
-		if( preg_match($pat, $value, $matches) ) {
-			if ( empty( $form_data['email_from_name'] ) ) {
-				$arr = explode("<", $form_data['email_from'], 2);
-				$form_data['email_from_name'] = $arr[0];
-			}
-			$form_data['email_from'] = $matches[1];
-		}
+		$email_from = ninja_forms_split_email_from( $form_data['email_from'] );
+
+		$form_data['email_from'] = $email_from['email_from'];
+		$form_data['email_from_name'] = $email_from['email_from_name'];
+
 		if ( empty( $form_data['email_from_name'] ) ) {
 			$form_data['email_from_name'] = get_option( 'blogname' );
 		}
