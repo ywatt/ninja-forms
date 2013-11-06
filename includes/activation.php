@@ -179,6 +179,8 @@ function ninja_forms_activation(){
 			'req_field_error' => __('This is a required field', 'ninja-forms'),
 			'spam_error' => __('Please answer the anti-spam question correctly.', 'ninja-forms'),
 			'honeypot_error' => __('If you are a human, please leave this field blank.', 'ninja-forms'),
+			'timed_submit_error' => __('If you are a human, please slow down.', 'ninja-forms'),
+			'javascript_error' => __('You need JavaScript to submit this form. Please enable it and try again.', 'ninja-forms'),
 			'invalid_email' => __( 'Please enter a valid email address.', 'ninja-forms' ),
 			'process_label' => __('Processing', 'ninja-forms'),
 			'login_link' => __('Login', 'ninja-forms'),
