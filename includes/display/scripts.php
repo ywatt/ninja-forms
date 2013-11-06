@@ -3,7 +3,7 @@
 function ninja_forms_display_js($form_id, $local_vars = ''){
 	global $post, $ninja_forms_display_localize_js;
 
-	if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+	if ( defined( 'NINJA_FORMS_JS_DEBUG' ) && NINJA_FORMS_JS_DEBUG ) {
 		$suffix = '';
 		$src = 'dev';
 	} else {
