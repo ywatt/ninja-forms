@@ -369,8 +369,8 @@ function ninja_forms_save_form_settings( $form_id, $data ){
 		if ( empty( $form_data['email_from_name'] ) ) {
 			$form_data['email_from_name'] = get_option( 'blogname' );
 		}
-		if ( empty( $form_data['email_from_name'] ) ) {
-			$form_data['email_from_name'] = get_option( 'admin_email' );
+		if ( empty( $form_data['email_from'] ) ) {
+			$form_data['email_from'] = get_option( 'admin_email' );
 		}
 
 		$data_array = array( 'data' => serialize( $form_data ) );
