@@ -361,8 +361,11 @@ function ninja_forms_save_form_settings( $form_id, $data ){
 		$email_from = ninja_forms_split_email_from( $form_data['email_from'] );
 
 		$form_data['email_from'] = $email_from['email_from'];
-		$form_data['email_from_name'] = $email_from['email_from_name'];
 
+		if ( !isset ( $form_data['email_from_name'] ) or empty( $form_data['email_from_name'] ) ) {
+			$form_data['email_from_name'] = $email_from['email_from_name'];
+		}
+		
 		if ( empty( $form_data['email_from_name'] ) ) {
 			$form_data['email_from_name'] = get_option( 'blogname' );
 		}
