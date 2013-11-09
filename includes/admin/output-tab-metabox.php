@@ -349,6 +349,10 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					<?php
 					break;
 				case 'button':
+					// set a default value for $class to maintain the standard WordPress UI
+					if( isset( $class ) && empty( $class ) ) {
+						$class = "button-secondary";
+					}
 					?>
 					<input type="button" name="<?php echo $name;?>" class="<?php echo $class; ?>" value="<?php echo $label;?>">
 					<?php
