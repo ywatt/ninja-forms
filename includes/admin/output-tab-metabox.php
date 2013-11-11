@@ -354,7 +354,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 						$class = "button-secondary";
 					}
 					?>
-					<input type="button" name="<?php echo $name;?>" class="<?php echo $class; ?>" value="<?php echo $label;?>">
+					<input type="button" name="<?php echo $name;?>" id="<?php echo $name;?>" class="<?php echo $class; ?>" value="<?php echo $label;?>">
 					<?php
 					break;
 
