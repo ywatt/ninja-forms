@@ -216,7 +216,7 @@ function ninja_forms_date_to_datepicker($date){
 	return preg_replace($pattern,$replace,$date);
 }
 
-function str_putcsv($array, $delimiter = ';', $enclosure = '"', $terminator = "\n") {
+function str_putcsv($array, $delimiter = ',', $enclosure = '"', $terminator = "\n") {
 	# First convert associative array to numeric indexed array
 	foreach ($array as $key => $value) $workArray[] = $value;
 
