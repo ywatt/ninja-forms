@@ -1,5 +1,5 @@
 /* ---------------------------------
-/  Generic styles & classes 
+/  Generic styles & classes
 ----------------------------------*/
 .nf-box {
 	background: #f1f1f1;
@@ -11,7 +11,7 @@
 
 
 /* ---------------------------------
-/  Styles for specific admin pages 
+/  Styles for specific admin pages
 ----------------------------------*/
 
 div.field-wrap.list-wrap {
@@ -715,7 +715,7 @@ a.tooltip span
 
 
 /* ---------------------------------
-/  System Status Page 
+/  System Status Page
 ----------------------------------*/
 #debug-report {
 	display: none;
@@ -754,7 +754,7 @@ p.debug-report {
 	}
 		.nf-status-table td:first-child {
 			border-left: 1px solid #ccc;
-			border-right-width: 0; 
+			border-right-width: 0;
 		}
 		.nf-status-table tbody:last-child td {
 			border-bottom-width: 1px;

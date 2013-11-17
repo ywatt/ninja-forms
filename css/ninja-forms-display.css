@@ -110,6 +110,18 @@ a.tooltip span
     border-color: #8dff1c !important;
 }
 
+.ninja-forms-form-wrap input,
+.ninja-forms-form-wrap select ,
+.ninja-forms-form-wrap textarea {
+    width: auto;
+}
+.ninja-forms-form-wrap label {
+    font-weight: bold;
+}
+.ninja-forms-form-wrap .list-checkbox-wrap ul label,
+.ninja-forms-form-wrap .list-radio-wrap ul label {
+    font-weight: normal;
+}
 
 .ninja-forms-form-wrap .ninja-forms-form .field-wrap:after {
     clear: both;
@@ -193,6 +205,11 @@ RADIO & CHECKBOX LISTS
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.ninja-forms-form-wrap .ninja-forms-form .list-radio-wrap ul li,
+.ninja-forms-form-wrap .ninja-forms-form .list-checkbox-wrap ul li {
+    list-style: none;
 }
 
 .ninja-forms-form-wrap .ninja-forms-form .list-radio-wrap ul li,
