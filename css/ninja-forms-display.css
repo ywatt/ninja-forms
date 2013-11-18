@@ -170,7 +170,9 @@ TEXT FIELDS & TEXTAREAS
 .ninja-forms-form-wrap .ninja-forms-form .text-wrap.label-above input,
 .ninja-forms-form-wrap .ninja-forms-form .text-wrap.label-below input,
 .ninja-forms-form-wrap .ninja-forms-form .textarea-wrap.label-above textarea,
-.ninja-forms-form-wrap .ninja-forms-form .textarea-wrap.label-below textarea {
+.ninja-forms-form-wrap .ninja-forms-form .textarea-wrap.label-below textarea,
+.ninja-forms-form-wrap .ninja-forms-form .list-dropdown-wrap.label-above select,
+.ninja-forms-form-wrap .ninja-forms-form .list-dropdown-wrap.label-below select {
     width: 100%;
 }
 
