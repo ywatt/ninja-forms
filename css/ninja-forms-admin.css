@@ -779,6 +779,9 @@ p.debug-report {
 .branch-3-8 #post-body #post-body-content h3 {
  margin-top: 0;
 }
-.branch-3-8 .item-controls {
+/*.branch-3-8 .item-controls {
 	top: 5px;
+}*/
+.branch-3-8 #TB_window .item-controls {
+	top: 17px;
 }
