@@ -1461,7 +1461,14 @@ function ninja_forms_escape_html(html) {
  *
  */
 
-formSettings = Backbone.Model.extend();
+formSettings = Backbone.Model.extend({
+	events = {
+		'click input' : function(e){
+			console.log('click');
+		}
+	}
+
+});
 
 var thisForm = new formSettings({
 	title: 'My First Form',
