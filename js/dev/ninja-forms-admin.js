@@ -1279,7 +1279,12 @@ jQuery(document).ready(function($) {
 			
         },
         stop: function( event, ui ) {
-
+        	if ( $(ui.item).hasClass( 'ninja-forms-field-button' ) ) {
+        		var label = $(ui.item[0]).html();
+        		var el = $( "li.ninja-col-1-1:first" ).clone();
+				$(el).children('div:first').find('label').html(label);
+        		$(ui.item).replaceWith(el);
+        	}
 			$('.ninja-row').each( function(){
 				var children = $( this ).children( 'li' ).length;
 				if ( children == 0 ) {
@@ -1363,52 +1368,59 @@ jQuery(document).ready(function($) {
 			});
 				
 		}
-
-
-			/*
-			// Loop through each of the children of our sender UL and reset them.
-			var sender_lis = $(ui.sender).children( 'li' ).not( ui.item );
-			$(sender_lis).each( function() {
-				// Get our previous size.
-				var old_size = $(this).data( 'size' );
-				// Reset our data attribute.
-				$(this).data( 'size', old_size );
-				// Remove our current size class.
-				$(this).removeClass();
-				// Add our previous size class.
-				console.log( 'set oldsize: ' + old_size );
-				$(this).addClass( 'ninja-col-' + old_size );
-			});			
-		
-
-
-		
-		// Get the current size for the element we're dragging.
-		var current_size = $(ui.item).data( 'size' );
-		// Get the previous size for the element we're dragging.
-		var old_size = $(ui.item).data( 'old_size' );
-		if ( typeof old_size !== 'undefined' ) {
-			// Reset the size of the element we are currently dragging.
-			$(ui.item).data( 'size', old_size );
-			// Remove the current size class for the element we're dragging.
-			$(ui.item).removeClass( 'ninja-col-' + current_size );
-			//$(ui.helper).removeClass( 'ninja-col-' + current_size );
-			// Add the previous size class for the element we're dragging.
-			$(ui.item).addClass( 'ninja-col-' + old_size );
-			//$(ui.helper).addClass( 'ninja-col-' + old_size );
-		}
-		
-		// Reset our sender UL's col data attribute.
-		var old_cols = $(ui.sender).data( 'old_cols' );
-		$(ui.sender).data( 'cols', old_cols );
-		
-		
-		*/
 	}
 
+	$('.ninja-forms-field-button').draggable({
+		revert: true,
+		placeholder: '.ninja-col-1-1',
+		connectToSortable: '.ninja-drop',
+		helper: function(){
+			var label = $(this).html();
+			var el = $( "li.ninja-col-1-1:first" ).clone();
+			$(el).children('div:first').find('label').html(label);
+			return el;
+		},
+		start: function(e,ui){
+			
 
+		},
+		stop: function(e, ui ){
 
-}); //Document.read();
+		},
+		zIndex:9999
+		});
+
+	$('#form_settings').on('click', function(e) {
+		new BasicSettingsView();
+	});
+
+	$('#basic-settings').on('click', function(e) {
+		$('.media-menu-item').removeClass('active');
+		$(this).addClass('active');
+		new BasicSettingsView();
+	});
+
+	$('#user-email-settings').on('click', function(e) {
+		$('.media-menu-item').removeClass('active');
+		$(this).addClass('active');
+		new UserEmailsView();
+	});
+
+	$(document).on('change', '.ninja-forms-settings', function(e) {
+		if ( this.type == 'checkbox' ) {
+			if ( this.checked ) {
+				var value = 1;
+			} else {
+				var value = 0;
+			}
+		} else {
+			var value = this.value;
+		}
+
+		thisForm.set( this.id, value );
+	});
+
+}); //Document.ready();
 
 
 
@@ -1451,20 +1463,22 @@ function ninja_forms_escape_html(html) {
 
 formSettings = Backbone.Model.extend();
 
-thisForm = new formSettings({
+var thisForm = new formSettings({
 	title: 'My First Form',
-	displayTitle: 0,
-	saveSub: 1,
-	requireLogin: 0,
-	appendPage: '',
-	ajax: 0,
-	successPage: '',
-	clearForm: 1,
-	hideForm: 1,
-	successMsg: 'Thanks for filling in my form!' 
+	displayTitle: 1,
+	saveSubs: 1,
+	requireLogin: 1,
+	appendPage: 3,
+	ajax: 1,
+	successPage: 2,
+	clearComplete: 1,
+	hideComplete: 1,
+	successMsg: 'Thanks for filling in my form!',
+	userEmailMsg: 'Thanks for filling out my form',
+
 });
 
-HomeView = Backbone.View.extend({
+BasicSettingsView = Backbone.View.extend({
 
 	el: "#my-content-id",
 
@@ -1473,225 +1487,25 @@ HomeView = Backbone.View.extend({
 	},
 
 	render: function() {
-		this.$el.append("<h1>My App</h1>");
+		var template = _.template( jQuery("#tmpl-basic-settings").html(), thisForm );
+		this.$el.html( template );
 
 		return this;
 	}
 });
 
+UserEmailsView = Backbone.View.extend({
 
+	el: "#my-content-id",
 
+	initialize: function() {
+		this.render();
+	},
 
-/*
-var ds = ds || {};
+	render: function() {
+		var template = _.template( jQuery("#tmpl-email-settings").html(), thisForm );
+		this.$el.html( template );
 
-( function( $ ) {
-	var media;
-
-	ds.media = media = {};
-
-	_.extend( media, { view: {}, controller: {} } );
-
-	media.view.basicSettings = wp.media.View.extend( {
-		className: 'basic-settings-frame',
-		template:  wp.media.template( 'basic-settings' ), // <script type="text/html" id="tmpl-basic-settings">
-		render: function() {
-			// Compile the template using underscore
-            var template = this.template;
-            // Load the compiled HTML into the Backbone "el"
-            this.$el.html( template );
-			tinyMCE.execCommand( 'mceAddControl', true, 'success_msg' );
-		}
-	} );
-
-	media.controller.basicSettings = wp.media.controller.State.extend( {
-		defaults: {
-			id:       'basic-settings-state',
-			menu:     'default',
-			content:  'basic_settings_state'
-		}
-	} );	
-
-	media.view.emailSettings = wp.media.View.extend( {
-		className: 'email-settings-frame',
-		template:  wp.media.template( 'email-settings' ) // <script type="text/html" id="tmpl-email-settings">
-
-	} );
-
-	media.controller.emailSettings = wp.media.controller.State.extend( {
-		defaults: {
-			id:       'email-settings-state',
-			menu:     'default',
-			content:  'email_settings_state'
-		}
-	} );
-
-	media.view.conditionalSettings = wp.media.View.extend( {
-		className: 'conditional-settings-frame',
-		template:  wp.media.template( 'conditional-settings' ) // <script type="text/html" id="tmpl-email-settings">
-	} );
-
-	media.controller.conditionalSettings = wp.media.controller.State.extend( {
-		defaults: {
-			id:       'conditional-settings-state',
-			menu:     'default',
-			content:  'conditional_settings_state'
-		}
-	} );
-
-	media.buttonId = '.open-settings-modal',
-
-	_.extend( media, {
-		frame: function() {
-			if ( this._frame )
-				return this._frame;
-
-
-			var states = [
-
-				new media.controller.basicSettings( {
-					title:    'Basic Settings',
-					id:       'basic-settings-state',
-					priority: 10
-				} ),				
-
-				new media.controller.emailSettings( {
-					title:    'Email Settings',
-					id:       'email-settings-state',
-					priority: 15
-				} ),				
-
-				new media.controller.conditionalSettings( {
-					title:    'Conditional Logic',
-					id:       'conditional-settings-state',
-					priority: 20
-				} ),				
-			];
-
-			this._frame = wp.media( {
-				className: 'media-frame no-sidebar',
-				states: states,
-				frame: 'post'
-			} );
-
-			this._frame.on( 'content:create:basic_settings_state', function() {
-				var view = new ds.media.view.basicSettings( {
-					controller: media.frame(),
-					model:      media.frame().state()
-				} );
-				
-				media.frame().content.set( view );
-	
-			} );			
-
-			this._frame.on( 'content:create:email_settings_state', function() {
-				var view = new ds.media.view.emailSettings( {
-					controller: media.frame(),
-					model:      media.frame().state()
-				} );
-
-				media.frame().content.set( view );
-			} );
-
-			this._frame.on( 'content:create:conditional_settings_state', function() {
-				var view = new ds.media.view.conditionalSettings( {
-					controller: media.frame(),
-					model:      media.frame().state()
-				} );
-
-				media.frame().content.set( view );
-			} );
-
-			this._frame.on( 'open', this.open );
-
-			this._frame.on( 'ready', this.ready );
-
-			this._frame.on( 'close', this.close );
-
-			this._frame.on( 'menu:render:default', this.menuRender );
-
-			this._frame.setState('basic-settings-state');
-
-			return this._frame;
-		},
-
-		open: function() {
-			$( '.media-modal' ).addClass( 'smaller' );
-
-		},
-
-		ready: function() {
-			console.log( 'Frame ready' );
-			
-		},
-
-		close: function() {
-			$( '.media-modal' ).removeClass( 'smaller' );
-		},
-
-		menuRender: function( view ) {
-			view.unset( 'gallery' );
-			view.unset( 'embed' );		
-			view.unset( 'insert' );
-			view.unset( 'library-separator' );
-			view.set({
-				'library-separator2': new wp.media.View({
-					className: 'separator',
-					priority: 11
-				})
-			});
-
-		},
-
-		select: function() {
-			var settings = wp.media.view.settings,
-				selection = this.get( 'selection' );
-
-			$( '.added' ).remove();
-			selection.map( media.showAttachmentDetails );
-		},
-
-		init: function() {
-			$( media.buttonId ).on( 'click', function( e ) {
-				e.preventDefault();
-				media.frame().open();
-			});
-		}
-	} );
-
-	$( media.init );
-} )( jQuery );
-
-function tinyMCE_bulk_init( editor_ids ) {
-    var init, ed, qt, first_init, DOM, el, i;
-
-    if ( typeof(tinymce) == 'object' ) {
-
-        var editor;
-        for ( e in tinyMCEPreInit.mceInit ) {
-            editor = e;
-            break;
-        }
-        for ( i in editor_ids ) {
-            var ed_id = editor_ids[i];
-            tinyMCEPreInit.mceInit[ed_id] = tinyMCEPreInit.mceInit[editor];
-            tinyMCEPreInit.mceInit[ed_id]['elements'] = ed_id;
-            tinyMCEPreInit.mceInit[ed_id]['body_class'] = ed_id;
-            tinyMCEPreInit.mceInit[ed_id]['succesful'] =  false;
-        }
-
-        for ( ed in tinyMCEPreInit.mceInit ) {
-            // check if there is an adjacent span with the class mceEditor
-            if ( ! jQuery('#'+ed).next().hasClass('mceEditor') ) {
-                init = tinyMCEPreInit.mceInit[ed];
-                try {
-                    tinymce.init(init);
-                } catch(e){
-                    console.log('fail');
-                }
-            }
-        }
-
-    }
-}
-*/
+		return this;
+	}
+});

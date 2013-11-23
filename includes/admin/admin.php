@@ -69,10 +69,10 @@ function ninja_forms_admin(){
 					<h3 class="accordion-section-title hndle" tabindex="0" title="Pages">General Fields</h3>
 					<div class="accordion-section-content ">
 						<div class="inside">
-							<input type="submit" name="submit" id="submit" class="button button-secondary" value="Single Line Text">
-							<input type="submit" name="submit" id="submit" class="button button-secondary" value="Multi Line Text">
-							<input type="submit" name="submit" id="submit" class="button button-secondary" value="Checkbox">
-							<input type="submit" name="submit" id="submit" class="button button-secondary" value="Dropdown List">
+							<div class="button button-secondary ninja-forms-field-button">Single Line Text</div>
+							<div class="button button-secondary ninja-forms-field-button">Multi Line Text</div>
+							<div class="button button-secondary ninja-forms-field-button">Checkbox</div>
+							<div class="button button-secondary ninja-forms-field-button">Dropdown List</div>
 						</div><!-- .inside -->
 					</div><!-- .accordion-section-content -->
 				</li><!-- .accordion-section -->
@@ -381,8 +381,8 @@ function ninja_forms_admin(){
 
 		<div class="media-frame-menu">
 			<div class="media-menu">
-				<a href="#" class="media-menu-item active">Basic Settings</a>
-				<a href="#" class="media-menu-item">User Emails</a>
+				<a href="#" class="media-menu-item active" id="basic-settings">Basic Settings</a>
+				<a href="#" class="media-menu-item" id="user-email-settings">User Emails</a>
 				<a href="#" class="media-menu-item">Admin Emails</a>
 				<div class="separator"></div>
 				<a href="#" class="media-menu-item">Misc.</a>
@@ -392,15 +392,17 @@ function ninja_forms_admin(){
 		<div class="media-frame-title">
 			<h1>Basic Settings</h1>
 		</div>
-
+		<!--
 		<div class="media-frame-router">
+			
 			<div class="media-router">
 				<a href="#" class="media-menu-item">Tab #1</a>
 				<a href="#" class="media-menu-item active">Tab #2</a>
 			</div>
+			
 		</div>
-
-		<div class="media-frame-content">
+		-->
+		<div class="media-frame-content" id="my-content-id">
 
 			<p>Place your settings here.</p>
 			
@@ -415,19 +417,19 @@ function ninja_forms_admin(){
 		<br />
 		<div>
 			<label>
-				<input type="checkbox" name="" value="">
+				<input type="checkbox" id="displayTitle" value="1" class="ninja-forms-settings" <% if ( thisForm.get('displayTitle') == 1 ) { %> checked <% } %> >
 				Display Form Title
 			</label>
 		</div>
 		<div>
 			<label>
-				<input type="checkbox" name="" value="">
+				<input type="checkbox" name="" value="" <% if ( thisForm.get('saveSubs') == 1 ) { %> checked <% } %> >
 				Save Form Submissions
 			</label>
 		</div>
 		<div>
 			<label>
-				<input type="checkbox" name="" value="">
+				<input type="checkbox" name="" value="" <% if ( thisForm.get('requireLogin') == 1 ) { %> checked <% } %> >
 				Require the user to be logged in to see the form
 			</label>
 		</div>
@@ -435,16 +437,17 @@ function ninja_forms_admin(){
 			<label>
 				Append to page:
 				<select id="" name="" class="">
-					<option>About Us</option>
-					<option>Contact Us</option>
-					<option>Employees</option>
-					<option>Careers</option>
+					<option>- None</option>
+					<option <% if ( thisForm.get('appendPage') == 1 ) { %> selected <% } %> >About Us</option>
+					<option <% if ( thisForm.get('appendPage') == 2 ) { %> selected <% } %> >Contact Us</option>
+					<option <% if ( thisForm.get('appendPage') == 3 ) { %> selected <% } %> >Employees</option>
+					<option <% if ( thisForm.get('appendPage') == 4 ) { %> selected <% } %> >Careers</option>
 				</select>
 			</label>
 		</div>
 		<div>
 			<label>
-				<input type="checkbox" name="" value="">
+				<input type="checkbox" name="" value="" <% if ( thisForm.get('ajax') == 1 ) { %> checked <% } %> >
 				Submit via ajax
 			</label>
 		</div>
@@ -452,22 +455,23 @@ function ninja_forms_admin(){
 			<label>
 				Show this page after successful submission:
 				<select id="" name="" class="">
-					<option>About Us</option>
-					<option>Contact Us</option>
-					<option>Employees</option>
-					<option>Careers</option>
+					<option>- None</option>
+					<option <% if ( thisForm.get('successPage') == 1 ) { %> selected <% } %> >About Us</option>
+					<option <% if ( thisForm.get('successPage') == 2 ) { %> selected <% } %> >Contact Us</option>
+					<option <% if ( thisForm.get('successPage') == 3 ) { %> selected <% } %> >Employees</option>
+					<option <% if ( thisForm.get('successPage') == 4 ) { %> selected <% } %> >Careers</option>
 				</select>
 			</label>
 		</div>
 		<div>
 			<label>
-				<input type="checkbox" name="" value="">
+				<input type="checkbox" name="" value="" <% if ( thisForm.get('clearComplete') == 1 ) { %> checked <% } %> >
 				Clear this form after a user submits it
 			</label>
 		</div>
 		<div>
 			<label>
-				<input type="checkbox" name="" value="">
+				<input type="checkbox" name="" value="" <% if ( thisForm.get('hideComplete') == 1 ) { %> checked <% } %> >
 				Hide this form after a user submits it
 			</label>
 		</div>
@@ -483,14 +487,8 @@ function ninja_forms_admin(){
 		<br />
 		<div>
 			<label>
-				<input type="checkbox" name="" value="1">
-				Use this as the <strong>from address</strong> for administrator emails.
-			</label>
-		</div>
-		<div>
-			<label>
-				<input type="checkbox" name="" value="1">
-				Use this as the <strong>from name</strong> for administrator emails.
+				User email message
+				<textarea id="userEmailMsg" class="ninja-forms-settings"><%= thisForm.get('userEmailMsg') %></textarea>
 			</label>
 		</div>
 	</script>
