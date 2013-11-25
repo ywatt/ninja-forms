@@ -1388,36 +1388,50 @@ jQuery(document).ready(function($) {
 
 		},
 		zIndex:9999
-		});
+	});
+
+	var currentView = new BasicSettingsView();
+
+	var AppRouter = Backbone.Router.extend({
+	    routes: {
+	        "test": "test", // matches http://example.com/#anything-here
+	        "test2": "test2" // matches http://example.com/#anything-here
+	    },
+	    test: function() {
+	    	currentView.remove();
+	    	currentView = new BasicSettingsView();
+			this.loadView( currentView );
+	    },
+	    test2: function() {
+	    	currentView.remove();
+	    	currentView	 = new UserEmailsView();
+	    	this.loadView( currentView );
+	    },
+    	loadView : function(view) {
+			//this.view && this.view.remove();
+			this.view = view;
+		}
+	});
+
+	// Initiate the router
+	var app_router = new AppRouter;
+
+	Backbone.history.start();
 
 	$('#form_settings').on('click', function(e) {
-		new BasicSettingsView();
+		app_router.navigate('test', { trigger: true } );
 	});
 
 	$('#basic-settings').on('click', function(e) {
 		$('.media-menu-item').removeClass('active');
 		$(this).addClass('active');
-		new BasicSettingsView();
+		app_router.navigate('test', { trigger: true } );
 	});
 
 	$('#user-email-settings').on('click', function(e) {
 		$('.media-menu-item').removeClass('active');
 		$(this).addClass('active');
-		new UserEmailsView();
-	});
-
-	$(document).on('change', '.ninja-forms-settings', function(e) {
-		if ( this.type == 'checkbox' ) {
-			if ( this.checked ) {
-				var value = 1;
-			} else {
-				var value = 0;
-			}
-		} else {
-			var value = this.value;
-		}
-
-		thisForm.set( this.id, value );
+		app_router.navigate('test2', { trigger: true } );
 	});
 
 }); //Document.ready();
@@ -1457,27 +1471,88 @@ function ninja_forms_escape_html(html) {
 
 /*
  *
- * Define our Form data model. Each form setting will be a setting within this data.
+ * In order to fully represent the data presented on the form settings modal, two models are used and one collection:
+ * 
+ * Model: FormSetting - This model represents each registered form setting. This is independent of what the actual settings of a form may be.
+ * Collection: BasicSettings - This collection holds all of the individual FormSetting models.
+ * 
+ * Model: ThisForm - This model represents the data for the form we are actually editing. Unlike the model above, the settings given to it are specific to this form.
  *
  */
 
-formSettings = Backbone.Model.extend({
+FormSetting = Backbone.Model.extend({
+	// We can pass it default values.
+	defaults: {
+		id: null,
+		type: null,
+		options: null,
+		class: null,
+		label: null,
+		value: null
+	}
 });
 
-var thisForm = new formSettings({
-	title: 'My First Form',
+ThisForm = Backbone.Model.extend({
+	urlRoot: ajaxurl + '?action=test',
+	defaults: {
+		id: null
+	}
+});
+
+var thisForm = new ThisForm({
+	id: 'test',
 	displayTitle: 1,
-	saveSubs: 1,
-	requireLogin: 1,
-	appendPage: 3,
-	ajax: 1,
-	successPage: 2,
-	clearComplete: 1,
-	hideComplete: 1,
-	successMsg: 'Thanks for filling in my form!',
-	userEmailMsg: 'Thanks for filling out my form',
-
+	appendPage: 'test',
+	userEmailMsg: 'BIG OLD TEST!'
 });
+
+var displayTitle = new FormSetting({
+	id: 'displayTitle',
+	type: 'checkbox',
+	label: 'Display Form Title'
+});
+
+var ajaxSetting = new FormSetting({
+	id: 'ajax',
+	type: 'checkbox',
+	label: 'Use Ajax Submission?'
+});
+
+var appendPage = new FormSetting({
+	id: 'appendPage',
+	type: 'select',
+	label: 'Add this form to the bottom of this page:',
+	options: {
+		0: {
+			'label': '- None',
+			'value': ''
+		},
+		1: {
+			'label': 'TEST',
+			'value': 'test'
+		}
+	},
+});
+
+var userEmailMsg = new FormSetting({
+	id: 'user_email_msg',
+	type: 'textarea',
+	label: 'User Email Message'
+});
+
+FormSettings = Backbone.Collection.extend({
+	model: FormSetting
+});
+
+var basicSettings = new FormSettings([
+	displayTitle,
+	ajaxSetting,
+	appendPage
+]);
+
+var userEmailSettings = new FormSettings([
+	userEmailMsg
+]);
 
 BasicSettingsView = Backbone.View.extend({
 
@@ -1488,11 +1563,33 @@ BasicSettingsView = Backbone.View.extend({
 	},
 
 	render: function() {
-		var template = _.template( jQuery("#tmpl-basic-settings").html(), thisForm );
+		var template = _.template( jQuery("#tmpl-basic-settings").html(), { settings: basicSettings.models, thisForm: thisForm } );
 		this.$el.html( template );
 
 		return this;
-	}
+	},
+	events: {
+		'change input': 'testCall'
+	},
+
+	testCall: function (e) {
+		var el = e.target;
+		if ( el.type == 'checkbox' ) {
+			if ( el.checked ) {
+				var value = 1;
+			} else {
+				var value = 0;
+			}
+		} else {
+			var value = jQuery(el).val();
+		}
+
+		var el_id = jQuery(el).prop('id');
+		thisForm.set( el_id, value );
+		jQuery.post( ajaxurl, { action:"test", form_id: thisForm.get('id'), setting: el_id, value: value }, function( response ) {
+			console.log( response );
+		});
+	},
 });
 
 UserEmailsView = Backbone.View.extend({
@@ -1504,7 +1601,7 @@ UserEmailsView = Backbone.View.extend({
 	},
 
 	render: function() {
-		var template = _.template( jQuery("#tmpl-email-settings").html(), thisForm );
+		var template = _.template( jQuery("#tmpl-email-settings").html(), { settings: userEmailSettings.models, thisForm: thisForm } );
 		this.$el.html( template );
 
 		return this;

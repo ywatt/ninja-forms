@@ -405,7 +405,9 @@ function ninja_forms_admin(){
 		<div class="media-frame-content" id="my-content-id">
 
 			<p>Place your settings here.</p>
-			
+			<div class="hidden">
+				<?php wp_editor( 'Hello World', 'hidden_input' ) ;?>
+			</div>
 		</div>
 
 	</div>
@@ -414,73 +416,50 @@ function ninja_forms_admin(){
   </div>
 
 	<script type="text/html" id="tmpl-basic-settings">
-		<br />
-		<div>
-			<label>
-				<input type="checkbox" id="displayTitle" value="1" class="ninja-forms-settings" <% if ( thisForm.get('displayTitle') == 1 ) { %> checked <% } %> >
-				Display Form Title
-			</label>
-		</div>
-		<div>
-			<label>
-				<input type="checkbox" name="" value="" <% if ( thisForm.get('saveSubs') == 1 ) { %> checked <% } %> >
-				Save Form Submissions
-			</label>
-		</div>
-		<div>
-			<label>
-				<input type="checkbox" name="" value="" <% if ( thisForm.get('requireLogin') == 1 ) { %> checked <% } %> >
-				Require the user to be logged in to see the form
-			</label>
-		</div>
-		<div>
-			<label>
-				Append to page:
-				<select id="" name="" class="">
-					<option>- None</option>
-					<option <% if ( thisForm.get('appendPage') == 1 ) { %> selected <% } %> >About Us</option>
-					<option <% if ( thisForm.get('appendPage') == 2 ) { %> selected <% } %> >Contact Us</option>
-					<option <% if ( thisForm.get('appendPage') == 3 ) { %> selected <% } %> >Employees</option>
-					<option <% if ( thisForm.get('appendPage') == 4 ) { %> selected <% } %> >Careers</option>
-				</select>
-			</label>
-		</div>
-		<div>
-			<label>
-				<input type="checkbox" name="" value="" <% if ( thisForm.get('ajax') == 1 ) { %> checked <% } %> >
-				Submit via ajax
-			</label>
-		</div>
-		<div>
-			<label>
-				Show this page after successful submission:
-				<select id="" name="" class="">
-					<option>- None</option>
-					<option <% if ( thisForm.get('successPage') == 1 ) { %> selected <% } %> >About Us</option>
-					<option <% if ( thisForm.get('successPage') == 2 ) { %> selected <% } %> >Contact Us</option>
-					<option <% if ( thisForm.get('successPage') == 3 ) { %> selected <% } %> >Employees</option>
-					<option <% if ( thisForm.get('successPage') == 4 ) { %> selected <% } %> >Careers</option>
-				</select>
-			</label>
-		</div>
-		<div>
-			<label>
-				<input type="checkbox" name="" value="" <% if ( thisForm.get('clearComplete') == 1 ) { %> checked <% } %> >
-				Clear this form after a user submits it
-			</label>
-		</div>
-		<div>
-			<label>
-				<input type="checkbox" name="" value="" <% if ( thisForm.get('hideComplete') == 1 ) { %> checked <% } %> >
-				Hide this form after a user submits it
-			</label>
-		</div>
-		<div>
-			<label>
-				Message to display after a user submits this form successfully
-				<?php wp_editor( 'Hello World', 'success_msg' ) ;?>
-			</label>
-		</div>
+		<% _.each(settings, function(setting){
+			var setting_id = setting.get( 'id' );
+			var value = thisForm.get( setting_id );
+
+			%>
+			<div>
+			<%
+			switch( setting.get('type') ) {
+				case 'checkbox':
+					%>
+					<label>
+						<input type="checkbox" id="<%= setting.id %>" class="<%= setting.get('class') %>" value="1" <% if ( value == 1 ) { %>checked<%}%>>
+						<%= setting.get('label') %>
+					</label>
+					<%
+					break;
+				case 'select':
+					%>
+					<label>
+						<%= setting.get('label') %>
+						<select id="<%= setting.get('id') %>">
+						<%
+						_.each(setting.get('options'), function(option) {
+							%>
+							<option value="<%= option.value %>" <% if ( value == option.value ) { %> selected <% } %>><%= option.label %></option>
+							<%
+						});
+						%>
+						</select>
+					</label>
+					<%
+					break;
+				case 'textarea':
+					%>
+					<label>
+						<%= setting.get('label') %>
+						<textarea id="<%= setting.get('id') %>"><%= value %></textarea>
+					</label>
+					<%
+					break;
+			}
+			%>
+			</div>
+		<% }); %>
 	</script>
 
 	<script type="text/html" id="tmpl-email-settings">

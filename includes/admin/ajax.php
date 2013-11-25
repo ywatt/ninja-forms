@@ -1,4 +1,17 @@
 <?php
+
+function big_ole_test() {
+	$form_id = esc_attr( $_REQUEST['form_id'] );
+	$setting = esc_attr( $_REQUEST['setting'] );
+	$value = esc_attr( $_REQUEST['value'] );
+
+	echo "CHANGE: " . $setting ." TO " . $value . " IN FORM " . $form_id;
+	die();
+}
+
+add_action( 'wp_ajax_test', 'big_ole_test' );
+
+
 add_action( 'wp_ajax_ninja_forms_save_metabox_state', 'ninja_forms_save_metabox_state' );
 function ninja_forms_save_metabox_state(){
 	$plugin_settings = get_option( 'ninja_forms_settings' );
