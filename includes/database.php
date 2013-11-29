@@ -121,6 +121,24 @@ function ninja_forms_update_form( $args ){
 	$wpdb->update(NINJA_FORMS_TABLE_NAME, $update_array, $where);
 }
 
+function ninja_forms_update_form_setting( $args ){
+	global $wpdb;
+	$update_data = $args['update'];
+	$form_id = $args['form_id'];
+	$form_row = ninja_forms_get_form_by_id( $form_id );
+	$current_data = $form_row['data'];
+	$new_data = array_merge( $current_data, $update_data );
+	$args = array(
+		'update_array' => array(
+			'data' => serialize( $new_data ),
+			),
+		'where' => array(
+			'id' => $form_id,
+			),
+	);
+	ninja_forms_update_form($args);
+}
+
 // Begin Field Interaction Functions
 
 function ninja_forms_get_field_by_id($field_id){

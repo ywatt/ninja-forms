@@ -138,6 +138,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.p
 	require_once( NINJA_FORMS_DIR . "/includes/admin/export-subs.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/output-tab-metabox.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/form-preview.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/admin/rest.php" );
 
 	//Edit Field Functions
 	require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/edit-field.php" );

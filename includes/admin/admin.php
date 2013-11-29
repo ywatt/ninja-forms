@@ -4,7 +4,7 @@ add_action( 'admin_menu', 'ninja_forms_add_menu' );
 function ninja_forms_add_menu(){
 	$plugins_url = plugins_url();
 
-	$capabilities = 'administrator';
+	$capabilities = 'manage_options';
 	$capabilities = apply_filters( 'ninja_forms_admin_menu_capabilities', $capabilities );
 
 	$page = add_menu_page("Ninja Forms" , __( 'Forms', 'ninja-forms' ), $capabilities, "ninja-forms", "ninja_forms_admin", NINJA_FORMS_URL."/images/ninja-head-ico-small.png" );
@@ -381,8 +381,8 @@ function ninja_forms_admin(){
 
 		<div class="media-frame-menu">
 			<div class="media-menu">
-				<a href="#" class="media-menu-item active" id="basic-settings">Basic Settings</a>
-				<a href="#" class="media-menu-item" id="user-email-settings">User Emails</a>
+				<a href="#" class="media-menu-item active" id="basic_settings">Basic Settings</a>
+				<a href="#" class="media-menu-item" id="user_email_settings">User Emails</a>
 				<a href="#" class="media-menu-item">Admin Emails</a>
 				<div class="separator"></div>
 				<a href="#" class="media-menu-item">Misc.</a>
@@ -408,6 +408,7 @@ function ninja_forms_admin(){
 			<div class="hidden">
 				<?php wp_editor( 'Hello World', 'hidden_input' ) ;?>
 			</div>
+
 		</div>
 
 	</div>
@@ -415,10 +416,11 @@ function ninja_forms_admin(){
  
   </div>
 
-	<script type="text/html" id="tmpl-basic-settings">
+	<script type="text/html" id="tmpl-form-settings">
+		<br />
 		<% _.each(settings, function(setting){
 			var setting_id = setting.get( 'id' );
-			var value = thisForm.get( setting_id );
+			var value = setting.get( 'current_value' );
 
 			%>
 			<div>
@@ -461,87 +463,6 @@ function ninja_forms_admin(){
 			</div>
 		<% }); %>
 	</script>
-
-	<script type="text/html" id="tmpl-email-settings">
-		<br />
-		<div>
-			<label>
-				User email message
-				<textarea id="userEmailMsg" class="ninja-forms-settings"><%= thisForm.get('userEmailMsg') %></textarea>
-			</label>
-		</div>
-	</script>
-
-	<script type="text/html" id="tmpl-conditional-settings">
-		<br />
-		<div id="ninja-forms-conditionals">
-			<span class="label">
-				Conditional Statements - <a href="#" name="" id="ninja_forms_field_49_add_conditional" class="ninja-forms-field-add-conditional">Add Conditional Statement</a>
-			</span>
-			<input type="hidden" name="ninja_forms_field_49[conditional]" value="">
-			<div id="ninja_forms_field_49_conditionals" class="" name="">
-				<div id="ninja_forms_field_49_conditional_0" class="ninja-forms-field-49-conditional ninja-forms-condition" name="49">
-					<div class="ninja-forms-condition-title">
-						<a href="#" id="ninja_forms_field_49_remove_conditional" name="0" class="ninja-forms-field-remove-conditional" title="Remove condition">X</a>
-						<select id="ninja_forms_field_49_conditional_0_action" name="ninja_forms_field_49[conditional][0][action]" class="ninja-forms-field-conditional-action">
-							<option value="">-- Action</option>
-							<option value="show">Show This</option>
-							<option value="hide">Hide This</option>
-							<option value="change_value">Change Value</option>
-						</select>
-						<span id="ninja_forms_field_49_0_value_span">
-							<input type="hidden" name="ninja_forms_field_49[conditional][0][value]" value="">
-						</span>
-						If	<select name="ninja_forms_field_49[conditional][0][connector]">
-							<option value="and">All</option>
-							<option value="or">Any</option>
-						</select>
-						of the following critera are met: <a href="#" id="ninja_forms_field_49_add_cr" name="0" class="ninja-forms-field-add-cr">Add Criteria</a>
-					</div>
-					<div id="ninja_forms_field_49_conditional_0_cr" class="ninja-forms-criteria">
-						<div class="description-wide single-criteria ninja-forms-field-49-conditional-0-cr" id="ninja_forms_field_49_conditional_0_cr_0">&nbsp;&nbsp; <a href="#" id="ninja_forms_field_49_remove_cr" class="ninja-forms-field-remove-cr" name="0" rel="0" title="Remove criteria">X</a> →
-							<select name="ninja_forms_field_49[conditional][0][cr][0][field]" class="ninja-forms-field-conditional-cr-field" id="ninja_forms_field_49_cr_field" title="0_0">
-								<option value="">-- Field</option>
-								<option value="53">ID: 53 - Last Name</option>
-								<option value="62">ID: 62 - Email Address</option>
-								<option value="1016">ID: 1016 - File Upload</option>
-							</select>
-							<select name="ninja_forms_field_49[conditional][0][cr][0][operator]">
-								<option value="==">=</option>
-								<option value="!=">!=</option>
-								<option value="&lt;">&lt;</option>
-								<option value="&gt;">&gt;</option>
-							</select>
-							<br>
-							<span id="ninja_forms_field_49_conditional_0_cr_0_value" class="">
-								<input type="text" name="ninja_forms_field_49[conditional][0][cr][0][value]" id="ninja_forms_field_49_conditional_0_cr_0_value" class="" value="">
-							</span>
-						</div>
-						<div class="description-wide single-criteria ninja-forms-field-49-conditional-0-cr" id="ninja_forms_field_49_conditional_0_cr_1">&nbsp;&nbsp; <a href="#" id="ninja_forms_field_49_remove_cr" class="ninja-forms-field-remove-cr" name="0" rel="1" title="Remove criteria">X</a> →
-							<select name="ninja_forms_field_49[conditional][0][cr][1][field]" class="ninja-forms-field-conditional-cr-field" id="ninja_forms_field_49_cr_field" title="0_1">
-								<option value="">-- Field</option>
-								<option value="53">ID: 53 - Last Name</option>
-								<option value="62">ID: 62 - Email Address</option>
-								<option value="1016">ID: 1016 - File Upload</option>
-							</select>
-							<select name="ninja_forms_field_49[conditional][0][cr][1][operator]">
-								<option value="==">=</option>
-								<option value="!=">!=</option>
-								<option value="&lt;">&lt;</option>
-								<option value="&gt;">&gt;</option>
-							</select>
-							<br>
-							<span id="ninja_forms_field_49_conditional_0_cr_1_value" class="">
-								<input type="text" name="ninja_forms_field_49[conditional][0][cr][1][value]" id="ninja_forms_field_49_conditional_0_cr_1_value" class="" value="">
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</script>
-
-
 <?php
 
 }
