@@ -42,7 +42,7 @@ function ninja_forms_register_tab_form_list(){
 add_action('admin_init', 'ninja_forms_register_tab_form_list');
 
 function ninja_forms_tab_form_list($form_id, $data){
-	global $wpdb;
+
 	$all_forms = ninja_forms_get_all_forms();
 	$form_count = count($all_forms);
 

@@ -543,6 +543,8 @@ jQuery(document).ready(function($) {
 		zIndex:9999
 	});
 
+	var savedNoticeTimeout = '';
+
 	FormSetting = Backbone.Model.extend({
 		urlRoot: rest_url + '&rest=form_settings',
 		
@@ -571,6 +573,9 @@ jQuery(document).ready(function($) {
 
 		    // Call super with attrs moved to options
 		    Backbone.Model.prototype.save.call(this, attrs, options);
+		    $('.media-frame-save').hide().html('Saved').fadeIn();
+	        // Hide the div after 3 seconds
+    		savedNoticeTimeout = setTimeout( "jQuery('.media-frame-save').fadeOut();",3000 );
 		}
 	});
 
@@ -589,23 +594,27 @@ jQuery(document).ready(function($) {
 		},
 
 		render: function() {
+			var content = _.template( $('#tmpl-form-settings').html(), { settings: formSettings.models } );
+			$(this.el).html(content);			
+
 			// This is a work-around for the wonky tinyMCE that might be in this settings collection.
 			var rte = {};
 			var local_mce_init = {};
 			var local_qt_init = {};
+
 			this.collection.each(function(model) {
 				model_id = model.get('id');
 				model_type = model.get('type');
 				if ( model_type == 'rte' ) {
 					
 					//tinyMCE.execCommand( 'mceRemoveControl', false, 'hidden_editor' );
-					//tinyMCE.execCommand( 'mceRemoveControl', false, model_id );
+					tinyMCE.execCommand( 'mceRemoveControl', false, model_id );
 					local_mce_init[model_id] = tinyMCEPreInit.mceInit['hidden_editor'];
 					
 					local_mce_init[model_id].body_class = model_id;
 					
 					local_mce_init[model_id].elements = model_id;
-					
+
 					local_mce_init[model_id]['setup'] =  function(ed) {
 						ed.onChange.add(function(ed, l) {
 							$('#' + ed.editorId ).trigger('change');
@@ -618,19 +627,9 @@ jQuery(document).ready(function($) {
 					//var tmp = $('#hidden_editor_div').html();
 					var tmp = '<div id="wp-hidden_editor-wrap" class="wp-core-ui wp-editor-wrap tmce-active"><link rel="stylesheet" id="editor-buttons-css" href="http://localhost:8888/wp-dev/wp-content/plugins/mp6/css/editor.css?ver=1381361301" type="text/css" media="all"><div id="wp-hidden_editor-editor-tools" class="wp-editor-tools hide-if-no-js"><a id="hidden_editor-html" class="wp-switch-editor switch-html" onclick="switchEditors.switchto(this);">Text</a><a id="hidden_editor-tmce" class="wp-switch-editor switch-tmce" onclick="switchEditors.switchto(this);">Visual</a><div id="wp-hidden_editor-media-buttons" class="wp-media-buttons"><a href="#" id="insert-media-button" class="button insert-media add_media" data-editor="hidden_editor" title="Add Media"><span class="wp-media-buttons-icon"></span> Add Media</a></div></div><div id="wp-hidden_editor-editor-container" class="wp-editor-container"><textarea class="wp-editor-area" rows="20" cols="40" name="hidden_editor" id="hidden_editor" style="" aria-hidden="true">&lt;p&gt;test&lt;/p&gt;</textarea></div></div>';
 					tmp = tmp.replace(/hidden_editor/g, model_id );
-					rte[model_id] = tmp;
-				}
-			});
-			
-			var content = _.template( $('#tmpl-form-settings').html(), { settings: formSettings.models } );
-			$(this.el).html(content);
-
-			this.collection.each(function(model) {
-				model_id = model.get('id');
-				model_type = model.get('type');
-				if ( model_type == 'rte' ) {
-					$('#' + model_id + '_replace').html(rte[model_id]);
-					tinyMCE.execCommand( 'mceRemoveControl', false, model_id );
+					
+					$('#' + model_id + '_replace').html(tmp);
+					//tinyMCE.execCommand( 'mceRemoveControl', false, model_id );
 					tinyMCE.init(local_mce_init[model_id]);
 					//tinyMCE.execCommand( 'mceAddControl', true, model.get('id') );
 		    		try { quicktags( local_qt_init[model_id] ); } catch(e){}
@@ -649,7 +648,8 @@ jQuery(document).ready(function($) {
 		},
 
 		save: function(e) {
-			
+			clearTimeout(savedNoticeTimeout);
+			$('.media-frame-save').hide().html('Saving...').fadeIn();
 			var el = e.target;
 			var el_id = jQuery(el).prop('id');
 
