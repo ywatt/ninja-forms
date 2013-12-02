@@ -25,7 +25,7 @@ function ninja_forms_admin_rest() {
 	}
 }
 
-add_action( 'plugins_loaded', 'ninja_forms_admin_rest', 1 );
+add_action( 'admin_init', 'ninja_forms_admin_rest', 11 );
 
 abstract class Ninja_Forms_Admin_Rest_API
 {
@@ -204,71 +204,85 @@ class Form_Settings_API extends Ninja_Forms_Admin_Rest_API
     }
 
 	protected function form_settings() {
+        global $ninja_forms_form_settings;
+        do_action( 'ninja_forms_register_form_settings' );
+
      	switch( $this->method ) {
      		case 'GET':
+                $tab = $this->request['tab'];
+                $form_id = $this->request['form_id'];
      			if ( isset ( $this->request['form_id'] ) ) {
      				$form_row = ninja_forms_get_form_by_id( $form_id );
+                    $form_data = $form_row['data'];
      			}
-				$tab = $this->request['tab'];
-	        	if ( $tab == 'basic_settings' ) {
-		        	$args = array(
-		        		array(
-							'id' => 'show_title',
-							'type' => 'checkbox',
-							'label' => 'Display Form Title',
-							'current_value' => 1
-		        		),        		
-		        		array(
-							'id' => 'ajax',
-							'type' => 'checkbox',
-							'label' => 'Submit Via Ajax?',
-							'current_value' => 1
-		        		),
-		        		array(
-		        			'id' => 'save_subs',
-		        			'type' => 'checkbox',
-		        			'label' => 'Save Form Submissions?',
-		        			'current_value' => 1
-		        		),
-		        		array(
-		        			'id' => 'append_page',
-		        			'type' => 'select',
-		        			'label' => 'Add this form to a page:',
-		        			'options' => array(
-		        				array( 'label' => '- None', 'value' => '' ),
-		        				array( 'label' => 'Test', 'value' => 'test' ),
-		        				array( 'label' => 'When babies attack', 'value' => 'babies' ),
-		        			),
-		        			'current_value' => 'babies'
-		        		),
-		        	);        		
-	        	} else if ( $tab == 'user_email_settings' ) {
-	        		$args = array(
-	        			array(
-	        				'id' => 'user_email_msg',
-	        				'type' => 'textarea',
-	        				'label' => 'User Email Message',
-	        				'current_value' => 'HELLO WORLD!'
-	        			),
-	        		);
-	        	}
+				$args = array();
+                foreach( $ninja_forms_form_settings[$tab] as $id => $setting ){
+                   
+                    if ( isset ( $setting['type'] ) ) {
+                        $type = $setting['type'];
+                    } else {
+                        $type = '';
+                    }
 
-            return $args;
- 			break;
- 		case 'PUT':
- 			$data = json_decode( $this->file );
- 			$current_value = $data->current_value;
- 			$form_setting = $data->id;
- 			$form_id = $data->form_id;
- 			$args = array(
- 				'form_id' => $form_id,
- 				'update' => array(
- 					$form_setting => $current_value,
- 				),
- 			);
-			ninja_forms_update_form_setting( $args );
- 			return $data;
- 			break;
+                    if ( isset ( $setting['label'] ) ) {
+                        $label = $setting['label'];
+                    } else {
+                        $label = '';
+                    }
+
+                    if ( isset ( $setting['options'] ) ) {
+                        $options = $setting['options'];
+                    } else {
+                        $options = '';
+                    }
+                    
+                    if ( isset ( $setting['class'] ) ) {
+                        $class = $setting['class'];
+                    } else {
+                        $class = '';
+                    }
+
+                    if ( isset ( $setting['desc'] ) ) {
+                        $desc = $setting['desc'];
+                    } else {
+                        $desc = '';
+                    }
+
+                    if ( isset ( $form_data[$id] ) ) {
+                        $current_value = $form_data[$id];
+                    } else if ( isset ( $setting['default_value'] ) ) {
+                        $current_value = $setting['default_value'];
+                    } else {
+                        $current_value = '';
+                    }
+
+                    $args[] = array(
+                        'id' => $id,
+                        'type' => $type,
+                        'label' => $label,
+                        'options' => $options,
+                        'current_value' => $current_value,
+                        'class' => $class,
+                        'desc' => $desc,
+                    ); 
+                }
+	        	
+                return $args;
+                break;
+     		case 'PUT':
+     			$data = json_decode( $this->file );
+     			$current_value = $data->current_value;
+     			$form_setting = $data->id;
+     			$form_id = $data->form_id;
+     			$args = array(
+     				'form_id' => $form_id,
+     				'update' => array(
+     					$form_setting => $current_value,
+     				),
+     			);
+    			ninja_forms_update_form_setting( $args );
+     			return $data;
+     			break;
 		}
 	}
  }

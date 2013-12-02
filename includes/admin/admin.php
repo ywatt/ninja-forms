@@ -49,7 +49,27 @@ function ninja_forms_add_menu(){
 }
 
 function ninja_forms_admin(){
-	global $wpdb, $ninja_forms_tabs, $ninja_forms_sidebars, $current_tab, $ninja_forms_tabs_metaboxes, $ninja_forms_admin_update_message;
+	global $wpdb, $ninja_forms_form_settings_tabs, $ninja_forms_form_settings;
+
+	do_action( 'ninja_forms_register_form_settings' );
+
+	$high_priority_tabs = array();
+	$core_priority_tabs = array();
+	$default_priority_tabs = array();
+	$low_priority_tabs = array();
+
+	foreach ( $ninja_forms_form_settings_tabs as $tab => $data ) {
+		$priority = $data['priority'];
+		if ( $priority == 'high' ) {
+			$high_priority_tabs[$tab] = $data;
+		} else if ( $priority == 'core' ) {
+			$core_priority_tabs[$tab] = $data;
+		} else if ( $priority == 'default' ) {
+			$default_priority_tabs[$tab] = $data;
+		} else if ( $priority == 'low' ) {
+			$low_priority_tabs[$tab] = $data;
+		}
+	}
 
 	?>
 
@@ -381,47 +401,160 @@ function ninja_forms_admin(){
 
 		<div class="media-frame-menu">
 			<div class="media-menu">
-				<a href="#" class="media-menu-item active" id="basic_settings">Basic Settings</a>
-				<a href="#" class="media-menu-item" id="user_email_settings">User Emails</a>
-				<a href="#" class="media-menu-item">Admin Emails</a>
-				<div class="separator"></div>
-				<a href="#" class="media-menu-item">Misc.</a>
+				
+				<?php
+				if ( is_array( $high_priority_tabs ) and !empty( $high_priority_tabs ) ) {
+					?>
+					<div class="separator"></div>
+					<?php
+				}
+				$active = false;
+				foreach( $high_priority_tabs as $tab => $settings ){
+					if ( isset ( $settings['class'] ) ) {
+						$class = $settings['class'];
+					} else {
+						$class = '';
+					}
+					if ( isset ( $settings['desc'] ) ) {
+						$desc = $settings['desc'];
+					} else {
+						$desc = '';
+					}
+					if ( !$active ) {
+						$class .= ' active';
+						$active = true;
+					}
+				?>
+				<a href="#" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>"><?php echo $settings['label']; ?></a>
+				<?php
+				}
+				if ( is_array( $high_priority_tabs ) and !empty( $high_priority_tabs ) and is_array( $core_priority_tabs ) and !empty( $core_priority_tabs ) ) {
+					?>
+					<div class="separator"></div>
+					<?php
+				}
+	
+				foreach( $core_priority_tabs as $tab => $settings ){
+					if ( isset ( $settings['class'] ) ) {
+						$class = $settings['class'];
+					} else {
+						$class = '';
+					}
+					if ( isset ( $settings['desc'] ) ) {
+						$desc = $settings['desc'];
+					} else {
+						$desc = '';
+					}
+					if ( !$active ) {
+						$class .= ' active';
+						$active = true;
+					}
+				?>
+				<a href="#" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>"><?php echo $settings['label']; ?></a>
+				<?php
+				}
+
+				if ( is_array( $core_priority_tabs ) and !empty( $core_priority_tabs ) and is_array( $default_priority_tabs ) and !empty( $default_priority_tabs ) ) {
+					?>
+					<div class="separator"></div>
+					<?php
+				}
+				foreach( $default_priority_tabs as $tab => $settings ){
+					if ( isset ( $settings['class'] ) ) {
+						$class = $settings['class'];
+					} else {
+						$class = '';
+					}
+					if ( isset ( $settings['desc'] ) ) {
+						$desc = $settings['desc'];
+					} else {
+						$desc = '';
+					}
+					if ( !$active ) {
+						$class .= ' active';
+						$active = true;
+					}
+				?>
+				<a href="#" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>"><?php echo $settings['label']; ?></a>
+				<?php
+				}
+
+				if ( is_array( $default_priority_tabs ) and !empty( $default_priority_tabs ) and is_array( $low_priority_tabs ) and !empty ( $low_priority_tabs ) ) {
+					?>
+					<div class="separator"></div>
+					<?php
+				}
+				foreach( $low_priority_tabs as $tab => $settings ){
+					if ( isset ( $settings['class'] ) ) {
+						$class = $settings['class'];
+					} else {
+						$class = '';
+					}
+					if ( isset ( $settings['desc'] ) ) {
+						$desc = $settings['desc'];
+					} else {
+						$desc = '';
+					}
+					if ( !$active ) {
+						$class .= ' active';
+						$active = true;
+					}
+				?>
+				<a href="#" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>"><?php echo $settings['label']; ?></a>
+				<?php
+				}
+				?>
 			</div>
 		</div>
 		
 		<div class="media-frame-title">
-			<h1>Basic Settings</h1>
+			<h1></h1>
 		</div>
-		<!--
+
 		<div class="media-frame-router">
 			
 			<div class="media-router">
-				<a href="#" class="media-menu-item">Tab #1</a>
-				<a href="#" class="media-menu-item active">Tab #2</a>
+				<div class="media-frame-desc">b
+					
+				</div>
+				<!--<a href="#" class="media-menu-item">Tab #1</a>
+				<a href="#" class="media-menu-item active">Tab #2</a>-->
 			</div>
 			
 		</div>
-		-->
+
 		<div class="media-frame-content" id="my-content-id">
 
 			<p>Place your settings here.</p>
-			<div class="hidden">
-				<?php wp_editor( 'Hello World', 'hidden_input' ) ;?>
-			</div>
+
 
 		</div>
 
 	</div>
 
- 
   </div>
+  <?php
+  /*
+	foreach( $ninja_forms_form_settings as $tab=> $settings ){
+		foreach( $settings as $id => $setting ) {
+			if ( $setting['type'] == 'rte' ) {
+	  		?>
+		  <div id="<?php echo $id; ?>_div" class='hidden'>
+		  	<?php wp_editor( 'test', $id ); ?>
+		  </div>
+	  <?php
+			}
+		}
+	}
+	*/
+
+  ?>
 
 	<script type="text/html" id="tmpl-form-settings">
 		<br />
 		<% _.each(settings, function(setting){
 			var setting_id = setting.get( 'id' );
 			var value = setting.get( 'current_value' );
-
 			%>
 			<div>
 			<%
@@ -438,11 +571,11 @@ function ninja_forms_admin(){
 					%>
 					<label>
 						<%= setting.get('label') %>
-						<select id="<%= setting.get('id') %>">
+						<select id="<%= setting_id %>" class="<%= setting.get('class') %>">
 						<%
 						_.each(setting.get('options'), function(option) {
 							%>
-							<option value="<%= option.value %>" <% if ( value == option.value ) { %> selected <% } %>><%= option.label %></option>
+							<option value="<%= option.value %>" <% if ( value == option.value ) { %> selected <% } %>><%= option.name %></option>
 							<%
 						});
 						%>
@@ -454,21 +587,70 @@ function ninja_forms_admin(){
 					%>
 					<label>
 						<%= setting.get('label') %>
-						<textarea id="<%= setting.get('id') %>"><%= value %></textarea>
+						<textarea id="<%= setting_id %>" class="<%= setting.get('class') %>"><%= value %></textarea>
 					</label>
+					<%
+					break;
+				case 'text':
+					%>
+					<label>
+						<%= setting.get('label') %>
+						<input type="text" id="<%= setting_id %>" class="<%= setting.get('class') %>" value="<%= value %>" />
+					</label>
+					<%
+					break;
+				case 'repeater-text':
+					
+					%>
+					<label>
+						<%= setting.get('label') %> <a href="#" id="<%= setting_id %>" class="repeater-add">Add New</a> <br />
+					</label>
+					<span id="<%= setting_id %>_span">
+						<%
+						if ( typeof value === 'object' ) {
+							_.each(value, function(val) {
+								%>
+								<span>
+									<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text" value="<%= val %>" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="repeater-remove">X</a>
+									<br />
+								</span>
+								<%
+							});
+						} else {
+							%>
+							<span>
+								<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text" value="" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="">X</a>
+								<br />
+							</span>
+							<%
+						}
+						%>
+						</span>
+					<%
+					break;
+				case 'rte':
+					%>
+					<%= setting.get('label') %>
+					<div id="<%= setting_id %>_replace"></div>
 					<%
 					break;
 			}
 			%>
+			<span class="howto">
+				<%= setting.get('desc') %>
+			</span>
 			</div>
 		<% }); %>
 	</script>
+	<div id="hidden_editor_div" class="hidden">
+		<?php wp_editor( 'test', 'hidden_editor' ); ?>
+	</div>
 <?php
 
 }
 
 if(is_admin()){
-	require_once(ABSPATH . 'wp-admin/includes/post.php');
+	//require_once(ABSPATH . 'wp-admin/includes/post.php');
 }
 
 function ninja_forms_get_current_tab(){
