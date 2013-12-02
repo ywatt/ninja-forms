@@ -362,6 +362,16 @@ function register_settings_tabs() {
 		),
 	);
 	ninja_forms_register_form_settings_tab( $args );	
+
+	$args = array(
+		'id' => 'test_setting',
+		'settings' => array(
+			'label' => 'Test Settings',
+			'priority' => 'low',
+			'desc' => __( 'This is just a test settings page.', 'ninja-forms' ),
+		),
+	);
+	ninja_forms_register_form_settings_tab( $args );	
 }
 
 add_action( 'ninja_forms_register_form_settings', 'register_settings_tabs' );
@@ -513,6 +523,18 @@ function register_forms_settings() {
 					array('name' => __( 'HTML', 'ninja-forms' ), 'value' => 'html'),
 					array('name' => __( 'Plain Text', 'ninja-forms' ), 'value' => 'plain'),
 				),
+			),
+		),
+	);
+	ninja_forms_register_form_settings( $args );
+
+	$args = array(
+		'tab' => 'test_setting',
+		'settings' => array(
+			'test' => array(
+				'type' => 'checkbox',
+				'label' => __( 'CHECK ME!', 'ninja-forms' ),
+				'desc' => 'HELLO WORLD!',
 			),
 		),
 	);
