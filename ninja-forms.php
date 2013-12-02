@@ -128,6 +128,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.p
 	require_once( NINJA_FORMS_DIR . "/includes/admin/sidebar.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/tabs.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/post-metabox.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/admin/all-forms-list.php" );
 
 	require_once( NINJA_FORMS_DIR . "/includes/admin/ajax.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/admin.php" );

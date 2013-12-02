@@ -707,9 +707,9 @@ a.tooltip span
 / 3.0 UI Changes
 */
 
-.toplevel_page_ninja-forms #post-body *,
-.toplevel_page_ninja-forms #post-body *:after,
-.toplevel_page_ninja-forms #post-body *:before {
+.forms_page_ninja-forms-edit #post-body *,
+.forms_page_ninja-forms-edit #post-body *:after,
+.forms_page_ninja-forms-edit #post-body *:before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
@@ -727,24 +727,24 @@ a.tooltip span
 #nav-menus-frame {
 	padding-right: 20px;
 }
-.toplevel_page_ninja-forms #post-body {
+.forms_page_ninja-forms-edit #post-body {
 	padding: 0 10px 10px;
 	border-width: 1px 0;
 	border-style: solid;
 }
-.toplevel_page_ninja-forms #post-body:after,
+.forms_page_ninja-forms-edit #post-body:after,
 .ninja-forms-admin-field:after,
 .ninja-forms-admin-group:after {
 	clear: both;
 	content: "";
 	display: block;
 }
-.toplevel_page_ninja-forms .major-publishing-actions .publishing-action {
+.forms_page_ninja-forms-edit .major-publishing-actions .publishing-action {
 	float: none;
 	padding: 3px 0;
 	text-align: left;
 }
-.toplevel_page_ninja-forms .accordion-container .button {
+.forms_page_ninja-forms-edit .accordion-container .button {
 	width: 49%;
 	margin-bottom: 3px;
 }
@@ -804,9 +804,9 @@ a.tooltip span
 	float: right;
 }
 
-.toplevel_page_ninja-forms #post-body *,
-.toplevel_page_ninja-forms #post-body *:after,
-.toplevel_page_ninja-forms #post-body *:before {
+.forms_page_ninja-forms-edit #post-body *,
+.forms_page_ninja-forms-edit #post-body *:after,
+.forms_page_ninja-forms-edit #post-body *:before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
