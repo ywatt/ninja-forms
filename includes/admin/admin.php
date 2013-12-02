@@ -3,7 +3,7 @@
 function ninja_forms_add_menu(){
 	$plugins_url = plugins_url();
 
-	if ( isset ( $_REQUEST['page'] ) and $_REQUEST['page'] = 'ninja-forms-edit' and isset ( $_REQUEST['form_id'] ) ) {
+	if ( isset ( $_REQUEST['page'] ) and $_REQUEST['page'] == 'ninja-forms-edit' and isset ( $_REQUEST['form_id'] ) ) {
 		$edit_form_parent = 'ninja-forms';
 	} else {
 		$edit_form_parent = null;
@@ -15,9 +15,10 @@ function ninja_forms_add_menu(){
 	$page = add_menu_page("Ninja Forms" , __( 'Forms', 'ninja-forms' ), $capabilities, "ninja-forms", null, NINJA_FORMS_URL."/images/ninja-head-ico-small.png" );
 		
 	$all_forms = add_submenu_page("ninja-forms", __( 'Forms', 'ninja-forms' ), __( 'All Forms', 'ninja-forms' ), $capabilities, "ninja-forms", "ninja_forms_admin_all_forms");
+	$new_form = add_submenu_page("ninja-forms", __( 'Add New', 'ninja-forms' ), __( 'Add New', 'ninja-forms' ), $capabilities, "ninja-forms&form_id=new", "ninja_forms_admin_all_forms");
 	$edit_form = add_submenu_page( $edit_form_parent, __( 'Edit Form', 'ninja-forms' ), __( 'Edit Form', 'ninja-forms' ), $capabilities, "ninja-forms-edit", "ninja_forms_admin_edit_form");
 	/*
-	$new_form = add_submenu_page("ninja-forms", __( 'Add New', 'ninja-forms' ), __( 'Add New', 'ninja-forms' ), $capabilities, "ninja-forms&tab=form_settings&form_id=new", "ninja_forms_admin");
+	
 	$subs = add_submenu_page("ninja-forms", __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), $capabilities, "ninja-forms-subs", "ninja_forms_admin");
 	$import = add_submenu_page("ninja-forms", __( 'Import/Export', 'ninja-forms' ), __( 'Import / Export', 'ninja-forms' ), $capabilities, "ninja-forms-impexp", "ninja_forms_admin");
 	$settings = add_submenu_page("ninja-forms", __( 'Ninja Form Settings', 'ninja-forms' ), __( 'Settings', 'ninja-forms' ), $capabilities, "ninja-forms-settings", "ninja_forms_admin");
@@ -29,7 +30,7 @@ function ninja_forms_add_menu(){
 	
 	add_action('admin_print_styles-' . $all_forms, 'ninja_forms_admin_css');
 	add_action('admin_print_styles-' . $all_forms, 'ninja_forms_admin_js');
-	
+
 	add_action('admin_print_styles-' . $edit_form, 'ninja_forms_admin_css');
 	add_action('admin_print_styles-' . $edit_form, 'ninja_forms_admin_js');
 	/*
@@ -710,6 +711,9 @@ function ninja_forms_admin_all_forms() {
 	}
 
 	?>
+	<div id="icon-ninja-custom-forms" class="icon32"><br></div>
+	<h2><a href="#new_form" rel="modal:open"><input type="button" id="btn_new_form" class="open-settings-modal button button-primary" value="<?php _e( 'New Form', 'ninja-forms' );?>"></a></h2>
+
 	<ul class="subsubsub">
 		<li class="all"><a href="" class="current"><?php _e( 'All', 'ninja-forms' ); ?> <span class="count">(<?php echo $form_count;?>)</span></a>
 	</ul>
@@ -839,7 +843,70 @@ function ninja_forms_admin_all_forms() {
 			</tr>
 		</tfoot>
 	</table>
-	<?php
+
+  <div id="new_form" style="display:none;">
+  	<a class="media-modal-close" href="#" title="Close">
+  		<span class="media-modal-icon"></span>
+  	</a>
+  	<div class="media-frame wp-core-ui" id="">
+
+		<div class="media-frame-menu">
+			<div class="media-menu">
+
+			</div>
+		</div>
+		
+		<div class="media-frame-title">
+			<h1><?php _e( 'Create A New Form', 'ninja-forms' );?></h1>
+		</div>
+
+		<div class="media-frame-router">
+			
+			<div class="media-router">
+				<div class="media-frame-desc">
+					
+				</div>
+				<div class="media-frame-save">
+				</div>
+			</div>
+		</div>
+
+		<div class="media-frame-content" id="new-form-creation" style="overflow:scroll;">
+			<h3>From Scratch:</h3>
+			<p><input type="text" class="widefat code" value="" placeholder="Form Name"></p>
+			<p><a href="#" class="button-primary">Creation Wizard, Please</a>
+				<a href="#" class="button-secondary">Skip The Wizard, Start Editing</a></p>
+			<span class='hidden'><?php wp_editor('hi','hi');?></span>
+			<h3>From A Template:</h3>
+			<div style="float:left;">
+				<img height="210" width="212" style="border-style:solid;border-width:5px; " src="http://www.raymondselda.com/wp-content/uploads/2009/04/contactform2.png">
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Form
+			</div>				
+			<div style="float:left;">
+				<img height="210" width="212" style="border-style:solid;border-width:5px; " src="http://www.welie.com/patterns/images/form-iht.png">
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Billing Information
+			</div>		
+
+		</div>
+
+	</div>
+
+  </div>
+  <?php
+  if ( isset( $_REQUEST['form_id'] ) and $_REQUEST['form_id'] == 'new' ) {
+  	?>
+  	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$('#btn_new_form').click();
+		});
+  	</script>
+
+  	<?php
+
+  }
+
 }
 
 if(is_admin()){
