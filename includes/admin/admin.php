@@ -62,9 +62,25 @@ function ninja_forms_add_menu(){
 add_action( 'admin_menu', 'ninja_forms_add_menu' );
 
 function ninja_forms_admin_edit_form(){
-	global $wpdb, $ninja_forms_form_settings_tabs, $ninja_forms_form_settings;
+	global $wpdb, $ninja_forms_form_settings_tabs;
 
-	do_action( 'ninja_forms_register_form_settings' );
+	do_action( 'ninja_forms_admin_init' );
+
+	if ( isset ( $_REQUEST['form_id'] ) ) {
+		$form_id = $_REQUEST['form_id'];
+	} else {
+		$form_id = '';
+	}
+
+	if ( $form_id != '' ) {
+		$form_row = ninja_forms_get_form_by_id( $form_id );
+	}
+
+	if ( isset ( $form_row['data'] ) ) {
+		$form_data = $form_row['data'];
+	} else {
+		$form_data = '';
+	}
 
 	$high_priority_tabs = array();
 	$core_priority_tabs = array();
@@ -87,7 +103,7 @@ function ninja_forms_admin_edit_form(){
 	?>
 
 	<div id="icon-ninja-custom-forms" class="icon32"><br></div>
-	<h2>Form Editor - Your Form Title - ID : 16</h2>
+	<h2>Form Editor - <?php if ( isset ( $form_data['form_title'] ) ) echo $form_data['form_title'];?> - ID : <?php echo $form_id;?></h2>
 
 	<div id="nav-menus-frame">
 	<div id="menu-settings-column" class="metabox-holder">

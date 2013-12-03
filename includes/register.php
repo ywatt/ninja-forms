@@ -374,7 +374,7 @@ function register_settings_tabs() {
 	ninja_forms_register_form_settings_tab( $args );	
 }
 
-add_action( 'ninja_forms_register_form_settings', 'register_settings_tabs' );
+add_action( 'ninja_forms_admin_init', 'register_settings_tabs' );
 
 function register_forms_settings() {
 	$pages = get_pages();
@@ -544,4 +544,4 @@ function register_forms_settings() {
 	ninja_forms_register_form_settings( $args );
 }
 
-add_action( 'ninja_forms_register_form_settings', 'register_forms_settings' );
+add_action( 'ninja_forms_admin_init', 'register_forms_settings' );

@@ -205,7 +205,7 @@ class Form_Settings_API extends Ninja_Forms_Admin_Rest_API
 
 	protected function form_settings() {
         global $ninja_forms_form_settings;
-        do_action( 'ninja_forms_register_form_settings' );
+        do_action( 'ninja_forms_admin_init' );
 
      	switch( $this->method ) {
      		case 'GET':

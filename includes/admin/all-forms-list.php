@@ -205,9 +205,9 @@ function ninja_forms_admin_all_forms() {
 		<div class="nf-new-form-content" id="new-form-creation" style="overflow:scroll;">
 			<div class="new-form-settings">
 				<h3><?php _e( 'From Scratch', 'ninja-forms' );?>:</h3>
-				<p><input type="text" class="widefat code" value="" placeholder="Form Name"></p>
-				<p><a href="#" class="button-primary"><?php _e( 'Creation Wizard, Please', 'ninja-forms' );?></a>
-					<a href="#" class="button-secondary"><?php _e( 'Start Editing, Skip The Wizard', 'ninja-forms' );?></a></p>
+				<p><input type="text" id="ninja_forms_new_form_title" class="widefat code" value="" placeholder="Form Title"></p>
+				<p><a href="#" id="ninja_forms_new_form_wizard" class="button-primary"><?php _e( 'Creation Wizard, Please', 'ninja-forms' );?></a>
+					<a href="#" id="ninja_forms_new_form_create" class="button-secondary"><?php _e( 'Start Editing, Skip The Wizard', 'ninja-forms' );?></a></p>
 				<span class='hidden'><?php wp_editor('hi','hi');?></span>
 			</div>
 			<div class="new-form-info">

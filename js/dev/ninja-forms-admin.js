@@ -165,6 +165,14 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	$('#ninja_forms_new_form_create').on('click', function(e) {
+		e.preventDefault();
+		var form_title = $('#ninja_forms_new_form_title').val();
+		$.post( ajaxurl, { action: 'ninja_forms_new_form', form_title: form_title }, function( response ) {
+			window.location = admin_url + '?page=ninja-forms-edit&form_id=' + response.form_id;
+		});
+	});
+
 	var sender_mod = false;
 	var empty_ul_html = '<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;"></ul>';
 	var sortable_options = {
@@ -546,7 +554,7 @@ jQuery(document).ready(function($) {
 	var savedNoticeTimeout = '';
 
 	FormSetting = Backbone.Model.extend({
-		urlRoot: rest_url + '&rest=form_settings',
+		urlRoot: ninja_forms_rest_url + '&rest=form_settings',
 		
 		defaults: {
 			form_id: form_id
@@ -580,7 +588,7 @@ jQuery(document).ready(function($) {
 	});
 
 	FormSettings = Backbone.Collection.extend({
-		url: rest_url + '&rest=form_settings',
+		url: ninja_forms_rest_url + '&rest=form_settings',
 		model: FormSetting,
 	});
 

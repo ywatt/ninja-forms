@@ -1,15 +1,17 @@
 <?php
 
-function big_ole_test() {
-	$form_id = esc_attr( $_REQUEST['form_id'] );
-	$setting = esc_attr( $_REQUEST['setting'] );
-	$value = esc_attr( $_REQUEST['value'] );
-
-	echo "CHANGE: " . $setting ." TO " . $value . " IN FORM " . $form_id;
+function ninja_forms_new_form() {
+	global $wpdb;
+	$form_title = esc_attr( $_REQUEST['form_title'] );
+	$wpdb->insert( NINJA_FORMS_TABLE_NAME, array('data' => serialize( array( 'form_title' => $form_title ) ) ) );
+	$form_id = $wpdb->insert_id;
+	header("Content-type: application/json");
+	$array = array( 'form_id' => $form_id );
+	echo json_encode( $array );
 	die();
 }
 
-add_action( 'wp_ajax_test', 'big_ole_test' );
+add_action( 'wp_ajax_ninja_forms_new_form', 'ninja_forms_new_form' );
 
 
 add_action( 'wp_ajax_ninja_forms_save_metabox_state', 'ninja_forms_save_metabox_state' );
