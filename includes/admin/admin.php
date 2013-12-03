@@ -648,6 +648,32 @@ function ninja_forms_admin_edit_form(){
 
 }
 
+function ninja_forms_admin_body_filter( $classes ) {
+	global $pagenow;
+
+	if ( $pagenow == 'admin.php' and isset ( $_REQUEST['page'] ) ) {
+		switch( $_REQUEST['page'] ) {
+			case 'ninja-forms':
+				$classes .= ' ninja-forms';
+				$classes .= ' ninja-forms-forms';
+				break;
+			case 'ninja-forms-edit':
+				$classes .= ' ninja-forms';
+				$classes .= ' ninja-forms-edit';
+				break;
+			case 'ninja-forms-settings':
+				$classes .= ' ninja-forms';
+				$classes .= ' ninja-forms-settings';
+				break;
+
+		}
+
+	}
+	return $classes;
+}
+
+add_filter( 'admin_body_class', 'ninja_forms_admin_body_filter' );
+
 function ninja_forms_get_current_tab(){
 	global $ninja_forms_tabs;
 	if(isset($_REQUEST['page'])){
