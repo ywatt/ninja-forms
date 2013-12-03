@@ -511,10 +511,13 @@ function register_forms_settings() {
 	$args = array(
 		'tab' => 'adv_email_settings',
 		'settings' => array(
+			'email_from_name' => array(
+				'type' => 'text',
+				'label' => __( 'Email From Name', 'ninja-forms' ),
+			),			
 			'email_from' => array(
 				'type' => 'text',
 				'label' => __( 'Email From Address', 'ninja-forms' ),
-				'desc' => htmlspecialchars( __( 'Steve Jones <steve@myurl.com>', 'ninja-forms' ) ),
 			),
 			'email_type' => array(
 				'type' => 'select',
