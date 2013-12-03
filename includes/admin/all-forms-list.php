@@ -127,7 +127,7 @@ function ninja_forms_admin_all_forms() {
 			$date_updated = $all_forms[$i]['date_updated'];
 			$date_updated = strtotime( $date_updated );
 			$date_updated = date_i18n( __( 'F d, Y', 'ninja-forms' ), $date_updated );
-			$edit_link = esc_url( add_query_arg( array( 'form_id' => $form_id ), 'http://localhost:8888/wp-dev/wp-admin/admin.php?page=ninja-forms-edit' ) );
+			$edit_link = esc_url( add_query_arg( array( 'form_id' => $form_id ), admin_url( 'admin.php?page=ninja-forms-edit' ) ) );
 			$subs_link = admin_url( 'admin.php?page=ninja-forms-subs&form_id='.$form_id );
 			$export_link = esc_url( add_query_arg( array( 'export_form' => 1, 'form_id' => $form_id ) ) );
 			$duplicate_link = esc_url( add_query_arg( array( 'duplicate_form' => 1, 'form_id' => $form_id ) ) );
