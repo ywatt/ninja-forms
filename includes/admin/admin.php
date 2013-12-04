@@ -13,12 +13,12 @@ function ninja_forms_add_menu(){
 	$capabilities = apply_filters( 'ninja_forms_admin_menu_capabilities', $capabilities );
 
 	$page = add_menu_page("Ninja Forms" , __( 'Forms', 'ninja-forms' ), $capabilities, "ninja-forms", null, NINJA_FORMS_URL."/images/ninja-head-ico-small.png" );
-		
+
 	$all_forms = add_submenu_page("ninja-forms", __( 'Forms', 'ninja-forms' ), __( 'All Forms', 'ninja-forms' ), $capabilities, "ninja-forms", "ninja_forms_admin_all_forms");
 	$new_form = add_submenu_page("ninja-forms", __( 'Add New', 'ninja-forms' ), __( 'Add New', 'ninja-forms' ), $capabilities, "ninja-forms&form_id=new", "ninja_forms_admin_all_forms");
 	$edit_form = add_submenu_page( $edit_form_parent, __( 'Edit Form', 'ninja-forms' ), __( 'Edit Form', 'ninja-forms' ), $capabilities, "ninja-forms-edit", "ninja_forms_admin_edit_form");
 	/*
-	
+
 	$subs = add_submenu_page("ninja-forms", __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), $capabilities, "ninja-forms-subs", "ninja_forms_admin");
 	$import = add_submenu_page("ninja-forms", __( 'Import/Export', 'ninja-forms' ), __( 'Import / Export', 'ninja-forms' ), $capabilities, "ninja-forms-impexp", "ninja_forms_admin");
 	$settings = add_submenu_page("ninja-forms", __( 'Ninja Form Settings', 'ninja-forms' ), __( 'Settings', 'ninja-forms' ), $capabilities, "ninja-forms-settings", "ninja_forms_admin");
@@ -26,8 +26,8 @@ function ninja_forms_add_menu(){
 	$extend = add_submenu_page("ninja-forms", __( 'Ninja Form Extensions', 'ninja-forms' ), __( 'Extend', 'ninja-forms' ), $capabilities, "ninja-forms-extend", "ninja_forms_admin");
 	*/
 	add_action('admin_print_styles-' . $page, 'ninja_forms_admin_css');
-	add_action('admin_print_styles-' . $page, 'ninja_forms_admin_js');	
-	
+	add_action('admin_print_styles-' . $page, 'ninja_forms_admin_js');
+
 	add_action('admin_print_styles-' . $all_forms, 'ninja_forms_admin_css');
 	add_action('admin_print_styles-' . $all_forms, 'ninja_forms_admin_js');
 
@@ -266,7 +266,7 @@ function ninja_forms_admin_edit_form(){
 						</ul>
 						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;">
 
-						</ul>						
+						</ul>
 						<ul class="ninja-row" data-cols="4" style="padding:2px;">
 							<li class="ninja-col-1-4" data-size="1-4" id="1 - 1x4">
 								<div class="ninja-forms-admin-field label-above">
@@ -322,7 +322,7 @@ function ninja_forms_admin_edit_form(){
 						</ul>
 						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;">
 
-						</ul>						
+						</ul>
 						<!-- <ul class="ninja-row">
 							<li class="ninja-col-1-3" data-size="1-3">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
@@ -336,7 +336,7 @@ function ninja_forms_admin_edit_form(){
 									</div>
 								</div>
 								<div class="nf-right-handlebar"></div>
-							</li>							
+							</li>
 							<li class="ninja-col-2-3" data-size="2-3">
 								<div class="ninja-forms-admin-group label-above">
 									<div class="nf-left-handlebar"></div>
@@ -372,9 +372,9 @@ function ninja_forms_admin_edit_form(){
 									</div>
 								</div>
 							</li>
-							
+
 						</ul>-->
-						
+
 						<ul class="ninja-row ninja-drop" data-cols="2" style="padding:2px;">
 							<li class="ninja-col-1-2" data-size="1-2">
 								<div class="ninja-forms-admin-field label-above open-settings-modal">
@@ -430,7 +430,7 @@ function ninja_forms_admin_edit_form(){
 
 		<div class="media-frame-menu">
 			<div class="media-menu">
-				
+
 				<?php
 				if ( is_array( $high_priority_tabs ) and !empty( $high_priority_tabs ) ) {
 					?>
@@ -462,7 +462,7 @@ function ninja_forms_admin_edit_form(){
 					<div class="separator"></div>
 					<?php
 				}
-	
+
 				foreach( $core_priority_tabs as $tab => $settings ){
 					if ( isset ( $settings['class'] ) ) {
 						$class = $settings['class'];
@@ -535,33 +535,21 @@ function ninja_forms_admin_edit_form(){
 				?>
 			</div>
 		</div>
-		
-		<div class="media-frame-title">
-			<h1></h1>
-		</div>
-
-		<div class="media-frame-router">
-			
-			<div class="media-router">
-				<div class="media-frame-desc">
-					
-				</div>
-				<div class="media-frame-save">
-
-				</div>
-				<!--<a href="#" class="media-menu-item">Tab #1</a>
-				<a href="#" class="media-menu-item active">Tab #2</a>-->
+		<div class="nf-settings">
+			<div class="nf-settings-title">
+				<h1></h1>
+				<div class="updated" style="display:none"></div>
 			</div>
-			
+
+
+			<div class="nf-settings-desc-desc"></div>
+
+			<div class="nf-settings-content" id="my-content-id" style="overflow:scroll;">
+
+				<p>Place your settings here.</p>
+
+			</div>
 		</div>
-
-		<div class="media-frame-content" id="my-content-id" style="overflow:scroll;">
-
-			<p>Place your settings here.</p>
-
-
-		</div>
-
 	</div>
 
   </div>
@@ -615,7 +603,7 @@ function ninja_forms_admin_edit_form(){
 					<%
 					break;
 				case 'repeater-text':
-					
+
 					%>
 					<label>
 						<%= setting.get('label') %> <a href="#" id="<%= setting_id %>" class="repeater-add">Add New</a> <br />

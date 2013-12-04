@@ -131,7 +131,7 @@ jQuery(document).ready(function($) {
 		$('#' + span_id).children('span:last').children('input').focus();
 	});
 
-	// Listen for clicks on our "remove repeater field" buttons.	
+	// Listen for clicks on our "remove repeater field" buttons.
 	$(document).on('click', '.repeater-remove', function(e) {
 		e.preventDefault();
 		var id = this.id;
@@ -186,14 +186,14 @@ jQuery(document).ready(function($) {
 
 			var placeholder_class = 'ninja-placeholder-1-' + target_cols;
 			ui.placeholder[0].className = placeholder_class;
-			
+
 			sender_mod = false;
 		},
 		over: function( event, ui ) {
-			
+
 			// Get our current column count for the target UL, sender UL.
 			var target_cols = parseInt( $(this).data( 'cols' ) );
-			
+
 			// Get the size of the element currently being dragged.
 			var current_drag_size = $(ui.item).data( 'size' );
 
@@ -204,14 +204,14 @@ jQuery(document).ready(function($) {
 			}
 
 			//console.log( "OVER - new target cols: " + new_target_cols )
-			
+
 			//$(this).data( 'cols', new_target_cols );
 			//$(this).data( 'old_cols', target_cols );
 
 			// Set our placeholder to the proper size.
 			var placeholder_class = 'ninja-placeholder-1-' + new_target_cols;
 			ui.placeholder[0].className = placeholder_class;
-			
+
 			// Set the size of the element currently being dragged.
 			$(ui.item).removeClass();
 			$(ui.item).addClass( 'ninja-col-1-' + new_target_cols );
@@ -219,7 +219,7 @@ jQuery(document).ready(function($) {
 			// Loop through each LI in our target UL and set the size.
 			var target_lis = $(this).children( 'li' ).not( '.' + placeholder_class ).not( ui.item );
 			$(target_lis).each( function() {
-				
+
 				// Get our current size for this LI element.
 				var current_size = $(this).data( 'size' );
 				// Set the current size as the old size so that we can undo later.
@@ -236,7 +236,7 @@ jQuery(document).ready(function($) {
 				$(this).addClass( 'ninja-col-' + new_size );
 
 			});
-			
+
 			//Set each LI within the sender UL to the proper size, but only if this is the first "over" event.
 
 			if ( this != ui.sender[0] ) {
@@ -244,12 +244,12 @@ jQuery(document).ready(function($) {
 				var sender_lis = $(ui.sender).children( 'li' ).not( ui.item ).not( '.' + placeholder_class );
 
 				//if ( !sender_mod ) {
-					
+
 					if ( $(sender_lis).length <= 1 ) {
 						var new_sender_cols = 1;
-						
+
 					} else if ( $(sender_lis).length == 2 ) {
-						// Loop through our remaining LI items. 
+						// Loop through our remaining LI items.
 						// If we don't have any colspans that are greater than one, then our new column is current col - 1.
 						var tmp_colspan = 1;
 						$(sender_lis).each( function() {
@@ -260,7 +260,7 @@ jQuery(document).ready(function($) {
 								var colspan = parseInt( tmp[0] );
 								if ( colspan > 1 ) {
 									tmp_colspan = colspan;
-								}						
+								}
 							}
 						});
 						// If the largest colspan is greater than one, then we can subtract one from the old col size.
@@ -293,11 +293,11 @@ jQuery(document).ready(function($) {
 				//$(ui.sender).data( 'old_cols', sender_cols );
 
 				// Loop through each LI in our sender UL and set the size.
-				
+
 				$(sender_lis).each( function() {
 					// Get the current size for this LI element.
 					var current_size = $(this).data( 'size' );
-					
+
 					if ( typeof current_size !== 'undefined' ) {
 						// Get the new size of the LI.
 						var tmp = current_size.split( '-' );
@@ -309,12 +309,12 @@ jQuery(document).ready(function($) {
 						// Remove the old size class.
 						$(this).removeClass();
 						// Add the new size class.
-						$(this).addClass( 'ninja-col-' + new_size );					
+						$(this).addClass( 'ninja-col-' + new_size );
 					}
 
-				});				
+				});
 			}
-			
+
 		},
 		beforeStop: function( event, ui ) {
 			$( ".ninja-row" ).off( "sortout", test_function );
@@ -324,9 +324,9 @@ jQuery(document).ready(function($) {
 		receive: function( event, ui) {
 			//console.log( 'receive' );
 			var target_cols = $(this).data( 'cols' );
-			
+
 			//$(this).removeData( 'old_cols' );
-			
+
 			// Increase our target UL column size by one.
 			if ( target_cols < 4 ) {
 				var new_target_cols = target_cols + 1;
@@ -353,7 +353,7 @@ jQuery(document).ready(function($) {
 				var tmp = current_size.split( '-' );
 				var colspan = tmp[0];
 				var new_size = colspan + '-' + new_target_cols;
-				
+
 				// Set the new size as the size setting.
 				$(this).data( 'size', new_size );
 
@@ -370,13 +370,13 @@ jQuery(document).ready(function($) {
 			var sender_cols = parseInt( $(this).data( 'cols' ) );
 			var sender_lis = $(this).children( 'li' ).not( ui.item );
 
-			
+
 			//if ( !sender_mod ) {
 				//console.log( 'mod' );
 				if ( $(sender_lis).length <= 1 ) {
 					var new_sender_cols = 1;
 				} else if ( $(sender_lis).length == 2 ) {
-					// Loop through our remaining LI items. 
+					// Loop through our remaining LI items.
 					// If we don't have any colspans that are greater than one, then our new column is current col - 1.
 					var tmp_colspan = 1;
 					$(sender_lis).each( function() {
@@ -387,7 +387,7 @@ jQuery(document).ready(function($) {
 							var colspan = parseInt( tmp[0] );
 							if ( colspan > 1 ) {
 								tmp_colspan = colspan;
-							}						
+							}
 						}
 					});
 					// If the largest colspan is greater than one, then we can subtract one from the old col size.
@@ -431,12 +431,12 @@ jQuery(document).ready(function($) {
 				var tmp = current_size.split( '-' );
 				var colspan = tmp[0];
 				var new_size = colspan + '-' + new_sender_cols;
-				
+
 				// Set the new size as the size setting.
 				//$(this).data( 'size', new_size );
 				//console.log( 'UPDATE ' + this.id + ' SIZE TO: ' + new_size );
 			});
-			
+
         },
         stop: function( event, ui ) {
         	if ( $(ui.item).hasClass( 'ninja-forms-field-button' ) ) {
@@ -463,7 +463,7 @@ jQuery(document).ready(function($) {
 						// If both previous and next ULs are empty, then remove the previous UL and this one.
 						$(this).remove();
 						$(this).prev('.ninja-row').remove();
-						
+
 					} else if ( prev_empty || next_empty ) {
 						// If just one of the siblings are empty, remove this UL.
 						$(this).remove();
@@ -499,24 +499,24 @@ jQuery(document).ready(function($) {
 	$('.ninja-row').disableSelection();
 
 	function test_function( event, ui ) {
-		
+
 		var placeholder_class = ui.placeholder[0].className;
 
 		//var old_cols = $(this).data( 'old_cols' );
 		//$(this).data( 'cols', old_cols );
 		//$(this).removeData( 'old_cols' );
-		
+
 		if ( this != ui.sender[0] ) {
 			//var old_cols = $(ui.sender).data( 'old_cols' );
 			//$(ui.sender).data( 'cols', old_cols );
 			//$(ui.sender).removeData( 'old_cols' );
-			
+
 			// Loop through each of the children of our target UL and reset them.
 			var target_lis = $(this).children( 'li' ).not( '.' + placeholder_class );
 			$(target_lis).each( function() {
 				// Get our previous size.
 				var old_size = $(this).data( 'old_size' );
-				
+
 				if ( typeof old_size !== 'undefined' ) {
 					$(this).removeData( 'old_size' );
 					$(this).data( 'size', old_size );
@@ -527,7 +527,7 @@ jQuery(document).ready(function($) {
 					$(this).addClass( 'ninja-col-' + old_size );
 				}
 			});
-				
+
 		}
 	}
 
@@ -542,7 +542,7 @@ jQuery(document).ready(function($) {
 			return el;
 		},
 		start: function(e,ui){
-			
+
 
 		},
 		stop: function(e, ui ){
@@ -555,7 +555,7 @@ jQuery(document).ready(function($) {
 
 	FormSetting = Backbone.Model.extend({
 		urlRoot: ninja_forms_rest_url + '&rest=form_settings',
-		
+
 		defaults: {
 			form_id: form_id
 		},
@@ -581,9 +581,9 @@ jQuery(document).ready(function($) {
 
 		    // Call super with attrs moved to options
 		    Backbone.Model.prototype.save.call(this, attrs, options);
-		    $('.media-frame-save').hide().html('Saved').fadeIn();
+		    $('.updated').hide().html('Saved').fadeIn();
 	        // Hide the div after 3 seconds
-    		savedNoticeTimeout = setTimeout( "jQuery('.media-frame-save').fadeOut();",3000 );
+    		savedNoticeTimeout = setTimeout( "jQuery('.updated').fadeOut();",3000 );
 		}
 	});
 
@@ -593,17 +593,17 @@ jQuery(document).ready(function($) {
 	});
 
 	var formSettings = new FormSettings();
-	
+
 	var ContentView = Backbone.View.extend({
 		el: '#my-content-id',
-		
+
 		initialize: function(){
  			this.collection.bind( 'reset', this.render, this );
 		},
 
 		render: function() {
 			var content = _.template( $('#tmpl-form-settings').html(), { settings: formSettings.models } );
-			$(this.el).html(content);			
+			$(this.el).html(content);
 
 			// This is a work-around for the wonky tinyMCE that might be in this settings collection.
 			var rte = {};
@@ -614,13 +614,13 @@ jQuery(document).ready(function($) {
 				model_id = model.get('id');
 				model_type = model.get('type');
 				if ( model_type == 'rte' ) {
-					
+
 					//tinyMCE.execCommand( 'mceRemoveControl', false, 'hidden_editor' );
 					tinyMCE.execCommand( 'mceRemoveControl', false, model_id );
 					local_mce_init[model_id] = tinyMCEPreInit.mceInit['hidden_editor'];
-					
+
 					local_mce_init[model_id].body_class = model_id;
-					
+
 					local_mce_init[model_id].elements = model_id;
 
 					local_mce_init[model_id]['setup'] =  function(ed) {
@@ -635,7 +635,7 @@ jQuery(document).ready(function($) {
 					//var tmp = $('#hidden_editor_div').html();
 					var tmp = '<div id="wp-hidden_editor-wrap" class="wp-core-ui wp-editor-wrap tmce-active"><link rel="stylesheet" id="editor-buttons-css" href="http://localhost:8888/wp-dev/wp-content/plugins/mp6/css/editor.css?ver=1381361301" type="text/css" media="all"><div id="wp-hidden_editor-editor-tools" class="wp-editor-tools hide-if-no-js"><a id="hidden_editor-html" class="wp-switch-editor switch-html" onclick="switchEditors.switchto(this);">Text</a><a id="hidden_editor-tmce" class="wp-switch-editor switch-tmce" onclick="switchEditors.switchto(this);">Visual</a><div id="wp-hidden_editor-media-buttons" class="wp-media-buttons"><a href="#" id="insert-media-button" class="button insert-media add_media" data-editor="hidden_editor" title="Add Media"><span class="wp-media-buttons-icon"></span> Add Media</a></div></div><div id="wp-hidden_editor-editor-container" class="wp-editor-container"><textarea class="wp-editor-area" rows="20" cols="40" name="hidden_editor" id="hidden_editor" style="" aria-hidden="true">&lt;p&gt;test&lt;/p&gt;</textarea></div></div>';
 					tmp = tmp.replace(/hidden_editor/g, model_id );
-					
+
 					$('#' + model_id + '_replace').html(tmp);
 					//tinyMCE.execCommand( 'mceRemoveControl', false, model_id );
 					tinyMCE.init(local_mce_init[model_id]);
@@ -657,7 +657,7 @@ jQuery(document).ready(function($) {
 
 		save: function(e) {
 			clearTimeout(savedNoticeTimeout);
-			$('.media-frame-save').hide().html('Saving...').fadeIn();
+			$('.updated').hide().html('Saving...').fadeIn();
 			var el = e.target;
 			var el_id = jQuery(el).prop('id');
 
@@ -707,8 +707,8 @@ jQuery(document).ready(function($) {
 			success: function() {
 	            $('.media-menu-item').removeClass('active');
 	            $('#' + tab_id).addClass('active');
-	            $('.media-frame-title').html('<h1>' + title + '</h1>');
-	            $('.media-frame-desc').html(desc);
+	            $('.nf-settings-title h1').html(title);
+	            $('.nf-settings-desc').html(desc);
 			},
 			error: function() {
 				//console.log('failed to get!');
