@@ -14,7 +14,7 @@ function ninja_forms_save_sub(){
 	if ( 0 === $ninja_forms_processing->get_form_setting('save_subs') ) {
 		$save = false;
 	}
-	$save = apply_filters ( 'ninja_forms_save_submission', $save, $ninja_forms_processing );
+	$save = apply_filters ( 'ninja_forms_save_submission', $save, $ninja_forms_processing->get_form_ID() );
 
 	if( $save ){
 
