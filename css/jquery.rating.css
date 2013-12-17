@@ -28,7 +28,7 @@
 .ninja-forms-star-rating-hover a {
 	background-position: 0 -32px
 }
-.rating-cancel.ninja-forms-star-rating-hover a {
+.rating-cancel a:hover {
 	background-position: 0 -32px
 }
 /* Read Only CSS */
