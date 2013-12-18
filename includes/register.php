@@ -8,7 +8,7 @@ function ninja_forms_register_field($slug, $args = array()){
 
 	$defaults = array(
 		'conditional' => '',
-		'default_label' => '',		
+		'default_label' => '',
 		'default_label_pos' => '',
 		'default_value' => '',
  		'display_function' => '',
@@ -298,7 +298,7 @@ function ninja_forms_register_form_settings( $args = array() ) {
 
 function ninja_forms_register_form_settings_tab( $args ) {
 	global $ninja_forms_form_settings_tabs;
-	
+
 	$defaults = array(
 		'priority' => 'default',
 	);
@@ -332,7 +332,7 @@ function register_settings_tabs() {
 		),
 	);
 	ninja_forms_register_form_settings_tab( $args );
-	
+
 	$args = array(
 		'id' => 'user_email_settings',
 		'settings' => array(
@@ -351,7 +351,7 @@ function register_settings_tabs() {
 			'desc' => __( 'Admin email settings description.', 'ninja-forms' ),
 		),
 	);
-	ninja_forms_register_form_settings_tab( $args );	
+	ninja_forms_register_form_settings_tab( $args );
 
 	$args = array(
 		'id' => 'adv_email_settings',
@@ -361,7 +361,7 @@ function register_settings_tabs() {
 			'desc' => __( 'Changing these settings will override your default plugin settings.', 'ninja-forms' ),
 		),
 	);
-	ninja_forms_register_form_settings_tab( $args );	
+	ninja_forms_register_form_settings_tab( $args );
 
 	$args = array(
 		'id' => 'test_setting',
@@ -371,7 +371,7 @@ function register_settings_tabs() {
 			'desc' => __( 'This is just a test settings page.', 'ninja-forms' ),
 		),
 	);
-	ninja_forms_register_form_settings_tab( $args );	
+	ninja_forms_register_form_settings_tab( $args );
 }
 
 add_action( 'ninja_forms_admin_init', 'register_settings_tabs' );
@@ -397,7 +397,7 @@ function register_forms_settings() {
 				'label' => __( 'Add this form to the bottom of this page:', 'ninja-forms' ),
 				'options' => $append_array,
 				'class' => 'widefat code',
-			),			
+			),
 			'logged_in' => array(
 				'type' => 'checkbox',
 				'label' => __( 'Only show this form to logged-in users?', 'ninja-forms' ),
@@ -405,7 +405,7 @@ function register_forms_settings() {
 			'ajax' => array(
 				'type' => 'checkbox',
 				'label' => __( 'Submit the form without reloading the page? (Via Ajax)', 'ninja-forms' ),
-			),			
+			),
 			'show_title' => array(
 				'type' => 'checkbox',
 				'label' => __( 'Output the form title above form?', 'ninja-forms' ),
@@ -427,7 +427,7 @@ function register_forms_settings() {
 				'label' => __( 'Show this page after successful submission:', 'ninja-forms' ),
 				'options' => $pages_array,
 				'class' => 'widefat code',
-			),			
+			),
 			'save_subs' => array(
 				'type' => 'checkbox',
 				'label' => __( 'Save form submissions into the Ninja Forms database?', 'ninja-forms' ),
@@ -438,7 +438,7 @@ function register_forms_settings() {
 				'type' => 'checkbox',
 				'label' => __( 'Clear the form after successful submission?', 'ninja-forms' ),
 				'default_value' => 1,
-			),			
+			),
 			'hide_complete' => array(
 				'type' => 'checkbox',
 				'label' => __( 'Hide the form after successful submission?', 'ninja-forms' ),
@@ -447,7 +447,7 @@ function register_forms_settings() {
 		),
 	);
 	ninja_forms_register_form_settings( $args );
-	
+
 	$args = array(
 		'tab' => 'user_email_settings',
 		'settings' => array(
@@ -460,6 +460,7 @@ function register_forms_settings() {
 				'type' => 'rte',
 				'label' => __( 'Email message sent to the user:', 'ninja-forms' ),
 				'class' => 'widefat code',
+				'desc' => __( 'If you want to include field data entered by the user, for instance a name, you can use the following shortcode: [ninja_forms_field id=23] where 23 is the ID of the field you want to insert. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. You can find the field ID when you expand the field for editing.', 'ninja-forms' ),
 			),
 			'user_email_fields' => array(
 				'type' => 'checkbox',
@@ -492,6 +493,7 @@ function register_forms_settings() {
 				'type' => 'rte',
 				'label' => __( 'Email message sent to the administrators:', 'ninja-forms' ),
 				'class' => 'widefat code',
+				'desc' => __( 'If you want to include field data entered by the user, for instance a name, you can use the following shortcode: [ninja_forms_field id=23] where 23 is the ID of the field you want to insert. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. You can find the field ID when you expand the field for editing.', 'ninja-forms' ),
 			),
 			'admin_email_fields' => array(
 				'type' => 'checkbox',
@@ -506,7 +508,7 @@ function register_forms_settings() {
 
 		),
 	);
-	ninja_forms_register_form_settings( $args );	
+	ninja_forms_register_form_settings( $args );
 
 	$args = array(
 		'tab' => 'adv_email_settings',
@@ -514,7 +516,7 @@ function register_forms_settings() {
 			'email_from_name' => array(
 				'type' => 'text',
 				'label' => __( 'Email From Name', 'ninja-forms' ),
-			),			
+			),
 			'email_from' => array(
 				'type' => 'text',
 				'label' => __( 'Email From Address', 'ninja-forms' ),

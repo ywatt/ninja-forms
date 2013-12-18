@@ -5,10 +5,13 @@
 
 .ninja-forms .modal {
     margin: 0 !important;
-    top: 100px !important;
-    bottom: 80px !important;
+    top: 60px !important;
+    bottom: 40px !important;
     left: 200px !important;
     right: 80px !important;
+    .inside {
+        padding: 20px;
+    }
     @media (min-width: 1700px) {
         left: 22% !important;
         right: 15% !important;

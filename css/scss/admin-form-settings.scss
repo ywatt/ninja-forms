@@ -13,6 +13,10 @@
     }
     .nf-settings-title {
         padding: 10px 20px 0;
+        h1 {
+            display: inline;
+            float: left;
+        }
     }
     .nf-settings-content-wrap {
         overflow: hidden;
@@ -34,10 +38,25 @@
     }
     .updated {
         background: #eee;
+        float: left;
+        margin-top: 8px;
         padding: 8px 12px;
-        position: absolute;
-        top: 50px;
-        left: 0;
-        right:0;
+        width: 200px;
+    }
+    .howto {
+        font-weight: normal;
+        padding: 10px;
+    }
+    .form-table {
+        th, td {
+            padding: 15px 10px;
+        }
+    }
+}
+
+.nf-rte {
+    label {
+        display: block;
+        margin-bottom: 20px;
     }
 }

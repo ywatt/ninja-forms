@@ -568,19 +568,22 @@ function ninja_forms_admin_edit_form(){
 				case 'checkbox':
 					%>
 					<th>
-						<label>
+						<label for="<%= setting.id %>">
 							<%= setting.get('label') %>
 						</label>
 					</th>
 					<td>
 						<input type="checkbox" id="<%= setting.id %>" class="<%= setting.get('class') %>" value="1" <% if ( value == 1 ) { %>checked<%}%>>
+						<span class="howto">
+							<%= setting.get('desc') %>
+						</span>
 					</td>
 					<%
 					break;
 				case 'select':
 					%>
 					<th>
-						<label>
+						<label for="<%= setting.id %>">
 							<%= setting.get('label') %>
 						</label>
 					</th>
@@ -594,76 +597,90 @@ function ninja_forms_admin_edit_form(){
 						});
 						%>
 						</select>
+						<span class="howto">
+							<%= setting.get('desc') %>
+						</span>
 					</td>
 					<%
 					break;
 				case 'textarea':
 					%>
 					<th colspan="2">
-						<label>
+						<label for="<%= setting.id %>">
 							<%= setting.get('label') %>
 						</label>
 						<textarea id="<%= setting_id %>" class="<%= setting.get('class') %>"><%= value %></textarea>
+						<span class="howto">
+							<%= setting.get('desc') %>
+						</span>
 					</th>
 					<%
 					break;
 				case 'text':
 					%>
 					<th>
-						<label>
+						<label for="<%= setting.id %>">
 							<%= setting.get('label') %>
 						</label>
 					</th>
 					<td>
 						<input type="text" id="<%= setting_id %>" class="<%= setting.get('class') %>" value="<%= value %>" />
+						<span class="howto">
+							<%= setting.get('desc') %>
+						</span>
 					</td>
 					<%
 					break;
 				case 'repeater-text':
 
 					%>
-					<label>
-						<%= setting.get('label') %> <a href="#" id="<%= setting_id %>" class="repeater-add">Add New</a> <br />
-					</label>
-					<span id="<%= setting_id %>_span">
-						<%
-						if ( typeof value === 'object' ) {
-							_.each(value, function(val) {
+					<th>
+						<label for="<%= setting.id %>">
+							<%= setting.get('label') %> <a href="#" id="<%= setting_id %>" class="repeater-add">Add New</a> <br />
+						</label>
+					</th>
+					<td>
+						<span id="<%= setting_id %>_span">
+							<%
+							if ( typeof value === 'object' ) {
+								_.each(value, function(val) {
+									%>
+									<span>
+										<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text" value="<%= val %>" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="repeater-remove">X</a>
+										<br />
+									</span>
+									<%
+								});
+							} else {
 								%>
 								<span>
-									<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text" value="<%= val %>" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="repeater-remove">X</a>
+									<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text" value="" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="">X</a>
 									<br />
 								</span>
 								<%
-							});
-						} else {
+							}
 							%>
-							<span>
-								<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text" value="" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="">X</a>
-								<br />
-							</span>
-							<%
-						}
-						%>
 						</span>
+					</td>
 					<%
 					break;
 				case 'rte':
 					%>
 					<th class="nf-rte" colspan="2">
-						<label>
+						<label for="<%= setting.id %>">
 							<%= setting.get('label') %>
 						</label>
 						<div id="<%= setting_id %>_replace"></div>
+						<span class="howto">
+							<%= setting.get('desc') %>
+						</span>
 					</th>
 					<%
 					break;
 
 			}
 			%>
-			<span class="howto">
-				<%= setting.get('desc') %>
-			</span>
+
 		</tr>
 		<% }); %>
 		</table>
