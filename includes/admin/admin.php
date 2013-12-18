@@ -544,36 +544,47 @@ function ninja_forms_admin_edit_form(){
 
 			<div class="nf-settings-desc-desc"></div>
 
-			<div class="nf-settings-content" id="my-content-id" style="overflow:scroll;">
+			<div class="nf-settings-content-wrap">
+				<div class="nf-settings-content" id="my-content-id">
 
-				<p>Place your settings here.</p>
+					<p>Place your settings here.</p>
 
+				</div>
 			</div>
 		</div>
 	</div>
 
   </div>
 	<script type="text/html" id="tmpl-form-settings">
-		<br />
+		<table class="form-table">
 		<% _.each(settings, function(setting){
 			var setting_id = setting.get( 'id' );
 			var value = setting.get( 'current_value' );
 			%>
-			<div>
+			<tr class= "nf-<%= setting.get('type') %>">
 			<%
 			switch( setting.get('type') ) {
+
 				case 'checkbox':
 					%>
-					<label>
+					<th>
+						<label>
+							<%= setting.get('label') %>
+						</label>
+					</th>
+					<td>
 						<input type="checkbox" id="<%= setting.id %>" class="<%= setting.get('class') %>" value="1" <% if ( value == 1 ) { %>checked<%}%>>
-						<%= setting.get('label') %>
-					</label>
+					</td>
 					<%
 					break;
 				case 'select':
 					%>
-					<label>
-						<%= setting.get('label') %>
+					<th>
+						<label>
+							<%= setting.get('label') %>
+						</label>
+					</th>
+					<td>
 						<select id="<%= setting_id %>" class="<%= setting.get('class') %>">
 						<%
 						_.each(setting.get('options'), function(option) {
@@ -583,23 +594,29 @@ function ninja_forms_admin_edit_form(){
 						});
 						%>
 						</select>
-					</label>
+					</td>
 					<%
 					break;
 				case 'textarea':
 					%>
-					<label>
-						<%= setting.get('label') %>
+					<th colspan="2">
+						<label>
+							<%= setting.get('label') %>
+						</label>
 						<textarea id="<%= setting_id %>" class="<%= setting.get('class') %>"><%= value %></textarea>
-					</label>
+					</th>
 					<%
 					break;
 				case 'text':
 					%>
-					<label>
-						<%= setting.get('label') %>
+					<th>
+						<label>
+							<%= setting.get('label') %>
+						</label>
+					</th>
+					<td>
 						<input type="text" id="<%= setting_id %>" class="<%= setting.get('class') %>" value="<%= value %>" />
-					</label>
+					</td>
 					<%
 					break;
 				case 'repeater-text':
@@ -633,17 +650,23 @@ function ninja_forms_admin_edit_form(){
 					break;
 				case 'rte':
 					%>
-					<%= setting.get('label') %>
-					<div id="<%= setting_id %>_replace"></div>
+					<th class="nf-rte" colspan="2">
+						<label>
+							<%= setting.get('label') %>
+						</label>
+						<div id="<%= setting_id %>_replace"></div>
+					</th>
 					<%
 					break;
+
 			}
 			%>
 			<span class="howto">
 				<%= setting.get('desc') %>
 			</span>
-			</div>
+		</tr>
 		<% }); %>
+		</table>
 	</script>
 	<div id="hidden_editor_div" class="hidden">
 		<?php wp_editor( 'test', 'hidden_editor' ); ?>
