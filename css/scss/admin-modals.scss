@@ -1,0 +1,25 @@
+.modal {
+    background: #fff;
+    padding: 30px;
+}
+
+.ninja-forms .modal {
+    margin: 0 !important;
+    top: 100px !important;
+    bottom: 80px !important;
+    left: 200px !important;
+    right: 80px !important;
+    @media (min-width: 1700px) {
+        left: 22% !important;
+        right: 15% !important;
+    }
+    @media (max-width: 900px) {
+        left: 100px !important;
+    }
+    @media (max-width: 782px) {
+        top: 46px !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+}

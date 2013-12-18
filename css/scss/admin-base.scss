@@ -1,0 +1,20 @@
+.icon32 {
+    display: inline-block;
+    float: left;
+    height: 34px;
+    margin: 7px 8px 0 0;
+    width: 35px;
+}
+
+.ninja-forms *,
+.ninja-forms *:after,
+.ninja-forms *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ninja-forms #wpbody {
+    margin: 0 20px 0 2px;
+}

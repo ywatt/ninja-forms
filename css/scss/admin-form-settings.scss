@@ -1,0 +1,21 @@
+.ninja-forms-edit {
+    .nf-settings {
+        margin-left: 200px;
+        position: relative;
+    }
+    .nf-settings-title {
+        padding: 10px 20px 0;
+    }
+    .nf-settings-content {
+        padding: 20px;
+        overflow: scroll;
+    }
+    .updated {
+        background: #eee;
+        padding: 8px 12px;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right:0;
+    }
+}

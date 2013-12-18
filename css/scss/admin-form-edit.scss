@@ -1,0 +1,108 @@
+[class*='ninja-col-'] {
+    float: left;
+    padding: 0 5px;
+    position: relative;
+}
+.nf-left-handlebar,
+.nf-right-handlebar {
+    background: #ccc;
+    cursor:e-resize;
+    width: 6px;
+}
+
+.ninja-col-1-1 { width: 100%; }
+
+.ninja-col-1-2 { width: 50%; }
+
+.ninja-col-1-3 { width: 33.33%; }
+.ninja-col-2-3 { width: 66.66%; }
+
+.ninja-col-1-4 { width: 25%; }
+.ninja-col-2-4 { width: 50%; }
+.ninja-col-3-4 { width: 75%; }
+
+.ninja-row { width: auto; margin: 0 auto; padding: 0; }
+.ninja-row li { margin-bottom: 0; }
+.ninja-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.ninja-forms-admin-field {
+    background: #ccc;
+    cursor:move;
+    /*border: 1px solid #ccc;
+    /*margin-bottom: 10px;*/
+    padding: 5px 20px;
+    &:after {
+        clear: both;
+        content: "";
+        display: table;
+    }
+}
+
+.ninja-forms-admin-group {
+    border: 2px dashed #D65027;
+    cursor:move;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+.ninja-forms-admin-group>label {
+    padding-left: 25px;
+    position: relative;
+}
+.ninja-forms-admin-group>label:after {
+    left: 0;
+    top: -2px;
+    content: '\f140';
+    border: none;
+    background: none;
+    font: normal 20px/1 'dashicons';
+    speak: none;
+    display: block;
+    padding: 0;
+    text-indent: 0;
+    text-align: center;
+    position: absolute;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: none !important;
+}
+
+.ninja-forms-admin-field:hover {
+    background: #ddd;
+}
+.ninja-forms-admin-field label,
+.ninja-forms-admin-field input {
+    cursor:move;
+    font-weight: bold;
+}
+.label-above label {
+    display: block;
+}
+.label-above input[type=text] {
+    width: 100%;
+}
+.nf-footer-left {
+    float: left;
+}
+.nf-footer-right {
+    color: #777;
+    float: right;
+}
+
+[class*='ninja-placeholder-'] {
+    background: #f1f1f1;
+    height: 80px;
+    float: left;
+    padding: 0 5px;
+    position: relative;
+}
+
+.ninja-placeholder-1-1 { width: 100%; }
+.ninja-placeholder-1-2 { width: 50%; }
+.ninja-placeholder-1-3 { width: 33.33%; }
+.ninja-placeholder-2-3 { width: 66.66%; }
+.ninja-placeholder-1-4 { width: 25%; }
+.ninja-placeholder-2-4 { width: 50%; }
+.ninja-placeholder-3-4 { width: 75%; }
