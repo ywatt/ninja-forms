@@ -180,46 +180,43 @@ function ninja_forms_admin_all_forms() {
 	</table>
 
   <div id="new_form" style="display:none;">
-  	<a class="media-modal-close" href="#" title="Close">
+<!--   	<a class="media-modal-close" href="#close-modal" rel="modal:close" title="Close">
   		<span class="media-modal-icon"></span>
-  	</a>
+  	</a> -->
   	<div class="nf-new-form wp-core-ui media-frame" id="">
-		<div class="theme-header">
-			<div alt="Close overlay" class="close dashicons dashicons-no"></div>
-			<div alt="Show previous theme" class="left dashicons dashicons-no disabled"></div>
-			<div alt="Show next theme" class="right dashicons dashicons-no"></div>
+		<div class="wizard-header">
+			<div alt="Close overlay" href="#close-modal" rel="modal:close" class="close dashicons dashicons-no"></div>
+			<div alt="Show previous" class="left dashicons dashicons-no disabled"></div>
+			<div alt="Show next" class="right dashicons dashicons-no"></div>
 		</div>
-		<div class="ninja-row" id="new-form-creation" style="overflow:scroll;">
-			
-			<div class="ninja-col-1-2">
-				<div class="inside">
-					<p><input type="text" id="ninja_forms_new_form_title" class="widefat code" value="" placeholder="Form Title"></p>
-					<p><a href="#" id="ninja_forms_new_form_wizard" class="button-primary"><?php _e( 'Creation Wizard, Please', 'ninja-forms' );?></a>
-						<a href="#" id="ninja_forms_new_form_create" class="button-secondary"><?php _e( 'Start Editing, Skip The Wizard', 'ninja-forms' );?></a></p>
-					<span class='hidden'><?php wp_editor('hi','hi');?></span>
+		<div id="new-form-creation">
+			<div class="ninja-row">
+				<div class="ninja-col-1-2 nf-wz-options">
+					<div class="inside">
+						<p><input type="text" id="ninja_forms_new_form_title" class="widefat code" value="" placeholder="Form Title"></p>
+						<p class="wizard-section-actions"><a href="#" id="ninja_forms_new_form_wizard" class="button-primary"><?php _e( 'Creation Wizard, Please', 'ninja-forms' );?></a>
+							<a href="#" id="ninja_forms_new_form_create" class="button-secondary"><?php _e( 'Start Editing, Skip The Wizard', 'ninja-forms' );?></a></p>
+						<span class='hidden'><?php wp_editor('hi','hi');?></span>
+					</div>
 				</div>
-			</div>
-			<div class="ninja-col-1-2">
-				<div class="inside">
-					<h1><?php _e( 'Create A New Form', 'ninja-forms' );?></h1>
-					<div class="theme-update-message">
-						<h4 class="theme-update">Update Available</h4>
-						<p><strong>There is a new version of Twenty Eleven available. <a href="https://wordpress.org/themes/twentyeleven?TB_iframe=true&amp;width=1024&amp;height=800" class="thickbox" title="Twenty Eleven">View version 1.7 details</a> or <a href="http://localhost:8888/wp-dev/wp-admin/update.php?action=upgrade-theme&amp;theme=twentyeleven&amp;_wpnonce=d74747fd1f" onclick="if ( confirm('Updating this theme will lose any customizations you have made. \'Cancel\' to stop, \'OK\' to update.') ) {return true;}return false;">update now</a>.</strong></p>
-						<p class="theme-description">The 2011 theme for WordPress is sophisticated, lightweight, and adaptable. Make it yours with a custom menu, header image, and background — then go further with available theme options for light or dark color scheme, custom link colors, and three layout choices. Twenty Eleven comes equipped with a Showcase page template that transforms your front page into a showcase to show off your best content, widget support galore (sidebar, three footer areas, and a Showcase page widget area), and a custom “Ephemera” widget to display your Aside, Link, Quote, or Status posts. Included are styles for print and for the admin editor, support for featured images (as custom header images on posts and pages and as large images on featured “sticky” posts), and special styles for six different post formats.</p>
-						
+				<div class="ninja-col-1-2 nf-wz-instructions">
+					<div class="inside">
+						<h3><?php _e( 'Create A New Form', 'ninja-forms' );?></h3>
+						<div class="theme-update-message">
+							<h4 class="theme-update">Update Available</h4>
+							<p><strong>There is a new version of Twenty Eleven available. <a href="https://wordpress.org/themes/twentyeleven?TB_iframe=true&amp;width=1024&amp;height=800" class="thickbox" title="Twenty Eleven">View version 1.7 details</a> or <a href="http://localhost:8888/wp-dev/wp-admin/update.php?action=upgrade-theme&amp;theme=twentyeleven&amp;_wpnonce=d74747fd1f" onclick="if ( confirm('Updating this theme will lose any customizations you have made. \'Cancel\' to stop, \'OK\' to update.') ) {return true;}return false;">update now</a>.</strong></p>
+						</div>
+							<p class="theme-description">The 2011 theme for WordPress is sophisticated, lightweight, and adaptable. Make it yours with a custom menu, header image, and background — then go further with available theme options for light or dark color scheme, custom link colors, and three layout choices. Twenty Eleven comes equipped with a Showcase page template that transforms your front page into a showcase to show off your best content, widget support galore (sidebar, three footer areas, and a Showcase page widget area), and a custom “Ephemera” widget to display your Aside, Link, Quote, or Status posts. Included are styles for print and for the admin editor, support for featured images (as custom header images on posts and pages and as large images on featured “sticky” posts), and special styles for six different post formats.</p>
 					</div>
 				</div>
 			</div>
-			
 		</div>
-		<div class="theme-actions">
-			<div class="active-theme">
-				<a href="#" class="button button-secondary">Previous</a>
-				<a class="button button-primary" href="#">Next</a>			
-			</div>
-		</div>
-	</div>
 
+	</div>
+	<div class="wizard-actions">
+		<a href="#" class="button button-secondary">Previous</a>
+		<a class="button button-primary" href="#">Next</a>
+	</div>
   </div>
   <?php
   if ( isset( $_REQUEST['form_id'] ) and $_REQUEST['form_id'] == 'new' ) {

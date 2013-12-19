@@ -10,7 +10,10 @@
     left: 200px !important;
     right: 80px !important;
     .inside {
-        padding: 20px;
+        padding: 30px 50px;
+    }
+    .close-modal {
+        display: none;
     }
     @media (min-width: 1700px) {
         left: 22% !important;
