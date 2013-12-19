@@ -315,7 +315,7 @@ function register_settings_tabs() {
 	$args = array(
 		'id' => 'display_settings',
 		'settings' => array(
-			'label' => 'Display Settings',
+			'label' => 'Display',
 			'class' => '',
 			'priority' => 'core',
 			'desc' => __( 'These settings affect how forms are displayed on the front-end.', 'ninja-forms' ),
@@ -326,7 +326,7 @@ function register_settings_tabs() {
 	$args = array(
 		'id' => 'success_settings',
 		'settings' => array(
-			'label' => 'After Submission Settings',
+			'label' => 'After Submission',
 			'priority' => 'core',
 			'desc' => __( 'These settings affect what happens after a form is submitted.', 'ninja-forms' ),
 		),
@@ -336,7 +336,7 @@ function register_settings_tabs() {
 	$args = array(
 		'id' => 'user_email_settings',
 		'settings' => array(
-			'label' => 'User Email Settings',
+			'label' => 'User Email Notification',
 			'priority' => 'default',
 			'desc' => __( 'User email settings description.', 'ninja-forms' ),
 		),
@@ -346,7 +346,7 @@ function register_settings_tabs() {
 	$args = array(
 		'id' => 'admin_email_settings',
 		'settings' => array(
-			'label' => 'Admin Email Settings',
+			'label' => 'Admin Email Notification',
 			'priority' => 'default',
 			'desc' => __( 'Admin email settings description.', 'ninja-forms' ),
 		),
@@ -366,7 +366,7 @@ function register_settings_tabs() {
 	$args = array(
 		'id' => 'test_setting',
 		'settings' => array(
-			'label' => 'Test Settings',
+			'label' => 'Test',
 			'priority' => 'low',
 			'desc' => __( 'This is just a test settings page.', 'ninja-forms' ),
 		),
