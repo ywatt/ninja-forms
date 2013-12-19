@@ -9,6 +9,12 @@ function ninja_forms_add_menu(){
 		$edit_form_parent = null;
 	}
 
+	if ( isset ( $_REQUEST['form_id'] ) ) {
+		$form_id = $_REQUEST['form_id'];
+	} else {
+		$form_id = '';
+	}
+
 	$capabilities = 'manage_options';
 	$capabilities = apply_filters( 'ninja_forms_admin_menu_capabilities', $capabilities );
 
@@ -30,9 +36,13 @@ function ninja_forms_add_menu(){
 
 	add_action('admin_print_styles-' . $all_forms, 'ninja_forms_admin_css');
 	add_action('admin_print_styles-' . $all_forms, 'ninja_forms_admin_js');
+	if ( $form_id == 'new' ) {
+		add_action('admin_print_styles-' . $all_forms, 'ninja_forms_new_form_js');
+	}
 
 	add_action('admin_print_styles-' . $edit_form, 'ninja_forms_admin_css');
 	add_action('admin_print_styles-' . $edit_form, 'ninja_forms_admin_js');
+	add_action('admin_print_styles-' . $edit_form, 'ninja_forms_edit_form_js');
 	/*
 	add_action('admin_print_styles-' . $settings, 'ninja_forms_admin_js');
 	add_action('admin_print_styles-' . $settings, 'ninja_forms_admin_css');

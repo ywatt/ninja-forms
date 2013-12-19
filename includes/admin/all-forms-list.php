@@ -192,40 +192,96 @@ function ninja_forms_admin_all_forms() {
 		<div id="new-form-creation">
 			<div class="ninja-row">
 				<div class="ninja-col-1-2 nf-wz-options">
-					<div class="inside">
+					<div class="inside" id="wizard-left">
 						<p><input type="text" id="ninja_forms_new_form_title" class="widefat code" value="" placeholder="Form Title"></p>
-						<p class="wizard-section-actions"><a href="#" id="ninja_forms_new_form_wizard" class="button-primary"><?php _e( 'Creation Wizard, Please', 'ninja-forms' );?></a>
+						<p class="wizard-section-actions"><a href="#" id="new-form-wizard" class="button-primary"><?php _e( 'Creation Wizard, Please', 'ninja-forms' );?></a>
 							<a href="#" id="ninja_forms_new_form_create" class="button-secondary"><?php _e( 'Start Editing, Skip The Wizard', 'ninja-forms' );?></a></p>
 						<span class='hidden'><?php wp_editor('hi','hi');?></span>
 					</div>
 				</div>
 				<div class="ninja-col-1-2 nf-wz-instructions">
-					<div class="inside">
+					<div class="inside" id="wizard-right">
 						<h3><?php _e( 'Create A New Form', 'ninja-forms' );?></h3>
-						<div class="theme-update-message">
-							<h4 class="theme-update">Update Available</h4>
-							<p><strong>There is a new version of Twenty Eleven available. <a href="https://wordpress.org/themes/twentyeleven?TB_iframe=true&amp;width=1024&amp;height=800" class="thickbox" title="Twenty Eleven">View version 1.7 details</a> or <a href="http://localhost:8888/wp-dev/wp-admin/update.php?action=upgrade-theme&amp;theme=twentyeleven&amp;_wpnonce=d74747fd1f" onclick="if ( confirm('Updating this theme will lose any customizations you have made. \'Cancel\' to stop, \'OK\' to update.') ) {return true;}return false;">update now</a>.</strong></p>
+						<div class="wizard-update-message">
+							<p><strong>To get started, enter a form title and then select whether or not you'd like to use the form creation wizard.</strong></p>
 						</div>
-							<p class="theme-description">The 2011 theme for WordPress is sophisticated, lightweight, and adaptable. Make it yours with a custom menu, header image, and background — then go further with available theme options for light or dark color scheme, custom link colors, and three layout choices. Twenty Eleven comes equipped with a Showcase page template that transforms your front page into a showcase to show off your best content, widget support galore (sidebar, three footer areas, and a Showcase page widget area), and a custom “Ephemera” widget to display your Aside, Link, Quote, or Status posts. Included are styles for print and for the admin editor, support for featured images (as custom header images on posts and pages and as large images on featured “sticky” posts), and special styles for six different post formats.</p>
+						<p class="wizard-description">The form creation wizard will assist you with all of the steps necessary to create a basic form. Once you have completed the wizard, you will be taken to the form editing page where you can make more changes to your form.</p>
 					</div>
 				</div>
 			</div>
 		</div>
 
 	</div>
-	<div class="wizard-actions">
-		<a href="#" class="button button-secondary">Previous</a>
-		<a class="button button-primary" href="#">Next</a>
+	<div class="wizard-actions" id="wizard-actions">
+		&nbsp;
 	</div>
   </div>
   <?php
   if ( isset( $_REQUEST['form_id'] ) and $_REQUEST['form_id'] == 'new' ) {
   	?>
-  	<script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$('#btn_new_form').click();
-		});
-  	</script>
+	<script type="text/html" id="tmpl-wizard-left">
+		<table class="form-table">
+			<tr>
+				<th>
+					<label for="">
+						Do you want to add this form to the bottom of a page?
+					</label>
+				</th>
+				<td>
+					<select id="" class="">
+						<option value="">- No</option>
+						<option value="">Hello World</option>
+						<option value="">Why do you ask?</option>
+						<option value="">Contact Us</option>
+					</select>
+					<span class="howto">
+						It will display just below any content you may have on the page.
+					</span>
+				</td>
+			</tr>			
+			<tr>
+				<th>
+					<label for="">
+						Would you like the form to submit without reloading the page?
+					</label>
+				</th>
+				<td>
+					<input type="checkbox" name="" id="" class="">
+					<span class="howto">
+						This will let the form submit without the user ever leaving the page that the form is attached to. Once the form is submitted, they'll see a success message that we'll setup in a moment.
+					</span>
+				</td>
+			</tr>			
+			<tr>
+				<th>
+					<label for="">
+						Would you like to show the title of the form above the form itself?
+					</label>
+				</th>
+				<td>
+					<input type="checkbox" name="" id="" class="">
+					<span class="howto">
+						If this box is checked, we'll output the form's title just before the actual form.
+					</span>
+				</td>
+			</tr>
+
+		</table>
+	</script>	
+
+	<script type="text/html" id="tmpl-wizard-right">
+		<h3><?php _e( 'Display Settings', 'ninja-forms' );?></h3>
+		<div class="wizard-update-message">
+			<p><strong>First, we&#39;ll take a look at some display settings.</strong></p>
+		</div>
+		<p class="wizard-description">These settings will affect both how the form is shown and how it is submitted. The video below will explain these settings further.</p>
+		<p class="wizard-description"><iframe width="640" height="390" src="//www.youtube.com/embed/hVfPmKzqYpk" frameborder="0" allowfullscreen></iframe></p>
+	</script>
+
+	<script type="text/html" id="tmpl-wizard-actions">
+		<a class="button button-secondary" href="#" >Previous</a>
+		<a class="button button-primary" href="#">Next</a>
+	</script>
 
   	<?php
 

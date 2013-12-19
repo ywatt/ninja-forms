@@ -43,7 +43,7 @@ function ninja_forms_admin_js(){
 
 	wp_enqueue_script('ninja-forms-admin',
 	NINJA_FORMS_URL .'/js/dev/ninja-forms-admin.js',
-	array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable'));
+	array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable', 'backbone' ));
 
 	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array('date_format' => $date_format));
 	if ( isset ( $_REQUEST['form_id'] ) ) {
@@ -52,12 +52,19 @@ function ninja_forms_admin_js(){
 		$form_id = '';
 	}
 	wp_localize_script( 'ninja-forms-admin', 'form_id', $form_id );
-	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_rest_url', admin_url( 'admin.php?page=ninja-forms' ) );
 	wp_localize_script( 'ninja-forms-admin', 'admin_url', admin_url( 'admin.php' ) );
-	/*
-	wp_enqueue_script('jquery.ui.nestedSortable',
-	NINJA_FORMS_URL .'/js/dev/jquery.ui.nestedSortable.js',
-	array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'));
-	*/
-	//wp_localize_script( 'ninja_forms_admin_js', 'settings', array( 'plugin_url' => NINJA_FORMS_URL, 'help_size' => $plugin_settings['help_size'], 'help_color' => $plugin_settings['help_color'], 'admin_help' => $plugin_settings['admin_help']) );
+}
+
+function ninja_forms_new_form_js() {
+	wp_enqueue_script('ninja-forms-new-form',
+		NINJA_FORMS_URL .'/js/dev/new-form.js',
+		array( 'jquery', 'ninja-forms-admin' ) );
+	wp_localize_script( 'ninja-forms-new-form', 'ninja_forms_rest_url', admin_url( 'admin.php?page=ninja-forms' ) );
+}
+
+function ninja_forms_edit_form_js() {
+	wp_enqueue_script('ninja-forms-edit-form',
+		NINJA_FORMS_URL .'/js/dev/edit-form.js',
+		array( 'jquery', 'ninja-forms-admin' ) );
+	wp_localize_script( 'ninja-forms-edit-form', 'ninja_forms_rest_url', admin_url( 'admin.php?page=ninja-forms' ) );
 }
