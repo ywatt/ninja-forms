@@ -18,7 +18,7 @@ function ninja_forms_register_field_textbox(){
 			array(
 				'type' => 'checkbox',
 				'name' => 'send_email',
-				'label' => __( 'Send a repsonse email to this email address?', 'ninja-forms' ),
+				'label' => __( 'Send a response email to this email address?', 'ninja-forms' ),
 			),
 			// array(
 			// 	'type' => 'checkbox',
