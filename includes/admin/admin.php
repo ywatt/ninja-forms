@@ -590,7 +590,7 @@ function ninja_forms_admin_edit_form(){
 					</td>
 					<%
 					break;
-				case 'select':
+				case 'dropdown':
 					%>
 					<th>
 						<label for="<%= setting.id %>">
@@ -603,6 +603,31 @@ function ninja_forms_admin_edit_form(){
 						_.each(setting.get('options'), function(option) {
 							%>
 							<option value="<%= option.value %>" <% if ( value == option.value ) { %> selected <% } %>><%= option.name %></option>
+							<%
+						});
+						%>
+						</select>
+						<span class="howto">
+							<%= setting.get('desc') %>
+						</span>
+					</td>
+					<%
+					break;
+				case 'radio':
+					%>
+					<th>
+						<span>
+							<%= setting.get('label') %>
+						</span>
+					</th>
+					<td>
+						<%
+						_.each(setting.get('options'), function(option) {
+							%>
+							<label for="<%= setting.id %>">
+								<input type="radio" value="<%= option.value %>" <% if ( value == option.value ) { %> checked <% } %> id="<%= setting_id %>" class="<%= setting.get('class') %>" value="<%= option.value %>">
+								<%= option.name %>
+							</label>
 							<%
 						});
 						%>

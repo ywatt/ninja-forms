@@ -48,8 +48,16 @@
         padding: 10px;
     }
     .form-table {
-        th, td {
-            padding: 15px 10px;
+        &>tr {
+            th, td {
+                padding: 15px 10px;
+            }
+        }
+    }
+    .mceToolbar {
+        .mceButton {
+            width: auto !important;
+            height: auto !important;
         }
     }
 }
