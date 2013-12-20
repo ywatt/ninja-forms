@@ -236,8 +236,11 @@
 .ninja-forms-edit .howto {
   font-weight: normal;
   padding: 10px; }
-.ninja-forms-edit .form-table th, .ninja-forms-edit .form-table td {
+.ninja-forms-edit .form-table > tr th, .ninja-forms-edit .form-table > tr td {
   padding: 15px 10px; }
+.ninja-forms-edit .mceToolbar .mceButton {
+  width: auto !important;
+  height: auto !important; }
 
 .nf-rte label {
   display: block;
