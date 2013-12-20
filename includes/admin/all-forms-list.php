@@ -240,7 +240,7 @@ function ninja_forms_admin_all_forms() {
 						It will display just below any content you may have on the page.
 					</span>
 				</td>
-			</tr>			
+			</tr>
 			<tr>
 				<th>
 					<label for="">
@@ -253,7 +253,7 @@ function ninja_forms_admin_all_forms() {
 						This will let the form submit without the user ever leaving the page that the form is attached to. Once the form is submitted, they'll see a success message that we'll setup in a moment.
 					</span>
 				</td>
-			</tr>			
+			</tr>
 			<tr>
 				<th>
 					<label for="">
@@ -269,7 +269,7 @@ function ninja_forms_admin_all_forms() {
 			</tr>
 
 		</table>
-	</script>	
+	</script>
 
 	<script type="text/html" id="tmpl-wizard-right">
 		<h3><?php _e( 'Display Settings', 'ninja-forms' );?></h3>
@@ -277,7 +277,11 @@ function ninja_forms_admin_all_forms() {
 			<p><strong>First, we&#39;ll take a look at some display settings.</strong></p>
 		</div>
 		<p class="wizard-description">These settings will affect both how the form is shown and how it is submitted. The video below will explain these settings further.</p>
-		<p class="wizard-description"><iframe width="640" height="390" src="//www.youtube.com/embed/hVfPmKzqYpk" frameborder="0" allowfullscreen></iframe></p>
+		<p class="wizard-description">
+			<div class="videoWrapper">
+				<iframe width="640" height="390" src="//www.youtube.com/embed/hVfPmKzqYpk" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</p>
 	</script>
 
 	<script type="text/html" id="tmpl-wizard-actions">
