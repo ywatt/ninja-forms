@@ -108,7 +108,7 @@ function ninja_forms_field_text_edit( $field_id, $data ){
 	if( isset( $plugin_settings['date_format'] ) ){
 		$date_format = $plugin_settings['date_format'];
 	}else{
-		$date_format = "$";
+		$date_format = "m/d/Y";
 	}
 	$custom = '';
 	// Default Value
