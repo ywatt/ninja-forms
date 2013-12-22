@@ -70,6 +70,12 @@ function ninja_forms_register_field_textbox(){
 			array(
 				'type' => 'hidden',
 				'name' => 'user_info_field_group',
+				'default_value' => 1,
+			),
+			array(
+				'type' => 'checkbox',
+				'label' => __( 'This is the user\'s state', 'ninja-forms' ),
+				'name' => 'user_state',
 			),
 		),
 		'display_function' => 'ninja_forms_field_text_display',
