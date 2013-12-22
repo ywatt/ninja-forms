@@ -186,6 +186,7 @@ function ninja_forms_admin_all_forms() {
   	<div class="nf-new-form wp-core-ui media-frame" id="">
 		<div class="wizard-header">
 			<div alt="Close overlay" href="#close-modal" rel="modal:close" class="close dashicons dashicons-no"></div>
+			<div>Test</div>
 			<!--
 			<div alt="Show previous" class="left dashicons dashicons-no disabled"></div>
 			<div alt="Show next" class="right dashicons dashicons-no"></div>
