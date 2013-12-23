@@ -313,6 +313,7 @@ function ninja_forms_get_field_class($field_id){
 		$user_info_group_class = '';
 	}
 
+	$address_class = '';
 	// Check to see if we are dealing with an address field.
 	if ( isset ( $data['user_address_1'] ) and $data['user_address_1'] == 1 ) {
 		$address_class = 'address address1';
