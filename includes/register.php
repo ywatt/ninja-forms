@@ -296,6 +296,26 @@ function ninja_forms_register_form_settings( $args = array() ) {
 	}
 }
 
+function ninja_forms_rest_put_filter( $value, $form_setting, $form_id ) {
+	global $ninja_forms_form_settings;
+	if ( is_array ( $ninja_forms_form_settings ) ) {
+		foreach ( $ninja_forms_form_settings as $tab => $settings ) {
+			foreach ( $settings as $id => $setting ) {
+				if ( $id == $form_setting and isset ( $setting['put_filter'] ) ) {
+					if ( is_string( $setting['put_filter'] ) and function_exists ( $setting['put_filter'] ) ) {
+						$value = call_user_func( $setting['put_filter'], $value, $form_setting, $form_id );
+					} else if ( is_callable( $setting['put_filter'] ) ) {
+						$value = $setting['put_filter']( $value, $form_setting, $form_id );
+					}
+				}
+			}
+		}	
+	}
+	return $value;
+}
+
+add_filter( 'ninja_forms_rest_put_value', 'ninja_forms_rest_put_filter', 10, 3 );
+
 function ninja_forms_register_form_settings_tab( $args ) {
 	global $ninja_forms_form_settings_tabs;
 
@@ -419,6 +439,22 @@ function register_forms_settings() {
 			'show_title' => array(
 				'type' => 'checkbox',
 				'label' => __( 'Output the form title above form?', 'ninja-forms' ),
+			),
+			'test' => array(
+				'custom' => true,
+				'type' => 'test',
+				'template' => '<th>
+						<label for="<%= setting.id %>">
+							Hello World
+						</label>
+					</th>
+					<td>
+						<input type="text" id="<%= setting_id %>" class="<%= setting.get(\'class\') %>" value="<%= value %>" />
+						<span class="howto">
+							My Test Description!
+						</span>
+					</td>',
+				//'put_filter' => function( $value, $form_setting, $form_id ) { return $value; }
 			),
 		),
 	);

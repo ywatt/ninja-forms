@@ -72,7 +72,7 @@ function ninja_forms_add_menu(){
 add_action( 'admin_menu', 'ninja_forms_add_menu' );
 
 function ninja_forms_admin_edit_form(){
-	global $wpdb, $ninja_forms_form_settings_tabs;
+	global $wpdb, $ninja_forms_form_settings_tabs, $ninja_forms_form_settings;
 
 	do_action( 'ninja_forms_admin_init' );
 
@@ -712,7 +712,25 @@ function ninja_forms_admin_edit_form(){
 					</th>
 					<%
 					break;
+				<?php
+				// Loop through our registered form settings and output any custom backbone templates
+				if ( is_array ( $ninja_forms_form_settings ) ) {
+					foreach ( $ninja_forms_form_settings as $tab => $settings ) {
+						foreach ( $settings as $slug => $setting ) {
+							if ( isset ( $setting['custom'] ) and $setting['custom'] === true ) {
+								?>
+								case '<?php echo $setting['type'];?>':
+								%>
+								<?php echo $setting['template'];?>
+								<%
+								break;
 
+								<?php
+							}
+						}
+					}
+				}
+				?>
 			}
 			%>
 
@@ -721,7 +739,7 @@ function ninja_forms_admin_edit_form(){
 		</table>
 	</script>
 	<div id="hidden_editor_div" class="hidden">
-		<?php wp_editor( 'test', 'hidden_editor' ); ?>
+		<?php wp_editor( 'hidden_editor', 'hidden_editor' ); ?>
 	</div>
 <?php
 

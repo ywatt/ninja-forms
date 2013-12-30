@@ -33,6 +33,7 @@ jQuery(document).ready(function($) {
 		    $('.updated').hide().html('Saved').fadeIn();
 	        // Hide the div after 3 seconds
     		savedNoticeTimeout = setTimeout( "jQuery('.updated').fadeOut();",3000 );
+    		formSettingsView.render();
 		}
 	});
 

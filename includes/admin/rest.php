@@ -256,6 +256,8 @@ class Form_Settings_API extends Ninja_Forms_Admin_Rest_API
                         $current_value = '';
                     }
 
+                    $current_value = apply_filters( 'ninja_forms_rest_get_value', $current_value, $id, $form_id );
+
                     $args[] = array(
                         'id' => $id,
                         'type' => $type,
@@ -274,6 +276,7 @@ class Form_Settings_API extends Ninja_Forms_Admin_Rest_API
      			$current_value = $data->current_value;
      			$form_setting = $data->id;
      			$form_id = $data->form_id;
+                $current_value = apply_filters( 'ninja_forms_rest_put_value', $current_value, $form_setting, $form_id );
      			$args = array(
      				'form_id' => $form_id,
      				'update' => array(
@@ -281,6 +284,8 @@ class Form_Settings_API extends Ninja_Forms_Admin_Rest_API
      				),
      			);
     			ninja_forms_update_form_setting( $args );
+                $current_value = apply_filters( 'ninja_forms_rest_put_return_value', $current_value, $form_setting, $form_id );
+                $data->current_value = $current_value;
      			return $data;
      			break;
 		}
