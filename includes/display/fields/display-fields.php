@@ -307,30 +307,30 @@ function ninja_forms_get_field_class($field_id){
 	}
 
 	// Check to see if we are dealing with a field that has the user_info_field_group set.
-	if ( isset ( $data['user_info_field_group_name'] ) and $data['user_info_field_group_name'] != '' ) {
-		$user_info_group_class = $data['user_info_field_group_name'].'-address';
+	if ( isset ( $field_data['user_info_field_group_name'] ) and $field_data['user_info_field_group_name'] != '' ) {
+		$user_info_group_class = $field_data['user_info_field_group_name'].'-address';
 	} else {
 		$user_info_group_class = '';
 	}
 
 	// Check to see if we are dealing with an address field.
-	if ( isset ( $data['user_address_1'] ) and $data['user_address_1'] == 1 ) {
+	if ( isset ( $field_data['user_address_1'] ) and $field_data['user_address_1'] == 1 ) {
 		$address_class = 'address address1';
 	}	
 
-	if ( isset ( $data['user_address_2'] ) and $data['user_address_2'] == 1 ) {
+	if ( isset ( $field_data['user_address_2'] ) and $field_data['user_address_2'] == 1 ) {
 		$address_class = 'address address2';
 	}	
 
-	if ( isset ( $data['user_city'] ) and $data['user_city'] == 1 ) {
+	if ( isset ( $field_data['user_city'] ) and $field_data['user_city'] == 1 ) {
 		$address_class = 'address city';
 	}	
 
-	if ( isset ( $data['user_state'] ) and $data['user_state'] == 1 ) {
+	if ( isset ( $field_data['user_state'] ) and $field_data['user_state'] == 1 ) {
 		$address_class = 'address state';
 	}
 
-	if ( isset ( $data['user_city'] ) and $data['user_city'] == 1 ) {
+	if ( isset ( $field_data['user_city'] ) and $field_data['user_city'] == 1 ) {
 		$address_class = 'address city';
 	}
 
