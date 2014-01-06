@@ -325,81 +325,123 @@ function ninja_forms_register_form_settings_tab( $args ) {
 
 	// Parse incomming $args into an array and merge it with $defaults
 	$args = wp_parse_args( $args, $defaults );
+	
+	$id = $args['id'];
+	unset( $args['id'] );
 
-	extract( $args );
+	if ( isset ( $args['settings'] ) and is_array( $args['settings'] ) ) {
+		$settings_args = array(
+			'tab' => $id,
+			'settings' => $args['settings'],
+		);
+		ninja_forms_register_form_settings( $settings_args );
+		unset( $args['settings'] );
+	}
 
-	$ninja_forms_form_settings_tabs[$id] = $settings;
+	foreach ( $args as $key => $val ) {
+		$ninja_forms_form_settings_tabs[$id][$key] = $val;
+	}
+	
 }
 
 function register_settings_tabs() {
 	$args = array(
 		'id' => 'display_settings',
-		'settings' => array(
-			'label' => 'Display',
-			'class' => '',
-			'priority' => 'core',
-			'desc' => __( 'These settings affect how forms are displayed on the front-end.', 'ninja-forms' ),
-		),
+		'label' => 'Display',
+		'class' => '',
+		'priority' => 'core',
+		'desc' => __( 'These settings affect how forms are displayed on the front-end.', 'ninja-forms' ),
+
 	);
 	ninja_forms_register_form_settings_tab( $args );
 
 	$args = array(
 		'id' => 'success_settings',
-		'settings' => array(
-			'label' => 'After Submission',
-			'priority' => 'core',
-			'desc' => __( 'These settings affect what happens after a form is submitted.', 'ninja-forms' ),
-		),
+		'label' => 'After Submission',
+		'priority' => 'core',
+		'desc' => __( 'These settings affect what happens after a form is submitted.', 'ninja-forms' ),
 	);
 	ninja_forms_register_form_settings_tab( $args );
 
 	$args = array(
-		'id' => 'user_email_settings',
-		'settings' => array(
-			'label' => 'User Email Notification',
-			'priority' => 'default',
-			'desc' => __( 'User email settings description.', 'ninja-forms' ),
-		),
-	);
-	//ninja_forms_register_form_settings_tab( $args );
+		'id' => 'notifications',
+		'label' => 'Notifications',
+		'priority' => 'default',
+		'desc' => __( 'This is where all form notifications are managed.', 'ninja-forms' ),
+		'custom' => true,
+		'template' => 
+			'<div id="" class="tablenav top">
+				<div class="alignleft" style="margin-right:15px">
+					<a href="#" class="button-primary">'.__( 'Add New', 'ninja-forms' ).'</a>
+				</div>
+				<div class="alignleft actions">
+					<select id="" class="" name="bulk_action">
+						<option value="">'.__( 'Bulk Actions', 'ninja-forms' ).'</option>
+						<option value="delete">'.__( 'Activate', 'ninja-forms' ).'</option>
+						<option value="delete">'.__( 'Deactivate', 'ninja-forms' ).'</option>
+						<option value="delete">'.__( 'Delete', 'ninja-forms' ).'</option>
+					</select>
+					<input type="submit" name="submit" value="'.__( 'Apply', 'ninja-forms' ).'" class="button-secondary">
+				</div>
+				<div class="alignleft actions">
+					<select id="" name="limit">
+						<option value="20">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+					'.__( 'Notifications Per Page', 'ninja-forms' ).'
+					<input type="submit" name="submit" value="'.__( 'Go', 'ninja-forms' ).'" class="button-secondary">
+				</div>
+			</div>
+			<table class="wp-list-table widefat fixed posts">
+				<thead>
+					<tr>
+						<th class="check-column"><input type="checkbox" id="" class="ninja-forms-select-all" title="ninja-forms-bulk-action"></th>
+						<th>'.__( 'Name', 'ninja-forms' ).'</th>
+						<th>'.__( 'Type', 'ninja-forms' ).'</th>
+						<th>'.__( 'Date Updated', 'ninja-forms' ).'</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row" class="check-column">
+							<input type="checkbox" id="" name="notification_ids[]" value="" class="ninja-forms-bulk-action">
+						</th>
 
-	$args = array(
-		'id' => 'admin_email_settings',
+						<td class="post-title page-title column-title">
+							<strong>
+								<a href="">Notification 1</a>
+							</strong>
+							<div class="row-actions">
+								<span class="activate"><a href="">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
+								<span class="trash"><a class="ninja-forms-delete-form" title="'.__( 'Delete this notification', 'ninja-forms' ).'" href="#" id="">'.__( 'Delete', 'ninja-forms' ).'</a> | </span>
+								<span class="export"><a href="" title="'.__( 'Export Form', 'ninja-forms' ).'">'.__( 'Export', 'ninja-forms' ).'</a> | </span>
+								<span class="duplicate"><a href="" title="'.__( 'Duplicate Form', 'ninja-forms' ).'">'.__( 'Duplicate', 'ninja-forms' ).'</a></span>
+							</div>
+						</td>
+						<td>
+							Email
+						</td>
+						<td>
+							6 January 2014
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th class="check-column"><input type="checkbox" id="" class="ninja-forms-select-all" title="ninja-forms-bulk-action"></th>
+						<th>'.__( 'Name', 'ninja-forms' ).'</th>
+						<th>'.__( 'Type', 'ninja-forms' ).'</th>
+						<th>'.__( 'Date Updated', 'ninja-forms' ).'</th>
+					</tr>
+				</tfoot>
+			</table>',
 		'settings' => array(
-			'label' => 'Admin Email Notification',
-			'priority' => 'default',
-			'desc' => __( 'Admin email settings description.', 'ninja-forms' ),
+			'test' => array(
+				'type' => 'array',
+			),
 		),
-	);
-	//ninja_forms_register_form_settings_tab( $args );
-
-	$args = array(
-		'id' => 'adv_email_settings',
-		'settings' => array(
-			'label' => 'Advanced Email Settings',
-			'priority' => 'default',
-			'desc' => __( 'Changing these settings will override your default plugin settings.', 'ninja-forms' ),
-		),
-	);
-	//ninja_forms_register_form_settings_tab( $args );
-
-	$args = array(
-		'id' => 'test_setting',
-		'settings' => array(
-			'label' => 'Test',
-			'priority' => 'low',
-			'desc' => __( 'This is just a test settings page.', 'ninja-forms' ),
-		),
-	);
-	//ninja_forms_register_form_settings_tab( $args );
-
-	$args = array(
-		'id' => 'notification_settings',
-		'settings' => array(
-			'label' => 'Notifcations',
-			'priority' => 'default',
-			'desc' => __( 'This is where all form notifications are managed.', 'ninja-forms' ),
-		),
+		//'put_filter' => function( $value, $form_setting, $form_id ) { return $value; }
 	);
 	ninja_forms_register_form_settings_tab( $args );
 }
@@ -440,22 +482,6 @@ function register_forms_settings() {
 				'type' => 'checkbox',
 				'label' => __( 'Output the form title above form?', 'ninja-forms' ),
 			),
-			'test' => array(
-				'custom' => true,
-				'type' => 'test',
-				'template' => '<th>
-						<label for="<%= setting.id %>">
-							Hello World
-						</label>
-					</th>
-					<td>
-						<input type="text" id="<%= setting_id %>" class="<%= setting.get(\'class\') %>" value="<%= value %>" />
-						<span class="howto">
-							My Test Description!
-						</span>
-					</td>',
-				//'put_filter' => function( $value, $form_setting, $form_id ) { return $value; }
-			),
 		),
 	);
 	ninja_forms_register_form_settings( $args );
@@ -489,91 +515,6 @@ function register_forms_settings() {
 				'type' => 'checkbox',
 				'label' => __( 'Hide the form after successful submission?', 'ninja-forms' ),
 				'default_value' => 1,
-			),
-		),
-	);
-	ninja_forms_register_form_settings( $args );
-
-	$args = array(
-		'tab' => 'user_email_settings',
-		'settings' => array(
-			'user_email_subject' => array(
-				'type' => 'text',
-				'label' => __( 'Email subject sent to the user:', 'ninja-forms' ),
-				'class' => 'widefat code',
-			),
-			'user_email_msg' => array(
-				'type' => 'rte',
-				'label' => __( 'Email message sent to the user:', 'ninja-forms' ),
-				'class' => 'widefat code',
-				'desc' => __( 'If you want to include field data entered by the user, for instance a name, you can use the following shortcode: [ninja_forms_field id=23] where 23 is the ID of the field you want to insert. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. You can find the field ID when you expand the field for editing.', 'ninja-forms' ),
-			),
-			'user_email_fields' => array(
-				'type' => 'checkbox',
-				'label' => __( 'Include a list of fields?', 'ninja-forms' ),
-			),
-			'user_email_test' => array(
-				'type' => 'rte',
-				'label' => __( 'Email message sent to the user:', 'ninja-forms' ),
-				'class' => 'widefat code',
-			),
-		),
-	);
-	ninja_forms_register_form_settings( $args );
-
-	$args = array(
-		'tab' => 'admin_email_settings',
-		'settings' => array(
-			'admin_mailto' => array(
-				'type' => 'repeater-text',
-				'label' => __( 'Send an email to these addresses:', 'ninja-forms' ),
-				'class' => 'code',
-				'default_value' => array(),
-			),
-			'admin_email_subject' => array(
-				'type' => 'text',
-				'label' => __( 'Email subject sent to the administrators:', 'ninja-forms' ),
-				'class' => 'widefat code',
-			),
-			'admin_email_msg' => array(
-				'type' => 'rte',
-				'label' => __( 'Email message sent to the administrators:', 'ninja-forms' ),
-				'class' => 'widefat code',
-				'desc' => __( 'If you want to include field data entered by the user, for instance a name, you can use the following shortcode: [ninja_forms_field id=23] where 23 is the ID of the field you want to insert. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. You can find the field ID when you expand the field for editing.', 'ninja-forms' ),
-			),
-			'admin_email_fields' => array(
-				'type' => 'checkbox',
-				'label' => __( 'Include a list of fields?', 'ninja-forms' ),
-				'default_value' => 1,
-			),
-			'admin_attach_csv' => array(
-				'type' => 'checkbox',
-				'label' => __( 'Attach CSV of submission?', 'ninja-forms' ),
-				'default_value' => 0,
-			),
-
-		),
-	);
-	ninja_forms_register_form_settings( $args );
-
-	$args = array(
-		'tab' => 'adv_email_settings',
-		'settings' => array(
-			'email_from_name' => array(
-				'type' => 'text',
-				'label' => __( 'Email From Name', 'ninja-forms' ),
-			),
-			'email_from' => array(
-				'type' => 'text',
-				'label' => __( 'Email From Address', 'ninja-forms' ),
-			),
-			'email_type' => array(
-				'type' => 'dropdown',
-				'label' => __( 'Email Type', 'ninja-forms' ),
-				'options' => array(
-					array('name' => __( 'HTML', 'ninja-forms' ), 'value' => 'html'),
-					array('name' => __( 'Plain Text', 'ninja-forms' ), 'value' => 'plain'),
-				),
 			),
 		),
 	);

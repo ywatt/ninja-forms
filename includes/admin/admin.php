@@ -463,8 +463,13 @@ function ninja_forms_admin_edit_form(){
 						$class .= ' active';
 						$active = true;
 					}
+					if ( isset ( $settings['custom'] ) ) {
+						$custom = $settings['custom'];
+					} else {
+						$custom = false;
+					}
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
 				<?php
 				}
 				if ( is_array( $high_priority_tabs ) and !empty( $high_priority_tabs ) and is_array( $core_priority_tabs ) and !empty( $core_priority_tabs ) ) {
@@ -488,8 +493,13 @@ function ninja_forms_admin_edit_form(){
 						$class .= ' active';
 						$active = true;
 					}
+					if ( isset ( $settings['custom'] ) ) {
+						$custom = $settings['custom'];
+					} else {
+						$custom = false;
+					}
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
 				<?php
 				}
 
@@ -513,8 +523,13 @@ function ninja_forms_admin_edit_form(){
 						$class .= ' active';
 						$active = true;
 					}
+					if ( isset ( $settings['custom'] ) ) {
+						$custom = $settings['custom'];
+					} else {
+						$custom = false;
+					}
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
 				<?php
 				}
 
@@ -538,8 +553,13 @@ function ninja_forms_admin_edit_form(){
 						$class .= ' active';
 						$active = true;
 					}
+					if ( isset ( $settings['custom'] ) ) {
+						$custom = $settings['custom'];
+					} else {
+						$custom = false;
+					}
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
 				<?php
 				}
 				?>
@@ -583,7 +603,7 @@ function ninja_forms_admin_edit_form(){
 						</label>
 					</th>
 					<td>
-						<input type="checkbox" id="<%= setting.id %>" class="<%= setting.get('class') %>" value="1" <% if ( value == 1 ) { %>checked<%}%>>
+						<input type="checkbox" id="<%= setting.id %>" class="<%= setting.get('class') %> form-setting" value="1" <% if ( value == 1 ) { %>checked<%}%>>
 						<span class="howto">
 							<%= setting.get('desc') %>
 						</span>
@@ -598,7 +618,7 @@ function ninja_forms_admin_edit_form(){
 						</label>
 					</th>
 					<td>
-						<select id="<%= setting_id %>" class="<%= setting.get('class') %>">
+						<select id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting">
 						<%
 						_.each(setting.get('options'), function(option) {
 							%>
@@ -625,7 +645,7 @@ function ninja_forms_admin_edit_form(){
 						_.each(setting.get('options'), function(option) {
 							%>
 							<label for="<%= setting.id %>">
-								<input type="radio" value="<%= option.value %>" <% if ( value == option.value ) { %> checked <% } %> id="<%= setting_id %>" class="<%= setting.get('class') %>" value="<%= option.value %>">
+								<input type="radio" value="<%= option.value %>" <% if ( value == option.value ) { %> checked <% } %> id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting" value="<%= option.value %>">
 								<%= option.name %>
 							</label>
 							<%
@@ -644,7 +664,7 @@ function ninja_forms_admin_edit_form(){
 						<label for="<%= setting.id %>">
 							<%= setting.get('label') %>
 						</label>
-						<textarea id="<%= setting_id %>" class="<%= setting.get('class') %>"><%= value %></textarea>
+						<textarea id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting"><%= value %></textarea>
 						<span class="howto">
 							<%= setting.get('desc') %>
 						</span>
@@ -659,7 +679,7 @@ function ninja_forms_admin_edit_form(){
 						</label>
 					</th>
 					<td>
-						<input type="text" id="<%= setting_id %>" class="<%= setting.get('class') %>" value="<%= value %>" />
+						<input type="text" id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting" value="<%= value %>" />
 						<span class="howto">
 							<%= setting.get('desc') %>
 						</span>
@@ -681,7 +701,7 @@ function ninja_forms_admin_edit_form(){
 								_.each(value, function(val) {
 									%>
 									<span>
-										<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text" value="<%= val %>" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="repeater-remove">X</a>
+										<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text form-setting" value="<%= val %>" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="repeater-remove">X</a>
 										<br />
 									</span>
 									<%
@@ -689,7 +709,7 @@ function ninja_forms_admin_edit_form(){
 							} else {
 								%>
 								<span>
-									<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text" value="" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="">X</a>
+									<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text form-setting" value="" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="">X</a>
 									<br />
 								</span>
 								<%
@@ -738,8 +758,21 @@ function ninja_forms_admin_edit_form(){
 		<% }); %>
 		</table>
 	</script>
+	<?php
+	// Loop through our tabs to see if we have any custom settings. If we do, output the template for that tab.
+	foreach ( $ninja_forms_form_settings_tabs as $tab => $data ) {
+		if ( isset ( $data['custom'] ) and $data['custom'] ) {
+			?>
+			<script type="text/html" id="tmpl-<?php echo $tab;?>">
+				<?php echo $data['template'];?>
+			</script>
+			<?php
+		}
+	}
+
+	?>
 	<div id="hidden_editor_div" class="hidden">
-		<?php wp_editor( 'hidden_editor', 'hidden_editor' ); ?>
+		<?php wp_editor( 'hidden_editor', 'hidden_editor', array( 'editor_class' => 'form-setting') ); ?>
 	</div>
 <?php
 

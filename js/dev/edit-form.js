@@ -47,12 +47,14 @@ jQuery(document).ready(function($) {
 	var ContentView = Backbone.View.extend({
 		el: '#my-content-id',
 
+		template: '#tmpl-form-settings',
+
 		initialize: function(){
  			this.collection.bind( 'reset', this.render, this );
 		},
 
 		render: function() {
-			var content = _.template( $('#tmpl-form-settings').html(), { settings: formSettings.models } );
+			var content = _.template( $(this.template).html(), { settings: formSettings.models } );
 			$(this.el).html(content);
 
 			// This is a work-around for the wonky tinyMCE that might be in this settings collection.
@@ -95,12 +97,16 @@ jQuery(document).ready(function($) {
 
 				}
 			});
-
+			//this.template = '#tmpl-form-settings';
  	        return this;
 		},
 
+		changeTemplate: function( template_id ) {
+			this.template = template_id;
+		},
+
 		events: {
-			'change input': 'save',
+			'change input.form-setting': 'save',
 			'change textarea': 'save',
 			'change select': 'save'
 		},
@@ -141,17 +147,21 @@ jQuery(document).ready(function($) {
 
 	});
 
+	var formSettingsView = new ContentView({ collection: formSettings });
 	var current_tab = $('.media-menu-item.active').prop('id');
 	change_tab( current_tab, $('.media-menu-item.active').html(), $('.media-menu-item.active').attr('title') );
-	var formSettingsView = new ContentView({ collection: formSettings });
-
+	
 	$('.media-menu-item').on('click', function(e) {
+		if ( $(this).data('custom') == 1 ) {
+			formSettingsView.template = '#tmpl-' + this.id;
+		} else {
+			formSettingsView.template = '#tmpl-form-settings';
+		}
 		change_tab( this.id, $(this).html(), $(this).attr('title') );
-
 	});
 
 	function change_tab( tab_id, title, desc ) {
-        formSettings.fetch({
+		formSettings.fetch({
 			data: $.param({ tab: tab_id, form_id: form_id }),
 			reset: true,
 			success: function() {
@@ -161,10 +171,8 @@ jQuery(document).ready(function($) {
 	            $('.nf-settings-desc').html(desc);
 			},
 			error: function() {
-				//console.log('failed to get!');
+				console.log('failed to get!');
 			}
 		});
 	}
-
-
 }); //Document.ready();
