@@ -118,7 +118,7 @@ class Ninja_Forms_Processing {
 
 		//Get our plugin settings
 		$plugin_settings = get_option("ninja_forms_settings");
-		$req_field_error = $plugin_settings['req_field_error'];
+		$req_field_error = __( $plugin_settings['req_field_error'], 'ninja-forms' );
 
 		if ( empty ( $this->data ) )
 			return '';

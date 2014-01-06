@@ -252,7 +252,7 @@ function ninja_forms_field_text_pre_process( $field_id, $user_value ){
 	global $ninja_forms_processing;
 	$plugin_settings = get_option( 'ninja_forms_settings' );
 	if( isset( $plugin_settings['invalid_email'] ) ){
-		$invalid_email = $plugin_settings['invalid_email'];
+		$invalid_email = __( $plugin_settings['invalid_email'], 'ninja-forms' );
 	}else{
 		$invalid_email = __( 'Please enter a valid email address.', 'ninja-forms' );
 	}
