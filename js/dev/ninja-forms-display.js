@@ -751,6 +751,7 @@ function ninja_forms_update_success_msg(response){
 		}
 		if(clear_complete == 1 ){
 			jQuery("#ninja_forms_form_" + form_id ).resetForm();
+			jQuery("input[type=radio].ninja-forms-star").rating("drain");
 		}
 	}
 }
