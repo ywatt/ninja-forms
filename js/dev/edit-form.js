@@ -151,7 +151,7 @@ jQuery(document).ready(function($) {
 	var current_tab = $('.media-menu-item.active').prop('id');
 	change_tab( current_tab, $('.media-menu-item.active').html(), $('.media-menu-item.active').attr('title') );
 	
-	$('.media-menu-item').on('click', function(e) {
+	$(document).on('click', '.media-menu-item', function(e) {
 		if ( $(this).data('custom') == 1 ) {
 			formSettingsView.template = '#tmpl-' + this.id;
 		} else {

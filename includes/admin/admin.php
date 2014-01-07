@@ -468,9 +468,12 @@ function ninja_forms_admin_edit_form(){
 					} else {
 						$custom = false;
 					}
+
+					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
 				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
 				<?php
+					}
 				}
 				if ( is_array( $high_priority_tabs ) and !empty( $high_priority_tabs ) and is_array( $core_priority_tabs ) and !empty( $core_priority_tabs ) ) {
 					?>
@@ -498,9 +501,12 @@ function ninja_forms_admin_edit_form(){
 					} else {
 						$custom = false;
 					}
+
+					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
 				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
 				<?php
+					}
 				}
 
 				if ( is_array( $core_priority_tabs ) and !empty( $core_priority_tabs ) and is_array( $default_priority_tabs ) and !empty( $default_priority_tabs ) ) {
@@ -528,9 +534,12 @@ function ninja_forms_admin_edit_form(){
 					} else {
 						$custom = false;
 					}
+
+					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
 				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
 				<?php
+					}
 				}
 
 				if ( is_array( $default_priority_tabs ) and !empty( $default_priority_tabs ) and is_array( $low_priority_tabs ) and !empty ( $low_priority_tabs ) ) {
@@ -558,9 +567,12 @@ function ninja_forms_admin_edit_form(){
 					} else {
 						$custom = false;
 					}
+
+					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
 				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
 				<?php
+					}
 				}
 				?>
 			</div>

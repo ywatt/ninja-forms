@@ -321,6 +321,7 @@ function ninja_forms_register_form_settings_tab( $args ) {
 
 	$defaults = array(
 		'priority' => 'default',
+		'display_link' => true,
 	);
 
 	// Parse incomming $args into an array and merge it with $defaults
@@ -410,7 +411,7 @@ function register_settings_tabs() {
 
 						<td class="post-title page-title column-title">
 							<strong>
-								<a href="">Notification 1</a>
+								<a href="#notification_single" class="media-menu-item" id="notification_single" title="">Admin Email</a>
 							</strong>
 							<div class="row-actions">
 								<span class="activate"><a href="">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
@@ -421,6 +422,52 @@ function register_settings_tabs() {
 						</td>
 						<td>
 							Email
+						</td>
+						<td>
+							6 January 2014
+						</td>
+					</tr>
+					<tr>
+						<th scope="row" class="check-column">
+							<input type="checkbox" id="" name="notification_ids[]" value="" class="ninja-forms-bulk-action">
+						</th>
+
+						<td class="post-title page-title column-title">
+							<strong>
+								<a href="#notification_single" class="media-menu-item" id="notification_single" title="">User Email</a>
+							</strong>
+							<div class="row-actions">
+								<span class="activate"><a href="">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
+								<span class="trash"><a class="ninja-forms-delete-form" title="'.__( 'Delete this notification', 'ninja-forms' ).'" href="#" id="">'.__( 'Delete', 'ninja-forms' ).'</a> | </span>
+								<span class="export"><a href="" title="'.__( 'Export Form', 'ninja-forms' ).'">'.__( 'Export', 'ninja-forms' ).'</a> | </span>
+								<span class="duplicate"><a href="" title="'.__( 'Duplicate Form', 'ninja-forms' ).'">'.__( 'Duplicate', 'ninja-forms' ).'</a></span>
+							</div>
+						</td>
+						<td>
+							Email
+						</td>
+						<td>
+							6 January 2014
+						</td>
+					</tr>					
+					<tr>
+						<th scope="row" class="check-column">
+							<input type="checkbox" id="" name="notification_ids[]" value="" class="ninja-forms-bulk-action">
+						</th>
+
+						<td class="post-title page-title column-title">
+							<strong>
+								<a href="#notification_single" class="media-menu-item" id="notification_single" title="">Success Message</a>
+							</strong>
+							<div class="row-actions">
+								<span class="activate"><a href="">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
+								<span class="trash"><a class="ninja-forms-delete-form" title="'.__( 'Delete this notification', 'ninja-forms' ).'" href="#" id="">'.__( 'Delete', 'ninja-forms' ).'</a> | </span>
+								<span class="export"><a href="" title="'.__( 'Export Form', 'ninja-forms' ).'">'.__( 'Export', 'ninja-forms' ).'</a> | </span>
+								<span class="duplicate"><a href="" title="'.__( 'Duplicate Form', 'ninja-forms' ).'">'.__( 'Duplicate', 'ninja-forms' ).'</a></span>
+							</div>
+						</td>
+						<td>
+							On-Screen Message
 						</td>
 						<td>
 							6 January 2014
@@ -441,6 +488,16 @@ function register_settings_tabs() {
 				'type' => 'array',
 			),
 		),
+		//'put_filter' => function( $value, $form_setting, $form_id ) { return $value; }
+	);
+	ninja_forms_register_form_settings_tab( $args );	
+
+	$args = array(
+		'id' => 'notification_single',
+		'label' => 'Notifications',
+		'display_link' => false,
+		'priority' => 'default',
+		'desc' => __( 'This is where all form notifications are managed.', 'ninja-forms' ),
 		//'put_filter' => function( $value, $form_setting, $form_id ) { return $value; }
 	);
 	ninja_forms_register_form_settings_tab( $args );
@@ -521,10 +578,10 @@ function register_forms_settings() {
 	ninja_forms_register_form_settings( $args );
 
 	$args = array(
-		'tab' => 'notification_settings',
+		'tab' => 'notification_single',
 		'settings' => array(
 			'notification_type' => array(
-				'type' => 'radio',
+				'type' => 'dropdown',
 				'label' => __( 'Type', 'ninja-forms' ),
 				'options' => array(
 					array('name' => __( 'Email', 'ninja-forms' ), 'value' => 'email'),
