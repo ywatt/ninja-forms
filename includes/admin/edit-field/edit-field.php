@@ -56,7 +56,7 @@ function ninja_forms_edit_field_el_output($field_id, $type, $label = '', $name =
 		break;
 		case 'number':
 		?>
-			<input type="number" class="<?php echo $class;?>" name="<?php echo $name;?>" id="<?php echo $id;?>" value="<?php echo $value;?>" step="0.001" />
+			<input type="number" class="<?php echo $class;?>" name="<?php echo $name;?>" id="<?php echo $id;?>" value="<?php echo $value;?>" />
 		<?php
 		break;
 		case 'checkbox':
