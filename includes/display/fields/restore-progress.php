@@ -6,9 +6,14 @@
  */
 
 function ninja_forms_filter_restore_progress( $data, $field_id ){
-	global $ninja_forms_processing, $ninja_forms_fields;
+	global $ninja_forms_loading, $ninja_forms_processing, $ninja_forms_fields;
 
-	$field_row = ninja_forms_get_field_by_id( $field_id );
+	if ( isset ( $ninja_forms_loading ) ) {
+		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
+	} else if ( isset ( $ninja_forms_processing ) ) {
+		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
+	}
+	
 	$field_type = $field_row['type'];
 
 	if ( isset( $ninja_forms_fields[$field_type]['esc_html'] ) ) {

@@ -9,14 +9,19 @@
  */
 
 function ninja_forms_default_value_filter( $data, $field_id ) {
-	global $current_user, $ninja_forms_fields, $post;
+	global $current_user, $ninja_forms_fields, $post, $ninja_forms_loading, $ninja_forms_processing;
 
-	$field_row = ninja_forms_get_field_by_id( $field_id );
+	if ( isset ( $ninja_forms_loading ) ) {
+		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
+	} else if ( isset ( $ninja_forms_processing ) ) {
+		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
+	}
+
 	$field_type = $field_row['type'];
 
-	if(isset($data['default_value'])){
+	if( isset ( $data['default_value'] ) ) {
 		$default_value = $data['default_value'];
-	} else if ( isset ( $ninja_forms_fields[$field_type]['default_value'] ) ){ 
+	} else if ( isset ( $ninja_forms_fields[$field_type]['default_value'] ) ) { 
 		$default_value = $ninja_forms_fields[$field_type]['default_value'];
 	} else {
 		$default_value = '';
@@ -28,6 +33,7 @@ function ninja_forms_default_value_filter( $data, $field_id ) {
     $user_lastname 		= $current_user->user_lastname;
     $user_display_name 	= $current_user->display_name;
     $user_email 		= $current_user->user_email;
+
     if ( is_object ( $post ) ) {
 	    $post_ID 			= $post->ID;
 	    $post_title 		= $post->post_title;

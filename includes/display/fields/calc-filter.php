@@ -148,7 +148,7 @@ function ninja_forms_field_calc_filter( $calc_data, $field_id ){
 	return $calc_data;
 }
 
-add_filter( 'ninja_forms_field', 'ninja_forms_field_calc_filter', 11, 2 );
+//add_filter( 'ninja_forms_field', 'ninja_forms_field_calc_filter', 11, 2 );
 
 /*
  *
@@ -297,17 +297,34 @@ function ninja_forms_calc_field_loop( $field_id, $calc_eq = '', $result = '' ){
  */
 
 function ninja_forms_calc_filter_list_options_span( $class, $field_id ){
-	$field_row = ninja_forms_get_field_by_id( $field_id );
+	global $ninja_forms_loading, $ninja_forms_processing;
+
+	if ( isset ( $ninja_forms_loading ) ) {
+		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
+	} else {
+		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
+	}
+
 	$add_class = false;
 	// Check to see if this field has cal_auto_include set to 1. If it does, we want to output a class name.
 	if ( isset ( $field_row['data']['calc_auto_include'] ) AND !empty ( $field_row['data']['calc_auto_include'] ) ) {
 		$add_class = true;
 	}
 
-	$form = ninja_forms_get_form_by_field_id( $field_id );
-	$form_id = $form['id'];
-	$all_fields = ninja_forms_get_fields_by_form_id( $form_id );
-	foreach ( $all_fields as $field ){
+	if ( isset ( $ninja_forms_loading ) ) {
+		$all_fields = $ninja_forms_loading->get_all_fields();
+	} else {
+		$all_fields = $ninja_forms_processing->get_all_fields();
+	}
+
+	foreach ( $all_fields as $f_id => $user_value ){
+
+		if ( isset ( $ninja_forms_loading ) ) {
+			$field = $ninja_forms_loading->get_field_settings( $f_id );
+		} else {
+			$field = $ninja_forms_processing->get_field_settings( $f_id );
+		}
+
 		if ( $field['type'] == '_calc' ) {
 			if ( isset ( $field['data']['calc_method'] ) ) {
 				$calc_method = $field['data']['calc_method'];
@@ -379,18 +396,15 @@ function ninja_forms_calc_evaluate($op, $value1, $value2 ){
  */
 
 function ninja_forms_field_calc_value( $field_id, $field_value = '', $calc_method = 'auto' ) {
-	global $ninja_forms_processing;
+	global $ninja_forms_loading, $ninja_forms_processing;
 	
-	if ( isset ( $ninja_forms_processing ) ){
-		$field = $ninja_forms_processing->get_field_settings( $field_id );
+	if ( isset ( $ninja_forms_loading ) ) {
+		$field = $ninja_forms_loading->get_field_settings( $field_id );
 	} else {
-		$field = ninja_forms_get_field_by_id( $field_id );	
+		$field = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 	
-	//$field_data = $field['data'];
-	//remove_filter( 'ninja_forms_field', 'ninja_forms_field_calc_filter', 11, 2 );
 	$field_data = apply_filters( 'ninja_forms_field', $field['data'], $field_id );
-	//add_filter( 'ninja_forms_field', 'ninja_forms_field_calc_filter', 11, 2 );
 	
 	if ( isset ( $field_data['default_value'] ) ) {
 		$default_value = $field_data['default_value'];

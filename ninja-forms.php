@@ -75,6 +75,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/scripts.php" );
 
 // Include Processing Functions if a form has been submitted.
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/class-ninja-forms-processing.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/processing/class-display-loading.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/pre-process.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/process.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/post-process.php" );
