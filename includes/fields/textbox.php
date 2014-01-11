@@ -70,7 +70,7 @@ function ninja_forms_register_field_textbox(){
 			array(
 				'type' => 'hidden',
 				'name' => 'user_info_field_group',
-				'default_value' => 1,
+				'default' => 1,
 			),
 			array(
 				'type' => 'checkbox',
