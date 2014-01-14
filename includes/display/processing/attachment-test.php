@@ -1,8 +1,8 @@
 <?php
-add_action( 'ninja_forms_insert_sub', 'ninja_forms_attachment_test' );
-add_action( 'ninja_forms_update_sub', 'ninja_forms_attachment_test' );
+add_action( 'ninja_forms_insert_sub', 'ninja_forms_csv_attachment' );
+add_action( 'ninja_forms_update_sub', 'ninja_forms_csv_attachment' );
 
-function ninja_forms_attachment_test( $sub_id ){
+function ninja_forms_csv_attachment( $sub_id ){
 	global $ninja_forms_processing;
 
 	// make sure this form is supposed to attach a CSV
