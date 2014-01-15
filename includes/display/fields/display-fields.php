@@ -247,8 +247,7 @@ function ninja_forms_get_field_class($field_id){
 	} else {
 		$field_results = $ninja_forms_processing->get_all_fields();
 	}
-	
-	/*
+
 	foreach($field_results as $f_id => $user_value ){
 		if ( isset ( $ninja_forms_loading ) ) {
 			$field = $ninja_forms_loading->get_field_settings( $f_id );
@@ -266,7 +265,7 @@ function ninja_forms_get_field_class($field_id){
 			}
 		}
 	}
-	*/
+
 	// Check to see if we are dealing with a field that has the user_info_field_group set.
 	if ( isset ( $data['user_info_field_group_name'] ) and $data['user_info_field_group_name'] != '' ) {
 		$user_info_group_class = $data['user_info_field_group_name'].'-address';
