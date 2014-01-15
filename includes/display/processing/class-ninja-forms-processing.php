@@ -152,6 +152,7 @@ class Ninja_Forms_Processing {
 
 							$this->data['fields'][$field_ID] = $val;
 							$field_row = ninja_forms_get_field_by_id( $field_ID );
+							$field_row['data']['field_class'] = 'ninja-forms-field';
 							$this->data['field_data'][$field_ID] = $field_row;
 						}
 					}
@@ -360,7 +361,7 @@ class Ninja_Forms_Processing {
 	 * @return $value or bool(false)
 	 */
 	function get_field_setting( $field_id = '', $setting_id = '' ) {
-		if ( empty ( $this->data ) OR $field_id == '' OR $setting_id = '' )
+		if ( empty ( $this->data ) OR $field_id == '' OR $setting_id == '' )
 			return false;
 		if ( isset ( $this->data['field_data'][$field_id][$setting_id] ) ) {
 			return $this->data['field_data'][$field_id][$setting_id];

@@ -9,18 +9,8 @@ function ninja_forms_register_display_fields(){
 }
 
 function ninja_forms_display_fields($form_id){
-	global $ninja_forms_fields, $ninja_forms_processing, $current_user;
-	get_currentuserinfo();
-	//var_dump( $ninja_forms_processing );
+	global $ninja_forms_fields, $ninja_forms_loading, $ninja_forms_processing;
 
-	if(isset($current_user)){
-		$user_id = $current_user->ID;
-	}else{
-		$user_id = '';
-	}
-
-	$plugin_settings = get_option("ninja_forms_settings");
-	$form_row = ninja_forms_get_form_by_id($form_id);
 	$field_results = ninja_forms_get_fields_by_form_id($form_id);
 	$field_results = apply_filters('ninja_forms_display_fields_array', $field_results, $form_id);
 	if(is_array($field_results) AND !empty($field_results)){
@@ -159,9 +149,14 @@ function ninja_forms_display_fields($form_id){
 **/
 
 function ninja_forms_get_field_wrap_class($field_id){
-	global $ninja_forms_processing;
+	global $ninja_forms_loading, $ninja_forms_processing;
 	$field_wrap_class = 'field-wrap';
-	$field_row = ninja_forms_get_field_by_id($field_id);
+	if ( isset ( $ninja_forms_loading ) ) {
+		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
+	} else {
+		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
+	}
+
 	$form_id = $field_row['form_id'];
 	$data = $field_row['data'];
 
@@ -178,7 +173,6 @@ function ninja_forms_get_field_wrap_class($field_id){
 		$label_pos = 'left';
 	}
 	$field_wrap_class .= " label-".$label_pos;
-
 
 	$x = 0;
 	$custom_class = '';
@@ -210,10 +204,22 @@ function ninja_forms_get_field_wrap_class($field_id){
 
 
 function ninja_forms_get_field_class($field_id){
-	$field_row = ninja_forms_get_field_by_id($field_id);
+	global $ninja_forms_loading, $ninja_forms_processing;
+
+	if ( isset ( $ninja_forms_loading ) ) {
+		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
+	} else {
+		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
+	}
+	
 	$field_data = $field_row['data'];
 	$field_data = apply_filters( 'ninja_forms_field', $field_data, $field_id );
-	$field_class = 'ninja-forms-field';
+
+	if ( isset ( $ninja_forms_loading ) ) {
+		$field_class = $ninja_forms_loading->get_field_setting( $field_id, 'field_class' );
+	} else {
+		$field_class = $ninja_forms_processing->get_field_setting( $field_id, 'field_class' );
+	}
 
 	$x = 0;
 	$custom_class = '';
@@ -236,11 +242,19 @@ function ninja_forms_get_field_class($field_id){
 
 	$form_id = $field_row['form_id'];
 	$watch_fields = array();
-	$field_results = ninja_forms_get_fields_by_form_id($form_id);
-	$calc_listen = '';
-	$sub_total = false;
-	$tax = false;
-	foreach($field_results as $field){
+	if ( isset ( $ninja_forms_loading ) ) {
+		$field_results = $ninja_forms_loading->get_all_fields();
+	} else {
+		$field_results = $ninja_forms_processing->get_all_fields();
+	}
+	
+	/*
+	foreach($field_results as $f_id => $user_value ){
+		if ( isset ( $ninja_forms_loading ) ) {
+			$field = $ninja_forms_loading->get_field_settings( $f_id );
+		} else {
+			$field = $ninja_forms_processing->get_field_settings( $f_id );
+		}
 		$data = $field['data'];
 		if(isset($data['conditional']) AND is_array($data['conditional'])){
 			foreach($data['conditional'] as $conditional){
@@ -251,61 +265,8 @@ function ninja_forms_get_field_class($field_id){
 				}
 			}
 		}
-		// Check for advanced calculation fields that reference this field. If we find one, and use_calc_adv is set to 1, add a special class to this field.
-		if ( $field['type'] == '_calc' ) {
-
-			// Check to see if this is a sub_total calculation
-
-
-			if ( isset ( $data['calc_method'] ) ) {
-				$calc_method = $data['calc_method'];
-			} else {
-				$calc_method = 'auto';
-			}
-
-			switch ( $calc_method ) {
-				case 'auto':
-					if ( isset ( $field_data['calc_auto_include'] ) AND $field_data['calc_auto_include'] == 1 ) {
-						$calc_listen = 'ninja-forms-field-calc-listen ninja-forms-field-calc-auto';
-					}
-					break;
-				case 'fields':
-					foreach ( $data['calc'] as $calc ) {
-						if ( $calc['field'] == $field_id ) {
-							if ( $calc_listen == '' ) {
-								$calc_listen = 'ninja-forms-field-calc-listen';
-							}
-							break;
-						}
-					}
-					break;
-				case 'eq':
-					$eq = $data['calc_eq'];
-					if (preg_match("/\bfield_".$field_id."\b/i", $eq ) ) {
-						if ( $calc_listen == '' ) {
-							$calc_listen = 'ninja-forms-field-calc-listen';
-						}
-						break;
-					}
-					break;
-			}
-		}
-
 	}
-
-	if ( isset ( $field_data['payment_sub_total'] ) AND $field_data['payment_sub_total'] == 1 ) {
-		if ( $calc_listen == '' ) {
-			$calc_listen = 'ninja-forms-field-calc-listen';
-		}
-	}
-
-	// Check to see if this is a tax field;
-	if ( $field_row['type'] == '_tax' ) {
-		if ( $calc_listen == '' ) {
-			$calc_listen = 'ninja-forms-field-calc-listen';
-		}
-	}
-
+	*/
 	// Check to see if we are dealing with a field that has the user_info_field_group set.
 	if ( isset ( $data['user_info_field_group_name'] ) and $data['user_info_field_group_name'] != '' ) {
 		$user_info_group_class = $data['user_info_field_group_name'].'-address';
@@ -354,10 +315,6 @@ function ninja_forms_get_field_class($field_id){
 
 	if($listen_class != ''){
 		$field_class .= " ".$listen_class;
-	}
-
-	if ( $calc_listen != '' ) {
-		$field_class .= ' '.$calc_listen;
 	}
 
 	if ( $user_info_group_class != '' ) {

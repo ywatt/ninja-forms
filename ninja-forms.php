@@ -114,9 +114,9 @@ require_once( NINJA_FORMS_DIR . "/includes/display/form/form-visibility.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/restore-progress.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/inside-label-hidden.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-type.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/fields/calc-filter.php" );
 //require_once( NINJA_FORMS_DIR . "/includes/display/fields/list-term-filter.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/fields/calc-field-class.php" );
 
 /* Require Pre-Registered Tabs and their sidebars */
 

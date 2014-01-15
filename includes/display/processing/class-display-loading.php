@@ -1,14 +1,14 @@
 <?php
 /**
- * This Ninja Forms Processing Class is used to interact with Ninja Forms as it processes form data.
+ * This Ninja Forms Loading Class is used to interact with Ninja Forms as it loads form data.
  * It is based upon the WordPress Error API.
  *
- * Contains the Ninja_Forms_Processing class
+ * Contains the Ninja_Forms_Loading class
  *
  */
 
 /**
- * Ninja Forms Processing class.
+ * Ninja Forms Loading class.
  *
  * Class used to interact with form processing.
  * This class stores all data related to the form submission, including data from the Ninja Form mySQL table.
@@ -117,6 +117,7 @@ class Ninja_Forms_Loading {
 	 */
 
 	function setup_field_data() {
+		global $current_user, $post, $ninja_forms_fields;
 		$form_id = $this->data['form_ID'];
 		$field_results = ninja_forms_get_fields_by_form_id($form_id);
 		$field_results = apply_filters('ninja_forms_display_fields_array', $field_results, $form_id);
@@ -124,14 +125,72 @@ class Ninja_Forms_Loading {
 		foreach( $field_results as $field ) {
 			$data = $field['data'];
 			$field_id = $field['id'];
-			if ( isset ( $data['default_value'] ) ) {
-				$val = $data['default_value'];
+			$field_type = $field['type'];
+
+			if( isset ( $data['default_value'] ) ) {
+				$default_value = $data['default_value'];
+			} else if ( isset ( $ninja_forms_fields[$field_type]['default_value'] ) ) { 
+				$default_value = $ninja_forms_fields[$field_type]['default_value'];
 			} else {
-				$val = '';
+				$default_value = '';
+			}
+			// Check to see if our default value is one of our preset values:
+			get_currentuserinfo();
+			$user_ID 			= $current_user->ID;
+			$user_firstname 	= $current_user->user_firstname;
+		    $user_lastname 		= $current_user->user_lastname;
+		    $user_display_name 	= $current_user->display_name;
+		    $user_email 		= $current_user->user_email;
+
+		    if ( is_object ( $post ) ) {
+			    $post_ID 			= $post->ID;
+			    $post_title 		= $post->post_title;
+			    $post_url			= get_permalink( $post_ID );
+		    } else {
+		    	$post_ID      		= '';
+		    	$post_title 		= '';
+		    	$post_url 			= '';
+		    }
+
+		    switch( $default_value ){
+				case '_user_id':
+					$default_value = $user_ID;
+					break;
+				case '_user_firstname':
+					$default_value = $user_firstname;
+					break;
+				case '_user_lastname':
+					$default_value = $user_lastname;
+					break;
+				case '_user_display_name':
+					$default_value = $user_display_name;
+					break;
+				case '_user_email':
+					$default_value = $user_email;
+					break;
+				case 'post_id':
+					$default_value = $post_ID;
+					break;
+				case 'post_title':
+					$default_value = $post_title;
+					break;
+				case 'post_url':
+					$default_value = $post_url;
+					break;
+				case 'today':
+					$plugin_settings = get_option( 'ninja_forms_settings' );
+					if ( isset ( $plugin_settings['date_format'] ) ) {
+						$date_format = $plugin_settings['date_format'];
+					} else {
+						$date_format = 'm/d/Y';
+					}
+					$default_value = date( $date_format, strtotime( 'now' ) );
+					break;
 			}
 
-			$this->data['fields'][$field_id] = $val;
+			$this->data['fields'][$field_id] = $default_value;
 			$field_row = ninja_forms_get_field_by_id( $field_id );
+			$field_row['data']['field_class'] = 'ninja-forms-field';
 			$this->data['field_data'][$field_id] = $field_row;
 		}
 	}
@@ -276,8 +335,9 @@ class Ninja_Forms_Loading {
 	 * @return $value or bool(false)
 	 */
 	function get_field_setting( $field_id = '', $setting_id = '' ) {
-		if ( empty ( $this->data ) OR $field_id == '' OR $setting_id = '' )
+		if ( empty ( $this->data ) OR $field_id == '' OR $setting_id == '' )
 			return false;
+
 		if ( isset ( $this->data['field_data'][$field_id][$setting_id] ) ) {
 			return $this->data['field_data'][$field_id][$setting_id];
 		} else if ( isset ( $this->data['field_data'][$field_id]['data'][$setting_id] ) ) {
