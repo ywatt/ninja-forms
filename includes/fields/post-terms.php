@@ -71,7 +71,7 @@ if ( !function_exists ( 'ninja_forms_register_field_post_terms' ) ) {
 		}
 	}
 
-	add_action( 'init', 'ninja_forms_register_field_post_terms' );
+	add_action( 'init', 'ninja_forms_register_field_post_terms', 20 );
 
 	function ninja_forms_post_field_type( $type, $field_id ) {
 		global $ninja_forms_fields;
