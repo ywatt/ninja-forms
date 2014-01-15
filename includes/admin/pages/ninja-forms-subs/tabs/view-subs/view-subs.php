@@ -278,7 +278,7 @@ function ninja_forms_tab_view_subs(){
 			for ($i = $start; $i < $end; $i++) {
 				$sub = $sub_results[$i];
 				$data = apply_filters( 'ninja_forms_view_sub_data', $sub['data'], $sub['id'] );
-				$download_link = add_query_arg(array('ninja_forms_export_subs_to_csv' => 1, 'sub_id' => $sub['id'], 'form_id' => $form_id));
+				$csv_download_link = add_query_arg(array('ninja_forms_export_subs_to_csv' => 1, 'sub_id' => $sub['id'], 'form_id' => $form_id));
 				$edit_link = add_query_arg(array('edit_sub_form' => 1, 'sub_id' => $sub['id'], 'form_id' => $form_id));
 				?>
 				<tr id="ninja_forms_sub_<?php echo $sub['id'];?>_tr">
@@ -295,8 +295,11 @@ function ninja_forms_tab_view_subs(){
 						<div class="row-actions">
 							<span class="edit"><a href="<?php echo $edit_link;?>" id="ninja_forms_sub_<?php echo $sub['id'];?>" class="ninja-forms-view-sub"><?php _e('Edit', 'ninja-forms' ); ?></a> | </span>
 							<span class="trash"><a href="#" id="ninja_forms_sub_<?php echo $sub['id'];?>" class="ninja-forms-delete-sub"><?php _e( 'Delete', 'ninja-forms' ); ?></a> | </span>
-							<span class="export"><a href="<?php echo $download_link;?>" id="ninja_forms_sub_<?php echo $sub['id'];?>" class="ninja-forms-export-sub"><?php _e( 'Export to CSV', 'ninja-forms' ); ?></a></span>
-
+							<span class="export"><a href="<?php echo $csv_download_link;?>" id="ninja_forms_sub_<?php echo $sub['id'];?>" class="ninja-forms-export-sub"><?php _e( 'Export to CSV', 'ninja-forms' ); ?></a></span>
+							<?php
+							// hook in here to allow extra row actions
+							do_action( 'ninja_forms_sub_table_row_actions', $data, $sub['id'], $form_id );
+							?>
 						</div>
 					</td>
 				<?php
