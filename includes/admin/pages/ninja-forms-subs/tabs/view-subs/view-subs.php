@@ -291,9 +291,7 @@ function ninja_forms_tab_view_subs(){
 							echo $date;
 						?>
 						<div class="row-actions">
-							
 							<?php
-							$row_actions = array();
 							/**
 							 * ninja_forms_sub_table_row_actions hook
 							 * hook in here to allow extra row actions
@@ -302,7 +300,7 @@ function ninja_forms_tab_view_subs(){
 							 * @hooked ninja_forms_sub_table_row_actions_delete - 20
 							 * @hooked ninja_forms_sub_table_row_actions_export - 30
 							 */
-							$row_actions = apply_filters( 'ninja_forms_sub_table_row_actions', $row_actions, $data, $sub['id'], $form_id );
+							$row_actions = apply_filters( 'ninja_forms_sub_table_row_actions', array(), $data, $sub['id'], $form_id );
 							echo implode(" | ", $row_actions);
 							?>
 						</div>
