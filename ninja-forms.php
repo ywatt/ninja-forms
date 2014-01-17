@@ -75,6 +75,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/scripts.php" );
 
 // Include Processing Functions if a form has been submitted.
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/class-ninja-forms-processing.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/processing/class-display-loading.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/pre-process.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/process.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/post-process.php" );
@@ -113,9 +114,9 @@ require_once( NINJA_FORMS_DIR . "/includes/display/form/form-visibility.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/restore-progress.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/inside-label-hidden.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-type.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/fields/calc-filter.php" );
 //require_once( NINJA_FORMS_DIR . "/includes/display/fields/list-term-filter.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/fields/calc-field-class.php" );
 
 /* Require Pre-Registered Tabs and their sidebars */
 
