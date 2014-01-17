@@ -24,6 +24,12 @@ function ninja_forms_calc_listen_field_class( $form_id ) {
 			$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 		}
 		
+		if ( isset ( $field_row['type'] ) ) {
+			$field_type = $field_row['type'];
+		} else {
+			$field_type = '';
+		}
+
 		$field_data = $field_row['data'];
 		$field_data = apply_filters( 'ninja_forms_field', $field_data, $field_id );
 		$calc_listen = '';
@@ -40,12 +46,16 @@ function ninja_forms_calc_listen_field_class( $form_id ) {
 
 			$data = $field['data'];
 
+			if ( isset ( $field['type'] ) ) {
+				$field_type = $field['type'];
+			} else {
+				$field_type = '';
+			}
+
 			// Check for advanced calculation fields that reference this field. If we find one, and use_calc_adv is set to 1, add a special class to this field.
-			if ( $field['type'] == '_calc' ) {
+			if ( $field_type == '_calc' ) {
 
 				// Check to see if this is a sub_total calculation
-
-
 				if ( isset ( $data['calc_method'] ) ) {
 					$calc_method = $data['calc_method'];
 				} else {
@@ -88,7 +98,7 @@ function ninja_forms_calc_listen_field_class( $form_id ) {
 		}
 
 		// Check to see if this is a tax field;
-		if ( $field_row['type'] == '_tax' ) {
+		if ( $field_type == '_tax' ) {
 			if ( $calc_listen == '' ) {
 				$calc_listen = 'ninja-forms-field-calc-listen';
 			}

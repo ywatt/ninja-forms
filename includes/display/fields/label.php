@@ -82,6 +82,12 @@ function ninja_forms_display_label_inside( $data, $field_id ){
 		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 
+	if ( isset ( $field_row['type'] ) ) {
+		$field_type = $field_row['type'];
+	} else {
+		$field_type = '';
+	}
+
 	$field_data = $field_row['data'];
 	if ( isset( $field_data['label_pos'] ) ) {
 		$label_pos = $field_data['label_pos'];
@@ -95,7 +101,7 @@ function ninja_forms_display_label_inside( $data, $field_id ){
 		$label = '';
 	}
 
-	if ( $field_row['type'] != '_list' ) {
+	if ( $field_type != '_list' ) {
 		if ( $label_pos == 'inside' ) {
 			$data['default_value'] = $label;
 		}

@@ -11,21 +11,11 @@ function ninja_forms_register_display_fields(){
 function ninja_forms_display_fields($form_id){
 	global $ninja_forms_fields, $ninja_forms_loading, $ninja_forms_processing;
 
-	if ( isset ( $ninja_forms_loading ) ) {
-		$field_results = $ninja_forms_loading->get_all_fields();
-	} else {
-		$field_results = $ninja_forms_processing->get_all_fields();
-	}
+	$field_results = ninja_forms_get_fields_by_form_id($form_id);
+	$field_results = apply_filters('ninja_forms_display_fields_array', $field_results, $form_id);
 
-	//$field_results = ninja_forms_get_fields_by_form_id($form_id);
-	//$field_results = apply_filters('ninja_forms_display_fields_array', $field_results, $form_id);
 	if ( is_array ( $field_results ) AND !empty ( $field_results ) ) {
-		foreach ( $field_results as $field_id => $user_value ) {
-			if ( isset ( $ninja_forms_loading ) ) {
-				$field = $ninja_forms_loading->get_field_settings( $field_id );
-			} else {
-				$field = $ninja_forms_processing->get_field_settings( $field_id );
-			}
+		foreach ( $field_results as $field ) {
 
 			if( isset( $ninja_forms_fields[$field['type']] ) ){
 				$type = $ninja_forms_fields[$field['type']];
@@ -172,7 +162,11 @@ function ninja_forms_get_field_wrap_class($field_id){
 	$form_id = $field_row['form_id'];
 	$data = $field_row['data'];
 
-	$type_slug = $field_row['type'];
+	if ( isset ( $field_row['type'] ) ) {
+		$type_slug = $field_row['type'];
+	} else {
+		$type_slug = '';
+	}
 
 	if(strpos($type_slug, "_") === 0){
 		$type_slug = substr($type_slug, 1);

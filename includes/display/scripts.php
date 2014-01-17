@@ -37,8 +37,18 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 				$field = $ninja_forms_processing->get_field_settings( $field_id );
 			}
 
-			$field_id = $field['id'];
-			$field_type = $field['type'];
+			if ( isset ( $field['id'] ) ) {
+				$field_id = $field['id'];
+			} else {
+				$field_id = '';
+			}
+
+			if ( isset ( $field['type'] ) ) {
+				$field_type = $field['type'];
+			} else {
+				$field_type = '';
+			}
+
 			$field['data'] = apply_filters( 'ninja_forms_display_script_field_data', $field['data'], $field_id );
 			if( isset( $field['data']['datepicker'] ) AND $field['data']['datepicker'] == 1 ){
 				$datepicker = 1;
@@ -125,8 +135,20 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 			} else {
 				$field = $ninja_forms_processing->get_field_settings( $field_id );
 			}
-			$field_id = $field['id'];
-			$field_type = $field['type'];
+			
+			if ( isset ( $field['id'] ) ) {
+				$field_id = $field['id'];
+			} else {
+				$field_id = '';
+			}
+
+			if ( isset ( $field['type'] ) ) {
+				$field_type = $field['type'];
+			} else {
+				$field_type = '';
+			}
+
+
 			if ( $field_type == '_calc' ) {
 				if ( isset ( $field['data']['payment_total'] ) AND $field['data']['payment_total'] == 1 ) {
 					if ( $sub_total AND $tax AND $field['data']['calc_method'] == 'auto' ) {
@@ -149,7 +171,7 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 					} else {
 						$field = $ninja_forms_processing->get_field_settings( $field_id );
 					}
-					if (preg_match("/\bfield_".$field['id']."\b/i", $calc['eq'] ) ) {
+					if (preg_match("/\bfield_".$field_id."\b/i", $calc['eq'] ) ) {
 						$calc_fields[$calc_id]['fields'][] = $field['id'];
 					}
 				}

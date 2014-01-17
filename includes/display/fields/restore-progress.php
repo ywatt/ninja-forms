@@ -14,7 +14,11 @@ function ninja_forms_filter_restore_progress( $data, $field_id ){
 		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 	
-	$field_type = $field_row['type'];
+	if ( isset ( $field_row['type'] ) ) {
+		$field_type = $field_row['type'];
+	} else {
+		$field_type = '';
+	}
 
 	if ( isset( $ninja_forms_fields[$field_type]['esc_html'] ) ) {
 		$esc_html = $ninja_forms_fields[$field_type]['esc_html'];

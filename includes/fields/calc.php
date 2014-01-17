@@ -468,7 +468,13 @@ function ninja_forms_field_calc_pre_process(){
 				$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 			}
 
-			$field_type = $field_row['type'];
+			if ( isset ( $field_row['type'] ) ) {
+				$field_type = $field_row['type'];
+			} else {
+				$field_type = '';
+			}
+
+			
 			if ( $field_type == '_calc' ) {
 				$field_data = $field_row['data'];
 				if ( isset ( $field_data['default_value'] ) ){
@@ -517,9 +523,15 @@ function ninja_forms_field_calc_pre_process(){
 						} else {
 							$field = $ninja_forms_processing->get_field_settings( $f_id );
 						}
+
+						if ( isset ( $field['type'] ) ) {
+							$f_type = $field['type'];
+						} else {
+							$f_type = '';
+						}
 						
-						$data = apply_filters( 'ninja_forms_field', $field['data'], $field['id'] );
-						if ( $field['type'] == '_tax' ) {
+						$data = apply_filters( 'ninja_forms_field', $field['data'], $f_id );
+						if ( $f_type == '_tax' ) {
 							// There is a tax field; save its field_id.
 							$tax = $field['id'];
 						} else if ( isset ( $data['payment_sub_total'] ) AND $data['payment_sub_total'] == 1 ) {
@@ -608,7 +620,7 @@ function ninja_forms_field_calc_pre_process(){
 								}
 								break;
 							case 'eq':
-								if (preg_match("/\bfield_".$field['id']."\b/i", $calc_eq ) ) {
+								if (preg_match("/\bfield_".$f_id."\b/i", $calc_eq ) ) {
 									if ( $field['type'] == '_calc' ) {
 										$calc_value = ninja_forms_calc_field_loop( $field['id'], $calc_eq );
 									} else {
