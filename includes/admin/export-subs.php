@@ -100,20 +100,20 @@ function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
 	$filename = $filename . ".csv";
 
 	if( $return ){
-		return str_putcsv($array , 
-			apply_filters('ninja_forms_csv_delimiter',',') , 
-			apply_filters('ninja_forms_csv_enclosure','"') , 
-			apply_filters('ninja_forms_csv_terminator',"\n") );
+		return str_putcsv( $array, 
+			ninja_forms_get_csv_delimiter(), 
+			ninja_forms_get_csv_enclosure(), 
+			ninja_forms_get_csv_terminator() );
 	}else{
 		header("Content-type: application/csv");
 		header("Content-Disposition: attachment; filename=".$filename);
 		header("Pragma: no-cache");
 		header("Expires: 0");
 		echo apply_filters('ninja_forms_csv_bom',"\xEF\xBB\xBF") ; // Byte Order Mark
-		echo str_putcsv($array , 
-			apply_filters('ninja_forms_csv_delimiter',',') , 
-			apply_filters('ninja_forms_csv_enclosure','"') , 
-			apply_filters('ninja_forms_csv_terminator',"\n") );
+		echo str_putcsv( $array, 
+			ninja_forms_get_csv_delimiter(), 
+			ninja_forms_get_csv_enclosure(), 
+			ninja_forms_get_csv_terminator() );
 
 		die();
 	}
@@ -139,4 +139,34 @@ function implode_r ($glue, $pieces){
 		}
 	}
 	return $out;
+}
+
+
+/**
+ * Get the csv delimiter
+ * 
+ * @return string
+ */
+function ninja_forms_get_csv_delimiter() {
+	return apply_filters( 'ninja_forms_csv_delimiter', ',' );
+}
+
+
+/**
+ * Get the csv enclosure
+ * 
+ * @return string
+ */
+function ninja_forms_get_csv_enclosure() {
+	return apply_filters( 'ninja_forms_csv_enclosure', '"' );
+}
+
+
+/**
+ * Get the csv delimiter
+ * 
+ * @return string
+ */
+function ninja_forms_get_csv_terminator() {
+	return apply_filters( 'ninja_forms_csv_terminator', "\n" );
 }
