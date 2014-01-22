@@ -710,7 +710,7 @@ jQuery(document).ready(function($) {
 
 	// Handle the importing of textarea data when the user clicks: "done"
 
-	$(".save-list-import").click(function(e){
+	$(document).on( 'click', '.save-list-import', function(e){
 		e.preventDefault();
 		var options = $(this).parent().find("textarea").val();
 		var field_id = $(this).attr("rel");
