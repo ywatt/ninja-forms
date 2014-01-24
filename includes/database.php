@@ -238,7 +238,7 @@ function ninja_forms_get_all_defs(){
  * @return string $count
  */
 
-function ninja_forms_get_subs_count( $args = array() ) {
+function ninja_forms_get_sub_count( $args = array() ) {
 	global $wpdb;
 
 	$plugin_settings = get_option( 'ninja_forms_settings' );
