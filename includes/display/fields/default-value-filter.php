@@ -19,6 +19,10 @@ function ninja_forms_default_value_filter( $data, $field_id ) {
 		$field_type = $ninja_forms_processing->get_field_setting( $field_id, 'type' );
 	}
 
+	if ( $default_value === false and isset ( $data['default_value'] ) ) {
+		$default_value = $data['default_value'];
+	}
+
 	if ( $ninja_forms_fields[ $field_type ]['process_field'] ) {
 		$data['default_value'] = $default_value;
 	}
