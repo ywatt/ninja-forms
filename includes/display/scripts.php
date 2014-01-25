@@ -16,6 +16,7 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 	$qtip = 0;
 	$mask = 0;
 	$currency = 0;
+	$input_limit= 0;
 	$rating = 0;
 	$calc_value = array();
 	$calc_fields = array();
@@ -64,6 +65,11 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 
 			if( isset( $field['data']['mask'] ) AND $field['data']['mask'] == 'currency' ){
 				$currency = 1;
+			}			
+
+			if( isset( $field['data']['input_limit'] ) AND $field['data']['input_limit'] != '' ){
+				$input_limit = $field['data']['input_limit'];
+				$input_limit_type = $field['data']['input_limit_type'];
 			}
 
 			if( $field_type == '_rating' ){
@@ -179,29 +185,35 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 		}
 	}
 
-	if( $datepicker == 1 ){
+	if ( $datepicker == 1 ) {
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 	}
 
-	if( $qtip == 1 ){
+	if ( $qtip == 1 ) {
 		wp_enqueue_script( 'jquery-qtip',
 			NINJA_FORMS_URL .'/js/min/jquery.qtip.min.js',
 			array( 'jquery', 'jquery-ui-position' ) );
 	}
 
-	if( $mask == 1 ){
+	if ( $mask == 1 ) {
 		wp_enqueue_script( 'jquery-maskedinput',
 			NINJA_FORMS_URL .'/js/min/jquery.maskedinput.min.js',
 			array( 'jquery' ) );
 	}
 
-	if( $currency == 1 ){
+	if ( $currency == 1 ) {
 		wp_enqueue_script('jquery-autonumeric',
 			NINJA_FORMS_URL .'/js/min/autoNumeric.min.js',
 			array( 'jquery' ) );
 	}
 
-	if( $rating == 1 ){
+	if ( $input_limit != 1 ) {
+		wp_enqueue_script('jquery-char-input-limit',
+			NINJA_FORMS_URL .'/js/dev/word-and-character-counter.js',
+			array( 'jquery' ) );
+	}
+
+	if ( $rating == 1 ) {
 		wp_enqueue_script('jquery-rating',
 			NINJA_FORMS_URL .'/js/min/jquery.rating.min.js',
 			array( 'jquery' ) );

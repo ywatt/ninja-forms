@@ -221,6 +221,24 @@ function ninja_forms_field_text_display( $field_id, $data ){
 		$mask = $data['mask'];
 	}else{
 		$mask = '';
+	}	
+
+	if( isset( $data['input_limit'] ) ){
+		$input_limit = $data['input_limit'];
+	}else{
+		$input_limit = '';
+	}
+
+	if( isset( $data['input_limit_type'] ) ){
+		$input_limit_type = $data['input_limit_type'];
+	}else{
+		$input_limit_type = '';
+	}
+
+	if( isset( $data['input_limit_msg'] ) ){
+		$input_limit_msg = $data['input_limit_msg'];
+	}else{
+		$input_limit_msg = '';
 	}
 
 	switch( $mask ){
@@ -243,7 +261,7 @@ function ninja_forms_field_text_display( $field_id, $data ){
 	}
 
 	?>
-	<input id="ninja_forms_field_<?php echo $field_id;?>" data-mask="<?php echo $mask;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="text" class="<?php echo $field_class;?> <?php echo $mask_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
+	<input id="ninja_forms_field_<?php echo $field_id;?>" data-mask="<?php echo $mask;?>" data-input-limit="<?php echo $input_limit;?>" data-input-limit-type="<?php echo $input_limit_type;?>" data-input-limit-msg="<?php echo $input_limit_msg;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="text" class="<?php echo $field_class;?> <?php echo $mask_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
 	<?php
 
 }

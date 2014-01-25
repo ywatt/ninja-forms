@@ -44,7 +44,9 @@ function ninja_forms_new_field(){
 		$label = $type_name;
 	}
 
-	$data = serialize(array('label' => $label));
+	$input_limit_msg = __( 'character(s) left', 'ninja-forms' );
+
+	$data = serialize( array( 'label' => $label, 'input_limit_msg' => $input_limit_msg ) );
 
 	$order = 999;
 

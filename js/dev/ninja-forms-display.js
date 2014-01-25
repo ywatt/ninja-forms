@@ -71,6 +71,20 @@ jQuery(document).ready(function(jQuery) {
 
 	/* * * End Help Hover JS * * */
 
+	/* * * Begin Character/Word Limit JS * * */
+
+	jQuery(".input-limit").each(function() {
+		var input_limit = jQuery(this).data( 'input-limit' );
+		var input_limit_type = jQuery(this).data( 'input-limit-type' );
+		var input_limit_msg = jQuery(this).data( 'input-limit-msg' );
+		jQuery(this).counter( {
+		    count: 'down', 
+		    goal: input_limit,
+		    type: input_limit_type,
+		    msg: input_limit_msg
+		} );
+
+	});
 
 	/* * * Begin ajaxForms JS * * */
 

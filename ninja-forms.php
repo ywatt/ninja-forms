@@ -43,7 +43,10 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 
 	jQuery AutoNumeric Plugin v.1.9.15
 	http://www.decorplanit.com/plugin/
-	By: Bob Knothe And okolov Yura aka funny_falcon
+	By: Bob Knothe And okolov Yura aka funny_falcon	
+
+	word-and-character-counter.js
+	v2.4 (c) Wilkins Fernandez
 
 */
 
@@ -57,7 +60,7 @@ define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
 define("NINJA_FORMS_SUBS_TABLE_NAME", $wpdb->prefix . "ninja_forms_subs");
 
-define("NINJA_FORMS_JS_DEBUG", false);
+define("NINJA_FORMS_JS_DEBUG", true);
 
 /* Require Core Files */
 require_once( NINJA_FORMS_DIR . "/includes/database.php" );
@@ -160,6 +163,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/calc-field-class.php" 
 	require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/user-info-fields.php" );
 	//require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/list-terms.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/post-meta-values.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/input-limit.php" );
 
 	/* * * * ninja-forms - Main Form Editing Page
 
