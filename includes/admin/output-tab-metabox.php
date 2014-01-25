@@ -123,6 +123,16 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 			}else{
 				$size = '';
 			}
+			if(isset($s['min'])){
+				$min = $s['min'];
+			}else{
+				$min = 0;
+			}
+			if(isset($s['max'])){
+				$max = $s['max'];
+			}else{
+				$max = '';
+			}
 
 			if( is_array( $name_array ) ){
 				$tmp = '';
@@ -171,6 +181,21 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					?>
 
 					<input type="text" class="code widefat <?php echo $class;?>" name="<?php echo $name;?>" id="<?php echo $name;?>" value="<?php echo $value;?>" />
+					<?php if( $help_text != ''){ ?>
+					<a href="#" class="tooltip">
+					    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="">
+					    <span>
+					        <img class="callout" src="<?php echo NINJA_FORMS_URL;?>/images/callout.gif" />
+					        <?php echo $help_text;?>
+					    </span>
+					</a>
+					<?php }
+					break;
+				case 'number':
+					$value = ninja_forms_esc_html_deep( $value );
+					?>
+
+					<input type="number" class="code <?php echo $class;?>" name="<?php echo $name;?>" id="<?php echo $name;?>" value="<?php echo $value;?>" min="<?php echo $min; ?>" max="<?php echo $max; ?>" />
 					<?php if( $help_text != ''){ ?>
 					<a href="#" class="tooltip">
 					    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="">

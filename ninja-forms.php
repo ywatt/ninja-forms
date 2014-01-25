@@ -43,7 +43,7 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 
 	jQuery AutoNumeric Plugin v.1.9.15
 	http://www.decorplanit.com/plugin/
-	By: Bob Knothe And okolov Yura aka funny_falcon	
+	By: Bob Knothe And okolov Yura aka funny_falcon
 
 	word-and-character-counter.js
 	v2.4 (c) Wilkins Fernandez
@@ -114,6 +114,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/form/open-form-tag.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/close-form-tag.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/hidden-fields.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-visibility.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/form/sub-limit.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/restore-progress.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/inside-label-hidden.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-type.php" );
