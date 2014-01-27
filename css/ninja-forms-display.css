@@ -137,6 +137,10 @@ a.tooltip span
 .field-wrap.label-right .ninja-forms-star-rating-control {
     margin-right: 8px;
 }
+.field-wrap.label-right label,
+.field-wrap.label-left label  {
+    display: inline;
+}
 
 .label-above label {
     margin-bottom: 5px;
