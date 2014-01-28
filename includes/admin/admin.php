@@ -83,13 +83,7 @@ function ninja_forms_admin_edit_form(){
 	}
 
 	if ( $form_id != '' ) {
-		$form_row = ninja_forms_get_form_by_id( $form_id );
-	}
-
-	if ( isset ( $form_row['data'] ) ) {
-		$form_data = $form_row['data'];
-	} else {
-		$form_data = '';
+		$form_settings = nf_get_form_settings( $form_id );
 	}
 
 	$high_priority_tabs = array();
@@ -113,7 +107,7 @@ function ninja_forms_admin_edit_form(){
 	?>
 
 	<div id="icon-ninja-custom-forms" class="icon32"><br></div>
-	<h2>Form Editor - <?php if ( isset ( $form_data['form_title'] ) ) echo $form_data['form_title'];?> - ID : <?php echo $form_id;?></h2>
+	<h2>Form Editor - <?php if ( isset ( $form_settings['name']['value'] ) ) echo $form_settings['name']['value'];?> - ID : <?php echo $form_id;?></h2>
 
 	<div id="nav-menus-frame">
 	<div id="menu-settings-column" class="metabox-holder">
@@ -630,7 +624,7 @@ function ninja_forms_admin_edit_form(){
 						</label>
 					</th>
 					<td>
-						<select id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting">
+						<select id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting" data-meta-id="<%= setting.get( 'meta_id' )%>">
 						<%
 						_.each(setting.get('options'), function(option) {
 							%>
@@ -639,6 +633,21 @@ function ninja_forms_admin_edit_form(){
 						});
 						%>
 						</select>
+						<span class="howto">
+							<%= setting.get('desc') %>
+						</span>
+					</td>
+					<%
+					break;
+				case 'number':
+					%>
+					<th>
+						<label for="<%= setting.id %>">
+							<%= setting.get('label') %>
+						</label>
+					</th>
+					<td>
+						<input type="number" id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting" value="<%= value %>" min="<%= setting.get('min') %>" max="<%= setting.get('max') %>"/>
 						<span class="howto">
 							<%= setting.get('desc') %>
 						</span>
@@ -654,13 +663,15 @@ function ninja_forms_admin_edit_form(){
 					</th>
 					<td>
 						<%
+						var x = 0;
 						_.each(setting.get('options'), function(option) {
 							%>
-							<label for="<%= setting.id %>">
-								<input type="radio" value="<%= option.value %>" <% if ( value == option.value ) { %> checked <% } %> id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting" value="<%= option.value %>">
+							<label>
+								<input type="radio" name="<%= setting.id %>" value="<%= option.value %>" <% if ( value == option.value ) { %> checked <% } %> id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting" />
 								<%= option.name %>
 							</label>
 							<%
+							x++;
 						});
 						%>
 						</select>
@@ -668,19 +679,6 @@ function ninja_forms_admin_edit_form(){
 							<%= setting.get('desc') %>
 						</span>
 					</td>
-					<%
-					break;
-				case 'textarea':
-					%>
-					<th colspan="2">
-						<label for="<%= setting.id %>">
-							<%= setting.get('label') %>
-						</label>
-						<textarea id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting"><%= value %></textarea>
-						<span class="howto">
-							<%= setting.get('desc') %>
-						</span>
-					</th>
 					<%
 					break;
 				case 'text':
@@ -696,6 +694,19 @@ function ninja_forms_admin_edit_form(){
 							<%= setting.get('desc') %>
 						</span>
 					</td>
+					<%
+					break;					
+				case 'textarea':
+					%>
+					<th colspan="2">
+						<label for="<%= setting.id %>">
+							<%= setting.get('label') %>
+						</label>
+						<textarea id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting"><%= value %></textarea>
+						<span class="howto">
+							<%= setting.get('desc') %>
+						</span>
+					</th>
 					<%
 					break;
 				case 'repeater-text':

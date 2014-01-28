@@ -211,71 +211,44 @@ class Form_Settings_API extends Ninja_Forms_Admin_Rest_API
      		case 'GET':
                 $tab = $this->request['tab'];
                 $form_id = $this->request['form_id'];
+                $data = $this->request['data'];
+
      			if ( isset ( $this->request['form_id'] ) ) {
-     				$form_row = ninja_forms_get_form_by_id( $form_id );
-                    $form_data = $form_row['data'];
+     				$form_settings = nf_get_form_settings( $form_id );
      			}
 				$args = array();
                 foreach( $ninja_forms_form_settings[$tab] as $id => $setting ){
                    
-                    if ( isset ( $setting['type'] ) ) {
-                        $type = $setting['type'];
-                    } else {
-                        $type = '';
-                    }
-
-                    if ( isset ( $setting['label'] ) ) {
-                        $label = $setting['label'];
-                    } else {
-                        $label = '';
-                    }
-
-                    if ( isset ( $setting['options'] ) ) {
-                        $options = $setting['options'];
-                    } else {
-                        $options = '';
-                    }
-                    
-                    if ( isset ( $setting['class'] ) ) {
-                        $class = $setting['class'];
-                    } else {
-                        $class = '';
-                    }
-
-                    if ( isset ( $setting['desc'] ) ) {
-                        $desc = $setting['desc'];
-                    } else {
-                        $desc = '';
-                    }
-
-                    if ( isset ( $form_data[$id] ) ) {
-                        $current_value = $form_data[$id];
+                    if ( isset ( $form_settings[ $id ] ) ) {
+                        $current_value = $form_settings[ $id ]['value'];
+                        $meta_id = $form_settings[ $id ]['meta_id'];
                     } else if ( isset ( $setting['default_value'] ) ) {
                         $current_value = $setting['default_value'];
+                        $meta_id = 'new';
                     } else {
                         $current_value = '';
+                        $meta_id = 'new';
                     }
 
                     $current_value = apply_filters( 'ninja_forms_rest_get_value', $current_value, $id, $form_id );
 
-                    $args[] = array(
-                        'id' => $id,
-                        'type' => $type,
-                        'label' => $label,
-                        'options' => $options,
-                        'current_value' => $current_value,
-                        'class' => $class,
-                        'desc' => $desc,
-                    ); 
+                    $setting['id'] = $id;
+                    $setting['current_value'] = $current_value;
+                    $setting['meta_id'] = $meta_id;
+
+                    $args[] = $setting;
                 }
 	        	
-                return $args;
+                return apply_filters( 'nf_rest_get_array', $args, $form_id, $tab, $data );
                 break;
      		case 'PUT':
      			$data = json_decode( $this->file );
      			$current_value = $data->current_value;
      			$form_setting = $data->id;
      			$form_id = $data->form_id;
+                $meta_id = $data->meta_id;
+                nf_update_meta( $meta_id, $current_value );
+                /*
                 $current_value = apply_filters( 'ninja_forms_rest_put_value', $current_value, $form_setting, $form_id );
      			$args = array(
      				'form_id' => $form_id,
@@ -286,6 +259,7 @@ class Form_Settings_API extends Ninja_Forms_Admin_Rest_API
     			ninja_forms_update_form_setting( $args );
                 $current_value = apply_filters( 'ninja_forms_rest_put_return_value', $current_value, $form_setting, $form_id );
                 $data->current_value = $current_value;
+                */
      			return $data;
      			break;
 		}

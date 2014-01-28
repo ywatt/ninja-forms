@@ -1,8 +1,9 @@
 <?php
 
 function ninja_forms_admin_all_forms() {
-	$all_forms = ninja_forms_get_all_forms();
-	$form_count = count($all_forms);
+	$all_forms = nf_get_all_forms();
+
+	$form_count = count( $all_forms );
 
 	if( isset( $_REQUEST['limit'] ) ){
 		$saved_limit = absint( $_REQUEST['limit'] );
@@ -120,13 +121,16 @@ function ninja_forms_admin_all_forms() {
 		</thead>
 		<tbody>
 	<?php
-	if(is_array($all_forms) AND !empty($all_forms) AND $current_page <= $page_count){
-		for ($i = $start; $i < $end; $i++) {
+	if ( is_array( $all_forms ) AND !empty ( $all_forms ) AND $current_page <= $page_count ) {
+		for ( $i = $start; $i < $end; $i++ ) {
 			$form_id = $all_forms[$i]['id'];
-			$data = $all_forms[$i]['data'];
-			$date_updated = $all_forms[$i]['date_updated'];
+			$settings = nf_get_form_settings( $form_id );
+
+			$date_updated = $settings['date_updated'];
+			
 			$date_updated = strtotime( $date_updated );
 			$date_updated = date_i18n( __( 'F d, Y', 'ninja-forms' ), $date_updated );
+
 			$edit_link = esc_url( add_query_arg( array( 'form_id' => $form_id ), admin_url( 'admin.php?page=ninja-forms-edit' ) ) );
 			$subs_link = admin_url( 'admin.php?page=ninja-forms-subs&form_id='.$form_id );
 			$export_link = esc_url( add_query_arg( array( 'export_form' => 1, 'form_id' => $form_id ) ) );
@@ -138,7 +142,7 @@ function ninja_forms_admin_all_forms() {
 				</th>
 				<td class="post-title page-title column-title">
 					<strong>
-						<a href="<?php echo $edit_link;?>"><?php echo $data['form_title'];?></a>
+						<a href="<?php echo $edit_link;?>"><?php echo $settings['name'];?></a>
 					</strong>
 					<div class="row-actions">
 						<span class="edit"><a href="<?php echo $edit_link;?>"><?php _e( 'Edit', 'ninja-forms' ); ?></a> | </span>

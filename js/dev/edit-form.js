@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
 			form_id: form_id
 		},
 
-		serverAttrs: ['current_value', 'id', 'form_id'],
+		serverAttrs: ['current_value', 'id', 'form_id', 'meta_id'],
 
 	    initialize: function () {
 	        // Define server attributes for this model
@@ -157,12 +157,15 @@ jQuery(document).ready(function($) {
 		} else {
 			formSettingsView.template = '#tmpl-form-settings';
 		}
-		change_tab( this.id, $(this).html(), $(this).attr('title') );
+
+		var data = $(this).data();
+
+		change_tab( this.id, $(this).html(), $(this).attr('title'), data );
 	});
 
-	function change_tab( tab_id, title, desc ) {
+	function change_tab( tab_id, title, desc, data ) {
 		formSettings.fetch({
-			data: $.param({ tab: tab_id, form_id: form_id }),
+			data: $.param({ tab: tab_id, form_id: form_id, data:data }),
 			reset: true,
 			success: function() {
 	            $('.media-menu-item').removeClass('active');

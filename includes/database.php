@@ -585,3 +585,107 @@ function ninja_forms_set_transient(){
 function ninja_forms_delete_transient(){
 	delete_transient( $_SESSION['ninja_forms_transient_id'] );
 }
+
+/**
+ * Function that returns all the forms in the database.
+ * 
+ * @since 3.0
+ * @return array $forms
+ */
+
+function nf_get_all_forms() {
+	global $wpdb;
+
+	$forms = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM ".NF_TABLE_NAME." WHERE type = 'form'", null ), ARRAY_A );
+	
+	return $forms;
+}
+
+/**
+ * Function that gets all notifications for a given form id
+ * 
+ * @since 3.0
+ * @param $form_id
+ * @return array $notifications
+ */
+
+function nf_get_notifications_by_form_id( $form_id ) {
+	global $wpdb;
+
+	$notifications = $wpdb->get_results( $wpdb->prepare( "SELECT object_id FROM ".NF_RELATIONSHIPS_TABLE_NAME." WHERE type = 'notification' AND form_id = %d", $form_id ), ARRAY_A);
+	$tmp_array = array();
+	foreach( $notifications as $id ) {
+		$object_id = $id['object_id'];
+		$settings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM ".NF_META_TABLE_NAME." WHERE object_id = %d", $id ), ARRAY_A);
+		foreach ( $settings as $s ) {
+			$tmp_array[ $object_id ][ $s['meta_key'] ] = $s['meta_value'];
+		}
+	}
+
+	return $tmp_array;
+}
+
+/**
+ * Function that gets a notification by id
+ *
+ * @since 3.0
+ * @param string $id
+ * @return array $notification
+ */
+
+function nf_get_notification_by_id( $id ) {
+	global $wpdb;
+
+	$notification = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM ".NF_META_TABLE_NAME." WHERE object_id = %d", $id ), ARRAY_A);
+	$tmp_array = array();
+	if ( is_array( $notification ) ) {
+		foreach( $notification as $var ) {
+			$tmp_array[ $var['meta_key'] ] = $var['meta_value'];
+		}
+	}
+
+	return $tmp_array;
+}
+
+/**
+ * Function that gets all the settings and their values for a particular form.
+ *
+ * @since 3.0
+ * @param string $form_id
+ * @return array $settings
+ */
+
+function nf_get_form_settings( $form_id ) {
+	global $wpdb;
+
+	$tmp_array = array();
+	$settings = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM ".NF_META_TABLE_NAME." WHERE object_id = %d", $form_id ), ARRAY_A);
+	if ( is_array( $settings ) ) {
+		foreach( $settings as $setting ) {
+			$tmp_array[ $setting['meta_key'] ]['meta_id'] = $setting['id'];
+			$tmp_array[ $setting['meta_key'] ]['value'] = $setting['meta_value'];
+		}
+	}
+
+	return $tmp_array;
+}
+
+/**
+ * Function that updates a piece of object meta
+ *
+ * @since 3.0
+ * @param string $meta_id
+ * @param string $meta_value
+ * @return void
+ */
+
+function nf_update_meta( $meta_id, $meta_value ) {
+	global $wpdb;
+
+	$meta_row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM ".NF_META_TABLE_NAME." WHERE object_id = %d", $meta_id ), ARRAY_A );
+	if ( !$meta_row ) {
+		echo "NO ROW";
+	} else {
+		echo "ROW FOUND";
+	}
+}

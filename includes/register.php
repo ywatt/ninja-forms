@@ -289,11 +289,26 @@ function ninja_forms_register_tab_metabox_options( $args = array() ){
 function ninja_forms_register_form_settings( $args = array() ) {
 	global $ninja_forms_form_settings;
 
-	extract( $args );
+	$defaults = array(
+		'class' => '',
+		'default_value' => '',		
+		'desc' => '',
+		'label' => '',
+		'options' => '',				
+		'type' => '',
+	);
 
-	foreach( $settings as $id => $setting ) {
-		$ninja_forms_form_settings[$tab][$id] = $setting;
+	// Parse incomming $args into an array and merge it with $defaults
+	$args = wp_parse_args( $args, $defaults );
+
+	$tab = $args['tab'];
+	unset( $args['tab'] );
+
+	if ( !isset ( $ninja_forms_form_settings[$tab] ) ) {
+		$ninja_forms_form_settings[$tab] = array();		
 	}
+
+	$ninja_forms_form_settings[$tab] = array_merge( $ninja_forms_form_settings[$tab], $args['settings'] );
 }
 
 function ninja_forms_rest_put_filter( $value, $form_setting, $form_id ) {
@@ -362,7 +377,7 @@ function register_settings_tabs() {
 		'priority' => 'core',
 		'desc' => __( 'These settings affect what happens after a form is submitted.', 'ninja-forms' ),
 	);
-	ninja_forms_register_form_settings_tab( $args );
+	//ninja_forms_register_form_settings_tab( $args );
 
 	$args = array(
 		'id' => 'notifications',
@@ -404,6 +419,7 @@ function register_settings_tabs() {
 					</tr>
 				</thead>
 				<tbody>
+				<% _.each(settings, function(setting){ %>
 					<tr>
 						<th scope="row" class="check-column">
 							<input type="checkbox" id="" name="notification_ids[]" value="" class="ninja-forms-bulk-action">
@@ -411,7 +427,7 @@ function register_settings_tabs() {
 
 						<td class="post-title page-title column-title">
 							<strong>
-								<a href="#notification_single" class="media-menu-item" id="notification_single" title="">Admin Email</a>
+								<a href="#notification_single" class="media-menu-item" id="notification_single" title="" data-notification-id="<%= setting.get( "id" ) %>" ><%= setting.get( "name" ) %></a>
 							</strong>
 							<div class="row-actions">
 								<span class="activate"><a href="">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
@@ -421,58 +437,13 @@ function register_settings_tabs() {
 							</div>
 						</td>
 						<td>
-							Email
+							<%= setting.get( "type" ) %>
 						</td>
 						<td>
 							6 January 2014
 						</td>
 					</tr>
-					<tr>
-						<th scope="row" class="check-column">
-							<input type="checkbox" id="" name="notification_ids[]" value="" class="ninja-forms-bulk-action">
-						</th>
-
-						<td class="post-title page-title column-title">
-							<strong>
-								<a href="#notification_single" class="media-menu-item" id="notification_single" title="">User Email</a>
-							</strong>
-							<div class="row-actions">
-								<span class="activate"><a href="">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
-								<span class="trash"><a class="ninja-forms-delete-form" title="'.__( 'Delete this notification', 'ninja-forms' ).'" href="#" id="">'.__( 'Delete', 'ninja-forms' ).'</a> | </span>
-								<span class="export"><a href="" title="'.__( 'Export Form', 'ninja-forms' ).'">'.__( 'Export', 'ninja-forms' ).'</a> | </span>
-								<span class="duplicate"><a href="" title="'.__( 'Duplicate Form', 'ninja-forms' ).'">'.__( 'Duplicate', 'ninja-forms' ).'</a></span>
-							</div>
-						</td>
-						<td>
-							Email
-						</td>
-						<td>
-							6 January 2014
-						</td>
-					</tr>					
-					<tr>
-						<th scope="row" class="check-column">
-							<input type="checkbox" id="" name="notification_ids[]" value="" class="ninja-forms-bulk-action">
-						</th>
-
-						<td class="post-title page-title column-title">
-							<strong>
-								<a href="#notification_single" class="media-menu-item" id="notification_single" title="">Success Message</a>
-							</strong>
-							<div class="row-actions">
-								<span class="activate"><a href="">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
-								<span class="trash"><a class="ninja-forms-delete-form" title="'.__( 'Delete this notification', 'ninja-forms' ).'" href="#" id="">'.__( 'Delete', 'ninja-forms' ).'</a> | </span>
-								<span class="export"><a href="" title="'.__( 'Export Form', 'ninja-forms' ).'">'.__( 'Export', 'ninja-forms' ).'</a> | </span>
-								<span class="duplicate"><a href="" title="'.__( 'Duplicate Form', 'ninja-forms' ).'">'.__( 'Duplicate', 'ninja-forms' ).'</a></span>
-							</div>
-						</td>
-						<td>
-							On-Screen Message
-						</td>
-						<td>
-							6 January 2014
-						</td>
-					</tr>
+					<% }); %>
 				</tbody>
 				<tfoot>
 					<tr>
@@ -490,7 +461,7 @@ function register_settings_tabs() {
 		),
 		//'put_filter' => function( $value, $form_setting, $form_id ) { return $value; }
 	);
-	ninja_forms_register_form_settings_tab( $args );	
+	ninja_forms_register_form_settings_tab( $args );
 
 	$args = array(
 		'id' => 'notification_single',
@@ -504,6 +475,50 @@ function register_settings_tabs() {
 }
 
 add_action( 'ninja_forms_admin_init', 'register_settings_tabs' );
+
+/**
+ * 
+ * 
+ */
+
+function nf_filter_rest_get_notifications( $args, $form_id, $tab, $data ) {
+	if ( $tab != 'notifications' )
+		return $args;
+
+	$notifications = nf_get_notifications_by_form_id( $form_id );
+	$tmp_array = array();
+	$x = 0;
+	foreach( $notifications as $id => $settings ) {
+		$tmp_array[$x]['id'] = $id;
+		foreach( $settings as $key => $value ) {
+			$tmp_array[$x][$key] = $value;
+		}
+		$x++;
+	}
+
+	return $tmp_array;
+}
+
+add_filter( 'nf_rest_get_array', 'nf_filter_rest_get_notifications', 10, 4 );
+
+function nf_filter_rest_get_single_notification( $args, $form_id, $tab, $data ) {
+	if ( $tab != 'notification_single' )
+		return $args;
+
+	$id = $data['notificationId'];
+
+	$notification = nf_get_notification_by_id( $id );
+
+	for ( $i=0; $i < count( $args ); $i++ ) { 
+		if ( isset ( $notification[ $args[ $i ]['id'] ] ) ) {
+			$args[ $i ]['current_value'] = $notification[ $args[ $i ]['id'] ];
+		}	
+	}
+
+	return $args;
+}
+
+add_filter( 'nf_rest_get_array', 'nf_filter_rest_get_single_notification', 10, 4 );
 
 function register_forms_settings() {
 	$pages = get_pages();
@@ -544,25 +559,8 @@ function register_forms_settings() {
 	ninja_forms_register_form_settings( $args );
 
 	$args = array(
-		'tab' => 'success_settings',
+		'tab' => 'display_settings',
 		'settings' => array(
-			'success_msg' => array(
-				'type' => 'rte',
-				'label' => __( 'Success Message', 'ninja-forms' ),
-				'desc' => __( 'If you want to include field data entered by the user, for instance a name, you can use the following shortcode: [ninja_forms_field id=23] where 23 is the ID of the field you want to insert. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. You can find the field ID when you expand the field for editing.', 'ninja-forms' ),
-			),
-			'landing_page' => array(
-				'type' => 'dropdown',
-				'label' => __( 'Show this page after successful submission:', 'ninja-forms' ),
-				'options' => $pages_array,
-				'class' => 'widefat code',
-			),
-			'save_subs' => array(
-				'type' => 'checkbox',
-				'label' => __( 'Save form submissions into the Ninja Forms database?', 'ninja-forms' ),
-				'default_value' => 1,
-			),
-
 			'clear_complete' => array(
 				'type' => 'checkbox',
 				'label' => __( 'Clear the form after successful submission?', 'ninja-forms' ),
@@ -573,6 +571,12 @@ function register_forms_settings() {
 				'label' => __( 'Hide the form after successful submission?', 'ninja-forms' ),
 				'default_value' => 1,
 			),
+			'sub_limit_number' => array(
+				'type' => 'number',
+				'label' => __( 'Limit Submissions', 'ninja-forms' ),
+				'min' => 0,
+				'desc' => __( 'Select the number of submissions that this form will accept. Leave empty for no limit.', 'ninja-forms' ),
+			),
 		),
 	);
 	ninja_forms_register_form_settings( $args );
@@ -580,7 +584,7 @@ function register_forms_settings() {
 	$args = array(
 		'tab' => 'notification_single',
 		'settings' => array(
-			'notification_type' => array(
+			'type' => array(
 				'type' => 'dropdown',
 				'label' => __( 'Type', 'ninja-forms' ),
 				'options' => array(
@@ -592,18 +596,18 @@ function register_forms_settings() {
 				'class' => '',
 				'desc' => __( 'What kind of notification would you like to create?', 'ninja-forms' ),
 			),
-			'notification_name' => array(
+			'name' => array(
 				'type' => 'text',
 				'label' => __( 'Name', 'ninja-forms' ),
 				'class' => 'widefat',
 				'desc' => __( 'How would you like to identify this notification?', 'ninja-forms' ),
 			),
-			'email_to' => array(
+			'mailto' => array(
 				'type' => 'radio',
 				'label' => __( 'Send To', 'ninja-forms' ),
 				'options' => array(
 					array('name' => __( 'Enter Email', 'ninja-forms' ), 'value' => 'manual_email'),
-					array('name' => __( 'Select a Field', 'ninja-forms' ), 'value' => 'email_field_value'),
+					array('name' => __( 'Select a Field', 'ninja-forms' ), 'value' => 'field_value'),
 					array('name' => __( 'Configure Routing', 'ninja-forms' ), 'value' => 'configure_routing'),
 				),
 				'class' => '',
