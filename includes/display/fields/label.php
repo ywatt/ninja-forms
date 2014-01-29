@@ -116,6 +116,8 @@ function ninja_forms_display_label_inside( $data, $field_id ){
 		$label = '';
 	}
 
+	$label = strip_tags( $label );
+
 	if ( $field_type != '_list' ) {
 		if ( $label_pos == 'inside' ) {
 			if ( isset ( $ninja_forms_loading ) ) {
