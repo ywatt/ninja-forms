@@ -14,6 +14,9 @@ function nf_check_sub_limit( $form_id ) {
 
     $sub_limit = $ninja_forms_loading->get_form_setting( 'sub_limit_number' );
 
+    if ( !$sub_limit or empty ( $sub_limit ) )
+        return false;
+
     $args = array(
         'form_id' => $form_id
     );
