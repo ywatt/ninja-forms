@@ -35,12 +35,25 @@ function ninja_forms_req_fields_process(){
 			}else{
 				$label_pos = '';
 			}
+				// Get the required field symbol.
+			$settings = get_option( 'ninja_forms_settings' );
+			if ( isset ( $settings['req_field_symbol'] ) ) {
+				$req_symbol = $settings['req_field_symbol'];
+			} else {
+				$req_symbol = '*';
+			}
+
+			if ( isset ( $field_data['req'] ) and $field_data['req'] == 1 and $field_data['label_pos'] == 'inside' ) {
+				$field_data['label'] .= ' '.$req_symbol;
+			}
 
 			if( isset( $field_data['label'] ) ){
 				$label = $field_data['label'];
 			}else{
 				$label = '';
 			}
+
+			$label = strip_tags( $label );
 
 			$reg_type = $ninja_forms_fields[$field_type];
 			$req_validation = $reg_type['req_validation'];
