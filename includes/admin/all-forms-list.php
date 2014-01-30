@@ -124,10 +124,9 @@ function ninja_forms_admin_all_forms() {
 	if ( is_array( $all_forms ) AND !empty ( $all_forms ) AND $current_page <= $page_count ) {
 		for ( $i = $start; $i < $end; $i++ ) {
 			$form_id = $all_forms[$i]['id'];
-			$settings = nf_get_form_settings( $form_id );
-
-			$date_updated = $settings['date_updated'];
 			
+			$date_updated = nf_get_form_setting( $form_id, 'date_updated' );
+
 			$date_updated = strtotime( $date_updated );
 			$date_updated = date_i18n( __( 'F d, Y', 'ninja-forms' ), $date_updated );
 
@@ -142,7 +141,7 @@ function ninja_forms_admin_all_forms() {
 				</th>
 				<td class="post-title page-title column-title">
 					<strong>
-						<a href="<?php echo $edit_link;?>"><?php echo $settings['name'];?></a>
+						<a href="<?php echo $edit_link;?>"><?php echo nf_get_form_setting( $form_id, 'name' );?></a>
 					</strong>
 					<div class="row-actions">
 						<span class="edit"><a href="<?php echo $edit_link;?>"><?php _e( 'Edit', 'ninja-forms' ); ?></a> | </span>

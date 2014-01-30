@@ -6,10 +6,10 @@ jQuery(document).ready(function($) {
 		urlRoot: ninja_forms_rest_url + '&rest=form_settings',
 
 		defaults: {
-			form_id: form_id
+			object_id: form_id
 		},
 
-		serverAttrs: ['current_value', 'id', 'form_id', 'meta_id'],
+		serverAttrs: ['current_value', 'id', 'object_id', 'meta_key'],
 
 	    initialize: function () {
 	        // Define server attributes for this model
@@ -149,7 +149,7 @@ jQuery(document).ready(function($) {
 
 	var formSettingsView = new ContentView({ collection: formSettings });
 	var current_tab = $('.media-menu-item.active').prop('id');
-	change_tab( current_tab, $('.media-menu-item.active').html(), $('.media-menu-item.active').attr('title') );
+	change_tab( current_tab, $('.media-menu-item.active').html(), $('.media-menu-item.active').attr('title'), form_id );
 	
 	$(document).on('click', '.media-menu-item', function(e) {
 		if ( $(this).data('custom') == 1 ) {
@@ -158,14 +158,14 @@ jQuery(document).ready(function($) {
 			formSettingsView.template = '#tmpl-form-settings';
 		}
 
-		var data = $(this).data();
+		var object_id = $(this).data( 'object-id' );
 
-		change_tab( this.id, $(this).html(), $(this).attr('title'), data );
+		change_tab( this.id, $(this).html(), $(this).attr('title'), object_id );
 	});
 
-	function change_tab( tab_id, title, desc, data ) {
+	function change_tab( tab_id, title, desc, object_id ) {
 		formSettings.fetch({
-			data: $.param({ tab: tab_id, form_id: form_id, data:data }),
+			data: $.param({ tab: tab_id, object_id: object_id }),
 			reset: true,
 			success: function() {
 	            $('.media-menu-item').removeClass('active');

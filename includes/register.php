@@ -372,14 +372,6 @@ function register_settings_tabs() {
 	ninja_forms_register_form_settings_tab( $args );
 
 	$args = array(
-		'id' => 'success_settings',
-		'label' => 'After Submission',
-		'priority' => 'core',
-		'desc' => __( 'These settings affect what happens after a form is submitted.', 'ninja-forms' ),
-	);
-	//ninja_forms_register_form_settings_tab( $args );
-
-	$args = array(
 		'id' => 'notifications',
 		'label' => 'Notifications',
 		'priority' => 'default',
@@ -427,7 +419,7 @@ function register_settings_tabs() {
 
 						<td class="post-title page-title column-title">
 							<strong>
-								<a href="#notification_single" class="media-menu-item" id="notification_single" title="" data-notification-id="<%= setting.get( "id" ) %>" ><%= setting.get( "name" ) %></a>
+								<a href="#notification_single" class="media-menu-item" id="notification_single" title="" data-notification-id="<%= setting.get( "id" ) %>" data-object-id="<%= setting.get( "id" ) %>" ><%= setting.get( "name" ) %></a>
 							</strong>
 							<div class="row-actions">
 								<span class="activate"><a href="">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
@@ -481,11 +473,12 @@ add_action( 'ninja_forms_admin_init', 'register_settings_tabs' );
  * 
  */
 
-function nf_filter_rest_get_notifications( $args, $form_id, $tab, $data ) {
+function nf_filter_rest_get_notifications( $args, $object_id, $tab ) {
 	if ( $tab != 'notifications' )
 		return $args;
 
-	$notifications = nf_get_notifications_by_form_id( $form_id );
+	$notifications = nf_get_notifications_by_form_id( $object_id );
+	
 	$tmp_array = array();
 	$x = 0;
 	foreach( $notifications as $id => $settings ) {
@@ -499,26 +492,23 @@ function nf_filter_rest_get_notifications( $args, $form_id, $tab, $data ) {
 	return $tmp_array;
 }
 
-add_filter( 'nf_rest_get_array', 'nf_filter_rest_get_notifications', 10, 4 );
+add_filter( 'nf_rest_get_array', 'nf_filter_rest_get_notifications', 10, 3 );
 
-function nf_filter_rest_get_single_notification( $args, $form_id, $tab, $data ) {
+function nf_filter_rest_get_single_notification( $args, $object_id, $tab ) {
 	if ( $tab != 'notification_single' )
 		return $args;
 
-	$id = $data['notificationId'];
-
-	$notification = nf_get_notification_by_id( $id );
-
+	$notification = nf_get_notification_by_id( $object_id );
 	for ( $i=0; $i < count( $args ); $i++ ) { 
-		if ( isset ( $notification[ $args[ $i ]['id'] ] ) ) {
-			$args[ $i ]['current_value'] = $notification[ $args[ $i ]['id'] ];
+		if ( isset ( $notification[ $args[ $i ]['meta_key'] ] ) ) {
+			$args[ $i ]['current_value'] = $notification[ $args[ $i ]['meta_key'] ];
 		}	
 	}
 
 	return $args;
 }
 
-add_filter( 'nf_rest_get_array', 'nf_filter_rest_get_single_notification', 10, 4 );
+add_filter( 'nf_rest_get_array', 'nf_filter_rest_get_single_notification', 10, 3 );
 
 function register_forms_settings() {
 	$pages = get_pages();

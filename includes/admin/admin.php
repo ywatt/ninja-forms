@@ -465,7 +465,7 @@ function ninja_forms_admin_edit_form(){
 
 					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>"><?php echo $settings['label']; ?></a>
 				<?php
 					}
 				}
@@ -498,7 +498,7 @@ function ninja_forms_admin_edit_form(){
 
 					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>"><?php echo $settings['label']; ?></a>
 				<?php
 					}
 				}
@@ -531,7 +531,7 @@ function ninja_forms_admin_edit_form(){
 
 					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>"><?php echo $settings['label']; ?></a>
 				<?php
 					}
 				}
@@ -564,7 +564,7 @@ function ninja_forms_admin_edit_form(){
 
 					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>"><?php echo $settings['label']; ?></a>
 				<?php
 					}
 				}
@@ -624,7 +624,7 @@ function ninja_forms_admin_edit_form(){
 						</label>
 					</th>
 					<td>
-						<select id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting" data-meta-id="<%= setting.get( 'meta_id' )%>">
+						<select id="<%= setting_id %>" class="<%= setting.get('class') %> form-setting" data-meta-key="<%= setting.get( 'meta_key' )%>" data-object-id="<%= setting.get( 'object_id' ) %>">
 						<%
 						_.each(setting.get('options'), function(option) {
 							%>

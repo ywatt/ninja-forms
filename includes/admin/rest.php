@@ -210,56 +210,37 @@ class Form_Settings_API extends Ninja_Forms_Admin_Rest_API
      	switch( $this->method ) {
      		case 'GET':
                 $tab = $this->request['tab'];
-                $form_id = $this->request['form_id'];
-                $data = $this->request['data'];
-
-     			if ( isset ( $this->request['form_id'] ) ) {
-     				$form_settings = nf_get_form_settings( $form_id );
-     			}
+                $object_id = $this->request['object_id'];
 				$args = array();
-                foreach( $ninja_forms_form_settings[$tab] as $id => $setting ){
-                   
-                    if ( isset ( $form_settings[ $id ] ) ) {
-                        $current_value = $form_settings[ $id ]['value'];
-                        $meta_id = $form_settings[ $id ]['meta_id'];
+                $object_meta = nf_get_object_meta( $object_id );
+                foreach( $ninja_forms_form_settings[$tab] as $meta_key => $setting ){
+                    if ( isset ( $object_meta[ $meta_key ] ) ){
+                        $current_value = $object_meta[ $meta_key ];
                     } else if ( isset ( $setting['default_value'] ) ) {
                         $current_value = $setting['default_value'];
-                        $meta_id = 'new';
                     } else {
                         $current_value = '';
-                        $meta_id = 'new';
                     }
 
-                    $current_value = apply_filters( 'ninja_forms_rest_get_value', $current_value, $id, $form_id );
+                    $current_value = apply_filters( 'nf_rest_get_value', $current_value, $meta_key, $object_id );
 
-                    $setting['id'] = $id;
+                    $setting['id'] = $meta_key;
                     $setting['current_value'] = $current_value;
-                    $setting['meta_id'] = $meta_id;
+                    $setting['meta_key'] = $meta_key;
+                    $setting['object_id'] = $object_id;
 
                     $args[] = $setting;
                 }
 	        	
-                return apply_filters( 'nf_rest_get_array', $args, $form_id, $tab, $data );
+                return apply_filters( 'nf_rest_get_array', $args, $object_id, $tab );
                 break;
      		case 'PUT':
      			$data = json_decode( $this->file );
      			$current_value = $data->current_value;
-     			$form_setting = $data->id;
-     			$form_id = $data->form_id;
-                $meta_id = $data->meta_id;
-                nf_update_meta( $meta_id, $current_value );
-                /*
-                $current_value = apply_filters( 'ninja_forms_rest_put_value', $current_value, $form_setting, $form_id );
-     			$args = array(
-     				'form_id' => $form_id,
-     				'update' => array(
-     					$form_setting => $current_value,
-     				),
-     			);
-    			ninja_forms_update_form_setting( $args );
-                $current_value = apply_filters( 'ninja_forms_rest_put_return_value', $current_value, $form_setting, $form_id );
-                $data->current_value = $current_value;
-                */
+     			$object_id = $data->object_id;
+                $meta_key = $data->meta_key;
+                nf_update_meta( $object_id, $meta_key, $current_value );
+
      			return $data;
      			break;
 		}

@@ -57,8 +57,8 @@ define( "NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields" );
 define( "NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields" );
 define( "NINJA_FORMS_SUBS_TABLE_NAME", $wpdb->prefix . "ninja_forms_subs" );
 
-define( "NF_TABLE_NAME", $wpdb->prefix . "nf" );
-define( "NF_META_TABLE_NAME", $wpdb->prefix . "nfmeta" );
+define( "NF_OBJECTS_TABLE_NAME", $wpdb->prefix . "nf_objects" );
+define( "NF_META_TABLE_NAME", $wpdb->prefix . "nf_objectmeta" );
 define( "NF_RELATIONSHIPS_TABLE_NAME", $wpdb->prefix . "nf_relationships" );
 
 /* Require Core Files */
