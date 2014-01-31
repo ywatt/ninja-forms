@@ -23,7 +23,7 @@ function ninja_forms_default_value_filter( $data, $field_id ) {
 		$default_value = $data['default_value'];
 	}
 
-	if ( $ninja_forms_fields[ $field_type ]['process_field'] ) {
+	if ( isset ( $ninja_forms_fields[ $field_type ]['process_field'] ) and $ninja_forms_fields[ $field_type ]['process_field'] ) {
 		$data['default_value'] = $default_value;
 	}
 
