@@ -126,7 +126,7 @@ class Ninja_Forms_Processing {
 		
 		$this->data['action'] = 'submit';
 		$this->data['form']['form_url'] = $this->get_current_url();
-		$cache = get_transient( $_SESSION['ninja_forms_transient_id'] );
+		$cache = isset( $_SESSION['ninja_forms_transient_id'] ) ? get_transient( $_SESSION['ninja_forms_transient_id'] ) : null;
 
 		// If we have fields in our $_POST object, then loop through the $_POST'd field values and add them to our global variable.
 		if ( isset ( $_POST['_ninja_forms_display_submit'] ) OR isset ( $_POST['_ninja_forms_edit_sub'] ) ) {
