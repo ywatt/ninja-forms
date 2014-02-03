@@ -83,7 +83,7 @@ function ninja_forms_admin_edit_form(){
 	}
 
 	if ( $form_id != '' ) {
-		$form_settings = nf_get_form_settings( $form_id );
+		$form_name = nf_get_form_setting( $form_id, 'name' );
 	}
 
 	$high_priority_tabs = array();
@@ -107,7 +107,7 @@ function ninja_forms_admin_edit_form(){
 	?>
 
 	<div id="icon-ninja-custom-forms" class="icon32"><br></div>
-	<h2>Form Editor - <?php if ( isset ( $form_settings['name']['value'] ) ) echo $form_settings['name']['value'];?> - ID : <?php echo $form_id;?></h2>
+	<h2>Form Editor - <?php if ( isset ( $form_name ) ) echo $form_name;?> - ID : <?php echo $form_id;?></h2>
 
 	<div id="nav-menus-frame">
 	<div id="menu-settings-column" class="metabox-holder">
