@@ -678,5 +678,7 @@ function ninja_forms_set_transient(){
  */
 
 function ninja_forms_delete_transient(){
-	delete_transient( $_SESSION['ninja_forms_transient_id'] );
+	if( isset( $_SESSION['ninja_forms_transient_id'] ) ) {
+		delete_transient( $_SESSION['ninja_forms_transient_id'] );
+	}
 }
