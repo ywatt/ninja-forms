@@ -137,10 +137,19 @@ class Ninja_Forms_Loading {
 			// Check to see if our default value is one of our preset values:
 			get_currentuserinfo();
 			$user_ID 			= $current_user->ID;
-			$user_firstname 	= $current_user->user_firstname;
-		    $user_lastname 		= $current_user->user_lastname;
-		    $user_display_name 	= $current_user->display_name;
-		    $user_email 		= $current_user->user_email;
+			if ( $user_ID and !empty( $user_ID ) ) {
+				$user_firstname 	= $current_user->user_firstname;
+			    $user_lastname 		= $current_user->user_lastname;
+			    $user_display_name 	= $current_user->display_name;
+			    $user_email 		= $current_user->user_email;
+			} else {
+				$user_ID 			= '';
+				$user_firstname 	= '';
+			    $user_lastname 		= '';
+			    $user_display_name 	= '';
+			    $user_email 		= '';
+			}
+
 
 		    if ( is_object ( $post ) ) {
 			    $post_ID 			= $post->ID;

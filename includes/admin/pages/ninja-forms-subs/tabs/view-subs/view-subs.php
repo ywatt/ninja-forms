@@ -349,24 +349,26 @@ function ninja_forms_tab_view_subs(){
 
 						<td id="ninja_forms_sub_<?php echo $sub['id'];?>_field_<?php echo $field_id;?>">
 						<?php
-							foreach($data as $d){
-								if($field_id == $d['field_id']){
-									$user_value = $d['user_value'];
-									$user_value = ninja_forms_stripslashes_deep( $user_value );
-									$user_value = ninja_forms_strip_tags_deep($user_value);
-									$user_value = apply_filters('ninja_forms_view_sub_td', $user_value, $d['field_id'], $sub['id'] );
+							if ( is_array( $data ) ) {
+								foreach($data as $d){
+									if($field_id == $d['field_id']){
+										$user_value = $d['user_value'];
+										$user_value = ninja_forms_stripslashes_deep( $user_value );
+										$user_value = ninja_forms_strip_tags_deep($user_value);
+										$user_value = apply_filters('ninja_forms_view_sub_td', $user_value, $d['field_id'], $sub['id'] );
 
-									if(is_array($user_value) AND !empty($user_value)){
-										$y = 1;
-										foreach($user_value as $val){
-											echo ninja_forms_stripslashes_deep($val);
-											if($y != count($user_value)){
-												echo ", ";
+										if(is_array($user_value) AND !empty($user_value)){
+											$y = 1;
+											foreach($user_value as $val){
+												echo ninja_forms_stripslashes_deep($val);
+												if($y != count($user_value)){
+													echo ", ";
+												}
+												$y++;
 											}
-											$y++;
+										}else{
+											echo stripslashes($user_value);
 										}
-									}else{
-										echo stripslashes($user_value);
 									}
 								}
 							}
