@@ -71,7 +71,7 @@ function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
 							$data['user_value'] = ninja_forms_html_entity_decode_deep( $data['user_value'], ENT_QUOTES );
 							if( $data['field_id'] == $field_id ){
 								if( is_array( $data['user_value'] ) ){
-									$user_value = implode_r( ',', $data['user_value'] );
+									$user_value = ninja_forms_implode_r( ',', $data['user_value'] );
 								}else{
 									$user_value = $data['user_value'];
 								}
@@ -121,14 +121,14 @@ function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
 
 }
 
-function implode_r ($glue, $pieces){
+function ninja_forms_implode_r($glue, $pieces){
 	$out = '';
 	foreach ( $pieces as $piece ) {
 		if ( is_array ( $piece ) ) {
 			if ( $out == '' ) {
-				$out = implode_r ($glue, $piece);
+				$out = ninja_forms_implode_r($glue, $piece);
 			} else {
-				$out .= implode_r ($glue, $piece); // recurse
+				$out .= ninja_forms_implode_r($glue, $piece); // recurse
 			}			
 		} else {
 			if ( $out == '' ) {
