@@ -452,7 +452,7 @@ jQuery(document).ready(function(jQuery) {
 								}
 							}
 
-							console.log(field_id + ':' + old_value);
+							//console.log(field_id + ':' + old_value);
 
 							// Check to see if our old_value exists in the calc_value JS object.
 							if ( typeof calc_settings.calc_value[field_id] !== 'undefined' && typeof calc_settings.calc_value[field_id][old_value] !== 'undefined' ) {
@@ -649,7 +649,7 @@ jQuery(document).ready(function(jQuery) {
 						if ( current_value !== calc_value ) {
 
 							if ( jQuery('#ninja_forms_field_' + field_id + '_list_type').val() != 'checkbox' ) {
-								console.log( 'set old value ' + field_id + ':' + key );
+								//console.log( 'set old value ' + field_id + ':' + key );
 								jQuery(this).data(calc_id + '-oldValue', key);
 							}
 
