@@ -73,29 +73,29 @@ require_once( NINJA_FORMS_DIR . "/includes/import-export.php" );
 
 require_once( NINJA_FORMS_DIR . "/includes/display/scripts.php" );
 
-// Include Processing Functions if a form has been submitted.
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/class-ninja-forms-processing.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/class-display-loading.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/pre-process.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/process.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/post-process.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/save-sub.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/filter-msgs.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/error-test.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/email-admin.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/email-user.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/email-add-fields.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/attachment-csv.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-pre-process.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-process.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-post-process.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/req-fields-pre-process.php" );
-//require_once( NINJA_FORMS_DIR . "/includes/display/processing/term-name-filter.php" );
-//require_once( NINJA_FORMS_DIR . "/includes/display/processing/update-terms.php" );
-//require_once( NINJA_FORMS_DIR . "/includes/display/processing/attach-post-media.php" );
-
-//Display Form Functions
 if( ! is_admin() ) {
+	// Include Processing Functions if a form has been submitted.
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/class-ninja-forms-processing.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/class-display-loading.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/pre-process.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/process.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/post-process.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/save-sub.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/filter-msgs.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/error-test.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/email-admin.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/email-user.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/email-add-fields.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/attachment-csv.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-pre-process.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-process.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-post-process.php" );
+	require_once( NINJA_FORMS_DIR . "/includes/display/processing/req-fields-pre-process.php" );
+	//require_once( NINJA_FORMS_DIR . "/includes/display/processing/term-name-filter.php" );
+	//require_once( NINJA_FORMS_DIR . "/includes/display/processing/update-terms.php" );
+	//require_once( NINJA_FORMS_DIR . "/includes/display/processing/attach-post-media.php" );
+
+	//Display Form Functions
 	require_once( NINJA_FORMS_DIR . "/includes/display/form/display-form.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/display/fields/display-fields.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/display/form/response-message.php" );
