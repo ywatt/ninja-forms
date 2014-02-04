@@ -241,7 +241,7 @@ function ninja_forms_get_all_defs(){
 function ninja_forms_get_sub_count( $args = array() ) {
 	global $wpdb;
 
-	$plugin_settings = get_option( 'ninja_forms_settings' );
+	$plugin_settings = nf_get_settings();
 	if ( isset ( $plugin_settings['date_format'] ) ) {
 		$date_format = $plugin_settings['date_format'];
 	} else {
@@ -325,7 +325,7 @@ function ninja_forms_get_sub_count( $args = array() ) {
 
 function ninja_forms_get_subs($args = array()){
 	global $wpdb;
-	$plugin_settings = get_option( 'ninja_forms_settings' );
+	$plugin_settings = nf_get_settings();
 	if ( isset ( $plugin_settings['date_format'] ) ) {
 		$date_format = $plugin_settings['date_format'];
 	} else {
@@ -678,5 +678,7 @@ function ninja_forms_set_transient(){
  */
 
 function ninja_forms_delete_transient(){
-	delete_transient( $_SESSION['ninja_forms_transient_id'] );
+	if( isset( $_SESSION['ninja_forms_transient_id'] ) ) {
+		delete_transient( $_SESSION['ninja_forms_transient_id'] );
+	}
 }
