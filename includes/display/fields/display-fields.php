@@ -214,7 +214,7 @@ function ninja_forms_get_field_wrap_class($field_id){
 }
 
 
-function ninja_forms_get_field_class($field_id){
+function ninja_forms_get_field_class( $field_id ) {
 	global $ninja_forms_loading, $ninja_forms_processing;
 
 	if ( isset ( $ninja_forms_loading ) ) {
