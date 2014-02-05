@@ -122,6 +122,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-type.php" );
 //require_once( NINJA_FORMS_DIR . "/includes/display/fields/list-term-filter.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/calc-field-class.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/fields/clear-complete.php" );
 
 /* Require Pre-Registered Tabs and their sidebars */
 
