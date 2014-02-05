@@ -1059,7 +1059,8 @@ class Ninja_Forms_Processing {
 
 		$tmp_array = array();
 		// Loop through the fields
-		foreach ( $this->data['field_data'] as $field ) {
+		foreach ( $this->data['fields'] as $field_id => $user_value ) {
+			$field = $this->data['field_data'][$field_id];
 			$field_value = $this->get_field_value( $field['id'] );
 			// We don't want our field to be added if it's a tax field.
 			if ( $field['type'] != '_tax' ) {
