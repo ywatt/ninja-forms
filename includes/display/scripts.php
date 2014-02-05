@@ -1,6 +1,6 @@
 <?php
 
-function ninja_forms_display_js($form_id, $local_vars = ''){
+function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 	global $post, $ninja_forms_display_localize_js, $wp_locale, $ninja_forms_loading, $ninja_forms_processing;
 
 	if ( defined( 'NINJA_FORMS_JS_DEBUG' ) && NINJA_FORMS_JS_DEBUG ) {
@@ -23,21 +23,12 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 	$calc_eq = false;
 	$sub_total = false;
 	$tax = false;
-	if ( isset ( $ninja_forms_loading ) ) {
-		$fields = $ninja_forms_loading->get_all_fields();
-	} else {
-		$fields = $ninja_forms_processing->get_all_fields();
-	}
+
+	$fields = ninja_forms_get_fields_by_form_id( $form_id );
 
 	if( is_array( $fields ) AND !empty( $fields ) ){
-		foreach( $fields as $field_id => $user_value ){
+		foreach( $fields as $field ){
 			
-			if ( isset ( $ninja_forms_loading ) ) {
-				$field = $ninja_forms_loading->get_field_settings( $field_id );
-			} else {
-				$field = $ninja_forms_processing->get_field_settings( $field_id );
-			}
-
 			if ( isset ( $field['id'] ) ) {
 				$field_id = $field['id'];
 			} else {
