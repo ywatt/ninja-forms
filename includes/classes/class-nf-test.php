@@ -1,12 +1,12 @@
 <?php
 /**
- * Roles and Capabilities
+ * Register Admin Settings
  *
- * @package     EDD
- * @subpackage  Classes/Roles
- * @copyright   Copyright (c) 2012, Pippin Williamson
+ * @package     Ninja Forms
+ * @subpackage  Classes/Register
+ * @copyright   Copyright (c) 2014, WPNINJAS
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.4.4
+ * @since       3.0
 */
 
 // Exit if accessed directly
@@ -15,14 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Ninja_Forms 
  *
- * This class handles the role creation and assignment of capabilities for those roles.
+ * This class handles the registration of admin settings within Ninja Forms.
  *
- * These roles let us have Shop Accountants, Shop Workers, etc, each of whom can do
- * certain things within the EDD store
+ * These settings include form, field, notification, and plugin settings.
  *
- * @since 1.4.4
+ * @since 3.0
  */
-class NF_Test {
+class NF_Register_Settings {
 	
 	private $test_var;
 
@@ -30,21 +29,11 @@ class NF_Test {
 	 * Get things going
 	 *
 	 * @access public
-	 * @since 1.4.4
-	 * @see EDD_Roles::add_roles()
-	 * @see EDD_Roles::add_caps()
+	 * @since 3.0
 	 * @return void
 	 */
 
 	public function __construct() {
 		$this->test_var = 'HELLO WORLD!';
-	}
-
-	public function change_var() {
-		$this->test_var = 'Goodbye World';
-	}
-
-	public function print_var() {
-		echo $this->test_var;
 	}
 }
