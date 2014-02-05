@@ -292,6 +292,12 @@ function ninja_forms_activation_old_forms_check(){
 	//Get the current plugin settings.
 	$plugin_settings = get_option( 'ninja_forms_settings' );
 
+	// Update the version setting if it isn't current
+	if ( !isset ( $plugin_settings['version'] ) OR ( NF_VERSION != $plugin_settings['version'] ) ) {
+		$plugin_settings['version'] = NF_VERSION;
+		update_option( 'ninja_forms_settings', $plugin_settings );
+	}
+
 	$current_version = $plugin_settings['version'];
 
 	//if( version_compare( $current_version, '2.0' , '<' ) ){
@@ -597,3 +603,5 @@ function ninja_forms_activation_old_forms_check(){
 	//}
 	return $forms;
 }
+
+register_activation_hook( __FILE__, 'ninja_forms_activation' );
