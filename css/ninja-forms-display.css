@@ -109,6 +109,14 @@ a.tooltip span
     background-color: #c3ff88;
     border-color: #8dff1c !important;
 }
+.ninja-forms-cont {
+    position: relative;
+}
+.ninja-forms-cont:after {
+    clear: both;
+    content: "";
+    display: block;
+}
 
 .ninja-forms-form-wrap input,
 .ninja-forms-form-wrap select ,

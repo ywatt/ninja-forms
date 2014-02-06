@@ -189,6 +189,8 @@ function ninja_forms_display_form( $form_id = '' ){
 			do_action('ninja_forms_display_close_form_wrap', $form_id);
 			do_action('ninja_forms_display_after_form_wrap', $form_id);
 
+			do_action( 'ninja_forms_after_form_display', $form_id );
+
 			do_action( 'ninja_forms_display_js', $form_id );
 			do_action( 'ninja_forms_display_css', $form_id );
 		}else{
