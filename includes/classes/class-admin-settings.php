@@ -13,8 +13,6 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Ninja_Forms 
- *
  * This class handles the registration of admin settings within Ninja Forms.
  *
  * These settings include form, field, notification, and plugin settings.
@@ -24,6 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class NF_Register_Admin_Settings {
 	
 	private $settings;
+
+	private $pages;
+
+	public $output;
 
 	/**
 	 * Get things going
@@ -36,9 +38,11 @@ class NF_Register_Admin_Settings {
 	public function __construct() {
 		if ( ! is_admin() )
 			return false;
-
+		add_action( 'admin_menu', array( $this, 'default_admin_pages' ) );
+		$this->output = new NF_Admin_Settings_Pages();
 		$this->default_form_settings();
 		$this->default_form_groups();
+		//$this->default_admin_pages();
 
 		do_action( 'nf_register_admin_settings' );
 	}
@@ -224,6 +228,15 @@ class NF_Register_Admin_Settings {
 		$this->register_settings_group( $args );
 	}
 
+	public function default_admin_pages() {
+		$args = array(
+			'page_title' 	=>	'Test',
+			'menu_title'	=> 	'Test',
+			'menu_slug'		=>	'test',
+		);
+		$this->register_admin_page( $args );
+	}
+
 	/**
 	 * Register admin settings
 	 * 
@@ -278,6 +291,35 @@ class NF_Register_Admin_Settings {
 			$this->settings[$scope][$group] = array();
 
 		$this->settings[$scope][$group] = array_merge_recursive( $this->settings[$scope][$group], $args );
+	}
+
+	/**
+	 * Register an admin menu page
+	 * 
+	 * @access public
+	 * @param array $args
+	 * @since 3.0
+	 * @return void
+	 */
+
+	public function register_admin_page( $args ) {
+		$defaults = array(
+			'parent_slug' 	=> 	'ninja-forms',
+			'page_title' 	=>	'Forms',
+			'menu_title'	=> 	'',
+			'capabilities' 	=> 	'manage_options',
+			'menu_slug'		=>	'',
+			'function' 		=>	array( $this->output, 'test' ),
+		);
+
+		// Parse incomming $args into an array and merge it with $defaults
+		$args = wp_parse_args( $args, $defaults );
+
+		if ( $args['menu_slug'] == '' ) {
+			$args['menu_slug'] = sanitize_title( $args['menu_title'] );
+		}
+
+		add_submenu_page( $args['parent_slug'], __( $args['page_title'], 'ninja-forms' ), __( $args['menu_title'], 'ninja-forms' ), $args['capabilities'], $args['menu_slug'], array( $this->output, 'test') );
 	}
 
 	/**

@@ -76,50 +76,6 @@ final class Ninja_Forms {
 	private static $instance;
 
 	/**
-	 *  NF User Roles and Capabilities Object
-	 *
-	 * @var object
-	 * @since 1.4.4
-	 */
-	public $loading;
-
-	/**
-	 * NF Cart Fees Object
-	 *
-	 * @var object
-	 * @since 1.5
-	 */
-	public $fees;
-
-	/**
-	 * NF API Object
-	 *
-	 * @var object
-	 * @since 1.5
-	 */
-	public $api;
-
-	/**
-	 * NF HTML Session Object
-	 *
-	 * This holds cart items, purchase sessions, and anything else stored in the session
-	 *
-	 *
-	 * @var object
-	 * @since 1.5
-	 */
-	public $session;
-
-	/**
-	 * NF HTML Element Helper Object
-	 *
-	 * @var object
-	 * @since 1.5
-	 */
-	public $html;
-
-
-	/**
 	 * Main Ninja_forms Instance
 	 *
 	 * Insures that only one instance of Ninja_forms exists in memory at any one
@@ -257,7 +213,7 @@ final class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . '/includes/register.php' );
 		require_once( NF_PLUGIN_DIR . '/includes/functions.php' );
 		require_once( NF_PLUGIN_DIR . '/includes/admin/form-preview.php' );
-		require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-settings.php' );
+		
 
 		/* Require Admin Files */
 		// These files are required for the backend only
@@ -268,7 +224,8 @@ final class Ninja_Forms {
 			require_once( NF_PLUGIN_DIR . '/includes/classes/class-rest-api.php' );
 			require_once( NF_PLUGIN_DIR . '/includes/admin/all-forms-list.php' );
 			require_once( NF_PLUGIN_DIR . '/includes/admin/scripts.php' );
-
+			require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-settings.php' );
+			require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-pages.php' );
 
 			//Require EDD autoupdate file
 			if( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
