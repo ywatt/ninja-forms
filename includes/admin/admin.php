@@ -72,7 +72,13 @@ function ninja_forms_add_menu(){
 add_action( 'admin_menu', 'ninja_forms_add_menu' );
 
 function ninja_forms_admin_edit_form(){
-	global $wpdb, $ninja_forms_form_settings_tabs, $ninja_forms_form_settings;
+	global $wpdb, $ninja_forms_form_settings;
+
+	$ninja_forms_form_settings_tabs = Ninja_forms()->admin_settings->get_setting_groups( 'form' );
+
+	// echo "<pre>";
+	// print_r( $ninja_forms_form_settings_tabs );
+	// echo "</pre>";
 
 	do_action( 'ninja_forms_admin_init' );
 
@@ -103,7 +109,9 @@ function ninja_forms_admin_edit_form(){
 			$low_priority_tabs[$tab] = $data;
 		}
 	}
-
+	// echo "<pre>";
+	// print_r( $core_priority_tabs );
+	// echo "</pre>";
 	?>
 
 	<div id="icon-ninja-custom-forms" class="icon32"><br></div>
@@ -463,9 +471,12 @@ function ninja_forms_admin_edit_form(){
 						$custom = false;
 					}
 
+					$scope = 'form';
+					$group = $tab;
+
 					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>" data-scope="<?php echo $scope;?>" data-group="<?php echo $group;?>"><?php echo $settings['label']; ?></a>
 				<?php
 					}
 				}
@@ -475,7 +486,7 @@ function ninja_forms_admin_edit_form(){
 					<?php
 				}
 
-				foreach( $core_priority_tabs as $tab => $settings ){
+				foreach ( $core_priority_tabs as $tab => $settings ) {
 					if ( isset ( $settings['class'] ) ) {
 						$class = $settings['class'];
 					} else {
@@ -496,9 +507,12 @@ function ninja_forms_admin_edit_form(){
 						$custom = false;
 					}
 
+					$scope = 'form';
+					$group = $tab;
+
 					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>" data-scope="<?php echo $scope;?>" data-group="<?php echo $group;?>"><?php echo $settings['label']; ?></a>
 				<?php
 					}
 				}
@@ -529,9 +543,12 @@ function ninja_forms_admin_edit_form(){
 						$custom = false;
 					}
 
+					$scope = 'form';
+					$group = $tab;
+
 					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>" data-scope="<?php echo $scope;?>" data-group="<?php echo $group;?>"><?php echo $settings['label']; ?></a>
 				<?php
 					}
 				}
@@ -562,9 +579,12 @@ function ninja_forms_admin_edit_form(){
 						$custom = false;
 					}
 
+					$scope = 'form';
+					$group = $tab;
+
 					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
 				?>
-				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>"><?php echo $settings['label']; ?></a>
+				<a href="#<?php echo $tab;?>" class="media-menu-item <?php echo $class; ?>" id="<?php echo $tab; ?>" title="<?php echo $desc;?>" data-custom="<?php echo $custom;?>" data-object-id="<?php echo $form_id;?>" data-scope="<?php echo $scope;?>" data-group="<?php echo $group;?>"><?php echo $settings['label']; ?></a>
 				<?php
 					}
 				}

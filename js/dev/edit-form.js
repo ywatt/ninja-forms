@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 	var savedNoticeTimeout = '';
 
 	FormSetting = Backbone.Model.extend({
-		urlRoot: ninja_forms_rest_url + '&rest=form_settings',
+		urlRoot: ninja_forms_rest_url + '&nf_rest=rest_api',
 
 		defaults: {
 			object_id: form_id
@@ -38,7 +38,7 @@ jQuery(document).ready(function($) {
 	});
 
 	FormSettings = Backbone.Collection.extend({
-		url: ninja_forms_rest_url + '&rest=form_settings',
+		url: ninja_forms_rest_url + '&nf_rest=rest_api',
 		model: FormSetting,
 	});
 
@@ -149,7 +149,10 @@ jQuery(document).ready(function($) {
 
 	var formSettingsView = new ContentView({ collection: formSettings });
 	var current_tab = $('.media-menu-item.active').prop('id');
-	change_tab( current_tab, $('.media-menu-item.active').html(), $('.media-menu-item.active').attr('title'), form_id );
+	var object_id = $('.media-menu-item.active').data( 'object-id' );
+	var scope = $('.media-menu-item.active').data( 'scope' );
+	var group = $('.media-menu-item.active').data( 'group' );
+	change_tab( current_tab, $('.media-menu-item.active').html(), $('.media-menu-item.active').attr('title'), form_id, scope, group );
 	
 	$(document).on('click', '.media-menu-item', function(e) {
 		if ( $(this).data('custom') == 1 ) {
@@ -159,13 +162,15 @@ jQuery(document).ready(function($) {
 		}
 
 		var object_id = $(this).data( 'object-id' );
+		var scope = $(this).data( 'scope' );
+		var group = $(this).data( 'group' );
 
-		change_tab( this.id, $(this).html(), $(this).attr('title'), object_id );
+		change_tab( this.id, $(this).html(), $(this).attr('title'), object_id, scope, group );
 	});
 
-	function change_tab( tab_id, title, desc, object_id ) {
+	function change_tab( tab_id, title, desc, object_id, scope, group ) {
 		formSettings.fetch({
-			data: $.param({ tab: tab_id, object_id: object_id }),
+			data: $.param({ tab: tab_id, object_id: object_id, scope: scope, group: group }),
 			reset: true,
 			success: function() {
 	            $('.media-menu-item').removeClass('active');

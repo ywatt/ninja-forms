@@ -1,34 +1,11 @@
 <?php
+/**
+ * Class responsible for initiating the rest API response.
+ * 
+ * @since 3.0
+ */
 
-function ninja_forms_admin_rest() {
-	global $pagenow;
-
-	$capabilities = 'manage_options';
-	$capabilities = apply_filters( 'ninja_forms_admin_menu_capabilities', $capabilities );
-	if ( current_user_can( $capabilities ) ) {
-		if ( $pagenow == 'admin.php' and isset ( $_REQUEST['page'] ) and $_REQUEST['page'] == 'ninja-forms' and isset ( $_REQUEST['rest'] ) and $_REQUEST['rest'] != '' ) {
-			// Requests from the same server don't have a HTTP_ORIGIN header
-			if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {
-			    $_SERVER['HTTP_ORIGIN'] = $_SERVER['SERVER_NAME'];
-			}
-
-			$request = $_REQUEST['rest'];
-
-			try {
-			    $Ninja_Forms_Admin_Rest_API = new Form_Settings_API($request, $_SERVER['HTTP_ORIGIN']);
-			    echo $Ninja_Forms_Admin_Rest_API->processAPI();
-			} catch (Exception $e) {
-			    echo json_encode(Array('error' => $e->getMessage()));
-			}
-			die();	
-		}
-	}
-}
-
-add_action( 'admin_init', 'ninja_forms_admin_rest', 11 );
-
-abstract class Ninja_Forms_Admin_Rest_API
-{
+class NF_Admin_Rest_API {
     /**
      * Property: method
      * The HTTP method this request was made in, either GET, POST, PUT or DELETE
@@ -40,19 +17,6 @@ abstract class Ninja_Forms_Admin_Rest_API
      */
     protected $endpoint = '';
     /**
-     * Property: verb
-     * An optional additional descriptor about the endpoint, used for things that can
-     * not be handled by the basic methods. eg: /files/process
-     */
-    protected $verb = '';
-    /**
-     * Property: args
-     * Any additional URI components after the endpoint and verb have been removed, in our
-     * case, an integer ID for the resource. eg: /<endpoint>/<verb>/<arg0>/<arg1>
-     * or /<endpoint>/<arg0>
-     */
-    protected $args = Array();
-    /**
      * Property: file
      * Stores the input of the PUT request
      */
@@ -62,7 +26,41 @@ abstract class Ninja_Forms_Admin_Rest_API
      * Constructor: __construct
      * Allow for CORS, assemble and pre-process the data
      */
-    public function __construct($request) {
+
+    public function __construct() {
+         // Bail if we aren't in the admin.
+        if ( ! is_admin() )
+            return false;
+
+        global $pagenow;
+
+        if ( $pagenow == 'admin.php' and isset ( $_REQUEST['page'] ) and $_REQUEST['page'] == 'ninja-forms' and isset ( $_REQUEST['nf_rest'] ) and $_REQUEST['nf_rest'] != '' ) {
+            add_action( 'admin_init', array( $this, 'check_rest_api' ), 11 );
+        }
+    }
+
+    public function check_rest_api() {
+        $capabilities = 'manage_options';
+        $capabilities = apply_filters( 'ninja_forms_admin_menu_capabilities', $capabilities );
+        if ( current_user_can( $capabilities ) ) {
+            // Requests from the same server don't have a HTTP_ORIGIN header
+            if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {
+                $_SERVER['HTTP_ORIGIN'] = $_SERVER['SERVER_NAME'];
+            }
+
+            $request = $_REQUEST['nf_rest'];
+
+            try {
+                $this->initiate_api_request($request, $_SERVER['HTTP_ORIGIN']);
+                echo $this->processAPI();
+            } catch (Exception $e) {
+                echo json_encode(Array('error' => $e->getMessage()));
+            }
+            die();  
+        }
+    }
+
+    public function initiate_api_request($request) {
         //header("Access-Control-Allow-Orgin: *");
         //header("Access-Control-Allow-Methods: *");
         header("Content-Type: application/json");
@@ -103,7 +101,7 @@ abstract class Ninja_Forms_Admin_Rest_API
         }
     }
 
-        public function processAPI() {
+    public function processAPI() {
         if ((int)method_exists($this, $this->endpoint) > 0) {
             return $this->_response($this->{$this->endpoint}($this->args));
         }
@@ -173,47 +171,23 @@ abstract class Ninja_Forms_Admin_Rest_API
         return ($status[$code])?$status[$code]:$status[500]; 
     }
 
-}
-
-class Form_Settings_API extends Ninja_Forms_Admin_Rest_API
-{
-    protected $User;
-
-    public function __construct($request, $origin) {
-        parent::__construct($request);
-
-        // Abstracted out for example
-        //$APIKey = new Models\APIKey();
-        //$User = new Models\User();
-
+    protected function rest_api() {
         
-        /*
-
-        if (!array_key_exists('apiKey', $this->request)) {
-            throw new Exception('No Ninja_Forms_Admin_Rest_API Key provided');
-        } else if (!$APIKey->verifyKey($this->request['apiKey'], $origin)) {
-            throw new Exception('Invalid Ninja_Forms_Admin_Rest_API Key');
-        } else if (array_key_exists('token', $this->request) &&
-             !$User->get('token', $this->request['token'])) {
-
-            throw new Exception('Invalid User Token');
-        }
-
-        $this->User = $User;
-        */
-    }
-
-	protected function form_settings() {
-        global $ninja_forms_form_settings;
         do_action( 'ninja_forms_admin_init' );
 
-     	switch( $this->method ) {
-     		case 'GET':
+        switch( $this->method ) {
+            case 'GET':
                 $tab = $this->request['tab'];
                 $object_id = $this->request['object_id'];
-				$args = array();
+                $scope = $this->request['scope'];
+                $group = $this->request['group'];
+
+                $settings = Ninja_Forms()->admin_settings->get_settings( $scope, $group );
+
+                $args = array();
+
                 $object_meta = nf_get_object_meta( $object_id );
-                foreach( $ninja_forms_form_settings[$tab] as $meta_key => $setting ){
+                foreach( $settings as $meta_key => $setting ){
                     if ( isset ( $object_meta[ $meta_key ] ) ){
                         $current_value = $object_meta[ $meta_key ];
                     } else if ( isset ( $setting['default_value'] ) ) {
@@ -231,18 +205,19 @@ class Form_Settings_API extends Ninja_Forms_Admin_Rest_API
 
                     $args[] = $setting;
                 }
-	        	
+                
                 return apply_filters( 'nf_rest_get_array', $args, $object_id, $tab );
                 break;
-     		case 'PUT':
-     			$data = json_decode( $this->file );
-     			$current_value = $data->current_value;
-     			$object_id = $data->object_id;
+            case 'PUT':
+                $data = json_decode( $this->file );
+                $current_value = $data->current_value;
+                $object_id = $data->object_id;
                 $meta_key = $data->meta_key;
                 nf_update_meta( $object_id, $meta_key, $current_value );
 
-     			return $data;
-     			break;
-		}
-	}
- }
+                return $data;
+                break;
+        }
+    }
+
+}
