@@ -664,7 +664,13 @@ function ninja_forms_set_transient(){
 
 	$transient['success_msgs'] = $success;
 	$transient['error_msgs'] = $errors;
-	$transient_id = $_SESSION['ninja_forms_transient_id'];
+	if ( ! isset ( $_SESSION['ninja_forms_transient_id'] ) )
+		ninja_forms_set_transient_id();
+
+	if ( isset ( $_SESSION['ninja_forms_transient_id'] ) ) {
+		$transient_id = $_SESSION['ninja_forms_transient_id'];		
+	}
+
 	//delete_transient( 'ninja_forms_test' );
 	set_transient( $transient_id, $transient, DAY_IN_SECONDS );
 }
