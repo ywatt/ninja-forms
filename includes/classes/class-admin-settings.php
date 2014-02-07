@@ -23,10 +23,6 @@ class NF_Register_Admin_Settings {
 	
 	private $settings;
 
-	private $pages;
-
-	public $output;
-
 	/**
 	 * Get things going
 	 *
@@ -38,11 +34,9 @@ class NF_Register_Admin_Settings {
 	public function __construct() {
 		if ( ! is_admin() )
 			return false;
-		add_action( 'admin_menu', array( $this, 'default_admin_pages' ) );
-		$this->output = new NF_Admin_Settings_Pages();
+
 		$this->default_form_settings();
 		$this->default_form_groups();
-		//$this->default_admin_pages();
 
 		do_action( 'nf_register_admin_settings' );
 	}
@@ -74,6 +68,7 @@ class NF_Register_Admin_Settings {
 			),
 		);
 		$this->register_settings( $args );
+
 	}
 
 	private function default_form_groups() {
@@ -97,6 +92,34 @@ class NF_Register_Admin_Settings {
 		);
 
 		$this->register_settings_group( $args );		
+
+		$args = array(
+			'scope' => 'plugin',
+			'id' => 'general',
+			'label' => 'General Settings',
+			'class' => '',
+			'priority' => 'core',
+			'desc' => __( 'These are settings.', 'ninja-forms' ),
+			'display_link' => true,
+			'settings' => array(
+				'date_format' => array(
+					'type' => 'text',
+					'desc' => __( 'e.g. m/d/Y, d-m-Y - Tries to follow the <a href="http://www.php.net/manual/en/function.date.php" target="_blank">PHP date() function</a> specifications, but not every format is supported.', 'ninja-forms' ),
+					'label' => __( 'Date Format', 'ninja-forms' ),
+					'default_value' => 'm/d/Y',
+					'class' => 'widefat code',
+				),
+				'currency_symbol' => array(
+					'type' => 'text',
+					'label' => __( 'Currency Symbol', 'ninja-forms' ),
+					'desc' => __( 'e.g. $, &pound;, &euro;', 'ninja-forms' ),
+				),
+			),
+		);
+
+		$this->register_settings_group( $args );
+
+
 
 		$args = array(
 			'scope' => 'form',
@@ -226,15 +249,48 @@ class NF_Register_Admin_Settings {
 		);
 
 		$this->register_settings_group( $args );
-	}
 
-	public function default_admin_pages() {
 		$args = array(
-			'page_title' 	=>	'Test',
-			'menu_title'	=> 	'Test',
-			'menu_slug'		=>	'test',
+			'scope' => 'plugin',
+			'id' => 'test',
+			'label' => 'TEST',
+			'display_link' => true,
+			'priority' => 'default',
+			'desc' => __( 'This is a test.', 'ninja-forms' ),
+			'settings' => array(
+				'type' => array(
+					'type' => 'dropdown',
+					'label' => __( 'Type', 'ninja-forms' ),
+					'options' => array(
+						array('name' => __( 'Email', 'ninja-forms' ), 'value' => 'email'),
+						array('name' => __( 'Success Message', 'ninja-forms' ), 'value' => 'success_message'),
+						array('name' => __( 'Pushover', 'ninja-forms' ), 'value' => 'pushover'),
+						array('name' => __( 'Text Message', 'ninja-forms' ), 'value' => 'text_message'),
+					),
+					'class' => '',
+					'desc' => __( 'What kind of notification would you like to create?', 'ninja-forms' ),
+				),
+				'name' => array(
+					'type' => 'text',
+					'label' => __( 'Name', 'ninja-forms' ),
+					'class' => 'widefat',
+					'desc' => __( 'How would you like to identify this notification?', 'ninja-forms' ),
+				),
+				'mailto' => array(
+					'type' => 'radio',
+					'label' => __( 'Send To', 'ninja-forms' ),
+					'options' => array(
+						array('name' => __( 'Enter Email', 'ninja-forms' ), 'value' => 'manual_email'),
+						array('name' => __( 'Select a Field', 'ninja-forms' ), 'value' => 'field_value'),
+						array('name' => __( 'Configure Routing', 'ninja-forms' ), 'value' => 'configure_routing'),
+					),
+					'class' => '',
+					'desc' => __( 'What kind of notification would you like to create?', 'ninja-forms' ),
+				),
+			),
 		);
-		$this->register_admin_page( $args );
+
+		$this->register_settings_group( $args );
 	}
 
 	/**
@@ -294,35 +350,6 @@ class NF_Register_Admin_Settings {
 	}
 
 	/**
-	 * Register an admin menu page
-	 * 
-	 * @access public
-	 * @param array $args
-	 * @since 3.0
-	 * @return void
-	 */
-
-	public function register_admin_page( $args ) {
-		$defaults = array(
-			'parent_slug' 	=> 	'ninja-forms',
-			'page_title' 	=>	'Forms',
-			'menu_title'	=> 	'',
-			'capabilities' 	=> 	'manage_options',
-			'menu_slug'		=>	'',
-			'function' 		=>	array( $this->output, 'test' ),
-		);
-
-		// Parse incomming $args into an array and merge it with $defaults
-		$args = wp_parse_args( $args, $defaults );
-
-		if ( $args['menu_slug'] == '' ) {
-			$args['menu_slug'] = sanitize_title( $args['menu_title'] );
-		}
-
-		add_submenu_page( $args['parent_slug'], __( $args['page_title'], 'ninja-forms' ), __( $args['menu_title'], 'ninja-forms' ), $args['capabilities'], $args['menu_slug'], array( $this->output, 'test') );
-	}
-
-	/**
 	 * Retrieve an admin setting by scope, group, and setting id
 	 * 
 	 * @access public
@@ -367,7 +394,7 @@ class NF_Register_Admin_Settings {
 	   * @return array $groups
 	   */
 
-	  public function get_setting_groups( $scope ) {
+	  public function get_settings_groups( $scope ) {
 	  	if ( isset ( $this->settings[$scope] ) ) {
 	  		return $this->settings[$scope];
 	  	} else {

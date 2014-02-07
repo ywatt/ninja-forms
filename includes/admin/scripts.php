@@ -53,6 +53,7 @@ function ninja_forms_admin_js(){
 	}
 	wp_localize_script( 'ninja-forms-admin', 'form_id', $form_id );
 	wp_localize_script( 'ninja-forms-admin', 'admin_url', admin_url( 'admin.php' ) );
+	
 }
 
 function ninja_forms_new_form_js() {

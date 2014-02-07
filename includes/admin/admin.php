@@ -74,7 +74,7 @@ add_action( 'admin_menu', 'ninja_forms_add_menu' );
 function ninja_forms_admin_edit_form(){
 	global $wpdb, $ninja_forms_form_settings;
 
-	$ninja_forms_form_settings_tabs = Ninja_forms()->admin_settings->get_setting_groups( 'form' );
+	$ninja_forms_form_settings_tabs = Ninja_forms()->admin_settings->get_settings_groups( 'form' );
 
 	// echo "<pre>";
 	// print_r( $ninja_forms_form_settings_tabs );

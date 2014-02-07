@@ -97,6 +97,7 @@ final class Ninja_Forms {
 			self::$instance->load_textdomain();
 			self::$instance->set_transient_id();
 			self::$instance->admin_settings = new NF_Register_Admin_Settings();
+			self::$instance->admin_settings_pages = new NF_Admin_Settings_Pages();
 			self::$instance->admin_rest = new NF_Admin_Rest_API();
 
 		}
@@ -213,7 +214,9 @@ final class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . '/includes/register.php' );
 		require_once( NF_PLUGIN_DIR . '/includes/functions.php' );
 		require_once( NF_PLUGIN_DIR . '/includes/admin/form-preview.php' );
-		
+		require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-settings.php' );
+		require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-pages.php' );		
+		require_once( NF_PLUGIN_DIR . '/includes/classes/class-rest-api.php' );
 
 		/* Require Admin Files */
 		// These files are required for the backend only
@@ -221,11 +224,8 @@ final class Ninja_Forms {
 			require_once( NF_PLUGIN_DIR . '/includes/activation.php' );
 
 			require_once( NF_PLUGIN_DIR . '/includes/admin/admin.php' );
-			require_once( NF_PLUGIN_DIR . '/includes/classes/class-rest-api.php' );
 			require_once( NF_PLUGIN_DIR . '/includes/admin/all-forms-list.php' );
 			require_once( NF_PLUGIN_DIR . '/includes/admin/scripts.php' );
-			require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-settings.php' );
-			require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-pages.php' );
 
 			//Require EDD autoupdate file
 			if( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
