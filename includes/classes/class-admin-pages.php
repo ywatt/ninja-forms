@@ -127,8 +127,8 @@ class NF_Admin_Settings_Pages {
 			}
 		}
 		?>
-		<div id="ex1" style="">
-		  	<div class="media-frame wp-core-ui" id="__wp-uploader-id-0">
+		<div id="" style="">
+		  	<div class="" id="">
 
 				<div class="media-frame-menu">
 					<div class="media-menu">
@@ -269,7 +269,7 @@ class NF_Admin_Settings_Pages {
 						?>
 					</div>
 				</div>
-				<div class="nf-settings">
+				<div class="nf-settings-non-modal">
 					<div class="nf-settings-title">
 						<h1></h1>
 						<div class="updated" style="display:none"></div>
@@ -496,10 +496,10 @@ class NF_Admin_Settings_Pages {
 
 	public function default_admin_pages() {
 		$args = array(
-			'page_title' 	=>	'General Settings',
-			'menu_title'	=> 	'General Settings',
+			'page_title' 	=>	'Settings',
+			'menu_title'	=> 	'Settings',
 			'menu_slug'		=>	'general',
-			'scope' 		=> 	'plugin'
+			'scope' 		=> 	'plugin_settings'
 		);
 		$this->register_admin_page( $args );
 
@@ -532,11 +532,11 @@ class NF_Admin_Settings_Pages {
 		wp_localize_script( 'ninja-forms-admin', 'form_id', $form_id );
 		wp_localize_script( 'ninja-forms-admin', 'admin_url', admin_url( 'admin.php' ) );
 
-
-		
 		wp_enqueue_script('ninja-forms-edit-form',
 			NINJA_FORMS_URL .'/js/dev/edit-form.js',
 			array( 'jquery', 'ninja-forms-admin' ) );
 		wp_localize_script( 'ninja-forms-edit-form', 'ninja_forms_rest_url', admin_url( 'admin.php?page=ninja-forms' ) );
+
+		ninja_forms_admin_css();
 	}
 }

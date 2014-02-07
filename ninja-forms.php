@@ -64,14 +64,14 @@ if ( ! class_exists( 'Ninja_forms' ) ) :
 /**
  * Main Ninja_forms Class
  *
- * @since 1.4
+ * @since 3.0
  */
 final class Ninja_Forms {
 	/** Singleton *************************************************************/
 
 	/**
 	 * @var Ninja_forms The one true Ninja_forms
-	 * @since 1.4
+	 * @since 3.0
 	 */
 	private static $instance;
 
@@ -81,7 +81,7 @@ final class Ninja_Forms {
 	 * Insures that only one instance of Ninja_forms exists in memory at any one
 	 * time. Also prevents needing to define globals all over the place.
 	 *
-	 * @since 1.4
+	 * @since 3.0
 	 * @static
 	 * @staticvar array $instance
 	 * @uses Ninja_forms::includes() Include the required files
@@ -135,7 +135,7 @@ final class Ninja_Forms {
 	 * Setup plugin constants
 	 *
 	 * @access private
-	 * @since 1.4
+	 * @since 3.0
 	 * @return void
 	 */
 	private function setup_constants() {
@@ -204,7 +204,7 @@ final class Ninja_Forms {
 	 * Include required files
 	 *
 	 * @access private
-	 * @since 1.4
+	 * @since 3.0
 	 * @return void
 	 */
 	private function includes() {
@@ -263,7 +263,7 @@ final class Ninja_Forms {
 	 * Loads the plugin language files
 	 *
 	 * @access public
-	 * @since 1.4
+	 * @since 3.0
 	 * @return void
 	 */
 
@@ -302,7 +302,7 @@ endif; // End if class_exists check
  *
  * Example: <?php $ninja_forms = Ninja_Forms(); ?>
  *
- * @since 1.4
+ * @since 3.0
  * @return object The one true Ninja_Forms Instance
  */
 function Ninja_Forms() {

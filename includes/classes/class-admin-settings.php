@@ -94,7 +94,7 @@ class NF_Register_Admin_Settings {
 		$this->register_settings_group( $args );		
 
 		$args = array(
-			'scope' => 'plugin',
+			'scope' => 'plugin_settings',
 			'id' => 'general',
 			'label' => 'General Settings',
 			'class' => '',
@@ -251,7 +251,7 @@ class NF_Register_Admin_Settings {
 		$this->register_settings_group( $args );
 
 		$args = array(
-			'scope' => 'plugin',
+			'scope' => 'plugin_settings',
 			'id' => 'test',
 			'label' => 'TEST',
 			'display_link' => true,

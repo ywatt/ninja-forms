@@ -227,6 +227,8 @@
   bottom: 0;
   right: 0;
   overflow: scroll; }
+.nf-settings-non-modal {
+  margin-left: 230px; }
 .ninja-forms-edit .updated {
   background: #eee;
   float: left;
