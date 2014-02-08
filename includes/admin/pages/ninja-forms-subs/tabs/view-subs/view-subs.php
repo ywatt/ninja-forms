@@ -353,8 +353,8 @@ function ninja_forms_tab_view_subs(){
 								foreach( $data as $d ) {
 									if ( $field_id == $d['field_id'] ) {
 										/**
-										 * ninja_forms_sub_table_row_actions hook
-										 * hook in here to allow extra row actions
+										 * ninja_forms_view_sub_td hook
+										 * hook in here to format the submission table data cells
 										 *
 										 * @hooked ninja_forms_strip_sub_td_slashes - 10
 										 * @hooked ninja_forms_strip_sub_td_tags - 20
