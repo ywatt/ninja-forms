@@ -633,6 +633,9 @@ function ninja_forms_field_calc_pre_process(){
 				}
 
 				if ( isset ( $calc_places ) ) {
+					if ( empty( $calc_places ) ) {
+						$calc_places = 0;
+					}
 					$result = number_format( round( $result, $calc_places ), $calc_places );
 				}
 				$result = str_replace( ',', '', $result );
