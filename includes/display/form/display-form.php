@@ -26,14 +26,15 @@ if( isset ( $_POST['_ninja_forms_display_submit'] ) AND absint ( $_POST['_ninja_
  */
 
 function ninja_forms_session_class_setup(){
-	if ( get_transient( $_SESSION['ninja_forms_transient_id'] ) !== false ) {
-		add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
-	}
+	if ( isset ( $_SESSION['ninja_forms_transient_id'] ) and !is_admin() ) {
+		if ( get_transient( $_SESSION['ninja_forms_transient_id'] ) !== false ) {
+			add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
+		}
+	} 
 }
 
-if ( isset ( $_SESSION['ninja_forms_transient_id'] ) and !is_admin() ) {
-	add_action( 'init', 'ninja_forms_session_class_setup', 4 );
-}
+add_action( 'init', 'ninja_forms_session_class_setup', 4 );
+
 /*
  *
  * Function that clears any transient values that have been stored in cache for this user.
@@ -44,7 +45,7 @@ if ( isset ( $_SESSION['ninja_forms_transient_id'] ) and !is_admin() ) {
 
 function ninja_forms_clear_transient() {
 	//set_transient( 'ninja_forms_test', 'TEST', DAY_IN_SECONDS );
-	ninja_forms_delete_transient();
+	//ninja_forms_delete_transient();
 }
 
 add_action( 'wp_head', 'ninja_forms_clear_transient' );
