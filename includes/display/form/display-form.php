@@ -45,7 +45,7 @@ add_action( 'init', 'ninja_forms_session_class_setup', 4 );
 
 function ninja_forms_clear_transient() {
 	//set_transient( 'ninja_forms_test', 'TEST', DAY_IN_SECONDS );
-	//ninja_forms_delete_transient();
+	ninja_forms_delete_transient();
 }
 
 add_action( 'wp_head', 'ninja_forms_clear_transient' );

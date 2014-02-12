@@ -162,14 +162,11 @@ function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 	if ( $calc_eq ) {
 		foreach ( $calc_fields as $calc_id => $calc ) {
 			if( $calc['method'] == 'eq' ) {
-				foreach( $fields as $field_id => $user_value ){
-					if ( isset ( $ninja_forms_loading ) ) {
-						$field = $ninja_forms_loading->get_field_settings( $field_id );
-					} else {
-						$field = $ninja_forms_processing->get_field_settings( $field_id );
-					}
+				foreach( $fields as $field ){
+					$field_id = $field['id'];
+
 					if (preg_match("/\bfield_".$field_id."\b/i", $calc['eq'] ) ) {
-						$calc_fields[$calc_id]['fields'][] = $field['id'];
+						$calc_fields[$calc_id]['fields'][] = $field_id;
 					}
 				}
 			}
