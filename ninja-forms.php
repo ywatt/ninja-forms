@@ -125,6 +125,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.p
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/calc-field-class.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/clear-complete.php" );
 
+
 /* Require Pre-Registered Tabs and their sidebars */
 
 //if ( is_admin() ) {
