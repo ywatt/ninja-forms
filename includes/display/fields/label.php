@@ -54,7 +54,7 @@ function ninja_forms_display_field_label( $field_id, $data ){
 	$label_class = apply_filters( 'ninja_forms_label_class', $label_class, $field_id );
 
 	if ( $display_label ) {
-		if ( $req == 1 ) {
+		if ( $req == 1 && $req_symbol != '' ) {
 			$req_span = "<span class='ninja-forms-req-symbol'>$req_symbol</span>";
 		} else {
 			$req_span = '';
