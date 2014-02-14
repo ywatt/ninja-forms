@@ -718,7 +718,7 @@ function ninja_forms_sub_table_row_actions_edit( $row_actions, $data, $sub_id, $
 	// turn on the output buffer
 	ob_start();
 	?>
-	<span class="edit"><a href="<?php echo $edit_link;?>" id="ninja_forms_sub_<?php echo $sub['id'];?>" class="ninja-forms-view-sub"><?php _e('Edit', 'ninja-forms' ); ?></a></span>
+	<span class="edit"><a href="<?php echo $edit_link;?>" id="ninja_forms_sub_<?php echo $sub_id;?>" class="ninja-forms-view-sub"><?php _e('Edit', 'ninja-forms' ); ?></a></span>
 	<?php
 	$action = ob_get_clean();
 
