@@ -306,7 +306,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'name' => 'sub_limit_msg',
 				'type' => 'rte',
 				'label' => __( 'Limit Reached Message', 'ninja-forms' ),
-				'desc' => __( 'Please enter a message that you would displayed when this form has reached it&#39;s submission limit and will not accept new submissions.', 'ninja-forms' ),
+				'desc' => __( 'Please enter a message that you want displayed when this form has reached its submission limit and will not accept new submissions.', 'ninja-forms' ),
 				//'default_value' => __( 'Submissions are closed.', 'ninja-forms' ),
 				'tr_class' => '',
 			),
