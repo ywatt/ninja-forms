@@ -117,12 +117,13 @@ function ninja_forms_display_label_inside( $data, $field_id ){
 		$label = '';
 	}
 
-	$label = strip_tags( $label );
 
-	$data['label'] = $label;
 
 	if ( $field_type != '_list' ) {
 		if ( $label_pos == 'inside' ) {
+			$label = strip_tags( $label );
+
+			$data['label'] = $label;			
 			if ( isset ( $ninja_forms_loading ) ) {
 				if ( !empty( $user_value ) )
 					return $data;
