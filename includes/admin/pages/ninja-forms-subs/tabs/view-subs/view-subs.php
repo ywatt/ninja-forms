@@ -124,16 +124,18 @@ function ninja_forms_tab_view_subs(){
 			$end = $limit;
 		}
 
-		$args = array(
+		$args = apply_filters( 'ninja_forms_view_subs_args', array(
 			'form_id' => $form_id,
 			'begin_date' => $begin_date,
 			'end_date' => $end_date,
 			'limit' => $start.','.$limit,
-			//'status' => 1,
+			'status' => 1,
 			//'11' => '05/06/2012',
-		);
+		) );
 
 		$sub_count = ninja_forms_get_sub_count( $args );
+
+		$sub_count = apply_filters( 'ninja_forms_view_subs_count', $sub_count );
 
 		$sub_results = ninja_forms_get_subs( $args );
 
