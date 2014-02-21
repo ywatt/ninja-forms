@@ -306,5 +306,5 @@ function ninja_forms_get_field_class( $field_id ) {
 		$field_class .= " input-limit";
 	}
 
-	return apply_filters( 'ninja_forms_display_field_class', $field_class, $field_id );
+	return apply_filters( 'ninja_forms_display_field_class', $field_class, $field_id, $field_row );
 }
