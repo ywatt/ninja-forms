@@ -210,7 +210,7 @@ function ninja_forms_get_field_wrap_class($field_id){
 			break;
 		}
 	}
-	return apply_filters( 'ninja_forms_display_field_wrap_class', $field_wrap_class, $field_id );
+	return apply_filters( 'ninja_forms_display_field_wrap_class', $field_wrap_class, $field_id, $field_row );
 }
 
 
