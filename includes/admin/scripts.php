@@ -34,16 +34,17 @@ function ninja_forms_admin_js(){
 		$date_format = 'm/d/Y';
 	}
 
-	wp_enqueue_script( 'jquery-modal',
-	NF_PLUGIN_URL .'js/min/jquery.modal.min.js',
-	array( 'jquery', 'jquery-ui-core' ) );
+	wp_enqueue_script( 'jquery-ui-tooltip' );
 
+	wp_enqueue_script( 'jquery-modal',
+		NF_PLUGIN_URL .'js/min/jquery.modal.min.js',
+		array( 'jquery', 'jquery-ui-core' ) );
 
 	$date_format = ninja_forms_date_to_datepicker($date_format);
 
 	wp_enqueue_script('ninja-forms-admin',
-	NF_PLUGIN_URL .'js/dev/ninja-forms-admin.js',
-	array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable', 'backbone' ));
+		NF_PLUGIN_URL .'js/dev/ninja-forms-admin.js',
+		array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable', 'backbone' ));
 
 	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array('date_format' => $date_format));
 	if ( isset ( $_REQUEST['form_id'] ) ) {
@@ -60,12 +61,12 @@ function ninja_forms_new_form_js() {
 	wp_enqueue_script('ninja-forms-new-form',
 		NINJA_FORMS_URL .'/js/dev/new-form.js',
 		array( 'jquery', 'ninja-forms-admin' ) );
-	wp_localize_script( 'ninja-forms-new-form', 'ninja_forms_rest_url', admin_url( 'admin.php?page=ninja-forms' ) );
+	wp_localize_script( 'ninja-forms-new-form', 'nf_rest_url', admin_url( 'admin.php?page=ninja-forms' ) );
 }
 
 function ninja_forms_edit_form_js() {
 	wp_enqueue_script('ninja-forms-edit-form',
-		NINJA_FORMS_URL .'/js/dev/edit-form.js',
+		NINJA_FORMS_URL .'/js/dev/admin-backbone.js',
 		array( 'jquery', 'ninja-forms-admin' ) );
-	wp_localize_script( 'ninja-forms-edit-form', 'ninja_forms_rest_url', admin_url( 'admin.php?page=ninja-forms' ) );
+	wp_localize_script( 'ninja-forms-edit-form', 'nf_rest_url', admin_url( 'admin.php?page=ninja-forms' ) );
 }

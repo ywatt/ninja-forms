@@ -740,3 +740,62 @@ function nf_update_meta( $object_id, $meta_key, $meta_value ) {
 
 	return $meta_id;
 }
+
+/**
+ * Delete an object. Also removes all of the objectmeta attached to the object.
+ *
+ * @since 3.0
+ * @param int $object_id
+ * @return bool
+ */
+
+function nf_delete_object( $object_id ) {
+	global $wpdb;
+
+	// Delete this object.
+	$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . NF_OBJECTS_TABLE_NAME .' WHERE id = %d', $object_id ) );
+
+	// Delete any objectmeta attached to this object.
+	$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . NF_META_TABLE_NAME .' WHERE object_id = %d', $object_id ) );
+
+	return true;
+}
+
+/**
+ * Insert an object.
+ * 
+ * @since 3.0
+ * @param string $type
+ * @return int $object_id
+ */
+
+function nf_insert_object( $type ) {
+	global $wpdb;
+	$wpdb->insert( NF_OBJECTS_TABLE_NAME, array( 'type' => $type ) );
+	return $wpdb->insert_id;
+}
+
+/**
+ * Insert a form. Accepts an array of meta.
+ * 
+ * @since 3.0
+ * @param array $object_meta
+ * @return int $form_id
+ */
+
+function nf_insert_form( $object_meta = array() ) {
+	global $wpdb;
+	
+	// Insert a new object
+	$form_id = nf_insert_object( 'form' );
+
+	// Loop through our object meta array and insert the elements.
+	if ( ! empty( $object_meta ) ) {
+		foreach( $object_meta as $key => $value ) {
+			// Add our objectmeta.
+			nf_update_meta( $form_id, $key, $value );
+		}
+	}
+
+	return $form_id;
+}

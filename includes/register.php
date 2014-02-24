@@ -1,4 +1,5 @@
 <?php
+
 function ninja_forms_register_field($slug, $args = array()){
 	global $ninja_forms_fields;
 
@@ -369,7 +370,7 @@ function register_settings_tabs() {
 		'desc' => __( 'These settings affect how forms are displayed on the front-end.', 'ninja-forms' ),
 
 	);
-	ninja_forms_register_form_settings_tab( $args );
+	//ninja_forms_register_form_settings_tab( $args );
 
 	$args = array(
 		'id' => 'notifications',
@@ -453,7 +454,7 @@ function register_settings_tabs() {
 		),
 		//'put_filter' => function( $value, $form_setting, $form_id ) { return $value; }
 	);
-	ninja_forms_register_form_settings_tab( $args );
+	//ninja_forms_register_form_settings_tab( $args );
 
 	$args = array(
 		'id' => 'notification_single',
@@ -463,10 +464,10 @@ function register_settings_tabs() {
 		'desc' => __( 'This is where all form notifications are managed.', 'ninja-forms' ),
 		//'put_filter' => function( $value, $form_setting, $form_id ) { return $value; }
 	);
-	ninja_forms_register_form_settings_tab( $args );
+	//ninja_forms_register_form_settings_tab( $args );
 }
 
-add_action( 'ninja_forms_admin_init', 'register_settings_tabs' );
+//add_action( 'ninja_forms_admin_init', 'register_settings_tabs' );
 
 /**
  * 
@@ -492,7 +493,7 @@ function nf_filter_rest_get_notifications( $args, $object_id, $tab ) {
 	return $tmp_array;
 }
 
-add_filter( 'nf_rest_get_array', 'nf_filter_rest_get_notifications', 10, 3 );
+//add_filter( 'nf_rest_get_array', 'nf_filter_rest_get_notifications', 10, 3 );
 
 function nf_filter_rest_get_single_notification( $args, $object_id, $tab ) {
 	if ( $tab != 'notification_single' )
@@ -508,7 +509,7 @@ function nf_filter_rest_get_single_notification( $args, $object_id, $tab ) {
 	return $args;
 }
 
-add_filter( 'nf_rest_get_array', 'nf_filter_rest_get_single_notification', 10, 3 );
+//add_filter( 'nf_rest_get_array', 'nf_filter_rest_get_single_notification', 10, 3 );
 
 function register_forms_settings() {
 	$pages = get_pages();
@@ -546,7 +547,7 @@ function register_forms_settings() {
 			),
 		),
 	);
-	ninja_forms_register_form_settings( $args );
+	//ninja_forms_register_form_settings( $args );
 
 	$args = array(
 		'tab' => 'display_settings',
@@ -569,7 +570,7 @@ function register_forms_settings() {
 			),
 		),
 	);
-	ninja_forms_register_form_settings( $args );
+	//ninja_forms_register_form_settings( $args );
 
 	$args = array(
 		'tab' => 'notification_single',
@@ -605,7 +606,7 @@ function register_forms_settings() {
 			),
 		),
 	);
-	ninja_forms_register_form_settings( $args );
+	//ninja_forms_register_form_settings( $args );
 }
 
-add_action( 'ninja_forms_admin_init', 'register_forms_settings' );
+//add_action( 'ninja_forms_admin_init', 'register_forms_settings' );

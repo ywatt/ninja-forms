@@ -80,3 +80,116 @@ function ninja_forms_letters_to_numbers( $size ) {
 	}
 	return $ret;
 }
+
+function ninja_forms_admin_body_filter( $classes ) {
+  global $pagenow;
+
+  if ( $pagenow == 'admin.php' and isset ( $_REQUEST['page'] ) ) {
+    switch( $_REQUEST['page'] ) {
+      case 'ninja-forms':
+        $classes .= ' ninja-forms';
+        $classes .= ' ninja-forms-forms';
+        break;
+      case 'ninja-forms-edit':
+        $classes .= ' ninja-forms';
+        $classes .= ' ninja-forms-edit';
+        break;
+      case 'ninja-forms-settings':
+        $classes .= ' ninja-forms';
+        $classes .= ' ninja-forms-settings';
+        break;
+
+    }
+
+  }
+  return $classes;
+}
+
+add_filter( 'admin_body_class', 'ninja_forms_admin_body_filter' );
+
+function ninja_forms_get_current_tab(){
+  global $ninja_forms_tabs;
+  if(isset($_REQUEST['page'])){
+    $current_page = $_REQUEST['page'];
+
+
+    if(isset($_REQUEST['tab'])){
+      $current_tab = $_REQUEST['tab'];
+    }else{
+      if(isset($ninja_forms_tabs[$current_page]) AND is_array($ninja_forms_tabs[$current_page])){
+        $first_tab = array_slice($ninja_forms_tabs[$current_page], 0, 1);
+        foreach($first_tab as $key => $val){
+          $current_tab = $key;
+        }
+      }else{
+        $current_tab = '';
+      }
+    }
+    return $current_tab;
+  }else{
+    return false;
+  }
+}
+
+function ninja_forms_date_to_datepicker($date){
+  $pattern = array(
+
+    //day
+    'd',    //day of the month
+    'j',    //3 letter name of the day
+    'l',    //full name of the day
+    'z',    //day of the year
+
+    //month
+    'F',    //Month name full
+    'M',    //Month name short
+    'n',    //numeric month no leading zeros
+    'm',    //numeric month leading zeros
+
+    //year
+    'Y',    //full numeric year
+    'y'   //numeric year: 2 digit
+  );
+  $replace = array(
+    'dd','d','DD','o',
+    'MM','M','m','mm',
+    'yy','y'
+  );
+  foreach($pattern as &$p)  {
+    $p = '/'.$p.'/';
+  }
+  return preg_replace($pattern,$replace,$date);
+}
+
+function str_putcsv($array, $delimiter = ',', $enclosure = '"', $terminator = "\n") {
+  # First convert associative array to numeric indexed array
+  foreach ($array as $key => $value) $workArray[] = $value;
+
+  $returnString = '';                 # Initialize return string
+  $arraySize = count($workArray);     # Get size of array
+
+  for ($i=0; $i<$arraySize; $i++) {
+    # Nested array, process nest item
+    if (is_array($workArray[$i])) {
+      $returnString .= str_putcsv($workArray[$i], $delimiter, $enclosure, $terminator);
+    } else {
+      switch (gettype($workArray[$i])) {
+        # Manually set some strings
+        case "NULL":     $_spFormat = ''; break;
+        case "boolean":  $_spFormat = ($workArray[$i] == true) ? 'true': 'false'; break;
+        # Make sure sprintf has a good datatype to work with
+        case "integer":  $_spFormat = '%i'; break;
+        case "double":   $_spFormat = '%0.2f'; break;
+        case "string":   $_spFormat = '%s'; $workArray[$i] = str_replace("$enclosure", "$enclosure$enclosure", $workArray[$i]); break;
+        # Unknown or invalid items for a csv - note: the datatype of array is already handled above, assuming the data is nested
+        case "object":
+        case "resource":
+        default:         $_spFormat = ''; break;
+      }
+              $returnString .= sprintf('%2$s'.$_spFormat.'%2$s', $workArray[$i], $enclosure);
+        $returnString .= ($i < ($arraySize-1)) ? $delimiter : $terminator;
+    }
+  }
+  # Done the workload, return the output information
+  return $returnString;
+}

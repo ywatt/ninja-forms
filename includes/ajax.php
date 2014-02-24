@@ -617,5 +617,20 @@ function csv_explode( $str, $d=',', $e='"', $crlf=TRUE ) {
 	// An empty array will exist due to $ being a zero-length match, so remove it
 	array_pop( $r );
 	return $r;
-
 }
+
+/**
+ * Create a new form.
+ *
+ * @since 3.0
+ * @return int $form_id
+ */
+
+function nf_new_form_ajax() {
+	$name = esc_attr( $_REQUEST['name'] );
+	$form_id = nf_insert_form( array( 'name' => $name ) );
+	echo $form_id;
+	die();
+}
+
+add_action( 'wp_ajax_nf_new_form', 'nf_new_form_ajax' );

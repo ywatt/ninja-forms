@@ -177,13 +177,14 @@ class NF_Admin_Rest_API {
 
         switch( $this->method ) {
             case 'GET':
-                $tab = $this->request['tab'];
                 $object_id = $this->request['object_id'];
                 $scope = $this->request['scope'];
                 $group = $this->request['group'];
 
                 $settings = Ninja_Forms()->admin_settings->get_settings( $scope, $group );
-
+                if ( ! $settings )
+                    $settings = array();
+                
                 $args = array();
 
                 $object_meta = nf_get_object_meta( $object_id );
@@ -206,7 +207,7 @@ class NF_Admin_Rest_API {
                     $args[] = $setting;
                 }
                 
-                return apply_filters( 'nf_rest_get_array', $args, $object_id, $tab );
+                return apply_filters( 'nf_rest_get_array', $args, $object_id, $group );
                 break;
             case 'PUT':
                 $data = json_decode( $this->file );
@@ -216,6 +217,13 @@ class NF_Admin_Rest_API {
                 nf_update_meta( $object_id, $meta_key, $current_value );
 
                 return $data;
+                break;
+            case 'DELETE':
+                if ( !isset ( $_REQUEST['type'] ) )
+                    return false;
+                $object_id = str_replace( '/', '', $_REQUEST['type'] );
+                nf_delete_object( $object_id );
+                return true;
                 break;
         }
     }

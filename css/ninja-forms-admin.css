@@ -227,8 +227,11 @@
   bottom: 0;
   right: 0;
   overflow: scroll; }
-.nf-settings-non-modal {
+.nf-settings {
   margin-left: 230px; }
+.nf-settings-modal .nf-settings-title {
+  margin-left: 230px;
+}
 .ninja-forms-edit .updated {
   background: #eee;
   float: left;
@@ -238,7 +241,7 @@
 .ninja-forms-edit .howto {
   font-weight: normal;
   padding: 10px; }
-.ninja-forms-edit .form-table > tr th, .ninja-forms-edit .form-table > tr td {
+.ninja-forms-edit .nf-table > tr th, .ninja-forms-edit .nf-table > tr td {
   padding: 15px 10px; }
 .ninja-forms-edit .mceToolbar .mceButton {
   width: auto !important;
@@ -339,6 +342,21 @@
   box-sizing: border-box;
   border-top: 1px solid #eee; }
 
+
+.tooltip {
+    background-color:#000;
+    border:1px solid #fff;
+    padding:10px 15px;
+    width:200px;
+    display:none;
+    color:#fff;
+    text-align:left;
+    font-size:12px;
+ 
+    /* outline radius for mozilla/firefox only */
+    -moz-box-shadow:0 0 10px #000;
+    -webkit-box-shadow:0 0 10px #000;
+}
 /*
 
 .nf-new-form-content {

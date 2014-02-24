@@ -118,6 +118,10 @@ jQuery.fn.nextElementInDom = function(selector, options) {
 
 jQuery(document).ready(function($) {
 
+	$( document ).on( 'click', '.media-modal-close', function(e){
+		$.modal.close();
+	});
+
 	// Listen for clicks on our "add repeater field" buttons.
 	$(document).on('click', '.repeater-add', function(e){
 		e.preventDefault();
@@ -163,14 +167,6 @@ jQuery(document).ready(function($) {
 			formSettingsView.render();
 			$('#' + span_id).children('span:last').children('input').focus();
 		}
-	});
-
-	$('#ninja_forms_new_form_create').on('click', function(e) {
-		e.preventDefault();
-		var form_title = $('#ninja_forms_new_form_title').val();
-		$.post( ajaxurl, { action: 'ninja_forms_new_form', form_title: form_title }, function( response ) {
-			window.location = admin_url + '?page=ninja-forms-edit&form_id=' + response.form_id;
-		});
 	});
 
 	var sender_mod = false;

@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.2.55
+Version: 3.0
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -99,7 +99,7 @@ final class Ninja_Forms {
 			self::$instance->admin_settings = new NF_Register_Admin_Settings();
 			self::$instance->admin_settings_pages = new NF_Admin_Settings_Pages();
 			self::$instance->admin_rest = new NF_Admin_Rest_API();
-
+			
 		}
 		return self::$instance;
 	}
@@ -207,30 +207,33 @@ final class Ninja_Forms {
 	 * @since 3.0
 	 * @return void
 	 */
+
 	private function includes() {
 		/* Require Core Files */
 		// These files are required for both backend and frontend Ninja Forms stuff.
 		require_once( NF_PLUGIN_DIR . '/includes/database.php' );
-		require_once( NF_PLUGIN_DIR . '/includes/register.php' );
 		require_once( NF_PLUGIN_DIR . '/includes/functions.php' );
-		require_once( NF_PLUGIN_DIR . '/includes/admin/form-preview.php' );
-		require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-settings.php' );
-		require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-pages.php' );		
-		require_once( NF_PLUGIN_DIR . '/includes/classes/class-rest-api.php' );
-
+		require_once( NF_PLUGIN_DIR . '/includes/ajax.php' );
 		/* Require Admin Files */
 		// These files are required for the backend only
 		if ( is_admin() ) {
 			require_once( NF_PLUGIN_DIR . '/includes/activation.php' );
 
-			require_once( NF_PLUGIN_DIR . '/includes/admin/admin.php' );
 			require_once( NF_PLUGIN_DIR . '/includes/admin/all-forms-list.php' );
 			require_once( NF_PLUGIN_DIR . '/includes/admin/scripts.php' );
+			require_once( NF_PLUGIN_DIR . '/includes/admin/default-admin-pages.php' );
+			require_once( NF_PLUGIN_DIR . '/includes/admin/default-form-settings.php' );
+			require_once( NF_PLUGIN_DIR . '/includes/admin/edit-form.php' );
+			require_once( NF_PLUGIN_DIR . '/includes/admin/form-preview.php' );
+			require_once( NF_PLUGIN_DIR . '/includes/admin/notifications.php' );
+			require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-settings.php' );
+			require_once( NF_PLUGIN_DIR . '/includes/classes/class-admin-pages.php' );		
+			require_once( NF_PLUGIN_DIR . '/includes/classes/class-rest-api.php' );
 
 			//Require EDD autoupdate file
 			if( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
 				// load our custom updater if it doesn't already exist
-				require_once(NF_PLUGIN_DIR.'/includes/classes/EDD_SL_Plugin_Updater.php');
+				require_once( NF_PLUGIN_DIR.'/includes/classes/EDD_SL_Plugin_Updater.php' );
 			}
 
 			require_once( NF_PLUGIN_DIR . '/includes/classes/class-extension-updater.php' );
