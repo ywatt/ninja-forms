@@ -9,7 +9,7 @@
 
 function nf_default_form_settings() {
 	
-	// Register our general settings group
+	// Plugin Settings
 	$args = array(
 		'scope' => 'plugin_settings',
 		'id' => 'general',
@@ -35,6 +35,50 @@ function nf_default_form_settings() {
 	);
 
 	Ninja_Forms()->admin_settings->register_settings_group( $args );
+
+	$args = array(
+		'scope' => 'plugin_settings',
+		'id' => 'test',
+		'label' => 'TEST',
+		'display_link' => true,
+		'priority' => 'default',
+		'desc' => __( 'This is a test.', 'ninja-forms' ),
+		'settings' => array(
+			'type' => array(
+				'type' => 'dropdown',
+				'label' => __( 'Type', 'ninja-forms' ),
+				'options' => array(
+					array('name' => __( 'Email', 'ninja-forms' ), 'value' => 'email'),
+					array('name' => __( 'Success Message', 'ninja-forms' ), 'value' => 'success_message'),
+					array('name' => __( 'Pushover', 'ninja-forms' ), 'value' => 'pushover'),
+					array('name' => __( 'Text Message', 'ninja-forms' ), 'value' => 'text_message'),
+				),
+				'class' => '',
+				'desc' => __( 'What kind of notification would you like to create?', 'ninja-forms' ),
+			),
+			'name' => array(
+				'type' => 'text',
+				'label' => __( 'Name', 'ninja-forms' ),
+				'class' => 'widefat',
+				'desc' => __( 'How would you like to identify this notification?', 'ninja-forms' ),
+			),
+			'mailto' => array(
+				'type' => 'radio',
+				'label' => __( 'Send To', 'ninja-forms' ),
+				'options' => array(
+					array('name' => __( 'Enter Email', 'ninja-forms' ), 'value' => 'manual_email'),
+					array('name' => __( 'Select a Field', 'ninja-forms' ), 'value' => 'field_value'),
+					array('name' => __( 'Configure Routing', 'ninja-forms' ), 'value' => 'configure_routing'),
+				),
+				'class' => '',
+				'desc' => __( 'What kind of notification would you like to create?', 'ninja-forms' ),
+			),
+		),
+	);
+
+	Ninja_Forms()->admin_settings->register_settings_group( $args );
+
+	// Form Settings
 
 	$args = array(
 		'scope' => 'form',
@@ -91,6 +135,8 @@ function nf_default_form_settings() {
 	);
 	Ninja_Forms()->admin_settings->register_settings( $args );	
 
+	// Wizard Settings
+
 	$args = array(
 		'scope' => 'form',
 		'id' => 'wizard',
@@ -103,11 +149,6 @@ function nf_default_form_settings() {
 		'scope' => 'form',
 		'group' => 'wizard',
 		'settings' => array(
-			'name' => array(
-				'type' 		=>	'text',
-				'desc' 		=> 	__( 'Give your form a name. This is how you\'ll identify your form later.', 'ninja-forms' ),
-				'label' 	=> 	__( 'Name', 'ninja-forms' ),
-			),
 			'append_page' => array(
 				'type' 		=> 	'dropdown',
 				'desc' 		=> 	__( 'The form will appear after the page content', 'ninja-forms' ),
@@ -122,46 +163,4 @@ function nf_default_form_settings() {
 		),
 	);
 	Ninja_Forms()->admin_settings->register_settings( $args );
-
-	$args = array(
-		'scope' => 'plugin_settings',
-		'id' => 'test',
-		'label' => 'TEST',
-		'display_link' => true,
-		'priority' => 'default',
-		'desc' => __( 'This is a test.', 'ninja-forms' ),
-		'settings' => array(
-			'type' => array(
-				'type' => 'dropdown',
-				'label' => __( 'Type', 'ninja-forms' ),
-				'options' => array(
-					array('name' => __( 'Email', 'ninja-forms' ), 'value' => 'email'),
-					array('name' => __( 'Success Message', 'ninja-forms' ), 'value' => 'success_message'),
-					array('name' => __( 'Pushover', 'ninja-forms' ), 'value' => 'pushover'),
-					array('name' => __( 'Text Message', 'ninja-forms' ), 'value' => 'text_message'),
-				),
-				'class' => '',
-				'desc' => __( 'What kind of notification would you like to create?', 'ninja-forms' ),
-			),
-			'name' => array(
-				'type' => 'text',
-				'label' => __( 'Name', 'ninja-forms' ),
-				'class' => 'widefat',
-				'desc' => __( 'How would you like to identify this notification?', 'ninja-forms' ),
-			),
-			'mailto' => array(
-				'type' => 'radio',
-				'label' => __( 'Send To', 'ninja-forms' ),
-				'options' => array(
-					array('name' => __( 'Enter Email', 'ninja-forms' ), 'value' => 'manual_email'),
-					array('name' => __( 'Select a Field', 'ninja-forms' ), 'value' => 'field_value'),
-					array('name' => __( 'Configure Routing', 'ninja-forms' ), 'value' => 'configure_routing'),
-				),
-				'class' => '',
-				'desc' => __( 'What kind of notification would you like to create?', 'ninja-forms' ),
-			),
-		),
-	);
-
-	Ninja_Forms()->admin_settings->register_settings_group( $args );
 }

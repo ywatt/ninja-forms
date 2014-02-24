@@ -256,8 +256,9 @@ function nf_admin_all_forms() {
 
 	<script type="text/html" id="tmpl-wizard-left-start">
 		<p><input type="text" id="nf_new_form_name" class="widefat code" value="" placeholder="<?php _e( 'Form Name', 'ninja-forms' ); ?>"></p>
-		<p class="wizard-section-actions"><a href="#" id="nf_new_form_wizard" class="button-primary"><?php _e( 'Creation Wizard, Please', 'ninja-forms' );?></a>
-			<a href="#" id="nf_create_form" class="button-secondary"><?php _e( 'Start Editing, Skip The Wizard', 'ninja-forms' );?></a></p>
+		<p class="wizard-section-actions"><a href="#" id="nf_create_form" class="button-secondary"><?php _e( 'Start Editing, Skip The Wizard', 'ninja-forms' );?></a>
+			<a href="#" id="nf_new_form_wizard" class="button-primary"><?php _e( 'Creation Wizard, Please', 'ninja-forms' );?></a>
+		</p>
 		<span class='hidden'><?php wp_editor('hi','hi');?></span>
 	</script>
 
