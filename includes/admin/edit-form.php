@@ -314,16 +314,3 @@ function nf_admin_edit_form(){
   <?php
 	echo Ninja_Forms()->admin_settings_pages->get_backbone_template( $scope, $groups, $object_id );
 }
-
-/**
- * Enqueue our JS for the edit form
- *
- * @since 3.0
- * @return void
- */
-
-function nf_admin_edit_form_js() {
-	wp_enqueue_script( 'nf-edit-form-backbone',
-		NF_PLUGIN_URL .'js/dev/edit-form-backbone.js',
-		array( 'nf-admin' ) );	
-}

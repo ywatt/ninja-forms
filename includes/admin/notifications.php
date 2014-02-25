@@ -12,10 +12,20 @@ function nf_notification_settings() {
 		'priority' => 'default',
 		'desc' => __( 'This is where all form notifications are managed.', 'ninja-forms' ),
 		'display_link' => true,
+		'custom_backbone' => true,
 		'template' => 
-			'<div id="" class="tablenav top">
+			'<%
+			console.log( notifications[0].get( "") );
+			if ( typeof notifications[0] !== "undefined" ) {
+				type = notifications[0].get( "nf_request_notification_type" );
+			} else {
+				type = "";
+			}
+			
+			%>
+			<div id="" class="tablenav top">
 				<div class="alignleft" style="margin-right:15px">
-					<a href="#" class="button-primary">'.__( 'Add New', 'ninja-forms' ).'</a>
+					<a href="#" class="button-primary" id="nf_new_notification">'.__( 'Add New', 'ninja-forms' ).'</a>
 				</div>
 				<div class="alignleft actions">
 					<select id="" class="" name="bulk_action">
@@ -26,54 +36,71 @@ function nf_notification_settings() {
 					</select>
 				</div>				
 				<div class="alignleft actions">
-					<select id="" class="" name="notification_type">
-						<option value="">'.__( 'All Types', 'ninja-forms' ).'</option>
-						<option value="email">'.__( 'Email', 'ninja-forms' ).'</option>
-						<option value="redirect">'.__( 'URL Redirect', 'ninja-forms' ).'</option>
-						<option value="success_message">'.__( 'Success Message', 'ninja-forms' ).'</option>
-						<option value="pushover">'.__( 'Pushover', 'ninja-forms' ).'</option>
+					<select id="nf_notification_type" class="" name="">
+						<option value="" <% if ( type == "" ) { %> selected <% } %> >'.__( 'All Types', 'ninja-forms' ).'</option>
+						<option value="email" <% if ( type == "email" ) { %> selected <% } %> >'.__( 'Email', 'ninja-forms' ).'</option>
+						<option value="redirect" <% if ( type == "redirect" ) { %> selected <% } %> >'.__( 'URL Redirect', 'ninja-forms' ).'</option>
+						<option value="success_message" <% if ( type == "success_message" ) { %> selected <% } %> >'.__( 'Success Message', 'ninja-forms' ).'</option>
+						<option value="pushover" <% if ( type == "pushover" ) { %> selected <% } %> >'.__( 'Pushover', 'ninja-forms' ).'</option>
 					</select>
+					<span class="spinner"></span>
 				</div>
 			</div>
 			<table class="wp-list-table widefat fixed posts">
 				<thead>
 					<tr>
 						<th class="check-column"><input type="checkbox" id="" class="ninja-forms-select-all" title="ninja-forms-bulk-action"></th>
+						<th>'.__( 'Status', 'ninja-forms' ).'</th>
 						<th>'.__( 'Name', 'ninja-forms' ).'</th>
 						<th>'.__( 'Type', 'ninja-forms' ).'</th>
 						<th>'.__( 'Date Updated', 'ninja-forms' ).'</th>
 					</tr>
 				</thead>
 				<tbody>
-				<% _.each(settings, function(setting){ %>
-					<tr>
-						<th scope="row" class="check-column">
-							<input type="checkbox" id="" name="notification_ids[]" value="" class="ninja-forms-bulk-action">
-						</th>
+				<% 
+				
+				if ( typeof notifications[0].get( "id" ) !== "undefined" ) {
 
-						<td class="post-title page-title column-title">
-							<strong>
-								<a href="#notification_single" class="media-menu-item" id="notification_single" title="" data-notification-id="<%= setting.get( "id" ) %>" data-object-id="<%= setting.get( "id" ) %>" data-scope="notification" data-group="notification_single"><%= setting.get( "name" ) %></a>
-							</strong>
-							<div class="row-actions">
-								<span class="activate"><a href="">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
-								<span class="trash"><a class="ninja-forms-delete-form" title="'.__( 'Delete this notification', 'ninja-forms' ).'" href="#" id="">'.__( 'Delete', 'ninja-forms' ).'</a> | </span>
-								<span class="export"><a href="" title="'.__( 'Export Form', 'ninja-forms' ).'">'.__( 'Export', 'ninja-forms' ).'</a> | </span>
-								<span class="duplicate"><a href="" title="'.__( 'Duplicate Form', 'ninja-forms' ).'">'.__( 'Duplicate', 'ninja-forms' ).'</a></span>
-							</div>
-						</td>
-						<td>
-							<%= setting.get( "type" ) %>
-						</td>
-						<td>
-							<%= setting.get( "date_updated" ) %>
-						</td>
+					_.each(notifications, function(notification){ 
+						%>
+						<tr>
+							<th scope="row" class="check-column">
+								<input type="checkbox" id="" name="notification_ids[]" value="" class="ninja-forms-bulk-action">
+							</th>
+							<td></td>
+							<td class="post-title page-title column-title">
+								<strong>
+									<a href="#notification_single" class="media-menu-item" id="notification_single_<%= notification.get( "id" ) %>" title="" data-notification-id="<%= notification.get( "id" ) %>" data-object-id="<%= notification.get( "id" ) %>" data-scope="notification" data-group="notification_single"><%= notification.get( "name" ) %></a>
+								</strong>
+								<div class="row-actions">
+									<span class="activate"><a href="" class="nf-activate-notification" data-notification-id="<%= notification.get( "id" ) %>">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
+									<span class="trash"><a class="nf-delete-notification" title="'.__( 'Delete this notification', 'ninja-forms' ).'" href="#" id="" data-notification-id="<%= notification.get( "id" ) %>" >'.__( 'Delete', 'ninja-forms' ).'</a> | </span>
+									<span class="export"><a href="" title="'.__( 'Export Form', 'ninja-forms' ).'">'.__( 'Export', 'ninja-forms' ).'</a> | </span>
+									<span class="duplicate"><a href="" title="'.__( 'Duplicate Form', 'ninja-forms' ).'">'.__( 'Duplicate', 'ninja-forms' ).'</a></span>
+								</div>
+							</td>
+							<td>
+								<%= notification.get( "type" ) %>
+							</td>
+							<td>
+								<%= notification.get( "date_updated" ) %>
+							</td>
+						</tr>
+					<% }); 
+				} else {
+					%>
+					<tr>
+						<td></td>
+						<td>' . __( 'No notifications found.', 'ninja-forms' ) .'</td>
 					</tr>
-					<% }); %>
+				<%
+				}
+				%>
 				</tbody>
 				<tfoot>
 					<tr>
 						<th class="check-column"><input type="checkbox" id="" class="ninja-forms-select-all" title="ninja-forms-bulk-action"></th>
+						<th>'.__( 'Status', 'ninja-forms' ).'</th>
 						<th>'.__( 'Name', 'ninja-forms' ).'</th>
 						<th>'.__( 'Type', 'ninja-forms' ).'</th>
 						<th>'.__( 'Date Updated', 'ninja-forms' ).'</th>
@@ -99,6 +126,7 @@ function nf_notification_settings() {
 				'type' => 'dropdown',
 				'label' => __( 'Type', 'ninja-forms' ),
 				'options' => array(
+					array('name' => __( '- Select One', 'ninja-forms' ), 'value' => ''),
 					array('name' => __( 'Email', 'ninja-forms' ), 'value' => 'email'),
 					array('name' => __( 'Success Message', 'ninja-forms' ), 'value' => 'success_message'),
 					array('name' => __( 'Pushover', 'ninja-forms' ), 'value' => 'pushover'),
@@ -128,14 +156,29 @@ function nf_notification_settings() {
 	);
 
 	Ninja_Forms()->admin_settings->register_settings_group( $args );	
+
+	// Enqueue our notification-specific JS if we are on the edit-forms page.
+	if ( isset( $_REQUEST['page'] ) and $_REQUEST['page'] == 'ninja-forms-edit' )
+		nf_notification_js();
 }
 
+/**
+ * Enqueue our notification JS
+ * 
+ * @since 3.0
+ * @return void
+ */
+
+function nf_notification_js() {
+	wp_enqueue_script( 'nf-notifications',
+		NF_PLUGIN_URL .'js/dev/notifications-admin.js',
+		array( 'nf-admin' ) );	
+}
 
 
 /**
  * This is our filter for getting all the notifications for a form.
  * 
- * @access public
  * @param array $args
  * @param int $object_id
  * @param string $group
@@ -149,14 +192,39 @@ function nf_notification_rest_filter( $args, $object_id, $group ) {
 
 	$notifications = nf_get_notifications_by_form_id( $object_id );
 	
+	// Check to see if we're trying to filter the notifications
+	if ( isset( $_REQUEST['type'] ) and $_REQUEST['type'] != '' ) {
+		$type = $_REQUEST['type'];
+		if ( is_array( $notifications ) ) {
+			$tmp_array = array();
+			foreach( $notifications as $id => $n ) {
+				if ( $n['type'] == $type ) {
+					$tmp_array[ $id ] = $n;
+				}
+			}
+			$notifications = $tmp_array;
+		}
+	} else {
+		$type = '';
+	}
+	
 	$tmp_array = array();
 	$x = 0;
-	foreach( $notifications as $id => $settings ) {
-		$tmp_array[$x]['id'] = $id;
-		foreach( $settings as $key => $value ) {
-			$tmp_array[$x][$key] = $value;
+	foreach( $notifications as $object_id => $settings ) {
+		foreach( $settings as $meta_key => $current_value ) {
+			$setting['id'] = $meta_key;
+            $setting['current_value'] = $current_value;
+            $setting['meta_key'] = $meta_key;
+            $setting['object_id'] = $object_id;			
+
+			$tmp_array[$x][] = $setting;
 		}
+		$tmp_array[$x]['nf_request_notification_type'] = $type;
 		$x++;
+	}
+
+	if ( empty( $tmp_array ) ) {
+		$tmp_array[0]['nf_request_notification_type'] = $type;
 	}
 
 	return $tmp_array;

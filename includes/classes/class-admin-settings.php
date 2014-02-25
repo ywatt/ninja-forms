@@ -85,8 +85,9 @@ class NF_Register_Admin_Settings {
 
 	public function register_settings_group( $args = array() ) {
 		$defaults = array(
-			'priority' 		=> 	'default',
-			'display_link' 	=> 	true,
+			'priority' 			=>	'default',
+			'display_link' 		=>	true,
+			'custom_backbone' 	=> 	false,
 		);
 
 		$scope = $args['scope'];

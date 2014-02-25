@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
 
 	var Form = Backbone.Model.extend({
 		urlRoot: function() {
-			return nf_rest_url + '&nf_rest=rest_api&type=' + $( '#nf_form_type' ).val();
+			return nf_rest_url + '&nf_rest=rest_api&type=' + $( '#nf_form_type' ).val() + '&del=';
 		},
 
 		defaults: {
@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
 
 	var Forms = Backbone.Collection.extend({
 		url: function() {
-			return nf_rest_url + '&nf_rest=rest_api&type=' + $( '#nf_form_type' ).val();
+			return nf_rest_url + '&nf_rest=rest_api&type=' + $( '#nf_form_type' ).val() + '&del=';
 		},
 		model: Form,
 	});
@@ -84,11 +84,11 @@ jQuery(document).ready(function($) {
 			var tmp = forms.get( $( this ).data( 'form_id' ) );
 			tmp.destroy({
 				success: function() {
-					//console.log( 'test' );
+					// Reload our view.
+					nf_fetch_all_forms();					
 				}
 			});
-			// Reload our view.
-			nf_fetch_all_forms();
+
 		}
 	});
 

@@ -612,10 +612,10 @@ function nf_get_all_forms() {
 function nf_get_notifications_by_form_id( $form_id ) {
 	global $wpdb;
 
-	$notifications = $wpdb->get_results( $wpdb->prepare( "SELECT object_id FROM ".NF_RELATIONSHIPS_TABLE_NAME." WHERE type = 'notification' AND form_id = %d", $form_id ), ARRAY_A);
+	$notifications = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM ".NF_RELATIONSHIPS_TABLE_NAME." WHERE child_type = 'notification' AND parent_id = %d", $form_id ), ARRAY_A);
 	$tmp_array = array();
 	foreach( $notifications as $id ) {
-		$object_id = $id['object_id'];
+		$object_id = $id['child_id'];
 		$settings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM ".NF_META_TABLE_NAME." WHERE object_id = %d", $id ), ARRAY_A);
 		foreach ( $settings as $s ) {
 			$tmp_array[ $object_id ][ $s['meta_key'] ] = $s['meta_value'];
@@ -673,7 +673,7 @@ function nf_get_object_meta( $object_id ) {
 	global $wpdb;
 
 	$tmp_array = array();
-	$settings = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM ".NF_META_TABLE_NAME." WHERE object_id = %d", $object_id ), ARRAY_A);
+	$settings = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . NF_META_TABLE_NAME . ' WHERE object_id = %d', $object_id ), ARRAY_A);
 	if ( is_array( $settings ) ) {
 		foreach( $settings as $setting ) {
 			$tmp_array[ $setting['meta_key'] ] = $setting['meta_value'];
@@ -681,6 +681,22 @@ function nf_get_object_meta( $object_id ) {
 	}
 
 	return $tmp_array;
+}
+
+/**
+ * Function that retrieves an object. Returns the object type.
+ * 
+ * @since 3.0
+ * @param int $object_id
+ * @return string $object_type
+ */
+
+function nf_get_object_type( $object_id ) {
+	global $wpdb;
+
+	$row = $wpdb->get_row( $wpdb->prepare( 'SELECT type FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE id = %d', $object_id ), ARRAY_A );
+	
+	return $row['type'];
 }
 
 /**
@@ -742,7 +758,7 @@ function nf_update_meta( $object_id, $meta_key, $meta_value ) {
 }
 
 /**
- * Delete an object. Also removes all of the objectmeta attached to the object.
+ * Delete an object. Also removes all of the objectmeta attached to the object and any references to it in the relationship table.
  *
  * @since 3.0
  * @param int $object_id
@@ -757,6 +773,9 @@ function nf_delete_object( $object_id ) {
 
 	// Delete any objectmeta attached to this object.
 	$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . NF_META_TABLE_NAME .' WHERE object_id = %d', $object_id ) );
+
+	// Delete any references to this object in the relationship table
+	$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . NF_RELATIONSHIPS_TABLE_NAME .' WHERE child_id = %d OR parent_id = %d', $object_id, $object_id ) );
 
 	return true;
 }
@@ -773,6 +792,26 @@ function nf_insert_object( $type ) {
 	global $wpdb;
 	$wpdb->insert( NF_OBJECTS_TABLE_NAME, array( 'type' => $type ) );
 	return $wpdb->insert_id;
+}
+
+/**
+ * Create a relationship between an object and a form
+ * 
+ * @since 3.0
+ * @param int $child_id
+ * @param string child_type
+ * @param int $parent_id
+ * @param string $parent_type
+ * @return bool
+ */
+
+function nf_add_relationship( $child_id, $child_type, $parent_id, $parent_type ) {
+	global $wpdb;
+	// Make sure that our relationship doesn't already exist.
+	$count = $wpdb->query( $wpdb->prepare( 'SELECT id FROM '. NF_RELATIONSHIPS_TABLE_NAME .' WHERE child_id = %d AND parent_id = %d', $child_id, $parent_id ), ARRAY_A );
+	if ( empty( $count ) ) {
+		$wpdb->insert( NF_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $child_id, 'child_type' => $child_type, 'parent_id' => $parent_id ) );
+	}
 }
 
 /**

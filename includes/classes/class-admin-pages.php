@@ -171,120 +171,36 @@ class NF_Admin_Settings_Pages {
 				}
 				$active = false;
 				foreach( $high_priority_tabs as $group => $settings ){
-					if ( isset ( $settings['class'] ) ) {
-						$class = $settings['class'];
-					} else {
-						$class = '';
-					}
-					if ( isset ( $settings['desc'] ) ) {
-						$desc = $settings['desc'];
-					} else {
-						$desc = '';
-					}
-					if ( !$active ) {
-						$class .= ' active';
-						$active = true;
-					}
-					if ( isset ( $settings['template'] ) and $settings['template'] != '' ) {
-						$custom = true;
-					} else {
-						$custom = false;
-					}
-
-					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
-
-						$html .= '<a href="#' . $group . '" class="media-menu-item ' . $class . ' wp-has-current-submenu" id="' . $group . '" title="' . $desc . '" data-custom="' . $custom . '" data-object-id="' . $object_id . '" data-scope="' . $scope . '" data-group="' . $group . '">' . $settings['label'] . '</a>';
-
-					}
+					$link = $this->get_sidebar_link( $scope, $group, $object_id, $settings, $active );
+					$active = $link['active'];
+					$html .= $link['html'];
 				}
 				if ( is_array( $high_priority_tabs ) and !empty( $high_priority_tabs ) and is_array( $core_priority_tabs ) and !empty( $core_priority_tabs ) ) {
 						$html .= '<div class="separator"></div>';
 				}
 
 				foreach ( $core_priority_tabs as $group => $settings ) {
-					if ( isset ( $settings['class'] ) ) {
-						$class = $settings['class'];
-					} else {
-						$class = '';
-					}
-					if ( isset ( $settings['desc'] ) ) {
-						$desc = $settings['desc'];
-					} else {
-						$desc = '';
-					}
-					if ( !$active ) {
-						$class .= ' active';
-						$active = true;
-					}
-					if ( isset ( $settings['template'] ) and $settings['template'] != '' ) {
-						$custom = true;
-					} else {
-						$custom = false;
-					}
-
-					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
-						$html .= '<a href="#' . $group . '" class="media-menu-item ' . $class . ' wp-has-current-submenu" id="' . $group . '" title="' . $desc . '" data-custom="' . $custom . '" data-object-id="' . $object_id . '" data-scope="' . $scope . '" data-group="' . $group . '">' . $settings['label'] . '</a>';
-					}
+					$link = $this->get_sidebar_link( $scope, $group, $object_id, $settings, $active );
+					$active = $link['active'];
+					$html .= $link['html'];
 				}
 
 				if ( is_array( $core_priority_tabs ) and !empty( $core_priority_tabs ) and is_array( $default_priority_tabs ) and !empty( $default_priority_tabs ) ) {
 					$html .= '<div class="separator"></div>';
 				}
 				foreach( $default_priority_tabs as $group => $settings ){
-					if ( isset ( $settings['class'] ) ) {
-						$class = $settings['class'];
-					} else {
-						$class = '';
-					}
-					if ( isset ( $settings['desc'] ) ) {
-						$desc = $settings['desc'];
-					} else {
-						$desc = '';
-					}
-					if ( !$active ) {
-						$class .= ' active';
-						$active = true;
-					}
-
-					if ( isset ( $settings['template'] ) and $settings['template'] != '' ) {
-						$custom = true;
-					} else {
-						$custom = false;
-					}
-
-					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
-						$html .= '<a href="#' . $group . '" class="media-menu-item ' . $class . ' wp-has-current-submenu" id="' . $group . '" title="' . $desc . '" data-custom="' . $custom . '" data-object-id="' . $object_id . '" data-scope="' . $scope . '" data-group="' . $group . '">' . $settings['label'] . '</a>';
-					}
+					$link = $this->get_sidebar_link( $scope, $group, $object_id, $settings, $active );
+					$active = $link['active'];
+					$html .= $link['html'];
 				}
 
 				if ( is_array( $default_priority_tabs ) and !empty( $default_priority_tabs ) and is_array( $low_priority_tabs ) and !empty ( $low_priority_tabs ) ) {
 					$html .= '<div class="separator"></div>';
 				}
 				foreach( $low_priority_tabs as $group => $settings ){
-					if ( isset ( $settings['class'] ) ) {
-						$class = $settings['class'];
-					} else {
-						$class = '';
-					}
-					if ( isset ( $settings['desc'] ) ) {
-						$desc = $settings['desc'];
-					} else {
-						$desc = '';
-					}
-					if ( !$active ) {
-						$class .= ' active';
-						$active = true;
-					}
-					
-					if ( isset ( $settings['template'] ) and $settings['template'] != '' ) {
-						$custom = true;
-					} else {
-						$custom = false;
-					}
-
-					if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
-						$html .= '<a href="#' . $group . '" class="media-menu-item ' . $class . ' wp-has-current-submenu" id="' . $group . '" title="' . $desc . '" data-custom="' . $custom . '" data-object-id="' . $object_id . '" data-scope="' . $scope . '" data-group="' . $group . '">' . $settings['label'] . '</a>';
-					}
+					$link = $this->get_sidebar_link( $scope, $group, $object_id, $settings, $active );
+					$active = $link['active'];
+					$html .= $link['html'];
 				}
 
 			$html .= '</div>
@@ -508,6 +424,51 @@ class NF_Admin_Settings_Pages {
 	}
 
 	/**
+	 * Output our sidebar link
+	 * 
+	 * @since 3.0
+	 * @param $settings
+	 * @return $html
+	 */
+
+	private function get_sidebar_link( $scope, $group, $object_id, $settings, $active ) {
+		if ( isset ( $settings['class'] ) ) {
+			$class = $settings['class'];
+		} else {
+			$class = '';
+		}
+		if ( isset ( $settings['desc'] ) ) {
+			$desc = $settings['desc'];
+		} else {
+			$desc = '';
+		}
+		if ( !$active ) {
+			$class .= ' active';
+			$active = true;
+		}
+
+		if ( isset ( $settings['template'] ) and $settings['template'] != '' ) {
+			$custom_tmpl = true;
+		} else {
+			$custom_tmpl = false;
+		}
+
+		if ( isset ( $settings['custom_backbone'] ) and ! empty( $settings['custom_backbone'] ) ) {
+			$custom_backbone = true;
+		} else {
+			$custom_backbone = false;
+		}
+
+		if ( isset ( $settings['display_link'] ) and $settings['display_link'] ) {
+			$html = '<a href="#' . $group . '" class="media-menu-item ' . $class . ' wp-has-current-submenu" id="nf_' . $group . '_btn" title="' . $desc . '" data-custom-tmpl="' . $custom_tmpl . '" data-custom-backbone="' . $custom_backbone . '" data-object-id="' . $object_id . '" data-scope="' . $scope . '" data-group="' . $group . '">' . $settings['label'] . '</a>';
+		} else {
+			$html = '';
+		}
+
+		return array( 'active' => $active, 'html' => $html );
+	}
+
+	/**
 	 * Include our JS files for the admin.
 	 * 
 	 * @since 3.0
@@ -555,8 +516,8 @@ class NF_Admin_Settings_Pages {
 	 */
 
 	public function settings_js() {		
-		wp_enqueue_script( 'nf-settings-backbone',
-			NF_PLUGIN_URL .'js/dev/settings-backbone.js',
+		wp_enqueue_script( 'nf-settings-admin',
+			NF_PLUGIN_URL .'js/dev/settings-admin.js',
 			array( 'nf-admin' ) );
 	}
 }

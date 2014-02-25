@@ -219,11 +219,35 @@ class NF_Admin_Rest_API {
                 return $data;
                 break;
             case 'DELETE':
-                if ( !isset ( $_REQUEST['type'] ) )
+                if ( !isset ( $_REQUEST['del'] ) )
                     return false;
-                $object_id = str_replace( '/', '', $_REQUEST['type'] );
+                $object_id = str_replace( '/', '', $_REQUEST['del'] );
+
                 nf_delete_object( $object_id );
                 return true;
+                break;
+            case 'POST':
+                $data = json_decode( $this->file, true );
+                $new_type = $data['object_type'];
+                unset( $data['object_type'] );
+                $new_id = nf_insert_object( $new_type );
+               
+                // Add our post meta.
+                if ( is_array( $data ) ) {
+                    foreach ( $data as $meta_key => $meta_value ) {
+                        nf_update_meta( $new_id, $meta_key, $meta_value );
+                    }
+                }
+
+                $data['id'] = $new_id;
+
+                // Add our relationships.
+                if ( ! empty( $data['object_id'] ) ) {
+                    $parent_id = $data['object_id'];
+                    $parent_type = nf_get_object_type( $parent_id );
+                    nf_add_relationship( $new_id, $new_type, $parent_id, $parent_type );
+                }
+                return $data;
                 break;
         }
     }
