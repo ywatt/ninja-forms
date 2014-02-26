@@ -534,7 +534,7 @@ function ninja_forms_edit_sub_save_values(){
 
 	$sub_id = $ninja_forms_processing->get_form_setting( 'sub_id' );
 	$form_id = $ninja_forms_processing->get_form_ID();
-	$user_id = $ninja_forms_processing->get_user_ID();
+	//$user_id = $ninja_forms_processing->get_user_ID();
 
 	$sub_row = ninja_forms_get_sub_by_id( $sub_id );
 	if( isset( $sub_row['status'] ) ){
@@ -560,7 +560,7 @@ function ninja_forms_edit_sub_save_values(){
 
 	$args = array(
 		'form_id' => $form_id,
-		'user_id' => $user_id,
+		//'user_id' => $user_id,
 		'status' => $status,
 		'action' => $action,
 		'data' => serialize( $sub_data ),
