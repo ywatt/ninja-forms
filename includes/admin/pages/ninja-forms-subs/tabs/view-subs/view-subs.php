@@ -259,7 +259,7 @@ function ninja_forms_tab_view_subs(){
 			<?php
 			}
 			?>
-			</div>
+			
 			<table border="1px" class="wp-list-table widefat fixed posts">
 			<?php
 			//Grab the first few fields attached to our form so that we can create column headers.
