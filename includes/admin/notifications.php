@@ -211,13 +211,13 @@ function nf_notification_rest_filter( $args, $object_id, $group ) {
 	$tmp_array = array();
 	$x = 0;
 	foreach( $notifications as $object_id => $settings ) {
+		$tmp_array[$x]['id'] = $object_id;
 		foreach( $settings as $meta_key => $current_value ) {
 			$setting['id'] = $meta_key;
             $setting['current_value'] = $current_value;
-            $setting['meta_key'] = $meta_key;
-            $setting['object_id'] = $object_id;			
+            $setting['meta_key'] = $meta_key;		
 
-			$tmp_array[$x][] = $setting;
+			$tmp_array[$x]['settings'][] = $setting;
 		}
 		$tmp_array[$x]['nf_request_notification_type'] = $type;
 		$x++;

@@ -1,5 +1,61 @@
+// let's create a namespace first
+var nmapp = nmapp || {};
+
 jQuery(document).ready(function($) {
 
+	nmapp.notificationSetting = Backbone.Model.extend({
+		initialize : function(){
+			this.setting_id = this.get( 'id' );
+			this.meta_key = this.get( 'meta_key' );
+			this.current_value = this.get( 'current_value' );
+		}
+	});
+	nmapp.notificaionSettings = Backbone.Collection.extend({ model : nmapp.notificationSetting });
+
+	nmapp.notification = Backbone.Model.extend({
+		initialize : function(){
+			this.settings = new nmapp.notificaionSettings( this.get( 'settings' ) );
+			this.settings.parent = this;
+			this.notificationId = this.get( 'object_id' );
+    	},
+		defaults: {
+			object_type: 'notification',
+			object_id: object_id
+		}
+	});
+
+	 // get the data from server on "Album Collection"
+	nmapp.notifications = Backbone.Collection.extend({
+		model : nmapp.notification,
+		url: function() {
+			if ( typeof $( '#nf_notification_type' ).val() !== 'undefined' ) {
+				var type = $( '#nf_notification_type' ).val();
+			} else {
+				var type = '';
+			}
+			return nf_rest_url + '&nf_rest=rest_api&type=' + type + '&del=';
+		},
+		parse : function(data){
+		  return data;
+		}
+	});
+
+	var notifications = new nmapp.notifications();
+	notifications.fetch({
+			data: jQuery.param({ object_id: object_id, scope: 'form', group: 'notifications' }),
+			reset: true,
+			success: function() {
+	           var test = notifications;
+	           var settings = test.models[0].settings;
+	           console.log( settings.get( 'name' ) );
+			},
+			error: function() {
+				console.log('failed to get!');
+			}
+		});
+	
+
+	/*
 	var savedNoticeTimeout = '';
 
 	var Notification = Backbone.Model.extend({
@@ -143,4 +199,5 @@ jQuery(document).ready(function($) {
 		tmp.set( 'active', true );
 		tmp.save();
 	});
+*/
 }); //Document.ready();
