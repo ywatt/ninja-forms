@@ -1,20 +1,51 @@
 // let's create a namespace first
-var nmapp = nmapp || {};
+var nfnx = nfnx || {};
 
 jQuery(document).ready(function($) {
+	var savedNoticeTimeout = '';
 
-	nmapp.notificationSetting = Backbone.Model.extend({
+	nfnx.notificationSetting = Backbone.Model.extend({
+		urlRoot: nf_rest_url + '&nf_rest=rest_api',
+
 		initialize : function(){
 			this.setting_id = this.get( 'id' );
 			this.meta_key = this.get( 'meta_key' );
 			this.current_value = this.get( 'current_value' );
+			this.on( 'change', this.save );
+			this.on( 'add', this.save );
+		},
+
+		serverAttrs: ['current_value', 'id', 'object_id', 'meta_key'],
+
+		save: function (attrs, options) {
+			attrs = attrs || this.toJSON();
+		    options = options || {};
+		    attrs = attrs.attributes;
+		    // If model defines serverAttrs, replace attrs with trimmed version
+		    if (this.serverAttrs) attrs = _.pick(attrs, this.serverAttrs);
+
+		    // Move attrs to options
+		    options.attrs = attrs;
+
+		    // Call super with attrs moved to options
+		    Backbone.Model.prototype.save.call(this, attrs, options);
+		    // Re-render our table row when the activate/deactivate is clicked.
+			var settings = {
+					id: attrs.object_id,
+					name: notifications.get( attrs.object_id ).settings.get( 'name' ).get( 'current_value' ),
+					active: notifications.get( attrs.object_id ).settings.get( 'active' ).get( 'current_value' ),
+					type: notifications.get( attrs.object_id ).settings.get( 'type' ).get( 'current_value' ),
+					date_updated: notifications.get( attrs.object_id ).settings.get( 'date_updated' ).get( 'current_value' )
+				};
+		    nfnx.notificationTrView.render( '#notification_tr_' + attrs.object_id, settings );
 		}
 	});
-	nmapp.notificaionSettings = Backbone.Collection.extend({ model : nmapp.notificationSetting });
 
-	nmapp.notification = Backbone.Model.extend({
+	nfnx.notificationSettings = Backbone.Collection.extend({ model : nfnx.notificationSetting });
+
+	nfnx.notification = Backbone.Model.extend({
 		initialize : function(){
-			this.settings = new nmapp.notificaionSettings( this.get( 'settings' ) );
+			this.settings = new nfnx.notificationSettings( this.get( 'settings' ) );
 			this.settings.parent = this;
 			this.notificationId = this.get( 'object_id' );
     	},
@@ -24,9 +55,8 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	 // get the data from server on "Album Collection"
-	nmapp.notifications = Backbone.Collection.extend({
-		model : nmapp.notification,
+	nfnx.notifications = Backbone.Collection.extend({
+		model : nfnx.notification,
 		url: function() {
 			if ( typeof $( '#nf_notification_type' ).val() !== 'undefined' ) {
 				var type = $( '#nf_notification_type' ).val();
@@ -40,62 +70,9 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	var notifications = new nmapp.notifications();
-	notifications.fetch({
-			data: jQuery.param({ object_id: object_id, scope: 'form', group: 'notifications' }),
-			reset: true,
-			success: function() {
-	           var test = notifications;
-	           var settings = test.models[0].settings;
-	           console.log( settings.get( 'name' ) );
-			},
-			error: function() {
-				console.log('failed to get!');
-			}
-		});
-	
-
-	/*
-	var savedNoticeTimeout = '';
-
-	var Notification = Backbone.Model.extend({
-		urlRoot: function() {
-			if ( typeof $( '#nf_notification_type' ).val() !== 'undefined' ) {
-				var type = $( '#nf_notification_type' ).val();
-			} else {
-				var type = '';
-			}
-			return nf_rest_url + '&nf_rest=rest_api&type=' + type + '&del=';
-		},
-
-		defaults: {
-			object_type: 'notification',
-			object_id: object_id
-		},
-
-		initialize: function () {
-	        // Define server attributes for this model
-	        //this.on('destory', this.destroy );
-	    }
-
-
-	});
-
-	var Notifications = Backbone.Collection.extend({
-		url: function() {
-			if ( typeof $( '#nf_notification_type' ).val() !== 'undefined' ) {
-				var type = $( '#nf_notification_type' ).val();
-			} else {
-				var type = '';
-			}
-			return nf_rest_url + '&nf_rest=rest_api&type=' + type + '&del=';
-		},
-		model: Notification,
-	});
-
-	var notifications = new Notifications();
-
-	var ContentView = Backbone.View.extend({
+	var notifications = new nfnx.notifications();
+	// This is the main view for our notifications table.
+	var NotificationTableView = Backbone.View.extend({
 
 		el: '#nf-settings-content',
 
@@ -109,6 +86,20 @@ jQuery(document).ready(function($) {
 
 			var content = _.template( jQuery( this.template ).html(), { notifications: notifications.models } );
 			jQuery( this.el ).html( content );
+
+			nfnx.notificationTrView = new NotificationTrView();
+
+			$( notifications.models ).each( function() {
+				var settings = {
+					id: this.get( 'id' ),
+					name: this.settings.get( 'name' ).get( 'current_value' ),
+					active: this.settings.get( 'active' ).get( 'current_value' ),
+					type: this.settings.get( 'type' ).get( 'current_value' ),
+					date_updated: this.settings.get( 'date_updated' ).get( 'current_value' )
+				};
+
+				nfnx.notificationTrView.render( '#notification_tr_' + this.get( 'id' ), settings );
+			});
 
 			jQuery( '.spinner' ).hide();
 			
@@ -126,12 +117,28 @@ jQuery(document).ready(function($) {
 		reload: function() {
 			nf_fetch_all_notifications();
 		}
+	});
 
+	// This is the view for each row of our notifications table.
+	var NotificationTrView = Backbone.View.extend({
+
+		render: function( el, settings ) {
+
+			var content = _.template( jQuery( "#tmpl-notifications_tr" ).html(), { settings: settings } );
+			jQuery( el ).html( content );
+
+			jQuery( '.spinner' ).hide();
+			
+	        return this;
+		}
 	});
 
 	$( document ).on( 'click', '#nf_notifications_btn', function(e) {
-		var notificationsView = new ContentView({ collection: notifications });
+		nfnx.notificationsTableView = new NotificationTableView({ collection: notifications });
 		nf_fetch_all_notifications();
+		$( '.media-menu-item' ).removeClass( 'active' );
+		$( this ).addClass( 'active' );
+		$( '.nf-settings-title h1' ).html( this.innerHTML );		
 	});
 
 	// Get our data.
@@ -142,10 +149,9 @@ jQuery(document).ready(function($) {
 			data: jQuery.param({ object_id: object_id, scope: 'form', group: 'notifications' }),
 			reset: true,
 			success: function() {
-	            $( '.media-menu-item' ).removeClass( 'active' );
-	            $( '#nf_notifications_btn' ).addClass( 'active' );
-	            $( '.nf-settings-title h1' ).html( 'Notifications' );
-	            $( document ).triggerHandler( 'notificationsFetched' );
+	           // var test = notifications;
+	           // var settings = test.models[0].settings;
+	           // console.log( settings.get( 'name' ) );
 			},
 			error: function() {
 				console.log('failed to get!');
@@ -153,31 +159,19 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	$( document ).on( 'click', '#nf_new_notification', function(e) {
+	// Handle our activation/deactivation button
+	$( document ).on( 'click', '.nf-activate-notification', function(e) {
 		e.preventDefault();
-		if ( typeof $( '#nf_notification_type' ).val() !== 'undefined' ) {
-			var type = $( '#nf_notification_type' ).val();
+		$( '.spinner' ).show();
+		var id = $( this ).data( 'notification-id' );
+		var settings = notifications.get( id ).settings;
+		var active = settings.get( "active" );
+		if ( active.get( "current_value" ) == 1 ) {
+			active.set( "current_value", 0 );
 		} else {
-			var type = '';
+			active.set( "current_value", 1 );
 		}
-		notifications.create({
-				'name': 'untitled',
-				'type': type,
-			},
-			{
-				success: function(response) {
-					var new_id = response.get( 'id' );
-					nf_fetch_all_notifications();
-					$( document ).on( 'notificationsFetched.new', function(e) {
-						$( '#notification_single_' + new_id ).click();
-						$( document ).off( 'notificationsFetched.new' );
-					});
-				}
-			}
-		);
-
-		
-	})
+	});
 
 	$( document ).on( 'click', '.nf-delete-notification', function(e) {
 		var del = confirm( commonL10n.warnDelete );
@@ -193,11 +187,64 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	$( document ).on( 'click', '.nf-activate-notification', function(e) {
+	$( document ).on( 'click', '#nf_new_notification', function(e) {
 		e.preventDefault();
-		var tmp = notifications.get( $( this ).data( 'notification-id' ) );
-		tmp.set( 'active', true );
-		tmp.save();
+		$( '.spinner' ).show();
+		if ( typeof $( '#nf_notification_type' ).val() !== 'undefined' ) {
+			var type = $( '#nf_notification_type' ).val();
+		} else {
+			var type = '';
+		}
+		notifications.create({},
+			{
+				success: function( response ) {
+					response.settings.add([
+						{
+							'id': 'name',
+							'object_id': response.get( 'id' ),
+							'meta_key': 'name',
+							'current_value': 'Untitled'
+						},
+						{
+							'id': 'type',
+							'object_id': response.get( 'id' ),
+							'meta_key': 'type',
+							'current_value': ''
+						},
+						{
+							'id': 'date_updated',
+							'object_id': response.get( 'id' ),
+							'meta_key': 'date_updated',
+							'current_value': '2014-02-24'
+						},
+						{
+							'id': 'active',
+							'object_id': response.get( 'id' ),
+							'meta_key': 'active',
+							'current_value': 0
+						}
+					]);
+					nfnx.notificationsTableView.render();
+					$( '#notification_single_' + response.get( 'id' ) ).click();
+					$( document ).on( 'nf_settings_rendered.new', function() {
+						$( '#name' ).focus();
+						$( document ).off( 'nf_settings_rendered.new' );
+					});
+				}
+			}
+		);
 	});
-*/
+
+
+
+	$( document ).on( 'click', '.notification-single', function() {
+		$( document ).on( 'nf_settings_fetched.single', function() {
+			$( '.media-menu-item' ).removeClass( 'active' );
+			$( '#nf_notifications_btn' ).addClass( 'active' );
+			var tmp = $( '.nf-settings-title' ).html();
+			$( '.nf-settings-title' ).html( '<a href="#"><-Back</a>' + tmp );
+			$( document ).off( 'nf_settings_fetched.single' );
+		});
+	});
+
 }); //Document.ready();

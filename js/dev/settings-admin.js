@@ -97,8 +97,8 @@ jQuery( document ).ready(function($) {
 
 				}
 			});
-			
-		        return this;
+			$( document ).triggerHandler( 'nf_settings_rendered' );
+		    return this;
 		},
 
 		changeTemplate: function( template_id ) {
@@ -163,6 +163,7 @@ jQuery( document ).ready(function($) {
 	           
 	            $( '.nf-settings-title h1' ).html( title );
 	            $( '.nf-settings-desc' ).html( desc );
+	            $( document ).triggerHandler( 'nf_settings_fetched' );
 			},
 			error: function() {
 				console.log('failed to get!');

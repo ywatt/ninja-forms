@@ -15,7 +15,7 @@ function nf_notification_settings() {
 		'custom_backbone' => true,
 		'template' => 
 			'<%
-			console.log( notifications[0].get( "") );
+			
 			if ( typeof notifications[0] !== "undefined" ) {
 				type = notifications[0].get( "nf_request_notification_type" );
 			} else {
@@ -50,7 +50,7 @@ function nf_notification_settings() {
 				<thead>
 					<tr>
 						<th class="check-column"><input type="checkbox" id="" class="ninja-forms-select-all" title="ninja-forms-bulk-action"></th>
-						<th>'.__( 'Status', 'ninja-forms' ).'</th>
+						
 						<th>'.__( 'Name', 'ninja-forms' ).'</th>
 						<th>'.__( 'Type', 'ninja-forms' ).'</th>
 						<th>'.__( 'Date Updated', 'ninja-forms' ).'</th>
@@ -60,32 +60,14 @@ function nf_notification_settings() {
 				<% 
 				
 				if ( typeof notifications[0].get( "id" ) !== "undefined" ) {
-
-					_.each(notifications, function(notification){ 
+					_.each(notifications, function(notification){
+						if ( notification.settings.get( "active" ).get( "current_value" ) == 1 ) {
+							var active_class = "active";
+						} else {
+							var active_class = "inactive";
+						}
 						%>
-						<tr>
-							<th scope="row" class="check-column">
-								<input type="checkbox" id="" name="notification_ids[]" value="" class="ninja-forms-bulk-action">
-							</th>
-							<td></td>
-							<td class="post-title page-title column-title">
-								<strong>
-									<a href="#notification_single" class="media-menu-item" id="notification_single_<%= notification.get( "id" ) %>" title="" data-notification-id="<%= notification.get( "id" ) %>" data-object-id="<%= notification.get( "id" ) %>" data-scope="notification" data-group="notification_single"><%= notification.get( "name" ) %></a>
-								</strong>
-								<div class="row-actions">
-									<span class="activate"><a href="" class="nf-activate-notification" data-notification-id="<%= notification.get( "id" ) %>">'.__( 'Activate', 'ninja-forms' ).'</a> | </span>
-									<span class="trash"><a class="nf-delete-notification" title="'.__( 'Delete this notification', 'ninja-forms' ).'" href="#" id="" data-notification-id="<%= notification.get( "id" ) %>" >'.__( 'Delete', 'ninja-forms' ).'</a> | </span>
-									<span class="export"><a href="" title="'.__( 'Export Form', 'ninja-forms' ).'">'.__( 'Export', 'ninja-forms' ).'</a> | </span>
-									<span class="duplicate"><a href="" title="'.__( 'Duplicate Form', 'ninja-forms' ).'">'.__( 'Duplicate', 'ninja-forms' ).'</a></span>
-								</div>
-							</td>
-							<td>
-								<%= notification.get( "type" ) %>
-							</td>
-							<td>
-								<%= notification.get( "date_updated" ) %>
-							</td>
-						</tr>
+						<tr id="notification_tr_<%= notification.get( "id" ) %>" class="<%= active_class %>"></tr>
 					<% }); 
 				} else {
 					%>
@@ -100,13 +82,54 @@ function nf_notification_settings() {
 				<tfoot>
 					<tr>
 						<th class="check-column"><input type="checkbox" id="" class="ninja-forms-select-all" title="ninja-forms-bulk-action"></th>
-						<th>'.__( 'Status', 'ninja-forms' ).'</th>
+						
 						<th>'.__( 'Name', 'ninja-forms' ).'</th>
 						<th>'.__( 'Type', 'ninja-forms' ).'</th>
 						<th>'.__( 'Date Updated', 'ninja-forms' ).'</th>
 					</tr>
 				</tfoot>
 			</table>',
+	);
+
+	Ninja_Forms()->admin_settings->register_settings_group( $args );
+
+	$args = array(
+		'scope' => 'form',
+		'id' => 'notifications_tr',
+		'label' => '',
+		'priority' => '',
+		'desc' => '',
+		'display_link' => false,
+		'custom_backbone' => true,
+		'template' => 
+			'<%
+			if ( settings.active == 1 ) {
+				var active = "' . __( 'Deactivate', 'ninja-forms' ) . '";
+			} else {
+				var active = "' . __( 'Active', 'ninja-forms' ). '";
+			}
+			%>
+
+			<th scope="row" class="check-column">
+				<input type="checkbox" id="" name="notification_ids[]" value="<%= settings.id %>" class="ninja-forms-bulk-action">
+			</th>
+			<td class="post-title page-title column-title">
+				<strong>
+					<a href="#notification_single" class="media-menu-item notification-single" id="notification_single_<%= settings.id %>" title="" data-notification-id="<%= settings.id %>" data-object-id="<%= settings.id %>" data-scope="notification" data-group="notification_single"><%= settings.name %></a>
+				</strong>
+				<div class="row-actions">
+					<span class="activate"><a href="" class="nf-activate-notification" data-notification-id="<%= settings.id %>"><%= active %></a> | </span>
+					<span class="trash"><a class="nf-delete-notification" title="'.__( 'Delete this notification', 'ninja-forms' ).'" href="#" id="" data-notification-id="<%= settings.id %>" >'.__( 'Delete', 'ninja-forms' ).'</a> | </span>
+					<span class="export"><a href="" title="'.__( 'Export Form', 'ninja-forms' ).'">'.__( 'Export', 'ninja-forms' ).'</a> | </span>
+					<span class="duplicate"><a href="" title="'.__( 'Duplicate Form', 'ninja-forms' ).'">'.__( 'Duplicate', 'ninja-forms' ).'</a></span>
+				</div>
+			</td>
+			<td>
+				<%= settings.type %>
+			</td>
+			<td>
+				<%= settings.date_updated %>
+			</td>',
 	);
 
 	Ninja_Forms()->admin_settings->register_settings_group( $args );
@@ -122,6 +145,12 @@ function nf_notification_settings() {
 		'priority' => 'default',
 		'desc' => __( 'This is where all form notifications are managed.', 'ninja-forms' ),
 		'settings' => array(
+			'name' => array(
+				'type' => 'text',
+				'label' => __( 'Name', 'ninja-forms' ),
+				'class' => 'widefat',
+				'desc' => __( 'How would you like to identify this notification?', 'ninja-forms' ),
+			),			
 			'type' => array(
 				'type' => 'dropdown',
 				'label' => __( 'Type', 'ninja-forms' ),
@@ -134,12 +163,6 @@ function nf_notification_settings() {
 				),
 				'class' => '',
 				'desc' => __( 'What kind of notification would you like to create?', 'ninja-forms' ),
-			),
-			'name' => array(
-				'type' => 'text',
-				'label' => __( 'Name', 'ninja-forms' ),
-				'class' => 'widefat',
-				'desc' => __( 'How would you like to identify this notification?', 'ninja-forms' ),
 			),
 			'mailto' => array(
 				'type' => 'radio',
@@ -216,6 +239,7 @@ function nf_notification_rest_filter( $args, $object_id, $group ) {
 			$setting['id'] = $meta_key;
             $setting['current_value'] = $current_value;
             $setting['meta_key'] = $meta_key;		
+            $setting['object_id'] = $object_id;		
 
 			$tmp_array[$x]['settings'][] = $setting;
 		}
