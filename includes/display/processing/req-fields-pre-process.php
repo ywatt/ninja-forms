@@ -88,7 +88,7 @@ function ninja_forms_req_fields_process(){
 								$ninja_forms_processing->add_error('required-general', $req_error_label, 'general');
 							}
 						}else{
-							if( empty( $user_value ) ){
+							if( $user_value === '' ){
 								$ninja_forms_processing->add_error('required-'.$field_id, $req_field_error, $field_id);
 								$ninja_forms_processing->add_error('required-general', $req_error_label, 'general');
 							}
