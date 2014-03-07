@@ -15,7 +15,6 @@ function nf_notification_settings() {
 		'custom_backbone' => true,
 		'template' => 
 			'<%
-			
 			if ( typeof notifications[0] !== "undefined" ) {
 				type = notifications[0].get( "nf_request_notification_type" );
 			} else {
@@ -28,7 +27,7 @@ function nf_notification_settings() {
 					<a href="#" class="button-primary" id="nf_new_notification">'.__( 'Add New', 'ninja-forms' ).'</a>
 				</div>
 				<div class="alignleft actions">
-					<select id="" class="" name="bulk_action">
+					<select id="nf_notifications_bulk_actions" class="" name="bulk_action">
 						<option value="">'.__( 'Bulk Actions', 'ninja-forms' ).'</option>
 						<option value="activate">'.__( 'Activate', 'ninja-forms' ).'</option>
 						<option value="deactivate">'.__( 'Deactivate', 'ninja-forms' ).'</option>
@@ -49,7 +48,7 @@ function nf_notification_settings() {
 			<table class="wp-list-table widefat fixed posts">
 				<thead>
 					<tr>
-						<th class="check-column"><input type="checkbox" id="" class="ninja-forms-select-all" title="ninja-forms-bulk-action"></th>
+						<th class="check-column"><input type="checkbox" id="" class="nf-notifications-select-all" title="ninja-forms-bulk-action"></th>
 						
 						<th>'.__( 'Name', 'ninja-forms' ).'</th>
 						<th>'.__( 'Type', 'ninja-forms' ).'</th>
@@ -57,9 +56,9 @@ function nf_notification_settings() {
 					</tr>
 				</thead>
 				<tbody>
-				<% 
-				
-				if ( typeof notifications[0].get( "id" ) !== "undefined" ) {
+				<%
+				console.log( notifications[0].get( "empty" ) );
+				if ( notifications[0].get( "empty" ) != true ) {
 					_.each(notifications, function(notification){
 						if ( notification.settings.get( "active" ).get( "current_value" ) == 1 ) {
 							var active_class = "active";
@@ -81,7 +80,7 @@ function nf_notification_settings() {
 				</tbody>
 				<tfoot>
 					<tr>
-						<th class="check-column"><input type="checkbox" id="" class="ninja-forms-select-all" title="ninja-forms-bulk-action"></th>
+						<th class="check-column"><input type="checkbox" id="" class="nf-notifications-select-all" title="ninja-forms-bulk-action"></th>
 						
 						<th>'.__( 'Name', 'ninja-forms' ).'</th>
 						<th>'.__( 'Type', 'ninja-forms' ).'</th>
@@ -111,7 +110,7 @@ function nf_notification_settings() {
 			%>
 
 			<th scope="row" class="check-column">
-				<input type="checkbox" id="" name="notification_ids[]" value="<%= settings.id %>" class="ninja-forms-bulk-action">
+				<input type="checkbox" id="" name="" value="<%= settings.id %>" class="nf-notifications-bulk-action" data-notification-id="<%= settings.id %>">
 			</th>
 			<td class="post-title page-title column-title">
 				<strong>
@@ -240,16 +239,17 @@ function nf_notification_rest_filter( $args, $object_id, $group ) {
             $setting['current_value'] = $current_value;
             $setting['meta_key'] = $meta_key;		
             $setting['object_id'] = $object_id;		
-
+            $tmp_array[$x]['nf_request_notification_type'] = $type;
 			$tmp_array[$x]['settings'][] = $setting;
 		}
-		$tmp_array[$x]['nf_request_notification_type'] = $type;
 		$x++;
 	}
 
 	if ( empty( $tmp_array ) ) {
-		$tmp_array[0]['nf_request_notification_type'] = $type;
+		$tmp_array['empty'] = true;
+		$tmp_array['nf_request_notification_type'] = $type;
 	}
+	//
 
 	return $tmp_array;
 }

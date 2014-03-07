@@ -88,18 +88,45 @@ jQuery(document).ready(function($) {
 			jQuery( this.el ).html( content );
 
 			nfnx.notificationTrView = new NotificationTrView();
+			//if ( typeof notifications.models[0].settings.get( 'name' ) !== 'undefined' ) {
+				$( notifications.models ).each( function() {
+					
+					if ( typeof this.settings.get( 'name' ) !== 'undefined' ) {
+						var name = this.settings.get( 'name' ).get( 'current_value' );
+					} else {
+						var name = '';
+					}					
 
-			$( notifications.models ).each( function() {
-				var settings = {
-					id: this.get( 'id' ),
-					name: this.settings.get( 'name' ).get( 'current_value' ),
-					active: this.settings.get( 'active' ).get( 'current_value' ),
-					type: this.settings.get( 'type' ).get( 'current_value' ),
-					date_updated: this.settings.get( 'date_updated' ).get( 'current_value' )
-				};
+					if ( typeof this.settings.get( 'active' ) !== 'undefined' ) {
+						var active = this.settings.get( 'active' ).get( 'current_value' );
+					} else {
+						var active = '';
+					}					
 
-				nfnx.notificationTrView.render( '#notification_tr_' + this.get( 'id' ), settings );
-			});
+					if ( typeof this.settings.get( 'type' ) !== 'undefined' ) {
+						var type = this.settings.get( 'type' ).get( 'current_value' );
+					} else {
+						var type = '';
+					}					
+
+					if ( typeof this.settings.get( 'date_updated' ) !== 'undefined' ) {
+						var date_updated = this.settings.get( 'date_updated' ).get( 'current_value' );
+					} else {
+						var date_updated = '';
+					}
+
+					var settings = {
+						id: this.get( 'id' ),
+						name: name,
+						active: active,
+						type: type,
+						date_updated: date_updated
+					};
+
+					nfnx.notificationTrView.render( '#notification_tr_' + this.get( 'id' ), settings );
+					$( document ).triggerHandler( 'nf_notification_table_rendered' );
+				});
+			//}
 
 			jQuery( '.spinner' ).hide();
 			
@@ -128,7 +155,7 @@ jQuery(document).ready(function($) {
 			jQuery( el ).html( content );
 
 			jQuery( '.spinner' ).hide();
-			
+			$( document ).triggerHandler( 'nf_notification_tr_rendered' );
 	        return this;
 		}
 	});
@@ -195,9 +222,17 @@ jQuery(document).ready(function($) {
 		} else {
 			var type = '';
 		}
-		notifications.create({},
+		notifications.create({
+			reset: false,
+		},
 			{
 				success: function( response ) {
+					response.settings.on( 'add', function( settings ) {
+						if ( settings.get('id') == 'active' ) {
+							response.set( 'empty', false );
+							nfnx.notificationsTableView.render();
+						}
+					});
 					response.settings.add([
 						{
 							'id': 'name',
@@ -209,7 +244,7 @@ jQuery(document).ready(function($) {
 							'id': 'type',
 							'object_id': response.get( 'id' ),
 							'meta_key': 'type',
-							'current_value': ''
+							'current_value': type
 						},
 						{
 							'id': 'date_updated',
@@ -224,8 +259,12 @@ jQuery(document).ready(function($) {
 							'current_value': 0
 						}
 					]);
-					nfnx.notificationsTableView.render();
-					$( '#notification_single_' + response.get( 'id' ) ).click();
+
+					$( document ).on( 'nf_notification_table_rendered.new', function() {
+						$( '#notification_single_' + response.get( 'id' ) ).click();
+						$( document ).off( 'nf_notification_table_rendered.new' );
+					});
+
 					$( document ).on( 'nf_settings_rendered.new', function() {
 						$( '#name' ).focus();
 						$( document ).off( 'nf_settings_rendered.new' );
@@ -235,7 +274,49 @@ jQuery(document).ready(function($) {
 		);
 	});
 
+	$( document ).on( 'change', '.nf-notifications-select-all', function() {
+		$( '.nf-notifications-bulk-action' ).prop( 'checked', this.checked );
+		$( '.nf-notifications-select-all' ).prop( 'checked', this.checked );
+	});
 
+	$( document ).on( 'change', '#nf_notifications_bulk_actions', function() {
+		if ( this.value == 'delete' ) {
+			var del = confirm( commonL10n.warnDelete );
+			if ( del ) {
+				var i = 0;
+				$( '.nf-notifications-bulk-action:checked' ).each( function() {
+					var id = $( this ).data( 'notification-id' );
+					if ( this.checked && typeof id !== 'undefined' ) {
+						// Delete our notification model
+						var tmp = notifications.get( id );
+						tmp.destroy({
+							success: function() {
+						 		// Reload our view if we're on our last notification.
+						 		if ( i == ( $( '.nf-notifications-bulk-action:checked' ).length - 1 ) ) {
+						 			nf_fetch_all_notifications();
+						 		}
+						 		i++;
+							}
+						});
+					}
+				});
+			}
+		} else if ( this.value !== '' ) {
+			var val = this.value;
+			$( '.nf-notifications-bulk-action' ).each( function() {
+				var id = $( this ).data( 'notification-id' );
+				if ( this.checked && typeof id !== 'undefined' ) {
+					if ( val == 'activate' ) {
+						var active = notifications.get( id ).settings.get( 'active' );
+						active.set( 'current_value', 1 );
+					} else if ( val == 'deactivate' ) {
+						var active = notifications.get( id ).settings.get( 'active' );
+						active.set( 'current_value', 0 );
+					}
+				}
+			});			
+		}
+	});
 
 	$( document ).on( 'click', '.notification-single', function() {
 		$( document ).on( 'nf_settings_fetched.single', function() {
