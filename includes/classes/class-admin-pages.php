@@ -226,8 +226,30 @@ class NF_Admin_Settings_Pages {
 			<% _.each(settings, function(setting){
 				var setting_id = setting.get( 'id' );
 				var value = setting.get( 'current_value' );
+
+				// Check to see if this field should be visible
+				if ( typeof setting.get( 'visible' ) == 'undefined' ) {
+					var visible = true;
+				} else {
+					var visible = setting.get( 'visible' );
+				}
+
+				if ( !visible ) {
+					visible = 'hidden';
+				} else {
+					visible = '';
+				}
+
+				// Loop through our 'data' settings and setup our 'data-attribute' tags.
+				if ( typeof setting.get( 'data' ) !== 'undefined' ) {
+					var data = setting.get( 'data' );
+					var data_attributes = '';
+					for ( prop in data ) {
+						data_attributes += 'data-' + prop + '="' + data[prop] + '"';
+					}
+				}
 				%>
-				<tr class= "nf-<%= setting.get('type') %>">
+				<tr class= "nf-<%= setting.get('type') %> <%= visible %>">
 				<%
 				switch( setting.get('type') ) {
 
@@ -239,7 +261,7 @@ class NF_Admin_Settings_Pages {
 							</label>
 						</th>
 						<td>
-							<input type="checkbox" id="<%= setting.id %>" class="<%= setting.get('class') %> nf-setting" value="1" <% if ( value == 1 ) { %>checked<%}%>>
+							<input type="checkbox" id="<%= setting.id %>" class="<%= setting.get('class') %> nf-setting" value="1" <% if ( value == 1 ) { %>checked<%}%> <%= data_attributes %>>
 							<span class="howto">
 								<%= setting.get('desc') %>
 							</span>
@@ -254,7 +276,7 @@ class NF_Admin_Settings_Pages {
 							</label>
 						</th>
 						<td>
-							<select id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" data-meta-key="<%= setting.get( 'meta_key' )%>" data-object-id="<%= setting.get( 'object_id' ) %>">
+							<select id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" data-meta-key="<%= setting.get( 'meta_key' )%>" data-object-id="<%= setting.get( 'object_id' ) %>" <%= data_attributes %>>
 							<%
 							_.each(setting.get('options'), function(option) {
 								%>
@@ -267,7 +289,7 @@ class NF_Admin_Settings_Pages {
 								<%= setting.get('desc') %>
 							</span>
 							<div class="nf-help">
-								HELLO WORLD!
+								
 							</div>
 						</td>
 						<%
@@ -280,7 +302,7 @@ class NF_Admin_Settings_Pages {
 							</label>
 						</th>
 						<td>
-							<input type="number" id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" value="<%= value %>" min="<%= setting.get('min') %>" max="<%= setting.get('max') %>"/>
+							<input type="number" id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" value="<%= value %>" min="<%= setting.get('min') %>" max="<%= setting.get('max') %>"  <%= data_attributes %>/>
 							<span class="howto">
 								<%= setting.get('desc') %>
 							</span>
@@ -300,7 +322,7 @@ class NF_Admin_Settings_Pages {
 							_.each(setting.get('options'), function(option) {
 								%>
 								<label>
-									<input type="radio" name="<%= setting.id %>" value="<%= option.value %>" <% if ( value == option.value ) { %> checked <% } %> id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" />
+									<input type="radio" name="<%= setting.id %>" value="<%= option.value %>" <% if ( value == option.value ) { %> checked <% } %> id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" <%= data_attributes %>/>
 									<%= option.name %>
 								</label>
 								<%
@@ -312,7 +334,7 @@ class NF_Admin_Settings_Pages {
 								<%= setting.get('desc') %>
 							</span>
 							<div class="nf-help">
-								HELLO WORLD!
+								
 							</div>
 						</td>
 						<%
@@ -325,12 +347,12 @@ class NF_Admin_Settings_Pages {
 							</label>
 						</th>
 						<td>
-							<input type="text" id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" value="<%= value %>" title="TEST TEST TEST" />
+							<input type="text" id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" value="<%= value %>" title="TEST TEST TEST" <%= data_attributes %>/>
 							<span class="howto">
 								<%= setting.get('desc') %>
 							</span>
 							<div class="nf-help">
-								HELLO WORLD!
+								
 							</div>
 						</td>
 						<%
@@ -341,7 +363,7 @@ class NF_Admin_Settings_Pages {
 							<label for="<%= setting.id %>">
 								<%= setting.get('label') %>
 							</label>
-							<textarea id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting"><%= value %></textarea>
+							<textarea id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" <%= data_attributes %>><%= value %></textarea>
 							<span class="howto">
 								<%= setting.get('desc') %>
 							</span>

@@ -4,6 +4,8 @@
  * 
  */
 
+
+// Register our nofitication Table View.
 function nf_notification_settings() {
 	$args = array(
 		'scope' => 'form',
@@ -14,15 +16,7 @@ function nf_notification_settings() {
 		'display_link' => true,
 		'custom_backbone' => true,
 		'template' => 
-			'<%
-			if ( typeof notifications[0] !== "undefined" ) {
-				type = notifications[0].get( "nf_request_notification_type" );
-			} else {
-				type = "";
-			}
-			
-			%>
-			<div id="" class="tablenav top">
+			'<div id="" class="tablenav top">
 				<div class="alignleft" style="margin-right:15px">
 					<a href="#" class="button-primary" id="nf_new_notification">'.__( 'Add New', 'ninja-forms' ).'</a>
 				</div>
@@ -36,11 +30,11 @@ function nf_notification_settings() {
 				</div>				
 				<div class="alignleft actions">
 					<select id="nf_notification_type" class="" name="">
-						<option value="" <% if ( type == "" ) { %> selected <% } %> >'.__( 'All Types', 'ninja-forms' ).'</option>
-						<option value="email" <% if ( type == "email" ) { %> selected <% } %> >'.__( 'Email', 'ninja-forms' ).'</option>
-						<option value="redirect" <% if ( type == "redirect" ) { %> selected <% } %> >'.__( 'URL Redirect', 'ninja-forms' ).'</option>
-						<option value="success_message" <% if ( type == "success_message" ) { %> selected <% } %> >'.__( 'Success Message', 'ninja-forms' ).'</option>
-						<option value="pushover" <% if ( type == "pushover" ) { %> selected <% } %> >'.__( 'Pushover', 'ninja-forms' ).'</option>
+						<option value="">'.__( 'All Types', 'ninja-forms' ).'</option>
+						<option value="email">'.__( 'Email', 'ninja-forms' ).'</option>
+						<option value="redirect">'.__( 'URL Redirect', 'ninja-forms' ).'</option>
+						<option value="success_message">'.__( 'Success Message', 'ninja-forms' ).'</option>
+						<option value="pushover">'.__( 'Pushover', 'ninja-forms' ).'</option>
 					</select>
 					<span class="spinner"></span>
 				</div>
@@ -55,29 +49,7 @@ function nf_notification_settings() {
 						<th>'.__( 'Date Updated', 'ninja-forms' ).'</th>
 					</tr>
 				</thead>
-				<tbody>
-				<%
-				console.log( notifications[0].get( "empty" ) );
-				if ( notifications[0].get( "empty" ) != true ) {
-					_.each(notifications, function(notification){
-						if ( notification.settings.get( "active" ).get( "current_value" ) == 1 ) {
-							var active_class = "active";
-						} else {
-							var active_class = "inactive";
-						}
-						%>
-						<tr id="notification_tr_<%= notification.get( "id" ) %>" class="<%= active_class %>"></tr>
-					<% }); 
-				} else {
-					%>
-					<tr>
-						<td></td>
-						<td>' . __( 'No notifications found.', 'ninja-forms' ) .'</td>
-					</tr>
-				<%
-				}
-				%>
-				</tbody>
+				<tbody id="nf_notification_tbody"></tbody>
 				<tfoot>
 					<tr>
 						<th class="check-column"><input type="checkbox" id="" class="nf-notifications-select-all" title="ninja-forms-bulk-action"></th>
@@ -92,6 +64,41 @@ function nf_notification_settings() {
 
 	Ninja_Forms()->admin_settings->register_settings_group( $args );
 
+	// Register our notification Table Body View.
+	$args = array(
+		'scope' => 'form',
+		'id' => 'notifications_tbody',
+		'label' => '',
+		'priority' => '',
+		'desc' => '',
+		'display_link' => false,
+		'custom_backbone' => true,
+		'template' => 
+			'<%
+			if ( notifications.length > 0 ) {
+				_.each(notifications, function(notification){
+					if ( notification.settings.get( "active" ).get( "current_value" ) == 1 ) {
+						var active_class = "active";
+					} else {
+						var active_class = "inactive";
+					}
+					%>
+					<tr id="notification_tr_<%= notification.get( "id" ) %>" class="<%= active_class %>"></tr>
+				<% }); 
+			} else {
+				%>
+				<tr>
+					<td></td>
+					<td>' . __( 'No notifications found.', 'ninja-forms' ) .'</td>
+				</tr>
+			<%
+			}
+			%>',
+	);
+
+	Ninja_Forms()->admin_settings->register_settings_group( $args );
+
+	// Register our notification Table Row View
 	$args = array(
 		'scope' => 'form',
 		'id' => 'notifications_tr',
@@ -136,6 +143,7 @@ function nf_notification_settings() {
 	// Add a filter for our all-notifications table
 	add_filter( 'nf_rest_get_array', 'nf_notification_rest_filter', 10, 3 );
 
+	// Register our notification Single View
 	$args = array(
 		'scope' => 'notification',
 		'id' => 'notification_single',
@@ -147,7 +155,7 @@ function nf_notification_settings() {
 			'name' => array(
 				'type' => 'text',
 				'label' => __( 'Name', 'ninja-forms' ),
-				'class' => 'widefat',
+				'class' => 'widefat notification-name',
 				'desc' => __( 'How would you like to identify this notification?', 'ninja-forms' ),
 			),			
 			'type' => array(
@@ -167,15 +175,66 @@ function nf_notification_settings() {
 				'type' => 'radio',
 				'label' => __( 'Send To', 'ninja-forms' ),
 				'options' => array(
-					array('name' => __( 'Enter Email', 'ninja-forms' ), 'value' => 'manual_email'),
-					array('name' => __( 'Select a Field', 'ninja-forms' ), 'value' => 'field_value'),
-					array('name' => __( 'Configure Routing', 'ninja-forms' ), 'value' => 'configure_routing'),
+					array( 'name' => __( 'Enter Email', 'ninja-forms' ), 'value' => 'manual_email' ),
+					array( 'name' => __( 'Select a Field', 'ninja-forms' ), 'value' => 'field_value' ),
 				),
 				'class' => '',
 				'desc' => __( 'What kind of notification would you like to create?', 'ninja-forms' ),
+				'depend' => array(
+					'type' => 'email',
+				),
+			),
+			'email' => array(
+				'type' => 'text',
+				'label' => '',
+				'class' => '',
+				'desc' => __( 'Enter an email address or a comma-separted list of addresses', 'ninja-forms' ),
+				'depend' => array(
+					'type' => 'email',
+					'mailto' => 'manual_email',
+				),
+			),
+			'email_field' => array(
+				'type' => 'dropdown',
+				'label' => '',
+				'options' => array(
+					array( 'name' => 'Your Email', 'value' => 34 ),
+					array( 'name' => 'Another Email', 'value' => 45 ),
+				),
+				'desc' => __( 'Select an email field', 'ninja-forms' ),
+				'depend' => array(
+					'type' => 'email',
+					'mailto' => 'field_value',
+				),
+			),
+			'from' => array(
+				'type' => 'text',
+				'label' => __( 'From Address', 'ninja-forms' ),
+				'desc' => __( 'Address that this email appears to be from', 'ninja-forms' ),
+				'depend' => array(
+					'type' => 'email',
+				),
+			),			
+			'reply_to' => array(
+				'type' => 'text',
+				'label' => __( 'Reply-To Address', 'ninja-forms' ),
+				'desc' => __( 'Address used when email recepients click "reply"', 'ninja-forms' ),
+				'depend' => array(
+					'type' => 'email',
+				),
+			),			
+			'email_msg' => array(
+				'type' => 'rte',
+				'label' => __( 'Email Message', 'ninja-forms' ),
+				'desc' => '',
+				'depend' => array(
+					'type' => 'email',
+				),
 			),
 		),
 	);
+	
+	$args = apply_filters( 'nf_notification_single_args', $args );
 
 	Ninja_Forms()->admin_settings->register_settings_group( $args );	
 
@@ -244,12 +303,6 @@ function nf_notification_rest_filter( $args, $object_id, $group ) {
 		}
 		$x++;
 	}
-
-	if ( empty( $tmp_array ) ) {
-		$tmp_array['empty'] = true;
-		$tmp_array['nf_request_notification_type'] = $type;
-	}
-	//
 
 	return $tmp_array;
 }

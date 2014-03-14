@@ -204,6 +204,23 @@ class NF_Admin_Rest_API {
                     $setting['meta_key'] = $meta_key;
                     $setting['object_id'] = $object_id;
 
+                    // Check to see if this field has any dependencies. 
+                    if ( isset ( $setting['depend'] ) and is_array( $setting['depend'] ) and ! empty( $setting['depend'] ) ) {
+                        $met = true;
+                        // Loop through our dependencies
+                        foreach ( $setting['depend'] as $meta_key => $meta_value ) {
+                            // Check to see what the current value of dependency is.
+                            $current_value = nf_get_meta( $object_id, $meta_key );
+                            if ( $current_value != $meta_value ) {
+                                $met = false;
+                                break;
+                            }
+                        }
+                        // Check to see if the dependencies have been satisfied.
+
+                        $setting['visible'] = $met;
+                    }
+
                     $args[] = $setting;
                 }
                 

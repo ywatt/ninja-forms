@@ -1,3 +1,6 @@
+// let's create a namespace first
+var nfs = nfs || {};
+
 jQuery( document ).ready(function($) {
 	var savedNoticeTimeout = '';
 
@@ -24,13 +27,24 @@ jQuery( document ).ready(function($) {
 
 		    // Move attrs to options
 		    options.attrs = attrs;
+		    options.success = function() {
+				settings.fetch({
+					data: $.param({ tab: nfs.current_tab, object_id: nfs.object_id, scope: nfs.scope, group: nfs.group }),
+					reset: true,
+					success: function() {
+						settingsView.render();
+					},
+					error: function() {
+						console.log('failed to get!');
+					}
+				});
+		    }
 
 		    // Call super with attrs moved to options
 		    Backbone.Model.prototype.save.call(this, attrs, options);
 		    $('.updated').hide().html('Saved').fadeIn();
 	        // Hide the div after 3 seconds
 			savedNoticeTimeout = setTimeout( "jQuery('.updated').fadeOut();",3000 );
-			settingsView.render();
 		}
 	});
 
@@ -48,7 +62,7 @@ jQuery( document ).ready(function($) {
 		template: '#tmpl-nf-settings',
 
 		initialize: function(){
-				this.collection.bind( 'reset', this.render, this );
+			this.collection.bind( 'reset', this.render, this );
 		},
 
 		render: function() {
@@ -77,7 +91,7 @@ jQuery( document ).ready(function($) {
 
 					local_mce_init[model_id]['setup'] =  function(ed) {
 						ed.onChange.add(function(ed, l) {
-							$('#' + ed.editorId ).trigger('change');
+							$( '#' + ed.editorId ).change();
 						});
 					};
 
@@ -107,12 +121,13 @@ jQuery( document ).ready(function($) {
 
 		events: {
 			'change input.nf-setting': 'save',
-			'change textarea.nf-setting': 'save',
+			'change textarea': 'save',
 			'change select.nf-setting': 'save'
 		},
 
 		save: function(e) {
-			clearTimeout(savedNoticeTimeout);
+			//clearTimeout(savedNoticeTimeout);
+
 			$('.updated').hide().html('Saving...').fadeIn();
 			var el = e.target;
 			var el_id = $(el).prop('id');
@@ -150,6 +165,13 @@ jQuery( document ).ready(function($) {
 	var settingsView = new ContentView({ collection: settings });
 
 	nf_settings_change_tab = function ( tab_id, title, desc, object_id, scope, group, custom_tmpl ) {
+		// Set our namespace variables so that we always know which tab, object, scope, and group we're currently viewing.
+
+		nfs.current_tab = tab_id;
+		nfs.object_id = object_id;
+		nfs.scope = scope;
+		nfs.group = group;
+
 		$( '.spinner' ).show();
 		if ( custom_tmpl == 1 ) {
 			settingsView.template = '#tmpl-' + tab_id;
@@ -182,6 +204,7 @@ jQuery( document ).ready(function($) {
 
 	$(document).on( 'click', '.media-menu-item', function(e) {
 		e.preventDefault();
+
 		// Bail if this has a custom backbone handler.
 		if ( $( this ).data( 'custom-backbone' ) == 1 ) {
 			return false;

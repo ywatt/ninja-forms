@@ -51,12 +51,13 @@ class NF_Register_Admin_Settings {
 
 	public function register_settings( $args = array() ) {
 		$defaults = array(
-			'class' => '',
+			'class' 		=> '',
 			'default_value' => '',		
-			'desc' => '',
-			'label' => '',
-			'options' => '',				
-			'type' => '',
+			'desc' 			=> '',
+			'label' 		=> '',
+			'options' 		=> '',				
+			'type' 			=> '',
+			'depend' 		=> '',
 		);
 
 		$settings = $args['settings'];

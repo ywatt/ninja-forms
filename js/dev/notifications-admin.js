@@ -58,11 +58,14 @@ jQuery(document).ready(function($) {
 	nfnx.notifications = Backbone.Collection.extend({
 		model : nfnx.notification,
 		url: function() {
-			if ( typeof $( '#nf_notification_type' ).val() !== 'undefined' ) {
+			if ( typeof $( '#nf_notifications_btn' ).data( 'type' ) !== 'undefined' ) {
+				var type = $( '#nf_notifications_btn' ).data( 'type' );
+			} else if ( typeof $( '#nf_notification_type' ).val() !== 'undefined' ) {
 				var type = $( '#nf_notification_type' ).val();
 			} else {
 				var type = '';
 			}
+
 			return nf_rest_url + '&nf_rest=rest_api&type=' + type + '&del=';
 		},
 		parse : function(data){
@@ -79,16 +82,50 @@ jQuery(document).ready(function($) {
 		template: '#tmpl-notifications',
 
 		initialize: function(){
-			this.collection.bind( 'reset', this.render, this );
+			this.render();
 		},
 
 		render: function() {
 
-			var content = _.template( jQuery( this.template ).html(), { notifications: notifications.models } );
+			var content = _.template( jQuery( this.template ).html(), { } );
 			jQuery( this.el ).html( content );
 
+			nfnx.notificationTbodyView = new NotificationTbodyView( { collection: notifications } );
+
 			nfnx.notificationTrView = new NotificationTrView();
-			//if ( typeof notifications.models[0].settings.get( 'name' ) !== 'undefined' ) {
+
+			jQuery( '.spinner' ).hide();
+			
+	        return this;
+		},
+
+		changeTemplate: function( template_id ) {
+			this.template = template_id;
+		},
+
+		events: {
+			'change #nf_notification_type': 'reload'
+		},
+
+		reload: function() {
+			$( '#nf_notifications_btn' ).removeData( 'type' );
+			console.log( $( '#nf_notifications_btn' ).data( 'type' ) );
+			nf_fetch_all_notifications();
+		}
+	});
+
+	// This is the view for the body of our notifications table.
+	var NotificationTbodyView = Backbone.View.extend({
+		initialize: function( notifications ) {
+			this.collection.bind( 'reset', this.render, this );
+			this.render();
+		},
+
+		render: function() {
+
+			var content = _.template( jQuery( "#tmpl-notifications_tbody" ).html(), { notifications: notifications.models } );
+			jQuery( '#nf_notification_tbody' ).html( content );
+
 				$( notifications.models ).each( function() {
 					
 					if ( typeof this.settings.get( 'name' ) !== 'undefined' ) {
@@ -126,25 +163,13 @@ jQuery(document).ready(function($) {
 					nfnx.notificationTrView.render( '#notification_tr_' + this.get( 'id' ), settings );
 					$( document ).triggerHandler( 'nf_notification_table_rendered' );
 				});
-			//}
 
 			jQuery( '.spinner' ).hide();
-			
+			$( document ).triggerHandler( 'nf_notification_tbody_rendered' );
+
 	        return this;
-		},
-
-		changeTemplate: function( template_id ) {
-			this.template = template_id;
-		},
-
-		events: {
-			'change #nf_notification_type': 'reload'
-		},
-
-		reload: function() {
-			nf_fetch_all_notifications();
 		}
-	});
+	});	
 
 	// This is the view for each row of our notifications table.
 	var NotificationTrView = Backbone.View.extend({
@@ -165,7 +190,12 @@ jQuery(document).ready(function($) {
 		nf_fetch_all_notifications();
 		$( '.media-menu-item' ).removeClass( 'active' );
 		$( this ).addClass( 'active' );
-		$( '.nf-settings-title h1' ).html( this.innerHTML );		
+		$( '.nf-settings-title h1' ).html( this.innerHTML );
+		$( '#nf_notification_type' ).val( $( '#nf_notifications_btn' ).data( 'type' ) );
+	});
+
+	$( document ).on( 'click', '.media-menu-item', function() {
+		$( '.nf-settings-title a' ).remove();
 	});
 
 	// Get our data.
@@ -227,10 +257,18 @@ jQuery(document).ready(function($) {
 		},
 			{
 				success: function( response ) {
+					$( document ).on( 'nf_notification_tbody_rendered.new', function() {
+						$( '#notification_single_' + response.get( 'id' ) ).click();
+							$( document ).on( 'nf_settings_rendered.new', function() {
+								$( '#name' ).focus();
+								$( document ).off( 'nf_settings_rendered.new' );
+							});
+						$( document ).off( 'nf_notification_tbody_rendered.new' );
+					});
+
 					response.settings.on( 'add', function( settings ) {
 						if ( settings.get('id') == 'active' ) {
-							response.set( 'empty', false );
-							nfnx.notificationsTableView.render();
+							nfnx.notificationTbodyView.render();
 						}
 					});
 					response.settings.add([
@@ -259,16 +297,6 @@ jQuery(document).ready(function($) {
 							'current_value': 0
 						}
 					]);
-
-					$( document ).on( 'nf_notification_table_rendered.new', function() {
-						$( '#notification_single_' + response.get( 'id' ) ).click();
-						$( document ).off( 'nf_notification_table_rendered.new' );
-					});
-
-					$( document ).on( 'nf_settings_rendered.new', function() {
-						$( '#name' ).focus();
-						$( document ).off( 'nf_settings_rendered.new' );
-					});
 				}
 			}
 		);
@@ -294,8 +322,11 @@ jQuery(document).ready(function($) {
 						 		// Reload our view if we're on our last notification.
 						 		if ( i == ( $( '.nf-notifications-bulk-action:checked' ).length - 1 ) ) {
 						 			nf_fetch_all_notifications();
+							 		$( '.nf-notifications-select-all' ).prop( 'checked', false );
+							 		$( '.nf-notifications-bulk-action' ).prop( 'checked', false );	
 						 		}
 						 		i++;
+
 							}
 						});
 					}
@@ -303,6 +334,7 @@ jQuery(document).ready(function($) {
 			}
 		} else if ( this.value !== '' ) {
 			var val = this.value;
+			$( '.spinner' ).show();
 			$( '.nf-notifications-bulk-action' ).each( function() {
 				var id = $( this ).data( 'notification-id' );
 				if ( this.checked && typeof id !== 'undefined' ) {
@@ -314,18 +346,33 @@ jQuery(document).ready(function($) {
 						active.set( 'current_value', 0 );
 					}
 				}
-			});			
+			});
+			$( '.nf-notifications-select-all' ).prop( 'checked', false );
 		}
+		this.value = '';
+
 	});
 
 	$( document ).on( 'click', '.notification-single', function() {
+		$( '#nf_notifications_btn' ).data( 'type', $( '#nf_notification_type' ).val() );
 		$( document ).on( 'nf_settings_fetched.single', function() {
 			$( '.media-menu-item' ).removeClass( 'active' );
 			$( '#nf_notifications_btn' ).addClass( 'active' );
+			$( '.nf-settings-title a' ).remove();
 			var tmp = $( '.nf-settings-title' ).html();
-			$( '.nf-settings-title' ).html( '<a href="#"><-Back</a>' + tmp );
+			$( '.nf-settings-title' ).html( '<a href="#" class="notification-back"><-Back</a>' + tmp );
 			$( document ).off( 'nf_settings_fetched.single' );
 		});
+	});
+
+	$( document ).on( 'click', '.notification-back', function(e) {
+		e.preventDefault();
+		$( '#nf_notifications_btn' ).click();
+		$( '#nf_notification_type' ).val( $( '#nf_notifications_btn' ).data( 'type' ) );
+	});
+
+	$( document ).on( 'change', '.notification-name', function(e) {
+		$( '.nf-settings-title h1' ).html( this.value );
 	});
 
 }); //Document.ready();
