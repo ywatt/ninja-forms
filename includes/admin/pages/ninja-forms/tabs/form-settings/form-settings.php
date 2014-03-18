@@ -83,7 +83,7 @@ function ninja_forms_register_form_settings_basic_email_metabox(){
 add_action( 'admin_init', 'ninja_forms_register_form_settings_basic_email_metabox' );
 
 function ninja_forms_register_form_settings_admin_email_metabox(){
-	$args = array(
+	$args = apply_filters( 'ninja_forms_form_settings_admin_email', array(
 		'page' => 'ninja-forms',
 		'tab' => 'form_settings',
 		'slug' => 'admin_email',
@@ -124,14 +124,14 @@ function ninja_forms_register_form_settings_admin_email_metabox(){
 				'default_value' => 0,
 			),
 		),
-	);
+	));
 	ninja_forms_register_tab_metabox($args);
 }
 
 add_action( 'admin_init', 'ninja_forms_register_form_settings_admin_email_metabox' );
 
 function ninja_forms_register_form_settings_user_email_metabox(){
-	$args = array(
+	$args = apply_filters( 'ninja_forms_form_settings_user_email', array(
 		'page' => 'ninja-forms',
 		'tab' => 'form_settings',
 		'slug' => 'user_email',
@@ -156,7 +156,7 @@ function ninja_forms_register_form_settings_user_email_metabox(){
 				'label' => __( 'Include a list of fields?', 'ninja-forms' ),
 			),
 		),
-	);
+	));
 	ninja_forms_register_tab_metabox($args);
 }
 
@@ -213,7 +213,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 		$ajax_style = '';
 	}
 
-	$args = array(
+	$args = apply_filters( 'ninja_forms_form_settings_basic', array(
 		'page' => 'ninja-forms',
 		'tab' => 'form_settings',
 		'slug' => 'basic_settings',
@@ -311,7 +311,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'tr_class' => '',
 			),
 		),
-	);
+	));
 	ninja_forms_register_tab_metabox($args);
 }
 
