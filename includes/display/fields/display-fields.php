@@ -181,7 +181,7 @@ function ninja_forms_get_field_wrap_class($field_id){
 	if(isset($data['label_pos'])){
 		$label_pos = $data['label_pos'];
 	}else{
-		$label_pos = 'left';
+		$label_pos = 'above';
 	}
 	$field_wrap_class .= " label-".$label_pos;
 
