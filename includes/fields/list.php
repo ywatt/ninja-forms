@@ -663,4 +663,4 @@ function ninja_forms_field_filter_list_data( $form_id ){
 	}
 }
 
-add_action( 'ninja_forms_display_init', 'ninja_forms_field_filter_list_data' );
+add_action( 'ninja_forms_display_pre_init', 'ninja_forms_field_filter_list_data' );
