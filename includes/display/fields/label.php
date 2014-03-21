@@ -54,7 +54,7 @@ function ninja_forms_display_field_label( $field_id, $data ){
 	$label_class = apply_filters( 'ninja_forms_label_class', $label_class, $field_id );
 
 	if ( $display_label ) {
-		if ( $req == 1 && $req_symbol != '' ) {
+		if ( $req == 1 && $req_symbol != '' && $label_pos != 'inside' ) {
 			$req_span = "<span class='ninja-forms-req-symbol'>$req_symbol</span>";
 		} else {
 			$req_span = '';
@@ -108,7 +108,6 @@ function ninja_forms_display_label_inside( $data, $field_id ){
 
 	if ( isset ( $data['req'] ) and $data['req'] == 1 and $data['label_pos'] == 'inside' ) {
 		$data['label'] .= ' '.$req_symbol;
-		$data['req'] = 0;
 	}
 
 	if ( isset( $data['label'] ) ) {
@@ -116,8 +115,6 @@ function ninja_forms_display_label_inside( $data, $field_id ){
 	} else {
 		$label = '';
 	}
-
-
 
 	if ( $field_type != '_list' ) {
 		if ( $label_pos == 'inside' ) {
