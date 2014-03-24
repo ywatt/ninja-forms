@@ -287,13 +287,6 @@ require_once( NINJA_FORMS_DIR . "/includes/fields/post-excerpt.php" );
 */
 require_once( NINJA_FORMS_DIR . "/includes/admin/save.php" );
 
-if(session_id() == '') {
-	session_start();
-}
-
-$_SESSION['NINJA_FORMS_DIR'] = NINJA_FORMS_DIR;
-$_SESSION['NINJA_FORMS_URL'] = NINJA_FORMS_URL;
-
 // Set $_SESSION variable used for storing items in transient variables
 function ninja_forms_set_transient_id(){
 	if ( !isset ( $_SESSION['ninja_forms_transient_id'] ) AND !is_admin() ) {
