@@ -628,7 +628,8 @@ function csv_explode( $str, $d=',', $e='"', $crlf=TRUE ) {
 
 function nf_new_form_ajax() {
 	$name = esc_attr( $_REQUEST['name'] );
-	$form_id = nf_insert_form( array( 'name' => $name ) );
+	$type = esc_attr( $_REQUEST['type'] );
+	$form_id = nf_insert_form( array( 'name' => $name, 'type' => $type ) );
 	echo $form_id;
 	die();
 }

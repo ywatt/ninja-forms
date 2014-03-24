@@ -255,11 +255,25 @@ function nf_admin_all_forms() {
 	?>
 
 	<script type="text/html" id="tmpl-wizard-left-start">
-		<p><input type="text" id="nf_new_form_name" class="widefat code" value="" placeholder="<?php _e( 'Form Name', 'ninja-forms' ); ?>"></p>
-		<p class="wizard-section-actions"><a href="#" id="nf_create_form" class="button-secondary"><?php _e( 'Start Editing, Skip The Wizard', 'ninja-forms' );?></a>
+		<p>
+			<input type="text" id="nf_new_form_name" class="code" value="" placeholder="<?php _e( 'Form Name', 'ninja-forms' ); ?>">
+
+			<select id="nf_new_form_type" class="code">
+				<option value=""><?php _e( '- Form Type', 'ninja-forms' ); ?></option>
+				<option value="contact"><?php _e( 'Contact', 'ninja-forms' ); ?></option>
+				<option value="support"><?php _e( 'Support', 'ninja-forms' ); ?></option>
+				<option value="post_creation"><?php _e( 'Post Creation', 'ninja-forms' ); ?></option>
+			</select>
+		</p>
+		
+		<p class="wizard-section-actions">
+			<a href="#" id="nf_create_form" class="button-secondary"><?php _e( 'Start Editing!', 'ninja-forms' );?></a>
+		<!--	
 			<a href="#" id="nf_new_form_wizard" class="button-primary"><?php _e( 'Creation Wizard, Please', 'ninja-forms' );?></a>
+		-->
 		</p>
 		<span class='hidden'><?php wp_editor('hi','hi');?></span>
+		
 	</script>
 
 	<script type="text/html" id="tmpl-wizard-right-start">
@@ -267,7 +281,7 @@ function nf_admin_all_forms() {
 		<div class="wizard-update-message">
 			<p><strong><?php _e( 'To get started, enter a form name and then select whether or not you\'d like to use the form creation wizard.', 'ninja-forms' ); ?></strong></p>
 		</div>
-		<p class="wizard-description"><?php _e( 'The form creation wizard will assist you with all of the steps necessary to create a basic form. Once you have completed the wizard, you will be taken to the form editing page where you can make more changes to your form.', 'ninja-forms' ); ?></p>
+		<!-- <p class="wizard-description"><?php _e( 'The form creation wizard will assist you with all of the steps necessary to create a basic form. Once you have completed the wizard, you will be taken to the form editing page where you can make more changes to your form.', 'ninja-forms' ); ?></p> -->
 	</script>
 
 	<script type="text/html" id="tmpl-wizard-right">
@@ -348,8 +362,8 @@ function nf_all_forms_rest_filter( $args, $object_id, $group ) {
 		$all_forms[$x]['preview_link'] = ninja_forms_preview_link( $form['id'] );
 
 		$all_forms[$x]['type'] = nf_get_form_setting( $form['id'], 'type' );
-		$all_forms[$x]['views'] = nf_get_form_setting( $form['id'], 'views' );
-		$all_forms[$x]['sub_count'] = nf_get_form_setting( $form['id'], 'sub_count' );
+		$all_forms[$x]['views'] = intval( nf_get_form_setting( $form['id'], 'views' ) );
+		$all_forms[$x]['sub_count'] = intval( nf_get_form_setting( $form['id'], 'sub_count' ) );
 		if ( $all_forms[$x]['sub_count'] > 0 and $all_forms[$x]['views'] > 0 ) {
 			$conversion = $all_forms[$x]['sub_count'] / $all_forms[$x]['views'] * 100;
 			$all_forms[$x]['conversion'] = intval( $conversion ) . '%';

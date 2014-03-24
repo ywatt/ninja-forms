@@ -357,6 +357,13 @@
     -moz-box-shadow:0 0 10px #000;
     -webkit-box-shadow:0 0 10px #000;
 }
+
+/* Kevin's Test Stuff */
+
+#nf_notification_tbody tr.active {
+  background: red;
+}
+
 /*
 
 .nf-new-form-content {

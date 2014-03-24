@@ -218,7 +218,8 @@ final class Ninja_Forms {
 		// These files are required for the backend only
 		if ( is_admin() ) {
 			require_once( NF_PLUGIN_DIR . '/includes/activation.php' );
-
+			register_activation_hook( __FILE__, 'nf_activation' );
+			
 			require_once( NF_PLUGIN_DIR . '/includes/admin/all-forms-list.php' );
 			require_once( NF_PLUGIN_DIR . '/includes/admin/scripts.php' );
 			require_once( NF_PLUGIN_DIR . '/includes/admin/default-admin-pages.php' );

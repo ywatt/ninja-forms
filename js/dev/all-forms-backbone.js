@@ -94,8 +94,9 @@ jQuery(document).ready(function($) {
 
 	$( document ).on( 'click', '#nf_create_form', function(e) {
 		e.preventDefault();
-		var name = $('#nf_new_form_name').val();
-		$.post( ajaxurl, { action: 'nf_new_form', name: name }, function( response ) {
+		var name = $( '#nf_new_form_name' ).val();
+		var type = $( '#nf_new_form_type' ).val();
+		$.post( ajaxurl, { action: 'nf_new_form', name: name, type: type }, function( response ) {
 			window.location = admin_url + '?page=ninja-forms-edit&form_id=' + response;
 		});
 	});

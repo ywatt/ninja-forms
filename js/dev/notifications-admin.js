@@ -109,7 +109,6 @@ jQuery(document).ready(function($) {
 
 		reload: function() {
 			$( '#nf_notifications_btn' ).removeData( 'type' );
-			console.log( $( '#nf_notifications_btn' ).data( 'type' ) );
 			nf_fetch_all_notifications();
 		}
 	});
