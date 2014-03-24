@@ -52,15 +52,15 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 
 global $wpdb, $wp_version;
 
-define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_VERSION", "2.5.2");
-define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
-define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
-define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
-define("NINJA_FORMS_SUBS_TABLE_NAME", $wpdb->prefix . "ninja_forms_subs");
+define( "NINJA_FORMS_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
+define( "NINJA_FORMS_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
+define( "NINJA_FORMS_VERSION", "2.5.2" );
+define( "NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms" );
+define( "NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields" );
+define( "NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields" );
+define( "NINJA_FORMS_SUBS_TABLE_NAME", $wpdb->prefix . "ninja_forms_subs" );
 
-define("NINJA_FORMS_JS_DEBUG", false);
+define( "NINJA_FORMS_JS_DEBUG", true );
 
 /* Require Core Files */
 require_once( NINJA_FORMS_DIR . "/includes/ninja-settings.php" );
