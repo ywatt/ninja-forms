@@ -289,6 +289,8 @@ require_once( NINJA_FORMS_DIR . "/includes/admin/save.php" );
 
 // Set $_SESSION variable used for storing items in transient variables
 function ninja_forms_set_transient_id(){
+	if( !session_id() )
+        session_start();
 	if ( !isset ( $_SESSION['ninja_forms_transient_id'] ) AND !is_admin() ) {
 		$t_id = ninja_forms_random_string();
 		// Make sure that our transient ID isn't currently in use.
