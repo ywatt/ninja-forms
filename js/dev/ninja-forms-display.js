@@ -34,7 +34,7 @@ jQuery(document).ready(function(jQuery) {
 	if( jQuery.fn.mask ){
 		jQuery(".ninja-forms-mask").each(function(){
 			var mask = jQuery(this).data('mask');
-			mask = mask.toString();			
+			mask = mask.toString();
 			jQuery(this).mask(mask);
 		});
 
@@ -78,7 +78,7 @@ jQuery(document).ready(function(jQuery) {
 		var input_limit_type = jQuery(this).data( 'input-limit-type' );
 		var input_limit_msg = jQuery(this).data( 'input-limit-msg' );
 		jQuery(this).counter( {
-		    count: 'down', 
+		    count: 'down',
 		    goal: input_limit,
 		    type: input_limit_type,
 		    msg: input_limit_msg

@@ -41,13 +41,16 @@ function ninja_forms_field_submit_display($field_id, $data){
 	}else{
 		$label = 'Submit';
 	}
-
+	$plugin_settings = nf_get_settings();
+	if ( isset ( $plugin_settings['process_label'] ) ) {
+		$processing_msg = $plugin_settings['process_label'];
+	}
 	?>
 	<div id="nf_submit">
 		<input type="submit" name="_ninja_forms_field_<?php echo $field_id;?>" class="<?php echo $field_class;?>" id="ninja_forms_field_<?php echo $field_id;?>" value="<?php echo $label;?>" rel="<?php echo $field_id;?>" >
 	</div>
 	<div id="nf_processing" style="display:none;">
-		<input type="submit" id="test_test" name="" value="" disabled>
+		<input type="submit" id="test_test" name="" value="<?php echo $processing_msg; ?>" disabled>
 	</div>
 	<?php
 
