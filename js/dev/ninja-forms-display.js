@@ -130,7 +130,7 @@ jQuery(document).ready(function(jQuery) {
 			var options = {
             beforeSerialize: function($form, add_product_form_options) {
             	if ( typeof tinyMCE !== 'undefined' ) {
-            		tinyMCE.triggerSave();	
+            		tinyMCE.triggerSave();
             	}
             },
 			beforeSubmit:  ninja_forms_before_submit,
@@ -686,8 +686,6 @@ jQuery(document).ready(function(jQuery) {
 }); //End document.ready
 
 function ninja_forms_before_submit(formData, jqForm, options){
-	jQuery( '#nf_submit' ).hide();
-	jQuery( '#nf_processing' ).show();
 	var result = jQuery(jqForm).triggerHandler('beforeSubmit', [ formData, jqForm, options ]);
 	if ( result !== false ) {
 		result = jQuery('body').triggerHandler('beforeSubmit', [ formData, jqForm, options ]);
@@ -700,8 +698,6 @@ function ninja_forms_before_submit(formData, jqForm, options){
 
 function ninja_forms_response(responseText, statusText, xhr, jQueryform){
 	//alert(responseText);
-	jQuery( '#nf_processing' ).hide();
-	jQuery( '#nf_submit' ).show();
 	if( ninja_forms_settings.ajax_msg_format == 'inline' ){
 		var result = jQuery(jQueryform).triggerHandler('submitResponse', [ responseText ]);
 		if ( result !== false ) {
@@ -732,11 +728,11 @@ function ninja_forms_default_before_submit(formData, jqForm, options){
 	var form_id = jQuery(jqForm).prop("id").replace("ninja_forms_form_", "" );
 
 	// Show the ajax spinner and processing message.
-	// jQuery("#ninja_forms_form_" + form_id + "_process_msg").show();
-	// jQuery("#ninja_forms_form_" + form_id + "_response_msg").prop("innerHTML", "");
-	// jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-error-msg");
-	// jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-success-msg");
-	// jQuery(".ninja-forms-field-error").prop("innerHTML", "");
+	jQuery("#ninja_forms_form_" + form_id + "_process_msg").show();
+	jQuery("#ninja_forms_form_" + form_id + "_response_msg").prop("innerHTML", "");
+	jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-error-msg");
+	jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-success-msg");
+	jQuery(".ninja-forms-field-error").prop("innerHTML", "");
 	jQuery(".ninja-forms-error").removeClass("ninja-forms-error");
 	return true;
 }
