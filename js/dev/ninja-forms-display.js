@@ -686,6 +686,9 @@ jQuery(document).ready(function(jQuery) {
 }); //End document.ready
 
 function ninja_forms_before_submit(formData, jqForm, options){
+	jQuery( '#nf_submit' ).hide();
+	jQuery( '#nf_processing' ).show();
+
 	var result = jQuery(jqForm).triggerHandler('beforeSubmit', [ formData, jqForm, options ]);
 	if ( result !== false ) {
 		result = jQuery('body').triggerHandler('beforeSubmit', [ formData, jqForm, options ]);
@@ -698,6 +701,9 @@ function ninja_forms_before_submit(formData, jqForm, options){
 
 function ninja_forms_response(responseText, statusText, xhr, jQueryform){
 	//alert(responseText);
+	jQuery( '#nf_processing' ).hide();
+	jQuery( '#nf_submit' ).show();
+
 	if( ninja_forms_settings.ajax_msg_format == 'inline' ){
 		var result = jQuery(jQueryform).triggerHandler('submitResponse', [ responseText ]);
 		if ( result !== false ) {
