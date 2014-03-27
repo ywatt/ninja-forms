@@ -106,7 +106,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/label.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/help.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/desc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-title.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/form/process-message.php" );
+//require_once( NINJA_FORMS_DIR . "/includes/display/form/process-message.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-error-message.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-wrap.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-cont.php" );
