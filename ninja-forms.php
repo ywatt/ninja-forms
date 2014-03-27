@@ -60,7 +60,7 @@ define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
 define("NINJA_FORMS_SUBS_TABLE_NAME", $wpdb->prefix . "ninja_forms_subs");
 
-define("NINJA_FORMS_JS_DEBUG", false);
+define("NINJA_FORMS_JS_DEBUG", true);
 
 /* Require Core Files */
 require_once( NINJA_FORMS_DIR . "/includes/ninja-settings.php" );
@@ -106,7 +106,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/label.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/help.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/desc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-title.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/form/process-message.php" );
+//require_once( NINJA_FORMS_DIR . "/includes/display/form/process-message.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-error-message.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-wrap.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-cont.php" );
