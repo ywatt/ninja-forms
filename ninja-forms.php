@@ -60,7 +60,7 @@ define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
 define("NINJA_FORMS_SUBS_TABLE_NAME", $wpdb->prefix . "ninja_forms_subs");
 
-define("NINJA_FORMS_JS_DEBUG", false);
+define("NINJA_FORMS_JS_DEBUG", true);
 
 /* Require Core Files */
 require_once( NINJA_FORMS_DIR . "/includes/ninja-settings.php" );
