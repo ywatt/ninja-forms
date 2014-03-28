@@ -1,20 +1,41 @@
 <?php
 
-if( isset ( $_POST['_ninja_forms_display_submit'] ) AND absint ( $_POST['_ninja_forms_display_submit'] ) == 1 ){
-	$form_row = ninja_forms_get_form_by_id( absint( $_POST['_form_id'] ) );
-	if( isset( $form_row['data']['ajax'] ) ){
-		$ajax = $form_row['data']['ajax'];
-	}else{
-		$ajax = '';
-	}
-	if( $ajax != 1 ){
-		add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
-		add_action( 'init', 'ninja_forms_pre_process', 999 );
-	}else if( $ajax == 1 AND $_REQUEST['action'] == 'ninja_forms_ajax_submit' ){
-		add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
-		add_action( 'init', 'ninja_forms_pre_process', 999 );
-	}
-} 
+/*
+ * Function that checks to see if we are processing a submission
+ *
+ * @since 2.6.2
+ * @return void
+ */
+
+function nf_check_post() {
+	if( isset ( $_POST['_ninja_forms_display_submit'] ) AND absint ( $_POST['_ninja_forms_display_submit'] ) == 1 ){
+		// If our nonce isn't set, bail
+		if ( !isset ( $_POST['_wpnonce'] ) )
+			return false;
+		
+		// If our nonce doesn't validate, bail
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'nf_form_' + absint( $_POST['_form_id'] ) ) )
+			return false;
+
+		$form_row = ninja_forms_get_form_by_id( absint( $_POST['_form_id'] ) );
+		if( isset( $form_row['data']['ajax'] ) ){
+			$ajax = $form_row['data']['ajax'];
+		}else{
+			$ajax = '';
+		}
+
+		if( $ajax != 1 ){
+			add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
+			add_action( 'init', 'ninja_forms_pre_process', 999 );
+		}else if( $ajax == 1 AND $_REQUEST['action'] == 'ninja_forms_ajax_submit' ){
+			add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
+			add_action( 'init', 'ninja_forms_pre_process', 999 );
+		}
+	}	
+}
+
+add_action( 'plugins_loaded', 'nf_check_post' );
+
 
 /*
  *

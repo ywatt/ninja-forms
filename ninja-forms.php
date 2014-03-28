@@ -117,6 +117,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/form/close-form-tag.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/hidden-fields.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-visibility.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/sub-limit.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/form/nonce.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/restore-progress.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/inside-label-hidden.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-type.php" );
