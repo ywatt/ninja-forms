@@ -218,6 +218,7 @@ class Ninja_Forms_Processing {
 			$this->data['form'] = $cache['form_settings'];
 			$this->data['success'] = $cache['success_msgs'];
 			$this->data['errors'] = $cache['error_msgs'];
+			$this->data['extra'] = $cache['extra_values'];
 			
 		}
 
