@@ -587,64 +587,50 @@ function ninja_forms_delete_transient(){
 }
 
 /**
- * Function that returns all the forms in the database.
+ * Acts as a wrapper/alias for nf_get_objects_by_type.
  * 
  * @since 3.0
  * @return array $forms
  */
 
 function nf_get_all_forms() {
-	global $wpdb;
-
-	$forms = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM ".NF_OBJECTS_TABLE_NAME." WHERE type = 'form'", null ), ARRAY_A );
-	
-	return $forms;
+	return nf_get_objects_by_type( 'form' );
 }
 
 /**
- * Function that gets all notifications for a given form id
+ * Acts as a wrapper/alias for nf_get_object_children that is specific to notifications.
  * 
  * @since 3.0
- * @param $form_id
+ * @param string $form_id
  * @return array $notifications
  */
 
-function nf_get_notifications_by_form_id( $form_id ) {
-	global $wpdb;
-
-	$notifications = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM ".NF_RELATIONSHIPS_TABLE_NAME." WHERE child_type = 'notification' AND parent_id = %d", $form_id ), ARRAY_A);
-	$tmp_array = array();
-	foreach( $notifications as $id ) {
-		$object_id = $id['child_id'];
-		$settings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM ".NF_META_TABLE_NAME." WHERE object_id = %d", $id ), ARRAY_A);
-		foreach ( $settings as $s ) {
-			$tmp_array[ $object_id ][ $s['meta_key'] ] = $s['meta_value'];
-		}
-	}
-
-	return $tmp_array;
+function nf_get_notifications_by_form_id( $form_id, $full_data = true ) {
+	return nf_get_object_children( $form_id, 'notification', $full_data );
 }
 
 /**
- * Function that gets a notification by id
+ * Acts as a wrapper/alias for nf_get_object_children that is specific to fields
+ * 
+ * @since 3.0
+ * @param string $form_id
+ * @return array $fields
+ */
+
+function nf_get_fields_by_form_id( $form_id, $full_data = true ) {
+	return nf_get_object_children( $form_id, 'field', $full_data );
+}
+
+/**
+ * Acts as a wrapper/alias for nf_get_object_meta
  *
  * @since 3.0
  * @param string $id
  * @return array $notification
  */
 
-function nf_get_notification_by_id( $id ) {
-	global $wpdb;
-
-	$notification = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM ".NF_META_TABLE_NAME." WHERE object_id = %d", $id ), ARRAY_A);
-	$tmp_array = array();
-	if ( is_array( $notification ) ) {
-		foreach( $notification as $var ) {
-			$tmp_array[ $var['meta_key'] ] = $var['meta_value'];
-		}
-	}
-
-	return $tmp_array;
+function nf_get_notification_by_id( $notification_id ) {
+	return nf_get_object_meta( $notification_id );
 }
 
 /**
@@ -656,9 +642,102 @@ function nf_get_notification_by_id( $id ) {
  */
 
 function nf_get_form_settings( $form_id ) {
+	return nf_get_object_meta( $form_id );
+}
+
+/**
+ * Acts as a wrapper/alias for nf_get_object_meta_value.
+ * 
+ * @since 3.0
+ * @param string $form_id
+ * @param string $form_setting
+ * @return var $form_value
+ */
+
+function nf_get_form_setting( $form_id, $form_setting ) {
+	return nf_get_object_meta_value( $form_id, $form_setting );
+}
+
+/**
+ * Insert a form. Accepts an array of meta.
+ * Uses both nf_insert_object() and nf_update_object_meta();
+ * 
+ * @since 3.0
+ * @param array $object_meta
+ * @return int $form_id
+ */
+
+function nf_insert_form( $object_meta = array() ) {
+
+	// Insert a new object
+	$form_id = nf_insert_object( 'form' );
+
+	// Loop through our object meta array and insert the elements.
+	if ( ! empty( $object_meta ) ) {
+		foreach( $object_meta as $key => $value ) {
+			// Add our objectmeta.
+			nf_update_object_meta( $form_id, $key, $value );
+		}
+	}
+
+	return $form_id;
+}
+
+/**
+ * Function that gets all objects of a given type.
+ * 
+ * @since 3.0
+ * @return array $results
+ */
+
+function nf_get_objects_by_type( $object_type ) {
 	global $wpdb;
 
-	return nf_get_object_meta( $form_id );
+	// Bail if we don't have an object type.
+	if ( $object_type == '' )
+		return false;
+
+	$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . NF_OBJECTS_TABLE_NAME . " WHERE type = %s", $object_type ), ARRAY_A );
+	
+	return $results;
+}
+
+/**
+ * Function that gets children objects by type and parent id
+ * 
+ * @since 3.0
+ * @param string $parent_id
+ * @param string $type
+ * @return array $children
+ */
+
+function nf_get_object_children( $object_id, $child_type = '', $full_data = true ) {
+	global $wpdb;
+
+	if ( $child_type != '' ) {
+		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_RELATIONSHIPS_TABLE_NAME . " WHERE child_type = %s AND parent_id = %d", $child_type, $object_id ), ARRAY_A);
+	} else {
+		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_RELATIONSHIPS_TABLE_NAME . " WHERE parent_id = %d", $object_id ), ARRAY_A);
+	}
+
+	if ( $full_data ) {
+		$tmp_array = array();
+		foreach( $children as $id ) {
+			$child_id = $id['child_id'];
+			$settings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM " . NF_META_TABLE_NAME . " WHERE object_id = %d", $child_id ), ARRAY_A);
+			if ( ! empty( $settings ) ) {
+				foreach ( $settings as $s ) {
+					$tmp_array[ $child_id ][ $s['meta_key'] ] = $s['meta_value'];
+				}				
+			} else {
+				$tmp_array[ $child_id ] = array();
+			}
+		}
+
+		return $tmp_array;	
+	} else {
+		return $children;
+	}
 }
 
 /**
@@ -708,26 +787,12 @@ function nf_get_object_type( $object_id ) {
  * @return var $meta_value
  */
 
-function nf_get_meta( $object_id, $meta_key ) {
+function nf_get_object_meta_value( $object_id, $meta_key ) {
 	global $wpdb;
 
 	$meta_value = $wpdb->get_row( $wpdb->prepare( "SELECT meta_value FROM ".NF_META_TABLE_NAME." WHERE object_id = %d AND meta_key = %s", $object_id, $meta_key ), ARRAY_A );
 
 	return $meta_value['meta_value'];
-}
-
-/**
- * Acts as a wrapper/alias for nf_get_meta.
- * 
- * @since 3.0
- * @param string $form_id
- * @param string $form_setting
- * @return var $form_value
- */
-
-function nf_get_form_setting( $form_id, $form_setting ) {
-	$form_value = nf_get_meta( $form_id, $form_setting );
-	return $form_value;
 }
 
 /**
@@ -740,7 +805,7 @@ function nf_get_form_setting( $form_id, $form_setting ) {
  * @return string $meta_id
  */
 
-function nf_update_meta( $object_id, $meta_key, $meta_value ) {
+function nf_update_object_meta( $object_id, $meta_key, $meta_value ) {
 	global $wpdb;
 
 	// Check to see if this meta_key/meta_value pair exist for this object_id.
@@ -795,7 +860,7 @@ function nf_insert_object( $type ) {
 }
 
 /**
- * Create a relationship between an object and a form
+ * Create a relationship between two objects
  * 
  * @since 3.0
  * @param int $child_id
@@ -810,31 +875,6 @@ function nf_add_relationship( $child_id, $child_type, $parent_id, $parent_type )
 	// Make sure that our relationship doesn't already exist.
 	$count = $wpdb->query( $wpdb->prepare( 'SELECT id FROM '. NF_RELATIONSHIPS_TABLE_NAME .' WHERE child_id = %d AND parent_id = %d', $child_id, $parent_id ), ARRAY_A );
 	if ( empty( $count ) ) {
-		$wpdb->insert( NF_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $child_id, 'child_type' => $child_type, 'parent_id' => $parent_id ) );
+		$wpdb->insert( NF_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $child_id, 'child_type' => $child_type, 'parent_id' => $parent_id, 'parent_type' => $parent_type ) );
 	}
-}
-
-/**
- * Insert a form. Accepts an array of meta.
- * 
- * @since 3.0
- * @param array $object_meta
- * @return int $form_id
- */
-
-function nf_insert_form( $object_meta = array() ) {
-	global $wpdb;
-	
-	// Insert a new object
-	$form_id = nf_insert_object( 'form' );
-
-	// Loop through our object meta array and insert the elements.
-	if ( ! empty( $object_meta ) ) {
-		foreach( $object_meta as $key => $value ) {
-			// Add our objectmeta.
-			nf_update_meta( $form_id, $key, $value );
-		}
-	}
-
-	return $form_id;
 }

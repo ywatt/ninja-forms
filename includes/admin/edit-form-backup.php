@@ -72,7 +72,7 @@ function nf_admin_edit_form(){
 				<div id="nav-menu-header">
 					<div class="major-publishing-actions">
 						<div class="publishing-action">
-							<a href="#form_settings_modal" rel="modal:open"><input type="button" id="form_settings" class="open-settings-modal button button-secondary" value="<?php _e( 'Form Settings', 'ninja-forms' ); ?>"></a>
+							<a href="#ex1" rel="modal:open"><input type="button" id="form_settings" class="open-settings-modal button button-secondary" value="Form Settings"></a>
 						</div><!-- END .publishing-action -->
 					</div><!-- END .major-publishing-actions -->
 				</div><!-- END .nav-menu-header -->
@@ -80,33 +80,23 @@ function nf_admin_edit_form(){
 					<div id="post-body-content">
 						<h3>Forms Structure</h3>
 						<p>Drag each item into the order you prefer. Click edit to reveal additional options.</p>
-						<?php
-						// Get the fields attached to this form.
-						$fields = nf_get_fields_by_form_id( $form_id );
-						// Loop through the fields.
-						if ( ! empty ( $fields ) ) {
-							foreach ( $fields as $field_id => $settings ) {
-								?>
-								<ul class="ninja-row ninja-drop" data-cols="1" style="padding:2px;" id="2">
-									<li class="ninja-col-1-1" data-size="1-1" id="4x4">
-										<div class="ninja-forms-admin-field label-above open-settings-modal">
-											<label><?php echo $settings['label']; ?></label>
-											<input type="<?php echo $settings['type']; ?>" disabled />
-											<div class="nf-footer-left">
-												<a href="#field_settings_modal" rel="modal:open" class="open-settings-modal" data-field-id="<?php echo $field_id; ?>">Edit</a>
-											</div>
-											<div class="nf-footer-right">
-												<?php echo $settings['type']; ?> - ID : <?php echo $field_id; ?>
-											</div>
-										</div>
-									</li>
-								</ul>
-							<?php
-							}
-						}
-						?>
+						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;" id="1">
 
-						<!--
+						</ul>
+						<ul class="ninja-row ninja-drop" data-cols="1" style="padding:2px;" id="2">
+							<li class="ninja-col-1-1" data-size="1-1" id="4x4">
+								<div class="ninja-forms-admin-field label-above open-settings-modal">
+									<label>First Name</label>
+									<input type="text" disabled />
+									<div class="nf-footer-left">
+										<a href="#" class="open-settings-modal">Edit</a>
+									</div>
+									<div class="nf-footer-right">
+										Single Line Text - ID : 1
+									</div>
+								</div>
+							</li>
+						</ul>
 						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;" id="3">
 
 						</ul>
@@ -277,7 +267,7 @@ function nf_admin_edit_form(){
 						</ul>
 						<ul class="ninja-row ninja-drop" data-cols="0" style="padding:10px;">
 
-						</ul> -->
+						</ul>
 
 					</div><!-- /#post-body-content -->
 				</div><!-- /#post-body -->
@@ -293,7 +283,7 @@ function nf_admin_edit_form(){
 	</div><!-- /#menu-management-liquid -->
 	</div>
 
-  <div id="form_settings_modal" style="display:none;">
+  <div id="ex1" style="display:none;">
   	<a class="media-modal-close" href="#" title="Close">
   		<span class="media-modal-icon"></span>
   	</a>
@@ -301,35 +291,6 @@ function nf_admin_edit_form(){
   		<?php
 	  	$scope = 'form';
 	  	$object_id = $form_id;
-	  	$groups = Ninja_Forms()->admin_settings->get_settings_groups( $scope );
-
-  		echo Ninja_Forms()->admin_settings_pages->get_sidebar_template( $scope, $groups, $object_id );
-  		?>
-		<div class="nf-settings-modal">
-			<div class="nf-settings-title">
-				<h1></h1>
-				<div class="updated" style="display:none"></div>
-			</div>
-
-			<div class="nf-settings-desc-desc"></div>
-
-			<div class="nf-settings-content-wrap">
-				<div class="nf-settings-content" id="nf-settings-content">
-				</div>
-			</div>
-		</div>
-	</div>
-
-  </div>
-
-  <div id="field_settings_modal" style="display:none;">
-  	<a class="media-modal-close" href="#" title="Close">
-  		<span class="media-modal-icon"></span>
-  	</a>
-  	<div class="media-frame wp-core-ui" id="__wp-uploader-id-0">
-  		<?php
-	  	$scope = 'field';
-	  	$object_id = 9;
 	  	$groups = Ninja_Forms()->admin_settings->get_settings_groups( $scope );
 
   		echo Ninja_Forms()->admin_settings_pages->get_sidebar_template( $scope, $groups, $object_id );

@@ -90,8 +90,10 @@ jQuery( document ).ready(function($) {
 					local_mce_init[model_id].elements = model_id;
 
 					local_mce_init[model_id]['setup'] =  function(ed) {
-						ed.onChange.add(function(ed, l) {
-							$( '#' + ed.editorId ).change();
+						ed.onInit.add(function(ed) { 
+							tinyMCE.dom.Event.add(ed.getWin(), "blur", function(e){
+			   					$( '#' + ed.editorId ).change();
+   							}); 
 						});
 					};
 

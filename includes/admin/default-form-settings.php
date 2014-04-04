@@ -135,6 +135,47 @@ function nf_default_form_settings() {
 	);
 	Ninja_Forms()->admin_settings->register_settings( $args );	
 
+	// Field Settings
+
+	// Form Settings
+
+	$args = array(
+		'scope' => 'field',
+		'id' => 'display_settings',
+		'label' => 'Display',
+		'class' => '',
+		'priority' => 'core',
+		'desc' => __( '', 'ninja-forms' ),
+		'display_link' => true,
+	);
+
+	Ninja_Forms()->admin_settings->register_settings_group( $args );
+
+	$args = array(
+		'scope' => 'field',
+		'group' => 'display_settings',
+		'settings' => array(
+			'label' => array(
+				'type' 		=>	'text',
+				'desc' 		=> 	__( 'Field Label', 'ninja-forms' ),
+				'label' 	=> 	__( 'Name', 'ninja-forms' ),
+			),
+			'label_pos' => array(
+				'type' 		=>	'dropdown',
+				'desc' 		=> 	'',
+				'label'		=> 	__( 'Label Position', 'ninja-forms' ),
+				'options' 	=>	array(
+					array( 'name' => 'Above Element', 'value' => 'above' ),
+					array( 'name' => 'Inside Element', 'value' => 'inside' ),
+					array( 'name' => 'Left of Element', 'value' => 'left' ),
+					array( 'name' => 'Right of Element', 'value' => 'right' ),
+					array( 'name' => 'Below Element', 'value' => 'below' ),
+				),
+			),
+		),
+	);
+	Ninja_Forms()->admin_settings->register_settings( $args );
+
 	// Wizard Settings
 
 	$args = array(

@@ -171,6 +171,15 @@ function nf_notification_settings() {
 				'class' => '',
 				'desc' => __( 'What kind of notification would you like to create?', 'ninja-forms' ),
 			),
+			'success_msg' => array(
+				'type' => 'rte',
+				'label' => __( 'Success Message', 'ninja-forms' ),
+				'class' => '',
+				'desc' => __( 'This message will be displayed to the user on-screen after a successful submission', 'ninja-forms' ),
+				'depend' => array(
+					'type' => 'success_message',
+				),
+			),
 			'mailto' => array(
 				'type' => 'radio',
 				'label' => __( 'Send To', 'ninja-forms' ),

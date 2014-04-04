@@ -30,14 +30,15 @@ jQuery(document).ready(function($) {
 		    // Call super with attrs moved to options
 		    Backbone.Model.prototype.save.call(this, attrs, options);
 		    // Re-render our table row when the activate/deactivate is clicked.
-			var settings = {
-					id: attrs.object_id,
-					name: notifications.get( attrs.object_id ).settings.get( 'name' ).get( 'current_value' ),
-					active: notifications.get( attrs.object_id ).settings.get( 'active' ).get( 'current_value' ),
-					type: notifications.get( attrs.object_id ).settings.get( 'type' ).get( 'current_value' ),
-					date_updated: notifications.get( attrs.object_id ).settings.get( 'date_updated' ).get( 'current_value' )
-				};
-		    nfnx.notificationTrView.render( '#notification_tr_' + attrs.object_id, settings );
+			// var settings = {
+			// 		id: attrs.object_id,
+			// 		name: notifications.get( attrs.object_id ).settings.get( 'name' ).get( 'current_value' ),
+			// 		active: notifications.get( attrs.object_id ).settings.get( 'active' ).get( 'current_value' ),
+			// 		type: notifications.get( attrs.object_id ).settings.get( 'type' ).get( 'current_value' ),
+			// 		date_updated: notifications.get( attrs.object_id ).settings.get( 'date_updated' ).get( 'current_value' )
+			// 	};
+			nfnx.notificationTbodyView.render();
+		    //nfnx.notificationTrView.render( '#notification_tr_' + attrs.object_id, settings );
 		}
 	});
 
