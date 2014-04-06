@@ -1160,7 +1160,12 @@ class Ninja_Forms_Processing {
 			$credit_card['number'] = $number;
 			$credit_card['cvc'] = $this->data['extra']['_credit_card_cvc'];
 			$credit_card['name'] = $this->data['extra']['_credit_card_name'];
-			$credit_card['expires'] = $this->data['extra']['_credit_card_expires'];
+			$credit_card['expires'] = $this->data['extra']['_credit_card_expires_month'] 
+				. '/' . $this->data['extra']['_credit_card_expires_year'];
+			
+			$credit_card['expires_month'] = $this->data['extra']['_credit_card_expires_month'];
+			$credit_card['expires_year'] = $this->data['extra']['_credit_card_expires_year'];
+			
 			return $credit_card;
 		}
 	}
