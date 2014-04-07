@@ -80,6 +80,10 @@
 				<td><?php echo size_format( ninja_forms_letters_to_numbers( ini_get('post_max_size') ) ); ?></td>
 			</tr>
 			<tr>
+				<td><?php _e('Max Input Nesting Level','ninja-forms' ); ?>:</td>
+				<td><?php echo ini_get('max_input_nesting_level'); ?></td>
+			</tr>
+			<tr>
 				<td><?php _e('PHP Time Limit','ninja-forms' ); ?>:</td>
 				<td><?php echo ini_get('max_execution_time'); ?></td>
 			</tr>
