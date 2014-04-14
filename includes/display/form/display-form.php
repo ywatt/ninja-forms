@@ -97,11 +97,6 @@ function ninja_forms_page_append_check(){
 
 add_action('wp_head', 'ninja_forms_page_append_check');
 
-function remove_bad_br_tags($content) {
-	$content = str_ireplace( '</label><br />', '</label>', $content );
-	return $content;
-}
-
 function ninja_forms_append_to_page($content){
 	global $ninja_forms_append_page_form_id;
 	$form = '';
@@ -113,8 +108,6 @@ function ninja_forms_append_to_page($content){
 		$form = ninja_forms_return_echo('ninja_forms_display_form', $ninja_forms_append_page_form_id);
 	}
 	$content .= $form;
-	//add_filter( 'the_content', 'remove_bad_br_tags', 99 );
-	//remove_filter( 'the_content', 'wpautop' );
 	return $content;
 }
 
