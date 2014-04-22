@@ -80,7 +80,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Changes:*
 
-* Added some CSS to make forms more responive and cross browser compatible.
+* Added some CSS to make forms more responsive and cross browser compatible.
 
 == Requested Features ==
 
@@ -92,7 +92,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 *Changes:*
 
-* Added some CSS to make forms more responive and cross browser compatible.
+* Added some CSS to make forms more responsive and cross browser compatible.
 
 = 2.6.1 (04/17/2014) =
 
