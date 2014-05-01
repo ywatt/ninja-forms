@@ -406,8 +406,8 @@ function ninja_forms_tab_view_subs(){
 				<input type="hidden" name="_form_id" value="<?php echo $form_id;?>">
 				<?php
 
-				add_filter('ninja_forms_field', 'ninja_forms_edit_sub_default_value', 15, 2);
-				add_filter('ninja_forms_field', 'ninja_forms_edit_sub_hide_fields', 99, 2);
+				add_filter('ninja_forms_field', 'ninja_forms_edit_sub_default_value', 15, 3);
+				add_filter('ninja_forms_field', 'ninja_forms_edit_sub_hide_fields', 99, 3);
 				add_filter( 'ninja_forms_display_form_form_data', 'ninja_forms_edit_sub_remove_ajax' );
 				remove_action('ninja_forms_display_before_fields', 'ninja_forms_display_req_items');
 				remove_action('ninja_forms_display_open_form_tag', 'ninja_forms_display_open_form_tag');
@@ -659,7 +659,7 @@ function ninja_forms_set_save_sub(){
 	$ninja_forms_processing->set_action( 'edit_sub' );
 }
 
-function ninja_forms_edit_sub_default_value($data, $field_id){
+function ninja_forms_edit_sub_default_value( $data, $field_id, $form_id ){
 	$sub_id = absint( $_REQUEST['sub_id'] );
 	$sub_row = ninja_forms_get_sub_by_id($sub_id);
 	$sub_data = $sub_row['data'];
@@ -675,7 +675,7 @@ function ninja_forms_edit_sub_default_value($data, $field_id){
 	return $data;
 }
 
-function ninja_forms_edit_sub_hide_fields($data, $field_id){
+function ninja_forms_edit_sub_hide_fields( $data, $field_id, $form_id ){
 	global $ninja_forms_fields;
 	$field_row = ninja_forms_get_field_by_id($field_id);
 	$field_data = $field_row['data'];

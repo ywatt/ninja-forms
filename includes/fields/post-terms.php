@@ -83,12 +83,12 @@ if ( !function_exists ( 'ninja_forms_register_field_post_terms' ) ) {
 		return $type;
 	}
 
-	function ninja_forms_field_post_terms_display($field_id, $data){
+	function ninja_forms_field_post_terms_display( $field_id, $data, $form_id ){
 		global $ninja_forms_fields;
 
 		$form_row = ninja_forms_get_form_by_field_id($field_id);
 		$form_data = $form_row['data'];
-		$field_class = ninja_forms_get_field_class($field_id);
+		$field_class = ninja_forms_get_field_class( $field_id, $form_id );
 		$field_row = ninja_forms_get_field_by_id( $field_id );
 		$field_type = $field_row['type'];
 		$post_tax = $ninja_forms_fields[$field_type]['tax'];

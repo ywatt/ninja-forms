@@ -4,14 +4,14 @@
  * Also outputs the required symbol if it is set.
 **/
 
-function ninja_forms_display_field_label( $field_id, $data ){
+function ninja_forms_display_field_label( $field_id, $data, $form_id ){
 	global $ninja_forms_fields, $ninja_forms_loading, $ninja_forms_processing;
 
 	$plugin_settings = nf_get_settings();
 
-	if ( isset ( $ninja_forms_loading ) ) {
+	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
-	} else if ( isset ( $ninja_forms_processing ) ) {
+	} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
 		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 	
@@ -63,7 +63,7 @@ function ninja_forms_display_field_label( $field_id, $data ){
 		<label for="ninja_forms_field_<?php echo $field_id;?>" id="ninja_forms_field_<?php echo $field_id;?>_label" class="<?php echo $label_class;?>"><?php echo $label;?> <?php echo $req_span;?>
 		<?php
 		if ( $label_pos != 'left' ) {
-			do_action( 'ninja_forms_display_field_help', $field_id, $data );
+			do_action( 'ninja_forms_display_field_help', $field_id, $data, $form_id );
 		}
 		?>
 		</label>
@@ -71,17 +71,17 @@ function ninja_forms_display_field_label( $field_id, $data ){
 	}
 }
 
-add_action('ninja_forms_display_field_label', 'ninja_forms_display_field_label', 10, 2);
+add_action( 'ninja_forms_display_field_label', 'ninja_forms_display_field_label', 10, 3 );
 
 
 
-function ninja_forms_display_label_inside( $data, $field_id ){
+function ninja_forms_display_label_inside( $data, $field_id, $form_id ){
 	global $ninja_forms_loading, $ninja_forms_processing;
 
-	if ( isset ( $ninja_forms_loading ) ) {
+	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 		$user_value = $ninja_forms_loading->get_field_value( $field_id );
 		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
-	} else if ( isset ( $ninja_forms_processing ) ) {
+	} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
 		$user_value = $ninja_forms_processing->get_field_value( $field_id );
 		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
@@ -106,8 +106,15 @@ function ninja_forms_display_label_inside( $data, $field_id ){
 		$req_symbol = '*';
 	}
 
-	if ( isset ( $data['req'] ) and $data['req'] == 1 and $label_pos == 'inside' ) {
+	if ( isset ( $data['req_symbol_added'] ) ) {
+		$req_symbol_added = $data['req_symbol_added'];
+	} else {
+		$req_symbol_added = 0;
+	}
+
+	if ( isset ( $data['req'] ) and $data['req'] == 1 and $label_pos == 'inside' and $req_symbol_added == 0 ) {
 		$data['label'] .= ' '.$req_symbol;
+		$data['req_symbol_added'] = 1;
 	}
 
 	if ( isset( $data['label'] ) ) {
@@ -121,11 +128,11 @@ function ninja_forms_display_label_inside( $data, $field_id ){
 			$label = strip_tags( $label );
 
 			$data['label'] = $label;			
-			if ( isset ( $ninja_forms_loading ) ) {
+			if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 				if ( !empty( $user_value ) )
 					return $data;
 				$ninja_forms_loading->update_field_value( $field_id, $label );
-			} else {
+			} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
 				if ( $ninja_forms_processing->get_field_value( $field_id ) )
 					return $data;
 				$ninja_forms_processing->update_field_value( $field_id, $label );
@@ -136,4 +143,4 @@ function ninja_forms_display_label_inside( $data, $field_id ){
 	return $data;
 }
 
-add_filter( 'ninja_forms_field', 'ninja_forms_display_label_inside', 5, 2 );
+add_filter( 'ninja_forms_field', 'ninja_forms_display_label_inside', 5, 3 );

@@ -74,12 +74,12 @@ function ninja_forms_register_field_list(){
 
 	ninja_forms_register_field('_list', $args);
 	add_filter( 'ninja_forms_field_wrap_class', 'ninja_forms_field_filter_list_wrap_class', 10, 2 );
-	add_action('ninja_forms_display_after_opening_field_wrap', 'ninja_forms_display_list_type', 10, 2);
+	add_action( 'ninja_forms_display_after_opening_field_wrap', 'ninja_forms_display_list_type', 10, 3 );
 }
 
 add_action('init', 'ninja_forms_register_field_list');
 
-function ninja_forms_display_list_type( $field_id, $data ){
+function ninja_forms_display_list_type( $field_id, $data, $form_id ){
 	$field_row = ninja_forms_get_field_by_id( $field_id );
 	$field_type = $field_row['type'];
 	if( $field_type == '_list' ){
@@ -206,8 +206,14 @@ Label,'',''
 	<?php
 }
 
-function ninja_forms_field_list_display( $field_id, $data ){
-	global $wpdb, $ninja_forms_fields;
+function ninja_forms_field_list_display( $field_id, $data, $form_id ){
+	global $ninja_forms_fields, $ninja_forms_loading, $ninja_forms_processing;
+
+	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
+		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
+	} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
+		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
+	}
 
 	if(isset($data['show_field'])){
 		$show_field = $data['show_field'];
@@ -215,9 +221,8 @@ function ninja_forms_field_list_display( $field_id, $data ){
 		$show_field = true;
 	}
 
-	$field_class = ninja_forms_get_field_class($field_id);
-	$field_row = ninja_forms_get_field_by_id($field_id);
-
+	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
+	
 	$type = $field_row['type'];
 	$type_name = $ninja_forms_fields[$type]['name'];
 
@@ -263,7 +268,7 @@ function ninja_forms_field_list_display( $field_id, $data ){
 		$selected_value = '';
 	}
 
-	$list_options_span_class = apply_filters( 'ninja_forms_display_list_options_span_class', '', $field_id );
+	$list_options_span_class = apply_filters( 'ninja_forms_display_list_options_span_class', '', $field_id, $form_id );
 
 	switch($list_type){
 		case 'dropdown':
@@ -626,7 +631,7 @@ function ninja_forms_field_filter_list_wrap_class( $field_wrap_class, $field_id 
 function ninja_forms_field_filter_list_data( $form_id ){
 	global $ninja_forms_loading, $ninja_forms_processing;
 
-	if ( isset ( $ninja_forms_loading ) ) {
+	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 		$all_fields = $ninja_forms_loading->get_all_fields();
 	} else {
 		return false;
@@ -641,7 +646,7 @@ function ninja_forms_field_filter_list_data( $form_id ){
 	
 	foreach( $all_fields as $field_id => $user_value ) {
 		$tmp_array = array();
-		if ( isset ( $ninja_forms_loading ) ) {
+		if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 			$field = $ninja_forms_loading->get_field_settings( $field_id );
 		} else {
 			// $field = $ninja_forms_processing->get_field_settings( $field_id );
@@ -669,7 +674,7 @@ function ninja_forms_field_filter_list_data( $form_id ){
 					}
 				}
 			}
-			if ( isset ( $ninja_forms_loading ) ) {
+			if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 				if ( $ninja_forms_loading->get_field_settings( $field_id ) ) {
 					$ninja_forms_loading->update_field_value( $field_id, $tmp_array );
 				}

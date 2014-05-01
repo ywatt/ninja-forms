@@ -60,7 +60,7 @@ if ( !function_exists ( 'ninja_forms_register_field_post_tags' ) ) {
 	 * @returns array $data
 	 */
 
-	function ninja_forms_field_post_tags_filter_field( $data, $field_id ){
+	function ninja_forms_field_post_tags_filter_field( $data, $field_id, $form_id ){
 		$field = ninja_forms_get_field_by_id( $field_id );
 		$field_type = $field['type'];
 		if ( isset ( $data['show_help'] ) ) {
@@ -75,12 +75,12 @@ if ( !function_exists ( 'ninja_forms_register_field_post_tags' ) ) {
 		return $data;
 	}
 
-	add_filter( 'ninja_forms_field', 'ninja_forms_field_post_tags_filter_field', 10, 2 );
+	add_filter( 'ninja_forms_field', 'ninja_forms_field_post_tags_filter_field', 10, 3 );
 
-	function ninja_forms_field_post_tags_display($field_id, $data){
+	function ninja_forms_field_post_tags_display( $field_id, $data, $form_id ){
 		global $ninja_forms_processing;
 
-		$field_class = ninja_forms_get_field_class($field_id);
+		$field_class = ninja_forms_get_field_class( $field_id, $form_id );
 		
 		if(isset($data['default_value'])){
 			$default_value = $data['default_value'];
@@ -149,7 +149,7 @@ if ( !function_exists ( 'ninja_forms_register_field_post_tags' ) ) {
 				}
 			}
 			$data['show_help'] = $data['tags_show_help'];
-			do_action( 'ninja_forms_display_field_help', $field_id, $data );
+			do_action( 'ninja_forms_display_field_help', $field_id, $data, $form_id );
 
 			?>
 			<div class="tagsdiv" id="post_tag">

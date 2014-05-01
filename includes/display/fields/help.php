@@ -4,7 +4,7 @@
  *
 **/
 
-function ninja_forms_display_field_help( $field_id, $data ){
+function ninja_forms_display_field_help( $field_id, $data, $form_id ){
 	$plugin_settings = nf_get_settings();
 
 	if( isset( $data['show_help'] ) ){
@@ -28,4 +28,4 @@ function ninja_forms_display_field_help( $field_id, $data ){
 	}
 }	
 
-add_action( 'ninja_forms_display_field_help', 'ninja_forms_display_field_help', 10, 2 );
+add_action( 'ninja_forms_display_field_help', 'ninja_forms_display_field_help', 10, 3 );

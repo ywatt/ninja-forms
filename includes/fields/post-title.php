@@ -45,8 +45,8 @@ if ( !function_exists ( 'ninja_forms_register_field_post_title' ) ) {
 
 	add_action('init', 'ninja_forms_register_field_post_title');
 
-	function ninja_forms_field_post_title_display($field_id, $data){
-		$field_class = ninja_forms_get_field_class($field_id);
+	function ninja_forms_field_post_title_display( $field_id, $data, $form_id ){
+		$field_class = ninja_forms_get_field_class( $field_id, $form_id );
 		
 		if(isset($data['default_value'])){
 			$default_value = $data['default_value'];

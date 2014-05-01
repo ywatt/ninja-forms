@@ -5,12 +5,12 @@
  *
  */
 
-function ninja_forms_filter_restore_progress( $data, $field_id ){
+function ninja_forms_filter_restore_progress( $data, $field_id, $form_id ){
 	global $ninja_forms_loading, $ninja_forms_processing, $ninja_forms_fields;
 
-	if ( isset ( $ninja_forms_loading ) ) {
+	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
-	} else if ( isset ( $ninja_forms_processing ) ) {
+	} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
 		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 	
@@ -49,4 +49,4 @@ function ninja_forms_filter_restore_progress( $data, $field_id ){
 	return $data;
 }
 
-add_filter( 'ninja_forms_field', 'ninja_forms_filter_restore_progress', 8, 2 );
+add_filter( 'ninja_forms_field', 'ninja_forms_filter_restore_progress', 8, 3 );

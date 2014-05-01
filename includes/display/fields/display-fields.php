@@ -8,7 +8,7 @@ function ninja_forms_register_display_fields(){
 	add_action('ninja_forms_display_fields', 'ninja_forms_display_fields', 10, 2);
 }
 
-function ninja_forms_display_fields($form_id){
+function ninja_forms_display_fields( $form_id ){
 	global $ninja_forms_fields, $ninja_forms_loading, $ninja_forms_processing;
 
 	$field_results = ninja_forms_get_fields_by_form_id($form_id);
@@ -16,9 +16,9 @@ function ninja_forms_display_fields($form_id){
 
 	if ( is_array ( $field_results ) AND !empty ( $field_results ) ) {
 		foreach ( $field_results as $field ) {
-			if ( isset ( $ninja_forms_loading ) ) {
+			if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 				$field = $ninja_forms_loading->get_field_settings( $field['id'] );
-			} else if ( isset ( $ninja_forms_processing ) ) {
+			} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
 				$field = $ninja_forms_processing->get_field_settings( $field['id'] );
 			}
 
@@ -57,7 +57,7 @@ function ninja_forms_display_fields($form_id){
 
 
 				//These filters can be used to temporarily modify the settings of a field, i.e. default_value.
-				$data = apply_filters( 'ninja_forms_field', $data, $field_id );
+				$data = apply_filters( 'ninja_forms_field', $data, $field_id, $form_id );
 				//Check the show_field value of our $data array. If it is set to false, don't output the field.
 				if(isset($data['show_field'])){
 					$show_field = $data['show_field'];
@@ -91,59 +91,60 @@ function ninja_forms_display_fields($form_id){
 						$label_pos = $default_label_pos;
 					}
 
-					do_action( 'ninja_forms_display_before_field', $field_id, $data );
+					do_action( 'ninja_forms_display_before_field', $field_id, $data, $form_id );
 
 					//Check to see if display_wrap has been disabled. If it hasn't, show the wrapping DIV.
 					if($display_wrap){
-						$field_wrap_class = ninja_forms_get_field_wrap_class($field_id);
+						$field_wrap_class = ninja_forms_get_field_wrap_class( $field_id, $form_id );
 						$field_wrap_class = apply_filters( 'ninja_forms_field_wrap_class', $field_wrap_class, $field_id );
-						do_action( 'ninja_forms_display_before_opening_field_wrap', $field_id, $data );
+						do_action( 'ninja_forms_display_before_opening_field_wrap', $field_id, $data, $form_id );
 						?>
 						<div class="<?php echo $field_wrap_class;?>" <?php echo $display_style;?> id="ninja_forms_field_<?php echo $field_id;?>_div_wrap" data-visible="<?php echo $visible;?>">
 						<?php
-						do_action( 'ninja_forms_display_after_opening_field_wrap', $field_id, $data );
+						do_action( 'ninja_forms_display_after_opening_field_wrap', $field_id, $data, $form_id );
 					}
 
 					//Check to see if display_label has been disabled. If it hasn't, show the label.
 					if( $display_label ){
 						if( $label_pos == 'left' OR $label_pos == 'above' ){ // Check the label position variable. If it is left or above, show the label.
-							do_action( 'ninja_forms_display_before_field_label', $field_id, $data );
-							do_action( 'ninja_forms_display_field_label', $field_id, $data );
-							do_action( 'ninja_forms_display_after_field_label', $field_id, $data );
+							do_action( 'ninja_forms_display_before_field_label', $field_id, $data, $form_id );
+							do_action( 'ninja_forms_display_field_label', $field_id, $data, $form_id );
+							do_action( 'ninja_forms_display_after_field_label', $field_id, $data, $form_id );
 						}
 					}
 
 					//Check to see if there is a registered display function. If so, call it.
 					if($display_function != ''){
 
-						do_action( 'ninja_forms_display_before_field_function', $field_id, $data );
+						do_action( 'ninja_forms_display_before_field_function', $field_id, $data, $form_id );
 						$arguments['field_id'] = $field_id;
 						$arguments['data'] = $data;
+						$arguments['form_id'] = $form_id;
 						call_user_func_array($display_function, $arguments);
-						do_action( 'ninja_forms_display_after_field_function', $field_id, $data );
+						do_action( 'ninja_forms_display_after_field_function', $field_id, $data, $form_id );
 						if( $label_pos == 'left' OR $label_pos == 'inside'){
-							do_action( 'ninja_forms_display_field_help', $field_id, $data );
+							do_action( 'ninja_forms_display_field_help', $field_id, $data, $form_id );
 						}
 					}
 
 					//Check to see if display_label has been disabled. If it hasn't, show the label.
 					if($display_label){
 						if($label_pos == 'right' OR $label_pos == 'below'){ // Check the label position variable. If it is right or below, show the label.
-							do_action( 'ninja_forms_display_before_field_label', $field_id, $data );
-							do_action( 'ninja_forms_display_field_label', $field_id, $data );
-							do_action( 'ninja_forms_display_after_field_label', $field_id, $data );
+							do_action( 'ninja_forms_display_before_field_label', $field_id, $data, $form_id );
+							do_action( 'ninja_forms_display_field_label', $field_id, $data, $form_id );
+							do_action( 'ninja_forms_display_after_field_label', $field_id, $data, $form_id );
 						}
 					}
 
 					//Check to see if display_wrap has been disabled. If it hasn't close the wrapping DIV
 					if($display_wrap){
-						do_action( 'ninja_forms_display_before_closing_field_wrap', $field_id, $data );
+						do_action( 'ninja_forms_display_before_closing_field_wrap', $field_id, $data, $form_id );
 						?>
 						</div>
 						<?php
-						do_action( 'ninja_forms_display_after_closing_field_wrap', $field_id, $data );
+						do_action( 'ninja_forms_display_after_closing_field_wrap', $field_id, $data, $form_id );
 					}
-					do_action( 'ninja_forms_display_after_field', $field_id, $data );
+					do_action( 'ninja_forms_display_after_field', $field_id, $data, $form_id );
 				}
 			}
 		}
@@ -155,16 +156,16 @@ function ninja_forms_display_fields($form_id){
  *
 **/
 
-function ninja_forms_get_field_wrap_class($field_id){
+function ninja_forms_get_field_wrap_class( $field_id, $form_id ){
 	global $ninja_forms_loading, $ninja_forms_processing;
 	$field_wrap_class = 'field-wrap';
-	if ( isset ( $ninja_forms_loading ) ) {
+
+	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
-	} else {
+	} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
 		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 
-	$form_id = $field_row['form_id'];
 	$data = $field_row['data'];
 
 	if ( isset ( $field_row['type'] ) ) {
@@ -214,21 +215,21 @@ function ninja_forms_get_field_wrap_class($field_id){
 }
 
 
-function ninja_forms_get_field_class( $field_id ) {
+function ninja_forms_get_field_class( $field_id, $form_id = '' ) {
 	global $ninja_forms_loading, $ninja_forms_processing;
 
-	if ( isset ( $ninja_forms_loading ) ) {
+	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
-	} else {
+	} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
 		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 	
 	$field_data = $field_row['data'];
-	$field_data = apply_filters( 'ninja_forms_field', $field_data, $field_id );
+	$field_data = apply_filters( 'ninja_forms_field', $field_data, $field_id, $form_id );
 
-	if ( isset ( $ninja_forms_loading ) ) {
+	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 		$field_class = $ninja_forms_loading->get_field_setting( $field_id, 'field_class' );
-	} else {
+	} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
 		$field_class = $ninja_forms_processing->get_field_setting( $field_id, 'field_class' );
 	}
 
