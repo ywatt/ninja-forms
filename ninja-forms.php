@@ -34,9 +34,15 @@ class Ninja_Forms {
 
 	/**
 	 * @var Ninja_Forms
-	 * @since 1.0
+	 * @since 3.0
 	 */
 	private static $instance;
+
+	/**
+	 * @var registered field types
+	 * @since 3.0
+	 */
+	public $registered_field_types;
 
 	/**
 	 * Main Ninja_Forms Instance
@@ -54,15 +60,70 @@ class Ninja_Forms {
 			self::$instance = new Ninja_Forms;
 			self::$instance->setup_constants();
 			self::$instance->includes();
-
+			self::$instance->plugin_settings = self::$instance->get_plugin_settings();
 			if ( is_admin() ) {
 				self::$instance->admin = new NF_Admin();				
 			}
+			self::$instance->register = new NF_Register();
+			// Set our field_types var to ''. We'll instantiate the class for this on the init hook.
+			self::$instance->field_types = '';
 
 			register_activation_hook( __FILE__, array( self::$instance, 'activation' ) );
+
+			// Register our default field classes.
+			self::$instance->register->field( 'checkbox', 'NF_Field_Checkbox' );
+			self::$instance->register->field( 'text', 'NF_Field_Text' );
+			self::$instance->register->field( 'date', 'NF_Field_Date' );
+			self::$instance->register->field( 'password', 'NF_Field_Password' );
+			self::$instance->register->field( 'submit', 'NF_Field_Submit' );
+
+			// Run an action hook so that third-party devs can register their own field types.
+			do_action( 'nf_register_field_types', self::$instance );
+			
+			self::$instance->field_types = new NF_Field_Types();
+			// The form_var variable won't be interacted with directly.
+			// Instead, the form( $form_id ) function will act as a wrapper for it.
+			self::$instance->form_var = new NF_Form();
+			// The field_var variable won't be interacted with directly.
+			// Instead, the field( $field_id ) function will act as a wrapper for it.
+			self::$instance->field_var = new NF_Field();
+
+			// Add our processing class.
+			self::$instance->processing = new NF_Processing();
+
 		}
 
 		return self::$instance;
+	}
+
+	/**
+	 * Function that acts as a wrapper for our field_var - NF_Field() class.
+	 * It sets the field_id and then returns the instance, which is now using the
+	 * proper field id
+	 * 
+	 * @access public
+	 * @param int $field_id
+	 * @since 3.0
+	 * @return object self::$instance->field_var
+	 */
+	public function field( $field_id ) {
+		self::$instance->field_var->set_field( $field_id );
+		return self::$instance->field_var;
+	}
+
+	/**
+	 * Function that acts as a wrapper for our form_var - NF_Form() class.
+	 * It sets the form_id and then returns the instance, which is now using the
+	 * proper form id
+	 * 
+	 * @access public
+	 * @param int $form_id
+	 * @since 3.0
+	 * @return object self::$instance->form_var
+	 */
+	public function form( $form_id ) {
+		self::$instance->form_var->set_form( $form_id );
+		return self::$instance->form_var;
 	}
 
 	/**
@@ -166,14 +227,40 @@ class Ninja_Forms {
 		if ( is_admin() ) {
 			require_once( NF_PLUGIN_DIR . 'classes/admin.php' );
 		}
-		
+
+		require_once( NF_PLUGIN_DIR . 'includes/functions.php' );
+
+		require_once( NF_PLUGIN_DIR . 'classes/register.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/field-types.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/field.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/processing.php' );
+
+		// include our default field classes
+		require_once( NF_PLUGIN_DIR . 'classes/fields/field.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/text.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/checkbox.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/date.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/password.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/submit.php' );
+	}
+
+	/**
+	 * Get our current settings values
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return array $settings
+	 */
+	public function get_plugin_settings() {
+		return apply_filters( 'nf_get_settings', get_option( 'nf_settings' ) );
 	}
 
 	/**
 	 * Upon activation, setup our super admin
 	 *
 	 * @access public
-	 * @since 1.0
+	 * @since 3.0
 	 * @return void
 	 */
 	public function activation() {
