@@ -4,7 +4,12 @@
  *
 **/
 
-function ninja_forms_add_field_desc( $field_id, $data, $form_id ){
+// add_action( 'init', 'ninja_forms_init_field_desc' );
+// function ninja_forms_init_field_desc() {
+// 	add_action( 'ninja_forms_display_before_field', 'ninja_forms_add_field_desc', 10, 2 );
+// }
+
+function ninja_forms_add_field_desc( $field_id, $data ){
 	$plugin_settings = nf_get_settings();
 
 	if ( isset( $data['desc_pos'] ) ) {
@@ -13,29 +18,37 @@ function ninja_forms_add_field_desc( $field_id, $data, $form_id ){
 		$desc_pos = 'none';
 	}
 
-	remove_action( 'ninja_forms_display_after_opening_field_wrap', 'ninja_forms_display_field_desc', 10, 3 );
-	remove_action( 'ninja_forms_display_before_field_label', 'ninja_forms_display_field_desc', 10, 3 );
-	remove_action( 'ninja_forms_display_after_field_label', 'ninja_forms_display_field_desc', 10, 3 );
-	remove_action( 'ninja_forms_display_before_closing_field_wrap', 'ninja_forms_display_field_desc', 10, 3 );
-
-	switch ( $desc_pos ) {
-		case 'before_everything':
-			add_action( 'ninja_forms_display_after_opening_field_wrap', 'ninja_forms_display_field_desc', 10, 3 );
-			break;
-		case 'before_label':
-			add_action( 'ninja_forms_display_before_field_label', 'ninja_forms_display_field_desc', 10, 3 );
-			break;
-		case 'after_label':
-			add_action( 'ninja_forms_display_after_field_label', 'ninja_forms_display_field_desc', 10, 3 );
-			break;
-		case 'after_everything':
-			add_action( 'ninja_forms_display_before_closing_field_wrap', 'ninja_forms_display_field_desc', 10, 3 );
-			break;
+	if ( $desc_pos == 'none' ) {
+		remove_action( 'ninja_forms_display_after_opening_field_wrap', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_before_field_label', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_after_field_label', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_before_closing_field_wrap', 'ninja_forms_display_field_desc', 10, 2 );
+	} elseif ( $desc_pos == 'before_everything' ) {
+		add_action( 'ninja_forms_display_after_opening_field_wrap', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_before_field_label', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_after_field_label', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_before_closing_field_wrap', 'ninja_forms_display_field_desc', 10, 2 );
+	} elseif ( $desc_pos == 'before_label' ) {
+		add_action( 'ninja_forms_display_before_field_label', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_after_field_label', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_before_closing_field_wrap', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_after_opening_field_wrap', 'ninja_forms_display_field_desc', 10, 2 );
+	} elseif ( $desc_pos == 'after_label' ) {
+		add_action( 'ninja_forms_display_after_field_label', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_before_field_label', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_before_closing_field_wrap', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_after_opening_field_wrap', 'ninja_forms_display_field_desc', 10, 2 );
+	} elseif ( $desc_pos == 'after_everything' ) {
+		add_action( 'ninja_forms_display_before_closing_field_wrap', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_before_field_label', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_after_field_label', 'ninja_forms_display_field_desc', 10, 2 );
+		remove_action( 'ninja_forms_display_after_opening_field_wrap', 'ninja_forms_display_field_desc', 10, 2 );
 	}
-}
-add_action( 'ninja_forms_display_before_field', 'ninja_forms_add_field_desc', 10, 3 );
 
-function ninja_forms_display_field_desc( $field_id, $data, $form_id ){
+}
+add_action( 'ninja_forms_display_before_field', 'ninja_forms_add_field_desc', 10, 2 );
+
+function ninja_forms_display_field_desc( $field_id, $data ){
 	$plugin_settings = nf_get_settings();
 	
 	if ( ( isset( $data['show_desc'] ) and $data['show_desc'] == 1 ) and isset( $data['desc_text'] ) ) {

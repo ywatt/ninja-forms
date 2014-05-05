@@ -75,7 +75,7 @@ function ninja_forms_field_spam_edit($field_id, $data){
 	<?php
 }
 
-function ninja_forms_field_spam_display( $field_id, $data, $form_id ){
+function ninja_forms_field_spam_display($field_id, $data){
 	if(isset($data['default_value'])){
 		$default_value = $data['default_value'];
 	}else{
@@ -88,7 +88,7 @@ function ninja_forms_field_spam_display( $field_id, $data, $form_id ){
 		$show_field = true;
 	}
 
-	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
+	$field_class = ninja_forms_get_field_class($field_id);
 	if(isset($data['label_pos'])){
 		$label_pos = $data['label_pos'];
 	}else{

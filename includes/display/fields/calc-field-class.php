@@ -24,7 +24,7 @@ function ninja_forms_calc_listen_field_class( $form_id ) {
 		}
 
 		$field_data = $field_row['data'];
-		$field_data = apply_filters( 'ninja_forms_field', $field_data, $field_id, $form_id );
+		$field_data = apply_filters( 'ninja_forms_field', $field_data, $field_id );
 		$calc_listen = '';
 
 		$sub_total = false;
@@ -91,11 +91,11 @@ function ninja_forms_calc_listen_field_class( $form_id ) {
 			}
 		}
 
-		if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ){
+		if ( isset ( $ninja_forms_loading ) ){
 			$field_class = $ninja_forms_loading->get_field_setting( $field_id, 'field_class' );
 			$field_class .= ' '.$calc_listen;
 			$ninja_forms_loading->update_field_setting( $field_id, 'field_class', $field_class );
-		} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
+		} else {
 			$field_class = $ninja_forms_processing->get_field_setting( $field_id, 'field_class' );
 			$field_class .= ' '.$calc_listen;
 			$ninja_forms_processing->update_field_setting( $field_id, 'field_class', $field_class );

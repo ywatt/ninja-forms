@@ -142,16 +142,20 @@ function ninja_forms_display_form( $form_id = '' ){
 		do_action( 'ninja_forms_display_pre_init', $form_id );
 		do_action( 'ninja_forms_display_init', $form_id );
 
-		if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
+		if ( isset ( $ninja_forms_loading ) ) {
 			$ajax = $ninja_forms_loading->get_form_setting( 'ajax' );
-			$logged_in = $ninja_forms_loading->get_form_setting( 'logged_in' );		
-		} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
+		} else {
 			$ajax = $ninja_forms_processing->get_form_setting( 'ajax' );
-			$logged_in = $ninja_forms_processing->get_form_setting( 'logged_in' );		
 		}
 
 		if ( !$ajax ) {
 			$ajax = 0;
+		}
+
+		if ( isset ( $ninja_forms_loading ) ) {
+			$logged_in = $ninja_forms_loading->get_form_setting( 'logged_in' );
+		} else {
+			$logged_in = $ninja_forms_processing->get_form_setting( 'logged_in' );
 		}
 
 		if ( !$logged_in ) {

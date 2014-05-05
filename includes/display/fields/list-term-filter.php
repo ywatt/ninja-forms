@@ -9,16 +9,16 @@
 
 // Make sure that this function isn't already defined.
 if ( !function_exists ( 'ninja_forms_field_filter_populate_term' ) ) {
-    function ninja_forms_field_filter_populate_term( $data, $field_id, $form_id ){
+    function ninja_forms_field_filter_populate_term( $data, $field_id ){
         global $post, $ninja_forms_loading, $ninja_forms_processing;
 
         $add_field = apply_filters( 'ninja_forms_use_post_fields', false );
         if ( !$add_field )
             return $data;
 
-        if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
+        if ( isset ( $ninja_forms_loading ) ) {
             $field_row = $ninja_forms_loading->get_field_settings( $field_id );
-        } else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
+        } else if ( isset ( $ninja_forms_processing ) ) {
             $field_row = $ninja_forms_processing->get_field_settings( $field_id );
         }
         
@@ -77,5 +77,5 @@ if ( !function_exists ( 'ninja_forms_field_filter_populate_term' ) ) {
         return $data;
     }
 
-    add_filter( 'ninja_forms_field', 'ninja_forms_field_filter_populate_term', 11, 3 );
+    add_filter( 'ninja_forms_field', 'ninja_forms_field_filter_populate_term', 11, 2 );
 }
