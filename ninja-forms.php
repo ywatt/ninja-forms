@@ -90,6 +90,8 @@ class Ninja_Forms {
 
 			// Add our processing class.
 			self::$instance->processing = new NF_Processing();
+			// Add our submission class.
+			self::$instance->subs = new NF_Subs();
 
 		}
 
@@ -235,6 +237,7 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/field.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/processing.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/subs.php' );
 
 		// include our default field classes
 		require_once( NF_PLUGIN_DIR . 'classes/fields/field.php' );
