@@ -183,6 +183,7 @@ function nf_get_object_meta( $object_id ) {
 
 	$tmp_array = array();
 	$settings = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . NF_META_TABLE_NAME . ' WHERE object_id = %d', $object_id ), ARRAY_A);
+
 	if ( is_array( $settings ) ) {
 		foreach( $settings as $setting ) {
 			$tmp_array[ $setting['meta_key'] ] = $setting['meta_value'];

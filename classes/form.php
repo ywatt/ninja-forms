@@ -75,11 +75,13 @@ class NF_Form {
 		// Set our current form id.
 		$this->form_id = $form_id;
 		// Check to see if we've already gotten our settings from the database.
+		
 		if ( ! isset ( $this->settings[ $form_id ] ) ) {
 			// Get our form settings from the database.
-			$this->settings[ $form_id ] = nf_get_object_meta( $form_id );
+			$this->settings[ $form_id ] = nf_get_form_settings( $form_id );
 			// Get an of all of our fields.
 			$this->settings[ $form_id ]['fields'] = nf_get_fields_by_form_id( $this->form_id, false );
+			
 			if ( is_array( $this->settings[ $form_id ]['fields'] ) ) {
 				foreach ( $this->settings[ $form_id ]['fields'] as $field ) {
 					$key = nf_get_object_meta_value( $field, 'key' );

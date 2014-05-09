@@ -121,6 +121,8 @@ class NF_Admin {
 		echo "</strong>";
 
 		var_dump( Ninja_Forms()->field( 9 )->get_value() );
+
+		Ninja_Forms()->sub( 4 )->add_value( 2, 'test' );
 	}
 
 	/**

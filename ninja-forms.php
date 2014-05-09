@@ -91,7 +91,7 @@ class Ninja_Forms {
 			// Add our processing class.
 			self::$instance->processing = new NF_Processing();
 			// Add our submission class.
-			self::$instance->subs = new NF_Subs();
+			self::$instance->subs_var = new NF_Subs();
 
 		}
 
@@ -126,6 +126,21 @@ class Ninja_Forms {
 	public function form( $form_id ) {
 		self::$instance->form_var->set_form( $form_id );
 		return self::$instance->form_var;
+	}
+
+	/**
+	 * Function that acts as a wrapper for our subs_var - NF_Subs() class.
+	 * It sets the sub_id and then returns the instance, which is now using the
+	 * proper sub id
+	 * 
+	 * @access public
+	 * @param int $form_id
+	 * @since 3.0
+	 * @return object self::$instance->form_var
+	 */
+	public function sub( $sub_id ) {
+		self::$instance->subs_var->set_sub( $sub_id );
+		return self::$instance->subs_var;
 	}
 
 	/**
