@@ -45,9 +45,7 @@ class NF_Field_Password extends NF_Field_Base {
 	public function validate() {
 		// Check to make sure that the password fields match.
 		if ( $this->value != $_POST['password_' . $this->field_id ] )
-			return false;
-		else
-			return true;
+			Ninja_Forms()->field( $this->field_id )->add_error( 'mismatch', __( 'Passwords must match', 'ninja-forms' ) );
 	}
 
 }

@@ -30,6 +30,12 @@ class NF_Form {
 	var $field_keys = array();
 
 	/**
+	 * @var errors - Form errors
+	 * @since 3.0
+	 */
+	var $errors = array();
+
+	/**
 	 * Get things started
 	 * 
 	 * @access public
@@ -49,7 +55,7 @@ class NF_Form {
 	 */
 	public function render() {
 		echo '<h2>' . $this->settings[ $this->form_id ]['name'] . '</h2>';
-		echo '<form id="" action="" method="post" enctype="multipart/form-data">';
+		echo '<form id="nf_form_' . $this->form_id . '" action="" method="post" enctype="multipart/form-data">';
 		echo '<input type="hidden" name="form_id" value="' . $this->form_id . '" />';
 		echo '<input type="hidden" name="nf_submitted" value="1" />';
 		wp_nonce_field( 'nf_submit', 'nf_form_' . $this->form_id );
@@ -75,7 +81,6 @@ class NF_Form {
 		// Set our current form id.
 		$this->form_id = $form_id;
 		// Check to see if we've already gotten our settings from the database.
-		
 		if ( ! isset ( $this->settings[ $form_id ] ) ) {
 			// Get our form settings from the database.
 			$this->settings[ $form_id ] = nf_get_form_settings( $form_id );
@@ -123,6 +128,14 @@ class NF_Form {
 		}
 	}
 
+	public function get_fields() {
+		if ( isset ( $this->settings[ $this->form_id ][ 'fields' ] ) ) {
+			return $this->settings[ $this->form_id ][ 'fields' ];
+		} else {
+			return false;
+		}
+	}
+
 	/**
 	 * Update a form setting (this doesn't update anything in the database)
 	 * Changes are only applied to this object.
@@ -142,14 +155,16 @@ class NF_Form {
 	}
 
 	/**
-	 * Function that allows the user to interact with a field by its key name
+	 * Function that allows the user to interact with a field by its key name or id
 	 * 
 	 * @access public
 	 * @since 3.0
 	 * @return object
 	 */
 	public function field( $key ) {
-		if ( isset ( $this->field_keys[ $this->form_id ][ $key ] ) ) {
+		if ( isset ( Ninja_Forms()->field_var->settings[ $key ] ) ) {
+			return Ninja_Forms()->field( $key );
+		} else if ( isset ( $this->field_keys[ $this->form_id ][ $key ] ) ) {
 			return Ninja_Forms()->field( $this->field_keys[ $this->form_id ][ $key ] );
 		} else {
 			return false;

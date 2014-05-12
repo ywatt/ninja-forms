@@ -63,7 +63,13 @@ class NF_Subs {
 	 * @return int $sub_id
 	 */
 	public function create_sub() {
-		echo "Create Sub";
+		$post = array(
+		  'post_status'    => 'publish',
+		  'post_type'      => 'nf_sub'
+		);
+		$sub_id = wp_insert_post( $post );
+		$this->sub_id = $sub_id;
+		return $sub_id;
 	}
 
 	/**
@@ -73,8 +79,23 @@ class NF_Subs {
 	 * @since 3.0
 	 * @return bool
 	 */
-	public function add_value( $field_id, $value ) {
-		echo "SUB ID: " . $this->sub_id;
+	public function add_value( $meta_key, $value ) {
+		if ( update_post_meta( $this->sub_id, $meta_key, $value ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Get a submitted value from our submission by field id
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return mixed
+	 */
+	public function get_value( $meta_key ) {
+		return get_post_meta( $this->sub_id, $meta_key, true );
 	}
 
 	/**

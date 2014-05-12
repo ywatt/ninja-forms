@@ -108,21 +108,25 @@ class NF_Admin {
 		//Ninja_Forms()->form( 1 )->update_setting( 'name', 'Your First Name' );
 		Ninja_Forms()->form( 1 )->render();
 
-		echo "<br><br><br>";
-		echo "RENDER A FIELD BY KEY NAME";
+		// echo "<br><br><br>";
+		// echo "RENDER A FIELD BY KEY NAME";
 
-		Ninja_Forms()->form( 1 )->field( 'firstname' )->render();
+		// Ninja_Forms()->form( 1 )->field( 'firstname' )->render();
 
-		echo "<br><br><br>";
-		echo "GET A FIELD SETTING BY KEY NAME: ";
-		echo "<strong>";
+		// echo "<br><br><br>";
+		// echo "GET A FIELD SETTING BY KEY NAME: ";
+		// echo "<strong>";
 
-		print_r( Ninja_Forms()->form( 1 )->field( 'firstname' )->get_setting( 'label' ) );
-		echo "</strong>";
+		// print_r( Ninja_Forms()->form( 1 )->field( 'firstname' )->get_setting( 'label' ) );
+		// echo "</strong>";
 
-		var_dump( Ninja_Forms()->field( 9 )->get_value() );
+		// var_dump( Ninja_Forms()->field( 9 )->get_value() );
 
-		Ninja_Forms()->sub( 4 )->add_value( 2, 'test' );
+		//var_dump( Ninja_Forms()->field( 9 )->type->add_to_sub );
+
+		echo "<pre>";
+		print_r( Ninja_Forms()->form( 1 )->field( 'lastname' )->get_value() );
+		echo "</pre>";
 	}
 
 	/**

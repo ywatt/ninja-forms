@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles the output of fields and interacting with them.
+ * Handles the output of fields and interacting with them during rendering and processing.
  *
  * @package     Ninja Forms
  * @subpackage  Classes/Form
@@ -42,6 +42,13 @@ class NF_Field {
 	var $errors = array();
 
 	/**
+	 * @var type - Acts as a wrapper for the field type class so that methods and variables
+	 * can be called from the NF_Field_Base (or a child class) like: Ninja_Forms()->field( 4 )->type->add_sub_value.
+	 * @since 3.0
+	 */
+	var $type;
+
+	/**
 	 * Get things running.
 	 * 
 	 * @access public
@@ -79,9 +86,12 @@ class NF_Field {
 		
 		$this->field_type = $this->settings[ $field_id ]['type'];
 		$field_type = $this->field_type;
+		$this->type = Ninja_Forms()->field_types->$field_type;
+
 		// Now that we have our field settings, let's set our field_type field id.
 		// This means that when we call the render() function later, it knows which field_id to use when rendering.
-		Ninja_Forms()->field_types->$field_type->set_field( $field_id );
+		$this->type->set_field( $field_id );
+		
 	}
 
 	/**
@@ -92,9 +102,8 @@ class NF_Field {
 	 * @return void
 	 */
 	public function render() {
-		$field_type = $this->field_type;
 		// Call our field_type render() function. We've already told it which field_id we want to render with.
-		Ninja_Forms()->field_types->$field_type->render();
+		$this->type->render();
 	}
 
 	/**
@@ -199,6 +208,17 @@ class NF_Field {
 	}
 
 	/**
+	 * Required validation
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return bool
+	 */
+	public function req_validation() {
+		return $this->type->req_validation();
+	}	
+
+	/**
 	 * Validate the field
 	 * 
 	 * @access public
@@ -206,8 +226,7 @@ class NF_Field {
 	 * @return bool
 	 */
 	public function validate() {
-		$field_type = $this->field_type;
-		return Ninja_Forms()->field_types->$field_type->validate();
+		return $this->type->validate();
 	}
 
 }

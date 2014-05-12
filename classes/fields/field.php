@@ -66,6 +66,12 @@ class NF_Field_Base {
 	var $placeholder = '';
 
 	/**
+	 * @var add_to_sub
+	 * @since 3.0
+	 */
+	var $add_to_sub = true;
+
+	/**
 	 * Get things started
 	 * 
 	 * @access public
@@ -131,7 +137,7 @@ class NF_Field_Base {
 	 * @return void
 	 */
 	public function render_element() {
-
+		// This line left intentionally blank.
 	}
 
 	/**
@@ -149,21 +155,47 @@ class NF_Field_Base {
 			$this->$setting = $value;
 		}
 		$this->value = Ninja_Forms()->field_var->values[ $field_id ];
+		$this->setup();
 	}
 
 	/**
-	 * Function that validates our field input.
+	 * Setup our class for use.
+	 * This function should be overwritten by child classes that need specific
+	 * setup for each field id.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function setup() {
+		// This line left intentionally blank.
+	}
+
+	/**
+	 * Function that validates our field input if it is set to required.
 	 * 
 	 * @access public
 	 * @since 3.0
 	 * @return bool $return
 	 */
-	public function validate() {
+	public function req_validation() {
 		if ( $this->value === '' ) {
 			return false;
 		} else {
 			return true;
 		}
+	}
+
+	/**
+	 * Function that validates our field.
+	 * Should be overwritten in child classes.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function validate() {
+		// This line left intentionally blank.
 	}
 
 }

@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class NF_Field_Submit extends NF_Field_Base {
 
 	var $label_pos = 'none';
+	var $add_to_sub = false;
 
 	public function render_element() {
 		$html = '<input type="submit" name="submit" value="' . $this->label . '" />';

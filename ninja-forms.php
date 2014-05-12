@@ -76,6 +76,8 @@ class Ninja_Forms {
 			self::$instance->register->field( 'date', 'NF_Field_Date' );
 			self::$instance->register->field( 'password', 'NF_Field_Password' );
 			self::$instance->register->field( 'submit', 'NF_Field_Submit' );
+			self::$instance->register->field( 'dropdown', 'NF_Field_Dropdown' );
+			self::$instance->register->field( 'radio', 'NF_Field_Radio' );
 
 			// Run an action hook so that third-party devs can register their own field types.
 			do_action( 'nf_register_field_types', self::$instance );
@@ -108,7 +110,7 @@ class Ninja_Forms {
 	 * @since 3.0
 	 * @return object self::$instance->field_var
 	 */
-	public function field( $field_id ) {
+	public function field( $field_id = '' ) {
 		self::$instance->field_var->set_field( $field_id );
 		return self::$instance->field_var;
 	}
@@ -123,7 +125,7 @@ class Ninja_Forms {
 	 * @since 3.0
 	 * @return object self::$instance->form_var
 	 */
-	public function form( $form_id ) {
+	public function form( $form_id = '' ) {
 		self::$instance->form_var->set_form( $form_id );
 		return self::$instance->form_var;
 	}
@@ -138,7 +140,7 @@ class Ninja_Forms {
 	 * @since 3.0
 	 * @return object self::$instance->form_var
 	 */
-	public function sub( $sub_id ) {
+	public function sub( $sub_id = '' ) {
 		self::$instance->subs_var->set_sub( $sub_id );
 		return self::$instance->subs_var;
 	}
@@ -182,7 +184,7 @@ class Ninja_Forms {
 
 		// Plugin version
 		if ( ! defined( 'NF_VERSION' ) ) {
-			define( 'NF_PLUGIN_VERSION', '1.0' );
+			define( 'NF_PLUGIN_VERSION', '3.0' );
 		}
 
 		// Plugin Folder Path
@@ -246,6 +248,7 @@ class Ninja_Forms {
 		}
 
 		require_once( NF_PLUGIN_DIR . 'includes/functions.php' );
+		require_once( NF_PLUGIN_DIR . 'includes/shortcodes.php' );
 
 		require_once( NF_PLUGIN_DIR . 'classes/register.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/field-types.php' );
@@ -261,6 +264,9 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/fields/date.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/password.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/submit.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/list.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/dropdown.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/radio.php' );
 	}
 
 	/**

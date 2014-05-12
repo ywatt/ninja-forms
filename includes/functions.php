@@ -84,6 +84,26 @@ function nf_get_field_type( $field_id ) {
 }
 
 /**
+ * Get a count of submissions for a form
+ * 
+ * @since 3.0
+ * @param int $post_id
+ * @return int $count
+ */
+ function nf_get_sub_count( $form_id, $post_status = 'publish' ) {
+ 	$args = array(
+	    'meta_key' => 'form_id',
+	    'meta_value' => $form_id,
+	    'post_type' => 'nf_sub',
+	    'posts_per_page' => 999999,
+	    'post_status' => $post_status,
+	);
+	$posts = get_posts( $args );
+
+	return count( $posts );
+ }
+
+/**
  * Insert a form. Accepts an array of meta.
  * Uses both nf_insert_object() and nf_update_object_meta();
  * 

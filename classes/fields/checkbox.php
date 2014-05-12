@@ -17,7 +17,7 @@ class NF_Field_Checkbox extends NF_Field_Base {
 	var $label_pos = 'right';
 
 	public function render_element() {
-		$html = '<input type="hidden" name="' . $this->element_id . '" value="">';
+		$html = '<input type="hidden" name="' . $this->element_id . '" value="0">';
 		$html .= '<input type="checkbox" name="' . $this->element_id . '" value="1"' . checked( 1, $this->value, false ) . '>';
 		echo $html;
 	}
