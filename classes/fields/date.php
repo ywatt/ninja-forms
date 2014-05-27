@@ -18,4 +18,35 @@ class NF_Field_Date extends NF_Field_Text {
 	 */
 	var $class = 'date';
 
+	/**
+	 * Get things started.
+	 * Set our nicename.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function __construct() {
+		$this->nicename = __( 'Date', 'ninja-forms' );	
+	}
+
+	public function render_element() {
+		if ( $this->datepicker == 1 ) {
+			$this->class = 'datepicker';
+		}
+		parent::render_element();
+	}
+
+	/**
+	 * Output our disabled element for the fields list.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function field_list_element() {
+		$html ='<input type="text" class="widefat" value="dd/mm/yyyy" disabled>';
+		echo $html;
+	}
+
 }

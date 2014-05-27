@@ -61,9 +61,7 @@ class Ninja_Forms {
 			self::$instance->setup_constants();
 			self::$instance->includes();
 			self::$instance->plugin_settings = self::$instance->get_plugin_settings();
-			if ( is_admin() ) {
-				self::$instance->admin = new NF_Admin();				
-			}
+			
 			self::$instance->register = new NF_Register();
 			// Set our field_types var to ''. We'll instantiate the class for this on the init hook.
 			self::$instance->field_types = '';
@@ -72,12 +70,26 @@ class Ninja_Forms {
 
 			// Register our default field classes.
 			self::$instance->register->field( 'checkbox', 'NF_Field_Checkbox' );
+			self::$instance->register->field( 'checkbox_list', 'NF_Field_Checkbox_List' );
 			self::$instance->register->field( 'text', 'NF_Field_Text' );
+			self::$instance->register->field( 'textarea', 'NF_Field_Textarea' );
 			self::$instance->register->field( 'date', 'NF_Field_Date' );
 			self::$instance->register->field( 'password', 'NF_Field_Password' );
 			self::$instance->register->field( 'submit', 'NF_Field_Submit' );
 			self::$instance->register->field( 'dropdown', 'NF_Field_Dropdown' );
+			self::$instance->register->field( 'multi-select', 'NF_Field_Multi_Select' );
 			self::$instance->register->field( 'radio', 'NF_Field_Radio' );
+			self::$instance->register->field( 'email', 'NF_Field_Email' );
+			self::$instance->register->field( 'phone', 'NF_Field_Phone' );
+			self::$instance->register->field( 'hr', 'NF_Field_Hr' );
+			self::$instance->register->field( 'html', 'NF_Field_Html' );
+			self::$instance->register->field( 'firstname', 'NF_Field_Firstname' );
+			self::$instance->register->field( 'lastname', 'NF_Field_Lastname' );
+			self::$instance->register->field( 'address', 'NF_Field_Address' );
+			self::$instance->register->field( 'city', 'NF_Field_City' );
+			self::$instance->register->field( 'state', 'NF_Field_State' );
+			self::$instance->register->field( 'postcode', 'NF_Field_Postcode' );
+			self::$instance->register->field( 'country', 'NF_Field_Country' );
 
 			// Run an action hook so that third-party devs can register their own field types.
 			do_action( 'nf_register_field_types', self::$instance );
@@ -94,6 +106,10 @@ class Ninja_Forms {
 			self::$instance->processing = new NF_Processing();
 			// Add our submission class.
 			self::$instance->subs_var = new NF_Subs();
+
+			if ( is_admin() ) {
+				self::$instance->admin = new NF_Admin();				
+			}
 
 		}
 
@@ -245,6 +261,7 @@ class Ninja_Forms {
 	private function includes() {
 		if ( is_admin() ) {
 			require_once( NF_PLUGIN_DIR . 'classes/admin.php' );
+			require_once( NF_PLUGIN_DIR . 'classes/all-forms-table.php' );
 		}
 
 		require_once( NF_PLUGIN_DIR . 'includes/functions.php' );
@@ -258,15 +275,30 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/subs.php' );
 
 		// include our default field classes
-		require_once( NF_PLUGIN_DIR . 'classes/fields/field.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/base-field.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/text.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/list.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/textarea.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/checkbox.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/checkbox-list.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/date.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/password.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/submit.php' );
-		require_once( NF_PLUGIN_DIR . 'classes/fields/list.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/dropdown.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/multi-select.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/radio.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/email.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/phone.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/hr.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/html.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/firstname.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/lastname.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/address.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/city.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/state.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/postcode.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/country.php' );
+		
 	}
 
 	/**

@@ -15,6 +15,18 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class NF_Field_Radio extends NF_Field_List {
 
 	/**
+	 * Get things started.
+	 * Set our nicename.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function __construct() {
+		$this->nicename = __( 'Radio Buttons', 'ninja-forms' );	
+	}
+
+	/**
 	 * Render our element.
 	 * 
 	 * @access public
@@ -30,6 +42,18 @@ class NF_Field_Radio extends NF_Field_List {
 			}			
 		}
 
+		echo $html;
+	}
+
+	/**
+	 * Output our disabled element for the fields list.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function field_list_element() {
+		$html ='<span class="disabled">' . __( 'Item 1', 'ninja-forms' ) . ' <input type="radio" disabled> ' . __( 'Item 2', 'ninja-forms' ) . ' <input type="radio" disabled> ' . __( 'Item 3', 'ninja-forms' ) . ' <input type="radio" disabled></span>';
 		echo $html;
 	}
 }

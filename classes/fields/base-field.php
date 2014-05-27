@@ -18,6 +18,18 @@ class NF_Field_Base {
 	// Setup our class variables. These can be overwritten by child classes.
 
 	/**
+	 * @var sidebar
+	 * @since 3.0
+	 */
+	var $sidebar = 'general';
+
+	/**
+	 * @var nicename
+	 * @since 3.0
+	 */
+	var $nicename = '';
+
+	/**
 	 * @var field_id
 	 * @since 3.0
 	 */
@@ -195,6 +207,18 @@ class NF_Field_Base {
 	 * @return void
 	 */
 	public function validate() {
+		// This line left intentionally blank.
+	}
+
+	/**
+	 * Function that outputs a disabled element for the field list.
+	 * Should be overwritten in child classes.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function field_list_element() {
 		// This line left intentionally blank.
 	}
 

@@ -24,7 +24,7 @@ class NF_Subs_CPT {
 		add_action( 'init', array( $this, 'register_cpt' ) );
 
 		// Add our submenu for the submissions page.
-		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
+		add_action( 'admin_menu', array( $this, 'add_submenu' ), 11 );
 
 		// Change our submission columns.
 		add_filter( 'manage_nf_sub_posts_columns', array( $this, 'change_columns' ) );
@@ -131,7 +131,6 @@ class NF_Subs_CPT {
 				}
 			}
 		}
-		
 
 		return $cols;
 	}

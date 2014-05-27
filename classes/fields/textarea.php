@@ -1,6 +1,6 @@
 <?php
 /**
- * Text field class
+ * Textarea field class
  *
  * @package     Ninja Forms
  * @subpackage  Classes/Field
@@ -12,7 +12,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_Field_Text extends NF_Field_Base {
+class NF_Field_Textarea extends NF_Field_Base {
 
 	/**
 	 * Get things started.
@@ -23,7 +23,7 @@ class NF_Field_Text extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Single Line Text', 'ninja-forms' );	
+		$this->nicename = __( 'Multi Line Text', 'ninja-forms' );	
 	}
 	
 	/**
@@ -34,20 +34,7 @@ class NF_Field_Text extends NF_Field_Base {
 	 * @return void
 	 */
 	public function render_element() {
-		$html = '<input type="text" name="' . $this->element_id . '" value="' . $this->value . '" class="' . $this->class . '" placeholder="' . $this->placeholder . '"/>';
+		$html = '<textarea name="' . $this->element_id . '" class="' . $this->class . '">' . $this->value . '</textarea>';
 		echo $html;
 	}
-
-	/**
-	 * Output our disabled element for the fields list.
-	 * 
-	 * @access public
-	 * @since 3.0
-	 * @return void
-	 */
-	public function field_list_element() {
-		$html ='<input type="text" class="widefat" value="" disabled>';
-		echo $html;
-	}
-
 }

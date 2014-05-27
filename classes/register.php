@@ -21,7 +21,7 @@ class NF_Register {
 	 * @return void
 	 */
 	public function field( $slug, $classname ) {
-		if ( ! empty( $slug ) && ! empty( $classname ) )
+		if ( ! empty( $slug ) && ! empty( $classname ) && ! isset ( Ninja_Forms()->registered_field_types[ $slug ] ) )
 			Ninja_Forms()->registered_field_types[ $slug ] = $classname;
 	}
 	

@@ -12,6 +12,25 @@ function nf_get_all_forms() {
 }
 
 /**
+ * Gets our forms by type.
+ * 
+ * @since 3.0
+ * @return array $tmp_array
+ */
+
+function nf_get_forms_by_type( $type ) {
+	$forms = nf_get_all_forms();
+	$tmp_array = array();
+	foreach( $forms as $form ) {
+		$form_type = nf_get_form_setting( $form['id'], 'type' );
+		if ( $form_type == $type ) {
+			$tmp_array[] = $form['id'];
+		}
+	}
+	return $tmp_array;
+}
+
+/**
  * Acts as a wrapper/alias for nf_get_object_children that is specific to notifications.
  * 
  * @since 3.0

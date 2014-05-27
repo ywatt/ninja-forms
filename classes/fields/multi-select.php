@@ -1,6 +1,6 @@
 <?php
 /**
- * Dropdown field class
+ * Multi Select list field class
  *
  * @package     Ninja Forms
  * @subpackage  Classes/Field
@@ -12,7 +12,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_Field_Dropdown extends NF_Field_List {
+class NF_Field_Multi_Select extends NF_Field_List {
 
 	/**
 	 * Get things started.
@@ -23,7 +23,7 @@ class NF_Field_Dropdown extends NF_Field_List {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Dropdown', 'ninja-forms' );	
+		$this->nicename = __( 'Multi Select', 'ninja-forms' );	
 	}
 
 	/**
@@ -34,14 +34,6 @@ class NF_Field_Dropdown extends NF_Field_List {
 	 * @return void
 	 */
 	public function render_element() {
-		$html = '<select>';
-		if ( isset ( $this->items[ $this->field_id ] ) ) {
-			foreach ( $this->items[ $this->field_id ] as $item ) {
-				$html .= '<option value="' . $item['value'] .'" ' . selected( $this->value, $item['value'], false ) . '>' . $item['label'] . '</option>';
-			}			
-		}
 
-		$html .= '</select>';
-		echo $html;
 	}
 }

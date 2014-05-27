@@ -19,6 +19,18 @@ class NF_Field_Password extends NF_Field_Base {
 	var $re_label = 'Re-enter Password';
 
 	/**
+	 * Get things started.
+	 * Set our nicename.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function __construct() {
+		$this->nicename = __( 'Password', 'ninja-forms' );	
+	}
+
+	/**
 	 * Function that renders the password fields
 	 * 
 	 * @access public
@@ -46,6 +58,18 @@ class NF_Field_Password extends NF_Field_Base {
 		// Check to make sure that the password fields match.
 		if ( $this->value != $_POST['password_' . $this->field_id ] )
 			Ninja_Forms()->field( $this->field_id )->add_error( 'mismatch', __( 'Passwords must match', 'ninja-forms' ) );
+	}
+
+	/**
+	 * Output our disabled element for the fields list.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function field_list_element() {
+		$html ='<input type="password" class="widefat" value="testpassword" disabled>';
+		echo $html;
 	}
 
 }

@@ -16,18 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class NF_Admin {
 
 	/**
-	 * @var plugin_settings
-	 * @since 3.0
-	 */
-	public $plugin_settings;
-
-	/**
-	 * @var tabs
-	 * @since 3.0
-	 */
-	public $tabs;
-
-	/**
 	 * Get things started
 	 * 
 	 * @access public
@@ -72,16 +60,17 @@ class NF_Admin {
 	 * @return void
 	 */
 	public function add_menu_page() {
-		$page = add_menu_page( __( 'Ninja Forms', 'ninja-forms' ) , __( 'Ninja Forms', 'ninja-forms' ), apply_filters( 'nf_admin_menu_capabilities', 'manage_options' ), 'ninja-forms', array( $this, 'all_forms' ), NF_PLUGIN_URL . "assets/images/nf-ico-small.png", "35.1337" );
+		$page = add_menu_page( __( 'Ninja Forms', 'ninja-forms' ) , __( 'Ninja Forms', 'ninja-forms' ), apply_filters( 'nf_admin_menu_capabilities', 'manage_options' ), 'ninja-forms', array( $this, 'forms_admin' ), NF_PLUGIN_URL . "assets/images/nf-ico-small.png", "35.1337" );
 		//add_action( 'admin_print_styles-' . $page, array( $this, 'admin_css' ) );
 
-		$sub_page = add_submenu_page( 'ninja-forms', __( 'Ninja Forms', 'ninja-forms' ) , __( 'All Forms', 'ninja-forms' ), apply_filters( 'nf_admin_menu_capabilities', 'manage_options' ), 'ninja-forms' );
-		//add_action( 'admin_print_styles-' . $sub_page, array( $this, 'admin_css' ) );
+		$sub_page = add_submenu_page( 'ninja-forms', __( 'Ninja Forms', 'ninja-forms' ) , __( 'Forms', 'ninja-forms' ), apply_filters( 'nf_admin_menu_capabilities', 'manage_options' ), 'ninja-forms' );
+		add_action( 'admin_print_styles-' . $sub_page, array( $this, 'admin_css' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_js' ) );		
 
 		$settings = add_submenu_page( 'ninja-forms', __( 'Settings', 'ninja-forms' ) , __( 'Settings', 'ninja-forms' ), apply_filters( 'nf_admin_menu_settings_capabilities', 'manage_options' ), 'ninja-forms-settings', array( $this, 'output_settings_page' ) );
 		//add_action( 'admin_print_styles-' . $sub_page, array( $this, 'admin_css' ) );
 		//add_action( 'admin_enqueue_scripts', array( $this, 'admin_js' ) );
+
 	}
 
 	/**
@@ -93,6 +82,20 @@ class NF_Admin {
 	 */
 	public function admin_js() {
 		wp_enqueue_script( 'nf-admin', NF_PLUGIN_URL . 'assets/js/dev/admin.js', array( 'jquery', 'jquery-ui-datepicker' ) );
+		if ( isset ( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
+			wp_enqueue_script( 'nf-edit-form', NF_PLUGIN_URL . 'assets/js/dev/edit-form.js', array( 'jquery' ) );
+		}
+	}
+
+	/**
+	 * Enqueue our admin CSS
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function admin_css() {
+		wp_enqueue_style( 'nf-admin', NF_PLUGIN_URL . 'assets/css/admin.css' );
 	}
 
 	/**
@@ -102,35 +105,238 @@ class NF_Admin {
 	 * @since 3.0
 	 * @return void
 	 */
-	public function all_forms() {
+	public function forms_admin() {
 
-		echo "RENDER A FORM";
-		//Ninja_Forms()->form( 1 )->update_setting( 'name', 'Your First Name' );
-		Ninja_Forms()->form( 1 )->render();
+		if ( ! isset ( $_GET['action'] ) || $_GET['action'] != 'edit' ) {
+			/** Show our all forms table. **/
+			$this->output_all_forms_page();
+		} else {
+			/** Show our edit forms admin. **/
+			$this->output_edit_form_page();
+		}
 
-		// echo "<br><br><br>";
-		// echo "RENDER A FIELD BY KEY NAME";
+		// echo "RENDER A FORM";
+		// //Ninja_Forms()->form( 1 )->update_setting( 'name', 'Your First Name' );
+		// Ninja_Forms()->form( 1 )->render();
 
-		// Ninja_Forms()->form( 1 )->field( 'firstname' )->render();
+		// // echo "<br><br><br>";
+		// // echo "RENDER A FIELD BY KEY NAME";
 
-		// echo "<br><br><br>";
-		// echo "GET A FIELD SETTING BY KEY NAME: ";
-		// echo "<strong>";
+		// // Ninja_Forms()->form( 1 )->field( 'firstname' )->render();
 
-		// print_r( Ninja_Forms()->form( 1 )->field( 'firstname' )->get_setting( 'label' ) );
-		// echo "</strong>";
+		// // echo "<br><br><br>";
+		// // echo "GET A FIELD SETTING BY KEY NAME: ";
+		// // echo "<strong>";
 
-		// var_dump( Ninja_Forms()->field( 9 )->get_value() );
+		// // print_r( Ninja_Forms()->form( 1 )->field( 'firstname' )->get_setting( 'label' ) );
+		// // echo "</strong>";
 
-		//var_dump( Ninja_Forms()->field( 9 )->type->add_to_sub );
+		// // var_dump( Ninja_Forms()->field( 9 )->get_value() );
 
-		echo "<pre>";
-		print_r( Ninja_Forms()->form( 1 )->field( 'lastname' )->get_value() );
-		echo "</pre>";
+		// //var_dump( Ninja_Forms()->field( 9 )->type->add_to_sub );
+
+		// echo "<pre>";
+		// print_r( Ninja_Forms()->form( 1 )->field( 'lastname' )->get_value() );
+		// echo "</pre>";
 	}
 
 	/**
-	 * Get our tabs
+	 * Output our all forms page
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function output_all_forms_page() {
+		//Create an instance of our package class...
+	    $nf_all_forms = new NF_All_Forms_List_Table();
+	    //Fetch, prepare, sort, and filter our data...
+	    $nf_all_forms->prepare_items();
+	    ?>
+	    <div class="wrap">
+        
+        <div id="icon-users" class="icon32"><br/></div>
+        <h2><?php _e( 'Forms', 'ninja-forms' ); ?> <?php echo sprintf('<a href="?page=%s&action=%s" class="add-new-h2">',$_REQUEST['page'],'new' ); _e( 'Add New', 'ninja-forms' );?></a></h2>
+        
+        <!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
+        <form id="forms-filter" method="get">
+            <!-- For plugins, we also need to ensure that the form posts back to our current page -->
+            <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+            <!-- Now we can render the completed list table -->
+            <?php $nf_all_forms->display() ?>
+        </form>
+        
+    	</div>
+    	<?php
+	}
+
+	/**
+	 * Output our edit form page
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function output_edit_form_page() {
+		$form_id = ( isset ( $_GET['form_id'] ) ? $_GET['form_id'] : '' );
+		$form_name = nf_get_form_setting( $form_id, 'name' );
+		?>
+		<div id="icon-ninja-custom-forms" class="icon32"><br></div>
+		<h2><?php _e( 'Form Editor', 'ninja-forms' );?> - <?php if ( isset ( $form_name ) ) echo $form_name;?> - ID : <?php echo $form_id;?></h2>
+
+		<div id="nav-menus-frame">
+			<div id="menu-settings-column" class="metabox-holder">
+
+				<div class="clear"></div>
+
+				<div id="side-sortables" class="accordion-container">
+
+					<ul class="outer-border">
+						<?php
+						foreach ( $this->get_field_sidebars() as $slug => $sidebar ) {
+							?>
+							<li class="control-section accordion-section open add-page top" id="add-page">
+								<h3 class="accordion-section-title hndle" tabindex="0" title="Pages"><?php _e( $sidebar['label'], 'ninja-forms' ); ?></h3>
+								<div class="accordion-section-content ">
+									<div class="inside">
+										<?php
+
+										if ( isset ( $sidebar['callback'] ) ) {
+											if ( ( is_array( $sidebar['callback'] ) && method_exists( $sidebar['callback'][0], $sidebar['callback'][1] ) ) || ( is_string( $sidebar['callback'] ) && function_exists( $sidebar['callback'] ) ) ) {
+												$arguments = array( 'form_id' => $form_id );
+												call_user_func_array( $sidebar['callback'], $arguments );
+											} 
+										} else {
+											foreach ( $this->get_sidebar_fields( $slug ) as $field_type ) {
+												$nicename = Ninja_Forms()->field_types->$field_type->nicename;
+											?>
+												<div class="button button-secondary ninja-forms-field-button"><?php _e( $nicename, 'ninja-forms' ); ?></div>
+											<?php
+											}
+
+										}
+										?>
+									</div><!-- .inside -->
+								</div><!-- .accordion-section-content -->
+							</li><!-- .accordion-section -->
+							<?php
+						}
+						?>
+
+
+					</ul><!-- .outer-border -->
+				</div><!-- .accordion-container -->
+			</div><!-- /#menu-settings-column -->
+
+			<div id="menu-management-liquid">
+				<div id="menu-management">
+					<div class="menu-edit ">
+						<div id="nav-menu-header">
+							<div class="major-publishing-actions">
+								<div class="publishing-action">
+									<a href="#form_settings_modal" rel="modal:open"><input type="button" id="form_settings" class="open-settings-modal button button-secondary" value="<?php _e( 'Form Settings', 'ninja-forms' ); ?>"></a>
+								</div><!-- END .publishing-action -->
+							</div><!-- END .major-publishing-actions -->
+						</div><!-- END .nav-menu-header -->
+						<div id="post-body">
+							<div id="post-body-content">
+								<h3>Forms Structure</h3>
+								<p>Drag each item into the order you prefer. Click edit to reveal additional options.</p>
+								<?php
+								// Get the fields attached to this form.
+								$fields = nf_get_fields_by_form_id( $form_id );
+								// Loop through the fields.
+								if ( ! empty ( $fields ) ) {
+									foreach ( $fields as $field_id => $settings ) {
+										?>
+										<ul class="ninja-row ninja-drop" data-cols="1" style="padding:2px;" id="2">
+											<li class="ninja-col-1-1" data-size="1-1" id="4x4">
+												<div class="ninja-forms-admin-field label-above open-settings-modal">
+													<label><?php echo $settings['label']; ?></label>
+													<?php
+													Ninja_Forms()->field_types->$settings['type']->field_list_element();
+													?>
+													<div class="nf-footer-left">
+														<a href="#field_settings_modal" rel="modal:open" class="open-settings-modal" data-field-id="<?php echo $field_id; ?>">Edit</a>
+													</div>
+													<div class="nf-footer-right">
+														<?php echo $settings['type']; ?> - ID : <?php echo $field_id; ?>
+													</div>
+												</div>
+											</li>
+										</ul>
+									<?php
+									}
+								}
+								?>
+							</div><!-- /#post-body-content -->
+						</div><!-- /#post-body -->
+						<div id="nav-menu-footer">
+							<div class="major-publishing-actions">
+								<div class="publishing-action">
+									<a class="submitdelete deletion menu-delete" href="/wp-admin/nav-menus.php?action=delete&amp;menu=6&amp;0=http%3A%2F%2Fnf.com%2Fwp-admin%2F&amp;_wpnonce=27e3bc67f9">Delete Form</a>
+								</div><!-- END .publishing-action -->
+							</div><!-- END .major-publishing-actions -->
+						</div><!-- /#nav-menu-footer -->
+					</div><!-- /.menu-edit -->
+				</div><!-- /#menu-management -->
+			</div><!-- /#menu-management-liquid -->
+		</div>
+
+
+		<?php
+	}
+
+	/**
+	 * Get our field sidebars
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return array $sidebars
+	 */
+	public function get_field_sidebars() {
+		$sidebars = array(
+			'favorite' => array(
+				'label' => __( 'Favorite Fields', 'ninja-forms' ),
+				'callback' => array( $this, 'favorite_fields_sidebar' ),
+			),
+			'general' => array(
+				'label' => __( 'General Fields', 'ninja-forms' ),
+			),
+			'user_info' => array(
+				'label' => __( 'User Information', 'ninja-forms' ),
+			),
+			'layout' => array(
+				'label' => __( 'Layout Elements', 'ninja-forms' ),
+			),
+		);
+
+		return apply_filters( 'nf_field_sidebars', $sidebars );
+	}
+
+	/**
+	 * Return all the field types registered to a specific sidebar
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return array $fields
+	 */
+	public function get_sidebar_fields( $slug ) {
+		$fields = array();
+		foreach( Ninja_Forms()->registered_field_types as $field_slug => $field_type ) {
+			if ( Ninja_Forms()->field_types->$field_slug->sidebar == $slug ) {
+				$fields[] = $field_slug;
+			}
+		}
+		return $fields;
+	}
+
+	public function favorite_fields_sidebar() {
+		echo "TEST";
+	}
+
+	/**
+	 * Get our plugin settings tabs
 	 * 
 	 * @access public
 	 * @since 3.0
@@ -141,7 +347,8 @@ class NF_Admin {
 
 		$tabs             		= array();
 		$tabs['general']  		= __( 'General', 'ninja-forms' );
-		$tabs['labels']      	= __( 'Labels', 'ninja-forms' );		
+		$tabs['labels']      	= __( 'Labels', 'ninja-forms' );
+		$tabs['types']			= __( 'Form Types', 'ninja-forms' );	
 
 		if( ! empty( $settings['licenses'] ) ) {
 			$tabs['licenses'] = __( 'Licenses', 'ninja-forms' );
