@@ -73,7 +73,9 @@ class Ninja_Forms {
 			self::$instance->register->field( 'checkbox_list', 'NF_Field_Checkbox_List' );
 			self::$instance->register->field( 'text', 'NF_Field_Text' );
 			self::$instance->register->field( 'textarea', 'NF_Field_Textarea' );
+			self::$instance->register->field( 'hidden', 'NF_Field_Hidden' );
 			self::$instance->register->field( 'date', 'NF_Field_Date' );
+			self::$instance->register->field( 'time', 'NF_Field_Time' );
 			self::$instance->register->field( 'password', 'NF_Field_Password' );
 			self::$instance->register->field( 'submit', 'NF_Field_Submit' );
 			self::$instance->register->field( 'dropdown', 'NF_Field_Dropdown' );
@@ -90,6 +92,9 @@ class Ninja_Forms {
 			self::$instance->register->field( 'state', 'NF_Field_State' );
 			self::$instance->register->field( 'postcode', 'NF_Field_Postcode' );
 			self::$instance->register->field( 'country', 'NF_Field_Country' );
+			self::$instance->register->field( 'spam', 'NF_Field_Spam' );
+			self::$instance->register->field( 'honeypot', 'NF_Field_Honeypot' );
+			self::$instance->register->field( 'timed_submit', 'NF_Field_Timed_Submit' );
 
 			// Run an action hook so that third-party devs can register their own field types.
 			do_action( 'nf_register_field_types', self::$instance );
@@ -282,6 +287,7 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/fields/checkbox.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/checkbox-list.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/date.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/time.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/password.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/submit.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/dropdown.php' );
@@ -298,6 +304,10 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/fields/state.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/postcode.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/country.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/hidden.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/spam.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/honeypot.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/timed-submit.php' );
 		
 	}
 

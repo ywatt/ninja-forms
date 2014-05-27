@@ -309,6 +309,9 @@ class NF_Admin {
 			'layout' => array(
 				'label' => __( 'Layout Elements', 'ninja-forms' ),
 			),
+			'spam' => array(
+				'label' => __( 'Spam Prevention', 'ninja-forms' ),
+			),
 		);
 
 		return apply_filters( 'nf_field_sidebars', $sidebars );
