@@ -1,7 +1,6 @@
 <?php
 /**
- * Date field class
- * Extends the text field class
+ * Custom Equation Calculation field class
  *
  * @package     Ninja Forms
  * @subpackage  Classes/Field
@@ -10,13 +9,16 @@
  * @since       3.0
 */
 
-class NF_Field_Date extends NF_Field_Text {
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+class NF_Field_Custom_Equation extends NF_Field_Calc {
 
 	/**
-	 * @var class
+	 * @var $sidebar
 	 * @since 3.0
 	 */
-	var $class = 'date';
+	var $sidebar = 'calc';
 
 	/**
 	 * Get things started.
@@ -27,14 +29,18 @@ class NF_Field_Date extends NF_Field_Text {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Date', 'ninja-forms' );	
+		$this->nicename = __( 'Custom Equation', 'ninja-forms' );	
 	}
-
+	
+	/**
+	 * Function that renders the textbox itself
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
 	public function render_element() {
-		if ( $this->datepicker == 1 ) {
-			$this->class = 'datepicker';
-		}
-		parent::render_element();
+
 	}
 
 	/**
@@ -45,7 +51,8 @@ class NF_Field_Date extends NF_Field_Text {
 	 * @return void
 	 */
 	public function field_list_element() {
-		$html ='<input type="text" class="widefat" value="dd/mm/yyyy" disabled>';
+		$html ='<input type="text" class="widefat" value="Auto Total" disabled>';
 		echo $html;
 	}
+
 }

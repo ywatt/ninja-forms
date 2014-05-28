@@ -81,6 +81,7 @@ class Ninja_Forms {
 			self::$instance->register->field( 'dropdown', 'NF_Field_Dropdown' );
 			self::$instance->register->field( 'multi-select', 'NF_Field_Multi_Select' );
 			self::$instance->register->field( 'radio', 'NF_Field_Radio' );
+			self::$instance->register->field( 'rating', 'NF_Field_Rating' );
 			self::$instance->register->field( 'email', 'NF_Field_Email' );
 			self::$instance->register->field( 'phone', 'NF_Field_Phone' );
 			self::$instance->register->field( 'hr', 'NF_Field_Hr' );
@@ -95,6 +96,9 @@ class Ninja_Forms {
 			self::$instance->register->field( 'spam', 'NF_Field_Spam' );
 			self::$instance->register->field( 'honeypot', 'NF_Field_Honeypot' );
 			self::$instance->register->field( 'timed_submit', 'NF_Field_Timed_Submit' );
+			self::$instance->register->field( 'number', 'NF_Field_Number' );
+			self::$instance->register->field( 'auto_total', 'NF_Field_Auto_Total' );
+			self::$instance->register->field( 'custom_eq', 'NF_Field_Custom_Equation' );
 
 			// Run an action hook so that third-party devs can register their own field types.
 			do_action( 'nf_register_field_types', self::$instance );
@@ -269,6 +273,7 @@ class Ninja_Forms {
 			require_once( NF_PLUGIN_DIR . 'classes/all-forms-table.php' );
 		}
 
+		require_once( NF_PLUGIN_DIR . 'includes/ajax.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/functions.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/shortcodes.php' );
 
@@ -293,6 +298,7 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/fields/dropdown.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/multi-select.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/radio.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/rating.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/email.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/phone.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/hr.php' );
@@ -308,6 +314,10 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/fields/spam.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/honeypot.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/fields/timed-submit.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/number.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/calc.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/auto-total.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/fields/custom-eq.php' );
 		
 	}
 

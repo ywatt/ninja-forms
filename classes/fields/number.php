@@ -1,6 +1,6 @@
 <?php
 /**
- * Date field class
+ * Number field class
  * Extends the text field class
  *
  * @package     Ninja Forms
@@ -10,7 +10,7 @@
  * @since       3.0
 */
 
-class NF_Field_Date extends NF_Field_Text {
+class NF_Field_Number extends NF_Field_Base {
 
 	/**
 	 * @var class
@@ -27,14 +27,7 @@ class NF_Field_Date extends NF_Field_Text {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Date', 'ninja-forms' );	
-	}
-
-	public function render_element() {
-		if ( $this->datepicker == 1 ) {
-			$this->class = 'datepicker';
-		}
-		parent::render_element();
+		$this->nicename = __( 'Number', 'ninja-forms' );	
 	}
 
 	/**
@@ -45,7 +38,7 @@ class NF_Field_Date extends NF_Field_Text {
 	 * @return void
 	 */
 	public function field_list_element() {
-		$html ='<input type="text" class="widefat" value="dd/mm/yyyy" disabled>';
+		$html ='<input type="text" class="widefat" value="#" disabled>';
 		echo $html;
 	}
 }

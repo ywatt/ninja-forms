@@ -55,6 +55,18 @@ function nf_get_fields_by_form_id( $form_id, $full_data = true ) {
 }
 
 /**
+ * Delete a form field.
+ * Acts as a wrapper/alias for nf_delete_object
+ * 
+ * @since 3.0
+ * @param int $field_id
+ * @return bool true
+ */
+function nf_delete_field( $field_id ) {
+	return nf_delete_object( $field_id );
+}
+
+/**
  * Acts as a wrapper/alias for nf_get_object_meta
  *
  * @since 3.0
