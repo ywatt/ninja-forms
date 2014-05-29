@@ -80,39 +80,101 @@ function nf_get_notification_by_id( $notification_id ) {
 
 /**
  * Acts as a wrapper/alias for nf_get_object_meta
- *
+ * First, checks to see if the form settings already exist in the Ninja_Forms() class.
+ * If it does, it returns that value.
+ * If it doesn't, it gets the value from the DB and populates the Ninja_Forms() class with it.
+ * If Ninja_Forms() isn't active, it just grabs the value from the database.
+ * 
  * @since 3.0
  * @param string $form_id
  * @return array $settings
  */
 
 function nf_get_form_settings( $form_id ) {
-	return nf_get_object_meta( $form_id );
+ 	if ( Ninja_Forms() ) { // Check to see if Ninja_Forms() exists.
+ 		if ( ! isset ( Ninja_Forms()->form_var->settings[ $form_id ] ) ) {
+ 			// If the setting doesn't exist, grab it from the database and add it to the class, caching it for this load.
+ 			Ninja_Forms()->form_var->settings[ $form_id ] = nf_get_object_meta( $form_id );
+ 		}
+ 		return Ninja_Forms()->form_var->settings[ $form_id ];
+ 	} else {
+ 		// Ninja_Forms() doesn't exist, so just ping the database for the information.
+ 		return nf_get_object_meta( $form_id );
+ 	}
 }
 
 /**
  * Acts as a wrapper/alias for nf_get_object_meta_value.
+ * First, checks to see if the form setting already exists in the Ninja_Forms() class.
+ * If it does, it returns that value.
+ * If it doesn't, it gets the value from the DB and populates the Ninja_Forms() class with it.
+ * If Ninja_Forms() isn't active, it just grabs the value from the database.
  * 
  * @since 3.0
  * @param string $form_id
  * @param string $form_setting
  * @return var $form_value
  */
-
 function nf_get_form_setting( $form_id, $form_setting ) {
-	return nf_get_object_meta_value( $form_id, $form_setting );
+ 	if ( Ninja_Forms() ) { // Check to see if Ninja_Forms() exists.
+ 		if ( ! isset ( Ninja_Forms()->form_var->settings[ $form_id ][ $form_setting ] ) ) {
+ 			// If the setting doesn't exist, grab it from the database and add it to the class, caching it for this load.
+ 			Ninja_Forms()->form_var->settings[ $form_id ][ $form_setting ] = nf_get_object_meta_value( $form_id, $form_setting );
+ 		}
+ 		return Ninja_Forms()->form_var->settings[ $form_id ][ $form_setting ];
+ 	} else {
+ 		// Ninja_Forms() doesn't exist, so just ping the database for the information.
+ 		return nf_get_object_meta_value( $form_id, $form_setting );
+ 	}
 }
 
 /**
  * Get a field's type from its id
+ * First, checks to see if the field setting already exists in the Ninja_Forms() class.
+ * If it does, it returns that value.
+ * If it doesn't, it gets the value from the DB and populates the Ninja_Forms() class with it.
+ * If Ninja_Forms() isn't active, it just grabs the value from the database.
  * 
  * @since 3.0
  * @param int $field_id
  * @return string $type
  */
 function nf_get_field_type( $field_id ) {
-	return nf_get_object_meta_value( $field_id, 'type' );
+ 	if ( Ninja_Forms() ) { // Check to see if Ninja_Forms() exists.
+ 		if ( ! isset ( Ninja_Forms()->field_var->settings[ $field_id ][ 'type' ] ) ) { // Check to see if this setting exists in our class object.
+ 			// If the setting doesn't exist, grab it from the database and add it to the class, caching it for this load.
+ 			Ninja_Forms()->field_var->settings[ $field_id ][ 'type' ] = nf_get_object_meta_value( $field_id, 'type' );
+ 		}
+		return Ninja_Forms()->field_var->settings[ $field_id ][ 'type' ];
+ 	} else {
+ 		// Ninja_Forms() doesn't exist, so just ping the database for the information.
+ 		return nf_get_object_meta_value( $field_id, 'type' );
+ 	}
 }
+
+/**
+ * Get a particular field setting.
+ * First, checks to see if the field setting already exists in the Ninja_Forms() class.
+ * If it does, it returns that value.
+ * If it doesn't, it gets the value from the DB and populates the Ninja_Forms() class with it.
+ * If Ninja_Forms() isn't active, it just grabs the value from the database.
+ * 
+ * @since 3.0
+ * @param int $field_id
+ * @param string $setting
+ */
+ function nf_get_field_setting( $field_id, $setting ) {
+ 	if ( Ninja_Forms() ) { // Check to see if Ninja_Forms() exists.
+ 		if ( ! isset ( Ninja_Forms()->field_var->settings[ $field_id ][ $setting ] ) ) { // Check to see if this setting exists in our class object.
+ 			// If the setting doesn't exist, grab it from the database and add it to the class, caching it for this load.
+ 			Ninja_Forms()->field_var->settings[ $field_id ][ $setting ] = nf_get_object_meta_value( $field_id, $setting );
+ 		}
+		return Ninja_Forms()->field_var->settings[ $field_id ][ $setting ];
+ 	} else {
+ 		// Ninja_Forms() doesn't exist, so just ping the database for the information.
+ 		return nf_get_object_meta_value( $field_id, $setting );
+ 	}
+ }
 
 /**
  * Get a count of submissions for a form

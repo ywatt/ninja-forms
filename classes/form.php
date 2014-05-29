@@ -24,6 +24,12 @@ class NF_Form {
 	var $settings = array();
 
 	/**
+	 * @var fields - Form Fields
+	 * @since 3.0
+	 */
+	var $fields = array();
+
+	/**
 	 * @var fields - Fields List
 	 * @since 3.0
 	 */
@@ -60,7 +66,7 @@ class NF_Form {
 		echo '<input type="hidden" name="nf_submitted" value="1" />';
 		wp_nonce_field( 'nf_submit', 'nf_form_' . $this->form_id );
 		// Get the fields attached to this form.
-		$all_fields = $this->settings[ $this->form_id ]['fields'];
+		$all_fields = $this->fields[ $this->form_id ];
 		if ( is_array( $all_fields ) ) {
 			foreach ( $all_fields as $field_id ) {
 				// Render our field.
@@ -84,11 +90,14 @@ class NF_Form {
 		if ( ! isset ( $this->settings[ $form_id ] ) ) {
 			// Get our form settings from the database.
 			$this->settings[ $form_id ] = nf_get_form_settings( $form_id );
+		}
+		//Check to see if we've already gotten our fields from the database.
+		if ( ! isset ( $this->fields[ $form_id ] ) ) {
 			// Get an of all of our fields.
-			$this->settings[ $form_id ]['fields'] = nf_get_fields_by_form_id( $this->form_id, false );
+			$this->fields[ $form_id ] = nf_get_fields_by_form_id( $this->form_id, false );
 			
-			if ( is_array( $this->settings[ $form_id ]['fields'] ) ) {
-				foreach ( $this->settings[ $form_id ]['fields'] as $field ) {
+			if ( is_array( $this->fields[ $form_id ] ) ) {
+				foreach ( $this->fields[ $form_id ] as $field ) {
 					$key = nf_get_object_meta_value( $field, 'key' );
 					if ( $key ) {
 						$this->field_keys[ $this->form_id ][ $key ] = $field;
@@ -129,8 +138,8 @@ class NF_Form {
 	}
 
 	public function get_fields() {
-		if ( isset ( $this->settings[ $this->form_id ][ 'fields' ] ) ) {
-			return $this->settings[ $this->form_id ][ 'fields' ];
+		if ( isset ( $this->fields[ $this->form_id ] ) ) {
+			return $this->fields[ $this->form_id ];
 		} else {
 			return false;
 		}

@@ -84,6 +84,10 @@ class NF_Admin {
 		wp_enqueue_script( 'nf-admin', NF_PLUGIN_URL . 'assets/js/dev/admin.js', array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-sortable' ) );
 		if ( isset ( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
 			wp_enqueue_script( 'nf-edit-form', NF_PLUGIN_URL . 'assets/js/dev/edit-form.js', array( 'jquery' ) );
+			wp_localize_script( 'nf-edit-form', 'nf_rest_url', admin_url( 'admin.php?page=ninja-forms' ) );
+			if ( isset ( $_GET['form_id'] ) ) {
+				wp_localize_script( 'nf-edit-form', 'nf_form_id', $_GET['form_id'] );
+			}
 		}
 	}
 
@@ -285,6 +289,10 @@ class NF_Admin {
 			</div><!-- /#menu-management-liquid -->
 		</div>
 
+		<script type="text/html" id="tmpl-nf-fields">
+
+
+		</script>
 
 		<?php
 	}

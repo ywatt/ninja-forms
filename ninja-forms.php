@@ -117,7 +117,8 @@ class Ninja_Forms {
 			self::$instance->subs_var = new NF_Subs();
 
 			if ( is_admin() ) {
-				self::$instance->admin = new NF_Admin();				
+				self::$instance->admin = new NF_Admin();
+				self::$instance->admin_rest = new NF_Admin_Rest_API();				
 			}
 
 		}
@@ -270,6 +271,7 @@ class Ninja_Forms {
 	private function includes() {
 		if ( is_admin() ) {
 			require_once( NF_PLUGIN_DIR . 'classes/admin.php' );
+			require_once( NF_PLUGIN_DIR . 'classes/admin-rest.php' );
 			require_once( NF_PLUGIN_DIR . 'classes/all-forms-table.php' );
 		}
 
