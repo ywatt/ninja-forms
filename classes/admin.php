@@ -85,6 +85,7 @@ class NF_Admin {
 		if ( isset ( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
 			wp_enqueue_script( 'nf-edit-form', NF_PLUGIN_URL . 'assets/js/dev/edit-form.js', array( 'jquery' ) );
 			wp_localize_script( 'nf-edit-form', 'nf_rest_url', admin_url( 'admin.php?page=ninja-forms&nf_rest=rest_api' ) );
+			wp_enqueue_script( 'nf-modal', NF_PLUGIN_URL . 'assets/js/min/jquery.modal.min.js', array( 'jquery' ) );
 			if ( isset ( $_GET['form_id'] ) ) {
 				wp_localize_script( 'nf-edit-form', 'nf_form_id', $_GET['form_id'] );
 			}
@@ -246,34 +247,8 @@ class NF_Admin {
 							<div id="post-body-content">
 								<h3>Forms Structure</h3>
 								<p>Drag each item into the order you prefer. Click edit to reveal additional options.</p>
-								<div id="nf_fields">
-									<?php
-									// Get the fields attached to this form.
-									$fields = nf_get_fields_by_form_id( $form_id );
-									// Loop through the fields.
-									if ( ! empty ( $fields ) ) {
-										foreach ( $fields as $field_id => $settings ) {
-											?>
-											<ul class="ninja-row ninja-drop" data-cols="1" style="padding:2px;" id="nf_field_<?php echo $field_id; ?>">
-												<li class="ninja-col-1-1" data-size="1-1" id="4x4">
-													<div class="ninja-forms-admin-field label-above open-settings-modal">
-														<label><?php echo $settings['label']; ?></label>
-														<?php
-														Ninja_Forms()->field_types->$settings['type']->field_list_element();
-														?>
-														<div class="nf-footer-left">
-															<a href="#field_settings_modal" rel="modal:open" class="open-settings-modal" data-field-id="<?php echo $field_id; ?>">Edit</a> <a href="#" data-field-id="<?php echo $field_id;?>" class="delete-field trash">Delete</a>
-														</div>
-														<div class="nf-footer-right">
-															<?php echo $settings['type']; ?> - ID : <?php echo $field_id; ?>
-														</div>
-													</div>
-												</li>
-											</ul>
-										<?php
-										}
-									}
-									?>
+								<div id="nf_field_list">
+									<!-- Field ULs are added here via Backbone. -->
 								</div>
 							</div><!-- /#post-body-content -->
 						</div><!-- /#post-body -->
@@ -289,15 +264,55 @@ class NF_Admin {
 			</div><!-- /#menu-management-liquid -->
 		</div>
 
-		<script type="text/html" id="tmpl-nf-settings">
-			<%
-			console.log( settings );
-			_.each(settings, function( setting ){
-				console.log( setting );
-			});
-			%>
+		<div id="form_settings_modal" style="display:none;">
+	  		<div class="media-frame-menu">
+				<div class="media-menu">
+					<a href="#" class="media-menu-item active" id="" title="">Hello World!</a>
+					<a href="#" class="media-menu-item" id="" title="">Test</a>
+					<a href="#" class="media-menu-item" id="" title="">Test2</a>
+				</div>
+			</div>
+			<div class="nf-settings">
+				<div class="nf-settings-title">
+					<h1></h1>
+					<div class="updated" style="display:none"></div>
+				</div>
+				<div class="nf-settings-desc-desc"></div>
+				<div class="nf-settings-content-wrap">
+					<div class="nf-settings-content" id="nf-settings-content">
+						CONTENT!
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/html" id="tmpl-nf-field-list">
+			<ul class="ninja-row ninja-drop" data-cols="1" style="padding:2px;" id="nf_field_<%= field.get( 'id' ) %>">
+				<li class="ninja-col-1-1" data-size="1-1" id="4x4">
+					<div class="ninja-forms-admin-field label-above open-settings-modal">
+						<%= _.template( jQuery( '#tmpl-nf-field-list-item-' + field.get( 'type' ) ).html(), { field: field } ) %>
+					</div>
+				</li>
+			</ul>
 		</script>
+
 		<?php
+		foreach ( Ninja_Forms()->registered_field_types as $slug => $class_name ) {
+			?>
+			<script type="text/html" id="tmpl-nf-field-list-item-<?php echo $slug; ?>">
+				<label><%= field.get( 'label' ) %></label>
+				<?php
+				Ninja_Forms()->field_types->$slug->field_list_element();
+				?>
+				<div class="nf-footer-left">
+					<a href="#field_settings_modal" rel="modal:open" class="open-settings-modal" data-field-id="<%= field.get( 'id' ) %>">Edit</a> <a href="#" data-field-id="<%= field.get( 'id' ) %>" class="delete-field trash">Delete</a>
+				</div>
+				<div class="nf-footer-right">
+					<%= field.get( 'type' ) %> - ID : <%= field.get( 'id' ) %>
+				</div>	
+			</script>
+		<?php
+		}
 	}
 
 	/**

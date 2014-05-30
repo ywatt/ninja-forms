@@ -175,6 +175,10 @@ class NF_Admin_Rest_API {
         return ($status[$code])?$status[$code]:$status[500]; 
     }
 
+    private function sortByOrder($a, $b) {
+        return $a['order'] - $b['order'];
+    }
+
     protected function rest_api() {
         
         switch( $this->method ) {
@@ -189,23 +193,32 @@ class NF_Admin_Rest_API {
                             $tmp_array = array();
                             $type = nf_get_field_type( $field_id );
                             $order = nf_get_field_order( $field_id );
-                            $tmp_array[ 'field_id' ] = $field_id;
+                            $label = nf_get_field_setting( $field_id, 'label' );
+                            $tmp_array[ 'id' ] = $field_id;
                             $tmp_array[ 'type' ] = $type;
-                            $args[ $order ] = $tmp_array;
+                            $tmp_array[ 'order' ] = $order;
+                            $tmp_array[ 'label' ] = $label;
+                            $args[] = $tmp_array;
                         }
+                        usort( $args, array( $this, 'sortByOrder' ) );
                         return $args;
 
                 }          
-                break;
+                
             case 'PUT':
                
                 break;
             case 'DELETE':
-                
-                break;
+                return nf_delete_object( $this->args[0] );
             case 'POST':
-                
-                break;
+                $data = json_decode( $this->file, true );
+                if ( isset ( $data['order'] ) ) {
+                    foreach ( $data['order'] as $order => $field ) {
+                        $field_id = str_replace( 'nf_field_', '', $field );
+                        nf_update_field_setting( $field_id, 'order', $order );
+                    }
+                    return $data['order'];
+                }
         }
     }
 

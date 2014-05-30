@@ -207,10 +207,12 @@
   bottom: 0;
   right: 0; }
 .ninja-forms-edit .nf-settings-title {
-  padding: 10px 20px 0; }
-  .ninja-forms-edit .nf-settings-title h1 {
+  padding: 10px 20px 0; 
+}
+.ninja-forms-edit .nf-settings-title h1 {
     display: inline;
-    float: left; }
+    float: left; 
+}
 .ninja-forms-edit .nf-settings-content-wrap {
   overflow: hidden;
   padding-left: 200px;
@@ -237,111 +239,39 @@
   float: left;
   margin-top: 8px;
   padding: 8px 12px;
-  width: 200px; }
+  width: 200px; 
+}
 .ninja-forms-edit .howto {
   font-weight: normal;
-  padding: 10px; }
+  padding: 10px; 
+}
 .ninja-forms-edit .nf-table > tr th, .ninja-forms-edit .nf-table > tr td {
-  padding: 15px 10px; }
+  padding: 15px 10px; 
+}
 .ninja-forms-edit .mceToolbar .mceButton {
   width: auto !important;
-  height: auto !important; }
-
+  height: auto !important; 
+}
 .nf-rte label {
   display: block;
-  margin-bottom: 20px; }
-
+  margin-bottom: 20px; 
+}
 #new-form-creation {
   position: absolute;
   top: 48px;
   bottom: 50px;
   left: 0;
   right: 0;
-  overflow: hidden; }
-  #new-form-creation .ninja-row {
+  overflow: hidden; 
+}
+#new-form-creation .ninja-row {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    overflow: auto; }
-
-.nf-wz-options .wizard-section-actions {
-  text-align: center; }
-
-.nf-wz-instructions h3 {
-  color: #222;
-  font-size: 32px;
-  font-weight: 100;
-  margin: 10px 0 0;
-  line-height: 1.3; }
-.nf-wz-instructions p {
-  color: #555;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.5;
-  margin: 30px 0 0; }
-
-.wizard-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 48px;
-  border-bottom: 1px solid #ddd; }
-  .wizard-header .left, .wizard-header .right, .wizard-header .close {
-    color: #777; }
-    .wizard-header .left:hover, .wizard-header .right:hover, .wizard-header .close:hover {
-      background: #e14d43;
-      color: #fff; }
-  .wizard-header .left, .wizard-header .right {
-    cursor: pointer;
-    height: 48px;
-    width: 54px;
-    float: left;
-    text-align: center;
-    border-right: 1px solid #ddd;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none; }
-    .wizard-header .left:before, .wizard-header .right:before {
-      font: 400 20px/50px dashicons !important;
-      display: inline;
-      font-weight: 300; }
-    .wizard-header .left.disabled, .wizard-header .right.disabled {
-      color: #ccc;
-      background: inherit;
-      cursor: inherit; }
-  .wizard-header .left:before {
-    content: '\f340'; }
-  .wizard-header .right:before {
-    content: '\f344'; }
-  .wizard-header .close {
-    cursor: pointer;
-    height: 48px;
-    width: 50px;
-    text-align: center;
-    float: right;
-    border-left: 1px solid #ddd; }
-    .wizard-header .close:before {
-      font: 400 30px/50px dashicons !important;
-      display: inline-block;
-      content: '\f335';
-      font-weight: 300; }
-
-.wizard-actions {
-  position: absolute;
-  text-align: center;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 10px 25px;
-  background: #f3f3f3;
-  z-index: 30;
-  box-sizing: border-box;
-  border-top: 1px solid #eee; }
-
+    overflow: auto; 
+}
 
 .tooltip {
     background-color:#000;

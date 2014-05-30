@@ -12,6 +12,21 @@ function nf_get_all_forms() {
 }
 
 /**
+ * Update a field setting.
+ * Acts as a wrapper/alias for nf_update_object_meta.
+ * 
+ * @since 3.0
+ * @param int $field_id
+ * @param string $setting
+ * @param mixed $value
+ * @return int $object_id
+ */
+
+function nf_update_field_setting( $field_id, $setting, $value ) {
+	return nf_update_object_meta( $field_id, $setting, $value );
+}
+
+/**
  * Gets our forms by type.
  * 
  * @since 3.0
@@ -380,7 +395,7 @@ function nf_update_object_meta( $object_id, $meta_key, $meta_value ) {
 	$found = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM ".NF_META_TABLE_NAME." WHERE object_id = %d AND meta_key = %s", $object_id, $meta_key ), ARRAY_A );
 
 	if ( $found ) {
-		$wpdb->prepare( $wpdb->update( NF_META_TABLE_NAME, array( 'meta_value' => $meta_value ), array( 'meta_key' => $meta_key, 'object_id' => $object_id ) ), NULL );
+		$wpdb->update( NF_META_TABLE_NAME, array( 'meta_value' => $meta_value ), array( 'meta_key' => $meta_key, 'object_id' => $object_id ) );
 		$meta_id = $found['id'];
 	} else {
 		$wpdb->insert( NF_META_TABLE_NAME, array( 'object_id' => $object_id, 'meta_key' => $meta_key, 'meta_value' => $meta_value ) );
