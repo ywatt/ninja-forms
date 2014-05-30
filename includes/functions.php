@@ -153,6 +153,30 @@ function nf_get_field_type( $field_id ) {
 }
 
 /**
+ * Get a field's order from its id
+ * First, checks to see if the field setting already exists in the Ninja_Forms() class.
+ * If it does, it returns that value.
+ * If it doesn't, it gets the value from the DB and populates the Ninja_Forms() class with it.
+ * If Ninja_Forms() isn't active, it just grabs the value from the database.
+ * 
+ * @since 3.0
+ * @param int $field_id
+ * @return int $order
+ */
+function nf_get_field_order( $field_id ) {
+ 	if ( Ninja_Forms() ) { // Check to see if Ninja_Forms() exists.
+ 		if ( ! isset ( Ninja_Forms()->field_var->settings[ $field_id ][ 'order' ] ) ) { // Check to see if this setting exists in our class object.
+ 			// If the setting doesn't exist, grab it from the database and add it to the class, caching it for this load.
+ 			Ninja_Forms()->field_var->settings[ $field_id ][ 'order' ] = nf_get_object_meta_value( $field_id, 'order' );
+ 		}
+		return Ninja_Forms()->field_var->settings[ $field_id ][ 'order' ];
+ 	} else {
+ 		// Ninja_Forms() doesn't exist, so just ping the database for the information.
+ 		return nf_get_object_meta_value( $field_id, 'order' );
+ 	}
+}
+
+/**
  * Get a particular field setting.
  * First, checks to see if the field setting already exists in the Ninja_Forms() class.
  * If it does, it returns that value.

@@ -179,15 +179,23 @@ class NF_Admin_Rest_API {
         
         switch( $this->method ) {
             case 'GET':
-                if ( isset ( $this->request['form_id'] ) ) {
-                    $form_id = $this->request['form_id'];
-                    $fields = nf_get_fields_by_form_id( $form_id );
-                    return $fields;
-                } else if ( isset ( $this->request['field_id'] ) ) {
-                    $field_id = $this->request['field_id'];
-                    $settings = nf_get_field_settings( $field_id );
-                    return $settings;
-                }                
+                $object_id = $this->request['object_id'];
+                $object_type = $this->request['object_type'];
+                switch( $object_type ) {
+                    case 'field_list':
+                        $args = array();
+                        $fields = nf_get_fields_by_form_id( $object_id, false );
+                        foreach ( $fields as $field_id ) {
+                            $tmp_array = array();
+                            $type = nf_get_field_type( $field_id );
+                            $order = nf_get_field_order( $field_id );
+                            $tmp_array[ 'field_id' ] = $field_id;
+                            $tmp_array[ 'type' ] = $type;
+                            $args[ $order ] = $tmp_array;
+                        }
+                        return $args;
+
+                }          
                 break;
             case 'PUT':
                

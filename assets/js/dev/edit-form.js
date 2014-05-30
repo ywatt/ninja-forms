@@ -29,16 +29,58 @@ jQuery( document ).ready( function( $ ) {
 		}
 	});
 
-	Field = Backbone.Model.extend({
+	/** Create a model for our field list **/
+
+	var FieldListItem = Backbone.Model.extend({
+		urlRoot: nf_rest_url
+	});
+
+	var FieldList = Backbone.Collection.extend({
+		url: nf_rest_url,
+		model: FieldListItem
+	});
+
+	fieldList = new FieldList();
+	fieldList.fetch({
+		reset: true,
+		data: $.param({ object_type: 'field_list', object_id: nf_form_id })
+	});
+
+	/*
+	Setting = Backbone.Model.extend({
 		urlRoot: nf_rest_url + '&nf_rest=rest_api'
 	});
 
-	var Fields = Backbone.Collection.extend({
-		url: nf_rest_url + '&nf_rest=rest_api&form_id=' + nf_form_id,
-		model: Field,
+	var Field = Backbone.Collection.extend({
+		url: nf_rest_url + '&nf_rest=rest_api',
+		model: Setting,
 	});
 
-	fields = new Fields();
-	fields.fetch();
+	field = new Field();
 
+	
+	var ContentView = Backbone.View.extend({
+
+		el: '#nf-settings-content',
+
+		template: '#tmpl-nf-settings',
+
+		initialize: function(){
+				this.collection.bind( 'reset', this.render, this );
+		},
+
+		render: function() {
+			var content = _.template( jQuery(this.template).html(), { settings: field } );
+			return this;
+		}
+
+	});
+
+	settingsView = new ContentView({ collection: field });
+
+	field.fetch({
+		reset: true, 
+		data: jQuery.param({ field_id: 9 })
+	 });
+	*/
 });
