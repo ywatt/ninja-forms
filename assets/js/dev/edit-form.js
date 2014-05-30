@@ -3,6 +3,10 @@ jQuery( document ).ready( function( $ ) {
     // $('#nf_loading').ajaxStart(function(){ $(this).fadeIn(); });
     // $('#nf_loading').ajaxComplete(function(){ $(this).fadeOut(); });
 
+    $( '.media-modal-close' ).on( 'click', function( e) {
+    	$.modal.close();
+    });
+
 	$( '.control-section h3' ).on( 'click', function( e ) {
 		if ( $( this ).parent().hasClass( 'open' ) ) {
 			$( this ).parent().removeClass( 'open' );

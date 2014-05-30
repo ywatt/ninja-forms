@@ -265,6 +265,9 @@ class NF_Admin {
 		</div>
 
 		<div id="form_settings_modal" style="display:none;">
+			<a class="media-modal-close" href="#" title="Close">
+		  		<span class="media-modal-icon"></span>
+		  	</a>
 	  		<div class="media-frame-menu">
 				<div class="media-menu">
 					<a href="#" class="media-menu-item active" id="" title="">Hello World!</a>
