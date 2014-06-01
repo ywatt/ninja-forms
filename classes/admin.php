@@ -25,6 +25,8 @@ class NF_Admin {
 	public function __construct() {
 		$this->includes();
 		$this->get_tabs();
+		$this->register_default_form_settings();
+		$this->register_default_field_settings();
 
 		$this->license = new NF_License();
 
@@ -33,6 +35,9 @@ class NF_Admin {
 
 		// add our settings via the options API
 		add_action( 'admin_init', array( $this, 'add_plugin_settings' ) );
+
+		// add a filter to the body class to specify which page we're on in the admin.
+		add_filter( 'admin_body_class', array( $this, 'admin_body_filter' ) );
 	}
 
 	/**
@@ -50,6 +55,36 @@ class NF_Admin {
 		}
 		require_once( NF_PLUGIN_DIR . 'classes/extension-updater.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/license.php' );
+	}
+
+	/**
+	 * Filter our admin body tag to add an appropriate Ninja Forms class name.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return string $classes
+	 */
+	public function admin_body_filter( $classes ) {
+		global $pagenow;
+
+		if ( $pagenow == 'admin.php' and isset ( $_REQUEST['page'] ) ) {
+			switch( $_REQUEST['page'] ) {
+				case 'ninja-forms':
+					$classes .= ' ninja-forms';
+					$classes .= ' ninja-forms-forms';
+					break;
+				case 'ninja-forms-edit':
+					$classes .= ' ninja-forms';
+					$classes .= ' ninja-forms-edit';
+					break;
+				case 'ninja-forms-settings':
+					$classes .= ' ninja-forms';
+					$classes .= ' ninja-forms-settings';
+					break;
+			}
+		}
+
+		return $classes;
 	}
 
 	/**
@@ -176,6 +211,147 @@ class NF_Admin {
 	}
 
 	/**
+	 * Register our default form settings and sidebars.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function register_default_form_settings() {
+		// Register our default form settings sidebars
+		Ninja_Forms()->register->form_settings_sidebar( 'display', 'Display' );
+		Ninja_Forms()->register->form_settings_sidebar( 'sub_limit', 'Limit Submissions' );
+
+		// Register our default form settings
+		$display = apply_filters( 'nf_display_form_settings', array(
+			'logged_in' 	=> array(
+				'id' 		=> 'logged_in',
+				'type' 		=> 'checkbox',
+				'name' 		=> __( 'Only show if the user is logged-in', 'ninja-forms' ),
+				'desc' 		=> '',
+				'help_text' => '',
+				'std' 		=> 0,
+			),
+			'append_page' 	=> array(
+				'id' 		=> 'append_page',
+				'type' 		=> 'select',
+				'name' 		=> __( 'Add This Form To This Page', 'ninja-forms' ),
+				'desc' 		=> '',
+				'help_text' =>'',
+				'std' 		=> '',
+				'options' 	=> array(
+					array( 'name' => 'TEST1', 'value' => 'test1' ),
+					array( 'name' => 'TEST2', 'value' => 'test2' ),
+				),
+			),
+			'ajax' 			=> array(
+				'id' 		=> 'ajax',
+				'type' 		=> 'checkbox',
+				'name' 		=> __( 'Submit this form without reloading the page?', 'ninja-forms' ),
+				'desc' 		=> '',
+				'help_text' => '',
+				'std' 		=> 0,
+			),
+		) );
+
+		Ninja_Forms()->register->form_settings( 'display', $display );
+
+		$sub_limit = apply_filters( 'nf_sub_limit_form_settings', array(
+			'sub_limit_number' 	=> array(
+				'id'			=> 'sub_limit_number',
+				'type'			=> 'number',
+				'name' 			=> __( 'Limit Submissions', 'ninja-forms' ),
+				'desc' 			=> '',
+				'help_text'		=> '',
+				'std' 			=> ''
+			),
+			'sub_limit_msg'		=> array(
+				'id'			=> 'sub_limit_msg',
+				'type'			=> 'textarea',
+				'name'			=> __( 'Limit Reached Message', 'ninja-forms' ),
+				'desc'			=> '',
+				'help_text'		=> '',
+				'std'			=> '',
+			),
+		));
+
+		Ninja_Forms()->register->form_settings( 'sub_limit', $sub_limit );
+
+		do_action( 'nf_register_form_settings' );
+
+	}
+
+	/**
+	 * Register our default field settings and sidebars
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function register_default_field_settings() {
+		// Register our default form settings sidebars
+		Ninja_Forms()->register->field_settings_sidebar( 'general', 'General' );
+		Ninja_Forms()->register->field_settings_sidebar( 'label', 'Label' );
+
+		// Register our default form settings
+		$general = apply_filters( 'nf_general_field_settings', array(
+			'logged_in' 	=> array(
+				'id' 		=> 'logged_in',
+				'type' 		=> 'checkbox',
+				'name' 		=> __( 'Required Field Label', 'ninja-forms' ),
+				'desc' 		=> '',
+				'help_text' => '',
+				'std' 		=> 0,
+			),
+			'append_page' 	=> array(
+				'id' 		=> 'append_page',
+				'type' 		=> 'select',
+				'name' 		=> __( 'Add This Form To This Page', 'ninja-forms' ),
+				'desc' 		=> '',
+				'help_text' =>'',
+				'std' 		=> '',
+				'options' 	=> array(
+					array( 'name' => 'TEST1', 'value' => 'test1' ),
+					array( 'name' => 'TEST2', 'value' => 'test2' ),
+				),
+			),
+			'ajax' 			=> array(
+				'id' 		=> 'ajax',
+				'type' 		=> 'checkbox',
+				'name' 		=> __( 'Submit this form without reloading the page?', 'ninja-forms' ),
+				'desc' 		=> '',
+				'help_text' => '',
+				'std' 		=> 0,
+			),
+		) );
+
+		Ninja_Forms()->register->field_settings( 'general', $general );
+
+		$label = apply_filters( 'nf_label_field_settings', array(
+			'sub_limit_number' 	=> array(
+				'id'			=> 'sub_limit_number',
+				'type'			=> 'number',
+				'name' 			=> __( 'Limit Submissions', 'ninja-forms' ),
+				'desc' 			=> '',
+				'help_text'		=> '',
+				'std' 			=> ''
+			),
+			'sub_limit_msg'		=> array(
+				'id'			=> 'sub_limit_msg',
+				'type'			=> 'textarea',
+				'name'			=> __( 'Limit Reached Message', 'ninja-forms' ),
+				'desc'			=> '',
+				'help_text'		=> '',
+				'std'			=> '',
+			),
+		));
+
+		Ninja_Forms()->register->field_settings( 'label', $label );
+
+		do_action( 'nf_register_field_settings' );
+	}
+
+	/**
 	 * Output our edit form page
 	 * 
 	 * @access public
@@ -198,7 +374,7 @@ class NF_Admin {
 
 					<ul class="outer-border">
 						<?php
-						foreach ( $this->get_field_sidebars() as $slug => $sidebar ) {
+						foreach ( $this->get_field_menu() as $slug => $sidebar ) {
 							?>
 							<li class="control-section accordion-section open add-page top" id="add-page">
 								<h3 class="accordion-section-title hndle" tabindex="0" title="Pages"><?php _e( $sidebar['label'], 'ninja-forms' ); ?></h3>
@@ -227,8 +403,6 @@ class NF_Admin {
 							<?php
 						}
 						?>
-
-
 					</ul><!-- .outer-border -->
 				</div><!-- .accordion-container -->
 			</div><!-- /#menu-settings-column -->
@@ -239,7 +413,7 @@ class NF_Admin {
 						<div id="nav-menu-header">
 							<div class="major-publishing-actions">
 								<div class="publishing-action">
-									<a href="#form_settings_modal" rel="modal:open"><input type="button" id="form_settings" class="open-settings-modal button button-secondary" value="<?php _e( 'Form Settings', 'ninja-forms' ); ?>"></a>
+									<a href="#nf-settings-modal" rel="modal:open"><input type="button" id="form_settings" class="open-settings-modal button button-secondary" value="<?php _e( 'Form Settings', 'ninja-forms' ); ?>"></a>
 								</div><!-- END .publishing-action -->
 							</div><!-- END .major-publishing-actions -->
 						</div><!-- END .nav-menu-header -->
@@ -264,31 +438,39 @@ class NF_Admin {
 			</div><!-- /#menu-management-liquid -->
 		</div>
 
-		<div id="form_settings_modal" style="display:none;">
+		<div id="hidden_editor_div" class="hidden">
+			<?php wp_editor( 'hidden_editor', 'hidden_editor', array( 'editor_class' => 'nf-setting') ); ?>
+		</div>
+
+		<!-- NF SETTINGS MODAL -->
+
+		<div id="nf-settings-modal" style="display:none;">
 			<a class="media-modal-close" href="#" title="Close">
 		  		<span class="media-modal-icon"></span>
 		  	</a>
 	  		<div class="media-frame-menu">
-				<div class="media-menu">
-					<a href="#" class="media-menu-item active" id="" title="">Hello World!</a>
-					<a href="#" class="media-menu-item" id="" title="">Test</a>
-					<a href="#" class="media-menu-item" id="" title="">Test2</a>
+				<div id="nf-settings-menu" class="media-menu">
+					
 				</div>
 			</div>
 			<div class="nf-settings">
 				<div class="nf-settings-title">
-					<h1></h1>
-					<div class="updated" style="display:none"></div>
+					<h1 id="nf-settings-h1"><div id="nf_form_h1" style="display:none;"><?php _e( 'Form Settings', 'ninja-forms' ); ?></div><div id="nf_field_h1" style="display:none;"><?php _e( 'Field Settings', 'ninja-forms' ); ?></div></h1>
+					<div class="updated" style="display:none"><?php _e( 'Saving...', 'ninja-forms' ); ?></div>
 				</div>
 				<div class="nf-settings-desc-desc"></div>
 				<div class="nf-settings-content-wrap">
 					<div class="nf-settings-content" id="nf-settings-content">
-						CONTENT!
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<!-- /NF SETTINGS MODAL -->
+
+		<!-- Begin Backbone.js Underscore templates -->
+
+		<!-- Field List item template -->
 		<script type="text/html" id="tmpl-nf-field-list">
 			<ul class="ninja-row ninja-drop" data-cols="1" style="padding:2px;" id="nf_field_<%= field.get( 'id' ) %>">
 				<li class="ninja-col-1-1" data-size="1-1" id="4x4">
@@ -299,7 +481,9 @@ class NF_Admin {
 			</ul>
 		</script>
 
+		<!-- Field list item disabled element template -->
 		<?php
+		// Loop through our registered field types and output their "field_list_element" function.
 		foreach ( Ninja_Forms()->registered_field_types as $slug => $class_name ) {
 			?>
 			<script type="text/html" id="tmpl-nf-field-list-item-<?php echo $slug; ?>">
@@ -308,13 +492,276 @@ class NF_Admin {
 				Ninja_Forms()->field_types->$slug->field_list_element();
 				?>
 				<div class="nf-footer-left">
-					<a href="#field_settings_modal" rel="modal:open" class="open-settings-modal" data-field-id="<%= field.get( 'id' ) %>">Edit</a> <a href="#" data-field-id="<%= field.get( 'id' ) %>" class="delete-field trash">Delete</a>
+					<a href="#nf-settings-modal" rel="modal:open" class="open-settings-modal edit-field" data-field-id="<%= field.get( 'id' ) %>" data-field-title="<%= field.get( 'label' ) %> - ID: <%= field.get( 'id' ) %>">Edit</a> <a href="#" data-field-id="<%= field.get( 'id' ) %>" class="delete-field trash">Delete</a>
 				</div>
 				<div class="nf-footer-right">
 					<%= field.get( 'type' ) %> - ID : <%= field.get( 'id' ) %>
 				</div>	
 			</script>
 		<?php
+		}
+		?>
+
+		<!-- Settings Menu template -->
+
+		<script type="text/html" id="tmpl-nf-settings-menu">
+			<%
+			_.each( menus, function( menuItem ) {
+				if ( menuItem.get( 'active' ) == 1 ) {
+					var active_class = 'active';
+				} else {
+					var active_class = '';
+				}
+			%>
+				<a href="#" class="media-menu-item nf-settings-menu <%= active_class %>" data-menu-item="<%= menuItem.get( 'id' ) %>" data-object-type="<%= menuItem.get( 'object_type' ) %>" data-object-id="<%= menuItem.get( 'object_id' ) %>" title=""><%= menuItem.get( 'nicename' ) %></a>
+			<%
+			});
+			%>
+			
+		</script>
+
+		<!-- Settings modal HR template -->
+
+		<script type="text/html" id="tmpl-nf-settings-h1">
+			<%= title %>
+		</script>
+
+		<!-- Settings form elements template -->
+
+		<script type="text/html" id="tmpl-nf-settings">
+			<table class="nf-table form-table">
+			<% _.each(settings, function(setting){
+				var setting_id = setting.get( 'id' );
+				var value = setting.get( 'current_value' );
+
+				// Check to see if this field should be visible
+				if ( typeof setting.get( 'visible' ) == 'undefined' ) {
+					var visible = true;
+				} else {
+					var visible = setting.get( 'visible' );
+				}
+
+				if ( !visible ) {
+					visible = 'hidden';
+				} else {
+					visible = '';
+				}
+
+				// Loop through our 'data' settings and setup our 'data-attribute' tags.
+				if ( typeof setting.get( 'data' ) !== 'undefined' ) {
+					var data = setting.get( 'data' );
+					var data_attributes = '';
+					for ( prop in data ) {
+						data_attributes += 'data-' + prop + '="' + data[prop] + '"';
+					}
+				}
+				%>
+				<tr class= "nf-<%= setting.get('type') %> <%= visible %>">
+				<%
+				switch( setting.get('type') ) {
+
+					case 'checkbox':
+						%>
+						<th>
+							<label for="<%= setting.id %>">
+								<%= setting.get( 'name' ) %>
+							</label>
+						</th>
+						<td>
+							<input type="checkbox" id="<%= setting.id %>" class="<%= setting.get('class') %> nf-setting" value="1" <% if ( value == 1 ) { %>checked<%}%> <%= data_attributes %>>
+							<span class="howto">
+								<%= setting.get( 'desc' ) %>
+							</span>
+						</td>
+						<%
+						break;
+					case 'select':
+						%>
+						<th>
+							<label for="<%= setting.id %>">
+								<%= setting.get( 'name' ) %>
+							</label>
+						</th>
+						<td>
+							<select id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" data-meta-key="<%= setting.get( 'meta_key' )%>" data-object-id="<%= setting.get( 'object_id' ) %>" <%= data_attributes %>>
+							<%
+
+							_.each(setting.get('options'), function(option) {
+								%>
+								<option value="<%= option.value %>" <% if ( value == option.value ) { %> selected <% } %>><%= option.name %></option>
+								<%
+							});
+							%>
+							</select>
+							<span class="howto">
+								<%= setting.get( 'desc' ) %>
+							</span>
+							<div class="nf-help">
+								
+							</div>
+						</td>
+						<%
+						break;
+					case 'number':
+						%>
+						<th>
+							<label for="<%= setting.id %>">
+								<%= setting.get( 'name' ) %>
+							</label>
+						</th>
+						<td>
+							<input type="number" id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" value="<%= value %>" min="<%= setting.get('min') %>" max="<%= setting.get('max') %>"  <%= data_attributes %>/>
+							<span class="howto">
+								<%= setting.get( 'desc' ) %>
+							</span>
+						</td>
+						<%
+						break;
+					case 'radio':
+						%>
+						<th>
+							<span>
+								<%= setting.get( 'name' ) %>
+							</span>
+						</th>
+						<td>
+							<%
+							var x = 0;
+							_.each(setting.get('options'), function(option) {
+								%>
+								<label>
+									<input type="radio" name="<%= setting.id %>" value="<%= option.value %>" <% if ( value == option.value ) { %> checked <% } %> id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" <%= data_attributes %>/>
+									<%= option.name %>
+								</label>
+								<%
+								x++;
+							});
+							%>
+							</select>
+							<span class="howto">
+								<%= setting.get( 'desc' ) %>
+							</span>
+							<div class="nf-help">
+								
+							</div>
+						</td>
+						<%
+						break;
+					case 'text':
+						%>
+						<th>
+							<label for="<%= setting.id %>">
+								<%= setting.get( 'name' ) %>
+							</label>
+						</th>
+						<td>
+							<input type="text" id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" value="<%= value %>" title="TEST TEST TEST" <%= data_attributes %>/>
+							<span class="howto">
+								<%= setting.get( 'desc' ) %>
+							</span>
+							<div class="nf-help">
+								
+							</div>
+						</td>
+						<%
+						break;					
+					case 'textarea':
+						%>
+						<th colspan="2">
+							<label for="<%= setting.id %>">
+								<%= setting.get( 'name' ) %>
+							</label>
+							<textarea id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" <%= data_attributes %>><%= value %></textarea>
+							<span class="howto">
+								<%= setting.get( 'desc' ) %>
+							</span>
+						</th>
+						<%
+						break;
+					case 'repeater-text':
+
+						%>
+						<th>
+							<label for="<%= setting.id %>">
+								<%= setting.get( 'name' ) %> <a href="#" id="<%= setting_id %>" class="repeater-add">Add New</a> <br />
+							</label>
+						</th>
+						<td>
+							<span id="<%= setting_id %>_span">
+								<%
+								if ( typeof value === 'object' ) {
+									_.each(value, function(val) {
+										%>
+										<span>
+											<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text nf-setting" value="<%= val %>" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="repeater-remove">X</a>
+											<br />
+										</span>
+										<%
+									});
+								} else {
+									%>
+									<span>
+										<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text nf-setting" value="" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="">X</a>
+										<br />
+									</span>
+									<%
+								}
+								%>
+							</span>
+						</td>
+						<%
+						break;
+					case 'rte':
+						%>
+						<th class="nf-rte" colspan="2">
+							<label for="<%= setting.id %>">
+								<%= setting.get( 'name' ) %>
+							</label>
+							<div id="<%= setting_id %>_replace"></div>
+							<span class="howto">
+								<%= setting.get( 'desc' ) %>
+							</span>
+						</th>
+						<%
+						break;
+				}
+				%>
+
+			</tr>
+			<% }); %>
+			</table>
+		</script>
+
+		<?php
+	}
+
+	/**
+	 * Get our field settings menu links
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return array $menu
+	 */
+	public function get_field_settings_menu( $field_id ) {
+		$field_type = nf_get_field_type( $field_id );
+		$menu = wp_parse_args( Ninja_Forms()->field_types->$field_type->settings_menu, Ninja_Forms()->registered_field_settings_menu );
+		return $menu;
+	}
+
+	/**
+	 * Get our field settings
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return array $settings
+	 */
+	public function get_field_settings( $field_id, $menu = '' ) {
+		$field_type = nf_get_field_type( $field_id );
+		$settings = wp_parse_args( Ninja_Forms()->field_types->$field_type->registered_settings, Ninja_Forms()->registered_field_settings );
+		if ( $menu != '' ) {
+			return $settings[ $menu ];	
+		} else {
+			return $settings;
 		}
 	}
 
@@ -325,7 +772,7 @@ class NF_Admin {
 	 * @since 3.0
 	 * @return array $sidebars
 	 */
-	public function get_field_sidebars() {
+	public function get_field_menu() {
 		$sidebars = array(
 			'favorite' => array(
 				'label' => __( 'Favorite Fields', 'ninja-forms' ),
@@ -348,7 +795,7 @@ class NF_Admin {
 			),
 		);
 
-		return apply_filters( 'nf_field_sidebars', $sidebars );
+		return apply_filters( 'nf_field_menu', $sidebars );
 	}
 
 	/**

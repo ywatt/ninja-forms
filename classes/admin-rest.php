@@ -183,11 +183,16 @@ class NF_Admin_Rest_API {
         
         switch( $this->method ) {
             case 'GET':
-                $object_id = $this->request['object_id'];
+                if ( isset ( $this->request['object_id'] ) ) {
+                    $object_id = $this->request['object_id'];
+                } else {
+                    $object_id = '';
+                }
+                
                 $object_type = $this->request['object_type'];
+                $args = array();
                 switch( $object_type ) {
                     case 'field_list':
-                        $args = array();
                         $fields = nf_get_fields_by_form_id( $object_id, false );
                         foreach ( $fields as $field_id ) {
                             $tmp_array = array();
@@ -202,11 +207,94 @@ class NF_Admin_Rest_API {
                         }
                         usort( $args, array( $this, 'sortByOrder' ) );
                         return $args;
-
+                    case 'form_settings':
+                        if ( isset ( $this->request['menu'] ) ) {
+                            $menu = $this->request['menu'];
+                        } else {
+                            $menu = 'display';
+                        }
+                        foreach( Ninja_Forms()->registered_form_settings[ $menu ] as $setting ) {
+                            $current_value = nf_get_form_setting( $object_id, $setting['id'] );
+                            if ( ! $current_value ) {
+                                $current_value = $setting['std'];
+                            }
+                            $tmp_array = array();
+                            $tmp_array['object_id'] = $object_id;
+                            $tmp_array['id'] = $setting['id'];
+                            $tmp_array['type'] = $setting['type'];
+                            $tmp_array['current_value'] = $current_value;
+                            $tmp_array['name'] = $setting['name'];
+                            $tmp_array['desc'] = $setting['desc'];
+                            if ( isset ( $setting['options'] ) ) {
+                                $tmp_array['options'] = $setting['options'];
+                            }
+                            $args[] = $tmp_array;
+                        }
+                        return $args; 
+                    case 'field_settings':
+                        if ( isset ( $this->request['menu'] ) ) {
+                            $menu = $this->request['menu'];
+                        } else {
+                            $menu = 'general';
+                        }
+                        
+                        foreach( Ninja_Forms()->admin->get_field_settings( $object_id, $menu ) as $setting ) {
+                            $current_value = nf_get_field_setting( $object_id, $setting['id'] );
+                            if ( ! $current_value ) {
+                                $current_value = $setting['std'];
+                            }
+                            $tmp_array = array();
+                            $tmp_array['object_id'] = $object_id;
+                            $tmp_array['id'] = $setting['id'];
+                            $tmp_array['type'] = $setting['type'];
+                            $tmp_array['current_value'] = $current_value;
+                            $tmp_array['name'] = $setting['name'];
+                            $tmp_array['desc'] = $setting['desc'];
+                            if ( isset ( $setting['options'] ) ) {
+                                $tmp_array['options'] = $setting['options'];
+                            }
+                            $args[] = $tmp_array;
+                        }
+                        return $args;
+                    case 'form_menu':
+                        $x = 0;
+                        foreach( Ninja_Forms()->registered_form_settings_menu as $slug => $nicename ) {
+                            $tmp_array = array();
+                            $tmp_array['id'] = $slug;
+                            $tmp_array['object_id'] = $object_id;
+                            $tmp_array['nicename'] = $nicename;
+                            $tmp_array['object_type'] = 'form';
+                            if ( $x == 0 ) {
+                                $tmp_array['active'] = 1;
+                            }
+                            $args[] = $tmp_array;
+                            $x++;
+                        }
+                        return $args;
+                    case 'field_menu':
+                        $x = 0;
+                        foreach( Ninja_Forms()->admin->get_field_settings_menu( $object_id ) as $slug => $nicename ) {
+                            $tmp_array = array();
+                            $tmp_array['id'] = $slug;
+                            $tmp_array['object_id'] = $object_id;
+                            $tmp_array['nicename'] = $nicename;
+                            $tmp_array['object_type'] = 'field';
+                            if ( $x == 0 ) {
+                                $tmp_array['active'] = 1;
+                            }
+                            $args[] = $tmp_array;
+                            $x++;
+                        }
+                        return $args;
                 }          
                 
             case 'PUT':
-               
+                $data = json_decode( $this->file, true );
+                $meta_key = $this->verb;
+                $object_id = $data['object_id'];
+                $meta_value = $data['current_value'];
+                return nf_update_object_meta( $object_id, $meta_key, $meta_value );
+
                 break;
             case 'DELETE':
                 return nf_delete_object( $this->args[0] );

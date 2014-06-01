@@ -24,5 +24,73 @@ class NF_Register {
 		if ( ! empty( $slug ) && ! empty( $classname ) && ! isset ( Ninja_Forms()->registered_field_types[ $slug ] ) )
 			Ninja_Forms()->registered_field_types[ $slug ] = $classname;
 	}
+
+	/**
+	 * Function that registers form settings sidebars
+	 * 
+	 * @access public
+	 * @param string $slug - Sidebar slug. Must be unique.
+	 * @param string $nicename - Display name for sidebar
+	 * @since 3.0
+	 * @return void
+	 */
+	public function form_settings_sidebar( $slug, $nicename ) {
+		if ( ! empty( $slug ) && ! empty( $nicename ) && ! isset ( Ninja_Forms()->registered_form_settings_menu[ $slug ] ) )
+			Ninja_Forms()->registered_form_settings_menu[ $slug ] = $nicename; 
+	}
+
+	/**
+	 * Function that registers form settings
+	 * 
+	 * @access public
+	 * @param string $sidebar
+	 * @param array $settings
+	 * @since 3.0
+	 * @return void
+	 */
+	public function form_settings( $sidebar, $settings ) {
+		if ( ! empty( $sidebar ) && is_array( $settings ) && ! empty ( $settings ) ) {
+			if ( isset ( Ninja_Forms()->registered_form_settings[ $sidebar ] ) ) {
+				$new_settings = wp_parse_args( Ninja_Forms()->registered_form_settings[ $sidebar ], $settings );
+			} else {
+				$new_settings = $settings;
+			}
+			Ninja_Forms()->registered_form_settings[ $sidebar ] = $new_settings;
+		}
+	}	
+
+	/**
+	 * Function that registers field settings sidebars
+	 * 
+	 * @access public
+	 * @param string $slug - Sidebar slug. Must be unique.
+	 * @param string $nicename - Display name for sidebar
+	 * @since 3.0
+	 * @return void
+	 */
+	public function field_settings_sidebar( $slug, $nicename ) {
+		if ( ! empty( $slug ) && ! empty( $nicename ) && ! isset ( Ninja_Forms()->registered_field_settings_menu[ $slug ] ) )
+			Ninja_Forms()->registered_field_settings_menu[ $slug ] = $nicename; 
+	}
+
+	/**
+	 * Function that registers field settings
+	 * 
+	 * @access public
+	 * @param string $sidebar
+	 * @param array $settings
+	 * @since 3.0
+	 * @return void
+	 */
+	public function field_settings( $sidebar, $settings ) {
+		if ( ! empty( $sidebar ) && is_array( $settings ) && ! empty ( $settings ) ) {
+			if ( isset ( Ninja_Forms()->registered_field_settings[ $sidebar ] ) ) {
+				$new_settings = wp_parse_args( Ninja_Forms()->registered_field_settings[ $sidebar ], $settings );
+			} else {
+				$new_settings = $settings;
+			}
+			Ninja_Forms()->registered_field_settings[ $sidebar ] = $new_settings;
+		}
+	}
 	
 }

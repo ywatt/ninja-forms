@@ -45,6 +45,30 @@ class Ninja_Forms {
 	public $registered_field_types;
 
 	/**
+	 * @var registered form settings sidebars
+	 * @since 3.0
+	 */
+	public $registered_form_settings_menu;
+
+	/**
+	 * @var registered form settings
+	 * @since 3.0
+	 */
+	public $registered_form_settings;
+
+	/**
+	 * @var registered field settings sidebars
+	 * @since 3.0
+	 */
+	public $registered_field_settings_menu;
+
+	/**
+	 * @var registered field settings
+	 * @since 3.0
+	 */
+	public $registered_field_settings;
+
+	/**
 	 * Main Ninja_Forms Instance
 	 *
 	 * Insures that only one instance of Ninja_Forms exists in memory at any one
@@ -100,13 +124,15 @@ class Ninja_Forms {
 			self::$instance->register->field( 'auto_total', 'NF_Field_Auto_Total' );
 			self::$instance->register->field( 'custom_eq', 'NF_Field_Custom_Equation' );
 
-			// Run an action hook so that third-party devs can register their own field types.
+			// Run an action hook so that other field types can be registered.
 			do_action( 'nf_register_field_types', self::$instance );
 			
 			self::$instance->field_types = new NF_Field_Types();
+
 			// The form_var variable won't be interacted with directly.
 			// Instead, the form( $form_id ) function will act as a wrapper for it.
 			self::$instance->form_var = new NF_Form();
+
 			// The field_var variable won't be interacted with directly.
 			// Instead, the field( $field_id ) function will act as a wrapper for it.
 			self::$instance->field_var = new NF_Field();

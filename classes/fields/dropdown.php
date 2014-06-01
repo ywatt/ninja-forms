@@ -23,7 +23,8 @@ class NF_Field_Dropdown extends NF_Field_List {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Dropdown', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Dropdown', 'ninja-forms' );
 	}
 
 	/**
@@ -42,6 +43,18 @@ class NF_Field_Dropdown extends NF_Field_List {
 		}
 
 		$html .= '</select>';
+		echo $html;
+	}
+
+	/**
+	 * Output our disabled element for the fields list.
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function field_list_element() {
+		$html ='<select disabled><option>' . __( 'Option', 'ninja-forms' ) . '</option></select>';
 		echo $html;
 	}
 }

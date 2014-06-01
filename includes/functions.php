@@ -374,7 +374,6 @@ function nf_get_object_meta_value( $object_id, $meta_key ) {
 	global $wpdb;
 
 	$meta_value = $wpdb->get_row( $wpdb->prepare( "SELECT meta_value FROM ".NF_META_TABLE_NAME." WHERE object_id = %d AND meta_key = %s", $object_id, $meta_key ), ARRAY_A );
-
 	return $meta_value['meta_value'];
 }
 

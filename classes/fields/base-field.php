@@ -24,6 +24,18 @@ class NF_Field_Base {
 	var $sidebar = 'general';
 
 	/**
+	 * @var settings_menu
+	 * @since 3.0
+	 */
+	var $settings_menu = array();
+
+	/**
+	 * @var registered_settings
+	 * @since 3.0
+	 */
+	var $registered_settings = array();
+
+	/**
 	 * @var nicename
 	 * @since 3.0
 	 */
