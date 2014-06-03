@@ -23,7 +23,10 @@ class NF_Field_Textarea extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Multi Line Text', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Multi Line Text', 'ninja-forms' );
+
+		do_action( 'nf_textarea_construct', $this );
 	}
 	
 	/**

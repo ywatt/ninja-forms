@@ -23,7 +23,10 @@ class NF_Field_Time extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Time', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Time', 'ninja-forms' );
+
+		do_action( 'nf_time_construct', $this );
 	}
 	
 	/**

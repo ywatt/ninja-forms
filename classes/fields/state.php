@@ -29,6 +29,9 @@ class NF_Field_State extends NF_Field_List {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'State', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'State', 'ninja-forms' );
+
+		do_action( 'nf_state_construct', $this );
 	}
 }

@@ -26,7 +26,10 @@ class NF_Field_Submit extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Submit Button', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Submit Button', 'ninja-forms' );
+
+		do_action( 'nf_submit_construct', $this );
 	}
 
 	/**

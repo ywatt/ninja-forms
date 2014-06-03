@@ -23,7 +23,10 @@ class NF_Field_Radio extends NF_Field_List {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Radio Buttons', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Radio Buttons', 'ninja-forms' );
+
+		do_action( 'nf_radio_construct', $this );
 	}
 
 	/**

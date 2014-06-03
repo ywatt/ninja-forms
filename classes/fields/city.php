@@ -27,6 +27,9 @@ class NF_Field_City extends NF_Field_Text {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'City', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'City', 'ninja-forms' );
+
+		do_action( 'nf_city_construct', $this );
 	}
 }

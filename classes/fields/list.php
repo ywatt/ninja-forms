@@ -22,6 +22,12 @@ class NF_Field_List extends NF_Field_Base {
 	var $items = array();
 
 	/**
+	 * @var sidebar
+	 * @var since 3.0
+	 */
+	var $sidebar = '';
+
+	/**
 	 * Get things started
 	 * 
 	 * @access public
@@ -29,6 +35,7 @@ class NF_Field_List extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
+		parent::__construct();
 		if ( ! isset ( $this->items[ $this->field_id ] ) ) {
 			$this->items[ $this->field_id ] = nf_get_object_children( $this->field_id, 'list_item' );
 		}
@@ -45,7 +52,23 @@ class NF_Field_List extends NF_Field_Base {
 			),
 		) );
 
-		$this->registered_settings['items'] = $item_settings;
+		$this->registered_settings['items'] = $item_settings;		
+
+		$item_settings = apply_filters( 'nf_list_settings', array(
+			'test' 	=> array(
+				'id' 		=> 'test',
+				'type' 		=> 'text',
+				'name' 		=> __( 'This is a test', 'ninja-forms' ),
+				'desc' 		=> '',
+				'help_text' => '',
+				'std' 		=> 0,
+			),
+		) );
+
+		$this->registered_settings['general'] = $item_settings;
+
+		do_action( 'nf_list_construct', $this );
+		
 	}
 
 	/**

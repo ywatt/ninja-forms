@@ -23,7 +23,10 @@ class NF_Field_Rating extends NF_Field_Radio {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Star Rating', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Star Rating', 'ninja-forms' );
+
+		do_action( 'nf_rating_construct', $this );
 	}
 
 	/**

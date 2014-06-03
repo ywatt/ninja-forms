@@ -23,7 +23,10 @@ class NF_Field_Multi_Select extends NF_Field_List {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Multi Select', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Multi Select', 'ninja-forms' );
+
+		do_action( 'nf_multi_select_construct', $this );
 	}
 
 	/**

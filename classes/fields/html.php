@@ -29,7 +29,10 @@ class NF_Field_Html extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'HTML', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'HTML', 'ninja-forms' );
+
+		do_action( 'nf_html_construct', $this );
 	}
 	
 	/**

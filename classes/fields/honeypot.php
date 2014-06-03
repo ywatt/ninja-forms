@@ -29,7 +29,10 @@ class NF_Field_Honeypot extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Honeypot', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Honeypot', 'ninja-forms' );
+
+		do_action( 'nf_honeypot_construct', $this );
 	}
 	
 	/**

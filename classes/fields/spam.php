@@ -29,7 +29,10 @@ class NF_Field_Spam extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Anti-Spam Question', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Anti-Spam Question', 'ninja-forms' );
+
+		do_action( 'nf_spam_construct', $this );
 	}
 	
 	/**

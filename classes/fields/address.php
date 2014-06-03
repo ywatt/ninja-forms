@@ -29,7 +29,10 @@ class NF_Field_Address extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
+		parent::__construct();
 		$this->nicename = __( 'Address', 'ninja-forms' );	
+
+		do_action( 'nf_address_construct', $this );
 	}
 	
 	/**

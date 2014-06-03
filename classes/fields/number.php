@@ -27,7 +27,10 @@ class NF_Field_Number extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Number', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Number', 'ninja-forms' );
+
+		do_action( 'nf_number_construct', $this );
 	}
 
 	/**

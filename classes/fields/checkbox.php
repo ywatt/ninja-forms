@@ -25,7 +25,10 @@ class NF_Field_Checkbox extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Single Checkbox', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Single Checkbox', 'ninja-forms' );
+			
+		do_action( 'nf_checkbox_construct', $this );
 	}
 
 	/**

@@ -29,7 +29,10 @@ class NF_Field_Timed_Submit extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Timed Submit', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Timed Submit', 'ninja-forms' );
+
+		do_action( 'nf_timed_submit_construct', $this );
 	}
 	
 	/**

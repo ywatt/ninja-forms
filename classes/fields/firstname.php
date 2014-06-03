@@ -27,6 +27,9 @@ class NF_Field_Firstname extends NF_Field_Text {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'First Name', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'First Name', 'ninja-forms' );
+
+		do_action( 'nf_firstname_construct', $this );	
 	}
 }

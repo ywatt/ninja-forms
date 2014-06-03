@@ -29,7 +29,10 @@ class NF_Field_Hr extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Horizontal Rule', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Horizontal Rule', 'ninja-forms' );
+
+		do_action( 'nf_hr_construct', $this );
 	}
 	
 	/**

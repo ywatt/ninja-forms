@@ -104,6 +104,7 @@ class NF_Field_Base {
 	 */
 	public function __construct() {
 
+		do_action( 'nf_field_construct', $this );
 	}
 
 	/**

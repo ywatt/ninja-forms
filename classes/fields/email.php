@@ -33,7 +33,10 @@ class NF_Field_Email extends NF_Field_Text {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Email', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Email', 'ninja-forms' );
+
+		do_action( 'nf_email_construct', $this );
 	}
 
 }

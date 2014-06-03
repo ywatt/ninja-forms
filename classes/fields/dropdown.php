@@ -25,6 +25,8 @@ class NF_Field_Dropdown extends NF_Field_List {
 	public function __construct() {
 		parent::__construct();
 		$this->nicename = __( 'Dropdown', 'ninja-forms' );
+
+		do_action( 'nf_dropdown_construct', $this );
 	}
 
 	/**

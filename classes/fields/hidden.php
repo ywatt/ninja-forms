@@ -23,7 +23,10 @@ class NF_Field_Hidden extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Hidden Field', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Hidden Field', 'ninja-forms' );
+
+		do_action( 'nf_hidden_construct', $this );
 	}
 	
 	/**

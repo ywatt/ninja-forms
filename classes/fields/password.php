@@ -27,7 +27,10 @@ class NF_Field_Password extends NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Password', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Password', 'ninja-forms' );
+
+		do_action( 'nf_password_construct', $this );
 	}
 
 	/**

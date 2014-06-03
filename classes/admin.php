@@ -219,8 +219,8 @@ class NF_Admin {
 	 */
 	public function register_default_form_settings() {
 		// Register our default form settings sidebars
-		Ninja_Forms()->register->form_settings_sidebar( 'display', 'Display' );
-		Ninja_Forms()->register->form_settings_sidebar( 'sub_limit', 'Limit Submissions' );
+		Ninja_Forms()->register->form_settings_menu( 'display', 'Display' );
+		Ninja_Forms()->register->form_settings_menu( 'sub_limit', 'Limit Submissions' );
 
 		// Register our default form settings
 		$display = apply_filters( 'nf_display_form_settings', array(
@@ -290,8 +290,8 @@ class NF_Admin {
 	 */
 	public function register_default_field_settings() {
 		// Register our default form settings sidebars
-		Ninja_Forms()->register->field_settings_sidebar( 'general', 'General' );
-		Ninja_Forms()->register->field_settings_sidebar( 'label', 'Label' );
+		Ninja_Forms()->register->field_settings_menu( 'general', 'General' );
+		Ninja_Forms()->register->field_settings_menu( 'label', 'Label' );
 
 		// Register our default form settings
 		$general = apply_filters( 'nf_general_field_settings', array(
@@ -745,6 +745,7 @@ class NF_Admin {
 	public function get_field_settings_menu( $field_id ) {
 		$field_type = nf_get_field_type( $field_id );
 		$menu = wp_parse_args( Ninja_Forms()->field_types->$field_type->settings_menu, Ninja_Forms()->registered_field_settings_menu );
+		ksort( $menu );
 		return $menu;
 	}
 
@@ -757,7 +758,7 @@ class NF_Admin {
 	 */
 	public function get_field_settings( $field_id, $menu = '' ) {
 		$field_type = nf_get_field_type( $field_id );
-		$settings = wp_parse_args( Ninja_Forms()->field_types->$field_type->registered_settings, Ninja_Forms()->registered_field_settings );
+		$settings = array_merge_recursive( Ninja_Forms()->registered_field_settings, Ninja_Forms()->field_types->$field_type->registered_settings );
 		if ( $menu != '' ) {
 			return $settings[ $menu ];	
 		} else {

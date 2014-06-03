@@ -29,7 +29,10 @@ class NF_Field_Custom_Equation extends NF_Field_Calc {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Custom Equation', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Custom Equation', 'ninja-forms' );
+
+		do_action( 'nf_custom_eq_construct', $this );
 	}
 	
 	/**

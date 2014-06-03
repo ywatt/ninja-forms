@@ -27,6 +27,9 @@ class NF_Field_Postcode extends NF_Field_Text {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Zip/Postcode', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Zip/Postcode', 'ninja-forms' );
+
+		do_action( 'nf_postcode_construct', $this );
 	}
 }

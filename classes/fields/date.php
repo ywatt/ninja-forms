@@ -27,7 +27,10 @@ class NF_Field_Date extends NF_Field_Text {
 	 * @return void
 	 */
 	public function __construct() {
+		parent::__construct();
 		$this->nicename = __( 'Date', 'ninja-forms' );
+
+		do_action( 'nf_date_construct', $this );
 	}
 
 	public function render_element() {

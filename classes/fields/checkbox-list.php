@@ -23,7 +23,10 @@ class NF_Field_Checkbox_List extends NF_Field_List {
 	 * @return void
 	 */
 	public function __construct() {
+		parent::__construct();
 		$this->nicename = __( 'Multi Checkboxes', 'ninja-forms' );	
+
+		do_action( 'nf_multi_checkbox_construct', $this );
 	}
 
 	/**

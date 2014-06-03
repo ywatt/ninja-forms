@@ -33,6 +33,9 @@ class NF_Field_Phone extends NF_Field_Text {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Phone Number', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Phone Number', 'ninja-forms' );
+
+		do_action( 'nf_phone_construct', $this );
 	}
 }

@@ -29,7 +29,10 @@ class NF_Field_Auto_Total extends NF_Field_Calc {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Automatic Total', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Automatic Total', 'ninja-forms' );
+
+		do_action( 'nf_auto_total_construct', $this );
 	}
 	
 	/**

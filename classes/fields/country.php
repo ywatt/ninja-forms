@@ -29,6 +29,9 @@ class NF_Field_Country extends NF_Field_List {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->nicename = __( 'Country', 'ninja-forms' );	
+		parent::__construct();
+		$this->nicename = __( 'Country', 'ninja-forms' );
+
+		do_action( 'nf_country_construct', $this );
 	}
 }

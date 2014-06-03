@@ -74,7 +74,7 @@ class Ninja_Forms {
 	 * Insures that only one instance of Ninja_Forms exists in memory at any one
 	 * time. Also prevents needing to define globals all over the place.
 	 *
-	 * @since 1.0
+	 * @since 3.0
 	 * @static
 	 * @staticvar array $instance
 	 * @return The highlander Ninja_Forms
@@ -84,72 +84,83 @@ class Ninja_Forms {
 			self::$instance = new Ninja_Forms;
 			self::$instance->setup_constants();
 			self::$instance->includes();
-			self::$instance->plugin_settings = self::$instance->get_plugin_settings();
-			
-			self::$instance->register = new NF_Register();
-			// Set our field_types var to ''. We'll instantiate the class for this on the init hook.
-			self::$instance->field_types = '';
-
-			register_activation_hook( __FILE__, array( self::$instance, 'activation' ) );
-
-			// Register our default field classes.
-			self::$instance->register->field( 'checkbox', 'NF_Field_Checkbox' );
-			self::$instance->register->field( 'checkbox_list', 'NF_Field_Checkbox_List' );
-			self::$instance->register->field( 'text', 'NF_Field_Text' );
-			self::$instance->register->field( 'textarea', 'NF_Field_Textarea' );
-			self::$instance->register->field( 'hidden', 'NF_Field_Hidden' );
-			self::$instance->register->field( 'date', 'NF_Field_Date' );
-			self::$instance->register->field( 'time', 'NF_Field_Time' );
-			self::$instance->register->field( 'password', 'NF_Field_Password' );
-			self::$instance->register->field( 'submit', 'NF_Field_Submit' );
-			self::$instance->register->field( 'dropdown', 'NF_Field_Dropdown' );
-			self::$instance->register->field( 'multi-select', 'NF_Field_Multi_Select' );
-			self::$instance->register->field( 'radio', 'NF_Field_Radio' );
-			self::$instance->register->field( 'rating', 'NF_Field_Rating' );
-			self::$instance->register->field( 'email', 'NF_Field_Email' );
-			self::$instance->register->field( 'phone', 'NF_Field_Phone' );
-			self::$instance->register->field( 'hr', 'NF_Field_Hr' );
-			self::$instance->register->field( 'html', 'NF_Field_Html' );
-			self::$instance->register->field( 'firstname', 'NF_Field_Firstname' );
-			self::$instance->register->field( 'lastname', 'NF_Field_Lastname' );
-			self::$instance->register->field( 'address', 'NF_Field_Address' );
-			self::$instance->register->field( 'city', 'NF_Field_City' );
-			self::$instance->register->field( 'state', 'NF_Field_State' );
-			self::$instance->register->field( 'postcode', 'NF_Field_Postcode' );
-			self::$instance->register->field( 'country', 'NF_Field_Country' );
-			self::$instance->register->field( 'spam', 'NF_Field_Spam' );
-			self::$instance->register->field( 'honeypot', 'NF_Field_Honeypot' );
-			self::$instance->register->field( 'timed_submit', 'NF_Field_Timed_Submit' );
-			self::$instance->register->field( 'number', 'NF_Field_Number' );
-			self::$instance->register->field( 'auto_total', 'NF_Field_Auto_Total' );
-			self::$instance->register->field( 'custom_eq', 'NF_Field_Custom_Equation' );
-
-			// Run an action hook so that other field types can be registered.
-			do_action( 'nf_register_field_types', self::$instance );
-			
-			self::$instance->field_types = new NF_Field_Types();
-
-			// The form_var variable won't be interacted with directly.
-			// Instead, the form( $form_id ) function will act as a wrapper for it.
-			self::$instance->form_var = new NF_Form();
-
-			// The field_var variable won't be interacted with directly.
-			// Instead, the field( $field_id ) function will act as a wrapper for it.
-			self::$instance->field_var = new NF_Field();
-
-			// Add our processing class.
-			self::$instance->processing = new NF_Processing();
-			// Add our submission class.
-			self::$instance->subs_var = new NF_Subs();
-
-			if ( is_admin() ) {
-				self::$instance->admin = new NF_Admin();
-				self::$instance->admin_rest = new NF_Admin_Rest_API();				
-			}
-
+			add_action( 'init', array( self::$instance, 'init' ), 5 );
 		}
 
 		return self::$instance;
+	}
+
+	/**
+	 * Run all of our plugin stuff on init.
+	 * This allows filters and actions to be used by third-party classes.
+	 * 
+	 * @since 3.0
+	 * @return void
+	 */
+	public function init() {
+		self::$instance->plugin_settings = self::$instance->get_plugin_settings();
+		
+		self::$instance->register = new NF_Register();
+		// Set our field_types var to ''. We'll instantiate the class for this on the init hook.
+		self::$instance->field_types = '';
+
+		register_activation_hook( __FILE__, array( self::$instance, 'activation' ) );
+
+		// Register our default field classes.
+		self::$instance->register->field( 'checkbox', 'NF_Field_Checkbox' );
+		self::$instance->register->field( 'checkbox_list', 'NF_Field_Checkbox_List' );
+		self::$instance->register->field( 'text', 'NF_Field_Text' );
+		self::$instance->register->field( 'textarea', 'NF_Field_Textarea' );
+		self::$instance->register->field( 'hidden', 'NF_Field_Hidden' );
+		self::$instance->register->field( 'date', 'NF_Field_Date' );
+		self::$instance->register->field( 'time', 'NF_Field_Time' );
+		self::$instance->register->field( 'password', 'NF_Field_Password' );
+		self::$instance->register->field( 'submit', 'NF_Field_Submit' );
+		self::$instance->register->field( 'list', 'NF_Field_List' );
+		self::$instance->register->field( 'dropdown', 'NF_Field_Dropdown' );
+		self::$instance->register->field( 'multi-select', 'NF_Field_Multi_Select' );
+		self::$instance->register->field( 'radio', 'NF_Field_Radio' );
+		self::$instance->register->field( 'rating', 'NF_Field_Rating' );
+		self::$instance->register->field( 'email', 'NF_Field_Email' );
+		self::$instance->register->field( 'phone', 'NF_Field_Phone' );
+		self::$instance->register->field( 'hr', 'NF_Field_Hr' );
+		self::$instance->register->field( 'html', 'NF_Field_Html' );
+		self::$instance->register->field( 'firstname', 'NF_Field_Firstname' );
+		self::$instance->register->field( 'lastname', 'NF_Field_Lastname' );
+		self::$instance->register->field( 'address', 'NF_Field_Address' );
+		self::$instance->register->field( 'city', 'NF_Field_City' );
+		self::$instance->register->field( 'state', 'NF_Field_State' );
+		self::$instance->register->field( 'postcode', 'NF_Field_Postcode' );
+		self::$instance->register->field( 'country', 'NF_Field_Country' );
+		self::$instance->register->field( 'spam', 'NF_Field_Spam' );
+		self::$instance->register->field( 'honeypot', 'NF_Field_Honeypot' );
+		self::$instance->register->field( 'timed_submit', 'NF_Field_Timed_Submit' );
+		self::$instance->register->field( 'number', 'NF_Field_Number' );
+		self::$instance->register->field( 'auto_total', 'NF_Field_Auto_Total' );
+		self::$instance->register->field( 'custom_eq', 'NF_Field_Custom_Equation' );
+
+		// Run an action hook so that other field types can be registered.
+		do_action( 'nf_register_field_types', self::$instance );
+		
+		self::$instance->field_types = new NF_Field_Types();
+
+		// The form_var variable won't be interacted with directly.
+		// Instead, the form( $form_id ) function will act as a wrapper for it.
+		self::$instance->form_var = new NF_Form();
+
+		// The field_var variable won't be interacted with directly.
+		// Instead, the field( $field_id ) function will act as a wrapper for it.
+		self::$instance->field_var = new NF_Field();
+
+		// Add our processing class.
+		self::$instance->processing = new NF_Processing();
+		// Add our submission class.
+		self::$instance->subs_var = new NF_Subs();
+
+		if ( is_admin() ) {
+			self::$instance->admin = new NF_Admin();
+			self::$instance->admin_rest = new NF_Admin_Rest_API();				
+		}	
 	}
 
 	/**
@@ -391,3 +402,30 @@ function Ninja_Forms() {
 
 // Get Ninja_Forms Running
 Ninja_Forms();
+
+function cooltestfunction() {
+	Ninja_Forms()->register->field_settings_menu( 'newone', 'New One' );
+
+	$label = apply_filters( 'nf_label_field_settings', array(
+		'sub_limit_number3' 	=> array(
+			'id'			=> 'sub_limit_number3',
+			'type'			=> 'number',
+			'name' 			=> __( 'NEW COOL STUFF!', 'ninja-forms' ),
+			'desc' 			=> '',
+			'help_text'		=> '',
+			'std' 			=> ''
+		),
+		'sub_limit_msg3'		=> array(
+			'id'			=> 'sub_limit_msg3',
+			'type'			=> 'textarea',
+			'name'			=> __( 'Limit Reached Message', 'ninja-forms' ),
+			'desc'			=> '',
+			'help_text'		=> '',
+			'std'			=> '',
+		),
+	));
+
+	Ninja_Forms()->register->field_settings( 'newone', $label, 'dropdown' );
+}
+
+add_action( 'init', 'cooltestfunction' );
