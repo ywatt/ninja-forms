@@ -175,10 +175,6 @@ class NF_Admin_Rest_API {
         return ($status[$code])?$status[$code]:$status[500]; 
     }
 
-    private function sortByOrder($a, $b) {
-        return $a['order'] - $b['order'];
-    }
-
     protected function rest_api() {
         
         switch( $this->method ) {
@@ -205,7 +201,7 @@ class NF_Admin_Rest_API {
                             $tmp_array[ 'label' ] = $label;
                             $args[] = $tmp_array;
                         }
-                        usort( $args, array( $this, 'sortByOrder' ) );
+                        usort( $args, array( Ninja_Forms(), 'sort_by_order' ) );
                         return $args;
                     case 'form_settings':
                         if ( isset ( $this->request['menu'] ) ) {
@@ -239,21 +235,31 @@ class NF_Admin_Rest_API {
                         }
                         
                         foreach( Ninja_Forms()->admin->get_field_settings( $object_id, $menu ) as $setting ) {
-                            $current_value = nf_get_field_setting( $object_id, $setting['id'] );
-                            if ( ! $current_value ) {
-                                $current_value = $setting['std'];
+                            if ( $setting['type'] == 'custom' && isset ( $setting['fetch_callback'] ) ) {
+                                if ( ( is_array( $setting['fetch_callback'] ) && method_exists( $setting['fetch_callback'][0], $setting['fetch_callback'][1] ) ) || ( is_string( $setting['fetch_callback'] ) && function_exists( $setting['fetch_callback'] ) ) ) {
+                                    $arguments = array( 'object_id' => $object_id );
+                                    $args = call_user_func_array( $setting['fetch_callback'], $arguments );
+                                }
+                            } else {
+                                $meta_key = isset( $setting[ 'meta_key' ] ) ? $setting[ 'meta_key' ] : $setting['id'];
+                                $current_value = nf_get_field_setting( $object_id, $meta_key );
+
+                                $tmp_array = array();
+                                $tmp_array['object_id'] = $object_id;
+                                $tmp_array['meta_key'] = $meta_key;
+                                $tmp_array['id'] = $setting['id'];
+                                $tmp_array['type'] = $setting['type'];
+                                $tmp_array['current_value'] = ( $current_value ) ? $current_value : $setting['std'];
+                                $tmp_array['name'] = $setting['name'];
+                                $tmp_array['desc'] = $setting['desc'];
+
+                                if ( isset ( $setting['options'] ) ) {
+                                    $tmp_array['options'] = $setting['options'];
+                                }
+
+                                $args[] = $tmp_array;
                             }
-                            $tmp_array = array();
-                            $tmp_array['object_id'] = $object_id;
-                            $tmp_array['id'] = $setting['id'];
-                            $tmp_array['type'] = $setting['type'];
-                            $tmp_array['current_value'] = $current_value;
-                            $tmp_array['name'] = $setting['name'];
-                            $tmp_array['desc'] = $setting['desc'];
-                            if ( isset ( $setting['options'] ) ) {
-                                $tmp_array['options'] = $setting['options'];
-                            }
-                            $args[] = $tmp_array;
+                            
                         }
                         return $args;
                     case 'form_menu':
@@ -290,7 +296,7 @@ class NF_Admin_Rest_API {
                 
             case 'PUT':
                 $data = json_decode( $this->file, true );
-                $meta_key = $this->verb;
+                $meta_key = $data['meta_key'];
                 $object_id = $data['object_id'];
                 $meta_value = $data['current_value'];
                 return nf_update_object_meta( $object_id, $meta_key, $meta_value );
@@ -300,7 +306,22 @@ class NF_Admin_Rest_API {
                 return nf_delete_object( $this->args[0] );
             case 'POST':
                 $data = json_decode( $this->file, true );
-                if ( isset ( $data['order'] ) ) {
+                // Check to see if we are creating an object.
+                if ( isset ( $data['object_type'] ) && $data['object_type'] ) {
+                    $object_id = nf_insert_object( $data['object_type'] );
+                    // Add our meta to the object (if we were sent any)
+                    if ( isset ( $data['meta'] ) && is_array ( $data['meta'] ) ) {
+                        foreach ( $data['meta'] as $meta ) {
+                            nf_update_object_meta( $object_id, $meta['meta_key'], $meta['meta_value'] );
+                        }
+                    }
+                    // Check to see if we need to create a connection in the relationship table.
+                    if ( isset ( $data['parent_id'] ) && ! empty ( $data['parent_id'] ) ) {
+                        $parent_type = nf_get_object_type( $data['parent_id'] );
+                        nf_add_relationship( $object_id, $data['object_type'], $data['parent_id'], $parent_type );
+                    }
+                    return $object_id;
+                } else if ( isset ( $data['order'] ) ) {
                     foreach ( $data['order'] as $order => $field ) {
                         $field_id = str_replace( 'nf_field_', '', $field );
                         nf_update_field_setting( $field_id, 'order', $order );

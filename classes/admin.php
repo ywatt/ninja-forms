@@ -116,7 +116,7 @@ class NF_Admin {
 	 * @return void
 	 */
 	public function admin_js() {
-		wp_enqueue_script( 'nf-admin', NF_PLUGIN_URL . 'assets/js/dev/admin.js', array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-sortable' ) );
+		wp_enqueue_script( 'nf-admin', NF_PLUGIN_URL . 'assets/js/dev/admin.js', array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-sortable', 'backbone', 'underscore' ) );
 		if ( isset ( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
 			wp_enqueue_script( 'nf-edit-form', NF_PLUGIN_URL . 'assets/js/dev/edit-form.js', array( 'jquery' ) );
 			wp_localize_script( 'nf-edit-form', 'nf_rest_url', admin_url( 'admin.php?page=ninja-forms&nf_rest=rest_api' ) );
@@ -724,6 +724,39 @@ class NF_Admin {
 						</th>
 						<%
 						break;
+					case 'custom':
+						<?php
+						// loop through our registered field and form settings to see if any of them have custom backbone templates
+						
+						if ( Ninja_Forms()->form( $form_id )->get_fields() ) {
+							foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field_id ) {
+								foreach ( Ninja_Forms()->admin->get_field_settings( $field_id ) as $sidebar => $setting ) {
+									foreach ( $setting as $slug => $s ) {
+										if ( $s['type'] == 'custom' ) { // Check to see if this is a custom setting type
+											?>
+											if ( setting.get( 'id' ) == '<?php echo $slug;?>' ) {
+											%>
+												<?php
+												if ( isset ( $s['template'] ) ) { // If we are given the underscore template as a string, echo it.
+													echo $s['template'];
+												} else if ( isset ( $s['template_callback'] ) ) { // If the template is a callback function, call that function.
+													if ( ( is_array( $s['template_callback'] ) && method_exists( $s['template_callback'][0], $s['template_callback'][1] ) ) || ( is_string( $s['template_callback'] ) && function_exists( $s['template_callback'] ) ) ) {
+														$arguments = array( 'field_id' => $field_id );
+														call_user_func_array( $s['template_callback'], $arguments );	
+													}
+												}
+												?>
+											<%
+											}
+											<?php
+										}
+									}				
+								}
+							}						
+						}
+						
+						?>
+						break;
 				}
 				%>
 
@@ -757,7 +790,7 @@ class NF_Admin {
 	 * @return array $settings
 	 */
 	public function get_field_settings( $field_id, $menu = '' ) {
-		$field_type = nf_get_field_type( $field_id );
+		$field_type = Ninja_Forms()->field( $field_id )->get_setting( 'type' );
 		$settings = array_merge_recursive( Ninja_Forms()->registered_field_settings, Ninja_Forms()->field_types->$field_type->registered_settings );
 		if ( $menu != '' ) {
 			return $settings[ $menu ];	

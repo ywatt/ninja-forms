@@ -14,7 +14,7 @@ jQuery( document ).ready( function( $ ) {
 		}
 	});
 
-	// Make our field list sortable
+	/** Make our field list sortable **/
 	$( '#nf_field_list' ).sortable({
 		items: 'ul',
 		update: function( event, ui ) {
@@ -200,16 +200,10 @@ jQuery( document ).ready( function( $ ) {
 	        // Define server attributes for this model
 	        this.on( 'change', this.save );
 	    },
-
 		save: function (attrs, options) {
 			attrs = attrs || this.toJSON();
 		    options = options || {};
 		    attrs = attrs.attributes;
-		    // If model defines serverAttrs, replace attrs with trimmed version
-		    if (this.serverAttrs) attrs = _.pick(attrs, this.serverAttrs);
-
-		    // Move attrs to options
-		    options.attrs = attrs;
 
 		    // Call super with attrs moved to options
 		    Backbone.Model.prototype.save.call(this, attrs, options);
@@ -221,10 +215,14 @@ jQuery( document ).ready( function( $ ) {
 
 	var Settings = Backbone.Collection.extend({
 		url: nf_rest_url,
-		model: Setting
+		model: Setting,
+		newSetting: function( opts ) {
+			newModel = this.add([ opts ]);
+			return newModel[0];
+		}
 	});
 
-	var settings = new Settings();
+	settings = new Settings();
 
 	var SettingsView = Backbone.View.extend({
 		el: '#nf-settings-content',
@@ -281,6 +279,19 @@ jQuery( document ).ready( function( $ ) {
 				}
 			});
 
+			/** Make our list items sortable **/
+			$( '.nf-list-items' ).sortable({
+				items: 'tr',
+				update: function( event, ui ) {
+					var newOrder = $( this ).sortable( 'toArray' );
+					for (var i = newOrder.length - 1; i >= 0; i--) {
+						var order = i;
+						var thisModel = settings.get( 'item_' + newOrder[i] + '_order' );
+						thisModel.set( 'current_value', order );
+					};
+				}
+			});
+
 			return this;
 		},
 		events: {
@@ -293,17 +304,6 @@ jQuery( document ).ready( function( $ ) {
 			jQuery('.updated').hide().fadeIn();
 			var el = e.target;
 			var el_id = jQuery(el).prop('id');
-
-			if ( jQuery(el).data( 'group' ) ) {
-				var el_id = jQuery(el).data( 'group' );
-				var value = new Array();
-				var x = 0;
-
-				jQuery('.repeater-' + el_id).each( function() {
-					value[x] = this.value;
-					x++;
-				});
-			}
 
 			var this_model = settings.get( el_id );
 
@@ -325,6 +325,35 @@ jQuery( document ).ready( function( $ ) {
 
 	settingsView = new SettingsView({ collection: settings });
 
+	/** Creation of new list field items **/
+	$( document ).on( 'change', '.nf-new-item', function(e){
+		var parent_id = $( this ).data( 'parent-id' );
+		var meta = [{
+			meta_key: $( this ).data( 'meta-key' ),
+			meta_value: $( this ).val(),
+		}, {
+			meta_key: 'order',
+			meta_value: $( '.nf-list-items' ).find( 'tr' ).length
+		}
+		];
+		var opts = {
+			object_type: 'list_item',
+			meta: meta,
+			parent_id: parent_id
+		} 
+		new_model = settings.newSetting( opts );
+		new_model.save({ 
+			success: function() {
+				console.log( 'hello world' );
+			},
+			error: function() {
+				console.log( 'error' );
+			}
+		});
+		
+	});
+
+	/** Handle fetching settings when the user clicks on the "Form Settings" button. **/
 	$( '#form_settings' ).on( 'click', function(e) {
 		e.preventDefault();
 		$( document ).data( 'nf-setting-h1', 'Form Settings' );

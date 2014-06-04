@@ -177,7 +177,9 @@ class NF_Field_Base {
 		$this->field_id = $field_id;
 		$this->element_id = 'nf_field_' . $field_id;
 		foreach( Ninja_Forms()->field_var->settings[ $field_id ] as $setting => $value ) {
-			$this->$setting = $value;
+			if ( ! empty( $setting ) ) {
+				$this->$setting = $value;
+			}	
 		}
 		$this->value = Ninja_Forms()->field_var->values[ $field_id ];
 		$this->setup();

@@ -449,7 +449,7 @@ function nf_insert_object( $type ) {
  * @param string child_type
  * @param int $parent_id
  * @param string $parent_type
- * @return bool
+ * @return void
  */
 
 function nf_add_relationship( $child_id, $child_type, $parent_id, $parent_type ) {

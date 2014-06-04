@@ -382,6 +382,22 @@ class Ninja_Forms {
 		
 	}
 
+	/**
+	 * Function used to sort multi-dimensional arrays by the 'order' value.
+	 * Can be used like: usort( $args, Ninja_Forms()->sort_by_order );
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return sorted array
+	 */
+    public function sort_by_order($a, $b) {
+        return $a['order'] - $b['order'];
+    }
+
+	public function get_highest_order ($a, $b) {
+	    return @$a['order'] > $b['order'] ? $a : $b ;
+	}
+
 } // End Class
 
 /**
