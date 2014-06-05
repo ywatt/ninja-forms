@@ -306,6 +306,8 @@ class NF_Admin_Rest_API {
                 return nf_delete_object( $this->args[0] );
             case 'POST':
                 $data = json_decode( $this->file, true );
+                return 49;
+                /*
                 // Check to see if we are creating an object.
                 if ( isset ( $data['object_type'] ) && $data['object_type'] ) {
                     $object_id = nf_insert_object( $data['object_type'] );
@@ -328,6 +330,7 @@ class NF_Admin_Rest_API {
                     }
                     return $data['order'];
                 }
+                */
         }
     }
 

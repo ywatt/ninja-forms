@@ -170,10 +170,10 @@ class NF_Field_List extends NF_Field_Base {
 				<input type="text" id="item_new_label" data-parent-id="<?php echo $field_id; ?>" data-meta-key="label" class="nf-new-item" value="" title="<?php _e( 'Item Label', 'ninja-forms' ); ?>" <%= data_attributes %>/>
 			</td>
 			<td>
-				<input type="text" id="item_new_value" data-parent-id="<?php echo $field_id; ?>" data-meta-key="value"  class="nf-new-item" value="" title="" <%= data_attributes %>/>
+				<input type="text" id="item_new_value" data-parent-id="<?php echo $field_id; ?>" data-meta-key="value"  class="" value="" title="" <%= data_attributes %>/>
 			</td>
 			<td>
-				<input type="text" id="item_new_calc" data-parent-id="<?php echo $field_id; ?>" data-meta-key="calc"  class="nf-new-item" value="" title="" <%= data_attributes %>/>
+				<input type="text" id="item_new_calc" data-parent-id="<?php echo $field_id; ?>" data-meta-key="calc"  class="" value="" title="" <%= data_attributes %>/>
 			</td>
 
 		</tr>

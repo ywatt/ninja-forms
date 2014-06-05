@@ -1,3 +1,34 @@
+jQuery.fn.putCursorAtEnd = function() {
+
+  return this.each(function() {
+
+    jQuery(this).focus()
+
+    // If this function exists...
+    if (this.setSelectionRange) {
+      // ... then use it (Doesn't work in IE)
+
+      // Double the length because Opera is inconsistent about whether a carriage return is one character or two. Sigh.
+      var len = jQuery(this).val().length * 2;
+
+      this.setSelectionRange(len, len);
+    
+    } else {
+    // ... otherwise replace the contents with itself
+    // (Doesn't work in Google Chrome)
+
+      jQuery(this).val(jQuery(this).val());
+      
+    }
+
+    // Scroll to the bottom, in case we're in a tall textarea
+    // (Necessary for Firefox and Google Chrome)
+    this.scrollTop = 999999;
+
+  });
+
+};
+
 jQuery( document ).ready( function( $ ) {
 
     $( '.media-modal-close' ).on( 'click', function( e) {
@@ -198,7 +229,7 @@ jQuery( document ).ready( function( $ ) {
 
 	    initialize: function () {
 	        // Define server attributes for this model
-	        this.on( 'change', this.save );
+	        this.on( 'change', this.save, this );
 	    },
 		save: function (attrs, options) {
 			attrs = attrs || this.toJSON();
@@ -342,9 +373,20 @@ jQuery( document ).ready( function( $ ) {
 			parent_id: parent_id
 		} 
 		new_model = settings.newSetting( opts );
-		new_model.save({ 
-			success: function() {
-				console.log( 'hello world' );
+		new_model.save({}, { 
+			success: function( model, response ) {
+				var new_id = response;
+				var focused = $(':focus');
+				settings.fetch({
+					reset: true,
+					data: $.param({ object_type: 'field_settings', object_id: parent_id, menu: 'items' }),
+					success: function() {
+						var id = $( focused ).prop( 'id' );
+						var new_focus = id.replace( 'item_new_', '' );
+						$( '#item_' + new_id + '_' + new_focus ).putCursorAtEnd();
+						settings.get( 'item_' + new_id + '_value' ).set( 'current_value', 'Bleep' );
+					}
+				});
 			},
 			error: function() {
 				console.log( 'error' );
