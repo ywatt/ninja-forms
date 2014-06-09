@@ -40,8 +40,8 @@ class NF_Field_List extends NF_Field_Base {
 		$this->settings_menu['items'] = __( 'Items', 'ninja-forms' );
 
 		$item_settings = apply_filters( 'nf_list_settings', array(
-			'item_test' 			=> array(
-				'id' 				=> 'item_test',
+			'list_items' 			=> array(
+				'id' 				=> 'list_items',
 				'type' 				=> 'custom',
 				'name' 				=> __( 'Item', 'ninja-forms' ),
 				'desc' 				=> '',
@@ -54,20 +54,6 @@ class NF_Field_List extends NF_Field_Base {
 		) );
 
 		$this->registered_settings['items'] = $item_settings;		
-
-		$item_settings = apply_filters( 'nf_list_settings', array(
-			'test' 	=> array(
-				'id' 		=> 'test',
-				'meta_key'	=> 'bloop',
-				'type' 		=> 'text',
-				'name' 		=> __( 'This is a test', 'ninja-forms' ),
-				'desc' 		=> '',
-				'help_text' => '',
-				'std' 		=> 0,
-			),
-		) );
-
-		$this->registered_settings['general'] = $item_settings;
 
 		do_action( 'nf_list_construct', $this );
 		
@@ -84,17 +70,17 @@ class NF_Field_List extends NF_Field_Base {
 	public function setup() {
 		if ( $this->field_id != '' && ! isset ( $this->items[ $this->field_id ] ) ) {
 			$this->items[ $this->field_id ] = nf_get_object_children( $this->field_id, 'list_item' );
-			
-			//$x = array_reduce( $this->items[ $this->field_id ], array( Ninja_Forms(), 'get_highest_order' ) );
-
-			// Add a default order if the items don't have one
-			// foreach ( $this->items[ $this->field_id ] as $index => $item ) {
-			// 	if ( ! isset ( $item['order'] ) ) {
-			// 		$this->items[ $this->field_id ][ $index ]['order'] = $x;
-			// 	}
-				
-			// }
 			uasort( $this->items[ $this->field_id ], array( Ninja_Forms(), 'sort_by_order' ) );
+			// Loop through and make sure that we have a set value
+			foreach ( $this->items[ $this->field_id ] as $item_id => $item ) {
+				if ( ! isset ( $item['value'] ) ) {
+					$this->items[ $this->field_id ][ $item_id ]['value'] = '';
+				}
+			}
+		}
+
+		if ( $this->value == '' && isset ( $this->settings['selected'] ) ) {
+			$this->value = $this->settings['selected'];
 		}
 	}
 
@@ -138,9 +124,9 @@ class NF_Field_List extends NF_Field_Base {
 						var checked = '';
 					}
 				%>
-				<tr class="nf-list-item" id="<%= item.object_id %>">
+				<tr class="nf-list-item" id="item_<%= item.object_id %>_tr" data-item-id=<%= item.object_id %>>
 					<th>
-						<a href="#" class="button-secondary">-</a>
+						<a href="#" class="button-secondary nf-delete-list-item" data-item-id="<%= item.object_id %>" data-field-id="<?php echo $field_id; ?>">-</a>
 						<span class="drag" style="cursor:move;">Drag</span>
 					</th>
 					<td>
@@ -161,22 +147,30 @@ class NF_Field_List extends NF_Field_Base {
 				});
 			}
 			%>
-		</tbody>
-		<tr class="nf-list-item-new">
-			<th colspan="2">
-				Enter text to add a new item ->
-			</th>
-			<td>
-				<input type="text" id="item_new_label" data-parent-id="<?php echo $field_id; ?>" data-meta-key="label" class="nf-new-item" value="" title="<?php _e( 'Item Label', 'ninja-forms' ); ?>" <%= data_attributes %>/>
-			</td>
-			<td>
-				<input type="text" id="item_new_value" data-parent-id="<?php echo $field_id; ?>" data-meta-key="value"  class="" value="" title="" <%= data_attributes %>/>
-			</td>
-			<td>
-				<input type="text" id="item_new_calc" data-parent-id="<?php echo $field_id; ?>" data-meta-key="calc"  class="" value="" title="" <%= data_attributes %>/>
-			</td>
+			<tr class="nf-list-item-new">
+				<th style="display:none;" class="list-item-actions">
+					<a href="#" class="button-secondary nf-delete-list-item" data-field-id="<?php echo $field_id; ?>">-</a>
+					<span class="drag" style="cursor:move;">Drag</span>
+				</th>
+				<th colspan="2" class="list-item-new">
+					Enter text to add a new item ->
+				</th>
+				<td style="display:none;" class="list-item-selected">
+					<input type="radio" id="selected" class="nf-setting" name="selected" value="">
+				</td>
+				<td>
+					<input type="text" id="item_new_label" data-parent-id="<?php echo $field_id; ?>" data-meta-key="label" class="nf-new-item" value="" title="<?php _e( 'Item Label', 'ninja-forms' ); ?>" <%= data_attributes %>/>
+				</td>
+				<td>
+					<input type="text" id="item_new_value" data-parent-id="<?php echo $field_id; ?>" data-meta-key="value"  class="nf-new-item" value="" title="" <%= data_attributes %>/>
+				</td>
+				<td>
+					<input type="text" id="item_new_calc" data-parent-id="<?php echo $field_id; ?>" data-meta-key="calc"  class="nf-new-item" value="" title="" <%= data_attributes %>/>
+				</td>
 
-		</tr>
+			</tr>
+		</tbody>
+		
 		<tr>
 			<th>
 			</th>
@@ -217,9 +211,16 @@ class NF_Field_List extends NF_Field_Base {
 		
 		$meta_array = array();
 
+
 		$meta_array[] = array( 'type' => 'custom', 'id' => 'selected', 'meta_key' => 'selected', 'current_value' => $selected, 'object_id' => $field_id );
 
 		foreach ( $this->items[ $field_id ] as $item_id => $item ) {
+			/**
+			 * Add our item as a part of the return.
+			 * This will allow us to delete it on the front-end later.
+			 */
+			$meta_array[] = array( 'type' => 'custom', 'id' => $item_id );
+
 			$label = isset( $item[ 'label' ] ) ? $item[ 'label' ] : '';
 			$value = isset( $item[ 'value' ] ) ? $item[ 'value' ] : '';
 			$calc = isset( $item[ 'calc' ] ) ? $item[ 'calc' ] : '';
@@ -247,7 +248,7 @@ class NF_Field_List extends NF_Field_Base {
 
 		}
 
-		$meta_array[] = array( 'type' => 'custom', 'id' => 'item_test', 'object_id' => $field_id, 'selected' => $selected, 'items' => $items_array );
+		$meta_array[] = array( 'type' => 'custom', 'id' => 'list_items', 'object_id' => $field_id, 'selected' => $selected, 'items' => $items_array );
 
 		return $meta_array;
 	}

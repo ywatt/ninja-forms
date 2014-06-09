@@ -298,7 +298,7 @@ class NF_Admin {
 			'logged_in' 	=> array(
 				'id' 		=> 'logged_in',
 				'type' 		=> 'checkbox',
-				'name' 		=> __( 'Required Field Label', 'ninja-forms' ),
+				'name' 		=> __( 'Require users to be logged in', 'ninja-forms' ),
 				'desc' 		=> '',
 				'help_text' => '',
 				'std' 		=> 0,
@@ -306,7 +306,7 @@ class NF_Admin {
 			'append_page' 	=> array(
 				'id' 		=> 'append_page',
 				'type' 		=> 'select',
-				'name' 		=> __( 'Add This Form To This Page', 'ninja-forms' ),
+				'name' 		=> __( 'Add to this page', 'ninja-forms' ),
 				'desc' 		=> '',
 				'help_text' =>'',
 				'std' 		=> '',
@@ -732,27 +732,30 @@ class NF_Admin {
 							foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field_id ) {
 								foreach ( Ninja_Forms()->admin->get_field_settings( $field_id ) as $sidebar => $setting ) {
 									foreach ( $setting as $slug => $s ) {
-										if ( $s['type'] == 'custom' ) { // Check to see if this is a custom setting type
-											?>
-											if ( setting.get( 'id' ) == '<?php echo $slug;?>' ) {
-											%>
-												<?php
-												if ( isset ( $s['template'] ) ) { // If we are given the underscore template as a string, echo it.
-													echo $s['template'];
-												} else if ( isset ( $s['template_callback'] ) ) { // If the template is a callback function, call that function.
-													if ( ( is_array( $s['template_callback'] ) && method_exists( $s['template_callback'][0], $s['template_callback'][1] ) ) || ( is_string( $s['template_callback'] ) && function_exists( $s['template_callback'] ) ) ) {
-														$arguments = array( 'field_id' => $field_id );
-														call_user_func_array( $s['template_callback'], $arguments );	
-													}
-												}
-												?>
-											<%
-											}
-											<?php
-										}
-									}				
+										$tmp_array[ $slug ] = $s;
+									}
 								}
-							}						
+							}
+							foreach ( $tmp_array as $slug => $s ) {
+								if ( $s['type'] == 'custom' ) { // Check to see if this is a custom setting type
+									?>
+									if ( setting.get( 'id' ) == '<?php echo $slug;?>' ) {
+									%>
+										<?php
+										if ( isset ( $s['template'] ) ) { // If we are given the underscore template as a string, echo it.
+											echo $s['template'];
+										} else if ( isset ( $s['template_callback'] ) ) { // If the template is a callback function, call that function.
+											if ( ( is_array( $s['template_callback'] ) && method_exists( $s['template_callback'][0], $s['template_callback'][1] ) ) || ( is_string( $s['template_callback'] ) && function_exists( $s['template_callback'] ) ) ) {
+												$arguments = array( 'field_id' => $field_id );
+												call_user_func_array( $s['template_callback'], $arguments );	
+											}
+										}
+										?>
+									<%
+									}
+									<?php
+								}								
+							}
 						}
 						
 						?>

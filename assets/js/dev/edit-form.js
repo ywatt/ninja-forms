@@ -312,12 +312,14 @@ jQuery( document ).ready( function( $ ) {
 
 			/** Make our list items sortable **/
 			$( '.nf-list-items' ).sortable({
-				items: 'tr',
+				items: 'tr.nf-list-item',
+				handle: 'span.drag',
 				update: function( event, ui ) {
 					var newOrder = $( this ).sortable( 'toArray' );
 					for (var i = newOrder.length - 1; i >= 0; i--) {
 						var order = i;
-						var thisModel = settings.get( 'item_' + newOrder[i] + '_order' );
+						var id = $( '#' + newOrder[i] ).data( 'item-id' );
+						var thisModel = settings.get( 'item_' + id + '_order' );
 						thisModel.set( 'current_value', order );
 					};
 				}
@@ -327,8 +329,9 @@ jQuery( document ).ready( function( $ ) {
 		},
 		events: {
 			'change input.nf-setting': 'save',
-			'change textarea': 'save',
-			'change select': 'save'
+			'change textarea.nf-setting': 'save',
+			'change select.nf-setting': 'save',
+			'click .nf-delete-list-item': 'delete_list_item'
 		},
 		save: function(e) {
 			clearTimeout(savedNoticeTimeout);
@@ -351,49 +354,33 @@ jQuery( document ).ready( function( $ ) {
 			}
 
 			this_model.set( 'current_value', value );
+		},
+		/** Deletion of list field items **/
+		delete_list_item: function(e) {
+			e.preventDefault();
+			var answer = confirm( commonL10n.warnDelete );
+			if ( answer ) {
+				//var items = settings.get( 'list_items' ).get( 'items' );
+				var item_id = $( e.target ).data( 'item-id' );
+				var field_id = $( e.target ).data( 'field-id' );
+				settings.get( item_id ).destroy({
+					wait: true,
+					success: function() {
+						// Fetch the settings for this list.
+						settings.fetch({
+							reset: true,
+							data: $.param({ object_type: 'field_settings', object_id: field_id, menu: 'items' })
+						});
+					}
+				});
+			}
 		}
 	});
 
 	settingsView = new SettingsView({ collection: settings });
 
 	/** Creation of new list field items **/
-	$( document ).on( 'change', '.nf-new-item', function(e){
-		var parent_id = $( this ).data( 'parent-id' );
-		var meta = [{
-			meta_key: $( this ).data( 'meta-key' ),
-			meta_value: $( this ).val(),
-		}, {
-			meta_key: 'order',
-			meta_value: $( '.nf-list-items' ).find( 'tr' ).length
-		}
-		];
-		var opts = {
-			object_type: 'list_item',
-			meta: meta,
-			parent_id: parent_id
-		} 
-		new_model = settings.newSetting( opts );
-		new_model.save({}, { 
-			success: function( model, response ) {
-				var new_id = response;
-				var focused = $(':focus');
-				settings.fetch({
-					reset: true,
-					data: $.param({ object_type: 'field_settings', object_id: parent_id, menu: 'items' }),
-					success: function() {
-						var id = $( focused ).prop( 'id' );
-						var new_focus = id.replace( 'item_new_', '' );
-						$( '#item_' + new_id + '_' + new_focus ).putCursorAtEnd();
-						settings.get( 'item_' + new_id + '_value' ).set( 'current_value', 'Bleep' );
-					}
-				});
-			},
-			error: function() {
-				console.log( 'error' );
-			}
-		});
-		
-	});
+	$( document ).on( 'keyup', '.nf-new-item', nf_new_list_item );
 
 	/** Handle fetching settings when the user clicks on the "Form Settings" button. **/
 	$( '#form_settings' ).on( 'click', function(e) {
@@ -409,4 +396,149 @@ jQuery( document ).ready( function( $ ) {
 		});
 	});
 
+	function nf_new_list_item(e){
+		if ( $( this ).val() == '' ) {
+			return false;
+		}
+
+		// Unbind our new item listener.
+		$( document ).off( 'keyup', '.nf-new-item' );
+
+		var parent_id = $( this ).data( 'parent-id' );
+		var meta = [{
+			meta_key: $( this ).data( 'meta-key' ),
+			meta_value: $( this ).val(),
+		}, {
+			meta_key: 'order',
+			meta_value: $( '.nf-list-items' ).find( 'tr.nf-list-item' ).length
+		}
+		];
+		var opts = {
+			object_type: 'list_item',
+			meta: meta,
+			parent_id: parent_id
+		} 
+		new_model = settings.newSetting( opts );
+		new_model.save({}, { 
+			success: function( model, response ) {
+				var new_id = response;
+				var order = $( '.nf-list-items' ).find( 'tr.nf-list-item' ).length;
+				// Clone our new item tr so that we can re-add it later.
+				var clone = $( '.nf-list-item-new' ).clone();
+
+				// Add our id to this tr
+				$( '.nf-list-item-new' ).prop( 'id', 'item_' + new_id + '_tr' );
+				// Add our id to this tr as a data attribute
+				$( '.nf-list-item-new' ).data( 'item-id', new_id );
+
+
+
+				// Add our regular item class to the new-item tr
+				$( '.nf-list-item-new' ).addClass( 'nf-list-item' );
+
+				// Remove the nf-list-item-new class from our cloning TR
+				$( '.nf-list-item-new' ).removeClass( 'nf-list-item-new' );
+
+				// Add a new item to the 'items' property of our list_items model.
+				var items = settings.get( 'list_items' ).get( 'items' );
+				items[ items.length ] = {
+					label: $( '#item_new_label' ).val(),
+					value: $( '#item_new_value' ).val(),
+					calc: $( '#item_new_calc' ).val(),
+					order: order,
+					object_id: new_id
+				}
+
+				// Add a new model for tracking this object
+				settings.newSetting({
+					id: new_id
+				});
+
+				// Add a new model to hold the order of this item
+				settings.newSetting({
+					id: 'item_' + new_id + '_order',
+					current_value: order,
+					meta_key: 'order',
+					object_id: new_id
+				});
+
+				// Add a new model for each of our settings.
+				settings.newSetting({
+					id: 'item_' + new_id + '_label',
+					current_value: $( '#item_new_label' ).val(),
+					meta_key: 'label',
+					object_id: new_id,
+				});				
+
+				settings.newSetting({
+					id: 'item_' + new_id + '_value',
+					current_value: $( '#item_new_value' ).val(),
+					meta_key: 'value',
+					object_id: new_id
+				});
+
+				settings.newSetting({
+					id: 'item_' + new_id + '_calc',
+					current_value: $( '#item_new_calc' ).val(),
+					meta_key: 'calc',
+					object_id: new_id
+				});
+
+				// Remove the nf-new-item class
+				$( '#item_new_label' ).removeClass( 'nf-new-item' );
+				$( '#item_new_value' ).removeClass( 'nf-new-item' );
+				$( '#item_new_calc' ).removeClass( 'nf-new-item' );
+
+				// Add the nf-setting class
+				$( '#item_new_label' ).addClass( 'nf-setting' );
+				$( '#item_new_value' ).addClass( 'nf-setting' );
+				$( '#item_new_calc' ).addClass( 'nf-setting' );				
+
+				// Change our label id
+				$( '#item_new_label' ).prop( 'id', 'item_' + new_id + '_label' );
+				// Change our value id
+				$( '#item_new_value' ).prop( 'id', 'item_' + new_id + '_value' );				
+				// Change our calc id
+				$( '#item_new_calc' ).prop( 'id', 'item_' + new_id + '_calc' );
+
+				// Remove the new item th
+				$( 'th.list-item-new' ).fadeOut().remove();
+				// Show the actions th
+				$( 'th.list-item-actions' ).fadeIn();
+				// Show the selected td
+				$( 'td.list-item-selected' ).fadeIn();
+
+				// Add our item-id data attribute to the delete button
+				$( 'th.list-item-actions' ).find( 'a' ).data( 'item-id', new_id );
+				$( 'th.list-item-actions' ).removeClass( 'list-item-actions' );
+
+				// Change the value of the selected radio button
+				$( 'td.list-item-selected' ).find( 'input' ).val( new_id );
+				$( 'td.list-item-selected' ).removeClass( 'list-item-selected' );
+
+				// Give our cloned new TR a display:none; style
+				$( clone ).css( 'display', 'none' );
+				// Make sure that our textboxes are empty.
+				$( clone ).find( 'input' ).val( '' );
+
+				// Add our cloned new TR back after the list tbody
+				$( 'tbody.nf-list-items' ).append( clone );
+
+				// Fade in our new item TR
+				$( '.nf-list-item-new' ).fadeIn();
+
+				// Refresh our sorable list.
+				$( '.nf-list-items' ).sortable( 'refresh' );
+
+				$( '.nf-list-items' ).trigger('sortupdate');
+
+				// Rebind our new item listener
+				$( document ).on( 'keyup', '.nf-new-item', nf_new_list_item );
+
+			},
+			error: function() {
+				console.log( 'error' );
+			}
+		});
+	}
 });

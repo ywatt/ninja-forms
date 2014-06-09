@@ -37,7 +37,7 @@ class NF_Field_Text extends NF_Field_Base {
 	 * @return void
 	 */
 	public function render_element() {
-		$html = '<input type="text" name="' . $this->element_id . '" value="' . $this->value . '" class="' . $this->class . '" placeholder="' . $this->placeholder . '"/>';
+		$html = '<input type="text" name="' . $this->element_id . '" value="' . $this->value . '" class="' . $this->settings['class'] . '" placeholder="' . $this->placeholder . '"/>';
 		echo $html;
 	}
 

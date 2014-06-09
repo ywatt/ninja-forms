@@ -36,6 +36,12 @@ class NF_Field_Base {
 	var $registered_settings = array();
 
 	/**
+	 * @var default settings
+	 * @since 3.0
+	 */
+	var $settings = array( 'label_pos' => 'left', 'class' => 'nf-field' );
+
+	/**
 	 * @var nicename
 	 * @since 3.0
 	 */
@@ -54,28 +60,10 @@ class NF_Field_Base {
 	var $element_id = '';
 
 	/**
-	 * @var class
-	 * @since 3.0
-	 */
-	var $class = '';
-
-	/**
 	 * @var value
 	 * @since 3.0
 	 */
 	var $value = false;
-
-	/**
-	 * @var label
-	 * @since 3.0
-	 */
-	var $label = 'Your Item';
-
-	/**
-	 * @var label
-	 * @since 3.0
-	 */
-	var $label_pos = 'left';
 
 	/**
 	 * @var label
@@ -121,22 +109,22 @@ class NF_Field_Base {
 		if ( $this->div_wrapper ) {
 			echo '<div>';
 		}
-		if ( $this->label_pos != 'none' && $this->label_pos != 'inside' ) {
+		if ( $this->settings['label_pos'] != 'none' && $this->settings['label_pos'] != 'inside' ) {
 			echo '<label>';
-			if ( $this->label_pos == 'left' ) {
-				echo $this->label;
+			if ( $this->settings['label_pos'] == 'left' ) {
+				echo $this->settings['label'];
 			}			
 		}
 
-		if ( $this->label_pos == 'inside' ) {
-			$this->placeholder = $this->label;
+		if ( $this->settings['label_pos'] == 'inside' ) {
+			$this->placeholder = $this->settings['label'];
 		}
 
 		$this->render_element();
 
-		if ( $this->label_pos != 'none' && $this->label_pos != 'inside' ) {
-			if ( $this->label_pos == 'right' ) {
-				echo $this->label;
+		if ( $this->settings['label_pos'] != 'none' && $this->settings['label_pos'] != 'inside' ) {
+			if ( $this->settings['label_pos'] == 'right' ) {
+				echo $this->settings['label'];
 			}
 			echo '</label>';			
 		}
@@ -178,7 +166,7 @@ class NF_Field_Base {
 		$this->element_id = 'nf_field_' . $field_id;
 		foreach( Ninja_Forms()->field_var->settings[ $field_id ] as $setting => $value ) {
 			if ( ! empty( $setting ) ) {
-				$this->$setting = $value;
+				$this->settings[ $setting ] = $value;
 			}	
 		}
 		$this->value = Ninja_Forms()->field_var->values[ $field_id ];

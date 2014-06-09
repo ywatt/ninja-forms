@@ -37,7 +37,7 @@ class NF_Field_Textarea extends NF_Field_Base {
 	 * @return void
 	 */
 	public function render_element() {
-		$html = '<textarea name="' . $this->element_id . '" class="' . $this->class . '">' . $this->value . '</textarea>';
+		$html = '<textarea name="' . $this->element_id . '" class="' . $this->settings['class'] . '">' . $this->value . '</textarea>';
 		echo $html;
 	}
 }

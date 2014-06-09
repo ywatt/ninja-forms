@@ -40,7 +40,7 @@ class NF_Field_Submit extends NF_Field_Base {
 	 * @return void
 	 */
 	public function render_element() {
-		$html = '<input type="submit" name="submit" value="' . $this->label . '" />';
+		$html = '<input type="submit" name="submit" value="' . $this->settings['label'] . '" />';
 		echo $html;
 	}
 

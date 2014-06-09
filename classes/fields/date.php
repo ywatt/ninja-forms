@@ -34,8 +34,8 @@ class NF_Field_Date extends NF_Field_Text {
 	}
 
 	public function render_element() {
-		if ( $this->datepicker == 1 ) {
-			$this->class = 'datepicker';
+		if ( $this->settings['datepicker'] == 1 ) {
+			$this->settings['class'] = 'datepicker';
 		}
 		parent::render_element();
 	}

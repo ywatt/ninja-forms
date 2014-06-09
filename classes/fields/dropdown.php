@@ -39,8 +39,8 @@ class NF_Field_Dropdown extends NF_Field_List {
 	public function render_element() {
 		$html = '<select>';
 		if ( isset ( $this->items[ $this->field_id ] ) ) {
-			foreach ( $this->items[ $this->field_id ] as $item ) {
-				$html .= '<option value="' . $item['value'] .'" ' . selected( $this->value, $item['value'], false ) . '>' . $item['label'] . '</option>';
+			foreach ( $this->items[ $this->field_id ] as $item_id => $item ) {
+				$html .= '<option value="' . $item['value'] .'" ' . selected( $this->value, $item_id, false ) . '>' . $item['label'] . '</option>';
 			}			
 		}
 

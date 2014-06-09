@@ -39,8 +39,8 @@ class NF_Field_Radio extends NF_Field_List {
 	public function render_element() {
 		$html = '';
 		if ( isset ( $this->items[ $this->field_id ] ) ) {
-			foreach ( $this->items[ $this->field_id ] as $item ) {
-				$html .=  '<label>' . $item['label'] . '<input type="radio" name="' . $this->element_id .'" value="' . $item['value'] .'" ' . checked( $this->value, $item['value'], false ) . '></label>';
+			foreach ( $this->items[ $this->field_id ] as $item_id => $item ) {
+				$html .=  '<label>' . $item['label'] . '<input type="radio" name="' . $this->element_id .'" value="' . $item['value'] .'" ' . checked( $this->value, $item_id, false ) . '></label>';
 				$html .= '<br>';
 			}			
 		}

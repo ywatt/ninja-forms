@@ -41,11 +41,11 @@ class NF_Field_Password extends NF_Field_Base {
 	 * @return void
 	 */
 	public function render_element() {
-		$html = '<label>' . $this->label;
-		$html .= '<input type="password" name="' . $this->element_id . '" value="' . $this->value . '" class="' . $this->class . '" placeholder="' . $this->placeholder . '"/>';
+		$html = '<label>' . $this->settings['label'];
+		$html .= '<input type="password" name="' . $this->element_id . '" value="' . $this->value . '" class="' . $this->settings['class'] . '" placeholder="' . $this->placeholder . '"/>';
 		$html .= '</label><br /><label>';
 		$html .= $this->re_label;
-		$html .= ' <input type="password" name="password_' . $this->field_id . '" value="' . $this->value . '" class="' . $this->class . '" placeholder="' . $this->placeholder . '"/>';
+		$html .= ' <input type="password" name="password_' . $this->field_id . '" value="' . $this->value . '" class="' . $this->settings['class'] . '" placeholder="' . $this->placeholder . '"/>';
 		$html .= '</label>';
 		echo $html;
 	}
