@@ -248,12 +248,8 @@ function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 
 	$password_mismatch = esc_html(stripslashes($plugin_settings['password_mismatch']));
 
-	if ( isset( $plugin_settings['msg_format'] ) ) {
-		$msg_format = $plugin_settings['msg_format'];
-	} else {
-		$msg_format = 'inline';
-	}
-
+	$msg_format = 'inline';
+	
 	wp_enqueue_script( 'ninja-forms-display',
 		NINJA_FORMS_URL . '/js/' . $src .'/ninja-forms-display' . $suffix . '.js',
 		array( 'jquery', 'jquery-form' ) );
