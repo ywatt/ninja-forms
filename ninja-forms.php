@@ -118,7 +118,7 @@ class Ninja_Forms {
 		self::$instance->register->field( 'submit', 'NF_Field_Submit' );
 		self::$instance->register->field( 'list', 'NF_Field_List' );
 		self::$instance->register->field( 'dropdown', 'NF_Field_Dropdown' );
-		self::$instance->register->field( 'multi-select', 'NF_Field_Multi_Select' );
+		self::$instance->register->field( 'multi_select', 'NF_Field_Multi_Select' );
 		self::$instance->register->field( 'radio', 'NF_Field_Radio' );
 		self::$instance->register->field( 'rating', 'NF_Field_Rating' );
 		self::$instance->register->field( 'email', 'NF_Field_Email' );
@@ -310,6 +310,7 @@ class Ninja_Forms {
 			require_once( NF_PLUGIN_DIR . 'classes/admin.php' );
 			require_once( NF_PLUGIN_DIR . 'classes/admin-rest.php' );
 			require_once( NF_PLUGIN_DIR . 'classes/all-forms-table.php' );
+			require_once( NF_PLUGIN_DIR . 'classes/notifications-table.php' );
 		}
 
 		require_once( NF_PLUGIN_DIR . 'includes/ajax.php' );
@@ -444,4 +445,4 @@ function cooltestfunction() {
 	Ninja_Forms()->register->field_settings( 'newone', $label, 'dropdown' );
 }
 
-add_action( 'init', 'cooltestfunction' );
+//add_action( 'init', 'cooltestfunction' );

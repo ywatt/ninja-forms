@@ -303,6 +303,9 @@ function nf_get_object_children( $object_id, $child_type = '', $full_data = true
 			$settings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM " . NF_META_TABLE_NAME . " WHERE object_id = %d", $child_id ), ARRAY_A);
 			if ( ! empty( $settings ) ) {
 				foreach ( $settings as $s ) {
+					if ( is_array ( $s['meta_value'] ) ) {
+						$s['meta_value'] =  unserialize( $s['meta_value'] );
+					}
 					$tmp_array[ $child_id ][ $s['meta_key'] ] = $s['meta_value'];
 				}				
 			} else {
@@ -338,6 +341,9 @@ function nf_get_object_meta( $object_id ) {
 
 	if ( is_array( $settings ) ) {
 		foreach( $settings as $setting ) {
+			if ( is_serialized ( $setting['meta_value'] ) ) {
+				$setting['meta_value'] = unserialize( $setting['meta_value'] );
+			}
 			$tmp_array[ $setting['meta_key'] ] = $setting['meta_value'];
 		}
 	}
@@ -374,6 +380,10 @@ function nf_get_object_meta_value( $object_id, $meta_key ) {
 	global $wpdb;
 
 	$meta_value = $wpdb->get_row( $wpdb->prepare( "SELECT meta_value FROM ".NF_META_TABLE_NAME." WHERE object_id = %d AND meta_key = %s", $object_id, $meta_key ), ARRAY_A );
+	if ( is_array ( $meta_value['meta_value'] ) ) {
+		$meta_value['meta_value'] = unserialize(  $meta_value['meta_value'] );
+	}
+
 	return $meta_value['meta_value'];
 }
 
@@ -389,6 +399,10 @@ function nf_get_object_meta_value( $object_id, $meta_key ) {
 
 function nf_update_object_meta( $object_id, $meta_key, $meta_value ) {
 	global $wpdb;
+
+	if ( is_array( $meta_value ) ) {
+		$meta_value = serialize( $meta_value );
+	}
 
 	// Check to see if this meta_key/meta_value pair exist for this object_id.
 	$found = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM ".NF_META_TABLE_NAME." WHERE object_id = %d AND meta_key = %s", $object_id, $meta_key ), ARRAY_A );

@@ -26,6 +26,66 @@ class NF_Field_Text extends NF_Field_Base {
 		parent::__construct();
 		$this->nicename = __( 'Single Line Text', 'ninja-forms' );
 
+		$this->settings_menu['restrict_input'] = __( 'Restrict User Input', 'ninja-forms' );
+
+		$restrict_input = apply_filters( 'nf_text_input_limit_settings', array(
+			'mask' 					=> array(
+				'id' 				=> 'mask',
+				'type' 				=> 'select',
+				'name' 				=> __( 'Input Mask', 'ninja-forms' ),
+				'desc' 				=> '',
+				'help_text' 		=> '',
+				'std' 				=> '',
+				'options'			=> array(
+					array( 'name' 	=> __( 'None', 'ninja-forms' ), 'value' => '' ),
+				),
+			),
+			'input_limit' 			=> array(
+				'id' 				=> 'input_limit',
+				'type' 				=> 'number',
+				'name' 				=> __( 'Limit Input To', 'ninja-forms' ),
+				'desc' 				=> __( 'Leave blank for no limit', 'ninja-forms' ),
+				'help_text' 		=> '',
+				'std' 				=> '',
+			),
+			'input_limit_type'		=> array(
+				'id' 				=> 'input_limit_type',
+				'type' 				=> 'select',
+				'name' 				=> __( 'Characters', 'ninja-forms' ),
+				'desc' 				=> __( 'What do you want to limit?', 'ninja-forms' ),
+				'help_text' 		=> '',
+				'std' 				=> '',
+				'options'			=> array(
+					array( 'name' => __( 'Characters', 'ninja-forms' ), 'value' => 'char' ),
+					array( 'name' => __( 'Words', 'ninja-forms' ), 'value' => 'word' ),
+				),
+			),
+			'input_limit_msg'		=> array(
+				'id' 				=> 'input_limit_msg',
+				'type' 				=> 'text',
+				'name' 				=> __( 'Text to appear after character/word counter', 'ninja-forms' ),
+				'desc' 				=> '',
+				'help_text' 		=> '',
+				'std' 				=> __( 'Character(s) left', 'ninja-forms' ),
+			),
+
+		) );
+
+		$this->registered_settings['restrict_input'] = $restrict_input;
+
+		$label_settings = apply_filters( 'nf_text_label_settings', array(
+			'placeholder'			=> array(
+				'id' 				=> 'placeholder',
+				'type' 				=> 'text',
+				'name' 				=> __( 'Placeholder Text', 'ninja-forms' ),
+				'desc' 				=> '',
+				'help_text' 		=> '',
+				'std' 				=> '',
+			),
+		) );
+
+		$this->registered_settings['display'] = $label_settings;
+
 		do_action( 'nf_text_construct', $this );
 	}
 	
@@ -37,6 +97,13 @@ class NF_Field_Text extends NF_Field_Base {
 	 * @return void
 	 */
 	public function render_element() {
+
+		if ( $this->settings['label_pos'] == 'inside' ) {
+			$this->placeholder = $this->settings['label'];
+		} else if ( isset ( $this->settings['placeholder'] ) ) {
+			$this->placeholder = $this->settings['placeholder'];
+		}
+
 		$html = '<input type="text" name="' . $this->element_id . '" value="' . $this->value . '" class="' . $this->settings['class'] . '" placeholder="' . $this->placeholder . '"/>';
 		echo $html;
 	}

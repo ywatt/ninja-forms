@@ -1,34 +1,3 @@
-jQuery.fn.putCursorAtEnd = function() {
-
-  return this.each(function() {
-
-    jQuery(this).focus()
-
-    // If this function exists...
-    if (this.setSelectionRange) {
-      // ... then use it (Doesn't work in IE)
-
-      // Double the length because Opera is inconsistent about whether a carriage return is one character or two. Sigh.
-      var len = jQuery(this).val().length * 2;
-
-      this.setSelectionRange(len, len);
-    
-    } else {
-    // ... otherwise replace the contents with itself
-    // (Doesn't work in Google Chrome)
-
-      jQuery(this).val(jQuery(this).val());
-      
-    }
-
-    // Scroll to the bottom, in case we're in a tall textarea
-    // (Necessary for Firefox and Google Chrome)
-    this.scrollTop = 999999;
-
-  });
-
-};
-
 jQuery( document ).ready( function( $ ) {
 
     $( '.media-modal-close' ).on( 'click', function( e) {
@@ -331,7 +300,8 @@ jQuery( document ).ready( function( $ ) {
 			'change input.nf-setting': 'save',
 			'change textarea.nf-setting': 'save',
 			'change select.nf-setting': 'save',
-			'click .nf-delete-list-item': 'delete_list_item'
+			'click .nf-delete-list-item': 'delete_list_item',
+			'change input.nf-checkbox-list': 'save_checkbox_list'
 		},
 		save: function(e) {
 			clearTimeout(savedNoticeTimeout);
@@ -350,6 +320,7 @@ jQuery( document ).ready( function( $ ) {
 			} else if ( this_model.get('type') == 'rte' ) {
 				var value = tinyMCE.get(el_id).getContent();
 			} else {
+				console.log( this_model.get( 'type' ) );
 				var value = jQuery(el).val();
 			}
 
@@ -374,6 +345,20 @@ jQuery( document ).ready( function( $ ) {
 					}
 				});
 			}
+		},
+		/** Save our checkbox list default selection **/
+		save_checkbox_list: function(e) {
+			var tmp_array = [];
+			$( '.nf-checkbox-list' ).each( function() {
+				if ( this.checked ) {
+					tmp_array.push( this.value );
+				}
+			})
+			var this_model = settings.get( 'selected' );
+			this_model.set( 'current_value', tmp_array );
+		 	jQuery('.updated').hide().fadeIn();
+	        // Hide the div after 3 seconds
+			savedNoticeTimeout = setTimeout( "jQuery('.updated').fadeOut();",3000 );
 		}
 	});
 

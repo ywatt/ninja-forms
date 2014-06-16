@@ -26,6 +26,14 @@ class NF_Field_Dropdown extends NF_Field_List {
 		parent::__construct();
 		$this->nicename = __( 'Dropdown', 'ninja-forms' );
 
+		$this->registered_settings['display']['label_pos']['options'] = array(
+			array( 'name' => __( 'None', 'ninja-forms' ), 'value' => 'none' ),
+			array( 'name' => __( 'Above Element', 'ninja-forms' ), 'value' => 'above' ),
+			array( 'name' => __( 'Left of Element', 'ninja-forms' ), 'value' => 'left' ),
+			array( 'name' => __( 'Right of Element', 'ninja-forms' ), 'value' => 'right' ),
+			array( 'name' => __( 'Below Element', 'ninja-forms' ), 'value' => 'below' ),
+		);
+
 		do_action( 'nf_dropdown_construct', $this );
 	}
 

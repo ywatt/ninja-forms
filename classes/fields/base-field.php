@@ -111,19 +111,15 @@ class NF_Field_Base {
 		}
 		if ( $this->settings['label_pos'] != 'none' && $this->settings['label_pos'] != 'inside' ) {
 			echo '<label>';
-			if ( $this->settings['label_pos'] == 'left' ) {
+			if ( $this->settings['label_pos'] == 'above' || $this->settings['label_pos'] == 'left' ) {
 				echo $this->settings['label'];
 			}			
-		}
-
-		if ( $this->settings['label_pos'] == 'inside' ) {
-			$this->placeholder = $this->settings['label'];
 		}
 
 		$this->render_element();
 
 		if ( $this->settings['label_pos'] != 'none' && $this->settings['label_pos'] != 'inside' ) {
-			if ( $this->settings['label_pos'] == 'right' ) {
+			if ( $this->settings['label_pos'] == 'right' || $this->settings['label_pos'] == 'below' ) {
 				echo $this->settings['label'];
 			}
 			echo '</label>';			
@@ -169,6 +165,7 @@ class NF_Field_Base {
 				$this->settings[ $setting ] = $value;
 			}	
 		}
+
 		$this->value = Ninja_Forms()->field_var->values[ $field_id ];
 		$this->setup();
 	}

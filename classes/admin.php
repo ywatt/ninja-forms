@@ -211,6 +211,36 @@ class NF_Admin {
 	}
 
 	/**
+	 * Output our Notifications Table
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return void
+	 */
+	public function output_notifications_table() {
+		//Create an instance of our package class...
+	    $nf_notifications = new NF_Notifications_List_Table();
+	    //Fetch, prepare, sort, and filter our data...
+	    $nf_notifications->prepare_items();
+	    ?>
+	    <div class="wrap">
+        
+        <div id="icon-users" class="icon32"><br/></div>
+        <h2><?php _e( 'Notifications', 'ninja-forms' ); ?> <?php echo sprintf('<a href="?page=%s&action=%s" class="add-new-h2">',$_REQUEST['page'],'new' ); _e( 'Add New', 'ninja-forms' );?></a></h2>
+        
+        <!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
+        <form id="forms-filter" method="get">
+            <!-- For plugins, we also need to ensure that the form posts back to our current page -->
+            <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+            <!-- Now we can render the completed list table -->
+            <?php $nf_notifications->display() ?>
+        </form>
+        
+    	</div>
+    	<?php
+	}
+
+	/**
 	 * Register our default form settings and sidebars.
 	 * 
 	 * @access public
@@ -291,62 +321,65 @@ class NF_Admin {
 	public function register_default_field_settings() {
 		// Register our default form settings sidebars
 		Ninja_Forms()->register->field_settings_menu( 'general', 'General' );
-		Ninja_Forms()->register->field_settings_menu( 'label', 'Label' );
+		Ninja_Forms()->register->field_settings_menu( 'display', 'Display' );
 
 		// Register our default form settings
 		$general = apply_filters( 'nf_general_field_settings', array(
-			'logged_in' 	=> array(
-				'id' 		=> 'logged_in',
-				'type' 		=> 'checkbox',
-				'name' 		=> __( 'Require users to be logged in', 'ninja-forms' ),
+			'default_value' => array(
+				'id' 		=> 'default_value',
+				'type' 		=> 'text',
+				'name' 		=> __( 'Default Value', 'ninja-forms' ),
 				'desc' 		=> '',
 				'help_text' => '',
-				'std' 		=> 0,
+				'std' 		=> '',
 			),
-			'append_page' 	=> array(
-				'id' 		=> 'append_page',
-				'type' 		=> 'select',
-				'name' 		=> __( 'Add to this page', 'ninja-forms' ),
+			'req' 	=> array(
+				'id' 		=> 'req',
+				'type' 		=> 'checkbox',
+				'name' 		=> __( 'Required Field', 'ninja-forms' ),
 				'desc' 		=> '',
 				'help_text' =>'',
-				'std' 		=> '',
-				'options' 	=> array(
-					array( 'name' => 'TEST1', 'value' => 'test1' ),
-					array( 'name' => 'TEST2', 'value' => 'test2' ),
-				),
-			),
-			'ajax' 			=> array(
-				'id' 		=> 'ajax',
-				'type' 		=> 'checkbox',
-				'name' 		=> __( 'Submit this form without reloading the page?', 'ninja-forms' ),
-				'desc' 		=> '',
-				'help_text' => '',
 				'std' 		=> 0,
+			),
+			'class'			=> array(
+				'id' 		=> 'class',
+				'type' 		=> 'text',
+				'name' 		=> __( 'Custom Classes', 'ninja-forms' ),
+				'desc' 		=> __( 'Comma separated list', 'ninja-forms' ),
+				'help_text' =>'',
+				'std' 		=> '',
 			),
 		) );
 
 		Ninja_Forms()->register->field_settings( 'general', $general );
 
 		$label = apply_filters( 'nf_label_field_settings', array(
-			'sub_limit_number' 	=> array(
-				'id'			=> 'sub_limit_number',
-				'type'			=> 'number',
-				'name' 			=> __( 'Limit Submissions', 'ninja-forms' ),
+			'label' 			=> array(
+				'id'			=> 'label',
+				'type'			=> 'text',
+				'name' 			=> __( 'Label', 'ninja-forms' ),
 				'desc' 			=> '',
 				'help_text'		=> '',
 				'std' 			=> ''
 			),
-			'sub_limit_msg'		=> array(
-				'id'			=> 'sub_limit_msg',
-				'type'			=> 'textarea',
-				'name'			=> __( 'Limit Reached Message', 'ninja-forms' ),
+			'label_pos'			=> array(
+				'id'			=> 'label_pos',
+				'type'			=> 'select',
+				'name'			=> __( 'Label Position', 'ninja-forms' ),
 				'desc'			=> '',
 				'help_text'		=> '',
 				'std'			=> '',
+				'options'		=> array(
+					array( 'name' => __( 'Above Element', 'ninja-forms' ), 'value' => 'above' ),
+					array( 'name' => __( 'Left of Element', 'ninja-forms' ), 'value' => 'left' ),
+					array( 'name' => __( 'Inside of Element', 'ninja-forms' ), 'value' => 'inside' ),
+					array( 'name' => __( 'Right of Element', 'ninja-forms' ), 'value' => 'right' ),
+					array( 'name' => __( 'Below Element', 'ninja-forms' ), 'value' => 'below' ),
+				),
 			),
 		));
 
-		Ninja_Forms()->register->field_settings( 'label', $label );
+		Ninja_Forms()->register->field_settings( 'display', $label );
 
 		do_action( 'nf_register_field_settings' );
 	}
@@ -413,7 +446,7 @@ class NF_Admin {
 						<div id="nav-menu-header">
 							<div class="major-publishing-actions">
 								<div class="publishing-action">
-									<a href="#nf-settings-modal" rel="modal:open"><input type="button" id="form_settings" class="open-settings-modal button button-secondary" value="<?php _e( 'Form Settings', 'ninja-forms' ); ?>"></a>
+									<a href="#nf-settings-modal" rel="modal:open" id="form_settings" class="open-settings-modal button button-secondary"><?php _e( 'Form Settings', 'ninja-forms' ); ?></a> <a href="#nf-notifications-modal" rel="modal:open" class="button-secondary"><?php _e( 'Notifications', 'ninja-forms' ); ?></a>
 								</div><!-- END .publishing-action -->
 							</div><!-- END .major-publishing-actions -->
 						</div><!-- END .nav-menu-header -->
@@ -467,6 +500,28 @@ class NF_Admin {
 		</div>
 
 		<!-- /NF SETTINGS MODAL -->
+
+		<!-- NF NOTIFICATIONS MODAL -->
+
+		<div id="nf-notifications-modal" style="display:none">
+			<a class="media-modal-close" href="#" title="Close">
+		  		<span class="media-modal-icon"></span>
+		  	</a>
+	  		
+			<div class="nf-notifications">
+				
+				<div class="nf-notifications-desc-desc"></div>
+				<div class="nf-notifications-content-wrap">
+					<div class="nf-notifications-content" id="nf-notifications-content">
+						<?php
+						$this->output_notifications_table();
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- /NF NOTIFICATIONS MODAL -->
 
 		<!-- Begin Backbone.js Underscore templates -->
 
@@ -794,11 +849,42 @@ class NF_Admin {
 	 */
 	public function get_field_settings( $field_id, $menu = '' ) {
 		$field_type = Ninja_Forms()->field( $field_id )->get_setting( 'type' );
-		$settings = array_merge_recursive( Ninja_Forms()->registered_field_settings, Ninja_Forms()->field_types->$field_type->registered_settings );
-		if ( $menu != '' ) {
+		
+		$tmp_array = Ninja_Forms()->registered_field_settings;
+
+		foreach( Ninja_Forms()->field_types->$field_type->registered_settings as $m => $settings ) {
+			foreach ( $settings as $slug => $setting ) {
+				foreach ( $setting as $prop => $val ) {
+					$tmp_array[ $m ][ $slug ][ $prop ] = $val;
+				}
+			}
+		}
+
+		$settings = $tmp_array;
+
+		//$settings = array_merge_recursive( Ninja_Forms()->field_types->$field_type->registered_settings, Ninja_Forms()->registered_field_settings );
+		if ( $menu != '' && isset ( $settings[ $menu ] ) ) {
 			return $settings[ $menu ];	
 		} else {
 			return $settings;
+		}
+	}
+
+	/**
+	 * Get a specific field setting
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return array $setting
+	 */
+	public function get_field_setting( $field_id, $setting ) {
+		$field_settings = $this->get_field_settings( $field_id );
+		foreach ( $field_settings as $menu => $settings ) {
+			foreach ( $settings as $slug => $s ) {
+				if ( $slug == $setting ) {
+					return $s;
+				}
+			}
 		}
 	}
 

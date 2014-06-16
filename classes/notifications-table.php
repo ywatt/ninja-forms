@@ -40,7 +40,7 @@ if( ! class_exists( 'WP_List_Table' ) ) {
  * 
  * Our theme for this list table is going to be movies.
  */
-class NF_All_Forms_List_Table extends WP_List_Table {
+class NF_Notifications_List_Table extends WP_List_Table {
     
     /** ************************************************************************
      * REQUIRED. Set up a constructor that references the parent constructor. We 
@@ -51,8 +51,8 @@ class NF_All_Forms_List_Table extends WP_List_Table {
                 
         //Set parent defaults
         parent::__construct( array(
-            'singular'  => 'form',     //singular name of the listed records
-            'plural'    => 'forms',    //plural name of the listed records
+            'singular'  => 'notification',     //singular name of the listed records
+            'plural'    => 'notifications',    //plural name of the listed records
             'ajax'      => false        //does this table support ajax?
         ) );
         
@@ -115,7 +115,6 @@ class NF_All_Forms_List_Table extends WP_List_Table {
             'delete'    => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Delete</a>',$_REQUEST['page'],'delete',$item['id'] ),
             'duplicate' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Duplicate</a>', $_REQUEST['page'], 'duplicate', $item['id'] ),
             'export' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Export</a>', $_REQUEST['page'], 'export', $item['id'] ),
-            'submissions' => sprintf( '<a href="edit.php?post_type=nf_sub&form_id=%s">Submissions</a>', $item['id'] ),
         );
         
         //Return the title contents

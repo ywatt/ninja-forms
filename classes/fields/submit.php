@@ -29,6 +29,10 @@ class NF_Field_Submit extends NF_Field_Base {
 		parent::__construct();
 		$this->nicename = __( 'Submit Button', 'ninja-forms' );
 
+		$this->registered_settings['general']['default_value']['type'] = 'custom';
+		$this->registered_settings['general']['req']['type'] = 'custom';
+		$this->registered_settings['display']['label_pos']['type'] = 'custom';
+
 		do_action( 'nf_submit_construct', $this );
 	}
 

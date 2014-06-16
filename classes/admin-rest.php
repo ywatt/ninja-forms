@@ -231,7 +231,7 @@ class NF_Admin_Rest_API {
                         if ( isset ( $this->request['menu'] ) ) {
                             $menu = $this->request['menu'];
                         } else {
-                            $menu = 'general';
+                            $menu = 'display';
                         }
                         
                         foreach( Ninja_Forms()->admin->get_field_settings( $object_id, $menu ) as $setting ) {
@@ -299,7 +299,24 @@ class NF_Admin_Rest_API {
                 $meta_key = $data['meta_key'];
                 $object_id = $data['object_id'];
                 $meta_value = $data['current_value'];
-                return nf_update_object_meta( $object_id, $meta_key, $meta_value );
+
+                // If we're saving a field setting, the setting may have a specific callback function.
+
+                if ( nf_get_object_type( $object_id ) == 'field' ) {
+                    // Check for that function and call it if necessary.
+                    $setting = Ninja_Forms()->admin->get_field_setting( $object_id, $meta_key );
+                    if ( isset ( $setting['save_callback'] ) ) {
+                        if ( ( is_array( $setting['save_callback'] ) && method_exists( $setting['save_callback'][0], $setting['save_callback'][1] ) ) || ( is_string( $setting['save_callback'] ) && function_exists( $setting['save_callback'] ) ) ) {
+                            $arguments = array( 'object_id' => $object_id, 'meta_key' => $meta_key, 'meta_value' => $meta_value );
+                            return call_user_func_array( $setting['save_callback'], $arguments );
+                        }
+                    } else {
+                        return nf_update_object_meta( $object_id, $meta_key, $meta_value ); 
+                    }
+                } else {
+                   return nf_update_object_meta( $object_id, $meta_key, $meta_value );
+                }
+               
 
                 break;
             case 'DELETE':

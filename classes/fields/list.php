@@ -49,11 +49,25 @@ class NF_Field_List extends NF_Field_Base {
 				'std' 				=> 0,
 				'template_callback'	=> array( $this, 'underscore_template' ),
 				'fetch_callback'	=> array( $this, 'fetch_items' ),
-				'save_callback'		=> array( $this, 'save_item' ),
+			),
+			'selected'				=> array(
+				'id'				=> 'selected',
+				'type'				=> 'custom',
+				'name'				=> '',
+				'desc'				=> '',
+				'std'				=> array(),
 			),
 		) );
 
-		$this->registered_settings['items'] = $item_settings;		
+		$this->registered_settings['items'] = $item_settings;
+
+		$this->registered_settings['general']['default_value']['type'] = 'custom';
+		$this->registered_settings['display']['label_pos']['options'] = array(
+			array( 'name' => __( 'Above Element', 'ninja-forms' ), 'value' => 'above' ),
+			array( 'name' => __( 'Left of Element', 'ninja-forms' ), 'value' => 'left' ),
+			array( 'name' => __( 'Right of Element', 'ninja-forms' ), 'value' => 'right' ),
+			array( 'name' => __( 'Below Element', 'ninja-forms' ), 'value' => 'below' ),
+		);
 
 		do_action( 'nf_list_construct', $this );
 		
@@ -251,16 +265,5 @@ class NF_Field_List extends NF_Field_Base {
 		$meta_array[] = array( 'type' => 'custom', 'id' => 'list_items', 'object_id' => $field_id, 'selected' => $selected, 'items' => $items_array );
 
 		return $meta_array;
-	}
-
-	/**
-	 * Save our items when they are blurred
-	 * 
-	 * @access public
-	 * @since 3.0
-	 * @return void
-	 */
-	public function save_items( ) {
-
 	}
 }
