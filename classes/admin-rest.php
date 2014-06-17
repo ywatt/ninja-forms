@@ -210,12 +210,14 @@ class NF_Admin_Rest_API {
                             $menu = 'display';
                         }
                         foreach( Ninja_Forms()->registered_form_settings[ $menu ] as $setting ) {
+                            $meta_key = isset( $setting[ 'meta_key' ] ) ? $setting[ 'meta_key' ] : $setting['id'];
                             $current_value = nf_get_form_setting( $object_id, $setting['id'] );
                             if ( ! $current_value ) {
                                 $current_value = $setting['std'];
                             }
                             $tmp_array = array();
                             $tmp_array['object_id'] = $object_id;
+                            $tmp_array['meta_key'] = $meta_key;
                             $tmp_array['id'] = $setting['id'];
                             $tmp_array['type'] = $setting['type'];
                             $tmp_array['current_value'] = $current_value;
