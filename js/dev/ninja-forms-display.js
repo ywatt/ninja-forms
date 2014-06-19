@@ -614,7 +614,7 @@ jQuery(document).ready(function(jQuery) {
 									//console.log( 'undefined: ' + f_value );
 								}
 
-								if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' && isNaN( f_value ) ) {
+								if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' && isNaN( f_value ) && typeof f_value != 'undefined' ) {
 									f_value = f_value.replace( ninja_forms_settings.currency_symbol, "" );
 									f_value = f_value.replace( /,/g, "" );
 								}
