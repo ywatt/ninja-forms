@@ -101,7 +101,7 @@ class NF_Field_Checkbox_List extends NF_Field_List {
 					<a href="#" class="button-secondary"><?php _e( 'Import List Items', 'ninja-forms' ); ?></a>
 				</th>
 				<th>
-					Defaultasdf asdf
+					Default
 				</th>
 				<th>
 					Label

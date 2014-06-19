@@ -119,6 +119,7 @@ class NF_Admin {
 		wp_enqueue_script( 'nf-admin', NF_PLUGIN_URL . 'assets/js/dev/admin.js', array( 'jquery', 'jquery-ui-datepicker', 'jquery-ui-sortable', 'backbone', 'underscore' ) );
 		if ( isset ( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
 			wp_enqueue_script( 'nf-edit-form', NF_PLUGIN_URL . 'assets/js/dev/edit-form.js', array( 'jquery' ) );
+			wp_localize_script( 'nf-edit-form', 'nf_settings_form_h1', __( 'Form Settings', 'ninja-forms' ) );
 			wp_localize_script( 'nf-edit-form', 'nf_rest_url', admin_url( 'admin.php?page=ninja-forms&nf_rest=rest_api' ) );
 			wp_enqueue_script( 'nf-modal', NF_PLUGIN_URL . 'assets/js/min/jquery.modal.min.js', array( 'jquery' ) );
 			if ( isset ( $_GET['form_id'] ) ) {
@@ -267,7 +268,7 @@ class NF_Admin {
 				'type' 		=> 'select',
 				'name' 		=> __( 'Add This Form To This Page', 'ninja-forms' ),
 				'desc' 		=> '',
-				'help_text' =>'',
+				'help_text' => '',
 				'std' 		=> '',
 				'options' 	=> array(
 					array( 'name' => 'TEST1', 'value' => 'test1' ),
@@ -320,40 +321,11 @@ class NF_Admin {
 	 */
 	public function register_default_field_settings() {
 		// Register our default form settings sidebars
-		Ninja_Forms()->register->field_settings_menu( 'general', 'General' );
-		Ninja_Forms()->register->field_settings_menu( 'display', 'Display' );
+		Ninja_Forms()->register->field_settings_menu( 'display', __( 'Display', 'ninja-forms' ) );
+		Ninja_Forms()->register->field_settings_menu( 'restrictions', __( 'Restrictions', 'ninja-forms' ) );
+		Ninja_Forms()->register->field_settings_menu( 'advanced', __( 'Advanced', 'ninja-forms' ) );
 
-		// Register our default form settings
-		$general = apply_filters( 'nf_general_field_settings', array(
-			'default_value' => array(
-				'id' 		=> 'default_value',
-				'type' 		=> 'text',
-				'name' 		=> __( 'Default Value', 'ninja-forms' ),
-				'desc' 		=> '',
-				'help_text' => '',
-				'std' 		=> '',
-			),
-			'req' 	=> array(
-				'id' 		=> 'req',
-				'type' 		=> 'checkbox',
-				'name' 		=> __( 'Required Field', 'ninja-forms' ),
-				'desc' 		=> '',
-				'help_text' =>'',
-				'std' 		=> 0,
-			),
-			'class'			=> array(
-				'id' 		=> 'class',
-				'type' 		=> 'text',
-				'name' 		=> __( 'Custom Classes', 'ninja-forms' ),
-				'desc' 		=> __( 'Comma separated list', 'ninja-forms' ),
-				'help_text' =>'',
-				'std' 		=> '',
-			),
-		) );
-
-		Ninja_Forms()->register->field_settings( 'general', $general );
-
-		$label = apply_filters( 'nf_label_field_settings', array(
+		$display = apply_filters( 'nf_display_field_settings', array(
 			'label' 			=> array(
 				'id'			=> 'label',
 				'type'			=> 'text',
@@ -377,9 +349,77 @@ class NF_Admin {
 					array( 'name' => __( 'Below Element', 'ninja-forms' ), 'value' => 'below' ),
 				),
 			),
+			'default_value' 	=> array(
+				'id' 			=> 'default_value',
+				'type' 			=> 'text',
+				'name' 			=> __( 'Default Value', 'ninja-forms' ),
+				'desc' 			=> '',
+				'help_text' 	=> '',
+				'std' 			=> '',
+			),
+			'wrap_class'		=> array(
+				'id' 			=> 'wrap_class',
+				'type' 			=> 'text',
+				'name' 			=> __( 'Custom Wrapper Classes', 'ninja-forms' ),
+				'desc' 			=> __( 'Comma separated list', 'ninja-forms' ),
+				'help_text' 	=> '',
+				'std' 			=> '',
+			),			
+			'label_class'		=> array(
+				'id' 			=> 'label_class',
+				'type' 			=> 'text',
+				'name' 			=> __( 'Custom Label Classes', 'ninja-forms' ),
+				'desc' 			=> __( 'Comma separated list', 'ninja-forms' ),
+				'help_text' 	=> '',
+				'std' 			=> '',
+			),
+			'element_class'		=> array(
+				'id' 			=> 'element_class',
+				'type' 			=> 'text',
+				'name' 			=> __( 'Custom Element Classes', 'ninja-forms' ),
+				'desc' 			=> __( 'Comma separated list', 'ninja-forms' ),
+				'help_text' 	=> '',
+				'std' 			=> '',
+			),
 		));
 
-		Ninja_Forms()->register->field_settings( 'display', $label );
+		Ninja_Forms()->register->field_settings( 'display', $display );
+
+		// Register our default field settings
+		$restrictions = apply_filters( 'nf_restriction_field_settings', array(
+			'req' 				=> array(
+				'id' 			=> 'req',
+				'type' 			=> 'checkbox',
+				'name' 			=> __( 'Required Field', 'ninja-forms' ),
+				'desc' 			=> '',
+				'help_text' 	=> '',
+				'std' 			=> 0,
+			),
+		) );
+
+		Ninja_Forms()->register->field_settings( 'restrictions', $restrictions );
+
+		// Register our default field settings
+		$advanced = apply_filters( 'nf_restriction_field_settings', array(
+			'key' 				=> array(
+				'id' 			=> 'key',
+				'type' 			=> 'text',
+				'name' 			=> __( 'Key Name', 'ninja-forms' ),
+				'desc' 			=> '',
+				'help_text' 	=> '',
+				'std' 			=> '',
+			),
+			'data_attributes'	=> array(
+				'id'			=> 'data_attributes',
+				'type'			=> 'textarea',
+				'name' 			=> __( 'Data Attributes', 'ninja-forms' ),
+				'desc'			=> __( 'Comma separated data attributes like: test="test", test-data="data"', 'ninja-forms' ),
+				'help_text'		=> '',
+				'std'			=> '',
+			),
+		) );
+
+		Ninja_Forms()->register->field_settings( 'advanced', $advanced );
 
 		do_action( 'nf_register_field_settings' );
 	}
@@ -488,8 +528,7 @@ class NF_Admin {
 			</div>
 			<div class="nf-settings">
 				<div class="nf-settings-title">
-					<h1 id="nf-settings-h1"><div id="nf_form_h1" style="display:none;"><?php _e( 'Form Settings', 'ninja-forms' ); ?></div><div id="nf_field_h1" style="display:none;"><?php _e( 'Field Settings', 'ninja-forms' ); ?></div></h1>
-					<div class="updated" style="display:none"><?php _e( 'Saving...', 'ninja-forms' ); ?></div>
+					<h1 id="nf-settings-h1"></h1><div class="saving" style="display:none;"><p><?php _e( 'Saving', 'ninja-forms' ); ?></p></div>
 				</div>
 				<div class="nf-settings-desc-desc"></div>
 				<div class="nf-settings-content-wrap">
@@ -568,259 +607,269 @@ class NF_Admin {
 					var active_class = '';
 				}
 			%>
-				<a href="#" class="media-menu-item nf-settings-menu <%= active_class %>" data-menu-item="<%= menuItem.get( 'id' ) %>" data-object-type="<%= menuItem.get( 'object_type' ) %>" data-object-id="<%= menuItem.get( 'object_id' ) %>" title=""><%= menuItem.get( 'nicename' ) %></a>
+				<a href="#<%= menuItem.get( 'id' ) %>" class="media-menu-item nf-settings-menu <%= active_class %>" data-menu-item="<%= menuItem.get( 'id' ) %>" data-object-type="<%= menuItem.get( 'object_type' ) %>" data-object-id="<%= menuItem.get( 'object_id' ) %>" title=""><%= menuItem.get( 'nicename' ) %></a>
 			<%
 			});
 			%>
 			
 		</script>
 
-		<!-- Settings modal HR template -->
-
-		<script type="text/html" id="tmpl-nf-settings-h1">
-			<%= title %>
-		</script>
-
 		<!-- Settings form elements template -->
 
 		<script type="text/html" id="tmpl-nf-settings">
-			<table class="nf-table form-table">
-			<% _.each(settings, function(setting){
-				var setting_id = setting.get( 'id' );
-				var value = setting.get( 'current_value' );
-
-				// Check to see if this field should be visible
-				if ( typeof setting.get( 'visible' ) == 'undefined' ) {
-					var visible = true;
-				} else {
-					var visible = setting.get( 'visible' );
-				}
-
-				if ( !visible ) {
-					visible = 'hidden';
-				} else {
-					visible = '';
-				}
-
-				// Loop through our 'data' settings and setup our 'data-attribute' tags.
-				if ( typeof setting.get( 'data' ) !== 'undefined' ) {
-					var data = setting.get( 'data' );
-					var data_attributes = '';
-					for ( prop in data ) {
-						data_attributes += 'data-' + prop + '="' + data[prop] + '"';
-					}
-				}
+			<%
+			
+			_.each( menus, function( menu ) {
+				var collection = tmp.selectAttribute( settings, 'menu', menu.get( 'id' ) );
 				%>
-				<tr class= "nf-<%= setting.get('type') %> <%= visible %>">
-				<%
-				switch( setting.get('type') ) {
+				<h4><a id="<%= menu.get( 'id' ) %>"><%= menu.get( 'nicename' ) %></a></h4>
 
-					case 'checkbox':
-						%>
-						<th>
-							<label for="<%= setting.id %>">
-								<%= setting.get( 'name' ) %>
-							</label>
-						</th>
-						<td>
-							<input type="checkbox" id="<%= setting.id %>" class="<%= setting.get('class') %> nf-setting" value="1" <% if ( value == 1 ) { %>checked<%}%> <%= data_attributes %>>
-							<span class="howto">
-								<%= setting.get( 'desc' ) %>
-							</span>
-						</td>
-						<%
-						break;
-					case 'select':
-						%>
-						<th>
-							<label for="<%= setting.id %>">
-								<%= setting.get( 'name' ) %>
-							</label>
-						</th>
-						<td>
-							<select id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" data-meta-key="<%= setting.get( 'meta_key' )%>" data-object-id="<%= setting.get( 'object_id' ) %>" <%= data_attributes %>>
-							<%
+				<hr>
+				<table class="nf-table form-table">
+					<% _.each( collection.models, function( setting ) {
+						var setting_id = setting.get( 'id' );
+						var value = setting.get( 'current_value' );
 
-							_.each(setting.get('options'), function(option) {
-								%>
-								<option value="<%= option.value %>" <% if ( value == option.value ) { %> selected <% } %>><%= option.name %></option>
-								<%
-							});
-							%>
-							</select>
-							<span class="howto">
-								<%= setting.get( 'desc' ) %>
-							</span>
-							<div class="nf-help">
-								
-							</div>
-						</td>
-						<%
-						break;
-					case 'number':
-						%>
-						<th>
-							<label for="<%= setting.id %>">
-								<%= setting.get( 'name' ) %>
-							</label>
-						</th>
-						<td>
-							<input type="number" id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" value="<%= value %>" min="<%= setting.get('min') %>" max="<%= setting.get('max') %>"  <%= data_attributes %>/>
-							<span class="howto">
-								<%= setting.get( 'desc' ) %>
-							</span>
-						</td>
-						<%
-						break;
-					case 'radio':
-						%>
-						<th>
-							<span>
-								<%= setting.get( 'name' ) %>
-							</span>
-						</th>
-						<td>
-							<%
-							var x = 0;
-							_.each(setting.get('options'), function(option) {
-								%>
-								<label>
-									<input type="radio" name="<%= setting.id %>" value="<%= option.value %>" <% if ( value == option.value ) { %> checked <% } %> id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" <%= data_attributes %>/>
-									<%= option.name %>
-								</label>
-								<%
-								x++;
-							});
-							%>
-							</select>
-							<span class="howto">
-								<%= setting.get( 'desc' ) %>
-							</span>
-							<div class="nf-help">
-								
-							</div>
-						</td>
-						<%
-						break;
-					case 'text':
-						%>
-						<th>
-							<label for="<%= setting.id %>">
-								<%= setting.get( 'name' ) %>
-							</label>
-						</th>
-						<td>
-							<input type="text" id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" value="<%= value %>" title="TEST TEST TEST" <%= data_attributes %>/>
-							<span class="howto">
-								<%= setting.get( 'desc' ) %>
-							</span>
-							<div class="nf-help">
-								
-							</div>
-						</td>
-						<%
-						break;					
-					case 'textarea':
-						%>
-						<th colspan="2">
-							<label for="<%= setting.id %>">
-								<%= setting.get( 'name' ) %>
-							</label>
-							<textarea id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" <%= data_attributes %>><%= value %></textarea>
-							<span class="howto">
-								<%= setting.get( 'desc' ) %>
-							</span>
-						</th>
-						<%
-						break;
-					case 'repeater-text':
+						// Check to see if this field should be visible
+						if ( typeof setting.get( 'visible' ) == 'undefined' ) {
+							var visible = true;
+						} else {
+							var visible = setting.get( 'visible' );
+						}
 
-						%>
-						<th>
-							<label for="<%= setting.id %>">
-								<%= setting.get( 'name' ) %> <a href="#" id="<%= setting_id %>" class="repeater-add">Add New</a> <br />
-							</label>
-						</th>
-						<td>
-							<span id="<%= setting_id %>_span">
-								<%
-								if ( typeof value === 'object' ) {
-									_.each(value, function(val) {
-										%>
-										<span>
-											<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text nf-setting" value="<%= val %>" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="repeater-remove">X</a>
-											<br />
-										</span>
-										<%
-									});
-								} else {
-									%>
-									<span>
-										<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text nf-setting" value="" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="">X</a>
-										<br />
-									</span>
-									<%
-								}
-								%>
-							</span>
-						</td>
-						<%
-						break;
-					case 'rte':
-						%>
-						<th class="nf-rte" colspan="2">
-							<label for="<%= setting.id %>">
-								<%= setting.get( 'name' ) %>
-							</label>
-							<div id="<%= setting_id %>_replace"></div>
-							<span class="howto">
-								<%= setting.get( 'desc' ) %>
-							</span>
-						</th>
-						<%
-						break;
-					case 'custom':
-						<?php
-						// loop through our registered field and form settings to see if any of them have custom backbone templates
-						
-						if ( Ninja_Forms()->form( $form_id )->get_fields() ) {
-							foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field_id ) {
-								foreach ( Ninja_Forms()->admin->get_field_settings( $field_id ) as $sidebar => $setting ) {
-									foreach ( $setting as $slug => $s ) {
-										$tmp_array[ $slug ] = $s;
-									}
-								}
-							}
-							foreach ( $tmp_array as $slug => $s ) {
-								if ( $s['type'] == 'custom' ) { // Check to see if this is a custom setting type
-									?>
-									if ( setting.get( 'id' ) == '<?php echo $slug;?>' ) {
-									%>
-										<?php
-										if ( isset ( $s['template'] ) ) { // If we are given the underscore template as a string, echo it.
-											echo $s['template'];
-										} else if ( isset ( $s['template_callback'] ) ) { // If the template is a callback function, call that function.
-											if ( ( is_array( $s['template_callback'] ) && method_exists( $s['template_callback'][0], $s['template_callback'][1] ) ) || ( is_string( $s['template_callback'] ) && function_exists( $s['template_callback'] ) ) ) {
-												$arguments = array( 'field_id' => $field_id );
-												call_user_func_array( $s['template_callback'], $arguments );	
-											}
-										}
-										?>
-									<%
-									}
-									<?php
-								}								
+						if ( !visible ) {
+							visible = 'hidden';
+						} else {
+							visible = '';
+						}
+
+						// Loop through our 'data' settings and setup our 'data-attribute' tags.
+						if ( typeof setting.get( 'data' ) !== 'undefined' ) {
+							var data = setting.get( 'data' );
+							var data_attributes = '';
+							for ( prop in data ) {
+								data_attributes += 'data-' + prop + '="' + data[prop] + '"';
 							}
 						}
-						
-						?>
-						break;
-				}
-				%>
+						%>
+						<tr class= "nf-<%= setting.get('type') %> <%= visible %>">
+						<%
+						switch( setting.get('type') ) {
 
-			</tr>
-			<% }); %>
-			</table>
+							case 'checkbox':
+								%>
+								<th>
+									<label for="<%= setting.id %>">
+										<%= setting.get( 'name' ) %>
+									</label>
+								</th>
+								<td>
+									<input type="checkbox" id="<%= setting.id %>" class="<%= setting.get('class') %> nf-setting" value="1" <% if ( value == 1 ) { %>checked<%}%> <%= data_attributes %>>
+									<span class="howto">
+										<%= setting.get( 'desc' ) %>
+									</span>
+								</td>
+								<%
+								break;
+							case 'select':
+								%>
+								<th>
+									<label for="<%= setting.id %>">
+										<%= setting.get( 'name' ) %>
+									</label>
+								</th>
+								<td>
+									<select id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" data-meta-key="<%= setting.get( 'meta_key' )%>" data-object-id="<%= setting.get( 'object_id' ) %>" <%= data_attributes %>>
+									<%
+
+									_.each(setting.get('options'), function(option) {
+										%>
+										<option value="<%= option.value %>" <% if ( value == option.value ) { %> selected <% } %>><%= option.name %></option>
+										<%
+									});
+									%>
+									</select>
+									<span class="howto">
+										<%= setting.get( 'desc' ) %>
+									</span>
+									<div class="nf-help">
+										
+									</div>
+								</td>
+								<%
+								break;
+							case 'number':
+								%>
+								<th>
+									<label for="<%= setting.id %>">
+										<%= setting.get( 'name' ) %>
+									</label>
+								</th>
+								<td>
+									<input type="number" id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" value="<%= value %>" min="<%= setting.get('min') %>" max="<%= setting.get('max') %>"  <%= data_attributes %>/>
+									<span class="howto">
+										<%= setting.get( 'desc' ) %>
+									</span>
+								</td>
+								<%
+								break;
+							case 'radio':
+								%>
+								<th>
+									<span>
+										<%= setting.get( 'name' ) %>
+									</span>
+								</th>
+								<td>
+									<%
+									var x = 0;
+									_.each(setting.get('options'), function(option) {
+										%>
+										<label>
+											<input type="radio" name="<%= setting.id %>" value="<%= option.value %>" <% if ( value == option.value ) { %> checked <% } %> id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" <%= data_attributes %>/>
+											<%= option.name %>
+										</label>
+										<%
+										x++;
+									});
+									%>
+									</select>
+									<span class="howto">
+										<%= setting.get( 'desc' ) %>
+									</span>
+									<div class="nf-help">
+										
+									</div>
+								</td>
+								<%
+								break;
+							case 'text':
+								%>
+								<th>
+									<label for="<%= setting.id %>">
+										<%= setting.get( 'name' ) %>
+									</label>
+								</th>
+								<td>
+									<input type="text" id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" value="<%= value %>" title="TEST TEST TEST" <%= data_attributes %>/>
+									<span class="howto">
+										<%= setting.get( 'desc' ) %>
+									</span>
+									<div class="nf-help">
+										
+									</div>
+								</td>
+								<%
+								break;					
+							case 'textarea':
+								%>
+								<th colspan="2">
+									<label for="<%= setting.id %>">
+										<%= setting.get( 'name' ) %>
+									</label>
+								</th>
+								<td>
+									<textarea id="<%= setting_id %>" class="<%= setting.get('class') %> nf-setting" <%= data_attributes %>><%= value %></textarea>
+									<span class="howto">
+										<%= setting.get( 'desc' ) %>
+									</span>
+								</td>
+								<%
+								break;
+							case 'repeater-text':
+
+								%>
+								<th>
+									<label for="<%= setting.id %>">
+										<%= setting.get( 'name' ) %> <a href="#" id="<%= setting_id %>" class="repeater-add">Add New</a> <br />
+									</label>
+								</th>
+								<td>
+									<span id="<%= setting_id %>_span">
+										<%
+										if ( typeof value === 'object' ) {
+											_.each(value, function(val) {
+												%>
+												<span>
+													<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text nf-setting" value="<%= val %>" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="repeater-remove">X</a>
+													<br />
+												</span>
+												<%
+											});
+										} else {
+											%>
+											<span>
+												<input type="text" id="" class="<%= setting.get('class') %> repeater-<%= setting_id %> repeater-text nf-setting" value="" data-group="<%= setting_id %>" /> - <a href="#" id="<%= setting_id %>" class="">X</a>
+												<br />
+											</span>
+											<%
+										}
+										%>
+									</span>
+								</td>
+								<%
+								break;
+							case 'rte':
+								%>
+								<th class="nf-rte" colspan="2">
+									<label for="<%= setting.id %>">
+										<%= setting.get( 'name' ) %>
+									</label>
+									<div id="<%= setting_id %>_replace"></div>
+									<span class="howto">
+										<%= setting.get( 'desc' ) %>
+									</span>
+								</th>
+								<%
+								break;
+							case 'custom':
+								<?php
+								// loop through our registered field and form settings to see if any of them have custom backbone templates
+								
+								if ( Ninja_Forms()->form( $form_id )->get_fields() ) {
+									foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field_id ) {
+										foreach ( Ninja_Forms()->admin->get_field_settings( $field_id ) as $sidebar => $setting ) {
+											foreach ( $setting as $slug => $s ) {
+												$tmp_array[ $slug ] = $s;
+											}
+										}
+									}
+									foreach ( $tmp_array as $slug => $s ) {
+										if ( $s['type'] == 'custom' ) { // Check to see if this is a custom setting type
+											?>
+											if ( setting.get( 'id' ) == '<?php echo $slug;?>' ) {
+											%>
+												<?php
+												if ( isset ( $s['template'] ) ) { // If we are given the underscore template as a string, echo it.
+													echo $s['template'];
+												} else if ( isset ( $s['template_callback'] ) ) { // If the template is a callback function, call that function.
+													if ( ( is_array( $s['template_callback'] ) && method_exists( $s['template_callback'][0], $s['template_callback'][1] ) ) || ( is_string( $s['template_callback'] ) && function_exists( $s['template_callback'] ) ) ) {
+														$arguments = array( 'field_id' => $field_id );
+														call_user_func_array( $s['template_callback'], $arguments );	
+													}
+												}
+												?>
+											<%
+											}
+											<?php
+										}								
+									}
+								}
+								
+								?>
+								break;
+						}
+						%>
+
+					</tr>
+					<%
+				 	});
+				 	%>
+				</table>
+			<%
+			});
+			%>
+
 		</script>
 
 		<?php
@@ -836,7 +885,7 @@ class NF_Admin {
 	public function get_field_settings_menu( $field_id ) {
 		$field_type = nf_get_field_type( $field_id );
 		$menu = wp_parse_args( Ninja_Forms()->field_types->$field_type->settings_menu, Ninja_Forms()->registered_field_settings_menu );
-		ksort( $menu );
+		//ksort( $menu );
 		return $menu;
 	}
 

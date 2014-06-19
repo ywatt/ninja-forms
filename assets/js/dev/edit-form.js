@@ -1,5 +1,15 @@
 jQuery( document ).ready( function( $ ) {
 
+	tmp = {};
+
+	tmp.selectAttribute = function (collection, attribute, value) {
+	    var models = collection.select(function (model) {
+	        return model.get(attribute) == value;
+	    });
+
+	    return new collection.constructor(models);
+	}
+
     $( '.media-modal-close' ).on( 'click', function( e) {
     	$.modal.close();
     });
@@ -101,14 +111,17 @@ jQuery( document ).ready( function( $ ) {
 			e.preventDefault();
 			var fieldID = $( e.target ).data( 'field-id' );
 			var fieldTitle = $( e.target ).data( 'field-title' );
-			$( document ).data( 'nf-setting-h1', fieldTitle );
-			settings.fetch({
-				reset: true,
-				data: $.param({ object_type: 'field_settings', object_id: fieldID })
-			});
+			$( document ).data( 'nf-settings-h1', fieldTitle );
+			
 			menus.fetch({
 				reset:true,
-				data: $.param({ object_type: 'field_menu', object_id: fieldID })
+				data: $.param({ object_type: 'field_menu', object_id: fieldID }),
+				success: function() {
+					settings.fetch({
+						reset: true,
+						data: $.param({ object_type: 'field_settings', object_id: fieldID })
+					});
+				}
 			});
 			
 		},
@@ -136,7 +149,7 @@ jQuery( document ).ready( function( $ ) {
 		model: Menu
 	});
 
-	var menus = new Menus();
+	menus = new Menus();
 
 	var MenusView = Backbone.View.extend({
 		el: '#nf-settings-menu',
@@ -153,7 +166,6 @@ jQuery( document ).ready( function( $ ) {
 			'click a': 'change',
 		},
 		change: function( e ) {
-			e.preventDefault();
 
 			// Show our loading message;
 			$( '.loading' ).fadeIn();
@@ -176,14 +188,7 @@ jQuery( document ).ready( function( $ ) {
 			// Change the active attribute on this data model to 1.
 			menus.get( menuItem ).set( 'active', 1 );
 
-			// Fetch the settings for this menu link.
-			settings.fetch({
-				reset: true,
-				data: $.param({ object_type: objectType + '_settings', object_id: objectID, menu: menuItem }),
-				success: function() {
-					$( '.loading' ).fadeOut();
-				}
-			});
+
 		}
 	});
 
@@ -207,9 +212,10 @@ jQuery( document ).ready( function( $ ) {
 
 		    // Call super with attrs moved to options
 		    Backbone.Model.prototype.save.call(this, attrs, options);
-		    jQuery('.updated').hide().fadeIn();
+		    
+		    jQuery('.saving').hide().fadeIn();
 	        // Hide the div after 3 seconds
-			savedNoticeTimeout = setTimeout( "jQuery('.updated').fadeOut();",3000 );
+			savedNoticeTimeout = setTimeout( "jQuery('.saving').fadeOut();",3000 );
 		}
 	});
 
@@ -228,16 +234,14 @@ jQuery( document ).ready( function( $ ) {
 		el: '#nf-settings-content',
 		h1_el: '#nf-settings-h1',
 		template: '#tmpl-nf-settings',
-		h1_template: '#tmpl-nf-settings-h1',
 		initialize: function() {
 			this.collection.bind( 'reset', this.render, this );
 		},
 		render: function() {
-			var content = _.template( $( this.template ).html(), { settings: settings.models } );
+			var content = _.template( $( this.template ).html(), { menus: menus.models } );
 			$( this.el ).html( content );
 
-			var title = _.template( $( this.h1_template ).html(), { title: $( document ).data( 'nf-setting-h1' ) } );
-			$( this.h1_el ).html( title );
+			$( this.h1_el ).html( $( document ).data( 'nf-settings-h1' ) );
 
 			var rte = {};
 			var local_mce_init = {};
@@ -304,8 +308,9 @@ jQuery( document ).ready( function( $ ) {
 			'change input.nf-checkbox-list': 'save_checkbox_list'
 		},
 		save: function(e) {
+
 			clearTimeout(savedNoticeTimeout);
-			jQuery('.updated').hide().fadeIn();
+
 			var el = e.target;
 			var el_id = jQuery(el).prop('id');
 
@@ -320,11 +325,14 @@ jQuery( document ).ready( function( $ ) {
 			} else if ( this_model.get('type') == 'rte' ) {
 				var value = tinyMCE.get(el_id).getContent();
 			} else {
-				console.log( this_model.get( 'type' ) );
 				var value = jQuery(el).val();
 			}
-
+			
 			this_model.set( 'current_value', value );
+
+			if ( value == this_model.get( 'current_value' ) ) {
+				this_model.save();
+			}
 		},
 		/** Deletion of list field items **/
 		delete_list_item: function(e) {
@@ -356,9 +364,6 @@ jQuery( document ).ready( function( $ ) {
 			})
 			var this_model = settings.get( 'selected' );
 			this_model.set( 'current_value', tmp_array );
-		 	jQuery('.updated').hide().fadeIn();
-	        // Hide the div after 3 seconds
-			savedNoticeTimeout = setTimeout( "jQuery('.updated').fadeOut();",3000 );
 		}
 	});
 
@@ -367,10 +372,16 @@ jQuery( document ).ready( function( $ ) {
 	/** Creation of new list field items **/
 	$( document ).on( 'keyup', '.nf-new-item', nf_new_list_item );
 
+	$( document ).on( 'listItemAdded.save', function( e, new_id ) {
+		$( '#item_' + new_id + '_label' ).trigger( 'change' );
+		$( '#item_' + new_id + '_value' ).trigger( 'change' );
+		$( '#item_' + new_id + '_calc' ).trigger( 'change' );
+	});
+
 	/** Handle fetching settings when the user clicks on the "Form Settings" button. **/
 	$( '#form_settings' ).on( 'click', function(e) {
 		e.preventDefault();
-		$( document ).data( 'nf-setting-h1', 'Form Settings' );
+		$( document ).data( 'nf-settings-h1', nf_settings_form_h1 );
 		settings.fetch({
 			reset: true,
 			data: $.param({ object_type: 'form_settings', object_id: nf_form_id })
@@ -402,8 +413,10 @@ jQuery( document ).ready( function( $ ) {
 			object_type: 'list_item',
 			meta: meta,
 			parent_id: parent_id
-		} 
+		}
+
 		new_model = settings.newSetting( opts );
+
 		new_model.save({}, { 
 			success: function( model, response ) {
 				var new_id = response;
@@ -415,8 +428,6 @@ jQuery( document ).ready( function( $ ) {
 				$( '.nf-list-item-new' ).prop( 'id', 'item_' + new_id + '_tr' );
 				// Add our id to this tr as a data attribute
 				$( '.nf-list-item-new' ).data( 'item-id', new_id );
-
-
 
 				// Add our regular item class to the new-item tr
 				$( '.nf-list-item-new' ).addClass( 'nf-list-item' );
@@ -477,12 +488,12 @@ jQuery( document ).ready( function( $ ) {
 				// Add the nf-setting class
 				$( '#item_new_label' ).addClass( 'nf-setting' );
 				$( '#item_new_value' ).addClass( 'nf-setting' );
-				$( '#item_new_calc' ).addClass( 'nf-setting' );				
+				$( '#item_new_calc' ).addClass( 'nf-setting' );
 
 				// Change our label id
 				$( '#item_new_label' ).prop( 'id', 'item_' + new_id + '_label' );
 				// Change our value id
-				$( '#item_new_value' ).prop( 'id', 'item_' + new_id + '_value' );				
+				$( '#item_new_value' ).prop( 'id', 'item_' + new_id + '_value' );
 				// Change our calc id
 				$( '#item_new_calc' ).prop( 'id', 'item_' + new_id + '_calc' );
 
@@ -519,6 +530,8 @@ jQuery( document ).ready( function( $ ) {
 
 				// Rebind our new item listener
 				$( document ).on( 'keyup', '.nf-new-item', nf_new_list_item );
+
+				$( document).triggerHandler( 'listItemAdded', [ new_id ] );
 
 			},
 			error: function() {

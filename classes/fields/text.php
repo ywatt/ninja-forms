@@ -26,9 +26,7 @@ class NF_Field_Text extends NF_Field_Base {
 		parent::__construct();
 		$this->nicename = __( 'Single Line Text', 'ninja-forms' );
 
-		$this->settings_menu['restrict_input'] = __( 'Restrict User Input', 'ninja-forms' );
-
-		$restrict_input = apply_filters( 'nf_text_input_limit_settings', array(
+		$restrictions = apply_filters( 'nf_text_restriction_settings', array(
 			'mask' 					=> array(
 				'id' 				=> 'mask',
 				'type' 				=> 'select',
@@ -71,7 +69,7 @@ class NF_Field_Text extends NF_Field_Base {
 
 		) );
 
-		$this->registered_settings['restrict_input'] = $restrict_input;
+		$this->registered_settings['restrictions'] = $restrictions;
 
 		$label_settings = apply_filters( 'nf_text_label_settings', array(
 			'placeholder'			=> array(

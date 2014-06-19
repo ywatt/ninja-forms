@@ -16,10 +16,10 @@
 .ninja-forms #wpbody {
   margin: 0 20px 0 2px; }
 
-.ninja-forms-edit .major-publishing-actions .publishing-action {
+.ninja-forms-form .major-publishing-actions .publishing-action {
   float: none;
   text-align: left; }
-.ninja-forms-edit .ninja-forms-field-button {
+.ninja-forms-form .ninja-forms-field-button {
   margin-bottom: 3px;
   width: 49%;
   text-align: center; }
@@ -196,9 +196,14 @@
       left: 0 !important;
       right: 0 !important; } }
 
-.ninja-forms-edit .media-frame-menu {
+.ninja-forms-form .media-frame-menu {
   overflow: auto; }
-.ninja-forms-edit .nf-settings {
+
+.modal {
+  overflow: hidden;
+}
+
+.ninja-forms-form .nf-settings {
   height: 100%;
   padding-left: 200px;
   position: absolute;
@@ -206,49 +211,64 @@
   left: 0;
   bottom: 0;
   right: 0; }
-.ninja-forms-edit .nf-settings-title {
+.ninja-forms-form .nf-settings-title {
   padding: 10px 20px 0; 
 }
-.ninja-forms-edit .nf-settings-title h1 {
+.ninja-forms-form .nf-settings-title h1 {
     display: inline;
     float: left; 
 }
-.ninja-forms-edit .nf-settings-content-wrap {
-  overflow: hidden;
+.nf-settings-content-wrap {
   padding-left: 200px;
   position: absolute;
   top: 60px;
   left: 0;
   bottom: 0;
-  right: 0; }
-.ninja-forms-edit .nf-settings-content {
+  right: 0; 
+  overflow: auto;
+}
+
+.nf-settings-content {
   padding: 0 20px 20px 220px;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  overflow: scroll; }
+  overflow: auto; }
 .nf-settings {
   margin-left: 230px; }
 .nf-settings-modal .nf-settings-title {
   margin-left: 230px;
 }
-.ninja-forms-edit .updated {
+.ninja-forms .saving {
   background: #eee;
-  float: left;
-  margin-top: 8px;
-  padding: 8px 12px;
-  width: 200px; 
+  display: inline-block;
+  margin-top: 4px;
+  margin-left: 12px;
+  padding: 4px 8px;
+  width: 200px;
+  border-left: 4px solid #7ad03a;
 }
-.ninja-forms-edit .howto {
+
+.saving p {
+  margin: .5em 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#nf-settings-h1 {
+  float:left;
+}
+
+.ninja-forms-form .howto {
   font-weight: normal;
   padding: 10px; 
 }
-.ninja-forms-edit .nf-table > tr th, .ninja-forms-edit .nf-table > tr td {
+.ninja-forms-form .nf-table > tr th, .ninja-forms-form .nf-table > tr td {
   padding: 15px 10px; 
 }
-.ninja-forms-edit .mceToolbar .mceButton {
+.ninja-forms-form .mceToolbar .mceButton {
   width: auto !important;
   height: auto !important; 
 }

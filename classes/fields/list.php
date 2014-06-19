@@ -61,7 +61,7 @@ class NF_Field_List extends NF_Field_Base {
 
 		$this->registered_settings['items'] = $item_settings;
 
-		$this->registered_settings['general']['default_value']['type'] = 'custom';
+		$this->registered_settings['display']['default_value']['type'] = 'custom';
 		$this->registered_settings['display']['label_pos']['options'] = array(
 			array( 'name' => __( 'Above Element', 'ninja-forms' ), 'value' => 'above' ),
 			array( 'name' => __( 'Left of Element', 'ninja-forms' ), 'value' => 'left' ),
@@ -108,7 +108,7 @@ class NF_Field_List extends NF_Field_Base {
 	public function underscore_template( $field_id ) {
 		?>
 		</tr>
-		<thead>
+		<tbody>
 			<tr>
 				<th>
 					<a href="#" class="button-secondary"><?php _e( 'Import List Items', 'ninja-forms' ); ?></a>
@@ -126,7 +126,7 @@ class NF_Field_List extends NF_Field_Base {
 					Calculation Amount
 				</th>
 			</tr>
-		</thead>
+		</tbody>
 		<tbody class="nf-list-items">
 			<%
 			if ( typeof setting.get( 'items' ) !== 'undefined' ) {
@@ -140,7 +140,7 @@ class NF_Field_List extends NF_Field_Base {
 				%>
 				<tr class="nf-list-item" id="item_<%= item.object_id %>_tr" data-item-id=<%= item.object_id %>>
 					<th>
-						<a href="#" class="button-secondary nf-delete-list-item" data-item-id="<%= item.object_id %>" data-field-id="<?php echo $field_id; ?>">-</a>
+						<a href="#" class="button-secondary nf-delete-list-item" data-item-id="<%= item.object_id %>" data-field-id="<%= setting.get( 'object_id' ) %>">-</a>
 						<span class="drag" style="cursor:move;">Drag</span>
 					</th>
 					<td>
@@ -163,7 +163,7 @@ class NF_Field_List extends NF_Field_Base {
 			%>
 			<tr class="nf-list-item-new">
 				<th style="display:none;" class="list-item-actions">
-					<a href="#" class="button-secondary nf-delete-list-item" data-field-id="<?php echo $field_id; ?>">-</a>
+					<a href="#" class="button-secondary nf-delete-list-item" data-field-id="<%= setting.get( 'object_id' ) %>">-</a>
 					<span class="drag" style="cursor:move;">Drag</span>
 				</th>
 				<th colspan="2" class="list-item-new">
@@ -173,13 +173,13 @@ class NF_Field_List extends NF_Field_Base {
 					<input type="radio" id="selected" class="nf-setting" name="selected" value="">
 				</td>
 				<td>
-					<input type="text" id="item_new_label" data-parent-id="<?php echo $field_id; ?>" data-meta-key="label" class="nf-new-item" value="" title="<?php _e( 'Item Label', 'ninja-forms' ); ?>" <%= data_attributes %>/>
+					<input type="text" id="item_new_label" data-parent-id="<%= setting.get( 'object_id' ) %>" data-meta-key="label" class="nf-new-item" value="" title="<?php _e( 'Item Label', 'ninja-forms' ); ?>" <%= data_attributes %>/>
 				</td>
 				<td>
-					<input type="text" id="item_new_value" data-parent-id="<?php echo $field_id; ?>" data-meta-key="value"  class="nf-new-item" value="" title="" <%= data_attributes %>/>
+					<input type="text" id="item_new_value" data-parent-id="<%= setting.get( 'object_id' ) %>" data-meta-key="value"  class="nf-new-item" value="" title="" <%= data_attributes %>/>
 				</td>
 				<td>
-					<input type="text" id="item_new_calc" data-parent-id="<?php echo $field_id; ?>" data-meta-key="calc"  class="nf-new-item" value="" title="" <%= data_attributes %>/>
+					<input type="text" id="item_new_calc" data-parent-id="<%= setting.get( 'object_id' ) %>" data-meta-key="calc"  class="nf-new-item" value="" title="" <%= data_attributes %>/>
 				</td>
 
 			</tr>
@@ -262,7 +262,7 @@ class NF_Field_List extends NF_Field_Base {
 
 		}
 
-		$meta_array[] = array( 'type' => 'custom', 'id' => 'list_items', 'object_id' => $field_id, 'selected' => $selected, 'items' => $items_array );
+		$meta_array[] = array( 'type' => 'custom', 'id' => 'list_items', 'menu' => 'items', 'object_id' => $field_id, 'selected' => $selected, 'items' => $items_array );
 
 		return $meta_array;
 	}
