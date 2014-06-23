@@ -21,13 +21,13 @@ class NF_Field_Base {
 	 * @var sidebar
 	 * @since 3.0
 	 */
-	var $sidebar = 'general';
+	var $sidebar = '';
 
 	/**
-	 * @var settings_menu
+	 * @var settings_sections
 	 * @since 3.0
 	 */
-	var $settings_menu = array();
+	var $settings_sections = array();
 
 	/**
 	 * @var registered_settings
@@ -91,6 +91,107 @@ class NF_Field_Base {
 	 * @return void
 	 */
 	public function __construct() {
+		// Register our default field settings sidebars
+		$this->settings_sections['display'] = __( 'Display', 'ninja-forms' );
+		$this->settings_sections['restrictions'] = __( 'Restrictions', 'ninja-forms' );
+		$this->settings_sections['advanced'] = __( 'Advanced', 'ninja-forms' );
+
+		$display = apply_filters( 'nf_display_field_settings', array(
+			'label' 			=> array(
+				'id'			=> 'label',
+				'type'			=> 'text',
+				'name' 			=> __( 'Label', 'ninja-forms' ),
+				'desc' 			=> '',
+				'help_text'		=> '',
+				'std' 			=> ''
+			),
+			'label_pos'			=> array(
+				'id'			=> 'label_pos',
+				'type'			=> 'select',
+				'name'			=> __( 'Label Position', 'ninja-forms' ),
+				'desc'			=> '',
+				'help_text'		=> '',
+				'std'			=> '',
+				'options'		=> array(
+					array( 'name' => __( 'Above Element', 'ninja-forms' ), 'value' => 'above' ),
+					array( 'name' => __( 'Left of Element', 'ninja-forms' ), 'value' => 'left' ),
+					array( 'name' => __( 'Inside of Element', 'ninja-forms' ), 'value' => 'inside' ),
+					array( 'name' => __( 'Right of Element', 'ninja-forms' ), 'value' => 'right' ),
+					array( 'name' => __( 'Below Element', 'ninja-forms' ), 'value' => 'below' ),
+				),
+			),
+			'default_value' 	=> array(
+				'id' 			=> 'default_value',
+				'type' 			=> 'text',
+				'name' 			=> __( 'Default Value', 'ninja-forms' ),
+				'desc' 			=> '',
+				'help_text' 	=> '',
+				'std' 			=> '',
+			),
+			'wrap_class'		=> array(
+				'id' 			=> 'wrap_class',
+				'type' 			=> 'text',
+				'name' 			=> __( 'Custom Wrapper Classes', 'ninja-forms' ),
+				'desc' 			=> __( 'Comma separated list', 'ninja-forms' ),
+				'help_text' 	=> '',
+				'std' 			=> '',
+			),			
+			'label_class'		=> array(
+				'id' 			=> 'label_class',
+				'type' 			=> 'text',
+				'name' 			=> __( 'Custom Label Classes', 'ninja-forms' ),
+				'desc' 			=> __( 'Comma separated list', 'ninja-forms' ),
+				'help_text' 	=> '',
+				'std' 			=> '',
+			),
+			'element_class'		=> array(
+				'id' 			=> 'element_class',
+				'type' 			=> 'text',
+				'name' 			=> __( 'Custom Element Classes', 'ninja-forms' ),
+				'desc' 			=> __( 'Comma separated list', 'ninja-forms' ),
+				'help_text' 	=> '',
+				'std' 			=> '',
+			),
+		));
+
+		$this->registered_settings['display'] = $display;
+
+		// Register our default field settings
+		$restrictions = apply_filters( 'nf_restriction_field_settings', array(
+			'req' 				=> array(
+				'id' 			=> 'req',
+				'type' 			=> 'checkbox',
+				'name' 			=> __( 'Required Field', 'ninja-forms' ),
+				'desc' 			=> '',
+				'help_text' 	=> '',
+				'std' 			=> 0,
+			),
+		) );
+
+		$this->registered_settings['restrictions'] = $restrictions;
+
+		// Register our default field settings
+		$advanced = apply_filters( 'nf_restriction_field_settings', array(
+			'key' 				=> array(
+				'id' 			=> 'key',
+				'type' 			=> 'text',
+				'name' 			=> __( 'Key Name', 'ninja-forms' ),
+				'desc' 			=> '',
+				'help_text' 	=> '',
+				'std' 			=> '',
+			),
+			'data_attributes'	=> array(
+				'id'			=> 'data_attributes',
+				'type'			=> 'textarea',
+				'name' 			=> __( 'Data Attributes', 'ninja-forms' ),
+				'desc'			=> __( 'Comma separated data attributes like: test="test", test-data="data"', 'ninja-forms' ),
+				'help_text'		=> '',
+				'std'			=> '',
+			),
+		) );
+
+		$this->registered_settings['advanced'] = $advanced;
+
 
 		do_action( 'nf_field_construct', $this );
 	}

@@ -12,11 +12,7 @@
 
 class NF_Field_Number extends NF_Field_Base {
 
-	/**
-	 * @var class
-	 * @since 3.0
-	 */
-	var $class = 'date';
+	var $sidebar = 'general';
 
 	/**
 	 * Get things started.

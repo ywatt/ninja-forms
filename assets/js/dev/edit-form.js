@@ -1,8 +1,10 @@
+
+
 jQuery( document ).ready( function( $ ) {
 
-	tmp = {};
+	ninjaForms = {};
 
-	tmp.selectAttribute = function (collection, attribute, value) {
+	ninjaForms.selectAttribute = function (collection, attribute, value) {
 	    var models = collection.select(function (model) {
 	        return model.get(attribute) == value;
 	    });
@@ -13,6 +15,22 @@ jQuery( document ).ready( function( $ ) {
     $( '.media-modal-close' ).on( 'click', function( e) {
     	$.modal.close();
     });
+
+    $( 'body' ).on( $.modal.BEFORE_OPEN, function( event, modal ) {
+    	// Prevent our background from scrolling.
+		$( this ).css( 'overflow', 'hidden' );
+	});    
+
+	$( 'body' ).on( $.modal.BEFORE_CLOSE, function( event, modal ) {
+		// Clear our modal sidebar of links.
+		$( '#nf-settings-menu' ).html( '' );
+		// Clear our modal content.
+		$( '#nf-settings-content' ).html( '' );
+		// Clear our modal title
+		$( '#nf-settings-h1' ).html( '' );
+		// Allow our page to scroll.
+		$( this ).css( 'overflow', 'auto' );
+	});
 
 	$( '.control-section h3' ).on( 'click', function( e ) {
 		if ( $( this ).parent().hasClass( 'open' ) ) {
@@ -38,6 +56,15 @@ jQuery( document ).ready( function( $ ) {
 			fieldListOrder.set( 'order', order );
 		}
 	});
+
+	/** Make our field type buttons draggable **/
+	$( '.nf-field-button' ).draggable({
+		helper: function(){
+			return $( '#nf_field_9' );
+		},
+		connectToSortable: '#nf_field_list'
+	});
+
 
 	/** Create the Backbone for our field list **/
 
@@ -382,13 +409,16 @@ jQuery( document ).ready( function( $ ) {
 	$( '#form_settings' ).on( 'click', function(e) {
 		e.preventDefault();
 		$( document ).data( 'nf-settings-h1', nf_settings_form_h1 );
-		settings.fetch({
-			reset: true,
-			data: $.param({ object_type: 'form_settings', object_id: nf_form_id })
-		});
+
 		menus.fetch({
 			reset:true,
-			data: $.param({ object_type: 'form_menu', object_id: nf_form_id })
+			data: $.param({ object_type: 'form_menu', object_id: nf_form_id }),
+			success: function() {
+				settings.fetch({
+					reset: true,
+					data: $.param({ object_type: 'form_settings', object_id: nf_form_id })
+				});
+			}
 		});
 	});
 

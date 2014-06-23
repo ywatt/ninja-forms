@@ -26,7 +26,6 @@ class NF_Admin {
 		$this->includes();
 		$this->get_tabs();
 		$this->register_default_form_settings();
-		$this->register_default_field_settings();
 
 		$this->license = new NF_License();
 
@@ -250,8 +249,8 @@ class NF_Admin {
 	 */
 	public function register_default_form_settings() {
 		// Register our default form settings sidebars
-		Ninja_Forms()->register->form_settings_menu( 'display', 'Display' );
-		Ninja_Forms()->register->form_settings_menu( 'sub_limit', 'Limit Submissions' );
+		Ninja_Forms()->register->form_settings_section( 'display', 'Display' );
+		Ninja_Forms()->register->form_settings_section( 'sub_limit', 'Limit Submissions' );
 
 		// Register our default form settings
 		$display = apply_filters( 'nf_display_form_settings', array(
@@ -313,118 +312,6 @@ class NF_Admin {
 	}
 
 	/**
-	 * Register our default field settings and sidebars
-	 * 
-	 * @access public
-	 * @since 3.0
-	 * @return void
-	 */
-	public function register_default_field_settings() {
-		// Register our default form settings sidebars
-		Ninja_Forms()->register->field_settings_menu( 'display', __( 'Display', 'ninja-forms' ) );
-		Ninja_Forms()->register->field_settings_menu( 'restrictions', __( 'Restrictions', 'ninja-forms' ) );
-		Ninja_Forms()->register->field_settings_menu( 'advanced', __( 'Advanced', 'ninja-forms' ) );
-
-		$display = apply_filters( 'nf_display_field_settings', array(
-			'label' 			=> array(
-				'id'			=> 'label',
-				'type'			=> 'text',
-				'name' 			=> __( 'Label', 'ninja-forms' ),
-				'desc' 			=> '',
-				'help_text'		=> '',
-				'std' 			=> ''
-			),
-			'label_pos'			=> array(
-				'id'			=> 'label_pos',
-				'type'			=> 'select',
-				'name'			=> __( 'Label Position', 'ninja-forms' ),
-				'desc'			=> '',
-				'help_text'		=> '',
-				'std'			=> '',
-				'options'		=> array(
-					array( 'name' => __( 'Above Element', 'ninja-forms' ), 'value' => 'above' ),
-					array( 'name' => __( 'Left of Element', 'ninja-forms' ), 'value' => 'left' ),
-					array( 'name' => __( 'Inside of Element', 'ninja-forms' ), 'value' => 'inside' ),
-					array( 'name' => __( 'Right of Element', 'ninja-forms' ), 'value' => 'right' ),
-					array( 'name' => __( 'Below Element', 'ninja-forms' ), 'value' => 'below' ),
-				),
-			),
-			'default_value' 	=> array(
-				'id' 			=> 'default_value',
-				'type' 			=> 'text',
-				'name' 			=> __( 'Default Value', 'ninja-forms' ),
-				'desc' 			=> '',
-				'help_text' 	=> '',
-				'std' 			=> '',
-			),
-			'wrap_class'		=> array(
-				'id' 			=> 'wrap_class',
-				'type' 			=> 'text',
-				'name' 			=> __( 'Custom Wrapper Classes', 'ninja-forms' ),
-				'desc' 			=> __( 'Comma separated list', 'ninja-forms' ),
-				'help_text' 	=> '',
-				'std' 			=> '',
-			),			
-			'label_class'		=> array(
-				'id' 			=> 'label_class',
-				'type' 			=> 'text',
-				'name' 			=> __( 'Custom Label Classes', 'ninja-forms' ),
-				'desc' 			=> __( 'Comma separated list', 'ninja-forms' ),
-				'help_text' 	=> '',
-				'std' 			=> '',
-			),
-			'element_class'		=> array(
-				'id' 			=> 'element_class',
-				'type' 			=> 'text',
-				'name' 			=> __( 'Custom Element Classes', 'ninja-forms' ),
-				'desc' 			=> __( 'Comma separated list', 'ninja-forms' ),
-				'help_text' 	=> '',
-				'std' 			=> '',
-			),
-		));
-
-		Ninja_Forms()->register->field_settings( 'display', $display );
-
-		// Register our default field settings
-		$restrictions = apply_filters( 'nf_restriction_field_settings', array(
-			'req' 				=> array(
-				'id' 			=> 'req',
-				'type' 			=> 'checkbox',
-				'name' 			=> __( 'Required Field', 'ninja-forms' ),
-				'desc' 			=> '',
-				'help_text' 	=> '',
-				'std' 			=> 0,
-			),
-		) );
-
-		Ninja_Forms()->register->field_settings( 'restrictions', $restrictions );
-
-		// Register our default field settings
-		$advanced = apply_filters( 'nf_restriction_field_settings', array(
-			'key' 				=> array(
-				'id' 			=> 'key',
-				'type' 			=> 'text',
-				'name' 			=> __( 'Key Name', 'ninja-forms' ),
-				'desc' 			=> '',
-				'help_text' 	=> '',
-				'std' 			=> '',
-			),
-			'data_attributes'	=> array(
-				'id'			=> 'data_attributes',
-				'type'			=> 'textarea',
-				'name' 			=> __( 'Data Attributes', 'ninja-forms' ),
-				'desc'			=> __( 'Comma separated data attributes like: test="test", test-data="data"', 'ninja-forms' ),
-				'help_text'		=> '',
-				'std'			=> '',
-			),
-		) );
-
-		Ninja_Forms()->register->field_settings( 'advanced', $advanced );
-
-		do_action( 'nf_register_field_settings' );
-	}
-
-	/**
 	 * Output our edit form page
 	 * 
 	 * @access public
@@ -464,7 +351,7 @@ class NF_Admin {
 											foreach ( $this->get_sidebar_fields( $slug ) as $field_type ) {
 												$nicename = Ninja_Forms()->field_types->$field_type->nicename;
 											?>
-												<div class="button button-secondary ninja-forms-field-button"><?php _e( $nicename, 'ninja-forms' ); ?></div>
+												<div class="button button-secondary nf-field-button"><?php _e( $nicename, 'ninja-forms' ); ?></div>
 											<?php
 											}
 
@@ -600,6 +487,7 @@ class NF_Admin {
 
 		<script type="text/html" id="tmpl-nf-settings-menu">
 			<%
+			var x = 0;
 			_.each( menus, function( menuItem ) {
 				if ( menuItem.get( 'active' ) == 1 ) {
 					var active_class = 'active';
@@ -608,7 +496,14 @@ class NF_Admin {
 				}
 			%>
 				<a href="#<%= menuItem.get( 'id' ) %>" class="media-menu-item nf-settings-menu <%= active_class %>" data-menu-item="<%= menuItem.get( 'id' ) %>" data-object-type="<%= menuItem.get( 'object_type' ) %>" data-object-id="<%= menuItem.get( 'object_id' ) %>" title=""><%= menuItem.get( 'nicename' ) %></a>
-			<%
+				<%
+				if ( x >= 2 ) {
+					%>
+					<div class="separator"></div>
+					<%
+					x = 0;
+				}
+				x++;
 			});
 			%>
 			
@@ -620,7 +515,7 @@ class NF_Admin {
 			<%
 			
 			_.each( menus, function( menu ) {
-				var collection = tmp.selectAttribute( settings, 'menu', menu.get( 'id' ) );
+				var collection = ninjaForms.selectAttribute( settings, 'menu', menu.get( 'id' ) );
 				%>
 				<h4><a id="<%= menu.get( 'id' ) %>"><%= menu.get( 'nicename' ) %></a></h4>
 
@@ -876,42 +771,54 @@ class NF_Admin {
 	}
 
 	/**
-	 * Get our field settings menu links
+	 * Get our form settings sections links
 	 * 
 	 * @access public
 	 * @since 3.0
-	 * @return array $menu
+	 * @return array $sections
 	 */
-	public function get_field_settings_menu( $field_id ) {
-		$field_type = nf_get_field_type( $field_id );
-		$menu = wp_parse_args( Ninja_Forms()->field_types->$field_type->settings_menu, Ninja_Forms()->registered_field_settings_menu );
-		//ksort( $menu );
-		return $menu;
+	public function get_form_settings_sections( $form_id ) {
+		return Ninja_Forms()->form_settings_sections;
 	}
 
 	/**
-	 * Get our field settings
+	 * Get an array of our registered form settings (Not their stored values)
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return array $settings
+	 */
+
+	public function get_form_settings( $form_id ) {
+		return Ninja_Forms()->registered_form_settings;
+	}
+
+	/**
+	 * Get our field settings sections links
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return array $sections
+	 */
+	public function get_field_settings_sections( $field_id ) {
+		$field_type = nf_get_field_type( $field_id );
+		$sections = Ninja_Forms()->field_types->$field_type->settings_sections;
+		return $sections;
+	}
+
+	/**
+	 * Get our registered field settings (Not their stored values)
 	 * 
 	 * @access public
 	 * @since 3.0
 	 * @return array $settings
 	 */
 	public function get_field_settings( $field_id, $menu = '' ) {
+
 		$field_type = Ninja_Forms()->field( $field_id )->get_setting( 'type' );
 		
-		$tmp_array = Ninja_Forms()->registered_field_settings;
+		$settings = Ninja_Forms()->field_types->$field_type->registered_settings;
 
-		foreach( Ninja_Forms()->field_types->$field_type->registered_settings as $m => $settings ) {
-			foreach ( $settings as $slug => $setting ) {
-				foreach ( $setting as $prop => $val ) {
-					$tmp_array[ $m ][ $slug ][ $prop ] = $val;
-				}
-			}
-		}
-
-		$settings = $tmp_array;
-
-		//$settings = array_merge_recursive( Ninja_Forms()->field_types->$field_type->registered_settings, Ninja_Forms()->registered_field_settings );
 		if ( $menu != '' && isset ( $settings[ $menu ] ) ) {
 			return $settings[ $menu ];	
 		} else {

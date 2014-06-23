@@ -16,6 +16,7 @@ class NF_Field_Submit extends NF_Field_Base {
 
 	var $label_pos = 'none';
 	var $add_to_sub = false;
+	var $sidebar = 'general';
 
 	/**
 	 * Get things started.
@@ -29,9 +30,11 @@ class NF_Field_Submit extends NF_Field_Base {
 		parent::__construct();
 		$this->nicename = __( 'Submit Button', 'ninja-forms' );
 
-		$this->registered_settings['general']['default_value']['type'] = 'custom';
-		$this->registered_settings['general']['req']['type'] = 'custom';
-		$this->registered_settings['display']['label_pos']['type'] = 'custom';
+		unset( $this->settings_sections['restrictions'] );
+
+		unset( $this->registered_settings['display']['default_value'] );
+		unset( $this->registered_settings['restrictions']['req'] );
+		unset( $this->registered_settings['display']['label_pos'] );
 
 		do_action( 'nf_submit_construct', $this );
 	}

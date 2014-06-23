@@ -30,32 +30,32 @@ class NF_Register {
 	 * 
 	 * @access public
 	 * @param string $slug - Sidebar slug. Must be unique.
-	 * @param string $nicename - Display name for sidebar
+	 * @param string $nicename - Display name for section
 	 * @since 3.0
 	 * @return void
 	 */
-	public function form_settings_menu( $slug, $nicename ) {
-		if ( ! empty( $slug ) && ! empty( $nicename ) && ! isset ( Ninja_Forms()->registered_form_settings_menu[ $slug ] ) )
-			Ninja_Forms()->registered_form_settings_menu[ $slug ] = $nicename; 
+	public function form_settings_section( $slug, $nicename ) {
+		if ( ! empty( $slug ) && ! empty( $nicename ) && ! isset ( Ninja_Forms()->form_settings_sections[ $slug ] ) )
+			Ninja_Forms()->form_settings_sections[ $slug ] = $nicename; 
 	}
 
 	/**
 	 * Function that registers form settings
 	 * 
 	 * @access public
-	 * @param string $sidebar
+	 * @param string $section
 	 * @param array $settings
 	 * @since 3.0
 	 * @return void
 	 */
-	public function form_settings( $sidebar, $settings ) {
-		if ( ! empty( $sidebar ) && is_array( $settings ) && ! empty ( $settings ) ) {
-			if ( isset ( Ninja_Forms()->registered_form_settings[ $sidebar ] ) ) {
-				$new_settings = wp_parse_args( Ninja_Forms()->registered_form_settings[ $sidebar ], $settings );
+	public function form_settings( $section, $settings ) {
+		if ( ! empty( $section ) && is_array( $settings ) && ! empty ( $settings ) ) {
+			if ( isset ( Ninja_Forms()->registered_form_settings[ $section ] ) ) {
+				$new_settings = wp_parse_args( Ninja_Forms()->registered_form_settings[ $section ], $settings );
 			} else {
 				$new_settings = $settings;
 			}
-			Ninja_Forms()->registered_form_settings[ $sidebar ] = $new_settings;
+			Ninja_Forms()->registered_form_settings[ $section ] = $new_settings;
 		}
 	}	
 
@@ -68,16 +68,9 @@ class NF_Register {
 	 * @since 3.0
 	 * @return void
 	 */
-	public function field_settings_menu( $slug, $nicename, $type = '' ) {
-		if ( ! empty( $slug ) && ! empty( $nicename ) && ! isset ( Ninja_Forms()->registered_field_settings_menu[ $slug ] ) ) {
-			if ( $type == '' ) {
-				Ninja_Forms()->registered_field_settings_menu[ $slug ] = $nicename; 
-			} else {
-				if ( ! isset ( Ninja_Forms()->field_types->$type->settings_menu[ $slug ] ) )
-					Ninja_Forms()->field_types->$type->settings_menu[ $slug ] = $nicename;
-			}
-		}
-			
+	public function field_settings_section( $slug, $nicename, $type = 'base' ) {
+		if ( ! isset ( Ninja_Forms()->field_types->$type->settings_sections[ $slug ] ) )
+			Ninja_Forms()->field_types->$type->settings_sections[ $slug ] = $nicename;			
 	}
 
 	/**
@@ -89,23 +82,16 @@ class NF_Register {
 	 * @since 3.0
 	 * @return void
 	 */
-	public function field_settings( $menu, $settings, $type = '' ) {
+	public function field_settings( $menu, $settings, $type = 'base' ) {
 		if ( ! empty( $menu ) && is_array( $settings ) && ! empty ( $settings ) ) {
-			if ( $type == '' ) {
-				if ( isset ( Ninja_Forms()->registered_field_settings[ $menu ] ) ) {
-					$new_settings = wp_parse_args( Ninja_Forms()->registered_field_settings[ $menu ], $settings );
-				} else {
-					$new_settings = $settings;
-				}
-				Ninja_Forms()->registered_field_settings[ $menu ] = $new_settings;				
+
+			if ( isset ( Ninja_Forms()->field_types->$type->registered_settings[ $menu ] ) ) {
+				$new_settings = wp_parse_args( Ninja_Forms()->field_types->$type->registered_settings[ $menu ], $settings );
 			} else {
-				if ( isset ( Ninja_Forms()->field_types->$type->registered_settings[ $menu ] ) ) {
-					$new_settings = wp_parse_args( Ninja_Forms()->field_types->$type->registered_settings[ $menu ], $settings );
-				} else {
-					$new_settings = $settings;
-				}
-				Ninja_Forms()->field_types->$type->registered_settings[ $menu ] = $new_settings;
+				$new_settings = $settings;
 			}
+
+			Ninja_Forms()->field_types->$type->registered_settings[ $menu ] = $new_settings;
 		}
 	}
 }

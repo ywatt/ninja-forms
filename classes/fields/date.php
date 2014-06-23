@@ -12,6 +12,8 @@
 
 class NF_Field_Date extends NF_Field_Text {
 
+	var $sidebar = 'general';
+
 	/**
 	 * @var class
 	 * @since 3.0

@@ -37,7 +37,7 @@ class NF_Field_List extends NF_Field_Base {
 	public function __construct() {
 		parent::__construct();
 
-		$this->settings_menu['items'] = __( 'Items', 'ninja-forms' );
+		$this->settings_sections['items'] = __( 'Items', 'ninja-forms' );
 
 		$item_settings = apply_filters( 'nf_list_settings', array(
 			'list_items' 			=> array(

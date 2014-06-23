@@ -14,6 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class NF_Field_Checkbox extends NF_Field_Base {
 
+	var $sidebar = 'general';
+
 	var $label_pos = 'right';
 	
 	/**

@@ -13,6 +13,8 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class NF_Field_Hidden extends NF_Field_Base {
+	
+	var $sidebar = 'general';
 
 	/**
 	 * Get things started.

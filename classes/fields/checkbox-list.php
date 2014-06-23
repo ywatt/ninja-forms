@@ -14,6 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class NF_Field_Checkbox_List extends NF_Field_List {
 
+	var $sidebar = 'general';
+
 	/**
 	 * Get things started.
 	 * Set our nicename.

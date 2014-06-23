@@ -48,25 +48,13 @@ class Ninja_Forms {
 	 * @var registered form settings sidebars
 	 * @since 3.0
 	 */
-	public $registered_form_settings_menu;
+	public $form_settings_sections;
 
 	/**
 	 * @var registered form settings
 	 * @since 3.0
 	 */
 	public $registered_form_settings;
-
-	/**
-	 * @var registered field settings sidebars
-	 * @since 3.0
-	 */
-	public $registered_field_settings_menu;
-
-	/**
-	 * @var registered field settings
-	 * @since 3.0
-	 */
-	public $registered_field_settings;
 
 	/**
 	 * Main Ninja_Forms Instance
@@ -107,6 +95,7 @@ class Ninja_Forms {
 		register_activation_hook( __FILE__, array( self::$instance, 'activation' ) );
 
 		// Register our default field classes.
+		self::$instance->register->field( 'base', 'NF_Field_Base' );
 		self::$instance->register->field( 'checkbox', 'NF_Field_Checkbox' );
 		self::$instance->register->field( 'checkbox_list', 'NF_Field_Checkbox_List' );
 		self::$instance->register->field( 'text', 'NF_Field_Text' );

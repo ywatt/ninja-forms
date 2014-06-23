@@ -204,31 +204,45 @@ class NF_Admin_Rest_API {
                         usort( $args, array( Ninja_Forms(), 'sort_by_order' ) );
                         return $args;
                     case 'form_settings':
-                        if ( isset ( $this->request['menu'] ) ) {
-                            $menu = $this->request['menu'];
-                        } else {
-                            $menu = 'display';
-                        }
-                        foreach( Ninja_Forms()->registered_form_settings[ $menu ] as $setting ) {
-                            $meta_key = isset( $setting[ 'meta_key' ] ) ? $setting[ 'meta_key' ] : $setting['id'];
-                            $current_value = nf_get_form_setting( $object_id, $setting['id'] );
-                            if ( ! $current_value ) {
-                                $current_value = $setting['std'];
+
+                        $args = array();
+                        $tmp_array = array();
+                        foreach( Ninja_Forms()->admin->get_form_settings( $object_id ) as $menu => $settings ) {
+
+                            foreach ( $settings as $setting ) {
+                                if ( $setting['type'] == 'custom' && isset ( $setting['fetch_callback'] ) ) {
+                                    if ( ( is_array( $setting['fetch_callback'] ) && method_exists( $setting['fetch_callback'][0], $setting['fetch_callback'][1] ) ) || ( is_string( $setting['fetch_callback'] ) && function_exists( $setting['fetch_callback'] ) ) ) {
+                                        $arguments = array( 'object_id' => $object_id );
+                                        $tmp_array = call_user_func_array( $setting['fetch_callback'], $arguments );
+                                        foreach ( $tmp_array as $tmp ) {
+                                            $args[] = $tmp;
+                                        }
+                                    }
+                                } else {
+                                    if ( isset ( $setting['id'] ) ) {
+                                        $meta_key = isset( $setting[ 'meta_key' ] ) ? $setting[ 'meta_key' ] : $setting['id'];
+                                        $current_value = nf_get_field_setting( $object_id, $meta_key );
+
+                                        $tmp_array = array();
+                                        $tmp_array['object_id'] = $object_id;
+                                        $tmp_array['meta_key'] = $meta_key;
+                                        $tmp_array['id'] = $setting['id'];
+                                        $tmp_array['type'] = $setting['type'];
+                                        $tmp_array['current_value'] = ( $current_value ) ? $current_value : $setting['std'];
+                                        $tmp_array['name'] = $setting['name'];
+                                        $tmp_array['desc'] = $setting['desc'];
+                                        $tmp_array['menu'] = $menu;
+
+                                        if ( isset ( $setting['options'] ) ) {
+                                            $tmp_array['options'] = $setting['options'];
+                                        }
+
+                                        $args[] = $tmp_array;
+                                    }
+                                }
                             }
-                            $tmp_array = array();
-                            $tmp_array['object_id'] = $object_id;
-                            $tmp_array['meta_key'] = $meta_key;
-                            $tmp_array['id'] = $setting['id'];
-                            $tmp_array['type'] = $setting['type'];
-                            $tmp_array['current_value'] = $current_value;
-                            $tmp_array['name'] = $setting['name'];
-                            $tmp_array['desc'] = $setting['desc'];
-                            if ( isset ( $setting['options'] ) ) {
-                                $tmp_array['options'] = $setting['options'];
-                            }
-                            $args[] = $tmp_array;
                         }
-                        return $args; 
+                        return $args;
                     case 'field_settings':
                         $args = array();
                         $tmp_array = array();
@@ -243,31 +257,33 @@ class NF_Admin_Rest_API {
                                         }
                                     }
                                 } else {
-                                    $meta_key = isset( $setting[ 'meta_key' ] ) ? $setting[ 'meta_key' ] : $setting['id'];
-                                    $current_value = nf_get_field_setting( $object_id, $meta_key );
+                                    if ( isset ( $setting['id'] ) ) {
+                                        $meta_key = isset( $setting[ 'meta_key' ] ) ? $setting[ 'meta_key' ] : $setting['id'];
+                                        $current_value = nf_get_field_setting( $object_id, $meta_key );
 
-                                    $tmp_array = array();
-                                    $tmp_array['object_id'] = $object_id;
-                                    $tmp_array['meta_key'] = $meta_key;
-                                    $tmp_array['id'] = $setting['id'];
-                                    $tmp_array['type'] = $setting['type'];
-                                    $tmp_array['current_value'] = ( $current_value ) ? $current_value : $setting['std'];
-                                    $tmp_array['name'] = $setting['name'];
-                                    $tmp_array['desc'] = $setting['desc'];
-                                    $tmp_array['menu'] = $menu;
+                                        $tmp_array = array();
+                                        $tmp_array['object_id'] = $object_id;
+                                        $tmp_array['meta_key'] = $meta_key;
+                                        $tmp_array['id'] = $setting['id'];
+                                        $tmp_array['type'] = $setting['type'];
+                                        $tmp_array['current_value'] = ( $current_value ) ? $current_value : $setting['std'];
+                                        $tmp_array['name'] = $setting['name'];
+                                        $tmp_array['desc'] = $setting['desc'];
+                                        $tmp_array['menu'] = $menu;
 
-                                    if ( isset ( $setting['options'] ) ) {
-                                        $tmp_array['options'] = $setting['options'];
+                                        if ( isset ( $setting['options'] ) ) {
+                                            $tmp_array['options'] = $setting['options'];
+                                        }
+
+                                        $args[] = $tmp_array;
                                     }
-
-                                    $args[] = $tmp_array;
                                 }
                             }
                         }
                         return $args;
                     case 'form_menu':
                         $x = 0;
-                        foreach( Ninja_Forms()->registered_form_settings_menu as $slug => $nicename ) {
+                        foreach( Ninja_Forms()->form_settings_sections as $slug => $nicename ) {
                             $tmp_array = array();
                             $tmp_array['id'] = $slug;
                             $tmp_array['object_id'] = $object_id;
@@ -282,7 +298,7 @@ class NF_Admin_Rest_API {
                         return $args;
                     case 'field_menu':
                         $x = 0;
-                        foreach( Ninja_Forms()->admin->get_field_settings_menu( $object_id ) as $slug => $nicename ) {
+                        foreach( Ninja_Forms()->admin->get_field_settings_sections( $object_id ) as $slug => $nicename ) {
                             $tmp_array = array();
                             $tmp_array['id'] = $slug;
                             $tmp_array['object_id'] = $object_id;

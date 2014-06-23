@@ -14,6 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class NF_Field_Text extends NF_Field_Base {
 
+	var $sidebar = 'general';
+	
 	/**
 	 * Get things started.
 	 * Set our nicename.
@@ -26,7 +28,7 @@ class NF_Field_Text extends NF_Field_Base {
 		parent::__construct();
 		$this->nicename = __( 'Single Line Text', 'ninja-forms' );
 
-		$restrictions = apply_filters( 'nf_text_restriction_settings', array(
+		$restrictions = apply_filters( 'nf_text_restrictions_settings', array(
 			'mask' 					=> array(
 				'id' 				=> 'mask',
 				'type' 				=> 'select',
@@ -69,9 +71,11 @@ class NF_Field_Text extends NF_Field_Base {
 
 		) );
 
-		$this->registered_settings['restrictions'] = $restrictions;
+		foreach( $restrictions as $slug => $setting ) {
+			$this->registered_settings['restrictions'][ $slug ] = $setting;
+		}
 
-		$label_settings = apply_filters( 'nf_text_label_settings', array(
+		$label_settings = apply_filters( 'nf_text_display_settings', array(
 			'placeholder'			=> array(
 				'id' 				=> 'placeholder',
 				'type' 				=> 'text',
@@ -82,7 +86,9 @@ class NF_Field_Text extends NF_Field_Base {
 			),
 		) );
 
-		$this->registered_settings['display'] = $label_settings;
+		foreach ( $label_settings as $slug => $settings ) {
+			$this->registered_settings['display'][ $slug ] = $settings;
+		}
 
 		do_action( 'nf_text_construct', $this );
 	}
