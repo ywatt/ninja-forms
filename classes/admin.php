@@ -351,7 +351,7 @@ class NF_Admin {
 											foreach ( $this->get_sidebar_fields( $slug ) as $field_type ) {
 												$nicename = Ninja_Forms()->field_types->$field_type->nicename;
 											?>
-												<div class="button button-secondary nf-field-button"><?php _e( $nicename, 'ninja-forms' ); ?></div>
+												<div class="button button-secondary nf-field-button" data-field-type="<?php echo $field_type;?>"><?php _e( $nicename, 'ninja-forms' ); ?></div>
 											<?php
 											}
 

@@ -46,21 +46,33 @@ jQuery( document ).ready( function( $ ) {
 	$( '#nf_field_list' ).sortable({
 		items: 'ul',
 		update: function( event, ui ) {
-			var order = $( '#nf_field_list' ).sortable( 'toArray' );
-			var x = 0;
-			_.each( order, function ( field ) {
-				var field_id = field.replace( 'nf_field_', '' );
-				fieldList.get( field_id ).set( 'order', x );
-				x++;
-			});
-			fieldListOrder.set( 'order', order );
+			if ( $( ui.item ).hasClass( 'nf-field-button' ) ) {
+				var label = $( ui.item ).html();
+				console.log( $( ui.item ).data( 'field-type' ) );
+				var el = $( "ul.ninja-row:first" ).clone();
+				$(el).find('label:first').html(label);
+				ui.item.replaceWith( el );
+			} else {
+				var order = $( '#nf_field_list' ).sortable( 'toArray' );
+				var x = 0;
+				_.each( order, function ( field ) {
+					var field_id = field.replace( 'nf_field_', '' );
+					fieldList.get( field_id ).set( 'order', x );
+					x++;
+				});
+				fieldListOrder.set( 'order', order );
+			}
+			
 		}
 	});
 
 	/** Make our field type buttons draggable **/
 	$( '.nf-field-button' ).draggable({
 		helper: function(){
-			return $( '#nf_field_9' );
+			var label = $(this).html();
+			var el = $( "li.ninja-col-1-1:first" ).clone();
+			$(el).children('div:first').find('label').html(label);
+			return el;
 		},
 		connectToSortable: '#nf_field_list'
 	});
