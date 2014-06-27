@@ -193,7 +193,7 @@ function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 
 	if ( $input_limit != 0 ) {
 		wp_enqueue_script('jquery-char-input-limit',
-			NINJA_FORMS_URL .'/js/dev/word-and-character-counter.js',
+			NINJA_FORMS_URL .'/js/min/word-and-character-counter.min.js',
 			array( 'jquery' ) );
 	}
 
