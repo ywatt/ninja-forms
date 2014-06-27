@@ -156,7 +156,7 @@ if ( !function_exists ( 'ninja_forms_register_field_post_tags' ) ) {
 				<div class="jaxtag">
 					<input type="hidden" name="ninja_forms_field_<?php echo $field_id;?>" id="ninja_forms_post_tag_hidden" value="<?php echo $string_tag;?>" rel="<?php echo $field_id;?>" >
 		 			<div class="ajaxtag hide-if-no-js">
-						<label class="screen-reader-text" for="new-tag-post_tag"><?php _e( 'Tags', 'ninja_forms' );?></label>
+						<label class="screen-reader-text" for="new-tag-post_tag"><?php _e( 'Tags', 'ninja-forms' );?></label>
 						<div class="taghint" style=""><?php _e( 'Add New Tag', 'ninja-forms' );?></div>
 						<p><input type="text" id="ninja_forms_post_tag" class="newtag form-input-tip" size="16" autocomplete="off" value="">
 						<input type="button" id="ninja_forms_post_add_tag" class="button" value="Add"></p>
