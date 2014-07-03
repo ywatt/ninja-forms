@@ -10,8 +10,6 @@ function ninja_forms_add_menu(){
 
 	$new_form = add_submenu_page("ninja-forms", __( 'Add New', 'ninja-forms' ), __( 'Add New', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_add_new_capabilities', 'manage_options' ), "ninja-forms&tab=form_settings&form_id=new", "ninja_forms_admin");
 
-	$subs = add_submenu_page("ninja-forms", __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_submissions_capabilities', 'manage_options' ), "ninja-forms-subs", "ninja_forms_admin");
-
 	$import = add_submenu_page("ninja-forms", __( 'Import/Export', 'ninja-forms' ), __( 'Import / Export', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_import_export_capabilities', 'manage_options' ), "ninja-forms-impexp", "ninja_forms_admin");
 
 	$settings = add_submenu_page("ninja-forms", __( 'Ninja Form Settings', 'ninja-forms' ), __( 'Settings', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_settings_capabilities', 'manage_options' ), "ninja-forms-settings", "ninja_forms_admin");
@@ -32,9 +30,6 @@ function ninja_forms_add_menu(){
 	add_action('admin_print_styles-' . $import, 'ninja_forms_admin_js');
 	add_action('admin_print_styles-' . $import, 'ninja_forms_admin_css');
 
-	add_action('admin_print_styles-' . $subs, 'ninja_forms_admin_js');
-	add_action('admin_print_styles-' . $subs, 'ninja_forms_admin_css');
-
 	add_action('admin_print_styles-' . $system_status, 'ninja_forms_admin_js');
 	add_action('admin_print_styles-' . $system_status, 'ninja_forms_admin_css');
 
@@ -45,7 +40,6 @@ function ninja_forms_add_menu(){
 	add_action( 'load-' . $all_forms, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $settings, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $import, 'ninja_forms_load_screen_options_tab' );
-	add_action( 'load-' . $subs, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $system_status, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $extend, 'ninja_forms_load_screen_options_tab' );
 }
