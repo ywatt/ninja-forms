@@ -689,3 +689,47 @@ function ninja_forms_delete_transient(){
 		delete_transient( $_SESSION['ninja_forms_transient_id'] );
 	}
 }
+
+/**
+ * Get a count of submissions for a form
+ * 
+ * @since 2.7
+ * @param int $post_id
+ * @return int $count
+ */
+function nf_get_sub_count( $form_id, $post_status = 'publish' ) {
+	$args = array(
+	    'meta_key' => 'form_id',
+	    'meta_value' => $form_id,
+	    'post_type' => 'nf_sub',
+	    'posts_per_page' => 999999,
+	    'post_status' => $post_status,
+	);
+	$posts = get_posts( $args );
+
+	return count( $posts );
+ }
+
+/**
+ * Get an array of our fields by form ID.
+ * The returned array has the field_ID as the key.
+ *
+ * @since 2.7
+ * @param int $form_id
+ * @return array $tmp_array
+ */
+function nf_get_fields_by_form_id( $form_id, $orderby = 'ORDER BY `order` ASC' ){
+	global $wpdb;
+
+	$tmp_array = array();
+	$field_results = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".NINJA_FORMS_FIELDS_TABLE_NAME." WHERE form_id = %d ".$orderby, $form_id), ARRAY_A);
+	if ( is_array( $field_results ) && ! empty( $field_results ) ) {
+		foreach ( $field_results as $field ) {
+			$field_id = $field['id'];
+			$field['data'] = unserialize( $field['data'] );
+			$tmp_array[ $field_id ] = $field;
+		}
+	}
+
+	return $tmp_array;
+}
