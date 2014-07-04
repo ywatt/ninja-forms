@@ -392,13 +392,13 @@ function ninja_forms_get_subs($args = array()){
 		if($where != ''){
 			$where .= ' AND ';
 		}
-		$where .= "date_updated > '".$begin_date."'";
+		$where .= "date_updated >= '".$begin_date."'";
 	}
 	if($end_date != ''){
 		if($where != ''){
 			$where .= ' AND ';
 		}
-		$where .= "date_updated < '".$end_date."'";
+		$where .= "date_updated <= '".$end_date."'";
 	}
 
 	$limit = '';
