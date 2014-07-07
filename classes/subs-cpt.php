@@ -767,7 +767,7 @@ class NF_Subs_CPT {
 		// Get the columns that should be hidden for this form ID.
 		$hidden_columns = get_user_option( 'manageedit-nf_subcolumnshidden-form-' . $form_id );
 		
-		if ( ! $hidden_columns ) {
+		if ( $hidden_columns === false ) {
 			// If we don't have custom hidden columns set up for this form, then only show the first five columns.
 			// Get our column headers
 			$columns = get_column_headers( 'edit-nf_sub' );
