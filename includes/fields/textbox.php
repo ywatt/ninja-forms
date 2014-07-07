@@ -95,6 +95,7 @@ function ninja_forms_register_field_textbox(){
 			),
 		),
 		'pre_process' => 'ninja_forms_field_text_pre_process',
+		'edit_sub_value' => 'nf_field_text_edit_sub_value'
 	);
 
 	ninja_forms_register_field( '_text', $args );
@@ -302,4 +303,16 @@ function ninja_forms_field_text_pre_process( $field_id, $user_value ){
 		}
 		$ninja_forms_processing->update_form_setting( 'admin_email_name', $admin_email_name );
 	}
+}
+
+/**
+ * Edit submission value output function
+ *
+ * @since 2.7
+ * @return void
+ */
+function nf_field_text_edit_sub_value( $field_id, $user_value ) {
+	?>
+	<input type="text" name="fields[<?php echo $field_id; ?>]" value="<?php echo $user_value; ?>">
+	<?php
 }
