@@ -319,6 +319,7 @@ class Ninja_Forms {
 		require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/user-info-fields.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/post-meta-values.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/input-limit.php" );
+		require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/sub-settings.php" );
 
 		/* * * * ninja-forms - Main Form Editing Page
 

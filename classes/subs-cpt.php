@@ -19,6 +19,12 @@ class NF_Subs_CPT {
 	var $output_row_actions = array();
 
 	/**
+	 * Store our field settings so that we don't have to ping the database for every field.
+	 * @var fields
+	 */
+	var $fields = array();
+
+	/**
 	 * Get things started
 	 * 
 	 * @access public
@@ -28,6 +34,9 @@ class NF_Subs_CPT {
 	function __construct() {
 		// Register our submission custom post type.
 		add_action( 'init', array( $this, 'register_cpt' ) );
+
+		// Populate our field settings var
+		add_action( 'init', array( $this, 'setup_fields' ) );
 
 		// Filter our hidden columns by form ID.
 		add_action( 'wp', array( $this, 'filter_hidden_columns' ) );
@@ -118,6 +127,21 @@ class NF_Subs_CPT {
 	}
 
 	/**
+	 * Populate our fields var with all the fields. This keeps us from needing to ping the database later.
+	 * 
+	 * @access public
+	 * @since 2.7
+	 */
+	public function setup_fields() {
+		global $pagenow;
+		// Bail if we aren't on the edit.php page, we aren't editing our custom post type, or we don't have a form_id set.
+		if ( $pagenow != 'edit.php' || ! isset ( $_REQUEST['post_type'] ) || $_REQUEST['post_type'] != 'nf_sub' || ! isset ( $_REQUEST['form_id'] ) )
+			return false;
+
+		$this->fields = nf_get_fields_by_form_id( $_REQUEST['form_id'] );
+	}
+
+	/**
 	 * Add our submissions submenu
 	 * 
 	 * @access public
@@ -199,9 +223,8 @@ class NF_Subs_CPT {
 		// Compatibility with old field registration system. Can be removed when the new one is in place.
 		if ( isset ( $_GET['form_id'] ) ) {
 			$form_id = $_GET['form_id'];
-			$fields = ninja_forms_get_fields_by_form_id( $form_id );
-			if ( is_array ( $fields ) ) {
-				foreach ( $fields as $field ) {
+			if ( is_array ( $this->fields ) ) {
+				foreach ( $this->fields as $field ) {
 					$field_id = $field['id'];
 					$field_type = $field['type'];
 					if ( isset ( $ninja_forms_fields[ $field_type ] ) ) {
@@ -210,7 +233,14 @@ class NF_Subs_CPT {
 					} else {
 						$process_field = false;
 					}
-					$label = isset ( $field['data']['label'] ) ? $field['data']['label'] : '';
+					if ( isset ( $field['data']['admin_label'] ) && ! empty ( $field['data']['admin_label'] ) ) {
+						$label = $field['data']['admin_label'];
+					} else if ( isset ( $field['data']['label'] ) ) {
+						$label = $field['data']['label'];
+					} else {
+						$label = '';
+					}
+
 					if ( strlen( $label ) > 140 )
 						$label = substr( $label, 0, 140 );
 
@@ -255,7 +285,14 @@ class NF_Subs_CPT {
            if( strpos( $vars['orderby'], 'form_' ) !== false ) {
            		$args = explode( '_', $vars['orderby'] );
            		$field_id = $args[3];
-                $vars['orderby'] = 'meta_value';
+
+           		if ( isset ( $this->field[ $field_id ]['data']['num_sort'] ) && $this->field[ $field_id ]['data']['num_sort'] == 1 ) {
+           			$orderby = 'meta_value_num';
+           		} else {
+           			$orderby = 'meta_value';
+           		}
+
+                $vars['orderby'] = $orderby;
                 $vars['meta_key'] = '_field_' . $field_id;
            }
 		}
@@ -595,7 +632,7 @@ class NF_Subs_CPT {
 		// Get all the post meta
 		$custom_fields = get_post_custom( $post->ID );
 		$form_id = $custom_fields['_form_id'][0];
-		$fields = nf_get_fields_by_form_id( $form_id );
+
 		?>
 		<div id="postcustomstuff">
 			<table id="list-table">
@@ -612,7 +649,7 @@ class NF_Subs_CPT {
 						if ( strpos( $meta_key, '_field_' ) === 0 ) {
 							$field_id = str_replace( '_field_', '', $meta_key );
 
-							$field = $fields[ $field_id ];
+							$field = $this->fields[ $field_id ];
 							$field_type = $field['type'];
 
 							if ( isset ( $ninja_forms_fields[ $field_type ] ) ) {
@@ -628,7 +665,7 @@ class NF_Subs_CPT {
 								$user_value = unserialize( $user_value );
 							}
 
-							if ( isset ( $fields[ $field_id ] ) && $process_field ) {
+							if ( isset ( $this->fields[ $field_id ] ) && $process_field ) {
 								?>
 								<tr>
 									<td class="left"><?php echo $field['data']['label']; ?></td>
@@ -760,6 +797,7 @@ class NF_Subs_CPT {
 		// Bail if we aren't on the edit.php page, we aren't editing our custom post type, or we don't have a form_id set.
 		if ( $pagenow != 'edit.php' || ! isset ( $_REQUEST['post_type'] ) || $_REQUEST['post_type'] != 'nf_sub' || ! isset ( $_REQUEST['form_id'] ) )
 			return false;
+
 		// Grab our current user.
 		$user = wp_get_current_user();
 		// Grab our form id.
