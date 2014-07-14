@@ -207,7 +207,7 @@ class NF_Subs_CPT {
 
 		wp_enqueue_script( 'subs-cpt',
 			NF_PLUGIN_URL . 'assets/js/' . $src .'/subs-cpt' . $suffix . '.js',
-			array('jquery') );
+			array('jquery', 'jquery-ui-datepicker') );
 
 		wp_localize_script( 'subs-cpt', 'nf_sub', array( 'form_id' => $form_id, 'date_format' => $date_format ) );
 
