@@ -814,7 +814,7 @@ function nf_field_list_edit_sub_value( $field_id, $user_value, $field ) {
 		break;
 		case 'checkbox':
 
-			?><input type="hidden" name="fields[<?php echo $field_id; ?>]" value=""><ul><?php
+			?><input type="hidden" name="fields[<?php echo $field_id; ?>][]" value=""><ul><?php
 			foreach($options as $option){
 
 				if(isset($option['value'])){
@@ -872,7 +872,62 @@ function nf_field_list_edit_sub_value( $field_id, $user_value, $field ) {
 			<?php
 		break;
 		case 'multi';
+			?>
+			<input type="hidden" name="fields[<?php echo $field_id; ?>][]" value="" />
+			<select name="fields[<?php echo $field_id; ?>][]" multiple size="5">
+				<?php
+				if($label_pos == 'inside'){
+					?>
+					<option value=""><?php echo $label;?></option>
+					<?php
+				}
+				foreach($options as $option){
 
+					if(isset($option['value'])){
+						$value = $option['value'];
+					}else{
+						$value = $option['label'];
+					}
+
+					$value = htmlspecialchars( $value, ENT_QUOTES );
+
+					if(isset($option['label'])){
+						$label = $option['label'];
+					}else{
+						$label = '';
+					}
+
+					if(isset($option['display_style'])){
+						$display_style = $option['display_style'];
+					}else{
+						$display_style = '';
+					}
+
+					$label = htmlspecialchars( $label, ENT_QUOTES );
+
+					$label = stripslashes($label);
+
+					if($list_show_value == 0){
+						$value = $label;
+					}
+
+					if(is_array($selected_value) AND in_array($value, $selected_value)){
+						$selected = 'selected';
+					}else if( $selected_value == '' AND isset( $option['selected'] ) AND $option['selected'] == 1 ){
+						$selected = 'selected';
+					}else{
+						$selected = '';
+					}
+
+					if( $display_style == '' ){
+					?>
+					<option value="<?php echo $value;?>" <?php echo $selected;?>><?php echo $label;?></option>
+					<?php
+					}
+				}
+				?>
+			</select>
+			<?php
 		break;
 	}
 

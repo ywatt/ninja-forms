@@ -2,8 +2,9 @@ jQuery(document).ready(function($) {
 
 	var nf_columns = {
 		init: function() {
-			this.move_row_actions();
-
+			//this.move_row_actions();
+			// Remove our "ID" checkbox.
+			$( '#id-hide' ).parent().remove();
 			var that = this;
 			$( document ).on( 'click', '.hide-column-tog', that.save_hidden_columns );
 		},
@@ -13,13 +14,13 @@ jQuery(document).ready(function($) {
 			$.post(
 				ajaxurl,
 				{ 
-					form_id: form_id,
+					form_id: nf_sub.form_id,
 			 		hidden: hidden,
 			 		action:'nf_hide_columns'
 			 	}
 			);
 			// Move our row-actions
-			nf_columns.move_row_actions();
+			//nf_columns.move_row_actions();
 		},
 		move_row_actions: function() {
 			// Move our row-actions class to our first column.
@@ -34,4 +35,6 @@ jQuery(document).ready(function($) {
 	}
 
 	nf_columns.init();
+
+	$( '.datepicker' ).datepicker( { dateFormat: nf_sub.date_format } );
 });

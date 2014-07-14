@@ -699,7 +699,7 @@ function ninja_forms_delete_transient(){
  */
 function nf_get_sub_count( $form_id, $post_status = 'publish' ) {
 	$args = array(
-	    'meta_key' => 'form_id',
+		'meta_key' => '_form_id',
 	    'meta_value' => $form_id,
 	    'post_type' => 'nf_sub',
 	    'posts_per_page' => 999999,
