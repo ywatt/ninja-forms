@@ -1,0 +1,19 @@
+#postcustomstuff table input[type=checkbox],
+#postcustomstuff table input[type=radio] {
+    width: auto;
+}
+#nf_fields {
+    /*background: transparent;
+    border: 0;*/
+}
+#postcustomstuff table {
+    background: transparent;
+    border: 0;
+}
+#postcustomstuff table tr td:first-child {
+    padding-top: 12px;
+}
+
+#nf_fields_save #major-publishing-actions {
+    margin: 10px -12px -12px;
+}
