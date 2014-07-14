@@ -97,8 +97,13 @@ class Ninja_Forms {
 	 * @return void
 	 */
 	public function init() {
-		// Add our submission class.
+		// The subs_var variable won't be interacted with directly.
+		// Instead, the sub( $form_id ) and subs() methods will act as wrappers for it.
 		self::$instance->subs_var = new NF_Subs();
+
+		// The form_var variable won't be interacted with directly.
+		// Instead, the form( $form_id ) function will act as a wrapper for it.
+		self::$instance->form_var = new NF_Form();
 	}
 
 	/**
@@ -153,6 +158,21 @@ class Ninja_Forms {
 	 */
 	public function subs() {
 		return self::$instance->subs_var;
+	}
+
+	/**
+	 * Function that acts as a wrapper for our form_var - NF_Form() class.
+	 * It sets the form_id and then returns the instance, which is now using the
+	 * proper form id
+	 * 
+	 * @access public
+	 * @param int $form_id
+	 * @since 2.7
+	 * @return object self::$instance->form_var
+	 */
+	public function form( $form_id = '' ) {
+		self::$instance->form_var->set_form( $form_id );
+		return self::$instance->form_var;
 	}
 
 	/**
@@ -229,6 +249,7 @@ class Ninja_Forms {
 	 */
 	private function includes() {
 		require_once( NF_PLUGIN_DIR . 'classes/subs.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
 
 		/* Legacy includes */
 		

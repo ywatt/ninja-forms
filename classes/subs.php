@@ -260,7 +260,13 @@ class NF_Subs {
 			foreach ( $label_array[0] as $field_id => $label ) {
 				if ( $field_id > 0 ) {
 					$user_value = Ninja_Forms()->sub( $sub_id )->get_value( $field_id, true );
-					$value_array[ $sub_id ][] = $user_value;					
+					$user_value = apply_filters( 'nf_subs_export_pre_value', $user_value, $field_id );
+					
+					if ( is_array( $user_value ) ) {
+						$user_value = implode( ',', $user_value );
+					}
+
+					$value_array[ $sub_id ][] = apply_filters( 'nf_subs_csv_field_value', $user_value, $field_id );					
 				}
 			}
 		}
@@ -272,6 +278,27 @@ class NF_Subs {
 		$today = date( $date_format, current_time( 'timestamp' ) );
 		$filename = apply_filters( 'nf_subs_csv_filename', 'nf_subs_' . $today );
 		$filename = $filename . ".csv";
+
+		if( $return ){
+			return str_putcsv( $array, 
+				apply_filters( 'nf_sub_csv_delimiter', ',' ), 
+				apply_filters( 'nf_sub_csv_enclosure', '"' ), 
+				apply_filters( 'nf_sub_csv_terminator', "\n" )
+			);
+		}else{
+			header( 'Content-type: application/csv');
+			header( 'Content-Disposition: attachment; filename="'.$filename .'"' );
+			header( 'Pragma: no-cache');
+			header( 'Expires: 0' );
+			echo apply_filters( 'nf_sub_csv_bom',"\xEF\xBB\xBF" ) ; // Byte Order Mark
+			echo str_putcsv( $array, 
+				apply_filters( 'nf_sub_csv_delimiter', ',' ), 
+				apply_filters( 'nf_sub_csv_enclosure', '"' ), 
+				apply_filters( 'nf_sub_csv_terminator', "\n" )
+			);
+
+			die();
+		}
 
 	}
 

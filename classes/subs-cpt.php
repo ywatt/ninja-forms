@@ -36,7 +36,7 @@ class NF_Subs_CPT {
 		add_action( 'init', array( $this, 'register_cpt' ) );
 
 		// Listen for the "download all" button.
-		add_action( 'load-edit.php', array( $this, 'download_all' ) );
+		add_action( 'load-edit.php', array( $this, 'export_listen' ) );
 
 		// Populate our field settings var
 		add_action( 'current_screen', array( $this, 'setup_fields' ) );
@@ -357,7 +357,7 @@ class NF_Subs_CPT {
 					if ( !isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
 						echo '<div class="row-actions">
 							<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit" title="' . __( 'Edit this item', 'ninja-forms' ) . '">Edit</a> | </span> 
-							<span class="edit"><a href="" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>  
+							<span class="edit"><a href="' . add_query_arg( array( 'export_single' => $sub_id ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>  
 							<span class="trash"><a class="submitdelete" title="' . __( 'Move this item to the Trash', 'ninja-forms' ) . '" href="' . get_delete_post_link( $sub_id ) . '">Trash</a> | </span>
 							
 							</div>';
@@ -1023,14 +1023,19 @@ class NF_Subs_CPT {
 	 * @since 2.7
 	 * @return void
 	 */
-	public function download_all() {
+	public function export_listen() {
 
-		Ninja_Forms()->subs()->export( array( 965, 966, 967, 968 ) );
-		
-		if ( ! isset ( $_REQUEST['submit'] ) || $_REQUEST['submit'] != __( 'Download All', 'ninja-forms' ) )
-			return false;
+		if ( isset ( $_REQUEST['export_single'] ) && ! empty( $_REQUEST['export_single'] ) )
+			Ninja_Forms()->sub( $_REQUEST['export_single'] )->export();
 
-		wp_redirect( remove_query_arg( 'submit' ) );
-		die();
+		if ( isset ( $_REQUEST['action'] ) && $_REQUEST['action'] == 'export' )
+			Ninja_Forms()->subs()->export( $_REQUEST['post'] );
+
+		if ( isset ( $_REQUEST['submit'] ) && $_REQUEST['submit'] == __( 'Download All', 'ninja-forms' ) && isset ( $_REQUEST['form_id'] ) ) {
+			$subs = Ninja_Forms()->form( 241 )->get_subs();
+		}
+			
+
+
 	}
 }
