@@ -1024,6 +1024,9 @@ class NF_Subs_CPT {
 	 * @return void
 	 */
 	public function download_all() {
+
+		Ninja_Forms()->subs()->export( array( 965, 966, 967, 968 ) );
+		
 		if ( ! isset ( $_REQUEST['submit'] ) || $_REQUEST['submit'] != __( 'Download All', 'ninja-forms' ) )
 			return false;
 

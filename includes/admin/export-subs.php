@@ -1,14 +1,4 @@
 <?php
-if(isset($_REQUEST['ninja_forms_export_subs_to_csv']) AND $_REQUEST['ninja_forms_export_subs_to_csv'] != ''){
-	add_action('admin_init', 'ninja_forms_subs_bulk_export');
-}
-
-function ninja_forms_subs_bulk_export(){
-	if(isset($_REQUEST['sub_id']) AND $_REQUEST['sub_id'] != ''){
-		$sub_ids = array( esc_html( $_REQUEST['sub_id'] ) );
-		ninja_forms_export_subs_to_csv($sub_ids);
-	}
-}
 
 function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
 	global $ninja_forms_fields, $ninja_forms_processing;

@@ -58,7 +58,7 @@ class Ninja_Forms {
 
 	/**
 	 * @var Ninja_Forms
-	 * @since 3.0
+	 * @since 2.7
 	 */
 	private static $instance;
 
@@ -68,7 +68,7 @@ class Ninja_Forms {
 	 * Insures that only one instance of Ninja_Forms exists in memory at any one
 	 * time. Also prevents needing to define globals all over the place.
 	 *
-	 * @since 3.0
+	 * @since 2.7
 	 * @static
 	 * @staticvar array $instance
 	 * @return The highlander Ninja_Forms
@@ -93,7 +93,7 @@ class Ninja_Forms {
 	 * Run all of our plugin stuff on init.
 	 * This allows filters and actions to be used by third-party classes.
 	 * 
-	 * @since 3.0
+	 * @since 2.7
 	 * @return void
 	 */
 	public function init() {
@@ -135,11 +135,23 @@ class Ninja_Forms {
 	 * 
 	 * @access public
 	 * @param int $form_id
-	 * @since 3.0
-	 * @return object self::$instance->form_var
+	 * @since 2.7
+	 * @return object self::$instance->subs_var
 	 */
 	public function sub( $sub_id = '' ) {
 		self::$instance->subs_var->set_sub( $sub_id );
+		return self::$instance->subs_var;
+	}
+
+	/**
+	 * Function that acts as a wrapper for our subs_var - NF_Subs() class.
+	 * It doesn't set a sub_id and can be used to interact with methods that affect mulitple submissions
+	 * 
+	 * @access public
+	 * @since 2.7
+	 * @return object self::$instance->subs_var
+	 */
+	public function subs() {
 		return self::$instance->subs_var;
 	}
 
