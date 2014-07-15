@@ -149,7 +149,7 @@ class NF_Subs_CPT {
 		if ( isset ( $_REQUEST['form_id'] ) ) {
 			$form_id = $_REQUEST['form_id'];
 		} else if ( isset ( $_REQUEST['post'] ) ) {
-			$form_id = get_post_meta( $_REQUEST['post'], '_form_id', true );
+			$form_id = Ninja_Forms()->sub( $_REQUEST['post'] )->form_id;
 		} else {
 			$form_id = '';
 		}
@@ -403,17 +403,26 @@ class NF_Subs_CPT {
 				default:
 					$field_id = str_replace( 'form_' . $form_id . '_field_', '', $column );
 					//if ( apply_filters( 'nf_add_sub_value', Ninja_Forms()->field( $field_id )->type->add_to_sub, $field_id ) ) {
-						$user_value = Ninja_Forms()->sub( $sub_id )->get_value( $field_id, true );
+						$user_value = Ninja_Forms()->sub( $sub_id )->get_field_value( $field_id );
 						if ( is_array ( $user_value ) ) {
-							$user_value = array_filter( $user_value );
-							$user_value = implode(',', $user_value );
-						}
-						// Cut down our string if it is longer than 140 characters.
-						$max_len = apply_filters( 'nf_sub_table_user_value_max_len', 140, $field_id );
-						if ( strlen( $user_value ) > 140 )
-							$user_value = substr( $user_value, 0, 140 );
+							echo '<ul>';
+							$max_items = apply_filters( 'nf_sub_table_user_value_max_items', 3, $field_id );
+							$x = 0;
 
-						echo $user_value;
+							while ( $x < $max_items && $x <= count( $user_value ) - 1 ) {
+								echo '<li>' . $user_value[$x] . '</li>';
+								$x++;
+							}							
+							echo '</ul>';
+						} else {
+							// Cut down our string if it is longer than 140 characters.
+							$max_len = apply_filters( 'nf_sub_table_user_value_max_len', 140, $field_id );
+							if ( strlen( $user_value ) > 140 )
+								$user_value = substr( $user_value, 0, 140 );
+
+							echo $user_value;							
+						}
+
 					//}		
 				break;
 			}
@@ -483,8 +492,10 @@ class NF_Subs_CPT {
 		}
 		$html .= '</select>';
 
-		// Add our "Download All" button.
-		$html .= '<input type="submit" name="submit" class="button-secondary" style="float:right;" value="' . __( 'Download All', 'ninja-forms' ) . '" />';
+		if ( isset ( $_REQUEST['post_status'] ) && $_REQUEST['post_status'] == 'all' ) {
+			// Add our "Download All" button.
+			$html .= '<input type="submit" name="submit" class="button-secondary" style="float:right;" value="' . __( 'Download All', 'ninja-forms' ) . '" />';
+		}
 
 		echo $html;
 	}
@@ -658,7 +669,7 @@ class NF_Subs_CPT {
 	public function bulk_admin_footer() {
 		global $post_type;
  
-		if($post_type == 'nf_sub') {
+		if( $post_type == 'nf_sub' && isset ( $_REQUEST['post_status'] ) && $_REQUEST['post_status'] == 'all' ) {
 			?>
 			<script type="text/javascript">
 				jQuery(document).ready(function() {
@@ -797,7 +808,7 @@ class NF_Subs_CPT {
 		global $ninja_forms_fields;
 		// Get all the post meta
 		$custom_fields = get_post_custom( $post->ID );
-		$form_id = $custom_fields['_form_id'][0];
+		$form_id = Ninja_Forms()->sub( $post->ID )->form_id;
 
 		?>
 		<div id="postcustomstuff">
@@ -875,7 +886,7 @@ class NF_Subs_CPT {
 		$user_data = get_userdata( $post->post_author );
 		$first_name = $user_data->first_name;
 		$last_name = $user_data->last_name;
-		$form_id = get_post_meta( $post->ID, '_form_id', true );
+		$form_id = Ninja_Forms()->sub( $post->ID )->form_id;
 		$form = ninja_forms_get_form_by_id( $form_id );
 		$form_title = $form['data']['form_title'];
 		?>
@@ -932,32 +943,32 @@ class NF_Subs_CPT {
 	 * @since 2.7
 	 * @return void
 	 */
-	public function save_sub( $post_id, $post ) {
+	public function save_sub( $sub_id, $post ) {
 		global $pagenow;
 
 		if ( ! isset ( $_POST['nf_edit_sub'] ) || $_POST['nf_edit_sub'] != 1 )
-			return $post_id;
+			return $sub_id;
 
 		// verify if this is an auto save routine.
 		// If it is our form has not been submitted, so we dont want to do anything
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-		  return $post_id;
+		  return $sub_id;
 
 		if ( $pagenow != 'post.php' )
-			return $post_id;
+			return $sub_id;
 
 		if ( $post->post_type != 'nf_sub' )
-			return $post_id;
+			return $sub_id;
 
 		/* Get the post type object. */
 		$post_type = get_post_type_object( $post->post_type );
 
 		/* Check if the current user has permission to edit the post. */
-		if ( !current_user_can( $post_type->cap->edit_post, $post_id ) )
-	    	return $post_id;
+		if ( !current_user_can( $post_type->cap->edit_post, $sub_id ) )
+	    	return $sub_id;
 
 	    foreach ( $_POST['fields'] as $field_id => $user_value ) {
-	    	update_post_meta( $post_id, '_field_' . $field_id, $user_value );
+	    	Ninja_Forms()->sub( $sub_id )->update_field_value( $field_id, $user_value );
 	    }
 	}
 

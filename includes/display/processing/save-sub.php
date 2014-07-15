@@ -22,9 +22,9 @@ function ninja_forms_save_sub(){
 
 		// If we don't have a submission ID already, create a submission post.
 		if ( empty( $sub_id ) ) {
-			$sub_id = Ninja_Forms()->sub()->create_sub( $form_id );
-			Ninja_Forms()->sub( $sub_id )->add_value( '_action', $action );
-			Ninja_Forms()->sub( $sub_id )->add_value( '_user_id', $user_id );
+			$sub_id = Ninja_Forms()->subs()->create_sub( $form_id );
+			Ninja_Forms()->sub( $sub_id )->update_action( $action );
+			Ninja_Forms()->sub( $sub_id )->update_user_id( $user_id );
 			do_action( 'nf_create_sub', $sub_id );
 			// Update our legacy $ninja_forms_processing with the new sub_id
 			$ninja_forms_processing->update_form_setting( 'sub_id', $sub_id );
@@ -45,7 +45,7 @@ function ninja_forms_save_sub(){
 							$user_value = esc_html( $user_value );
 						}
 						// Add our submitted field value.
-						Ninja_Forms()->sub( $sub_id )->add_value( $field_id, $user_value, true );
+						Ninja_Forms()->sub( $sub_id )->add_field( $field_id, $user_value );
 					}
 				}
 			}

@@ -97,9 +97,9 @@ class Ninja_Forms {
 	 * @return void
 	 */
 	public function init() {
-		// The subs_var variable won't be interacted with directly.
-		// Instead, the sub( $form_id ) and subs() methods will act as wrappers for it.
-		self::$instance->subs_var = new NF_Subs();
+		// The subs variable won't be interacted with directly.
+		// Instead, the subs() methods will act as wrappers for it.
+		self::$instance->subs = new NF_Subs();
 
 		// The form_var variable won't be interacted with directly.
 		// Instead, the form( $form_id ) function will act as a wrapper for it.
@@ -134,18 +134,27 @@ class Ninja_Forms {
 	}
 
 	/**
-	 * Function that acts as a wrapper for our subs_var - NF_Subs() class.
-	 * It sets the sub_id and then returns the instance, which is now using the
-	 * proper sub id
+	 * Function that acts as a wrapper for our individual sub objects.
+	 * It checks to see if an object exists for this sub id.
+	 * If it does, it returns that object. Otherwise, it creates a new one and returns it.
 	 * 
 	 * @access public
 	 * @param int $form_id
 	 * @since 2.7
-	 * @return object self::$instance->subs_var
+	 * @return object self::$instance->$sub_var
 	 */
 	public function sub( $sub_id = '' ) {
-		self::$instance->subs_var->set_sub( $sub_id );
-		return self::$instance->subs_var;
+		// Bail if we don't get a sub id.
+		if ( $sub_id == '' )
+			return false;
+		
+		$sub_var = 'sub_' . $sub_id;
+		// Check to see if an object for this sub already exists
+		// Create one if it doesn't exist.
+		if ( ! isset( self::$instance->$sub_var ) )
+			self::$instance->$sub_var = new NF_Sub( $sub_id );
+
+		return self::$instance->$sub_var;
 	}
 
 	/**
@@ -157,7 +166,7 @@ class Ninja_Forms {
 	 * @return object self::$instance->subs_var
 	 */
 	public function subs() {
-		return self::$instance->subs_var;
+		return self::$instance->subs;
 	}
 
 	/**
@@ -248,7 +257,13 @@ class Ninja_Forms {
 	 * @return void
 	 */
 	private function includes() {
+		// Include our sub object.
+		require_once( NF_PLUGIN_DIR . 'classes/sub.php' );
+		// Include our subs object.
 		require_once( NF_PLUGIN_DIR . 'classes/subs.php' );
+		// Include our subs CPT.
+		require_once( NF_PLUGIN_DIR . 'classes/subs-cpt.php' );
+		// Include our form object.
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
 
 		/* Legacy includes */
