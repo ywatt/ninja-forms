@@ -187,7 +187,8 @@ function ninja_forms_get_subs( $args = array() ) {
 				foreach ( $fields as $field_id => $user_value ) {
 					$data[] = array( 'field_id' => $field_id, 'user_value' => $user_value ); 
 				}
-
+				
+				
 				$subs_results[$x]['data'] = $data;
 				$subs_results[$x]['date_updated'] = $sub->post_modified;
 
