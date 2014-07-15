@@ -131,7 +131,7 @@ class NF_Subs {
 			$value_array[ $sub_id ][] = date( $date_format, $date );
 			foreach ( $label_array[0] as $field_id => $label ) {
 				if ( $field_id > 0 ) {
-					$user_value = Ninja_Forms()->sub( $sub_id )->get_field_value( $field_id );
+					$user_value = Ninja_Forms()->sub( $sub_id )->get_field( $field_id );
 					$user_value = apply_filters( 'nf_subs_export_pre_value', $user_value, $field_id );
 
 					if ( is_array( $user_value ) ) {

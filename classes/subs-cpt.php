@@ -403,7 +403,7 @@ class NF_Subs_CPT {
 				default:
 					$field_id = str_replace( 'form_' . $form_id . '_field_', '', $column );
 					//if ( apply_filters( 'nf_add_sub_value', Ninja_Forms()->field( $field_id )->type->add_to_sub, $field_id ) ) {
-						$user_value = Ninja_Forms()->sub( $sub_id )->get_field_value( $field_id );
+						$user_value = Ninja_Forms()->sub( $sub_id )->get_field( $field_id );
 						if ( is_array ( $user_value ) ) {
 							echo '<ul>';
 							$max_items = apply_filters( 'nf_sub_table_user_value_max_items', 3, $field_id );
@@ -420,7 +420,7 @@ class NF_Subs_CPT {
 							if ( strlen( $user_value ) > 140 )
 								$user_value = substr( $user_value, 0, 140 );
 
-							echo $user_value;							
+							echo nl2br( $user_value );							
 						}
 
 					//}		
@@ -968,7 +968,7 @@ class NF_Subs_CPT {
 	    	return $sub_id;
 
 	    foreach ( $_POST['fields'] as $field_id => $user_value ) {
-	    	Ninja_Forms()->sub( $sub_id )->update_field_value( $field_id, $user_value );
+	    	Ninja_Forms()->sub( $sub_id )->update_field( $field_id, $user_value );
 	    }
 	}
 

@@ -214,7 +214,7 @@ class NF_Sub {
 	 * @since 2.7
 	 * @return array|bool
 	 */
-	public function get_meta_value( $meta_key ) {
+	public function get_meta( $meta_key ) {
 		if ( isset ( $this->meta[ $meta_key ] ) ) {
 			return $this->meta[ $meta_key ];
 		} else {
@@ -229,7 +229,7 @@ class NF_Sub {
 	 * @since 2.7
 	 * @return array|bool
 	 */
-	public function get_field_value( $field_id ) {
+	public function get_field( $field_id ) {
 		if ( isset ( $this->fields[ $field_id ] ) ) {
 			return $this->fields[ $field_id ];
 		} else {
