@@ -347,7 +347,7 @@ class NF_Subs_CPT {
 					echo '<div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>';
 					if ( !isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
 						echo '<div class="row-actions">
-							<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit" title="' . __( 'Edit this item', 'ninja-forms' ) . '">Edit</a> | </span> 
+							<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( add_query_arg( array() ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">Edit</a> | </span> 
 							<span class="edit"><a href="' . add_query_arg( array( 'export_single' => $sub_id ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>  
 							<span class="trash"><a class="submitdelete" title="' . __( 'Move this item to the Trash', 'ninja-forms' ) . '" href="' . get_delete_post_link( $sub_id ) . '">Trash</a> | </span>
 							
@@ -702,22 +702,22 @@ class NF_Subs_CPT {
 
 			?>
 			<script type="text/javascript">
-			jQuery(function(){
-				jQuery( "li.all" ).find( "a" ).attr( "href", "<?php echo $all_url; ?>" );
-				jQuery( "li.<?php echo $active; ?>" ).addClass( "current" );
-				jQuery( "li.<?php echo $active; ?>" ).find( "a" ).addClass( "current" );
-				jQuery( "li.trash" ).find( "a" ).attr( "href", "<?php echo $trash_url; ?>" );
-				jQuery( ".view-switch" ).remove();
-				<?php
-				if ( $trashed_sub_count == 0 ) {
-					?>
-					var text = jQuery( "li.all" ).prop( "innerHTML" );
-					text = text.replace( " |", "" );
-					jQuery( "li.all" ).prop( "innerHTML", text );
+				jQuery(function(){
+					jQuery( "li.all" ).find( "a" ).attr( "href", "<?php echo $all_url; ?>" );
+					jQuery( "li.<?php echo $active; ?>" ).addClass( "current" );
+					jQuery( "li.<?php echo $active; ?>" ).find( "a" ).addClass( "current" );
+					jQuery( "li.trash" ).find( "a" ).attr( "href", "<?php echo $trash_url; ?>" );
+					jQuery( ".view-switch" ).remove();
 					<?php
-				}
-				?>
-			});
+					if ( $trashed_sub_count == 0 ) {
+						?>
+						var text = jQuery( "li.all" ).prop( "innerHTML" );
+						text = text.replace( " |", "" );
+						jQuery( "li.all" ).prop( "innerHTML", text );
+						<?php
+					}
+					?>
+				});
 			</script>
 
 			<style>
@@ -733,7 +733,19 @@ class NF_Subs_CPT {
 			</style>
 			<?php			
 		} else if ( $typenow == 'nf_sub' && $pagenow == 'post.php' ) {
+			if ( isset ( $_REQUEST['ref'] ) ) {
+				$back_url = urldecode( $_REQUEST['ref'] );
+			} else {
+				$back_url = '';
+			}
 			?>
+			<script type="text/javascript">
+				jQuery(function(){
+					var html = '<a href="<?php echo $back_url; ?>" class="back"><?php _e( 'Back to list', 'ninja-forms' ); ?></a>';
+					console.log( html );
+					jQuery( 'div.wrap' ).children( 'h2:first' ).append( html );
+				});
+			</script>
 			<style>
 				.add-new-h2 {
 					display:none;
