@@ -485,7 +485,7 @@ class NF_Subs_CPT {
 
 		if ( isset ( $_REQUEST['post_status'] ) && $_REQUEST['post_status'] == 'all' ) {
 			// Add our "Download All" button.
-			$html .= '<input type="submit" name="submit" class="button-secondary" style="float:right;" value="' . __( 'Download All', 'ninja-forms' ) . '" />';
+			$html .= '<input type="submit" name="submit" class="download-all" style="float:right;" value="' . __( 'Download All', 'ninja-forms' ) . '" />';
 		}
 
 		echo $html;
