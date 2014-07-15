@@ -1,6 +1,32 @@
+.wp-list-table .type-nf_sub ul {
+    margin: 0;
+}
+
+.download-all {
+    float: right;
+}
+
 #postcustomstuff table input[type=checkbox],
 #postcustomstuff table input[type=radio] {
     width: auto;
+}
+#postcustomstuff table textarea {
+    height: 150px;
+}
+.wrap h2 a {
+    font-size: 16px;
+}
+::-webkit-input-placeholder {
+    padding: 2px 5px 4px;
+}
+:-moz-placeholder {
+    padding: 2px 5px 4px;
+}
+::-moz-placeholder {
+    padding: 2px 5px 4px;
+}
+:-ms-input-placeholder {
+    padding: 2px 5px 4px;
 }
 #nf_fields {
     /*background: transparent;
