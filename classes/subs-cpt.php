@@ -755,7 +755,7 @@ class NF_Subs_CPT {
 			?>
 			<script type="text/javascript">
 				jQuery(function(){
-					var html = '<a href="<?php echo $back_url; ?>" class="back"><?php _e( 'Back to list', 'ninja-forms' ); ?></a>';
+					var html = '<a href="<?php echo $back_url; ?>" class="back button-secondary"><?php _e( 'Back to list', 'ninja-forms' ); ?></a>';
 					console.log( html );
 					jQuery( 'div.wrap' ).children( 'h2:first' ).append( html );
 				});
