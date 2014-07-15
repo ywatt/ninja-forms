@@ -71,6 +71,7 @@ function ninja_forms_register_field_list(){
 			),
 		),
 		'edit_sub_value' => 'nf_field_list_edit_sub_value',
+		'sub_table_value' => 'nf_field_list_sub_table_value',
 	);
 
 	ninja_forms_register_field('_list', $args);
@@ -929,5 +930,30 @@ function nf_field_list_edit_sub_value( $field_id, $user_value, $field ) {
 			<?php
 		break;
 	}
+}
 
+/**
+ * Output our user value on the sub table
+ * 
+ * @since 2.7
+ * @return void
+ */
+function nf_field_list_sub_table_value( $field_id, $user_value ) {
+	if ( is_array ( $user_value ) ) {
+		echo '<ul>';
+		$max_items = apply_filters( 'nf_sub_table_user_value_max_items', 3, $field_id );
+		$x = 0;
+
+		while ( $x < $max_items && $x <= count( $user_value ) - 1 ) {
+			echo '<li>' . $user_value[$x] . '</li>';
+			$x++;
+		}							
+		echo '</ul>';
+	} else {
+		$max_len = apply_filters( 'nf_sub_table_user_value_max_len', 140, $field_id );
+		if ( strlen( $user_value ) > 140 )
+			$user_value = substr( $user_value, 0, 140 );
+
+		echo nl2br( $user_value );
+	}
 }

@@ -343,17 +343,25 @@ class NF_Subs_CPT {
 			$form_id = $_GET['form_id'];
 			switch( $column ) {
 				case 'id':
-					echo Ninja_Forms()->sub( $sub_id )->get_seq_id();
+					echo apply_filters( 'nf_sub_table_seq_id', Ninja_Forms()->sub( $sub_id )->get_seq_id(), $sub_id, $column );
 					echo '<div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>';
 					if ( !isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
-						echo '<div class="row-actions">
-							<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( add_query_arg( array() ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">Edit</a> | </span> 
-							<span class="edit"><a href="' . add_query_arg( array( 'export_single' => $sub_id ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>  
-							<span class="trash"><a class="submitdelete" title="' . __( 'Move this item to the Trash', 'ninja-forms' ) . '" href="' . get_delete_post_link( $sub_id ) . '">Trash</a> | </span>
-							
-							</div>';
+						echo '<div class="row-actions">';
+						do_action( 'nf_sub_table_before_row_actions', $sub_id, $column );
+						echo '<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( add_query_arg( array() ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">Edit</a> | </span> 
+							<span class="edit"><a href="' . add_query_arg( array( 'export_single' => $sub_id ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>';
+						$row_actions = apply_filters( 'nf_sub_table_row_actions', array(), $sub_id, $form_id );
+						echo implode(" | ", $row_actions);
+						echo '<span class="trash"><a class="submitdelete" title="' . __( 'Move this item to the Trash', 'ninja-forms' ) . '" href="' . get_delete_post_link( $sub_id ) . '">Trash</a> | </span>';
+						do_action( 'nf_sub_table_after_row_actions', $sub_id, $column );
+						echo '</div>';
 					} else {
-						echo '<div class="row-actions"><span class="untrash"><a title="' . esc_attr( __( 'Restore this item from the Trash' ) ) . '" href="' . wp_nonce_url( sprintf( get_edit_post_link( $sub_id ) . '&amp;action=untrash', $sub_id ) , 'untrash-post_' . $sub_id ) . '">' . __( 'Restore' ) . '</a> | </span> <span class="delete"><a class="submitdelete" title="' . esc_attr( __( 'Delete this item permanently' ) ) . '" href="' . get_delete_post_link( $sub_id, '', true ) . '">' . __( 'Delete Permanently' ) . '</a></span></div>';
+						echo '<div class="row-actions">';
+						do_action( 'nf_sub_table_before_row_actions_trash', $sub_id, $column );
+						echo '<span class="untrash"><a title="' . esc_attr( __( 'Restore this item from the Trash' ) ) . '" href="' . wp_nonce_url( sprintf( get_edit_post_link( $sub_id ) . '&amp;action=untrash', $sub_id ) , 'untrash-post_' . $sub_id ) . '">' . __( 'Restore' ) . '</a> | </span> 
+						<span class="delete"><a class="submitdelete" title="' . esc_attr( __( 'Delete this item permanently' ) ) . '" href="' . get_delete_post_link( $sub_id, '', true ) . '">' . __( 'Delete Permanently' ) . '</a></span>';
+						do_action( 'nf_sub_table_after_row_actions_trash', $sub_id, $column );
+						echo '</div>';
 					}
 
 				break;
@@ -377,44 +385,44 @@ class NF_Subs_CPT {
 							$h_time = mysql2date( __( 'Y/m/d' ), $m_time );
 					}
 					
-					if ( 'excerpt' == $mode ) {
-						echo $t_time;
-					} else {
-						/** This filter is documented in wp-admin/includes/class-wp-posts-list-table.php */
-						echo '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
-					}
+					/** This filter is documented in wp-admin/includes/class-wp-posts-list-table.php */
+					echo '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
+
 					echo '<br />';
 					if ( 'publish' == $post->post_status ) {
 						_e( 'Submitted', 'ninja-forms' );
 					} else {
-						_e( 'Last Modified' );
+						_e( 'Last Modified', '' );
 					}
 					
 				break;
 				default:
+					global $ninja_forms_fields;
+
 					$field_id = str_replace( 'form_' . $form_id . '_field_', '', $column );
 					//if ( apply_filters( 'nf_add_sub_value', Ninja_Forms()->field( $field_id )->type->add_to_sub, $field_id ) ) {
-						$user_value = Ninja_Forms()->sub( $sub_id )->get_field( $field_id );
-						if ( is_array ( $user_value ) ) {
-							echo '<ul>';
-							$max_items = apply_filters( 'nf_sub_table_user_value_max_items', 3, $field_id );
-							$x = 0;
-
-							while ( $x < $max_items && $x <= count( $user_value ) - 1 ) {
-								echo '<li>' . $user_value[$x] . '</li>';
-								$x++;
-							}							
-							echo '</ul>';
+						$field = Ninja_Forms()->form( $form_id )->fields[ $field_id ];
+						$field_type = $field['type'];
+						if ( isset ( $ninja_forms_fields[ $field_type ] ) ) {
+							$reg_field = $ninja_forms_fields[ $field_type ];
 						} else {
-							// Cut down our string if it is longer than 140 characters.
-							$max_len = apply_filters( 'nf_sub_table_user_value_max_len', 140, $field_id );
-							if ( strlen( $user_value ) > 140 )
-								$user_value = substr( $user_value, 0, 140 );
-
-							echo nl2br( $user_value );							
+							$reg_field = array();
 						}
 
-					//}		
+						if ( isset ( $reg_field['sub_table_value'] ) ) {
+							$edit_value_function = $reg_field['sub_table_value'];
+						} else {
+							$edit_value_function = 'nf_field_text_sub_table_value';
+						}
+
+						$user_value = Ninja_Forms()->sub( $sub_id )->get_field( $field_id );
+
+						$args['field_id'] = $field_id;
+						$args['user_value'] = $user_value;
+						$args['field'] = $field;
+
+						call_user_func_array( $edit_value_function, $args );
+					//}
 				break;
 			}
 		}
@@ -485,10 +493,16 @@ class NF_Subs_CPT {
 
 		if ( isset ( $_REQUEST['post_status'] ) && $_REQUEST['post_status'] == 'all' ) {
 			// Add our "Download All" button.
-			$html .= '<input type="submit" name="submit" class="download-all button-secondary" style="float:right;" value="' . __( 'Download All', 'ninja-forms' ) . '" />';
+			// $html .= '<input type="submit" name="submit" class="download-all button-secondary" style="float:right;" value="' . __( 'Download All', 'ninja-forms' ) . '" />';
 		}
 
 		echo $html;
+
+		$args = array(
+			'form_id' => 241
+		);
+
+		ninja_forms_get_subs( $args );
 	}
 
 	/**
@@ -1047,7 +1061,7 @@ class NF_Subs_CPT {
 			Ninja_Forms()->subs()->export( $_REQUEST['post'] );
 
 		if ( isset ( $_REQUEST['submit'] ) && $_REQUEST['submit'] == __( 'Download All', 'ninja-forms' ) && isset ( $_REQUEST['form_id'] ) ) {
-			$subs = Ninja_Forms()->form( 241 )->get_subs();
+			//$subs = Ninja_Forms()->form( 241 )->get_subs();
 		}
 	}
 }

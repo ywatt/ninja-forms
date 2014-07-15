@@ -270,6 +270,8 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/subs-cpt.php' );
 		// Include our form object.
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
+		// Include deprecated functions and filters.
+		require_once( NF_PLUGIN_DIR . 'includes/deprecated.php' );
 
 		/* Legacy includes */
 		
