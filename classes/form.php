@@ -42,12 +42,6 @@ class NF_Form {
 	var $errors = array();
 
 	/**
-	 * @var subs - Form Submissions
-	 * @since 2.7
-	 */
-	var $subs = array();
-
-	/**
 	 * Get things started
 	 * 
 	 * @access public
@@ -96,18 +90,23 @@ class NF_Form {
 	 * 
 	 * @access public
 	 * @since 2.7
-	 * @return array $subs
+	 * @return array $sub_ids
 	 */
 	public function get_subs( $args = array() ) {
-		$args = array(
-			'post_type' => 'nf_sub',
-			'meta_key' => '_form_id',
-			'meta_value' => $this->form_id,
-		);
-		$query = new WP_Query( $args );
-		echo "<pre>";
-		print_r( $query );
-		echo "</pre>";
+		$args['form_id'] = $this->form_id;
+		return Ninja_Forms()->subs()->get_subs( $args );
+	}
+
+	/**
+	 * Return a count of the submissions this form has had
+	 * 
+	 * @access public
+	 * @param array $args
+	 * @since 2.7
+	 * @return int $count
+	 */
+	public function sub_count( $args = array() ) {
+		return count( $this->get_subs( $args ) );
 	}
 
 }

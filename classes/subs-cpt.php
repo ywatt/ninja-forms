@@ -497,12 +497,6 @@ class NF_Subs_CPT {
 		}
 
 		echo $html;
-
-		$args = array(
-			'form_id' => 241
-		);
-
-		ninja_forms_get_subs( $args );
 	}
 
 	/**
@@ -513,8 +507,9 @@ class NF_Subs_CPT {
 	 * @return void
 	 */
 	public function table_filter( $query ) {
+		global $pagenow;
 
-		if( is_admin() AND $query->query['post_type'] == 'nf_sub' ) {
+		if( $pagenow == 'edit.php' && is_admin() && $query->query['post_type'] == 'nf_sub' && is_main_query() ) {
 
 		    $qv = &$query->query_vars;
 
@@ -555,18 +550,22 @@ class NF_Subs_CPT {
 		    	$end_date = '';
 		    }
 
-		    $qv['date_query'] = array(
-		    	'after' => $begin_date,
-		    	'before' => $end_date,
-		    );
+		    if ( ! isset ( $qv['date_query'] ) ) {
+			    $qv['date_query'] = array(
+			    	'after' => $begin_date,
+			    	'before' => $end_date,
+			    );		    	
+		    }
 
-		    $qv['meta_query'] = array(
-		    	array(
-		    		'key' => '_form_id',
-		    		'value' => $form_id,
-		    		'compare' => '=',
-		    	),
-		    );
+		    if ( ! isset ( $qv['meta_query'] ) ) {
+			     $qv['meta_query'] = array(
+			    	array(
+			    		'key' => '_form_id',
+			    		'value' => $form_id,
+			    		'compare' => '=',
+			    	),
+			    );	
+		    }
 		}
 	}
 
