@@ -12,17 +12,7 @@
 
 class NF_Subs_CPT {
 
-	/**
-	 * Store our form settings so that we don't have to ping the database for every field.
-	 * @var form
-	 */
-	var $form = array();
-
-	/**
-	 * Store our field settings so that we don't have to ping the database for every field.
-	 * @var fields
-	 */
-	var $fields = array();
+	var $form_id;
 
 	/**
 	 * Get things started
@@ -154,8 +144,9 @@ class NF_Subs_CPT {
 			$form_id = '';
 		}
 
-		$this->fields = nf_get_fields_by_form_id( $form_id );
-		$this->form = ninja_forms_get_form_by_id( $form_id );
+		$this->form_id = $form_id;
+
+		Ninja_Forms()->form( $form_id );
 	}
 
 	/**
@@ -262,8 +253,8 @@ class NF_Subs_CPT {
 		// Compatibility with old field registration system. Can be removed when the new one is in place.
 		if ( isset ( $_GET['form_id'] ) ) {
 			$form_id = $_GET['form_id'];
-			if ( is_array ( $this->fields ) ) {
-				foreach ( $this->fields as $field ) {
+			if ( is_array ( Ninja_Forms()->form( $this->form_id )->fields ) ) {
+				foreach ( Ninja_Forms()->form( $this->form_id )->fields as $field ) {
 					$field_id = $field['id'];
 					$field_type = $field['type'];
 					if ( isset ( $ninja_forms_fields[ $field_type ] ) ) {
@@ -327,7 +318,7 @@ class NF_Subs_CPT {
            		$args = explode( '_', $vars['orderby'] );
            		$field_id = $args[3];
 
-           		if ( isset ( $this->fields[ $field_id ]['data']['num_sort'] ) && $this->fields[ $field_id ]['data']['num_sort'] == 1 ) {
+           		if ( isset ( Ninja_Forms()->form( $this->form_id )->fields[ $field_id ]['data']['num_sort'] ) && Ninja_Forms()->form( $this->form_id )->fields[ $field_id ]['data']['num_sort'] == 1 ) {
            			$orderby = 'meta_value_num';
            		} else {
            			$orderby = 'meta_value';
@@ -716,6 +707,7 @@ class NF_Subs_CPT {
 				jQuery( "li.<?php echo $active; ?>" ).addClass( "current" );
 				jQuery( "li.<?php echo $active; ?>" ).find( "a" ).addClass( "current" );
 				jQuery( "li.trash" ).find( "a" ).attr( "href", "<?php echo $trash_url; ?>" );
+				jQuery( ".view-switch" ).remove();
 				<?php
 				if ( $trashed_sub_count == 0 ) {
 					?>
@@ -807,7 +799,7 @@ class NF_Subs_CPT {
 	public function edit_sub_metabox( $post ) {
 		global $ninja_forms_fields;
 		// Get all the post meta
-		$custom_fields = get_post_custom( $post->ID );
+		$fields = Ninja_Forms()->sub( $post->ID )->get_all_fields();
 		$form_id = Ninja_Forms()->sub( $post->ID )->form_id;
 
 		?>
@@ -822,49 +814,49 @@ class NF_Subs_CPT {
 				<tbody id="the-list">
 					<?php
 					// Loop through our post meta and keep our field values
-					foreach ( $custom_fields as $meta_key => $meta_value ) {
-						if ( strpos( $meta_key, '_field_' ) === 0 ) {
-							$field_id = str_replace( '_field_', '', $meta_key );
+					foreach ( $fields as $field_id => $user_value ) {
 
-							$field = $this->fields[ $field_id ];
-							$field_type = $field['type'];
+						$field = Ninja_Forms()->form( $this->form_id )->fields[ $field_id ];
+						$field_type = $field['type'];
 
-							if ( isset ( $ninja_forms_fields[ $field_type ] ) ) {
-								$reg_field = $ninja_forms_fields[ $field_type ];
-								$process_field = $reg_field['process_field'];
-							} else {
-								$process_field = false;
-							}
-
-							$user_value = $meta_value[0];
-
-							if ( is_serialized( $user_value ) ) {
-								$user_value = unserialize( $user_value );
-							}
-
-							if ( isset ( $this->fields[ $field_id ] ) && $process_field ) {
-								?>
-								<tr>
-									<td class="left"><?php echo $field['data']['label']; ?></td>
-									<td>
-									<?php
-										if ( isset ( $reg_field['edit_sub_value'] ) ) {
-											$edit_value_function = $reg_field['edit_sub_value'];
-										} else {
-											$edit_value_function = 'nf_field_text_edit_sub_value';
-										}
-										$args['field_id'] = $field_id;
-										$args['user_value'] = $user_value;
-										$args['field'] = $field;
-
-										call_user_func_array( $edit_value_function, $args );
-
-									?>
-									</td>
-								</tr>
-								<?php
-							}
+						if ( isset ( $field['data']['admin_label'] ) && $field['data']['admin_label'] != '' ) {
+							$label = $field['data']['admin_label'];
+						} else if ( isset ( $field['data']['label'] ) ) {
+							$label = $field['data']['label'];
+						} else {
+							$label = '';
 						}
+
+						if ( isset ( $ninja_forms_fields[ $field_type ] ) ) {
+							$reg_field = $ninja_forms_fields[ $field_type ];
+							$process_field = $reg_field['process_field'];
+						} else {
+							$process_field = false;
+						}
+
+						if ( isset ( Ninja_Forms()->form( $this->form_id )->fields[ $field_id ] ) && $process_field ) {
+							?>
+							<tr>
+								<td class="left"><?php echo $label; ?></td>
+								<td>
+								<?php
+									if ( isset ( $reg_field['edit_sub_value'] ) ) {
+										$edit_value_function = $reg_field['edit_sub_value'];
+									} else {
+										$edit_value_function = 'nf_field_text_edit_sub_value';
+									}
+									$args['field_id'] = $field_id;
+									$args['user_value'] = $user_value;
+									$args['field'] = $field;
+
+									call_user_func_array( $edit_value_function, $args );
+
+								?>
+								</td>
+							</tr>
+							<?php
+						}
+
 					}
 					?>
 				</tbody>
@@ -1045,8 +1037,5 @@ class NF_Subs_CPT {
 		if ( isset ( $_REQUEST['submit'] ) && $_REQUEST['submit'] == __( 'Download All', 'ninja-forms' ) && isset ( $_REQUEST['form_id'] ) ) {
 			$subs = Ninja_Forms()->form( 241 )->get_subs();
 		}
-			
-
-
 	}
 }

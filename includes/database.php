@@ -711,6 +711,18 @@ function nf_get_sub_count( $form_id, $post_status = 'publish' ) {
  }
 
 /**
+ * Get an array of form settings by form ID
+ * 
+ * @since 2.7
+ * @param int $form_id
+ * @return array $form['data']
+ */
+function nf_get_form_settings( $form_id ) {
+	$form = ninja_forms_get_form_by_id( $form_id );
+	return $form['data'];
+}
+
+/**
  * Get an array of our fields by form ID.
  * The returned array has the field_ID as the key.
  *

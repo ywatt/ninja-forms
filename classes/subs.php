@@ -53,7 +53,7 @@ class NF_Subs {
 		$seq_id = apply_filters( 'nf_sub_seq_id', $seq_id, $form_id );
 
 		// Add the sequential ID to the post meta
-		update_post_meta ( $sub_id, '_seq_id', $seq_id );
+		Ninja_Forms()->sub( $sub_id )->update_meta( '_seq_id', $seq_id );
 
 		// Update our form data with the new "last seq id."
 		$form['data']['last_sub'] = $seq_id;

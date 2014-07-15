@@ -100,10 +100,6 @@ class Ninja_Forms {
 		// The subs variable won't be interacted with directly.
 		// Instead, the subs() methods will act as wrappers for it.
 		self::$instance->subs = new NF_Subs();
-
-		// The form_var variable won't be interacted with directly.
-		// Instead, the form( $form_id ) function will act as a wrapper for it.
-		self::$instance->form_var = new NF_Form();
 	}
 
 	/**
@@ -180,8 +176,17 @@ class Ninja_Forms {
 	 * @return object self::$instance->form_var
 	 */
 	public function form( $form_id = '' ) {
-		self::$instance->form_var->set_form( $form_id );
-		return self::$instance->form_var;
+		// Bail if we don't get a form id.
+		if ( $form_id == '' )
+			return false;
+		
+		$form_var = 'form_' . $form_id;
+		// Check to see if an object for this form already exists
+		// Create one if it doesn't exist.
+		if ( ! isset( self::$instance->$form_var ) )
+			self::$instance->$form_var = new NF_Form( $form_id );
+
+		return self::$instance->$form_var;
 	}
 
 	/**

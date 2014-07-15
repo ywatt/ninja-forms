@@ -257,19 +257,10 @@ class NF_Sub {
 	 * @return string $seq_id
 	 */
 	public function get_seq_id() {
-		$seq_id = get_post_meta( $this->sub_id, '_seq_id', true );
+		$seq_id = $this->get_meta( '_seq_id' );
 
-		if ( isset ( $this->CPT->form['data']['sub_prefix'] ) && $this->CPT->form['data']['sub_prefix'] != '' ) {
-			$prefix = $this->CPT->form['data']['sub_prefix'] . '-';
-		} else {
-			$prefix = '';
-		}
-
-		if ( isset ( $this->CPT->form['data']['sub_postfix'] ) && $this->CPT->form['data']['sub_postfix'] != '' ) {
-			$postfix = '-' . $this->CPT->form['data']['sub_postfix'];
-		} else {
-			$postfix = '';
-		}
+		$prefix = Ninja_Forms()->form( $this->form_id )->get_setting( 'sub_prefix' );
+		$postfix = Ninja_Forms()->form( $this->form_id )->get_setting( 'sub_postfix' );
 
 		return $prefix . $seq_id . $postfix;
 		
