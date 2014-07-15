@@ -217,7 +217,8 @@ class NF_Subs_CPT {
 		if ( $pagenow != 'edit.php' && $pagenow != 'post.php' )
 			return false;
 
-		wp_enqueue_style( 'nf-sub', NF_PLUGIN_URL .'assets/css/cpt.css');
+		wp_enqueue_style( 'nf-sub', NF_PLUGIN_URL .'assets/css/cpt.css' );
+		wp_enqueue_style( 'nf-jquery-ui-freshness', NF_PLUGIN_URL .'assets/css/jquery-ui-fresh.min.css' );
 	}
 
 	/**
