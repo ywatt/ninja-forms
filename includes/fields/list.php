@@ -873,7 +873,6 @@ function nf_field_list_edit_sub_value( $field_id, $user_value, $field ) {
 		break;
 		case 'multi';
 			?>
-			<input type="hidden" name="fields[<?php echo $field_id; ?>][]" value="" />
 			<select name="fields[<?php echo $field_id; ?>][]" multiple size="5">
 				<?php
 				if($label_pos == 'inside'){
