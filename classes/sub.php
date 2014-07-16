@@ -75,7 +75,7 @@ class NF_Sub {
 		// Setup our action var
 		$this->action = get_post_meta( $sub_id, '_action', true );		
 		// Setup our user_id var
-		$this->user_id = get_post_meta( $sub_id, '_user_id', true );
+		$this->user_id = $sub->post_author;
 		// Setup our date submitted var
 		$this->date_submitted = get_the_time( 'Y-m-d G:i:s', $sub_id );
 		// Setup our date modified var
@@ -107,7 +107,7 @@ class NF_Sub {
 					$this->fields[ $field_id ] = $meta_value;					
 				}
 
-			} else if ( $key != '_form_id' && $key != '_action' && $key != '_user_id' ) {
+			} else if ( $key != '_form_id' && $key != '_action' ) {
 				$this->meta[ $key ] = $meta_value;
 			}
 		}
@@ -153,7 +153,14 @@ class NF_Sub {
 	 * @return bool
 	 */
 	public function update_user_id( $user_id ) {
-		if ( update_post_meta( $this->sub_id, '_user_id', $user_id ) ) {
+		// Update post 37
+		$args = array(
+			'ID'           	=> $this->sub_id,
+			'post_author' 	=> $user_id,
+		);
+
+		// Update the post into the database
+		if ( wp_update_post( $args ) ) {
 			$this->user_id = $user_id;
 			return true;
 		} else {
@@ -280,8 +287,7 @@ class NF_Sub {
 	 * @return void
 	 */
 	public function export( $return = false ){
-		$sub_ids = array( $this->sub_id );
-		Ninja_Forms()->subs()->export( $sub_ids );
+		Ninja_Forms()->subs()->export( array( $this->sub_id ) );
 	}
 
 }

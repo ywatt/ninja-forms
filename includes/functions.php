@@ -56,3 +56,61 @@ function ninja_forms_subval_sort( $a, $subkey ) {
 	}
 	return $c;
 }
+
+/**
+ * Return the begin date with an added 00:00:00.
+ * Checks for the current date format setting and tries to respect it.
+ * 
+ * @since 2.7
+ * @param string $begin_date
+ * @return string $begin_date
+ */
+function nf_get_begin_date( $begin_date ) {
+	$plugin_settings = nf_get_settings();
+
+	if ( isset ( $plugin_settings['date_format'] ) ) {
+		$date_format = $plugin_settings['date_format'];
+	} else {
+		$date_format = 'm/d/Y';
+	}
+
+	if ( $date_format == 'd/m/Y' ) {
+		$begin_date = str_replace( '/', '-', $begin_date );
+	} else if ( $date_format == 'm-d-Y' ) {
+		$begin_date = str_replace( '-', '/', $begin_date );
+	}
+	$begin_date .= '00:00:00';
+	$begin_date = new DateTime( $begin_date );
+	$begin_date = $begin_date->format("Y-m-d G:i:s");
+
+	return $begin_date;
+}
+
+/**
+ * Return the end date with an added 23:59:59.
+ * Checks for the current date format setting and tries to respect it.
+ * 
+ * @since 2.7
+ * @param string $end_date
+ * @return string $end_date
+ */
+function nf_get_end_date( $end_date ) {
+	$plugin_settings = nf_get_settings();
+
+	if ( isset ( $plugin_settings['date_format'] ) ) {
+		$date_format = $plugin_settings['date_format'];
+	} else {
+		$date_format = 'm/d/Y';
+	}
+
+	if ( $date_format == 'd/m/Y' ) {
+		$end_date = str_replace( '/', '-', $end_date );
+	} else if ( $date_format == 'm-d-Y' ) {
+		$end_date = str_replace( '-', '/', $end_date );
+	}
+	$end_date .= '23:59:59';
+	$end_date = new DateTime( $end_date );
+	$end_date = $end_date->format("Y-m-d G:i:s");
+
+	return $end_date;
+}

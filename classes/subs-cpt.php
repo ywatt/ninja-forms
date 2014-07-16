@@ -35,7 +35,7 @@ class NF_Subs_CPT {
 		add_action( 'wp', array( $this, 'filter_hidden_columns' ) );
 
 		// Add our submenu for the submissions page.
-		add_action( 'admin_menu', array( $this, 'add_submenu' ), 11 );
+		add_action( 'admin_menu', array( $this, 'add_submenu' ), 10 );
 
 		// Change our submission columns.
 		add_filter( 'manage_nf_sub_posts_columns', array( $this, 'change_columns' ) );
@@ -158,7 +158,7 @@ class NF_Subs_CPT {
 	 */
 	public function add_submenu() {
 		// Add our submissions submenu
-		$sub_page = add_submenu_page( 'ninja-forms', __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), apply_filters( 'nf_admin_menu_subs_capabilities', 'manage_options' ), 'edit.php?post_type=nf_sub'); 
+		$sub_page = add_submenu_page( 'ninja-forms', __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), apply_filters( 'nf_admin_menu_subs_capabilities', 'manage_options' ), 'edit.php?post_type=nf_sub' ); 
 		// Enqueue our JS on the edit page.
 		//add_action( 'load-' . $sub_page, array( $this, 'load_js' ) );
 		add_action( 'admin_print_styles', array( $this, 'load_js' ) );
@@ -482,7 +482,7 @@ class NF_Subs_CPT {
 
 		// Add begin date and end date filter fields.
 		$html = '<div style="float:left;">';
-
+		$html .= '<span style="float:left;" class="spinner"></span>';
 		$html .= '<select name="form_id" id="form_id" class="nf-form-jump">';
 		$html .= '<option value="">- Select a form</option>';
 		if ( is_array( $forms ) ) {
@@ -497,6 +497,7 @@ class NF_Subs_CPT {
 		$html .= '</div>';
 
 		echo $html;
+
 	}
 
 	/**
@@ -523,29 +524,13 @@ class NF_Subs_CPT {
 		    $date_format = $plugin_settings['date_format'];
 
 		    if ( !empty ( $_GET['begin_date'] ) ) {
-		    	$begin_date = $_GET['begin_date'];
-				if ( $date_format == 'd/m/Y' ) {
-					$begin_date = str_replace( '/', '-', $begin_date );
-				} else if ( $date_format == 'm-d-Y' ) {
-					$begin_date = str_replace( '-', '/', $begin_date );
-				}
-				$begin_date .= '00:00:00';
-				$begin_date = new DateTime( $begin_date );
-				$begin_date = $begin_date->format("Y-m-d G:i:s");
+		    	$begin_date = nf_get_begin_date( $_GET['begin_date'] );
 		    } else {
 		    	$begin_date = '';
 		    }
 
 			if ( !empty ( $_GET['end_date'] ) ) {
-		    	$end_date = $_GET['end_date'];
-			    if ( $date_format == 'd/m/Y' ) {
-					$end_date = str_replace( '/', '-', $end_date );
-				} else if ( $date_format == 'm-d-Y' ) {
-					$end_date = str_replace( '-', '/', $end_date );
-				}
-				$end_date .= '23:59:59';
-				$end_date = new DateTime( $end_date );
-				$end_date = $end_date->format("Y-m-d G:i:s");
+		    	$end_date = nf_get_end_date( $_GET['end_date'] );
 		    } else {
 		    	$end_date = '';
 		    }

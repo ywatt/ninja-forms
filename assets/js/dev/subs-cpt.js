@@ -37,7 +37,12 @@ jQuery(document).ready(function($) {
 	nf_columns.init();
 
 	$( '.datepicker' ).datepicker( { dateFormat: nf_sub.date_format } );
+
 	$( document ).on( 'change', '.nf-form-jump', function( e ) {
 		$( '#posts-filter' ).submit();
+	});
+	
+	$( document ).on( 'submit', function( e ) {
+		$( '.spinner' ).show();
 	});
 });

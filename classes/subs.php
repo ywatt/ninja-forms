@@ -83,32 +83,27 @@ class NF_Subs {
 	 */
 	public function get( $args = array() ) {
 
-		$date_query = array();
-
-		$plugin_settings = nf_get_settings();
-
-		if ( isset ( $plugin_settings['date_format'] ) ) {
-			$date_format = $plugin_settings['date_format'];
-		} else {
-			$date_format = 'm/d/Y';
-		}
+		$query_args = array(
+			'post_type' 		=> 'nf_sub',
+			'posts_per_page'	=> -1,
+			'date_query'		=> array(
+				'inclusive'		=> true,
+			),
+		);
 
 		if( isset( $args['form_id'] ) ) {
-			$meta_query[] = array(
+			$query_args['meta_query'][] = array(
 				'key' => '_form_id',
 				'value' => $args['form_id'],
 			);
 		}
 
 		if( isset( $args['user_id'] ) ) {
-			$meta_query[] = array(
-				'key' => '_user_id',
-				'value' => $args['user_id'],
-			);
+			$query_args['author'] = $args['user_id'];
 		}
 
 		if( isset( $args['action'])){
-			$meta_query[] = array(
+			$query_args['meta_query'][] = array(
 				'key' => '_action',
 				'value' => $args['action'],
 			);
@@ -116,7 +111,7 @@ class NF_Subs {
 
 		if ( isset ( $args['meta'] ) ) {
 			foreach ( $meta as $key => $value ) {
-				$meta_query[] = array(
+				$query_args['meta_query'][] = array(
 					'key' => $key,
 					'value' => $value,
 				);
@@ -124,41 +119,12 @@ class NF_Subs {
 		}
 
 		if( isset( $args['begin_date'] ) AND $args['begin_date'] != '') {
-			$begin_date = $args['begin_date'];
-			if ( $date_format == 'd/m/Y' ) {
-				$begin_date = str_replace( '/', '-', $begin_date );
-			} else if ( $date_format == 'm-d-Y' ) {
-				$begin_date = str_replace( '-', '/', $begin_date );
-			}
-			$begin_date .= '00:00:00';
-			$begin_date = new DateTime( $begin_date );
-			$begin_date = $begin_date->format("Y-m-d G:i:s");
-
-			$date_query['after'] = $begin_date;
+			$query_args['date_query']['after'] = nf_get_begin_date( $args['begin_date'] );
 		}
 
 		if( isset( $args['end_date'] ) AND $args['end_date'] != '' ) {
-			$end_date = $args['end_date'];
- 			if ( $date_format == 'd/m/Y' ) {
-				$end_date = str_replace( '/', '-', $end_date );
-			} else if ( $date_format == 'm-d-Y' ) {
-				$end_date = str_replace( '-', '/', $end_date );
-			}
-			$end_date .= '23:59:59';
-			$end_date = new DateTime( $end_date );
-			$end_date = $end_date->format("Y-m-d G:i:s");
-
-			$date_query['before'] = $end_date;
+			$query_args['date_query']['before'] = nf_get_end_date( $args['end_date'] );
 		}
-
-		$date_query['inclusive'] = true;
-
-		$query_args = array(
-			'post_type' 		=> 'nf_sub',
-			'date_query' 		=> $date_query,
-			'meta_query' 		=> $meta_query,
-			'posts_per_page'	=> -1,
-		);
 
 		$subs = new WP_Query( $query_args );;
 
