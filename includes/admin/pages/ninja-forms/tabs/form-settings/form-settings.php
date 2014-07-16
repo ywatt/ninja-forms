@@ -310,21 +310,6 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				//'default_value' => __( 'Submissions are closed.', 'ninja-forms' ),
 				'tr_class' => '',
 			),
-			array(
-				'name' => 'sub_prefix',
-				'type' => 'text',
-				'desc' => '',
-				'label' => __( 'Sequential ID Prefix', 'ninja-forms' ),
-				'default_value' => '',
-
-			),
-			array(
-				'name' => 'sub_postfix',
-				'type' => 'text',
-				'desc' => '',
-				'label' => __( 'Sequential ID Postfix', 'ninja-forms' ),
-				'default_value' => '',
-			),
 		),
 	));
 	ninja_forms_register_tab_metabox($args);
