@@ -81,7 +81,7 @@ class NF_Subs {
 	 * @param array $args
 	 * @return array $sub_ids
 	 */
-	public function get_subs( $args = array() ) {
+	public function get( $args = array() ) {
 
 		$date_query = array();
 
@@ -112,6 +112,15 @@ class NF_Subs {
 				'key' => '_action',
 				'value' => $args['action'],
 			);
+		}
+
+		if ( isset ( $args['meta'] ) ) {
+			foreach ( $meta as $key => $value ) {
+				$meta_query[] = array(
+					'key' => $key,
+					'value' => $value,
+				);
+			}
 		}
 
 		if( isset( $args['begin_date'] ) AND $args['begin_date'] != '') {
@@ -153,17 +162,16 @@ class NF_Subs {
 
 		$subs = new WP_Query( $query_args );;
 
-		$sub_ids = array();
+		$sub_objects = array();
 
 		if ( is_array( $subs->posts ) && ! empty( $subs->posts ) ) {
 			foreach ( $subs->posts as $sub ) {
-
-				$sub_ids[] = $sub->ID;
+				$sub_objects[] = Ninja_Forms()->sub( $sub->ID );
 			}			
 		}
 
 		wp_reset_postdata();
-		return $sub_ids;
+		return $sub_objects;
 	}
 
 	/**
