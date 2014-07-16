@@ -61,6 +61,12 @@ class NF_Sub {
 	 */
 	public function __construct( $sub_id ) {
 		global $ninja_forms_fields;
+		
+		// Bail if the sub doesn't exist.
+		$sub = get_post( $sub_id );
+		if ( ! $sub )
+			return false;
+
 		// Set our sub id
 		$this->sub_id = $sub_id;
 
@@ -70,6 +76,10 @@ class NF_Sub {
 		$this->action = get_post_meta( $sub_id, '_action', true );		
 		// Setup our user_id var
 		$this->user_id = get_post_meta( $sub_id, '_user_id', true );
+		// Setup our date submitted var
+		$this->date_submitted = get_the_time( 'Y-m-d G:i:s', $sub_id );
+		// Setup our date modified var
+		$this->date_modified = get_post_modified_time( 'Y-m-d G:i:s', false, $sub_id );
 
 		// Setup our fields and meta vars.
 		$post_meta = get_post_custom( $this->sub_id );
@@ -257,13 +267,7 @@ class NF_Sub {
 	 * @return string $seq_id
 	 */
 	public function get_seq_id() {
-		$seq_id = $this->get_meta( '_seq_id' );
-
-		$prefix = Ninja_Forms()->form( $this->form_id )->get_setting( 'sub_prefix' );
-		$postfix = Ninja_Forms()->form( $this->form_id )->get_setting( 'sub_postfix' );
-
-		return $prefix . $seq_id . $postfix;
-		
+		return apply_filters( 'nf_subs_seq_id', $this->get_meta( '_seq_id' ), $this->sub_id );
 	}
 
 	/**
