@@ -175,9 +175,9 @@ class NF_Subs_CPT {
 	 * @return void
 	 */
 	public function load_js() {
-		global $pagenow;
+		global $pagenow, $typenow;
 		// Bail if we aren't on the edit.php page or we aren't editing our custom post type.
-		if ( $pagenow != 'edit.php' || ! isset ( $_REQUEST['post_type'] ) || $_REQUEST['post_type'] != 'nf_sub' )
+		if ( ( $pagenow != 'edit.php' && $pagenow != 'post.php' ) && $typenow != 'nf_sub' )
 			return false;
 
 		$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
@@ -746,7 +746,6 @@ class NF_Subs_CPT {
 			<script type="text/javascript">
 				jQuery(function(){
 					var html = '<a href="<?php echo $back_url; ?>" class="back button-secondary"><?php _e( 'Back to list', 'ninja-forms' ); ?></a>';
-					console.log( html );
 					jQuery( 'div.wrap' ).children( 'h2:first' ).append( html );
 				});
 			</script>

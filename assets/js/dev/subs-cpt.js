@@ -41,8 +41,14 @@ jQuery(document).ready(function($) {
 	$( document ).on( 'change', '.nf-form-jump', function( e ) {
 		$( '#posts-filter' ).submit();
 	});
-	
+
 	$( document ).on( 'submit', function( e ) {
 		$( '.spinner' ).show();
 	});
+
+	$( 'li#toplevel_page_ninja-forms' ).children( 'a' ).removeClass( 'wp-not-current-submenu' );
+	$( 'li#toplevel_page_ninja-forms' ).removeClass( 'wp-not-current-submenu' );
+	$( 'li#toplevel_page_ninja-forms' ).addClass( 'wp-menu-open wp-has-current-submenu' );
+	$( 'li#toplevel_page_ninja-forms' ).children( 'a' ).addClass( 'wp-menu-open wp-has-current-submenu' );
+
 });
