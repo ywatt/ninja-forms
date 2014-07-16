@@ -54,6 +54,7 @@ function ninja_forms_get_all_forms( $debug = false ){
 		while($x <= $count){
 			if( isset( $form_results[$x]['data'] ) ){
 				$form_results[$x]['data'] = unserialize($form_results[$x]['data']);
+				$form_results[$x]['name'] = $form_results[$x]['data']['form_title'];
 				if( substr( $form_results[$x]['data']['form_title'], 0, 1 ) == '_' ){
 					if( !$debug ){
 						unset( $form_results[$x] );
@@ -63,7 +64,8 @@ function ninja_forms_get_all_forms( $debug = false ){
 			$x++;
 		}
 	}
-	$form_results = array_values($form_results);
+	$form_results = array_values( $form_results );
+	$form_results = ninja_forms_subval_sort( $form_results, 'name' );
 	return $form_results;
 }
 
@@ -227,53 +229,6 @@ function ninja_forms_get_all_defs(){
 	}
 	return $def_results;
 }
-
-// Begin Submission Interaction Functions
-
-function ninja_forms_get_sub_by_id($sub_id){
-	global $wpdb;
-	$sub_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".NINJA_FORMS_SUBS_TABLE_NAME." WHERE id = %d", $sub_id), ARRAY_A);
-	if( $sub_row ){
-		$sub_row['data'] = unserialize($sub_row['data']);
-	}
-	return $sub_row;
-}
-
-function ninja_forms_get_all_subs( $form_id = '' ){
-	global $wpdb;
-	if( $form_id != '' ){
-		$sub_results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM ".NINJA_FORMS_SUBS_TABLE_NAME." WHERE form_id = %d", $form_id), ARRAY_A);
-	}else{
-		$sub_results = $wpdb->get_results( "SELECT * FROM ".NINJA_FORMS_SUBS_TABLE_NAME, ARRAY_A );
-	}
-		return $sub_results;
-}
-
-function ninja_forms_insert_sub($args){
-	global $wpdb;
-
-	$update_array = $args;
-
-	$wpdb->insert( NINJA_FORMS_SUBS_TABLE_NAME, $update_array );
-	return $wpdb->insert_id;
-}
-
-function ninja_forms_update_sub($args){
-	global $wpdb;
-	$update_array = array();
-	$sub_id = $args['sub_id'];
-	unset( $args['sub_id'] );
-	if ( !is_serialized( $args['data'] ) ) {
-		$args['data'] = serialize( $args['data'] );
-	}
-	$update_array = $args;
-	$date_updated = $date_updated = date( 'Y-m-d H:i:s', strtotime ( 'now' ) );
-	$update_array['date_updated'] = $date_updated;
-
-	$wpdb->update(NINJA_FORMS_SUBS_TABLE_NAME, $update_array, array('id' => $sub_id));
-}
-
-// The ninja_forms_delete_sub( $sub_id ) function is in includes/admin/ajax.php
 
 function ninja_forms_addslashes_deep( $value ){
     $value = is_array($value) ?

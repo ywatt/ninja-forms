@@ -45,3 +45,14 @@ function ninja_forms_letters_to_numbers( $size ) {
 	}
 	return $ret;
 }
+
+function ninja_forms_subval_sort( $a, $subkey ) {
+	foreach($a as $k=>$v) {
+		$b[$k] = strtolower($v[$subkey]);
+	}
+	asort($b);
+	foreach($b as $key=>$val) {
+		$c[] = $a[$key];
+	}
+	return $c;
+}

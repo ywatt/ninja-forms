@@ -96,7 +96,7 @@ function nf_old_subs_table_row_actions_filter( $actions, $sub_id, $form_id ) {
 add_filter( 'nf_sub_table_row_actions', 'nf_old_subs_table_row_actions_filter', 10, 3 );
 
 /**
- * ninja_forms_get_subs() has been deprecated in favour of Ninja_Forms()->subs()->get_subs( $args ) or Ninja_Forms()->form( 23 )->get_subs( $args )
+ * ninja_forms_get_subs() has been deprecated in favour of Ninja_Forms()->subs()->get( $args ) or Ninja_Forms()->form( 23 )->get_subs( $args )
  * You can also use WordPress queries ,since this is a custom post type.
  * 
  * @since 2.7
@@ -141,26 +141,29 @@ function ninja_forms_get_subs( $args = array() ) {
 
 		if( isset( $args['begin_date'] ) AND $args['begin_date'] != '') {
 			$begin_date = $args['begin_date'];
+
 			if ( $date_format == 'd/m/Y' ) {
 				$begin_date = str_replace( '/', '-', $begin_date );
 			} else if ( $date_format == 'm-d-Y' ) {
 				$begin_date = str_replace( '-', '/', $begin_date );
 			}
-			$begin_date = strtotime($begin_date);
-			$begin_date = date("Y-m-d 00:00:00", $begin_date);
+			$begin_date .= '00:00:00';
+			$begin_date = new DateTime( $begin_date );
+			$begin_date = $begin_date->format("Y-m-d G:i:s");
 
 			$date_query['after'] = $begin_date;
 		}
 
 		if( isset( $args['end_date'] ) AND $args['end_date'] != '' ) {
 			$end_date = $args['end_date'];
-			if ( $date_format == 'd/m/Y' ) {
+ 			if ( $date_format == 'd/m/Y' ) {
 				$end_date = str_replace( '/', '-', $end_date );
 			} else if ( $date_format == 'm-d-Y' ) {
 				$end_date = str_replace( '-', '/', $end_date );
 			}
-			$end_date = strtotime($end_date);
-			$end_date = date("Y-m-d 11:59:59", $end_date);
+			$end_date .= '23:59:59';
+			$end_date = new DateTime( $end_date );
+			$end_date = $end_date->format("Y-m-d G:i:s");
 
 			$date_query['before'] = $end_date;
 		}
@@ -180,15 +183,19 @@ function ninja_forms_get_subs( $args = array() ) {
 				$data = array();
 				$subs_results[$x]['id'] = $sub->ID;
 				$subs_results[$x]['user_id'] = $sub->post_author;
-				$subs_results[$x]['form_id'] = Ninja_Forms()->sub( $sub->ID )->form_id;
-				$subs_results[$x]['action'] = Ninja_Forms()->sub( $sub->ID )->action;
+				$subs_results[$x]['form_id'] = get_post_meta( $sub->ID, '_form_id' );
+				$subs_results[$x]['action'] = get_post_meta( $sub->ID, '_action' );
 
-				$fields = Ninja_Forms()->sub( $sub->ID )->get_all_fields();
-				foreach ( $fields as $field_id => $user_value ) {
-					$data[] = array( 'field_id' => $field_id, 'user_value' => $user_value ); 
+				$meta = get_post_custom( $sub->ID );
+
+				foreach ( $meta as $key => $array ) {
+					if ( strpos( $key, '_field_' ) !== false ) {
+						$field_id = str_replace( '_field_', '', $key );
+						$user_value = $array[0];
+						$data[] = array( 'field_id' => $field_id, 'user_value' => $user_value );
+					}
 				}
-				
-				
+
 				$subs_results[$x]['data'] = $data;
 				$subs_results[$x]['date_updated'] = $sub->post_modified;
 
@@ -204,91 +211,82 @@ function ninja_forms_get_subs( $args = array() ) {
  * ninja_forms_get_sub_count() has been deprecated in favour of Ninja_Forms()->form( 23 )->sub_count or nf_get_sub_count()
  * Function that returns a count of the number of submissions.
  *
- * @since 2.3.8
- * @return string $count
+ * @since 2.7
  */
 
 function ninja_forms_get_sub_count( $args = array() ) {
-	global $wpdb;
+	return count( ninja_forms_get_subs( $args ) );
+}
 
-	$plugin_settings = nf_get_settings();
-	if ( isset ( $plugin_settings['date_format'] ) ) {
-		$date_format = $plugin_settings['date_format'];
+/**
+ * ninja_forms_get_sub_by_id( $sub_id ) has been deprecated in favour of Ninja_Forms()->sub( 23 );
+ * 
+ * @since 2.7
+ */
+
+function ninja_forms_get_sub_by_id( $sub_id ) {
+	$sub = get_post( $sub_id );
+	if ( $sub ) {
+		$sub_row = array();
+		$data = array();
+		$sub_row['id'] = $sub->ID;
+		$sub_row['user_id'] = $sub->post_author;
+		$sub_row['form_id'] = get_post_meta( $sub->ID, '_form_id' );
+		$sub_row['action'] = get_post_meta( $sub->ID, '_action' );
+
+		$meta = get_post_custom( $sub->ID );
+
+		foreach ( $meta as $key => $array ) {
+			if ( strpos( $key, '_field_' ) !== false ) {
+				$field_id = str_replace( '_field_', '', $key );
+				$user_value = $array[0];
+				$data[] = array( 'field_id' => $field_id, 'user_value' => $user_value );
+			}
+		}
+
+		$sub_row['data'] = $data;
+		$sub_row['date_updated'] = $sub->post_modified;
+
+		return $sub_row;
 	} else {
-		$date_format = 'm/d/Y';
+		return false;
 	}
-	if(is_array($args) AND !empty($args)){
-		$where = '';
-		if(isset($args['form_id'])){
-			$where = '`form_id` = '.$args['form_id'];
-			unset($args['form_id']);
-		}
-		if(isset($args['user_id'])){
-			if($where != ''){
-				$where .= ' AND ';
-			}
-			$where .= '`user_id` = '.$args['user_id'];
-			unset($args['user_id']);
-		}
-		if(isset($args['status'])){
-			if($where != ''){
-				$where .= ' AND ';
-			}
-			$where .= '`status` = '.$args['status'];
-			unset($args['status']);
-		}
-		if(isset($args['action'])){
-			if($where != ''){
-				$where .= ' AND ';
-			}
-			$where .= '`action` = "'.$args['action'].'"';
-			unset($args['action']);
-		}
-		if(isset($args['begin_date']) AND $args['begin_date'] != ''){
-			$begin_date = $args['begin_date'];
-			if ( $date_format == 'd/m/Y' ) {
-				$begin_date = str_replace( '/', '-', $begin_date );
-			} else if ( $date_format == 'm-d-Y' ) {
-				$begin_date = str_replace( '-', '/', $begin_date );
-			}
-			$begin_date = new DateTime($begin_date);
-			$begin_date = $begin_date->format("Y-m-d G:i:s");
-			unset($args['begin_date']);
-		}else{
-			unset($args['begin_date']);
-			$begin_date = '';
-		}
-		if(isset($args['end_date']) AND $args['end_date'] != ''){
-			$end_date = $args['end_date'];
-			if ( $date_format == 'd/m/Y' ) {
-				$end_date = str_replace( '/', '-', $end_date );
-			} else if ( $date_format == 'm-d-Y' ) {
-				$end_date = str_replace( '-', '/', $end_date );
-			}
-			$end_date = new DateTime($end_date);
-			$end_date = $end_date->format("Y-m-d G:i:s");
-			unset($args['end_date']);
-		}else{
-			unset($args['end_date']);
-			$end_date = '';
-		}
-	}
+}
 
-	if($begin_date != ''){
-		if($where != ''){
-			$where .= ' AND ';
-		}
-		$where .= "date_updated >= '".$begin_date."'";
-	}
-	if($end_date != ''){
-		if($where != ''){
-			$where .= ' AND ';
-		}
-		$where .= "date_updated <= '".$end_date."'";
-	}
+/**
+ * ninja_forms_get_all_subs() has been deprecated in favour of Ninja_Forms()->subs()->get();
+ * 
+ * @since 2.7
+ */
 
-	$subs_results = $wpdb->get_results( "SELECT COUNT(*) FROM ".NINJA_FORMS_SUBS_TABLE_NAME." WHERE " . $where . " ORDER BY `date_updated`" , ARRAY_A );
-	
-	return $subs_results[0]['COUNT(*)'];
+ function ninja_forms_get_all_subs( $form_id = '' ){
+	if ( $form_id == '' )
+		return false;
 
+	$args = array( 'form_id' => $form_id );
+	return ninja_forms_get_subs( $args );
+}
+
+/**
+ * ninja_forms_insert_sub() has been deprecated in favour of Ninja_Forms()->subs()->create( $form_id );
+ * Because submissions are now a CPT, this function will only return false. 
+ * Please replace any instances of this function with the replacement.
+ * 
+ * @since 2.7
+ */
+
+function ninja_forms_insert_sub($args){
+	return false;
+}
+
+/**
+ * ninja_forms_update_sub() has been deprecated in favour of Ninja_Forms()->sub( 23 )->update_field( id, value );
+ * Because submissions are now a CPT, this function will only return false. 
+ * Please replace any instances of this function with the replacement.
+ * 
+ * @since 2.7
+ */
+
+function ninja_forms_update_sub($args){
+	return false;
 }
