@@ -94,7 +94,7 @@ class NF_Form {
 	 */
 	public function get_subs( $args = array() ) {
 		$args['form_id'] = $this->form_id;
-		return Ninja_Forms()->subs()->get_subs( $args );
+		return Ninja_Forms()->subs()->get( $args );
 	}
 
 	/**
