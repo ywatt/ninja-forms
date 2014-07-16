@@ -748,7 +748,13 @@ class NF_Subs_CPT {
 			<?php			
 		} else if ( $typenow == 'nf_sub' && $pagenow == 'post.php' ) {
 			if ( isset ( $_REQUEST['ref'] ) ) {
-				$back_url = urldecode( $_REQUEST['ref'] );
+				$back_url = $_REQUEST['ref'];
+			} else {
+				$back_url = get_transient( 'nf_sub_edit_ref' );
+			}
+			
+			if ( $back_url ) {
+				$back_url = urldecode( $back_url );
 			} else {
 				$back_url = '';
 			}
@@ -827,8 +833,13 @@ class NF_Subs_CPT {
 		// Get all the post meta
 		$fields = Ninja_Forms()->sub( $post->ID )->get_all_fields();
 		$form_id = Ninja_Forms()->sub( $post->ID )->form_id;
-
+		if ( isset ( $_REQUEST['ref'] ) ) {
+			$ref = $_REQUEST['ref'];
+		} else {
+			$ref = '';
+		}
 		?>
+		<input type="hidden" name="ref" value="<?php echo $ref; ?>" />
 		<div id="postcustomstuff">
 			<table id="list-table">
 				<thead>
@@ -988,6 +999,8 @@ class NF_Subs_CPT {
 	    foreach ( $_POST['fields'] as $field_id => $user_value ) {
 	    	Ninja_Forms()->sub( $sub_id )->update_field( $field_id, $user_value );
 	    }
+
+	    set_transient( 'nf_sub_edit_ref', $_REQUEST['ref'] );
 	}
 
 	/**
