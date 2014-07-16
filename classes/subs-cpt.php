@@ -252,7 +252,7 @@ class NF_Subs_CPT {
 		*/
 
 		// Compatibility with old field registration system. Can be removed when the new one is in place.
-		if ( isset ( $_GET['form_id'] ) ) {
+		if ( isset ( $_GET['form_id'] ) && $_GET['form_id'] != '' ) {
 			$form_id = $_GET['form_id'];
 			if ( is_array ( Ninja_Forms()->form( $this->form_id )->fields ) ) {
 				foreach ( Ninja_Forms()->form( $this->form_id )->fields as $field ) {
@@ -327,6 +327,9 @@ class NF_Subs_CPT {
 
                 $vars['orderby'] = $orderby;
                 $vars['meta_key'] = '_field_' . $field_id;
+           } else if ( $vars['orderby'] == 'id' ) {
+				$vars['orderby'] = 'meta_value_num';
+                $vars['meta_key'] = '_seq_id';
            }
 		}
 		return $vars;
@@ -353,7 +356,7 @@ class NF_Subs_CPT {
 							<span class="edit"><a href="' . add_query_arg( array( 'export_single' => $sub_id ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>';
 						$row_actions = apply_filters( 'nf_sub_table_row_actions', array(), $sub_id, $form_id );
 						echo implode(" | ", $row_actions);
-						echo '<span class="trash"><a class="submitdelete" title="' . __( 'Move this item to the Trash', 'ninja-forms' ) . '" href="' . get_delete_post_link( $sub_id ) . '">Trash</a> | </span>';
+						echo '<span class="trash"><a class="submitdelete" title="' . __( 'Move this item to the Trash', 'ninja-forms' ) . '" href="' . get_delete_post_link( $sub_id ) . '">Trash</a> </span>';
 						do_action( 'nf_sub_table_after_row_actions', $sub_id, $column );
 						echo '</div>';
 					} else {
@@ -468,22 +471,19 @@ class NF_Subs_CPT {
 		echo $html;		
 		*/
 
-		$begin_date = isset ( $_GET['begin_date'] ) ? $_GET['begin_date'] : '';
-		$end_date = isset ( $_GET['end_date'] ) ? $_GET['end_date'] : '';
-
-		// Add begin date and end date filter fields.
-		$html = '<div style="float:left;">';
-		$html .= '<input name="begin_date" type="text" class="datepicker" placeholder="' . __( 'Begin Date', 'ninja-forms' ) . '" value="' . $begin_date . '" /> ';
-		$html .= '<input name="end_date" type="text" class="datepicker" placeholder="' . __( 'End Date', 'ninja-forms' ) . '" value="' . $end_date . '" />';
-		$html .= '</div>';
-
 		// Add our Form selection dropdown.
 		// Get our list of forms
 		$forms = ninja_forms_get_all_forms();
 
 		$form_id = isset( $_GET['form_id'] ) ? $_GET['form_id'] : '';
 
- 		$html .= '<select name="form_id" id="form_id">';
+		$begin_date = isset ( $_GET['begin_date'] ) ? $_GET['begin_date'] : '';
+		$end_date = isset ( $_GET['end_date'] ) ? $_GET['end_date'] : '';
+
+		// Add begin date and end date filter fields.
+		$html = '<div style="float:left;">';
+
+		$html .= '<select name="form_id" id="form_id" class="nf-form-jump">';
 		$html .= '<option value="">- Select a form</option>';
 		if ( is_array( $forms ) ) {
 			foreach ( $forms as $form ) {
@@ -492,10 +492,9 @@ class NF_Subs_CPT {
 		}
 		$html .= '</select>';
 
-		if ( isset ( $_REQUEST['post_status'] ) && $_REQUEST['post_status'] == 'all' ) {
-			// Add our "Download All" button.
-			// $html .= '<input type="submit" name="submit" class="download-all button-secondary" style="float:right;" value="' . __( 'Download All', 'ninja-forms' ) . '" />';
-		}
+		$html .= '<input name="begin_date" type="text" class="datepicker" placeholder="' . __( 'Begin Date', 'ninja-forms' ) . '" value="' . $begin_date . '" /> ';
+		$html .= '<input name="end_date" type="text" class="datepicker" placeholder="' . __( 'End Date', 'ninja-forms' ) . '" value="' . $end_date . '" />';
+		$html .= '</div>';
 
 		echo $html;
 	}
