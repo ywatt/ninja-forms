@@ -911,9 +911,24 @@ class NF_Subs_CPT {
 	public function save_sub_metabox( $post ) {
 		$date_submitted = date( 'M j, Y @ h:i', strtotime( $post->post_date ) );
 		$date_modified = date( 'M j, Y @ h:i', strtotime( $post->post_modified ) );
-		$user_data = get_userdata( $post->post_author );
-		$first_name = $user_data->first_name;
-		$last_name = $user_data->last_name;
+
+		if ( $post->post_author != 0 ) {
+			$user_data = get_userdata( $post->post_author );
+			
+			$first_name = $user_data->first_name;
+			$last_name = $user_data->last_name;
+
+			if ( $first_name != '' && $last_name != '' ) {
+				$name = $first_name . ' ' . $last_name;
+			} else if ( $user_data->display_name != '' ) {
+				$name = $user_data->display_name;
+			} else {
+				$name = $user_data->user_login;
+			}
+
+			$name = apply_filters( 'nf_edit_sub_username', $name, $post->post_author );
+		}
+
 		$form_id = Ninja_Forms()->sub( $post->ID )->form_id;
 		$form = ninja_forms_get_form_by_id( $form_id );
 		$form_title = $form['data']['form_title'];
@@ -944,9 +959,15 @@ class NF_Subs_CPT {
 							<?php _e( 'Modified on', 'ninja-forms' ); ?>: <b><?php echo $date_modified; ?></b>
 						</span>
 					</div>
-					<div class="misc-pub-section misc-pub-visibility" id="visibility">
-						<?php _e( 'Submitted By', 'ninja-forms' ); ?>: <span id="post-visibility-display"><?php echo $first_name; ?> <?php echo $last_name; ?></span>
-					</div>
+					<?php
+					if ( $post->post_author != 0 ) {
+						?>
+						<div class="misc-pub-section misc-pub-visibility" id="visibility">
+							<?php _e( 'Submitted By', 'ninja-forms' ); ?>: <span id="post-visibility-display"><?php echo $name; ?></span>
+						</div>
+						<?php
+					}
+					?>
 				</div>
 			</div>
 			<div id="major-publishing-actions">
