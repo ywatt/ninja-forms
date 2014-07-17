@@ -7,7 +7,7 @@
  * @subpackage  Classes/Submissions
  * @copyright   Copyright (c) 2014, WPNINJAS
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0
+ * @since       2.7
 */
 
 class NF_Sub {
@@ -64,7 +64,7 @@ class NF_Sub {
 		
 		// Bail if the sub doesn't exist.
 		$sub = get_post( $sub_id );
-		if ( ! $sub )
+		if ( ! is_object( $sub ) )
 			return false;
 
 		// Set our sub id
@@ -73,9 +73,11 @@ class NF_Sub {
 		// Setup our form id var
 		$this->form_id = get_post_meta( $sub_id, '_form_id', true );
 		// Setup our action var
-		$this->action = get_post_meta( $sub_id, '_action', true );		
+		$this->action = get_post_meta( $sub_id, '_action', true );	
+		// Setup our sequential id
+		$this->seq_id = get_post_meta( $sub_id, '_seq_id', true );		
 		// Setup our user_id var
-		$this->user_id = $sub->post_author;
+		//$this->user_id = $sub->post_author;
 		// Setup our date submitted var
 		$this->date_submitted = get_the_time( 'Y-m-d G:i:s', $sub_id );
 		// Setup our date modified var
@@ -139,6 +141,22 @@ class NF_Sub {
 	public function update_action( $action ) {
 		if ( update_post_meta( $this->sub_id, '_action', $action ) ) {
 			$this->action = $action;
+			return true;
+		} else {
+			return false;
+		}
+	}	
+
+	/**
+	 * Update our sequential id
+	 * 
+	 * @access public
+	 * @since 2.7
+	 * @return bool
+	 */
+	public function update_seq_id( $seq_id ) {
+		if ( update_post_meta( $this->sub_id, '_seq_id', $seq_id ) ) {
+			$this->seq_id = $seq_id;
 			return true;
 		} else {
 			return false;
@@ -274,7 +292,7 @@ class NF_Sub {
 	 * @return string $seq_id
 	 */
 	public function get_seq_id() {
-		return apply_filters( 'nf_subs_seq_id', $this->get_meta( '_seq_id' ), $this->sub_id );
+		return apply_filters( 'nf_subs_seq_id', $this->seq_id, $this->sub_id );
 	}
 
 	/**

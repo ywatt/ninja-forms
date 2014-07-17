@@ -23,7 +23,7 @@ class NF_Subs_CPT {
 	 */
 	function __construct() {
 		// Register our submission custom post type.
-		add_action( 'init', array( $this, 'register_cpt' ) );
+		add_action( 'init', array( $this, 'register_cpt' ), 5 );
 
 		// Listen for the "download all" button.
 		add_action( 'load-edit.php', array( $this, 'export_listen' ) );
@@ -235,7 +235,7 @@ class NF_Subs_CPT {
 
 		$cols = array(
 			'cb'    => '<input type="checkbox" />',
-			'id' => __( 'ID', 'ninja-forms' ),
+			'id' => __( '#', 'ninja-forms' ),
 		);
 		/*
 		 * This section uses the new Ninja Forms db structure. Until that is utilized, we must deal with the old db.

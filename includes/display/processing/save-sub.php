@@ -22,7 +22,7 @@ function ninja_forms_save_sub(){
 
 		// If we don't have a submission ID already, create a submission post.
 		if ( empty( $sub_id ) ) {
-			$sub_id = Ninja_Forms()->subs()->create_sub( $form_id );
+			$sub_id = Ninja_Forms()->subs()->create( $form_id );
 			Ninja_Forms()->sub( $sub_id )->update_action( $action );
 			Ninja_Forms()->sub( $sub_id )->update_user_id( $user_id );
 			do_action( 'nf_create_sub', $sub_id );

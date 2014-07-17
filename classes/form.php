@@ -6,7 +6,7 @@
  * @subpackage  Classes/Form
  * @copyright   Copyright (c) 2014, WPNINJAS
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0
+ * @since       2.7
 */
 
 class NF_Form {

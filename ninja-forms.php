@@ -79,6 +79,9 @@ class Ninja_Forms {
 			self::$instance->setup_constants();
 			self::$instance->includes();
 
+			// Start our submissions custom post type class
+			self::$instance->subs_cpt = new NF_Subs_CPT();
+
 			register_activation_hook( __FILE__, 'ninja_forms_activation' );
 			add_action( 'plugins_loaded', array( self::$instance, 'load_lang' ) );
 			add_action( 'init', array( self::$instance, 'set_transient_id'), 1 );
@@ -100,6 +103,8 @@ class Ninja_Forms {
 		// The subs variable won't be interacted with directly.
 		// Instead, the subs() methods will act as wrappers for it.
 		self::$instance->subs = new NF_Subs();
+
+
 	}
 
 	/**
@@ -270,6 +275,12 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/subs-cpt.php' );
 		// Include our form object.
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
+		require_once( NF_PLUGIN_DIR . 'includes/actions.php' );
+
+		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
+		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
+		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );	
+			
 		// Include deprecated functions and filters.
 		require_once( NF_PLUGIN_DIR . 'includes/deprecated.php' );
 

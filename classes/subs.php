@@ -7,7 +7,7 @@
  * @subpackage  Classes/Submissions
  * @copyright   Copyright (c) 2014, WPNINJAS
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0
+ * @since       2.7
 */
 
 class NF_Subs {
@@ -20,8 +20,7 @@ class NF_Subs {
 	 * @return void/
 	 */
 	public function __construct() {
-		// Start our custom post type class
-		$this->CPT = new NF_Subs_CPT();
+
 	}
 
 	/**
@@ -31,7 +30,7 @@ class NF_Subs {
 	 * @since 2.7
 	 * @return int $sub_id
 	 */
-	public function create_sub( $form_id = '' ) {
+	public function create( $form_id = '' ) {
 		// Create Submission
 		$post = array(
 		  'post_status'    => 'publish',
