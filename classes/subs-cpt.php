@@ -86,6 +86,11 @@ class NF_Subs_CPT {
 	 * @return void
 	 */
 	public function register_cpt() {
+		if ( ! isset ( $_REQUEST['form_id'] ) || empty( $_REQUEST['form_id'] ) ) {
+			$not_found = __( 'Please select a form to view submissions', 'ninja-forms' );
+		} else {
+			$not_found = __( 'No Submissions Found', 'ninja-forms' );
+		}
 		$labels = array(
 		    'name' => _x('Submissions', 'post type general name' ),
 		    'singular_name' => _x( 'Submission', 'post type singular name' ),
@@ -95,7 +100,7 @@ class NF_Subs_CPT {
 		    'new_item' => __( 'New Submission', 'ninja-forms' ),
 		    'view_item' => __( 'View Submission', 'ninja-forms' ),
 		    'search_items' => __( 'Search Submissions', 'ninja-forms' ),
-		    'not_found' =>  __( 'No Submissions Found', 'ninja-forms' ),
+		    'not_found' =>  $not_found,
 		    'not_found_in_trash' => __( 'No Submissions Found In The Trash', 'ninja-forms' ),
 		    'parent_item_colon' => ''
 	  	);
@@ -333,6 +338,10 @@ class NF_Subs_CPT {
 				$vars['orderby'] = 'meta_value_num';
                 $vars['meta_key'] = '_seq_id';
            }
+		} else {
+			$vars['orderby'] = 'meta_value_num';
+            $vars['meta_key'] = '_seq_id';
+            $vars['order'] = 'DESC';
 		}
 		return $vars;
 	}
@@ -373,8 +382,6 @@ class NF_Subs_CPT {
 				break;
 				case 'sub_date':
 					$post = get_post( $sub_id );
-					$mode = empty( $_REQUEST['mode'] ) ? 'list' : $_REQUEST['mode'];
-
 					if ( '0000-00-00 00:00:00' == $post->post_date ) {
 						$t_time = $h_time = __( 'Unpublished' );
 						$time_diff = 0;
@@ -551,8 +558,10 @@ class NF_Subs_CPT {
 			    		'value' => $form_id,
 			    		'compare' => '=',
 			    	),
-			    );	
+			    );
 		    }
+
+		    $qv = apply_filters( 'nf_subs_table_qv', $qv, $form_id );
 		}
 	}
 
@@ -749,6 +758,11 @@ class NF_Subs_CPT {
 				jQuery(function(){
 					var html = '<a href="<?php echo $back_url; ?>" class="back button-secondary"><?php _e( 'Back to list', 'ninja-forms' ); ?></a>';
 					jQuery( 'div.wrap' ).children( 'h2:first' ).append( html );
+					jQuery( 'li#toplevel_page_ninja-forms' ).children( 'a' ).removeClass( 'wp-not-current-submenu' );
+					jQuery( 'li#toplevel_page_ninja-forms' ).removeClass( 'wp-not-current-submenu' );
+					jQuery( 'li#toplevel_page_ninja-forms' ).addClass( 'wp-menu-open wp-has-current-submenu' );
+					jQuery( 'li#toplevel_page_ninja-forms' ).children( 'a' ).addClass( 'wp-menu-open wp-has-current-submenu' );
+
 				});
 			</script>
 			<style>
@@ -816,8 +830,9 @@ class NF_Subs_CPT {
 	public function edit_sub_metabox( $post ) {
 		global $ninja_forms_fields;
 		// Get all the post meta
-		$fields = Ninja_Forms()->sub( $post->ID )->get_all_fields();
 		$form_id = Ninja_Forms()->sub( $post->ID )->form_id;
+		$fields = Ninja_Forms()->form( $this->form_id )->fields;
+		
 		if ( isset ( $_REQUEST['ref'] ) ) {
 			$ref = $_REQUEST['ref'];
 		} else {
@@ -836,9 +851,8 @@ class NF_Subs_CPT {
 				<tbody id="the-list">
 					<?php
 					// Loop through our post meta and keep our field values
-					foreach ( $fields as $field_id => $user_value ) {
-
-						$field = Ninja_Forms()->form( $this->form_id )->fields[ $field_id ];
+					foreach ( $fields as $field_id => $field ) {
+						$user_value = Ninja_Forms()->sub( $post->ID )->get_field( $field_id );
 						$field_type = $field['type'];
 
 						if ( isset ( $field['data']['admin_label'] ) && $field['data']['admin_label'] != '' ) {

@@ -23,6 +23,7 @@ function nf_upgrades_screen() {
 	$step   = isset( $_GET['step'] )        ? absint( $_GET['step'] )                     : 1;
 	$total  = isset( $_GET['total'] )       ? absint( $_GET['total'] )                    : false;
 	$custom = isset( $_GET['custom'] )      ? absint( $_GET['custom'] )                   : 0;
+	$form_id = isset( $_GET['form_id'] )      ? absint( $_GET['form_id'] )                : 0;
 	?> 
 	<div class="wrap">
 		<h2><?php _e( 'Ninja Forms - Upgrades', 'ninja-forms' ); ?></h2>
@@ -37,7 +38,7 @@ function nf_upgrades_screen() {
 				<?php endif; ?>
 			</div>
 			<script type="text/javascript">
-				document.location.href = "index.php?nf_action=<?php echo $action; ?>&step=<?php echo $step; ?>&total=<?php echo $total; ?>&custom=<?php echo $custom; ?>";
+				document.location.href = "index.php?nf_action=<?php echo $action; ?>&step=<?php echo $step; ?>&total=<?php echo $total; ?>&custom=<?php echo $custom; ?>&form_id=<?php echo $form_id; ?>";
 			</script>
 
 		<?php else : ?>

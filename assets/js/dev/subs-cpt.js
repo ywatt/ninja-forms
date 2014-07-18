@@ -46,9 +46,4 @@ jQuery(document).ready(function($) {
 		$( '.spinner' ).show();
 	});
 
-	$( 'li#toplevel_page_ninja-forms' ).children( 'a' ).removeClass( 'wp-not-current-submenu' );
-	$( 'li#toplevel_page_ninja-forms' ).removeClass( 'wp-not-current-submenu' );
-	$( 'li#toplevel_page_ninja-forms' ).addClass( 'wp-menu-open wp-has-current-submenu' );
-	$( 'li#toplevel_page_ninja-forms' ).children( 'a' ).addClass( 'wp-menu-open wp-has-current-submenu' );
-
 });

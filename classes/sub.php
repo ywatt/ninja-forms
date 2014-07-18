@@ -71,13 +71,13 @@ class NF_Sub {
 		$this->sub_id = $sub_id;
 
 		// Setup our form id var
-		$this->form_id = get_post_meta( $sub_id, '_form_id', true );
+		$this->form_id = $this->get_meta( '_form_id' );
 		// Setup our action var
-		$this->action = get_post_meta( $sub_id, '_action', true );	
+		$this->action = $this->get_meta( '_action' );	
 		// Setup our sequential id
-		$this->seq_id = get_post_meta( $sub_id, '_seq_id', true );		
+		$this->seq_id = $this->get_meta( '_seq_id' );		
 		// Setup our user_id var
-		//$this->user_id = $sub->post_author;
+		$this->user_id = $sub->post_author;
 		// Setup our date submitted var
 		$this->date_submitted = get_the_time( 'Y-m-d G:i:s', $sub_id );
 		// Setup our date modified var
@@ -171,7 +171,6 @@ class NF_Sub {
 	 * @return bool
 	 */
 	public function update_user_id( $user_id ) {
-		// Update post 37
 		$args = array(
 			'ID'           	=> $this->sub_id,
 			'post_author' 	=> $user_id,
@@ -180,6 +179,52 @@ class NF_Sub {
 		// Update the post into the database
 		if ( wp_update_post( $args ) ) {
 			$this->user_id = $user_id;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Update our date submitted
+	 * 
+	 * @access public
+	 * @since 2.7
+	 * @return bool
+	 */
+	public function update_date_submitted( $date ) {
+		$args = array(
+			'ID'           	=> $this->sub_id,
+			'post_date' 	=> $date,
+			'post_date_gmt'	=> get_gmt_from_date( $date ),
+		);
+
+		// Update the post into the database
+		if ( wp_update_post( $args ) ) {
+			$this->date_submitted = $date;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Update our date modified
+	 * 
+	 * @access public
+	 * @since 2.7
+	 * @return bool
+	 */
+	public function update_date_modified( $date ) {
+		$args = array(
+			'ID'           		=> $this->sub_id,
+			'post_modified' 	=> $date,
+			'post_modified_gmt'	=> get_gmt_from_date( $date ),
+		);
+
+		// Update the post into the database
+		if ( wp_update_post( $args ) ) {
+			$this->date_modified = $date;
 			return true;
 		} else {
 			return false;
@@ -253,7 +298,7 @@ class NF_Sub {
 		if ( isset ( $this->meta[ $meta_key ] ) ) {
 			return $this->meta[ $meta_key ];
 		} else {
-			return false;
+			return get_post_meta( $this->sub_id, $meta_key, true );
 		}
 	}
 
@@ -268,7 +313,7 @@ class NF_Sub {
 		if ( isset ( $this->fields[ $field_id ] ) ) {
 			return $this->fields[ $field_id ];
 		} else {
-			return false;
+			return get_post_meta( $this->sub_id, '_field_' . $field_id, true );
 		}
 	}
 
