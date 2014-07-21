@@ -33,7 +33,7 @@ function nf_upgrades_screen() {
 			<div id="nf-upgrade-status">
 				<p><?php _e( 'The upgrade process has started, please be patient. This could take several minutes. You will be automatically redirected when the upgrade is finished.', 'ninja-forms' ); ?></p>
 				<?php if( ! empty( $total ) ) : ?>
-					<p><strong><?php printf( __( 'Step %d of approximately %d running', 'ninja-forms' ), $step, $total ); ?></strong>
+					<p><strong><?php printf( __( 'Step %d of approximately %d running', 'ninja-forms' ), $step, $total + 1 ); ?></strong>
 					<span class="spinner" id="nf-upgrade-loader"/></span></p>
 				<?php endif; ?>
 			</div>

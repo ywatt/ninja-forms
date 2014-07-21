@@ -340,11 +340,11 @@ class NF_Subs_CPT {
                 $vars['meta_key'] = '_field_' . $field_id;
            } else if ( $vars['orderby'] == 'id' ) {
 				$vars['orderby'] = 'meta_value_num';
-                $vars['meta_key'] = '_seq_id';
+                $vars['meta_key'] = '_seq_num';
            }
 		} else if( is_admin() && $typenow == 'nf_sub' && $pagenow == 'edit.php' ) {
 			$vars['orderby'] = 'meta_value_num';
-            $vars['meta_key'] = '_seq_id';
+            $vars['meta_key'] = '_seq_num';
             $vars['order'] = 'DESC';
 		}
 		return $vars;
@@ -361,7 +361,7 @@ class NF_Subs_CPT {
 		if ( isset ( $_GET['form_id'] ) ) {
 			$form_id = $_GET['form_id'];
 			if ( $column == 'id' ) {
-				echo apply_filters( 'nf_sub_table_seq_id', Ninja_Forms()->sub( $sub_id )->get_seq_id(), $sub_id, $column );
+				echo apply_filters( 'nf_sub_table_seq_num', Ninja_Forms()->sub( $sub_id )->get_seq_num(), $sub_id, $column );
 				echo '<div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>';
 				if ( !isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
 					echo '<div class="row-actions">';
@@ -948,7 +948,7 @@ class NF_Subs_CPT {
 				<div id="misc-publishing-actions">
 					<div class="misc-pub-section misc-pub-post-status">
 						<label for="post_status"><?php _e( '#', 'ninja-forms' ); ?>:</label>
-						<span id="post-status-display"><?php echo Ninja_Forms()->sub( $post->ID )->get_seq_id(); ?></span>
+						<span id="post-status-display"><?php echo Ninja_Forms()->sub( $post->ID )->get_seq_num(); ?></span>
 					</div>
 					<div class="misc-pub-section misc-pub-post-status">
 						<label for="post_status"><?php _e( 'Status', 'ninja-forms' ); ?>:</label>

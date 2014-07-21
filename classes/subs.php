@@ -44,18 +44,18 @@ class NF_Subs {
 		// Get the current sequential ID
 		$form = ninja_forms_get_form_by_id( $form_id );
 		if ( isset ( $form['data']['last_sub'] ) ) {
-			$seq_id = $form['data']['last_sub'] + 1;
+			$seq_num = $form['data']['last_sub'] + 1;
 		} else { // If we don't have a starting number, start at 1
-			$seq_id = 1;
+			$seq_num = 1;
 		}
 
-		$seq_id = apply_filters( 'nf_sub_seq_id', $seq_id, $form_id );
+		$seq_num = apply_filters( 'nf_sub_seq_num', $seq_num, $form_id );
 
 		// Add the sequential ID to the post meta
-		Ninja_Forms()->sub( $sub_id )->update_meta( '_seq_id', $seq_id );
+		Ninja_Forms()->sub( $sub_id )->update_meta( '_seq_num', $seq_num );
 
 		// Update our form data with the new "last seq id."
-		$form['data']['last_sub'] = $seq_id;
+		$form['data']['last_sub'] = $seq_num;
 		$args = array(
 			'update_array' => array(
 				'data' => serialize( $form['data'] ),
@@ -68,7 +68,7 @@ class NF_Subs {
 		ninja_forms_update_form( $args );
 
 		// Update our sub count
-		Ninja_Forms()->form( $form_id )->sub_count = $seq_id - 1;
+		Ninja_Forms()->form( $form_id )->sub_count = $seq_num - 1;
 
 		return $sub_id;
 	}

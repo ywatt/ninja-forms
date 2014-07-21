@@ -130,7 +130,7 @@ function nf_v27_upgrade_subs_to_cpt() {
 
 	} else {
 		update_option( 'nf_convert_subs_step', 'complete' );
-		wp_redirect( admin_url() ); exit;
+		wp_redirect( admin_url( 'index.php?page=nf-about' ) ); exit;
 	}
 }
 add_action( 'nf_upgrade_subs_to_cpt', 'nf_v27_upgrade_subs_to_cpt' );

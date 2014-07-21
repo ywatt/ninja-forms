@@ -107,7 +107,7 @@ class NF_Convert_Subs {
 		$sub_id = Ninja_Forms()->subs()->create( $form_id );
 		Ninja_Forms()->sub( $sub_id )->update_action( $action );
 		Ninja_Forms()->sub( $sub_id )->update_user_id( $user_id );
-		Ninja_Forms()->sub( $sub_id )->update_seq_id( $num );
+		Ninja_Forms()->sub( $sub_id )->update_seq_num( $num );
 		Ninja_Forms()->sub( $sub_id )->update_date_submitted( $date_updated );
 		Ninja_Forms()->sub( $sub_id )->update_date_modified( $date_updated );
 		Ninja_Forms()->sub( $sub_id )->add_meta( '_old_id', $old_id );

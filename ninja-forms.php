@@ -205,8 +205,8 @@ class Ninja_Forms {
 		global $wpdb;
 
 		// Plugin version
-		if ( ! defined( 'NF_VERSION' ) ) {
-			define( 'NF_PLUGIN_VERSION', '3.0' );
+		if ( ! defined( 'NF_PLUGIN_VERSION' ) ) {
+			define( 'NF_PLUGIN_VERSION', '2.7' );
 		}
 
 		// Plugin Folder Path
@@ -277,6 +277,8 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/actions.php' );
 
+		// Include our upgrade files.
+		require_once( NF_PLUGIN_DIR . 'includes/admin/welcome.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );	

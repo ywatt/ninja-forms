@@ -15,7 +15,12 @@ class NF_Sub {
 	/**
 	 * @var $sub_id store our sub id
 	 */
-	var $sub_id;
+	var $sub_id;	
+
+	/**
+	 * @var $seq_num store our sequential number
+	 */
+	var $seq_num;
 
 	/**
 	 * @var $form_id store our form_id
@@ -75,7 +80,7 @@ class NF_Sub {
 		// Setup our action var
 		$this->action = $this->get_meta( '_action' );	
 		// Setup our sequential id
-		$this->seq_id = $this->get_meta( '_seq_id' );		
+		$this->seq_num = $this->get_meta( '_seq_num' );		
 		// Setup our user_id var
 		$this->user_id = $sub->post_author;
 		// Setup our date submitted var
@@ -154,9 +159,9 @@ class NF_Sub {
 	 * @since 2.7
 	 * @return bool
 	 */
-	public function update_seq_id( $seq_id ) {
-		if ( update_post_meta( $this->sub_id, '_seq_id', $seq_id ) ) {
-			$this->seq_id = $seq_id;
+	public function update_seq_num( $seq_num ) {
+		if ( update_post_meta( $this->sub_id, '_seq_num', $seq_num ) ) {
+			$this->seq_num = $seq_num;
 			return true;
 		} else {
 			return false;
@@ -334,10 +339,10 @@ class NF_Sub {
 	 * 
 	 * @access public
 	 * @since 2.7
-	 * @return string $seq_id
+	 * @return string $seq_num
 	 */
-	public function get_seq_id() {
-		return apply_filters( 'nf_subs_seq_id', $this->seq_id, $this->sub_id );
+	public function get_seq_num() {
+		return apply_filters( 'nf_subs_seq_num', $this->seq_num, $this->sub_id );
 	}
 
 	/**
