@@ -58,6 +58,10 @@ function ninja_forms_activation(){
 		$current_version = '';
 	}
 
+	if ( $current_version != '' ) {
+		update_option( 'nf_version_upgraded_from', $current_version );
+	}
+
 	$forms = '';
 
 	if( ( $current_version != '' ) AND version_compare( $current_version, '2.0' , '<' ) ){
@@ -228,7 +232,7 @@ function ninja_forms_activation(){
 
 	$opt['preview_id'] = $page_id;
 
- 	$opt['version'] = NINJA_FORMS_VERSION;
+ 	$opt['version'] = NF_PLUGIN_VERSION;
 
  	update_option( "ninja_forms_settings", $opt );
 
@@ -298,7 +302,8 @@ function ninja_forms_activation(){
  		ninja_forms_add_starter_form();
  	}
 
-
+	// Add the transient to redirect
+	set_transient( '_nf_activation_redirect', true, 30 );
 }
 
 function ninja_forms_activation_old_forms_check(){
