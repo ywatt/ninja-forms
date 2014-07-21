@@ -33,11 +33,11 @@ function nf_old_subs_csv_label( $label, $field_id ) {
 add_filter( 'nf_subs_csv_field_label', 'nf_old_subs_csv_label', 10, 2 );
 
 // Hook into our new submissions CSV label array filter.
-function nf_old_subs_csv_label_array( $label_array ) {
-	return apply_filters( 'ninja_forms_export_subs_label_array', $label_array, false );
+function nf_old_subs_csv_label_array( $label_array, $sub_ids ) {
+	return apply_filters( 'ninja_forms_export_subs_label_array', $label_array, $sub_ids );
 }
 
-add_filter( 'nf_subs_csv_label_array', 'nf_old_subs_csv_label_array' );
+add_filter( 'nf_subs_csv_label_array', 'nf_old_subs_csv_label_array', 10, 2 );
 
 // Hook into our new submissions CSV pre_value filter.
 function nf_old_subs_csv_pre_value( $user_value, $field_id ) {
@@ -54,11 +54,11 @@ function nf_old_subs_csv_value( $user_value, $field_id ) {
 add_filter( 'nf_subs_csv_field_value', 'nf_old_subs_csv_value', 10, 2 );
 
 // Hook into our new submissions CSV value array filter.
-function nf_old_subs_csv_value_array( $value_array ) {
-	return apply_filters( 'ninja_forms_export_subs_label_array', $value_array, false );
+function nf_old_subs_csv_value_array( $values_array, $sub_ids ) {
+	return apply_filters( 'ninja_forms_export_subs_value_array', $values_array, $sub_ids );
 }
 
-add_filter( 'nf_subs_csv_value_array', 'nf_old_subs_csv_value_array' );
+add_filter( 'nf_subs_csv_value_array', 'nf_old_subs_csv_value_array', 10, 2 );
 
 // Hook into our new CSV BOM filter
 function nf_old_subs_csv_bom( $bom ) {
@@ -215,7 +215,7 @@ function ninja_forms_get_sub_by_id( $sub_id ) {
 		foreach ( $meta as $key => $array ) {
 			if ( strpos( $key, '_field_' ) !== false ) {
 				$field_id = str_replace( '_field_', '', $key );
-				$user_value = $array[0];
+				$user_value = is_serialized( $array[0] ) ? unserialize( $array[0] ) : $array[0];
 				$data[] = array( 'field_id' => $field_id, 'user_value' => $user_value );
 			}
 		}
@@ -265,4 +265,66 @@ function ninja_forms_insert_sub($args){
 
 function ninja_forms_update_sub($args){
 	return false;
+}
+
+/**
+ * ninja_forms_export_subs_to_csv() has been deprecated in favour of Ninja_Forms()->subs()->export( sub_ids, return );
+ * or Ninja_Forms()->sub( 23 )->export( return );
+ * Please replace any instances of this function with the replacement.
+ * 
+ * @since 2.7
+ */
+
+function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
+	Ninja_Forms()->subs()->export( $sub_ids, $return );
+}
+
+function ninja_forms_implode_r($glue, $pieces){
+	$out = '';
+	foreach ( $pieces as $piece ) {
+		if ( is_array ( $piece ) ) {
+			if ( $out == '' ) {
+				$out = ninja_forms_implode_r($glue, $piece);
+			} else {
+				$out .= ninja_forms_implode_r($glue, $piece); // recurse
+			}			
+		} else {
+			if ( $out == '' ) {
+				$out .= $piece;
+			} else {
+				$out .= $glue.$piece;
+			}
+		}
+	}
+	return $out;
+}
+
+
+/**
+ * Get the csv delimiter
+ * 
+ * @return string
+ */
+function ninja_forms_get_csv_delimiter() {
+	return apply_filters( 'ninja_forms_csv_delimiter', ',' );
+}
+
+
+/**
+ * Get the csv enclosure
+ * 
+ * @return string
+ */
+function ninja_forms_get_csv_enclosure() {
+	return apply_filters( 'ninja_forms_csv_enclosure', '"' );
+}
+
+
+/**
+ * Get the csv delimiter
+ * 
+ * @return string
+ */
+function ninja_forms_get_csv_terminator() {
+	return apply_filters( 'ninja_forms_csv_terminator', "\n" );
 }

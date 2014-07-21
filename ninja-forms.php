@@ -366,7 +366,6 @@ class Ninja_Forms {
 		require_once( NINJA_FORMS_DIR . "/includes/admin/display-screen-options.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/admin/register-screen-options.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/admin/register-screen-help.php" );
-		require_once( NINJA_FORMS_DIR . "/includes/admin/export-subs.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/admin/output-tab-metabox.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/admin/form-preview.php" );
 

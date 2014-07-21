@@ -22,6 +22,7 @@ class NF_Subs_CPT {
 	 * @return void
 	 */
 	function __construct() {
+		
 		// Register our submission custom post type.
 		add_action( 'init', array( $this, 'register_cpt' ), 5 );
 
@@ -42,6 +43,7 @@ class NF_Subs_CPT {
 
 		// Make our columns sortable.
 		add_filter( 'manage_edit-nf_sub_sortable_columns', array( $this, 'sortable_columns' ) );
+
 		// Actually do the sorting
 		add_filter( 'request', array( $this, 'sort_columns' ) );
 
@@ -76,6 +78,7 @@ class NF_Subs_CPT {
 
 		// Save our hidden columns by form id.
 		add_action( 'wp_ajax_nf_hide_columns', array( $this, 'hide_columns' ) );
+
 	}
 
 	/**
@@ -321,6 +324,7 @@ class NF_Subs_CPT {
 	 * @return array $vars
 	 */
 	public function sort_columns( $vars ) {
+		global $pagenow, $typenow;
 		if( array_key_exists( 'orderby', $vars ) ) {
            if( strpos( $vars['orderby'], 'form_' ) !== false ) {
            		$args = explode( '_', $vars['orderby'] );
@@ -338,7 +342,7 @@ class NF_Subs_CPT {
 				$vars['orderby'] = 'meta_value_num';
                 $vars['meta_key'] = '_seq_id';
            }
-		} else {
+		} else if( is_admin() && $typenow == 'nf_sub' && $pagenow == 'edit.php' ) {
 			$vars['orderby'] = 'meta_value_num';
             $vars['meta_key'] = '_seq_id';
             $vars['order'] = 'DESC';
@@ -356,87 +360,81 @@ class NF_Subs_CPT {
 	public function custom_columns( $column, $sub_id ) {
 		if ( isset ( $_GET['form_id'] ) ) {
 			$form_id = $_GET['form_id'];
-			switch( $column ) {
-				case 'id':
-					echo apply_filters( 'nf_sub_table_seq_id', Ninja_Forms()->sub( $sub_id )->get_seq_id(), $sub_id, $column );
-					echo '<div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>';
-					if ( !isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
-						echo '<div class="row-actions">';
-						do_action( 'nf_sub_table_before_row_actions', $sub_id, $column );
-						echo '<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( add_query_arg( array() ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">Edit</a> | </span> 
-							<span class="edit"><a href="' . add_query_arg( array( 'export_single' => $sub_id ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>';
-						$row_actions = apply_filters( 'nf_sub_table_row_actions', array(), $sub_id, $form_id );
-						echo implode(" | ", $row_actions);
-						echo '| <span class="trash"><a class="submitdelete" title="' . __( 'Move this item to the Trash', 'ninja-forms' ) . '" href="' . get_delete_post_link( $sub_id ) . '">Trash</a> </span>';
-						do_action( 'nf_sub_table_after_row_actions', $sub_id, $column );
-						echo '</div>';
+			if ( $column == 'id' ) {
+				echo apply_filters( 'nf_sub_table_seq_id', Ninja_Forms()->sub( $sub_id )->get_seq_id(), $sub_id, $column );
+				echo '<div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>';
+				if ( !isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
+					echo '<div class="row-actions">';
+					do_action( 'nf_sub_table_before_row_actions', $sub_id, $column );
+					echo '<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( add_query_arg( array() ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">Edit</a> | </span> 
+						<span class="edit"><a href="' . add_query_arg( array( 'export_single' => $sub_id ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>';
+					$row_actions = apply_filters( 'nf_sub_table_row_actions', array(), $sub_id, $form_id );
+					echo implode(" | ", $row_actions);
+					echo '| <span class="trash"><a class="submitdelete" title="' . __( 'Move this item to the Trash', 'ninja-forms' ) . '" href="' . get_delete_post_link( $sub_id ) . '">Trash</a> </span>';
+					do_action( 'nf_sub_table_after_row_actions', $sub_id, $column );
+					echo '</div>';
+				} else {
+					echo '<div class="row-actions">';
+					do_action( 'nf_sub_table_before_row_actions_trash', $sub_id, $column );
+					echo '<span class="untrash"><a title="' . esc_attr( __( 'Restore this item from the Trash' ) ) . '" href="' . wp_nonce_url( sprintf( get_edit_post_link( $sub_id ) . '&amp;action=untrash', $sub_id ) , 'untrash-post_' . $sub_id ) . '">' . __( 'Restore' ) . '</a> | </span> 
+					<span class="delete"><a class="submitdelete" title="' . esc_attr( __( 'Delete this item permanently' ) ) . '" href="' . get_delete_post_link( $sub_id, '', true ) . '">' . __( 'Delete Permanently' ) . '</a></span>';
+					do_action( 'nf_sub_table_after_row_actions_trash', $sub_id, $column );
+					echo '</div>';
+				}
+			} else if ( $column == 'sub_date' ) {
+				$post = get_post( $sub_id );
+				if ( '0000-00-00 00:00:00' == $post->post_date ) {
+					$t_time = $h_time = __( 'Unpublished' );
+					$time_diff = 0;
+				} else {
+					$t_time = get_the_time( __( 'Y/m/d g:i:s A' ) );
+					$m_time = $post->post_date;
+					$time = get_post_time( 'G', true, $post );
+
+					$time_diff = time() - $time;
+
+					if ( $time_diff > 0 && $time_diff < DAY_IN_SECONDS )
+						$h_time = sprintf( __( '%s ago' ), human_time_diff( $time ) );
+					else
+						$h_time = mysql2date( __( 'Y/m/d' ), $m_time );
+				}
+				
+				/** This filter is documented in wp-admin/includes/class-wp-posts-list-table.php */
+				echo '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
+
+				echo '<br />';
+				if ( 'publish' == $post->post_status ) {
+					_e( 'Submitted', 'ninja-forms' );
+				} else {
+					_e( 'Last Modified', '' );
+				}
+			} else if ( strpos( $column, '_field_' ) !== false ) {
+				global $ninja_forms_fields;
+
+				$field_id = str_replace( 'form_' . $form_id . '_field_', '', $column );
+				//if ( apply_filters( 'nf_add_sub_value', Ninja_Forms()->field( $field_id )->type->add_to_sub, $field_id ) ) {
+					$field = Ninja_Forms()->form( $form_id )->fields[ $field_id ];
+					$field_type = $field['type'];
+					if ( isset ( $ninja_forms_fields[ $field_type ] ) ) {
+						$reg_field = $ninja_forms_fields[ $field_type ];
 					} else {
-						echo '<div class="row-actions">';
-						do_action( 'nf_sub_table_before_row_actions_trash', $sub_id, $column );
-						echo '<span class="untrash"><a title="' . esc_attr( __( 'Restore this item from the Trash' ) ) . '" href="' . wp_nonce_url( sprintf( get_edit_post_link( $sub_id ) . '&amp;action=untrash', $sub_id ) , 'untrash-post_' . $sub_id ) . '">' . __( 'Restore' ) . '</a> | </span> 
-						<span class="delete"><a class="submitdelete" title="' . esc_attr( __( 'Delete this item permanently' ) ) . '" href="' . get_delete_post_link( $sub_id, '', true ) . '">' . __( 'Delete Permanently' ) . '</a></span>';
-						do_action( 'nf_sub_table_after_row_actions_trash', $sub_id, $column );
-						echo '</div>';
+						$reg_field = array();
 					}
 
-				break;
-				case 'sub_date':
-					$post = get_post( $sub_id );
-					if ( '0000-00-00 00:00:00' == $post->post_date ) {
-						$t_time = $h_time = __( 'Unpublished' );
-						$time_diff = 0;
+					if ( isset ( $reg_field['sub_table_value'] ) ) {
+						$edit_value_function = $reg_field['sub_table_value'];
 					} else {
-						$t_time = get_the_time( __( 'Y/m/d g:i:s A' ) );
-						$m_time = $post->post_date;
-						$time = get_post_time( 'G', true, $post );
-
-						$time_diff = time() - $time;
-
-						if ( $time_diff > 0 && $time_diff < DAY_IN_SECONDS )
-							$h_time = sprintf( __( '%s ago' ), human_time_diff( $time ) );
-						else
-							$h_time = mysql2date( __( 'Y/m/d' ), $m_time );
+						$edit_value_function = 'nf_field_text_sub_table_value';
 					}
-					
-					/** This filter is documented in wp-admin/includes/class-wp-posts-list-table.php */
-					echo '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
 
-					echo '<br />';
-					if ( 'publish' == $post->post_status ) {
-						_e( 'Submitted', 'ninja-forms' );
-					} else {
-						_e( 'Last Modified', '' );
-					}
-					
-				break;
-				default:
-					global $ninja_forms_fields;
+					$user_value = Ninja_Forms()->sub( $sub_id )->get_field( $field_id );
 
-					$field_id = str_replace( 'form_' . $form_id . '_field_', '', $column );
-					//if ( apply_filters( 'nf_add_sub_value', Ninja_Forms()->field( $field_id )->type->add_to_sub, $field_id ) ) {
-						$field = Ninja_Forms()->form( $form_id )->fields[ $field_id ];
-						$field_type = $field['type'];
-						if ( isset ( $ninja_forms_fields[ $field_type ] ) ) {
-							$reg_field = $ninja_forms_fields[ $field_type ];
-						} else {
-							$reg_field = array();
-						}
+					$args['field_id'] = $field_id;
+					$args['user_value'] = $user_value;
+					$args['field'] = $field;
 
-						if ( isset ( $reg_field['sub_table_value'] ) ) {
-							$edit_value_function = $reg_field['sub_table_value'];
-						} else {
-							$edit_value_function = 'nf_field_text_sub_table_value';
-						}
-
-						$user_value = Ninja_Forms()->sub( $sub_id )->get_field( $field_id );
-
-						$args['field_id'] = $field_id;
-						$args['user_value'] = $user_value;
-						$args['field'] = $field;
-
-						call_user_func_array( $edit_value_function, $args );
-					//}
-				break;
+					call_user_func_array( $edit_value_function, $args );
+				//}
 			}
 		}
 	}
@@ -675,6 +673,17 @@ class NF_Subs_CPT {
 				jQuery(document).ready(function() {
 					jQuery('<option>').val('export').text('<?php _e('Export')?>').appendTo("select[name='action']");
 					jQuery('<option>').val('export').text('<?php _e('Export')?>').appendTo("select[name='action2']");
+					<?php
+					if ( ( isset ( $_POST['action'] ) && $_POST['action'] == 'export' ) || ( isset ( $_POST['action2'] ) && $_POST['action2'] == 'export' ) ) {
+						?>
+						setInterval(function(){
+							jQuery( "select[name='action'" ).val( '-1' );
+							jQuery( "select[name='action2'" ).val( '-1' );
+							jQuery( '#posts-filter' ).submit();
+						},5000);
+						<?php
+					}
+					?>
 				});
 			</script>
 			<?php
@@ -938,7 +947,7 @@ class NF_Subs_CPT {
 			<div id="minor-publishing">
 				<div id="misc-publishing-actions">
 					<div class="misc-pub-section misc-pub-post-status">
-						<label for="post_status"><?php _e( 'ID', 'ninja-forms' ); ?>:</label>
+						<label for="post_status"><?php _e( '#', 'ninja-forms' ); ?>:</label>
 						<span id="post-status-display"><?php echo Ninja_Forms()->sub( $post->ID )->get_seq_id(); ?></span>
 					</div>
 					<div class="misc-pub-section misc-pub-post-status">

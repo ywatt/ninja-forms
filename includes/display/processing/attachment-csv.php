@@ -7,11 +7,8 @@ function nf_csv_attachment( $sub_id ){
 	// make sure this form is supposed to attach a CSV
 	if( 1 == $ninja_forms_processing->get_form_setting( 'admin_attach_csv' ) AND 'submit' == $ninja_forms_processing->get_action() ) {
 		
-		// convert submission id to array
-		$sub_ids = array($sub_id);
-		
 		// create CSV content
-		$csv_content = ninja_forms_export_subs_to_csv( $sub_ids, true );
+		$csv_content = Ninja_Forms()->sub( $sub_id )->export( true );
 		
 		// create temporary file
 		$path = tempnam( get_temp_dir(), 'Sub' );

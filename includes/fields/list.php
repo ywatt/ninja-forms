@@ -805,7 +805,7 @@ function nf_field_list_edit_sub_value( $field_id, $user_value, $field ) {
 				}
 				?>
 				<li>
-					<input id="" name="fields[<?php echo $field_id; ?>]" type="radio" class="<?php echo $field_class;?>" value="<?php echo $value;?>" <?php echo $selected;?> /><?php echo $label;?>
+					<label><input id="" name="fields[<?php echo $field_id; ?>]" type="radio" class="<?php echo $field_class;?>" value="<?php echo $value;?>" <?php echo $selected;?> /><?php echo $label;?></label>
 				</li>
 				<?php
 

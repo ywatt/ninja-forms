@@ -155,6 +155,9 @@ class NF_Subs {
 		if ( empty( $sub_ids ) )
 			return false;
 
+		if ( ! is_array( $sub_ids ) )
+			$sub_ids = array( $sub_ids );
+
 		$plugin_settings = nf_get_settings();
 		$date_format = $plugin_settings['date_format'];
 	
@@ -190,29 +193,42 @@ class NF_Subs {
 		}
 
 		$label_array = ninja_forms_stripslashes_deep( $label_array );
-		$label_array = apply_filters( 'nf_subs_csv_label_array', $label_array );
+		$label_array = apply_filters( 'nf_subs_csv_label_array', $label_array, $sub_ids );
 
 		$value_array = array();
-
+		$x = 0;
+		// Loop through our submissions and create a new row for each one.
 		foreach ( $sub_ids as $sub_id ) {
-			$date = get_post_time( 'U', false, $sub_id );
-			$value_array[ $sub_id ][] = date( $date_format, $date );
+			// Get the date of our submission.
+			$date = strtotime( Ninja_Forms()->sub( $sub_id )->date_submitted );
+			// The first item is our date field.
+			$value_array[ $x ][] = date( $date_format, $date );
 			foreach ( $label_array[0] as $field_id => $label ) {
-				if ( $field_id > 0 ) {
-					$user_value = Ninja_Forms()->sub( $sub_id )->get_field( $field_id );
+				// Make sure we aren't working with our date field, which will always have a field id of 0.
+				if ( $field_id !== 0 ) {
+					// Check to see if our field_id is numeric. If it isn't, then we're working with meta, not a field.
+					if ( is_numeric( $field_id ) ) {
+						// We're working with a field, grab the value.
+						$user_value = Ninja_Forms()->sub( $sub_id )->get_field( $field_id );
+					} else {
+						// We're working with a piece of meta, grabe the value.
+						$user_value = Ninja_Forms()->sub( $sub_id )->get_meta( $field_id );
+					}
+					// Run our value through the appropriate filters before we flatten any arrays.
 					$user_value = apply_filters( 'nf_subs_export_pre_value', $user_value, $field_id );
-
+					// Implode any arrays we might have.
 					if ( is_array( $user_value ) ) {
 						$user_value = implode( ',', $user_value );
 					}
-
-					$value_array[ $sub_id ][] = apply_filters( 'nf_subs_csv_field_value', $user_value, $field_id );					
+					// Run our final value through the appropriate filters and assign it to the array.
+					$value_array[ $x ][ $field_id ] = apply_filters( 'nf_subs_csv_field_value', $user_value, $field_id );					
 				}
 			}
+			$x++;
 		}
 
 		$value_array = ninja_forms_stripslashes_deep( $value_array );
-		$value_array = apply_filters( 'nf_subs_csv_value_array', $value_array );
+		$value_array = apply_filters( 'nf_subs_csv_value_array', $value_array, $sub_ids );
 
 		$array = array( $label_array, $value_array );
 		$today = date( $date_format, current_time( 'timestamp' ) );
