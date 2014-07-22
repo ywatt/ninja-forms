@@ -923,8 +923,8 @@ class NF_Subs_CPT {
 	 * @return void
 	 */
 	public function save_sub_metabox( $post ) {
-		$date_submitted = date( 'M j, Y @ h:i', strtotime( $post->post_date ) );
-		$date_modified = date( 'M j, Y @ h:i', strtotime( $post->post_modified ) );
+		$date_submitted = apply_filters( 'nf_edit_sub_date_submitted', date( 'M j, Y @ h:i', strtotime( $post->post_date ) ), $post->ID );
+		$date_modified = apply_filters( 'nf_edit_sub_date_modified', date( 'M j, Y @ h:i', strtotime( $post->post_modified ) ), $post->ID );
 
 		if ( $post->post_author != 0 ) {
 			$user_data = get_userdata( $post->post_author );

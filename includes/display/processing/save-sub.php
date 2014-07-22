@@ -30,6 +30,7 @@ function nf_save_sub(){
 		}
 		
 		Ninja_Forms()->sub( $sub_id )->update_action( $action );
+		Ninja_Forms()->sub( $sub_id )->update_date_submitted( current_time( 'mysql' ) );
 		
 		if ( is_array ( $field_data ) && ! empty ( $field_data ) ) {
 			// Loop through our submitted data and add the values found there.
