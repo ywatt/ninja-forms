@@ -102,14 +102,13 @@ class NF_Welcome {
 		<style type="text/css" media="screen">
 		/*<![CDATA[*/
 		.nf-badge {
-			padding-top: 150px;
+			padding-top: 125px;
 			height: 52px;
 			width: 185px;
-			color: #666;
+			color: #fff;
 			font-weight: bold;
 			font-size: 14px;
 			text-align: center;
-			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 			margin: 0 -5px;
 			background: url('<?php echo $badge_url; ?>') no-repeat;
 		}
@@ -170,25 +169,74 @@ class NF_Welcome {
 		?>
 		<div class="wrap about-wrap">
 			<h1><?php printf( __( 'Welcome to Ninja Forms %s', 'ninja-forms' ), $display_version ); ?></h1>
-			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is ready to make your online store faster, safer, and better!', 'ninja-forms' ), $display_version ); ?></div>
+			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is primed to make your experience managing submissions an enjoyable one!', 'ninja-forms' ), $display_version ); ?></div>
 			<div class="nf-badge"><?php printf( __( 'Version %s', 'ninja-forms' ), $display_version ); ?></div>
 
 			<?php $this->tabs(); ?>
 
 			<div class="changelog">
-				<h3><?php _e( 'Sequential Submission Numbers', 'ninja-forms' );?></h3>
 
-				<div class="feature-section">
+				<div class="about-overview">
+					<iframe width="640" height="360" src="//www.youtube.com/embed/X810JLbAuzs" frameborder="0" allowfullscreen></iframe>
+				</div>
+				<h2 class="about-headline-callout"><?php _e( 'A better submission management experience', 'ninja-forms' );?></h2>
 
-					<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/20-sequential.png'; ?>" class="nf-welcome-screenshots"/>
+				<div class="feature-section col two-col">
 
-					<h4><?php _e( 'Prefix, Postfix, and Starting Number', 'ninja-forms' );?></h4>
-					<p><?php printf( __( 'Sequential order numbers are now supported out of the box. Simply go to <a href="%s">Settings &rarr; Misc</a> to enable them. The starting number, prefix, and postfix for order numbers can all be easily configured.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					<div class="col-1">
+						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-sub-table.png'; ?>">
+						<h4><?php _e( 'Improved submissions layout', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Submissions are now displayed in a clean and organized table for easy viewing.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
 
-					<h4><?php _e( 'Upgrade Routine', 'ninja-forms' );?></h4>
-					<p><?php _e( 'Sequential order numbers are important for some and even mandatory for others, so we want to ensure that all users can make use of them. For this reason, we have provided a one-click upgrade routine that will update all previous purchase records with sequential order numbers matching your settings.', 'ninja-forms' );?></p>
+					<div class="col-2 last-feature">
+						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-sub-edit-screen.png'; ?>">
+						<h4><?php _e( 'Easy submission editing', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'When editing submissions don\'t get bogged down front-end functionality and styles. 2.7 provides a clean submission editing experience.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
 
 				</div>
+
+				<hr />
+
+				<div class="feature-section col three-col">
+
+					<div class="col-1">
+						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-seq-nums.png'; ?>">
+						<h4><?php _e( 'Sequential submission numbering', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Keep track of all form submisisions with a unique sequntial number.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
+
+					<div class="col-2">
+						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-columns.gif'; ?>">
+						<h4><?php _e( 'Show and hide table columns', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Show and hide columns in your submisssions table. Settings saved on a per form and per user basis', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
+
+					<div class="col-3 last-feature">
+						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-sort.gif'; ?>">
+						<h4><?php _e( 'Sort submissions by field', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Sort submissions by any field within your form.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
+
+				</div>
+
+				<hr />
+
+				<div class="feature-section col two-col">
+
+					<div class="col-1">
+						<h4><?php _e( 'Admin only labels', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Each field can now be assigned an admin only label to be used in the submissions tables for clearer identification of the content involved.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
+
+					<div class="col-2 last-feature">
+						<h4><?php _e( 'Search or filter by date', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Search all your submissions by any field value as well as filter tem by any date range you desire to easily find the exact submission you are looking for.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
+
+				</div>
+
 			</div>
 
 			<div class="return-to-dashboard">
@@ -211,7 +259,7 @@ class NF_Welcome {
 		?>
 		<div class="wrap about-wrap">
 			<h1><?php _e( 'Ninja Forms Changelog', 'ninja-forms' ); ?></h1>
-			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is ready to make your online store faster, safer, and better!', 'ninja-forms' ), $display_version ); ?></div>
+			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is primed to make your experience managing submissions an enjoyable one!', 'ninja-forms' ), $display_version ); ?></div>
 			<div class="nf-badge"><?php printf( __( 'Version %s', 'ninja-forms' ), $display_version ); ?></div>
 
 			<?php $this->tabs(); ?>
@@ -243,7 +291,7 @@ class NF_Welcome {
 		?>
 		<div class="wrap about-wrap">
 			<h1><?php printf( __( 'Welcome to Ninja Forms %s', 'ninja-forms' ), $display_version ); ?></h1>
-			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is ready to make your online store faster, safer and better!', 'ninja-forms' ), $display_version ); ?></div>
+			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is primed to make your experience managing submissions an enjoyable one!', 'ninja-forms' ), $display_version ); ?></div>
 			<div class="nf-badge"><?php printf( __( 'Version %s', 'ninja-forms' ), $display_version ); ?></div>
 
 			<?php $this->tabs(); ?>
@@ -251,22 +299,79 @@ class NF_Welcome {
 			<p class="about-description"><?php _e( 'Use the tips below to get started using Ninja Forms. You will be up and running in no time!', 'ninja-forms' ); ?></p>
 
 			<div class="changelog">
-				<h3><?php _e( 'Creating Your First Download Product', 'ninja-forms' );?></h3>
+				<h3><?php _e( 'Creating Your First Form', 'ninja-forms' );?></h3>
 
 				<div class="feature-section">
 
-					<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/edit-download.png'; ?>" class="nf-welcome-screenshots"/>
+					<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-new-form.png'; ?>" class="nf-welcome-screenshots">
 
-					<h4><?php __( '<a href="">%s &rarr; Add New</a>', 'ninja-forms' ); ?></h4>
-					<p><?php __( 'The forms menu is your access point for all aspects of your Ninja Forms product creation and setup. To create your first product, simply click Add New and then fill out the product details.', 'ninja-forms' ); ?></p>
+					<h4><?php printf( __( '<a href="%s">Forms &rarr; Add New</a>', 'ninja-forms' ), admin_url( 'admin.php?page=ninja-forms&tab=form_settings&form_id=new' ) ); ?></h4>
+					<p><?php _e( 'The Forms menu is your access point for all aspects of your Ninja Forms creation and setup. We\'ve already created your first form for you so you can use that as an example or create your own, simply click Add New and start with your Forms Settings.', 'ninja-forms' ); ?></p>
 
-					<h4><?php _e( 'Product Price', 'ninja-forms' );?></h4>
-					<p><?php _e( 'Products can have simple prices or variable prices if you wish to have more than one price point for a product. For a single price, simply enter the price. For multiple price points, click <em>Enable variable pricing</em> and enter the options.', 'ninja-forms' );?></p>
+					<h4><?php _e( 'Form Settings', 'ninja-forms' );?></h4>
+					<p><?php _e( 'The Form Settings tab is where you will configure all the options that pertain to the specific form you are editing. Everything about how your form behaves is handled here.', 'ninja-forms' );?></p>
 
-					<h4><?php _e( 'Download Files', 'ninja-forms' );?></h4>
-					<p><?php _e( 'Uploading the downloadable files is simple. Click <em>Upload File</em> in the Download Files section and choose your download file. To add more than one file, simply click the <em>Add New</em> button.', 'ninja-forms' );?></p>
+					<h4><?php _e( 'Field Settings', 'ninja-forms' );?></h4>
+					<p><?php _e( 'The Field Settings tab is where you will actually build your form by adding fields and placing them in the order you want them to appear with a simple drag and drop method. Each field will have an assortment of avaialble options that are either general for all fields or specific to that field type.', 'ninja-forms' );?></p>
 
 				</div>
+
+			</div>
+
+			<hr />
+
+			<div class="changelog">
+				<h3><?php _e( 'Displaying Your Form', 'ninja-forms' );?></h3>
+
+				<div class="feature-section col two-col">
+
+					<div class="col-1">
+						<h4><?php _e( 'Append to Page', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Under Basic Form Behavior in the Form Settings you can easily select a page that you would like the form automatically appended to the end of that page\'s content. A similiar option is avaiable in every content edit screen in it\'s sidebar.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
+
+					<div class="col-2 last-feature">
+						<h4><?php _e( 'Shortcode', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Place [ninja_forms_display_form id=1] in any area that accepts shortcodes to display your form anywhere you like. Even in the middle of your page or posts content.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
+
+				</div>
+
+				<div class="feature-section col two-col">
+
+					<div class="col-1">
+						<h4><?php _e( 'Ninja Forms Widget', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Ninja Forms provides a widget that you can place in any widgetized area of your site and select exactly which form you would like displayed in tat space.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
+
+					<div class="col-2 last-feature">
+						<h4><?php _e( 'Template Function', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Ninja Forms also comes with a simple template function that can be places directly into a php template file. <code>if( function_exists( \'ninja_forms_display_form\' ) ){ ninja_forms_display_form( 1 ); }</code>', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+					</div>
+
+				</div>
+
+			</div>
+
+			<hr />
+
+			<div class="changelog">
+				<h3><?php _e( 'Need Help?', 'ninja-forms' );?></h3>
+
+				<div class="feature-section col two-col">
+
+					<div class="col-1">
+						<h4><?php _e( 'Growing Documentation', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'We have all kinds of documentation available covering everything from <a href="%s">Troubleshooting</a> to our <a href="%s">Devloper API</a>. New Documents be added every day.', 'ninja-forms' ), 'http://ninjaforms.com/documentation/using-ninja-forms/faq-troubleshooting/', 'http://ninjaforms.com/documentation/developer-api/' ); ?></p>
+					</div>
+
+					<div class="col-2 last-feature">
+						<h4><?php _e( 'Best Support in the Business', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'We do our very best to provide every Ninja Forms user with the best support possible. If you encounter a problem or have a question, <a href="%s">please contact us</a>.', 'ninja-forms' ), 'http://ninjaforms.com/contact/' ); ?></p>
+					</div>
+
+				</div>
+
 			</div>
 		</div>
 		<?php
@@ -284,12 +389,12 @@ class NF_Welcome {
 		?>
 		<div class="wrap about-wrap">
 			<h1><?php printf( __( 'Welcome to Ninja Forms %s', 'ninja-forms' ), $display_version ); ?></h1>
-			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is ready to make your online store faster, safer and better!', 'ninja-forms' ), $display_version ); ?></div>
+			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is primed to make your experience managing submissions an enjoyable one!', 'ninja-forms' ), $display_version ); ?></div>
 			<div class="nf-badge"><?php printf( __( 'Version %s', 'ninja-forms' ), $display_version ); ?></div>
 
 			<?php $this->tabs(); ?>
 
-			<p class="about-description"><?php _e( 'Ninja Forms is created by a worldwide team of developers who aim to provide the #1 eCommerce platform for selling digital goods through WordPress.', 'ninja-forms' ); ?></p>
+			<p class="about-description"><?php _e( 'Ninja Forms is created by a worldwide team of developers who aim to provide the #1 WordPress community form creation plugin.', 'ninja-forms' ); ?></p>
 
 			<?php echo $this->contributors(); ?>
 		</div>
