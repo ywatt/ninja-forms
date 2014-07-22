@@ -232,15 +232,15 @@ class Ninja_Forms {
 
 		// Ninja Forms plugin directory
 		if ( ! defined( 'NINJA_FORMS_DIR' ) )
-			define( 'NINJA_FORMS_DIR', plugin_dir_path( __FILE__ ) );
+			define( 'NINJA_FORMS_DIR', NF_PLUGIN_DIR );
 		
 		// Ninja Forms plugin url
 		if ( ! defined( 'NINJA_FORMS_URL' ) )
-			define( 'NINJA_FORMS_URL', plugin_dir_url( __FILE__ ) );
+			define( 'NINJA_FORMS_URL', NF_PLUGIN_URL );
 
 		// Ninja Forms Version
 		if ( ! defined( 'NINJA_FORMS_VERSION' ) )
-			define( 'NINJA_FORMS_VERSION', '2.6.5');
+			define( 'NINJA_FORMS_VERSION', NF_PLUGIN_VERSION );
 
 		// Ninja Forms table name
 		if ( ! defined( 'NINJA_FORMS_TABLE_NAME' ) )
@@ -528,8 +528,8 @@ class Ninja_Forms {
 	public function update_version_number(){
 		$plugin_settings = nf_get_settings();
 
-		if ( !isset ( $plugin_settings['version'] ) OR ( NINJA_FORMS_VERSION != $plugin_settings['version'] ) ) {
-			$plugin_settings['version'] = NINJA_FORMS_VERSION;
+		if ( !isset ( $plugin_settings['version'] ) OR ( NF_PLUGIN_VERSION != $plugin_settings['version'] ) ) {
+			$plugin_settings['version'] = NF_PLUGIN_VERSION;
 			update_option( 'ninja_forms_settings', $plugin_settings );
 		}
 	}

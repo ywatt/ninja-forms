@@ -44,6 +44,14 @@ jQuery(document).ready(function($) {
 
 	$( document ).on( 'submit', function( e ) {
 		$( '.spinner' ).show();
+		if ( $( 'select[name="action"]' ).val() == 'export' || $( 'select[name="action2"]' ).val() == 'export' ) {
+			setTimeout(function(){ // Delay for Chrome
+				$( 'input:checkbox' ).attr( 'checked', false );
+				$( '.spinner' ).hide();
+				$( 'select[name="action"]' ).val( '-1' );
+				$( 'select[name="action2"]' ).val( '-1' );
+		    }, 2000);
+		}
 	});
 
 });
