@@ -25,6 +25,9 @@ class NF_Welcome {
 	 * @var string The capability users should have to view the page
 	 */
 	public $minimum_capability = 'manage_options';
+	public $display_version = NF_PLUGIN_VERSION;
+	public $header_text;
+	public $header_desc;
 
 	/**
 	 * Get things started
@@ -35,6 +38,9 @@ class NF_Welcome {
 		add_action( 'admin_menu', array( $this, 'admin_menus') );
 		add_action( 'admin_head', array( $this, 'admin_head' ) );
 		add_action( 'admin_init', array( $this, 'welcome'    ) );
+
+		$this->header_text = sprintf( __( 'Welcome to Ninja Forms %s', 'ninja-forms' ), $this->display_version );
+		$this->header_desc = sprintf( __( 'Thank you for updating to the latest version! Ninja Forms %s is primed to make your experience managing submissions an enjoyable one!', 'ninja-forms' ), $this->display_version );
 	}
 
 	/**
@@ -165,12 +171,11 @@ class NF_Welcome {
 	 * @return void
 	 */
 	public function about_screen() {
-		list( $display_version ) = explode( '-', NF_PLUGIN_VERSION );
 		?>
 		<div class="wrap about-wrap">
-			<h1><?php printf( __( 'Welcome to Ninja Forms %s', 'ninja-forms' ), $display_version ); ?></h1>
-			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is primed to make your experience managing submissions an enjoyable one!', 'ninja-forms' ), $display_version ); ?></div>
-			<div class="nf-badge"><?php printf( __( 'Version %s', 'ninja-forms' ), $display_version ); ?></div>
+			<h1><?php echo $this->header_text; ?></h1>
+			<div class="about-text"><?php echo $this->header_desc; ?></div>
+			<div class="nf-badge"><?php printf( __( 'Version %s', 'ninja-forms' ), $this->display_version ); ?></div>
 
 			<?php $this->tabs(); ?>
 
@@ -258,9 +263,9 @@ class NF_Welcome {
 		list( $display_version ) = explode( '-', NF_PLUGIN_VERSION );
 		?>
 		<div class="wrap about-wrap">
-			<h1><?php _e( 'Ninja Forms Changelog', 'ninja-forms' ); ?></h1>
-			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is primed to make your experience managing submissions an enjoyable one!', 'ninja-forms' ), $display_version ); ?></div>
-			<div class="nf-badge"><?php printf( __( 'Version %s', 'ninja-forms' ), $display_version ); ?></div>
+			<h1><?php echo $this->header_text; ?></h1>
+			<div class="about-text"><?php echo $this->header_desc; ?></div>
+			<div class="nf-badge"><?php printf( __( 'Version %s', 'ninja-forms' ), $this->display_version ); ?></div>
 
 			<?php $this->tabs(); ?>
 
@@ -290,9 +295,9 @@ class NF_Welcome {
 		list( $display_version ) = explode( '-', NF_PLUGIN_VERSION );
 		?>
 		<div class="wrap about-wrap">
-			<h1><?php printf( __( 'Welcome to Ninja Forms %s', 'ninja-forms' ), $display_version ); ?></h1>
-			<div class="about-text"><?php printf( __( 'Thank you for updating to the latest version! Ninja Forms %s is primed to make your experience managing submissions an enjoyable one!', 'ninja-forms' ), $display_version ); ?></div>
-			<div class="nf-badge"><?php printf( __( 'Version %s', 'ninja-forms' ), $display_version ); ?></div>
+			<h1><?php echo $this->header_text; ?></h1>
+			<div class="about-text"><?php echo $this->header_desc; ?></div>
+			<div class="nf-badge"><?php printf( __( 'Version %s', 'ninja-forms' ), $this->display_version ); ?></div>
 
 			<?php $this->tabs(); ?>
 
