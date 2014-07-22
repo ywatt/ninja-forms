@@ -411,11 +411,8 @@ class NF_Subs_CPT {
 				echo '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
 
 				echo '<br />';
-				if ( 'publish' == $post->post_status ) {
-					_e( 'Submitted', 'ninja-forms' );
-				} else {
-					_e( 'Last Modified', '' );
-				}
+				echo apply_filters( 'nf_sub_table_status', __( 'Submitted', 'ninja-forms' ), $sub_id );
+
 			} else if ( strpos( $column, '_field_' ) !== false ) {
 				global $ninja_forms_fields;
 
