@@ -960,13 +960,13 @@ class NF_Subs_CPT {
 						<span id="sub-form-title-display"><?php echo $form_title; ?></span>
 					</div>
 					<div class="misc-pub-section curtime misc-pub-curtime">
-						<span id="date-submitted">
+						<span id="timestamp">
 							<?php _e( 'Submitted on', 'ninja-forms' ); ?>: <b><?php echo $date_submitted; ?></b>
 						</span>
 						<?php do_action( 'nf_sub_edit_date_submitted', $post ); ?>
 					</div>
 					<div class="misc-pub-section curtime misc-pub-curtime">
-						<span id="date-modified">
+						<span id="timestamp">
 							<?php _e( 'Modified on', 'ninja-forms', $post ); ?>: <b><?php echo $date_modified; ?></b>
 						</span>
 						<?php do_action( 'nf_sub_edit_date_modified', $post ); ?>
