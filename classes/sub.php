@@ -358,4 +358,15 @@ class NF_Sub {
 		Ninja_Forms()->subs()->export( array( $this->sub_id ) );
 	}
 
+	/**
+	 * Delete this submission
+	 * 
+	 * @access public
+	 * @since 2.7
+	 * @return void
+	 */
+	public function delete() {
+		wp_delete_post( $this->sub_id, true );
+	}
+
 }

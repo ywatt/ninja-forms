@@ -197,7 +197,7 @@ class NF_Welcome {
 					<div class="col-2 last-feature">
 						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-sub-edit-screen.png'; ?>">
 						<h4><?php _e( 'Easy submission editing', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'When editing submissions don\'t get bogged down front-end functionality and styles. 2.7 provides a clean submission editing experience.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php printf( __( 'Editing submissions no longer gets bogged down with front-end functionality and styles. 2.7 provides a clean submission editing experience.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 				</div>
@@ -237,7 +237,7 @@ class NF_Welcome {
 
 					<div class="col-2 last-feature">
 						<h4><?php _e( 'Search or filter by date', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Search all your submissions by any field value as well as filter tem by any date range you desire to easily find the exact submission you are looking for.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php printf( __( 'Search all your submissions by any field value, as well as filter by any date range to easily find the exact submission you are looking for.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 				</div>

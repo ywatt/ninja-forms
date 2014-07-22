@@ -1,6 +1,6 @@
 <?php
 
-function ninja_forms_save_sub(){
+function nf_save_sub(){
 	global $ninja_forms_processing, $ninja_forms_fields;
 
 	// save forms by default
@@ -23,13 +23,14 @@ function ninja_forms_save_sub(){
 		// If we don't have a submission ID already, create a submission post.
 		if ( empty( $sub_id ) ) {
 			$sub_id = Ninja_Forms()->subs()->create( $form_id );
-			Ninja_Forms()->sub( $sub_id )->update_action( $action );
 			Ninja_Forms()->sub( $sub_id )->update_user_id( $user_id );
 			do_action( 'nf_create_sub', $sub_id );
 			// Update our legacy $ninja_forms_processing with the new sub_id
 			$ninja_forms_processing->update_form_setting( 'sub_id', $sub_id );
 		}
-
+		
+		Ninja_Forms()->sub( $sub_id )->update_action( $action );
+		
 		if ( is_array ( $field_data ) && ! empty ( $field_data ) ) {
 			// Loop through our submitted data and add the values found there.
 			foreach ( $field_data as $field_id => $user_value ) {
@@ -55,4 +56,4 @@ function ninja_forms_save_sub(){
 	}
 }
 
-add_action('ninja_forms_post_process', 'ninja_forms_save_sub');
+add_action('ninja_forms_post_process', 'nf_save_sub');
