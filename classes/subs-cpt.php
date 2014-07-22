@@ -948,25 +948,28 @@ class NF_Subs_CPT {
 				<div id="misc-publishing-actions">
 					<div class="misc-pub-section misc-pub-post-status">
 						<label for="post_status"><?php _e( '#', 'ninja-forms' ); ?>:</label>
-						<span id="post-status-display"><?php echo Ninja_Forms()->sub( $post->ID )->get_seq_num(); ?></span>
+						<span id="sub-seq-num-display"><?php echo Ninja_Forms()->sub( $post->ID )->get_seq_num(); ?></span>
 					</div>
 					<div class="misc-pub-section misc-pub-post-status">
 						<label for="post_status"><?php _e( 'Status', 'ninja-forms' ); ?>:</label>
-						<span id="post-status-display"><?php _e( 'Complete', 'ninja-forms' ); ?></span>
+						<span id="sub-status-display"><?php echo apply_filters( 'nf_sub_edit_status', __( 'Complete', 'ninja-forms' ), $post->ID ); ?></span>
+						<?php do_action( 'nf_sub_edit_after_status', $post ); ?>
 					</div>
 					<div class="misc-pub-section misc-pub-post-status">
 						<label for="post_status"><?php _e( 'Form', 'ninja-forms' ); ?>:</label>
-						<span id="post-status-display"><?php echo $form_title; ?></span>
+						<span id="sub-form-title-display"><?php echo $form_title; ?></span>
 					</div>
 					<div class="misc-pub-section curtime misc-pub-curtime">
-						<span id="timestamp">
+						<span id="date-submitted">
 							<?php _e( 'Submitted on', 'ninja-forms' ); ?>: <b><?php echo $date_submitted; ?></b>
 						</span>
+						<?php do_action( 'nf_sub_edit_date_submitted', $post ); ?>
 					</div>
 					<div class="misc-pub-section curtime misc-pub-curtime">
-						<span id="timestamp">
-							<?php _e( 'Modified on', 'ninja-forms' ); ?>: <b><?php echo $date_modified; ?></b>
+						<span id="date-modified">
+							<?php _e( 'Modified on', 'ninja-forms', $post ); ?>: <b><?php echo $date_modified; ?></b>
 						</span>
+						<?php do_action( 'nf_sub_edit_date_modified', $post ); ?>
 					</div>
 					<?php
 					if ( $post->post_author != 0 ) {
