@@ -14,6 +14,8 @@ class NF_Subs_CPT {
 
 	var $form_id;
 
+	var $screen_options;
+
 	/**
 	 * Get things started
 	 * 
@@ -78,6 +80,9 @@ class NF_Subs_CPT {
 
 		// Save our hidden columns by form id.
 		add_action( 'wp_ajax_nf_hide_columns', array( $this, 'hide_columns' ) );
+
+		// Load any custom screen options
+		add_filter( 'screen_settings', array( $this, 'output_screen_options' ), 10, 2 );
 
 	}
 
@@ -1091,6 +1096,20 @@ class NF_Subs_CPT {
 		$hidden = array_filter( $hidden );
 		update_user_option( $user->ID, 'manageedit-nf_subcolumnshidden-form-' . $form_id, $hidden, true );
 		die();
+	}
+
+	/**
+	 * Add custom screen options
+	 * 
+	 * @access public
+	 * @since 2.7
+	 * @return void
+	 */
+	public function output_screen_options( $status, $args ) {
+		if ( $args->base == 'edit' && $args->post_type == 'nf_sub' ) {
+			$status .= '<span id="nf-subs-screen-options">' . $this->screen_options . '</span>';
+		}
+		return $status;
 	}
 
 	/**
