@@ -707,6 +707,9 @@ class NF_Subs_CPT {
 	public function jquery_remove_counts() {
 		global $typenow, $pagenow;
 		if ( $typenow == 'nf_sub' && $pagenow == 'edit.php' ) {
+			// Remove our transient
+			delete_transient( 'nf_sub_edit_ref' );
+
 			if ( ! isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
 				$active = 'all';
 			} else if ( $_GET['post_status'] == 'trash' ) {
@@ -849,6 +852,8 @@ class NF_Subs_CPT {
 		
 		if ( isset ( $_REQUEST['ref'] ) ) {
 			$ref = $_REQUEST['ref'];
+		} else if ( get_transient( 'nf_sub_edit_ref' ) ) {
+			$ref = get_transient( 'nf_sub_edit_ref' );
 		} else {
 			$ref = '';
 		}
@@ -889,19 +894,21 @@ class NF_Subs_CPT {
 							<tr>
 								<td class="left"><?php echo $label; ?></td>
 								<td>
-								<?php
-									if ( isset ( $reg_field['edit_sub_value'] ) ) {
-										$edit_value_function = $reg_field['edit_sub_value'];
-									} else {
-										$edit_value_function = 'nf_field_text_edit_sub_value';
-									}
-									$args['field_id'] = $field_id;
-									$args['user_value'] = $user_value;
-									$args['field'] = $field;
+									<div class="nf-sub-edit-value type-<?php echo $field_type; ?>">
+									<?php
+										if ( isset ( $reg_field['edit_sub_value'] ) ) {
+											$edit_value_function = $reg_field['edit_sub_value'];
+										} else {
+											$edit_value_function = 'nf_field_text_edit_sub_value';
+										}
+										$args['field_id'] = $field_id;
+										$args['user_value'] = $user_value;
+										$args['field'] = $field;
 
-									call_user_func_array( $edit_value_function, $args );
+										call_user_func_array( $edit_value_function, $args );
 
-								?>
+									?>
+									</div>
 								</td>
 							</tr>
 							<?php
@@ -1034,6 +1041,7 @@ class NF_Subs_CPT {
 	    	return $sub_id;
 
 	    foreach ( $_POST['fields'] as $field_id => $user_value ) {
+	    	$user_value = apply_filters( 'nf_edit_sub_user_value', $user_value, $field_id, $sub_id );
 	    	Ninja_Forms()->sub( $sub_id )->update_field( $field_id, $user_value );
 	    }
 
