@@ -5,6 +5,14 @@
 .download-all {
     float: right;
 }
+#postcustomstuff table td {
+    padding: 0 10px;
+}
+#postcustomstuff table input,
+#postcustomstuff table select,
+#postcustomstuff table textarea {
+    width: 100%;
+}
 
 #postcustomstuff table input[type=checkbox],
 #postcustomstuff table input[type=radio] {
@@ -43,3 +51,28 @@
 #nf_fields_save #major-publishing-actions {
     margin: 10px -12px -12px;
 }
+
+.misc-pub-section span {
+    font-weight: bold;
+}
+
+.nf-sub-edit-value {
+    position: relative;
+}
+.type-_upload input[type=text] {
+    padding-right: 48px;
+}
+.type-_upload a {
+    background: #333;
+    color: #fff;
+    height: 27px;
+    line-height: 27px;
+    text-decoration: none;
+    padding: 0 10px;
+    position: absolute;
+    top: 8px;
+    right: -8px;
+}
+.type-_upload a:hover {
+    background: #f1f1f1;
+    color: #333;
