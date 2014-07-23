@@ -28,9 +28,10 @@ function nf_save_sub(){
 			// Update our legacy $ninja_forms_processing with the new sub_id
 			$ninja_forms_processing->update_form_setting( 'sub_id', $sub_id );
 		}
+
+		do_action( 'nf_before_save_sub', $sub_id );
 		
 		Ninja_Forms()->sub( $sub_id )->update_action( $action );
-		Ninja_Forms()->sub( $sub_id )->update_date_submitted( current_time( 'mysql' ) );
 		
 		if ( is_array ( $field_data ) && ! empty ( $field_data ) ) {
 			// Loop through our submitted data and add the values found there.

@@ -964,7 +964,7 @@ class NF_Subs_CPT {
 					</div>
 					<div class="misc-pub-section misc-pub-post-status">
 						<label for="post_status"><?php _e( 'Status', 'ninja-forms' ); ?>:</label>
-						<span id="sub-status-display"><?php echo apply_filters( 'nf_sub_edit_status', __( 'Complete', 'ninja-forms' ), $post->ID ); ?></span>
+						<span id="sub-status-display"><?php echo apply_filters( 'nf_sub_edit_status', __( 'Submitted', 'ninja-forms' ), $post->ID ); ?></span>
 						<?php do_action( 'nf_sub_edit_after_status', $post ); ?>
 					</div>
 					<div class="misc-pub-section misc-pub-post-status">
