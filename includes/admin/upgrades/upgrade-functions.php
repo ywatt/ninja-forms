@@ -47,7 +47,7 @@ function nf_show_upgrade_notices() {
 		echo '<div class="error"><p>' . __( 'Your version of the Ninja Forms File Upload extension isn\'t compatible with version 2.7 of Ninja Forms. It needs to be at least version 1.3.5. Please update this extension at ', 'ninja-forms' ) . '<a href="http://ninjaforms.com/your-account/purchases/"</a>ninjaforms.com</a></p></div>';
 	}	
 
-	if ( defined( 'NINJA_FORMS_UPLOADS_VERSION' ) && version_compare( NINJA_FORMS_UPLOADS_VERSION, '1.3.5' ) == -1 ) {
+	if ( defined( 'NINJA_FORMS_SAVE_PROGRESS_VERSION' ) && version_compare( NINJA_FORMS_SAVE_PROGRESS_VERSION, '1.1.3' ) == -1 ) {
 		echo '<div class="error"><p>' . __( 'Your version of the Ninja Forms Save Progress extension isn\'t compatible with version 2.7 of Ninja Forms. It needs to be at least version 1.1.3. Please update this extension at ', 'ninja-forms' ) . '<a href="http://ninjaforms.com/your-account/purchases/"</a>ninjaforms.com</a></p></div>';
 	}
 }
