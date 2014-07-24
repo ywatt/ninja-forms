@@ -251,8 +251,19 @@ function ninja_forms_get_sub_by_id( $sub_id ) {
  * @since 2.7
  */
 
-function ninja_forms_insert_sub($args){
-	return false;
+function ninja_forms_insert_sub( $args ) {
+
+	if ( ! isset ( $args['form_id'] ) )
+		return false;
+
+	$form_id = $args['form_id'];
+	
+	$sub_id = Ninja_Forms()->subs()->create( $form_id );
+	$args['sub_id'] = $sub_id;
+
+	ninja_forms_update_sub( $args );
+
+	return $sub_id;
 }
 
 /**
@@ -263,8 +274,32 @@ function ninja_forms_insert_sub($args){
  * @since 2.7
  */
 
-function ninja_forms_update_sub($args){
-	return false;
+function ninja_forms_update_sub( $args ){
+	if ( ! isset ( $args['sub_id'] ) )
+		return false;
+
+	$sub_id = $args['sub_id'];
+	$sub = Ninja_Forms()->sub( $sub_id );
+
+	if ( isset ( $args['data'] ) ) {
+		$data = $args['data'];
+		unset ( $args['data'] );
+
+		if ( is_serialized( $data ) ) {
+			$data = unserialize( $data );
+
+			foreach ( $data as $d ) {
+				$field_id = $d['field_id'];
+				$user_value = $d['user_value'];
+				$sub->add_field( $field_id, $user_value );
+			}
+		}		
+	}
+
+	foreach ( $args as $key => $value ) {
+		$sub->update_meta( '_' . $key, $value );
+	}
+
 }
 
 /**
