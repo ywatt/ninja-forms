@@ -109,9 +109,18 @@ class NF_Subs {
 		}
 
 		if ( isset ( $args['meta'] ) ) {
-			foreach ( $meta as $key => $value ) {
+			foreach ( $args['meta'] as $key => $value ) {
 				$query_args['meta_query'][] = array(
 					'key' => $key,
+					'value' => $value,
+				);
+			}
+		}
+
+		if ( isset ( $args['fields'] ) ) {
+			foreach ( $args['fields'] as $field_id => $value ) {
+				$query_args['meta_query'][] = array(
+					'key' => '_field_' . $field_id,
 					'value' => $value,
 				);
 			}
