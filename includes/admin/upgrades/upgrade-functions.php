@@ -33,6 +33,23 @@ function nf_show_upgrade_notices() {
 			admin_url( 'index.php?page=nf-upgrades&nf-upgrade=upgrade_subs_to_cpt&step=' . $step )
 		);
 	}
+
+	$upgrade_notice = get_option( 'nf_upgrade_notice' );
+
+	if ( $upgrade_notice != 'closed' ) {
+		printf(
+			'<div class="updated"><p>' . __( 'Thank you for updating to version 2.7 of Ninja Forms. Please update any Ninja Forms extensions from ', 'ninja-forms' ) . '<a href="http://ninjaforms.com/your-account/purchases/"</a>ninjaforms.com</a>. <a href="%s">Dismiss this notice</a></p></div>',
+			add_query_arg( array( 'nf_action' => 'dismiss_upgrade_notice' ) ) 
+		);
+	}
+
+	if ( defined( 'NINJA_FORMS_UPLOADS_VERSION' ) && version_compare( NINJA_FORMS_UPLOADS_VERSION, '1.3.5' ) == -1 ) {
+		echo '<div class="error"><p>' . __( 'Your version of the Ninja Forms File Upload extension isn\'t compatible with version 2.7 of Ninja Forms. It needs to be at least version 1.3.5. Please update this extension at ', 'ninja-forms' ) . '<a href="http://ninjaforms.com/your-account/purchases/"</a>ninjaforms.com</a></p></div>';
+	}	
+
+	if ( defined( 'NINJA_FORMS_UPLOADS_VERSION' ) && version_compare( NINJA_FORMS_UPLOADS_VERSION, '1.3.5' ) == -1 ) {
+		echo '<div class="error"><p>' . __( 'Your version of the Ninja Forms Save Progress extension isn\'t compatible with version 2.7 of Ninja Forms. It needs to be at least version 1.1.3. Please update this extension at ', 'ninja-forms' ) . '<a href="http://ninjaforms.com/your-account/purchases/"</a>ninjaforms.com</a></p></div>';
+	}
 }
 add_action( 'admin_notices', 'nf_show_upgrade_notices' );
 
@@ -134,3 +151,17 @@ function nf_v27_upgrade_subs_to_cpt() {
 	}
 }
 add_action( 'nf_upgrade_subs_to_cpt', 'nf_v27_upgrade_subs_to_cpt' );
+
+/**
+ * Keep our upgrade notice closed.
+ *
+ * @since 2.7
+ * @return void
+ */
+function nf_dismiss_upgrade_notice() {
+	update_option( 'nf_upgrade_notice', 'closed' );
+	wp_redirect( remove_query_arg( 'nf_action' ) );
+	exit;
+}
+
+add_action( 'nf_dismiss_upgrade_notice', 'nf_dismiss_upgrade_notice' );

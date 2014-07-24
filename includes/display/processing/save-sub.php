@@ -35,6 +35,11 @@ function nf_save_sub(){
 		
 		if ( is_array ( $field_data ) && ! empty ( $field_data ) ) {
 			// Loop through our submitted data and add the values found there.
+
+			// Maintain backwards compatibility with older extensions that use the ninja_forms_save_sub_args filter.
+			$data = array();
+			//
+
 			foreach ( $field_data as $field_id => $user_value ) {
 				$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 				$field_type = $field_row['type'];
@@ -49,10 +54,24 @@ function nf_save_sub(){
 						}
 						// Add our submitted field value.
 						Ninja_Forms()->sub( $sub_id )->add_field( $field_id, $user_value );
+
+						// Maintain backwards compatibility with older extensions that use the ninja_forms_save_sub_args filter.
+						$data[] = array( 'field_id' => $field_id, 'user_value' => $user_value );
+						//
 					}
 				}
 			}
 		}
+
+		// Maintain backwards compatibility with older extensions that still use the ninja_forms_save_sub_args filter.
+		$args = apply_filters( 'ninja_forms_save_sub_args', array(
+			'sub_id' 	=> $sub_id,
+			'form_id' 	=> $form_id,
+			'data' 		=> serialize( $data ),
+		) );
+
+		ninja_forms_update_sub( $args );
+		//
 
 		do_action( 'nf_save_sub', $sub_id );
 	}

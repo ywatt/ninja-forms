@@ -201,16 +201,22 @@ function ninja_forms_get_sub_count( $args = array() ) {
  */
 
 function ninja_forms_get_sub_by_id( $sub_id ) {
-	$sub = get_post( $sub_id );
+	$sub = Ninja_Forms()->sub( $sub_id );
 	if ( $sub ) {
 		$sub_row = array();
 		$data = array();
-		$sub_row['id'] = $sub->ID;
-		$sub_row['user_id'] = $sub->post_author;
-		$sub_row['form_id'] = get_post_meta( $sub->ID, '_form_id' );
-		$sub_row['action'] = get_post_meta( $sub->ID, '_action' );
+		$sub_row['id'] = $sub_id;
+		$sub_row['user_id'] = $sub->user_id;
+		$sub_row['form_id'] = $sub->form_id;
+		$sub_row['action'] = $sub->action;
 
-		$meta = get_post_custom( $sub->ID );
+		if ( $sub->action == 'submit' ) {
+			$sub_row['status'] = 1;
+		} else {
+			$sub_row['status'] = 0;
+		}
+
+		$meta = get_post_custom( $sub_id );
 
 		foreach ( $meta as $key => $array ) {
 			if ( strpos( $key, '_field_' ) !== false ) {
@@ -221,7 +227,7 @@ function ninja_forms_get_sub_by_id( $sub_id ) {
 		}
 
 		$sub_row['data'] = $data;
-		$sub_row['date_updated'] = $sub->post_modified;
+		$sub_row['date_updated'] = $sub->date_submitted;
 
 		return $sub_row;
 	} else {
@@ -362,4 +368,11 @@ function ninja_forms_get_csv_enclosure() {
  */
 function ninja_forms_get_csv_terminator() {
 	return apply_filters( 'ninja_forms_csv_terminator', "\n" );
+}
+
+/**
+ * Wrapper for nf_save_sub()
+ */
+function ninja_forms_save_sub() {
+	nf_save_sub();
 }
