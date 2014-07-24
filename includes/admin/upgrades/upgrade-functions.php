@@ -91,6 +91,11 @@ function nf_v27_upgrade_subs_to_cpt() {
 	$step   = isset( $_GET['step'] )  ? absint( $_GET['step'] )  : 1;
 	$total  = isset( $_GET['total'] ) ? absint( $_GET['total'] ) : false;
 	$number  = isset( $_GET['custom'] ) ? absint( $_GET['custom'] ) : 1;
+
+	if ( get_option( 'nf_convert_subs_num' ) ) {
+		$number = get_option( 'nf_convert_subs_num' );
+	}
+
 	$form_id  = isset( $_GET['form_id'] ) ? absint( $_GET['form_id'] ) : 0;
 
 	update_option( 'nf_convert_subs_step', $step );
@@ -117,19 +122,19 @@ function nf_v27_upgrade_subs_to_cpt() {
 				if ( $form_id != $sub['form_id'] ) {
 					$form_id = $sub['form_id'];
 					$number = 1;
-				}				
+				}
 				$converted = get_option( 'nf_converted_subs' );
 				if ( empty( $converted ) )
 					$converted = array();
 
 				if ( ! in_array( $sub['id'], $converted ) ) {
 					$convert_subs->convert( $sub, $number );
+									
+					$converted[] = $sub['id'];
+					update_option( 'nf_converted_subs', $converted );
+					$number++;
+					update_option( 'nf_convert_subs_num', $number );
 				}
-					
-				$converted[] = $sub['id'];
-				update_option( 'nf_converted_subs', $converted );
-
-				$number++;
 			}
 		}
 
@@ -147,6 +152,7 @@ function nf_v27_upgrade_subs_to_cpt() {
 
 	} else {
 		update_option( 'nf_convert_subs_step', 'complete' );
+		delete_option( 'nf_convert_subs_num' );
 		wp_redirect( admin_url( 'index.php?page=nf-about' ) ); exit;
 	}
 }
