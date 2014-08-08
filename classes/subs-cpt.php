@@ -556,8 +556,8 @@ class NF_Subs_CPT {
 			     $end_date = new DateTime( $end_date );
 			     $_GET['begin_date'] = $begin_date->format('m/d/Y');
 			     $_GET['end_date'] = $end_date->format('m/d/Y');
-			     $begin_date = $begin_date->format('m/d/Y');
-			     $end_date = $end_date->format('m/d/Y');
+			     $begin_date = $begin_date->format("Y-m-d G:i:s");
+			     $end_date = $end_date->format("Y-m-d G:i:s");
 		    }
 		    
 		    if ( ! isset ( $qv['date_query'] ) ) {
