@@ -548,8 +548,8 @@ class NF_Subs_CPT {
 		    }
 
 		    if ( $begin_date > $end_date ) {
-		    	 $begin_date = new DateTime( $begin_date )
-		    	 $end_date = new DateTime( $end_date )
+		    	 $begin_date = new DateTime( $begin_date );
+		    	 $end_date = new DateTime( $end_date );
 			     $end_date_temp = $begin_date;
 			     $begin_date_temp = $end_date;
 			     $begin_date = $begin_date_temp;
