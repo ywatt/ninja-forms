@@ -552,8 +552,6 @@ class NF_Subs_CPT {
 			     $end_date_temp = $end_date;
 			     $begin_date = $end_date_temp;
 			     $end_date = $begin_date_temp;
-			     $begin_date = new DateTime( $begin_date );
-			     $end_date = new DateTime( $end_date );
 			     $_GET['begin_date'] = $begin_date->format('m/d/Y');
 			     $_GET['end_date'] = $end_date->format('m/d/Y');
 			     $begin_date = $begin_date->format("Y-m-d G:i:s");
@@ -562,8 +560,8 @@ class NF_Subs_CPT {
 		    
 		    if ( ! isset ( $qv['date_query'] ) ) {
 			    $qv['date_query'] = array(
-			    	'after' => $begin_date,
-			    	'before' => $end_date,
+			    	'after' => $begin_date->format("Y-m-d G:i:s"),
+			    	'before' => $end_date->format("Y-m-d G:i:s"),
 			    );		    	
 		    }
 
