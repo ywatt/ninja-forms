@@ -541,6 +541,11 @@ class NF_Subs_CPT {
 		    	$begin_date = '';
 		    }
 
+		    if ( $begin_date > $end_date ) {
+			     $begin_date = '';
+			     $end_date = '';
+		    }
+
 			if ( !empty ( $_GET['end_date'] ) ) {
 		    	$end_date = nf_get_end_date( $_GET['end_date'] );
 		    } else {
