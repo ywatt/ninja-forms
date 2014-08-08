@@ -548,8 +548,16 @@ class NF_Subs_CPT {
 		    }
 
 		    if ( $begin_date > $end_date ) {
-			     $begin_date = '';
-			     $end_date = '';
+			     $begin_date_temp = $begin_date;
+			     $end_date_temp = $end_date;
+			     $begin_date = $end_date_temp;
+			     $end_date = $begin_date_temp;
+			     $begin_date = new DateTime( $begin_date );
+			     $end_date = new DateTime( $end_date );
+			     $_GET['begin_date'] = $begin_date->format('m/d/Y');
+			     $_GET['end_date'] = $end_date->format('m/d/Y');
+			     $begin_date = $begin_date->format('m/d/Y');
+			     $end_date = $end_date->format('m/d/Y');
 		    }
 		    
 		    if ( ! isset ( $qv['date_query'] ) ) {
