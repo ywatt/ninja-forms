@@ -34,7 +34,7 @@ function ninja_forms_display_form_settings($form_id, $data){
 	<div id="titlediv">
 		<div id="titlewrap">
 			<label class="<?php echo $prompt_text;?>" id="title-prompt-text" for="title"><?php _e( 'Enter form title here', 'ninja-forms' ); ?></label>
-			<input type="text" name="form_title" size="30" value="<?php echo $form_title;?>" id="title" autocomplete="off">
+			<input type="text" name="form_title" size="30" value="<?php echo esc_attr($form_title); ?>" id="title" autocomplete="off">
 		</div>
 	</div>
 <?php
