@@ -536,13 +536,13 @@ class NF_Subs_CPT {
 		    $date_format = $plugin_settings['date_format'];
 
 		    if ( !empty ( $_GET['begin_date'] ) ) {
-		    	$begin_date = nf_get_begin_date( $_GET['begin_date'] );
+		    	$begin_date = nf_get_begin_date( $_GET['begin_date'] )->format("Y-m-d G:i:s");
 		    } else {
 		    	$begin_date = '';
 		    }
 
 			if ( !empty ( $_GET['end_date'] ) ) {
-		    	$end_date = nf_get_end_date( $_GET['end_date'] );
+		    	$end_date = nf_get_end_date( $_GET['end_date'] )->format("Y-m-d G:i:s");
 		    } else {
 		    	$end_date = '';
 		    }
