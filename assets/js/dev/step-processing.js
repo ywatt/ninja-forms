@@ -54,21 +54,44 @@ jQuery(document).ready(function($) {
 			currentLabel: 0
       	};
 
-      	$.post( ajaxurl, { action: nfProcessingAction }, function( response ) {
-      		console.log( response );
-      	} );
+      	var nfProcessing = {
+      		setup: function() {
+      			// Figure out when we're going to change the size of the bar.
+      			this.interval = Math.floor( 100 / parseInt( this.totalSteps ) );
+      		},
+      		process: function() {
 
-		function progress() {
-			var val = progressbar.progressbar( "value" ) || 0;
+				$.post( ajaxurl, { step: this.step, args: nfProcessingArgs, action: nfProcessingAction }, function( response ) {
+		      		response = $.parseJSON( response );
+		      		nfProcessing.step = response.step;
+		      		nfProcessing.totalSteps = response.total_steps;
+		      		
+		      		if ( nfProcessing.runSetup == 1 ) {
+		      			nfProcessing.setup();
+		      			nfProcessing.runSetup = 0;
+		      		}
 
-			progressbar.progressbar( "value", val + 2 );
+		      		if ( ! response.complete ) {
+		      			nfProcessing.progress();
+		      			nfProcessing.process();
+		      		} else {
+		      			console.log( 'complete' );
+		      			progressbar.progressbar( "value", 100 );
+		      		}
+		      	});
+      		},
+      		progress: function() {
+				var val = progressbar.progressbar( "value" ) || 0;
 
-			if ( val < 99 ) {
-				setTimeout( progress, 800 );
-			}
-		}
- 
-    	setTimeout( progress, 2000 );
+				progressbar.progressbar( "value", val + this.interval );
+
+      		},
+      		step: 'loading',
+      		totalSteps: 0,
+      		runSetup: 1,
+      		interval: 0
+      	}
+     	
+     	nfProcessing.process();
 	}
-    
   });

@@ -75,18 +75,30 @@ class NF_Step_Processing
 				position: relative;
 				width: 800px;
 				max-width: 100%;
-				height: 40px;
+				height: 20px;
+				
 			}
+
 			.progress-label {
-				line-height: 30px;
+				line-height: 12px;
 				position: absolute;
 				left: 40%;
 				top: 4px;
 				font-weight: bold;
 				text-shadow: 1px 1px 0 #fff;
+
 			}
+
+			.ui-progressbar-value {
+				/*background-size: 100% auto;*/
+				background-color: #FFF;
+				background-repeat: repeat;
+				background-image: url(<?php echo NF_PLUGIN_URL . 'assets/images/pbar-ani.gif'; ?>);
+			}
+
 		</style>
 		<script type="text/javascript">
+
 			<?php
 			if ( isset ( $_REQUEST['action'] ) && ! empty ( $_REQUEST['action'] ) ) {
 				$action = __( 'Loading...', 'ninja-forms' );
@@ -99,9 +111,22 @@ class NF_Step_Processing
 				var nfProcessingAction = 'none';
 				<?php
 			}
+
+			$tmp_array = array();
+			$url_params = parse_url( add_query_arg( array() ) );
+			$query = $url_params['query'];
+			$query = parse_str( $query, $tmp_array );
+			unset ( $tmp_array['action'] );
+			unset ( $tmp_array['page'] );
 			?>
 			
+			var nfProcessingArgs = <?php echo json_encode( $tmp_array ); ?>
+
 		</script>
+
+		<?php
+		
+		?>
 
 		<div class="wrap">
 			<h2><?php _e( 'Ninja Forms - Processing', 'ninja-forms' ); ?></h2>
@@ -119,7 +144,45 @@ class NF_Step_Processing
 }
 
 function nf_test(){
-	echo 'hello world';
+
+	// Get our passed arguments. These come from the querysting of the processing page.
+	$args = $_REQUEST['args'];
+	
+	// Get our current step.
+	$step = isset ( $_REQUEST['step'] )? $_REQUEST['step'] : 'loading';
+
+	// If our step is loading, then we need to return how many total steps there are along with the next step, which is 1.
+	if ( 'loading' == $step ) {
+		$return = array(
+			'total_steps' 	=> 100,
+			'step' 			=> 1,
+			'complete' 		=> false,
+		);
+	} else { // We aren't on the loading step, so do our processing.
+
+
+
+
+
+		if ( 100 == $step ) {
+			$return = array(
+				'step'			=> $step,
+				'complete'		=> true,
+			);
+		} else {
+			// Increase our step by one.
+			$step ++;
+			$return = array(
+				'step' 			=> $step,
+				'complete' 		=> false,
+			);
+		}
+	}
+
+	echo json_encode( $return );
+
 	die();
+
+
 }
 add_action( 'wp_ajax_nf_test', 'nf_test' );
