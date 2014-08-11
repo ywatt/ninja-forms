@@ -106,8 +106,10 @@ class Ninja_Forms {
 
 		// Get our step processor up and running.
 		// We only need this in the admin.
-		if ( is_admin() )
+		if ( is_admin() ) {
 			self::$instance->step_processing = new NF_Step_Processing();
+			self::$instance->download_all_subs = new NF_Download_All_Subs();
+		}
 	}
 
 	/**
@@ -291,17 +293,22 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/actions.php' );
 
-		// Include our step processing class if we're in the admin.
+		
 		if ( is_admin () ) {
+			// Include our step processing stuff if we're in the admin.
+			require_once( NF_PLUGIN_DIR . 'includes/admin/step-processing.php' );
 			require_once( NF_PLUGIN_DIR . 'classes/step-processing.php' );
+
+			// Include our download all submissions php files
+			require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
 		}
 
 		// Include our upgrade files.
 		require_once( NF_PLUGIN_DIR . 'includes/admin/welcome.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
-		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );	
-			
+		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );
+
 		// Include deprecated functions and filters.
 		require_once( NF_PLUGIN_DIR . 'includes/deprecated.php' );
 

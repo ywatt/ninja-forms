@@ -60,11 +60,12 @@ jQuery(document).ready(function($) {
       			this.interval = Math.floor( 100 / parseInt( this.totalSteps ) );
       		},
       		process: function() {
-
-				$.post( ajaxurl, { step: this.step, args: nfProcessingArgs, action: nfProcessingAction }, function( response ) {
+      			
+				$.post( ajaxurl, { step: this.step, total_steps: nfProcessing.totalSteps, args: this.args, action: nfProcessingAction }, function( response ) {
 		      		response = $.parseJSON( response );
 		      		nfProcessing.step = response.step;
 		      		nfProcessing.totalSteps = response.total_steps;
+		      		nfProcessing.args = response.args;
 		      		
 		      		if ( nfProcessing.runSetup == 1 ) {
 		      			nfProcessing.setup();
@@ -75,8 +76,10 @@ jQuery(document).ready(function($) {
 		      			nfProcessing.progress();
 		      			nfProcessing.process();
 		      		} else {
-		      			console.log( 'complete' );
 		      			progressbar.progressbar( "value", 100 );
+		      			if ( typeof response.redirect != 'undefined' && response.redirect != '' ) {
+		      				document.location.href = response.redirect;
+		      			}
 		      		}
 		      	});
       		},
@@ -89,7 +92,8 @@ jQuery(document).ready(function($) {
       		step: 'loading',
       		totalSteps: 0,
       		runSetup: 1,
-      		interval: 0
+      		interval: 0,
+      		args: nfProcessingArgs,
       	}
      	
      	nfProcessing.process();

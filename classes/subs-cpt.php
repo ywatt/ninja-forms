@@ -82,9 +82,6 @@ class NF_Subs_CPT {
 
 		// Load any custom screen options
 		add_filter( 'screen_settings', array( $this, 'output_screen_options' ), 10, 2 );
-
-		// Download all submissions
-		add_action( 'nf_download_all_subs', array( $this, 'download_all' ) );
 				
 		// Listen for our exports button.
 		add_action( 'load-edit.php', array( $this, 'export_listen' ) );
@@ -700,7 +697,7 @@ class NF_Subs_CPT {
 
 					if ( isset ( $_REQUEST['form_id'] ) && $_REQUEST['form_id'] != '' ) {
 						$redirect = urlencode( remove_query_arg( array( 'download_all', 'download_file' ) ) );
-						$url = admin_url( 'index.php?page=nf-upgrades&nf-upgrade=download_all_subs&step=1&form_id=' . $_REQUEST['form_id'] . '&custom=' . $redirect );
+						$url = admin_url( 'admin.php?page=nf-processing&action=download_all_subs&form_id=' . $_REQUEST['form_id'] . '&redirect=' . $redirect );
 						?>
 						var button = '<a href="<?php echo $url; ?>" class="button-secondary nf-download-all"><?php echo __( 'Download All Submissions', 'ninja-forms' ); ?></a>';
 						jQuery( '#doaction2' ).after( button );
@@ -1146,94 +1143,6 @@ class NF_Subs_CPT {
 	}
 
 	/**
-	 * Download all submissions
-	 * 
-	 * @access public
-	 * @since 2.7.4
-	 * @return void
-	 */
-	public function download_all() {
-
-		//Bail if we aren't in the admin.
-		if ( ! is_admin() )
-			return false;
-
-		ignore_user_abort( true );
-
-		if ( ! nf_is_func_disabled( 'set_time_limit' ) && ! ini_get( 'safe_mode' ) ) {
-			set_time_limit( 0 );
-		}
-
-		$step   = isset( $_GET['step'] )  ? absint( $_GET['step'] )  : 1;
-		$total  = isset( $_GET['total'] ) ? absint( $_GET['total'] ) : false;
-		$finished_redirect  = isset( $_GET['custom'] ) ? $_GET['custom'] : 1;
-		$form_id  = isset( $_GET['form_id'] ) ? absint( $_GET['form_id'] ) : 0;
-
-	 	$sub_count = nf_get_sub_count( $form_id );
-
-		if ( empty( $form_id ) )
-			return false;
-
-		if( empty( $total ) || $total <= 1 ) {
-			$total = round( ( $sub_count / 100 ), 0 ) + 2;
-		}
-
-		if ( 1 == $step ) {
-			$this->random_filename( 'all-subs' );
-			$finished_redirect = add_query_arg( array( 'download_all' => $this->filename ), $finished_redirect );
-		}
-
-		if ( $step <= $total ) {
-			$args = array(
-				'posts_per_page' => 100,
-				'paged' => $step,
-				'post_type' => 'nf_sub',
-				'meta_query' => array(
-					array( 
-						'key' => '_form_id',
-						'value' => $form_id,
-					),
-				),
-			);
-
-			$subs_results = get_posts( $args );
-
-			if ( is_array( $subs_results ) && ! empty( $subs_results ) ) {
-				$upload_dir = wp_upload_dir();
-				$file_path = trailingslashit( $upload_dir['path'] ) . $this->filename . '.csv';
-				$myfile = fopen( $file_path, 'w' ) or die( 'Unable to open file!' );
-				$x = 0;
-				$export = '';
-				foreach ( $subs_results as $sub ) {
-					$sub_export = Ninja_Forms()->sub( $sub->ID )->export( true );
-					if ( $x > 0 || $step > 1 ) {
-						$sub_export = substr( $sub_export, strpos( $sub_export, "\n" ) + 1 );
-					}
-					$export .= $sub_export;
-					$x++;
-				}
-				fwrite( $myfile, $export );
-				fclose( $myfile );
-			}
-
-			$step++;
-
-			$redirect = add_query_arg( array(
-				'page'        	=> 'nf-upgrades',
-				'nf-upgrade' 	=> 'download_all_subs',
-				'step'        	=> $step,
-				'custom'      	=> urlencode( $finished_redirect ),
-				'total'       	=> $total,
-				'form_id'		=> $form_id
-			), admin_url( 'index.php' ) );
-			wp_redirect( $redirect ); exit;
-		} else {
-			$redirect = urldecode( $finished_redirect );
-			wp_redirect( $redirect ); exit;
-		}
-	}
-
-	/**
 	 * Listen for exporting subs
 	 * 
 	 * @access public
@@ -1290,30 +1199,5 @@ class NF_Subs_CPT {
 		}
 	}
 
-	/**
-	 * Add an integar to the end of our filename to make sure it is unique
-	 * 
-	 * @access public
-	 * @since 2.7.4
-	 * @return void
-	 */
-	public function random_filename( $filename ) {
-		$upload_dir = wp_upload_dir();
-		$file_path = trailingslashit( $upload_dir['path'] ) . $filename . '.csv';
-		if ( file_exists ( $file_path ) ) {
-			for ($x = 0; $x < 999 ; $x++) { 
-				$tmp_name = $filename . '-' . $x;
-				$tmp_path = trailingslashit( $upload_dir['path'] );
-				if ( file_exists( $tmp_path . $tmp_name . '.csv' ) ) {
-					$this->random_filename( $tmp_name );
-					break;
-				} else {
-					$this->filename = $tmp_name;
-					break;
-				}
-			}
-		} else {
-			$this->filename = $filename;
-		}
-	}
+	
 }
