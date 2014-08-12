@@ -104,6 +104,9 @@ class Ninja_Forms {
 		// Instead, the subs() methods will act as wrappers for it.
 		self::$instance->subs = new NF_Subs();
 
+		// Get our notifications up and running.
+		self::$instance->notifications = new NF_Notifications();
+
 		// Get our step processor up and running.
 		// We only need this in the admin.
 		if ( is_admin() ) {
@@ -292,6 +295,8 @@ class Ninja_Forms {
 		// Include our form object.
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/actions.php' );
+		// Include our notification object
+		require_once( NF_PLUGIN_DIR . 'classes/notifications.php' );
 
 		
 		if ( is_admin () ) {
