@@ -42,6 +42,11 @@ if( ! class_exists( 'WP_List_Table' ) ) {
  */
 class NF_Notifications_List_Table extends WP_List_Table {
     
+    /**
+     * @var form_id
+     */
+    var $form_id = '';
+
     /** ************************************************************************
      * REQUIRED. Set up a constructor that references the parent constructor. We 
      * use the parent reference to set some default configs.
@@ -55,6 +60,8 @@ class NF_Notifications_List_Table extends WP_List_Table {
             'plural'    => 'notifications',    //plural name of the listed records
             'ajax'      => false        //does this table support ajax?
         ) );
+
+        $this->form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
         
     }
 
@@ -329,7 +336,10 @@ class NF_Notifications_List_Table extends WP_List_Table {
          * use sort and pagination data to build a custom query instead, as you'll
          * be able to use your precisely-queried data immediately.
          */
-        // $forms = nf_get_all_forms();
+        $notifications = nf_get_notifications_by_form_id( $this->form_id );
+        echo "<pre>";
+        print_r( $notifications );
+        echo "</pre>";
         $data = array();
 
         // if ( isset ( $_REQUEST['type'] ) ) {

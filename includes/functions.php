@@ -131,3 +131,101 @@ function nf_is_func_disabled( $function ) {
 
 	return in_array( $function, $disabled );
 }
+
+/**
+ * Acts as a wrapper/alias for nf_get_object_children that is specific to notifications.
+ * 
+ * @since 2.8
+ * @param string $form_id
+ * @return array $notifications
+ */
+
+function nf_get_notifications_by_form_id( $form_id, $full_data = true ) {
+	return nf_get_object_children( $form_id, 'notification', $full_data );
+}
+
+/**
+ * Acts as a wrapper/alias for nf_get_object_meta
+ *
+ * @since 2.8
+ * @param string $id
+ * @return array $notification
+ */
+
+function nf_get_notification_by_id( $notification_id ) {
+	return nf_get_object_meta( $notification_id );
+}
+
+
+/**
+ * Function that gets children objects by type and parent id
+ * 
+ * @since 2.8
+ * @param string $parent_id
+ * @param string $type
+ * @return array $children
+ */
+
+function nf_get_object_children( $object_id, $child_type = '', $full_data = true ) {
+	global $wpdb;
+
+	if ( $child_type != '' ) {
+		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_RELATIONSHIPS_TABLE_NAME . " WHERE child_type = %s AND parent_id = %d", $child_type, $object_id ), ARRAY_A);
+	} else {
+		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_RELATIONSHIPS_TABLE_NAME . " WHERE parent_id = %d", $object_id ), ARRAY_A);
+	}
+	$tmp_array = array();
+	if ( $full_data ) {
+		foreach( $children as $id ) {
+			$child_id = $id['child_id'];
+			$settings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM " . NF_META_TABLE_NAME . " WHERE object_id = %d", $child_id ), ARRAY_A);
+			if ( ! empty( $settings ) ) {
+				foreach ( $settings as $s ) {
+					if ( is_array ( $s['meta_value'] ) ) {
+						$s['meta_value'] =  unserialize( $s['meta_value'] );
+					}
+					$tmp_array[ $child_id ][ $s['meta_key'] ] = $s['meta_value'];
+				}				
+			} else {
+				$tmp_array[ $child_id ] = array();
+			}
+		}
+
+			
+	} else {
+		if ( is_array( $children ) ) {
+			foreach ( $children as $child ) {
+				$tmp_array[] = $child['child_id'];
+			}
+		}
+	}
+
+	return $tmp_array;
+}
+
+
+/**
+ * Function that gets all the meta values attached to a given object.
+ *
+ * @since 2.8
+ * @param string $object
+ * @return array $settings
+ */
+
+function nf_get_object_meta( $object_id ) {
+	global $wpdb;
+
+	$tmp_array = array();
+	$settings = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . NF_META_TABLE_NAME . ' WHERE object_id = %d', $object_id ), ARRAY_A);
+
+	if ( is_array( $settings ) ) {
+		foreach( $settings as $setting ) {
+			if ( is_serialized ( $setting['meta_value'] ) ) {
+				$setting['meta_value'] = unserialize( $setting['meta_value'] );
+			}
+			$tmp_array[ $setting['meta_key'] ] = $setting['meta_value'];
+		}
+	}
+
+	return $tmp_array;
+}
