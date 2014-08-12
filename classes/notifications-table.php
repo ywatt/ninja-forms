@@ -24,9 +24,6 @@ if( ! class_exists( 'WP_List_Table' ) ) {
     require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
-
-
-
 /************************** CREATE A PACKAGE CLASS *****************************
  *******************************************************************************
  * Create a new list table package that extends the core WP_List_Table class.
@@ -118,11 +115,11 @@ class NF_Notifications_List_Table extends WP_List_Table {
         
         //Build row actions
         $actions = array(
-            'edit'      => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Edit</a>',$_REQUEST['page'],'edit',$item['id'] ),
+            'edit'      => sprintf( '<a href="?page=%s&action=%s&tab=%s&id=%s">Edit</a>',$_REQUEST['page'],'edit', 'notifications',$item['id'] ),
             'delete'    => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Delete</a>',$_REQUEST['page'],'delete',$item['id'] ),
             'duplicate' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Duplicate</a>', $_REQUEST['page'], 'duplicate', $item['id'] ),
             'export' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Export</a>', $_REQUEST['page'], 'export', $item['id'] ),
-            'submissions' => sprintf( '<a href="edit.php?post_type=nf_sub&form_id=%s">Submissions</a>', $item['id'] ),
+            //'submissions' => sprintf( '<a href="edit.php?post_type=nf_sub&form_id=%s">Submissions</a>', $item['id'] ),
         );
         
         //Return the title contents
@@ -337,32 +334,14 @@ class NF_Notifications_List_Table extends WP_List_Table {
          * be able to use your precisely-queried data immediately.
          */
         $notifications = nf_get_notifications_by_form_id( $this->form_id );
-        echo "<pre>";
-        print_r( $notifications );
-        echo "</pre>";
         $data = array();
 
-        // if ( isset ( $_REQUEST['type'] ) ) {
-        //     $selected_type = $_REQUEST['type'];
-        // } else {
-        //     $selected_type = '';
-        // }
-
-        // foreach ( $forms as $form ) {
-        //     $id = $form['id'];
-        //     $name = nf_get_form_setting( $form['id'], 'name' );
-        //     $type = nf_get_form_setting( $form['id'], 'type' );
-        //     $views = nf_get_form_setting( $form['id'], 'views' );
-        //     $sub_count = nf_get_form_setting( $form['id'], 'sub_count' );
-        //     $stats = array( 'views' => $views, 'sub_count' => $sub_count );
-        //     $date_updated = nf_get_form_setting( $form['id'], 'date_updated' );
-        //     if ( $selected_type == '' || $selected_type == $type ) {
-        //        $data[] = array( 'id' => $id, 'name' => $name, 'type' => $type, 'stats' => $stats, 'date_updated' => $date_updated ); 
-        //     }
-        // }
-
-        //$data = $this->example_data;
-                
+        if ( is_array( $notifications ) ) {
+            foreach ( $notifications as $id => $n ) {
+                $n['id'] = $id;
+                $data[] = $n;
+            }
+        }
         
         /**
          * This checks for sorting input and sorts the data in our array accordingly.

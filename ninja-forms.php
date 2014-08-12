@@ -224,24 +224,32 @@ class Ninja_Forms {
 		global $wpdb;
 
 		// Plugin version
-		if ( ! defined( 'NF_PLUGIN_VERSION' ) ) {
+		if ( ! defined( 'NF_PLUGIN_VERSION' ) )
 			define( 'NF_PLUGIN_VERSION', '2.7.6' );
-		}
 
 		// Plugin Folder Path
-		if ( ! defined( 'NF_PLUGIN_DIR' ) ) {
+		if ( ! defined( 'NF_PLUGIN_DIR' ) )
 			define( 'NF_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-		}
 
 		// Plugin Folder URL
-		if ( ! defined( 'NF_PLUGIN_URL' ) ) {
+		if ( ! defined( 'NF_PLUGIN_URL' ) )
 			define( 'NF_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-		}
 
 		// Plugin Root File
-		if ( ! defined( 'NF_PLUGIN_FILE' ) ) {
+		if ( ! defined( 'NF_PLUGIN_FILE' ) )
 			define( 'NF_PLUGIN_FILE', __FILE__ );
-		}
+
+		// Objects table name
+		if ( ! defined( 'NF_OBJECTS_TABLE_NAME') )
+			define( 'NF_OBJECTS_TABLE_NAME', $wpdb->prefix . 'nf_objects' );
+
+		// Meta table name
+		if ( ! defined( 'NF_META_TABLE_NAME' ) )
+			define( 'NF_META_TABLE_NAME', $wpdb->prefix . 'nf_objectmeta' );
+
+		// Relationships table name
+		if ( ! defined( 'NF_RELATIONSHIPS_TABLE_NAME' ) )
+			define( 'NF_RELATIONSHIPS_TABLE_NAME', $wpdb->prefix . 'nf_relationships' );
 
 		/* Legacy Definitions */
 
