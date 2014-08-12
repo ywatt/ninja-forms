@@ -119,10 +119,6 @@ class NF_Step_Processing
 			$return['total_steps'] = $this->total_steps;
 		}
 
-		if ( isset ( $this->redirect ) && ! empty ( $this->redirect ) ) {
-			$this->args['redirect'] = $this->redirect;
-		}
-
 		$user_id = get_current_user_id();
 
 		if ( $return['complete'] ) {
@@ -135,6 +131,10 @@ class NF_Step_Processing
 		} else {
 			// Save our current step so that we can resume if necessary
 			update_user_option( $user_id, 'nf_step_processing_' . $this->action . '_step', $this->step );
+		}
+
+		if ( isset ( $this->redirect ) && ! empty ( $this->redirect ) ) {
+			$this->args['redirect'] = $this->redirect;
 		}
 
 		$return['args'] = $this->args;
