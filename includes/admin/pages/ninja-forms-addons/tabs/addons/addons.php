@@ -219,7 +219,7 @@ function ninja_forms_tab_addons(){
             'image' => 'http://ninjaforms.com/wp-content/uploads/edd/2014/08/popcontrol-300x121.png',
             'content' => __( 'Many options to pop your Ninja Forms in a lightbox', 'ninja-forms' ),
             'link' => 'http://ninjaforms.com/downloads/popcontrol/',
-            'plugin' => 'placeholder',
+            'plugin' => 'ninja-forms-pop-control/PopControl.php',
             'docs' => '',
         ),
 		
@@ -228,7 +228,7 @@ function ninja_forms_tab_addons(){
             'image' => 'http://ninjaforms.com/wp-content/uploads/edd/2014/08/sendy-300x121.png',
             'content' => __( 'Sendy extension for Ninja Forms lets you subscribe user’s using Ninja Forms.', 'ninja-forms' ),
             'link' => 'http://ninjaforms.com/downloads/sendy/',
-            'plugin' => 'placeholder',
+            'plugin' => 'ninja-forms-sendy/ninja-forms-sendy.php',
             'docs' => '',
         ),
 		array (
@@ -244,7 +244,7 @@ function ninja_forms_tab_addons(){
             'image' => 'http://ninjaforms.com/wp-content/uploads/edd/2014/07/white-label-forms-300x121.png',
             'content' => __( 'Brand the amazing Ninja Forms plugin however you like. Change “Ninja Forms” to your name name and remove any reference to Ninja Forms.', 'ninja-forms' ),
             'link' => 'http://ninjaforms.com/downloads/white-label-forms/',
-            'plugin' => 'placeholder',
+            'plugin' => 'ninja-forms-white-label/ninja-forms-white-label.php',
             'docs' => '',
         ),
 		array (
@@ -252,7 +252,7 @@ function ninja_forms_tab_addons(){
             'image' => 'http://ninjaforms.com/wp-content/uploads/edd/2014/05/pdf-form-submission-300x121.png',
             'content' => __( 'Easily create PDF copies of your form submissions', 'ninja-forms' ),
             'link' => 'http://ninjaforms.com/downloads/pdf-form-submissions/',
-            'plugin' => 'placeholder',
+            'plugin' => 'ninja-forms-pdf-submissions/nf-pdf-submissions.php',
             'docs' => '',
         ),
 		array (
@@ -268,7 +268,7 @@ function ninja_forms_tab_addons(){
             'image' => 'http://ninjaforms.com/wp-content/uploads/edd/2014/03/secure-form-300x121.png',
             'content' => __( 'Control who can see your form based on a password or popular WordPress eCommerce systems.', 'ninja-forms' ),
             'link' => 'http://ninjaforms.com/downloads/secure-form/',
-            'plugin' => 'placeholder',
+            'plugin' => 'ninja-forms-secure-form/ninja-forms-secure-form.php',
             'docs' => '',
         ),
 		array (
