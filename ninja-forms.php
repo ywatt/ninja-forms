@@ -297,8 +297,9 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'includes/actions.php' );
 		// Include our notification object
 		require_once( NF_PLUGIN_DIR . 'classes/notifications.php' );
+		// Include our notification table object
+		require_once( NF_PLUGIN_DIR . 'classes/notifications-table.php' );
 
-		
 		if ( is_admin () ) {
 			// Include our step processing stuff if we're in the admin.
 			require_once( NF_PLUGIN_DIR . 'includes/admin/step-processing.php' );

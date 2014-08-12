@@ -173,7 +173,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
         $columns = array(
             'cb'            => '<input type="checkbox" />', //Render a checkbox instead of text
             'name'          => 'Name',
-            // 'type'          => 'Type',
+            'type'          => 'Type',
             // 'stats'         => 'Stats',
             'date_updated'  => 'Date Updated'
         );
@@ -198,8 +198,8 @@ class NF_Notifications_List_Table extends WP_List_Table {
     function get_sortable_columns() {
         $sortable_columns = array(
             'name'     => array( 'name',false ),     //true means it's already sorted
-            // 'type'    => array( 'type',false ),
-            // 'date_updated'  => array( 'date_updated',false )
+            'type'    => array( 'type',false ),
+            'date_updated'  => array( 'date_updated',false )
         );
         return $sortable_columns;
     }
@@ -240,11 +240,11 @@ class NF_Notifications_List_Table extends WP_List_Table {
         ?>
         <div class="alignleft actions">
             <select name="type">
-                <option value="" <?php selected( $type, '' ); ?>>View All Types</option>
-                <option value="email" <?php selected( $type, 'email' ); ?>>Email</option>
-                <option value="redirect" <?php selected( $type, 'redirect' ); ?>>Redirect</option>
+                <option value="" <?php selected( $type, '' ); ?>><?php _e( '- View All Types', 'ninja-forms' ); ?></option>
+                <option value="email" <?php selected( $type, 'email' ); ?>><?php _e( 'Email', 'ninja-forms' ); ?></option>
+                <option value="redirect" <?php selected( $type, 'redirect' ); ?>><?php _e( 'Redirect', 'ninja-forms' ); ?></option>
             </select>
-            <input type="submit" class="button-secondary" value="Filter">
+            <input type="submit" class="button-secondary" value="<?php _e( 'Filter', 'ninja-forms' ); ?>">
         </div>
         <?php
     }
@@ -330,7 +330,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
          * be able to use your precisely-queried data immediately.
          */
         // $forms = nf_get_all_forms();
-        // $data = array();
+        $data = array();
 
         // if ( isset ( $_REQUEST['type'] ) ) {
         //     $selected_type = $_REQUEST['type'];
