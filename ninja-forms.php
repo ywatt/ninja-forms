@@ -86,7 +86,7 @@ class Ninja_Forms {
 			add_action( 'plugins_loaded', array( self::$instance, 'load_lang' ) );
 			add_action( 'init', array( self::$instance, 'set_transient_id'), 1 );
 			add_action( 'init', array( self::$instance, 'init' ), 5 );
-			add_action( 'admin_init', array( self::$instance, 'update_version_number' ) );
+			add_action( 'admin_init', array( self::$instance, 'admin_init' ), 5 );
 		}
 
 		return self::$instance;
@@ -104,7 +104,23 @@ class Ninja_Forms {
 		// Instead, the subs() methods will act as wrappers for it.
 		self::$instance->subs = new NF_Subs();
 
+		// Get our step processor up and running.
+		// We only need this in the admin.
+		if ( is_admin() ) {
+			self::$instance->step_processing = new NF_Step_Processing();
+			self::$instance->download_all_subs = new NF_Download_All_Subs();
+		}
+	}
 
+	/**
+	 * Run all of our plugin stuff on admin init.
+	 * 
+	 * @since 2.7.4
+	 * @return void
+	 */
+	public function admin_init() {
+		// Check and update our version number.
+		self::$instance->update_version_number();
 	}
 
 	/**
@@ -277,12 +293,22 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/actions.php' );
 
+		
+		if ( is_admin () ) {
+			// Include our step processing stuff if we're in the admin.
+			require_once( NF_PLUGIN_DIR . 'includes/admin/step-processing.php' );
+			require_once( NF_PLUGIN_DIR . 'classes/step-processing.php' );
+
+			// Include our download all submissions php files
+			require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
+		}
+
 		// Include our upgrade files.
 		require_once( NF_PLUGIN_DIR . 'includes/admin/welcome.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
-		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );	
-			
+		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );
+
 		// Include deprecated functions and filters.
 		require_once( NF_PLUGIN_DIR . 'includes/deprecated.php' );
 
