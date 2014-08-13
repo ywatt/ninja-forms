@@ -81,8 +81,6 @@ class NF_Notifications
 			$id = isset ( $_REQUEST['id'] ) ? $_REQUEST['id'] : '';
 			if ( '' == $id )
 				return false;
-
-			
 			?>
 			<h2><?php _e( 'Edit Notification', 'ninja-forms' ); ?> - ID <?php echo $_REQUEST['id']; ?> <a href="<?php echo remove_query_arg( array( 'action', 'id' ) );?>" class="button-secondary"><?php _e( 'Back To List', 'ninja-forms' );?></a></h2>
 
@@ -94,9 +92,22 @@ class NF_Notifications
 				<table class="form-table">
 					<tbody>
 						<tr>
-							<th scope="row"><label for="blogname"><?php _e( 'Name', 'ninja-forms' ); ?></label></th>
-							<td><input name="blogname" type="text" id="blogname" value="<?php" class="regular-text"></td>
+							<th scope="row"><label for="name"><?php _e( 'Name', 'ninja-forms' ); ?></label></th>
+							<td><input name="name" type="text" id="name" value="<?php echo nf_get_object_meta_value( $id, 'name' ); ?>" class="regular-text"></td>
 						</tr>
+						<tr>
+							<th scope="row"><label for="type"><?php _e( 'Type', 'ninja-forms' ); ?></label></th>
+							<td>
+								<select name="type" id="type">
+									<option value="email" <?php selected ( nf_get_object_meta_value( $id, 'type' ), 'email' ); ?>>Email</option>								
+									<option value="redirect" <?php selected ( nf_get_object_meta_value( $id, 'type' ), 'redirect' ); ?>>Redirect</option>								
+									<option value="success_message" <?php selected ( nf_get_object_meta_value( $id, 'type' ), 'success_message' ); ?>>Success Message</option>								
+								</select>
+							</td>
+						</tr>
+						<?php
+						Ninja_Forms()->notification( $id )->edit_screen();
+						?>
 					</tbody>
 				</table>
 			<?php

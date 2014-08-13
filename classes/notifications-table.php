@@ -113,7 +113,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
         
         //Build row actions
         $actions = array(
-            'edit'      => sprintf( '<a href="?page=%s&action=%s&tab=%s&id=%s&form_id=%s">Edit</a>',$_REQUEST['page'],'edit', 'notifications',$item['id'], $this->form_id ),
+            'edit'      => '<a href="' . add_query_arg( array( 'action' => 'edit', 'id' => $item['id'] ) ) . '">Edit</a>',
             'delete'    => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Delete</a>',$_REQUEST['page'],'delete',$item['id'] ),
             'duplicate' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Duplicate</a>', $_REQUEST['page'], 'duplicate', $item['id'] ),
             'export' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Export</a>', $_REQUEST['page'], 'export', $item['id'] ),

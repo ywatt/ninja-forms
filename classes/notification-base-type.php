@@ -10,7 +10,7 @@
  * @since       2.8
 */
 
-class NF_Notifications_Types
+class NF_Notification_Base_Type
 {
 	/**
 	 * Get things rolling
@@ -39,7 +39,7 @@ class NF_Notifications_Types
 	 * @since 2.8
 	 * @return false
 	 */
-	public function output_admin() {
+	public function edit_screen( $id ) {
 		// This space left intentionally blank
 	}
 	

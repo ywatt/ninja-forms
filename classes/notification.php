@@ -18,7 +18,12 @@ class NF_Notification
 	/**
 	 * @var notification id
 	 */
-	var $n_id = '';
+	var $id = '';
+
+	/**
+	 * @var type
+	 */
+	var $type = '';
 
 	/**
 	 * Get things rolling
@@ -26,8 +31,21 @@ class NF_Notification
 	 * @since 2.8
 	 * @return void
 	 */
-	function __construct( $n_id ) {
-		$this->n_id = $n_id;
+	function __construct( $id ) {
+		$this->id = $id;
+		$this->type = nf_get_object_meta_value( $id, 'type' );
+	}
+
+	/**
+	 * Ouptut our admin screen
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function edit_screen() {
+		// Call our type edit screen.
+		Ninja_Forms()->notification_email->edit_screen( $this->id );
 	}
 
 

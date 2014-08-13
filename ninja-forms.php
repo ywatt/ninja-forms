@@ -106,6 +106,8 @@ class Ninja_Forms {
 
 		// Get our notifications up and running.
 		self::$instance->notifications = new NF_Notifications();
+		self::$instance->notification_base_type = new NF_Notification_Base_Type();
+		self::$instance->notification_email = new NF_Notification_Email();
 
 		// Get our step processor up and running.
 		// We only need this in the admin.
@@ -154,12 +156,36 @@ class Ninja_Forms {
 	}
 
 	/**
+	 * Function that acts as a wrapper for our individual notification objects.
+	 * It checks to see if an object exists for this notification id.
+	 * If it does, it returns that object. Otherwise, it creates a new one and returns it.
+	 * 
+	 * @access public
+	 * @param int $n_id
+	 * @since 2.8
+	 * @return object self::$instance->$n_var
+	 */
+	public function notification( $n_id = '' ) {
+		// Bail if we don't get a notification id.
+		if ( '' == $n_id )
+			return false;
+
+		$n_var = 'notification_' . $n_id;
+		// Check to see if an object for this notification already exists.
+		// Create one if it doesn't exist.
+		if ( ! isset ( self::$instance->$n_var ) )
+			self::$instance->$n_var = new NF_Notification( $n_id );
+
+		return self::$instance->$n_var;
+	}
+
+	/**
 	 * Function that acts as a wrapper for our individual sub objects.
 	 * It checks to see if an object exists for this sub id.
 	 * If it does, it returns that object. Otherwise, it creates a new one and returns it.
 	 * 
 	 * @access public
-	 * @param int $form_id
+	 * @param int $sub_id
 	 * @since 2.7
 	 * @return object self::$instance->$sub_var
 	 */
@@ -169,7 +195,7 @@ class Ninja_Forms {
 			return false;
 		
 		$sub_var = 'sub_' . $sub_id;
-		// Check to see if an object for this sub already exists
+		// Check to see if an object for this sub already exists.
 		// Create one if it doesn't exist.
 		if ( ! isset( self::$instance->$sub_var ) )
 			self::$instance->$sub_var = new NF_Sub( $sub_id );
@@ -303,10 +329,15 @@ class Ninja_Forms {
 		// Include our form object.
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
 		require_once( NF_PLUGIN_DIR . 'includes/actions.php' );
-		// Include our notification object
+		// Include our single notification object
+		require_once( NF_PLUGIN_DIR . 'classes/notification.php' );
+		// Include our notifications object
 		require_once( NF_PLUGIN_DIR . 'classes/notifications.php' );
 		// Include our notification table object
-		require_once( NF_PLUGIN_DIR . 'classes/notifications-table.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/notifications-table.php' );		
+		// Include our notification table object
+		require_once( NF_PLUGIN_DIR . 'classes/notification-base-type.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/notification-email.php' );
 
 		if ( is_admin () ) {
 			// Include our step processing stuff if we're in the admin.

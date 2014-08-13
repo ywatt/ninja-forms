@@ -156,6 +156,26 @@ function nf_get_notification_by_id( $notification_id ) {
 	return nf_get_object_meta( $notification_id );
 }
 
+/**
+ * Function that gets a piece of object meta
+ * 
+ * @since 2.8
+ * @param string $object_id
+ * @param string $meta_key
+ * @return var $meta_value
+ */
+
+function nf_get_object_meta_value( $object_id, $meta_key ) {
+	global $wpdb;
+
+	$meta_value = $wpdb->get_row( $wpdb->prepare( "SELECT meta_value FROM ".NF_OBJECT_META_TABLE_NAME." WHERE object_id = %d AND meta_key = %s", $object_id, $meta_key ), ARRAY_A );
+	if ( is_array ( $meta_value['meta_value'] ) ) {
+		$meta_value['meta_value'] = unserialize(  $meta_value['meta_value'] );
+	}
+
+	return $meta_value['meta_value'];
+}
+
 
 /**
  * Function that gets children objects by type and parent id
