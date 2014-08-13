@@ -61,23 +61,16 @@ class NF_Notifications
 		$action = isset ( $_REQUEST['action'] ) ? $_REQUEST['action'] : '';
 		?>
 		<div class="wrap">
-	        <h2><?php _e( 'Notifications', 'ninja-forms' ); ?> <?php echo sprintf('<a href="?page=%s&tab=%s&action=%s" class="add-new-h2">',$_REQUEST['page'], 'notifications','new' ); _e( 'Add New', 'ninja-forms' );?></a></h2>
+			<?php
+		if ( '' == $action ) {
+			?>
+			<h2><?php _e( 'Notifications', 'ninja-forms' ); ?> <?php echo sprintf('<a href="?page=%s&tab=%s&action=%s" class="add-new-h2">',$_REQUEST['page'], 'notifications','new' ); _e( 'Add New', 'ninja-forms' );?></a></h2>
 
 	        <!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
 	        <form id="forms-filter" method="get">
 	            <!-- For plugins, we also need to ensure that the form posts back to our current page -->
 	            <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-				<table class="form-table">
-					<tbody>
-						<tr>
-							<th scope="row"><label for="blogname">Site Title</label></th>
-							<td><input name="blogname" type="text" id="blogname" value="WordPress 3.9" class="regular-text"></td>
-						</tr>
-					</tbody>
-				</table>
 			<?php
-		if ( '' == $action ) {
-
 			//Create an instance of our package class...
 		    $nf_all_forms = new NF_Notifications_List_Table();
 		    //Fetch, prepare, sort, and filter our data...
@@ -85,7 +78,28 @@ class NF_Notifications
  			// Now we can render the completed list table
             $nf_all_forms->display();
 		} else if ( 'edit' == $action ) {
+			$id = isset ( $_REQUEST['id'] ) ? $_REQUEST['id'] : '';
+			if ( '' == $id )
+				return false;
 
+			
+			?>
+			<h2><?php _e( 'Edit Notification', 'ninja-forms' ); ?> - ID <?php echo $_REQUEST['id']; ?> <a href="<?php echo remove_query_arg( array( 'action', 'id' ) );?>" class="button-secondary"><?php _e( 'Back To List', 'ninja-forms' );?></a></h2>
+
+	        <!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
+	        <form id="forms-filter" method="get">
+	            <!-- For plugins, we also need to ensure that the form posts back to our current page -->
+	            <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+
+				<table class="form-table">
+					<tbody>
+						<tr>
+							<th scope="row"><label for="blogname"><?php _e( 'Name', 'ninja-forms' ); ?></label></th>
+							<td><input name="blogname" type="text" id="blogname" value="<?php" class="regular-text"></td>
+						</tr>
+					</tbody>
+				</table>
+			<?php
 		}
 
 	    ?>

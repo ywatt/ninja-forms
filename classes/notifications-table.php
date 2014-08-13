@@ -62,7 +62,6 @@ class NF_Notifications_List_Table extends WP_List_Table {
         
     }
 
-
     /** ************************************************************************
      * Recommended. This method is called when the parent class can't find a method
      * specifically build for a given column. Generally, it's recommended to include
@@ -94,7 +93,6 @@ class NF_Notifications_List_Table extends WP_List_Table {
         }
     }
 
-
     /** ************************************************************************
      * Recommended. This is a custom column method and is responsible for what
      * is rendered in any column with a name/slug of 'title'. Every time the class
@@ -115,7 +113,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
         
         //Build row actions
         $actions = array(
-            'edit'      => sprintf( '<a href="?page=%s&action=%s&tab=%s&id=%s">Edit</a>',$_REQUEST['page'],'edit', 'notifications',$item['id'] ),
+            'edit'      => sprintf( '<a href="?page=%s&action=%s&tab=%s&id=%s&form_id=%s">Edit</a>',$_REQUEST['page'],'edit', 'notifications',$item['id'], $this->form_id ),
             'delete'    => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Delete</a>',$_REQUEST['page'],'delete',$item['id'] ),
             'duplicate' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Duplicate</a>', $_REQUEST['page'], 'duplicate', $item['id'] ),
             'export' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Export</a>', $_REQUEST['page'], 'export', $item['id'] ),
@@ -141,7 +139,6 @@ class NF_Notifications_List_Table extends WP_List_Table {
         return 'Views: ' . $views . ' Submissions: ' . $sub_count . ' Conversion: ' . $conversion;
     }
 
-
     /** ************************************************************************
      * REQUIRED if displaying checkboxes or using bulk actions! The 'cb' column
      * is given special treatment when columns are processed. It ALWAYS needs to
@@ -158,7 +155,6 @@ class NF_Notifications_List_Table extends WP_List_Table {
             /*$2%s*/ $item['id']                //The value of the checkbox should be the record's id
         );
     }
-
 
     /** ************************************************************************
      * REQUIRED! This method dictates the table's columns and titles. This should
@@ -184,7 +180,6 @@ class NF_Notifications_List_Table extends WP_List_Table {
         return $columns;
     }
 
-
     /** ************************************************************************
      * Optional. If you want one or more columns to be sortable (ASC/DESC toggle), 
      * you will need to register it here. This should return an array where the 
@@ -207,7 +202,6 @@ class NF_Notifications_List_Table extends WP_List_Table {
         );
         return $sortable_columns;
     }
-
 
     /** ************************************************************************
      * Optional. If you need to include bulk actions in your list table, this is
