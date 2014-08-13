@@ -18,8 +18,11 @@ class NF_Notification_Types
 	 */
 
 	function __construct() {
-
-
+		foreach( Ninja_Forms()->registered_notification_types as $slug => $type ) {
+			$classname = $type['classname'];
+			if ( class_exists( $classname ) )
+				$this->$slug = new $classname();
+		}
 	}
 
 }

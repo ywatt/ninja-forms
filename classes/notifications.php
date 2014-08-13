@@ -84,11 +84,7 @@ class NF_Notifications
 			?>
 			<h2><?php _e( 'Edit Notification', 'ninja-forms' ); ?> - ID <?php echo $_REQUEST['id']; ?> <a href="<?php echo remove_query_arg( array( 'action', 'id' ) );?>" class="button-secondary"><?php _e( 'Back To List', 'ninja-forms' );?></a></h2>
 
-	        <!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
-	        <form id="forms-filter" method="get">
-	            <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-	            <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-
+			<input type="hidden" name="notification_id" value="<?php echo $id; ?>" />
 				<table class="form-table">
 					<tbody>
 						<tr>
@@ -99,9 +95,13 @@ class NF_Notifications
 							<th scope="row"><label for="type"><?php _e( 'Type', 'ninja-forms' ); ?></label></th>
 							<td>
 								<select name="type" id="type">
-									<option value="email" <?php selected ( nf_get_object_meta_value( $id, 'type' ), 'email' ); ?>>Email</option>								
-									<option value="redirect" <?php selected ( nf_get_object_meta_value( $id, 'type' ), 'redirect' ); ?>>Redirect</option>								
-									<option value="success_message" <?php selected ( nf_get_object_meta_value( $id, 'type' ), 'success_message' ); ?>>Success Message</option>								
+									<?php
+									foreach ( $this->get_types() as $slug => $nicename ) {
+										?>
+										<option value="<?php echo $slug; ?>" <?php selected ( nf_get_object_meta_value( $id, 'type' ), $slug ); ?>><?php echo $nicename; ?></option>
+										<?php
+									}
+									?>						
 								</select>
 							</td>
 						</tr>
@@ -114,7 +114,6 @@ class NF_Notifications
 		}
 
 	    ?>
-        	</form>
     	</div>
     	<?php
 	}
@@ -127,8 +126,13 @@ class NF_Notifications
 	 * @since 2.8
 	 * @return void
 	 */
-	public function save_admin( $data ) {
-
+	public function save_admin( $form_id, $data ) {
+		if ( ! isset ( $data['notification_id'] ) || empty ( $data['notification_id'] ) )
+			return false;
+		
+		foreach ( $data as $meta_key => $meta_value ) {
+			nf_update_object_meta( $)
+		}
 	}
 
 	/**
@@ -136,11 +140,14 @@ class NF_Notifications
 	 * 
 	 * @access public
 	 * @since 2.8
-	 * @return void
+	 * @return array $types
 	 */
 	public function get_types() {
-
-
+		$types = array();
+		foreach ( Ninja_Forms()->registered_notification_types as $slug => $type ) {
+			$types[ $slug ] = $type['nicename'];
+		}
+		return $types;
 	}
 	
 }

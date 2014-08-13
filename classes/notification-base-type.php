@@ -22,7 +22,7 @@ class NF_Notification_Base_Type
 	}
 
 	/**
-	 * Processing function
+	 * Processing
 	 * 
 	 * @access public
 	 * @since 2.8
@@ -33,7 +33,7 @@ class NF_Notification_Base_Type
 	}
 
 	/**
-	 * Display function
+	 * Output admin edit screen
 	 * 
 	 * @access public
 	 * @since 2.8
@@ -41,6 +41,17 @@ class NF_Notification_Base_Type
 	 */
 	public function edit_screen( $id ) {
 		// This space left intentionally blank
+	}
+
+	/**
+	 * Save admin edit screen
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function save( $id ) {
+		
 	}
 	
 }

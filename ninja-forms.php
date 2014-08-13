@@ -114,7 +114,10 @@ class Ninja_Forms {
 
 		// Get our notifications up and running.
 		self::$instance->notifications = new NF_Notifications();
-		self::$instance->register->notification_type( 'email', 'NF_Notification_Email' );
+
+		self::$instance->register->notification_type( 'email', __( 'Email', 'ninja-forms' ), 'NF_Notification_Email' );
+		self::$instance->register->notification_type( 'redirect', __( 'Redirect', 'ninja-forms' ), 'NF_Notification_Redirect' );
+		self::$instance->register->notification_type( 'success_message', __( 'Success Message', 'ninja-forms' ), 'NF_Notification_Success_Message' );
 
 		do_action( 'nf_register_notification_types', self::$instance );
 
@@ -353,6 +356,8 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/notification-types.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/notification-base-type.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/notification-email.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/notification-redirect.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/notification-success-message.php' );
 
 		if ( is_admin () ) {
 			// Include our step processing stuff if we're in the admin.

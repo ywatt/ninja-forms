@@ -27,7 +27,20 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	 * @return void
 	 */
 	public function edit_screen( $id ) {
-		echo "HELLO WORLD!";
+		?>
+		<tr>
+			<th scope="row"><label for="to"><?php _e( 'To', 'ninja-forms' ); ?></label></th>
+			<td><input name="to" type="text" id="to" value="<?php echo nf_get_object_meta_value( $id, 'to' ); ?>" class="regular-text"></td>
+		</tr>		
+		<tr>
+			<th scope="row"><label for="cc"><?php _e( 'Cc', 'ninja-forms' ); ?></label></th>
+			<td><input name="cc" type="text" id="cc" value="<?php echo nf_get_object_meta_value( $id, 'cc' ); ?>" class="regular-text"></td>
+		</tr>		
+		<tr>
+			<th scope="row"><label for="bcc"><?php _e( 'Bcc', 'ninja-forms' ); ?></label></th>
+			<td><input name="bcc" type="text" id="bcc" value="<?php echo nf_get_object_meta_value( $id, 'bcc' ); ?>" class="regular-text"></td>
+		</tr>
+		<?php
 	}
 
 }

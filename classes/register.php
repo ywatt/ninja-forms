@@ -21,10 +21,11 @@ class NF_Register
 	 * @since 3.0
 	 * @return void
 	 */
-	public function notification_type( $slug, $classname ) {
-		if ( ! empty( $slug ) && ! empty( $classname ) && ! isset ( Ninja_Forms()->registered_field_types[ $slug ] ) )
-			Ninja_Forms()->registered_notification_types[ $slug ] = $classname;
+	public function notification_type( $slug, $nicename, $classname ) {
+		if ( ! empty( $slug ) && ! empty( $classname ) && ! isset ( Ninja_Forms()->registered_field_types[ $slug ] ) ) {
+			Ninja_Forms()->registered_notification_types[ $slug ]['nicename'] = $nicename;
+			Ninja_Forms()->registered_notification_types[ $slug ]['classname'] = $classname;
+		}
 	}
-
 	
 }
