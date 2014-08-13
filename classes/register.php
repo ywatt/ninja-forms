@@ -9,7 +9,8 @@
  * @since       3.0
 */
 
-class NF_Register {
+class NF_Register
+{
 
 	/**
 	 * Function that registers a notification type

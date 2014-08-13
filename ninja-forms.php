@@ -116,6 +116,10 @@ class Ninja_Forms {
 		self::$instance->notifications = new NF_Notifications();
 		self::$instance->register->notification_type( 'email', 'NF_Notification_Email' );
 
+		do_action( 'nf_register_notification_types', self::$instance );
+
+		self::$instance->notification_types = new NF_Notification_Types();
+
 		// Get our step processor up and running.
 		// We only need this in the admin.
 		if ( is_admin() ) {
@@ -346,6 +350,7 @@ class Ninja_Forms {
 		// Include our notification table object
 		require_once( NF_PLUGIN_DIR . 'classes/notifications-table.php' );		
 		// Include our notification table object
+		require_once( NF_PLUGIN_DIR . 'classes/notification-types.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/notification-base-type.php' );
 		require_once( NF_PLUGIN_DIR . 'classes/notification-email.php' );
 
