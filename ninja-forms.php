@@ -63,6 +63,11 @@ class Ninja_Forms {
 	private static $instance;
 
 	/**
+	 * @var registered_notification_types
+	 */
+	var $registered_notification_types;
+
+	/**
 	 * Main Ninja_Forms Instance
 	 *
 	 * Insures that only one instance of Ninja_Forms exists in memory at any one
@@ -81,6 +86,9 @@ class Ninja_Forms {
 
 			// Start our submissions custom post type class
 			self::$instance->subs_cpt = new NF_Subs_CPT();
+
+			// Add our registration class object
+			self::$instance->register = new NF_Register();
 
 			register_activation_hook( __FILE__, 'ninja_forms_activation' );
 			add_action( 'plugins_loaded', array( self::$instance, 'load_lang' ) );
@@ -106,8 +114,7 @@ class Ninja_Forms {
 
 		// Get our notifications up and running.
 		self::$instance->notifications = new NF_Notifications();
-		self::$instance->notification_base_type = new NF_Notification_Base_Type();
-		self::$instance->notification_email = new NF_Notification_Email();
+		self::$instance->register->notification_type( 'email', 'NF_Notification_Email' );
 
 		// Get our step processor up and running.
 		// We only need this in the admin.
@@ -328,6 +335,9 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/subs-cpt.php' );
 		// Include our form object.
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
+		// Include our field, notification, and sidebar registration class.
+		require_once( NF_PLUGIN_DIR . 'classes/register.php' );
+		// Include our 'nf_action' watcher.
 		require_once( NF_PLUGIN_DIR . 'includes/actions.php' );
 		// Include our single notification object
 		require_once( NF_PLUGIN_DIR . 'classes/notification.php' );
