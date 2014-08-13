@@ -16,12 +16,9 @@ class NF_Notifications
 {
 	/**
 	 * Get things rolling
-<<<<<<< HEAD
 	 * 
 	 * @access public
-=======
 	 *
->>>>>>> 1e39991356b9cbed695fbe02926e013c9afdd003
 	 * @since 2.8
 	 */
 	function __construct() {
@@ -30,12 +27,9 @@ class NF_Notifications
 
 	/**
 	 * Register our setting tab.
-<<<<<<< HEAD
 	 * 
 	 * @access public
-=======
 	 *
->>>>>>> 1e39991356b9cbed695fbe02926e013c9afdd003
 	 * @since 2.8
 	 * @return void
 	 */
@@ -57,12 +51,9 @@ class NF_Notifications
 
 	/**
 	 * Output our notifications admin.
-<<<<<<< HEAD
 	 * 
 	 * @access public
-=======
 	 *
->>>>>>> 1e39991356b9cbed695fbe02926e013c9afdd003
 	 * @since 2.8
 	 * @return void
 	 */
@@ -105,12 +96,9 @@ class NF_Notifications
 
 	/**
 	 * Save our notifications admin.
-<<<<<<< HEAD
 	 * 
 	 * @access public
-=======
 	 *
->>>>>>> 1e39991356b9cbed695fbe02926e013c9afdd003
 	 * @since 2.8
 	 * @return void
 	 */
@@ -127,10 +115,7 @@ class NF_Notifications
 	 */
 	public function get_types() {
 
-<<<<<<< HEAD
+
 	}
 	
 }
-=======
-}
->>>>>>> 1e39991356b9cbed695fbe02926e013c9afdd003
