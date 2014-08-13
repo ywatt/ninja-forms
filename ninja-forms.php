@@ -244,12 +244,12 @@ class Ninja_Forms {
 			define( 'NF_OBJECTS_TABLE_NAME', $wpdb->prefix . 'nf_objects' );
 
 		// Meta table name
-		if ( ! defined( 'NF_META_TABLE_NAME' ) )
-			define( 'NF_META_TABLE_NAME', $wpdb->prefix . 'nf_objectmeta' );
+		if ( ! defined( 'NF_OBJECT_META_TABLE_NAME' ) )
+			define( 'NF_OBJECT_META_TABLE_NAME', $wpdb->prefix . 'nf_objectmeta' );
 
 		// Relationships table name
-		if ( ! defined( 'NF_RELATIONSHIPS_TABLE_NAME' ) )
-			define( 'NF_RELATIONSHIPS_TABLE_NAME', $wpdb->prefix . 'nf_relationships' );
+		if ( ! defined( 'NF_OBJECT_RELATIONSHIPS_TABLE_NAME' ) )
+			define( 'NF_OBJECT_RELATIONSHIPS_TABLE_NAME', $wpdb->prefix . 'nf_relationships' );
 
 		/* Legacy Definitions */
 

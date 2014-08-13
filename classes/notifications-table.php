@@ -84,7 +84,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
      * @param array $column_name The name/slug of the column to be processed
      * @return string Text or HTML to be placed inside the column <td>
      **************************************************************************/
-    function column_default($item, $column_name){
+    public function column_default($item, $column_name){
         switch($column_name){
             case 'type':
             case 'date_updated':
@@ -111,7 +111,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
      * @param array $item A singular item (one full row's worth of data)
      * @return string Text to be placed inside the column <td> (movie title only)
      **************************************************************************/
-    function column_name( $item ){
+    public function column_name( $item ){
         
         //Build row actions
         $actions = array(
@@ -130,7 +130,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
         );
     }
 
-    function column_stats( $item ) {
+    public function column_stats( $item ) {
         $views = intval( $item['stats']['views'] );
         $sub_count = intval( $item['stats']['sub_count'] );
         if ( $views > 0 ) {
@@ -151,7 +151,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
      * @param array $item A singular item (one full row's worth of data)
      * @return string Text to be placed inside the column <td> (movie title only)
      **************************************************************************/
-    function column_cb($item){
+    public function column_cb($item){
         return sprintf(
             '<input type="checkbox" name="%1$s[]" value="%2$s" />',
             /*$1%s*/ $this->_args['singular'],  //Let's simply repurpose the table's singular label ("movie")
@@ -173,7 +173,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
      * @see WP_List_Table::::single_row_columns()
      * @return array An associative array containing column information: 'slugs'=>'Visible Titles'
      **************************************************************************/
-    function get_columns(){
+    public function get_columns(){
         $columns = array(
             'cb'            => '<input type="checkbox" />', //Render a checkbox instead of text
             'name'          => 'Name',
@@ -199,7 +199,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
      * 
      * @return array An associative array containing all the columns that should be sortable: 'slugs'=>array('data_values',bool)
      **************************************************************************/
-    function get_sortable_columns() {
+    public function get_sortable_columns() {
         $sortable_columns = array(
             'name'     => array( 'name',false ),     //true means it's already sorted
             'type'    => array( 'type',false ),
@@ -223,7 +223,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
      * 
      * @return array An associative array containing all the bulk actions: 'slugs'=>'Visible Titles'
      **************************************************************************/
-    function get_bulk_actions() {
+    public function get_bulk_actions() {
         $actions = array(
             'export'    => 'Export',
             'delete'    => 'Delete'
@@ -231,7 +231,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
         return $actions;
     }
 
-    function extra_tablenav( $which ) {
+    public function extra_tablenav( $which ) {
         if ( $which == 'bottom' )
             return false;
 
@@ -260,7 +260,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
      * 
      * @see $this->prepare_items()
      **************************************************************************/
-    function process_bulk_action() {
+    public function process_bulk_action() {
         
         //Detect when a bulk action is being triggered...
         if( 'delete'=== $this->current_action() ) {
@@ -287,7 +287,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
      * @uses $this->get_pagenum()
      * @uses $this->set_pagination_args()
      **************************************************************************/
-    function prepare_items() {
+    public function prepare_items() {
         global $wpdb; //This is used only if making any database queries
 
         /**
@@ -415,6 +415,5 @@ class NF_Notifications_List_Table extends WP_List_Table {
             'total_pages' => ceil($total_items/$per_page)   //WE have to calculate the total number of pages
         ) );
     }
-
 
 }

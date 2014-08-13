@@ -170,15 +170,15 @@ function nf_get_object_children( $object_id, $child_type = '', $full_data = true
 	global $wpdb;
 
 	if ( $child_type != '' ) {
-		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_RELATIONSHIPS_TABLE_NAME . " WHERE child_type = %s AND parent_id = %d", $child_type, $object_id ), ARRAY_A);
+		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE child_type = %s AND parent_id = %d", $child_type, $object_id ), ARRAY_A);
 	} else {
-		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_RELATIONSHIPS_TABLE_NAME . " WHERE parent_id = %d", $object_id ), ARRAY_A);
+		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE parent_id = %d", $object_id ), ARRAY_A);
 	}
 	$tmp_array = array();
 	if ( $full_data ) {
 		foreach( $children as $id ) {
 			$child_id = $id['child_id'];
-			$settings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM " . NF_META_TABLE_NAME . " WHERE object_id = %d", $child_id ), ARRAY_A);
+			$settings = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM " . NF_OBJECT_META_TABLE_NAME . " WHERE object_id = %d", $child_id ), ARRAY_A);
 			if ( ! empty( $settings ) ) {
 				foreach ( $settings as $s ) {
 					if ( is_array ( $s['meta_value'] ) ) {
@@ -211,12 +211,11 @@ function nf_get_object_children( $object_id, $child_type = '', $full_data = true
  * @param string $object
  * @return array $settings
  */
-
 function nf_get_object_meta( $object_id ) {
 	global $wpdb;
 
 	$tmp_array = array();
-	$settings = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . NF_META_TABLE_NAME . ' WHERE object_id = %d', $object_id ), ARRAY_A);
+	$settings = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . NF_OBJECT_META_TABLE_NAME . ' WHERE object_id = %d', $object_id ), ARRAY_A);
 
 	if ( is_array( $settings ) ) {
 		foreach( $settings as $setting ) {

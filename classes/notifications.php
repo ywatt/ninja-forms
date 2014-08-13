@@ -3,7 +3,7 @@
  * Notifications
  * 
  * Adds our notifications to the form edit page.
- * Processes notifications upon form submission.
+ * Gets notification types
  *
  * @package     Ninja Forms
  * @subpackage  Classes/Notifications
@@ -17,6 +17,7 @@ class NF_Notifications
 	/**
 	 * Get things rolling
 	 * 
+	 * @access public
 	 * @since 2.8
 	 */
 	function __construct() {
@@ -26,6 +27,7 @@ class NF_Notifications
 	/**
 	 * Register our setting tab.
 	 * 
+	 * @access public
 	 * @since 2.8
 	 * @return void
 	 */
@@ -48,6 +50,7 @@ class NF_Notifications
 	/**
 	 * Output our notifications admin.
 	 * 
+	 * @access public
 	 * @since 2.8
 	 * @return void
 	 */
@@ -84,6 +87,7 @@ class NF_Notifications
 	/**
 	 * Save our notifications admin.
 	 * 
+	 * @access public
 	 * @since 2.8
 	 * @return void
 	 */
@@ -91,5 +95,15 @@ class NF_Notifications
 
 	}
 
+	/**
+	 * Get our registered notification types
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function get_types() {
 
+	}
+	
 }
