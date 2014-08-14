@@ -50,8 +50,9 @@ class NF_Notification_Base_Type
 	 * @since 2.8
 	 * @return void
 	 */
-	public function save( $id ) {
-		
+	public function save_admin( $id, $data ) {
+		// This space left intentionally blank
+		return $data;
 	}
 	
 }

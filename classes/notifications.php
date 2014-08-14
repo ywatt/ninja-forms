@@ -88,13 +88,13 @@ class NF_Notifications
 				<table class="form-table">
 					<tbody>
 						<tr>
-							<th scope="row"><label for="name"><?php _e( 'Name', 'ninja-forms' ); ?></label></th>
-							<td><input name="name" type="text" id="name" value="<?php echo nf_get_object_meta_value( $id, 'name' ); ?>" class="regular-text"></td>
+							<th scope="row"><label for="setting-name"><?php _e( 'Name', 'ninja-forms' ); ?></label></th>
+							<td><input name="settings[name]" type="text" id="settings-name" value="<?php echo nf_get_object_meta_value( $id, 'name' ); ?>" class="regular-text"></td>
 						</tr>
 						<tr>
 							<th scope="row"><label for="type"><?php _e( 'Type', 'ninja-forms' ); ?></label></th>
 							<td>
-								<select name="type" id="type">
+								<select name="settings[type]" id="settings-type">
 									<?php
 									foreach ( $this->get_types() as $slug => $nicename ) {
 										?>
@@ -129,9 +129,17 @@ class NF_Notifications
 	public function save_admin( $form_id, $data ) {
 		if ( ! isset ( $data['notification_id'] ) || empty ( $data['notification_id'] ) )
 			return false;
-		
-		foreach ( $data as $meta_key => $meta_value ) {
-			nf_update_object_meta( $)
+
+		$n_id = $data['notification_id'];
+
+		$type = Ninja_Forms()->notification( $n_id )->type;
+
+		$data = Ninja_Forms()->notification_types->$type->save_admin( $n_id, $data );
+
+		$settings = $data['settings'];
+
+		foreach ( $settings as $meta_key => $meta_value ) {
+			nf_update_object_meta( $n_id, $meta_key, $meta_value );
 		}
 	}
 

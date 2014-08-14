@@ -223,6 +223,36 @@ function nf_get_object_children( $object_id, $child_type = '', $full_data = true
 	return $tmp_array;
 }
 
+/**
+ * Function that updates a piece of object meta
+ *
+ * @since 3.0
+ * @param string $object_id
+ * @param string $meta_key
+ * @param string $meta_value
+ * @return string $meta_id
+ */
+
+function nf_update_object_meta( $object_id, $meta_key, $meta_value ) {
+	global $wpdb;
+
+	if ( is_array( $meta_value ) ) {
+		$meta_value = serialize( $meta_value );
+	}
+
+	// Check to see if this meta_key/meta_value pair exist for this object_id.
+	$found = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM ".NF_OBJECT_META_TABLE_NAME." WHERE object_id = %d AND meta_key = %s", $object_id, $meta_key ), ARRAY_A );
+
+	if ( $found ) {
+		$wpdb->update( NF_OBJECT_META_TABLE_NAME, array( 'meta_value' => $meta_value ), array( 'meta_key' => $meta_key, 'object_id' => $object_id ) );
+		$meta_id = $found['id'];
+	} else {
+		$wpdb->insert( NF_OBJECT_META_TABLE_NAME, array( 'object_id' => $object_id, 'meta_key' => $meta_key, 'meta_value' => $meta_value ) );
+		$meta_id = $wpdb->insert_id;
+	}
+
+	return $meta_id;
+}
 
 /**
  * Function that gets all the meta values attached to a given object.
