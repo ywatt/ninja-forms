@@ -193,7 +193,7 @@ class NF_Subs_CPT {
 	public function load_js() {
 		global $pagenow, $typenow;
 		// Bail if we aren't on the edit.php page or we aren't editing our custom post type.
-		if ( ( $pagenow != 'edit.php' && $pagenow != 'post.php' ) && $typenow != 'nf_sub' )
+		if ( ( $pagenow != 'edit.php' && $pagenow != 'post.php' ) || $typenow != 'nf_sub' )
 			return false;
 
 		$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
@@ -228,11 +228,12 @@ class NF_Subs_CPT {
 	 * @return void
 	 */
 	public function load_css() {
-		global $pagenow;
-		// Bail if we aren't on the edit.php page or the post.php page.
-		if ( $pagenow != 'edit.php' && $pagenow != 'post.php' )
-			return false;
+		global $pagenow, $typenow;
 
+		// Bail if we aren't on the edit.php page or the post.php page.
+		if ( ( $pagenow != 'edit.php' && $pagenow != 'post.php' ) || $typenow != 'nf_sub' )
+			return false;
+		
 		wp_enqueue_style( 'nf-sub', NF_PLUGIN_URL .'assets/css/cpt.css' );
 		wp_enqueue_style( 'nf-jquery-ui-freshness', NF_PLUGIN_URL .'assets/css/jquery-ui-fresh.min.css' );
 	}
