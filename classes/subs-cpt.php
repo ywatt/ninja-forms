@@ -20,13 +20,13 @@ class NF_Subs_CPT {
 
 	/**
 	 * Get things started
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
 	 */
 	function __construct() {
-		
+
 		// Register our submission custom post type.
 		add_action( 'init', array( $this, 'register_cpt' ), 5 );
 
@@ -82,7 +82,7 @@ class NF_Subs_CPT {
 
 		// Load any custom screen options
 		add_filter( 'screen_settings', array( $this, 'output_screen_options' ), 10, 2 );
-				
+
 		// Listen for our exports button.
 		add_action( 'load-edit.php', array( $this, 'export_listen' ) );
 
@@ -90,7 +90,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Register our submission CPT
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -140,7 +140,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Populate our fields var with all the fields. This keeps us from needing to ping the database later.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 */
@@ -166,14 +166,14 @@ class NF_Subs_CPT {
 
 	/**
 	 * Add our submissions submenu
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
 	 */
 	public function add_submenu() {
 		// Add our submissions submenu
-		$sub_page = add_submenu_page( 'ninja-forms', __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), apply_filters( 'nf_admin_menu_subs_capabilities', 'manage_options' ), 'edit.php?post_type=nf_sub' ); 
+		$sub_page = add_submenu_page( 'ninja-forms', __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), apply_filters( 'nf_admin_menu_subs_capabilities', 'manage_options' ), 'edit.php?post_type=nf_sub' );
 		// Enqueue our JS on the edit page.
 		//add_action( 'load-' . $sub_page, array( $this, 'load_js' ) );
 		add_action( 'admin_print_styles', array( $this, 'load_js' ) );
@@ -185,7 +185,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Enqueue our submissions JS file.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -222,7 +222,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Enqueue our submissions CSS file.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -233,14 +233,14 @@ class NF_Subs_CPT {
 		// Bail if we aren't on the edit.php page or the post.php page.
 		if ( ( $pagenow != 'edit.php' && $pagenow != 'post.php' ) || $typenow != 'nf_sub' )
 			return false;
-		
+
 		wp_enqueue_style( 'nf-sub', NF_PLUGIN_URL .'assets/css/cpt.css' );
 		wp_enqueue_style( 'nf-jquery-ui-freshness', NF_PLUGIN_URL .'assets/css/jquery-ui-fresh.min.css' );
 	}
 
 	/**
 	 * Modify the columns of our submissions table.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return array $cols
@@ -265,14 +265,14 @@ class NF_Subs_CPT {
 						$cols[ 'form_' . $form_id . '_field_' . $field_id ] = $setting['label'];
 				}
 			}
-		}		
+		}
 		*/
 
 		// Compatibility with old field registration system. Can be removed when the new one is in place.
 		if ( isset ( $_GET['form_id'] ) && $_GET['form_id'] != '' ) {
 			$form_id = $_GET['form_id'];
 			if ( is_object( Ninja_Forms()->form( $form_id ) ) && is_array ( Ninja_Forms()->form( $form_id )->fields ) ) {
-				foreach ( Ninja_Forms()->form( $this->form_id )->fields as $field ) {
+				foreach ( Ninja_Forms()->form( $form_id )->fields as $field ) {
 					$field_id = $field['id'];
 					$field_type = $field['type'];
 					if ( isset ( $ninja_forms_fields[ $field_type ] ) ) {
@@ -308,7 +308,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Make our columns sortable
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return array
@@ -319,7 +319,7 @@ class NF_Subs_CPT {
 		$tmp_array = array();
 		foreach ( $columns as $slug => $c ) {
 			if ( $slug != 'cb' ) {
-				$tmp_array[ $slug ] = $slug;				
+				$tmp_array[ $slug ] = $slug;
 			}
 		}
 		return $tmp_array;
@@ -327,7 +327,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Actually sort our columns
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return array $vars
@@ -361,7 +361,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Add our custom column data
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -375,7 +375,7 @@ class NF_Subs_CPT {
 				if ( !isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
 					echo '<div class="row-actions">';
 					do_action( 'nf_sub_table_before_row_actions', $sub_id, $column );
-					echo '<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( add_query_arg( array() ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">Edit</a> | </span> 
+					echo '<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( add_query_arg( array() ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">Edit</a> | </span>
 						<span class="edit"><a href="' . add_query_arg( array( 'export_single' => $sub_id ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>';
 					$row_actions = apply_filters( 'nf_sub_table_row_actions', array(), $sub_id, $form_id );
 					if ( ! empty( $row_actions ) ) {
@@ -388,7 +388,7 @@ class NF_Subs_CPT {
 				} else {
 					echo '<div class="row-actions">';
 					do_action( 'nf_sub_table_before_row_actions_trash', $sub_id, $column );
-					echo '<span class="untrash"><a title="' . esc_attr( __( 'Restore this item from the Trash' ) ) . '" href="' . wp_nonce_url( sprintf( get_edit_post_link( $sub_id ) . '&amp;action=untrash', $sub_id ) , 'untrash-post_' . $sub_id ) . '">' . __( 'Restore' ) . '</a> | </span> 
+					echo '<span class="untrash"><a title="' . esc_attr( __( 'Restore this item from the Trash' ) ) . '" href="' . wp_nonce_url( sprintf( get_edit_post_link( $sub_id ) . '&amp;action=untrash', $sub_id ) , 'untrash-post_' . $sub_id ) . '">' . __( 'Restore' ) . '</a> | </span>
 					<span class="delete"><a class="submitdelete" title="' . esc_attr( __( 'Delete this item permanently' ) ) . '" href="' . get_delete_post_link( $sub_id, '', true ) . '">' . __( 'Delete Permanently' ) . '</a></span>';
 					do_action( 'nf_sub_table_after_row_actions_trash', $sub_id, $column );
 					echo '</div>';
@@ -410,7 +410,7 @@ class NF_Subs_CPT {
 					else
 						$h_time = mysql2date( __( 'Y/m/d' ), $m_time );
 				}
-				
+
 				/** This filter is documented in wp-admin/includes/class-wp-posts-list-table.php */
 				echo '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
 
@@ -450,7 +450,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Add our submission filters
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -484,7 +484,7 @@ class NF_Subs_CPT {
 			}
 		}
 		$html .= '</select>';
-		echo $html;		
+		echo $html;
 		*/
 
 		// Add our Form selection dropdown.
@@ -518,7 +518,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Filter our submission list by form_id
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -563,12 +563,12 @@ class NF_Subs_CPT {
 			     $begin_date = $begin_date->format("Y-m-d G:i:s");
 			     $end_date = $end_date->format("Y-m-d G:i:s");
 		    }
-		    
+
 		    if ( ! isset ( $qv['date_query'] ) ) {
 			    $qv['date_query'] = array(
 			    	'after' => $begin_date,
 			    	'before' => $end_date,
-			    );		    	
+			    );
 		    }
 
 		    if ( ! isset ( $qv['meta_query'] ) ) {
@@ -587,7 +587,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Filter our search
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -595,7 +595,7 @@ class NF_Subs_CPT {
 	public function search( $pieces ) {
 		global $typenow;
 	    // filter to select search query
-	    if ( is_search() && is_admin() && $typenow == 'nf_sub' && isset ( $_GET['s'] ) ) { 
+	    if ( is_search() && is_admin() && $typenow == 'nf_sub' && isset ( $_GET['s'] ) ) {
 	        global $wpdb;
 
 	        $keywords = explode(' ', get_query_var('s'));
@@ -618,7 +618,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Filter our bulk updated/trashed messages so that it uses "submission" rather than "post"
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return array $bulk_messages
@@ -637,7 +637,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Filter our updated/trashed post messages
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return array $messages
@@ -669,7 +669,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Remove the 'edit' bulk action
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return array $actions
@@ -681,14 +681,14 @@ class NF_Subs_CPT {
 
 	/**
 	 * Add our "export" bulk action
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
 	 */
 	public function bulk_admin_footer() {
 		global $post_type;
- 		
+
 		if ( ! is_admin() )
 			return false;
 
@@ -717,7 +717,7 @@ class NF_Subs_CPT {
 						jQuery( '#doaction2' ).after( button );
 						<?php
 					}
-					
+
 					if ( isset ( $_REQUEST['download_all'] ) && $_REQUEST['download_all'] != '' ) {
 						$redirect = add_query_arg( array( 'download_file' => $_REQUEST['download_all'] ) );
 						$redirect = remove_query_arg( array( 'download_all' ), $redirect );
@@ -737,7 +737,7 @@ class NF_Subs_CPT {
 	 * jQuery that hides some of our post-related page items.
 	 * Also adds the active class to All and Trash links, and changes those
 	 * links to match the current filter.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -759,7 +759,7 @@ class NF_Subs_CPT {
 			$trash_url = add_query_arg( array( 'post_status' => 'trash' ) );
 			$trash_url = remove_query_arg( 's', $trash_url );
 			if ( isset ( $_GET['form_id'] ) ) {
-				$trashed_sub_count = nf_get_sub_count( $_GET['form_id'], 'trash' );	
+				$trashed_sub_count = nf_get_sub_count( $_GET['form_id'], 'trash' );
 			} else {
 				$trashed_sub_count = 0;
 			}
@@ -795,14 +795,14 @@ class NF_Subs_CPT {
 					display:none;
 				}
 			</style>
-			<?php			
+			<?php
 		} else if ( $typenow == 'nf_sub' && $pagenow == 'post.php' ) {
 			if ( isset ( $_REQUEST['ref'] ) ) {
 				$back_url = $_REQUEST['ref'];
 			} else {
 				$back_url = get_transient( 'nf_sub_edit_ref' );
 			}
-			
+
 			if ( $back_url ) {
 				$back_url = urldecode( $back_url );
 			} else {
@@ -824,7 +824,7 @@ class NF_Subs_CPT {
 				.add-new-h2 {
 					display:none;
 				}
-			</style>	
+			</style>
 
 			<?php
 		}
@@ -832,13 +832,13 @@ class NF_Subs_CPT {
 
 	/**
 	 * Filter our post counts for the submission listing page
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return int $count
 	 */
 	public function count_posts( $count, $post_type, $perm ) {
-		
+
 		// Bail if we aren't working with our custom post type.
 		if ( $post_type != 'nf_sub' )
 			return $count;
@@ -858,7 +858,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Add our field editing metabox to the CPT editing page.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -877,7 +877,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Output our field editing metabox to the CPT editing page.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -887,7 +887,7 @@ class NF_Subs_CPT {
 		// Get all the post meta
 		$form_id = Ninja_Forms()->sub( $post->ID )->form_id;
 		$fields = Ninja_Forms()->form( $this->form_id )->fields;
-		
+
 		if ( isset ( $_REQUEST['ref'] ) ) {
 			$ref = $_REQUEST['ref'];
 		} else if ( get_transient( 'nf_sub_edit_ref' ) ) {
@@ -962,7 +962,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Output our field editing metabox to the CPT editing page.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -973,7 +973,7 @@ class NF_Subs_CPT {
 
 		if ( $post->post_author != 0 ) {
 			$user_data = get_userdata( $post->post_author );
-			
+
 			$first_name = $user_data->first_name;
 			$last_name = $user_data->last_name;
 
@@ -1035,7 +1035,7 @@ class NF_Subs_CPT {
 			<div id="major-publishing-actions">
 				<div id="delete-action">
 
-				<!-- <a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID ); ?>">Move to Trash</a>--></div> 
+				<!-- <a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID ); ?>">Move to Trash</a>--></div>
 
 				<div id="publishing-action">
 				<span class="spinner"></span>
@@ -1050,7 +1050,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Save our submission user values
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -1089,7 +1089,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Filter our hidden columns so that they are handled on a per-form basis.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -1106,7 +1106,7 @@ class NF_Subs_CPT {
 		$form_id = $_REQUEST['form_id'];
 		// Get the columns that should be hidden for this form ID.
 		$hidden_columns = get_user_option( 'manageedit-nf_subcolumnshidden-form-' . $form_id );
-		
+
 		if ( $hidden_columns === false ) {
 			// If we don't have custom hidden columns set up for this form, then only show the first five columns.
 			// Get our column headers
@@ -1126,7 +1126,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Save our hidden columns per form id.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -1144,7 +1144,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Add custom screen options
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -1158,7 +1158,7 @@ class NF_Subs_CPT {
 
 	/**
 	 * Listen for exporting subs
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7.3
 	 * @return void
@@ -1180,7 +1180,7 @@ class NF_Subs_CPT {
 		if ( isset ( $_REQUEST['download_file'] ) && ! empty( $_REQUEST['download_file'] ) ) {
 			// Open our download all file
 			$filename = $_REQUEST['download_file'];
-			
+
 			$upload_dir = wp_upload_dir();
 
 			$file_path = trailingslashit( $upload_dir['path'] ) . $filename . '.csv';
@@ -1192,7 +1192,7 @@ class NF_Subs_CPT {
 				wp_redirect( $redirect );
 				die();
 			}
-			
+
 			unlink( $file_path );
 
 			$form_name = Ninja_Forms()->form( $_REQUEST['form_id'] )->get_setting( 'form_title' );
@@ -1213,5 +1213,5 @@ class NF_Subs_CPT {
 		}
 	}
 
-	
+
 }
