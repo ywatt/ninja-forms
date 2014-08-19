@@ -86,6 +86,9 @@ class NF_Subs_CPT {
 		// Listen for our exports button.
 		add_action( 'load-edit.php', array( $this, 'export_listen' ) );
 
+		// Check CPT roles
+		add_action( 'init', array( $this, 'check_cpt_roles' ) );
+
 	}
 
 	/**
@@ -122,20 +125,30 @@ class NF_Subs_CPT {
 			'show_ui' => true,
 			'_builtin' => false, // It's a custom post type, not built in!
 			'query_var' => true,
-			'capability_type' => 'post',
+			//'capability_type' => 'post',
 			'has_archive' => false,
 			'show_in_menu' => false,
-			// 'capabilities' => array(
-		 //    	'create_posts' => false, // Removes support for the "Add New" function
-			// ),
 			'hierarchical' => false,
 			'menu_events' => null,
 			'rewrite' => array( 'slug' => 'nf_sub' ), // Permalinks format
 			//'taxonomies' => array( 'novel_genre', 'novel_series', 'novel_author', 'post_tag'),
 			'supports' => array( 'custom-fields' ),
+			// 'capability_type' => 'nf_sub',
+			// 'capabilities' => array(
+			// 	'publish_posts' => 'nf_sub',
+			// 	'edit_posts' => 'nf_sub',
+			// 	'edit_others_posts' => 'nf_sub',
+			// 	'delete_posts' => 'nf_sub',
+			// 	'delete_others_posts' => 'nf_sub',
+			// 	'read_private_posts' => 'nf_sub',
+			// 	'edit_post' => 'nf_sub',
+			// 	'delete_post' => 'nf_sub',
+			// 	'read_post' => 'nf_sub',
+			// ),
 		);
 
-		register_post_type('nf_sub',$args);
+		register_post_type( 'nf_sub',$args );
+
 	}
 
 	/**
@@ -173,7 +186,7 @@ class NF_Subs_CPT {
 	 */
 	public function add_submenu() {
 		// Add our submissions submenu
-		$sub_page = add_submenu_page( 'ninja-forms', __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), apply_filters( 'nf_admin_menu_subs_capabilities', 'manage_options' ), 'edit.php?post_type=nf_sub' ); 
+		$sub_page = add_submenu_page( 'ninja-forms', __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_submissions_capabilities', 'manage_options' ), 'edit.php?post_type=nf_sub' ); 
 		// Enqueue our JS on the edit page.
 		//add_action( 'load-' . $sub_page, array( $this, 'load_js' ) );
 		add_action( 'admin_print_styles', array( $this, 'load_js' ) );
@@ -410,6 +423,9 @@ class NF_Subs_CPT {
 					else
 						$h_time = mysql2date( __( 'Y/m/d' ), $m_time );
 				}
+
+				$t_time = apply_filters( 'nf_sub_title_time', $t_time );
+				$h_time = apply_filters( 'nf_sub_human_time', $h_time );
 				
 				/** This filter is documented in wp-admin/includes/class-wp-posts-list-table.php */
 				echo '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
@@ -1213,5 +1229,25 @@ class NF_Subs_CPT {
 		}
 	}
 
+	/**
+	 * Check to make sure that our roles have been assigned.
+	 * 
+	 * @access public
+	 * @since 2.7.7
+	 * @return void
+	 */
+	public function check_cpt_roles() {
+		global $wp_roles;
+
+		// echo "<pre>";
+		// var_dump( $wp_roles );
+		// echo "</pre>";
+	   	// gets the author role
+	    $role = get_role( 'editor' );
+
+	    // This only works, because it accesses the class instance.
+	    // would allow the author to edit others' posts for current theme only
+	    $role->add_cap( 'nf_sub' ); 
+	}
 	
 }
