@@ -86,8 +86,8 @@ class NF_Subs_CPT {
 		// Listen for our exports button.
 		add_action( 'load-edit.php', array( $this, 'export_listen' ) );
 
-		// Check CPT roles
-		add_action( 'init', array( $this, 'check_cpt_roles' ) );
+		// Filter our submission capabilities
+		add_filter( 'user_has_cap', array( $this, 'cap_filter' ), 10, 3 );
 
 	}
 
@@ -125,26 +125,24 @@ class NF_Subs_CPT {
 			'show_ui' => true,
 			'_builtin' => false, // It's a custom post type, not built in!
 			'query_var' => true,
-			//'capability_type' => 'post',
 			'has_archive' => false,
 			'show_in_menu' => false,
 			'hierarchical' => false,
 			'menu_events' => null,
 			'rewrite' => array( 'slug' => 'nf_sub' ), // Permalinks format
-			//'taxonomies' => array( 'novel_genre', 'novel_series', 'novel_author', 'post_tag'),
 			'supports' => array( 'custom-fields' ),
-			// 'capability_type' => 'nf_sub',
-			// 'capabilities' => array(
-			// 	'publish_posts' => 'nf_sub',
-			// 	'edit_posts' => 'nf_sub',
-			// 	'edit_others_posts' => 'nf_sub',
-			// 	'delete_posts' => 'nf_sub',
-			// 	'delete_others_posts' => 'nf_sub',
-			// 	'read_private_posts' => 'nf_sub',
-			// 	'edit_post' => 'nf_sub',
-			// 	'delete_post' => 'nf_sub',
-			// 	'read_post' => 'nf_sub',
-			// ),
+			'capability_type' => 'nf_sub',
+			'capabilities' => array(
+				'publish_posts' => 'nf_sub',
+				'edit_posts' => 'nf_sub',
+				'edit_others_posts' => 'nf_sub',
+				'delete_posts' => 'nf_sub',
+				'delete_others_posts' => 'nf_sub',
+				'read_private_posts' => 'nf_sub',
+				'edit_post' => 'nf_sub',
+				'delete_post' => 'nf_sub',
+				'read_post' => 'nf_sub',
+			),
 		);
 
 		register_post_type( 'nf_sub',$args );
@@ -1228,26 +1226,23 @@ class NF_Subs_CPT {
 			die();
 		}
 	}
-
+	
 	/**
-	 * Check to make sure that our roles have been assigned.
+	 * Filter user capabilities
 	 * 
 	 * @access public
 	 * @since 2.7.7
 	 * @return void
 	 */
-	public function check_cpt_roles() {
-		global $wp_roles;
+	public function cap_filter( $allcaps, $cap, $args ) {
 
-		// echo "<pre>";
-		// var_dump( $wp_roles );
-		// echo "</pre>";
-	   	// gets the author role
-	    $role = get_role( 'editor' );
+		$sub_cap = apply_filters( 'ninja_forms_admin_submissions_capabilities', 'manage_options' );
 
-	    // This only works, because it accesses the class instance.
-	    // would allow the author to edit others' posts for current theme only
-	    $role->add_cap( 'nf_sub' ); 
+		if ( ! empty( $allcaps[ $sub_cap ] ) ) {
+			$allcaps['nf_sub'] = true;
+		}
+
+		return $allcaps;
 	}
-	
+
 }
