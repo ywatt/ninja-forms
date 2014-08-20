@@ -157,6 +157,23 @@ function nf_get_notification_by_id( $notification_id ) {
 }
 
 /**
+ *
+ * @since 2.8
+ * @param int $form_id
+ * @return int $n_id
+ */
+
+function nf_insert_notification( $form_id = '' ) {
+	if ( empty ( $form_id ) )
+		return false;
+
+	$n_id = nf_insert_object( 'notification' );
+	nf_add_relationship( $n_id, 'notification', $form_id, 'form' );
+
+	return $n_id;
+}
+
+/**
  * Function that gets a piece of object meta
  * 
  * @since 2.8
@@ -277,4 +294,38 @@ function nf_get_object_meta( $object_id ) {
 	}
 
 	return $tmp_array;
+}
+
+/**
+ * Insert an object.
+ * 
+ * @since 3.0
+ * @param string $type
+ * @return int $object_id
+ */
+
+function nf_insert_object( $type ) {
+	global $wpdb;
+	$wpdb->insert( NF_OBJECTS_TABLE_NAME, array( 'type' => $type ) );
+	return $wpdb->insert_id;
+}
+
+/**
+ * Create a relationship between two objects
+ * 
+ * @since 3.0
+ * @param int $child_id
+ * @param string child_type
+ * @param int $parent_id
+ * @param string $parent_type
+ * @return void
+ */
+
+function nf_add_relationship( $child_id, $child_type, $parent_id, $parent_type ) {
+	global $wpdb;
+	// Make sure that our relationship doesn't already exist.
+	$count = $wpdb->query( $wpdb->prepare( 'SELECT id FROM '. NF_RELATIONSHIPS_TABLE_NAME .' WHERE child_id = %d AND parent_id = %d', $child_id, $parent_id ), ARRAY_A );
+	if ( empty( $count ) ) {
+		$wpdb->insert( NF_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $child_id, 'child_type' => $child_type, 'parent_id' => $parent_id, 'parent_type' => $parent_type ) );
+	}
 }
