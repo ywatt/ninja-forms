@@ -74,7 +74,7 @@ function ninja_forms_activation( $network_wide ){
 		  `data` longtext CHARACTER SET utf8 NOT NULL,
 		  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		  PRIMARY KEY (`id`)
-		) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;";
+		) DEFAULT CHARSET=utf8 ;";
 
 		dbDelta($sql);
 
@@ -86,7 +86,7 @@ function ninja_forms_activation( $network_wide ){
 		`data` longtext CHARACTER SET utf8 NOT NULL,
 		`name` varchar(255) CHARACTER SET utf8 NOT NULL,
 		PRIMARY KEY (`id`)
-		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;";
+		) DEFAULT CHARSET=utf8;";
 
 		dbDelta($sql);
 
@@ -127,7 +127,7 @@ function ninja_forms_activation( $network_wide ){
 		  `fav_id` int(11) DEFAULT NULL,
 		  `def_id` int(11) DEFAULT NULL,
 		  PRIMARY KEY (`id`)
-		) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;";
+		) DEFAULT CHARSET=utf8 ;";
 
 		dbDelta($sql);
 
@@ -140,7 +140,7 @@ function ninja_forms_activation( $network_wide ){
 		  `data` longtext CHARACTER SET utf8 NOT NULL,
 		  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		  PRIMARY KEY (`id`)
-		) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;";
+		) DEFAULT CHARSET=utf8 ;";
 
 		dbDelta($sql);
 
