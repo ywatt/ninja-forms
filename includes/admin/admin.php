@@ -70,13 +70,23 @@ function ninja_forms_admin(){
 		$ninja_forms_admin_update_message = $_REQUEST['update_message'];
 	}
 
-	?>
-	<form id="ninja_forms_admin" enctype="multipart/form-data" method="post" name="" action="">
-		<input type="hidden" name="_page" id="_page" value="<?php echo $current_page;?>">
-		<input type="hidden" name="_tab" id="_tab" value="<?php echo $current_tab;?>">
-		<input type="hidden" name="_form_id"  id="_form_id" value="<?php echo $form_id;?>">
-		<input type="hidden" name="_fields_order" id="_fields_order" value="same">
-		<?php wp_nonce_field('_ninja_forms_save','_ninja_forms_admin_submit'); ?>
+	$output_form = isset ( $ninja_forms_tabs[$current_page][$current_tab]['output_form'] ) ? $ninja_forms_tabs[$current_page][$current_tab]['output_form'] : true;
+
+	$form_method = isset ( $ninja_forms_tabs[$current_page][$current_tab]['form_method'] ) ? $ninja_forms_tabs[$current_page][$current_tab]['form_method'] : 'post';
+
+	$hidden_fields = isset ( $ninja_forms_tabs[$current_page][$current_tab]['hidden_fields'] ) ? $ninja_forms_tabs[$current_page][$current_tab]['hidden_fields'] : true;
+
+	if ( $output_form ) {
+		?>
+		<form id="ninja_forms_admin" enctype="multipart/form-data" method="<?php echo $form_method; ?>">
+			<input type="hidden" name="_page" id="_page" value="<?php echo $current_page;?>">
+			<input type="hidden" name="_tab" id="_tab" value="<?php echo $current_tab;?>">
+			<input type="hidden" name="_form_id"  id="_form_id" value="<?php echo $form_id;?>">
+			<input type="hidden" name="_fields_order" id="_fields_order" value="same">
+			<?php
+			wp_nonce_field('_ninja_forms_save','_ninja_forms_admin_submit'); 
+	}
+		?>
 		<div class="wrap">
 			<?php
 				screen_icon( 'ninja-custom-forms' );
@@ -159,8 +169,12 @@ function ninja_forms_admin(){
 			</div>
 		</div>
 	<!-- </div>/.wrap-->
-</form>
-<?php
+	<?php
+	if ( $output_form ) {
+			?>
+		</form>
+		<?php
+	}
 } //End ninja_edit_forms function
 
 if(is_admin()){

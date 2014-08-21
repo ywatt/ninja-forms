@@ -157,7 +157,12 @@ function nf_get_notification_by_id( $notification_id ) {
 }
 
 /**
- *
+ * Insert a notification into the database.
+ * 
+ * Calls nf_insert_object()
+ * Calls nf_add_relationship()
+ * Calls nf_update_object_meta()
+ * 
  * @since 2.8
  * @param int $form_id
  * @return int $n_id
@@ -169,9 +174,24 @@ function nf_insert_notification( $form_id = '' ) {
 
 	$n_id = nf_insert_object( 'notification' );
 	nf_add_relationship( $n_id, 'notification', $form_id, 'form' );
-
+	$date_updated = date( 'Y-m-d', current_time( 'timestamp' ) );
+	nf_update_object_meta( $n_id, 'date_updated', $date_updated );
 	return $n_id;
 }
+
+/**
+ * Delete a notification.
+ * Calls 
+ * 
+ * @since 2.8
+ * @param int $n_id
+ * @return void
+ */
+
+function nf_delete_notification( $n_id ) {
+
+}
+
 
 /**
  * Function that gets a piece of object meta
@@ -324,8 +344,8 @@ function nf_insert_object( $type ) {
 function nf_add_relationship( $child_id, $child_type, $parent_id, $parent_type ) {
 	global $wpdb;
 	// Make sure that our relationship doesn't already exist.
-	$count = $wpdb->query( $wpdb->prepare( 'SELECT id FROM '. NF_RELATIONSHIPS_TABLE_NAME .' WHERE child_id = %d AND parent_id = %d', $child_id, $parent_id ), ARRAY_A );
+	$count = $wpdb->query( $wpdb->prepare( 'SELECT id FROM '. NF_OBJECT_RELATIONSHIPS_TABLE_NAME .' WHERE child_id = %d AND parent_id = %d', $child_id, $parent_id ), ARRAY_A );
 	if ( empty( $count ) ) {
-		$wpdb->insert( NF_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $child_id, 'child_type' => $child_type, 'parent_id' => $parent_id, 'parent_type' => $parent_type ) );
+		$wpdb->insert( NF_OBJECT_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $child_id, 'child_type' => $child_type, 'parent_id' => $parent_id, 'parent_type' => $parent_type ) );
 	}
 }

@@ -111,10 +111,12 @@ class NF_Notifications_List_Table extends WP_List_Table {
      **************************************************************************/
     public function column_name( $item ){
         
+        $base_url = remove_query_arg( array( '_wp_http_referer', '_wpnonce' ) );
+
         //Build row actions
         $actions = array(
-            'edit'      => '<a href="' . add_query_arg( array( 'action' => 'edit', 'id' => $item['id'] ) ) . '">Edit</a>',
-            'delete'    => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Delete</a>',$_REQUEST['page'],'delete',$item['id'] ),
+            'edit'      => '<a href="' . add_query_arg( array( 'notification-action' => 'edit', 'id' => $item['id'] ), $base_url ) . '">' . __( 'Edit', 'ninja-forms' ) . '</a>',
+            'delete'    => '<a href="' . add_query_arg( array( 'action' => 'delete' ), $base_url ) .'" class="notification-delete">' . __( 'Delete', 'ninja-forms' ) . '</a>',
             'duplicate' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Duplicate</a>', $_REQUEST['page'], 'duplicate', $item['id'] ),
             'export' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Export</a>', $_REQUEST['page'], 'export', $item['id'] ),
             //'submissions' => sprintf( '<a href="edit.php?post_type=nf_sub&form_id=%s">Submissions</a>', $item['id'] ),
@@ -126,17 +128,6 @@ class NF_Notifications_List_Table extends WP_List_Table {
             /*$2%s*/ $item['id'],
             /*$3%s*/ $this->row_actions($actions)
         );
-    }
-
-    public function column_stats( $item ) {
-        $views = intval( $item['stats']['views'] );
-        $sub_count = intval( $item['stats']['sub_count'] );
-        if ( $views > 0 ) {
-            $conversion = round( ( $sub_count / $views ) * 100, 2 ) . '%';
-        } else {
-            $conversion = '0%';
-        }
-        return 'Views: ' . $views . ' Submissions: ' . $sub_count . ' Conversion: ' . $conversion;
     }
 
     /** ************************************************************************
@@ -229,18 +220,23 @@ class NF_Notifications_List_Table extends WP_List_Table {
         if ( $which == 'bottom' )
             return false;
 
-        if ( isset ( $_GET['type'] ) ) {
-            $type = $_GET['type'];
+        if ( isset ( $_REQUEST['type'] ) ) {
+            $type = $_REQUEST['type'];
         } else {
             $type = '';
         }
 
         ?>
         <div class="alignleft actions">
-            <select name="type">
+            <select name="type" id="filter-type">
                 <option value="" <?php selected( $type, '' ); ?>><?php _e( '- View All Types', 'ninja-forms' ); ?></option>
-                <option value="email" <?php selected( $type, 'email' ); ?>><?php _e( 'Email', 'ninja-forms' ); ?></option>
-                <option value="redirect" <?php selected( $type, 'redirect' ); ?>><?php _e( 'Redirect', 'ninja-forms' ); ?></option>
+                <?php
+                foreach ( Ninja_Forms()->notifications->get_types() as $slug => $nicename ) {
+                    ?>
+                    <option value="<?php echo $slug; ?>" <?php selected( $type, $slug ); ?>><?php echo $nicename; ?></option>
+                    <?php
+                }
+                ?>                      
             </select>
             <input type="submit" class="button-secondary" value="<?php _e( 'Filter', 'ninja-forms' ); ?>">
         </div>
@@ -332,8 +328,16 @@ class NF_Notifications_List_Table extends WP_List_Table {
 
         if ( is_array( $notifications ) ) {
             foreach ( $notifications as $id => $n ) {
-                $n['id'] = $id;
-                $data[] = $n;
+                if ( isset ( $_REQUEST['type'] ) && ! empty( $_REQUEST['type'] ) ) {
+                    if ( nf_get_object_meta_value( $id, 'type' ) == $_REQUEST['type'] ) {
+                        $n['id'] = $id;
+                        $data[] = $n;                            
+                    }
+                } else {
+                    $n['id'] = $id;
+                    $data[] = $n;
+                }
+
             }
         }
         

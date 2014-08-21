@@ -26,11 +26,15 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	 * @since 2.8
 	 * @return void
 	 */
-	public function edit_screen( $id ) {
+	public function edit_screen( $id = '' ) {
 		?>
 		<tr>
 			<th scope="row"><label for="settings-from"><?php _e( 'From', 'ninja-forms' ); ?></label></th>
 			<td><input name="settings[from]" type="text" id="settings-from" value="<?php echo nf_get_object_meta_value( $id, 'from' ); ?>" class="regular-text"></td>
+		</tr>			
+		<tr>
+			<th scope="row"><label for="settings-reply_to"><?php _e( 'Reply To', 'ninja-forms' ); ?></label></th>
+			<td><input name="settings[reply_to]" type="text" id="settings-reply_to" value="<?php echo nf_get_object_meta_value( $id, 'reply_to' ); ?>" class="regular-text"></td>
 		</tr>			
 		<tr>
 			<th scope="row"><label for="settings-to"><?php _e( 'To', 'ninja-forms' ); ?></label></th>

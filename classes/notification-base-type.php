@@ -39,7 +39,7 @@ class NF_Notification_Base_Type
 	 * @since 2.8
 	 * @return false
 	 */
-	public function edit_screen( $id ) {
+	public function edit_screen( $id = '' ) {
 		// This space left intentionally blank
 	}
 
@@ -50,7 +50,7 @@ class NF_Notification_Base_Type
 	 * @since 2.8
 	 * @return void
 	 */
-	public function save_admin( $id, $data ) {
+	public function save_admin( $id = '', $data ) {
 		// This space left intentionally blank
 		return $data;
 	}

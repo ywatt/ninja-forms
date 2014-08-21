@@ -26,12 +26,35 @@ class NF_Notification_Success_Message extends NF_Notification_Base_Type
 	 * @since 2.8
 	 * @return void
 	 */
-	public function edit_screen( $id ) {
+	public function edit_screen( $id = '' ) {
+		$settings = array(
+			'textarea_name' => 'settings[success_message]',
+		);
+		$loc_opts = apply_filters( 'nf_success_message_locations',
+			array(
+				array( 'action' => 'ninja_forms_display_before_fields', 'name' => __( 'Before Form', 'ninja-forms' ) ),
+				array( 'action' => 'ninja_forms_display_after_fields', 'name' => __( 'After Form', 'ninja-forms' ) ),
+			)
+		);
 		?>
 		<tr>
-			<th scope="row"><label for="message"><?php _e( 'Message', 'ninja-forms' ); ?></label></th>
+			<th scope="row"><label for="success_message_loc"><?php _e( 'Location', 'ninja-forms' ); ?></label></th>
 			<td>
-				<?php wp_editor( nf_get_object_meta_value( $id, 'message' ), 'message' ); ?>
+				<select name="settings[success_message_loc]">
+					<?php
+					foreach ( $loc_opts as $opt ) {
+						?>
+						<option value="<?php echo $opt['action'];?>" <?php selected( nf_get_object_meta_value( $id, 'success_message_loc' ), $opt['action'] ); ?>><?php echo $opt['name'];?></option>
+						<?php
+					}
+					?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"><label for="success_message"><?php _e( 'Message', 'ninja-forms' ); ?></label></th>
+			<td>
+				<?php wp_editor( nf_get_object_meta_value( $id, 'success_message' ), 'success_message', $settings ); ?>
 			</td>
 		</tr>
 

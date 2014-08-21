@@ -265,7 +265,7 @@ class Ninja_Forms {
 
 		// Plugin version
 		if ( ! defined( 'NF_PLUGIN_VERSION' ) )
-			define( 'NF_PLUGIN_VERSION', '2.7.6' );
+			define( 'NF_PLUGIN_VERSION', '2.7.7' );
 
 		// Plugin Folder Path
 		if ( ! defined( 'NF_PLUGIN_DIR' ) )
@@ -295,7 +295,7 @@ class Ninja_Forms {
 
 		// Ninja Forms debug mode
 		if ( ! defined( 'NINJA_FORMS_JS_DEBUG' ) )
-			define( 'NINJA_FORMS_JS_DEBUG', false );
+			define( 'NINJA_FORMS_JS_DEBUG', true );
 
 		// Ninja Forms plugin directory
 		if ( ! defined( 'NINJA_FORMS_DIR' ) )

@@ -49,5 +49,16 @@ class NF_Notification
 		Ninja_Forms()->notification_types->$type->edit_screen( $this->id );
 	}
 
+	/**
+	 * Delete our notification
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function delete() {
+		
+	}
+
 
 }
