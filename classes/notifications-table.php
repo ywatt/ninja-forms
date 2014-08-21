@@ -113,20 +113,21 @@ class NF_Notifications_List_Table extends WP_List_Table {
         
         $base_url = remove_query_arg( array( '_wp_http_referer', '_wpnonce' ) );
 
+        $activate_link = ( Ninja_Forms()->notification( $item['id'] )->active ) ? __( 'Deactivate', 'ninja-forms' ) : __( 'Activate', 'ninja-forms' );
+        $activate_action = ( Ninja_Forms()->notification( $item['id'] )->active ) ? 'deactivate' : 'activate';
+
         //Build row actions
         $actions = array(
+            'active'    => '<a href="' . add_query_arg( array( 'notification-action' => $activate_action, 'id' => $item['id'] ), $base_url ) . '" class="notification-activate" data-action="' . $activate_action . '" data-n_id="' . $item['id'] . '">' . $activate_link . '</a>',
             'edit'      => '<a href="' . add_query_arg( array( 'notification-action' => 'edit', 'id' => $item['id'] ), $base_url ) . '">' . __( 'Edit', 'ninja-forms' ) . '</a>',
-            'delete'    => '<a href="' . add_query_arg( array( 'action' => 'delete' ), $base_url ) .'" class="notification-delete">' . __( 'Delete', 'ninja-forms' ) . '</a>',
-            'duplicate' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Duplicate</a>', $_REQUEST['page'], 'duplicate', $item['id'] ),
-            'export' => sprintf( '<a href="?page=%s&action=%s&form_id=%s">Export</a>', $_REQUEST['page'], 'export', $item['id'] ),
-            //'submissions' => sprintf( '<a href="edit.php?post_type=nf_sub&form_id=%s">Submissions</a>', $item['id'] ),
+            'delete'    => '<a href="' . add_query_arg( array( 'action' => 'delete' ), $base_url ) .'" class="notification-delete" data-n_id="' . $item['id'] . '">' . __( 'Delete', 'ninja-forms' ) . '</a>',
+            'duplicate'    => '<a href="' . add_query_arg( array( 'notification-action' => 'duplicate', 'id' => $item['id'] ), $base_url ) .'">' . __( 'Duiplicate', 'ninja-forms' ) . '</a>',
         );
-        
+
         //Return the title contents
-        return sprintf('%1$s <span style="color:silver">(id:%2$s)</span>%3$s',
+        return sprintf('%1$s %2$s',
             /*$1%s*/ $item['name'],
-            /*$2%s*/ $item['id'],
-            /*$3%s*/ $this->row_actions($actions)
+            /*$2%s*/ $this->row_actions($actions)
         );
     }
 
@@ -210,8 +211,9 @@ class NF_Notifications_List_Table extends WP_List_Table {
      **************************************************************************/
     public function get_bulk_actions() {
         $actions = array(
-            'export'    => 'Export',
-            'delete'    => 'Delete'
+            'activate'      => __( 'Activate', 'ninja-forms' ),
+            'deactivate'    => __( 'Deactivate', 'ninja-forms' ),
+            'delete'        => __( 'Delete', 'ninja-forms' ),
         );
         return $actions;
     }
@@ -243,23 +245,23 @@ class NF_Notifications_List_Table extends WP_List_Table {
         <?php
     }
 
-    /** ************************************************************************
-     * Optional. You can handle your bulk actions anywhere or anyhow you prefer.
-     * For this example package, we will handle it in the class to keep things
-     * clean and organized.
-     * 
-     * @see $this->prepare_items()
-     **************************************************************************/
-    public function process_bulk_action() {
+    /**
+     * Generates content for a single row of the table
+     *
+     * @since 3.1.0
+     * @access protected
+     *
+     * @param object $item The current item
+     */
+    function single_row( $item ) {
+        static $alternate = '';
+
+        $active = ( Ninja_Forms()->notification( $item['id'] )->active ) ? 'nf-notification-active ' : 'nf-notification-inactive';
+        $alternate = ( $alternate == '' ? 'alternate' : '' );
         
-        //Detect when a bulk action is being triggered...
-        if( 'delete'=== $this->current_action() ) {
-            wp_die( 'Items deleted (or they would be if we had items to delete)!' );
-        } else if ( 'export' === $this->current_action() ) {
-            print_r( $_REQUEST['form_id'] );
-            wp_die( 'Export Items!' );
-        }
-        
+        echo '<tr class="' . $active . ' ' . $alternate . '" id="' . $item['id'] . '">';
+        $this->single_row_columns( $item );
+        echo '</tr>';
     }
 
     /** ************************************************************************
@@ -311,7 +313,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
          * Optional. You can handle your bulk actions however you see fit. In this
          * case, we'll handle them within our package just to keep things clean.
          */
-        $this->process_bulk_action();
+        //$this->process_bulk_action();
         
         
         /**

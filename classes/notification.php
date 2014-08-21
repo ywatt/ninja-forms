@@ -26,6 +26,13 @@ class NF_Notification
 	var $type = '';
 
 	/**
+	 * @var active
+	 * Holds a boolean value.
+	 */
+	var $active = '';
+
+
+	/**
 	 * Get things rolling
 	 * 
 	 * @since 2.8
@@ -34,6 +41,7 @@ class NF_Notification
 	function __construct( $id ) {
 		$this->id = $id;
 		$this->type = nf_get_object_meta_value( $id, 'type' );
+		$this->active = ( nf_get_object_meta_value( $id, 'active' ) == 1 ) ? true : false;
 	}
 
 	/**
@@ -57,8 +65,47 @@ class NF_Notification
 	 * @return void
 	 */
 	public function delete() {
-		
+		nf_delete_notification( $this->id );
 	}
 
+	/**
+	 * Activate our notification
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function activate() {
+		nf_update_object_meta( $this->id, 'active', 1 );
+		$this->active = true;
+	}
+
+	/**
+	 * Deactivate our notification
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function deactivate() {
+		nf_update_object_meta( $this->id, 'active', 0 );
+		$this->active = false;
+	}
+
+	/**
+	 * Duplicate our notification
+	 *
+	 * @access public
+	 * @since 2.8
+	 * @return int $n_id
+	 */
+	public function duplicate() {
+		
+		$n_id = Ninja_Forms()->notifications->create( $form_id );
+		$meta = nf_get_notification_by_id( $this->id );
+		foreach ( $meta as $meta_key => $meta_value ) {
+			nf_update_object_meta( $n_id, $meta_key, $meta_value );
+		}
+	}
 
 }

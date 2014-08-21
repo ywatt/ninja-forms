@@ -1,0 +1,12 @@
+.nf-notification-inactive {
+	background: #f1f1f1;
+}
+.nf-notification-inactive td,
+.nf-notification-inactive td ul {
+    color: #bbb;
+}
+.nf-notification-inactive th,
+.nf-notification-inactive td {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}

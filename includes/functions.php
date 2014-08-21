@@ -181,7 +181,8 @@ function nf_insert_notification( $form_id = '' ) {
 
 /**
  * Delete a notification.
- * Calls 
+ * 
+ * Acts as a wrapper/alias for nf_delete_object
  * 
  * @since 2.8
  * @param int $n_id
@@ -189,7 +190,7 @@ function nf_insert_notification( $form_id = '' ) {
  */
 
 function nf_delete_notification( $n_id ) {
-
+	nf_delete_object( $n_id );
 }
 
 
@@ -328,6 +329,29 @@ function nf_insert_object( $type ) {
 	global $wpdb;
 	$wpdb->insert( NF_OBJECTS_TABLE_NAME, array( 'type' => $type ) );
 	return $wpdb->insert_id;
+}
+
+/**
+ * Delete an object. Also removes all of the objectmeta attached to the object and any references to it in the relationship table.
+ *
+ * @since 2.8
+ * @param int $object_id
+ * @return bool
+ */
+
+function nf_delete_object( $object_id ) {
+	global $wpdb;
+
+	// Delete this object.
+	$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . NF_OBJECTS_TABLE_NAME .' WHERE id = %d', $object_id ) );
+
+	// Delete any objectmeta attached to this object.
+	$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . NF_OBJECT_META_TABLE_NAME .' WHERE object_id = %d', $object_id ) );
+
+	// Delete any references to this object in the relationship table
+	$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . NF_OBJECT_RELATIONSHIPS_TABLE_NAME .' WHERE child_id = %d OR parent_id = %d', $object_id, $object_id ) );
+
+	return true;
 }
 
 /**

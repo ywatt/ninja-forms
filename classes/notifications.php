@@ -22,8 +22,20 @@ class NF_Notifications
 	 * @since 2.8
 	 */
 	function __construct() {
+		global $pagenow;
+
 		add_action( 'admin_init', array( $this, 'register_tab' ) );
-		add_action( 'admin_init', array( $this, 'add_js' ) );
+		
+		if ( 'admin.php' == $pagenow && isset ( $_REQUEST['page'] ) && $_REQUEST['page'] == 'ninja-forms' && isset ( $_REQUEST['tab'] ) && $_REQUEST['tab'] == 'notifications' ) {
+			add_action( 'admin_init', array( $this, 'add_js' ) );
+			add_action( 'admin_init', array( $this, 'add_css' ) );
+			add_action( 'admin_init', array( $this, 'bulk_actions' ) );
+			add_action( 'admin_init', array( $this, 'duplicate_notification' ) );
+		}
+
+		add_action( 'wp_ajax_nf_delete_notification', array( $this, 'delete_notification' ) );
+		add_action( 'wp_ajax_nf_activate_notification', array( $this, 'activate_notification' ) );
+		add_action( 'wp_ajax_nf_deactivate_notification', array( $this, 'deactivate_notification' ) );
 	}
 
 	/**
@@ -58,26 +70,38 @@ class NF_Notifications
 	}
 
 	/**
-	 * Output JS
+	 * Enqueue JS
 	 * 
 	 * @access public
 	 * @since 2.8
 	 * @return void
 	 */
 	public function add_js() {
-		global $pagenow;
-		if ( 'admin.php' == $pagenow && isset ( $_REQUEST['page'] ) && $_REQUEST['page'] == 'ninja-forms' && isset ( $_REQUEST['tab'] ) && $_REQUEST['tab'] == 'notifications' ) {
-			if ( defined( 'NINJA_FORMS_JS_DEBUG' ) && NINJA_FORMS_JS_DEBUG ) {
-				$suffix = '';
-				$src = 'dev';
-			} else {
-				$suffix = '.min';
-				$src = 'min';
-			}
-			wp_enqueue_script( 'nf-notifications',
-			NF_PLUGIN_URL . 'assets/js/' . $src .'/notifications' . $suffix . '.js',
-			array( 'jquery' ) );
+		if ( defined( 'NINJA_FORMS_JS_DEBUG' ) && NINJA_FORMS_JS_DEBUG ) {
+			$suffix = '';
+			$src = 'dev';
+		} else {
+			$suffix = '.min';
+			$src = 'min';
 		}
+
+		wp_enqueue_script( 'nf-notifications',
+		NF_PLUGIN_URL . 'assets/js/' . $src .'/notifications' . $suffix . '.js',
+		array( 'jquery' ) );
+
+		wp_localize_script( 'nf-notifications', 'nf_notifications', array( 'activate' => __( 'Activate', 'ninja-forms' ), 'deactivate' => __( 'Deactivate', 'ninja-forms' ) ) );
+	}
+
+	/**
+	 * Enqueue CSS
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function add_css() {
+		wp_enqueue_style( 'nf-notifications',
+		NF_PLUGIN_URL . 'assets/css/notifications.css' );
 	}
 
 	/**
@@ -238,7 +262,7 @@ class NF_Notifications
 
 		if ( 'new' == $n_id ) {
 			$type = $settings['type'];
-			$n_id = nf_insert_notification( $form_id );
+			$n_id = $this->create( $form_id );
 		} else {
 			$type = Ninja_Forms()->notification( $n_id )->type;
 		}
@@ -247,7 +271,10 @@ class NF_Notifications
 
 		foreach ( $settings as $meta_key => $meta_value ) {
 			nf_update_object_meta( $n_id, $meta_key, $meta_value );
-		}		
+		}
+
+		wp_redirect( remove_query_arg( array( 'notification-action' ) ) );
+		die();
 	}
 
 	/**
@@ -263,6 +290,128 @@ class NF_Notifications
 			$types[ $slug ] = $type['nicename'];
 		}
 		return $types;
+	}
+
+	/**
+	 * Delete a notification.
+	 * Hooked into the ajax action for nf_delete_notification
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function delete_notification() {
+		$n_id = $_REQUEST['n_id'];
+		Ninja_Forms()->notification( $n_id )->delete();
+	}
+
+	/**
+	 * Activate a notification.
+	 * Hooked into the ajax action for nf_activate_notification
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function activate_notification() {
+		$n_id = $_REQUEST['n_id'];
+		Ninja_Forms()->notification( $n_id )->activate();
+	}
+
+	/**
+	 * Deactivate a notification.
+	 * Hooked into the ajax action for nf_deactivate_notification
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function deactivate_notification() {
+		$n_id = $_REQUEST['n_id'];
+		Ninja_Forms()->notification( $n_id )->deactivate();
+	}
+
+	/**
+	 * Duplicate our notification
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function duplicate_notification() {
+		if ( ! isset ( $_REQUEST['notification-action'] ) || $_REQUEST['notification-action'] != 'duplicate' )
+			return false;
+
+		$n_id = isset ( $_REQUEST['id'] ) ? $_REQUEST['id'] : '';
+		
+		// Bail if we don't have an ID.
+		if ( '' === $n_id )
+			return false;
+
+		Ninja_Forms()->notification( $n_id )->duplicate();
+
+		wp_redirect( remove_query_arg( array( 'notification-action' ) ) );
+		die();
+	}
+
+	/**
+	 * Create a new notification
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return int $n_id
+	 */
+	public function create( $form_id = '' ) {
+		// Bail if we don't have a form_id
+		if ( '' == $form_id )
+			return false;
+
+		$n_id = nf_insert_notification( $form_id );
+
+		// Activate our new notification
+		Ninja_Forms()->notification( $n_id )->activate();
+
+		return $n_id;
+	}
+
+	/**
+	 * Handle bulk actions
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function bulk_actions() {
+		$action = '';
+
+		if ( isset( $_REQUEST['action2'] ) && -1 != $_REQUEST['action2'] )
+			$action = $_REQUEST['action2'];	
+				
+		if ( isset( $_REQUEST['action'] ) && -1 != $_REQUEST['action'] )
+			$action = $_REQUEST['action'];
+
+		$n_ids = isset ( $_REQUEST['notification'] ) ? $_REQUEST['notification'] : '';
+
+		if ( ! is_array( $n_ids ) || empty( $n_ids ) )
+			return false;
+
+        if( 'delete' === $action ) {
+        	foreach ( $n_ids as $n_id ) {
+                Ninja_Forms()->notification( $n_id )->delete();
+            }
+        } else if ( 'activate' === $action ) {
+        	foreach ( $n_ids as $n_id ) {
+        		Ninja_Forms()->notification( $n_id )->activate();
+        	}
+        } else if ( 'deactivate' === $action ) {
+        	foreach ( $n_ids as $n_id ) {
+        		Ninja_Forms()->notification( $n_id )->deactivate();
+        	}
+        }
+
+        wp_redirect( remove_query_arg( array( 'notification', '_wpnonce', '_wp_http_referer', 'action', 'action2' ) ) );
+        die();
+
 	}
 
 }
