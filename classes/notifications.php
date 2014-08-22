@@ -77,6 +77,10 @@ class NF_Notifications
 	 * @return void
 	 */
 	public function add_js() {
+		$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
+		if ( empty ( $form_id ) )
+			return false;
+
 		if ( defined( 'NINJA_FORMS_JS_DEBUG' ) && NINJA_FORMS_JS_DEBUG ) {
 			$suffix = '';
 			$src = 'dev';
@@ -89,7 +93,38 @@ class NF_Notifications
 		NF_PLUGIN_URL . 'assets/js/' . $src .'/notifications' . $suffix . '.js',
 		array( 'jquery' ) );
 
-		wp_localize_script( 'nf-notifications', 'nf_notifications', array( 'activate' => __( 'Activate', 'ninja-forms' ), 'deactivate' => __( 'Deactivate', 'ninja-forms' ) ) );
+		wp_enqueue_script( 'nf-tokenize',
+		NF_PLUGIN_URL . 'assets/js/' . $src .'/bootstrap-tokenfield' . $suffix . '.js',
+		array( 'jquery', 'jquery-ui-autocomplete' ) );
+
+		$all_fields = Ninja_Forms()->form( $form_id )->fields;
+		$search_fields = array();
+		$fields = array();
+
+		foreach( $all_fields as $field_id => $field ) {
+			$label = strip_tags( nf_get_field_admin_label( $field_id ) );
+
+			$fields[] = array( 'field_id' => $field_id, 'label' => $label );
+
+			if ( $field['type'] == '_text' && isset ( $field['data']['email'] ) && $field['data']['email'] == 1 ) {
+				$search_fields['email'][] = array( 'value' => $field_id, 'label' => $label . ' - ID: ' . $field_id );
+			} else if ( $field['type'] == '_text' && isset ( $field['data']['first_name'] ) && $field['data']['first_name'] == 1 ) {
+				$search_fields['name'][] = array( 'value' => $field_id, 'label' => $label . ' - ID: ' . $field_id );
+			} else if ( $field['type'] == '_text' && isset ( $field['data']['last_name'] ) && $field['data']['last_name'] == 1 ) {
+				$search_fields['name'][] = array( 'value' => $field_id, 'label' => $label . ' - ID: ' . $field_id );
+			}
+		}
+
+		$js_vars = array( 
+			'activate' 		=> __( 'Activate', 'ninja-forms' ), 
+			'deactivate' 	=> __( 'Deactivate', 'ninja-forms' ),
+			'search_fields' => $search_fields,
+			'tokens'		=> array(),
+			'fields'		=> $fields,
+		);
+
+		wp_localize_script( 'nf-notifications', 'nf_notifications', $js_vars );
+	
 	}
 
 	/**
@@ -101,7 +136,13 @@ class NF_Notifications
 	 */
 	public function add_css() {
 		wp_enqueue_style( 'nf-notifications',
-		NF_PLUGIN_URL . 'assets/css/notifications.css' );
+		NF_PLUGIN_URL . 'assets/css/notifications.css' );		
+
+		wp_enqueue_style( 'nf-tokenize',
+		NF_PLUGIN_URL . 'assets/css/bootstrap-tokenfield.css' );
+
+		// wp_enqueue_style( 'nf-bootstrap',
+		// 'http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css' );
 	}
 
 	/**
@@ -273,8 +314,10 @@ class NF_Notifications
 			nf_update_object_meta( $n_id, $meta_key, $meta_value );
 		}
 
-		wp_redirect( remove_query_arg( array( 'notification-action' ) ) );
-		die();
+		if ( 'new' == $n_id ) {
+			wp_redirect( remove_query_arg( array( 'notification-action' ) ) );
+			die();			
+		}
 	}
 
 	/**

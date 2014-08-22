@@ -664,3 +664,23 @@ function Ninja_Forms() {
 }
 
 Ninja_Forms();
+
+function jcorgbuttons( $context ) {
+	$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
+	if ( empty ( $form_id ) )
+		return $context;
+
+	$all_fields = Ninja_Forms()->form( $form_id )->fields;
+
+	$fields = array();
+	$html = '<select id="nf-field">';
+	foreach( $all_fields as $field_id => $field ) {
+		$label = nf_get_field_admin_label( $field_id );
+		$html .= '<option value="' . $field_id . '">' . $label . ' - ID: ' . $field_id . '</option>';
+	}
+	$html .= '</select>';
+	$html .= ' <a href="#" id="nf-insert-field" class="button-secondary">Insert Field</a> <a href="#" id="nf-insert-all-fields" class="button-secondary">Insert All Fields</a>';
+	return $html;
+}
+
+add_action('media_buttons_context','jcorgbuttons');

@@ -63,6 +63,32 @@ function ninja_forms_subval_sort( $a, $subkey ) {
 }
 
 /**
+ * Takes a field ID and returns the admin label if it exists and the label if it does not.
+ * 
+ * @since 2.8
+ * @param int $field_id
+ * @return string $label
+ */
+function nf_get_field_admin_label( $field_id, $form_id = '' ) {
+
+	if ( empty ( $form_id ) ) {
+		$form = ninja_forms_get_form_by_field_id( $field_id );
+		$form_id = $form['id'];
+	}
+
+	$admin_label = isset( Ninja_Forms()->form( $form_id )->fields[ $field_id ]['data']['admin_label'] ) ? Ninja_Forms()->form( $form_id )->fields[ $field_id ]['data']['admin_label'] : '';
+	$field_label = isset( Ninja_Forms()->form( $form_id )->fields[ $field_id ]['data']['label'] ) ? Ninja_Forms()->form( $form_id )->fields[ $field_id ]['data']['label'] : '';
+
+	if ( ! empty( $admin_label ) ) {
+		$label = $admin_label;
+	} else {
+		$label = $field_label;
+	}
+
+	return $label;
+}
+
+/**
  * Return the begin date with an added 00:00:00.
  * Checks for the current date format setting and tries to respect it.
  * 
@@ -357,7 +383,7 @@ function nf_delete_object( $object_id ) {
 /**
  * Create a relationship between two objects
  * 
- * @since 3.0
+ * @since 2.8
  * @param int $child_id
  * @param string child_type
  * @param int $parent_id
@@ -368,8 +394,23 @@ function nf_delete_object( $object_id ) {
 function nf_add_relationship( $child_id, $child_type, $parent_id, $parent_type ) {
 	global $wpdb;
 	// Make sure that our relationship doesn't already exist.
-	$count = $wpdb->query( $wpdb->prepare( 'SELECT id FROM '. NF_OBJECT_RELATIONSHIPS_TABLE_NAME .' WHERE child_id = %d AND parent_id = %d', $child_id, $parent_id ), ARRAY_A );
+	$count = $wpdb->query( $wpdb->prepare( 'SELECT id FROM ' . NF_OBJECT_RELATIONSHIPS_TABLE_NAME .' WHERE child_id = %d AND parent_id = %d', $child_id, $parent_id ), ARRAY_A );
 	if ( empty( $count ) ) {
 		$wpdb->insert( NF_OBJECT_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $child_id, 'child_type' => $child_type, 'parent_id' => $parent_id, 'parent_type' => $parent_type ) );
 	}
+}
+
+/**
+ * Get an object's parent
+ *
+ * @since 2.8
+ * @param int $child_id
+ * @return int $parent_id
+ */
+
+function nf_get_object_parent( $child_id ) {
+	global $wpdb;
+	// Check our relationship table for where this ID appears as a child.
+	$parent = $wpdb->get_row( $wpdb->prepare( 'SELECT parent_id FROM ' . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . ' WHERE child_id = %d', $child_id ), ARRAY_A );
+	return $parent['parent_id'];
 }

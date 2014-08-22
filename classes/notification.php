@@ -31,6 +31,12 @@ class NF_Notification
 	 */
 	var $active = '';
 
+	/**
+	 * @var form_id
+	 * Holds the id of our form.
+	 */
+	var $form_id = '';
+
 
 	/**
 	 * Get things rolling
@@ -42,6 +48,7 @@ class NF_Notification
 		$this->id = $id;
 		$this->type = nf_get_object_meta_value( $id, 'type' );
 		$this->active = ( nf_get_object_meta_value( $id, 'active' ) == 1 ) ? true : false;
+		$this->form_id = nf_get_object_parent( $id );
 	}
 
 	/**
@@ -100,12 +107,15 @@ class NF_Notification
 	 * @return int $n_id
 	 */
 	public function duplicate() {
-		
-		$n_id = Ninja_Forms()->notifications->create( $form_id );
+		$n_id = Ninja_Forms()->notifications->create( $this->form_id );
 		$meta = nf_get_notification_by_id( $this->id );
 		foreach ( $meta as $meta_key => $meta_value ) {
 			nf_update_object_meta( $n_id, $meta_key, $meta_value );
 		}
+
+		$name = nf_get_object_meta_value( $n_id, 'name' ) . ' - ' . __( 'duplicate', 'ninja-forms' );
+		nf_update_object_meta( $n_id, 'name', $name );
+
 	}
 
 }

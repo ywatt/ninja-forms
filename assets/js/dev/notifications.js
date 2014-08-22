@@ -42,4 +42,40 @@ jQuery(document).ready(function($) {
 		});
 	});
 
+	$( '.nf-tokenize' ).each( function() {
+		var limit = $( this ).data( 'token-limit' );
+		var key = $( this ).data( 'key' );
+		var type = $( this ).data( 'type' );
+		$( this ).tokenfield({
+			autocomplete: {
+				source: nf_notifications.search_fields[ type ],
+				delay: 100,
+			},
+			tokens: nf_notifications.tokens[ key ],
+			delimiter: [ ',' ],
+			showAutocompleteOnFocus: true,
+			beautify: false,
+			limit: limit,
+			createTokensOnBlur: true
+		});
+	});
+
+	$( document ).on( 'click', '#nf-insert-field', function(e) {
+		e.preventDefault();
+		var field_id = $( '#nf-field' ).val();
+		var shortcode = '[ninja_forms_field id=' + field_id + ']';
+		window.parent.send_to_editor( shortcode );
+	});
+
+	$( document ).on( 'click', '#nf-insert-all-fields', function(e) {
+		e.preventDefault();
+		var shortcode = '<table><tbody>';
+
+		for ( x = 0; x < nf_notifications.fields.length ; x++ ) {
+			shortcode += '<tr><td>' + nf_notifications.fields[x].label + '</td><td>[ninja_forms_field id=' + nf_notifications.fields[x].field_id + ']</td></tr>';
+		};
+		shortcode += '</tbody></table>';
+		window.parent.send_to_editor( shortcode );
+	});
+
 });

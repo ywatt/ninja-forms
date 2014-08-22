@@ -113,21 +113,28 @@ class NF_Notifications_List_Table extends WP_List_Table {
         
         $base_url = remove_query_arg( array( '_wp_http_referer', '_wpnonce' ) );
 
-        $activate_link = ( Ninja_Forms()->notification( $item['id'] )->active ) ? __( 'Deactivate', 'ninja-forms' ) : __( 'Activate', 'ninja-forms' );
+        $activate_text = ( Ninja_Forms()->notification( $item['id'] )->active ) ? __( 'Deactivate', 'ninja-forms' ) : __( 'Activate', 'ninja-forms' );
+        
         $activate_action = ( Ninja_Forms()->notification( $item['id'] )->active ) ? 'deactivate' : 'activate';
+
+        $activate_url = add_query_arg( array( 'notification-action' => $activate_action, 'id' => $item['id'] ), $base_url );
+        $edit_url = add_query_arg( array( 'notification-action' => 'edit', 'id' => $item['id'] ), $base_url );
+        $delete_url = add_query_arg( array( 'action' => 'delete' ), $base_url );
+        $duplicate_url = add_query_arg( array( 'notification-action' => 'duplicate', 'id' => $item['id'] ), $base_url );
 
         //Build row actions
         $actions = array(
-            'active'    => '<a href="' . add_query_arg( array( 'notification-action' => $activate_action, 'id' => $item['id'] ), $base_url ) . '" class="notification-activate" data-action="' . $activate_action . '" data-n_id="' . $item['id'] . '">' . $activate_link . '</a>',
-            'edit'      => '<a href="' . add_query_arg( array( 'notification-action' => 'edit', 'id' => $item['id'] ), $base_url ) . '">' . __( 'Edit', 'ninja-forms' ) . '</a>',
-            'delete'    => '<a href="' . add_query_arg( array( 'action' => 'delete' ), $base_url ) .'" class="notification-delete" data-n_id="' . $item['id'] . '">' . __( 'Delete', 'ninja-forms' ) . '</a>',
-            'duplicate'    => '<a href="' . add_query_arg( array( 'notification-action' => 'duplicate', 'id' => $item['id'] ), $base_url ) .'">' . __( 'Duiplicate', 'ninja-forms' ) . '</a>',
+            'active'    => '<a href="' . $activate_url . '" class="notification-activate" data-action="' . $activate_action . '" data-n_id="' . $item['id'] . '">' . $activate_text . '</a>',
+            'edit'      => '<a href="' . $edit_url . '">' . __( 'Edit', 'ninja-forms' ) . '</a>',
+            'delete'    => '<a href="' . $delete_url .'" class="notification-delete" data-n_id="' . $item['id'] . '">' . __( 'Delete', 'ninja-forms' ) . '</a>',
+            'duplicate'    => '<a href="' . $duplicate_url .'">' . __( 'Duiplicate', 'ninja-forms' ) . '</a>',
         );
 
         //Return the title contents
-        return sprintf('%1$s %2$s',
-            /*$1%s*/ $item['name'],
-            /*$2%s*/ $this->row_actions($actions)
+        return sprintf( '<a href="%1$s">%2$s</a> %3$s',
+            /*$1%s*/ $edit_url,
+            /*$2%s*/ $item['name'],
+            /*$3%s*/ $this->row_actions($actions)
         );
     }
 
@@ -285,7 +292,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
         /**
          * First, lets decide how many records per page to show
          */
-        $per_page = 5;
+        $per_page = 99999;
         
         
         /**
