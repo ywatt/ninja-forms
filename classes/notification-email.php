@@ -27,7 +27,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	 * @return void
 	 */
 	public function edit_screen( $id = '' ) {
-		$form_id = Ninja_Forms()->notification( $id )->form_id;
+		$form_id = ( '' != $id ) ? Ninja_Forms()->notification( $id )->form_id : '';
 
 		$from_name = nf_get_object_meta_value( $id, 'from_name' );
 		$from_address = nf_get_object_meta_value( $id, 'from_address' );
@@ -86,13 +86,21 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		</tr>
 
 		<?php
-
-		$from_name = $this->get_value( $id, 'from_name', $form_id );
-		$from_address = $this->get_value( $id, 'from_address', $form_id );
-		$reply_to = $this->get_value( $id, 'reply_to', $form_id );
-		$to = $this->get_value( $id, 'to', $form_id );
-		$cc = $this->get_value( $id, 'cc', $form_id );
-		$bcc = $this->get_value( $id, 'bcc', $form_id );
+		if ( '' != $form_id ) {
+			$from_name = $this->get_value( $id, 'from_name', $form_id );
+			$from_address = $this->get_value( $id, 'from_address', $form_id );
+			$reply_to = $this->get_value( $id, 'reply_to', $form_id );
+			$to = $this->get_value( $id, 'to', $form_id );
+			$cc = $this->get_value( $id, 'cc', $form_id );
+			$bcc = $this->get_value( $id, 'bcc', $form_id );			
+		} else {
+			$from_name = '';
+			$from_address = '';
+			$reply_to = '';
+			$to = '';
+			$cc = '';
+			$bcc = '';
+		}
 
 		?>
 
