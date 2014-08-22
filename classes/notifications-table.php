@@ -127,7 +127,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
             'active'    => '<a href="' . $activate_url . '" class="notification-activate" data-action="' . $activate_action . '" data-n_id="' . $item['id'] . '">' . $activate_text . '</a>',
             'edit'      => '<a href="' . $edit_url . '">' . __( 'Edit', 'ninja-forms' ) . '</a>',
             'delete'    => '<a href="' . $delete_url .'" class="notification-delete" data-n_id="' . $item['id'] . '">' . __( 'Delete', 'ninja-forms' ) . '</a>',
-            'duplicate'    => '<a href="' . $duplicate_url .'">' . __( 'Duiplicate', 'ninja-forms' ) . '</a>',
+            'duplicate'    => '<a href="' . $duplicate_url .'">' . __( 'Duplicate', 'ninja-forms' ) . '</a>',
         );
 
         //Return the title contents

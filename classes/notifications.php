@@ -23,14 +23,16 @@ class NF_Notifications
 	 */
 	function __construct() {
 		global $pagenow;
-
+		// Register our notification tab
 		add_action( 'admin_init', array( $this, 'register_tab' ) );
 		
+		// Only add these actions if we are actually on the notification tab.
 		if ( 'admin.php' == $pagenow && isset ( $_REQUEST['page'] ) && $_REQUEST['page'] == 'ninja-forms' && isset ( $_REQUEST['tab'] ) && $_REQUEST['tab'] == 'notifications' ) {
 			add_action( 'admin_init', array( $this, 'add_js' ) );
 			add_action( 'admin_init', array( $this, 'add_css' ) );
 			add_action( 'admin_init', array( $this, 'bulk_actions' ) );
 			add_action( 'admin_init', array( $this, 'duplicate_notification' ) );
+			add_filter( 'media_buttons_context', array( $this, 'tinymce_buttons' ) );
 		}
 
 		add_action( 'wp_ajax_nf_delete_notification', array( $this, 'delete_notification' ) );
@@ -62,7 +64,7 @@ class NF_Notifications
 			'save_function' => array( $this, 'save_admin' ),
 			'disable_no_form_id' => true,
 			'show_save' => true,
-			'tab_reload' => false,
+			'tab_reload' => true,
 			'output_form' => $output_form,
 		);
 
@@ -77,6 +79,8 @@ class NF_Notifications
 	 * @return void
 	 */
 	public function add_js() {
+		global $ninja_forms_fields;
+
 		$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
 		if ( empty ( $form_id ) )
 			return false;
@@ -95,33 +99,69 @@ class NF_Notifications
 
 		wp_enqueue_script( 'nf-tokenize',
 		NF_PLUGIN_URL . 'assets/js/' . $src .'/bootstrap-tokenfield' . $suffix . '.js',
-		array( 'jquery', 'jquery-ui-autocomplete' ) );
+		array( 'jquery', 'jquery-ui-autocomplete' ) );		
+
+		wp_enqueue_script( 'nf-combobox',
+		NF_PLUGIN_URL . 'assets/js/' . $src .'/combobox' . $suffix . '.js',
+		array( 'jquery', 'jquery-ui-core', 'jquery-ui-button', 'jquery-ui-autocomplete' ) );
 
 		$all_fields = Ninja_Forms()->form( $form_id )->fields;
+		$process_fields = array();
 		$search_fields = array();
 		$fields = array();
-
+		// Generate our search fields JS var.
 		foreach( $all_fields as $field_id => $field ) {
 			$label = strip_tags( nf_get_field_admin_label( $field_id ) );
 
-			$fields[] = array( 'field_id' => $field_id, 'label' => $label );
+			$fields[ $field_id ] = array( 'field_id' => $field_id, 'label' => $label );
+
+			if ( strlen( $label ) > 30 ) {
+				$tmp_label = substr( $label, 0, 30 );
+			} else {
+				$tmp_label = $label;
+			}
+
+			$tmp_array = array( 'value' => $field_id, 'label' => $tmp_label . ' - ID: ' . $field_id );
+
+			// Check to see if this field is supposed to be "processed"
+			$type = $field['type'];
+			if ( isset ( $ninja_forms_fields[ $type ]['process_field'] ) && $ninja_forms_fields[ $type ]['process_field'] ) {
+				$process_fields[ $field_id ] = array( 'field_id' => $field_id, 'label' => $label );
+				$search_fields['all'][] = $tmp_array;
+			}
 
 			if ( $field['type'] == '_text' && isset ( $field['data']['email'] ) && $field['data']['email'] == 1 ) {
-				$search_fields['email'][] = array( 'value' => $field_id, 'label' => $label . ' - ID: ' . $field_id );
+				$search_fields['email'][] = $tmp_array;
 			} else if ( $field['type'] == '_text' && isset ( $field['data']['first_name'] ) && $field['data']['first_name'] == 1 ) {
-				$search_fields['name'][] = array( 'value' => $field_id, 'label' => $label . ' - ID: ' . $field_id );
+				$search_fields['name'][] = $tmp_array;
 			} else if ( $field['type'] == '_text' && isset ( $field['data']['last_name'] ) && $field['data']['last_name'] == 1 ) {
-				$search_fields['name'][] = array( 'value' => $field_id, 'label' => $label . ' - ID: ' . $field_id );
+				$search_fields['name'][] = $tmp_array;
 			}
+
 		}
 
-		$js_vars = array( 
-			'activate' 		=> __( 'Activate', 'ninja-forms' ), 
-			'deactivate' 	=> __( 'Deactivate', 'ninja-forms' ),
-			'search_fields' => $search_fields,
-			'tokens'		=> array(),
-			'fields'		=> $fields,
-		);
+		// Add our "process_fields" to our form global
+		Ninja_Forms()->form( $form_id )->process_fields = $process_fields;
+
+		// Generate our "all fields" table for use as a JS var.
+		$all_fields_table = '<table><tbody>';
+
+		foreach ( $process_fields as $field_id => $field ) {
+			$label = apply_filters( 'nf_notification_admin_all_fields_field_label', $field['label'] );
+			$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .'</td><td>[ninja_forms_field id=' . $field_id . ']</td></tr>'; 
+		}
+		
+		$all_fields_table .= '</tbody></table>';
+
+		$js_vars = apply_filters( 'nf_notification_admin_js_vars', array( 
+			'activate' 			=> __( 'Activate', 'ninja-forms' ), 
+			'deactivate' 		=> __( 'Deactivate', 'ninja-forms' ),
+			'search_fields' 	=> $search_fields,
+			'tokens'			=> array(),
+			'all_fields'		=> $fields,
+			'all_fields_table' 	=> $all_fields_table,
+			'process_fields'	=> $process_fields,
+		) );
 
 		wp_localize_script( 'nf-notifications', 'nf_notifications', $js_vars );
 	
@@ -139,7 +179,10 @@ class NF_Notifications
 		NF_PLUGIN_URL . 'assets/css/notifications.css' );		
 
 		wp_enqueue_style( 'nf-tokenize',
-		NF_PLUGIN_URL . 'assets/css/bootstrap-tokenfield.css' );
+		NF_PLUGIN_URL . 'assets/css/bootstrap-tokenfield.css' );		
+
+		wp_enqueue_style( 'nf-combobox',
+		NF_PLUGIN_URL . 'assets/css/combobox.css' );
 
 		// wp_enqueue_style( 'nf-bootstrap',
 		// 'http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css' );
@@ -316,8 +359,10 @@ class NF_Notifications
 
 		if ( 'new' == $n_id ) {
 			wp_redirect( remove_query_arg( array( 'notification-action' ) ) );
-			die();			
+			die();
 		}
+
+		return __( 'Notification Updated', 'ninja-forms' );
 	}
 
 	/**
@@ -454,7 +499,37 @@ class NF_Notifications
 
         wp_redirect( remove_query_arg( array( 'notification', '_wpnonce', '_wp_http_referer', 'action', 'action2' ) ) );
         die();
+	}
 
+	/**
+	 * Output our tinyMCE field buttons
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function tinymce_buttons( $context ) {
+		$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
+		if ( empty ( $form_id ) )
+			return $context;
+
+		$all_fields = Ninja_Forms()->form( $form_id )->process_fields;
+		$first_option = __( 'Select a field or type to search', 'ninja-forms' );
+
+		$fields = array();
+		$html = '<select class="nf-fields-combobox" data-first-option="' . $first_option . '">';
+		$html .= '<option value="">' . $first_option .'</option>';
+		foreach( $all_fields as $field_id => $field ) {
+			$label = $field['label'];
+			if ( strlen( $label ) > 30 )
+				$label = substr( $label, 0, 30 ) . '...';
+
+			$html .= '<option value="' . $field_id . '">' . $label . ' - ID: ' . $field_id . '</option>';
+		}
+		$html .= '</select>';
+		$html .= ' <a href="#" class="button-secondary nf-insert-field">Insert Field</a> <a href="#" class="button-secondary nf-insert-all-fields">Insert All Fields</a>';
+
+		return $html;
 	}
 
 }

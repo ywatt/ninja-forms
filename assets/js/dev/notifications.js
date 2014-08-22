@@ -1,4 +1,6 @@
 jQuery(document).ready(function($) {
+
+
 	$( '#settings-type' ).change( function() {
 		var val = this.value;
 		$( '.notification-type' ).hide();
@@ -52,7 +54,7 @@ jQuery(document).ready(function($) {
 				delay: 100,
 			},
 			tokens: nf_notifications.tokens[ key ],
-			delimiter: [ ',' ],
+			delimiter: [ '|' ],
 			showAutocompleteOnFocus: true,
 			beautify: false,
 			limit: limit,
@@ -60,22 +62,40 @@ jQuery(document).ready(function($) {
 		});
 	});
 
-	$( document ).on( 'click', '#nf-insert-field', function(e) {
+	$( document ).on( 'click', '.nf-insert-field', function(e) {
 		e.preventDefault();
-		var field_id = $( '#nf-field' ).val();
-		var shortcode = '[ninja_forms_field id=' + field_id + ']';
+		var field_id = $( this ).prev().prev( '.nf-fields-combobox' ).val();
+		if ( field_id != '' && field_id != null ) {
+			var shortcode = '[ninja_forms_field id=' + field_id + ']';
+			window.parent.send_to_editor( shortcode );			
+		}
+	});
+
+	$( document ).on( 'click', '.nf-insert-all-fields', function(e) {
+		e.preventDefault();
+		var shortcode = nf_notifications.all_fields_table;		
 		window.parent.send_to_editor( shortcode );
 	});
 
-	$( document ).on( 'click', '#nf-insert-all-fields', function(e) {
-		e.preventDefault();
-		var shortcode = '<table><tbody>';
+	$( '.nf-fields-combobox' ).combobox();
 
-		for ( x = 0; x < nf_notifications.fields.length ; x++ ) {
-			shortcode += '<tr><td>' + nf_notifications.fields[x].label + '</td><td>[ninja_forms_field id=' + nf_notifications.fields[x].field_id + ']</td></tr>';
-		};
-		shortcode += '</tbody></table>';
-		window.parent.send_to_editor( shortcode );
+	$( '.ui-combobox-input' ).focus( function(e) {
+		var selected = $( this ).parent().prev( '.nf-fields-combobox' ).val();
+		if ( selected == '' || selected == null ) {
+			this.value = '';
+		} else {
+			$( this ).select();
+		}
+	});
+
+	$( '.ui-combobox-input' ).mouseup(function(e){
+		e.preventDefault();
+	});
+
+	$( '.ui-combobox-input' ).blur( function(e) {
+		if ( this.value == '' ) {
+			this.value = $( this ).parent().prev( '.nf-fields-combobox' ).data( 'first-option' );
+		}
 	});
 
 });

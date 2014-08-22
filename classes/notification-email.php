@@ -35,12 +35,13 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$to = nf_get_object_meta_value( $id, 'to' );
 		$cc = nf_get_object_meta_value( $id, 'cc' );
 		$bcc = nf_get_object_meta_value( $id, 'bcc' );
+		$subject = nf_get_object_meta_value( $id, 'subject' );
 		
 		?>
 		<tr>
 			<th scope="row"><label for="settings-from_name"><?php _e( 'From Name', 'ninja-forms' ); ?></label></th>
 			<td>
-				<input name="settings[from_name]" type="text" id="settings-from_name" value="<?php echo $from_name; ?>" class="nf-tokenize" placeholder="Name or fields" data-token-limit="2" data-key="from_name" data-type="name" />
+				<input name="settings[from_name]" type="text" id="settings-from_name" value="<?php echo $from_name; ?>" class="nf-tokenize" placeholder="Name or fields" data-token-limit="0" data-key="from_name" data-type="name" />
 			</td>
 		</tr>
 		<tr>
@@ -72,6 +73,12 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			<td>
 				<input name="settings[bcc]" type="text" id="settings-bcc" value="<?php echo $bcc; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="bcc" data-type="email" />
 			</td>
+		</tr>
+		<tr>
+			<th scope="row"><label for="settings-subject"><?php _e( 'Subject', 'ninja-forms' ); ?></label></th>
+			<td>
+				<input name="settings[subject]" type="text" id="settings-subject" value="<?php echo $subject; ?>" class="nf-tokenize" placeholder="Subject Text or search for a field" data-token-limit="0" data-key="subject" data-type="all" />
+			</td>
 		</tr>		
 		<tr>
 			<th scope="row"><label for="settings-email_message"><?php _e( 'Email Message', 'ninja-forms' ); ?></label></th>
@@ -93,6 +100,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$to = $this->get_value( $id, 'to', $form_id );
 			$cc = $this->get_value( $id, 'cc', $form_id );
 			$bcc = $this->get_value( $id, 'bcc', $form_id );			
+			$subject = $this->get_value( $id, 'subject', $form_id );			
 		} else {
 			$from_name = '';
 			$from_address = '';
@@ -100,6 +108,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$to = '';
 			$cc = '';
 			$bcc = '';
+			$subject = '';
 		}
 
 		?>
@@ -111,6 +120,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 				nf_notifications.tokens['to'] = <?php echo json_encode( $to ); ?>;
 				nf_notifications.tokens['cc'] = <?php echo json_encode( $cc ); ?>;
 				nf_notifications.tokens['bcc'] = <?php echo json_encode( $bcc ); ?>;
+				nf_notifications.tokens['subject'] = <?php echo json_encode( $subject ); ?>;
 		</script>
 
 		<?php
@@ -125,12 +135,16 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	 */
 	public function get_value( $id, $meta_key, $form_id ) {
 		$meta_value = nf_get_object_meta_value( $id, $meta_key );
-		$meta_value = explode( ',', $meta_value );
+		$meta_value = explode( '|', $meta_value );
 
 		$return = array();
 		foreach( $meta_value as $val ) {
 			if ( is_numeric( $val ) ) {
 				$label = nf_get_field_admin_label( $val, $form_id );
+				if ( strlen( $label ) > 30 ) {
+					$label = substr( $label, 0, 30 );
+				}
+
 				$return[] = array( 'value' => $val, 'label' => $label . ' - ID: ' . $val );
 			} else {
 				$return[] = array( 'value' => $val, 'label' => $val );
