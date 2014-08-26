@@ -1,9 +1,12 @@
 <?php
 /**
- * Notifications
+ * Main Notifications Class
  *
  * Adds our notifications to the form edit page.
  * Gets notification types
+ * Listens for ajax commands to delete/activate/deactivate notifications
+ * Listens for bulk actions from the notifications admin page
+ * Adds notification types processing to the appropriate action hook
  *
  * @package     Ninja Forms
  * @subpackage  Classes/Notifications
@@ -23,6 +26,7 @@ class NF_Notifications
 	 */
 	function __construct() {
 		global $pagenow;
+
 		// Register our notification tab
 		add_action( 'admin_init', array( $this, 'register_tab' ) );
 		
@@ -38,6 +42,9 @@ class NF_Notifications
 		add_action( 'wp_ajax_nf_delete_notification', array( $this, 'delete_notification' ) );
 		add_action( 'wp_ajax_nf_activate_notification', array( $this, 'activate_notification' ) );
 		add_action( 'wp_ajax_nf_deactivate_notification', array( $this, 'deactivate_notification' ) );
+
+		// Add our hook to add notification types processors.
+		add_action( 'ninja_forms_post_process', array( $this, 'notification_processing' ), 999 );
 	}
 
 	/**
@@ -123,10 +130,14 @@ class NF_Notifications
 
 			$tmp_array = array( 'value' => $field_id, 'label' => $tmp_label . ' - ID: ' . $field_id );
 
+			$admin_label = $label;
+
+			$label = isset( $field['data']['label'] ) ? $field['data']['label'] : '';
+
 			// Check to see if this field is supposed to be "processed"
 			$type = $field['type'];
 			if ( isset ( $ninja_forms_fields[ $type ]['process_field'] ) && $ninja_forms_fields[ $type ]['process_field'] ) {
-				$process_fields[ $field_id ] = array( 'field_id' => $field_id, 'label' => $label );
+				$process_fields[ $field_id ] = array( 'field_id' => $field_id, 'label' => $label, 'admin_label' => $admin_label );
 				$search_fields['all'][] = $tmp_array;
 			}
 
@@ -147,7 +158,7 @@ class NF_Notifications
 		$all_fields_table = '<table><tbody>';
 
 		foreach ( $process_fields as $field_id => $field ) {
-			$label = apply_filters( 'nf_notification_admin_all_fields_field_label', $field['label'] );
+			$label = strip_tags( apply_filters( 'nf_notification_admin_all_fields_field_label', $field['label'] ) );
 			$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .'</td><td>[ninja_forms_field id=' . $field_id . ']</td></tr>'; 
 		}
 		
@@ -229,7 +240,7 @@ class NF_Notifications
 
 			$this_type = Ninja_Forms()->notification( $id )->type;
 			?>
-			<h2><?php _e( 'Edit Notification', 'ninja-forms' ); ?> - ID <?php echo $_REQUEST['id']; ?> <a href="<?php echo remove_query_arg( array( 'notification-action', 'id' ) );?>" class="button-secondary"><?php _e( 'Back To List', 'ninja-forms' );?></a></h2>
+			<h2><?php _e( 'Edit Notification', 'ninja-forms' ); ?> - ID <?php echo $_REQUEST['id']; ?> <a href="<?php echo remove_query_arg( array( 'notification-action', 'id', 'update_message' ) );?>" class="button-secondary"><?php _e( 'Back To List', 'ninja-forms' );?></a></h2>
 
 			<input type="hidden" id="notification_id" name="notification_id" value="<?php echo $id; ?>" />
 			<table class="form-table">
@@ -530,6 +541,27 @@ class NF_Notifications
 		$html .= ' <a href="#" class="button-secondary nf-insert-field">Insert Field</a> <a href="#" class="button-secondary nf-insert-all-fields">Insert All Fields</a>';
 
 		return $html;
+	}
+
+	/**
+	 * Loop through our notifications and add their processing functions to the appropriate hook.
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function notification_processing() {
+		global $ninja_forms_processing;
+
+		$form_id = $ninja_forms_processing->get_form_ID();
+		$notifications = nf_get_notifications_by_form_id( $form_id, false );
+		if ( is_array( $notifications ) ) {
+			foreach ( $notifications as $id ) {
+				if ( Ninja_Forms()->notification( $id )->active ) {
+					Ninja_Forms()->notification( $id )->process();
+				}
+			}
+		}
 	}
 
 }

@@ -54,7 +54,7 @@ jQuery(document).ready(function($) {
 				delay: 100,
 			},
 			tokens: nf_notifications.tokens[ key ],
-			delimiter: [ '|' ],
+			delimiter: [ '`' ],
 			showAutocompleteOnFocus: true,
 			beautify: false,
 			limit: limit,

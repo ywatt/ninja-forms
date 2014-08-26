@@ -35,4 +35,19 @@ class NF_Notification_Redirect extends NF_Notification_Base_Type
 		<?php
 	}
 
+	/**
+	 * Process our Redirect notification
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function process( $id ) {
+		global $ninja_forms_processing;
+
+		$redirect_url = Ninja_Forms()->notification( $id )->get_setting( 'redirect_url' );
+
+		$ninja_forms_processing->update_form_setting( 'landing_page', $redirect_url );
+	}
+
 }

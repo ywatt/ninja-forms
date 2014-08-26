@@ -28,7 +28,7 @@ class NF_Notification_Success_Message extends NF_Notification_Base_Type
 	 */
 	public function edit_screen( $id = '' ) {
 		$settings = array(
-			'textarea_name' => 'settings[success_message]',
+			'textarea_name' => 'settings[success_msg]',
 		);
 		$loc_opts = apply_filters( 'nf_success_message_locations',
 			array(
@@ -52,13 +52,29 @@ class NF_Notification_Success_Message extends NF_Notification_Base_Type
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="success_message"><?php _e( 'Message', 'ninja-forms' ); ?></label></th>
+			<th scope="row"><label for="success_msg"><?php _e( 'Message', 'ninja-forms' ); ?></label></th>
 			<td>
-				<?php wp_editor( nf_get_object_meta_value( $id, 'success_message' ), 'success_message', $settings ); ?>
+				<?php wp_editor( nf_get_object_meta_value( $id, 'success_msg' ), 'success_msg', $settings ); ?>
 			</td>
 		</tr>
 
 		<?php
+	}
+
+	/**
+	 * Process our Success Message notification
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function process( $id ) {
+		global $ninja_forms_processing;
+
+		$success = Ninja_Forms()->notification( $id )->get_setting( 'success_msg' );
+		$success = do_shortcode( wpautop( $success ) );
+
+		$ninja_forms_processing->add_success_msg( 'success_msg', $success );
 	}
 
 }

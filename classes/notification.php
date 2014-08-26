@@ -115,7 +115,29 @@ class NF_Notification
 
 		$name = nf_get_object_meta_value( $n_id, 'name' ) . ' - ' . __( 'duplicate', 'ninja-forms' );
 		nf_update_object_meta( $n_id, 'name', $name );
+	}
 
+	/**
+	 * Run our notification processing function
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return void
+	 */
+	public function process() {
+		$type = $this->type;
+		Ninja_Forms()->notification_types->$type->process( $this->id );
+	}
+
+	/**
+	 * Get a notification setting
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return string $meta_value
+	 */
+	public function get_setting( $meta_key ) {
+		return nf_get_object_meta_value( $this->id, $meta_key );
 	}
 
 }
