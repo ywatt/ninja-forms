@@ -142,7 +142,7 @@ function ninja_forms_activation( $network_wide ){
 		  PRIMARY KEY (`id`)
 		) DEFAULT CHARSET=utf8 ;";
 
-		dbDelta($sql);
+		//dbDelta($sql);
 
 		$title = ninja_forms_get_preview_page_title();
 	    $preview_page = get_page_by_title( $title );
