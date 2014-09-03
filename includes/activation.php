@@ -158,7 +158,7 @@ function ninja_forms_activation( $network_wide ){
 		  PRIMARY KEY (`id`)
 		) DEFAULT CHARSET=utf8 ;";
 
-		dbDelta($sql);
+		//dbDelta($sql);
 
 		if( version_compare( $current_version, '2.0' , '<' ) ){
 			if( isset( $plugin_settings['upload_dir'] ) ){
