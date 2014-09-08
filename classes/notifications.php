@@ -102,7 +102,7 @@ class NF_Notifications
 
 		wp_enqueue_script( 'nf-notifications',
 		NF_PLUGIN_URL . 'assets/js/' . $src .'/notifications' . $suffix . '.js',
-		array( 'jquery' ) );
+		array( 'jquery', 'jquery-ui-autocomplete' ) );
 
 		wp_enqueue_script( 'nf-tokenize',
 		NF_PLUGIN_URL . 'assets/js/' . $src .'/bootstrap-tokenfield' . $suffix . '.js',
@@ -115,10 +115,12 @@ class NF_Notifications
 		$all_fields = Ninja_Forms()->form( $form_id )->fields;
 		$process_fields = array();
 		$search_fields = array();
+		$search_fields['email'] = array();
+		$search_fields['name'] = array();
 		$fields = array();
 		// Generate our search fields JS var.
 		foreach( $all_fields as $field_id => $field ) {
-			$label = strip_tags( nf_get_field_admin_label( $field_id ) );
+			$label = esc_attr( nf_get_field_admin_label( $field_id ) );
 
 			$fields[ $field_id ] = array( 'field_id' => $field_id, 'label' => $label );
 
@@ -148,7 +150,6 @@ class NF_Notifications
 			} else if ( $field['type'] == '_text' && isset ( $field['data']['last_name'] ) && $field['data']['last_name'] == 1 ) {
 				$search_fields['name'][] = $tmp_array;
 			}
-
 		}
 
 		// Add our "process_fields" to our form global
