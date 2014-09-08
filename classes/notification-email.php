@@ -29,16 +29,30 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	public function edit_screen( $id = '' ) {
 		$form_id = ( '' != $id ) ? Ninja_Forms()->notification( $id )->form_id : '';
 
-		$email_format = Ninja_Forms()->notification( $id )->get_setting( 'email_format' );
-		$from_name = Ninja_Forms()->notification( $id )->get_setting( 'from_name' );
-		$from_address = Ninja_Forms()->notification( $id )->get_setting( 'from_address' );
-		$reply_to = Ninja_Forms()->notification( $id )->get_setting( 'reply_to' );
-		$to = Ninja_Forms()->notification( $id )->get_setting( 'to' );
-		$cc = Ninja_Forms()->notification( $id )->get_setting( 'cc' );
-		$bcc = Ninja_Forms()->notification( $id )->get_setting( 'bcc' );
-		$email_subject = Ninja_Forms()->notification( $id )->get_setting( 'email_subject' );
-		$email_message = Ninja_Forms()->notification( $id )->get_setting( 'email_message' );
-		$attach_csv = Ninja_Forms()->notification( $id )->get_setting( 'attach_csv' );
+		if ( $id == '' ) {
+			$email_format = 'html';
+			$from_name = '';
+			$from_address = '';
+			$reply_to = '';
+			$to = '';
+			$cc = '';
+			$bcc = '';
+			$email_subject = '';
+			$email_message = '';
+			$attach_csv = '';
+		} else {
+			$email_format = Ninja_Forms()->notification( $id )->get_setting( 'email_format' );
+			$from_name = Ninja_Forms()->notification( $id )->get_setting( 'from_name' );
+			$from_address = Ninja_Forms()->notification( $id )->get_setting( 'from_address' );
+			$reply_to = Ninja_Forms()->notification( $id )->get_setting( 'reply_to' );
+			$to = Ninja_Forms()->notification( $id )->get_setting( 'to' );
+			$cc = Ninja_Forms()->notification( $id )->get_setting( 'cc' );
+			$bcc = Ninja_Forms()->notification( $id )->get_setting( 'bcc' );
+			$email_subject = Ninja_Forms()->notification( $id )->get_setting( 'email_subject' );
+			$email_message = Ninja_Forms()->notification( $id )->get_setting( 'email_message' );
+			$attach_csv = Ninja_Forms()->notification( $id )->get_setting( 'attach_csv' );			
+		}
+
 		
 		?>
 		<tr>
