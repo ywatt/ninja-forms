@@ -255,7 +255,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			}
 		}
 
-		$csv_attachment = array();
+		$csv_attachment = '';
 		$attachments = array();
 
 		if ( $ninja_forms_processing->get_form_setting( 'email_attachments' ) ) {
