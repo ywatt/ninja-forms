@@ -38,11 +38,11 @@ function ninja_forms_register_field_textbox(){
 				'type' => 'hidden',
 				'name' => 'last_name',
 			),
-			array(
-				'type' => 'checkbox',
-				'name' => 'from_name',
-				'label' => __( 'Use this as the "From" and Reply-To email name for Administrative recipients of this form?', 'ninja-forms' ),
-			),
+			// array(
+			// 	'type' => 'checkbox',
+			// 	'name' => 'from_name',
+			// 	'label' => __( 'Use this as the "From" and Reply-To email name for Administrative recipients of this form?', 'ninja-forms' ),
+			// ),
 			array(
 				'type' => 'hidden',
 				'name' => 'user_address_1',
