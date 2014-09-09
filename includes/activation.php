@@ -64,7 +64,7 @@ function ninja_forms_activation( $network_wide ){
 
 		$opt = $plugin_settings;
 
-		if( version_compare( $current_version, '2.0' , '<' ) ){
+		if( ! empty( $current_version ) && version_compare( $current_version, '2.0' , '<' ) ){
 			nf_pre_20_activation( $current_version );
 			$opt = nf_pre_20_opts();
 		}
