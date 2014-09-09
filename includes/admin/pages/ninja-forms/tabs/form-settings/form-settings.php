@@ -80,7 +80,7 @@ function ninja_forms_register_form_settings_basic_email_metabox(){
 	ninja_forms_register_tab_metabox($args);
 }
 
-//add_action( 'admin_init', 'ninja_forms_register_form_settings_basic_email_metabox' );
+// add_action( 'admin_init', 'ninja_forms_register_form_settings_basic_email_metabox' );
 
 function ninja_forms_register_form_settings_admin_email_metabox(){
 	$args = apply_filters( 'ninja_forms_form_settings_admin_email', array(
@@ -128,7 +128,7 @@ function ninja_forms_register_form_settings_admin_email_metabox(){
 	ninja_forms_register_tab_metabox($args);
 }
 
-//add_action( 'admin_init', 'ninja_forms_register_form_settings_admin_email_metabox' );
+// add_action( 'admin_init', 'ninja_forms_register_form_settings_admin_email_metabox' );
 
 function ninja_forms_register_form_settings_user_email_metabox(){
 	$args = apply_filters( 'ninja_forms_form_settings_user_email', array(
@@ -160,7 +160,7 @@ function ninja_forms_register_form_settings_user_email_metabox(){
 	ninja_forms_register_tab_metabox($args);
 }
 
-//add_action( 'admin_init', 'ninja_forms_register_form_settings_user_email_metabox' );
+// add_action( 'admin_init', 'ninja_forms_register_form_settings_user_email_metabox' );
 
 function ninja_forms_register_form_settings_basic_metabox(){
 
