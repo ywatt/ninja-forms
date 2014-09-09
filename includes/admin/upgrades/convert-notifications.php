@@ -276,6 +276,16 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 				Ninja_Forms()->notification( $n_id )->update_setting( 'email_message', $email_message );
 			}
 		}
+
+		if ( isset ( $form_settings['success_msg'] ) ) {
+			// Create a notification for our success message
+			$n_id = nf_insert_notification( $form_id );
+			nf_update_object_meta( $n_id, 'name', __( 'Success Message', 'ninja-forms' ) );
+			nf_update_object_meta( $n_id, 'type', 'success_msg' );
+			nf_update_object_meta( $n_id, 'active', 1 );
+			nf_update_object_meta( $n_id, 'success_msg', $form_settings['success_msg'] );
+		}
+
 		$completed_forms = get_option( 'nf_convert_notifications_forms' );
 		if ( ! is_array( $completed_forms ) || empty ( $completed_forms ) ) {
 			$completed_forms = array( $form_id );
@@ -291,6 +301,9 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 			unset( $form_settings['admin_subject'] );
 			unset( $form_settings['admin_email_msg'] );
 			unset( $form_settings['admin_email_fields'] );
+			unset( $form_settings['success_msg'] );
+			unset( $form_settings['user_email_msg'] );
+			unset( $form_settings['user_subject'] );
 
 			$args = array(
 				'update_array' 	=> array(
