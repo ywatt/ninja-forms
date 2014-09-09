@@ -131,37 +131,6 @@ function ninja_forms_activation( $network_wide ){
 
 		dbDelta($sql);
 
-		$title = ninja_forms_get_preview_page_title();
-	    $preview_page = get_page_by_title( $title );
-		if( !$preview_page ) {
-			// Create preview page object
-			$preview_post = array(
-				'post_title' => $title,
-				'post_content' => 'This is a preview of how this form will appear on your website',
-				'post_status' => 'draft',
-				'post_type' => 'page'
-			);
-
-			// Insert the page into the database
-			$page_id = wp_insert_post( $preview_post );
-	 	}else{
-	 		$page_id = $preview_page->ID;
-	 	}
-
-		$opt['preview_id'] = $page_id;
-
-	 	$opt['version'] = NF_PLUGIN_VERSION;
-
-	 	update_option( "ninja_forms_settings", $opt );
-
-	 	// check for an existing form
-	 	$starter_form_exists = ninja_forms_starter_form_exists();
-
-	 	if ( ! $starter_form_exists ) {
-	 		// if a starter form doesn't exist them create it
-	 		ninja_forms_add_starter_form();
-	 	}
-
 	 	/**
 	 	 * Add our table structure for version 2.8.
 	 	 */
@@ -198,6 +167,37 @@ function ninja_forms_activation( $network_wide ){
 		) DEFAULT CHARSET=utf8;";
 
 		dbDelta( $sql );
+
+		$title = ninja_forms_get_preview_page_title();
+	    $preview_page = get_page_by_title( $title );
+		if( !$preview_page ) {
+			// Create preview page object
+			$preview_post = array(
+				'post_title' => $title,
+				'post_content' => 'This is a preview of how this form will appear on your website',
+				'post_status' => 'draft',
+				'post_type' => 'page'
+			);
+
+			// Insert the page into the database
+			$page_id = wp_insert_post( $preview_post );
+	 	}else{
+	 		$page_id = $preview_page->ID;
+	 	}
+
+		$opt['preview_id'] = $page_id;
+
+	 	$opt['version'] = NF_PLUGIN_VERSION;
+
+	 	update_option( "ninja_forms_settings", $opt );
+
+	 	// check for an existing form
+	 	$starter_form_exists = ninja_forms_starter_form_exists();
+
+	 	if ( ! $starter_form_exists ) {
+	 		// if a starter form doesn't exist them create it
+	 		ninja_forms_add_starter_form();
+	 	}
 
 		update_option( 'nf_convert_notifications_complete', true);
 		update_option( 'nf_convert_subs_step', 'complete' );
