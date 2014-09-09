@@ -311,7 +311,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 		// Delete our admin CSV if one is present.
 		if ( file_exists( $csv_attachment ) ) {
-			//unlink ( $csv_attachment );
+			unlink ( $csv_attachment );
 		}
 
 	}

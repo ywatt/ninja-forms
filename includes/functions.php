@@ -414,3 +414,17 @@ function nf_get_object_parent( $child_id ) {
 	$parent = $wpdb->get_row( $wpdb->prepare( 'SELECT parent_id FROM ' . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . ' WHERE child_id = %d', $child_id ), ARRAY_A );
 	return $parent['parent_id'];
 }
+
+/**
+ * Return our form count
+ *
+ * @since 2.8
+ * @return int $count
+ */
+
+function nf_get_form_count() {
+	global $wpdb;
+
+	$count = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . NINJA_FORMS_TABLE_NAME );
+	return $count;
+}

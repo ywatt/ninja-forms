@@ -128,6 +128,7 @@ class Ninja_Forms {
 		if ( is_admin() ) {
 			self::$instance->step_processing = new NF_Step_Processing();
 			self::$instance->download_all_subs = new NF_Download_All_Subs();
+			self::$instance->convert_notifications = new NF_Convert_Notifications();
 		}
 	}
 
@@ -364,8 +365,10 @@ class Ninja_Forms {
 			require_once( NF_PLUGIN_DIR . 'includes/admin/step-processing.php' );
 			require_once( NF_PLUGIN_DIR . 'classes/step-processing.php' );
 
+
 			// Include our download all submissions php files
 			require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
+			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-notifications.php' );
 		}
 
 		// Include our upgrade files.

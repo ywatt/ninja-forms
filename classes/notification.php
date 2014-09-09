@@ -140,4 +140,16 @@ class NF_Notification
 		return nf_get_object_meta_value( $this->id, $meta_key );
 	}
 
+	/**
+	 * Update a notification setting
+	 * 
+	 * @access public
+	 * @since 2.8
+	 * @return bool
+	 */
+	public function update_setting( $meta_key, $meta_value ) {
+		nf_update_object_meta( $this->id, $meta_key, $meta_value );
+		return true;
+	}
+
 }
