@@ -131,19 +131,6 @@ function ninja_forms_activation( $network_wide ){
 
 		dbDelta($sql);
 
-		$sql = "CREATE TABLE IF NOT EXISTS ".NINJA_FORMS_SUBS_TABLE_NAME." (
-		  `id` int(11) NOT NULL AUTO_INCREMENT,
-		  `user_id` int(11) DEFAULT NULL,
-		  `form_id` int(11) NOT NULL,
-		  `status` int(11) NOT NULL,
-		  `action` varchar(255) NOT NULL,
-		  `data` longtext CHARACTER SET utf8 NOT NULL,
-		  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-		  PRIMARY KEY (`id`)
-		) DEFAULT CHARSET=utf8 ;";
-
-		//dbDelta($sql);
-
 		$title = ninja_forms_get_preview_page_title();
 	    $preview_page = get_page_by_title( $title );
 		if( !$preview_page ) {
