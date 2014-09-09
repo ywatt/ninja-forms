@@ -204,7 +204,7 @@ function ninja_forms_activation( $network_wide ){
 		if ( nf_get_form_count() > 0 && ! $n_conversion_complete ) {
 			update_option( 'nf_convert_notifications_complete', false );
 		} else {
-			update_option( 'nf_convert_notifications_complete', true)
+			update_option( 'nf_convert_notifications_complete', true);
 		}
 
 		// Add the transient to redirect
