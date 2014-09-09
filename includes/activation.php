@@ -199,13 +199,9 @@ function ninja_forms_activation( $network_wide ){
 
 		dbDelta( $sql );
 
-		// Check to see if we need to run a notification upgrade.
-		$n_conversion_complete = get_option( 'nf_convert_notifications_complete', false );
-		if ( nf_get_form_count() > 0 && ! $n_conversion_complete ) {
-			update_option( 'nf_convert_notifications_complete', false );
-		} else {
-			update_option( 'nf_convert_notifications_complete', true);
-		}
+		update_option( 'nf_convert_notifications_complete', true);
+		update_option( 'nf_convert_subs_step', 'complete' );
+		update_option( 'nf_upgrade_notice', 'closed' );
 
 		// Add the transient to redirect
 		set_transient( '_nf_activation_redirect', true, 30 );
