@@ -26,7 +26,7 @@ function nf_show_upgrade_notices() {
 
 	$n_conversion_complete = get_option( 'nf_convert_notifications_complete', false );
 
-	if ( ! $n_conversion_complete && version_compare( NF_PLUGIN_VERSION, '2.8', '<' ) ) {
+	if ( ! $n_conversion_complete ) {
 		printf(
 			'<div class="updated"><p>' . __( 'Ninja Forms needs to upgrade your form notifications, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</p></div>',
 			admin_url( 'index.php?page=nf-processing&action=convert_notifications' )
