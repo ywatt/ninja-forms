@@ -350,7 +350,6 @@ function ninja_forms_get_csv_delimiter() {
 	return apply_filters( 'ninja_forms_csv_delimiter', ',' );
 }
 
-
 /**
  * Get the csv enclosure
  * 
@@ -359,7 +358,6 @@ function ninja_forms_get_csv_delimiter() {
 function ninja_forms_get_csv_enclosure() {
 	return apply_filters( 'ninja_forms_csv_enclosure', '"' );
 }
-
 
 /**
  * Get the csv delimiter
@@ -388,3 +386,35 @@ function nf_change_admin_menu_filter( $cap ) {
 }
 
 add_filter( 'ninja_forms_admin_parent_menu_capabilities', 'nf_change_admin_menu_filter' );
+
+// The admin_mailto setting has been deprecated. Because users may have used this setting to modify who receives the admin email,
+// we need to make sure that it is backwards compatible.
+function nf_clear_admin_mailto() {
+	global $ninja_forms_processing;
+
+	$ninja_forms_processing->update_form_setting( 'admin_mailto', array() );
+}
+
+add_action( 'ninja_forms_before_pre_process', 'nf_clear_admin_mailto' );
+
+function nf_modify_admin_mailto( $setting, $setting_name, $id ) {
+	global $ninja_forms_processing;
+
+	// Bail if this isn't our admin notification
+	if ( ! nf_get_object_meta_value( $id, 'admin_email' ) )
+		return $setting;
+
+	// Bail if this isn't the "to" setting.
+	if ( $setting_name != 'to' )
+		return $setting;
+	
+	$admin_mailto = $ninja_forms_processing->get_form_setting( 'admin_mailto' );
+
+	if ( is_array( $admin_mailto ) && ! empty ( $admin_mailto ) ) {
+		array_merge( $setting, $admin_mailto );
+	}
+
+	return $setting;
+}
+
+add_action( 'nf_email_notification_process_setting','nf_modify_admin_mailto', 10, 3 );

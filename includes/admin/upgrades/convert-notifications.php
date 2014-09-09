@@ -203,6 +203,20 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 				if ( isset ( $field['data']['send_email'] ) && $field['data']['send_email'] == 1 ) {
 					// Add this field to our $addresses variable.
 					$addresses[] = $field_id;
+					unset( $field['data']['send_email'] );
+					unset( $field['data']['replyto_email'] );
+					unset( $field['data']['from_name'] );
+
+					$args = array(
+						'update_array'	=> array(
+							'data'		=> serialize( $field['data'] ),
+						),
+						'where'			=> array(
+							'id' 		=> $field_id,
+						),
+					);
+
+					ninja_forms_update_field( $args );
 				}
 			}
 
@@ -250,7 +264,7 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 
 					foreach ( $process_fields as $field_id => $field ) {
 						$label = strip_tags( apply_filters( 'nf_notification_admin_all_fields_field_label', $field['label'] ) );
-						$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .'</td><td>[ninja_forms_field id=' . $field_id . ']</td></tr>'; 
+						$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>[ninja_forms_field id=' . $field_id . ']</td></tr>'; 
 					}
 					
 					$all_fields_table .= '</tbody></table>';
@@ -269,6 +283,26 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 			$completed_forms[] = $form_id;
 		}
 		update_option( 'nf_convert_notifications_forms', $completed_forms );
+
+		// Unset our admin email settings and save the form.
+		if ( isset ( $form_settings['admin_mailto'] ) ) {
+			unset( $form_settings['admin_mailto'] );
+			unset( $form_settings['admin_attach_csv'] );
+			unset( $form_settings['admin_subject'] );
+			unset( $form_settings['admin_email_msg'] );
+			unset( $form_settings['admin_email_fields'] );
+
+			$args = array(
+				'update_array' 	=> array(
+					'data'		=> serialize( $form_settings ),
+				),
+				'where'		   	=> array(
+					'id'	=> $form_id,
+				),
+			);
+
+			ninja_forms_update_form( $args );
+		}
 	}
 
 	public function complete() {

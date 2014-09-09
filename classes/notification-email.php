@@ -327,6 +327,8 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	 */
 	public function process_setting( $id, $setting ) {
 		global $ninja_forms_processing;
+		
+		$setting_name = $setting;
 
 		$setting = explode( '`', Ninja_Forms()->notification( $id )->get_setting( $setting ) );
 
@@ -337,7 +339,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$setting[ $x ] = do_shortcode( $setting[ $x ] );
 		}
 
-		return $setting;
+		return apply_filters( 'nf_email_notification_process_setting', $setting, $setting_name, $id );
 	}
 
 }
