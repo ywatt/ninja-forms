@@ -140,7 +140,7 @@ function nf_is_func_disabled( $function ) {
  * @since 2.7.8
  * @return string $ip User's IP address
  */
-function ninja_forms_get_ip() {
+function nf_get_ip() {
 
     $ip = '127.0.0.1';
 
