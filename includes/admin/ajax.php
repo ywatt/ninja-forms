@@ -75,6 +75,9 @@ function ninja_forms_remove_field(){
 
 add_action('wp_ajax_ninja_forms_delete_form', 'ninja_forms_delete_form');
 function ninja_forms_delete_form( $form_id = '' ){
+
+	check_ajax_referer( 'delete_form', 'delete_form_nonce' );
+
 	global $wpdb;
 	if( $form_id == '' ){
 		$ajax = true;

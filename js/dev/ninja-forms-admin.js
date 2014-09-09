@@ -331,7 +331,7 @@ jQuery(document).ready(function($) {
 		var form_id = this.id.replace('ninja_forms_delete_form_', '');
 		var answer = confirm('Really delete this form? (Irreversible)');
 		if(answer){
-			$.post(ajaxurl, { form_id: form_id, action:"ninja_forms_delete_form"}, function(response){
+			$.post(ajaxurl, { form_id: form_id, action:"ninja_forms_delete_form", delete_form_nonce:ninja_forms_settings.delete_form_nonce}, function(response){
 				$("#ninja_forms_form_" + form_id + "_tr").css("background-color", "#FF0000").fadeOut('slow', function(){
 					$(this).remove();
 				});
