@@ -359,8 +359,10 @@ class NF_Notifications
 		if ( 'new' == $n_id ) {
 			$type = $settings['type'];
 			$n_id = $this->create( $form_id );
+			$new = true;
 		} else {
 			$type = Ninja_Forms()->notification( $n_id )->type;
+			$new = false;
 		}
 
 		$data = Ninja_Forms()->notification_types->$type->save_admin( $n_id, $data );
@@ -369,8 +371,10 @@ class NF_Notifications
 			nf_update_object_meta( $n_id, $meta_key, $meta_value );
 		}
 
-		if ( 'new' == $n_id ) {
-			wp_redirect( remove_query_arg( array( 'notification-action' ) ) );
+		if ( $new ) {
+			$redirect = remove_query_arg( array( 'notification-action' ) );
+			$redirect = add_query_arg( array( 'id' => $n_id, 'notification-action' => 'edit' ), $redirect );
+			wp_redirect( $redirect );
 			die();
 		}
 
