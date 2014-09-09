@@ -41,7 +41,7 @@ function ninja_forms_admin_js(){
 	NINJA_FORMS_URL . 'js/' . $src .'/ninja-forms-admin' . $suffix . '.js',
 	array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable'));
 
-	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array('date_format' => $date_format));
+	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array('date_format' => $date_format, 'delete_form_nonce' => wp_create_nonce( 'delete_form') ));
 	/*
 	wp_enqueue_script('jquery.ui.nestedSortable',
 	NINJA_FORMS_URL .'/js/dev/jquery.ui.nestedSortable.js',

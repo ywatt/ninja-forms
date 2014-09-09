@@ -428,3 +428,27 @@ function nf_get_form_count() {
 	$count = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . NINJA_FORMS_TABLE_NAME );
 	return $count;
 }
+
+/*
+ * Get User IP
+ *
+ * Returns the IP address of the current visitor
+ *
+ * @since 2.8
+ * @return string $ip User's IP address
+ */
+function nf_get_ip() {
+
+    $ip = '127.0.0.1';
+
+    if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+        //check ip from share internet
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+        //to check ip is pass from proxy
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } elseif( ! empty( $_SERVER['REMOTE_ADDR'] ) ) {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return apply_filters( 'nf_get_ip', $ip );
+}
