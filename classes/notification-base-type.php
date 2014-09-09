@@ -14,24 +14,6 @@ class NF_Notification_Base_Type
 {
 
 	/**
-	 * What priority should the pre_process function run on?
-	 * @var process_priority
-	 */
-	var $pre_process_priority = 10;
-
-	/**
-	 * What priority should the process function run on?
-	 * @var process_priority
-	 */
-	var $process_priority = 10;
-
-	/**
-	 * What priority should the post_process function run on?
-	 * @var process_priority
-	 */
-	var $post_process_priority = 10;
-
-	/**
 	 * Get things rolling
 	 *
 	 * @since 2.8

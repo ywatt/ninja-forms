@@ -218,9 +218,8 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 				Ninja_Forms()->notification( $n_id )->update_setting( 'name', __( 'User Email', 'ninja-forms' ) );
 
 				// Implode our admin email addresses
-				$addresses = implode( '`', $addresses );
 				$n_var = count ( $addresses ) > 1 ? 'bcc' : 'to';
-
+				$addresses = implode( '`', $addresses );
 				Ninja_Forms()->notification( $n_id )->update_setting( $n_var, $addresses );
 
 				// Update our Format Setting
