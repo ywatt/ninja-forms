@@ -47,6 +47,7 @@ function ninja_forms_letters_to_numbers( $size ) {
 }
 
 function ninja_forms_subval_sort( $a, $subkey ) {
+	$b = '';
 	foreach($a as $k=>$v) {
 		$b[$k] = strtolower($v[$subkey]);
 	}
