@@ -176,13 +176,14 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 		$return = array();
 		foreach( $meta_value as $val ) {
-			if ( is_numeric( $val ) ) {
+			if ( strpos( $val, 'field_' ) !== false ) {
+				$val = str_replace( 'field_', '', $val );
 				$label = nf_get_field_admin_label( $val, $form_id );
 				if ( strlen( $label ) > 30 ) {
 					$label = substr( $label, 0, 30 );
 				}
 
-				$return[] = array( 'value' => $val, 'label' => $label . ' - ID: ' . $val );
+				$return[] = array( 'value' => 'field_' . $val, 'label' => $label . ' - ID: ' . $val );
 			} else {
 				$return[] = array( 'value' => $val, 'label' => $val );
 			}

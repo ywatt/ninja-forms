@@ -130,7 +130,7 @@ class NF_Notifications
 				$tmp_label = $label;
 			}
 
-			$tmp_array = array( 'value' => $field_id, 'label' => $tmp_label . ' - ID: ' . $field_id );
+			$tmp_array = array( 'value' => 'field_' . $field_id, 'label' => $tmp_label . ' - ID: ' . $field_id );
 
 			$admin_label = $label;
 
@@ -160,7 +160,7 @@ class NF_Notifications
 
 		foreach ( $process_fields as $field_id => $field ) {
 			$label = strip_tags( apply_filters( 'nf_notification_admin_all_fields_field_label', $field['label'] ) );
-			$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .'</td><td>[ninja_forms_field id=' . $field_id . ']</td></tr>'; 
+			$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>[ninja_forms_field id=' . $field_id . ']</td></tr>'; 
 		}
 		
 		$all_fields_table .= '</tbody></table>';
