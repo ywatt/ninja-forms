@@ -414,6 +414,8 @@ function nf_modify_admin_mailto( $setting, $setting_name, $id ) {
 	
 	$admin_mailto = $ninja_forms_processing->get_form_setting( 'admin_mailto' );
 	$ninja_forms_processing->update_form_setting( 'admin_mailto', '' );
+	echo "ADMIN MAILTO:";
+	var_dump( $ninja_forms_processing->get_form_setting( 'admin_mailto' ) );
 
 	if ( is_array( $admin_mailto ) && ! empty ( $admin_mailto ) ) {
 		array_merge( $setting, $admin_mailto );
@@ -422,7 +424,7 @@ function nf_modify_admin_mailto( $setting, $setting_name, $id ) {
 	return $setting;
 }
 
-add_action( 'nf_email_notification_process_setting','nf_modify_admin_mailto', 10, 3 );
+add_filter( 'nf_email_notification_process_setting','nf_modify_admin_mailto', 10, 3 );
 
 add_action('init', 'ninja_forms_register_filter_email_add_fields', 15 );
 function ninja_forms_register_filter_email_add_fields(){
@@ -545,7 +547,7 @@ function ninja_forms_filter_email_add_fields( $message ){
 
 add_action( 'init', 'ninja_forms_register_email_admin' );
 function ninja_forms_register_email_admin() {
-	add_action( 'ninja_forms_post_process', 'ninja_forms_email_admin', 999 );
+	add_action( 'ninja_forms_post_process', 'ninja_forms_email_admin', 1000 );
 }
 
 function ninja_forms_email_admin() {
@@ -556,6 +558,7 @@ function ninja_forms_email_admin() {
 	$form_ID 			= $ninja_forms_processing->get_form_ID();
 	$form_title 		= $ninja_forms_processing->get_form_setting( 'form_title' );
 	$admin_mailto 		= $ninja_forms_processing->get_form_setting( 'admin_mailto' );
+	var_dump( $admin_mailto );
 	$email_from_name 	= $ninja_forms_processing->get_form_setting( 'email_from_name' );
 	$email_from 		= $ninja_forms_processing->get_form_setting( 'email_from' );
 	$email_type 		= $ninja_forms_processing->get_form_setting( 'email_type' );
@@ -620,7 +623,7 @@ function ninja_forms_email_admin() {
 
 add_action('init', 'ninja_forms_register_email_user');
 function ninja_forms_register_email_user(){
-	add_action('ninja_forms_post_process', 'ninja_forms_email_user', 999);
+	add_action( 'ninja_forms_post_process', 'ninja_forms_email_user', 1000 );
 }
 
 function ninja_forms_email_user(){
@@ -745,3 +748,26 @@ function nf_csv_attachment( $sub_id ){
 	}
 }
 
+function change_ninja_forms_admin_email(){
+    global $ninja_forms_processing; // The global variable gives us access to all the form and field settings.
+    $form_id = $ninja_forms_processing->get_form_ID(); // Gets the ID of the form we are currently processing.
+    if( $form_id == 1 ){ // Check to make sure that this form has the same ID as the one we got earlier.
+        $dept = $ninja_forms_processing->get_field_value( 51 ); // Gets the value that the user has submitted.
+        // We're going to use a switch() case to set the admin email address based upon the value of $dept.
+        // This could also be an if...else statement, but I think that the switch() is cleaner.
+        switch( $dept ){
+            case 'One':
+                $admin_mailto = array( 'jamielaws@gmail.com' );
+                break;
+            case 'Two':
+                $admin_mailto = array( 'kstover@gmail.com' );
+                break;
+            case 'Three':
+                $admin_mailto = array( 'wpnzach@gmail.com' );
+                break;
+        }
+        // $admin_mailto now contains our new admin email address. Let's update the form setting.
+        $ninja_forms_processing->update_form_setting( 'admin_mailto', $admin_mailto );
+    }
+}
+add_action( 'ninja_forms_pre_process', 'change_ninja_forms_admin_email' );

@@ -225,7 +225,6 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$attach_csv 	= Ninja_Forms()->notification( $id )->get_setting( 'attach_csv' );
 
 		$from_name 		= $this->process_setting( $id, 'from_name' );
-		var_dump( $from_name );
 		$from_name 		= implode( ' ', $from_name );
 
 		$from_address 	= $this->process_setting( $id, 'from_address' );
@@ -240,7 +239,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$email_from 	= $from_name.' <'.$from_address.'>';
 
 		$subject 		= $this->process_setting( $id, 'email_subject' );
-		$subject 		= implode( '', $subject );
+		$subject 		= implode( ' ', $subject );
 		if ( empty( $subject ) ) {
 			$subject = $form_title;
 		}
@@ -319,8 +318,6 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$attachments[] = $csv_attachment;
 		}
 
-		print_r( $headers );
-
 		if ( is_array( $to ) AND !empty( $to ) ){
 			foreach( $to as $to ) {
 				// wp_mail( $to, $subject, $message, $headers, $attachments );
@@ -352,7 +349,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 		for ( $x = 0; $x <= count ( $setting ) - 1; $x++ ) { 
 			if ( $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) ) ) {
-				$setting[ $x ] = $ninja_forms_processing->get_field_value( $setting[ $x ] );
+				$setting[ $x ] = $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) );
 			}
 			$setting[ $x ] = do_shortcode( $setting[ $x ] );
 		}
