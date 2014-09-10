@@ -173,6 +173,7 @@ class NF_Notifications
 			'all_fields'		=> $fields,
 			'all_fields_table' 	=> $all_fields_table,
 			'process_fields'	=> $process_fields,
+			'filter_type'		=> remove_query_arg( array( 'type' ) ),
 		) );
 
 		wp_localize_script( 'nf-notifications', 'nf_notifications', $js_vars );
