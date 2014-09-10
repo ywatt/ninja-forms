@@ -274,6 +274,8 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 
 				// Update our email message
 				Ninja_Forms()->notification( $n_id )->update_setting( 'email_message', $email_message );
+
+				Ninja_Forms()->notification( $n_id )->update_setting( 'user_email', true );
 			}
 		}
 
