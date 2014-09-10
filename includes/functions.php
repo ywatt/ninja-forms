@@ -160,6 +160,16 @@ function nf_is_func_disabled( $function ) {
 }
 
 /**
+ * Acts as a wrapper/alias for nf_get_objects_by_type that is specific to notifications.
+ * 
+ * @since 2.8
+ * @return array $notifications
+ */
+function nf_get_all_notifications() {
+	return nf_get_objects_by_type( 'notification' );
+}
+
+/**
  * Acts as a wrapper/alias for nf_get_object_children that is specific to notifications.
  * 
  * @since 2.8
@@ -452,4 +462,24 @@ function nf_get_ip() {
         $ip = $_SERVER['REMOTE_ADDR'];
     }
     return apply_filters( 'nf_get_ip', $ip );
+}
+
+
+/**
+ * Function that gets all objects of a given type.
+ * 
+ * @since 2.8
+ * @return array $results
+ */
+
+function nf_get_objects_by_type( $object_type ) {
+	global $wpdb;
+
+	// Bail if we don't have an object type.
+	if ( $object_type == '' )
+		return false;
+
+	$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE type = %s', $object_type ), ARRAY_A );
+
+	return $results;
 }
