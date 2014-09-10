@@ -413,6 +413,7 @@ function nf_modify_admin_mailto( $setting, $setting_name, $id ) {
 		return $setting;
 	
 	$admin_mailto = $ninja_forms_processing->get_form_setting( 'admin_mailto' );
+	$ninja_forms_processing->update_form_setting( 'admin_mailto', '' );
 
 	if ( is_array( $admin_mailto ) && ! empty ( $admin_mailto ) ) {
 		array_merge( $setting, $admin_mailto );
