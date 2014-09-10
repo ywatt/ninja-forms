@@ -98,4 +98,14 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	$( '#filter-type' ).change( function(e) {
+		if ( this.value == '' ) {
+			var url = nf_notifications.filter_type;
+		} else {
+			var url = nf_notifications.filter_type + '&type=' + this.value
+		}
+		$( '.spinner' ).show();
+		document.location.href = url;
+	});
+
 });
