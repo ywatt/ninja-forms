@@ -58,10 +58,11 @@ class NF_Notifications
 	public function register_tab() {
 		$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
 		$action = isset ( $_REQUEST['notification-action'] ) ? $_REQUEST['notification-action'] : '';
+		$output_form = false;
+		$show_save = false;
 		if ( 'edit' == $action || 'new' == $action ) {
 			$output_form = true;
-		} else {
-			$output_form = false;
+			$show_save = true;
 		}
 
 		$args = array(
@@ -70,7 +71,7 @@ class NF_Notifications
 			'display_function' => array( $this, 'output_admin' ),
 			'save_function' => array( $this, 'save_admin' ),
 			'disable_no_form_id' => true,
-			'show_save' => true,
+			'show_save' => $show_save,
 			'tab_reload' => true,
 			'output_form' => $output_form,
 		);
