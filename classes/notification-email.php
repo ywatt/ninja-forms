@@ -336,7 +336,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$setting = explode( '`', Ninja_Forms()->notification( $id )->get_setting( $setting ) );
 
 		for ( $x = 0; $x <= count ( $setting ) - 1; $x++ ) { 
-			if ( $ninja_forms_processing->get_field_value( $setting[ $x ] ) ) {
+			if ( $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) ) ) {
 				$setting[ $x ] = $ninja_forms_processing->get_field_value( $setting[ $x ] );
 			}
 			$setting[ $x ] = do_shortcode( $setting[ $x ] );

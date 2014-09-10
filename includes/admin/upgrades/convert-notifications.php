@@ -156,7 +156,7 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 			foreach ( $fields as $field ) {
 				if ( isset ( $field['data']['from_name'] ) && $field['data']['from_name'] == 1 ) {
 					// Update our From Name
-					Ninja_Forms()->notification( $n_id )->update_setting( 'from_name', $field['id'] );
+					Ninja_Forms()->notification( $n_id )->update_setting( 'from_name', 'field_' . $field['id'] );
 					break;
 				}
 			}
@@ -167,7 +167,7 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 			// Get our reply-to address
 			foreach ( $fields as $field ) {
 				if ( isset ( $field['data']['replyto_email'] ) && $field['data']['replyto_email'] == 1 ) {
-					Ninja_Forms()->notification( $n_id )->update_setting( 'reply_to', $field['id'] );
+					Ninja_Forms()->notification( $n_id )->update_setting( 'reply_to', 'field_' . $field['id'] );
 					break;
 				}
 			}

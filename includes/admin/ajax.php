@@ -75,9 +75,12 @@ function ninja_forms_remove_field(){
 
 add_action('wp_ajax_ninja_forms_delete_form', 'ninja_forms_delete_form');
 function ninja_forms_delete_form( $form_id = '' ){
-
-	
 	global $wpdb;
+
+	// Bail if we aren't in the admin
+	if ( ! is_admin() )
+		return false;
+
 	if( $form_id == '' ){
 		$ajax = true;
 		$form_id = absint( $_REQUEST['form_id'] );
@@ -387,25 +390,14 @@ function ninja_forms_view_sub(){
 	die();
 }
 
-add_action('wp_ajax_ninja_forms_edit_sub', 'ninja_forms_edit_sub');
-function ninja_forms_edit_sub(){
-	global $wpdb;
-	$sub_id = absint( $_REQUEST['sub_id'] );
-	$sub_data = $_REQUEST['sub_data'];
-
-	$args = array(
-		'sub_id' => $sub_id,
-		'data' => $sub_data,
-	);
-
-	ninja_forms_update_sub($args);
-	die();
-}
-
 add_action('wp_ajax_ninja_forms_delete_sub', 'ninja_forms_delete_sub');
 //add_action('wp_ajax_nopriv_ninja_forms_delete_sub', 'ninja_forms_delete_sub');
 function ninja_forms_delete_sub($sub_id = ''){
 	global $wpdb;
+	// Bail if we aren't in the admin.
+	if ( ! is_admin() )
+		return false;
+
 	if($sub_id == ''){
 		$ajax = true;
 		$sub_id = absint( $_REQUEST['sub_id'] );
