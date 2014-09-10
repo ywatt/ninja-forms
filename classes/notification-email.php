@@ -320,7 +320,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 		if ( is_array( $to ) AND !empty( $to ) ){
 			foreach( $to as $to ) {
-				// wp_mail( $to, $subject, $message, $headers, $attachments );
+				wp_mail( $to, $subject, $message, $headers, $attachments );
 			}
 		}
 
@@ -328,7 +328,6 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		if ( file_exists( $csv_attachment ) ) {
 			unlink ( $csv_attachment );
 		}
-
 	}
 
 	/**
