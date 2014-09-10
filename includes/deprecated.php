@@ -745,26 +745,26 @@ function nf_csv_attachment( $sub_id ){
 	}
 }
 
-function change_ninja_forms_admin_email(){
-    global $ninja_forms_processing; // The global variable gives us access to all the form and field settings.
-    $form_id = $ninja_forms_processing->get_form_ID(); // Gets the ID of the form we are currently processing.
-    if( $form_id == 1 ){ // Check to make sure that this form has the same ID as the one we got earlier.
-        $dept = $ninja_forms_processing->get_field_value( 6 ); // Gets the value that the user has submitted.
-        // We're going to use a switch() case to set the admin email address based upon the value of $dept.
-        // This could also be an if...else statement, but I think that the switch() is cleaner.
-        switch( $dept ){
-            case 'One':
-                $admin_mailto = array( 'jamielaws@gmail.com' );
-                break;
-            case 'Two':
-                $admin_mailto = array( 'kstover@gmail.com' );
-                break;
-            case 'Three':
-                $admin_mailto = array( 'wpnzach@gmail.com' );
-                break;
-        }
-        // $admin_mailto now contains our new admin email address. Let's update the form setting.
-        $ninja_forms_processing->update_form_setting( 'admin_mailto', $admin_mailto );
-    }
-}
-add_action( 'ninja_forms_pre_process', 'change_ninja_forms_admin_email' );
+// function change_ninja_forms_admin_email(){
+//     global $ninja_forms_processing; // The global variable gives us access to all the form and field settings.
+//     $form_id = $ninja_forms_processing->get_form_ID(); // Gets the ID of the form we are currently processing.
+//     if( $form_id == 1 ){ // Check to make sure that this form has the same ID as the one we got earlier.
+//         $dept = $ninja_forms_processing->get_field_value( 6 ); // Gets the value that the user has submitted.
+//         // We're going to use a switch() case to set the admin email address based upon the value of $dept.
+//         // This could also be an if...else statement, but I think that the switch() is cleaner.
+//         switch( $dept ){
+//             case 'One':
+//                 $admin_mailto = array( 'jamielaws@gmail.com' );
+//                 break;
+//             case 'Two':
+//                 $admin_mailto = array( 'kstover@gmail.com' );
+//                 break;
+//             case 'Three':
+//                 $admin_mailto = array( 'wpnzach@gmail.com' );
+//                 break;
+//         }
+//         // $admin_mailto now contains our new admin email address. Let's update the form setting.
+//         $ninja_forms_processing->update_form_setting( 'admin_mailto', $admin_mailto );
+//     }
+// }
+// add_action( 'ninja_forms_pre_process', 'change_ninja_forms_admin_email' );
