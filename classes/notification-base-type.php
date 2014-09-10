@@ -63,8 +63,11 @@ class NF_Notification_Base_Type
 	 * @since 2.8
 	 * @return string $table
 	 */
-	public function remove_empty_fields_from_table( $table ) {
+	public function remove_empty_fields_from_table( $table = '' ) {
 		global $ninja_forms_processing;
+
+		if ( empty ( $table ) )
+			return $table;
 
 		$doc = new DOMDocument();
 		$doc->loadHTML( $table );

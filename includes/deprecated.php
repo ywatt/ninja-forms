@@ -749,7 +749,7 @@ function nf_csv_attachment( $sub_id ){
 function nf_modify_attachments( $files, $n_id ) {
 	global $ninja_forms_processing;
 
-	if ( Ninja_Forms()->notification( $n_id )->get_setting( 'user_email' ) ) {
+	if ( Ninja_Forms()->notification( $n_id )->get_setting( 'admin_email' ) ) {
 		if ( is_array( $ninja_forms_processing->get_form_setting( 'admin_attachments' ) ) ) {
 			$files = array_merge( $files, $ninja_forms_processing->get_form_setting( 'admin_attachments' ) );
 		}
@@ -758,6 +758,8 @@ function nf_modify_attachments( $files, $n_id ) {
 			$files = array_merge( $files, $ninja_forms_processing->get_form_setting( 'user_attachments' ) );
 		}
 	}
+
+	$ninja_forms_processing->update_form_setting( 'admin_attachments', '' );
 	
 	return $files;
 }
