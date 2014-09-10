@@ -235,6 +235,8 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$message = apply_filters( 'ninja_forms_admin_email_message_wpautop', wpautop( $message ) );
 		}
 
+		$message = $this->remove_empty_fields_from_table( $message );
+
 		$headers = array();
 		$headers[] = 'From: ' . $email_from;
 
