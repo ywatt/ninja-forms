@@ -247,7 +247,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
                 }
                 ?>                      
             </select>
-            <input type="submit" class="button-secondary" value="<?php _e( 'Filter', 'ninja-forms' ); ?>">
+            <span style="float:left;" class="spinner"></span>
         </div>
         <?php
     }
