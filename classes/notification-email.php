@@ -39,7 +39,6 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$bcc = '';
 			$email_subject = '';
 			$email_message = '';
-			$attach_csv = '';
 		} else {
 			$email_format = Ninja_Forms()->notification( $id )->get_setting( 'email_format' );
 			$from_name = Ninja_Forms()->notification( $id )->get_setting( 'from_name' );
@@ -49,8 +48,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$cc = Ninja_Forms()->notification( $id )->get_setting( 'cc' );
 			$bcc = Ninja_Forms()->notification( $id )->get_setting( 'bcc' );
 			$email_subject = Ninja_Forms()->notification( $id )->get_setting( 'email_subject' );
-			$email_message = Ninja_Forms()->notification( $id )->get_setting( 'email_message' );
-			$attach_csv = Ninja_Forms()->notification( $id )->get_setting( 'attach_csv' );			
+			$email_message = Ninja_Forms()->notification( $id )->get_setting( 'email_message' );		
 		}
 
 		
@@ -62,13 +60,6 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 					<option value="html" <?php selected( $email_format, 'html' ); ?>><?php _e( 'HTML', 'ninja-forms' ); ?></option>
 					<option value="plain" <?php selected( $email_format, 'plain' ); ?>><?php _e( 'Plain Text', 'ninja-forms' ); ?></option>
 				</select>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="settings-attach_csv"><?php _e( 'Attach CSV', 'ninja-forms' ); ?></label></th>
-			<td>
-				<input name="settings[attach_csv]" type="hidden" value="0">
-				<input name="settings[attach_csv]" type="checkbox" id="settings-attach_csv" value="1" <?php checked( $attach_csv, 1 ); ?>/>
 			</td>
 		</tr>
 		<tr>
@@ -123,6 +114,31 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 				);
 				wp_editor( $email_message, 'email_message', $settings ); 
 				?>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"><label for="settings-attachments"><?php _e( 'Attachments', 'ninja-forms' ); ?></label></th>
+			<td>
+				<ul>
+					<?php
+					$attachment_types = apply_filters( 'nf_email_notification_attachment_types',
+						array(
+							'attach_csv' => 'Submission CSV',
+						)
+					);
+					
+					foreach ( $attachment_types as $slug => $nicename ) {
+						?>
+						<li>
+							<input name="settings[<?php echo $slug; ?>]" type="hidden" value="0">
+							<input name="settings[<?php echo $slug; ?>]" type="checkbox" id="settings-<?php echo $slug; ?>" value="1" <?php checked( Ninja_Forms()->notification( $id )->get_setting( $slug ), 1 ); ?>/>
+							<label for="settings-<?php echo $slug; ?>"><?php echo $nicename; ?></label>
+						</li>
+
+						<?php
+					}
+					?>
+				</ul>
 			</td>
 		</tr>
 
@@ -209,6 +225,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$attach_csv 	= Ninja_Forms()->notification( $id )->get_setting( 'attach_csv' );
 
 		$from_name 		= $this->process_setting( $id, 'from_name' );
+		var_dump( $from_name );
 		$from_name 		= implode( ' ', $from_name );
 
 		$from_address 	= $this->process_setting( $id, 'from_address' );
@@ -259,11 +276,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		}
 
 		$csv_attachment = '';
-		$attachments = array();
-
-		if ( $ninja_forms_processing->get_form_setting( 'email_attachments' ) ) {
-			$attachments = $ninja_forms_processing->get_form_setting( 'email_attachments' );
-		}
+		$attachments = apply_filters( 'nf_email_notification_attachments', array(), $id );
 
 		// Check to see if we need to attach a CSV
 		if ( 1 == $attach_csv ) {
@@ -306,9 +319,11 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$attachments[] = $csv_attachment;
 		}
 
+		print_r( $headers );
+
 		if ( is_array( $to ) AND !empty( $to ) ){
 			foreach( $to as $to ) {
-				wp_mail( $to, $subject, $message, $headers, $attachments );
+				// wp_mail( $to, $subject, $message, $headers, $attachments );
 			}
 		}
 
