@@ -18,7 +18,7 @@ function ninja_forms_field_shortcode( $atts ){
 	} else {
 		$value = '';
 	}
-	return strip_tags( $value );
+	return $value;
 }
 add_shortcode( 'ninja_forms_field', 'ninja_forms_field_shortcode' );
 
