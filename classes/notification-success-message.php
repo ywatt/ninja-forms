@@ -73,9 +73,6 @@ class NF_Notification_Success_Message extends NF_Notification_Base_Type
 
 		$success_msg = Ninja_Forms()->notification( $id )->get_setting( 'success_msg' );
 		$success_msg = do_shortcode( wpautop( $success_msg ) );
-
-		$success_msg = $this->remove_empty_fields_from_table( $success_msg );
-
 		$ninja_forms_processing->add_success_msg( 'success_msg', $success_msg );
 	}
 

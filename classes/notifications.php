@@ -156,23 +156,12 @@ class NF_Notifications
 		// Add our "process_fields" to our form global
 		Ninja_Forms()->form( $form_id )->process_fields = $process_fields;
 
-		// Generate our "all fields" table for use as a JS var.
-		$all_fields_table = '<table><tbody>';
-
-		foreach ( $process_fields as $field_id => $field ) {
-			$label = strip_tags( apply_filters( 'nf_notification_admin_all_fields_field_label', $field['label'] ) );
-			$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>[ninja_forms_field id=' . $field_id . ']</td></tr>'; 
-		}
-		
-		$all_fields_table .= '</tbody></table>';
-
 		$js_vars = apply_filters( 'nf_notification_admin_js_vars', array( 
 			'activate' 			=> __( 'Activate', 'ninja-forms' ), 
 			'deactivate' 		=> __( 'Deactivate', 'ninja-forms' ),
 			'search_fields' 	=> $search_fields,
 			'tokens'			=> array(),
 			'all_fields'		=> $fields,
-			'all_fields_table' 	=> $all_fields_table,
 			'process_fields'	=> $process_fields,
 			'filter_type'		=> remove_query_arg( array( 'type' ) ),
 		) );
@@ -236,14 +225,19 @@ class NF_Notifications
 	            ?>
         	</form>
             <?php
-		} else if ( 'edit' == $action ) {
+		} else {
 			$id = isset ( $_REQUEST['id'] ) ? $_REQUEST['id'] : '';
-			if ( '' == $id )
-				return false;
+			if ( $id == '' ) {
+				$id = 'new';
+				$this_type = 'email';
+				$title = __( 'New Notification', 'ninja-forms' );
+			} else {
+				$this_type = Ninja_Forms()->notification( $id )->type;
+				$title = __( 'Edit Notification', 'ninja-forms' ) . ' - ID ' . $id;
+			}
 
-			$this_type = Ninja_Forms()->notification( $id )->type;
 			?>
-			<h2><?php _e( 'Edit Notification', 'ninja-forms' ); ?> - ID <?php echo $_REQUEST['id']; ?> <a href="<?php echo remove_query_arg( array( 'notification-action', 'id', 'update_message' ) );?>" class="button-secondary"><?php _e( 'Back To List', 'ninja-forms' );?></a></h2>
+			<h2><?php echo $title; ?> <a href="<?php echo remove_query_arg( array( 'notification-action', 'id', 'update_message' ) );?>" class="button-secondary"><?php _e( 'Back To List', 'ninja-forms' );?></a></h2>
 
 			<input type="hidden" id="notification_id" name="notification_id" value="<?php echo $id; ?>" />
 			<table class="form-table">
@@ -259,7 +253,7 @@ class NF_Notifications
 								<?php
 								foreach ( $this->get_types() as $slug => $nicename ) {
 									?>
-									<option value="<?php echo $slug; ?>" <?php selected ( nf_get_object_meta_value( $id, 'type' ), $slug ); ?>><?php echo $nicename; ?></option>
+									<option value="<?php echo $slug; ?>" <?php selected ( $this_type, $slug ); ?>><?php echo $nicename; ?></option>
 									<?php
 								}
 								?>						
@@ -269,8 +263,7 @@ class NF_Notifications
 
 				</tbody>
 				<?php
-				$types = $this->get_types();
-				foreach ( $types as $slug => $nicename ) {
+				foreach ( $this->get_types() as $slug => $nicename ) {
 					if ( $this_type == $slug ) {
 						$display = '';
 					} else {
@@ -288,57 +281,7 @@ class NF_Notifications
 				?>			
 			</table>
 			<?php
-		} else if ( 'new' == $action ) {
-			$this_type = 'email';
-			?>
-			<h2><?php _e( 'New Notification', 'ninja-forms' ); ?> <a href="<?php echo remove_query_arg( array( 'notification-action', 'id' ) );?>" class="button-secondary"><?php _e( 'Back To List', 'ninja-forms' );?></a></h2>
-
-			<input type="hidden" name="notification_id" value="new" />
-			<table class="form-table">
-				<tbody id="notification-main">
-					<tr>
-						<th scope="row"><label for="setting-name"><?php _e( 'Name', 'ninja-forms' ); ?></label></th>
-						<td><input name="settings[name]" type="text" id="settings-name" value="" class="regular-text"></td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="type"><?php _e( 'Type', 'ninja-forms' ); ?></label></th>
-						<td>
-							<select name="settings[type]" id="settings-type">
-								<?php
-								foreach ( $this->get_types() as $slug => $nicename ) {
-									?>
-									<option value="<?php echo $slug; ?>"><?php echo $nicename; ?></option>
-									<?php
-								}
-								?>						
-							</select>
-						</td>
-					</tr>
-
-				</tbody>
-				<?php
-				$types = $this->get_types();
-				foreach ( $types as $slug => $nicename ) {
-					if ( $this_type == $slug ) {
-						$display = '';
-					} else {
-						$display = 'display:none;';
-					}
-					?>
-					<tbody id="notification-<?php echo $slug; ?>" class="notification-type" style="<?php echo $display;?>">
-						<?php
-							// Call our type edit screen.
-							Ninja_Forms()->notification_types->$slug->edit_screen();
-						?>
-					</tbody>
-					<?php
-				}
-				?>			
-			</table>
-			<?php
-		}
-
-	    ?>
+		} ?>
     	</div>
     	<?php
 	}

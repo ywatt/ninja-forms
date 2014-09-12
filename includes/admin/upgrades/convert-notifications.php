@@ -174,20 +174,9 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 
 			$email_message = $form_settings['admin_email_msg'];
 
-			// Check to see if the "include list of fields" checkbox was checked. If so, add our table to the end of the email message.
+			// Check to see if the "include list of fields" checkbox was checked.
 			if ( isset ( $form_settings['admin_email_fields'] ) && $form_settings['admin_email_fields'] == 1 ) {
-				
-				// Generate our "all fields" table for use as a JS var.
-				$all_fields_table = '<table><tbody>';
-
-				foreach ( $process_fields as $field_id => $field ) {
-					$label = strip_tags( apply_filters( 'nf_notification_admin_all_fields_field_label', $field['label'] ) );
-					$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>[ninja_forms_field id=' . $field_id . ']</td></tr>'; 
-				}
-				
-				$all_fields_table .= '</tbody></table>';
-
-				$email_message .= $all_fields_table;
+				$email_message .= '<br />[ninja_forms_all_fields]';
 			}
 
 			// Update our email message
@@ -258,18 +247,7 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 
 				// Check to see if the "include list of fields" checkbox was checked. If so, add our table to the end of the email message.
 				if ( isset ( $form_settings['user_email_fields'] ) && $form_settings['user_email_fields'] == 1 ) {
-					
-					// Generate our "all fields" table for use as a JS var.
-					$all_fields_table = '<table><tbody>';
-
-					foreach ( $process_fields as $field_id => $field ) {
-						$label = strip_tags( apply_filters( 'nf_notification_admin_all_fields_field_label', $field['label'] ) );
-						$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>[ninja_forms_field id=' . $field_id . ']</td></tr>'; 
-					}
-					
-					$all_fields_table .= '</tbody></table>';
-
-					$email_message .= $all_fields_table;
+					$email_message .= '<br />[ninja_forms_all_fields]';
 				}
 
 				// Update our email message
@@ -286,6 +264,15 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 			nf_update_object_meta( $n_id, 'type', 'success_message' );
 			nf_update_object_meta( $n_id, 'active', 1 );
 			nf_update_object_meta( $n_id, 'success_message', $form_settings['success_msg'] );
+		}
+
+		if ( isset ( $form_settings['landing_page'] ) && ! empty( $form_settings['landing_page'] ) ) {
+			// Create a notification for our redirect
+			$n_id = nf_insert_notification( $form_id );
+			nf_update_object_meta( $n_id, 'name', __( 'Redirect', 'ninja-forms' ) );
+			nf_update_object_meta( $n_id, 'type', 'redirect' );
+			nf_update_object_meta( $n_id, 'active', 1 );
+			nf_update_object_meta( $n_id, 'redirect_url', $form_settings['landing_page'] );
 		}
 
 		$completed_forms = get_option( 'nf_convert_notifications_forms' );

@@ -128,10 +128,16 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 					);
 					
 					foreach ( $attachment_types as $slug => $nicename ) {
+						if ( '' == $id ) {
+							$current_setting = 0;
+						} else {
+							$current_setting = Ninja_Forms()->notification( $id )->get_setting( $slug );
+						}
+						
 						?>
 						<li>
 							<input name="settings[<?php echo $slug; ?>]" type="hidden" value="0">
-							<input name="settings[<?php echo $slug; ?>]" type="checkbox" id="settings-<?php echo $slug; ?>" value="1" <?php checked( Ninja_Forms()->notification( $id )->get_setting( $slug ), 1 ); ?>/>
+							<input name="settings[<?php echo $slug; ?>]" type="checkbox" id="settings-<?php echo $slug; ?>" value="1" <?php checked( $current_setting, 1 ); ?>/>
 							<label for="settings-<?php echo $slug; ?>"><?php echo $nicename; ?></label>
 						</li>
 
@@ -250,8 +256,6 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		if ( $email_format != 'plain' ) {
 			$message = apply_filters( 'ninja_forms_admin_email_message_wpautop', wpautop( $message ) );
 		}
-
-		$message = $this->remove_empty_fields_from_table( $message );
 
 		$headers = array();
 		$headers[] = 'From: ' . $email_from;

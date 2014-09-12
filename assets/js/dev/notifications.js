@@ -73,7 +73,7 @@ jQuery(document).ready(function($) {
 
 	$( document ).on( 'click', '.nf-insert-all-fields', function(e) {
 		e.preventDefault();
-		var shortcode = nf_notifications.all_fields_table;		
+		var shortcode = '[ninja_forms_all_fields]';	
 		window.parent.send_to_editor( shortcode );
 	});
 
