@@ -765,3 +765,22 @@ function nf_modify_attachments( $files, $n_id ) {
 }
 
 add_filter( 'nf_email_notification_attachments', 'nf_modify_attachments', 10, 2 );
+
+// Deprecate old "add all fields" filters
+function nf_deprecate_all_fields_email_field_label( $value, $field_id ) {
+	return apply_filters( 'ninja_forms_email_field_label', $value, $field_id );
+}
+
+add_filter( 'nf_all_fields_field_label', 'nf_deprecate_all_fields_email_field_label', 10, 2 );
+
+function nf_deprecate_all_fields_email_field_value( $value, $field_id ) {
+	return apply_filters( 'ninja_forms_email_user_value', $value, $field_id );
+}
+
+add_filter( 'nf_all_fields_field_value', 'nf_deprecate_all_fields_email_field_value', 10, 2 );
+
+function nf_deprecate_all_fields_email_table( $value, $form_id ) {
+	return apply_filters( 'ninja_forms_email_field_list', $value, $form_id );
+}
+
+add_filter( 'nf_all_fields_table', 'nf_deprecate_all_fields_email_table' );
