@@ -81,6 +81,10 @@ function ninja_forms_delete_form( $form_id = '' ){
 	if ( ! is_admin() )
 		return false;
 
+	// Bail if we don't have proper permissions
+	if ( ! current_user_can( apply_filters( 'nf_delete_form_capabilities', 'manage_options' ) ) )
+		return false;
+
 	if( $form_id == '' ){
 		$ajax = true;
 		$form_id = absint( $_REQUEST['form_id'] );
