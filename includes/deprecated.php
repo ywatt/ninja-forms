@@ -783,4 +783,4 @@ function nf_deprecate_all_fields_email_table( $value, $form_id ) {
 	return apply_filters( 'ninja_forms_email_field_list', $value, $form_id );
 }
 
-add_filter( 'nf_all_fields_table', 'nf_deprecate_all_fields_email_table' );
+add_filter( 'nf_all_fields_table', 'nf_deprecate_all_fields_email_table', 10, 2 );

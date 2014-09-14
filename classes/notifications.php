@@ -71,7 +71,7 @@ class NF_Notifications
 			'display_function' => array( $this, 'output_admin' ),
 			'save_function' => array( $this, 'save_admin' ),
 			'disable_no_form_id' => true,
-			'show_save' => false,
+			'show_save' => $show_save,
 			'tab_reload' => true,
 			'output_form' => $output_form,
 		);
@@ -280,7 +280,6 @@ class NF_Notifications
 				}
 				?>			
 			</table>
-			<input class="button-primary menu-save ninja-forms-save-data" id="ninja_forms_save_data_bottom" type="submit" value="<?php _e( 'Save', 'ninja-forms' ); ?>" />
 			<?php
 		} ?>
 		
