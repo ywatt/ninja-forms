@@ -182,7 +182,7 @@ class NF_Welcome {
 			<div class="changelog">
 
 				<div class="about-overview">
-					<iframe width="640" height="360" src="//www.youtube.com/embed/QuEwigZwdCo" frameborder="0" allowfullscreen></iframe>
+					<iframe width="640" height="360" src="//www.youtube.com/embed/LeXxZn0aPlo" frameborder="0" allowfullscreen></iframe>
 				</div>
 				<h2 class="about-headline-callout"><?php _e( 'A more powerful and flexible notification system', 'ninja-forms' );?></h2>
 
