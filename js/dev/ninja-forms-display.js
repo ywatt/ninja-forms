@@ -10,7 +10,7 @@ jQuery(document).ready(function(jQuery) {
 		if (e.keyCode == 13) {
 			var type = jQuery(this).attr("type");
 			if( type != "textarea" ){
-				return false;
+				// return false;
 			}
 		}
 	});
