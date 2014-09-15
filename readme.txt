@@ -1,7 +1,7 @@
 === Ninja Forms ===
 Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
-Requires at least: 3.7
+Requires at least: 3.8
 Tested up to: 4.0
 Stable tag: 2.8
 License: GPLv2 or later
@@ -76,22 +76,15 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.8 (14 September 2014) =
-
-*Features:*
-
-* New, simpler system for creating custom notifications.
-* Send any number of emails per form submission.
-* Easily redirect the user to a page or display a custom success message.
-
-*Changes:*
-
-* Changed the "Save Form Settings" button to "Save."
+= 2.8.1 (14 September 2014 ) =
 
 *Bugs:*
 
-* Fixed PHP notices.
-* Fixed some possible security vulnerabilites within the admin.
+* Fixed a bug that could cause emails to be sent to the user's email address, even if a notification wasn't active.
+
+*Security:*
+
+* Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update. 
 
 == Requested Features ==
 
@@ -99,7 +92,17 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 == Changelog ==
 
+= 2.8.1 (14 September 2014 ) =
+
+*Bugs:*
+
+* Fixed a bug that could cause emails to be sent to the user's email address, even if a notification wasn't active.
+
 = 2.8 (14 September 2014) =
+
+*Security:*
+
+* Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update. 
 
 *Features:*
 
@@ -114,7 +117,6 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 *Bugs:*
 
 * Fixed PHP notices.
-* Fixed some possible security vulnerabilites within the admin.
 
 = 2.7.7 (19 August 2014) =
 
