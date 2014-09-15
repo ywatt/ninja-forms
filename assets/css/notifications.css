@@ -2,13 +2,9 @@
 	background: #f1f1f1;
 }
 .nf-notification-inactive td,
-.nf-notification-inactive td ul {
+.nf-notification-inactive td ul,
+.nf-notification-inactive td > a {
     color: #bbb;
-}
-.nf-notification-inactive th,
-.nf-notification-inactive td {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
 }
 
 #ninja_forms_admin .tokenfield {
