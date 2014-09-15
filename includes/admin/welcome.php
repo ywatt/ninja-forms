@@ -81,8 +81,8 @@ class NF_Welcome {
 
 		// Credits Page
 		add_dashboard_page(
-			__( 'The people that build Ninja Forms', 'ninja-forms' ),
-			__( 'The people that build Ninja Forms', 'ninja-forms' ),
+			__( 'The people who build Ninja Forms', 'ninja-forms' ),
+			__( 'The people who build Ninja Forms', 'ninja-forms' ),
 			$this->minimum_capability,
 			'nf-credits',
 			array( $this, 'credits_screen' )
@@ -191,13 +191,13 @@ class NF_Welcome {
 					<div class="col-1">
 						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-noti-view.png'; ?>">
 						<h4><?php _e( 'Unlimited notifications', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Create as many notifications (Email, Success Message, Redirect) you like for each of your Ninja Forms.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php printf( __( 'Create as many notifications (Email, Success Message, Redirect) as you like for each of your Ninja Forms.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 					<div class="col-2 last-feature">
 						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-noti-create.gif'; ?>">
 						<h4><?php _e( 'Easy notification creation', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Each notification type come with exactly the settings you need and all of them can easily be filled with your users submitted data.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php printf( __( 'All relevant notification settings on one page. Easily fill these settings with submitted data.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 				</div>
@@ -209,19 +209,19 @@ class NF_Welcome {
 					<div class="col-1">
 						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-noti-deactivate.png'; ?>">
 						<h4><?php _e( 'Activate or deactivate notifications', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Easily turn notifications on or off depending on your current needs.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php printf( __( 'Easily activate or deactivate notifications, depending on your current needs.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 					<div class="col-2">
 						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-noti-filter.png'; ?>">
 						<h4><?php _e( 'Filter notifications by type', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Have a long list of notifications? Easily filter them by a specific type to find just the one you\'re looking for.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php printf( __( 'Easily filter long lists of notifications by a specified type to find just the one you\'re looking for.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 					<div class="col-3 last-feature">
 						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-noti-duplicate.png'; ?>">
 						<h4><?php _e( 'Duplicate notifications', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Easily create similar notifications by duplicating one and only making the changes you need.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php printf( __( 'Duplicate notifications and change settings to quickly create similar notifications.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 				</div>
@@ -232,12 +232,12 @@ class NF_Welcome {
 
 					<div class="col-1">
 						<h4><?php _e( 'More to come', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Even as we release these powerful notifications we are already looking to the future. We have plans to add "global" notifications that can be used across multiple forms or move notifications from one form to another. Also be on the look out for Ninja Forms extesions to make notifications even more powerful.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php printf( __( 'This update is just the beginning; the future will bring even more improvements to the notification system. We have plans to add "global" notifications that can be used across multiple forms. Also be on the look out for Ninja Forms extesions to make notifications even more powerful.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 					<div class="col-2 last-feature">
 						<h4><?php _e( 'Notification documentation', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'To get you started we\'ve already added documentation on the new notifications feature. If you still have questions you can always contact the Ninja Forms support team.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php printf( __( 'To get you started, we\'ve already added documentation on the new notifications feature. If you still have questions you can always contact the Ninja Forms support team.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 						<p>
 							<a href="<?php echo esc_url( 'http://ninjaforms.com/documentation/using-ninja-forms/creating-new-notification/' ); ?>"><?php _e( 'Notification Documentation', 'ninja-forms' ); ?></a> &middot;
 							<a href="<?php echo esc_url( 'http://ninjaforms.com/contact/' ); ?>"><?php _e( 'Get Support', 'ninja-forms' ); ?></a>
