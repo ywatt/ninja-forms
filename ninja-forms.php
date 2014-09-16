@@ -129,6 +129,7 @@ class Ninja_Forms {
 			self::$instance->step_processing = new NF_Step_Processing();
 			self::$instance->download_all_subs = new NF_Download_All_Subs();
 			self::$instance->convert_notifications = new NF_Convert_Notifications();
+			self::$instance->update_email_settings = new NF_Update_Email_Settings();
 		}
 	}
 
@@ -369,13 +370,15 @@ class Ninja_Forms {
 			// Include our download all submissions php files
 			require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-notifications.php' );
+			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/update-email-settings.php' );
+			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
+			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );
+			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
 		}
 
 		// Include our upgrade files.
 		require_once( NF_PLUGIN_DIR . 'includes/admin/welcome.php' );
-		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
-		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
-		require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );
+
 
 		// Include deprecated functions and filters.
 		require_once( NF_PLUGIN_DIR . 'includes/deprecated.php' );
