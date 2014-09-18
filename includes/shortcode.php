@@ -87,7 +87,7 @@ add_action( 'nf_save_sub', 'nf_sub_seq_num_shortcode' );
  * @since 2.8
  * @return string $content
  */
-function nf_all_fields_shortcode( $atts ) {
+function nf_all_fields_shortcode( $atts, $content = '' ) {
 	global $ninja_forms_fields, $ninja_forms_processing;
 
 	if ( ! isset ( $ninja_forms_processing ) )
@@ -116,3 +116,38 @@ function nf_all_fields_shortcode( $atts ) {
 }
 
 add_shortcode( 'ninja_forms_all_fields', 'nf_all_fields_shortcode' );
+
+/**
+ * Parse our [ninja_forms_field] shortcode, just incase the shortcode parser screwed up.
+ *
+ * @since 2.8.4
+ * @return content
+ */
+function nf_parse_fields_shortcode( $content ) {
+	global $ninja_forms_processing;
+
+	if ( ! isset ( $ninja_forms_processing ) )
+		return $content;
+
+	$matches = array();
+	$pattern = get_shortcode_regex();
+	preg_match_all('/'.$pattern.'/s', $content, $matches);
+
+	if ( is_array( $matches ) && ! empty( $matches[2] ) ) {
+		foreach ( $matches[2] as $key => $shortcode ) {
+			if ( 'ninja_forms_field' == $shortcode  ) {
+				if ( isset ( $matches[3][ $key ] ) ) {
+					$atts = shortcode_parse_atts( $matches[3][ $key ] );
+					$id = $atts['id'];
+					$content = str_replace( $matches[0][ $key ], $ninja_forms_processing->get_field_value( $id ), $content );
+				}
+			} else if ( 'ninja_forms_all_fields' == $shortcode ) {
+				if ( isset ( $matches[3][ $key ] ) ) {
+					$atts = shortcode_parse_atts( $matches[3][ $key ] );
+					$content = str_replace( $matches[0][ $key ], nf_all_fields_shortcode( $atts, $content ), $content );
+				}
+			}
+		}
+	}
+	return $content;
+}

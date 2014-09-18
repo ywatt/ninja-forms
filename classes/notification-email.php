@@ -373,6 +373,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 				$setting[ $x ] = $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) );
 			}
 			$setting[ $x ] = do_shortcode( $setting[ $x ] );
+			$setting[ $x ] = nf_parse_fields_shortcode( $setting[ $x ] );
 		}
 
 		return apply_filters( 'nf_email_notification_process_setting', $setting, $setting_name, $id );
