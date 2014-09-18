@@ -1,9 +1,21 @@
 <?php
 
 function ninja_forms_shortcode( $atts ){
-	$form = ninja_forms_return_echo( 'ninja_forms_display_form', $atts['id'] );
-	return $form;
+	if ( is_admin() ) {
+		$return = '[ninja_forms_display_form';
+		if ( is_array ( $atts ) ) {
+			foreach ( $atts as $key => $value ) {
+				$return .= ' ' . $key . '=' . $value;
+			}
+		}
+		$return .= ']';
+		return $return;
+	} else {
+		$form = ninja_forms_return_echo( 'ninja_forms_display_form', $atts['id'] );
+		return $form;
+	}
 }
+
 add_shortcode( 'ninja_forms_display_form', 'ninja_forms_shortcode' );
 
 function ninja_forms_field_shortcode( $atts ){
@@ -59,7 +71,7 @@ add_filter('the_content', 'ninja_forms_pre_process_shortcode', 9999);
  */
 function nf_sub_seq_num_shortcode( $sub_id ) {
 	global $ninja_forms_processing;
-	
+
 	$seq_num = Ninja_Forms()->sub( $sub_id )->get_seq_num();
 
 	//Get the form settings for the form currently being processed.
@@ -76,7 +88,7 @@ function nf_sub_seq_num_shortcode( $sub_id ) {
 	$ninja_forms_processing->update_form_setting( 'admin_email_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $admin_email_msg ) );
 	$ninja_forms_processing->update_form_setting( 'user_email_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $user_email_msg ) );
 	$ninja_forms_processing->update_form_setting( 'save_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $save_msg ) );
-	
+
 }
 
 add_action( 'nf_save_sub', 'nf_sub_seq_num_shortcode' );
@@ -107,9 +119,9 @@ function nf_all_fields_shortcode( $atts, $content = '' ) {
 
 		$value = apply_filters( 'nf_all_fields_field_value', ninja_forms_field_shortcode( array( 'id' => $field_id ) ), $field_id );
 		$label = strip_tags( apply_filters( 'nf_all_fields_field_label', $field['data']['label'], $field_id ) );
-		$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>' . $value . '</td></tr>'; 
+		$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>' . $value . '</td></tr>';
 	}
-	
+
 	$all_fields_table .= '</tbody></table>';
 
 	return apply_filters( 'nf_all_fields_table', $all_fields_table, $ninja_forms_processing->get_form_ID() );
