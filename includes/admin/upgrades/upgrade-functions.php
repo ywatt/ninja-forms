@@ -199,3 +199,106 @@ function nf_dismiss_upgrade_notice() {
 }
 
 add_action( 'nf_dismiss_upgrade_notice', 'nf_dismiss_upgrade_notice' );
+
+
+/**
+ * Clearing out the old email favourite field and replacing it with the new version.
+ * 
+ * @since 2.8.4
+ * @return void
+ */
+function nf_clear_old_email_fav() {
+	global $wpdb;
+
+	$email_fav_updated = get_option( 'nf_email_fav_updated', false );
+
+	if ( $email_fav_updated )
+		return false;
+
+	nf_change_email_fav();
+	nf_remove_old_email_settings();
+
+	update_option( 'nf_email_fav_updated', true );
+}
+
+add_action( 'admin_init', 'nf_clear_old_email_fav' );
+
+/**
+ * Remove old email "send to" settings from form fiels.
+ * 
+ * @since 2.8.4
+ * @return void
+ */
+function nf_remove_old_email_settings( $form_id = '' ) {
+
+	if ( '' == $form_id ) {
+		$forms = ninja_forms_get_all_forms( true );
+
+		if ( is_array( $forms ) ) {
+			foreach ( $forms as $form ) {
+				nf_remove_old_email_send_to( $form['id'] );
+			}
+		}
+	} else {
+		nf_remove_old_email_send_to( $form_id );
+	}
+}
+
+/**
+ * Removes old email settings form a single form.
+ * 
+ * @since 2.8.4
+ * @return void
+ */
+function nf_remove_old_email_send_to( $form_id ) {
+	if ( empty ( $form_id ) )
+		return false;
+
+	// Update any old email settings we have.
+	$fields = Ninja_Forms()->form( $form_id )->fields;
+
+	// Create a notification for our user email
+	if ( ! empty ( $fields ) ) {
+		foreach ( $fields as $field_id => $field ) {
+			if ( isset ( $field['data']['send_email'] ) && $field['data']['send_email'] == 1 ) {
+				// Add this field to our $addresses variable.
+				unset( $field['data']['send_email'] );
+				unset( $field['data']['replyto_email'] );
+				unset( $field['data']['from_name'] );
+
+				$args = array(
+					'update_array'	=> array(
+						'data'		=> serialize( $field['data'] ),
+					),
+					'where'			=> array(
+						'id' 		=> $field_id,
+					),
+				);
+
+				ninja_forms_update_field( $args );
+			}
+		}
+	}
+}
+
+/**
+ * Remove the old copy of our email defined field and replace it.
+ * 
+ * @since 2.8.4
+ * @return void
+ */
+function nf_change_email_fav() {
+	global $wpdb;
+
+	$email_address = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM ".NINJA_FORMS_FAV_FIELDS_TABLE_NAME." WHERE name = %s AND row_type = 0", 'Email' ), ARRAY_A );
+
+	if( isset($email_address['id']) ){
+		$sql = 'DELETE FROM `' . NINJA_FORMS_FAV_FIELDS_TABLE_NAME . '` WHERE id = ' . $email_address['id'];
+		$wpdb->query( $sql );
+	}
+
+	$sql = 'INSERT INTO `'.NINJA_FORMS_FAV_FIELDS_TABLE_NAME.'` (`id`, `row_type`, `type`, `order`, `data`, `name`) VALUES
+	(1, 0, \'_text\', 0, \'a:25:{s:5:"label";s:5:"Email";s:9:"label_pos";s:5:"above";s:13:"default_value";s:0:"";s:4:"mask";s:0:"";s:10:"datepicker";s:1:"0";s:5:"email";s:1:"1";s:10:"send_email";s:1:"0";s:10:"from_email";s:1:"0";s:10:"first_name";s:1:"0";s:9:"last_name";s:1:"0";s:9:"from_name";s:1:"0";s:14:"user_address_1";s:1:"0";s:14:"user_address_2";s:1:"0";s:9:"user_city";s:1:"0";s:8:"user_zip";s:1:"0";s:10:"user_phone";s:1:"0";s:10:"user_email";s:1:"1";s:21:"user_info_field_group";s:1:"1";s:3:"req";s:1:"0";s:5:"class";s:0:"";s:9:"show_help";s:1:"0";s:9:"help_text";s:0:"";s:17:"calc_auto_include";s:1:"0";s:11:"calc_option";s:1:"0";s:11:"conditional";s:0:"";}\', \'Email Address\')';
+	$wpdb->query($sql);
+}
+
