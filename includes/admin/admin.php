@@ -299,7 +299,6 @@ function nf_clear_old_email_fav() {
 
 	$forms = ninja_forms_get_all_forms( true );
 
-	$x = 1;
 	if ( is_array( $forms ) ) {
 		foreach ( $forms as $form ) {
 			$form_id = $form['id'];
@@ -328,7 +327,6 @@ function nf_clear_old_email_fav() {
 					}
 				}
 			}			
-			$x++;
 		}
 	}
 
