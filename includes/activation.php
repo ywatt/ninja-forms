@@ -193,6 +193,16 @@ function ninja_forms_activation( $network_wide ){
 
 	 	$opt['version'] = NF_PLUGIN_VERSION;
 
+	 	$current_settings = get_option( 'ninja_forms_settings', false );
+
+	 	if ( $current_settings ) {
+			update_option( 'nf_convert_notifications_complete', true );
+			update_option( 'nf_convert_subs_step', 'complete' );
+			update_option( 'nf_upgrade_notice', 'closed' );
+			update_option( 'nf_update_email_settings_complete', true );	 		
+			update_option( 'nf_email_fav_updated', true );	 		
+	 	}
+
 	 	update_option( "ninja_forms_settings", $opt );
 
 	 	// check for an existing form
@@ -202,10 +212,6 @@ function ninja_forms_activation( $network_wide ){
 	 		// if a starter form doesn't exist them create it
 	 		ninja_forms_add_starter_form();
 	 	}
-
-		update_option( 'nf_convert_notifications_complete', true );
-		update_option( 'nf_convert_subs_step', 'complete' );
-		update_option( 'nf_upgrade_notice', 'closed' );
 
 		// Add the transient to redirect
 		set_transient( '_nf_activation_redirect', true, 30 );
