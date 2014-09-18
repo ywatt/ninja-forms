@@ -187,7 +187,7 @@ function ninja_forms_activation( $network_wide ){
 
 	 	$current_settings = get_option( 'ninja_forms_settings', false );
 
-	 	if ( $current_settings ) {
+	 	if ( ! $current_settings ) {
 			update_option( 'nf_convert_notifications_complete', true );
 			update_option( 'nf_convert_subs_step', 'complete' );
 			update_option( 'nf_upgrade_notice', 'closed' );
