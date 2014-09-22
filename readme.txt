@@ -82,6 +82,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 * Moving reply to, cc, and bcc to an advanced settings section for email notifications.
 * Any field can now be inserted into the from name, address, to, subject, reply to, cc, and bcc fields.
+* Added a custom short code parser that will prevent other plugins from tampering with email and success message ninja forms short codes.
 
 *Bugs:*
 
@@ -108,6 +109,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 * Moving reply to, cc, and bcc to an advanced settings section for email notifications.
 * Any field can now be inserted into the from name, address, to, subject, reply to, cc, and bcc fields.
+* Added a custom short code parser that will prevent other plugins from tampering with email and success message ninja forms short codes.
 
 *Bugs:*
 
