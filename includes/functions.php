@@ -6,7 +6,6 @@ function ninja_forms_return_echo($function_name){
     ob_start();
     call_user_func_array($function_name, $arguments);
 	$return = ob_get_clean();
-	ob_end_clean();
 	return $return;
 }
 
