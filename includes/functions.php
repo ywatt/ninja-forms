@@ -483,3 +483,18 @@ function nf_get_objects_by_type( $object_type ) {
 
 	return $results;
 }
+
+/**
+ * Add filters so that users given the ability to see the "All Forms" table and the add new form page
+ * can add new fields and delete forms.
+ * 
+ * @since 2.8.6
+ * @return void
+ */
+function nf_add_permissions_filters( $cap ) {
+	return apply_filters( 'ninja_forms_admin_all_forms_capabilities', $cap );
+}
+
+add_filter( 'nf_new_field_capabilities', 'nf_add_permissions_filters' );
+add_filter( 'nf_delete_field_capabilities', 'nf_add_permissions_filters' );
+add_filter( 'nf_delete_form_capabilities', 'nf_add_permissions_filters' );
