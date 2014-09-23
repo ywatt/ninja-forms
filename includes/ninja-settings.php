@@ -15,6 +15,7 @@ function nf_get_settings(){
   $settings['javascript_error'] = isset ( $settings['javascript_error'] ) ? $settings['javascript_error'] : __( 'You cannot submit the form without Javascript enabled.', 'ninja-forms' );
   $settings['invalid_email'] = isset ( $settings['invalid_email'] ) ? $settings['invalid_email'] : __( 'Please enter a valid email address.', 'ninja-forms' );
   $settings['process_label'] = isset ( $settings['process_label'] ) ? $settings['process_label'] : __( 'Processing', 'ninja-forms' );
+  $settings['password_mismatch'] = isset ( $settings['password_mismatch'] ) ? $settings['password_mismatch'] : __( 'The passwords provided do not match.', 'ninja-forms' );
 
   $settings['date_format']           = apply_filters( 'ninja_forms_labels/date_format'           , $settings['date_format'] );
   $settings['currency_symbol']       = apply_filters( 'ninja_forms_labels/currency_symbol'       , $settings['currency_symbol'] );
