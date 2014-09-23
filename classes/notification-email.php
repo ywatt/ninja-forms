@@ -53,23 +53,12 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 		?>
 		<tr>
-			<th scope="row"><label for="settings-email_format"><?php _e( 'Format', 'ninja-forms' ); ?></label></th>
-			<td>
-				<select name="settings[email_format]" id="settings-email_format" data-key="email_format"/>
-					<option value="html" <?php selected( $email_format, 'html' ); ?>><?php _e( 'HTML', 'ninja-forms' ); ?></option>
-					<option value="plain" <?php selected( $email_format, 'plain' ); ?>><?php _e( 'Plain Text', 'ninja-forms' ); ?></option>
-				</select>
-			</td>
-		</tr>
-		<tr>
 			<th scope="row"><label for="settings-from_name"><?php _e( 'From Name', 'ninja-forms' ); ?></label></th>
 			<td>
 				<input name="settings[from_name]" type="text" id="settings-from_name" value="<?php echo $from_name; ?>" class="nf-tokenize" placeholder="Name or fields" data-token-limit="0" data-key="from_name" data-type="all" />
 				<span class="howto"><?php _e( 'Email will appear to be from this name.', 'ninja-forms' ) ?></span>
 			</td>
 		</tr>
-
-
 		<tr>
 			<th scope="row"><label for="settings-from_address"><?php _e( 'From Address', 'ninja-forms' ); ?></label></th>
 			<td>
@@ -137,6 +126,15 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			<th scope="row"><a href="#" id="toggle_email_advanced"><?php _e( 'Advanced Settings', 'ninja-forms' ); ?></a></th>
 		</tr>
 		<tbody id="email_advanced" style="display:none;">
+			<tr>
+				<th scope="row"><label for="settings-email_format"><?php _e( 'Format', 'ninja-forms' ); ?></label></th>
+				<td>
+					<select name="settings[email_format]" id="settings-email_format" data-key="email_format"/>
+						<option value="html" <?php selected( $email_format, 'html' ); ?>><?php _e( 'HTML', 'ninja-forms' ); ?></option>
+						<option value="plain" <?php selected( $email_format, 'plain' ); ?>><?php _e( 'Plain Text', 'ninja-forms' ); ?></option>
+					</select>
+				</td>
+			</tr>
 			<tr>
 				<th scope="row"><label for="settings-reply_to"><?php _e( 'Reply To', 'ninja-forms' ); ?></label></th>
 				<td>
@@ -371,6 +369,14 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			if ( $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) ) ) {
 				$setting[ $x ] = $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) );
 			}
+
+			$format = Ninja_Forms()->notification( $id )->get_setting( 'email_format' );
+			if ( 'html' == $format )
+				$html = 1;
+			else
+				$html = 0;
+
+			$setting[ $x ] = str_replace( '[ninja_forms_all_fields]', '[ninja_forms_all_fields html=' . $html . ']', $setting[ $x ] );
 			$setting[ $x ] = do_shortcode( $setting[ $x ] );
 			$setting[ $x ] = nf_parse_fields_shortcode( $setting[ $x ] );
 		}
