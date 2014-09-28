@@ -1,6 +1,6 @@
 <?php
 /**
- * Class for notification types. 
+ * Class for notification types.
  * This is the parent class. it should be extended by specific notification types
  *
  * @package     Ninja Forms
@@ -10,7 +10,7 @@
  * @since       2.8
 */
 
-class NF_Notification_Base_Type
+abstract class NF_Notification_Base_Type
 {
 
 	/**
@@ -24,7 +24,7 @@ class NF_Notification_Base_Type
 
 	/**
 	 * Processing function
-	 * 
+	 *
 	 * @access public
 	 * @since 2.8
 	 * @return false
@@ -35,7 +35,7 @@ class NF_Notification_Base_Type
 
 	/**
 	 * Output admin edit screen
-	 * 
+	 *
 	 * @access public
 	 * @since 2.8
 	 * @return false
@@ -46,7 +46,7 @@ class NF_Notification_Base_Type
 
 	/**
 	 * Save admin edit screen
-	 * 
+	 *
 	 * @access public
 	 * @since 2.8
 	 * @return void
