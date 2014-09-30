@@ -76,6 +76,9 @@ function nf_parse_sub_seq_num_shortcode( $setting, $setting_name = '', $id = '' 
 		return $setting;
 
 	$sub_id = $ninja_forms_processing->get_form_setting( 'sub_id' );
+	if ( empty ( $sub_id ) )
+		return $setting;
+
 	$seq_num = Ninja_Forms()->sub( $sub_id )->get_seq_num();
 	
 	$setting = str_replace( '[nf_sub_seq_num]', $seq_num, $setting );
