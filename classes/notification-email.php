@@ -368,6 +368,8 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		for ( $x = 0; $x <= count ( $setting ) - 1; $x++ ) { 
 			if ( $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) ) ) {
 				$setting[ $x ] = $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) );
+			} else {
+				$setting[ $x ] = '';
 			}
 
 			$format = Ninja_Forms()->notification( $id )->get_setting( 'email_format' );
