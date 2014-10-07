@@ -427,6 +427,21 @@ function nf_get_object_parent( $child_id ) {
 }
 
 /**
+ * Get an object's type
+ * 
+ * @since 2.8.6
+ * @param $object_id
+ * @return string $type
+ */
+
+function nf_get_object_type( $object_id ) {
+	global $wpdb;
+	// Get our object type
+	$type = $wpdb->get_row( $wpdb->prepare( 'SELECT type FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE id = %d', $object_id ), ARRAY_A );
+	return $type['type'];
+}
+
+/**
  * Return our form count
  *
  * @since 2.8

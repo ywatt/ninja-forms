@@ -317,6 +317,8 @@ class NF_Notifications
 			nf_update_object_meta( $n_id, $meta_key, $meta_value );
 		}
 
+		do_action( 'nf_save_notification', $n_id, $data, $new );
+
 		if ( $new ) {
 			$redirect = remove_query_arg( array( 'notification-action' ) );
 			$redirect = add_query_arg( array( 'id' => $n_id, 'notification-action' => 'edit' ), $redirect );
@@ -508,6 +510,7 @@ class NF_Notifications
 		$notifications = nf_get_notifications_by_form_id( $form_id, false );
 		if ( is_array( $notifications ) ) {
 			foreach ( $notifications as $id ) {
+				do_action( 'nf_notification_before_process', $id );
 				if ( Ninja_Forms()->notification( $id )->active ) {
 					Ninja_Forms()->notification( $id )->process();
 				}
