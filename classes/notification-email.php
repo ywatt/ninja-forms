@@ -246,7 +246,9 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$reply_to 		= $reply_to[0];		
 		$to 			= $this->process_setting( $id, 'to' );
 		$cc 			= $this->process_setting( $id, 'cc' );
+		$cc             = $cc[0];
 		$bcc 			= $this->process_setting( $id, 'bcc' );
+		$bcc 			= $bcc[0];
 
 		if ( empty ( $from_name ) )
 			$from_name = 'WordPress';
@@ -284,15 +286,11 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$headers[] = 'charset=utf-8';
 
 		if ( ! empty( $cc ) ) {
-			foreach ( $cc as $address ) {
-				$headers[] = 'Cc: ' . $address;				
-			}
+			$headers[] = 'Cc: ' . $address;
 		}
 
 		if ( ! empty( $bcc ) ) {
-			foreach ( $bcc as $address ) {
-				$headers[] = 'Bcc: ' . $address;				
-			}
+			$headers[] = 'Bcc: ' . $address;
 		}
 
 		$csv_attachment = '';
