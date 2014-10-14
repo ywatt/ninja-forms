@@ -21,7 +21,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 	/**
 	 * Output our edit screen
-	 * 
+	 *
 	 * @access public
 	 * @since 2.8
 	 * @return void
@@ -48,7 +48,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$cc = Ninja_Forms()->notification( $id )->get_setting( 'cc' );
 			$bcc = Ninja_Forms()->notification( $id )->get_setting( 'bcc' );
 			$email_subject = Ninja_Forms()->notification( $id )->get_setting( 'email_subject' );
-			$email_message = Ninja_Forms()->notification( $id )->get_setting( 'email_message' );		
+			$email_message = Ninja_Forms()->notification( $id )->get_setting( 'email_message' );
 		}
 
 		?>
@@ -79,7 +79,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 				<input name="settings[email_subject]" type="text" id="settings-email_subject" value="<?php echo $email_subject; ?>" class="nf-tokenize" placeholder="Subject Text or search for a field" data-token-limit="0" data-key="email_subject" data-type="all" />
 				<span class="howto"><?php _e( 'This will be the subject of the email.', 'ninja-forms' ) ?></span>
 			</td>
-		</tr>		
+		</tr>
 		<tr>
 			<th scope="row"><label for="settings-email_message"><?php _e( 'Email Message', 'ninja-forms' ); ?></label></th>
 			<td>
@@ -87,7 +87,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 				$settings = array(
 					'textarea_name' => 'settings[email_message]',
 				);
-				wp_editor( $email_message, 'email_message', $settings ); 
+				wp_editor( $email_message, 'email_message', $settings );
 				?>
 			</td>
 		</tr>
@@ -101,14 +101,14 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 							'attach_csv' => 'Submission CSV',
 						)
 					);
-					
+
 					foreach ( $attachment_types as $slug => $nicename ) {
 						if ( '' == $id ) {
 							$current_setting = 0;
 						} else {
 							$current_setting = Ninja_Forms()->notification( $id )->get_setting( $slug );
 						}
-						
+
 						?>
 						<li>
 							<input name="settings[<?php echo $slug; ?>]" type="hidden" value="0">
@@ -146,7 +146,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 				<td>
 					<input name="settings[cc]" type="text" id="settings-cc" value="<?php echo $cc; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="cc" data-type="all" />
 				</td>
-			</tr>		
+			</tr>
 			<tr>
 				<th scope="row"><label for="settings-bcc"><?php _e( 'Bcc', 'ninja-forms' ); ?></label></th>
 				<td>
@@ -164,8 +164,8 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$reply_to = $this->get_value( $id, 'reply_to', $form_id );
 			$to = $this->get_value( $id, 'to', $form_id );
 			$cc = $this->get_value( $id, 'cc', $form_id );
-			$bcc = $this->get_value( $id, 'bcc', $form_id );			
-			$email_subject = $this->get_value( $id, 'email_subject', $form_id );			
+			$bcc = $this->get_value( $id, 'bcc', $form_id );
+			$email_subject = $this->get_value( $id, 'email_subject', $form_id );
 		} else {
 			$from_name = get_bloginfo( 'name' );
 			$from_address = get_bloginfo( 'admin_email' );
@@ -193,7 +193,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 	/**
 	 * Get our input value labels
-	 * 
+	 *
 	 * @access public
 	 * @since 2.8
 	 * @return string $label
@@ -222,7 +222,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 	/**
 	 * Process our Email notification
-	 * 
+	 *
 	 * @access public
 	 * @since 2.8
 	 * @return void
@@ -243,7 +243,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$from_address 	= $from_address[0];
 
 		$reply_to 		= $this->process_setting( $id, 'reply_to' );
-		$reply_to 		= $reply_to[0];		
+		$reply_to 		= $reply_to[0];
 		$to 			= $this->process_setting( $id, 'to' );
 		$cc 			= $this->process_setting( $id, 'cc' );
 		$cc             = $cc[0];
@@ -305,31 +305,31 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 			// create CSV content
 			$csv_content = Ninja_Forms()->sub( $sub_id )->export( true );
-			
+
 			$upload_dir = wp_upload_dir();
 			$path = trailingslashit( $upload_dir['path'] );
 
 			// create temporary file
 			$path = tempnam( $path, 'Sub' );
 			$temp_file = fopen( $path, 'r+' );
-			
+
 			// write to temp file
 			fwrite( $temp_file, $csv_content );
 			fclose( $temp_file );
-			
+
 			// find the directory we will be using for the final file
 			$path = pathinfo( $path );
 			$dir = $path['dirname'];
 			$basename = $path['basename'];
-			
+
 			// create name for file
 			$new_name = apply_filters( 'ninja_forms_submission_csv_name', 'ninja-forms-submission' );
-			
+
 			// remove a file if it already exists
 			if( file_exists( $dir.'/'.$new_name.'.csv' ) ) {
 				unlink( $dir.'/'.$new_name.'.csv' );
 			}
-			
+
 			// move file
 			rename( $dir.'/'.$basename, $dir.'/'.$new_name.'.csv' );
 			$csv_attachment = $dir.'/'.$new_name.'.csv';
@@ -351,23 +351,25 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	 * Explode our settings by ` and extract each value.
 	 * Check to see if the setting is a field; if it is, assign the value.
 	 * Run shortcodes and return the result.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.8
 	 * @return array $setting
 	 */
 	public function process_setting( $id, $setting ) {
 		global $ninja_forms_processing;
-		
+
 		$setting_name = $setting;
 
 		$setting = explode( '`', Ninja_Forms()->notification( $id )->get_setting( $setting ) );
 
-		for ( $x = 0; $x <= count ( $setting ) - 1; $x++ ) { 
-			if ( $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) ) ) {
-				$setting[ $x ] = $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) );
-			} else {
-				$setting[ $x ] = '';
+		for ( $x = 0; $x <= count ( $setting ) - 1; $x++ ) {
+			if ( strpos( $setting[ $x ], 'field_' ) !== false ) {
+				if ( $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) ) ) {
+					$setting[ $x ] = $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) );
+				} else {
+					$setting[ $x ] = '';
+				}
 			}
 
 			$format = Ninja_Forms()->notification( $id )->get_setting( 'email_format' );
