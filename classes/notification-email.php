@@ -16,7 +16,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	 * Get things rolling
 	 */
 	function __construct() {
-
+		$this->name = __( 'Email', 'ninja-forms' );
 	}
 
 	/**
@@ -387,3 +387,5 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	}
 
 }
+
+return new NF_Notification_Email();

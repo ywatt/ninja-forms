@@ -65,7 +65,7 @@ class Ninja_Forms {
 	/**
 	 * @var registered_notification_types
 	 */
-	var $registered_notification_types;
+	var $notification_types = array();
 
 	/**
 	 * Main Ninja_Forms Instance
@@ -112,16 +112,7 @@ class Ninja_Forms {
 		// Instead, the subs() methods will act as wrappers for it.
 		self::$instance->subs = new NF_Subs();
 
-		// Get our notifications up and running.
 		self::$instance->notifications = new NF_Notifications();
-
-		self::$instance->register->notification_type( 'email', __( 'Email', 'ninja-forms' ), 'NF_Notification_Email' );
-		self::$instance->register->notification_type( 'redirect', __( 'Redirect', 'ninja-forms' ), 'NF_Notification_Redirect' );
-		self::$instance->register->notification_type( 'success_message', __( 'Success Message', 'ninja-forms' ), 'NF_Notification_Success_Message' );
-
-		do_action( 'nf_register_notification_types', self::$instance );
-
-		self::$instance->notification_types = new NF_Notification_Types();
 
 		// Get our step processor up and running.
 		// We only need this in the admin.
@@ -353,13 +344,9 @@ class Ninja_Forms {
 		// Include our notifications object
 		require_once( NF_PLUGIN_DIR . 'classes/notifications.php' );
 		// Include our notification table object
-		require_once( NF_PLUGIN_DIR . 'classes/notifications-table.php' );		
-		// Include our notification table object
-		require_once( NF_PLUGIN_DIR . 'classes/notification-types.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/notifications-table.php' );
+		// Include our base notification type
 		require_once( NF_PLUGIN_DIR . 'classes/notification-base-type.php' );
-		require_once( NF_PLUGIN_DIR . 'classes/notification-email.php' );
-		require_once( NF_PLUGIN_DIR . 'classes/notification-redirect.php' );
-		require_once( NF_PLUGIN_DIR . 'classes/notification-success-message.php' );
 
 		if ( is_admin () ) {
 			// Include our step processing stuff if we're in the admin.

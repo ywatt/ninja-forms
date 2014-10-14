@@ -27,6 +27,13 @@ class NF_Notifications
 	function __construct() {
 		global $pagenow;
 
+		// Register our notification types
+		Ninja_Forms()->notification_types['email'] = require_once( NF_PLUGIN_DIR . 'classes/notification-email.php' );
+		Ninja_Forms()->notification_types['redirect'] = require_once( NF_PLUGIN_DIR . 'classes/notification-redirect.php' );
+		Ninja_Forms()->notification_types['success_message'] = require_once( NF_PLUGIN_DIR . 'classes/notification-success-message.php' );
+
+		Ninja_Forms()->notification_types = apply_filters( 'nf_notification_types', Ninja_Forms()->notification_types );
+
 		// Register our notification tab
 		add_action( 'admin_init', array( $this, 'register_tab' ) );
 		
@@ -273,7 +280,7 @@ class NF_Notifications
 					<tbody id="notification-<?php echo $slug; ?>" class="notification-type" style="<?php echo $display;?>">
 						<?php
 							// Call our type edit screen.
-							Ninja_Forms()->notification_types->$slug->edit_screen( $id );
+							Ninja_Forms()->notification_types[ $slug ]->edit_screen( $id );
 						?>
 					</tbody>
 					<?php
@@ -311,7 +318,7 @@ class NF_Notifications
 			$new = false;
 		}
 
-		$data = Ninja_Forms()->notification_types->$type->save_admin( $n_id, $data );
+		$data = Ninja_Forms()->notification_types[ $type ]->save_admin( $n_id, $data );
 
 		foreach ( $settings as $meta_key => $meta_value ) {
 			nf_update_object_meta( $n_id, $meta_key, $meta_value );
@@ -338,8 +345,8 @@ class NF_Notifications
 	 */
 	public function get_types() {
 		$types = array();
-		foreach ( Ninja_Forms()->registered_notification_types as $slug => $type ) {
-			$types[ $slug ] = $type['nicename'];
+		foreach ( Ninja_Forms()->notification_types as $slug => $object ) {
+			$types[ $slug ] = $object->name;
 		}
 		return $types;
 	}

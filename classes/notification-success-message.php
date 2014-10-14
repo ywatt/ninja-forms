@@ -16,7 +16,7 @@ class NF_Notification_Success_Message extends NF_Notification_Base_Type
 	 * Get things rolling
 	 */
 	function __construct() {
-
+		$this->name = __( 'Success Message', 'ninja-forms' );
 	}
 
 	/**
@@ -76,5 +76,6 @@ class NF_Notification_Success_Message extends NF_Notification_Base_Type
 		$success_msg = nf_parse_fields_shortcode( $success_msg );
 		$ninja_forms_processing->add_success_msg( 'success_msg', $success_msg );
 	}
-
 }
+
+return new NF_Notification_Success_Message();
