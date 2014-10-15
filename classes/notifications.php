@@ -50,6 +50,8 @@ class NF_Notifications
 		add_action( 'wp_ajax_nf_activate_notification', array( $this, 'activate_notification' ) );
 		add_action( 'wp_ajax_nf_deactivate_notification', array( $this, 'deactivate_notification' ) );
 
+
+
 		// Add our hook to add notification types processors.
 		add_action( 'ninja_forms_post_process', array( $this, 'notification_processing' ), 999 );
 	}
@@ -360,6 +362,9 @@ class NF_Notifications
 	 * @return void
 	 */
 	public function delete_notification() {
+		// Bail if our nonce doesn't verify.
+		check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
+
 		$n_id = $_REQUEST['n_id'];
 		Ninja_Forms()->notification( $n_id )->delete();
 	}
@@ -373,6 +378,9 @@ class NF_Notifications
 	 * @return void
 	 */
 	public function activate_notification() {
+		// Bail if our nonce doesn't verify.
+		check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
+
 		$n_id = $_REQUEST['n_id'];
 		Ninja_Forms()->notification( $n_id )->activate();
 	}
@@ -386,6 +394,9 @@ class NF_Notifications
 	 * @return void
 	 */
 	public function deactivate_notification() {
+		// Bail if our nonce doesn't verify.
+		check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
+
 		$n_id = $_REQUEST['n_id'];
 		Ninja_Forms()->notification( $n_id )->deactivate();
 	}
