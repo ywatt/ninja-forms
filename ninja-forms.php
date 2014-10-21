@@ -123,6 +123,10 @@ class Ninja_Forms {
 			self::$instance->convert_notifications = new NF_Convert_Notifications();
 			self::$instance->update_email_settings = new NF_Update_Email_Settings();
 		}
+
+		// Fire our Ninja Forms init filter.
+		// This will allow other plugins to register items to the instance.
+		do_action( 'nf_init', self::$instance );
 	}
 
 	/**
