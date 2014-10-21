@@ -65,7 +65,7 @@ abstract class NF_Notification_Base_Type
 	 * @since 2.8
 	 * @return array $setting
 	 */
-	public function process_setting( $id, $setting ) {
+	public function process_setting( $id, $setting, $html = 1 ) {
 		global $ninja_forms_processing;
 
 		$setting_name = $setting;
@@ -80,12 +80,6 @@ abstract class NF_Notification_Base_Type
 					$setting[ $x ] = '';
 				}
 			}
-
-			$format = Ninja_Forms()->notification( $id )->get_setting( 'email_format' );
-			if ( 'html' == $format )
-				$html = 1;
-			else
-				$html = 0;
 
 			$setting[ $x ] = str_replace( '[ninja_forms_all_fields]', '[ninja_forms_all_fields html=' . $html . ']', $setting[ $x ] );
 			$setting[ $x ] = do_shortcode( $setting[ $x ] );

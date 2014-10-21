@@ -361,8 +361,14 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		// save the setting name
 		$setting_name = $setting;
 
+		$format = Ninja_Forms()->notification( $id )->get_setting( 'email_format' );
+		if ( 'html' == $format )
+			$html = 1;
+		else
+			$html = 0;
+
 		// call parent process setting method
-		$setting = parent::process_setting( $id, $setting );
+		$setting = parent::process_setting( $id, $setting, $html );
 		
 		// gotta keep the old filter in case anyone was using it.
 		return apply_filters( 'nf_email_notification_process_setting', $setting, $setting_name, $id );
