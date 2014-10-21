@@ -357,32 +357,14 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	 * @return array $setting
 	 */
 	public function process_setting( $id, $setting ) {
-		global $ninja_forms_processing;
 
+		// save the setting name
 		$setting_name = $setting;
 
-		$setting = explode( '`', Ninja_Forms()->notification( $id )->get_setting( $setting ) );
-
-		for ( $x = 0; $x <= count ( $setting ) - 1; $x++ ) {
-			if ( strpos( $setting[ $x ], 'field_' ) !== false ) {
-				if ( $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) ) ) {
-					$setting[ $x ] = $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) );
-				} else {
-					$setting[ $x ] = '';
-				}
-			}
-
-			$format = Ninja_Forms()->notification( $id )->get_setting( 'email_format' );
-			if ( 'html' == $format )
-				$html = 1;
-			else
-				$html = 0;
-
-			$setting[ $x ] = str_replace( '[ninja_forms_all_fields]', '[ninja_forms_all_fields html=' . $html . ']', $setting[ $x ] );
-			$setting[ $x ] = do_shortcode( $setting[ $x ] );
-			$setting[ $x ] = nf_parse_fields_shortcode( $setting[ $x ] );
-		}
-
+		// call parent process setting method
+		$setting = parent::process_setting( $id, $setting );
+		
+		// gotta keep the old filter in case anyone was using it.
 		return apply_filters( 'nf_email_notification_process_setting', $setting, $setting_name, $id );
 	}
 
