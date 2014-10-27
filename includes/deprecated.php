@@ -811,6 +811,8 @@ function nf_deprecate_form_import( $form ) {
 
 	if ( isset ( $form['data']['user_subject'] ) )
 		unset ( $form['data']['user_subject'] );
+
+	return $form;
 }
 
 add_filter( 'ninja_forms_before_import_form', 'nf_deprecate_form_import' );
