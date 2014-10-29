@@ -286,11 +286,11 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$headers[] = 'charset=utf-8';
 
 		if ( ! empty( $cc ) ) {
-			$headers[] = 'Cc: ' . $address;
+			$headers[] = 'Cc: ' . $cc;
 		}
 
 		if ( ! empty( $bcc ) ) {
-			$headers[] = 'Bcc: ' . $address;
+			$headers[] = 'Bcc: ' . $bcc;
 		}
 
 		$csv_attachment = '';
