@@ -246,9 +246,9 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$reply_to 		= $reply_to[0];
 		$to 			= $this->process_setting( $id, 'to' );
 		$cc 			= $this->process_setting( $id, 'cc' );
-		$cc             = $cc[0];
+//		$cc             = $cc[0];
 		$bcc 			= $this->process_setting( $id, 'bcc' );
-		$bcc 			= $bcc[0];
+//		$bcc 			= $bcc[0];
 
 		if ( empty ( $from_name ) )
 			$from_name = 'WordPress';
@@ -286,11 +286,15 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$headers[] = 'charset=utf-8';
 
 		if ( ! empty( $cc ) ) {
-			$headers[] = 'Cc: ' . $cc;
+			foreach ($cc as $ccemail) {
+				$headers[] = 'Cc: ' . $ccemail;
+			}
 		}
 
 		if ( ! empty( $bcc ) ) {
-			$headers[] = 'Bcc: ' . $bcc;
+			foreach ($bcc as $bccemail) {
+				$headers[] = 'Bcc: ' . $bccemail;
+			}
 		}
 
 		$csv_attachment = '';
@@ -367,7 +371,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 		// call parent process setting method
 		$setting = parent::process_setting( $id, $setting, $html );
-		
+
 		// gotta keep the old filter in case anyone was using it.
 		return apply_filters( 'nf_email_notification_process_setting', $setting, $setting_name, $id );
 	}
