@@ -4,17 +4,17 @@
 function ninja_forms_register_tab_form_settings(){
 	$all_forms_link = esc_url(remove_query_arg(array('form_id', 'tab')));
 	$args = array(
-		'name' => __( 'Form Settings', 'ninja-forms' ),
+		'name' => __( 'Settings', 'ninja-forms' ),
 		'page' => 'ninja-forms',
-		'display_function' => 'ninja_forms_display_form_settings',
+		// 'display_function' => 'ninja_forms_display_form_settings',
 		'save_function' => 'ninja_forms_save_form_settings',
 		'tab_reload' => false,
-		//'title' => '<h2>Forms <a href="'.$all_forms_link.'" class="add-new-h2">'.__('View All Forms', 'ninja-forms').'</a></h2>',
+		// 'title' => '<h2>Forms <a href="'.$all_forms_link.'" class="add-new-h2">'.__('View All Forms', 'ninja-forms').'</a></h2>',
 	);
 	ninja_forms_register_tab('form_settings', $args);
 }
 
-add_action( 'admin_init', 'ninja_forms_register_tab_form_settings' );
+add_action( 'admin_init', 'ninja_forms_register_tab_form_settings', 11 );
 
 function ninja_forms_display_form_settings($form_id, $data){
 	if(isset($data['form_title'])){
