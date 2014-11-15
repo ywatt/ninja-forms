@@ -13,9 +13,7 @@ Ninja Forms is the ultimate FREE form creation solution for WordPress. Build Wor
 
 The Ninja Forms framework is now on [GitHub](https://github.com/wpninjas/ninja-forms)! If you're a developer and want to help make Ninja Forms better, check out our [GitHub repo](https://github.com/wpninjas/ninja-forms). It's also a great resource for developers who are interested in creating premium extensions for our online store.
 
-This review of Ninja Forms was done by Pippin Williamson:
-
-[youtube http://www.youtube.com/watch?v=hVfPmKzqYpk]
+[youtube http://www.youtube.com/watch?v=2yf2Fqvbmkk]
 
 Here are just a few of the things you will find in Ninja Forms:
 
@@ -33,7 +31,7 @@ Here are just a few of the things you will find in Ninja Forms:
 * Please note that if you are using a version of PHP lower than 5.3, you may experience some problems using AJAX Submissions. These can be minimized by using simple success/error messages without any quotes or special characters.
 
 = Demo Site =
-Please feel free to visit our [demo site](http://demo.wpninjas.com/ninja-forms/) where you can test the features of Ninja Forms and all of our extensions. http://demo.wpninjas.com/ninja-forms/
+Please feel free to visit our [demo site](http://demo.ninjaforms.com) where you can test the features of Ninja Forms and all of our extensions. http://demo.ninjaforms.com
 
 = In addition to these features, extensions are available at our website: =
 
