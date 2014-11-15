@@ -159,14 +159,6 @@ function ninja_forms_tab_addons(){
             'docs' => '',
         ),        
         array (
-            'title' => __( 'HubSpot', 'ninja-forms' ),
-            'image' => 'http://ninjaforms.com/wp-content/uploads/edd/2013/10/hubspot-300x121.png',
-            'content' => __( 'The Ninja Forms HubSpot Extension extends a forms capabilities by forwarding submit data directly into your HubSpot account.', 'ninja-forms' ),
-            'link' => 'http://ninjaforms.com/downloads/hubspot/',
-            'plugin' => 'ninja-forms-hubspot/ninja-forms-hubspot.php',
-            'docs' => '',
-        ),
-        array (
             'title' => __( 'Text Message Notifications', 'ninja-forms' ),
             'image' => 'http://ninjaforms.com/wp-content/uploads/edd/2013/10/text-message-notifications-300x121.png',
             'content' => __( 'Send text message notifications to a site administrator when a form has been submitted.', 'ninja-forms' ),
