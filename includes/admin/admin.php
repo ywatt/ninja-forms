@@ -94,6 +94,7 @@ function ninja_forms_admin(){
 					echo $ninja_forms_tabs[$current_page][$current_tab]['title'];
 				}
 
+				echo '<h2>Forms <a href="#" class="add-new-h2">'.__('View All Forms', 'ninja-forms').'</a></h2>';
 
 				if($ninja_forms_tabs[$current_page][$current_tab]['show_tab_links']){
 					?>
