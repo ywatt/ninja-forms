@@ -86,7 +86,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'desc' => '',
 				'label' => __( 'Require user to be logged in to view form?', 'ninja-forms' ),
 				'display_function' => '',
-				'help' => __( '', 'ninja-forms' ),
+				'help' => '',
 			),
 			array(
 				'name' => 'append_page',
@@ -94,7 +94,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'desc' => '',
 				'label' => __( 'Add form to this page', 'ninja-forms' ),
 				'display_function' => '',
-				'help' => __('', 'ninja-forms'),
+				'help' => '',
 				'options' => $append_array,
 			),
 			array(
@@ -103,7 +103,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'desc' => '',
 				'label' => __( 'Submit via AJAX (without page reload)?', 'ninja-forms' ),
 				'display_function' => '',
-				'help' => __( '', 'ninja-forms' )
+				'help' => '',
 			),
 			array(
 				'name' => 'clear_complete',
