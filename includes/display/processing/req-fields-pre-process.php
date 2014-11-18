@@ -100,4 +100,4 @@ function ninja_forms_req_fields_process(){
 	}
 }
 
- add_action( 'ninja_forms_pre_process', 'ninja_forms_req_fields_process', 13);
+add_action( 'ninja_forms_pre_process', 'ninja_forms_req_fields_process', 13);

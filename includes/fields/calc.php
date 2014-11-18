@@ -311,7 +311,7 @@ function ninja_forms_field_calc_edit( $field_id, $data ) {
  * @since 2.2.28
  * @return void
  */
-function ninja_forms_field_calc_display( $field_id, $data, $form_id ){
+function ninja_forms_field_calc_display( $field_id, $data ){
 
 	if ( isset( $data['default_value'] ) ) {
 		$default_value = $data['default_value'];
@@ -347,7 +347,7 @@ function ninja_forms_field_calc_display( $field_id, $data, $form_id ){
 		$calc_method = '';
 	}
 
-	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
+	$field_class = ninja_forms_get_field_class( $field_id );
 
 	?>
 	<input type="hidden" name="ninja_forms_field_<?php echo $field_id;?>" value="<?php echo $default_value;?>" class="<?php echo $field_class;?>">

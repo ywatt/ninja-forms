@@ -16,9 +16,9 @@ function ninja_forms_display_fields($form_id){
 
 	if ( is_array ( $field_results ) AND !empty ( $field_results ) ) {
 		foreach ( $field_results as $field ) {
-			if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
+			if ( isset ( $ninja_forms_loading ) ) {
 				$field = $ninja_forms_loading->get_field_settings( $field['id'] );
-			} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
+			} else if ( isset ( $ninja_forms_processing ) ) {
 				$field = $ninja_forms_processing->get_field_settings( $field['id'] );
 			}
 
@@ -95,7 +95,7 @@ function ninja_forms_display_fields($form_id){
 
 					//Check to see if display_wrap has been disabled. If it hasn't, show the wrapping DIV.
 					if($display_wrap){
-						$field_wrap_class = ninja_forms_get_field_wrap_class($field_id, $form_id);
+						$field_wrap_class = ninja_forms_get_field_wrap_class($field_id);
 						$field_wrap_class = apply_filters( 'ninja_forms_field_wrap_class', $field_wrap_class, $field_id );
 						do_action( 'ninja_forms_display_before_opening_field_wrap', $field_id, $data );
 						?>
@@ -119,7 +119,6 @@ function ninja_forms_display_fields($form_id){
 						do_action( 'ninja_forms_display_before_field_function', $field_id, $data );
 						$arguments['field_id'] = $field_id;
 						$arguments['data'] = $data;
-						$arguments['form_id'] = $form_id;
 						call_user_func_array($display_function, $arguments);
 						do_action( 'ninja_forms_display_after_field_function', $field_id, $data );
 						if( $label_pos == 'left' OR $label_pos == 'inside'){
@@ -156,13 +155,12 @@ function ninja_forms_display_fields($form_id){
  *
 **/
 
-function ninja_forms_get_field_wrap_class( $field_id, $form_id ){
+function ninja_forms_get_field_wrap_class($field_id){
 	global $ninja_forms_loading, $ninja_forms_processing;
 	$field_wrap_class = 'field-wrap';
-
-	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
+	if ( isset ( $ninja_forms_loading ) ) {
 		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
-	} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
+	} else {
 		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 
@@ -216,26 +214,23 @@ function ninja_forms_get_field_wrap_class( $field_id, $form_id ){
 }
 
 
-function ninja_forms_get_field_class( $field_id, $form_id = '' ) {
+function ninja_forms_get_field_class( $field_id ) {
 	global $ninja_forms_loading, $ninja_forms_processing;
 
-	if ( '' == $form_id ) {
-		$field = ninja_forms_get_field_by_id( $field_id );
-		$form_id = $field['form_id'];
-	}
-
-	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
+	if ( isset ( $ninja_forms_loading ) ) {
 		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
-		$field_class = $ninja_forms_loading->get_field_setting( $field_id, 'field_class' );
-	} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
+	} else {
 		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
-		$field_class = $ninja_forms_processing->get_field_setting( $field_id, 'field_class' );
 	}
 	
 	$field_data = $field_row['data'];
 	$field_data = apply_filters( 'ninja_forms_field', $field_data, $field_id );
 
-	$field_type = isset ( $field_row['type'] ) ? $field_row['type'] : '';
+	if ( isset ( $ninja_forms_loading ) ) {
+		$field_class = $ninja_forms_loading->get_field_setting( $field_id, 'field_class' );
+	} else {
+		$field_class = $ninja_forms_processing->get_field_setting( $field_id, 'field_class' );
+	}
 
 	$x = 0;
 	$custom_class = '';
@@ -255,6 +250,8 @@ function ninja_forms_get_field_class( $field_id, $form_id = '' ) {
 	if(isset($field_data['req']) AND $field_data['req'] == 1){
 		$req_class = 'ninja-forms-req';
 	}
+
+	$form_id = $field_row['form_id'];
 
 	// Check to see if we are dealing with a field that has the user_info_field_group set.
 	if ( isset ( $field_data['user_info_field_group_name'] ) and $field_data['user_info_field_group_name'] != '' ) {
@@ -285,7 +282,7 @@ function ninja_forms_get_field_class( $field_id, $form_id = '' ) {
     	$address_class = 'address zip';
     }
 
-    if ( '_country' == $field_type ) {
+    if ( '_country' == $field_row['type'] ) {
     	$address_class = 'address country';
     }
 

@@ -7,14 +7,11 @@
 function ninja_forms_display_field_label( $field_id, $data ){
 	global $ninja_forms_fields, $ninja_forms_loading, $ninja_forms_processing;
 
-    $field = ninja_forms_get_field_by_id( $field_id );
-    $form_id = $field['form_id'];
-
 	$plugin_settings = nf_get_settings();
 
-	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
+	if ( isset ( $ninja_forms_loading ) ) {
 		$field_row = $ninja_forms_loading->get_field_settings( $field_id );
-	} else if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
+	} else if ( isset ( $ninja_forms_processing ) ) {
 		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
 	}
 	

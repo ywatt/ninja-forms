@@ -42,7 +42,7 @@ function ninja_forms_field_submit_display($field_id, $data){
 		$show_field = true;
 	}
 
-	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
+	$field_class = ninja_forms_get_field_class($field_id);
 	if(isset($data['label']) AND $data['label'] != ''){
 		$label = $data['label'];
 	}else{
