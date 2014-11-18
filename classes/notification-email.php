@@ -138,19 +138,19 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			<tr>
 				<th scope="row"><label for="settings-reply_to"><?php _e( 'Reply To', 'ninja-forms' ); ?></label></th>
 				<td>
-					<input name="settings[reply_to]" type="text" id="settings-reply_to" value="<?php echo $reply_to; ?>" class="nf-tokenize" placeholder="One email address or field" data-token-limit="1" data-key="reply_to" data-type="all" />
+					<input name="settings[reply_to]" type="text" id="settings-reply_to" value="<?php echo $reply_to; ?>" class="nf-tokenize" placeholder="<?php __( 'One email address or field', 'ninja-forms' ); ?>" data-token-limit="1" data-key="reply_to" data-type="all" />
 				</td>
 			</tr>
 			<tr>
 				<th scope="row"><label for="settings-cc"><?php _e( 'Cc', 'ninja-forms' ); ?></label></th>
 				<td>
-					<input name="settings[cc]" type="text" id="settings-cc" value="<?php echo $cc; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="cc" data-type="all" />
+					<input name="settings[cc]" type="text" id="settings-cc" value="<?php echo $cc; ?>" class="nf-tokenize" placeholder="<?php __( 'Email addresses or search for a field', 'ninja-forms' ); ?>" data-token-limit="0" data-key="cc" data-type="all" />
 				</td>
 			</tr>
 			<tr>
 				<th scope="row"><label for="settings-bcc"><?php _e( 'Bcc', 'ninja-forms' ); ?></label></th>
 				<td>
-					<input name="settings[bcc]" type="text" id="settings-bcc" value="<?php echo $bcc; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="bcc" data-type="all" />
+					<input name="settings[bcc]" type="text" id="settings-bcc" value="<?php echo $bcc; ?>" class="nf-tokenize" placeholder="<?php __( 'Email addresses or search for a field', 'ninja-forms' ); ?>" data-token-limit="0" data-key="bcc" data-type="all" />
 				</td>
 			</tr>
 		</tbody>
