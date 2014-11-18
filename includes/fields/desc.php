@@ -52,7 +52,7 @@ function ninja_forms_register_field_desc(){
 
 add_action('init', 'ninja_forms_register_field_desc');
 
-function ninja_forms_field_desc_display( $field_id, $data, $form_id ){
+function ninja_forms_field_desc_display( $field_id, $data, $form_id = '' ){
 
 	if(isset($data['desc_el'])){
 		$desc_el = $data['desc_el'];

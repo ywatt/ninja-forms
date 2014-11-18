@@ -46,7 +46,7 @@ function ninja_forms_register_field_spam(){
 
 add_action('init', 'ninja_forms_register_field_spam');
 
-function ninja_forms_field_spam_edit($field_id, $data){
+function ninja_forms_field_spam_edit( $field_id, $data ){
 	if(isset($data['label'])){
 		$question = $data['label'];
 	}else{
@@ -75,7 +75,7 @@ function ninja_forms_field_spam_edit($field_id, $data){
 	<?php
 }
 
-function ninja_forms_field_spam_display( $field_id, $data, $form_id ){
+function ninja_forms_field_spam_display( $field_id, $data, $form_id = '' ){
 	if(isset($data['default_value'])){
 		$default_value = $data['default_value'];
 	}else{

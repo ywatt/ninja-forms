@@ -52,7 +52,7 @@ function ninja_forms_register_field_textarea(){
 
 add_action('init', 'ninja_forms_register_field_textarea');
 
-function ninja_forms_field_textarea_display( $field_id, $data, $form_id ){
+function ninja_forms_field_textarea_display( $field_id, $data, $form_id = '' ){
 	if(isset($data['default_value'])){
 		$default_value = $data['default_value'];
 	}else{

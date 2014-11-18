@@ -89,7 +89,7 @@ function ninja_forms_field_number_edit( $field_id, $data ) {
 	<?php
 }
 
-function ninja_forms_field_number_display( $field_id, $data, $form_id ) {
+function ninja_forms_field_number_display( $field_id, $data, $form_id = '' ) {
 	if ( isset( $data['default_value'] ) ) {
 		$default_value = $data['default_value'];
 	} elseif( isset( $data['number_min'] ) ) {

@@ -127,7 +127,7 @@ add_action( 'init', 'ninja_forms_register_field_credit_card' );
  * @returns void
  */
 
-function ninja_forms_field_credit_card_display( $field_id, $data, $form_id ) {
+function ninja_forms_field_credit_card_display( $field_id, $data, $form_id = '' ) {
 	global $ninja_forms_processing;
 
 	if( isset( $data['default_value'] ) ) {

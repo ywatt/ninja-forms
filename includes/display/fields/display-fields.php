@@ -156,9 +156,14 @@ function ninja_forms_display_fields($form_id){
  *
 **/
 
-function ninja_forms_get_field_wrap_class( $field_id, $form_id ){
+function ninja_forms_get_field_wrap_class( $field_id, $form_id = '' ){
 	global $ninja_forms_loading, $ninja_forms_processing;
 	$field_wrap_class = 'field-wrap';
+
+	if ( '' == $form_id ) {
+		$field = ninja_forms_get_field_by_id( $field_id );
+		$form_id = $field['form_id'];
+	}
 
 	if ( isset ( $ninja_forms_loading ) && $ninja_forms_loading->get_form_ID() == $form_id ) {
 		$field_row = $ninja_forms_loading->get_field_settings( $field_id );

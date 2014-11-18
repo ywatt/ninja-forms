@@ -311,7 +311,7 @@ function ninja_forms_field_calc_edit( $field_id, $data ) {
  * @since 2.2.28
  * @return void
  */
-function ninja_forms_field_calc_display( $field_id, $data, $form_id ){
+function ninja_forms_field_calc_display( $field_id, $data, $form_id = '' ){
 
 	if ( isset( $data['default_value'] ) ) {
 		$default_value = $data['default_value'];

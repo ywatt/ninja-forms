@@ -310,7 +310,7 @@ add_action( 'init', 'ninja_forms_register_field_country' );
  * @returns void
  */
 
-function ninja_forms_field_country_display( $field_id, $data, $form_id ) {
+function ninja_forms_field_country_display( $field_id, $data, $form_id = '' ) {
 	$countries = array(
 		__( 'Afghanistan', 'ninja-forms' ) => 'AF',
 		__( 'Albania', 'ninja-forms' ) => 'AL',

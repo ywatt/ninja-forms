@@ -23,7 +23,7 @@ function ninja_forms_register_field_hr(){
 
 add_action('init', 'ninja_forms_register_field_hr');
 
-function ninja_forms_field_hr_display( $field_id, $data, $form_id ){
+function ninja_forms_field_hr_display( $field_id, $data, $form_id = '' ){
 	if( isset( $data['display_style'] ) ){
 		$display_style = $data['display_style'];
 	}else{

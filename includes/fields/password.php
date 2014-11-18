@@ -55,7 +55,7 @@ function ninja_forms_register_field_profile_pass(){
 
 add_action( 'init', 'ninja_forms_register_field_profile_pass' );
 
-function ninja_forms_field_profile_pass_display( $field_id, $data, $form_id ){
+function ninja_forms_field_profile_pass_display( $field_id, $data, $form_id = '' ){
 	global $current_user;
 	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
 
