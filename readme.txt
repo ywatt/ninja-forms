@@ -1106,7 +1106,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 *Changes:*
 
 * Added a new action hook that runs if a form is set to "Require Logged-In", but the user is not logged in. It is named: ninja_forms_display_user_not_logged_in.
-* Added new filters for the arguments sent to the wp_editor() function when a rich text editor is rendered. They are:	ninja_forms_textarea_rte (Front-End Textarea), ninja_forms_admin_metabox_rte (Ninja Forms admin settings areas), ninja_forms_edit_field_rte (Field settings).
+* Added new filters for the arguments sent to the wp_editor() function when a rich text editor is rendered. They are:   ninja_forms_textarea_rte (Front-End Textarea), ninja_forms_admin_metabox_rte (Ninja Forms admin settings areas), ninja_forms_edit_field_rte (Field settings).
 
 = 2.2.0 =
 
