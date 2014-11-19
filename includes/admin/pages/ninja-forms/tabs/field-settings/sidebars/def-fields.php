@@ -5,7 +5,7 @@ function ninja_forms_register_sidebar_def_fields(){
 	$args = array(
 		'name' => __( 'Defined Fields', 'ninja-forms' ),
 		'page' => 'ninja-forms',
-		'tab' => 'field_settings',
+		'tab' => 'fields',
 		'display_function' => 'ninja_forms_sidebar_def_fields'
 	);
 	ninja_forms_register_sidebar('def_fields', $args);

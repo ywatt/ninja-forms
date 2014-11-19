@@ -43,4 +43,7 @@ function ninja_forms_admin_js(){
 
 	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array('date_format' => $date_format, 'nf_ajax_nonce' => wp_create_nonce( 'nf_ajax') ) );
 
+	wp_enqueue_script( 'nf-admin-fields',
+		NINJA_FORMS_URL . 'assets/js/' . $src .'/admin-fields' . $suffix . '.js' );
+
 }
