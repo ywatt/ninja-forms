@@ -46,4 +46,10 @@ function ninja_forms_admin_js(){
 	wp_enqueue_script( 'nf-admin-fields',
 		NINJA_FORMS_URL . 'assets/js/' . $src .'/admin-fields' . $suffix . '.js' );
 
+	$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
+
+	if ( '' != $form_id ) {
+		$fields = Ninja_Forms()->form( $form_id )->fields;
+		wp_localize_script( 'nf-admin-fields', 'nf_admin', array( 'fields' => $fields ) );
+	}
 }

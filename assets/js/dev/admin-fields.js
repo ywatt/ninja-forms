@@ -4,6 +4,20 @@
  */
 
 jQuery( document ).ready( function() {
-	var fields = 
+	var Field = Backbone.Model.extend();
+	var Fields = Backbone.Collection.extend({
+		model: Field
+	});
 
+	var fields = new Fields();
+
+	if( 'undefined' !== typeof nf_admin.fields ) {
+		_.each( nf_admin.fields, function( field ) {
+			fields.add( { id: field.id } );
+		} );
+	}
+
+	var test = fields.toJSON();
+
+	console.log( JSON.stringify( test ) );
 });
