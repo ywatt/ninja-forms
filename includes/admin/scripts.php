@@ -43,13 +43,30 @@ function ninja_forms_admin_js(){
 
 	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array('date_format' => $date_format, 'nf_ajax_nonce' => wp_create_nonce( 'nf_ajax') ) );
 
-	wp_enqueue_script( 'nf-admin-fields',
-		NINJA_FORMS_URL . 'assets/js/' . $src .'/admin-fields' . $suffix . '.js' );
+	if ( isset ( $_REQUEST['page'] ) && $_REQUEST['page'] == 'ninja-forms' && isset ( $_REQUEST['tab'] ) && $_REQUEST['tab'] == 'fields' ) {
+		wp_enqueue_script( 'nf-admin-fields',
+			NINJA_FORMS_URL . 'assets/js/' . $src .'/admin-fields' . $suffix . '.js' );
 
-	$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
+		$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
 
-	if ( '' != $form_id ) {
-		$fields = Ninja_Forms()->form( $form_id )->fields;
-		wp_localize_script( 'nf-admin-fields', 'nf_admin', array( 'fields' => $fields ) );
+		if ( '' != $form_id ) {
+			$fields = Ninja_Forms()->form( $form_id )->fields;
+
+			$current_tab = ninja_forms_get_current_tab();
+			$current_page = isset ( $_REQUEST['page'] ) ? esc_html( $_REQUEST['page'] ) : '';
+
+			foreach ( $fields as $field_id => $field ) {
+				$slug = 'field_' . $field_id;
+				if ( isset ( $plugin_settings['metabox_state'][ $current_page ][ $current_tab ][ $slug ] ) && $plugin_settings['metabox_state'][ $current_page ][ $current_tab ][ $slug ] == 'display:none;' ) {
+					$state = 0;
+				} else {
+					$state = 1;
+				}
+
+				$fields[ $field_id ]['metabox_state'] = $state;
+			}
+
+			wp_localize_script( 'nf-admin-fields', 'nf_admin', array( 'fields' => $fields ) );
+		}		
 	}
 }

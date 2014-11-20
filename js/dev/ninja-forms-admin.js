@@ -121,25 +121,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	//Sidebar Toggle
-	$(document).on('click', '.item-edit', function(event){
-		event.preventDefault();
-		//$(this).parent().next('div.inside').toggle();
-		$(this).nextElementInDom('.inside:first').toggle();
-		if($(this).hasClass("metabox-item-edit")){
-			var page = $("#_page").val();
-			var tab = $("#_tab").val();
-			var slug = $(this).parent().parent().prop("id").replace("ninja_forms_metabox_", "");
-			if($(this).nextElementInDom('.inside:first').is(":visible")){
-				var state = '';
-			}else{
-				var state = 'display:none;'
-			}
-
-			$.post( ajaxurl, { page: page, tab: tab, slug: slug, state: state, action:"ninja_forms_save_metabox_state", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce } );
-		}
-	});
-
 	//Make the Sidebar Sortable.
 	$("#side-sortables").sortable({
 		placeholder: "ui-state-highlight",

@@ -12,11 +12,36 @@ function ninja_forms_save_metabox_state(){
 	$page = esc_html( $_REQUEST['page'] );
 	$tab = esc_html( $_REQUEST['tab'] );
 	$slug = esc_html( $_REQUEST['slug'] );
-	$state = esc_html( $_REQUEST['state'] );
-	$plugin_settings['metabox_state'][$page][$tab][$slug] = $state;
+	$metabox_state = esc_html( $_REQUEST['metabox_state'] );
+	$plugin_settings['metabox_state'][$page][$tab][$slug] = $metabox_state;
 	update_option( 'ninja_forms_settings', $plugin_settings );
+
 	die();
 }
+
+/**
+ * When a field settings metabox is expanded, return a JSON element containing the field settings HTML
+ */
+
+function nf_output_field_settings_html() {
+
+	// Bail if we aren't in the admin
+	if ( ! is_admin() )
+		return false;
+
+	// Bail if we don't have proper permissions
+	if ( ! current_user_can( apply_filters( 'nf_new_field_capabilities', 'manage_options' ) ) )
+		return false;
+
+	check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
+
+	$field_id = esc_html( $_REQUEST['field_id'] );
+
+	echo $field_id;
+
+}
+
+add_action( 'wp_ajax_nf_output_field_settings_html', 'nf_output_field_settings_html' );
 
 add_action('wp_ajax_ninja_forms_new_field', 'ninja_forms_new_field');
 function ninja_forms_new_field(){
