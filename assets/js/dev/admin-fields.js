@@ -61,6 +61,7 @@ jQuery( document ).ready( function( $ ) {
 			// Remove our no-padding class.
 			$( '#ninja_forms_field_' + field_id + '_inside' ).removeClass( 'no-padding' );
 			// Fetch our HTML.
+			nf_update_field_html( field_id );
 		}
 		
 	});
