@@ -37,19 +37,21 @@ jQuery( document ).ready( function( $ ) {
 		// Get our field id.
 		var field_id = $( e.target ).data( 'field' );
 		
-		// Toggle the metabox field settings.
-		$( '#ninja_forms_field_' + field_id + '_inside' ).toggle();
-		
 		// Get our current metabox state.
-		var metabox_state = nf_field_metabox_get_state( field_id );
-
-		// Save the state of the metabox in our database.
-		nf_field_metabox_save_state( field_id, metabox_state );
-		// Save the state of the metabox in our data model.
-		fields.get( field_id ).set( 'metabox_state', metabox_state );
+		var current_metabox_state = fields.get( field_id ).get( 'metabox_state' );
+		if ( current_metabox_state == 1 ) { // If our current state is 1, then we are closing the metabox.
+			var new_metabox_state = 0;
+		} else { // If our current state is 0, then we are opening the metabox.
+			var new_metabox_state = 1;
+		}
 
 		// Perform specific tasks based upon the state of the metabox.
-		if ( metabox_state == 0 ) { // If we have closed the metabox.
+		if ( new_metabox_state == 1 ) { // If we have opened the metabox.
+			// Remove our no-padding class.
+			$( '#ninja_forms_field_' + field_id + '_inside' ).removeClass( 'no-padding' );
+			// Fetch our HTML.
+			nf_update_field_html( field_id );
+		} else { // If we have opened the metabox.
 			// Update our model data.
 			nf_update_field_data( field_id );
 			// Remove the HTML contents of this metabox.
@@ -57,12 +59,12 @@ jQuery( document ).ready( function( $ ) {
 			// Add our no-padding class
 			$( '#ninja_forms_field_' + field_id + '_inside' ).addClass( 'no-padding' );
 			// var test = fields.toJSON();
-		} else if ( metabox_state == 1 ) { // If we have opened the metabox.
-			// Remove our no-padding class.
-			$( '#ninja_forms_field_' + field_id + '_inside' ).removeClass( 'no-padding' );
-			// Fetch our HTML.
-			nf_update_field_html( field_id );
 		}
+
+		// Save the state of the metabox in our database.
+		nf_field_metabox_save_state( field_id, new_metabox_state );
+		// Save the state of the metabox in our data model.
+		fields.get( field_id ).set( 'metabox_state', new_metabox_state );
 		
 	});
 
@@ -77,16 +79,6 @@ jQuery( document ).ready( function( $ ) {
 
 		console.log( fields );
 	});
-
-	function nf_field_metabox_get_state( field_id ) {
-		if ( $( '#ninja_forms_field_' + field_id + '_inside' ).is( ':visible' ) ){
-			var metabox_state = 1;
-		}else{
-			var metabox_state = 0;
-		}
-
-		return metabox_state;
-	}
 
 	function nf_field_metabox_save_state( field_id, metabox_state ) {
 

@@ -57,7 +57,7 @@ function ninja_forms_admin_js(){
 
 			foreach ( $fields as $field_id => $field ) {
 				$slug = 'field_' . $field_id;
-				if ( isset ( $plugin_settings['metabox_state'][ $current_page ][ $current_tab ][ $slug ] ) && $plugin_settings['metabox_state'][ $current_page ][ $current_tab ][ $slug ] == 'display:none;' ) {
+				if ( isset ( $plugin_settings['metabox_state'][ $current_page ][ $current_tab ][ $slug ] ) && empty ( $plugin_settings['metabox_state'][ $current_page ][ $current_tab ][ $slug ] ) ) {
 					$state = 0;
 				} else {
 					$state = 1;

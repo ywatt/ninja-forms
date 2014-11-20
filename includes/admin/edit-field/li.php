@@ -357,3 +357,100 @@ class NF_WP_Editor_Ajax {
         return '{' . trim( $options, ' ,' ) . '}';
     }
 }
+
+function nf_output_registered_field_settings( $field_id ) {
+
+	$field_row = ninja_forms_get_field_by_id( $field_id );
+	$current_tab = ninja_forms_get_current_tab();
+	if ( isset ( $_REQUEST['page'] ) ) {
+		$current_page = esc_html( $_REQUEST['page'] );
+	} else {
+		$current_page = '';
+	}
+	
+	$field_data = $field_row['data'];
+
+	?>
+	<table id="field-info"><tr><td width="65%"><?php _e( 'Field ID', 'ninja-forms' ); ?>: <strong><?php echo $field_id;?></strong></td><!-- <td width="15%"><a href="#" class="ninja-forms-field-add-def" id="ninja_forms_field_<?php echo $field_id;?>_def" class="ninja-forms-field-add-def">Add Defined</a></td><td width="15%"><a href="#" class="ninja-forms-field-remove-def" id="ninja_forms_field_<?php echo $field_id;?>_def">Remove Defined</a></td> --> <td width="5%"><a href="#" class="<?php echo $fav_class;?>" id="ninja_forms_field_<?php echo $field_id;?>_fav">Star</a></td></tr></table>
+	<?php
+
+	do_action( 'ninja_forms_edit_field_before_registered', $field_id );
+
+	$arguments = func_get_args();
+	array_shift( $arguments ); // We need to remove the first arg ($function_name)
+	$arguments['field_id'] = $field_id;
+	$arguments['data'] = $field_data;
+
+	if ( $edit_function != '' ) {
+		call_user_func_array( $edit_function, $arguments );
+	}
+
+	/**
+	 * We need to get a list of all of our RTEs. 
+	 * If we're submitting via ajax, we'll need to use this list.
+	 */
+	if ( ! isset ( $nf_rte_editors ) )
+		$nf_rte_editors = array();
+
+	$editors = new NF_WP_Editor_Ajax();
+
+	if ( is_array( $edit_options ) and !empty( $edit_options ) ) {
+		foreach ( $edit_options as $opt ) {
+			$type = $opt['type'];
+
+			$label_class = '';
+
+			if ( isset( $opt['label'] ) ) {
+				$label = $opt['label'];
+			} else {
+				$label = '';
+			}
+
+			if ( isset( $opt['name'] ) ) {
+				$name = $opt['name'];
+			} else {
+				$name = '';
+			}
+
+			if ( isset( $opt['width'] ) ) {
+				$width = $opt['width'];
+			} else {
+				$width = '';
+			}
+
+			if ( isset( $opt['options'] ) ) {
+				$options = $opt['options'];
+			} else {
+				$options = '';
+			}
+
+			if ( isset( $opt['class'] ) ) {
+				$class = $opt['class'];
+			} else {
+				$class = '';
+			}
+
+			if ( isset( $opt['default'] ) ) {
+				$default = $opt['default'];
+			} else {
+				$default = '';
+			}
+
+			if ( isset( $opt['desc'] ) ) {
+				$desc = $opt['desc'];
+			} else {
+				$desc = '';
+			}
+
+			if ( isset( $field_data[$name] ) ) {
+				$value = $field_data[$name];
+			} else {
+				$value = $default;
+			}
+
+			ninja_forms_edit_field_el_output( $field_id, $type, $label, $name, $value, $width, $options, $class, $desc, $label_class );						
+		}
+	}
+
+	do_action( 'ninja_forms_edit_field_after_registered', $field_id );
+}
