@@ -232,13 +232,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	//Save the sortable list as an array when the save button is pressed
-	$(".ninja-forms-save-data").click(function(event){
-		//event.preventDefault();
-		var order = $("#ninja_forms_field_list").sortable("toArray");
-		$("#ninja_forms_field_order").val(order);
-	});
-
 	//Add New Field
 	$(".ninja-forms-new-field").click(function(event){
 		event.preventDefault();
