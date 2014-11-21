@@ -56,14 +56,7 @@ function ninja_forms_admin_js(){
 			$current_page = isset ( $_REQUEST['page'] ) ? esc_html( $_REQUEST['page'] ) : '';
 
 			foreach ( $fields as $field_id => $field ) {
-				$slug = 'field_' . $field_id;
-				if ( isset ( $plugin_settings['metabox_state'][ $current_page ][ $current_tab ][ $slug ] ) && empty ( $plugin_settings['metabox_state'][ $current_page ][ $current_tab ][ $slug ] ) ) {
-					$state = 0;
-				} else {
-					$state = 1;
-				}
-
-				$fields[ $field_id ]['metabox_state'] = $state;
+				$fields[ $field_id ]['metabox_state'] = 0;
 			}
 
 			wp_localize_script( 'nf-admin-fields', 'nf_admin', array( 'fields' => $fields ) );

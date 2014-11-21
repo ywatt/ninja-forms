@@ -179,7 +179,7 @@ function ninja_forms_new_field(){
 		);
 
 		$new_id = ninja_forms_insert_field( $form_id, $args );
-		$new_html = ninja_forms_return_echo('ninja_forms_edit_field', $new_id);
+		$new_html = ninja_forms_return_echo('ninja_forms_edit_field', $new_id, true );
 		header("Content-type: application/json");
 		$array = array ('new_id' => $new_id, 'new_type' => $type_name, 'new_html' => $new_html, 'edit_options' => $edit_options, 'new_type_slug' => $type );
 		echo json_encode($array);
@@ -288,7 +288,7 @@ function ninja_forms_insert_fav(){
 			'fav_id' => $fav_id,
 		);
 		$new_id = ninja_forms_insert_field( $form_id, $args );
-		$new_html = ninja_forms_return_echo('ninja_forms_edit_field', $new_id);
+		$new_html = ninja_forms_return_echo('ninja_forms_edit_field', $new_id, true );
 		header("Content-type: application/json");
 		$array = array ('new_id' => $new_id, 'new_type' => $type_name, 'new_html' => $new_html);
 		echo json_encode($array);
@@ -322,7 +322,7 @@ function ninja_forms_insert_def(){
 			'def_id' => $def_id,
 		);
 		$new_id = ninja_forms_insert_field( $form_id, $args );
-		$new_html = ninja_forms_return_echo('ninja_forms_edit_field', $new_id);
+		$new_html = ninja_forms_return_echo('ninja_forms_edit_field', $new_id, true );
 		header("Content-type: application/json");
 		$array = array ('new_id' => $new_id, 'new_type' => $type_name, 'new_html' => $new_html);
 		echo json_encode($array);

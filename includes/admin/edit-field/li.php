@@ -1,6 +1,6 @@
 <?php
 
-function ninja_forms_edit_field_output_li( $field_id ) {
+function ninja_forms_edit_field_output_li( $field_id, $new = false ) {
 	global $wpdb, $ninja_forms_fields, $nf_rte_editors;
 	$field_row = ninja_forms_get_field_by_id( $field_id );
 	$current_tab = ninja_forms_get_current_tab();
@@ -14,16 +14,6 @@ function ninja_forms_edit_field_output_li( $field_id ) {
 	$field_data = $field_row['data'];
 	$plugin_settings = nf_get_settings();
 	
-	$slug = 'field_' . $field_id;
-
-	if ( isset ( $plugin_settings['metabox_state'][$current_page][$current_tab][$slug] ) && ! empty ( $plugin_settings['metabox_state'][$current_page][$current_tab][$slug] ) ) {
-		$metabox_state = 1;
-		$padding = '';
-	} else {
-		$metabox_state = 0;
-		$padding = 'no-padding';
-	}
-
 	if ( isset( $ninja_forms_fields[$field_type]['use_li'] ) && $ninja_forms_fields[$field_type]['use_li'] ) {
 
 		if ( isset( $field_row['fav_id'] ) && $field_row['fav_id'] != 0 ) {
@@ -106,7 +96,7 @@ function ninja_forms_edit_field_output_li( $field_id ) {
 			} else {
 				$conditional_value_type = '';
 			}
-?>
+			?>
 			<li id="ninja_forms_field_<?php echo $field_id;?>" class="<?php echo $nesting_class;?> <?php echo $type_class;?>">
 				<input type="hidden" id="ninja_forms_field_<?php echo $field_id;?>_conditional_value_type" value="<?php echo $conditional_value_type;?>">
 				<input type="hidden" id="ninja_forms_field_<?php echo $field_id;?>_fav_id" name="" class="ninja-forms-field-fav-id" value="<?php echo $fav_id;?>">
@@ -119,9 +109,16 @@ function ninja_forms_edit_field_output_li( $field_id ) {
 						</span>
 					</dt>
 				</dl>
-				<div class="menu-item-settings type-class inside <?php echo $padding; ?>" id="ninja_forms_field_<?php echo $field_id;?>_inside" >
+				<?php
+				if ( $new ) {
+					$padding = '';
+				} else {
+					$padding = 'no-padding';
+				}
+				?>
+				<div class="menu-item-settings type-class inside <?php echo $padding?>" id="ninja_forms_field_<?php echo $field_id;?>_inside" >
 					<?php
-					if ( $metabox_state == 1 ) {
+					if ( $new ) {
 						nf_output_registered_field_settings( $field_id );
 					}
 		}
@@ -151,7 +148,7 @@ function ninja_forms_edit_field_output_li( $field_id ) {
 	}
 }
 
-add_action( 'ninja_forms_edit_field_li', 'ninja_forms_edit_field_output_li' );
+add_action( 'ninja_forms_edit_field_li', 'ninja_forms_edit_field_output_li', 10, 2 );
 
 function ninja_forms_edit_field_close_li( $field_id ) {
 	global $ninja_forms_fields;

@@ -992,38 +992,7 @@ jQuery(document).ready(function($) {
 
 	/* * * End Form Settings JS * * */
 
-}); //Document.read();
-
-function ninja_forms_new_field_response( response ){
-	jQuery("#ninja_forms_field_list").append(response.new_html).show('slow');
-	if ( response.new_type == 'List' ) {
-		//Make List Options sortable
-		jQuery(".ninja-forms-field-list-options").sortable({
-			helper: 'clone',
-			handle: '.ninja-forms-drag',
-			items: 'div',
-			placeholder: "ui-state-highlight",
-		});
-	}
-	if ( typeof nf_ajax_rte_editors !== 'undefined' ) {
-		for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
-			var editor_id = nf_ajax_rte_editors[x];
-			tinyMCE.init( tinyMCEPreInit.mceInit[ editor_id ] );
-			try { quicktags( tinyMCEPreInit.qtInit[ editor_id ] ); } catch(e){}
-		};
-	}
-
-	jQuery(".ninja-forms-field-conditional-cr-field").each(function(){
-		jQuery(this).append('<option value="' + response.new_id + '">' + response.new_type + '</option>');
-	});
-	jQuery("#ninja_forms_field_" + response.new_id + "_toggle").click();
-
-	jQuery("#ninja_forms_field_" + response.new_id + "_label").focus();
-
-	// Fire our custom jQuery addField event.
-	jQuery(document).trigger('addField', [ response ]);
-
-}
+}); //Document.ready();
 
 function ninja_forms_escape_html(html) {
 	var escape = document.createElement('textarea');

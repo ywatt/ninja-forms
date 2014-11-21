@@ -3,16 +3,17 @@
  * Uses backbone data models to send only modified field data to the db.
  */
 
-jQuery( document ).ready( function( $ ) {
-	// Model to hold our field settings.
-	var Field = Backbone.Model.extend();
-	// Collection to hold our fields.
-	var Fields = Backbone.Collection.extend({
-		model: Field
-	});
+// Model to hold our field settings.
+var Field = Backbone.Model.extend();
+// Collection to hold our fields.
+var Fields = Backbone.Collection.extend({
+	model: Field
+});
 
-	// Instantiate our fields collection.
-	var fields = new Fields();
+// Instantiate our fields collection.
+var fields = new Fields();
+
+jQuery( document ).ready( function( $ ) {
 
 	// Loop through our field JSON that is already on the page and populate our collection with it.
 	if( 'undefined' !== typeof nf_admin.fields ) {
@@ -23,7 +24,6 @@ jQuery( document ).ready( function( $ ) {
 
 	/**
 	 * Open and close a field metabox.
-	 * Send an ajax request to the backend to save the current state.
 	 * When a metabox is closed:
 	 * 	- update the field collection with any values that might have changed.
 	 *  - remove the HTML
@@ -60,8 +60,6 @@ jQuery( document ).ready( function( $ ) {
 			});
 		}
 
-		// Save the state of the metabox in our database.
-		nf_field_metabox_save_state( field_id, new_metabox_state );
 		// Save the state of the metabox in our data model.
 		fields.get( field_id ).set( 'metabox_state', new_metabox_state );
 		
@@ -94,19 +92,10 @@ jQuery( document ).ready( function( $ ) {
 		var order = $( document ).data( 'field_order' );
 		var data = $( document ).data( 'field_data' );
 
-		$.post( ajaxurl, { form_id: form_id, data: data, order: order, action: 'nf_save_admin_fields', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
-			console.log( response );	
-		} );
+		// $.post( ajaxurl, { form_id: form_id, data: data, order: order, action: 'nf_save_admin_fields', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
+		// 	console.log( response );	
+		// } );
 	});
-
-	function nf_field_metabox_save_state( field_id, metabox_state ) {
-
-		var page = $( '#_page' ).val();
-		var tab = $( '#_tab' ).val();
-		var slug = 'field_' + field_id;
-		
-		$.post( ajaxurl, { page: page, tab: tab, slug: slug, metabox_state: metabox_state, action: 'ninja_forms_save_metabox_state', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce } );
-	}
 
 	function nf_update_field_data( field_id ) {
 		var data = $('[name^=ninja_forms_field_' + field_id + ']');
@@ -135,5 +124,35 @@ jQuery( document ).ready( function( $ ) {
 			});
 		} );
 	}
-
 });
+
+function ninja_forms_new_field_response( response ){
+	jQuery("#ninja_forms_field_list").append(response.new_html).show('slow');
+	if ( response.new_type == 'List' ) {
+		//Make List Options sortable
+		jQuery(".ninja-forms-field-list-options").sortable({
+			helper: 'clone',
+			handle: '.ninja-forms-drag',
+			items: 'div',
+			placeholder: "ui-state-highlight",
+		});
+	}
+	if ( typeof nf_ajax_rte_editors !== 'undefined' ) {
+		for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
+			var editor_id = nf_ajax_rte_editors[x];
+			tinyMCE.init( tinyMCEPreInit.mceInit[ editor_id ] );
+			try { quicktags( tinyMCEPreInit.qtInit[ editor_id ] ); } catch(e){}
+		};
+	}
+
+	jQuery(".ninja-forms-field-conditional-cr-field").each(function(){
+		jQuery(this).append('<option value="' + response.new_id + '">' + response.new_type + '</option>');
+	});
+
+	// Add our field to our backbone data model.
+	fields.add( { id: response.new_id, metabox_state: 1 } );
+
+	// Fire our custom jQuery addField event.
+	jQuery( document ).trigger('addField', [ response ]);
+
+}
