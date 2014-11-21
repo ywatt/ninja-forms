@@ -47,18 +47,17 @@ jQuery( document ).ready( function( $ ) {
 
 		// Perform specific tasks based upon the state of the metabox.
 		if ( new_metabox_state == 1 ) { // If we have opened the metabox.
-			// Remove our no-padding class.
-			$( '#ninja_forms_field_' + field_id + '_inside' ).removeClass( 'no-padding' );
 			// Fetch our HTML.
 			nf_update_field_html( field_id );
 		} else { // If we have opened the metabox.
 			// Update our model data.
 			nf_update_field_data( field_id );
-			// Remove the HTML contents of this metabox.
-			$( '#ninja_forms_field_' + field_id + '_inside' ).empty();
-			// Add our no-padding class
-			$( '#ninja_forms_field_' + field_id + '_inside' ).addClass( 'no-padding' );
-			// var test = fields.toJSON();
+			$( '#ninja_forms_field_' + field_id + '_inside' ).slideUp('fast', function( e ) {
+				// Remove the HTML contents of this metabox.
+				$( '#ninja_forms_field_' + field_id + '_inside' ).empty();				
+				// Add our no-padding class
+				$( '#ninja_forms_field_' + field_id + '_inside' ).addClass( 'no-padding' );
+			});
 		}
 
 		// Save the state of the metabox in our database.
@@ -68,8 +67,9 @@ jQuery( document ).ready( function( $ ) {
 		
 	});
 
-	$( document ).on( 'submit', function( e ) {
+	$( document ).on( 'click', '.nf-save-admin-fields', function( e ) {
 		e.preventDefault();
+
 		// Loop through our fields collection and update any field lis that are open
 		_.each( fields.models, function( field ) {
 			if ( field.get( 'metabox_state' ) == 1 ) {
@@ -77,7 +77,26 @@ jQuery( document ).ready( function( $ ) {
 			}
 		});
 
-		console.log( fields );
+		var data = JSON.stringify( fields.toJSON() );
+		var order = {};
+		var current_order = $( "#ninja_forms_field_list" ).sortable( "toArray" );
+		for ( var i = 0; i < current_order.length; i++ ) {
+			order[i] = current_order[i];
+		};
+		order = JSON.stringify( order );
+		var form_id = $( '#_form_id' ).val();
+
+		$( document ).data( 'field_order', order );
+		$( document ).data( 'field_data', data );
+
+		jQuery(document).triggerHandler( 'nfAdminSaveFields' );
+		
+		var order = $( document ).data( 'field_order' );
+		var data = $( document ).data( 'field_data' );
+
+		$.post( ajaxurl, { form_id: form_id, data: data, order: order, action: 'nf_save_admin_fields', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
+			console.log( response );	
+		} );
 	});
 
 	function nf_field_metabox_save_state( field_id, metabox_state ) {
@@ -86,7 +105,7 @@ jQuery( document ).ready( function( $ ) {
 		var tab = $( '#_tab' ).val();
 		var slug = 'field_' + field_id;
 		
-		$.post( ajaxurl, { page: page, tab: tab, slug: slug, metabox_state: metabox_state, action:'ninja_forms_save_metabox_state', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce } );
+		$.post( ajaxurl, { page: page, tab: tab, slug: slug, metabox_state: metabox_state, action: 'ninja_forms_save_metabox_state', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce } );
 	}
 
 	function nf_update_field_data( field_id ) {
@@ -105,9 +124,15 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	function nf_update_field_html( field_id ) {
-		
+		$( '#ninja_forms_metabox_field_' + field_id ).find( '.spinner' ).show();
 		$.post( ajaxurl, { field_id: field_id, action:'nf_output_field_settings_html', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
-			console.log( response );	
+			$( '#ninja_forms_metabox_field_' + field_id ).find( '.spinner' ).hide();
+			// Remove our no-padding class.
+			$( '#ninja_forms_field_' + field_id + '_inside' ).removeClass( 'no-padding' );	
+			$( '#ninja_forms_field_' + field_id + '_inside' ).append( response );
+			$( '#ninja_forms_field_' + field_id + '_inside' ).slideDown('fast', function( e ) {
+				
+			});
 		} );
 	}
 
