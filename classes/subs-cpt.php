@@ -232,7 +232,7 @@ class NF_Subs_CPT {
 			NF_PLUGIN_URL . 'assets/js/' . $src .'/subs-cpt' . $suffix . '.js',
 			array('jquery', 'jquery-ui-datepicker') );
 
-		wp_localize_script( 'subs-cpt', 'nf_sub', array( 'form_id' => $form_id, 'datepicker_args' => apply_filters( 'admin_submissions_datepicker_args', $datepicker_args ) ) );
+		wp_localize_script( 'subs-cpt', 'nf_sub', array( 'form_id' => $form_id, 'datepicker_args' => apply_filters( 'ninja_forms_admin_submissions_datepicker_args', $datepicker_args ) ) );
 
 	}
 
