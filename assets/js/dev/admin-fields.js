@@ -92,9 +92,9 @@ jQuery( document ).ready( function( $ ) {
 		var order = $( document ).data( 'field_order' );
 		var data = $( document ).data( 'field_data' );
 
-		// $.post( ajaxurl, { form_id: form_id, data: data, order: order, action: 'nf_save_admin_fields', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
-		// 	console.log( response );	
-		// } );
+		$.post( ajaxurl, { form_id: form_id, data: data, order: order, action: 'nf_save_admin_fields', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
+			console.log( response );	
+		} );
 	});
 
 	function nf_update_field_data( field_id ) {

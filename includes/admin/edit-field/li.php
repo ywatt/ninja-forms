@@ -126,8 +126,7 @@ function ninja_forms_edit_field_output_li( $field_id, $new = false ) {
 		if ( isset( $ninja_forms_fields[$field_type] ) ) {
 			$reg_field = $ninja_forms_fields[$field_type];
 			$edit_function = $reg_field['edit_function'];
-			$arguments = func_get_args();
-			array_shift( $arguments ); // We need to remove the first arg ($function_name)
+			$arguments = array();
 			$arguments['field_id'] = $field_id;
 			$arguments['data'] = $field_data;
 
