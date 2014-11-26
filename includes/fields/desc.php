@@ -66,7 +66,7 @@ function ninja_forms_field_desc_display( $field_id, $data, $form_id = '' ){
 		$default_value = '';
 	}
 
-	$default_value = html_entity_decode( $default_value );
+	$default_value = html_entity_decode( $default_value, ENT_COMPAT, "UTF-8" );
 
 	if($desc_el == "div"){
 		$default_value = wpautop( $default_value );		
