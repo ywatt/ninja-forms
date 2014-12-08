@@ -25,6 +25,7 @@ function ninja_forms_import_form( $file ){
 	if(is_array($form_fields)){
 		for ($x=0; $x < count( $form_fields ); $x++) {
 			$form_fields[$x]['form_id'] = $form_id;
+			$form_fields[$x]['data'] = apply_filters( 'nf_before_import_field', $form_fields[$x]['data'], $form_fields[$x]['id'] );
 			$form_fields[$x]['data'] = serialize( $form_fields[$x]['data'] );
 			$old_field_id = $form_fields[$x]['id'];
 			$form_fields[$x]['id'] = NULL;
