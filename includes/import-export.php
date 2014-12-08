@@ -16,6 +16,10 @@ function ninja_forms_import_form( $file ){
 	unset ( $form['notifications'] );
 
 	$form = apply_filters( 'ninja_forms_before_import_form', $form );
+	// Remove our last_sub setting. This is our starting seq_num.
+	if ( isset ( $form['data']['last_sub'] ) )
+		unset( $form['data']['last_sub'] );
+
 	$form['data'] = serialize( $form['data'] ) ;
 
 	$wpdb->insert( NINJA_FORMS_TABLE_NAME, $form );
