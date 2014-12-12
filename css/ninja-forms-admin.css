@@ -601,6 +601,38 @@ a.tooltip span
     box-shadow: 5px 5px 8px #CCC;
 }
 
+.nf-brand-header {
+	background: #EF4748;
+	border-left: 4px solid #424242;
+}
+.nf-brand-header:after {
+	clear: both;
+	content: "";
+	display: block;
+
+}
+.nf-brand-header .nf-logo {
+	background-image: url("https://ninjaforms.com/wp-content/themes/ninja-brand/images/ninja-forms-logo-header.png");
+	background-size: 410px 600px;
+	background-position: 40px 80px;
+	float: left;
+	height: 80px;
+	width: 410px;
+}
+.nf-brand-header .wpn-logo {
+	background: #fff;
+	background-image: url("../images/wpninjas-logo.png");
+	background-size: 83px 70px;
+	background-position: 0 10px;
+	background-repeat: no-repeat;
+	float: right;
+	font-size: 8px;
+	height: 80px;
+	width: 83px;
+	text-align: center;
+}
+
+
 .nf-extend {
 	float: left;
 	margin: 0 20px 20px 0;
@@ -691,7 +723,7 @@ a.tooltip span
 }
 
 #wpfooter {
-	display: none;
+	/*display: none;*/
 }
 
 

@@ -532,15 +532,15 @@ add_filter( 'nf_new_field_capabilities', 'nf_add_permissions_filters' );
 add_filter( 'nf_delete_field_capabilities', 'nf_add_permissions_filters' );
 add_filter( 'nf_delete_form_capabilities', 'nf_add_permissions_filters' );
 
-function ninja_admin_footer_text( $footer_text ) {
-	global $current_screen;
+function nf_admin_footer_text( $footer_text ) {
+	global $current_screen, $pagenow, $typenow;
 
 	// only display custom text on Ninja Admin Pages
-	if ( isset( $current_screen->id ) && strpos( $current_screen->id, 'ninja' ) !== false ) {
+	if ( isset( $current_screen->id ) && strpos( $current_screen->id, 'ninja' ) !== false || ( ( $pagenow == 'edit.php' || $pagenow == 'post.php' ) && $typenow == 'nf_sub' ) ) {
 		return sprintf( __( 'Rate <strong>Ninja Forms</strong> <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%1$s" target="_blank">WordPress.org</a> to keep this plugin free.  Thanks from the team here at The WP Ninjas!', 'ninja-forms' ), __( 'http://wordpress.org/support/view/plugin-reviews/ninja-forms?filter=5', 'ninja-forms' ) );
 	} else {
 		return $footer_text;
 	}
 }
 
-add_filter( 'admin_footer_text', 'ninja_admin_footer_text' , 1, 2 );
+add_filter( 'admin_footer_text', 'nf_admin_footer_text' , 1, 2 );
