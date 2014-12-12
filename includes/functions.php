@@ -537,7 +537,7 @@ function nf_admin_footer_text( $footer_text ) {
 
 	// only display custom text on Ninja Admin Pages
 	if ( isset( $current_screen->id ) && strpos( $current_screen->id, 'ninja' ) !== false || ( ( $pagenow == 'edit.php' || $pagenow == 'post.php' ) && $typenow == 'nf_sub' ) ) {
-		return sprintf( __( 'Rate <strong>Ninja Forms</strong> <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%1$s" target="_blank">WordPress.org</a> to keep this plugin free.  Thanks from the team here at The WP Ninjas!', 'ninja-forms' ), __( 'http://wordpress.org/support/view/plugin-reviews/ninja-forms?filter=5', 'ninja-forms' ) );
+		return sprintf( __( 'Please rate <strong>Ninja Forms</strong> <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%1$s" target="_blank">WordPress.org</a> to help us keep this plugin free.  Thank you from the WP Ninjas team!', 'ninja-forms' ), __( 'http://wordpress.org/support/view/plugin-reviews/ninja-forms?filter=5', 'ninja-forms' ) );
 	} else {
 		return $footer_text;
 	}
