@@ -223,11 +223,16 @@ class NF_Subs_CPT {
 		$plugin_settings = nf_get_settings();
 		$date_format = ninja_forms_date_to_datepicker( $plugin_settings['date_format'] );
 
+		$datepicker_args = array();
+		if ( !empty( $date_format ) ) {
+			$datepicker_args['dateFormat'] = $date_format;
+		}
+
 		wp_enqueue_script( 'subs-cpt',
 			NF_PLUGIN_URL . 'assets/js/' . $src .'/subs-cpt' . $suffix . '.js',
 			array('jquery', 'jquery-ui-datepicker') );
 
-		wp_localize_script( 'subs-cpt', 'nf_sub', array( 'form_id' => $form_id, 'date_format' => $date_format ) );
+		wp_localize_script( 'subs-cpt', 'nf_sub', array( 'form_id' => $form_id, 'datepicker_args' => apply_filters( 'ninja_forms_admin_submissions_datepicker_args', $datepicker_args ) ) );
 
 	}
 
