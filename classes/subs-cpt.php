@@ -956,6 +956,7 @@ class NF_Subs_CPT {
 										$args['field_id'] = $field_id;
 										$args['user_value'] = nf_wp_kses_post_deep( $user_value );
 										$args['field'] = $field;
+										$args['sub_id'] = $post->ID;
 
 										call_user_func_array( $edit_value_function, $args );
 
