@@ -4,21 +4,21 @@
  */
 
 // Model to hold our field settings.
-var Field = Backbone.Model.extend();
+var nfField = Backbone.Model.extend();
 // Collection to hold our fields.
-var Fields = Backbone.Collection.extend({
-	model: Field
+var nfFields = Backbone.Collection.extend({
+	model: nfField
 });
 
 // Instantiate our fields collection.
-var fields = new Fields();
+var nfFields = new nfFields();
 
 jQuery( document ).ready( function( $ ) {
 
 	// Loop through our field JSON that is already on the page and populate our collection with it.
 	if( 'undefined' !== typeof nf_admin.fields ) {
 		_.each( nf_admin.fields, function( field ) {
-			fields.add( { id: field.id, metabox_state: field.metabox_state } );
+			nfFields.add( { id: field.id, metabox_state: field.metabox_state } );
 		} );
 	}
 
@@ -38,7 +38,7 @@ jQuery( document ).ready( function( $ ) {
 		var field_id = $( e.target ).data( 'field' );
 		
 		// Get our current metabox state.
-		var current_metabox_state = fields.get( field_id ).get( 'metabox_state' );
+		var current_metabox_state = nfFields.get( field_id ).get( 'metabox_state' );
 		if ( current_metabox_state == 1 ) { // If our current state is 1, then we are closing the metabox.
 			var new_metabox_state = 0;
 		} else { // If our current state is 0, then we are opening the metabox.
@@ -61,7 +61,7 @@ jQuery( document ).ready( function( $ ) {
 		}
 
 		// Save the state of the metabox in our data model.
-		fields.get( field_id ).set( 'metabox_state', new_metabox_state );
+		nfFields.get( field_id ).set( 'metabox_state', new_metabox_state );
 		
 	});
 
@@ -69,13 +69,13 @@ jQuery( document ).ready( function( $ ) {
 		e.preventDefault();
 
 		// Loop through our fields collection and update any field lis that are open
-		_.each( fields.models, function( field ) {
+		_.each( nfFields.models, function( field ) {
 			if ( field.get( 'metabox_state' ) == 1 ) {
 				nf_update_field_data( field.get( 'id' ) );
 			}
 		});
 
-		var data = JSON.stringify( fields.toJSON() );
+		var data = JSON.stringify( nfFields.toJSON() );
 		var order = {};
 		var current_order = $( "#ninja_forms_field_list" ).sortable( "toArray" );
 		for ( var i = 0; i < current_order.length; i++ ) {
@@ -93,7 +93,7 @@ jQuery( document ).ready( function( $ ) {
 		var data = $( document ).data( 'field_data' );
 
 		$.post( ajaxurl, { form_id: form_id, data: data, order: order, action: 'nf_save_admin_fields', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
-			console.log( response );	
+				
 		} );
 	});
 
@@ -106,7 +106,7 @@ jQuery( document ).ready( function( $ ) {
 			
 			for( var prop in field ) {
 			    if ( field.hasOwnProperty( prop ) ) {
-			        fields.get( field_id ).set( prop, field[ prop ] );
+			        nfFields.get( field_id ).set( prop, field[ prop ] );
 			    }
 			}
 		}
@@ -150,7 +150,7 @@ function ninja_forms_new_field_response( response ){
 	});
 
 	// Add our field to our backbone data model.
-	fields.add( { id: response.new_id, metabox_state: 1 } );
+	nfFields.add( { id: response.new_id, metabox_state: 1 } );
 
 	// Fire our custom jQuery addField event.
 	jQuery( document ).trigger('addField', [ response ]);
