@@ -20,6 +20,8 @@ function ninja_forms_add_class($classes) {
 function ninja_forms_admin_js(){
 	global $version_compare;
 
+	$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
+
 	if ( defined( 'NINJA_FORMS_JS_DEBUG' ) && NINJA_FORMS_JS_DEBUG ) {
 		$suffix = '';
 		$src = 'dev';
@@ -46,13 +48,11 @@ function ninja_forms_admin_js(){
 	NINJA_FORMS_URL . 'js/' . $src .'/ninja-forms-admin' . $suffix . '.js',
 	array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable'));
 
-	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array( 'nf_ajax_nonce' => wp_create_nonce( 'nf_ajax'), 'datepicker_args' => apply_filters( 'ninja_forms_admin_forms_datepicker_args', $datepicker_args ) ) );
+	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array( 'nf_ajax_nonce' => wp_create_nonce( 'nf_ajax'), 'form_id' => $form_id, 'datepicker_args' => apply_filters( 'ninja_forms_admin_forms_datepicker_args', $datepicker_args ) ) );
 
 	if ( isset ( $_REQUEST['page'] ) && $_REQUEST['page'] == 'ninja-forms' && isset ( $_REQUEST['tab'] ) && $_REQUEST['tab'] == 'fields' ) {
 		wp_enqueue_script( 'nf-admin-fields',
 			NINJA_FORMS_URL . 'assets/js/' . $src .'/admin-fields' . $suffix . '.js' );
-
-		$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
 
 		if ( '' != $form_id ) {
 			$fields = Ninja_Forms()->form( $form_id )->fields;
