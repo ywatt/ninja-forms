@@ -30,6 +30,7 @@ function ninja_forms_register_field($slug, $args = array()){
 		'group' => '',
 		'interact' => true,
 		'label_pos_options' => '',
+		'li_class' => '',
  		'limit' => '',
  		'name' => $slug,
 		'nesting' => false,
