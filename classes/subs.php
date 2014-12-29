@@ -96,11 +96,18 @@ class NF_Subs {
 				'value' => $args['form_id'],
 			);
 		}
+		
+		if( isset( $args['seq_num'] ) ) {
+			$query_args['meta_query'][] = array(
+				'key' => '_seq_num',
+				'value' => $args['seq_num'],
+			);
+		}
 
 		if( isset( $args['user_id'] ) ) {
 			$query_args['author'] = $args['user_id'];
 		}
-
+		
 		if( isset( $args['action'])){
 			$query_args['meta_query'][] = array(
 				'key' => '_action',
