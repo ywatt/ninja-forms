@@ -171,3 +171,61 @@ function nf_parse_fields_shortcode( $content ) {
 	}
 	return $content;
 }
+
+/**
+ * Shortcode for ninja_forms_all_fields
+ *
+ * @since 2.8
+ * @return string sub_limit_number
+ */
+function ninja_forms_display_sub_limit_number_shortcode( $atts ){
+  $form = Ninja_Forms()->form( $atts[ 'id' ] );
+  
+  if ( isset( $form->settings[ 'sub_limit_number' ] ) ) {
+    return $form->settings[ 'sub_limit_number' ];
+  }
+  else {
+    return null;
+  }
+}
+
+add_shortcode( 'ninja_forms_display_sub_limit_number', 'ninja_forms_display_sub_limit_number_shortcode' );
+
+/**
+ * Shortcode for ninja_forms_display_sub_number
+ *
+ * @since 2.8
+ * @return int nf_get_sub_count()
+ * @see nf_get_sub_count()
+ */
+function ninja_forms_display_sub_number_shortcode( $atts ){
+  $sub_count = nf_get_sub_count( $atts[ 'id' ] );
+  return $sub_count;
+}
+
+add_shortcode( 'ninja_forms_display_sub_number', 'ninja_forms_display_sub_number_shortcode' );
+
+/**
+ * Shortcode for ninja_forms_display_sub_number_remaining
+ *
+ * @since 2.8
+ * @return int
+ * @see nf_get_sub_count()
+ */
+function ninja_forms_display_sub_number_remaining_shortcode( $atts ){
+  $form = Ninja_Forms()->form($atts[ 'id' ]);
+  
+  if( isset( $form->settings[ 'sub_limit_number' ] ) ) {
+    $sub_count = nf_get_sub_count( $atts[ 'id' ] );
+    $sub_limit = (int) $form->settings[ 'sub_limit_number' ];
+    
+    if( $sub_count > $sub_limit )
+      return 0;
+    
+    return $sub_limit - $sub_count;
+  }
+  else {
+    return null;
+  }
+}
+add_shortcode( 'ninja_forms_display_sub_number_remaining', 'ninja_forms_display_sub_number_remaining_shortcode' );
