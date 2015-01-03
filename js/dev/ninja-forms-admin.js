@@ -244,7 +244,7 @@ jQuery(document).ready(function($) {
 
 		if((limit != '' && current_count < limit) || limit == '' || current_count == '' || current_count == 0){
 
-			$.post( ajaxurl, { type: type, form_id: form_id, action:'ninja_forms_new_field', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, ninja_forms_new_field_response );
+			$.post( ajaxurl, { type: type, form_id: form_id, action:'ninja_forms_new_field', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, nf_new_field_response );
 
 		}else{
 			$(this).addClass('disabled');
@@ -893,7 +893,7 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		var fav_id = this.id.replace("ninja_forms_insert_fav_field_", "");
 		var form_id = $("#_form_id").val();
-		$.post(ajaxurl, {fav_id: fav_id, form_id: form_id, action:"ninja_forms_insert_fav", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, ninja_forms_new_field_response)
+		$.post(ajaxurl, {fav_id: fav_id, form_id: form_id, action:"ninja_forms_insert_fav", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, nf_new_field_response)
 	});
 
 	/* * * End Favorite Fields JS * * */
@@ -958,7 +958,7 @@ jQuery(document).ready(function($) {
 			var current_count = '';
 		}
 		if((limit != '' && current_count < limit) || limit == '' || current_count == '' || current_count == 0){
-			$.post(ajaxurl, {def_id: def_id, form_id: form_id, action:"ninja_forms_insert_def", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, ninja_forms_new_field_response);
+			$.post(ajaxurl, {def_id: def_id, form_id: form_id, action:"ninja_forms_insert_def", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, nf_new_field_response);
 		}
 	});
 

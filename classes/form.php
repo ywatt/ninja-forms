@@ -51,9 +51,19 @@ class NF_Form {
 	public function __construct( $form_id ) {
 		// Set our current form id.
 		$this->form_id = $form_id;
-
-		$this->fields = nf_get_fields_by_form_id( $form_id );
+		$this->update_fields();		
 		$this->settings = nf_get_form_settings( $form_id );
+	}
+
+	/**
+	 * Update our fields
+	 * 
+	 * @access public
+	 * @since 2.9
+	 * @return void
+	 */
+	public function update_fields() {
+		$this->fields = nf_get_fields_by_form_id( $this->form_id );
 	}
 
 	/**

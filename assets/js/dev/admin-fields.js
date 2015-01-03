@@ -68,12 +68,7 @@ jQuery( document ).ready( function( $ ) {
 	$( document ).on( 'click', '.nf-save-admin-fields', function( e ) {
 		e.preventDefault();
 
-		// Loop through our fields collection and update any field lis that are open
-		_.each( nfFields.models, function( field ) {
-			if ( field.get( 'metabox_state' ) == 1 ) {
-				nf_update_field_data( field.get( 'id' ) );
-			}
-		});
+		nf_update_all_fields();
 
 		var data = JSON.stringify( nfFields.toJSON() );
 		var order = {};
@@ -87,7 +82,7 @@ jQuery( document ).ready( function( $ ) {
 		$( document ).data( 'field_order', order );
 		$( document ).data( 'field_data', data );
 
-		jQuery(document).triggerHandler( 'nfAdminSaveFields' );
+		$( document ).triggerHandler( 'nfAdminSaveFields' );
 		
 		var order = $( document ).data( 'field_order' );
 		var data = $( document ).data( 'field_data' );
@@ -96,21 +91,6 @@ jQuery( document ).ready( function( $ ) {
 				
 		} );
 	});
-
-	function nf_update_field_data( field_id ) {
-		var data = $('[name^=ninja_forms_field_' + field_id + ']');
-		var field_data = jQuery(data).serializeFullArray();
-
-		if ( typeof field_data['ninja_forms_field_' + field_id] != 'undefined' ) {
-			var field = field_data['ninja_forms_field_' + field_id];
-			
-			for( var prop in field ) {
-			    if ( field.hasOwnProperty( prop ) ) {
-			        nfFields.get( field_id ).set( prop, field[ prop ] );
-			    }
-			}
-		}
-	}
 
 	function nf_update_field_html( field_id ) {
 		$( '#ninja_forms_metabox_field_' + field_id ).find( '.spinner' ).show();
@@ -124,35 +104,60 @@ jQuery( document ).ready( function( $ ) {
 			});
 		} );
 	}
+
+	// Hook into our add field response event
+	$( document ).on( 'addField.default', function( e, response ) {
+		console.log( response );
+		jQuery("#ninja_forms_field_list").append(response.new_html).show('slow');
+		if ( response.new_type == 'List' ) {
+			//Make List Options sortable
+			jQuery(".ninja-forms-field-list-options").sortable({
+				helper: 'clone',
+				handle: '.ninja-forms-drag',
+				items: 'div',
+				placeholder: "ui-state-highlight",
+			});
+		}
+		if ( typeof nf_ajax_rte_editors !== 'undefined' ) {
+			for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
+				var editor_id = nf_ajax_rte_editors[x];
+				tinyMCE.init( tinyMCEPreInit.mceInit[ editor_id ] );
+				try { quicktags( tinyMCEPreInit.qtInit[ editor_id ] ); } catch(e){}
+			};
+		}
+
+		// Add our field to our backbone data model.
+		nfFields.add( { id: response.new_id, metabox_state: 1 } );
+
+	} );
 });
 
-function ninja_forms_new_field_response( response ){
-	jQuery("#ninja_forms_field_list").append(response.new_html).show('slow');
-	if ( response.new_type == 'List' ) {
-		//Make List Options sortable
-		jQuery(".ninja-forms-field-list-options").sortable({
-			helper: 'clone',
-			handle: '.ninja-forms-drag',
-			items: 'div',
-			placeholder: "ui-state-highlight",
-		});
-	}
-	if ( typeof nf_ajax_rte_editors !== 'undefined' ) {
-		for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
-			var editor_id = nf_ajax_rte_editors[x];
-			tinyMCE.init( tinyMCEPreInit.mceInit[ editor_id ] );
-			try { quicktags( tinyMCEPreInit.qtInit[ editor_id ] ); } catch(e){}
-		};
-	}
-
-	jQuery(".ninja-forms-field-conditional-cr-field").each(function(){
-		jQuery(this).append('<option value="' + response.new_id + '">' + response.new_type + '</option>');
+function nf_update_all_fields() {
+	// Loop through our fields collection and update any field lis that are open
+	_.each( nfFields.models, function( field ) {
+		if ( field.get( 'metabox_state' ) == 1 ) {
+			nf_update_field_data( field.get( 'id' ) );
+		}
 	});
+}
 
-	// Add our field to our backbone data model.
-	nfFields.add( { id: response.new_id, metabox_state: 1 } );
 
+function nf_update_field_data( field_id ) {
+	var data = jQuery('[name^=ninja_forms_field_' + field_id + ']');
+	var field_data = jQuery(data).serializeFullArray();
+
+	if ( typeof field_data['ninja_forms_field_' + field_id] != 'undefined' ) {
+		var field = field_data['ninja_forms_field_' + field_id];
+		
+		for( var prop in field ) {
+		    if ( field.hasOwnProperty( prop ) ) {
+		        nfFields.get( field_id ).set( prop, field[ prop ] );
+		    }
+		}
+	}
+}
+
+function nf_new_field_response( response ){
 	// Fire our custom jQuery addField event.
 	jQuery( document ).trigger('addField', [ response ]);
-
 }

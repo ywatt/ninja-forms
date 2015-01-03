@@ -328,10 +328,29 @@ function nf_output_registered_field_settings( $field_id ) {
 		$fav_class = 'ninja-forms-field-add-fav';
 	}
 
-	?>
-	<table id="field-info"><tr><td width="65%"><?php _e( 'Field ID', 'ninja-forms' ); ?>: <strong><?php echo $field_id;?></strong></td><!-- <td width="15%"><a href="#" class="ninja-forms-field-add-def" id="ninja_forms_field_<?php echo $field_id;?>_def" class="ninja-forms-field-add-def">Add Defined</a></td><td width="15%"><a href="#" class="ninja-forms-field-remove-def" id="ninja_forms_field_<?php echo $field_id;?>_def">Remove Defined</a></td> --> <td width="5%"><a href="#" class="<?php echo $fav_class;?>" id="ninja_forms_field_<?php echo $field_id;?>_fav">Star</a></td></tr></table>
-	<?php
-
+	if ( $reg_field['show_field_id'] || $reg_field['show_fav'] ) {
+		?>
+		<table id="field-info">
+			<tr>
+				<?php
+				if ( $reg_field['show_field_id'] ) {
+					?>
+					<td width="65%"><?php _e( 'Field ID', 'ninja-forms' ); ?>: <strong><?php echo $field_id;?></strong></td>
+					<?php
+				}
+				?>
+				<!-- <td width="15%"><a href="#" class="ninja-forms-field-add-def" id="ninja_forms_field_<?php echo $field_id;?>_def" class="ninja-forms-field-add-def">Add Defined</a></td><td width="15%"><a href="#" class="ninja-forms-field-remove-def" id="ninja_forms_field_<?php echo $field_id;?>_def">Remove Defined</a></td> -->
+				<?php
+				if ( $reg_field['show_fav'] ) {
+					?>
+					<td width="5%"><a href="#" class="<?php echo $fav_class;?>" id="ninja_forms_field_<?php echo $field_id;?>_fav">Star</a></td>
+					<?php
+				}
+				?>
+			</tr>
+		</table>
+		<?php
+	}
 	do_action( 'ninja_forms_edit_field_before_registered', $field_id );
 
 	$arguments = func_get_args();
