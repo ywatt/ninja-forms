@@ -355,7 +355,7 @@ class NF_Welcome {
 
 					<div class="col-2 last-feature">
 						<h4><?php _e( 'Template Function', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Ninja Forms also comes with a simple template function that can be places directly into a php template file. <code>if( function_exists( \'ninja_forms_display_form\' ) ){ ninja_forms_display_form( 1 ); }</code>', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php printf( __( 'Ninja Forms also comes with a simple template function that can be placed directly into a php template file. <code>if( function_exists( \'ninja_forms_display_form\' ) ){ ninja_forms_display_form( 1 ); }</code>', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 				</div>
