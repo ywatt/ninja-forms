@@ -89,7 +89,10 @@ function ninja_forms_activation( $network_wide ){
 		) DEFAULT CHARSET=utf8;";
 
 		dbDelta($sql);
-
+		
+		if (!function_exists('nf_change_email_fav')){
+  			require_once __DIR__.'/admin/upgrades/upgrade-functions.php';
+		}
 		// Remove old email settings.
 		nf_change_email_fav();
 
