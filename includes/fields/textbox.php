@@ -77,6 +77,11 @@ function ninja_forms_register_field_textbox(){
 				'label' => __( 'This is the user\'s state', 'ninja-forms' ),
 				'name' => 'user_state',
 			),
+			array(
+				'type' => 'checkbox',
+				'label' => __( 'Disable Input', 'ninja-forms' ),
+				'name' => 'disable_input',
+			),
 		),
 		'display_function' => 'ninja_forms_field_text_display',
 		'save_function' => '',
@@ -266,8 +271,16 @@ function ninja_forms_field_text_display( $field_id, $data, $form_id = '' ){
 		$mask_class = 'ninja-forms-datepicker';
 	}
 
+	$disable_input = isset( $data['disable_input'] ) ? $data['disable_input'] : 0;
+
+	if ( 1 == $disable_input ) {
+		$disabled = 'disabled';
+	} else {
+		$disabled = '';
+	}
+
 	?>
-	<input id="ninja_forms_field_<?php echo $field_id;?>" data-mask="<?php echo $mask;?>" data-input-limit="<?php echo $input_limit;?>" data-input-limit-type="<?php echo $input_limit_type;?>" data-input-limit-msg="<?php echo $input_limit_msg;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="text" class="<?php echo $field_class;?> <?php echo $mask_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
+	<input id="ninja_forms_field_<?php echo $field_id;?>" data-mask="<?php echo $mask;?>" data-input-limit="<?php echo $input_limit;?>" data-input-limit-type="<?php echo $input_limit_type;?>" data-input-limit-msg="<?php echo $input_limit_msg;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="text" class="<?php echo $field_class;?> <?php echo $mask_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" <?php echo $disabled; ?> />
 	<?php
 
 }

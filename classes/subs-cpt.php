@@ -627,9 +627,10 @@ class NF_Subs_CPT {
 
 	        if (!empty($query)) {
 	            // add to where clause
-	            $pieces['where'] = str_replace("(((wp_posts.post_title LIKE '%", "( {$query} ((wp_posts.post_title LIKE '%", $pieces['where']);
+	            $pieces['where'] = str_replace("((({$wpdb->posts}.post_title LIKE '%", "( {$query} (({$wpdb->posts}.post_title LIKE '%", $pieces['where']);
 
 	            $pieces['join'] = $pieces['join'] . " INNER JOIN {$wpdb->postmeta} AS mypm1 ON ({$wpdb->posts}.ID = mypm1.post_id)";
+	        	
 	        }
 	    }
 	    return ($pieces);

@@ -34,8 +34,31 @@ function nf_step_processing_css() {
  */
 function nf_step_processing_js() {
 	wp_enqueue_script( 'nf-processing',
-		NF_PLUGIN_URL . 'assets/js/dev/step-processing.js',
+		NF_PLUGIN_URL . 'assets/js/min/step-processing.min.js',
 		array( 'jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-progressbar' ) );
+	$step_labels = apply_filters( 'nf_step_processing_labels', array(
+		'Lacing Our Tabis',
+		'Cleaning The Dojo',
+		'Doing Splits',
+		'Buffing Bo Staff',
+		'Intimidating Gaze',
+		'Sparring',
+		'Packing Smoke Bombs',
+		'Polishing Shuriken',
+		'Throwing Sais',
+		'Calling Our Mom',
+		'Practicing Katas',
+		'Swinging Nunchucks',
+		'Sharpening Swords',
+		'Ironing Ninja Gi',
+		'Eating Breakfast',
+		'Cutting Stuff',
+		'Doing Dishes',
+		'Climbing Walls'
+	) );
+
+
+	wp_localize_script( 'nf-processing', 'nf_processing', array( 'step_labels' => $step_labels ) );
 }
 
 /**

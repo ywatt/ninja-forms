@@ -98,30 +98,19 @@ function ninja_forms_display_list_type( $field_id, $data ){
 }
 
 function ninja_forms_field_list_add_value( $field_id, $x, $conditional, $name, $id, $current = '', $field_data = '' ){
-	if( isset( $current['value']['value'] ) ){
-		$current_value = $current['value']['value'];
-	}else{
-		$current_value = '';
-	}
-	if( isset( $current['value']['label'] ) ){
-		$current_label = $current['value']['label'];
-	}else{
-		$current_label = '';
-	}
+	$current_value = isset( $current['value']['value'] ) ? $current['value']['value'] : '';
+	$current_label = isset( $current['value']['label'] ) ? $current['value']['label'] : '';
+	$current_calc = isset ( $current['value']['calc'] ) ? $current['value']['calc'] : '';
 
-	if( isset( $field_data['list_show_value'] ) ){
-		$list_show_value = $field_data['list_show_value'];
-	}else{
-		$list_show_value = 0;
-	}
+	$list_show_value = isset( $field_data['list_show_value'] ) ? $field_data['list_show_value'] : '';
 
+	_e( 'Label', 'ninja-forms' );
 	?>
-	Label
 	<input type="text" name="<?php echo $name;?>[label]" id="<?php echo $id;?>" class="" value="<?php echo $current_label;?>">
 	<?php
 	if( $list_show_value == 1 ){
+		_e( 'Value', 'ninja-forms' );
 		?>
-		Value
 		<input type="text" name="<?php echo $name;?>[value]" id="<?php echo $id;?>" class="ninja-forms-field-<?php echo $field_id;?>-list-option-value" value="<?php echo $current_value;?>">
 		<?php
 	}else{
@@ -129,6 +118,11 @@ function ninja_forms_field_list_add_value( $field_id, $x, $conditional, $name, $
 		<input type="hidden" name="<?php echo $name;?>[value]" value="_ninja_forms_no_value">
 		<?php
 	}
+	_e( 'Calc', 'ninja-forms' );
+	?>
+	<input type="text" name="<?php echo $name;?>[calc]" id="<?php echo $id;?>" class="" value="<?php echo $current_calc;?>">
+	<?php
+
 }
 
 function ninja_forms_field_list_edit($field_id, $data){
