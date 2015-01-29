@@ -62,12 +62,17 @@ jQuery( document ).ready( function( $ ) {
 
 		// Save the state of the metabox in our data model.
 		nfFields.get( field_id ).set( 'metabox_state', new_metabox_state );
-		
 	});
+
+	// Remove the saved message when the user clicks anywhere on the page.
+	$( document ).on( 'click', function() {
+		$( '#message' ).fadeOut( 'slow' );
+	} );
 
 	$( document ).on( 'click', '.nf-save-admin-fields', function( e ) {
 		e.preventDefault();
-
+		$( '.nf-save-admin-fields' ).hide();
+		$( '.nf-save-spinner' ).show();
 		nf_update_all_fields();
 
 		var data = JSON.stringify( nfFields.toJSON() );
@@ -88,7 +93,11 @@ jQuery( document ).ready( function( $ ) {
 		var data = $( document ).data( 'field_data' );
 
 		$.post( ajaxurl, { form_id: form_id, data: data, order: order, action: 'nf_save_admin_fields', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
-				
+			$( '.nf-save-spinner' ).hide();
+			$( '.nf-save-admin-fields' ).show();
+			var html = '<div id="message" class="updated below-h2" style="display:none;margin-top: 20px;"><p>' + nf_admin.saved_text + '</p></div>';
+			$( '.nav-tab-wrapper:last' ).after( html );
+			$( '#message' ).fadeIn();
 		} );
 	});
 
