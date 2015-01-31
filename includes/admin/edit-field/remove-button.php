@@ -10,7 +10,7 @@ function ninja_forms_edit_field_remove_button( $field_id ){
 	if ( $show_remove ) {
 		?>
 		<div class="menu-item-actions description-wide submitbox">
-			<a class="submitdelete deletion ninja-forms-field-remove" id="ninja_forms_field_<?php echo $field_id;?>_remove" name="" href="#"><?php _e('Remove', 'ninja-forms'); ?></a>
+			<a class="submitdelete deletion nf-remove-field" id="ninja_forms_field_<?php echo $field_id;?>_remove" data-field="<?php echo $field_id; ?>" href="#"><?php _e('Remove', 'ninja-forms'); ?></a>
 		</div>
 		<?php
 	}
