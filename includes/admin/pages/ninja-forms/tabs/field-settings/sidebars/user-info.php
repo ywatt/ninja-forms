@@ -33,7 +33,7 @@ function ninja_forms_sidebar_user_info_fields(){
 
 				?>
 				<p class="button-controls" id="ninja_forms_insert_def_field_<?php echo $field_id;?>_p">
-					<a class="button-secondary ninja-forms-insert-def-field" id="ninja_forms_insert_def_field_<?php echo $field_id;?>" name="_<?php echo $limit;?>"  href="#" rel="<?php echo $type;?>"><?php _e($name, 'ninja-forms');?></a>
+					<a class="button-secondary ninja-forms-insert-def-field" id="ninja_forms_insert_def_field_<?php echo $field_id;?>" data-limit="<?php echo $limit; ?>" data-field="<?php echo $field_id; ?>" data-type="<?php echo $type; ?>" href="#"><?php _e($name, 'ninja-forms');?></a>
 				</p>
 				<?php				
 			}

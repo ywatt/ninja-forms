@@ -263,7 +263,6 @@ function ninja_forms_add_list_options(){
 	die();
 }
 
-add_action('wp_ajax_ninja_forms_insert_fav', 'ninja_forms_insert_fav');
 function ninja_forms_insert_fav(){
 	global $wpdb, $ninja_forms_fields;
 	// Bail if we aren't in the admin
@@ -272,7 +271,7 @@ function ninja_forms_insert_fav(){
 
 	check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
 
-	$fav_id = absint( $_REQUEST['fav_id'] );
+	$fav_id = absint( $_REQUEST['field_id'] );
 	$form_id = absint( $_REQUEST['form_id'] );
 
 	$fav_row = ninja_forms_get_fav_by_id($fav_id);
@@ -296,7 +295,9 @@ function ninja_forms_insert_fav(){
 	die();
 }
 
-add_action('wp_ajax_ninja_forms_insert_def', 'ninja_forms_insert_def');
+
+add_action('wp_ajax_ninja_forms_insert_fav', 'ninja_forms_insert_fav');
+
 function ninja_forms_insert_def(){
 	global $wpdb, $ninja_forms_fields;
 
@@ -306,7 +307,7 @@ function ninja_forms_insert_def(){
 
 	check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
 
-	$def_id = absint( $_REQUEST['def_id'] );
+	$def_id = absint( $_REQUEST['field_id'] );
 	$form_id = absint( $_REQUEST['form_id'] );
 
 	$def_row = ninja_forms_get_def_by_id($def_id);
@@ -329,6 +330,8 @@ function ninja_forms_insert_def(){
 	}
 	die();
 }
+
+add_action('wp_ajax_ninja_forms_insert_def', 'ninja_forms_insert_def');
 
 add_action('wp_ajax_ninja_forms_add_fav', 'ninja_forms_add_fav');
 function ninja_forms_add_fav(){
@@ -389,7 +392,7 @@ function ninja_forms_add_fav(){
 	$wpdb->update( NINJA_FORMS_FIELDS_TABLE_NAME, $update_array, array( 'id' => $field_id ));
 
 	$new_html = '<p class="button-controls" id="ninja_forms_insert_fav_field_'.$fav_id.'_p">
-				<a class="button add-new-h2 ninja-forms-insert-fav-field" id="ninja_forms_insert_fav_field_'.$fav_id.'" name=""  href="#">'.__($name, 'ninja-forms').'</a>
+				<a class="button add-new-h2 ninja-forms-insert-fav-field" id="ninja_forms_insert_fav_field_'.$fav_id.'" data-field="' . $fav_id . '" data-type="fav" href="#">'.__($name, 'ninja-forms').'</a>
 			</p>';
 
 	header("Content-type: application/json");

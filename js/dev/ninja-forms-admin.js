@@ -143,35 +143,6 @@ jQuery(document).ready(function($) {
 			}
 		}
 	});
-	/*
-	//Make Metaboxes Sortable.
-	$("#ninja_forms_admin_metaboxes").sortable({
-		placeholder: "ui-state-highlight",
-		helper: 'clone',
-		handle: '.hndl',
-		stop: function(e,ui) {
-			alert('done');
-		}
-	});
-
-		$(".add-new-h2").draggable({
-		connectToSortable: ".ninja-forms-field-list",
-		revert: true,
-		start: function(e,ui){
-			$.data( document.body, 'test', e.target.id );
-		},
-		helper: function(){
-			var el = $( "li.ninja-forms-no-nest:last" ).clone();
-			return el;
-		}
-	});
-
-	$(".ninja-forms-field-list").droppable({
-		drop: function( event, ui ) {
-      		alert( $("li.ninja-forms-no-nest:last" ).length );
-		}
-    });
-	*/
 
 	//Listen to the keydown and keyup of our New Form title. Then remove or add the class as appropriate to add/remove default text.
 	$("#title").keydown(function(){
@@ -191,64 +162,6 @@ jQuery(document).ready(function($) {
 
 	$(".hndle").dblclick(function(event){
 		$(this).prevAll(".item-controls:first").find("a").click();
-	});
-
-
-	//Make the field list sortable
-	$(".ninja-forms-field-list").sortable({
-		handle: '.menu-item-handle',
-		items: "li:not(.not-sortable)",
-		connectWith: ".ninja-forms-field-list",
-		//cursorAt: {left: -10, top: -1},
-		start: function(e, ui){
-			var wp_editor_count = $(ui.item).find(".wp-editor-wrap").length;
-			if(wp_editor_count > 0){
-				$(ui.item).find(".wp-editor-wrap").each(function(){
-					var ed_id = this.id.replace("wp-", "");
-					ed_id = ed_id.replace("-wrap", "");
-					tinyMCE.execCommand( 'mceRemoveControl', false, ed_id );
-				});
-			}
-		},
-		stop: function(e,ui) {
-			/*
-			if( $(ui.item).prop("tagName") == "A" ){
-				//alert( $.data( document.body, 'test' ) );
-				var el = $( "li.ninja-forms-no-nest:last" ).clone();
-				$(ui.item).replaceWith(el);
-			}
-			*/
-			var wp_editor_count = $(ui.item).find(".wp-editor-wrap").length;
-			if(wp_editor_count > 0){
-				$(ui.item).find(".wp-editor-wrap").each(function(){
-					var ed_id = this.id.replace("wp-", "");
-					ed_id = ed_id.replace("-wrap", "");
-					tinyMCE.execCommand( 'mceAddControl', true, ed_id );
-				});
-			}
-			$(this).sortable("refresh");
-		}
-	});
-
-	//Add New Field
-	$(".ninja-forms-new-field").click(function(event){
-		event.preventDefault();
-		var limit = this.name.replace('_', '');
-		var type = this.id;
-		var form_id = $("#_form_id").val();
-		if(limit != ''){
-			var current_count = $("." + type + "-li").length;
-		}else{
-			var current_count = '';
-		}
-
-		if((limit != '' && current_count < limit) || limit == '' || current_count == '' || current_count == 0){
-
-			$.post( ajaxurl, { type: type, form_id: form_id, action:'ninja_forms_new_field', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, nf_new_field_response );
-
-		}else{
-			$(this).addClass('disabled');
-		}
 	});
 
 	//Listen to the Field Label and change the LI title and update select lists on KeyUp
@@ -306,27 +219,6 @@ jQuery(document).ready(function($) {
 			$.post(ajaxurl, { form_id: form_id, action:"ninja_forms_delete_form", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function(response){
 				$("#ninja_forms_form_" + form_id + "_tr").css("background-color", "#FF0000").fadeOut('slow', function(){
 					$(this).remove();
-				});
-			});
-		}
-	});
-
-	//Remove Field
-	$(document).on( 'click', '.ninja-forms-field-remove', function(event){
-		event.preventDefault();
-		var field_id = this.id.replace("ninja_forms_field_", "");
-		field_id = field_id.replace("_remove", "");
-		var answer = confirm("Remove this field? It will be removed even if you do not save.");
-		if(answer){
-			$.post(ajaxurl, { field_id: field_id, action:"ninja_forms_remove_field", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function(){
-				$("#ninja_forms_field_" + field_id).remove();
-				$(document).trigger('removeField', [ field_id ]);
-				$(".ninja-forms-field-conditional-cr-field").each(function(){
-					$(this).children('option').each(function(){
-						if(this.value == field_id){
-							$(this).remove();
-						}
-					});
 				});
 			});
 		}
@@ -888,14 +780,6 @@ jQuery(document).ready(function($) {
 		});
 	});
 
-	//Insert a Favorite Field
-	$(document).on( 'click', '.ninja-forms-insert-fav-field', function(event){
-		event.preventDefault();
-		var fav_id = this.id.replace("ninja_forms_insert_fav_field_", "");
-		var form_id = $("#_form_id").val();
-		$.post(ajaxurl, {fav_id: fav_id, form_id: form_id, action:"ninja_forms_insert_fav", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, nf_new_field_response)
-	});
-
 	/* * * End Favorite Fields JS * * */
 
 	/* * * Defined Fields JS * * */
@@ -942,24 +826,6 @@ jQuery(document).ready(function($) {
 		$.post(ajaxurl, { field_id: field_id, action:"ninja_forms_remove_def", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce}, function(response){
 			$("#ninja_forms_insert_def_field_" + response.def_id + "_p").remove();
 		});
-	});
-
-
-	//Insert a Defined Field
-	$(document).on( 'click', '.ninja-forms-insert-def-field', function(event){
-		event.preventDefault();
-		var limit = this.name.replace('_', '');
-		var def_id = this.id.replace("ninja_forms_insert_def_field_", "");
-		var form_id = $("#_form_id").val();
-		var type = this.rel;
-		if(limit != ''){
-			var current_count = $("." + type + "-li").length;
-		}else{
-			var current_count = '';
-		}
-		if((limit != '' && current_count < limit) || limit == '' || current_count == '' || current_count == 0){
-			$.post(ajaxurl, {def_id: def_id, form_id: form_id, action:"ninja_forms_insert_def", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, nf_new_field_response);
-		}
 	});
 
 	/* * * End Defined Fields JS * * */
