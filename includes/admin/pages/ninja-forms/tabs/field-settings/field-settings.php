@@ -8,7 +8,7 @@ function ninja_forms_register_tab_field_settings(){
 	}
 
 	$args = array(
-		'name' => __( 'Fields', 'ninja-forms' ),
+		'name' => __( 'Builder', 'ninja-forms' ),
 		'page' => 'ninja-forms',
 		'display_function' => 'ninja_forms_tab_field_settings',
 		'disable_no_form_id' => true,

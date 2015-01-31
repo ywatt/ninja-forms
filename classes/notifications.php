@@ -75,7 +75,7 @@ class NF_Notifications
 		}
 
 		$args = array(
-			'name' => __( 'Notifications', 'ninja-forms' ),
+			'name' => __( 'Email & Actions', 'ninja-forms' ),
 			'page' => 'ninja-forms',
 			'display_function' => array( $this, 'output_admin' ),
 			'save_function' => array( $this, 'save_admin' ),
