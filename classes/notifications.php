@@ -216,7 +216,7 @@ class NF_Notifications
 			<?php
 		if ( '' == $action ) {
 			?>
-			<h2><?php _e( 'Notifications', 'ninja-forms' ); ?> <a href="<?php echo add_query_arg( array( 'notification-action' => 'new' ) ); ?>" class="add-new-h2"><?php _e( 'Add New', 'ninja-forms' );?></a></h2>
+			<h2><?php _e( 'Email & Actions', 'ninja-forms' ); ?> <a href="<?php echo add_query_arg( array( 'notification-action' => 'new' ) ); ?>" class="add-new-h2"><?php _e( 'Add New', 'ninja-forms' );?></a></h2>
 
 	        <!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
 	      	 <form id="forms-filter" method="get">
