@@ -136,16 +136,6 @@ function ninja_forms_edit_field_output_li( $field_id, $new = false ) {
 			}
 		}
 	}
-
-	/**
-	 * We need to get a list of all of our RTEs. 
-	 * If we're submitting via ajax, we'll need to use this list.
-	 */
-	if ( isset ( $_POST['action'] ) && $_POST['action'] == 'ninja_forms_new_field' ) {
-		if ( ! empty ( $nf_rte_editors ) && isset ( $editors ) && is_object( $editors ) ) {
-			$editors->output_js( $field_id, $nf_rte_editors );
-		}
-	}
 }
 
 add_action( 'ninja_forms_edit_field_li', 'ninja_forms_edit_field_output_li', 10, 2 );
@@ -182,7 +172,7 @@ class NF_WP_Editor_Ajax {
     */
 
     public static function output_js( $field_id = '', $editors = array() ) {
-		
+
     	if ( empty( $field_id ) or empty( $editors ) )
     		return false;
 
@@ -266,7 +256,7 @@ class NF_WP_Editor_Ajax {
 }
 
 function nf_output_registered_field_settings( $field_id ) {
-	global $ninja_forms_fields;
+	global $ninja_forms_fields, $nf_rte_editors;
 
 	$field_row = ninja_forms_get_field_by_id( $field_id );
 	$current_tab = ninja_forms_get_current_tab();
@@ -430,4 +420,10 @@ function nf_output_registered_field_settings( $field_id ) {
 	}
 
 	do_action( 'ninja_forms_edit_field_after_registered', $field_id );
+
+
+	if ( ! empty ( $nf_rte_editors ) && isset ( $editors ) && is_object( $editors ) ) {
+		$editors->output_js( $field_id, $nf_rte_editors );
+	}
+
 }

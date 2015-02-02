@@ -128,7 +128,7 @@ function ninja_forms_edit_field_el_output($field_id, $type, $label = '', $name =
 			wp_editor( $value, $editor_id, $args );				
 
 			// If we're using ajax, add this editor ID to our global var so that we can instantiate it on the front-end.
-			if ( isset ( $_POST['action'] ) && $_POST['action'] == 'ninja_forms_new_field' )
+			if ( isset ( $_POST['action'] ) && ( $_POST['action'] == 'ninja_forms_new_field' || $_POST['action'] == 'nf_output_field_settings_html' ) )
 				$nf_rte_editors[] = $editor_id;
 
 		break;

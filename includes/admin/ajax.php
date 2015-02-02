@@ -27,6 +27,7 @@ function ninja_forms_save_metabox_state(){
  */
 
 function nf_output_field_settings_html() {
+	global $nf_rte_editors;
 
 	// Bail if we aren't in the admin
 	if ( ! is_admin() )
@@ -41,6 +42,7 @@ function nf_output_field_settings_html() {
 	$field_id = esc_html( $_REQUEST['field_id'] );
 
 	nf_output_registered_field_settings( $field_id );
+
 	die();
 }
 

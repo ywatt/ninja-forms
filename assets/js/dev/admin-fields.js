@@ -5,7 +5,7 @@
 
 // Model to hold our field settings.
 var nfField = Backbone.Model.extend( {
-	openMetabox: function() {
+	toggleMetabox: function() {
 		/**
 		 * Open and close a field metabox.
 		 * When a metabox is closed:
@@ -30,12 +30,19 @@ var nfField = Backbone.Model.extend( {
 		if ( new_metabox_state == 1 ) { // If we have opened the metabox.
 			// Fetch our HTML.
 			this.updateHTML();
-		} else { // If we have opened the metabox.
+		} else { // If we have closed the metabox.
 			// Update our model data.
 			this.updateData();
+			// Remove any tinyMCE editors
+			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).find( 'div.rte' ).each( function() {
+				var editor_id = jQuery( this ).find( 'textarea.wp-editor-area' ).prop( 'id' );
+				tinymce.remove( '#' + editor_id );
+			} );
+
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).slideUp('fast', function( e ) {
 				// Remove the HTML contents of this metabox.
-				jQuery( '#ninja_forms_field_' + field_id + '_inside' ).empty();				
+				jQuery( '#ninja_forms_field_' + field_id + '_inside' ).empty();
+
 				// Add our no-padding class
 				jQuery( '#ninja_forms_field_' + field_id + '_inside' ).addClass( 'no-padding' );
 			});
@@ -52,11 +59,19 @@ var nfField = Backbone.Model.extend( {
 			// Remove our no-padding class.
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).removeClass( 'no-padding' );	
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).append( response );
+			if ( typeof nf_ajax_rte_editors !== 'undefined' ) {
+				for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
+					var editor_id = nf_ajax_rte_editors[x];
+					tinyMCE.init( tinyMCEPreInit.mceInit[ editor_id ] );
+					try { quicktags( tinyMCEPreInit.qtInit[ editor_id ] ); } catch(e){ console.log( 'error' ); }
+				};
+			}
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).slideDown( 'fast' );
 		} );
 	},
 	updateData: function() {
 		var field_id = this.id;
+		tinyMCE.triggerSave();
 		var data = jQuery('[name^=ninja_forms_field_' + field_id + ']');
 		var field_data = jQuery(data).serializeFullArray();
 
@@ -135,15 +150,12 @@ var nfFields = Backbone.Collection.extend({
 		}
 
 		if ( typeof jQuery( button ).data( 'field' ) == 'undefined' ) {
-			console.log( 'none' );
 			var field_id = '';
 			var action = 'ninja_forms_new_field';
 		} else if ( jQuery( button ).data( 'type' ) == 'fav' ) {
-			console.log( 'fav' );
 			var field_id = jQuery( button ).data( 'field' );
 			var action = 'ninja_forms_insert_fav';
 		} else {
-			console.log( 'def' );
 			var field_id = jQuery( button ).data( 'field' );
 			var action = 'ninja_forms_insert_def';
 		}
@@ -201,7 +213,7 @@ jQuery( document ).ready( function( $ ) {
 		e.preventDefault();
 		// Get our field id.
 		var field_id = jQuery( e.target ).data( 'field' );
-		nfFields.get( field_id ).openMetabox();
+		nfFields.get( field_id ).toggleMetabox();
 	});
 
 	// Remove the saved message when the user clicks anywhere on the page.
