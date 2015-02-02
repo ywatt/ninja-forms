@@ -11,7 +11,7 @@ function ninja_forms_register_sidebar_user_info_fields(){
 	$args = array(
 		'name' => __( 'User Information', 'ninja-forms' ),
 		'page' => 'ninja-forms',
-		'tab' => 'fields',
+		'tab' => 'builder',
 		'display_function' => 'ninja_forms_sidebar_user_info_fields'
 	);
 	ninja_forms_register_sidebar('user_info', $args);

@@ -15,7 +15,7 @@ function ninja_forms_register_tab_field_settings(){
 		'show_save' => false,
 		'tab_reload' => false,
 	);
-	ninja_forms_register_tab('fields', $args);
+	ninja_forms_register_tab( 'builder', $args );
 }
 
 add_action('admin_init', 'ninja_forms_register_tab_field_settings');

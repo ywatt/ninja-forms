@@ -57,10 +57,11 @@ function ninja_forms_admin(){
 	$current_tab = ninja_forms_get_current_tab();
 	$current_page = esc_html( $_REQUEST['page'] );
 
-	if(isset($_REQUEST['form_id'])){
+	if( isset ( $_REQUEST['form_id'] ) ) {
 		$form_id = absint( $_REQUEST['form_id'] );
 		$form_row = ninja_forms_get_form_by_id($form_id);
 		$data = $form_row['data'];
+		$form_title = $data['form_title'];
 	}else{
 		$form_id = '';
 		$data = '';
@@ -94,7 +95,16 @@ function ninja_forms_admin(){
 					echo $ninja_forms_tabs[$current_page][$current_tab]['title'];
 				}
 
-				echo '<h2>Forms <a href="#" class="add-new-h2">'.__('View All Forms', 'ninja-forms').'</a></h2>';
+				if ( 'form_list' == $current_tab ) {
+					?>
+					<h2><?php _e( 'Forms', 'ninja-forms' ); ?> <a href="#" class="add-new-h2"><?php _e( 'Add New', 'ninja-forms'); ?></a></h2>
+					<?php
+				} else {
+
+					?>
+					<h2><?php echo $form_title; ?></h2>
+					<?php
+				}
 
 				if($ninja_forms_tabs[$current_page][$current_tab]['show_tab_links']){
 					?>

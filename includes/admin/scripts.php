@@ -50,7 +50,7 @@ function ninja_forms_admin_js(){
 
 	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array( 'nf_ajax_nonce' => wp_create_nonce( 'nf_ajax'), 'form_id' => $form_id, 'datepicker_args' => apply_filters( 'ninja_forms_admin_forms_datepicker_args', $datepicker_args ) ) );
 
-	if ( isset ( $_REQUEST['page'] ) && $_REQUEST['page'] == 'ninja-forms' && isset ( $_REQUEST['tab'] ) && $_REQUEST['tab'] == 'fields' ) {
+	if ( isset ( $_REQUEST['page'] ) && $_REQUEST['page'] == 'ninja-forms' && isset ( $_REQUEST['tab'] ) && $_REQUEST['tab'] == 'builder' ) {
 		wp_enqueue_script( 'nf-admin-fields',
 			NINJA_FORMS_URL . 'assets/js/' . $src .'/admin-fields' . $suffix . '.js' );
 

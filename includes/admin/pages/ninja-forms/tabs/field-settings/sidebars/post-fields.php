@@ -34,7 +34,7 @@ if ( !function_exists ( 'ninja_forms_register_field_post_tags' ) ) {
 		$args = array(
 			'name' => 'Post Creation Fields',
 			'page' => 'ninja-forms',
-			'tab' => 'fields',
+			'tab' => 'builder',
 			'display_function' => 'ninja_forms_sidebar_display_fields'
 		);
 		if($create_post == 1){
