@@ -52,7 +52,7 @@ function ninja_forms_admin_js(){
 
 	if ( isset ( $_REQUEST['page'] ) && $_REQUEST['page'] == 'ninja-forms' && isset ( $_REQUEST['tab'] ) && $_REQUEST['tab'] == 'fields' ) {
 		wp_enqueue_script( 'nf-admin-fields',
-			NINJA_FORMS_URL . 'assets/js/' . $src .'/admin-fields' . $suffix . '.js' );
+			NINJA_FORMS_URL . 'assets/js/' . $src .'/admin-fields' . $suffix . '.js', array( 'backbone' ) );
 
 		if ( '' != $form_id ) {
 			$fields = Ninja_Forms()->form( $form_id )->fields;
@@ -65,6 +65,6 @@ function ninja_forms_admin_js(){
 			}
 
 			wp_localize_script( 'nf-admin-fields', 'nf_admin', array( 'fields' => $fields, 'saved_text' => __( 'Saved', 'ninja-forms' ), 'save_text' => __( 'Save', 'ninja-forms' ), 'saving_text' => __( 'Saving...', 'ninja-forms' ), 'remove_field' => __( 'Remove this field? It will be removed even if you do not save.', 'ninja-forms' ) ) );
-		}		
+		}
 	}
 }
