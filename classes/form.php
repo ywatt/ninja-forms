@@ -48,11 +48,44 @@ class NF_Form {
 	 * @since 2.7
 	 * @return void
 	 */
-	public function __construct( $form_id ) {
-		// Set our current form id.
-		$this->form_id = $form_id;
-		$this->update_fields();		
-		$this->settings = nf_get_form_settings( $form_id );
+	public function __construct( $form_id = '' ) {
+		if ( ! empty ( $form_id ) ) { // We've been passed a form id.
+			// Set our current form id.
+			$this->form_id = $form_id;
+			$this->update_fields();
+			$this->settings = nf_get_form_settings( $form_id );	
+		}
+	}
+
+	/**
+	 * Add a form
+	 * 
+	 * @access public
+	 * @since 2.9
+	 * @return int $form_id
+	 */
+	public function create( $status = 'draft', $args = array() ) {
+		$form_id = nf_insert_object( 'form' );
+		$date_updated = date( 'Y-m-d', current_time( 'timestamp' ) );
+		nf_update_object_meta( $form_id, 'date_updated', $date_updated );
+		nf_update_object_meta( $form_id, 'status', $status );
+
+		foreach( $args as $meta_key => $meta_value ) {
+			nf_update_object_meta( $form_id, $meta_key, $meta_value );
+		}
+
+		return $form_id;
+	}
+
+	/**
+	 * Insert a field into our form
+	 * 
+	 * @access public
+	 * @since 2.9
+	 * @return bool()
+	 */
+	public function insert_field( $field_id ) {
+		return nf_add_relationship( $field_id, 'field', $this->form_id, 'form' );
 	}
 
 	/**
@@ -86,13 +119,26 @@ class NF_Form {
 	 * Changes are only applied to this object.
 	 * 
 	 * @access public
+	 * @since 2.8
 	 * @param string $setting
 	 * @param mixed $value
 	 * @return bool
 	 */
 	public function update_setting( $setting, $value ) {
 		$this->settings[ $setting ] = $value;
+		nf_update_object_meta( $this->form_id, $setting, $value );
 		return true;
+	}
+
+	/**
+	 * Get all of our settings
+	 * 
+	 * @access public
+	 * @since 2.9
+	 * @return array $settings
+	 */
+	public function get_all_settings() {
+		return $this->settings;
 	}
 
 	/**

@@ -112,6 +112,10 @@ class Ninja_Forms {
 		// Instead, the subs() methods will act as wrappers for it.
 		self::$instance->subs = new NF_Subs();
 
+		// The forms variable won't be interacted with directly.
+		// Instead, the forms() methods will act as wrappers for it.
+		self::$instance->forms = new NF_Forms();
+
 		// Get our notifications up and running.
 		self::$instance->notifications = new NF_Notifications();
 
@@ -242,9 +246,7 @@ class Ninja_Forms {
 	 */
 	public function form( $form_id = '' ) {
 		// Bail if we don't get a form id.
-		if ( $form_id == '' )
-			return false;
-		
+
 		$form_var = 'form_' . $form_id;
 		// Check to see if an object for this form already exists
 		// Create one if it doesn't exist.
@@ -252,6 +254,17 @@ class Ninja_Forms {
 			self::$instance->$form_var = new NF_Form( $form_id );
 
 		return self::$instance->$form_var;
+	}
+
+	/**
+	 * Function that acts as a wrapper for our forms_var - NF_Form() class.
+	 * 
+	 * @access public
+	 * @since 2.9
+	 * @return object self::$instance->forms_var
+	 */
+	public function forms( $form_id = '' ) {
+		return self::$instance->forms;
 	}
 
 	/**
@@ -343,6 +356,8 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/subs-cpt.php' );
 		// Include our form object.
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
+		// Include our form sobject.
+		require_once( NF_PLUGIN_DIR . 'classes/forms.php' );
 		// Include our field, notification, and sidebar registration class.
 		require_once( NF_PLUGIN_DIR . 'classes/register.php' );
 		// Include our 'nf_action' watcher.
