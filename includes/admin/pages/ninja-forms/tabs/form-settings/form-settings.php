@@ -150,25 +150,11 @@ add_action( 'admin_init', 'ninja_forms_register_form_settings_basic_metabox' );
 
 function ninja_forms_save_form_settings( $form_id, $data ){
 	global $wpdb, $ninja_forms_admin_update_message;
-	$form_row = ninja_forms_get_form_by_id( $form_id );
-	$form_data = $form_row['data'];
 
 	foreach ( $data as $key => $val ){
-		$form_data[$key] = $val;
+		Ninja_Forms()->form( $form_id )->update_setting( $key, $val );
 	}
 
-	if ( $form_id != 'new' ){
-		$date_updated = date( 'Y-m-d H:i:s', strtotime ( 'now' ) );
-		$data_array = array( 'data' => serialize( $form_data ), 'date_updated' => $date_updated );
-		$wpdb->update( NINJA_FORMS_TABLE_NAME, $data_array, array( 'id' => $form_id ) );
-	} else {
-		$data_array = array('data' => serialize( $form_data ) );
-		$wpdb->insert( NINJA_FORMS_TABLE_NAME, $data_array );
-		$redirect = add_query_arg( array( 'form_id' => $wpdb->insert_id, 'update_message' => urlencode( __( 'Form Settings Saved', 'ninja-forms' ) ) ) );
-		do_action( 'ninja_forms_save_new_form_settings', $wpdb->insert_id, $data );
-		wp_redirect( $redirect );
-		exit();
-	}
 	$update_msg = __( 'Form Settings Saved', 'ninja-forms' );
 	return $update_msg;
 }
