@@ -832,3 +832,49 @@ function nf_deprecate_field_import( $data ) {
 }
 
 add_filter( 'nf_before_import_field', 'nf_deprecate_field_import' );
+
+
+/** 
+ * Deprecated as of version 2.9
+ *
+ */
+
+
+/**
+ * Get an array of form settings by form ID
+ *
+ * @since 2.7
+ * @param int $form_id
+ * @return array $form['data']
+ */
+function nf_get_form_settings( $form_id ) {
+	return nf_get_object_meta( $form_id );
+}
+
+/**
+ * Return form data
+ * 
+ * @since 1.0
+ * @param int $form_id
+ * @return array $form
+ */
+function ninja_forms_get_form_by_id( $form_id ) {
+	$settings = Ninja_Forms()->form( $form_id )->get_all_settings();
+	$date_updated = Ninja_Forms()->form( $form_id )->get_setting( 'date_updated' );
+	return array( 'id' => $form_id, 'data' => $settings, 'date_updated' => $date_updated );
+}
+
+/**
+ * Get a form by field id
+ * 
+ * @since 1.0
+ * @param int $field_id
+ * @param array $form
+ */
+function ninja_forms_get_form_by_field_id( $field_id ){
+	global $wpdb;
+	$form_id = $wpdb->get_row($wpdb->prepare("SELECT form_id FROM ".NINJA_FORMS_FIELDS_TABLE_NAME." WHERE id = %d", $field_id), ARRAY_A);
+	$form_id = $form_id['form_id'];
+	$form = ninja_forms_get_form_by_id( $form_id );
+	return $form;
+}
