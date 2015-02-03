@@ -120,7 +120,7 @@ var nfFields = Backbone.Collection.extend({
 			order[i] = current_order[i];
 		};
 		order = JSON.stringify( order );
-		var form_id = jQuery( '#_form_id' ).val();
+		var form_id = ninja_forms_settings.form_id;
 
 		jQuery( document ).data( 'field_order', order );
 		jQuery( document ).data( 'field_data', data );
