@@ -162,7 +162,7 @@ function ninja_forms_tab_form_list($form_id, $data){
 		for ($i = $start; $i < $end; $i++) {
 			$form_id = $all_forms[$i]['id'];
 			$data = $all_forms[$i]['data'];
-			$date_updated = $all_forms[$i]['date_updated'];
+			$date_updated = $data['date_updated'];
 			$date_updated = strtotime( $date_updated );
 			$date_updated = date_i18n( __( 'F d, Y', 'ninja-forms' ), $date_updated );
 			$link = remove_query_arg( array( 'paged' ) );
