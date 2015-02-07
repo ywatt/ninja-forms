@@ -7,7 +7,7 @@
  * @return void
  */
 
-function ninja_forms_edit_field_input_limit( $field_id ) {
+function ninja_forms_edit_field_input_limit( $field_id, $field_data ) {
 	
 	$field_row = ninja_forms_get_field_by_id($field_id);
 	$field_type = $field_row['type'];
@@ -16,8 +16,6 @@ function ninja_forms_edit_field_input_limit( $field_id ) {
 
 	if ( ! in_array( $field_type, $allowed_types ) )
 		return false;
-
-	$field_data = $field_row['data'];
 
 	if ( isset ( $field_data['input_limit'] ) ) {
 		$input_limit = $field_data['input_limit'];
@@ -46,4 +44,4 @@ function ninja_forms_edit_field_input_limit( $field_id ) {
 	ninja_forms_edit_field_el_output( $field_id, 'text', __( 'Text to appear after character/word counter', 'ninja-forms' ), 'input_limit_msg', $input_limit_msg, 'wide', '', 'widefat' );
 }
 
-add_action( 'ninja_forms_edit_field_after_registered', 'ninja_forms_edit_field_input_limit', 10 );
+add_action( 'ninja_forms_edit_field_after_registered', 'ninja_forms_edit_field_input_limit', 10, 2 );
