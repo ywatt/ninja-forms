@@ -54,7 +54,10 @@ var nfField = Backbone.Model.extend( {
 	updateHTML: function() {
 		var field_id = this.id;
 		jQuery( '#ninja_forms_metabox_field_' + field_id ).find( '.spinner' ).show();
-		jQuery.post( ajaxurl, { field_id: field_id, action:'nf_output_field_settings_html', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
+		this.updateData();
+		var data = JSON.stringify( this.toJSON() );
+
+		jQuery.post( ajaxurl, { field_id: field_id, data: data, action:'nf_output_field_settings_html', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
 			jQuery( '#ninja_forms_metabox_field_' + field_id ).find( '.spinner' ).hide();
 			// Remove our no-padding class.
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).removeClass( 'no-padding' );	
@@ -66,6 +69,7 @@ var nfField = Backbone.Model.extend( {
 					try { quicktags( tinyMCEPreInit.qtInit[ editor_id ] ); } catch(e){ console.log( 'error' ); }
 				};
 			}
+
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).slideDown( 'fast' );
 		} );
 	},
@@ -115,12 +119,14 @@ var nfFields = Backbone.Collection.extend({
 
 		var data = JSON.stringify( this.toJSON() );
 		var order = {};
-		var current_order = jQuery( "#ninja_forms_field_list" ).sortable( "toArray" );
+		var current_order = jQuery( '#ninja_forms_field_list' ).sortable( 'toArray' );
 		for ( var i = 0; i < current_order.length; i++ ) {
 			order[i] = current_order[i];
 		};
 		order = JSON.stringify( order );
 		var form_id = ninja_forms_settings.form_id;
+
+		console.log( order );
 
 		jQuery( document ).data( 'field_order', order );
 		jQuery( document ).data( 'field_data', data );
