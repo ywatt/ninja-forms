@@ -40,8 +40,10 @@ function ninja_forms_register_imp_forms_metabox(){
 	ninja_forms_register_tab_metabox($args);
 }
 
-add_action('admin_init', 'ninja_forms_register_exp_forms_metabox');
 function ninja_forms_register_exp_forms_metabox(){
+	if ( ! isset ( $_REQUEST['page'] ) || 'ninja-forms-impexp' != $_REQUEST['page'] )
+		return false;
+	
 	$form_results = ninja_forms_get_all_forms();
 	$form_select = array();
 	if(is_array($form_results) AND !empty($form_results)){
@@ -77,6 +79,8 @@ function ninja_forms_register_exp_forms_metabox(){
 	);
 	ninja_forms_register_tab_metabox($args);
 }
+
+add_action('admin_init', 'ninja_forms_register_exp_forms_metabox');
 
 /*
  *
