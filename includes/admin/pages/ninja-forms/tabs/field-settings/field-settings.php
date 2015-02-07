@@ -51,9 +51,10 @@ function nf_create_form_listen() {
 		$form_id = Ninja_Forms()->form()->create();
 		var_dump ( $form_id );
 		$redirect = add_query_arg( array( 'form_id' => $form_id ) );
-		// wp_redirect( $redirect );
+		var_dump( $redirect );
+		wp_redirect( $redirect );
 		die();		
 	}
 }
 
-// add_action( 'admin_init', 'nf_create_form_listen', 5 );
+add_action( 'admin_init', 'nf_create_form_listen', 5 );
