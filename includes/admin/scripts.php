@@ -51,8 +51,8 @@ function ninja_forms_admin_js(){
 	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array( 'nf_ajax_nonce' => wp_create_nonce( 'nf_ajax'), 'form_id' => $form_id, 'datepicker_args' => apply_filters( 'ninja_forms_admin_forms_datepicker_args', $datepicker_args ) ) );
 
 	if ( isset ( $_REQUEST['page'] ) && $_REQUEST['page'] == 'ninja-forms' && isset ( $_REQUEST['tab'] ) && $_REQUEST['tab'] == 'builder' ) {
-		wp_enqueue_script( 'nf-admin-fields',
-			NINJA_FORMS_URL . 'assets/js/' . $src .'/admin-fields' . $suffix . '.js', array( 'backbone' ) );
+		wp_enqueue_script( 'nf-builder',
+			NINJA_FORMS_URL . 'assets/js/' . $src .'/builder' . $suffix . '.js', array( 'backbone' ) );
 
 		if ( '' != $form_id ) {
 			$fields = Ninja_Forms()->form( $form_id )->fields;
@@ -64,7 +64,7 @@ function ninja_forms_admin_js(){
 				$fields[ $field_id ]['metabox_state'] = 0;
 			}
 
-			wp_localize_script( 'nf-admin-fields', 'nf_admin', array( 'fields' => $fields, 'saved_text' => __( 'Saved', 'ninja-forms' ), 'save_text' => __( 'Save', 'ninja-forms' ), 'saving_text' => __( 'Saving...', 'ninja-forms' ), 'remove_field' => __( 'Remove this field? It will be removed even if you do not save.', 'ninja-forms' ) ) );
+			wp_localize_script( 'nf-builder', 'nf_admin', array( 'fields' => $fields, 'saved_text' => __( 'Saved', 'ninja-forms' ), 'save_text' => __( 'Save', 'ninja-forms' ), 'saving_text' => __( 'Saving...', 'ninja-forms' ), 'remove_field' => __( 'Remove this field? It will be removed even if you do not save.', 'ninja-forms' ) ) );
 		}
 	}
 }
