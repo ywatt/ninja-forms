@@ -426,6 +426,7 @@ class Ninja_Forms {
 
 		//Display Form Functions
 		require_once( NINJA_FORMS_DIR . "/includes/display/form/display-form.php" );
+		require_once( NINJA_FORMS_DIR . "/includes/display/form/not-logged-in.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/fields/display-fields.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/form/response-message.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/fields/label.php" );
