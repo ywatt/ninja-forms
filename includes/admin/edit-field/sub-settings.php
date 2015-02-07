@@ -8,20 +8,20 @@
  * @returns void
  */
 
-function nf_edit_field_sub_settings( $field_id ) {
+function nf_edit_field_sub_settings( $field_id, $field_data ) {
 	global $ninja_forms_fields;
 
 	$field_row = ninja_forms_get_field_by_id( $field_id );
 	$field_type = $field_row['type'];
 
 	if ( $ninja_forms_fields[$field_type]['process_field'] ) {
-		if ( isset ( $field_row['data']['admin_label'] ) ) {
-			$admin_label = $field_row['data']['admin_label'];
+		if ( isset ( $field_data['admin_label'] ) ) {
+			$admin_label = $field_data['admin_label'];
 		} else {
 			$admin_label = '';
 		}
-		if ( isset ( $field_row['data']['num_sort'] ) ) {
-			$num_sort = $field_row['data']['num_sort'];
+		if ( isset ( $field_data['num_sort'] ) ) {
+			$num_sort = $field_data['num_sort'];
 		} else {
 			$num_sort = '';
 		}
@@ -36,4 +36,4 @@ function nf_edit_field_sub_settings( $field_id ) {
 	}
 }
 
-add_action( 'ninja_forms_edit_field_after_registered', 'nf_edit_field_sub_settings', 11 );
+add_action( 'ninja_forms_edit_field_after_registered', 'nf_edit_field_sub_settings', 11, 2 );

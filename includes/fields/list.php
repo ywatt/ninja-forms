@@ -125,7 +125,7 @@ function ninja_forms_field_list_add_value( $field_id, $x, $conditional, $name, $
 
 }
 
-function ninja_forms_field_list_edit($field_id, $data){
+function ninja_forms_field_list_edit( $field_id, $data ) {
 	global $wpdb;
 	if(isset($data['list_type'])){
 		$list_type = $data['list_type'];
@@ -144,6 +144,7 @@ function ninja_forms_field_list_edit($field_id, $data){
 	}else{
 		$multi_size = 5;
 	}
+
 	?>
 
 	<p id="ninja_forms_field_<?php echo $field_id;?>_multi_size_p" class="description description-wide" style="<?php if($list_type != 'multi'){ echo 'display:none;';}?>">

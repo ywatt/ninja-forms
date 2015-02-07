@@ -255,19 +255,20 @@ class NF_WP_Editor_Ajax {
     }
 }
 
-function nf_output_registered_field_settings( $field_id ) {
+function nf_output_registered_field_settings( $field_id, $data = array() ) {
 	global $ninja_forms_fields, $nf_rte_editors;
 
 	$field_row = ninja_forms_get_field_by_id( $field_id );
+	$field_type = $field_row['type'];
+
+	$field_data = empty ( $data ) ? $field_row['data'] : $data;
+
 	$current_tab = ninja_forms_get_current_tab();
 	if ( isset ( $_REQUEST['page'] ) ) {
 		$current_page = esc_html( $_REQUEST['page'] );
 	} else {
 		$current_page = '';
 	}
-
-	$field_type = $field_row['type'];
-	$field_data = $field_row['data'];
 
 	$reg_field = $ninja_forms_fields[$field_type];
 	$type_name = $reg_field['name'];
@@ -341,12 +342,9 @@ function nf_output_registered_field_settings( $field_id ) {
 		</table>
 		<?php
 	}
-	do_action( 'ninja_forms_edit_field_before_registered', $field_id );
+	do_action( 'ninja_forms_edit_field_before_registered', $field_id, $field_data );
 
-	$arguments = func_get_args();
-	array_shift( $arguments ); // We need to remove the first arg ($function_name)
-	$arguments['field_id'] = $field_id;
-	$arguments['data'] = $field_data;
+	$arguments = array( 'field_id' => $field_id, 'data' => $field_data );
 
 	if ( $edit_function != '' ) {
 		call_user_func_array( $edit_function, $arguments );
@@ -419,7 +417,7 @@ function nf_output_registered_field_settings( $field_id ) {
 		}
 	}
 
-	do_action( 'ninja_forms_edit_field_after_registered', $field_id );
+	do_action( 'ninja_forms_edit_field_after_registered', $field_id, $field_data );
 
 
 	if ( ! empty ( $nf_rte_editors ) && isset ( $editors ) && is_object( $editors ) ) {
