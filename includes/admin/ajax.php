@@ -40,8 +40,13 @@ function nf_output_field_settings_html() {
 	check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
 
 	$field_id = esc_html( $_REQUEST['field_id'] );
+	$data = isset ( $_REQUEST['data'] ) ? json_decode( stripslashes( $_REQUEST['data'] ), true ) : array();
 
-	nf_output_registered_field_settings( $field_id );
+	$field = ninja_forms_get_field_by_id( $field_id );
+	$field_data = $field['data'];
+	$data = wp_parse_args( $data, $field_data );
+
+	nf_output_registered_field_settings( $field_id, $data );
 
 	die();
 }
