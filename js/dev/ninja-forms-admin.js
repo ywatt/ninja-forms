@@ -99,26 +99,6 @@ jQuery(document).ready(function($) {
 		$("." + tmp_class).prop("checked", checked);
 	});
 
-	//Hide the Success Page option if ajax is selected.
-	$("#ajax").change( function(e){
-		if( this.checked ){
-			$(".ajax-hide").hide();
-			$(".no-ajax-hide").show();
-		}else{
-			$(".ajax-hide").show();
-			$(".no-ajax-hide").hide();
-		}
-	});
-
-	//Hide the Ajax button, the Success Message, and the clear and hide form options if a landing page is selected.
-	$(".landing-page-select").change(function(e){
-		if( this.value == '' ){
-			$(".landing-page-hide").show();
-		}else{
-			$(".landing-page-hide").hide();
-		}
-	});
-
 	//Make the Sidebar Sortable.
 	$("#side-sortables").sortable({
 		placeholder: "ui-state-highlight",
@@ -159,6 +139,11 @@ jQuery(document).ready(function($) {
 			$("#title-prompt-text").addClass("screen-reader-text");
 		}
 	});
+
+	$( document ).on( 'click', '.metabox-item-edit', function( e ) {
+		e.preventDefault();
+		$( this ).parent().parent().find('.inside' ).slideToggle( 'fast' );
+	} );
 
 	$(".hndle").dblclick(function(event){
 		$(this).prevAll(".item-controls:first").find("a").click();
