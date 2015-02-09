@@ -90,6 +90,10 @@ class Ninja_Forms {
 			// Add our registration class object
 			self::$instance->register = new NF_Register();
 
+			// The forms variable won't be interacted with directly.
+			// Instead, the forms() methods will act as wrappers for it.
+			self::$instance->forms = new NF_Forms();			
+
 			register_activation_hook( __FILE__, 'ninja_forms_activation' );
 			add_action( 'plugins_loaded', array( self::$instance, 'load_lang' ) );
 			add_action( 'init', array( self::$instance, 'set_transient_id'), 1 );
@@ -112,9 +116,6 @@ class Ninja_Forms {
 		// Instead, the subs() methods will act as wrappers for it.
 		self::$instance->subs = new NF_Subs();
 
-		// The forms variable won't be interacted with directly.
-		// Instead, the forms() methods will act as wrappers for it.
-		self::$instance->forms = new NF_Forms();
 
 		// Get our notifications up and running.
 		self::$instance->notifications = new NF_Notifications();
