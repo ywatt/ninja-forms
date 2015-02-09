@@ -64,6 +64,7 @@ function ninja_forms_admin(){
 	}else{
 		$form_id = '';
 		$data = '';
+		$form_title = '';
 	}
 
 	if( !isset( $ninja_forms_admin_update_message ) AND isset( $_REQUEST['update_message'] ) ){
