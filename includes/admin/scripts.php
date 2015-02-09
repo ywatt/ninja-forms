@@ -3,8 +3,8 @@
 function ninja_forms_admin_css(){
 	$plugin_settings = nf_get_settings();
 
-	wp_enqueue_style( 'jquery-smoothness', NINJA_FORMS_URL .'css/smoothness/jquery-smoothness.css');
-	wp_enqueue_style( 'ninja-forms-admin', NINJA_FORMS_URL .'css/ninja-forms-admin.css');
+	wp_enqueue_style( 'jquery-smoothness', NINJA_FORMS_URL .'css/smoothness/jquery-smoothness.css' );
+	wp_enqueue_style( 'ninja-forms-admin', NINJA_FORMS_URL .'css/ninja-forms-admin.css', 'editor' );
 
 	add_filter('admin_body_class', 'ninja_forms_add_class');
 

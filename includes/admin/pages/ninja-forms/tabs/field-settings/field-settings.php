@@ -34,6 +34,43 @@ function ninja_forms_tab_field_settings(){
 		do_action( 'ninja_forms_edit_field_ul', $form_id );
 		do_action( 'ninja_forms_edit_field_after_ul', $form_id );
 	}
+
+	?>
+<!-- 
+</form>
+<div id="nf-link-backdrop" style="display: block;"></div>
+<div id="nf-link-wrap" class="wp-core-ui" style="display: block;">
+	<form id="nf-link" tabindex="-1">
+		<div id="link-modal-title">
+			Save Your Form			<button type="button" id="nf-link-close"><span class="screen-reader-text">Close</span></button>
+	 	</div>
+	 	<div id="modal-contents-wrapper" style="padding:20px;">
+			<div id="link-selector">
+				<div id="link-options">
+					<div>
+						<label><input id="form_title" class="widefat" style="width:100%;" type="text" name="linktitle" placeholder="Give your form a title. This is how you'll find the form later."></label>
+					</div>
+				</div>
+				<div id="link-optionss">
+					<div class="link-target">
+						<label><span>&nbsp;</span><input type="checkbox" id="link-target-checkbox"> Insert Submit Button</label>
+					</div>
+				</div>
+			</div>
+			<div class="submitbox">
+				<div id="nf-link-cancel">
+					<a class="submitdelete deletion" href="#">Cancel</a>
+				</div>
+				<div id="nf-link-update">
+					<input type="submit" value="Save" class="button button-secondary" id="nf-link-submit" name="nf-link-submit" disabled>
+				</div>
+			</div>
+		</div>
+		</form>
+		</div> -->
+
+
+	<?php
 }
 
 /**
@@ -49,9 +86,7 @@ function nf_create_form_listen() {
 
 	if ( 'ninja-forms' == $page && 'builder' == $tab && 'new' == $form_id ) {
 		$form_id = Ninja_Forms()->form()->create();
-		var_dump ( $form_id );
 		$redirect = add_query_arg( array( 'form_id' => $form_id ) );
-		var_dump( $redirect );
 		wp_redirect( $redirect );
 		die();		
 	}

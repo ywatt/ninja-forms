@@ -256,11 +256,25 @@ jQuery( document ).ready( function( $ ) {
 		nfFields.newField( e.target );
 	});
 
-		//Insert a Defined Field
+	//Insert a Defined Field
 	$( document ).on( 'click', '.ninja-forms-insert-def-field', function( e ){
 		e .preventDefault();
 		nfFields.newField( e.target );
 	});
+
+	// Enable/disable our save button on the name modal
+	$( document ).on( 'keyup', '#form_title', function( e ) {
+		var value = this.value;
+		if ( this.value.length > 0 ) {
+			$( '#nf-link-submit' ).attr( 'disabled', false );
+			$( '#nf-link-submit' ).removeClass( 'button-secondary' );
+			$( '#nf-link-submit' ).addClass( 'button-primary' );
+		} else {
+			$( '#nf-link-submit' ).attr( 'disabled', true );
+			$( '#nf-link-submit' ).removeClass( 'button-primary' );
+			$( '#nf-link-submit' ).addClass( 'button-secondary' );
+		}
+	} );
 
 	//Make the field list sortable
 	$(".ninja-forms-field-list").sortable({
