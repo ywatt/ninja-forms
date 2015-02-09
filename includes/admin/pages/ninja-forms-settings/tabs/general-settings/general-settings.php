@@ -29,23 +29,29 @@ function ninja_forms_register_general_settings_metabox(){
 		'title' => __( 'General Settings', 'ninja-forms' ),
 		'settings' => array(
 			array(
-				'name' => 'version',
-				'type' => 'desc',
+				'name' 	=> 'version',
+				'type' 	=> 'desc',
 				'label' => __( 'Version', 'ninja-forms' ),
-				'desc' => $current_version,
+				'desc' 	=> $current_version,
 			),
 			array(
-				'name' => 'date_format',
-				'type' => 'text',
+				'name' 	=> 'date_format',
+				'type' 	=> 'text',
 				'label' => __( 'Date Format', 'ninja-forms' ),
-				'desc' => __( 'e.g. m/d/Y, d/m/Y - Tries to follow the <a href="http://www.php.net/manual/en/function.date.php" target="_blank">PHP date() function</a> specifications, but not every format is supported.', 'ninja-forms' ),
+				'desc' 	=> __( 'e.g. m/d/Y, d/m/Y - Tries to follow the <a href="http://www.php.net/manual/en/function.date.php" target="_blank">PHP date() function</a> specifications, but not every format is supported.', 'ninja-forms' ),
 			),
 			array(
-				'name' => 'currency_symbol',
-				'type' => 'text',
+				'name' 	=> 'currency_symbol',
+				'type' 	=> 'text',
 				'label' => __( 'Currency Symbol', 'ninja-forms' ),
-				'desc' => __( 'e.g. $, &pound;, &euro;', 'ninja-forms' ),
+				'desc' 	=> __( 'e.g. $, &pound;, &euro;', 'ninja-forms' ),
 			),
+			array(
+				'name'	=> 'delete_on_uninstall',
+				'type'	=> 'checkbox',
+				'label'	=> __( 'Remove ALL Ninja Forms data upon deactivation?', 'ninja-forms' ),
+				'desc'	=> __( 'If this box is checked, ALL Ninja Forms data will be removed from the database upon deletion. This is not recoverable.', 'ninja-forms' ),
+			)
 		),
 	);
 	ninja_forms_register_tab_metabox( $args );
