@@ -161,6 +161,7 @@ function ninja_forms_save_form_settings( $form_id, $data ){
 		$date_updated = date( 'Y-m-d H:i:s', strtotime ( 'now' ) );
 		$data_array = array( 'data' => serialize( $form_data ), 'date_updated' => $date_updated );
 		$wpdb->update( NINJA_FORMS_TABLE_NAME, $data_array, array( 'id' => $form_id ) );
+		do_action( 'ninja_forms_save_form_settings', $form_id, $data );
 	} else {
 		$data_array = array('data' => serialize( $form_data ) );
 		$wpdb->insert( NINJA_FORMS_TABLE_NAME, $data_array );
