@@ -811,6 +811,9 @@ function nf_deprecate_form_import( $form ) {
 
 	if ( isset ( $form['data']['user_subject'] ) )
 		unset ( $form['data']['user_subject'] );
+	
+	if ( isset ( $form['data']['landing_page'] ) )
+		unset ( $form['data']['landing_page'] );
 
 	return $form;
 }
