@@ -3,7 +3,7 @@
 function ninja_forms_add_menu(){
 	$page = add_menu_page("Ninja Forms" , __( 'Forms', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ), "ninja-forms", "ninja_forms_admin", "dashicons-feedback", "35.1337" );
 	$all_forms = add_submenu_page("ninja-forms", __( 'Forms', 'ninja-forms' ), __( 'All Forms', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_all_forms_capabilities', 'manage_options' ), "ninja-forms", "ninja_forms_admin");
-	$new_form = add_submenu_page("ninja-forms", __( 'Add New', 'ninja-forms' ), __( 'Add New', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_add_new_capabilities', 'manage_options' ), "ninja-forms&tab=form_settings&form_id=new", "ninja_forms_admin");
+	$new_form = add_submenu_page("ninja-forms", __( 'Add New', 'ninja-forms' ), __( 'Add New', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_add_new_capabilities', 'manage_options' ), "ninja-forms&tab=builder&form_id=new", "ninja_forms_admin");
 	
 	$upgrade = add_submenu_page( null, __( 'Ninja Forms Upgrades', 'ninja-forms' ), __( 'Upgrades', 'ninja-forms' ), 'install_plugins', 'nf-upgrades', 'nf_upgrades_screen' );
 	
@@ -103,7 +103,7 @@ function ninja_forms_admin(){
 				} else {
 
 					?>
-					<h2><?php echo $form_title; ?></h2>
+					<h2 id="nf-display-form-title"><?php echo $form_title; ?></h2>
 					<?php
 				}
 
@@ -187,6 +187,26 @@ function ninja_forms_admin(){
 		</form>
 		<?php
 	}
+	?>
+	<div id="nf-admin-modal-backdrop" style="display: none;"></div>
+	<div id="nf-admin-modal-wrap" class="wp-core-ui" style="display: none;">
+		<div id="nf-admin-modal" tabindex="-1">
+			<div id="admin-modal-title">
+				<span id="nf-modal-title"></span>
+				<button type="button" id="nf-admin-modal-close" class="modal-close"><span class="screen-reader-text modal-close">Close</span></button>
+		 	</div>
+		 	<div id="modal-contents-wrapper" style="padding:20px;">
+				<div id="nf-admin-modal-content" class="admin-modal-inside">
+					
+				</div>
+				<div class="submitbox" style="display:block;">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php
 } //End ninja_edit_forms function
 
 if(is_admin()){

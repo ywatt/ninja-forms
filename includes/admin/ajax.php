@@ -60,7 +60,7 @@ add_action( 'wp_ajax_nf_output_field_settings_html', 'nf_output_field_settings_h
  * @return false;
  */
 
-function nf_save_admin_fields() {
+function nf_admin_save_builder() {
 	global $ninja_forms_fields, $wpdb;
 
 	// Bail if we aren't in the admin
@@ -73,14 +73,15 @@ function nf_save_admin_fields() {
 
 	check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
 
-	$data = json_decode( stripslashes( $_REQUEST['data'] ), true );
+	$field_data = json_decode( stripslashes( $_REQUEST['field_data'] ), true );
 	$form_id = esc_html( $_REQUEST['form_id'] );
-	$order = json_decode( strip_tags( stripslashes( $_REQUEST['order'] ) ), true );
+	$form_title = $_REQUEST['form_title'];
+	$field_order = json_decode( strip_tags( stripslashes( $_REQUEST['field_order'] ) ), true );
 
-	if ( is_array ( $order ) ) {
+	if ( is_array ( $field_order ) ) {
 		$order_array = array();
 		$x = 0;
-		foreach ( $order as $id ) {
+		foreach ( $field_order as $id ) {
 			$id = str_replace( 'ninja_forms_field_', '', $id );
 			$order_array[ $id ] = $x;
 			$x++;
@@ -88,48 +89,48 @@ function nf_save_admin_fields() {
 	}
 
 	$tmp_array = array();
-	foreach ( $data as $field ) {
+	foreach ( $field_data as $field ) {
 		$field_id = $field['id'];
 		unset( $field['id'] );
 		unset( $field['metabox_state'] );
 		$tmp_array[ $field_id ] = $field;
 	}
 
-	$data = $tmp_array;
+	$field_data = $tmp_array;
 
 	if ( isset ( $ninja_forms_fields ) && is_array( $ninja_forms_fields ) ) {
 		foreach ( $ninja_forms_fields as $slug => $field ){
 			if ( $field['save_function'] != '') {
 				$save_function = $field['save_function'];
 				$arguments['form_id'] = $form_id;
-				$arguments['data'] = $data;
-				$data = call_user_func_array($save_function, $arguments);
+				$arguments['data'] = $field_data;
+				$field_data = call_user_func_array( $save_function, $arguments );
 			}
 		}
 	}
 
 	if( $form_id != '' && $form_id != 0 && $form_id != 'new' ){
-		foreach ($data as $field_id => $vals )  {
-			$order = $order_array[$field_id];
+		foreach ( $field_data as $field_id => $vals )  {
+			$field_order = $order_array[$field_id];
 			$field_row = ninja_forms_get_field_by_id( $field_id );
-			$field_data = $field_row['data'];
+			$data = $field_row['data'];
 			foreach( $vals as $k => $v ){
-				$field_data[$k] = $v;
+				$data[$k] = $v;
 			}
-			$data_array = array('data' => serialize( $field_data ), 'order' => $order);
+			$data_array = array('data' => serialize( $data ), 'order' => $field_order);
 			$wpdb->update( NINJA_FORMS_FIELDS_TABLE_NAME, $data_array, array( 'id' => $field_id ));
 		}
-		$date_updated = date( 'Y-m-d H:i:s', strtotime ( 'now' ) );
-		$data_array = array( 'date_updated' => $date_updated );
-		$wpdb->update( NINJA_FORMS_TABLE_NAME, $data_array, array( 'id' => $form_id ) );
-	}
 
+		$date_updated = date( 'Y-m-d H:i:s', strtotime ( 'now' ) );
+		Ninja_Forms()->form( $form_id )->update_setting( 'form_title', $form_title );
+		Ninja_Forms()->form( $form_id )->update_setting( 'date_updated', $date_updated );
+		Ninja_Forms()->form( $form_id )->update_setting( 'status', '' );
+	}
 
 	die();
 }
 
-add_action( 'wp_ajax_nf_save_admin_fields', 'nf_save_admin_fields' );
-
+add_action( 'wp_ajax_nf_admin_save_builder', 'nf_admin_save_builder' );
 
 
 add_action('wp_ajax_ninja_forms_new_field', 'ninja_forms_new_field');
@@ -211,42 +212,6 @@ function ninja_forms_remove_field(){
 	$field_id = absint( $_REQUEST['field_id'] );
 	$wpdb->query($wpdb->prepare("DELETE FROM ".NINJA_FORMS_FIELDS_TABLE_NAME." WHERE id = %d", $field_id));
 	die();
-}
-
-add_action('wp_ajax_ninja_forms_delete_form', 'ninja_forms_delete_form');
-function ninja_forms_delete_form( $form_id = '' ){
-	global $wpdb;
-
-	// Bail if we aren't in the admin
-	if ( ! is_admin() )
-		return false;
-
-	// Bail if we don't have proper permissions
-	if ( ! current_user_can( apply_filters( 'nf_delete_form_capabilities', 'manage_options' ) ) )
-		return false;
-
-	if( $form_id == '' ){
-		$ajax = true;
-		$form_id = absint( $_REQUEST['form_id'] );
-		check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
-	}else{
-		$ajax = false;
-	}
-
-	$wpdb->query($wpdb->prepare("DELETE FROM ".NINJA_FORMS_TABLE_NAME." WHERE id = %d", $form_id));
-	$wpdb->query($wpdb->prepare("DELETE FROM ".NINJA_FORMS_FIELDS_TABLE_NAME." WHERE form_id = %d", $form_id));
-
-	// Delete any notifications attached to this form.
-	// Grab notifications.
-	$notifications = nf_get_notifications_by_form_id( $form_id, false );
-	foreach ( $notifications as $n_id ) {
-		nf_delete_object( $n_id );
-	}
-
-	if( $ajax ){
-		die();
-	}
-
 }
 
 add_action('wp_ajax_ninja_forms_add_list_option', 'ninja_forms_add_list_options');

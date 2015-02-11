@@ -878,3 +878,36 @@ function ninja_forms_get_form_by_field_id( $field_id ){
 	$form = ninja_forms_get_form_by_id( $form_id );
 	return $form;
 }
+
+/**
+ * Delete a form
+ *
+ * @since 1.0
+ */
+function ninja_forms_delete_form( $form_id = '' ){
+	global $wpdb;
+
+	// Bail if we aren't in the admin
+	if ( ! is_admin() )
+		return false;
+
+	// Bail if we don't have proper permissions
+	if ( ! current_user_can( apply_filters( 'nf_delete_form_capabilities', 'manage_options' ) ) )
+		return false;
+
+	if( $form_id == '' ){
+		$ajax = true;
+		$form_id = absint( $_REQUEST['form_id'] );
+		check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
+	}else{
+		$ajax = false;
+	}
+
+	Ninja_Forms()->form( $form_id )->delete();
+
+	if( $ajax ){
+		die();
+	}
+}
+
+add_action('wp_ajax_ninja_forms_delete_form', 'ninja_forms_delete_form');

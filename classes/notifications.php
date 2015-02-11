@@ -239,10 +239,10 @@ class NF_Notifications
 			if ( $id == '' ) {
 				$id = 'new';
 				$this_type = 'email';
-				$title = __( 'New Notification', 'ninja-forms' );
+				$title = __( 'New Action', 'ninja-forms' );
 			} else {
 				$this_type = Ninja_Forms()->notification( $id )->type;
-				$title = __( 'Edit Notification', 'ninja-forms' ) . ' - ID ' . $id;
+				$title = __( 'Edit Action', 'ninja-forms' ) . ' - ID ' . $id;
 			}
 
 			?>
@@ -252,7 +252,7 @@ class NF_Notifications
 			<table class="form-table">
 				<tbody id="notification-main">
 					<tr>
-						<th scope="row"><label for="setting-name"><?php _e( 'Notification Name', 'ninja-forms' ); ?></label></th>
+						<th scope="row"><label for="setting-name"><?php _e( 'Action Name', 'ninja-forms' ); ?></label></th>
 						<td><input name="settings[name]" type="text" id="settings-name" value="<?php echo nf_get_object_meta_value( $id, 'name' ); ?>" class="regular-text"></td>
 					</tr>
 					<tr>
@@ -335,7 +335,7 @@ class NF_Notifications
 			die();
 		}
 
-		return __( 'Notification Updated', 'ninja-forms' );
+		return __( 'Action Updated', 'ninja-forms' );
 	}
 
 	/**

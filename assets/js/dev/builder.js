@@ -88,6 +88,7 @@ var nfField = Backbone.Model.extend( {
 			    }
 			}
 		}
+		nfForm.set( 'saved', false );
 	},
 	remove: function() {
 		var field_id = this.id;
@@ -110,38 +111,6 @@ var nfFields = Backbone.Collection.extend({
 			if ( field.get( 'metabox_state' ) == 1 ) {
 				field.updateData();
 			}
-		} );
-	},
-	save: function() {
-		jQuery( '.nf-save-admin-fields' ).hide();
-		jQuery( '.nf-save-spinner' ).show();
-		this.updateData();
-
-		var data = JSON.stringify( this.toJSON() );
-		var order = {};
-		var current_order = jQuery( '#ninja_forms_field_list' ).sortable( 'toArray' );
-		for ( var i = 0; i < current_order.length; i++ ) {
-			order[i] = current_order[i];
-		};
-		order = JSON.stringify( order );
-		var form_id = ninja_forms_settings.form_id;
-
-		console.log( order );
-
-		jQuery( document ).data( 'field_order', order );
-		jQuery( document ).data( 'field_data', data );
-
-		jQuery( document ).triggerHandler( 'nfAdminSaveFields' );
-		
-		var order = jQuery( document ).data( 'field_order' );
-		var data = jQuery( document ).data( 'field_data' );
-
-		jQuery.post( ajaxurl, { form_id: form_id, data: data, order: order, action: 'nf_save_admin_fields', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
-			jQuery( '.nf-save-spinner' ).hide();
-			jQuery( '.nf-save-admin-fields' ).show();
-			var html = '<div id="message" class="updated below-h2" style="display:none;margin-top: 20px;"><p>' + nf_admin.saved_text + '</p></div>';
-			jQuery( '.nav-tab-wrapper:last' ).after( html );
-			jQuery( '#message' ).fadeIn();
 		} );
 	},
 	newField: function( button ) {
@@ -167,12 +136,11 @@ var nfFields = Backbone.Collection.extend({
 		}
 
 		if ( ( limit != '' && current_count < limit ) || limit == '' || current_count == '' || current_count == 0 ) {
-			
-				jQuery.post( ajaxurl, { type: type, field_id: field_id, form_id: form_id, action: action, nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, this.newFieldResponse );
-
+			jQuery.post( ajaxurl, { type: type, field_id: field_id, form_id: form_id, action: action, nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, this.newFieldResponse );
 		} else {
 			jQuery( button ).addClass( 'disabled' );
 		}
+		nfForm.set( 'saved', false );
 	},
 	newFieldResponse: function( response ) {
 		// Fire our custom jQuery addField event.
@@ -202,8 +170,90 @@ var nfFields = Backbone.Collection.extend({
 	}
 });
 
+var nfForm = Backbone.Model.extend( {
+	defaults: {
+		'id' 	 	: ninja_forms_settings.form_id,
+		'status' 	: nf_admin.form_status,
+		'title'	 	: nf_admin.form_title,
+		'saved'		: true
+	},
+	save: function() {
+		jQuery( '.nf-save-admin-fields' ).hide();
+		jQuery( '.nf-save-spinner' ).show();
+
+		// If our form is new, then prompt for a title before we save
+		if ( 'new' == nfForm.get( 'status' ) ) {
+			if ( jQuery( '._submit-li' ).length > 0 ) {
+				jQuery( '#nf-insert-submit-div' ).hide();
+			} else {
+				jQuery( '#nf-insert-submit-div' ).show();
+			}
+			// Open our save form modal.
+			jQuery( '#nf-save-title' ).nfAdminModal( 'open' );
+			return false;			
+		}
+
+		nfFields.updateData();
+
+		var field_data = JSON.stringify( nfFields.toJSON() );
+		var field_order = {};
+		var current_order = jQuery( '#ninja_forms_field_list' ).sortable( 'toArray' );
+	
+		for ( var i = 0; i < current_order.length; i++ ) {
+			field_order[i] = current_order[i];
+		};
+		field_order = JSON.stringify( field_order );
+		var form_id = ninja_forms_settings.form_id;
+
+		jQuery( document ).data( 'field_order', field_order );
+		jQuery( document ).data( 'field_data', field_data );
+
+		jQuery( document ).triggerHandler( 'nfAdminSaveFields' );
+		
+		var field_order = jQuery( document ).data( 'field_order' );
+		var data = jQuery( document ).data( 'field_data' );
+
+		jQuery.post( ajaxurl, { form_title: this.get( 'title' ), form_id: form_id, field_data: field_data, field_order: field_order, action: 'nf_admin_save_builder', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
+			jQuery( '.nf-save-spinner' ).hide();
+			jQuery( '.nf-save-admin-fields' ).show();
+			var html = '<div id="message" class="updated below-h2" style="display:none;margin-top: 20px;"><p>' + nf_admin.saved_text + '</p></div>';
+			jQuery( '.nav-tab-wrapper:last' ).after( html );
+			jQuery( '#message' ).fadeIn();
+			if ( jQuery( '#nf-display-form-title' ).html() == '' ) {
+				jQuery( '#nf-display-form-title' ).html( nfForm.get( 'title' ) );
+			}
+			nfForm.set( 'saved', true );
+		} );
+	},
+	saveTitle: function() {
+		var title = jQuery( '#modal-contents-wrapper' ).find( '#nf-form-title' ).val();
+		var insert_submit = jQuery( '#modal-contents-wrapper' ).find( '#nf-insert-submit' ).prop( 'checked' );
+		this.set( 'title', title );
+		this.set( 'status', '' );
+
+		// Insert our submit button if we checked the box.
+		if ( insert_submit ) {
+			var that = this;
+			// Add our custom addField behaviour
+			jQuery( document ).on( 'addField.insertSubmit', function( e, response ) {
+				jQuery( '#ninja_forms_field_' + response.new_id + '_toggle' ).click();
+				jQuery( '#nf-save-title' ).nfAdminModal( 'close' );
+				that.save();
+				jQuery( document ).off( 'addField.insertSubmit' );
+			} );
+			jQuery( '#_submit' ).click();
+		} else {
+			jQuery( '#nf-save-title' ).nfAdminModal( 'close' );
+			this.save();			
+		}
+	}
+} );
+
 // Instantiate our fields collection.
 var nfFields = new nfFields();
+
+// Instantiate our form settings.
+var nfForm = new nfForm();
 
 jQuery( document ).ready( function( $ ) {
 
@@ -229,14 +279,19 @@ jQuery( document ).ready( function( $ ) {
 
 	$( document ).on( 'click', '.nf-save-admin-fields', function( e ) {
 		e.preventDefault();
-		nfFields.save();
-	});
+		nfForm.save();
+	} );
+
+	$( document ).on( 'click', '#nf-save-title-submit', function( e ) {
+		e.preventDefault();
+		nfForm.saveTitle();
+	} );
 
 	// Add New Field
 	$( document ).on( 'click', '.ninja-forms-new-field', function( e ) {
 		e.preventDefault();
 		nfFields.newField( e.target );
-	});
+	} );
 
 	// Remove Field
 	$( document ).on( 'click', '.nf-remove-field', function( e ){
@@ -250,59 +305,78 @@ jQuery( document ).ready( function( $ ) {
 		nfFields.addFieldDefault( response );
 	} );
 
-	//Insert a Favorite Field
+	// Insert a Favorite Field
 	$( document ).on( 'click', '.ninja-forms-insert-fav-field', function( e ){
 		e.preventDefault();
 		nfFields.newField( e.target );
 	});
 
-	//Insert a Defined Field
+	// Insert a Defined Field
 	$( document ).on( 'click', '.ninja-forms-insert-def-field', function( e ){
 		e .preventDefault();
 		nfFields.newField( e.target );
 	});
 
+	// Create our save form modal.
+	$( '#nf-save-title' ).nfAdminModal( { title: 'Save Your Form', buttons: '#nf-save-title-buttons' } );
+
+	// Remove spinners when the save title modal is closed
+	$( document ).on( 'nfAdminModalClose.hideSpinners', function( e ) {
+		jQuery( '.nf-save-spinner' ).hide();
+		jQuery( '.nf-save-admin-fields' ).show();
+	} );
+
 	// Enable/disable our save button on the name modal
-	$( document ).on( 'keyup', '#form_title', function( e ) {
+	$( document ).on( 'keyup', '#nf-form-title', function( e ) {
 		var value = this.value;
 		if ( this.value.length > 0 ) {
-			$( '#nf-link-submit' ).attr( 'disabled', false );
-			$( '#nf-link-submit' ).removeClass( 'button-secondary' );
-			$( '#nf-link-submit' ).addClass( 'button-primary' );
+			$( '#modal-contents-wrapper' ).find( '#nf-save-title-submit' ).prop( 'disabled', false );
+			$( '#modal-contents-wrapper' ).find( '#nf-save-title-submit' ).removeClass( 'button-secondary' );
+			$( '#modal-contents-wrapper' ).find( '#nf-save-title-submit' ).addClass( 'button-primary' );
 		} else {
-			$( '#nf-link-submit' ).attr( 'disabled', true );
-			$( '#nf-link-submit' ).removeClass( 'button-primary' );
-			$( '#nf-link-submit' ).addClass( 'button-secondary' );
+			$( '#modal-contents-wrapper' ).find( '#nf-save-title-submit' ).prop( 'disabled', true );
+			$( '#modal-contents-wrapper' ).find( '#nf-save-title-submit' ).removeClass( 'button-primary' );
+			$( '#modal-contents-wrapper' ).find( '#nf-save-title-submit' ).addClass( 'button-secondary' );
 		}
 	} );
 
-	//Make the field list sortable
-	$(".ninja-forms-field-list").sortable({
+	// Make the field list sortable
+	$( '.ninja-forms-field-list' ).sortable({
 		handle: '.menu-item-handle',
-		items: "li:not(.not-sortable)",
-		connectWith: ".ninja-forms-field-list",
+		items: 'li:not(.not-sortable)',
+		connectWith: '.ninja-forms-field-list',
 		//cursorAt: {left: -10, top: -1},
-		start: function(e, ui){
-			var wp_editor_count = $(ui.item).find(".wp-editor-wrap").length;
+		start: function( e, ui ) {
+			var wp_editor_count = $( ui.item ).find( '.wp-editor-wrap' ).length;
 			if(wp_editor_count > 0){
-				$(ui.item).find(".wp-editor-wrap").each(function(){
-					var ed_id = this.id.replace("wp-", "");
-					ed_id = ed_id.replace("-wrap", "");
+				$(ui.item).find('.wp-editor-wrap').each(function(){
+					var ed_id = this.id.replace( 'wp- ', '');
+					ed_id = ed_id.replace( '-wrap', '' );
 					tinyMCE.execCommand( 'mceRemoveControl', false, ed_id );
 				});
 			}
 		},
-		stop: function(e,ui) {
-			var wp_editor_count = $(ui.item).find(".wp-editor-wrap").length;
-			if(wp_editor_count > 0){
-				$(ui.item).find(".wp-editor-wrap").each(function(){
-					var ed_id = this.id.replace("wp-", "");
-					ed_id = ed_id.replace("-wrap", "");
+		stop: function( e,ui ) {
+			var wp_editor_count = $( ui.item ).find( '.wp-editor-wrap' ).length;
+			if( wp_editor_count > 0 ) {
+				$( ui.item ).find( '.wp-editor-wrap').each(function(){
+					var ed_id = this.id.replace( 'wp-', '' );
+					ed_id = ed_id.replace( '-wrap', '' );
 					tinyMCE.execCommand( 'mceAddControl', true, ed_id );
 				});
 			}
-			$(this).sortable("refresh");
+			$( this ).sortable( 'refresh' );
 		}
 	});
+
+	
+	$( window ).bind( 'beforeunload', function() {
+		if ( 'new' == nfForm.get( 'status' ) ) { // Prompt the user to give a name if they leave the builder before naming their form.
+			$( '#nf-save-title' ).nfAdminModal( 'open' );
+			return 'Please save your form before leaving this page.';
+		} else if ( nfForm.get( 'saved' ) == false ) {
+			return 'You have unsaved changes. Please save before leaving this page.';
+		}
+	} );
 
 });

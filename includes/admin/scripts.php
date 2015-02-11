@@ -64,7 +64,10 @@ function ninja_forms_admin_js(){
 				$fields[ $field_id ]['metabox_state'] = 0;
 			}
 
-			wp_localize_script( 'nf-builder', 'nf_admin', array( 'fields' => $fields, 'saved_text' => __( 'Saved', 'ninja-forms' ), 'save_text' => __( 'Save', 'ninja-forms' ), 'saving_text' => __( 'Saving...', 'ninja-forms' ), 'remove_field' => __( 'Remove this field? It will be removed even if you do not save.', 'ninja-forms' ) ) );
+			$form_status = Ninja_Forms()->form( $form_id )->get_setting( 'status' );
+			$form_title = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
+
+			wp_localize_script( 'nf-builder', 'nf_admin', array( 'form_title' => $form_title, 'form_status' => $form_status, 'fields' => $fields, 'saved_text' => __( 'Saved', 'ninja-forms' ), 'save_text' => __( 'Save', 'ninja-forms' ), 'saving_text' => __( 'Saving...', 'ninja-forms' ), 'remove_field' => __( 'Remove this field? It will be removed even if you do not save.', 'ninja-forms' ) ) );
 		}
 	}
 }

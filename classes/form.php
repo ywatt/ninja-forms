@@ -64,13 +64,12 @@ class NF_Form {
 	 * @since 2.9
 	 * @return int $form_id
 	 */
-	public function create( $status = 'draft', $args = array() ) {
+	public function create( $defaults = array() ) {
 		$form_id = nf_insert_object( 'form' );
 		$date_updated = date( 'Y-m-d', current_time( 'timestamp' ) );
 		nf_update_object_meta( $form_id, 'date_updated', $date_updated );
-		nf_update_object_meta( $form_id, 'status', $status );
 
-		foreach( $args as $meta_key => $meta_value ) {
+		foreach( $defaults as $meta_key => $meta_value ) {
 			nf_update_object_meta( $form_id, $meta_key, $meta_value );
 		}
 
@@ -163,6 +162,17 @@ class NF_Form {
 	 */
 	public function sub_count( $args = array() ) {
 		return count( $this->get_subs( $args ) );
+	}
+
+	/**
+	 * Delete this form
+	 * 
+	 * @access public
+	 * @since 2.9
+	 */
+	public function delete() {
+		// Delete this object.
+		nf_delete_object( $this->form_id );
 	}
 
 }

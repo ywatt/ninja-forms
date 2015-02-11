@@ -160,8 +160,8 @@ function ninja_forms_tab_form_list($form_id, $data){
 	<?php
 	if(is_array($all_forms) AND !empty($all_forms) AND $current_page <= $page_count){
 		for ($i = $start; $i < $end; $i++) {
-			$form_id = $all_forms[$i]['id'];
-			$data = $all_forms[$i]['data'];
+			$form_id = $all_forms[$i];
+			$data = Ninja_Forms()->form( $form_id )->get_all_settings();
 			$date_updated = $data['date_updated'];
 			$date_updated = strtotime( $date_updated );
 			$date_updated = date_i18n( __( 'F d, Y', 'ninja-forms' ), $date_updated );
@@ -178,7 +178,7 @@ function ninja_forms_tab_form_list($form_id, $data){
 				</th>
 				<td class="post-title page-title column-title">
 					<strong>
-						<a href="<?php echo $edit_link;?>"><?php echo $data['form_title'];?></a>
+						<a href="<?php echo $edit_link;?>"><?php echo stripslashes( $data['form_title'] );?></a>
 					</strong>
 					<div class="row-actions">
 						<span class="edit"><a href="<?php echo $edit_link;?>"><?php _e( 'Edit', 'ninja-forms' ); ?></a> | </span>
