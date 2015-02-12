@@ -34,21 +34,6 @@ function ninja_forms_insert_field( $form_id, $args = array() ){
 	return $new_id;
 }
 
-function ninja_forms_get_all_forms( $debug = false ){
-	$forms = Ninja_Forms()->forms()->get_all();
-
-	$tmp_array = array();
-	$x = 0;
-	foreach ( $forms as $form_id ) {
-		$tmp_array[ $x ]['id'] = $form_id;
-		$tmp_array[ $x ]['data'] = Ninja_Forms()->form( $form_id )->get_all_settings();
-		$tmp_array[ $x ]['name'] = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
-		$x++;
-	}
-
-	return $tmp_array;
-}
-
 function ninja_forms_get_form_ids_by_post_id( $post_id ){
 	global $wpdb;
 	$form_ids = array();

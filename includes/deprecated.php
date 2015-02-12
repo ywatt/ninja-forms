@@ -911,3 +911,18 @@ function ninja_forms_delete_form( $form_id = '' ){
 }
 
 add_action('wp_ajax_ninja_forms_delete_form', 'ninja_forms_delete_form');
+
+function ninja_forms_get_all_forms( $debug = false ){
+	$forms = Ninja_Forms()->forms()->get_all();
+
+	$tmp_array = array();
+	$x = 0;
+	foreach ( $forms as $form_id ) {
+		$tmp_array[ $x ]['id'] = $form_id;
+		$tmp_array[ $x ]['data'] = Ninja_Forms()->form( $form_id )->get_all_settings();
+		$tmp_array[ $x ]['name'] = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
+		$x++;
+	}
+
+	return $tmp_array;
+}
