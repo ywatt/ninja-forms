@@ -36,12 +36,13 @@ function ninja_forms_insert_field( $form_id, $args = array() ){
 
 function ninja_forms_get_all_forms( $debug = false ){
 	$forms = Ninja_Forms()->forms()->get_all();
+
 	$tmp_array = array();
 	$x = 0;
-	foreach ( $forms as $form ) {
-		$tmp_array[ $x ]['id'] = $form['id'];
-		$tmp_array[ $x ]['data'] = Ninja_Forms()->form( $form['id'] )->get_all_settings();
-		$tmp_array[ $x ]['name'] = Ninja_Forms()->form( $form['id'] )->get_setting( 'form_title' );
+	foreach ( $forms as $form_id ) {
+		$tmp_array[ $x ]['id'] = $form_id;
+		$tmp_array[ $x ]['data'] = Ninja_Forms()->form( $form_id )->get_all_settings();
+		$tmp_array[ $x ]['name'] = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
 		$x++;
 	}
 
@@ -92,11 +93,13 @@ function ninja_forms_update_form( $args ){
 	$form_id = $args['where']['id'];
 	$update_array = $args['update_array'];
 	if ( isset ( $update_array['data'] ) ) {
-		$data = unserialize( $update_array['data'] );
-		foreach ( $data as $key => $val ) {
-			Ninja_Forms()->form( $form_id )->update_setting( $key, $val );
+		$data = maybe_unserialize( $update_array['data'] );
+		if ( is_array( $data ) ) {
+			foreach ( $data as $key => $val ) {
+				Ninja_Forms()->form( $form_id )->update_setting( $key, $val );
+			}	
 		}
-		unset( $update_array['data'] );
+		unset( $update_array['data'] );	
 	}
 
 	foreach ( $update_array as $key => $val ) {
