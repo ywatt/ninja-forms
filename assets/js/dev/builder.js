@@ -366,6 +366,7 @@ jQuery( document ).ready( function( $ ) {
 				});
 			}
 			$( this ).sortable( 'refresh' );
+			nfForm.set( 'saved', false );
 		}
 	});
 
