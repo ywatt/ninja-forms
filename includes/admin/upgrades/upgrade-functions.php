@@ -358,17 +358,19 @@ function nf_change_state_dropdown_fav() {
 function nf_maybe_update_form_settings() {
 	global $wpdb;
 	$all_forms = $wpdb->get_results( 'SELECT * FROM ' . NINJA_FORMS_TABLE_NAME, ARRAY_A );
-	echo "<pre>";
-	print_r( $all_forms );
-	echo "</pre>";
 
-	// foreach ( $all_forms as $form_id ) {
-	// 	$type = nf_get_object_type( $form_id );
-	// 	if ( 'form' != $type ) {
-	// 		echo "UPGRADE FORM #" . $form_id;
-	// 		echo "<br>";
-	// 	}		
-	// }
+	foreach ( $all_forms as $form ) {
+		$type = nf_get_object_type( $form['id'] );
+		if ( 'form' != $type ) {
+			$settings = maybe_unserialize( $form['data'] );
+			$settings['date_updated'] = $form['date_updated'];
+			$form_id = nf_insert_object( 'form', $form['id'] );
+			foreach ( $settings as $meta_key => $value ) {
+				nf_update_object_meta( $form_id, $meta_key, $value );
+			}
+		}
+		$wpdb->query( 'DELETE FROM ' . NINJA_FORMS_TABLE_NAME . ' WHERE id = ' . $form_id );
+	}
 }
 
 add_action( 'nf_admin_before_form_list', 'nf_maybe_update_form_settings' );
