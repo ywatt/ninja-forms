@@ -368,8 +368,8 @@ function nf_maybe_update_form_settings() {
 			foreach ( $settings as $meta_key => $value ) {
 				nf_update_object_meta( $form_id, $meta_key, $value );
 			}
+			$wpdb->query( 'DELETE FROM ' . NINJA_FORMS_TABLE_NAME . ' WHERE id = ' . $form_id );
 		}
-		$wpdb->query( 'DELETE FROM ' . NINJA_FORMS_TABLE_NAME . ' WHERE id = ' . $form_id );
 	}
 }
 
