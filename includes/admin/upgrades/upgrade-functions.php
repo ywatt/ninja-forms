@@ -348,3 +348,27 @@ function nf_change_state_dropdown_fav() {
 	
 	$wpdb->query( $sql );
 }
+
+/**
+ * Update form settings to the new storage system when the form is viewed for the first time.
+ *
+ * @since 2.9
+ * @return void
+ */
+function nf_maybe_update_form_settings() {
+	global $wpdb;
+	$all_forms = $wpdb->get_results( 'SELECT * FROM ' . NINJA_FORMS_TABLE_NAME, ARRAY_A );
+	echo "<pre>";
+	print_r( $all_forms );
+	echo "</pre>";
+
+	// foreach ( $all_forms as $form_id ) {
+	// 	$type = nf_get_object_type( $form_id );
+	// 	if ( 'form' != $type ) {
+	// 		echo "UPGRADE FORM #" . $form_id;
+	// 		echo "<br>";
+	// 	}		
+	// }
+}
+
+add_action( 'nf_admin_before_form_list', 'nf_maybe_update_form_settings' );

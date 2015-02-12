@@ -372,9 +372,9 @@ function nf_get_object_meta( $object_id ) {
  * @return int $object_id
  */
 
-function nf_insert_object( $type ) {
+function nf_insert_object( $type, $id = NULL ) {
 	global $wpdb;
-	$wpdb->insert( NF_OBJECTS_TABLE_NAME, array( 'type' => $type ) );
+	$wpdb->insert( NF_OBJECTS_TABLE_NAME, array( 'id' => $id, 'type' => $type ) );
 	return $wpdb->insert_id;
 }
 
@@ -449,14 +449,15 @@ function nf_get_object_parent( $child_id ) {
  *
  * @since 2.8.6
  * @param $object_id
- * @return string $type
+ * @return string $return
  */
 
 function nf_get_object_type( $object_id ) {
 	global $wpdb;
 	// Get our object type
 	$type = $wpdb->get_row( $wpdb->prepare( 'SELECT type FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE id = %d', $object_id ), ARRAY_A );
-	return $type['type'];
+	$return = ( isset ( $type['type'] ) ) ? $type['type'] : false;
+	return $return;
 }
 
 /**

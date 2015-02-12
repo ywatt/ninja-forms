@@ -133,6 +133,7 @@ function ninja_forms_display_form( $form_id = '' ){
 		$function = true;
 	}
 	if($form_id != ''){ //Make sure that we have an active form_id.
+		do_action( 'nf_before_display_loading', $form_id );
 
 		// Instantiate our loading global singleton.
 		if ( !isset ( $ninja_forms_processing ) or ( isset ( $ninja_forms_processing ) and $ninja_forms_processing->get_form_ID() != $form_id ) ) {

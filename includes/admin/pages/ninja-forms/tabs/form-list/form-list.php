@@ -41,8 +41,10 @@ function ninja_forms_register_tab_form_list(){
 
 add_action('admin_init', 'ninja_forms_register_tab_form_list');
 
-function ninja_forms_tab_form_list($form_id, $data){
-	global $wpdb;
+function ninja_forms_tab_form_list(){
+	
+	do_action( 'nf_admin_before_form_list' );
+
 	$debug = ! empty ( $_REQUEST['debug'] ) ? true : false;
 
 	$all_forms = Ninja_Forms()->forms()->get_all( $debug );
