@@ -31,13 +31,14 @@ class NF_Forms {
 	 */
 	public function get_all( $debug = false, $show_new = false ) {
 		$forms = nf_get_objects_by_type( 'form' );
+
 		$tmp_array = array();
 		foreach ( $forms as $form ) {
 			$form_id = $form['id'];
 
-			$status = nf_get_object_meta_value( $form_id, 'status' );
+			$status = Ninja_Forms()->form( $form_id )->get_setting( 'status' );
 			if ( ( $status == 'new' && $show_new ) || $status != 'new' ) {
-				$title = nf_get_object_meta_value( $form_id, 'form_title' );
+				$title = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
 				if ( strpos( $title, '_' ) === 0 ) {
 					if ( $debug )
 						$tmp_array[] = $form_id;
