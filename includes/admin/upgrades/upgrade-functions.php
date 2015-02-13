@@ -365,16 +365,16 @@ function nf_maybe_update_form_settings() {
 		$type = nf_get_object_type( $form['id'] );
 		if ( $type && 'form' != $type ) {
 			// We have an object with our form id.
-			// Change its id to the last available id.
-			// Get our last available id.
-			$row = $wpdb->get_row( "SHOW TABLE STATUS LIKE '" . NF_OBJECTS_TABLE_NAME . "'", ARRAY_A );
-			$next_id = $row['Auto_increment'];
-
+			// Insert a new object.
+			$next_id = nf_insert_object( $type );
+			
 			// Replace all instances of the object ID with our new one.
-			$wpdb->update( NF_OBJECTS_TABLE_NAME, array( 'id' => $next_id ), array( 'id' => $form['id'] ) );
 			$wpdb->update( NF_OBJECT_META_TABLE_NAME, array( 'object_id' => $next_id ), array( 'object_id' => $form['id'] ) );
 			$wpdb->update( NF_OBJECT_RELATIONSHIPS_TABLE_NAME, array( 'parent_id' => $next_id ), array( 'parent_id' => $form['id'] ) );
 			$wpdb->update( NF_OBJECT_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $next_id ), array( 'child_id' => $form['id'] ) );
+		
+			// Delete the original object
+			nf_delete_object( $form['id'] );
 		}
 
 		$settings = maybe_unserialize( $form['data'] );
