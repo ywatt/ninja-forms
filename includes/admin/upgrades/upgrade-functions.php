@@ -370,11 +370,11 @@ function nf_maybe_update_form_settings() {
 			
 			// Replace all instances of the object ID with our new one.
 			$wpdb->update( NF_OBJECT_META_TABLE_NAME, array( 'object_id' => $next_id ), array( 'object_id' => $form['id'] ) );
-			$wpdb->update( NF_OBJECT_RELATIONSHIPS_TABLE_NAME, array( 'parent_id' => $next_id ), array( 'parent_id' => $form['id'] ) );
-			$wpdb->update( NF_OBJECT_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $next_id ), array( 'child_id' => $form['id'] ) );
+			$wpdb->update( NF_OBJECT_RELATIONSHIPS_TABLE_NAME, array( 'parent_id' => $next_id ), array( 'parent_type' => $type, 'parent_id' => $form['id'] ) );
+			$wpdb->update( NF_OBJECT_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $next_id ), array( 'child_type' => $type, 'child_id' => $form['id'] ) );
 		
 			// Delete the original object
-			nf_delete_object( $form['id'] );
+			$wpdb->query( 'DELETE FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE id = ' . $form['id'] );
 		}
 
 		$settings = maybe_unserialize( $form['data'] );
