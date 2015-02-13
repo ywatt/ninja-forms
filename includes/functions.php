@@ -243,7 +243,7 @@ function nf_delete_notification( $n_id ) {
 function nf_get_object_meta_value( $object_id, $meta_key ) {
 	global $wpdb;
 
-	$meta_value = $wpdb->get_row( $wpdb->prepare( "SELECT meta_value FROM ".NF_OBJECT_META_TABLE_NAME." WHERE object_id = %d AND meta_key = %s", $object_id, $meta_key ), ARRAY_A );
+	$meta_value = $wpdb->get_row( $wpdb->prepare( 'SELECT meta_value FROM ' . NF_OBJECT_META_TABLE_NAME . ' WHERE object_id = %d AND meta_key = %s', $object_id, $meta_key ), ARRAY_A );
 	if ( is_array ( $meta_value['meta_value'] ) ) {
 		$meta_value['meta_value'] = unserialize(  $meta_value['meta_value'] );
 	}
@@ -513,7 +513,7 @@ function nf_get_objects_by_type( $object_type ) {
 	if ( $object_type == '' )
 		return false;
 
-	$results = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE type = %s', $object_type ), ARRAY_A );
+	$results = $wpdb->get_results( $wpdb->prepare( 'SELECT id FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE type = %s', $object_type ), ARRAY_A );
 
 	return $results;
 }
