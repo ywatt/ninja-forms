@@ -481,34 +481,9 @@ class NF_Subs_CPT {
 		if ( $typenow != 'nf_sub' )
 			return false;
 
-		/*
-		// Bail if we are looking at the trashed submissions.
-		if ( isset ( $_REQUEST['post_status'] ) && $_REQUEST['post_status'] == 'trash' )
-			return false;
-		*/
-
-		/*
-		 * This section uses the new database structure for Ninja Forms. Until that structure is in place, we have to get data from the old db.
-
-		// Get our list of forms
-		$forms = nf_get_all_forms();
-
-		$form_id = isset( $_GET['form_id'] ) ? $_GET['form_id'] : '';
-
- 		$html = '<select name="form_id" id="form_id">';
-		$html .= '<option value="">- Select a form</option>';
-		if ( is_array( $forms ) ) {
-			foreach ( $forms as $form ) {
-				$html .= '<option value="' . $form['id'] . '" ' . selected( $form['id'], $form_id, false ) . '>' . nf_get_form_setting( $form['id'], 'name' ) . '</option>';
-			}
-		}
-		$html .= '</select>';
-		echo $html;		
-		*/
-
 		// Add our Form selection dropdown.
 		// Get our list of forms
-		$forms = ninja_forms_get_all_forms();
+		$forms = Ninja_Forms()->forms()->get_all();
 
 		$form_id = isset( $_GET['form_id'] ) ? $_GET['form_id'] : '';
 
@@ -521,8 +496,9 @@ class NF_Subs_CPT {
 		$html .= '<select name="form_id" id="form_id" class="nf-form-jump">';
 		$html .= '<option value="">' . __( '- Select a form', 'ninja-forms' ) . '</option>';
 		if ( is_array( $forms ) ) {
-			foreach ( $forms as $form ) {
-				$html .= '<option value="' . $form['id'] . '" ' . selected( $form['id'], $form_id, false ) . '>' . $form['data']['form_title'] . '</option>';
+			foreach ( $forms as $f_id ) {
+				$form_title = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
+				$html .= '<option value="' . $f_id . '" ' . selected( $form_id, $f_id, false ) . '>' . $form_title . '</option>';
 			}
 		}
 		$html .= '</select>';
