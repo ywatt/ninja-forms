@@ -497,7 +497,7 @@ class NF_Subs_CPT {
 		$html .= '<option value="">' . __( '- Select a form', 'ninja-forms' ) . '</option>';
 		if ( is_array( $forms ) ) {
 			foreach ( $forms as $f_id ) {
-				$form_title = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
+				$form_title = Ninja_Forms()->form( $f_id )->get_setting( 'form_title' );
 				$html .= '<option value="' . $f_id . '" ' . selected( $form_id, $f_id, false ) . '>' . $form_title . '</option>';
 			}
 		}
@@ -986,8 +986,7 @@ class NF_Subs_CPT {
 		}
 
 		$form_id = Ninja_Forms()->sub( $post->ID )->form_id;
-		$form = ninja_forms_get_form_by_id( $form_id );
-		$form_title = $form['data']['form_title'];
+		$form_title = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
 		?>
 		<input type="hidden" name="nf_edit_sub" value="1">
 		<div class="submitbox" id="submitpost">

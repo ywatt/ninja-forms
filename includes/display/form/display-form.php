@@ -17,12 +17,7 @@ function nf_check_post() {
 		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'nf_form_' . absint( $_POST['_form_id'] ) ) )
 			return false;
 
-		$form_row = ninja_forms_get_form_by_id( absint( $_POST['_form_id'] ) );
-		if( isset( $form_row['data']['ajax'] ) ){
-			$ajax = $form_row['data']['ajax'];
-		}else{
-			$ajax = '';
-		}
+		$ajax = Ninja_Forms()->form( absint( $_POST['_form_id'] ) )->get_setting( 'ajax' );
 
 		if( $ajax != 1 ){
 			add_action( 'init', 'ninja_forms_setup_processing_class', 5 );

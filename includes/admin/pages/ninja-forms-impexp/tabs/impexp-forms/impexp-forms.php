@@ -95,8 +95,9 @@ function ninja_forms_serialize_form( $form_id ){
 		return;
 
 	$plugin_settings = nf_get_settings();
-	$form_row = ninja_forms_get_form_by_id($form_id);
-	$field_results = ninja_forms_get_fields_by_form_id($form_id);
+	$form_row = array();
+	$form_row['data'] = Ninja_Forms()->form( $form_id )->get_all_settings();
+	$field_results = ninja_forms_get_fields_by_form_id( $form_id );
 	$form_row['id'] = NULL;
 	if ( is_array ( $form_row ) AND ! empty ( $form_row ) ) {
 		if ( is_array( $field_results ) AND ! empty( $field_results ) ) {
@@ -124,9 +125,7 @@ function ninja_forms_export_form( $form_id ){
 	if($form_id == '')
 		return;
 	$plugin_settings = nf_get_settings();
-	$form_row = ninja_forms_get_form_by_id($form_id);
-	$data = $form_row['data'];
-	$form_title = $data['form_title'];
+	$form_title = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
 	$form_row = ninja_forms_serialize_form( $form_id );
 	$form_title = preg_replace('/[^a-zA-Z0-9-]/', '', $form_title);
 	$form_title = str_replace (" ", "-", $form_title);

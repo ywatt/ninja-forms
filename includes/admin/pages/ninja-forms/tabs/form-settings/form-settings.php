@@ -44,8 +44,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 
 	if( isset( $_REQUEST['form_id'] ) ){
 		$form_id = absint( $_REQUEST['form_id'] );
-		$form_row = ninja_forms_get_form_by_id( $form_id );
-		$form_data = $form_row['data'];
+		$form_data = Ninja_Forms()->form( $form_id )->get_all_settings();
 	}else{
 		$form_id = '';
 		$form_row = '';
