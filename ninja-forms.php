@@ -411,6 +411,7 @@ class Ninja_Forms {
 		require_once( NINJA_FORMS_DIR . "/includes/import-export.php" );
 
 		require_once( NINJA_FORMS_DIR . "/includes/display/scripts.php" );
+		require_once( NINJA_FORMS_DIR . "/includes/display/upgrade-functions.php" );
 
 		// Include Processing Functions if a form has been submitted.
 		require_once( NINJA_FORMS_DIR . "/includes/display/processing/class-ninja-forms-processing.php" );

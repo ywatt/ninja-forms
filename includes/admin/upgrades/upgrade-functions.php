@@ -350,41 +350,20 @@ function nf_change_state_dropdown_fav() {
 }
 
 /**
- * Update form settings to the new storage system when the form is viewed for the first time.
+ * Check our option to see if we've updated all of our forms.
+ * If we haven't, loop through all of our forms and see if any need to be updated.
  *
  * @since 2.9
  * @return void
  */
-function nf_maybe_update_form_settings() {
+function nf_29_update_all_form_settings_check() {
 	global $wpdb;
 	// Grab all of our forms.
-	$all_forms = $wpdb->get_results( 'SELECT * FROM ' . NINJA_FORMS_TABLE_NAME, ARRAY_A );
+	$all_forms = $wpdb->get_results( 'SELECT id FROM ' . NINJA_FORMS_TABLE_NAME, ARRAY_A );
 
 	foreach ( $all_forms as $form ) {
-		// Check to see if an object exists with our form id.
-		$type = nf_get_object_type( $form['id'] );
-		if ( $type && 'form' != $type ) {
-			// We have an object with our form id.
-			// Insert a new object.
-			$next_id = nf_insert_object( $type );
-			
-			// Replace all instances of the object ID with our new one.
-			$wpdb->update( NF_OBJECT_META_TABLE_NAME, array( 'object_id' => $next_id ), array( 'object_id' => $form['id'] ) );
-			$wpdb->update( NF_OBJECT_RELATIONSHIPS_TABLE_NAME, array( 'parent_id' => $next_id ), array( 'parent_type' => $type, 'parent_id' => $form['id'] ) );
-			$wpdb->update( NF_OBJECT_RELATIONSHIPS_TABLE_NAME, array( 'child_id' => $next_id ), array( 'child_type' => $type, 'child_id' => $form['id'] ) );
-		
-			// Delete the original object
-			$wpdb->query( 'DELETE FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE id = ' . $form['id'] );
-		}
-
-		$settings = maybe_unserialize( $form['data'] );
-		$settings['date_updated'] = $form['date_updated'];
-		$form_id = nf_insert_object( 'form', $form['id'] );
-		foreach ( $settings as $meta_key => $value ) {
-			nf_update_object_meta( $form_id, $meta_key, $value );
-		}
-		$wpdb->query( 'DELETE FROM ' . NINJA_FORMS_TABLE_NAME . ' WHERE id = ' . $form_id );
+		nf_29_update_form_settings( $form['id'] );
 	}
 }
 
-add_action( 'nf_admin_before_form_list', 'nf_maybe_update_form_settings' );
+add_action( 'nf_admin_before_form_list', 'nf_29_update_all_form_settings_check' );
