@@ -117,6 +117,16 @@ function ninja_forms_admin(){
 					<?php
 				}
 
+				if ( ! empty ( $form_id ) ) {
+					$preview_link = ninja_forms_preview_link( $form_id, false );
+					$subs_link = admin_url( 'edit.php?post_status=all&post_type=nf_sub&action=-1&m=0&form_id=' . $form_id . '&begin_date&end_date&paged=1&mode=list&action2=-1' );
+					?>
+					<a href="<?php echo $preview_link; ?>" target="_blank"><span style="float:right;" class="dashicons dashicons-welcome-view-site"></span></a>
+					<a href="<?php echo $subs_link; ?>" target="_blank"><span style="float:right;" class="dashicons dashicons-id"></span></a>
+					<?php					
+				}
+
+
 				if( isset( $ninja_forms_admin_update_message ) AND $ninja_forms_admin_update_message != '' ){
 					?>
 					<div id="message" class="updated below-h2">
