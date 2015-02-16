@@ -458,6 +458,7 @@ class Ninja_Forms {
 		//Edit Field Functions
 		require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/edit-field.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/label.php" );
+		require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/placeholder.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/hr.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/req.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/custom-class.php" );
