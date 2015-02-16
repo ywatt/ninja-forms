@@ -350,14 +350,11 @@ function nf_get_object_meta( $object_id ) {
 	global $wpdb;
 
 	$tmp_array = array();
-	$settings = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . NF_OBJECT_META_TABLE_NAME . ' WHERE object_id = %d', $object_id ), ARRAY_A);
+	$settings = $wpdb->get_results( $wpdb->prepare( 'SELECT meta_key, meta_value FROM ' . NF_OBJECT_META_TABLE_NAME . ' WHERE object_id = %d', $object_id ), ARRAY_A);
 
 	if ( is_array( $settings ) ) {
 		foreach( $settings as $setting ) {
-			if ( is_serialized ( $setting['meta_value'] ) ) {
-				$setting['meta_value'] = unserialize( $setting['meta_value'] );
-			}
-			$tmp_array[ $setting['meta_key'] ] = $setting['meta_value'];
+			$tmp_array[ $setting['meta_key'] ] = $setting['meta_value'] = maybe_unserialize( $setting['meta_value'] );
 		}
 	}
 
@@ -460,20 +457,6 @@ function nf_get_object_type( $object_id ) {
 	return $return;
 }
 
-/**
- * Return our form count
- *
- * @since 2.8
- * @return int $count
- */
-
-function nf_get_form_count() {
-	global $wpdb;
-
-	$count = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . NINJA_FORMS_TABLE_NAME );
-	return $count;
-}
-
 /*
  * Get User IP
  *
@@ -506,14 +489,32 @@ function nf_get_ip() {
  * @return array $results
  */
 
-function nf_get_objects_by_type( $object_type ) {
+function nf_get_objects_by_type( $object_type, $begin = false, $end = false ) {
 	global $wpdb;
 
 	// Bail if we don't have an object type.
 	if ( $object_type == '' )
 		return false;
 
-	$results = $wpdb->get_results( $wpdb->prepare( 'SELECT id FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE type = %s', $object_type ), ARRAY_A );
+	if ( $begin || $end ) {
+		$limit = 'LIMIT ';
+	} else {
+		$limit = '';
+	}
+	
+	if ( $begin ) {
+		$limit .= $begin;
+	}
+
+	if ( $begin && $end ) {
+		$limit .= ',';
+	}
+
+	if ( $end ) {
+		$limit .= $end;
+	}
+
+	$results = $wpdb->get_results( $wpdb->prepare( 'SELECT id FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE type = %s ' . $limit , $object_type ), ARRAY_A );
 
 	return $results;
 }

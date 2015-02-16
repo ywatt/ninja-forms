@@ -926,3 +926,17 @@ function ninja_forms_get_all_forms( $debug = false ){
 
 	return $tmp_array;
 }
+
+/**
+ * Return our form count
+ *
+ * @since 2.8
+ * @return int $count
+ */
+
+function nf_get_form_count() {
+	global $wpdb;
+
+	$forms = Ninja_Forms()->forms()->get_all();
+	return count( $forms );
+}

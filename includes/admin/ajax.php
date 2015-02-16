@@ -75,7 +75,7 @@ function nf_admin_save_builder() {
 
 	$field_data = json_decode( stripslashes( $_REQUEST['field_data'] ), true );
 	$form_id = esc_html( $_REQUEST['form_id'] );
-	$form_title = $_REQUEST['form_title'];
+	$form_title = stripslashes( $_REQUEST['form_title'] );
 	$field_order = json_decode( strip_tags( stripslashes( $_REQUEST['field_order'] ) ), true );
 
 	if ( is_array ( $field_order ) ) {

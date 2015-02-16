@@ -31,6 +31,7 @@ function nf_29_update_form_settings( $form_id ) {
 	foreach ( $settings as $meta_key => $value ) {
 		nf_update_object_meta( $f_id, $meta_key, $value );
 	}
+	nf_update_object_meta( $f_id, 'status', '' );
 	$wpdb->query( 'DELETE FROM ' . NINJA_FORMS_TABLE_NAME . ' WHERE id = ' . $f_id );
 }
 

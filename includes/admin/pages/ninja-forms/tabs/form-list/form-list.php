@@ -42,12 +42,13 @@ function ninja_forms_register_tab_form_list(){
 add_action('admin_init', 'ninja_forms_register_tab_form_list');
 
 function ninja_forms_tab_form_list(){
-	
+
 	do_action( 'nf_admin_before_form_list' );
 
 	$debug = ! empty ( $_REQUEST['debug'] ) ? true : false;
 
 	$all_forms = Ninja_Forms()->forms()->get_all( $debug );
+
 	$form_count = count($all_forms);
 
 	if( isset( $_REQUEST['limit'] ) ){
@@ -80,7 +81,7 @@ function ninja_forms_tab_form_list(){
 			$end = $form_count;
 		}else{
 			$end = $current_page * $limit;
-			$end = $end - 1;
+			// $end = $end - 1;
 		}
 
 		if( $end > $form_count ){

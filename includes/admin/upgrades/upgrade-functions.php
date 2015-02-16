@@ -73,6 +73,16 @@ function nf_show_upgrade_notices() {
 	if ( defined( 'NINJA_FORMS_SAVE_PROGRESS_VERSION' ) && version_compare( NINJA_FORMS_SAVE_PROGRESS_VERSION, '1.1.3' ) == -1 ) {
 		echo '<div class="error"><p>' . __( 'Your version of the Ninja Forms Save Progress extension isn\'t compatible with version 2.7 of Ninja Forms. It needs to be at least version 1.1.3. Please update this extension at ', 'ninja-forms' ) . '<a href="http://ninjaforms.com/your-account/purchases/"</a>ninjaforms.com</a></p></div>';
 	}
+
+	$forms_conversion_complete = get_option( 'nf_convert_forms_complete', false );
+
+	if ( ! $forms_conversion_complete ) {
+		printf(
+			'<div class="update-nag">' . __( 'Ninja Forms needs to upgrade your form settings, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</div>',
+			admin_url( 'index.php?page=nf-processing&action=convert_forms' )
+		);
+	}
+	
 }
 add_action( 'admin_notices', 'nf_show_upgrade_notices' );
 
@@ -357,13 +367,21 @@ function nf_change_state_dropdown_fav() {
  * @return void
  */
 function nf_29_update_all_form_settings_check() {
-	global $wpdb;
-	// Grab all of our forms.
-	$all_forms = $wpdb->get_results( 'SELECT id FROM ' . NINJA_FORMS_TABLE_NAME, ARRAY_A );
 
-	foreach ( $all_forms as $form ) {
-		nf_29_update_form_settings( $form['id'] );
-	}
+	$forms_conversion_complete = get_option( 'nf_convert_forms_complete', false );
+
+	if ( $forms_conversion_complete )
+		return false;
+
+	$url = admin_url( 'index.php?page=nf-processing&action=convert_forms' );
+	
+	?>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			window.location.href = "<?php echo $url; ?>";
+		} );
+	</script>
+	<?php
 }
 
 add_action( 'nf_admin_before_form_list', 'nf_29_update_all_form_settings_check' );

@@ -53,7 +53,7 @@ class NF_Form {
 			// Set our current form id.
 			$this->form_id = $form_id;
 			$this->update_fields();
-			$this->settings = nf_get_form_settings( $form_id );	
+			$this->settings = nf_get_form_settings( $form_id );
 		}
 	}
 
