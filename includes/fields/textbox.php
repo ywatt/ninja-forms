@@ -83,7 +83,6 @@ function ninja_forms_register_field_textbox(){
 		'group' => 'standard_fields',
 		'edit_label' => true,
 		'edit_label_pos' => true,
-		'edit_placeholder' => true,
 		'edit_req' => true,
 		'edit_custom_class' => true,
 		'edit_help' => true,
@@ -224,12 +223,6 @@ function ninja_forms_field_text_display( $field_id, $data, $form_id = '' ){
 		$label = '';
 	}
 
-	if(isset($data['placeholder'])){
-		$placeholder = $data['placeholder'];
-	}else{
-		$placeholder = '';
-	}
-
 	if( isset( $data['mask'] ) ){
 		$mask = $data['mask'];
 	}else{
@@ -274,7 +267,7 @@ function ninja_forms_field_text_display( $field_id, $data, $form_id = '' ){
 	}
 
 	?>
-	<input id="ninja_forms_field_<?php echo $field_id;?>" data-mask="<?php echo $mask;?>" data-input-limit="<?php echo $input_limit;?>" data-input-limit-type="<?php echo $input_limit_type;?>" data-input-limit-msg="<?php echo $input_limit_msg;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="text" placeholder="<?php echo $placeholder;?>" class="<?php echo $field_class;?> <?php echo $mask_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
+	<input id="ninja_forms_field_<?php echo $field_id;?>" data-mask="<?php echo $mask;?>" data-input-limit="<?php echo $input_limit;?>" data-input-limit-type="<?php echo $input_limit_type;?>" data-input-limit-msg="<?php echo $input_limit_msg;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="text" class="<?php echo $field_class;?> <?php echo $mask_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
 	<?php
 
 }
