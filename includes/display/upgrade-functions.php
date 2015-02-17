@@ -46,4 +46,4 @@ function nf_29_update_form_settings_check( $form_id ) {
 	nf_29_update_form_settings( $form_id );
 }
 
-add_action( 'nf_before_display_loading', 'nf_29_update_form_settings_check' );
+// add_action( 'nf_before_display_loading', 'nf_29_update_form_settings_check' );
