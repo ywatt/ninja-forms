@@ -46,6 +46,11 @@ function nf_29_update_form_settings_check( $form_id ) {
 	// Bail if we are in the admin
 	if ( is_admin() )
 		return false;
+
+	// Bail if this form was created in 2.9 or higher.
+	if ( 'form' == nf_get_object_type( $form_id ) )
+		return false;
+
 	// Get a list of forms that we've already converted.
 	$completed_forms = get_option( 'nf_converted_forms', array() );
 
