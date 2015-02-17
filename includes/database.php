@@ -73,26 +73,6 @@ function ninja_forms_get_form_by_sub_id( $sub_id ){
 
 // The ninja_forms_delete_form( $form_id ) function is in includes/deprecated.php
 
-function ninja_forms_update_form( $args ){
-	// Get our form id
-	$form_id = $args['where']['id'];
-	$update_array = $args['update_array'];
-	if ( isset ( $update_array['data'] ) ) {
-		$data = maybe_unserialize( $update_array['data'] );
-		if ( is_array( $data ) ) {
-			foreach ( $data as $key => $val ) {
-				Ninja_Forms()->form( $form_id )->update_setting( $key, $val );
-			}	
-		}
-		unset( $update_array['data'] );	
-	}
-
-	foreach ( $update_array as $key => $val ) {
-		Ninja_Forms()->form( $form_id )->update_setting( $key, $val );
-	}
-	
-}
-
 // Begin Field Interaction Functions
 
 function ninja_forms_get_field_by_id($field_id){

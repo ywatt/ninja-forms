@@ -945,3 +945,23 @@ function nf_get_form_count() {
  * Old Ninja Forms shortcode
  */
 add_shortcode( 'ninja_forms_display_form', 'ninja_forms_shortcode' );
+
+function ninja_forms_update_form( $args ){
+	// Get our form id
+	$form_id = $args['where']['id'];
+	$update_array = $args['update_array'];
+	if ( isset ( $update_array['data'] ) ) {
+		$data = maybe_unserialize( $update_array['data'] );
+		if ( is_array( $data ) ) {
+			foreach ( $data as $key => $val ) {
+				Ninja_Forms()->form( $form_id )->update_setting( $key, $val );
+			}	
+		}
+		unset( $update_array['data'] );	
+	}
+
+	foreach ( $update_array as $key => $val ) {
+		Ninja_Forms()->form( $form_id )->update_setting( $key, $val );
+	}
+	
+}
