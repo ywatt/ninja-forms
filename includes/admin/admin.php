@@ -112,20 +112,16 @@ function ninja_forms_admin(){
 					<h2 class="nav-tab-wrapper">
 						<?php
 						ninja_forms_display_tabs();
-						?>
+						if ( ! empty ( $form_id ) ) {
+							$preview_link = ninja_forms_preview_link( $form_id, false );
+							$subs_link = admin_url( 'edit.php?post_status=all&post_type=nf_sub&action=-1&m=0&form_id=' . $form_id . '&begin_date&end_date&paged=1&mode=list&action2=-1' );
+							?>
+							<a href="<?php echo $preview_link; ?>" target="_blank" class="nf-preview"><span style="float:right;" class="dashicons dashicons-welcome-view-site"></span></a>
+							<a href="<?php echo $subs_link; ?>" target="_blank" class="nf-subs"><span style="float:right;" class="dashicons dashicons-id"></span></a>
+						<?php } ?>
 					</h2>
 					<?php
 				}
-
-				if ( ! empty ( $form_id ) ) {
-					$preview_link = ninja_forms_preview_link( $form_id, false );
-					$subs_link = admin_url( 'edit.php?post_status=all&post_type=nf_sub&action=-1&m=0&form_id=' . $form_id . '&begin_date&end_date&paged=1&mode=list&action2=-1' );
-					?>
-					<a href="<?php echo $preview_link; ?>" target="_blank" class="nf-preview"><span style="float:right;" class="dashicons dashicons-welcome-view-site"></span></a>
-					<a href="<?php echo $subs_link; ?>" target="_blank" class="nf-subs"><span style="float:right;" class="dashicons dashicons-id"></span></a>
-					<?php
-				}
-
 
 				if( isset( $ninja_forms_admin_update_message ) AND $ninja_forms_admin_update_message != '' ){
 					?>
