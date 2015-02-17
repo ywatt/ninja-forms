@@ -12,6 +12,13 @@
 class NF_Forms {
 
 	/**
+	 * Store our array of form ids
+	 * 
+	 * @since 2.9
+	 */
+	var $forms = array();
+	
+	/**
 	 * Get things started
 	 * 
 	 * @access public
@@ -32,23 +39,27 @@ class NF_Forms {
 	public function get_all( $debug = false, $show_new = false ) {
 		global $wpdb;
 
-		$forms = nf_get_objects_by_type( 'form' );
+		if ( empty ( $this->forms ) ) {
+			$forms = nf_get_objects_by_type( 'form' );
 
-		$tmp_array = array();
-		foreach ( $forms as $form ) {
-			$form_id = $form['id'];
+			$tmp_array = array();
+			foreach ( $forms as $form ) {
+				$form_id = $form['id'];
 
-			$status = Ninja_Forms()->form( $form_id )->get_setting( 'status' );
-			if ( ( $status == 'new' && $show_new ) || $status != 'new' ) {
-				$title = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
-				if ( strpos( $title, '_' ) === 0 ) {
-					if ( $debug )
+				$status = Ninja_Forms()->form( $form_id )->get_setting( 'status' );
+				if ( ( $status == 'new' && $show_new ) || $status != 'new' ) {
+					$title = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
+					if ( strpos( $title, '_' ) === 0 ) {
+						if ( $debug )
+							$tmp_array[] = $form_id;
+					} else {
 						$tmp_array[] = $form_id;
-				} else {
-					$tmp_array[] = $form_id;
+					}
 				}
 			}
+			$this->forms = $tmp_array;
 		}
-		return $tmp_array;
+
+		return $this->forms;
 	}
 }

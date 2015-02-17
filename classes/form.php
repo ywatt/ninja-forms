@@ -171,8 +171,11 @@ class NF_Form {
 	 * @since 2.9
 	 */
 	public function delete() {
+		global $wpdb;
 		// Delete this object.
 		nf_delete_object( $this->form_id );
+		// Delete any fields on this form.
+		$wpdb->query($wpdb->prepare( "DELETE FROM ".NINJA_FORMS_FIELDS_TABLE_NAME." WHERE form_id = %d", $this->form_id ) );
 	}
 
 }
