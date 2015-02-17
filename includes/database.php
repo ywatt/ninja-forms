@@ -65,8 +65,7 @@ function ninja_forms_get_form_ids_by_post_id( $post_id ){
 
 function ninja_forms_get_form_by_sub_id( $sub_id ){
 	global $wpdb;
-	$sub_row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM ".NINJA_FORMS_SUBS_TABLE_NAME." WHERE id = %d", $sub_id ), ARRAY_A );
-	$form_id = $sub_row['form_id'];
+	$form_id = Ninja_Forms()->sub( $sub_id )->form_id;
 	$form_row = ninja_forms_get_form_by_id( $form_id );
 	return $form_row;
 }
