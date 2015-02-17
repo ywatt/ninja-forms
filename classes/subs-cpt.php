@@ -104,8 +104,16 @@ class NF_Subs_CPT {
 		} else {
 			$not_found = __( 'No Submissions Found', 'ninja-forms' );
 		}
+
+		$name = _x( 'Submissions', 'post type general name', 'ninja-forms' );
+
+		if ( ! empty ( $_REQUEST['form_id'] ) ) {
+			$form_title = Ninja_Forms()->form( $_REQUEST['form_id'] )->get_setting( 'form_title' );
+			$name =$name . ' - ' . $form_title;
+		}
+
 		$labels = array(
-		    'name' => _x('Submissions', 'post type general name', 'ninja-forms' ),
+		    'name' => $name,
 		    'singular_name' => _x( 'Submission', 'post type singular name', 'ninja-forms' ),
 		    'add_new' => _x( 'Add New', 'nf_sub' ),
 		    'add_new_item' => __( 'Add New Submission', 'ninja-forms' ),
@@ -270,19 +278,6 @@ class NF_Subs_CPT {
 			'cb'    => '<input type="checkbox" />',
 			'id' => __( '#', 'ninja-forms' ),
 		);
-		/*
-		 * This section uses the new Ninja Forms db structure. Until that is utilized, we must deal with the old db.
-		if ( isset ( $_GET['form_id'] ) ) {
-			$form_id = $_GET['form_id'];
-			$fields = nf_get_fields_by_form_id( $form_id );
-			if ( is_array ( $fields ) ) {
-				foreach ( $fields as $field_id => $setting ) {
-					if ( apply_filters( 'nf_add_sub_value', Ninja_Forms()->field( $field_id )->type->add_to_sub, $field_id ) )
-						$cols[ 'form_' . $form_id . '_field_' . $field_id ] = $setting['label'];
-				}
-			}
-		}		
-		*/
 
 		// Compatibility with old field registration system. Can be removed when the new one is in place.
 		if ( isset ( $_GET['form_id'] ) && $_GET['form_id'] != '' ) {
