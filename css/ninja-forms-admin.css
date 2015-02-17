@@ -1249,3 +1249,14 @@ p.debug-report {
 	-webkit-box-shadow: 0 0 2px rgba(30,140,190,0.8);
 	box-shadow: 0 0 2px rgba(30,140,190,0.8);
 }
+
+.nf-preview,
+.nf-subs {
+	text-decoration: none;
+}
+.nf-preview span,
+.nf-subs span {
+	font-size: 30px;
+	width: 40px;
+	height: 30px;
+}
