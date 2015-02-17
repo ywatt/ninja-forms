@@ -940,3 +940,8 @@ function nf_get_form_count() {
 	$forms = Ninja_Forms()->forms()->get_all();
 	return count( $forms );
 }
+
+/**
+ * Old Ninja Forms shortcode
+ */
+add_shortcode( 'ninja_forms_display_form', 'ninja_forms_shortcode' );
