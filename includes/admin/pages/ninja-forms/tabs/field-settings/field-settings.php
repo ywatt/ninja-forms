@@ -41,12 +41,13 @@ function ninja_forms_tab_field_settings(){
 			<div id="admin-modal-selector">
 				<div id="admin-modal-options">
 					<div>
-						<label><input id="nf-form-title" class="widefat" style="width:100%;" type="text" name="admin-modaltitle" placeholder="Give your form a title. This is how you'll find the form later."></label>
+						<label><input id="nf-form-title" class="widefat" style="width:100%;" type="text" name="admin-modaltitle" placeholder="<?php _e( 'Give your form a title. This is how you\'ll find the form later.', 'ninja-forms' ); ?>"></label>
 					</div>
 				</div>
 				<div id="nf-insert-submit-div">
 					<div class="admin-modal-target">
-						<label><span>&nbsp;</span><input type="checkbox" id="nf-insert-submit" value="1"> Insert Submit Button</label>
+						<p class="howto"><?php _e( 'You have not added a submit button to your form.', 'ninja-forms' ); ?></p>
+						<label><span>&nbsp;</span><input type="checkbox" id="nf-insert-submit" value="1" checked> Insert Submit Button</label>
 					</div>
 				</div>
 			</div>
