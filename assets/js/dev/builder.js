@@ -190,6 +190,7 @@ var nfForm = Backbone.Model.extend( {
 			}
 			// Open our save form modal.
 			jQuery( '#nf-save-title' ).nfAdminModal( 'open' );
+			jQuery( '#modal-contents-wrapper' ).find( '#nf-form-title' ).focus();
 			return false;			
 		}
 
