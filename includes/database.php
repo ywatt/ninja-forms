@@ -71,7 +71,7 @@ function ninja_forms_get_form_by_sub_id( $sub_id ){
 	return $form_row;
 }
 
-// The ninja_forms_delete_form( $form_id ) function is in includes/admin/ajax.php
+// The ninja_forms_delete_form( $form_id ) function is in includes/deprecated.php
 
 function ninja_forms_update_form( $args ){
 	// Get our form id
