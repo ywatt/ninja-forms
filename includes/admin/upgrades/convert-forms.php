@@ -11,9 +11,19 @@ class NF_Convert_Forms extends NF_Step_Processing {
 	public function loading() {
 		global $wpdb;
 
+		// Get all our forms
 		$forms = $wpdb->get_results( 'SELECT id FROM ' . NINJA_FORMS_TABLE_NAME, ARRAY_A );
+
+		$x = 1;
+		if ( is_array( $forms ) ) {
+			foreach ( $forms as $form ) {
+				$this->args['forms'][$x] = $form['id'];
+				$x++;
+			}
+		}
+
 		$form_count = count( $forms );
-		$total_steps = ceil( $form_count / 5 );
+		$this->total_steps = $form_count;
 
 		if( empty( $this->total_steps ) || $this->total_steps <= 1 ) {
 			$this->total_steps = 1;
@@ -30,19 +40,29 @@ class NF_Convert_Forms extends NF_Step_Processing {
 	}
 
 	public function step() {
-		global $ninja_forms_fields;
+		global $wpdb;
 
-		// 	global $wpdb;
-		// // Grab all of our forms.
-		// $all_forms = $wpdb->get_results( 'SELECT id FROM ' . NINJA_FORMS_TABLE_NAME, ARRAY_A );
+		// Get a list of forms that we've already converted.
+		$completed_forms = get_option( 'nf_converted_forms', array() );
 
-		// foreach ( $all_forms as $form ) {
-		// 	nf_29_update_form_settings( $form['id'] );
-		// }
-		
+		// Get our form ID
+		$form_id = $this->args['forms'][ $this->step ];
+
+		// Bail if we've already converted the notifications for this form.
+		if ( in_array( $form_id, $completed_forms ) )
+			return false;
+
+		nf_29_update_form_settings( $form_id );
+
+		$completed_forms[] = $form_id;
+
+		update_option( 'nf_converted_forms', $completed_forms );
+
 	}
 
 	public function complete() {
+		global $wpdb;
+		$wpdb->query( 'DROP TABLE ' . NINJA_FORMS_TABLE_NAME );
 		update_option( 'nf_convert_forms_complete', true );
 	}
 
