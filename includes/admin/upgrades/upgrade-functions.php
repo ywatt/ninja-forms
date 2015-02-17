@@ -77,9 +77,10 @@ function nf_show_upgrade_notices() {
 	$forms_conversion_complete = get_option( 'nf_convert_forms_complete', false );
 
 	if ( ! $forms_conversion_complete ) {
+		$title = urlencode( __( 'Updating Form Database', 'ninja-forms' ) );
 		printf(
 			'<div class="update-nag">' . __( 'Ninja Forms needs to upgrade your form settings, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</div>',
-			admin_url( 'index.php?page=nf-processing&action=convert_forms' )
+			admin_url( 'index.php?page=nf-processing&action=convert_forms&title=' . $title )
 		);
 	}
 	
@@ -372,8 +373,9 @@ function nf_29_update_all_form_settings_check() {
 
 	if ( $forms_conversion_complete )
 		return false;
-
-	$url = admin_url( 'index.php?page=nf-processing&action=convert_forms' );
+	
+	$title = urlencode( __( 'Updating Form Database', 'ninja-forms' ) );
+	$url = admin_url( 'index.php?page=nf-processing&action=convert_forms&title=' . $title );
 	
 	?>
 	<script type="text/javascript">
