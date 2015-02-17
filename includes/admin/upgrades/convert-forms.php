@@ -45,10 +45,14 @@ class NF_Convert_Forms extends NF_Step_Processing {
 		// Get a list of forms that we've already converted.
 		$completed_forms = get_option( 'nf_converted_forms', array() );
 
+		
+		if ( ! is_array( $completed_forms ) )
+			$completed_forms = array();
+		
 		// Get our form ID
 		$form_id = $this->args['forms'][ $this->step ];
 
-		// Bail if we've already converted the notifications for this form.
+		// Bail if we've already converted the db for this form.
 		if ( in_array( $form_id, $completed_forms ) )
 			return false;
 

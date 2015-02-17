@@ -10,7 +10,7 @@ function nf_29_update_form_settings( $form_id ) {
 
 	// Check to see if an object exists with our form id.
 	$type = nf_get_object_type( $form_id );
-	if ( $type && 'form' != $type ) {
+	if ( 'form' != $type ) {
 		// We have an object with our form id.
 		// Insert a new object.
 		$next_id = nf_insert_object( $type );
@@ -43,7 +43,23 @@ function nf_29_update_form_settings( $form_id ) {
  * @return void
  */
 function nf_29_update_form_settings_check( $form_id ) {
+	// Bail if we are in the admin
+	if ( is_admin() )
+		return false;
+	// Get a list of forms that we've already converted.
+	$completed_forms = get_option( 'nf_converted_forms', array() );
+
+	if ( ! is_array( $completed_forms ) )
+		$completed_forms = array();
+
+	// Bail if we've already converted the db for this form.
+	if ( in_array( $form_id, $completed_forms ) )
+		return false;
+
 	nf_29_update_form_settings( $form_id );
+
+	$completed_forms[] = $form_id;
+	update_option( 'nf_converted_forms', $completed_forms );
 }
 
-// add_action( 'nf_before_display_loading', 'nf_29_update_form_settings_check' );
+add_action( 'nf_before_display_loading', 'nf_29_update_form_settings_check' );
