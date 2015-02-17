@@ -29,10 +29,10 @@ class NF_Forms {
 	 * @since 2.9
 	 * @return array $forms
 	 */
-	public function get_all( $debug = false, $show_new = false, $begin = false, $end = false ) {
+	public function get_all( $debug = false, $show_new = false ) {
 		global $wpdb;
 
-		$forms = nf_get_objects_by_type( 'form', $begin, $end );
+		$forms = nf_get_objects_by_type( 'form' );
 
 		$tmp_array = array();
 		foreach ( $forms as $form ) {

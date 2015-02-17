@@ -489,32 +489,14 @@ function nf_get_ip() {
  * @return array $results
  */
 
-function nf_get_objects_by_type( $object_type, $begin = false, $end = false ) {
+function nf_get_objects_by_type( $object_type ) {
 	global $wpdb;
 
 	// Bail if we don't have an object type.
 	if ( $object_type == '' )
 		return false;
 
-	if ( $begin || $end ) {
-		$limit = 'LIMIT ';
-	} else {
-		$limit = '';
-	}
-	
-	if ( $begin ) {
-		$limit .= $begin;
-	}
-
-	if ( $begin && $end ) {
-		$limit .= ',';
-	}
-
-	if ( $end ) {
-		$limit .= $end;
-	}
-
-	$results = $wpdb->get_results( $wpdb->prepare( 'SELECT id FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE type = %s ' . $limit , $object_type ), ARRAY_A );
+	$results = $wpdb->get_results( $wpdb->prepare( 'SELECT id FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE type = %s', $object_type ), ARRAY_A );
 
 	return $results;
 }
