@@ -652,7 +652,16 @@ function ninja_forms_field_calc_pre_process(){
 }
 
 add_action( 'ninja_forms_pre_process', 'ninja_forms_field_calc_pre_process', 999 );
-add_action( 'ninja_forms_display_pre_init', 'ninja_forms_field_calc_pre_process', 999 );
+
+function ninja_forms_calc_check_load() {
+	global $ninja_forms_processing;
+
+	if ( ! is_object ( $ninja_forms_processing ) ) {
+		ninja_forms_field_calc_pre_process();
+	}
+}
+
+add_action( 'ninja_forms_display_pre_init', 'ninja_forms_calc_check_load', 999 );
 
 
 function ninja_forms_calc_field_loop( $field_id, $calc_eq = '', $result = '' ) {
