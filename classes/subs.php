@@ -43,7 +43,7 @@ class NF_Subs {
 
 		// Get the current sequential ID
 		$last_sub = Ninja_Forms()->form( $form_id )->get_setting( 'last_sub' );
-		$seq_num = ! empty ( $last_sub ) ? $last_sub : 1;
+		$seq_num = ! empty ( $last_sub ) ? $last_sub + 1 : 1;
 
 		$seq_num = apply_filters( 'nf_sub_seq_num', $seq_num, $form_id );
 
