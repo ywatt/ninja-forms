@@ -6,8 +6,8 @@ function ninja_forms_register_display_open_form_tag() {
 add_action( 'init', 'ninja_forms_register_display_open_form_tag' );
 
 function ninja_forms_display_open_form_tag( $form_id ) {
-
-	$ajax = ! empty ( Ninja_Forms()->form( $form_id )->get_setting( 'ajax' ) ) ? Ninja_Forms()->form( $form_id )->get_setting( 'ajax' ) : 0;
+	$ajax = Ninja_Forms()->form( $form_id )->get_setting( 'ajax' );
+	$ajax = ! empty ( $ajax ) ? $ajax : 0;
 
 	if ( $ajax == 1 ) {
 		if( is_ssl() ) {
