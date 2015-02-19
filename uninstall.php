@@ -52,3 +52,7 @@ $wpdb->query( 'DROP TABLE ' . NINJA_FORMS_TABLE_NAME );
 $wpdb->query( 'DROP TABLE ' . NINJA_FORMS_FIELDS_TABLE_NAME );
 $wpdb->query( 'DROP TABLE ' . NINJA_FORMS_FAV_FIELDS_TABLE_NAME );
 $wpdb->query( 'DROP TABLE ' . NINJA_FORMS_SUBS_TABLE_NAME );
+
+// Remove our daily cron job
+$timestamp = wp_next_scheduled( 'ninja_forms_daily_action' );
+wp_unschedule_event( $timestamp, 'ninja_forms_daily_action' );
