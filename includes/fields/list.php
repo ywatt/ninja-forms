@@ -151,18 +151,18 @@ function ninja_forms_field_list_edit( $field_id, $data ) {
 		<?php _e( 'Multi-Select Box Size', 'ninja-forms' );?>: <input type="text" id="" name="ninja_forms_field_<?php echo $field_id;?>[multi_size]" value="<?php echo $multi_size;?>">
 	</p>
 	<p class="description description-wide">
-		<a href="#" id="ninja_forms_field_<?php echo $field_id;?>_collapse_options" name="" class="ninja-forms-field-collapse-options"><?php _e( 'Expand / Collapse Options', 'ninja-forms' );?></a>
+		<a href="#" id="ninja_forms_field_<?php echo $field_id;?>_collapse_options" name="" class="button-secondary ninja-forms-field-collapse-options"><?php _e( 'Add / View List Items', 'ninja-forms' );?></a>
 	</p>
 	<span id="ninja_forms_field_<?php echo $field_id;?>_list_span" class="ninja-forms-list-span" style="display: none;">
 		<p class="description description-wide">
-			<?php _e( 'Options', 'ninja-forms' );?>: <a href="#" id="ninja_forms_field_<?php echo $field_id;?>_list_add_option" class="ninja-forms-field-add-list-option button-secondary"><?php _e( 'Add New', 'ninja-forms' );?></a>
-			<a href="#TB_inline?width=640&height=530&inlineId=ninja_forms_field_<?php echo $field_id;?>_import_options_div" class="thickbox button-secondary" title="<?php _e( 'Import List Items', 'ninja-forms' ); ?>" id=""><?php _e( 'Import Options', 'ninja-forms' );?></a>
+			<?php _e( 'List Items', 'ninja-forms' );?>: <a href="#" id="ninja_forms_field_<?php echo $field_id;?>_list_add_option" class="ninja-forms-field-add-list-option button-secondary"><?php _e( 'Add New', 'ninja-forms' );?></a>
+			<a href="#TB_inline?width=640&height=530&inlineId=ninja_forms_field_<?php echo $field_id;?>_import_options_div" class="thickbox button-secondary" title="<?php _e( 'Import List Items', 'ninja-forms' ); ?>" id=""><?php _e( 'Import List Items', 'ninja-forms' );?></a>
 		</p>
 
 		<p class="description description-wide">
 			<input type="hidden" id="" name="ninja_forms_field_<?php echo $field_id;?>[list_show_value]" value="0">
 			<label for="ninja_forms_field_<?php echo $field_id;?>_list_show_value"><input type="checkbox" value="1" id="ninja_forms_field_<?php echo $field_id;?>_list_show_value" name="ninja_forms_field_<?php echo $field_id;?>[list_show_value]" class="ninja-forms-field-list-show-value" <?php if(isset($data['list_show_value']) AND $data['list_show_value'] == 1){ echo "checked='checked'";}?>>
-			<?php _e( 'Show option values', 'ninja-forms' );?> </label>
+			<?php _e( 'Show list item values', 'ninja-forms' );?> </label>
 		</p>
 		<div id="ninja_forms_field_<?php echo $field_id;?>_list_options" class="ninja-forms-field-list-options description description-wide">
 			<input type="hidden" name="ninja_forms_field_<?php echo $field_id;?>[list][options]" value="">
@@ -643,9 +643,9 @@ function ninja_forms_field_filter_list_data( $form_id ){
 	if ( ! $all_fields ) {
 		return;
 	}
-	
+
 	// Loop through all of our fields and see if we have any list fields.
-	
+
 	foreach( $all_fields as $field_id => $user_value ) {
 		$tmp_array = array();
 		if ( isset ( $ninja_forms_loading ) ) {
@@ -684,7 +684,7 @@ function ninja_forms_field_filter_list_data( $form_id ){
 				// if ( !$ninja_forms_processing->get_field_value( $field_id ) ) {
 				// 	$ninja_forms_processing->update_field_value( $field_id, $tmp_array );
 				// }
-			}			
+			}
 		}
 	}
 }
@@ -939,7 +939,7 @@ function nf_field_list_edit_sub_value( $field_id, $user_value, $field ) {
 
 /**
  * Output our user value on the sub table
- * 
+ *
  * @since 2.7
  * @return void
  */
@@ -952,7 +952,7 @@ function nf_field_list_sub_table_value( $field_id, $user_value ) {
 		while ( $x < $max_items && $x <= count( $user_value ) - 1 ) {
 			echo '<li>' . $user_value[$x] . '</li>';
 			$x++;
-		}							
+		}
 		echo '</ul>';
 	} else {
 		$max_len = apply_filters( 'nf_sub_table_user_value_max_len', 140, $field_id );
