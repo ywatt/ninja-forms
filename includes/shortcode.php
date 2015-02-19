@@ -17,6 +17,7 @@ function ninja_forms_shortcode( $atts ){
 }
 
 add_shortcode( 'ninja_forms', 'ninja_forms_shortcode' );
+add_shortcode( 'ninja_form', 'ninja_forms_shortcode' );
 
 function ninja_forms_field_shortcode( $atts ){
 	global $ninja_forms_processing;

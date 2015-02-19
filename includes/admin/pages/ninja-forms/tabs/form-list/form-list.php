@@ -174,7 +174,7 @@ function ninja_forms_tab_form_list(){
 			$edit_link = esc_url( add_query_arg( array( 'tab' => 'builder', 'form_id' => $form_id ), $link ) );
 			$subs_link = admin_url( 'edit.php?post_status=all&post_type=nf_sub&action=-1&m=0&form_id=' . $form_id . '&paged=1&mode=list&action2=-1' );
 			$duplicate_link = esc_url( add_query_arg( array( 'duplicate_form' => 1, 'form_id' => $form_id ), $link ) );
-			$shortcode = apply_filters ( "ninja_forms_form_list_shortcode", "[ninja_forms_display_form id=" .  $form_id . "]", $form_id );
+			$shortcode = apply_filters ( "ninja_forms_form_list_shortcode", "[ninja_forms id=" .  $form_id . "]", $form_id );
 			$template_function = apply_filters ( "ninja_forms_form_list_template_function", "<pre>if( function_exists( 'ninja_forms_display_form' ) ){ ninja_forms_display_form( " . "$form_id" . " ); }</pre>", $form_id );
 			?>
 			<tr id="ninja_forms_form_<?php echo $form_id;?>_tr">

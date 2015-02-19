@@ -949,6 +949,12 @@ function nf_get_form_count() {
  */
 add_shortcode( 'ninja_forms_display_form', 'ninja_forms_shortcode' );
 
+/**
+ * Old update form function.
+ * 
+ * @since 1.0
+ * @return void
+ */
 function ninja_forms_update_form( $args ){
 	// Get our form id
 	$form_id = $args['where']['id'];
