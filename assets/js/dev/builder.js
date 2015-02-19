@@ -105,6 +105,14 @@ var nfField = Backbone.Model.extend( {
 // Collection to hold our fields.
 var nfFields = Backbone.Collection.extend({
 	model: nfField,
+	setup: function() {
+		// Loop through our field JSON that is already on the page and populate our collection with it.
+		if( 'undefined' !== typeof nf_admin.fields ) {
+			_.each( nf_admin.fields, function( field ) {
+				nfFields.add( { id: field.id, metabox_state: field.metabox_state } );
+			} );
+		}
+	},
 	updateData: function() {
 		// Loop through our fields collection and update any field lis that are open
 		_.each( this.models, function( field ) {
@@ -177,12 +185,24 @@ var nfForm = Backbone.Model.extend( {
 		'title'	 	: nf_admin.form_title,
 		'saved'		: true
 	},
+	setup: function() {
+		this.changeMenu();
+	},
+	changeMenu: function() {
+		jQuery( '.wp-submenu li' ).removeClass( 'current' );
+		if ( 'new' == this.get( 'status' ) ) { // If we're working with a new form, highlight the "Add New" menu item.
+			jQuery( 'a[href="admin.php?page=ninja-forms&tab=builder&form_id=new"]' ).parent().addClass( 'current' );
+		} else {
+			var html = '<li class="current"><a href="#">' + nf_admin.edit_form_text + '</a></li>';
+			jQuery( 'a[href="admin.php?page=ninja-forms&tab=builder&form_id=new"]' ).parent().after( html );
+		}
+	},
 	save: function() {
 		jQuery( '.nf-save-admin-fields' ).hide();
 		jQuery( '.nf-save-spinner' ).show();
 
 		// If our form is new, then prompt for a title before we save
-		if ( 'new' == nfForm.get( 'status' ) ) {
+		if ( 'new' == this.get( 'status' ) ) {
 			if ( jQuery( '._submit-li' ).length > 0 ) {
 				jQuery( '#nf-insert-submit-div' ).hide();
 			} else {
@@ -224,6 +244,8 @@ var nfForm = Backbone.Model.extend( {
 				jQuery( '#nf-display-form-title' ).html( nfForm.get( 'title' ) );
 			}
 			nfForm.set( 'saved', true );
+			nfForm.set( 'status', '' );
+			nfForm.changeMenu();
 		} );
 	},
 	saveTitle: function() {
@@ -258,12 +280,8 @@ var nfForm = new nfForm();
 
 jQuery( document ).ready( function( $ ) {
 
-	// Loop through our field JSON that is already on the page and populate our collection with it.
-	if( 'undefined' !== typeof nf_admin.fields ) {
-		_.each( nf_admin.fields, function( field ) {
-			nfFields.add( { id: field.id, metabox_state: field.metabox_state } );
-		} );
-	}
+	nfFields.setup();
+	nfForm.setup();
 
 	// Open and close a field metabox.
 	$( document ).on( 'click', '.metabox-item-edit', function( e ) {
