@@ -73,6 +73,12 @@ class NF_Form {
 			nf_update_object_meta( $form_id, $meta_key, $meta_value );
 		}
 
+		// Add a single event hook that will check to see if this is an orphaned function.
+		$timestamp = strtotime( '+24 hours', time() );
+		$args = array(
+			'form_id' => $form_id
+		);
+		wp_schedule_single_event( $timestamp, 'nf_maybe_delete_form', $args );
 		return $form_id;
 	}
 

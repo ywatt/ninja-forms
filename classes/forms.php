@@ -26,7 +26,7 @@ class NF_Forms {
 	 * @return void
 	 */
 	public function __construct() {
-		
+		add_action( 'nf_maybe_delete_form', array( $this, 'maybe_delete' ) );
 	}
 
 	/**
@@ -61,5 +61,19 @@ class NF_Forms {
 		}
 
 		return $this->forms;
+	}
+
+	/**
+	 * Delete a form if it is created and not saved within 24 hrs.
+	 * 
+	 * @access public
+	 * @since 2.9
+	 * @return void
+	 */
+	public function maybe_delete( $form_id ) {
+		$status = Ninja_Forms()->form( $form_id )->get_setting( 'status' );
+		if ( 'new' == $status ) {
+			Ninja_Forms()->form( $form_id )->delete();
+		}
 	}
 }
