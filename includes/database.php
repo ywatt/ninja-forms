@@ -258,7 +258,8 @@ function ninja_forms_json_response(){
 	$form_settings = $ninja_forms_processing->get_all_form_settings();
 	$extras = $ninja_forms_processing->get_all_extras();
 
-
+	// Success will default to false if there is not success message.
+	if ( ! $success && ! $errors ) $success = true;
 
 	if( version_compare( phpversion(), '5.3', '>=' ) ){
 		$json = json_encode( array( 'form_id' => $form_id, 'errors' => $errors, 'success' => $success, 'fields' => $fields, 'form_settings' => $form_settings, 'extras' => $extras ), JSON_HEX_QUOT | JSON_HEX_TAG  );
