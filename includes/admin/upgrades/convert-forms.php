@@ -66,7 +66,6 @@ class NF_Convert_Forms extends NF_Step_Processing {
 
 	public function complete() {
 		global $wpdb;
-		$wpdb->query( 'DROP TABLE ' . NINJA_FORMS_TABLE_NAME );
 		update_option( 'nf_convert_forms_complete', true );
 	}
 
