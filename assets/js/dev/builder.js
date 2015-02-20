@@ -205,8 +205,10 @@ var nfForm = Backbone.Model.extend( {
 		if ( 'new' == this.get( 'status' ) ) {
 			if ( jQuery( '._submit-li' ).length > 0 ) {
 				jQuery( '#nf-insert-submit-div' ).hide();
+				this.set( 'show_insert_submit', false );
 			} else {
 				jQuery( '#nf-insert-submit-div' ).show();
+				this.set( 'show_insert_submit', true );
 			}
 			// Open our save form modal.
 			jQuery( '#nf-save-title' ).nfAdminModal( 'open' );
@@ -250,12 +252,13 @@ var nfForm = Backbone.Model.extend( {
 	},
 	saveTitle: function() {
 		var title = jQuery( '#modal-contents-wrapper' ).find( '#nf-form-title' ).val();
+		var show_insert_submit = this.get( 'show_insert_submit' );
 		var insert_submit = jQuery( '#modal-contents-wrapper' ).find( '#nf-insert-submit' ).prop( 'checked' );
 		this.set( 'title', title );
 		this.set( 'status', '' );
 
 		// Insert our submit button if we checked the box.
-		if ( insert_submit ) {
+		if ( show_insert_submit && insert_submit ) {
 			var that = this;
 			// Add our custom addField behaviour
 			jQuery( document ).on( 'addField.insertSubmit', function( e, response ) {
@@ -267,7 +270,7 @@ var nfForm = Backbone.Model.extend( {
 			jQuery( '#_submit' ).click();
 		} else {
 			jQuery( '#nf-save-title' ).nfAdminModal( 'close' );
-			this.save();			
+			this.save();	
 		}
 	}
 } );
