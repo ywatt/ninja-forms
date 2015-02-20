@@ -71,6 +71,9 @@ var nfField = Backbone.Model.extend( {
 			}
 
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).slideDown( 'fast' );
+
+			// Re-run makeSortable for new HTML
+			nfFields.makeSortable();
 		} );
 	},
 	updateData: function() {
@@ -157,13 +160,7 @@ var nfFields = Backbone.Collection.extend({
 	addFieldDefault: function( response ) {
 		jQuery( '#ninja_forms_field_list' ).append( response.new_html ).show( 'slow' );
 		if ( response.new_type == 'List' ) {
-			//Make List Options sortable
-			jQuery(".ninja-forms-field-list-options").sortable({
-				helper: 'clone',
-				handle: '.ninja-forms-drag',
-				items: 'div',
-				placeholder: "ui-state-highlight",
-			});
+			this.makeSortable();
 		}
 		if ( typeof nf_ajax_rte_editors !== 'undefined' ) {
 			for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
@@ -175,6 +172,16 @@ var nfFields = Backbone.Collection.extend({
 
 		// Add our field to our backbone data model.
 		this.add( { id: response.new_id, metabox_state: 1 } );
+	},
+	makeSortable: function ( response ) {
+		console.log("Make Sortable");
+		//Make List Options sortable
+		jQuery(".ninja-forms-field-list-options").sortable({
+			helper: 'clone',
+			handle: '.ninja-forms-drag',
+			items: 'div',
+			placeholder: "ui-state-highlight",
+		});
 	}
 });
 
