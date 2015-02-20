@@ -76,4 +76,16 @@ class NF_Forms {
 			Ninja_Forms()->form( $form_id )->delete();
 		}
 	}
+
+	/**
+	 * Update cached forms
+	 * 
+	 * @access public
+	 * @since 2.9
+	 * @return void
+	 */
+	public function update_cache( $debug = false, $show_new = false ) {
+		$this->forms = array();
+		$this->get_all( $debug, $show_new );
+	}
 }

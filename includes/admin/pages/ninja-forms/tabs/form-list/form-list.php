@@ -231,7 +231,7 @@ function ninja_forms_save_form_list( $data ){
 			foreach( $data['form_ids'] as $form_id ){
 				switch( $data['bulk_action'] ){
 					case 'delete':
-						ninja_forms_delete_form( $form_id );
+						Ninja_Forms()->form( $form_id )->delete();
 						$ninja_forms_admin_update_message = count( $data['form_ids'] ).' ';
 						if( count( $data['form_ids'] ) > 1 ){
 							$update_message = __( 'Forms Deleted', 'ninja-forms' );
@@ -245,6 +245,8 @@ function ninja_forms_save_form_list( $data ){
 				}
 			}
 		}
+		$debug = ! empty ( $_REQUEST['debug'] ) ? true : false;
+		Ninja_Forms()->forms()->update_cache( $debug );
 		return $update_message;
 	}
 }
