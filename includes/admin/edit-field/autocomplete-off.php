@@ -7,6 +7,7 @@ function nf_register_edit_autocomplete_off(){
 function nf_field_autocomplete_off( $field_id, $field_data ) {
 	global $ninja_forms_fields;
 
+	$field_row = ninja_forms_get_field_by_id( $field_id );
 	$field_type = $field_row['type'];
 	$reg_field = $ninja_forms_fields[$field_type];
 	$edit_autocomplete_off = $reg_field['edit_autocomplete_off'];
