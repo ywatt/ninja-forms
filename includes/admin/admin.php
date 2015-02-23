@@ -116,8 +116,12 @@ function ninja_forms_admin(){
 							$preview_link = ninja_forms_preview_link( $form_id, false );
 							$subs_link = admin_url( 'edit.php?post_status=all&post_type=nf_sub&action=-1&m=0&form_id=' . $form_id . '&begin_date&end_date&paged=1&mode=list&action2=-1' );
 							?>
-							<a href="<?php echo $subs_link; ?>" target="_blank" class="nf-subs"><span style="float:right;" class="dashicons dashicons-index-card"></span></a>
-							<a href="<?php echo $preview_link; ?>" target="_blank" class="nf-preview"><span style="float: right;" class="dashicons dashicons-desktop"></span></a>
+							<a href="<?php echo $preview_link; ?>" target="_blank" class="nf-preview"><span style="float:right;" class="dashicons dashicons-welcome-view-site"></span></a>
+							<a href="<?php echo $subs_link; ?>" target="_blank" class="nf-subs">
+								<span style="float:right;">
+									<svg class="nf-subs-svg" viewBox="0 0 857.143 900" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M570.834 535.744h176.328q-.558 -1.674 -1.395 -4.464t-1.395 -4.464l-118.296 -276.768h-395.064l-118.296 276.768q-.558 1.116 -1.395 4.464t-1.395 4.464h176.328l53.01 107.136h178.56zm286.254 16.74v268.956q0 14.508 -10.602 25.11t-25.11 10.602h-785.664q-14.508 0 -25.11 -10.602t-10.602 -25.11v-268.956q0 -34.596 13.95 -68.634l132.804 -308.016q5.58 -13.95 20.367 -23.436t29.295 -9.486h464.256q14.508 0 29.295 9.486t20.367 23.436l132.804 308.016q13.95 34.038 13.95 68.634z"/></svg>
+								</span>
+							</a>
 						<?php } ?>
 					</h2>
 					<?php
