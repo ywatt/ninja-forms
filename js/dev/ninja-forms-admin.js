@@ -497,7 +497,7 @@ jQuery(document).ready(function($) {
 	});
 
 	//Remove List Option
-	$(document).on( 'click', '.ninja-forms-field-remove-list-option', function(event){
+	$(document).on( 'click', '.nf-remove-list-option', function(event){
 		event.preventDefault();
 		var field_id = this.id.replace("ninja_forms_field_", "");
 		field_id = field_id.replace("_list_remove_option", "");

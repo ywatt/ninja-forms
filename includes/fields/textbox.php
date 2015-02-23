@@ -95,6 +95,7 @@ function ninja_forms_register_field_textbox(){
 		'edit_desc' => true,
 		'edit_meta' => false,
 		'edit_conditional' => true,
+		'edit_autocomplete_off' => true,
 		'conditional' => array(
 			'value' => array(
 				'type' => 'text',
@@ -259,6 +260,14 @@ function ninja_forms_field_text_display( $field_id, $data, $form_id = '' ){
 		$input_limit_msg = '';
 	}
 
+	$autocomplete_off = isset ( $data['autocomplete_off'] ) ? $data['autocomplete_off'] : 0;
+
+	if ( 1 == $autocomplete_off ) {
+		$autocomplete_off = 'autocomplete="off"';
+	} else {
+		$autocomplete_off = '';
+	}
+
 	switch( $mask ){
 		case '':
 			$mask_class = '';
@@ -287,7 +296,7 @@ function ninja_forms_field_text_display( $field_id, $data, $form_id = '' ){
 	}
 
 	?>
-	<input id="ninja_forms_field_<?php echo $field_id;?>" data-mask="<?php echo $mask;?>" data-input-limit="<?php echo $input_limit;?>" data-input-limit-type="<?php echo $input_limit_type;?>" data-input-limit-msg="<?php echo $input_limit_msg;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="text" placeholder="<?php echo $placeholder;?>" class="<?php echo $field_class;?> <?php echo $mask_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" <?php echo $disabled; ?> />
+	<input id="ninja_forms_field_<?php echo $field_id;?>" data-mask="<?php echo $mask;?>" data-input-limit="<?php echo $input_limit;?>" data-input-limit-type="<?php echo $input_limit_type;?>" data-input-limit-msg="<?php echo $input_limit_msg;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="text" placeholder="<?php echo $placeholder;?>" class="<?php echo $field_class;?> <?php echo $mask_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" <?php echo $disabled; ?> <?php echo $autocomplete_off; ?> />
 	<?php
 
 }

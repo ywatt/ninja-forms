@@ -5,19 +5,6 @@ function ninja_forms_register_field_list(){
 		'edit_function' => 'ninja_forms_field_list_edit',
 		'edit_options'  => array(
 			array(
-				'type'    => 'select',
-				'name'    => 'list_type',
-				'label'   => __( 'List Type', 'ninja-forms' ),
-				'width'   => 'wide',
-				'class'   => 'widefat',
-				'options' => array(
-					array('name' => __( 'Dropdown', 'ninja-forms' ), 'value' => 'dropdown'),
-					array('name' => __( 'Radio', 'ninja-forms' ), 'value' => 'radio'),
-					array('name' => __( 'Checkboxes', 'ninja-forms' ), 'value' => 'checkbox'),
-					array('name' => __( 'Multi-Select', 'ninja-forms' ), 'value' => 'multi'),
-				),
-			),
-			array(
 				'type'  => 'checkbox',
 				'name'  => 'user_state',
 				'label' => __( 'This is the user\'s state', 'ninja-forms' ),
@@ -127,37 +114,41 @@ function ninja_forms_field_list_add_value( $field_id, $x, $conditional, $name, $
 
 function ninja_forms_field_list_edit( $field_id, $data ) {
 	global $wpdb;
-	if(isset($data['list_type'])){
-		$list_type = $data['list_type'];
-	}else{
-		$list_type = '';
-	}
 
-	if(isset($data['list_show_value'])){
-		$hidden = $data['list_show_value'];
-	}else{
-		$hidden = 0;
-	}
+	$list_type = isset( $data['list_type'] ) ? $data['list_type'] : '';
+	$hidden = isset( $data['list_show_value'] ) ? $data['list_show_value'] : 0;
+	$multi_size = isset( $data['multi_size'] ) ? $data['multi_size'] : 5;
+	$default_options = array(
+		array( 'label' => 'Option 1', 'value' => '', 'calc' => '', 'selected' => 0 ),
+		array( 'label' => 'Option 2', 'value' => '', 'calc' => '', 'selected' => 0 ),
+		array( 'label' => 'Option 3', 'value' => '', 'calc' => '', 'selected' => 0 ),
+	);
 
-	if(isset($data['multi_size'])){
-		$multi_size = $data['multi_size'];
-	}else{
-		$multi_size = 5;
-	}
+	$list_options = isset ( $data['list']['options'] ) ? $data['list']['options'] : $default_options;
 
+	$list_type_options = array(
+		array('name' => __( 'Dropdown', 'ninja-forms' ), 'value' => 'dropdown'),
+		array('name' => __( 'Radio', 'ninja-forms' ), 'value' => 'radio'),
+		array('name' => __( 'Checkboxes', 'ninja-forms' ), 'value' => 'checkbox'),
+		array('name' => __( 'Multi-Select', 'ninja-forms' ), 'value' => 'multi'),
+	);
+	
+	ninja_forms_edit_field_el_output( $field_id, 'select', __( 'List Type', 'ninja-forms' ), 'list_type', $list_type, 'wide', $list_type_options, 'widefat' );
+	
 	?>
-
+	
 	<p id="ninja_forms_field_<?php echo $field_id;?>_multi_size_p" class="description description-wide" style="<?php if($list_type != 'multi'){ echo 'display:none;';}?>">
 		<?php _e( 'Multi-Select Box Size', 'ninja-forms' );?>: <input type="text" id="" name="ninja_forms_field_<?php echo $field_id;?>[multi_size]" value="<?php echo $multi_size;?>">
 	</p>
-	<p class="description description-wide">
-		<a href="#" id="ninja_forms_field_<?php echo $field_id;?>_collapse_options" name="" class="button-secondary ninja-forms-field-collapse-options"><?php _e( 'Add / View List Items', 'ninja-forms' );?></a>
-	</p>
-	<span id="ninja_forms_field_<?php echo $field_id;?>_list_span" class="ninja-forms-list-span" style="display: none;">
-		<p class="description description-wide">
-			<?php _e( 'List Items', 'ninja-forms' );?>: <a href="#" id="ninja_forms_field_<?php echo $field_id;?>_list_add_option" class="ninja-forms-field-add-list-option button-secondary"><?php _e( 'Add New', 'ninja-forms' );?></a>
+	<span id="ninja_forms_field_<?php echo $field_id;?>_list_span" class="ninja-forms-list-span">
+		<div class="description description-wide">
+			<hr />
+			<h5><?php _e( 'Options', 'ninja-forms' );?></h5>
+		</div>
+		<!-- <p class="description description-wide"> -->
+			<a href="#" id="ninja_forms_field_<?php echo $field_id;?>_list_add_option" class="ninja-forms-field-add-list-option button-secondary"><?php _e( 'Add New', 'ninja-forms' );?></a>
 			<a href="#TB_inline?width=640&height=530&inlineId=ninja_forms_field_<?php echo $field_id;?>_import_options_div" class="thickbox button-secondary" title="<?php _e( 'Import List Items', 'ninja-forms' ); ?>" id=""><?php _e( 'Import List Items', 'ninja-forms' );?></a>
-		</p>
+		<!-- </p> -->
 
 		<p class="description description-wide">
 			<input type="hidden" id="" name="ninja_forms_field_<?php echo $field_id;?>[list_show_value]" value="0">
@@ -167,15 +158,18 @@ function ninja_forms_field_list_edit( $field_id, $data ) {
 		<div id="ninja_forms_field_<?php echo $field_id;?>_list_options" class="ninja-forms-field-list-options description description-wide">
 			<input type="hidden" name="ninja_forms_field_<?php echo $field_id;?>[list][options]" value="">
 			<?php
-			if( isset( $data['list']['options'] ) AND is_array( $data['list']['options'] ) AND $data['list']['options'] != '' ){
+			if( isset( $list_options ) AND is_array( $list_options ) AND $list_options != '' ){
 				$x = 0;
-				foreach($data['list']['options'] as $option){
-					ninja_forms_field_list_option_output($field_id, $x, $option, $hidden);
+				foreach( $list_options as $option ) {
+					ninja_forms_field_list_option_output( $field_id, $x, $option, $hidden );
 					$x++;
 				}
 			}
 			?>
 
+		</div>
+		<div class="description description-wide">
+			<hr />
 		</div>
 	</span>
 	<?php add_thickbox(); ?>
@@ -588,7 +582,7 @@ function ninja_forms_field_list_option_output($field_id, $x, $option = '', $hidd
 		<table class="list-options">
 			<tr>
 				<td class="ninja-forms-delete-list-option-td">
-					<a href="#" id="ninja_forms_field_<?php echo $field_id;?>_list_remove_option" class="ninja-forms-field-remove-list-option">X</a>
+					<a href="#" id="ninja_forms_field_<?php echo $field_id;?>_list_remove_option" class="nf-remove-list-option"><span class="dashicons dashicons-dismiss"></span></a>
 				</td>
 				<td class="ninja-forms-list-option-label-td">
 					<?php _e( 'Label', 'ninja-forms' );?>: <input type="text" name="ninja_forms_field_<?php echo $field_id;?>[list][options][<?php echo $x;?>][label]" id="ninja_forms_field_<?php echo $field_id;?>_list_option_label" class="ninja-forms-field-list-option-label" value="<?php echo $label;?>">
@@ -603,7 +597,7 @@ function ninja_forms_field_list_option_output($field_id, $x, $option = '', $hidd
 					<label for="ninja_forms_field_<?php echo $field_id;?>_options_<?php echo $x;?>_selected"><?php _e( 'Selected', 'ninja-forms' );?> <input type="hidden" value="0" name="ninja_forms_field_<?php echo $field_id;?>[list][options][<?php echo $x;?>][selected]"><input type="checkbox" value="1" name="ninja_forms_field_<?php echo $field_id;?>[list][options][<?php echo $x;?>][selected]" id="ninja_forms_field_<?php echo $field_id;?>_options_<?php echo $x;?>_selected" <?php echo $selected;?>></label>
 				</td>
 				<td class="ninja-forms-list-option-drag-td">
-					<span class="ninja-forms-drag">Drag</span>
+					<span class="ninja-forms-drag"><span class="dashicons dashicons-menu"></span></span>
 				</td>
 			</tr>
 		</table>

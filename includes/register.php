@@ -14,6 +14,7 @@ function ninja_forms_register_field($slug, $args = array()){
  		'display_function' => '',
  		'display_label' => true,
  		'display_wrap' => true,
+ 		'edit_autocomplete_off' => false,
  		'edit_conditional' => true,
  		'edit_custom_class' => true,
  		'edit_function' => '',

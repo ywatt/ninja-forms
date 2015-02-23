@@ -1260,3 +1260,12 @@ p.debug-report {
 	width: 40px;
 	height: 30px;
 }
+
+.nf-remove-list-option {
+	color: #444;
+	text-decoration:none;
+}
+
+.nf-remove-list-option:hover {
+	color:gray;
+}
