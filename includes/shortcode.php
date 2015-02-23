@@ -161,7 +161,11 @@ function nf_parse_fields_shortcode( $content ) {
 				if ( isset ( $matches[3][ $key ] ) ) {
 					$atts = shortcode_parse_atts( $matches[3][ $key ] );
 					$id = $atts['id'];
-					$content = str_replace( $matches[0][ $key ], $ninja_forms_processing->get_field_value( $id ), $content );
+					$value = $ninja_forms_processing->get_field_value( $id );
+					if( is_array( $value ) ){
+						$value = implode( ',', $value );
+					}
+					$content = str_replace( $matches[0][ $key ], $value, $content );
 				}
 			} else if ( 'ninja_forms_all_fields' == $shortcode ) {
 				if ( isset ( $matches[3][ $key ] ) ) {
