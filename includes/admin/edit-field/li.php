@@ -105,7 +105,7 @@ function ninja_forms_edit_field_output_li( $field_id, $new = false ) {
 					<dt class="menu-item-handle" id="ninja_forms_metabox_field_<?php echo $field_id;?>" >
 						<span class="item-title ninja-forms-field-title" id="ninja_forms_field_<?php echo $field_id;?>_title"><?php echo $li_label;?></span>
 						<span class="item-controls">
-							<span class="item-type"><span class="spinner"></span><?php echo $type_name;?></span>
+							<span class="item-type"><span class="spinner" style="margin-top:-2px;float:left;"></span><?php echo $type_name;?></span>
 							<a class="item-edit metabox-item-edit" id="ninja_forms_field_<?php echo $field_id;?>_toggle" title="<?php _e( 'Edit Menu Item', 'ninja-forms' ); ?>" href="#" data-field="<?php echo $field_id; ?>"><?php _e( 'Edit Menu Item' , 'ninja-forms' ); ?></a>
 						</span>
 					</dt>
