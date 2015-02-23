@@ -123,7 +123,7 @@ function nf_all_fields_shortcode( $atts, $content = '' ) {
 
 		if ( 1 == $html ) {
 			$field_list .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>' . $value . '</td></tr>';
-		} else {}
+		} else {
 			$field_list .= $label . ' - ' . $value . "\r\n";
 		}
 	}
