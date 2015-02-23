@@ -6,7 +6,6 @@ function ninja_forms_register_tab_form_settings(){
 	$args = array(
 		'name' => __( 'Settings', 'ninja-forms' ),
 		'page' => 'ninja-forms',
-		// 'display_function' => 'ninja_forms_display_form_settings',
 		'save_function' => 'ninja_forms_save_form_settings',
 		'tab_reload' => false,
 		// 'title' => '<h2>Forms <a href="'.$all_forms_link.'" class="add-new-h2">'.__('View All Forms', 'ninja-forms').'</a></h2>',
@@ -15,30 +14,6 @@ function ninja_forms_register_tab_form_settings(){
 }
 
 add_action( 'admin_init', 'ninja_forms_register_tab_form_settings', 11 );
-
-function ninja_forms_display_form_settings($form_id, $data){
-	if(isset($data['form_title'])){
-		$form_title = $data['form_title'];
-		$prompt_text = 'screen-reader-text';
-	}else{
-		$form_title = '';
-		$prompt_text = '';
-	}
-
-	if(isset($data['show_title'])){
-		$show_title = $data['show_title'];
-	}else{
-		$show_title = '';
-	}
-?>
-	<div id="titlediv">
-		<div id="titlewrap">
-			<label class="<?php echo $prompt_text;?>" id="title-prompt-text" for="title"><?php _e( 'Enter form title here', 'ninja-forms' ); ?></label>
-			<input type="text" name="form_title" size="30" value="<?php echo esc_attr($form_title); ?>" id="title" autocomplete="off">
-		</div>
-	</div>
-<?php
-}
 
 function ninja_forms_register_form_settings_basic_metabox(){
 
@@ -176,6 +151,9 @@ function ninja_forms_save_form_settings( $form_id, $data ){
 	global $wpdb, $ninja_forms_admin_update_message;
 
 	foreach ( $data as $key => $val ){
+		if ( 'form_title' == $key ) {
+			$val = esc_html( $val );
+		}
 		Ninja_Forms()->form( $form_id )->update_setting( $key, $val );
 	}
 
