@@ -92,7 +92,7 @@ class Ninja_Forms {
 
 			// The forms variable won't be interacted with directly.
 			// Instead, the forms() methods will act as wrappers for it.
-			self::$instance->forms = new NF_Forms();			
+			self::$instance->forms = new NF_Forms();
 
 			register_activation_hook( __FILE__, 'ninja_forms_activation' );
 			add_action( 'plugins_loaded', array( self::$instance, 'load_lang' ) );
@@ -107,7 +107,7 @@ class Ninja_Forms {
 	/**
 	 * Run all of our plugin stuff on init.
 	 * This allows filters and actions to be used by third-party classes.
-	 * 
+	 *
 	 * @since 2.7
 	 * @return void
 	 */
@@ -139,7 +139,7 @@ class Ninja_Forms {
 
 	/**
 	 * Run all of our plugin stuff on admin init.
-	 * 
+	 *
 	 * @since 2.7.4
 	 * @return void
 	 */
@@ -182,7 +182,7 @@ class Ninja_Forms {
 	 * Function that acts as a wrapper for our individual notification objects.
 	 * It checks to see if an object exists for this notification id.
 	 * If it does, it returns that object. Otherwise, it creates a new one and returns it.
-	 * 
+	 *
 	 * @access public
 	 * @param int $n_id
 	 * @since 2.8
@@ -206,7 +206,7 @@ class Ninja_Forms {
 	 * Function that acts as a wrapper for our individual sub objects.
 	 * It checks to see if an object exists for this sub id.
 	 * If it does, it returns that object. Otherwise, it creates a new one and returns it.
-	 * 
+	 *
 	 * @access public
 	 * @param int $sub_id
 	 * @since 2.7
@@ -216,7 +216,7 @@ class Ninja_Forms {
 		// Bail if we don't get a sub id.
 		if ( $sub_id == '' )
 			return false;
-		
+
 		$sub_var = 'sub_' . $sub_id;
 		// Check to see if an object for this sub already exists.
 		// Create one if it doesn't exist.
@@ -229,7 +229,7 @@ class Ninja_Forms {
 	/**
 	 * Function that acts as a wrapper for our subs_var - NF_Subs() class.
 	 * It doesn't set a sub_id and can be used to interact with methods that affect mulitple submissions
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return object self::$instance->subs_var
@@ -242,7 +242,7 @@ class Ninja_Forms {
 	 * Function that acts as a wrapper for our form_var - NF_Form() class.
 	 * It sets the form_id and then returns the instance, which is now using the
 	 * proper form id
-	 * 
+	 *
 	 * @access public
 	 * @param int $form_id
 	 * @since 2.7
@@ -262,7 +262,7 @@ class Ninja_Forms {
 
 	/**
 	 * Function that acts as a wrapper for our forms_var - NF_Form() class.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.9
 	 * @return object self::$instance->forms_var
@@ -318,7 +318,7 @@ class Ninja_Forms {
 		// Ninja Forms plugin directory
 		if ( ! defined( 'NINJA_FORMS_DIR' ) )
 			define( 'NINJA_FORMS_DIR', NF_PLUGIN_DIR );
-		
+
 		// Ninja Forms plugin url
 		if ( ! defined( 'NINJA_FORMS_URL' ) )
 			define( 'NINJA_FORMS_URL', NF_PLUGIN_URL );
@@ -399,7 +399,7 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'includes/deprecated.php' );
 
 		/* Legacy includes */
-		
+
 		/* Require Core Files */
 		require_once( NINJA_FORMS_DIR . "/includes/ninja-settings.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/database.php" );
@@ -596,7 +596,7 @@ class Ninja_Forms {
 
 	/**
 	 * Load our language files
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -625,7 +625,7 @@ class Ninja_Forms {
 
 	/**
 	 * Update our version number if necessary
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
@@ -641,11 +641,11 @@ class Ninja_Forms {
 
 	/**
 	 * Set $_SESSION variable used for storing items in transient variables
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
-	 */	 
+	 */
 	public function set_transient_id(){
 		if( !session_id() )
 	        session_start();
@@ -661,7 +661,7 @@ class Ninja_Forms {
 
 	/**
 	 * Get our plugin settings.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.9
 	 * @return array $settings
@@ -671,7 +671,7 @@ class Ninja_Forms {
 
 	  $settings['date_format'] = isset ( $settings['date_format'] ) ? $settings['date_format'] : 'd/m/Y';
 	  $settings['currency_symbol'] = isset ( $settings['currency_symbol'] ) ? $settings['currency_symbol'] : '$';
-	  $settings['req_div_label'] = isset ( $settings['req_div_label'] ) ? $settings['req_div_label'] : __( 'Fields marked with an * are required', 'ninja-forms' );
+	  $settings['req_div_label'] = isset ( $settings['req_div_label'] ) ? $settings['req_div_label'] : sprintf( __( 'Fields marked with an %s*%s are required', 'ninja-forms' ), '<span class="ninja-forms-req-symbol">','</span>' );
 	  $settings['req_field_symbol'] = isset ( $settings['req_field_symbol'] ) ? $settings['req_field_symbol'] : '<strong>*</strong>';
 	  $settings['req_error_label'] = isset ( $settings['req_error_label'] ) ? $settings['req_error_label'] : __( 'Please ensure all required fields are completed.', 'ninja-forms' );
 	  $settings['req_field_error'] = isset ( $settings['req_field_error'] ) ? $settings['req_field_error'] : __( 'This is a required field', 'ninja-forms' );
