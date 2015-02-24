@@ -105,7 +105,7 @@ function ninja_forms_edit_field_output_li( $field_id, $new = false ) {
 					<dt class="menu-item-handle" id="ninja_forms_metabox_field_<?php echo $field_id;?>" >
 						<span class="item-title ninja-forms-field-title" id="ninja_forms_field_<?php echo $field_id;?>_title"><?php echo $li_label;?></span>
 						<span class="item-controls">
-							<span class="item-type"><span class="spinner" style="margin-top:-2px;float:left;"></span><?php echo $type_name;?></span>
+							<span class="item-type"><span class="spinner" style="margin-top:-2px;float:left;"></span><span class="item-type-name"><?php echo $type_name;?></span></span>
 							<a class="item-edit metabox-item-edit" id="ninja_forms_field_<?php echo $field_id;?>_toggle" title="<?php _e( 'Edit Menu Item', 'ninja-forms' ); ?>" href="#" data-field="<?php echo $field_id; ?>"><?php _e( 'Edit Menu Item' , 'ninja-forms' ); ?></a>
 						</span>
 					</dt>
@@ -315,9 +315,11 @@ function nf_output_registered_field_settings( $field_id, $data = array() ) {
 		if ( !empty( $fav_row['name'] ) ) {
 			$fav_class = 'ninja-forms-field-remove-fav';
 			$type_name = $fav_row['name'];
+			$icon_class = 'filled';
 		}
 	} else {
 		$fav_class = 'ninja-forms-field-add-fav';
+		$icon_class = 'empty';
 	}
 
 	if ( $reg_field['show_field_id'] || $reg_field['show_fav'] ) {
@@ -335,7 +337,7 @@ function nf_output_registered_field_settings( $field_id, $data = array() ) {
 				<?php
 				if ( $reg_field['show_fav'] ) {
 					?>
-					<td width="5%"><a href="#" class="<?php echo $fav_class;?>" id="ninja_forms_field_<?php echo $field_id;?>_fav">Star</a></td>
+					<td width="5%"><a href="#" class="<?php echo $fav_class;?>" id="ninja_forms_field_<?php echo $field_id;?>_fav"><span class="dashicons dashicons-star-<?php echo $icon_class; ?>"></span></a></td>
 					<?php
 				}
 				?>

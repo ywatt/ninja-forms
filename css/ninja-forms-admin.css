@@ -36,26 +36,33 @@ div.field-wrap.list-wrap {
 	display: block;
 	text-align: center;
 }
+
 a.ninja-forms-field-add-fav {
 	display: block;
-	width:16px;
-	height:16px;
-	background:url(../images/empty_star_hover.png) 0 -16px no-repeat;
-	text-indent: -99999px;
+	text-decoration: none;
+	color: #444;
 }
-a.ninja-forms-field-add-fav:hover{
-	background:url(../images/empty_star_hover.png) 0 -32px no-repeat;
+
+a.ninja-forms-field-add-fav:hover span:before {
+	content: "\f155";
+}
+
+a.ninja-forms-field-add-fav span:before {
+	content: "\f154";
 }
 
 a.ninja-forms-field-remove-fav {
 	display: block;
-	width:16px;
-	height:16px;
-	background:url(../images/empty_star_hover.png) 0 -32px no-repeat;
-	text-indent: -99999px;
+	text-decoration: none;
+	color: #444;
 }
-a.ninja-forms-field-remove-fav:hover{
-	background:url(../images/empty_star_hover.png) 0 0 no-repeat;
+
+a.ninja-forms-field-remove-fav:hover span:before {
+	content: "\f154";
+}
+
+a.ninja-forms-field-remove-fav span:before {
+	content: "\f155";
 }
 
 #editor-toolbar #edButtonHTML, #ed_toolbar, #edButtonPreview {
@@ -1292,3 +1299,14 @@ p.debug-report {
 .item-edit.open:before {
 	content: '\f142' ! important;
 }
+
+/*.nf-field-settings .inside {
+	background: #f1f1f1;
+	padding: 5px;
+}
+
+.nf-field-settings .inside:after {
+	clear: both;
+	content: '';
+	display: block;
+}*/

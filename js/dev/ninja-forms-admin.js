@@ -795,7 +795,7 @@ jQuery(document).ready(function($) {
 				$("#ninja_forms_field_" + field_id + "_fav").removeClass("ninja-forms-field-add-fav");
 				$("#ninja_forms_field_" + field_id + "_fav").addClass("ninja-forms-field-remove-fav");
 				$("#ninja_forms_sidebar_fav_fields").append(response.link_html);
-				$("#ninja_forms_field_" + field_id + "_title").nextElementInDom('.item-type:first').prop("innerHTML", response.fav_name);
+				$("#ninja_forms_field_" + field_id + "_title").nextElementInDom('.item-type-name:first').prop("innerHTML", response.fav_name);
 				$("#ninja_forms_field_" + field_id + "_fav_id").val(response.fav_id);
 
 			});
@@ -820,7 +820,7 @@ jQuery(document).ready(function($) {
 					remove_id = remove_id.replace("_fav_id", "");
 					$("#ninja_forms_field_" + remove_id + "_fav").removeClass("ninja-forms-field-remove-fav");
 					$("#ninja_forms_field_" + remove_id + "_fav").addClass("ninja-forms-field-add-fav");
-					$("#ninja_forms_field_" + remove_id + "_title").nextElementInDom('.item-type:first').prop("innerHTML", response.type_name);
+					$("#ninja_forms_field_" + remove_id + "_title").nextElementInDom('.item-type-name:first').prop("innerHTML", response.type_name);
 				}
 			});
 		});
