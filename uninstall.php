@@ -17,7 +17,7 @@ include_once( 'ninja-forms.php' );
 
 global $wpdb;
 
-$settings = nf_get_settings();
+$settings = Ninja_Forms()->get_plugin_settings();
 
 // Bail if we haven't checked the "delete on uninstall" box.
 if( ! isset ( $settings['delete_on_uninstall'] ) || 1 != $settings['delete_on_uninstall'] ) exit;
