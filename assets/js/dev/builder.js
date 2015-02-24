@@ -185,7 +185,7 @@ var nfFields = Backbone.Collection.extend({
 		// Add our field to our backbone data model.
 		this.add( { id: response.new_id, metabox_state: 1 } );
 
-		nfField.get( response.new_id ).removeEmptySettings();
+		nfFields.get( response.new_id ).removeEmptySettings();
 	},
 	listOptionsSortable: function ( response ) {
 		//Make List Options sortable
@@ -228,12 +228,16 @@ var nfForm = Backbone.Model.extend( {
 		this.changeMenu();
 	},
 	changeMenu: function() {
-		jQuery( '.wp-submenu li' ).removeClass( 'current' );
+		
 		if ( 'new' == this.get( 'status' ) ) { // If we're working with a new form, highlight the "Add New" menu item.
+			jQuery( '.wp-submenu li' ).removeClass( 'current' );
 			jQuery( 'a[href="admin.php?page=ninja-forms&tab=builder&form_id=new"]' ).parent().addClass( 'current' );
 		} else {
 			var html = '<li class="current"><a href="#">' + nf_admin.edit_form_text + '</a></li>';
-			jQuery( 'a[href="admin.php?page=ninja-forms&tab=builder&form_id=new"]' ).parent().after( html );
+			if ( jQuery( 'li a:contains("' + nf_admin.edit_form_text + '")' ).length == 0 ) {
+				jQuery( '.wp-submenu li' ).removeClass( 'current' );
+				jQuery( 'a[href="admin.php?page=ninja-forms&tab=builder&form_id=new"]' ).parent().after( html );
+			}
 		}
 	},
 	save: function() {
@@ -408,6 +412,10 @@ jQuery( document ).ready( function( $ ) {
 			$( '#modal-contents-wrapper' ).find( '#nf-save-title-submit' ).removeClass( 'button-primary' );
 			$( '#modal-contents-wrapper' ).find( '#nf-save-title-submit' ).addClass( 'button-secondary' );
 		}
+
+		if( e.keyCode == 13 && this.value.length > 0 ){
+			nfForm.saveTitle();
+		}		
 	} );
 
 	// Make the field list sortable
