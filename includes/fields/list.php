@@ -575,7 +575,7 @@ function ninja_forms_field_list_option_output($field_id, $x, $option = '', $hidd
 	}
 
 	?>
-	<div id="ninja_forms_field_<?php echo $field_id;?>_list_option_<?php echo $x;?>" class="ninja-forms-field-<?php echo $field_id;?>-list-option ninja-forms-field-list-option" <?php echo $hide;?>>
+	<div id="ninja_forms_field_<?php echo $field_id;?>_list_option_<?php echo $x;?>" class="ninja-forms-field-<?php echo $field_id;?>-list-option ninja-forms-field-list-option" <?php echo $hide;?> data-field="<?php echo $field_id; ?>">
 		<table class="list-options">
 			<tr>
 				<td class="ninja-forms-delete-list-option-td">
@@ -591,7 +591,7 @@ function ninja_forms_field_list_option_output($field_id, $x, $option = '', $hidd
 					<?php _e( 'Calc', 'ninja-forms' );?>: <input type="text" name="ninja_forms_field_<?php echo $field_id;?>[list][options][<?php echo $x;?>][calc]" id="ninja_forms_field_<?php echo $field_id;?>_list_option_calc" class="ninja-forms-field-list-option-calc" value="<?php echo $calc;?>">
 				</td>
 				<td class="ninja-forms-list-option-selected-td">
-					<label for="ninja_forms_field_<?php echo $field_id;?>_options_<?php echo $x;?>_selected"><?php _e( 'Selected', 'ninja-forms' );?> <input type="hidden" value="0" name="ninja_forms_field_<?php echo $field_id;?>[list][options][<?php echo $x;?>][selected]"><input type="checkbox" value="1" name="ninja_forms_field_<?php echo $field_id;?>[list][options][<?php echo $x;?>][selected]" id="ninja_forms_field_<?php echo $field_id;?>_options_<?php echo $x;?>_selected" <?php echo $selected;?>></label>
+					<label for="ninja_forms_field_<?php echo $field_id;?>_options_<?php echo $x;?>_selected"><?php _e( 'Selected', 'ninja-forms' );?> <input type="hidden" value="0" name="ninja_forms_field_<?php echo $field_id;?>[list][options][<?php echo $x;?>][selected]"><input type="checkbox" value="1" name="ninja_forms_field_<?php echo $field_id;?>[list][options][<?php echo $x;?>][selected]" id="ninja_forms_field_<?php echo $field_id;?>_options_<?php echo $x;?>_selected" class="ninja-forms-field-list-option-selected" <?php echo $selected;?>></label>
 				</td>
 				<td class="ninja-forms-list-option-drag-td">
 					<span class="ninja-forms-drag"><span class="dashicons dashicons-menu"></span></span>

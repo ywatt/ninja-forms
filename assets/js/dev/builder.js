@@ -186,7 +186,26 @@ var nfFields = Backbone.Collection.extend({
 			helper: 'clone',
 			handle: '.ninja-forms-drag',
 			items: 'div',
-			placeholder: "ui-state-highlight",
+			placeholder: 'ui-state-highlight',
+			update: function( event, ui ) {
+				var order = jQuery( this ).sortable( 'toArray' );
+				var x = 0;
+				_.each( order, function( id ) {
+					var field_id = jQuery( '#' + id ).data( 'field' );
+
+					var label_name = 'ninja_forms_field_' + field_id + '[list][options][' + x + '][label]';
+					var value_name = 'ninja_forms_field_' + field_id + '[list][options][' + x + '][value]';
+					var calc_name = 'ninja_forms_field_' + field_id + '[list][options][' + x + '][calc]';
+					var selected_name = 'ninja_forms_field_' + field_id + '[list][options][' + x + '][selected]';
+					
+					jQuery( '#' + id ).find( '.ninja-forms-field-list-option-label' ).attr( 'name', label_name );
+					jQuery( '#' + id ).find( '.ninja-forms-field-list-option-value' ).attr( 'name', value_name );
+					jQuery( '#' + id ).find( '.ninja-forms-field-list-option-calc' ).attr( 'name', calc_name );
+					jQuery( '#' + id ).find( '.ninja-forms-field-list-option-selected' ).attr( 'name', selected_name );
+
+					x++;
+				} );
+			}
 		});
 	}
 });
