@@ -523,7 +523,7 @@ function nf_admin_footer_text( $footer_text ) {
 
 	// only display custom text on Ninja Admin Pages
 	if ( isset( $current_screen->id ) && strpos( $current_screen->id, 'ninja' ) !== false || ( ( $pagenow == 'edit.php' || $pagenow == 'post.php' ) && $typenow == 'nf_sub' ) ) {
-		$footer_text = sprintf( __( 'Please rate <strong>Ninja Forms</strong> <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%1$s" target="_blank">WordPress.org</a> to help us keep this plugin free.  Thank you from the WP Ninjas team!', 'ninja-forms' ), __( 'http://wordpress.org/support/view/plugin-reviews/ninja-forms?filter=5', 'ninja-forms' ) );
+		$footer_text = sprintf( __( 'Please rate %sNinja Forms%s %s on %sWordPress.org%s to help us keep this plugin free.  Thank you from the WP Ninjas team!', 'ninja-forms' ), '<strong>', '</strong>', '<a href="http://wordpress.org/support/view/plugin-reviews/ninja-forms?filter=5" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>', '<a href="http://wordpress.org/support/view/plugin-reviews/ninja-forms?filter=5" target="_blank">', '</a>' );
 	}
 
 	if ( 'builder' == $current_tab ) {
