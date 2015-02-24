@@ -34,8 +34,6 @@ function ninja_forms_edit_field_calc( $field_id, $field_data ) {
 
 		?>
 		<div class="description description-wide">
-		<hr>
-		<h5><?php _e( 'Calculation Settings', 'ninja-forms' );?></h5>
 		<?php
 		if ( $field_type == '_checkbox' ) {
 			if ( !isset ( $calc_value['unchecked'] ) ) {
@@ -50,8 +48,8 @@ function ninja_forms_edit_field_calc( $field_id, $field_data ) {
 		ninja_forms_edit_field_el_output($field_id, 'checkbox', __( 'Include in the auto-total? (If enabled)', 'ninja-forms' ), 'calc_auto_include', $calc_auto_include, 'wide', '', 'ninja-forms-field-auto-total-include');
 	}
 	?>
-		
+		</div>
 	<?php
 }
 
-add_action( 'ninja_forms_edit_field_after_registered', 'ninja_forms_edit_field_calc', 11, 2 );
+add_action( 'nf_edit_field_calculations', 'ninja_forms_edit_field_calc', 10, 2 );

@@ -17,4 +17,4 @@ function ninja_forms_edit_field_remove_button( $field_id ){
 	
 }
 
-add_action( 'ninja_forms_edit_field_after_registered', 'ninja_forms_edit_field_remove_button', 99999 );
+// add_action( 'ninja_forms_edit_field_after_registered', 'ninja_forms_edit_field_remove_button', 99999 );

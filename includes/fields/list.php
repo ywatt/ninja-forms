@@ -5,13 +5,17 @@ function ninja_forms_register_field_list(){
 		'edit_function' => 'ninja_forms_field_list_edit',
 		'edit_options'  => array(
 			array(
-				'type'  => 'checkbox',
-				'name'  => 'user_state',
-				'label' => __( 'This is the user\'s state', 'ninja-forms' ),
-			),
-			array(
 				'type' => 'hidden',
 				'name' => 'user_info_field_group',
+			),
+		),
+		'edit_settings' => array(
+			'advanced' => array(
+				array(
+					'type'  => 'checkbox',
+					'name'  => 'user_state',
+					'label' => __( 'This is the user\'s state', 'ninja-forms' ),
+				),
 			),
 		),
 		'display_function' => 'ninja_forms_field_list_display',
@@ -141,10 +145,6 @@ function ninja_forms_field_list_edit( $field_id, $data ) {
 		<?php _e( 'Multi-Select Box Size', 'ninja-forms' );?>: <input type="text" id="" name="ninja_forms_field_<?php echo $field_id;?>[multi_size]" value="<?php echo $multi_size;?>">
 	</p>
 	<span id="ninja_forms_field_<?php echo $field_id;?>_list_span" class="ninja-forms-list-span">
-		<div class="description description-wide">
-			<hr />
-			<h5><?php _e( 'Options', 'ninja-forms' );?></h5>
-		</div>
 		<!-- <p class="description description-wide"> -->
 			<a href="#" id="ninja_forms_field_<?php echo $field_id;?>_list_add_option" class="ninja-forms-field-add-list-option button-secondary"><?php _e( 'Add New', 'ninja-forms' );?></a>
 			<a href="#TB_inline?width=640&height=530&inlineId=ninja_forms_field_<?php echo $field_id;?>_import_options_div" class="thickbox button-secondary" title="<?php _e( 'Import List Items', 'ninja-forms' ); ?>" id=""><?php _e( 'Import List Items', 'ninja-forms' );?></a>
@@ -167,9 +167,6 @@ function ninja_forms_field_list_edit( $field_id, $data ) {
 			}
 			?>
 
-		</div>
-		<div class="description description-wide">
-			<hr />
 		</div>
 	</span>
 	<?php add_thickbox(); ?>

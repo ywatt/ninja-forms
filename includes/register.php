@@ -25,6 +25,7 @@ function ninja_forms_register_field($slug, $args = array()){
  		'edit_options' => '',
  		'edit_placeholder' => false,
  		'edit_req' => true,
+ 		'edit_settings' => '',
  		'edit_sub_post_process' => '',
  		'edit_sub_pre_process' => '',
  		'edit_sub_process' => '',

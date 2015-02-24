@@ -274,6 +274,7 @@ function nf_output_registered_field_settings( $field_id, $data = array() ) {
 	$type_name = $reg_field['name'];
 	$edit_function = $reg_field['edit_function'];
 	$edit_options = $reg_field['edit_options'];
+	$edit_settings = $reg_field['edit_settings'];
 
 	if ( $reg_field['nesting'] ) {
 		$nesting_class = 'ninja-forms-nest';
@@ -417,11 +418,99 @@ function nf_output_registered_field_settings( $field_id, $data = array() ) {
 		}
 	}
 
-	do_action( 'ninja_forms_edit_field_after_registered', $field_id, $field_data );
+	add_action( 'nf_edit_field_advanced', 'nf_test', 10, 2 );
 
+	$settings_sections = apply_filters( 'nf_edit_field_settings_sections', array(
+		'restrictions' 	=> __( 'Restriction Settings', 'ninja-forms' ),
+		'calculations'	=> __( 'Calculation Settings', 'ninja-forms' ),
+		'advanced'		=> __( 'Advanced Settings', 'ninja-forms' ),
+		) );
+
+	foreach ( $settings_sections as $key => $name ) {
+		?>
+		<div class="nf-field-settings description-wide description">
+			<div class="title">
+				<?php echo $name; ?><span class="dashicons dashicons-arrow-down nf-field-toggle"></span>
+			</div>
+			<div class="inside" style="display:none;">
+				<?php
+				if ( ! empty ( $edit_settings[ $key ] ) ) {
+					foreach ( $edit_settings[ $key ] as $opt ) {
+						$type = $opt['type'];
+
+						$label_class = '';
+
+						if ( isset( $opt['label'] ) ) {
+							$label = $opt['label'];
+						} else {
+							$label = '';
+						}
+
+						if ( isset( $opt['name'] ) ) {
+							$name = $opt['name'];
+						} else {
+							$name = '';
+						}
+
+						if ( isset( $opt['width'] ) ) {
+							$width = $opt['width'];
+						} else {
+							$width = '';
+						}
+
+						if ( isset( $opt['options'] ) ) {
+							$options = $opt['options'];
+						} else {
+							$options = '';
+						}
+
+						if ( isset( $opt['class'] ) ) {
+							$class = $opt['class'];
+						} else {
+							$class = '';
+						}
+
+						if ( isset( $opt['default'] ) ) {
+							$default = $opt['default'];
+						} else {
+							$default = '';
+						}
+
+						if ( isset( $opt['desc'] ) ) {
+							$desc = $opt['desc'];
+						} else {
+							$desc = '';
+						}
+
+						if ( isset( $field_data[$name] ) ) {
+							$value = $field_data[$name];
+						} else {
+							$value = $default;
+						}
+
+						ninja_forms_edit_field_el_output( $field_id, $type, $label, $name, $value, $width, $options, $class, $desc, $label_class );						
+					}
+				}
+
+				do_action( 'nf_edit_field_' . $key, $field_id, $field_data );
+				?>
+			</div>
+		</div>
+		<?php
+	}
+
+	?>
+	<div class="menu-item-actions description-wide submitbox">
+		<a class="submitdelete deletion nf-remove-field" id="ninja_forms_field_<?php echo $field_id;?>_remove" data-field="<?php echo $field_id; ?>" href="#"><?php _e('Remove', 'ninja-forms'); ?></a>
+	</div>
+	<?php
 
 	if ( ! empty ( $nf_rte_editors ) && isset ( $editors ) && is_object( $editors ) ) {
 		$editors->output_js( $field_id, $nf_rte_editors );
 	}
 
+}
+
+function nf_test( $field_id, $field_data ) {
+	do_action( 'ninja_forms_edit_field_after_registered', $field_id, $field_data );
 }

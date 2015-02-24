@@ -70,10 +70,17 @@ var nfField = Backbone.Model.extend( {
 				};
 			}
 
+			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).find( '.nf-field-settings .inside' ).each( function() {
+				var html = jQuery.trim( jQuery( this ).html() );
+				if ( html == '' ) {
+					jQuery( this ).parent().remove();
+				}
+			} );
+
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).slideDown( 'fast' );
 
 			// Re-run makeSortable for new HTML
-			nfFields.makeSortable();
+			nfFields.listOptionsSortable();
 		} );
 	},
 	updateData: function() {
@@ -160,7 +167,7 @@ var nfFields = Backbone.Collection.extend({
 	addFieldDefault: function( response ) {
 		jQuery( '#ninja_forms_field_list' ).append( response.new_html ).show( 'slow' );
 		if ( response.new_type == 'List' ) {
-			this.makeSortable();
+			this.listOptionsSortable();
 		}
 		if ( typeof nf_ajax_rte_editors !== 'undefined' ) {
 			for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
@@ -173,8 +180,7 @@ var nfFields = Backbone.Collection.extend({
 		// Add our field to our backbone data model.
 		this.add( { id: response.new_id, metabox_state: 1 } );
 	},
-	makeSortable: function ( response ) {
-		console.log("Make Sortable");
+	listOptionsSortable: function ( response ) {
 		//Make List Options sortable
 		jQuery(".ninja-forms-field-list-options").sortable({
 			helper: 'clone',
@@ -296,9 +302,18 @@ jQuery( document ).ready( function( $ ) {
 	// Open and close a field metabox.
 	$( document ).on( 'click', '.metabox-item-edit', function( e ) {
 		e.preventDefault();
+
 		// Get our field id.
 		var field_id = jQuery( e.target ).data( 'field' );
-		nfFields.get( field_id ).toggleMetabox();
+		nfFields.get( field_id ).toggleMetabox();		
+
+		// Get our current metabox state.
+		var current_metabox_state = nfFields.get( field_id ).get( 'metabox_state' );
+		if ( current_metabox_state == 1 ) {
+			$( this ).addClass( 'open' );
+		} else {
+			$( this ).removeClass( 'open' );
+		}
 	});
 
 	// Remove the saved message when the user clicks anywhere on the page.
@@ -398,6 +413,16 @@ jQuery( document ).ready( function( $ ) {
 			nfForm.set( 'saved', false );
 		}
 	});
+
+	$( document ).on( 'click', '.nf-field-toggle', function(e) {
+		e.preventDefault();
+		if ( $( this ).hasClass( 'dashicons-arrow-down' ) ) {
+			$( this ).removeClass( 'dashicons-arrow-down' ).addClass( 'dashicons-arrow-up' );
+		} else {
+			$( this ).removeClass( 'dashicons-arrow-up' ).addClass( 'dashicons-arrow-down' );
+		}
+		$( this ).parent().next( '.inside' ).slideToggle();
+	} );
 
 	
 	$( window ).bind( 'beforeunload', function() {

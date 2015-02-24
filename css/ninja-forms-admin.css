@@ -1269,3 +1269,23 @@ p.debug-report {
 .nf-remove-list-option:hover {
 	color:gray;
 }
+
+.nf-field-settings {
+	overflow: auto;
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+}
+
+.nf-field-settings .title {
+	background: #f1f1f1;
+	padding: 5px 10px;
+}
+
+.nf-field-settings .dashicons {
+	float: right;
+	cursor: pointer;
+}
+
+.item-edit.open:before {
+	content: '\f142' ! important;
+}

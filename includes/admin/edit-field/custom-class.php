@@ -17,6 +17,6 @@ function ninja_forms_edit_field_custom_class( $field_id, $field_data ) {
 			$class = '';
 		}
 
-		ninja_forms_edit_field_el_output($field_id, 'text', __( 'Custom CSS Classes', 'ninja-forms' ), 'class', $class, 'thin', '', 'widefat');
+		ninja_forms_edit_field_el_output($field_id, 'text', __( 'Custom CSS Classes', 'ninja-forms' ), 'class', $class, 'wide', '', 'widefat');
 	}
 }

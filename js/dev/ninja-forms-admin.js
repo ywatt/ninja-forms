@@ -721,18 +721,18 @@ jQuery(document).ready(function($) {
 		field_id = field_id.replace("_calc_display_type", "");
 		// Show the extra settings if the "none" option isn't selected.
 		if(this.value == 'html'){
-			$("#ninja_forms_field_" + field_id + "_clac_text_display").hide();
-			$("#ninja_forms_field_" + field_id + "_clac_html_display").show();
-			$("#ninja_forms_field_" + field_id + "_clac_extra_display").show();
+			$("#ninja_forms_field_" + field_id + "_calc_text_display").hide();
+			$("#ninja_forms_field_" + field_id + "_calc_html_display").show();
+			$("#ninja_forms_field_" + field_id + "_calc_extra_display").show();
 			$("#ninja_forms_field_" + field_id + "_label").val('');
 		}else if(this.value == 'text'){
-			$("#ninja_forms_field_" + field_id + "_clac_text_display").show();
-			$("#ninja_forms_field_" + field_id + "_clac_html_display").hide();
-			$("#ninja_forms_field_" + field_id + "_clac_extra_display").show();
+			$("#ninja_forms_field_" + field_id + "_calc_text_display").show();
+			$("#ninja_forms_field_" + field_id + "_calc_html_display").hide();
+			$("#ninja_forms_field_" + field_id + "_calc_extra_display").show();
 		}else{
-			$("#ninja_forms_field_" + field_id + "_clac_text_display").hide();
-			$("#ninja_forms_field_" + field_id + "_clac_html_display").hide();
-			$("#ninja_forms_field_" + field_id + "_clac_extra_display").hide();
+			$("#ninja_forms_field_" + field_id + "_calc_text_display").hide();
+			$("#ninja_forms_field_" + field_id + "_calc_html_display").hide();
+			$("#ninja_forms_field_" + field_id + "_calc_extra_display").hide();
 			$("#ninja_forms_field_" + field_id + "_label").val('');
 		}
 	});

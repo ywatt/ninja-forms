@@ -3,33 +3,8 @@ function ninja_forms_register_field_textbox(){
 	$args = array(
 		'name' => __( 'Textbox', 'ninja-forms' ),
 		'sidebar' => 'template_fields',
-		'edit_function' => 'ninja_forms_field_text_edit',
 		'edit_options' => array(
-			array(
-				'type' => 'checkbox',
-				'name' => 'datepicker',
-				'label' => __( 'Datepicker', 'ninja-forms' ),
-			),
-			array(
-				'type' => 'checkbox',
-				'name' => 'email',
-				'label' => __( 'Validate as an email address? (Field must be required)', 'ninja-forms' ),
-			),
-			// array(
-			// 	'type' => 'checkbox',
-			// 	'name' => 'send_email',
-			// 	'label' => __( 'Send a response email to this email address?', 'ninja-forms' ),
-			// ),
-			// array(
-			// 	'type' => 'checkbox',
-			// 	'name' => 'from_email',
-			// 	'label' => __( 'Use this as the "From" email address for Administrative recipients of this form?', 'ninja-forms' ),
-			// ),
-			// array(
-			// 	'type' => 'checkbox',
-			// 	'name' => 'replyto_email',
-			// 	'label' => __( 'Use this email address as the Reply-To address?', 'ninja-forms' ),
-			// ),
+		
 			array(
 				'type' => 'hidden',
 				'name' => 'first_name',
@@ -38,11 +13,6 @@ function ninja_forms_register_field_textbox(){
 				'type' => 'hidden',
 				'name' => 'last_name',
 			),
-			// array(
-			// 	'type' => 'checkbox',
-			// 	'name' => 'from_name',
-			// 	'label' => __( 'Use this as the "From" and Reply-To email name for Administrative recipients of this form?', 'ninja-forms' ),
-			// ),
 			array(
 				'type' => 'hidden',
 				'name' => 'user_address_1',
@@ -72,15 +42,32 @@ function ninja_forms_register_field_textbox(){
 				'name' => 'user_info_field_group',
 				'default' => 1,
 			),
-			array(
-				'type' => 'checkbox',
-				'label' => __( 'This is the user\'s state', 'ninja-forms' ),
-				'name' => 'user_state',
+
+		),
+		'edit_settings' => array(
+			'restrictions' => array(
+				array(
+					'type' => 'checkbox',
+					'name' => 'email',
+					'label' => __( 'Validate as an email address? (Field must be required)', 'ninja-forms' ),
+				),
+				array(
+					'type' => 'checkbox',
+					'label' => __( 'Disable Input', 'ninja-forms' ),
+					'name' => 'disable_input',
+				),
 			),
-			array(
-				'type' => 'checkbox',
-				'label' => __( 'Disable Input', 'ninja-forms' ),
-				'name' => 'disable_input',
+			'advanced' => array(
+				array(
+					'type' => 'checkbox',
+					'name' => 'datepicker',
+					'label' => __( 'Datepicker', 'ninja-forms' ),
+				),
+				array(
+					'type' => 'checkbox',
+					'label' => __( 'This is the user\'s state', 'ninja-forms' ),
+					'name' => 'user_state',
+				),
 			),
 		),
 		'display_function' => 'ninja_forms_field_text_display',
@@ -111,7 +98,11 @@ function ninja_forms_register_field_textbox(){
 
 add_action( 'init', 'ninja_forms_register_field_textbox' );
 
-function ninja_forms_field_text_edit( $field_id, $data ){
+function nf_field_text_edit_default_value( $field_id, $data ){
+	$field = ninja_forms_get_field_by_id( $field_id );
+	if ( '_text' != $field['type'] )
+		return false;
+
 	$plugin_settings = nf_get_settings();
 
 	if( isset( $plugin_settings['currency_symbol'] ) ){
@@ -167,16 +158,22 @@ function ninja_forms_field_text_edit( $field_id, $data ){
 		</label>
 
 	</div>
-
-
 	<?php
+}
+add_action( 'nf_edit_field_advanced', 'nf_field_text_edit_default_value', 9, 2 );
+
+
+function nf_field_text_edit_input_mask( $field_id, $data ) {
+	$field = ninja_forms_get_field_by_id( $field_id );
+	if ( '_text' != $field['type'] )
+		return false;
+
 	$custom = '';
-	// Field Mask
-	if( isset( $data['mask'] ) ){
-		$mask = $data['mask'];
-	}else{
-		$mask = '';
-	}
+	// Field Mask	
+	$mask = isset( $data['mask'] ) ? $data['mask'] : '';
+	$plugin_settings = nf_get_settings();
+	$currency_symbol = $plugin_settings['currency_symbol'];
+	$date_format = $plugin_settings['date_format'];
 	?>
 	<div class="description description-thin">
 		<span class="field-option">
@@ -203,6 +200,8 @@ function ninja_forms_field_text_edit( $field_id, $data ){
 	</div>
 	<?php
 }
+
+add_action( 'nf_edit_field_restrictions', 'nf_field_text_edit_input_mask', 10, 2 );
 
 function ninja_forms_field_text_display( $field_id, $data, $form_id = '' ){
 	global $current_user;
