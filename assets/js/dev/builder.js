@@ -56,7 +56,7 @@ var nfField = Backbone.Model.extend( {
 		jQuery( '#ninja_forms_metabox_field_' + field_id ).find( '.spinner' ).show();
 		this.updateData();
 		var data = JSON.stringify( this.toJSON() );
-
+		var that = this;
 		jQuery.post( ajaxurl, { field_id: field_id, data: data, action:'nf_output_field_settings_html', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
 			jQuery( '#ninja_forms_metabox_field_' + field_id ).find( '.spinner' ).hide();
 			// Remove our no-padding class.
@@ -70,12 +70,7 @@ var nfField = Backbone.Model.extend( {
 				};
 			}
 
-			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).find( '.nf-field-settings .inside' ).each( function() {
-				var html = jQuery.trim( jQuery( this ).html() );
-				if ( html == '' ) {
-					jQuery( this ).parent().remove();
-				}
-			} );
+			that.removeEmptySettings();
 
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).slideDown( 'fast' );
 
@@ -109,6 +104,15 @@ var nfField = Backbone.Model.extend( {
 				jQuery( document ).trigger( 'removeField', [ field_id ] );
 			});
 		}
+	},
+	removeEmptySettings: function() {
+		var field_id = this.id;
+		jQuery( '#ninja_forms_field_' + field_id + '_inside' ).find( '.nf-field-settings .inside' ).each( function() {
+			var html = jQuery.trim( jQuery( this ).html() );
+			if ( html == '' ) {
+				jQuery( this ).parent().remove();
+			}
+		} );
 	}
 
 } );
@@ -166,6 +170,7 @@ var nfFields = Backbone.Collection.extend({
 	},
 	addFieldDefault: function( response ) {
 		jQuery( '#ninja_forms_field_list' ).append( response.new_html ).show( 'slow' );
+
 		if ( response.new_type == 'List' ) {
 			this.listOptionsSortable();
 		}
@@ -179,6 +184,8 @@ var nfFields = Backbone.Collection.extend({
 
 		// Add our field to our backbone data model.
 		this.add( { id: response.new_id, metabox_state: 1 } );
+
+		nfField.get( response.new_id ).removeEmptySettings();
 	},
 	listOptionsSortable: function ( response ) {
 		//Make List Options sortable
