@@ -1263,9 +1263,11 @@ p.debug-report {
 }
 .nf-preview span,
 .nf-subs span {
-	font-size: 30px;
-	width: 40px;
-	height: 30px;
+	font-size: 20px;
+	width: 30px;
+	height: 28px;
+	padding-top: 3px;
+	margin-left: -5px;
 }
 .nf-subs-svg {
 	height: 27px;
