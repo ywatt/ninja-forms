@@ -99,6 +99,7 @@ class Ninja_Forms {
 			add_action( 'init', array( self::$instance, 'set_transient_id'), 1 );
 			add_action( 'init', array( self::$instance, 'init' ), 5 );
 			add_action( 'admin_init', array( self::$instance, 'admin_init' ), 5 );
+			add_action( 'update_option_ninja_forms_settings', array( self::$instance, 'refresh_plugin_settings' ), 10, 2 );
 		}
 
 		return self::$instance;
@@ -698,6 +699,17 @@ class Ninja_Forms {
 	  $settings['password_mismatch']     = apply_filters( 'ninja_forms_labels/password_mismatch'     , $settings['password_mismatch'] );
 
 	  return $settings;
+	}
+
+	/**
+	 * Refresh our plugin settings if we update the ninja_forms_settings option
+	 * 
+	 * @access public
+	 * @since 2.9
+	 * @return void
+	 */
+	public function refresh_plugin_settings( $old_value, $value ) {
+		self::$instance->plugin_settings = self::$instance->get_plugin_settings();
 	}
 
 } // End Class
