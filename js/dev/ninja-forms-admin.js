@@ -185,22 +185,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	//Listen to the keydown and keyup of our New Form title. Then remove or add the class as appropriate to add/remove default text.
-	$("#title").keydown(function(){
-		if(this.value == ''){
-			$("#title-prompt-text").removeClass("screen-reader-text");
-		}else{
-			$("#title-prompt-text").addClass("screen-reader-text");
-		}
-	});
-	$("#title").keyup(function(){
-		if(this.value == ''){
-			$("#title-prompt-text").removeClass("screen-reader-text");
-		}else{
-			$("#title-prompt-text").addClass("screen-reader-text");
-		}
-	});
-
 	$( document ).on( 'click', '.metabox-item-edit', function( e ) {
 		e.preventDefault();
 		$( this ).parent().parent().find('.inside' ).slideToggle( 'fast' );
@@ -304,10 +288,6 @@ jQuery(document).ready(function($) {
 
 		if(this.value != '' && this.value != 'today' ){
 			$("#ninja_forms_field_" + id + "_datepicker").prop('checked', false);
-			if(this.value != '_user_email'){
-				$("#ninja_forms_field_" + id + "_email").prop("checked", false);
-				$("#ninja_forms_field_" + id + "_send_email").prop("checked", false);
-			}
 		}
 	});
 
@@ -325,8 +305,6 @@ jQuery(document).ready(function($) {
 
 		if(this.value != ''){
 			$("#ninja_forms_field_" + id + "_datepicker").prop('checked', false);
-			$("#ninja_forms_field_" + id + "_email").prop("checked", false);
-			$("#ninja_forms_field_" + id + "_send_email").prop("checked", false);
 		}
 	});
 
@@ -352,69 +330,8 @@ jQuery(document).ready(function($) {
 			$("#default_value_label_" + id).hide();
 			$("#mask_" + id).val("");
 			$("#mask_label_" + id).hide();
-			$("#ninja_forms_field_" + id + "_email").prop("checked", false);
-			$("#ninja_forms_field_" + id + "_send_email").prop("checked", false);
-			$("#ninja_forms_field_" + id + "_from_email").prop("checked", false);
 		}
 	});
-
-	// Email
-
-	$(document).on( 'change', '.ninja-forms-_text-email', function(){
-		var id = this.id.replace("ninja_forms_field_", "");
-		id = id.replace("_email", "");
-		if(this.checked == true){
-			if( $("#ninja_forms_field_" + id + "_default_value").val() != '_user_email' ){
-				$("#ninja_forms_field_" + id + "_default_value").val("");
-				$("#default_value_" + id).val("");
-				$("#default_value_label_" + id).hide();
-			}
-			$("#ninja_forms_field_" + id + "_mask").val("");
-			$("#mask_" + id).val("");
-			$("#mask_label_" + id).hide();
-			$("#ninja_forms_field_" + id + "_datepicker").prop("checked", false);
-		}else{
-			$("#ninja_forms_field_" + id + "_send_email").prop("checked", false);
-			$("#ninja_forms_field_" + id + "_from_email").prop("checked", false);
-		}
-	});
-
-	// Send Email
-	$(document).on( 'change', '.ninja-forms-_text-send_email', function(){
-		var id = this.id.replace("ninja_forms_field_", "");
-		id = id.replace("_send_email", "");
-		if(this.checked == true){
-			$("#ninja_forms_field_" + id + "_email").prop("checked", true);
-			if( $("#ninja_forms_field_" + id + "_default_value").val() != '_user_email' ){
-				$("#ninja_forms_field_" + id + "_default_value").val("");
-				$("#default_value_" + id).val("");
-				$("#default_value_label_" + id).hide();
-			}
-			$("#ninja_forms_field_" + id + "_mask").val("");
-			$("#mask_" + id).val("");
-			$("#mask_label_" + id).hide();
-			$("#ninja_forms_field_" + id + "_datepicker").prop("checked", false);
-		}
-	});
-
-	// From Email
-	$(document).on( 'change', '.ninja-forms-_text-from_email', function(){
-		var id = this.id.replace("ninja_forms_field_", "");
-		id = id.replace("_from_email", "");
-		if(this.checked == true){
-			$("#ninja_forms_field_" + id + "_email").prop("checked", true);
-			if( $("#ninja_forms_field_" + id + "_default_value").val() != '_user_email' ){
-				$("#ninja_forms_field_" + id + "_default_value").val("");
-				$("#default_value_" + id).val("");
-				$("#default_value_label_" + id).hide();
-			}
-			$("#ninja_forms_field_" + id + "_mask").val("");
-			$("#mask_" + id).val("");
-			$("#mask_label_" + id).hide();
-			$("#ninja_forms_field_" + id + "_datepicker").prop("checked", false);
-		}
-	});
-
 
 	/* List Field JS */
 
@@ -788,7 +705,7 @@ jQuery(document).ready(function($) {
 			}
 		})
 
-		var fav_name = prompt("What would you like to name this favorite?", "");
+		var fav_name = prompt( ninja_forms_settings.add_fav_prompt, '' );
 		if(fav_name.length >= 1){
 			$.post(ajaxurl, { fav_name: fav_name, field_data: field_data, field_id: field_id, action:"ninja_forms_add_fav", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function(response){
 				//document.write(response);
@@ -800,7 +717,7 @@ jQuery(document).ready(function($) {
 
 			});
 		}else{
-			var answer = confirm('You must supply a name for this favorite.');
+			var answer = confirm( ninja_forms_settings.add_fav_error );
 			if(answer){
 				$("#" + this_id).click();
 			}
@@ -876,31 +793,12 @@ jQuery(document).ready(function($) {
 
 	/* * * End Defined Fields JS * * */
 
-	/* * * Begin Form Settings JS * * */
-
-	$(".ninja-forms-add-mailto").click(function(event){
-		event.preventDefault();
-		var id = this.id.replace("ninja_forms_add_mailto_", "");
-		if($(".ninja-forms-mailto-address").length > 0){
-			var count = $(".ninja-forms-mailto-address:last").parent().prop("id");
-			count = count.replace("ninja_forms_mailto_", "");
-			count = count.replace("_span", "");
-			count++;
-		}else{
-			var count = 0;
+	$( document ).on( 'click', '#nf_deactivate_all_licenses', function( e ) {
+		var answer = confirm( ninja_forms_settings.deactivate_all_licenses_confirm );
+		if ( ! answer ) {
+			return false;
 		}
-
-		var html = '<span id="ninja_forms_mailto_' + count + '_span"><a href="#" id="" class="ninja-forms-remove-mailto">X</a> <input type="text" name="admin_mailto[]" id="" value="" class="ninja-forms-mailto-address"></span>';
-		$("#ninja_forms_mailto").append(html);
-		$(".ninja-forms-mailto-address:last").focus();
-	});
-
-	$(document).on( 'click', '.ninja-forms-remove-mailto', function(event){
-		event.preventDefault();
-		$(this).parent().remove();
-	});
-
-	/* * * End Form Settings JS * * */
+	} );
 
 }); //Document.ready();
 

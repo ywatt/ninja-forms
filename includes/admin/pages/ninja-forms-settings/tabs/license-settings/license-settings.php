@@ -1,7 +1,4 @@
 <?php
-
-add_action('init', 'ninja_forms_register_tab_license_settings');
-
 function ninja_forms_register_tab_license_settings(){
 	$args = array(
 		'name' 				=> __( 'Licenses', 'ninja-forms' ),
@@ -14,7 +11,7 @@ function ninja_forms_register_tab_license_settings(){
 	ninja_forms_register_tab( 'license_settings', $args );
 }
 
-add_action('init', 'ninja_forms_register_license_settings_metabox');
+add_action( 'init', 'ninja_forms_register_tab_license_settings' );
 
 function ninja_forms_register_license_settings_metabox(){
 	$args = array(
@@ -22,16 +19,19 @@ function ninja_forms_register_license_settings_metabox(){
 		'tab' 				=> 'license_settings',
 		'slug' 				=> 'license_settings',
 		'title' 			=> __( 'Licenses', 'ninja-forms' ),
+		'display_function'	=> 'nf_license_settings_no_licenses_notice',
 		'settings' 			=> array(
 			array(
 				'name' 		=> 'license_key',
 				'type' 		=> 'desc',
-				'desc' 		=> __('To activate licenses for Ninja Forms extensions you must first <a target="_blank" href="http://ninjaforms.com/documentation/extension-docs/installing-extensions/">install and activate</a> the chosen extension. License settings will then appear below.', 'ninja-forms'),
+				'desc' 		=> __( 'To activate licenses for Ninja Forms extensions you must first <a target="_blank" href="http://ninjaforms.com/documentation/extension-docs/installing-extensions/">install and activate</a> the chosen extension. License settings will then appear below.', 'ninja-forms' ),
 			),
 		),
 	);
 	ninja_forms_register_tab_metabox( $args );
 }
+
+add_action( 'init', 'ninja_forms_register_license_settings_metabox' );
 
 /**
  * Output a save button so that we can call it: "Save & Activate"
@@ -42,7 +42,7 @@ function ninja_forms_register_license_settings_metabox(){
 function nf_license_settings_save_button() {
 	global $ninja_forms_tabs_metaboxes;
 
-	$show_save = true;
+	$show_save = false;
 	$show_deactivate = false;
 
 	// Loop through each of our licenses to check if any are invalid.
@@ -70,10 +70,24 @@ function nf_license_settings_save_button() {
 
 	if ( $show_deactivate ) {
 		?>
-		<input type="submit" class="button-secondary" id="deactivate_all_licenses" name="deactivate_all" value="<?php _e( 'Deactivate All Licenses', 'ninja-forms' ); ?>">
+		<input type="submit" class="button-secondary" id="nf_deactivate_all_licenses" name="deactivate_all" value="<?php _e( 'Deactivate All Licenses', 'ninja-forms' ); ?>">
 		<?php
 	}
+}
 
+/**
+ * Output a message letting the user know that they don't have any extensions with licenses activated.
+ * 
+ * @since 2.9
+ * @return void
+ */
+function nf_license_settings_no_licenses_notice() {
+	$desc = sprintf( __( 'To activate licenses for Ninja Forms extensions you must first %s install and activate %s the chosen extension. License settings will then appear below.', 'ninja-forms' ), '<a target="_blank" href="http://ninjaforms.com/documentation/extension-docs/installing-extensions/">', '</a>' );
+	?>
+	<tr id="row_license_key">
+		<td colspan="2"><?php echo $desc; ?></td>
+	</tr>
+	<?php
 }
 
 function ninja_forms_save_license_settings( $data ){

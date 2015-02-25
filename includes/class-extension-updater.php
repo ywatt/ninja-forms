@@ -101,25 +101,7 @@ class NF_Extension_Updater
 			$this->deactivate_license();
 			return false;
 		} else if ( isset ( $data[ $this->product_name . '_license' ] ) ) {
-			$plugin_settings = nf_get_settings();
-
-			$valid = $this->is_valid();
-
-			$status = $valid ? 'valid' : 'invalid';
-
-			if( isset( $plugin_settings[ $this->product_name.'_license' ] ) ){
-				$old_license = $plugin_settings[ $this->product_name.'_license'];
-			}else{
-				$old_license = '';
-			}
-
-			if ( $old_license != '' AND $old_license != $data[ $this->product_name.'_license' ] AND $status == 'valid' ) {
-				$this->deactivate_license();
-			}
-
-			if( $old_license == '' OR ( $old_license != $data[ $this->product_name.'_license' ] ) OR $status == 'invalid' ){
-		 		$this->activate_license( $data );
-			}
+	 		$this->activate_license( $data );
 		}
 
 	} // function check_license
@@ -133,6 +115,7 @@ class NF_Extension_Updater
 	 */
 
 	function activate_license( $data ) {
+	
 		$plugin_settings = nf_get_settings();
 		// retrieve the license from the database
 		$license = $data[ $this->product_name.'_license' ];
@@ -146,7 +129,7 @@ class NF_Extension_Updater
  
 		// Call the custom API.
 		$response = wp_remote_get( add_query_arg( $api_params, $this->store_url ) );
- 
+
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) )
 			return false;
@@ -155,7 +138,9 @@ class NF_Extension_Updater
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
 		// $license_data->license will be either "valid" or "invalid"
+ 		$plugin_settings[  $this->product_name . '_license' ] = $license;
  		$plugin_settings[  $this->product_name . '_license_status' ] = $license_data->license;
+
 		if ( 'invalid' == $license_data->license ) {
 			$error = '<span style="color: red;">' . __( 'Could not activate license. Please verify your license key', 'ninja-forms' ) . '</span>';
 		} else {
