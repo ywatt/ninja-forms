@@ -91,7 +91,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 			if(isset($s['class'])){
 				$class = $s['class'];
 			}else{
-				$class = '';
+				$class = 'widefat';
 			}
 			if(isset($s['tr_class'])){
 				$tr_class = $s['tr_class'];
@@ -180,7 +180,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					$value = ninja_forms_esc_html_deep( $value );
 					?>
 
-					<input type="text" class="code widefat <?php echo $class;?>" name="<?php echo $name;?>" id="<?php echo $name;?>" value="<?php echo $value;?>" />
+					<input type="text" class="code <?php echo $class;?>" name="<?php echo $name;?>" id="<?php echo $name;?>" value="<?php echo $value;?>" />
 					<?php if( $help_text != ''){ ?>
 					<a href="#" class="tooltip">
 					    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>images/question-ico.gif" title="">

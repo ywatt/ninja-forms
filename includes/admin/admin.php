@@ -132,16 +132,6 @@ function ninja_forms_admin(){
 					<div id="post-body-content">
 						<?php
 
-						//Check to see if the registered tab has a display function registered.
-						if(isset($ninja_forms_tabs[$current_page][$current_tab]['display_function']) AND $ninja_forms_tabs[$current_page][$current_tab]['display_function'] != ''){
-							$tab_callback = $ninja_forms_tabs[$current_page][$current_tab]['display_function'];
-							$arguments = func_get_args();
-							array_shift($arguments); // We need to remove the first arg ($function_name)
-							$arguments['form_id'] = $form_id;
-							$arguments['data'] = $data;
-							call_user_func_array($tab_callback, $arguments);
-						}
-
 						//Check to see if the registered tab has an metaboxes registered to it.
 						if(isset($ninja_forms_tabs_metaboxes[$current_page][$current_tab]) AND !empty($ninja_forms_tabs_metaboxes[$current_page][$current_tab])){
 							?>
@@ -155,8 +145,16 @@ function ninja_forms_admin(){
 							<?php
 						}
 
-						?>
-						<?php
+						//Check to see if the registered tab has a display function registered.
+						if(isset($ninja_forms_tabs[$current_page][$current_tab]['display_function']) AND $ninja_forms_tabs[$current_page][$current_tab]['display_function'] != ''){
+							$tab_callback = $ninja_forms_tabs[$current_page][$current_tab]['display_function'];
+							$arguments = func_get_args();
+							array_shift($arguments); // We need to remove the first arg ($function_name)
+							$arguments['form_id'] = $form_id;
+							$arguments['data'] = $data;
+							call_user_func_array($tab_callback, $arguments);
+						}
+
 						if(isset($ninja_forms_tabs[$current_page][$current_tab]['show_save']) AND $ninja_forms_tabs[$current_page][$current_tab]['show_save'] === true){ ?>
 							<br />
 							<input class="button-primary menu-save ninja-forms-save-data" id="ninja_forms_save_data_top" type="submit" value="<?php _e( 'Save', 'ninja-forms' ); ?>" />
