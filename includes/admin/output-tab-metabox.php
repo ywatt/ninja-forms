@@ -2,8 +2,7 @@
 function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 	$plugin_settings = nf_get_settings();
 	if($form_id != ''){
-		$form_row = ninja_forms_get_form_by_id($form_id);
-		$current_settings = $form_row['data'];
+		$current_settings = Ninja_Forms()->form($form_id)->get_all_settings();
 	}else{
 		$form_id = '';
 		$current_settings = nf_get_settings();

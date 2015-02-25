@@ -68,6 +68,7 @@ function nf_step_processing_js() {
  * @return void
  */
 function nf_output_step_processing_page() {
+	$page_title = isset ( $_REQUEST['title'] ) ? urldecode( $_REQUEST['title'] ) : __( 'Ninja Forms - Processing', 'ninja-forms' );
 	?>
 	<style>
 		.ui-progressbar {
@@ -128,7 +129,7 @@ function nf_output_step_processing_page() {
 	?>
 
 	<div class="wrap">
-		<h2><?php _e( 'Ninja Forms - Processing', 'ninja-forms' ); ?></h2>
+		<h2><?php echo $page_title ?></h2>
 			<div id="nf-upgrade-status">
 				<p><?php _e( 'The process has started, please be patient. This could take several minutes. You will be automatically redirected when the process is finished.', 'ninja-forms' ); ?></p>
 				<div id="progressbar">

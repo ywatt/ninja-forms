@@ -104,8 +104,16 @@ class NF_Subs_CPT {
 		} else {
 			$not_found = __( 'No Submissions Found', 'ninja-forms' );
 		}
+
+		$name = _x( 'Submissions', 'post type general name', 'ninja-forms' );
+
+		if ( ! empty ( $_REQUEST['form_id'] ) ) {
+			$form_title = Ninja_Forms()->form( $_REQUEST['form_id'] )->get_setting( 'form_title' );
+			$name =$name . ' - ' . $form_title;
+		}
+
 		$labels = array(
-		    'name' => _x('Submissions', 'post type general name', 'ninja-forms' ),
+		    'name' => $name,
 		    'singular_name' => _x( 'Submission', 'post type singular name', 'ninja-forms' ),
 		    'add_new' => _x( 'Add New', 'nf_sub' ),
 		    'add_new_item' => __( 'Add New Submission', 'ninja-forms' ),
@@ -270,24 +278,11 @@ class NF_Subs_CPT {
 			'cb'    => '<input type="checkbox" />',
 			'id' => __( '#', 'ninja-forms' ),
 		);
-		/*
-		 * This section uses the new Ninja Forms db structure. Until that is utilized, we must deal with the old db.
-		if ( isset ( $_GET['form_id'] ) ) {
-			$form_id = $_GET['form_id'];
-			$fields = nf_get_fields_by_form_id( $form_id );
-			if ( is_array ( $fields ) ) {
-				foreach ( $fields as $field_id => $setting ) {
-					if ( apply_filters( 'nf_add_sub_value', Ninja_Forms()->field( $field_id )->type->add_to_sub, $field_id ) )
-						$cols[ 'form_' . $form_id . '_field_' . $field_id ] = $setting['label'];
-				}
-			}
-		}		
-		*/
 
 		// Compatibility with old field registration system. Can be removed when the new one is in place.
 		if ( isset ( $_GET['form_id'] ) && $_GET['form_id'] != '' ) {
 			$form_id = $_GET['form_id'];
-			if ( is_object( Ninja_Forms()->form( $form_id ) ) && is_array ( Ninja_Forms()->form( $form_id )->fields ) ) {
+			if ( is_object( Ninja_Forms()->form( $this->form_id ) ) && is_array ( Ninja_Forms()->form( $this->form_id )->fields ) ) {
 				foreach ( Ninja_Forms()->form( $this->form_id )->fields as $field ) {
 					$field_id = $field['id'];
 					$field_type = $field['type'];
@@ -481,34 +476,9 @@ class NF_Subs_CPT {
 		if ( $typenow != 'nf_sub' )
 			return false;
 
-		/*
-		// Bail if we are looking at the trashed submissions.
-		if ( isset ( $_REQUEST['post_status'] ) && $_REQUEST['post_status'] == 'trash' )
-			return false;
-		*/
-
-		/*
-		 * This section uses the new database structure for Ninja Forms. Until that structure is in place, we have to get data from the old db.
-
-		// Get our list of forms
-		$forms = nf_get_all_forms();
-
-		$form_id = isset( $_GET['form_id'] ) ? $_GET['form_id'] : '';
-
- 		$html = '<select name="form_id" id="form_id">';
-		$html .= '<option value="">- Select a form</option>';
-		if ( is_array( $forms ) ) {
-			foreach ( $forms as $form ) {
-				$html .= '<option value="' . $form['id'] . '" ' . selected( $form['id'], $form_id, false ) . '>' . nf_get_form_setting( $form['id'], 'name' ) . '</option>';
-			}
-		}
-		$html .= '</select>';
-		echo $html;		
-		*/
-
 		// Add our Form selection dropdown.
 		// Get our list of forms
-		$forms = ninja_forms_get_all_forms();
+		$forms = Ninja_Forms()->forms()->get_all();
 
 		$form_id = isset( $_GET['form_id'] ) ? $_GET['form_id'] : '';
 
@@ -521,8 +491,9 @@ class NF_Subs_CPT {
 		$html .= '<select name="form_id" id="form_id" class="nf-form-jump">';
 		$html .= '<option value="">' . __( '- Select a form', 'ninja-forms' ) . '</option>';
 		if ( is_array( $forms ) ) {
-			foreach ( $forms as $form ) {
-				$html .= '<option value="' . $form['id'] . '" ' . selected( $form['id'], $form_id, false ) . '>' . $form['data']['form_title'] . '</option>';
+			foreach ( $forms as $f_id ) {
+				$form_title = Ninja_Forms()->form( $f_id )->get_setting( 'form_title' );
+				$html .= '<option value="' . $f_id . '" ' . selected( $form_id, $f_id, false ) . '>' . $form_title . '</option>';
 			}
 		}
 		$html .= '</select>';
@@ -1010,8 +981,7 @@ class NF_Subs_CPT {
 		}
 
 		$form_id = Ninja_Forms()->sub( $post->ID )->form_id;
-		$form = ninja_forms_get_form_by_id( $form_id );
-		$form_title = $form['data']['form_title'];
+		$form_title = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
 		?>
 		<input type="hidden" name="nf_edit_sub" value="1">
 		<div class="submitbox" id="submitpost">
