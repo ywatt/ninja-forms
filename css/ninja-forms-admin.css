@@ -1312,3 +1312,8 @@ p.debug-report {
 	content: '';
 	display: block;
 }*/
+
+.nf-nuke-warning {
+	font-weight: bold;
+	text-decoration: underline;
+}

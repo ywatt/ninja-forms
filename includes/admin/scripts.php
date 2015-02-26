@@ -48,7 +48,7 @@ function ninja_forms_admin_js(){
 	NINJA_FORMS_URL . 'js/' . $src .'/ninja-forms-admin' . $suffix . '.js',
 	array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable'));
 
-	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array( 'nf_ajax_nonce' => wp_create_nonce( 'nf_ajax'), 'form_id' => $form_id, 'datepicker_args' => apply_filters( 'ninja_forms_admin_forms_datepicker_args', $datepicker_args ), 'add_fav_prompt' => __( 'What would you like to name this favorite?', 'ninja-forms' ), 'add_fav_error' => __( 'You must supply a name for this favorite.', 'ninja-forms' ), 'deactivate_all_licenses_confirm' => __( 'Really deactivate all licenses?', 'ninja-forms' ) ) );
+	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array( 'nf_ajax_nonce' => wp_create_nonce( 'nf_ajax'), 'form_id' => $form_id, 'datepicker_args' => apply_filters( 'ninja_forms_admin_forms_datepicker_args', $datepicker_args ), 'add_fav_prompt' => __( 'What would you like to name this favorite?', 'ninja-forms' ), 'add_fav_error' => __( 'You must supply a name for this favorite.', 'ninja-forms' ), 'deactivate_all_licenses_confirm' => __( 'Really deactivate all licenses?', 'ninja-forms' ), 'nuke_warning' => 'This setting will COMPLETELY remove anything Ninja Forms related. This includes SUBMISSIONS and FORMS. It cannot be undone.', 'ninja-forms' ) );
 
 	if ( isset ( $_REQUEST['page'] ) && $_REQUEST['page'] == 'ninja-forms' && isset ( $_REQUEST['tab'] ) ) {
 		wp_enqueue_script( 'nf-builder',

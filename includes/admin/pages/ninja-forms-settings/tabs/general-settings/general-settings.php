@@ -46,13 +46,24 @@ function ninja_forms_register_general_settings_metabox(){
 				'label' => __( 'Currency Symbol', 'ninja-forms' ),
 				'desc' 	=> __( 'e.g. $, &pound;, &euro;', 'ninja-forms' ),
 			),
+		),
+	);
+	ninja_forms_register_tab_metabox( $args );	
+
+	$args = array(
+		'page' => 'ninja-forms-settings',
+		'tab' => 'general_settings',
+		'slug' => 'advanced_settings',
+		'title' => __( 'Advanced Settings', 'ninja-forms' ),
+		'settings' => array(
 			array(
 				'name'	=> 'delete_on_uninstall',
 				'type'	=> 'checkbox',
-				'label'	=> __( 'Remove ALL Ninja Forms data upon deactivation?', 'ninja-forms' ),
-				'desc'	=> __( 'If this box is checked, ALL Ninja Forms data will be removed from the database upon deletion. This is not recoverable.', 'ninja-forms' ),
+				'label'	=> __( 'Remove ALL Ninja Forms data upon uninstall?', 'ninja-forms' ),
+				'desc'	=> sprintf( __( 'If this box is checked, ALL Ninja Forms data will be removed from the database upon deletion. %sAll form and submission data will be unrecoverable.%s', 'ninja-forms' ), '<span class="nf-nuke-warning">', '</span>' ),
 			)
 		),
+		'state' => 'closed',
 	);
 	ninja_forms_register_tab_metabox( $args );
 

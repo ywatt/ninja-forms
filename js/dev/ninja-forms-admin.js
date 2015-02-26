@@ -800,6 +800,15 @@ jQuery(document).ready(function($) {
 		}
 	} );
 
+	$( document ).on( 'change', '#delete_on_uninstall', function( e ) {
+		if ( this.checked ) {
+			var answer = confirm( ninja_forms_settings.nuke_warning );
+			if ( ! answer ) {
+				this.checked = false;
+			}
+		}
+	} );
+
 }); //Document.ready();
 
 function ninja_forms_escape_html(html) {
