@@ -330,7 +330,7 @@ jQuery( document ).ready( function( $ ) {
 	nfForm.setup();
 
 	// Open and close a field metabox.
-	$( document ).on( 'click', '.metabox-item-edit', function( e ) {
+	$( document ).on( 'click', '.nf-edit-field', function( e ) {
 		e.preventDefault();
 
 		// Get our field id.
