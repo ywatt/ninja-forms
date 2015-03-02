@@ -308,14 +308,12 @@ class NF_Welcome {
 			<p class="about-description"><?php _e( 'Use the tips below to get started using Ninja Forms. You will be up and running in no time!', 'ninja-forms' ); ?></p>
 
 			<div class="changelog">
-				<h3><?php _e( 'Creating Your First Form', 'ninja-forms' );?></h3>
-
+				
 				<div class="feature-section">
-
+					<h4><?php _e( 'All About Forms', 'ninja-forms' );?></h4>
 					<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-new-form.png'; ?>" class="nf-welcome-screenshots">
 
-					<h4><a href="<?php echo admin_url( 'admin.php?page=ninja-forms&tab=form_settings&form_id=new' ); ?>"><?php printf( __( 'Forms %s Add New</a>', 'ninja-forms' ), '&rarr;' ); ?></h4>
-					<p><?php _e( 'The Forms menu is your access point for all things Ninja Forms. We\'ve already created your first contact form so that you have an example. You can also create your own by clicking Add New.', 'ninja-forms' ); ?></p>
+					<p><?php printf( __( 'The Forms menu is your access point for all things Ninja Forms. We\'ve already created your first %scontact form%s so that you have an example. You can also create your own by clicking %sAdd New%s.', 'ninja-forms' ), '<a href="admin.php?page=ninja-forms&tab=builder&form_id=1">', '</a>', '<a href="admin.php?page=ninja-forms&tab=builder&form_id=new">', '</a>' ); ?></p>
 
 					<h4><?php _e( 'Build Your Form', 'ninja-forms' );?></h4>
 					<p><?php _e( 'This is where you\'ll build your form by adding fields and dragging them into the order you want them to appear. Each field will have an assortment of options such as label, label position, and placeholder.', 'ninja-forms' );?></p>
