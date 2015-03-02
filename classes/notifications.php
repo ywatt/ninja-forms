@@ -330,7 +330,7 @@ class NF_Notifications
 
 		if ( $new ) {
 			$redirect = remove_query_arg( array( 'notification-action' ) );
-			$redirect = add_query_arg( array( 'id' => $n_id, 'notification-action' => 'edit' ), $redirect );
+			$redirect = add_query_arg( array( 'id' => $n_id, 'notification-action' => 'edit', 'update_message' => urlencode( __( 'Action Updated', 'ninja-forms' ) ) ), $redirect );
 			wp_redirect( $redirect );
 			die();
 		}
