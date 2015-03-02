@@ -410,7 +410,7 @@ class NF_Subs_CPT {
 					$t_time = $h_time = __( 'Unpublished' );
 					$time_diff = 0;
 				} else {
-					$t_time = get_the_time( __( 'Y/m/d g:i:s A' ) );
+					$t_time = get_the_time( 'Y/m/d g:i:s A' );
 					$m_time = $post->post_date;
 					$time = get_post_time( 'G', true, $post );
 
@@ -419,7 +419,7 @@ class NF_Subs_CPT {
 					if ( $time_diff > 0 && $time_diff < DAY_IN_SECONDS )
 						$h_time = sprintf( __( '%s ago' ), human_time_diff( $time ) );
 					else
-						$h_time = mysql2date( __( 'Y/m/d' ), $m_time );
+						$h_time = mysql2date( 'Y/m/d', $m_time );
 				}
 
 				$t_time = apply_filters( 'nf_sub_title_time', $t_time );
@@ -489,7 +489,7 @@ class NF_Subs_CPT {
 		$html = '<div style="float:left;">';
 		$html .= '<span style="float:left;" class="spinner"></span>';
 		$html .= '<select name="form_id" id="form_id" class="nf-form-jump">';
-		$html .= '<option value="">' . __( '- Select a form', 'ninja-forms' ) . '</option>';
+		$html .= '<option value="">- ' . __( 'Select a form', 'ninja-forms' ) . '</option>';
 		if ( is_array( $forms ) ) {
 			foreach ( $forms as $f_id ) {
 				$form_title = Ninja_Forms()->form( $f_id )->get_setting( 'form_title' );
@@ -644,15 +644,15 @@ class NF_Subs_CPT {
 		$messages[$post_type] = array(
 			0 => '', // Unused. Messages start at index 1.
 			1 => $singular . ' ' . __( 'updated', 'ninja-forms' ) . '.',
-			2 => __('Custom field updated.'),
-			3 => __('Custom field deleted.'),
-			4 => __($singular.' updated.'),
-			5 => isset($_GET['revision']) ? sprintf( __($singular.' restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6 => sprintf( __($singular.' published. <a href="%s">View '.strtolower($singular).'</a>'), esc_url( get_permalink($post_ID) ) ),
-			7 => __('Page saved.'),
-			8 => sprintf( __($singular.' submitted. <a target="_blank" href="%s">Preview '.strtolower($singular).'</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
-			9 => sprintf( __($singular.' scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview '.strtolower($singular).'</a>'), date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
-			10 => sprintf( __($singular.' draft updated. <a target="_blank" href="%s">Preview '.strtolower($singular).'</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+			2 => 'Custom field updated.',
+			3 => 'Custom field deleted.',
+			4 => $singular.' updated.',
+			5 => isset($_GET['revision']) ? sprintf( $singular.' restored to revision from %s', wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6 => sprintf( $singular.' published. <a href="%s">View '.strtolower($singular).'</a>', esc_url( get_permalink($post_ID) ) ),
+			7 => 'Page saved.',
+			8 => sprintf( $singular.' submitted. <a target="_blank" href="%s">Preview '.strtolower($singular).'</a>', esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+			9 => sprintf( $singular.' scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview '.strtolower($singular).'</a>', date_i18n( 'M j, Y @ G:i', strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
+			10 => sprintf( $singular.' draft updated. <a target="_blank" href="%s">Preview '.strtolower($singular).'</a>', esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
 		);
 
 		return $messages;

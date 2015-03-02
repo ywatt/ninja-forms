@@ -154,7 +154,7 @@ function ninja_forms_field_credit_card_display( $field_id, $data, $form_id = '' 
 	$cc_exp_month_label = isset ( $data['cc_exp_month_label'] ) ? $data['cc_exp_month_label'] : __( 'Expiration month (MM)', 'ninja-forms' );
 	$cc_exp_month_desc = isset ( $data['cc_exp_month_desc'] ) ? $data['cc_exp_month_desc'] : __( 'The month your credit card expires, typically on the front of the card.', 'ninja-forms' );
 
-	$cc_exp_year_label = isset ( $data['cc_exp_year_label'] ) ? $data['cc_exp_year_label'] : __( 'Expiration year (YYY)', 'ninja-forms' );
+	$cc_exp_year_label = isset ( $data['cc_exp_year_label'] ) ? $data['cc_exp_year_label'] : __( 'Expiration year (YYYY)', 'ninja-forms' );
 	$cc_exp_year_desc = isset ( $data['cc_exp_year_desc'] ) ? $data['cc_exp_year_desc'] : __( 'The year your credit card expires, typically on the front of the card.', 'ninja-forms' );
 
 	if ( isset ( $ninja_forms_processing ) ){

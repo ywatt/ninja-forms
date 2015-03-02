@@ -38,13 +38,13 @@ function ninja_forms_register_general_settings_metabox(){
 				'name' 	=> 'date_format',
 				'type' 	=> 'text',
 				'label' => __( 'Date Format', 'ninja-forms' ),
-				'desc' 	=> __( 'e.g. m/d/Y, d/m/Y - Tries to follow the <a href="http://www.php.net/manual/en/function.date.php" target="_blank">PHP date() function</a> specifications, but not every format is supported.', 'ninja-forms' ),
+				'desc' 	=> 'e.g. m/d/Y, d/m/Y - ' . sprintf( __( 'Tries to follow the %sPHP date() function%s specifications, but not every format is supported.', 'ninja-forms' ), '<a href="http://www.php.net/manual/en/function.date.php" target="_blank">', '</a>' ),
 			),
 			array(
 				'name' 	=> 'currency_symbol',
 				'type' 	=> 'text',
 				'label' => __( 'Currency Symbol', 'ninja-forms' ),
-				'desc' 	=> __( 'e.g. $, &pound;, &euro;', 'ninja-forms' ),
+				'desc' 	=> 'e.g. $, &pound;, &euro;',
 			),
 		),
 	);

@@ -28,8 +28,8 @@ function nf_show_upgrade_notices() {
 
 	if ( ! $n_conversion_complete ) {
 		printf(
-			'<div class="update-nag"><p>' . __( 'Ninja Forms needs to upgrade your form notifications, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</p></div>',
-			admin_url( 'index.php?page=nf-processing&action=convert_notifications' )
+			'<div class="update-nag"><p>' . __( 'Ninja Forms needs to upgrade your form notifications, click %shere%s to start the upgrade.', 'ninja-forms' ) . '</p></div>',
+			'<a href="' . admin_url( 'index.php?page=nf-processing&action=convert_notifications' ) . '">', '</a>'
 		);
 	}
 
@@ -37,8 +37,8 @@ function nf_show_upgrade_notices() {
 
 	if ( $n_conversion_complete && ! $update_email_settings_complete ) {
 		printf(
-			'<div class="update-nag"><p>' . __( 'Ninja Forms needs to update your email settings, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</p></div>',
-			admin_url( 'index.php?page=nf-processing&action=update_email_settings' )
+			'<div class="update-nag"><p>' . __( 'Ninja Forms needs to update your email settings, click %shere%s to start the upgrade.', 'ninja-forms' ) . '</p></div>',
+			'<a href="' . admin_url( 'index.php?page=nf-processing&action=update_email_settings' ) . '">', '</a>'
 		);
 	}
 
@@ -52,8 +52,8 @@ function nf_show_upgrade_notices() {
 			$step = 1;
 		}
 		printf(
-			'<div class="update-nag"><p>' . __( 'Ninja Forms needs to upgrade the submissions table, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</p></div>',
-			admin_url( 'index.php?page=nf-upgrades&nf-upgrade=upgrade_subs_to_cpt&step=' . $step )
+			'<div class="update-nag"><p>' . __( 'Ninja Forms needs to upgrade the submissions table, click %shere%s to start the upgrade.', 'ninja-forms' ) . '</p></div>',
+			'<a href="' . admin_url( 'index.php?page=nf-upgrades&nf-upgrade=upgrade_subs_to_cpt&step=' . $step ) . '">', '</a>'
 		);
 	}
 
@@ -79,8 +79,8 @@ function nf_show_upgrade_notices() {
 	if ( ! $forms_conversion_complete ) {
 		$title = urlencode( __( 'Updating Form Database', 'ninja-forms' ) );
 		printf(
-			'<div class="update-nag">' . __( 'Ninja Forms needs to upgrade your form settings, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</div>',
-			admin_url( 'index.php?page=nf-processing&action=convert_forms&title=' . $title )
+			'<div class="update-nag">' . __( 'Ninja Forms needs to upgrade your form settings, click %shere%s to start the upgrade.', 'ninja-forms' ) . '</div>',
+			'<a href="' . admin_url( 'index.php?page=nf-processing&action=convert_forms&title=' . $title ) . '">', '</a>'
 		);
 	}
 	

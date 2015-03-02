@@ -169,7 +169,7 @@ function ninja_forms_tab_form_list(){
 			$data = Ninja_Forms()->form( $form_id )->get_all_settings();
 			$date_updated = $data['date_updated'];
 			$date_updated = strtotime( $date_updated );
-			$date_updated = date_i18n( __( 'F d, Y', 'ninja-forms' ), $date_updated );
+			$date_updated = date_i18n( 'F d, Y', $date_updated );
 			$link = remove_query_arg( array( 'paged' ) );
 			$edit_link = esc_url( add_query_arg( array( 'tab' => 'builder', 'form_id' => $form_id ), $link ) );
 			$subs_link = admin_url( 'edit.php?post_status=all&post_type=nf_sub&action=-1&m=0&form_id=' . $form_id . '&paged=1&mode=list&action2=-1' );

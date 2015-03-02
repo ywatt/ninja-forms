@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ninja-forms\n"
-"POT-Creation-Date: 2015-02-24 14:32-0500\n"
-"PO-Revision-Date: 2015-02-24 14:32-0500\n"
+"POT-Creation-Date: 2015-03-02 11:51-0500\n"
+"PO-Revision-Date: 2015-03-02 11:52-0500\n"
 "Last-Translator: \n"
 "Language-Team: WP Ninjas <info@wpninjas.com>\n"
 "MIME-Version: 1.0\n"
@@ -13,48 +13,48 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: ninja-forms.php:166 ninja-forms.php:178
+#: ninja-forms.php:167 ninja-forms.php:179
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: ninja-forms.php:674
+#: ninja-forms.php:675
 #, php-format
 msgid "Fields marked with an %s*%s are required"
 msgstr ""
 
-#: ninja-forms.php:676
+#: ninja-forms.php:677
 msgid "Please ensure all required fields are completed."
 msgstr ""
 
-#: ninja-forms.php:677
+#: ninja-forms.php:678
 msgid "This is a required field"
 msgstr ""
 
-#: ninja-forms.php:678
+#: ninja-forms.php:679
 msgid "Please answer the anti-spam question correctly."
 msgstr ""
 
-#: ninja-forms.php:679
+#: ninja-forms.php:680
 msgid "Please leave the spam field blank."
 msgstr ""
 
-#: ninja-forms.php:680
+#: ninja-forms.php:681
 msgid "Please wait to submit the form."
 msgstr ""
 
-#: ninja-forms.php:681
+#: ninja-forms.php:682
 msgid "You cannot submit the form without Javascript enabled."
 msgstr ""
 
-#: ninja-forms.php:682 includes/fields/textbox.php:309
+#: ninja-forms.php:683 includes/fields/textbox.php:309
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: ninja-forms.php:683 includes/admin/step-processing.php:11
+#: ninja-forms.php:684 includes/admin/step-processing.php:11
 msgid "Processing"
 msgstr ""
 
-#: ninja-forms.php:684
+#: ninja-forms.php:685
 msgid "The passwords provided do not match."
 msgstr ""
 
@@ -124,6 +124,7 @@ msgid "Submission CSV"
 msgstr ""
 
 #: classes/notification-email.php:126 includes/admin/edit-field/li.php:428
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:57
 msgid "Advanced Settings"
 msgstr ""
 
@@ -255,7 +256,7 @@ msgstr ""
 msgid "Action Name"
 msgstr ""
 
-#: classes/notifications.php:338
+#: classes/notifications.php:333 classes/notifications.php:338
 msgid "Action Updated"
 msgstr ""
 
@@ -361,17 +362,9 @@ msgstr ""
 msgid "Unpublished"
 msgstr ""
 
-#: classes/subs-cpt.php:413
-msgid "Y/m/d g:i:s A"
-msgstr ""
-
 #: classes/subs-cpt.php:420
 #, php-format
 msgid "%s ago"
-msgstr ""
-
-#: classes/subs-cpt.php:422
-msgid "Y/m/d"
 msgstr ""
 
 #: classes/subs-cpt.php:432 classes/subs-cpt.php:996
@@ -379,7 +372,8 @@ msgid "Submitted"
 msgstr ""
 
 #: classes/subs-cpt.php:492
-msgid "- Select a form"
+#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:67
+msgid "Select a form"
 msgstr ""
 
 #: classes/subs-cpt.php:501
@@ -417,53 +411,6 @@ msgstr ""
 
 #: classes/subs-cpt.php:646
 msgid "updated"
-msgstr ""
-
-#: classes/subs-cpt.php:647
-msgid "Custom field updated."
-msgstr ""
-
-#: classes/subs-cpt.php:648
-msgid "Custom field deleted."
-msgstr ""
-
-#: classes/subs-cpt.php:649
-msgid " updated."
-msgstr ""
-
-#: classes/subs-cpt.php:650
-#, php-format
-msgid " restored to revision from %s"
-msgstr ""
-
-#: classes/subs-cpt.php:651
-#, php-format
-msgid " published. <a href=\"%s\">View "
-msgstr ""
-
-#: classes/subs-cpt.php:652
-msgid "Page saved."
-msgstr ""
-
-#: classes/subs-cpt.php:653
-#, php-format
-msgid " submitted. <a target=\"_blank\" href=\"%s\">Preview "
-msgstr ""
-
-#: classes/subs-cpt.php:654
-#, php-format
-msgid ""
-" scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
-"\">Preview "
-msgstr ""
-
-#: classes/subs-cpt.php:654
-msgid "M j, Y @ G:i"
-msgstr ""
-
-#: classes/subs-cpt.php:655
-#, php-format
-msgid " draft updated. <a target=\"_blank\" href=\"%s\">Preview "
 msgstr ""
 
 #: classes/subs-cpt.php:707
@@ -526,12 +473,20 @@ msgid ""
 "to activate the plugin."
 msgstr ""
 
-#: includes/class-extension-updater.php:71
-msgid "License Key"
+#: includes/class-extension-updater.php:65
+msgid "You will find this included with your purchase email."
 msgstr ""
 
-#: includes/class-extension-updater.php:72
-msgid "You will find this included with your purchase email."
+#: includes/class-extension-updater.php:75
+msgid "Key"
+msgstr ""
+
+#: includes/class-extension-updater.php:145
+msgid "Could not activate license. Please verify your license key"
+msgstr ""
+
+#: includes/class-extension-updater.php:262
+msgid "Deactivate License"
 msgstr ""
 
 #: includes/deprecated.php:464 includes/deprecated.php:473
@@ -631,7 +586,7 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: includes/admin/admin.php:180 includes/admin/scripts.php:70
+#: includes/admin/admin.php:178 includes/admin/scripts.php:70
 #: includes/admin/pages/ninja-forms/tabs/field-settings/edit-field-ul.php:7
 #: includes/admin/pages/ninja-forms/tabs/field-settings/edit-field-ul.php:19
 msgid "Save"
@@ -664,6 +619,18 @@ msgstr ""
 
 #: includes/admin/post-metabox.php:12 includes/admin/post-metabox.php:20
 msgid "Append A Ninja Form"
+msgstr ""
+
+#: includes/admin/scripts.php:51
+msgid "What would you like to name this favorite?"
+msgstr ""
+
+#: includes/admin/scripts.php:51
+msgid "You must supply a name for this favorite."
+msgstr ""
+
+#: includes/admin/scripts.php:51
+msgid "Really deactivate all licenses?"
 msgstr ""
 
 #: includes/admin/scripts.php:70
@@ -820,7 +787,7 @@ msgid ""
 "This update is just the beginning; the future will bring even more "
 "improvements to the notification system. We have plans to add \"global\" "
 "notifications that can be used across multiple forms. Also be on the look "
-"out for Ninja Forms extesions to make notifications even more powerful."
+"out for Ninja Forms extensions to make notifications even more powerful."
 msgstr ""
 
 #: includes/admin/welcome.php:239
@@ -870,7 +837,7 @@ msgstr ""
 
 #: includes/admin/welcome.php:317
 #, php-format
-msgid "<a href=\"%s\">Forms &rarr; Add New</a>"
+msgid "Forms %s Add New</a>"
 msgstr ""
 
 #: includes/admin/welcome.php:318
@@ -900,7 +867,7 @@ msgstr ""
 msgid ""
 "The Field Settings tab is where you will actually build your form by adding "
 "fields and placing them in the order you want them to appear with a simple "
-"drag and drop method. Each field will have an assortment of avaialble "
+"drag and drop method. Each field will have an assortment of available "
 "options that are either general for all fields or specific to that field "
 "type."
 msgstr ""
@@ -918,7 +885,7 @@ msgid ""
 "Under Basic Form Behavior in the Form Settings you can easily select a page "
 "that you would like the form automatically appended to the end of that "
 "page's content. A similiar option is avaiable in every content edit screen "
-"in it's sidebar."
+"in its sidebar."
 msgstr ""
 
 #: includes/admin/welcome.php:343
@@ -928,10 +895,10 @@ msgid "Shortcode"
 msgstr ""
 
 #: includes/admin/welcome.php:344
+#, php-format
 msgid ""
-"Place [ninja_forms_display_form id=1] in any area that accepts shortcodes to "
-"display your form anywhere you like. Even in the middle of your page or "
-"posts content."
+"Place %s in any area that accepts shortcodes to display your form anywhere "
+"you like. Even in the middle of your page or posts content."
 msgstr ""
 
 #: includes/admin/welcome.php:353
@@ -948,10 +915,10 @@ msgid "Template Function"
 msgstr ""
 
 #: includes/admin/welcome.php:358
+#, php-format
 msgid ""
 "Ninja Forms also comes with a simple template function that can be placed "
-"directly into a php template file. <code>if( function_exists"
-"( 'ninja_forms_display_form' ) ){ ninja_forms_display_form( 1 ); }</code>"
+"directly into a php template file. %s"
 msgstr ""
 
 #: includes/admin/welcome.php:368
@@ -965,9 +932,8 @@ msgstr ""
 #: includes/admin/welcome.php:374
 #, php-format
 msgid ""
-"We have all kinds of documentation available covering everything from <a "
-"href=\"%s\">Troubleshooting</a> to our <a href=\"%s\">Devloper API</a>. New "
-"Documents be added every day."
+"Documentation is available covering everything from %sTroubleshooting%s to "
+"our %sDeveloper API%s. New Documents be added every day."
 msgstr ""
 
 #: includes/admin/welcome.php:378
@@ -977,9 +943,9 @@ msgstr ""
 #: includes/admin/welcome.php:379
 #, php-format
 msgid ""
-"We do our very best to provide every Ninja Forms user with the best support "
-"possible. If you encounter a problem or have a question, <a href=\"%s"
-"\">please contact us</a>."
+"We do all we can to provide every Ninja Forms user with the best support "
+"possible. If you encounter a problem or have a question, %splease contact us"
+"%s."
 msgstr ""
 
 #: includes/admin/welcome.php:401
@@ -996,7 +962,7 @@ msgid ""
 msgstr ""
 
 #: includes/admin/welcome.php:424
-msgid "No valid changlog was found."
+msgid "No valid changelog was found."
 msgstr ""
 
 #: includes/admin/welcome.php:461
@@ -1009,19 +975,23 @@ msgid "Disable Browser Autocomplete"
 msgstr ""
 
 #: includes/admin/edit-field/calc.php:44
-msgid "<strong>Checked</strong> Calculation Value"
+#, php-format
+msgid "%sChecked%s Calculation Value"
 msgstr ""
 
 #: includes/admin/edit-field/calc.php:44
-msgid "This is the value that will be used if <strong>Checked</strong>."
+#, php-format
+msgid "This is the value that will be used if %sChecked%s."
 msgstr ""
 
 #: includes/admin/edit-field/calc.php:45
-msgid "<strong>Unchecked</strong> Calculation Value"
+#, php-format
+msgid "%sUnchecked%s Calculation Value"
 msgstr ""
 
 #: includes/admin/edit-field/calc.php:45
-msgid "This is the value that will be used if <strong>Unchecked</strong>."
+#, php-format
+msgid "This is the value that will be used if %sUnchecked%s."
 msgstr ""
 
 #: includes/admin/edit-field/calc.php:48
@@ -1321,10 +1291,6 @@ msgstr ""
 msgid "SMTP"
 msgstr ""
 
-#: includes/admin/pages/system-status-html.php:109
-msgid "smtp_port"
-msgstr ""
-
 #: includes/admin/pages/system-status-html.php:114
 msgid "Default Timezone"
 msgstr ""
@@ -1337,10 +1303,6 @@ msgstr ""
 #: includes/admin/pages/system-status-html.php:120
 #, php-format
 msgid "Default timezone is %s"
-msgstr ""
-
-#: includes/admin/pages/system-status-html.php:128
-msgid "fsockopen/cURL"
 msgstr ""
 
 #: includes/admin/pages/system-status-html.php:131
@@ -1373,8 +1335,8 @@ msgstr ""
 #: includes/admin/pages/system-status-html.php:149
 #, php-format
 msgid ""
-"Your server does not have the <a href=\"%s\">SOAP Client</a> class enabled - "
-"some gateway plugins which use SOAP may not work as expected."
+"Your server does not have the %sSOAP Client%s class enabled - some gateway "
+"plugins which use SOAP may not work as expected."
 msgstr ""
 
 #: includes/admin/pages/system-status-html.php:154
@@ -1462,7 +1424,7 @@ msgstr ""
 
 #: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
 msgid ""
-"So, if you wanted to a mask for an an American Social Security Number, you'd "
+"So, if you wanted to a mask for an American Social Security Number, you'd "
 "put 999-99-9999 into the box"
 msgstr ""
 
@@ -1551,10 +1513,6 @@ msgstr ""
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:218
 #: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:55
 msgid "Form Title"
-msgstr ""
-
-#: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:172
-msgid "F d, Y"
 msgstr ""
 
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:190
@@ -1759,10 +1717,6 @@ msgstr ""
 msgid "Export a form"
 msgstr ""
 
-#: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:67
-msgid "Select a form"
-msgstr ""
-
 #: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:75
 #: includes/admin/pages/ninja-forms-impexp/tabs/impexp-forms/impexp-forms.php:156
 msgid "Export Form"
@@ -1805,31 +1759,29 @@ msgid "Date Format"
 msgstr ""
 
 #: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:41
+#, php-format
 msgid ""
-"e.g. m/d/Y, d/m/Y - Tries to follow the <a href=\"http://www.php.net/manual/"
-"en/function.date.php\" target=\"_blank\">PHP date() function</a> "
-"specifications, but not every format is supported."
+"Tries to follow the %sPHP date() function%s specifications, but not every "
+"format is supported."
 msgstr ""
 
 #: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:46
 msgid "Currency Symbol"
 msgstr ""
 
-#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:47
-msgid "e.g. $, &pound;, &euro;"
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:62
+msgid "Remove ALL Ninja Forms data upon uninstall?"
 msgstr ""
 
-#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:52
-msgid "Remove ALL Ninja Forms data upon deactivation?"
-msgstr ""
-
-#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:53
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:63
+#, php-format
 msgid ""
 "If this box is checked, ALL Ninja Forms data will be removed from the "
-"database upon deletion. This is not recoverable."
+"database upon deletion. %sAll form and submission data will be unrecoverable."
+"%s"
 msgstr ""
 
-#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:69
+#: includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php:80
 #: includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php:102
 msgid "Settings Saved"
 msgstr ""
@@ -1898,20 +1850,28 @@ msgid ""
 "password field."
 msgstr ""
 
-#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:7
-#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:23
+#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:4
+#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:21
 msgid "Licenses"
 msgstr ""
 
-#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:28
-msgid ""
-"To activate licenses for Ninja Forms extensions you must first <a target="
-"\"_blank\" href=\"http://ninjaforms.com/documentation/extension-docs/"
-"installing-extensions/\">install and activate</a> the chosen extension. "
-"License settings will then appear below."
+#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:60
+msgid "Save & Activate"
 msgstr ""
 
-#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:43
+#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:66
+msgid "Deactivate All Licenses"
+msgstr ""
+
+#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:84
+#, php-format
+msgid ""
+"To activate licenses for Ninja Forms extensions you must first %s install "
+"and activate %s the chosen extension. License settings will then appear "
+"below."
+msgstr ""
+
+#: includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php:100
 msgid "Licenses Saved"
 msgstr ""
 
@@ -1926,22 +1886,22 @@ msgstr ""
 #: includes/admin/upgrades/upgrade-functions.php:31
 #, php-format
 msgid ""
-"Ninja Forms needs to upgrade your form notifications, click <a href=\"%s"
-"\">here</a> to start the upgrade."
+"Ninja Forms needs to upgrade your form notifications, click %shere%s to "
+"start the upgrade."
 msgstr ""
 
 #: includes/admin/upgrades/upgrade-functions.php:40
 #, php-format
 msgid ""
-"Ninja Forms needs to update your email settings, click <a href=\"%s\">here</"
-"a> to start the upgrade."
+"Ninja Forms needs to update your email settings, click %shere%s to start the "
+"upgrade."
 msgstr ""
 
 #: includes/admin/upgrades/upgrade-functions.php:55
 #, php-format
 msgid ""
-"Ninja Forms needs to upgrade the submissions table, click <a href=\"%s"
-"\">here</a> to start the upgrade."
+"Ninja Forms needs to upgrade the submissions table, click %shere%s to start "
+"the upgrade."
 msgstr ""
 
 #: includes/admin/upgrades/upgrade-functions.php:64
@@ -1972,8 +1932,8 @@ msgstr ""
 #: includes/admin/upgrades/upgrade-functions.php:82
 #, php-format
 msgid ""
-"Ninja Forms needs to upgrade your form settings, click <a href=\"%s\">here</"
-"a> to start the upgrade."
+"Ninja Forms needs to upgrade your form settings, click %shere%s to start the "
+"upgrade."
 msgstr ""
 
 #: includes/admin/upgrades/upgrades.php:41
@@ -2026,16 +1986,13 @@ msgstr ""
 msgid "Please check required fields."
 msgstr ""
 
-#: includes/fields/calc.php:10 includes/fields/calc.php:111
+#: includes/fields/calc.php:10 includes/fields/calc.php:70
+#: includes/fields/calc.php:111
 msgid "Calculation"
 msgstr ""
 
 #: includes/fields/calc.php:42
 msgid "Number of decimal places."
-msgstr ""
-
-#: includes/fields/calc.php:70
-msgid "calc_name"
 msgstr ""
 
 #: includes/fields/calc.php:94 includes/fields/textbox.php:4
@@ -2063,16 +2020,17 @@ msgid ""
 msgstr ""
 
 #: includes/fields/calc.php:188
+#, php-format
 msgid ""
 "You can enter calculation equations here using field_x where x is the ID of "
-"the field you want to use. For example, <strong>field_53 + field_28 + "
-"field_65</strong>."
+"the field you want to use. For example, %sfield_53 + field_28 + field_65%s."
 msgstr ""
 
 #: includes/fields/calc.php:189
+#, php-format
 msgid ""
-"Complex equations can be created by adding parentheses: <strong>( field_45 * "
-"field_2 ) / 2</strong>."
+"Complex equations can be created by adding parentheses: %s( field_45 * "
+"field_2 ) / 2%s."
 msgstr ""
 
 #: includes/fields/calc.php:190
@@ -3211,7 +3169,7 @@ msgstr ""
 msgid "Card Expiry Year Label"
 msgstr ""
 
-#: includes/fields/credit-card.php:100
+#: includes/fields/credit-card.php:100 includes/fields/credit-card.php:157
 msgid "Expiration year (YYYY)"
 msgstr ""
 
@@ -3221,10 +3179,6 @@ msgstr ""
 
 #: includes/fields/credit-card.php:108 includes/fields/credit-card.php:158
 msgid "The year your credit card expires, typically on the front of the card."
-msgstr ""
-
-#: includes/fields/credit-card.php:157
-msgid "Expiration year (YYY)"
 msgstr ""
 
 #: includes/fields/desc.php:4
@@ -3329,7 +3283,7 @@ msgstr ""
 msgid "Remove Value"
 msgstr ""
 
-#: includes/fields/list.php:112 includes/fields/list.php:591
+#: includes/fields/list.php:112
 msgid "Calc"
 msgstr ""
 

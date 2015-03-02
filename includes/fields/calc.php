@@ -67,7 +67,7 @@ function ninja_forms_calc_edit_label_filter( $li_label, $field_id ) {
 		if ( isset ( $field_row['data']['calc_name'] ) ) {
 			$li_label = $field_row['data']['calc_name'];
 		} else {
-			$li_label = __( 'calc_name', 'ninja-forms' );
+			$li_label = __( 'Calculation', 'ninja-forms' );
 		}
 
 	}
@@ -185,9 +185,9 @@ function ninja_forms_field_calc_edit( $field_id, $data ) {
 		$calc = array();
 	}
 
-	$desc = '<p>'.__( 'You can enter calculation equations here using field_x where x is the ID of the field you want to use. For example, <strong>field_53 + field_28 + field_65</strong>.', 'ninja-forms' ).'</p>';
-	$desc .= '<p>'.__( 'Complex equations can be created by adding parentheses: <strong>( field_45 * field_2 ) / 2</strong>.', 'ninja-forms' ).'</p>';
-	$desc .= '<p>'.__( 'Please use these operators: + - * /. This is an advanced feature. Watch out for things like division by 0.', 'ninja-forms' ).'</p>';
+	$desc = '<p>' . sprintf( __( 'You can enter calculation equations here using field_x where x is the ID of the field you want to use. For example, %sfield_53 + field_28 + field_65%s.', 'field_ should NOT be translated.', 'ninja-forms' ), '<strong>', '</strong>' ) . '</p>';
+	$desc .= '<p>' . sprintf( __( 'Complex equations can be created by adding parentheses: %s( field_45 * field_2 ) / 2%s.', 'field_ should NOT be translated.', 'ninja-forms' ), '<strong>', '</strong>' ) . '</p>';
+	$desc .= '<p>' .__( 'Please use these operators: + - * /. This is an advanced feature. Watch out for things like division by 0.', 'ninja-forms' ).'</p>';
 	$options = array(
 		array( 'name' => __( 'Automatically Total Calculation Values', 'ninja-forms' ), 'value' => 'auto' ),
 		array( 'name' => __( 'Specify Operations And Fields (Advanced)', 'ninja-forms' ), 'value' => 'fields' ),
