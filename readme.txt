@@ -13,7 +13,7 @@ Ninja Forms is the ultimate FREE form creation solution for WordPress. Build Wor
 
 The Ninja Forms framework is now on [GitHub](https://github.com/wpninjas/ninja-forms)! If you're a developer and want to help make Ninja Forms better, check out our [GitHub repo](https://github.com/wpninjas/ninja-forms). It's also a great resource for developers who are interested in creating premium extensions for our online store.
 
-[youtube http://www.youtube.com/watch?v=2yf2Fqvbmkk]
+[youtube https://www.youtube.com/watch?v=DFAz8kKVi08]
 
 Here are just a few of the things you will find in Ninja Forms:
 
@@ -177,7 +177,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 * Fixed a bug with converting notifications from previous versions of Ninja Forms.
 * Re-Added the password mismatch label to the label settings tab.
-* The [ninja_forms_all_fields] short code should now function properly in plain text emails. 
+* The [ninja_forms_all_fields] short code should now function properly in plain text emails.
 * Submitted forms that are set to clear upon completion should now properly re-populate default values that are based upon logged-in user information.
 * Fixed an issue with doubles slashes on Windows servers.
 * Importing forms should now work properly in all instances.
@@ -254,7 +254,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 *Security:*
 
-* Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update. 
+* Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update.
 
 *Features:*
 
