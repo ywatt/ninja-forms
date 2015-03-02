@@ -133,6 +133,13 @@ class NF_Welcome {
 		.about-wrap .feature-section {
 			margin-top: 20px;
 		}
+		.about-overview {
+			padding: 20px;
+		}
+		.about-overview iframe {
+			display: block;
+			margin: 0 auto;
+		}
 
 		/*]]>*/
 		</style>
@@ -308,22 +315,22 @@ class NF_Welcome {
 			<p class="about-description"><?php _e( 'Use the tips below to get started using Ninja Forms. You will be up and running in no time!', 'ninja-forms' ); ?></p>
 
 			<div class="changelog">
-				
+
 				<div class="feature-section">
 					<h4><?php _e( 'All About Forms', 'ninja-forms' );?></h4>
-					<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-new-form.png'; ?>" class="nf-welcome-screenshots">
+					<img style="width: 500px; height: 292px;" src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-new-form.png'; ?>" class="nf-welcome-screenshots">
 
 					<p><?php printf( __( 'The Forms menu is your access point for all things Ninja Forms. We\'ve already created your first %scontact form%s so that you have an example. You can also create your own by clicking %sAdd New%s.', 'ninja-forms' ), '<a href="admin.php?page=ninja-forms&tab=builder&form_id=1">', '</a>', '<a href="admin.php?page=ninja-forms&tab=builder&form_id=new">', '</a>' ); ?></p>
 
 					<h4><?php _e( 'Build Your Form', 'ninja-forms' );?></h4>
 					<p><?php _e( 'This is where you\'ll build your form by adding fields and dragging them into the order you want them to appear. Each field will have an assortment of options such as label, label position, and placeholder.', 'ninja-forms' );?></p>
-					
+
 					<h4><?php _e( 'Emails & Actions', 'ninja-forms' );?></h4>
 					<p><?php _e( 'If you would like for your form to notify you via email when a user clicks submit, you can set those up on this tab. You can create an unlimited number of emails, including emails sent to the user who filled out the form.', 'ninja-forms' );?></p>
-					
+
 					<h4><?php _e( 'Settings', 'ninja-forms' );?></h4>
 					<p><?php _e( 'This tab hold general form settings, such as title and submission method, as well as display settings like hiding a form when it is successfully completed.', 'ninja-forms' );?></p>
-				
+
 				</div>
 
 			</div>
@@ -486,7 +493,7 @@ class NF_Welcome {
 		if ( false !== $contributors )
 			return $contributors;
 
-		$response = wp_remote_get( 'https://api.github.com/repos/wpninjas/ninja-forms/contributors', array( 'sslverify' => false ) );
+		$response = wp_remote_get( 'https://api.github.com/repos/wpninjas/ninja-forms/contributors?&per_page=100', array( 'sslverify' => false ) );
 
 		if ( is_wp_error( $response ) || 200 != wp_remote_retrieve_response_code( $response ) )
 			return array();
