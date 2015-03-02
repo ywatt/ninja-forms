@@ -2,8 +2,8 @@
 Contributors: kstover, jameslaws, wpnzach, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
-Tested up to: 4.1
-Stable tag: 2.8.13
+Tested up to: 4.1.1
+Stable tag: 2.9
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -74,17 +74,41 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.8.13 (18 December 2014) =
+= 2.9 (3 March 2015) =
+
+*Changes:*
+
+* Simplified the form creation interface by adding a "Build Your Form" tab, an "Emails & Actions" tab and a "Settings" tab. All other tabs have been removed.
+* Form Preview and Submissions are now buttons that can be click at any stage of editing a form.
+* Field settings have been simplified by introducing a series of new, expandable settings sections. These sections house more advanced or less-used settings.
 
 *Bugs:*
 
-* Fixed a bug introduced in the previous version that could prevent javascript from working properly on the front-end.
+* Fixed a major bug that could prevent longer forms from saving properly. Previous fixes required modifying a php.ini file.
+* Creating a new action should now show the proper saved message.
+* Updated the Ninja Forms translation file with several new strings and cleaned up existing strings.
+* Modified the way that options are grabbed from the database to make them more effecient and prevent errors.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.9 (3 March 2015) =
+
+*Changes:*
+
+* Simplified the form creation interface by adding a "Build Your Form" tab, an "Emails & Actions" tab and a "Settings" tab. All other tabs have been removed.
+* Form Preview and Submissions are now buttons that can be click at any stage of editing a form.
+* Field settings have been simplified by introducing a series of new, expandable settings sections. These sections house more advanced or less-used settings.
+
+*Bugs:*
+
+* Fixed a major bug that could prevent longer forms from saving properly. Previous fixes required modifying a php.ini file.
+* Creating a new action should now show the proper saved message.
+* Updated the Ninja Forms translation file with several new strings and cleaned up existing strings.
+* Modified the way that options are grabbed from the database to make them more effecient and prevent errors.
 
 = 2.8.13 (18 December 2014) =
 
