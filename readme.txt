@@ -88,6 +88,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Creating a new action should now show the proper saved message.
 * Updated the Ninja Forms translation file with several new strings and cleaned up existing strings.
 * Modified the way that options are grabbed from the database to make them more effecient and prevent errors.
+* Fixed a bug that caused post meta to be added to a post/page even if no form was selected.
 
 == Requested Features ==
 
@@ -109,6 +110,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 * Creating a new action should now show the proper saved message.
 * Updated the Ninja Forms translation file with several new strings and cleaned up existing strings.
 * Modified the way that options are grabbed from the database to make them more effecient and prevent errors.
+* Fixed a bug that caused post meta to be added to a post/page even if no form was selected.
 
 = 2.8.13 (18 December 2014) =
 
