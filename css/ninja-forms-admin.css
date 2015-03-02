@@ -1317,3 +1317,11 @@ p.debug-report {
 	font-weight: bold;
 	text-decoration: underline;
 }
+
+.about-overview {
+	padding: 20px;
+}
+.about-overview iframe {
+	display: block;
+	margin: 0 auto;
+}
