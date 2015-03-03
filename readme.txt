@@ -85,6 +85,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 *Bugs:*
 
 * Fixed a bug that could cause a PHP notice to show in placeholders.
+* Fixed a bug that could cause forms not to display properly when added via the "append to page" option.
 * Fixed a major bug that could prevent longer forms from saving properly. Previous fixes required modifying a php.ini file.
 * Creating a new action should now show the proper saved message.
 * Updated the Ninja Forms translation file with several new strings and cleaned up existing strings.
@@ -97,6 +98,13 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 == Changelog ==
 
+= 2.9.1 (3 March 2015 ) =
+
+*Bugs:*
+
+* Fixed a bug that could cause a PHP notice to show in placeholders.
+* Fixed a bug that could cause forms not to display properly when added via the "append to page" option.
+
 = 2.9 (3 March 2015) =
 
 *Changes:*
@@ -107,7 +115,6 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 *Bugs:*
 
-* Fixed a bug that could cause a PHP notice to show in placeholders.
 * Fixed a major bug that could prevent longer forms from saving properly. Previous fixes required modifying a php.ini file.
 * Creating a new action should now show the proper saved message.
 * Updated the Ninja Forms translation file with several new strings and cleaned up existing strings.
