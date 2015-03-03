@@ -432,7 +432,7 @@ function nf_output_registered_field_settings( $field_id, $data = array() ) {
 		?>
 		<div class="nf-field-settings description-wide description">
 			<div class="title">
-				<?php echo $name; ?><span class="dashicons dashicons-arrow-down nf-field-toggle"></span>
+				<?php echo $name; ?><span class="dashicons dashicons-arrow-down nf-field-sub-section-toggle"></span>
 			</div>
 			<div class="inside" style="display:none;">
 				<?php

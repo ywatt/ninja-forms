@@ -1291,6 +1291,7 @@ p.debug-report {
 .nf-field-settings .title {
 	background: #f1f1f1;
 	padding: 5px 10px;
+	cursor: pointer;
 }
 
 .nf-field-settings .dashicons {

@@ -76,6 +76,8 @@ var nfField = Backbone.Model.extend( {
 
 			// Re-run makeSortable for new HTML
 			nfFields.listOptionsSortable();
+
+			jQuery( '.nf-field-settings' ).disableSelection();
 		} );
 	},
 	updateData: function() {
@@ -448,7 +450,11 @@ jQuery( document ).ready( function( $ ) {
 		}
 	});
 
-	$( document ).on( 'click', '.nf-field-toggle', function(e) {
+	$( document ).on( 'dblclick', '.nf-field-settings', function(e) {
+		$( this ).find( '.nf-field-sub-section-toggle' ).click();
+	} );
+
+	$( document ).on( 'click', '.nf-field-sub-section-toggle', function(e) {
 		e.preventDefault();
 		if ( $( this ).hasClass( 'dashicons-arrow-down' ) ) {
 			$( this ).removeClass( 'dashicons-arrow-down' ).addClass( 'dashicons-arrow-up' );
