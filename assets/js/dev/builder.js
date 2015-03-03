@@ -457,7 +457,6 @@ jQuery( document ).ready( function( $ ) {
 		}
 		$( this ).parent().next( '.inside' ).slideToggle();
 	} );
-
 	
 	$( window ).bind( 'beforeunload', function() {
 		if ( 'new' == nfForm.get( 'status' ) ) { // Prompt the user to give a name if they leave the builder before naming their form.
@@ -466,6 +465,10 @@ jQuery( document ).ready( function( $ ) {
 		} else if ( nfForm.get( 'saved' ) == false ) {
 			return 'You have unsaved changes. Please save before leaving this page.';
 		}
+	} );
+
+	$( document ).on( 'dblclick', '.menu-item-handle', function( e ) {
+		$( this ).find( '.nf-edit-field' ).click();
 	} );
 
 });
