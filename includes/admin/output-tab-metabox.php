@@ -2,8 +2,7 @@
 function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 	$plugin_settings = nf_get_settings();
 	if($form_id != ''){
-		$form_row = ninja_forms_get_form_by_id($form_id);
-		$current_settings = $form_row['data'];
+		$current_settings = Ninja_Forms()->form($form_id)->get_all_settings();
 	}else{
 		$form_id = '';
 		$current_settings = nf_get_settings();
@@ -96,7 +95,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 			if(isset($s['class'])){
 				$class = $s['class'];
 			}else{
-				$class = '';
+				$class = 'widefat';
 			}
 			if(isset($s['tr_class'])){
 				$tr_class = $s['tr_class'];
@@ -185,7 +184,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					$value = ninja_forms_esc_html_deep( $value );
 					?>
 
-					<input type="text" class="code widefat <?php echo $class;?>" name="<?php echo $name;?>" id="<?php echo $name;?>" value="<?php echo $value;?>" />
+					<input type="text" class="code <?php echo $class;?>" name="<?php echo $name;?>" id="<?php echo $name;?>" value="<?php echo $value;?>" />
 					<?php if( $help_text != ''){ ?>
 					<a href="#" class="tooltip">
 					    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>images/question-ico.gif" title="">
