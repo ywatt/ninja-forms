@@ -450,7 +450,7 @@ jQuery( document ).ready( function( $ ) {
 		}
 	});
 
-	$( document ).on( 'dblclick', '.nf-field-settings', function(e) {
+	$( document ).on( 'dblclick', '.nf-field-settings .title', function(e) {
 		$( this ).find( '.nf-field-sub-section-toggle' ).click();
 	} );
 
