@@ -216,19 +216,19 @@ class NF_Welcome {
 					<div class="col-1">
 						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-emails-actions.png'; ?>">
 						<h4><?php _e( 'Improved clarity', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Along with the "Build Your Form" tab, we\'ve removed "Notifications" in favor of "Emails & Actions." This is a much clearer indication of what can be done on this tab.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php _e( 'Along with the "Build Your Form" tab, we\'ve removed "Notifications" in favor of "Emails & Actions." This is a much clearer indication of what can be done on this tab.', 'ninja-forms' ); ?></p>
 					</div>
 
 					<div class="col-2">
 						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-nuke-option.png'; ?>">
 						<h4><?php _e( 'Remove all Ninja Forms data', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'We\'ve added the option to remove all Ninja Forms data (submissions, forms, fields, options) when you delete the plugin. We call it the nuclear option.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php _e( 'We\'ve added the option to remove all Ninja Forms data (submissions, forms, fields, options) when you delete the plugin. We call it the nuclear option.', 'ninja-forms' ); ?></p>
 					</div>
 
 					<div class="col-3 last-feature">
 						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-licenses.png'; ?>">
 						<h4><?php _e( 'Better license management', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Deactivate Ninja Forms extension licenses individually or as a group from the settings tab.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p><?php _e( 'Deactivate Ninja Forms extension licenses individually or as a group from the settings tab.', 'ninja-forms' ); ?></p>
 					</div>
 
 				</div>
@@ -379,7 +379,7 @@ class NF_Welcome {
 
 					<div class="col-1">
 						<h4><?php _e( 'Growing Documentation', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Documentation is available covering everything from %sTroubleshooting%s to our %sDeveloper API%s. New Documents be added every day.', 'ninja-forms' ), '<a href="http://ninjaforms.com/documentation/using-ninja-forms/faq-troubleshooting/">', '</a>', '<a href="http://ninjaforms.com/documentation/developer-api/">', '</a>' ); ?></p>
+						<p><?php printf( __( 'Documentation is available covering everything from %sTroubleshooting%s to our %sDeveloper API%s. New Documents are always being added.', 'ninja-forms' ), '<a href="http://ninjaforms.com/documentation/using-ninja-forms/faq-troubleshooting/">', '</a>', '<a href="http://ninjaforms.com/documentation/developer-api/">', '</a>' ); ?></p>
 					</div>
 
 					<div class="col-2 last-feature">

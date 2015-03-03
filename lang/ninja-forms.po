@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ninja-forms\n"
-"POT-Creation-Date: 2015-03-02 11:51-0500\n"
-"PO-Revision-Date: 2015-03-02 11:52-0500\n"
+"POT-Creation-Date: 2015-03-02 21:39-0500\n"
+"PO-Revision-Date: 2015-03-02 21:39-0500\n"
 "Last-Translator: \n"
 "Language-Team: WP Ninjas <info@wpninjas.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.7\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x;_n\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x;_n;_ex\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -186,47 +186,47 @@ msgstr ""
 msgid "duplicate"
 msgstr ""
 
-#: classes/notifications-table.php:116 classes/notifications-table.php:221
+#: classes/notifications-table.php:117 classes/notifications-table.php:222
 #: classes/notifications.php:170
 msgid "Deactivate"
 msgstr ""
 
-#: classes/notifications-table.php:116 classes/notifications-table.php:220
+#: classes/notifications-table.php:117 classes/notifications-table.php:221
 #: classes/notifications.php:169
 msgid "Activate"
 msgstr ""
 
-#: classes/notifications-table.php:128 classes/subs-cpt.php:389
+#: classes/notifications-table.php:129 classes/subs-cpt.php:389
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:189
 msgid "Edit"
 msgstr ""
 
-#: classes/notifications-table.php:129 classes/notifications-table.php:222
+#: classes/notifications-table.php:130 classes/notifications-table.php:223
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:103
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:190
 msgid "Delete"
 msgstr ""
 
-#: classes/notifications-table.php:130
+#: classes/notifications-table.php:131
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:191
 msgid "Duplicate"
 msgstr ""
 
-#: classes/notifications-table.php:174
+#: classes/notifications-table.php:175
 msgid "Name"
 msgstr ""
 
-#: classes/notifications-table.php:175 classes/notifications.php:259
+#: classes/notifications-table.php:176 classes/notifications.php:259
 msgid "Type"
 msgstr ""
 
-#: classes/notifications-table.php:176
+#: classes/notifications-table.php:177
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:161
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:221
 msgid "Date Updated"
 msgstr ""
 
-#: classes/notifications-table.php:240
+#: classes/notifications-table.php:241
 msgid "- View All Types"
 msgstr ""
 
@@ -517,7 +517,7 @@ msgid ""
 "plugin free.  Thank you from the WP Ninjas team!"
 msgstr ""
 
-#: includes/widget.php:14 includes/admin/welcome.php:352
+#: includes/widget.php:14 includes/admin/welcome.php:360
 msgid "Ninja Forms Widget"
 msgstr ""
 
@@ -565,7 +565,7 @@ msgstr ""
 msgid "Ninja Form Settings"
 msgstr ""
 
-#: includes/admin/admin.php:30
+#: includes/admin/admin.php:30 includes/admin/welcome.php:331
 #: includes/admin/pages/ninja-forms/tabs/form-settings/form-settings.php:7
 msgid "Settings"
 msgstr ""
@@ -679,7 +679,7 @@ msgid ""
 "You will be automatically redirected when the process is finished."
 msgstr ""
 
-#: includes/admin/welcome.php:42 includes/admin/welcome.php:400
+#: includes/admin/welcome.php:42 includes/admin/welcome.php:408
 #, php-format
 msgid "Welcome to Ninja Forms %s"
 msgstr ""
@@ -687,8 +687,8 @@ msgstr ""
 #: includes/admin/welcome.php:43
 #, php-format
 msgid ""
-"Thank you for updating to the latest version! Ninja Forms %s brings you "
-"unprecedented control over your notifications in a form creation plugin!"
+"Thank you for updating! Ninja Forms %s makes form building easier than ever "
+"before!"
 msgstr ""
 
 #: includes/admin/welcome.php:57 includes/admin/welcome.php:58
@@ -707,180 +707,180 @@ msgstr ""
 msgid "The people who build Ninja Forms"
 msgstr ""
 
-#: includes/admin/welcome.php:154
+#: includes/admin/welcome.php:161
 msgid "What's New"
 msgstr ""
 
-#: includes/admin/welcome.php:157
+#: includes/admin/welcome.php:164
 msgid "Getting Started"
 msgstr ""
 
-#: includes/admin/welcome.php:160
+#: includes/admin/welcome.php:167
 msgid "Credits"
 msgstr ""
 
-#: includes/admin/welcome.php:178 includes/admin/welcome.php:272
-#: includes/admin/welcome.php:304 includes/admin/welcome.php:402
+#: includes/admin/welcome.php:185 includes/admin/welcome.php:279
+#: includes/admin/welcome.php:311 includes/admin/welcome.php:410
 #, php-format
 msgid "Version %s"
 msgstr ""
 
-#: includes/admin/welcome.php:187
-msgid "A more powerful and flexible notification system"
-msgstr ""
-
-#: includes/admin/welcome.php:193
-msgid "Unlimited notifications"
-msgstr ""
-
 #: includes/admin/welcome.php:194
-msgid ""
-"Create as many notifications (Email, Success Message, Redirect) as you like "
-"for each of your Ninja Forms."
-msgstr ""
-
-#: includes/admin/welcome.php:199
-msgid "Easy notification creation"
+msgid "A simplified and more powerful form building experience."
 msgstr ""
 
 #: includes/admin/welcome.php:200
+msgid "New Builder Tab"
+msgstr ""
+
+#: includes/admin/welcome.php:201
 msgid ""
-"All relevant notification settings on one page. Easily fill these settings "
-"with submitted data."
+"When creating and editing forms, go directly to the section that matters "
+"most."
 msgstr ""
 
-#: includes/admin/welcome.php:211
-msgid "Activate or deactivate notifications"
+#: includes/admin/welcome.php:206
+msgid "Better Organized Field Settings"
 msgstr ""
 
-#: includes/admin/welcome.php:212
+#: includes/admin/welcome.php:207
 msgid ""
-"Easily activate or deactivate notifications, depending on your current needs."
-msgstr ""
-
-#: includes/admin/welcome.php:217
-msgid "Filter notifications by type"
+"The most common settings are shown immediately, while other, non-essential, "
+"settings are tucked away inside expandable sections."
 msgstr ""
 
 #: includes/admin/welcome.php:218
-msgid ""
-"Easily filter long lists of notifications by a specified type to find just "
-"the one you're looking for."
+msgid "Improved clarity"
 msgstr ""
 
-#: includes/admin/welcome.php:223
-msgid "Duplicate notifications"
+#: includes/admin/welcome.php:219
+msgid ""
+"Along with the \"Build Your Form\" tab, we've removed \"Notifications\" in "
+"favor of \"Emails & Actions.\" This is a much clearer indication of what can "
+"be done on this tab."
 msgstr ""
 
 #: includes/admin/welcome.php:224
-msgid ""
-"Duplicate notifications and change settings to quickly create similar "
-"notifications."
+msgid "Remove all Ninja Forms data"
 msgstr ""
 
-#: includes/admin/welcome.php:234
+#: includes/admin/welcome.php:225
+msgid ""
+"We've added the option to remove all Ninja Forms data (submissions, forms, "
+"fields, options) when you delete the plugin. We call it the nuclear option."
+msgstr ""
+
+#: includes/admin/welcome.php:230
+msgid "Better license management"
+msgstr ""
+
+#: includes/admin/welcome.php:231
+msgid ""
+"Deactivate Ninja Forms extension licenses individually or as a group from "
+"the settings tab."
+msgstr ""
+
+#: includes/admin/welcome.php:241
 msgid "More to come"
 msgstr ""
 
-#: includes/admin/welcome.php:235
-msgid ""
-"This update is just the beginning; the future will bring even more "
-"improvements to the notification system. We have plans to add \"global\" "
-"notifications that can be used across multiple forms. Also be on the look "
-"out for Ninja Forms extensions to make notifications even more powerful."
-msgstr ""
-
-#: includes/admin/welcome.php:239
-msgid "Notification documentation"
-msgstr ""
-
-#: includes/admin/welcome.php:240
-msgid ""
-"To get you started, we've already added documentation on the new "
-"notifications feature. If you still have questions you can always contact "
-"the Ninja Forms support team."
-msgstr ""
-
 #: includes/admin/welcome.php:242
-msgid "Notification Documentation"
+msgid ""
+"The interface updates in this version lay the groundwork for some great "
+"improvements in the future. Version 3.0 will build on these changes to make "
+"Ninja Forms an even more stable, powerful, and user-friendly form builder."
 msgstr ""
 
-#: includes/admin/welcome.php:243
+#: includes/admin/welcome.php:246
+#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:40
+msgid "Documentation"
+msgstr ""
+
+#: includes/admin/welcome.php:247
+msgid "Take a look at our in-depth Ninja Forms documentation below."
+msgstr ""
+
+#: includes/admin/welcome.php:249
+msgid "Ninja Forms Documentation"
+msgstr ""
+
+#: includes/admin/welcome.php:250
 msgid "Get Support"
 msgstr ""
 
-#: includes/admin/welcome.php:252
+#: includes/admin/welcome.php:259
 msgid "Return to Ninja Forms"
 msgstr ""
 
-#: includes/admin/welcome.php:253
+#: includes/admin/welcome.php:260
 msgid "View the Full Changelog"
 msgstr ""
 
-#: includes/admin/welcome.php:277
+#: includes/admin/welcome.php:284
 msgid "Full Changelog"
 msgstr ""
 
-#: includes/admin/welcome.php:285
+#: includes/admin/welcome.php:292
 msgid "Go to Ninja Forms"
 msgstr ""
 
-#: includes/admin/welcome.php:308
+#: includes/admin/welcome.php:315
 msgid ""
 "Use the tips below to get started using Ninja Forms. You will be up and "
 "running in no time!"
 msgstr ""
 
-#: includes/admin/welcome.php:311
-msgid "Creating Your First Form"
-msgstr ""
-
-#: includes/admin/welcome.php:317
-#, php-format
-msgid "Forms %s Add New</a>"
-msgstr ""
-
-#: includes/admin/welcome.php:318
-msgid ""
-"The Forms menu is your access point for all aspects of your Ninja Forms "
-"creation and setup. We've already created your first form for you so you can "
-"use that as an example or create your own, simply click Add New and start "
-"with your Forms Settings."
-msgstr ""
-
 #: includes/admin/welcome.php:320
-msgid "Form Settings"
-msgstr ""
-
-#: includes/admin/welcome.php:321
-msgid ""
-"The Form Settings tab is where you will configure all the options that "
-"pertain to the specific form you are editing. Everything about how your form "
-"behaves is handled here."
+msgid "All About Forms"
 msgstr ""
 
 #: includes/admin/welcome.php:323
-msgid "Field Settings"
-msgstr ""
-
-#: includes/admin/welcome.php:324
+#, php-format
 msgid ""
-"The Field Settings tab is where you will actually build your form by adding "
-"fields and placing them in the order you want them to appear with a simple "
-"drag and drop method. Each field will have an assortment of available "
-"options that are either general for all fields or specific to that field "
-"type."
+"The Forms menu is your access point for all things Ninja Forms. We've "
+"already created your first %scontact form%s so that you have an example. You "
+"can also create your own by clicking %sAdd New%s."
 msgstr ""
 
-#: includes/admin/welcome.php:333
+#: includes/admin/welcome.php:325
+#: includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:11
+msgid "Build Your Form"
+msgstr ""
+
+#: includes/admin/welcome.php:326
+msgid ""
+"This is where you'll build your form by adding fields and dragging them into "
+"the order you want them to appear. Each field will have an assortment of "
+"options such as label, label position, and placeholder."
+msgstr ""
+
+#: includes/admin/welcome.php:328
+msgid "Emails & Actions"
+msgstr ""
+
+#: includes/admin/welcome.php:329
+msgid ""
+"If you would like for your form to notify you via email when a user clicks "
+"submit, you can set those up on this tab. You can create an unlimited number "
+"of emails, including emails sent to the user who filled out the form."
+msgstr ""
+
+#: includes/admin/welcome.php:332
+msgid ""
+"This tab hold general form settings, such as title and submission method, as "
+"well as display settings like hiding a form when it is successfully "
+"completed."
+msgstr ""
+
+#: includes/admin/welcome.php:341
 msgid "Displaying Your Form"
 msgstr ""
 
-#: includes/admin/welcome.php:338
+#: includes/admin/welcome.php:346
 msgid "Append to Page"
 msgstr ""
 
-#: includes/admin/welcome.php:339
+#: includes/admin/welcome.php:347
 msgid ""
 "Under Basic Form Behavior in the Form Settings you can easily select a page "
 "that you would like the form automatically appended to the end of that "
@@ -888,59 +888,59 @@ msgid ""
 "in its sidebar."
 msgstr ""
 
-#: includes/admin/welcome.php:343
+#: includes/admin/welcome.php:351
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:159
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:219
 msgid "Shortcode"
 msgstr ""
 
-#: includes/admin/welcome.php:344
+#: includes/admin/welcome.php:352
 #, php-format
 msgid ""
 "Place %s in any area that accepts shortcodes to display your form anywhere "
 "you like. Even in the middle of your page or posts content."
 msgstr ""
 
-#: includes/admin/welcome.php:353
+#: includes/admin/welcome.php:361
 msgid ""
 "Ninja Forms provides a widget that you can place in any widgetized area of "
 "your site and select exactly which form you would like displayed in that "
 "space."
 msgstr ""
 
-#: includes/admin/welcome.php:357
+#: includes/admin/welcome.php:365
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:160
 #: includes/admin/pages/ninja-forms/tabs/form-list/form-list.php:220
 msgid "Template Function"
 msgstr ""
 
-#: includes/admin/welcome.php:358
+#: includes/admin/welcome.php:366
 #, php-format
 msgid ""
 "Ninja Forms also comes with a simple template function that can be placed "
 "directly into a php template file. %s"
 msgstr ""
 
-#: includes/admin/welcome.php:368
+#: includes/admin/welcome.php:376
 msgid "Need Help?"
 msgstr ""
 
-#: includes/admin/welcome.php:373
+#: includes/admin/welcome.php:381
 msgid "Growing Documentation"
 msgstr ""
 
-#: includes/admin/welcome.php:374
+#: includes/admin/welcome.php:382
 #, php-format
 msgid ""
 "Documentation is available covering everything from %sTroubleshooting%s to "
-"our %sDeveloper API%s. New Documents be added every day."
+"our %sDeveloper API%s. New Documents are always being added."
 msgstr ""
 
-#: includes/admin/welcome.php:378
+#: includes/admin/welcome.php:386
 msgid "Best Support in the Business"
 msgstr ""
 
-#: includes/admin/welcome.php:379
+#: includes/admin/welcome.php:387
 #, php-format
 msgid ""
 "We do all we can to provide every Ninja Forms user with the best support "
@@ -948,24 +948,24 @@ msgid ""
 "%s."
 msgstr ""
 
-#: includes/admin/welcome.php:401
+#: includes/admin/welcome.php:409
 #, php-format
 msgid ""
 "Thank you for updating to the latest version! Ninja Forms %s is primed to "
 "make your experience managing submissions an enjoyable one!"
 msgstr ""
 
-#: includes/admin/welcome.php:406
+#: includes/admin/welcome.php:414
 msgid ""
 "Ninja Forms is created by a worldwide team of developers who aim to provide "
 "the #1 WordPress community form creation plugin."
 msgstr ""
 
-#: includes/admin/welcome.php:424
+#: includes/admin/welcome.php:432
 msgid "No valid changelog was found."
 msgstr ""
 
-#: includes/admin/welcome.php:461
+#: includes/admin/welcome.php:469
 #, php-format
 msgid "View %s"
 msgstr ""
@@ -1377,10 +1377,6 @@ msgstr ""
 msgid "version"
 msgstr ""
 
-#: includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:11
-msgid "Build Your Form"
-msgstr ""
-
 #: includes/admin/pages/ninja-forms/tabs/field-settings/field-settings.php:44
 msgid "Give your form a title. This is how you'll find the form later."
 msgstr ""
@@ -1424,8 +1420,8 @@ msgstr ""
 
 #: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
 msgid ""
-"So, if you wanted to a mask for an American Social Security Number, you'd "
-"put 999-99-9999 into the box"
+"So, if you wanted to create a mask for an American Social Security Number, "
+"you wouldd type 999-99-9999 into the box"
 msgstr ""
 
 #: includes/admin/pages/ninja-forms/tabs/field-settings/help.php:24
@@ -1623,10 +1619,6 @@ msgstr ""
 
 #: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:6
 msgid "Extend Ninja Forms"
-msgstr ""
-
-#: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:40
-msgid "Documentation"
 msgstr ""
 
 #: includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php:42
@@ -3283,7 +3275,7 @@ msgstr ""
 msgid "Remove Value"
 msgstr ""
 
-#: includes/fields/list.php:112
+#: includes/fields/list.php:112 includes/fields/list.php:591
 msgid "Calc"
 msgstr ""
 
