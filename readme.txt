@@ -1,5 +1,5 @@
 === Ninja Forms ===
-Contributors: kstover, jameslaws, wpnzach, daveshine, mordauk, bftrick, helgatheviking
+Contributors: wpninjasllc, kstover, jameslaws, wpnzach, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.1.1
@@ -78,9 +78,9 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Changes:*
 
-* Simplified the form creation interface by adding a "Build Your Form" tab, an "Emails & Actions" tab and a "Settings" tab. All other tabs have been removed.
-* Form Preview and Submissions are now buttons that can be click at any stage of editing a form.
-* Field settings have been simplified by introducing a series of new, expandable settings sections. These sections house more advanced or less-used settings.
+* Simplified the form creation interface by adding a "Build Your Form" tab, an "Emails & Actions" tab, and a "Settings" tab. All other tabs have been removed.
+* Form Preview and Submissions are now buttons that can be clicked at any stage of editing a form.
+* Field settings have been simplified by introducing a series of new, expandable settings sections. These sections house more advanced or less-common settings.
 
 *Bugs:*
 
@@ -100,9 +100,9 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 *Changes:*
 
-* Simplified the form creation interface by adding a "Build Your Form" tab, an "Emails & Actions" tab and a "Settings" tab. All other tabs have been removed.
-* Form Preview and Submissions are now buttons that can be click at any stage of editing a form.
-* Field settings have been simplified by introducing a series of new, expandable settings sections. These sections house more advanced or less-used settings.
+* Simplified the form creation interface by adding a "Build Your Form" tab, an "Emails & Actions" tab, and a "Settings" tab. All other tabs have been removed.
+* Form Preview and Submissions are now buttons that can be clicked at any stage of editing a form.
+* Field settings have been simplified by introducing a series of new, expandable settings sections. These sections house more advanced or less-common settings.
 
 *Bugs:*
 
