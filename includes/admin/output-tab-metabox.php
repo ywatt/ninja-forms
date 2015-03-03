@@ -88,6 +88,11 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 			}else{
 				$label = '';
 			}
+			if(isset($s['value'])){
+				$button_text = $s['value'];
+			}else{
+				$button_text = $label;
+			}
 			if(isset($s['class'])){
 				$class = $s['class'];
 			}else{
@@ -370,7 +375,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					break;
 				case 'submit':
 					?>
-					<input type="submit" name="<?php echo $name;?>" class="<?php echo $class; ?>" value="<?php echo $label;?>">
+					<input type="submit" name="<?php echo $name;?>" class="<?php echo $class; ?>" value="<?php echo $button_text;?>">
 					<?php
 					break;
 				case 'button':
@@ -379,7 +384,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 						$class = "button-secondary";
 					}
 					?>
-					<input type="button" name="<?php echo $name;?>" id="<?php echo $name;?>" class="<?php echo $class; ?>" value="<?php echo $label;?>">
+					<input type="button" name="<?php echo $name;?>" id="<?php echo $name;?>" class="<?php echo $class; ?>" value="<?php echo $button_text;?>">
 					<?php
 					break;
 
