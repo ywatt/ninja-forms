@@ -478,7 +478,7 @@ class NF_Subs_CPT {
 
 		// Add our Form selection dropdown.
 		// Get our list of forms
-		$forms = Ninja_Forms()->forms()->get_all();
+        $forms = apply_filters('nf_submission_form_ids', Ninja_Forms()->forms()->get_all());
 
 		$form_id = isset( $_GET['form_id'] ) ? $_GET['form_id'] : '';
 
