@@ -326,7 +326,9 @@ var nfFields = new nfFields();
 // Instantiate our form settings.
 var nfForm = new nfForm();
 
-jQuery( document ).ready( function( $ ) {
+(function($){
+
+$( document ).ready( function( $ ) {
 
 	nfFields.setup();
 	nfForm.setup();
@@ -478,3 +480,5 @@ jQuery( document ).ready( function( $ ) {
 	} );
 
 });
+
+})(jQuery);
