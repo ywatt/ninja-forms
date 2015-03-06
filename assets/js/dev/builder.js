@@ -77,7 +77,7 @@ var nfField = Backbone.Model.extend( {
 			// Re-run makeSortable for new HTML
 			nfFields.listOptionsSortable();
 
-			jQuery( '.nf-field-settings' ).disableSelection();
+			jQuery( '.nf-field-settings .title' ).disableSelection();
 		} );
 	},
 	updateData: function() {
