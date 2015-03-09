@@ -153,6 +153,9 @@ function nf_parse_fields_shortcode( $content ) {
 	if ( ! isset ( $ninja_forms_processing ) )
 		return $content;
 
+	if ( is_array ( $content ) )
+		return $content;
+
 	$matches = array();
 	$pattern = '\[(\[?)(ninja_forms_field|ninja_forms_all_fields)(?![\w-])([^\]\/]*(?:\/(?!\])[^\]\/]*)*?)(?:(\/)\]|\](?:([^\[]*+(?:\[(?!\/\2\])[^\[]*+)*+)\[\/\2\])?)(\]?)';
 
