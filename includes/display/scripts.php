@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 	global $post, $ninja_forms_display_localize_js, $wp_locale, $ninja_forms_loading, $ninja_forms_processing;

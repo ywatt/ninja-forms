@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Update form settings to the new storage system when the form is viewed for the first time.
  *
