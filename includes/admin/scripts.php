@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 //Load up our WP Ninja Custom Form JS files.
 function ninja_forms_admin_css(){
 	$plugin_settings = nf_get_settings();

@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Class for notification types.
  * This is the parent class. it should be extended by specific notification types
