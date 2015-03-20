@@ -32,6 +32,13 @@ function ninja_forms_tab_addons(){
 
     foreach ($items as $item) {
         echo '<div class="nf-extend nf-box">';
+            $plugin_data = array();
+            if( !empty( $item['plugin'] ) && file_exists( WP_PLUGIN_DIR.'/'.$item['plugin'] ) ){
+                $plugin_data = get_plugin_data( WP_PLUGIN_DIR.'/'.$item['plugin'], false, true );
+            }
+            $version = isset ( $plugin_data['Version'] ) ? $plugin_data['Version'] : '';
+
+            echo $version;
             echo '<img src="' . $item['image'] . '" />';
             echo '<h2>' . $item['title'] . '</h2>';
             echo '<div>';
