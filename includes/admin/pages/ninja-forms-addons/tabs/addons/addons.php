@@ -37,7 +37,7 @@ function ninja_forms_tab_addons(){
         $version = isset ( $plugin_data['Version'] ) ? $plugin_data['Version'] : '';
         if ( ! empty ( $version ) && $version < $item['version'] ) {
             echo '<div class="error"><p>';
-                echo $item['title'] . ' requires an update. You have version <strong>' . $version . '</strong> installed. The current version is ' . $item['version'] . '.';
+                echo '<strong>' . $item['title'] . '</strong> requires an update. You have version <strong>' . $version . '</strong> installed. The current version is <strong>' . $item['version'] . '</strong>.';
             echo '</p></div>';
         }
     }
