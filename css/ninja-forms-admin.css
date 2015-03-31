@@ -737,6 +737,9 @@ a.tooltip span
 	/*display: none;*/
 }
 
+.field-option span.description {
+	display: block;
+}
 
 /* ---------------------------------
 /  System Status Page
