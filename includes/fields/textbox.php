@@ -308,8 +308,14 @@ function ninja_forms_field_text_pre_process( $field_id, $user_value ){
 	$data = $field_row['data'];
 	if( isset( $data['email'] ) AND $data['email'] == 1 AND $user_value != '' ){
 		if ( ! is_email( $user_value ) ) {
-    		$ninja_forms_processing->add_error( 'email-'.$field_id, $invalid_email, $field_id );
-    		$ninja_forms_processing->add_error( 'email-general', $invalid_email );
+
+            //Check False Positive
+            if ( 'inside' == $data['label_pos'] AND ( $data['label'] . " *" ) == $ninja_forms_processing->get_field_value( $field_id ) ) {
+                //False Positive
+            } else {
+                $ninja_forms_processing->add_error('email-' . $field_id, $invalid_email, $field_id);
+                $ninja_forms_processing->add_error('email-general', $invalid_email);
+            }
 		}
 	}
 
