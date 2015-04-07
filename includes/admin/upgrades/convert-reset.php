@@ -5,7 +5,9 @@ class NF_Conversion_Reset
     public function __construct()
     {
         add_action('admin_menu', array( $this, 'register_submenu'), 9001);
+        add_filter( 'nf_general_settings_advanced', array( $this, 'register_advanced_settings' ) );
     }
+
     public function register_submenu()
     {
         add_submenu_page(
@@ -17,6 +19,7 @@ class NF_Conversion_Reset
             array( $this, 'process')        // Function
         );
     }
+
     public function process()
     {
         global $wpdb;
@@ -27,6 +30,25 @@ class NF_Conversion_Reset
 
         // TODO add flag for conversion reset
     }
+
+    public function register_advanced_settings( $advanced_settings ) {
+
+        $new_advanced_setting = array(
+            'name'  => 'reset-conversions',
+            'type'  => '',
+            'label' => 'Reset Conversions',
+            'display_function' => array( $this, 'display_advanced_settings' )
+        );
+
+        $advanced_settings[] = $new_advanced_setting;
+
+        return $advanced_settings;
+    }
+
+    public function display_advanced_settings() {
+        echo '<a href="#" class="button-primary">Reset Conversion</a>';
+    }
+
 } // End Ninja_Forms_View_Admin Class
 
 // Self-Instantiate
