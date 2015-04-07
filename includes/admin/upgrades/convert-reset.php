@@ -22,13 +22,12 @@ class NF_Conversion_Reset
 
     public function process()
     {
-        global $wpdb;
-
         // Remove our "converted" flags from the options table
-        // delete_option( 'nf_convert_forms_complete' );
-        // delete_option( 'nf_converted_forms' );
+        delete_option( 'nf_convert_forms_complete' );
+        delete_option( 'nf_converted_forms' );
 
-        // TODO add flag for conversion reset
+        // Add flag for conversion being reset
+        update_option( 'nf_converted_form_reset', '1' );
     }
 
     public function register_advanced_settings( $advanced_settings ) {
