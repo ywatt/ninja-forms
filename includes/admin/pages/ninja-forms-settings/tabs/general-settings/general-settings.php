@@ -71,13 +71,6 @@ function ninja_forms_register_general_settings_metabox(){
 
 }
 
-//array(
-//    'name'  => 'reset-conversions',
-//    'type'  => '',
-//    'label' => 'Reset Conversions',
-//    'display_function' => 'ninja_forms_reset_button_display'
-//)
-
 function ninja_forms_save_general_settings( $data ){
 	$plugin_settings = nf_get_settings();
 
