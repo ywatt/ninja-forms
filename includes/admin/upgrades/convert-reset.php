@@ -25,8 +25,8 @@ class NF_Conversion_Reset
         global $wpdb;
 
         // Remove our "converted" flags from the options table
-        delete_option( 'nf_convert_forms_complete' );
-        delete_option( 'nf_converted_forms' );
+        // delete_option( 'nf_convert_forms_complete' );
+        // delete_option( 'nf_converted_forms' );
 
         // TODO add flag for conversion reset
     }
@@ -46,7 +46,7 @@ class NF_Conversion_Reset
     }
 
     public function display_advanced_settings() {
-        echo '<a href="#" class="button-primary">Reset Conversion</a>';
+        echo '<a href="' . site_url('wp-admin/index.php?page=ninja-forms-conversion-reset') . '" class="button-primary">Reset Conversion</a>';
     }
 
 } // End Ninja_Forms_View_Admin Class
