@@ -14,12 +14,18 @@ class NF_Conversion_Reset
             'Ninja Forms Conversion Reset', // Menu Title
             'manage_options',               // Capability
             'ninja-forms-conversion-reset', // Menu Slug
-            array( $this, 'display_page')   // Display Function
+            array( $this, 'process')        // Function
         );
     }
-    public function display_page()
+    public function process()
     {
-        echo "Hello, world!";
+        global $wpdb;
+
+        // Remove our "converted" flags from the options table
+        delete_option( 'nf_convert_forms_complete' );
+        delete_option( 'nf_converted_forms' );
+
+        // TODO add flag for conversion reset
     }
 } // End Ninja_Forms_View_Admin Class
 
