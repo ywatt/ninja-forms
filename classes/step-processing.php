@@ -33,6 +33,11 @@ class NF_Step_Processing
 	 */
 	var $redirect = '';
 
+    /**
+     * @var array
+     */
+    var $errors = array();
+
 	/**
 	 * @var args
 	 */
