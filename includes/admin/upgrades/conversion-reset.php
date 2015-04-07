@@ -16,8 +16,16 @@ class NF_Conversion_Reset
             'Ninja Forms Conversion Reset', // Menu Title
             'manage_options',               // Capability
             'ninja-forms-conversion-reset', // Menu Slug
-            array( $this, 'process')        // Function
+            array( $this, 'display')        // Function
         );
+    }
+
+    public function display() {
+        echo "<h1>Reset Forms Conversion</h1>";
+
+        $this->process();
+
+        echo '<script>window.location.replace("' . site_url('wp-admin/index.php?page=nf-processing&action=convert_forms&title=Updating+Form+Database') . '");</script>';
     }
 
     public function process()
