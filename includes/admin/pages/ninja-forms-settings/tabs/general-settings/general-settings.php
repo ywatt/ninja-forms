@@ -61,7 +61,13 @@ function ninja_forms_register_general_settings_metabox(){
 				'type'	=> 'checkbox',
 				'label'	=> __( 'Remove ALL Ninja Forms data upon uninstall?', 'ninja-forms' ),
 				'desc'	=> sprintf( __( 'If this box is checked, ALL Ninja Forms data will be removed from the database upon deletion. %sAll form and submission data will be unrecoverable.%s', 'ninja-forms' ), '<span class="nf-nuke-warning">', '</span>' ),
-			)
+			),
+            array(
+                'name'  => 'reset-conversions',
+                'type'  => '',
+                'label' => 'Reset Conversions',
+                'display_function' => 'ninja_forms_reset_button_display'
+            )
 		),
 		'state' => 'closed',
 	);
@@ -79,4 +85,8 @@ function ninja_forms_save_general_settings( $data ){
 	update_option( 'ninja_forms_settings', $plugin_settings );
 	$update_msg = __( 'Settings Saved', 'ninja-forms' );
 	return $update_msg;
+}
+
+function ninja_forms_reset_button_display() {
+    echo '<a href="#" class="button-primary">Reset Conversion</a>';
 }
