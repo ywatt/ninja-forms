@@ -61,10 +61,12 @@ function ninja_forms_register_general_settings_metabox(){
 				'type'	=> 'checkbox',
 				'label'	=> __( 'Remove ALL Ninja Forms data upon uninstall?', 'ninja-forms' ),
 				'desc'	=> sprintf( __( 'If this box is checked, ALL Ninja Forms data will be removed from the database upon deletion. %sAll form and submission data will be unrecoverable.%s', 'ninja-forms' ), '<span class="nf-nuke-warning">', '</span>' ),
-			)
+			),
 		),
 		'state' => 'closed',
 	);
+    $args['settings'] = apply_filters( 'nf_general_settings_advanced', $args['settings'] );
+
 	ninja_forms_register_tab_metabox( $args );
 
 }
