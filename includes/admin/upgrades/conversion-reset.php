@@ -58,7 +58,7 @@ class NF_Conversion_Reset
         ?>
         <a href="#TB_inline?width=400&height=200&inlineId=nfConversionResetConfirm" class="button-primary thickbox">Reset Conversion</a>
         <p class="description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet architecto corporis deleniti dolorum eos id itaque maiores non omnis, perspiciatis, qui quisquam rem ullam. Earum est fugiat illo molestiae tempore.
+            If your forms are "missing" after updating to 2.9, this button will attempt to reconvert your old forms to show them in 2.9.  Any forms you have made since updating to 2.9 will be reimported at the end of this process.
         </p>
         <div id="nfConversionResetConfirm" style="display: none;">
             <h2>Reset Conversion</h2>
