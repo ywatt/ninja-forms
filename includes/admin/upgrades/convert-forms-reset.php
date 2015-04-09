@@ -56,7 +56,7 @@ class NF_Convert_Forms_Reset
         add_thickbox();
         //TODO move this to a view
         ?>
-        <a href="#TB_inline?width=400&height=200&inlineId=nfConversionResetConfirm" class="button-primary thickbox">Reset Form Conversion</a>
+        <a href="#TB_inline?width=400&height=auto&inlineId=nfConversionResetConfirm" class="button-primary thickbox">Reset Form Conversion</a>
         <p class="description">
             If your forms are "missing" after updating to 2.9, this button will attempt to reconvert your old forms to show them in 2.9.  Any forms you have made since updating to 2.9 will be reimported at the end of this process.
         </p>
