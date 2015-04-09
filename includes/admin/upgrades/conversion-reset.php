@@ -57,6 +57,9 @@ class NF_Conversion_Reset
         //TODO move this to a view
         ?>
         <a href="#TB_inline?width=400&height=200&inlineId=nfConversionResetConfirm" class="button-primary thickbox">Reset Conversion</a>
+        <p class="description">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet architecto corporis deleniti dolorum eos id itaque maiores non omnis, perspiciatis, qui quisquam rem ullam. Earum est fugiat illo molestiae tempore.
+        </p>
         <div id="nfConversionResetConfirm" style="display: none;">
             <h2>Reset Conversion</h2>
             <p>
