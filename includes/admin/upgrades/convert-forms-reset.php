@@ -56,22 +56,20 @@ class NF_Convert_Forms_Reset
         add_thickbox();
         //TODO move this to a view
         ?>
-        <a href="#TB_inline?width=400&height=auto&inlineId=nfConversionResetConfirm" class="button-primary thickbox">Reset Form Conversion</a>
+        <a href="#TB_inline?width=400&height=200&inlineId=nfConversionResetConfirm" class="button-primary thickbox">Reset Form Conversion</a>
         <p class="description">
-            If your forms are "missing" after updating to 2.9, this button will attempt to reconvert your old forms to show them in 2.9.  Any forms you have made since updating to 2.9 will be reimported at the end of this process.
+            If your forms are "missing" after updating to 2.9, this button will attempt to reconvert your old forms to show them in 2.9.  All current forms will remain in the "All Forms" table.
         </p>
         <div id="nfConversionResetConfirm" style="display: none;">
-            <h2>Reset Form Conversion</h2>
-            <h3>You are about to reset the form conversion process for v2.9.</h3>
+            <h3>You are about to reset the form conversion process for v2.9+</h3>
             <p>
-                Clicking continue will re-attempt the form conversion process initially attempted by the version 2.9 update. All current forms will remain in the "All Forms" table.
+                <em>All current forms will remain in the "All Forms" table. In some cases some forms may be duplicated during this process.</em>
             </p>
-            <p>
-                <strong>Note: </strong>There is a chance that some forms will be duplicated during this process, in the case of an incomplete initial conversion.
-            </p>
-            <a class="button-secondary" href="#" onclick="self.parent.tb_remove();return false">Cancel</a>
-            <span style="padding: 10px;"> or </span>
-            <a class="button-primary" href="<?php echo site_url('wp-admin/index.php?page=ninja-forms-conversion-reset'); ?>">Continue</a>
+            <div>
+                <a class="button-secondary" href="#" onclick="self.parent.tb_remove();return false">Cancel</a>
+                <span style="padding: 10px;"> or </span>
+                <a class="button-primary" href="<?php echo site_url('wp-admin/index.php?page=ninja-forms-conversion-reset'); ?>">Continue</a>
+            </div>
         </div>
         <?php
     }
