@@ -64,11 +64,14 @@ class NF_Convert_Forms_Reset
             <h2>Reset Form Conversion</h2>
             <h3>You are about to reset the form conversion process for v2.9.</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores iusto recusandae repellendus voluptatum! Architecto libero odit voluptas? Consequatur consequuntur cupiditate impedit ipsum porro saepe sit temporibus veritatis voluptatem voluptates?
+                Clicking continue will re-attempt the form conversion process initially attempted by the version 2.9 update. All current forms will remain in the "All Forms" table.
             </p>
-            <a class="button-secondary" href="#" onclick="self.parent.tb_remove();return false">No, nevermind.</a>
+            <p>
+                <strong>Note: </strong>There is a chance that some forms will be duplicated during this process, in the case of an incomplete initial conversion.
+            </p>
+            <a class="button-secondary" href="#" onclick="self.parent.tb_remove();return false">Cancel</a>
             <span style="padding: 10px;"> or </span>
-            <a class="button-primary" href="<?php echo site_url('wp-admin/index.php?page=ninja-forms-conversion-reset'); ?>">Yes, continue.</a>
+            <a class="button-primary" href="<?php echo site_url('wp-admin/index.php?page=ninja-forms-conversion-reset'); ?>">Continue</a>
         </div>
         <?php
     }
