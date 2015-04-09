@@ -35,7 +35,7 @@ class NF_Convert_Forms_Reset
         delete_option( 'nf_converted_forms' );
 
         // Add flag for conversion being reset
-        update_option( 'nf_converted_form_reset', '1' );
+        update_option( 'nf_converted_form_reset', true );
     }
 
     public function register_advanced_settings( $advanced_settings ) {

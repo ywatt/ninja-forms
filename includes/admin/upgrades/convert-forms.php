@@ -67,6 +67,7 @@ class NF_Convert_Forms extends NF_Step_Processing {
 	public function complete() {
 		global $wpdb;
 		update_option( 'nf_convert_forms_complete', true );
+        update_option( 'nf_converted_form_reset', false );
 	}
 
 }
