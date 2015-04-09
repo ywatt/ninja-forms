@@ -53,7 +53,20 @@ class NF_Conversion_Reset
     }
 
     public function display_advanced_settings() {
-        echo '<a href="' . site_url('wp-admin/index.php?page=ninja-forms-conversion-reset') . '" class="button-primary">Reset Conversion</a>';
+        add_thickbox();
+        //TODO move this to a view
+        ?>
+        <a href="#TB_inline?width=400&height=200&inlineId=nfConversionResetConfirm" class="button-primary thickbox">Reset Conversion</a>
+        <div id="nfConversionResetConfirm" style="display: none;">
+            <h2>Reset Conversion</h2>
+            <p>
+                <strong>You are about to reset the conversion process.</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores iusto recusandae repellendus voluptatum! Architecto libero odit voluptas? Consequatur consequuntur cupiditate impedit ipsum porro saepe sit temporibus veritatis voluptatem voluptates?
+            </p>
+            <a class="button-secondary" href="#" onclick="self.parent.tb_remove();return false">No, nevermind.</a>
+            <span style="padding: 10px;"> or </span>
+            <a class="button-primary" href="<?php echo site_url('wp-admin/index.php?page=ninja-forms-conversion-reset'); ?>">Yes, continue.</a>
+        </div>
+        <?php
     }
 
 } // End Ninja_Forms_View_Admin Class
