@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_Conversion_Reset
+class NF_Convert_Forms_Reset
 {
     public function __construct()
     {
@@ -41,9 +41,9 @@ class NF_Conversion_Reset
     public function register_advanced_settings( $advanced_settings ) {
 
         $new_advanced_setting = array(
-            'name'  => 'reset-conversions',
+            'name'  => 'reset-conversion',
             'type'  => '',
-            'label' => 'Reset Conversions',
+            'label' => 'Reset Form Conversion',
             'display_function' => array( $this, 'display_advanced_settings' )
         );
 
@@ -56,14 +56,15 @@ class NF_Conversion_Reset
         add_thickbox();
         //TODO move this to a view
         ?>
-        <a href="#TB_inline?width=400&height=200&inlineId=nfConversionResetConfirm" class="button-primary thickbox">Reset Conversion</a>
+        <a href="#TB_inline?width=400&height=200&inlineId=nfConversionResetConfirm" class="button-primary thickbox">Reset Form Conversion</a>
         <p class="description">
             If your forms are "missing" after updating to 2.9, this button will attempt to reconvert your old forms to show them in 2.9.  Any forms you have made since updating to 2.9 will be reimported at the end of this process.
         </p>
         <div id="nfConversionResetConfirm" style="display: none;">
-            <h2>Reset Conversion</h2>
+            <h2>Reset Form Conversion</h2>
+            <h3>You are about to reset the form conversion process for v2.9.</h3>
             <p>
-                <strong>You are about to reset the conversion process.</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores iusto recusandae repellendus voluptatum! Architecto libero odit voluptas? Consequatur consequuntur cupiditate impedit ipsum porro saepe sit temporibus veritatis voluptatem voluptates?
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores iusto recusandae repellendus voluptatum! Architecto libero odit voluptas? Consequatur consequuntur cupiditate impedit ipsum porro saepe sit temporibus veritatis voluptatem voluptates?
             </p>
             <a class="button-secondary" href="#" onclick="self.parent.tb_remove();return false">No, nevermind.</a>
             <span style="padding: 10px;"> or </span>
@@ -75,4 +76,4 @@ class NF_Conversion_Reset
 } // End Ninja_Forms_View_Admin Class
 
 // Self-Instantiate
-new NF_Conversion_Reset();
+new NF_Convert_Forms_Reset();
