@@ -25,7 +25,7 @@ class NF_Convert_Forms_Reset
 
         $this->process();
 
-        echo '<script>window.location.replace("' . site_url('wp-admin/index.php?page=nf-processing&action=convert_forms&title=Updating+Form+Database') . '");</script>';
+        echo '<script>window.location.replace("' . site_url('wp-admin/index.php?page=nf-upgrade') . '");</script>';
     }
 
     public function process()
