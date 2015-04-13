@@ -133,7 +133,7 @@ function nf_field_text_edit_default_value( $field_id, $data ){
 				<option value="post_url" <?php if($default_value == 'post_url'){ echo 'selected'; $custom = 'no';}?>><?php _e('Post / Page URL (If available)', 'ninja-forms'); ?></option>
 				<option value="today" <?php if($default_value == 'today'){ echo 'selected'; $custom = 'no';}?>><?php _e('Today\'s Date', 'ninja-forms'); ?></option>
 				<option value="_custom" <?php if($custom != 'no'){ echo 'selected';}?>><?php _e('Custom', 'ninja-forms'); ?> -></option>
-				<option value="querystring" <?php if($default_value_type == 'querystring'){ echo 'selected'; $custom = 'yes';}?>><?php _e('Querystring Value', 'ninja-forms'); ?> -></option>
+				<option value="querystring" <?php if($default_value_type == 'querystring'){ echo 'selected'; $custom = 'yes';}?>><?php _e('Querystring Variable', 'ninja-forms'); ?> -></option>
 			</select>
 		</span>
 	</div>
