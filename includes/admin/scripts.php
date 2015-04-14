@@ -4,7 +4,7 @@ function ninja_forms_admin_css(){
 	$plugin_settings = nf_get_settings();
 
 	wp_enqueue_style( 'jquery-smoothness', NINJA_FORMS_URL .'css/smoothness/jquery-smoothness.css' );
-	wp_enqueue_style( 'ninja-forms-admin', NINJA_FORMS_URL .'css/ninja-forms-admin.css?nf_ver=' . NF_PLUGIN_VERSION, 'editor' );
+	wp_enqueue_style( 'ninja-forms-admin', NINJA_FORMS_URL .'css/ninja-forms-admin.css?nf_ver=' . NF_PLUGIN_VERSION );
 
 	add_filter('admin_body_class', 'ninja_forms_add_class');
 
@@ -18,7 +18,7 @@ function ninja_forms_add_class($classes) {
 }
 
 function ninja_forms_admin_js(){
-	global $version_compare;
+	global $version_compare, $public_query_vars;
 
 	$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
 
@@ -69,6 +69,89 @@ function ninja_forms_admin_js(){
 			$form_title = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
 
 			wp_localize_script( 'nf-builder', 'nf_admin', array( 'edit_form_text' => __( 'Edit Form', 'ninja-forms' ), 'form_title' => $form_title, 'form_status' => $form_status, 'fields' => $fields, 'saved_text' => __( 'Saved', 'ninja-forms' ), 'save_text' => __( 'Save', 'ninja-forms' ), 'saving_text' => __( 'Saving...', 'ninja-forms' ), 'remove_field' => __( 'Remove this field? It will be removed even if you do not save.', 'ninja-forms' ) ) );
+		
+			$reserved_terms = array( 
+				'attachment',
+				'attachment_id',
+				'author',
+				'author_name',
+				'calendar',
+				'cat',
+				'category',
+				'category__and',
+				'category__in',
+				'category__not_in',
+				'category_name',
+				'comments_per_page',
+				'comments_popup',
+				'customize_messenger_channel',
+				'customized',
+				'cpage',
+				'day',
+				'debug',
+				'error',
+				'exact',
+				'feed',
+				'hour',
+				'link_category',
+				'm',
+				'minute',
+				'monthnum',
+				'more',
+				'name',
+				'nav_menu',
+				'nonce',
+				'nopaging',
+				'offset',
+				'order',
+				'orderby',
+				'p',
+				'page',
+				'page_id',
+				'paged',
+				'pagename',
+				'pb',
+				'perm',
+				'post',
+				'post__in',
+				'post__not_in',
+				'post_format',
+				'post_mime_type',
+				'post_status',
+				'post_tag',
+				'post_type',
+				'posts',
+				'posts_per_archive_page',
+				'posts_per_page',
+				'preview',
+				'robots',
+				's',
+				'search',
+				'second',
+				'sentence',
+				'showposts',
+				'static',
+				'subpost',
+				'subpost_id',
+				'tag',
+				'tag__and',
+				'tag__in',
+				'tag__not_in',
+				'tag_id',
+				'tag_slug__and',
+				'tag_slug__in',
+				'taxonomy',
+				'tb',
+				'term',
+				'theme',
+				'type',
+				'w',
+				'withcomments',
+				'withoutcomments',
+				'year',
+			);
+
+			wp_localize_script( 'nf-builder', 'wp_reserved_terms', $reserved_terms );
 		}
 	}
 }
