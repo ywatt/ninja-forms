@@ -809,6 +809,15 @@ jQuery(document).ready(function($) {
 		}
 	} );
 
+	// JS for resetting form conversion
+	$( '#nf-conversion-reset' ).nfAdminModal( { title: nf_conversion_title, buttons: '#nf-conversion-reset-buttons' } );
+
+	$( document ).on( 'click', '.nf-reset-form-conversion', function( e ) {
+		e.preventDefault();
+		$( '#nf-conversion-reset' ).nfAdminModal( 'open' );
+		
+	} );
+
 }); //Document.ready();
 
 function ninja_forms_escape_html(html) {
