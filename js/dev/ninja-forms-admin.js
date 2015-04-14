@@ -800,13 +800,24 @@ jQuery(document).ready(function($) {
 		}
 	} );
 
+	$( '.nf-delete-on-uninstall-prompt' ).nfAdminModal( { title: nf_nuke_title, buttons: '.nf-delete-on-uninstall-prompt-buttons' } );
+
 	$( document ).on( 'change', '#delete_on_uninstall', function( e ) {
 		if ( this.checked ) {
-			var answer = confirm( ninja_forms_settings.nuke_warning );
-			if ( ! answer ) {
-				this.checked = false;
-			}
+			$( '.nf-delete-on-uninstall-prompt' ).nfAdminModal( 'open' );
 		}
+	} );
+
+	$( document ).on( 'click', '.nf-delete-on-uninstall-yes', function( e ) {
+		e.preventDefault();
+		$( "#delete_on_uninstall" ).attr( 'checked', true );
+		$( '.nf-delete-on-uninstall-prompt' ).nfAdminModal( 'close' );
+	} );	
+
+	$( document ).on( 'click', '.nf-delete-on-uninstall-cancel', function( e ) {
+		e.preventDefault();
+		$( "#delete_on_uninstall" ).attr( 'checked', false );
+		$( '.nf-delete-on-uninstall-prompt' ).nfAdminModal( 'close' );
 	} );
 
 	// JS for resetting form conversion
@@ -815,7 +826,6 @@ jQuery(document).ready(function($) {
 	$( document ).on( 'click', '.nf-reset-form-conversion', function( e ) {
 		e.preventDefault();
 		$( '#nf-conversion-reset' ).nfAdminModal( 'open' );
-		
 	} );
 
 }); //Document.ready();
