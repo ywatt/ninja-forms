@@ -390,7 +390,7 @@ class Ninja_Forms {
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/conversion-reset.php' );
+            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms-reset.php' );
 		}
 
 		// Include our upgrade files.

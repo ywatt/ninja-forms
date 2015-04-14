@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_Conversion_Reset
+class NF_Convert_Forms_Reset
 {
     public function __construct()
     {
@@ -21,7 +21,7 @@ class NF_Conversion_Reset
     }
 
     public function display() {
-        echo "<h1>Reset Forms Conversion</h1>";
+        echo "<h1>" . __( 'Reset Forms Conversion', 'ninja-forms' ) . "</h1>";
 
         $this->process();
 
@@ -35,15 +35,15 @@ class NF_Conversion_Reset
         delete_option( 'nf_converted_forms' );
 
         // Add flag for conversion being reset
-        update_option( 'nf_converted_form_reset', '1' );
+        update_option( 'nf_converted_form_reset', true );
     }
 
     public function register_advanced_settings( $advanced_settings ) {
 
         $new_advanced_setting = array(
-            'name'  => 'reset-conversions',
+            'name'  => 'reset-conversion',
             'type'  => '',
-            'label' => 'Reset Conversions',
+            'label' => __( 'Reset Form Conversion', 'ninja-forms' ),
             'display_function' => array( $this, 'display_advanced_settings' )
         );
 
@@ -53,10 +53,31 @@ class NF_Conversion_Reset
     }
 
     public function display_advanced_settings() {
-        echo '<a href="' . site_url('wp-admin/index.php?page=ninja-forms-conversion-reset') . '" class="button-primary">Reset Conversion</a>';
+        //TODO move this to a view
+        ?>
+        <a href="#" class="button-primary nf-reset-form-conversion"><?php _e( 'Reset Form Conversion', 'ninja-forms' ); ?></a>
+        <p class="description">
+            <?php _e( 'If your forms are "missing" after updating to 2.9, this button will attempt to reconvert your old forms to show them in 2.9.  All current forms will remain in the "All Forms" table.', 'ninja-forms' ); ?>
+        </p>
+
+        <div id="nf-conversion-reset">
+            <p>
+                <?php _e( 'All current forms will remain in the "All Forms" table. In some cases some forms may be duplicated during this process.', 'ninja-forms' ); ?>
+            </p>
+        </div>
+
+        <div id="nf-conversion-reset-buttons">
+            <div id="nf-admin-modal-cancel">
+                <a class="submitdelete deletion modal-close" href="#"><?php _e( 'Cancel', 'ninja-forms' ); ?></a>
+            </div>
+            <div id="nf-admin-modal-update">
+                <a class="button-primary" href="<?php echo site_url('wp-admin/index.php?page=ninja-forms-conversion-reset'); ?>"><?php _e( 'Continue', 'ninja-forms' ); ?></a>
+            </div>
+        </div>
+        <?php
     }
 
 } // End Ninja_Forms_View_Admin Class
 
 // Self-Instantiate
-new NF_Conversion_Reset();
+new NF_Convert_Forms_Reset();
