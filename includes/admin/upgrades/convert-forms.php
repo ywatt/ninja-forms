@@ -11,7 +11,14 @@ class NF_Convert_Forms extends NF_Step_Processing {
 	public function loading() {
 		global $wpdb;
 
-		// Get all our forms
+        // Check that the table exists
+        if( 0 == $wpdb->query( "SHOW TABLES LIKE '" . NINJA_FORMS_TABLE_NAME . "'" ) ) {
+            $this->errors[] = NINJA_FORMS_TABLE_NAME . ' is not in the database';
+            $this->redirect = admin_url( 'admin.php?page=ninja-forms' );
+            return array( 'complete' => true );
+        }
+
+        // Get all our forms
 		$forms = $wpdb->get_results( 'SELECT id FROM ' . NINJA_FORMS_TABLE_NAME, ARRAY_A );
 
 		$x = 1;
