@@ -1324,3 +1324,9 @@ p.debug-report {
 	display: block;
 	margin: 0 auto;
 }
+.querystring-error {
+	color: red;
+}
+input[type=text].error {
+	border: solid red;
+}

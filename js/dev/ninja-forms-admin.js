@@ -282,14 +282,36 @@ jQuery(document).ready(function($) {
 			$("#default_value_label_" + id).show();
 			$("#ninja_forms_field_" + id + "_default_value").focus();
 		}else{
-			$("#default_value_label_" + id).hide();
-			$("#ninja_forms_field_" + id + "_default_value").val(this.value);
+			$( '.querystring-error' ).hide();
+			$( '#ninja_forms_field_' + id + '_default_value' ).removeClass( 'error' );
+			$( '#default_value_label_' + id ).hide();
+			$( '#ninja_forms_field_' + id + '_default_value' ).val(this.value);
+		}
+
+		if ( 'querystring' != this.value ) {
+			$( '.querystring-error' ).hide();
+			$( '#ninja_forms_field_' + id + '_default_value' ).removeClass( 'error' );
+			$( '.nf-save-admin-fields' ).attr( 'disabled', false );
 		}
 
 		if(this.value != '' && this.value != 'today' ){
 			$("#ninja_forms_field_" + id + "_datepicker").prop('checked', false);
 		}
 	});
+
+	// Throw an error if we set a querystring that is reserved
+	$( document ).on( 'keyup', '.nf-default-value-text', function() {
+		var field_id = $( this ).data( 'field-id' );
+		if ( -1 != wp_reserved_terms.indexOf( this.value ) && 'querystring' == $( '#default_value_' + field_id ).val() ) {
+			$( '.querystring-error' ).show();
+			$( this ).addClass( 'error' );
+			$( '.nf-save-admin-fields' ).attr( 'disabled', true );
+		} else {
+			$( '.querystring-error' ).hide();
+			$( this ).removeClass( 'error' );
+			$( '.nf-save-admin-fields' ).attr( 'disabled', false );
+		}
+	} );
 
 	// Input Mask
 	$(document).on( 'change', '.ninja-forms-_text-mask', function(){

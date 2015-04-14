@@ -140,11 +140,11 @@ function nf_field_text_edit_default_value( $field_id, $data ){
 	<div class="description description-thin">
 
 		<label for="" id="default_value_label_<?php echo $field_id;?>" style="<?php if($custom == 'no'){ echo 'display:none;';}?>">
-			<span class="field-option">
-				<br />
-				<input type="text" class="widefat code" name="ninja_forms_field_<?php echo $field_id;?>[default_value]" id="ninja_forms_field_<?php echo $field_id;?>_default_value" value="<?php echo $default_value;?>" />
-			</span>
+			<br />
+			<input type="text" class="widefat code nf-default-value-text" name="ninja_forms_field_<?php echo $field_id;?>[default_value]" id="ninja_forms_field_<?php echo $field_id;?>_default_value" value="<?php echo $default_value;?>" data-field-id="<?php echo $field_id; ?>" />
+			<span class="querystring-error" style="display:none;"><?php _e( 'This keyword is reserved by WordPress. Please try another.', 'ninja-forms' ); ?></span>
 		</label>
+
 
 	</div>
 	<?php
