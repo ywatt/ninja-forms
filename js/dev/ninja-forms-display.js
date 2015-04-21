@@ -613,8 +613,19 @@ jQuery(document).ready(function(jQuery) {
 								}
 
 								if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' && isNaN( f_value ) && typeof f_value != 'undefined' ) {
+
+                                    // Strip the Currency Symbol
 									f_value = f_value.replace( ninja_forms_settings.currency_symbol, "" );
-									f_value = f_value.replace( /,/g, "" );
+
+                                    // Strip the Thousands Separator
+									f_value = f_value.replace( /thousandsSeparator/g, "" );
+
+                                    // If the Decimal Point is not `.`
+                                    if ( '.' != decimalPoint ) {
+
+                                        // Replace the Decimal Point
+                                        f_value = f_value.replace( decimalPoint, "." );
+                                    }
 								}
 
 								if ( isNaN( f_value ) || f_value == '' || !f_value || typeof f_value === 'undefined' ) {
