@@ -127,6 +127,9 @@ function nf_admin_save_builder() {
 		Ninja_Forms()->form( $form_id )->update_setting( 'status', '' );
 	}
 
+	// Dump our current form transient.
+	delete_transient( 'nf_form_' . $form_id );
+
 	die();
 }
 

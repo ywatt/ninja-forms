@@ -246,7 +246,7 @@ class Ninja_Forms {
 	 *
 	 * @access public
 	 * @param int $form_id
-	 * @since 2.7
+	 * @since 2.9.11
 	 * @return object self::$instance->form_var
 	 */
 	public function form( $form_id = '' ) {
