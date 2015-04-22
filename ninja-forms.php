@@ -253,10 +253,19 @@ class Ninja_Forms {
 		// Bail if we don't get a form id.
 
 		$form_var = 'form_' . $form_id;
-		// Check to see if an object for this form already exists
-		// Create one if it doesn't exist.
-		if ( ! isset( self::$instance->$form_var ) )
+		// Check to see if an object for this form already exists in memory. If it does, return it.
+		if ( isset( self::$instance->$form_var ) )
+			return self::$instance->$form_var;
+		
+		// Check to see if we have a transient object stored for this form.
+		if ( false != ( $form_obj = get_transient( 'nf_form_' . $form_id ) ) ) {
+			self::$instance->$form_var = $form_obj;
+		} else {
+			// Create a new form object for this form.
 			self::$instance->$form_var = new NF_Form( $form_id );
+			// Save it into a transient.
+			set_transient( 'nf_form_' . $form_id, self::$instance->$form_var, DAY_IN_SECONDS );
+		}
 
 		return self::$instance->$form_var;
 	}
