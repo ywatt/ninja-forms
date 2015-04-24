@@ -46,9 +46,27 @@ function ninja_forms_register_general_settings_metabox(){
 				'label' => __( 'Currency Symbol', 'ninja-forms' ),
 				'desc' 	=> 'e.g. $, &pound;, &euro;',
 			),
+			array(
+				'name' 	=> 'recaptcha_site_key',
+				'type' 	=> 'text',
+				'label' => __( 'reCAPTCHA Site Key', 'ninja-forms' ),
+				'desc' 	=> '',
+			),
+			array(
+				'name' 	=> 'recaptcha_secret_key',
+				'type' 	=> 'text',
+				'label' => __( 'reCAPTCHA Secret Key', 'ninja-forms' ),
+				'desc' 	=> '',
+			),
+			array(
+				'name' 	=> 'recaptcha_lang',
+				'type' 	=> 'text',
+				'label' => __( 'reCAPTCHA Language', 'ninja-forms' ),
+				'desc' 	=> 'e.g. en, da - ' . sprintf( __( 'Language of reCAPTCHA.To get code for your language click %shere%s', 'ninja-forms' ), '<a href="https://developers.google.com/recaptcha/docs/language" target="_blank">', '</a>' )
+			),
 		),
 	);
-	ninja_forms_register_tab_metabox( $args );	
+	ninja_forms_register_tab_metabox( $args );
 
 	$args = array(
 		'page' => 'ninja-forms-settings',
