@@ -89,7 +89,6 @@ function ninja_forms_register_general_settings_metabox(){
 		'state' => 'closed',
 	);
     $args['settings'] = apply_filters( 'nf_general_settings_advanced', $args['settings'] );
-
 	ninja_forms_register_tab_metabox( $args );
 
 }
