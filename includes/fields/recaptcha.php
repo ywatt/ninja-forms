@@ -48,8 +48,8 @@ function ninja_forms_field_recaptcha_pre_process( $field_id, $user_value  ) {
 		$ninja_forms_processing->add_error( 'error_recaptcha', __( 'Please enter value in captcha field' , 'ninja-forms' ) );
 	}else {
 		$settings = get_option( 'ninja_forms_settings' );
-		$url = 'https://www.google.com/recaptcha/api/siteverify?secret='.$settings['recaptcha_secret_key'].'&response='.$_POST['g-recaptcha-response'];
-		$resp = wp_remote_get( $url, array( 'sslverify'=>true ) );
+		$url = 'https://www.google.com/recaptcha/api/siteverify?secret='.$settings['recaptcha_secret_key'].'&response='.sanitize_text_field( $_POST['g-recaptcha-response'] );
+		$resp = wp_remote_get( esc_url_raw( $url ) );
 
 		if ( !is_wp_error( $resp ) ) {
 			$body = wp_remote_retrieve_body( $resp );
