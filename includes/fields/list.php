@@ -727,6 +727,12 @@ function nf_field_list_edit_sub_value( $field_id, $user_value, $field ) {
 						$label = '';
 					}
 
+					if(isset($option['display_style'])){
+						$display_style = $option['display_style'];
+					}else{
+						$display_style = '';
+					}
+
 					if ( isset( $option['disabled'] ) AND $option['disabled'] ){
 						$disabled = 'disabled';
 					}else{
