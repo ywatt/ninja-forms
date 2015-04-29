@@ -195,6 +195,7 @@ TEXT FIELDS & TEXTAREAS
     width: 100%;
 }
 
+.profile_pass-wrap input,
 .text-wrap.label-above input,
 .text-wrap.label-below input,
 .text-wrap.label-inside input,
