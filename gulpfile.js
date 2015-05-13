@@ -1,3 +1,12 @@
+/**
+ * Gulpfile
+ *
+ * Rename and Minify JavaScript... and more (later).
+ *
+ * Install Command:
+ * npm install gulp gulp-rename gulp-uglify
+ */
+
 var gulp   = require('gulp');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
