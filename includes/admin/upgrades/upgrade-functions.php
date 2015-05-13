@@ -13,7 +13,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Display Upgrade Notices
+ * DEPRECATED - Display Upgrade Notices
  *
  * @since 2.7
  * @return void
@@ -83,9 +83,9 @@ function nf_show_upgrade_notices() {
 			'<a href="' . admin_url( 'index.php?page=nf-processing&action=convert_forms&title=' . $title ) . '">', '</a>'
 		);
 	}
-	
+
 }
-add_action( 'admin_notices', 'nf_show_upgrade_notices' );
+//add_action( 'admin_notices', 'nf_show_upgrade_notices' );
 
 /**
  * Triggers all upgrade functions

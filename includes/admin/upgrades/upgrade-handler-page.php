@@ -1,4 +1,4 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit;
+<?php //if ( ! defined( 'ABSPATH' ) ) exit;
 
 class NF_UpgradeHandlerPage
 {
@@ -7,6 +7,7 @@ class NF_UpgradeHandlerPage
     public function __construct()
     {
         add_action( 'admin_menu', array( $this, 'register' ) );
+        add_action( 'admin_notices', array( $this, 'show_upgrade_notices' ) );
     }
 
     public function register()
@@ -61,6 +62,21 @@ class NF_UpgradeHandlerPage
         wp_enqueue_style(
             /* Handle */ $this->slug,
             /* Source */ NF_PLUGIN_URL . '/assets/css/nf-upgrade-handler.css'
+        );
+    }
+
+    public function show_upgrade_notices()
+    {
+        // Don't show notices on the upgrade handler page.
+        if ( isset ( $_GET['page'] ) && $this->slug == $_GET['page'] ) {
+            return;
+        }
+
+        // TODO: Check if an upgrade is needed
+
+        printf(
+            '<div class="update-nag"><p>' . __( 'Ninja Forms needs to upgrade your database. %sStart Upgrade%s', 'ninja-forms' ) . '</p></div>',
+            '<a class="button button-primary" href="' . admin_url( 'admin.php?page=nf-upgrade-handler' ) . '">', '</a>'
         );
     }
 }
