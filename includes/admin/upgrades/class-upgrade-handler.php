@@ -69,6 +69,7 @@ class NF_UpgradeHandler
 
         if( 0 == $current_step ) {
             $current_upgrade->loading();
+            $response['total_steps'] = $current_upgrade->total_steps;
         } else {
 
             if (is_array($current_upgrade->errors) AND $current_upgrade->errors) {
