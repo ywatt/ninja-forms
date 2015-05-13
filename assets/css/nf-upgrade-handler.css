@@ -1,0 +1,24 @@
+.menu-item-handle {
+    cursor: default!important;
+}
+.ui-progressbar {
+    position: relative;
+    width: 800px;
+    max-width: 100%;
+    height: 20px;
+    background-color: #DDD;
+    margin-left: -7px;
+    border: 2px solid #CCC;
+    border-radius: 3px;
+}
+.progress-label {
+    font-size: .8em;
+    line-height: 12px;
+    position: absolute;
+    left: 40%;
+    top: 4px;
+}
+.ui-progressbar-value {
+    height: 20px;
+    background-color: #CCC;
+}
