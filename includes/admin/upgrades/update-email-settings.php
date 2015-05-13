@@ -10,7 +10,7 @@ final class NF_Upgrade_Email_Settings extends NF_Upgrade
 {
     public $name = 'email_settings';
 
-    public $priority = '2.9000';
+    public $priority = '2.8.10';
 
     public $description = 'Email settings need to be transferred to a new storage method.';
 

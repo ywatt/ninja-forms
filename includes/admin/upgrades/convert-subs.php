@@ -10,7 +10,7 @@ final class NF_Upgrade_Submissions extends NF_Upgrade
 {
     public $name = 'submissions';
 
-    public $priority = '2.9000';
+    public $priority = '2.7';
 
     public $description = 'The new submission database allows submissions to be stored and retrieved more efficiently. It also allows for much better submission searching.';
 
