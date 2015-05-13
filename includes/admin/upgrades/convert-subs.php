@@ -17,7 +17,12 @@ final class NF_Upgrade_Submissions extends NF_Upgrade
     public function loading()
     {
         $old_sub_count = $this->countOldSubs();
+
         $this->total_steps = round( ( $old_sub_count / 100 ), 0 );
+
+        if ( ! $this->total_steps || 1 > $this->total_steps ) {
+            $this->total_steps = 1;
+        }
     }
 
     public function _beforeStep( $step )
