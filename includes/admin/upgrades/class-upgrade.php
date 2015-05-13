@@ -111,7 +111,9 @@ abstract class NF_Upgrade
      */
     public function _step( $step )
     {
-        if( ( $last_step = $this->getLastStep() ) AND ($step < $this->getLastStep() ) ) {
+        $last_step = $this->getLastStep();
+
+        if( $step < $last_step ) {
             $step = $last_step;
         }
 
@@ -160,7 +162,7 @@ abstract class NF_Upgrade
      */
     public function getLastStep()
     {
-        return get_option( 'nf_upgrade_' . $this->name . '_last_step' );
+        return get_option( 'nf_upgrade_' . $this->name . '_last_step', 0 );
     }
 
 

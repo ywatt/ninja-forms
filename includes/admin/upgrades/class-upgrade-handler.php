@@ -60,23 +60,24 @@ class NF_UpgradeHandler
 
         $current_upgrade->total_steps = $_REQUEST['total_steps'];
 
+        if( 0 == $current_step ) {
+            $current_upgrade->loading();
+        }
+
         $response = array(
             'upgrade'     => $current_upgrade->name,
-            'step'        => $current_step + 1,
             'total_steps' => (int) $current_upgrade->total_steps,
             'args'        => $current_upgrade->args,
         );
 
-        if( 0 == $current_step ) {
-            $current_upgrade->loading();
-            $response['total_steps'] = $current_upgrade->total_steps;
-        } else {
+        if( 0 != $current_step ) {
 
             if (is_array($current_upgrade->errors) AND $current_upgrade->errors) {
                 $response['errors'] = $current_upgrade->errors;
             }
 
-            if ($current_upgrade->total_steps < $response['step']) {
+            if ($current_upgrade->total_steps < $current_step ) {
+
                 $current_upgrade->complete();
                 $response['complete'] = TRUE;
                 $next_upgrade = $this->getNextUpgrade($current_upgrade);
@@ -85,10 +86,14 @@ class NF_UpgradeHandler
                     $response['nextUpgrade'] = $next_upgrade->name;
                 }
             } else {
+
                 $current_upgrade->_step($current_step);
+
             }
 
         }
+
+        $response['step'] = $current_step + 1;
 
         echo json_encode( $response );
         die();
