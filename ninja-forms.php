@@ -388,6 +388,7 @@ class Ninja_Forms {
             require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade.php');
 
             // Include Upgrades
+			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/database-migrations.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-notifications.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/update-email-settings.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );

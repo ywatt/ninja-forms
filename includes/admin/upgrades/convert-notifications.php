@@ -20,8 +20,6 @@ final class NF_Upgrade_Notifications extends NF_Upgrade
     {
         global $wpdb;
 
-        $this->addNewTableStructure();
-
         $this->removeOldEmailSettings();
 
         $form_count = nf_get_form_count();
@@ -291,42 +289,6 @@ final class NF_Upgrade_Notifications extends NF_Upgrade
     /*
      * PRIVATE METHODS
      */
-
-    private function addNewTableStructure()
-    {
-        // Create our object meta table
-        $sql = "CREATE TABLE IF NOT EXISTS ". NF_OBJECT_META_TABLE_NAME . " (
-		  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-		  `object_id` bigint(20) NOT NULL,
-		  `meta_key` varchar(255) NOT NULL,
-		  `meta_value` longtext NOT NULL,
-		  PRIMARY KEY (`id`)
-		) DEFAULT CHARSET=utf8;";
-
-        dbDelta( $sql );
-
-        // Create our object table
-        $sql = "CREATE TABLE IF NOT EXISTS " . NF_OBJECTS_TABLE_NAME . " (
-		  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-		  `type` varchar(255) NOT NULL,
-		  PRIMARY KEY (`id`)
-		) DEFAULT CHARSET=utf8;";
-
-        dbDelta( $sql );
-
-        // Create our object relationships table
-
-        $sql = "CREATE TABLE IF NOT EXISTS " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " (
-		  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-		  `child_id` bigint(20) NOT NULL,
-		  `parent_id` bigint(20) NOT NULL,
-		  `child_type` varchar(255) NOT NULL,
-		  `parent_type` varchar(255) NOT NULL,
-		  PRIMARY KEY (`id`)
-		) DEFAULT CHARSET=utf8;";
-
-        dbDelta( $sql );
-    }
 
     private function removeOldEmailSettings()
     {
