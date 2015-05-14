@@ -317,4 +317,22 @@ final class NF_Upgrade_Notifications extends NF_Upgrade
 
         return $tmp_array;
     }
+
+    private function replace_shortcodes( $text ) {
+        $matches = array();
+        $pattern = get_shortcode_regex();
+        preg_match_all('/'.$pattern.'/s', $text, $matches);
+        if ( is_array( $matches ) && ! empty( $matches[2] ) ) {
+            foreach ( $matches[2] as $key => $shortcode ) {
+                if ( $shortcode == 'ninja_forms_field' ) {
+                    if ( isset ( $matches[3][ $key ] ) ) {
+                        $atts = shortcode_parse_atts( $matches[3][ $key ] );
+                        $id = $atts['id'];
+                        $text = str_replace( $matches[0][ $key ], '`field_' . $id . '`', $text );
+                    }
+                }
+            }
+        }
+        return $text;
+    }
 }
