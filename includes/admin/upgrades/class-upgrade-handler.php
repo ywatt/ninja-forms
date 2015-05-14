@@ -60,6 +60,10 @@ class NF_UpgradeHandler
 
         $current_upgrade->total_steps = $_REQUEST['total_steps'];
 
+        if( isset( $_REQUEST['args'] ) ) {
+            $current_upgrade->args = $_REQUEST['args'];
+        }
+
         if( 0 == $current_step ) {
             $current_upgrade->loading();
         }
