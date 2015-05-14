@@ -51,27 +51,31 @@ final class NF_Upgrade_Forms extends NF_Upgrade
         // Get a list of forms that we've already converted.
         $this->completed_forms = get_option( 'nf_converted_forms', array() );
 
-        if ( ! is_array( $this->completed_forms ) )
+        if ( ! is_array( $this->completed_forms ) ) {
             $this->completed_forms = array();
+        }
+
+        $this->form_id = $this->args['forms'][ $step ];
+
+        Ninja_Forms()->form( $this->form_id )->dumpCache();
+
+        // Bail if we've already converted the db for this form.
+        if ( in_array( $this->form_id, $this->completed_forms ) ) {
+            return false;
+        }
     }
 
     public function step( $step )
     {
-        // Get our form ID
-        $form_id = $this->args['forms'][ $step ];
-
-        // Bail if we've already converted the db for this form.
-        if ( in_array( $form_id, $this->completed_forms ) )
-            return false;
-
-        $this->update_form_settings( $form_id );
-
-        $this->completed_forms[] = $form_id;
+        $this->update_form_settings( $this->form_id );
     }
 
     public function _afterStep( $step )
     {
+        $this->completed_forms[] = $this->form_id;
         update_option( 'nf_converted_forms', $this->completed_forms );
+
+        Ninja_Forms()->form( $this->form_id )->dumpCache();
     }
 
     public function complete()
