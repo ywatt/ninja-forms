@@ -73,10 +73,24 @@ class NF_UpgradeHandlerPage
         }
 
         // TODO: Check if an upgrade is needed
+        $upgrades = NF_UpgradeHandler()->upgrades;
 
-        printf(
-            '<div class="update-nag"><p>' . __( 'Ninja Forms needs to upgrade your database. %sStart Upgrade%s', 'ninja-forms' ) . '</p></div>',
-            '<a class="button button-primary" href="' . admin_url( 'admin.php?page=nf-upgrade-handler' ) . '">', '</a>'
-        );
+        $show_upgrade_notice = FALSE;
+
+        foreach( $upgrades as $upgrade ) {
+
+            if( ! $upgrade->isComplete() ) {
+                $show_upgrade_notice = TRUE;
+                break;
+            }
+
+        }
+
+        if( $show_upgrade_notice ) {
+            printf(
+                '<div class="update-nag"><p>' . __('Ninja Forms needs to upgrade your database. %sStart Upgrade%s', 'ninja-forms') . '</p></div>',
+                '<a class="button button-primary" href="' . admin_url('admin.php?page=nf-upgrade-handler') . '">', '</a>'
+            );
+        }
     }
 }
