@@ -48,14 +48,30 @@ class NF_UpgradeHandlerPage
             /* In Footer    */ TRUE
         );
 
+        $upgrades = NF_UpgradeHandler()->upgrades;
+        foreach( $upgrades as $upgrade ) {
+
+            if ( ! $upgrade->isComplete() ) {
+                $this->localizeUpgradeName( $upgrade->name );
+                break;
+            }
+
+        }
+
+    }
+
+    public function localizeUpgradeName( $upgade_name )
+    {
         wp_localize_script(
             $this->slug,
             'nfUpgradeHandler',
             array(
-                'upgrade' => NF_UpgradeHandler()->upgrades[0]->name
+                'upgrade' => $upgade_name
             )
         );
     }
+
+
 
     public function styles()
     {

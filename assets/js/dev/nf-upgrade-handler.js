@@ -1,7 +1,5 @@
 jQuery(document).ready(function($) {
 
-    console.log( 'DEBUG: NF_UpgradeHandler first upgrades is ' + nfUpgradeHandler.upgrade );
-
     function UpgradeHandler( upgrade ) {
 
         this.upgrade = upgrade;
@@ -145,19 +143,30 @@ jQuery(document).ready(function($) {
 
     }
 
-    var upgradeHandler = new UpgradeHandler( nfUpgradeHandler.upgrade );
+    if( "undefined" != typeof nfUpgradeHandler  ) {
 
-    $( '.progressbar' ).progressbar({ value: 0 });
+        console.log('DEBUG: NF_UpgradeHandler first upgrades is ' + nfUpgradeHandler.upgrade);
 
-    var first_upgrade = $( '#nf_upgrade_' + upgradeHandler.upgrade );
+        var upgradeHandler = new UpgradeHandler(nfUpgradeHandler.upgrade);
 
-    //TODO: move animations to Upgrade object
-    first_upgrade.find( '.spinner' ).css( 'display', 'block' ).css( 'visibility', 'visible' );
+        $('.progressbar').progressbar({value: 0});
 
-    first_upgrade.find( '.dashicons-no' ).css( 'display', 'none' );
+        var first_upgrade = $('#nf_upgrade_' + upgradeHandler.upgrade);
 
-    first_upgrade.find( '.inside') .slideDown();
+        //TODO: move animations to Upgrade object
+        first_upgrade.find('.spinner').css('display', 'block').css('visibility', 'visible');
 
-    upgradeHandler.process();
+        first_upgrade.find('.dashicons-no').css('display', 'none');
+
+        first_upgrade.find('.inside').slideDown();
+
+        upgradeHandler.process();
+
+    } else {
+
+        // No Upgrades to run, return to All Forms Page
+        document.location.href = "admin.php?page=ninja-forms";
+
+    }
 
 });
