@@ -10,7 +10,7 @@ final class NF_Upgrade_Notifications extends NF_Upgrade
 {
     public $name = 'notifications';
 
-    public $priority = '2.9.1';
+    public $priority = '2.8';
 
     public $description = 'An update is necessary for the new Emails & Actions tab to function properly. This new section gives the user much more control over what happens when a form is submitted.';
 
