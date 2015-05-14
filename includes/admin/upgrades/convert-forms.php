@@ -10,7 +10,7 @@ final class NF_Upgrade_Forms extends NF_Upgrade
 {
     public $name = 'forms';
 
-    public $priority = '2.9';
+    public $priority = '2.9.0';
 
     public $description = 'Form settings and information needs to be transferred to a new forms database. This new storage method will make it much easier effecient to interact with forms.';
 
