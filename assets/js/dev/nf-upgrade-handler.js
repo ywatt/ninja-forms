@@ -6,10 +6,11 @@ jQuery(document).ready(function($) {
 
         this.upgrade = upgrade;
 
-        this.process = function( step, total_steps ) {
+        this.process = function( step, total_steps, args ) {
 
             step = typeof step !== 'undefined' ? step : 0;
             total_step = typeof total_step !== 'undefined' ? total_step : 0;
+            args = typeof args !== 'undefined' ? args : [];
 
             console.log( 'Upgrade: ' + this.upgrade );
 
@@ -19,6 +20,7 @@ jQuery(document).ready(function($) {
                     upgrade: this.upgrade,
                     step: parseInt( step ),
                     total_steps: parseInt( total_steps ),
+                    args: args,
                     action: 'nf_upgrade_handler'
                 },
                 function (response) {
@@ -113,7 +115,7 @@ jQuery(document).ready(function($) {
                         return;
                     }
 
-                    upgradeHandler.process( response.step, response.total_steps  );
+                    upgradeHandler.process( response.step, response.total_steps, response.args  );
                 }
             ).fail(function() {
                     alert( "error" );
