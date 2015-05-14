@@ -22,8 +22,9 @@ final class NF_Upgrade_Forms extends NF_Upgrade
 
         // Check that the table exists
         if( 0 == $wpdb->query( "SHOW TABLES LIKE '" . NINJA_FORMS_TABLE_NAME . "'" ) ) {
+            //TODO Maybe change error to debug message instead
             $this->errors[] = NINJA_FORMS_TABLE_NAME . ' is not in the database';
-            return array( 'complete' => true );
+            return;
         }
 
         // Get all our forms
