@@ -10,7 +10,7 @@ final class NF_Upgrade_Notifications extends NF_Upgrade
 {
     public $name = 'notifications';
 
-    public $priority = '2.8';
+    public $priority = '2.9.1';
 
     public $description = 'An update is necessary for the new Emails & Actions tab to function properly. This new section gives the user much more control over what happens when a form is submitted.';
 
@@ -22,9 +22,9 @@ final class NF_Upgrade_Notifications extends NF_Upgrade
 
         $this->removeOldEmailSettings();
 
-        $form_count = nf_get_form_count();
+        $form_count = $this->getFormCount();
 
-        $forms = ninja_forms_get_all_forms( true );
+        $forms = $this->getAllForms();
 
         $x = 1;
         if ( is_array( $forms ) ) {
@@ -294,5 +294,27 @@ final class NF_Upgrade_Notifications extends NF_Upgrade
     {
         nf_change_email_fav();
         nf_remove_old_email_settings();
+    }
+
+    private function getFormCount()
+    {
+        $forms = Ninja_Forms()->forms()->get_all();
+        return count( $forms );
+    }
+
+    private function getAllForms()
+    {
+        $forms = Ninja_Forms()->forms()->get_all();
+
+        $tmp_array = array();
+        $x = 0;
+        foreach ( $forms as $form_id ) {
+            $tmp_array[ $x ]['id'] = $form_id;
+            $tmp_array[ $x ]['data'] = Ninja_Forms()->form( $form_id )->get_all_settings();
+            $tmp_array[ $x ]['name'] = Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
+            $x++;
+        }
+
+        return $tmp_array;
     }
 }
