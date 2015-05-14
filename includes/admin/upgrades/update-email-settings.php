@@ -59,6 +59,11 @@ final class NF_Upgrade_Email_Settings extends NF_Upgrade
         update_option( 'nf_update_email_settings_complete', true );
     }
 
+    public function isComplete()
+    {
+        return get_option( 'nf_update_email_settings_complete', false );
+    }
+
     /*
      * PRIVATE METHODS
      */

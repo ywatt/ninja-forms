@@ -34,6 +34,11 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
         update_option( 'nf_database_migrations', true);
     }
 
+    public function isComplete()
+    {
+        return get_option( 'nf_database_migrations', false );
+    }
+
     /*
      * PRIVATE METHODS
      */

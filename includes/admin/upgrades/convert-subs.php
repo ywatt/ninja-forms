@@ -76,6 +76,11 @@ final class NF_Upgrade_Submissions extends NF_Upgrade
         delete_option( 'nf_convert_subs_num' );
     }
 
+    public function isComplete()
+    {
+        return get_option( 'nf_convert_subs_step', false );
+    }
+
     /*
      * PRIVATE METHODS
      */

@@ -286,6 +286,11 @@ final class NF_Upgrade_Notifications extends NF_Upgrade
         update_option( 'nf_convert_notifications_complete', true );
     }
 
+    public function isComplete()
+    {
+        return get_option( 'nf_convert_notifications_complete', false );
+    }
+
     /*
      * PRIVATE METHODS
      */

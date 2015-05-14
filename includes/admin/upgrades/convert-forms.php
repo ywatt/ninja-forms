@@ -84,6 +84,11 @@ final class NF_Upgrade_Forms extends NF_Upgrade
         update_option( 'nf_converted_form_reset', false );
     }
 
+    public function isComplete()
+    {
+        return get_option( 'nf_convert_forms_complete', false );
+    }
+
     /*
      * CONVERSION METHODS
      */
