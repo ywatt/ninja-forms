@@ -50,7 +50,7 @@ final class NF_Upgrade_Email_Settings extends NF_Upgrade
     public function step( $step )
     {
         // Get our form ID
-        $form_id = $this->args['forms'][ $this->step ];
+        $form_id = $this->args['forms'][ $step ];
         $this->removeOldEmailSettings( $form_id );
     }
 
