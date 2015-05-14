@@ -103,6 +103,15 @@ abstract class NF_Upgrade
 
 
     /**
+     * Is Complete
+     *
+     * The isComplete method checks to see if the upgrade has already been completed.
+     */
+    abstract public function isComplete();
+
+
+
+    /**
      * _Step
      *
      * @param $step
