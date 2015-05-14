@@ -66,7 +66,7 @@ final class NF_Upgrade_Forms extends NF_Upgrade
 
         $this->update_form_settings( $form_id );
 
-        $completed_forms[] = $form_id;
+        $this->completed_forms[] = $form_id;
     }
 
     public function _afterStep( $step )
