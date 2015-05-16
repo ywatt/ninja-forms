@@ -88,7 +88,6 @@ class NF_UpgradeHandlerPage
             return;
         }
 
-        // TODO: Check if an upgrade is needed
         $upgrades = NF_UpgradeHandler()->upgrades;
 
         $show_upgrade_notice = FALSE;
