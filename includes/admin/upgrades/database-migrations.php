@@ -17,7 +17,7 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
 
     public function loading()
     {
-        $already_run = get_option( 'nf_database_migrations', false );
+        $already_run = $this->isComplete();
 
         $this->total_steps = ( $already_run ) ? 0 : 1;
     }
