@@ -45,6 +45,8 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
 
     private function createObjectTable()
     {
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
         $sql = "CREATE TABLE IF NOT EXISTS " . NF_OBJECTS_TABLE_NAME . " (
         `id` bigint(20) NOT NULL AUTO_INCREMENT,
         `type` varchar(255) NOT NULL,
@@ -56,6 +58,8 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
 
     private function createObjectMetaTable()
     {
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
         $sql = "CREATE TABLE IF NOT EXISTS ". NF_OBJECT_META_TABLE_NAME . " (
         `id` bigint(20) NOT NULL AUTO_INCREMENT,
         `object_id` bigint(20) NOT NULL,
@@ -69,6 +73,8 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
 
     private function createObjectRelationshipsTable()
     {
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
         $sql = "CREATE TABLE IF NOT EXISTS " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " (
         `id` bigint(20) NOT NULL AUTO_INCREMENT,
         `child_id` bigint(20) NOT NULL,
