@@ -158,7 +158,7 @@ final class NF_Upgrade_Notifications extends NF_Upgrade
             foreach ( $fields as $field_id => $field ) {
                 if ( isset ( $field['data']['send_email'] ) && $field['data']['send_email'] == 1 ) {
                     // Add this field to our $addresses variable.
-                    $addresses[] = $field_id;
+                    $addresses[] = 'field_' . $field_id;
                     unset( $field['data']['send_email'] );
                     unset( $field['data']['replyto_email'] );
                     unset( $field['data']['from_name'] );
