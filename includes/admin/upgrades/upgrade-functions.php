@@ -373,8 +373,7 @@ function nf_29_update_all_form_settings_check() {
 
 	if ( $forms_conversion_complete )
 		return false;
-	
-	$title = urlencode( __( 'Updating Form Database', 'ninja-forms' ) );
+
 	$url = admin_url( 'index.php?page=nf-upgrade-handler' );
 	
 	?>
