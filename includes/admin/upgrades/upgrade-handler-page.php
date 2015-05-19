@@ -90,21 +90,22 @@ class NF_UpgradeHandlerPage
 
         $upgrades = NF_UpgradeHandler()->upgrades;
 
-        $show_upgrade_notice = FALSE;
+        $upgrade_count = 0;
 
         foreach( $upgrades as $upgrade ) {
 
             if( ! $upgrade->isComplete() ) {
-                $show_upgrade_notice = TRUE;
-                break;
+                $upgrade_count++;
             }
 
         }
 
-        if( $show_upgrade_notice ) {
+        if( 0 < $upgrade_count ) {
             printf(
-                '<div class="update-nag"><p>' . __('Ninja Forms needs to upgrade your database. %sStart Upgrade%s', 'ninja-forms') . '</p></div>',
-                '<a class="button button-primary" href="' . admin_url('admin.php?page=nf-upgrade-handler') . '">', '</a>'
+                '<div class="update-nag"><p>' . __('Ninja Forms needs to process %s upgrade(s). This may take a few minutes to complete. %sStart Upgrade%s', 'ninja-forms') . '</p></div>',
+                $upgrade_count,
+                '<a class="button button-primary" href="' . admin_url('admin.php?page=nf-upgrade-handler') . '">',
+                '</a>'
             );
         }
     }
