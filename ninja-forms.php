@@ -123,16 +123,6 @@ class Ninja_Forms {
 		// Get our notifications up and running.
 		self::$instance->notifications = new NF_Notifications();
 
-		// Get our step processor up and running.
-		// We only need this in the admin.
-		if ( is_admin() ) {
-			self::$instance->step_processing = new NF_Step_Processing();
-			self::$instance->download_all_subs = new NF_Download_All_Subs();
-			self::$instance->convert_notifications = new NF_Convert_Notifications();
-			self::$instance->convert_forms = new NF_Convert_Forms();
-			self::$instance->update_email_settings = new NF_Update_Email_Settings();
-		}
-
 		// Fire our Ninja Forms init action.
 		// This will allow other plugins to register items to the instance.
 		do_action( 'nf_init', self::$instance );
@@ -393,6 +383,12 @@ class Ninja_Forms {
 
 			// Include our download all submissions php files
 			require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
+
+            // Include Upgrade Base Class
+            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade.php');
+
+            // Include Upgrades
+			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/database-migrations.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-notifications.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/update-email-settings.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
@@ -400,6 +396,10 @@ class Ninja_Forms {
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms.php' );
 			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
             require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms-reset.php' );
+
+            // Include Upgrade Handler
+            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-handler-page.php');
+            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade-handler.php');
 		}
 
 		// Include our upgrade files.
