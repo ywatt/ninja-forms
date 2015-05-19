@@ -23,7 +23,7 @@
                                 </span>
                     </dt>
                 </dl>
-                <div class="menu-item-settings type-class inside" style="display: none;">
+                <div class="menu-item-settings menu-item-settings--nf-upgrade type-class inside" style="display: none;">
                     <div id="progressbar_<?php echo $upgrade->name; ?>" class="progressbar">
                         <div class="progress-label">
                             Processing...

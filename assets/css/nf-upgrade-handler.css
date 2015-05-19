@@ -1,5 +1,10 @@
-.menu-item-handle {
-    cursor: default!important;
+.nf_upgrade .menu-item-handle {
+    cursor: default;
+}
+.nf_upgrade .menu-item-handle,
+.menu-item-settings.menu-item-settings--nf-upgrade {
+    width: 750px;
+    max-width: 95%;
 }
 .ui-progressbar {
     position: relative;
