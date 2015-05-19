@@ -24,21 +24,19 @@
                 <div class="menu-item-settings menu-item-settings--nf-upgrade type-class inside" style="display: none;">
                     <div id="progressbar_<?php echo $upgrade->name; ?>" class="progressbar">
                         <div class="progress-label">
-                            Processing...
+                            <?php _e( 'Processing', 'ninja-forms' ); ?>
                         </div>
                     </div>
                     <p><?php echo $upgrade->description; ?></p>
                     <div class="nf-upgrade-handler__errors" style="display: none; box-sizing: border-box; border: 1px solid #DEDEDE; padding-left: 5px; margin-right: 10px; border-radius: 3px; background-color: #EDEDED;">
                         <h3 class="nf-upgrade-handler__errors__title">
-                            <!-- TODO: Translate Text -->
-                            Error
+                            <?php _e( 'Error', 'ninja-forms' ); ?>
                         </h3>
                         <pre class="nf-upgrade-handler__errors__text" style="padding-left: 10px;">
 
                         </pre>
                         <p>
-                            <!-- TODO: Translate Text -->
-                            Please <a href="https://ninjaforms.com/contact/">contact support</a>.
+                            <?php sprintf( __('Please %scontact support%s with the error seen above.', 'ninja-forms' ) , '<a href="https://ninjaforms.com/contact/">', '</a>' ); ?>
                         </p>
                     </div>
                 </div>
