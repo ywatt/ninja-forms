@@ -1,11 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-add_filter( 'nf-upgrade-handler-register', 'add_nf_upgrade_submissions', 10, 1 );
-function add_nf_upgrade_submissions( $upgrades ) {
-    $upgrades[] = new NF_Upgrade_Submissions();
-    return $upgrades;
-}
-
 final class NF_Upgrade_Submissions extends NF_Upgrade
 {
     public $name = 'submissions';

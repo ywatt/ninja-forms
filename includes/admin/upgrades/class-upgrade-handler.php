@@ -1,5 +1,11 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
+require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/database-migrations.php' );
+require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms.php' );
+require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-notifications.php' );
+require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-subs.php' );
+require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/update-email-settings.php' );
+
 /**
 * Class NF_Upgrade_Handler
 */
@@ -42,6 +48,12 @@ class NF_UpgradeHandler
 
     public function register_upgrades()
     {
+        $this->upgrades[] = new NF_Upgrade_Database_Migrations();
+        $this->upgrades[] = new NF_Upgrade_Forms();
+        $this->upgrades[] = new NF_Upgrade_Notifications();
+        $this->upgrades[] = new NF_Upgrade_Submissions();
+        $this->upgrades[] = new NF_Upgrade_Email_Settings();
+
         $this->upgrades = apply_filters( 'nf-upgrade-handler-register', $this->upgrades );
 
         usort( $this->upgrades, array( $this, 'compare_upgrade_priority' ) ) ;

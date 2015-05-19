@@ -1,11 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-add_filter( 'nf-upgrade-handler-register', 'add_nf_database_migrations', 10, 1 );
-function add_nf_database_migrations( $upgrades ) {
-    $upgrades[] = new NF_Upgrade_Database_Migrations();
-    return $upgrades;
-}
-
 final class NF_Upgrade_Database_Migrations extends NF_Upgrade
 {
 
@@ -36,6 +30,7 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
 
     public function isComplete()
     {
+        return false;
         return get_option( 'nf_database_migrations', false );
     }
 
@@ -87,4 +82,3 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
         dbDelta( $sql );
     }
 }
-

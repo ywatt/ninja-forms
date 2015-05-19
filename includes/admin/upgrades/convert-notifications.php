@@ -1,11 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-add_filter( 'nf-upgrade-handler-register', 'add_nf_upgrade_notifications', 10, 1 );
-function add_nf_upgrade_notifications( $upgrades ) {
-    $upgrades[] = new NF_Upgrade_Notifications();
-    return $upgrades;
-}
-
 final class NF_Upgrade_Notifications extends NF_Upgrade
 {
     public $name = 'notifications';

@@ -1,11 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-add_filter( 'nf-upgrade-handler-register', 'add_nf_upgrade_email_settings', 10, 1 );
-function add_nf_upgrade_email_settings( $upgrades ) {
-    $upgrades[] = new NF_Upgrade_Email_Settings();
-    return $upgrades;
-}
-
 final class NF_Upgrade_Email_Settings extends NF_Upgrade
 {
     public $name = 'email_settings';
