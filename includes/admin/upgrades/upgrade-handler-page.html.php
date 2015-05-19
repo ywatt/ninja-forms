@@ -36,7 +36,7 @@
 
                         </pre>
                         <p>
-                            <?php sprintf( __('Please %scontact support%s with the error seen above.', 'ninja-forms' ) , '<a href="https://ninjaforms.com/contact/">', '</a>' ); ?>
+                            <?php echo sprintf( __('Please %scontact support%s with the error seen above.', 'ninja-forms' ) , '<a href="https://ninjaforms.com/contact/">', '</a>' ); ?>
                         </p>
                     </div>
                 </div>
