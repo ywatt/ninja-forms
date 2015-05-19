@@ -87,7 +87,9 @@ class NF_UpgradeHandler
                 $next_upgrade = $this->getNextUpgrade($current_upgrade);
 
                 if ($next_upgrade) {
-                    $response['nextUpgrade'] = $next_upgrade->name;
+                    if( ! $next_upgrade->isComplete() ) {
+                        $response['nextUpgrade'] = $next_upgrade->name;
+                    }
                 }
             } else {
 
