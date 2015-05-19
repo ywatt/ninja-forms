@@ -30,6 +30,12 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
 
     public function isComplete()
     {
+        if( $this->existsObjectTable() ||
+            $this->existsObjectMetaTable() ||
+            $this->existsObjectRelationshipsTable()
+        ) {
+            return true;
+        }
         return get_option( 'nf_database_migrations', false );
     }
 
@@ -50,6 +56,13 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
         dbDelta( $sql );
     }
 
+    private function existsObjectTable()
+    {
+        global $wpdb;
+        return $wpdb->query( "SHOW TABLES LIKE '" . NF_OBJECTS_TABLE_NAME . "'" );
+    }
+
+
     private function createObjectMetaTable()
     {
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
@@ -63,6 +76,12 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
         ) DEFAULT CHARSET=utf8;";
 
         dbDelta( $sql );
+    }
+
+    private function existsObjectMetaTable()
+    {
+        global $wpdb;
+        return $wpdb->query( "SHOW TABLES LIKE '" . NF_OBJECT_META_TABLE_NAME . "'" );
     }
 
     private function createObjectRelationshipsTable()
@@ -79,5 +98,11 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
         ) DEFAULT CHARSET=utf8;";
 
         dbDelta( $sql );
+    }
+
+    private function existsObjectRelationshipsTable()
+    {
+        global $wpdb;
+        return $wpdb->query( "SHOW TABLES LIKE '" . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . "'" );
     }
 }
