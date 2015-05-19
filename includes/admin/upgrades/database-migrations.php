@@ -30,7 +30,6 @@ final class NF_Upgrade_Database_Migrations extends NF_Upgrade
 
     public function isComplete()
     {
-        return false;
         return get_option( 'nf_database_migrations', false );
     }
 
