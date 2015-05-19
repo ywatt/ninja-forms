@@ -7,6 +7,9 @@
     min-width: 50%;
     max-width: 95%;
 }
+.menu-item-settings.menu-item-settings--nf-upgrade {
+    background-color: #FEFEFE;
+}
 .ui-progressbar {
     position: relative;
     width: 100%;
