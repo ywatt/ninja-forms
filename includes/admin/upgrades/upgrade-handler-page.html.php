@@ -1,7 +1,5 @@
 <div class="wrap">
 
-    <h2>Upgrade Handler</h2>
-
     <?php foreach ( NF_UpgradeHandler()->upgrades as $upgrade ): ?>
         <?php if( ! $upgrade->isComplete() ) : ?>
             <div id="nf_upgrade_<?php echo $upgrade->name ?>">
