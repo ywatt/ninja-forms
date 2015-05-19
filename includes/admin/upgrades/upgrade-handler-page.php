@@ -8,6 +8,7 @@ class NF_UpgradeHandlerPage
     {
         add_action( 'admin_menu', array( $this, 'register' ) );
         add_action( 'admin_notices', array( $this, 'show_upgrade_notices' ) );
+        add_action( 'admin_menu', 'ninja_forms_admin_js');
     }
 
     public function register()
@@ -49,35 +50,37 @@ class NF_UpgradeHandlerPage
         );
 
         $upgrades = NF_UpgradeHandler()->upgrades;
+        $first_upgrade = null;
         foreach( $upgrades as $upgrade ) {
 
             if ( ! $upgrade->isComplete() ) {
-                $this->localizeUpgradeName( $upgrade->name );
+                $first_upgrade = $upgrade->name;
                 break;
             }
 
         }
 
-    }
-
-    public function localizeUpgradeName( $upgade_name )
-    {
         wp_localize_script(
             $this->slug,
             'nfUpgradeHandler',
             array(
-                'upgrade' => $upgade_name
+                'upgrade' => $first_upgrade,
+                'nf_upgrade_complete_title' => __( 'Upgrades Complete', 'ninja-forms' ),
             )
         );
+
     }
-
-
 
     public function styles()
     {
         wp_enqueue_style(
             /* Handle */ $this->slug,
             /* Source */ NF_PLUGIN_URL . '/assets/css/nf-upgrade-handler.css'
+        );
+
+        wp_enqueue_style(
+        /* Handle */ 'ninja-forms-admin',
+            /* Source */ NF_PLUGIN_URL . '/css/ninja-forms-admin.css'
         );
     }
 
