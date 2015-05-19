@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
 
+    $( '.nf-upgrade-complete' ).nfAdminModal( { title: nfUpgradeHandler.nf_upgrade_complete_title, buttons: '.nf-upgrade-complete-buttons' } );
+
     function UpgradeHandler( upgrade ) {
 
         this.upgrade = upgrade;
@@ -110,14 +112,17 @@ jQuery(document).ready(function($) {
                         }
 
                         console.log( 'DEBUG: NF_UpgradeHandler says "It is finished!"' );
+
+                        $( '.nf-upgrade-complete' ).nfAdminModal( 'open' );
+
                         return;
                     }
 
                     upgradeHandler.process( response.step, response.total_steps, response.args  );
                 }
             ).fail(function() {
-                    alert( "error" );
-                });
+                alert( "error" );
+            });
 
         };
 
