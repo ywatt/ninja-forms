@@ -12,14 +12,20 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 
 gulp.task('js', function () {
-    return gulp.src('assets/js/dev/nf-upgrade-handler.js')
+    gulp.src('assets/js/dev/nf-upgrade-handler.js')
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('assets/js/min/')); //the destination folder
+
+    gulp.src('js/dev/ninja-forms-admin.js')
+        .pipe(uglify())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest('js/min/')); //the destination folder
 });
 
 // Watch Files For Changes
 gulp.task('watch', function() {
+    gulp.watch('js/dev/ninja-forms-admin.js', ['js']);
     gulp.watch('assets/js/dev/nf-upgrade-handler.js', ['js']);
 });
 
