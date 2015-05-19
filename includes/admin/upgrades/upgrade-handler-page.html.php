@@ -48,8 +48,6 @@
 
 </div> <!-- /.wrap -->
 
-
-
 <div class="nf-upgrade-complete" style="display: none;">
     <?php _e( 'Ninja Forms has completed all available upgrades!', 'ninja-forms' ); ?>
 </div><!-- /.nf-upgrade-complete -->
@@ -58,26 +56,3 @@
         <a class="button-primary" href="<?php echo admin_url( 'admin.php?page=ninja-forms' );?>"><?php _e( 'Go to Forms', 'ninja-forms' ); ?></a>
     </div>
 </div><!-- /.nf-upgrade-complete-buttons -->
-
-
-
-<!-- BEING nfAdminModal Structure -->
-<!-- TODO: Add to nfAdminModal function -->
-<div id="nf-admin-modal-backdrop" style="display: none;"></div>
-<div id="nf-admin-modal-wrap" class="wp-core-ui" style="display: none;">
-    <div id="nf-admin-modal" tabindex="-1">
-        <div id="admin-modal-title">
-            <span id="nf-modal-title"></span>
-            <button type="button" id="nf-admin-modal-close" class="modal-close"><span class="screen-reader-text modal-close">Close</span></button>
-        </div>
-        <div id="modal-contents-wrapper" style="padding:20px;">
-            <div id="nf-admin-modal-content" class="admin-modal-inside">
-
-            </div>
-            <div class="submitbox" style="display:block;">
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END nfAdminModal Structure -->
