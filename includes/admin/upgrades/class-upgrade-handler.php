@@ -54,7 +54,7 @@ class NF_UpgradeHandler
         $this->upgrades[] = new NF_Upgrade_Submissions();
         $this->upgrades[] = new NF_Upgrade_Email_Settings();
 
-        $this->upgrades = apply_filters( 'nf-upgrade-handler-register', $this->upgrades );
+        $this->upgrades = apply_filters( 'nf_upgrade_handler_register', $this->upgrades );
 
         usort( $this->upgrades, array( $this, 'compare_upgrade_priority' ) ) ;
     }
