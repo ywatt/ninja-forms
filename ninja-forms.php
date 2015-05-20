@@ -123,6 +123,13 @@ class Ninja_Forms {
 		// Get our notifications up and running.
 		self::$instance->notifications = new NF_Notifications();
 
+		// Get our step processor up and running.
+		// We only need this in the admin.
+		if ( is_admin() ) {
+			self::$instance->step_processing = new NF_Step_Processing();
+			self::$instance->download_all_subs = new NF_Download_All_Subs();
+		}
+
 		// Fire our Ninja Forms init action.
 		// This will allow other plugins to register items to the instance.
 		do_action( 'nf_init', self::$instance );
