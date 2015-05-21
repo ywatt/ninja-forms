@@ -255,7 +255,7 @@ class Ninja_Forms {
 			return self::$instance->$form_var;
 		
 		// Check to see if we have a transient object stored for this form.
-		if ( false != ( $form_obj = get_transient( 'nf_form_' . $form_id ) ) ) {
+		if ( is_object ( ( $form_obj = get_transient( 'nf_form_' . $form_id ) ) ) ) {
 			self::$instance->$form_var = $form_obj;
 		} else {
 			// Create a new form object for this form.
