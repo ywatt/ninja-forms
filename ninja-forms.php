@@ -94,6 +94,9 @@ class Ninja_Forms {
 			// Instead, the forms() methods will act as wrappers for it.
 			self::$instance->forms = new NF_Forms();
 
+			// Our session manager wrapper class
+			self::$instance->session = new NF_Session();
+
 			register_activation_hook( __FILE__, 'ninja_forms_activation' );
 			add_action( 'plugins_loaded', array( self::$instance, 'load_lang' ) );
 			add_action( 'init', array( self::$instance, 'set_transient_id'), 1 );
@@ -359,6 +362,8 @@ class Ninja_Forms {
 	 * @return void
 	 */
 	private function includes() {
+		// Include our session manager
+		require_once( NF_PLUGIN_DIR . 'classes/session.php' );
 		// Include our sub object.
 		require_once( NF_PLUGIN_DIR . 'classes/sub.php' );
 		// Include our subs object.
@@ -387,7 +392,6 @@ class Ninja_Forms {
 			require_once( NF_PLUGIN_DIR . 'includes/admin/step-processing.php' );
 			require_once( NF_PLUGIN_DIR . 'classes/step-processing.php' );
 
-
 			// Include our download all submissions php files
 			require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
 
@@ -406,7 +410,6 @@ class Ninja_Forms {
 
 		// Include our upgrade files.
 		require_once( NF_PLUGIN_DIR . 'includes/admin/welcome.php' );
-
 
 		// Include deprecated functions and filters.
 		require_once( NF_PLUGIN_DIR . 'includes/deprecated.php' );
@@ -653,23 +656,23 @@ class Ninja_Forms {
 	}
 
 	/**
-	 * Set $_SESSION variable used for storing items in transient variables
+	 * Set Ninja_Forms()->session variable used for storing items in transient variables
 	 *
 	 * @access public
 	 * @since 2.7
-	 * @return void
+	 * @return string $t_id;
 	 */
 	public function set_transient_id(){
-		if( !session_id() )
-	        session_start();
-		if ( !isset ( $_SESSION['ninja_forms_transient_id'] ) AND !is_admin() ) {
-			$t_id = ninja_forms_random_string();
+		$transient_id = $this->session->get( 'nf_transient_id' );
+		if ( ! $transient_id && ! is_admin() ) {
+			$transient_id = ninja_forms_random_string();
 			// Make sure that our transient ID isn't currently in use.
-			while ( get_transient( $t_id ) !== false ) {
+			while ( get_transient( $transient_id ) !== false ) {
 				$_id = ninja_forms_random_string();
 			}
-			$_SESSION['ninja_forms_transient_id'] = $t_id;
+			$this->session->set( 'nf_transient_id', $transient_id );
 		}
+		return $transient_id;
 	}
 
 	/**
