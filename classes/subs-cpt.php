@@ -236,13 +236,11 @@ class NF_Subs_CPT {
 			$datepicker_args['dateFormat'] = $date_format;
 		}
 
-		ninja_forms_admin_js();
-
 		wp_enqueue_script( 'subs-cpt',
 			NF_PLUGIN_URL . 'assets/js/' . $src .'/subs-cpt' . $suffix . '.js',
 			array('jquery', 'jquery-ui-datepicker') );
 
-		wp_localize_script( 'subs-cpt', 'nf_sub', array( 'form_id' => $form_id, 'reset_seq_num_title' => __( 'Re-number Submissions', 'ninja-forms' ), 'datepicker_args' => apply_filters( 'ninja_forms_admin_submissions_datepicker_args', $datepicker_args ) ) );
+		wp_localize_script( 'subs-cpt', 'nf_sub', array( 'form_id' => $form_id, 'datepicker_args' => apply_filters( 'ninja_forms_admin_submissions_datepicker_args', $datepicker_args ) ) );
 
 	}
 
@@ -259,8 +257,6 @@ class NF_Subs_CPT {
 		// Bail if we aren't on the edit.php page or the post.php page.
 		if ( ( $pagenow != 'edit.php' && $pagenow != 'post.php' ) || $typenow != 'nf_sub' )
 			return false;
-
-		ninja_forms_admin_css();
 		
 		wp_enqueue_style( 'nf-sub', NF_PLUGIN_URL .'assets/css/cpt.css' );
 		wp_enqueue_style( 'nf-jquery-ui-freshness', NF_PLUGIN_URL .'assets/css/jquery-ui-fresh.min.css' );
