@@ -111,7 +111,10 @@ class NF_Form {
 	 * @since 2.7
 	 * @return string $setting
 	 */
-	public function get_setting( $setting ) {
+	public function get_setting( $setting, $bypass_cache = false ) {
+		if ( $bypass_cache ) {
+			return nf_get_object_meta_value( $this->form_id, 'last_sub' );
+		}
 		if ( isset ( $this->settings[ $setting ] ) ) {
 			return $this->settings[ $setting ];
 		} else {

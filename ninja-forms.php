@@ -387,7 +387,6 @@ class Ninja_Forms {
 			require_once( NF_PLUGIN_DIR . 'includes/admin/step-processing.php' );
 			require_once( NF_PLUGIN_DIR . 'classes/step-processing.php' );
 
-
 			// Include our download all submissions php files
 			require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
 
