@@ -191,11 +191,22 @@ class NF_Form {
      * Delete the cached form object (transient)
      *
      * @access public
+     * @since 2.9.17
+     */
+    public function dump_cache()
+    {
+        delete_transient( 'nf_form_' . $this->form_id );
+    }
+
+    /**
+     * Deprecated wrapper for dump_cache()
+     *
+     * @access public
      * @since 2.9.12
      */
     public function dumpCache()
     {
-        delete_transient( 'nf_form_' . $this->form_id );
+        $this->dump_cache();
     }
 
 }
