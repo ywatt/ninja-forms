@@ -253,7 +253,7 @@ class Ninja_Forms {
 		// Check to see if an object for this form already exists in memory. If it does, return it.
 		if ( isset( self::$instance->$form_var ) )
 			return self::$instance->$form_var;
-		
+
 		// Check to see if we have a transient object stored for this form.
 		if ( is_object ( ( $form_obj = get_transient( 'nf_form_' . $form_id ) ) ) ) {
 			self::$instance->$form_var = $form_obj;
@@ -714,12 +714,12 @@ class Ninja_Forms {
 
 	/**
 	 * Refresh our plugin settings if we update the ninja_forms_settings option
-	 * 
+	 *
 	 * @access public
 	 * @since 2.9
 	 * @return void
 	 */
-	public function refresh_plugin_settings( $old_value, $value ) {
+	public function refresh_plugin_settings() {
 		self::$instance->plugin_settings = self::$instance->get_plugin_settings();
 	}
 
