@@ -99,7 +99,7 @@ class Ninja_Forms {
 			add_action( 'init', array( self::$instance, 'set_transient_id'), 1 );
 			add_action( 'init', array( self::$instance, 'init' ), 5 );
 			add_action( 'admin_init', array( self::$instance, 'admin_init' ), 5 );
-			add_action( 'update_option_ninja_forms_settings', array( self::$instance, 'refresh_plugin_settings' ), 10, 2 );
+			add_action( 'update_option_ninja_forms_settings', array( self::$instance, 'refresh_plugin_settings' ), 10 );
 		}
 
 		return self::$instance;
