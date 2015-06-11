@@ -37,10 +37,14 @@ function ninja_forms_field_recaptcha_display( $field_id, $data, $form_id = '' ) 
 	$lang = $settings['recaptcha_lang'];
 	$siteKey = $settings['recaptcha_site_key'];
 	if ( !empty( $siteKey ) ) { ?>
-
-		<div class="g-recaptcha" data-sitekey="<?php echo $siteKey; ?>"></div>
+		<input id="ninja_forms_field_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="hidden" class="<?php echo $field_class;?>" value="" rel="<?php echo $field_id;?>" />
+		<div class="g-recaptcha" data-callback="nf_recaptcha_set_field_value" data-sitekey="<?php echo $siteKey; ?>"></div>
         <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=<?php echo $lang; ?>"> </script>
-
+		<script type="text/javascript">
+            function nf_recaptcha_set_field_value(inpval){
+            	jQuery("#ninja_forms_field_<?php echo $field_id;?>").val(inpval)
+            }
+            </script>
 		<?php
 	}
 }
