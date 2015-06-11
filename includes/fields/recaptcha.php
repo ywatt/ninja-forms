@@ -1,5 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_register_field_recaptcha() {
+
+	$settings = get_option( "ninja_forms_settings" );
 	$args = array(
 		'name' => __( 'reCAPTCHA', 'ninja-forms' ),
 		'sidebar' => 'template_fields',
@@ -22,8 +24,10 @@ function ninja_forms_register_field_recaptcha() {
 		'pre_process' => 'ninja_forms_field_recaptcha_pre_process',
 
 	);
-
-	ninja_forms_register_field( '_recaptcha', $args );
+	// show recaptcha field in admin only if site and secret key exists.
+	if ( !empty( $settings['recaptcha_site_key'] ) && !empty( $settings['recaptcha_secret_key'] ) ) {
+		ninja_forms_register_field( '_recaptcha', $args );
+	}
 }
 
 add_action( 'init', 'ninja_forms_register_field_recaptcha' );

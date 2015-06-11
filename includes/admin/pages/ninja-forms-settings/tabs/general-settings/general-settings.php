@@ -50,7 +50,7 @@ function ninja_forms_register_general_settings_metabox(){
 				'name' 	=> 'recaptcha_site_key',
 				'type' 	=> 'text',
 				'label' => __( 'reCAPTCHA Site Key', 'ninja-forms' ),
-				'desc' 	=> '',
+				'desc' 	=>  sprintf( __( 'Get site key for your domain by registering  %shere%s', 'ninja-forms' ), '<a href="https://www.google.com/recaptcha/intro/index.html" target="_blank">', '</a>' )
 			),
 			array(
 				'name' 	=> 'recaptcha_secret_key',
