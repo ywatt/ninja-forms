@@ -145,12 +145,6 @@ class Ninja_Forms_Processing {
 					$val = false;
 				}
 
-                if( '_textarea' == $field_type ) {
-                    //Avoid closing of the textarea
-                    $val = str_replace( '</textarea', '', $val );
-                    $val = str_replace( 'textarea>', '', $val );
-                }
-
                 $val = nf_wp_kses_post_deep( $val );
 
 				$this->data['fields'][$field_id] = $val;
