@@ -44,7 +44,8 @@ function ninja_forms_register_field_textarea(){
 				'type' => 'textarea',
 			),
 		),
-		'edit_sub_value' => 'nf_field_textarea_edit_sub_value'
+		'edit_sub_value' => 'nf_field_textarea_edit_sub_value',
+		'pre_process'	=> 'nf_field_textarea_pre_process',
 	);
 
 	ninja_forms_register_field('_textarea', $args);
@@ -118,4 +119,24 @@ function nf_field_textarea_edit_sub_value( $field_id, $user_value ) {
 	?>
 	<textarea name="fields[<?php echo $field_id; ?>]"><?php echo $user_value; ?></textarea>
 	<?php
+}
+
+/**
+ * Make sure we strip nested script tags from our values
+ *
+ * @since  2.9.19
+ * @return  void
+ */
+function nf_field_textarea_pre_process( $field_id, $user_value ) {
+	global $ninja_forms_processing;
+	
+    //Avoid closing of the textarea
+    $user_value = str_replace( '&lt;/textarea', '', $user_value );
+    $user_value = str_replace( 'textarea&gt;', '', $user_value );
+
+	while ( false !== strpos( $user_value, '&lt;script&gt;' ) ) {
+		$user_value = str_replace( '&lt;script&gt;', '', $user_value );
+		$user_value = str_replace( '&lt;/script&gt;', '', $user_value );
+	}
+	$ninja_forms_processing->update_field_value( $field_id, $user_value );
 }
