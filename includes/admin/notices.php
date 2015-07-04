@@ -1,12 +1,24 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-function nf_admin_notice() {
-        NF_Notices()->admin_notice("THIS IS A MSG", "7/1/2015", 7);
-        NF_Notices()->admin_notice("DOUBLE UP TEST", "7/2/2015", 6);
+/**
+ * Notices page to house all of the admin notices for Core
+ *
+ * Can be simply used be adding another line into the nf_admin_notices() function
+ *
+ * The class NF_Notices in notices-class.php can be extended to create more advanced notices to include triggered events
+ *
+ * @since 2.9
+ */
 
-        $message = '<p>We notice that your Ninja Form has over 50 fields! Have you considered purchasing Multi-Part Forms?</p><p>Easily break up long forms into multiple pages. Control animation and direction. Show a confirmation page.</p>
-        <div class="nf-extend-buttons"><a href="https://ninjaforms.com/extensions/multi-part-forms/" title="Multi-Part Forms" class="button-primary nf-button">Learn More</a></div>';
-        NF_Notices()->admin_notice($message);
+// This function is used to hold all of the basic notices
+
+function nf_admin_notices() {
+
+        NF_Notices()->admin_notice("THIS IS A MSG - test", "7/4/2015", 7);
+        
+        NF_Notices()->admin_notice("DOUBLE UP TEST - Yo Bro", "7/2/2015", 6);
+
 }
 
-add_action( 'admin_notices', 'nf_admin_notice' );
+// Require any files that contain class extensions for NF_Notices
+require_once( NF_PLUGIN_DIR . 'includes/admin/notices-multipart.php' );

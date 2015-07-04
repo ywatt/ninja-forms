@@ -1,0 +1,39 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * NF_Notices_Multipart Class
+ *
+ * Extends NF_Notices to check for 50 or more fields in a single form and if multi-part forms is not installed before throwing an admin notice.
+ *
+ * @since 2.9
+ */
+
+class NF_Notices_Multipart extends NF_Notices
+{
+        // Basic actions to run
+        public function __construct(){
+
+                // Runs the visibility checks for admin notices after all needed core files are loaded
+                add_action( 'admin_head', array( $this, 'special_parameters' ) );
+
+        }
+        
+        // Function to do all the special checks before running the notice
+        public function special_parameters(){
+                if ( $this->nf_admin_notice() ) {
+
+                        // Check for 50 fields in one form
+                        
+                        // Check for multi-part forms installed
+                        if ( ! is_plugin_active( 'ninja-forms-multi-part/multi-part.php' ) ) {
+                                // Run notice
+                                $message = '<p>We notice that your Ninja Form has over 50 fields! Have you considered purchasing Multi-Part Forms?</p><p>Easily break up long forms into multiple pages. Control animation and direction. Show a confirmation page.</p>
+                                <div class="nf-extend-buttons"><a href="https://ninjaforms.com/extensions/multi-part-forms/" title="Multi-Part Forms" class="button-primary nf-button">Learn More</a></div>';
+                                NF_Notices()->admin_notice($message);
+                        }
+
+                }
+        }
+}
+
+return new NF_Notices_Multipart();
