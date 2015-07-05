@@ -11,12 +11,13 @@
  */
 
 // This function is used to hold all of the basic notices
+// Date format accepts most formats but can get confused so preferred methods are m/d/Y or d-m-Y
 
 function nf_admin_notices() {
 
-        NF_Notices()->admin_notice("THIS IS A MSG - test", "7/4/2015", 7);
+        NF_Notices()->admin_notice("THIS IS A MSG - test", "7/6/2015", 7);
         
-        NF_Notices()->admin_notice("DOUBLE UP TEST - Yo Bro", "7/2/2015", 6);
+        NF_Notices()->admin_notice("DOUBLE UP TEST - Yo Bro", "7/6/2015", 10);
 
 }
 

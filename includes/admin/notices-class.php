@@ -25,7 +25,7 @@ class NF_Notices
         }
 
         public $notice_spam = 0;
-        public $notice_spam_max = 5;
+        public $notice_spam_max = 1;
 
         // Basic actions to run
         public function __construct(){
