@@ -15,9 +15,9 @@
 
 function nf_admin_notices() {
 
-        NF_Notices()->admin_notice("THIS IS A MSG - test", "7/6/2015", 7);
+        Ninja_Forms()->notices->admin_notice("THIS IS A MSG - Testing a simple message #1", current_time( "n/j/Y" ), 7);
         
-        NF_Notices()->admin_notice("DOUBLE UP TEST - Yo Bro", "7/6/2015", 10);
+        Ninja_Forms()->notices->admin_notice("DOUBLE UP TEST - Testing spam filter set to 1", current_time( "n/j/Y" ), 10);
 
 }
 

@@ -68,7 +68,7 @@ class NF_Notices
                 }
 
                 // Get the current date then set start date to either passed value or current date value
-                $current_date = date( "n/j/Y" );
+                $current_date = current_time( "n/j/Y" );
                 $start_date = ( $start_date != null ? $start_date : $current_date );
                 $start_date = date( "n/j/Y", strtotime( $start_date ) );
 
@@ -153,9 +153,3 @@ class NF_Notices
         
 }
 
-// Create the instance function for ease of use
-function NF_Notices() {
-    return NF_Notices::instance();
-}
-
-NF_Notices();

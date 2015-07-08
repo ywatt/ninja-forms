@@ -148,6 +148,9 @@ class Ninja_Forms {
                 // Check and update our version number.
                 self::$instance->update_version_number();
 
+                // Get our admin notices up and running.
+                self::$instance->notices = new NF_Notices();
+
                 // Fire our Ninja Forms init action.
                 do_action( 'nf_admin_init', self::$instance );
         }
