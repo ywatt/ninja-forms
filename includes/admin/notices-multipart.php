@@ -14,13 +14,18 @@ class NF_Notices_Multipart extends NF_Notices
         public function __construct(){
 
                 // Runs the visibility checks for admin notices after all needed core files are loaded
-                add_action( 'nf_admin_notices', array( $this, 'special_parameters' ) );
+                add_filter( 'nf_admin_notices', array( $this, 'special_parameters' ) );
 
         }
         
         // Function to do all the special checks before running the notice
-        public function special_parameters(){
+        public function special_parameters( $admin_notices ){
 
+                // Check if on builder
+                if ( ! $this->admin_notice_pages( array( array( 'ninja-forms', 'builder' ) ) ) ) {
+                        return $admin_notices;
+                }
+                
                 // Check for 50 fields in one form
                 $field_check = 0;
                 $all_fields = ninja_forms_get_all_fields();
@@ -46,11 +51,14 @@ class NF_Notices_Multipart extends NF_Notices
                         
                 // Check for multi-part forms installed and if the above passes
                 if ( ! is_plugin_active( 'ninja-forms-multi-part/multi-part.php' ) && $field_check == 1 ) {
-                        // Run notice
+                        // Add notice
                         $message = '<p>We notice that your Ninja Form has over 50 fields! Have you considered purchasing Multi-Part Forms?</p><p>Easily break up long forms into multiple pages. Control animation and direction. Show a confirmation page.</p>
                         <div class="nf-extend-buttons"><a href="https://ninjaforms.com/extensions/multi-part-forms/" title="Multi-Part Forms" class="button-primary nf-button">Learn More</a></div>';
-                        Ninja_Forms()->notices->admin_notice($message);
+                        $admin_notices[ 'multi-part' ] = array( 'msg' => __( $message, 'ninja-forms' ) );
+
                 }
+                
+                return $admin_notices;
 
         }
 }

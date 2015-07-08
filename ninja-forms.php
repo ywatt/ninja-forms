@@ -163,8 +163,10 @@ class Ninja_Forms {
          * @return void
          */
         public function admin_head() {
-                // Notices action.
-                do_action( 'nf_admin_notices' );
+                // Notices filter and run the notices function.
+                $admin_notices = apply_filters( 'nf_admin_notices', array() );
+                self::$instance->notices->admin_notice( $admin_notices );
+
         }
 
         /**

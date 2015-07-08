@@ -32,9 +32,6 @@ class NF_Notices
 
                 // Runs the admin notice ignore function incase a dismiss button has been clicked
                 add_action( 'admin_init', array( $this, 'admin_notice_ignore' ) );
-                
-                // Runs the default admin notices after all needed core files are loaded
-                add_action( 'nf_admin_notices', 'nf_admin_notices' );
 
         }
         
@@ -43,7 +40,7 @@ class NF_Notices
 
                 $nf_settings = get_option( 'ninja_forms_settings' );
                 if ( ! isset( $nf_settings[ 'disable_admin_notices' ] ) || ( isset( $nf_settings[ 'disable_admin_notices' ] ) && $nf_settings[ 'disable_admin_notices' ] == 0 ) ){
-                        if ( current_user_can( apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ) ) && get_current_screen()->id === 'dashboard' ) {
+                        if ( current_user_can( apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ) ) ) {
                                 return true;
                         }
                 }
@@ -52,76 +49,68 @@ class NF_Notices
         }
         
         // Primary notice function that can be called from an outside function sending necessary variables
-        public function admin_notice( $message, $start_date = null, $interval = 14 ) {
+        public function admin_notice( $admin_notices ) {
 
-                // Check options and on dashboard
+                // Check options
                 if ( ! $this->nf_admin_notice() ) {
                         return false;
                 }
                 
-                // Call for spam protection
-                if ( $this->anti_notice_spam() ) {
-                        return false;
-                }
-
-                // Get the current date then set start date to either passed value or current date value
-                $current_date = current_time( "n/j/Y" );
-                $start_date = ( $start_date != null ? $start_date : $current_date );
-                $start_date = date( "n/j/Y", strtotime( $start_date ) );
-
-                // This is the main notices storage option
-                $admin_notices = ( get_option( 'nf_admin_notice' ) ? unserialize( get_option( 'nf_admin_notice' ) ) : array() );
-
-                // Check if the message is already stored and if so just grab the key otherwise store the message and its associated date information
-                foreach ($admin_notices as $key => $val) {
-                        if ($val['message'] === $message) {
-                            $message_number = $key;
+                foreach ( $admin_notices as $slug => $admin_notice ) {
+                        // Call for spam protection
+                        if ( $this->anti_notice_spam() ) {
+                                return false;
                         }
+                
+                        if ( isset( $admin_notices[ $slug ][ 'pages' ] ) && is_array( $admin_notices[ $slug ][ 'pages' ] ) ) {
+                                if ( ! $this->admin_notice_pages( $admin_notices[ $slug ][ 'pages' ] ) ) {
+                                        return false;
+                                }
+                        }
+
+                        // Get the current date then set start date to either passed value or current date value and add interval
+                        $current_date = current_time( "n/j/Y" );
+                        $start = ( isset( $admin_notices[ $slug ][ 'start' ] ) ? $admin_notices[ $slug ][ 'start' ] : $current_date );
+                        $start = date( "n/j/Y", strtotime( $start ) );
+                        $date_array = explode( '/', $start );
+                        $interval = ( isset( $admin_notices[ $slug ][ 'int' ] ) ? $admin_notices[ $slug ][ 'int' ] : 0 );
+                        $date_array[1] += $interval;
+                        $start = date( "n/j/Y", mktime( 0, 0, 0, $date_array[0], $date_array[1], $date_array[2] ) );
+
+                        // This is the main notices storage option
+                        $admin_notices_option = ( get_option( 'nf_admin_notice' ) ? unserialize( get_option( 'nf_admin_notice' ) ) : array() );
+
+                        // Check if the message is already stored and if so just grab the key otherwise store the message and its associated date information
+                        if ( ! array_key_exists( $slug, $admin_notices_option ) ) {
+                                $admin_notices_option[ $slug ][ 'msg' ] = $admin_notices[ $slug ][ 'msg' ];
+                                $admin_notices_option[ $slug ][ 'start' ] = $start;
+                                $admin_notices_option[ $slug ][ 'int' ] = $interval;
+                                update_option( 'nf_admin_notice', serialize( $admin_notices_option ) );
+                        }
+
+                        // Sanity check to ensure we have accurate information
+                        // New date information will not overwrite old date information
+                        $admin_display_check = ( isset( $admin_notices_option[ $slug ][ 'dismissed' ] ) ? $admin_notices_option[ $slug ][ 'dismissed'] : 0 );
+                        $admin_display_start = ( isset( $admin_notices_option[ $slug ][ 'start' ] ) ? $admin_notices_option[ $slug ][ 'start'] : $start );
+                        $admin_display_interval = ( isset( $admin_notices_option[ $slug ][ 'int' ] ) ? $admin_notices_option[ $slug ][ 'int'] : $interval );
+                        $admin_display_msg = ( isset( $admin_notices_option[ $slug ][ 'msg' ] ) ? $admin_notices_option[ $slug ][ 'msg'] : $admin_notices[ $slug ][ 'msg' ] );
+
+                        // Ensure the notice hasn't been hidden and that the current date is after the start date
+                        if ( $admin_display_check == 0 && strtotime( $admin_display_start ) <= strtotime( $current_date ) ) {
+
+                                // Admin notice display output
+                                echo '<div class="updated notice nf-admin-notice welcome-panel">';
+                                printf(__('%1$s <div class="nf-admin-notice-dismiss-wrap"><a href="?nf_admin_notice_ignore=%2$s" class="nf-admin-notice-dismiss">Dismiss</a></div>'), $admin_display_msg, $slug );
+                                echo '</div>';
+
+                                $this->notice_spam += 1;
+
+                        }
+                
                 }
-                
-                if ( ! isset( $message_number ) ) {
-                        $admin_notices[][ 'message' ] = $message;
-                        end( $admin_notices );
-                        $message_number = key( $admin_notices );
-                        $admin_notices[ $message_number ][ 'start_date' ] = $start_date;
-                        $admin_notices[ $message_number ][ 'interval' ] = $interval;
-                        update_option( 'nf_admin_notice', serialize( $admin_notices ) );
-                }
-
-                // Sanity check to ensure we have accurate information
-                // New date information will not overwrite old date information
-                // Changing the message even by 1 character will create a new message and thus receive all new variables
-                $admin_display_check = ( isset( $admin_notices[ $message_number ][ 'dismissed' ] ) ? $admin_notices[ $message_number ][ 'dismissed'] : 0 );
-                $admin_display_start = ( isset( $admin_notices[ $message_number ][ 'start_date' ] ) ? $admin_notices[ $message_number ][ 'start_date'] : $start_date );
-                $admin_display_interval = ( isset( $admin_notices[ $message_number ][ 'interval' ] ) ? $admin_notices[ $message_number ][ 'interval'] : $interval );
-                
-                // Add the interval to the start date to get an end date
-                $date_array = explode( '/', $start_date );
-                $date_array[1] += $admin_display_interval;
-                $end_date = date( "n/j/Y", mktime( 0, 0, 0, $date_array[0], $date_array[1], $date_array[2] ) );
-
-                // Ensure the notice hasn't been hidden and that the current date is between the start and end date
-                if ( $admin_display_check == 0 && strtotime( $admin_display_start ) <= strtotime( $current_date ) && strtotime( $current_date ) <= strtotime( $end_date ) ) {
-
-                        // Admin notice display output
-                        echo '<div class="updated notice nf-admin-notice welcome-panel">';
-                        printf(__('%1$s <div class="nf-admin-notice-dismiss-wrap"><a href="?nf_admin_notice_ignore=%2$s" class="nf-admin-notice-dismiss">Dismiss</a></div>'), $message, $message_number );
-                        echo '</div>';
-
-                        $this->notice_spam += 1;
-                        return true;
-                        
-                // If the end date is already passed and the message hasn't been marked dismissed then mark it
-                } elseif ( $admin_display_check != 1 && strtotime( $current_date ) > strtotime( $end_date ) ) {
-                
-                        $admin_notices[ $message_number ][ 'dismissed' ] = 1;
-                        update_option( 'nf_admin_notice', serialize( $admin_notices ) );
-                }
-                
-                return false;
         }
 
-        // test for spam protection
+        // Spam protection check
         public function anti_notice_spam() {
 
                 if ( $this->notice_spam >= $this->notice_spam_max ) {
@@ -137,14 +126,40 @@ class NF_Notices
                 // If user clicks to ignore the notice, update the option to not show it again
                 if ( isset($_GET['nf_admin_notice_ignore']) && current_user_can( apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ) ) ) {
 
-                        $admin_notices = ( get_option( 'nf_admin_notice' ) ? unserialize( get_option( 'nf_admin_notice' ) ) : array() );
-                        $admin_notices[ $_GET[ 'nf_admin_notice_ignore' ] ][ 'dismissed' ] = 1;
-                        update_option( 'nf_admin_notice', serialize( $admin_notices ) );
+                        $admin_notices_option = ( get_option( 'nf_admin_notice' ) ? unserialize( get_option( 'nf_admin_notice' ) ) : array() );
+                        $admin_notices_option[ $_GET[ 'nf_admin_notice_ignore' ] ][ 'dismissed' ] = 1;
+                        update_option( 'nf_admin_notice', serialize( $admin_notices_option ) );
+                }
+        }
+        
+        // Page check function - This should be called from class extensions if the notice should only show on specific admin pages
+        // Expects an array in the form of IE: array( 'dashboard', 'ninja-forms', array( 'ninja-forms', 'builder' ) )
+        // Function accepts dashboard as a special check and also whatever is passed to page or tab as parameters
+        // The above example will display on dashboard and all of the pages that have page=ninja-forms and any page=ninja-forms&tab=builder which is redundant in the example
+        public function admin_notice_pages( $pages ) {
+
+                foreach( $pages as $key => $page ) {
+                        if ( is_array( $page ) ) {
+                                if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page'] == $page[0] && isset( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] == $page[1] ) {
+                                        return true;
+                                }
+                        } else {
+                                if ( $page == 'all' ) {
+                                        return true;
+                                }
+                                if ( get_current_screen()->id === $page ) {
+                                        return true;
+                                }
+                                if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page'] == $page ) {
+                                        return true;
+                                }
+                        }
+                        return false;
                 }
         }
         
         // Special parameters function that is to be used in any extension of this class
-        public function special_parameters() {
+        public function special_parameters( $admin_notices ) {
                 // Intentionally left blank
         }
         
