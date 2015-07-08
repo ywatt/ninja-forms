@@ -33,17 +33,9 @@ class NF_Notices
                 // Runs the admin notice ignore function incase a dismiss button has been clicked
                 add_action( 'admin_init', array( $this, 'admin_notice_ignore' ) );
                 
-                // Runs the visibility checks for admin notices after all needed core files are loaded
-                add_action( 'admin_head', array( $this, 'nf_admin_default_notices' ) );
+                // Runs the default admin notices after all needed core files are loaded
+                add_action( 'nf_admin_notices', 'nf_admin_notices' );
 
-        }
-        
-        // Default notices function
-        // The hooked function is found in notices.php and that is where all basic notices can be created with a few simple lines.
-        public function nf_admin_default_notices() {
-                if ( $this->nf_admin_notice() ) {
-                        add_action( 'admin_notices', 'nf_admin_notices' );
-                }
         }
         
         // Checks to ensure notices aren't disabled, the user has the correct permissions, and the user is on the dashboard.
@@ -62,6 +54,11 @@ class NF_Notices
         // Primary notice function that can be called from an outside function sending necessary variables
         public function admin_notice( $message, $start_date = null, $interval = 14 ) {
 
+                // Check options and on dashboard
+                if ( ! $this->nf_admin_notice() ) {
+                        return false;
+                }
+                
                 // Call for spam protection
                 if ( $this->anti_notice_spam() ) {
                         return false;
