@@ -36,6 +36,7 @@ function ninja_forms_field_recaptcha_display( $field_id, $data, $form_id = '' ) 
 	$settings = get_option( "ninja_forms_settings" );
 	$lang = $settings['recaptcha_lang'];
 	$siteKey = $settings['recaptcha_site_key'];
+	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
 	if ( !empty( $siteKey ) ) { ?>
 		<input id="ninja_forms_field_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="hidden" class="<?php echo $field_class;?>" value="" rel="<?php echo $field_id;?>" />
 		<div class="g-recaptcha" data-callback="nf_recaptcha_set_field_value" data-sitekey="<?php echo $siteKey; ?>"></div>
@@ -53,7 +54,7 @@ function ninja_forms_field_recaptcha_pre_process( $field_id, $user_value  ) {
 	global $ninja_forms_processing;
 
 	if ( empty( $_POST['g-recaptcha-response'] ) ) {
-		$ninja_forms_processing->add_error( 'error_recaptcha', __( 'Please enter value in captcha field' , 'ninja-forms' ) );
+		$ninja_forms_processing->add_error( 'error_recaptcha', __( 'Please complete the captcha field' , 'ninja-forms' ) );
 	}else {
 		$settings = get_option( 'ninja_forms_settings' );
 		$url = 'https://www.google.com/recaptcha/api/siteverify?secret='.$settings['recaptcha_secret_key'].'&response='.sanitize_text_field( $_POST['g-recaptcha-response'] );
@@ -64,9 +65,9 @@ function ninja_forms_field_recaptcha_pre_process( $field_id, $user_value  ) {
 			$response = json_decode( $body );
 			if ( $response->success===false ) {
 				if ( !empty( $response->{'error-codes'} ) && $response->{'error-codes'} != 'missing-input-response' ) {
-					$error= __( 'Please check if you have entered Site & Secret key correctly', 'ninja-forms' );
+					$error= __( 'Please make sure you have entered your Site & Secret keys correctly', 'ninja-forms' );
 				}else {
-					$error= __( 'Captcha mismatch, Please enter correct value in captcha field', 'ninja-forms' );
+					$error= __( 'Captcha mismatch. Please enter the correct value in captcha field', 'ninja-forms' );
 				}
 				$ninja_forms_processing->add_error( 'error_recaptcha', $error );
 			}
