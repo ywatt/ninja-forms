@@ -98,9 +98,12 @@ class NF_Notices
                         // Ensure the notice hasn't been hidden and that the current date is after the start date
                         if ( $admin_display_check == 0 && strtotime( $admin_display_start ) <= strtotime( $current_date ) ) {
 
+                                // Get remaining query string
+                                $query_str = esc_url( add_query_arg( 'nf_admin_notice_ignore', $slug ) );
+                                
                                 // Admin notice display output
                                 echo '<div class="updated notice nf-admin-notice welcome-panel">';
-                                printf(__('%1$s <div class="nf-admin-notice-dismiss-wrap"><a href="?nf_admin_notice_ignore=%2$s" class="nf-admin-notice-dismiss">Dismiss</a></div>'), $admin_display_msg, $slug );
+                                printf(__('%1$s <div class="nf-admin-notice-dismiss-wrap"><a href="%2$s" class="nf-admin-notice-dismiss">Dismiss</a></div>'), $admin_display_msg, $query_str );
                                 echo '</div>';
 
                                 $this->notice_spam += 1;
@@ -129,6 +132,9 @@ class NF_Notices
                         $admin_notices_option = ( get_option( 'nf_admin_notice' ) ? unserialize( get_option( 'nf_admin_notice' ) ) : array() );
                         $admin_notices_option[ $_GET[ 'nf_admin_notice_ignore' ] ][ 'dismissed' ] = 1;
                         update_option( 'nf_admin_notice', serialize( $admin_notices_option ) );
+                        $query_str = remove_query_arg( 'nf_admin_notice_ignore' );
+                        wp_redirect( $query_str );
+                        exit;
                 }
         }
         
