@@ -247,6 +247,7 @@ class NF_Notifications_List_Table extends WP_List_Table {
                 }
                 ?>                      
             </select>
+            <a href="https://ninjaforms.com/extensions/?display=actions" target="_blank"><?php _e( 'Get More Types', 'ninja-forms' ); ?> <span class="dashicons dashicons-external"></span></a>
             <span style="float:left;" class="spinner"></span>
         </div>
         <?php

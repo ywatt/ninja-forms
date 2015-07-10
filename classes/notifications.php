@@ -265,8 +265,9 @@ class NF_Notifications
 									<option value="<?php echo $slug; ?>" <?php selected ( $this_type, $slug ); ?>><?php echo $nicename; ?></option>
 									<?php
 								}
-								?>						
+								?>					
 							</select>
+							<a href="https://ninjaforms.com/extensions/?display=actions" target="_blank"><?php _e( 'Get More Actions', 'ninja-forms' ); ?> <span class="dashicons dashicons-external"></span></a>
 						</td>
 					</tr>
 				</tbody>
