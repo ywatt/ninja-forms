@@ -97,7 +97,7 @@ jQuery.fn.nfAdminModal = function( action, options ) {
 		options = action;
 	}
 
-	var defaults = { 'title' : '', 'buttons' : false };
+	var defaults = { 'title' : '', 'buttons' : false, 'backgroundClose': false };
 
 	if ( 'undefined' === typeof options ) {
 		options = jQuery( this ).data( 'nfAdminModal' );
@@ -129,22 +129,28 @@ jQuery.fn.nfAdminModal = function( action, options ) {
 		jQuery( '#modal-contents-wrapper' ).find( '.submitbox' ).hide();
 	}
 
+	if ( options.backgroundClose ) {
+		jQuery( '#nf-admin-modal-backdrop' ).on( 'click', function( e ) { 
+			jQuery.fn.nfAdminModal.close();
+		} );
+	}	
+
 	if ( 'close' == action ) {
 		jQuery.fn.nfAdminModal.close();
 	} else if ( 'open' == action ) {
 		jQuery.fn.nfAdminModal.open();
 	}
 
-	jQuery( document ).on( 'click', '.modal-close', function( e ) {
-		e.preventDefault();
-		jQuery.fn.nfAdminModal.close();
-	} );
-
+	// jQuery( document ).on( 'click', '.modal-close', function( e ) {
+	// 	e.preventDefault();
+	// 	jQuery.fn.nfAdminModal.close();
+	// } );
 };
 
 jQuery.fn.nfAdminModal.close = function() {
 	jQuery( '#nf-admin-modal-backdrop' ).hide();
 	jQuery( '#nf-admin-modal-wrap' ).hide();
+	console.log( 'trigger' );
 	jQuery( document ).triggerHandler( 'nfAdminModalClose' );
 }
 
