@@ -769,7 +769,7 @@ class Ninja_Forms {
 	 */
 	public function output_tinymce_button_js( $context ) {
 		?>
-		<div id="nf-insert-form-modal">
+		<div id="nf-insert-form-modal" style="height:350px;">
             <p>
                 <?php
                 $all_forms = Ninja_Forms()->forms()->get_all();
@@ -793,26 +793,31 @@ class Ninja_Forms {
                 <a class="submitdelete deletion modal-close" href="#"><?php _e( 'Cancel', 'ninja-forms' ); ?></a>
             </div>
             <div id="nf-admin-modal-update">
-                <a class="button-primary" href="#"><?php _e( 'Insert', 'ninja-forms' ); ?></a>
+                <a class="button-primary" id="nf-insert-form" href="#"><?php _e( 'Insert', 'ninja-forms' ); ?></a>
             </div>
         </div>
 
 		<script type="text/javascript">
 		jQuery( document ).ready( function( $ ) {
 			$( '#nf-insert-form-modal' ).nfAdminModal( { title: 'Test', buttons: '#nf-insert-form-buttons', backgroundClose: true } );
-			$( '.nf-insert-form' ).on( 'click', function( e ) {
+			$( document ).on( 'click', '.nf-insert-form', function( e ) {
 				e.preventDefault();
 				$( '#nf-insert-form-modal' ).nfAdminModal( 'open' );
 				$( '.nf-forms-combobox' ).combobox();
 			} );
 
-			$( document ).on( 'nfAdminModalClose.destroyCombo', function( e ) {
-				// console.log( 'destroy' );
-				$( '.nf-forms-combobox' ).combobox( 'destroy'  );
+			$( document ).on( 'click', '#nf-insert-form', function( e ) {
+				e.preventDefault();
+				var form_id = 2;
+				var shortcode = '[ninja_form id=' + form_id + ']';
+				window.parent.send_to_editor( shortcode );
+				jQuery.fn.nfAdminModal.close();
 			} );
 
-
-			
+			$( document ).on( 'nfAdminModalClose.destroyCombo', function( e ) {
+				console.log( 'destroy' );
+				$( '.nf-forms-combobox' ).combobox( 'destroy'  );
+			} );
 		} );
 		</script>
 		<?php
