@@ -14,7 +14,7 @@ function nf_admin_notices( $notices ) {
 
     // $notices['bleep5'] = array( 'msg' => __( 'This is a test message', 'ninja-forms' ), 'start' => '7/10/2015', 'int' => 7 );
     // $notices['test2'] = array( 'msg' => __( 'This is 2nd test message', 'ninja-forms' ), 'start' => '7/7/2015' );
-    // $notices['test6'] = array( 'msg' => __( 'This is 3rd test message', 'ninja-forms' ) );
+    $notices['test77'] = array( 'msg' => __( 'This is 3rd test message', 'ninja-forms' ), 'int' => 0 );
     // $notices['test4'] = array( 'msg' => __( 'This is 4th test message', 'ninja-forms' ), 'pages' => array( 'ninja-forms' ) );
 
 
