@@ -1330,3 +1330,56 @@ p.debug-report {
 input[type=text].error {
 	border: solid red;
 }
+
+.nf-admin-notice {
+  background: #fff;
+  border-color: #ED494D;
+  border-top: 4px;
+  display: block;
+  min-height: 68px;
+  padding: 10px 40px 10px 145px;
+  position: relative;
+}
+.nf-admin-notice h3 {
+}
+.nf-admin-notice:after {
+  clear: both;
+  content: "";
+  display: block;
+  background-image: url("https://ninjaforms.com/wp-content/themes/ninja-brand/images/nf-logo-vert.png");
+  background-size: 125px 83px;
+  width: 125px;
+  height: 83px;
+  position: absolute;
+  top: 5px;
+  left: 0;
+}
+.nf-admin-notice > .dashicons {
+  color: #424242;
+  position: absolute;
+  right: 20px;
+  top: 40%;
+}
+.nf-notice-title {
+  font-size: 24px;
+  margin: 0;
+}
+.nf-notice-body {
+  font-weight: normal;
+  margin: 5px 0;
+}
+.nf-notice-body:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+.nf-notice-body li {
+  float: left;
+  margin-right: 20px;
+}
+.nf-notice-body .dashicons {
+  font-size: 17px;
+}
+.nf-red {
+  color: #ED494D;
+}

@@ -103,7 +103,8 @@ class Ninja_Forms {
                         add_action( 'init', array( self::$instance, 'init' ), 5 );
                         add_action( 'admin_init', array( self::$instance, 'admin_init' ), 5 );
                         add_action( 'update_option_ninja_forms_settings', array( self::$instance, 'refresh_plugin_settings' ), 10 );
-                        add_action( 'admin_head', array( self::$instance, 'admin_head' ) );
+                        // add_action( 'admin_head', array( self::$instance, 'admin_head' ) );
+                        add_action( 'admin_notices', array( self::$instance, 'admin_notice' ) );
                 }
 
                 return self::$instance;
@@ -157,16 +158,15 @@ class Ninja_Forms {
         }
         
         /**
-         * Run some admin stuff on admin_head.
+         * Run some admin stuff on admin_notices hook.
          *
          * @since 2.9
          * @return void
          */
-        public function admin_head() {
+        public function admin_notice() {
                 // Notices filter and run the notices function.
                 $admin_notices = apply_filters( 'nf_admin_notices', array() );
                 self::$instance->notices->admin_notice( $admin_notices );
-
         }
 
         /**

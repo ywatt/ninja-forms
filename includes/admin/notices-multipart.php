@@ -43,7 +43,7 @@ class NF_Notices_Multipart extends NF_Notices
                         }
 
                         foreach ( $count as $form_id => $field_count ) {
-                                if ( $field_count >=50 ) {
+                                if ( $field_count >=5 ) {
                                         $field_check = 1;
                                 }
                         }
@@ -52,9 +52,8 @@ class NF_Notices_Multipart extends NF_Notices
                 // Check for multi-part forms installed and if the above passes
                 if ( ! is_plugin_active( 'ninja-forms-multi-part/multi-part.php' ) && $field_check == 1 ) {
                         // Add notice
-                        $message = '<p>We notice that your Ninja Form has over 50 fields! Have you considered purchasing Multi-Part Forms?</p><p>Easily break up long forms into multiple pages. Control animation and direction. Show a confirmation page.</p>
-                        <div class="nf-extend-buttons"><a href="https://ninjaforms.com/extensions/multi-part-forms/" title="Multi-Part Forms" class="button-primary nf-button">Learn More</a></div>';
-                        $admin_notices[ 'multi-part' ] = array( 'msg' => __( $message, 'ninja-forms' ) );
+                        $message = 'My, what a long form you have!</p><p>We notice that your Ninja Form has over 50 fields! Have you considered purchasing Multi-Part Forms?</p><p>Easily break up long forms into multiple pages. Control animation and direction. Show a confirmation page.</p>';
+                        $admin_notices[ 'multi-part11' ] = array( 'msg' => __( $message, 'ninja-forms' ) );
 
                 }
                 

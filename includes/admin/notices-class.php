@@ -102,8 +102,15 @@ class NF_Notices
                                 $query_str = esc_url( add_query_arg( 'nf_admin_notice_ignore', $slug ) );
                                 
                                 // Admin notice display output
-                                echo '<div class="updated notice nf-admin-notice welcome-panel">';
-                                printf(__('%1$s <div class="nf-admin-notice-dismiss-wrap"><a href="%2$s" class="nf-admin-notice-dismiss">Dismiss</a></div>'), $admin_display_msg, $query_str );
+                                echo '<div class="update-nag nf-admin-notice">';
+                                echo ' <p class="nf-notice-title">';
+                                echo $admin_display_msg;
+                                echo '</p>';
+                                echo '<ul class="nf-notice-body nf-red">
+                                      <li><span class="dashicons dashicons-media-text"></span>DOCS: How to Configure your PayPal Express Add-on</li>
+                                      <li><span class="dashicons dashicons-sos"></span>Get Support</li>
+                                    </ul>';
+                                echo '<a href="' . $query_str . '" class="dashicons dashicons-dismiss"></a>';
                                 echo '</div>';
 
                                 $this->notice_spam += 1;
