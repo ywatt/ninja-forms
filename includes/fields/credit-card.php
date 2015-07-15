@@ -237,63 +237,6 @@ function ninja_forms_field_credit_card_display( $field_id, $data, $form_id = '' 
 	<?php
 	
 	}
-	if( !in_array( 'cvc' , $hide_cc_fields ) ){
-	
-	?>
-		<div class="ninja-forms-credit-card-cvc label-<?php echo $label_pos; ?> field-wrap"> <!-- [open_cvc_wrap] -->
-			<?php
-			if ( $desc_pos == 'before_label' or $desc_pos == 'before_everything' ) {
-				?>
-				<span><?php echo apply_filters( 'ninja_forms_credit_card_cvc_desc', $cc_cvc_desc ); ?></span>
-				<?php
-			}
-
-			if ( $label_pos == 'above' or $label_pos == 'left' ) {
-				?>
-				<label><?php echo apply_filters( 'ninja_forms_credit_card_cvc_label', $cc_cvc_label ); ?></label>
-				<?php
-			}
-
-			if ( $desc_pos == 'after_label' ) {
-				?>
-				<span><?php echo apply_filters( 'ninja_forms_credit_card_cvc_desc', $cc_cvc_desc ); ?></span>
-				<?php
-			}
-			?>
-			
-			<input type="text" <?php if ( $post_field ){ echo 'name="_credit_card_cvc"'; } ?> class="ninja-forms-field card-cvc">
-		
-			<?php
-			if ( $label_pos == 'below' or $label_pos == 'right' ) {
-				?>
-				<label><?php echo apply_filters( 'ninja_forms_credit_card_cvc_label', $cc_cvc_label ); ?></label>
-				<?php
-			}
-
-			if ( $desc_pos == 'after_everything' ) {
-				?>
-				<span><?php echo apply_filters( 'ninja_forms_credit_card_cvc_desc', $cc_cvc_desc ); ?></span>
-				<?php
-			}
-			?>
-
-		</div>
-		<div>
-			<div class="ninja-forms-credit-card-cvc-error ninja-forms-field-error">
-				<?php
-				if ( $card_cvc_errors ) {
-					if( is_array( $card_cvc_errors ) ) {
-						foreach ( $card_cvc_errors as $error ) {
-							echo '<p>'.$error['msg'].'</p>';
-						}
-					}
-				}
-				?>
-			</div>
-		</div>
-	<?php
-	
-	}
 	if( !in_array( 'name' , $hide_cc_fields ) ){
 	
 	?>	
@@ -458,6 +401,63 @@ function ninja_forms_field_credit_card_display( $field_id, $data, $form_id = '' 
 			</div> <!-- [close_exp_month_wrap] -->
 		</div>
 	<?php
+	}
+	if( !in_array( 'cvc' , $hide_cc_fields ) ){
+
+		?>
+		<div class="ninja-forms-credit-card-cvc label-<?php echo $label_pos; ?> field-wrap"> <!-- [open_cvc_wrap] -->
+			<?php
+			if ( $desc_pos == 'before_label' or $desc_pos == 'before_everything' ) {
+				?>
+				<span><?php echo apply_filters( 'ninja_forms_credit_card_cvc_desc', $cc_cvc_desc ); ?></span>
+				<?php
+			}
+
+			if ( $label_pos == 'above' or $label_pos == 'left' ) {
+				?>
+				<label><?php echo apply_filters( 'ninja_forms_credit_card_cvc_label', $cc_cvc_label ); ?></label>
+				<?php
+			}
+
+			if ( $desc_pos == 'after_label' ) {
+				?>
+				<span><?php echo apply_filters( 'ninja_forms_credit_card_cvc_desc', $cc_cvc_desc ); ?></span>
+				<?php
+			}
+			?>
+
+			<input type="text" <?php if ( $post_field ){ echo 'name="_credit_card_cvc"'; } ?> class="ninja-forms-field card-cvc">
+
+			<?php
+			if ( $label_pos == 'below' or $label_pos == 'right' ) {
+				?>
+				<label><?php echo apply_filters( 'ninja_forms_credit_card_cvc_label', $cc_cvc_label ); ?></label>
+				<?php
+			}
+
+			if ( $desc_pos == 'after_everything' ) {
+				?>
+				<span><?php echo apply_filters( 'ninja_forms_credit_card_cvc_desc', $cc_cvc_desc ); ?></span>
+				<?php
+			}
+			?>
+
+		</div>
+		<div>
+			<div class="ninja-forms-credit-card-cvc-error ninja-forms-field-error">
+				<?php
+				if ( $card_cvc_errors ) {
+					if( is_array( $card_cvc_errors ) ) {
+						foreach ( $card_cvc_errors as $error ) {
+							echo '<p>'.$error['msg'].'</p>';
+						}
+					}
+				}
+				?>
+			</div>
+		</div>
+		<?php
+
 	}
 }
 
