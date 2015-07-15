@@ -35,7 +35,7 @@ class NF_Notices
 
     }
     
-    // Checks to ensure notices aren't disabled, the user has the correct permissions, and the user is on the dashboard.
+    // Checks to ensure notices aren't disabled and the user has the correct permissions.
     public function nf_admin_notice() {
 
         $nf_settings = get_option( 'ninja_forms_settings' );
@@ -62,11 +62,15 @@ class NF_Notices
                         return false;
                 }
         
+                // Check for proper page to display on
                 if ( isset( $admin_notices[ $slug ][ 'pages' ] ) && is_array( $admin_notices[ $slug ][ 'pages' ] ) ) {
                         if ( ! $this->admin_notice_pages( $admin_notices[ $slug ][ 'pages' ] ) ) {
                                 return false;
                         }
                 }
+
+                // Check for required fields
+                if ( ! $this->required_fields( $admin_notices[ $slug ] ) ) {
 
                 // Get the current date then set start date to either passed value or current date value and add interval
                 $current_date = current_time( "n/j/Y" );
@@ -83,6 +87,8 @@ class NF_Notices
                 // Check if the message is already stored and if so just grab the key otherwise store the message and its associated date information
                 if ( ! array_key_exists( $slug, $admin_notices_option ) ) {
                         $admin_notices_option[ $slug ][ 'msg' ] = $admin_notices[ $slug ][ 'msg' ];
+                        $admin_notices_option[ $slug ][ 'title' ] = $admin_notices[ $slug ][ 'title' ];
+                        $admin_notices_option[ $slug ][ 'link' ] = ( isset( $admin_notices[ $slug ][ 'link' ] ) ? $admin_notices[ $slug ][ 'link' ] : '' );
                         $admin_notices_option[ $slug ][ 'start' ] = $start;
                         $admin_notices_option[ $slug ][ 'int' ] = $interval;
                         update_option( 'nf_admin_notice', serialize( $admin_notices_option ) );
@@ -94,7 +100,10 @@ class NF_Notices
                 $admin_display_start = ( isset( $admin_notices_option[ $slug ][ 'start' ] ) ? $admin_notices_option[ $slug ][ 'start'] : $start );
                 $admin_display_interval = ( isset( $admin_notices_option[ $slug ][ 'int' ] ) ? $admin_notices_option[ $slug ][ 'int'] : $interval );
                 $admin_display_msg = ( isset( $admin_notices_option[ $slug ][ 'msg' ] ) ? $admin_notices_option[ $slug ][ 'msg'] : $admin_notices[ $slug ][ 'msg' ] );
+                $admin_display_title = ( isset( $admin_notices_option[ $slug ][ 'title' ] ) ? $admin_notices_option[ $slug ][ 'title'] : $admin_notices[ $slug ][ 'title' ] );
+                $admin_display_link = ( isset( $admin_notices_option[ $slug ][ 'link' ] ) ? $admin_notices_option[ $slug ][ 'link' ] : '' );
                 $output_css = false;
+                
                 // Ensure the notice hasn't been hidden and that the current date is after the start date
                 if ( $admin_display_check == 0 && strtotime( $admin_display_start ) <= strtotime( $current_date ) ) {
 
@@ -104,11 +113,13 @@ class NF_Notices
                     // Admin notice display output
                     echo '<div class="update-nag nf-admin-notice">';
                     echo ' <p class="nf-notice-title">';
+                    echo $admin_display_title;
+                    echo ' </p>';
+                    echo ' <p class="nf-notice-body">';
                     echo $admin_display_msg;
-                    echo '</p>';
+                    echo ' </p>';
                     echo '<ul class="nf-notice-body nf-red">
-                          <li><span class="dashicons dashicons-media-text"></span>DOCS: How to Configure your PayPal Express Add-on</li>
-                          <li><span class="dashicons dashicons-sos"></span>Get Support</li>
+                          ' . $admin_display_link . '
                         </ul>';
                     echo '<a href="' . $query_str . '" class="dashicons dashicons-dismiss"></a>';
                     echo '</div>';
@@ -118,6 +129,7 @@ class NF_Notices
                 }
             if ( $output_css ) {
                 wp_enqueue_style( 'nf-admin-notices', NINJA_FORMS_URL .'assets/css/admin-notices.css?nf_ver=' . NF_PLUGIN_VERSION );
+            }
             }
         }
     }
@@ -173,6 +185,20 @@ class NF_Notices
         }
     }
     
+    // Required fields check
+    public function required_fields( $fields ) {
+
+        if ( ! isset( $fields[ 'msg' ] ) || ( isset( $fields[ 'msg' ] ) && empty( $fields[ 'msg' ] ) ) ) {
+                return true;
+        }
+        
+        if ( ! isset( $fields[ 'title' ] ) || ( isset( $fields[ 'title' ] ) && empty( $fields[ 'title' ] ) ) ) {
+                return true;
+        }
+        
+        return false;
+    }
+
     // Special parameters function that is to be used in any extension of this class
     public function special_parameters( $admin_notices ) {
             // Intentionally left blank

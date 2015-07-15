@@ -14,7 +14,30 @@ function nf_admin_notices( $notices ) {
 
     // $notices['bleep5'] = array( 'msg' => __( 'This is a test message', 'ninja-forms' ), 'start' => '7/10/2015', 'int' => 7 );
     // $notices['test2'] = array( 'msg' => __( 'This is 2nd test message', 'ninja-forms' ), 'start' => '7/7/2015' );
-    $notices['test77'] = array( 'msg' => __( 'This is 3rd test message', 'ninja-forms' ), 'int' => 0 );
+    $notices['itsmaslug'] = array(
+        'title' => __( 'Paypal Express', 'ninja-forms' ),
+        'msg' => __( 'Learn how to use Paypal Express more efficiently.', 'ninja-forms' ),
+        'link' => '<li><span class="dashicons dashicons-media-text"></span>DOCS: How to Configure your PayPal Express Add-on</li>
+                    <li><span class="dashicons dashicons-sos"></span>Get Support</li>',
+        'int' => 0
+    );
+    $notices['notitle'] = array(
+        'msg' => __( 'Learn how to use Paypal Express more efficiently.', 'ninja-forms' ),
+        'link' => '<li><span class="dashicons dashicons-media-text"></span>DOCS: How to Configure your PayPal Express Add-on</li>
+                    <li><span class="dashicons dashicons-sos"></span>Get Support</li>',
+        'int' => 0
+    );
+    $notices['nomsg'] = array(
+        'title' => __( 'Paypal Express', 'ninja-forms' ),
+        'link' => '<li><span class="dashicons dashicons-media-text"></span>DOCS: How to Configure your PayPal Express Add-on</li>
+                    <li><span class="dashicons dashicons-sos"></span>Get Support</li>',
+        'int' => 0
+    );
+    $notices['nolink'] = array(
+        'title' => __( 'Paypal Express', 'ninja-forms' ),
+        'msg' => __( 'Learn how to use Paypal Express more efficiently.', 'ninja-forms' ),
+        'int' => 0
+    );
     // $notices['test4'] = array( 'msg' => __( 'This is 4th test message', 'ninja-forms' ), 'pages' => array( 'ninja-forms' ) );
 
 
