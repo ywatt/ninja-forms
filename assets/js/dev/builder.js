@@ -57,6 +57,7 @@ var nfField = Backbone.Model.extend( {
 	updateHTML: function() {
 		var field_id = this.id;
 		jQuery( '#ninja_forms_metabox_field_' + field_id ).find( '.spinner' ).show();
+		jQuery( '#ninja_forms_metabox_field_' + field_id ).find( '.spinner' ).css( 'visibility', 'visible' );
 		this.updateData();
 		var data = JSON.stringify( this.toJSON() );
 		var that = this;
@@ -251,6 +252,7 @@ var nfForm = Backbone.Model.extend( {
 	save: function() {
 		jQuery( '.nf-save-admin-fields' ).hide();
 		jQuery( '.nf-save-spinner' ).show();
+		jQuery( '.nf-save-spinner' ).css( 'visibility', 'visible' );
 
 		// If our form is new, then prompt for a title before we save
 		if ( 'new' == this.get( 'status' ) ) {
