@@ -310,6 +310,7 @@ CREDIT CARD BLOCK
     font-size: 0.8em;
 }
 
+/* http://lea.verou.me/2011/01/styling-children-based-on-their-number-with-css3/ */
 
 .ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap {
     float: left;
@@ -318,19 +319,19 @@ CREDIT CARD BLOCK
 
 /* one item */
 .ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap:first-child:nth-last-child(1) {
-    width: 100%!important;
+    width: 100%;
 }
 
 /* two items */
 .ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap:first-child:nth-last-child(2),
 .ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap:first-child:nth-last-child(2) ~ .field-wrap {
-    width: 50%!important;
+    width: 50%;
 }
 
 /* three items */
 .ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap:first-child:nth-last-child(3),
 .ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap:first-child:nth-last-child(3) ~ .field-wrap {
-    width: 33.3333%!important;
+    width: 33.3333%;
 }
 
 /* ---------------------------------
