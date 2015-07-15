@@ -295,6 +295,10 @@ function ninja_forms_field_credit_card_display( $field_id, $data, $form_id = '' 
 	<?php
 	
 	}
+
+	//Output Open Group Wrap for Exp/CVC
+	echo '<div class="ninja-forms-credit-card-exp-cvc-group-wrap">';
+
 	if( !in_array( 'expires' , $hide_cc_fields ) ){
 	
 	?>
@@ -334,20 +338,19 @@ function ninja_forms_field_credit_card_display( $field_id, $data, $form_id = '' 
 				<?php
 			}
 			?>
-
-		</div>
-		<div>
-			<div class="ninja-forms-credit-card-exp-month-error ninja-forms-field-error">
-				<?php
-				if ( $card_month_errors ) {
-					if( is_array( $card_month_errors ) ) {
-						foreach ( $card_month_errors as $error ) {
-							echo '<p>'.$error['msg'].'</p>';
+			<div>
+				<div class="ninja-forms-credit-card-exp-month-error ninja-forms-field-error">
+					<?php
+					if ( $card_month_errors ) {
+						if( is_array( $card_month_errors ) ) {
+							foreach ( $card_month_errors as $error ) {
+								echo '<p>'.$error['msg'].'</p>';
+							}
 						}
 					}
-				}
-				?>
-			</div> <!-- [close_exp_month_wrap] -->
+					?>
+				</div> <!-- [close_exp_month_wrap] -->
+			</div>
 		</div>
 		<div class="ninja-forms-credit-card-exp-year label-<?php echo $label_pos; ?> field-wrap"> <!-- [open_exp_year_wrap] -->
 			<?php
@@ -385,21 +388,21 @@ function ninja_forms_field_credit_card_display( $field_id, $data, $form_id = '' 
 				<?php
 			}
 			?>
-
-		</div>
-		<div>
-			<div class="ninja-forms-credit-card-exp-year-error ninja-forms-field-error">
-				<?php
-				if ( $card_year_errors ) {
-					if( is_array( $card_year_errors ) ) {
-						foreach ( $card_year_errors as $error ) {
-							echo '<p>'.$error['msg'].'</p>';
+			<div>
+				<div class="ninja-forms-credit-card-exp-year-error ninja-forms-field-error">
+					<?php
+					if ( $card_year_errors ) {
+						if( is_array( $card_year_errors ) ) {
+							foreach ( $card_year_errors as $error ) {
+								echo '<p>'.$error['msg'].'</p>';
+							}
 						}
 					}
-				}
-				?>
-			</div> <!-- [close_exp_month_wrap] -->
+					?>
+				</div> <!-- [close_exp_month_wrap] -->
+			</div>
 		</div>
+
 	<?php
 	}
 	if( !in_array( 'cvc' , $hide_cc_fields ) ){
@@ -441,24 +444,27 @@ function ninja_forms_field_credit_card_display( $field_id, $data, $form_id = '' 
 				<?php
 			}
 			?>
-
-		</div>
-		<div>
-			<div class="ninja-forms-credit-card-cvc-error ninja-forms-field-error">
-				<?php
-				if ( $card_cvc_errors ) {
-					if( is_array( $card_cvc_errors ) ) {
-						foreach ( $card_cvc_errors as $error ) {
-							echo '<p>'.$error['msg'].'</p>';
+			<div>
+				<div class="ninja-forms-credit-card-cvc-error ninja-forms-field-error">
+					<?php
+					if ( $card_cvc_errors ) {
+						if( is_array( $card_cvc_errors ) ) {
+							foreach ( $card_cvc_errors as $error ) {
+								echo '<p>'.$error['msg'].'</p>';
+							}
 						}
 					}
-				}
-				?>
+					?>
+				</div>
 			</div>
 		</div>
+
 		<?php
 
 	}
+
+	//Output Close Group Wrap for Exp/CVC
+	echo "</div>";
 }
 
 /*

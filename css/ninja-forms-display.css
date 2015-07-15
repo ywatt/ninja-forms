@@ -310,6 +310,29 @@ CREDIT CARD BLOCK
     font-size: 0.8em;
 }
 
+
+.ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap {
+    float: left;
+    box-sizing: border-box;
+}
+
+/* one item */
+.ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap:first-child:nth-last-child(1) {
+    width: 100%!important;
+}
+
+/* two items */
+.ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap:first-child:nth-last-child(2),
+.ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap:first-child:nth-last-child(2) ~ .field-wrap {
+    width: 50%!important;
+}
+
+/* three items */
+.ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap:first-child:nth-last-child(3),
+.ninja-forms-credit-card-exp-cvc-group-wrap > .field-wrap:first-child:nth-last-child(3) ~ .field-wrap {
+    width: 33.3333%!important;
+}
+
 /* ---------------------------------
 HONEYPOT
 ----------------------------------*/
