@@ -62,6 +62,8 @@ class Ninja_Forms {
 	 */
 	private static $instance;
 
+	public static $use_form_transients = TRUE;
+
 	/**
 	 * @var registered_notification_types
 	 */
@@ -132,6 +134,8 @@ class Ninja_Forms {
 			self::$instance->step_processing = new NF_Step_Processing();
 			self::$instance->download_all_subs = new NF_Download_All_Subs();
 		}
+
+		self::$use_form_transients = apply_filters( 'nf_use_form_transients', TRUE );
 
 		// Fire our Ninja Forms init action.
 		// This will allow other plugins to register items to the instance.
@@ -258,7 +262,7 @@ class Ninja_Forms {
 			return self::$instance->$form_var;
 
 		// Check to see if we have a transient object stored for this form.
-		if ( apply_filters( 'nf_use_forms_transients', TRUE )  && is_object ( ( $form_obj = get_transient( 'nf_form_' . $form_id ) ) ) ) {
+		if ( self::$use_form_transients  && is_object ( ( $form_obj = get_transient( 'nf_form_' . $form_id ) ) ) ) {
 			self::$instance->$form_var = $form_obj;
 		} else {
 			// Create a new form object for this form.
