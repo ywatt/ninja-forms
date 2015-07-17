@@ -17,4 +17,4 @@ function ninja_forms_display_honeypot( $form_id ) {
 	<?php
 }
 
-add_action( 'ninja_forms_display_close_form_tag', 'ninja_forms_display_honeypot', 9 );
+add_action( 'ninja_forms_display_before_fields', 'ninja_forms_display_honeypot', 9 );
