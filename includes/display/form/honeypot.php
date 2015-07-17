@@ -8,10 +8,12 @@
  */
 
 function ninja_forms_display_honeypot( $form_id ) {
+	$hp_name = ninja_forms_random_string( 5 );
 	?>
-	<div class="honeypot-wrap">
+	<div class="hp-wrap">
 		<label><?php _e( 'If you are a human and are seeing this field, please leave it blank.', 'ninja-forms' ); ?>
-			<input type="text" value="" name="_honeypot">
+			<input type="text" value="" name="_<?php echo $hp_name; ?>">
+			<input type="hidden" value="_<?php echo $hp_name; ?>" name="_hp_name">
 		</label>
 	</div>
 	<?php
