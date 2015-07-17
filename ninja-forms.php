@@ -445,6 +445,7 @@ class Ninja_Forms {
 		require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-process.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-post-process.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/processing/req-fields-pre-process.php" );
+		require_once( NINJA_FORMS_DIR . "/includes/display/processing/honeypot.php" );
 
 		//Display Form Functions
 		require_once( NINJA_FORMS_DIR . "/includes/display/form/display-form.php" );
@@ -466,6 +467,7 @@ class Ninja_Forms {
 		require_once( NINJA_FORMS_DIR . "/includes/display/form/form-visibility.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/form/sub-limit.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/form/nonce.php" );
+		require_once( NINJA_FORMS_DIR . "/includes/display/form/honeypot.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/fields/restore-progress.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/fields/inside-label-hidden.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-type.php" );
@@ -594,7 +596,6 @@ class Ninja_Forms {
 		require_once( NINJA_FORMS_DIR . "/includes/fields/organizer.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/fields/submit.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/fields/spam.php" );
-		require_once( NINJA_FORMS_DIR . "/includes/fields/honeypot.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/fields/timed-submit.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/fields/hr.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/fields/desc.php" );
