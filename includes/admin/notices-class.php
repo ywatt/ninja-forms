@@ -33,6 +33,9 @@ class NF_Notices
         // Runs the admin notice ignore function incase a dismiss button has been clicked
         add_action( 'admin_init', array( $this, 'admin_notice_ignore' ) );
 
+        // Runs the admin notice temp ignore function incase a temp dismiss link has been clicked
+        add_action( 'admin_init', array( $this, 'admin_notice_temp_ignore' ) );
+
     }
     
     // Checks to ensure notices aren't disabled and the user has the correct permissions.
@@ -158,7 +161,30 @@ class NF_Notices
                 exit;
         }
     }
-    
+
+    // Temp Ignore function that gets ran at admin init to ensure any messages that were temp dismissed get their start date changed
+    public function admin_notice_temp_ignore() {
+
+        // If user clicks to temp ignore the notice, update the option to change the start date - default interval of 14 days
+        if ( isset($_GET['nf_admin_notice_temp_ignore']) && current_user_can( apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ) ) ) {
+
+                $admin_notices_option = ( get_option( 'nf_admin_notice' ) ? unserialize( get_option( 'nf_admin_notice' ) ) : array() );
+
+                $current_date = current_time( "n/j/Y" );
+                $date_array = explode( '/', $current_date );
+                $interval = ( isset( $_GET[ 'nf_int' ] ) ? $_GET[ 'nf_int' ] : 14 );
+                $date_array[1] += $interval;
+                $new_start = date( "n/j/Y", mktime( 0, 0, 0, $date_array[0], $date_array[1], $date_array[2] ) );
+
+                $admin_notices_option[ $_GET[ 'nf_admin_notice_temp_ignore' ] ][ 'start' ] = $new_start;
+                $admin_notices_option[ $_GET[ 'nf_admin_notice_temp_ignore' ] ][ 'dismissed' ] = 0;
+                update_option( 'nf_admin_notice', serialize( $admin_notices_option ) );
+                $query_str = remove_query_arg( array( 'nf_admin_notice_temp_ignore', 'nf_int' ) );
+                wp_redirect( $query_str );
+                exit;
+        }
+    }
+
     // Page check function - This should be called from class extensions if the notice should only show on specific admin pages
     // Expects an array in the form of IE: array( 'dashboard', 'ninja-forms', array( 'ninja-forms', 'builder' ) )
     // Function accepts dashboard as a special check and also whatever is passed to page or tab as parameters
