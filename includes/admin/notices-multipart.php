@@ -13,8 +13,11 @@ class NF_Notices_Multipart extends NF_Notices
         // Basic actions to run
         public function __construct(){
 
-                // Runs the visibility checks for admin notices after all needed core files are loaded
-                add_filter( 'nf_admin_notices', array( $this, 'special_parameters' ) );
+            // Runs the admin notice ignore function incase a dismiss button has been clicked
+            add_action( 'admin_init', array( $this, 'admin_notice_ignore' ) );
+
+            // Runs the visibility checks for admin notices after all needed core files are loaded
+            add_filter( 'nf_admin_notices', array( $this, 'special_parameters' ) );
 
         }
         
@@ -43,7 +46,8 @@ class NF_Notices_Multipart extends NF_Notices
                         }
 
                         foreach ( $count as $form_id => $field_count ) {
-                                if ( $field_count >=5 ) {
+                                /***** NEEDS TO BE UPDATED BEFORE USED LIVE ****/
+                                if ( $field_count >=1 ) {
                                         $field_check = 1;
                                 }
                         }
@@ -53,7 +57,7 @@ class NF_Notices_Multipart extends NF_Notices
                 if ( ! is_plugin_active( 'ninja-forms-multi-part/multi-part.php' ) && $field_check == 1 ) {
                         // Add notice
                         $message = 'My, what a long form you have!</p><p>We notice that your Ninja Form has over 50 fields! Have you considered purchasing Multi-Part Forms?</p><p>Easily break up long forms into multiple pages. Control animation and direction. Show a confirmation page.</p>';
-                        $admin_notices[ 'multi-part12' ] = array(
+                        $admin_notices[ 'multi-part19' ] = array(
                             'title' => __( 'Check out Multi-Part Forms', 'ninja-forms' ),
                             'msg' => __( $message, 'ninja-forms' )
                         );
@@ -63,6 +67,20 @@ class NF_Notices_Multipart extends NF_Notices
                 return $admin_notices;
 
         }
+    // Ignore function that gets ran at admin init to ensure any messages that were dismissed get marked
+    public function admin_notice_ignore() {
+
+        $slug = ( isset( $_GET[ 'nf_admin_notice_ignore' ] ) ) ? $_GET[ 'nf_admin_notice_ignore' ] : '';
+        // If user clicks to ignore the notice, run this action
+        if ( $slug == 'multi-part19' && current_user_can( apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ) ) ) {
+
+                $admin_notices_extra_option = ( get_option( 'nf_admin_notice_extra' ) ? unserialize( get_option( 'nf_admin_notice_extra' ) ) : array() );
+                $admin_notices_extra_option[ $_GET[ 'nf_admin_notice_ignore' ] ][ 'test19' ] = 1;
+                update_option( 'nf_admin_notice_extra', serialize( $admin_notices_extra_option ) );
+
+        }
+    }
+
 }
 
 return new NF_Notices_Multipart();
