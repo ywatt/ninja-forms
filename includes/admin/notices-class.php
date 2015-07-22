@@ -89,9 +89,6 @@ class NF_Notices
 
                 // Check if the message is already stored and if so just grab the key otherwise store the message and its associated date information
                 if ( ! array_key_exists( $slug, $admin_notices_option ) ) {
-                        $admin_notices_option[ $slug ][ 'msg' ] = $admin_notices[ $slug ][ 'msg' ];
-                        $admin_notices_option[ $slug ][ 'title' ] = $admin_notices[ $slug ][ 'title' ];
-                        $admin_notices_option[ $slug ][ 'link' ] = ( isset( $admin_notices[ $slug ][ 'link' ] ) ? $admin_notices[ $slug ][ 'link' ] : '' );
                         $admin_notices_option[ $slug ][ 'start' ] = $start;
                         $admin_notices_option[ $slug ][ 'int' ] = $interval;
                         update_option( 'nf_admin_notice', serialize( $admin_notices_option ) );
@@ -102,9 +99,9 @@ class NF_Notices
                 $admin_display_check = ( isset( $admin_notices_option[ $slug ][ 'dismissed' ] ) ? $admin_notices_option[ $slug ][ 'dismissed'] : 0 );
                 $admin_display_start = ( isset( $admin_notices_option[ $slug ][ 'start' ] ) ? $admin_notices_option[ $slug ][ 'start'] : $start );
                 $admin_display_interval = ( isset( $admin_notices_option[ $slug ][ 'int' ] ) ? $admin_notices_option[ $slug ][ 'int'] : $interval );
-                $admin_display_msg = ( isset( $admin_notices_option[ $slug ][ 'msg' ] ) ? $admin_notices_option[ $slug ][ 'msg'] : $admin_notices[ $slug ][ 'msg' ] );
-                $admin_display_title = ( isset( $admin_notices_option[ $slug ][ 'title' ] ) ? $admin_notices_option[ $slug ][ 'title'] : $admin_notices[ $slug ][ 'title' ] );
-                $admin_display_link = ( isset( $admin_notices_option[ $slug ][ 'link' ] ) ? $admin_notices_option[ $slug ][ 'link' ] : '' );
+                $admin_display_msg = ( isset( $admin_notices[ $slug ][ 'msg' ] ) ? $admin_notices[ $slug ][ 'msg'] : '' );
+                $admin_display_title = ( isset( $admin_notices[ $slug ][ 'title' ] ) ? $admin_notices[ $slug ][ 'title'] : '' );
+                $admin_display_link = ( isset( $admin_notices[ $slug ][ 'link' ] ) ? $admin_notices[ $slug ][ 'link' ] : '' );
                 $output_css = false;
                 
                 // Ensure the notice hasn't been hidden and that the current date is after the start date
