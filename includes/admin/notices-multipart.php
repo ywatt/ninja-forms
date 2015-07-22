@@ -74,9 +74,9 @@ class NF_Notices_Multipart extends NF_Notices
         // If user clicks to ignore the notice, run this action
         if ( $slug == 'multi-part19' && current_user_can( apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ) ) ) {
 
-                $admin_notices_extra_option = ( get_option( 'nf_admin_notice_extra' ) ? unserialize( get_option( 'nf_admin_notice_extra' ) ) : array() );
+                $admin_notices_extra_option = get_option( 'nf_admin_notice_extra', array() );
                 $admin_notices_extra_option[ $_GET[ 'nf_admin_notice_ignore' ] ][ 'test19' ] = 1;
-                update_option( 'nf_admin_notice_extra', serialize( $admin_notices_extra_option ) );
+                update_option( 'nf_admin_notice_extra', $admin_notices_extra_option );
 
         }
     }

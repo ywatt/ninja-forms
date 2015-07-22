@@ -85,13 +85,13 @@ class NF_Notices
                 $start = date( "n/j/Y", mktime( 0, 0, 0, $date_array[0], $date_array[1], $date_array[2] ) );
 
                 // This is the main notices storage option
-                $admin_notices_option = ( get_option( 'nf_admin_notice' ) ? unserialize( get_option( 'nf_admin_notice' ) ) : array() );
+                $admin_notices_option = get_option( 'nf_admin_notice', array() );
 
                 // Check if the message is already stored and if so just grab the key otherwise store the message and its associated date information
                 if ( ! array_key_exists( $slug, $admin_notices_option ) ) {
                         $admin_notices_option[ $slug ][ 'start' ] = $start;
                         $admin_notices_option[ $slug ][ 'int' ] = $interval;
-                        update_option( 'nf_admin_notice', serialize( $admin_notices_option ) );
+                        update_option( 'nf_admin_notice', $admin_notices_option );
                 }
 
                 // Sanity check to ensure we have accurate information
@@ -150,9 +150,9 @@ class NF_Notices
         // If user clicks to ignore the notice, update the option to not show it again
         if ( isset($_GET['nf_admin_notice_ignore']) && current_user_can( apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ) ) ) {
 
-                $admin_notices_option = ( get_option( 'nf_admin_notice' ) ? unserialize( get_option( 'nf_admin_notice' ) ) : array() );
+                $admin_notices_option = get_option( 'nf_admin_notice', array() );
                 $admin_notices_option[ $_GET[ 'nf_admin_notice_ignore' ] ][ 'dismissed' ] = 1;
-                update_option( 'nf_admin_notice', serialize( $admin_notices_option ) );
+                update_option( 'nf_admin_notice', $admin_notices_option );
                 $query_str = remove_query_arg( 'nf_admin_notice_ignore' );
                 wp_redirect( $query_str );
                 exit;
@@ -165,7 +165,7 @@ class NF_Notices
         // If user clicks to temp ignore the notice, update the option to change the start date - default interval of 14 days
         if ( isset($_GET['nf_admin_notice_temp_ignore']) && current_user_can( apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ) ) ) {
 
-                $admin_notices_option = ( get_option( 'nf_admin_notice' ) ? unserialize( get_option( 'nf_admin_notice' ) ) : array() );
+                $admin_notices_option = get_option( 'nf_admin_notice', array() );
 
                 $current_date = current_time( "n/j/Y" );
                 $date_array = explode( '/', $current_date );
@@ -175,7 +175,7 @@ class NF_Notices
 
                 $admin_notices_option[ $_GET[ 'nf_admin_notice_temp_ignore' ] ][ 'start' ] = $new_start;
                 $admin_notices_option[ $_GET[ 'nf_admin_notice_temp_ignore' ] ][ 'dismissed' ] = 0;
-                update_option( 'nf_admin_notice', serialize( $admin_notices_option ) );
+                update_option( 'nf_admin_notice', $admin_notices_option
                 $query_str = remove_query_arg( array( 'nf_admin_notice_temp_ignore', 'nf_int' ) );
                 wp_redirect( $query_str );
                 exit;
