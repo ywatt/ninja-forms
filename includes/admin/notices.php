@@ -16,8 +16,8 @@ function nf_admin_notices( $notices ) {
     $notices['one_week_support'] = array(
         'title' => __( 'How You Doin?', 'ninja-forms' ),
         'msg' => __( 'Thank you for creating with Ninja Forms! We hope that you\'ve found everything you need, but if you have any questions: ', 'ninja-forms' ),
-        'link' => '<li><span class="dashicons dashicons-media-text"></span><a href="#">' . __( 'Check out our documentation', 'ninja-forms' ) . '</a></li>
-                    <li><span class="dashicons dashicons-sos"></span><a href="' . $one_week_support . '">' . __( 'Get Some Help' ,'ninja-forms' ) . '</a></li>',
+        'link' => '<li><span class="dashicons dashicons-media-text"></span><a target="_blank" href="http://docs.ninjaforms.com">' . __( 'Check out our documentation', 'ninja-forms' ) . '</a></li>
+                    <li><span class="dashicons dashicons-sos"></span><a target="_blank" href="http://ninjaforms.com/contact/">' . __( 'Get Some Help' ,'ninja-forms' ) . '</a></li>',
         'int' => 0
     );
 
