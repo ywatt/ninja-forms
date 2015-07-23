@@ -12,16 +12,26 @@
 
 function nf_admin_notices( $notices ) {
 
-    $one_week_support = add_query_arg( array( 'nf_admin_notice_temp_ignore' => 'one_week_support', 'nf_int' => 7 ) );
+    $one_week_support = add_query_arg( array( 'nf_admin_notice_ignore' => 'one_week_support', 'nf_int' => 7 ) );
     $notices['one_week_support'] = array(
         'title' => __( 'How You Doin?', 'ninja-forms' ),
-        'msg' => __( 'This is a message!', 'ninja-forms' ),
-        'link' => '<li><span class="dashicons dashicons-media-text"></span><a href="#">Go Somewhere Else</a></li>
+        'msg' => __( 'Thank you for creating with Ninja Forms! We hope that you\'ve found everything you need, but if you have any questions: ', 'ninja-forms' ),
+        'link' => '<li><span class="dashicons dashicons-media-text"></span><a href="#">' . __( 'Check out our documentation', 'ninja-forms' ) . '</a></li>
+                    <li><span class="dashicons dashicons-sos"></span><a href="' . $one_week_support . '">' . __( 'Get Some Help' ,'ninja-forms' ) . '</a></li>',
+        'int' => 0
+    );
+
+    /*
+    $notices['one_week_support'] = array(
+        'title' => __( 'How You Doin?', 'ninja-forms' ),
+        'msg' => __( 'Thank you for creating with Ninja Forms! We hope that you\'ve found everything you need, but if you have any questions: ', 'ninja-forms' ),
+        'link' => '<li><span class="dashicons dashicons-media-text"></span><a href="#">' . __( 'Check out our documentation', 'ninja-forms' ) . '</a></li>
                     <li><span class="dashicons dashicons-sos"></span><a href="' . $one_week_support . '">' . __( 'Maybe Later' ,'ninja-forms' ) . '</a></li>
                     <li><span class="dashicons dashicons-sos"></span><a href="?nf_admin_notice_ignore=one_week_support">Perm Dismiss</a></li>',
         'int' => 0
     );
-
+    */
+    
     return $notices;
 }
 // This function is used to hold all of the basic notices
