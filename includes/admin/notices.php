@@ -15,7 +15,7 @@ function nf_admin_notices( $notices ) {
     $one_week_support = add_query_arg( array( 'nf_admin_notice_temp_ignore' => 'one_week_support', 'nf_int' => 7 ) );
     $notices['one_week_support'] = array(
         'title' => __( 'How You Doin?', 'ninja-forms' ),
-        'msg' => __( 'Link section contains the links. Perm dismiss is linking to the same thing that the right hand corner links too. Temp dismiss also has an nf_int set which overrides the default 14 day interval.', 'ninja-forms' ),
+        'msg' => __( 'This is a message!', 'ninja-forms' ),
         'link' => '<li><span class="dashicons dashicons-media-text"></span><a href="#">Go Somewhere Else</a></li>
                     <li><span class="dashicons dashicons-sos"></span><a href="' . $one_week_support . '">' . __( 'Maybe Later' ,'ninja-forms' ) . '</a></li>
                     <li><span class="dashicons dashicons-sos"></span><a href="?nf_admin_notice_ignore=one_week_support">Perm Dismiss</a></li>',
