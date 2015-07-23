@@ -86,7 +86,6 @@ class NF_Notices
 
                 // This is the main notices storage option
                 $admin_notices_option = get_option( 'nf_admin_notice', array() );
-
                 // Check if the message is already stored and if so just grab the key otherwise store the message and its associated date information
                 if ( ! array_key_exists( $slug, $admin_notices_option ) ) {
                         $admin_notices_option[ $slug ][ 'start' ] = $start;
@@ -175,7 +174,7 @@ class NF_Notices
 
                 $admin_notices_option[ $_GET[ 'nf_admin_notice_temp_ignore' ] ][ 'start' ] = $new_start;
                 $admin_notices_option[ $_GET[ 'nf_admin_notice_temp_ignore' ] ][ 'dismissed' ] = 0;
-                update_option( 'nf_admin_notice', $admin_notices_option
+                update_option( 'nf_admin_notice', $admin_notices_option );
                 $query_str = remove_query_arg( array( 'nf_admin_notice_temp_ignore', 'nf_int' ) );
                 wp_redirect( $query_str );
                 exit;

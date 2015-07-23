@@ -12,43 +12,15 @@
 
 function nf_admin_notices( $notices ) {
 
-    // $notices['bleep5'] = array( 'msg' => __( 'This is a test message', 'ninja-forms' ), 'start' => '7/10/2015', 'int' => 7 );
-    // $notices['test2'] = array( 'msg' => __( 'This is 2nd test message', 'ninja-forms' ), 'start' => '7/7/2015' );
-    $tempdis = add_query_arg( array( 'nf_admin_notice_temp_ignore' => 'tempdis', 'nf_int' => 1 ) );
-    $notices['tempdis'] = array(
-        'title' => __( 'Temporary Dismiss', 'ninja-forms' ),
+    $one_week_support = add_query_arg( array( 'nf_admin_notice_temp_ignore' => 'one_week_support', 'nf_int' => 7 ) );
+    $notices['one_week_support'] = array(
+        'title' => __( 'How You Doin?', 'ninja-forms' ),
         'msg' => __( 'Link section contains the links. Perm dismiss is linking to the same thing that the right hand corner links too. Temp dismiss also has an nf_int set which overrides the default 14 day interval.', 'ninja-forms' ),
         'link' => '<li><span class="dashicons dashicons-media-text"></span><a href="#">Go Somewhere Else</a></li>
-                    <li><span class="dashicons dashicons-sos"></span><a href="' . $tempdis . '">Temp Dismiss</a></li>
-                    <li><span class="dashicons dashicons-sos"></span><a href="?nf_admin_notice_ignore=tempdis">Perm Dismiss</a></li>',
+                    <li><span class="dashicons dashicons-sos"></span><a href="' . $one_week_support . '">' . __( 'Maybe Later' ,'ninja-forms' ) . '</a></li>
+                    <li><span class="dashicons dashicons-sos"></span><a href="?nf_admin_notice_ignore=one_week_support">Perm Dismiss</a></li>',
         'int' => 0
     );
-    $notices['itsmaslug'] = array(
-        'title' => __( 'Paypal Express', 'ninja-forms' ),
-        'msg' => __( 'Learn how to use Paypal Express more efficiently.', 'ninja-forms' ),
-        'link' => '<li><span class="dashicons dashicons-media-text"></span>DOCS: How to Configure your PayPal Express Add-on</li>
-                    <li><span class="dashicons dashicons-sos"></span>Get Support</li>',
-        'int' => 0
-    );
-    $notices['notitle'] = array(
-        'msg' => __( 'Learn how to use Paypal Express more efficiently.', 'ninja-forms' ),
-        'link' => '<li><span class="dashicons dashicons-media-text"></span>DOCS: How to Configure your PayPal Express Add-on</li>
-                    <li><span class="dashicons dashicons-sos"></span>Get Support</li>',
-        'int' => 0
-    );
-    $notices['nomsg'] = array(
-        'title' => __( 'Paypal Express', 'ninja-forms' ),
-        'link' => '<li><span class="dashicons dashicons-media-text"></span>DOCS: How to Configure your PayPal Express Add-on</li>
-                    <li><span class="dashicons dashicons-sos"></span>Get Support</li>',
-        'int' => 0
-    );
-    $notices['nolink'] = array(
-        'title' => __( 'Paypal Express', 'ninja-forms' ),
-        'msg' => __( 'Learn how to use Paypal Express more efficiently.', 'ninja-forms' ),
-        'int' => 0
-    );
-    // $notices['test4'] = array( 'msg' => __( 'This is 4th test message', 'ninja-forms' ), 'pages' => array( 'ninja-forms' ) );
-
 
     return $notices;
 }
