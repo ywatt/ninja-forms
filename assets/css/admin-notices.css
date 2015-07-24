@@ -7,19 +7,22 @@
   padding: 10px 40px 10px 145px;
   position: relative;
 }
-.nf-admin-notice h3 {
+.nf-admin-notice a {
+  color: #ED494D;
 }
-.nf-admin-notice:after {
+.nf-notice-logo {
   clear: both;
   content: "";
   display: block;
   background-image: url("https://ninjaforms.com/wp-content/themes/ninja-brand/images/nf-logo-vert.png");
   background-size: 125px 83px;
+  background-repeat: no-repeat;
+  background-position: 0 40%;
   width: 125px;
-  height: 83px;
   position: absolute;
-  top: 5px;
-  left: 0;
+  top: 0;
+  bottom: 0;
+  left: 5px;
 }
 .nf-admin-notice > .dashicons {
   color: #424242;

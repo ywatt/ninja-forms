@@ -14,7 +14,7 @@ class NF_Notices
 {
     // Highlander the instance
     static $instance;
-    
+
     public static function instance()
     {
         if ( ! isset( self::$instance ) ) {
@@ -37,7 +37,7 @@ class NF_Notices
         add_action( 'admin_init', array( $this, 'admin_notice_temp_ignore' ) );
 
     }
-    
+
     // Checks to ensure notices aren't disabled and the user has the correct permissions.
     public function nf_admin_notice() {
 
@@ -50,7 +50,7 @@ class NF_Notices
         return false;
 
     }
-    
+
     // Primary notice function that can be called from an outside function sending necessary variables
     public function admin_notice( $admin_notices ) {
 
@@ -58,13 +58,13 @@ class NF_Notices
         if ( ! $this->nf_admin_notice() ) {
                 return false;
         }
-        
+
         foreach ( $admin_notices as $slug => $admin_notice ) {
                 // Call for spam protection
                 if ( $this->anti_notice_spam() ) {
                         return false;
                 }
-        
+
                 // Check for proper page to display on
                 if ( isset( $admin_notices[ $slug ][ 'pages' ] ) && is_array( $admin_notices[ $slug ][ 'pages' ] ) ) {
                         if ( ! $this->admin_notice_pages( $admin_notices[ $slug ][ 'pages' ] ) ) {
@@ -102,15 +102,16 @@ class NF_Notices
                 $admin_display_title = ( isset( $admin_notices[ $slug ][ 'title' ] ) ? $admin_notices[ $slug ][ 'title'] : '' );
                 $admin_display_link = ( isset( $admin_notices[ $slug ][ 'link' ] ) ? $admin_notices[ $slug ][ 'link' ] : '' );
                 $output_css = false;
-                
+
                 // Ensure the notice hasn't been hidden and that the current date is after the start date
                 if ( $admin_display_check == 0 && strtotime( $admin_display_start ) <= strtotime( $current_date ) ) {
 
                     // Get remaining query string
                     $query_str = esc_url( add_query_arg( 'nf_admin_notice_ignore', $slug ) );
-                    
+
                     // Admin notice display output
                     echo '<div class="update-nag nf-admin-notice">';
+                    echo '<div class="nf-notice-logo"></div>';
                     echo ' <p class="nf-notice-title">';
                     echo $admin_display_title;
                     echo ' </p>';
@@ -139,10 +140,10 @@ class NF_Notices
         if ( $this->notice_spam >= $this->notice_spam_max ) {
                 return true;
         }
-        
+
         return false;
     }
-    
+
     // Ignore function that gets ran at admin init to ensure any messages that were dismissed get marked
     public function admin_notice_ignore() {
 
@@ -206,18 +207,18 @@ class NF_Notices
             return false;
         }
     }
-    
+
     // Required fields check
     public function required_fields( $fields ) {
 
         if ( ! isset( $fields[ 'msg' ] ) || ( isset( $fields[ 'msg' ] ) && empty( $fields[ 'msg' ] ) ) ) {
                 return true;
         }
-        
+
         if ( ! isset( $fields[ 'title' ] ) || ( isset( $fields[ 'title' ] ) && empty( $fields[ 'title' ] ) ) ) {
                 return true;
         }
-        
+
         return false;
     }
 
@@ -225,6 +226,6 @@ class NF_Notices
     public function special_parameters( $admin_notices ) {
             // Intentionally left blank
     }
-        
+
 }
 
