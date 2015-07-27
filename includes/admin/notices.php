@@ -19,7 +19,7 @@ function nf_admin_notices( $notices ) {
         'msg' => __( 'Thank you for using Ninja Forms! We hope that you\'ve found everything you need, but if you have any questions:', 'ninja-forms' ),
         'link' => '<li><span class="dashicons dashicons-media-text"></span><a target="_blank" href="http://docs.ninjaforms.com">' . __( 'Check out our documentation', 'ninja-forms' ) . '</a></li>
                     <li><span class="dashicons dashicons-sos"></span><a target="_blank" href="https://ninjaforms.com/contact/">' . __( 'Get Some Help' ,'ninja-forms' ) . '</a></li>
-                    <li><span class="dashicons dashicons-dismiss"></span><a href="#">' . __( 'Dismiss' ,'ninja-forms' ) . '</a></li>',
+                    <li><span class="dashicons dashicons-dismiss"></span><a href="' . $one_week_support . '">' . __( 'Dismiss' ,'ninja-forms' ) . '</a></li>',
         'int' => 7
     );
     
