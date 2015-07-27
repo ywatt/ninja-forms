@@ -46,12 +46,7 @@ function ninja_forms_register_general_settings_metabox(){
                                 'label' => __( 'Currency Symbol', 'ninja-forms' ),
                                 'desc'         => 'e.g. $, &pound;, &euro;',
                         ),
-                        array(
-                                'name'         => 'disable_admin_notices',
-                                'type'         => 'checkbox',
-                                'label' => __( 'Disable All Admin Notices', 'ninja-forms' ),
-                                'desc'         => __( 'Never see a single admin notice on the dashboard from Ninja Forms again. Uncheck to see them again.', 'ninja-forms' ),
-                        ),
+
                 ),
         );
         ninja_forms_register_tab_metabox( $args );        
@@ -73,6 +68,12 @@ function ninja_forms_register_general_settings_metabox(){
                                 'type'        => '',
                                 'display_function' => 'nf_delete_on_uninstall_prompt',
                         ),
+                        array(
+                                'name'         => 'disable_admin_notices',
+                                'type'         => 'checkbox',
+                                'label' => __( 'Disable Admin Notices', 'ninja-forms' ),
+                                'desc'         => __( 'Never see an admin notice on the dashboard from Ninja Forms. Uncheck to see them again.', 'ninja-forms' ),
+                        ),                        
                 ),
                 'state' => 'closed',
         );
