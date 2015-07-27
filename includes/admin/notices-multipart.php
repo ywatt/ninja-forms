@@ -29,7 +29,7 @@ class NF_Notices_Multipart extends NF_Notices
                         return $admin_notices;
                 }
                 
-                // Check for 50 fields in one form
+                // Check for 20 fields in one form
                 $field_check = 0;
                 $all_fields = ninja_forms_get_all_fields();
                         
@@ -47,7 +47,7 @@ class NF_Notices_Multipart extends NF_Notices
 
                         foreach ( $count as $form_id => $field_count ) {
                                 /***** NEEDS TO BE UPDATED BEFORE USED LIVE ****/
-                                if ( $field_count >=1 ) {
+                                if ( $field_count >=20 ) {
                                         $field_check = 1;
                                 }
                         }
