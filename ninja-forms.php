@@ -734,7 +734,7 @@ class Ninja_Forms {
 
 	/**
 	 * Output our tinyMCE field buttons
-	 * 
+	 *
 	 * @access public
 	 * @since 2.8
 	 * @return void
@@ -745,8 +745,20 @@ class Ninja_Forms {
 		if ( 'post.php' != $pagenow ) {
 			return $context;
 		}
-
-		$html = '<a href="#" class="button-secondary nf-insert-form"><span class="dashicons dashicons-feedback"></span> ' . __( 'Add Form', 'ninja-forms' ) . '</a>';
+		$html = '<style>
+			span.nf-insert-form {
+				color:#888;
+				font: 400 18px/1 dashicons;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				display: inline-block;
+				width: 18px;
+				height: 18px;
+				vertical-align: text-top;
+				margin: 0 2px 0 0;
+			}
+		</style>';
+		$html .= '<a href="#" class="button-secondary nf-insert-form"><span class="nf-insert-form dashicons dashicons-feedback"></span> ' . __( 'Add Form', 'ninja-forms' ) . '</a>';
 		ninja_forms_admin_css();
 		ninja_forms_admin_js();
 
@@ -762,7 +774,7 @@ class Ninja_Forms {
 
 	/**
 	 * Output our tinyMCE field buttons
-	 * 
+	 *
 	 * @access public
 	 * @since 2.8
 	 * @return void
