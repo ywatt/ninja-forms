@@ -774,7 +774,7 @@ class Ninja_Forms {
                 <?php
                 $all_forms = Ninja_Forms()->forms()->get_all();
 				$first_option = __( 'Select a form or type to search', 'ninja-forms' );
-				echo '<select class="nf-forms-combobox" data-first-option="' . $first_option . '">';
+				echo '<select class="nf-forms-combobox" id="nf_form_select" data-first-option="' . $first_option . '">';
 				echo '<option value="">' . $first_option .'</option>';
 				foreach( $all_forms as $form_id ) {
 					$label = esc_html( Ninja_Forms()->form( $form_id )->get_setting( 'form_title' ) );
@@ -799,23 +799,24 @@ class Ninja_Forms {
 
 		<script type="text/javascript">
 		jQuery( document ).ready( function( $ ) {
+
 			$( '#nf-insert-form-modal' ).nfAdminModal( { title: 'Test', buttons: '#nf-insert-form-buttons', backgroundClose: true } );
 			$( document ).on( 'click', '.nf-insert-form', function( e ) {
 				e.preventDefault();
 				$( '#nf-insert-form-modal' ).nfAdminModal( 'open' );
 				$( '.nf-forms-combobox' ).combobox();
+				$( '#nf-admin-modal-content .ui-autocomplete-input' ).focus().select();
 			} );
 
 			$( document ).on( 'click', '#nf-insert-form', function( e ) {
 				e.preventDefault();
-				var form_id = 2;
+				var form_id = $( this ).parent().parent().parent().find( '#nf_form_select' ).val();
 				var shortcode = '[ninja_form id=' + form_id + ']';
 				window.parent.send_to_editor( shortcode );
-				jQuery.fn.nfAdminModal.close();
+				$.fn.nfAdminModal.close();
 			} );
 
 			$( document ).on( 'nfAdminModalClose.destroyCombo', function( e ) {
-				console.log( 'destroy' );
 				$( '.nf-forms-combobox' ).combobox( 'destroy'  );
 			} );
 		} );
