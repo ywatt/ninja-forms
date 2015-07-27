@@ -1,14 +1,14 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * NF_Notices_Multipart Class
+ * NF_Notices_MP Class
  *
- * Extends NF_Notices to check for 50 or more fields in a single form and if multi-part forms is not installed before throwing an admin notice.
+ * Extends NF_Notices to check for 20 or more fields in a single form and if multi-part forms is not installed before throwing an admin notice.
  *
  * @since 2.9
  */
 
-class NF_Notices_Multipart extends NF_Notices
+class NF_Notices_MP extends NF_Notices
 {
         // Basic actions to run
         public function __construct(){
@@ -46,7 +46,6 @@ class NF_Notices_Multipart extends NF_Notices
                         }
 
                         foreach ( $count as $form_id => $field_count ) {
-                                /***** NEEDS TO BE UPDATED BEFORE USED LIVE ****/
                                 if ( $field_count >=20 ) {
                                         $field_check = 1;
                                 }
@@ -56,14 +55,20 @@ class NF_Notices_Multipart extends NF_Notices
                 // Check for multi-part forms installed and if the above passes
                 if ( ! is_plugin_active( 'ninja-forms-multi-part/multi-part.php' ) && $field_check == 1 ) {
                         // Add notice
-                        $message = 'My, what a long form you have!</p><p>We notice that your Ninja Form has over 50 fields! Have you considered purchasing Multi-Part Forms?</p><p>Easily break up long forms into multiple pages. Control animation and direction. Show a confirmation page.</p>';
-                        $admin_notices[ 'multi-part19' ] = array(
-                            'title' => __( 'Check out Multi-Part Forms', 'ninja-forms' ),
-                            'msg' => __( $message, 'ninja-forms' )
+
+                        $multi_part_ignore = add_query_arg( array( 'nf_admin_notice_ignore' => 'multi_part' ) );
+                        $multi_part_temp = add_query_arg( array( 'nf_admin_notice_temp_ignore' => 'multi_part', 'int' => 14) );
+                        $admin_notices['multi_part'] = array(
+                            'title' => __( 'Increase Conversions', 'ninja-forms' ),
+                            'msg' => __( 'Did you know that you can increase form conversion by breaking larger forms into smaller, more easily digested parts?<p>The Multi-Part Forms extension for Ninja Forms makes this quick and easy.</p>', 'ninja-forms' ),
+                            'link' => '<li> <span class="dashicons dashicons-external"></span><a href="https://ninjaforms.com/extensions/multi-part-forms/"> ' . __( 'Learn More About Multi-Part Forms', 'ninja-forms' ) . '</a></li>
+                                        <li><span class="dashicons dashicons-calendar-alt"></span><a href="' . $multi_part_temp . '">' . __( 'Maybe Later' ,'ninja-forms' ) . '</a></li>
+                                        <li><span class="dashicons dashicons-dismiss"></span><a href="' . $multi_part_ignore . '">' . __( 'Dismiss', 'ninja-forms' ) . '</a></li>',
+                            'int' => 0
                         );
 
                 }
-                
+
                 return $admin_notices;
 
         }
@@ -83,4 +88,4 @@ class NF_Notices_Multipart extends NF_Notices
 
 }
 
-return new NF_Notices_Multipart();
+return new NF_Notices_MP();

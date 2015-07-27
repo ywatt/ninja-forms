@@ -512,7 +512,7 @@ class Ninja_Forms {
                 require_once( NINJA_FORMS_DIR . "/includes/admin/register-screen-help.php" );
                 require_once( NINJA_FORMS_DIR . "/includes/admin/output-tab-metabox.php" );
                 require_once( NINJA_FORMS_DIR . "/includes/admin/form-preview.php" );
-                require_once( NINJA_FORMS_DIR . "/includes/admin/notices-class.php" );
+                require_once( NINJA_FORMS_DIR . "/classes/notices-class.php" );
                 require_once( NINJA_FORMS_DIR . "/includes/admin/notices.php" );
 
                 //Edit Field Functions

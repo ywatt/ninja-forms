@@ -43,4 +43,7 @@ function nf_admin_notices( $notices ) {
 add_filter( 'nf_admin_notices', 'nf_admin_notices' );
 
 // Require any files that contain class extensions for NF_Notices
-require_once( NF_PLUGIN_DIR . 'includes/admin/notices-multipart.php' );
+require_once( NF_PLUGIN_DIR . 'classes/notices-multipart.php' );
+
+// Require any files that contain class extensions for NF_Notices
+require_once( NF_PLUGIN_DIR . 'classes/notices-save-progress.php' );
