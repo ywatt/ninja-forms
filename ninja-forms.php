@@ -56,6 +56,7 @@ if ( ! defined( 'ABSPATH' ) )
 
 class Ninja_Forms {
 
+
     /**
      * @var Ninja_Forms
      * @since 2.7
