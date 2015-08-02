@@ -20,7 +20,7 @@ class NF_Notices_SP extends NF_Notices
             add_filter( 'nf_admin_notices', array( $this, 'special_parameters' ) );
 
         }
-        
+
         // Function to do all the special checks before running the notice
         public function special_parameters( $admin_notices ){
 
@@ -28,11 +28,11 @@ class NF_Notices_SP extends NF_Notices
                 if ( ! $this->admin_notice_pages( array( array( 'ninja-forms', 'builder' ) ) ) ) {
                         return $admin_notices;
                 }
-                
+
                 // Check for 20 fields in one form
                 $field_check = 0;
                 $all_fields = ninja_forms_get_all_fields();
-                        
+
                 if ( is_array( $all_fields ) ) {
                         $count = array();
 
@@ -51,17 +51,17 @@ class NF_Notices_SP extends NF_Notices
                                 }
                         }
                 }
-                        
-                // Check for multi-part forms installed and if the above passes
-                if ( ! is_plugin_active( 'ninja-forms-multi-part/multi-part.php' ) && $field_check == 1 ) {
-                        // Add notice
 
+                // Check for multi-part forms installed and if the above passes
+                if ( ! is_plugin_active( 'ninja-forms-save-progress/save-progress.php' ) && $field_check == 1 ) {
+                        // Add notice
+                        $tags = '?utm_medium=plugin&utm_source=admin-notice&utm_campaign=Ninja+Forms+Upsell&utm_content=Save+Progress';
                         $save_progress_ignore = add_query_arg( array( 'nf_admin_notice_ignore' => 'save_progress' ) );
                         $save_progress_temp = add_query_arg( array( 'nf_admin_notice_temp_ignore' => 'save_progress', 'int' => 14) );
                         $admin_notices['save_progress'] = array(
                             'title' => __( 'Increase Conversions', 'ninja-forms' ),
                             'msg' => __( 'Users are more likely to complete long forms when they can save and return to complete their submission later.<p>The Save Progress extension for Ninja Forms makes this quick and easy.</p>', 'ninja-forms' ),
-                            'link' => '<li> <span class="dashicons dashicons-external"></span><a href="https://ninjaforms.com/extensions/save-user-progress/"> ' . __( 'Learn More About Save Progress', 'ninja-forms' ) . '</a></li>
+                            'link' => '<li> <span class="dashicons dashicons-external"></span><a href="https://ninjaforms.com/extensions/save-user-progress/' . $tags . '"> ' . __( 'Learn More About Save Progress', 'ninja-forms' ) . '</a></li>
                                         <li><span class="dashicons dashicons-calendar-alt"></span><a href="' . $save_progress_temp . '">' . __( 'Maybe Later' ,'ninja-forms' ) . '</a></li>
                                         <li><span class="dashicons dashicons-dismiss"></span><a href="' . $save_progress_ignore . '">' . __( 'Dismiss', 'ninja-forms' ) . '</a></li>',
                             'int' => 0
