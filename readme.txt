@@ -1,5 +1,5 @@
 === Ninja Forms ===
-Contributors: wpninjasllc, kstover, jameslaws, wpnzach, kbjohnson90, daveshine, mordauk, bftrick, helgatheviking
+Contributors: wpninjasllc, kstover, jameslaws, wpnzach, kbjohnson90, aman086, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.9
 Tested up to: 4.2.2
