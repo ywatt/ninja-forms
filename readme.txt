@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, wpnzach, kbjohnson90, aman086, da
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.9
 Tested up to: 4.2.2
-Stable tag: 2.9.21
+Stable tag: 2.9.22
 License: GPLv2 or later
 
 Create forms and manage submissions easily with a simple drag and drop interface. Contact forms, subscription forms, or any other form for WordPress.
@@ -97,23 +97,35 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9.21 (14 July 2015) =
+= 2.9.22 (3 August 2015) =
 
 *Features:*
 
-* Added built-in support for Google reCAPTCHA.
+* Add a form easily while editing a post, page, or custom post type using a form selector.
 
-*Changes:*
+*Security:*
 
-* Added South Sudan to the country list.
+* Fixed a minor security issue within the WordPress admin.
 
 *Bugs:*
 
-* Fixed a bug that could cause multiple forms on a page to add an empty DIV when one was successfully completed.
-* Ampersands (&) should now encode properly when using them in the redirect action.
-* The "Today's Date" option should now use the WordPress time rather than GMT.
+* Fixed a few PHP notices within the WordPress admin.
 
 == Changelog ==
+
+= 2.9.22 (3 August 2015) =
+
+*Features:*
+
+* Add a form easily while editing a post, page, or custom post type using a form selector.
+
+*Security:*
+
+* Fixed a minor security issue within the WordPress admin.
+
+*Bugs:*
+
+* Fixed a few PHP notices within the WordPress admin.
 
 = 2.9.21 (14 July 2015) =
 
