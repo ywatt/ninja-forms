@@ -100,7 +100,6 @@ class Ninja_Forms {
 
             register_activation_hook( __FILE__, 'ninja_forms_activation' );
             add_action( 'plugins_loaded', array( self::$instance, 'load_lang' ) );
-            add_action( 'init', array( self::$instance, 'set_transient_id'), 1 );
             add_action( 'init', array( self::$instance, 'init' ), 5 );
             add_action( 'admin_init', array( self::$instance, 'admin_init' ), 5 );
             add_action( 'update_option_ninja_forms_settings', array( self::$instance, 'refresh_plugin_settings' ), 10 );
