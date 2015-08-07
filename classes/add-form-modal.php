@@ -50,6 +50,8 @@ class NF_Admin_AddFormModal {
         wp_enqueue_style( 'nf-admin-modal',
             NF_PLUGIN_URL . 'assets/css/admin-modal.css' );
 
+        wp_enqueue_style( 'jquery-smoothness', NINJA_FORMS_URL .'css/smoothness/jquery-smoothness.css' );
+
         add_action( 'admin_footer', array( $this, 'output_tinymce_button_js' ) );
         return $context . ' ' . $html;
     }
