@@ -156,6 +156,9 @@ class Ninja_Forms {
         // Get our admin notices up and running.
         self::$instance->notices = new NF_Notices();
 
+        // Register our admin scripts
+        self::$instance->register_admin_scripts();
+
         // Fire our Ninja Forms init action.
         do_action( 'nf_admin_init', self::$instance );
     }
@@ -752,6 +755,26 @@ class Ninja_Forms {
      */
     public function refresh_plugin_settings() {
         self::$instance->plugin_settings = self::$instance->get_plugin_settings();
+    }
+
+    /**
+     * Register our admin scripts so that they can be enqueued later.
+     * @since  2.9.25
+     * @return void
+     */
+    public function register_admin_scripts() {
+        if ( defined( 'NINJA_FORMS_JS_DEBUG' ) && NINJA_FORMS_JS_DEBUG ) {
+            $suffix = '';
+            $src = 'dev';
+        } else {
+            $suffix = '.min';
+            $src = 'min';
+        }
+
+        wp_register_script( 'nf-admin-modal',
+            NF_PLUGIN_URL . 'assets/js/' . $src . '/admin-modal' . $suffix . '.js',
+            array( 'jquery', 'jquery-ui-core' ) );
+
     }
 
 } // End Class
