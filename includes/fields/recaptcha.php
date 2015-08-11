@@ -69,6 +69,9 @@ function ninja_forms_field_recaptcha_pre_process( $field_id, $user_value  ) {
 
 	// Set our captcha field id for later processing.
 	$ninja_forms_processing->update_form_setting( 'recaptcha_field', $field_id );
+
+	// Add our captcha processing.
+	add_action( 'ninja_forms_process', 'nf_field_recaptcha_pre_process', -1 );
 }
 
 /**
@@ -101,5 +104,3 @@ function nf_field_recaptcha_pre_process( $form_id ) {
 		}
 	}
 }
-
-add_action( 'ninja_forms_process', 'nf_field_recaptcha_pre_process', -1 );
