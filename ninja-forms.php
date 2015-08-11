@@ -81,6 +81,9 @@ class Ninja_Forms {
      */
     public static function instance() {
         if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Ninja_Forms ) ) {
+
+            include_once '/includes/class_aliases.php';
+
             self::$instance = new Ninja_Forms;
             self::$instance->setup_constants();
             self::$instance->includes();
