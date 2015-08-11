@@ -966,10 +966,6 @@ function ninja_forms_field_calc_value( $field_id, $field_value = '', $calc_metho
 //		$calc_value = (float) preg_replace('/[^0-9' . $decimal_point . '-]*/','',$field_value);
 		$calc_value = preg_replace('/[^0-9' . $decimal_point . '-]*/','',$field_value);
 
-		echo "<pre>";
-		echo "CALC VALUE";
-		var_dump($calc_value);
-		echo "</pre>";
 	}
 
 	if ( is_string( $calc_value ) AND strpos( $calc_value, "%" ) !== false ) {
@@ -979,13 +975,6 @@ function ninja_forms_field_calc_value( $field_id, $field_value = '', $calc_metho
 	if ( $calc_value == '' OR !$calc_value ) {
 		$calc_value = 0;
 	}
-
-	echo "<pre>";
-	echo "CALC VALUE";
-	var_dump($calc_value);
-	echo "</pre>";
-
-	echo "____";
 
 	return $calc_value;
 }
