@@ -11,7 +11,9 @@
 
 
 /*
- * Deprecated - Main Notifications Class
+ * Deprecated - NF_Notifications
+ *
+ * Main Notifications Class
  *
  * @since {VERSION_HERE}
  */
@@ -556,3 +558,25 @@ class NF_Notifications
     }
 
 }
+
+/* END NF_Notifications */
+
+
+
+
+
+/*
+ * Deprecated - {CLASS_NAME}
+ *
+ * {CLASS_SHORT_DESCRIPTION}
+ *
+ * @since {VERSION_HERE}
+ */
+
+/**
+ * {CLASS_SHORT_DESCRIPTION}
+ *
+ * {CLASS_LONG_DESCRIPTION}
+ */
+
+/* END {CLASS_NAME} */
