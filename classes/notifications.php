@@ -533,6 +533,7 @@ class NF_Notifications
 				if ( Ninja_Forms()->notification( $id )->active ) {
 					Ninja_Forms()->notification( $id )->process();
 				}
+
 			}
 		}
 	}
