@@ -13,6 +13,8 @@
 /*
  * Deprecated - NF_Notifications
  *
+ * Deprecated in favor of NF_Actions for the purpose of renaming 'notifications' to 'actions'.
+ *
  * Main Notifications Class
  *
  * @since {VERSION_HERE}
@@ -567,6 +569,8 @@ class NF_Notifications
 
 /*
  * Deprecated - {CLASS_NAME}
+ *
+ * Deprecated in favor of or because of....
  *
  * {CLASS_SHORT_DESCRIPTION}
  *
