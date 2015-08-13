@@ -167,4 +167,15 @@ class NF_Notification
 		return Ninja_Forms()->notification_types[ $type ]->name;
 	}
 
+	/**
+	 * Get our notification processing type
+	 * 
+	 * @access public
+	 * @since 3.0
+	 * @return string $processing_type
+	 */
+	public function processing_type() {
+		$type = $this->type;
+		return isset( Ninja_Forms()->notification_types[ $type ]->processing_type ) ? Ninja_Forms()->notification_types[ $type ]->processing_type : 'default';
+	}
 }

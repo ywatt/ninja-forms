@@ -530,7 +530,7 @@ class NF_Notifications
 		if ( is_array( $notifications ) ) {
 			foreach ( $notifications as $id ) {
 				do_action( 'nf_notification_before_process', $id );
-				if ( Ninja_Forms()->notification( $id )->active ) {
+				if ( 'default' == Ninja_Forms()->notification( $id )->processing_type() && Ninja_Forms()->notification( $id )->active ) {
 					Ninja_Forms()->notification( $id )->process();
 				}
 			}
