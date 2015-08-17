@@ -6,9 +6,10 @@ class NF_Database_Migrations
 
     public function __construct()
     {
-        $this->migrations[ 'forms' ]   = new NF_Database_Migrations_Forms();
-        $this->migrations[ 'fields' ]  = new NF_Database_Migrations_Fields();
-        $this->migrations[ 'actions' ] = new NF_Database_Migrations_Actions();
+        $this->migrations[ 'forms' ]     = new NF_Database_Migrations_Forms();
+        $this->migrations[ 'form_meta' ] = new NF_Database_Migrations_Forms();
+        $this->migrations[ 'fields' ]    = new NF_Database_Migrations_Fields();
+        $this->migrations[ 'actions' ]   = new NF_Database_Migrations_Actions();
     }
 
     public function migrate()
