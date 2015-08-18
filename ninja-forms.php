@@ -81,6 +81,8 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 self::$instance->forms_menu = new NF_Admin_Forms();
                 self::$instance->settings_menu = new NF_Admin_Settings();
+                self::$instance->addons_menu = new NF_Admin_Addons();
+                self::$instance->system_status = new NF_Admin_SystemStatus();
             }
 
             return self::$instance;

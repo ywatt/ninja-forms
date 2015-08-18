@@ -13,7 +13,7 @@ final class NF_Admin_SystemStatus extends NF_Admin_Submenu
 
     public function display()
     {
-        echo 'Hello, settings!';
+        Ninja_Forms::template( 'admin-menu-system-status' );
     }
 
 } // End Class NF_Admin_SystemStatus
