@@ -56,7 +56,8 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 /*
                  * Admin Menus
                  */
-                self::$instance->forms_menu = new NF_Admin_FormsMenu();
+                self::$instance->forms_menu = new NF_Admin_Forms();
+                self::$instance->settings_menu = new NF_Admin_Settings();
             }
 
             return self::$instance;
