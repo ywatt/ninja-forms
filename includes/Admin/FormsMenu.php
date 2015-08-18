@@ -4,6 +4,8 @@ final class NF_Admin_FormsMenu extends NF_Admin_Menu
 {
     public $page_title = 'Forms';
 
+    public $icon_url = 'dashicons-feedback';
+
     public function __construct()
     {
         parent::__construct();
