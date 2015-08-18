@@ -384,7 +384,7 @@ class NF_Subs_CPT {
 				echo apply_filters( 'nf_sub_table_seq_num', Ninja_Forms()->sub( $sub_id )->get_seq_num(), $sub_id, $column );
 				echo '<div class="locked-info"><span class="locked-avatar"></span> <span class="locked-text"></span></div>';
 				if ( !isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
-					echo '<div class="row-actions">';
+					echo '<div class="row-actions custom-row-actions">';
 					do_action( 'nf_sub_table_before_row_actions', $sub_id, $column );
 					echo '<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( esc_url(  add_query_arg( array() ) ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">' . __( 'Edit', 'ninja-forms' ) . '</a> | </span> 
 						<span class="edit"><a href="' . esc_url( add_query_arg( array( 'export_single' => $sub_id ) ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>';
@@ -397,7 +397,7 @@ class NF_Subs_CPT {
 					do_action( 'nf_sub_table_after_row_actions', $sub_id, $column );
 					echo '</div>';
 				} else {
-					echo '<div class="row-actions">';
+					echo '<div class="row-actions custom-row-actions">';
 					do_action( 'nf_sub_table_before_row_actions_trash', $sub_id, $column );
 					echo '<span class="untrash"><a title="' . esc_attr( __( 'Restore this item from the Trash' ) ) . '" href="' . wp_nonce_url( sprintf( get_edit_post_link( $sub_id ) . '&amp;action=untrash', $sub_id ) , 'untrash-post_' . $sub_id ) . '">' . __( 'Restore' ) . '</a> | </span> 
 					<span class="delete"><a class="submitdelete" title="' . esc_attr( __( 'Delete this item permanently' ) ) . '" href="' . get_delete_post_link( $sub_id, '', true ) . '">' . __( 'Delete Permanently' ) . '</a></span>';
