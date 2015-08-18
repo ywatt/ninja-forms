@@ -20,20 +20,47 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
     return;
 }
 
+/**
+ * Class Ninja_Forms
+ */
 final class Ninja_Forms
 {
+    /**
+     * @var Ninja_Forms
+     * @since 2.7
+     */
     private static $instance;
 
+    /**
+     * Main Ninja_Forms Instance
+     *
+     * Insures that only one instance of Ninja_Forms exists in memory at any one
+     * time. Also prevents needing to define globals all over the place.
+     *
+     * @since 2.7
+     * @static
+     * @staticvar array $instance
+     * @return The highlander Ninja_Forms
+     */
     public static function instance()
     {
         if (!isset(self::$instance) && !(self::$instance instanceof Ninja_Forms)) {
             self::$instance = new Ninja_Forms;
+
+            /*
+             * Register our autoloader
+             */
             spl_autoload_register(array(self::$instance, 'autoloader'));
         }
 
         return self::$instance;
     }
 
+    /**
+     * Autoloader
+     *
+     * Autoload Ninja Forms classes
+     */
     public function autoloader($class_name)
     {
         if (false !== strpos($class_name, 'NF_')) {
@@ -48,8 +75,19 @@ final class Ninja_Forms
 
 } // End Class Ninja_Forms
 
-function Ninja_Forms()
-{
+/**
+ * The main function responsible for returning The Highlander Ninja_Forms
+ * Instance to functions everywhere.
+ *
+ * Use this function like you would a global variable, except without needing
+ * to declare the global.
+ *
+ * Example: <?php $nf = Ninja_Forms(); ?>
+ *
+ * @since 2.7
+ * @return object The Highlander Ninja_Forms Instance
+ */
+function Ninja_Forms(){
     return Ninja_Forms::instance();
 }
 
