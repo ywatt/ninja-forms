@@ -2,7 +2,7 @@
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php');
 
-abstract class NF_Database_Migration
+abstract class NF_BaseClasses_Migration
 {
     public $table_name = '';
 
