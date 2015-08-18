@@ -16,79 +16,85 @@ Copyright 2015 WP Ninjas.
 define( 'LOAD_DEPRECATED', FALSE );
 
 if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
+
     include 'deprecated/ninja-forms.php';
-    return;
-}
 
-/**
- * Class Ninja_Forms
- */
-final class Ninja_Forms
-{
-    /**
-     * @var Ninja_Forms
-     * @since 2.7
-     */
-    private static $instance;
+} else {
+
+    exit;
 
     /**
-     * Main Ninja_Forms Instance
-     *
-     * Insures that only one instance of Ninja_Forms exists in memory at any one
-     * time. Also prevents needing to define globals all over the place.
-     *
-     * @since 2.7
-     * @static
-     * @staticvar array $instance
-     * @return The highlander Ninja_Forms
+     * Class Ninja_Forms
      */
-    public static function instance()
+    final class Ninja_Forms
     {
-        if (!isset(self::$instance) && !(self::$instance instanceof Ninja_Forms)) {
-            self::$instance = new Ninja_Forms;
+        /**
+         * @var Ninja_Forms
+         * @since 2.7
+         */
+        private static $instance;
 
-            /*
-             * Register our autoloader
-             */
-            spl_autoload_register(array(self::$instance, 'autoloader'));
+        /**
+         * Main Ninja_Forms Instance
+         *
+         * Insures that only one instance of Ninja_Forms exists in memory at any one
+         * time. Also prevents needing to define globals all over the place.
+         *
+         * @since 2.7
+         * @static
+         * @staticvar array $instance
+         * @return The highlander Ninja_Forms
+         */
+        public static function instance()
+        {
+            if (!isset(self::$instance) && !(self::$instance instanceof Ninja_Forms)) {
+                self::$instance = new Ninja_Forms;
+
+                /*
+                 * Register our autoloader
+                 */
+                spl_autoload_register(array(self::$instance, 'autoloader'));
+            }
+
+            return self::$instance;
         }
 
-        return self::$instance;
-    }
-
-    /**
-     * Autoloader
-     *
-     * Autoload Ninja Forms classes
-     */
-    public function autoloader($class_name)
-    {
-        if (false !== strpos($class_name, 'NF_')) {
-            $class_name = str_replace('NF_', '', $class_name);
-            $classes_dir = realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR;
-            $class_file = str_replace('_', DIRECTORY_SEPARATOR, $class_name) . '.php';
-            if (file_exists($classes_dir . $class_file)) {
-                require_once $classes_dir . $class_file;
+        /**
+         * Autoloader
+         *
+         * Autoload Ninja Forms classes
+         */
+        public function autoloader($class_name)
+        {
+            if (false !== strpos($class_name, 'NF_')) {
+                $class_name = str_replace('NF_', '', $class_name);
+                $classes_dir = realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR;
+                $class_file = str_replace('_', DIRECTORY_SEPARATOR, $class_name) . '.php';
+                if (file_exists($classes_dir . $class_file)) {
+                    require_once $classes_dir . $class_file;
+                }
             }
         }
+
+    } // End Class Ninja_Forms
+
+    /**
+     * The main function responsible for returning The Highlander Ninja_Forms
+     * Instance to functions everywhere.
+     *
+     * Use this function like you would a global variable, except without needing
+     * to declare the global.
+     *
+     * Example: <?php $nf = Ninja_Forms(); ?>
+     *
+     * @since 2.7
+     * @return object The Highlander Ninja_Forms Instance
+     */
+    function Ninja_Forms()
+    {
+        return Ninja_Forms::instance();
     }
 
-} // End Class Ninja_Forms
+    Ninja_Forms();
 
-/**
- * The main function responsible for returning The Highlander Ninja_Forms
- * Instance to functions everywhere.
- *
- * Use this function like you would a global variable, except without needing
- * to declare the global.
- *
- * Example: <?php $nf = Ninja_Forms(); ?>
- *
- * @since 2.7
- * @return object The Highlander Ninja_Forms Instance
- */
-function Ninja_Forms(){
-    return Ninja_Forms::instance();
 }
-
-Ninja_Forms();
