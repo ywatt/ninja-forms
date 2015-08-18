@@ -13,7 +13,7 @@ final class NF_Admin_Addons extends NF_Admin_Submenu
 
     public function display()
     {
-        Ninja_Forms::template( 'admin-menu-system-status' );
+        Ninja_Forms::template( 'admin-menu-addons' );
     }
 
 } // End Class NF_Admin_Addons
