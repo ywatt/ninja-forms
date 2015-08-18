@@ -15,7 +15,7 @@ final class NF_Admin_Forms extends NF_Admin_Menu
 
     public function display()
     {
-        echo 'Hello, Ninja Forms!';
+        Ninja_Forms::template( 'admin-menu-forms' );
     }
 
 }
