@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_Database_Migrations_ActionMeta extends NF_Database_Migration
+class NF_Database_Migrations_ActionMeta extends NF_BaseClasses_Migration
 {
     public function __construct()
     {
