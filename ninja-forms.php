@@ -14,3 +14,8 @@ Copyright 2015 WP Ninjas.
 */
 
 include 'deprecated/ninja-forms.php';
+
+/*
+	Deperecated activation function
+ */
+register_activation_hook( __FILE__, 'ninja_forms_activation' );

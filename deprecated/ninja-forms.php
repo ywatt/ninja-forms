@@ -86,7 +86,6 @@ class Ninja_Forms {
             // Our session manager wrapper class
             self::$instance->session = new NF_Session();
 
-            register_activation_hook( __FILE__, 'ninja_forms_activation' );
             add_action( 'plugins_loaded', array( self::$instance, 'load_lang' ) );
             add_action( 'init', array( self::$instance, 'init' ), 5 );
             add_action( 'admin_init', array( self::$instance, 'admin_init' ), 5 );
