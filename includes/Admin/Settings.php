@@ -13,7 +13,7 @@ final class NF_Admin_Settings extends NF_Admin_Submenu
 
     public function display()
     {
-        echo 'Hello, settings!';
+        Ninja_Forms::template( 'admin-menu-settings' );
     }
 
 } // End Class NF_Admin_Settings
