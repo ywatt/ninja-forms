@@ -26,11 +26,30 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
      */
     final class Ninja_Forms
     {
+
+        const VERSION = '2.9.27';
+
+        const TEXTDOMAIN = 'ninja-forms';
+
         /**
          * @var Ninja_Forms
          * @since 2.7
          */
         private static $instance;
+
+        /**
+         * Plugin Directory
+         *
+         * @var string $dir
+         */
+        public static $dir = '';
+
+        /**
+         * Plugin URL
+         *
+         * @var string $url
+         */
+        public static $url = '';
 
         /**
          * Main Ninja_Forms Instance
@@ -47,6 +66,10 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         {
             if (!isset(self::$instance) && !(self::$instance instanceof Ninja_Forms)) {
                 self::$instance = new Ninja_Forms;
+
+                self::$dir = plugin_dir_path( __FILE__ );
+
+                self::$url = plugin_dir_url( __FILE__ );
 
                 /*
                  * Register our autoloader
@@ -78,6 +101,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                     require_once $classes_dir . $class_file;
                 }
             }
+        }
+
+        public static function template( $file_name )
+        {
+            include self::$dir . 'includes/Templates/' . $file_name . '.html.php';
         }
 
     } // End Class Ninja_Forms
