@@ -21,8 +21,6 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 
 } else {
 
-    exit;
-
     /**
      * Class Ninja_Forms
      */
@@ -54,6 +52,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  * Register our autoloader
                  */
                 spl_autoload_register(array(self::$instance, 'autoloader'));
+
+                /*
+                 * Admin Menus
+                 */
+                self::$instance->forms_menu = new NF_Admin_FormsMenu();
             }
 
             return self::$instance;
@@ -68,7 +71,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         {
             if (false !== strpos($class_name, 'NF_')) {
                 $class_name = str_replace('NF_', '', $class_name);
-                $classes_dir = realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR;
+                $classes_dir = realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR;
                 $class_file = str_replace('_', DIRECTORY_SEPARATOR, $class_name) . '.php';
                 if (file_exists($classes_dir . $class_file)) {
                     require_once $classes_dir . $class_file;
