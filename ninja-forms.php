@@ -60,7 +60,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
          * @since 2.7
          * @static
          * @staticvar array $instance
-         * @return The highlander Ninja_Forms
+         * @return Ninja_Forms Highlander Instance
          */
         public static function instance()
         {
@@ -93,7 +93,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
          *
          * Autoload Ninja Forms classes
          */
-        public function autoloader($class_name)
+        public function autoloader( $class_name )
         {
             if (false !== strpos($class_name, 'NF_')) {
                 $class_name = str_replace('NF_', '', $class_name);
@@ -122,7 +122,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
      * Example: <?php $nf = Ninja_Forms(); ?>
      *
      * @since 2.7
-     * @return object The Highlander Ninja_Forms Instance
+     * @return Ninja_Forms Highlander Instance
      */
     function Ninja_Forms()
     {
