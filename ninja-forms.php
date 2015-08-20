@@ -83,6 +83,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->settings_menu = new NF_Admin_Settings();
                 self::$instance->addons_menu = new NF_Admin_Addons();
                 self::$instance->system_status_menu = new NF_Admin_SystemStatus();
+
+                /*
+                 * AJAX Controllers
+                 */
+                self::$instance->controllers[ 'form' ]   = new NF_AJAX_Controllers_Form();
+                self::$instance->controllers[ 'field' ]  = new NF_AJAX_Controllers_Fields();
+                self::$instance->controllers[ 'action' ] = new NF_AJAX_Controllers_Actions();
             }
 
             return self::$instance;
@@ -130,5 +137,4 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
     }
 
     Ninja_Forms();
-
 }
