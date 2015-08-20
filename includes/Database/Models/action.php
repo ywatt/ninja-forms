@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_Database_Model_Action extends NF_BaseClasses_Model
+class NF_Database_Models_Action extends NF_BaseClasses_Model
 {
     public $table_name = 'nf_actions';
 
