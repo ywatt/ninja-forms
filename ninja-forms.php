@@ -27,8 +27,14 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
     final class Ninja_Forms
     {
 
+        /**
+         * @since 3.0
+         */
         const VERSION = '2.9.27';
 
+        /**
+         * @since 3.0
+         */
         const TEXTDOMAIN = 'ninja-forms';
 
         /**
@@ -40,6 +46,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         /**
          * Plugin Directory
          *
+         * @since 3.0
          * @var string $dir
          */
         public static $dir = '';
@@ -47,9 +54,26 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         /**
          * Plugin URL
          *
+         * @since 3.0
          * @var string $url
          */
         public static $url = '';
+
+        /**
+         * Admin Menus
+         *
+         * @since 3.0
+         * @var array
+         */
+        public $menus = array();
+
+        /**
+         * AJAX Controllers
+         *
+         * @since 3.0
+         * @var array
+         */
+        public $controllers = array();
 
         /**
          * Main Ninja_Forms Instance
@@ -64,7 +88,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
          */
         public static function instance()
         {
-            if (!isset(self::$instance) && !(self::$instance instanceof Ninja_Forms)) {
+            if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Ninja_Forms ) ) {
                 self::$instance = new Ninja_Forms;
 
                 self::$dir = plugin_dir_path( __FILE__ );
@@ -74,22 +98,22 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 /*
                  * Register our autoloader
                  */
-                spl_autoload_register(array(self::$instance, 'autoloader'));
+                spl_autoload_register( array( self::$instance, 'autoloader' ) );
 
                 /*
                  * Admin Menus
                  */
-                self::$instance->forms_menu = new NF_Admin_Forms();
-                self::$instance->settings_menu = new NF_Admin_Settings();
-                self::$instance->addons_menu = new NF_Admin_Addons();
-                self::$instance->system_status_menu = new NF_Admin_SystemStatus();
+                self::$instance->menus[ 'forms' ]        = new NF_Admin_Forms();
+                self::$instance->menus[ 'settings' ]     = new NF_Admin_Settings();
+                self::$instance->menus[ 'add-ons' ]      = new NF_Admin_Addons();
+                self::$instance->menus[ 'system_status'] = new NF_Admin_SystemStatus();
 
                 /*
                  * AJAX Controllers
                  */
-                self::$instance->controllers[ 'form' ]   = new NF_AJAX_Controllers_Form();
-                self::$instance->controllers[ 'field' ]  = new NF_AJAX_Controllers_Fields();
-                self::$instance->controllers[ 'action' ] = new NF_AJAX_Controllers_Actions();
+                self::$instance->controllers[ 'form' ]       = new NF_AJAX_Controllers_Form();
+                self::$instance->controllers[ 'action' ]     = new NF_AJAX_Controllers_Action();
+                self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();
             }
 
             return self::$instance;
