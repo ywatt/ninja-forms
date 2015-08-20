@@ -51,7 +51,7 @@ abstract class NF_BaseClasses_Model
                 'value' => $value
             ),
             array(
-                'id' => $this->id,
+                'form_id' => $this->id,
                 'key' => $key
             )
         );
