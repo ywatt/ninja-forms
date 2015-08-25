@@ -30,7 +30,7 @@ class NF_Abstracts_Model
         $this->_meta_table_name     = $wpdb->prefix . $this->_meta_table_name;
         $this->_relationships_table = $wpdb->prefix . $this->_relationships_table;
 
-        $this->_settings = $this->get_settings();
+        $this->_settings = $this->cache( FALSE )->get_settings();
     }
 
     /*
@@ -40,25 +40,29 @@ class NF_Abstracts_Model
     /**
      * Get Settings
      *
-     * @param string ...$only
+     * @param string ...$only returns a subset of the object's settings
      * @return array
      */
-    public function get_settings(  )
+    public function get_settings()
     {
-        $sql = "SELECT `key`, `value` FROM `$this->_meta_table_name` WHERE `parent_id` = $this->_id";
-
         $only = func_get_args();
-        if( $only && is_array( $only ) && (count( $only ) == count( $only, COUNT_RECURSIVE))  ){
-            $sql .= ' AND (`key` = "' . implode( '" OR `key` = "', $only ) . '")';
+
+        if( ! $this->_cache ) {
+
+            $sql = "SELECT `key`, `value` FROM `$this->_meta_table_name` WHERE `parent_id` = $this->_id";
+
+            if ($only && is_array($only) && (count($only) == count($only, COUNT_RECURSIVE))) {
+                $sql .= ' AND (`key` = "' . implode('" OR `key` = "', $only) . '")';
+            }
+
+            $results = $this->_db->get_results($sql);
+
+            foreach ($results as $meta) {
+                $this->_settings[$meta->key] = $meta->value;
+            }
         }
 
-        $results = $this->_db->get_results( $sql );
-
-        foreach( $results as $meta ){
-            $this->_settings[ $meta->key ] = $meta->value;
-        }
-
-        return $this->_settings;
+        return ( $only && is_array( $only ) ) ? array_intersect_key( $this->_settings, array_flip( $only ) ) : $this->_settings;
     }
 
     /**
