@@ -1,16 +1,19 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_Database_Models_Action extends NF_BaseClasses_Model
+/**
+ * Class NF_Database_Models_Action
+ */
+final class NF_Database_Models_Action extends NF_BaseClasses_Model
 {
-    public $table_name = 'nf_actions';
+    protected $_table_name = 'nf_actions';
 
-    public $meta_table_name = 'nf_action_meta';
+    protected $_meta_table_name = 'nf_action_meta';
 
-    public $columns = array();
+    protected $_columns = array();
 
     public function __construct( $id )
     {
         parent::__construct( $id );
     }
 
-}
+} // End NF_Database_Models_Action

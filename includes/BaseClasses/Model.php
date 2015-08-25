@@ -1,67 +1,111 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-abstract class NF_BaseClasses_Model
+class NF_BaseClasses_Model
 {
-    public $id = '';
+    protected $_id = '';
 
-    public $table_name = '';
+    protected $_db = '';
 
-    public $meta_table_name = '';
+    protected $_table_name = '';
 
-    public $columns = array();
+    protected $_meta_table_name = '';
 
-    public $settings = array();
+    protected $_relationships_table = 'nf_relationships';
+
+    protected $_columns = array();
+
+    protected $_settings = array();
+
+    protected $_cache = TRUE;
 
     public function __construct( $id )
     {
         global $wpdb;
 
-        $this->id = $id;
+        $this->_db = $wpdb;
 
-        $this->table_name      = $wpdb->prefix . $this->table_name;
-        $this->meta_table_name = $wpdb->prefix . $this->meta_table_name;
+        $this->_id = $id;
+
+        $this->_table_name          = $wpdb->prefix . $this->_table_name;
+        $this->_meta_table_name     = $wpdb->prefix . $this->_meta_table_name;
+        $this->_relationships_table = $wpdb->prefix . $this->_relationships_table;
+
+        $this->_settings = $this->get_settings();
     }
 
     /*
      * PUBLIC METHODS
      */
 
+    /**
+     * Get Settings
+     *
+     * @param string ...$only
+     * @return array
+     */
+    public function get_settings(  )
+    {
+        $sql = "SELECT `key`, `value` FROM `$this->_meta_table_name` WHERE `parent_id` = $this->_id";
+
+        $only = func_get_args();
+        if( $only && is_array( $only ) && (count( $only ) == count( $only, COUNT_RECURSIVE))  ){
+            $sql .= ' AND (`key` = "' . implode( '" OR `key` = "', $only ) . '")';
+        }
+
+        $results = $this->_db->get_results( $sql );
+
+        foreach( $results as $meta ){
+            $this->_settings[ $meta->key ] = $meta->value;
+        }
+
+        return $this->_settings;
+    }
+
+    /**
+     * Update Setting
+     *
+     * @param $key
+     * @param $value
+     * @return bool|false|int
+     */
     public function update_setting( $key, $value )
     {
-        global $wpdb;
+        if( ! $this->_id ) return FALSE;
 
-        if( ! $this->id ) return FALSE;
+        if( in_array( $key, $this->_columns ) ){
 
-        if( in_array( $key, $this->columns ) ){
-
-            return $wpdb->update(
-                $this->table_name,
+            return $this->_db->update(
+                $this->_table_name,
                 array(
                     $key => $value
                 ),
                 array(
-                    'id' => $this->id
+                    'id' => $this->_id
                 )
             );
         }
 
-        return $wpdb->update(
-            $this->meta_table_name,
+        return $this->_db->update(
+            $this->_meta_table_name,
             array(
                 'value' => $value
             ),
             array(
-                'parent_id' => $this->id,
+                'parent_id' => $this->_id,
                 'key' => $key
             )
         );
     }
 
+    /**
+     * Update Settings
+     *
+     * @param $data
+     * @return bool
+     */
     public function update_settings( $data )
     {
-        global $wpdb;
-
-        if( ! $this->id ) return FALSE;
+        if( ! $this->_id ) return FALSE;
 
         // Separate out columns from meta
         $columns = array();
@@ -71,7 +115,7 @@ abstract class NF_BaseClasses_Model
 
         foreach( $data as $key => $value ){
 
-            if( in_array( $key, $this->columns ) ){
+            if( in_array( $key, $this->_columns ) ){
                 $columns[ $key ] = $value;
                 unset( $data[ $key ] );
             } else {
@@ -79,23 +123,93 @@ abstract class NF_BaseClasses_Model
             }
         }
 
-        $results[] = $wpdb->update(
-            $this->table_name,
+        $results[] = $this->_db->update(
+            $this->_table_name,
             $columns,
             array(
-                'id' => $this->id
+                'id' => $this->_id
             )
         );
 
         return in_array( FALSE, $results );
     }
 
-    /*
-     * STATIC METHODS
+    /**
+     * Delete
+     *
+     * @return bool
      */
-
-    public static function get( $id )
+    public function delete()
     {
+        $results = array();
 
+        $results[] = $this->_db->delete(
+            $this->_table_name,
+            array(
+                'id' => $this->_id
+            )
+        );
+
+        $results[] = $this->_db->delete(
+            $this->_meta_table_name,
+            array(
+                'parent_id' => $this->_id
+            )
+        );
+
+        // TODO: Cascade through Object Relationships
+
+        return in_array( FALSE, $results );
     }
+
+    /**
+     * Find
+     *
+     * @param string $where
+     * @return array|bool
+     */
+    public function find( $where = '' )
+    {
+        if( ! $where || ! is_array( $where ) ) return FALSE;
+
+        $where_statement = '';
+        foreach( $where as $key => $value ){
+            $where_statement[] = $key . ' = ' . $value;
+        }
+
+        $where_statement = implode( ' AND ', $where_statement );
+
+        $ids = $this->_db->get_col(
+            "
+            SELECT id
+            FROM   $this->_table_name
+            WHERE  $where_statement
+            "
+        );
+
+        $class = get_class( $this );
+
+        $results = array();
+        foreach( $ids as $id ){
+            $results[] = new $class( $id );
+        }
+
+        return $results;
+    }
+
+    /**
+     * Cache Flag
+     * 
+     * @param string $cache
+     * @return $this
+     */
+    public function cache( $cache = '' )
+    {
+        if( $cache !== '' ) {
+            $this->_cache = $cache;
+        }
+
+        return $this;
+    }
+
 }
