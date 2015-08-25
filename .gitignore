@@ -14,3 +14,4 @@ node_modules
 
 # Project Stuff
 deploy.sh
+development.php
