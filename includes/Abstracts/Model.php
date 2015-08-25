@@ -2,22 +2,51 @@
 
 class NF_Abstracts_Model
 {
+    /**
+     * @var int
+     */
     protected $_id = '';
 
+    /**
+     * @var string
+     */
     protected $_db = '';
 
+    /**
+     * @var string
+     */
     protected $_table_name = '';
 
+    /**
+     * @var string
+     */
     protected $_meta_table_name = '';
 
+    /**
+     * @var string
+     */
     protected $_relationships_table = 'nf_relationships';
 
+    /**
+     * @var array
+     */
     protected $_columns = array();
 
+    /**
+     * @var array
+     */
     protected $_settings = array();
 
+    /**
+     * @var bool
+     */
     protected $_cache = TRUE;
 
+    /**
+     * Constructor
+     *
+     * @param $id
+     */
     public function __construct( $id )
     {
         global $wpdb;
