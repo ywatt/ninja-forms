@@ -3,7 +3,7 @@
 /**
  * Class NF_Database_Models_Field
  */
-final class NF_Database_Models_Field extends NF_BaseClasses_Model
+final class NF_Database_Models_Field extends NF_Abstracts_Model
 {
     protected $_table_name = 'nf_fields';
 

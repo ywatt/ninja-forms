@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-abstract class NF_BaseClasses_Action
+abstract class NF_Abstracts_Action
 {
     public $timing = 'normal';
 

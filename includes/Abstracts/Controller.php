@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-abstract class NF_BaseClasses_Controller
+abstract class NF_Abstracts_Controller
 {
     public $errors = array();
 

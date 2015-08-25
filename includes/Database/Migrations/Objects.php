@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_Database_Migrations_Objects extends NF_BaseClasses_Migration
+class NF_Database_Migrations_Objects extends NF_Abstracts_Migration
 {
     public function __construct()
     {

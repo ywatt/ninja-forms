@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_BaseClasses_Model
+class NF_Abstracts_Model
 {
     protected $_id = '';
 

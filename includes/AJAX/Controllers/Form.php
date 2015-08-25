@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-class NF_AJAX_Controllers_Form extends NF_BaseClasses_Controller
+class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 {
     public $form = '';
 
