@@ -59,7 +59,8 @@ class NF_Abstracts_Model
         $this->_meta_table_name     = $wpdb->prefix . $this->_meta_table_name;
         $this->_relationships_table = $wpdb->prefix . $this->_relationships_table;
 
-        $this->_settings = $this->cache( FALSE )->get_settings();
+        $this->_settings = $this->get_settings();
+
     }
 
     /*
@@ -76,7 +77,7 @@ class NF_Abstracts_Model
     {
         $only = func_get_args();
 
-        if( ! $this->_cache ) {
+        if( ! $this->_settings || ! $this->_cache ) {
 
             $sql = "SELECT `key`, `value` FROM `$this->_meta_table_name` WHERE `parent_id` = $this->_id";
 
@@ -244,5 +245,4 @@ class NF_Abstracts_Model
 
         return $this;
     }
-
 }
