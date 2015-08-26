@@ -52,7 +52,7 @@ class NF_Abstracts_Model
      *
      * @param $id
      */
-    public function __construct( $id )
+    public function __construct( $id = '' )
     {
         global $wpdb;
 
@@ -80,6 +80,8 @@ class NF_Abstracts_Model
      */
     public function get_settings()
     {
+        if( ! $this->_id ) return;
+
         if( ! $this->_settings || ! $this->_cache ) {
 
             $columns = '`' . implode( '`, `', $this->_columns ) . '`';
@@ -228,6 +230,20 @@ class NF_Abstracts_Model
      */
     public function save()
     {
+        if( ! $this->_id ){
+            $result = $this->_db->insert(
+                $this->_table_name,
+                array( 'created_at' => time() )
+            );
+
+            $this->_id = $this->_db->insert_id;
+
+            echo "<pre>";
+            var_dump( "Created field id# " . $this->_id );
+            echo "</pre>";
+
+        }
+
         $this->_save_settings();
     }
 
@@ -259,8 +275,6 @@ class NF_Abstracts_Model
      */
     protected function _save_setting( $key, $value )
     {
-        if( ! $this->_id ) return FALSE;
-
         if( in_array( $key, $this->_columns ) ){
 
             return $this->_db->update(
@@ -274,7 +288,7 @@ class NF_Abstracts_Model
             );
         }
 
-        return $this->_db->update(
+        $result = $this->_db->update(
             $this->_meta_table_name,
             array(
                 'value' => $value
@@ -284,6 +298,18 @@ class NF_Abstracts_Model
                 'key' => $key
             )
         );
+
+        if( 0 === $result ){
+            // Nothing to Update. Row needs to be created.
+            $result = $this->_db->insert(
+                $this->_meta_table_name,
+                array(
+                    'key' => $key,
+                    'value' => $value,
+                    'parent_id' => $this->_id,
+                )
+            );
+        }
     }
 
     /**
@@ -293,6 +319,8 @@ class NF_Abstracts_Model
      */
     protected function _save_settings()
     {
+        if( ! $this->_settings ) return;
+
         foreach( $this->_settings as $key => $value ){
             $this->_results[] = $this->_save_setting( $key, $value );
         }
