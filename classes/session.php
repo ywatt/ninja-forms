@@ -112,6 +112,18 @@ class NF_Session {
 	}
 
 	/**
+	 * Delete a session variable
+	 *
+	 * @since 2.9.28
+	 * @param string $key
+	 * @return void
+	 */
+	public function delete() {
+		delete_option( '_wp_session_' . $this->session->session_id );
+		delete_option( '_wp_session_expires_' . $this->session->session_id );
+	}
+
+	/**
 	 * Force the cookie expiration variant time to 23 minutes
 	 *
 	 * @access public
