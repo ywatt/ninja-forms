@@ -38,6 +38,11 @@ class NF_Abstracts_Model
     protected $_settings = array();
 
     /**
+     * @var array
+     */
+    protected $_results = array();
+
+    /**
      * @var bool
      */
     protected $_cache = TRUE;
@@ -75,24 +80,51 @@ class NF_Abstracts_Model
      */
     public function get_settings()
     {
-        $only = func_get_args();
-
         if( ! $this->_settings || ! $this->_cache ) {
 
-            $sql = "SELECT `key`, `value` FROM `$this->_meta_table_name` WHERE `parent_id` = $this->_id";
+            $columns = '`' . implode( '`, `', $this->_columns ) . '`';
 
-            if ($only && is_array($only) && (count($only) == count($only, COUNT_RECURSIVE))) {
-                $sql .= ' AND (`key` = "' . implode('" OR `key` = "', $only) . '")';
+            $results = $this->_db->get_row(
+                "
+                SELECT $columns
+                FROM   `$this->_table_name`
+                "
+            );
+
+            foreach( $this->_columns as $column ){
+                $this->_settings[ $column ] = $results->$column;
             }
 
-            $results = $this->_db->get_results($sql);
+            $meta_results = $this->_db->get_results(
+                "
+                SELECT `key`, `value`
+                FROM   `$this->_meta_table_name`
+                WHERE  `parent_id` = $this->_id
+                "
+            );
 
-            foreach ($results as $meta) {
-                $this->_settings[$meta->key] = $meta->value;
+            foreach ($meta_results as $meta) {
+                $this->_settings[ $meta->key ] = $meta->value;
             }
         }
 
-        return ( $only && is_array( $only ) ) ? array_intersect_key( $this->_settings, array_flip( $only ) ) : $this->_settings;
+        $only = func_get_args();
+        if ( $only && is_array($only)
+            // And if the array is NOT multidimensional
+            && (count($only) == count($only, COUNT_RECURSIVE))) {
+
+            // If only one setting, return a single value
+            if( 1 == count( $only ) ){ return $this->_settings[ $only[0] ]; }
+
+            // Flip the array to match the settings property
+            $only_settings = array_flip( $only );
+
+            // Return only the requested settings
+            return array_intersect_key( $this->_settings, $only_settings );
+        }
+
+        // Return all settings
+        return $this->_settings;
     }
 
     /**
@@ -104,31 +136,9 @@ class NF_Abstracts_Model
      */
     public function update_setting( $key, $value )
     {
-        if( ! $this->_id ) return FALSE;
+        $this->_settings[ $key ] = $value;
 
-        if( in_array( $key, $this->_columns ) ){
-
-            return $this->_db->update(
-                $this->_table_name,
-                array(
-                    $key => $value
-                ),
-                array(
-                    'id' => $this->_id
-                )
-            );
-        }
-
-        return $this->_db->update(
-            $this->_meta_table_name,
-            array(
-                'value' => $value
-            ),
-            array(
-                'parent_id' => $this->_id,
-                'key' => $key
-            )
-        );
+        return $this;
     }
 
     /**
@@ -139,33 +149,11 @@ class NF_Abstracts_Model
      */
     public function update_settings( $data )
     {
-        if( ! $this->_id ) return FALSE;
-
-        // Separate out columns from meta
-        $columns = array();
-
-        // Log results for single return
-        $results = array();
-
         foreach( $data as $key => $value ){
-
-            if( in_array( $key, $this->_columns ) ){
-                $columns[ $key ] = $value;
-                unset( $data[ $key ] );
-            } else {
-                $results[] = $this->update_setting($key, $value);
-            }
+            $this->update_setting( $key, $value );
         }
 
-        $results[] = $this->_db->update(
-            $this->_table_name,
-            $columns,
-            array(
-                'id' => $this->_id
-            )
-        );
-
-        return in_array( FALSE, $results );
+        return $this;
     }
 
     /**
@@ -231,6 +219,18 @@ class NF_Abstracts_Model
         return $results;
     }
 
+    /*
+     * UTILITY METHODS
+     */
+
+    /**
+     * Save
+     */
+    public function save()
+    {
+        $this->_save_settings();
+    }
+
     /**
      * Cache Flag
      * 
@@ -245,4 +245,60 @@ class NF_Abstracts_Model
 
         return $this;
     }
+
+    /*
+     * PROTECTED METHODS
+     */
+
+    /**
+     * Save Setting
+     *
+     * @param $key
+     * @param $value
+     * @return bool|false|int
+     */
+    protected function _save_setting( $key, $value )
+    {
+        if( ! $this->_id ) return FALSE;
+
+        if( in_array( $key, $this->_columns ) ){
+
+            return $this->_db->update(
+                $this->_table_name,
+                array(
+                    $key => $value
+                ),
+                array(
+                    'id' => $this->_id
+                )
+            );
+        }
+
+        return $this->_db->update(
+            $this->_meta_table_name,
+            array(
+                'value' => $value
+            ),
+            array(
+                'parent_id' => $this->_id,
+                'key' => $key
+            )
+        );
+    }
+
+    /**
+     * Save Settings
+     *
+     * @return bool
+     */
+    protected function _save_settings()
+    {
+        foreach( $this->_settings as $key => $value ){
+            $this->_results[] = $this->_save_setting( $key, $value );
+        }
+
+        return $this->_results;
+    }
+
+
 }
