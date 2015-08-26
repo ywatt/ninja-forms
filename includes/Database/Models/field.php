@@ -9,8 +9,9 @@ final class NF_Database_Models_Field extends NF_Abstracts_Model
 
     protected $_meta_table_name = 'nf_field_meta';
 
-    protected $_columns = array();
-
+    protected $_columns = array(
+        'title'
+    );
     public function __construct( $id )
     {
         parent::__construct( $id );
