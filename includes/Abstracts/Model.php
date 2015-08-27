@@ -52,11 +52,11 @@ class NF_Abstracts_Model
      *
      * @param $id
      */
-    public function __construct( $id = '' )
+    public function __construct( $db, $id = '' )
     {
         global $wpdb;
 
-        $this->_db = $wpdb;
+        $this->_db = $db;
 
         $this->_id = $id;
 
