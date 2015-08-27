@@ -72,6 +72,11 @@ class NF_Abstracts_Model
      * PUBLIC METHODS
      */
 
+    public function get_id()
+    {
+        return $this->_id;
+    }
+
     /**
      * Get Settings
      *
