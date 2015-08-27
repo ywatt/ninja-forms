@@ -95,8 +95,6 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
          */
         public static function instance()
         {
-            global $wpdb;
-
             if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Ninja_Forms ) ) {
                 self::$instance = new Ninja_Forms;
 
@@ -122,12 +120,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 self::$instance->controllers[ 'form' ]       = new NF_AJAX_Controllers_Form();
                 self::$instance->controllers[ 'action' ]     = new NF_AJAX_Controllers_Action();
-                self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();
-
-                /*
-                 * Model Factory
-                 */
-                self::$instance->factory = new NF_Abstracts_ModelFactory( $wpdb );
+                self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();;
             }
 
             return self::$instance;
@@ -148,6 +141,19 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                     require_once $classes_dir . $class_file;
                 }
             }
+        }
+
+        /**
+         * Form Model Factory Wrapper
+         *
+         * @param $id
+         * @return NF_Abstracts_ModelFactory
+         */
+        public function form( $id )
+        {
+            global $wpdb;
+
+            return new NF_Abstracts_ModelFactory( $wpdb, $id );
         }
 
         public static function template( $file_name )
