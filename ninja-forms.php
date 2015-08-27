@@ -76,6 +76,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         public $controllers = array();
 
         /**
+         * Model Factory
+         *
+         * @var object
+         */
+        public $factory = '';
+
+        /**
          * Main Ninja_Forms Instance
          *
          * Insures that only one instance of Ninja_Forms exists in memory at any one
@@ -88,6 +95,8 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
          */
         public static function instance()
         {
+            global $wpdb;
+
             if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Ninja_Forms ) ) {
                 self::$instance = new Ninja_Forms;
 
@@ -114,6 +123,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->controllers[ 'form' ]       = new NF_AJAX_Controllers_Form();
                 self::$instance->controllers[ 'action' ]     = new NF_AJAX_Controllers_Action();
                 self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();
+
+                /*
+                 * Model Factory
+                 */
+                self::$instance->factory = new NF_Abstracts_ModelFactory( $wpdb );
             }
 
             return self::$instance;
