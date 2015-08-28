@@ -149,7 +149,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
          * @param $id
          * @return NF_Abstracts_ModelFactory
          */
-        public function form( $id )
+        public function form( $id = '' )
         {
             global $wpdb;
 
