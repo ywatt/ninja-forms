@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-final class NF_Admin_Settings extends NF_Admin_Submenu
+final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 {
     public $parent_slug = 'ninja-forms';
 

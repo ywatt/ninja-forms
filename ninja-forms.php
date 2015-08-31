@@ -110,10 +110,10 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 /*
                  * Admin Menus
                  */
-                self::$instance->menus[ 'forms' ]        = new NF_Admin_Forms();
-                self::$instance->menus[ 'settings' ]     = new NF_Admin_Settings();
-                self::$instance->menus[ 'add-ons' ]      = new NF_Admin_Addons();
-                self::$instance->menus[ 'system_status'] = new NF_Admin_SystemStatus();
+                self::$instance->menus[ 'forms' ]        = new NF_Admin_Menus_Forms();
+                self::$instance->menus[ 'settings' ]     = new NF_Admin_Menus_Settings();
+                self::$instance->menus[ 'add-ons' ]      = new NF_Admin_Menus_Addons();
+                self::$instance->menus[ 'system_status'] = new NF_Admin_Menus_SystemStatus();
 
                 /*
                  * AJAX Controllers

@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-final class NF_Admin_Forms extends NF_Admin_Menu
+final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 {
     public $page_title = 'Forms';
 
