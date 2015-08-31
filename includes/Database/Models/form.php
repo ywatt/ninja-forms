@@ -31,7 +31,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
     private function getFields()
     {
-        $this->fields = NF::field()->find( array( 'form_id' => $this->id ) );
+
     }
 
 } // End NF_Database_Models_Form
