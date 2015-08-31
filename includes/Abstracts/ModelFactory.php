@@ -27,6 +27,11 @@ class NF_Abstracts_ModelFactory
         return $this->_form;
     }
 
+    public function field( $id = '' )
+    {
+
+    }
+
     public function get_field( $id )
     {
         $form_id = $this->_form->get_id();
