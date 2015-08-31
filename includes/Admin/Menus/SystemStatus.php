@@ -1,10 +1,10 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-final class NF_Admin_Addons extends NF_Admin_Submenu
+final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
 {
     public $parent_slug = 'ninja-forms';
 
-    public $page_title = 'Addons';
+    public $page_title = 'System Status';
 
     public function __construct()
     {
@@ -13,7 +13,7 @@ final class NF_Admin_Addons extends NF_Admin_Submenu
 
     public function display()
     {
-        Ninja_Forms::template( 'admin-menu-addons' );
+        Ninja_Forms::template( 'admin-menu-system-status' );
     }
 
-} // End Class NF_Admin_Addons
+} // End Class NF_Admin_SystemStatus

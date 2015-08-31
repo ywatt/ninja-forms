@@ -3,7 +3,7 @@
 /**
  * WordPress Menu Page Base Class
  */
-abstract class NF_Admin_Submenu
+abstract class NF_Abstracts_Submenu
 {
     /**
      * (required) The slug name for the parent menu (or the file name of a standard WordPress admin page)

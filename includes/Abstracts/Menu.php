@@ -3,7 +3,7 @@
 /**
  * WordPress Menu Page Base Class
  */
-abstract class NF_Admin_Menu
+abstract class NF_Abstracts_Menu
 {
     /**
      * (required) The text to be displayed in the title tags of the page when the menu is selected
