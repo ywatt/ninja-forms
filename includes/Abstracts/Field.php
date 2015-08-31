@@ -41,6 +41,8 @@ abstract class NF_Abstracts_Field
 
   }
 
+  public abstract function template();
+
   public abstract function validate();
 
   public abstract function process();
