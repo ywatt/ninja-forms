@@ -13,7 +13,7 @@ final class NF_Database_Models_Object extends NF_Abstracts_Model
         'type'
     );
 
-    public function __construct( $db, $id )
+    public function __construct( $db, $id, $parent_id = '' )
     {
         parent::__construct( $db, $id );
     }
