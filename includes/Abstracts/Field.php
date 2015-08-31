@@ -1,29 +1,29 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Class NF_Abstracts_ModelFactory
+ * Class NF_Abstracts_Field
  */
 abstract class NF_Abstracts_Field
 {
   /**
    * @var string
    */
-  protected $name  = '';
+  protected $_name  = '';
 
   /**
    * @var string
    */
-  protected $group = '';
+  protected $_group = '';
 
   /**
    * @var array
    */
-  protected $settings = array();
+  protected $_settings = array();
 
   /**
    * @var string
    */
-  protected $test_value = '';
+  protected $_test_value = '';
 
   /**
    * Constructor

@@ -1,29 +1,29 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Class NF_Abstracts_ModelFactory
+ * Class NF_Abstracts_Action
  */
 abstract class NF_Abstracts_Action
 {
     /**
     * @var string
     */
-    protected $name  = '';
+    protected $_name  = '';
 
     /**
      * @var array
      */
-    protected $tags = array();
+    protected $_tags = array();
 
     /**
      * @var string
      */
-    protected $timing = 'normal';
+    protected $_timing = 'normal';
 
     /**
      * @var int
      */
-    protected $priority = '10';
+    protected $_priority = '10';
 
     public function __construct()
     {
