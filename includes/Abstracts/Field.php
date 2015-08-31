@@ -5,51 +5,51 @@
  */
 abstract class NF_Abstracts_Field
 {
-  /**
-   * @var string
-   */
-  protected $_name  = '';
+    /**
+     * @var string
+     */
+    protected $_name  = '';
 
-  /**
-   * @var string
-   */
-  protected $_group = '';
+    /**
+     * @var string
+     */
+    protected $_group = '';
 
-  /**
-   * @var array
-   */
-  protected $_settings = array();
+    /**
+     * @var array
+     */
+    protected $_settings = array();
 
-  /**
-   * @var string
-   */
-  protected $_test_value = '';
+    /**
+     * @var string
+     */
+    protected $_test_value = '';
 
-  /**
-   * @var string
-   */
-   protected $_attr = '';
+    /**
+     * @var string
+     */
+     protected $_attr = '';
 
-  /**
-   * Constructor
-   */
-  public function __construct()
-  {
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
 
-  }
+    }
 
-  /*
-   * PUBLIC METHODS
-   */
-  public function register()
-  {
+    /*
+     * PUBLIC METHODS
+     */
+    public function register()
+    {
 
-  }
+    }
 
-  public abstract function template();
+    public abstract function template();
 
-  public abstract function validate();
+    public abstract function validate();
 
-  public abstract function process();
+    public abstract function process();
 
 }
