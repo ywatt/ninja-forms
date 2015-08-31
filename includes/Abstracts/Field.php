@@ -46,10 +46,16 @@ abstract class NF_Abstracts_Field
 
     }
 
+    public function process()
+    {
+        // This section intentionally left blank.
+    }
+
+    public function validate( $value )
+    {
+        if (isset($this->_attr['required']) AND !$value) return FALSE;
+    }
+
     public abstract function template();
-
-    public abstract function validate();
-
-    public abstract function process();
 
 }
