@@ -26,6 +26,11 @@ abstract class NF_Abstracts_Field
   protected $_test_value = '';
 
   /**
+   * @var string
+   */
+   protected $_attr = '';
+
+  /**
    * Constructor
    */
   public function __construct()
