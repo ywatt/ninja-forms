@@ -52,14 +52,3 @@ class NF_Abstracts_ModelFactory
     }
 
 } // End Class NF_Abstracts_ModelFactory
-
-//function NF()
-//{
-//    return new NF_ModelFactory();
-//}
-
-// NF()->get_form( 1 );
-// NF()->form( 1 )->get_fields();
-// NF()->form( 1 )->get_field( 2 );
-// NF()->form( 1 )->get_actions();
-// NF()->form( 1 )->get_action( 3 );
