@@ -1,9 +1,9 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Class NF_Action_Save
+ * Class NF_Action_Redirect
  */
-final class NF_Action_Save extends NF_Abstracts_Action
+final class NF_Action_Redirect extends NF_Abstracts_Action
 {
     /**
     * @var string
