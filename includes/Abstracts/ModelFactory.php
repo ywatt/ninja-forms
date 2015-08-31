@@ -7,7 +7,7 @@ class NF_Abstracts_ModelFactory
 {
     protected $_db;
 
-    protected $_form;
+    protected $_object;
 
     protected $_fields = array();
 
@@ -17,7 +17,9 @@ class NF_Abstracts_ModelFactory
     {
         $this->_db = $db;
 
-        $this->_form = new NF_Database_Models_Form( $id );
+        if( $id ) {
+            $this->_object = new NF_Database_Models_Form( $id );
+        }
 
         return $this;
     }
@@ -29,7 +31,7 @@ class NF_Abstracts_ModelFactory
 
     public function field( $id = '' )
     {
-
+        $this->_object = new NF_Database_Models_Field( $this->_db, $id );
     }
 
     public function get_field( $id )
@@ -42,6 +44,11 @@ class NF_Abstracts_ModelFactory
     public function get_fields()
     {
         return $this->_fields;
+    }
+
+    public function action( $id = '' )
+    {
+        $this->_object = new NF_Database_Models_Action( $this->_db, $id );
     }
 
     public function get_action( $id )

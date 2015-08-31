@@ -13,9 +13,9 @@ final class NF_Database_Models_Action extends NF_Abstracts_Model
 
     protected $_columns = array();
 
-    public function __construct( $db, $id, $form_id )
+    public function __construct( $db, $id, $form_id = '' )
     {
-        $this->form_id = $form_id;
+        if( $form_id ) $this->form_id = $form_id;
 
         parent::__construct( $db, $id );
     }
