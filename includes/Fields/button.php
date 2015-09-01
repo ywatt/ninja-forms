@@ -22,7 +22,7 @@ class NF_Field_Button extends NF_Abstracts_Field
     {
         // Placeholder output
         ?>
-        <input type="<?php echo $this->_type; ?>">
+        <button type="<?php echo $this->_type; ?>"></button>">
         <?php
     }
 
