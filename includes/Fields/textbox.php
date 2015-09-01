@@ -3,7 +3,7 @@
 /**
  * Class NF_Field_Textbox
  */
-final class NF_Field_Textbox extends NF_Abstracts_Field
+final class NF_Fields_Textbox extends NF_Abstracts_Field
 {
     protected $_name = 'textbox';
 
@@ -19,7 +19,7 @@ final class NF_Field_Textbox extends NF_Abstracts_Field
     {
         // Placeholder output
         ?>
-        <input type="<?php echo $this->type; ?>">
+        <input type="<?php echo $this->_type; ?>">
         <?php
     }
 
