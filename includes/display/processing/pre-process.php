@@ -1,16 +1,14 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 function ninja_forms_setup_processing_class( $form_id = '' ){
 	global $ninja_forms_processing;
-	$transient_id = Ninja_Forms()->session->get( 'nf_transient_id' );
+	// $transient_id = Ninja_Forms()->session->get( 'nf_transient_id' );
+	$cache = Ninja_Forms()->session->get( 'nf_cache' );
 	//Set the form id
 	if ( $form_id == '' ) {
 		if ( isset ( $_REQUEST['_form_id'] ) ) {
 			$form_id = absint( $_REQUEST['_form_id'] );
-		} else if ( $transient_id ) {
-			$cache = get_transient( $transient_id );
-			if ( $cache !== false ) {
-				$form_id = $cache['form_id'];
-			}
+		} else if ( $cache ) {
+			$form_id = $cache['form_id'];
 		}
 	}
 

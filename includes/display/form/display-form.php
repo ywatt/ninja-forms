@@ -42,11 +42,9 @@ add_action( 'plugins_loaded', 'nf_check_post' );
  */
 
 function ninja_forms_session_class_setup(){
-	$transient_id = Ninja_Forms()->session->get( 'nf_transient_id' );
-	if ( $transient_id && ! is_admin() ) {
-		if ( get_transient( $transient_id ) !== false ) {
-			add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
-		}
+	$cache = Ninja_Forms()->session->get( 'nf_cache' );
+	if ( $cache && ! is_admin() ) {
+		add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
 	}
 }
 
@@ -61,7 +59,6 @@ add_action( 'init', 'ninja_forms_session_class_setup', 4 );
  */
 
 function ninja_forms_clear_transient() {
-	//set_transient( 'ninja_forms_test', 'TEST', DAY_IN_SECONDS );
 	ninja_forms_delete_transient();
 }
 
