@@ -7,13 +7,13 @@ class NF_Fields_Address extends NF_Fields_Textbox
 {
     protected $_name = 'address';
 
-    protected $_nicename = 'address';
+    protected $_nicename = 'Address';
 
     protected $_group = 'user_info';
 
     public function __construct()
     {
-        $this->_nicename = __( 'address', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Address', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()

@@ -7,7 +7,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 {
     protected $_name = 'checkbox';
 
-    protected $_nicename = 'checkbox';
+    protected $_nicename = 'Checkbox';
 
     protected $_group = 'standard_fields';
 
@@ -15,7 +15,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
     public function __construct()
     {
-        $this->_nicename = __( 'checkbox', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Checkbox', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()

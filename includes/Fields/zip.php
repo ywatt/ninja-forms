@@ -7,13 +7,13 @@ class NF_Fields_Zip extends NF_Fields_Textbox
 {
     protected $_name = 'zip';
 
-    protected $_nicename = 'zip';
+    protected $_nicename = 'Zip';
 
     protected $_group = 'user_info';
 
     public function __construct()
     {
-        $this->_nicename = __( 'zip', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Zip', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()

@@ -7,7 +7,7 @@ class NF_Field_Button extends NF_Abstracts_Field
 {
     protected $_name = 'button';
 
-    protected $_nicename = 'button';
+    protected $_nicename = 'Button';
 
     protected $_group = 'standard_fields';
 
@@ -15,7 +15,7 @@ class NF_Field_Button extends NF_Abstracts_Field
 
     public function __construct()
     {
-        $this->_nicename = __( 'button', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Button', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()

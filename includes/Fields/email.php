@@ -7,7 +7,7 @@ class NF_Fields_Email extends NF_Abstracts_Input
 {
     protected $_name = 'email';
 
-    protected $_nicename = 'email';
+    protected $_nicename = 'Email';
 
     protected $_group = 'standard_fields';
 
@@ -15,7 +15,7 @@ class NF_Fields_Email extends NF_Abstracts_Input
 
     public function __construct()
     {
-        $this->_nicename = __( 'email', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Email', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()

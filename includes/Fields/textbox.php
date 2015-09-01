@@ -7,7 +7,7 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 {
     protected $_name = 'textbox';
 
-    protected $_nicename = 'textbox';
+    protected $_nicename = 'Textbox';
 
     protected $_group = 'standard_fields';
 
@@ -15,7 +15,7 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
     public function __construct()
     {
-        $this->_nicename = __( 'textbox', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Textbox', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()

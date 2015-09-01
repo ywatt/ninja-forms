@@ -7,13 +7,13 @@ class NF_Fields_LastName extends NF_Fields_Textbox
 {
     protected $_name = 'lastname';
 
-    protected $_nicename = 'lastname';
+    protected $_nicename = 'Last Name';
 
     protected $_group = 'user_info';
 
     public function __construct()
     {
-        $this->_nicename = __( 'lastname', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Last Name', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()

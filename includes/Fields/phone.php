@@ -7,7 +7,7 @@ class NF_Fields_Phone extends NF_Fields_Textbox
 {
     protected $_name = 'phone';
 
-    protected $_nicename = 'phone';
+    protected $_nicename = 'Phone';
 
     protected $_group = 'user_info';
 
@@ -15,7 +15,7 @@ class NF_Fields_Phone extends NF_Fields_Textbox
 
     public function __construct()
     {
-        $this->_nicename = __( 'phone', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Phone', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()

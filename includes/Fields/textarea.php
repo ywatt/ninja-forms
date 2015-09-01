@@ -7,14 +7,14 @@ class NF_Field_Textarea extends NF_Abstracts_Field
 {
     protected $_name = 'textarea';
 
-    protected $_nicename = 'textarea';
+    protected $_nicename = 'Textarea';
 
     protected $_group = 'standard_fields';
 
 
     public function __construct()
     {
-        $this->_nicename = __( 'textarea', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Textarea', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()
