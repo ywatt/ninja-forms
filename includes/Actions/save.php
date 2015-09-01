@@ -38,8 +38,11 @@ final class NF_Action_Save extends NF_Abstracts_Action
 
     }
 
-    /*
+    /**
     * PUBLIC METHODS
     */
-    public abstract function process();
+    public function process()
+    {
+
+    }
 }

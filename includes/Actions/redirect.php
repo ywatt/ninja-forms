@@ -38,8 +38,11 @@ final class NF_Action_Redirect extends NF_Abstracts_Action
 
     }
 
-    /*
+    /**
     * PUBLIC METHODS
     */
-    public abstract function process();
+    public function process()
+    {
+        
+    }
 }
