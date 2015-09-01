@@ -41,6 +41,7 @@ abstract class NF_Abstracts_Field
     /*
     * PUBLIC METHODS
     */
+
     function register()
     {
 
@@ -53,7 +54,7 @@ abstract class NF_Abstracts_Field
 
     public function validate( $value )
     {
-        if (isset($this->_attr['required']) AND !$value) return FALSE;
+        if ( isset( $this->_attr['required'] ) AND TRUE == $this->_attr['required'] AND ! $value ) return FALSE;
     }
 
     public abstract function template();
