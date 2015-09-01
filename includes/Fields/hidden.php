@@ -1,11 +1,13 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Class NF_Field_Textbox
+ * Class NF_Fields_Hidden
  */
 class NF_Fields_Hidden extends NF_Abstracts_Input
 {
-    protected $_name = 'textbox';
+    protected $_name = 'hidden';
+
+    protected $_nicename = 'hidden';
 
     protected $_group = 'standard_fields';
 
@@ -13,6 +15,7 @@ class NF_Fields_Hidden extends NF_Abstracts_Input
 
     public function __construct()
     {
+        $this->_nicename = __( 'hidden', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()
