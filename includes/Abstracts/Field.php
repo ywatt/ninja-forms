@@ -47,16 +47,6 @@ abstract class NF_Abstracts_Field
     * PUBLIC METHODS
     */
 
-    function register()
-    {
-
-    }
-
-    public function process()
-    {
-        // This section intentionally left blank.
-    }
-
     public function validate( $value )
     {
         if ( isset( $this->_attr['required'] ) AND TRUE == $this->_attr['required'] AND ! $value ) return FALSE;
