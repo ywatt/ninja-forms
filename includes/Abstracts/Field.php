@@ -11,6 +11,11 @@ abstract class NF_Abstracts_Field
     protected $_name  = '';
 
     /**
+     * @var string
+     */
+    protected $_nicename = '';
+
+    /**
     * @var string
     */
     protected $_group = '';
@@ -35,7 +40,7 @@ abstract class NF_Abstracts_Field
      */
     public function __construct()
     {
-
+        $this->_nicename = __( $this->_nicename, Ninja_Forms::TEXTDOMAIN );
     }
 
     /*
