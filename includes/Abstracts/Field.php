@@ -47,11 +47,21 @@ abstract class NF_Abstracts_Field
     * PUBLIC METHODS
     */
 
+    /**
+     * Validate a user (or system) defined value.
+     *
+     * @param $value
+     * @return bool
+     */
     public function validate( $value )
     {
         if ( isset( $this->_attr['required'] ) AND TRUE == $this->_attr['required'] AND ! $value ) return FALSE;
     }
 
+    /**
+     * Output a field template for display.
+     * @return mixed
+     */
     public abstract function template();
 
 
