@@ -21,7 +21,7 @@ class NF_Field_Textarea extends NF_Abstracts_Field
     {
         // Placeholder output
         ?>
-        <input type="<?php echo $this->_type; ?>">
+        <textarea></textarea>
         <?php
     }
 
