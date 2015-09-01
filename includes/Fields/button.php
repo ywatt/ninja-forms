@@ -11,7 +11,7 @@ class NF_Field_Button extends NF_Abstracts_Field
 
     protected $_group = 'standard_fields';
 
-    protected $_type = 'button';
+    protected $_type = '';
 
     public function __construct()
     {
