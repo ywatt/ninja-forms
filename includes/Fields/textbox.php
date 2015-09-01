@@ -3,7 +3,7 @@
 /**
  * Class NF_Field_Textbox
  */
-final class NF_Fields_Textbox extends NF_Abstracts_Field
+class NF_Fields_Textbox extends NF_Abstracts_Input
 {
     protected $_name = 'textbox';
 
