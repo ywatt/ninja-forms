@@ -163,7 +163,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 
         public static function config( $file_name )
         {
-            include self::$dir . 'includes/Config/' . $file_name . '.php';
+            return include self::$dir . 'includes/Config/' . $file_name . '.php';
         }
 
     } // End Class Ninja_Forms
