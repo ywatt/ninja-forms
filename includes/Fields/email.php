@@ -16,6 +16,12 @@ class NF_Fields_Email extends NF_Abstracts_Input
     public function __construct()
     {
         $this->_nicename = __( 'Email', Ninja_Forms::TEXTDOMAIN );
+
+        parent::__construct();
+
+        $settings = Ninja_Forms::config( 'EmailFieldSettings' );
+
+        $this->_settings = array_merge( $this->_settings, $settings );
     }
 
     public function template()
