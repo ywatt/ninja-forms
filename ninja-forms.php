@@ -161,6 +161,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
             include self::$dir . 'includes/Templates/' . $file_name . '.html.php';
         }
 
+        public static function config( $file_name )
+        {
+            include self::$dir . 'includes/Config/' . $file_name . '.php';
+        }
+
     } // End Class Ninja_Forms
 
     /**
