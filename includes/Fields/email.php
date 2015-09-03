@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_Email
  */
-class NF_Fields_Email extends NF_Abstracts_Input
+class NF_Fields_Email extends NF_Abstracts_UserInfo
 {
     protected $_name = 'email';
 

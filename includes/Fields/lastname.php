@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_FirstName
  */
-class NF_Fields_LastName extends NF_Fields_Textbox
+class NF_Fields_LastName extends NF_Abstracts_UserInfo
 {
     protected $_name = 'lastname';
 
@@ -13,6 +13,8 @@ class NF_Fields_LastName extends NF_Fields_Textbox
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->_nicename = __( 'Last Name', Ninja_Forms::TEXTDOMAIN );
     }
 
