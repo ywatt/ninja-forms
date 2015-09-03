@@ -15,6 +15,8 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->_nicename = __( 'Textbox', Ninja_Forms::TEXTDOMAIN );
     }
 

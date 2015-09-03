@@ -1,30 +1,30 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Class NF_Fields_Checkbox
+ * Class NF_Field_Button
  */
-class NF_Fields_Checkbox extends NF_Abstracts_Input
+class NF_Fields_TimedSubmit extends NF_Field_Button
 {
-    protected $_name = 'checkbox';
+    protected $_name = 'timedsubmit';
 
-    protected $_nicename = 'Checkbox';
+    protected $_nicename = 'Timed Submit Button';
 
     protected $_group = 'standard_fields';
 
-    protected $_type = 'checkbox';
+    protected $_type = 'submit';
 
     public function __construct()
     {
         parent::__construct();
-        
-        $this->_nicename = __( 'Checkbox', Ninja_Forms::TEXTDOMAIN );
+
+        $this->_nicename = __( 'Timed Button', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function template()
     {
         // Placeholder output
         ?>
-        <input type="<?php echo $this->_type; ?>">
+        <button type="<?php echo $this->_type; ?>"></button>">
         <?php
     }
 

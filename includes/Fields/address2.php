@@ -13,6 +13,8 @@ class NF_Fields_Address2 extends NF_Fields_Textbox
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->_nicename = __( 'Address 2', Ninja_Forms::TEXTDOMAIN );
     }
 

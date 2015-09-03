@@ -13,6 +13,8 @@ class NF_Fields_CheckboxList extends NF_Abstracts_List
 
     public function __construct()
     {
+        parent::__construct();
+        
         $this->_nicename = __( 'Checkbox List', Ninja_Forms::TEXTDOMAIN );
     }
 

@@ -3,21 +3,25 @@
 /**
  * Class NF_Field_Button
  */
-class NF_Field_Button extends NF_Abstracts_Field
+class NF_Fields_Submit extends NF_Field_Button
 {
-    protected $_name = 'button';
+    protected $_name = 'submit';
 
-    protected $_nicename = 'Button';
+    protected $_nicename = 'Submit Button';
 
     protected $_group = 'standard_fields';
 
-    protected $_type = '';
+    protected $_type = 'submit';
 
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->_nicename = __( 'Button', Ninja_Forms::TEXTDOMAIN );
+
+        $settings = Ninja_Forms::config( 'SubmitFieldSettings' );
+
+        $this->_settings = array_merge( $this->_settings, $settings );
     }
 
     public function template()
