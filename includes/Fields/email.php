@@ -9,8 +9,6 @@ class NF_Fields_Email extends NF_Abstracts_UserInfo
 
     protected $_nicename = 'Email';
 
-    protected $_group = 'standard_fields';
-
     protected $_type = 'email';
 
     public function __construct()

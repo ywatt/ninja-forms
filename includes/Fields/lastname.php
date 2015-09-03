@@ -9,7 +9,6 @@ class NF_Fields_LastName extends NF_Abstracts_UserInfo
 
     protected $_nicename = 'Last Name';
 
-    protected $_group = 'user_info';
 
     public function __construct()
     {

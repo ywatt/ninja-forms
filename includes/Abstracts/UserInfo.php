@@ -7,7 +7,7 @@ abstract class NF_Abstracts_UserInfo extends NF_Abstracts_Input
 {
     protected $_name = 'input';
 
-    protected $_group = 'standard_fields';
+    protected $_group = 'user_info';
 
     protected $_type = 'text';
 
