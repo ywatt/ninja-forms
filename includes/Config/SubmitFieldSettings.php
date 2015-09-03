@@ -3,7 +3,11 @@
 return array(
 
     /*
-     * DEFAULT VALUE
+     * TIME SETTING
      */
 
+         'timed' => array(
+             'type' => 'number',
+             'label' => __( 'Number of seconds for timed submit.', Ninja_Forms::TEXTDOMAIN ),
+         ),
 );
