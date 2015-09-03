@@ -7,8 +7,8 @@ return array(
      */
 
     'default' => array(
-        'type' => 'datetime',
-        'label' => __( 'Add time stamp to form?', Ninja_Forms::TEXTDOMAIN ),
+        'type' => 'checkbox',
+        'label' => __( 'Use the JQueryUI datepicker.', Ninja_Forms::TEXTDOMAIN ),
     ),
 
 );
