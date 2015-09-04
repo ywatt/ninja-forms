@@ -23,14 +23,6 @@ class NF_Field_Textarea extends NF_Abstracts_Field
         $this->_settings = array_merge( $this->_settings, $settings );
     }
 
-    public function template()
-    {
-        // Placeholder output
-        ?>
-        <textarea></textarea>
-        <?php
-    }
-
     public function validate( $value )
     {
         parent::validate( $value );

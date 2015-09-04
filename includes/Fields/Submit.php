@@ -24,14 +24,6 @@ class NF_Fields_Submit extends NF_Field_Button
         $this->_settings = array_merge( $this->_settings, $settings );
     }
 
-    public function template()
-    {
-        // Placeholder output
-        ?>
-        <button type="<?php echo $this->_type; ?>"></button>">
-        <?php
-    }
-
     public function validate( $value )
     {
         parent::validate( $value );

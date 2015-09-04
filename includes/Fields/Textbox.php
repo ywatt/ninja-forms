@@ -20,14 +20,6 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
         $this->_nicename = __( 'Textbox', Ninja_Forms::TEXTDOMAIN );
     }
 
-    public function template()
-    {
-        // Placeholder output
-        ?>
-        <input type="<?php echo $this->_type; ?>">
-        <?php
-    }
-
     public function validate( $value )
     {
         parent::validate( $value );

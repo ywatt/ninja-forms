@@ -36,6 +36,11 @@ abstract class NF_Abstracts_Field
     protected $_attr = '';
 
     /**
+     * @var string
+     */
+     protected $_template ='';
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -59,12 +64,5 @@ abstract class NF_Abstracts_Field
     {
         if ( isset( $this->_attr['required'] ) AND TRUE == $this->_attr['required'] AND ! $value ) return FALSE;
     }
-
-    /**
-     * Output a field template for display.
-     * @return mixed
-     */
-    public abstract function template();
-
 
 }

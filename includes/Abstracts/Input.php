@@ -11,6 +11,8 @@ abstract class NF_Abstracts_Input extends NF_Abstracts_Field
 
     protected $_type = 'text';
 
+    protected $_template ='';
+
     public function __construct()
     {
         parent::__construct();
@@ -18,14 +20,6 @@ abstract class NF_Abstracts_Input extends NF_Abstracts_Field
         $settings = Ninja_Forms::config( 'InputFieldSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );
-    }
-
-    public function template()
-    {
-        // Placeholder output
-        ?>
-        <input type="<?php echo $this->_type; ?>">
-        <?php
     }
 
     public function validate( $value )

@@ -14,16 +14,8 @@ class NF_Fields_Zip extends NF_Fields_Textbox
     public function __construct()
     {
         parent::__construct();
-        
-        $this->_nicename = __( 'Zip', Ninja_Forms::TEXTDOMAIN );
-    }
 
-    public function template()
-    {
-        // Placeholder output
-        ?>
-        <input type="<?php echo $this->_type; ?>">
-        <?php
+        $this->_nicename = __( 'Zip', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function validate( $value )

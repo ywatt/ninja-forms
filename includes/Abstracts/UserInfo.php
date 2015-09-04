@@ -20,14 +20,6 @@ abstract class NF_Abstracts_UserInfo extends NF_Abstracts_Input
         $this->_settings = array_merge( $this->_settings, $settings );
     }
 
-    public function template()
-    {
-        // Placeholder output
-        ?>
-        <input type="<?php echo $this->_type; ?>">
-        <?php
-    }
-
     public function validate( $value )
     {
         parent::validate( $value );

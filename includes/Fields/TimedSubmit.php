@@ -20,14 +20,6 @@ class NF_Fields_TimedSubmit extends NF_Field_Button
         $this->_nicename = __( 'Timed Button', Ninja_Forms::TEXTDOMAIN );
     }
 
-    public function template()
-    {
-        // Placeholder output
-        ?>
-        <button type="<?php echo $this->_type; ?>"></button>">
-        <?php
-    }
-
     public function validate( $value )
     {
         parent::validate( $value );

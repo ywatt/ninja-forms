@@ -14,13 +14,8 @@ class NF_Fields_RadioList extends NF_Abstracts_List
     public function __construct()
     {
         parent::__construct();
-        
-        $this->_nicename = __( 'Radio List', Ninja_Forms::TEXTDOMAIN );
-    }
 
-    public function template()
-    {
-        // This section intentionally left blank.
+        $this->_nicename = __( 'Radio List', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function validate( $value )

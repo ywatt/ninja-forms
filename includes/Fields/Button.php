@@ -16,16 +16,8 @@ class NF_Field_Button extends NF_Abstracts_Field
     public function __construct()
     {
         parent::__construct();
-        
-        $this->_nicename = __( 'Button', Ninja_Forms::TEXTDOMAIN );
-    }
 
-    public function template()
-    {
-        // Placeholder output
-        ?>
-        <button type="<?php echo $this->_type; ?>"></button>">
-        <?php
+        $this->_nicename = __( 'Button', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function validate( $value )

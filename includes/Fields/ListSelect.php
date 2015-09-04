@@ -11,16 +11,13 @@ class NF_Fields_SelectList extends NF_Abstracts_List
 
     protected $_group = 'standard_fields';
 
+    protected $_template ='';
+
     public function __construct()
     {
         parent::__construct();
-        
-        $this->_nicename = __( 'Select', Ninja_Forms::TEXTDOMAIN );
-    }
 
-    public function template()
-    {
-        // This section intentionally left blank.
+        $this->_nicename = __( 'Select', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function validate( $value )

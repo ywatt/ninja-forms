@@ -9,13 +9,10 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
 
     protected $_group = 'standard_fields';
 
+    protected $_template ='';
+
     public function __construct()
     {
-    }
-
-    public function template()
-    {
-        // This section intentionally left blank.
     }
 
     public function validate( $value )

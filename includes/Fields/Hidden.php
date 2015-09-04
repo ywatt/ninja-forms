@@ -16,16 +16,8 @@ class NF_Fields_Hidden extends NF_Abstracts_Input
     public function __construct()
     {
         parent::__construct();
-        
-        $this->_nicename = __( 'Hidden', Ninja_Forms::TEXTDOMAIN );
-    }
 
-    public function template()
-    {
-        // Placeholder output
-        ?>
-        <input type="<?php echo $this->_type; ?>">
-        <?php
+        $this->_nicename = __( 'Hidden', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function validate( $value )

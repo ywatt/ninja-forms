@@ -13,19 +13,13 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
     protected $_type = 'checkbox';
 
+    protected $_template ='';
+
     public function __construct()
     {
         parent::__construct();
-        
-        $this->_nicename = __( 'Checkbox', Ninja_Forms::TEXTDOMAIN );
-    }
 
-    public function template()
-    {
-        // Placeholder output
-        ?>
-        <input type="<?php echo $this->_type; ?>">
-        <?php
+        $this->_nicename = __( 'Checkbox', Ninja_Forms::TEXTDOMAIN );
     }
 
     public function validate( $value )
