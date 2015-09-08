@@ -3,7 +3,7 @@
 /**
  * Class NF_Field_Button
  */
-class NF_Field_Button extends NF_Abstracts_Field
+class NF_Fields_Button extends NF_Abstracts_Field
 {
     protected $_name = 'button';
 

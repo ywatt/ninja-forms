@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_SelectList
  */
-class NF_Fields_SelectList extends NF_Abstracts_List
+class NF_Fields_ListSelect extends NF_Abstracts_List
 {
     protected $_name = 'selectlist';
 

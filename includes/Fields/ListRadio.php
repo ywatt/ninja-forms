@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_RadioList
  */
-class NF_Fields_RadioList extends NF_Abstracts_List
+class NF_Fields_ListRadio extends NF_Abstracts_List
 {
     protected $_name = 'radiolist';
 

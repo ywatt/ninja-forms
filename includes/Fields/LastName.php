@@ -9,7 +9,6 @@ class NF_Fields_LastName extends NF_Abstracts_UserInfo
 
     protected $_nicename = 'Last Name';
 
-
     public function __construct()
     {
         parent::__construct();

@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_CountryList
  */
-class NF_Fields_CountryList extends NF_Abstracts_List
+class NF_Fields_ListCountry extends NF_Abstracts_List
 {
     protected $_name = 'countrylist';
 

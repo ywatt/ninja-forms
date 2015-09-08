@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_CheckboxList
  */
-class NF_Fields_CheckboxList extends NF_Abstracts_List
+class NF_Fields_ListCheckbox extends NF_Abstracts_List
 {
     protected $_name = 'checkboxlist';
 

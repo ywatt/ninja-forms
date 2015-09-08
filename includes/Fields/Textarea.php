@@ -3,7 +3,7 @@
 /**
  * Class NF_Field_Textarea
  */
-class NF_Field_Textarea extends NF_Abstracts_Field
+class NF_Fields_Textarea extends NF_Abstracts_Field
 {
     protected $_name = 'textarea';
 

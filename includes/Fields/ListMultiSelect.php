@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_MultiselectList
  */
-class NF_Fields_MultiselectList extends NF_Abstracts_List
+class NF_Fields_ListMultiselect extends NF_Abstracts_List
 {
     protected $_name = 'multiselectlist';
 
