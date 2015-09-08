@@ -76,6 +76,14 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         public $controllers = array();
 
         /**
+         * Form Fields
+         *
+         * @since 3.0
+         * @var array
+         */
+        public $fields = array();
+
+        /**
          * Model Factory
          *
          * @var object
@@ -121,6 +129,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->controllers[ 'form' ]       = new NF_AJAX_Controllers_Form();
                 self::$instance->controllers[ 'action' ]     = new NF_AJAX_Controllers_Action();
                 self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();
+
+                /*
+                 * Field Class Registration
+                 */
+                self::$instance->fields = self::load_classes( 'Fields' );
+
+
             }
 
             return self::$instance;
@@ -164,6 +179,30 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         public static function config( $file_name )
         {
             return include self::$dir . 'includes/Config/' . $file_name . '.php';
+        }
+
+        /*
+         * PRIVATE METHODS
+         */
+
+        private static function load_classes( $subdirectory = '' )
+        {
+            $return = array();
+
+            $subdirectory = 'NF_' . $subdirectory;
+
+            foreach (scandir( self::$dir . $subdirectory ) as $path) {
+                $path = explode( DIRECTORY_SEPARATOR, str_replace( self::$dir, '', $path ) );
+                $filename = end( $path );
+
+                $class_name = $subdirectory . $filename;
+
+                if( ! class_exists( $class_name ) ) continue;
+
+                $return[ $filename ] = new $class_name;
+            }
+
+            return $return;
         }
 
     } // End Class Ninja_Forms
