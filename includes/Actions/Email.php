@@ -3,7 +3,7 @@
 /**
  * Class NF_Action_Email
  */
-final class NF_Action_Email extends NF_Abstracts_Action
+final class NF_Actions_Email extends NF_Abstracts_Action
 {
     /**
     * @var string
@@ -43,6 +43,6 @@ final class NF_Action_Email extends NF_Abstracts_Action
     */
     public function process()
     {
-        
+
     }
 }

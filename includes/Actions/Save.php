@@ -3,7 +3,7 @@
 /**
  * Class NF_Action_Save
  */
-final class NF_Action_Save extends NF_Abstracts_Action
+final class NF_Actions_Save extends NF_Abstracts_Action
 {
     /**
     * @var string
