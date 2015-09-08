@@ -3,7 +3,7 @@
 /**
  * Class NF_Field_Button
  */
-class NF_Fields_Submit extends NF_Field_Button
+class NF_Fields_Submit extends NF_Fields_Button
 {
     protected $_name = 'submit';
 
