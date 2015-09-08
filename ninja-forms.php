@@ -190,17 +190,20 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
          * PRIVATE METHODS
          */
 
-        private static function load_classes( $subdirectory = '' )
+        private static function load_classes( $prefix = '' )
         {
             $return = array();
 
-            $subdirectory = 'NF_' . $subdirectory;
+            $subdirectory = str_replace( '_', DIRECTORY_SEPARATOR, str_replace( 'NF_', '', $prefix ) );
 
-            foreach (scandir( self::$dir . $subdirectory ) as $path) {
+            $directory = 'includes/' . $subdirectory;
+
+            foreach (scandir( self::$dir . $directory ) as $path) {
+
                 $path = explode( DIRECTORY_SEPARATOR, str_replace( self::$dir, '', $path ) );
-                $filename = end( $path );
+                $filename = str_replace( '.php', '', end( $path ) );
 
-                $class_name = $subdirectory . $filename;
+                $class_name = 'NF_' . $prefix . '_' . $filename;
 
                 if( ! class_exists( $class_name ) ) continue;
 
