@@ -133,7 +133,12 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 /*
                  * Field Class Registration
                  */
-                self::$instance->fields = self::load_classes( 'Fields' );
+                self::$instance->fields = apply_filters( 'ninja_forms_register_fields', self::load_classes( 'Fields' ) );
+
+                /*
+                 * Form Action Registration
+                 */
+                self::$instance->actions = apply_filters( 'ninja_forms_register_actions', self::load_classes( 'Actions' ) );
 
 
             }
