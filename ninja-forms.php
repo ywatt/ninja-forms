@@ -176,9 +176,9 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
             return new NF_Abstracts_ModelFactory( $wpdb, $id );
         }
 
-        public static function template( $file_name )
+        public static function template( $file_name = '', $ext = '.html.php' )
         {
-            include self::$dir . 'includes/Templates/' . $file_name . '.html.php';
+            include self::$dir . 'includes/Templates/' . $file_name . $ext;
         }
 
         public static function config( $file_name )
