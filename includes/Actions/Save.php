@@ -25,15 +25,10 @@ final class NF_Actions_Save extends NF_Abstracts_Action
     */
     protected $_priority = '10';
 
-    public function __construct()
-    {
-
-    }
-
     /**
     * Constructor
     */
-    public function register()
+    public function __construct()
     {
 
     }
