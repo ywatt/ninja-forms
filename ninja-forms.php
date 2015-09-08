@@ -178,6 +178,8 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 
         public static function template( $file_name = '', $ext = '.html.php' )
         {
+            if( ! $file_name ) return;
+
             include self::$dir . 'includes/Templates/' . $file_name . $ext;
         }
 
