@@ -6,7 +6,15 @@ final class NF_Display_Render
 
     public function __construct()
     {
+        $this->template( 'fields-input' );
+        $this->template( 'fields-checkbox' );
+    }
 
+    protected function template( $file_name = '' )
+    {
+        if( ! $file_name ) return;
+
+        Ninja_Forms::template( $file_name, '.html' );
     }
 
     /*
