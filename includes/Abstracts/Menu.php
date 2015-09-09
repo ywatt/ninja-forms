@@ -52,7 +52,7 @@ abstract class NF_Abstracts_Menu
      *
      * @var string
      */
-    public $position = '100';
+    public $position = NULL;
 
     /**
      * Constructor
