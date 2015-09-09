@@ -50,9 +50,8 @@
     content: "";
     display: block;
 }
-#builder {
+#nf-builder {
     background: #fff;
-    /*border: 3px solid red;*/
     padding: 40px;
     width: 100%;
     position: absolute;
@@ -65,9 +64,8 @@
 #nf-main {
     background: #fff;
     /*border: 3px solid red;*/
-    float: left;
     padding: 40px;
-    width: 50%;
+    width: 100%;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -76,7 +74,6 @@
 }
 #nf-drawer {
     background: #EBEDEE;
-    float: left;
     padding: 40px;
     width: 50%;
     position: absolute;
