@@ -15,9 +15,9 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
     protected $_fields;
 
-    public function __construct( $id )
+    public function __construct( $db, $id = '' )
     {
-        parent::__construct( $id );
+        parent::__construct( $db, $id );
 
         $this->getFields();
     }
