@@ -119,10 +119,21 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 /*
                  * Admin Menus
                  */
-                self::$instance->menus[ 'forms' ]        = new NF_Admin_Menus_Forms();
-                self::$instance->menus[ 'settings' ]     = new NF_Admin_Menus_Settings();
-                self::$instance->menus[ 'add-ons' ]      = new NF_Admin_Menus_Addons();
-                self::$instance->menus[ 'system_status'] = new NF_Admin_Menus_SystemStatus();
+                self::$instance->menus[ 'forms' ]           = new NF_Admin_Menus_Forms();
+                self::$instance->menus[ 'settings' ]        = new NF_Admin_Menus_Settings();
+                self::$instance->menus[ 'add-ons' ]         = new NF_Admin_Menus_Addons();
+                self::$instance->menus[ 'system_status']    = new NF_Admin_Menus_SystemStatus();
+
+                /*
+                 * Admin menus used for building out the admin UI
+                 *
+                 * Should be removed once building is complete
+                 */
+                self::$instance->menus[ 'add-field']        = new NF_Admin_Menus_AddField();
+                self::$instance->menus[ 'edit-field']       = new NF_Admin_Menus_EditField();
+                self::$instance->menus[ 'add-action']       = new NF_Admin_Menus_AddAction();
+                self::$instance->menus[ 'edit-action']      = new NF_Admin_Menus_EditAction();
+                self::$instance->menus[ 'edit-settings']    = new NF_Admin_Menus_EditSettings();
 
                 /*
                  * AJAX Controllers
@@ -141,6 +152,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 self::$instance->actions = apply_filters( 'ninja_forms_register_actions', self::load_classes( 'Actions' ) );
 
+
+                /*
+                 * Temporary Shortcode for working on the frontend JS display.
+                 */
+                require_once( self::$dir . 'includes/Display/Shortcodes/tmp-frontend.php' );
 
             }
 
