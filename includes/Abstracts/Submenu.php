@@ -80,6 +80,16 @@ abstract class NF_Abstracts_Submenu
             $this->menu_slug,
             array( $this, $this->function )
         );
+
+        add_filter( 'admin_body_class', array( $this, 'body_class' ) );
+    }
+
+    public function body_class( $classes )
+    {
+        if( isset( $_GET['page'] ) && $_GET['page'] == $this->menu_slug ) {
+
+            return "$classes ninja-forms-app";
+        }
     }
 
     /**
