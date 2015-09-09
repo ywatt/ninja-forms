@@ -1,34 +1,13 @@
-<div id="builder">
+<div id="nf-builder">
     <div id="nf-main">
         <!-- main content area. Where fields and actions are rendered. -->
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
-        <div class="nf-field-wrap">Field</div>
+
+        <?php
+        for ($i=0; $i < 25; $i++) {
+            echo '<div class="nf-field-wrap">Field</div>';
+        }
+        ?>
+
     </div>
 
     <div id="nf-drawer">
