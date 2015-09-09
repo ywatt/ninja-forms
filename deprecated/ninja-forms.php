@@ -1,11 +1,19 @@
 <?php
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) )
-    exit;
-
 /*
- This program is free software; you can redistribute it and/or
+Plugin Name: Ninja Forms
+Plugin URI: http://ninjaforms.com/
+Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
+Version: 2.9.27
+Author: The WP Ninjas
+Author URI: http://ninjaforms.com
+Text Domain: ninja-forms
+Domain Path: /lang/
+
+Copyright 2011 WP Ninjas/Kevin Stover.
+
+
+This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
 of the License, or (at your option) any later version.
@@ -21,26 +29,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Ninja Forms also uses the following jQuery plugins. Their licenses can be found in their respective files.
 
-jQuery TipTip Tooltip v1.3
-code.drewwilson.com/entry/tiptip-jquery-plugin
-www.drewwilson.com
-Copyright 2010 Drew Wilson
+    jQuery TipTip Tooltip v1.3
+    code.drewwilson.com/entry/tiptip-jquery-plugin
+    www.drewwilson.com
+    Copyright 2010 Drew Wilson
 
-jQuery MaskedInput v.1.3.1
-http://digitalbush.co
-Copyright (c) 2007-2011 Josh Bush
+    jQuery MaskedInput v.1.3.1
+    http://digitalbush.co
+    Copyright (c) 2007-2011 Josh Bush
 
-jQuery Tablesorter Plugin v.2.0.5
-http://tablesorter.com
-Copyright (c) Christian Bach 2012
+    jQuery Tablesorter Plugin v.2.0.5
+    http://tablesorter.com
+    Copyright (c) Christian Bach 2012
 
-jQuery AutoNumeric Plugin v.1.9.15
-http://www.decorplanit.com/plugin/
-By: Bob Knothe And okolov Yura aka funny_falcon
+    jQuery AutoNumeric Plugin v.1.9.15
+    http://www.decorplanit.com/plugin/
+    By: Bob Knothe And okolov Yura aka funny_falcon
 
-word-and-character-counter.js
-v2.4 (c) Wilkins Fernandez
- */
+    word-and-character-counter.js
+    v2.4 (c) Wilkins Fernandez
+
+*/
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) )
+    exit;
 
 class Ninja_Forms {
 

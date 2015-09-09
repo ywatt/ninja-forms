@@ -1,5 +1,4 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit;
-
+<?php 
 /*
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
@@ -12,6 +11,8 @@ Domain Path: /lang/
 
 Copyright 2015 WP Ninjas.
 */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 define( 'LOAD_DEPRECATED', FALSE );
 
