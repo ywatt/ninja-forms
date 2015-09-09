@@ -24,4 +24,19 @@ class NF_Database_Migrations
         }
     }
 
+    public function nuke( $areYouSure = FALSE, $areYouReallySure = FALSE )
+    {
+        if( ! $areYouSure || ! $areYouReallySure ) return;
+
+        global $wpdb;
+
+        foreach( $this->migrations as $migration ){
+
+            if( 0 == $wpdb->query( "SHOW TABLES LIKE '" . $migration->table_name . "'" ) ) continue;
+
+            $wpdb->query( "DROP TABLE $migration->table_name" );
+
+        }
+    }
+
 }
