@@ -95,9 +95,10 @@ abstract class NF_Abstracts_Menu
     public function body_class( $classes )
     {
         if( isset( $_GET['page'] ) && $_GET['page'] == $this->menu_slug ) {
-
-            return "$classes ninja-forms-app";
+            $classes = "$classes ninja-forms-app";
         }
+
+        return $classes;
     }
 
     /**
