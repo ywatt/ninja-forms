@@ -34,9 +34,7 @@ class NF_Abstracts_ModelFactory
     {
         $this->_db = $db;
 
-        if( $id ) {
-            $this->_object = new NF_Database_Models_Form( $id );
-        }
+        $this->_object = new NF_Database_Models_Form( $this->_db, $id );
 
         return $this;
     }
