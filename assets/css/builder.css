@@ -1,24 +1,24 @@
-.toplevel_page_ninja-forms-3-0 #wpfooter {
+.toplevel_page_ninja-forms #wpfooter {
     display: none;
 }
-.toplevel_page_ninja-forms-3-0 #wpcontent {
+.toplevel_page_ninja-forms #wpcontent {
     background: #fff;
     margin-left: 140px;
 }
-.toplevel_page_ninja-forms-3-0.folded #wpcontent {
+.toplevel_page_ninja-forms.folded #wpcontent {
     margin-left: 16px;
 }
-.toplevel_page_ninja-forms-3-0 #wpcontent #wpbody {
+.toplevel_page_ninja-forms #wpcontent #wpbody {
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     left: 160px;
 }
-.toplevel_page_ninja-forms-3-0.folded #wpcontent #wpbody {
+.toplevel_page_ninja-forms.folded #wpcontent #wpbody {
     left: 36px;
 }
-.toplevel_page_ninja-forms-3-0 #wpcontent * {
+.toplevel_page_ninja-forms #wpcontent * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing:    border-box;
     box-sizing:         border-box;
@@ -49,6 +49,18 @@
     clear: both;
     content: "";
     display: block;
+}
+#builder {
+    background: #fff;
+    /*border: 3px solid red;*/
+    padding: 40px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: scroll;
 }
 #nf-main {
     background: #fff;
