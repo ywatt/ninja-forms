@@ -63,7 +63,7 @@ class NF_Abstracts_Model
 
         $this->_id = $id;
 
-        $this->parent_id = $parent_id;
+        $this->_parent_id = $parent_id;
 
         $this->_table_name          = $this->_db->prefix . $this->_table_name;
         $this->_meta_table_name     = $this->_db->prefix . $this->_meta_table_name;
@@ -241,9 +241,16 @@ class NF_Abstracts_Model
     public function save()
     {
         if( ! $this->_id ){
+
+            $data = array( 'created_at' => time() );
+
+            if( $this->_parent_id ){
+                $data['parent_id'] = $this->_parent_id;
+            }
+
             $result = $this->_db->insert(
                 $this->_table_name,
-                array( 'created_at' => time() )
+                $data
             );
 
             $this->_id = $this->_db->insert_id;
