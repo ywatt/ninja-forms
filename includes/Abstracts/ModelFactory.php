@@ -57,10 +57,15 @@ class NF_Abstracts_ModelFactory
      * Sets the parent object for chained methods as a Field.
      *
      * @param string $id
+     * @return $this
      */
-    public function field( $id )
+    public function field( $id = '' )
     {
-        $this->_object = new NF_Database_Models_Field( $this->_db, $id );
+        $form_id = $this->_object->get_id();
+
+        $this->_object = new NF_Database_Models_Field( $this->_db, $id, $form_id );
+
+        return $this;
     }
 
     /**
