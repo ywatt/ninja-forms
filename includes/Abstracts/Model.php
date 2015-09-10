@@ -3,6 +3,11 @@
 class NF_Abstracts_Model
 {
     /**
+     * @var string
+     */
+    protected $_db = '';
+
+    /**
      * @var int
      */
     protected $_id = '';
@@ -10,7 +15,7 @@ class NF_Abstracts_Model
     /**
      * @var string
      */
-    protected $_db = '';
+    protected $_parent_id = '';
 
     /**
      * @var string
@@ -52,17 +57,17 @@ class NF_Abstracts_Model
      *
      * @param $id
      */
-    public function __construct( $db, $id = '' )
+    public function __construct( $db, $id = '', $parent_id = '' )
     {
-        global $wpdb;
-
         $this->_db = $db;
 
         $this->_id = $id;
 
-        $this->_table_name          = $wpdb->prefix . $this->_table_name;
-        $this->_meta_table_name     = $wpdb->prefix . $this->_meta_table_name;
-        $this->_relationships_table = $wpdb->prefix . $this->_relationships_table;
+        $this->parent_id = $parent_id;
+
+        $this->_table_name          = $this->_db->prefix . $this->_table_name;
+        $this->_meta_table_name     = $this->_db->prefix . $this->_meta_table_name;
+        $this->_relationships_table = $this->_db->prefix . $this->_relationships_table;
 
         $this->_settings = $this->get_settings();
 
