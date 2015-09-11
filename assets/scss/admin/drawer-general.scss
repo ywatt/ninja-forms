@@ -15,6 +15,9 @@
             margin-right: 10px;
         }
     }
+    .nf-button {
+        float: right;
+    }
 }
 .nf-settings {
     h3 {
@@ -27,6 +30,11 @@
             font-size: 28px;
             margin: -4px 10px 0 -30px;
         }
+    }
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
     }
 }
 .nf-one-half,
