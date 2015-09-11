@@ -11,16 +11,16 @@ Normalize WordPress admin for Ninja Forms App
 
 #nf-builder { background: #fff; padding: 10px 40px; width: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: hidden; }
 
-#nf-main { background: #fff; /*border: 3px solid red;*/ padding: 20px 40px 40px; width: 100%; position: absolute; top: 140px; bottom: 0; left: 0; overflow: scroll; z-index: 100; }
+#nf-main { background: #fff; /*border: 3px solid red;*/ padding: 20px 40px 40px; width: 100%; position: absolute; top: 140px; bottom: 0; left: 0; overflow: scroll; }
 
-#nf-drawer { background: #EBEDEE; padding: 40px; width: 50%; position: absolute; top: 0; bottom: 0; right: -700px; overflow: scroll; }
+#nf-drawer { background: #EBEDEE; padding: 40px; width: 100%; position: absolute; top: 0; bottom: 0; right: -1400px; overflow: scroll; z-index: 900; }
 
 .nf-drawer-opened #nf-main { width: 50%; -webkit-transition: width 1.0s ease; transition: width 1.0s ease; }
 .nf-drawer-opened #nf-main .nf-button { display: none; }
 .nf-drawer-opened #nf-drawer { right: 0; -webkit-transition: right 1.0s ease; transition: right 1.0s ease; }
 
 .nf-drawer-closed #nf-main { width: 100%; -webkit-transition: width 1.0s ease; transition: width 1.0s ease; }
-.nf-drawer-closed #nf-drawer { right: -700px; -webkit-transition: right 1.0s ease; transition: right 1.0s ease; }
+.nf-drawer-closed #nf-drawer { right: -1400px; -webkit-transition: right 1.0s ease; transition: right 1.0s ease; }
 
 /*
 Header and Nav for Ninja Forms App

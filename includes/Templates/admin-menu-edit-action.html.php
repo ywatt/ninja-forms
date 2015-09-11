@@ -121,7 +121,9 @@ jQuery(document).ready(function($){
             </div>
             <div class="nf-full">
                 <label>Email Message</label>
+                <div class="nf-wp-editor">
                 <?php wp_editor( 'Your Email Message', 2, $settings = array() ); ?>
+                </div>
             </div>
         </section>
 
