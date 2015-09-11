@@ -100,6 +100,7 @@ class NF_Abstracts_Model
                 "
                 SELECT $columns
                 FROM   `$this->_table_name`
+                WHERE `id` = $this->_id
                 "
             );
 
@@ -202,30 +203,17 @@ class NF_Abstracts_Model
      * @param string $where
      * @return array|bool
      */
-    public function find( $where = '' )
+    public function find( $parent_id, $where = '' )
     {
-        if( ! $where || ! is_array( $where ) ) return FALSE;
+        $query = $this->build_meta_query( $parent_id, $where );
 
-        $where_statement = '';
-        foreach( $where as $key => $value ){
-            $where_statement[] = $key . ' = ' . $value;
-        }
-
-        $where_statement = implode( ' AND ', $where_statement );
-
-        $ids = $this->_db->get_col(
-            "
-            SELECT id
-            FROM   $this->_table_name
-            WHERE  $where_statement
-            "
-        );
+        $ids = $this->_db->get_col( $query );
 
         $class = get_class( $this );
 
         $results = array();
         foreach( $ids as $id ){
-            $results[] = new $class( $id );
+            $results[] = $object = new $class( $this->_db, $id, $parent_id );
         }
 
         return $results;
@@ -343,6 +331,39 @@ class NF_Abstracts_Model
         }
 
         return $this->_results;
+    }
+
+    protected function build_meta_query( $parent_id, $where )
+    {
+        $join_statement = array();
+        $where_statement = array();
+
+        if( $where AND is_array( $where ) ) {
+
+            $where_conditions = array();
+            foreach ($where as $key => $value) {
+                $conditions['key'] = $key;
+                $conditions['value'] = $value;
+
+                $where_conditions[] = $conditions;
+            }
+
+            $count = count($where);
+            for ($i = 0; $i < $count; $i++) {
+
+                $join_statement[] = "INNER JOIN " . $this->_meta_table_name . " as meta$i on meta$i.parent_id = " . $this->_table_name . ".id";
+                $where_statement[] = "( meta$i.key = '" . $where_conditions[$i]['key'] . "' AND meta$i.value = '" . $where_conditions[$i]['value'] . "' )";
+            }
+
+        }
+
+        $join_statement = implode( ' ', $join_statement );
+
+        $where_statement = implode( ' AND ', $where_statement );
+        if( $where_statement ) $where_statement = "AND " . $where_statement;
+
+        return "SELECT DISTINCT $this->_table_name.id FROM $this->_table_name $join_statement WHERE $this->_table_name.parent_id = $parent_id $where_statement";
+
     }
 
 
