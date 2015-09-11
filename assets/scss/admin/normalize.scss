@@ -18,6 +18,9 @@
             -moz-box-sizing:    border-box;
             box-sizing:         border-box;
         }
+        .wp-editor-tabs button {
+            box-sizing: initial;
+        }
     }
     &.folded {
         #wpcontent {

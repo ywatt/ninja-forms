@@ -5,6 +5,7 @@ Normalize WordPress admin for Ninja Forms App
 .ninja-forms-app #wpcontent { background: #fff; margin-left: 140px; }
 .ninja-forms-app #wpcontent #wpbody { font-size: 16px; position: absolute; top: 0; bottom: 0; right: 0; left: 160px; }
 .ninja-forms-app #wpcontent * { box-sizing: border-box; }
+.ninja-forms-app #wpcontent .wp-editor-tabs button { box-sizing: initial; }
 .ninja-forms-app.folded #wpcontent { margin-left: 16px; }
 .ninja-forms-app.folded #wpcontent #wpbody { left: 36px; }
 
