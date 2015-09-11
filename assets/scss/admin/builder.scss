@@ -13,116 +13,19 @@ Header and Nav for Ninja Forms App
 /*
 Form field placeholders for the fields a user has added to their form
 ---------------------------------------------------------------------------------------------------- */
-
+@import "item-controls";
 @import "builder-fields";
 
 /*
-Styling for all form elements used with in the app
+All styles used within the drawer
 ---------------------------------------------------------------------------------------------------- */
 
-@import "form-elements";
+@import "drawer-general";
+@import "drawer-settings";
+@import "drawer-add";
 
-.nf-one-half,
-.nf-one-third {
-    float: left;
-}
-.nf-one-half {
-    width: 50%;
-}
-.nf-one-third {
-    width: 33.33%;
-}
-.nf-first {
-    clear: both;
-    margin-left: 0;
-}
-.nf-full,
-.nf-one-half,
-.nf-one-third {
-    margin-bottom: 15px;
-    padding: 0 2%;
-}
-.nf-full:after,
-.nf-one-half:after,
-.nf-one-third:after {
-    clear: both;
-    content: "";
-    display: block;
-}
+/*
+All styles used for displaying table content
+---------------------------------------------------------------------------------------------------- */
 
-#nf-drawer h2,
-#nf-drawer h3 {
-    color: #666;
-}
-#nf-drawer h2 {
-    float: left;
-}
-#nf-drawer h3 {
-    clear: both;
-}
-#nf-drawer header {
-    margin-bottom: 40px;
-}
-#nf-drawer header input[type=submit] {
-    background: #28A0D6;
-    border: 0;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    float: right;
-    padding: 12px 30px;
-}
-#nf-drawer header input[type=search] {
-    background: #f9f9f9;
-    border: 0;
-    padding: 12px 15px;
-    content: "\f179";
-}
-#nf-drawer label {
-    color: #999;
-    padding-left: 3px;
-}
-#nf-drawer input[type=text] {
-    background: #f9f9f9;
-    border: 0;
-    margin-top: 10px;
-    padding: 12px 15px;
-    width: 100%;
-}
-#nf-drawer select {
-    background: #f9f9f9;
-    border: 0;
-    margin-top: 10px;
-    height: 43px;
-    padding: 0 15px;
-    width: 100%;
-    -webkit-appearance: none;
-}
-
-.nf-field-button {
-    background: #666;
-    border-radius: 4px;
-    color: #f1f1f1;
-    padding: 10px;
-    text-align: center;
-}
-.nf-reservoir {
-    border: 3px dashed #ccc;
-    border-radius: 4px;
-    min-height: 10px;
-    padding-top: 3px;
-}
-.nf-reservoir:after {
-    clear: both;
-    content: "";
-    display: block;
-}
-.nf-reservoir span {
-    background: #666;
-    border-radius: 4px;
-    color: #f1f1f1;
-    display: inline-block;
-    float: left;
-    margin: 0 3px 3px 3px;
-    padding: 5px 10px;
-}
+@import "table-display";
