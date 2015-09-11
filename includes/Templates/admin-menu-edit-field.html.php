@@ -3,10 +3,12 @@ jQuery(document).ready(function($){
     $(".nf-item-edit").click(function(){
         $("#nf-builder").removeClass("nf-drawer-closed");
         $("#nf-builder").addClass("nf-drawer-opened");
+        $(".nf-field-wrap:first-child").addClass("active");
     });
     $(".nf-close-drawer").click(function(){
         $("#nf-builder").removeClass("nf-drawer-opened");
         $("#nf-builder").addClass("nf-drawer-closed");
+        $(".nf-field-wrap:first-child").removeClass("active");
     });
 });
 </script>
@@ -43,11 +45,16 @@ jQuery(document).ready(function($){
 
 <?php
 for ($i=0; $i < 25; $i++) {
-    echo '<div class="nf-field-wrap">Field
+    if ( 0 == $i ) {
+        $field = 'First Name *';
+    } else {
+        $field = 'Textbox';
+    }
+    echo '<div class="nf-field-wrap">' . $field . '
         <ul class="nf-item-controls">
             <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
             <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-            <li class="nf-item-edit"><a href="#"><span class="dashicons dashicons-admin-generic"></span><span class="nf-tooltip">Edit</span></a></li>
+            <li class="nf-item-edit"><a href="#"><span class="dashicons dashicons-admin-generic"></span><span class="nf-tooltip">Edit</span><span class="nf-editing">Editing field</span></a></li>
         </ul>
     </div>';
 }
@@ -58,13 +65,17 @@ for ($i=0; $i < 25; $i++) {
     <div id="nf-drawer">
         <!-- drawer area. This is where settings and add fields are rendered. -->
         <!-- THIS IS THE CONTENT FOR EDITING FIELDS -->
-        <header class="nf-full">
-            <h2>Editing Field</h2>
+        <header class="nf-drawer-header">
+            <h2><span class="dashicons dashicons-star-filled"></span>Editing Field</h2>
             <input type="submit" class="nf-button primary nf-close-drawer" value="Close" />
         </header>
         <div class="nf-one-half">
             <label>Label Name</label>
-            <input type="text" />
+            <input type="text" value="First Name" />
+        </div>
+        <div class="nf-one-half">
+            <label>Placeholder Text</label>
+            <input type="text" value="Enter your first name" />
         </div>
         <div class="nf-one-half">
             <label>Label Position</label>
@@ -76,159 +87,10 @@ for ($i=0; $i < 25; $i++) {
                 <option>Hide Label</option>
             </select>
         </div>
-        <div class="nf-full">
-            <label>Class Name</label>
-            <input type="text" />
+        <div class="nf-one-half">
+            <label>Required Field</label>
+            <input type="checkbox" class="nf-toggle" />
         </div>
     </div>
 
-    <!-- THIS IS THE CONTENT FOR ADDING FIELDS
-    <header class="nf-full">
-        <input type="search" />
-        <span><input type="submit" class="close-add-fields" value="DONE" /></span>
-    </header>
-
-    <div class="nf-reservoir">
-        <span>Textbox</span><span>Textbox</span><span>Textbox</span><span>Textbox</span><span>Textbox</span><span>Textbox</span><span>Textbox</span><span>Textbox</span><span>Textbox</span>
-    </div>
-
-    <h3>Basic Fields</h3>
-
-    <div class="nf-one-third">
-        <div class="nf-field-button">Textbox</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Textarea</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Checkbox</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Dropdown</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Mult-Select</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Radio List</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Hidden Field</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Button</div>
-    </div>
-
-
-    <h3>Basic Fields</h3>
-
-    <div class="nf-one-third">
-        <div class="nf-field-button">Textbox</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Textarea</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Checkbox</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Dropdown</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Mult-Select</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Radio List</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Hidden Field</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Button</div>
-    </div>
-
-    <div class="nf-full">
-        <h3>Basic Fields</h3>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Textbox</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Textarea</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Checkbox</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Dropdown</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Mult-Select</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Radio List</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Hidden Field</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Button</div>
-    </div>
-
-    <div class="nf-full">
-        <h3>Basic Fields</h3>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Textbox</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Textarea</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Checkbox</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Dropdown</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Mult-Select</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Radio List</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Hidden Field</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Button</div>
-    </div>
-
-    <div class="nf-full">
-        <h3>Basic Fields</h3>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Textbox</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Textarea</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Checkbox</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Dropdown</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Mult-Select</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Radio List</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Hidden Field</div>
-    </div>
-    <div class="nf-one-third">
-        <div class="nf-field-button">Button</div>
-    </div>
-    -->
 </div>

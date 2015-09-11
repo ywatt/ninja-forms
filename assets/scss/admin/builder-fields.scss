@@ -24,10 +24,32 @@
     color: #888;
     margin-bottom: 20px;
     padding: 15px 20px;
+    &.active {
+        //background: #fafafa;
+        border: 2px solid #84CC1E;
+        color: #424242;
+        font-weight: bold;
+        .nf-item-controls {
+            a {
+                color: #424242;
+            }
+            .nf-item-delete,
+            .nf-item-duplicate {
+                display: none;
+            }
+            font-weight: normal;
+            .nf-editing {
+                display: inline;
+            }
+        }
+    }
 }
 .nf-item-controls {
     float: right;
     margin: 0;
+    .nf-editing {
+        display: none;
+    }
     li {
         float: left;
         margin: 0 6px;

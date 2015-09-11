@@ -17,10 +17,17 @@ Form field placeholders for the fields a user has added to their form
 @import "builder-fields";
 
 /*
+All styles used within the drawer
+---------------------------------------------------------------------------------------------------- */
+
+@import "drawer";
+
+/*
 Styling for all form elements used with in the app
 ---------------------------------------------------------------------------------------------------- */
 
 @import "form-elements";
+
 
 .nf-one-half,
 .nf-one-third {
@@ -78,26 +85,7 @@ Styling for all form elements used with in the app
     padding: 12px 15px;
     content: "\f179";
 }
-#nf-drawer label {
-    color: #999;
-    padding-left: 3px;
-}
-#nf-drawer input[type=text] {
-    background: #f9f9f9;
-    border: 0;
-    margin-top: 10px;
-    padding: 12px 15px;
-    width: 100%;
-}
-#nf-drawer select {
-    background: #f9f9f9;
-    border: 0;
-    margin-top: 10px;
-    height: 43px;
-    padding: 0 15px;
-    width: 100%;
-    -webkit-appearance: none;
-}
+
 
 .nf-field-button {
     background: #666;

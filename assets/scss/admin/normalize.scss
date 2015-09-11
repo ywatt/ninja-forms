@@ -66,6 +66,9 @@
     #nf-main {
         width: 50%;
         transition: width 1.0s ease;
+        .nf-button {
+            display: none;
+        }
     }
     #nf-drawer {
         right: 0;

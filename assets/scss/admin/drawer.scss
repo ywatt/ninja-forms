@@ -1,0 +1,18 @@
+.nf-drawer-header {
+    margin-bottom: 20px;
+    padding: 0 10px;
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
+    }
+    h2 {
+        color: #666;
+        float: left;
+        font-size: 20px;
+        line-height: 22px;
+        .dashicons {
+            margin-right: 10px;
+        }
+    }
+}
