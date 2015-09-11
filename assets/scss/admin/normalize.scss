@@ -18,6 +18,9 @@
             -moz-box-sizing:    border-box;
             box-sizing:         border-box;
         }
+        .wp-editor-tabs button {
+            box-sizing: initial;
+        }
     }
     &.folded {
         #wpcontent {
@@ -50,17 +53,17 @@
     bottom: 0;
     left: 0;
     overflow: scroll;
-    z-index: 100;
 }
 #nf-drawer {
     background: #EBEDEE;
     padding: 40px;
-    width: 50%;
+    width: 100%;
     position: absolute;
     top: 0;
     bottom: 0;
-    right: -700px;
+    right: -1400px;
     overflow: scroll;
+    z-index: 900;
 }
 .nf-drawer-opened {
     #nf-main {
@@ -81,7 +84,7 @@
         transition: width 1.0s ease;
     }
     #nf-drawer {
-        right: -700px;
+        right: -1400px;
         transition: right 1.0s ease;
     }
 }

@@ -23,31 +23,13 @@
             color: #BCBDBF;
         }
     }
-    .nf-item-controls {
-        float: left;
-    }
-    .nf-toggle {
-        margin: 0;
-        width: 30px;
-        &::after {
-            border-radius: 20px;
-            top: 2px;
-            left: -4px;
-            width: 30px;
-            height: 14px;
+    .nf-new-action {
+        td {
+            color: $accent_color;
+            font-weight: bold;
         }
-        &::before {
-            border-radius: 20px;
-            top: 4px;
-            left: -1px;
-            width: 14px;
-            height: 14px;
-        }
-        &:checked {
-            &::before {
-                top: 7px;
-                left: 17px;
-            }
+        a {
+            color: $accent_color;
         }
     }
 }

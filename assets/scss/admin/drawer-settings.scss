@@ -133,14 +133,40 @@ input[type=checkbox].nf-toggle {
     }
     &:checked {
         &::after {
-            background: #84CC1E;
-            border: 2px solid #84CC1E;
+            background: $accent_color;
+            border: 2px solid $accent_color;
             transition: all 0.3s ease;
         }
         &::before {
             top: 2px;
             left: 22px;
             transition: all 0.3s ease;
+        }
+    }
+}
+#nf-table-display {
+    .nf-toggle {
+        margin: 0;
+        width: 30px;
+        &::after {
+            border-radius: 20px;
+            top: 2px;
+            left: -4px;
+            width: 30px;
+            height: 14px;
+        }
+        &::before {
+            border-radius: 20px;
+            top: 4px;
+            left: -1px;
+            width: 14px;
+            height: 14px;
+        }
+        &:checked {
+            &::before {
+                top: 7px;
+                left: 17px;
+            }
         }
     }
 }
