@@ -22,4 +22,10 @@ All styles used within the drawer
 
 @import "drawer-general";
 @import "drawer-settings";
-@import "drawer-fields";
+@import "drawer-add";
+
+/*
+All styles used for displaying table content
+---------------------------------------------------------------------------------------------------- */
+
+@import "table-display";

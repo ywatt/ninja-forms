@@ -14,7 +14,7 @@ jQuery(document).ready(function($){
 </script>
 <div id="nf-builder">
     <div id="nf-header">
-        <div id="nf-main-header">
+        <div id="nf-app-header">
             <div id="nf-logo"></div>
             <ul>
                 <li><a class="active" href="#">Form Fields</a></li>
@@ -26,7 +26,7 @@ jQuery(document).ready(function($){
             <a class="nf-cancel" href="#">Cancel</a>
         </div>
 
-        <div id="nf-sub-header">
+        <div id="nf-app-sub-header">
             <!-- <h2>Contact Form</h2> -->
             <a class="nf-add-new" href="#">Add new field</a>
             <!-- <input class="nf-button secondary" type="submit" value="Edit Emails and Actions" /> -->
@@ -37,11 +37,11 @@ jQuery(document).ready(function($){
 
     <div id="nf-main">
         <!-- main content area. Where fields and actions are rendered. -->
-        <div id="nf-main-controls">
+        <div id="nf-main-header">
             <h2>Contact Form</h2>
             <input class="nf-button secondary" type="submit" value="Edit Emails and Actions" />
         </div>
-        <div id="nf-form-wrap">
+        <div id="nf-main-content">
 
 <?php
 for ($i=0; $i < 25; $i++) {

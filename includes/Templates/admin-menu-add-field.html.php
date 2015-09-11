@@ -82,46 +82,46 @@ for ($i=0; $i < 25; $i++) {
         <section class="nf-settings nf-favorites">
             <h3>Saved Fields</h3>
             <div class="nf-one-third">
-                <div class="nf-field">Textbox</div>
+                <div class="nf-item">Textbox</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">Textarea</div>
+                <div class="nf-item">Textarea</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">Checkbox</div>
+                <div class="nf-item">Checkbox</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">Dropdown</div>
+                <div class="nf-item">Dropdown</div>
             </div>
         </section>
         <section class="nf-settings">
             <h3>Common Fields</h3>
             <div class="nf-one-third">
-                <div class="nf-field">Textbox</div>
+                <div class="nf-item">Textbox</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">Textarea</div>
+                <div class="nf-item">Textarea</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">Checkbox</div>
+                <div class="nf-item">Checkbox</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">Dropdown</div>
+                <div class="nf-item">Dropdown</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">Checkbox List</div>
+                <div class="nf-item">Checkbox List</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">Radio List</div>
+                <div class="nf-item">Radio List</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">File Upload</div>
+                <div class="nf-item">File Upload</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">Multi-Select</div>
+                <div class="nf-item">Multi-Select</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-field">Hidden Field</div>
+                <div class="nf-item">Hidden Field</div>
             </div>
         </section>
     </div>

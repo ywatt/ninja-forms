@@ -47,14 +47,14 @@
         display: block;
     }
 }
-#nf-main-header {
+#nf-app-header {
     &:after {
         clear: both;
         content: "";
         display: block;
     }
 }
-#nf-sub-header {
+#nf-app-sub-header {
     padding: 0;
     h2 {
         display: inline-block;
