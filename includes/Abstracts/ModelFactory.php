@@ -84,10 +84,21 @@ class NF_Abstracts_ModelFactory
     /**
      * Returns an array of field objects for the set form (object).
      *
+     * @param array $where
+     * @param bool|FALSE $fresh
      * @return array
      */
-    public function get_fields()
+    public function get_fields( $where = array(), $fresh = FALSE)
     {
+        if( $where || $fresh || ! $this->_fields ){
+
+            $form_id = $this->_object->get_id();
+
+            $model_shell = new NF_Database_Models_Field( $this->_db, 0 );
+
+            $this->_fields = $model_shell->find( $form_id );
+        }
+
         return $this->_fields;
     }
 
