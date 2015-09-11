@@ -22,7 +22,7 @@ jQuery(document).ready(function($){
                 <li><a href="#">Settings</a></li>
                 <li><a class="preview" href="#">Live Preview<span class="dashicons dashicons-visibility"></span></a></li>
             </ul>
-            <input class="nf-button primary" type="submit" value="Save Changes" />
+            <input class="nf-button primary" type="submit" value="Publish Changes" />
             <a class="nf-cancel" href="#">Cancel</a>
         </div>
 
@@ -66,31 +66,74 @@ for ($i=0; $i < 25; $i++) {
         <!-- drawer area. This is where settings and add fields are rendered. -->
         <!-- THIS IS THE CONTENT FOR EDITING FIELDS -->
         <header class="nf-drawer-header">
-            <h2><span class="dashicons dashicons-star-filled"></span>Editing Field</h2>
+            <h2><span class="dashicons dashicons-star-empty"></span>Single Line Textbox</h2>
             <input type="submit" class="nf-button primary nf-close-drawer" value="Close" />
         </header>
-        <div class="nf-one-half">
-            <label>Label Name</label>
-            <input type="text" value="First Name" />
-        </div>
-        <div class="nf-one-half">
-            <label>Placeholder Text</label>
-            <input type="text" value="Enter your first name" />
-        </div>
-        <div class="nf-one-half">
-            <label>Label Position</label>
-            <select>
-                <option>Above Field</option>
-                <option>Below Field</option>
-                <option>Left of Field</option>
-                <option>Right of Field</option>
-                <option>Hide Label</option>
-            </select>
-        </div>
-        <div class="nf-one-half">
-            <label>Required Field</label>
-            <input type="checkbox" class="nf-toggle" />
-        </div>
+        <section class="nf-settings">
+            <div class="nf-one-half">
+                <label>Label</label>
+                <input type="text" value="First Name" />
+            </div>
+            <div class="nf-one-half">
+                <label>Placeholder Text</label>
+                <input type="text" value="Enter your first name" />
+            </div>
+            <div class="nf-one-half">
+                <label>Label Position</label>
+                <div class="nf-select">
+                    <select>
+                        <option>Above Field</option>
+                        <option>Below Field</option>
+                        <option>Left of Field</option>
+                        <option>Right of Field</option>
+                        <option>Hide Label</option>
+                    </select>
+                </div>
+            </div>
+            <div class="nf-one-half">
+                <label>Required Field</label>
+                <input type="checkbox" class="nf-toggle" />
+            </div>
+        </section>
+        <section class="nf-settings">
+            <h3><span class="dashicons dashicons-arrow-down"></span>Restriction Settings</h3>
+            <div class="nf-settings-sub">
+                <div class="nf-one-half">
+                    <label>Input Mask</label>
+                    <div class="nf-select">
+                        <select>
+                            <option>None</option>
+                            <option>US Phone Number</option>
+                            <option>Date</option>
+                        </select>
+                    </div>
+                </div>
+                <fieldset>
+                    <legend>Limit input to this number</legend>
+                    <div class="nf-one-half">
+                        <input type="text" value="140" />
+                    </div>
+                    <div class="nf-one-half">
+                        <div class="nf-select">
+                            <select>
+                                <option>Character</option>
+                                <option>Words</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="nf-full">
+                        <label>Text to appear after counter</label>
+                        <input type="text" value="character(s) left" />
+                    </div>
+                </fieldset>
+            </div>
+        </section>
+        <section class="nf-settings">
+            <h3><span class="dashicons dashicons-arrow-right"></span>Advanced Settings</h3>
+        </section>
+        <section class="nf-settings">
+            <h3><span class="dashicons dashicons-arrow-right"></span>Conditional Settings</h3>
+        </section>
     </div>
 
 </div>

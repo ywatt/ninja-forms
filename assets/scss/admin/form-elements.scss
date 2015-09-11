@@ -51,8 +51,17 @@
     }
 }
 #nf-drawer {
-    label {
-        color: #666;
+    fieldset {
+        border: 1px solid #ccc;
+        clear: both;
+        display: block;
+    }
+    legend {
+        margin: 0 3px;
+        padding: 0 10px;
+    }
+    label, legend {
+        color: #424242;
         font-size: 13px;
         text-transform: uppercase;
     }
@@ -63,14 +72,27 @@
         padding: 12px 15px;
         width: 100%;
     }
-    select {
-        background: #f9f9f9;
-        border: 0;
-        margin-top: 5px;
-        height: 43px;
-        padding: 0 15px;
-        width: 100%;
-        -webkit-appearance: none;
+    .nf-select {
+        position: relative;
+        select {
+            background: #f9f9f9;
+            border: 0;
+            margin-top: 5px;
+            height: 43px;
+            padding: 0 30px 0 15px;
+            width: 100%;
+            -webkit-appearance: none;
+        }
+        &::after {
+            content: "\f347";
+            font-family: 'Dashicons';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            right: 0;
+            top: 19px;
+            z-index: 101;
+        }
     }
 }
 
