@@ -12,6 +12,9 @@ jQuery(document).ready(function($){
         $(".nf-field-wrap:first-child").removeClass("active");
         $("#field-0 .nf-item-controls").removeClass("nf-editing");
     });
+    $(".nf-toggle-drawer").click(function(){
+        $("#nf-drawer").toggleClass("nf-drawer-expand");
+    });
 });
 </script>
 <div id="nf-builder">
@@ -19,7 +22,7 @@ jQuery(document).ready(function($){
         <div id="nf-app-header">
             <div id="nf-logo"></div>
             <ul>
-                <li><a class="active" href="#">Form Fields</a></li>
+                <li class="selected"><a class="active" href="#">Form Fields</a></li>
                 <li><a href="#">Emails & Actions</a></li>
                 <li><a href="#">Settings</a></li>
                 <li><a class="preview" href="#">Preview Changes<span class="dashicons dashicons-visibility"></span></a></li>
@@ -136,6 +139,10 @@ for ($i=0; $i < 25; $i++) {
         <section class="nf-settings">
             <h3><span class="dashicons dashicons-arrow-right"></span>Conditional Settings</h3>
         </section>
+
+        <a class="nf-toggle-drawer">
+            <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
+        </a>
     </div>
 
 </div>

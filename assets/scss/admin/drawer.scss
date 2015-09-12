@@ -7,7 +7,11 @@
     bottom: 0;
     right: -1400px;
     overflow: scroll;
-    z-index: 900;
+    z-index: 99;
+    transition: width 1.0s ease;
+    &.nf-drawer-expand {
+        width: 100%;
+    }
 }
 .nf-drawer-opened {
     #nf-main {
@@ -19,7 +23,23 @@
     }
     #nf-drawer {
         right: 0;
-        transition: right 1.0s ease;
+        transition: all 1.0s ease;
+        &.nf-drawer-expand {
+            width: 100%;
+            transition: all 1.0s ease;
+            .nf-toggle-drawer {
+                .dashicons {
+                    transform: rotate(180deg);
+                    transition: all 1.0s ease;
+                }
+                .nf-expand-off {
+                    display: none;
+                }
+                .nf-expand-on {
+                    display: inline;
+                }
+            }
+        }
     }
     .nf-setting-wrap {
         width: 50%;
@@ -127,4 +147,22 @@
     clear: both;
     content: "";
     display: block;
+}
+.nf-toggle-drawer {
+    color: #aaa;
+    cursor: pointer;
+    display: block;
+    float: right;
+    margin-top: 40px;
+    text-decoration: none;
+    .dashicons {
+        margin-right: 5px;
+        transition: all 1.0s ease;
+    }
+    .nf-expand-off {
+        display: inline;
+    }
+    .nf-expand-on {
+        display: none;
+    }
 }

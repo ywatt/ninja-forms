@@ -12,6 +12,12 @@ jQuery(document).ready(function($){
         $(".nf-field-wrap:first-child").removeClass("active");
         $("#action-3 .nf-item-controls").removeClass("nf-editing");
     });
+
+    $(".nf-toggle-drawer").click(function(){
+        $("#nf-drawer").toggleClass("nf-drawer-expand");
+    });
+
+
 });
 </script>
 <div id="nf-builder">
@@ -129,6 +135,10 @@ jQuery(document).ready(function($){
                 </div>
             </fieldset>
         </section>
+
+        <a class="nf-toggle-drawer">
+            <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
+        </a>
 
     </div>
 

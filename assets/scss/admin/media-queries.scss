@@ -1,0 +1,87 @@
+@media only screen and (max-width: 1270px) {
+    #nf-header {
+        .preview {
+            content: "Preview";
+        }
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .ninja-forms-app {
+        &.folded {
+            #wpcontent {
+                margin-left: 36px;
+                padding: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                #wpbody {
+                    left: 0;
+                }
+            }
+        }
+    }
+    #nf-header {
+        ul {
+            li {
+                display: none;
+                &.selected {
+                    display: block;
+                }
+            }
+        }
+    }
+    #nf-main-header {
+        .nf-button {
+            display: none;
+        }
+    }
+    #nf-drawer {
+        width: 100%;
+    }
+    .nf-drawer-opened {
+        #nf-main {
+            width: 100%;
+        }
+    }
+    .nf-toggle-drawer {
+        display: none;
+    }
+}
+@media only screen and (max-width: 960px) {
+    .ninja-forms-app {
+        &.auto-fold {
+            #wpcontent {
+                margin-left: 36px;
+                padding: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                #wpbody {
+                    left: 0;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 782px) {
+    .ninja-forms-app {
+        &.folded, &.auto-fold {
+            #wpcontent {
+                margin-left: 0;
+            }
+        }
+    }
+    .nf-cancel {
+        display: none;
+    }
+}
+@media only screen and (max-width: 600px) {
+    #nf-builder {
+        margin-top: 46px;
+    }
+}

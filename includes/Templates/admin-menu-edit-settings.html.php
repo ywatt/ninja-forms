@@ -12,6 +12,9 @@ jQuery(document).ready(function($){
         $(".nf-setting-wrap:nth-child(1)").removeClass("active");
         $("#field-0 .nf-item-controls").removeClass("nf-editing");
     });
+    $(".nf-toggle-drawer").click(function(){
+        $("#nf-drawer").toggleClass("nf-drawer-expand");
+    });
 });
 </script>
 <div id="nf-builder">
@@ -19,9 +22,9 @@ jQuery(document).ready(function($){
         <div id="nf-app-header">
             <div id="nf-logo"></div>
             <ul>
-                <li><a class="active" href="#">Form Fields</a></li>
+                <li><a href="#">Form Fields</a></li>
                 <li><a href="#">Emails & Actions</a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a class="active" href="#">Settings</a></li>
                 <li><a class="preview" href="#">Preview Changes<span class="dashicons dashicons-visibility"></span></a></li>
             </ul>
             <input class="nf-button primary" type="submit" value="Publish Changes" />
@@ -30,7 +33,7 @@ jQuery(document).ready(function($){
 
         <div id="nf-app-sub-header">
             <!-- <h2>Contact Form</h2> -->
-            <a class="nf-add-new" href="#">Add new field</a>
+<!--             <a class="nf-add-new" href="#">Add new field</a> -->
             <!-- <input class="nf-button secondary" type="submit" value="Edit Emails and Actions" /> -->
 
         </div>
@@ -72,6 +75,10 @@ jQuery(document).ready(function($){
                 <input type="checkbox" class="nf-toggle" />
             </div>
         </section>
+
+        <a class="nf-toggle-drawer">
+            <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
+        </a>
 
     </div>
 
