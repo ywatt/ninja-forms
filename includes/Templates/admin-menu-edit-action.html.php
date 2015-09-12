@@ -119,12 +119,15 @@ jQuery(document).ready(function($){
                 <label>Subject</label>
                 <input type="text" value="Email to Use" />
             </div>
-            <div class="nf-full">
-                <label>Email Message</label>
-                <div class="nf-wp-editor">
-                <?php wp_editor( 'Your Email Message', 2, $settings = array() ); ?>
+            <fieldset class="nf-wp-editor">
+                <legend>Email Message</legend>
+                <div class="nf-full">
+
                 </div>
-            </div>
+                <div class="nf-full">
+                    <?php wp_editor( 'Your Email Message', 2, $settings = array() ); ?>
+                </div>
+            </fieldset>
         </section>
 
     </div>

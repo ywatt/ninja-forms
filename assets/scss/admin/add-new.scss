@@ -1,0 +1,30 @@
+.nf-add-new {
+    color: $accent_color;
+    display: inline-block;
+    padding: 0 0 0 46px;
+    text-decoration: none;
+    position: relative;
+    line-height: 30px;
+    // top: 180px;
+    // left: 40px;
+    z-index: 101;
+    &:after {
+        border: 2px solid $accent_color;
+        border-radius: 40px;
+        content: "+";
+        font-size: 22px;
+        padding: 8px;
+        position: absolute;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        line-height: 10px;
+    }
+    &:hover, &:active, &.active {
+        color: $accent_color;
+        &:after {
+            background: $accent_color;
+            color: #fff;
+        }
+    }
+}

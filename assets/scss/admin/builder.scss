@@ -2,32 +2,42 @@ $accent_color: #84CC1E;
 
 /*
 Normalize WordPress admin for Ninja Forms App
----------------------------------------------------------------------------------------------------- */
+---------------------------------------------*/
 
 @import "normalize";
 
 /*
 Header and Nav for Ninja Forms App
----------------------------------------------------------------------------------------------------- */
+---------------------------------- */
 
 @import "header";
+@import "main";
+@import "main-settings";
 
 /*
 Form field placeholders for the fields a user has added to their form
----------------------------------------------------------------------------------------------------- */
+----------------------------------------------------------------------- */
 @import "item-controls";
 @import "builder-fields";
 
 /*
 All styles used within the drawer
----------------------------------------------------------------------------------------------------- */
+--------------------------------- */
 
-@import "drawer-general";
+@import "drawer";
 @import "drawer-settings";
 @import "drawer-add";
 
 /*
-All styles used for displaying table content
----------------------------------------------------------------------------------------------------- */
+Various custom field styles
+--------------------------------- */
 
-@import "table-display";
+@import "add-new";
+@import "toggle";
+@import "dropdown";
+
+/*
+All styles used for displaying table content
+-------------------------------------------- */
+
+@import "tables";

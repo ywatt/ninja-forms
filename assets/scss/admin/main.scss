@@ -1,0 +1,16 @@
+#nf-main {
+    background: #fff;
+    /*border: 3px solid red;*/
+    padding: 20px 40px 40px;
+    width: 100%;
+    position: absolute;
+    top: 140px;
+    bottom: 0;
+    left: 0;
+    overflow: scroll;
+}
+#nf-main-content,
+#nf-main-header {
+    margin: 0 auto;
+    max-width: 700px;
+}
