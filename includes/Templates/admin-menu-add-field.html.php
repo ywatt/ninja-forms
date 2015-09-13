@@ -14,8 +14,20 @@ jQuery(document).ready(function($){
     $(".nf-toggle-drawer").click(function(){
         $("#nf-drawer").toggleClass("nf-drawer-expand");
     });
+    $(".nf-item-expand").click(function(){
+        $(".nf-group-wrap").toggleClass("expanded");
+    });
 });
 </script>
+
+<?php function nf_display_controls() {
+    echo '<ul class="nf-item-controls">
+        <li class="nf-item-expand"><a href="#"><span class="dashicons dashicons-admin-collapse"></span><span class="nf-tooltip">Expand</span></a></li>
+        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+        <li class="nf-item-edit"><a href="#"><span class="dashicons dashicons-admin-generic"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+    </ul>';
+} ?>
 <div id="nf-builder">
     <div id="nf-header">
         <div id="nf-app-header">
@@ -47,22 +59,28 @@ jQuery(document).ready(function($){
         </div>
         <div id="nf-main-content">
 
-<?php
-for ($i=0; $i < 25; $i++) {
-    if ( 0 == $i ) {
-        $field = 'First Name *';
-    } else {
-        $field = 'Textbox';
-    }
-    echo '<div class="nf-field-wrap">' . $field . '
-        <ul class="nf-item-controls">
-            <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-            <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-            <li class="nf-item-edit"><a href="#"><span class="dashicons dashicons-admin-generic"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-        </ul>
-    </div>';
-}
-?>
+            <div class="nf-field-wrap">First Name
+            <?php nf_display_controls(); ?></div>
+
+            <div class="nf-field-wrap">Last Name
+            <?php nf_display_controls(); ?></div>
+
+            <div class="nf-group-wrap">
+                Mailing Address (4 fields)
+                <?php nf_display_controls(); ?>
+                <div class="nf-field-wrap">Street Address
+                <?php nf_display_controls(); ?></div>
+
+                <div class="nf-field-wrap">City
+                <?php nf_display_controls(); ?></div>
+
+                <div class="nf-field-wrap">State
+                <?php nf_display_controls(); ?></div>
+
+                <div class="nf-field-wrap">Zip Code
+                <?php nf_display_controls(); ?></div>
+            </div>
+
         </div>
     </div>
 

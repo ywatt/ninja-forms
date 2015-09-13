@@ -29,7 +29,26 @@
                 display: none;
                 &.selected {
                     display: block;
+                    a {
+                        position: relative;
+                        //padding-right: 20px;
+                        &::after {
+                            content: "\f347";
+                            font-family: 'Dashicons';
+                            position: absolute;
+                            width: 30px;
+                            height: 30px;
+                            right: -40px;
+                            top: 0;
+                            z-index: 98;
+                        }
+                    }
                 }
+                // &:hover {
+                //     clear: both;
+                //     display: inline-block;
+                //     float: none;
+                // }
             }
         }
     }
@@ -38,12 +57,23 @@
             display: none;
         }
     }
+    .nf-setting-wrap {
+        width: 50%;
+    }
     #nf-drawer {
         width: 100%;
     }
     .nf-drawer-opened {
         #nf-main {
             width: 100%;
+        }
+        .nf-setting-wrap {
+            width: 50%;
+        }
+    }
+    .nf-drawer-closed {
+        .nf-setting-wrap {
+            width: 50%;
         }
     }
     .nf-toggle-drawer {

@@ -24,7 +24,7 @@ jQuery(document).ready(function($){
             <div id="nf-logo"></div>
             <ul>
                 <li><a href="#">Form Fields</a></li>
-                <li><a class="active" href="#">Emails & Actions</a></li>
+                <li class="selected"><a class="active" href="#">Emails & Actions</a></li>
                 <li><a href="#">Settings</a></li>
                 <li><a class="preview" href="#">Live Preview<span class="dashicons dashicons-visibility"></span></a></li>
             </ul>

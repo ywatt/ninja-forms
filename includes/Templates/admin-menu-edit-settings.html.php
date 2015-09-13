@@ -24,7 +24,7 @@ jQuery(document).ready(function($){
             <ul>
                 <li><a href="#">Form Fields</a></li>
                 <li><a href="#">Emails & Actions</a></li>
-                <li><a class="active" href="#">Settings</a></li>
+                <li class="selected"><a class="active" href="#">Settings</a></li>
                 <li><a class="preview" href="#">Preview Changes<span class="dashicons dashicons-visibility"></span></a></li>
             </ul>
             <input class="nf-button primary" type="submit" value="Publish Changes" />

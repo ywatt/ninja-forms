@@ -9,10 +9,13 @@
             color: #bbb;
             text-decoration: none;
             position: relative;
+            width: 20px;
+            height: 20px;
             &:hover {
                 color: #424242;
                 .nf-tooltip {
                     top: -45px;
+                    visibility:visible;
                     opacity: 1.0;
                     filter: alpha(opacity=100);
                     transition: all 1.0s ease;
@@ -38,6 +41,12 @@
                 &:after {
                     left: 20px;
                 }
+            }
+        }
+        &.nf-item-expand {
+            display: none;
+            .dashicons {
+                transform: rotate(-90deg);
             }
         }
         .nf-item-editing {
@@ -75,6 +84,7 @@
     top: -40px;
     left: -24px;
     opacity: 0.0;
+    visibility:hidden;
     filter: alpha(opacity=0);
     transition: all 1.0s ease;
     &:after {
