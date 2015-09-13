@@ -11,7 +11,9 @@ final class NF_Database_Models_Action extends NF_Abstracts_Model
 
     protected $_meta_table_name = 'nf_action_meta';
 
-    protected $_columns = array();
+    protected $_columns = array(
+        'title'
+    );
 
     public function __construct( $db, $id, $parent_id = '' )
     {

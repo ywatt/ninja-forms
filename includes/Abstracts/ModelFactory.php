@@ -96,7 +96,11 @@ class NF_Abstracts_ModelFactory
 
             $model_shell = new NF_Database_Models_Field( $this->_db, 0 );
 
-            $this->_fields = $model_shell->find( $form_id );
+            $fields = $model_shell->find( $form_id, $where );
+
+            foreach( $fields as $field ){
+                $this->_fields[ $field->get_id() ] = $field;
+            }
         }
 
         return $this->_fields;
@@ -111,9 +115,13 @@ class NF_Abstracts_ModelFactory
      *
      * @param string $id
      */
-    public function action( $id )
+    public function action( $id ='' )
     {
-        $this->_object = new NF_Database_Models_Action( $this->_db, $id );
+        $form_id = $this->_object->get_id();
+
+        $this->_object = new NF_Database_Models_Action( $this->_db, $id, $form_id );
+
+        return $this;
     }
 
     /**
@@ -132,10 +140,25 @@ class NF_Abstracts_ModelFactory
     /**
      * Returns an array of action objects for the set form (object).
      *
+     * @param array $where
+     * @param bool|FALSE $fresh
      * @return array
      */
-    public function get_actions()
+    public function get_actions( $where = array(), $fresh = FALSE)
     {
+        if( $where || $fresh || ! $this->_actions ){
+
+            $form_id = $this->_object->get_id();
+
+            $model_shell = new NF_Database_Models_Action( $this->_db, 0 );
+
+            $actions = $model_shell->find( $form_id, $where );
+
+            foreach( $actions as $action ){
+                $this->_actions[ $action->get_id() ] = $action;
+            }
+        }
+
         return $this->_actions;
     }
 
@@ -150,7 +173,11 @@ class NF_Abstracts_ModelFactory
      */
     public function object( $id )
     {
-        $this->_object = new NF_Database_Models_Object( $this->_db, $id );
+        $form_id = $this->_object->get_id();
+
+        $this->_object = new NF_Database_Models_Object( $this->_db, $id, $form_id );
+
+        return $this;
     }
 
     /**
@@ -169,10 +196,25 @@ class NF_Abstracts_ModelFactory
     /**
      * Returns an array of objects for the set object.
      *
+     * @param array $where
+     * @param bool|FALSE $fresh
      * @return array
      */
-    public function get_objects()
+    public function get_objects( $where = array(), $fresh = FALSE)
     {
+        if( $where || $fresh || ! $this->_objects ){
+
+            $form_id = $this->_object->get_id();
+
+            $model_shell = new NF_Database_Models_Object( $this->_db, 0 );
+
+            $objects = $model_shell->find( $form_id, $where );
+
+            foreach( $objects as $object ){
+                $this->_objects[ $object->get_id() ] = $object;
+            }
+        }
+
         return $this->_objects;
     }
 
