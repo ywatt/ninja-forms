@@ -25,21 +25,25 @@ abstract class NF_Abstracts_Action
      */
     protected $_priority = '10';
 
-    public function __construct()
-    {
-
-    }
-
     /**
      * Constructor
      */
-    public function register()
+    public function __construct()
     {
 
     }
 
     /*
      * PUBLIC METHODS
+     */
+
+    /**
+     * Save
+     */
+    public abstract function save();
+
+    /**
+     * Process
      */
     public abstract function process();
 }
