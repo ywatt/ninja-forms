@@ -127,7 +127,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 /*
                  * Admin menus used for building out the admin UI
                  *
-                 * Should be removed once building is complete
+                 * TODO: removed once building is complete
                  */
                 self::$instance->menus[ 'add-field']        = new NF_Admin_Menus_AddField();
                 self::$instance->menus[ 'edit-field']       = new NF_Admin_Menus_EditField();
@@ -139,7 +139,6 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  * AJAX Controllers
                  */
                 self::$instance->controllers[ 'form' ]       = new NF_AJAX_Controllers_Form();
-                self::$instance->controllers[ 'action' ]     = new NF_AJAX_Controllers_Action();
                 self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();
 
                 /*

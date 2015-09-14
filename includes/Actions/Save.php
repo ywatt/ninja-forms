@@ -33,9 +33,15 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
     }
 
-    /**
+    /*
     * PUBLIC METHODS
     */
+
+    public function save()
+    {
+
+    }
+
     public function process()
     {
 

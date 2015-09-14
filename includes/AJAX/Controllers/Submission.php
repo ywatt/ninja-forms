@@ -9,6 +9,6 @@ class NF_AJAX_Controllers_Submission
 
     public function process()
     {
-
+        $this->_respond();
     }
 }
