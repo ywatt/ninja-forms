@@ -13,7 +13,7 @@ final class NF_Display_Render
         $fields = Ninja_Forms()->form( $form_id )->get_fields();
 
         foreach( $fields as $field ){
-            $field_class = $field->get_settings( 'field_class' );
+            $field_class = $field->get_settings( 'type' );
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
             $this->template( 'fields-' . $field_class::TEMPLATE );
