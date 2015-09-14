@@ -13,7 +13,8 @@ final class NF_Database_Models_Field extends NF_Abstracts_Model
 
     protected $_columns = array(
         'title',
-        'parent_id'
+        'parent_id',
+        'field_class'
     );
     public function __construct( $db, $id, $parent_id = '' )
     {
