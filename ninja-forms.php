@@ -139,7 +139,6 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  * AJAX Controllers
                  */
                 self::$instance->controllers[ 'form' ]       = new NF_AJAX_Controllers_Form();
-                self::$instance->controllers[ 'action' ]     = new NF_AJAX_Controllers_Action();
                 self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();
 
                 /*
