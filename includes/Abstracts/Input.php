@@ -5,6 +5,8 @@
  */
 abstract class NF_Abstracts_Input extends NF_Abstracts_Field
 {
+    const TEMPLATE = 'input';
+
     protected $_name = 'input';
 
     protected $_group = 'standard_fields';
