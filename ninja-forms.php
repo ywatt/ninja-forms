@@ -154,6 +154,8 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 
                 /*
                  * Temporary Shortcode for working on the frontend JS display.
+                 *
+                 * TODO: removed once building is complete
                  */
                 require_once( self::$dir . 'includes/Display/Shortcodes/tmp-frontend.php' );
 
