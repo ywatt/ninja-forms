@@ -2,12 +2,22 @@
 
 final class NF_Display_Render
 {
+    protected $_form = '';
+
     protected $_templates = array();
 
-    public function __construct()
+    public function __construct( $form_id = 1 )
     {
-        $this->template( 'fields-input' );
-        $this->template( 'fields-checkbox' );
+        $this->_form = Ninja_Forms()->form( $form_id );
+
+        $fields = Ninja_Forms()->form( $form_id )->get_fields();
+
+        foreach( $fields as $field ){
+            $field_class = $field->get_settings( 'field_class' );
+            $field_class = Ninja_Forms()->fields[ $field_class ];
+
+            $this->template( 'fields-' . $field_class::TEMPLATE );
+        }
     }
 
     protected function template( $file_name = '' )
