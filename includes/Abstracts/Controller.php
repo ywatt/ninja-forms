@@ -8,7 +8,7 @@ abstract class NF_Abstracts_Controller
 
     public function __construct()
     {
-        // TODO: Check Nonce
+        // TODO: Add Nonce Check
     }
 
     protected function _respond()
