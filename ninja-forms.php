@@ -225,7 +225,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 
                 if( ! class_exists( $class_name ) ) continue;
 
-                $return[ $filename ] = new $class_name;
+                $return[ strtolower( $filename ) ] = new $class_name;
             }
 
             return $return;
