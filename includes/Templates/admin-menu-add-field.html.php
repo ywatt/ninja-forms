@@ -81,6 +81,12 @@ jQuery(document).ready(function($){
                 <?php nf_display_controls(); ?></div>
             </div>
 
+            <div class="nf-field-wrap">Message
+            <?php nf_display_controls(); ?></div>
+
+            <div class="nf-field-wrap">Submit
+            <?php nf_display_controls(); ?></div>
+
         </div>
     </div>
 
