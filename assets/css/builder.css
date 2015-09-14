@@ -78,7 +78,7 @@ Form field placeholders for the fields a user has added to their form
 .nf-field-wrap { background: #fff; border: 1px solid #ccc; border-radius: 4px; color: #888; margin-bottom: 20px; padding: 15px 20px; }
 .nf-field-wrap.active { border: 1px solid #84CC1E; color: #424242; font-weight: bold; }
 
-.nf-group-wrap { background: #fff; border: 1px solid #ccc; border-radius: 4px; color: #888; margin: 0 -10px 20px; padding: 15px 30px; position: relative; }
+.nf-group-wrap { background: #fff; border: 2px solid #ccc; border-radius: 4px; color: #888; margin: 0 -10px 20px; padding: 15px 30px; position: relative; }
 .nf-group-wrap .nf-item-controls { width: 128px; }
 .nf-group-wrap .nf-item-expand { display: inline !important; }
 .nf-group-wrap .nf-field-wrap { margin-left: -20px; margin-right: -20px; visibility: hidden; opacity: 0.0; filter: alpha(opacity=0); position: absolute; top: 0; left: 0; right: 0; }
