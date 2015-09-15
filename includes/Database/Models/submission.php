@@ -47,7 +47,9 @@ final class NF_Database_Models_Submission
      */
     protected function format_meta_query( $where = array() )
     {
-        $return = array();
+        $return = array(
+            '_form_id' => $this->_form_id
+        );
 
         foreach( $where as $key => $value ){
 
