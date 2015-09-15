@@ -15,7 +15,7 @@ abstract class NF_Abstracts_Controller
     {
         $response = array( 'errors' => $this->_errors, 'data' => $this->_data );
 
-        echo json_encode( $response );
+        echo wp_json_encode( $response );
 
         wp_die(); // this is required to terminate immediately and return a proper response
     }
