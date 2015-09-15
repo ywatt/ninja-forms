@@ -114,6 +114,7 @@ class NF_Abstracts_ModelFactory
      * Sets the parent object for chained methods as an Action.
      *
      * @param string $id
+     * @return $this
      */
     public function action( $id ='' )
     {
@@ -170,6 +171,7 @@ class NF_Abstracts_ModelFactory
      * Sets the parent object for chained methods as an Object.
      *
      * @param string $id
+     * @return $this
      */
     public function object( $id )
     {
