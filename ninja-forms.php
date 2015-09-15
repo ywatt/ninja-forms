@@ -159,6 +159,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 require_once( self::$dir . 'includes/Display/Shortcodes/tmp-frontend.php' );
 
+                /*
+                 * Submission CPT
+                 */
+                new NF_Admin_CPT_Submission();
+
             }
 
             return self::$instance;

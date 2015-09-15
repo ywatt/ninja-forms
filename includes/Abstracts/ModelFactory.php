@@ -220,5 +220,43 @@ class NF_Abstracts_ModelFactory
         return $this->_objects;
     }
 
+    /*
+     * SUBMISSIONS
+     */
+
+    public function sub( $id = '' )
+    {
+        $form_id = $this->_object->get_id();
+
+        $this->_object = new NF_Database_Models_Submission( $this->_db, $id, $form_id );
+
+        return $this;
+    }
+
+    public function get_sub( $id )
+    {
+        $parent_id = $this->_object->get_id();
+
+        return $this->_objects[ $id ] = new NF_Database_Models_Submission( $this->_db, $id, $parent_id );
+    }
+
+    public function get_subs( $where = array(), $fresh = FALSE )
+    {
+        if( $where || $fresh || ! $this->_objects ){
+
+            $form_id = $this->_object->get_id();
+
+            $model_shell = new NF_Database_Models_Submission( $this->_db, 0 );
+
+            $objects = $model_shell->find( $form_id, $where );
+
+            foreach( $objects as $object ){
+                $this->_objects[ $object->get_id() ] = $object;
+            }
+        }
+
+        return $this->_objects;
+    }
+
 
 } // End Class NF_Abstracts_ModelFactory
