@@ -51,14 +51,7 @@ final class NF_Database_Models_Submission
 
         foreach( $where as $key => $value ){
 
-            if( is_array( $value ) ){
-                $return[] = $value;
-            } else {
-                $return[] = array(
-                    'key' => $key,
-                    'value' => $value
-                );
-            }
+            $return[] = ( is_array( $value ) ) ? $value : array( 'key' => $key, 'value' => $value );
         }
 
         return $return;
