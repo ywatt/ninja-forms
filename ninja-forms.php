@@ -181,6 +181,10 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
             }
         }
 
+        /*
+         * PUBLIC API WRAPPERS
+         */
+
         /**
          * Form Model Factory Wrapper
          *
