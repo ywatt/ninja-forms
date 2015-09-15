@@ -228,7 +228,7 @@ class NF_Abstracts_ModelFactory
     {
         $form_id = $this->_object->get_id();
 
-        $this->_object = new NF_Database_Models_Submission( $this->_db, $id, $form_id );
+        $this->_object = new NF_Database_Models_Submission( $id, $form_id );
 
         return $this;
     }
@@ -237,7 +237,7 @@ class NF_Abstracts_ModelFactory
     {
         $parent_id = $this->_object->get_id();
 
-        return $this->_objects[ $id ] = new NF_Database_Models_Submission( $this->_db, $id, $parent_id );
+        return $this->_objects[ $id ] = new NF_Database_Models_Submission( $id, $parent_id );
     }
 
     public function get_subs( $where = array(), $fresh = FALSE )
@@ -246,7 +246,7 @@ class NF_Abstracts_ModelFactory
 
             $form_id = $this->_object->get_id();
 
-            $model_shell = new NF_Database_Models_Submission( $this->_db, 0 );
+            $model_shell = new NF_Database_Models_Submission( 0 );
 
             $objects = $model_shell->find( $form_id, $where );
 

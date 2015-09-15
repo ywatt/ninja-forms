@@ -5,15 +5,12 @@
  */
 final class NF_Database_Models_Submission
 {
-    protected $_db = '';
-
     protected $_id = '';
 
     protected $_form_id = '';
 
-    public function __construct( $db, $id = '', $form_id = '' )
+    public function __construct( $id = '', $form_id = '' )
     {
-        $this->_db = $db;
         $this->_id = $id;
         $this->_form_id = $form_id;
     }
