@@ -2,13 +2,24 @@
 
 final class NF_Display_Render
 {
-    protected $_form = '';
+    public static $loaded_templates = array();
 
-    protected $_templates = array();
-
-    public function __construct( $form_id = 1 )
+    public static function localize( $form_id )
     {
-        $this->_form = Ninja_Forms()->form( $form_id );
+        $form = Ninja_Forms()->form( $form_id )->get();
+
+        ?>
+
+            <div id="nf_form_<?php echo $form_id; ?>"></div>
+
+        <?php
+
+        ?>
+        <script>
+            var form_<?php echo $form_id; ?> = JSON.parse( '<?php echo json_encode( $form->get_settings() ); ?>' );
+            form_<?php echo $form_id; ?>.fields = [];
+        </script>
+        <?php
 
         $fields = Ninja_Forms()->form( $form_id )->get_fields();
 
@@ -16,24 +27,34 @@ final class NF_Display_Render
             $field_class = $field->get_settings( 'type' );
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
-            $this->template( 'fields-' . $field_class::TEMPLATE );
+            ?>
+            <script>
+                var field = JSON.parse( '<?php echo json_encode( $field->get_settings() ); ?>' );
+                form_<?php echo $form_id; ?>.fields.push( field );
+            </script>
+            <?php
+
+            self::template( $field_class::TEMPLATE );
         }
     }
 
-    protected function template( $file_name = '' )
+    protected static function template( $file_name = '' )
     {
         if( ! $file_name ) return;
 
-        Ninja_Forms::template( $file_name, '.html' );
+        if( self::is_template_loaded( $file_name ) ) return;
+
+        Ninja_Forms::template( 'fields-' . $file_name, '.html' );
+        self::$loaded_templates[] = $file_name;
     }
 
     /*
      * UTILITY
      */
 
-    protected function is_template_loaded( $template_name )
+    protected static function is_template_loaded( $template_name )
     {
-        return ( in_array( $template_name, array_keys( $this->_templates ) ) ) ? TRUE : FALSE ;
-    }
+        return ( in_array( $template_name, self::$loaded_templates ) ) ? TRUE : FALSE ;
+}
 
 } // End Class NF_Display_Render
