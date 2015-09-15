@@ -135,6 +135,8 @@ final class NF_Database_Models_Submission
             $this->_save_field_value( $field_id, $value );
         }
 
+        update_post_meta( $this->_id, '_form_id', $this->_form_id );
+
         return $this;
     }
 
