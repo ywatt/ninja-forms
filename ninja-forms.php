@@ -194,6 +194,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
             return new NF_Abstracts_ModelFactory( $wpdb, $id );
         }
 
+        public function display( $form_id )
+        {
+            if( ! $form_id ) return;
+
+            NF_Display_Render::localize( $form_id );
+        }
+
         public static function template( $file_name = '', $ext = '.html.php' )
         {
             if( ! $file_name ) return;
