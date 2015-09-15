@@ -102,7 +102,8 @@ final class NF_Database_Models_Submission
     {
         if( ! $this->_id ){
             $sub = array(
-                'post_type' => 'nf_sub'
+                'post_type' => 'nf_sub',
+                'post_status' => 'publish'
             );
 
             $this->_id = wp_insert_post( $sub );
