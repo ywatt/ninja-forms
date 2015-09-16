@@ -41,6 +41,37 @@
             }
         }
     }
+    #nf-main-content,
+    #nf-main-header {
+        margin: 0 auto;
+        //padding-left: 60px;
+        transition: all 1.0s ease;
+    }
+    #nf-header {
+        #nf-logo {
+            opacity: 0.0;
+            filter: alpha(opacity=0);
+            transition: all 1.0s ease;
+        }
+    }
+    .nf-add-new {
+        padding-left: 32px;
+        text-indent: -500px;
+        width:55px;
+        height:52px;
+        top: 60px;
+        left: 70px;
+        transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;
+        &:after {
+            box-shadow: 0 3px 3px rgba(0,0,0,0.3);
+            font-size: 40px;
+            padding: 15px 8px 2px 10px;
+            width:25px;
+            height:25px;
+            text-indent: 0px;
+            transition: all 1.0s ease 0s
+        }
+    }
     .nf-setting-wrap {
         width: 50%;
         transition: width 1.0s ease;

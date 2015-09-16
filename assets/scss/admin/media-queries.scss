@@ -1,8 +1,12 @@
-@media only screen and (max-width: 1270px) {
+@media only screen and (max-width: 1150px) {
     #nf-header {
         .preview {
             content: "Preview";
         }
+    }
+    #nf-main-content,
+    #nf-main-header {
+        //margin: 0 10% 0 30%;
     }
 }
 

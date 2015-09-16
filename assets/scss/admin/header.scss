@@ -1,6 +1,6 @@
 #nf-header {
-    // background: red;
-    height: 120px;
+    //background: red;
+    height: 100px;
     #nf-logo {
         background-image: url( '../img/ninja-forms-app-header-logo.png' );
         float: left;
@@ -10,6 +10,9 @@
             background-image: url( '../img/ninja-forms-app-header-logo@2x.png' );
             background-size: 80px 30px;
         }
+        opacity: 1.0;
+        filter: alpha(opacity=100);
+        transition: all 1.0s ease;
     }
     ul {
         li {
@@ -58,6 +61,7 @@
     padding: 0;
     h2 {
         display: inline-block;
+        margin: 0;
     }
     &:after {
         clear: both;

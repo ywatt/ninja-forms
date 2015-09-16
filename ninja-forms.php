@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
@@ -134,6 +134,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->menus[ 'add-action']       = new NF_Admin_Menus_AddAction();
                 self::$instance->menus[ 'edit-action']      = new NF_Admin_Menus_EditAction();
                 self::$instance->menus[ 'edit-settings']    = new NF_Admin_Menus_EditSettings();
+                self::$instance->menus[ 'fields-layout']    = new NF_Admin_Menus_FieldsLayout();
 
                 /*
                  * AJAX Controllers

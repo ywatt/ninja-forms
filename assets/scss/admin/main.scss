@@ -4,7 +4,7 @@
     padding: 20px 40px 40px;
     width: 100%;
     position: absolute;
-    top: 140px;
+    top: 120px;
     bottom: 0;
     left: 0;
     overflow: scroll;
@@ -13,4 +13,19 @@
 #nf-main-header {
     margin: 0 auto;
     max-width: 700px;
+    transition: all 1.0s ease;
+}
+#nf-main-header {
+    padding: 0 0 20px;
+    .nf-button {
+        float: right;
+    }
+    h2 {
+        display: inline-block;
+    }
+    &:after {
+        clear: both;
+        content: "";
+        display: block;
+    }
 }
