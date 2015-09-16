@@ -5,6 +5,8 @@
  */
 class NF_Fields_Checkbox extends NF_Abstracts_Input
 {
+    const TEMPLATE = 'checkbox';
+
     protected $_name = 'checkbox';
 
     protected $_nicename = 'Checkbox';

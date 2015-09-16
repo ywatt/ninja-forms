@@ -155,8 +155,15 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 
                 /*
                  * Temporary Shortcode for working on the frontend JS display.
+                 *
+                 * TODO: removed once building is complete
                  */
                 require_once( self::$dir . 'includes/Display/Shortcodes/tmp-frontend.php' );
+
+                /*
+                 * Submission CPT
+                 */
+                new NF_Admin_CPT_Submission();
 
             }
 
@@ -180,6 +187,10 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
             }
         }
 
+        /*
+         * PUBLIC API WRAPPERS
+         */
+
         /**
          * Form Model Factory Wrapper
          *
@@ -191,6 +202,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
             global $wpdb;
 
             return new NF_Abstracts_ModelFactory( $wpdb, $id );
+        }
+
+        public function display( $form_id )
+        {
+            if( ! $form_id ) return;
+
+            NF_Display_Render::localize( $form_id );
         }
 
         public static function template( $file_name = '', $ext = '.html.php' )
@@ -226,7 +244,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 
                 if( ! class_exists( $class_name ) ) continue;
 
-                $return[ $filename ] = new $class_name;
+                $return[ strtolower( $filename ) ] = new $class_name;
             }
 
             return $return;

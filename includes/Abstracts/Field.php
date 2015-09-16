@@ -38,7 +38,7 @@ abstract class NF_Abstracts_Field
     /**
      * @var string
      */
-     protected $_template ='';
+     const TEMPLATE = '';
 
     /**
      * Constructor
