@@ -42,8 +42,10 @@ final class NF_Actions_SuccessMessage extends NF_Abstracts_Action
 
     }
 
-    public function process()
+    public function process( $data )
     {
+        $data['success_message'] = 'Success Again!';
 
+        return $data;
     }
 }

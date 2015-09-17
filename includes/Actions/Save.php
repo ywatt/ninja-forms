@@ -42,8 +42,15 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
     }
 
-    public function process()
+    public function process( $data )
     {
+        $sub = Ninja_Forms()->form( 1 )->sub()->get();
 
+        foreach( $data['field_values'] as $id => $value ){
+
+            $sub->update_field_value( $id, $value );
+        }
+
+        $sub->save();
     }
 }
