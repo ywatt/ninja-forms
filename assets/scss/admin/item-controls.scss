@@ -1,7 +1,6 @@
 .nf-item-controls {
     float: right;
     margin: 0;
-    width: 96px;
     li {
         float: left;
         margin: 0 6px;
@@ -55,7 +54,6 @@
     }
     &.nf-editing {
         font-weight: normal;
-        width: 120px;
         a {
             color: #424242;
         }
@@ -65,6 +63,11 @@
         }
         .nf-item-editing {
             display: inline;
+        }
+        .nf-item-edit {
+            .dashicons {
+                margin-right: 12px
+            }
         }
     }
 }

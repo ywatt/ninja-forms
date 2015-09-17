@@ -6,19 +6,39 @@
     font-size: 17px;
     padding: 10px 30px;
     text-transform: uppercase;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     &.primary {
-        background: #1EA9EA;
+        background: $cta_color;
         color: #fff;
     }
     &.secondary {
         background: #fff;
-        border: 1px solid #1EA9EA;
-        color: #1EA9EA;
+        border: 1px solid $cta_color;
+        color: $cta_color;
     }
 }
 .nf-cancel {
     color: #999;
     font-size: 15px;
+}
+.nf-mobile {
+    background: $cta_color;
+    border-radius: 4px;
+    color: #fff;
+    display: none;
+    float: right;
+    padding: 5px 7px 5px 5px;
+    text-decoration: none;
+    transition: margin 0.5s ease;
+    .dashicons {
+        font-size: 30px;
+        width: 32px;
+        height: 30px;
+    }
+    &:hover {
+        color: #fff;
+    }
 }
 
 .ninja-forms-app {

@@ -8,6 +8,8 @@
     bottom: 0;
     left: 0;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    transition: left 0.5s ease;
 }
 #nf-main-content,
 #nf-main-header {

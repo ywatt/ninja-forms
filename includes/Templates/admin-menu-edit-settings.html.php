@@ -32,10 +32,7 @@ jQuery(document).ready(function($){
         </div>
 
         <div id="nf-app-sub-header">
-            <!-- <h2>Contact Form</h2> -->
-<!--             <a class="nf-add-new" href="#">Add new field</a> -->
-            <!-- <input class="nf-button secondary" type="submit" value="Edit Emails and Actions" /> -->
-
+            <h2>Contact Form</h2>
         </div>
 
     </div>
@@ -43,7 +40,6 @@ jQuery(document).ready(function($){
     <div id="nf-main">
         <!-- main content area. Where fields and actions are rendered. -->
         <div id="nf-main-header">
-            <h2>Contact Form</h2>
         </div>
         <div id="nf-main-content">
             <div class="nf-setting-wrap"><span>Display Settings</span></div>
