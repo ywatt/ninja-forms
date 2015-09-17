@@ -2,12 +2,25 @@
 
 abstract class NF_Abstracts_Controller
 {
+    /**
+     * Data (Misc.) passed back to the client in the Response.
+     *
+     * @var array
+     */
     protected $_data = array();
+
+    /*
+     * PUBLIC METHODS
+     */
 
     public function __construct()
     {
         // TODO: Add Nonce Check
     }
+
+    /*
+     * PROTECTED METHODS
+     */
 
     protected function _respond()
     {
