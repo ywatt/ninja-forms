@@ -2,6 +2,8 @@
 
 class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 {
+    protected $_form_id = '';
+
     protected $_field_values = array();
 
     public function __construct()
