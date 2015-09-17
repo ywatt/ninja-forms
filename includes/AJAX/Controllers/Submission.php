@@ -2,6 +2,8 @@
 
 class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 {
+    protected $_form_id = '';
+
     protected $_field_values = array();
 
     public function __construct()
@@ -13,8 +15,6 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     public function process()
     {
         $this->_form_id = $_POST['nf_form'][ 'id' ];
-
-        $this->_actions = Ninja_Forms()->form( $this->_form_id )->get_actions();
 
         foreach( $_POST['nf_form']['fields'] as $field ){
 
@@ -36,7 +36,9 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     protected function run_actions()
     {
-        foreach( $this->_actions as $action ){
+        $actions = Ninja_Forms()->form( $this->_form_id )->get_actions();
+
+        foreach( $actions as $action ){
             $type = $action->get_settings( 'type' );
 
             $data = Ninja_Forms()->actions[ $type ]->process( $this->_data );
