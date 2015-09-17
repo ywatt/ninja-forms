@@ -10,13 +10,22 @@ final class NF_Display_Render
 
         ?>
 
-            <div id="nf_form_<?php echo $form_id; ?>"></div>
+            <div id="nf_form_<?php echo $form_id; ?>" class="nf_form_container">
+                Form Container, Ya'll!
+            </div>
+            <style>
+                .nf_form_container {
+                    padding: 10px;
+                    border: 1px solid red;
+                }
+            </style>
 
         <?php
 
         ?>
         <script>
             var form_<?php echo $form_id; ?> = JSON.parse( '<?php echo json_encode( $form->get_settings() ); ?>' );
+            form_<?php echo $form_id; ?>.id = <?php echo $form_id; ?>;
             form_<?php echo $form_id; ?>.fields = [];
         </script>
         <?php
@@ -27,6 +36,8 @@ final class NF_Display_Render
             $field_class = $field->get_settings( 'type' );
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
+            $field->update_setting( 'value', time() );
+            $field->update_setting( 'id', $field->get_id() );
             ?>
             <script>
                 var field = JSON.parse( '<?php echo json_encode( $field->get_settings() ); ?>' );
@@ -35,6 +46,7 @@ final class NF_Display_Render
             <?php
 
             self::template( $field_class::TEMPLATE );
+
         }
     }
 
