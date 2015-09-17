@@ -42,7 +42,7 @@ final class NF_Actions_Redirect extends NF_Abstracts_Action
 
     }
 
-    public function process( $data )
+    public function process( $form_id, $data )
     {
         $data['redirect'] = 'http://ninjaforms.com';
 
