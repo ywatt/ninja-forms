@@ -2,8 +2,6 @@
 
 abstract class NF_Abstracts_Controller
 {
-    protected $_errors = array();
-
     protected $_data = array();
 
     public function __construct()
