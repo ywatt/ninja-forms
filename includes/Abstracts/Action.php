@@ -45,5 +45,5 @@ abstract class NF_Abstracts_Action
     /**
      * Process
      */
-    public abstract function process();
+    public abstract function process( $data );
 }
