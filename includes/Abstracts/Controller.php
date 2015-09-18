@@ -3,6 +3,13 @@
 abstract class NF_Abstracts_Controller
 {
     /**
+     * Errors passed back to the client in the Reponse.
+     *
+     * @var array
+     */
+    protected $_errors = array();
+
+    /**
      * Data (Misc.) passed back to the client in the Response.
      *
      * @var array
