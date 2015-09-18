@@ -42,8 +42,9 @@ final class NF_Actions_SuccessMessage extends NF_Abstracts_Action
 
     }
 
-    public function process( $form_id, $data )
+    public function process( $action_id, $form_id, $data )
     {
+        $settings = Ninja_Forms()->form( $form_id )->action( $action_id );
         $data['success_message'] = 'Success Again!';
 
         return $data;

@@ -16,13 +16,9 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     {
         $this->_form_id = $_POST['nf_form'][ 'id' ];
 
-        foreach( $_POST['nf_form']['fields'] as $field ){
-
-            $field_id = $field['id'];
-            $this->_data['field_values'][ $field_id ] = $field['value'];
-        }
-
         $this->_errors[ 'sample' ] = 'This is a sample error';
+
+        $this->validate_fields();
 
         $this->run_actions();
 
@@ -31,7 +27,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     protected function validate_fields()
     {
+        foreach( $_POST['nf_form']['fields'] as $field ){
 
+            $field_id = $field['id'];
+            $this->_data['field_values'][ $field_id ] = $field['value'];
+        }
     }
 
     protected function run_actions()
@@ -41,7 +41,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         foreach( $actions as $action ){
             $type = $action->get_settings( 'type' );
 
-            $data = Ninja_Forms()->actions[ $type ]->process( $this->_data );
+            $data = Ninja_Forms()->actions[ $type ]->process( $action->get_id(), $this->_form_id, $this->_data );
 
             $this->_data = ( $data ) ? $data :  $this->_data;
         }

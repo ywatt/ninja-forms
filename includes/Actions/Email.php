@@ -42,7 +42,7 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
     }
 
-    public function process( $form_id, $data )
+    public function process( $action_id, $form_id, $data )
     {
         wp_mail( 'kyle@wpninjas.com', 'Ninja Forms 3.0 - Email Action', 'This is a test.' );
     }
