@@ -16,8 +16,6 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     {
         $this->_form_id = $_POST['nf_form'][ 'id' ];
 
-        $this->_errors[ 'sample' ] = 'This is a sample error';
-
         $this->validate_fields();
 
         $this->run_actions();
