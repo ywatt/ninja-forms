@@ -121,6 +121,10 @@ class NF_Abstracts_Model
             }
         }
 
+        foreach( $this->_settings as $key => $value ){
+            $this->_settings[ $key ] = maybe_unserialize( $value );
+        }
+
         $only = func_get_args();
         if ( $only && is_array($only)
             // And if the array is NOT multidimensional
@@ -327,6 +331,7 @@ class NF_Abstracts_Model
         if( ! $this->_settings ) return;
 
         foreach( $this->_settings as $key => $value ){
+            $value = maybe_serialize( $value );
             $this->_results[] = $this->_save_setting( $key, $value );
         }
 
