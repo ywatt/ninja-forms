@@ -1,6 +1,7 @@
 #nf-header {
     //background: red;
     height: 100px;
+    transition: margin 0.5s ease;
     #nf-logo {
         background-image: url( '../img/ninja-forms-app-header-logo.png' );
         float: left;
@@ -15,12 +16,17 @@
         transition: all 1.0s ease;
     }
     ul {
+        display: inline-block;
+        margin: 0;
         li {
             float: left;
+            &.nf-mobile {
+                display: none;
+            }
             a {
                 color: #424242;
                 display: block;
-                margin: 16px 30px;
+                margin: 16px 28px;
                 padding-bottom: 8px;
                 text-decoration: none;
                 &.active {
@@ -34,6 +40,11 @@
                     }
                 }
             }
+        }
+        &:after {
+            clear: both;
+            content: "";
+            display: block;
         }
     }
     input[type=submit] {
@@ -51,6 +62,7 @@
     }
 }
 #nf-app-header {
+    height: 50px;
     &:after {
         clear: both;
         content: "";
@@ -58,18 +70,17 @@
     }
 }
 #nf-app-sub-header {
+    height: 50px;
     padding: 0;
     h2 {
         display: inline-block;
         margin: 0;
+        padding: 10px 0;
+        transition: all 1.0s ease 0s
     }
     &:after {
         clear: both;
         content: "";
         display: block;
-    }
-    .nf-add-new {
-        float: left;
-        margin: 8px 20px 0 0;
     }
 }
