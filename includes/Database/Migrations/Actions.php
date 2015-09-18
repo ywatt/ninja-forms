@@ -16,7 +16,7 @@ class NF_Database_Migrations_Actions extends NF_Abstracts_Migration
             `id` int NOT NULL AUTO_INCREMENT,
             `title` tinytext,
             `type` tinytext,
-            `active` boolean,
+            `active` boolean DEFAULT TRUE,
             `parent_id` int NOT NULL,
             `created_at` TIMESTAMP,
             `updated_at` DATETIME,

@@ -39,7 +39,10 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         $actions = Ninja_Forms()->form( $this->_form_id )->get_actions();
 
         foreach( $actions as $action ){
-            $type = $action->get_settings( 'type' );
+
+            if( ! $action->get_setting( 'active' ) ) continue;
+
+            $type = $action->get_setting( 'type' );
 
             $data = Ninja_Forms()->actions[ $type ]->process( $action->get_id(), $this->_form_id, $this->_data );
 

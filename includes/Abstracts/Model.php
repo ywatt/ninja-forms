@@ -82,6 +82,11 @@ class NF_Abstracts_Model
         return $this->_id;
     }
 
+    public function get_setting( $setting )
+    {
+        return $this->get_settings( $setting );
+    }
+
     /**
      * Get Settings
      *
