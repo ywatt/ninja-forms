@@ -4,12 +4,12 @@
     display:block;
     padding: 0 0 0 46px;
     text-decoration: none;
-    position: fixed;
+    position: absolute;
     line-height: 32px;
     width: 165px;
     height: 32px;
-    top: 170px;
-    left: 75px;
+    top: 135px;
+    left: 40px;
     z-index: 98;
     text-indent: 0px;
     overflow: hidden;
@@ -36,7 +36,14 @@
         &:after {
             background: #fff;
             color: $accent_color;
+            transform: rotate(360deg);
             transition: all 1.0s ease;
+        }
+    }
+}
+.ninja-forms-app {
+    &.folded {
+        .nf-add-new {
         }
     }
 }

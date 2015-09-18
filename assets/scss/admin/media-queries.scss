@@ -1,4 +1,44 @@
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1255px) {
+    .nf-cancel {
+        display: none;
+    }
+    #nf-app-sub-header {
+        h2 {
+            padding-left: 80px;
+            transition: all 1.0s ease 0s
+        }
+    }
+    .nf-add-new {
+        padding-left: 32px;
+        text-indent: -500px;
+        width:60px;
+        height:60px;
+        top: 70px;
+        left: 40px;
+        transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;
+        &:after {
+            //box-shadow: 0 3px 3px rgba(0,0,0,0.3);
+            font-size: 40px;
+            padding: 16px;
+            line-height: 21px;
+            width:24px;
+            height:24px;
+            text-indent: 0px;
+            transition: all 1.0s ease 0s
+        }
+        &:hover {
+            &:after {
+                //box-shadow: 0 -3px 3px rgba(0,0,0,0.3);
+            }
+        }
+    }
+
+    .folded {
+    }
+
+}
+
+@media only screen and (max-width: 1132px) {
     #nf-header {
         .preview {
             content: "Preview";
@@ -8,8 +48,118 @@
     #nf-main-header {
         //margin: 0 10% 0 30%;
     }
+    .nf-cancel {
+        display: none;
+    }
 }
-
+@media only screen and (max-width: 1030px) {
+    #nf-header {
+        ul {
+            display: none;
+        }
+        .nf-button.primary {
+            display: none;
+        }
+    }
+    .nf-mobile {
+        display: inline-block;
+    }
+    #nf-app-sub-header {
+        h2 {
+            padding-left: 0;
+            transition: all 1.0s ease 0s
+        }
+    }
+    .nf-add-new {
+        position: fixed;
+        top: auto;
+        left: auto;
+        bottom: 20px;
+        right: 20px;
+        transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;
+    }
+    #nf-main-header {
+        .nf-button {
+            display: none;
+        }
+    }
+    .nf-item-controls {
+        li {
+            margin: -4px 15px 0;
+            a {
+                width: 30px;
+                height: 30px;
+                &:hover {
+                    .nf-tooltip {
+                        top: -45px;
+                        visibility:visible;
+                        opacity: 1.0;
+                        filter: alpha(opacity=100);
+                        transition: all 1.0s ease;
+                        transition-delay: 1.4s;
+                    }
+                }
+                .dashicons {
+                    font-size: 26px;
+                    padding-top: 1px;
+                }
+            }
+            &.nf-item-duplicate {
+                .nf-tooltip {
+                    left: -32px;
+                    &:after {
+                        left: 36px;
+                    }
+                }
+            }
+            &.nf-item-edit {
+                .nf-tooltip {
+                    left: -16px;
+                    &:after {
+                        left: 20px;
+                    }
+                }
+            }
+            &.nf-item-expand {
+                display: none;
+                .dashicons {
+                    transform: rotate(-90deg);
+                }
+            }
+            .nf-item-editing {
+                display: none;
+            }
+        }
+        &.nf-editing {
+            font-weight: normal;
+            a {
+                color: #424242;
+            }
+            .nf-item-delete,
+            .nf-item-duplicate {
+                display: none;
+            }
+            .nf-item-editing {
+                display: inline;
+                line-height: 26px;
+            }
+        }
+    }
+    .nf-one-half, .nf-on-third {
+        float: none;
+        width: 100%;
+    }
+    .nf-drawer-expand {
+        .nf-one-half {
+            float: left;
+            width: 50%;
+        }
+        .nf-on-third {
+            float: left;
+            width: 33%;
+        }
+    }
+}
 @media only screen and (max-width: 1023px) {
     .ninja-forms-app {
         &.folded {
@@ -27,40 +177,7 @@
             }
         }
     }
-    #nf-header {
-        ul {
-            li {
-                display: none;
-                &.selected {
-                    display: block;
-                    a {
-                        position: relative;
-                        //padding-right: 20px;
-                        &::after {
-                            content: "\f347";
-                            font-family: 'Dashicons';
-                            position: absolute;
-                            width: 30px;
-                            height: 30px;
-                            right: -40px;
-                            top: 0;
-                            z-index: 98;
-                        }
-                    }
-                }
-                // &:hover {
-                //     clear: both;
-                //     display: inline-block;
-                //     float: none;
-                // }
-            }
-        }
-    }
-    #nf-main-header {
-        .nf-button {
-            display: none;
-        }
-    }
+
     .nf-setting-wrap {
         width: 50%;
     }
@@ -83,6 +200,7 @@
     .nf-toggle-drawer {
         display: none;
     }
+
 }
 @media only screen and (max-width: 960px) {
     .ninja-forms-app {
@@ -102,6 +220,7 @@
         }
     }
 }
+
 @media only screen and (max-width: 782px) {
     .ninja-forms-app {
         &.folded, &.auto-fold {
@@ -110,10 +229,40 @@
             }
         }
     }
-    .nf-cancel {
+    #nf-builder {
+        padding: 20px 20px 10px;
+    }
+    #nf-main {
+        padding: 0 0 80px;
+    }
+    #nf-drawer {
+        padding: 20px;
+    }
+}
+@media only screen and (max-width: 660px) {
+
+    #nf-builder {
+        //margin-top: 46px;
+    }
+    .nf-one-half, .nf-one-third {
+        width: 100%;
+    }
+    .nf-field-wrap {
+        border: 0;
+        border-bottom: 1px solid #ccc;
+        border-radius: 0;
+        margin: 0;
+        padding: 20px;
+        &:first-child {
+            border-top: 1px solid #ccc;
+        }
+    }
+    .nf-item-delete,
+    .nf-item-duplicate {
         display: none;
     }
 }
+
 @media only screen and (max-width: 600px) {
     #nf-builder {
         margin-top: 46px;
