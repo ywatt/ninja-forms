@@ -7,6 +7,7 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 			_.bindAll( this, 'render' );
     		this.model.bind( 'change:reRender', this.maybeRender, this );
     		this.model.bind( 'change:errors', this.changeError, this );
+    		this.model.bind( 'change:wrapperClasses', this.changeWrapperClasses, this );
 		},
 
 		changeError: function() {
@@ -24,6 +25,10 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 				this.render();
 				this.model.set( 'reRender', false, { silent: true } );
 			}
+		},
+
+		changeWrapperClasses: function( classes ) {
+			
 		},
 
 		onRender: function() {
