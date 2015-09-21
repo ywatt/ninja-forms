@@ -7,7 +7,8 @@ define( ['lib/backbone.radio', 'front-end/models/fieldErrorCollection'], functio
 			classes: 'nf-element',
 			reRender: false,
 			mirror_field: false,
-			confirm_field: false
+			confirm_field: false,
+			wrapperClasses: {}
 		},
 
 		initialize: function() {
@@ -26,6 +27,14 @@ define( ['lib/backbone.radio', 'front-end/models/fieldErrorCollection'], functio
 			Radio.channel( 'field-' + this.get( 'id' ) ).trigger( 'change:modelValue', this );
 			Radio.channel( this.get( 'type' ) ).trigger( 'change:modelValue', this );
 			Radio.channel( 'fields' ).trigger( 'change:modelValue', this );
+		},
+
+		addWrapperClass: function( cl ) {
+			this.set( 'addWrapperClass', cl );
+		},
+
+		removeWrapperClass: function( cl ) {
+			this.set( 'removeWrapperClass', cl );
 		}
 
 	} );

@@ -36,7 +36,7 @@ define(['lib/backbone.radio'], function( Radio ) {
 		 * @param  {object} model Model connected to the element that triggered the event
 		 * @return {void}
 		 */
-		emailKeyup: function( el, model ) {
+		emailKeyup: function( el, keyCode, model ) {
 			/*
 			 * Get the current value from our element.
 			 */
@@ -47,15 +47,14 @@ define(['lib/backbone.radio'], function( Radio ) {
 			 * If we have an empty value, remove our pass/fail class
 			 */
 			if ( 0 == value.length ) {
-				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-pass' );
-				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-fail' );
+				model.removeWrapperClass( 'nf-fail' );
+				model.removeWrapperClass( 'nf-pass' );
 			} else if ( ! emailReg.test( value ) ) {
-				Radio.channel( 'fields' ).request( 'add:fieldWrapClass',  'nf-pass' );
-				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-pass' );
-				jQuery( el ).closest( '.nf-field-wrap' ).addClass( 'nf-fail' );
+				model.removeWrapperClass( 'nf-pass' );
+				model.addWrapperClass( 'nf-fail' );
 			} else {
-				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-fail' );
-				jQuery( el ).closest( '.nf-field-wrap' ).addClass( 'nf-pass' );
+				model.removeWrapperClass( 'nf-fail' );
+				model.addWrapperClass( 'nf-pass' );
 			}
 		}
 	});
