@@ -160,6 +160,8 @@ class NF_Abstracts_ModelFactory
             }
         }
 
+        usort( $this->_actions, 'NF_Abstracts_Action::sort_actions' );
+
         return $this->_actions;
     }
 
