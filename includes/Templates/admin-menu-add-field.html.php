@@ -17,80 +17,50 @@ jQuery(document).ready(function($){
     $(".nf-item-expand").click(function(){
         $(".nf-group-wrap").toggleClass("expanded");
     });
+    $(".nf-mobile").click(function(){
+        $("#nf-builder").toggleClass("nf-menu-expand");
+    });
+    $(".first-name-tr").click(function(){
+        $(".first-name").show();
+    });
+    $(".last-name-tr").click(function(){
+        $(".last-name").show();
+    });
+    $(".email-tr").click(function(){
+        $(".email").show();
+    });
+    $(".textarea-tr").click(function(){
+        $(".textarea").show();
+    });
+    $(".submit-tr").click(function(){
+        $(".submit").show();
+    });
 });
 </script>
 
-<?php function nf_display_controls() {
-    echo '<ul class="nf-item-controls">
-        <li class="nf-item-expand"><a href="#"><span class="dashicons dashicons-admin-collapse"></span><span class="nf-tooltip">Expand</span></a></li>
-        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-        <li class="nf-item-edit"><a href="#"><span class="dashicons dashicons-admin-generic"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-    </ul>';
-} ?>
-<div id="nf-builder">
-    <div id="nf-header">
-        <div id="nf-app-header">
-            <div id="nf-logo"></div>
-            <ul>
-                <li class="selected"><a class="active" href="#">Form Fields</a></li>
-                <li><a href="#">Emails & Actions</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a class="preview" href="#">Live Preview<span class="dashicons dashicons-visibility"></span></a></li>
-            </ul>
-            <input class="nf-button primary" type="submit" value="Publish Changes" />
-            <a class="nf-cancel" href="#">Cancel</a>
-        </div>
+<div id="nf-builder" class="grey">
 
-        <div id="nf-app-sub-header">
-            <a class="nf-add-new" href="#">Add new field</a><h2>Contact Form</h2>
-
-            <!-- <input class="nf-button secondary" type="submit" value="Edit Emails and Actions" /> -->
-
-        </div>
-
-    </div>
+    <?php Ninja_Forms::template( 'ui-nf-header' ); ?>
 
     <div id="nf-main">
 
         <!-- main content area. Where fields and actions are rendered. -->
         <div id="nf-main-header">
 
-            <input class="nf-button secondary" type="submit" value="Edit Emails and Actions" />
+            <!-- <input class="nf-button secondary" type="submit" value="Edit Emails and Actions" /> -->
+
         </div>
+
         <div id="nf-main-content">
 
-            <div class="nf-field-wrap">First Name
-            <?php nf_display_controls(); ?></div>
-
-            <div class="nf-field-wrap">Last Name
-            <?php nf_display_controls(); ?></div>
-
-            <div class="nf-group-wrap">
-                Mailing Address (4 fields)
-                <?php nf_display_controls(); ?>
-                <div class="nf-field-wrap">Street Address
-                <?php nf_display_controls(); ?></div>
-
-                <div class="nf-field-wrap">City
-                <?php nf_display_controls(); ?></div>
-
-                <div class="nf-field-wrap">State
-                <?php nf_display_controls(); ?></div>
-
-                <div class="nf-field-wrap">Zip Code
-                <?php nf_display_controls(); ?></div>
+            <div class="nf-fields-empty">
+                <h3>Add form fields</h3>
+                <p>Get started by adding your first form field. Just click the plus and select the fields you want. It’s that easy.</p>
             </div>
-
-            <div class="nf-field-wrap">Message
-            <?php nf_display_controls(); ?></div>
-
-            <div class="nf-field-wrap">Submit
-            <?php nf_display_controls(); ?></div>
 
         </div>
     </div>
-
+    <?php Ninja_Forms::template( 'ui-nf-menu-drawer' ); ?>
     <div id="nf-drawer">
         <!-- drawer area. This is where settings and add fields are rendered. -->
         <!-- THIS IS THE CONTENT FOR EDITING FIELDS -->
@@ -98,29 +68,30 @@ jQuery(document).ready(function($){
             <div class="nf-search">
                 <input type="search" class="" value="" placeholder="Search" />
             </div>
-            <input type="submit" class="nf-button primary nf-close-drawer" value="Done" />
+            <a href="http://three.ninjaforms.com/wp-admin/admin.php?page=edit-field" class="nf-button primary nf-close-drawer">Done</a>
         </header>
         <section class="nf-settings">
             <div class="nf-reservoir">
-                <span>Textbox<span class="dashicons dashicons-dismiss"></span></span>
-                <span>First Name<span class="dashicons dashicons-dismiss"></span></span>
-                <span>Checkbox<span class="dashicons dashicons-dismiss"></span></span>
-                <span>Textarea<span class="dashicons dashicons-dismiss"></span></span>
+                <span class="nf-item-dock first-name">First Name<span class="dashicons dashicons-dismiss"></span></span>
+                <span class="nf-item-dock last-name">Last Name<span class="dashicons dashicons-dismiss"></span></span>
+                <span class="nf-item-dock email">Email<span class="dashicons dashicons-dismiss"></span></span>
+                <span class="nf-item-dock textarea">Textarea<span class="dashicons dashicons-dismiss"></span></span>
+                <span class="nf-item-dock submit">Submit<span class="dashicons dashicons-dismiss"></span></span>
             </div>
         </section>
         <section class="nf-settings nf-favorites">
             <h3>Saved Fields</h3>
             <div class="nf-one-third">
-                <div class="nf-item">Textbox</div>
+                <div class="nf-item first-name-tr">First Name</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-item">Textarea</div>
+                <div class="nf-item last-name-tr">Last Name</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-item">Checkbox</div>
+                <div class="nf-item email-tr">Email</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-item">Dropdown</div>
+                <div class="nf-item submit-tr">Submit</div>
             </div>
         </section>
         <section class="nf-settings">
@@ -129,7 +100,7 @@ jQuery(document).ready(function($){
                 <div class="nf-item">Textbox</div>
             </div>
             <div class="nf-one-third">
-                <div class="nf-item">Textarea</div>
+                <div class="nf-item textarea-tr">Textarea</div>
             </div>
             <div class="nf-one-third">
                 <div class="nf-item">Checkbox</div>
@@ -154,9 +125,8 @@ jQuery(document).ready(function($){
             </div>
         </section>
 
-        <a class="nf-toggle-drawer">
-            <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
-        </a>
+        <?php Ninja_Forms::template( 'ui-nf-toggle-drawer' ); ?>
+
     </div>
 
 </div>

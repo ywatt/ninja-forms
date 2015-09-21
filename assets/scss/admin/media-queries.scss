@@ -14,7 +14,7 @@
         width:60px;
         height:60px;
         top: 70px;
-        left: 40px;
+        left: 43px;
         transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;
         &:after {
             //box-shadow: 0 3px 3px rgba(0,0,0,0.3);
@@ -76,7 +76,7 @@
         left: auto;
         bottom: 20px;
         right: 20px;
-        transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;
+        transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease;
     }
     #nf-main-header {
         .nf-button {
@@ -257,9 +257,87 @@
             border-top: 1px solid #ccc;
         }
     }
+    .nf-actions-table {
+        td:nth-child(3),th:nth-child(3) {
+            display: none;
+        }
+    }
+    //     display: block;
+    //     table, thead, tbody, th, td, tr {
+    //         display: block;
+    //     }
+    //     thead tr {
+    //         position: absolute;
+    //         top: -9999px;
+    //         left: -9999px;
+    //     }
+    //     tr { border: 1px solid #ccc; }
+    //     td {
+    //         /* Behave  like a "row" */
+    //         border: none;
+    //         border-bottom: 1px solid #eee;
+    //         position: relative;
+    //         padding-left: 50%;
+    //         text-align: right;
+    //         width: auto !important;
+    //         &::before {
+    //             /* Now like a table header */
+    //             line-height: 36px;
+    //             position: absolute;
+    //             /* Top/left values mimic padding */
+    //             top: 6px;
+    //             left: 6px;
+    //             width: 45%;
+    //             padding-right: 10px;
+    //             text-align: left;
+    //             white-space: nowrap;
+    //         }
+    //         &:last-child {
+    //             height: 50px;
+    //         }
+    //     }
+    //     td:nth-of-type(1):before { content: ""; }
+    //     td:nth-of-type(2):before { content: "Name"; }
+    //     td:nth-of-type(3):before { content: "Type"; }
+    //     td:nth-of-type(4):before { content: "Actions"; }
+    // }
+    #nf-table-display {
+        .nf-item-controls {
+            width: auto;
+        }
+    }
     .nf-item-delete,
     .nf-item-duplicate {
         display: none;
+    }
+    .nf-drawer-buttons {
+        display: block;
+    }
+    .nf-drawer-header {
+        background: #fff;
+        margin: -20px -20px 20px;
+        padding: 0;
+        h2 {
+            font-size: 16px;
+            line-height: 46px;
+            margin: 0;
+            .dashicons {
+                background: #fff;
+                font-size: 30px;
+                padding-top: 7px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        .nf-button {
+            border-radius: 0;
+        }
+    }
+    .nf-item {
+        padding: 15px;
+    }
+    .nf-favorites .nf-item::after {
+        padding: 14px;
     }
 }
 
