@@ -177,9 +177,7 @@ class NF_Abstracts_ModelFactory
      */
     public function object( $id )
     {
-        $form_id = $this->_object->get_id();
-
-        $this->_object = new NF_Database_Models_Object( $this->_db, $id, $form_id );
+        $this->_object = new NF_Database_Models_Object( $this->_db, $id );
 
         return $this;
     }
@@ -192,9 +190,7 @@ class NF_Abstracts_ModelFactory
      */
     public function get_object( $id )
     {
-        $parent_id = $this->_object->get_id();
-
-        return $this->_objects[ $id ] = new NF_Database_Models_Object( $this->_db, $id, $parent_id );
+        return $this->_objects[ $id ] = new NF_Database_Models_Object( $this->_db, $id );
     }
 
     /**
