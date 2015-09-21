@@ -82,6 +82,11 @@ class NF_Abstracts_Model
         return $this->_id;
     }
 
+    public function get_setting( $setting )
+    {
+        return $this->get_settings( $setting );
+    }
+
     /**
      * Get Settings
      *
@@ -119,6 +124,10 @@ class NF_Abstracts_Model
             foreach ($meta_results as $meta) {
                 $this->_settings[ $meta->key ] = $meta->value;
             }
+        }
+
+        foreach( $this->_settings as $key => $value ){
+            $this->_settings[ $key ] = maybe_unserialize( $value );
         }
 
         $only = func_get_args();
@@ -327,6 +336,7 @@ class NF_Abstracts_Model
         if( ! $this->_settings ) return;
 
         foreach( $this->_settings as $key => $value ){
+            $value = maybe_serialize( $value );
             $this->_results[] = $this->_save_setting( $key, $value );
         }
 

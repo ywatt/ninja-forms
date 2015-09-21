@@ -42,9 +42,9 @@ final class NF_Actions_Redirect extends NF_Abstracts_Action
 
     }
 
-    public function process( $form_id, $data )
+    public function process( $action_id, $form_id, $data )
     {
-        $data['redirect'] = 'http://ninjaforms.com';
+        $data['redirect'] = Ninja_Forms()->form( $form_id )->get_action( $action_id )->get_setting( 'url' );
 
         return $data;
     }

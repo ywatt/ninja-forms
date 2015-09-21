@@ -5,6 +5,7 @@ define( ['lib/backbone.radio'], function( Radio ) {
 
 		initialize: function() {
 			this.listenTo( radioChannel, 'init:model', this.registerConfirm );
+			this.listenTo( radioChannel, 'keyup:field', this.confirmKeyup );
 		},
 
 		registerConfirm: function( model ) {
@@ -33,7 +34,29 @@ define( ['lib/backbone.radio'], function( Radio ) {
 				}
 			}
 
+		},
+
+		confirmKeyup: function( el, model ) {
+			if ( model.get( 'confirm_field' ) ) {
+				var targetModel = Radio.channel( 'fields' ).request( 'get:field', this.targetID );
+				var currentValue = jQuery( el ).val();
+				if ( currentValue != '' ) {
+					if ( currentValue == targetModel.get( 'value' ) ) {
+						jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-fail' );
+						jQuery( el ).closest( '.nf-field-wrap' ).addClass( 'nf-pass' );
+					} else {
+						jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-pass' );
+						jQuery( el ).closest( '.nf-field-wrap' ).addClass( 'nf-fail' );
+					}
+				} else {
+					jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-pass' );
+					jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-fail' );
+				}
+			} else if ( model.get( 'id' ) == this.targetID ) {
+				
+			}
 		}
+
 	});
 
 	return controller;

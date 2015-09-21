@@ -17,32 +17,32 @@ function nf_tmp_frontendform( $atts = array() ) {
 					'id'			=> 1,
 					'type' 			=> 'text',
 					'label'			=> 'Name',
-					'label_pos' 	=> 'inside',
+					'label_pos' 	=> 'before',
 				),
 				array(
 					'id'			=> 8,
 					'type' 			=> 'email',
 					'label'			=> 'Email',
-					'label_pos' 	=> 'inside',
+					'label_pos' 	=> 'before',
 				),
 				array(
 					'id'			=> 11,
 					'type' 			=> 'text',
 					'label'			=> 'Confirm Email',
-					'label_pos' 	=> 'inside',
+					'label_pos' 	=> 'before',
 					'confirm_field'	=> 8,
 				),
 				array(
 					'id'			=> 2,
 					'type' 			=> 'textarea',
 					'label'			=> 'Message',
-					'label_pos'		=> 'inside',
+					'label_pos'		=> 'before',
 				),
 				array(
 					'id'			=> 10,
 					'type' 			=> 'text',
 					'label'			=> 'Mirror Name',
-					'label_pos' 	=> 'inside',
+					'label_pos' 	=> 'before',
 					'mirror_field'	=> 1
 					
 				),
@@ -142,6 +142,27 @@ function nf_tmp_output_templates() {
 		.nf-error input {
 			border-color: red;
 		}
+
+		.nf-error-msg {
+			color:red;
+		}
+
+		.nf-pass .nf-element {
+			border: 2px solid green;
+	  		background: url( 'https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/tick_green.png' ) no-repeat;
+			background-position: 99.5% 60%;
+	  		background-size: 35px 35px;
+
+	  		/*background: url( 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/email_envelope.png' ) 0 no-repeat;*/
+		}
+
+		.nf-fail .nf-element {
+			border: 2px solid red;
+	  		background: url( 'https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/cancel-512.png' ) no-repeat;
+	  		background-position: 99% 60%;
+	  		background-size: 30px 30px;
+	  		/*background: url( 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/email_envelope.png' ) 0 no-repeat;*/
+		}
 	</style>
 
 	<script id="nf-tmpl-layout" type="text/template">
@@ -171,7 +192,7 @@ function nf_tmp_output_templates() {
 	</script>
 
 	<script id="nf-tmpl-field-wrap" type="text/template">
-		<div id="nf-field-<%= id %>-wrap" class="nf-field-wrap">
+		<div id="nf-field-<%= id %>-wrap" class="nf-field-wrap" data-field-id="<%= id %>">
 			<%
 			/*
 			 * This is our main field template. It's called for every field type.

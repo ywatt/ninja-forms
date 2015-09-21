@@ -28,8 +28,8 @@ define(['lib/backbone.radio'], function( Radio ) {
 
 		/**
 		 * When a user types inside of an email field, track their keypresses and add the appropriate class.
-		 * If the value validates as an email, add a class of nf-email-pass
-		 * If the value does not validate as email, add a class of nf-email-fail
+		 * If the value validates as an email, add a class of nf-pass
+		 * If the value does not validate as email, add a class of nf-fail
 		 * 
 		 * @since  3.0
 		 * @param  {object} el    Element that triggered the keyup event.
@@ -47,14 +47,15 @@ define(['lib/backbone.radio'], function( Radio ) {
 			 * If we have an empty value, remove our pass/fail class
 			 */
 			if ( 0 == value.length ) {
-				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-email-pass' );
-				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-email-fail' );
+				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-pass' );
+				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-fail' );
 			} else if ( ! emailReg.test( value ) ) {
-				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-email-pass' );
-				jQuery( el ).closest( '.nf-field-wrap' ).addClass( 'nf-email-fail' );
+				Radio.channel( 'fields' ).request( 'add:fieldWrapClass',  'nf-pass' );
+				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-pass' );
+				jQuery( el ).closest( '.nf-field-wrap' ).addClass( 'nf-fail' );
 			} else {
-				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-email-fail' );
-				jQuery( el ).closest( '.nf-field-wrap' ).addClass( 'nf-email-pass' );
+				jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-fail' );
+				jQuery( el ).closest( '.nf-field-wrap' ).addClass( 'nf-pass' );
 			}
 		}
 	});
