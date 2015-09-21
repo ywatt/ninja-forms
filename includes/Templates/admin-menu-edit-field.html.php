@@ -3,14 +3,16 @@ jQuery(document).ready(function($){
     $(".nf-item-edit").click(function(){
         $("#nf-builder").removeClass("nf-drawer-closed");
         $("#nf-builder").addClass("nf-drawer-opened");
-        $(".nf-field-wrap:first-child").addClass("active");
-        $("#field-0 .nf-item-controls").addClass("nf-editing");
+        $(".nf-field-wrap:nth-child(4)").addClass("active");
+        $("#field-3 .nf-item-controls").addClass("nf-editing");
     });
     $(".nf-close-drawer").click(function(){
         $("#nf-builder").removeClass("nf-drawer-opened");
         $("#nf-builder").addClass("nf-drawer-closed");
-        $(".nf-field-wrap:first-child").removeClass("active");
-        $("#field-0 .nf-item-controls").removeClass("nf-editing");
+        $(".nf-field-wrap:nth-child(4)").removeClass("active");
+        $("#field-3 .nf-item-controls").removeClass("nf-editing");
+        $(".before").hide();
+        $(".after").show();
     });
     $(".nf-toggle-drawer").click(function(){
         $("#nf-drawer").toggleClass("nf-drawer-expand");
@@ -18,37 +20,10 @@ jQuery(document).ready(function($){
     $(".nf-mobile").click(function(){
         $("#nf-builder").toggleClass("nf-menu-expand");
     });
-    $(".nf-field-wrap").on("swipeleft",function(){
-      alert("You swiped left!");
-    });
 });
 </script>
 <div id="nf-builder">
-    <div id="nf-header">
-        <div id="nf-app-header">
-            <div id="nf-logo"></div>
-            <ul>
-                <li><a href="#">Form Fields</a></li>
-                <li><a href="#">Emails & Actions</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a class="preview" href="#">Preview Changes<span class="dashicons dashicons-visibility"></span></a></li>
-            </ul>
-            <input class="nf-button primary" type="submit" value="Save" />
-            <a class="nf-mobile" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
-            <a class="nf-cancel" href="#">Cancel</a>
-        </div>
-
-        <div id="nf-app-sub-header">
-
-            <a class="nf-add-new" href="#">Add new field</a>
-            <h2>Contact Form</h2>
-
-            <!-- <input class="nf-button secondary" type="submit" value="Edit Emails and Actions" /> -->
-
-        </div>
-
-    </div>
-
+    <?php Ninja_Forms::template( 'ui-nf-header' ); ?>
     <div id="nf-main">
         <!-- main content area. Where fields and actions are rendered. -->
         <div id="nf-main-header">
@@ -57,34 +32,29 @@ jQuery(document).ready(function($){
         <div id="nf-main-content">
 
 <?php
-for ($i=0; $i < 25; $i++) {
+for ($i=0; $i < 5; $i++) {
     if ( 0 == $i ) {
-        $field = 'First Name *';
+        $field = 'First Name';
+    } elseif ( 1 == $i ) {
+        $field = 'Last Name';
+    } elseif ( 2 == $i ) {
+        $field = 'Email';
+    } elseif ( 3 == $i ) {
+        $field = '<span class="before">Textarea</span><span class="after">Message</span>';
     } else {
-        $field = 'Textbox';
+        $field = 'Submit';
     }
-    echo '<div id="field-' . $i . '" class="nf-field-wrap">' . $field . '
-        <ul class="nf-item-controls">
-            <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-            <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-            <li class="nf-item-edit"><a href="#"><span class="dashicons dashicons-admin-generic"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-        </ul>
-    </div>';
+    echo '<div id="field-' . $i . '" class="nf-field-wrap">' . $field;
+    Ninja_Forms::template( 'ui-item-controls' );
+    echo '</div>';
 }
+
+
 ?>
+
         </div>
     </div>
-    <div id="nf-menu-drawer">
-        <ul>
-            <li class="nf-publish">Publish</li>
-        </ul>
-        <ul>
-            <li>Form Fields</li>
-            <li>Emails & Actions</li>
-            <li>Settings</li>
-            <li>Preview</li>
-        </ul>
-    </div>
+    <?php Ninja_Forms::template( 'ui-nf-menu-drawer' ); ?>
     <div id="nf-drawer">
         <!-- drawer area. This is where settings and add fields are rendered. -->
         <!-- THIS IS THE CONTENT FOR EDITING FIELDS -->
@@ -95,11 +65,11 @@ for ($i=0; $i < 25; $i++) {
         <section class="nf-settings">
             <div class="nf-one-half">
                 <label>Label</label>
-                <input type="text" value="First Name" />
+                <input type="text" value="Textarea" />
             </div>
             <div class="nf-one-half">
                 <label>Placeholder Text</label>
-                <input type="text" value="Enter your first name" />
+                <input type="text" value="" />
             </div>
             <div class="nf-one-half">
                 <label>Label Position</label>
@@ -158,9 +128,8 @@ for ($i=0; $i < 25; $i++) {
             <h3><span class="dashicons dashicons-arrow-right"></span>Conditional Settings</h3>
         </section>
 
-        <a class="nf-toggle-drawer">
-            <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
-        </a>
+        <?php Ninja_Forms::template( 'ui-nf-toggle-drawer' ); ?>
+        <?php Ninja_Forms::template( 'ui-nf-drawer-buttons' ); ?>
     </div>
 
 </div>

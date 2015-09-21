@@ -30,6 +30,22 @@
             }
         }
     }
+    .grey {
+        .nf-mobile {
+            background: #ccc !important;
+        }
+        .nf-publish {
+            background: #ccc !important;
+        }
+        #nf-drawer {
+            .nf-button {
+                padding: 15px 30px;
+            }
+        }
+    }
+    .after {
+        display: none;
+    }
 }
 
 #nf-builder {

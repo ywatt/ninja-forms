@@ -132,6 +132,116 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/js\/front-end\/controllers\/changeCheckbox.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/controllers\/changeCheckbox.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/controllers\/min\/changeCheckbox-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/controllers\/changeEmail.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/controllers\/changeEmail.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/controllers\/min\/changeEmail-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/controllers\/changeField.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/controllers\/changeField.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/controllers\/min\/changeField-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/controllers\/changeRadio.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/controllers\/changeRadio.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/controllers\/min\/changeRadio-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/controllers\/confirmField.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/controllers\/confirmField.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/controllers\/min\/confirmField-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/controllers\/fieldError.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/controllers\/fieldError.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/controllers\/min\/fieldError-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/controllers\/getField.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/controllers\/getField.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/controllers\/min\/getField-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/controllers\/loadControllers.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/controllers\/loadControllers.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/controllers\/min\/loadControllers-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/controllers\/mirrorField.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/controllers\/mirrorField.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/controllers\/min\/mirrorField-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/controllers\/updateFieldModel.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/controllers\/updateFieldModel.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/controllers\/min\/updateFieldModel-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/js\/front-end\/main.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -143,34 +253,144 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/js\/front-end\/templates\/checkbox.js": {
+	"\/js\/front-end\/models\/fieldCollection.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/front-end\/templates\/checkbox.js",
-		"outputAbbreviatedPath": "\/js\/front-end\/templates\/min\/checkbox-min.js",
+		"inputAbbreviatedPath": "\/js\/front-end\/models\/fieldCollection.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/models\/min\/fieldCollection-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/js\/front-end\/templates\/text.js": {
+	"\/js\/front-end\/models\/fieldErrorCollection.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/front-end\/templates\/text.js",
-		"outputAbbreviatedPath": "\/js\/front-end\/templates\/min\/text-min.js",
+		"inputAbbreviatedPath": "\/js\/front-end\/models\/fieldErrorCollection.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/models\/min\/fieldErrorCollection-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/js\/front-end\/templates\/textarea.js": {
+	"\/js\/front-end\/models\/fieldErrorModel.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/front-end\/templates\/textarea.js",
-		"outputAbbreviatedPath": "\/js\/front-end\/templates\/min\/textarea-min.js",
+		"inputAbbreviatedPath": "\/js\/front-end\/models\/fieldErrorModel.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/models\/min\/fieldErrorModel-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/models\/fieldModel.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/models\/fieldModel.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/models\/min\/fieldModel-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/models\/formModel.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/models\/formModel.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/models\/min\/formModel-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/views\/afterForm.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/views\/afterForm.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/views\/min\/afterForm-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/views\/beforeForm.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/views\/beforeForm.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/views\/min\/beforeForm-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/views\/fieldCollection.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/views\/fieldCollection.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/views\/min\/fieldCollection-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/views\/fieldErrorCollection.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/views\/fieldErrorCollection.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/views\/min\/fieldErrorCollection-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/views\/fieldErrorItem.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/views\/fieldErrorItem.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/views\/min\/fieldErrorItem-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/views\/fieldItem.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/views\/fieldItem.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/views\/min\/fieldItem-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/views\/formLayout.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/views\/formLayout.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/views\/min\/formLayout-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/front-end\/views\/mainLayout.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/front-end\/views\/mainLayout.js",
+		"outputAbbreviatedPath": "\/js\/front-end\/views\/min\/mainLayout-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -386,6 +606,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
+	"\/scss\/admin\/main-fields.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/scss\/admin\/main-fields.scss",
+		"outputAbbreviatedPath": "\/scss\/css\/main-fields.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": 0
+		},
 	"\/scss\/admin\/main-settings.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -517,8 +753,8 @@
 	},
 "projectAttributes": {
 	"bowerAbbreviatedPath": "",
-	"displayValue": "assets",
-	"displayValueWasSetByUser": 0,
+	"displayValue": "three",
+	"displayValueWasSetByUser": 1,
 	"iconImageName": "brackets_gray"
 	},
 "projectSettings": {
