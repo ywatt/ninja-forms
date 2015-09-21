@@ -16,39 +16,14 @@ jQuery(document).ready(function($){
     $(".nf-toggle-drawer").click(function(){
         $("#nf-drawer").toggleClass("nf-drawer-expand");
     });
-
+    $(".nf-mobile").click(function(){
+        $("#nf-builder").toggleClass("nf-menu-expand");
+    });
 
 });
 </script>
 <div id="nf-builder">
-    <div id="nf-header">
-        <div id="nf-app-header">
-            <div id="nf-logo"></div>
-            <ul>
-                <li><a href="#">Form Fields</a></li>
-                <li class="selected"><a class="active" href="#">Emails & Actions</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a class="preview" href="#">Live Preview<span class="dashicons dashicons-visibility"></span></a></li>
-            </ul>
-            <input class="nf-button primary" type="submit" value="Publish Changes" />
-            <a class="nf-cancel" href="#">Cancel</a>
-        </div>
-
-        <div id="nf-app-sub-header">
-            <h2>Contact Form</h2>
-            <a class="nf-add-new" href="#">Add new action</a>
-            <!-- <input class="nf-button secondary" type="submit" value="Edit Emails and Actions" /> -->
-
-        </div>
-
-    </div>
-<?php function nf_display_controls() {
-    echo '<ul class="nf-item-controls">
-        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-        <li class="nf-item-edit"><a href="#"><span class="dashicons dashicons-admin-generic"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">In Progress</span></a></li>
-    </ul>';
-} ?>
+    <?php Ninja_Forms::template( 'ui-nf-header' ); ?>
     <div id="nf-main">
         <!-- main content area. Where fields and actions are rendered. -->
         <div id="nf-main-header">
@@ -56,7 +31,7 @@ jQuery(document).ready(function($){
         </div>
 
         <div id="nf-main-content">
-            <table id="nf-table-display">
+            <table id="nf-table-display" class="nf-actions-table">
                 <thead>
                     <tr>
                         <th></th>
@@ -70,32 +45,26 @@ jQuery(document).ready(function($){
                         <td><input type="checkbox" class="nf-toggle" checked /></td>
                         <td>Save to Database</td>
                         <td>Save Submissions</td>
-                        <td><?php nf_display_controls(); ?></td>
+                        <td><?php Ninja_Forms::template( 'ui-item-controls' ); ?></td>
                     </tr>
                     <tr>
                         <td><input type="checkbox" class="nf-toggle" checked /></td>
                         <td>Email to Admin</td>
                         <td>Email</td>
-                        <td><?php nf_display_controls(); ?></td>
+                        <td><?php Ninja_Forms::template( 'ui-item-controls' ); ?></td>
                     </tr>
                     <tr class="nf-deactivated">
                         <td><input type="checkbox" class="nf-toggle" /></td>
                         <td>Thank You Message</td>
                         <td>Sucess Message</td>
-                        <td><?php nf_display_controls(); ?></td>
-                    </tr>
-                    <tr id="action-3" class="nf-new-action">
-                        <td></td>
-                        <td>Email to Use</td>
-                        <td>Email</td>
-                        <td><?php nf_display_controls(); ?></td>
+                        <td><?php Ninja_Forms::template( 'ui-item-controls' ); ?></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
     </div>
-
+    <?php Ninja_Forms::template( 'ui-nf-menu-drawer' ); ?>
     <div id="nf-drawer">
         <!-- drawer area. This is where settings and add fields are rendered. -->
         <!-- THIS IS THE CONTENT FOR EDITING FIELDS -->
@@ -135,9 +104,8 @@ jQuery(document).ready(function($){
             </fieldset>
         </section>
 
-        <a class="nf-toggle-drawer">
-            <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
-        </a>
+        <?php Ninja_Forms::template( 'ui-nf-toggle-drawer' ); ?>
+        <?php Ninja_Forms::template( 'ui-nf-drawer-buttons' ); ?>
 
     </div>
 

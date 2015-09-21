@@ -5,6 +5,7 @@
     display: inline-block;
     font-size: 17px;
     padding: 10px 30px;
+    text-decoration: none;
     text-transform: uppercase;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -62,5 +63,36 @@
         margin-top: 5px;
         padding: 12px 15px;
         width: 100%;
+    }
+}
+.nf-drawer-buttons {
+    display: none;
+    margin: 40px -20px -20px;
+    padding: 0;
+    li {
+        background: #fff;
+        border-right: 1px solid #f1f1f1;
+        float: left;
+        margin: 0;
+        padding: 15px;
+        text-align: center;
+        width: 50%;
+        &:last-child {
+            border: 0;
+        }
+        &.nf-drawer-delete {
+            color: red;
+        }
+        &.nf-drawer-duplicate {
+            color: $accent_color;
+        }
+        .dashicons {
+            margin-right: 10px;
+        }
+    }
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
     }
 }

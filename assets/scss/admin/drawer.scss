@@ -17,7 +17,7 @@
 .nf-drawer-opened {
     #nf-main {
         width: 50%;
-        transition: width 1.0s ease;
+        transition: all 1.0s ease;
         .nf-button {
             display: none;
         }
@@ -93,7 +93,8 @@
 .nf-drawer-closed {
     #nf-main {
         width: 100%;
-        transition: width 1.0s ease;
+        left: 0;
+        transition: width 1.0s ease, left 0.5s ease;
     }
     #nf-drawer {
         right: -1400px;
@@ -231,7 +232,17 @@
     ul {
         margin: 0;
         li {
-            padding: 5px 20px;
+            a {
+                border-bottom: 1px solid #ccc;
+                color: #424242;
+                display: block;
+                padding: 10px 20px;
+                text-decoration: none;
+                .dashicons {
+                    color: $cta_color;
+                    margin-right: 15px;
+                }
+            }
         }
     }
     .nf-publish {
