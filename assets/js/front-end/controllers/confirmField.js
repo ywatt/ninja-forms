@@ -36,24 +36,35 @@ define( ['lib/backbone.radio'], function( Radio ) {
 
 		},
 
-		confirmKeyup: function( el, model ) {
+		confirmKeyup: function( el, keyCode, model ) {
+
 			if ( model.get( 'confirm_field' ) ) {
 				var targetModel = Radio.channel( 'fields' ).request( 'get:field', this.targetID );
 				var currentValue = jQuery( el ).val();
-				if ( currentValue != '' ) {
-					if ( currentValue == targetModel.get( 'value' ) ) {
-						jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-fail' );
-						jQuery( el ).closest( '.nf-field-wrap' ).addClass( 'nf-pass' );
-					} else {
-						jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-pass' );
-						jQuery( el ).closest( '.nf-field-wrap' ).addClass( 'nf-fail' );
-					}
+				if ( '' == currentValue ) {
+					model.removeWrapperClass( 'nf-fail' );
+					model.removeWrapperClass( 'nf-pass' );
+				} else if ( currentValue == targetModel.get( 'value' ) ) {
+					model.removeWrapperClass( 'nf-fail' );
+					model.addWrapperClass( 'nf-pass' );
 				} else {
-					jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-pass' );
-					jQuery( el ).closest( '.nf-field-wrap' ).removeClass( 'nf-fail' );
+					model.removeWrapperClass( 'nf-pass' );
+					model.addWrapperClass( 'nf-fail' );
 				}
 			} else if ( model.get( 'id' ) == this.targetID ) {
-				
+				var listeningModel = Radio.channel( 'fields' ).request( 'get:field', this.listeningID );
+				var targetValue = jQuery( el ).val();
+
+				if ( '' == targetValue ) {
+					listeningModel.removeWrapperClass( 'nf-fail' );
+					listeningModel.removeWrapperClass( 'nf-pass' );
+				} else if ( targetValue == listeningModel.get( 'value' ) ) {
+					listeningModel.removeWrapperClass( 'nf-fail' );
+					listeningModel.addWrapperClass( 'nf-pass' );
+				} else {
+					listeningModel.removeWrapperClass( 'nf-pass' );
+					listeningModel.addWrapperClass( 'nf-fail' );
+				}
 			}
 		}
 

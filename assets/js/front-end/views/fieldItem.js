@@ -7,17 +7,34 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 			_.bindAll( this, 'render' );
     		this.model.bind( 'change:reRender', this.maybeRender, this );
     		this.model.bind( 'change:errors', this.changeError, this );
-    		this.model.bind( 'change:wrapperClasses', this.changeWrapperClasses, this );
+    		this.model.bind( 'change:addWrapperClass', this.addWrapperClass, this );
+    		this.model.bind( 'change:removeWrapperClass', this.removeWrapperClass, this );
 		},
 
 		changeError: function() {
 			if ( 0 == this.model.get( 'errors' ).models.length ) {
-				jQuery( this.el ).removeClass( 'nf-error' );
+				this.removeWrapperClass( 'nf-error' );
 			} else {
-				jQuery( this.el ).addClass( 'nf-error' );
+				this.addWrapperClass( 'nf-error' );
 			}
 
 			this.errorCollectionView.render();
+		},
+
+		addWrapperClass: function() {
+			var cl = this.model.get( 'addWrapperClass' );
+			if ( '' != cl ) {
+				jQuery( this.el ).addClass( cl );
+				this.model.set( 'addWrapperClass', '' );				
+			}
+		},
+
+		removeWrapperClass: function() {
+			var cl = this.model.get( 'removeWrapperClass' );
+			if ( '' != cl ) {
+				jQuery( this.el ).removeClass( cl );
+				this.model.set( 'removeWrapperClass', '' );				
+			}
 		},
 
 		maybeRender: function() {
@@ -25,10 +42,6 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 				this.render();
 				this.model.set( 'reRender', false, { silent: true } );
 			}
-		},
-
-		changeWrapperClasses: function( classes ) {
-			
 		},
 
 		onRender: function() {
@@ -77,8 +90,9 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 
 		fieldKeyup: function( e ) {
 			var el = jQuery( e.currentTarget );
-			var response = Radio.channel( this.model.get( 'type' ) ).trigger( 'keyup:field', el, this.model );
-			var response = Radio.channel( 'fields' ).trigger( 'keyup:field', el, this.model );
+			var keyCode = e.keyCode;
+			var response = Radio.channel( this.model.get( 'type' ) ).trigger( 'keyup:field', el, keyCode, this.model );
+			var response = Radio.channel( 'fields' ).trigger( 'keyup:field', el, keyCode, this.model );
 		}
 	});
 
