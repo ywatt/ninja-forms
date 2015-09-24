@@ -1,5 +1,7 @@
 define( ['lib/backbone.radio'], function( Radio ) {
 	var radioChannel = Radio.channel( 'fields' );
+	var errorID = 'confirm-mismatch';
+	var errorMsg = 'These fields must match!';
 
 	var controller = Marionette.Object.extend( {
 
@@ -8,66 +10,68 @@ define( ['lib/backbone.radio'], function( Radio ) {
 			this.listenTo( radioChannel, 'keyup:field', this.confirmKeyup );
 		},
 
-		registerConfirm: function( model ) {
-			if ( model.get( 'confirm_field' ) ) {
-				this.targetID = model.get( 'confirm_field' );
-				this.listeningID = model.get( 'id' );
+		registerConfirm: function( confirmModel ) {
+			if ( confirmModel.get( 'confirm_field' ) ) {
+				var targetModel = radioChannel.request( 'get:field', confirmModel.get( 'confirm_field' ) );
+				targetModel.set( 'confirm_with', confirmModel.get( 'id' ) );
+				var targetID = targetModel.get( 'id' );
+				var confirmID = confirmModel.get( 'id' );
 
-				this.listenTo( Radio.channel( 'field-' + this.targetID ), 'change:modelValue', this.changeValue );
-				this.listenTo( Radio.channel( 'field-' + this.listeningID ), 'change:modelValue', this.changeValue );
+				this.listenTo( Radio.channel( 'field-' + targetID ), 'change:modelValue', this.changeValue );
+				this.listenTo( Radio.channel( 'field-' + confirmID ), 'change:modelValue', this.changeValue );
 			}
 		},
 
 		changeValue: function( model ) {
-			var targetModel = Radio.channel( 'fields' ).request( 'get:field', this.targetID );
-			var listeningModel = Radio.channel( 'fields' ).request( 'get:field', this.listeningID );
-
-			if ( listeningModel.get( 'value' ) != '' ) {
-				var errorID = 'confirm-mismatch';
-				if ( listeningModel.get( 'value' ) == targetModel.get( 'value' ) ) {
-					Radio.channel( 'fields' ).request( 'remove:error', this.listeningID, errorID );
-					Radio.channel( 'fields' ).request( 'remove:error', this.targetID, errorID );
-				} else {
-					var errorMsg = 'These fields must match!';
-					Radio.channel( 'fields' ).request( 'add:error', this.listeningID, errorID, errorMsg );
-					Radio.channel( 'fields' ).request( 'add:error', this.targetID, errorID, '' );
-				}
+			if ( 'undefined' == typeof model.get( 'confirm_with' ) ) {
+				var confirmModel = model;
+				var targetModel = radioChannel.request( 'get:field', confirmModel.get( 'confirm_field' ) );
+			} else {
+				var targetModel = model;
+				var confirmModel = radioChannel.request( 'get:field', targetModel.get( 'confirm_with' ) );
 			}
+			var targetID = targetModel.get( 'id' );
+			var confirmID = confirmModel.get( 'id' );
 
+			if ( '' == confirmModel.get( 'value' ) || confirmModel.get( 'value' ) == targetModel.get( 'value' ) ) {
+				Radio.channel( 'fields' ).request( 'remove:error', confirmID, errorID );
+			} else {
+				Radio.channel( 'fields' ).request( 'add:error', confirmID, errorID, errorMsg );
+			}
 		},
 
+		
 		confirmKeyup: function( el, keyCode, model ) {
-
+			var currentValue = jQuery( el ).val();
 			if ( model.get( 'confirm_field' ) ) {
-				var targetModel = Radio.channel( 'fields' ).request( 'get:field', this.targetID );
-				var currentValue = jQuery( el ).val();
-				if ( '' == currentValue ) {
-					model.removeWrapperClass( 'nf-fail' );
-					model.removeWrapperClass( 'nf-pass' );
-				} else if ( currentValue == targetModel.get( 'value' ) ) {
-					model.removeWrapperClass( 'nf-fail' );
-					model.addWrapperClass( 'nf-pass' );
-				} else {
-					model.removeWrapperClass( 'nf-pass' );
-					model.addWrapperClass( 'nf-fail' );
-				}
-			} else if ( model.get( 'id' ) == this.targetID ) {
-				var listeningModel = Radio.channel( 'fields' ).request( 'get:field', this.listeningID );
-				var targetValue = jQuery( el ).val();
+				var confirmModel = model;
+				var confirmID = model.get( 'id' );
+				var targetModel = Radio.channel( 'fields' ).request( 'get:field', confirmModel.get( 'confirm_field' ) );
+				var compareValue = targetModel.get( 'value' );
+				var confirmValue = currentValue;
+			} else if ( model.get( 'confirm_with' ) ) {
+				var confirmModel = Radio.channel( 'fields' ).request( 'get:field', model.get( 'confirm_with' ) );
+				var confirmID = confirmModel.get( 'id' );
+				var confirmValue = confirmModel.get( 'value' );
+				var compareValue = confirmValue;
+			}
 
-				if ( '' == targetValue ) {
-					listeningModel.removeWrapperClass( 'nf-fail' );
-					listeningModel.removeWrapperClass( 'nf-pass' );
-				} else if ( targetValue == listeningModel.get( 'value' ) ) {
-					listeningModel.removeWrapperClass( 'nf-fail' );
-					listeningModel.addWrapperClass( 'nf-pass' );
+			if ( 'undefined' !== typeof confirmModel ) {
+				if ( '' == confirmValue ) {
+					confirmModel.removeWrapperClass( 'nf-fail' );
+					confirmModel.removeWrapperClass( 'nf-pass' );
+					Radio.channel( 'fields' ).request( 'remove:error', confirmID, errorID );				
+				} else if ( currentValue == compareValue ) {
+					confirmModel.removeWrapperClass( 'nf-fail' );
+					confirmModel.addWrapperClass( 'nf-pass' );
+					Radio.channel( 'fields' ).request( 'remove:error', confirmID, errorID );				
 				} else {
-					listeningModel.removeWrapperClass( 'nf-pass' );
-					listeningModel.addWrapperClass( 'nf-fail' );
-				}
+					confirmModel.removeWrapperClass( 'nf-pass' );
+					confirmModel.addWrapperClass( 'nf-fail' );
+					Radio.channel( 'fields' ).request( 'add:error', confirmID, errorID, errorMsg );				
+				}				
 			}
 		}
-
 	});
 
 	return controller;

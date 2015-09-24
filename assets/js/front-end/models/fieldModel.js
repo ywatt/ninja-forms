@@ -8,7 +8,8 @@ define( ['lib/backbone.radio', 'front-end/models/fieldErrorCollection'], functio
 			reRender: false,
 			mirror_field: false,
 			confirm_field: false,
-			wrapperClasses: {}
+			clean: true,
+			disabled: ''
 		},
 
 		initialize: function() {

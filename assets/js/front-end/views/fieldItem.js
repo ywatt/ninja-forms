@@ -13,9 +13,9 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 
 		changeError: function() {
 			if ( 0 == this.model.get( 'errors' ).models.length ) {
-				this.removeWrapperClass( 'nf-error' );
+				this.model.removeWrapperClass( 'nf-error' );
 			} else {
-				this.addWrapperClass( 'nf-error' );
+				this.model.addWrapperClass( 'nf-error' );
 			}
 
 			this.errorCollectionView.render();
@@ -49,7 +49,7 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 			this.$el.unwrap();
 			this.setElement( this.$el );
 
-			var el = jQuery( this.el ).children( 'nf-error-wrap' );
+			var el = jQuery( this.el ).children( '.nf-error-wrap' );
     		this.errorCollectionView = new fieldErrorCollection( { el: el, collection: this.model.get( 'errors' ), thisModel: this.model } );
 		},
 
