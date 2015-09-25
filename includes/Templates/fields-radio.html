@@ -1,0 +1,27 @@
+<ul>
+    <%
+    _.each( options, function( option ) {
+    %>
+    <li>
+        <label><input type="radio" name="nf-field-<%= id %>" class="<%= classes %>" value="<%= option.value %>" <%= ( value == option.value ) ? 'checked="checked"' : '' %>> <%= option.label %></label>
+    </li>
+    <%
+    } );
+    %>
+    <%
+    if ( 1 == show_other ) {
+    %>
+    <li>
+        <label><input type="radio" name="nf-field-<%= id %>" class="<%= classes %>" value="nf-other" <%= ( value == 'nf-other' ) ? 'checked="checked"' : '' %>> Other</label>
+        <%
+        if ( value == 'nf-other' ) {
+        %>
+        <input type="text" name="nf-field-<%= id %>" value="">
+        <%
+        }
+        %>
+    </li>
+    <%
+    }
+    %>
+</ul>
