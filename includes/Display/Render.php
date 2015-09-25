@@ -6,6 +6,9 @@ final class NF_Display_Render
 
     public static function localize( $form_id )
     {
+        if( ! has_action( 'wp_footer', 'NF_Display_Render::output_templates' ) ){
+            add_action( 'wp_footer', 'NF_Display_Render::output_templates' );
+        }
         $form = Ninja_Forms()->form( $form_id )->get();
 
         $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
@@ -21,7 +24,7 @@ final class NF_Display_Render
 
             $fields[] = $field->get_settings();
 
-            self::template( $field_class::TEMPLATE );
+            self::load_template( $field_class::TEMPLATE );
 
         }
 
@@ -49,18 +52,23 @@ final class NF_Display_Render
         </script>
         <?php
 
-
     }
 
-    protected static function template( $file_name = '' )
+    public static function output_templates()
+    {
+        foreach( self::$loaded_templates as $name ) {
+            echo "<script id='nf-tmpl-field-$name' type='text/template'>";
+            Ninja_Forms::template('fields-' . $name, '.html');
+            echo '</script>';
+        }
+    }
+
+    protected static function load_template( $file_name = '' )
     {
         if( ! $file_name ) return;
 
         if( self::is_template_loaded( $file_name ) ) return;
 
-        echo "<script id='nf-tmpl-field-$file_name' type='text/template'>";
-        Ninja_Forms::template( 'fields-' . $file_name, '.html' );
-        echo '</script>';
         self::$loaded_templates[] = $file_name;
     }
 
@@ -71,6 +79,6 @@ final class NF_Display_Render
     protected static function is_template_loaded( $template_name )
     {
         return ( in_array( $template_name, self::$loaded_templates ) ) ? TRUE : FALSE ;
-}
+    }
 
 } // End Class NF_Display_Render
