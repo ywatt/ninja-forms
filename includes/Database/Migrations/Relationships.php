@@ -18,6 +18,8 @@ class NF_Database_Migrations_Relationships extends NF_Abstracts_Migration
             `child_type` tinytext NOT NULL,
             `parent_id` int NOT NULL,
             `parent_type` tinytext NOT NULL,
+            `created_at` TIMESTAMP,
+            `updated_at` DATETIME,
             UNIQUE KEY (`id`)
         ) $this->charset_collate;";
 
