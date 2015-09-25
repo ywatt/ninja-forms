@@ -7,6 +7,8 @@ final class NF_Database_Models_Field extends NF_Abstracts_Model
 {
     private $form_id = '';
 
+    protected $_type = 'field';
+
     protected $_table_name = 'nf_fields';
 
     protected $_meta_table_name = 'nf_field_meta';
