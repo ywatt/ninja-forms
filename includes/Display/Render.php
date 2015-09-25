@@ -58,7 +58,9 @@ final class NF_Display_Render
 
         if( self::is_template_loaded( $file_name ) ) return;
 
+        echo "<script id='nf-tmpl-field-$file_name' type='text/template'>";
         Ninja_Forms::template( 'fields-' . $file_name, '.html' );
+        echo '</script>';
         self::$loaded_templates[] = $file_name;
     }
 
