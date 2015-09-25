@@ -175,9 +175,12 @@ class NF_Abstracts_ModelFactory
      * @param string $id
      * @return $this
      */
-    public function object( $id )
+    public function object( $id = '' )
     {
-        $this->_object = new NF_Database_Models_Object( $this->_db, $id );
+        $parent_id = $this->_object->get_id();
+        $parent_type = $this->_object->get_type();
+
+        $this->_object = new NF_Database_Models_Object( $this->_db, $id, $parent_id, $parent_type );
 
         return $this;
     }
@@ -256,5 +259,30 @@ class NF_Abstracts_ModelFactory
         return $this->_objects;
     }
 
+    /*
+     * GENERIC
+     */
+
+    public function get_model( $id, $type )
+    {
+        global $wpdb;
+
+        switch( $type ){
+            case 'form':
+                return new NF_Database_Models_Form( $wpdb, $id );
+                break;
+            case 'field':
+                return new NF_Database_Models_Field( $wpdb, $id );
+                break;
+            case 'action':
+                return new NF_Database_Models_Action( $wpdb, $id );
+                break;
+            case 'object':
+                return new NF_Database_Models_Object( $wpdb, $id );
+                break;
+            default:
+                return FALSE;
+        }
+    }
 
 } // End Class NF_Abstracts_ModelFactory
