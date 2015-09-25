@@ -8,18 +8,11 @@ final class NF_Display_Render
     {
         $form = Ninja_Forms()->form( $form_id )->get();
 
+        // Output Form Container
         ?>
-
-            <div id="nf_form_<?php echo $form_id; ?>" class="nf_form_container">
+            <div id="nf-form-<?php echo $form_id; ?>-cont">
                 Form Container, Ya'll!
             </div>
-            <style>
-                .nf_form_container {
-                    padding: 10px;
-                    border: 1px solid red;
-                }
-            </style>
-
         <?php
 
         ?>
