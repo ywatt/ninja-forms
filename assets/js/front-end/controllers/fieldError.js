@@ -11,6 +11,7 @@ define(['lib/backbone.radio', 'front-end/models/fieldErrorModel'], function( Rad
 			errors.add( { 'id': id, 'msg' : msg } );
 			model.set( 'errors', errors );
 			model.trigger( 'change:errors', model );
+			Radio.channel( 'fields' ).trigger( 'add:error', model, id, msg );
 		},
 
 		removeError: function( targetID, id ) {
@@ -21,6 +22,7 @@ define(['lib/backbone.radio', 'front-end/models/fieldErrorModel'], function( Rad
 				errors.remove( targetError );
 				model.set( 'errors', errors );
 				model.trigger( 'change:errors', model );
+				Radio.channel( 'fields' ).trigger( 'remove:error', model, id );
 			}
 			
 		}

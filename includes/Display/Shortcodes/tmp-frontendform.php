@@ -5,7 +5,7 @@ function nf_tmp_frontendform( $atts = array() ) {
 
 	wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
     wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
-	wp_enqueue_script( 'nf-front-end', Ninja_Forms::$url . 'assets/js/front-end/main.js', array( 'jquery', 'backbone', 'requirejs' ) );
+	wp_enqueue_script( 'nf-front-end', Ninja_Forms::$url . 'assets/js/front-end/main.js', array( 'jquery', 'backbone', 'requirejs', 'jquery-form' ) );
 
 	wp_localize_script( 'nf-front-end', 'nfFrontEnd', array( 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/' ) );
 
@@ -18,12 +18,14 @@ function nf_tmp_frontendform( $atts = array() ) {
 					'type' 			=> 'text',
 					'label'			=> 'Name',
 					'label_pos' 	=> 'before',
+					'required'		=> 1,
 				),
 				array(
 					'id'			=> 8,
 					'type' 			=> 'email',
 					'label'			=> 'Email',
 					'label_pos' 	=> 'before',
+					'required'		=> 1,
 				),
 				array(
 					'id'			=> 11,
@@ -31,12 +33,22 @@ function nf_tmp_frontendform( $atts = array() ) {
 					'label'			=> 'Confirm Email',
 					'label_pos' 	=> 'before',
 					'confirm_field'	=> 8,
+					'required'		=> 1,
+				),
+				array(
+					'id'			=> 13,
+					'type' 			=> 'file',
+					'label'			=> 'Attachment',
+					'button_label'	=> 'Upload',
+					'label_pos' 	=> 'before',
+					'required'		=> 1,
 				),
 				array(
 					'id'			=> 2,
 					'type' 			=> 'textarea',
 					'label'			=> 'Message',
 					'label_pos'		=> 'before',
+					'required'		=> 1,
 				),
 				array(
 					'id'			=> 10,
@@ -44,7 +56,6 @@ function nf_tmp_frontendform( $atts = array() ) {
 					'label'			=> 'Mirror Name',
 					'label_pos' 	=> 'before',
 					'mirror_field'	=> 1
-					
 				),
 				array(
 					'id'			=> 3,
@@ -61,6 +72,12 @@ function nf_tmp_frontendform( $atts = array() ) {
 					'type' 			=> 'text',
 					'label'			=> 'Name',
 					'label_pos' 	=> 'before',
+				),
+				array(
+					'id'			=> 12,
+					'type'			=> 'email',
+					'label'			=> 'Email',
+					'label_pos'		=> 'before',
 				),
 				array(
 					'id'			=> 5,
@@ -148,7 +165,7 @@ function nf_tmp_output_templates() {
 		}
 
 		.nf-pass .nf-element {
-			border: 2px solid green;
+			/*border: 2px solid green;*/
 	  		background: url( 'https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/tick_green.png' ) no-repeat;
 			background-position: 99.5% 60%;
 	  		background-size: 35px 35px;
@@ -157,12 +174,17 @@ function nf_tmp_output_templates() {
 		}
 
 		.nf-fail .nf-element {
-			border: 2px solid red;
+			/*border: 2px solid red;*/
 	  		background: url( 'https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/cancel-512.png' ) no-repeat;
 	  		background-position: 99% 60%;
 	  		background-size: 30px 30px;
 	  		/*background: url( 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/email_envelope.png' ) 0 no-repeat;*/
 		}
+
+		.nf-file-progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+		.nf-file-bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+		.nf-file-percent { position:absolute; display:inline-block; top:3px; left:48%; }
+
 	</style>
 
 	<script id="nf-tmpl-layout" type="text/template">
@@ -180,11 +202,11 @@ function nf_tmp_output_templates() {
 	</script>
 
 	<script id="nf-tmpl-form-layout" type="text/template">
-		<form id="nf-form-1" enctype="multipart/form-data" method="post" action="" class="nf-form">
+		<div>
 			<div class="nf-before-fields"><%= beforeFields %></div>
 			<div class="nf-fields"></div>
 			<div class="nf-after-fields"><%= afterFields %></div>
-		</form>
+		</div>
 	</script>
 
 	<script id="nf-tmpl-after-form" type="text/template">
@@ -241,7 +263,7 @@ function nf_tmp_output_templates() {
 			 * Render our error section if we have an error.
 			 */
 			%>
-			<nf-error-wrap></nf-error-wrap>
+			<div class="nf-error-wrap"></div>
 		</div>
 	</script>
 
@@ -254,23 +276,38 @@ function nf_tmp_output_templates() {
 	</script>
 
 	<script id="nf-tmpl-field-text" type="text/template">
-		<input id="nf-field-<%= id %>" class="<%= classes %>" type="text" value="<%= value %>" placeholder="<%= placeholder %>">
+		<input id="nf-field-<%= id %>" name="nf-field-<%= id %>" class="<%= classes %>" type="text" value="<%= value %>" placeholder="<%= placeholder %>">
 	</script>
 
 	<script id="nf-tmpl-field-email" type="text/template">
-		<input id="nf-field-<%= id %>" class="<%= classes %>" type="email" value="<%= value %>" placeholder="<%= placeholder %>">
+		<input id="nf-field-<%= id %>" name="nf-field-<%= id %>" class="<%= classes %>" type="email" value="<%= value %>" placeholder="<%= placeholder %>">
 	</script>
 
 	<script id="nf-tmpl-field-textarea" type="text/template">
-		<textarea id="nf-field-<%= id %>" placeholder="<%= placeholder %>"><%= value %></textarea>
+		<textarea id="nf-field-<%= id %>" name="nf-field-<%= id %>" placeholder="<%= placeholder %>"><%= value %></textarea>
 	</script>
 
 	<script id="nf-tmpl-field-submit" type="text/template">
-		<input id="nf-field-<%= id %>" type="submit" value="<%= label %>">
+		<input id="nf-field-<%= id %>" type="submit" value="<%= label %>" <%= disabled %>>
 	</script>
 
 	<script id="nf-tmpl-field-checkbox" type="text/template">
-		<input id="nf-field-<%= id %>" class="<%= classes %>" type="checkbox" value="1">
+		<input id="nf-field-<%= id %>" name="nf-field-<%= id %>" class="<%= classes %>" type="checkbox" value="1">
+	</script>
+
+	<script id="nf-tmpl-field-file" type="text/template">
+		<form id="nf-file-form-<%= id %>" enctype="multipart/form-data" method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="nf-file-form">
+			<input type="button" value="<%= button_label %>" class="nf-file-button nf-element">
+			
+			<div class="nf-file-progress" style="display:none;">
+				<div class="nf-file-bar"></div>
+				<div class="nf-file-percent">0%</div>
+			</div>
+			<div class="nf-file-status"></div>
+
+			<input type="hidden" name="MAX_FILE_SIZE" value="2097152000">
+			<input id="nf-field-<%= id %>" name="nf-field-<%= id %>" class="<%= classes %>" type="file" style="display:none;">
+		</form>
 	</script>
 
 	<script id="nf-tmpl-field-radio" type="text/template">
@@ -292,7 +329,7 @@ function nf_tmp_output_templates() {
 					<%
 					if ( value == 'nf-other' ) {
 						%>
-							<input type="text" value="">
+							<input type="text" name="nf-field-<%= id %>" value="">
 						<%
 					}
 					%>
@@ -305,3 +342,19 @@ function nf_tmp_output_templates() {
 
 	<?php
 }
+
+function nf_ajax_test() {
+	echo wp_json_encode( $_POST );
+	die();
+}
+
+add_action( 'wp_ajax_nf_submit_form', 'nf_ajax_test' );
+add_action( 'wp_ajax_nopriv_nf_submit_form', 'nf_ajax_test' );
+
+function nf_ajax_async_upload() {
+	echo "The.Jerk.1979.720p.BluRay.x264.YIFY.mp4";
+	die();
+}
+
+add_action( 'wp_ajax_nf_async_upload', 'nf_ajax_async_upload' );
+add_action( 'wp_ajax_nopriv_nf_async_upload', 'nf_ajax_async_upload' );

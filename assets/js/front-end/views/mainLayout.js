@@ -18,6 +18,11 @@ define( ['front-end/views/beforeForm', 'front-end/views/formLayout', 'front-end/
 			this.beforeForm.show( new beforeForm( { model: this.model } ) );
 			this.formLayout.show( new formLayout( { model: this.model, fieldCollection: this.options.fieldCollection } ) );
 			this.afterForm.show( new afterForm( { model: this.model } ) );
+		},
+
+		onRender: function() {
+			// var formEl = jQuery( '#nf-form-' + this.model.get( 'id' ) );
+			// console.log( formEl );
 		}
 
 	});

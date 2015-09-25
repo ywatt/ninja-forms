@@ -13,9 +13,9 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 
 		changeError: function() {
 			if ( 0 == this.model.get( 'errors' ).models.length ) {
-				this.removeWrapperClass( 'nf-error' );
+				this.model.removeWrapperClass( 'nf-error' );
 			} else {
-				this.addWrapperClass( 'nf-error' );
+				this.model.addWrapperClass( 'nf-error' );
 			}
 
 			this.errorCollectionView.render();
@@ -49,7 +49,7 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 			this.$el.unwrap();
 			this.setElement( this.$el );
 
-			var el = jQuery( this.el ).children( 'nf-error-wrap' );
+			var el = jQuery( this.el ).children( '.nf-error-wrap' );
     		this.errorCollectionView = new fieldErrorCollection( { el: el, collection: this.model.get( 'errors' ), thisModel: this.model } );
 		},
 
@@ -80,7 +80,8 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 
 		events: {
 			'change .nf-element': 'fieldChange',
-			'keyup .nf-element': 'fieldKeyup'
+			'keyup .nf-element': 'fieldKeyup',
+			'click .nf-element': 'fieldClick'
 		},
 
 		fieldChange: function( e ) {
@@ -91,8 +92,13 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 		fieldKeyup: function( e ) {
 			var el = jQuery( e.currentTarget );
 			var keyCode = e.keyCode;
-			var response = Radio.channel( this.model.get( 'type' ) ).trigger( 'keyup:field', el, keyCode, this.model );
-			var response = Radio.channel( 'fields' ).trigger( 'keyup:field', el, keyCode, this.model );
+			Radio.channel( this.model.get( 'type' ) ).trigger( 'keyup:field', el, keyCode, this.model );
+			Radio.channel( 'fields' ).trigger( 'keyup:field', el, keyCode, this.model );
+		},
+
+		fieldClick: function( e ) {
+			var el = jQuery( e.currentTarget );
+			Radio.channel( 'fields' ).trigger( 'click:field', el, this.model );
 		}
 	});
 

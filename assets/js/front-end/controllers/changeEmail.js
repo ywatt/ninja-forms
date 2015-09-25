@@ -43,18 +43,28 @@ define(['lib/backbone.radio'], function( Radio ) {
 			var value = jQuery( el ).val();
 
 			/*
+			 * Get our current ID
+			 */
+			var fieldID = model.get( 'id' );
+
+			/*
 			 * Check our value to see if it is a valid email.
 			 * If we have an empty value, remove our pass/fail class
 			 */
 			if ( 0 == value.length ) {
 				model.removeWrapperClass( 'nf-fail' );
 				model.removeWrapperClass( 'nf-pass' );
+				Radio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
 			} else if ( ! emailReg.test( value ) ) {
 				model.removeWrapperClass( 'nf-pass' );
-				model.addWrapperClass( 'nf-fail' );
-			} else {
+				if ( ! model.get( 'clean' ) ) {
+					model.addWrapperClass( 'nf-fail' );
+					Radio.channel( 'fields' ).request( 'add:error', fieldID, errorID, errorMsg );
+				}
+			} else if ( emailReg.test( value ) ) {
 				model.removeWrapperClass( 'nf-fail' );
 				model.addWrapperClass( 'nf-pass' );
+				Radio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
 			}
 		}
 	});

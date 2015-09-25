@@ -22,6 +22,9 @@ define(['lib/backbone.radio'], function( Radio ) {
 			// Set our 'isUpdated' flag to false.
 			model.set( 'isUpdated', false );
 
+			// Set our 'clean' flag to false.
+			model.set( 'clean', false );
+
 			/*
 			 * Send out a message saying that we've changed a field.
 			 * The first channel is field id/key specific.
