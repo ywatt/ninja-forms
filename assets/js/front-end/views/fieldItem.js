@@ -80,7 +80,8 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 
 		events: {
 			'change .nf-element': 'fieldChange',
-			'keyup .nf-element': 'fieldKeyup'
+			'keyup .nf-element': 'fieldKeyup',
+			'click .nf-element': 'fieldClick'
 		},
 
 		fieldChange: function( e ) {
@@ -91,8 +92,13 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 		fieldKeyup: function( e ) {
 			var el = jQuery( e.currentTarget );
 			var keyCode = e.keyCode;
-			var response = Radio.channel( this.model.get( 'type' ) ).trigger( 'keyup:field', el, keyCode, this.model );
-			var response = Radio.channel( 'fields' ).trigger( 'keyup:field', el, keyCode, this.model );
+			Radio.channel( this.model.get( 'type' ) ).trigger( 'keyup:field', el, keyCode, this.model );
+			Radio.channel( 'fields' ).trigger( 'keyup:field', el, keyCode, this.model );
+		},
+
+		fieldClick: function( e ) {
+			var el = jQuery( e.currentTarget );
+			Radio.channel( 'fields' ).trigger( 'click:field', el, this.model );
 		}
 	});
 

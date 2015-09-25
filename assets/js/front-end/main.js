@@ -39,37 +39,7 @@ jQuery( document ).ready( function( $ ) {
 			},
 			onStart: function() {
 				_.each( this.forms.models, function( form, index ) {
-					var options = {
-			            beforeSerialize: function( formData, options ) {
-			            	// if ( typeof tinyMCE !== 'undefined' ) {
-			            	// 	tinyMCE.triggerSave();
-			            	// }
-			            	
-			            },
-						beforeSubmit: function( formData, jqForm, options ) {
-							Radio.channel( 'form' ).trigger( 'before:submit', formData, options );
-
-							var formID = options.extraData.formID;
-							var errors = Radio.channel( 'form' ).request( 'get:errors', formID );
-							if ( errors ) {
-								return false;
-							}
-						},
-
-						success: function( responseText ) {
-							console.log( responseText );
-						},
-
-						data: {
-							action: 'nf_submit_form',
-							formID: form.get( 'id' )
-						},
-
-						dataType: 'json'
-					};
-
-					var layoutView = new mainLayout( { model: form, fieldCollection: form.get( 'fields' ) } );
-					jQuery( '#nf-form-' + form.get( 'id') ).ajaxForm( options );			
+					var layoutView = new mainLayout( { model: form, fieldCollection: form.get( 'fields' ) } );			
 				} );
 			},
 			getField: function( id ) {

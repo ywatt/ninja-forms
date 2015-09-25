@@ -9,7 +9,8 @@ define(
 		'front-end/controllers/confirmField',
 		'front-end/controllers/updateFieldModel',
 		'front-end/controllers/submitInit',
-		'front-end/controllers/getFormErrors'
+		'front-end/controllers/getFormErrors',
+		'front-end/controllers/selectFile'
 	],
 	function(
 		FieldError,
@@ -21,7 +22,8 @@ define(
 		ConfirmField,
 		UpdateFieldModel,
 		SubmitInit,
-		GetFormErrors
+		GetFormErrors,
+		SelectFile
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -35,6 +37,7 @@ define(
 				var updateFieldModel = new UpdateFieldModel();
 				var submitInit = new SubmitInit();
 				var getFormErrors = new GetFormErrors();
+				var selectFile = new SelectFile();
 			}
 		});
 

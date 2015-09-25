@@ -36,6 +36,14 @@ function nf_tmp_frontendform( $atts = array() ) {
 					'required'		=> 1,
 				),
 				array(
+					'id'			=> 13,
+					'type' 			=> 'file',
+					'label'			=> 'Attachment',
+					'button_label'	=> 'Upload',
+					'label_pos' 	=> 'before',
+					'required'		=> 1,
+				),
+				array(
 					'id'			=> 2,
 					'type' 			=> 'textarea',
 					'label'			=> 'Message',
@@ -172,6 +180,11 @@ function nf_tmp_output_templates() {
 	  		background-size: 30px 30px;
 	  		/*background: url( 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/email_envelope.png' ) 0 no-repeat;*/
 		}
+
+		.nf-file-progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+		.nf-file-bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+		.nf-file-percent { position:absolute; display:inline-block; top:3px; left:48%; }
+
 	</style>
 
 	<script id="nf-tmpl-layout" type="text/template">
@@ -189,11 +202,11 @@ function nf_tmp_output_templates() {
 	</script>
 
 	<script id="nf-tmpl-form-layout" type="text/template">
-		<form id="nf-form-<%= id %>" enctype="multipart/form-data" method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="nf-form">
+		<div>
 			<div class="nf-before-fields"><%= beforeFields %></div>
 			<div class="nf-fields"></div>
 			<div class="nf-after-fields"><%= afterFields %></div>
-		</form>
+		</div>
 	</script>
 
 	<script id="nf-tmpl-after-form" type="text/template">
@@ -282,6 +295,21 @@ function nf_tmp_output_templates() {
 		<input id="nf-field-<%= id %>" name="nf-field-<%= id %>" class="<%= classes %>" type="checkbox" value="1">
 	</script>
 
+	<script id="nf-tmpl-field-file" type="text/template">
+		<form id="nf-file-form-<%= id %>" enctype="multipart/form-data" method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="nf-file-form">
+			<input type="button" value="<%= button_label %>" class="nf-file-button nf-element">
+			
+			<div class="nf-file-progress" style="display:none;">
+				<div class="nf-file-bar"></div>
+				<div class="nf-file-percent">0%</div>
+			</div>
+			<div class="nf-file-status"></div>
+
+			<input type="hidden" name="MAX_FILE_SIZE" value="2097152000">
+			<input id="nf-field-<%= id %>" name="nf-field-<%= id %>" class="<%= classes %>" type="file" style="display:none;">
+		</form>
+	</script>
+
 	<script id="nf-tmpl-field-radio" type="text/template">
 		<ul>
 			<%
@@ -322,3 +350,11 @@ function nf_ajax_test() {
 
 add_action( 'wp_ajax_nf_submit_form', 'nf_ajax_test' );
 add_action( 'wp_ajax_nopriv_nf_submit_form', 'nf_ajax_test' );
+
+function nf_ajax_async_upload() {
+	echo "The.Jerk.1979.720p.BluRay.x264.YIFY.mp4";
+	die();
+}
+
+add_action( 'wp_ajax_nf_async_upload', 'nf_ajax_async_upload' );
+add_action( 'wp_ajax_nopriv_nf_async_upload', 'nf_ajax_async_upload' );
