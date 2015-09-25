@@ -10,6 +10,8 @@ class NF_AJAX_Controllers_Uploads extends NF_Abstracts_Controller
 
     public function upload()
     {
+        $this->_data['file'] = array_values($_FILES)[0];
 
+        $this->_respond();
     }
 }
