@@ -57,9 +57,7 @@ final class NF_Display_Render
     public static function output_templates()
     {
         foreach( self::$loaded_templates as $name ) {
-            echo "<script id='nf-tmpl-field-$name' type='text/template'>";
             Ninja_Forms::template('fields-' . $name, '.html');
-            echo '</script>';
         }
     }
 
