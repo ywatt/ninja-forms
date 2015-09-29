@@ -22,8 +22,9 @@ abstract class NF_Abstracts_Controller
 
     public function __construct()
     {
-        check_ajax_referer( 'ninja_forms_ajax_nonce' );
+        //This section intentionally left blank.
     }
+
 
     /*
      * PROTECTED METHODS
