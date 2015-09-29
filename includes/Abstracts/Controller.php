@@ -22,7 +22,7 @@ abstract class NF_Abstracts_Controller
 
     public function __construct()
     {
-        // TODO: Add Nonce Check
+        check_ajax_referer( 'ninja_forms_ajax_nonce' );
     }
 
     /*
