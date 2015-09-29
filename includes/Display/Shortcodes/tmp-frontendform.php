@@ -372,5 +372,5 @@ function nf_ajax_async_upload() {
 	die();
 }
 
-add_action( 'wp_ajax_nf_async_upload', 'nf_ajax_async_upload' );
-add_action( 'wp_ajax_nopriv_nf_async_upload', 'nf_ajax_async_upload' );
+//add_action( 'wp_ajax_nf_async_upload', 'nf_ajax_async_upload' );
+//add_action( 'wp_ajax_nopriv_nf_async_upload', 'nf_ajax_async_upload' );
