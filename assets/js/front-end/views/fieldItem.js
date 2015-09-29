@@ -55,19 +55,23 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 
 		templateHelpers: function () {
 	    	return {
+	    		
 				renderElement: function(){
 					this.setPlaceholder();
 					this.setClasses();
 					return _.template( jQuery( '#nf-tmpl-field-' + this.type ).html(), this );
 				},
+
 				renderLabel: function() {
 					return _.template( jQuery( '#nf-tmpl-field-label' ).html(), this );
 				},
+
 				setPlaceholder: function() {
 					if ( 'inside' == this.label_pos ) {
 						this.placeholder = this.label;
 					}
 				},
+
 				setClasses: function() {
 					if ( this.error ) {
 						this.classes += ' nf-error';

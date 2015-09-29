@@ -2,6 +2,8 @@ require.config( {
 	baseUrl: nfFrontEnd.requireBaseUrl
 } );
 
+var nfRadio = Backbone.Radio;
+
 jQuery( document ).ready( function( $ ) {
 	require( ['lib/backbone.radio', 'front-end/models/formCollection', 'front-end/models/formModel', 'front-end/models/fieldCollection', 'front-end/controllers/loadControllers', 'front-end/views/mainLayout'], function( Radio, formCollection, FormModel, FieldCollection, LoadControllers, mainLayout ) {
 
