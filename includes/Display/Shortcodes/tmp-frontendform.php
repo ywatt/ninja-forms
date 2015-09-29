@@ -4,10 +4,12 @@ function nf_tmp_frontendform( $atts = array() ) {
 	$form_id = $atts['id'];
 
 	wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
+	wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
+    
     wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
 	wp_enqueue_script( 'nf-front-end', Ninja_Forms::$url . 'assets/js/front-end/main.js', array( 'jquery', 'backbone', 'requirejs', 'jquery-form' ) );
 
-	wp_localize_script( 'nf-front-end', 'nfFrontEnd', array( 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/' ) );
+	wp_localize_script( 'nf-front-end', 'nfFrontEnd', array( 'adminAjax' => admin_url( 'admin-ajax.php' ), 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/' ) );
 
 	switch( $form_id ) {
 		case 1:
@@ -164,6 +166,10 @@ function nf_tmp_output_templates() {
 			color:red;
 		}
 
+		.nf-element.disabled {
+			opacity: 0.3;
+		}
+
 		.nf-pass .nf-element {
 			/*border: 2px solid green;*/
 	  		background: url( 'https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/tick_green.png' ) no-repeat;
@@ -288,7 +294,14 @@ function nf_tmp_output_templates() {
 	</script>
 
 	<script id="nf-tmpl-field-submit" type="text/template">
-		<input id="nf-field-<%= id %>" type="submit" value="<%= label %>" <%= disabled %>>
+		<input id="nf-field-<%= id %>" class="nf-element <%= disabled %>" type="button" value="<%= label %>">
+		<%=	maybeRenderError() %>
+	</script>
+
+	<script id="nf-tmpl-field-submit-error-msg" type="text/template">
+		<div class="nf-field-submit-error nf-error-msg" style="display:none;">
+			DAT ERROR MESSAGE!
+		</div>
 	</script>
 
 	<script id="nf-tmpl-field-checkbox" type="text/template">
@@ -296,18 +309,21 @@ function nf_tmp_output_templates() {
 	</script>
 
 	<script id="nf-tmpl-field-file" type="text/template">
-		<form id="nf-file-form-<%= id %>" enctype="multipart/form-data" method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="nf-file-form">
+		<div>
 			<input type="button" value="<%= button_label %>" class="nf-file-button nf-element">
-			
-			<div class="nf-file-progress" style="display:none;">
-				<div class="nf-file-bar"></div>
-				<div class="nf-file-percent">0%</div>
-			</div>
-			<div class="nf-file-status"></div>
+		</div>
 
+		<div class="nf-file-progress" style="display:none;">
+			<div class="nf-file-bar"></div>
+			<div class="nf-file-percent">0%</div>
+		</div>
+
+		<div class="nf-file-status"></div>
+		
+		<span class="nf-file-input-wrapper">
 			<input type="hidden" name="MAX_FILE_SIZE" value="2097152000">
 			<input id="nf-field-<%= id %>" name="nf-field-<%= id %>" class="<%= classes %>" type="file" style="display:none;">
-		</form>
+		</span>
 	</script>
 
 	<script id="nf-tmpl-field-radio" type="text/template">
