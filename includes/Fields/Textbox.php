@@ -11,7 +11,7 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
     protected $_group = 'standard_fields';
 
-    protected $_type = 'text';
+    protected $_type = 'input';
 
     public function __construct()
     {

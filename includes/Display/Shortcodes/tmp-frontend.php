@@ -14,21 +14,21 @@ function nf_test_ajax()
 	?>
 	<script>
 		jQuery(document).ready(function($) {
-			var ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
-			var data = {
-				action: 'nf_process_submission',
-				nf_form: form_1
-			}
+//			var ajaxurl = '<?php //echo admin_url( 'admin-ajax.php' ); ?>//';
+//			var data = {
+//				action: 'nf_process_submission',
+//				nf_form: form_1
+//			}
 
-			console.log( form_1 );
+			console.log( nfForms );
 
-			jQuery.post(ajaxurl, data, function (response) {
-
-				response = JSON.parse( response );
-
-				console.log( response );
-
-			});
+//			jQuery.post(ajaxurl, data, function (response) {
+//
+//				response = JSON.parse( response );
+//
+//				console.log( response );
+//
+//			});
 		});
 	</script>
 	<?php

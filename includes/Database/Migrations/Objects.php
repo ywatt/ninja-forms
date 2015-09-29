@@ -16,7 +16,6 @@ class NF_Database_Migrations_Objects extends NF_Abstracts_Migration
             `id` int NOT NULL AUTO_INCREMENT,
             `type` tinytext,
             `title` tinytext,
-            `parent_id` int NOT NULL,
             `created_at` TIMESTAMP,
             `updated_at` DATETIME,
             UNIQUE KEY (`id`)

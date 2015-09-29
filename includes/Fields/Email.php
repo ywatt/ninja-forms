@@ -5,6 +5,8 @@
  */
 class NF_Fields_Email extends NF_Abstracts_UserInfo
 {
+    const TEMPLATE = 'email';
+
     protected $_name = 'email';
 
     protected $_nicename = 'Email';

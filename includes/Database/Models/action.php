@@ -7,6 +7,8 @@ final class NF_Database_Models_Action extends NF_Abstracts_Model
 {
     private $form_id = '';
 
+    protected $_type = 'action';
+
     protected $_table_name = 'nf_actions';
 
     protected $_meta_table_name = 'nf_action_meta';

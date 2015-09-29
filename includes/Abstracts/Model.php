@@ -15,7 +15,17 @@ class NF_Abstracts_Model
     /**
      * @var string
      */
+    protected $_type = '';
+
+    /**
+     * @var string
+     */
     protected $_parent_id = '';
+
+    /**
+     * @var string
+     */
+    protected $_parent_type = '';
 
     /**
      * @var string
@@ -82,6 +92,11 @@ class NF_Abstracts_Model
         return $this->_id;
     }
 
+    public function get_type()
+    {
+        return $this->_type;
+    }
+
     public function get_setting( $setting )
     {
         return $this->get_settings( $setting );
@@ -109,8 +124,10 @@ class NF_Abstracts_Model
                 "
             );
 
-            foreach( $this->_columns as $column ){
-                $this->_settings[ $column ] = $results->$column;
+            if( $results ) {
+                foreach ($this->_columns as $column) {
+                    $this->_settings[$column] = $results->$column;
+                }
             }
 
             $meta_results = $this->_db->get_results(
@@ -201,7 +218,28 @@ class NF_Abstracts_Model
             )
         );
 
-        // TODO: Cascade through Object Relationships
+        $children = $this->_db->get_results(
+            "
+            SELECT child_id, child_type
+            FROM $this->_relationships_table
+            WHERE parent_id = $this->_id
+            AND   parent_type = '$this->_type'
+            "
+        );
+
+        foreach( $children as $child ) {
+            $model = Ninja_Forms()->form()->get_model( $child->child_id, $child->child_type );
+            $model->delete();
+        }
+
+        $this->_db->delete(
+            $this->_relationships_table,
+            array(
+                'parent_id' => $this->_id,
+                'parent_type' => $this->_type
+            )
+        );
+
 
         return in_array( FALSE, $results );
     }
@@ -251,11 +289,6 @@ class NF_Abstracts_Model
             );
 
             $this->_id = $this->_db->insert_id;
-
-            echo "<pre>";
-            var_dump( "Created field id# " . $this->_id );
-            echo "</pre>";
-
         }
 
         $this->_save_settings();
@@ -272,6 +305,15 @@ class NF_Abstracts_Model
         if( $cache !== '' ) {
             $this->_cache = $cache;
         }
+
+        return $this;
+    }
+
+    public function add_parent( $parent_id, $parent_type )
+    {
+        $this->_parent_id = $parent_id;
+
+        $this->_parent_type = $parent_type;
 
         return $this;
     }
@@ -340,7 +382,44 @@ class NF_Abstracts_Model
             $this->_results[] = $this->_save_setting( $key, $value );
         }
 
+        $this->_save_parent_relationship();
+
         return $this->_results;
+    }
+
+    protected function _save_parent_relationship()
+    {
+        if( ! $this->_id || ! $this->_type || ! $this->_parent_id || ! $this->_parent_type ) return $this;
+
+        $this->_db->get_results(
+            "
+          SELECT *
+          FROM $this->_relationships_table
+          WHERE `child_id` = $this->_id
+          AND   `child_type` = '$this->_type'
+          "
+        );
+
+        if( 0 == $this->_db->num_rows ){
+
+            $this->_db->insert(
+                $this->_relationships_table,
+                array(
+                    'child_id' => $this->_id,
+                    'child_type' => $this->_type,
+                    'parent_id' => $this->_parent_id,
+                    'parent_type' => $this->_parent_type
+                ),
+                array(
+                    '%d',
+                    '%s',
+                    '%d',
+                    '%s',
+                )
+            );
+        }
+
+        return $this;
     }
 
     protected function build_meta_query( $parent_id, $where )

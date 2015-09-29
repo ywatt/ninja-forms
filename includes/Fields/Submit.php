@@ -5,6 +5,8 @@
  */
 class NF_Fields_Submit extends NF_Fields_Button
 {
+    const TEMPLATE = 'submit';
+
     protected $_name = 'submit';
 
     protected $_nicename = 'Submit Button';

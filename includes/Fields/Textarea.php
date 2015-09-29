@@ -5,6 +5,8 @@
  */
 class NF_Fields_Textarea extends NF_Abstracts_Field
 {
+    const TEMPLATE = 'textarea';
+
     protected $_name = 'textarea';
 
     protected $_nicename = 'Textarea';

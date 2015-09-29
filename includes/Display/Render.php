@@ -6,57 +6,67 @@ final class NF_Display_Render
 
     public static function localize( $form_id )
     {
+        if( ! has_action( 'wp_footer', 'NF_Display_Render::output_templates' ) ){
+            add_action( 'wp_footer', 'NF_Display_Render::output_templates' );
+        }
         $form = Ninja_Forms()->form( $form_id )->get();
 
-        ?>
+        $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
 
-            <div id="nf_form_<?php echo $form_id; ?>" class="nf_form_container">
-                Form Container, Ya'll!
-            </div>
-            <style>
-                .nf_form_container {
-                    padding: 10px;
-                    border: 1px solid red;
-                }
-            </style>
+        $fields = array();
 
-        <?php
-
-        ?>
-        <script>
-            var form_<?php echo $form_id; ?> = JSON.parse( '<?php echo json_encode( $form->get_settings() ); ?>' );
-            form_<?php echo $form_id; ?>.id = <?php echo $form_id; ?>;
-            form_<?php echo $form_id; ?>.fields = [];
-        </script>
-        <?php
-
-        $fields = Ninja_Forms()->form( $form_id )->get_fields();
-
-        foreach( $fields as $field ){
+        foreach( $form_fields as $field ){
             $field_class = $field->get_settings( 'type' );
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
             $field->update_setting( 'value', time() );
             $field->update_setting( 'id', $field->get_id() );
-            ?>
-            <script>
-                var field = JSON.parse( '<?php echo json_encode( $field->get_settings() ); ?>' );
-                form_<?php echo $form_id; ?>.fields.push( field );
-            </script>
-            <?php
 
-            self::template( $field_class::TEMPLATE );
+            $fields[] = $field->get_settings();
 
+            self::load_template( $field_class::TEMPLATE );
+
+        }
+
+        // Output Form Container
+        ?>
+            <div id="nf-form-<?php echo $form_id; ?>-cont">
+                Form Container, Ya'll!
+            </div>
+        <?php
+
+        ?>
+        <script>
+            // Maybe initialize nfForms object
+            var nfForms = nfForms || [];
+
+            // Build Form Data
+            var form = [];
+            form.id = <?php echo $form_id; ?>;
+            form.settings = JSON.parse( '<?php echo wp_json_encode( $form->get_settings() ); ?>' );
+
+            form.fields = JSON.parse( '<?php echo wp_json_encode( $fields ); ?>' );
+
+            // Add Form Data to nfForms object
+            nfForms.push( form );
+        </script>
+        <?php
+
+    }
+
+    public static function output_templates()
+    {
+        foreach( self::$loaded_templates as $name ) {
+            Ninja_Forms::template('fields-' . $name, '.html');
         }
     }
 
-    protected static function template( $file_name = '' )
+    protected static function load_template( $file_name = '' )
     {
         if( ! $file_name ) return;
 
         if( self::is_template_loaded( $file_name ) ) return;
 
-        Ninja_Forms::template( 'fields-' . $file_name, '.html' );
         self::$loaded_templates[] = $file_name;
     }
 
@@ -67,6 +77,6 @@ final class NF_Display_Render
     protected static function is_template_loaded( $template_name )
     {
         return ( in_array( $template_name, self::$loaded_templates ) ) ? TRUE : FALSE ;
-}
+    }
 
 } // End Class NF_Display_Render
