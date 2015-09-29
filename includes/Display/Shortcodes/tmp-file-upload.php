@@ -33,6 +33,8 @@ function nf_tmp_file_upload() {
 
             var ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
 
+            var nf_ajax_nonce = '<?php echo wp_create_nonce( "ninja_forms_ajax_nonce" ); ?>';
+
             $('form').on('submit', uploadFiles);
 
             // Catch the form submit and upload the files
@@ -51,6 +53,7 @@ function nf_tmp_file_upload() {
                 });
 
                 data.append( 'action', 'nf_async_upload' );
+                data.append( 'security', nf_ajax_nonce );
 
                 $.ajax({
                     url: ajaxurl,

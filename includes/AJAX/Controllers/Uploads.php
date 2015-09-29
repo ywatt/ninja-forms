@@ -17,7 +17,7 @@ class NF_AJAX_Controllers_Uploads extends NF_Abstracts_Controller
 
     public function upload()
     {
-        check_ajax_referer( 'ninja_forms_ajax_nonce' );
+        check_ajax_referer( 'ninja_forms_ajax_nonce', 'security' );
 
         $this->_data['file'] = array_values($_FILES)[0];
 
