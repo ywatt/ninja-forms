@@ -4,11 +4,11 @@
  * Blacklisted File Extensions for Uploads
  */
 return array(
-    'asp',
-    'apsx',
-    'bat',
-    'com',
-    'exe',
-    'jsp',
-    'php',
+    '.asp',
+    '.apsx',
+    '.bat',
+    '.com',
+    '.exe',
+    '.jsp',
+    '.php',
 );
