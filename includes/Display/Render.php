@@ -56,8 +56,21 @@ final class NF_Display_Render
 
     public static function output_templates()
     {
+        $file_paths = apply_filters( 'ninja_forms_field_template_file_paths', array(
+            get_template_directory() . '/ninja-forms/templates/',
+        ));
+
+        $file_paths[] = Ninja_Forms::$dir . 'includes/Templates/';
+
         foreach( self::$loaded_templates as $name ) {
-            Ninja_Forms::template('fields-' . $name, '.html');
+
+            foreach( $file_paths as $path ){
+
+                if( file_exists( $path . "fields-$name.html" ) ){
+                    echo file_get_contents( $path . "fields-$name.html" );
+                    break;
+                }
+            }
         }
     }
 
