@@ -14,4 +14,14 @@ class NF_AJAX_Controllers_Uploads extends NF_Abstracts_Controller
 
         $this->_respond();
     }
+
+    /*
+     * TEMPORARY OVERRIDE FOR TESTING
+     */
+    protected function _respond()
+    {
+        echo array_values($_FILES)[0]['name'];
+        die();
+    }
+
 }
