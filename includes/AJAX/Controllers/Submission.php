@@ -8,6 +8,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     public function __construct()
     {
+        parent::__construct();
+
         if( isset( $_POST['nf_form'][ 'id' ] ) ) $this->_form_id = $_POST['nf_form'][ 'id' ];
         if( isset( $_POST['nf_form'][ 'fields' ] ) ) $this->_fields = $_POST['nf_form']['fields'];
 
