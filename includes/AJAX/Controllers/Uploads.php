@@ -2,8 +2,12 @@
 
 class NF_AJAX_Controllers_Uploads extends NF_Abstracts_Controller
 {
+    protected $_blacklist = array();
+
     public function __construct()
     {
+        $this->_blacklist = apply_filters( 'ninja_forms_uploads_extension_blacklist', Ninja_Forms::config( 'UploadsExtensionBlacklist' ) );
+
         add_action( 'wp_ajax_nf_async_upload', array( $this, 'upload' ) );
         add_action( 'wp_ajax_nopriv_nf_async_upload', array( $this, 'upload' ) );
     }
