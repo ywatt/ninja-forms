@@ -142,6 +142,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->menus[ 'edit-action']      = new NF_Admin_Menus_EditAction();
                 self::$instance->menus[ 'edit-settings']    = new NF_Admin_Menus_EditSettings();
                 self::$instance->menus[ 'fields-layout']    = new NF_Admin_Menus_FieldsLayout();
+                self::$instance->menus[ 'mock-data']        = new NF_Admin_Menus_MockData();
 
                 /*
                  * AJAX Controllers
