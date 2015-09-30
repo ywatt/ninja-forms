@@ -11,8 +11,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         if( isset( $_POST['nf_form'][ 'id' ] ) ) $this->_form_id = $_POST['nf_form'][ 'id' ];
         if( isset( $_POST['nf_form'][ 'fields' ] ) ) $this->_fields = $_POST['nf_form']['fields'];
 
-        add_action( 'wp_ajax_nf_process_submission',   array( $this, 'process' )  );
-        add_action( 'wp_ajax_nopriv_nf_process_submission',   array( $this, 'process' )  );
+        add_action( 'wp_ajax_nf_ajax_submit',   array( $this, 'process' )  );
+        add_action( 'wp_ajax_nopriv_nf_ajax_submit',   array( $this, 'process' )  );
     }
 
     public function process()
