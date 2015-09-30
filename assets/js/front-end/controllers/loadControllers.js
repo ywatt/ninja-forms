@@ -3,41 +3,44 @@ define(
 		'front-end/controllers/fieldError',
 		'front-end/controllers/changeField',
 		'front-end/controllers/changeEmail',
-		'front-end/controllers/changeCheckbox',
-		'front-end/controllers/changeRadio',
+		'front-end/controllers/fieldCheckbox',
+		'front-end/controllers/fieldRadio',
 		'front-end/controllers/mirrorField',
 		'front-end/controllers/confirmField',
 		'front-end/controllers/updateFieldModel',
 		'front-end/controllers/submitInit',
 		'front-end/controllers/getFormErrors',
-		'front-end/controllers/selectFile'
+		'front-end/controllers/selectFile',
+		'front-end/controllers/validateRequired'
 	],
 	function(
 		FieldError,
 		ChangeField,
 		ChangeEmail,
-		ChangeCheckbox,
-		ChangeRadio,
+		FieldCheckbox,
+		FieldRadio,
 		MirrorField,
 		ConfirmField,
 		UpdateFieldModel,
 		SubmitInit,
 		GetFormErrors,
-		SelectFile
+		SelectFile,
+		ValidateRequired
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
 				var fieldError = new FieldError();
 				var changeField = new ChangeField();
 				var changeEmail = new ChangeEmail();
-				var changeCheckbox = new ChangeCheckbox();
-				var changeRadio = new ChangeRadio();
+				var fieldCheckbox = new FieldCheckbox();
+				var fieldRadio = new FieldRadio();
 				var mirrorField = new MirrorField();
 				var confirmField = new ConfirmField();
 				var updateFieldModel = new UpdateFieldModel();
 				var submitInit = new SubmitInit();
 				var getFormErrors = new GetFormErrors();
 				var selectFile = new SelectFile();
+				var validateRequired = new ValidateRequired();
 			}
 		});
 

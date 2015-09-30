@@ -1,4 +1,4 @@
-define( ['lib/backbone.radio'], function( Radio ) {
+define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'nf-section',
 		template: '#nf-tmpl-field-error',

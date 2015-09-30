@@ -1,4 +1,4 @@
-define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function( Radio, fieldErrorCollection ) {
+define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection ) {
 	var view = Marionette.ItemView.extend({
 		tagName: 'nf-section',
 		template: '#nf-tmpl-field-wrap',
@@ -85,24 +85,30 @@ define( ['lib/backbone.radio', 'front-end/views/fieldErrorCollection'], function
 		events: {
 			'change .nf-element': 'fieldChange',
 			'keyup .nf-element': 'fieldKeyup',
-			'click .nf-element': 'fieldClick'
+			'click .nf-element': 'fieldClick',
+			'blur .nf-element': 'fieldBlur'
 		},
 
 		fieldChange: function( e ) {
 			var el = jQuery( e.currentTarget );
-			var response = Radio.channel( 'nfAdmin' ).request( 'change:field', el, this.model );
+			var response = nfRadio.channel( 'nfAdmin' ).request( 'change:field', el, this.model );
 		},
 
 		fieldKeyup: function( e ) {
 			var el = jQuery( e.currentTarget );
 			var keyCode = e.keyCode;
-			Radio.channel( this.model.get( 'type' ) ).trigger( 'keyup:field', el, keyCode, this.model );
-			Radio.channel( 'fields' ).trigger( 'keyup:field', el, keyCode, this.model );
+			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'keyup:field', el, this.model, keyCode );
+			nfRadio.channel( 'fields' ).trigger( 'keyup:field', el, this.model, keyCode );
 		},
 
 		fieldClick: function( e ) {
 			var el = jQuery( e.currentTarget );
-			Radio.channel( 'fields' ).trigger( 'click:field', el, this.model );
+			nfRadio.channel( 'fields' ).trigger( 'click:field', el, this.model );
+		},
+
+		fieldBlur: function( e ) {
+			var el = jQuery( e.currentTarget );
+			nfRadio.channel( 'fields' ).trigger( 'blur:field', el, this.model );
 		}
 	});
 

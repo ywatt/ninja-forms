@@ -5,13 +5,13 @@ require.config( {
 var nfRadio = Backbone.Radio;
 
 jQuery( document ).ready( function( $ ) {
-	require( ['lib/backbone.radio', 'front-end/models/formCollection', 'front-end/models/formModel', 'front-end/models/fieldCollection', 'front-end/controllers/loadControllers', 'front-end/views/mainLayout'], function( Radio, formCollection, FormModel, FieldCollection, LoadControllers, mainLayout ) {
+	require( ['front-end/models/formCollection', 'front-end/models/formModel', 'front-end/models/fieldCollection', 'front-end/controllers/loadControllers', 'front-end/views/mainLayout'], function( formCollection, FormModel, FieldCollection, LoadControllers, mainLayout ) {
 
 		var NinjaForms = Marionette.Application.extend({
 			forms: {},
 			initialize: function( options ) {		
-				Radio.channel( 'fields' ).reply( 'get:field', this.getField, this );
-				Radio.channel( 'form' ).reply( 'get:form', this.getForm, this );
+				nfRadio.channel( 'fields' ).reply( 'get:field', this.getField, this );
+				nfRadio.channel( 'form' ).reply( 'get:form', this.getForm, this );
 				var loadControllers = new LoadControllers();
 				/*
 				 * Setup our field collections.
@@ -33,8 +33,8 @@ jQuery( document ).ready( function( $ ) {
 				_.each( this.forms.models, function( form ) {
 					_.each( form.get( 'fields' ).models, function( field ) {
 						field.set( 'formID', form.get( 'id' ) );
-						Radio.channel( field.get( 'type' ) ).trigger( 'init:model', field );
-						Radio.channel( 'fields' ).trigger( 'init:model', field );
+						nfRadio.channel( field.get( 'type' ) ).trigger( 'init:model', field );
+						nfRadio.channel( 'fields' ).trigger( 'init:model', field );
 					} );
 				} );
 				

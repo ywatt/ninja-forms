@@ -1,5 +1,5 @@
-define(['lib/backbone.radio'], function( Radio ) {
-	var radioChannel = Radio.channel( 'email' );
+define([], function() {
+	var radioChannel = nfRadio.channel( 'email' );
 	var emailReg = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 	var errorID = 'invalid-email';
 	var errorMsg = 'Please enter a valid email address!';
@@ -17,12 +17,12 @@ define(['lib/backbone.radio'], function( Radio ) {
 
 			if ( 0 < value.length ) {
 				if( emailReg.test( value ) ) {
-					Radio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
+					nfRadio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
 				} else {
-					Radio.channel( 'fields' ).request( 'add:error', fieldID, errorID, errorMsg );
+					nfRadio.channel( 'fields' ).request( 'add:error', fieldID, errorID, errorMsg );
 				}				
 			} else {
-				Radio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
+				nfRadio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
 			}
 		},
 
@@ -36,7 +36,7 @@ define(['lib/backbone.radio'], function( Radio ) {
 		 * @param  {object} model Model connected to the element that triggered the event
 		 * @return {void}
 		 */
-		emailKeyup: function( el, keyCode, model ) {
+		emailKeyup: function( el, model, keyCode ) {
 			/*
 			 * Get the current value from our element.
 			 */
@@ -54,17 +54,17 @@ define(['lib/backbone.radio'], function( Radio ) {
 			if ( 0 == value.length ) {
 				model.removeWrapperClass( 'nf-fail' );
 				model.removeWrapperClass( 'nf-pass' );
-				Radio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
+				nfRadio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
 			} else if ( ! emailReg.test( value ) ) {
 				model.removeWrapperClass( 'nf-pass' );
 				if ( ! model.get( 'clean' ) ) {
 					model.addWrapperClass( 'nf-fail' );
-					Radio.channel( 'fields' ).request( 'add:error', fieldID, errorID, errorMsg );
+					nfRadio.channel( 'fields' ).request( 'add:error', fieldID, errorID, errorMsg );
 				}
 			} else if ( emailReg.test( value ) ) {
 				model.removeWrapperClass( 'nf-fail' );
 				model.addWrapperClass( 'nf-pass' );
-				Radio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
+				nfRadio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
 			}
 		}
 	});
