@@ -2,14 +2,13 @@
 
 class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 {
-    protected $_form_id = '';
+    protected $_form_data = array();
 
-    protected $_field_values = array();
+    protected $_form_id = '';
 
     public function __construct()
     {
-        if( isset( $_POST['nf_form'][ 'id' ] ) ) $this->_form_id = $_POST['nf_form'][ 'id' ];
-        if( isset( $_POST['nf_form'][ 'fields' ] ) ) $this->_fields = $_POST['nf_form']['fields'];
+        if( isset( $_POST['formData'] ) ) $this->_form_data = json_decode( $_POST['formData'], TRUE );
 
         add_action( 'wp_ajax_nf_ajax_submit',   array( $this, 'process' )  );
         add_action( 'wp_ajax_nopriv_nf_ajax_submit',   array( $this, 'process' )  );
@@ -19,8 +18,17 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     {
         check_ajax_referer( 'ninja_forms_ajax_nonce', 'security' );
 
-        $this->validate_fields();
+        if( ! $this->_form_data ) {
+            $this->_errors[] = 'Form Data not found.';
+            $this->_respond();
+        }
 
+        $this->_form_id = $this->_form_data['id'];
+
+        $this->_data['fields'] = $this->_form_data['fields'];
+
+//        $this->validate_fields();
+//
         $this->run_actions();
 
         $this->_respond();
@@ -28,11 +36,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     protected function validate_fields()
     {
-        foreach( $this->_fields as $field ){
 
-            $field_id = $field['id'];
-            $this->_data['field_values'][ $field_id ] = $field['value'];
-        }
     }
 
     protected function run_actions()

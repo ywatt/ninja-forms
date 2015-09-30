@@ -46,9 +46,9 @@ final class NF_Actions_Save extends NF_Abstracts_Action
     {
         $sub = Ninja_Forms()->form( $form_id )->sub()->get();
 
-        foreach( $data['field_values'] as $id => $value ){
+        foreach( $data['fields'] as $field ){
 
-            $sub->update_field_value( $id, $value );
+            $sub->update_field_value( $field['id'], $field['value'] );
         }
 
         $sub->save();

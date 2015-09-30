@@ -12,8 +12,6 @@ Domain Path: /lang/
 Copyright 2015 WP Ninjas.
 */
 
-
-
 define( 'LOAD_DEPRECATED', FALSE );
 
 if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
