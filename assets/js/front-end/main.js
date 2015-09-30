@@ -12,6 +12,7 @@ jQuery( document ).ready( function( $ ) {
 			initialize: function( options ) {		
 				nfRadio.channel( 'fields' ).reply( 'get:field', this.getField, this );
 				nfRadio.channel( 'form' ).reply( 'get:form', this.getForm, this );
+				nfRadio.channel( 'form' ).reply( 'submit:form', this.submitForm, this );
 				var loadControllers = new LoadControllers();
 				/*
 				 * Setup our field collections.

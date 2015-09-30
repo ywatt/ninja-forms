@@ -71,7 +71,8 @@ define([], function() {
 				},
 
 				data: {
-					action: 'nf_async_upload'
+					action: 'nf_async_upload',
+					security: nfFrontEnd.ajaxNonce
 				}
 			};
 
