@@ -43,25 +43,23 @@ define([], function() {
 			} else {
 				var formModel = nfRadio.channel( 'form' ).request( 'get:form', model.get( 'formID' ) );
 				var formData = JSON.stringify( formModel );
-				console.log( formData );	
+				var data = {
+                	'action': 'nf_ajax_submit',
+                	'security': nfFrontEnd.ajaxNonce,
+                	'formData': formData
+				}
+
 				jQuery.ajax({
                     url: nfFrontEnd.adminAjax,
                     type: 'POST',
-                    data: {
-                    	action: 'nf_ajax_submit',
-                    	security: nfFrontEnd.ajaxNonce,
-                    	formData: formData
-                    },
+                    data: data,
                     cache: false,
-                    dataType: 'json',
-                    processData: false, // Don't process the files
-                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-                    success: function(data, textStatus, jqXHR)
+                   	success: function(data, textStatus, jqXHR)
                     {
                         if(typeof data.error === 'undefined')
                         {
                             // Success so call function to process the form
-//                            submitForm(event, data);
+							// submitForm(event, data);
                         }
                         else
                         {

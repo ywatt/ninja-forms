@@ -363,19 +363,3 @@ function nf_tmp_output_templates() {
 
 	<?php
 }
-
-function nf_ajax_test() {
-	echo wp_json_encode( $_POST );
-	die();
-}
-
-add_action( 'wp_ajax_nf_submit_form', 'nf_ajax_test' );
-add_action( 'wp_ajax_nopriv_nf_submit_form', 'nf_ajax_test' );
-
-function nf_ajax_async_upload() {
-	echo "The.Jerk.1979.720p.BluRay.x264.YIFY.mp4";
-	die();
-}
-
-//add_action( 'wp_ajax_nf_async_upload', 'nf_ajax_async_upload' );
-//add_action( 'wp_ajax_nopriv_nf_async_upload', 'nf_ajax_async_upload' );
