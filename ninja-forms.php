@@ -12,7 +12,7 @@ Domain Path: /lang/
 Copyright 2015 WP Ninjas.
 */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+
 
 define( 'LOAD_DEPRECATED', FALSE );
 
@@ -140,6 +140,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  * AJAX Controllers
                  */
                 self::$instance->controllers[ 'form' ]       = new NF_AJAX_Controllers_Form();
+                self::$instance->controllers[ 'uploads' ]    = new NF_AJAX_Controllers_Uploads();
                 self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();
 
                 /*
@@ -166,6 +167,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  * TODO: remove once build is complete
                  */
                 require_once( self::$dir . 'includes/Display/Shortcodes/tmp-frontendform.php' );
+
+                /*
+                 * Temporary Shortcode for working on the Async Upload Controller.
+                 *
+                 * TODO: remove once build is complete
+                 */
+                require_once( self::$dir . 'includes/Display/Shortcodes/tmp-file-upload.php' );
 
                 /*
                  * Submission CPT

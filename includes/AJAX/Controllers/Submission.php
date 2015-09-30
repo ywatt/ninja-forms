@@ -17,6 +17,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     public function process()
     {
+        check_ajax_referer( 'ninja_forms_ajax_nonce', 'security' );
+
         $this->validate_fields();
 
         $this->run_actions();

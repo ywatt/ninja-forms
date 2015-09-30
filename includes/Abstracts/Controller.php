@@ -22,8 +22,9 @@ abstract class NF_Abstracts_Controller
 
     public function __construct()
     {
-        // TODO: Add Nonce Check
+        //This section intentionally left blank.
     }
+
 
     /*
      * PROTECTED METHODS
