@@ -2,7 +2,15 @@
 
 final class NF_Display_Render
 {
-    public static $loaded_templates = array();
+    public static $loaded_templates = array(
+        'layout',
+        'before-form',
+        'form-layout',
+        'field-wrap',
+        'label',
+        'error',
+        'after-form',
+    );
 
     public static function localize( $form_id )
     {
