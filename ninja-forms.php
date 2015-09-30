@@ -92,6 +92,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         public $factory = '';
 
         /**
+         * Logger
+         *
+         * @var string
+         */
+        protected $_logger = '';
+
+        /**
          * Main Ninja_Forms Instance
          *
          * Insures that only one instance of Ninja_Forms exists in memory at any one
@@ -180,6 +187,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 new NF_Admin_CPT_Submission();
 
+                /*
+                 * Logger
+                 */
+                self::$instance->_logger = new NF_Database_Logger();
+
             }
 
             return self::$instance;
@@ -217,6 +229,20 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
             global $wpdb;
 
             return new NF_Abstracts_ModelFactory( $wpdb, $id );
+        }
+
+        /**
+         * Logger Class Wrapper
+         *
+         * Example Use:
+         * Ninja_Forms()->logger()->log( 'debug', "Hello, {name}!", array( 'name' => 'world' ) );
+         * Ninja_Forms()->logger()->debug( "Hello, {name}!", array( 'name' => 'world' ) );
+         *
+         * @return string
+         */
+        public function logger()
+        {
+            return $this->_logger;
         }
 
         public function display( $form_id )
