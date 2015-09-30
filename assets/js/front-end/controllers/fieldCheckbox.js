@@ -1,9 +1,10 @@
-define(['lib/backbone.radio'], function( Radio ) {
-	var radioChannel = Radio.channel( 'checkbox' );
+define([], function() {
+	var radioChannel = nfRadio.channel( 'checkbox' );
 
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( radioChannel, 'change:field', this.fieldChange );
+			radioChannel.reply( 'validate:required', this.validateRequired );
 		},
 
 		fieldChange: function( el, model ) {
@@ -20,6 +21,10 @@ define(['lib/backbone.radio'], function( Radio ) {
 			};
 			
 			model.set( args );
+		},
+
+		validateRequired: function( el, model ) {
+			return el[0].checked;
 		}
 	});
 

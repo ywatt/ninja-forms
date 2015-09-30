@@ -1,10 +1,10 @@
-define(['lib/backbone.radio'], function( Radio ) {
-	var radioChannel = Radio.channel( 'radio' );
+define([], function() {
+	var radioChannel = nfRadio.channel( 'radio' );
 
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( radioChannel, 'change:modelValue', this.fieldChange );
-			this.listenTo( Radio.channel( 'form' ), 'before:submit', this.test );
+			this.listenTo( nfRadio.channel( 'form' ), 'before:submit', this.test );
 		},
 
 		fieldChange: function( model ) {
@@ -19,7 +19,7 @@ define(['lib/backbone.radio'], function( Radio ) {
 					field.value = 'plinko!';
 				}
 				var fieldID = field.name.replace( 'nf-field-', '' );
-				fieldModel = Radio.channel( 'fields' ).request( 'get:field', fieldID );
+				fieldModel = nfRadio.channel( 'fields' ).request( 'get:field', fieldID );
 			} );
 		}
 	});

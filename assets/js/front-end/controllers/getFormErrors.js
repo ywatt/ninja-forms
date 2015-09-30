@@ -1,12 +1,12 @@
-define(['lib/backbone.radio'], function( Radio ) {
-	var radioChannel = Radio.channel( 'fields' );
+define([], function() {
+	var radioChannel = nfRadio.channel( 'fields' );
 	var controller = Marionette.Object.extend( {
 		initialize: function( model ) {
-			Radio.channel( 'form' ).reply( 'get:errors', this.getFormErrors );
+			nfRadio.channel( 'form' ).reply( 'get:errors', this.getFormErrors );
 		},
 
 		getFormErrors: function( formID ) {
-			var formModel = Radio.channel( 'form' ).request( 'get:form', formID );
+			var formModel = nfRadio.channel( 'form' ).request( 'get:form', formID );
 			var errors = false;
 			if ( formModel ) {
 				_.each( formModel.get( 'fields' ).models, function( field ) {

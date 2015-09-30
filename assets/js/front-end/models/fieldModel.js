@@ -1,4 +1,4 @@
-define( ['lib/backbone.radio', 'front-end/models/fieldErrorCollection'], function( Radio, fieldErrorCollection ) {
+define( ['front-end/models/fieldErrorCollection'], function( fieldErrorCollection ) {
 	var model = Backbone.Model.extend( {
 		defaults: {
 			placeholder: '',
@@ -19,15 +19,15 @@ define( ['lib/backbone.radio', 'front-end/models/fieldErrorCollection'], functio
 		},
 
 		changeModel: function() {
-			Radio.channel( 'field-' + this.get( 'id' ) ).trigger( 'change:model', this );
-			Radio.channel( this.get( 'type' ) ).trigger( 'change:model', this );
-			Radio.channel( 'fields' ).trigger( 'change:model', this );
+			nfRadio.channel( 'field-' + this.get( 'id' ) ).trigger( 'change:model', this );
+			nfRadio.channel( this.get( 'type' ) ).trigger( 'change:model', this );
+			nfRadio.channel( 'fields' ).trigger( 'change:model', this );
 		},
 
 		changeValue: function() {
-			Radio.channel( 'field-' + this.get( 'id' ) ).trigger( 'change:modelValue', this );
-			Radio.channel( this.get( 'type' ) ).trigger( 'change:modelValue', this );
-			Radio.channel( 'fields' ).trigger( 'change:modelValue', this );
+			nfRadio.channel( 'field-' + this.get( 'id' ) ).trigger( 'change:modelValue', this );
+			nfRadio.channel( this.get( 'type' ) ).trigger( 'change:modelValue', this );
+			nfRadio.channel( 'fields' ).trigger( 'change:modelValue', this );
 		},
 
 		addWrapperClass: function( cl ) {

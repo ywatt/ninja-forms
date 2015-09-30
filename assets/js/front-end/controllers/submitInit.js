@@ -1,5 +1,5 @@
-define(['lib/backbone.radio', 'front-end/controllers/submitButton'], function( Radio, submitButton ) {
-	var radioChannel = Radio.channel( 'submit' );
+define(['front-end/controllers/submitButton'], function( submitButton ) {
+	var radioChannel = nfRadio.channel( 'submit' );
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( radioChannel, 'init:model', this.registerSubmit );
@@ -11,7 +11,7 @@ define(['lib/backbone.radio', 'front-end/controllers/submitButton'], function( R
 		},
 
 		maybeRenderError: function() {
-			if ( Radio.channel( 'form' ).request( 'get:errors', this.formID ) ) {
+			if ( nfRadio.channel( 'form' ).request( 'get:errors', this.formID ) ) {
 				return _.template( jQuery( '#nf-tmpl-field-submit-error-msg' ).html(), this );
 			} else {
 				return '';

@@ -1,5 +1,5 @@
-define( ['lib/backbone.radio'], function( Radio ) {
-	var radioChannel = Radio.channel( 'fields' );
+define( [], function() {
+	var radioChannel = nfRadio.channel( 'fields' );
 
 	var controller = Marionette.Object.extend( {
 		listeningModel: '',
@@ -12,7 +12,7 @@ define( ['lib/backbone.radio'], function( Radio ) {
 			if ( model.get( 'mirror_field' ) ) {
 				this.listeningModel = model;
 				var targetID = model.get( 'mirror_field' );
-				this.listenTo( Radio.channel( 'field-' + targetID ), 'change:modelValue', this.changeValue );
+				this.listenTo( nfRadio.channel( 'field-' + targetID ), 'change:modelValue', this.changeValue );
 			}
 		},
 

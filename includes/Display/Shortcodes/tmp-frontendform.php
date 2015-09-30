@@ -74,24 +74,28 @@ function nf_tmp_frontendform( $atts = array() ) {
 					'type' 			=> 'text',
 					'label'			=> 'Name',
 					'label_pos' 	=> 'before',
+					'required'		=> 1,
 				),
 				array(
 					'id'			=> 12,
 					'type'			=> 'email',
 					'label'			=> 'Email',
 					'label_pos'		=> 'before',
+					'required'		=> 1,
 				),
 				array(
 					'id'			=> 5,
 					'type' 			=> 'textarea',
 					'label'			=> 'What Can We Help You With?',
 					'label_pos'		=> 'before',
+					'required'		=> 1,
 				),
 				array(
 					'id'			=> 6,
 					'type' 			=> 'checkbox',
 					'label'			=> 'Agree?',
 					'label_pos'		=> 'after',
+					'required'		=> 1,
 				),
 				array(
 					'id'			=> 9,
@@ -113,6 +117,7 @@ function nf_tmp_frontendform( $atts = array() ) {
 						),
 					),
 					'show_other'	=> 1,
+					'required'		=> 1,
 				),
 				array(
 					'id'				=> 7,

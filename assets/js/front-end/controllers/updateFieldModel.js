@@ -1,7 +1,7 @@
-define(['lib/backbone.radio'], function( Radio ) {
+define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			Radio.channel( 'nfAdmin' ).reply( 'update:field', this.updateField );
+			nfRadio.channel( 'nfAdmin' ).reply( 'update:field', this.updateField );
 		},
 
 		updateField: function( model, value ) {

@@ -1,4 +1,4 @@
-define( ['lib/backbone.radio'], function( Radio ) {
+define( [], function() {
 	var model = Backbone.Model.extend( {
 
 	} );

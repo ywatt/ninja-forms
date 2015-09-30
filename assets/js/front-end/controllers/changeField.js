@@ -5,14 +5,14 @@
  * and the public fields channel so that the data model can be updated.
  */
 
-define(['lib/backbone.radio'], function( Radio ) {
+define([], function() {
 	var controller = Marionette.Object.extend( {
 
 		initialize: function() {
 			/*
 			 * Reply to our request for changing a field.
 			 */
-			Radio.channel( 'nfAdmin' ).reply( 'change:field', this.changeField );
+			nfRadio.channel( 'nfAdmin' ).reply( 'change:field', this.changeField );
 		},
 
 		changeField: function( el, model ) {
@@ -35,15 +35,15 @@ define(['lib/backbone.radio'], function( Radio ) {
 			 * you can set that model in the actions below and set the 'isUpdated' model attribute to true.
 			 * i.e. model.set( 'isUpdated', true );
 			 */
-			Radio.channel( 'field-' + model.get( 'id' ) ).trigger( 'change:field', el, model );
-			Radio.channel( model.get( 'type' ) ).trigger( 'change:field', el, model );
-			Radio.channel( 'fields' ).trigger( 'change:field', el, model );
+			nfRadio.channel( 'field-' + model.get( 'id' ) ).trigger( 'change:field', el, model );
+			nfRadio.channel( model.get( 'type' ) ).trigger( 'change:field', el, model );
+			nfRadio.channel( 'fields' ).trigger( 'change:field', el, model );
 
 			/*
 			 * Send a request out on our nfAdmin channel to update our field model.
 			 * If the field model has a 'isUpdated' property of false, nothing will be updated.
 			 */
-			Radio.channel( 'nfAdmin' ).request( 'update:field', model, value );
+			nfRadio.channel( 'nfAdmin' ).request( 'update:field', model, value );
 		}
 	});
 

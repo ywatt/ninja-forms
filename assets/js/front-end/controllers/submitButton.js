@@ -1,9 +1,9 @@
-define(['lib/backbone.radio'], function( Radio ) {
+define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function( model ) {
 			this.model = model;
-			var formChannel = Radio.channel( 'form-' + model.get( 'formID' ) );
-			var fieldsChannel = Radio.channel( 'fields' )
+			var formChannel = nfRadio.channel( 'form-' + model.get( 'formID' ) );
+			var fieldsChannel = nfRadio.channel( 'fields' )
 			this.listenTo( fieldsChannel, 'add:error', this.updateSubmit, this );
 			this.listenTo( fieldsChannel, 'remove:error', this.updateSubmit, this );
 			this.listenTo( fieldsChannel, 'click:field', this.displayError, this );
@@ -14,7 +14,7 @@ define(['lib/backbone.radio'], function( Radio ) {
 
 		updateSubmit: function( model, id, msg ) {
 			if ( ( model.get( 'id' ) !== this.model.get( 'id' ) ) && ( model.get( 'formID' ) == this.model.get( 'formID' ) ) ) {
-				if ( Radio.channel( 'form' ).request( 'get:errors', model.get( 'formID' ) ) ) {
+				if ( nfRadio.channel( 'form' ).request( 'get:errors', model.get( 'formID' ) ) ) {
 					this.disableSubmit( model, id, msg );
 				} else {
 					this.enableSubmit( model, id );
@@ -33,7 +33,7 @@ define(['lib/backbone.radio'], function( Radio ) {
 		},
 
 		displayError: function( el, model ) {
-			if ( model.get( 'id' ) == this.model.get( 'id' ) && Radio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) ) ) {
+			if ( model.get( 'id' ) == this.model.get( 'id' ) && nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) ) ) {
 				jQuery( el ).closest( '.nf-field-wrap' ).find( '.nf-field-submit-error' ).show();
 			}
 		}

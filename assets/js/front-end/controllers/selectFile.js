@@ -1,12 +1,12 @@
-define(['lib/backbone.radio'], function( Radio ) {
+define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( Radio.channel( 'file' ), 'init:model', this.initFile );
+			this.listenTo( nfRadio.channel( 'file' ), 'init:model', this.initFile );
 		},
 
 		initFile: function( model ) {
-			this.listenTo( Radio.channel( 'file' ), 'change:field', this.changeFile );
-			this.listenTo( Radio.channel( 'fields' ), 'click:field', this.clickFileButton );
+			this.listenTo( nfRadio.channel( 'file' ), 'change:field', this.changeFile );
+			this.listenTo( nfRadio.channel( 'fields' ), 'click:field', this.clickFileButton );
 		},
 
 		clickFileButton: function( el, model ) {
@@ -37,7 +37,7 @@ define(['lib/backbone.radio'], function( Radio ) {
 
 				beforeSend: function() {
 					status.empty();
-					Radio.channel( 'form-' + model.get( 'formID' ) ).trigger( 'disable:submit', 'File upload in progress.' );
+					nfRadio.channel( 'form-' + model.get( 'formID' ) ).trigger( 'disable:submit', 'File upload in progress.' );
 					button.fadeOut( 'fast', function() {
 						progress.fadeIn( 'fast', function() {
 					        var percentVal = '0%';
@@ -60,7 +60,7 @@ define(['lib/backbone.radio'], function( Radio ) {
 			    },
 
 				complete: function( xhr ) {
-					Radio.channel( 'form-' + model.get( 'formID' ) ).trigger( 'enable:submit' );
+					nfRadio.channel( 'form-' + model.get( 'formID' ) ).trigger( 'enable:submit' );
 					jQuery( progress ).fadeOut( 'fast', function() {
 						var filename = xhr.responseText;
 						var link = '<input type="button" class="nf-element nf-file-reset" value="Upload a different file">';
