@@ -32,12 +32,11 @@ define([], function() {
 	            	// }
 	            },
 				beforeSubmit: function( formData, jqForm, options ) {
-					console.log( 'before submit' );
+					nfRadio.channel( 'form-' + model.get( 'formID' ) ).trigger( 'disable:submit', 'File upload in progress.' );
 				},
 
 				beforeSend: function() {
 					status.empty();
-					nfRadio.channel( 'form-' + model.get( 'formID' ) ).trigger( 'disable:submit', 'File upload in progress.' );
 					button.fadeOut( 'fast', function() {
 						progress.fadeIn( 'fast', function() {
 					        var percentVal = '0%';
@@ -67,6 +66,7 @@ define([], function() {
 						status.html( filename + ' ' + link );
 						status.fadeIn( 'fast' );
 						jQuery( el ).parent().unwrap();
+						model.set( 'value', 'FILE UPLOAD' );
 					} );
 				},
 
