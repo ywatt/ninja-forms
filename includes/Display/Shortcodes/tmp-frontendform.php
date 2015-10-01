@@ -333,32 +333,28 @@ function nf_tmp_output_templates() {
 
 	<script id="nf-tmpl-field-radio" type="text/template">
 		<ul>
-			<%
-			_.each( options, function( option ) {
-				%>
-				<li>
-					<label><input type="radio" name="nf-field-<%= id %>" class="<%= classes %>" value="<%= option.value %>" <%= ( value == option.value ) ? 'checked="checked"' : '' %>> <%= option.label %></label>
-				</li>
-				<%
-			} );
-			%>
-			<%
-			if ( 1 == show_other ) {
-				%>
-				<li>
-					<label><input type="radio" name="nf-field-<%= id %>" class="<%= classes %>" value="nf-other" <%= ( value == 'nf-other' ) ? 'checked="checked"' : '' %>> Other</label>
-					<%
-					if ( value == 'nf-other' ) {
-						%>
-							<input type="text" name="nf-field-<%= id %>" value="">
-						<%
-					}
-					%>
-				</li>
-				<%
-			}
-			%>
+			<%=	renderOptions()	%>
 		</ul>
+	</script>
+
+	<script id='nf-tmpl-field-radio-option' type='text/template'>
+	    <li>
+	        <label><input type="radio" name="nf-field-<%= fieldID %>" class="<%= classes %>" value="<%= value %>" <%= ( value == currentValue ) ? 'checked="checked"' : '' %>> <%= label %></label>
+	    </li>
+	</script>
+
+	<script id='nf-tmpl-field-radio-other' type='text/template'>
+	    <li>
+	        <label>
+	            <input type="radio" name="nf-field-<%= fieldID %>" class="<%= classes %>" value="nf-other" <%= ( currentValue == 'nf-other' ) ? 'checked="checked"' : '' %>>
+	            Other
+	        </label>
+	        <%= renderOtherText() %>
+	    </li>
+	</script>
+
+	<script id='nf-tmpl-field-radio-other-text' type='text/template'>
+	    <input type="text" name="nf-field-<%= fieldID %>" value="">
 	</script>
 
 	<?php

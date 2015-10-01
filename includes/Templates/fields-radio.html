@@ -1,4 +1,4 @@
-<script id='nf-tmpl-field-radio' type='text/template'>
+<script id="nf-tmpl-field-radio" type="text/template">
     <ul>
         <%= renderOptions() %>
     </ul>
@@ -6,14 +6,14 @@
 
 <script id='nf-tmpl-field-radio-option' type='text/template'>
     <li>
-        <label><input type="radio" name="nf-field-<%= id %>" class="<%= classes %>" value="<%= option.value %>" <%= ( value == option.value ) ? 'checked="checked"' : '' %>> <%= option.label %></label>
+        <label><input type="radio" name="nf-field-<%= fieldID %>" class="<%= classes %>" value="<%= value %>" <%= ( value == currentValue ) ? 'checked="checked"' : '' %>> <%= label %></label>
     </li>
 </script>
 
 <script id='nf-tmpl-field-radio-other' type='text/template'>
     <li>
         <label>
-            <input type="radio" name="nf-field-<%= id %>" class="<%= classes %>" value="nf-other" <%= ( value == 'nf-other' ) ? 'checked="checked"' : '' %>>
+            <input type="radio" name="nf-field-<%= fieldID %>" class="<%= classes %>" value="nf-other" <%= ( currentValue == 'nf-other' ) ? 'checked="checked"' : '' %>>
             Other
         </label>
         <%= renderOtherText() %>
@@ -21,5 +21,5 @@
 </script>
 
 <script id='nf-tmpl-field-radio-other-text' type='text/template'>
-    <input type="text" name="nf-field-<%= id %>" value="">
+    <input type="text" name="nf-field-<%= fieldID %>" value="">
 </script>
