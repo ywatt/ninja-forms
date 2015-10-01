@@ -29,7 +29,7 @@ final class NF_Display_Render
           
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
-            $field->update_setting( 'value', time() );
+            // $field->update_setting( 'value', time() );
             $field->update_setting( 'id', $field->get_id() );
 
             $fields[] = $field->get_settings();
