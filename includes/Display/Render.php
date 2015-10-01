@@ -2,20 +2,14 @@
 
 final class NF_Display_Render
 {
-    public static $field_templates = array(
-        'wrap',
-        'label',
-        'error',
-    );
-
-    public static $app_templates = array(
-        'layout',
-        'before-form',
-        'after-form',
-    );
-
-    public static $form_templates = array(
-        'layout',
+    protected static $loaded_templates = array(
+        'app-layout',
+        'app-before-form',
+        'app-after-form',
+        'form-layout',
+        'fields-wrap',
+        'fields-label',
+        'fields-error',
     );
 
     public static function localize( $form_id )
@@ -38,7 +32,7 @@ final class NF_Display_Render
 
             $fields[] = $field->get_settings();
 
-            self::load_template( $field_class::TEMPLATE );
+            self::load_template( 'fields-' . $field_class::TEMPLATE );
 
         }
 
@@ -113,22 +107,27 @@ final class NF_Display_Render
 
     public static function output_templates()
     {
+        // Build File Path Hierarchy
         $file_paths = apply_filters( 'ninja_forms_field_template_file_paths', array(
             get_template_directory() . '/ninja-forms/templates/',
         ));
 
         $file_paths[] = Ninja_Forms::$dir . 'includes/Templates/';
 
-        foreach( self::$loaded_templates as $name ) {
+        // Search for and Output File Templates
+        foreach( self::$loaded_templates as $file_name ) {
 
             foreach( $file_paths as $path ){
 
-                if( file_exists( $path . "fields-$name.html" ) ){
-                    echo file_get_contents( $path . "fields-$name.html" );
+                if( file_exists( $path . "$file_name.html" ) ){
+                    echo file_get_contents( $path . "$file_name.html" );
                     break;
                 }
             }
         }
+
+        // Action to Output Custom Templates
+        do_action( 'nf_output_templates' );
     }
 
     protected static function load_template( $file_name = '' )
