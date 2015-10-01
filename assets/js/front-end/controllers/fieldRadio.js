@@ -1,5 +1,5 @@
 define(['front-end/models/fieldModel'], function( fieldModel ) {
-	var radioChannel = nfRadio.channel( 'radio' );
+	var radioChannel = nfRadio.channel( 'listradio' );
 
 	var controller = Marionette.Object.extend( {
 		initialize: function() {

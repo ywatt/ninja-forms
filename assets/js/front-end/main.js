@@ -25,8 +25,8 @@ jQuery( document ).ready( function( $ ) {
 				this.forms = new formCollection();
 
 				_.each( nfForms, function( form, index ) {
-					var formModel = new FormModel( form[0] );
-					var fields = new FieldCollection( form[0].fields );
+					var formModel = new FormModel( form );
+					var fields = new FieldCollection( form.fields );
 					formModel.set( 'fields', fields );
 					that.forms.add( formModel );
 				} );

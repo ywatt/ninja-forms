@@ -46,6 +46,8 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
             ->update_setting( 'required', 1 )
             ->save();
 
+        $name_field_id = $field->get_id();
+
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'email' )
             ->update_setting( 'label', 'Email')
@@ -75,6 +77,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
             ->update_setting( 'label', 'Mirror Name')
             ->update_setting( 'label_pos', 'before' )
             ->update_setting( 'required', 1 )
+            ->update_setting( 'mirror_field', $name_field_id )
             ->save();
 
         $field = Ninja_Forms()->form( 1 )->field()->get();
@@ -87,7 +90,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $fields = array(
             array(
                 'id'			=> 4,
-                'type' 			=> 'text',
+                'type' 			=> 'textbox',
                 'label'			=> 'Name',
                 'label_pos' 	=> 'before',
             ),
@@ -111,7 +114,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
             ),
             array(
                 'id'			=> 9,
-                'type' 			=> 'radio',
+                'type' 			=> 'listradio',
                 'label'			=> 'Best Contact Method?',
                 'label_pos'		=> 'before',
                 'options'		=> array(

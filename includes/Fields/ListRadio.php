@@ -5,6 +5,8 @@
  */
 class NF_Fields_ListRadio extends NF_Abstracts_List
 {
+    const TEMPLATE = 'listradio';
+
     protected $_name = 'radiolist';
 
     protected $_nicename = 'Radio List';

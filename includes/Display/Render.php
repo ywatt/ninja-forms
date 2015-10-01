@@ -26,6 +26,7 @@ final class NF_Display_Render
 
         foreach( $form_fields as $field ){
             $field_class = $field->get_settings( 'type' );
+          
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
             $field->update_setting( 'value', time() );
@@ -34,14 +35,11 @@ final class NF_Display_Render
             $fields[] = $field->get_settings();
 
             self::load_template( 'fields-' . $field_class::TEMPLATE );
-
         }
 
         // Output Form Container
         ?>
-            <div id="nf-form-<?php echo $form_id; ?>-cont">
-                Form Container, Ya'll!
-            </div>
+            <div id="nf-form-<?php echo $form_id; ?>-cont"></div>
         <?php
 
         ?>
