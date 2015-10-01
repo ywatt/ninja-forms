@@ -107,12 +107,14 @@ final class NF_Display_Render
 
     public static function output_templates()
     {
+        // Build File Path Hierarchy
         $file_paths = apply_filters( 'ninja_forms_field_template_file_paths', array(
             get_template_directory() . '/ninja-forms/templates/',
         ));
 
         $file_paths[] = Ninja_Forms::$dir . 'includes/Templates/';
 
+        // Search for and Output File Templates
         foreach( self::$loaded_templates as $file_name ) {
 
             foreach( $file_paths as $path ){
@@ -124,6 +126,7 @@ final class NF_Display_Render
             }
         }
 
+        // Action to Output Custom Templates
         do_action( 'nf_output_templates' );
     }
 
