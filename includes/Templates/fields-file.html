@@ -1,14 +1,17 @@
-<script id='nf-tmpl-field-file' type='text/template'>
-    <form id="nf-file-form-<%= id %>" enctype="multipart/form-data" method="post" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" class="nf-file-form">
+<script id="nf-tmpl-field-file" type="text/template">
+    <div>
         <input type="button" value="<%= button_label %>" class="nf-file-button nf-element">
+    </div>
 
-        <div class="nf-file-progress" style="display:none;">
-            <div class="nf-file-bar"></div>
-            <div class="nf-file-percent">0%</div>
-        </div>
-        <div class="nf-file-status"></div>
+    <div class="nf-file-progress" style="display:none;">
+        <div class="nf-file-bar"></div>
+        <div class="nf-file-percent">0%</div>
+    </div>
 
+    <div class="nf-file-status"></div>
+    
+    <span class="nf-file-input-wrapper">
         <input type="hidden" name="MAX_FILE_SIZE" value="2097152000">
         <input id="nf-field-<%= id %>" name="nf-field-<%= id %>" class="<%= classes %>" type="file" style="display:none;">
-    </form>
+    </span>
 </script>

@@ -14,6 +14,7 @@ final class NF_Display_Render
 
     public static function localize( $form_id )
     {
+
         if( ! has_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 ) ){
             add_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 );
         }
