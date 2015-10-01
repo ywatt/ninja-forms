@@ -15,7 +15,7 @@ define([], function() {
 		},
 
 		updateSubmit: function( model, id, msg ) {
-			if ( ( model.get( 'id' ) !== this.model.get( 'id' ) ) && ( model.get( 'formID' ) == this.model.get( 'formID' ) ) ) {
+			if ( model.get( 'formID' ) == this.model.get( 'formID' ) ) {
 				if ( nfRadio.channel( 'form' ).request( 'get:errors', model.get( 'formID' ) ) ) {
 					this.disableSubmit( model, id, msg );
 				} else {
@@ -25,54 +25,68 @@ define([], function() {
 		},
 
 		disableSubmit: function( model, id, msg ) {
-			this.model.set( 'disabled', 'disabled' );
-			this.model.set( 'reRender', true );
+			if ( 'disabled' != this.model.get( 'disabled' ) ) {
+				this.model.set( 'disabled', 'disabled' );
+				this.model.set( 'reRender', true );				
+			}
 		},
 
 		enableSubmit: function( model, id ) {
-			this.model.set( 'disabled', '' );
-			this.model.set( 'reRender', true );
+			if ( 'disabled' == this.model.get( 'disabled' ) ) {
+				this.model.set( 'disabled', '' );
+				this.model.set( 'reRender', true );						
+			}
 		},
 
 		submitForm: function( el, model ) {
-			if ( nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) ) ) {
+			var formErrors = nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) );
+			if ( formErrors ) {
 				jQuery( el ).closest( '.nf-field-wrap' ).find( '.nf-field-submit-error' ).show();
 			} else {
+				// Get our form model.
 				var formModel = nfRadio.channel( 'form' ).request( 'get:form', model.get( 'formID' ) );
-				var formData = JSON.stringify( formModel );
-				var data = {
-                	'action': 'nf_ajax_submit',
-                	'security': nfFrontEnd.ajaxNonce,
-                	'formData': formData
+				// Before we submit, check to make sure that all of our required fields aren't empty.
+				_.each( formModel.get( 'fields' ).models, function( field ) {
+					if ( 1 == field.get( 'required' ) && '' == jQuery.trim( field.get( 'value' ) ) ) {
+						nfRadio.channel( 'fields' ).request( 'add:error', field.get( 'id' ), 'required-error', 'This is a required field.' );
+					}
+				} );
+
+				// Check again for form errors.
+				formErrors = nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) );
+
+				if ( formErrors ) {
+					return false;
+				} else {
+					var formData = JSON.stringify( formModel );
+					var data = {
+	                	'action': 'nf_ajax_submit',
+	                	'security': nfFrontEnd.ajaxNonce,
+	                	'formData': formData
+					}
+
+					jQuery.ajax({
+	                    url: nfFrontEnd.adminAjax,
+	                    type: 'POST',
+	                    data: data,
+	                    cache: false,
+	                   	success: function(data, textStatus, jqXHR)
+	                    {
+	                        if(typeof data.error === 'undefined') {
+								console.log( data );
+	                        } else {
+	                            console.log('ERRORS: ' + data.error);
+	                        }
+	                    },
+	                    error: function(jqXHR, textStatus, errorThrown)
+	                    {
+	                        // Handle errors here
+	                        console.log('ERRORS: ' + textStatus);
+	                        // STOP LOADING SPINNER
+	                    }
+	                });
 				}
-
-				jQuery.ajax({
-                    url: nfFrontEnd.adminAjax,
-                    type: 'POST',
-                    data: data,
-                    cache: false,
-                   	success: function(data, textStatus, jqXHR)
-                    {
-                        if(typeof data.error === 'undefined')
-                        {
-                            // Success so call function to process the form
-							// submitForm(event, data);
-                        }
-                        else
-                        {
-                            // Handle errors here
-                            console.log('ERRORS: ' + data.error);
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown)
-                    {
-                        // Handle errors here
-                        console.log('ERRORS: ' + textStatus);
-                        // STOP LOADING SPINNER
-                    }
-                });
 			}
-
 		}
 	});
 

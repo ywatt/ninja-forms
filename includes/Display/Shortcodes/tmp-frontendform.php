@@ -43,7 +43,7 @@ function nf_tmp_frontendform( $atts = array() ) {
 					'label'			=> 'Attachment',
 					'button_label'	=> 'Upload',
 					'label_pos' 	=> 'before',
-					'required'		=> 1,
+					'required'		=> 0,
 				),
 				array(
 					'id'			=> 2,
