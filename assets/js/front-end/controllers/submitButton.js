@@ -3,11 +3,12 @@ define([], function() {
 		initialize: function( model ) {
 			this.model = model;
 			var formChannel = nfRadio.channel( 'form-' + model.get( 'formID' ) );
-			var fieldsChannel = nfRadio.channel( 'fields' )
+			var allFieldsChannel = nfRadio.channel( 'fields' );
+			var thisFieldChannel = nfRadio.channel( 'field-' + model.get( 'id' ) );
 
-			this.listenTo( fieldsChannel, 'add:error', this.updateSubmit, this );
-			this.listenTo( fieldsChannel, 'remove:error', this.updateSubmit, this );
-			this.listenTo( nfRadio.channel( 'field-' + model.get( 'id' ) ), 'click:field', this.submitForm, this );
+			this.listenTo( allFieldsChannel, 'add:error', this.updateSubmit, this );
+			this.listenTo( allFieldsChannel, 'remove:error', this.updateSubmit, this );
+			this.listenTo( thisFieldChannel, 'click:field', this.submitForm, this );
 
 			this.listenTo( formChannel, 'disable:submit', this.disableSubmit, this );
 			this.listenTo( formChannel, 'enable:submit', this.enableSubmit, this );
@@ -34,7 +35,6 @@ define([], function() {
 		},
 
 		submitForm: function( el, model ) {
-			
 			if ( nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) ) ) {
 				jQuery( el ).closest( '.nf-field-wrap' ).find( '.nf-field-submit-error' ).show();
 			} else {
