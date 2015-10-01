@@ -2,19 +2,19 @@
 
 final class NF_Display_Render
 {
-    public static $field_templates = array(
+    protected static $field_templates = array(
         'wrap',
         'label',
         'error',
     );
 
-    public static $app_templates = array(
+    protected static $app_templates = array(
         'layout',
         'before-form',
         'after-form',
     );
 
-    public static $form_templates = array(
+    protected static $form_templates = array(
         'layout',
     );
 
@@ -38,7 +38,7 @@ final class NF_Display_Render
 
             $fields[] = $field->get_settings();
 
-            self::load_template( $field_class::TEMPLATE );
+            self::load_field_template( $field_class::TEMPLATE );
 
         }
 
@@ -119,7 +119,46 @@ final class NF_Display_Render
 
         $file_paths[] = Ninja_Forms::$dir . 'includes/Templates/';
 
-        foreach( self::$loaded_templates as $name ) {
+        self::output_app_templates( $file_paths );
+
+        self::output_form_templates( $file_paths );
+
+        self::output_field_templates( $file_paths );
+
+        do_action( 'nf_output_templates' );
+    }
+
+    protected  static function output_app_templates( $file_paths )
+    {
+        foreach( self::$app_templates as $name ) {
+
+            foreach( $file_paths as $path ){
+
+                if( file_exists( $path . "app-$name.html" ) ){
+                    echo file_get_contents( $path . "app-$name.html" );
+                    break;
+                }
+            }
+        }
+    }
+
+    protected  static function output_form_templates( $file_paths )
+    {
+        foreach( self::$form_templates as $name ) {
+
+            foreach( $file_paths as $path ){
+
+                if( file_exists( $path . "form-$name.html" ) ){
+                    echo file_get_contents( $path . "form-$name.html" );
+                    break;
+                }
+            }
+        }
+    }
+
+    protected  static function output_field_templates( $file_paths )
+    {
+        foreach( self::$field_templates as $name ) {
 
             foreach( $file_paths as $path ){
 
@@ -131,22 +170,22 @@ final class NF_Display_Render
         }
     }
 
-    protected static function load_template( $file_name = '' )
+    protected static function load_field_template( $file_name = '' )
     {
         if( ! $file_name ) return;
 
-        if( self::is_template_loaded( $file_name ) ) return;
+        if( self::is_field_template_loaded( $file_name ) ) return;
 
-        self::$loaded_templates[] = $file_name;
+        self::$field_templates[] = $file_name;
     }
 
     /*
      * UTILITY
      */
 
-    protected static function is_template_loaded( $template_name )
+    protected static function is_field_template_loaded( $template_name )
     {
-        return ( in_array( $template_name, self::$loaded_templates ) ) ? TRUE : FALSE ;
+        return ( in_array( $template_name, self::$field_templates ) ) ? TRUE : FALSE ;
     }
 
 } // End Class NF_Display_Render
