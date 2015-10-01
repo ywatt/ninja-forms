@@ -295,7 +295,7 @@ function nf_tmp_output_templates() {
 	</script>
 
 	<script id="nf-tmpl-field-textarea" type="text/template">
-		<textarea id="nf-field-<%= id %>" name="nf-field-<%= id %>" placeholder="<%= placeholder %>"><%= value %></textarea>
+		<textarea id="nf-field-<%= id %>" name="nf-field-<%= id %>" class="<%= classes %>" placeholder="<%= placeholder %>"><%= value %></textarea>
 	</script>
 
 	<script id="nf-tmpl-field-submit" type="text/template">

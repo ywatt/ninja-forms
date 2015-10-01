@@ -7,7 +7,7 @@ define([], function() {
 
 			this.listenTo( fieldsChannel, 'add:error', this.updateSubmit, this );
 			this.listenTo( fieldsChannel, 'remove:error', this.updateSubmit, this );
-			this.listenTo( fieldsChannel, 'click:field', this.submitForm, this );
+			this.listenTo( nfRadio.channel( 'field-' + model.get( 'id' ) ), 'click:field', this.submitForm, this );
 
 			this.listenTo( formChannel, 'disable:submit', this.disableSubmit, this );
 			this.listenTo( formChannel, 'enable:submit', this.enableSubmit, this );
@@ -34,10 +34,7 @@ define([], function() {
 		},
 
 		submitForm: function( el, model ) {
-			if ( model.get( 'id' ) != this.model.get( 'id' ) ) {
-				return false;
-			}
-
+			
 			if ( nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) ) ) {
 				jQuery( el ).closest( '.nf-field-wrap' ).find( '.nf-field-submit-error' ).show();
 			} else {
@@ -75,6 +72,7 @@ define([], function() {
                     }
                 });
 			}
+
 		}
 	});
 

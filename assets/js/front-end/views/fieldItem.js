@@ -97,17 +97,22 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 		fieldKeyup: function( e ) {
 			var el = jQuery( e.currentTarget );
 			var keyCode = e.keyCode;
+			nfRadio.channel( 'field-' + this.model.get( 'id' ) ).trigger( 'keyup:field', el, this.model );
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'keyup:field', el, this.model, keyCode );
 			nfRadio.channel( 'fields' ).trigger( 'keyup:field', el, this.model, keyCode );
 		},
 
 		fieldClick: function( e ) {
 			var el = jQuery( e.currentTarget );
+			nfRadio.channel( 'field-' + this.model.get( 'id' ) ).trigger( 'click:field', el, this.model );
+			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'click:field', el, this.model );
 			nfRadio.channel( 'fields' ).trigger( 'click:field', el, this.model );
 		},
 
 		fieldBlur: function( e ) {
 			var el = jQuery( e.currentTarget );
+			nfRadio.channel( 'field-' + this.model.get( 'id' ) ).trigger( 'blur:field', el, this.model );
+			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'blur:field', el, this.model );
 			nfRadio.channel( 'fields' ).trigger( 'blur:field', el, this.model );
 		}
 	});
