@@ -4,7 +4,7 @@ define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( radioChannel, 'change:modelValue', this.fieldChange );
-			this.listenTo( nfRadio.channel( 'form' ), 'before:submit', this.test );
+			this.listenTo( nfRadio.channel( 'submit' ), 'before:submit', this.test );
 		},
 
 		fieldChange: function( model ) {
@@ -13,14 +13,8 @@ define([], function() {
 			}
 		},
 
-		test: function( formData, options ) {
-			_.each ( formData, function ( field ) {
-				if ( field.name == 'nf-field-4' ) {
-					field.value = 'plinko!';
-				}
-				var fieldID = field.name.replace( 'nf-field-', '' );
-				fieldModel = nfRadio.channel( 'fields' ).request( 'get:field', fieldID );
-			} );
+		test: function( formModel ) {
+			console.log( 'fired from trigger' );
 		}
 	});
 

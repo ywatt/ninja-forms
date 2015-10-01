@@ -47,10 +47,15 @@ define([], function() {
 				var formModel = nfRadio.channel( 'form' ).request( 'get:form', model.get( 'formID' ) );
 				// Before we submit, check to make sure that all of our required fields aren't empty.
 				_.each( formModel.get( 'fields' ).models, function( field ) {
-					if ( 1 == field.get( 'required' ) && '' == jQuery.trim( field.get( 'value' ) ) ) {
-						nfRadio.channel( 'fields' ).request( 'add:error', field.get( 'id' ), 'required-error', 'This is a required field.' );
-					}
+					nfRadio.channel( 'submit' ).trigger( 'validate:field', field );
 				} );
+
+				console.log( 'before radio message' );
+
+				// Send out a message on the radio saying we're about to submit.
+				nfRadio.channel( 'submit' ).trigger( 'before:submit', formModel );
+
+				console.log( 'after radio message' );
 
 				// Check again for form errors.
 				formErrors = nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) );
@@ -72,11 +77,9 @@ define([], function() {
 	                    cache: false,
 	                   	success: function(data, textStatus, jqXHR)
 	                    {
-	                        if(typeof data.error === 'undefined') {
-								console.log( data );
-	                        } else {
-	                            console.log('ERRORS: ' + data.error);
-	                        }
+	                    	console.log( jQuery.parseJSON( data ).data.redirect );
+	                        nfRadio.channel( 'submit' ).trigger( 'after:submit', data, textStatus, jqXHR );
+
 	                    },
 	                    error: function(jqXHR, textStatus, errorThrown)
 	                    {

@@ -2,14 +2,20 @@
 
 final class NF_Display_Render
 {
-    public static $loaded_templates = array(
-        'layout',
-        'before-form',
-        'form-layout',
-        'field-wrap',
+    public static $field_templates = array(
+        'wrap',
         'label',
         'error',
+    );
+
+    public static $app_templates = array(
+        'layout',
+        'before-form',
         'after-form',
+    );
+
+    public static $form_templates = array(
+        'layout',
     );
 
     public static function localize( $form_id )
@@ -58,8 +64,51 @@ final class NF_Display_Render
             // Add Form Data to nfForms object
             nfForms.push( form );
         </script>
+
+        <style>
+            .nf-error input {
+                border-color: red;
+            }
+
+            .nf-error-msg {
+                color:red;
+            }
+
+            .nf-element.disabled {
+                opacity: 0.3;
+            }
+
+            .nf-pass .nf-element {
+                /*border: 2px solid green;*/
+                background: url( 'https://cdn0.iconfinder.com/data/icons/round-ui-icons/512/tick_green.png' ) no-repeat;
+                background-position: 99.5% 60%;
+                background-size: 35px 35px;
+
+                /*background: url( 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/email_envelope.png' ) 0 no-repeat;*/
+            }
+
+            .nf-fail .nf-element {
+                /*border: 2px solid red;*/
+                background: url( 'https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/cancel-512.png' ) no-repeat;
+                background-position: 99% 60%;
+                background-size: 30px 30px;
+                /*background: url( 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/email_envelope.png' ) 0 no-repeat;*/
+            }
+
+            .nf-file-progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+            .nf-file-bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+            .nf-file-percent { position:absolute; display:inline-block; top:3px; left:48%; }
+
+        </style>
         <?php
 
+        wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
+        wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
+        
+        wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
+        wp_enqueue_script( 'nf-front-end', Ninja_Forms::$url . 'assets/js/front-end/main.js', array( 'jquery', 'backbone', 'requirejs', 'jquery-form' ) );
+
+        wp_localize_script( 'nf-front-end', 'nfFrontEnd', array( 'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ), 'adminAjax' => admin_url( 'admin-ajax.php' ), 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/' ) );
     }
 
     public static function output_templates()

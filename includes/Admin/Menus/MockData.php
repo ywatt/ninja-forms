@@ -191,7 +191,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $action = Ninja_Forms()->form( 1 )->action()->get();
         $action->update_setting( 'title',  'Mock Redirect Action' )
             ->update_setting( 'type', 'redirect' )
-            ->update_setting( 'url', 'http://kylebjohnson.me' )
+            ->update_setting( 'url', 'http://kstover.codes' )
             ->save();
 
         $action = Ninja_Forms()->form( 1 )->action()->get();

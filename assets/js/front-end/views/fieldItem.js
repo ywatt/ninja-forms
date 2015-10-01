@@ -9,7 +9,13 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
     		this.model.bind( 'change:errors', this.changeError, this );
     		this.model.bind( 'change:addWrapperClass', this.addWrapperClass, this );
     		this.model.bind( 'change:removeWrapperClass', this.removeWrapperClass, this );
+    		this.listenTo( nfRadio.channel( 'submit' ), 'before:submit', this.test );
 		},
+
+		test: function( model ) {
+			console.log( 'firing from trigger 1' );
+		},
+
 
 		changeError: function() {
 			if ( 0 == this.model.get( 'errors' ).models.length ) {

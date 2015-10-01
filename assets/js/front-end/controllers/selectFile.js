@@ -2,6 +2,12 @@ define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'file' ), 'init:model', this.initFile );
+
+			this.listenTo( nfRadio.channel( 'submit' ), 'before:submit', this.test, this );
+		},
+
+		test: function( model ) {
+			console.log( 'firing from trigger 2' );
 		},
 
 		initFile: function( model ) {
