@@ -48,6 +48,8 @@ define([], function() {
 				// Before we submit, check to make sure that all of our required fields aren't empty.
 				_.each( formModel.get( 'fields' ).models, function( field ) {
 					nfRadio.channel( 'submit' ).trigger( 'validate:field', field );
+					nfRadio.channel( field.get( 'type' ) ).trigger( 'before:submit', field );
+					nfRadio.channel( 'fields' ).trigger( 'before:submit', field );
 				} );
 
 				console.log( 'before radio message' );
@@ -70,6 +72,8 @@ define([], function() {
 	                	'formData': formData
 					}
 
+					console.log( data );
+
 					jQuery.ajax({
 	                    url: nfFrontEnd.adminAjax,
 	                    type: 'POST',
@@ -77,8 +81,8 @@ define([], function() {
 	                    cache: false,
 	                   	success: function(data, textStatus, jqXHR)
 	                    {
-	                    	console.log( jQuery.parseJSON( data ).data.redirect );
-	                        nfRadio.channel( 'submit' ).trigger( 'after:submit', data, textStatus, jqXHR );
+	                    	console.log( jQuery.parseJSON( data ) );
+	                        nfRadio.channel( 'submit' ).trigger( 'submit:response', data, textStatus, jqXHR );
 
 	                    },
 	                    error: function(jqXHR, textStatus, errorThrown)

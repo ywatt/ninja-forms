@@ -5,6 +5,7 @@ define([], function() {
 			this.listenTo( nfRadio.channel( 'fields' ), 'change:field', this.validateRequired );
 			this.listenTo( nfRadio.channel( 'fields' ), 'keyup:field', this.validateKeyup );
 
+			this.listenTo( nfRadio.channel( 'fields' ), 'change:modelValue', this.beforeSubmit );
 			this.listenTo( nfRadio.channel( 'submit' ), 'validate:field', this.beforeSubmit );
 		},
 		
@@ -34,11 +35,7 @@ define([], function() {
 				var valid = defaultReqValidation;
 			}
 
-			if ( ! valid ) {
-				nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'required-error', 'This is a required field.' );
-			} else {
-				nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'required-error' );
-			}
+			this.maybeError( valid, model );
 		},
 
 		beforeSubmit: function( model ) {
@@ -56,12 +53,16 @@ define([], function() {
 
 			var valid = defaultReqValidation;
 			
+			this.maybeError( valid, model );
+
+		},
+
+		maybeError: function( valid, model ) {
 			if ( ! valid ) {
 				nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'required-error', 'This is a required field.' );
 			} else {
 				nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'required-error' );
-			}
-
+			}			
 		}
 	});
 

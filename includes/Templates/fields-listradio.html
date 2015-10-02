@@ -15,11 +15,11 @@
         <label>
             <input type="radio" name="nf-field-<%= fieldID %>" class="<%= classes %>" value="nf-other" <%= ( currentValue == 'nf-other' ) ? 'checked="checked"' : '' %>>
             Other
+            <%= renderOtherText() %> 
         </label>
-        <%= renderOtherText() %>
     </li>
 </script>
 
 <script id='nf-tmpl-field-radio-other-text' type='text/template'>
-    <input type="text" name="nf-field-<%= fieldID %>" value="">
+    <input type="text" class="nf-other" value="">
 </script>

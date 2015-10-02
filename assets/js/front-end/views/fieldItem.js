@@ -16,7 +16,6 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 			console.log( 'firing from trigger 1' );
 		},
 
-
 		changeError: function() {
 			if ( 0 == this.model.get( 'errors' ).models.length ) {
 				this.model.removeWrapperClass( 'nf-error' );
