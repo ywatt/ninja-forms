@@ -3,7 +3,7 @@ define(['front-end/models/fieldModel'], function( fieldModel ) {
 
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( radioChannel, 'change:modelValue', this.fieldChange );
+			this.listenTo( radioChannel, 'change:modelValue', this.changeModelValue );
 			this.listenTo( radioChannel, 'init:model', this.register );
 		},
 
@@ -12,7 +12,7 @@ define(['front-end/models/fieldModel'], function( fieldModel ) {
 			model.set( 'renderOtherText', this.renderOtherText );
 		},
 
-		fieldChange: function( model ) {
+		changeModelValue: function( model ) {
 			if ( 1 == model.get( 'show_other' ) ) {
 				model.set( 'reRender', true );
 			}
@@ -21,7 +21,17 @@ define(['front-end/models/fieldModel'], function( fieldModel ) {
 		renderOptions: function() {
 			var that = this;
 			var html = '';
+			if ( '' == this.value ) {
+				var valueFound = true;
+			} else {
+				var valueFound = false;
+			}
+			
 			_.each( this.options, function( option ) {
+				if ( option.value == that.value ) {
+					valueFound = true;
+				}
+
 				option.fieldID = that.id;
 				option.classes = that.classes;
 				option.currentValue = that.value;
@@ -30,11 +40,15 @@ define(['front-end/models/fieldModel'], function( fieldModel ) {
 			} );
 
 			if ( 1 == this.show_other ) {
+				if ( 'nf-other' == this.value ) {
+					valueFound = false;
+				}
 				var data = {
 					fieldID: this.id,
 					classes: this.classes,
 					currentValue: this.value,
-					renderOtherText: this.renderOtherText
+					renderOtherText: this.renderOtherText,
+					valueFound: valueFound
 				};
 				html += _.template( jQuery( '#nf-tmpl-field-radio-other' ).html(), data );
 
@@ -44,11 +58,14 @@ define(['front-end/models/fieldModel'], function( fieldModel ) {
 		},
 
 		renderOtherText: function() {
-			if ( this.currentValue == 'nf-other' ) {
+			if ( 'nf-other' == this.currentValue || ! this.valueFound ) {
+				if ( 'nf-other' == this.currentValue ) {
+					this.currentValue = '';
+				}
 				var data = {
-					fieldID: this.id,
+					fieldID: this.fieldID,
 					classes: this.classes,
-					currentValue: this.value
+					currentValue: this.currentValue
 				};
 				return _.template( jQuery( '#nf-tmpl-field-radio-other-text' ).html(), data );
 			}

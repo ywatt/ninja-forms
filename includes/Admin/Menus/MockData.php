@@ -42,7 +42,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'textbox' )
             ->update_setting( 'label', 'Name')
-            ->update_setting( 'label_pos', 'before' )
+            ->update_setting( 'label_pos', 'inside' )
             ->update_setting( 'required', 1 )
             ->save();
 
@@ -51,7 +51,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'email' )
             ->update_setting( 'label', 'Email')
-            ->update_setting( 'label_pos', 'before' )
+            ->update_setting( 'label_pos', 'inside' )
             ->update_setting( 'required', 1 )
             ->save();
 
@@ -60,7 +60,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'textbox' )
             ->update_setting( 'label', 'Confirm Email')
-            ->update_setting( 'label_pos', 'before' )
+            ->update_setting( 'label_pos', 'inside' )
             ->update_setting( 'confirm_field', $email_field_id )
             ->update_setting( 'required', 1 )
             ->save();
@@ -68,21 +68,21 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'textarea' )
             ->update_setting( 'label', 'Message')
-            ->update_setting( 'label_pos', 'before' )
+            ->update_setting( 'label_pos', 'inside' )
             ->update_setting( 'required', 1 )
             ->save();
 
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'textbox' )
             ->update_setting( 'label', 'Mirror Name')
-            ->update_setting( 'label_pos', 'before' )
+            ->update_setting( 'label_pos', 'inside' )
             ->update_setting( 'required', 1 )
             ->update_setting( 'mirror_field', $name_field_id )
             ->save();
 
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'submit' )
-            ->update_setting( 'label', 'YOLO')
+            ->update_setting( 'label', 'Submit')
             ->save();
 
         /* FORM #2: Get Help */
@@ -132,6 +132,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
                     ),
                 ),
                 'show_other'	=> 1,
+                'required'      => 1,
             ),
             array(
                 'id'				=> 7,
