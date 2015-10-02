@@ -244,6 +244,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
             return $this->_logger;
         }
 
+        /**
+         * Display Wrapper
+         *
+         * @param $form_id
+         */
         public function display( $form_id )
         {
             if( ! $form_id ) return;
@@ -251,22 +256,18 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
             NF_Display_Render::localize( $form_id );
         }
 
-        public static function template( $file_name = '', $ext = '.html.php' )
-        {
-            if( ! $file_name ) return;
 
-            include self::$dir . 'includes/Templates/' . $file_name . $ext;
-        }
-
-        public static function config( $file_name )
-        {
-            return include self::$dir . 'includes/Config/' . $file_name . '.php';
-        }
 
         /*
          * PRIVATE METHODS
          */
 
+        /**
+         * Load Classes from Directory
+         *
+         * @param string $prefix
+         * @return array
+         */
         private static function load_classes( $prefix = '' )
         {
             $return = array();
@@ -288,6 +289,36 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
             }
 
             return $return;
+        }
+
+
+
+        /*
+         * STATIC METHODS
+         */
+
+        /**
+         * Template
+         *
+         * @param string $file_name
+         * @param string $ext
+         */
+        public static function template( $file_name = '', $ext = '.html.php' )
+        {
+            if( ! $file_name ) return;
+
+            include self::$dir . 'includes/Templates/' . $file_name . $ext;
+        }
+
+        /**
+         * Config
+         *
+         * @param $file_name
+         * @return mixed
+         */
+        public static function config( $file_name )
+        {
+            return include self::$dir . 'includes/Config/' . $file_name . '.php';
         }
 
     } // End Class Ninja_Forms
