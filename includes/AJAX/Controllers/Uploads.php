@@ -13,6 +13,7 @@ class NF_AJAX_Controllers_Uploads extends NF_Abstracts_Controller
         add_action( 'wp_ajax_nf_async_upload', array( $this, 'upload' ) );
         add_action( 'wp_ajax_nopriv_nf_async_upload', array( $this, 'upload' ) );
 
+        add_action( 'nf_uploads_delete_temporary_file', array( $this, 'delete_temporary_file' ), 10, 1 );
     }
 
     /*
@@ -28,6 +29,11 @@ class NF_AJAX_Controllers_Uploads extends NF_Abstracts_Controller
         $this->validate();
 
         $this->_respond();
+    }
+
+    public function delete_temporary_file( $file_path )
+    {
+        unlink( $file_path );
     }
 
     /*
@@ -46,7 +52,11 @@ class NF_AJAX_Controllers_Uploads extends NF_Abstracts_Controller
 
                 $new_tmp_name = $this->i_like_clean_slugs_and_i_cannot_lie( $file['name'] );
 
-                move_uploaded_file( $file['tmp_name'], $upload_dir['basedir'] . "/" . $new_tmp_name );
+                $file_path = $upload_dir['basedir'] . "/" . $new_tmp_name;
+
+                move_uploaded_file( $file['tmp_name'], $file_path );
+
+                wp_schedule_single_event( time() + 3600, 'nf_uploads_delete_temporary_file', array( $file_path ) );
 
                 $this->_data['files'][ $key ]['tmp_name'] = $new_tmp_name;
             }
