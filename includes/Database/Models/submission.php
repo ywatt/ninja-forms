@@ -166,7 +166,7 @@ final class NF_Database_Models_Submission
 
     protected function get_field_id_by_key( $field_key )
     {
-        return $field_key
+        return $field_key;
     }
 
 
