@@ -1,17 +1,17 @@
 define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'fields' ), 'blur:field', this.validateRequired );
-			this.listenTo( nfRadio.channel( 'fields' ), 'change:field', this.validateRequired );
-			this.listenTo( nfRadio.channel( 'fields' ), 'keyup:field', this.validateKeyup );
+			// this.listenTo( nfRadio.channel( 'fields' ), 'blur:field', this.validateRequired );
+			// this.listenTo( nfRadio.channel( 'fields' ), 'change:field', this.validateRequired );
+			// this.listenTo( nfRadio.channel( 'fields' ), 'keyup:field', this.validateKeyup );
 
-			this.listenTo( nfRadio.channel( 'fields' ), 'change:modelValue', this.beforeSubmit );
-			this.listenTo( nfRadio.channel( 'submit' ), 'validate:field', this.beforeSubmit );
+			// this.listenTo( nfRadio.channel( 'fields' ), 'change:modelValue', this.validateModelData );
+			// this.listenTo( nfRadio.channel( 'submit' ), 'validate:field', this.validateModelData );
 		},
 		
 		validateKeyup: function( el, model, keyCode ) {
 			var errorExists = nfRadio.channel( 'fields' ).request( 'get:error', model.get( 'id' ), 'required-error' );
-			if ( errorExists ) {
+			if ( ( errorExists || ! model.get( 'clean' ) ) && 1 == model.get( 'required' ) ) {
 				this.validateRequired( el, model );
 			}
 		},
@@ -20,7 +20,6 @@ define([], function() {
 			if ( 1 != model.get( 'required' ) ) {
 				return false;
 			}
-			
 			var currentValue = jQuery( el ).val();
 			var customReqValidation = nfRadio.channel( model.get( 'type' ) ).request( 'validate:required', el, model );
 			var defaultReqValidation = true;
@@ -38,7 +37,7 @@ define([], function() {
 			this.maybeError( valid, model );
 		},
 
-		beforeSubmit: function( model ) {
+		validateModelData: function( model ) {
 			if ( 1 != model.get( 'required' ) ) {
 				return false;
 			}

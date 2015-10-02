@@ -132,6 +132,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
                     ),
                 ),
                 'show_other'	=> 1,
+                'required'      => 1,
             ),
             array(
                 'id'				=> 7,
