@@ -125,6 +125,14 @@ final class NF_Display_Render
             }
         }
 
+        ?>
+        <script>
+            var post_max_size = '<?php echo ini_get('post_max_size'); ?>';
+            var upload_max_filesize = '<?php echo ini_get('upload_max_filesize'); ?>';
+            var wp_memory_limit = '<?php echo WP_MEMORY_LIMIT; ?>';
+        </script>
+        <?php
+
         // Action to Output Custom Templates
         do_action( 'nf_output_templates' );
     }
