@@ -19,10 +19,4 @@ class NF_Fields_Password extends NF_Abstracts_Input
 
         $this->_nicename = __( 'Password', Ninja_Forms::TEXTDOMAIN );
     }
-    
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

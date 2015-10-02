@@ -19,10 +19,4 @@ class NF_Fields_LastName extends NF_Abstracts_UserInfo
 
         $this->_settings = array_merge( $this->_settings, $settings );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

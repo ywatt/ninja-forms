@@ -19,10 +19,4 @@ class NF_Fields_Button extends NF_Abstracts_Field
 
         $this->_nicename = __( 'Button', Ninja_Forms::TEXTDOMAIN );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

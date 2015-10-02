@@ -19,10 +19,4 @@ abstract class NF_Abstracts_UserInfo extends NF_Abstracts_Input
 
         $this->_settings = array_merge( $this->_settings, $settings );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

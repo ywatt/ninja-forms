@@ -23,10 +23,4 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
         $this->_nicename = __( 'Checkbox', Ninja_Forms::TEXTDOMAIN );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

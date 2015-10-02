@@ -17,10 +17,4 @@ class NF_Fields_StateList extends NF_Abstracts_List
 
         $this->_nicename = __( 'State', Ninja_Forms::TEXTDOMAIN );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

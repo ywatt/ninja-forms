@@ -17,10 +17,4 @@ class NF_Fields_ListMultiselect extends NF_Abstracts_List
 
         $this->_nicename = __( 'Multi-Select', Ninja_Forms::TEXTDOMAIN );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

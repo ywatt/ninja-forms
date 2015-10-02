@@ -55,14 +55,21 @@ abstract class NF_Abstracts_Field
     */
 
     /**
-     * Validate a user (or system) defined value.
+     * Validate
      *
-     * @param $value
-     * @return bool
+     * @param $field
+     * @param $data
+     * @return array $errors
      */
-    public function validate( $value )
+    public function validate( $field, $data )
     {
-        if ( isset( $this->_attr['required'] ) AND TRUE == $this->_attr['required'] AND ! $value ) return FALSE;
+        $errors = array();
+
+        if( isset( $field['required'] ) && $field['required'] && ! trim( $field['value'] ) ){
+            $errors[] = 'Field is required.';
+        }
+
+        return $errors;
     }
 
 }

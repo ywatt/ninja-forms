@@ -25,10 +25,4 @@ class NF_Fields_Submit extends NF_Fields_Button
 
         $this->_settings = array_merge( $this->_settings, $settings );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

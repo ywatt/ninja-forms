@@ -17,10 +17,4 @@ class NF_Fields_Phone extends NF_Fields_Textbox
     {
         $this->_nicename = __( 'Phone', Ninja_Forms::TEXTDOMAIN );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

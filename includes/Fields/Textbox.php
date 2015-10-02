@@ -21,10 +21,4 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
         $this->_nicename = __( 'Textbox', Ninja_Forms::TEXTDOMAIN );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

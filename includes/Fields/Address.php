@@ -17,10 +17,4 @@ class NF_Fields_Address extends NF_Fields_Textbox
 
         $this->_nicename = __( 'Address', Ninja_Forms::TEXTDOMAIN );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

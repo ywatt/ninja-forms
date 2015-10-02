@@ -17,10 +17,4 @@ class NF_Fields_ListCheckbox extends NF_Abstracts_List
 
         $this->_nicename = __( 'Checkbox List', Ninja_Forms::TEXTDOMAIN );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }

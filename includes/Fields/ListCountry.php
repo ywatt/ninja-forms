@@ -17,10 +17,4 @@ class NF_Fields_ListCountry extends NF_Abstracts_List
 
         $this->_nicename = __( 'Country', Ninja_Forms::TEXTDOMAIN );
     }
-
-    public function validate( $value )
-    {
-        parent::validate( $value );
-    }
-
 }
