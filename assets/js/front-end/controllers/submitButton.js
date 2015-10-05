@@ -72,21 +72,17 @@ define([], function() {
 	                	'formData': formData
 					}
 
-					console.log( data );
-
 					jQuery.ajax({
 	                    url: nfFrontEnd.adminAjax,
 	                    type: 'POST',
 	                    data: data,
 	                    cache: false,
-	                   	success: function(data, textStatus, jqXHR)
-	                    {
-	                    	console.log( jQuery.parseJSON( data ) );
-	                        nfRadio.channel( 'submit' ).trigger( 'submit:response', data, textStatus, jqXHR );
-
+	                   	success: function( data, textStatus, jqXHR ) {
+	                   		var response = jQuery.parseJSON( data );
+	                   		
+	                        nfRadio.channel( 'submit' ).trigger( 'submit:response', response, textStatus, jqXHR );
 	                    },
-	                    error: function(jqXHR, textStatus, errorThrown)
-	                    {
+	                    error: function( jqXHR, textStatus, errorThrown ) {
 	                        // Handle errors here
 	                        console.log('ERRORS: ' + textStatus);
 	                        // STOP LOADING SPINNER

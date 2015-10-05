@@ -11,7 +11,9 @@ define(
 		'front-end/controllers/submitInit',
 		'front-end/controllers/getFormErrors',
 		'front-end/controllers/selectFile',
-		'front-end/controllers/validateRequired'
+		'front-end/controllers/validateRequired',
+		'front-end/controllers/submitError',
+		'front-end/controllers/actionRedirect'
 	],
 	function(
 		FieldError,
@@ -25,7 +27,9 @@ define(
 		SubmitInit,
 		GetFormErrors,
 		SelectFile,
-		ValidateRequired
+		ValidateRequired,
+		SubmitError,
+		ActionRedirect
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -41,6 +45,8 @@ define(
 				var getFormErrors = new GetFormErrors();
 				var selectFile = new SelectFile();
 				var validateRequired = new ValidateRequired();
+				var submitError = new SubmitError();
+				var actionRedirect = new ActionRedirect();
 			}
 		});
 

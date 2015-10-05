@@ -1,12 +1,12 @@
 define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			// this.listenTo( nfRadio.channel( 'fields' ), 'blur:field', this.validateRequired );
-			// this.listenTo( nfRadio.channel( 'fields' ), 'change:field', this.validateRequired );
-			// this.listenTo( nfRadio.channel( 'fields' ), 'keyup:field', this.validateKeyup );
+			this.listenTo( nfRadio.channel( 'fields' ), 'blur:field', this.validateRequired );
+			this.listenTo( nfRadio.channel( 'fields' ), 'change:field', this.validateRequired );
+			this.listenTo( nfRadio.channel( 'fields' ), 'keyup:field', this.validateKeyup );
 
-			// this.listenTo( nfRadio.channel( 'fields' ), 'change:modelValue', this.validateModelData );
-			// this.listenTo( nfRadio.channel( 'submit' ), 'validate:field', this.validateModelData );
+			this.listenTo( nfRadio.channel( 'fields' ), 'change:modelValue', this.validateModelData );
+			this.listenTo( nfRadio.channel( 'submit' ), 'validate:field', this.validateModelData );
 		},
 		
 		validateKeyup: function( el, model, keyCode ) {
@@ -20,6 +20,7 @@ define([], function() {
 			if ( 1 != model.get( 'required' ) ) {
 				return false;
 			}
+			console.log( 'validate' );
 			var currentValue = jQuery( el ).val();
 			var customReqValidation = nfRadio.channel( model.get( 'type' ) ).request( 'validate:required', el, model );
 			var defaultReqValidation = true;
