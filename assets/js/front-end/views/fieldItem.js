@@ -56,6 +56,9 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 
 			var el = jQuery( this.el ).children( '.nf-error-wrap' );
     		this.errorCollectionView = new fieldErrorCollection( { el: el, collection: this.model.get( 'errors' ), thisModel: this.model } );
+			
+			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'render:view', this );
+			nfRadio.channel( 'fields' ).trigger( 'render:view', this );
 		},
 
 		templateHelpers: function () {
