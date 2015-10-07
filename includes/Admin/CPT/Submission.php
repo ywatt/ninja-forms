@@ -1,12 +1,24 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
+/**
+ * Class NF_Admin_CPT_Submission
+ */
 class NF_Admin_CPT_Submission
 {
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         add_action( 'init', array( $this, 'custom_post_type' ), 0 );
+
+        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 2 );
+        add_action( 'add_meta_boxes', array( $this, 'remove_meta_boxes' ) );
     }
 
+    /**
+     * Custom Post Type
+     */
     function custom_post_type() {
 
         $labels = array(
@@ -30,11 +42,11 @@ class NF_Admin_CPT_Submission
             'label'               => __( 'Submission', 'ninja_forms' ),
             'description'         => __( 'Form Submissions', 'ninja_forms' ),
             'labels'              => $labels,
-            'supports'            => array( ),
+            'supports'            => false,
             'hierarchical'        => false,
             'public'              => true,
             'show_ui'             => true,
-            'show_in_menu'        => true,
+            'show_in_menu'        => false,
             'menu_position'       => 5,
             'show_in_admin_bar'   => true,
             'show_in_nav_menus'   => true,
@@ -45,7 +57,53 @@ class NF_Admin_CPT_Submission
             'capability_type'     => 'page',
         );
         register_post_type( 'nf_subs', $args );
+    }
 
+    /**
+     * Meta Boxes
+     */
+    public function add_meta_boxes( $post_type, $post )
+    {
+        add_meta_box(
+            'nf_sub_fields',
+            __( 'User Submitted Values', 'ninja-forms' ),
+            array( $this, 'fields_meta_box' ),
+            'nf_subs',
+            'normal',
+            'default'
+        );
+
+        add_meta_box(
+            'nf_sub_info',
+            __( 'Submission Info', 'ninja-forms' ),
+            array( $this, 'info_meta_box' ),
+            'nf_subs',
+            'side',
+            'default'
+        );
+    }
+
+    public function fields_meta_box( $post )
+    {
+        $sub = Ninja_Forms()->form()->get_sub( $post->ID );
+
+        $fields = Ninja_Forms()->form( 1 )->get_fields();
+
+        Ninja_Forms::template( 'admin-metabox-sub-fields.html.php', compact( 'fields', 'sub' ) );
+    }
+
+    public function info_meta_box( $post )
+    {
+        Ninja_Forms::template( 'admin-metabox-sub-info.html.php' );
+    }
+
+    /**
+     * Remove Meta Boxes
+     */
+    public function remove_meta_boxes()
+    {
+        // Remove the default Publish metabox
+        remove_meta_box( 'submitdiv', 'nf_subs', 'side' );
     }
 
 }
