@@ -93,6 +93,28 @@ final class NF_Display_Render
             .nf-file-percent { position:absolute; display:inline-block; top:3px; left:48%; }
 
         </style>
+
+        <style>
+​        .nf-files-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .nf-files-table td {
+            border-top: 1px solid #ccc;
+            padding: 10px;
+        }
+        .nf-files-table tr:last-child td {
+            border-bottom: 1px solid #ccc;
+        }
+        .nf-files-table tr:nth-child(odd) td {
+            background: #fff;
+        }
+        .nf-files-table tr:nth-child(even) td {
+            background: #f1f1f1;
+        }
+        ​
+        </style>
+
         <?php
 
         wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );

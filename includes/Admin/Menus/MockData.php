@@ -74,14 +74,6 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
             ->save();
 
         $field = Ninja_Forms()->form( 1 )->field()->get();
-        $field->update_setting( 'type', 'file' )
-            ->update_setting( 'label', 'Select a file')
-            ->update_setting( 'label_pos', 'before' )
-            ->update_setting( 'button_label', 'ADD A FILE' )
-            ->update_setting( 'required', 1 )
-            ->save();
-
-        $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'textarea' )
             ->update_setting( 'label', 'Message')
             ->update_setting( 'label_pos', 'inside' )
