@@ -9,12 +9,34 @@ final class NF_Database_Models_Submission
 
     protected $_form_id = '';
 
+    protected $_sub_date = '';
+
     protected $_field_values = array();
 
     public function __construct( $id = '', $form_id = '' )
     {
         $this->_id = $id;
         $this->_form_id = $form_id;
+
+        if( $this->_id ){
+            $sub = get_post( $this->_id );
+            $this->_sub_date = $sub->post_date;
+        }
+    }
+
+    /**
+     * Get Submission ID
+     *
+     * @return int
+     */
+    public function get_id()
+    {
+        return intval( $this->_id );
+    }
+
+    public function get_sub_date( $format = 'm/d/Y' )
+    {
+        return date( $format, strtotime( $this->_sub_date ) );
     }
 
     /**
