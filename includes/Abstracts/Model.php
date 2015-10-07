@@ -89,7 +89,7 @@ class NF_Abstracts_Model
 
     public function get_id()
     {
-        return $this->_id;
+        return intval( $this->_id );
     }
 
     public function get_type()
