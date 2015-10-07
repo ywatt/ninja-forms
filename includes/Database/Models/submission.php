@@ -27,7 +27,7 @@ final class NF_Database_Models_Submission
      */
     public function get_field_value( $field_ref )
     {
-        $field_id = ( is_int( $field_ref ) ) ? $field_ref : get_field_id_by_key( $field_ref );
+        $field_id = ( is_int( $field_ref ) ) ? $field_ref : $this->get_field_id_by_key( $field_ref );
 
         $field = '_field_' . $field_id;
 
@@ -48,6 +48,13 @@ final class NF_Database_Models_Submission
         return $this->_field_values = get_post_meta( $this->_id );
     }
 
+    /**
+     * Update Field Value
+     *
+     * @param $field_ref
+     * @param $value
+     * @return $this
+     */
     public function update_field_value( $field_ref, $value )
     {
         $field_id = ( is_int( $field_ref ) ) ? $field_ref : $this->get_field_id_by_key( $field_ref );
@@ -57,6 +64,12 @@ final class NF_Database_Models_Submission
         return $this;
     }
 
+    /**
+     * Update Field Values
+     *
+     * @param $data
+     * @return $this
+     */
     public function update_field_values( $data )
     {
         foreach( $data as $field_ref => $value )
@@ -68,7 +81,7 @@ final class NF_Database_Models_Submission
     }
 
     /**
-     * Find
+     * Find Submissions
      *
      * @param array $where
      * @return array
@@ -78,7 +91,7 @@ final class NF_Database_Models_Submission
         $args = array(
             'post_type' => 'nf_subs',
             'posts_per_page' => -1,
-            'meta_query' => format_meta_query( $where )
+            'meta_query' => $this->format_meta_query( $where )
         );
 
         $subs = get_posts( $args );
@@ -93,6 +106,9 @@ final class NF_Database_Models_Submission
         return $return;
     }
 
+    /**
+     * Delete Submission
+     */
     public function delete()
     {
         if( ! $this->_id ) return;
@@ -100,6 +116,11 @@ final class NF_Database_Models_Submission
         wp_delete_post( $this->_id );
     }
 
+    /**
+     * Save Submission
+     *
+     * @return $this|NF_Database_Models_Submission|void
+     */
     public function save()
     {
         if( ! $this->_id ){
@@ -121,6 +142,13 @@ final class NF_Database_Models_Submission
      * PROTECTED METHODS
      */
 
+    /**
+     * Save Field Value
+     *
+     * @param $field_id
+     * @param $value
+     * @return $this
+     */
     protected function _save_field_value( $field_id, $value )
     {
         update_post_meta( $this->_id, '_field_' . $field_id, $value );
@@ -128,9 +156,14 @@ final class NF_Database_Models_Submission
         return $this;
     }
 
+    /**
+     * SAve Field Values
+     *
+     * @return $this|void
+     */
     protected function _save_field_values()
     {
-        if( ! $this->_field_values ) return;
+        if( ! $this->_field_values ) return FALSE;
 
         foreach( $this->_field_values as $field_id => $value )
         {
@@ -166,6 +199,12 @@ final class NF_Database_Models_Submission
         return $return;
     }
 
+    /**
+     * Get Field ID By Key
+     *
+     * @param $field_key
+     * @return mixed
+     */
     protected function get_field_id_by_key( $field_key )
     {
         return $field_key;
