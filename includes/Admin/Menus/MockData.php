@@ -162,13 +162,21 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
          */
 
         $sub = Ninja_Forms()->form( 1 )->sub()->get();
-        $sub->update_field_value( 1, 'foo' )
-            ->update_field_value( 2, 'bar' );
+        $sub->update_field_value( 1, 'Kyle Johnson' )
+            ->update_field_value( 2, 'kyle@wpninjas.com' )
+            ->update_field_value( 3, 'kyle@wpninjas.com' )
+            ->update_field_value( 4, 'This is a test.' )
+            ->update_field_value( 5, 'Kyle Johnson' );
         $sub->save();
 
         $sub = Ninja_Forms()->form( 1 )->sub()->get();
-        $sub->update_field_value( 1, 'bar' );
+        $sub->update_field_value( 1, 'John Doe' )
+            ->update_field_value( 2, 'user@gmail.com' )
+            ->update_field_value( 3, 'user@gmail.com' )
+            ->update_field_value( 4, 'This is another test.' )
+            ->update_field_value( 5, 'John Doe' );
         $sub->save();
+
 
         /*
          * Create Field from Array
