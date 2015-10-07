@@ -128,6 +128,8 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->menus[ 'settings' ]        = new NF_Admin_Menus_Settings();
                 self::$instance->menus[ 'add-ons' ]         = new NF_Admin_Menus_Addons();
                 self::$instance->menus[ 'system_status']    = new NF_Admin_Menus_SystemStatus();
+                self::$instance->menus[ 'submissions']      = new NF_Admin_Menus_Submissions();
+
 
                 /*
                  * Admin menus used for building out the admin UI
@@ -147,7 +149,6 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 self::$instance->controllers[ 'form' ]       = new NF_AJAX_Controllers_Form();
                 self::$instance->controllers[ 'uploads' ]    = new NF_AJAX_Controllers_Uploads();
-                self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();
 
                 /*
                  * Field Class Registration
@@ -301,13 +302,15 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
          * Template
          *
          * @param string $file_name
-         * @param string $ext
+         * @param array $data
          */
-        public static function template( $file_name = '', $ext = '.html.php' )
+        public static function template( $file_name = '', array $data = array() )
         {
             if( ! $file_name ) return;
 
-            include self::$dir . 'includes/Templates/' . $file_name . $ext;
+            extract( $data );
+
+            include self::$dir . 'includes/Templates/' . $file_name;
         }
 
         /**
