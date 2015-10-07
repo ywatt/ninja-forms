@@ -83,6 +83,11 @@ class NF_Admin_CPT_Submission
         );
     }
 
+    /**
+     * Fields Meta Box
+     *
+     * @param $post
+     */
     public function fields_meta_box( $post )
     {
         $sub = Ninja_Forms()->form()->get_sub( $post->ID );
@@ -92,6 +97,11 @@ class NF_Admin_CPT_Submission
         Ninja_Forms::template( 'admin-metabox-sub-fields.html.php', compact( 'fields', 'sub' ) );
     }
 
+    /**
+     * Info Meta Box
+     *
+     * @param $post
+     */
     public function info_meta_box( $post )
     {
         Ninja_Forms::template( 'admin-metabox-sub-info.html.php' );
