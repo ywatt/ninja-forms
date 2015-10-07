@@ -29,9 +29,11 @@ final class NF_Database_Models_Submission
     {
         $field_id = ( is_int( $field_ref ) ) ? $field_ref : get_field_id_by_key( $field_ref );
 
-        if( isset( $this->_field_values[ $field_id ] ) ) return $this->_field_values[ $field_id ];
+        $field = '_field_' . $field_id;
 
-        return $this->_field_values[ $field_id ] = get_post_meta($this->_id, '_field_' . $field_id, TRUE);
+        if( isset( $this->_field_values[ $field ] ) ) return $this->_field_values[ $field ];
+
+        return $this->_field_values[ $field ] = get_post_meta($this->_id, $field, TRUE);
     }
 
     /**
