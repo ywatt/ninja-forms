@@ -47,6 +47,8 @@ abstract class NF_Abstracts_Submenu
      */
     public $function = 'display';
 
+    public $priority = 10;
+
     /**
      * Constructor
      *
@@ -64,7 +66,7 @@ abstract class NF_Abstracts_Submenu
 
         $this->capability = add_filter( 'submenu_' . $this->menu_slug . '_capability', $this->capability );
 
-        add_action( 'admin_menu', array( $this, 'register' ) );
+        add_action( 'admin_menu', array( $this, 'register' ), $this->priority );
     }
 
     /**
@@ -72,13 +74,15 @@ abstract class NF_Abstracts_Submenu
      */
     public function register()
     {
+        $function = ( $this->function ) ? array( $this, $this->function ) : NULL;
+
         add_submenu_page(
             $this->parent_slug,
             $this->page_title,
             $this->menu_title,
             $this->capability,
             $this->menu_slug,
-            array( $this, $this->function )
+            $function
         );
 
         add_filter( 'admin_body_class', array( $this, 'body_class' ) );

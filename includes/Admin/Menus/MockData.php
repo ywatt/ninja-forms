@@ -6,6 +6,8 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
 
     public $page_title = 'Mock Data';
 
+    public $priority = 9002;
+
     public function __construct()
     {
         parent::__construct();
@@ -20,6 +22,12 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
          */
         $migrations = new NF_Database_Migrations();
         $migrations->nuke( TRUE, TRUE );
+
+        $posts = get_posts( 'post_type=nf_subs' );
+        foreach( $posts as $post ){
+            wp_delete_post( $post->ID );
+        }
+
         $migrations->migrate();
 
         /*
@@ -161,9 +169,14 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
          * Create Submission
          */
 
-//        $sub = Ninja_Forms()->form( 1 )->sub()->get();
-//        $sub->update_field_value( 1, 'blarg' );
-//        $sub->save();
+        $sub = Ninja_Forms()->form( 1 )->sub()->get();
+        $sub->update_field_value( 1, 'foo' )
+            ->update_field_value( 2, 'bar' );
+        $sub->save();
+
+        $sub = Ninja_Forms()->form( 1 )->sub()->get();
+        $sub->update_field_value( 1, 'bar' );
+        $sub->save();
 
         /*
          * Create Field from Array

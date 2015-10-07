@@ -6,6 +6,8 @@ final class NF_Admin_Menus_AddAction extends NF_Abstracts_Submenu
 
     public $page_title = 'Add Action';
 
+    public $priority = 9001;
+
     public function __construct()
     {
         parent::__construct();

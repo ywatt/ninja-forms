@@ -6,6 +6,8 @@ final class NF_Admin_Menus_Addons extends NF_Abstracts_Submenu
 
     public $page_title = 'Addons';
 
+    public $priority = 11;
+
     public function __construct()
     {
         parent::__construct();

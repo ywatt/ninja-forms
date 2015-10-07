@@ -6,6 +6,8 @@ final class NF_Admin_Menus_EditAction extends NF_Abstracts_Submenu
 
     public $page_title = 'Edit Action';
 
+    public $priority = 9001;
+
     public function __construct()
     {
         parent::__construct();

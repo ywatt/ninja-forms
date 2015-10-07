@@ -6,6 +6,8 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
 
     public $page_title = 'System Status';
 
+    public $priority = 12;
+
     public function __construct()
     {
         parent::__construct();
