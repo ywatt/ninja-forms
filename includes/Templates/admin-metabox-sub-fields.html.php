@@ -12,11 +12,15 @@
         <tbody>
         <?php foreach( $fields as $field ): ?>
 
+            <?php if( in_array( $field->get_setting( 'type' ), $hidden_field_types ) ) continue; ?>
+
             <tr>
                 <td><?php echo $field->get_setting( 'label' ); ?></td>
 
-                <!-- TODO: Add form elements for editing submission data. -->
-                <td><?php echo $sub->get_field_value( $field->get_id() ); ?></td>
+                <?php
+                $field_class = Ninja_Forms()->fields[ $field->get_setting( 'type' ) ];
+                ?>
+                <td><?php echo $field_class->admin_form_element( $field->get_id(), $sub->get_field_value( $field->get_id() ) ); ?></td>
             </tr>
 
         <?php endforeach; ?>
@@ -28,16 +32,21 @@
     <style>
         .nf-sub-custom-fields-table {
             width: 100%;
+            border-spacing: 0;
         }
-        .nf-sub-custom-fields-table th {
+        .nf-sub-custom-fields-table thead {
+            background-color: #f1f1f1;
+        }
+        .nf-sub-custom-fields-table thead th {
             text-align: left;
         }
         .nf-sub-custom-fields-table th,
         .nf-sub-custom-fields-table td {
             padding: 10px 0 10px 10px;
+            vertical-align: top;
         }
-        .nf-sub-custom-fields-table tbody tr:nth-child( odd ) {
-            background-color: #EEE;
+        .nf-sub-custom-fields-table textarea {
+            height: 150px;
         }
     </style>
 
