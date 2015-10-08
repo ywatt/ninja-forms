@@ -24,5 +24,15 @@ class NF_Fields_Submit extends NF_Fields_Button
         $settings = Ninja_Forms::config( 'SubmitFieldSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );
+
+        add_filter( 'nf_sub_hidden_field_types', array( $this, 'hide_field_type' ) );
     }
+
+    function hide_field_type( $field_types )
+    {
+        $field_types[] = $this->_name;
+
+        return $field_types;
+    }
+
 }
