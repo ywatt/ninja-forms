@@ -35,7 +35,7 @@ class NF_Admin_CPT_Submission
             'update_item'         => __( 'Update Item', 'ninja_forms' ),
             'view_item'           => __( 'View Item', 'ninja_forms' ),
             'search_items'        => __( 'Search Item', 'ninja_forms' ),
-            'not_found'           => __( 'Not found', 'ninja_forms' ),
+            'not_found'           => $this->not_found_message(),
             'not_found_in_trash'  => __( 'Not found in Trash', 'ninja_forms' ),
         );
         $args = array(
@@ -94,7 +94,9 @@ class NF_Admin_CPT_Submission
 
         $fields = Ninja_Forms()->form( 1 )->get_fields();
 
-        Ninja_Forms::template( 'admin-metabox-sub-fields.html.php', compact( 'fields', 'sub' ) );
+        $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
+
+        Ninja_Forms::template( 'admin-metabox-sub-fields.html.php', compact( 'fields', 'sub', 'hidden_field_types' ) );
     }
 
     /**
@@ -114,6 +116,19 @@ class NF_Admin_CPT_Submission
     {
         // Remove the default Publish metabox
         remove_meta_box( 'submitdiv', 'nf_subs', 'side' );
+    }
+
+    /*
+     * PRIVATE METHODS
+     */
+
+    private function not_found_message()
+    {
+        if ( ! isset ( $_REQUEST['form_id'] ) || empty( $_REQUEST['form_id'] ) ) {
+            return __( 'Please select a form to view submissions', 'ninja-forms' );
+        } else {
+            return __( 'No Submissions Found', 'ninja-forms' );
+        }
     }
 
 }
