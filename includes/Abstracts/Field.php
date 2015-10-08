@@ -72,4 +72,9 @@ abstract class NF_Abstracts_Field
         return $errors;
     }
 
+    public function admin_form_element( $id, $value )
+    {
+        return "<input class='widefat' name='fields[$id]' value='$value' />";
+    }
+
 }

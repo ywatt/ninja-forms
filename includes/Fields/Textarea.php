@@ -24,4 +24,9 @@ class NF_Fields_Textarea extends NF_Abstracts_Field
 
         $this->_settings = array_merge( $this->_settings, $settings );
     }
+
+    public function admin_form_element( $id, $value )
+    {
+        return "<textarea class='widefat' name='fields[$id]'>$value</textarea>";
+    }
 }
