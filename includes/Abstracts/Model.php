@@ -247,10 +247,11 @@ class NF_Abstracts_Model
     /**
      * Find
      *
-     * @param string $where
-     * @return array|bool
+     * @param string $parent_id
+     * @param array $where
+     * @return array
      */
-    public function find( $parent_id, $where = '' )
+    public function find( $parent_id = '', array $where = array() )
     {
         $query = $this->build_meta_query( $parent_id, $where );
 
@@ -422,7 +423,7 @@ class NF_Abstracts_Model
         return $this;
     }
 
-    protected function build_meta_query( $parent_id, $where )
+    protected function build_meta_query( $parent_id = '', array $where = array() )
     {
         $join_statement = array();
         $where_statement = array();
@@ -451,7 +452,15 @@ class NF_Abstracts_Model
         $where_statement = implode( ' AND ', $where_statement );
         if( $where_statement ) $where_statement = "AND " . $where_statement;
 
-        return "SELECT DISTINCT $this->_table_name.id FROM $this->_table_name $join_statement WHERE $this->_table_name.parent_id = $parent_id $where_statement";
+        if( $parent_id ){
+            $where_statement = "$this->_table_name.parent_id = $parent_id $where_statement";
+        }
+
+        if( ! empty( $where_statement ) ) {
+            $where_statement = "WHERE $where_statement";
+        }
+
+        return "SELECT DISTINCT $this->_table_name.id FROM $this->_table_name $join_statement $where_statement";
 
     }
 
