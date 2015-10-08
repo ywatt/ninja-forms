@@ -23,7 +23,7 @@ jQuery(document).ready(function($){
 });
 </script>
 <div id="nf-builder">
-    <?php Ninja_Forms::template( 'ui-nf-header' ); ?>
+    <?php Ninja_Forms::template( 'ui-nf-header.html.php' ); ?>
     <div id="nf-main">
         <!-- main content area. Where fields and actions are rendered. -->
         <div id="nf-main-header">
@@ -45,7 +45,7 @@ for ($i=0; $i < 5; $i++) {
         $field = 'Submit';
     }
     echo '<div id="field-' . $i . '" class="nf-field-wrap">' . $field;
-    Ninja_Forms::template( 'ui-item-controls' );
+    Ninja_Forms::template( 'ui-item-controls.html.php' );
     echo '</div>';
 }
 
@@ -54,7 +54,7 @@ for ($i=0; $i < 5; $i++) {
 
         </div>
     </div>
-    <?php Ninja_Forms::template( 'ui-nf-menu-drawer' ); ?>
+    <?php Ninja_Forms::template( 'ui-nf-menu-drawer.html.php' ); ?>
     <div id="nf-drawer">
         <!-- drawer area. This is where settings and add fields are rendered. -->
         <!-- THIS IS THE CONTENT FOR EDITING FIELDS -->
@@ -128,8 +128,8 @@ for ($i=0; $i < 5; $i++) {
             <h3><span class="dashicons dashicons-arrow-right"></span>Conditional Settings</h3>
         </section>
 
-        <?php Ninja_Forms::template( 'ui-nf-toggle-drawer' ); ?>
-        <?php Ninja_Forms::template( 'ui-nf-drawer-buttons' ); ?>
+        <?php Ninja_Forms::template( 'ui-nf-toggle-drawer.html.php' ); ?>
+        <?php Ninja_Forms::template( 'ui-nf-drawer-buttons.html.php' ); ?>
     </div>
 
 </div>

@@ -17,7 +17,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
     public function display()
     {
-        Ninja_Forms::template( 'admin-menu-forms' );
+        Ninja_Forms::template( 'admin-menu-forms.html.php' );
         wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
     }
 

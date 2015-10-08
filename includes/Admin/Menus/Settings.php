@@ -13,7 +13,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
     public function display()
     {
-        Ninja_Forms::template( 'admin-menu-settings' );
+        Ninja_Forms::template( 'admin-menu-settings.html.php' );
     }
 
 } // End Class NF_Admin_Settings

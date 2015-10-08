@@ -15,7 +15,7 @@ final class NF_Admin_Menus_Addons extends NF_Abstracts_Submenu
 
     public function display()
     {
-        Ninja_Forms::template( 'admin-menu-addons' );
+        Ninja_Forms::template( 'admin-menu-addons.html.php' );
     }
 
 } // End Class NF_Admin_Addons

@@ -23,7 +23,7 @@ jQuery(document).ready(function($){
 });
 </script>
 <div id="nf-builder">
-    <?php Ninja_Forms::template( 'ui-nf-header' ); ?>
+    <?php Ninja_Forms::template( 'ui-nf-header.html.php' ); ?>
     <div id="nf-main">
         <!-- main content area. Where fields and actions are rendered. -->
         <div id="nf-main-header">
@@ -45,26 +45,26 @@ jQuery(document).ready(function($){
                         <td><input type="checkbox" class="nf-toggle" checked /></td>
                         <td>Save to Database</td>
                         <td>Save Submissions</td>
-                        <td><?php Ninja_Forms::template( 'ui-item-controls' ); ?></td>
+                        <td><?php Ninja_Forms::template( 'ui-item-controls.html.php' ); ?></td>
                     </tr>
                     <tr>
                         <td><input type="checkbox" class="nf-toggle" checked /></td>
                         <td>Email to Admin</td>
                         <td>Email</td>
-                        <td><?php Ninja_Forms::template( 'ui-item-controls' ); ?></td>
+                        <td><?php Ninja_Forms::template( 'ui-item-controls.html.php' ); ?></td>
                     </tr>
                     <tr class="nf-deactivated">
                         <td><input type="checkbox" class="nf-toggle" /></td>
                         <td>Thank You Message</td>
                         <td>Sucess Message</td>
-                        <td><?php Ninja_Forms::template( 'ui-item-controls' ); ?></td>
+                        <td><?php Ninja_Forms::template( 'ui-item-controls.html.php' ); ?></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
     </div>
-    <?php Ninja_Forms::template( 'ui-nf-menu-drawer' ); ?>
+    <?php Ninja_Forms::template( 'ui-nf-menu-drawer.html.php' ); ?>
     <div id="nf-drawer">
         <!-- drawer area. This is where settings and add fields are rendered. -->
         <!-- THIS IS THE CONTENT FOR EDITING FIELDS -->
@@ -104,8 +104,8 @@ jQuery(document).ready(function($){
             </fieldset>
         </section>
 
-        <?php Ninja_Forms::template( 'ui-nf-toggle-drawer' ); ?>
-        <?php Ninja_Forms::template( 'ui-nf-drawer-buttons' ); ?>
+        <?php Ninja_Forms::template( 'ui-nf-toggle-drawer.html.php' ); ?>
+        <?php Ninja_Forms::template( 'ui-nf-drawer-buttons.html.php' ); ?>
 
     </div>
 

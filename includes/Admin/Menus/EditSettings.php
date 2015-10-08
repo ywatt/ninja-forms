@@ -15,7 +15,7 @@ final class NF_Admin_Menus_EditSettings extends NF_Abstracts_Submenu
 
     public function display()
     {
-        Ninja_Forms::template( 'admin-menu-edit-settings' );
+        Ninja_Forms::template( 'admin-menu-edit-settings.html.php' );
         wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
     }
 
