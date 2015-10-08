@@ -49,6 +49,13 @@ class NF_Abstracts_ModelFactory
         return $this->_object;
     }
 
+    public function get_forms( array $where = array() )
+    {
+        if( 'form' != $this->_object->get_type() ) return FALSE;
+
+        return $this->_object->find( NULL, $where );
+    }
+
     /*
      * FIELDS
      */
