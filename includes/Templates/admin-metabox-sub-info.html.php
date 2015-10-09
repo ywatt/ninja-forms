@@ -28,6 +28,7 @@
     <span class="spinner"></span>
 </div>
 
+<!-- TODO: Move to Stylesheet. -->
 <style>
     .nf-sub-stats li {
         padding: 5px 10px 5px;
