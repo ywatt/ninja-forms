@@ -1,3 +1,5 @@
+<input type="hidden" name="nf_edit_sub" value="1">
+
 <div id="minor-publishing">
 
     <ul class="nf-sub-stats">
