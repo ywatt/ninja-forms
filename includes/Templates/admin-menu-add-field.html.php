@@ -1,4 +1,4 @@
-<div id="nf-builder" class="grey"></div>
+<div id="nf-builder" class="grey nf-drawer-opened"></div>
 
 <script id="nf-tmpl-builder" type="text/template">
     <div id="nf-header"></div>
@@ -60,69 +60,39 @@
 <script id="nf-tmpl-drawer" type="text/template">
     <!-- drawer area. This is where settings and add fields are rendered. -->
     <!-- THIS IS THE CONTENT FOR EDITING FIELDS -->
-    <header class="nf-drawer-header">
-        <div class="nf-search">
-            <input type="search" class="" value="" placeholder="Search" />
-        </div>
-        <a href="#" class="nf-button primary nf-close-drawer">Done</a>
-    </header>
-    <section class="nf-settings">
-        <div class="nf-reservoir">
-            <span class="nf-item-dock first-name">First Name<span class="dashicons dashicons-dismiss"></span></span>
-            <span class="nf-item-dock last-name">Last Name<span class="dashicons dashicons-dismiss"></span></span>
-            <span class="nf-item-dock email">Email<span class="dashicons dashicons-dismiss"></span></span>
-            <span class="nf-item-dock textarea">Textarea<span class="dashicons dashicons-dismiss"></span></span>
-            <span class="nf-item-dock submit">Submit<span class="dashicons dashicons-dismiss"></span></span>
-        </div>
+    <div id="nf-drawer-header"></div>
+    <section id="nf-drawer-staging" class="nf-settings nf-stage">
+        <div class="nf-reservoir"></div>
     </section>
-    <section class="nf-settings nf-favorites">
-        <h3>Saved Fields</h3>
-        <div class="nf-one-third">
-            <div class="nf-item first-name-tr">First Name</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item last-name-tr">Last Name</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item email-tr">Email</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item submit-tr">Submit</div>
-        </div>
-    </section>
-    <section class="nf-settings">
-        <h3>Common Fields</h3>
-        <div class="nf-one-third">
-            <div class="nf-item">Textbox</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item textarea-tr">Textarea</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Checkbox</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Dropdown</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Checkbox List</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Radio List</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">File Upload</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Multi-Select</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Hidden Field</div>
-        </div>
-    </section>
-
+    <span id="nf-drawer-primary"></span>
+    <span id="nf-drawer-secondary"></span>
     <a class="nf-toggle-drawer">
         <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
     </a>
 </script>
 
+<script id="nf-tmpl-drawer-staged-field" type="text/template">
+     <span class="nf-item-dock" id="nf-staged-field-<%= slug %>"><%= nicename %><span class="dashicons dashicons-dismiss"></span>
+</script>
+
+<script id="nf-tmpl-drawer-field-type-section" type="text/template">
+    <section class="nf-settings <%= classes %>">
+        <h3><%= nicename %></h3>
+        <%= renderFieldTypes() %>
+    </section>    
+</script>
+
+<script id="nf-tmpl-drawer-field-type-button" type="text/template">
+    <div class="nf-one-third">
+        <div class="nf-item" data-id="<%= id %>"><%= nicename %></div>
+    </div>
+</script>
+
+<script id="nf-tmpl-drawer-header" type="text/template">
+    <header class="nf-drawer-header">
+        <div class="nf-search">
+            <input type="search" class="nf-type-filter" value="" placeholder="Filter" />
+        </div>
+        <a href="#" class="nf-button primary nf-close-drawer">Done</a>
+    </header>
+</script>
