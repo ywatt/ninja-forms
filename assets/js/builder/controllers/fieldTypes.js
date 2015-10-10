@@ -15,7 +15,9 @@ define( ['builder/models/fieldTypeCollection'], function( fieldTypeCollection ) 
 				{ id: 'zip', nicename: 'Zip Code' },
 				{ id: 'phone', nicename: 'Phone', alias: ['telephone'] },
 				{ id: 'calc', nicename: 'Display Calculation' },
-				{ id: 'test', nicename: 'Something Crazy' }
+				{ id: 'test', nicename: 'Something Crazy' },
+				{ id: 'patient-id', nicename: 'Patient ID', savedField: true },
+				{ id: 'doctors-name', nicename: 'Doctor\'s Name', savedField: true },
 			] );
 
 			nfRadio.channel( 'data' ).reply( 'get:fieldType', this.getFieldType, this );

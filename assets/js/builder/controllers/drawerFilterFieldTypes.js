@@ -5,7 +5,7 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 			this.listenTo( nfRadio.channel( 'drawer' ), 'change:fieldTypeFilter', this.filterFieldTypes );
 		},
 
-		filterFieldTypes: function( search ) {
+		filterFieldTypes: function( search, e ) {
 			if ( '' != jQuery.trim( search ) ) {
         		var filtered = [];
         		_.each( this.filterCollection( search ), function( model ) {
@@ -21,6 +21,13 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 				] );
 
         		nfRadio.channel( 'drawer' ).trigger( 'filter:fieldTypes', filteredSectionCollection );
+        		if ( e.addField ) {
+        			if ( 0 < filtered.length ) {
+        				nfRadio.channel( 'drawer' ).request( 'add:stagedField', filtered[0] );
+        				nfRadio.channel( 'drawer' ).request( 'filter:clear' );
+        			}
+        		}
+        		
         	} else {
         		nfRadio.channel( 'drawer' ).trigger( 'remove:fieldTypeFilter' );
         	}

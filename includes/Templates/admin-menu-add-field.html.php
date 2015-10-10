@@ -50,10 +50,10 @@
         <li class="nf-publish">Publish</li>
     </ul>
     <ul>
-        <li><a href="#"><span class="dashicons dashicons-menu"></span>Form Fields</a></li>
-        <li><a href="http://three.ninjaforms.com/wp-admin/admin.php?page=edit-action"><span class="dashicons dashicons-external"></span>Emails & Actions</a></li>
-        <li><a href="#"><span class="dashicons dashicons-admin-generic"></span>Settings</a></li>
-        <li><a href="#"><span class="dashicons dashicons-visibility"></span>Preview</a></li>
+        <li><a href="#" tabindex="-1"><span class="dashicons dashicons-menu"></span>Form Fields</a></li>
+        <li><a href="http://three.ninjaforms.com/wp-admin/admin.php?page=edit-action" tabindex="-1"><span class="dashicons dashicons-external"></span>Emails & Actions</a></li>
+        <li><a href="#" tabindex="-1"><span class="dashicons dashicons-admin-generic"></span>Settings</a></li>
+        <li><a href="#" tabindex="-1"><span class="dashicons dashicons-visibility"></span>Preview</a></li>
     </ul>
 </script>
 
@@ -83,8 +83,8 @@
 </script>
 
 <script id="nf-tmpl-drawer-field-type-button" type="text/template">
-    <div class="nf-one-third">
-        <div class="nf-item" data-id="<%= id %>"><%= nicename %></div>
+    <div class="nf-one-third <%= savedField() %>">
+        <div class="nf-item" data-id="<%= id %>" tabindex="0"><%= nicename %></div>
     </div>
 </script>
 
@@ -93,6 +93,6 @@
         <div class="nf-search">
             <input type="search" class="nf-type-filter" value="" placeholder="Filter" />
         </div>
-        <a href="#" class="nf-button primary nf-close-drawer">Done</a>
+        <a href="#" class="nf-button primary nf-close-drawer" tabindex="99">Done</a>
     </header>
 </script>

@@ -27,15 +27,28 @@ define( [], function() {
 				}
 
 			} ).disableSelection();
+			
+			jQuery( this.el ).find( '.nf-item' ).focus( function() {
+		    	jQuery( this ).addClass( 'active' );
+		    } ).blur( function() {
+		    	jQuery( this ).removeClass( 'active' );
+		    } );
 		},
 
 		events: {
 			'click .nf-item': 'clickFieldType',
+			'keydown .nf-item': 'maybeClickFieldType'
 		},
 
-		clickFieldType: function( el ) {
+		clickFieldType: function( e ) {
 			if ( ! this.dragging ) {
-				nfRadio.channel( 'drawer' ).trigger( 'click:fieldType', el );
+				nfRadio.channel( 'drawer' ).trigger( 'click:fieldType', e );
+			}
+		},
+
+		maybeClickFieldType: function( e ) {
+			if ( 13 == e.keyCode ) {
+				this.clickFieldType( e );
 			}
 		}
 	});

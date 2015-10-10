@@ -5,33 +5,10 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 				{ 
 					id: 'saved',
 					nicename: 'Saved Fields',
-					classes: 'nf-favorites',
+					classes: 'nf-saved',
 					fieldTypes: [
-						'firstname',
-						'lastname',
-						'email',
-						'address',
-						'submit',
-						'firstname',
-						'lastname',
-						'email',
-						'address',
-						'submit',
-						'firstname',
-						'lastname',
-						'email',
-						'address',
-						'submit',
-						'firstname',
-						'lastname',
-						'email',
-						'address',
-						'submit',
-						'firstname',
-						'lastname',
-						'email',
-						'address',
-						'submit'	
+						'patient-id',
+						'doctors-name'
 					]
 				}
 			] );
