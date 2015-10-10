@@ -1,4 +1,4 @@
-
+/*
 Normalize WordPress admin for Ninja Forms App
 ---------------------------------------------*/
 .ninja-forms-app #wpfooter { display: none; }
@@ -39,6 +39,8 @@ Header and Nav for Ninja Forms App
 #nf-app-sub-header { height: 50px; padding: 0; }
 #nf-app-sub-header h2 { display: inline-block; margin: 0; padding: 10px 0; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; }
 #nf-app-sub-header:after { clear: both; content: ""; display: block; }
+
+#nf-main { background: #fff; border: 10px solid #fff; width: 100%; position: absolute; top: 120px; bottom: 0; left: 0; overflow: scroll; -webkit-overflow-scrolling: touch; -webkit-transition: left 0.5s ease; transition: left 0.5s ease; }
 
 #nf-main-content, #nf-main-header { margin: 0 auto; max-width: 700px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 
@@ -101,7 +103,7 @@ Form field placeholders for the fields a user has added to their form
 /*
 All styles used within the drawer
 --------------------------------- */
-#nf-drawer { background: #EBEDEE; padding: 40px; width: 50%; position: absolute; top: 0; bottom: 0; right: -1400px; overflow-y: scroll; overflow-x: hidden; z-index: 99; -webkit-transition: width 1.0s ease; transition: width 1.0s ease; -webkit-overflow-scrolling: touch; }
+#nf-drawer { background: #EBEDEE; padding: 40px; width: 50%; position: absolute; top: 0; bottom: 0; right: -1400px; overflow: auto; z-index: 99; -webkit-transition: width 1.0s ease; transition: width 1.0s ease; -webkit-overflow-scrolling: touch; }
 #nf-drawer.nf-drawer-expand { width: 100%; }
 
 .nf-drawer-opened #nf-main { width: 50%; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
@@ -141,7 +143,7 @@ All styles used within the drawer
 
 .nf-one-half { width: 50%; }
 
-.nf-one-third { width: 33.33%; z-index: 99999 }
+.nf-one-third { width: 33.33%; }
 
 .nf-first { clear: both; margin-left: 0; }
 
@@ -188,15 +190,19 @@ All styles used within the drawer
 .nf-drawer-buttons::after { clear: both; content: ""; display: block; }
 
 .nf-search { display: inline; position: relative; }
-.nf-search input[type=search] { background: transparent; box-shadow: 0 0 0; border: 0; padding: 12px 15px 12px 50px; width: 60%; }
+.nf-search input[type=search] { background: transparent; box-shadow: 0 0 0; border: 0; padding: 12px 0 12px 50px; width: 60%; }
 .nf-search::before { content: "\f179"; color: #aaa; font-family: "Dashicons"; font-size: 30px; width: 30px; height: 30px; position: absolute; top: 4px; left: 10px; }
 
+.nf-stage { position: relative; }
+.nf-stage .nf-stage-controls { background: #F8F8F9; padding: 5px; position: absolute; top: -20px; right: 10px; }
+
+.nf-reservoir { background: #F8F8F9; border: 10px solid #F8F8F9; border-radius: 4px; margin: 30px 2% 20px; min-height: 60px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-reservoir::after { clear: both; content: ""; display: block; }
-.nf-reservoir div > span { background: #fff; border-radius: 4px; color: #999; display: inline-block; float: left; margin: 0 3px 3px 3px; padding: 5px 10px; position: relative; }
-.nf-reservoir div > span .dashicons { font-size: 14px; margin: 2px 0 -4px 5px; }
-/*.nf-reservoir .nf-item-dock { display: none; }*/
+.nf-reservoir .ui-sortable > span { background: #fff; border-radius: 4px; color: #999; display: inline-block; float: left; margin: 0 3px 3px 3px; padding: 5px 10px; position: relative; }
+.nf-reservoir .ui-sortable > span .dashicons { font-size: 14px; margin: 2px 0 -4px 5px; }
 
 .nf-item { background: #3B454D; border-radius: 4px; color: #A2A5A8; font-size: 14px; padding: 10px; text-align: center; }
+.nf-item.active { background: #1EA9EA; color: #fff; }
 
 .nf-saved .nf-item { position: relative; }
 .nf-saved .nf-item::after { background: #30373E; border-top-left-radius: 4px; border-bottom-left-radius: 4px; content: "\f155"; font-family: "Dashicons"; padding: 9px; position: absolute; top: 0; left: 0; bottom: 0; width: 16px; height: 20px; }
@@ -236,6 +242,56 @@ All styles used for displaying table content
 .ninja-forms-app table .nf-toggle::after { border-radius: 20px; top: 2px; left: -4px; width: 30px; height: 14px; }
 .ninja-forms-app table .nf-toggle::before { border-radius: 20px; top: 4px; left: -1px; width: 14px; height: 14px; }
 .ninja-forms-app table .nf-toggle:checked::before { top: 7px; left: 17px; }
+
+/* perfect-scrollbar v0.6.7 */
+.ps-container { -ms-touch-action: none; overflow: hidden !important; }
+
+.ps-container.ps-active-x > .ps-scrollbar-x-rail, .ps-container.ps-active-y > .ps-scrollbar-y-rail { display: block; }
+
+.ps-container.ps-in-scrolling { pointer-events: none; }
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail { background-color: #eee; opacity: 0.9; }
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x { background-color: #999; }
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail { background-color: #eee; opacity: 0.9; }
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y { background-color: #999; }
+
+.ps-container > .ps-scrollbar-x-rail { display: none; position: absolute; /* please don't change 'position' */ border-radius: 4px; opacity: 0; -webkit-transition: background-color 0.2s linear, opacity 0.2s linear; transition: background-color 0.2s linear, opacity 0.2s linear; bottom: 3px; /* there must be 'bottom' for ps-scrollbar-x-rail */ height: 8px; }
+
+.ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x { position: absolute; /* please don't change 'position' */ background-color: #aaa; border-radius: 4px; -webkit-transition: background-color 0.2s linear; transition: background-color 0.2s linear; bottom: 0; /* there must be 'bottom' for ps-scrollbar-x */ height: 8px; }
+
+.ps-container > .ps-scrollbar-y-rail { display: none; position: absolute; /* please don't change 'position' */ border-radius: 4px; opacity: 0; -webkit-transition: background-color 0.2s linear, opacity 0.2s linear; transition: background-color 0.2s linear, opacity 0.2s linear; right: 3px; /* there must be 'right' for ps-scrollbar-y-rail */ width: 8px; }
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y { position: absolute; /* please don't change 'position' */ background-color: #aaa; border-radius: 4px; -webkit-transition: background-color 0.2s linear; transition: background-color 0.2s linear; right: 0; /* there must be 'right' for ps-scrollbar-y */ width: 8px; }
+
+.ps-container:hover.ps-in-scrolling { pointer-events: none; }
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail { background-color: #eee; opacity: 0.9; }
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x { background-color: #999; }
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail { background-color: #eee; opacity: 0.9; }
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y { background-color: #999; }
+
+.ps-container:hover > .ps-scrollbar-x-rail, .ps-container:hover > .ps-scrollbar-y-rail { opacity: 0.6; }
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover { background-color: #eee; opacity: 0.9; }
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x { background-color: #999; }
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover { background-color: #eee; opacity: 0.9; }
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y { background-color: #999; }
+
+.ui-draggable-handle { cursor: pointer; }
+
+.ui-draggable-dragging { z-index: 99; }
+
+#nf-builder .nf-droppable-active { border: 4px solid #1EA9EA; padding: 6px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
+#nf-builder .nf-droppable-hover { border: 4px solid #84CC1E; padding: 6px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 
 @media only screen and (max-width: 1255px) { .nf-cancel { display: none; }
   #nf-app-sub-header h2 { padding-left: 80px; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; }
@@ -296,130 +352,4 @@ All styles used for displaying table content
   .nf-saved .nf-item::after { padding: 14px; } }
 @media only screen and (max-width: 600px) { #nf-builder { margin-top: 46px; } }
 
-
-/**
- * ADDED OR CHANGED BY KEVIN. NEEDS TO BE MOVED INTO MAIN CSS FILES
- * @type {[type]}
- */
-
-.ui-draggable-handle { cursor: pointer; }
-.ui-draggable-dragging { z-index: 99 }
-#nf-drawer { background: #EBEDEE; padding: 40px; width: 50%; position: absolute; top: 0; bottom: 0; right: -1400px; overflow:auto; z-index: 99; -webkit-transition: width 1.0s ease; transition: width 1.0s ease; -webkit-overflow-scrolling: touch; }
-#nf-main { background: #fff; border: 4px solid white; padding: 20px 40px 40px; width: 100%; position: absolute; top: 120px; bottom: 0; left: 0; overflow: scroll; -webkit-overflow-scrolling: touch; -webkit-transition: left 0.5s ease; transition: left 0.5s ease; }
-.nf-reservoir { background: #F8F8F9; border-radius: 4px; margin: 30px 2% 20px; padding: 20px; border: 4px solid white; }
-#nf-main.nf-droppable-active { border: 4px solid #1EA9EA; }
-.nf-droppable-active { border: 4px solid #1EA9EA; }
-#nf-main.nf-droppable-hover { border: 4px solid #84CC1E; }
-.nf-droppable-hover { border: 4px solid #84CC1E; }
-.nf-item.active { background: #1EA9EA; color: #fff; }
-
-/* perfect-scrollbar v0.6.7 */
-.ps-container {
-  -ms-touch-action: none;
-  overflow: hidden !important; }
-  .ps-container.ps-active-x > .ps-scrollbar-x-rail,
-  .ps-container.ps-active-y > .ps-scrollbar-y-rail {
-    display: block; }
-  .ps-container.ps-in-scrolling {
-    pointer-events: none; }
-    .ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
-      background-color: #eee;
-      opacity: 0.9; }
-      .ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
-        background-color: #999; }
-    .ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
-      background-color: #eee;
-      opacity: 0.9; }
-      .ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
-        background-color: #999; }
-  .ps-container > .ps-scrollbar-x-rail {
-    display: none;
-    position: absolute;
-    /* please don't change 'position' */
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    border-radius: 4px;
-    opacity: 0;
-    -webkit-transition: background-color 0.2s linear, opacity 0.2s linear;
-    -moz-transition: background-color 0.2s linear, opacity 0.2s linear;
-    -o-transition: background-color 0.2s linear, opacity 0.2s linear;
-    transition: background-color 0.2s linear, opacity 0.2s linear;
-    bottom: 3px;
-    /* there must be 'bottom' for ps-scrollbar-x-rail */
-    height: 8px; }
-    .ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
-      position: absolute;
-      /* please don't change 'position' */
-      background-color: #aaa;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -ms-border-radius: 4px;
-      border-radius: 4px;
-      -webkit-transition: background-color 0.2s linear;
-      -moz-transition: background-color 0.2s linear;
-      -o-transition: background-color 0.2s linear;
-      transition: background-color 0.2s linear;
-      bottom: 0;
-      /* there must be 'bottom' for ps-scrollbar-x */
-      height: 8px; }
-  .ps-container > .ps-scrollbar-y-rail {
-    display: none;
-    position: absolute;
-    /* please don't change 'position' */
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    border-radius: 4px;
-    opacity: 0;
-    -webkit-transition: background-color 0.2s linear, opacity 0.2s linear;
-    -moz-transition: background-color 0.2s linear, opacity 0.2s linear;
-    -o-transition: background-color 0.2s linear, opacity 0.2s linear;
-    transition: background-color 0.2s linear, opacity 0.2s linear;
-    right: 3px;
-    /* there must be 'right' for ps-scrollbar-y-rail */
-    width: 8px; }
-    .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
-      position: absolute;
-      /* please don't change 'position' */
-      background-color: #aaa;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -ms-border-radius: 4px;
-      border-radius: 4px;
-      -webkit-transition: background-color 0.2s linear;
-      -moz-transition: background-color 0.2s linear;
-      -o-transition: background-color 0.2s linear;
-      transition: background-color 0.2s linear;
-      right: 0;
-      /* there must be 'right' for ps-scrollbar-y */
-      width: 8px; }
-  .ps-container:hover.ps-in-scrolling {
-    pointer-events: none; }
-    .ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
-      background-color: #eee;
-      opacity: 0.9; }
-      .ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
-        background-color: #999; }
-    .ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
-      background-color: #eee;
-      opacity: 0.9; }
-      .ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
-        background-color: #999; }
-  .ps-container:hover > .ps-scrollbar-x-rail,
-  .ps-container:hover > .ps-scrollbar-y-rail {
-    opacity: 0.6; }
-  .ps-container:hover > .ps-scrollbar-x-rail:hover {
-    background-color: #eee;
-    opacity: 0.9; }
-    .ps-container:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
-      background-color: #999; }
-  .ps-container:hover > .ps-scrollbar-y-rail:hover {
-    background-color: #eee;
-    opacity: 0.9; }
-    .ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
-      background-color: #999; }
-
-
-
-/*# sourceMappingURL=builder.css.map 
+/*# sourceMappingURL=builder.css.map */

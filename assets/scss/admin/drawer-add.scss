@@ -5,7 +5,7 @@
         background: transparent;
         box-shadow: 0 0 0;
         border: 0;
-        padding: 12px 15px 12px 50px;
+        padding: 12px 0 12px 50px;
         width: 60%;
     }
     &::before {
@@ -20,17 +20,30 @@
         left: 10px;
     }
 }
+.nf-stage {
+    position: relative;
+    .nf-stage-controls {
+        background: #F8F8F9;
+        padding: 5px;
+        position: absolute;
+        top: -20px;
+        right: 10px;
+    }
+}
 .nf-reservoir {
     background: #F8F8F9;
+    border: 10px solid #F8F8F9;
     border-radius: 4px;
     margin: 30px 2% 20px;
-    padding: 20px;
+    //padding: 10px;
+    min-height: 60px;
+    transition: all 1.0s ease;
     &::after {
         clear: both;
         content: "";
         display: block;
     }
-    > span {
+    .ui-sortable > span {
         background: #fff;
         border-radius: 4px;
         color: #999;
@@ -45,7 +58,7 @@
         }
     }
     .nf-item-dock {
-        display: none;
+        //display: none;
     }
 }
 .nf-item {
@@ -55,6 +68,10 @@
     font-size: 14px;
     padding: 10px;
     text-align: center;
+    &.active {
+        background: $cta_color;
+        color: #fff;
+    }
 }
 .nf-saved {
     .nf-item {

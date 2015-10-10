@@ -79,7 +79,7 @@
     <section class="nf-settings <%= classes %>">
         <h3><%= nicename %></h3>
         <%= renderFieldTypes() %>
-    </section>    
+    </section>
 </script>
 
 <script id="nf-tmpl-drawer-field-type-button" type="text/template">
