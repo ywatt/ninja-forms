@@ -327,6 +327,8 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 
     } // End Class Ninja_Forms
 
+
+
     /**
      * The main function responsible for returning The Highlander Ninja_Forms
      * Instance to functions everywhere.
@@ -346,3 +348,125 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 
     Ninja_Forms();
 }
+
+/**
+ * Class NF
+ *
+ * The Ninja Forms Static Helper Class
+ *
+ * TODO: Move this somewhere else.
+ */
+final class NF
+{
+    /**
+     * @param $value
+     * @return array|string
+     */
+    public static function addslashes_deep( $value )
+    {
+        $value = is_array($value) ?
+            array_map(array( 'self', 'addslashes_deep' ), $value) :
+            addslashes($value);
+        return $value;
+    }
+
+    /**
+     * @param $input
+     * @return array|string
+     */
+    public static function utf8_encode_recursive( $input ){
+        if ( is_array( $input ) )    {
+            return array_map( array( 'self', 'utf8_encode_recursive' ), $input );
+        }else{
+            return utf8_encode( $input );
+        }
+    }
+
+    /**
+     * @param $search
+     * @param $replace
+     * @param $subject
+     * @return mixed
+     */
+    public static function str_replace_deep( $search, $replace, $subject ){
+        if( is_array( $subject ) ){
+            foreach( $subject as &$oneSubject )
+                $oneSubject = NF::str_replace_deep($search, $replace, $oneSubject);
+            unset($oneSubject);
+            return $subject;
+        } else {
+            return str_replace($search, $replace, $subject);
+        }
+    }
+
+    /**
+     * @param $value
+     * @param int $flag
+     * @return array|string
+     */
+    public static function html_entity_decode_deep( $value, $flag = ENT_COMPAT ){
+        $value = is_array($value) ?
+            array_map( array( 'self', 'html_entity_decode_deep' ), $value) :
+            html_entity_decode( $value, $flag );
+        return $value;
+    }
+
+    /**
+     * @param $value
+     * @return array|string
+     */
+    public static function htmlspecialchars_deep( $value ){
+        $value = is_array($value) ?
+            array_map( array( 'self', 'htmlspecialchars_deep' ), $value) :
+            htmlspecialchars( $value );
+        return $value;
+    }
+
+    /**
+     * @param $value
+     * @return array|string
+     */
+    public static function stripslashes_deep( $value ){
+        $value = is_array($value) ?
+            array_map( array( 'self', 'stripslashes_deep' ), $value) :
+            stripslashes($value);
+        return $value;
+    }
+
+    /**
+     * @param $value
+     * @return array|string
+     */
+    public static function esc_html_deep( $value )
+    {
+        $value = is_array($value) ?
+            array_map( array( 'self', 'esc_html_deep' ), $value) :
+            esc_html($value);
+        return $value;
+    }
+
+    /**
+     * @param $value
+     * @return array|string
+     */
+    public static function kses_post_deep( $value )
+    {
+        $value = is_array( $value ) ?
+            array_map(  array( 'self', 'kses_post_deep' ), $value ) :
+            wp_kses_post($value);
+        return $value;
+    }
+
+    /**
+     * @param $value
+     * @return array|string
+     */
+    public static function strip_tags_deep( $value )
+    {
+        $value = is_array( $value ) ?
+            array_map( array( 'self', 'strip_tags_deep' ), $value ) :
+            strip_tags( $value );
+        return $value;
+    }
+
+} // END CLASS NF
