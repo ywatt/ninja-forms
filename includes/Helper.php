@@ -1,7 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-if( class_exists( 'WPN_Helper' ) ) exit;
-
 /**
  * Class WPN_Helper
  *

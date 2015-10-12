@@ -202,9 +202,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
          * Autoloader
          *
          * Autoload Ninja Forms classes
+         *
+         * @param $class_name
          */
         public function autoloader( $class_name )
         {
+            if( class_exists( $class_name ) ) return;
+
             /* Ninja Forms Prefix */
             if (false !== strpos($class_name, 'NF_')) {
                 $class_name = str_replace('NF_', '', $class_name);
