@@ -12,8 +12,11 @@ class NF_Admin_CPT_Submission
     {
         add_action( 'init', array( $this, 'custom_post_type' ), 0 );
 
+        add_action( 'save_post', array( $this, 'save_nf_sub' ), 10, 2 );
+
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 2 );
         add_action( 'add_meta_boxes', array( $this, 'remove_meta_boxes' ) );
+
     }
 
     /**
@@ -57,6 +60,41 @@ class NF_Admin_CPT_Submission
             'capability_type'     => 'page',
         );
         register_post_type( 'nf_subs', $args );
+    }
+
+    public function save_nf_sub( $nf_sub_id, $nf_sub )
+    {
+        global $pagenow;
+
+        if ( ! isset ( $_POST['nf_edit_sub'] ) || $_POST['nf_edit_sub'] != 1 )
+            return $nf_sub_id;
+
+        // verify if this is an auto save routine.
+        // If it is our form has not been submitted, so we dont want to do anything
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+            return $nf_sub_id;
+
+        if ( $pagenow != 'post.php' )
+            return $nf_sub_id;
+
+        if ( $nf_sub->post_type != 'nf_subs' )
+            return $nf_sub_id;
+
+        /* Get the post type object. */
+        $post_type = get_post_type_object( $nf_sub->post_type );
+
+        /* Check if the current user has permission to edit the post. */
+        if ( !current_user_can( $post_type->cap->edit_post, $nf_sub_id ) )
+            return $nf_sub_id;
+
+        $sub = Ninja_Forms()->form()->sub( $nf_sub_id )->get();
+
+        foreach ( $_POST['fields'] as $field_id => $user_value ) {
+            $user_value = apply_filters( 'nf_edit_sub_user_value', $user_value, $field_id, $nf_sub_id );
+            $sub->update_field_value( $field_id, $user_value )->save();
+        }
+
+        set_transient( 'nf_sub_edit_ref', esc_url_raw( $_REQUEST['ref'] ) );
     }
 
     /**
