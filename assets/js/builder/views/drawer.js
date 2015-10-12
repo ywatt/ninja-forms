@@ -14,7 +14,6 @@ define( ['builder/views/drawerStaging', 'builder/models/stagingCollection', 'bui
 			nfRadio.channel( 'drawer' ).reply( 'get:drawerEl', this.getEl, this );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'filter:fieldTypes', this.filterFieldTypes );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'remove:fieldTypeFilter', this.removeFieldTypeFilter );
-			this.listenTo( nfRadio.channel( 'drawer' ), 'focus:firstFieldType', this.focusFirstFieldType );
 		
 			this.savedCollection = nfRadio.channel( 'drawer' ).request( 'get:savedFields' );
 			this.primaryCollection = this.savedCollection;
