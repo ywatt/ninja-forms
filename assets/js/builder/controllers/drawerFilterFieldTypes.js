@@ -27,7 +27,6 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
         				nfRadio.channel( 'drawer' ).request( 'filter:clear' );
         			}
         		}
-        		
         	} else {
         		nfRadio.channel( 'drawer' ).trigger( 'remove:fieldTypeFilter' );
         	}

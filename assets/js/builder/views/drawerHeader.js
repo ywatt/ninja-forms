@@ -13,8 +13,7 @@ define( [], function() {
 
 		events: {
 			'keyup .nf-type-filter': 'maybeAddField',
-			'input .nf-type-filter': 'filterFields',
-			'keydown .nf-type-filter': 'maybeChangeFocus'
+			'input .nf-type-filter': 'filterFields'
 		},
 
 		filterFields: function( e ) {
@@ -29,16 +28,14 @@ define( [], function() {
 		},
 
 		clearFilter: function() {
-			jQuery( this.el ).find( '.nf-type-filter' ).val('');
-			jQuery( this.el ).find( '.nf-type-filter' ).trigger( 'input' );
-		},
-
-		maybeChangeFocus: function( e ) {
-			if ( 9 == e.keyCode ) {
-				nfRadio.channel( 'drawer' ).trigger( 'focus:firstFieldType' );
+			var filterEl =  jQuery( this.el ).find( '.nf-type-filter' );
+			if ( '' != jQuery.trim( filterEl.val() ) ) {
+				filterEl.val('');
+				filterEl.trigger( 'input' );
+				filterEl.focus();			
 			}
-		}
 
+		}
 	});
 
 	return view;
