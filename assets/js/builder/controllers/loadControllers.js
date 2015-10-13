@@ -2,10 +2,11 @@ define(
 	[
 		'builder/controllers/fieldTypes',
 		'builder/controllers/fieldTypeSections',
-		'builder/controllers/savedFields',
-		'builder/controllers/stagedFields',
+		'builder/controllers/drawerSavedFields',
+		'builder/controllers/drawerStagedFields',
 		'builder/controllers/drawer',
-		'builder/controllers/drawerFilterFieldTypes'
+		'builder/controllers/drawerFilterFieldTypes',
+		'builder/controllers/appMenu'
 	],
 	function(
 		FieldTypes,
@@ -13,7 +14,8 @@ define(
 		SavedFields,
 		StagedFields,
 		Drawer,
-		DrawerFilterFieldTypes
+		DrawerFilterFieldTypes,
+		AppMenu
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -23,6 +25,7 @@ define(
 				var stagedFields = new StagedFields();
 				var drawer = new Drawer();
 				var drawerFilterFieldTypes = new DrawerFilterFieldTypes();
+				var appMenu = new AppMenu();
 			}
 		});
 

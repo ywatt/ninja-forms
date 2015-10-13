@@ -11,6 +11,14 @@ define( ['builder/views/appHeader'], function( appHeaderView ) {
 
 		onShow: function() {
 			this.app.show( new appHeaderView() );
+		},
+
+		events: {
+			'click .nf-open-drawer': 'openDrawer'
+		},
+
+		openDrawer: function() {
+			nfRadio.channel( 'drawer' ).trigger( 'click:openDrawer' );
 		}
 
 	});

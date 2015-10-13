@@ -17,6 +17,12 @@ define( ['builder/views/header', 'builder/views/main', 'builder/views/menuDrawer
 			this.main.show( new mainView() );
 			this.menuDrawer.show( new menuDrawerView() );
 			this.drawer.show( new drawerView() );
+
+			nfRadio.channel( 'app' ).reply( 'get:builderEl', this.returnBuilderEl, this );
+		},
+
+		returnBuilderEl: function() {
+			return this.el;
 		}
 
 	} );

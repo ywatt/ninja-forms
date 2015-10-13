@@ -9,11 +9,13 @@ define( [], function() {
 			this.setElement( this.$el );
 
 			nfRadio.channel( 'drawer' ).reply( 'filter:clear', this.clearFilter, this );
+			nfRadio.channel( 'drawer' ).reply( 'get:filterEl', this.getEl, this );
 		},
 
 		events: {
 			'keyup .nf-type-filter': 'maybeAddField',
-			'input .nf-type-filter': 'filterFields'
+			'input .nf-type-filter': 'filterFields',
+			'click .nf-close-drawer': 'closeDrawer'
 		},
 
 		filterFields: function( e ) {
@@ -34,7 +36,14 @@ define( [], function() {
 				filterEl.trigger( 'input' );
 				filterEl.focus();			
 			}
+		},
 
+		closeDrawer: function() {
+			nfRadio.channel( 'drawer' ).trigger( 'click:closeDrawer' );
+		},
+
+		getEl: function() {
+			return jQuery( this.el ).find( '.nf-type-filter' );
 		}
 	});
 
