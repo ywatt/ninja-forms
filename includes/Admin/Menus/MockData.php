@@ -169,6 +169,9 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
             ->update_field_value( 5, 'Kyle Johnson' );
         $sub->save();
 
+        // Delay Execution for different submission dates
+        sleep(1);
+
         $sub = Ninja_Forms()->form( 1 )->sub()->get();
         $sub->update_field_value( 1, 'John Doe' )
             ->update_field_value( 2, 'user@gmail.com' )
@@ -217,6 +220,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $action->update_setting( 'title',  'Mock Redirect Action' )
             ->update_setting( 'type', 'redirect' )
             ->update_setting( 'url', 'http://kstover.codes' )
+            ->update_setting( 'active', 0 )
             ->save();
 
         $action = Ninja_Forms()->form( 1 )->action()->get();
