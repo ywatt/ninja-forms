@@ -91,8 +91,10 @@ class NF_Admin_CPT_Submission
 
         foreach ( $_POST['fields'] as $field_id => $user_value ) {
             $user_value = apply_filters( 'nf_edit_sub_user_value', $user_value, $field_id, $nf_sub_id );
-            $sub->update_field_value( $field_id, $user_value )->save();
+            $sub->update_field_value( $field_id, $user_value );
         }
+
+        $sub->save();
 
         set_transient( 'nf_sub_edit_ref', esc_url_raw( $_REQUEST['ref'] ) );
     }
