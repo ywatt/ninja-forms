@@ -22,6 +22,10 @@ final class NF_Database_Models_Submission
             $sub = get_post( $this->_id );
             $this->_sub_date = $sub->post_date;
         }
+
+        if( $this->_id && ! $this->_form_id ){
+            $this->_form_id = get_post_meta( $this->_id, '_form_id', TRUE );
+        }
     }
 
     /**
