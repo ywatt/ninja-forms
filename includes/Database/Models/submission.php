@@ -9,6 +9,8 @@ final class NF_Database_Models_Submission
 
     protected $_form_id = '';
 
+    protected $_seq_num = '';
+
     protected $_sub_date = '';
 
     protected $_field_values = array();
@@ -25,6 +27,10 @@ final class NF_Database_Models_Submission
 
         if( $this->_id && ! $this->_form_id ){
             $this->_form_id = get_post_meta( $this->_id, '_form_id', TRUE );
+        }
+
+        if( $this->_id && $this->_form_id ){
+            $this->_seq_num = get_post_meta( $this->_id, '_seq_num', TRUE );
         }
     }
 
@@ -150,6 +156,7 @@ final class NF_Database_Models_Submission
     public function save()
     {
         if( ! $this->_id ){
+
             $sub = array(
                 'post_type' => 'nf_sub',
                 'post_status' => 'publish'
@@ -159,6 +166,11 @@ final class NF_Database_Models_Submission
 
             // Log Error
             if( ! $this->_id ) return;
+        }
+
+        if( ! $this->_seq_num && $this->_form_id ){
+
+            $this->_seq_num = NF_Database_Models_Form::get_next_sub_seq( $this->_form_id );
         }
 
         return $this->_save_field_values();
@@ -197,6 +209,8 @@ final class NF_Database_Models_Submission
         }
 
         update_post_meta( $this->_id, '_form_id', $this->_form_id );
+
+        update_post_meta( $this->_id, '_seq_num', $this->_seq_num );
 
         return $this;
     }

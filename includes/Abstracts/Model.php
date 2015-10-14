@@ -97,9 +97,11 @@ class NF_Abstracts_Model
         return $this->_type;
     }
 
-    public function get_setting( $setting )
+    public function get_setting( $setting, $default = FALSE )
     {
-        return $this->get_settings( $setting );
+        $return = $this->get_settings( $setting );
+
+        return ( $return ) ? $return : $default;
     }
 
     /**
@@ -153,7 +155,14 @@ class NF_Abstracts_Model
             && (count($only) == count($only, COUNT_RECURSIVE))) {
 
             // If only one setting, return a single value
-            if( 1 == count( $only ) ){ return $this->_settings[ $only[0] ]; }
+            if( 1 == count( $only ) ){
+
+                if( isset( $this->_settings[ $only[0] ] ) ) {
+                    return $this->_settings[$only[0]];
+                } else {
+                    return NULL;
+                }
+            }
 
             // Flip the array to match the settings property
             $only_settings = array_flip( $only );

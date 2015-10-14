@@ -39,4 +39,15 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         }
     }
 
+    public static function get_next_sub_seq( $form_id )
+    {
+        $form = Ninja_Forms()->form( $form_id )->get();
+
+        $last_seq_num = $form->get_setting( '_seq_num', 1 );
+
+        $form->update_setting( '_seq_num', $last_seq_num + 1 )->save();
+
+        return $last_seq_num;
+    }
+
 } // End NF_Database_Models_Form
