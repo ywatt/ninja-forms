@@ -49,7 +49,6 @@ define( [], function() {
 		maybeClickFieldType: function( e ) {
 			if ( 13 == e.keyCode ) {
 				this.clickFieldType( e );
-				console.log( 'clear filter' );
 				nfRadio.channel( 'drawer' ).request( 'filter:clear' );
 			}
 		}

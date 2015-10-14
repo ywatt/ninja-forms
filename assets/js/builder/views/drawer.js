@@ -50,6 +50,14 @@ define( ['builder/views/drawerStaging', 'builder/models/stagingCollection', 'bui
 		removeFieldTypeFilter: function () {
 			this.primary.show( new fieldTypeSectionCollectionView( { collection: this.savedCollection } ) );
 			this.secondary.show( new fieldTypeSectionCollectionView( { collection: this.fieldTypeSectionCollection } ) );
+		},
+
+		events: {
+			'click .nf-toggle-drawer': 'clickToggleDrawer'
+		},
+
+		clickToggleDrawer: function() {
+			nfRadio.channel( 'drawer' ).trigger( 'click:toggleDrawerSize' );
 		}
 
 	} );

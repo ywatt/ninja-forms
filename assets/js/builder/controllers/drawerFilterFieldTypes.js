@@ -3,6 +3,7 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 		initialize: function() {
 			this.collection = nfRadio.channel( 'data' ).request( 'get:fieldTypes' );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'change:fieldTypeFilter', this.filterFieldTypes );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'open:drawer', this.focusFilter );
 		},
 
 		filterFieldTypes: function( search, e ) {
@@ -43,6 +44,17 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 					found = true;
 				}
 
+				// If our search begins with a hash, search tags.
+				if ( model.get( 'tags' ) && 0 == search.indexOf( '#' ) ) {
+					_.each( model.get( 'tags' ), function( tag ) {
+						if ( search.replace( '#', '' ).length > 1 ) {
+							if ( tag.toLowerCase().indexOf( search.replace( '#', '' ) ) != -1 ) {
+								found = true;
+							}							
+						}
+					} );
+				}
+
 				if ( model.get( 'alias' ) ) {
 					_.each( model.get( 'alias' ), function( alias ) {
 						if ( alias.toLowerCase().indexOf( search ) != -1 ) {
@@ -54,6 +66,11 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 				return found;
 			} );
 			return filtered;
+        },
+
+        focusFilter: function() {
+        	var filterEl = nfRadio.channel( 'drawer' ).request( 'get:filterEl' );
+        	jQuery( filterEl ).focus();
         }
 	});
 

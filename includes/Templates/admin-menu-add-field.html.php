@@ -1,4 +1,4 @@
-<div id="nf-builder" class="grey nf-drawer-opened"></div>
+<div id="nf-builder" class="grey nf-drawer-closed"></div>
 
 <script id="nf-tmpl-builder" type="text/template">
     <div id="nf-header"></div>
@@ -11,19 +11,14 @@
     <div id="nf-app-header"></div>
 
     <div id="nf-app-sub-header">
-        <a class="nf-add-new" href="#">Add new field</a>
+        <a class="nf-add-new nf-open-drawer" href="#">Add new field</a>
         <h2>Contact Form</h2>
     </div>
 </script>
 
 <script id="nf-tmpl-app-header" type="text/template">
     <div id="nf-logo"></div>
-    <ul>
-        <li><a href="#">Form Fields</a></li>
-        <li><a href="#">Emails & Actions</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a class="preview" href="#">Preview Changes<span class="dashicons dashicons-visibility"></span></a></li>
-    </ul>
+    <ul class="nf-app-menu"></ul>
     <input class="nf-button primary" type="submit" value="Save" />
     <a class="nf-mobile" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
     <a class="nf-cancel" href="#">Cancel</a>
@@ -95,4 +90,8 @@
         </div>
         <a href="#" class="nf-button primary nf-close-drawer" tabindex="99">Done</a>
     </header>
+</script>
+
+<script id="nf-tmpl-app-menu-item" type="text/template">
+    <li><a href="#" class="<%= classes %>"><%= nicename %><%= renderDashicons() %></a></li>
 </script>

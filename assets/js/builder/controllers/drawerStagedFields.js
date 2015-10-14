@@ -10,6 +10,7 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:removeStagedField', this.removeStagedField );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'dropped:fieldStaging', this.addStagedField );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'sorted:fieldStaging', this.updateStagedOrder );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'close:drawer', this.closeDrawer );
 		},
 
 		getStagingCollection: function() {
@@ -36,6 +37,10 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 				model[0].set( 'order', index );
 			} );
 			this.collection.sort();
+		},
+
+		closeDrawer: function() {
+			this.collection.reset();
 		}
 
 	});
