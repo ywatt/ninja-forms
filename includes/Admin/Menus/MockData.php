@@ -237,6 +237,11 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
             ->update_setting( 'type', 'save' )
             ->save();
 
+        $action = Ninja_Forms()->form( 2 )->action()->get();
+        $action->update_setting( 'title',  'Mock Save Action' )
+            ->update_setting( 'type', 'save' )
+            ->save();
+
         /*
          * Find Fields
          */
