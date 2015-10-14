@@ -130,9 +130,11 @@ class NF_Admin_CPT_Submission
      */
     public function fields_meta_box( $post )
     {
+        $form_id = get_post_meta( $post->ID, '_form_id', TRUE );
+
         $sub = Ninja_Forms()->form()->get_sub( $post->ID );
 
-        $fields = Ninja_Forms()->form( 1 )->get_fields();
+        $fields = Ninja_Forms()->form( $form_id )->get_fields();
 
         $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
 

@@ -62,12 +62,16 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
      */
     public function change_columns()
     {
+        $form_id = ( isset( $_GET['form_id'] ) ) ? $_GET['form_id'] : FALSE;
+
+        if( ! $form_id ) return array();
+
         $cols = array(
             'cb'    => '<input type="checkbox" />',
-            'id' => __( '#', 'ninja-forms' ),
+            'seq_num' => __( '#', 'ninja-forms' ),
         );
 
-        $fields = Ninja_Forms()->form( 1 )->get_fields();
+        $fields = Ninja_Forms()->form( $form_id )->get_fields();
 
         $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
 
@@ -95,8 +99,8 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         $sub = Ninja_Forms()->form()->get_sub( $sub_id );
 
         switch( $column ){
-            case 'id':
-                echo $this->custom_columns_id( $sub );
+            case 'seq_num':
+                echo $this->custom_columns_seq_num( $sub );
                 break;
             case 'sub_date':
                 echo $this->custom_columns_sub_date( $sub );
@@ -220,9 +224,9 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
      * @param $sub
      * @return mixed
      */
-    private function custom_columns_id( $sub )
+    private function custom_columns_seq_num( $sub )
     {
-        return $sub->get_id();
+        return $sub->get_seq_num();
     }
 
     /**
