@@ -23,6 +23,14 @@ define( ['builder/views/header', 'builder/views/main', 'builder/views/menuDrawer
 
 		returnBuilderEl: function() {
 			return this.el;
+		},
+
+		events: {
+			'click .nf-open-drawer': 'openDrawer'
+		},
+
+		openDrawer: function( e ) {
+			nfRadio.channel( 'app' ).trigger( 'click:openDrawer', e );
 		}
 
 	} );

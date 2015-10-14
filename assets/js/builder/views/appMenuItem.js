@@ -3,6 +3,10 @@ define( [], function() {
 		tagName: 'div',
 		template: '#nf-tmpl-app-menu-item',
 
+		initialize: function() {
+			this.listenTo( nfRadio.channel( 'app' ), 'change:domain', this.render );
+		},
+
 		onRender: function() {
 			this.$el = this.$el.children();
 			this.$el.unwrap();

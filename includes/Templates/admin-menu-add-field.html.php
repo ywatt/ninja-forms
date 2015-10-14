@@ -2,18 +2,20 @@
 
 <script id="nf-tmpl-builder" type="text/template">
     <div id="nf-header"></div>
-    <div id="nf-main"></div>
+    <div id="nf-main" class="nf-app-main"></div>
     <div id="nf-menu-drawer"></div>
     <div id="nf-drawer"></div>
 </script>
 
 <script id="nf-tmpl-header" type="text/template">
     <div id="nf-app-header"></div>
+    <h2>Contact Form</h2>
+    <div id="nf-app-sub-header"></div>
 
-    <div id="nf-app-sub-header">
-        <a class="nf-add-new nf-open-drawer" href="#">Add new field</a>
-        <h2>Contact Form</h2>
-    </div>
+</script>
+
+<script id="nf-tmpl-sub-header" type="text/template">
+    <a class="nf-add-new nf-open-drawer" href="#" data-drawerid="addField">Add new fields</a>
 </script>
 
 <script id="nf-tmpl-app-header" type="text/template">
@@ -25,19 +27,106 @@
 </script>
 
 <script id="nf-tmpl-main" type="text/template">
-    <div id="nf-main-header"></div>
-    <div id="nf-main-content"></div>
+    <div id="nf-main-header" class="nf-app-area"></div>
+    <div id="nf-main-content" class="nf-app-area"></div>
 </script>
 
 <script id="nf-tmpl-main-header" type="text/template">
-    <!-- <input class="nf-button secondary" type="submit" value="Edit Emails and Actions" /> -->
+    <!-- <input class="nf-button secondary" type="button" value="Edit Emails and Actions" /> -->
 </script>
 
-<script id="nf-tmpl-main-content" type="text/template">
+<script id="nf-tmpl-fields-empty" type="text/template">
     <div class="nf-fields-empty">
         <h3>Add form fields</h3>
         <p>Get started by adding your first form field. Just click the plus and select the fields you want. It’s that easy.</p>
     </div>
+</script>
+
+<script id="nf-tmpl-fields" type="text/template">
+    <?php
+    for ($i=0; $i < 5; $i++) {
+        if ( 0 == $i ) {
+            $field = 'First Name';
+        } elseif ( 1 == $i ) {
+            $field = 'Last Name';
+        } elseif ( 2 == $i ) {
+            $field = 'Email';
+        } elseif ( 3 == $i ) {
+            $field = '<span class="before">Textarea</span><span class="after">Message</span>';
+        } else {
+            $field = 'Submit';
+        }
+        ?>
+        <div id="field-<?php echo $i ?>" class="nf-field-wrap"> <?php echo $field ?>
+        <ul class="nf-item-controls">
+            <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+            <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+            <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editField"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+        </ul>
+
+        </div>
+        <?php
+    }
+    ?>
+</script>
+
+<script id="nf-tmpl-actions" type="text/template">
+    <table id="nf-table-display" class="nf-actions-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox" class="nf-toggle" checked /></td>
+                <td>Save to Database</td>
+                <td>Save Submissions</td>
+                <td>
+                    <ul class="nf-item-controls">
+                        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+                        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+                        <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="nf-toggle" checked /></td>
+                <td>Email to Admin</td>
+                <td>Email</td>
+                <td>
+                    <ul class="nf-item-controls">
+                        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+                        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+                        <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr class="nf-deactivated">
+                <td><input type="checkbox" class="nf-toggle" /></td>
+                <td>Thank You Message</td>
+                <td>Sucess Message</td>
+                <td>
+                    <ul class="nf-item-controls">
+                        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+                        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+                        <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</script>
+
+<script id="nf-tmpl-settings" type="text/template">
+    <div class="nf-setting-wrap"><span class="nf-open-drawer" data-drawerid="editFormSettings">Display Settings</span></div>
+    <div class="nf-setting-wrap"><span class="nf-open-drawer" data-drawerid="editFormSettings">Restrictions</span></div>
+    <div class="nf-setting-wrap"><span class="nf-open-drawer" data-drawerid="editFormSettings">Calculations</span></div>
+    <div class="nf-setting-wrap"><span class="nf-open-drawer" data-drawerid="editFormSettings">PayPal</span></div>
+    <div class="nf-setting-wrap"><span class="nf-open-drawer" data-drawerid="editFormSettings">Stripe</span></div>
 </script>
 
 <script id="nf-tmpl-menu-drawer" type="text/template">
@@ -53,17 +142,147 @@
 </script>
 
 <script id="nf-tmpl-drawer" type="text/template">
-    <!-- drawer area. This is where settings and add fields are rendered. -->
-    <!-- THIS IS THE CONTENT FOR EDITING FIELDS -->
     <div id="nf-drawer-header"></div>
+    <span id="nf-drawer-content"></span>
+    <a class="nf-toggle-drawer">
+        <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
+    </a>
+</script>
+
+<script id="nf-tmpl-drawer-content-add-field" type="text/template">
     <section id="nf-drawer-staging" class="nf-settings nf-stage">
         <div class="nf-reservoir"></div>
     </section>
     <span id="nf-drawer-primary"></span>
     <span id="nf-drawer-secondary"></span>
-    <a class="nf-toggle-drawer">
-        <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
-    </a>
+</script>
+
+<script id="nf-tmpl-drawer-content-edit-field" type="text/template">
+    <h2><span class="dashicons dashicons-star-empty"></span>Single Line Textbox</h2>
+    <section class="nf-settings">
+        <div class="nf-one-half">
+            <label>Label</label>
+            <input type="text" value="Textarea" />
+        </div>
+        <div class="nf-one-half">
+            <label>Placeholder Text</label>
+            <input type="text" value="" />
+        </div>
+        <div class="nf-one-half">
+            <label>Label Position</label>
+            <div class="nf-select">
+                <select>
+                    <option>Above Field</option>
+                    <option>Below Field</option>
+                    <option>Left of Field</option>
+                    <option>Right of Field</option>
+                    <option>Hide Label</option>
+                </select>
+            </div>
+        </div>
+        <div class="nf-one-half">
+            <label>Required Field</label>
+            <input type="checkbox" class="nf-toggle" />
+        </div>
+    </section>
+    <section class="nf-settings">
+        <h3><span class="dashicons dashicons-arrow-down"></span>Restriction Settings</h3>
+        <div class="nf-settings-sub">
+            <div class="nf-one-half">
+                <label>Input Mask</label>
+                <div class="nf-select">
+                    <select>
+                        <option>None</option>
+                        <option>US Phone Number</option>
+                        <option>Date</option>
+                    </select>
+                </div>
+            </div>
+            <fieldset>
+                <legend>Limit input to this number</legend>
+                <div class="nf-one-half">
+                    <input type="text" value="140" />
+                </div>
+                <div class="nf-one-half">
+                    <div class="nf-select">
+                        <select>
+                            <option>Character</option>
+                            <option>Words</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="nf-full">
+                    <label>Text to appear after counter</label>
+                    <input type="text" value="character(s) left" />
+                </div>
+            </fieldset>
+        </div>
+    </section>
+    <section class="nf-settings">
+        <h3><span class="dashicons dashicons-arrow-right"></span>Advanced Settings</h3>
+    </section>
+    <section class="nf-settings">
+        <h3><span class="dashicons dashicons-arrow-right"></span>Conditional Settings</h3>
+    </section>
+</script>
+
+<script id="nf-tmpl-drawer-content-edit-action" type="text/template">
+    <section class="nf-settings">
+        <div class="nf-full">
+            <label>Action Name</label>
+            <input type="text" value="Email to Use" />
+        </div>
+        <div class="nf-one-half">
+            <label>From Name</label>
+            <input type="text" value="James Laws" />
+        </div>
+        <div class="nf-one-half">
+            <label>From Email</label>
+            <input type="text" value="james@wpninjas.com" />
+        </div>
+        <div class="nf-full">
+            <label>To</label>
+            <input type="text" value="" />
+        </div>
+        <div class="nf-full">
+            <label>Subject</label>
+            <input type="text" value="Email to Use" />
+        </div>
+        <fieldset class="nf-wp-editor">
+            <legend>Email Message</legend>
+            <div class="nf-full">
+
+            </div>
+            <div class="nf-full">
+                <?php //wp_editor( 'Your Email Message', 2, $settings = array() ); ?>
+            </div>
+        </fieldset>
+    </section>
+</script>
+
+<script id="nf-tmpl-drawer-content-edit-form-settings" type="text/template">
+    <section class="nf-settings">
+        <div class="nf-full toggle-row">
+            <label>Display Form Title</label>
+            <input type="checkbox" class="nf-toggle" />
+        </div>
+        <div class="nf-full toggle-row">
+            <label>Clear form values after successful submission kjh hkja askh askjh jkasfhj kjhasf</label>
+            <input type="checkbox" class="nf-toggle" />
+        </div>
+        <div class="nf-full toggle-row">
+            <label>Hide form after successful submission</label>
+            <input type="checkbox" class="nf-toggle" />
+        </div>
+    </section>
+</script>
+
+<script id="nf-tmpl-drawer-content-add-field" type="text/template">
+    <section id="nf-drawer-staging" class="nf-settings nf-stage">
+        <div class="nf-reservoir"></div>
+    </section>
+    <span id="nf-drawer-primary"></span>
+    <span id="nf-drawer-secondary"></span>
 </script>
 
 <script id="nf-tmpl-drawer-staged-field" type="text/template">
@@ -86,12 +305,12 @@
 <script id="nf-tmpl-drawer-header" type="text/template">
     <header class="nf-drawer-header">
         <div class="nf-search">
-            <input type="search" class="nf-type-filter" value="" placeholder="Filter" />
+            <input type="search" class="nf-filter" value="" placeholder="Filter" />
         </div>
         <a href="#" class="nf-button primary nf-close-drawer" tabindex="99">Done</a>
     </header>
 </script>
 
 <script id="nf-tmpl-app-menu-item" type="text/template">
-    <li><a href="#" class="<%= classes %>"><%= nicename %><%= renderDashicons() %></a></li>
+    <li><a href="#" class="<%= renderClasses() %>"><%= nicename %><%= renderDashicons() %></a></li>
 </script>

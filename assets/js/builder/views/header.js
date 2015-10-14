@@ -1,4 +1,4 @@
-define( ['builder/views/appHeader'], function( appHeaderView ) {
+define( ['builder/views/appHeader', 'builder/views/appSubHeader'], function( appHeaderView, appSubHeaderView ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: "div",
@@ -11,16 +11,8 @@ define( ['builder/views/appHeader'], function( appHeaderView ) {
 
 		onShow: function() {
 			this.app.show( new appHeaderView() );
-		},
-
-		events: {
-			'click .nf-open-drawer': 'openDrawer'
-		},
-
-		openDrawer: function() {
-			nfRadio.channel( 'drawer' ).trigger( 'click:openDrawer' );
+			this.appSub.show( new appSubHeaderView() );
 		}
-
 	});
 
 	return view;

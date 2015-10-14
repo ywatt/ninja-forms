@@ -49,7 +49,7 @@ define( [], function() {
 		maybeClickFieldType: function( e ) {
 			if ( 13 == e.keyCode ) {
 				this.clickFieldType( e );
-				nfRadio.channel( 'drawer' ).request( 'filter:clear' );
+				nfRadio.channel( 'drawer' ).request( 'clear:filter' );
 			}
 		}
 	});

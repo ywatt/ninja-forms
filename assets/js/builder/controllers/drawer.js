@@ -1,20 +1,12 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'drawer' ), 'startDrag:fieldType', this.overflowVisible );
-			this.listenTo( nfRadio.channel( 'drawer' ), 'stopDrag:fieldType', this.resetOverflow );
+			this.listenTo( nfRadio.channel( 'app' ), 'click:openDrawer', this.openDrawer );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:closeDrawer', this.closeDrawer );
-			this.listenTo( nfRadio.channel( 'drawer' ), 'click:openDrawer', this.openDrawer );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:toggleDrawerSize', this.toggleDrawerSize );
-		},
 
-		overflowVisible: function() {
-			this.drawerEl = nfRadio.channel( 'drawer' ).request( 'get:drawerEl' );
-			jQuery( this.drawerEl )[0].style.setProperty( 'overflow', 'visible', 'important' );
-		},
-
-		resetOverflow: function() {
-			jQuery( this.drawerEl )[0].style.setProperty( 'overflow', 'hidden', 'important' );
+			nfRadio.channel( 'app' ).reply( 'open:drawer', this.openDrawer );
+			nfRadio.channel( 'app' ).reply( 'close:drawer', this.closeDrawer );
 		},
 
 		closeDrawer: function() {
@@ -31,7 +23,14 @@ define( [], function() {
 			);
 		},
 
-		openDrawer: function() {
+		openDrawer: function( e ) {
+			/*
+			 * 1) Before we open the drawer, we need to get the drawer ID.
+			 * 2) Send out a message requesting the drawer content be loaded.
+			 */
+			var drawerID = jQuery( e.target ).data( 'drawerid' );
+			nfRadio.channel( 'drawer' ).request( 'load:drawerContent', drawerID );
+
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
 			jQuery( builderEl ).removeClass( 'nf-drawer-closed' ).addClass( 'nf-drawer-opened' );
 			var triggered = false;
@@ -46,7 +45,7 @@ define( [], function() {
 		},
 
 		toggleDrawerSize: function() {
-			var drawerEl = nfRadio.channel( 'drawer' ).request( 'get:drawerEl' );
+			var drawerEl = nfRadio.channel( 'app' ).request( 'get:drawerEl' );
 			jQuery( drawerEl ).toggleClass( 'nf-drawer-expand' );
 		}
 	});

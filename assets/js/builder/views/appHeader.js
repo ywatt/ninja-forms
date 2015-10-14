@@ -8,8 +8,8 @@ define( ['builder/views/appMenu'], function( appMenuCollectionView ) {
 		},
 
 		onShow: function() {
-			var appMenuCollection = nfRadio.channel( 'app' ).request( 'get:appMenuCollection' );
-			this.menu.show( new appMenuCollectionView( { collection: appMenuCollection } ) );
+			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+			this.menu.show( new appMenuCollectionView( { collection: appDomainCollection } ) );
 		}
 	} );
 
