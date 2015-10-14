@@ -1,4 +1,18 @@
-define( ['builder/models/drawerCollection', 'builder/views/drawerAddField', 'builder/views/drawerEditField', 'builder/views/drawerEditAction', 'builder/views/drawerEditFormSettings'], function( drawerCollection, addFieldView, editFieldView, editActionView, editFormSettingsView ) {
+define( [
+	'builder/models/drawerCollection',
+	'builder/views/drawerAddField',
+	'builder/views/drawerEditField',
+	'builder/views/drawerAddAction',
+	'builder/views/drawerEditAction',
+	'builder/views/drawerEditFormSettings'
+	], function(
+		drawerCollection,
+		addFieldView,
+		editFieldView,
+		addActionView,
+		editActionView,
+		editFormSettingsView
+	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 
@@ -22,6 +36,13 @@ define( ['builder/models/drawerCollection', 'builder/views/drawerAddField', 'bui
 
 					getView: function() {
 						return new editActionView();
+					}
+				},
+				{
+					id: 'addAction',
+
+					getView: function() {
+						return new addActionView();
 					}
 				},
 				{

@@ -4,11 +4,14 @@ define( ['builder/models/appModel'], function( appModel ) {
 			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
 			appDomainCollection.get( 'fields' ).set( 'active', true );
 			this.model = new appModel( {
-				currentDomain: appDomainCollection.get( 'fields' )
+				currentDomain: appDomainCollection.get( 'fields' ),
+				currentDrawer: false
 			} );
 			nfRadio.channel( 'app' ).reply( 'update:appDomain', this.updateDomain, this );
+			nfRadio.channel( 'app' ).reply( 'update:currentDrawer', this.updateCurrentDrawer, this );
 			nfRadio.channel( 'app' ).reply( 'get:appData', this.getAppData, this );
 			nfRadio.channel( 'app' ).reply( 'get:currentDomain', this.getCurrentDomain, this );
+			nfRadio.channel( 'app' ).reply( 'get:currentDrawer', this.getCurrentDrawer, this );
 		},
 
 		updateDomain: function( model ) {
@@ -23,6 +26,15 @@ define( ['builder/models/appModel'], function( appModel ) {
 
 		getCurrentDomain: function() {
 			return this.model.get( 'currentDomain' );
+		},
+
+		updateCurrentDrawer: function( drawerID ) {
+			this.model.set( 'currentDrawer', drawerID );
+			return true;
+		},
+
+		getCurrentDrawer: function() {
+			return this.model.get( 'currentDrawer' );
 		}
 
 

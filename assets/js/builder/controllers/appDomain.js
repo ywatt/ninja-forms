@@ -1,4 +1,28 @@
-define( ['builder/models/appDomainCollection', 'builder/views/mainFields', 'builder/views/mainActions', 'builder/views/mainSettings'], function( appDomainCollection, mainFieldsView, mainActionsView, mainSettingsView ) {
+define( [
+	'builder/models/appDomainCollection',
+	'builder/views/mainContentFields',
+	'builder/views/mainContentActions',
+	'builder/views/mainContentSettings',
+	'builder/views/mainHeaderFields',
+	'builder/views/mainHeaderActions',
+	'builder/views/mainHeaderSettings',
+	'builder/views/subHeaderFields',
+	'builder/views/subHeaderActions',
+	'builder/views/subHeaderSettings',
+
+	], 
+	function( 
+		appDomainCollection,
+		mainContentFieldsView,
+		mainContentActionsView,
+		mainContentSettingsView,
+		mainHeaderFieldsView,
+		mainHeaderActionsView,
+		mainHeaderSettingsView,
+		subHeaderFieldsView,
+		subHeaderActionsView,
+		subHeaderSettingsView
+	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 
@@ -7,24 +31,48 @@ define( ['builder/models/appDomainCollection', 'builder/views/mainFields', 'buil
 					id: 'fields',
 					nicename: 'Form Fields',
 
-					getView: function() {
-						return new mainFieldsView();
+					getMainHeaderView: function() {
+						return new mainHeaderFieldsView();
+					},
+
+					getSubHeaderView: function() {
+						return new subHeaderFieldsView();
+					},
+
+					getMainContentView: function() {
+						return new mainContentFieldsView();
 					}
 				},
 				{
 					id: 'actions',
 					nicename: 'Emails & Actions',
 
-					getView: function() {
-						return new mainActionsView();
+					getMainHeaderView: function() {
+						return new mainHeaderActionsView();
+					},
+
+					getSubHeaderView: function() {
+						return new subHeaderActionsView();
+					},
+					
+					getMainContentView: function() {
+						return new mainContentActionsView();
 					}
 				},
 				{
 					id: 'settings',
 					nicename: 'Settings',
 
-					getView: function() {
-						return new mainSettingsView();
+					getMainHeaderView: function() {
+						return new mainHeaderSettingsView();
+					},
+
+					getSubHeaderView: function() {
+						return new subHeaderSettingsView();
+					},
+					
+					getMainContentView: function() {
+						return new mainContentSettingsView();
 					}
 				},
 				{
@@ -37,7 +85,10 @@ define( ['builder/models/appDomainCollection', 'builder/views/mainFields', 'buil
 			] );
 
 			nfRadio.channel( 'app' ).reply( 'get:appDomainCollection', this.getAppDomainCollection, this );
+			
+			nfRadio.channel( 'app' ).reply( 'change:domain', this.changeAppDomain, this );
 			this.listenTo( nfRadio.channel( 'app' ), 'click:appMenu', this.changeAppDomain );
+			this.listenTo( nfRadio.channel( 'app' ), 'click:changeDomain', this.maybeChangeDomain );
 		},
 
 		getAppDomainCollection: function() {
@@ -50,6 +101,12 @@ define( ['builder/models/appDomainCollection', 'builder/views/mainFields', 'buil
 				var updated = nfRadio.channel( 'app' ).request( 'update:appDomain', model );
 				nfRadio.channel( 'app' ).trigger( 'change:appDomain', model );
 			}
+		},
+
+		maybeChangeDomain: function( e ) {
+			var domainID = jQuery( e.target ).data( 'domain' );
+			var domainModel = this.collection.get( domainID );
+			this.changeAppDomain( domainModel );
 		}
 
 	});

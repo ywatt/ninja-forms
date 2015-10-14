@@ -1,4 +1,4 @@
-<div id="nf-builder" class="grey nf-drawer-closed"></div>
+<div id="nf-builder" class="grey"></div>
 
 <script id="nf-tmpl-builder" type="text/template">
     <div id="nf-header"></div>
@@ -14,8 +14,16 @@
 
 </script>
 
-<script id="nf-tmpl-sub-header" type="text/template">
+<script id="nf-tmpl-sub-header-fields" type="text/template">
     <a class="nf-add-new nf-open-drawer" href="#" data-drawerid="addField">Add new fields</a>
+</script>
+
+<script id="nf-tmpl-sub-header-actions" type="text/template">
+    <a class="nf-add-new nf-open-drawer" href="#" data-drawerid="addAction">Add new action</a>
+</script>
+
+<script id="nf-tmpl-sub-header-settings" type="text/template">
+
 </script>
 
 <script id="nf-tmpl-app-header" type="text/template">
@@ -31,8 +39,16 @@
     <div id="nf-main-content" class="nf-app-area"></div>
 </script>
 
-<script id="nf-tmpl-main-header" type="text/template">
-    <!-- <input class="nf-button secondary" type="button" value="Edit Emails and Actions" /> -->
+<script id="nf-tmpl-main-header-fields" type="text/template">
+    <input class="nf-button secondary nf-change-domain" data-domain="actions" type="button" value="Edit Emails and Actions" />
+</script>
+
+<script id="nf-tmpl-main-header-actions" type="text/template">
+    <input class="nf-button secondary nf-change-domain" data-domain="settings" type="button" value="Manage Settings" />
+</script>
+
+<script id="nf-tmpl-main-header-settings" type="text/template">
+    
 </script>
 
 <script id="nf-tmpl-fields-empty" type="text/template">
@@ -157,6 +173,54 @@
     <span id="nf-drawer-secondary"></span>
 </script>
 
+<script id="nf-tmpl-drawer-content-add-action" type="text/template">
+    <section class="nf-settings nf-action-items">
+        <h3>Installed Actions</h3>
+        <div class="nf-one-third">
+            <div class="nf-item">Email</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Success Message</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Redirect</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Save Submissions</div>
+        </div>
+    </section>
+    <section class="nf-settings nf-action-items">
+        <h3>Available Actions</h3>
+        <div class="nf-one-third">
+            <div class="nf-item">MailChimp</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Insightly</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Constant Contact</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Campaign Monitor</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Slack</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Trello</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Create Post</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Salesforce</div>
+        </div>
+        <div class="nf-one-third">
+            <div class="nf-item">Text Message</div>
+        </div>
+    </section>
+</script>
+
 <script id="nf-tmpl-drawer-content-edit-field" type="text/template">
     <h2><span class="dashicons dashicons-star-empty"></span>Single Line Textbox</h2>
     <section class="nf-settings">
@@ -275,14 +339,6 @@
             <input type="checkbox" class="nf-toggle" />
         </div>
     </section>
-</script>
-
-<script id="nf-tmpl-drawer-content-add-field" type="text/template">
-    <section id="nf-drawer-staging" class="nf-settings nf-stage">
-        <div class="nf-reservoir"></div>
-    </section>
-    <span id="nf-drawer-primary"></span>
-    <span id="nf-drawer-secondary"></span>
 </script>
 
 <script id="nf-tmpl-drawer-staged-field" type="text/template">

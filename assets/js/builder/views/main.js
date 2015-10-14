@@ -1,4 +1,4 @@
-define( ['builder/views/mainHeader', 'builder/views/mainContent', 'builder/views/mainFields'], function( mainHeaderView, mainContentView, mainFieldsView ) {
+define( ['builder/views/mainHeader'], function( mainHeaderView ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
@@ -18,10 +18,11 @@ define( ['builder/views/mainHeader', 'builder/views/mainContent', 'builder/views
 		},
 
 		onRender: function() {
-			this.header.show( new mainHeaderView() );
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
-			var view = currentDomain.get( 'getView' ).call( currentDomain );
-			this.content.show( view );
+			var headerView = currentDomain.get( 'getMainHeaderView' ).call( currentDomain );
+			this.header.show( headerView );
+			var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
+			this.content.show( contentView );
 		}
 
 	});

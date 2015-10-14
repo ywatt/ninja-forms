@@ -7,6 +7,7 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 		},
 
 		filterFieldTypes: function( search, e ) {
+			console.log( nfRadio.channel( 'app' ).request( 'get:currentDrawer' ) );
 			if ( '' != jQuery.trim( search ) ) {
         		var filtered = [];
         		_.each( this.filterCollection( search ), function( model ) {

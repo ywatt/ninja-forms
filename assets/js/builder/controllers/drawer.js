@@ -7,11 +7,16 @@ define( [], function() {
 
 			nfRadio.channel( 'app' ).reply( 'open:drawer', this.openDrawer );
 			nfRadio.channel( 'app' ).reply( 'close:drawer', this.closeDrawer );
+
+			this.moving = false;
 		},
 
 		closeDrawer: function() {
+			nfRadio.channel( 'app' ).request( 'update:currentDrawer', false );
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
-			jQuery( builderEl ).removeClass( 'nf-drawer-opened' ).addClass( 'nf-drawer-closed' );
+			jQuery( builderEl ).addClass( 'nf-drawer-closed' ).removeClass( 'nf-drawer-opened' );
+			nfRadio.channel( 'drawer' ).request( 'clear:filter' );
+			
 			var triggered = false;
 			jQuery( builderEl ).one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',   
 			    function(e) {
@@ -27,12 +32,16 @@ define( [], function() {
 			/*
 			 * 1) Before we open the drawer, we need to get the drawer ID.
 			 * 2) Send out a message requesting the drawer content be loaded.
+			 * 3) Update our appData model with the current drawer.
 			 */
 			var drawerID = jQuery( e.target ).data( 'drawerid' );
 			nfRadio.channel( 'drawer' ).request( 'load:drawerContent', drawerID );
 
+			nfRadio.channel( 'app' ).request( 'update:currentDrawer', drawerID );
+
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
-			jQuery( builderEl ).removeClass( 'nf-drawer-closed' ).addClass( 'nf-drawer-opened' );
+			jQuery( builderEl ).addClass( 'nf-drawer-opened' ).removeClass( 'nf-drawer-closed' );
+			
 			var triggered = false;
 			jQuery( builderEl ).one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',   
 			    function(e) {
