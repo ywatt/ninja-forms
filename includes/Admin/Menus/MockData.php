@@ -23,9 +23,9 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $migrations = new NF_Database_Migrations();
         $migrations->nuke( TRUE, TRUE );
 
-        $posts = get_posts( 'post_type=nf_subs' );
+        $posts = get_posts( 'post_type=nf_sub' );
         foreach( $posts as $post ){
-            wp_delete_post( $post->ID );
+            wp_delete_post( $post->ID, TRUE );
         }
 
         $migrations->migrate();

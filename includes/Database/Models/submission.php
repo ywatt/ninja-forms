@@ -111,7 +111,7 @@ final class NF_Database_Models_Submission
     public function find( $where = array() )
     {
         $args = array(
-            'post_type' => 'nf_subs',
+            'post_type' => 'nf_sub',
             'posts_per_page' => -1,
             'meta_query' => $this->format_meta_query( $where )
         );
@@ -147,7 +147,7 @@ final class NF_Database_Models_Submission
     {
         if( ! $this->_id ){
             $sub = array(
-                'post_type' => 'nf_subs',
+                'post_type' => 'nf_sub',
                 'post_status' => 'publish'
             );
 

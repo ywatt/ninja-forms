@@ -18,7 +18,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
     /**
      * @var string
      */
-    public $menu_slug = 'edit.php?post_type=nf_subs';
+    public $menu_slug = 'edit.php?post_type=nf_sub';
 
     /**
      * @var null
@@ -32,7 +32,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
     {
         parent::__construct();
 
-        add_filter( 'manage_nf_subs_posts_columns', array( $this, 'change_columns' ) );
+        add_filter( 'manage_nf_sub_posts_columns', array( $this, 'change_columns' ) );
 
         add_action( 'manage_posts_custom_column', array( $this, 'custom_columns' ), 10, 2 );
 
@@ -114,7 +114,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
      */
     public function remove_filter_show_all_dates( $months )
     {
-        if( ! isset( $_GET[ 'post_type' ] ) || 'nf_subs' != $_GET[ 'post_type' ] ) return $months;
+        if( ! isset( $_GET[ 'post_type' ] ) || 'nf_sub' != $_GET[ 'post_type' ] ) return $months;
 
         // Returning an empty array should hide the dropdown.
         return array();
@@ -130,7 +130,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         global $typenow;
 
         // Bail if we aren't in our submission custom post type.
-        if ( $typenow != 'nf_subs' ) return false;
+        if ( $typenow != 'nf_sub' ) return false;
 
         $forms = Ninja_Forms()->form()->get_forms();
 
@@ -167,7 +167,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
     {
         global $pagenow;
 
-        if( $pagenow != 'edit.php' || ! is_admin() || ! isset( $query->query['post_type'] ) || 'nf_subs' != $query->query['post_type'] || ! is_main_query() ) return;
+        if( $pagenow != 'edit.php' || ! is_admin() || ! isset( $query->query['post_type'] ) || 'nf_sub' != $query->query['post_type'] || ! is_main_query() ) return;
 
         $vars = &$query->query_vars;
 
@@ -177,13 +177,13 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
 
         $vars = $this->table_filter_by_date( $vars );
 
-        $vars = apply_filters( 'nf_subs_table_qv', $vars, $form_id );
+        $vars = apply_filters( 'nf_sub_table_qv', $vars, $form_id );
     }
 
     public function search( $pieces ) {
         global $typenow;
         // filter to select search query
-        if ( is_search() && is_admin() && $typenow == 'nf_subs' && isset ( $_GET['s'] ) ) {
+        if ( is_search() && is_admin() && $typenow == 'nf_sub' && isset ( $_GET['s'] ) ) {
             global $wpdb;
 
             $keywords = explode(' ', get_query_var('s'));

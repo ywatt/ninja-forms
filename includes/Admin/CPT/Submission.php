@@ -59,7 +59,7 @@ class NF_Admin_CPT_Submission
             'publicly_queryable'  => true,
             'capability_type'     => 'page',
         );
-        register_post_type( 'nf_subs', $args );
+        register_post_type( 'nf_sub', $args );
     }
 
     public function save_nf_sub( $nf_sub_id, $nf_sub )
@@ -77,7 +77,7 @@ class NF_Admin_CPT_Submission
         if ( $pagenow != 'post.php' )
             return $nf_sub_id;
 
-        if ( $nf_sub->post_type != 'nf_subs' )
+        if ( $nf_sub->post_type != 'nf_sub' )
             return $nf_sub_id;
 
         /* Get the post type object. */
@@ -106,7 +106,7 @@ class NF_Admin_CPT_Submission
             'nf_sub_fields',
             __( 'User Submitted Values', 'ninja-forms' ),
             array( $this, 'fields_meta_box' ),
-            'nf_subs',
+            'nf_sub',
             'normal',
             'default'
         );
@@ -115,7 +115,7 @@ class NF_Admin_CPT_Submission
             'nf_sub_info',
             __( 'Submission Info', 'ninja-forms' ),
             array( $this, 'info_meta_box' ),
-            'nf_subs',
+            'nf_sub',
             'side',
             'default'
         );
@@ -153,7 +153,7 @@ class NF_Admin_CPT_Submission
     public function remove_meta_boxes()
     {
         // Remove the default Publish metabox
-        remove_meta_box( 'submitdiv', 'nf_subs', 'side' );
+        remove_meta_box( 'submitdiv', 'nf_sub', 'side' );
     }
 
     /*
