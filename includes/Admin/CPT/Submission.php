@@ -148,7 +148,21 @@ class NF_Admin_CPT_Submission
      */
     public function info_meta_box( $post )
     {
-        Ninja_Forms::template( 'admin-metabox-sub-info.html.php' );
+        $sub = Ninja_Forms()->form()->sub( $post->ID )->get();
+
+        $seq_num = $sub->get_seq_num();
+
+        $status = ucwords( $sub->get_status() );
+
+        $user = $sub->get_user()->data->user_nicename;
+
+        $form_title = $sub->get_form_title();
+
+        $sub_date = $sub->get_sub_date( 'm/d/Y H:i' );
+
+        $mod_date = $sub->get_mod_date( 'm/d/Y H:i' );
+
+        Ninja_Forms::template( 'admin-metabox-sub-info.html.php', compact( 'seq_num', 'status', 'user', 'form_title', 'sub_date', 'mod_date' ) );
     }
 
     /**

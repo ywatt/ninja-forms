@@ -5,19 +5,19 @@
     <ul class="nf-sub-stats">
 
         <li class="nf-sub-info-seq">
-            #: <strong>0</strong>
+            #: <strong><?php echo $seq_num; ?></strong>
         </li>
         <li class="nf-sub-info-status">
-            Status: <strong>Submitted</strong>
+            Status: <strong><?php echo $status; ?></strong>
         </li>
         <li class="nf-sub-info-form">
-            Form: <strong>Example Form</strong>
+            Form: <strong><?php echo $form_title; ?></strong>
         </li>
 
-        <li class="nf-sub-info-created">Submitted on: <strong><?php echo date( 'm/d/Y H:i' ); ?></strong></li>
-        <li class="nf-sub-info-updated">Updated on: <strong><?php echo date( 'm/d/Y H:i' ); ?></strong></li>
+        <li class="nf-sub-info-updated">Updated on: <strong><?php echo $mod_date; ?></strong></li>
+        <li class="nf-sub-info-created">Submitted on: <strong><?php echo $sub_date; ?></strong></li>
 
-        <li class="nf-sub-info-user">Submitted by: <strong>Kyle Johnson</strong></li>
+        <li class="nf-sub-info-user">Submitted by: <strong><?php echo $user; ?></strong></li>
 
     </ul>
 

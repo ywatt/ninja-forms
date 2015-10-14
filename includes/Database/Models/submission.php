@@ -7,11 +7,17 @@ final class NF_Database_Models_Submission
 {
     protected $_id = '';
 
+    protected $_status = '';
+
+    protected $_user_id = '';
+
     protected $_form_id = '';
 
     protected $_seq_num = '';
 
     protected $_sub_date = '';
+
+    protected $_mod_date = '';
 
     protected $_field_values = array();
 
@@ -22,7 +28,10 @@ final class NF_Database_Models_Submission
 
         if( $this->_id ){
             $sub = get_post( $this->_id );
+            $this->_status = $sub->post_status;
+            $this->_user_id = $sub->post_author;
             $this->_sub_date = $sub->post_date;
+            $this->_mod_date = $sub->post_modified;
         }
 
         if( $this->_id && ! $this->_form_id ){
@@ -44,6 +53,27 @@ final class NF_Database_Models_Submission
         return intval( $this->_id );
     }
 
+    public function get_status()
+    {
+        return $this->_status;
+    }
+
+    public function get_user()
+    {
+        return get_user_by( 'id', $this->_user_id );
+    }
+
+    public function get_form_id()
+    {
+        return intval( $this->_form_id );
+    }
+
+    public function get_form_title()
+    {
+        $form = Ninja_Forms()->form( $this->_form_id )->get();
+        return $form->get_setting( 'title' );
+    }
+
     public function get_seq_num()
     {
         return intval( $this->_seq_num );
@@ -52,6 +82,11 @@ final class NF_Database_Models_Submission
     public function get_sub_date( $format = 'm/d/Y' )
     {
         return date( $format, strtotime( $this->_sub_date ) );
+    }
+
+    public function get_mod_date( $format = 'm/d/Y' )
+    {
+        return date( $format, strtotime( $this->_mod_date ) );
     }
 
     /**
