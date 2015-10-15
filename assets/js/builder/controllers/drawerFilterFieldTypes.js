@@ -3,11 +3,13 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 		initialize: function() {
 			this.collection = nfRadio.channel( 'data' ).request( 'get:fieldTypes' );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'change:filter', this.filterFieldTypes );
-			this.listenTo( nfRadio.channel( 'drawer' ), 'open:drawer', this.focusFilter );
 		},
 
 		filterFieldTypes: function( search, e ) {
-			console.log( nfRadio.channel( 'app' ).request( 'get:currentDrawer' ) );
+			if (  'addField' != nfRadio.channel( 'app' ).request( 'get:currentDrawer' ) ) {
+				return false;
+			}
+
 			if ( '' != jQuery.trim( search ) ) {
         		var filtered = [];
         		_.each( this.filterCollection( search ), function( model ) {
@@ -67,11 +69,6 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 				return found;
 			} );
 			return filtered;
-        },
-
-        focusFilter: function() {
-        	var filterEl = nfRadio.channel( 'drawer' ).request( 'get:filterEl' );
-        	jQuery( filterEl ).focus();
         }
 	});
 

@@ -15,7 +15,7 @@
 </script>
 
 <script id="nf-tmpl-sub-header-fields" type="text/template">
-    <a class="nf-add-new nf-open-drawer" href="#" data-drawerid="addField">Add new fields</a>
+    <a class="nf-add-new nf-open-drawer" href="#" data-drawerid="addField">Add new field</a>
 </script>
 
 <script id="nf-tmpl-sub-header-actions" type="text/template">
