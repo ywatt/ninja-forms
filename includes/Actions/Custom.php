@@ -44,17 +44,16 @@ final class NF_Actions_Custom extends NF_Abstracts_Action
 
     public function process( $action_id, $form_id, $data )
     {
-        $type = Ninja_Forms()->form( $form_id )->get_action( $action_id )->get_setting( 'hook' );
-        $tag  = Ninja_Forms()->form( $form_id )->get_action( $action_id )->get_setting( 'tag' );
+        $settings = Ninja_Forms()->form()->get_action( $action_id )->get_settings();
 
         ob_start(); // Use the Output Buffer to suppress output
 
-        switch( $type ){
+        switch( $settings['hook'] ){
             case 'action':
-                do_action( $tag, $data );
+                do_action( $settings['tag'], $data );
                 break;
             case 'filter':
-                $data = apply_filters( $tag, $data );
+                $data = apply_filters( $settings['tag'], $data );
                 break;
         }
 
