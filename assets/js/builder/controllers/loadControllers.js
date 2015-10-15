@@ -2,7 +2,7 @@ define(
 	[
 		'builder/controllers/fieldTypes',
 		'builder/controllers/fieldTypeSections',
-		'builder/controllers/drawerfieldTypeDrag',
+		'builder/controllers/drawerFieldTypeDrag',
 		'builder/controllers/drawerSavedFields',
 		'builder/controllers/drawerStagedFields',
 		'builder/controllers/drawer',

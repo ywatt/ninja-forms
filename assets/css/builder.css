@@ -196,7 +196,7 @@ All styles used within the drawer
 .nf-stage { position: relative; }
 .nf-stage .nf-stage-controls { background: #F8F8F9; padding: 5px; position: absolute; top: -20px; right: 10px; }
 
-.nf-reservoir { background: #F8F8F9; border: 10px solid #F8F8F9; border-radius: 4px; margin: 30px 2% 20px; min-height: 60px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
+.nf-reservoir { background: #F8F8F9; border: 10px solid #F8F8F9; border-radius: 4px; margin: 30px 2% 20px; min-height: 52px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-reservoir::after { clear: both; content: ""; display: block; }
 .nf-reservoir .ui-sortable > span { background: #fff; border-radius: 4px; color: #999; display: inline-block; float: left; margin: 0 3px 3px 3px; padding: 5px 10px; position: relative; }
 .nf-reservoir .ui-sortable > span .dashicons { font-size: 14px; margin: 2px 0 -4px 5px; }
