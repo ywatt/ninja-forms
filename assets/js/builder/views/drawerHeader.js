@@ -8,29 +8,29 @@ define( [], function() {
 			this.$el.unwrap();
 			this.setElement( this.$el );
 
-			nfRadio.channel( 'drawer' ).reply( 'filter:clear', this.clearFilter, this );
+			nfRadio.channel( 'drawer' ).reply( 'clear:filter', this.clearFilter, this );
 			nfRadio.channel( 'drawer' ).reply( 'get:filterEl', this.getEl, this );
 		},
 
 		events: {
-			'keyup .nf-type-filter': 'maybeAddField',
-			'input .nf-type-filter': 'filterFields',
+			'keyup .nf-filter': 'maybeChangeFilter',
+			'input .nf-filter': 'changeFilter',
 			'click .nf-close-drawer': 'closeDrawer'
 		},
 
-		filterFields: function( e ) {
-			nfRadio.channel( 'drawer' ).trigger( 'change:fieldTypeFilter', e.target.value, e );
+		changeFilter: function( e ) {
+			nfRadio.channel( 'drawer' ).trigger( 'change:filter', e.target.value, e );
 		},
 
-		maybeAddField: function( e ) {
+		maybeChangeFilter: function( e ) {
 			if ( 13 == e.keyCode ) {
 				e.addField = true;
-				this.filterFields( e );			
+				this.changeFilter( e );			
 			}
 		},
 
 		clearFilter: function() {
-			var filterEl =  jQuery( this.el ).find( '.nf-type-filter' );
+			var filterEl =  jQuery( this.el ).find( '.nf-filter' );
 			if ( '' != jQuery.trim( filterEl.val() ) ) {
 				filterEl.val('');
 				filterEl.trigger( 'input' );
@@ -43,7 +43,7 @@ define( [], function() {
 		},
 
 		getEl: function() {
-			return jQuery( this.el ).find( '.nf-type-filter' );
+			return jQuery( this.el ).find( '.nf-filter' );
 		}
 	});
 

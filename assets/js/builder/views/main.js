@@ -1,29 +1,28 @@
-define( ['builder/views/mainHeader', 'builder/views/mainContent'], function( mainHeaderView, mainContentView ) {
+define( ['builder/views/mainHeader'], function( mainHeaderView ) {
 
 	var view = Marionette.LayoutView.extend({
-		tagName: "div",
-		template: "#nf-tmpl-main",
+		tagName: 'div',
+		template: '#nf-tmpl-main',
 
 		regions: {
-			header: "#nf-main-header",
-			content: "#nf-main-content"
+			header: '#nf-main-header',
+			content: '#nf-main-content'
+		},
+
+		initialize: function() {
+			this.listenTo( nfRadio.channel( 'app' ), 'change:domain', this.render );
 		},
 
 		onShow: function() {
-			this.header.show( new mainHeaderView() );
-			this.header.show( new mainContentView() );
-
 			jQuery( this.el ).parent().perfectScrollbar();
+		},
 
-			jQuery( this.el ).parent().droppable( {
-				accept: function( draggable ) {
-					if ( jQuery( draggable ).hasClass( 'nf-stage' ) || jQuery( draggable ).hasClass( 'nf-one-third' ) ) {
-						return true;
-					}
-				},
-				activeClass: 'nf-droppable-active',
-				hoverClass: 'nf-droppable-hover'
-			} );
+		onRender: function() {
+			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
+			var headerView = currentDomain.get( 'getMainHeaderView' ).call( currentDomain );
+			this.header.show( headerView );
+			var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
+			this.content.show( contentView );
 		}
 
 	});

@@ -2,11 +2,14 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.collection = nfRadio.channel( 'data' ).request( 'get:fieldTypes' );
-			this.listenTo( nfRadio.channel( 'drawer' ), 'change:fieldTypeFilter', this.filterFieldTypes );
-			this.listenTo( nfRadio.channel( 'drawer' ), 'open:drawer', this.focusFilter );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'change:filter', this.filterFieldTypes );
 		},
 
 		filterFieldTypes: function( search, e ) {
+			if (  'addField' != nfRadio.channel( 'app' ).request( 'get:currentDrawer' ) ) {
+				return false;
+			}
+
 			if ( '' != jQuery.trim( search ) ) {
         		var filtered = [];
         		_.each( this.filterCollection( search ), function( model ) {
@@ -25,11 +28,11 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
         		if ( e.addField ) {
         			if ( 0 < filtered.length ) {
         				nfRadio.channel( 'drawer' ).request( 'add:stagedField', filtered[0] );
-        				nfRadio.channel( 'drawer' ).request( 'filter:clear' );
+        				nfRadio.channel( 'drawer' ).request( 'clear:filter' );
         			}
         		}
         	} else {
-        		nfRadio.channel( 'drawer' ).trigger( 'remove:fieldTypeFilter' );
+        		nfRadio.channel( 'drawer' ).trigger( 'clear:filter' );
         	}
         },
 
@@ -66,11 +69,6 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 				return found;
 			} );
 			return filtered;
-        },
-
-        focusFilter: function() {
-        	var filterEl = nfRadio.channel( 'drawer' ).request( 'get:filterEl' );
-        	jQuery( filterEl ).focus();
         }
 	});
 

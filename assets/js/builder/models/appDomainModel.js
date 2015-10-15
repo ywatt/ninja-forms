@@ -3,12 +3,24 @@ define( [], function() {
 		defaults: {
 			dashicons: '',
 			classes: '',
+			active: false,
+			url: '',
+			
 			renderDashicons: function() {
 				if ( this.dashicons ) {
 					return '<span class="dashicons ' + this.dashicons + '"></span>'
 				} else {
 					return '';
 				}
+			},
+
+			renderClasses: function() {
+				var classes = this.classes;
+				var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
+				if ( currentDomain.get( 'id' ) == this.id ) {
+					classes += ' active';
+				}
+				return classes;
 			}
 		}
 	} );
