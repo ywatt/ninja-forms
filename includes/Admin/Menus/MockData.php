@@ -233,6 +233,13 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
             ->save();
 
         $action = Ninja_Forms()->form( 1 )->action()->get();
+        $action->update_setting( 'title',  'Run WordPress Action' )
+            ->update_setting( 'type', 'custom' )
+            ->update_setting( 'hook', 'action' )
+            ->update_setting( 'tag', 'blarg_action' )
+            ->save();
+
+        $action = Ninja_Forms()->form( 1 )->action()->get();
         $action->update_setting( 'title',  'Mock Save Action' )
             ->update_setting( 'type', 'save' )
             ->save();
