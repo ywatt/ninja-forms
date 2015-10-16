@@ -23,7 +23,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $migrations = new NF_Database_Migrations();
         $migrations->nuke( TRUE, TRUE );
 
-        $posts = get_posts( 'post_type=nf_sub' );
+        $posts = get_posts( 'post_type=nf_sub&numberposts=-1' );
         foreach( $posts as $post ){
             wp_delete_post( $post->ID, TRUE );
         }
@@ -230,6 +230,13 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
             ->update_setting( 'subject', 'This is an email action.' )
             ->update_setting( 'message', 'Hello, Ninja Forms!' )
             ->update_setting( 'active', FALSE )
+            ->save();
+
+        $action = Ninja_Forms()->form( 1 )->action()->get();
+        $action->update_setting( 'title',  'Run WordPress Action' )
+            ->update_setting( 'type', 'custom' )
+            ->update_setting( 'hook', 'action' )
+            ->update_setting( 'tag', 'blarg_action' )
             ->save();
 
         $action = Ninja_Forms()->form( 1 )->action()->get();
