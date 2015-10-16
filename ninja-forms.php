@@ -161,6 +161,10 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 self::$instance->actions = apply_filters( 'ninja_forms_register_actions', self::load_classes( 'Actions' ) );
 
+                /*
+                 * Preview Page
+                 */
+                self::$instance->preview = new NF_Display_Preview();
 
                 /*
                  * Temporary Shortcode for working on the frontend JS display.
