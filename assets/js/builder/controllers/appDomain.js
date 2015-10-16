@@ -96,14 +96,9 @@ define( [
 		},
 
 		changeAppDomain: function( model ) {
-			
-			if ( nfRadio.channel( 'drawer' ).request( 'is:moving' ) ) {
-				return false;
-			}
-			if ( nfRadio.channel( 'app' ).request( 'get:currentDrawer' ) ) {
-				nfRadio.channel( 'app' ).request( 'close:drawer' );
-			}
-			
+
+			nfRadio.channel( 'app' ).request( 'close:drawer' );
+						
 			if ( 0 == model.get( 'url' ).length ) {
 				var updated = nfRadio.channel( 'app' ).request( 'update:appDomain', model );
 				nfRadio.channel( 'app' ).trigger( 'change:appDomain', model );

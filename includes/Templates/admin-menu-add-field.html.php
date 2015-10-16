@@ -3,7 +3,7 @@
 <script id="nf-tmpl-builder" type="text/template">
     <div id="nf-header"></div>
     <div id="nf-main" class="nf-app-main"></div>
-    <div id="nf-menu-drawer"></div>
+    <!-- <div id="nf-menu-drawer"></div> -->
     <div id="nf-drawer"></div>
 </script>
 
@@ -361,7 +361,7 @@
 <script id="nf-tmpl-drawer-header" type="text/template">
     <header class="nf-drawer-header">
         <div class="nf-search">
-            <input type="search" class="nf-filter" value="" placeholder="Filter" />
+            <input type="search" class="nf-filter" value="" tabindex="0" placeholder="Filter" />
         </div>
         <a href="#" class="nf-button primary nf-close-drawer" tabindex="99">Done</a>
     </header>

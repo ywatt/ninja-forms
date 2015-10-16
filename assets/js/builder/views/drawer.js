@@ -12,10 +12,13 @@ define( ['builder/views/drawerHeader'], function( drawerHeaderView ) {
 			nfRadio.channel( 'app' ).reply( 'get:drawerEl', this.getEl, this );
 			nfRadio.channel( 'drawer' ).reply( 'load:drawerContent', this.loadContent, this );
 		},
-		
+
 		onShow: function() {
+			var builderEl = jQuery( this.el ).parent().parent();
+			var closedRight = '-' + jQuery( builderEl ).width() + 'px';
+			jQuery( this.el ).parent().css( { 'right': closedRight } );
+					
 			this.header.show( new drawerHeaderView() );
-			// this.content.show( new drawerContentView() );
 			jQuery( this.el ).parent().perfectScrollbar();
 		    jQuery( this.el ).parent().disableSelection();
 		},
