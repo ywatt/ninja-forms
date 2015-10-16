@@ -108,7 +108,7 @@ All styles used within the drawer
 
 .nf-drawer-opened #nf-main { width: 50%; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-drawer-opened #nf-main .nf-button { display: none; }
-.nf-drawer-opened #nf-drawer { right: 0; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
+.nf-drawer-opened #nf-drawer { -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-drawer-opened #nf-drawer.nf-drawer-expand { width: 100%; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .dashicons { -webkit-transform: rotate(180deg); -ms-transform: rotate(180deg); transform: rotate(180deg); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .nf-expand-off { display: none; }
@@ -120,7 +120,7 @@ All styles used within the drawer
 .nf-drawer-opened .nf-setting-wrap { width: 50%; -webkit-transition: width 1.0s ease; transition: width 1.0s ease; }
 
 .nf-drawer-closed #nf-main { width: 100%; left: 0; -webkit-transition: width 1.0s ease, left 0.5s ease; transition: width 1.0s ease, left 0.5s ease; }
-.nf-drawer-closed #nf-drawer { right: -1400px; -webkit-transition: right 1.0s ease; transition: right 1.0s ease; }
+.nf-drawer-closed #nf-drawer { -webkit-transition: right 1.0s ease; transition: right 1.0s ease; }
 .nf-drawer-closed .nf-add-new { opacity: 1.0; visibility: visible; filter: alpha(opacity=100); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-drawer-closed .nf-setting-wrap { width: 33%; -webkit-transition: width 1.0s ease; transition: width 1.0s ease; }
 

@@ -7,43 +7,32 @@ define( [], function() {
 
 			nfRadio.channel( 'app' ).reply( 'open:drawer', this.openDrawer, this );
 			nfRadio.channel( 'app' ).reply( 'close:drawer', this.closeDrawer, this );
-
-			nfRadio.channel( 'drawer' ).reply( 'is:moving', this.isMoving, this );
-
-			this.moving = false;
 		},
 
 		closeDrawer: function() {
-			if ( this.moving ) {
-				return false;
-			}
-
-			this.moving = true;
 
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
 			jQuery( builderEl ).addClass( 'nf-drawer-closed' ).removeClass( 'nf-drawer-opened' );
+
+			var rightClosed = this.getClosedDrawerRight();
+
+			var drawerEl = nfRadio.channel( 'app' ).request( 'get:drawerEl' );
+			jQuery( drawerEl ).css( { 'right': rightClosed } );
+
 			nfRadio.channel( 'drawer' ).request( 'clear:filter' );
-			
-			var triggered = false;
+						
 			var that = this;
-			jQuery( builderEl ).one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',   
-			    function(e) {
-			    	if ( ! triggered ) {
-			    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', false );
-			    		nfRadio.channel( 'drawer' ).trigger( 'close:drawer' );
-			    		triggered = true;
-			    		that.moving = false;
-			    	}
-				}
-			);
+
+			this.checkCloseDrawerPos = setInterval( function() {
+	        	if ( rightClosed == jQuery( drawerEl ).css( 'right' ) ) {
+	        		clearInterval( that.checkCloseDrawerPos );
+		    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', false );
+		    		nfRadio.channel( 'drawer' ).trigger( 'close:drawer' );
+	        	}
+			}, 150 );
 		},
 
 		openDrawer: function( e ) {
-			if ( this.moving ) {
-				return false;
-			}
-
-			this.moving = true;
 			/*
 			 * 1) Before we open the drawer, we need to get the drawer ID.
 			 * 2) Send out a message requesting the drawer content be loaded.
@@ -54,20 +43,20 @@ define( [], function() {
 
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
 			jQuery( builderEl ).addClass( 'nf-drawer-opened' ).removeClass( 'nf-drawer-closed' );
+
+			var drawerEl = nfRadio.channel( 'app' ).request( 'get:drawerEl' );
+			jQuery( drawerEl ).css( { 'right': '0px' } );
 			
 			var that = this;
-			var triggered = false;
-			jQuery( builderEl ).one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',   
-			    function(e) {
-			    	if ( ! triggered ) {
-			    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', drawerID );
-			    		nfRadio.channel( 'drawer' ).trigger( 'open:drawer' );
-			    		that.focusFilter();
-			    		triggered = true;
-			    		that.moving = false;
-			    	}
-				}
-			);
+
+			this.checkOpenDrawerPos = setInterval( function() {
+	        	if ( '0px' == jQuery( drawerEl ).css( 'right' ) ) {
+	        		clearInterval( that.checkOpenDrawerPos );
+	        		that.focusFilter();
+		    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', drawerID );
+		    		nfRadio.channel( 'drawer' ).trigger( 'open:drawer' );
+	        	}
+			}, 150 );
 		},
 
 		toggleDrawerSize: function() {
@@ -75,13 +64,14 @@ define( [], function() {
 			jQuery( drawerEl ).toggleClass( 'nf-drawer-expand' );
 		},
 
-		isMoving: function() {
-			return this.moving;
-		},
-
         focusFilter: function() {
         	var filterEl = nfRadio.channel( 'drawer' ).request( 'get:filterEl' );
         	jQuery( filterEl ).focus();
+        },
+
+        getClosedDrawerRight: function() {
+			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
+			return '-' + jQuery( builderEl ).width() + 'px';
         }
 	});
 
