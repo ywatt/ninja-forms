@@ -18,10 +18,10 @@ define( ['builder/views/header', 'builder/views/main', 'builder/views/menuDrawer
 			// this.menuDrawer.show( new menuDrawerView() );
 			this.drawer.show( new drawerView() );
 
-			nfRadio.channel( 'app' ).reply( 'get:builderEl', this.returnBuilderEl, this );
+			nfRadio.channel( 'app' ).reply( 'get:builderEl', this.getBuilderEl, this );
 		},
 
-		returnBuilderEl: function() {
+		getBuilderEl: function() {
 			return this.el;
 		},
 

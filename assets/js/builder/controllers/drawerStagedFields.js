@@ -10,7 +10,7 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:removeStagedField', this.removeStagedField );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'dropped:fieldStaging', this.addStagedField );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'sorted:fieldStaging', this.updateStagedOrder );
-			this.listenTo( nfRadio.channel( 'drawer' ), 'close:drawer', this.closeDrawer );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'before:closeDrawer', this.beforeCloseDrawer );
 		},
 
 		getStagingCollection: function() {
@@ -39,7 +39,15 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 			this.collection.sort();
 		},
 
-		closeDrawer: function() {
+		beforeCloseDrawer: function() {
+			var fieldCollection = nfRadio.channel( 'data' ).request( 'get:fieldCollection' );
+			var tmpNum = fieldCollection.models.length + 1;
+			var fields = [];
+			_.each( this.collection.models, function( model ) {
+				fields.push( { id: 'tmp-' + tmpNum, label: model.get( 'nicename' ), type: model.get( 'slug' ) } );
+				tmpNum++;
+			} );
+			nfRadio.channel( 'data' ).request( 'add:fieldData', fields );
 			this.collection.reset();
 		}
 

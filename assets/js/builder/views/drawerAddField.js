@@ -1,4 +1,4 @@
-define( ['builder/views/drawerStaging', 'builder/models/stagingCollection', 'builder/views/fieldTypeSectionCollection', 'builder/views/drawerHeader', 'builder/models/fieldTypeCollection'], function( drawerStagingView, StagingCollection, fieldTypeSectionCollectionView, drawerHeaderView, fieldTypeCollection ) {
+define( ['builder/views/drawerStaging', 'builder/models/stagingCollection', 'builder/views/drawerFieldTypeSectionCollection', 'builder/views/drawerHeader', 'builder/models/fieldTypeCollection'], function( drawerStagingView, StagingCollection, fieldTypeSectionCollectionView, drawerHeaderView, fieldTypeCollection ) {
 
 	var view = Marionette.LayoutView.extend( {
 		template: '#nf-tmpl-drawer-content-add-field',

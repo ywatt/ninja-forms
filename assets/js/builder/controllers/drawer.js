@@ -10,6 +10,7 @@ define( [], function() {
 		},
 
 		closeDrawer: function() {
+			nfRadio.channel( 'drawer' ).trigger( 'before:closeDrawer' );
 
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
 			jQuery( builderEl ).addClass( 'nf-drawer-closed' ).removeClass( 'nf-drawer-opened' );

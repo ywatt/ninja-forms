@@ -10,7 +10,7 @@ define(
 		'builder/controllers/drawerFilterFieldTypes',
 		'builder/controllers/appDomain',
 		'builder/controllers/appData',
-		'builder/controllers/mainContent',
+		'builder/controllers/mainContentFields',
 		'builder/controllers/fieldData'
 	],
 	function(
@@ -24,11 +24,12 @@ define(
 		DrawerFilterFieldTypes,
 		AppDomain,
 		AppData,
-		MainContent,
+		MainContentFields,
 		FieldData
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
+				
 				var fieldTypes = new FieldTypes();
 				var fieldTypeSections = new FieldTypeSections();
 				var fieldTypeDrag = new FieldTypeDrag();
@@ -39,7 +40,7 @@ define(
 				var drawerFilterFieldTypes = new DrawerFilterFieldTypes();
 				var appDomain = new AppDomain();
 				var appData = new AppData();
-				var mainContent = new MainContent();
+				var mainContentFields = new MainContentFields();
 				var fieldData = new FieldData();
 			}
 		});
