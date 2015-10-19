@@ -24,7 +24,8 @@ define( [], function() {
 				stop: function( event, ui ) {
 					that.dragging = false;
 					nfRadio.channel( 'drawer' ).trigger( 'stopDrag:fieldType', ui );
-				}
+				},
+				connectToSortable: '.nf-fields-sortable'
 
 			} ).disableSelection();
 			

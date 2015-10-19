@@ -3,6 +3,7 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 		initialize: function() {
 
 			this.collection = new fieldCollection( [
+				
 				{
 					id: 1,
 					type: 'first_name',
@@ -34,13 +35,19 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 					default_value: '',
 					placeholder: ''
 				}
+				
 			] );
 
-			nfRadio.channel( 'data' ).request( 'get:fieldCollection', this.getFieldCollection );
+			nfRadio.channel( 'data' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
+			nfRadio.channel( 'data' ).reply( 'add:fieldData', this.addFieldData, this );
 		},
 
 		getFieldCollection: function() {
 			return this.collection;
+		},
+
+		addFieldData: function( data ) {
+			this.collection.add( data );
 		}
 	});
 

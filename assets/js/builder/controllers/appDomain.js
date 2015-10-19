@@ -1,6 +1,6 @@
 define( [
 	'builder/models/appDomainCollection',
-	'builder/views/mainContentFields',
+	'builder/views/mainContentFieldCollection',
 	'builder/views/mainContentActions',
 	'builder/views/mainContentSettings',
 	'builder/views/mainHeaderFields',
@@ -39,8 +39,9 @@ define( [
 						return new subHeaderFieldsView();
 					},
 
-					getMainContentView: function() {
-						return new mainContentFieldsView();
+					getMainContentView: function( collection ) {
+						var collection = nfRadio.channel( 'data' ).request( 'get:fieldCollection' );
+						return new mainContentFieldsView( { collection: collection } );
 					}
 				},
 				{

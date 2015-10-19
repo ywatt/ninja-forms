@@ -51,39 +51,21 @@
     
 </script>
 
-<script id="nf-tmpl-fields-empty" type="text/template">
+<script id="nf-tmpl-main-content-fields-empty" type="text/template">
     <div class="nf-fields-empty">
         <h3>Add form fields</h3>
         <p>Get started by adding your first form field. Just click the plus and select the fields you want. It’s that easy.</p>
     </div>
 </script>
 
-<script id="nf-tmpl-fields" type="text/template">
-    <?php
-    for ($i=0; $i < 5; $i++) {
-        if ( 0 == $i ) {
-            $field = 'First Name';
-        } elseif ( 1 == $i ) {
-            $field = 'Last Name';
-        } elseif ( 2 == $i ) {
-            $field = 'Email';
-        } elseif ( 3 == $i ) {
-            $field = '<span class="before">Textarea</span><span class="after">Message</span>';
-        } else {
-            $field = 'Submit';
-        }
-        ?>
-        <div id="field-<?php echo $i ?>" class="nf-field-wrap"> <?php echo $field ?>
+<script id="nf-tmpl-main-content-field" type="text/template">
+    <div id="field-<%= id %>" class="nf-field-wrap"> <%= label %>
         <ul class="nf-item-controls">
             <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
             <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
             <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editField"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
         </ul>
-
-        </div>
-        <?php
-    }
-    ?>
+    </div>
 </script>
 
 <script id="nf-tmpl-actions" type="text/template">
@@ -361,7 +343,7 @@
 <script id="nf-tmpl-drawer-header" type="text/template">
     <header class="nf-drawer-header">
         <div class="nf-search">
-            <input type="search" class="nf-filter" value="" tabindex="0" placeholder="Filter" />
+            <input type="search" class="nf-filter" value="" placeholder="Filter" />
         </div>
         <a href="#" class="nf-button primary nf-close-drawer" tabindex="99">Done</a>
     </header>
