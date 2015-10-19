@@ -44,6 +44,10 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
     public function process( $action_id, $form_id, $data )
     {
+        if( isset( $data['settings']['is_preview'] ) && $data['settings']['is_preview'] ){
+            return $data;
+        }
+
         $sub = Ninja_Forms()->form( $form_id )->sub()->get();
 
         foreach( $data['fields'] as $field ){
