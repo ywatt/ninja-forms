@@ -3,10 +3,13 @@ define( ['builder/views/drawerStagedField'], function( stagedFieldView ) {
 		tagName: 'div',
 		childView: stagedFieldView,
 
+		initialize: function() {
+			nfRadio.channel( 'app' ).reply( 'get:stagedFieldsEl', this.getStagedFieldsEl, this );
+		},
+
 		onDomRefresh: function() {
 			jQuery( this.el ).parent().droppable( {
 				accept: '.nf-one-third',
-				activeClass: 'nf-droppable-active',
 				hoverClass: 'nf-droppable-hover',
 
 				drop: function( event, ui ) {
@@ -29,13 +32,19 @@ define( ['builder/views/drawerStagedField'], function( stagedFieldView ) {
 			jQuery( this.el ).parent().parent().draggable( {
 				helper: 'clone',
 				opacity: 0.9,
+				connectToSortable: '.nf-fields-sortable',
+				
 				start: function( event, ui ) {
-					nfRadio.channel( 'drawer' ).trigger( 'startDrag:fieldType', ui );
+					nfRadio.channel( 'drawer' ).trigger( 'startDrag:fieldStaging', this, ui );
 				},
 				stop: function( event, ui ) {
-					nfRadio.channel( 'drawer' ).trigger( 'stopDrag:fieldType', ui );
+					nfRadio.channel( 'drawer' ).trigger( 'stopDrag:fieldStaging', this, ui );
 				}
 			} );
+		},
+
+		getStagedFieldsEl: function() {
+			return jQuery( this.el ).parent();
 		}
 
 	} );

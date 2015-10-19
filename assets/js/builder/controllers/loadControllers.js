@@ -3,6 +3,7 @@ define(
 		'builder/controllers/fieldTypes',
 		'builder/controllers/fieldTypeSections',
 		'builder/controllers/drawerFieldTypeDrag',
+		'builder/controllers/drawerStagingDrag',
 		'builder/controllers/drawerSavedFields',
 		'builder/controllers/drawerStagedFields',
 		'builder/controllers/drawer',
@@ -17,6 +18,7 @@ define(
 		FieldTypes,
 		FieldTypeSections,
 		FieldTypeDrag,
+		FieldStagingDrag,
 		SavedFields,
 		StagedFields,
 		Drawer,
@@ -33,6 +35,7 @@ define(
 				var fieldTypes = new FieldTypes();
 				var fieldTypeSections = new FieldTypeSections();
 				var fieldTypeDrag = new FieldTypeDrag();
+				var fieldStagingDrag = new FieldStagingDrag();
 				var savedFields = new SavedFields();
 				var stagedFields = new StagedFields();
 				var drawer = new Drawer();

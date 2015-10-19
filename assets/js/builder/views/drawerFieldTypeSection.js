@@ -19,11 +19,11 @@ define( [], function() {
 				opacity: 0.9,
 				start: function( event, ui ) {
 					that.dragging = true;
-					nfRadio.channel( 'drawer' ).trigger( 'startDrag:fieldType', ui );
+					nfRadio.channel( 'drawer' ).trigger( 'startDrag:fieldType', this, ui );
 				},
 				stop: function( event, ui ) {
 					that.dragging = false;
-					nfRadio.channel( 'drawer' ).trigger( 'stopDrag:fieldType', ui );
+					nfRadio.channel( 'drawer' ).trigger( 'stopDrag:fieldType', this, ui );
 				},
 				connectToSortable: '.nf-fields-sortable'
 

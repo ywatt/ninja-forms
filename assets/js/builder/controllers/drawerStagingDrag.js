@@ -1,10 +1,10 @@
 define( [], function( ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'drawer' ), 'startDrag:fieldType', this.startDrag );
-			this.listenTo( nfRadio.channel( 'drawer' ), 'stopDrag:fieldType', this.stopDrag );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'startDrag:fieldStaging', this.startDrag );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'stopDrag:fieldStaging', this.stopDrag );
 
-			nfRadio.channel( 'app' ).reply( 'get:fieldTypeHelperClone', this.getCurrentDraggableHelperClone, this );
+			nfRadio.channel( 'app' ).reply( 'get:fieldStagingHelperClone', this.getCurrentDraggableHelperClone, this );
 		},
 
 		startDrag: function( context, ui ) {

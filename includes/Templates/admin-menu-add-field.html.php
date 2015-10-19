@@ -335,7 +335,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-field-type-button" type="text/template">
-    <div class="nf-one-third <%= savedField() %>">
+    <div class="nf-field-type-button nf-one-third <%= savedField() %>" data-id="<%= id %>">
         <div class="nf-item" data-id="<%= id %>" tabindex="0"><%= nicename %></div>
     </div>
 </script>
@@ -352,3 +352,11 @@
 <script id="nf-tmpl-app-menu-item" type="text/template">
     <li><a href="#" class="<%= renderClasses() %>"><%= nicename %><%= renderDashicons() %></a></li>
 </script>
+
+<div class="nf-field-wrap nf-field-hover hidden">
+    <ul class="nf-item-controls">
+        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+        <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editField"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+    </ul>
+</div>

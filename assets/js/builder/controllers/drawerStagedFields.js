@@ -7,10 +7,14 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 		    nfRadio.channel( 'drawer' ).reply( 'get:stagedFields', this.getStagingCollection, this );
 			nfRadio.channel( 'drawer' ).reply( 'add:stagedField', this.addStagedField, this );
 			nfRadio.channel( 'drawer' ).reply( 'remove:stagedField', this.removeStagedField, this );
+			
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:removeStagedField', this.removeStagedField );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'dropped:fieldStaging', this.addStagedField );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'sorted:fieldStaging', this.updateStagedOrder );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'before:closeDrawer', this.beforeCloseDrawer );
+		
+			this.listenTo( nfRadio.channel( 'drawer' ), 'startDrag:fieldType', this.addActiveClass );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'stopDrag:fieldType', this.removeActiveClass );
 		},
 
 		getStagingCollection: function() {
@@ -49,6 +53,17 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 			} );
 			nfRadio.channel( 'data' ).request( 'add:fieldData', fields );
 			this.collection.reset();
+		},
+
+
+		addActiveClass: function() {
+			var stagedFieldsEl = nfRadio.channel( 'app' ).request( 'get:stagedFieldsEl' );
+			jQuery( stagedFieldsEl ).addClass( 'nf-droppable-active' );
+		},
+
+		removeActiveClass: function() {
+			var stagedFieldsEl = nfRadio.channel( 'app' ).request( 'get:stagedFieldsEl' );
+			jQuery( stagedFieldsEl ).removeClass( 'nf-droppable-active' );
 		}
 
 	});
