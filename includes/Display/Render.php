@@ -156,9 +156,9 @@ final class NF_Display_Render
 
         ?>
         <script>
-            var post_max_size = '<?php echo self::string_to_bytes( ini_get('post_max_size') ); ?>';
-            var upload_max_filesize = '<?php echo self::string_to_bytes( ini_get( 'upload_max_filesize' ) ); ?>';
-            var wp_memory_limit = '<?php echo self::string_to_bytes( WP_MEMORY_LIMIT ); ?>';
+            var post_max_size = '<?php echo WPN_Helper::string_to_bytes( ini_get('post_max_size') ); ?>';
+            var upload_max_filesize = '<?php echo WPN_Helper::string_to_bytes( ini_get( 'upload_max_filesize' ) ); ?>';
+            var wp_memory_limit = '<?php echo WPN_Helper::string_to_bytes( WP_MEMORY_LIMIT ); ?>';
         </script>
         <?php
 
@@ -182,18 +182,6 @@ final class NF_Display_Render
     protected static function is_template_loaded( $template_name )
     {
         return ( in_array( $template_name, self::$loaded_templates ) ) ? TRUE : FALSE ;
-    }
-
-    private static function string_to_bytes( $size ) {
-        $unit = preg_replace('/[^bkmgtpezy]/i', '', $size); // Remove the non-unit characters from the size.
-        $size = preg_replace('/[^0-9\.]/', '', $size); // Remove the non-numeric characters from the size.
-        if ($unit) {
-        // Find the position of the unit in the ordered string which is the power of magnitude to multiply a kilobyte by.
-        return round($size * pow(1024, stripos('bkmgtpezy', $unit[0])));
-        }
-        else {
-        return round($size);
-        }
     }
 
 } // End Class NF_Display_Render

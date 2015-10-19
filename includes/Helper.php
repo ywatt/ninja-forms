@@ -120,4 +120,28 @@ final class WPN_Helper
         return $value;
     }
 
+    /**
+     * String to Bytes
+     *
+     * Converts PHP settings from a string to bytes.
+     *
+     * @param $size
+     * @return float
+     */
+    public static function string_to_bytes( $size )
+    {
+        // Remove the non-unit characters from the size.
+        $unit = preg_replace('/[^bkmgtpezy]/i', '', $size);
+
+        // Remove the non-numeric characters from the size.
+        $size = preg_replace('/[^0-9\.]/', '', $size);
+
+        if ( $unit && is_array( $unit ) ) {
+            // Find the position of the unit in the ordered string which is the power of magnitude to multiply a kilobyte by.
+            $size *= pow( 1024, stripos( 'bkmgtpezy', $unit[0] ) );
+        }
+
+        return round($size);
+    }
+
 } // End Class WPN_Helper
