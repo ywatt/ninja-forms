@@ -15,6 +15,7 @@ final class NF_Display_Preview
 
         add_filter('the_title', array( $this, 'the_title' ) );
         add_filter('the_content', array( $this, 'the_content' ) );
+        add_filter('get_the_excerpt', array( $this, 'the_content' ) );
         add_filter('template_include', array( $this, 'template_include' ) );
     }
 
@@ -41,7 +42,7 @@ final class NF_Display_Preview
      */
     function template_include()
     {
-        return locate_template( array( 'single.php' ) );
+        return locate_template( array( 'page.php', 'single.php', 'index.php' ) );
     }
 
 } // END CLASS NF_Display_Preview
