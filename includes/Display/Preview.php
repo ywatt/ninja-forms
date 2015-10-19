@@ -34,7 +34,7 @@ final class NF_Display_Preview
      */
     function the_content()
     {
-        return "[nf_tmp_frontend id='{$this->_form_id}']";
+        return "[nf_tmp_preview id='{$this->_form_id}']";
     }
 
     /**

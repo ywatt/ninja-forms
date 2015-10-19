@@ -176,6 +176,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 require_once( self::$dir . 'includes/Display/Shortcodes/tmp-frontend.php' );
 
                 /*
+                 * Temporary Shortcode for working on the form sandbox preview.
+                 *
+                 * TODO: removed once building is complete
+                 */
+                require_once( self::$dir . 'includes/Display/Shortcodes/tmp-preview.php' );
+
+                /*
                  * Temporary Shortcode for working on the frontend JS display.
                  *
                  * TODO: remove once build is complete
@@ -272,11 +279,15 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
          *
          * @param $form_id
          */
-        public function display( $form_id )
+        public function display( $form_id, $preview = FALSE )
         {
             if( ! $form_id ) return;
 
-            NF_Display_Render::localize( $form_id );
+            if( ! $preview ) {
+                NF_Display_Render::localize($form_id);
+            } else {
+                NF_Display_Render::localize_preview($form_id);
+            }
         }
 
 
