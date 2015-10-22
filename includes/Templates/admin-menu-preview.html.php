@@ -4,14 +4,14 @@
 
 <script>
     var data = {
-        action: 'nf_preview_field',
+        action: 'nf_preview_update',
         security: '<?php echo wp_create_nonce( 'ninja_forms_ajax_nonce' ); ?>',
         form_id: 1,
         field: {
             "id" : 1,
             "settings": {
                 "type": 'textbox',
-                "label": 'Name2',
+                "label": 'Another Name',
                 "label_pos": 'inside',
                 "required": 1
             }
