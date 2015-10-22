@@ -12,6 +12,7 @@ define( [], function( ) {
 			jQuery( this.drawerEl )[0].style.setProperty( 'overflow', 'visible', 'important' );
 
 			this.draggableHelperClone = jQuery( ui.helper ).clone();
+			
 		},
 
 		stopDrag: function( context, ui ) {

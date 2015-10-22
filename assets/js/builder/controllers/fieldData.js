@@ -10,7 +10,8 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 					label: 'First Name',
 					label_pos: 'above',
 					default_value: '',
-					placeholder: ''
+					placeholder: '',
+					order: 1
 				},
 				{
 					id: 2,
@@ -18,7 +19,8 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 					label: 'Last Name',
 					label_pos: 'above',
 					default_value: '',
-					placeholder: ''
+					placeholder: '',
+					order: 2
 				},
 				{
 					id: 3,
@@ -26,28 +28,50 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 					label: 'Message',
 					label_pos: 'above',
 					default_value: '',
-					placeholder: ''
+					placeholder: '',
+					order: 3
 				},
 				{
 					id: 4,
 					type: 'submit',
 					label: 'Submit',
 					default_value: '',
-					placeholder: ''
+					placeholder: '',
+					order: 4
 				}
 				
 			] );
 
 			nfRadio.channel( 'data' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
 			nfRadio.channel( 'data' ).reply( 'add:fieldData', this.addFieldData, this );
+			nfRadio.channel( 'data' ).reply( 'sort:fields', this.sortFields, this );
 		},
 
 		getFieldCollection: function() {
 			return this.collection;
 		},
 
-		addFieldData: function( data ) {
-			this.collection.add( data );
+		addFieldData: function( data, silent ) {
+			silent = silent || false;
+			this.collection.add( data, { silent: silent } );
+		},
+
+		sortFields: function() {
+			var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
+			var order = jQuery( sortableEl ).sortable( 'toArray' );
+
+			_.each( this.collection.models, function( field ) {
+				var id = field.get( 'id' );
+				if ( jQuery.isNumeric( id ) ) {
+					var search = 'field-' + id;
+				} else {
+					var search = id;
+				}
+				var pos = order.indexOf( search );
+				// console.log( 'field ' + id + ' - order ' + pos );
+				field.set( 'order', pos );
+			} );
+			this.collection.sort();
 		}
 	});
 

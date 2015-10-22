@@ -59,7 +59,7 @@
 </script>
 
 <script id="nf-tmpl-main-content-field" type="text/template">
-    <div id="field-<%= id %>" class="nf-field-wrap"> <%= label %>
+    <div id="<%= getFieldID() %>" class="nf-field-wrap"> <%= label %>
         <ul class="nf-item-controls">
             <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
             <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
@@ -149,7 +149,7 @@
 
 <script id="nf-tmpl-drawer-content-add-field" type="text/template">
     <section id="nf-drawer-staging" class="nf-settings nf-stage">
-        <div class="nf-reservoir"></div>
+        <div class="nf-reservoir nf-drawer-staged-fields nf-field-type-droppable"></div>
     </section>
     <span id="nf-drawer-primary"></span>
     <span id="nf-drawer-secondary"></span>
@@ -324,7 +324,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-staged-field" type="text/template">
-     <span class="nf-item-dock" id="nf-staged-field-<%= slug %>"><%= nicename %><span class="dashicons dashicons-dismiss"></span>
+     <span class="nf-item-dock" id="<%= id %>" data-id="<%= slug %>"><%= nicename %><span class="dashicons dashicons-dismiss"></span>
 </script>
 
 <script id="nf-tmpl-drawer-field-type-section" type="text/template">
@@ -360,3 +360,15 @@
         <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editField"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
     </ul>
 </div>
+
+<script id="nf-tmpl-staged-fields-drag" type="text/template">
+    <div class="nf-staged-fields-drag">
+        <div id="drag-item-1" class="nf-field-wrap">4 Fields</div>
+        <div id="drag-item-2" class="nf-field-wrap">Test</div>
+        <div id="drag-item-3" class="nf-field-wrap">Test</div>
+    </div>
+</script>
+
+<script id="nf-tmpl-drawer-staged-fields-empty" type="text/template">
+    <span></span>
+</script>

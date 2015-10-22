@@ -198,8 +198,6 @@ All styles used within the drawer
 
 .nf-reservoir { background: #F8F8F9; border: 10px solid #F8F8F9; border-radius: 4px; margin: 30px 2% 20px; min-height: 52px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-reservoir::after { clear: both; content: ""; display: block; }
-.nf-reservoir .ui-sortable > span { background: #fff; border-radius: 4px; color: #999; display: inline-block; float: left; margin: 0 3px 3px 3px; padding: 5px 10px; position: relative; }
-.nf-reservoir .ui-sortable > span .dashicons { font-size: 14px; margin: 2px 0 -4px 5px; }
 
 .nf-item { background: #3B454D; border-radius: 4px; color: #A2A5A8; font-size: 14px; padding: 10px; text-align: center; }
 .nf-item.active { background: #1EA9EA; color: #fff; }
@@ -352,8 +350,22 @@ All styles used for displaying table content
   .nf-saved .nf-item::after { padding: 14px; } }
 @media only screen and (max-width: 600px) { #nf-builder { margin-top: 46px; } }
 
-
+/* new styles */
 .nf-fields-sortable { border: 4px solid #FFF; padding: 25px 15px 6px; }
 .nf-fields-sortable-placeholder { margin-top: -14px; margin-bottom: 6px; border: 4px solid #84CC1E }
+.nf-staged-fields-drag { position: relative; display: block; height: 80px;}
+.nf-staged-fields-drag:after { clear: both; content: ''; display: block; }
+.nf-staged-fields-drag .nf-field-wrap { position: absolute; width: 700px; }
+.nf-staged-fields-drag #drag-item-1 { bottom: 0px; left: 0px; z-index: 3; }
+.nf-staged-fields-drag #drag-item-2 { bottom: 5px; left: 5px; z-index: 2;  }
+.nf-staged-fields-drag #drag-item-3 { bottom: 10px; left: 10px; z-index: 1;  }
 
+.nf-item-dock { background: #fff; border-radius: 4px; color: #999; display: inline-block; float: left; margin: 0 4px 3px 3px; padding: 5px 10px; position: relative; }
+.nf-item-dock .dashicons { font-size: 14px; margin: 2px 0 -4px 5px; }
+
+.nf-staged-fields-sortable-placeholder { float: left; height: 28px; border-right: 3px solid #84CC1E; margin-right: -2px; margin-left: -2px; }
+/* removed styles 
+.nf-reservoir .ui-sortable > span { background: #fff; border-radius: 4px; color: #999; display: inline-block; float: left; margin: 0 3px 3px 3px; padding: 5px 10px; position: relative; }
+.nf-reservoir .ui-sortable > span .dashicons { font-size: 14px; margin: 2px 0 -4px 5px; }
+*/
 /*# sourceMappingURL=builder.css.map */

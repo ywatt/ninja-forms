@@ -1,4 +1,4 @@
-define( ['builder/views/drawerStaging', 'builder/models/stagingCollection', 'builder/views/drawerFieldTypeSectionCollection', 'builder/views/drawerHeader', 'builder/models/fieldTypeCollection'], function( drawerStagingView, StagingCollection, fieldTypeSectionCollectionView, drawerHeaderView, fieldTypeCollection ) {
+define( ['builder/views/drawerStagingCollection', 'builder/models/stagingCollection', 'builder/views/drawerFieldTypeSectionCollection', 'builder/views/drawerHeader', 'builder/models/fieldTypeCollection'], function( drawerStagingView, StagingCollection, fieldTypeSectionCollectionView, drawerHeaderView, fieldTypeCollection ) {
 
 	var view = Marionette.LayoutView.extend( {
 		template: '#nf-tmpl-drawer-content-add-field',
@@ -22,7 +22,7 @@ define( ['builder/views/drawerStaging', 'builder/models/stagingCollection', 'bui
 		},
 
 		onShow: function() {
-			var stagingCollection = nfRadio.channel( 'drawer' ).request( 'get:stagedFields' );
+			var stagingCollection = nfRadio.channel( 'data' ).request( 'get:stagedFields' );
 			this.staging.show( new drawerStagingView( { collection: stagingCollection } ) );
 
 			this.primary.show( new fieldTypeSectionCollectionView( { collection: this.primaryCollection } ) );
