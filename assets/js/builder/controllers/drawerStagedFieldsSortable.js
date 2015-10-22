@@ -55,7 +55,7 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 		startStagedFields: function( ui ) {
 			jQuery( ui.item ).show();
 			jQuery( ui.item ).css( { 'display': 'inline', 'opacity': '0.7' } );
-			jQuery( ui.helper ).css( 'opacity', '0.95' );
+			jQuery( ui.helper ).css( 'opacity', '0.5' );
 		},
 
 		stopStagedFields: function( ui ) {

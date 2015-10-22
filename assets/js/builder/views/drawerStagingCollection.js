@@ -46,8 +46,7 @@ define( ['builder/views/drawerStagedField', 'builder/views/drawerStagedFieldsEmp
 				}
 			} );
 
-
-			jQuery( this.el ).parent().parent().draggable( {
+			jQuery( this.el ).parent().draggable( {
 				helper: 'clone',
 				opacity: 0.9,
 				connectToSortable: '.nf-fields-sortable',

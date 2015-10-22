@@ -4,41 +4,41 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 
 			this.collection = new fieldCollection( [
 				
-				{
-					id: 1,
-					type: 'first_name',
-					label: 'First Name',
-					label_pos: 'above',
-					default_value: '',
-					placeholder: '',
-					order: 1
-				},
-				{
-					id: 2,
-					type: 'last_name',
-					label: 'Last Name',
-					label_pos: 'above',
-					default_value: '',
-					placeholder: '',
-					order: 2
-				},
-				{
-					id: 3,
-					type: 'textarea',
-					label: 'Message',
-					label_pos: 'above',
-					default_value: '',
-					placeholder: '',
-					order: 3
-				},
-				{
-					id: 4,
-					type: 'submit',
-					label: 'Submit',
-					default_value: '',
-					placeholder: '',
-					order: 4
-				}
+				// {
+				// 	id: 1,
+				// 	type: 'first_name',
+				// 	label: 'First Name',
+				// 	label_pos: 'above',
+				// 	default_value: '',
+				// 	placeholder: '',
+				// 	order: 1
+				// },
+				// {
+				// 	id: 2,
+				// 	type: 'last_name',
+				// 	label: 'Last Name',
+				// 	label_pos: 'above',
+				// 	default_value: '',
+				// 	placeholder: '',
+				// 	order: 2
+				// },
+				// {
+				// 	id: 3,
+				// 	type: 'textarea',
+				// 	label: 'Message',
+				// 	label_pos: 'above',
+				// 	default_value: '',
+				// 	placeholder: '',
+				// 	order: 3
+				// },
+				// {
+				// 	id: 4,
+				// 	type: 'submit',
+				// 	label: 'Submit',
+				// 	default_value: '',
+				// 	placeholder: '',
+				// 	order: 4
+				// }
 				
 			] );
 
@@ -56,22 +56,23 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 			this.collection.add( data, { silent: silent } );
 		},
 
-		sortFields: function() {
+		sortFields: function( order ) {
 			var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
-			var order = jQuery( sortableEl ).sortable( 'toArray' );
+			if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
+				var order = order || jQuery( sortableEl ).sortable( 'toArray' );
 
-			_.each( this.collection.models, function( field ) {
-				var id = field.get( 'id' );
-				if ( jQuery.isNumeric( id ) ) {
-					var search = 'field-' + id;
-				} else {
-					var search = id;
-				}
-				var pos = order.indexOf( search );
-				// console.log( 'field ' + id + ' - order ' + pos );
-				field.set( 'order', pos );
-			} );
-			this.collection.sort();
+				_.each( this.collection.models, function( field ) {
+					var id = field.get( 'id' );
+					if ( jQuery.isNumeric( id ) ) {
+						var search = 'field-' + id;
+					} else {
+						var search = id;
+					}
+					var pos = order.indexOf( search );
+					field.set( 'order', pos );
+				} );
+				this.collection.sort();				
+			}
 		}
 	});
 

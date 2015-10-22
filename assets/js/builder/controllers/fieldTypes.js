@@ -6,7 +6,7 @@ define( ['builder/models/fieldTypeCollection'], function( fieldTypeCollection ) 
 				{ id: 'textbox', nicename: 'Textbox', alias: [ 'input' ] },
 				{ id: 'radio', nicename: 'Radio Buttons', alias: ['input', 'list']  },
 				{ id: 'dropdown', nicename: 'Dropdown', alias: [ 'select' ] },
-				{ id: 'textarea', nicename: 'Textarea' },
+				{ id: 'textarea', nicename: 'Textarea', alias: [ 'message' ] },
 				{ id: 'submit', nicename: 'Submit', alias: ['button'] },
 				{ id: 'firstname', nicename: 'First Name', tags: ['contact'] },
 				{ id: 'lastname', nicename: 'Last Name', tags: ['contact'] },

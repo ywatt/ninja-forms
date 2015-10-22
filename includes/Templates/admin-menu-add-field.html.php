@@ -363,9 +363,9 @@
 
 <script id="nf-tmpl-staged-fields-drag" type="text/template">
     <div class="nf-staged-fields-drag">
-        <div id="drag-item-1" class="nf-field-wrap">4 Fields</div>
-        <div id="drag-item-2" class="nf-field-wrap">Test</div>
-        <div id="drag-item-3" class="nf-field-wrap">Test</div>
+        <div id="drag-item-1" class="nf-field-wrap"><%= num %> Fields</div>
+        <div id="drag-item-2" class="nf-field-wrap">&nbsp;</div>
+        <div id="drag-item-3" class="nf-field-wrap">&nbsp;</div>
     </div>
 </script>
 

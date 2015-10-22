@@ -8,8 +8,10 @@ define( [], function( ) {
 		startDrag: function( context, ui ) {
 			this.drawerEl = nfRadio.channel( 'app' ).request( 'get:drawerEl' );
 			jQuery( this.drawerEl )[0].style.setProperty( 'overflow', 'visible', 'important' );
-			var html = _.template( jQuery( '#nf-tmpl-staged-fields-drag' ).html() );
+			var stagedFields = nfRadio.channel( 'data' ).request( 'get:stagedFields' );
+			var html = _.template( jQuery( '#nf-tmpl-staged-fields-drag' ).html(), { num: stagedFields.models.length } );
 			jQuery( ui.helper ).html( html );
+			jQuery( ui.helper ).prop( 'id', 'nf-staged-fields-drag' );
 			jQuery( ui.item ).css( 'opacity', '0.7' );
 		},
 

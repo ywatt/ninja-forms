@@ -8,6 +8,7 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 			nfRadio.channel( 'data' ).reply( 'add:stagedField', this.addStagedField, this );
 			nfRadio.channel( 'data' ).reply( 'remove:stagedField', this.removeStagedField, this );
 			nfRadio.channel( 'data' ).reply( 'sort:stagedFields', this.sortStagedFields, this );
+			nfRadio.channel( 'data' ).reply( 'clear:stagedFields', this.clearStagedFields, this );
 			
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:removeStagedField', this.removeStagedField );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'before:closeDrawer', this.beforeCloseDrawer );
@@ -55,6 +56,10 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 				field.set( 'order', pos );
 			} );
 			this.collection.sort();
+		},
+
+		clearStagedFields: function() {
+			this.collection.reset();
 		}
 
 	});

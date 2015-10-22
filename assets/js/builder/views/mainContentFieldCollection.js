@@ -10,45 +10,43 @@ define( ['builder/views/mainContentField', 'builder/views/mainContentFieldsEmpty
 		},
 
 		onRender: function() {
-			// jQuery( this.el ).hide();
-		},
+			if ( this.collection.models.length > 0 ) {
+				jQuery( this.el ).addClass( 'nf-field-type-droppable' ).addClass( 'nf-fields-sortable' );
+				var that = this;
+				jQuery( this.el ).sortable( {
+					containment: '#nf-main',
+					helper: 'clone',
+					cancel: '.nf-item-controls',
+					placeholder: 'nf-fields-sortable-placeholder',
+					opacity: 0.95,
+					tolerance: 'pointer',
+					// items: '.nf-field-wrap',
 
-		onShow: function() {
-			// jQuery( this.el ).fadeIn();
-			jQuery( this.el ).addClass( 'nf-field-type-droppable' ).addClass( 'nf-fields-sortable' );
-			var that = this;
-			jQuery( this.el ).sortable( {
-				containment: '#nf-main',
-				helper: 'clone',
-				cancel: '.nf-item-controls',
-				placeholder: 'nf-fields-sortable-placeholder',
-				opacity: 0.95,
-				tolerance: 'pointer',
+					receive: function( e, ui ) {
+						nfRadio.channel( 'app' ).request( 'receive:fieldsSortable', ui );
+					},
 
-				receive: function( e, ui ) {
-					nfRadio.channel( 'app' ).request( 'receive:fieldsSortable', ui );
-				},
+					over: function( e, ui ) {
+						nfRadio.channel( 'app' ).request( 'over:fieldsSortable', ui );
+					},
 
-				over: function( e, ui ) {
-					nfRadio.channel( 'app' ).request( 'over:fieldsSortable', ui );
-				},
+					out: function( e, ui ) {
+						nfRadio.channel( 'app' ).request( 'out:fieldsSortable', ui );
+					},
 
-				out: function( e, ui ) {
-					nfRadio.channel( 'app' ).request( 'out:fieldsSortable', ui );
-				},
+					start: function( e, ui ) {
+						nfRadio.channel( 'app' ).request( 'start:fieldsSortable', ui );
+					},
 
-				start: function( e, ui ) {
-					nfRadio.channel( 'app' ).request( 'start:fieldsSortable', ui );
-				},
+					update: function( e, ui ) {
+						nfRadio.channel( 'app' ).request( 'update:fieldsSortable', ui );
+					},
 
-				update: function( e, ui ) {
-					nfRadio.channel( 'app' ).request( 'update:fieldsSortable', ui );
-				},
-
-				stop: function( e, ui ) {
-					nfRadio.channel( 'app' ).request( 'stop:fieldsSortable', ui );
-				}
-			} );
+					stop: function( e, ui ) {
+						nfRadio.channel( 'app' ).request( 'stop:fieldsSortable', ui );
+					}
+				} );				
+			}
 		},
 
 		getFieldsSortableEl: function() {
