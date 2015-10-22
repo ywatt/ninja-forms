@@ -169,31 +169,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->preview = new NF_Display_Preview();
 
                 /*
-                 * Temporary Shortcode for working on the frontend JS display.
+                 * Temporary Shortcodes
                  *
                  * TODO: removed once building is complete
                  */
                 require_once( self::$dir . 'includes/Display/Shortcodes/tmp-frontend.php' );
-
-                /*
-                 * Temporary Shortcode for working on the form sandbox preview.
-                 *
-                 * TODO: removed once building is complete
-                 */
                 require_once( self::$dir . 'includes/Display/Shortcodes/tmp-preview.php' );
-
-                /*
-                 * Temporary Shortcode for working on the frontend JS display.
-                 *
-                 * TODO: remove once build is complete
-                 */
                 require_once( self::$dir . 'includes/Display/Shortcodes/tmp-frontendform.php' );
-
-                /*
-                 * Temporary Shortcode for working on the Async Upload Controller.
-                 *
-                 * TODO: remove once build is complete
-                 */
                 require_once( self::$dir . 'includes/Display/Shortcodes/tmp-file-upload.php' );
 
                 /*
