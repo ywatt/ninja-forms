@@ -15,6 +15,11 @@ define( [], function() {
 			this.dragging = false;
 			var that = this;
 			jQuery( this.el ).find( 'div.nf-one-third' ).draggable( {
+				opacity: 0.9,
+				tolerance: 'pointer',
+				scroll: false,
+				connectToSortable: '.nf-field-type-droppable',
+
 				helper: function( e ) {
 					var width = jQuery( e.target ).parent().width();
 					var height = jQuery( e.target ).parent().height();
@@ -25,21 +30,16 @@ define( [], function() {
 
 					return element;
 				},
-				opacity: 0.9,
-				tolerance: 'pointer',
-				
+
 				start: function( e, ui ) {
 					that.dragging = true;
-					jQuery( '.nf-reservoir' ).click();
 					nfRadio.channel( 'drawer' ).trigger( 'startDrag:fieldType', this, ui );
 				},
 
 				stop: function( e, ui ) {
 					that.dragging = false;
 					nfRadio.channel( 'drawer' ).trigger( 'stopDrag:fieldType', this, ui );
-				},
-
-				connectToSortable: '.nf-field-type-droppable'
+				}
 
 			} ).disableSelection();
 
