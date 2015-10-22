@@ -27,7 +27,7 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
         		nfRadio.channel( 'drawer' ).trigger( 'filter:fieldTypes', filteredSectionCollection );
         		if ( e.addField ) {
         			if ( 0 < filtered.length ) {
-        				nfRadio.channel( 'drawer' ).request( 'add:stagedField', filtered[0] );
+        				nfRadio.channel( 'data' ).request( 'add:stagedField', filtered[0] );
         				nfRadio.channel( 'drawer' ).request( 'clear:filter' );
         			}
         		}

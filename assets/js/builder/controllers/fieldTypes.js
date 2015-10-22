@@ -35,7 +35,7 @@ define( ['builder/models/fieldTypeCollection'], function( fieldTypeCollection ) 
 
         addStagedField: function( el ) {
         	var type = jQuery( el.target ).data( 'id' );
-        	nfRadio.channel( 'drawer' ).request( 'add:stagedField', type );
+        	nfRadio.channel( 'data' ).request( 'add:stagedField', type );
         }
 	});
 

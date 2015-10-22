@@ -15,20 +15,34 @@ define( [], function() {
 			this.dragging = false;
 			var that = this;
 			jQuery( this.el ).find( 'div.nf-one-third' ).draggable( {
-				helper: 'clone',
+				helper: function( e ) {
+					var width = jQuery( e.target ).parent().width();
+					var height = jQuery( e.target ).parent().height();
+					var element = jQuery( e.target ).parent().clone();
+					var left = width / 4;
+					var top = height / 2;
+					jQuery( this ).draggable( 'option', 'cursorAt', { top: top, left: left } );
+
+					return element;
+				},
 				opacity: 0.9,
-				start: function( event, ui ) {
+				tolerance: 'pointer',
+				
+				start: function( e, ui ) {
 					that.dragging = true;
+					jQuery( '.nf-reservoir' ).click();
 					nfRadio.channel( 'drawer' ).trigger( 'startDrag:fieldType', this, ui );
 				},
-				stop: function( event, ui ) {
+
+				stop: function( e, ui ) {
 					that.dragging = false;
 					nfRadio.channel( 'drawer' ).trigger( 'stopDrag:fieldType', this, ui );
 				},
-				connectToSortable: '.nf-fields-sortable'
+
+				connectToSortable: '.nf-field-type-droppable'
 
 			} ).disableSelection();
-			
+
 			jQuery( this.el ).find( '.nf-item' ).focus( function() {
 		    	jQuery( this ).addClass( 'active' );
 		    } ).blur( function() {

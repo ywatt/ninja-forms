@@ -5,13 +5,14 @@ define(
 		'builder/controllers/drawerFieldTypeDrag',
 		'builder/controllers/drawerStagingDrag',
 		'builder/controllers/drawerSavedFields',
-		'builder/controllers/drawerStagedFields',
+		'builder/controllers/drawerStagedFieldsData',
+		'builder/controllers/drawerStagedFieldsSortable',
 		'builder/controllers/drawer',
 		'builder/controllers/drawerData',
 		'builder/controllers/drawerFilterFieldTypes',
 		'builder/controllers/appDomain',
 		'builder/controllers/appData',
-		'builder/controllers/mainContentFields',
+		'builder/controllers/mainContentFieldsSortable',
 		'builder/controllers/fieldData'
 	],
 	function(
@@ -20,13 +21,14 @@ define(
 		FieldTypeDrag,
 		FieldStagingDrag,
 		SavedFields,
-		StagedFields,
+		StagedFieldsData,
+		StagedFieldsSortable,
 		Drawer,
 		DrawerData,
 		DrawerFilterFieldTypes,
 		AppDomain,
 		AppData,
-		MainContentFields,
+		MainContentFieldsSortable,
 		FieldData
 	) {
 		var controller = Marionette.Object.extend( {
@@ -37,13 +39,14 @@ define(
 				var fieldTypeDrag = new FieldTypeDrag();
 				var fieldStagingDrag = new FieldStagingDrag();
 				var savedFields = new SavedFields();
-				var stagedFields = new StagedFields();
+				var stagedFieldsData = new StagedFieldsData();
+				var stagedFieldsSortable = new StagedFieldsSortable();
 				var drawer = new Drawer();
 				var drawerData = new DrawerData();
 				var drawerFilterFieldTypes = new DrawerFilterFieldTypes();
 				var appDomain = new AppDomain();
 				var appData = new AppData();
-				var mainContentFields = new MainContentFields();
+				var mainContentFieldsSortable = new MainContentFieldsSortable();
 				var fieldData = new FieldData();
 			}
 		});

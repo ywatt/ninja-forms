@@ -1,6 +1,7 @@
 define( ['builder/models/fieldModel'], function( fieldModel ) {
 	var collection = Backbone.Collection.extend( {
-		model: fieldModel
+		model: fieldModel,
+		comparator: 'order'
 	} );
 	return collection;
 } );
