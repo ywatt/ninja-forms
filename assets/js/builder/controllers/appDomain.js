@@ -33,7 +33,9 @@ define( [
 					id: 'fields',
 					nicename: 'Form Fields',
 					hotkeys: {
-						'Ctrl+Shift+n': 'add:newField'
+						'Ctrl+Shift+n': 'add:newField',
+						'Ctrl+Shift+a': 'changeDomain:actions',
+						'Ctrl+Shift+s': 'changeDomain:settings'
 					},
 
 					getMainHeaderView: function() {
@@ -53,7 +55,9 @@ define( [
 					id: 'actions',
 					nicename: 'Emails & Actions',
 					hotkeys: {
-						'Ctrl+Shift+n': 'add:newAction'
+						'Ctrl+Shift+n': 'add:newAction',
+						'Ctrl+Shift+f': 'changeDomain:fields',
+						'Ctrl+Shift+s': 'changeDomain:settings'
 					},
 
 					getMainHeaderView: function() {
@@ -71,6 +75,10 @@ define( [
 				{
 					id: 'settings',
 					nicename: 'Settings',
+					hotkeys: {
+						'Ctrl+Shift+f': 'changeDomain:fields',
+						'Ctrl+Shift+a': 'changeDomain:actions'
+					},
 
 					getMainHeaderView: function() {
 						return new mainHeaderSettingsView();
@@ -94,6 +102,7 @@ define( [
 			] );
 
 			nfRadio.channel( 'app' ).reply( 'get:appDomainCollection', this.getAppDomainCollection, this );
+			nfRadio.channel( 'app' ).reply( 'change:appDomain', this.changeAppDomain, this );
 
 			this.listenTo( nfRadio.channel( 'app' ), 'click:appMenu', this.changeAppDomain );
 			this.listenTo( nfRadio.channel( 'app' ), 'click:changeDomain', this.maybeChangeDomain );
