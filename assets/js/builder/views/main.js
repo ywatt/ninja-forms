@@ -27,6 +27,8 @@ define( ['builder/views/mainHeader'], function( mainHeaderView ) {
 
 			var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
 			this.content.show( contentView );
+
+			nfRadio.channel( 'main' ).trigger( 'render:main' );
 		},
 
 		getMainEl: function() {

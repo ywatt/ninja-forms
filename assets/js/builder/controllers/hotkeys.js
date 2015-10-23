@@ -1,19 +1,20 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'app' ), 'change:appDomain', this.changeHotkeys );
+			this.listenTo( nfRadio.channel( 'main' ), 'render:main', this.changeHotkeys );
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'add:newField', this.addNewField );
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'add:newAction', this.addNewAction );
 		},
 
-		changeHotkeys: function( model ) {
-			if ( model.get( 'hotkeys' ) ) {
-				jQuery.each( model.get( 'hotkeys' ), function( hotkey, msg ) {
-					jQuery( document ).off( '.nfDomainHotkeys' );
+		changeHotkeys: function() {
+			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
+			jQuery( document ).off( '.nfDomainHotkeys' );
+			jQuery( 'input' ).off( '.nfDomainHotkeys' );
+			if ( currentDomain.get( 'hotkeys' ) ) {
+				jQuery.each( currentDomain.get( 'hotkeys' ), function( hotkey, msg ) {
 					jQuery( document ).on( 'keydown.nfDomainHotkeys', null, 'Ctrl+Shift+n', function( e ) {
 						nfRadio.channel( 'hotkeys' ).trigger( msg );
 					} );
-					jQuery( 'input' ).off( '.nfDomainHotkeys' );
 					jQuery( 'input' ).on( 'keydown.nfDomainHotkeys', null, 'Ctrl+Shift+n', function( e ) {
 						nfRadio.channel( 'hotkeys' ).trigger( msg );
 					} );
