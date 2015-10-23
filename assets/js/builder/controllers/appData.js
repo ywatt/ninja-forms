@@ -4,10 +4,9 @@ define( ['builder/models/appModel'], function( appModel ) {
 			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
 			appDomainCollection.get( 'fields' ).set( 'active', true );
 			this.model = new appModel( {
-				currentDrawer: false
+				currentDrawer: false,
+				currentDomain: appDomainCollection.get( 'fields' )
 			} );
-
-			this.updateDomain( appDomainCollection.get( 'fields') );
 
 			nfRadio.channel( 'app' ).reply( 'update:appDomain', this.updateDomain, this );
 			nfRadio.channel( 'app' ).reply( 'update:currentDrawer', this.updateCurrentDrawer, this );
