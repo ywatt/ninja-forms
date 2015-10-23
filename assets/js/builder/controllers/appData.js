@@ -18,7 +18,6 @@ define( ['builder/models/appModel'], function( appModel ) {
 
 		updateDomain: function( model ) {
 			this.model.set( 'currentDomain', model );
-			nfRadio.channel( 'app' ).trigger( 'change:domain', model );
 			return true;
 		},
 

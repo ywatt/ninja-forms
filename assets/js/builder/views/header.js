@@ -10,7 +10,7 @@ define( ['builder/views/appHeader', 'builder/views/appSubHeader'], function( app
 		},
 
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'app' ), 'change:domain', this.changeSubHeader );
+			this.listenTo( nfRadio.channel( 'app' ), 'change:appDomain', this.changeSubHeader );
 		},
 
 		onShow: function() {

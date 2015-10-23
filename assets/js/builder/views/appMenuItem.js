@@ -4,7 +4,7 @@ define( [], function() {
 		template: '#nf-tmpl-app-menu-item',
 
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'app' ), 'change:domain', this.render );
+			this.listenTo( nfRadio.channel( 'app' ), 'change:appDomain', this.render );
 		},
 
 		onRender: function() {

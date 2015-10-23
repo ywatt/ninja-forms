@@ -94,14 +94,9 @@ define( [
 			] );
 
 			nfRadio.channel( 'app' ).reply( 'get:appDomainCollection', this.getAppDomainCollection, this );
-			
-			nfRadio.channel( 'app' ).reply( 'change:domain', this.changeAppDomain, this );
+
 			this.listenTo( nfRadio.channel( 'app' ), 'click:appMenu', this.changeAppDomain );
 			this.listenTo( nfRadio.channel( 'app' ), 'click:changeDomain', this.maybeChangeDomain );
-		},
-
-		hotkeyListener: function( e ) {
-			console.log( 'add it!' );
 		},
 
 		getAppDomainCollection: function() {
