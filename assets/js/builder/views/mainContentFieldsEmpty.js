@@ -4,7 +4,7 @@ define( [], function() {
 		template: '#nf-tmpl-main-content-fields-empty',
 
 		onBeforeDestroy: function() {
-			jQuery( this.el ).droppable( 'destroy' );
+			jQuery( this.el ).parent().removeClass( 'nf-fields-empty-droppable' ).droppable( 'destroy' );
 		},
 
 		onRender: function() {
@@ -14,14 +14,15 @@ define( [], function() {
 		},
 
 		onShow: function() {
-			jQuery( this.el ).droppable( {
+			jQuery( this.el ).parent().addClass( 'nf-fields-empty-droppable' );
+			jQuery( this.el ).parent().droppable( {
 				accept: function( draggable ) {
 					if ( jQuery( draggable ).hasClass( 'nf-stage' ) || jQuery( draggable ).hasClass( 'nf-field-type-button' ) ) {
 						return true;
 					}
 				},
-				activeClass: 'nf-droppable-active',
 				hoverClass: 'nf-droppable-hover',
+				tolerance: 'pointer',
 				over: function( e, ui ) {
 					ui.item = ui.draggable;
 					nfRadio.channel( 'app' ).request( 'over:fieldsSortable', ui );

@@ -9,6 +9,7 @@ define( [], function() {
 			this.setElement( this.$el );
 
 			nfRadio.channel( 'drawer' ).reply( 'clear:filter', this.clearFilter, this );
+			nfRadio.channel( 'drawer' ).reply( 'blur:filter', this.blurFilter, this );
 			nfRadio.channel( 'drawer' ).reply( 'get:filterEl', this.getEl, this );
 		},
 
@@ -36,6 +37,10 @@ define( [], function() {
 				filterEl.trigger( 'input' );
 				filterEl.focus();			
 			}
+		},
+
+		blurFilter: function() {
+			jQuery( this.el ).find( '.nf-filter' ).blur();
 		},
 
 		closeDrawer: function() {

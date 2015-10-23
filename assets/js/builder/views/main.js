@@ -10,7 +10,7 @@ define( ['builder/views/mainHeader'], function( mainHeaderView ) {
 		},
 
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'app' ), 'change:domain', this.render );
+			this.listenTo( nfRadio.channel( 'app' ), 'change:appDomain', this.render );
 			nfRadio.channel( 'app' ).reply( 'get:mainEl', this.getMainEl, this );
 		},
 

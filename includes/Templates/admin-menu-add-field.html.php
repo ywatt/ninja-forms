@@ -343,9 +343,9 @@
 <script id="nf-tmpl-drawer-header" type="text/template">
     <header class="nf-drawer-header">
         <div class="nf-search">
-            <input type="search" class="nf-filter" value="" placeholder="Filter" />
+            <input type="search" class="nf-filter" value="" placeholder="Filter" tabindex="-1" />
         </div>
-        <a href="#" class="nf-button primary nf-close-drawer" tabindex="99">Done</a>
+        <a href="#" class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
     </header>
 </script>
 

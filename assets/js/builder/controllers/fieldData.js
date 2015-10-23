@@ -71,7 +71,7 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 					var pos = order.indexOf( search );
 					field.set( 'order', pos );
 				} );
-				this.collection.sort();				
+				this.collection.sort();			
 			}
 		}
 	});

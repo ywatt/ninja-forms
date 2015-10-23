@@ -5,6 +5,7 @@ define( [], function() {
 			classes: '',
 			active: false,
 			url: '',
+			hotkeys: false,
 			
 			renderDashicons: function() {
 				if ( this.dashicons ) {

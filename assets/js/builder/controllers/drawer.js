@@ -1,7 +1,7 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'app' ), 'click:openDrawer', this.openDrawer );
+			this.listenTo( nfRadio.channel( 'app' ), 'click:openDrawer', this.maybeOpenDrawer );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:closeDrawer', this.closeDrawer );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:toggleDrawerSize', this.toggleDrawerSize );
 
@@ -21,6 +21,7 @@ define( [], function() {
 			jQuery( drawerEl ).css( { 'right': rightClosed } );
 
 			nfRadio.channel( 'drawer' ).request( 'clear:filter' );
+			nfRadio.channel( 'drawer' ).request( 'blur:filter' );
 						
 			var that = this;
 
@@ -33,13 +34,17 @@ define( [], function() {
 			}, 150 );
 		},
 
-		openDrawer: function( e ) {
+		maybeOpenDrawer: function( e ) {
+			var drawerID = jQuery( e.target ).data( 'drawerid' );
+			this.openDrawer( drawerID );
+		},
+
+		openDrawer: function( drawerID ) {
 			/*
-			 * 1) Before we open the drawer, we need to get the drawer ID.
 			 * 2) Send out a message requesting the drawer content be loaded.
 			 * 3) Update our appData model with the current drawer.
 			 */
-			var drawerID = jQuery( e.target ).data( 'drawerid' );
+			
 			nfRadio.channel( 'drawer' ).request( 'load:drawerContent', drawerID );
 
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );

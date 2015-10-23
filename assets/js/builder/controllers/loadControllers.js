@@ -1,5 +1,6 @@
 define(
 	[
+		'builder/controllers/hotkeys',
 		'builder/controllers/fieldTypes',
 		'builder/controllers/fieldTypeSections',
 		'builder/controllers/drawerFieldTypeDrag',
@@ -16,6 +17,7 @@ define(
 		'builder/controllers/fieldData'
 	],
 	function(
+		Hotkeys,
 		FieldTypes,
 		FieldTypeSections,
 		FieldTypeDrag,
@@ -30,10 +32,11 @@ define(
 		AppData,
 		MainContentFieldsSortable,
 		FieldData
+		
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
-				
+				var hotkeys = new Hotkeys();
 				var fieldTypes = new FieldTypes();
 				var fieldTypeSections = new FieldTypeSections();
 				var fieldTypeDrag = new FieldTypeDrag();

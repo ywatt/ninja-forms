@@ -20,7 +20,6 @@ define( ['builder/views/mainContentField', 'builder/views/mainContentFieldsEmpty
 					placeholder: 'nf-fields-sortable-placeholder',
 					opacity: 0.95,
 					tolerance: 'pointer',
-					// items: '.nf-field-wrap',
 
 					receive: function( e, ui ) {
 						nfRadio.channel( 'app' ).request( 'receive:fieldsSortable', ui );
@@ -45,7 +44,7 @@ define( ['builder/views/mainContentField', 'builder/views/mainContentFieldsEmpty
 					stop: function( e, ui ) {
 						nfRadio.channel( 'app' ).request( 'stop:fieldsSortable', ui );
 					}
-				} );				
+				} );
 			}
 		},
 

@@ -39,10 +39,14 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 			var tmpNum = fieldCollection.models.length + 1;
 			var fields = [];
 			_.each( this.collection.models, function( model ) {
-				fields.push( { id: 'tmp-' + tmpNum, label: model.get( 'nicename' ), type: model.get( 'slug' ) } );
+				// fields.push( { id: 'tmp-' + tmpNum, label: model.get( 'nicename' ), type: model.get( 'slug' ) } );
+				var tmpField = { id: 'tmp-' + tmpNum, label: model.get( 'nicename' ), type: model.get( 'slug' ) };
+				nfRadio.channel( 'data' ).request( 'add:fieldData',  tmpField );
 				tmpNum++;
 			} );
-			nfRadio.channel( 'data' ).request( 'add:fieldData', fields );
+			nfRadio.channel( 'data' ).request( 'sort:fields' );
+			
+			fieldCollection.trigger( 'reset', fieldCollection );
 			this.collection.reset();
 		},
 

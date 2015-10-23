@@ -26,10 +26,15 @@ define( [
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 
+			var that = this;
+
 			this.collection = new appDomainCollection( [
 				{
 					id: 'fields',
 					nicename: 'Form Fields',
+					hotkeys: {
+						'Ctrl+Shift+n': 'add:newField'
+					},
 
 					getMainHeaderView: function() {
 						return new mainHeaderFieldsView();
@@ -47,6 +52,9 @@ define( [
 				{
 					id: 'actions',
 					nicename: 'Emails & Actions',
+					hotkeys: {
+						'Ctrl+Shift+n': 'add:newAction'
+					},
 
 					getMainHeaderView: function() {
 						return new mainHeaderActionsView();
@@ -90,6 +98,10 @@ define( [
 			nfRadio.channel( 'app' ).reply( 'change:domain', this.changeAppDomain, this );
 			this.listenTo( nfRadio.channel( 'app' ), 'click:appMenu', this.changeAppDomain );
 			this.listenTo( nfRadio.channel( 'app' ), 'click:changeDomain', this.maybeChangeDomain );
+		},
+
+		hotkeyListener: function( e ) {
+			console.log( 'add it!' );
 		},
 
 		getAppDomainCollection: function() {

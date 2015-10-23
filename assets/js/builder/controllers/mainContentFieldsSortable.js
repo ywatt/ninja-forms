@@ -15,12 +15,12 @@ define( [], function() {
 
 		addActiveClass: function() {
 			var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
-			if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
-				jQuery( sortableEl ).addClass( 'nf-droppable-active' );
-			}
+			jQuery( sortableEl ).addClass( 'nf-droppable-active' );
+			
 		},
 
 		removeActiveClass: function() {
+			console.log( 'remove active' );
 			var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
 			jQuery( sortableEl ).removeClass( 'nf-droppable-active' );
 		},
@@ -127,7 +127,9 @@ define( [], function() {
 				jQuery( this.currentHelper ).html( jQuery( helperClone ).html() );
 				jQuery( this.currentHelper ).removeClass( 'nf-field-wrap' ).addClass( 'nf-one-third' ).css( { 'width': '', 'height': '' } );
 				var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
-				jQuery( sortableEl ).removeClass( 'nf-droppable-hover' );
+				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
+					jQuery( sortableEl ).removeClass( 'nf-droppable-hover' );
+				}
 			} else if ( jQuery( ui.item ).hasClass( 'nf-stage' ) ) {
 
 			}
