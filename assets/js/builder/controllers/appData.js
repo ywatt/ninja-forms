@@ -2,7 +2,6 @@ define( ['builder/models/appModel'], function( appModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
-			appDomainCollection.get( 'fields' ).set( 'active', true );
 			this.model = new appModel( {
 				currentDrawer: false,
 				currentDomain: appDomainCollection.get( 'fields' )
