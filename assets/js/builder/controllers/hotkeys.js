@@ -13,7 +13,7 @@ define( [], function() {
 					jQuery( document ).on( 'keydown.nfDomainHotkeys', null, 'Ctrl+Shift+n', function( e ) {
 						nfRadio.channel( 'hotkeys' ).trigger( msg );
 					} );
-					console.log( 'add filter' );
+					jQuery( 'input' ).off( '.nfDomainHotkeys' );
 					jQuery( 'input' ).on( 'keydown.nfDomainHotkeys', null, 'Ctrl+Shift+n', function( e ) {
 						nfRadio.channel( 'hotkeys' ).trigger( msg );
 					} );

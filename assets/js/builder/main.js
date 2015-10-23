@@ -15,6 +15,12 @@ jQuery( document ).ready( function( $ ) {
 
 			onStart: function() {
 				var builderView = new BuilderView();
+
+				// Setup our default domain
+				var appDomains = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+				var defaultDomain = appDomains.get( 'fields' );
+				nfRadio.channel( 'app' ).trigger( 'click:appMenu', defaultDomain );
+				
 			}
 		} );
 	

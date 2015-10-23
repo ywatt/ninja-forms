@@ -20,7 +20,6 @@ define( [], function() {
 		},
 
 		removeActiveClass: function() {
-			console.log( 'remove active' );
 			var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
 			jQuery( sortableEl ).removeClass( 'nf-droppable-active' );
 		},
