@@ -4,41 +4,41 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 
 			this.collection = new fieldCollection( [
 				
-				// {
-				// 	id: 1,
-				// 	type: 'first_name',
-				// 	label: 'First Name',
-				// 	label_pos: 'above',
-				// 	default_value: '',
-				// 	placeholder: '',
-				// 	order: 1
-				// },
-				// {
-				// 	id: 2,
-				// 	type: 'last_name',
-				// 	label: 'Last Name',
-				// 	label_pos: 'above',
-				// 	default_value: '',
-				// 	placeholder: '',
-				// 	order: 2
-				// },
-				// {
-				// 	id: 3,
-				// 	type: 'textarea',
-				// 	label: 'Message',
-				// 	label_pos: 'above',
-				// 	default_value: '',
-				// 	placeholder: '',
-				// 	order: 3
-				// },
-				// {
-				// 	id: 4,
-				// 	type: 'submit',
-				// 	label: 'Submit',
-				// 	default_value: '',
-				// 	placeholder: '',
-				// 	order: 4
-				// }
+				{
+					id: 1,
+					type: 'textbox',
+					label: 'First Name',
+					label_pos: 'above',
+					default_value: '',
+					placeholder: '',
+					order: 1
+				},
+				{
+					id: 2,
+					type: 'last_name',
+					label: 'Last Name',
+					label_pos: 'above',
+					default_value: '',
+					placeholder: '',
+					order: 2
+				},
+				{
+					id: 3,
+					type: 'textarea',
+					label: 'Message',
+					label_pos: 'above',
+					default_value: '',
+					placeholder: '',
+					order: 3
+				},
+				{
+					id: 4,
+					type: 'submit',
+					label: 'Submit',
+					default_value: '',
+					placeholder: '',
+					order: 4
+				}
 				
 			] );
 

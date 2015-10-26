@@ -13,6 +13,14 @@ define( [], function() {
 
 		onShow: function() {
 			// jQuery( this.el ).fadeIn( 'fast' );
+		},
+
+		events: {
+			'click .nf-edit-settings': 'openDrawer'
+		},
+
+		openDrawer: function( e ) {
+			nfRadio.channel( 'app' ).request( 'open:drawer', 'editField' );
 		}
 
 	});
