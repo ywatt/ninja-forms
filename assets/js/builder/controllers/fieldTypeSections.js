@@ -20,6 +20,8 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 						'firstname',
 						'lastname',
 						'email',
+						'city',
+						'state',
 						'zip'
 					]
 				},

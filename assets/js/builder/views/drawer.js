@@ -1,4 +1,4 @@
-define( ['builder/views/drawerHeader'], function( drawerHeaderView ) {
+define( ['builder/views/drawerHeader', 'builder/views/drawerContentEmpty'], function( drawerHeaderView, drawerEmptyView ) {
 
 	var view = Marionette.LayoutView.extend( {
 		template: '#nf-tmpl-drawer',
@@ -11,6 +11,7 @@ define( ['builder/views/drawerHeader'], function( drawerHeaderView ) {
 		initialize: function() {
 			nfRadio.channel( 'app' ).reply( 'get:drawerEl', this.getEl, this );
 			nfRadio.channel( 'drawer' ).reply( 'load:drawerContent', this.loadContent, this );
+			nfRadio.channel( 'drawer' ).reply( 'empty:drawerContent', this.emptyContent, this );
 		},
 
 		onShow: function() {
@@ -27,6 +28,10 @@ define( ['builder/views/drawerHeader'], function( drawerHeaderView ) {
 			var drawer = nfRadio.channel( 'app' ).request( 'get:drawer', drawerID );
 			var view = drawer.get( 'getView' ).call( drawer );
 			this.content.show( view );
+		},
+
+		emptyContent: function() {
+			this.content.show( new drawerEmptyView() );
 		},
 
 		getEl: function() {

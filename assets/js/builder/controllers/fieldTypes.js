@@ -12,6 +12,8 @@ define( ['builder/models/fieldTypeCollection'], function( fieldTypeCollection ) 
 				{ id: 'lastname', nicename: 'Last Name', tags: ['contact'] },
 				{ id: 'email', nicename: 'Email', alias: ['html5'], tags: ['contact'] },
 				{ id: 'address', nicename: 'Address', tags: ['contact'] },
+				{ id: 'city', nicename: 'City', tags: ['contact'] },
+				{ id: 'state', nicename: 'State', tags: ['contact'] },
 				{ id: 'zip', nicename: 'Zip Code', tags: ['contact'] },
 				{ id: 'phone', nicename: 'Phone', alias: ['telephone'], tags: ['contact'] },
 				{ id: 'calc', nicename: 'Display Calculation' },
