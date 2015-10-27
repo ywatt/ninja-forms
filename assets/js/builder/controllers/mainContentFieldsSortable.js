@@ -30,7 +30,7 @@ define( [], function() {
 		receiveFieldsSortable: function( ui ) {
 
 			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) {
-				var type = jQuery( ui.item ).find( '.nf-item' ).data( 'id' );
+				var type = jQuery( ui.item ).data( 'id' );
 				var tmpID = this.addField( type, true );
 				jQuery( ui.helper ).prop( 'id', tmpID );
 				nfRadio.channel( 'data' ).request( 'sort:fields' );
@@ -95,17 +95,15 @@ define( [], function() {
 
 		addField: function( type, silent ) {
 			silent = silent || false;
-			var fieldCollection = nfRadio.channel( 'data' ).request( 'get:fieldCollection' );
 			var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', type );
-			var tmpNum = fieldCollection.length + 1;
-			var tmpID = 'tmp-' + tmpNum;
-			nfRadio.channel( 'data' ).request( 'add:fieldData',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'slug' ) }, silent );
+			var tmpID = nfRadio.channel( 'data' ).request( 'get:tmpFieldID' );
+			nfRadio.channel( 'data' ).request( 'add:field',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'slug' ) }, silent );
 			return tmpID;
 		},
 
 		overfieldsSortable: function( ui ) {
 			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) {
-				var type = jQuery( ui.helper ).find( '.nf-item' ).data( 'id' );
+				var type = jQuery( ui.helper ).data( 'id' );
 				var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', type );
 				var label = fieldType.get( 'nicename' );
 				var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
@@ -116,10 +114,7 @@ define( [], function() {
 				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
 					jQuery( sortableEl ).addClass( 'nf-droppable-hover' );
 				}
-			} else if ( jQuery( ui.item ).hasClass( 'nf-stage' ) ) {
-
 			}
-
 		},
 
 		outFieldsSortable: function( ui ) {

@@ -16,11 +16,21 @@ define( [], function() {
 		},
 
 		events: {
-			'click .nf-edit-settings': 'openDrawer'
+			'click .nf-edit-settings': 'clickEditField',
+			'click .nf-delete': 'clickDeleteField',
+			'click .nf-duplicate': 'clickDuplicateField'
 		},
 
-		openDrawer: function( e ) {
-			nfRadio.channel( 'app' ).request( 'open:drawer', 'editField' );
+		clickEditField: function( e ) {
+			nfRadio.channel( 'fields' ).trigger( 'click:editField', e, this.model );
+		},
+
+		clickDeleteField: function( e ) {
+			nfRadio.channel( 'fields' ).trigger( 'click:deleteField', e, this.model );
+		},
+
+		clickDuplicateField: function( e ) {
+			nfRadio.channel( 'fields' ).trigger( 'click:duplicateField', e, this.model );
 		}
 
 	});

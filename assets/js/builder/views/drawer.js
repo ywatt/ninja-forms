@@ -24,9 +24,9 @@ define( ['builder/views/drawerHeader', 'builder/views/drawerContentEmpty'], func
 		    jQuery( this.el ).parent().disableSelection();
 		},
 
-		loadContent: function( drawerID ) {
+		loadContent: function( drawerID, data ) {
 			var drawer = nfRadio.channel( 'app' ).request( 'get:drawer', drawerID );
-			var view = drawer.get( 'getView' ).call( drawer );
+			var view = drawer.get( 'getView' ).call( drawer, data );
 			this.content.show( view );
 		},
 

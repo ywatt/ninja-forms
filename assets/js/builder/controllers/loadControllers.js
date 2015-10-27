@@ -14,7 +14,8 @@ define(
 		'builder/controllers/appDomain',
 		'builder/controllers/appData',
 		'builder/controllers/mainContentFieldsSortable',
-		'builder/controllers/fieldData'
+		'builder/controllers/fieldData',
+		'builder/controllers/fieldClick'
 	],
 	function(
 		Hotkeys,
@@ -31,8 +32,8 @@ define(
 		AppDomain,
 		AppData,
 		MainContentFieldsSortable,
-		FieldData
-		
+		FieldData,
+		FieldClick
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -51,6 +52,7 @@ define(
 				var appData = new AppData();
 				var mainContentFieldsSortable = new MainContentFieldsSortable();
 				var fieldData = new FieldData();
+				var fieldClick = new FieldClick();
 			}
 		});
 

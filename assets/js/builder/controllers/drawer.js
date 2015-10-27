@@ -40,13 +40,15 @@ define( [], function() {
 			this.openDrawer( drawerID );
 		},
 
-		openDrawer: function( drawerID ) {
+		openDrawer: function( drawerID, data ) {
 			/*
 			 * 2) Send out a message requesting the drawer content be loaded.
 			 * 3) Update our appData model with the current drawer.
 			 */
 			
-			nfRadio.channel( 'drawer' ).request( 'load:drawerContent', drawerID );
+			data = data || false;
+
+			nfRadio.channel( 'drawer' ).request( 'load:drawerContent', drawerID, data );
 
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
 			jQuery( builderEl ).addClass( 'nf-drawer-opened' ).removeClass( 'nf-drawer-closed' );
