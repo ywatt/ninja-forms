@@ -45,6 +45,10 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         add_filter( 'posts_clauses', array( $this, 'search' ), 20, 1 );
 
         add_filter( 'bulk_actions-edit-nf_sub', array( $this, 'remove_bulk_edit' ) );
+
+        add_action( 'admin_footer-edit.php', array( $this, 'bulk_admin_footer' ) );
+
+        add_action( 'load-edit.php', array( $this, 'export_listen' ) );
     }
 
     /**
@@ -212,6 +216,112 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
     public function remove_bulk_edit( $actions ) {
         unset( $actions['edit'] );
         return $actions;
+    }
+
+    public function bulk_admin_footer() {
+        global $post_type;
+
+        if ( ! is_admin() )
+            return false;
+
+        if( $post_type == 'nf_sub' && isset ( $_REQUEST['post_status'] ) && $_REQUEST['post_status'] == 'all' ) {
+            ?>
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    jQuery('<option>').val('export').text('<?php _e('Export')?>').appendTo("select[name='action']");
+                    jQuery('<option>').val('export').text('<?php _e('Export')?>').appendTo("select[name='action2']");
+                    <?php
+                    if ( ( isset ( $_POST['action'] ) && $_POST['action'] == 'export' ) || ( isset ( $_POST['action2'] ) && $_POST['action2'] == 'export' ) ) {
+                        ?>
+                    setInterval(function(){
+                        jQuery( "select[name='action'" ).val( '-1' );
+                        jQuery( "select[name='action2'" ).val( '-1' );
+                        jQuery( '#posts-filter' ).submit();
+                    },5000);
+                    <?php
+                }
+
+                if ( isset ( $_REQUEST['form_id'] ) && ! empty ( $_REQUEST['form_id'] ) ) {
+                    $redirect = urlencode( remove_query_arg( array( 'download_all', 'download_file' ) ) );
+                    $url = admin_url( 'admin.php?page=nf-processing&action=download_all_subs&form_id=' . absint( $_REQUEST['form_id'] ) . '&redirect=' . $redirect );
+                    $url = esc_url( $url );
+                    ?>
+                    var button = '<a href="<?php echo $url; ?>" class="button-secondary nf-download-all"><?php echo __( 'Download All Submissions', 'ninja-forms' ); ?></a>';
+                    jQuery( '#doaction2' ).after( button );
+                    <?php
+                }
+
+                if ( isset ( $_REQUEST['download_all'] ) && $_REQUEST['download_all'] != '' ) {
+                    $redirect = esc_url_raw( add_query_arg( array( 'download_file' => esc_html( $_REQUEST['download_all'] ) ) ) );
+                    $redirect = remove_query_arg( array( 'download_all' ), $redirect );
+                    ?>
+                    document.location.href = "<?php echo $redirect; ?>";
+                    <?php
+                }
+
+                ?>
+                });
+            </script>
+            <?php
+        }
+    }
+
+    public function export_listen()
+    {
+        // Bail if we aren't in the admin
+        if (!is_admin())
+            return false;
+
+        if (!isset ($_REQUEST['form_id']) || empty ($_REQUEST['form_id'])) {
+            return false;
+        }
+
+        if (isset ($_REQUEST['export_single']) && !empty($_REQUEST['export_single'])) {
+            Ninja_Forms()->sub(esc_html($_REQUEST['export_single']))->export();
+        }
+
+        if ((isset ($_REQUEST['action']) && $_REQUEST['action'] == 'export') || (isset ($_REQUEST['action2']) && $_REQUEST['action2'] == 'export')) {
+
+            $sub_ids = WPN_Helper::esc_html($_REQUEST['post']);
+
+            Ninja_Forms()->form( $_REQUEST['form_id'] )->export_subs( $sub_ids );
+        }
+
+        if (isset ($_REQUEST['download_file']) && !empty($_REQUEST['download_file'])) {
+
+            // Open our download all file
+            $filename = esc_html($_REQUEST['download_file']);
+
+            $upload_dir = wp_upload_dir();
+
+            $file_path = trailingslashit($upload_dir['path']) . $filename . '.csv';
+
+            if (file_exists($file_path)) {
+                $myfile = file_get_contents($file_path);
+            } else {
+                $redirect = esc_url_raw(remove_query_arg(array('download_file', 'download_all')));
+                wp_redirect($redirect);
+                die();
+            }
+
+            unlink($file_path);
+
+            $form_name = Ninja_Forms()->form(absint($_REQUEST['form_id']))->get_setting('title');
+            $form_name = sanitize_title($form_name);
+
+            $today = date('Y-m-d', current_time('timestamp'));
+
+            $filename = apply_filters('nf_download_all_filename', $form_name . '-all-subs-' . $today);
+
+            header('Content-type: application/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
+            header('Pragma: no-cache');
+            header('Expires: 0');
+
+            echo $myfile;
+
+            die();
+        }
     }
 
     /*

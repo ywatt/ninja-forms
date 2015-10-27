@@ -155,11 +155,14 @@ final class NF_Database_Models_Submission
     /**
      * Find Submissions
      *
+     * @param $form_id
      * @param array $where
      * @return array
      */
-    public function find( $where = array() )
+    public function find( $form_id, array $where = array() )
     {
+        $this->_form_id = $form_id;
+
         $args = array(
             'post_type' => 'nf_sub',
             'posts_per_page' => -1,
@@ -216,6 +219,95 @@ final class NF_Database_Models_Submission
         return $this->_save_field_values();
     }
 
+    public static function export( $form_id, array $sub_ids = array(), $return = FALSE )
+    {
+        //TODO: Set Date Format from Plugin Settings
+        $date_format = 'm/d/Y';
+
+
+        /*
+         * Labels
+         */
+
+        $field_labels = array(
+            '_seq_num' => '#',
+            '_date_submitted' => __( 'Date Submitted', 'ninja-forms' )
+        );
+
+        // Legacy Filter from 2.9.*
+        $field_labels = apply_filters( 'nf_subs_csv_label_array_before_fields', $field_labels, $sub_ids );
+
+        $fields = Ninja_Forms()->form( $form_id )->get_fields();
+
+        $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
+
+        foreach( $fields as $field ){
+
+            if( in_array( $field->get_setting( 'type' ), $hidden_field_types ) ) continue;
+
+            $field_labels[ $field->get_id() ] = $field->get_setting( 'label' );
+        }
+
+
+        /*
+         * Submissions
+         */
+
+        $value_array = array();
+
+        $subs = Ninja_Forms()->form( $form_id )->get_subs();
+
+        foreach( $subs as $sub ){
+
+            if( ! in_array( $sub->get_id(), $sub_ids ) ) continue;
+
+            $value[ '_seq_num' ] = $sub->get_seq_num();
+            $value[ '_date_submitted' ] = $sub->get_sub_date( $date_format );
+
+            foreach( $field_labels as $field_id => $label ){
+
+                if( ! is_int( $field_id ) ) continue;
+
+                $value[ $field_id ] = $sub->get_field_value( $field_id );
+            }
+
+            $value_array[] = $value;
+        }
+
+        $value_array = WPN_Helper::stripslashes( $value_array );
+
+        // Legacy Filter from 2.9.*
+        $value_array = apply_filters( 'nf_subs_csv_value_array', $value_array, $sub_ids );
+
+        $csv_array[ 0 ][] = $field_labels;
+        $csv_array[ 1 ][] = $value_array;
+
+        $today = date( $date_format, current_time( 'timestamp' ) );
+        $filename = apply_filters( 'nf_subs_csv_filename', 'nf_subs_' . $today );
+        $filename = $filename . ".csv";
+
+        if( $return ){
+            return WPN_Helper::str_putcsv( $csv_array,
+                apply_filters( 'nf_sub_csv_delimiter', ',' ),
+                apply_filters( 'nf_sub_csv_enclosure', '"' ),
+                apply_filters( 'nf_sub_csv_terminator', "\n" )
+            );
+        }else{
+            header( 'Content-type: application/csv');
+            header( 'Content-Disposition: attachment; filename="'.$filename .'"' );
+            header( 'Pragma: no-cache');
+            header( 'Expires: 0' );
+            echo apply_filters( 'nf_sub_csv_bom',"\xEF\xBB\xBF" ) ; // Byte Order Mark
+            echo WPN_Helper::str_putcsv( $csv_array,
+                apply_filters( 'nf_sub_csv_delimiter', ',' ),
+                apply_filters( 'nf_sub_csv_enclosure', '"' ),
+                apply_filters( 'nf_sub_csv_terminator', "\n" )
+            );
+
+            die();
+        }
+    }
+
     /*
      * PROTECTED METHODS
      */
@@ -235,7 +327,7 @@ final class NF_Database_Models_Submission
     }
 
     /**
-     * SAve Field Values
+     * Save Field Values
      *
      * @return $this|void
      */
@@ -265,15 +357,17 @@ final class NF_Database_Models_Submission
      * @param array $where
      * @return array
      */
-    protected function format_meta_query( $where = array() )
+    protected function format_meta_query( array $where = array() )
     {
         $return = array(
             '_form_id' => $this->_form_id
         );
 
-        foreach( $where as $key => $value ){
+        if( ! empty( $where ) ) {
+            foreach ($where as $key => $value) {
 
-            $return[] = ( is_array( $value ) ) ? $value : array( 'key' => $key, 'value' => $value );
+                $return[] = (is_array($value)) ? $value : array('key' => $key, 'value' => $value);
+            }
         }
 
         return $return;

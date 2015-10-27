@@ -266,6 +266,13 @@ class NF_Abstracts_ModelFactory
         return $this->_objects;
     }
 
+    public function export_subs( array $sub_ids = array(), $return = FALSE )
+    {
+        $form_id = $this->_object->get_id();
+
+        return NF_Database_Models_Submission::export( $form_id, $sub_ids, $return );
+    }
+
     /*
      * GENERIC
      */
