@@ -114,10 +114,7 @@ define( [], function() {
 				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
 					jQuery( sortableEl ).addClass( 'nf-droppable-hover' );
 				}
-			} else if ( jQuery( ui.item ).hasClass( 'nf-stage' ) ) {
-
 			}
-
 		},
 
 		outFieldsSortable: function( ui ) {

@@ -19,6 +19,8 @@ define( [], function() {
 			var newModel = model.clone();
 			var tmpID = nfRadio.channel( 'data' ).request( 'get:tmpFieldID' );
 			newModel.set( 'id', tmpID );
+			var newLabel = newModel.get( 'label' ) + ' Copy';
+			newModel.set( 'label', newLabel );
 			nfRadio.channel( 'data' ).request( 'add:field', newModel );
 		}
 
