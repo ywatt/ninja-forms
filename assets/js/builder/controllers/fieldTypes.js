@@ -1,4 +1,4 @@
-define( ['builder/models/fieldTypeCollection'], function( fieldTypeCollection ) {
+define( ['builder/models/fieldTypeCollection', 'builder/models/fieldTypeSettingCollection'], function( fieldTypeCollection, fieldTypeSettingCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 
@@ -10,7 +10,7 @@ define( ['builder/models/fieldTypeCollection'], function( fieldTypeCollection ) 
 					settingGroups: [
 						{
 							name: '',
-							settings: [
+							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'textbox',
 									name: 'label',
@@ -57,11 +57,11 @@ define( ['builder/models/fieldTypeCollection'], function( fieldTypeCollection ) 
 									label: 'Required Field',
 									width: 'one-half'
 								}
-							]
+							] )
 						},
 						{
 							name: 'Restriction Settings',
-							settings: [
+							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'dropdown',
 									name: 'mask',
@@ -110,19 +110,15 @@ define( ['builder/models/fieldTypeCollection'], function( fieldTypeCollection ) 
 								{
 									type: 'close-settings-fieldset'
 								}
-							]
+							] )
 						},
 						{
 							name: 'Advanced Settings',
-							settings: [
-
-							]
+							settings: new fieldTypeSettingCollection()
 						},
 						{
 							name: 'Conditional Settings',
-							settings: [
-
-							]
+							settings: new fieldTypeSettingCollection()
 						}
 					]
 				},

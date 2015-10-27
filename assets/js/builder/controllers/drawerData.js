@@ -20,36 +20,36 @@ define( [
 				{
 					id: 'addField',
 
-					getView: function() {
-						return new addFieldView();
+					getView: function( data ) {
+						return new addFieldView( data );
 					}
 				},
 				{
 					id: 'editField',
 
-					getView: function() {
-						return new editFieldView();
+					getView: function( data ) {
+						return new editFieldView( data );
 					}
 				},
 				{
 					id: 'editAction',
 
-					getView: function() {
-						return new editActionView();
+					getView: function( data ) {
+						return new editActionView( data );
 					}
 				},
 				{
 					id: 'addAction',
 
-					getView: function() {
-						return new addActionView();
+					getView: function( data ) {
+						return new addActionView( data );
 					}
 				},
 				{
 					id: 'editFormSettings',
 
-					getView: function() {
-						return new editFormSettingsView();
+					getView: function( data ) {
+						return new editFormSettingsView( data );
 					}
 				}
 			] );

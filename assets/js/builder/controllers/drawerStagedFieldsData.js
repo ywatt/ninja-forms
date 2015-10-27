@@ -36,13 +36,12 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 
 		beforeCloseDrawer: function() {
 			var fieldCollection = nfRadio.channel( 'data' ).request( 'get:fieldCollection' );
-			var tmpNum = fieldCollection.models.length + 1;
+
 			var fields = [];
 			_.each( this.collection.models, function( model ) {
-				// fields.push( { id: 'tmp-' + tmpNum, label: model.get( 'nicename' ), type: model.get( 'slug' ) } );
-				var tmpField = { id: 'tmp-' + tmpNum, label: model.get( 'nicename' ), type: model.get( 'slug' ) };
-				nfRadio.channel( 'data' ).request( 'add:fieldData',  tmpField );
-				tmpNum++;
+				var tmpID = nfRadio.channel( 'data' ).request( 'get:tmpFieldID' );
+				var tmpField = { id: tmpID, label: model.get( 'nicename' ), type: model.get( 'slug' ) };
+				nfRadio.channel( 'data' ).request( 'add:field',  tmpField );
 			} );
 			nfRadio.channel( 'data' ).request( 'sort:fields' );
 			

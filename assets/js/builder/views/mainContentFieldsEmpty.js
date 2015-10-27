@@ -14,6 +14,9 @@ define( [], function() {
 		},
 
 		onShow: function() {
+			if ( jQuery( this.el ).parent().hasClass( 'ui-sortable' ) ) {
+				jQuery( this.el ).parent().sortable( 'destroy' );
+			}
 			jQuery( this.el ).parent().addClass( 'nf-fields-empty-droppable' );
 			jQuery( this.el ).parent().droppable( {
 				accept: function( draggable ) {

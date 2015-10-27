@@ -4,47 +4,51 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 
 			this.collection = new fieldCollection( [
 				
-				{
-					id: 1,
-					type: 'textbox',
-					label: 'First Name',
-					label_pos: 'above',
-					default_value: '',
-					placeholder: '',
-					order: 1
-				},
-				{
-					id: 2,
-					type: 'last_name',
-					label: 'Last Name',
-					label_pos: 'above',
-					default_value: '',
-					placeholder: '',
-					order: 2
-				},
-				{
-					id: 3,
-					type: 'textarea',
-					label: 'Message',
-					label_pos: 'above',
-					default_value: '',
-					placeholder: '',
-					order: 3
-				},
-				{
-					id: 4,
-					type: 'submit',
-					label: 'Submit',
-					default_value: '',
-					placeholder: '',
-					order: 4
-				}
+				// {
+				// 	id: 1,
+				// 	type: 'textbox',
+				// 	label: 'First Name',
+				// 	label_pos: 'above',
+				// 	default_value: '',
+				// 	placeholder: '',
+				// 	order: 1
+				// },
+				// {
+				// 	id: 2,
+				// 	type: 'last_name',
+				// 	label: 'Last Name',
+				// 	label_pos: 'above',
+				// 	default_value: '',
+				// 	placeholder: '',
+				// 	order: 2
+				// },
+				// {
+				// 	id: 3,
+				// 	type: 'textarea',
+				// 	label: 'Message',
+				// 	label_pos: 'above',
+				// 	default_value: '',
+				// 	placeholder: '',
+				// 	order: 3
+				// },
+				// {
+				// 	id: 4,
+				// 	type: 'submit',
+				// 	label: 'Submit',
+				// 	default_value: '',
+				// 	placeholder: '',
+				// 	order: 4
+				// }
 				
 			] );
 
 			nfRadio.channel( 'data' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
-			nfRadio.channel( 'data' ).reply( 'add:fieldData', this.addFieldData, this );
+			nfRadio.channel( 'data' ).reply( 'add:field', this.addFieldData, this );
+			nfRadio.channel( 'data' ).reply( 'delete:field', this.deleteField, this );
 			nfRadio.channel( 'data' ).reply( 'sort:fields', this.sortFields, this );
+			nfRadio.channel( 'data' ).reply( 'get:tmpFieldID', this.getTmpFieldID, this );
+
+			this.listenTo( nfRadio.channel( 'fields' ), 'click:deleteField', this.clickDeleteField );
 		},
 
 		getFieldCollection: function() {
@@ -73,6 +77,15 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 				} );
 				this.collection.sort();			
 			}
+		},
+
+		deleteField: function( model ) {
+			this.collection.remove( model );
+		},
+
+		getTmpFieldID: function() {
+			var tmpNum = this.collection.models.length + 1;
+			return 'tmp-' + tmpNum;
 		}
 	});
 
