@@ -61,7 +61,7 @@ abstract class NF_Abstracts_Submenu
         }
 
         if( ! $this->menu_slug ) {
-            $this->menu_slug = strtolower( preg_replace( '/[^A-Za-z0-9-]+/', '-', $this->menu_title ) );
+            $this->menu_slug = 'nf-' . strtolower( preg_replace( '/[^A-Za-z0-9-]+/', '-', $this->menu_title ) );
         }
 
         $this->capability = add_filter( 'submenu_' . $this->menu_slug . '_capability', $this->capability );
