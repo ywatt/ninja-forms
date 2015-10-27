@@ -8,7 +8,27 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
     public function __construct()
     {
+        add_action( 'plugins_loaded', array( $this, 'import_form_listener' ) );
+        add_action( 'plugins_loaded', array( $this, 'export_form_listener' ) );
+
         parent::__construct();
+    }
+
+    public function import_form_listener()
+    {
+        if( isset( $_FILES[ 'nf_import_form' ] ) && $_FILES[ 'nf_import_form' ] ){
+
+            $import = file_get_contents( $_FILES[ 'nf_import_form' ][ 'tmp_name' ] );
+            Ninja_Forms()->form()->import_form( $import );
+        }
+    }
+
+    public function export_form_listener()
+    {
+        if( isset( $_REQUEST[ 'nf_export_form' ] ) && $_REQUEST[ 'nf_export_form' ] ){
+            $form_id = $_REQUEST[ 'nf_export_form' ];
+            Ninja_Forms()->form( $form_id )->export_form();
+        }
     }
 
     public function display()
@@ -19,7 +39,8 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
             )
         );
 
-        $active_tab = ( isset( $_GET[ 'tab' ] ) ) ? $_GET[ 'tab' ] : reset( array_keys( $tabs ) );
+        $tab_keys = array_keys( $tabs );
+        $active_tab = ( isset( $_GET[ 'tab' ] ) ) ? $_GET[ 'tab' ] : reset( $tab_keys );
 
         $this->add_meta_boxes();
 
@@ -50,7 +71,8 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
             'nf_import_export_forms_export',
             __( 'Export Forms', 'ninja-forms' ),
             function(){
-                Ninja_Forms::template( 'admin-metabox-import-export-forms-export.html.php' );
+                $forms = Ninja_Forms()->form()->get_forms();
+                Ninja_Forms::template( 'admin-metabox-import-export-forms-export.html.php', compact( 'forms' ) );
             },
             'nf_import_export_forms'
         );

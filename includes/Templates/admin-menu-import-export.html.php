@@ -1,7 +1,5 @@
 <div class="wrap">
 
-    <h2>Hello, Import/Export</h2>
-
     <h2 class="nav-tab-wrapper">
         <?php foreach( $tabs as $tab => $name ): ?>
             <?php if( $tab == $active_tab ): ?>
@@ -12,9 +10,9 @@
         <?php endforeach; ?>
     </h2>
 
-    <p></p>
-
-    <?php do_meta_boxes('nf_import_export_' . $active_tab, 'advanced', NULL ); ?>
+    <div id="poststuff">
+        <?php do_meta_boxes('nf_import_export_' . $active_tab, 'advanced', NULL ); ?>
+    </div>
 
     <script>
         jQuery(document).ready( function($) {

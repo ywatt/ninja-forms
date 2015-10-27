@@ -56,6 +56,19 @@ class NF_Abstracts_ModelFactory
         return $this->_object->find( NULL, $where );
     }
 
+    public function export_form( $return = FALSE )
+    {
+        $form_id = $this->_object->get_id();
+
+        return NF_Database_Models_Form::export( $form_id, $return );
+    }
+
+    public function import_form( $import )
+    {
+        $import = maybe_unserialize( $import );
+        NF_Database_Models_Form::import( $import );
+    }
+
     /*
      * FIELDS
      */

@@ -30,7 +30,7 @@ final class NF_Actions_SuccessMessage extends NF_Abstracts_Action
     */
     public function __construct()
     {
-
+        add_action( 'nf_before_import_form', array( $this, 'import_form_action_success_message' ), 11 );
     }
 
     /*
@@ -47,5 +47,20 @@ final class NF_Actions_SuccessMessage extends NF_Abstracts_Action
         $data['success_message'] = Ninja_Forms()->form( $form_id )->get_action( $action_id )->get_setting( 'message' );
 
         return $data;
+    }
+
+    public function import_form_action_success_message( $import )
+    {
+        if( ! isset( $import[ 'actions' ] ) ) return $import;
+
+        foreach( $import[ 'actions' ] as &$action ){
+
+            if( 'success_message' == $action[ 'type' ] ){
+
+                $action[ 'type' ] = 'successmessage';
+            }
+        }
+
+        return $import;
     }
 }

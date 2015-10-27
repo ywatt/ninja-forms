@@ -61,6 +61,8 @@ abstract class NF_Abstracts_Action
 
     public static function sort_actions( $a, $b )
     {
+        if( ! isset( Ninja_Forms()->actions[ $a->get_setting( 'type' ) ] ) ) return 1;
+
         $a->timing   = Ninja_Forms()->actions[ $a->get_setting( 'type' ) ]->get_timing();
         $a->priority = Ninja_Forms()->actions[ $a->get_setting( 'type' ) ]->get_priority();
 
