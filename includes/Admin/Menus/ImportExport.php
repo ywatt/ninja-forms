@@ -34,6 +34,9 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
     public function add_meta_boxes()
     {
+        /*
+         * Forms
+         */
         add_meta_box(
             'nf_import_export_forms_import',
             __( 'Import Forms', 'ninja-forms' ),
@@ -50,6 +53,27 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
                 Ninja_Forms::template( 'admin-metabox-import-export-forms-export.html.php' );
             },
             'nf_import_export_forms'
+        );
+
+        /*
+         * FAVORITE FIELDS
+         */
+        add_meta_box(
+            'nf_import_export_favorite_fields_import',
+            __( 'Import Favorite Fields', 'ninja-forms' ),
+            function(){
+                Ninja_Forms::template( 'admin-metabox-import-export-favorite-fields-import.html.php' );
+            },
+            'nf_import_export_favorite_fields'
+        );
+
+        add_meta_box(
+            'nf_import_export_favorite_fields_export',
+            __( 'Export Facvorite Fields', 'ninja-forms' ),
+            function(){
+                Ninja_Forms::template( 'admin-metabox-import-export-favorite-fields-export.html.php' );
+            },
+            'nf_import_export_favorite_fields'
         );
     }
 }
