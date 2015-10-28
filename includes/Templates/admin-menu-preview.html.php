@@ -30,6 +30,7 @@
                 "settings": {
                     "type": 'successmessage',
                     "message": 'This is another test success message',
+                    "active": 1
                 }
             }
         },
@@ -38,11 +39,16 @@
     jQuery.post( ajaxurl, preview_field, function(response){
 
         console.log( JSON.parse( response ) );
+    });
 
+    setTimeout(function(){
         jQuery.post( ajaxurl, preview_action, function(response){
 
             console.log( JSON.parse( response ) );
 
         });
-    });
+    }, 3000);
+
+
+
 </script>
