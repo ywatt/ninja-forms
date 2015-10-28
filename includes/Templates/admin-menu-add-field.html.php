@@ -373,25 +373,39 @@
 
 <script id="nf-tmpl-edit-field-setting-list-repeater" type="text/template">
     <fieldset class="nf-list-options">
-        <legend>Options <a href="#" class="nf-add-new">Add New</a></legend>
+        <legend><%= label %></legend>
         <table>
-            <tr>
-                <td>
-                    <span class="dashicons dashicons-menu"></span>
-                </td>
-                <td style="width: 30%">
-                    <input type="text" value="" placeholder="Label">
-                </td>
-                <td style="width: 30%">
-                    <input type="text" value="" placeholder="Value">
-                </td>
-                <td>
-                    <input type="text" value="" placeholder="Calc Value">
-                </td>
-                <td>
-                    <span class="dashicons dashicons-dismiss"></span>
-                </td>
-            </tr>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Label</th>
+                    <th>Value</th>
+                    <th>Calc Value</th>
+                    <th></th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="dashicons dashicons-menu"></span>
+                    </td>
+                    <td style="width: 30%">
+                        <input type="text" value="">
+                    </td>
+                    <td style="width: 30%">
+                        <input type="text" value="">
+                    </td>
+                    <td>
+                        <input type="text" value="">
+                    </td>
+                    <td>
+                        <span class="dashicons dashicons-dismiss"></span>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </fieldset>
+</script>
+
+<script id="nf-tmpl-edit-field-setting-list-option" type="text/template">
+
 </script>

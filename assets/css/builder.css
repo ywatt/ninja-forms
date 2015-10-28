@@ -179,7 +179,14 @@ All styles used within the drawer
 .ninja-forms-app fieldset { border: 1px solid #ccc; clear: both; display: block; }
 .ninja-forms-app legend { margin: 0 3px; padding: 0 10px; }
 .ninja-forms-app label, .ninja-forms-app legend { color: #424242; font-size: 13px; text-transform: uppercase; }
-.ninja-forms-app input[type=text] { background: #f9f9f9; border: 0; margin-top: 5px; padding: 12px 15px; width: 100%; }
+.ninja-forms-app input[type=text], .ninja-forms-app textarea { background: #f9f9f9; border: 0; margin-top: 5px; padding: 12px 15px; width: 100%; }
+.ninja-forms-app textarea { height: 200px; }
+
+.ninja-forms-app .nf-list-options .nf-add-new { margin-left: 20px; }
+.ninja-forms-app .nf-list-options table td { padding: 15px 5px; }
+.ninja-forms-app .nf-list-options table td:nth-child(1), .ninja-forms-app .nf-list-options table td:nth-child(5) { padding: 15px; width: 20px; }
+.ninja-forms-app .nf-list-options table td:nth-child(2), .ninja-forms-app .nf-list-options table td:nth-child(3) { width: 45%; }
+.ninja-forms-app .nf-list-options table td:nth-child(4) { min-width: 120px; }
 
 .nf-drawer-buttons { display: none; margin: 40px -20px -20px; padding: 0; }
 .nf-drawer-buttons li { background: #fff; border-right: 1px solid #f1f1f1; float: left; margin: 0; padding: 15px; text-align: center; width: 50%; }
@@ -318,15 +325,15 @@ All styles used for displaying table content
 
 @media only screen and (max-width: 1255px) { .nf-cancel { display: none; }
   #nf-app-sub-header h2 { padding-left: 80px; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; }
-  .nf-add-new { padding-left: 32px; text-indent: -500px; width: 60px; height: 60px; top: 70px; left: 43px; -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; }
-  .nf-add-new:after { font-size: 40px; padding: 16px; line-height: 21px; width: 24px; height: 24px; text-indent: 0px; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; } }
+  .nf-add-new.nf-open-drawer { padding-left: 32px; text-indent: -500px; width: 60px; height: 60px; top: 70px; left: 43px; -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; }
+  .nf-add-new.nf-open-drawer:after { font-size: 40px; padding: 16px; line-height: 21px; width: 24px; height: 24px; text-indent: 0px; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; } }
 @media only screen and (max-width: 1132px) { #nf-header .preview { content: "Preview"; }
   .nf-cancel { display: none; } }
 @media only screen and (max-width: 1030px) { #nf-header ul { display: none; }
   #nf-header .nf-button.primary { display: none; }
   .nf-mobile { display: inline-block; }
   #nf-app-sub-header h2 { padding-left: 0; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; }
-  .nf-add-new { position: fixed; top: auto; left: auto; bottom: 20px; right: 20px; -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease; transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease; }
+  .nf-add-new.nf-open-drawer { position: fixed; top: auto; left: auto; bottom: 20px; right: 20px; -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease; transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease; }
   #nf-main-header .nf-button { display: none; }
   .nf-item-controls li { margin: -4px 15px 0; }
   .nf-item-controls li a { width: 30px; height: 30px; }

@@ -10,8 +10,10 @@ define( ['builder/views/drawerFieldTypeSetting', 'builder/views/drawerFieldTypeS
 		getChildView: function( model ) {
 			if ( model.get( 'settings' ) ) {
 				return fieldTypeSettingCompositeView;
+			} else if ( model.get( 'childView' ) ) {
+				return model.get( 'childView' );
 			} else {
-				return fieldTypeSettingView
+				return fieldTypeSettingView;
 			}
 		}
 

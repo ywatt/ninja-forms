@@ -1,11 +1,15 @@
 define( [
 	'builder/models/fieldTypeCollection',
 	'builder/models/fieldTypeSettingCollection',
-	'builder/models/fieldTypeSettingGroupCollection'
+	'builder/models/fieldTypeSettingGroupCollection',
+	'builder/models/listOptionCollection',
+	'builder/views/drawerListOption'
 	], function(
 	fieldTypeCollection,
 	fieldTypeSettingCollection,
-	fieldTypeSettingGroupCollection
+	fieldTypeSettingGroupCollection,
+	listOptionCollection,
+	listOptionView
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
@@ -178,8 +182,26 @@ define( [
 								{
 									type: 'list-repeater',
 									name: 'options',
-									label: 'Options',
-									width: 'full'
+									label: 'Options <a href="#" class="nf-add-new">Add New</a>',
+									width: 'full',
+									options: new listOptionCollection( [
+										{
+											label: 'Item 1',
+											value: 'item1',
+											calcValue: '1'
+										},
+										{
+											label: 'Item 2',
+											value: 'item2',
+											calcValue: '2'
+										},
+										{
+											label: 'Item 3',
+											value: 'item3',
+											calcValue: '3'
+										}
+									] ),
+									// childView: listOptionView
 								}
 							] )
 						}					
