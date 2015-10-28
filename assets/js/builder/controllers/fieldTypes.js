@@ -201,7 +201,7 @@ define( [
 											calcValue: '3'
 										}
 									] ),
-									childView: listOptionView
+									// childView: listOptionView
 								}
 							] )
 						}					
