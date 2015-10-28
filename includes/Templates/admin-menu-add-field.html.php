@@ -48,7 +48,7 @@
 </script>
 
 <script id="nf-tmpl-main-header-settings" type="text/template">
-    
+
 </script>
 
 <script id="nf-tmpl-main-content-fields-empty" type="text/template">
@@ -321,7 +321,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-empty" type="text/template">
-    
+
 </script>
 
 
@@ -372,9 +372,9 @@
 </script>
 
 <script id="nf-tmpl-edit-field-setting-list-repeater" type="text/template">
-    <fieldset>
-        <legend>Options <a href="#" class="nf-button secondary"><span class="dashicons dashicons-plus-alt"></span> Add New</a></legend>
-        <table class="nf-list-options">
+    <fieldset class="nf-list-options">
+        <legend>Options <a href="#" class="nf-add-new"><span class="dashicons dashicons-plus-alt"></span> Add New</a></legend>
+        <table>
             <tr>
                 <td>
                     <span class="dashicons dashicons-menu"></span>
