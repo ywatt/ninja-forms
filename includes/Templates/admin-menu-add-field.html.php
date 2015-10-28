@@ -374,7 +374,7 @@
 <script id="nf-tmpl-edit-field-setting-list-repeater" type="text/template">
     <fieldset>
         <legend>Options <a href="#" class="nf-button secondary"><span class="dashicons dashicons-plus-alt"></span> Add New</a></legend>
-        <table>
+        <table class="nf-list-options">
             <tr>
                 <td>
                     <span class="dashicons dashicons-menu"></span>
