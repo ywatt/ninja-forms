@@ -379,10 +379,10 @@
                 <td>
                     <span class="dashicons dashicons-menu"></span>
                 </td>
-                <td style="width: 30%">
+                <td>
                     <input type="text" value="" placeholder="Label">
                 </td>
-                <td style="width: 30%">
+                <td>
                     <input type="text" value="" placeholder="Value">
                 </td>
                 <td>

@@ -8,7 +8,7 @@
             transition: all 1.0s ease 0s
         }
     }
-    .nf-add-new {
+    .nf-add-new.nf-open-drawer {
         padding-left: 32px;
         text-indent: -500px;
         width:60px;
@@ -70,7 +70,7 @@
             transition: all 1.0s ease 0s
         }
     }
-    .nf-add-new {
+    .nf-add-new.nf-open-drawer {
         position: fixed;
         top: auto;
         left: auto;
