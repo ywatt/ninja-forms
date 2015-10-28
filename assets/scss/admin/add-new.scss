@@ -1,15 +1,12 @@
 .nf-add-new {
     // background: red;
     color: $accent_color;
-    display:block;
     padding: 0 0 0 46px;
     text-decoration: none;
-    position: absolute;
     line-height: 32px;
+    position: relative;
     width: 165px;
     height: 32px;
-    top: 135px;
-    left: 40px;
     z-index: 98;
     text-indent: 0px;
     overflow: hidden;
@@ -39,6 +36,11 @@
             transform: rotate(360deg);
             transition: all 1.0s ease;
         }
+    }
+    &.nf-open-drawer {
+        position: absolute;
+        top: 135px;
+        left: 40px;
     }
 }
 .ninja-forms-app {
