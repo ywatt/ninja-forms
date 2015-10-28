@@ -12,6 +12,27 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
     {
         check_ajax_referer( 'ninja_forms_ajax_nonce', 'security' );
 
+        if( ! isset( $_POST[ 'form' ] ) ){
+            $this->_errors[] = 'Form Not Found';
+            $this->_respond();
+        }
+
+        $form_data = $_POST[ 'form' ];
+
+        $form = Ninja_Forms()->form( $form_data[ 'id' ] );
+
+        $form->update_settings( $form_data[ 'settings' ] )->save();
+
+        foreach( $form_data[ 'fields' ] as $field_data ){
+            $field = Ninja_Forms()->form()->get_field( $field_data[ 'id' ] );
+            $field->update_settings( $field_data[ 'settings' ] )->save();
+        }
+
+        foreach( $form_data[ 'actions' ] as $action_data ){
+            $action = Ninja_Forms()->form()->get_field( $action_data[ 'id' ] );
+            $action->update_settings( $action_data[ 'settings' ] )->save();
+        }
+
         $this->_respond();
     }
 
