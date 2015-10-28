@@ -65,15 +65,13 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         foreach( $actions as $action ){
 
-            $settings = apply_filters( 'ninja_forms_run_action_settings', $action->get_settings(), $this->_form_id, $action->get_id() );
+            $action_settings = apply_filters( 'ninja_forms_run_action_settings', $action->get_settings(), $this->_form_id, $action->get_id(), $this->_data['settings'] );
 
-            $this->_errors[ 'settings' ] = $settings;
+            if( ! $action_settings['active'] ) continue;
 
-            if( ! $settings['active'] ) continue;
+            $type = $action_settings['type'];
 
-            $type = $settings['type'];
-
-            $data = Ninja_Forms()->actions[ $type ]->process( $action->get_id(), $this->_form_id, $this->_data );
+            $data = Ninja_Forms()->actions[ $type ]->process( $action_settings, $this->_form_id, $this->_data );
 
             $this->_data = ( $data ) ? $data : $this->_data;
         }

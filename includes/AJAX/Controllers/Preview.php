@@ -8,7 +8,7 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
     {
         add_action( 'wp_ajax_nf_preview_update', array( $this, 'update' ) );
 
-        add_filter( 'ninja_forms_run_action_settings', array( $this, 'filter_action_settings' ), 10, 3 );
+        add_filter( 'ninja_forms_run_action_settings', array( $this, 'filter_action_settings' ), 10, 4 );
     }
 
     public function update()
@@ -40,8 +40,10 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
         $this->_respond();
     }
 
-    public function filter_action_settings( $action_settings, $form_id, $action_id )
+    public function filter_action_settings( $action_settings, $form_id, $action_id, $form_settings )
     {
+        if( ! isset( $form_settings[ 'is_preview' ] ) ) return $action_settings;
+
         $form_data = $this->get_form_data( $form_id );
 
         if( isset( $form_data[ 'actions' ][ $action_id ] ) ){
@@ -83,7 +85,6 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
 
     private function update_form_data( $form_data )
     {
-        $form_data[ 'foo' ] = 'bar';
         $update = update_user_option( get_current_user_id(), self::$transient_prefix . $form_data['id'], $form_data );
 
         $this->_data[ 'updated' ] = $update;

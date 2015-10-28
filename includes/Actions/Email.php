@@ -42,14 +42,12 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
     }
 
-    public function process( $action_id, $form_id, $data )
+    public function process( $action_settings, $form_id, $data )
     {
-        $settings = Ninja_Forms()->form( $form_id )->get_action( $action_id )->get_settings();
-
         wp_mail(
-            $settings['to'],
-            $settings['subject'],
-            $settings['message']
+            $action_settings['to'],
+            $action_settings['subject'],
+            $action_settings['message']
         );
     }
 }
