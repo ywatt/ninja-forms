@@ -368,7 +368,7 @@
     <fieldset>
         <legend><%= label %></legend>
         <span class="nf-field-sub-settings"></span>
-    </fields>
+    </fieldset>
 </script>
 
 <script id="nf-tmpl-edit-field-setting-list-repeater" type="text/template">
