@@ -16,7 +16,9 @@ define(
 		'builder/controllers/mainContentFieldsSortable',
 		'builder/controllers/fieldData',
 		'builder/controllers/fieldClick',
-		'builder/controllers/drawerToggleSettingGroup'
+		'builder/controllers/drawerToggleSettingGroup',
+		'builder/controllers/changeFieldSetting',
+		'builder/controllers/changeToggleSetting'
 	],
 	function(
 		Hotkeys,
@@ -35,7 +37,9 @@ define(
 		MainContentFieldsSortable,
 		FieldData,
 		FieldClick,
-		DrawerToggleSettingGroup
+		DrawerToggleSettingGroup,
+		ChangeFieldSetting,
+		ChangeToggleSetting
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -56,6 +60,8 @@ define(
 				var fieldData = new FieldData();
 				var fieldClick = new FieldClick();
 				var drawerToggleSettingGroup = new DrawerToggleSettingGroup();
+				var changeFieldSetting = new ChangeFieldSetting();
+				var changeToggleSetting = new ChangeToggleSetting();
 			}
 		});
 

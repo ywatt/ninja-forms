@@ -6,7 +6,7 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 				
 				{
 					id: 1,
-					type: 'textbox',
+					type: 'firstname',
 					label: 'First Name',
 					label_pos: 'above',
 					default_value: '',
@@ -16,7 +16,7 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 				},
 				{
 					id: 2,
-					type: 'textbox',
+					type: 'lastname',
 					label: 'Last Name',
 					label_pos: 'above',
 					default_value: '',
@@ -42,7 +42,8 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 			] );
 
 			nfRadio.channel( 'data' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
-			nfRadio.channel( 'data' ).reply( 'add:field', this.addFieldData, this );
+			nfRadio.channel( 'data' ).reply( 'add:field', this.addField, this );
+			nfRadio.channel( 'data' ).reply( 'update:field', this.updateFieldData, this );
 			nfRadio.channel( 'data' ).reply( 'delete:field', this.deleteField, this );
 			nfRadio.channel( 'data' ).reply( 'sort:fields', this.sortFields, this );
 			nfRadio.channel( 'data' ).reply( 'get:tmpFieldID', this.getTmpFieldID, this );
@@ -52,9 +53,13 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 			return this.collection;
 		},
 
-		addFieldData: function( data, silent ) {
+		addField: function( data, silent ) {
 			silent = silent || false;
 			this.collection.add( data, { silent: silent } );
+		},
+
+		updateField: function( ) {
+
 		},
 
 		sortFields: function( order ) {

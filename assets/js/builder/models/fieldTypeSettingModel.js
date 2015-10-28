@@ -2,6 +2,7 @@ define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
 			settings: false,
+			placeholder: '',
 			renderLabel: function() {
 				if ( 'undefined' != typeof this.label ) {
 					return '<label>' + this.label + '</label>';

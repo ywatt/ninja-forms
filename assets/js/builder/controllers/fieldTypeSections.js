@@ -25,14 +25,14 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 						'zip'
 					]
 				},
-				{ 
-					id: 'advanced',
-					nicename: 'Advanced Fields',
-					fieldTypes: [
-						'calc',
-						'test'
-					]
-				}
+				// { 
+				// 	id: 'advanced',
+				// 	nicename: 'Advanced Fields',
+				// 	fieldTypes: [
+				// 		'calc',
+				// 		'test'
+				// 	]
+				// }
 			] );
 
             nfRadio.channel( 'drawer' ).reply( 'get:fieldTypeSections', this.getFieldTypeSections, this );

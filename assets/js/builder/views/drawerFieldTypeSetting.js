@@ -25,6 +25,14 @@ define( [], function() {
 					return _.template( jQuery( '#nf-tmpl-edit-field-setting-' + this.type ).html(), this );
 				},
 			};
+		},
+
+		events: {
+			'change': 'changeSetting'
+		},
+
+		changeSetting: function( e ) {
+			nfRadio.channel( 'fields' ).request( 'change:setting', e, this.model, this.fieldModel );
 		}
 
 	});

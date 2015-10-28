@@ -336,7 +336,7 @@
 
 <script id="nf-tmpl-edit-field-setting-textbox" type="text/template">
     <%= renderLabel() %>
-    <input type="text" value="<%= value %>" />
+    <input type="text" value="<%= value %>" placeholder="<%= placeholder %>" />
 </script>
 
 <script id="nf-tmpl-edit-field-setting-textarea" type="text/template">
@@ -351,7 +351,7 @@
             <%
             _.each( options, function( option ) {
                 %>
-                <option value="<%= option.value %> <%= ( value == option.value ) ? 'selected' : '' %>"><%= option.label %></option>
+                <option value="<%= option.value %>" <%= ( value == option.value ) ? 'selected="selected"' : '' %>><%= option.label %></option>
                 <%
             } );
             %>

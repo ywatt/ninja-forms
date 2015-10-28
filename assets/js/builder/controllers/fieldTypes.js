@@ -70,7 +70,6 @@ define( [
 						},
 						{
 							name: 'Restriction Settings',
-							
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'dropdown',
@@ -95,10 +94,13 @@ define( [
 									settings: new fieldTypeSettingCollection( [
 										{
 											type: 'textbox',
+											name: 'input_limit',
+											placeholder: '150',
 											width: 'one-half'
 										},
 										{
 											type: 'dropdown',
+											name: 'input_limit_type',
 											options: [
 												{
 													label: 'Character(s)',
@@ -113,24 +115,16 @@ define( [
 										},
 										{
 											type: 'textbox',
+											name: 'input_limit_msg',
 											label: 'Text to Appear After Counter',
+											placeholder: 'Character(s) left',
 											width: 'full'
 										}
 									] )
 								},
 								
 							] )
-						},
-						{
-							name: 'Advanced Settings',
-							
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							
-							settings: new fieldTypeSettingCollection()
-						}
+						}						
 					] )
 				},
 				{
@@ -146,13 +140,7 @@ define( [
 									type: 'textbox',
 									name: 'label',
 									label: 'Label',
-									width: 'one-half'
-								},
-								{
-									type: 'textbox',
-									name: 'placeholder',
-									label: 'Placeholder',
-									width: 'one-half'
+									width: 'full'
 								},
 								{
 									type: 'dropdown',
@@ -189,70 +177,7 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							
-							settings: new fieldTypeSettingCollection()
-						}
+						}					
 					] )
 				},
 				{
@@ -311,70 +236,7 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							
-							settings: new fieldTypeSettingCollection()
-						}
+						}						
 					] )
 				},
 				{
@@ -436,7 +298,6 @@ define( [
 						},
 						{
 							name: 'Restriction Settings',
-							
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'fieldset',
@@ -445,10 +306,13 @@ define( [
 									settings: new fieldTypeSettingCollection( [
 										{
 											type: 'textbox',
+											name: 'input_limit',
+											placeholder: '150',
 											width: 'one-half'
 										},
 										{
 											type: 'dropdown',
+											name: 'input_limit_type',
 											options: [
 												{
 													label: 'Character(s)',
@@ -463,24 +327,16 @@ define( [
 										},
 										{
 											type: 'textbox',
+											name: 'input_limit_msg',
 											label: 'Text to Appear After Counter',
+											placeholder: 'Character(s) left',
 											width: 'full'
 										}
 									] )
 								},
 								
 							] )
-						},
-						{
-							name: 'Advanced Settings',
-							
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							
-							settings: new fieldTypeSettingCollection()
-						}
+						}						
 					] )
 				},
 				{
@@ -558,70 +414,7 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							
-							settings: new fieldTypeSettingCollection()
-						}
+						}						
 					] )
 				},
 				{
@@ -680,67 +473,6 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
 						}
 					] )
 				},
@@ -752,6 +484,7 @@ define( [
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
+							display: true,
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'textbox',
@@ -800,66 +533,6 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
 						}
 					] )
 				},
@@ -870,6 +543,7 @@ define( [
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
+							display: true,
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'textbox',
@@ -918,66 +592,6 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
 						}
 					] )
 				},
@@ -988,6 +602,7 @@ define( [
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
+							display: true,
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'textbox',
@@ -1036,66 +651,6 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
 						}
 					] )
 				},
@@ -1106,6 +661,7 @@ define( [
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
+							display: true,
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'textbox',
@@ -1154,66 +710,6 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
 						}
 					] )
 				},
@@ -1224,6 +720,7 @@ define( [
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
+							display: true,
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'textbox',
@@ -1272,66 +769,6 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
 						}
 					] )
 				},
@@ -1343,6 +780,7 @@ define( [
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
+							display: true,
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'textbox',
@@ -1391,66 +829,6 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
 						}
 					] )
 				},
@@ -1460,6 +838,7 @@ define( [
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
+							display: true,
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'textbox',
@@ -1508,183 +887,6 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
-						}
-					] )
-				},
-				{
-					id: 'test',
-					nicename: 'Something Crazy',
-					settingGroups: new fieldTypeSettingGroupCollection( [
-						{
-							name: '',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'textbox',
-									name: 'label',
-									label: 'Label',
-									width: 'one-half'
-								},
-								{
-									type: 'textbox',
-									name: 'placeholder',
-									label: 'Placeholder',
-									width: 'one-half'
-								},
-								{
-									type: 'dropdown',
-									name: 'label_pos',
-									label: 'Label Position',
-									options: [
-										{
-											label: 'Above Field',
-											value: 'above'
-										},
-										{
-											label: 'Below Field',
-											value: 'below'
-										},
-										{
-											label: 'Left of Field',
-											value: 'left'
-										},
-										{
-											label: 'Right of Field',
-											value: 'right'
-										},
-										{
-											label: 'Hide Label',
-											value: 'hidden'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'toggle',
-									name: 'required',
-									label: 'Required Field',
-									width: 'one-half'
-								}
-							] )
-						},
-						{
-							name: 'Restriction Settings',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
 						}
 					] )
 				},
@@ -1695,6 +897,7 @@ define( [
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
+							display: true,
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'textbox',
@@ -1743,66 +946,6 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
 						}
 					] )
 				},
@@ -1813,6 +956,7 @@ define( [
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
+							display: true,
 							settings: new fieldTypeSettingCollection( [
 								{
 									type: 'textbox',
@@ -1861,66 +1005,6 @@ define( [
 									width: 'one-half'
 								}
 							] )
-						},
-						{
-							name: 'Restriction Settings',
-							settings: new fieldTypeSettingCollection( [
-								{
-									type: 'dropdown',
-									name: 'mask',
-									label: 'Input Mask',
-									options: [
-										{
-											label: 'US Phone',
-											value: 'us-phone'
-										},
-										{
-											label: 'Date',
-											value: 'date'
-										}
-									],
-									width: 'one-half'
-								},
-								{
-									type: 'fieldset',
-									label: 'Limit Input to this Number',
-									width: 'full',
-									settings: new fieldTypeSettingCollection( [
-										{
-											type: 'textbox',
-											width: 'one-half'
-										},
-										{
-											type: 'dropdown',
-											options: [
-												{
-													label: 'Character(s)',
-													value: 'characters'
-												},
-												{
-													label: 'Word(s)',
-													value: 'words'
-												}
-											],
-											width: 'one-half'
-										},
-										{
-											type: 'textbox',
-											label: 'Text to Appear After Counter',
-											width: 'full'
-										}
-									] )
-								},
-								
-							] )
-						},
-						{
-							name: 'Advanced Settings',
-							settings: new fieldTypeSettingCollection()
-						},
-						{
-							name: 'Conditional Settings',
-							settings: new fieldTypeSettingCollection()
 						}
 					] )
 				}
