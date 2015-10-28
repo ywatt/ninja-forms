@@ -204,72 +204,19 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field" type="text/template">
-    <h2><span class="dashicons dashicons-star-empty"></span>Single Line Textbox</h2>
+    <h2><span class="dashicons dashicons-star-empty"></span> <%= label %></h2>
+    <span class="nf-settings-groups"></span>
+</script>
+
+<script id="nf-tmpl-drawer-content-edit-field-setting-group" type="text/template">
     <section class="nf-settings">
-        <div class="nf-one-half">
-            <label>Label</label>
-            <input type="text" value="Textarea" />
-        </div>
-        <div class="nf-one-half">
-            <label>Placeholder Text</label>
-            <input type="text" value="" />
-        </div>
-        <div class="nf-one-half">
-            <label>Label Position</label>
-            <div class="nf-select">
-                <select>
-                    <option>Above Field</option>
-                    <option>Below Field</option>
-                    <option>Left of Field</option>
-                    <option>Right of Field</option>
-                    <option>Hide Label</option>
-                </select>
-            </div>
-        </div>
-        <div class="nf-one-half">
-            <label>Required Field</label>
-            <input type="checkbox" class="nf-toggle" />
-        </div>
+        <%= renderLabel() %>
+        <span class="nf-field-settings"></span>
     </section>
-    <section class="nf-settings">
-        <h3><span class="dashicons dashicons-arrow-down"></span>Restriction Settings</h3>
-        <div class="nf-settings-sub">
-            <div class="nf-one-half">
-                <label>Input Mask</label>
-                <div class="nf-select">
-                    <select>
-                        <option>None</option>
-                        <option>US Phone Number</option>
-                        <option>Date</option>
-                    </select>
-                </div>
-            </div>
-            <fieldset>
-                <legend>Limit input to this number</legend>
-                <div class="nf-one-half">
-                    <input type="text" value="140" />
-                </div>
-                <div class="nf-one-half">
-                    <div class="nf-select">
-                        <select>
-                            <option>Character</option>
-                            <option>Words</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="nf-full">
-                    <label>Text to appear after counter</label>
-                    <input type="text" value="character(s) left" />
-                </div>
-            </fieldset>
-        </div>
-    </section>
-    <section class="nf-settings">
-        <h3><span class="dashicons dashicons-arrow-right"></span>Advanced Settings</h3>
-    </section>
-    <section class="nf-settings">
-        <h3><span class="dashicons dashicons-arrow-right"></span>Conditional Settings</h3>
-    </section>
+</script>
+
+<script id="nf-tmpl-drawer-content-edit-field-setting-group-label" type="text/template">
+    <h3 class="toggle"><span class="dashicons dashicons-arrow-<%= renderArrowDir() %>"></span><%= name %></h3>
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-action" type="text/template">
@@ -376,3 +323,51 @@
 <script id="nf-tmpl-drawer-content-empty" type="text/template">
     
 </script>
+
+
+
+<!-- Field Settings Templates -->
+
+<script id="nf-tmpl-edit-field-setting-wrap" type="text/template">
+    <div class="nf-<%= renderWidth() %>">
+        <%= renderSetting() %>
+    </div>
+</script>
+
+<script id="nf-tmpl-edit-field-setting-textbox" type="text/template">
+    <%= renderLabel() %>
+    <input type="text" value="<%= value %>" />
+</script>
+
+<script id="nf-tmpl-edit-field-setting-textarea" type="text/template">
+    <%= renderLabel() %>
+    <textarea><%= value %></textarea>
+</script>
+
+<script id="nf-tmpl-edit-field-setting-dropdown" type="text/template">
+    <%= renderLabel() %>
+    <div class="nf-select">
+        <select>
+            <%
+            _.each( options, function( option ) {
+                %>
+                <option value="<%= option.value %> <%= ( value == option.value ) ? 'selected' : '' %>"><%= option.label %></option>
+                <%
+            } );
+            %>
+        </select>
+    </div>
+</script>
+
+<script id="nf-tmpl-edit-field-setting-toggle" type="text/template">
+    <label><%= renderLabel() %></label>
+    <input type="checkbox" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
+</script>
+
+<script id="nf-tmpl-edit-field-setting-fieldset" type="text/template">
+    <fieldset>
+        <legend><%= label %></legend>
+        <span class="nf-field-sub-settings"></span>
+    </fields>
+</script>
+

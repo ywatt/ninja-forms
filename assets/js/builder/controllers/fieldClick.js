@@ -15,7 +15,6 @@ define( [], function() {
 		},
 
 		clickDuplicate: function( e, model ) {
-			console.log( 'here' );
 			var newModel = model.clone();
 			var tmpID = nfRadio.channel( 'data' ).request( 'get:tmpFieldID' );
 			newModel.set( 'id', tmpID );

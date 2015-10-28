@@ -97,7 +97,7 @@ define( [], function() {
 			silent = silent || false;
 			var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', type );
 			var tmpID = nfRadio.channel( 'data' ).request( 'get:tmpFieldID' );
-			nfRadio.channel( 'data' ).request( 'add:field',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'slug' ) }, silent );
+			nfRadio.channel( 'data' ).request( 'add:field',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'id' ) }, silent );
 			return tmpID;
 		},
 

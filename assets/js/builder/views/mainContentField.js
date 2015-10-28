@@ -7,12 +7,6 @@ define( [], function() {
 			this.$el = this.$el.children();
 			this.$el.unwrap();
 			this.setElement( this.$el );
-
-			// jQuery( this.el ).hide();
-		},
-
-		onShow: function() {
-			// jQuery( this.el ).fadeIn( 'fast' );
 		},
 
 		events: {

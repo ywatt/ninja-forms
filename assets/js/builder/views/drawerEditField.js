@@ -1,11 +1,26 @@
-define( [], function() {
-	var view = Marionette.ItemView.extend({
+define( ['builder/views/drawerFieldTypeSettingGroupCollection'], function( fieldTypeSettingGroupCollectionView ) {
+	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-drawer-content-edit-field',
 
-		initialize: function() {
+		regions: {
+			settingGroups: '.nf-settings-groups'
+		},
+
+		initialize: function( data ) {
+			this.fieldModel = data.model;
+			this.listenTo( nfRadio.channel( 'fields' ), 'click:deleteField', this.maybeCloseDrawer );
+		},
+
+		onRender: function() {
 			var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType' , this.model.get( 'type' ) );
-			console.log( fieldType );
+			this.settingGroups.show( new fieldTypeSettingGroupCollectionView( { collection: fieldType.get( 'settingGroups' ), fieldModel: this.fieldModel } ) );
+		},
+
+		maybeCloseDrawer: function( e, model ) {
+			if ( model.get( 'id' ) == this.model.get( 'id' ) ) {
+				nfRadio.channel( 'app' ).request( 'close:drawer' );
+			}
 		}
 	});
 

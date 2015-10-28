@@ -4,41 +4,40 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 
 			this.collection = new fieldCollection( [
 				
-				// {
-				// 	id: 1,
-				// 	type: 'textbox',
-				// 	label: 'First Name',
-				// 	label_pos: 'above',
-				// 	default_value: '',
-				// 	placeholder: '',
-				// 	order: 1
-				// },
-				// {
-				// 	id: 2,
-				// 	type: 'last_name',
-				// 	label: 'Last Name',
-				// 	label_pos: 'above',
-				// 	default_value: '',
-				// 	placeholder: '',
-				// 	order: 2
-				// },
-				// {
-				// 	id: 3,
-				// 	type: 'textarea',
-				// 	label: 'Message',
-				// 	label_pos: 'above',
-				// 	default_value: '',
-				// 	placeholder: '',
-				// 	order: 3
-				// },
-				// {
-				// 	id: 4,
-				// 	type: 'submit',
-				// 	label: 'Submit',
-				// 	default_value: '',
-				// 	placeholder: '',
-				// 	order: 4
-				// }
+				{
+					id: 1,
+					type: 'textbox',
+					label: 'First Name',
+					label_pos: 'above',
+					default_value: '',
+					placeholder: 'First Name',
+					required: 1,
+					order: 1
+				},
+				{
+					id: 2,
+					type: 'textbox',
+					label: 'Last Name',
+					label_pos: 'above',
+					default_value: '',
+					placeholder: 'Last Name',
+					order: 2
+				},
+				{
+					id: 3,
+					type: 'textarea',
+					label: 'Message',
+					label_pos: 'above',
+					default_value: '',
+					placeholder: 'Message',
+					order: 3
+				},
+				{
+					id: 4,
+					type: 'submit',
+					label: 'Submit',
+					order: 4
+				}
 				
 			] );
 
@@ -47,8 +46,6 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 			nfRadio.channel( 'data' ).reply( 'delete:field', this.deleteField, this );
 			nfRadio.channel( 'data' ).reply( 'sort:fields', this.sortFields, this );
 			nfRadio.channel( 'data' ).reply( 'get:tmpFieldID', this.getTmpFieldID, this );
-
-			this.listenTo( nfRadio.channel( 'fields' ), 'click:deleteField', this.clickDeleteField );
 		},
 
 		getFieldCollection: function() {
