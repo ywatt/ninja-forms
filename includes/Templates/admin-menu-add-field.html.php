@@ -371,3 +371,27 @@
     </fields>
 </script>
 
+<script id="nf-tmpl-edit-field-setting-list-repeater" type="text/template">
+    <fieldset>
+        <legend>Options <a href="#" class="nf-button secondary"><span class="dashicons dashicons-plus-alt"></span> Add New</a></legend>
+        <table>
+            <tr>
+                <td>
+                    <span class="dashicons dashicons-menu"></span>
+                </td>
+                <td style="width: 30%">
+                    <input type="text" value="" placeholder="Label">
+                </td>
+                <td style="width: 30%">
+                    <input type="text" value="" placeholder="Value">
+                </td>
+                <td>
+                    <input type="text" value="" placeholder="Calc Value">
+                </td>
+                <td>
+                    <span class="dashicons dashicons-dismiss"></span>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</script>

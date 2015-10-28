@@ -24,19 +24,27 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 					order: 2
 				},
 				{
+					id: 5,
+					type: 'radio',
+					label: 'Radio Buttons',
+					label_pos: 'above',
+					default_value: '',
+					order: 3
+				},
+				{
 					id: 3,
 					type: 'textarea',
 					label: 'Message',
 					label_pos: 'above',
 					default_value: '',
 					placeholder: 'Message',
-					order: 3
+					order: 4
 				},
 				{
 					id: 4,
 					type: 'submit',
 					label: 'Submit',
-					order: 4
+					order: 5
 				}
 				
 			] );

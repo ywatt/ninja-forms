@@ -7,6 +7,8 @@ define( [], function() {
 
 			nfRadio.channel( 'app' ).reply( 'open:drawer', this.openDrawer, this );
 			nfRadio.channel( 'app' ).reply( 'close:drawer', this.closeDrawer, this );
+
+			nfRadio.channel( 'drawer' ).reply( 'get:closedRightPos', this.getClosedDrawerPos, this );
 		},
 
 		closeDrawer: function() {
@@ -16,7 +18,7 @@ define( [], function() {
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
 			jQuery( builderEl ).addClass( 'nf-drawer-closed' ).removeClass( 'nf-drawer-opened' );
 
-			var rightClosed = this.getClosedDrawerRight();
+			var rightClosed = this.getClosedDrawerPos();
 
 			var drawerEl = nfRadio.channel( 'app' ).request( 'get:drawerEl' );
 			jQuery( drawerEl ).css( { 'right': rightClosed } );
@@ -78,9 +80,10 @@ define( [], function() {
         	jQuery( filterEl ).focus();
         },
 
-        getClosedDrawerRight: function() {
+        getClosedDrawerPos: function() {
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
-			return '-' + jQuery( builderEl ).width() + 'px';
+			var closedPos = jQuery( builderEl ).width() + 300;
+			return '-' + closedPos + 'px';
         }
 	});
 

@@ -15,9 +15,9 @@ define( ['builder/views/drawerHeader', 'builder/views/drawerContentEmpty'], func
 		},
 
 		onShow: function() {
-			var builderEl = jQuery( this.el ).parent().parent();
-			var closedRight = '-' + jQuery( builderEl ).width() + 'px';
-			jQuery( this.el ).parent().css( { 'right': closedRight } );
+			var closedRightPos = nfRadio.channel( 'drawer' ).request( 'get:closedRightPos' );
+			console.log( closedRightPos );
+			jQuery( this.el ).parent().css( { 'right': closedRightPos } );
 					
 			this.header.show( new drawerHeaderView() );
 			jQuery( this.el ).parent().perfectScrollbar();

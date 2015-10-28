@@ -121,10 +121,9 @@ define( [
 											width: 'full'
 										}
 									] )
-								},
-								
+								}
 							] )
-						}						
+						}		
 					] )
 				},
 				{
@@ -175,6 +174,12 @@ define( [
 									name: 'required',
 									label: 'Required Field',
 									width: 'one-half'
+								},
+								{
+									type: 'list-repeater',
+									name: 'options',
+									label: 'Options',
+									width: 'full'
 								}
 							] )
 						}					
