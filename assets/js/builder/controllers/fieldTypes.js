@@ -2,14 +2,12 @@ define( [
 	'builder/models/fieldTypeCollection',
 	'builder/models/fieldTypeSettingCollection',
 	'builder/models/fieldTypeSettingGroupCollection',
-	'builder/models/listOptionCollection',
-	'builder/views/drawerListOption'
+	'builder/models/listOptionCollection'
 	], function(
 	fieldTypeCollection,
 	fieldTypeSettingCollection,
 	fieldTypeSettingGroupCollection,
-	listOptionCollection,
-	listOptionView
+	listOptionCollection
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
@@ -200,8 +198,7 @@ define( [
 											value: 'item3',
 											calcValue: '3'
 										}
-									] ),
-									// childView: listOptionView
+									] )
 								}
 							] )
 						}					
