@@ -1,4 +1,4 @@
-define( [], function() {
+define( ['builder/models/listOptionCollection'], function( listOptionCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'field-radio' ), 'init:fieldModel', this.bindChange );
@@ -9,6 +9,9 @@ define( [], function() {
 		},
 
 		bindChange: function( model ) {
+			if ( ! model.get( 'options' ) ) {
+				model.set( 'options', new listOptionCollection() );
+			}
 			model.get( 'options' ).on( 'change', model.changeSetting, model );
 		},
 

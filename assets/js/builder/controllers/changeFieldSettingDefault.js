@@ -5,9 +5,13 @@ define( [], function() {
 		},
 
 		changeSetting: function( e, settingTypeModel, fieldModel ) {
-			var value = jQuery( e.target ).val();
 			var name = settingTypeModel.get( 'name' );
-			nfRadio.channel( 'fields' ).request( 'update:setting', fieldModel, name, value, settingTypeModel, e );
+			var value = nfRadio.channel( 'fields-' + settingTypeModel.get( 'type' ) ).request( 'before:updateSetting', e, fieldModel, name, settingTypeModel );
+			if ( 'undefined' == typeof value ) {
+				value = jQuery( e.target ).val();
+			}
+
+			fieldModel.set( name, value );
 		}
 
 	});

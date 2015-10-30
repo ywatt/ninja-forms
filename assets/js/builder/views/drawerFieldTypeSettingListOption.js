@@ -11,6 +11,10 @@ define( [], function() {
 			jQuery( this.el ).prop( 'id', this.model.cid );
 		},
 
+		onShow: function() {
+			jQuery( this.el ).find( 'input:first' ).focus();
+		},
+
 		events: {
 			'change input': 'changeSetting',
 			'click .nf-delete': 'deleteOption',
