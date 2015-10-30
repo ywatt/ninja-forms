@@ -3,13 +3,12 @@
 return array(
 
     /*
-    * URL
-    */
+     * Name
+     */
 
-    'url' => array(
+    'name' => array(
         'type' => 'text',
-        'label' => __( 'URL', 'ninja-forms' ),
+        'label' => __( 'Action Name', 'ninja-forms' ),
         'placeholder' => '',
     ),
-
 );

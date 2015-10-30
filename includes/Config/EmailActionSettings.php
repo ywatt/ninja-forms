@@ -3,16 +3,6 @@
 return array(
 
     /*
-     * Name
-     */
-
-    'name' => array(
-        'type' => 'text',
-        'label' => __( 'Action Name', 'ninja-forms' ),
-        'placeholder' => '',
-    ),
-
-    /*
     * From Name
     */
 
@@ -63,7 +53,7 @@ return array(
     ),
 
     /*
-    * Advanced Settings
+    * Format
     */
 
     'format' => array(
@@ -77,6 +67,10 @@ return array(
         'placeholder' => '',
     ),
 
+    /*
+    * Reply To
+    */
+
     'reply-to' => array(
         'type' => 'text',
         'group' => 'advanced',
@@ -84,12 +78,20 @@ return array(
         'placeholder' => '',
     ),
 
+    /*
+    * Cc
+    */
+
     'cc' => array(
         'type' => 'text',
         'group' => 'advanced',
         'label' => __( 'Cc', 'ninja-forms' ),
         'placeholder' => '',
     ),
+
+    /*
+    * Bcc
+    */
 
     'bcc' => array(
         'type' => 'text',

@@ -3,16 +3,6 @@
 return array(
 
     /*
-     * Name
-     */
-
-    'name' => array(
-        'type' => 'text',
-        'label' => __( 'Action Name', 'ninja-forms' ),
-        'placeholder' => '',
-    ),
-
-    /*
     * Format
     */
 
@@ -65,5 +55,5 @@ return array(
         'label' => __( 'Message', 'ninja-forms' ),
         'placeholder' => '',
     ),
-    
+
 );
