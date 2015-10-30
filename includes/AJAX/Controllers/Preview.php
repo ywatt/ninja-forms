@@ -19,18 +19,51 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
 
         $form_data = $this->get_form_data( $form_id );
 
-        if( isset( $_POST[ 'form' ][ 'field' ] ) ) {
+        /*
+         * Form Settings
+         */
 
-            $field_id = $_POST[ 'form' ][ 'field' ][ 'id' ];
+        if( isset( $_POST[ 'form' ][ 'settings' ] ) && is_array( $_POST[ 'form' ][ 'settings' ] ) ) {
 
-            $form_data[ 'fields' ][ $field_id ][ 'settings' ] = $_POST[ 'form' ][ 'field' ][ 'settings' ];
+            $old_settings = $form_data[ 'settings' ];
+
+            $form_data[ 'settings' ] = array_merge( $old_settings, $_POST[ 'form' ][ 'settings' ] );
         }
 
-        if( isset( $_POST[ 'form' ][ 'action' ] ) ) {
+        /*
+         * Fields and Field Settings
+         */
 
-            $action_id = $_POST[ 'form' ][ 'action' ][ 'id' ];
+        if( isset( $_POST[ 'form' ][ 'fields' ] ) && is_array( $_POST[ 'form' ][ 'fields' ] ) ) {
 
-            $form_data[ 'actions' ][ $action_id ][ 'settings' ] = $_POST[ 'form' ][ 'action' ][ 'settings' ];
+            foreach( $_POST[ 'form' ][ 'fields' ] as $field ){
+
+                $id = $field[ 'id' ];
+
+                $old_settings = $form_data[ 'fields' ][ id ][ 'settings' ];
+
+                $new_settings = array_merge( $old_settings, $field[ 'settings' ] );
+
+                $form_data[ 'fields' ][ $id ][ 'settings' ] = $new_settings;
+            }
+        }
+
+        /*
+         * Actions and Action Settings
+         */
+
+        if( isset( $_POST[ 'form' ][ 'actions' ] ) && is_array( $_POST[ 'form' ][ 'actions' ] ) ) {
+
+            foreach( $_POST[ 'form' ][ 'actions' ] as $action ){
+
+                $id = $action[ 'id' ];
+
+                $old_settings = $form_data[ 'actions' ][ $id ][ 'settings' ];
+
+                $new_settings = array_merge( $old_settings, $action[ 'settings' ] );
+
+                $form_data[ 'actions' ][ $id ][ 'settings' ] = $new_settings;
+            }
         }
 
         $this->update_form_data( $form_data );
