@@ -26,11 +26,16 @@ abstract class NF_Abstracts_Action
     protected $_priority = '10';
 
     /**
+     * @var array
+     */
+    protected $_settings = array();
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-
+        $this->_settings = Ninja_Forms::config( 'ActionSettings' );
     }
 
     /*

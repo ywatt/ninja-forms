@@ -30,6 +30,12 @@ final class NF_Actions_SuccessMessage extends NF_Abstracts_Action
     */
     public function __construct()
     {
+        parent::__construct();
+
+        $settings = Ninja_Forms::config( 'SuccessMessageActionSettings' );
+
+        $this->_settings = array_merge( $this->_settings, $settings );
+
         add_action( 'nf_before_import_form', array( $this, 'import_form_action_success_message' ), 11 );
     }
 

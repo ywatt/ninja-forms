@@ -30,7 +30,7 @@ final class NF_Actions_Save extends NF_Abstracts_Action
     */
     public function __construct()
     {
-
+        parent::__construct();
     }
 
     /*
