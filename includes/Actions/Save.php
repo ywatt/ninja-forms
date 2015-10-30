@@ -8,7 +8,7 @@ final class NF_Actions_Save extends NF_Abstracts_Action
     /**
     * @var string
     */
-    protected $_name  = '';
+    protected $_name  = 'save';
 
     /**
     * @var array
