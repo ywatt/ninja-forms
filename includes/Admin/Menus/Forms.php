@@ -17,43 +17,6 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
     public function display()
     {
-        /*
-        if( isset( $_GET[ 'form_id' ] ) && $_GET[ 'form_id' ] ){
-            $form = Ninja_Forms()->form( $_GET[ 'form_id' ] )->get();
-
-            echo "<h1>" . $form->get_setting( 'title' ) . "</h1>";
-
-            echo "<h2>Form Settings</h2>";
-
-            echo "<pre>";
-            var_dump($form->get_settings());
-            echo "</pre>";
-
-            echo "<h2>Field Settings</h2>";
-
-            $fields = Ninja_Forms()->form( $form->get_id() )->get_fields();
-
-            foreach( $fields as $field ){
-                echo "<pre>";
-                var_dump($field->get_settings());
-                echo "</pre>";
-            }
-
-            echo "<h2>Action Settings</h2>";
-
-            $actions = Ninja_Forms()->form( $form->get_id() )->get_actions();
-
-            foreach( $actions as $action ){
-                echo "<pre>";
-                var_dump($action->get_settings());
-                echo "</pre>";
-            }
-
-
-            die();
-        }
-        */
-
         Ninja_Forms::template( 'admin-menu-new-form.html.php' );
         wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
 
@@ -68,6 +31,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_localize_script( 'nf-builder', 'nfAdmin', array( 'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ), 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/' ) );
 
         $this->_localize_form_data( $_GET[ 'form_id' ] );
+
+        $this->_localize_field_type_data();
+
+        $this->_localize_action_type_data();
 
     }
 
@@ -100,6 +67,46 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             formData[ 'fields' ] = JSON.parse( '<?php echo wp_json_encode( $fields_settings ); ?>' );
             formData[ 'actions' ] = JSON.parse( '<?php echo wp_json_encode( $actions_settings ); ?>' );
             console.log( formData );
+        </script>
+        <?php
+    }
+
+    private function _localize_field_type_data()
+    {
+        $field_type_settings = array();
+
+        foreach( Ninja_Forms()->fields as $field ){
+
+            $name = $field->get_name();
+
+            $settings = $field->get_settings();
+
+            $field_type_settings[ $name ] = $settings;
+        }
+        ?>
+        <script>
+            var fieldTypeData = JSON.parse( '<?php echo wp_json_encode( $field_type_settings ); ?>' );
+            console.log( fieldTypeData );
+        </script>
+        <?php
+    }
+
+    private function _localize_action_type_data()
+    {
+        $action_type_settings = array();
+
+        foreach( Ninja_Forms()->actions as $action ){
+
+            $name = $action->get_name();
+
+            $settings = $action->get_settings();
+
+            $action_type_settings[ $name ] = $settings;
+        }
+        ?>
+        <script>
+            var actionTypeData = JSON.parse( '<?php echo wp_json_encode( $action_type_settings ); ?>' );
+            console.log( actionTypeData );
         </script>
         <?php
     }
