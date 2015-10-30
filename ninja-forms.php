@@ -83,6 +83,14 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         public $fields = array();
 
         /**
+         * Form Actions
+         *
+         * @since 3.0
+         * @var array
+         */
+        public $actions = array();
+
+        /**
          * Model Factory
          *
          * @var object
