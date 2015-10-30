@@ -21,4 +21,9 @@ abstract class NF_Abstracts_Input extends NF_Abstracts_Field
 
         $this->_settings = array_merge( $this->_settings, $settings );
     }
+
+    public function get_parent_type()
+    {
+        return parent::get_type();
+    }
 }

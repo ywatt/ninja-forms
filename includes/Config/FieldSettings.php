@@ -15,7 +15,7 @@ return array(
      * LABEL POSITION
      */
 
-    'label_position' => array(
+    'label_pos' => array(
         'type' => 'select',
         'label' => __( 'Label Position', Ninja_Forms::TEXTDOMAIN ),
         'options' => array(

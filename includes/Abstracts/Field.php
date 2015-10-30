@@ -38,6 +38,11 @@ abstract class NF_Abstracts_Field
     /**
      * @var string
      */
+    protected $_type = '';
+
+    /**
+     * @var string
+     */
      const TEMPLATE = '';
 
     /**
@@ -80,6 +85,16 @@ abstract class NF_Abstracts_Field
     public function get_name()
     {
         return $this->_name;
+    }
+
+    public function get_type()
+    {
+        return $this->_type;
+    }
+
+    public function get_parent_type()
+    {
+        return ( get_parent_class() ) ? parent::_type : '';
     }
 
     public function get_settings()

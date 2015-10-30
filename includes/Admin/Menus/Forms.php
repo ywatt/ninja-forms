@@ -64,6 +64,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         ?>
         <script>
             var formData = JSON.parse( '<?php echo wp_json_encode( $form->get_settings() ); ?>' );
+            formData[ 'settings' ] = JSON.parse( '<?php echo wp_json_encode( $form->get_settings() ); ?>' );
             formData[ 'fields' ] = JSON.parse( '<?php echo wp_json_encode( $fields_settings ); ?>' );
             formData[ 'actions' ] = JSON.parse( '<?php echo wp_json_encode( $actions_settings ); ?>' );
             console.log( formData );
@@ -80,6 +81,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $name = $field->get_name();
 
             $settings = $field->get_settings();
+
+            $settings[ 'parentType' ] = $field->get_parent_type();
 
             $field_type_settings[ $name ] = $settings;
         }
