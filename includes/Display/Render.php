@@ -25,6 +25,9 @@ final class NF_Display_Render
         $fields = array();
 
         foreach( $form_fields as $field ){
+
+            $field = apply_filters( 'nf_localize_fields', $field );
+
             $field_class = $field->get_settings( 'type' );
           
             $field_class = Ninja_Forms()->fields[ $field_class ];
@@ -150,11 +153,13 @@ final class NF_Display_Render
 
         foreach( $form['fields'] as $field_id => $field ){
 
+            $field['settings'][ 'id' ] = $field_id;
+
+            $field = apply_filters( 'nf_localize_fields_preview', $field );
+
             $field_class = $field['settings']['type'];
 
             $field_class = Ninja_Forms()->fields[ $field_class ];
-
-            $field['settings'][ 'id' ] = $field_id;
 
             $fields[] = $field['settings'];
 
@@ -262,7 +267,7 @@ final class NF_Display_Render
     public static function output_templates()
     {
         // Build File Path Hierarchy
-        $file_paths = apply_filters( 'ninja_forms_field_template_file_paths', array(
+        $file_paths = apply_filters( 'nf_field_template_file_paths', array(
             get_template_directory() . '/ninja-forms/templates/',
         ));
 
