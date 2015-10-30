@@ -5,7 +5,7 @@
  */
 class NF_Fields_ListCheckbox extends NF_Abstracts_List
 {
-    protected $_name = 'checkboxlist';
+    protected $_name = 'listcheckbox';
 
     protected $_nicename = 'Checkbox List';
 
