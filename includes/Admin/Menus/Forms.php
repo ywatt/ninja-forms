@@ -67,11 +67,41 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         
         wp_localize_script( 'nf-builder', 'nfAdmin', array( 'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ), 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/' ) );
 
+        $this->_localize_form_data( $_GET[ 'form_id' ] );
+
     }
 
     public function submenu_separators()
     {
         add_submenu_page( 'ninja-forms', '', '', 'read', '', '' );
+    }
+
+    private function _localize_form_data( $form_id )
+    {
+        $form = Ninja_Forms()->form( $form_id )->get();
+        $fields = Ninja_Forms()->form( $form_id )->get_fields();
+        $actions = Ninja_Forms()->form( $form_id )->get_actions();
+
+        $fields_settings = array();
+
+        foreach( $fields as $field ){
+            $fields_settings[] = $field->get_settings();
+        }
+
+        $actions_settings = array();
+
+        foreach( $actions as $action ){
+            $actions_settings[] = $action->get_settings();
+        }
+
+        ?>
+        <script>
+            var formData = JSON.parse( '<?php echo wp_json_encode( $form->get_settings() ); ?>' );
+            formData[ 'fields' ] = JSON.parse( '<?php echo wp_json_encode( $fields_settings ); ?>' );
+            formData[ 'actions' ] = JSON.parse( '<?php echo wp_json_encode( $actions_settings ); ?>' );
+            console.log( formData );
+        </script>
+        <?php
     }
 
 }
