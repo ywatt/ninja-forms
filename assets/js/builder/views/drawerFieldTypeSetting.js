@@ -32,7 +32,7 @@ define( [], function() {
 		},
 
 		changeSetting: function( e ) {
-			nfRadio.channel( 'fields' ).request( 'change:setting', e, this.model, this.fieldModel );
+			nfRadio.channel( 'fields' ).trigger( 'change:setting', e, this.model, this.fieldModel );
 		}
 
 	});

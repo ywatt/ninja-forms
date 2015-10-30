@@ -1,4 +1,4 @@
-define( ['builder/models/fieldCollection'], function( fieldCollection ) {
+define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'], function( fieldCollection, listOptionCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 
@@ -29,6 +29,28 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 					label: 'Radio Buttons',
 					label_pos: 'above',
 					default_value: '',
+					options: new listOptionCollection( [
+						{
+							label: 'Item 1',
+							value: 'item1',
+							calcValue: '1'
+						},
+						{
+							label: 'Item 2',
+							value: 'item2',
+							calcValue: '2'
+						},
+						{
+							label: 'Item 3',
+							value: 'item3',
+							calcValue: '3'
+						},
+						{
+							label: 'Item 4',
+							value: 'item4',
+							calcValue: '4'
+						}
+					] ),
 					order: 3
 				},
 				{
@@ -50,8 +72,9 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 			] );
 
 			nfRadio.channel( 'data' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
+			nfRadio.channel( 'data' ).reply( 'get:field', this.getField, this );
 			nfRadio.channel( 'data' ).reply( 'add:field', this.addField, this );
-			nfRadio.channel( 'data' ).reply( 'update:field', this.updateFieldData, this );
+			nfRadio.channel( 'data' ).reply( 'update:fieldSetting', this.updateFieldSetting, this );
 			nfRadio.channel( 'data' ).reply( 'delete:field', this.deleteField, this );
 			nfRadio.channel( 'data' ).reply( 'sort:fields', this.sortFields, this );
 			nfRadio.channel( 'data' ).reply( 'get:tmpFieldID', this.getTmpFieldID, this );
@@ -61,13 +84,18 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 			return this.collection;
 		},
 
+		getField: function( id ) {
+			return this.collection.get( id );
+		},
+
 		addField: function( data, silent ) {
 			silent = silent || false;
 			this.collection.add( data, { silent: silent } );
 		},
 
-		updateField: function( ) {
-
+		updateFieldSetting: function( id, name, value ) {
+			var fieldModel = this.collection.get( id );
+			fieldModel.set( name, value );
 		},
 
 		sortFields: function( order ) {

@@ -389,20 +389,24 @@
     </fieldset>
 </script>
 
+<script id="nf-tmpl-edit-field-setting-list-empty" type="text/template">
+    <td></td><td></td><td></td><td></td><td></td>
+</script>
+
 <script id="nf-tmpl-edit-field-setting-list-option" type="text/template">
     <td>
-        <span class="dashicons dashicons-menu"></span>
+        <span class="dashicons dashicons-menu handle"></span>
     </td>
     <td>
-        <input type="text" value="">
+        <input type="text" value="<%= label %>" data-id="label">
     </td>
     <td>
-        <input type="text" value="">
+        <input type="text" value="<%= value %>" data-id="value">
     </td>
     <td>
-        <input type="text" value="">
+        <input type="text" value="<%= calcValue %>" data-id="calc">
     </td>
     <td>
-        <span class="dashicons dashicons-dismiss"></span>
+        <span class="dashicons dashicons-dismiss nf-delete"></span>
     </td>
 </script>

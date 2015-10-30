@@ -17,11 +17,13 @@ define(
 		'builder/controllers/fieldData',
 		'builder/controllers/fieldClick',
 		'builder/controllers/drawerToggleSettingGroup',
-		'builder/controllers/changeFieldSetting',
-		'builder/controllers/changeToggleSetting',
+		'builder/controllers/changeFieldSettingDefault',
+		'builder/controllers/fieldToggle',
 		'builder/controllers/drawerFieldTypeSettingChildView',
 		'builder/controllers/fieldset',
-		'builder/controllers/fieldList'
+		'builder/controllers/fieldListOptionSortable',
+		'builder/controllers/fieldList',
+		'builder/controllers/updateFieldSetting'
 
 	],
 	function(
@@ -42,11 +44,13 @@ define(
 		FieldData,
 		FieldClick,
 		DrawerToggleSettingGroup,
-		ChangeFieldSetting,
-		ChangeToggleSetting,
+		ChangeFieldSettingDefault,
+		FieldToggle,
 		DrawerFieldTypeSettingChildView,
 		Fieldset,
-		FieldList
+		FieldListOptionSortable,
+		FieldList,
+		UpdateFieldSetting
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -64,14 +68,16 @@ define(
 				var appDomain = new AppDomain();
 				var appData = new AppData();
 				var mainContentFieldsSortable = new MainContentFieldsSortable();
-				var fieldData = new FieldData();
 				var fieldClick = new FieldClick();
 				var drawerToggleSettingGroup = new DrawerToggleSettingGroup();
-				var changeFieldSetting = new ChangeFieldSetting();
-				var changeToggleSetting = new ChangeToggleSetting();
+				var changeFieldSettingDefault = new ChangeFieldSettingDefault();
+				var fieldToggle = new FieldToggle();
 				var drawerFieldTypeSettingChildView = new DrawerFieldTypeSettingChildView();
 				var fieldset = new Fieldset();
+				var fieldListOptionSortable = new FieldListOptionSortable();
 				var fieldList = new FieldList();
+				var fieldData = new FieldData();
+				var updateFieldSetting = new UpdateFieldSetting();
 			}
 		});
 

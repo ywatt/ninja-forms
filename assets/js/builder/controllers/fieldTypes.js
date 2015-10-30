@@ -181,24 +181,7 @@ define( [
 									type: 'list-repeater',
 									name: 'options',
 									label: 'Options <a href="#" class="nf-add-new">Add New</a>',
-									width: 'full',
-									options: new listOptionCollection( [
-										{
-											label: 'Item 1',
-											value: 'item1',
-											calcValue: '1'
-										},
-										{
-											label: 'Item 2',
-											value: 'item2',
-											calcValue: '2'
-										},
-										{
-											label: 'Item 3',
-											value: 'item3',
-											calcValue: '3'
-										}
-									] )
+									width: 'full'
 								}
 							] )
 						}					
