@@ -77,4 +77,14 @@ abstract class NF_Abstracts_Field
         return "<input class='widefat' name='fields[$id]' value='$value' />";
     }
 
+    public function get_name()
+    {
+        return $this->_name;
+    }
+
+    public function get_settings()
+    {
+        return $this->_settings;
+    }
+
 }

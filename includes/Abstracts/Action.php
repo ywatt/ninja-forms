@@ -76,4 +76,14 @@ abstract class NF_Abstracts_Action
         // Compare Timing
         return $a->timing < $b->timing ? 1 : -1;
     }
+
+    public function get_name()
+    {
+        return $this->_name;
+    }
+
+    public function get_settings()
+    {
+        return $this->_settings;
+    }
 }
