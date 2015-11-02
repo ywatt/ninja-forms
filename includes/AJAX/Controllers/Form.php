@@ -23,18 +23,32 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 
         $form->update_settings( $form_data[ 'settings' ] )->save();
 
+        if( $form->get_tmp_id() ){
+
+            $tmp_id = $form->get_tmp_id();
+            $this->_data[ 'new_ids' ][ 'forms' ][ $tmp_id ] = $form->get_id();
+        }
+
         foreach( $form_data[ 'fields' ] as $field_data ){
             $field = Ninja_Forms()->form()->get_field( $field_data[ 'id' ] );
-            $new_id = $field->update_settings( $field_data[ 'settings' ] )->save();
+            $field->update_settings( $field_data[ 'settings' ] )->save();
 
-            if( $new_id ){
-                $this->_data[ 'new_field_ids' ] = array_merge( $this->_data[ 'new_field_ids'], $new_id );
+            if( $field->get_tmp_id() ){
+
+                $tmp_id = $field->get_tmp_id();
+                $this->_data[ 'new_ids' ][ 'fields' ][ $tmp_id ] = $field->get_id();
             }
         }
 
         foreach( $form_data[ 'actions' ] as $action_data ){
             $action = Ninja_Forms()->form()->get_field( $action_data[ 'id' ] );
             $action->update_settings( $action_data[ 'settings' ] )->save();
+
+            if( $action->get_tmp_id() ){
+
+                $tmp_id = $action->get_tmp_id();
+                $this->_data[ 'new_ids' ][ 'actions' ][ $tmp_id ] = $action->get_id();
+            }
         }
 
         $this->_respond();
