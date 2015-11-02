@@ -52,7 +52,9 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         $fields_settings = array();
 
         foreach( $fields as $field ){
-            $fields_settings[] = $field->get_settings();
+            $settings = $field->get_settings();
+            $settings[ 'id' ] = $field->get_id();
+            $fields_settings[] = $settings;
         }
 
         $actions_settings = array();
