@@ -27,6 +27,7 @@ jQuery( document ).ready( function( $ ) {
 				_.each( nfForms, function( form, index ) {
 					var formModel = new FormModel( form );
 					var fields = new FieldCollection( form.fields );
+					fields.sort();
 					formModel.set( 'fields', fields );
 					that.forms.add( formModel );
 				} );
