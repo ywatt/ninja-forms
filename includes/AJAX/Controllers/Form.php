@@ -17,7 +17,7 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
             $this->_respond();
         }
 
-        $form_data = $_POST[ 'form' ];
+        $form_data = json_decode( stripslashes( $_POST['form'] ), ARRAY_A );
 
         $form = Ninja_Forms()->form( $form_data[ 'id' ] );
 
