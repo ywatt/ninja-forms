@@ -27,10 +27,10 @@
 		 */
 
 		/*
-		 * Render our label if the position is set to before or left.
+		 * Render our label if the position is set to above or left.
 		 */
 		%>
-		<%= ( 'before' == label_pos || 'left' == label_pos ) ? renderLabel() : '' %>
+		<%= ( 'above' == label_pos || 'left' == label_pos ) ? renderLabel() : '' %>
 		<%
 		/*
 		 * Render our field element. Uses the template for the field being rendered.
@@ -39,10 +39,10 @@
 		<%= renderElement() %>
 		<%
 		/*
-		 * Render our label if the position is set to after or right.
+		 * Render our label if the position is set to below or right.
 		 */
 		%>
-		<%= ( 'after' == label_pos || 'right' == label_pos ) ? renderLabel() : '' %>
+		<%= ( 'below' == label_pos || 'right' == label_pos ) ? renderLabel() : '' %>
 		<%
 		/*
 		 * Render our error section if we have an error.

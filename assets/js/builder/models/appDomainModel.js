@@ -6,6 +6,7 @@ define( [], function() {
 			active: false,
 			url: '',
 			hotkeys: false,
+			disabled: false,
 			
 			renderDashicons: function() {
 				if ( this.dashicons ) {
@@ -37,6 +38,14 @@ define( [], function() {
 					return '_blank';
 				} else {
 					return '_self';
+				}
+			},
+
+			renderDisabled: function() {
+				if ( this.disabled ) {
+					return 'disabled';
+				} else {
+					return '';
 				}
 			}
 		}

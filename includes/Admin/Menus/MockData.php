@@ -50,7 +50,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'textbox' )
             ->update_setting( 'label', 'Name')
-            ->update_setting( 'label_pos', 'inside' )
+            ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'required', 1 )
             ->update_setting( 'order', 1 )
             ->save();
@@ -60,7 +60,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'email' )
             ->update_setting( 'label', 'Email')
-            ->update_setting( 'label_pos', 'inside' )
+            ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'required', 1 )
             ->update_setting( 'order', 2 )
             ->save();
@@ -70,7 +70,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'textbox' )
             ->update_setting( 'label', 'Confirm Email')
-            ->update_setting( 'label_pos', 'inside' )
+            ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'confirm_field', $email_field_id )
             ->update_setting( 'required', 1 )
             ->update_setting( 'order', 3 )
@@ -79,7 +79,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'textarea' )
             ->update_setting( 'label', 'Message')
-            ->update_setting( 'label_pos', 'inside' )
+            ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'required', 1 )
             ->update_setting( 'order', 4 )
             ->save();
@@ -87,7 +87,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'textbox' )
             ->update_setting( 'label', 'Mirror Name')
-            ->update_setting( 'label_pos', 'inside' )
+            ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'required', 1 )
             ->update_setting( 'mirror_field', $name_field_id )
             ->update_setting( 'order', 5 )

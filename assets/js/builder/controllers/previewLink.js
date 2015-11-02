@@ -8,12 +8,14 @@ define( [], function() {
 		disablePreview: function() {
 			var appDomains = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
 			var preview = appDomains.get( 'preview' );
+			preview.set( 'disabled', true );
 		},
 
 		changePreviewNicename: function() {
 			var appDomains = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
 			var preview = appDomains.get( 'preview' );
 			preview.set( 'nicename', 'Preview Changes' );
+			preview.set( 'disabled', false );
 		}
 
 	});

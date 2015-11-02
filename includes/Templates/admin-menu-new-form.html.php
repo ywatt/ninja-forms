@@ -297,7 +297,7 @@
 </script>
 
 <script id="nf-tmpl-app-menu-item" type="text/template">
-    <li><a href="<%= renderUrl() %>" class="<%= renderClasses() %>" target="<%= renderTarget() %>"><%= nicename %><%= renderDashicons() %></a></li>
+    <li><a href="<%= renderUrl() %>" class="<%= renderClasses() %>" target="<%= renderTarget() %>" <%= renderDisabled() %>><%= nicename %><%= renderDashicons() %></a></li>
 </script>
 
 <div class="nf-field-wrap nf-field-hover hidden">
