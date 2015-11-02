@@ -17,6 +17,7 @@ define( [
 					id: 'textbox',
 					nicename: 'Textbox',
 					alias: [ 'input' ],
+					parentType: '',
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
@@ -132,6 +133,7 @@ define( [
 					id: 'radio',
 					nicename: 'Radio Buttons',
 					alias: ['input', 'list'],
+					parentType: 'list',
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
@@ -191,6 +193,7 @@ define( [
 					id: 'dropdown',
 					nicename: 'Dropdown',
 					alias: [ 'select' ],
+					parentType: 'list',
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
@@ -250,6 +253,7 @@ define( [
 					id: 'textarea',
 					nicename: 'Textarea',
 					alias: [ 'message' ],
+					parentType: '',
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
@@ -350,6 +354,7 @@ define( [
 					id: 'submit',
 					nicename: 'Submit',
 					alias: ['button'],
+					parentType: 'button',
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
@@ -369,6 +374,7 @@ define( [
 					id: 'firstname',
 					nicename: 'First Name',
 					tags: ['contact'],
+					parentType: 'textbox',
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
@@ -488,6 +494,7 @@ define( [
 					nicename: 'Email',
 					alias: ['html5'],
 					tags: ['contact'],
+					parentType: 'textbox',
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
@@ -784,6 +791,7 @@ define( [
 					nicename: 'Phone',
 					alias: ['telephone'],
 					tags: ['contact'],
+					parentType: 'textbox',
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',
