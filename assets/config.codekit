@@ -2,6 +2,15 @@
 "CodeKitInfo": "This is a CodeKit 2.x project configuration file. It is designed to sync project settings across multiple machines. MODIFYING THE CONTENTS OF THIS FILE IS A POOR LIFE DECISION. If you do so, you will likely cause CodeKit to crash. This file is not useful unless accompanied by the project that created it in CodeKit 2. This file is not backwards-compatible with CodeKit 1.x. For more information, see: http:\/\/incident57.com\/codekit",
 "creatorBuild": "19076",
 "files": {
+	"\/css\/builder.css": {
+		"fileType": 16,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/css\/builder.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/img\/ninja-forms-app-header-logo.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -57,23 +66,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/js\/builder\/controllers\/changeFieldSetting.js": {
+	"\/js\/builder\/controllers\/changeFieldSettingDefault.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/builder\/controllers\/changeFieldSetting.js",
-		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/changeFieldSetting-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/js\/builder\/controllers\/changeToggleSetting.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/builder\/controllers\/changeToggleSetting.js",
-		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/changeToggleSetting-min.js",
+		"inputAbbreviatedPath": "\/js\/builder\/controllers\/changeFieldSettingDefault.js",
+		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/changeFieldSettingDefault-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -107,6 +105,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/js\/builder\/controllers\/drawerFieldTypeDrag.js",
 		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/drawerFieldTypeDrag-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/controllers\/drawerFieldTypeSettingChildView.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/controllers\/drawerFieldTypeSettingChildView.js",
+		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/drawerFieldTypeSettingChildView-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -200,6 +209,50 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/js\/builder\/controllers\/fieldList.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/controllers\/fieldList.js",
+		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/fieldList-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/controllers\/fieldListOptionSortable.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/controllers\/fieldListOptionSortable.js",
+		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/fieldListOptionSortable-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/controllers\/fieldset.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/controllers\/fieldset.js",
+		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/fieldset-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/controllers\/fieldToggle.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/controllers\/fieldToggle.js",
+		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/fieldToggle-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/js\/builder\/controllers\/fieldTypes.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -217,6 +270,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/js\/builder\/controllers\/fieldTypeSections.js",
 		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/fieldTypeSections-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/controllers\/formData.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/controllers\/formData.js",
+		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/formData-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -250,6 +314,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/js\/builder\/controllers\/mainContentFieldsSortable.js",
 		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/mainContentFieldsSortable-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/controllers\/updateFieldSetting.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/controllers\/updateFieldSetting.js",
+		"outputAbbreviatedPath": "\/js\/builder\/controllers\/min\/updateFieldSetting-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -431,6 +506,39 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/js\/builder\/models\/formModel.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/models\/formModel.js",
+		"outputAbbreviatedPath": "\/js\/builder\/models\/min\/formModel-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/models\/listOptionCollection.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/models\/listOptionCollection.js",
+		"outputAbbreviatedPath": "\/js\/builder\/models\/min\/listOptionCollection-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/models\/listOptionModel.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/models\/listOptionModel.js",
+		"outputAbbreviatedPath": "\/js\/builder\/models\/min\/listOptionModel-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/js\/builder\/models\/stagingCollection.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -503,6 +611,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/js\/builder\/views\/builder.js",
 		"outputAbbreviatedPath": "\/js\/builder\/views\/min\/builder-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/views\/drawer.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/views\/drawer.js",
+		"outputAbbreviatedPath": "\/js\/builder\/views\/min\/drawer-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -618,12 +737,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/js\/builder\/views\/drawerFieldTypeSettingComposite.js": {
+	"\/js\/builder\/views\/drawerFieldTypeSettingFieldset.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/builder\/views\/drawerFieldTypeSettingComposite.js",
-		"outputAbbreviatedPath": "\/js\/builder\/views\/min\/drawerFieldTypeSettingComposite-min.js",
+		"inputAbbreviatedPath": "\/js\/builder\/views\/drawerFieldTypeSettingFieldset.js",
+		"outputAbbreviatedPath": "\/js\/builder\/views\/min\/drawerFieldTypeSettingFieldset-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -646,6 +765,39 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/js\/builder\/views\/drawerFieldTypeSettingGroupCollection.js",
 		"outputAbbreviatedPath": "\/js\/builder\/views\/min\/drawerFieldTypeSettingGroupCollection-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/views\/drawerFieldTypeSettingListComposite.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/views\/drawerFieldTypeSettingListComposite.js",
+		"outputAbbreviatedPath": "\/js\/builder\/views\/min\/drawerFieldTypeSettingListComposite-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/views\/drawerFieldTypeSettingListEmpty.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/views\/drawerFieldTypeSettingListEmpty.js",
+		"outputAbbreviatedPath": "\/js\/builder\/views\/min\/drawerFieldTypeSettingListEmpty-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/js\/builder\/views\/drawerFieldTypeSettingListOption.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/builder\/views\/drawerFieldTypeSettingListOption.js",
+		"outputAbbreviatedPath": "\/js\/builder\/views\/min\/drawerFieldTypeSettingListOption-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
