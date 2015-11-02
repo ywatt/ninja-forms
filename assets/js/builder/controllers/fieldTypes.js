@@ -130,7 +130,7 @@ define( [
 					] )
 				},
 				{
-					id: 'radio',
+					id: 'listradio',
 					nicename: 'Radio Buttons',
 					alias: ['input', 'list'],
 					parentType: 'list',
@@ -355,6 +355,26 @@ define( [
 					nicename: 'Submit',
 					alias: ['button'],
 					parentType: 'button',
+					settingGroups: new fieldTypeSettingGroupCollection( [
+						{
+							name: '',
+							display: true,
+							settings: new fieldTypeSettingCollection( [
+								{
+									type: 'textbox',
+									name: 'label',
+									label: 'Label',
+									width: 'full'
+								}								
+							] )
+						}
+					] )
+				},
+				{
+					id: 'checkbox',
+					nicename: 'Checkbox',
+					alias: ['toggle'],
+					parentType: '',
 					settingGroups: new fieldTypeSettingGroupCollection( [
 						{
 							name: '',

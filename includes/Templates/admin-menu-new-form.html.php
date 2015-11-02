@@ -9,7 +9,7 @@
 
 <script id="nf-tmpl-header" type="text/template">
     <div id="nf-app-header"></div>
-    <h2>Contact Form</h2>
+    <h2><%= renderTitle() %></h2>
     <div id="nf-app-sub-header"></div>
 
 </script>

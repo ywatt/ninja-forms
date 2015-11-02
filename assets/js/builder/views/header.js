@@ -22,7 +22,17 @@ define( ['builder/views/appHeader', 'builder/views/appSubHeader'], function( app
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 			var subHeaderView = currentDomain.get( 'getSubHeaderView' ).call( currentDomain );
 			this.appSub.show( subHeaderView );
-		}
+		},
+
+		templateHelpers: function () {
+			var that = this;
+	    	return {
+	    		renderTitle: function(){
+	    			var formData = nfRadio.channel( 'data' ).request( 'get:formData' );
+	    			return formData.get( 'settings' ).title;
+				},
+			};
+		},
 	});
 
 	return view;

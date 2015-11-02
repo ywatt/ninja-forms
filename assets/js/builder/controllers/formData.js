@@ -4,6 +4,7 @@ define( ['builder/models/formModel'], function( formModel) {
 			this.model = new formModel;
 			this.model.set( 'id', preloadedFormData.id );
 			this.model.set( 'fields', nfRadio.channel( 'data' ).request( 'get:fieldCollection' ) );
+			this.model.set( 'settings', preloadedFormData.settings );
 
 			nfRadio.channel( 'data' ).reply( 'get:formData', this.getFormData, this );
 		},

@@ -21,9 +21,7 @@ define( [], function() {
 		},
 
 		changeSetting: function() {
-			if ( ! this.hasChanged( 'isUpdated' ) ) {
-				nfRadio.channel( 'fields' ).trigger( 'update:setting', this );
-			}
+			nfRadio.channel( 'fields' ).trigger( 'update:setting', this );
 		}
 	} );
 	

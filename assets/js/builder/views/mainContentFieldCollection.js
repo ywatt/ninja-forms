@@ -19,7 +19,7 @@ define( ['builder/views/mainContentField', 'builder/views/mainContentFieldsEmpty
 					cancel: '.nf-item-controls',
 					placeholder: 'nf-fields-sortable-placeholder',
 					opacity: 0.95,
-					tolerance: 'pointer',
+					tolerance: 'intersect',
 
 					receive: function( e, ui ) {
 						nfRadio.channel( 'app' ).request( 'receive:fieldsSortable', ui );
