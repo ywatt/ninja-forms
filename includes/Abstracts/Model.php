@@ -73,7 +73,7 @@ class NF_Abstracts_Model
 
         if( is_int( $id ) ) {
             $this->_id = $id;
-        } else {
+        } elseif( $id ) {
             $this->_tmp_id = $id;
         }
 
