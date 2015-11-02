@@ -94,7 +94,7 @@ define( [
 				},
 				{
 					id: 'preview',
-					nicename: 'Preview Changes',
+					nicename: 'Preview Form',
 					classes: 'preview',
 					dashicons: 'dashicons-visibility',
 					url: nfAdmin.previewurl

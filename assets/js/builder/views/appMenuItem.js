@@ -5,6 +5,7 @@ define( [], function() {
 
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'app' ), 'change:appDomain', this.render );
+			this.model.on( 'change', this.render, this );
 		},
 
 		onRender: function() {

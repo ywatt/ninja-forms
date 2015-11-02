@@ -21,8 +21,10 @@ define( [], function() {
 			
 			data = JSON.stringify( data );
 			
+			nfRadio.channel( 'app' ).trigger( 'before:postChanges', data );
+
 			jQuery.post( ajaxurl, { action: 'nf_preview_update', form: data, security: nfAdmin.ajaxNonce }, function( response ) {
-				console.log( jQuery.parseJSON( response ) );
+				nfRadio.channel( 'app' ).trigger( 'response:postChanges', response );
 			} );
 		}
 
