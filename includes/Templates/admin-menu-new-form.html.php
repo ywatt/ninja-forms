@@ -29,9 +29,9 @@
 <script id="nf-tmpl-app-header" type="text/template">
     <div id="nf-logo"></div>
     <ul class="nf-app-menu"></ul>
-    <input class="nf-button primary" type="submit" value="Save" />
     <a class="nf-mobile" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
-    <a class="nf-cancel" href="#">Cancel</a>
+    <input class="nf-button primary" type="submit" value="Publish" />
+    <a class="nf-cancel" href="#">Cancel Changes</a>
 </script>
 
 <script id="nf-tmpl-main" type="text/template">

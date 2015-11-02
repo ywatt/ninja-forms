@@ -7,7 +7,7 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 					nicename: 'Common Fields',
 					fieldTypes: [
 						'textbox',
-						'radio',
+						'listradio',
 						'dropdown',
 						'textarea',
 						'submit'
