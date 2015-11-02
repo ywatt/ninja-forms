@@ -101,6 +101,11 @@ class NF_Abstracts_Model
         return intval( $this->_id );
     }
 
+    public function get_tmp_id()
+    {
+        return intval( $this->_tmp_id );
+    }
+
     public function get_type()
     {
         return $this->_type;
