@@ -15,6 +15,11 @@ class NF_Abstracts_Model
     /**
      * @var string
      */
+    protected $_tmp_id = '';
+
+    /**
+     * @var string
+     */
     protected $_type = '';
 
     /**
