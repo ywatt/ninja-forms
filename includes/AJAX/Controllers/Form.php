@@ -25,7 +25,11 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 
         foreach( $form_data[ 'fields' ] as $field_data ){
             $field = Ninja_Forms()->form()->get_field( $field_data[ 'id' ] );
-            $field->update_settings( $field_data[ 'settings' ] )->save();
+            $new_id = $field->update_settings( $field_data[ 'settings' ] )->save();
+
+            if( $new_id ){
+                $this->_data[ 'new_field_ids' ] = array_merge( $this->_data[ 'new_field_ids'], $new_id );
+            }
         }
 
         foreach( $form_data[ 'actions' ] as $action_data ){

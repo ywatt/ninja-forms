@@ -71,7 +71,11 @@ class NF_Abstracts_Model
     {
         $this->_db = $db;
 
-        $this->_id = $id;
+        if( is_int( $id ) ) {
+            $this->_id = $id;
+        } else {
+            $this->_tmp_id = $id;
+        }
 
         $this->_parent_id = $parent_id;
 
@@ -302,6 +306,10 @@ class NF_Abstracts_Model
         }
 
         $this->_save_settings();
+
+        if( $this->_tmp_id ){
+            return array( $this->_tmp_id => $this->_id );
+        }
     }
 
     /**
