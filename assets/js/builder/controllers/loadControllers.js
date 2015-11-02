@@ -23,7 +23,8 @@ define(
 		'builder/controllers/fieldset',
 		'builder/controllers/fieldListOptionSortable',
 		'builder/controllers/fieldList',
-		'builder/controllers/updateFieldSetting'
+		'builder/controllers/updateFieldSetting',
+		'builder/controllers/formData'
 
 	],
 	function(
@@ -50,7 +51,8 @@ define(
 		Fieldset,
 		FieldListOptionSortable,
 		FieldList,
-		UpdateFieldSetting
+		UpdateFieldSetting,
+		FormData
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -78,6 +80,7 @@ define(
 				var fieldList = new FieldList();
 				var fieldData = new FieldData();
 				var updateFieldSetting = new UpdateFieldSetting();
+				var formData = new FormData();
 			}
 		});
 

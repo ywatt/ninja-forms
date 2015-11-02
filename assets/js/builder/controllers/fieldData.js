@@ -7,7 +7,6 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 			nfRadio.channel( 'data' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
 			nfRadio.channel( 'data' ).reply( 'get:field', this.getField, this );
 			nfRadio.channel( 'data' ).reply( 'add:field', this.addField, this );
-			nfRadio.channel( 'data' ).reply( 'update:fieldSetting', this.updateFieldSetting, this );
 			nfRadio.channel( 'data' ).reply( 'delete:field', this.deleteField, this );
 			nfRadio.channel( 'data' ).reply( 'sort:fields', this.sortFields, this );
 			nfRadio.channel( 'data' ).reply( 'get:tmpFieldID', this.getTmpFieldID, this );
@@ -43,7 +42,8 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 					} else {
 						var search = id;
 					}
-					var pos = order.indexOf( search );
+					var pos = order.indexOf( search ) + 1;
+					pos = pos.toString();
 					field.set( 'order', pos );
 				} );
 				this.collection.sort();			

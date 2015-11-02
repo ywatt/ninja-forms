@@ -4,13 +4,26 @@ define( [], function() {
 			this.listenTo( nfRadio.channel( 'fields' ), 'update:setting', this.updateSetting, this );
 		},
 
-		updateSetting: function( e, settingTypeModel, fieldModel ) {
+		updateSetting: function( fieldModel ) {
 			// Update our model in the database.
-			// var data = this.changedAttributes();
-			// data.fieldID = this.get( 'id' );
-			var appData = nfRadio.channel( 'app' ).request( 'get:appData' );
-
+			var changedSettings = fieldModel.changedAttributes();
+			var fieldID = fieldModel.get( 'id' );
+			var formID = preloadedFormData.id;
+			var data = {
+				id: formID,
+				fields: [
+					{
+						id: fieldID,
+						settings: changedSettings
+					}
+				]
+			}
 			
+			data = JSON.stringify( data );
+			
+			jQuery.post( ajaxurl, { action: 'nf_preview_update', form: data, security: nfAdmin.ajaxNonce }, function( response ) {
+				console.log( jQuery.parseJSON( response ) );
+			} );
 		}
 
 	});

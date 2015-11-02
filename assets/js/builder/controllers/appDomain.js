@@ -97,7 +97,7 @@ define( [
 					nicename: 'Preview Changes',
 					classes: 'preview',
 					dashicons: 'dashicons-visibility',
-					url: 'http://www.cnn.com'
+					url: nfAdmin.previewurl
 				}
 			] );
 

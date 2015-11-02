@@ -28,7 +28,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/builder/main.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );
         
-        wp_localize_script( 'nf-builder', 'nfAdmin', array( 'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ), 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/' ) );
+        wp_localize_script( 'nf-builder', 'nfAdmin', array( 'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ), 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/', 'previewurl' => site_url() . '/?nf_preview_form=' . $_GET[ 'form_id' ] ) );
 
         $this->_localize_form_data( $_GET[ 'form_id' ] );
 
@@ -64,6 +64,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
         
         $form_data = array();
+        $form_data['id'] = $form_id;
         $form_data['settings'] = $form->get_settings();
         $form_data['fields'] = $fields_settings;
         $form_data['actions'] = $actions_settings;

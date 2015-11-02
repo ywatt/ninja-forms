@@ -22,6 +22,22 @@ define( [], function() {
 					classes += ' active';
 				}
 				return classes;
+			},
+
+			renderUrl: function() {
+				if ( '' != this.url ) {
+					return this.url;
+				} else {
+					return '#';
+				}
+			},
+
+			renderTarget: function() {
+				if ( '' != this.url ) {
+					return '_blank';
+				} else {
+					return '_self';
+				}
 			}
 		}
 	} );

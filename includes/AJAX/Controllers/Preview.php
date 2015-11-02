@@ -15,7 +15,9 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
     {
         check_ajax_referer( 'ninja_forms_ajax_nonce', 'security' );
 
-        $form_id = $_POST[ 'form' ][ 'id' ];
+        $form = json_decode( stripslashes( $_POST['form'] ), ARRAY_A );
+
+        $form_id = $form[ 'id' ];
 
         $form_data = $this->get_form_data( $form_id );
 
@@ -23,24 +25,24 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
          * Form Settings
          */
 
-        if( isset( $_POST[ 'form' ][ 'settings' ] ) && is_array( $_POST[ 'form' ][ 'settings' ] ) ) {
+        if( isset( $form[ 'settings' ] ) && is_array( $form[ 'settings' ] ) ) {
 
             $old_settings = $form_data[ 'settings' ];
 
-            $form_data[ 'settings' ] = array_merge( $old_settings, $_POST[ 'form' ][ 'settings' ] );
+            $form_data[ 'settings' ] = array_merge( $old_settings, $form[ 'settings' ] );
         }
 
         /*
          * Fields and Field Settings
          */
 
-        if( isset( $_POST[ 'form' ][ 'fields' ] ) && is_array( $_POST[ 'form' ][ 'fields' ] ) ) {
+        if( isset( $form[ 'fields' ] ) && is_array( $form[ 'fields' ] ) ) {
 
-            foreach( $_POST[ 'form' ][ 'fields' ] as $field ){
+            foreach( $form[ 'fields' ] as $field ){
 
                 $id = $field[ 'id' ];
 
-                $old_settings = $form_data[ 'fields' ][ id ][ 'settings' ];
+                $old_settings = $form_data[ 'fields' ][ $id ][ 'settings' ];
 
                 $new_settings = array_merge( $old_settings, $field[ 'settings' ] );
 
@@ -52,9 +54,9 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
          * Actions and Action Settings
          */
 
-        if( isset( $_POST[ 'form' ][ 'actions' ] ) && is_array( $_POST[ 'form' ][ 'actions' ] ) ) {
+        if( isset( $form[ 'actions' ] ) && is_array( $form[ 'actions' ] ) ) {
 
-            foreach( $_POST[ 'form' ][ 'actions' ] as $action ){
+            foreach( $form[ 'actions' ] as $action ){
 
                 $id = $action[ 'id' ];
 
