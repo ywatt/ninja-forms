@@ -2,6 +2,7 @@ define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
 			classes: '',
+
 			renderFieldTypes: function() {
 		        var html = '';
 		        var that = this;
@@ -12,6 +13,7 @@ define( [], function() {
 		        } );
 		        return html;
 			},
+
 			isSavedField: function() {
 				if( this.type.get( 'savedField' ) ) {
 					return 'nf-saved';
