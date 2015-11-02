@@ -2,11 +2,14 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 
+			// this.collection = new fieldCollection( preloadedFormData.fields );
+			// this.collection.sort();
 			this.collection = new fieldCollection( [
 				
 				{
 					id: 1,
 					type: 'firstname',
+					parentType: 'textbox',
 					label: 'First Name',
 					label_pos: 'above',
 					default_value: '',
@@ -17,6 +20,7 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 				{
 					id: 2,
 					type: 'lastname',
+					parentType: 'textbox',
 					label: 'Last Name',
 					label_pos: 'above',
 					default_value: '',
@@ -26,6 +30,7 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 				{
 					id: 5,
 					type: 'radio',
+					parentType: 'list',
 					label: 'Radio Buttons',
 					label_pos: 'above',
 					default_value: '',
@@ -33,22 +38,22 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 						{
 							label: 'Item 1',
 							value: 'item1',
-							calcValue: '1'
+							calc: '1'
 						},
 						{
 							label: 'Item 2',
 							value: 'item2',
-							calcValue: '2'
+							calc: '2'
 						},
 						{
 							label: 'Item 3',
 							value: 'item3',
-							calcValue: '3'
+							calc: '3'
 						},
 						{
 							label: 'Item 4',
 							value: 'item4',
-							calcValue: '4'
+							calc: '4'
 						}
 					] ),
 					order: 3
@@ -56,6 +61,7 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 				{
 					id: 3,
 					type: 'textarea',
+					parentType: 'baseField',
 					label: 'Message',
 					label_pos: 'above',
 					default_value: '',
@@ -65,11 +71,15 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 				{
 					id: 4,
 					type: 'submit',
+					parentType: 'button',
 					label: 'Submit',
 					order: 5
 				}
 				
 			] );
+
+			console.log( this.collection.models );
+			console.log( preloadedFormData.fields );
 
 			nfRadio.channel( 'data' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
 			nfRadio.channel( 'data' ).reply( 'get:field', this.getField, this );

@@ -7,7 +7,7 @@ define( ['builder/views/drawerFieldTypeSettingListOption', 'builder/views/drawer
 		initialize: function( data ) {
 			this.collection = data.fieldModel.get( 'options' );
 			this.fieldModel = data.fieldModel;
-			this.childViewOptions = { fieldModel: data.fieldModel };
+			this.childViewOptions = { collection: this.collection, fieldModel: data.fieldModel };
 		},
 
 		onRender: function() {
@@ -60,7 +60,7 @@ define( ['builder/views/drawerFieldTypeSettingListOption', 'builder/views/drawer
 		},
 
 		addOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).request( 'add:option', this.collection );
+			nfRadio.channel( 'list-repeater' ).request( 'add:option', this.collection, this.fieldModel );
 		}
 
 	} );

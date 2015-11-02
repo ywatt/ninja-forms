@@ -404,7 +404,7 @@
         <input type="text" value="<%= value %>" data-id="value">
     </td>
     <td>
-        <input type="text" value="<%= calcValue %>" data-id="calc">
+        <input type="text" value="<%= calc %>" data-id="calc">
     </td>
     <td>
         <span class="dashicons dashicons-dismiss nf-delete"></span>

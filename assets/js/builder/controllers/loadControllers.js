@@ -22,7 +22,8 @@ define(
 		'builder/controllers/drawerFieldTypeSettingChildView',
 		'builder/controllers/fieldset',
 		'builder/controllers/fieldListOptionSortable',
-		'builder/controllers/fieldList'
+		'builder/controllers/fieldList',
+		'builder/controllers/updateFieldSetting'
 
 	],
 	function(
@@ -48,7 +49,8 @@ define(
 		DrawerFieldTypeSettingChildView,
 		Fieldset,
 		FieldListOptionSortable,
-		FieldList
+		FieldList,
+		UpdateFieldSetting
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -75,6 +77,7 @@ define(
 				var fieldListOptionSortable = new FieldListOptionSortable();
 				var fieldList = new FieldList();
 				var fieldData = new FieldData();
+				var updateFieldSetting = new UpdateFieldSetting();
 			}
 		});
 

@@ -8,7 +8,7 @@ define( ['builder/models/listOptionModel'], function( listOptionModel ) {
 		},
 
 		changeCollection: function() {
-			nfRadio.channel( 'field-list' ).trigger( 'sort:options', this );
+			nfRadio.channel( 'list-repeater' ).trigger( 'sort:options', this );
 		}
 	} );
 	return collection;

@@ -13,13 +13,14 @@ define( [], function() {
 
 		initialize: function() {
 			this.bind( 'change', this.changeSetting, this );
-			nfRadio.channel( 'data' ).trigger( 'init:fieldModel', this );
-			nfRadio.channel( 'field-' + this.get( 'type' ) ).trigger( 'init:fieldModel', this );
+			nfRadio.channel( 'fields' ).trigger( 'init:fieldModel', this );
+			nfRadio.channel( 'fields-' + this.get( 'parentType' ) ).trigger( 'init:fieldModel', this );
+			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:fieldModel', this );
 		},
 
 		changeSetting: function() {
 			if ( ! this.hasChanged( 'isUpdated' ) ) {
-				
+				nfRadio.channel( 'fields' ).trigger( 'update:setting', this );
 			}
 		}
 	} );

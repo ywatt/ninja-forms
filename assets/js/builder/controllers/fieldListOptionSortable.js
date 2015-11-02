@@ -17,6 +17,8 @@ define( ['builder/views/drawerFieldTypeSettingListComposite'], function( listCom
 				setting.collection.get( { cid: cid } ).set( 'order', index );
 			} );
 			setting.collection.sort();
+
+			nfRadio.channel( 'list-repeater' ).request( 'trigger:change', setting.collection, setting.fieldModel );
 		},
 
 		stopOptionSortable: function( ui ) {

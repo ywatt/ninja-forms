@@ -16,22 +16,22 @@ define( [], function() {
 		},
 
 		events: {
-			'change input': 'changeSetting',
+			'change input': 'changeOption',
 			'click .nf-delete': 'deleteOption',
 			'keyup': 'maybeAddOption'
 		},
 
-		changeSetting: function( e ) {
-			nfRadio.channel( 'field-list' ).trigger( 'change:option', e, this.model );
+		changeOption: function( e ) {
+			nfRadio.channel( 'list-repeater' ).trigger( 'change:option', e, this.model, this.fieldModel );
 		},
 
 		deleteOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).request( 'delete:option', this.model, this.model.collection );
+			nfRadio.channel( 'list-repeater' ).request( 'delete:option', this.model, this.model.collection, this.fieldModel );
 		},
 
 		maybeAddOption: function( e ) {
 			if ( 13 == e.keyCode ) {
-				nfRadio.channel( 'list-repeater' ).request( 'add:option', this.model.collection );
+				nfRadio.channel( 'list-repeater' ).request( 'add:option', this.model.collection, this.fieldModel );
 			}
 		}
 

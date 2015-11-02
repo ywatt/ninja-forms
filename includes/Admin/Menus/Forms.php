@@ -60,14 +60,16 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         foreach( $actions as $action ){
             $actions_settings[] = $action->get_settings();
         }
+        
+        $form_data = array();
+        $form_data['settings'] = $form->get_settings();
+        $form_data['fields'] = $fields_settings;
+        $form_data['actions'] = $actions_settings;
 
         ?>
         <script>
-            var formData = JSON.parse( '<?php echo wp_json_encode( $form->get_settings() ); ?>' );
-            formData[ 'settings' ] = JSON.parse( '<?php echo wp_json_encode( $form->get_settings() ); ?>' );
-            formData[ 'fields' ] = JSON.parse( '<?php echo wp_json_encode( $fields_settings ); ?>' );
-            formData[ 'actions' ] = JSON.parse( '<?php echo wp_json_encode( $actions_settings ); ?>' );
-            console.log( formData );
+            var preloadedFormData = <?php echo wp_json_encode( $form_data ); ?>;
+            // console.log( preloadedFormData );
         </script>
         <?php
     }
@@ -88,8 +90,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
         ?>
         <script>
-            var fieldTypeData = JSON.parse( '<?php echo wp_json_encode( $field_type_settings ); ?>' );
-            console.log( fieldTypeData );
+            var fieldTypeData = <?php echo wp_json_encode( $field_type_settings ); ?>;
+            // console.log( fieldTypeData );
         </script>
         <?php
     }
@@ -108,8 +110,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
         ?>
         <script>
-            var actionTypeData = JSON.parse( '<?php echo wp_json_encode( $action_type_settings ); ?>' );
-            console.log( actionTypeData );
+            var actionTypeData = <?php echo wp_json_encode( $action_type_settings ); ?>;
+            // console.log( actionTypeData );
         </script>
         <?php
     }
