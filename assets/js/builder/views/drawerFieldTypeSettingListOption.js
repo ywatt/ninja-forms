@@ -5,6 +5,7 @@ define( [], function() {
 
 		initialize: function( data ) {
 			this.fieldModel = data.fieldModel;
+			this.collection = data.collection;
 		},
 
 		onRender: function() {
@@ -26,12 +27,12 @@ define( [], function() {
 		},
 
 		deleteOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).request( 'delete:option', this.model, this.model.collection, this.fieldModel );
+			nfRadio.channel( 'list-repeater' ).request( 'delete:option', this.model, this.collection, this.fieldModel );
 		},
 
 		maybeAddOption: function( e ) {
 			if ( 13 == e.keyCode ) {
-				nfRadio.channel( 'list-repeater' ).request( 'add:option', this.model.collection, this.fieldModel );
+				nfRadio.channel( 'list-repeater' ).request( 'add:option', this.collection, this.fieldModel );
 			}
 		}
 

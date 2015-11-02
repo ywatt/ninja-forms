@@ -11,6 +11,7 @@ define( ['builder/models/listOptionCollection'], function( listOptionCollection 
 		},
 
 		createOptionCollection: function( model ) {
+			console.log( 'create collection' );
 			if ( ! model.get( 'options' ) ) {
 				model.set( 'options', new listOptionCollection() );
 			}
