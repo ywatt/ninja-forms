@@ -72,13 +72,13 @@ class NF_Abstracts_Model
      *
      * @param $id
      */
-    public function __construct( $db, $id = '', $parent_id = '' )
+    public function __construct( $db, $id = NULL, $parent_id = '' )
     {
         $this->_db = $db;
 
-        if( is_int( $id ) ) {
-            $this->_id = $id;
-        } elseif( $id ) {
+        if( is_numeric( $id ) ) {
+            $this->_id = absint( $id );
+        } else {
             $this->_tmp_id = $id;
         }
 
