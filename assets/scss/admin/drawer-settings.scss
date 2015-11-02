@@ -71,14 +71,24 @@
 }
 .ninja-forms-app {
     .nf-list-options {
+        padding-bottom: 20px;
         .nf-add-new {
             margin-left: 20px;
         }
         table {
+            tr {
+                // height: 100px;
+                // border-top: 4px solid tranparent;
+                // border-bottom: 4px solid transparent;
+            }
+            th {
+                padding: 30px 10px 5px;
+            }
             td {
-                padding: 15px 5px;
+                //border-top: 16px solid red;
+                padding: 5px;
                 &:nth-child(1), &:nth-child(5) {
-                    padding: 15px;
+                    padding: 0 15px;
                     width: 20px;
                 }
                 &:nth-child(2), &:nth-child(3) {
@@ -86,6 +96,9 @@
                 }
                 &:nth-child(4) {
                     min-width: 120px;
+                }
+                input {
+                    margin: 0;
                 }
             }
         }
