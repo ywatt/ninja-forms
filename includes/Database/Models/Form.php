@@ -118,6 +118,40 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         });
     }
 
+    public static function duplicate( $form_id )
+    {
+        $form = Ninja_Forms()->form( $form_id )->get();
+
+        $settings = $form->get_settings();
+
+        $new_form = Ninja_Forms()->form()->get();
+        $new_form->update_settings( $settings);
+
+        $new_form_id = $new_form->get_id();
+
+        $fields = Ninja_Forms()->form( $form_id )->get_fields();
+
+        foreach( $fields as $field ){
+
+            $field_settings = $field->get_settings();
+
+            $new_field = Ninja_Forms()->form( $new_form_id )->field();
+            $new_field->update_settings( $field_settings );
+        }
+
+        $actions = Ninja_Forms()->form( $form_id )->get_actions();
+
+        foreach( $actions as $action ){
+
+            $action_settings = $action->get_settings();
+
+            $new_action = Ninja_Forms()->form( $new_form_id )->action();
+            $new_action->update_settings( $action_settings );
+        }
+
+        return $new_form_id;
+    }
+
     public static function export( $form_id, $return = FALSE )
     {
         //TODO: Set Date Format from Plugin Settings
