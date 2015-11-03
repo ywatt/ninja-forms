@@ -31,7 +31,7 @@ define( [], function() {
 
 			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) {
 				var type = jQuery( ui.item ).data( 'id' );
-				var tmpID = this.addField( type, true );
+				var tmpID = this.addField( type, false );
 				jQuery( ui.helper ).prop( 'id', tmpID );
 				nfRadio.channel( 'data' ).request( 'sort:fields' );
 				jQuery( ui.helper ).remove();

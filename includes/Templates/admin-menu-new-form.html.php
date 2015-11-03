@@ -30,8 +30,16 @@
     <div id="nf-logo"></div>
     <ul class="nf-app-menu"></ul>
     <a class="nf-mobile" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
-    <input class="nf-button primary" type="submit" value="Publish" />
-    <a class="nf-cancel" href="#">Cancel Changes</a>
+    <span class="nf-app-buttons"></span>
+</script>
+
+<script id="nf-tmpl-app-header-action-button" type="text/template">
+    <input class="nf-button primary <%= maybeDisabled() %> publish" type="submit" value="Publish" />
+    <%= maybeRenderCancel() %>
+</script>
+
+<script id="nf-tmpl-app-header-cancel" type="text/template">
+    <a class="nf-cancel cancel" href="#">View Changes</a>
 </script>
 
 <script id="nf-tmpl-main" type="text/template">

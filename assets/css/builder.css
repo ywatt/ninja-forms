@@ -388,4 +388,12 @@ All styles used for displaying table content
   .nf-saved .nf-item::after { padding: 14px; } }
 @media only screen and (max-width: 600px) { #nf-builder { margin-top: 46px; } }
 
+
+/**
+ * Styles added by Kevin
+ *
+ * 
+ */
+.nf-button.primary.disabled { background: gray; color: #fff; }
+
 /*# sourceMappingURL=builder.css.map */

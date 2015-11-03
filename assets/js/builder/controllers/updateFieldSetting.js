@@ -5,6 +5,9 @@ define( [], function() {
 		},
 
 		updateSetting: function( fieldModel ) {
+			// Set our 'clean' data flag to false
+			nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', false );
+
 			// Update our model in the database.
 			var changedSettings = fieldModel.changedAttributes();
 			var fieldID = fieldModel.get( 'id' );
@@ -21,10 +24,10 @@ define( [], function() {
 			
 			data = JSON.stringify( data );
 			
-			nfRadio.channel( 'app' ).trigger( 'before:postChanges', data );
+			nfRadio.channel( 'app' ).trigger( 'before:sendChanges', data );
 
 			jQuery.post( ajaxurl, { action: 'nf_preview_update', form: data, security: nfAdmin.ajaxNonce }, function( response ) {
-				nfRadio.channel( 'app' ).trigger( 'response:postChanges', response );
+				nfRadio.channel( 'app' ).trigger( 'response:sendChanges', response );
 			} );
 		}
 

@@ -25,7 +25,8 @@ define(
 		'builder/controllers/fieldList',
 		'builder/controllers/updateFieldSetting',
 		'builder/controllers/formData',
-		'builder/controllers/previewLink'
+		'builder/controllers/previewLink',
+		'builder/controllers/appMenuButtons'
 
 	],
 	function(
@@ -54,7 +55,8 @@ define(
 		FieldList,
 		UpdateFieldSetting,
 		FormData,
-		PreviewLink
+		PreviewLink,
+		AppMenuButtons
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -84,6 +86,7 @@ define(
 				var updateFieldSetting = new UpdateFieldSetting();
 				var formData = new FormData();
 				var previewLink = new PreviewLink();
+				var appMenuButtons = new AppMenuButtons();
 			}
 		});
 

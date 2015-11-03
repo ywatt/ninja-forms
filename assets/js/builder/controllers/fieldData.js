@@ -3,13 +3,17 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 		initialize: function() {
 
 			this.collection = new fieldCollection( preloadedFormData.fields );
-			
+
 			nfRadio.channel( 'data' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
 			nfRadio.channel( 'data' ).reply( 'get:field', this.getField, this );
 			nfRadio.channel( 'data' ).reply( 'add:field', this.addField, this );
 			nfRadio.channel( 'data' ).reply( 'delete:field', this.deleteField, this );
 			nfRadio.channel( 'data' ).reply( 'sort:fields', this.sortFields, this );
 			nfRadio.channel( 'data' ).reply( 'get:tmpFieldID', this.getTmpFieldID, this );
+
+			this.listenTo( nfRadio.channel( 'app' ), 'change:clean', this.updateClone );
+			nfRadio.channel( 'data' ).reply( 'cancel:changes', this.restoreCollection, this );
+
 		},
 
 		getFieldCollection: function() {
@@ -46,7 +50,6 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 					pos = pos.toString();
 					field.set( 'order', pos );
 				} );
-				this.collection.sort();			
 			}
 		},
 
@@ -57,6 +60,17 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 		getTmpFieldID: function() {
 			var tmpNum = this.collection.models.length + 1;
 			return 'tmp-' + tmpNum;
+		},
+
+		updateClone: function( clean ) {
+			if ( clean ) {
+				this.collectionClone = this.collection.clone();
+			}
+		},
+
+		restoreCollection: function() {
+			nfUndoManager.undoAll();
+			nfRadio.channel( 'app' ).trigger( 'cancel:changes' );
 		}
 	});
 
