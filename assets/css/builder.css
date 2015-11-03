@@ -184,12 +184,11 @@ All styles used within the drawer
 
 .ninja-forms-app .nf-list-options { padding-bottom: 20px; }
 .ninja-forms-app .nf-list-options .nf-add-new { margin-left: 20px; }
-.ninja-forms-app .nf-list-options table th { padding: 30px 10px 5px; }
-.ninja-forms-app .nf-list-options table td { padding: 5px; }
-.ninja-forms-app .nf-list-options table td:nth-child(1), .ninja-forms-app .nf-list-options table td:nth-child(5) { padding: 0 15px; width: 20px; }
-.ninja-forms-app .nf-list-options table td:nth-child(2), .ninja-forms-app .nf-list-options table td:nth-child(3) { width: 45%; }
-.ninja-forms-app .nf-list-options table td:nth-child(4) { min-width: 120px; }
-.ninja-forms-app .nf-list-options table td input { margin: 0; }
+.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div { display: table-cell; padding: 5px; }
+.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(1), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(5) { padding: 0 15px; width: 20px; }
+.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(2), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(3) { width: 45%; }
+.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(4) { min-width: 120px; }
+.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div input { margin: 0; }
 
 .nf-drawer-buttons { display: none; margin: 40px -20px -20px; padding: 0; }
 .nf-drawer-buttons li { background: #fff; border-right: 1px solid #f1f1f1; float: left; margin: 0; padding: 15px; text-align: center; width: 50%; }
@@ -322,8 +321,7 @@ All styles used for displaying table content
 
 .nf-staged-fields-sortable-placeholder { float: left; height: 28px; border-right: 3px solid #84CC1E; margin-right: -2px; margin-left: -2px; }
 
-.nf-list-options-sortable-placeholder { border-top: 4px solid #84CC1E; border-bottom: 4px solid #84CC1E; }
-.nf-list-options-sortable-placeholder + tr td { border-top: 0 !important; }
+.nf-list-options-sortable-placeholder { border: 4px solid #84CC1E; height: 8px !important; margin: -4px 0 -4px 0; }
 
 .nf-fields-empty-droppable { border: 4px solid #FFF; }
 
@@ -387,13 +385,5 @@ All styles used for displaying table content
   .nf-item { padding: 15px; }
   .nf-saved .nf-item::after { padding: 14px; } }
 @media only screen and (max-width: 600px) { #nf-builder { margin-top: 46px; } }
-
-
-/**
- * Styles added by Kevin
- *
- * 
- */
-.nf-button.primary.disabled { background: gray; color: #fff; }
 
 /*# sourceMappingURL=builder.css.map */
