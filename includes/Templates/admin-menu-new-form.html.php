@@ -39,7 +39,7 @@
 </script>
 
 <script id="nf-tmpl-app-header-cancel" type="text/template">
-    <a class="nf-cancel cancel" href="#">Cancel Changes</a>
+    <a class="nf-cancel cancel" href="#">View Changes</a>
 </script>
 
 <script id="nf-tmpl-main" type="text/template">

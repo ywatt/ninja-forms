@@ -67,14 +67,14 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
 
         $email_field_id = $field->get_id();
 
-        $field = Ninja_Forms()->form( 1 )->field()->get();
-        $field->update_setting( 'type', 'textbox' )
-            ->update_setting( 'label', 'Confirm Email')
-            ->update_setting( 'label_pos', 'above' )
-            ->update_setting( 'confirm_field', $email_field_id )
-            ->update_setting( 'required', 1 )
-            ->update_setting( 'order', 3 )
-            ->save();
+        // $field = Ninja_Forms()->form( 1 )->field()->get();
+        // $field->update_setting( 'type', 'textbox' )
+        //     ->update_setting( 'label', 'Confirm Email')
+        //     ->update_setting( 'label_pos', 'above' )
+        //     ->update_setting( 'confirm_field', $email_field_id )
+        //     ->update_setting( 'required', 1 )
+        //     ->update_setting( 'order', 3 )
+        //     ->save();
 
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'textarea' )
@@ -84,14 +84,14 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
             ->update_setting( 'order', 4 )
             ->save();
 
-        $field = Ninja_Forms()->form( 1 )->field()->get();
-        $field->update_setting( 'type', 'textbox' )
-            ->update_setting( 'label', 'Mirror Name')
-            ->update_setting( 'label_pos', 'above' )
-            ->update_setting( 'required', 1 )
-            ->update_setting( 'mirror_field', $name_field_id )
-            ->update_setting( 'order', 5 )
-            ->save();
+        // $field = Ninja_Forms()->form( 1 )->field()->get();
+        // $field->update_setting( 'type', 'textbox' )
+        //     ->update_setting( 'label', 'Mirror Name')
+        //     ->update_setting( 'label_pos', 'above' )
+        //     ->update_setting( 'required', 1 )
+        //     ->update_setting( 'mirror_field', $name_field_id )
+        //     ->update_setting( 'order', 5 )
+        //     ->save();
 
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'submit' )
