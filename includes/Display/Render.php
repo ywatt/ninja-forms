@@ -127,6 +127,10 @@ final class NF_Display_Render
 
         <?php
 
+
+        wp_enqueue_script( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure,css' );
+        wp_enqueue_script( 'nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css' );
+
         wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
         
@@ -252,6 +256,9 @@ final class NF_Display_Render
         </style>
 
         <?php
+
+        wp_enqueue_script( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure.css' );
+        wp_enqueue_script( 'nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css' );
 
         wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
