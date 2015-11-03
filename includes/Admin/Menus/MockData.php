@@ -93,10 +93,35 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         //     ->update_setting( 'order', 5 )
         //     ->save();
 
+        $options = array(
+            array(
+                'label' => 'One',
+                'value' => '1',
+                'calc' => 1
+            ),
+            array(
+                'label' => 'Two',
+                'value' => '2',
+                'calc' => 2
+            ),
+            array(
+                'label' => 'Three',
+                'value' => '3',
+                'calc' => 3
+            ),
+        );
+
+        $field = Ninja_Forms()->form( 1 )->field()->get();
+        $field->update_setting( 'type', 'listradio' )
+            ->update_setting( 'label', 'Jame\'s List')
+            ->update_setting( 'options', $options)
+            ->update_setting( 'order', 5 )
+            ->save();
+
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Submit')
-            ->update_setting( 'order', 6)
+            ->update_setting( 'order', 6 )
             ->save();
 
         /* FORM #2: Get Help */
@@ -161,7 +186,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
                 'type'			=> 'submit',
                 'label'			=> 'Send',
                 'order'         => 6,
-            ),
+            )
         );
 
         foreach( $fields as $settings ){
