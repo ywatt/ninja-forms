@@ -23,10 +23,11 @@ define(
 		'builder/controllers/fieldset',
 		'builder/controllers/fieldListOptionSortable',
 		'builder/controllers/fieldList',
-		'builder/controllers/updateFieldSetting',
+		'builder/controllers/updatePreview',
 		'builder/controllers/formData',
 		'builder/controllers/previewLink',
-		'builder/controllers/appMenuButtons'
+		'builder/controllers/appMenuButtons',
+		'builder/controllers/appTrackChanges'
 
 	],
 	function(
@@ -53,10 +54,11 @@ define(
 		Fieldset,
 		FieldListOptionSortable,
 		FieldList,
-		UpdateFieldSetting,
+		UpdatePreview,
 		FormData,
 		PreviewLink,
-		AppMenuButtons
+		AppMenuButtons,
+		AppTrackChanges
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -83,10 +85,11 @@ define(
 				var fieldListOptionSortable = new FieldListOptionSortable();
 				var fieldList = new FieldList();
 				var fieldData = new FieldData();
-				var updateFieldSetting = new UpdateFieldSetting();
+				var updatePreview = new UpdatePreview();
 				var formData = new FormData();
 				var previewLink = new PreviewLink();
 				var appMenuButtons = new AppMenuButtons();
+				var appTrackChanges = new AppTrackChanges();
 			}
 		});
 

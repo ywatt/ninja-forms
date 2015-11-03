@@ -81,7 +81,7 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
             ->update_setting( 'label', 'Message')
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'required', 1 )
-            ->update_setting( 'order', 4 )
+            ->update_setting( 'order', 3 )
             ->save();
 
         // $field = Ninja_Forms()->form( 1 )->field()->get();
@@ -113,8 +113,8 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
 
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'listradio' )
-            ->update_setting( 'label', "James' List")
             ->update_setting( 'label_pos', 'above')
+            ->update_setting( 'label', 'James\' List')
             ->update_setting( 'options', $options)
             ->update_setting( 'order', 5 )
             ->save();

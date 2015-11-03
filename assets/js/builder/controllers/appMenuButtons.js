@@ -11,8 +11,9 @@ define( [], function() {
 		},
 
 		cancelChanges: function() {
-			nfRadio.channel( 'data' ).request( 'cancel:changes' );
-			nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', true );
+			nfRadio.channel( 'app' ).request( 'open:drawer', 'viewChanges' );
+			// nfRadio.channel( 'data' ).request( 'cancel:changes' );
+			// nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', true );
 		}
 
 	});

@@ -39,7 +39,7 @@
 </script>
 
 <script id="nf-tmpl-app-header-cancel" type="text/template">
-    <a class="nf-cancel cancel" href="#">View Changes</a>
+    <a class="nf-cancel cancel" style="text-decoration: none;" href="#"><span class="dashicons dashicons-backup"></span></a>
 </script>
 
 <script id="nf-tmpl-main" type="text/template">
@@ -211,6 +211,26 @@
     </section>
 </script>
 
+<script id="nf-tmpl-drawer-content-view-changes" type="text/template">
+    <ul>
+        <li>
+            <span class="dashicons dashicons-admin-generic"></span> Field 1 - Label changed from 'Name' to 'Your Name'
+        </li>
+        <li>
+            <span class="dashicons dashicons-admin-generic"></span> Field 1 - Required turned off
+        </li>
+        <li>
+            <span class="dashicons dashicons-sort"></span> Re-order Fields 1, 2, 3
+        </li>
+        <li>
+            <span class="dashicons dashicons-plus-alt"></span> New Field - Email
+        </li>
+        <li>
+            <span class="dashicons dashicons-dismiss"></span> Remove Field - Radio Buttons
+        </li>
+    </ul>
+</script>
+
 <script id="nf-tmpl-drawer-content-edit-field" type="text/template">
     <h2><span class="dashicons dashicons-star-empty"></span> <%= label %></h2>
     <span class="nf-settings-groups"></span>
@@ -295,10 +315,19 @@
     </div>
 </script>
 
-<script id="nf-tmpl-drawer-header" type="text/template">
+<script id="nf-tmpl-drawer-header-default" type="text/template">
     <header class="nf-drawer-header">
         <div class="nf-search">
             <input type="search" class="nf-filter" value="" placeholder="Filter" tabindex="-1" />
+        </div>
+        <a href="#" class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
+    </header>
+</script>
+
+<script id="nf-tmpl-drawer-header-view-changes" type="text/template">
+    <header class="nf-drawer-header">
+        <div>
+            <a href="#" class="nf-button secondary" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
         </div>
         <a href="#" class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
     </header>
@@ -382,39 +411,39 @@
 <script id="nf-tmpl-edit-field-setting-list-repeater" type="text/template">
     <fieldset class="nf-list-options">
         <legend><%= label %></legend>
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Label</th>
-                    <th>Value</th>
-                    <th>Calc Value</th>
-                    <th></th>
-            </thead>
-            <tbody class="nf-list-options-tbody">
-            </tbody>
-        </table>
+        <div class="nf-div-table">
+            <div class="nf-table-row">
+                <div>&nbsp;</div>
+                <div>Label</div>
+                <div>Value</div>
+                <div>Calc Value</div>
+                <div>&nbsp;</div>
+            </div>
+
+            <div class="nf-list-options-tbody">
+            </div>
+        </div>
     </fieldset>
 </script>
 
 <script id="nf-tmpl-edit-field-setting-list-empty" type="text/template">
-    <td></td><td></td><td></td><td></td><td></td>
+
 </script>
 
 <script id="nf-tmpl-edit-field-setting-list-option" type="text/template">
-    <td>
+    <div>
         <span class="dashicons dashicons-menu handle"></span>
-    </td>
-    <td>
+    </div>
+    <div>
         <input type="text" value="<%= label %>" data-id="label">
-    </td>
-    <td>
+    </div>
+    <div>
         <input type="text" value="<%= value %>" data-id="value">
-    </td>
-    <td>
+    </div>
+    <div>
         <input type="text" value="<%= calc %>" data-id="calc">
-    </td>
-    <td>
+    </div>
+    <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>
-    </td>
+    </div>
 </script>
