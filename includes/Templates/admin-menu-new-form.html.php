@@ -39,7 +39,7 @@
 </script>
 
 <script id="nf-tmpl-app-header-cancel" type="text/template">
-    <a class="nf-cancel cancel" href="#">View Changes</a>
+    <a class="nf-cancel cancel" style="text-decoration: none;" href="#"><span class="dashicons dashicons-backup"></span></a>
 </script>
 
 <script id="nf-tmpl-main" type="text/template">
@@ -327,7 +327,7 @@
 <script id="nf-tmpl-drawer-header-view-changes" type="text/template">
     <header class="nf-drawer-header">
         <div>
-            <a href="#" class="nf-button secondary" style="float:left;" tabindex="-1"><span class="dashicons dashicons-image-rotate"></span> Undo All</a>
+            <a href="#" class="nf-button secondary" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
         </div>
         <a href="#" class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
     </header>
