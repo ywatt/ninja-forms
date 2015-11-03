@@ -115,13 +115,13 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $field->update_setting( 'type', 'listradio' )
             ->update_setting( 'label', 'James List')
             ->update_setting( 'options', $options)
-            ->update_setting( 'order', 5 )
+            ->update_setting( 'order', 4 )
             ->save();
 
         $field = Ninja_Forms()->form( 1 )->field()->get();
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Submit')
-            ->update_setting( 'order', 6 )
+            ->update_setting( 'order', 5 )
             ->save();
 
         /* FORM #2: Get Help */

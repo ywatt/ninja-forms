@@ -1,12 +1,12 @@
-define( [], function() {
-	var view = Marionette.ItemView.extend({
+define( ['builder/views/drawerContentViewChangesItem'], function( viewChangesItem ) {
+	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
-		template: '#nf-tmpl-drawer-content-view-changes',
+		childView: viewChangesItem,
 
 		onRender: function() {
-			console.log( nfUndoManager.stack.models );
+			
 		}
-	});
+	} );
 
 	return view;
 } );

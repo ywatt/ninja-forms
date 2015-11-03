@@ -211,22 +211,10 @@
     </section>
 </script>
 
-<script id="nf-tmpl-drawer-content-view-changes" type="text/template">
+<script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
     <ul>
         <li>
             <span class="dashicons dashicons-admin-generic"></span> Field 1 - Label changed from 'Name' to 'Your Name'
-        </li>
-        <li>
-            <span class="dashicons dashicons-admin-generic"></span> Field 1 - Required turned off
-        </li>
-        <li>
-            <span class="dashicons dashicons-sort"></span> Re-order Fields 1, 2, 3
-        </li>
-        <li>
-            <span class="dashicons dashicons-plus-alt"></span> New Field - Email
-        </li>
-        <li>
-            <span class="dashicons dashicons-dismiss"></span> Remove Field - Radio Buttons
         </li>
     </ul>
 </script>
