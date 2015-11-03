@@ -1,4 +1,4 @@
-define( ['builder/views/drawerHeader', 'builder/views/drawerContentEmpty'], function( drawerHeaderView, drawerEmptyView ) {
+define( ['builder/views/drawerHeaderDefault', 'builder/views/drawerContentEmpty'], function( drawerHeaderView, drawerEmptyView ) {
 
 	var view = Marionette.LayoutView.extend( {
 		template: '#nf-tmpl-drawer',
@@ -15,21 +15,21 @@ define( ['builder/views/drawerHeader', 'builder/views/drawerContentEmpty'], func
 		},
 
 		onShow: function() {
-			// var closedRightPos = nfRadio.channel( 'drawer' ).request( 'get:closedRightPos' );
-			// jQuery( this.el ).parent().css( { 'right': closedRightPos } );
-
-			this.header.show( new drawerHeaderView() );
 			jQuery( this.el ).parent().perfectScrollbar();
 		    jQuery( this.el ).parent().disableSelection();
 		},
 
 		loadContent: function( drawerID, data ) {
 			var drawer = nfRadio.channel( 'app' ).request( 'get:drawer', drawerID );
-			var view = drawer.get( 'getView' ).call( drawer, data );
-			this.content.show( view );
+			var contentView = drawer.get( 'getContentView' ).call( drawer, data );
+			var headerView = drawer.get( 'getHeaderView' ).call( drawer, data );
+
+			this.header.show( headerView );
+			this.content.show( contentView );
 		},
 
 		emptyContent: function() {
+			this.header.show( new drawerEmptyView() );
 			this.content.show( new drawerEmptyView() );
 		},
 

@@ -27,11 +27,16 @@ define( ['builder/views/header', 'builder/views/main', 'builder/views/menuDrawer
 
 		events: {
 			'click .nf-open-drawer': 'openDrawer',
-			'click .nf-change-domain': 'changeDomain'
+			'click .nf-change-domain': 'changeDomain',
+			'click .nf-close-drawer': 'closeDrawer'
 		},
 
 		openDrawer: function( e ) {
 			nfRadio.channel( 'app' ).trigger( 'click:openDrawer', e );
+		},
+
+		closeDrawer: function() {
+			nfRadio.channel( 'drawer' ).trigger( 'click:closeDrawer' );
 		},
 
 		changeDomain: function( e ) {
