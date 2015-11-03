@@ -411,39 +411,39 @@
 <script id="nf-tmpl-edit-field-setting-list-repeater" type="text/template">
     <fieldset class="nf-list-options">
         <legend><%= label %></legend>
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Label</th>
-                    <th>Value</th>
-                    <th>Calc Value</th>
-                    <th></th>
-            </thead>
-            <tbody class="nf-list-options-tbody">
-            </tbody>
-        </table>
+        <div class="nf-div-table">
+            <div class="nf-table-row">
+                <div>&nbsp;</div>
+                <div>Label</div>
+                <div>Value</div>
+                <div>Calc Value</div>
+                <div>&nbsp;</div>
+            </div>
+
+            <div class="nf-list-options-tbody">
+            </div>
+        </div>
     </fieldset>
 </script>
 
 <script id="nf-tmpl-edit-field-setting-list-empty" type="text/template">
-    <td></td><td></td><td></td><td></td><td></td>
+
 </script>
 
 <script id="nf-tmpl-edit-field-setting-list-option" type="text/template">
-    <td>
+    <div>
         <span class="dashicons dashicons-menu handle"></span>
-    </td>
-    <td>
+    </div>
+    <div>
         <input type="text" value="<%= label %>" data-id="label">
-    </td>
-    <td>
+    </div>
+    <div>
         <input type="text" value="<%= value %>" data-id="value">
-    </td>
-    <td>
+    </div>
+    <div>
         <input type="text" value="<%= calc %>" data-id="calc">
-    </td>
-    <td>
+    </div>
+    <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>
-    </td>
+    </div>
 </script>
