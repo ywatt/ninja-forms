@@ -4,19 +4,31 @@ define( ['builder/models/appModel'], function( appModel ) {
 			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
 			this.model = new appModel( {
 				currentDrawer: false,
-				currentDomain: appDomainCollection.get( 'fields' )
+				currentDomain: appDomainCollection.get( 'fields' ),
+				clean: true
 			} );
 
 			nfRadio.channel( 'app' ).reply( 'update:appDomain', this.updateDomain, this );
 			nfRadio.channel( 'app' ).reply( 'update:currentDrawer', this.updateCurrentDrawer, this );
+			nfRadio.channel( 'app' ).reply( 'update:appSetting', this.updateSetting, this );
+
 			nfRadio.channel( 'app' ).reply( 'get:appData', this.getAppData, this );
+			nfRadio.channel( 'app' ).reply( 'get:appSetting', this.getAppSetting, this );
 			nfRadio.channel( 'app' ).reply( 'get:currentDomain', this.getCurrentDomain, this );
 			nfRadio.channel( 'app' ).reply( 'get:currentDrawer', this.getCurrentDrawer, this );
 		},
 
 		updateDomain: function( model ) {
-			this.model.set( 'currentDomain', model );
+			this.updateSetting( 'currentDomain', model );
+		},
+
+		updateSetting: function( setting, value ) {
+			this.model.set( setting, value );
 			return true;
+		},
+
+		getAppSetting: function( setting ) {
+			return this.model.get( setting );
 		},
 
 		getAppData: function() {
@@ -28,7 +40,7 @@ define( ['builder/models/appModel'], function( appModel ) {
 		},
 
 		updateCurrentDrawer: function( drawerID ) {
-			this.model.set( 'currentDrawer', drawerID );
+			this.updateSetting( 'currentDrawer', drawerID );
 			return true;
 		},
 

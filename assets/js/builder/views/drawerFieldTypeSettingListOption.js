@@ -1,6 +1,6 @@
 define( [], function() {
 	var view = Marionette.ItemView.extend({
-		tagName: 'tr',
+		tagName: 'div',
 		template: '#nf-tmpl-edit-field-setting-list-option',
 
 		initialize: function( data ) {

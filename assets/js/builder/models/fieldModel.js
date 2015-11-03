@@ -15,9 +15,12 @@ define( [], function() {
 			var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', this.get( 'type' ) );
 			var parentType = fieldType.get( 'parentType' );
 			this.bind( 'change', this.changeSetting, this );
+			
 			nfRadio.channel( 'fields' ).trigger( 'init:fieldModel', this );
 			nfRadio.channel( 'fields-' + parentType ).trigger( 'init:fieldModel', this );
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:fieldModel', this );
+
+			nfUndoManager.register( this );
 		},
 
 		changeSetting: function() {

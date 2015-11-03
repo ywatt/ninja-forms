@@ -3,6 +3,7 @@ require.config( {
 } );
 
 var nfRadio = Backbone.Radio;
+var nfUndoManager = new Backbone.UndoManager();
 
 jQuery( document ).ready( function( $ ) {
 	require( ['builder/views/builder', 'builder/controllers/loadControllers'], function( BuilderView, LoadControllers ) {
@@ -28,6 +29,7 @@ jQuery( document ).ready( function( $ ) {
 
 				// Trigger our after start event.
 				nfRadio.channel( 'app' ).trigger( 'after:appStart', this );
+				nfUndoManager.startTracking();	
 			}
 		} );
 	
