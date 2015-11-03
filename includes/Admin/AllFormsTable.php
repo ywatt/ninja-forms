@@ -21,8 +21,6 @@ class NF_Admin_AllFormsTable extends WP_List_Table
             'plural'   => __( 'Forms', 'ninja-forms' ), //plural name of the listed records
             'ajax'     => false //should this table support ajax?
         ) );
-
-        add_action( 'plugins_loaded', array( $this, 'process_bulk_action' ) );
     }
 
     public function no_items() {
@@ -189,7 +187,7 @@ class NF_Admin_AllFormsTable extends WP_List_Table
         $title = $item[ 'title' ];
         $edit_url = add_query_arg( 'form_id', $item[ 'id' ], admin_url( 'admin.php?page=ninja-forms') );
         $delete_url = add_query_arg( array( 'action' => 'delete', 'id' => $item[ 'id' ], '_wpnonce' => wp_create_nonce( 'nf_delete_form' )));
-        $duplicate_url = '';
+        $duplicate_url = add_query_arg( array( 'action' => 'duplicate', 'id' => $item[ 'id' ], '_wpnonce' => wp_create_nonce( 'nf_duplicate_form' )));
         $preview_url = add_query_arg( 'nf_preview_form', $item[ 'id' ], site_url() );
         $submissions_url = add_query_arg( 'form_id', $item[ 'id' ], admin_url( 'edit.php?post_type=nf_sub') );
 
@@ -210,9 +208,24 @@ class NF_Admin_AllFormsTable extends WP_List_Table
         return $actions;
     }
 
-    public function process_bulk_action()
+    public static function process_bulk_action()
     {
-        //Detect when a bulk action is being triggered...
+        if ( isset( $_REQUEST[ 'action' ] ) && 'duplicate' === $_REQUEST[ 'action' ] ) {
+
+            // In our file that handles the request, verify the nonce.
+            $nonce = esc_attr( $_REQUEST['_wpnonce'] );
+
+            if ( ! wp_verify_nonce( $nonce, 'nf_duplicate_form' ) ) {
+                die( 'Go get a life, script kiddies' );
+            }
+            else {
+                NF_Database_Models_Form::duplicate( absint( $_GET['id'] ) );
+            }
+
+            wp_redirect( admin_url( 'admin.php?page=nf-all-forms' ) );
+            exit;
+        }
+
         if ( isset( $_REQUEST[ 'action' ] ) && 'delete' === $_REQUEST[ 'action' ] ) {
 
             // In our file that handles the request, verify the nonce.
@@ -224,6 +237,9 @@ class NF_Admin_AllFormsTable extends WP_List_Table
             else {
                 self::delete_item( absint( $_GET['id'] ) );
             }
+
+            wp_redirect( admin_url( 'admin.php?page=nf-all-forms' ) );
+            exit;
         }
 
         // If the delete bulk action is triggered
@@ -238,15 +254,10 @@ class NF_Admin_AllFormsTable extends WP_List_Table
 
                 self::delete_item( absint( $id ) );
             }
+
+            wp_redirect( admin_url( 'admin.php?page=nf-all-forms' ) );
+            exit;
         }
-
-        echo "<pre>";
-        var_dump($_POST);
-        echo "</pre>";
-        die();
-
-        wp_redirect( admin_url( 'admin.php?page=nf-all-forms' ) );
-        exit;
     }
 
     public static function delete_item( $id )

@@ -125,7 +125,13 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $settings = $form->get_settings();
 
         $new_form = Ninja_Forms()->form()->get();
-        $new_form->update_settings( $settings);
+        $new_form->update_settings( $settings );
+
+        $form_title = $form->get_setting( 'title' );
+
+        $new_form->update_setting( 'title', $form_title . " - duplicate" );
+
+        $new_form->save();
 
         $new_form_id = $new_form->get_id();
 
@@ -135,8 +141,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
             $field_settings = $field->get_settings();
 
-            $new_field = Ninja_Forms()->form( $new_form_id )->field();
-            $new_field->update_settings( $field_settings );
+            $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
+            $new_field->update_settings( $field_settings )->save();
         }
 
         $actions = Ninja_Forms()->form( $form_id )->get_actions();
@@ -145,8 +151,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
             $action_settings = $action->get_settings();
 
-            $new_action = Ninja_Forms()->form( $new_form_id )->action();
-            $new_action->update_settings( $action_settings );
+            $new_action = Ninja_Forms()->form( $new_form_id )->action()->get();
+            $new_action->update_settings( $action_settings )->save();
         }
 
         return $new_form_id;

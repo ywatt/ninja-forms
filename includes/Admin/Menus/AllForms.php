@@ -12,7 +12,10 @@ final class NF_Admin_Menus_AllForms extends NF_Abstracts_Submenu
     {
         parent::__construct();
 
-        add_action( 'admin_init', array( $this, 'admin_init' ) );
+        if( ! defined( 'DOING_AJAX' ) ) {
+            add_action('admin_init', array($this, 'admin_init'));
+            add_action( 'admin_init', array( 'NF_Admin_AllFormsTable', 'process_bulk_action' ) );
+        }
     }
 
     public function admin_init()
