@@ -1,0 +1,12 @@
+define( ['builder/views/drawerContentViewChangesItem'], function( viewChangesItem ) {
+	var view = Marionette.CollectionView.extend( {
+		tagName: 'div',
+		childView: viewChangesItem,
+
+		onRender: function() {
+			
+		}
+	} );
+
+	return view;
+} );

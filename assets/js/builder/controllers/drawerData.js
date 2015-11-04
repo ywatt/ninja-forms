@@ -4,14 +4,18 @@ define( [
 	'builder/views/drawerEditField',
 	'builder/views/drawerAddAction',
 	'builder/views/drawerEditAction',
-	'builder/views/drawerEditFormSettings'
+	'builder/views/drawerEditFormSettings',
+	'builder/views/drawerContentViewChanges',
+	'builder/views/drawerHeaderViewChanges'
 	], function(
 		drawerCollection,
 		addFieldView,
 		editFieldView,
 		addActionView,
 		editActionView,
-		editFormSettingsView
+		editFormSettingsView,
+		viewChangesView,
+		viewChangesHeaderView
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
@@ -20,36 +24,47 @@ define( [
 				{
 					id: 'addField',
 
-					getView: function( data ) {
+					getContentView: function( data ) {
 						return new addFieldView( data );
 					}
 				},
 				{
 					id: 'editField',
 
-					getView: function( data ) {
+					getContentView: function( data ) {
 						return new editFieldView( data );
 					}
 				},
 				{
 					id: 'editAction',
 
-					getView: function( data ) {
+					getContentView: function( data ) {
 						return new editActionView( data );
 					}
 				},
 				{
 					id: 'addAction',
 
-					getView: function( data ) {
+					getContentView: function( data ) {
 						return new addActionView( data );
 					}
 				},
 				{
 					id: 'editFormSettings',
 
-					getView: function( data ) {
+					getContentView: function( data ) {
 						return new editFormSettingsView( data );
+					}
+				},
+				{
+					id: 'viewChanges',
+
+					getHeaderView: function( data ) {
+						return new viewChangesHeaderView( data );
+					},
+
+					getContentView: function( data ) {
+						return new viewChangesView( data );
 					}
 				}
 			] );

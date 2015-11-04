@@ -1,7 +1,7 @@
 define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'div',
-		template: '#nf-tmpl-drawer-header',
+		template: '#nf-tmpl-drawer-header-default',
 
 		onRender: function() {
 			this.$el = this.$el.children();
@@ -15,8 +15,7 @@ define( [], function() {
 
 		events: {
 			'keyup .nf-filter': 'maybeChangeFilter',
-			'input .nf-filter': 'changeFilter',
-			'click .nf-close-drawer': 'closeDrawer'
+			'input .nf-filter': 'changeFilter'
 		},
 
 		changeFilter: function( e ) {
@@ -41,10 +40,6 @@ define( [], function() {
 
 		blurFilter: function() {
 			jQuery( this.el ).find( '.nf-filter' ).blur();
-		},
-
-		closeDrawer: function() {
-			nfRadio.channel( 'drawer' ).trigger( 'click:closeDrawer' );
 		},
 
 		getEl: function() {

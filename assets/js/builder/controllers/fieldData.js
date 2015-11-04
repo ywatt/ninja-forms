@@ -11,7 +11,6 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 			nfRadio.channel( 'data' ).reply( 'sort:fields', this.sortFields, this );
 			nfRadio.channel( 'data' ).reply( 'get:tmpFieldID', this.getTmpFieldID, this );
 
-			this.listenTo( nfRadio.channel( 'app' ), 'change:clean', this.updateClone );
 			nfRadio.channel( 'data' ).reply( 'cancel:changes', this.restoreCollection, this );
 
 		},
@@ -50,6 +49,8 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 					pos = pos.toString();
 					field.set( 'order', pos );
 				} );
+
+				nfRadio.channel( 'app' ).request( 'update:preview' );
 			}
 		},
 
@@ -60,12 +61,6 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 		getTmpFieldID: function() {
 			var tmpNum = this.collection.models.length + 1;
 			return 'tmp-' + tmpNum;
-		},
-
-		updateClone: function( clean ) {
-			if ( clean ) {
-				this.collectionClone = this.collection.clone();
-			}
 		},
 
 		restoreCollection: function() {
