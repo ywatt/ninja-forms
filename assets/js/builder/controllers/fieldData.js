@@ -27,7 +27,7 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 		addField: function( data, silent ) {
 			silent = silent || false;
 			this.collection.add( data, { silent: silent } );
-			nfRadio.channel( 'app' ).request( 'update:preview' );
+			nfRadio.channel( 'app' ).request( 'update:db' );
 		},
 
 		updateFieldSetting: function( id, name, value ) {
@@ -52,14 +52,14 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 					field.set( 'order', pos );
 				} );
 
-				nfRadio.channel( 'app' ).request( 'update:preview' );
+				nfRadio.channel( 'app' ).request( 'update:db' );
 			}
 		},
 
 		deleteField: function( model ) {
 			this.collection.remove( model );
 			nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', false );
-			nfRadio.channel( 'app' ).request( 'update:preview' );
+			nfRadio.channel( 'app' ).request( 'update:db' );
 		},
 
 		updateRemovedIDs: function() {

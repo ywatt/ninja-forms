@@ -24,7 +24,7 @@ define(
 		'builder/controllers/fieldListOptionSortable',
 		'builder/controllers/fieldList',
 		'builder/controllers/fieldSubmit',
-		'builder/controllers/updatePreview',
+		'builder/controllers/updateDB',
 		'builder/controllers/formData',
 		'builder/controllers/previewLink',
 		'builder/controllers/appMenuButtons',
@@ -57,7 +57,7 @@ define(
 		FieldListOptionSortable,
 		FieldList,
 		FieldSubmit,
-		UpdatePreview,
+		UpdateDB,
 		FormData,
 		PreviewLink,
 		AppMenuButtons,
@@ -90,7 +90,7 @@ define(
 				var fieldList = new FieldList();
 				var fieldSubmit = new FieldSubmit();
 				var fieldData = new FieldData();
-				var updatePreview = new UpdatePreview();
+				var updateDB = new UpdateDB();
 				var formData = new FormData();
 				var previewLink = new PreviewLink();
 				var appMenuButtons = new AppMenuButtons();

@@ -1,15 +1,22 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'drawer' ), 'close:drawer', this.updatePreview );
-			nfRadio.channel( 'app' ).reply( 'update:preview', this.updatePreview, this );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'close:drawer', this.updateDB );
+			nfRadio.channel( 'app' ).reply( 'update:db', this.updateDB, this );
 		},
 
-		updatePreview: function() {
+		updateDB: function( action ) {
 			if ( nfRadio.channel( 'app' ).request( 'get:appSetting', 'clean' ) ) {
 				return false;
 			}
 			
+			action = action || 'preview';
+
+			if ( 'preview' == action ) {
+				var jsAction = 'nf_preview_update';
+			} else if ( 'publish' == action ) {
+				var jsAction = 'nf_save_form';
+			}
 			var formData = nfRadio.channel( 'data' ).request( 'get:formData' );
 			removedIDs = formData.get( 'fields' ).removedIDs;
 
@@ -34,9 +41,11 @@ define( [], function() {
 
 			data = JSON.stringify( data );
 
-			nfRadio.channel( 'app' ).trigger( 'before:sendChanges', data );
-			jQuery.post( ajaxurl, { action: 'nf_preview_update', form: data, security: nfAdmin.ajaxNonce }, function( response ) {
-				nfRadio.channel( 'app' ).trigger( 'response:sendChanges', response );
+			nfRadio.channel( 'app' ).trigger( 'before:updateDB', data );
+			jQuery.post( ajaxurl, { action: jsAction, form: data, security: nfAdmin.ajaxNonce }, function( response ) {
+				response = JSON.parse( response );
+				response.action = action;
+				nfRadio.channel( 'app' ).trigger( 'response:updateDB', response );
 			} );
 		}
 

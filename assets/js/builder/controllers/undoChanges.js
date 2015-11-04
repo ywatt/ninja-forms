@@ -12,7 +12,7 @@ define( [], function() {
 
 			nfRadio.channel( 'data' ).request( 'update:removedIDs' );
 			nfRadio.channel( 'data' ).request( 'update:newIDs' );
-			nfRadio.channel( 'app' ).request( 'update:preview' );
+			nfRadio.channel( 'app' ).request( 'update:db' );
 			nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', true );
 			nfRadio.channel( 'app' ).trigger( 'cancel:changes' );
 			nfRadio.channel( 'app' ).request( 'close:drawer' );
