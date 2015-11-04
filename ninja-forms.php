@@ -174,6 +174,13 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->actions = apply_filters( 'nf_register_actions', self::load_classes( 'Actions' ) );
 
                 /*
+                 * WP-CLI Commands
+                 */
+                if( class_exists( 'WP_CLI_Command' ) ) {
+                    WP_CLI::add_command('ninja-forms', 'NF_WPCLI_NinjaFormsCommand');
+                }
+
+                /*
                  * Preview Page
                  */
                 self::$instance->preview = new NF_Display_Preview();
