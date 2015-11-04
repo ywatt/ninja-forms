@@ -27,7 +27,8 @@ define(
 		'builder/controllers/formData',
 		'builder/controllers/previewLink',
 		'builder/controllers/appMenuButtons',
-		'builder/controllers/appTrackChanges'
+		'builder/controllers/appTrackChanges',
+		'builder/controllers/drawerUndoChanges'
 
 	],
 	function(
@@ -58,7 +59,8 @@ define(
 		FormData,
 		PreviewLink,
 		AppMenuButtons,
-		AppTrackChanges
+		AppTrackChanges,
+		DrawerUndoChanges
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -90,6 +92,7 @@ define(
 				var previewLink = new PreviewLink();
 				var appMenuButtons = new AppMenuButtons();
 				var appTrackChanges = new AppTrackChanges();
+				var drawerUndoChanges = new DrawerUndoChanges();
 			}
 		});
 
