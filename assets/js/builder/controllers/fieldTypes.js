@@ -92,6 +92,7 @@ define( [
 								},
 								{
 									type: 'fieldset',
+									name: 'fieldset_input_limit',
 									label: 'Limit Input to this Number',
 									width: 'full',
 									settings: new fieldTypeSettingCollection( [
@@ -1047,6 +1048,7 @@ define( [
 
 			nfRadio.channel( 'data' ).reply( 'get:fieldType', this.getFieldType, this );
 			nfRadio.channel( 'data' ).reply( 'get:fieldTypes', this.getFieldTypes, this );
+			nfRadio.channel( 'data' ).reply( 'get:fieldTypeSetting', this.getFieldTypeSetting, this );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addStagedField );
 		},
 
@@ -1056,6 +1058,17 @@ define( [
 
 		getFieldTypes: function( id ) {
         	return this.collection;
+        },
+
+        getFieldTypeSetting: function( type, search ) {
+        	var setting = false;
+			_.find( this.collection.get( type ).get('settingGroups' ).models, function( group ) {
+				setting = group.get( 'settings' ).findWhere( { name: search } );
+				if ( setting ) {
+					return true;
+				}
+			} );
+			return setting;
         },
 
         addStagedField: function( el ) {

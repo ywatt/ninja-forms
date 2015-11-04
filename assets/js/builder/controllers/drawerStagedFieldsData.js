@@ -35,16 +35,18 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 		},
 
 		beforeCloseDrawer: function() {
-			var fieldCollection = nfRadio.channel( 'data' ).request( 'get:fieldCollection' );
+			if ( 0 != this.collection.models.length ) {
+				var fieldCollection = nfRadio.channel( 'data' ).request( 'get:fieldCollection' );
 
-			var fields = [];
-			_.each( this.collection.models, function( model ) {
-				var tmpID = nfRadio.channel( 'data' ).request( 'get:tmpFieldID' );
-				var tmpField = { id: tmpID, label: model.get( 'nicename' ), type: model.get( 'slug' ) };
-				nfRadio.channel( 'data' ).request( 'add:field',  tmpField );
-			} );
-			nfRadio.channel( 'data' ).request( 'sort:fields' );
-			this.collection.reset();
+				var fields = [];
+				_.each( this.collection.models, function( model ) {
+					var tmpID = nfRadio.channel( 'data' ).request( 'get:tmpFieldID' );
+					var tmpField = { id: tmpID, label: model.get( 'nicename' ), type: model.get( 'slug' ) };
+					nfRadio.channel( 'data' ).request( 'add:field',  tmpField );
+				} );
+				nfRadio.channel( 'data' ).request( 'sort:fields' );
+				this.collection.reset();				
+			}
 		},
 
 		sortStagedFields: function() {

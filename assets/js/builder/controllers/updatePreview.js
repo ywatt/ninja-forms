@@ -31,7 +31,7 @@ define( [], function() {
 			} );
 
 			data.deleted_fields = removedIDs;
-			console.log( data );
+
 			data = JSON.stringify( data );
 
 			nfRadio.channel( 'app' ).trigger( 'before:sendChanges', data );

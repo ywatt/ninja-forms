@@ -4,11 +4,11 @@ define( [], function() {
 		template: '#nf-tmpl-drawer-header-view-changes',
 
 		events: {
-			'click .cancelChanges': 'clickCancelChanges'
+			'click .undoChanges': 'clickUndoChanges'
 		},
 
-		clickCancelChanges: function( e ) {
-			nfRadio.channel( 'drawer' ).trigger( 'click:cancelChanges' );
+		clickUndoChanges: function( e ) {
+			nfRadio.channel( 'drawer' ).trigger( 'click:undoChanges' );
 		}
 	});
 
