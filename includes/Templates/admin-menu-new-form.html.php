@@ -213,16 +213,22 @@
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
     <%
+    /*
     for ( var prop in before ) {
         var setting = prop;
     }
 
+    if ( 'undefined' !== typeof setting ) {
     %>
     <ul>
         <li>
             <span class="dashicons dashicons-admin-generic"></span> Field <%= object.get( 'id' ) %> - <%= setting %> changed from '<%= before[setting] %>' to '<%= after[setting] %>'
         </li>
     </ul>
+    <%       
+    }
+    */
+    %>
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field" type="text/template">

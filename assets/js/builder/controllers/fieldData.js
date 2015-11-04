@@ -1,8 +1,10 @@
 define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'], function( fieldCollection, listOptionCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-
+			
 			this.collection = new fieldCollection( preloadedFormData.fields );
+			this.collection.removedIDs = [];
+			nfUndoManager.register( this.collection );
 
 			nfRadio.channel( 'data' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
 			nfRadio.channel( 'data' ).reply( 'get:field', this.getField, this );
@@ -23,6 +25,7 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 		addField: function( data, silent ) {
 			silent = silent || false;
 			this.collection.add( data, { silent: silent } );
+			nfRadio.channel( 'app' ).request( 'update:preview' );
 		},
 
 		updateFieldSetting: function( id, name, value ) {
@@ -52,7 +55,10 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 		},
 
 		deleteField: function( model ) {
+			this.collection.removedIDs.push( model.get( 'id' ) );
 			this.collection.remove( model );
+			nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', false );
+			nfRadio.channel( 'app' ).request( 'update:preview' );
 		},
 
 		getTmpFieldID: function() {

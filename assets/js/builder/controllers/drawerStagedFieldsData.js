@@ -44,8 +44,6 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 				nfRadio.channel( 'data' ).request( 'add:field',  tmpField );
 			} );
 			nfRadio.channel( 'data' ).request( 'sort:fields' );
-			
-			fieldCollection.trigger( 'reset', fieldCollection );
 			this.collection.reset();
 		},
 

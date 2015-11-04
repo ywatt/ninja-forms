@@ -2,6 +2,7 @@ define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
 			options: false,
+			label_pos: 'above',
 			getFieldID: function() {
 				if ( jQuery.isNumeric( this.id ) ) {
 					return 'field-' + this.id;
@@ -19,8 +20,6 @@ define( [], function() {
 			nfRadio.channel( 'fields' ).trigger( 'init:fieldModel', this );
 			nfRadio.channel( 'fields-' + parentType ).trigger( 'init:fieldModel', this );
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:fieldModel', this );
-
-			nfUndoManager.register( this );
 		},
 
 		changeSetting: function() {

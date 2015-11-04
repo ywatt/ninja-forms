@@ -11,13 +11,13 @@ define( [], function() {
 			}
 			
 			var formData = nfRadio.channel( 'data' ).request( 'get:formData' );
+			removedIDs = formData.get( 'fields' ).removedIDs;
+
 			var data = JSON.parse( JSON.stringify( formData ) );
 
 			_.each( data.fields, function( field ) {
 				var id = field.id;
-				var type = field.type;
 				delete field.id;
-				delete field.type;
 				delete field.parent_id;
 				var settings = {};
 				for (var prop in field) {
@@ -28,9 +28,10 @@ define( [], function() {
 				}
 				field.settings = settings;
 				field.id = id;
-				field.type = type;
 			} );
 
+			data.deleted_fields = removedIDs;
+			console.log( data );
 			data = JSON.stringify( data );
 
 			nfRadio.channel( 'app' ).trigger( 'before:sendChanges', data );
