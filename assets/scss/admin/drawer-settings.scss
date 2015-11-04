@@ -81,7 +81,7 @@
                     //border-top: 16px solid red;
                     display: table-cell;
                     padding: 5px;
-                    &:nth-child(1), &:nth-child(5) {
+                    &:nth-child(1), &:nth-child(6) {
                         padding: 0 15px;
                         width: 20px;
                     }
@@ -89,10 +89,19 @@
                         width: 45%;
                     }
                     &:nth-child(4) {
-                        min-width: 120px;
+                        min-width: 100px;
                     }
                     input {
                         margin: 0;
+                    }
+                }
+                &.nf-table-header {
+                    div {
+                        font-size: 12px;
+                        padding: 20px 5px 5px;
+                        &:nth-child(1), &:nth-child(6) {
+                            padding: 0 25px;
+                        }
                     }
                 }
             }

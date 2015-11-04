@@ -42,7 +42,7 @@
             }
         }
     }
-    .nf-add-new.nf-open-drawer {
+    .nf-add-new.nf-open-drawer, .preview {
         opacity: 0.0;
         visibility:hidden;
         filter: alpha(opacity=0);

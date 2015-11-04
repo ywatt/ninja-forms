@@ -406,11 +406,12 @@
     <fieldset class="nf-list-options">
         <legend><%= label %></legend>
         <div class="nf-div-table">
-            <div class="nf-table-row">
+            <div class="nf-table-row nf-table-header">
                 <div>&nbsp;</div>
                 <div>Label</div>
                 <div>Value</div>
                 <div>Calc Value</div>
+                <div><span class="dashicons dashicons-yes"></span></div>
                 <div>&nbsp;</div>
             </div>
 
@@ -436,6 +437,9 @@
     </div>
     <div>
         <input type="text" value="<%= calc %>" data-id="calc">
+    </div>
+    <div>
+        <input type="checkbox" value="1" data-id="selected">
     </div>
     <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>
