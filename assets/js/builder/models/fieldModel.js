@@ -1,6 +1,7 @@
 define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
+			objectType: 'Field',
 			options: false,
 			label_pos: 'above',
 			getFieldID: function() {

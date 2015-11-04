@@ -1049,6 +1049,7 @@ define( [
 			nfRadio.channel( 'data' ).reply( 'get:fieldType', this.getFieldType, this );
 			nfRadio.channel( 'data' ).reply( 'get:fieldTypes', this.getFieldTypes, this );
 			nfRadio.channel( 'data' ).reply( 'get:fieldTypeSetting', this.getFieldTypeSetting, this );
+			
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addStagedField );
 		},
 

@@ -5,7 +5,10 @@ define( [], function() {
 		},
 
 		undoChanges: function() {
-			nfUndoManager.undoAll();
+			// nfUndoManager.undoAll();
+			var field = nfRadio.channel( 'data' ).request( 'get:field', 1 );
+			nfUndoManager.undo( field );
+
 
 			nfRadio.channel( 'data' ).request( 'update:removedIDs' );
 			nfRadio.channel( 'data' ).request( 'update:newIDs' );

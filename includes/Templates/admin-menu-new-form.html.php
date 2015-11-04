@@ -38,7 +38,7 @@
     <%= maybeRenderCancel() %>
 </script>
 
-<script id="nf-tmpl-app-header-cancel" type="text/template">
+<script id="nf-tmpl-app-header-view-changes" type="text/template">
     <a class="nf-cancel viewChanges" style="text-decoration: none;" href="#"><span class="dashicons dashicons-backup"></span></a>
 </script>
 
@@ -217,12 +217,19 @@
     switch( type ) {
         case 'change':
             var id = object.get( 'id' );
-            var fieldType = object.get( 'type' );
+            var objectLabel = object.get( 'label' );
+            var objectType = object.get( 'objectType' );
             var setting = Object.keys( before )[0];
-            var typeSetting = nfRadio.channel( 'data' ).request( 'get:fieldTypeSetting', fieldType, setting );
-            var settingLabel = typeSetting.get( 'label' );
-            var dashicon = 'admin-generic';
-            var msg = 'Field ' + id + ' ' + settingLabel + ' changed from ' + before[ setting ] + ' to ' + after[ setting ];
+            if ( 'order' != setting ) {
+                var typeSetting = nfRadio.channel( 'data' ).request( 'get:fieldTypeSetting', object.get( 'type' ), setting );
+                var settingLabel = typeSetting.get( 'label' );
+                var dashicon = 'admin-generic';
+            } else {
+                var settingLabel = 'Order';
+                var dashicon = 'sort';
+            }
+                        
+            var msg = objectType + ': ' + objectLabel + ' ' + settingLabel + ' changed from ' + before[ setting ] + ' to ' + after[ setting ];
             break;
         case 'add':
             var dashicon = 'plus-alt';
@@ -237,21 +244,6 @@
     <li>
         <span class="dashicons dashicons-<%= dashicon %>"></span> <%= msg %>
     </li>
-    <%
-
-    /*
-    for ( var prop in before ) {
-        var setting = prop;
-    }
-
-    if ( 'undefined' !== typeof setting ) {
-    %>
-    <ul>
-
-    </ul>
-    <%       
-    }
-    */
     %>
 </script>
 

@@ -19,7 +19,7 @@ define( [], function() {
 
 	    		maybeRenderCancel: function() {
 	    			if ( ! nfRadio.channel( 'app' ).request( 'get:appSetting', 'clean' ) ) {
-	    				return _.template( jQuery( '#nf-tmpl-app-header-cancel' ).html(), this );	    				
+	    				return _.template( jQuery( '#nf-tmpl-app-header-view-changes' ).html(), this );	    				
 	    			} else {
 	    				return '';
 	    			}
