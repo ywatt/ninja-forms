@@ -103,7 +103,7 @@ class NF_Abstracts_Model
 
     public function get_tmp_id()
     {
-        return intval( $this->_tmp_id );
+        return $this->_tmp_id;
     }
 
     public function get_type()

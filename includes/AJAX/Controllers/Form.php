@@ -19,7 +19,7 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 
         $form_data = json_decode( stripslashes( $_POST['form'] ), ARRAY_A );
 
-        $form = Ninja_Forms()->form( $form_data[ 'id' ] );
+        $form = Ninja_Forms()->form( $form_data[ 'id' ] )->get();
 
         $form->update_settings( $form_data[ 'settings' ] )->save();
 
@@ -29,18 +29,20 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
             $this->_data[ 'new_ids' ][ 'forms' ][ $tmp_id ] = $form->get_id();
         }
 
-        foreach( $form_data[ 'fields' ] as $field_data ){
+        if( isset( $form_data[ 'fields' ] ) ) {
+            foreach ($form_data['fields'] as $field_data) {
 
-            $id = $field_data[ 'id' ];
+                $id = $field_data['id'];
 
-            $field = Ninja_Forms()->form()->get_field( $id );
+                $field = Ninja_Forms()->form()->get_field($id);
 
-            $field->update_settings( $field_data[ 'settings' ] )->save();
+                $field->update_settings($field_data['settings'])->save();
 
-            if( $field->get_tmp_id() ){
+                if ($field->get_tmp_id()) {
 
-                $tmp_id = $field->get_tmp_id();
-                $this->_data[ 'new_ids' ][ 'fields' ][ $tmp_id ] = $field->get_id();
+                    $tmp_id = $field->get_tmp_id();
+                    $this->_data['new_ids']['fields'][$tmp_id] = $field->get_id();
+                }
             }
         }
 
@@ -53,18 +55,20 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
             }
         }
 
-        foreach( $form_data[ 'actions' ] as $action_data ){
+        if( isset( $form_data[ 'actions' ] ) ) {
+            foreach ($form_data['actions'] as $action_data) {
 
-            $id = $action_data[ 'id' ];
+                $id = $action_data['id'];
 
-            $action = Ninja_Forms()->form()->get_field( $action_data[ 'id' ] );
+                $action = Ninja_Forms()->form()->get_field($action_data['id']);
 
-            $action->update_settings( $action_data[ 'settings' ] )->save();
+                $action->update_settings($action_data['settings'])->save();
 
-            if( $action->get_tmp_id() ){
+                if ($action->get_tmp_id()) {
 
-                $tmp_id = $action->get_tmp_id();
-                $this->_data[ 'new_ids' ][ 'actions' ][ $tmp_id ] = $action->get_id();
+                    $tmp_id = $action->get_tmp_id();
+                    $this->_data['new_ids']['actions'][$tmp_id] = $action->get_id();
+                }
             }
         }
 
