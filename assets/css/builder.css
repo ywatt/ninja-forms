@@ -26,7 +26,7 @@ Header and Nav for Ninja Forms App
 #nf-header ul li.nf-mobile { display: none; }
 #nf-header ul li a { color: #424242; display: block; margin: 16px 28px; padding-bottom: 8px; text-decoration: none; }
 #nf-header ul li a.active { border-bottom: 2px solid #424242; }
-#nf-header ul li a.preview { color: #bbb; }
+#nf-header ul li a.preview { color: #bbb; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 #nf-header ul li a.preview .dashicons { display: inline-block; margin-left: 10px; }
 #nf-header ul:after { clear: both; content: ""; display: block; }
 #nf-header input[type=submit] { float: right; }
@@ -113,8 +113,8 @@ All styles used within the drawer
 .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .dashicons { -webkit-transform: rotate(180deg); -ms-transform: rotate(180deg); transform: rotate(180deg); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .nf-expand-off { display: none; }
 .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .nf-expand-on { display: inline; }
-.nf-drawer-opened .nf-add-new.nf-open-drawer { opacity: 0.0; visibility: hidden; filter: alpha(opacity=0); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
-.nf-drawer-opened .nf-add-new.nf-open-drawer:hover, .nf-drawer-opened .nf-add-new.nf-open-drawer:active, .nf-drawer-opened .nf-add-new.nf-open-drawer.active { opacity: 0.0; visibility: hidden; filter: alpha(opacity=0); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
+.nf-drawer-opened .nf-add-new.nf-open-drawer, .nf-drawer-opened .preview { opacity: 0.0; visibility: hidden; filter: alpha(opacity=0); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
+.nf-drawer-opened .nf-add-new.nf-open-drawer:hover, .nf-drawer-opened .nf-add-new.nf-open-drawer:active, .nf-drawer-opened .nf-add-new.nf-open-drawer.active, .nf-drawer-opened .preview:hover, .nf-drawer-opened .preview:active, .nf-drawer-opened .preview.active { opacity: 0.0; visibility: hidden; filter: alpha(opacity=0); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-drawer-opened #nf-app-sub-header h2 { padding-left: 0; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; }
 .nf-drawer-opened #nf-main-content, .nf-drawer-opened #nf-main-header { margin: 0 auto; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-drawer-opened .nf-setting-wrap { width: 50%; -webkit-transition: width 1.0s ease; transition: width 1.0s ease; }
@@ -185,10 +185,12 @@ All styles used within the drawer
 .ninja-forms-app .nf-list-options { padding-bottom: 20px; }
 .ninja-forms-app .nf-list-options .nf-add-new { margin-left: 20px; }
 .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div { display: table-cell; padding: 5px; }
-.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(1), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(5) { padding: 0 15px; width: 20px; }
+.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(1), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(6) { padding: 0 15px; width: 20px; }
 .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(2), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(3) { width: 45%; }
-.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(4) { min-width: 120px; }
+.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(4) { min-width: 100px; }
 .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div input { margin: 0; }
+.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row.nf-table-header div { font-size: 12px; padding: 20px 5px 5px; }
+.ninja-forms-app .nf-list-options .nf-div-table .nf-table-row.nf-table-header div:nth-child(1), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row.nf-table-header div:nth-child(6) { padding: 0 25px; }
 
 .nf-drawer-buttons { display: none; margin: 40px -20px -20px; padding: 0; }
 .nf-drawer-buttons li { background: #fff; border-right: 1px solid #f1f1f1; float: left; margin: 0; padding: 15px; text-align: center; width: 50%; }
@@ -205,9 +207,9 @@ All styles used within the drawer
 .nf-stage { position: relative; }
 .nf-stage .nf-stage-controls { background: #F8F8F9; padding: 5px; position: absolute; top: -20px; right: 10px; }
 
-.nf-reservoir { background: #F8F8F9; border: 10px solid #F8F8F9; border-radius: 4px; margin: 30px 2% 20px; min-height: 52px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
+.nf-reservoir { background: #F8F8F9; border: 4px solid #F8F8F9; border-radius: 4px; margin: 30px 2% 20px; min-height: 52px; padding: 6px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-reservoir::after { clear: both; content: ""; display: block; }
-.nf-reservoir .nf-item-dock { background: #fff; border-radius: 4px; color: #999; display: inline-block; float: left; margin: 0 4px 3px 3px; padding: 5px 10px; position: relative; }
+.nf-reservoir .nf-item-dock { background: #fff; border-radius: 4px; color: #999; display: inline-block; float: left; margin: 0 4px 3px 4px; padding: 5px 10px; position: relative; }
 .nf-reservoir .nf-item-dock .dashicons { font-size: 14px; margin: 2px 0 -4px 5px; }
 
 .nf-item { background: #3B454D; border-radius: 4px; color: #A2A5A8; font-size: 14px; padding: 10px; text-align: center; }
@@ -300,8 +302,8 @@ All styles used for displaying table content
 
 .ui-draggable-dragging { z-index: 99; }
 
-#nf-builder .nf-droppable-active { border: 4px solid #1EA9EA; padding: 6px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
-#nf-builder .nf-droppable-hover { border: 4px solid #84CC1E; padding: 6px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
+#nf-builder .nf-droppable-active { border: 4px solid #1EA9EA; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
+#nf-builder .nf-droppable-hover { border: 4px solid #84CC1E; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 
 .nf-fields-sortable { border: 4px solid #FFF; padding: 25px 15px 6px; }
 
@@ -319,7 +321,7 @@ All styles used for displaying table content
 
 .nf-staged-fields-drag #drag-item-3 { bottom: 10px; left: 10px; z-index: 1; }
 
-.nf-staged-fields-sortable-placeholder { float: left; height: 28px; border-right: 3px solid #84CC1E; margin-right: -2px; margin-left: -2px; }
+.nf-staged-fields-sortable-placeholder { float: left; height: 28px; border-right: 8px solid #84CC1E; margin-right: -4px; margin-left: -4px; }
 
 .nf-list-options-sortable-placeholder { border: 4px solid #84CC1E; height: 8px !important; margin: -4px 0 -4px 0; }
 
