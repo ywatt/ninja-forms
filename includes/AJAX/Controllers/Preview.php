@@ -42,6 +42,12 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
 
                 $id = $field[ 'id' ];
 
+                if( isset( $form[ 'deleted_fields' ][ $id ] ) ) {
+
+                    unset( $form_data[ 'fields' ][ $id ] );
+                    continue;
+                }
+
                 $old_settings = ( isset( $form_data[ 'fields' ][ $id ][ 'settings' ] ) ) ? $form_data[ 'fields' ][ $id ][ 'settings' ] : array();
 
                 $new_settings = array_merge( $old_settings, $field[ 'settings' ] );
@@ -60,6 +66,12 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
 
                 $id = $action[ 'id' ];
 
+                if( isset( $form[ 'deleted_actions' ][ $id ] ) ) {
+
+                    unset( $form_data[ 'actions' ][ $id ] );
+                    continue;
+                }
+
                 $old_settings = $form_data[ 'actions' ][ $id ][ 'settings' ];
 
                 $new_settings = array_merge( $old_settings, $action[ 'settings' ] );
@@ -67,6 +79,8 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
                 $form_data[ 'actions' ][ $id ][ 'settings' ] = $new_settings;
             }
         }
+
+
 
         $this->update_form_data( $form_data );
 
