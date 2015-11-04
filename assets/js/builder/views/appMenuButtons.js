@@ -29,15 +29,15 @@ define( [], function() {
 
 		events: {
 			'click .publish': 'clickPublish',
-			'click .cancel': 'clickCancel'
+			'click .viewChanges': 'clickViewChanges'
 		},
 
 		clickPublish: function( e ) {
 			nfRadio.channel( 'app' ).trigger( 'click:publish', e );
 		},
 
-		clickCancel: function( e ) {
-			nfRadio.channel( 'app' ).trigger( 'click:cancelChanges', e );
+		clickViewChanges: function( e ) {
+			nfRadio.channel( 'app' ).trigger( 'click:viewChanges', e );
 		}
 
 	});

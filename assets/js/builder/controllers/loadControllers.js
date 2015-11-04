@@ -23,12 +23,13 @@ define(
 		'builder/controllers/fieldset',
 		'builder/controllers/fieldListOptionSortable',
 		'builder/controllers/fieldList',
+		'builder/controllers/fieldSubmit',
 		'builder/controllers/updatePreview',
 		'builder/controllers/formData',
 		'builder/controllers/previewLink',
 		'builder/controllers/appMenuButtons',
 		'builder/controllers/appTrackChanges',
-		'builder/controllers/drawerUndoChanges'
+		'builder/controllers/undoChanges'
 
 	],
 	function(
@@ -55,12 +56,13 @@ define(
 		Fieldset,
 		FieldListOptionSortable,
 		FieldList,
+		FieldSubmit,
 		UpdatePreview,
 		FormData,
 		PreviewLink,
 		AppMenuButtons,
 		AppTrackChanges,
-		DrawerUndoChanges
+		UndoChanges
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -86,13 +88,14 @@ define(
 				var fieldset = new Fieldset();
 				var fieldListOptionSortable = new FieldListOptionSortable();
 				var fieldList = new FieldList();
+				var fieldSubmit = new FieldSubmit();
 				var fieldData = new FieldData();
 				var updatePreview = new UpdatePreview();
 				var formData = new FormData();
 				var previewLink = new PreviewLink();
 				var appMenuButtons = new AppMenuButtons();
 				var appTrackChanges = new AppTrackChanges();
-				var drawerUndoChanges = new DrawerUndoChanges();
+				var undoChanges = new UndoChanges();
 			}
 		});
 

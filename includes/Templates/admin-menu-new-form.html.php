@@ -39,7 +39,7 @@
 </script>
 
 <script id="nf-tmpl-app-header-cancel" type="text/template">
-    <a class="nf-cancel cancel" style="text-decoration: none;" href="#"><span class="dashicons dashicons-backup"></span></a>
+    <a class="nf-cancel viewChanges" style="text-decoration: none;" href="#"><span class="dashicons dashicons-backup"></span></a>
 </script>
 
 <script id="nf-tmpl-main" type="text/template">
@@ -213,6 +213,32 @@
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
     <%
+
+    switch( type ) {
+        case 'change':
+            var id = object.get( 'id' );
+            var fieldType = object.get( 'type' );
+            var setting = Object.keys( before )[0];
+            var typeSetting = nfRadio.channel( 'data' ).request( 'get:fieldTypeSetting', fieldType, setting );
+            var settingLabel = typeSetting.get( 'label' );
+            var dashicon = 'admin-generic';
+            var msg = 'Field ' + id + ' ' + settingLabel + ' changed from ' + before[ setting ] + ' to ' + after[ setting ];
+            break;
+        case 'add':
+            var dashicon = 'plus-alt';
+            var msg = 'Add First Name field';
+            break;
+        case 'remove':
+            var dashicon = 'dismiss';
+            var msg = 'Delete First Name field';
+            break;
+    }
+    %>
+    <li>
+        <span class="dashicons dashicons-<%= dashicon %>"></span> <%= msg %>
+    </li>
+    <%
+
     /*
     for ( var prop in before ) {
         var setting = prop;
@@ -221,9 +247,7 @@
     if ( 'undefined' !== typeof setting ) {
     %>
     <ul>
-        <li>
-            <span class="dashicons dashicons-admin-generic"></span> Field <%= object.get( 'id' ) %> - <%= setting %> changed from '<%= before[setting] %>' to '<%= after[setting] %>'
-        </li>
+
     </ul>
     <%       
     }
@@ -327,7 +351,7 @@
 <script id="nf-tmpl-drawer-header-view-changes" type="text/template">
     <header class="nf-drawer-header">
         <div>
-            <a href="#" class="nf-button secondary cancelChanges" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
+            <a href="#" class="nf-button secondary undoChanges" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
         </div>
         <a href="#" class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
     </header>

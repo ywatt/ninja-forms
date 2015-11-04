@@ -1,10 +1,10 @@
 define( ['builder/views/drawerContentViewChangesItem'], function( viewChangesItem ) {
 	var view = Marionette.CollectionView.extend( {
-		tagName: 'div',
+		tagName: 'ul',
 		childView: viewChangesItem,
 
 		onRender: function() {
-			
+			// console.log( nfUndoManager );
 		}
 	} );
 

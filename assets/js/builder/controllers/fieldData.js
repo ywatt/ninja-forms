@@ -12,6 +12,8 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 			nfRadio.channel( 'data' ).reply( 'delete:field', this.deleteField, this );
 			nfRadio.channel( 'data' ).reply( 'sort:fields', this.sortFields, this );
 			nfRadio.channel( 'data' ).reply( 'get:tmpFieldID', this.getTmpFieldID, this );
+			nfRadio.channel( 'data' ).reply( 'update:removedIDs', this.updateRemovedIDs, this );
+			nfRadio.channel( 'data' ).reply( 'update:newIDs', this.updateRemovedIDs, this );
 		},
 
 		getFieldCollection: function() {
@@ -55,10 +57,26 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 		},
 
 		deleteField: function( model ) {
-			this.collection.removedIDs[ model.get( 'id' ) ] = model.get( 'id' );
 			this.collection.remove( model );
 			nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', false );
 			nfRadio.channel( 'app' ).request( 'update:preview' );
+		},
+
+		updateRemovedIDs: function() {
+			this.collection.removedIDs = {};
+			if ( 0 < this.collection.newIDs.length ) {
+				var that = this;
+				// Loop through our new fields and see if any have been removed.
+				_.each( this.collection.newIDs, function( id ) {
+					if ( ! that.collection.get( id ) ) {
+						that.collection.removedIDs[ id ] = id;
+					}
+				} );
+			}
+		},
+
+		newIDs: function() {
+			this.collection.removedIDs = [];
 		},
 
 		getTmpFieldID: function() {
