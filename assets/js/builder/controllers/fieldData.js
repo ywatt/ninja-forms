@@ -3,7 +3,7 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 		initialize: function() {
 			
 			this.collection = new fieldCollection( preloadedFormData.fields );
-			this.collection.removedIDs = [];
+			this.collection.removedIDs = {};
 			nfUndoManager.register( this.collection );
 
 			nfRadio.channel( 'data' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
@@ -55,7 +55,7 @@ define( ['builder/models/fieldCollection', 'builder/models/listOptionCollection'
 		},
 
 		deleteField: function( model ) {
-			this.collection.removedIDs.push( model.get( 'id' ) );
+			this.collection.removedIDs[ model.get( 'id' ) ] = model.get( 'id' );
 			this.collection.remove( model );
 			nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', false );
 			nfRadio.channel( 'app' ).request( 'update:preview' );
