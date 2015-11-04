@@ -35,12 +35,6 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 
             $field = Ninja_Forms()->form()->get_field( $id );
 
-            if( isset( $form_data[ 'deleted_fields' ][ $id ] ) ) {
-
-                $field->delete();
-                continue;
-            }
-
             $field->update_settings( $field_data[ 'settings' ] )->save();
 
             if( $field->get_tmp_id() ){
@@ -50,17 +44,20 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
             }
         }
 
+        if( isset( $form_data[ 'deleted_fields' ] ) ){
+
+            foreach( $form_data[ 'deleted_fields' ] as  $deleted_field_id ){
+
+                $field = Ninja_Forms()->form()->get_field( $deleted_field_id );
+                $field->delete();
+            }
+        }
+
         foreach( $form_data[ 'actions' ] as $action_data ){
 
             $id = $action_data[ 'id' ];
 
             $action = Ninja_Forms()->form()->get_field( $action_data[ 'id' ] );
-
-            if( isset( $form_data[ 'deleted_actions' ][ $id ] ) ) {
-
-                $action->delete();
-                continue;
-            }
 
             $action->update_settings( $action_data[ 'settings' ] )->save();
 
@@ -68,6 +65,15 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 
                 $tmp_id = $action->get_tmp_id();
                 $this->_data[ 'new_ids' ][ 'actions' ][ $tmp_id ] = $action->get_id();
+            }
+        }
+
+        if( isset( $form_data[ 'deleted_actions' ] ) ){
+
+            foreach( $form_data[ 'deleted_actions' ] as  $deleted_action_id ){
+
+                $action = Ninja_Forms()->form()->get_action( $deleted_action_id );
+                $action->delete();
             }
         }
 
