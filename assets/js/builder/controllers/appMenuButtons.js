@@ -48,9 +48,9 @@ define( [], function() {
 					}
 				}
 				nfRadio.channel( 'app' ).trigger( 'response:sendChanges', response );
+				nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', true );
 			} );
-
-			nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', true );
+			
 		},
 
 		viewChanges: function() {
