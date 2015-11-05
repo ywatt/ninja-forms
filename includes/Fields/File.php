@@ -3,7 +3,7 @@
 /**
  * Class NF_Field_File
  */
-class NF_Fields_File extends NF_Abstracts_Input
+class NF_Fields_File extends NF_Abstracts_Field
 {
     const TEMPLATE = 'file';
 
