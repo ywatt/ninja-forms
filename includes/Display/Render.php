@@ -54,9 +54,9 @@ final class NF_Display_Render
             // Build Form Data
             var form = [];
             form.id = <?php echo $form_id; ?>;
-            form.settings = JSON.parse( '<?php echo wp_json_encode( WPN_Helper::addslashes( $form->get_settings() ) ); ?>' );
+            form.settings = JSON.parse( '<?php echo WPN_Helper::addslashes( wp_json_encode( $form->get_settings() ) ); ?>' );
 
-            form.fields = JSON.parse( '<?php echo wp_json_encode(  WPN_Helper::addslashes( $fields ) ); ?>' );
+            form.fields = JSON.parse( '<?php echo WPN_Helper::addslashes( wp_json_encode( $fields ) ); ?>' );
 
             // Add Form Data to nfForms object
             nfForms.push( form );
@@ -184,9 +184,9 @@ final class NF_Display_Render
             // Build Form Data
             var form = [];
             form.id = <?php echo $form['id']; ?>;
-            form.settings = JSON.parse( '<?php echo wp_json_encode( $form['settings'] ); ?>' );
+            form.settings = JSON.parse( '<?php echo WPN_Helper::addslashes( wp_json_encode( $form['settings'] ) ); ?>' );
 
-            form.fields = JSON.parse( '<?php echo wp_json_encode( WPN_Helper::esc_html( $fields ) ); ?>' );
+            form.fields = JSON.parse( '<?php echo WPN_Helper::addslashes( wp_json_encode(  $fields ) ); ?>' );
 
             // Add Form Data to nfForms object
             nfForms.push( form );
