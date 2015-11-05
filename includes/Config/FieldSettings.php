@@ -1,14 +1,28 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return array(
+return apply_filters( 'ninja-forms-field-settings', array(
 
     /*
      * LABEL
      */
 
     'label' => array(
-        'type' => 'text',
+        'name' => 'label',
+        'type' => 'textbox',
         'label' => __( 'Label', Ninja_Forms::TEXTDOMAIN ),
+        'width' => 'one-half',
+        'group' => 'primary'
+    ),
+
+    /*
+     * PLACEHOLDER
+     */
+
+    'placeholder' => array(
+        'name' => 'placeholder',
+        'type' => 'textbox',
+        'label' => __( 'Placeholder', Ninja_Forms::TEXTDOMAIN ),
+        'width' => 'one-half'
     ),
 
     /*
@@ -16,14 +30,41 @@ return array(
      */
 
     'label_pos' => array(
-        'type' => 'select',
+        'name' => 'label_pos',
+        'type' => 'dropdown',
         'label' => __( 'Label Position', Ninja_Forms::TEXTDOMAIN ),
         'options' => array(
-            'left'   => __( 'Left of Element', Ninja_Forms::TEXTDOMAIN ),
-            'right'  => __( 'Right of Element', Ninja_Forms::TEXTDOMAIN ),
-            'above'  => __( 'Above Element', Ninja_Forms::TEXTDOMAIN ),
-            'below'  => __( 'Below Element', Ninja_Forms::TEXTDOMAIN ),
-            'inside' => __( 'Inside Element', Ninja_Forms::TEXTDOMAIN ),
+            'above'   => array(
+                'label' => __( 'Above Element', Ninja_Forms::TEXTDOMAIN ),
+                'value' => 'above'
+            ),
+            'below'   => array(
+                'label' => __( 'Below of Element', Ninja_Forms::TEXTDOMAIN ),
+                'value' => 'below'
+            ),
+            'left'   => array(
+                'label' => __( 'Left of Element', Ninja_Forms::TEXTDOMAIN ),
+                'value' => 'left'
+            ),
+            'right'   => array(
+                'label' => __( 'Right of Element', Ninja_Forms::TEXTDOMAIN ),
+                'value' => 'right'
+            ),
+            'hidden'   => array(
+                'label' => __( 'Hidden', Ninja_Forms::TEXTDOMAIN ),
+                'value' => 'hidden'
+            ),
         ),
     ),
-);
+
+    /*
+     * REQUIRED
+     */
+
+    'required' => array(
+        'name' => 'required',
+        'type' => 'toggle',
+        'label' => __( 'Required Field', Ninja_Forms::TEXTDOMAIN ),
+        'width' => 'one-half'
+    ),
+));
