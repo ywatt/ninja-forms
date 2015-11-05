@@ -18,6 +18,7 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
         /** @global wpdb $wpdb */
         global $wpdb;
 
+        //PHP locale
         $locale = localeconv();
 
         if ( is_multisite() ) {
@@ -26,23 +27,24 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
             $multisite =  __( 'No', 'ninja-forms' );
          }
 
-         //TODO: Ask if this check is need
-         //if ( function_exists( 'phpversion' ) ) echo esc_html( phpversion() )
-
-
          //TODO: Possible refactor
          foreach( $locale as $key => $val ){
-             if( is_string( $val) ){
+             if( is_string( $val ) ){
                 $data = $key . ': ' . $val . '</br>';
              }
          }
 
+         //TODO: Ask if this check is need
+         //if ( function_exists( 'phpversion' ) ) echo esc_html( phpversion() );
+
+         //WP_DEBUG
          if ( defined('WP_DEBUG') && WP_DEBUG ){
              $debug = __( 'Yes', 'ninja-forms' );
          } else {
             $debug =  __( 'No', 'ninja-forms' );
          }
 
+         //WPLANG
          if ( defined( 'WPLANG' ) && WPLANG ) {
             $lang = WPLANG();
          } else {
@@ -55,18 +57,55 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
         //     $get_ini = size_format( ini_get('post_max_size') );
         //  }
 
+        //SUHOSIN
         if ( extension_loaded( 'suhosin' ) ) {
             $suhosin =  __( 'Yes', 'ninja-forms' );
         } else {
             $suhosin =  __( 'No', 'ninja-forms' );
         }
 
+
+        //Time Zone Check
+        //TODO: May need refactored
         $default_timezone = date_default_timezone_get();
         if ( 'UTC' !== $default_timezone ) {
             echo sprintf( __( 'Default timezone is %s - it should be UTC', 'ninja-forms' ), $default_timezone );
         } else {
             echo sprintf( __( 'Default timezone is %s', 'ninja-forms' ), $default_timezone );
         }
+
+        //Check for active plugins
+        $active_plugins = (array) get_option( 'active_plugins', array() );
+
+        if ( is_multisite() ) {
+            $active_plugins = array_merge( $active_plugins, get_site_option( 'active_sitewide_plugins', array() ) );
+        }
+
+        $all_plugins = array();
+
+        foreach ( $active_plugins as $plugin ) {
+            $plugin_data    = @get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin );
+            $dirname        = dirname( $plugin );
+            $version_string = '';
+
+            if ( ! empty( $plugin_data['Name'] ) ) {
+
+                // link the plugin name to the plugin url if available
+                $plugin_name = $plugin_data['Name'];
+                if ( ! empty( $plugin_data['PluginURI'] ) ) {
+                    $plugin_name = '<a href="' . $plugin_data['PluginURI'] . '" title="' . __( 'Visit plugin homepage' , 'ninja-forms' ) . '">' . $plugin_name . '</a>';
+                }
+
+                $all_plugins[] = $plugin_name . ' ' . __( 'by', 'ninja-forms' ) . ' ' . $plugin_data['Author'] . ' ' . __( 'version', 'ninja-forms' ) . ' ' . $plugin_data['Version'] . $version_string;
+            }
+        }
+
+        if ( sizeof( $all_plugins ) == 0 ) {
+            $site_wide_plugins = '-';
+        } else {
+            $site_wide_plugins = implode( ', <br/>', $all_plugins );
+        }
+
         $environment = array(
             __( 'Home URL','ninja-forms' ) => home_url(),
             __( 'Site URL','ninja-forms' ) => site_url(),
@@ -93,8 +132,6 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
             __( 'Default Timezone','ninja-forms' ) => $default_timezone,
         );
 
-
-
-        Ninja_Forms::template( 'admin-menu-system-status.html.php', compact( 'environment' ) );
+        Ninja_Forms::template( 'admin-menu-system-status.html.php', compact( 'environment', 'site_wide_plugins' ) );
     }
 } // End Class NF_Admin_SystemStatus
