@@ -2,7 +2,7 @@
  * Ninja Forms - Form Display Structure
  */
 
- .ninja-forms-form-wrap *,
+.ninja-forms-form-wrap *,
 .ninja-forms-form-wrap *:after,
 .ninja-forms-form-wrap *:before {
     -webkit-box-sizing: border-box;
