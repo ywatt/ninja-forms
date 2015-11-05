@@ -29,7 +29,7 @@ final class NF_Display_Render
             $field = apply_filters( 'nf_localize_fields', $field );
 
             $field_class = $field->get_settings( 'type' );
-          
+
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
             // $field->update_setting( 'value', time() );
@@ -128,12 +128,12 @@ final class NF_Display_Render
         <?php
 
 
-        wp_enqueue_script( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure,css' );
-        wp_enqueue_script( 'nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css' );
+        wp_enqueue_style( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure,css' );
+        wp_enqueue_style( 'nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css' );
 
         wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
-        
+
         wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'nf-front-end', Ninja_Forms::$url . 'assets/js/front-end/main.js', array( 'jquery', 'backbone', 'requirejs', 'jquery-form' ) );
 
@@ -257,8 +257,8 @@ final class NF_Display_Render
 
         <?php
 
-        wp_enqueue_script( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure.css' );
-        wp_enqueue_script( 'nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css' );
+        wp_enqueue_style( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure.css' );
+        wp_enqueue_style( 'nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css' );
 
         wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );

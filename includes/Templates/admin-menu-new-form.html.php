@@ -228,7 +228,7 @@
                 var settingLabel = 'Order';
                 var dashicon = 'sort';
             }
-                        
+
             var msg = objectType + ': ' + objectLabel + ' ' + settingLabel + ' changed from ' + before[ setting ] + ' to ' + after[ setting ];
             break;
         case 'add':
@@ -248,7 +248,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field" type="text/template">
-    <h2><span class="dashicons dashicons-star-empty"></span> <%= label %></h2>
+    <h2><span class="dashicons dashicons-star-empty"></span> <%= type %></h2>
     <span class="nf-settings-groups"></span>
 </script>
 

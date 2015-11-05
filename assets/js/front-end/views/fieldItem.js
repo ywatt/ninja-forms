@@ -59,6 +59,7 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 			
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'render:view', this );
 			nfRadio.channel( 'fields' ).trigger( 'render:view', this );
+			console.log( this.model );
 		},
 
 		templateHelpers: function () {
