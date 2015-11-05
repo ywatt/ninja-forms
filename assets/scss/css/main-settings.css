@@ -1,9 +1,0 @@
-.nf-setting-wrap {
-  float: left;
-  margin-bottom: 15px;
-  padding: 0 2%;
-  width: 33.33%; }
-  .nf-setting-wrap::after {
-    clear: both;
-    content: "";
-    display: block; }
