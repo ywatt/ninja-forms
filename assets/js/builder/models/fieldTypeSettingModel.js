@@ -17,6 +17,11 @@ define( [], function() {
 					return 'one-half';
 				}
 			}
+		},
+
+		initialize: function() {
+			nfRadio.channel( 'fields' ).trigger( 'init:fieldTypeModel', this );
+			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:fieldTypeModel', this );
 		}
 	} );
 	

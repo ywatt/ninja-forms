@@ -56,11 +56,11 @@ define( ['builder/views/drawerFieldTypeSettingListOption', 'builder/views/drawer
 		},
 
 		events: {
-			'click .nf-add-new': 'addOption'
+			'click .nf-add-new': 'clickAddOption'
 		},
 
-		addOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).request( 'add:option', this.collection, this.fieldModel );
+		clickAddOption: function( e ) {
+			nfRadio.channel( 'list-repeater' ).trigger( 'click:addOption', this.collection, this.fieldModel );
 		}
 
 	} );

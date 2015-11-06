@@ -10,7 +10,7 @@ define( ['builder/views/appHeader', 'builder/views/appSubHeader'], function( app
 		},
 
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'app' ), 'change:appDomain', this.changeSubHeader );
+			this.listenTo( nfRadio.channel( 'app' ), 'change:currentDomain', this.changeSubHeader );
 		},
 
 		onShow: function() {
@@ -28,7 +28,7 @@ define( ['builder/views/appHeader', 'builder/views/appSubHeader'], function( app
 			var that = this;
 	    	return {
 	    		renderTitle: function(){
-	    			var formData = nfRadio.channel( 'data' ).request( 'get:formData' );
+	    			var formData = nfRadio.channel( 'app' ).request( 'get:formData' );
 	    			return formData.get( 'settings' ).title;
 				},
 			};

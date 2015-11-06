@@ -1,3 +1,13 @@
+/**
+ * Config file for our app drawers.
+ *
+ * this.collection represents all of our registered drawers.
+ * 
+ * @package Ninja Forms builder
+ * @subpackage Main App
+ * @copyright (c) 2015 WP Ninjas
+ * @since 3.0
+ */
 define( [
 	'builder/models/drawerCollection',
 	'builder/views/drawerAddField',
@@ -59,6 +69,7 @@ define( [
 				{
 					id: 'viewChanges',
 
+					// getHeaderView() is defined by default, but we need to override it for the viewChanges drawer.
 					getHeaderView: function( data ) {
 						return new viewChangesHeaderView( data );
 					},
@@ -69,7 +80,9 @@ define( [
 				}
 			] );
 
+			// Listen for requests for our drawer collection.
 			nfRadio.channel( 'app' ).reply( 'get:drawerCollection', this.getDrawerCollection, this );
+			// Listen for requests for specific drawer models.
 			nfRadio.channel( 'app' ).reply( 'get:drawer', this.getDrawer, this );
 		},
 

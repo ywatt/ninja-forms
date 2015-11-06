@@ -260,7 +260,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field-setting-group-label" type="text/template">
-    <h3 class="toggle"><span class="dashicons dashicons-arrow-<%= renderArrowDir() %>"></span><%= name %></h3>
+    <h3 class="toggle"><span class="dashicons dashicons-arrow-<%= renderArrowDir() %>"></span><%= label %></h3>
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-action" type="text/template">
@@ -397,7 +397,7 @@
     <textarea><%= value %></textarea>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-dropdown" type="text/template">
+<script id="nf-tmpl-edit-field-setting-select" type="text/template">
     <%= renderLabel() %>
     <div class="nf-select">
         <select>

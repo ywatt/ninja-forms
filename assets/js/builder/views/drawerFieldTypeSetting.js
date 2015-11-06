@@ -22,6 +22,7 @@ define( [], function() {
 	    			} else {
 	    				this.value = '';
 	    			}
+	    			
 					return _.template( jQuery( '#nf-tmpl-edit-field-setting-' + this.type ).html(), this );
 				},
 			};

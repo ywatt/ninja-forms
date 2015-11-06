@@ -2,8 +2,8 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 	
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'drawer' ), 'startDrag:fieldType', this.addActiveClass );
-			this.listenTo( nfRadio.channel( 'drawer' ), 'stopDrag:fieldType', this.removeActiveClass );
+			this.listenTo( nfRadio.channel( 'drawer-addField' ), 'startDrag:type', this.addActiveClass );
+			this.listenTo( nfRadio.channel( 'drawer-addField' ), 'stopDrag:type', this.removeActiveClass );
 
 			this.listenTo( nfRadio.channel( 'drawer' ), 'startDrag:fieldStaging', this.addActiveClass );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'stopDrag:fieldStaging', this.removeActiveClass );
@@ -17,13 +17,13 @@ define( [], function() {
 		},
 
 		addActiveClass: function() {
-			var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
+			var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
 			jQuery( sortableEl ).addClass( 'nf-droppable-active' );
 			
 		},
 
 		removeActiveClass: function() {
-			var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
+			var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
 			jQuery( sortableEl ).removeClass( 'nf-droppable-active' );
 		},
 
@@ -33,25 +33,25 @@ define( [], function() {
 				var type = jQuery( ui.item ).data( 'id' );
 				var tmpID = this.addField( type, false );
 				jQuery( ui.helper ).prop( 'id', tmpID );
-				nfRadio.channel( 'data' ).request( 'sort:fields' );
+				nfRadio.channel( 'fields' ).request( 'sort:fields' );
 				jQuery( ui.helper ).remove();
-				nfRadio.channel( 'app' ).trigger( 'drop:fieldType', type );
+				nfRadio.channel( 'fields' ).trigger( 'drop:fieldType', type );
 			} else if ( jQuery( ui.item ).hasClass( 'nf-stage' ) ) {
 				var that = this;
 
 				/*
 				Make sure that our staged fields are sorted properly.
 				*/	
-				nfRadio.channel( 'data' ).request( 'sort:stagedFields' );
+				nfRadio.channel( 'fields' ).request( 'sort:staging' );
 				/*
 				Grab our staged fields.
 				 */
-				var stagedFields = nfRadio.channel( 'data' ).request( 'get:stagedFields' );
+				var stagedFields = nfRadio.channel( 'fields' ).request( 'get:staging' );
 
 				/*
 				Get our current field order.
 				 */
-				var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
+				var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
 				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
 					var order = jQuery( sortableEl ).sortable( 'toArray' );
 				} else {
@@ -85,9 +85,9 @@ define( [], function() {
 				var insertedAt = order.indexOf( 'nf-staged-fields-drag' );
 				order.splice( insertedAt, 1 );
 
-				nfRadio.channel( 'data' ).request( 'sort:fields', order );
+				nfRadio.channel( 'fields' ).request( 'sort:fields', order );
 				
-				nfRadio.channel( 'data' ).request( 'clear:stagedFields' );
+				nfRadio.channel( 'fields' ).request( 'clear:staging' );
 
 				jQuery( ui.helper ).remove();
 			}
@@ -96,8 +96,8 @@ define( [], function() {
 		addField: function( type, silent ) {
 			silent = silent || false;
 			var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', type );
-			var tmpID = nfRadio.channel( 'data' ).request( 'get:tmpFieldID' );
-			nfRadio.channel( 'data' ).request( 'add:field',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'id' ) }, silent );
+			var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpFieldID' );
+			nfRadio.channel( 'fields' ).request( 'add:field',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'id' ) }, silent );
 			return tmpID;
 		},
 
@@ -106,7 +106,7 @@ define( [], function() {
 				var type = jQuery( ui.helper ).data( 'id' );
 				var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', type );
 				var label = fieldType.get( 'nicename' );
-				var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
+				var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
 				var fieldWidth = jQuery( sortableEl ).width();
 				this.currentHelper = ui.helper;
 				jQuery( ui.helper ).html( label );
@@ -119,11 +119,11 @@ define( [], function() {
 
 		outFieldsSortable: function( ui ) {
 			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) {
-				var helperClone = nfRadio.channel( 'app' ).request( 'get:fieldTypeHelperClone' );
+				var helperClone = nfRadio.channel( 'drawer-addField' ).request( 'get:typeHelperClone' );
 							
 				jQuery( this.currentHelper ).html( jQuery( helperClone ).html() );
 				jQuery( this.currentHelper ).removeClass( 'nf-field-wrap' ).addClass( 'nf-one-third' ).css( { 'width': '', 'height': '' } );
-				var sortableEl = nfRadio.channel( 'app' ).request( 'get:fieldsSortableEl' );
+				var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
 				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
 					jQuery( sortableEl ).removeClass( 'nf-droppable-hover' );
 				}
@@ -142,7 +142,7 @@ define( [], function() {
 		},
 
 		updateFieldsSortable: function( ui ) {
-			nfRadio.channel( 'data' ).request( 'sort:fields' );
+			nfRadio.channel( 'fields' ).request( 'sort:fields' );
 		}
 	});
 

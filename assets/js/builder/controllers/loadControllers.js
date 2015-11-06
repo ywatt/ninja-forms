@@ -3,33 +3,35 @@ define(
 		'builder/controllers/hotkeys',
 		'builder/controllers/fieldTypes',
 		'builder/controllers/fieldTypeSections',
-		'builder/controllers/drawerFieldTypeDrag',
-		'builder/controllers/drawerStagingDrag',
-		'builder/controllers/drawerSavedFields',
-		'builder/controllers/drawerStagedFieldsData',
-		'builder/controllers/drawerStagedFieldsSortable',
-		'builder/controllers/drawer',
-		'builder/controllers/drawerData',
-		'builder/controllers/drawerFilterFieldTypes',
-		'builder/controllers/appDomain',
-		'builder/controllers/appData',
+		'builder/controllers/fields/fieldTypeDrag',
+		'builder/controllers/fields/stagingDrag',
+		'builder/controllers/fields/savedFieldsSection',
+		'builder/controllers/fields/staging',
+		'builder/controllers/fields/stagingSortable',
+		'builder/controllers/app/drawer',
+		'builder/controllers/app/drawerConfig',
+		'builder/controllers/fields/filterTypes',
+		'builder/controllers/app/domainConfig',
+		'builder/controllers/app/data',
 		'builder/controllers/mainContentFieldsSortable',
-		'builder/controllers/fieldData',
-		'builder/controllers/fieldClick',
-		'builder/controllers/drawerToggleSettingGroup',
-		'builder/controllers/changeFieldSettingDefault',
+		'builder/controllers/fields/data',
+		'builder/controllers/fields/itemControls',
+		'builder/controllers/app/drawerToggleSettingGroup',
+		'builder/controllers/fieldsChangeSettingDefault',
 		'builder/controllers/fieldToggle',
-		'builder/controllers/drawerFieldTypeSettingChildView',
+		'builder/controllers/fields/getSettingChildView',
 		'builder/controllers/fieldset',
 		'builder/controllers/fieldListOptionSortable',
-		'builder/controllers/fieldList',
+		'builder/controllers/fields/listField',
 		'builder/controllers/fieldSubmit',
 		'builder/controllers/updateDB',
 		'builder/controllers/formData',
 		'builder/controllers/previewLink',
-		'builder/controllers/appMenuButtons',
-		'builder/controllers/appTrackChanges',
-		'builder/controllers/undoChanges'
+		'builder/controllers/app/menuButtons',
+		'builder/controllers/app/trackChanges',
+		'builder/controllers/undoChanges',
+		'builder/controllers/app/publishResponse',
+		'builder/controllers/app/changeDomain'
 
 	],
 	function(
@@ -50,7 +52,7 @@ define(
 		FieldData,
 		FieldClick,
 		DrawerToggleSettingGroup,
-		ChangeFieldSettingDefault,
+		FieldsChangeSettingDefault,
 		FieldToggle,
 		DrawerFieldTypeSettingChildView,
 		Fieldset,
@@ -62,11 +64,14 @@ define(
 		PreviewLink,
 		AppMenuButtons,
 		AppTrackChanges,
-		UndoChanges
+		UndoChanges,
+		AppPublishResponse,
+		AppChangeDomain
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
 				var hotkeys = new Hotkeys();
+				var fieldset = new Fieldset();
 				var fieldTypes = new FieldTypes();
 				var fieldTypeSections = new FieldTypeSections();
 				var fieldTypeDrag = new FieldTypeDrag();
@@ -82,12 +87,11 @@ define(
 				var mainContentFieldsSortable = new MainContentFieldsSortable();
 				var fieldClick = new FieldClick();
 				var drawerToggleSettingGroup = new DrawerToggleSettingGroup();
-				var changeFieldSettingDefault = new ChangeFieldSettingDefault();
+				var fieldsChangeSettingDefault = new FieldsChangeSettingDefault();
 				var fieldToggle = new FieldToggle();
 				var drawerFieldTypeSettingChildView = new DrawerFieldTypeSettingChildView();
-				var fieldset = new Fieldset();
-				var fieldListOptionSortable = new FieldListOptionSortable();
 				var fieldList = new FieldList();
+				var fieldListOptionSortable = new FieldListOptionSortable();
 				var fieldSubmit = new FieldSubmit();
 				var fieldData = new FieldData();
 				var updateDB = new UpdateDB();
@@ -96,6 +100,8 @@ define(
 				var appMenuButtons = new AppMenuButtons();
 				var appTrackChanges = new AppTrackChanges();
 				var undoChanges = new UndoChanges();
+				var appPublishResponse = new AppPublishResponse();
+				var appChangeDomain = new AppChangeDomain();
 			}
 		});
 

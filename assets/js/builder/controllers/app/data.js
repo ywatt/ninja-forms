@@ -1,5 +1,5 @@
 /**
- * Creates and stores a model that represents app-wide data. i.e. domain, drawer, clean, etc.
+ * Creates and stores a model that represents app-wide data. i.e. current domain, current drawer, clean, etc.
  *
  * clean is a boolean that represents whether or not changes have been made.
  * 
@@ -8,12 +8,11 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-
 define( ['builder/models/appModel'], function( appModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Get the collection that represents all the parts of our application.
-			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
 			// Setup our initial model.
 			this.model = new appModel( {
 				currentDrawer: false,
@@ -21,18 +20,24 @@ define( ['builder/models/appModel'], function( appModel ) {
 				clean: true
 			} );
 
-			// 
-			nfRadio.channel( 'app' ).reply( 'update:appDomain', this.updateDomain, this );
-			nfRadio.channel( 'app' ).reply( 'update:currentDrawer', this.updateCurrentDrawer, this );
-			nfRadio.channel( 'app' ).reply( 'update:appSetting', this.updateSetting, this );
-
-			nfRadio.channel( 'app' ).reply( 'get:appData', this.getAppData, this );
-			nfRadio.channel( 'app' ).reply( 'get:appSetting', this.getAppSetting, this );
+			/*
+			 * Respond to app channel requests for information about the state of our app.
+			 */
+			nfRadio.channel( 'app' ).reply( 'get:data', this.getData, this );
+			nfRadio.channel( 'app' ).reply( 'get:setting', this.getSetting, this );
 			nfRadio.channel( 'app' ).reply( 'get:currentDomain', this.getCurrentDomain, this );
 			nfRadio.channel( 'app' ).reply( 'get:currentDrawer', this.getCurrentDrawer, this );
+
+			/*
+			 * Respond to app channel requests to update app settings.
+			 */		
+			nfRadio.channel( 'app' ).reply( 'update:currentDomain', this.updateCurrentDomain, this );
+			nfRadio.channel( 'app' ).reply( 'update:currentDrawer', this.updateCurrentDrawer, this );
+			nfRadio.channel( 'app' ).reply( 'update:setting', this.updateSetting, this );
+
 		},
 
-		updateDomain: function( model ) {
+		updateCurrentDomain: function( model ) {
 			this.updateSetting( 'currentDomain', model );
 		},
 
@@ -41,11 +46,11 @@ define( ['builder/models/appModel'], function( appModel ) {
 			return true;
 		},
 
-		getAppSetting: function( setting ) {
+		getSetting: function( setting ) {
 			return this.model.get( setting );
 		},
 
-		getAppData: function() {
+		getData: function() {
 			return this.model;
 		},
 
@@ -59,7 +64,8 @@ define( ['builder/models/appModel'], function( appModel ) {
 		},
 
 		getCurrentDrawer: function() {
-			return this.model.get( 'currentDrawer' );
+			var currentDrawerID = this.model.get( 'currentDrawer' );
+			return nfRadio.channel( 'app' ).request( 'get:drawer', currentDrawerID );
 		}
 
 

@@ -9,7 +9,7 @@ define( ['builder/views/appMenu', 'builder/views/appMenuButtons'], function( app
 		},
 
 		onShow: function() {
-			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
 			this.menu.show( new appMenuCollectionView( { collection: appDomainCollection } ) );
 		
 			this.buttons.show( new appMenuButtonsView() );

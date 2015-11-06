@@ -14,7 +14,7 @@ define( [], function() {
 		},
 
 		removeStagedField: function( el ) {
-			nfRadio.channel( 'drawer' ).trigger( 'click:removeStagedField', el, this.model );
+			nfRadio.channel( 'drawer-addField' ).trigger( 'click:removeStagedField', el, this.model );
 		}
 	});
 

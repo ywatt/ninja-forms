@@ -1,6 +1,15 @@
+/**
+ * Handles actions related to our list field options sortable.
+ * 
+ * @package Ninja Forms builder
+ * @subpackage Fields - Edit Field Drawer
+ * @copyright (c) 2015 WP Ninjas
+ * @since 3.0
+ */
 define( ['builder/views/drawerFieldTypeSettingListComposite'], function( listCompositeView ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
+			// Listen for 
 			nfRadio.channel( 'list-repeater' ).reply( 'get:settingChildView', this.getSettingChildView, this );
 			nfRadio.channel( 'list-repeater' ).reply( 'update:optionSortable', this.updateOptionSortable, this );
 			nfRadio.channel( 'list-repeater' ).reply( 'stop:optionSortable', this.stopOptionSortable, this );

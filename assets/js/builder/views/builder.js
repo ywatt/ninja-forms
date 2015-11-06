@@ -36,11 +36,11 @@ define( ['builder/views/header', 'builder/views/main', 'builder/views/menuDrawer
 		},
 
 		closeDrawer: function() {
-			nfRadio.channel( 'drawer' ).trigger( 'click:closeDrawer' );
+			nfRadio.channel( 'app' ).trigger( 'click:closeDrawer' );
 		},
 
 		changeDomain: function( e ) {
-			nfRadio.channel( 'app' ).trigger( 'click:changeDomain', e );
+			nfRadio.channel( 'app' ).trigger( 'click:menu', e );
 		}
 
 	} );
