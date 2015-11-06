@@ -42,7 +42,7 @@ return apply_filters( 'ninja-forms-textbox-settings', array(
 				'width' => 'one-half'
             ),
 			'input_limit_type' => array(
-				'name' => 'input_type_limit',
+				'name' => 'input_limit_type',
 				'type' => 'dropdown',
 				'options' => array(
 					'characters' => array(
