@@ -18,7 +18,7 @@ abstract class NF_Abstracts_Field
     /**
     * @var string
     */
-    protected $_group = '';
+    protected $_section = '';
 
     /**
      * @var array
@@ -95,6 +95,11 @@ abstract class NF_Abstracts_Field
     public function get_nicename()
     {
         return $this->_nicename;
+    }
+
+    public function get_section()
+    {
+        return $this->_section;
     }
 
     public function get_aliases()

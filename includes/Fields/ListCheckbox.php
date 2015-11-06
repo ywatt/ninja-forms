@@ -9,7 +9,7 @@ class NF_Fields_ListCheckbox extends NF_Abstracts_List
 
     protected $_nicename = 'Checkbox List';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
     public function __construct()
     {

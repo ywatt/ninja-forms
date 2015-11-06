@@ -9,7 +9,7 @@ class NF_Fields_Phone extends NF_Fields_Textbox
 
     protected $_nicename = 'Phone';
 
-    protected $_group = 'user_info';
+    protected $_section = 'userinfo';
 
     protected $_type = 'tel';
 

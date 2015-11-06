@@ -9,7 +9,7 @@ abstract class NF_Abstracts_Input extends NF_Abstracts_Field
 
     protected $_name = 'input';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
     protected $_type = 'text';
 

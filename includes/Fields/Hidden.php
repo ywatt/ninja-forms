@@ -9,7 +9,7 @@ class NF_Fields_Hidden extends NF_Abstracts_Input
 
     protected $_nicename = 'Hidden';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
     protected $_type = 'hidden';
 

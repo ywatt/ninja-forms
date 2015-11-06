@@ -9,6 +9,8 @@ class NF_Fields_FirstName extends NF_Abstracts_UserInfo
 
     protected $_nicename = 'First Name';
 
+    protected $_section = 'userinfo';
+
     public function __construct()
     {
         parent::__construct();

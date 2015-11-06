@@ -11,7 +11,7 @@ class NF_Fields_Submit extends NF_Fields_Button
 
     protected $_nicename = 'Submit Button';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
     protected $_type = 'submit';
 

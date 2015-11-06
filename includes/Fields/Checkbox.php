@@ -11,7 +11,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
     protected $_nicename = 'Checkbox';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
     protected $_type = 'checkbox';
 

@@ -9,7 +9,7 @@ class NF_Fields_ListMultiselect extends NF_Abstracts_List
 
     protected $_nicename = 'Mulit-Select';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
     public function __construct()
     {

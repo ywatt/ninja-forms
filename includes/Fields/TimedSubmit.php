@@ -9,7 +9,7 @@ class NF_Fields_TimedSubmit extends NF_Fields_Button
 
     protected $_nicename = 'Timed Submit Button';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
     protected $_type = 'submit';
 

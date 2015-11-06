@@ -9,7 +9,7 @@ class NF_Fields_Zip extends NF_Fields_Textbox
 
     protected $_nicename = 'Zip';
 
-    protected $_group = 'user_info';
+    protected $_section = 'userinfo';
 
     public function __construct()
     {

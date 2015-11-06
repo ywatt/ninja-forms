@@ -11,7 +11,7 @@ class NF_Fields_ListState extends NF_Abstracts_List
 
     protected $_nicename = 'State';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
     public function __construct()
     {

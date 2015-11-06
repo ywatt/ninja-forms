@@ -9,7 +9,7 @@ class NF_Fields_Address extends NF_Fields_Textbox
 
     protected $_nicename = 'Address';
 
-    protected $_group = 'user_info';
+    protected $_section = 'userinfo';
 
     public function __construct()
     {

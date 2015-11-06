@@ -7,7 +7,7 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
 {
     protected $_name = '';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
     protected $_template = '';
 

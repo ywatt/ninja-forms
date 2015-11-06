@@ -13,6 +13,8 @@ class NF_Fields_Email extends NF_Abstracts_UserInfo
 
     protected $_type = 'email';
 
+    protected $_section = 'userinfo';
+
     public function __construct()
     {
         parent::__construct();

@@ -11,7 +11,7 @@ class NF_Fields_ListRadio extends NF_Abstracts_List
 
     protected $_nicename = 'Radio List';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
     public function __construct()
     {

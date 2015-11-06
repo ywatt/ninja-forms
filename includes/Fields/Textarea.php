@@ -11,7 +11,7 @@ class NF_Fields_Textarea extends NF_Abstracts_Field
 
     protected $_nicename = 'Textarea';
 
-    protected $_group = 'standard_fields';
+    protected $_section = 'common';
 
 
     public function __construct()
