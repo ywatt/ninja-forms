@@ -95,7 +95,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             foreach( $settings as $setting ){
 
                 $group = $setting[ 'group' ];
-                $settings_groups[ $group ][ 'settings' ] = $setting;
+                $settings_groups[ $group ][ 'settings' ][] = $setting;
             }
 
             $field_type_settings[ $name ] = array(
