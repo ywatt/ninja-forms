@@ -17,7 +17,7 @@ abstract class NF_Abstracts_Input extends NF_Abstracts_Field
     {
         parent::__construct();
 
-        $settings = Ninja_Forms::config( 'InputFieldSettings' );
+        $settings = Ninja_Forms::config( 'FieldInputSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );
     }

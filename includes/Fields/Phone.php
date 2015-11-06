@@ -15,6 +15,8 @@ class NF_Fields_Phone extends NF_Fields_Textbox
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->_nicename = __( 'Phone', Ninja_Forms::TEXTDOMAIN );
     }
 }

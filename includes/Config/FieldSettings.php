@@ -22,7 +22,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'name' => 'placeholder',
         'type' => 'textbox',
         'label' => __( 'Placeholder', 'ninja-forms' ),
-        'width' => 'one-half'
+        'width' => 'one-half',
+        'group' => 'primary'
     ),
 
     /*
@@ -55,6 +56,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'value' => 'hidden'
             ),
         ),
+        'width' => 'one-half',
+        'group' => 'primary'
     ),
 
     /*
@@ -65,6 +68,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'name' => 'required',
         'type' => 'toggle',
         'label' => __( 'Required Field', 'ninja-forms' ),
-        'width' => 'one-half'
+        'width' => 'one-half',
+        'group' => 'primary'
     ),
 ));
