@@ -1,11 +1,13 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Class NF_Fields_StateList
+ * Class NF_Fields_ListState
  */
-class NF_Fields_StateList extends NF_Abstracts_List
+class NF_Fields_ListState extends NF_Abstracts_List
 {
-    protected $_name = 'statelist';
+    const TEMPLATE = 'state';
+
+    protected $_name = 'liststate';
 
     protected $_nicename = 'State';
 
