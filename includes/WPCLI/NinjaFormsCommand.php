@@ -20,6 +20,41 @@ class NF_WPCLI_NinjaFormsCommand extends WP_CLI_Command
         WP_CLI::line( '' );
     }
 
+    /**
+     * Creates a Form
+     *
+     * ## OPTIONS
+     *
+     * <title>
+     * : The form title.
+     *
+     * ## EXAMPLES
+     *
+     *     wp ninja-forms form "My New Form"
+     *
+     * @synopsis <title>
+     * @subcommand form
+     * @alias create-form
+     */
+    public function create_form( $args, $assoc_args )
+    {
+        list( $title ) = $args;
+
+        $form = Ninja_Forms()->form()->get();
+        $form->update_setting( 'title', $title );
+        $form->save();
+    }
+
+
+    public function mock()
+    {
+        $mock_data = new NF_Database_MockData();
+
+        $mock_data->form_contact_form_1();
+        $mock_data->form_contact_form_2();
+        $mock_data->form_long_form();
+    }
+
     private function peeking_ninja()
     {
         $output = file_get_contents( Ninja_Forms::$dir . 'includes/Templates/wpcli-header-art.txt' );
