@@ -2,14 +2,17 @@
 
 if( ! class_exists( 'WP_CLI_Command' ) ) exit;
 
+/**
+ * The Ninja Forms WP-CLI Command
+ */
 class NF_WPCLI_NinjaFormsCommand extends WP_CLI_Command
 {
     /**
-     * Help Subcommand
+     * Display Ninja Forms Information
      *
-     * @subcommand help
+     * @subcommand info
      */
-    function help()
+    function info()
     {
         $this->peeking_ninja();
         WP_CLI::success( 'Welcome to the Ninja Forms WP-CLI Extension!' );
@@ -45,7 +48,9 @@ class NF_WPCLI_NinjaFormsCommand extends WP_CLI_Command
         $form->save();
     }
 
-
+    /**
+     * Installs mock form data
+     */
     public function mock()
     {
         $mock_data = new NF_Database_MockData();
