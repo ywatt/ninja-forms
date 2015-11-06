@@ -13,6 +13,8 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
     protected $_group = 'standard_fields';
 
+    protected $_aliases = array( 'input' );
+
     protected $_type = 'textbox';
 
     public function __construct()

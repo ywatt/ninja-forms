@@ -101,7 +101,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $field_type_settings[ $name ] = array(
                 'id' =>  $name,
                 'nicename' => $field->get_nicename(),
-                'alias' => '',
+                'alias' => $field->get_aliases(),
                 'parentType' => $field->get_parent_type(),
                 'settingGroups' => $settings_groups
             );

@@ -21,6 +21,11 @@ abstract class NF_Abstracts_Field
     protected $_group = '';
 
     /**
+     * @var array
+     */
+    protected $_aliases = array();
+
+    /**
     * @var array
     */
     protected $_settings = array();
@@ -92,6 +97,10 @@ abstract class NF_Abstracts_Field
         return $this->_nicename;
     }
 
+    public function get_aliases()
+    {
+        return $this->_aliases;
+    }
 
     public function get_type()
     {
