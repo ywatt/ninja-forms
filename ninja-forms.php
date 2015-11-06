@@ -140,7 +140,6 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->menus[ 'submissions']      = new NF_Admin_Menus_Submissions();
                 self::$instance->menus[ 'import-export']    = new NF_Admin_Menus_ImportExport();
 
-
                 /*
                  * Admin menus used for building out the admin UI
                  *
@@ -378,4 +377,15 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
     }
 
     Ninja_Forms();
+}
+
+add_action( 'admin_notices', 'nf_alpha_release_admin_notice' );
+function nf_alpha_release_admin_notice()
+{
+    ?>
+    <div class="error">
+        <h3>Ninja Forms 3.0 - ALPHA</h3>
+        <p><strong>NOTICE:</strong> Installed is an Alpha Release of Ninja Forms. This is not intended for production.</p>
+    </div>
+    <?php
 }
