@@ -20,7 +20,7 @@ class NF_Fields_Textarea extends NF_Abstracts_Field
 
         $this->_nicename = __( 'Textarea', Ninja_Forms::TEXTDOMAIN );
 
-        $settings = Ninja_Forms::config( 'InputFieldSettings' );
+        $settings = Ninja_Forms::config( 'FieldInputSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );
     }
