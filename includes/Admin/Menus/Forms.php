@@ -90,9 +90,21 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $settings = $field->get_settings();
 
-            $settings[ 'parentType' ] = $field->get_parent_type();
+            $settings_groups = Ninja_Forms::config( 'SettingsGroups' );
 
-            $field_type_settings[ $name ] = $settings;
+            foreach( $settings as $setting ){
+
+                $group = $setting[ 'group' ];
+                $settings_groups[ $group ][ 'settings' ] = $setting;
+            }
+
+            $field_type_settings[ $name ] = array(
+                'id' =>  $name,
+                'nicename' => $field->get_nicename(),
+                'alias' => '',
+                'parentType' => $field->get_parent_type(),
+                'settingGroups' => $settings_groups
+            );
         }
         ?>
         <script>
