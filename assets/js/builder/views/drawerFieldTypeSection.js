@@ -33,12 +33,12 @@ define( [], function() {
 
 				start: function( e, ui ) {
 					that.dragging = true;
-					nfRadio.channel( 'drawer' ).trigger( 'startDrag:fieldType', this, ui );
+					nfRadio.channel( 'drawer-addField' ).trigger( 'startDrag:type', this, ui );
 				},
 
 				stop: function( e, ui ) {
 					that.dragging = false;
-					nfRadio.channel( 'drawer' ).trigger( 'stopDrag:fieldType', this, ui );
+					nfRadio.channel( 'drawer-addField' ).trigger( 'stopDrag:type', this, ui );
 				}
 
 			} ).disableSelection();

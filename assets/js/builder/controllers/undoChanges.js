@@ -6,14 +6,14 @@ define( [], function() {
 
 		undoChanges: function() {
 			// nfUndoManager.undoAll();
-			var field = nfRadio.channel( 'data' ).request( 'get:field', 1 );
+			var field = nfRadio.channel( 'fields' ).request( 'get:field', 1 );
 			nfUndoManager.undo( field );
 
 
-			nfRadio.channel( 'data' ).request( 'update:removedIDs' );
-			nfRadio.channel( 'data' ).request( 'update:newIDs' );
+			nfRadio.channel( 'fields' ).request( 'update:removedIDs' );
+			nfRadio.channel( 'fields' ).request( 'update:newIDs' );
 			nfRadio.channel( 'app' ).request( 'update:db' );
-			nfRadio.channel( 'app' ).request( 'update:appSetting', 'clean', true );
+			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );
 			nfRadio.channel( 'app' ).trigger( 'cancel:changes' );
 			nfRadio.channel( 'app' ).request( 'close:drawer' );
 		}

@@ -22,7 +22,7 @@ define( ['builder/views/drawerStagingCollection', 'builder/models/stagingCollect
 		},
 
 		onShow: function() {
-			var stagingCollection = nfRadio.channel( 'data' ).request( 'get:stagedFields' );
+			var stagingCollection = nfRadio.channel( 'fields' ).request( 'get:staging' );
 			this.staging.show( new drawerStagingView( { collection: stagingCollection } ) );
 
 			this.primary.show( new fieldTypeSectionCollectionView( { collection: this.primaryCollection } ) );

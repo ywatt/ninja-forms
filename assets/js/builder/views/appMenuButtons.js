@@ -10,7 +10,7 @@ define( [], function() {
 		templateHelpers: function () {
 	    	return {
 	    		maybeDisabled: function() {
-	    			if ( nfRadio.channel( 'app' ).request( 'get:appSetting', 'clean' ) ) {
+	    			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
 	    				return 'disabled';
 	    			} else {
 	    				return '';
@@ -18,7 +18,7 @@ define( [], function() {
 	    		},
 
 	    		maybeRenderCancel: function() {
-	    			if ( ! nfRadio.channel( 'app' ).request( 'get:appSetting', 'clean' ) ) {
+	    			if ( ! nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
 	    				return _.template( jQuery( '#nf-tmpl-app-header-view-changes' ).html(), this );	    				
 	    			} else {
 	    				return '';

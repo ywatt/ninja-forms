@@ -45,21 +45,21 @@ define( [], function() {
 		},
 
 		changeDomainFields: function() {
-			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
 			var fieldDomain = appDomainCollection.get( 'fields' );
-			nfRadio.channel( 'app' ).request( 'change:appDomain', fieldDomain );
+			nfRadio.channel( 'app' ).request( 'change:currentDomain', fieldDomain );
 		},
 
 		changeDomainActions: function() {
-			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
 			var fieldDomain = appDomainCollection.get( 'actions' );
-			nfRadio.channel( 'app' ).request( 'change:appDomain', fieldDomain );
+			nfRadio.channel( 'app' ).request( 'change:currentDomain', fieldDomain );
 		},
 
 		changeDomainSettings: function() {
-			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
 			var fieldDomain = appDomainCollection.get( 'settings' );
-			nfRadio.channel( 'app' ).request( 'change:appDomain', fieldDomain );
+			nfRadio.channel( 'app' ).request( 'change:currentDomain', fieldDomain );
 		}
 
 	});

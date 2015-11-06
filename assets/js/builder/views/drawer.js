@@ -42,7 +42,7 @@ define( ['builder/views/drawerHeaderDefault', 'builder/views/drawerContentEmpty'
 		},
 
 		clickToggleDrawer: function() {
-			nfRadio.channel( 'drawer' ).trigger( 'click:toggleDrawerSize' );
+			nfRadio.channel( 'app' ).trigger( 'click:toggleDrawerSize' );
 		}
 
 	} );

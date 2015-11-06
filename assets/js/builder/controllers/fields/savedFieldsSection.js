@@ -1,6 +1,15 @@
+/**
+ * Handles our saved fields type section.
+ * 
+ * @package Ninja Forms builder
+ * @subpackage Fields - New Field Drawer
+ * @copyright (c) 2015 WP Ninjas
+ * @since 3.0
+ */
 define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectionCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
+			// Create our collection for saved fields
 			this.collection = new fieldTypeSectionCollection( [
 				{ 
 					id: 'saved',
@@ -12,7 +21,7 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 					]
 				}
 			] );
-
+			// Respond to requests for our saved fields collection.
             nfRadio.channel( 'drawer' ).reply( 'get:savedFields', this.getSavedFields, this );
 		},
 

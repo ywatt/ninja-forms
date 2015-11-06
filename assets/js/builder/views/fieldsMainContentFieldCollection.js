@@ -7,7 +7,7 @@ define( ['builder/views/mainContentField', 'builder/views/mainContentFieldsEmpty
 
 		initialize: function() {
 			this.collection.on( 'change', this.render, this );
-			nfRadio.channel( 'app' ).reply( 'get:fieldsSortableEl', this.getFieldsSortableEl, this );
+			nfRadio.channel( 'fields' ).reply( 'get:sortableEl', this.getSortableEl, this );
 		},
 
 		onRender: function() {
@@ -49,7 +49,7 @@ define( ['builder/views/mainContentField', 'builder/views/mainContentFieldsEmpty
 			}
 		},
 
-		getFieldsSortableEl: function() {
+		getSortableEl: function() {
 			return this.el;
 		}
 	} );

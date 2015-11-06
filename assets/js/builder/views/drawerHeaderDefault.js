@@ -19,7 +19,8 @@ define( [], function() {
 		},
 
 		changeFilter: function( e ) {
-			nfRadio.channel( 'drawer' ).trigger( 'change:filter', e.target.value, e );
+			var currentDrawer = nfRadio.channel( 'app' ).request( 'get:currentDrawer' );
+			nfRadio.channel( 'drawer-' + currentDrawer.get( 'id' ) ).trigger( 'change:filter', e.target.value, e );
 		},
 
 		maybeChangeFilter: function( e ) {

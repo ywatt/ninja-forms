@@ -7,13 +7,13 @@ define( [], function() {
 		},
 
 		disablePreview: function() {
-			var appDomains = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+			var appDomains = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
 			var preview = appDomains.get( 'preview' );
 			preview.set( 'disabled', true );
 		},
 
 		changePreviewNicename: function( status ) {
-			var appDomains = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+			var appDomains = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
 			var preview = appDomains.get( 'preview' );
 
 			if ( ! status ) {
@@ -26,7 +26,7 @@ define( [], function() {
 		},
 
 		enablePreview: function() {
-			var appDomains = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+			var appDomains = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
 			var preview = appDomains.get( 'preview' );
 			preview.set( 'disabled', false );
 		}

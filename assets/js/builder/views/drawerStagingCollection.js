@@ -21,28 +21,28 @@ define( ['builder/views/drawerStagedField', 'builder/views/drawerStagedFieldsEmp
 				helper: 'clone',
 				tolerance: 'pointer',
 				over: function( e, ui ) {
-					nfRadio.channel( 'drawer' ).trigger( 'over:stagedFields', e, ui );
+					nfRadio.channel( 'drawer-addField' ).trigger( 'over:stagedFields', e, ui );
 				},
 
 				out: function( e, ui ) {
-					nfRadio.channel( 'drawer' ).trigger( 'out:stagedFields', ui );
+					nfRadio.channel( 'drawer-addField' ).trigger( 'out:stagedFields', ui );
 				},
 
 				receive: function( e, ui ) {
-					nfRadio.channel( 'drawer' ).trigger( 'receive:stagedFields', ui );
+					nfRadio.channel( 'drawer-addField' ).trigger( 'receive:stagedFields', ui );
 				},
 
 				update: function( e, ui ) {
-					nfRadio.channel( 'data' ).request( 'sort:stagedFields' );
+					nfRadio.channel( 'fields' ).request( 'sort:staging' );
 				},
 
 				start: function( e, ui ) {
-					nfRadio.channel( 'drawer' ).trigger( 'start:stagedFields', ui );
+					nfRadio.channel( 'drawer-addField' ).trigger( 'start:stagedFields', ui );
 
 				},
 
 				stop: function( e, ui ) {
-					nfRadio.channel( 'drawer' ).trigger( 'stop:stagedFields', ui );
+					nfRadio.channel( 'drawer-addField' ).trigger( 'stop:stagedFields', ui );
 				}
 			} );
 
@@ -52,10 +52,10 @@ define( ['builder/views/drawerStagedField', 'builder/views/drawerStagedFieldsEmp
 				connectToSortable: '.nf-fields-sortable',
 
 				start: function( e, ui ) {
-					nfRadio.channel( 'drawer' ).trigger( 'startDrag:fieldStaging', this, ui );
+					nfRadio.channel( 'drawer-addField' ).trigger( 'startDrag:fieldStaging', this, ui );
 				},
 				stop: function( e, ui ) {
-					nfRadio.channel( 'drawer' ).trigger( 'stopDrag:fieldStaging', this, ui );
+					nfRadio.channel( 'drawer-addField' ).trigger( 'stopDrag:fieldStaging', this, ui );
 				}
 			} );
 		},

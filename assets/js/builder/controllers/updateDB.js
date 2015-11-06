@@ -1,12 +1,12 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'drawer' ), 'close:drawer', this.updateDB );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'closed', this.updateDB );
 			nfRadio.channel( 'app' ).reply( 'update:db', this.updateDB, this );
 		},
 
 		updateDB: function( action ) {
-			if ( nfRadio.channel( 'app' ).request( 'get:appSetting', 'clean' ) ) {
+			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
 				return false;
 			}
 			
@@ -17,7 +17,7 @@ define( [], function() {
 			} else if ( 'publish' == action ) {
 				var jsAction = 'nf_save_form';
 			}
-			var formData = nfRadio.channel( 'data' ).request( 'get:formData' );
+			var formData = nfRadio.channel( 'app' ).request( 'get:formData' );
 			removedIDs = formData.get( 'fields' ).removedIDs;
 
 			var data = JSON.parse( JSON.stringify( formData ) );

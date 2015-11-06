@@ -23,17 +23,17 @@ jQuery( document ).ready( function( $ ) {
 				var builderView = new BuilderView();
 
 				// Setup our default domain
-				var appDomains = nfRadio.channel( 'app' ).request( 'get:appDomainCollection' );
+				var appDomains = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
 				var defaultDomain = appDomains.get( 'fields' );
-				nfRadio.channel( 'app' ).trigger( 'click:appMenu', defaultDomain );
+				nfRadio.channel( 'app' ).trigger( 'click:menu', {}, defaultDomain );
 
 				// Trigger our after start event.
 				nfRadio.channel( 'app' ).trigger( 'after:appStart', this );
-				nfUndoManager.startTracking();	
+				// nfUndoManager.startTracking();	
 			}
 		} );
 	
 		var ninjaForms = new NinjaForms();
-		ninjaForms.start();		
+		ninjaForms.start();
 	} );
 } );

@@ -28,12 +28,12 @@ define( [], function() {
 		},
 
 		deleteOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).request( 'delete:option', this.model, this.collection, this.fieldModel );
+			nfRadio.channel( 'list-repeater' ).trigger( 'click:deleteOption', this.model, this.collection, this.fieldModel );
 		},
 
 		maybeAddOption: function( e ) {
 			if ( 13 == e.keyCode ) {
-				nfRadio.channel( 'list-repeater' ).request( 'add:option', this.collection, this.fieldModel );
+				nfRadio.channel( 'list-repeater' ).trigger( 'click:addOption', this.collection, this.fieldModel );
 			}
 		}
 

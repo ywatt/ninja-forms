@@ -16,6 +16,7 @@ define( ['builder/views/drawerFieldTypeSetting'], function( fieldTypeSettingView
 			this.$el = this.$el.children();
 			this.$el.unwrap();
 			this.setElement( this.$el );
+			console.log( 'render' );
 		},
 
 		templateHelpers: function () {
