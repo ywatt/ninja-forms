@@ -87,6 +87,12 @@ abstract class NF_Abstracts_Field
         return $this->_name;
     }
 
+    public function get_nicename()
+    {
+        return $this->_nicename;
+    }
+
+
     public function get_type()
     {
         return $this->_type;
