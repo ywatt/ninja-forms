@@ -106,6 +106,7 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
             $site_wide_plugins = implode( ', <br/>', $all_plugins );
         }
 
+        //Output array
         $environment = array(
             __( 'Home URL','ninja-forms' ) => home_url(),
             __( 'Site URL','ninja-forms' ) => site_url(),
