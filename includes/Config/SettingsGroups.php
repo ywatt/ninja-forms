@@ -9,11 +9,13 @@ return array(
     ),
 
     'restrictions' => array(
-
+        'id' => 'restrictions',
+        'label' => __( 'Restrictions', 'ninja-forms' )
     ),
 
     'advanced' => array(
-
+        'id' => 'advanced',
+        'label' => __( 'Advanced', 'ninja-forms' )
     )
 
 );
