@@ -9,6 +9,7 @@ return array(
          'timed' => array(
              'type' => 'number',
              'label' => __( 'Number of seconds for timed submit.', Ninja_Forms::TEXTDOMAIN ),
+             'width' => 'full',
              'group' => 'advanced'
          ),
 );
