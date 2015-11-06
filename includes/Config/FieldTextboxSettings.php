@@ -8,7 +8,7 @@ return apply_filters( 'ninja-forms-textbox-settings', array(
 
     'mask' => array(
         'name' => 'mask',
-        'type' => 'dropdown',
+        'type' => 'select',
         'label' => __( 'Input Mask', 'ninja-forms'),
         'width' => 'one-half',
         'group' => 'restrictions',
@@ -43,7 +43,7 @@ return apply_filters( 'ninja-forms-textbox-settings', array(
             ),
 			'input_limit_type' => array(
 				'name' => 'input_limit_type',
-				'type' => 'dropdown',
+				'type' => 'select',
 				'options' => array(
 					'characters' => array(
 						'label' => __( 'Character(s)', 'ninja-forms' ),

@@ -32,7 +32,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
 
     'label_pos' => array(
         'name' => 'label_pos',
-        'type' => 'dropdown',
+        'type' => 'select',
         'label' => __( 'Label Position', 'ninja-forms' ),
         'options' => array(
             'above'   => array(
