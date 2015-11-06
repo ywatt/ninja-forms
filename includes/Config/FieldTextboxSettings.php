@@ -33,6 +33,7 @@ return apply_filters( 'ninja-forms-textbox-settings', array(
         'type' => 'fieldset',
         'label' => __( 'Limit Input to this Number', 'ninja-forms' ),
         'width' => 'full',
+		'group' => 'restrictions',
         'settings' => array(
             'input_limit' => array(
 				'name' => 'input_limit',
