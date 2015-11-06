@@ -1,15 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return array(
-
-    /*
-     * PLACEHOLDER
-     */
-
-    'placeholder' => array(
-        'type' => 'text',
-        'label' => __( 'Placeholder', Ninja_Forms::TEXTDOMAIN ),
-    ),
+return apply_filters( 'ninja-forms-field-input-settings', array(
 
     /*
      * DEFAULT VALUE
@@ -25,7 +16,9 @@ return array(
             'post_url'     => __( 'Post / Page URL', Ninja_Forms::TEXTDOMAIN ),
             'query_string' => __( 'Query String Variable', Ninja_Forms::TEXTDOMAIN ),
             'custom'       => __( 'Custom Default Value', Ninja_Forms::TEXTDOMAIN ),
-        )
+        ),
+        'width' => 'one-half',
+        'group' => 'primary'
     ),
 
-);
+));
