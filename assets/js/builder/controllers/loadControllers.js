@@ -73,7 +73,7 @@ define(
 				var hotkeys = new Hotkeys();
 				var fieldset = new Fieldset();
 				var fieldTypes = new FieldTypes();
-				var fieldTypeSections = new FieldTypeSections();
+				// var fieldTypeSections = new FieldTypeSections();
 				var fieldTypeDrag = new FieldTypeDrag();
 				var fieldStagingDrag = new FieldStagingDrag();
 				var savedFields = new SavedFields();

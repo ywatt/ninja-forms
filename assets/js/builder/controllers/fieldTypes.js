@@ -2,17 +2,30 @@ define( [
 	'builder/models/fieldTypeCollection',
 	'builder/models/fieldTypeSettingCollection',
 	'builder/models/fieldTypeSettingGroupCollection',
-	'builder/models/listOptionCollection'
+	'builder/models/fieldTypeSectionCollection'
 	], function(
 	fieldTypeCollection,
 	fieldTypeSettingCollection,
 	fieldTypeSettingGroupCollection,
-	listOptionCollection
+	fieldTypeSectionCollection
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 
 			this.collection = new fieldTypeCollection();
+			this.fieldTypeSections = new fieldTypeSectionCollection( [
+				{
+					id: 'common',
+					nicename: 'Common Fields',
+					fieldTypes: []
+				},
+				{ 
+					id: 'userinfo',
+					nicename: 'User Information Fields',
+					fieldTypes: []
+				}
+			] );
+
 			var that = this;
 
 			_.each( fieldTypeData, function ( type ) {
@@ -26,6 +39,8 @@ define( [
 
 					settingGroups.add( groupTmp );
 				} );
+
+				that.fieldTypeSections.get( type.section ).get( 'fieldTypes' ).push( type.id );
 
 				var fieldType = {
 					id: type.id,
@@ -41,7 +56,8 @@ define( [
 			nfRadio.channel( 'data' ).reply( 'get:fieldType', this.getFieldType, this );
 			nfRadio.channel( 'data' ).reply( 'get:fieldTypes', this.getFieldTypes, this );
 			nfRadio.channel( 'data' ).reply( 'get:fieldTypeSetting', this.getFieldTypeSetting, this );
-			
+			nfRadio.channel( 'drawer' ).reply( 'get:fieldTypeSections', this.getFieldTypeSections, this );
+		
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addStagedField );
 		},
 
@@ -67,6 +83,10 @@ define( [
         addStagedField: function( el ) {
         	var type = jQuery( el.target ).data( 'id' );
         	nfRadio.channel( 'fields' ).request( 'add:stagedField', type );
+        },
+
+        getFieldTypeSections: function() {
+            return this.fieldTypeSections;
         }
 	});
 

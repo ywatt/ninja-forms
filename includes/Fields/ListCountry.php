@@ -9,7 +9,7 @@ class NF_Fields_ListCountry extends NF_Abstracts_List
 
     protected $_nicename = 'Country';
 
-    protected $_section = 'common';
+    protected $_section = 'userinfo';
 
     public function __construct()
     {

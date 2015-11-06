@@ -15,10 +15,7 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 					id: 'saved',
 					nicename: 'Saved Fields',
 					classes: 'nf-saved',
-					fieldTypes: [
-						'patient-id',
-						'doctors-name'
-					]
+					fieldTypes: []
 				}
 			] );
 			// Respond to requests for our saved fields collection.

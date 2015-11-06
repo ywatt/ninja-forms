@@ -4,7 +4,7 @@ define( ['builder/views/drawerContentViewChangesItem'], function( viewChangesIte
 		childView: viewChangesItem,
 
 		onRender: function() {
-			// console.log( nfUndoManager );
+			
 		}
 	} );
 

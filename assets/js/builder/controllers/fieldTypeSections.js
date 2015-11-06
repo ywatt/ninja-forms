@@ -8,7 +8,7 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 					fieldTypes: [
 						'textbox',
 						'listradio',
-						'dropdown',
+						'listselect',
 						'textarea',
 						'submit'
 					]
@@ -20,8 +20,8 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
 						'firstname',
 						'lastname',
 						'email',
+						'liststate',
 						'city',
-						'state',
 						'zip'
 					]
 				},

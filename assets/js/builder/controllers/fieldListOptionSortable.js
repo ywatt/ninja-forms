@@ -37,7 +37,6 @@ define( ['builder/views/drawerFieldTypeSettingListComposite'], function( listCom
 		startOptionSortable: function( ui ) {
 			jQuery( ui.placeholder ).find( 'div' ).remove();
 			jQuery( ui.item ).css( 'opacity', '0.5' ).show();
-			//console.log( ui.placeholder );
 		}
 
 	});

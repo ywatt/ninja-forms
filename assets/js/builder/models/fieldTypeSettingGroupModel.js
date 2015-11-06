@@ -4,7 +4,7 @@ define( [], function() {
 			display: false,
 
 			renderLabel: function() {
-				if ( '' != this.name ) {
+				if ( '' != this.label ) {
 					this.arrowDir = 'down';
 					return _.template( jQuery( '#nf-tmpl-drawer-content-edit-field-setting-group-label' ).html(), this );
 				} else {
