@@ -283,6 +283,32 @@ final class NF_Database_MockData
         }
     }
 
+    public function form_long_form( $num_fields = 100 )
+    {
+        /*
+        * FORM
+        */
+
+        $form = Ninja_Forms()->form()->get();
+        $form->update_setting( 'title', 'The Long Form' );
+        $form->save();
+
+        $form_id = $form->get_id();
+
+        /*
+         * FIELDS
+         */
+
+        for( $i = 1; $i <= $num_fields; $i++ ) {
+            $field = Ninja_Forms()->form($form_id)->field()->get();
+            $field->update_setting('type', 'textbox')
+                ->update_setting('label', 'Field #' . $i)
+                ->update_setting('label_pos', 'above')
+                ->update_setting('required', 0)
+                ->save();
+        }
+    }
+
     private function _migrate()
     {
         $migrations = new NF_Database_Migrations();
