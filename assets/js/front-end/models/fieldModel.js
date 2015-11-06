@@ -4,7 +4,7 @@ define( ['front-end/models/fieldErrorCollection'], function( fieldErrorCollectio
 			placeholder: '',
 			value: '',
 			label_pos: '',
-			classes: 'nf-element',
+			classes: 'nf-element ninja-forms-field',
 			reRender: false,
 			mirror_field: false,
 			confirm_field: false,
@@ -39,6 +39,6 @@ define( ['front-end/models/fieldErrorCollection'], function( fieldErrorCollectio
 		}
 
 	} );
-	
+
 	return model;
 } );
