@@ -11,7 +11,7 @@ class NF_Fields_File extends NF_Abstracts_Field
 
     protected $_nicename = 'File';
 
-    protected $_section = 'common';
+    protected $_section = '';
 
     protected $_type = 'file';
 

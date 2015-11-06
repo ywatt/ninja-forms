@@ -9,7 +9,7 @@ class NF_Fields_Button extends NF_Abstracts_Field
 
     protected $_nicename = 'Button';
 
-    protected $_section = 'common';
+    protected $_section = '';
 
     protected $_type = '';
 

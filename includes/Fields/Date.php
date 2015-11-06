@@ -9,7 +9,7 @@ class NF_Fields_Date extends NF_Abstracts_Input
 
     protected $_nicename = 'Date';
 
-    protected $_section = 'common';
+    protected $_section = '';
 
     protected $_type = 'date';
 

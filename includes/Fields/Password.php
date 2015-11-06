@@ -9,7 +9,7 @@ class NF_Fields_Password extends NF_Abstracts_Input
 
     protected $_nicename = 'Password';
 
-    protected $_section = 'common';
+    protected $_section = '';
 
     protected $_type = 'password';
 

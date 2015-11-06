@@ -40,8 +40,10 @@ define( [
 					settingGroups.add( groupTmp );
 				} );
 
-				that.fieldTypeSections.get( type.section ).get( 'fieldTypes' ).push( type.id );
-
+				if ( 'undefined' != typeof that.fieldTypeSections.get( type.section ) ) {
+					that.fieldTypeSections.get( type.section ).get( 'fieldTypes' ).push( type.id );
+				}
+				
 				var fieldType = {
 					id: type.id,
 					nicename: type.nicename,
