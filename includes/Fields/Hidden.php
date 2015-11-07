@@ -5,6 +5,8 @@
  */
 class NF_Fields_Hidden extends NF_Abstracts_Input
 {
+    const TEMPLATE = 'hidden';
+
     protected $_name = 'hidden';
 
     protected $_nicename = 'Hidden';
