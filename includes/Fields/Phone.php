@@ -11,7 +11,7 @@ class NF_Fields_Phone extends NF_Fields_Textbox
 
     protected $_section = 'userinfo';
 
-    protected $_type = 'tel';
+    protected $_type = 'textbox';
 
     public function __construct()
     {

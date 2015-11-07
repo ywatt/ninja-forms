@@ -8,7 +8,7 @@ return array(
 
     'datepicker' => array(
         'name' => 'datepicker',
-        'type' => 'checkbox',
+        'type' => 'toggle',
         'label' => __( 'Use the JQueryUI datepicker.', Ninja_Forms::TEXTDOMAIN ),
         'width' => 'full',
         'group' => 'advanced'

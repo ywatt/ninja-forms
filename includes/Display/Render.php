@@ -128,7 +128,7 @@ final class NF_Display_Render
         <?php
 
 
-        wp_enqueue_style( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure,css' );
+        wp_enqueue_style( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure.css' );
         wp_enqueue_style( 'nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css' );
 
         wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );

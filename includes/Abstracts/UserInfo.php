@@ -9,7 +9,7 @@ abstract class NF_Abstracts_UserInfo extends NF_Abstracts_Input
 
     protected $_section = 'userinfo';
 
-    protected $_type = 'text';
+    protected $_type = 'textbox';
 
     public function __construct()
     {
