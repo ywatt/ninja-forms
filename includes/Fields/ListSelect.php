@@ -5,13 +5,13 @@
  */
 class NF_Fields_ListSelect extends NF_Abstracts_List
 {
+    const TEMPLATE = 'list';
+
     protected $_name = 'listselect';
 
     protected $_nicename = 'Select';
 
     protected $_section = 'common';
-
-    protected $_template ='';
 
     public function __construct()
     {

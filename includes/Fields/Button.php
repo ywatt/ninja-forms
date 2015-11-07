@@ -5,6 +5,8 @@
  */
 class NF_Fields_Button extends NF_Abstracts_Field
 {
+    const TEMPLATE = 'button';
+
     protected $_name = 'button';
 
     protected $_nicename = 'Button';

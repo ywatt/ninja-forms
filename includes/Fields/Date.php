@@ -5,13 +5,15 @@
  */
 class NF_Fields_Date extends NF_Abstracts_Input
 {
+    const TEMPLATE = 'textbox';
+
     protected $_name = 'date';
 
     protected $_nicename = 'Date';
 
     protected $_section = '';
 
-    protected $_type = 'date';
+    protected $_type = 'textbox';
 
     public function __construct()
     {
