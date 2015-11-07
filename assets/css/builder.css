@@ -40,7 +40,7 @@ Header and Nav for Ninja Forms App
 #nf-app-sub-header h2 { display: inline-block; margin: 0; padding: 10px 0; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; }
 #nf-app-sub-header:after { clear: both; content: ""; display: block; }
 
-#nf-main { background: #fff; border: 4px solid #fff; width: 100%; position: absolute; top: 120px; bottom: 0; left: 0; overflow: scroll; -webkit-overflow-scrolling: touch; -webkit-transition: left 0.5s ease; transition: left 0.5s ease; }
+#nf-main { background: #fff; border: 4px solid #fff; width: 100%; position: absolute; top: 125px; bottom: 0; left: 0; overflow: scroll; -webkit-overflow-scrolling: touch; -webkit-transition: left 0.5s ease; transition: left 0.5s ease; }
 
 #nf-main-content, #nf-main-header { margin: 0 auto; max-width: 700px; -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 
