@@ -137,6 +137,14 @@ final class NF_Display_Render
 
     }
 
+    protected static function load_template( $file_name = '' )
+    {
+        if( ! $file_name ) return;
+
+        if( self::is_template_loaded( $file_name ) ) return;
+
+        self::$loaded_templates[] = $file_name;
+    }
 
     public static function output_templates()
     {
@@ -169,15 +177,6 @@ final class NF_Display_Render
 
         // Action to Output Custom Templates
         do_action( 'nf_output_templates' );
-    }
-
-    protected static function load_template( $file_name = '' )
-    {
-        if( ! $file_name ) return;
-
-        if( self::is_template_loaded( $file_name ) ) return;
-
-        self::$loaded_templates[] = $file_name;
     }
 
     /*
