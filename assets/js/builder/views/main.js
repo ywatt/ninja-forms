@@ -13,7 +13,7 @@ define( ['builder/views/mainHeader'], function( mainHeaderView ) {
 			this.listenTo( nfRadio.channel( 'app' ), 'change:currentDomain', this.render );
 			nfRadio.channel( 'app' ).reply( 'get:mainEl', this.getMainEl, this );
 			
-			this.listenTo( nfRadio.channel( 'app' ), 'cancel:changes', this.render );
+			// this.listenTo( nfRadio.channel( 'app' ), 'cancel:changes', this.render );
 		},
 
 		onShow: function() {
@@ -23,10 +23,8 @@ define( ['builder/views/mainHeader'], function( mainHeaderView ) {
 
 		onRender: function() {
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
-
 			var headerView = currentDomain.get( 'getMainHeaderView' ).call( currentDomain );
 			this.header.show( headerView );
-
 			var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
 			this.content.show( contentView );
 
