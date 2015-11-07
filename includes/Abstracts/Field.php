@@ -114,7 +114,7 @@ abstract class NF_Abstracts_Field
 
     public function get_parent_type()
     {
-        return ( get_parent_class() ) ? parent::_type : '';
+        return ( get_parent_class() ) ? parent::_type : 'textbox';
     }
 
     public function get_settings()
