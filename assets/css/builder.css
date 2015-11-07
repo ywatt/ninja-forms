@@ -224,7 +224,7 @@ All styles used within the drawer
 /*
 Various custom field styles
 --------------------------------- */
-.nf-add-new { color: #84CC1E; padding: 0 0 0 46px; text-decoration: none; line-height: 32px; position: relative; width: 165px; height: 32px; z-index: 98; text-indent: 0px; overflow: hidden; -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; }
+.nf-add-new { color: #84CC1E; padding: 0 0 0 46px; text-decoration: none; line-height: 32px; position: relative; height: 32px; z-index: 98; text-indent: 0px; overflow: hidden; -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; }
 .nf-add-new:after { background: #84CC1E; border: 2px solid #84CC1E; border-radius: 40px; color: #fff; content: "+"; font-size: 22px; padding: 8px; position: absolute; left: 0; width: 12px; height: 12px; line-height: 10px; text-indent: 0px; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; }
 .nf-add-new:hover, .nf-add-new:active, .nf-add-new.active { color: #84CC1E; -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; }
 .nf-add-new:hover:after, .nf-add-new:active:after, .nf-add-new.active:after { background: #fff; color: #84CC1E; -webkit-transform: rotate(360deg); -ms-transform: rotate(360deg); transform: rotate(360deg); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
@@ -388,5 +388,36 @@ All styles used for displaying table content
   .nf-item { padding: 15px; }
   .nf-saved .nf-item::after { padding: 14px; } }
 @media only screen and (max-width: 600px) { #nf-builder { margin-top: 46px; } }
+.rtl.ninja-forms-app #wpcontent { margin-right: 140px; }
+.rtl.ninja-forms-app #wpcontent #wpbody { right: 160px; left: 0; }
+.rtl.ninja-forms-app.folded #wpcontent { margin-right: 16px; }
+.rtl.ninja-forms-app.folded #wpcontent #wpbody { right: 36px; left: 0; }
+
+.rtl #nf-header #nf-logo { float: right; }
+.rtl #nf-header ul li { float: right; }
+.rtl #nf-header ul li a.preview .dashicons { margin-right: 10px; }
+.rtl #nf-header input[type=submit] { float: left; }
+.rtl #nf-header .nf-cancel { float: left; margin-left: 20px; }
+.rtl .nf-add-new { padding: 0 46px 0 0; }
+.rtl .nf-add-new:after { right: 0; line-height: 14px; }
+.rtl .nf-add-new.nf-open-drawer { right: 40px; left: 0; }
+.rtl #nf-main { right: 0; left: auto; }
+.rtl #nf-main-header .nf-button { float: left; }
+.rtl .nf-item-controls { float: left; }
+.rtl .nf-item-controls li { float: right; }
+.rtl .nf-item-controls li.nf-item-duplicate .nf-tooltip { left: -32px; }
+.rtl .nf-item-controls li.nf-item-duplicate .nf-tooltip:after { left: 36px; }
+.rtl .nf-item-controls li.nf-item-edit .nf-tooltip { left: -16px; }
+.rtl .nf-item-controls li.nf-item-edit .nf-tooltip:after { left: 20px; }
+.rtl .nf-item-controls.nf-editing .nf-item-edit .dashicons { margin-left: 12px; }
+.rtl #nf-drawer { right: auto; left: -1400px; }
+.rtl #nf-drawer.nf-drawer-expand { width: 100%; }
+.rtl .nf-drawer-header h2 { float: right; }
+.rtl .nf-drawer-header h2 .dashicons { margin-left: 10px; }
+.rtl .nf-drawer-header .nf-button { float: left; }
+.rtl .nf-search input[type=search] { padding: 12px 50px 12px 0; }
+.rtl .nf-search::before { right: 10px; left: 0; }
+.rtl .nf-drawer-opened #nf-drawer { left: 0; right: auto; }
+.rtl .nf-drawer-opened #nf-app-sub-header h2 { padding-right: 0; }
 
 /*# sourceMappingURL=builder.css.map */
