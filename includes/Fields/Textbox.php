@@ -9,8 +9,6 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
     protected $_name = 'textbox';
 
-    protected $_nicename = 'Textbox';
-
     protected $_section = 'common';
 
     protected $_aliases = array( 'input' );

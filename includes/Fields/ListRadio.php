@@ -9,8 +9,6 @@ class NF_Fields_ListRadio extends NF_Abstracts_List
 
     protected $_name = 'listradio';
 
-    protected $_nicename = 'Radio List';
-
     protected $_section = 'common';
 
     public function __construct()
