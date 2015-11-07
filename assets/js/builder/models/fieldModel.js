@@ -15,6 +15,11 @@ define( [], function() {
 
 		initialize: function() {
 			var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', this.get( 'type' ) );
+
+			console.log( this );
+
+			console.log( fieldType );
+
 			var parentType = fieldType.get( 'parentType' );
 			this.bind( 'change', this.changeSetting, this );
 			

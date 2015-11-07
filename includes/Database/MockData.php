@@ -272,22 +272,70 @@ final class NF_Database_MockData
          * FIELDS
          */
 
-        foreach( Ninja_Forms()->fields as $field_type ){
+        $fields = array(
+            array(
+                'type' 			=> 'textbox',
+                'label'			=> 'Textbox',
+            ),
+            array(
+                'type' 			=> 'firstname',
+                'label'			=> 'First Name',
+            ),
+            array(
+                'type' 			=> 'lastname',
+                'label'			=> 'Last Name',
+            ),
+            array(
+                'type' 			=> 'hidden',
+                'label'			=> 'Hidden',
+                'label_pos' 	=> 'hidden',
+            ),
+            array(
+                'type' 			=> 'textarea',
+                'label'			=> 'Textarea',
+            ),
+            array(
+                'type' 			=> 'listselect',
+                'label'			=> 'Select List',
+            ),
+            array(
+                'type' 			=> 'listradio',
+                'label'			=> 'Radio List',
+                'options'      => array(
+                    array(
+                    'label' => 'One',
+                    'value' => 1
+                    )
+                )
+            ),
+            array(
+                'type' 			=> 'checkbox',
+                'label'			=> 'Checkbox',
+            ),
+            array(
+                'type' 			=> 'button',
+                'label'			=> 'Button',
+                'label_pos' 	=> 'hidden',
+            ),
+            array(
+                'type' 			=> 'submit',
+                'label'			=> 'Submit',
+                'label_pos' 	=> 'hidden',
+            ),
+        );
 
-            $label_pos = 'above';
+        foreach( array( 'above', 'right', 'below', 'left', 'hidden' ) as $label_pos ) {
 
-            if( 'button' == $field_type->get_name() ) $label_pos = 'hidden';
-            if( 'hidden' == $field_type->get_name() ) $label_pos = 'hidden';
-            if( 'submit' == $field_type->get_name() ) $label_pos = 'hidden';
-            if( 'timedsubmit' == $field_type->get_name() ) $label_pos = 'hidden';
-            if( 'checkbox' == $field_type->get_name() ) $label_pos = 'right';
 
-            $field = Ninja_Forms()->form( $form_id )->field()->get();
-            $field->update_setting( 'type', $field_type->get_type() )
-                ->update_setting( 'label', $field_type->get_nicename())
-                ->update_setting( 'label_pos', $label_pos )
-                ->update_setting( 'required', 0 )
-                ->save();
+            foreach ($fields as $settings) {
+
+                unset($settings['id']);
+
+                if ( ! isset( $settings['label_pos'] ) ) $settings['label_pos'] = $label_pos;
+
+                $field = Ninja_Forms()->form($form_id)->field()->get();
+                $field->update_settings($settings)->save();
+            }
         }
     }
 
