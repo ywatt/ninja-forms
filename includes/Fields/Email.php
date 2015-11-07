@@ -5,8 +5,6 @@
  */
 class NF_Fields_Email extends NF_Abstracts_UserInfo
 {
-    const TEMPLATE = 'email';
-
     protected $_name = 'email';
 
     protected $_nicename = 'Email';
@@ -14,6 +12,8 @@ class NF_Fields_Email extends NF_Abstracts_UserInfo
     protected $_type = 'email';
 
     protected $_section = 'userinfo';
+
+    protected $_templates = array( 'email', 'textbox', 'input' );
 
     public function __construct()
     {

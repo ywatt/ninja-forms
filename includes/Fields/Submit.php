@@ -5,13 +5,13 @@
  */
 class NF_Fields_Submit extends NF_Fields_Button
 {
-    const TEMPLATE = 'submit';
-
     protected $_name = 'submit';
 
     protected $_section = 'common';
 
     protected $_type = 'submit';
+
+    protected $_templates = array( 'submit', 'button', 'input' );
 
     public function __construct()
     {

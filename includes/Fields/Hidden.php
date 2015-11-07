@@ -5,8 +5,6 @@
  */
 class NF_Fields_Hidden extends NF_Abstracts_Input
 {
-    const TEMPLATE = 'hidden';
-
     protected $_name = 'hidden';
 
     protected $_nicename = 'Hidden';
@@ -14,6 +12,8 @@ class NF_Fields_Hidden extends NF_Abstracts_Input
     protected $_section = '';
 
     protected $_type = 'hidden';
+
+    protected $_templates = array( 'hidden', 'textbox', 'input' );
 
     public function __construct()
     {

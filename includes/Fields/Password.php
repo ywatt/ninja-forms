@@ -13,6 +13,8 @@ class NF_Fields_Password extends NF_Abstracts_Input
 
     protected $_type = 'textbox';
 
+    protected $_templates = array( 'password', 'textbox', 'input' );
+
     public function __construct()
     {
         parent::__construct();

@@ -13,6 +13,8 @@ class NF_Fields_Phone extends NF_Fields_Textbox
 
     protected $_type = 'textbox';
 
+    protected $_templates = array( 'tel', 'textbox', 'input' );
+
     public function __construct()
     {
         parent::__construct();

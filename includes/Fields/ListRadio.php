@@ -5,11 +5,11 @@
  */
 class NF_Fields_ListRadio extends NF_Abstracts_List
 {
-    const TEMPLATE = 'listradio';
-
     protected $_name = 'listradio';
 
     protected $_section = 'common';
+
+    protected $_templates = array( 'listradio', 'list', 'input' );
 
     public function __construct()
     {

@@ -11,6 +11,8 @@ class NF_Fields_ListCheckbox extends NF_Abstracts_List
 
     protected $_section = '';
 
+    protected $_templates = array( 'listcheckbox', 'list', 'input' );
+
     public function __construct()
     {
         parent::__construct();

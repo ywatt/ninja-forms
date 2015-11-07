@@ -5,8 +5,6 @@
  */
 class NF_Fields_Textbox extends NF_Abstracts_Input
 {
-    const TEMPLATE = 'textbox';
-
     protected $_name = 'textbox';
 
     protected $_section = 'common';
@@ -14,6 +12,8 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
     protected $_aliases = array( 'input' );
 
     protected $_type = 'textbox';
+
+    protected $_templates = array( 'textbox', 'input' );
 
     public function __construct()
     {
