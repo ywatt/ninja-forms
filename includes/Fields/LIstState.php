@@ -17,6 +17,6 @@ class NF_Fields_ListState extends NF_Abstracts_List
     {
         parent::__construct();
 
-        $this->_nicename = __( 'State', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'State', 'ninja-forms' );
     }
 }

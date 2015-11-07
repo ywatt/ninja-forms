@@ -17,6 +17,6 @@ class NF_Fields_Hidden extends NF_Abstracts_Input
     {
         parent::__construct();
 
-        $this->_nicename = __( 'Hidden', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Hidden', 'ninja-forms' );
     }
 }

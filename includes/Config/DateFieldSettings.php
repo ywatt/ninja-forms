@@ -9,7 +9,7 @@ return array(
     'datepicker' => array(
         'name' => 'datepicker',
         'type' => 'toggle',
-        'label' => __( 'Use the JQueryUI datepicker.', Ninja_Forms::TEXTDOMAIN ),
+        'label' => __( 'Use the JQueryUI datepicker.', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'advanced'
     ),

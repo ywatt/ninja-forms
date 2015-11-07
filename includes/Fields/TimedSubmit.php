@@ -17,6 +17,6 @@ class NF_Fields_TimedSubmit extends NF_Fields_Button
     {
         parent::__construct();
 
-        $this->_nicename = __( 'Timed Button', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Timed Button', 'ninja-forms' );
     }
 }

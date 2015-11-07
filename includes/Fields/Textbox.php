@@ -23,6 +23,6 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
         $this->_settings = array_merge( $this->_settings, $settings );
 
-        $this->_nicename = __( 'Textbox', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Textbox', 'ninja-forms' );
     }
 }

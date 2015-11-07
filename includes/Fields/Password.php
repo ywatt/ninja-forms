@@ -17,6 +17,6 @@ class NF_Fields_Password extends NF_Abstracts_Input
     {
         parent::__construct();
 
-        $this->_nicename = __( 'Password', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Password', 'ninja-forms' );
     }
 }

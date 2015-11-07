@@ -8,7 +8,7 @@ return array(
 
     array(
         'type' => 'toggle',
-        'label' => __( 'Default to User Info if logged-in', Ninja_Forms::TEXTDOMAIN ),
+        'label' => __( 'Default to User Info if logged-in', 'ninja-forms' ),
         'width' => 'one-half',
         'group' => 'primary'
     ),

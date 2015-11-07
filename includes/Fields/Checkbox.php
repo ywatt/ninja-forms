@@ -21,6 +21,6 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
     {
         parent::__construct();
 
-        $this->_nicename = __( 'Checkbox', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Checkbox', 'ninja-forms' );
     }
 }
