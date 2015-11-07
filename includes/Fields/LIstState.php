@@ -5,8 +5,6 @@
  */
 class NF_Fields_ListState extends NF_Abstracts_List
 {
-    const TEMPLATE = 'state';
-
     protected $_name = 'liststate';
 
     protected $_nicename = 'State';

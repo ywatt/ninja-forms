@@ -11,7 +11,7 @@ class NF_Fields_Password extends NF_Abstracts_Input
 
     protected $_section = '';
 
-    protected $_type = 'password';
+    protected $_type = 'textbox';
 
     public function __construct()
     {
