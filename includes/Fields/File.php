@@ -19,6 +19,6 @@ class NF_Fields_File extends NF_Abstracts_Field
     {
         parent::__construct();
 
-        $this->_nicename = __( 'File', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'File', 'ninja-forms' );
     }
 }

@@ -15,6 +15,6 @@ class NF_Fields_ListCountry extends NF_Abstracts_List
     {
         parent::__construct();
 
-        $this->_nicename = __( 'Country', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Country', 'ninja-forms' );
     }
 }

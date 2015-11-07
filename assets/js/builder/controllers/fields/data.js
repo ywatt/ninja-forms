@@ -85,9 +85,9 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 					}
 					// Get the index of our field inside our order array
 					var pos = order.indexOf( search ) + 1;
-					pos = pos.toString();
 					field.set( 'order', pos );
 				} );
+				this.collection.sort();
 				// Update our preview
 				nfRadio.channel( 'app' ).request( 'update:db' );
 			}

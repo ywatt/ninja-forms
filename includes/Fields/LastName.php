@@ -15,6 +15,6 @@ class NF_Fields_LastName extends NF_Abstracts_UserInfo
     {
         parent::__construct();
 
-        $this->_nicename = __( 'Last Name', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Last Name', 'ninja-forms' );
     }
 }

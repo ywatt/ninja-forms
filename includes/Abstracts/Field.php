@@ -55,7 +55,7 @@ abstract class NF_Abstracts_Field
      */
     public function __construct()
     {
-        $this->_nicename = __( $this->_nicename, Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( $this->_nicename, 'ninja-forms' );
 
         $this->_settings = Ninja_Forms::config( 'FieldSettings' );
     }

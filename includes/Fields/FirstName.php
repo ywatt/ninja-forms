@@ -15,6 +15,6 @@ class NF_Fields_FirstName extends NF_Abstracts_UserInfo
     {
         parent::__construct();
 
-        $this->_nicename = __( 'First Name', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'First Name', 'ninja-forms' );
     }
 }

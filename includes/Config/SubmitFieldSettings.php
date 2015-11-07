@@ -8,7 +8,7 @@ return array(
 
     array(
      'type' => 'textbox',
-     'label' => __( 'Number of seconds for timed submit.', Ninja_Forms::TEXTDOMAIN ),
+     'label' => __( 'Number of seconds for timed submit.', 'ninja-forms' ),
      'width' => 'full',
      'group' => 'advanced'
     ),

@@ -4,14 +4,9 @@ define( ['builder/models/fieldModel'], function( fieldModel ) {
 		comparator: 'order',
 
 		initialize: function() {
-			this.on( 'change:order', this.changeCollection, this );
 			this.on( 'add', this.addField, this );
 			this.on( 'remove', this.removeField, this );
 			this.newIDs = [];
-		},
-
-		changeCollection: function() {
-			this.sort();
 		},
 
 		addField: function( model ) {

@@ -17,6 +17,6 @@ class NF_Fields_ListSelect extends NF_Abstracts_List
     {
         parent::__construct();
 
-        $this->_nicename = __( 'Select', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Select', 'ninja-forms' );
     }
 }

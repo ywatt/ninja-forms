@@ -15,6 +15,6 @@ class NF_Fields_City extends NF_Fields_Textbox
     {
         parent::__construct();
 
-        $this->_nicename = __( 'City', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'City', 'ninja-forms' );
     }
 }

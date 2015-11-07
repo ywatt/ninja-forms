@@ -24,6 +24,6 @@ class NF_Fields_Button extends NF_Abstracts_Field
         unset( $this->_settings[ 'placeholder' ] );
         unset( $this->_settings[ 'required' ] );
 
-        $this->_nicename = __( 'Button', Ninja_Forms::TEXTDOMAIN );
+        $this->_nicename = __( 'Button', 'ninja-forms' );
     }
 }
