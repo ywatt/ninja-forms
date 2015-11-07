@@ -5,8 +5,6 @@
  */
 class NF_Fields_Button extends NF_Abstracts_Field
 {
-    const TEMPLATE = 'button';
-
     protected $_name = 'button';
 
     protected $_nicename = 'Button';
@@ -14,6 +12,8 @@ class NF_Fields_Button extends NF_Abstracts_Field
     protected $_section = '';
 
     protected $_type = 'button';
+
+    protected $_templates = array( 'button', 'input' );
 
     public function __construct()
     {

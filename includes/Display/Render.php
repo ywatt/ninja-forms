@@ -35,9 +35,21 @@ final class NF_Display_Render
             // $field->update_setting( 'value', time() );
             $field->update_setting( 'id', $field->get_id() );
 
-            $fields[] = $field->get_settings();
+            $templates = $field_class->get_templates();
 
-            self::load_template( 'fields-' . $field_class::TEMPLATE );
+            if( ! array( $templates ) ){
+                $templates = array( $templates );
+            }
+
+            foreach( $templates as $template ) {
+                self::load_template('fields-' . $template);
+            }
+
+            $settings = $field->get_settings();
+
+            $settings[ 'templates' ] = $templates;
+
+            $fields[] = $settings;
         }
 
         // Output Form Container
@@ -91,9 +103,19 @@ final class NF_Display_Render
 
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
-            $fields[] = $field['settings'];
+            $templates = $field_class->get_templates();
 
-            self::load_template( 'fields-' . $field_class::TEMPLATE );
+            if( ! array( $templates ) ){
+                $templates = array( $templates );
+            }
+
+            foreach( $templates as $template ) {
+                self::load_template('fields-' . $template);
+            }
+
+            $field[ 'settings' ][ 'templates' ] = $templates;
+
+            $fields[] = $field['settings'];
         }
 
         // Output Form Container

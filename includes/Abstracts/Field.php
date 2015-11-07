@@ -46,9 +46,9 @@ abstract class NF_Abstracts_Field
     protected $_type = '';
 
     /**
-     * @var string
+     * @var array
      */
-     const TEMPLATE = '';
+    protected $_templates = array();
 
     /**
      * Constructor
@@ -120,6 +120,11 @@ abstract class NF_Abstracts_Field
     public function get_settings()
     {
         return $this->_settings;
+    }
+
+    public function get_templates()
+    {
+        return $this->_templates;
     }
 
 }

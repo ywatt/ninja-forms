@@ -5,13 +5,13 @@
  */
 class NF_Fields_Textarea extends NF_Abstracts_Field
 {
-    const TEMPLATE = 'textarea';
-
     protected $_name = 'textarea';
 
     protected $_section = 'common';
 
     protected $_type = 'textarea';
+
+    protected $_templates = array( 'textarea', 'textbox', 'input' );
 
 
     public function __construct()

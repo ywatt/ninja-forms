@@ -13,6 +13,8 @@ class NF_Fields_TimedSubmit extends NF_Fields_Button
 
     protected $_type = 'submit';
 
+    protected $_templates = array( 'timedsubmit', 'submit', 'button', 'input' );
+
     public function __construct()
     {
         parent::__construct();

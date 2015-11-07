@@ -11,6 +11,8 @@ class NF_Fields_ListState extends NF_Abstracts_List
 
     protected $_section = 'userinfo';
 
+    protected $_templates = array( 'liststate', 'list', 'input' );
+
     public function __construct()
     {
         parent::__construct();

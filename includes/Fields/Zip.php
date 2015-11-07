@@ -11,6 +11,8 @@ class NF_Fields_Zip extends NF_Fields_Textbox
 
     protected $_section = 'userinfo';
 
+    protected $_templates = array( 'zip', 'checkbox', 'input' );
+
     public function __construct()
     {
         parent::__construct();

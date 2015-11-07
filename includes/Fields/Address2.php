@@ -11,6 +11,8 @@ class NF_Fields_Address2 extends NF_Fields_Textbox
 
     protected $_section = '';
 
+    protected $_templates = array( 'address', 'address2', 'textbox', 'input' );
+
     public function __construct()
     {
         parent::__construct();

@@ -6,7 +6,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
      * LABEL
      */
 
-    array(
+    'label' => array(
         'name' => 'label',
         'type' => 'textbox',
         'label' => __( 'Label', 'ninja-forms'),
@@ -18,7 +18,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
      * PLACEHOLDER
      */
 
-    array(
+    'placeholder' => array(
         'name' => 'placeholder',
         'type' => 'textbox',
         'label' => __( 'Placeholder', 'ninja-forms' ),
@@ -30,7 +30,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
      * LABEL POSITION
      */
 
-    array(
+    'label_pos' => array(
         'name' => 'label_pos',
         'type' => 'select',
         'label' => __( 'Label Position', 'ninja-forms' ),
