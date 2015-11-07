@@ -21,8 +21,5 @@ class NF_Fields_Email extends NF_Abstracts_UserInfo
 
         $this->_nicename = __( 'Email', Ninja_Forms::TEXTDOMAIN );
 
-        $settings = Ninja_Forms::config( 'UserInfoFieldSettings' );
-
-        $this->_settings = array_merge( $this->_settings, $settings );
     }
 }
