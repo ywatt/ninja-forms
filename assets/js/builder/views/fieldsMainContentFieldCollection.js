@@ -6,7 +6,8 @@ define( ['builder/views/mainContentField', 'builder/views/mainContentFieldsEmpty
 		reorderOnSort: true,
 
 		initialize: function() {
-			this.collection.on( 'change', this.render, this );
+			this.collection.on( 'change:label', this.render, this );
+			this.collection.on( 'change:required', this.render, this );
 			nfRadio.channel( 'fields' ).reply( 'get:sortableEl', this.getSortableEl, this );
 		},
 
