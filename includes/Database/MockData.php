@@ -303,8 +303,16 @@ final class NF_Database_MockData
                 'label'			=> 'Radio List',
                 'options'      => array(
                     array(
-                    'label' => 'One',
+                    'label' => 'Option One',
                     'value' => 1
+                    ),
+                    array(
+                    'label' => 'Option Two',
+                    'value' => 2
+                    ),
+                    array(
+                    'label' => 'Option Three',
+                    'value' => 3
                     )
                 )
             ),
@@ -312,11 +320,11 @@ final class NF_Database_MockData
                 'type' 			=> 'checkbox',
                 'label'			=> 'Checkbox',
             ),
-            array(
-                'type' 			=> 'button',
-                'label'			=> 'Button',
-                'label_pos' 	=> 'hidden',
-            ),
+            // array(
+            //     'type' 			=> 'button',
+            //     'label'			=> 'Button',
+            //     'label_pos' 	=> 'hidden',
+            // ),
             array(
                 'type' 			=> 'submit',
                 'label'			=> 'Submit',
@@ -332,6 +340,10 @@ final class NF_Database_MockData
                 unset($settings['id']);
 
                 if ( ! isset( $settings['label_pos'] ) ) $settings['label_pos'] = $label_pos;
+
+                if ( 'submit' != $settings['type'] ) $settings['label'] = $settings['label'] . ' - label ' . $label_pos;
+
+                if ( 'hidden' == $settings['label_pos'] && 'submit' != $settings['type'] ) $settings['placeholder'] = $settings['label'];
 
                 $field = Ninja_Forms()->form($form_id)->field()->get();
                 $field->update_settings($settings)->save();
