@@ -274,10 +274,18 @@ final class NF_Database_MockData
 
         foreach( Ninja_Forms()->fields as $field_type ){
 
+            $label_pos = 'above';
+
+            if( 'button' == $field_type->get_name() ) $label_pos = 'hidden';
+            if( 'hidden' == $field_type->get_name() ) $label_pos = 'hidden';
+            if( 'submit' == $field_type->get_name() ) $label_pos = 'hidden';
+            if( 'timedsubmit' == $field_type->get_name() ) $label_pos = 'hidden';
+            if( 'checkbox' == $field_type->get_name() ) $label_pos = 'right';
+
             $field = Ninja_Forms()->form( $form_id )->field()->get();
             $field->update_setting( 'type', $field_type->get_type() )
                 ->update_setting( 'label', $field_type->get_nicename())
-                ->update_setting( 'label_pos', 'above' )
+                ->update_setting( 'label_pos', $label_pos )
                 ->update_setting( 'required', 0 )
                 ->save();
         }
