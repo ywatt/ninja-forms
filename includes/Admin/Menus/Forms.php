@@ -121,6 +121,12 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 $settings_groups[ $group ][ 'settings' ][] = $setting;
             }
 
+            foreach( $settings_groups as $id => $group ) {
+                if ( empty( $group[ 'settings' ] ) ) {
+                    unset( $settings_groups[ $id ] );
+                }
+            }
+
             $field_type_settings[ $name ] = array(
                 'id' =>  $name,
                 'nicename' => $field->get_nicename(),
