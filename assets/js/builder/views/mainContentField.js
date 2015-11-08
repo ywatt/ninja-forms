@@ -43,6 +43,13 @@ define( [], function() {
 	    				classes += ' active';
 	    			}
 	    			return classes;
+	    		},
+	    		renderRequired: function() {
+	    			if ( 1 == this.required ) {
+	    				return '<span class="required">*</span>';
+	    			} else {
+	    				return '';
+	    			}
 	    		}
 			};
 		},
