@@ -248,7 +248,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field" type="text/template">
-    <h2><span class="dashicons dashicons-star-empty"></span> <%= type %></h2>
+    <h2><span class="dashicons dashicons-star-empty"></span> <%= renderTypeNicename() %></h2>
     <span class="nf-settings-groups"></span>
 </script>
 

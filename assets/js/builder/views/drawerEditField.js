@@ -21,7 +21,16 @@ define( ['builder/views/drawerFieldTypeSettingGroupCollection'], function( field
 			if ( model.get( 'id' ) == this.model.get( 'id' ) ) {
 				nfRadio.channel( 'app' ).request( 'close:drawer' );
 			}
-		}
+		},
+
+		templateHelpers: function () {
+	    	return {
+	    		renderTypeNicename: function() {
+	    			var type = nfRadio.channel( 'data' ).request( 'get:fieldType', this.type );
+	    			return type.get( 'nicename' );
+				},
+			};
+		},
 	});
 
 	return view;
