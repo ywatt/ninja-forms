@@ -35,7 +35,8 @@ define( [], function() {
 			var currentDrawer = nfRadio.channel( 'app' ).request( 'get:currentDrawer' );
 			// Triggers the before close drawer action on our current domain's drawer channel.
 			nfRadio.channel( 'drawer-' + currentDrawer.get( 'id' ) ).trigger( 'before:closeDrawer' );
-
+			nfRadio.channel( 'drawer' ).trigger( 'before:closeDrawer' );
+			
 			// Send a message to our drawer to empty its contents.
 			nfRadio.channel( 'drawer' ).request( 'empty:drawerContent' );
 
