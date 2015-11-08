@@ -36,6 +36,7 @@ final class NF_Display_Render
             $field->update_setting( 'id', $field->get_id() );
 
             $templates = $field_class->get_templates();
+            $old_classname = $field_class->get_old_classname();
 
             if( ! array( $templates ) ){
                 $templates = array( $templates );
@@ -48,6 +49,7 @@ final class NF_Display_Render
             $settings = $field->get_settings();
 
             $settings[ 'templates' ] = $templates;
+            $settings[ 'old_classname' ] = $old_classname;
 
             $fields[] = $settings;
         }

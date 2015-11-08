@@ -11,6 +11,8 @@ class NF_Fields_ListRadio extends NF_Abstracts_List
 
     protected $_templates = array( 'listradio', 'list', 'input' );
 
+    protected $_old_classname = 'list-radio';
+
     public function __construct()
     {
         parent::__construct();

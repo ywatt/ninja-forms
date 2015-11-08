@@ -13,6 +13,8 @@ class NF_Fields_ListSelect extends NF_Abstracts_List
 
     protected $_templates = array( 'listselect', 'list', 'input' );
 
+    protected $_old_classname = 'list-select';
+
     public function __construct()
     {
         parent::__construct();
