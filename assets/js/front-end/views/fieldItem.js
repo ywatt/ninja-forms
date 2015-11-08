@@ -68,7 +68,12 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 				renderElement: function(){
 					this.setPlaceholder();
 					this.setClasses();
-					return _.template( jQuery( '#nf-tmpl-field-' + this.type ).html(), this );
+					var tmpl = _.find( this.templates, function( tmpl ) {
+						if ( 0 < jQuery( '#nf-tmpl-field-' + tmpl ).length ) {
+							return true;
+						}
+					} );
+					return _.template( jQuery( '#nf-tmpl-field-' + tmpl ).html(), this );
 				},
 
 				renderLabel: function() {
