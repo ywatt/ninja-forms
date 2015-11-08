@@ -4,6 +4,7 @@ define( [], function() {
 			objectType: 'Field',
 			options: false,
 			label_pos: 'above',
+			editActive: false,
 			getFieldID: function() {
 				if ( jQuery.isNumeric( this.id ) ) {
 					return 'field-' + this.id;
@@ -15,11 +16,6 @@ define( [], function() {
 
 		initialize: function() {
 			var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', this.get( 'type' ) );
-
-			console.log( this );
-
-			console.log( fieldType );
-
 			var parentType = fieldType.get( 'parentType' );
 			this.bind( 'change', this.changeSetting, this );
 			

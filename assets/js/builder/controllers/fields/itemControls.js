@@ -13,6 +13,8 @@ define( [], function() {
 			this.listenTo( nfRadio.channel( 'fields' ), 'click:editField', this.clickEdit );
 			this.listenTo( nfRadio.channel( 'fields' ), 'click:deleteField', this.clickDelete );
 			this.listenTo( nfRadio.channel( 'fields' ), 'click:duplicateField', this.clickDuplicate );
+
+			// Listen for our drawer close and remove our active edit state
 		},
 
 		/**
@@ -24,6 +26,8 @@ define( [], function() {
 		 * @return void
 		 */
 		clickEdit: function( e, model ) {
+			nfRadio.channel( 'fields' ).request( 'clear:editActive' );
+			model.set( 'editActive', true );
 			nfRadio.channel( 'app' ).request( 'open:drawer', 'editField', { model: model } );
 		},
 

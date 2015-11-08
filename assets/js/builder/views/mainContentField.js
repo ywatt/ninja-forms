@@ -25,7 +25,20 @@ define( [], function() {
 
 		clickDuplicateField: function( e ) {
 			nfRadio.channel( 'fields' ).trigger( 'click:duplicateField', e, this.model );
-		}
+		},
+
+		templateHelpers: function () {
+	    	return {
+	    		renderClasses: function() {
+	    			var classes = 'nf-field-wrap';
+	    			if ( this.editActive ) {
+	    				classes += ' active';
+	    			}
+	    			return classes;
+	    		}
+			};
+		},
+
 
 	});
 

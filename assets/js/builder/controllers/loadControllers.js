@@ -31,7 +31,8 @@ define(
 		'builder/controllers/app/trackChanges',
 		'builder/controllers/undoChanges',
 		'builder/controllers/app/publishResponse',
-		'builder/controllers/app/changeDomain'
+		'builder/controllers/app/changeDomain',
+		'builder/controllers/fields/editActive'
 
 	],
 	function(
@@ -66,7 +67,8 @@ define(
 		AppTrackChanges,
 		UndoChanges,
 		AppPublishResponse,
-		AppChangeDomain
+		AppChangeDomain,
+		EditActive
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -102,6 +104,7 @@ define(
 				var undoChanges = new UndoChanges();
 				var appPublishResponse = new AppPublishResponse();
 				var appChangeDomain = new AppChangeDomain();
+				var editActive = new EditActive();
 			}
 		});
 
