@@ -15,18 +15,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
     ),
 
     /*
-     * PLACEHOLDER
-     */
-
-    'placeholder' => array(
-        'name' => 'placeholder',
-        'type' => 'textbox',
-        'label' => __( 'Placeholder', 'ninja-forms' ),
-        'width' => 'one-half',
-        'group' => 'primary'
-    ),
-
-    /*
      * LABEL POSITION
      */
 
@@ -57,6 +45,18 @@ return apply_filters( 'ninja-forms-field-settings', array(
             ),
         ),
         'width' => 'one-half',
+        'group' => 'primary'
+    ),
+
+    /*
+     * PLACEHOLDER
+     */
+
+    'placeholder' => array(
+        'name' => 'placeholder',
+        'type' => 'textbox',
+        'label' => __( 'Placeholder', 'ninja-forms' ),
+        'width' => 'full',
         'group' => 'primary'
     ),
 
