@@ -117,41 +117,13 @@ a.tooltip span
     display: block;
 }
 
-.ninja-forms-field-error {
-    color: red;
-}
-
-.ninja-forms-form-wrap label {
-    font-weight: bold;
-}
-.ninja-forms-form-wrap .list-checkbox-wrap ul label,
-.ninja-forms-form-wrap .list-radio-wrap ul label {
-    font-weight: normal;
-}
-
-.field-wrap:after {
-    clear: both;
-    content: "";
-    display: block;
-}
-
-.field-wrap.label-left .ninja-forms-field,
 .field-wrap.label-left .ninja-forms-star-rating-control {
     margin-left: 8px;
     width: auto;
 }
-.field-wrap.label-right .ninja-forms-field,
 .field-wrap.label-right .ninja-forms-star-rating-control {
     margin-right: 8px;
     width: auto;
-}
-.field-wrap.label-right label,
-.field-wrap.label-left label  {
-    display: inline;
-}
-
-.label-above label {
-    margin-bottom: 5px;
 }
 
 .MultiFile-wrap {
@@ -162,110 +134,19 @@ a.tooltip span
 TEXT FIELDS & TEXTAREAS
 ----------------------------------*/
 
-.text-wrap.label-left input,
-.profile_pass-wrap.label-left input,
-.textarea-wrap.label-left textarea {
+.profile_pass-wrap.label-left input {
     margin-left: 10px;
 }
-.text-wrap.label-right input,
-.profile_pass-wrap.label-right input,
-.textarea-wrap.label-right textarea {
+.profile_pass-wrap.label-right input {
     margin-right: 10px;
 }
 
-.text-wrap.label-above label,
-.textarea-wrap.label-above label {
-    display: block;
+.profile_pass-wrap input {
     width: 100%;
-}
-
-.profile_pass-wrap input,
-.text-wrap.label-above input,
-.text-wrap.label-below input,
-.text-wrap.label-inside input,
-.textarea-wrap.label-above textarea,
-.textarea-wrap.label-below textarea,
-.textarea-wrap.label-inside textarea,
-.list-dropdown-wrap.label-above select,
-.list-dropdown-wrap.label-below select {
-    width: 100%;
-}
-
-.textarea-wrap textarea {
-    height: 200px;
 }
 
 .profile_pass-wrap input {
     margin-bottom: 10px;
-}
-
-/* ---------------------------------
-RADIO & CHECKBOX LISTS
-----------------------------------*/
-
-.list-radio-wrap span ul li input,
-.list-checkbox-wrap span ul li input {
-    margin-right: 5px;
-}
-
-.list-radio-wrap ul,
-.list-checkbox-wrap ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.list-radio-wrap ul li,
-.list-checkbox-wrap ul li {
-    list-style: none;
-}
-
-.list-radio-wrap ul li,
-.list-checkbox-wrap ul li {
-    margin: 0;
-    padding: 0;
-}
-
-.list-radio-wrap.label-left label,
-.list-radio-wrap.label-left ul,
-.list-radio-wrap.label-left ul li,
-.list-radio-wrap.label-right label,
-.list-radio-wrap.label-right ul,
-.list-radio-wrap.label-right ul li,
-.list-checkbox-wrap.label-left label,
-.list-checkbox-wrap.label-left ul,
-.list-checkbox-wrap.label-left ul li,
-.list-checkbox-wrap.label-right label,
-.list-checkbox-wrap.label-right ul,
-.list-checkbox-wrap.label-right ul li {
-    float: left;
-}
-.rtl .list-radio-wrap.label-left label,
-.rtl .list-radio-wrap.label-left ul,
-.rtl .list-radio-wrap.label-left ul li,
-.rtl .list-radio-wrap.label-right label,
-.rtl .list-radio-wrap.label-right ul,
-.rtl .list-radio-wrap.label-right ul li,
-.rtl .list-checkbox-wrap.label-left label,
-.rtl .list-checkbox-wrap.label-left ul,
-.rtl .list-checkbox-wrap.label-left ul li,
-.rtl .list-checkbox-wrap.label-right label,
-.rtl .list-checkbox-wrap.label-right ul,
-.rtl .list-checkbox-wrap.label-right ul li {
-    float: right;
-}
-.list-radio-wrap.label-left ul li,
-.list-radio-wrap.label-right ul li,
-.list-checkbox-wrap.label-left ul li,
-.list-checkbox-wrap.label-right ul li {
-    padding: 0 8px;
-}
-
-.list-radio-wrap.label-above ul li,
-.list-radio-wrap.label-below ul li,
-.list-checkbox-wrap.label-above ul li,
-.list-checkbox-wrap.label-below ul li {
-    padding: 0 0 0 10px;
 }
 
 /* ---------------------------------

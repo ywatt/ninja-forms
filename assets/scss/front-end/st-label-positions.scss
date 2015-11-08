@@ -33,6 +33,10 @@
         &.textarea-wrap {
             vertical-align: top;
         }
+        ul {
+            float: left;
+            width: 50%;
+        }
     }
     .label-left {
         vertical-align: middle;
@@ -46,11 +50,17 @@
             width: 50%;
         }
         > input[type=radio],
-        input[type=checkbox] {
+        > input[type=checkbox] {
+            float: none;
             width: auto;
+            margin-left: 10px;
         }
         &.textarea-wrap {
             vertical-align: top;
+        }
+        ul {
+            float: right;
+            width: 50%;
         }
     }
 }

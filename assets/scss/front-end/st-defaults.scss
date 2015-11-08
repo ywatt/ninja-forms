@@ -34,67 +34,17 @@
 RADIO & CHECKBOX LISTS
 ----------------------------------*/
 
-.list-radio-wrap span ul li input,
-.list-checkbox-wrap span ul li input {
-    margin-right: 5px;
-}
-
-.list-radio-wrap ul,
-.list-checkbox-wrap ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.list-radio-wrap ul li,
-.list-checkbox-wrap ul li {
-    list-style: none;
-}
-
-.list-radio-wrap ul li,
-.list-checkbox-wrap ul li {
-    margin: 0;
-    padding: 0;
-}
-
-.list-radio-wrap.label-left label,
-.list-radio-wrap.label-left ul,
-.list-radio-wrap.label-left ul li,
-.list-radio-wrap.label-right label,
-.list-radio-wrap.label-right ul,
-.list-radio-wrap.label-right ul li,
-.list-checkbox-wrap.label-left label,
-.list-checkbox-wrap.label-left ul,
-.list-checkbox-wrap.label-left ul li,
-.list-checkbox-wrap.label-right label,
-.list-checkbox-wrap.label-right ul,
-.list-checkbox-wrap.label-right ul li {
-    float: left;
-}
-.rtl .list-radio-wrap.label-left label,
-.rtl .list-radio-wrap.label-left ul,
-.rtl .list-radio-wrap.label-left ul li,
-.rtl .list-radio-wrap.label-right label,
-.rtl .list-radio-wrap.label-right ul,
-.rtl .list-radio-wrap.label-right ul li,
-.rtl .list-checkbox-wrap.label-left label,
-.rtl .list-checkbox-wrap.label-left ul,
-.rtl .list-checkbox-wrap.label-left ul li,
-.rtl .list-checkbox-wrap.label-right label,
-.rtl .list-checkbox-wrap.label-right ul,
-.rtl .list-checkbox-wrap.label-right ul li {
-    float: right;
-}
-.list-radio-wrap.label-left ul li,
-.list-radio-wrap.label-right ul li,
-.list-checkbox-wrap.label-left ul li,
-.list-checkbox-wrap.label-right ul li {
-    padding: 0 8px;
-}
-
-.list-radio-wrap.label-above ul li,
-.list-radio-wrap.label-below ul li,
-.list-checkbox-wrap.label-above ul li,
-.list-checkbox-wrap.label-below ul li {
-    padding: 0 0 0 10px;
+.list-radio-wrap,
+.list-checkbox-wrap {
+    ul, li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        input {
+            margin-right: 5px;
+        }
+    }
+    li {
+        padding-left: 10px;
+    }
 }

@@ -116,6 +116,9 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 					} else {
 						this.classes = this.classes.replace( 'nf-error', '' );
 					}
+					if ( 'undefined' != typeof this.element_class && 0 < jQuery.trim( this.element_class ).length ) {
+						this.classes += ' ' + this.element_class;
+					}
 				}
 			};
 		},

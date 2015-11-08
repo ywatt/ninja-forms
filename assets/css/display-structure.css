@@ -29,71 +29,21 @@ Normalize Ninja Forms fields with default structure
 /* ---------------------------------
 RADIO & CHECKBOX LISTS
 ----------------------------------*/
-.list-radio-wrap span ul li input,
-.list-checkbox-wrap span ul li input {
+.list-radio-wrap ul, .list-radio-wrap li,
+.list-checkbox-wrap ul,
+.list-checkbox-wrap li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.list-radio-wrap ul input, .list-radio-wrap li input,
+.list-checkbox-wrap ul input,
+.list-checkbox-wrap li input {
   margin-right: 5px;
 }
-
-.list-radio-wrap ul,
-.list-checkbox-wrap ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.list-radio-wrap ul li,
-.list-checkbox-wrap ul li {
-  list-style: none;
-}
-
-.list-radio-wrap ul li,
-.list-checkbox-wrap ul li {
-  margin: 0;
-  padding: 0;
-}
-
-.list-radio-wrap.label-left label,
-.list-radio-wrap.label-left ul,
-.list-radio-wrap.label-left ul li,
-.list-radio-wrap.label-right label,
-.list-radio-wrap.label-right ul,
-.list-radio-wrap.label-right ul li,
-.list-checkbox-wrap.label-left label,
-.list-checkbox-wrap.label-left ul,
-.list-checkbox-wrap.label-left ul li,
-.list-checkbox-wrap.label-right label,
-.list-checkbox-wrap.label-right ul,
-.list-checkbox-wrap.label-right ul li {
-  float: left;
-}
-
-.rtl .list-radio-wrap.label-left label,
-.rtl .list-radio-wrap.label-left ul,
-.rtl .list-radio-wrap.label-left ul li,
-.rtl .list-radio-wrap.label-right label,
-.rtl .list-radio-wrap.label-right ul,
-.rtl .list-radio-wrap.label-right ul li,
-.rtl .list-checkbox-wrap.label-left label,
-.rtl .list-checkbox-wrap.label-left ul,
-.rtl .list-checkbox-wrap.label-left ul li,
-.rtl .list-checkbox-wrap.label-right label,
-.rtl .list-checkbox-wrap.label-right ul,
-.rtl .list-checkbox-wrap.label-right ul li {
-  float: right;
-}
-
-.list-radio-wrap.label-left ul li,
-.list-radio-wrap.label-right ul li,
-.list-checkbox-wrap.label-left ul li,
-.list-checkbox-wrap.label-right ul li {
-  padding: 0 8px;
-}
-
-.list-radio-wrap.label-above ul li,
-.list-radio-wrap.label-below ul li,
-.list-checkbox-wrap.label-above ul li,
-.list-checkbox-wrap.label-below ul li {
-  padding: 0 0 0 10px;
+.list-radio-wrap li,
+.list-checkbox-wrap li {
+  padding-left: 10px;
 }
 
 /*
@@ -144,6 +94,10 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-right.textarea-wrap {
   vertical-align: top;
 }
+.nf-fields .label-right ul {
+  float: left;
+  width: 50%;
+}
 .nf-fields .label-left {
   vertical-align: middle;
 }
@@ -157,11 +111,17 @@ Make sure all Ninja Forms label positons function properly
   width: 50%;
 }
 .nf-fields .label-left > input[type=radio],
-.nf-fields .label-left input[type=checkbox] {
+.nf-fields .label-left > input[type=checkbox] {
+  float: none;
   width: auto;
+  margin-left: 10px;
 }
 .nf-fields .label-left.textarea-wrap {
   vertical-align: top;
+}
+.nf-fields .label-left ul {
+  float: right;
+  width: 50%;
 }
 
 /*# sourceMappingURL=display-structure.css.map */
