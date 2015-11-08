@@ -8,9 +8,27 @@
     padding: 15px 20px;
     &.active {
         //background: #fafafa;
-        border: 1px solid #84CC1E;
+        border: 2px solid #84CC1E;
         color: #424242;
         font-weight: bold;
+        .nf-item-controls {
+            font-weight: normal;
+            a {
+                color: #424242;
+            }
+            .nf-item-delete,
+            .nf-item-duplicate {
+                display: none;
+            }
+            .nf-item-editing {
+                display: inline;
+            }
+            .nf-item-edit {
+                .dashicons {
+                    margin-right: 12px
+                }
+            }
+        }
     }
 }
 

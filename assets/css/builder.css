@@ -74,11 +74,6 @@ Form field placeholders for the fields a user has added to their form
 .nf-item-controls li.nf-item-expand { display: none; }
 .nf-item-controls li.nf-item-expand .dashicons { -webkit-transform: rotate(-90deg); -ms-transform: rotate(-90deg); transform: rotate(-90deg); }
 .nf-item-controls li .nf-item-editing { display: none; }
-.nf-item-controls.nf-editing { font-weight: normal; }
-.nf-item-controls.nf-editing a { color: #424242; }
-.nf-item-controls.nf-editing .nf-item-delete, .nf-item-controls.nf-editing .nf-item-duplicate { display: none; }
-.nf-item-controls.nf-editing .nf-item-editing { display: inline; }
-.nf-item-controls.nf-editing .nf-item-edit .dashicons { margin-right: 12px; }
 
 #nf-table-display .nf-item-controls { float: right; width: 150px; }
 
@@ -86,7 +81,12 @@ Form field placeholders for the fields a user has added to their form
 .nf-tooltip:after { content: ""; width: 0; height: 0; margin: auto; border-top: 8px solid #424242; border-left: 6px solid transparent; border-right: 6px solid transparent; position: absolute; bottom: -6px; left: 28px; }
 
 .nf-field-wrap { background: #fff; border: 1px solid #ccc; border-radius: 4px; color: #888; cursor: pointer; margin-bottom: 20px; padding: 15px 20px; }
-.nf-field-wrap.active { border: 1px solid #84CC1E; color: #424242; font-weight: bold; }
+.nf-field-wrap.active { border: 2px solid #84CC1E; color: #424242; font-weight: bold; }
+.nf-field-wrap.active .nf-item-controls { font-weight: normal; }
+.nf-field-wrap.active .nf-item-controls a { color: #424242; }
+.nf-field-wrap.active .nf-item-controls .nf-item-delete, .nf-field-wrap.active .nf-item-controls .nf-item-duplicate { display: none; }
+.nf-field-wrap.active .nf-item-controls .nf-item-editing { display: inline; }
+.nf-field-wrap.active .nf-item-controls .nf-item-edit .dashicons { margin-right: 12px; }
 
 .nf-group-wrap { background: #fff; border: 2px solid #ccc; border-radius: 4px; color: #888; margin: 0 -10px 20px; padding: 15px 30px; position: relative; }
 .nf-group-wrap .nf-item-controls { width: 128px; }
@@ -177,7 +177,7 @@ All styles used within the drawer
 .nf-mobile .dashicons { font-size: 30px; width: 32px; height: 30px; }
 .nf-mobile:hover { color: #fff; }
 
-.ninja-forms-app fieldset { border: 1px solid #ccc; clear: both; display: block; }
+.ninja-forms-app fieldset { border: 1px solid #ccc; clear: both; display: block; margin-bottom: 20px; }
 .ninja-forms-app legend { margin: 0 3px 10px; padding: 0 10px; }
 .ninja-forms-app label, .ninja-forms-app legend { color: #424242; font-size: 13px; text-transform: uppercase; }
 .ninja-forms-app input[type=text], .ninja-forms-app textarea { background: #f9f9f9; border: 0; margin-top: 5px; padding: 12px 15px; width: 100%; }

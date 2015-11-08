@@ -52,24 +52,6 @@
             display: none;
         }
     }
-    &.nf-editing {
-        font-weight: normal;
-        a {
-            color: #424242;
-        }
-        .nf-item-delete,
-        .nf-item-duplicate {
-            display: none;
-        }
-        .nf-item-editing {
-            display: inline;
-        }
-        .nf-item-edit {
-            .dashicons {
-                margin-right: 12px
-            }
-        }
-    }
 }
 #nf-table-display {
     .nf-item-controls {
