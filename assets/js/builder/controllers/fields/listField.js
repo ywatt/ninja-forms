@@ -32,6 +32,9 @@ define( ['builder/models/listOptionCollection'], function( listOptionCollection 
 		 * @return void
 		 */
 		createOptionCollection: function( model ) {
+			if ( ! model.get( 'options' ) ) {
+				model.set( 'options', [ { calc: 1, label: 'One', value: 'one' }, { calc: 2, label: 'Two', value: 'two' }, { calc: 3, label: 'Three', value: 'three' } ] );
+			}
 			model.set( 'options', new listOptionCollection( model.get( 'options' ) ) );
 		},
 
