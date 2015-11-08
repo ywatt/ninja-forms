@@ -3,6 +3,14 @@ define( [], function() {
 		tagName: 'div',
 		template: '#nf-tmpl-main-content-field',
 
+		initialize: function() {
+			this.model.on( 'change', this.render, this );
+		},
+
+		onBeforeDestroy: function() {
+			this.model.off( 'change', this.render );
+		},
+
 		onRender: function() {
 			this.$el = this.$el.children();
 			this.$el.unwrap();
@@ -25,7 +33,20 @@ define( [], function() {
 
 		clickDuplicateField: function( e ) {
 			nfRadio.channel( 'fields' ).trigger( 'click:duplicateField', e, this.model );
-		}
+		},
+
+		templateHelpers: function () {
+	    	return {
+	    		renderClasses: function() {
+	    			var classes = 'nf-field-wrap';
+	    			if ( this.editActive ) {
+	    				classes += ' active';
+	    			}
+	    			return classes;
+	    		}
+			};
+		},
+
 
 	});
 

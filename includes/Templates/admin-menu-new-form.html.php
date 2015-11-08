@@ -67,7 +67,7 @@
 </script>
 
 <script id="nf-tmpl-main-content-field" type="text/template">
-    <div id="<%= getFieldID() %>" class="nf-field-wrap"> <%= label %>
+    <div id="<%= getFieldID() %>" class="<%= renderClasses() %>"> <%= label %>
         <ul class="nf-item-controls">
             <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
             <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
