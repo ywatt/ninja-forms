@@ -106,6 +106,7 @@ final class NF_Display_Render
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
             $templates = $field_class->get_templates();
+            $old_classname = $field_class->get_old_classname();
 
             if( ! array( $templates ) ){
                 $templates = array( $templates );
@@ -116,6 +117,7 @@ final class NF_Display_Render
             }
 
             $field[ 'settings' ][ 'templates' ] = $templates;
+            $field[ 'settings' ][ 'old_classname' ] = $old_classname; 
 
             $fields[] = $field['settings'];
         }
