@@ -86,6 +86,14 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 					}
 				},
 
+				renderPlaceholder: function() {
+					if( '' != jQuery.trim( this.placeholder ) ) {
+						return 'placeholder="' + this.placeholder + '"';
+					} else {
+						return '';
+					}
+				},
+
 				setClasses: function() {
 					if ( this.error ) {
 						this.classes += ' nf-error';
