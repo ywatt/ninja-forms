@@ -129,12 +129,12 @@ input[type=checkbox].nf-toggle {
   background: transparent;
   border: 0;
   box-shadow: 0 0 0;
-  display: block;
-  margin: 19px 5px 11px;
+  margin: 10px;
+  height: 18px;
   -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   position: relative;
-  width: 40px;
-  height: 20px;
   cursor: pointer;
 }
 input[type=checkbox].nf-toggle::after {
@@ -145,8 +145,8 @@ input[type=checkbox].nf-toggle::after {
   position: absolute;
   top: -4px;
   left: -4px;
-  width: 40px;
-  height: 20px;
+  width: 46px;
+  height: 24px;
   -webkit-transition: all 0.3s ease;
           transition: all 0.3s ease;
 }
@@ -170,10 +170,16 @@ input[type=checkbox].nf-toggle:checked::after {
           transition: all 0.3s ease;
 }
 input[type=checkbox].nf-toggle:checked::before {
-  top: 2px;
-  left: 22px;
+  top: -1px;
+  left: 20px;
   -webkit-transition: all 0.3s ease;
           transition: all 0.3s ease;
+}
+.label-right input[type=checkbox].nf-toggle {
+  padding: 0 50px 0 0;
+}
+.label-left input[type=checkbox].nf-toggle {
+  padding: 0;
 }
 
 .field-wrap > label {

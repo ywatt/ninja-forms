@@ -2,12 +2,10 @@ input[type=checkbox].nf-toggle {
     background: transparent;
     border: 0;
     box-shadow: 0 0 0;
-    display: block;
-    margin: 19px 5px 11px;
-    -webkit-appearance: none;
+    margin: 10px;
+    height: 18px;
+    appearance: none;
     position: relative;
-    width: 40px;
-    height: 20px;
     cursor: pointer;
     &::after {
         background: #BCBDBF;
@@ -17,8 +15,8 @@ input[type=checkbox].nf-toggle {
         position: absolute;
         top: -4px;
         left: -4px;
-        width: 40px;
-        height: 20px;
+        width: 46px;
+        height: 24px;
         transition: all 0.3s ease;
     }
         &::before {
@@ -40,9 +38,15 @@ input[type=checkbox].nf-toggle {
             transition: all 0.3s ease;
         }
         &::before {
-            top: 2px;
-            left: 22px;
+            top: -1px;
+            left: 20px;
             transition: all 0.3s ease;
         }
+    }
+    .label-right & {
+        padding: 0 50px 0 0;
+    }
+    .label-left & {
+        padding: 0;
     }
 }
