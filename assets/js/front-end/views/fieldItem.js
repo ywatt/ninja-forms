@@ -30,7 +30,7 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 			var cl = this.model.get( 'addWrapperClass' );
 			if ( '' != cl ) {
 				jQuery( this.el ).addClass( cl );
-				this.model.set( 'addWrapperClass', '' );				
+				this.model.set( 'addWrapperClass', '' );
 			}
 		},
 
@@ -38,7 +38,7 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 			var cl = this.model.get( 'removeWrapperClass' );
 			if ( '' != cl ) {
 				jQuery( this.el ).removeClass( cl );
-				this.model.set( 'removeWrapperClass', '' );				
+				this.model.set( 'removeWrapperClass', '' );
 			}
 		},
 
@@ -56,7 +56,7 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 
 			var el = jQuery( this.el ).children( '.nf-error-wrap' );
     		this.errorCollectionView = new fieldErrorCollection( { el: el, collection: this.model.get( 'errors' ), thisModel: this.model } );
-			
+
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'render:view', this );
 			nfRadio.channel( 'fields' ).trigger( 'render:view', this );
 			console.log( this.model );
@@ -64,7 +64,7 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 
 		templateHelpers: function () {
 	    	return {
-	    		
+
 				renderElement: function(){
 					this.setPlaceholder();
 					this.setClasses();
@@ -91,6 +91,15 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 						return 'placeholder="' + this.placeholder + '"';
 					} else {
 						return '';
+					}
+				},
+
+				renderWrapClass: function() {
+					console.log( this.settings );
+					if( 0 < jQuery.trim( this.classes ) ) {
+						return ' YES';
+					} else {
+						return ' test';
 					}
 				},
 

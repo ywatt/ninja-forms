@@ -74,7 +74,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
 
 
     'classes' => array(
-        'name' => 'required',
+        'name' => 'classes',
         'type' => 'fieldset',
         'label' => __( 'Custom Class Names', 'ninja-forms' ),
         'width' => 'full',
