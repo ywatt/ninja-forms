@@ -71,4 +71,30 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary'
     ),
+
+
+    'classes' => array(
+        'name' => 'required',
+        'type' => 'fieldset',
+        'label' => __( 'Custom Class Names', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'settings' => array(
+            array(
+                'name' => 'wrapper_class',
+                'type' => 'textbox',
+                'placeholder' => '',
+                'label' => __( 'Wrapper', 'ninja-forms' ),
+                'width' => 'one-half'
+            ),
+            array(
+                'name' => 'element_class',
+                'type' => 'textbox',
+                'label' => __( 'Element', 'ninja-forms' ),
+                'placeholder' => '',
+                'width' => 'one-half'
+            ),
+        )
+    ),
+
 ));
