@@ -297,6 +297,20 @@ final class NF_Database_MockData
             array(
                 'type' 			=> 'listselect',
                 'label'			=> 'Select List',
+                'options'      => array(
+                    array(
+                    'label' => 'Option One',
+                    'value' => 1
+                    ),
+                    array(
+                    'label' => 'Option Two',
+                    'value' => 2
+                    ),
+                    array(
+                    'label' => 'Option Three',
+                    'value' => 3
+                    )
+                )
             ),
             array(
                 'type' 			=> 'listradio',
