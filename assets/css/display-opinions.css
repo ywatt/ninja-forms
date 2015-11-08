@@ -1,3 +1,62 @@
 /*
- * Ninja Forms - Form Display Opinions
- */
+
+---------------------------------------------*/
+.field-wrap,
+#ninja_forms_required_items {
+  margin-bottom: 20px;
+}
+
+.nf-fields .nf-element {
+  font-size: 16px;
+  padding: 16px;
+}
+.nf-fields textarea {
+  height: 200px;
+}
+.nf-fields .label-above > label,
+.nf-fields .label-below > label,
+.nf-fields .label-hidden > label {
+  margin-bottom: 5px;
+}
+.nf-fields .label-below > label {
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+.nf-fields .label-right > label {
+  margin-bottom: 0;
+}
+.nf-fields .label-right > input,
+.nf-fields .label-right textarea,
+.nf-fields .label-right select {
+  margin-right: 10px;
+}
+.nf-fields .label-right > input[type=radio],
+.nf-fields .label-right input[type=checkbox] {
+  margin-right: 10px;
+}
+.nf-fields .label-left > label {
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+.nf-fields .label-left > input,
+.nf-fields .label-left textarea,
+.nf-fields .label-left select {
+  margin-right: 10px;
+}
+.nf-fields .label-left > input[type=radio],
+.nf-fields .label-left input[type=checkbox] {
+  margin-right: 10px;
+}
+
+.field-wrap > label {
+  font-weight: bold;
+}
+
+.nf-error .nf-element {
+  border-color: red;
+}
+.nf-error .nf-error-msg {
+  color: red;
+}
+
+/*# sourceMappingURL=display-opinions.css.map */

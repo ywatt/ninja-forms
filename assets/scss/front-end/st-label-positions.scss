@@ -1,0 +1,56 @@
+.nf-fields {
+    .label-above,
+    .label-below,
+    .label-hidden {
+        > label {
+            display: block;
+        }
+        > input,
+        textarea,
+        select {
+            width: 100%;
+        }
+        input[type="submit"],
+        input[type="button"],
+        button {
+            width: auto;
+        }
+    }
+    .label-right {
+        vertical-align: middle;
+        > label {
+            display: inline-block;
+        }
+        > input,
+        textarea,
+        select {
+            width: 50%;
+        }
+        > input[type=radio],
+        input[type=checkbox] {
+            width: auto;
+        }
+        &.textarea-wrap {
+            vertical-align: top;
+        }
+    }
+    .label-left {
+        vertical-align: middle;
+        > label {
+            display: inline-block;
+        }
+        > input,
+        textarea,
+        select {
+            float: right;
+            width: 50%;
+        }
+        > input[type=radio],
+        input[type=checkbox] {
+            width: auto;
+        }
+        &.textarea-wrap {
+            vertical-align: top;
+        }
+    }
+}

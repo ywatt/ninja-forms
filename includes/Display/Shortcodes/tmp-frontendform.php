@@ -5,7 +5,7 @@ function nf_tmp_frontendform( $atts = array() ) {
 
 	wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
 	wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
-    
+
     wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
 	wp_enqueue_script( 'nf-front-end', Ninja_Forms::$url . 'assets/js/front-end/main.js', array( 'jquery', 'backbone', 'requirejs', 'jquery-form' ) );
 
@@ -140,7 +140,7 @@ function nf_tmp_frontendform( $atts = array() ) {
 			// 'afterFields' 			=> 'After Fields ' . $form_id,
 			'fields'					=> $fields,
 		)
-	);  
+	);
 
 	?>
 	<script type="text/javascript">
@@ -200,7 +200,7 @@ function nf_tmp_output_templates() {
 
 	<script id="nf-tmpl-layout" type="text/template">
 		<h3><%= settings.title %></h3>
-		<div class="nf-form-wrap">
+		<div class="nf-form-wrap ninja-forms-form-wrap">
 			<div class="nf-response-msg"></div>
 			<div class="nf-before-form"></div>
 			<div class="nf-form-layout"></div>
@@ -324,7 +324,7 @@ function nf_tmp_output_templates() {
 		</div>
 
 		<div class="nf-file-status"></div>
-		
+
 		<span class="nf-file-input-wrapper">
 			<input type="hidden" name="MAX_FILE_SIZE" value="2097152000">
 			<input id="nf-field-<%= id %>" name="nf-field-<%= id %>" class="<%= classes %>" type="file" style="display:none;">

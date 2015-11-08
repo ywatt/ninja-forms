@@ -1,0 +1,56 @@
+.field-wrap,
+#ninja_forms_required_items {
+    margin-bottom: 20px;
+}
+
+.nf-fields {
+    .nf-element {
+        font-size: 16px;
+        padding: 16px;
+    }
+    textarea {
+        height: 200px;
+    }
+    .label-above,
+    .label-below,
+    .label-hidden {
+        > label {
+            margin-bottom: 5px;
+        }
+    }
+    .label-below {
+        > label {
+            margin-bottom: 0;
+            margin-top: 5px;
+        }
+    }
+    .label-right {
+        > label {
+            margin-bottom: 0;
+        }
+        > input,
+        textarea,
+        select {
+            margin-right: 10px;
+        }
+        > input[type=radio],
+        input[type=checkbox] {
+            margin-right: 10px;
+        }
+    }
+    .label-left {
+        > label {
+            margin-bottom: 0;
+            margin-top: 5px;
+        }
+        > input,
+        textarea,
+        select {
+            margin-right: 10px;
+        }
+        > input[type=radio],
+        input[type=checkbox] {
+            margin-right: 10px;
+        }
+    }
+}

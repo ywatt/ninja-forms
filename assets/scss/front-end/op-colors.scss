@@ -1,0 +1,16 @@
+
+.field-wrap {
+    > label {
+        font-weight: bold;
+    }
+}
+
+
+.nf-error {
+    .nf-element {
+        border-color: red;
+    }
+    .nf-error-msg {
+        color: red;
+    }
+}
