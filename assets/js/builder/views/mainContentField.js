@@ -3,6 +3,14 @@ define( [], function() {
 		tagName: 'div',
 		template: '#nf-tmpl-main-content-field',
 
+		initialize: function() {
+			this.model.on( 'change', this.render, this );
+		},
+
+		onBeforeDestroy: function() {
+			this.model.off( 'change', this.render );
+		},
+
 		onRender: function() {
 			this.$el = this.$el.children();
 			this.$el.unwrap();
