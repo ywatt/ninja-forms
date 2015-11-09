@@ -149,7 +149,7 @@ class NF_Admin_AllFormsTable extends WP_List_Table
     private function sort_data( $a, $b )
     {
         // Set defaults
-        $orderby = 'title';
+        $orderby = 'id';
         $order = 'asc';
 
         // If orderby is set, use this as the sort column
