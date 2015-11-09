@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Ninja Forms
+Plugin Name: Ninja Forms - 3.0 Alpha
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.9.28
+Version: 3.0 Alpha-1 Hartnell
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -29,7 +29,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         /**
          * @since 3.0
          */
-        const VERSION = '2.9.27';
+        const VERSION = '3.0 Alpha-1-Hartnell';
 
         /**
          * @since 3.0
