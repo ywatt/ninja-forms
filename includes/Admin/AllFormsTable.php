@@ -201,9 +201,9 @@ class NF_Admin_AllFormsTable extends WP_List_Table
      */
     public function get_bulk_actions()
     {
-        $actions = [
+        $actions = array(
             'bulk-delete' => 'Delete'
-        ];
+        );
 
         return $actions;
     }
