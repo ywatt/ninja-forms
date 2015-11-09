@@ -386,6 +386,7 @@ function nf_alpha_release_admin_notice()
     <div class="error">
         <h3>Ninja Forms 3.0 - ALPHA</h3>
         <p><strong>NOTICE:</strong> Installed is an Alpha Release of Ninja Forms. This is not intended for production.</p>
+        <p>Please submit all <strong>feedback</strong> to respective blog post on <a href="http://developer.ninjaforms.com/tag/alpha/">developer.ninjaforms.com</a></p>
     </div>
     <?php
 }
