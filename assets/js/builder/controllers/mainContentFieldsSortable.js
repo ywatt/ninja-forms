@@ -5,8 +5,8 @@ define( [], function() {
 			this.listenTo( nfRadio.channel( 'drawer-addField' ), 'startDrag:type', this.addActiveClass );
 			this.listenTo( nfRadio.channel( 'drawer-addField' ), 'stopDrag:type', this.removeActiveClass );
 
-			this.listenTo( nfRadio.channel( 'drawer' ), 'startDrag:fieldStaging', this.addActiveClass );
-			this.listenTo( nfRadio.channel( 'drawer' ), 'stopDrag:fieldStaging', this.removeActiveClass );
+			this.listenTo( nfRadio.channel( 'drawer-addField' ), 'startDrag:fieldStaging', this.addActiveClass );
+			this.listenTo( nfRadio.channel( 'drawer-addField' ), 'stopDrag:fieldStaging', this.removeActiveClass );
 
 			nfRadio.channel( 'app' ).reply( 'receive:fieldsSortable', this.receiveFieldsSortable, this );
 			nfRadio.channel( 'app' ).reply( 'over:fieldsSortable', this.overfieldsSortable, this );

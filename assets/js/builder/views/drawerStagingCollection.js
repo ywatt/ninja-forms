@@ -47,10 +47,19 @@ define( ['builder/views/drawerStagedField', 'builder/views/drawerStagedFieldsEmp
 			} );
 
 			jQuery( this.el ).parent().draggable( {
-				helper: 'clone',
 				opacity: 0.9,
 				connectToSortable: '.nf-fields-sortable',
 
+				helper: function( e ) {
+					var width = jQuery( e.target ).parent().width();
+					var height = jQuery( e.target ).parent().height();
+					var element = jQuery( e.target ).parent().clone();
+					var left = width / 4;
+					var top = height / 2;
+					jQuery( this ).draggable( 'option', 'cursorAt', { top: top, left: left } );
+
+					return element;
+				},
 				start: function( e, ui ) {
 					nfRadio.channel( 'drawer-addField' ).trigger( 'startDrag:fieldStaging', this, ui );
 				},
