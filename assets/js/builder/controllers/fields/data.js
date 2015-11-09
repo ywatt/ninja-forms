@@ -107,6 +107,7 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 			this.collection.remove( model );
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
+			nfRadio.channel( 'app' ).request( 'update:db' );
 		},
 
 		/**
