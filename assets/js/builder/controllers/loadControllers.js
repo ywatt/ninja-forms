@@ -101,7 +101,7 @@ define(
 				var appPublishResponse = new AppPublishResponse();
 				var appChangeDomain = new AppChangeDomain();
 				var editActive = new EditActive();
-				var pushstate = new Pushstate();
+				// var pushstate = new Pushstate();
 			}
 		});
 
