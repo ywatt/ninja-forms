@@ -16,7 +16,7 @@ define( ['builder/views/drawerStagingCollection', 'builder/models/stagingCollect
 			this.savedCollection = nfRadio.channel( 'drawer' ).request( 'get:savedFields' );
 			this.primaryCollection = this.savedCollection;
 
-			this.fieldTypeSectionCollection = nfRadio.channel( 'drawer' ).request( 'get:fieldTypeSections' );
+			this.fieldTypeSectionCollection = nfRadio.channel( 'fields' ).request( 'get:typeSections' );
 			this.secondaryCollection = this.fieldTypeSectionCollection;
 
 		},
