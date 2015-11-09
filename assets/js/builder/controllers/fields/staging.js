@@ -86,12 +86,15 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 					// Create an object that can be added as a model.
 					var tmpField = { id: tmpID, label: model.get( 'nicename' ), type: model.get( 'slug' ) };
 					// Add our new field.
-					nfRadio.channel( 'fields' ).request( 'add:field',  tmpField );
+					nfRadio.channel( 'fields' ).request( 'add:field',  tmpField, false );
 				} );
+
 				// Sort our fields.
 				nfRadio.channel( 'fields' ).request( 'sort:fields' );
+				// Trigger a reset on our field collection so that our view re-renders
+				fieldCollection.trigger( 'reset', fieldCollection );
 				// Empty the staging collection
-				this.collection.reset();				
+				this.collection.reset();
 			}
 		},
 
