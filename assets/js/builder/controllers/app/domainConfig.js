@@ -70,6 +70,7 @@ define( [
 						return new fieldsMainContentFieldCollectionView( { collection: collection } );
 					}
 				},
+				/*
 				{
 					id: 'actions',
 					nicename: 'Emails & Actions',
@@ -111,6 +112,7 @@ define( [
 						return new settingsMainContentView();
 					}
 				},
+				*/
 				{
 					id: 'preview',
 					nicename: 'Preview Form',
