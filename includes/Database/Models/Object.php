@@ -12,7 +12,8 @@ final class NF_Database_Models_Object extends NF_Abstracts_Model
     protected $_meta_table_name = 'nf_object_meta';
 
     protected $_columns = array(
-        'type'
+        'type',
+        'created_at'
     );
 
     public function __construct( $db, $id, $parent_id = '', $parent_type = '' )

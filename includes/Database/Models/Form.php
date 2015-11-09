@@ -12,7 +12,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
     protected $_meta_table_name = 'nf_form_meta';
 
     protected $_columns = array(
-        'title'
+        'title',
+        'created_at'
     );
 
     protected $_fields;

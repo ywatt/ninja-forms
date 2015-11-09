@@ -16,7 +16,8 @@ final class NF_Database_Models_Action extends NF_Abstracts_Model
     protected $_columns = array(
         'title',
         'type',
-        'active'
+        'active',
+        'created_at'
     );
 
     public function __construct( $db, $id, $parent_id = '' )
