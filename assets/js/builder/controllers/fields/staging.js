@@ -39,7 +39,7 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 		 */
 		addStagedField: function( type ) {
 			// Get our type model from the string.
-			var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', type );
+			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', type );
 			// Our tmp ID is a string with the time appended to make it unique.
 			var tmpID = 'nf-staged-field-' + jQuery.now();
 			// Object that will be added to our staging collection.

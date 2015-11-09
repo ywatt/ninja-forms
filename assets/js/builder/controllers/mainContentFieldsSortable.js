@@ -95,7 +95,7 @@ define( [], function() {
 
 		addField: function( type, silent ) {
 			silent = silent || false;
-			var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', type );
+			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', type );
 			var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpFieldID' );
 			nfRadio.channel( 'fields' ).request( 'add:field',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'id' ) }, silent );
 			return tmpID;
@@ -104,7 +104,7 @@ define( [], function() {
 		overfieldsSortable: function( ui ) {
 			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) {
 				var type = jQuery( ui.helper ).data( 'id' );
-				var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', type );
+				var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', type );
 				var label = fieldType.get( 'nicename' );
 				var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
 				var fieldWidth = jQuery( sortableEl ).width();

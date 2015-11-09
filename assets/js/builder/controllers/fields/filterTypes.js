@@ -69,7 +69,7 @@ define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectio
         filterCollection: function( search ) {
         	search = search.toLowerCase();
         	// Get our list of field types
-        	var collection = nfRadio.channel( 'data' ).request( 'get:fieldTypes' );
+        	var collection = nfRadio.channel( 'fields' ).request( 'get:typeCollection' );
         	/*
         	 * Backbone collections have a 'filter' method that loops through every model,
         	 * waiting for you to return true or false. If you return true, the model is kept.

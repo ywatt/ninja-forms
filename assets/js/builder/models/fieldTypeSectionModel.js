@@ -7,7 +7,7 @@ define( [], function() {
 		        var html = '';
 		        var that = this;
 		        _.each( this.fieldTypes, function( id ) {
-		            var type = nfRadio.channel( 'data' ).request( 'get:fieldType', id );
+		            var type = nfRadio.channel( 'fields' ).request( 'get:type', id );
 		            var nicename = type.get( 'nicename' );
 		            html += _.template( jQuery( '#nf-tmpl-drawer-field-type-button' ).html(), { id: id, nicename: nicename, type: type, savedField: that.isSavedField } );
 		        } );

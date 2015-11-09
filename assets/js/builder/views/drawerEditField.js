@@ -13,7 +13,7 @@ define( ['builder/views/drawerFieldTypeSettingGroupCollection'], function( field
 		},
 
 		onRender: function() {
-			var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType' , this.model.get( 'type' ) );
+			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type' , this.model.get( 'type' ) );
 			this.settingGroups.show( new fieldTypeSettingGroupCollectionView( { collection: fieldType.get( 'settingGroups' ), fieldModel: this.fieldModel } ) );
 		},
 
@@ -26,7 +26,7 @@ define( ['builder/views/drawerFieldTypeSettingGroupCollection'], function( field
 		templateHelpers: function () {
 	    	return {
 	    		renderTypeNicename: function() {
-	    			var type = nfRadio.channel( 'data' ).request( 'get:fieldType', this.type );
+	    			var type = nfRadio.channel( 'fields' ).request( 'get:type', this.type );
 	    			return type.get( 'nicename' );
 				},
 			};

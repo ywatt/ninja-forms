@@ -1,8 +1,7 @@
 define(
 	[
 		'builder/controllers/hotkeys',
-		'builder/controllers/fieldTypes',
-		'builder/controllers/fieldTypeSections',
+		'builder/controllers/fields/types',
 		'builder/controllers/fields/fieldTypeDrag',
 		'builder/controllers/fields/stagingDrag',
 		'builder/controllers/fields/savedFieldsSection',
@@ -17,13 +16,12 @@ define(
 		'builder/controllers/fields/data',
 		'builder/controllers/fields/itemControls',
 		'builder/controllers/app/drawerToggleSettingGroup',
-		'builder/controllers/fieldsChangeSettingDefault',
-		'builder/controllers/fieldToggle',
+		'builder/controllers/fields/changeSettingDefault',
+		'builder/controllers/fields/toggleSetting',
 		'builder/controllers/fields/getSettingChildView',
-		'builder/controllers/fieldset',
-		'builder/controllers/fieldListOptionSortable',
+		'builder/controllers/fields/fieldset',
 		'builder/controllers/fields/listField',
-		'builder/controllers/fieldSubmit',
+		'builder/controllers/fields/submitField',
 		'builder/controllers/updateDB',
 		'builder/controllers/formData',
 		'builder/controllers/previewLink',
@@ -32,13 +30,13 @@ define(
 		'builder/controllers/undoChanges',
 		'builder/controllers/app/publishResponse',
 		'builder/controllers/app/changeDomain',
-		'builder/controllers/fields/editActive'
+		'builder/controllers/fields/editActive',
+		'builder/controllers/app/pushstate'
 
 	],
 	function(
 		Hotkeys,
 		FieldTypes,
-		FieldTypeSections,
 		FieldTypeDrag,
 		FieldStagingDrag,
 		SavedFields,
@@ -57,7 +55,6 @@ define(
 		FieldToggle,
 		DrawerFieldTypeSettingChildView,
 		Fieldset,
-		FieldListOptionSortable,
 		FieldList,
 		FieldSubmit,
 		UpdateDB,
@@ -68,14 +65,14 @@ define(
 		UndoChanges,
 		AppPublishResponse,
 		AppChangeDomain,
-		EditActive
+		EditActive,
+		Pushstate
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
 				var hotkeys = new Hotkeys();
 				var fieldset = new Fieldset();
 				var fieldTypes = new FieldTypes();
-				// var fieldTypeSections = new FieldTypeSections();
 				var fieldTypeDrag = new FieldTypeDrag();
 				var fieldStagingDrag = new FieldStagingDrag();
 				var savedFields = new SavedFields();
@@ -93,7 +90,6 @@ define(
 				var fieldToggle = new FieldToggle();
 				var drawerFieldTypeSettingChildView = new DrawerFieldTypeSettingChildView();
 				var fieldList = new FieldList();
-				var fieldListOptionSortable = new FieldListOptionSortable();
 				var fieldSubmit = new FieldSubmit();
 				var fieldData = new FieldData();
 				var updateDB = new UpdateDB();
@@ -105,6 +101,7 @@ define(
 				var appPublishResponse = new AppPublishResponse();
 				var appChangeDomain = new AppChangeDomain();
 				var editActive = new EditActive();
+				var pushstate = new Pushstate();
 			}
 		});
 

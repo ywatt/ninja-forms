@@ -13,6 +13,15 @@ define( [], function() {
 			this.listenTo( nfRadio.channel( 'fields' ), 'change:setting', this.changeSetting, this );
 		},
 
+		/**
+		 * When we change our field setting, update the model.
+		 * 
+		 * @since  3.0
+		 * @param  Object 			e                event
+		 * @param  backbone.model 	settingTypeModel model that holds our field type settings info
+		 * @param  backbone.model 	fieldModel       model that holds our field settings
+		 * @return void
+		 */
 		changeSetting: function( e, settingTypeModel, fieldModel ) {
 			var name = settingTypeModel.get( 'name' );
 			// Sends out a request on the fields-type (fields-text, fields-checkbox, etc) channel to see if that field type needs to return a special value for saving.

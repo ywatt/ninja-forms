@@ -70,7 +70,7 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 		overStagedFields: function( e, ui ) {
 			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) {
 				var type = jQuery( ui.item ).data( 'id' );
-				var fieldType = nfRadio.channel( 'data' ).request( 'get:fieldType', type );
+				var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', type );
 				var nicename = fieldType.get( 'nicename' );
 				this.currentHelper = ui.helper 
 				jQuery( ui.helper ).html( nicename + '<span class="dashicons dashicons-dismiss"></span>' );

@@ -1,3 +1,11 @@
+/**
+ * Handles actions related to field settings that use a fieldset
+ * 
+ * @package Ninja Forms builder
+ * @subpackage Fields - Edit Field Drawer
+ * @copyright (c) 2015 WP Ninjas
+ * @since 3.0
+ */
 define( ['builder/views/drawerFieldTypeSettingFieldset','builder/models/fieldTypeSettingCollection'], function( fieldsetView, fieldTypeSettingCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
@@ -5,7 +13,12 @@ define( ['builder/views/drawerFieldTypeSettingFieldset','builder/models/fieldTyp
 			// When a list type field is initialized, create an option collection.
 			this.listenTo( nfRadio.channel( 'fields-fieldset' ), 'init:fieldTypeModel', this.createSettingsCollection );
 		},
-
+		/**
+		 * Return our 
+		 * @since  version
+		 * @param  {[type]} model [description]
+		 * @return {[type]}       [description]
+		 */
 		getSettingChildView: function( model ) {
 			return fieldsetView;
 		},
