@@ -52,12 +52,35 @@ define( [], function() {
 		 * @return void
 		 */
 		clickDuplicate: function( e, model ) {
+			// Temporary value used to store any new collections.
+			var replace = {};
+			// Loop over every model attribute and if we find a collection, clone each model and instantiate a new collection.
+			_.each( model.attributes, function( val, key ) {
+				if( val instanceof Backbone.Collection ) { // Is this a backbone collection?
+					// Clone each model.
+					var models = val.map( function( model ) { return model.clone(); } );
+					var options = _.clone( val.options );
+					var copy = new val.constructor( models, options );
+					replace[ key ] = copy;
+				}
+			} );
+
+			// Clone our original model
 			var newModel = model.clone();
+			// Overwrite any collections we created above.
+			_.each( replace, function( val, key ) {
+				newModel.set( key, val );
+			} );
+
+			// Change our label.
+			newModel.set( 'label', newModel.get( 'label' ) + ' Copy' );
+			// Update our ID to the new tmp id.
 			var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpFieldID' );
 			newModel.set( 'id', tmpID );
-			var newLabel = newModel.get( 'label' ) + ' Copy';
-			newModel.set( 'label', newLabel );
+			// Add new model.
 			nfRadio.channel( 'fields' ).request( 'add:field', newModel );
+			// Update preview.
+			nfRadio.channel( 'app' ).request( 'update:db' );
 		}
 
 	});

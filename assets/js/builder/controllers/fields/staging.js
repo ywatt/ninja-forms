@@ -88,14 +88,13 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 					// Add our new field.
 					nfRadio.channel( 'fields' ).request( 'add:field',  tmpField, false );
 				} );
-
-				// Sort our fields.
-				nfRadio.channel( 'fields' ).request( 'sort:fields' );
 				// Trigger a reset on our field collection so that our view re-renders
 				fieldCollection.trigger( 'reset', fieldCollection );
 				// Empty the staging collection
 				this.collection.reset();
 			}
+			// Sort our fields.
+			nfRadio.channel( 'fields' ).request( 'sort:fields' );
 		},
 
 		/**
