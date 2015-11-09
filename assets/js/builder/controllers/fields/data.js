@@ -136,7 +136,8 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 		 * @return string
 		 */
 		getTmpFieldID: function() {
-			var tmpNum = this.collection.models.length + 1;
+			var tmpNum = this.collection.tmpNum;
+			this.collection.tmpNum++;
 			return 'tmp-' + tmpNum;
 		}
 	});
