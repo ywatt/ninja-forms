@@ -75,6 +75,10 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 				this.currentHelper = ui.helper 
 				jQuery( ui.helper ).html( nicename + '<span class="dashicons dashicons-dismiss"></span>' );
 				jQuery( ui.helper ).removeClass( 'nf-one-third' ).addClass( 'nf-item-dock' ).css( { 'opacity': '0.8', 'width': '', 'height': '' } );
+				var sortableEl = nfRadio.channel( 'app' ).request( 'get:stagedFieldsEl' );
+				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
+					jQuery( sortableEl ).addClass( 'nf-droppable-hover' );
+				}
 			}
 			
 		},
@@ -91,6 +95,10 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 				var helperClone = nfRadio.channel( 'drawer-addField' ).request( 'get:typeHelperClone' );	
 				jQuery( this.currentHelper ).html( jQuery( helperClone ).html() );
 				jQuery( this.currentHelper ).removeClass( 'nf-item-dock' ).addClass( 'nf-one-third' );
+				var sortableEl = nfRadio.channel( 'app' ).request( 'get:stagedFieldsEl' );
+				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
+					jQuery( sortableEl ).removeClass( 'nf-droppable-hover' );
+				}
 			}		
 		},
 

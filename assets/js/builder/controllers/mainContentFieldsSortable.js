@@ -114,6 +114,11 @@ define( [], function() {
 				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
 					jQuery( sortableEl ).addClass( 'nf-droppable-hover' );
 				}
+			} else if ( jQuery( ui.item ).hasClass( 'nf-stage' ) ) {
+				var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
+				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
+					jQuery( sortableEl ).addClass( 'nf-droppable-hover' );
+				}
 			}
 		},
 
@@ -128,7 +133,10 @@ define( [], function() {
 					jQuery( sortableEl ).removeClass( 'nf-droppable-hover' );
 				}
 			} else if ( jQuery( ui.item ).hasClass( 'nf-stage' ) ) {
-
+				var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
+				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
+					jQuery( sortableEl ).removeClass( 'nf-droppable-hover' );
+				}
 			}
 		},
 
