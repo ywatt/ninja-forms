@@ -1,5 +1,5 @@
 <?php
-
+/*
 function nf_tmp_file_upload() {
 
     if( $_FILES ) {
@@ -95,3 +95,4 @@ function nf_tmp_file_upload() {
 }
 
 add_shortcode( 'nf_tmp_file_upload', 'nf_tmp_file_upload' );
+*/
