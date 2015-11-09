@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_Phone
  */
-class NF_Fields_Phone extends NF_Fields_Textbox
+class NF_Fields_Phone extends NF_Abstracts_UserInfo
 {
     protected $_name = 'phone';
 

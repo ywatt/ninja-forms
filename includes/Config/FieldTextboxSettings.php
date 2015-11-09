@@ -6,7 +6,7 @@ return apply_filters( 'ninja-forms-textbox-settings', array(
      * MASK
      */
 
-    array(
+    'mask' => array(
         'name' => 'mask',
         'type' => 'select',
         'label' => __( 'Input Mask', 'ninja-forms'),
