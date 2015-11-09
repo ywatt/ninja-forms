@@ -58,7 +58,6 @@ define( [], function() {
 			var newLabel = newModel.get( 'label' ) + ' Copy';
 			newModel.set( 'label', newLabel );
 			nfRadio.channel( 'fields' ).request( 'add:field', newModel );
-			nfRadio.channel( 'app' ).request( 'update:db' );
 		}
 
 	});
