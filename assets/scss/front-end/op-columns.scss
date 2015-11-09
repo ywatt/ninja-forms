@@ -18,6 +18,11 @@
     .inside {
         padding: 20px;
     }
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
+    }
 }
 
 .one-half,

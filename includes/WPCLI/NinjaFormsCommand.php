@@ -57,6 +57,7 @@ class NF_WPCLI_NinjaFormsCommand extends WP_CLI_Command
 
         $mock_data->form_contact_form_1();
         $mock_data->form_contact_form_2();
+        $mock_data->form_email_submission();
         $mock_data->form_long_form();
     }
 

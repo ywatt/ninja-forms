@@ -5,6 +5,15 @@
     }
 }
 
+.nf-element {
+    background: #f7f7f7;
+    border: 1px solid #eaeaea;
+    &:focus {
+        background: #fff;
+        border-color: #c1c1c1;
+        outline: none;
+    }
+}
 
 .nf-error {
     .nf-element {

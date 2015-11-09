@@ -391,6 +391,43 @@ final class NF_Database_MockData
         }
     }
 
+    public function form_email_submission()
+    {
+        /*
+         * FORM
+         */
+
+        $form = Ninja_Forms()->form()->get();
+        $form->update_setting( 'title', 'Email Subscription Form' );
+        $form->save();
+
+        $form_id = $form->get_id();
+
+        /*
+         * FIELDS
+         */
+
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
+        $field->update_setting( 'type', 'email' )
+            ->update_setting( 'label', 'Email Address')
+            ->update_setting( 'label_pos', 'hidden' )
+            ->update_setting( 'required', 1 )
+            ->update_setting( 'order', 1 )
+            ->update_setting( 'placeholder', 'Enter your email address' )
+            ->update_setting( 'wrapper_class', 'three-fourths first' )
+            ->save();
+
+        $email_field_id = $field->get_id();
+
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
+        $field->update_setting( 'type', 'submit' )
+            ->update_setting( 'label', 'Subscribe')
+            ->update_setting( 'order', 5 )
+            ->update_setting( 'wrapper_class', 'one-fourth' )
+            ->save();
+
+    }
+
     private function _migrate()
     {
         $migrations = new NF_Database_Migrations();

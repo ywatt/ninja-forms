@@ -5,12 +5,17 @@
 
 .nf-fields {
     padding: 5px;
+    max-width: 1000px;
+    margin: 0 auto;
     .nf-element {
         font-size: 16px;
         padding: 16px;
     }
     textarea {
         height: 200px;
+    }
+    select {
+        height: 48px;
     }
     .label-above,
     .label-below,
@@ -50,14 +55,14 @@
         > input,
         textarea,
         select {
-            margin-right: 10px;
+            margin-left: 10px;
         }
         > input[type=radio],
         input[type=checkbox] {
-            margin-right: 10px;
+            margin-left: 10px;
         }
-        ul {
-            margin-left: 15px;
-        }
+        // ul {
+        //     margin-left: 15px;
+        // }
     }
 }

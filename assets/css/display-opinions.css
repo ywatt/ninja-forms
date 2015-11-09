@@ -8,6 +8,8 @@
 
 .nf-fields {
   padding: 5px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 .nf-fields .nf-element {
   font-size: 16px;
@@ -15,6 +17,9 @@
 }
 .nf-fields textarea {
   height: 200px;
+}
+.nf-fields select {
+  height: 48px;
 }
 .nf-fields .label-above > label,
 .nf-fields .label-below > label,
@@ -47,14 +52,11 @@
 .nf-fields .label-left > input,
 .nf-fields .label-left textarea,
 .nf-fields .label-left select {
-  margin-right: 10px;
+  margin-left: 10px;
 }
 .nf-fields .label-left > input[type=radio],
 .nf-fields .label-left input[type=checkbox] {
-  margin-right: 10px;
-}
-.nf-fields .label-left ul {
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 /* Column Classes
@@ -86,6 +88,21 @@
 .two-sixths .inside,
 .two-thirds .inside {
   padding: 20px;
+}
+.five-sixths::after,
+.four-sixths::after,
+.one-fourth::after,
+.one-half::after,
+.one-sixth::after,
+.one-third::after,
+.three-fourths::after,
+.three-sixths::after,
+.two-fourths::after,
+.two-sixths::after,
+.two-thirds::after {
+  clear: both;
+  content: "";
+  display: block;
 }
 
 .one-half,
@@ -180,10 +197,22 @@ input[type=checkbox].nf-toggle:checked::before {
 }
 .label-left input[type=checkbox].nf-toggle {
   padding: 0;
+  margin-left: 22px;
+  margin-top: 20px;
 }
 
 .field-wrap > label {
   font-weight: bold;
+}
+
+.nf-element {
+  background: #f7f7f7;
+  border: 1px solid #eaeaea;
+}
+.nf-element:focus {
+  background: #fff;
+  border-color: #c1c1c1;
+  outline: none;
 }
 
 .nf-error .nf-element {
