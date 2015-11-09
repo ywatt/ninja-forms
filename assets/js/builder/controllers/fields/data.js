@@ -45,7 +45,8 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 		addField: function( data, silent ) {
 			silent = silent || false;
 			this.collection.add( data, { silent: silent } );
-			nfRadio.channel( 'app' ).request( 'update:db' );
+			// Set our 'clean' status to false so that we get a notice to publish changes
+			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 		},
 
 		/**
@@ -88,6 +89,8 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 					field.set( 'order', pos );
 				} );
 				this.collection.sort();
+				// Set our 'clean' status to false so that we get a notice to publish changes
+				nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 				// Update our preview
 				nfRadio.channel( 'app' ).request( 'update:db' );
 			}
@@ -104,8 +107,6 @@ define( ['builder/models/fieldCollection'], function( fieldCollection ) {
 			this.collection.remove( model );
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
-			// Update our preview
-			nfRadio.channel( 'app' ).request( 'update:db' );
 		},
 
 		/**
