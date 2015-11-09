@@ -136,7 +136,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'id' =>  $name,
                 'nicename' => $field->get_nicename(),
                 'alias' => $field->get_aliases(),
-                'parentType' => absint( $field->get_parent_type() ),
+                'parentType' => $field->get_parent_type(),
                 'section' => $field->get_section(),
                 'type' => $field->get_type(),
                 'settingGroups' => $settings_groups
