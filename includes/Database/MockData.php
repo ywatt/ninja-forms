@@ -8,6 +8,17 @@ final class NF_Database_MockData
         $this->_migrate();
     }
 
+    public function form_blank_form()
+    {
+        /*
+         * FORM
+         */
+
+        $form = Ninja_Forms()->form()->get();
+        $form->update_setting( 'title', 'Blank Forms' );
+        $form->save();
+    }
+
     public function form_contact_form_1()
     {
         /*
@@ -18,11 +29,13 @@ final class NF_Database_MockData
         $form->update_setting( 'title', 'Contact Me' );
         $form->save();
 
+        $form_id = $form->get_id();
+
         /*
          * FIELDS
          */
 
-        $field = Ninja_Forms()->form( 1 )->field()->get();
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'textbox' )
             ->update_setting( 'label', 'Name')
             ->update_setting( 'label_pos', 'above' )
@@ -32,7 +45,7 @@ final class NF_Database_MockData
 
         $name_field_id = $field->get_id();
 
-        $field = Ninja_Forms()->form( 1 )->field()->get();
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'email' )
             ->update_setting( 'label', 'Email')
             ->update_setting( 'label_pos', 'above' )
@@ -42,7 +55,7 @@ final class NF_Database_MockData
 
         $email_field_id = $field->get_id();
 
-        // $field = Ninja_Forms()->form( 1 )->field()->get();
+        // $field = Ninja_Forms()->form( $form_id )->field()->get();
         // $field->update_setting( 'type', 'textbox' )
         //     ->update_setting( 'label', 'Confirm Email')
         //     ->update_setting( 'label_pos', 'above' )
@@ -51,7 +64,7 @@ final class NF_Database_MockData
         //     ->update_setting( 'order', 3 )
         //     ->save();
 
-        $field = Ninja_Forms()->form( 1 )->field()->get();
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'textarea' )
             ->update_setting( 'label', 'Message')
             ->update_setting( 'label_pos', 'above' )
@@ -59,7 +72,7 @@ final class NF_Database_MockData
             ->update_setting( 'order', 3 )
             ->save();
 
-        // $field = Ninja_Forms()->form( 1 )->field()->get();
+        // $field = Ninja_Forms()->form( $form_id )->field()->get();
         // $field->update_setting( 'type', 'textbox' )
         //     ->update_setting( 'label', 'Mirror Name')
         //     ->update_setting( 'label_pos', 'above' )
@@ -86,7 +99,7 @@ final class NF_Database_MockData
             ),
         );
 
-        $field = Ninja_Forms()->form( 1 )->field()->get();
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'listradio' )
             ->update_setting( 'label_pos', 'above')
             ->update_setting( 'label', "James' List")
@@ -94,7 +107,7 @@ final class NF_Database_MockData
             ->update_setting( 'order', 4 )
             ->save();
 
-        $field = Ninja_Forms()->form( 1 )->field()->get();
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Submit')
             ->update_setting( 'order', 5 )
@@ -104,20 +117,20 @@ final class NF_Database_MockData
          * ACTIONS
          */
 
-        $action = Ninja_Forms()->form( 1 )->action()->get();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'title',  'Mock Success Message Action' )
             ->update_setting( 'type', 'successmessage' )
             ->update_setting( 'message', 'This is a test success message' )
             ->save();
 
-        $action = Ninja_Forms()->form( 1 )->action()->get();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'title',  'Mock Redirect Action' )
             ->update_setting( 'type', 'redirect' )
             ->update_setting( 'url', 'http://kstover.codes' )
             ->update_setting( 'active', 0 )
             ->save();
 
-        $action = Ninja_Forms()->form( 1 )->action()->get();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'title',  'Mock Email Action' )
             ->update_setting( 'type', 'email' )
             ->update_setting( 'to', array( 'kyle@wpninjas.com' ) )
@@ -126,14 +139,14 @@ final class NF_Database_MockData
             ->update_setting( 'active', FALSE )
             ->save();
 
-        $action = Ninja_Forms()->form( 1 )->action()->get();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'title',  'Run WordPress Action' )
             ->update_setting( 'type', 'custom' )
             ->update_setting( 'hook', 'action' )
             ->update_setting( 'tag', 'blarg_action' )
             ->save();
 
-        $action = Ninja_Forms()->form( 1 )->action()->get();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'title',  'Mock Save Action' )
             ->update_setting( 'type', 'save' )
             ->save();
@@ -142,7 +155,7 @@ final class NF_Database_MockData
          * SUBMISSIONS
          */
 
-        $sub = Ninja_Forms()->form( 1 )->sub()->get();
+        $sub = Ninja_Forms()->form( $form_id )->sub()->get();
         $sub->update_field_value( 1, 'Kyle Johnson' )
             ->update_field_value( 2, 'kyle@wpninjas.com' )
             ->update_field_value( 3, 'kyle@wpninjas.com' )
@@ -153,7 +166,7 @@ final class NF_Database_MockData
         // Delay Execution for different submission dates
         sleep(1);
 
-        $sub = Ninja_Forms()->form( 1 )->sub()->get();
+        $sub = Ninja_Forms()->form( $form_id )->sub()->get();
         $sub->update_field_value( 1, 'John Doe' )
             ->update_field_value( 2, 'user@gmail.com' )
             ->update_field_value( 3, 'user@gmail.com' )
@@ -171,6 +184,8 @@ final class NF_Database_MockData
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Get Help' );
         $form->save();
+
+        $form_id = $form->get_id();
 
         /*
          * FIELDS
@@ -243,7 +258,7 @@ final class NF_Database_MockData
 
             unset( $settings[ 'id' ] );
 
-            $field = Ninja_Forms()->form( 2 )->field()->get();
+            $field = Ninja_Forms()->form( $form_id )->field()->get();
             $field->update_settings( $settings )->save();
         }
 
@@ -251,7 +266,7 @@ final class NF_Database_MockData
          * ACTIONS
          */
 
-        $action = Ninja_Forms()->form( 2 )->action()->get();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'title',  'Mock Save Action' )
             ->update_setting( 'type', 'save' )
             ->save();
