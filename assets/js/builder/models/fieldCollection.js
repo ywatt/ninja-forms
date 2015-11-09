@@ -2,6 +2,7 @@ define( ['builder/models/fieldModel'], function( fieldModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: fieldModel,
 		comparator: 'order',
+		tmpNum: 1,
 
 		initialize: function() {
 			this.on( 'add', this.addField, this );

@@ -18,6 +18,7 @@ define( [], function() {
 				var jsAction = 'nf_save_form';
 			}
 			var formData = nfRadio.channel( 'app' ).request( 'get:formData' );
+
 			removedIDs = formData.get( 'fields' ).removedIDs;
 
 			var data = JSON.parse( JSON.stringify( formData ) );
