@@ -80,6 +80,11 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         foreach( $fields as $field ){
             $settings = $field->get_settings();
             $settings[ 'id' ] = $field->get_id();
+
+            foreach( $settings as $key => $setting ){
+                if( is_numeric( $setting ) ) $settings[ $key ] = absint( $setting );
+            }
+
             $fields_settings[] = $settings;
         }
 
@@ -131,7 +136,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'id' =>  $name,
                 'nicename' => $field->get_nicename(),
                 'alias' => $field->get_aliases(),
-                'parentType' => $field->get_parent_type(),
+                'parentType' => absint( $field->get_parent_type() ),
                 'section' => $field->get_section(),
                 'type' => $field->get_type(),
                 'settingGroups' => $settings_groups
