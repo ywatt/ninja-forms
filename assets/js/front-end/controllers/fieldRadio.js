@@ -1,10 +1,8 @@
 define(['front-end/models/fieldModel'], function( fieldModel ) {
-	var radioChannel = nfRadio.channel( 'listradio' );
-
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( radioChannel, 'change:modelValue', this.changeModelValue );
-			this.listenTo( radioChannel, 'init:model', this.register );
+			this.listenTo( nfRadio.channel( 'listradio' ), 'change:modelValue', this.changeModelValue );
+			this.listenTo( nfRadio.channel( 'listradio' ), 'init:model', this.register );
 		},
 
 		register: function( model ) {
@@ -36,7 +34,7 @@ define(['front-end/models/fieldModel'], function( fieldModel ) {
 				option.classes = that.classes;
 				option.currentValue = that.value;
 				
-				html += _.template( jQuery( '#nf-tmpl-field-radio-option' ).html(), option );
+				html += _.template( jQuery( '#nf-tmpl-field-listradio-option' ).html(), option );
 			} );
 
 			if ( 1 == this.show_other ) {
@@ -50,7 +48,7 @@ define(['front-end/models/fieldModel'], function( fieldModel ) {
 					renderOtherText: this.renderOtherText,
 					valueFound: valueFound
 				};
-				html += _.template( jQuery( '#nf-tmpl-field-radio-other' ).html(), data );
+				html += _.template( jQuery( '#nf-tmpl-field-listradio-other' ).html(), data );
 
 			}
 
@@ -67,7 +65,7 @@ define(['front-end/models/fieldModel'], function( fieldModel ) {
 					classes: this.classes,
 					currentValue: this.currentValue
 				};
-				return _.template( jQuery( '#nf-tmpl-field-radio-other-text' ).html(), data );
+				return _.template( jQuery( '#nf-tmpl-field-listradio-other-text' ).html(), data );
 			}
 		}
 	});

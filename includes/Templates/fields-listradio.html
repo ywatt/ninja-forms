@@ -4,13 +4,13 @@
     </ul>
 </script>
 
-<script id='nf-tmpl-field-radio-option' type='text/template'>
+<script id='nf-tmpl-field-listradio-option' type='text/template'>
     <li>
         <label><input type="radio" name="nf-field-<%= fieldID %>" class="<%= classes %>" value="<%= value %>" <%= ( value == currentValue ) ? 'checked="checked"' : '' %>> <%= label %></label>
     </li>
 </script>
 
-<script id='nf-tmpl-field-radio-other' type='text/template'>
+<script id='nf-tmpl-field-listradio-other' type='text/template'>
     <li>
         <label>
             <input type="radio" name="nf-field-<%= fieldID %>" class="<%= classes %>" value="nf-other" <%= ( ! valueFound ) ? 'checked="checked"' : '' %>>
@@ -20,6 +20,6 @@
     </li>
 </script>
 
-<script id='nf-tmpl-field-radio-other-text' type='text/template'>
+<script id='nf-tmpl-field-listradio-other-text' type='text/template'>
     <input type="text" name="nf-field-<%= fieldID %>" class="nf-element" value="<%= currentValue %>">
 </script>
