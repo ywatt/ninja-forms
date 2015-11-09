@@ -181,8 +181,8 @@ input[type=checkbox].nf-toggle::before {
           transition: all 0.3s ease;
 }
 input[type=checkbox].nf-toggle:checked::after {
-  background: green;
-  border: 2px solid green;
+  background: lightgreen;
+  border: 2px solid lightgreen;
   -webkit-transition: all 0.3s ease;
           transition: all 0.3s ease;
 }

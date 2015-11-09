@@ -33,8 +33,8 @@ input[type=checkbox].nf-toggle {
     }
     &:checked {
         &::after {
-            background: green;
-            border: 2px solid green;
+            background: lightgreen;
+            border: 2px solid lightgreen;
             transition: all 0.3s ease;
         }
         &::before {
