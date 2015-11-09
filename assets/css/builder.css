@@ -331,9 +331,7 @@ All styles used for displaying table content
 .nf-settings .toggle { cursor: pointer; }
 
 @media only screen and (max-width: 1255px) { .nf-cancel { display: none; }
-  #nf-app-sub-header h2 { padding-left: 80px; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; }
-  .nf-add-new.nf-open-drawer { padding-left: 32px; text-indent: -500px; width: 60px; height: 60px; top: 70px; left: 43px; -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; }
-  .nf-add-new.nf-open-drawer:after { font-size: 40px; padding: 16px; line-height: 21px; width: 24px; height: 24px; text-indent: 0px; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; } }
+  #nf-app-sub-header h2 { padding-left: 80px; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; } }
 @media only screen and (max-width: 1132px) { #nf-header .preview { content: "Preview"; }
   .nf-cancel { display: none; } }
 @media only screen and (max-width: 1030px) { #nf-header ul { display: none; }
