@@ -32,11 +32,6 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         const VERSION = '2.9.27';
 
         /**
-         * @since 3.0
-         */
-        const TEXTDOMAIN = 'ninja-forms';
-
-        /**
          * @var Ninja_Forms
          * @since 2.7
          */
