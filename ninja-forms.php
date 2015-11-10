@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Ninja Forms
+Plugin Name: Ninja Forms - Three Alpha
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.9.28
+Version: 3.0-Alpha-1-Hartnell
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -204,6 +204,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 self::$instance->_logger = new NF_Database_Logger();
 
+                /*
+                 * Activation Hook
+                 * TODO: Move to a permanent home.
+                 */
+                register_activation_hook( __FILE__, array( self::$instance, 'activation' ) );
             }
 
             return self::$instance;
@@ -353,6 +358,20 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         public static function config( $file_name )
         {
             return include self::$dir . 'includes/Config/' . $file_name . '.php';
+        }
+
+        /**
+         * Activation
+         * TODO: Move to a permanent home
+         */
+        public function activation() {
+            $mock_data = new NF_Database_MockData();
+            $mock_data->form_blank_form();
+            $mock_data->form_contact_form_1();
+            $mock_data->form_contact_form_2();
+            $mock_data->form_email_submission();
+            $mock_data->form_long_form();
+            $mock_data->form_kitchen_sink();
         }
 
     } // End Class Ninja_Forms
