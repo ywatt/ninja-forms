@@ -60,20 +60,20 @@ define( [], function() {
 
 		changeDomainFields: function() {
 			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
-			var fieldDomain = appDomainCollection.get( 'fields' );
-			nfRadio.channel( 'app' ).request( 'change:currentDomain', fieldDomain );
+			var fieldsDomain = appDomainCollection.get( 'fields' );
+			nfRadio.channel( 'app' ).request( 'change:currentDomain', {}, fieldsDomain );
 		},
 
 		changeDomainActions: function() {
 			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
-			var fieldDomain = appDomainCollection.get( 'actions' );
-			nfRadio.channel( 'app' ).request( 'change:currentDomain', fieldDomain );
+			var actionsDomain = appDomainCollection.get( 'actions' );
+			nfRadio.channel( 'app' ).request( 'change:currentDomain', {}, actionsDomain );
 		},
 
 		changeDomainSettings: function() {
 			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
-			var fieldDomain = appDomainCollection.get( 'settings' );
-			nfRadio.channel( 'app' ).request( 'change:currentDomain', fieldDomain );
+			var settingsDomain = appDomainCollection.get( 'settings' );
+			nfRadio.channel( 'app' ).request( 'change:currentDomain', {}, settingsDomain );
 		}
 
 	});

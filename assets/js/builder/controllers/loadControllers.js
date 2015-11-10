@@ -85,11 +85,11 @@ define(
 		FieldData,
 		FieldItemControls,
 		FieldsChangeSettingDefault,
-		FieldToggle,
+		toggleFieldSetting,
 		DrawerFieldTypeSettingChildView,
 		Fieldset,
-		FieldList,
-		FieldSubmit,
+		ListField,
+		SubmitField,
 		EditActive
 		/*
 		 * TODO: Actions domain controllers
@@ -105,11 +105,42 @@ define(
 				/*
 				 * Application controllers
 				 */
-				
+				new Hotkeys();
+				new Drawer();
+				new DrawerConfig();
+				new DomainConfig();
+				new DrawerToggleSettingGroup();
+				new UpdateDB();
+				new PreviewLink();
+				new AppMenuButtons();
+				new AppTrackChanges();
+				new AppPublishResponse();
+				new AppChangeDomain();
+				new EditActive();
+				// new Pushstate();
 				/*
 				 * Fields domain controllers
+				 * 
+				 * Field-specific controllers should be loaded before our field type controller.
+				 * This ensures that any 'init' hooks are properly registered.
 				 */
-				
+				new Fieldset();
+				new ListField();
+				new SubmitField();
+
+				new FieldTypes();
+				new FieldTypeDrag();
+				new FieldStagingDrag();
+				new SavedFields();
+				new StagedFieldsData();
+				new StagedFieldsSortable();
+				new DrawerFilterFieldTypes();
+				new MainContentFieldsSortable();
+				new FieldItemControls();
+				new FieldsChangeSettingDefault();
+				new toggleFieldSetting();
+				new DrawerFieldTypeSettingChildView();
+
 				/*
 				 * TODO: Actions domain controllers
 				 */
@@ -117,37 +148,14 @@ define(
 				/*
 				 * TODO: Settings domain controllers
 				 */
-				var hotkeys = new Hotkeys();
-				var fieldset = new Fieldset();
-				var fieldTypes = new FieldTypes();
-				var fieldTypeDrag = new FieldTypeDrag();
-				var fieldStagingDrag = new FieldStagingDrag();
-				var savedFields = new SavedFields();
-				var stagedFieldsData = new StagedFieldsData();
-				var stagedFieldsSortable = new StagedFieldsSortable();
-				var drawer = new Drawer();
-				var drawerConfig = new DrawerConfig();
-				var drawerFilterFieldTypes = new DrawerFilterFieldTypes();
-				var domainConfig = new DomainConfig();
-				var appData = new AppData();
-				var mainContentFieldsSortable = new MainContentFieldsSortable();
-				var fieldItemControls = new FieldItemControls();
-				var drawerToggleSettingGroup = new DrawerToggleSettingGroup();
-				var fieldsChangeSettingDefault = new FieldsChangeSettingDefault();
-				var fieldToggle = new FieldToggle();
-				var drawerFieldTypeSettingChildView = new DrawerFieldTypeSettingChildView();
-				var fieldList = new FieldList();
-				var fieldSubmit = new FieldSubmit();
-				var fieldData = new FieldData();
-				var updateDB = new UpdateDB();
-				var formData = new FormData();
-				var previewLink = new PreviewLink();
-				var appMenuButtons = new AppMenuButtons();
-				var appTrackChanges = new AppTrackChanges();
-				var appPublishResponse = new AppPublishResponse();
-				var appChangeDomain = new AppChangeDomain();
-				var editActive = new EditActive();
-				// var pushstate = new Pushstate();
+				
+				/*
+				 * Data controllers need to be set after every other controller has been setup, even if they aren't domain-specific.
+				 * We load them from domains to app specificity.
+				 */
+				new FieldData();
+				new FormData();
+				new AppData();
 			}
 		});
 
