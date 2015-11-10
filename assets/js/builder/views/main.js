@@ -24,7 +24,11 @@ define( ['builder/views/mainHeader'], function( mainHeaderView ) {
 		onRender: function() {
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 			var headerView = currentDomain.get( 'getMainHeaderView' ).call( currentDomain );
-			this.header.show( headerView );
+			/**
+			 * Commented out for Alpha 1 Hartnell
+			 */
+			// this.header.show( headerView );
+			
 			var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
 			this.content.show( contentView );
 

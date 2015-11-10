@@ -19,7 +19,11 @@ define( [], function() {
 
 	    		maybeRenderCancel: function() {
 	    			if ( ! nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
-	    				return _.template( jQuery( '#nf-tmpl-app-header-view-changes' ).html(), this );	    				
+						/**
+						 * Commented out for Alpha 1 Hartnell
+						 */
+	    				// return _.template( jQuery( '#nf-tmpl-app-header-view-changes' ).html(), this );	    				
+	    				return '';
 	    			} else {
 	    				return '';
 	    			}
