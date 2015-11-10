@@ -6,7 +6,7 @@
 class NF_Abstracts_Model
 {
     /**
-     * Copy of the $wpdb global
+     * Database Object
      *
      * @var string
      */
@@ -125,7 +125,7 @@ class NF_Abstracts_Model
     //-----------------------------------------------------
 
     /**
-     * Constructor
+     * NF_Abstracts_Model constructor.
      *
      * @param $db
      * @param $id
@@ -480,9 +480,9 @@ class NF_Abstracts_Model
         return $this;
     }
 
-    /*
-     * PROTECTED METHODS
-     */
+    //-----------------------------------------------------
+    // Protected Methods
+    //-----------------------------------------------------
 
     /**
      * Save Setting
