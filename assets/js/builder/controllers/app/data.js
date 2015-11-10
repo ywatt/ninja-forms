@@ -8,7 +8,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/appModel'], function( appModel ) {
+define( ['builder/models/app/appModel'], function( appModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Get the collection that represents all the parts of our application.

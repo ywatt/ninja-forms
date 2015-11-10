@@ -1,5 +1,5 @@
 /**
- * Loads all of our controllers.
+ * Loads all of our controllers using Require JS.
  * 
  * @package Ninja Forms builder
  * @subpackage Fields

@@ -50,7 +50,14 @@ define( [], function() {
 	    			} else {
 	    				return '';
 	    			}
-	    		}
+	    		},
+	    		getFieldID: function() {
+					if ( jQuery.isNumeric( this.id ) ) {
+						return 'field-' + this.id;
+					} else {
+						return this.id;
+					}
+				}
 			};
 		},
 

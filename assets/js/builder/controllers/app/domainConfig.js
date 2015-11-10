@@ -18,7 +18,7 @@
  */
 define( [
 	// Require our domain collection
-	'builder/models/appDomainCollection',
+	'builder/models/app/domainCollection',
 	// Require our fields domain files
 	'builder/views/fieldsMainHeader',
 	'builder/views/fieldsSubHeader',

@@ -66,6 +66,29 @@ define( [], function() {
 				this.clickFieldType( e );
 				nfRadio.channel( 'drawer' ).request( 'clear:filter' );
 			}
+		},
+
+		templateHelpers: function() {
+			return {
+				renderFieldTypes: function() {
+			        var html = '';
+			        var that = this;
+			        _.each( this.fieldTypes, function( id ) {
+			            var type = nfRadio.channel( 'fields' ).request( 'get:type', id );
+			            var nicename = type.get( 'nicename' );
+			            html += _.template( jQuery( '#nf-tmpl-drawer-field-type-button' ).html(), { id: id, nicename: nicename, type: type, savedField: that.isSavedField } );
+			        } );
+			        return html;
+				},
+
+				isSavedField: function() {
+					if( this.type.get( 'savedField' ) ) {
+						return 'nf-saved';
+					} else {
+						return '';
+					}
+				}
+			}
 		}
 	});
 

@@ -9,7 +9,7 @@
  * @since 3.0
  */
 define( [
-	'builder/models/drawerCollection',
+	'builder/models/app/drawerCollection',
 	'builder/views/drawerAddField',
 	'builder/views/drawerEditField',
 	'builder/views/drawerAddAction',
