@@ -1,4 +1,4 @@
-define( ['builder/views/drawerFieldTypeSettingListOption', 'builder/views/drawerFieldTypeSettingListEmpty'], function( listOptionView, listEmptyView ) {
+define( ['builder/views/fields/drawer/typeSettingListOption', 'builder/views/fields/drawer/typeSettingListEmpty'], function( listOptionView, listEmptyView ) {
 	var view = Marionette.CompositeView.extend( {
 		template: '#nf-tmpl-edit-field-setting-wrap',
 		childView: listOptionView,

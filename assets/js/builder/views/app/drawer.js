@@ -1,4 +1,12 @@
-define( ['builder/views/drawerHeaderDefault', 'builder/views/drawerContentEmpty'], function( drawerHeaderView, drawerEmptyView ) {
+/**
+ * Renders our drawer region
+ *
+ * @package Ninja Forms builder
+ * @subpackage App
+ * @copyright (c) 2015 WP Ninjas
+ * @since 3.0
+ */
+define( ['builder/views/app/drawer/headerDefault', 'builder/views/app/drawer/contentEmpty'], function( drawerHeaderView, drawerEmptyView ) {
 
 	var view = Marionette.LayoutView.extend( {
 		template: '#nf-tmpl-drawer',

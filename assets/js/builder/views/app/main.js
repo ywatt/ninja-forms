@@ -1,4 +1,4 @@
-define( ['builder/views/mainHeader'], function( mainHeaderView ) {
+define( [], function() {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: 'div',

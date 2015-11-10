@@ -1,4 +1,4 @@
-define( ['builder/views/drawerFieldTypeSetting'], function( fieldTypeSettingView ) {
+define( ['builder/views/fields/drawer/typeSetting'], function( fieldTypeSettingView ) {
 	var view = Marionette.CompositeView.extend( {
 		template: '#nf-tmpl-edit-field-setting-wrap',
 		childView: fieldTypeSettingView,

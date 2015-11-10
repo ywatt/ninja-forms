@@ -1,4 +1,4 @@
-define( ['builder/views/drawerContentViewChangesItem'], function( viewChangesItem ) {
+define( ['builder/views/app/drawer/contentViewChangesItem'], function( viewChangesItem ) {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'ul',
 		childView: viewChangesItem,

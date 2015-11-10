@@ -10,13 +10,13 @@
  */
 define( [
 	'builder/models/app/drawerCollection',
-	'builder/views/drawerAddField',
-	'builder/views/drawerEditField',
-	'builder/views/drawerAddAction',
-	'builder/views/drawerEditAction',
-	'builder/views/drawerEditFormSettings',
-	'builder/views/drawerContentViewChanges',
-	'builder/views/drawerHeaderViewChanges'
+	'builder/views/fields/drawer/addField',
+	'builder/views/fields/drawer/editField',
+	'builder/views/actions/drawer/addAction',
+	'builder/views/actions/drawer/editAction',
+	'builder/views/settings/drawer/editFormSettings',
+	'builder/views/app/drawer/contentViewChanges',
+	'builder/views/app/drawer/headerViewChanges'
 	], function(
 		drawerCollection,
 		addFieldView,

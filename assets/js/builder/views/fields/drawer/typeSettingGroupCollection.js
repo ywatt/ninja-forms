@@ -1,4 +1,4 @@
-define( ['builder/views/drawerFieldTypeSettingGroup'], function( fieldTypeSettingGroupView ) {
+define( ['builder/views/fields/drawer/typeSettingGroup'], function( fieldTypeSettingGroupView ) {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
 		childView: fieldTypeSettingGroupView,

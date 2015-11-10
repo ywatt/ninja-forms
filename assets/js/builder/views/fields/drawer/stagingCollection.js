@@ -1,4 +1,4 @@
-define( ['builder/views/drawerStagedField', 'builder/views/drawerStagedFieldsEmpty'], function( stagedFieldView, stagedFieldsEmptyView ) {
+define( ['builder/views/fields/drawer/stagedField', 'builder/views/fields/drawer/stagingEmpty'], function( stagedFieldView, stagedFieldsEmptyView ) {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
 		childView: stagedFieldView,

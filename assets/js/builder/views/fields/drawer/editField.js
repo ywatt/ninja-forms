@@ -1,4 +1,4 @@
-define( ['builder/views/drawerFieldTypeSettingGroupCollection'], function( fieldTypeSettingGroupCollectionView ) {
+define( ['builder/views/fields/drawer/typeSettingGroupCollection'], function( fieldTypeSettingGroupCollectionView ) {
 	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-drawer-content-edit-field',

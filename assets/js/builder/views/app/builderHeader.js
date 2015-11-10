@@ -1,4 +1,16 @@
-define( ['builder/views/appHeader', 'builder/views/appSubHeader'], function( appHeaderView, appSubHeaderView ) {
+/**
+ * Renders our builder header.
+ *
+ * This is a layout view and handles two regions:
+ * app - menu/buttons
+ * subapp - title, add new field, etc.
+ *
+ * @package Ninja Forms builder
+ * @subpackage App
+ * @copyright (c) 2015 WP Ninjas
+ * @since 3.0
+ */
+define( ['builder/views/app/header', 'builder/views/app/subHeader'], function( appHeaderView, appSubHeaderView ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: "div",

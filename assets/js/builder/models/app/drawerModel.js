@@ -1,4 +1,4 @@
-define( ['builder/views/drawerHeaderDefault'], function( defaultHeaderView ) {
+define( ['builder/views/app/drawer/headerDefault'], function( defaultHeaderView ) {
 	var model = Backbone.Model.extend( {
 		defaults: {
 			getHeaderView: function( data ) {
