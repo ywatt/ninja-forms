@@ -35,12 +35,13 @@ abstract class NF_Abstracts_Action
      */
     public function __construct()
     {
+        // Loads a settings array from the ActionSettings configuration file.
         $this->_settings = Ninja_Forms::config( 'ActionSettings' );
     }
 
-    /*
-     * PUBLIC METHODS
-     */
+    //-----------------------------------------------------
+    // Public Methods
+    //-----------------------------------------------------
 
     /**
      * Save
@@ -52,6 +53,13 @@ abstract class NF_Abstracts_Action
      */
     public abstract function process( $action_id, $form_id, $data );
 
+    /**
+     * Get Timing
+     *
+     * Returns the timing for an action.
+     *
+     * @return mixed
+     */
     public function get_timing()
     {
         $timing = array( 'early' => '1', 'normal' => '0', 'late' => '-1' );
@@ -59,11 +67,51 @@ abstract class NF_Abstracts_Action
         return $timing[ $this->_timing ];
     }
 
+    /**
+     * Get Priority
+     *
+     * Returns the priority for an action.
+     *
+     * @return int
+     */
     public function get_priority()
     {
         return $this->_priority;
     }
 
+    /**
+     * Get Name
+     *
+     * Returns the name of an action.
+     *
+     * @return string
+     */
+    public function get_name()
+    {
+        return $this->_name;
+    }
+
+    /**
+     * Get Settings
+     *
+     * Returns the settings for an action.
+     *
+     * @return array|mixed
+     */
+    public function get_settings()
+    {
+        return $this->_settings;
+    }
+
+    /**
+     * Sort Actions
+     *
+     * A static method for sorting two actions by timing, then priority.
+     *
+     * @param $a
+     * @param $b
+     * @return int
+     */
     public static function sort_actions( $a, $b )
     {
         if( ! isset( Ninja_Forms()->actions[ $a->get_setting( 'type' ) ] ) ) return 1;
@@ -82,13 +130,4 @@ abstract class NF_Abstracts_Action
         return $a->timing < $b->timing ? 1 : -1;
     }
 
-    public function get_name()
-    {
-        return $this->_name;
-    }
-
-    public function get_settings()
-    {
-        return $this->_settings;
-    }
-}
+} // END CLASS NF_Abstracts_Action

@@ -55,19 +55,21 @@ abstract class NF_Abstracts_Field
      */
     protected $_old_classname = '';
 
+    //-----------------------------------------------------
+    // Public Methods
+    //-----------------------------------------------------
+
     /**
      * Constructor
      */
     public function __construct()
     {
+        // Translate the nicename property.
         $this->_nicename = __( $this->_nicename, 'ninja-forms' );
 
+        // Loads a settings array from the FieldSettings configuration file.
         $this->_settings = Ninja_Forms::config( 'FieldSettings' );
     }
-
-    /*
-    * PUBLIC METHODS
-    */
 
     /**
      * Validate
@@ -80,6 +82,7 @@ abstract class NF_Abstracts_Field
     {
         $errors = array();
 
+        // Required check.
         if( isset( $field['required'] ) && $field['required'] && ! trim( $field['value'] ) ){
             $errors[] = 'Field is required.';
         }
@@ -87,6 +90,15 @@ abstract class NF_Abstracts_Field
         return $errors;
     }
 
+    /**
+     * Admin Form Element
+     *
+     * Returns the output for editing fields in a submission.
+     *
+     * @param $id
+     * @param $value
+     * @return string
+     */
     public function admin_form_element( $id, $value )
     {
         return "<input class='widefat' name='fields[$id]' value='$value' />";
@@ -119,6 +131,7 @@ abstract class NF_Abstracts_Field
 
     public function get_parent_type()
     {
+        // If a type is not set, return 'textbox'
         return ( get_parent_class() ) ? parent::_type : 'textbox';
     }
 
