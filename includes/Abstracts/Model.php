@@ -1,116 +1,209 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
+/**
+ * Class NF_Abstracts_Model
+ */
 class NF_Abstracts_Model
 {
     /**
+     * Copy of the $wpdb global
+     *
      * @var string
      */
     protected $_db = '';
 
     /**
+     * ID
+     *
+     * The ID is assigned after being saved to the database.
+     *
      * @var int
      */
     protected $_id = '';
 
     /**
+     * Temporary ID
+     *
+     * The temporary ID is used to reference unsaved objects
+     *   before they are stored in the database.
+     *
      * @var string
      */
     protected $_tmp_id = '';
 
     /**
+     * Type
+     *
+     * The type is used to pragmatically identify the type
+     *   of an object without inspecting the class.
+     *
      * @var string
      */
     protected $_type = '';
 
     /**
+     * Parent ID
+     *
+     * The ID of the parent object.
+     *
      * @var string
      */
     protected $_parent_id = '';
 
     /**
+     * Parent Type
+     *
+     * The type of the parent object.
+     *
      * @var string
      */
     protected $_parent_type = '';
 
     /**
+     * Table Name
+     *
+     * The name of the table where the model objects are stored.
+     *
      * @var string
      */
     protected $_table_name = '';
 
     /**
+     * Meta Table Name
+     *
+     * The name of the table where the object settings are stored.
+     *
      * @var string
      */
     protected $_meta_table_name = '';
 
     /**
+     * ? Deprecated ?
      * @var string
      */
     protected $_relationships_table = 'nf_relationships';
 
     /**
+     * Columns
+     *
+     * A list of settings that are stored in the main table as columns.
+     *   These settings are NOT stored in the meta table.
+     *
      * @var array
      */
     protected $_columns = array();
 
     /**
+     * Settings
+     *
+     * A list of settings that are stored in the meta table.
+     *
      * @var array
      */
     protected $_settings = array();
 
     /**
+     * Results
+     *
+     * The last results returned by a query.
+     *
      * @var array
      */
     protected $_results = array();
 
     /**
+     * Cache
+     *
+     * A Flag for using or bypassing caching.
+     *
      * @var bool
      */
     protected $_cache = TRUE;
 
+    //-----------------------------------------------------
+    // Public Methods
+    //-----------------------------------------------------
+
     /**
      * Constructor
      *
+     * @param $db
      * @param $id
+     * @param $parent_id
      */
     public function __construct( $db, $id = NULL, $parent_id = '' )
     {
+        /*
+         * Injected the Database Dependency
+         */
         $this->_db = $db;
 
+        /*
+         * Assign Database Tables using the DB prefix
+         */
+        $this->_table_name          = $this->_db->prefix . $this->_table_name;
+        $this->_meta_table_name     = $this->_db->prefix . $this->_meta_table_name;
+        $this->_relationships_table = $this->_db->prefix . $this->_relationships_table;
+
+        /*
+         * Set the object ID
+         *   Check if the ID is Permanent (int) or Temporary (string)
+         */
         if( is_numeric( $id ) ) {
             $this->_id = absint( $id );
         } else {
             $this->_tmp_id = $id;
         }
 
+        /*
+         * Set the Parent ID for context
+         */
         $this->_parent_id = $parent_id;
 
-        $this->_table_name          = $this->_db->prefix . $this->_table_name;
-        $this->_meta_table_name     = $this->_db->prefix . $this->_meta_table_name;
-        $this->_relationships_table = $this->_db->prefix . $this->_relationships_table;
-
+        /*
+         * With the ID set, query settings from the database
+         */
         $this->_settings = $this->get_settings();
 
     }
 
-    /*
-     * PUBLIC METHODS
+    /**
+     * Get the Permanent ID
+     *
+     * @return int
      */
-
     public function get_id()
     {
         return intval( $this->_id );
     }
 
+    /**
+     * Get the Temporary ID
+     *
+     * @return null|string
+     */
     public function get_tmp_id()
     {
         return $this->_tmp_id;
     }
 
+    /**
+     * Get the Type
+     *
+     * @return string
+     */
     public function get_type()
     {
         return $this->_type;
     }
 
+    /**
+     * Get a single setting with a default fallback
+     *
+     * @param string $setting
+     * @param bool $default optional
+     * @return string|int|bool
+     */
     public function get_setting( $setting, $default = FALSE )
     {
         $return = $this->get_settings( $setting );
@@ -126,12 +219,16 @@ class NF_Abstracts_Model
      */
     public function get_settings()
     {
+        // If the ID is not set, then we cannot pull settings from the Database.
         if( ! $this->_id ) return;
 
+        // Only query if settings haven't been already queried or cache is FALSE.
         if( ! $this->_settings || ! $this->_cache ) {
 
+            // Build query syntax from the columns property.
             $columns = '`' . implode( '`, `', $this->_columns ) . '`';
 
+            // Query column settings
             $results = $this->_db->get_row(
                 "
                 SELECT $columns
@@ -140,12 +237,17 @@ class NF_Abstracts_Model
                 "
             );
 
+            /*
+             * If the query returns results then
+             *   assign settings using the column name as the setting key.
+             */
             if( $results ) {
                 foreach ($this->_columns as $column) {
                     $this->_settings[$column] = $results->$column;
                 }
             }
 
+            // Query settings from the meta table.
             $meta_results = $this->_db->get_results(
                 "
                 SELECT `key`, `value`
@@ -154,15 +256,18 @@ class NF_Abstracts_Model
                 "
             );
 
+            // Assign settings to the settings property.
             foreach ($meta_results as $meta) {
                 $this->_settings[ $meta->key ] = $meta->value;
             }
         }
 
+        // Un-serialize queried settings results.
         foreach( $this->_settings as $key => $value ){
             $this->_settings[ $key ] = maybe_unserialize( $value );
         }
 
+        // Check for passed arguments to limit the returned settings.
         $only = func_get_args();
         if ( $only && is_array($only)
             // And if the array is NOT multidimensional
@@ -221,12 +326,15 @@ class NF_Abstracts_Model
     /**
      * Delete
      *
+     * Delete the object, its children, and its relationships.
+     *
      * @return bool
      */
     public function delete()
     {
         $results = array();
 
+        // Delete the object from the model's table
         $results[] = $this->_db->delete(
             $this->_table_name,
             array(
@@ -234,6 +342,7 @@ class NF_Abstracts_Model
             )
         );
 
+        // Delete settings from the model's meta table.
         $results[] = $this->_db->delete(
             $this->_meta_table_name,
             array(
@@ -241,6 +350,7 @@ class NF_Abstracts_Model
             )
         );
 
+        // Query for child objects using the relationships table.
         $children = $this->_db->get_results(
             "
             SELECT child_id, child_type
@@ -250,11 +360,13 @@ class NF_Abstracts_Model
             "
         );
 
+        // Delete each child model
         foreach( $children as $child ) {
             $model = Ninja_Forms()->form()->get_model( $child->child_id, $child->child_type );
             $model->delete();
         }
 
+        // Delete all relationships
         $this->_db->delete(
             $this->_relationships_table,
             array(
@@ -263,7 +375,7 @@ class NF_Abstracts_Model
             )
         );
 
-
+        // return False if there are no query errors.
         return in_array( FALSE, $results );
     }
 
@@ -276,17 +388,23 @@ class NF_Abstracts_Model
      */
     public function find( $parent_id = '', array $where = array() )
     {
+        // Build the query using the $where argument
         $query = $this->build_meta_query( $parent_id, $where );
 
+        // Get object IDs from the query
         $ids = $this->_db->get_col( $query );
 
+        // Get the current class name
         $class = get_class( $this );
 
         $results = array();
         foreach( $ids as $id ){
+
+            // Instantiate a new object for each ID
             $results[] = $object = new $class( $this->_db, $id, $parent_id );
         }
 
+        // Return an array of objects
         return $results;
     }
 
@@ -299,6 +417,7 @@ class NF_Abstracts_Model
      */
     public function save()
     {
+        // If the ID is not set, assign an ID
         if( ! $this->_id ){
 
             $data = array( 'created_at' => time() );
@@ -307,16 +426,19 @@ class NF_Abstracts_Model
                 $data['parent_id'] = $this->_parent_id;
             }
 
+            // Create a new row in the database
             $result = $this->_db->insert(
                 $this->_table_name,
                 $data
             );
 
+            // Assign the New ID
             $this->_id = $this->_db->insert_id;
         }
 
         $this->_save_settings();
 
+        // If a Temporary ID is set, return it along with the newly assigned ID.
         if( $this->_tmp_id ){
             return array( $this->_tmp_id => $this->_id );
         }
@@ -330,19 +452,31 @@ class NF_Abstracts_Model
      */
     public function cache( $cache = '' )
     {
+        // Set the Cache Flag Property.
         if( $cache !== '' ) {
             $this->_cache = $cache;
         }
 
+        // Return the current object for method chaining.
         return $this;
     }
 
+    /**
+     * Add Parent
+     *
+     * Set the Parent ID and Parent Type properties
+     *
+     * @param $parent_id
+     * @param $parent_type
+     * @return $this
+     */
     public function add_parent( $parent_id, $parent_type )
     {
         $this->_parent_id = $parent_id;
 
         $this->_parent_type = $parent_type;
 
+        // Return the current object for method chaining.
         return $this;
     }
 
@@ -353,12 +487,15 @@ class NF_Abstracts_Model
     /**
      * Save Setting
      *
+     * Save a single setting.
+     *
      * @param $key
      * @param $value
      * @return bool|false|int
      */
     protected function _save_setting( $key, $value )
     {
+        // If the setting is a column, save the settings to the model's table.
         if( in_array( $key, $this->_columns ) ){
 
             return $this->_db->update(
@@ -372,6 +509,7 @@ class NF_Abstracts_Model
             );
         }
 
+        // If the settings is not a column, attempt to update the value in the model's meta table.
         $result = $this->_db->update(
             $this->_meta_table_name,
             array(
@@ -383,8 +521,8 @@ class NF_Abstracts_Model
             )
         );
 
+        // If nothing was updated, then a new row needs to be created.
         if( 0 === $result ){
-            // Nothing to Update. Row needs to be created.
             $result = $this->_db->insert(
                 $this->_meta_table_name,
                 array(
@@ -398,6 +536,8 @@ class NF_Abstracts_Model
 
     /**
      * Save Settings
+     *
+     * Save all settings.
      *
      * @return bool
      */
@@ -415,10 +555,17 @@ class NF_Abstracts_Model
         return $this->_results;
     }
 
+    /**
+     * Save Parent Relationship
+     *
+     * @return $this
+     */
     protected function _save_parent_relationship()
     {
+        // ID, Type, Parent ID, and Parent Type are required for creating a relationship.
         if( ! $this->_id || ! $this->_type || ! $this->_parent_id || ! $this->_parent_type ) return $this;
 
+        // Check to see if a relationship exists.
         $this->_db->get_results(
             "
           SELECT *
@@ -428,6 +575,7 @@ class NF_Abstracts_Model
           "
         );
 
+        // If a relationship does not exists, then create one.
         if( 0 == $this->_db->num_rows ){
 
             $this->_db->insert(
@@ -447,9 +595,17 @@ class NF_Abstracts_Model
             );
         }
 
+        // Return the current object for method chaining.
         return $this;
     }
 
+    /**
+     * Build Meta Query
+     *
+     * @param string $parent_id
+     * @param array $where
+     * @return string
+     */
     protected function build_meta_query( $parent_id = '', array $where = array() )
     {
         $join_statement = array();
