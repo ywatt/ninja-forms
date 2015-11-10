@@ -29,7 +29,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         /**
          * @since 3.0
          */
-        const VERSION = '2.9.27';
+        const VERSION = '3.0 Alpha-1-Hartnell';
 
         /**
          * @since 3.0

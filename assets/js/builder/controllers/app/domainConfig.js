@@ -70,6 +70,7 @@ define( [
 						return new fieldsMainContentFieldCollectionView( { collection: collection } );
 					}
 				},
+
 				/**
 				 * Commented out for Alpha 1 Hartnell
 				 */
