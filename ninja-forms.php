@@ -383,9 +383,34 @@ add_action( 'admin_notices', 'nf_alpha_release_admin_notice' );
 function nf_alpha_release_admin_notice()
 {
     ?>
-    <div class="error">
-        <h3>Ninja Forms 3.0 - ALPHA</h3>
+    <style>
+        .nf-alpha-notice ul {
+            list-style-type: disc;
+            padding-left: 40px;
+        }
+    </style>
+    <div class="error nf-alpha-notice">
+        <h3>Ninja Forms 3.0 - ALPHA 1 - Hartnell</h3>
         <p><strong>NOTICE:</strong> Installed is an Alpha Release of Ninja Forms. This is not intended for production.</p>
+        <p>Please keep a few things in mind while exploring:</p>
+        <ul>
+            <li><strong>DO NOT</strong> attempt to install this release on a live website. (If this site falls in that category, remove this plugin)</li>
+            <li><strong>DO</strong> install this on a clean WordPress install; by this we mean a completely new WordPress installation to which Ninja Forms 2.9.x or earlier has never been installed.</li>
+            <li>There will be database conflicts if you install this alongside 2.9.x, even if 2.9.x has been deactivated or deleted.</li>
+            <li>This ALPHA is best viewed at <strong>1039px wide or greater.</strong> This is because we have not fully implented the responsive UI thus far.</li>
+            <li>This release is meant to expose you to the following...
+                <ul>
+                    <li>Edit the default forms</li>
+                    <li>Create fields</li>
+                    <li>Change field settings</li>
+                    <li>Duplicate fields</li>
+                    <li>Reorder fields</li>
+                    <li>Delete fields</li>
+                    <li>Preview the default form that you’ve edited on the front end</li>
+                    <li>**If you need to reset your forms back to their default state for any reason, go to Forms in the WordPress dashboard and click Mock Data.</li>
+                </ul>
+            </li>
+        </ul>
         <p>Please submit all <strong>feedback</strong> to respective blog post on <a href="http://developer.ninjaforms.com/tag/alpha/">developer.ninjaforms.com</a></p>
     </div>
     <?php
