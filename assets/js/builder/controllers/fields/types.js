@@ -13,8 +13,8 @@
  */
 define( [
 	'builder/models/fields/typeCollection',
-	'builder/models/fieldTypeSettingCollection',
-	'builder/models/fieldTypeSettingGroupCollection',
+	'builder/models/fields/typeSettingCollection',
+	'builder/models/fields/typeSettingGroupCollection',
 	'builder/models/fields/typeSectionCollection'
 	], function(
 	fieldTypeCollection,

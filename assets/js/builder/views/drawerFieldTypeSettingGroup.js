@@ -30,6 +30,27 @@ define( ['builder/views/drawerFieldTypeSettingCollection'], function( fieldTypeS
 
 		clickToggleGroup: function( e ) {
 			nfRadio.channel( 'drawer' ).trigger( 'click:toggleSettingGroup', e, this.model );
+		},
+
+		templateHelpers: function() {
+			return {
+				renderLabel: function() {
+					if ( '' != this.label ) {
+						this.arrowDir = 'down';
+						return _.template( jQuery( '#nf-tmpl-drawer-content-edit-field-setting-group-label' ).html(), this );
+					} else {
+						return '';
+					}
+				},
+
+				renderArrowDir: function() {
+					if ( this.display ) {
+						return 'up';
+					} else {
+						return 'down';
+					}
+				}
+			}
 		}
 	});
 
