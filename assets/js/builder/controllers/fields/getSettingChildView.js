@@ -9,7 +9,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/drawerFieldTypeSetting'], function( fieldTypeSettingView ) {
+define( ['builder/views/fields/drawer/typeSetting'], function( fieldTypeSettingView ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Respond to requests for field settings child views.

@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/fieldTypeSectionCollection'], function( fieldTypeSectionCollection ) {
+define( ['builder/models/fields/typeSectionCollection'], function( fieldTypeSectionCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Create our collection for saved fields

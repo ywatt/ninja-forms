@@ -12,10 +12,10 @@
  * @since 3.0
  */
 define( [
-	'builder/models/fieldTypeCollection',
-	'builder/models/fieldTypeSettingCollection',
-	'builder/models/fieldTypeSettingGroupCollection',
-	'builder/models/fieldTypeSectionCollection'
+	'builder/models/fields/typeCollection',
+	'builder/models/fields/typeSettingCollection',
+	'builder/models/fields/typeSettingGroupCollection',
+	'builder/models/fields/typeSectionCollection'
 	], function(
 	fieldTypeCollection,
 	fieldTypeSettingCollection,
