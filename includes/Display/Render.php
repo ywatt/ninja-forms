@@ -49,7 +49,7 @@ final class NF_Display_Render
 
             $settings = $field->get_settings();
 
-            $settings[ 'templates' ] = $templates;
+            $settings[ 'element_templates' ] = $templates;
             $settings[ 'old_classname' ] = $field_class->get_old_classname();
             $settings[ 'wrap_template' ] = $field_class->get_wrap_template();
 
@@ -117,7 +117,7 @@ final class NF_Display_Render
                 self::load_template('fields-' . $template);
             }
 
-            $field[ 'settings' ][ 'templates' ] = $templates;
+            $field[ 'settings' ][ 'element_templates' ] = $templates;
             $field[ 'settings' ][ 'old_classname' ] = $field_class->get_old_classname();
             $field[ 'settings' ][ 'wrap_tempalte' ] = $field_class->get_wrap_template();
 
