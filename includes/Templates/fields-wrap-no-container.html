@@ -1,0 +1,10 @@
+<script id="nf-tmpl-field-wrap" type="text/template">
+
+        <%= ( 'above' == label_pos || 'left' == label_pos ) ? renderLabel() : '' %>
+
+        <%= renderElement() %>
+
+        <%= ( 'below' == label_pos || 'right' == label_pos ) ? renderLabel() : '' %>
+
+        <div class="nf-error-wrap"></div>
+</script>

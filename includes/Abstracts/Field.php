@@ -51,6 +51,11 @@ abstract class NF_Abstracts_Field
     protected $_templates = array();
 
     /**
+     * @var string
+     */
+    protected $_wrap_template = 'wrap';
+
+    /**
      * @var array
      */
     protected $_old_classname = '';
@@ -143,6 +148,11 @@ abstract class NF_Abstracts_Field
     public function get_templates()
     {
         return $this->_templates;
+    }
+
+    public function get_wrap_template()
+    {
+        return $this->_wrap_template;
     }
 
     public function get_old_classname()
