@@ -39,9 +39,9 @@ define( ['builder/models/fields/listOptionCollection', 'builder/views/fields/dra
 		 */
 		createOptionCollection: function( model ) {
 			if ( ! model.get( 'options' ) ) {
-				model.set( 'options', [ { calc: 1, label: 'One', value: 'one' }, { calc: 2, label: 'Two', value: 'two' }, { calc: 3, label: 'Three', value: 'three' } ] );
+				model.set( 'options', [ { calc: 1, label: 'One', value: 'one' }, { calc: 2, label: 'Two', value: 'two' }, { calc: 3, label: 'Three', value: 'three' } ], { silent: true } );
 			}
-			model.set( 'options', new listOptionCollection( model.get( 'options' ) ) );
+			model.set( 'options', new listOptionCollection( model.get( 'options' ) ), { silent: true } );
 		},
 
 		/**

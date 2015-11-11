@@ -21,10 +21,12 @@ define(
 		'builder/controllers/app/previewLink',
 		'builder/controllers/app/menuButtons',
 		'builder/controllers/app/trackChanges',
+		'builder/controllers/app/undoChanges',
 		'builder/controllers/app/publishResponse',
 		'builder/controllers/app/changeDomain',
 		'builder/controllers/app/pushstate',
 		'builder/controllers/app/hotkeys',
+		'builder/controllers/app/cleanState',
 		/*
 		 * Fields domain controllers
 		 */
@@ -67,10 +69,12 @@ define(
 		PreviewLink,
 		AppMenuButtons,
 		AppTrackChanges,
+		AppUndoChanges,
 		AppPublishResponse,
 		AppChangeDomain,
 		Pushstate,
 		Hotkeys,
+		CleanState,
 		/*
 		 * Fields domain controllers
 		 */
@@ -114,9 +118,11 @@ define(
 				new PreviewLink();
 				new AppMenuButtons();
 				new AppTrackChanges();
+				new AppUndoChanges();
 				new AppPublishResponse();
 				new AppChangeDomain();
 				new EditActive();
+				new CleanState();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers

@@ -77,7 +77,7 @@ define( [
 			// Respond to requests to get field type, collection, settings, and sections
 			nfRadio.channel( 'fields' ).reply( 'get:type', this.getFieldType, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeCollection', this.getTypeCollection, this );
-			nfRadio.channel( 'fields' ).reply( 'get:typeSetting', this.getTypeSetting, this );
+			nfRadio.channel( 'fields' ).reply( 'get:settingModel', this.getSettingModel, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeSections', this.getTypeSections, this );
 			// Listen to clicks on field types		
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addStagedField );
@@ -114,14 +114,17 @@ define( [
          * @param  string 			search 	setting name
          * @return backbone.model        	setting model
          */
-        getTypeSetting: function( type, search ) {
+        getSettingModel: function( name ) {
         	var setting = false;
-			_.find( this.collection.get( type ).get('settingGroups' ).models, function( group ) {
-				setting = group.get( 'settings' ).findWhere( { name: search } );
-				if ( setting ) {
-					return true;
-				}
-			} );
+        	_.each( this.collection.models, function( type ) {
+				_.find( type.get('settingGroups' ).models, function( group ) {
+					setting = group.get( 'settings' ).findWhere( { name: name } );
+					if ( setting ) {
+						return true;
+					}
+				} );
+        	} );
+
 			return setting;
         },
 

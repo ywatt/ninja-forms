@@ -213,38 +213,31 @@
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
     <%
+    var objectLabel = model.get( 'label' );
+    var objectType = model.get( 'objectType' );
+    var setting = nfRadio.channel( 'fields' ).request( 'get:settingModel', attr );
 
-    switch( type ) {
-        case 'change':
-            var id = object.get( 'id' );
-            var objectLabel = object.get( 'label' );
-            var objectType = object.get( 'objectType' );
-            var setting = Object.keys( before )[0];
-            if ( 'order' != setting ) {
-                var typeSetting = nfRadio.channel( 'data' ).request( 'get:fieldTypeSetting', object.get( 'type' ), setting );
-                var settingLabel = typeSetting.get( 'label' );
-                var dashicon = 'admin-generic';
-            } else {
-                var settingLabel = 'Order';
-                var dashicon = 'sort';
-            }
+    if ( 0 == before ) {
+        before = 'off';
+    } else if ( 1 == before ) {
+        before = 'on';
+    }
 
-            var msg = objectType + ': ' + objectLabel + ' ' + settingLabel + ' changed from ' + before[ setting ] + ' to ' + after[ setting ];
-            break;
-        case 'add':
-            var dashicon = 'plus-alt';
-            var msg = 'Add First Name field';
-            break;
-        case 'remove':
-            var dashicon = 'dismiss';
-            var msg = 'Delete First Name field';
+    if ( 0 == after ) {
+        after = 'off';
+    } else if ( 1 == after ) {
+        after = 'on';
+    }
+    switch( action ) {
+        case 'changeSetting':
+            var dashicon = 'admin-generic';
             break;
     }
+
     %>
     <li>
-        <span class="dashicons dashicons-<%= dashicon %>"></span> <%= msg %>
+        <span class="dashicons dashicons-<%= dashicon %>"></span> <%= objectType %> <%= objectLabel %> <%= setting.get( 'label' ) %> <%= before %> to <%= after %>
     </li>
-    %>
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field" type="text/template">

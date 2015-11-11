@@ -23,8 +23,15 @@ define( ['builder/views/fields/drawer/typeSetting'], function( fieldTypeSettingV
 	    		renderSetting: function(){
 					return _.template( jQuery( '#nf-tmpl-edit-field-setting-' + this.type ).html(), this );
 				},
-
-			};
+				
+				renderWidth: function() {
+					if ( 'undefined' != typeof this.width ) {
+						return this.width;
+					} else {
+						return 'one-half';
+					}
+				}
+			}
 		},
 
 		attachHtml: function( collectionView, childView ) {

@@ -4,7 +4,7 @@
  * TODO: make dynamic
  * 
  * @package Ninja Forms builder
- * @subpackage Fields
+ * @subpackage Actions
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */

@@ -41,7 +41,7 @@ define( [], function() {
 						return 'one-half';
 					}
 				}
-			};
+			}
 		},
 
 		events: {

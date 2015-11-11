@@ -11,7 +11,10 @@ define( [], function() {
 		defaults: {
 			objectType: 'Field',
 			options: false,
+			label: '',
+			placeholder: '',
 			label_pos: 'above',
+			required: 0,
 			editActive: false
 		},
 

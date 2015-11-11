@@ -47,7 +47,14 @@ define( ['builder/views/fields/drawer/typeSettingListOption', 'builder/views/fie
 	    		renderSetting: function(){
 					return _.template( jQuery( '#nf-tmpl-edit-field-setting-' + this.type ).html(), this );
 				},
-
+				
+				renderWidth: function() {
+					if ( 'undefined' != typeof this.width ) {
+						return this.width;
+					} else {
+						return 'one-half';
+					}
+				}
 			};
 		},
 
