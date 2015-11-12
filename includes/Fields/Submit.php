@@ -19,7 +19,7 @@ class NF_Fields_Submit extends NF_Fields_Button
 
         $this->_nicename = __( 'Submit', 'ninja-forms' );
 
-        $settings = Ninja_Forms::config( 'SubmitFieldSettings' );
+        $settings = Ninja_Forms::config( 'FieldSubmitSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );
 
