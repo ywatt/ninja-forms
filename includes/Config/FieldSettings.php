@@ -206,7 +206,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
     'rich_text_editor' => array(
         'name' => 'rich_text_editor',
         'type' => 'checkbox',
-        'value' => 'unchecked'
+        'value' => 'unchecked',
     'label' => __( 'Show Rich Text Editor', 'ninja-forms' ),
     'width' => '',
     'group' => ''
@@ -260,7 +260,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
       'number_of_stars' => array(
         'name' => 'number_of_stars',
         'type' => 'textbox',
-        'value' => 5
+        'value' => 5,
         'label' => __( 'Number of stars', 'ninja-forms' ),
         'width' => '',
         'group' => ''
