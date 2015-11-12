@@ -53,6 +53,8 @@ define( [
 						display: group.display,
 						settings: new fieldTypeSettingCollection( group.settings ),
 					}
+					// Add the tmp object to our setting groups collection
+					settingGroups.add( groupTmp );
 				} );
 
 				// Add our field type to the appropriate drawer section.
