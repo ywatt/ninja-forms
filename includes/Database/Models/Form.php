@@ -114,9 +114,9 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $action->update_settings( $settings )->save();
         }
 
-        add_action( 'admin_notices', function() use ( $form_id ){
-            Ninja_Forms()->template( 'admin-notice-form-import.html.php', compact( 'form_id' ) );
-        });
+//        add_action( 'admin_notices', function() use ( $form_id ){
+//            Ninja_Forms()->template( 'admin-notice-form-import.html.php', compact( 'form_id' ) );
+//        });
     }
 
     public static function duplicate( $form_id )
