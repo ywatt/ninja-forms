@@ -21,7 +21,7 @@ class NF_Fields_Date extends NF_Abstracts_Input
 
         $this->_nicename = __( 'Date', 'ninja-forms' );
 
-        $settings = Ninja_Forms::config( 'DateFieldSettings' );
+        $settings = Ninja_Forms::config( 'FieldDateSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );
     }
