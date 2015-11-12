@@ -314,16 +314,19 @@ final class NF_Database_MockData
                 'label'			=> 'Select List',
                 'options'      => array(
                     array(
-                    'label' => 'Option One',
-                    'value' => 1
+                        'label' => 'Option One',
+                        'value' => 1,
+                        'calc' => ''
                     ),
                     array(
-                    'label' => 'Option Two',
-                    'value' => 2
+                        'label' => 'Option Two',
+                        'value' => 2,
+                        'calc' => ''
                     ),
                     array(
-                    'label' => 'Option Three',
-                    'value' => 3
+                        'label' => 'Option Three',
+                        'value' => 3,
+                        'calc' => ''
                     )
                 )
             ),
@@ -332,16 +335,19 @@ final class NF_Database_MockData
                 'label'			=> 'Radio List',
                 'options'      => array(
                     array(
-                    'label' => 'Option One',
-                    'value' => 1
+                        'label' => 'Option One',
+                        'value' => 1,
+                        'calc' => ''
                     ),
                     array(
-                    'label' => 'Option Two',
-                    'value' => 2
+                        'label' => 'Option Two',
+                        'value' => 2,
+                        'calc' => ''
                     ),
                     array(
-                    'label' => 'Option Three',
-                    'value' => 3
+                        'label' => 'Option Three',
+                        'value' => 3,
+                        'calc' => ''
                     )
                 )
             ),
