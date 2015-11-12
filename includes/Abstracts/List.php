@@ -16,12 +16,6 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
     public function __construct()
     {
         parent::__construct();
-
-        $settings = Ninja_Forms::config( 'FieldListSettings' );
-
-        $this->_settings = array_merge( $this->_settings, $settings );
-
-        unset( $this->_settings[ 'placeholder' ] );
     }
 
     public function get_parent_type()

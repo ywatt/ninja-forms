@@ -71,9 +71,6 @@ abstract class NF_Abstracts_Field
     {
         // Translate the nicename property.
         $this->_nicename = __( $this->_nicename, 'ninja-forms' );
-
-        // Loads a settings array from the FieldSettings configuration file.
-        $this->_settings = Ninja_Forms::config( 'FieldSettings' );
     }
 
     /**
@@ -158,6 +155,24 @@ abstract class NF_Abstracts_Field
     public function get_old_classname()
     {
         return $this->_old_classname;
+    }
+
+    protected function load_settings( $only_settings = array() )
+    {
+        // Loads a settings array from the FieldSettings configuration file.
+        $settings = Ninja_Forms::config( 'FieldSettings' );
+
+        if( ! empty( $only_settings ) ){
+
+            foreach( $settings as $key => $setting ){
+
+                if( ! in_array( $key, $only_settings) ){
+                    unset( $settings[ $key ] );
+                }
+            }
+        }
+
+        return $settings;
     }
 
 }

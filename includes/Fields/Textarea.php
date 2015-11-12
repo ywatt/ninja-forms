@@ -19,10 +19,6 @@ class NF_Fields_Textarea extends NF_Abstracts_Field
         parent::__construct();
 
         $this->_nicename = __( 'Textarea', 'ninja-forms' );
-
-        $settings = Ninja_Forms::config( 'FieldInputSettings' );
-
-        $this->_settings = array_merge( $this->_settings, $settings );
     }
 
     public function admin_form_element( $id, $value )

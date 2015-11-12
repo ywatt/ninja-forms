@@ -19,9 +19,7 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
     {
         parent::__construct();
 
-        $settings = Ninja_Forms::config( 'FieldTextboxSettings' );
-
-        $this->_settings = array_merge( $this->_settings, $settings );
+        $this->_settings = $this->load_settings( array( 'label', 'label_pos', 'default' ) );
 
         $this->_nicename = __( 'Textbox', 'ninja-forms' );
     }

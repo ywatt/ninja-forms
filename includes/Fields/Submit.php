@@ -19,14 +19,6 @@ class NF_Fields_Submit extends NF_Fields_Button
 
         $this->_nicename = __( 'Submit', 'ninja-forms' );
 
-        $settings = Ninja_Forms::config( 'FieldSubmitSettings' );
-
-        $this->_settings = array_merge( $this->_settings, $settings );
-
-        unset( $this->_settings[ 'label_pos' ] );
-        unset( $this->_settings[ 'placeholder' ] );
-        unset( $this->_settings[ 'required' ] );
-
         add_filter( 'nf_sub_hidden_field_types', array( $this, 'hide_field_type' ) );
     }
 

@@ -14,9 +14,5 @@ abstract class NF_Abstracts_UserInfo extends NF_Abstracts_Input
     public function __construct()
     {
         parent::__construct();
-
-        $settings = Ninja_Forms::config( 'FieldUserInfoSettings' );
-
-        $this->_settings = array_merge( $this->_settings, $settings );
     }
 }

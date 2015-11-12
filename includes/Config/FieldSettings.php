@@ -316,4 +316,167 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => ''
     ),
 
+    /*
+     * DATEPICKER
+     */
+
+    'datepicker' => array(
+        'name' => 'datepicker',
+        'type' => 'toggle',
+        'label' => __( 'Use the JQueryUI datepicker.', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced'
+    ),
+
+    /*
+     * DEFAULT VALUE
+     */
+
+
+    'default' => array(
+        'name'    => 'default',
+        'type'    => 'fieldset',
+        'label'   => __( 'Default Value', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'primary',
+        'settings' => array(
+            array(
+                'name' => 'default_type',
+                'label' => 'Type',
+                'type' => 'select',
+                'options' => array(
+                    array(
+                        'value' => 'none',
+                        'label' => __( 'None', 'ninja-forms' )
+                    ),
+                    array(
+                        'value' => 'post_id',
+                        'label' => __( 'Post / Page ID', 'ninja-forms' )
+                    ),
+                    array(
+                        'value' => 'post_title',
+                        'label' => __( 'Post / Page Title', 'ninja-forms' )
+                    ),
+                    array(
+                        'value' => 'post_url',
+                        'label' => __( 'Post / Page URL', 'ninja-forms' )
+                    ),
+                    array(
+                        'value' => 'query_string',
+                        'label' => __( 'Query String Variable', 'ninja-forms' )
+                    ),
+                    array(
+                        'value' => 'custom',
+                        'label' => __( 'Custom Default Value', 'ninja-forms' )
+                    )
+                ),
+            ),
+            array(
+                'name' => 'default_value',
+                'label' => 'Value',
+                'type' => 'textbox',
+                'width' => 'one-half'
+            )
+        )
+    ),
+
+    /*
+     * OPTIONS
+     */
+
+    'options' => array(
+        'name' => 'options',
+        'type' => 'list-repeater',
+        'label' => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
+        'width' => 'full',
+        'group' => 'primary'
+    ),
+
+    /*
+     * TIME SETTING
+     */
+
+    'time_submit' => array(
+        'name' => 'time_submit',
+        'type' => 'textbox',
+        'label' => __( 'Number of seconds for timed submit.', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced'
+    ),
+
+    /*
+     * MASK
+     */
+
+    'mask' => array(
+        'name' => 'mask',
+        'type' => 'select',
+        'label' => __( 'Input Mask', 'ninja-forms'),
+        'width' => 'one-half',
+        'group' => 'restrictions',
+        'options' => array(
+            array(
+                'label' => __( 'US Phone', 'ninja-forms' ),
+                'value' => 'us-phone'
+            ),
+            array(
+                'label' => __( 'Date', 'ninja-forms' ),
+                'value' => 'date'
+            ),
+        )
+    ),
+
+    /*
+     * INPUT LIMIT SET
+     */
+
+    'input_limit_set' => array(
+        'name' => 'input_limit_set',
+        'type' => 'fieldset',
+        'label' => __( 'Limit Input to this Number', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'restrictions',
+        'settings' => array(
+            array(
+                'name' => 'input_limit',
+                'type' => 'textbox',
+                'placeholder' => 150,
+                'width' => 'one-half'
+            ),
+            array(
+                'name' => 'input_limit_type',
+                'type' => 'select',
+                'options' => array(
+                    array(
+                        'label' => __( 'Character(s)', 'ninja-forms' ),
+                        'value' => 'characters'
+                    ),
+                    array(
+                        'label' => __( 'Word(s)', 'ninja-forms' ),
+                        'value' => 'words'
+                    ),
+                )
+            ),
+            array(
+                'name' => 'input_limit_message',
+                'type' => 'textbox',
+                'label' => __( 'Text to Appear After Counter', 'ninja-forms' ),
+                'placeholder' => __( 'Character(s) left' ),
+                'width' => 'full'
+            )
+        )
+    ),
+
+    /*
+     * USER INFO DEFAULT VALUE
+     */
+
+    'user_info_default_value' => array(
+        'name' => 'default_value',
+        'type' => 'toggle',
+        'label' => __( 'Default to User Info if logged-in', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary'
+    ),
+
 ));
