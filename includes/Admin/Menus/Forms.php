@@ -120,14 +120,28 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $settings = $field->get_settings();
 
-            $master_settings_list = array_merge( $master_settings_list, $settings );
-
             $settings_groups = Ninja_Forms::config( 'SettingsGroups' );
 
             foreach( $settings as $setting ){
 
                 $group = $setting[ 'group' ];
                 $settings_groups[ $group ][ 'settings' ][] = $setting;
+
+                if( isset( $setting[ 'name' ] ) ){
+
+                    if( isset( $setting[ 'type' ] ) && 'fieldset' == $setting[ 'type' ] ){
+
+                        foreach( $setting[ 'settings' ] as $fieldset_setting ){
+
+                            $setting_name = $fieldset_setting[ 'name' ];
+                            $master_settings_list[ $setting_name ] = $fieldset_setting;
+                        }
+                    } else {
+
+                        $setting_name = $setting[ 'name' ];
+                        $master_settings_list[ $setting_name ] = $setting;
+                    }
+                }
             }
 
             foreach( $settings_groups as $id => $group ) {
