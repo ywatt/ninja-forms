@@ -112,11 +112,15 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     {
         $field_type_settings = array();
 
+        $master_settings_list = array();
+
         foreach( Ninja_Forms()->fields as $field ){
 
             $name = $field->get_name();
 
             $settings = $field->get_settings();
+
+            $master_settings_list = array_merge( $master_settings_list, $settings );
 
             $settings_groups = Ninja_Forms::config( 'SettingsGroups' );
 
@@ -145,6 +149,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         ?>
         <script>
             var fieldTypeData = <?php echo wp_json_encode( $field_type_settings ); ?>;
+            var fieldSettings = <?php echo wp_json_encode( $master_settings_list ); ?>;
             // console.log( fieldTypeData );
         </script>
         <?php
