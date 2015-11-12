@@ -212,31 +212,8 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
-    <%
-    var objectLabel = model.get( 'label' );
-    var objectType = model.get( 'objectType' );
-    var setting = nfRadio.channel( 'fields' ).request( 'get:settingModel', attr );
-
-    if ( 0 == before ) {
-        before = 'off';
-    } else if ( 1 == before ) {
-        before = 'on';
-    }
-
-    if ( 0 == after ) {
-        after = 'off';
-    } else if ( 1 == after ) {
-        after = 'on';
-    }
-    switch( action ) {
-        case 'changeSetting':
-            var dashicon = 'admin-generic';
-            break;
-    }
-
-    %>
     <li>
-        <span class="dashicons dashicons-<%= dashicon %>"></span> <%= objectType %> <%= objectLabel %> <%= setting.get( 'label' ) %> <%= before %> to <%= after %>
+        <a href="#" class="undoSingle" style="text-decoration:none;"><span class="dashicons dashicons-image-rotate"></span></a> <span class="dashicons dashicons-<%= dashicon %>"></span> <%= label %>
     </li>
 </script>
 
@@ -336,7 +313,7 @@
 <script id="nf-tmpl-drawer-header-view-changes" type="text/template">
     <header class="nf-drawer-header">
         <div>
-            <a href="#" class="nf-button secondary undoChanges" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
+            <a href="#" class="nf-button secondary undoAllChanges" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
         </div>
         <a href="#" class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
     </header>

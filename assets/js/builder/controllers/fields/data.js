@@ -70,7 +70,7 @@ define( ['builder/models/fields/fieldCollection'], function( fieldCollection ) {
 		 * @param  Array 	order optional order array like: [field-1, field-4, field-2]
 		 * @return void
 		 */
-		sortFields: function( order ) {
+		sortFields: function( order, ui ) {
 			// Get our sortable element
 			var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
 			if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) { // Make sure that sortable is enabled
@@ -78,6 +78,8 @@ define( ['builder/models/fields/fieldCollection'], function( fieldCollection ) {
 				var order = order || jQuery( sortableEl ).sortable( 'toArray' );
 				// Loop through all of our fields and update their order value
 				_.each( this.collection.models, function( field ) {
+					// Get our current position.
+					var oldPos = field.get( 'order' );
 					var id = field.get( 'id' );
 					if ( jQuery.isNumeric( id ) ) {
 						var search = 'field-' + id;
@@ -85,10 +87,11 @@ define( ['builder/models/fields/fieldCollection'], function( fieldCollection ) {
 						var search = id;
 					}
 					// Get the index of our field inside our order array
-					var pos = order.indexOf( search ) + 1;
-					field.set( 'order', pos );
+					var newPos = order.indexOf( search ) + 1;
+					field.set( 'order', newPos );
 				} );
 				this.collection.sort();
+
 				// Set our 'clean' status to false so that we get a notice to publish changes
 				nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 				// Update our preview

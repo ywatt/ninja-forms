@@ -46,7 +46,7 @@ define(
 		'builder/controllers/fields/fieldset',
 		'builder/controllers/fields/listField',
 		'builder/controllers/fields/submitField',
-		'builder/controllers/fields/editActive',		
+		'builder/controllers/fields/editActive',	
 		/*
 		 * TODO: Actions domain controllers
 		 */

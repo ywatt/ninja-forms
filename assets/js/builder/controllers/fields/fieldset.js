@@ -13,12 +13,7 @@ define( ['builder/views/fields/drawer/typeSettingFieldset','builder/models/field
 			// When a list type field is initialized, create an option collection.
 			this.listenTo( nfRadio.channel( 'fields-fieldset' ), 'init:fieldTypeSettingModel', this.createSettingsCollection );
 		},
-		/**
-		 * Return our 
-		 * @since  version
-		 * @param  {[type]} model [description]
-		 * @return {[type]}       [description]
-		 */
+
 		getSettingChildView: function( model ) {
 			return fieldsetView;
 		},
