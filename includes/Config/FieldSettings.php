@@ -97,7 +97,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
     ),
 
-    /*
+   /*
     * Checkbox Default Value
     */
 
@@ -119,7 +119,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary'
     ),
 
-    /*
+   /*
     * Send Form Copy
     */
 
@@ -132,7 +132,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => ''
     ),
 
-    /*
+   /*
     * Spam Question
     */
 
@@ -145,7 +145,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => ''
     ),
 
-    /*
+   /*
     * Spam Answer
     */
 
@@ -157,7 +157,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => ''
     ),
 
-    /*
+   /*
     * Timed Submit Label
     */
 
@@ -170,7 +170,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => '',
         'group' => ''
     ),
-    /*
+
+   /*
     * Timed Submit Timer
     */
 
@@ -184,7 +185,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => ''
     ),
 
-    /*
+   /*
     * Timed Submit Countdown
     */
 
@@ -199,7 +200,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => ''
     ),
 
-    /*
+   /*
     * Show Rich Text Editor
     */
 
@@ -207,16 +208,16 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'name' => 'rich_text_editor',
         'type' => 'checkbox',
         'value' => 'unchecked',
-    'label' => __( 'Show Rich Text Editor', 'ninja-forms' ),
-    'width' => '',
-    'group' => ''
+         'label' => __( 'Show Rich Text Editor', 'ninja-forms' ),
+        'width' => '',
+        'group' => ''
     ),
 
-      /*
-      * Show Media Upload Button
-      */
+   /*
+    * Show Media Upload Button
+    */
 
-      'media_upload_button' => array(
+    'media_upload_button' => array(
         'name' => 'media_upload_button',
         'type' => 'checkbox',
         'value' => 'unchecked',
@@ -225,24 +226,24 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => ''
     ),
 
-      /*
-      * Disable Mobile Rich Text Editor
-      */
+   /*
+    * Disable Mobile Rich Text Editor
+    */
 
-      'disable_moblile_rich_text_editor' => array(
+    'disable_moblile_rich_text_editor' => array(
         'name' => 'disable_mobile_rich_text_editor',
         'type' => 'checkbox',
         'value' => 'unchecked',
         'label' => __( 'Disable Rich Text Editor on Mobile', 'ninja-forms' ),
         'width' => '',
         'group' => ''
-    ),
+        ),
 
-      /*
-      * Password Registration checkbox
-      */
+   /*
+    * Password Registration checkbox
+    */
 
-      'password_registration_checkbox' => array(
+    'password_registration_checkbox' => array(
         'name' => 'password_registration_checkbox',
         'type' => 'checkbox',
         'value' => 'unchecked',
@@ -253,35 +254,36 @@ return apply_filters( 'ninja-forms-field-settings', array(
     ),
 
 
-      /*
-      * Number of Stars Textbox
-      */
+   /*
+    * Number of Stars Textbox
+    */
 
-      'number_of_stars' => array(
+    'number_of_stars' => array(
         'name' => 'number_of_stars',
         'type' => 'textbox',
         'value' => 5,
         'label' => __( 'Number of stars', 'ninja-forms' ),
         'width' => '',
         'group' => ''
-        ),
+    ),
 
-      /*
-      * Text Default Value
-      */
+   /*
+    * Text Default Value
+    */
 
-      'textarea_default_value' => array(
+    'textarea_default_value' => array(
         'name' => 'text_default_value',
         'type' => 'textarea',// TODO: WYSIWYG editor here
         'label' => __( 'Default Value', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary'
     ),
-      /*
-      * Disable Browser Autocomplete
-      */
 
-      'disable_browser_autocomplete' => array(
+   /*
+    * Disable Browser Autocomplete
+    */
+
+    'disable_browser_autocomplete' => array(
         'name' => 'disable_browser_autocomplete',
         'type' => 'checkbox',
         'value' => 'unchecked',
@@ -290,12 +292,12 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => ''
     ),
 
-        //TODO: Ask about the list of states and countries.
-      /*
-      *  Country - Use Custom First Option
-      */
+    //TODO: Ask about the list of states and countries.
+   /*
+    *  Country - Use Custom First Option
+    */
 
-      'use_custom_first_option' => array(
+    'use_custom_first_option' => array(
         'name' => 'use_custom_first_option',
         'type' => 'checkbox',
         'value' => 'unchecked',
@@ -304,11 +306,11 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => ''
     ),
 
-      /*
-      * Country - Custom first option
-      */
+   /*
+    * Country - Custom first option
+    */
 
-      'custom_first_option' => array(
+    'custom_first_option' => array(
         'name' => 'custom_first_option',
         'type' => 'textbox',
         'label' => __( 'Custom first option', 'ninja-forms' ),
