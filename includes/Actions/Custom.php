@@ -32,7 +32,7 @@ final class NF_Actions_Custom extends NF_Abstracts_Action
     {
         parent::__construct();
 
-        $settings = Ninja_Forms::config( 'CustomActionSettings' );
+        $settings = Ninja_Forms::config( 'ActionCustomSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );
     }
