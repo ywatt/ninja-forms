@@ -21,6 +21,14 @@ define( [], function() {
 			this.$el = this.$el.children();
 			this.$el.unwrap();
 			this.setElement( this.$el );
+		},
+
+		events: {
+			'click .undoSingle': 'undoSingle'
+		},
+
+		undoSingle: function( e ) {
+			nfRadio.channel( 'changes' ).request( 'undo:single', this.model );
 		}
 	});
 

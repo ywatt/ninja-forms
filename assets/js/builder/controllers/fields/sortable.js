@@ -250,6 +250,31 @@ define( [], function() {
 		 */
 		updateFieldsSortable: function( ui ) {
 			nfRadio.channel( 'fields' ).request( 'sort:fields' );
+			var draggedFieldID = jQuery( ui.item ).prop( 'id' ).replace( 'field-', '' );
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+
+			// Add our change event to the change tracker.
+			var objModels = [];
+			_.each( fieldCollection.models, function( field ) {
+				var oldPos = field._previousAttributes.order;
+				var newPos = field.get( 'order' );
+				
+				objModels.push( {
+					model: field,
+					attr: 'order',
+					before: oldPos,
+					after: newPos
+				} );
+
+				if ( draggedFieldID == field.get( 'id' ) ) {
+					draggedOldPos = oldPos;
+					draggedNewPos = newPos;
+					draggedLabel = field.get( 'label' );
+				}
+			} );
+			var label = 'Field ' + draggedFieldID + ' - ' + draggedLabel + ' - Re-ordered from ' + draggedOldPos + ' to ' + draggedNewPos
+			var dashicon = 'sort';
+			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', objModels, label, dashicon );					
 		}
 	});
 

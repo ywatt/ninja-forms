@@ -51,10 +51,8 @@ define( [
 					var groupTmp = {
 						label: group.label,
 						display: group.display,
-						settings: new fieldTypeSettingCollection( group.settings ), 
+						settings: new fieldTypeSettingCollection( group.settings ),
 					}
-					// Add the tmp object to our setting groups collection
-					settingGroups.add( groupTmp );
 				} );
 
 				// Add our field type to the appropriate drawer section.
@@ -122,6 +120,11 @@ define( [
 					if ( setting ) {
 						return true;
 					}
+					_.each( group.get( 'settings' ), function( setting ) {
+						if( setting instanceof Backbone.Collection ) { // Is this a backbone collection?
+
+						}
+					} );
 				} );
         	} );
 
