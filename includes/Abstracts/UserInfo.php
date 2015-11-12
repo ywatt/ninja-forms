@@ -3,7 +3,7 @@
 /**
  * Class NF_Abstracts_UserInfo
  */
-abstract class NF_Abstracts_UserInfo extends NF_Abstracts_Input
+abstract class NF_Abstracts_UserInfo extends NF_Fields_Textbox
 {
     protected $_name = 'input';
 
@@ -14,5 +14,9 @@ abstract class NF_Abstracts_UserInfo extends NF_Abstracts_Input
     public function __construct()
     {
         parent::__construct();
+
+        $this->_settings = $this->load_settings(
+            array( 'label', 'label_pos', 'required', 'user_info_default_value' )
+        );
     }
 }

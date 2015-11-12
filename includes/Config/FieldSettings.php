@@ -115,8 +115,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'value' => 'checked',
             ),
         ),
-        'width' => '',
-        'group' => ''
+        'width' => 'one-half',
+        'group' => 'primary'
     ),
 
     /*
@@ -270,12 +270,12 @@ return apply_filters( 'ninja-forms-field-settings', array(
       * Text Default Value
       */
 
-      'text_default_value' => array(
+      'textarea_default_value' => array(
         'name' => 'text_default_value',
-        'type' => '',// TODO: WYSIWYG editor here
-        'label' => __( 'Re-enter Password Label', 'ninja-forms' ),
-        'width' => '',
-        'group' => ''
+        'type' => 'textarea',// TODO: WYSIWYG editor here
+        'label' => __( 'Default Value', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'primary'
     ),
       /*
       * Disable Browser Autocomplete
@@ -389,7 +389,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'type' => 'list-repeater',
         'label' => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
         'width' => 'full',
-        'group' => 'primary'
+        'group' => 'primary',
     ),
 
     /*
@@ -474,7 +474,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
     'user_info_default_value' => array(
         'name' => 'default_value',
         'type' => 'toggle',
-        'label' => __( 'Default to User Info if logged-in', 'ninja-forms' ),
+        'label' => __( 'Default to User Info', 'ninja-forms' ),
         'width' => 'one-half',
         'group' => 'primary'
     ),
