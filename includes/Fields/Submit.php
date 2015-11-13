@@ -11,7 +11,7 @@ class NF_Fields_Submit extends NF_Fields_Button
 
     protected $_type = 'submit';
 
-    protected $_templates = array( 'submit', 'button', 'input' );
+    protected $_templates = 'submit';
 
     protected $_wrap_template = 'wrap-no-label';
 

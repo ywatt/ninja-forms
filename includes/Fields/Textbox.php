@@ -13,7 +13,7 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
     protected $_type = 'textbox';
 
-    protected $_templates = array( 'textbox', 'input' );
+    protected $_templates = 'textbox';
 
     public function __construct()
     {

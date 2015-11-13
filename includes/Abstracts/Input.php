@@ -11,8 +11,6 @@ abstract class NF_Abstracts_Input extends NF_Abstracts_Field
 
     protected $_type = 'text';
 
-    protected $_templates = array( 'input' );
-
     public function __construct()
     {
         parent::__construct();

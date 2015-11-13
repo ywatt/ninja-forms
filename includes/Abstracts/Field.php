@@ -46,6 +46,11 @@ abstract class NF_Abstracts_Field
     protected $_type = '';
 
     /**
+     * @var string
+     */
+    public static $_base_template = 'input';
+
+    /**
      * @var array
      */
     protected $_templates = array();
@@ -144,7 +149,23 @@ abstract class NF_Abstracts_Field
 
     public function get_templates()
     {
-        return $this->_templates;
+        $templates = (array) $this->_templates;
+
+        // Create a reflection for examining the parent
+        $reflection = new ReflectionClass( $this );
+        $parent_class = $reflection->getParentClass();
+
+        if ( $parent_class->isAbstract() ) {
+
+            $parent_class_name = $parent_class->getName();
+            $parent_templates = $parent_class_name::$_base_template; // Parent Class' Static Property
+            return array_merge( $templates, (array) $parent_templates );
+        }
+
+        $parent_class_name = strtolower( str_replace('NF_Fields_', '', $parent_class->getName() ) );
+        $parent = Ninja_Forms()->fields[$parent_class_name];
+        return array_merge($templates, $parent->get_templates());
+
     }
 
     public function get_wrap_template()
