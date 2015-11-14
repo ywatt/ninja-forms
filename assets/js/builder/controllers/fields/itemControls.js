@@ -39,13 +39,13 @@ define( [], function() {
 		 * @param  backbone.model 	model 	field model
 		 * @return void
 		 */
-		clickDelete: function( e, model ) {
-			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', model );
+		clickDelete: function( e, fieldModel ) {
+			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', fieldModel );
 
 			// Add our field deletion to our change log.
 			var label = {
 				object: 'Field',
-				label: model.get( 'label' ),
+				label: fieldModel.get( 'label' ),
 				change: 'Removed',
 				dashicon: 'dismiss'
 			};
@@ -53,14 +53,21 @@ define( [], function() {
 			nfRadio.channel( 'changes' ).request( 'register:change', 'removeField', newModel, null, label );
 			
 			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-			var results = changeCollection.where( { model: model } );
+			var results = changeCollection.where( { model: fieldModel } );
 
-			_.each( results, function( model ) {
-				model.set( 'model', newModel );
-				model.set( 'disabled', true );
+			_.each( results, function( changeModel ) {
+				if ( 'object' == typeof changeModel.get( 'data' ) ) {
+					_.each( changeModel.get( 'data' ), function( dataModel ) {
+						if ( dataModel.model == fieldModel ) {
+							dataModel.model = newModel;
+						}
+					} );
+				}
+				changeModel.set( 'model', newModel );
+				changeModel.set( 'disabled', true );
 			} );
 
-			nfRadio.channel( 'fields' ).request( 'delete:field', model );
+			nfRadio.channel( 'fields' ).request( 'delete:field', fieldModel );
 		},
 
 		/**
