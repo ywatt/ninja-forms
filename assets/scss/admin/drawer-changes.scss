@@ -3,5 +3,10 @@ table.nf-changes {
         td {
             border-bottom: 1px solid #ccc;
         }
+        &.disabled-row {
+            td {
+                color:  #bbb;
+            }
+        }
     }
 }

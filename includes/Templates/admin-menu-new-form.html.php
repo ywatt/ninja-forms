@@ -212,7 +212,11 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
+    <% if ( ! disabled ) { %>
     <tr>
+    <% } else { %>
+    <tr class="disabled-row">
+    <% } %>
 
         <td>
             <span class="dashicons dashicons-<%= label.dashicon %>"></span> <span class="nf-changes-item <%= ( disabled ) ? 'disabled' : '' %>"></span>
