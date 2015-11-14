@@ -73,8 +73,11 @@ define( ['builder/models/fields/listOptionCollection', 'builder/views/fields/dra
 				after: after
 			}
 
-			var settingModel = nfRadio.channel( 'fields' ).request( 'get:settingModel', name );
-			var label = 'Field - ' + fieldModel.get( 'label' ) + ' - ' + name + ' changed from ' + before + ' to ' + after;
+			var label = {
+				object: 'Field',
+				label: fieldModel.get( 'label' ),
+				change: 'Option ' + name + ' changed from ' + before + ' to ' + after
+			};
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', model, changes, label );
 		},

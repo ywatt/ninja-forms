@@ -43,10 +43,14 @@ define( [], function() {
 			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', model );
 
 			// Add our field deletion to our change log.
-			var label = 'Field - ' + model.get( 'label' ) + ' - Removed' ;
-			var dashicon = 'dismiss';
+			var label = {
+				object: 'Field',
+				label: model.get( 'label' ),
+				change: 'Removed',
+				dashicon: 'dismiss'
+			};
 
-			nfRadio.channel( 'changes' ).request( 'register:change', 'removeField', newModel, null, label, dashicon );
+			nfRadio.channel( 'changes' ).request( 'register:change', 'removeField', newModel, null, label );
 			
 			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
 			var results = changeCollection.where( { model: model } );
@@ -96,9 +100,14 @@ define( [], function() {
 			// Add new model.
 			nfRadio.channel( 'fields' ).request( 'add:field', newModel );
 			// Add our field addition to our change log.
-			var label = 'Field - ' + model.get( 'label' ) + ' - Duplicated' ;
-			var dashicon = 'admin-page';
-			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateField', model, null, label, dashicon );
+			var label = {
+				object: 'Field',
+				label: model.get( 'label' ),
+				change: 'Duplicated',
+				dashicon: 'admin-page'
+			};
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateField', model, null, label );
 			
 			// Update preview.
 			nfRadio.channel( 'app' ).request( 'update:db' );

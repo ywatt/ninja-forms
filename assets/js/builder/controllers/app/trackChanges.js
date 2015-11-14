@@ -16,14 +16,13 @@ define( ['builder/models/app/changeCollection', 'builder/models/app/changeModel'
 			nfRadio.channel( 'changes' ).reply( 'get:changeCollection', this.getCollection, this );
 		},
 
-		registerChange: function( action, model, changes, label, dashicon, data ) {
+		registerChange: function( action, model, changes, label, data ) {
 			var data = typeof data !== 'undefined' ? data : {};
 			var changeModel = new ChangeModel({
 				action: action,
 				model: model,
 				changes: changes,
 				label: label,
-				dashicon: dashicon,
 				data: data				
 			} );
 			this.collection.add( changeModel );

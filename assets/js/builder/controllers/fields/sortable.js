@@ -142,10 +142,14 @@ define( [], function() {
 			// Add our field
 			var newModel = nfRadio.channel( 'fields' ).request( 'add:field',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'id' ) }, silent );
 			// Add our field addition to our change log.
-			var label = 'Field - ' + newModel.get( 'label' ) + ' - Added' ;
-			var dashicon = 'plus-alt';
+			var label = {
+				object: 'Field',
+				label: newModel.get( 'label' ),
+				change: 'Added',
+				dashicon: 'plus-alt'
+			};
 
-			nfRadio.channel( 'changes' ).request( 'register:change', 'addField', newModel, null, label, dashicon );
+			nfRadio.channel( 'changes' ).request( 'register:change', 'addField', newModel, null, label );
 			
 			return tmpID;
 		},
@@ -278,9 +282,15 @@ define( [], function() {
 					} );
 
 				} );
-				var label = 'Field - ' + dragModel.get( 'label' ) + ' - Re-ordered from ' + dragModel._previousAttributes.order + ' to ' + dragModel.get( 'order' );
-				var dashicon = 'sort';
-				nfRadio.channel( 'changes' ).request( 'register:change', 'sortFields', dragModel, null, label, dashicon, data );					
+
+				var label = {
+					object: 'Field',
+					label: dragModel.get( 'label' ),
+					change: 'Re-ordered from ' + dragModel._previousAttributes.order + ' to ' + dragModel.get( 'order' ),
+					dashicon: 'sort'
+				};
+
+				nfRadio.channel( 'changes' ).request( 'register:change', 'sortFields', dragModel, null, label, data );					
 			}
 
 			

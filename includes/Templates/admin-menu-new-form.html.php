@@ -223,12 +223,14 @@
             <% if ( ! disabled ) { %>
                 </a>
             <% } %>
-        </td>
-        <td>
             <span class="dashicons dashicons-<%= dashicon %>"></span> <span class="nf-changes-item <%= ( disabled ) ? 'disabled' : '' %>"></span>
+            <%= label.object %>
         </td>
         <td>
-            <%= label %>
+            <%= label.label %>
+        </td>
+        <td>
+            <%= label.change %>
         </td>
     </tr>
 </script>
