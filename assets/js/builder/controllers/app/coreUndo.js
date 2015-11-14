@@ -13,6 +13,7 @@ define( [], function() {
 			nfRadio.channel( 'changes' ).reply( 'undo:sortFields', this.undoSortFields, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:addField', this.undoAddField, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:removeField', this.undoRemoveField, this );
+			nfRadio.channel( 'changes' ).reply( 'undo:duplicateField', this.undoDuplicateField, this );
 		},
 
 		/**
@@ -69,6 +70,35 @@ define( [], function() {
 			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
 			var results = changeCollection.where( { model: fieldModel } );
 
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+			delete fieldCollection.newIDs[ fieldModel.get( 'id' ) ];
+			
+			_.each( results, function( model ) {
+				if ( model !== change ) {
+					changeCollection.remove( model );
+				}
+			} );
+			
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+			fieldCollection.remove( fieldModel );
+			this.maybeRemoveChange( change, remove );
+		},		
+
+		/**
+		 * Undo adding a field.
+		 * Loops through our change collection and removes any change models based upon the one we're removing.
+		 * 
+		 * @since  3.0
+		 * @param  backbone.model 	change 	model of our change
+		 * @param  boolean 			remove 	should we remove this item from our change collection
+		 * @return void
+		 */
+		undoDuplicateField: function( change, remove ) {
+			var fieldModel = change.get( 'model' );
+			
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			var results = changeCollection.where( { model: fieldModel } );
+
 			_.each( results, function( model ) {
 				if ( model !== change ) {
 					changeCollection.remove( model );
@@ -90,8 +120,10 @@ define( [], function() {
 		 */
 		undoRemoveField: function( change, remove ) {
 			var fieldModel = change.get( 'model' );
-
 			nfRadio.channel( 'fields' ).request( 'add:field', fieldModel );
+
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+			delete fieldCollection.removedIDs[ fieldModel.get( 'id' ) ];
 
 			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
 			var results = changeCollection.where( { model: fieldModel } );
@@ -114,6 +146,8 @@ define( [], function() {
 		 * @return void
 		 */
 		maybeRemoveChange: function( change, remove ) {
+			// Update preview.
+			nfRadio.channel( 'app' ).request( 'update:db' );			
 			var remove = typeof remove !== 'undefined' ? remove : true;
 			if ( remove ) {
 				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );

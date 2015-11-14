@@ -12,6 +12,8 @@ define( [], function() {
 				that.undoSingle( change, false );
 			} );
 			changeCollection.reset();
+			// Update preview.
+			nfRadio.channel( 'app' ).request( 'update:db' );			
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );
 			nfRadio.channel( 'app' ).request( 'close:drawer' );
 		},

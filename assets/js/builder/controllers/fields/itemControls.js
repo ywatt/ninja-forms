@@ -107,7 +107,7 @@ define( [], function() {
 				dashicon: 'admin-page'
 			};
 
-			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateField', model, null, label );
+			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateField', newModel, null, label );
 			
 			// Update preview.
 			nfRadio.channel( 'app' ).request( 'update:db' );
