@@ -119,7 +119,7 @@ final class NF_Display_Render
 
             $field[ 'settings' ][ 'element_templates' ] = $templates;
             $field[ 'settings' ][ 'old_classname' ] = $field_class->get_old_classname();
-            $field[ 'settings' ][ 'wrap_tempalte' ] = $field_class->get_wrap_template();
+            $field[ 'settings' ][ 'wrap_template' ] = $field_class->get_wrap_template();
 
             $fields[] = $field['settings'];
         }
