@@ -213,6 +213,19 @@
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
     <tr>
+
+        <td>
+            <span class="dashicons dashicons-<%= dashicon %>"></span> <span class="nf-changes-item <%= ( disabled ) ? 'disabled' : '' %>"></span>
+        </td>
+        <td>
+            <%= label.object %>
+        </td>
+        <td>
+            <%= label.label %>
+        </td>
+        <td>
+            <%= label.change %>
+        </td>
         <td>
             <% if ( ! disabled ) { %>
                 <a href="#" class="undoSingle disabled" style="text-decoration:none;">
@@ -223,14 +236,6 @@
             <% if ( ! disabled ) { %>
                 </a>
             <% } %>
-            <span class="dashicons dashicons-<%= dashicon %>"></span> <span class="nf-changes-item <%= ( disabled ) ? 'disabled' : '' %>"></span>
-            <%= label.object %>
-        </td>
-        <td>
-            <%= label.label %>
-        </td>
-        <td>
-            <%= label.change %>
         </td>
     </tr>
 </script>
