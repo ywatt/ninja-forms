@@ -38,10 +38,14 @@ define( ['builder/models/fields/listOptionCollection', 'builder/views/fields/dra
 		 * @return void
 		 */
 		createOptionCollection: function( model ) {
-			if ( ! model.get( 'options' ) ) {
+			var options = model.get( 'options' );
+			if ( ! options ) {
 				model.set( 'options', [ { calc: 1, label: 'One', value: 'one' }, { calc: 2, label: 'Two', value: 'two' }, { calc: 3, label: 'Three', value: 'three' } ], { silent: true } );
 			}
-			model.set( 'options', new listOptionCollection( model.get( 'options' ) ), { silent: true } );
+
+			if ( false == options instanceof Backbone.Collection ) {
+				model.set( 'options', new listOptionCollection( model.get( 'options' ) ), { silent: true } );
+			}
 		},
 
 		/**
@@ -58,7 +62,21 @@ define( ['builder/models/fields/listOptionCollection', 'builder/views/fields/dra
 			var value = jQuery( e.target ).val();
 			model.set( name, value );
 			// Triger an update on our fieldModel
-			this.triggerFieldModel( model.collection, fieldModel );
+			this.triggerFieldModel( model, fieldModel );
+
+			var before = model._previousAttributes[ name ];
+			var after = value;
+			
+			var changes = {
+				attr: name,
+				before: before,
+				after: after
+			}
+
+			var settingModel = nfRadio.channel( 'fields' ).request( 'get:settingModel', name );
+			var label = 'Field - ' + fieldModel.get( 'label' ) + ' - ' + name + ' changed from ' + before + ' to ' + after;
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', model, changes, label );
 		},
 
 		/**
@@ -71,7 +89,8 @@ define( ['builder/models/fields/listOptionCollection', 'builder/views/fields/dra
 		 */
 		addOption: function( collection, fieldModel ) {
 			collection.add( { label: '', value: '', calc: '' } );
-			this.triggerFieldModel( collection, fieldModel );
+			var model = collection.at( collection.length - 1 );
+			this.triggerFieldModel( model, fieldModel );
 		},
 
 		/**
@@ -85,7 +104,7 @@ define( ['builder/models/fields/listOptionCollection', 'builder/views/fields/dra
 		 */
 		deleteOption: function( model, collection, fieldModel ) {
 			collection.remove( model );
-			this.triggerFieldModel( collection, fieldModel );
+			this.triggerFieldModel( model, fieldModel );
 		},
 
 		/**
@@ -97,14 +116,8 @@ define( ['builder/models/fields/listOptionCollection', 'builder/views/fields/dra
 		 * @param backbone.model 		fieldModel 	field model
 		 * @return void
 		 */
-		triggerFieldModel: function( collection, fieldModel ) {
-			if ( ! collection.arb ) {
-				collection.arb = true;
-			} else {
-				collection.arb = false;
-			}
-			var optionsClone = _.clone( collection );
-			fieldModel.set( 'options', optionsClone );			
+		triggerFieldModel: function( model, fieldModel ) {
+			nfRadio.channel( 'fields' ).trigger( 'update:setting', model );	
 		},
 
 		/**

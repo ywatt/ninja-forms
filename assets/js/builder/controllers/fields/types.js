@@ -77,7 +77,6 @@ define( [
 			// Respond to requests to get field type, collection, settings, and sections
 			nfRadio.channel( 'fields' ).reply( 'get:type', this.getFieldType, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeCollection', this.getTypeCollection, this );
-			nfRadio.channel( 'fields' ).reply( 'get:settingModel', this.getSettingModel, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeSections', this.getTypeSections, this );
 			// Listen to clicks on field types		
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addStagedField );
@@ -103,34 +102,6 @@ define( [
          */
 		getTypeCollection: function( id ) {
         	return this.collection;
-        },
-
-        /**
-         * Return an individual field setting model.
-         * Loops through our settings groups until we find the setting.
-         * 
-         * @since  3.0
-         * @param  string 			type   	field type
-         * @param  string 			search 	setting name
-         * @return backbone.model        	setting model
-         */
-        getSettingModel: function( name ) {
-        	var setting = false;
-        	_.each( this.collection.models, function( type ) {
-				_.find( type.get('settingGroups' ).models, function( group ) {
-					setting = group.get( 'settings' ).findWhere( { name: name } );
-					if ( setting ) {
-						return true;
-					}
-					_.each( group.get( 'settings' ), function( setting ) {
-						if( setting instanceof Backbone.Collection ) { // Is this a backbone collection?
-
-						}
-					} );
-				} );
-        	} );
-
-			return setting;
         },
 
         /**

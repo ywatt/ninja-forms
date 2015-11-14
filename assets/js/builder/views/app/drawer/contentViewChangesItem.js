@@ -11,6 +11,10 @@ define( [], function() {
 		tagName: 'div',
 		template: '#nf-tmpl-drawer-content-view-changes-item',
 
+		initialize: function() {
+			this.model.on( 'change:disabled', this.render, this );
+		},
+
 		/**
 		 * When we render this element, remove the extra wrapping <div> that backbone creates.
 		 * 
@@ -28,7 +32,7 @@ define( [], function() {
 		},
 
 		undoSingle: function( e ) {
-			nfRadio.channel( 'changes' ).request( 'undo:single', this.model );
+			nfRadio.channel( 'drawer' ).trigger( 'click:undoSingle', this.model );
 		}
 	});
 

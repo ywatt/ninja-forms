@@ -1,27 +1,23 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'drawer' ), 'click:undoAllChanges', this.undoAllChanges, this );
-			nfRadio.channel( 'changes' ).reply( 'undo:single', this.undoSingle, this );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'click:undoChanges', this.undoChanges, this );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'click:undoSingle', this.undoSingle, this );
 		},
 
-		undoAllChanges: function() {
+		undoChanges: function() {
 			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-			changeCollection.sort();
-			_.each( changeCollection.models, function( model ) {
-				this.undoSingle( model );
+			var that = this;
+			_.each( changeCollection.models, function( change ) {
+				that.undoSingle( change, false );
 			} );
-			nfRadio.channel( 'app' ).request( 'close:drawer' );
 			changeCollection.reset();
+			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );
+			nfRadio.channel( 'app' ).request( 'close:drawer' );
 		},
 
-		undoSingle: function( model ) {
-			var attr = model.get( 'attr' );
-			var before = model.get( 'before' );
-			var after = model.get( 'after' );
-			var objModel = model.get( 'model' );
-			objModel.set( attr, before );
-			model.collection.remove( model );
+		undoSingle: function( change, remove ) {
+			nfRadio.channel( 'changes' ).request( 'undo:' + change.get( 'action' ), change, remove );
 		}
 
 	});
