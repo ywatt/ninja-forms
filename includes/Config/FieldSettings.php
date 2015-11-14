@@ -49,12 +49,24 @@ return apply_filters( 'ninja-forms-field-settings', array(
     ),
 
     /*
-     * PLACEHOLDER
+     * INPUT PLACEHOLDER
      */
 
     'placeholder' => array(
         'name' => 'placeholder',
         'type' => 'textbox',
+        'label' => __( 'Placeholder', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'primary'
+    ),
+
+    /*
+     * TEXTAREA PLACEHOLDER
+     */
+
+    'textarea_placeholder' => array(
+        'name' => 'textarea_placeholder',
+        'type' => 'textarea',
         'label' => __( 'Placeholder', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary'
@@ -72,7 +84,57 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary'
     ),
 
+    /*
+     * DEFAULT VALUE
+     */
 
+
+    'default' => array(
+        'name'    => 'default',
+        'type'    => 'fieldset',
+        'label'   => __( 'Default Value', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'settings' => array(
+            array(
+                'name' => 'default_type',
+                'label' => 'Type',
+                'type' => 'select',
+                'options' => array(
+                    array(
+                        'value' => 'none',
+                        'label' => __( 'None', 'ninja-forms' )
+                    ),
+                    array(
+                        'value' => 'post_id',
+                        'label' => __( 'Post / Page ID', 'ninja-forms' )
+                    ),
+                    array(
+                        'value' => 'post_title',
+                        'label' => __( 'Post / Page Title', 'ninja-forms' )
+                    ),
+                    array(
+                        'value' => 'post_url',
+                        'label' => __( 'Post / Page URL', 'ninja-forms' )
+                    ),
+                    array(
+                        'value' => 'query_string',
+                        'label' => __( 'Query String Variable', 'ninja-forms' )
+                    ),
+                    array(
+                        'value' => 'custom',
+                        'label' => __( 'Custom Default Value', 'ninja-forms' )
+                    )
+                ),
+            ),
+            array(
+                'name' => 'default_value',
+                'label' => 'Value',
+                'type' => 'textbox',
+                'width' => 'one-half'
+            )
+        )
+    ),
     'classes' => array(
         'name' => 'classes',
         'type' => 'fieldset',
@@ -276,7 +338,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'type' => 'textarea',// TODO: WYSIWYG editor here
         'label' => __( 'Default Value', 'ninja-forms' ),
         'width' => 'full',
-        'group' => 'primary'
+        'group' => 'advanced'
     ),
 
    /*
@@ -328,58 +390,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Use the JQueryUI datepicker.', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'advanced'
-    ),
-
-    /*
-     * DEFAULT VALUE
-     */
-
-
-    'default' => array(
-        'name'    => 'default',
-        'type'    => 'fieldset',
-        'label'   => __( 'Default Value', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'primary',
-        'settings' => array(
-            array(
-                'name' => 'default_type',
-                'label' => 'Type',
-                'type' => 'select',
-                'options' => array(
-                    array(
-                        'value' => 'none',
-                        'label' => __( 'None', 'ninja-forms' )
-                    ),
-                    array(
-                        'value' => 'post_id',
-                        'label' => __( 'Post / Page ID', 'ninja-forms' )
-                    ),
-                    array(
-                        'value' => 'post_title',
-                        'label' => __( 'Post / Page Title', 'ninja-forms' )
-                    ),
-                    array(
-                        'value' => 'post_url',
-                        'label' => __( 'Post / Page URL', 'ninja-forms' )
-                    ),
-                    array(
-                        'value' => 'query_string',
-                        'label' => __( 'Query String Variable', 'ninja-forms' )
-                    ),
-                    array(
-                        'value' => 'custom',
-                        'label' => __( 'Custom Default Value', 'ninja-forms' )
-                    )
-                ),
-            ),
-            array(
-                'name' => 'default_value',
-                'label' => 'Value',
-                'type' => 'textbox',
-                'width' => 'one-half'
-            )
-        )
     ),
 
     /*

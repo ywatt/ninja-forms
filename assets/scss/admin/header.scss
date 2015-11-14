@@ -53,8 +53,11 @@
     }
     .nf-cancel {
         float: right;
-        margin-right: 20px;
-        padding: 14px 0;
+        margin-right: 30px;
+        padding: 8px 0;
+        .dashicons {
+            font-size: 30px;
+        }
     }
     &:after {
         clear: both;

@@ -30,7 +30,8 @@ Header and Nav for Ninja Forms App
 #nf-header ul li a.preview .dashicons { display: inline-block; margin-left: 10px; }
 #nf-header ul:after { clear: both; content: ""; display: block; }
 #nf-header input[type=submit] { float: right; }
-#nf-header .nf-cancel { float: right; margin-right: 20px; padding: 14px 0; }
+#nf-header .nf-cancel { float: right; margin-right: 30px; padding: 8px 0; }
+#nf-header .nf-cancel .dashicons { font-size: 30px; }
 #nf-header:after { clear: both; content: ""; display: block; }
 
 #nf-app-header { height: 50px; }
@@ -134,6 +135,7 @@ All styles used within the drawer
 .nf-settings h3 .dashicons { color: #bbb; font-size: 28px; margin: -4px 10px 0 -30px; }
 .nf-settings::after { clear: both; content: ""; display: block; }
 
+.nf-full { clear: both; }
 .nf-full.toggle-row { border-bottom: 1px solid #ccc; margin: 0; position: relative; }
 .nf-full.toggle-row:first-child { border-top: 1px solid #ccc; }
 .nf-full.toggle-row label { display: inline-block; padding: 15px 60px 15px 0; }
@@ -240,7 +242,7 @@ input[type=checkbox].nf-toggle:checked::after { background: #84CC1E; border: 2px
 input[type=checkbox].nf-toggle:checked::before { top: 2px; left: 22px; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
 
 .ninja-forms-app .nf-select { position: relative; }
-.ninja-forms-app .nf-select select { background: #f9f9f9; border: 0; margin-top: 5px; height: 46px !important; padding: 0 30px 0 15px; width: 100%; -webkit-appearance: none; }
+.ninja-forms-app .nf-select select { background: #f9f9f9; border: 0; margin-top: 5px; height: 43px !important; padding: 0 30px 0 15px; width: 100%; -webkit-appearance: none; }
 .ninja-forms-app .nf-select::after { content: "\f347"; font-family: 'Dashicons'; position: absolute; width: 30px; height: 30px; right: 0; top: 19px; z-index: 101; }
 
 /*

@@ -18,7 +18,7 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
         parent::__construct();
 
         $this->_settings = $this->load_settings(
-            array( 'label', 'label_pos', 'required', 'options' )
+            array( 'label', 'label_pos', 'required', 'options', 'classes' )
         );
     }
 
