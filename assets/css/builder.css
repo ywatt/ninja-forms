@@ -242,7 +242,7 @@ input[type=checkbox].nf-toggle:checked::after { background: #84CC1E; border: 2px
 input[type=checkbox].nf-toggle:checked::before { top: 2px; left: 22px; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
 
 .ninja-forms-app .nf-select { position: relative; }
-.ninja-forms-app .nf-select select { background: #f9f9f9; border: 0; margin-top: 5px; height: 46px !important; padding: 0 30px 0 15px; width: 100%; -webkit-appearance: none; }
+.ninja-forms-app .nf-select select { background: #f9f9f9; border: 0; margin-top: 5px; height: 43px !important; padding: 0 30px 0 15px; width: 100%; -webkit-appearance: none; }
 .ninja-forms-app .nf-select::after { content: "\f347"; font-family: 'Dashicons'; position: absolute; width: 30px; height: 30px; right: 0; top: 19px; z-index: 101; }
 
 /*

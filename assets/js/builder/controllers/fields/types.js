@@ -1,11 +1,11 @@
 /**
  * Creates and stores a collection of field types. This includes all of the settings shown when editing a field.
- * 
+ *
  * 1) Create our settings sections config
  * 2) Loops over our preloaded data and adds that to our field type collection
  *
  * Also responds to requests for data about field types
- * 
+ *
  * @package Ninja Forms builder
  * @subpackage Fields
  * @copyright (c) 2015 WP Ninjas
@@ -33,11 +33,16 @@ define( [
 					nicename: 'Common Fields',
 					fieldTypes: []
 				},
-				{ 
+				{
 					id: 'userinfo',
 					nicename: 'User Information Fields',
 					fieldTypes: []
-				}
+				},
+                {
+                    id: 'misc',
+                    nicename: 'Miscellaneous Fields',
+                    fieldTypes: []
+                }
 			] );
 
 			// Since we want to access the "this" context later, we assign it to that so it isn't overwritten
@@ -61,7 +66,7 @@ define( [
 				if ( 'undefined' != typeof that.fieldTypeSections.get( type.section ) ) {
 					that.fieldTypeSections.get( type.section ).get( 'fieldTypes' ).push( type.id );
 				}
-				
+
 				// Build an object for this type that we can add to our field type collection
 				var fieldType = {
 					id: type.id,
@@ -73,18 +78,18 @@ define( [
 				// Add tmp object to our field type collection
 				that.collection.add( fieldType );
 			} );
-			
+
 			// Respond to requests to get field type, collection, settings, and sections
 			nfRadio.channel( 'fields' ).reply( 'get:type', this.getFieldType, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeCollection', this.getTypeCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeSections', this.getTypeSections, this );
-			// Listen to clicks on field types		
+			// Listen to clicks on field types
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addStagedField );
 		},
 
 		/**
 		 * Return a field type by id
-		 * 
+		 *
 		 * @since  3.0
 		 * @param  string 			id 	field type
 		 * @return backbone.model    	field type model
@@ -95,7 +100,7 @@ define( [
 
         /**
          * Return the entire field type collection
-         * 
+         *
          * @since  3.0
          * @param  string 				id 	[description]
          * @return backbone.collection    	field type collection
@@ -106,7 +111,7 @@ define( [
 
         /**
          * Add a field type to our staging area when the field type button is clicked.
-         * 
+         *
          * @since 3.0
          * @param Object e event
          * @return void
@@ -118,7 +123,7 @@ define( [
 
         /**
          * Return our field type settings sections
-         * 
+         *
          * @since  3.0
          * @return backbone.collection field type settings sections
          */

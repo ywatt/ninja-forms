@@ -20,7 +20,7 @@ class NF_Fields_Hidden extends NF_Abstracts_Input
         parent::__construct();
 
         $this->_settings = $this->load_settings(
-            array( 'default' )
+            array( 'label', 'default' )
         );
 
         $this->_nicename = __( 'Hidden', 'ninja-forms' );

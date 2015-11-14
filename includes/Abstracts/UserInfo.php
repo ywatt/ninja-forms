@@ -18,7 +18,7 @@ abstract class NF_Abstracts_UserInfo extends NF_Fields_Textbox
         parent::__construct();
 
         $this->_settings = $this->load_settings(
-            array( 'label', 'label_pos', 'required', 'user_info_default_value' )
+            array( 'label', 'label_pos', 'required', 'user_info_default_value', 'classes' )
         );
     }
 }
