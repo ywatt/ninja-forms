@@ -9,7 +9,7 @@ class NF_Fields_ListRadio extends NF_Abstracts_List
 
     protected $_section = 'common';
 
-    protected $_templates = array( 'listradio', 'list', 'input' );
+    protected $_templates = 'listradio';
 
     protected $_old_classname = 'list-radio';
 

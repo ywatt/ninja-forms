@@ -13,7 +13,7 @@ class NF_Fields_Button extends NF_Abstracts_Field
 
     protected $_type = 'button';
 
-    protected $_templates = array( 'button', 'input' );
+    protected $_templates = 'button';
 
     public function __construct()
     {

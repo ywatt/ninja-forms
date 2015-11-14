@@ -11,7 +11,7 @@ class NF_Fields_Textarea extends NF_Abstracts_Field
 
     protected $_type = 'textarea';
 
-    protected $_templates = array( 'textarea', 'textbox', 'input' );
+    protected $_templates = 'textarea';
 
 
     public function __construct()

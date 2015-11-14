@@ -11,6 +11,8 @@ abstract class NF_Abstracts_UserInfo extends NF_Fields_Textbox
 
     protected $_type = 'textbox';
 
+    public static $_base_template = 'textbox';
+
     public function __construct()
     {
         parent::__construct();
