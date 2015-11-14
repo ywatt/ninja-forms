@@ -367,6 +367,7 @@ final class NF_Database_MockData
             ),
         );
 
+        $order = 1;
         foreach( array( 'above', 'right', 'below', 'left', 'hidden' ) as $label_pos ) {
 
 
@@ -381,8 +382,14 @@ final class NF_Database_MockData
                 if ( 'hidden' == $settings['label_pos'] && 'submit' != $settings['type'] ) $settings['placeholder'] = $settings['label'];
 
                 $field = Ninja_Forms()->form($form_id)->field()->get();
+
+                $settings[ 'order' ] = $order;
+
                 $field->update_settings($settings)->save();
+
+                $order++;
             }
+            $order++;
         }
     }
 
