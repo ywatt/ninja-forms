@@ -221,6 +221,8 @@ All styles used within the drawer
 
 .nf-action-items .nf-item { height: 75px; line-height: 55px; }
 
+table.nf-changes tr td { border-bottom: 1px solid #ccc; }
+
 /*
 Various custom field styles
 --------------------------------- */

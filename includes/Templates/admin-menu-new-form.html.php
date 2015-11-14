@@ -212,19 +212,25 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
-    <li>
-        <% if ( ! disabled ) { %>
-            <a href="#" class="undoSingle disabled" style="text-decoration:none;">
-        <% } %>
+    <tr>
+        <td>
+            <% if ( ! disabled ) { %>
+                <a href="#" class="undoSingle disabled" style="text-decoration:none;">
+            <% } %>
 
-        <span class="dashicons dashicons-image-rotate <%= ( disabled ) ? 'disabled' : '' %>"></span>
-       
-        <% if ( ! disabled ) { %>
-            </a>
-        <% } %>
+            <span class="dashicons dashicons-image-rotate <%= ( disabled ) ? 'disabled' : '' %>"></span>
 
-        <span class="dashicons dashicons-<%= dashicon %>"></span> <span class="nf-changes-item <%= ( disabled ) ? 'disabled' : '' %>"><%= label %></span>
-    </li>
+            <% if ( ! disabled ) { %>
+                </a>
+            <% } %>
+        </td>
+        <td>
+            <span class="dashicons dashicons-<%= dashicon %>"></span> <span class="nf-changes-item <%= ( disabled ) ? 'disabled' : '' %>"></span>
+        </td>
+        <td>
+            <%= label %>
+        </td>
+    </tr>
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field" type="text/template">

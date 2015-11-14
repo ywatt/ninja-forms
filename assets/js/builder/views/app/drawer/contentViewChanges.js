@@ -8,7 +8,8 @@
  */
 define( ['builder/views/app/drawer/contentViewChangesItem'], function( viewChangesItem ) {
 	var view = Marionette.CollectionView.extend( {
-		tagName: 'ul',
+		tagName: 'table',
+        className: 'nf-changes',
 		childView: viewChangesItem
 	} );
 
