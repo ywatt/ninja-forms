@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/fields/fieldCollection'], function( fieldCollection ) {
+define( ['builder/models/fields/fieldCollection', 'builder/models/fields/fieldModel'], function( fieldCollection, fieldModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Load our field collection from our localized form data
@@ -44,9 +44,17 @@ define( ['builder/models/fields/fieldCollection'], function( fieldCollection ) {
 		 */
 		addField: function( data, silent ) {
 			silent = silent || false;
-			this.collection.add( data, { silent: silent } );
+			if ( false === data instanceof Backbone.Model ) {
+				var model = new fieldModel( data );
+			} else {
+				var model = data;
+			}			
+
+			this.collection.add( model, { silent: silent } );
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
+
+			return model;
 		},
 
 		/**
@@ -111,6 +119,7 @@ define( ['builder/models/fields/fieldCollection'], function( fieldCollection ) {
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 			nfRadio.channel( 'app' ).request( 'update:db' );
+
 		},
 
 		/**

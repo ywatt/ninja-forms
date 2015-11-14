@@ -213,7 +213,17 @@
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
     <li>
-        <a href="#" class="undoSingle" style="text-decoration:none;"><span class="dashicons dashicons-image-rotate"></span></a> <span class="dashicons dashicons-<%= dashicon %>"></span> <%= label %>
+        <% if ( ! disabled ) { %>
+            <a href="#" class="undoSingle disabled" style="text-decoration:none;">
+        <% } %>
+
+        <span class="dashicons dashicons-image-rotate <%= ( disabled ) ? 'disabled' : '' %>"></span>
+       
+        <% if ( ! disabled ) { %>
+            </a>
+        <% } %>
+
+        <span class="dashicons dashicons-<%= dashicon %>"></span> <span class="nf-changes-item <%= ( disabled ) ? 'disabled' : '' %>"><%= label %></span>
     </li>
 </script>
 
@@ -313,7 +323,7 @@
 <script id="nf-tmpl-drawer-header-view-changes" type="text/template">
     <header class="nf-drawer-header">
         <div>
-            <a href="#" class="nf-button secondary undoAllChanges" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
+            <a href="#" class="nf-button secondary undoChanges" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
         </div>
         <a href="#" class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
     </header>

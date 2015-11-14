@@ -6,17 +6,9 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/app/changeCollection'], function( changeCollection ) {
+define( ['builder/models/app/changeCollection', 'builder/models/app/changeModel'], function( changeCollection, ChangeModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			/*
-			 * Set an array of field model attributes to ignore.
-			 * This list will be filtered just before we ignore anything.
-			 */ 
-			this.ignoreAttributes = [
-				'editActive'
-			];
-
 			this.collection = new changeCollection();
 			// Respond to any requests to add a change directly.
 			nfRadio.channel( 'changes' ).reply( 'register:change', this.registerChange, this );
@@ -24,13 +16,18 @@ define( ['builder/models/app/changeCollection'], function( changeCollection ) {
 			nfRadio.channel( 'changes' ).reply( 'get:changeCollection', this.getCollection, this );
 		},
 
-		registerChange: function( action, objModels, label, dashicon ) {
-			this.collection.add( {
+		registerChange: function( action, model, changes, label, dashicon, data ) {
+			var data = typeof data !== 'undefined' ? data : {};
+			var changeModel = new ChangeModel({
 				action: action,
-				objModels: objModels,
+				model: model,
+				changes: changes,
 				label: label,
-				dashicon: dashicon
+				dashicon: dashicon,
+				data: data				
 			} );
+			this.collection.add( changeModel );
+			return changeModel;
 		},
 
 		getCollection: function() {

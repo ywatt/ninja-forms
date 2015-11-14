@@ -140,7 +140,13 @@ define( [], function() {
 			// Get our tmp ID
 			var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpFieldID' );
 			// Add our field
-			nfRadio.channel( 'fields' ).request( 'add:field',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'id' ) }, silent );
+			var newModel = nfRadio.channel( 'fields' ).request( 'add:field',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'id' ) }, silent );
+			// Add our field addition to our change log.
+			var label = 'Field - ' + newModel.get( 'label' ) + ' - Added' ;
+			var dashicon = 'plus-alt';
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'addField', newModel, null, label, dashicon );
+			
 			return tmpID;
 		},
 
@@ -250,31 +256,34 @@ define( [], function() {
 		 */
 		updateFieldsSortable: function( ui ) {
 			nfRadio.channel( 'fields' ).request( 'sort:fields' );
-			var draggedFieldID = jQuery( ui.item ).prop( 'id' ).replace( 'field-', '' );
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
 
-			// Add our change event to the change tracker.
-			var objModels = [];
-			_.each( fieldCollection.models, function( field ) {
-				var oldPos = field._previousAttributes.order;
-				var newPos = field.get( 'order' );
-				
-				objModels.push( {
-					model: field,
-					attr: 'order',
-					before: oldPos,
-					after: newPos
+			// If we aren't dragging an item in from types or staging, update our change log.
+			if( ! jQuery( ui.item ).hasClass( 'nf-field-type-button' ) && ! jQuery( ui.item ).hasClass( 'nf-stage' ) ) { 
+
+				var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+				var dragFieldID = jQuery( ui.item ).prop( 'id' ).replace( 'field-', '' );
+				var dragModel = fieldCollection.get( dragFieldID );
+
+				// Add our change event to the change tracker.
+				var data = [];
+				_.each( fieldCollection.models, function( field ) {
+					var oldPos = field._previousAttributes.order;
+					var newPos = field.get( 'order' );
+					
+					data.push( {
+						model: field,
+						attr: 'order',
+						before: oldPos,
+						after: newPos
+					} );
+
 				} );
+				var label = 'Field - ' + dragModel.get( 'label' ) + ' - Re-ordered from ' + dragModel._previousAttributes.order + ' to ' + dragModel.get( 'order' );
+				var dashicon = 'sort';
+				nfRadio.channel( 'changes' ).request( 'register:change', 'sortFields', dragModel, null, label, dashicon, data );					
+			}
 
-				if ( draggedFieldID == field.get( 'id' ) ) {
-					draggedOldPos = oldPos;
-					draggedNewPos = newPos;
-					draggedLabel = field.get( 'label' );
-				}
-			} );
-			var label = 'Field ' + draggedFieldID + ' - ' + draggedLabel + ' - Re-ordered from ' + draggedOldPos + ' to ' + draggedNewPos
-			var dashicon = 'sort';
-			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', objModels, label, dashicon );					
+			
 		}
 	});
 

@@ -27,7 +27,7 @@ define( [], function() {
 			}
 
 			var ignoreAttributes = nfRadio.channel( 'undo-' + model.get( 'type' ) ).request( 'ignore:attributes', this.ignoreAttributes ) || this.ignoreAttributes;
-
+			
 			if ( -1 != this.ignoreAttributes.indexOf( attr ) ) {
 				return false;
 			}

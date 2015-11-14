@@ -40,6 +40,22 @@ define( [], function() {
 		 * @return void
 		 */
 		clickDelete: function( e, model ) {
+			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', model );
+
+			// Add our field deletion to our change log.
+			var label = 'Field - ' + model.get( 'label' ) + ' - Removed' ;
+			var dashicon = 'dismiss';
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'removeField', newModel, null, label, dashicon );
+			
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			var results = changeCollection.where( { model: model } );
+
+			_.each( results, function( model ) {
+				model.set( 'model', newModel );
+				model.set( 'disabled', true );
+			} );
+
 			nfRadio.channel( 'fields' ).request( 'delete:field', model );
 		},
 
@@ -79,6 +95,11 @@ define( [], function() {
 			newModel.set( 'id', tmpID );
 			// Add new model.
 			nfRadio.channel( 'fields' ).request( 'add:field', newModel );
+			// Add our field addition to our change log.
+			var label = 'Field - ' + model.get( 'label' ) + ' - Duplicated' ;
+			var dashicon = 'admin-page';
+			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateField', model, null, label, dashicon );
+			
 			// Update preview.
 			nfRadio.channel( 'app' ).request( 'update:db' );
 		}

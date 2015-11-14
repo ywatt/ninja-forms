@@ -134,12 +134,12 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                         foreach( $setting[ 'settings' ] as $fieldset_setting ){
 
                             $setting_name = $fieldset_setting[ 'name' ];
-                            $master_settings_list[ $setting_name ] = $fieldset_setting;
+                            $master_settings_list[] = $fieldset_setting;
                         }
                     } else {
 
                         $setting_name = $setting[ 'name' ];
-                        $master_settings_list[ $setting_name ] = $setting;
+                        $master_settings_list[] = $setting;
                     }
                 }
             }

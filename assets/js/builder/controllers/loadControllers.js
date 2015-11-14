@@ -27,6 +27,8 @@ define(
 		'builder/controllers/app/pushstate',
 		'builder/controllers/app/hotkeys',
 		'builder/controllers/app/cleanState',
+		'builder/controllers/app/coreUndo',
+		'builder/controllers/app/cloneModelDeep',
 		/*
 		 * Fields domain controllers
 		 */
@@ -45,8 +47,9 @@ define(
 		'builder/controllers/fields/getSettingChildView',
 		'builder/controllers/fields/fieldset',
 		'builder/controllers/fields/listField',
-		'builder/controllers/fields/submitField',
-		'builder/controllers/fields/editActive',	
+		'builder/controllers/fields/editActive',
+		'builder/controllers/fields/fieldSettings',
+
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -75,6 +78,8 @@ define(
 		Pushstate,
 		Hotkeys,
 		CleanState,
+		CoreUndo,
+		CloneModelDeep,
 		/*
 		 * Fields domain controllers
 		 */
@@ -93,8 +98,8 @@ define(
 		DrawerFieldTypeSettingChildView,
 		Fieldset,
 		ListField,
-		SubmitField,
-		EditActive
+		EditActive,
+		FieldSettings
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -123,6 +128,8 @@ define(
 				new AppChangeDomain();
 				new EditActive();
 				new CleanState();
+				new CoreUndo();
+				new CloneModelDeep();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
@@ -132,7 +139,6 @@ define(
 				 */
 				new Fieldset();
 				new ListField();
-				new SubmitField();
 
 				new FieldTypes();
 				new FieldTypeDrag();
@@ -146,7 +152,7 @@ define(
 				new FieldsChangeSettingDefault();
 				new toggleFieldSetting();
 				new DrawerFieldTypeSettingChildView();
-
+				new FieldSettings();
 				/*
 				 * TODO: Actions domain controllers
 				 */
