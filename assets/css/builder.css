@@ -30,7 +30,8 @@ Header and Nav for Ninja Forms App
 #nf-header ul li a.preview .dashicons { display: inline-block; margin-left: 10px; }
 #nf-header ul:after { clear: both; content: ""; display: block; }
 #nf-header input[type=submit] { float: right; }
-#nf-header .nf-cancel { float: right; margin-right: 20px; padding: 14px 0; }
+#nf-header .nf-cancel { float: right; margin-right: 30px; padding: 8px 0; }
+#nf-header .nf-cancel .dashicons { font-size: 30px; }
 #nf-header:after { clear: both; content: ""; display: block; }
 
 #nf-app-header { height: 50px; }
