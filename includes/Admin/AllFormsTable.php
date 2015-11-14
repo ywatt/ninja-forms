@@ -222,7 +222,7 @@ class NF_Admin_AllFormsTable extends WP_List_Table
                 NF_Database_Models_Form::duplicate( absint( $_GET['id'] ) );
             }
 
-            wp_redirect( admin_url( 'admin.php?page=nf-all-forms' ) );
+            wp_redirect( admin_url( 'admin.php?page=ninja-forms' ) );
             exit;
         }
 
@@ -238,7 +238,7 @@ class NF_Admin_AllFormsTable extends WP_List_Table
                 self::delete_item( absint( $_GET['id'] ) );
             }
 
-            wp_redirect( admin_url( 'admin.php?page=nf-all-forms' ) );
+            wp_redirect( admin_url( 'admin.php?page=ninja-forms' ) );
             exit;
         }
 
@@ -255,7 +255,7 @@ class NF_Admin_AllFormsTable extends WP_List_Table
                 self::delete_item( absint( $id ) );
             }
 
-            wp_redirect( admin_url( 'admin.php?page=nf-all-forms' ) );
+            wp_redirect( admin_url( 'admin.php?page=ninja-forms' ) );
             exit;
         }
     }
