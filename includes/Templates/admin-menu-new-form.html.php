@@ -215,7 +215,7 @@
     <tr>
 
         <td>
-            <span class="dashicons dashicons-<%= dashicon %>"></span> <span class="nf-changes-item <%= ( disabled ) ? 'disabled' : '' %>"></span>
+            <span class="dashicons dashicons-<%= label.dashicon %>"></span> <span class="nf-changes-item <%= ( disabled ) ? 'disabled' : '' %>"></span>
         </td>
         <td>
             <%= label.object %>

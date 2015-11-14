@@ -9,7 +9,6 @@
 define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
-			dashicon: 'admin-generic',
 			disabled: false
 		}
 	} );

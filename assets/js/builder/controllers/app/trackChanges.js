@@ -18,6 +18,9 @@ define( ['builder/models/app/changeCollection', 'builder/models/app/changeModel'
 
 		registerChange: function( action, model, changes, label, data ) {
 			var data = typeof data !== 'undefined' ? data : {};
+			if ( 'undefined' == typeof label.dashicon ) {
+				label.dashicon = 'admin-generic';
+			}
 			var changeModel = new ChangeModel({
 				action: action,
 				model: model,
