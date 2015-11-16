@@ -13,7 +13,7 @@ class NF_Fields_Phone extends NF_Abstracts_UserInfo
 
     protected $_type = 'textbox';
 
-    protected $_templates = array( 'tel', 'textbox', 'input' );
+    protected $_templates = 'tel';
 
     public function __construct()
     {

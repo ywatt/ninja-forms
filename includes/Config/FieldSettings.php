@@ -84,6 +84,37 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary'
     ),
 
+    'number' => array(
+        'name' => 'number',
+        'type' => 'fieldset',
+        'label' => __( 'Number Options', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'primary',
+        'settings' => array(
+            array(
+                'name' => 'min',
+                'type' => 'textbox',
+                'placeholder' => '',
+                'label' => __( 'Min', 'ninja-forms' ),
+                'width' => 'one-third'
+            ),
+            array(
+                'name' => 'max',
+                'type' => 'textbox',
+                'label' => __( 'Max', 'ninja-forms' ),
+                'placeholder' => '',
+                'width' => 'one-third'
+            ),
+            array(
+                'name' => 'step',
+                'type' => 'textbox',
+                'label' => __( 'Step', 'ninja-forms' ),
+                'placeholder' => '',
+                'width' => 'one-third'
+            ),
+        ),
+    ),
+
     /*
      * DEFAULT VALUE
      */
