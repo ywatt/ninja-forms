@@ -15,6 +15,10 @@ define( [], function() {
 			this.model.on( 'change:disabled', this.render, this );
 		},
 
+		onBeforeDestroy: function() {
+			this.model.off( 'change:disabled', this.render );
+		},
+
 		/**
 		 * When we render this element, remove the extra wrapping <div> that backbone creates.
 		 * 
