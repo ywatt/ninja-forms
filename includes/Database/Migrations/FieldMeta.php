@@ -16,7 +16,7 @@ class NF_Database_Migrations_FieldMeta extends NF_Abstracts_Migration
             `id` int NOT NULL AUTO_INCREMENT,
             `parent_id` int NOT NULL,
             `key` tinytext NOT NULL,
-            `value` tinytext,
+            `value` longtext,
             UNIQUE KEY (`id`)
         ) $this->charset_collate;";
 

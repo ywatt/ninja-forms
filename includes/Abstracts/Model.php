@@ -509,29 +509,16 @@ class NF_Abstracts_Model
             );
         }
 
-        // If the settings is not a column, attempt to update the value in the model's meta table.
-        $result = $this->_db->update(
+        $result = $this->_db->replace(
             $this->_meta_table_name,
             array(
-                'value' => $value
-            ),
-            array(
+                'key' => $key,
+                'value' => $value,
                 'parent_id' => $this->_id,
-                'key' => $key
             )
         );
 
-        // If nothing was updated, then a new row needs to be created.
-        if( 0 === $result ){
-            $result = $this->_db->insert(
-                $this->_meta_table_name,
-                array(
-                    'key' => $key,
-                    'value' => $value,
-                    'parent_id' => $this->_id,
-                )
-            );
-        }
+        return $result;
     }
 
     /**

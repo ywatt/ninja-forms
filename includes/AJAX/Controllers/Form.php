@@ -43,6 +43,8 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
                     $tmp_id = $field->get_tmp_id();
                     $this->_data['new_ids']['fields'][$tmp_id] = $field->get_id();
                 }
+
+                $this->_data[ 'fields' ][ $id ] = $field->get_settings();
             }
         }
 
