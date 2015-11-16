@@ -13,17 +13,17 @@ class NF_Fields_Button extends NF_Abstracts_Field
 
     protected $_type = 'button';
 
-    protected $_templates = array( 'button', 'input' );
+    protected $_templates = 'button';
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->_settings[ 'label' ][ 'width' ] = 'full';
+        $this->_settings = $this->load_settings(
+            array( 'label' )
+        );
 
-        unset( $this->_settings[ 'label_pos' ] );
-        unset( $this->_settings[ 'placeholder' ] );
-        unset( $this->_settings[ 'required' ] );
+        $this->_settings[ 'label' ][ 'width' ] = 'full';
 
         $this->_nicename = __( 'Button', 'ninja-forms' );
     }

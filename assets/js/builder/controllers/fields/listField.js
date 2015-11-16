@@ -10,7 +10,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/listOptionCollection', 'builder/views/drawerFieldTypeSettingListComposite'], function( listOptionCollection, listCompositeView ) {
+define( ['builder/models/fields/listOptionModel', 'builder/models/fields/listOptionCollection', 'builder/views/fields/drawer/typeSettingListComposite'], function( listOptionModel, listOptionCollection, listCompositeView ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Respond to requests for the childView for list type fields.
@@ -38,10 +38,16 @@ define( ['builder/models/listOptionCollection', 'builder/views/drawerFieldTypeSe
 		 * @return void
 		 */
 		createOptionCollection: function( model ) {
-			if ( ! model.get( 'options' ) ) {
-				model.set( 'options', [ { calc: 1, label: 'One', value: 'one' }, { calc: 2, label: 'Two', value: 'two' }, { calc: 3, label: 'Three', value: 'three' } ] );
+			var options = model.get( 'options' );
+			if ( ! options ) {
+				model.set( 'options', [ { calc: 1, label: 'One', value: 'one', order: 0 }, { calc: 2, label: 'Two', value: 'two', order: 1 }, { calc: 3, label: 'Three', value: 'three', order: 2 } ], { silent: true } );
 			}
-			model.set( 'options', new listOptionCollection( model.get( 'options' ) ) );
+
+			if ( false == options instanceof Backbone.Collection ) {
+				var optionCollection = new listOptionCollection();
+				optionCollection.add( model.get( 'options' ) );
+				model.set( 'options', optionCollection, { silent: true } );
+			}
 		},
 
 		/**
@@ -56,9 +62,26 @@ define( ['builder/models/listOptionCollection', 'builder/views/drawerFieldTypeSe
 		changeOption: function( e, model, fieldModel ) {
 			var name = jQuery( e.target ).data( 'id' );
 			var value = jQuery( e.target ).val();
+			var before = model.get( name );
 			model.set( name, value );
 			// Triger an update on our fieldModel
-			this.triggerFieldModel( model.collection, fieldModel );
+			this.triggerFieldModel( model, fieldModel );
+
+			var after = value;
+			
+			var changes = {
+				attr: name,
+				before: before,
+				after: after
+			}
+
+			var label = {
+				object: 'Field',
+				label: fieldModel.get( 'label' ),
+				change: 'Option ' + name + ' changed from ' + before + ' to ' + after
+			};
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', model, changes, label );
 		},
 
 		/**
@@ -70,8 +93,20 @@ define( ['builder/models/listOptionCollection', 'builder/views/drawerFieldTypeSe
 		 * @return void
 		 */
 		addOption: function( collection, fieldModel ) {
-			collection.add( { label: '', value: '', calc: '' } );
-			this.triggerFieldModel( collection, fieldModel );
+			var model = new listOptionModel( { label: '', value: '', calc: '', order: collection.length } );
+			collection.add( model );
+
+			// Add our field addition to our change log.
+			var label = {
+				object: 'Field',
+				label: fieldModel.get( 'label' ),
+				change: 'Option Added',
+				dashicon: 'plus-alt'
+			};
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'addListOption', model, null, label );
+			
+			this.triggerFieldModel( model, fieldModel );
 		},
 
 		/**
@@ -84,8 +119,39 @@ define( ['builder/models/listOptionCollection', 'builder/views/drawerFieldTypeSe
 		 * @return void
 		 */
 		deleteOption: function( model, collection, fieldModel ) {
+			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', model );
+
+			// Add our field deletion to our change log.
+			var label = {
+				object: 'Field',
+				label: fieldModel.get( 'label' ),
+				change: 'Option ' + newModel.get( 'label' ) + ' Removed',
+				dashicon: 'dismiss'
+			};
+
+			var data = {
+				collection: collection
+			}
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'removeListOption', newModel, null, label, data );
+			
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			var results = changeCollection.where( { model: model } );
+
+			_.each( results, function( changeModel ) {
+				if ( 'object' == typeof changeModel.get( 'data' ) ) {
+					_.each( changeModel.get( 'data' ), function( dataModel ) {
+						if ( dataModel.model == fieldModel ) {
+							dataModel.model = newModel;
+						}
+					} );
+				}
+				changeModel.set( 'model', newModel );
+				changeModel.set( 'disabled', true );
+			} );
+
 			collection.remove( model );
-			this.triggerFieldModel( collection, fieldModel );
+			this.triggerFieldModel( model, fieldModel );
 		},
 
 		/**
@@ -97,14 +163,8 @@ define( ['builder/models/listOptionCollection', 'builder/views/drawerFieldTypeSe
 		 * @param backbone.model 		fieldModel 	field model
 		 * @return void
 		 */
-		triggerFieldModel: function( collection, fieldModel ) {
-			if ( ! collection.arb ) {
-				collection.arb = true;
-			} else {
-				collection.arb = false;
-			}
-			var optionsClone = _.clone( collection );
-			fieldModel.set( 'options', optionsClone );			
+		triggerFieldModel: function( model, fieldModel ) {
+			nfRadio.channel( 'fields' ).trigger( 'update:setting', model );	
 		},
 
 		/**
@@ -126,14 +186,41 @@ define( ['builder/models/listOptionCollection', 'builder/views/drawerFieldTypeSe
 		 * @param  backbone.model 	setting  	Setting model
 		 * @return void
 		 */
-		updateOptionSortable: function( sortable, setting ) {
+		updateOptionSortable: function( ui, sortable, setting ) {
 			var newOrder = jQuery( sortable ).sortable( 'toArray' );
+			var dragModel = setting.collection.get( { cid: jQuery( ui.item ).prop( 'id' ) } );
+			var data = {
+				collection: setting.collection,
+				objModels: []
+			};
 			_.each( newOrder, function( cid, index ) {
-				setting.collection.get( { cid: cid } ).set( 'order', index );
+				var optionModel = setting.collection.get( { cid: cid } );
+				var oldPos = optionModel.get( 'order' );
+				optionModel.set( 'order', index );
+				var newPos = index;
+
+				console.log( optionModel.get( 'label' ) + ' old pos - ' + oldPos );
+
+				data.objModels.push( {
+					model: optionModel,
+					attr: 'order',
+					before: oldPos,
+					after: newPos
+				} );
 			} );
+			
 			setting.collection.sort();
 
-			this.triggerFieldModel( setting.collection, setting.fieldModel );
+			var label = {
+				object: 'Field',
+				label: setting.fieldModel.get( 'label' ),
+				change: 'Option ' + dragModel.get( 'label' ) + ' re-ordered from ' + dragModel._previousAttributes.order + ' to ' + dragModel.get( 'order' ),
+				dashicon: 'sort'
+			};
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'sortListOptions', dragModel, null, label, data );
+
+			this.triggerFieldModel( dragModel, setting.fieldModel );
 		},
 
 		/**

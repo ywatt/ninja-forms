@@ -46,28 +46,38 @@ abstract class NF_Abstracts_Field
     protected $_type = '';
 
     /**
+     * @var string
+     */
+    public static $_base_template = 'input';
+
+    /**
      * @var array
      */
     protected $_templates = array();
+
+    /**
+     * @var string
+     */
+    protected $_wrap_template = 'wrap';
 
     /**
      * @var array
      */
     protected $_old_classname = '';
 
+    //-----------------------------------------------------
+    // Public Methods
+    //-----------------------------------------------------
+
     /**
      * Constructor
      */
     public function __construct()
     {
+        // Translate the nicename property.
         $this->_nicename = __( $this->_nicename, 'ninja-forms' );
 
-        $this->_settings = Ninja_Forms::config( 'FieldSettings' );
     }
-
-    /*
-    * PUBLIC METHODS
-    */
 
     /**
      * Validate
@@ -80,6 +90,7 @@ abstract class NF_Abstracts_Field
     {
         $errors = array();
 
+        // Required check.
         if( isset( $field['required'] ) && $field['required'] && ! trim( $field['value'] ) ){
             $errors[] = 'Field is required.';
         }
@@ -87,6 +98,15 @@ abstract class NF_Abstracts_Field
         return $errors;
     }
 
+    /**
+     * Admin Form Element
+     *
+     * Returns the output for editing fields in a submission.
+     *
+     * @param $id
+     * @param $value
+     * @return string
+     */
     public function admin_form_element( $id, $value )
     {
         return "<input class='widefat' name='fields[$id]' value='$value' />";
@@ -119,6 +139,7 @@ abstract class NF_Abstracts_Field
 
     public function get_parent_type()
     {
+        // If a type is not set, return 'textbox'
         return ( get_parent_class() ) ? parent::_type : 'textbox';
     }
 
@@ -129,12 +150,56 @@ abstract class NF_Abstracts_Field
 
     public function get_templates()
     {
-        return $this->_templates;
+        $templates = (array) $this->_templates;
+
+        // Create a reflection for examining the parent
+        $reflection = new ReflectionClass( $this );
+        $parent_class = $reflection->getParentClass();
+
+        if ( $parent_class->isAbstract() ) {
+
+            $parent_class_name = $parent_class->getName();
+            $parent_templates = call_user_func( $parent_class_name . '::get_base_template' ); // Parent Class' Static Property
+            return array_merge( $templates, (array) $parent_templates );
+        }
+
+        $parent_class_name = strtolower( str_replace('NF_Fields_', '', $parent_class->getName() ) );
+        $parent = Ninja_Forms()->fields[$parent_class_name];
+        return array_merge($templates, $parent->get_templates());
+
+    }
+
+    public function get_wrap_template()
+    {
+        return $this->_wrap_template;
     }
 
     public function get_old_classname()
     {
         return $this->_old_classname;
+    }
+
+    protected function load_settings( $only_settings = array() )
+    {
+        // Loads a settings array from the FieldSettings configuration file.
+        $settings = Ninja_Forms::config( 'FieldSettings' );
+
+        if( ! empty( $only_settings ) ){
+
+            foreach( $settings as $key => $setting ){
+
+                if( ! in_array( $key, $only_settings) ){
+                    unset( $settings[ $key ] );
+                }
+            }
+        }
+
+        return $settings;
+    }
+
+    public static function get_base_template()
+    {
+        return self::$_base_template;
     }
 
 }

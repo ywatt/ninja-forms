@@ -1,7 +1,6 @@
 define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection ) {
 	var view = Marionette.ItemView.extend({
 		tagName: 'nf-section',
-		template: '#nf-tmpl-field-wrap',
 
 		initialize: function() {
 			_.bindAll( this, 'render' );
@@ -10,6 +9,8 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
     		this.model.bind( 'change:addWrapperClass', this.addWrapperClass, this );
     		this.model.bind( 'change:removeWrapperClass', this.removeWrapperClass, this );
     		this.listenTo( nfRadio.channel( 'submit' ), 'before:submit', this.test );
+
+    		this.template = '#nf-tmpl-field-' + this.model.get( 'wrap_template' );
 		},
 
 		test: function( model ) {
@@ -67,7 +68,7 @@ define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection
 				renderElement: function(){
 					this.setPlaceholder();
 					this.setClasses();
-					var tmpl = _.find( this.templates, function( tmpl ) {
+					var tmpl = _.find( this.element_templates, function( tmpl ) {
 						if ( 0 < jQuery( '#nf-tmpl-field-' + tmpl ).length ) {
 							return true;
 						}

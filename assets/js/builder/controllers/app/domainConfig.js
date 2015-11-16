@@ -18,19 +18,19 @@
  */
 define( [
 	// Require our domain collection
-	'builder/models/appDomainCollection',
+	'builder/models/app/domainCollection',
 	// Require our fields domain files
-	'builder/views/fieldsMainHeader',
-	'builder/views/fieldsSubHeader',
-	'builder/views/fieldsMainContentFieldCollection',
+	'builder/views/fields/mainHeader',
+	'builder/views/fields/subHeader',
+	'builder/views/fields/mainContentFieldCollection',
 	// Require our actions domain files
-	'builder/views/actionsMainHeader', 
-	'builder/views/actionsSubHeader',
-	'builder/views/actionsMainContent',
+	'builder/views/actions/mainHeader', 
+	'builder/views/actions/subHeader',
+	'builder/views/actions/mainContent',
 	// Require our settings domain files
-	'builder/views/settingsMainHeader',
-	'builder/views/settingsSubHeader',
-	'builder/views/settingsMainContent',
+	'builder/views/settings/mainHeader',
+	'builder/views/settings/subHeader',
+	'builder/views/settings/mainContent',
 	], 
 	function( 
 		appDomainCollection,

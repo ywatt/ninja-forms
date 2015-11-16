@@ -85,17 +85,20 @@ final class NF_Database_MockData
             array(
                 'label' => 'One',
                 'value' => '1',
-                'calc' => 1
+                'calc' => 1,
+                'order' => 1
             ),
             array(
                 'label' => 'Two',
                 'value' => '2',
-                'calc' => 2
+                'calc' => 2,
+                'order' => 2
             ),
             array(
                 'label' => 'Three',
                 'value' => '3',
-                'calc' => 3
+                'calc' => 3,
+                'order' => 3
             ),
         );
 
@@ -230,16 +233,19 @@ final class NF_Database_MockData
                         'label'	=> 'Phone',
                         'value'	=> 'phone',
                         'calc'  => '',
+                        'order' => 1,
                     ),
                     array(
                         'label'	=> 'Email',
                         'value'	=> 'email',
                         'calc'  => '',
+                        'order' => 2,
                     ),
                     array(
                         'label'	=> 'Snail Mail',
                         'value'	=> 'snail-mail',
                         'calc'  => '',
+                        'order' => 3,
                     ),
                 ),
                 'show_other'	=> 1,
@@ -314,34 +320,46 @@ final class NF_Database_MockData
                 'label'			=> 'Select List',
                 'options'      => array(
                     array(
-                    'label' => 'Option One',
-                    'value' => 1
+                        'label' => 'Option One',
+                        'value' => 1,
+                        'calc'  => '',
+                        'order' => 1,
                     ),
                     array(
-                    'label' => 'Option Two',
-                    'value' => 2
+                        'label' => 'Option Two',
+                        'value' => 2,
+                        'calc'  => '',
+                        'order' => 2,
                     ),
                     array(
-                    'label' => 'Option Three',
-                    'value' => 3
+                        'label' => 'Option Three',
+                        'value' => 3,
+                        'calc'  => '',
+                        'order' => 3,
                     )
                 )
             ),
             array(
                 'type' 			=> 'listradio',
                 'label'			=> 'Radio List',
-                'options'      => array(
+                'options'       => array(
                     array(
-                    'label' => 'Option One',
-                    'value' => 1
+                        'label' => 'Option One',
+                        'value' => 1,
+                        'calc'  => '',
+                        'order' => 1,
                     ),
                     array(
-                    'label' => 'Option Two',
-                    'value' => 2
+                        'label' => 'Option Two',
+                        'value' => 2,
+                        'calc'  => '',
+                        'order' => 2,
                     ),
                     array(
-                    'label' => 'Option Three',
-                    'value' => 3
+                        'label' => 'Option Three',
+                        'value' => 3,
+                        'calc'  => '',
+                        'order' => 3,
                     )
                 )
             ),
@@ -361,6 +379,7 @@ final class NF_Database_MockData
             ),
         );
 
+        $order = 1;
         foreach( array( 'above', 'right', 'below', 'left', 'hidden' ) as $label_pos ) {
 
 
@@ -375,8 +394,14 @@ final class NF_Database_MockData
                 if ( 'hidden' == $settings['label_pos'] && 'submit' != $settings['type'] ) $settings['placeholder'] = $settings['label'];
 
                 $field = Ninja_Forms()->form($form_id)->field()->get();
+
+                $settings[ 'order' ] = $order;
+
                 $field->update_settings($settings)->save();
+
+                $order++;
             }
+            $order++;
         }
     }
 

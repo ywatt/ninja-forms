@@ -20,6 +20,9 @@ abstract class NF_Abstracts_Controller
      * PUBLIC METHODS
      */
 
+    /**
+     * NF_Abstracts_Controller constructor.
+     */
     public function __construct()
     {
         //This section intentionally left blank.
@@ -30,6 +33,11 @@ abstract class NF_Abstracts_Controller
      * PROTECTED METHODS
      */
 
+    /**
+     * Respond
+     *
+     * A wrapper for the WordPress AJAX response pattern.
+     */
     protected function _respond()
     {
         $response = array( 'errors' => $this->_errors, 'data' => $this->_data );

@@ -8,6 +8,8 @@ final class NF_Display_Render
         'app-after-form',
         'form-layout',
         'fields-wrap',
+        'fields-wrap-no-label',
+        'fields-wrap-no-container',
         'fields-label',
         'fields-error',
     );
@@ -36,7 +38,6 @@ final class NF_Display_Render
             $field->update_setting( 'id', $field->get_id() );
 
             $templates = $field_class->get_templates();
-            $old_classname = $field_class->get_old_classname();
 
             if( ! array( $templates ) ){
                 $templates = array( $templates );
@@ -48,8 +49,9 @@ final class NF_Display_Render
 
             $settings = $field->get_settings();
 
-            $settings[ 'templates' ] = $templates;
-            $settings[ 'old_classname' ] = $old_classname;
+            $settings[ 'element_templates' ] = $templates;
+            $settings[ 'old_classname' ] = $field_class->get_old_classname();
+            $settings[ 'wrap_template' ] = $field_class->get_wrap_template();
 
             $fields[] = $settings;
         }
@@ -106,7 +108,6 @@ final class NF_Display_Render
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
             $templates = $field_class->get_templates();
-            $old_classname = $field_class->get_old_classname();
 
             if( ! array( $templates ) ){
                 $templates = array( $templates );
@@ -116,8 +117,9 @@ final class NF_Display_Render
                 self::load_template('fields-' . $template);
             }
 
-            $field[ 'settings' ][ 'templates' ] = $templates;
-            $field[ 'settings' ][ 'old_classname' ] = $old_classname; 
+            $field[ 'settings' ][ 'element_templates' ] = $templates;
+            $field[ 'settings' ][ 'old_classname' ] = $field_class->get_old_classname();
+            $field[ 'settings' ][ 'wrap_template' ] = $field_class->get_wrap_template();
 
             $fields[] = $field['settings'];
         }

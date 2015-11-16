@@ -11,7 +11,9 @@ class NF_Fields_Submit extends NF_Fields_Button
 
     protected $_type = 'submit';
 
-    protected $_templates = array( 'submit', 'button', 'input' );
+    protected $_templates = 'submit';
+
+    protected $_wrap_template = 'wrap-no-label';
 
     public function __construct()
     {
@@ -19,13 +21,11 @@ class NF_Fields_Submit extends NF_Fields_Button
 
         $this->_nicename = __( 'Submit', 'ninja-forms' );
 
-        $settings = Ninja_Forms::config( 'SubmitFieldSettings' );
+        $this->_settings = $this->load_settings(
+            array( 'label', 'timed_submit' )
+        );
 
-        $this->_settings = array_merge( $this->_settings, $settings );
-
-        unset( $this->_settings[ 'label_pos' ] );
-        unset( $this->_settings[ 'placeholder' ] );
-        unset( $this->_settings[ 'required' ] );
+        $this->_settings[ 'label' ][ 'width' ] = 'full';
 
         add_filter( 'nf_sub_hidden_field_types', array( $this, 'hide_field_type' ) );
     }

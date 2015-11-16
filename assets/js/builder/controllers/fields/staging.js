@@ -9,7 +9,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/stagingCollection'], function( stagingCollection ) {
+define( ['builder/models/fields/stagingCollection'], function( stagingCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Create our staged fields collection
@@ -86,7 +86,12 @@ define( ['builder/models/stagingCollection'], function( stagingCollection ) {
 					// Create an object that can be added as a model.
 					var tmpField = { id: tmpID, label: model.get( 'nicename' ), type: model.get( 'slug' ) };
 					// Add our new field.
-					nfRadio.channel( 'fields' ).request( 'add:field',  tmpField, false );
+					var newModel = nfRadio.channel( 'fields' ).request( 'add:field',  tmpField, false );
+					// Add our field addition to our change log.
+					var label = 'Field - ' + newModel.get( 'label' ) + ' - Added' ;
+					var dashicon = 'plus-alt';
+					nfRadio.channel( 'changes' ).request( 'register:change', 'addField', newModel, null, label, dashicon );
+			
 				} );
 				// Trigger a reset on our field collection so that our view re-renders
 				fieldCollection.trigger( 'reset', fieldCollection );

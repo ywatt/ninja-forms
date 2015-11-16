@@ -30,7 +30,8 @@ Header and Nav for Ninja Forms App
 #nf-header ul li a.preview .dashicons { display: inline-block; margin-left: 10px; }
 #nf-header ul:after { clear: both; content: ""; display: block; }
 #nf-header input[type=submit] { float: right; }
-#nf-header .nf-cancel { float: right; margin-right: 20px; padding: 14px 0; }
+#nf-header .nf-cancel { float: right; margin-right: 30px; padding: 8px 0; }
+#nf-header .nf-cancel .dashicons { font-size: 30px; }
 #nf-header:after { clear: both; content: ""; display: block; }
 
 #nf-app-header { height: 50px; }
@@ -134,6 +135,7 @@ All styles used within the drawer
 .nf-settings h3 .dashicons { color: #bbb; font-size: 28px; margin: -4px 10px 0 -30px; }
 .nf-settings::after { clear: both; content: ""; display: block; }
 
+.nf-full { clear: both; }
 .nf-full.toggle-row { border-bottom: 1px solid #ccc; margin: 0; position: relative; }
 .nf-full.toggle-row:first-child { border-top: 1px solid #ccc; }
 .nf-full.toggle-row label { display: inline-block; padding: 15px 60px 15px 0; }
@@ -221,6 +223,9 @@ All styles used within the drawer
 
 .nf-action-items .nf-item { height: 75px; line-height: 55px; }
 
+table.nf-changes tr td { border-bottom: 1px solid #ccc; }
+table.nf-changes tr.disabled-row td { color: #bbb; }
+
 /*
 Various custom field styles
 --------------------------------- */
@@ -237,7 +242,7 @@ input[type=checkbox].nf-toggle:checked::after { background: #84CC1E; border: 2px
 input[type=checkbox].nf-toggle:checked::before { top: 2px; left: 22px; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
 
 .ninja-forms-app .nf-select { position: relative; }
-.ninja-forms-app .nf-select select { background: #f9f9f9; border: 0; margin-top: 5px; height: 46px !important; padding: 0 30px 0 15px; width: 100%; -webkit-appearance: none; }
+.ninja-forms-app .nf-select select { background: #f9f9f9; border: 0; margin-top: 5px; height: 43px !important; padding: 0 30px 0 15px; width: 100%; -webkit-appearance: none; }
 .ninja-forms-app .nf-select::after { content: "\f347"; font-family: 'Dashicons'; position: absolute; width: 30px; height: 30px; right: 0; top: 19px; z-index: 101; }
 
 /*
@@ -299,6 +304,10 @@ All styles used for displaying table content
 
 .ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y { background-color: #999; }
 
+.ui-sortable-helper.nf-field-wrap  { box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); }
+
+.ui-draggable-dragging .nf-item { box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); }
+
 .ui-draggable-handle { cursor: pointer; }
 
 .ui-draggable-dragging { z-index: 99; }
@@ -311,15 +320,11 @@ All styles used for displaying table content
 .nf-fields-sortable-placeholder { margin-top: -14px; margin-bottom: 6px; border: 4px solid #84CC1E; }
 
 .nf-staged-fields-drag { position: relative; display: block; height: 80px; }
-
-.nf-staged-fields-drag:after { clear: both; content: ''; display: block; }
-
-.nf-staged-fields-drag .nf-field-wrap { position: absolute; width: 700px; }
-
+.nf-staged-fields-drag::after { clear: both; content: ''; display: block; }
+.nf-staged-fields-drag .nf-field-wrap { position: absolute; width: 500px; }
+.nf-staged-fields-drag #drag-item-1, .nf-staged-fields-drag #drag-item-2, .nf-staged-fields-drag #drag-item-3 { box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); }
 .nf-staged-fields-drag #drag-item-1 { bottom: 0px; left: 0px; z-index: 3; }
-
 .nf-staged-fields-drag #drag-item-2 { bottom: 5px; left: 5px; z-index: 2; }
-
 .nf-staged-fields-drag #drag-item-3 { bottom: 10px; left: 10px; z-index: 1; }
 
 .nf-staged-fields-sortable-placeholder { float: left; height: 28px; border-right: 8px solid #84CC1E; margin-right: -4px; margin-left: -4px; }

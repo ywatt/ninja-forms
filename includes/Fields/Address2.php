@@ -11,7 +11,7 @@ class NF_Fields_Address2 extends NF_Abstracts_UserInfo
 
     protected $_section = '';
 
-    protected $_templates = array( 'address', 'address2', 'textbox', 'input' );
+    protected $_templates = array( 'address2', 'address' );
 
     public function __construct()
     {

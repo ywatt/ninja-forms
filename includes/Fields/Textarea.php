@@ -11,7 +11,7 @@ class NF_Fields_Textarea extends NF_Abstracts_Field
 
     protected $_type = 'textarea';
 
-    protected $_templates = array( 'textarea', 'textbox', 'input' );
+    protected $_templates = 'textarea';
 
 
     public function __construct()
@@ -20,9 +20,11 @@ class NF_Fields_Textarea extends NF_Abstracts_Field
 
         $this->_nicename = __( 'Textarea', 'ninja-forms' );
 
-        $settings = Ninja_Forms::config( 'FieldInputSettings' );
+        $this->_settings = $this->load_settings(
+            array( 'label', 'label_pos', 'required', 'placeholder', 'textarea_default_value', 'input_limit_set', 'rte_enable', 'rte_media', 'rte_mobile' )
+        );
 
-        $this->_settings = array_merge( $this->_settings, $settings );
+        $this->_settings[ 'placeholder' ][ 'type' ] = 'textarea';
     }
 
     public function admin_form_element( $id, $value )

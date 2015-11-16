@@ -6,7 +6,7 @@ var nfRadio = Backbone.Radio;
 var nfUndoManager = new Backbone.UndoManager();
 
 jQuery( document ).ready( function( $ ) {
-	require( ['builder/views/builder', 'builder/controllers/loadControllers'], function( BuilderView, LoadControllers ) {
+	require( ['builder/views/app/builder', 'builder/controllers/loadControllers'], function( BuilderView, LoadControllers ) {
 
 		var NinjaForms = Marionette.Application.extend( {
 

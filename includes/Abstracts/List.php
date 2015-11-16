@@ -9,19 +9,17 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
 
     protected $_section = 'common';
 
-    protected $_template = '';
-
     protected $_type = 'list';
+
+    public static $_base_template = 'list';
 
     public function __construct()
     {
         parent::__construct();
 
-        $settings = Ninja_Forms::config( 'FieldListSettings' );
-
-        $this->_settings = array_merge( $this->_settings, $settings );
-
-        unset( $this->_settings[ 'placeholder' ] );
+        $this->_settings = $this->load_settings(
+            array( 'label', 'label_pos', 'required', 'options', 'classes' )
+        );
     }
 
     public function get_parent_type()

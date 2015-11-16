@@ -13,15 +13,15 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
     protected $_type = 'textbox';
 
-    protected $_templates = array( 'textbox', 'input' );
+    protected $_templates = 'textbox';
 
     public function __construct()
     {
         parent::__construct();
 
-        $settings = Ninja_Forms::config( 'FieldTextboxSettings' );
-
-        $this->_settings = array_merge( $this->_settings, $settings );
+        $this->_settings = $this->load_settings(
+            array( 'label', 'label_pos', 'required', 'placeholder', 'default', 'classes', 'input_limit_set' )
+        );
 
         $this->_nicename = __( 'Textbox', 'ninja-forms' );
     }

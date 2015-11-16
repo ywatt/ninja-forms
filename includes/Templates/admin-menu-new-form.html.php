@@ -212,39 +212,36 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
-    <%
+    <% if ( ! disabled ) { %>
+    <tr>
+    <% } else { %>
+    <tr class="disabled-row">
+    <% } %>
 
-    switch( type ) {
-        case 'change':
-            var id = object.get( 'id' );
-            var objectLabel = object.get( 'label' );
-            var objectType = object.get( 'objectType' );
-            var setting = Object.keys( before )[0];
-            if ( 'order' != setting ) {
-                var typeSetting = nfRadio.channel( 'data' ).request( 'get:fieldTypeSetting', object.get( 'type' ), setting );
-                var settingLabel = typeSetting.get( 'label' );
-                var dashicon = 'admin-generic';
-            } else {
-                var settingLabel = 'Order';
-                var dashicon = 'sort';
-            }
+        <td>
+            <span class="dashicons dashicons-<%= label.dashicon %>"></span> <span class="nf-changes-item <%= ( disabled ) ? 'disabled' : '' %>"></span>
+        </td>
+        <td>
+            <%= label.object %>
+        </td>
+        <td>
+            <%= label.label %>
+        </td>
+        <td>
+            <%= label.change %>
+        </td>
+        <td>
+            <% if ( ! disabled ) { %>
+                <a href="#" class="undoSingle disabled" style="text-decoration:none;">
+            <% } %>
 
-            var msg = objectType + ': ' + objectLabel + ' ' + settingLabel + ' changed from ' + before[ setting ] + ' to ' + after[ setting ];
-            break;
-        case 'add':
-            var dashicon = 'plus-alt';
-            var msg = 'Add First Name field';
-            break;
-        case 'remove':
-            var dashicon = 'dismiss';
-            var msg = 'Delete First Name field';
-            break;
-    }
-    %>
-    <li>
-        <span class="dashicons dashicons-<%= dashicon %>"></span> <%= msg %>
-    </li>
-    %>
+            <span class="dashicons dashicons-image-rotate <%= ( disabled ) ? 'disabled' : '' %>"></span>
+
+            <% if ( ! disabled ) { %>
+                </a>
+            <% } %>
+        </td>
+    </tr>
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field" type="text/template">

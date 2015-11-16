@@ -1,21 +1,21 @@
 /**
  * Creates and stores a collection of field types. This includes all of the settings shown when editing a field.
- * 
+ *
  * 1) Create our settings sections config
  * 2) Loops over our preloaded data and adds that to our field type collection
  *
  * Also responds to requests for data about field types
- * 
+ *
  * @package Ninja Forms builder
  * @subpackage Fields
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
 define( [
-	'builder/models/fieldTypeCollection',
-	'builder/models/fieldTypeSettingCollection',
-	'builder/models/fieldTypeSettingGroupCollection',
-	'builder/models/fieldTypeSectionCollection'
+	'builder/models/fields/typeCollection',
+	'builder/models/fields/typeSettingCollection',
+	'builder/models/fields/typeSettingGroupCollection',
+	'builder/models/fields/typeSectionCollection'
 	], function(
 	fieldTypeCollection,
 	fieldTypeSettingCollection,
@@ -33,11 +33,16 @@ define( [
 					nicename: 'Common Fields',
 					fieldTypes: []
 				},
-				{ 
+				{
 					id: 'userinfo',
 					nicename: 'User Information Fields',
 					fieldTypes: []
-				}
+				},
+                {
+                    id: 'misc',
+                    nicename: 'Miscellaneous Fields',
+                    fieldTypes: []
+                }
 			] );
 
 			// Since we want to access the "this" context later, we assign it to that so it isn't overwritten
@@ -51,7 +56,7 @@ define( [
 					var groupTmp = {
 						label: group.label,
 						display: group.display,
-						settings: new fieldTypeSettingCollection( group.settings ), 
+						settings: new fieldTypeSettingCollection( group.settings ),
 					}
 					// Add the tmp object to our setting groups collection
 					settingGroups.add( groupTmp );
@@ -61,7 +66,7 @@ define( [
 				if ( 'undefined' != typeof that.fieldTypeSections.get( type.section ) ) {
 					that.fieldTypeSections.get( type.section ).get( 'fieldTypes' ).push( type.id );
 				}
-				
+
 				// Build an object for this type that we can add to our field type collection
 				var fieldType = {
 					id: type.id,
@@ -73,19 +78,18 @@ define( [
 				// Add tmp object to our field type collection
 				that.collection.add( fieldType );
 			} );
-			
+
 			// Respond to requests to get field type, collection, settings, and sections
 			nfRadio.channel( 'fields' ).reply( 'get:type', this.getFieldType, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeCollection', this.getTypeCollection, this );
-			nfRadio.channel( 'fields' ).reply( 'get:typeSetting', this.getTypeSetting, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeSections', this.getTypeSections, this );
-			// Listen to clicks on field types		
+			// Listen to clicks on field types
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addStagedField );
 		},
 
 		/**
 		 * Return a field type by id
-		 * 
+		 *
 		 * @since  3.0
 		 * @param  string 			id 	field type
 		 * @return backbone.model    	field type model
@@ -96,7 +100,7 @@ define( [
 
         /**
          * Return the entire field type collection
-         * 
+         *
          * @since  3.0
          * @param  string 				id 	[description]
          * @return backbone.collection    	field type collection
@@ -106,28 +110,8 @@ define( [
         },
 
         /**
-         * Return an individual field setting model.
-         * Loops through our settings groups until we find the setting.
-         * 
-         * @since  3.0
-         * @param  string 			type   	field type
-         * @param  string 			search 	setting name
-         * @return backbone.model        	setting model
-         */
-        getTypeSetting: function( type, search ) {
-        	var setting = false;
-			_.find( this.collection.get( type ).get('settingGroups' ).models, function( group ) {
-				setting = group.get( 'settings' ).findWhere( { name: search } );
-				if ( setting ) {
-					return true;
-				}
-			} );
-			return setting;
-        },
-
-        /**
          * Add a field type to our staging area when the field type button is clicked.
-         * 
+         *
          * @since 3.0
          * @param Object e event
          * @return void
@@ -139,7 +123,7 @@ define( [
 
         /**
          * Return our field type settings sections
-         * 
+         *
          * @since  3.0
          * @return backbone.collection field type settings sections
          */

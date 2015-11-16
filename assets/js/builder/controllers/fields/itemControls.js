@@ -39,8 +39,35 @@ define( [], function() {
 		 * @param  backbone.model 	model 	field model
 		 * @return void
 		 */
-		clickDelete: function( e, model ) {
-			nfRadio.channel( 'fields' ).request( 'delete:field', model );
+		clickDelete: function( e, fieldModel ) {
+			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', fieldModel );
+
+			// Add our field deletion to our change log.
+			var label = {
+				object: 'Field',
+				label: fieldModel.get( 'label' ),
+				change: 'Removed',
+				dashicon: 'dismiss'
+			};
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'removeField', newModel, null, label );
+			
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			var results = changeCollection.where( { model: fieldModel } );
+
+			_.each( results, function( changeModel ) {
+				if ( 'object' == typeof changeModel.get( 'data' ) ) {
+					_.each( changeModel.get( 'data' ), function( dataModel ) {
+						if ( dataModel.model == fieldModel ) {
+							dataModel.model = newModel;
+						}
+					} );
+				}
+				changeModel.set( 'model', newModel );
+				changeModel.set( 'disabled', true );
+			} );
+
+			nfRadio.channel( 'fields' ).request( 'delete:field', fieldModel );
 		},
 
 		/**
@@ -79,6 +106,16 @@ define( [], function() {
 			newModel.set( 'id', tmpID );
 			// Add new model.
 			nfRadio.channel( 'fields' ).request( 'add:field', newModel );
+			// Add our field addition to our change log.
+			var label = {
+				object: 'Field',
+				label: model.get( 'label' ),
+				change: 'Duplicated',
+				dashicon: 'admin-page'
+			};
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateField', newModel, null, label );
+			
 			// Update preview.
 			nfRadio.channel( 'app' ).request( 'update:db' );
 		}

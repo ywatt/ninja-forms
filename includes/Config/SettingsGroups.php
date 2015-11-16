@@ -8,6 +8,11 @@ return array(
         'display' => TRUE
     ),
 
+    'rte' => array(
+        'id' => 'rte',
+        'label' => __( 'Rich Text Editor (RTE)', 'ninja-forms' )
+    ),
+
     'restrictions' => array(
         'id' => 'restrictions',
         'label' => __( 'Restrictions', 'ninja-forms' )
@@ -16,6 +21,11 @@ return array(
     'advanced' => array(
         'id' => 'advanced',
         'label' => __( 'Advanced', 'ninja-forms' )
+    ),
+
+    'administration' => array(
+        'id' => 'administration',
+        'label' => __( 'Administration', 'ninja-forms' )
     )
 
 );

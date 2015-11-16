@@ -20,7 +20,8 @@ define( [], function() {
 		},
 
 		viewChanges: function() {
-			nfRadio.channel( 'app' ).request( 'open:drawer', 'viewChanges', { collection: nfUndoManager.stack } );
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			nfRadio.channel( 'app' ).request( 'open:drawer', 'viewChanges', { collection: changeCollection } );
 		}
 
 	});

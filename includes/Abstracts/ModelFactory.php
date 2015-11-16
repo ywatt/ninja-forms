@@ -6,30 +6,56 @@
 class NF_Abstracts_ModelFactory
 {
     /**
+     * Database Object
+     *
      * @var
      */
     protected $_db;
 
     /**
+     * The last set object.
+     *   Used to create context between two objects in a chain.
+     *
      * @var object
      */
     protected $_object;
 
     /**
+     * Fields
+     *
+     * An array of field model objects.
+     *
      * @var array
      */
     protected $_fields = array();
 
     /**
+     * Actions
+     *
+     * An array of action model objects.
+     *
      * @var array
      */
     protected $_actions = array();
 
     /**
+     * Objects
+     *
+     * An array of generic model objects.
+     *
      * @var array
      */
     protected $_objects = array();
 
+    //-----------------------------------------------------
+    // Public Methods
+    //-----------------------------------------------------
+
+    /**
+     * NF_Abstracts_ModelFactory constructor.
+     * @param $db
+     * @param $id
+     */
     public function __construct( $db, $id )
     {
         $this->_db = $db;
@@ -49,6 +75,14 @@ class NF_Abstracts_ModelFactory
         return $this->_object;
     }
 
+    /**
+     * Get Forms
+     *
+     * Returns an array of Form Model Objects.
+     *
+     * @param array $where
+     * @return array|bool
+     */
     public function get_forms( array $where = array() )
     {
         if( 'form' != $this->_object->get_type() ) return FALSE;
@@ -56,6 +90,14 @@ class NF_Abstracts_ModelFactory
         return $this->_object->find( NULL, $where );
     }
 
+    /**
+     * Export Form
+     *
+     * A wrapper for the Form Model export method.
+     *
+     * @param bool|FALSE $return
+     * @return array
+     */
     public function export_form( $return = FALSE )
     {
         $form_id = $this->_object->get_id();
@@ -63,6 +105,13 @@ class NF_Abstracts_ModelFactory
         return NF_Database_Models_Form::export( $form_id, $return );
     }
 
+    /**
+     * Import Form
+     *
+     * A wrapper for the Form Model import method.
+     *
+     * @param $import
+     */
     public function import_form( $import )
     {
         $import = maybe_unserialize( $import );
@@ -245,6 +294,15 @@ class NF_Abstracts_ModelFactory
      * SUBMISSIONS
      */
 
+    /**
+     * Submission
+     *
+     * Returns a single submission by ID,
+     *   or an empty submission.
+     *
+     * @param string $id
+     * @return $this
+     */
     public function sub( $id = '' )
     {
         $form_id = $this->_object->get_id();
@@ -254,6 +312,14 @@ class NF_Abstracts_ModelFactory
         return $this;
     }
 
+    /**
+     * Get Submission
+     *
+     * Returns a single submission by ID.
+     *
+     * @param $id
+     * @return NF_Database_Models_Submission
+     */
     public function get_sub( $id )
     {
         $parent_id = $this->_object->get_id();
@@ -261,6 +327,15 @@ class NF_Abstracts_ModelFactory
         return $this->_objects[ $id ] = new NF_Database_Models_Submission( $id, $parent_id );
     }
 
+    /**
+     * Get Submissions
+     *
+     * Returns an array of Submission Model Objects.
+     *
+     * @param array $where
+     * @param bool|FALSE $fresh
+     * @return array
+     */
     public function get_subs( $where = array(), $fresh = FALSE )
     {
         if( $where || $fresh || ! $this->_objects ){
@@ -279,6 +354,15 @@ class NF_Abstracts_ModelFactory
         return $this->_objects;
     }
 
+    /**
+     * Export Submissions
+     *
+     * A wrapper for the Submission Model export method.
+     *
+     * @param array $sub_ids
+     * @param bool|FALSE $return
+     * @return string
+     */
     public function export_subs( array $sub_ids = array(), $return = FALSE )
     {
         $form_id = $this->_object->get_id();
@@ -290,6 +374,15 @@ class NF_Abstracts_ModelFactory
      * GENERIC
      */
 
+    /**
+     * Get Model
+     *
+     * A generic method call for any object model type.
+     *
+     * @param $id
+     * @param $type
+     * @return bool|NF_Database_Models_Action|NF_Database_Models_Field|NF_Database_Models_Form|NF_Database_Models_Object
+     */
     public function get_model( $id, $type )
     {
         global $wpdb;

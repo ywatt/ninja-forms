@@ -13,7 +13,7 @@ class NF_Fields_Email extends NF_Abstracts_UserInfo
 
     protected $_section = 'userinfo';
 
-    protected $_templates = array( 'email', 'textbox', 'input' );
+    protected $_templates = 'email';
 
     public function __construct()
     {

@@ -24,6 +24,7 @@ define( [], function() {
 		 */
 		changeSetting: function( e, settingTypeModel, fieldModel ) {
 			var name = settingTypeModel.get( 'name' );
+			var before = fieldModel.get( name );
 			// Sends out a request on the fields-type (fields-text, fields-checkbox, etc) channel to see if that field type needs to return a special value for saving.
 			var value = nfRadio.channel( 'fields-' + settingTypeModel.get( 'type' ) ).request( 'before:updateSetting', e, fieldModel, name, settingTypeModel );
 			// If we didn't get a special field-type value, get the value from the event passed.
@@ -32,6 +33,22 @@ define( [], function() {
 			}
 			// Update our field model with the new setting value.
 			fieldModel.set( name, value );
+			// Register our setting change with our change tracker
+			var after = value;
+			
+			var changes = {
+				attr: name,
+				before: before,
+				after: after
+			}
+
+			var label = {
+				object: 'Field',
+				label: fieldModel.get( 'label' ),
+				change: 'Changed from ' + before + ' to ' + after
+			};
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', fieldModel, changes, label );
 		}
 
 	});

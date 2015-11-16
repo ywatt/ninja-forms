@@ -32,7 +32,7 @@ final class NF_Actions_Redirect extends NF_Abstracts_Action
     {
         parent::__construct();
 
-        $settings = Ninja_Forms::config( 'RedirectActionSettings' );
+        $settings = Ninja_Forms::config( 'ActionRedirectSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );
     }
