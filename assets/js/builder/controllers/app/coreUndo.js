@@ -10,10 +10,15 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			nfRadio.channel( 'changes' ).reply( 'undo:changeSetting', this.undoChangeSetting, this );
+
 			nfRadio.channel( 'changes' ).reply( 'undo:sortFields', this.undoSortFields, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:addField', this.undoAddField, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:removeField', this.undoRemoveField, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:duplicateField', this.undoDuplicateField, this );
+
+			nfRadio.channel( 'changes' ).reply( 'undo:addListOption', this.undoAddListOption, this );
+			nfRadio.channel( 'changes' ).reply( 'undo:removeListOption', this.undoRemoveListOption, this );
+			nfRadio.channel( 'changes' ).reply( 'undo:sortListOptions', this.undoSortListOptions, this );
 		},
 
 		/**
@@ -134,6 +139,54 @@ define( [], function() {
 				}
 			} );
 
+			this.maybeRemoveChange( change, remove );
+		},
+
+		undoAddListOption: function( change, remove ) {
+			var model = change.get( 'model' );
+
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			var results = changeCollection.where( { model: model } );
+
+			_.each( results, function( changeModel ) {
+				if ( changeModel !== change ) {
+					changeCollection.remove( changeModel );
+				}
+			} );
+
+			model.collection.remove( model );
+			this.maybeRemoveChange( change, remove );
+		},
+
+		undoRemoveListOption: function( change, remove ) {
+			var model = change.get( 'model' );
+			var collection = change.get( 'data' ).collection;
+			collection.add( model );
+
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			var results = changeCollection.where( { model: model } );
+
+			_.each( results, function( model ) {
+				if ( model !== change ) {
+					model.set( 'disabled', false );
+				}
+			} );
+
+			this.maybeRemoveChange( change, remove );
+		},
+
+		undoSortListOptions: function( change, remove ) {
+			var data = change.get( 'data' );
+			var collection = data.collection;
+			var objModels = data.objModels;
+
+			_.each( objModels, function( changeModel ) {
+				var before = changeModel.before;
+				var optionModel = changeModel.model;
+				optionModel.set( 'order', before );
+			} );
+
+			collection.sort();
 			this.maybeRemoveChange( change, remove );
 		},
 

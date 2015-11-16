@@ -14,11 +14,20 @@ define( ['builder/models/fields/listOptionModel'], function( listOptionModel ) {
 		initialize: function() {
 			// Listen to the 'sort' event
 			this.on( 'sort', this.changeCollection, this );
+			// Listen to the 'add' event
+			this.on( 'add', this.addOption, this );
 		},
 
 		changeCollection: function() {
 			// Trigger a 'sort:options' event so that our field model can update
 			nfRadio.channel( 'list-repeater' ).trigger( 'sort:options', this );
+		},
+
+		addOption: function( model, collection ) {
+			if ( ! model.get( 'order' ) ) {
+				// console.log( collection.length );
+				// model.set( 'order', this.length );
+			}
 		}
 	} );
 	return collection;
