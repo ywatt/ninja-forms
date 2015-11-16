@@ -14,6 +14,8 @@ define( ['builder/models/app/changeCollection', 'builder/models/app/changeModel'
 			nfRadio.channel( 'changes' ).reply( 'register:change', this.registerChange, this );
 			// Respond to requests for the change collection
 			nfRadio.channel( 'changes' ).reply( 'get:changeCollection', this.getCollection, this );
+			// Listen for changes in our clean state. If it goes to clean, clear our collection.
+			this.listenTo( nfRadio.channel( 'app' ), 'change:clean', this.maybeResetCollection );
 		},
 
 		registerChange: function( action, model, changes, label, data ) {
@@ -34,6 +36,12 @@ define( ['builder/models/app/changeCollection', 'builder/models/app/changeModel'
 
 		getCollection: function() {
 			return this.collection;
+		},
+
+		maybeResetCollection: function( clean ) {
+			if ( clean ) {
+				this.collection.reset();
+			}
 		}
 
 	});
