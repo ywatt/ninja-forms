@@ -290,7 +290,7 @@ define( [], function() {
 					dashicon: 'sort'
 				};
 
-				nfRadio.channel( 'changes' ).request( 'register:change', 'sortFields', dragModel, null, label, data );					
+				nfRadio.channel( 'changes' ).request( 'register:change', 'sortFields', dragModel, null, label, data );
 			}
 
 			

@@ -61,18 +61,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
     ),
 
     /*
-     * TEXTAREA PLACEHOLDER
-     */
-
-    'textarea_placeholder' => array(
-        'name' => 'textarea_placeholder',
-        'type' => 'textarea',
-        'label' => __( 'Placeholder', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'advanced'
-    ),
-
-    /*
      * REQUIRED
      */
 
@@ -84,6 +72,10 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary'
     ),
 
+    /*
+     * NUMBER
+     */
+
     'number' => array(
         'name' => 'number',
         'type' => 'fieldset',
@@ -92,21 +84,21 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'settings' => array(
             array(
-                'name' => 'min',
+                'name' => 'num_min',
                 'type' => 'textbox',
                 'placeholder' => '',
                 'label' => __( 'Min', 'ninja-forms' ),
                 'width' => 'one-third'
             ),
             array(
-                'name' => 'max',
+                'name' => 'num_max',
                 'type' => 'textbox',
                 'label' => __( 'Max', 'ninja-forms' ),
                 'placeholder' => '',
                 'width' => 'one-third'
             ),
             array(
-                'name' => 'step',
+                'name' => 'num_step',
                 'type' => 'textbox',
                 'label' => __( 'Step', 'ninja-forms' ),
                 'placeholder' => '',

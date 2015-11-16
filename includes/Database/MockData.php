@@ -85,17 +85,20 @@ final class NF_Database_MockData
             array(
                 'label' => 'One',
                 'value' => '1',
-                'calc' => 1
+                'calc' => 1,
+                'order' => 1
             ),
             array(
                 'label' => 'Two',
                 'value' => '2',
-                'calc' => 2
+                'calc' => 2,
+                'order' => 2
             ),
             array(
                 'label' => 'Three',
                 'value' => '3',
-                'calc' => 3
+                'calc' => 3,
+                'order' => 3
             ),
         );
 
@@ -230,16 +233,19 @@ final class NF_Database_MockData
                         'label'	=> 'Phone',
                         'value'	=> 'phone',
                         'calc'  => '',
+                        'order' => 1,
                     ),
                     array(
                         'label'	=> 'Email',
                         'value'	=> 'email',
                         'calc'  => '',
+                        'order' => 2,
                     ),
                     array(
                         'label'	=> 'Snail Mail',
                         'value'	=> 'snail-mail',
                         'calc'  => '',
+                        'order' => 3,
                     ),
                 ),
                 'show_other'	=> 1,
@@ -316,38 +322,44 @@ final class NF_Database_MockData
                     array(
                         'label' => 'Option One',
                         'value' => 1,
-                        'calc' => ''
+                        'calc'  => '',
+                        'order' => 1,
                     ),
                     array(
                         'label' => 'Option Two',
                         'value' => 2,
-                        'calc' => ''
+                        'calc'  => '',
+                        'order' => 2,
                     ),
                     array(
                         'label' => 'Option Three',
                         'value' => 3,
-                        'calc' => ''
+                        'calc'  => '',
+                        'order' => 3,
                     )
                 )
             ),
             array(
                 'type' 			=> 'listradio',
                 'label'			=> 'Radio List',
-                'options'      => array(
+                'options'       => array(
                     array(
                         'label' => 'Option One',
                         'value' => 1,
-                        'calc' => ''
+                        'calc'  => '',
+                        'order' => 1,
                     ),
                     array(
                         'label' => 'Option Two',
                         'value' => 2,
-                        'calc' => ''
+                        'calc'  => '',
+                        'order' => 2,
                     ),
                     array(
                         'label' => 'Option Three',
                         'value' => 3,
-                        'calc' => ''
+                        'calc'  => '',
+                        'order' => 3,
                     )
                 )
             ),

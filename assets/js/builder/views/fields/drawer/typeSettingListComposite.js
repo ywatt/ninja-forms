@@ -37,7 +37,7 @@ define( ['builder/views/fields/drawer/typeSettingListOption', 'builder/views/fie
 				},
 
 				update: function( e, ui ) {
-					nfRadio.channel( 'list-repeater' ).request( 'update:optionSortable', this, that );
+					nfRadio.channel( 'list-repeater' ).request( 'update:optionSortable', ui, this, that );
 				}
 			} );
 		},
