@@ -61,19 +61,14 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
         add_meta_box(
             'nf_import_export_forms_import',
             __( 'Import Forms', 'ninja-forms' ),
-            function(){
-                Ninja_Forms::template( 'admin-metabox-import-export-forms-import.html.php' );
-            },
+            array( $this, 'template_import_forms' ),
             'nf_import_export_forms'
         );
 
         add_meta_box(
             'nf_import_export_forms_export',
             __( 'Export Forms', 'ninja-forms' ),
-            function(){
-                $forms = Ninja_Forms()->form()->get_forms();
-                Ninja_Forms::template( 'admin-metabox-import-export-forms-export.html.php', compact( 'forms' ) );
-            },
+            array( $this, 'template_export_forms' ),
             'nf_import_export_forms'
         );
 
@@ -83,19 +78,36 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
         add_meta_box(
             'nf_import_export_favorite_fields_import',
             __( 'Import Favorite Fields', 'ninja-forms' ),
-            function(){
-                Ninja_Forms::template( 'admin-metabox-import-export-favorite-fields-import.html.php' );
-            },
+            array( $this, 'template_import_favorite_fields' ),
             'nf_import_export_favorite_fields'
         );
 
         add_meta_box(
             'nf_import_export_favorite_fields_export',
-            __( 'Export Facvorite Fields', 'ninja-forms' ),
-            function(){
-                Ninja_Forms::template( 'admin-metabox-import-export-favorite-fields-export.html.php' );
-            },
+            __( 'Export Favorite Fields', 'ninja-forms' ),
+            array( $this, 'template_export_favorite_fields' ),
             'nf_import_export_favorite_fields'
         );
+    }
+
+    public function template_import_forms()
+    {
+        Ninja_Forms::template( 'admin-metabox-import-export-forms-import.html.php' );
+    }
+
+    public function template_export_forms()
+    {
+        $forms = Ninja_Forms()->form()->get_forms();
+        Ninja_Forms::template( 'admin-metabox-import-export-forms-export.html.php', compact( 'forms' ) );
+    }
+
+    public function template_import_favorite_fields()
+    {
+        Ninja_Forms::template( 'admin-metabox-import-export-favorite-fields-import.html.php' );
+    }
+
+    public function template_export_favorite_fields()
+    {
+        Ninja_Forms::template( 'admin-metabox-import-export-favorite-fields-export.html.php' );
     }
 }
