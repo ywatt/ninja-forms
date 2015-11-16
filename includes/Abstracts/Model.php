@@ -220,7 +220,7 @@ class NF_Abstracts_Model
     public function get_settings()
     {
         // If the ID is not set, then we cannot pull settings from the Database.
-        if( ! $this->_id ) return;
+        if( ! $this->_id ) return $this->_settings;
 
         // Only query if settings haven't been already queried or cache is FALSE.
         if( ! $this->_settings || ! $this->_cache ) {
