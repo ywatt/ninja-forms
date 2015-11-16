@@ -25,6 +25,8 @@ class NF_Fields_Hidden extends NF_Abstracts_Input
             array( 'label', 'default' )
         );
 
+        $this->_settings[ 'label' ][ 'width' ] = 'full';
+
         $this->_nicename = __( 'Hidden', 'ninja-forms' );
     }
 }
