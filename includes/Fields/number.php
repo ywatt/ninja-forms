@@ -7,7 +7,7 @@ class NF_Fields_Number extends NF_Abstracts_Input
 {
     protected $_name = 'number';
 
-    protected $_section = 'misc';
+    protected $_section = '';
 
     protected $_type = 'number';
 
