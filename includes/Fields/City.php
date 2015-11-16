@@ -11,7 +11,7 @@ class NF_Fields_City extends NF_Abstracts_UserInfo
 
     protected $_section = 'userinfo';
 
-    protected $_templates = array( 'city', 'textbox', 'input' );
+    protected $_templates = 'city';
 
     public function __construct()
     {

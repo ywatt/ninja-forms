@@ -13,7 +13,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
     protected $_type = 'checkbox';
 
-    protected $_templates = array( 'checkbox', 'input' );
+    protected $_templates = 'checkbox';
 
     public function __construct()
     {
@@ -24,7 +24,6 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
         $this->_settings = $this->load_settings(
             array( 'label', 'label_pos', 'checkbox_default_value', 'required', 'classes' )
         );
-
 
     }
 }

@@ -57,7 +57,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'type' => 'textbox',
         'label' => __( 'Placeholder', 'ninja-forms' ),
         'width' => 'full',
-        'group' => 'primary'
+        'group' => 'advanced'
     ),
 
     /*
@@ -69,7 +69,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'type' => 'textarea',
         'label' => __( 'Placeholder', 'ninja-forms' ),
         'width' => 'full',
-        'group' => 'primary'
+        'group' => 'advanced'
     ),
 
     /*
@@ -253,6 +253,31 @@ return apply_filters( 'ninja-forms-field-settings', array(
    /*
     * Timed Submit Label
     */
+
+   'timed_submit' => array(
+        'name' => 'timed_submit',
+        'type' => 'fieldset',
+        'label' => __( 'Timed Submit', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'settings' => array(
+            array(
+                'name' => 'timer_label',
+                'type' => 'textbox',
+                'placeholder' => '',
+                'label' => __( 'Timer Label', 'ninja-forms' ),
+                'width' => 'one-half'
+            ),
+            array(
+                'name' => 'timer_countdown',
+                'type' => 'textbox',
+                'label' => __( 'Countdown', 'ninja-forms' ),
+                'value' => 10,
+                'placeholder' => '',
+                'width' => 'one-half'
+            ),
+        ),
+    ),
 
     'timed_submit_label' => array(
         'name' => 'timed_submit_label',
@@ -523,3 +548,11 @@ return apply_filters( 'ninja-forms-field-settings', array(
     ),
 
 ));
+
+
+// Example of settings
+
+// Add all core settings. Fields can unset if unneeded.
+// $this->_settings = $this->load_settings(
+//     array( 'label', 'label_pos', 'required', 'number', 'spam_question', 'mask', 'input_limit_set','rich_text_editor', 'placeholder', 'textare_placeholder', 'default', 'checkbox_default_value', 'classes', 'timed_submit' )
+// );

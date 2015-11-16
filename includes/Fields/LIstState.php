@@ -13,7 +13,7 @@ class NF_Fields_ListState extends NF_Abstracts_List
 
     protected $_type = 'liststate';
 
-    protected $_templates = array( 'liststate', 'list', 'input' );
+    protected $_templates = 'liststate';
 
     public function __construct()
     {

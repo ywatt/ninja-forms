@@ -9,9 +9,9 @@ class NF_Fields_ListCheckbox extends NF_Abstracts_List
 
     protected $_nicename = 'Checkbox List';
 
-    protected $_section = '';
+    protected $_section = 'common';
 
-    protected $_templates = array( 'listcheckbox', 'list', 'input' );
+    protected $_templates = 'listcheckbox';
 
     protected $_old_classname = 'list-checkbox';
 

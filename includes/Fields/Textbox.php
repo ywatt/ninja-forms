@@ -19,6 +19,10 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
     {
         parent::__construct();
 
+        $this->_settings = $this->load_settings(
+            array( 'label', 'label_pos', 'required', 'placeholder', 'default', 'classes', 'input_limit_set' )
+        );
+
         $this->_nicename = __( 'Textbox', 'ninja-forms' );
     }
 }

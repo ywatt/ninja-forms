@@ -11,7 +11,7 @@ class NF_Fields_LastName extends NF_Abstracts_UserInfo
 
     protected $_section = 'userinfo';
 
-    protected $_templates = array( 'lastname', 'textbox', 'input' );
+    protected $_templates = 'lastname';
 
     public function __construct()
     {

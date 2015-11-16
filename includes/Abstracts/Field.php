@@ -76,6 +76,7 @@ abstract class NF_Abstracts_Field
     {
         // Translate the nicename property.
         $this->_nicename = __( $this->_nicename, 'ninja-forms' );
+
     }
 
     /**

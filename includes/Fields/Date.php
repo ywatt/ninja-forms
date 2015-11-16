@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_Date
  */
-class NF_Fields_Date extends NF_Abstracts_Input
+class NF_Fields_Date extends NF_Fields_Textbox
 {
     protected $_name = 'date';
 
@@ -13,7 +13,7 @@ class NF_Fields_Date extends NF_Abstracts_Input
 
     protected $_type = 'textbox';
 
-    protected $_templates = array( 'date', 'textbox', 'input' );
+    protected $_templates = 'date';
 
     public function __construct()
     {

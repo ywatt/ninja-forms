@@ -17,12 +17,7 @@ class NF_Fields_Number extends NF_Abstracts_Input
     {
         parent::__construct();
 
-        $this->_settings = array_merge( $this->_settings, $this->load_settings( array( 'placeholder', 'number' ) ) );
-
-        unset(
-            $this->_settings['mask'],
-            $this->_settings['input_limit_set']
-        );
+        $this->_settings = $this->load_settings( array( 'label', 'label_pos', 'required', 'placeholder', 'number', 'default', 'classes' ) );
 
         $this->_nicename = __( 'Number', 'ninja-forms' );
     }
