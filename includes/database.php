@@ -241,17 +241,18 @@ function nf_wp_kses_post_deep( $value ){
 
 	if( ! is_array( $value ) ) {
 
-		while ( stripos( $value, 'script' ) || stripos( $value, '</textarea>' ) || stripos( $value, 'textarea>' ) || stripos( $value, '"&gt;' ) || stripos( $value, '">' ) || stripos( $value, "'&gt;") || stripos( $value, "'>") ) {
+		while (stripos($value, 'script') || stripos($value, '</textarea>') || stripos($value, 'textarea>') || stripos($value, '"&gt;') || stripos($value, '">') || stripos($value, "'&gt;") || stripos($value, "'>")) {
 
-			$value = str_ireplace( 'script', '', $value );
-			$value = str_ireplace( '</textarea>', '', $value );
-			$value = str_ireplace( 'textarea>', '', $value );
-			$value = str_ireplace( '">', '', $value );
-			$value = str_ireplace( '"&gt;', '', $value );
-			$value = str_ireplace( "'>", '', $value );
-			$value = str_ireplace( "'&gt;", '', $value );
-			$value = wp_kses_post( $value );
+			$value = str_ireplace('script', '', $value);
+			$value = str_ireplace('</textarea>', '', $value);
+			$value = str_ireplace('textarea>', '', $value);
+			$value = str_ireplace('">', '', $value);
+			$value = str_ireplace('"&gt;', '', $value);
+			$value = str_ireplace("'>", '', $value);
+			$value = str_ireplace("'&gt;", '', $value);
+			$value = wp_kses_post($value);
 		}
+	}
 
     return $value;
 }
