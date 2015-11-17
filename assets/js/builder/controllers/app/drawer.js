@@ -33,6 +33,9 @@ define( [], function() {
 		closeDrawer: function() {
 			// Get our current domain.
 			var currentDrawer = nfRadio.channel( 'app' ).request( 'get:currentDrawer' );
+			if ( ! currentDrawer ) {
+				return false;
+			}
 			// Triggers the before close drawer action on our current domain's drawer channel.
 			nfRadio.channel( 'drawer-' + currentDrawer.get( 'id' ) ).trigger( 'before:closeDrawer' );
 			nfRadio.channel( 'drawer' ).trigger( 'before:closeDrawer' );

@@ -20,7 +20,8 @@ define( [], function() {
 		events: {
 			'click .nf-edit-settings': 'clickEditField',
 			'click .nf-delete': 'clickDeleteField',
-			'click .nf-duplicate': 'clickDuplicateField'
+			'click .nf-duplicate': 'clickDuplicateField',
+			'click': 'maybeClickEditField'
 		},
 
 		clickEditField: function( e ) {
@@ -33,6 +34,12 @@ define( [], function() {
 
 		clickDuplicateField: function( e ) {
 			nfRadio.channel( 'fields' ).trigger( 'click:duplicateField', e, this.model );
+		},
+
+		maybeClickEditField: function( e ) {
+			if ( jQuery( e.target ).parent().hasClass( 'nf-fields-sortable' ) ) {
+				this.clickEditField();
+			}
 		},
 
 		templateHelpers: function () {
