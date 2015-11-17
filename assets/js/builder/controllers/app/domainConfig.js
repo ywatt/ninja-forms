@@ -52,6 +52,7 @@ define( [
 					id: 'fields',
 					nicename: 'Form Fields',
 					hotkeys: {
+						'Esc': 'close:drawer',
 						'Ctrl+Shift+n': 'add:newField',
 						'Ctrl+Shift+a': 'changeDomain:actions',
 						'Ctrl+Shift+s': 'changeDomain:settings'
@@ -79,6 +80,7 @@ define( [
 					id: 'actions',
 					nicename: 'Emails & Actions',
 					hotkeys: {
+						'Esc': 'close:drawer',
 						'Ctrl+Shift+n': 'add:newAction',
 						'Ctrl+Shift+f': 'changeDomain:fields',
 						'Ctrl+Shift+s': 'changeDomain:settings'
@@ -100,6 +102,7 @@ define( [
 					id: 'settings',
 					nicename: 'Settings',
 					hotkeys: {
+						'Esc': 'close:drawer',
 						'Ctrl+Shift+f': 'changeDomain:fields',
 						'Ctrl+Shift+a': 'changeDomain:actions'
 					},

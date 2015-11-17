@@ -72,6 +72,21 @@
     textarea {
         height: 200px;
     }
+    input[type=checkbox] {
+        appearance: none;
+        background: #f9f9f9;
+        border: 0;
+        height: 25px;
+        width: 25px;
+        padding: 2px 1px 0px !important;
+        margin: -3px -5px;
+        &:checked {
+            &::before {
+                content: "\f147";
+                font: 400 30px/1 dashicons;
+            }
+        }
+    }
 }
 .ninja-forms-app {
     .nf-list-options {

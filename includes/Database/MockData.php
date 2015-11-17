@@ -86,19 +86,22 @@ final class NF_Database_MockData
                 'label' => 'One',
                 'value' => '1',
                 'calc' => 1,
-                'order' => 1
+                'order' => 1,
+                'selected' => 0,
             ),
             array(
                 'label' => 'Two',
                 'value' => '2',
                 'calc' => 2,
-                'order' => 2
+                'order' => 2,
+                'selected' => 1,
             ),
             array(
                 'label' => 'Three',
                 'value' => '3',
                 'calc' => 3,
-                'order' => 3
+                'order' => 3,
+                'selected' => 0,
             ),
         );
 
@@ -234,18 +237,21 @@ final class NF_Database_MockData
                         'value'	=> 'phone',
                         'calc'  => '',
                         'order' => 1,
+                        'selected' => 0,
                     ),
                     array(
                         'label'	=> 'Email',
                         'value'	=> 'email',
                         'calc'  => '',
                         'order' => 2,
+                        'selected' => 0,
                     ),
                     array(
                         'label'	=> 'Snail Mail',
                         'value'	=> 'snail-mail',
                         'calc'  => '',
                         'order' => 3,
+                        'selected' => 0,
                     ),
                 ),
                 'show_other'	=> 1,
@@ -324,18 +330,21 @@ final class NF_Database_MockData
                         'value' => 1,
                         'calc'  => '',
                         'order' => 1,
+                        'selected' => 0,
                     ),
                     array(
                         'label' => 'Option Two',
                         'value' => 2,
                         'calc'  => '',
                         'order' => 2,
+                        'selected' => 0,
                     ),
                     array(
                         'label' => 'Option Three',
                         'value' => 3,
                         'calc'  => '',
                         'order' => 3,
+                        'selected' => 0,
                     )
                 )
             ),
@@ -348,18 +357,21 @@ final class NF_Database_MockData
                         'value' => 1,
                         'calc'  => '',
                         'order' => 1,
+                        'selected' => 0,
                     ),
                     array(
                         'label' => 'Option Two',
                         'value' => 2,
                         'calc'  => '',
                         'order' => 2,
+                        'selected' => 0,
                     ),
                     array(
                         'label' => 'Option Three',
                         'value' => 3,
                         'calc'  => '',
                         'order' => 3,
+                        'selected' => 0,
                     )
                 )
             ),

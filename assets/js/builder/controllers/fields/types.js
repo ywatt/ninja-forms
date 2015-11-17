@@ -73,7 +73,8 @@ define( [
 					nicename: type.nicename,
 					alias: type.alias,
 					parentType: type.parentType,
-					settingGroups: settingGroups
+					settingGroups: settingGroups,
+					settingDefaults: type.settingDefaults
 				}
 				// Add tmp object to our field type collection
 				that.collection.add( fieldType );

@@ -68,11 +68,12 @@
 
 <script id="nf-tmpl-main-content-field" type="text/template">
     <div id="<%= getFieldID() %>" class="<%= renderClasses() %>"> <%= label %> <%= renderRequired() %>
-        <ul class="nf-item-controls">
-            <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-            <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-            <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editField"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-        </ul>
+        
+            <ul class="nf-item-controls">
+                <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+                <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+                <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editField"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+            </ul>
     </div>
 </script>
 
@@ -430,9 +431,7 @@
                 <div>Label</div>
                 <div>Value</div>
                 <div>Calc Value</div>
-                <!--
                 <div><span class="dashicons dashicons-yes"></span></div>
-                -->
                 <div>&nbsp;</div>
             </div>
 
@@ -459,11 +458,9 @@
     <div>
         <input type="text" value="<%= calc %>" data-id="calc">
     </div>
-    <!--
     <div>
-        <input type="checkbox" value="1" data-id="selected">
+        <input type="checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
     </div>
-    -->
     <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>
     </div>
