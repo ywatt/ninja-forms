@@ -140,8 +140,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                             $setting_name = $fieldset_setting[ 'name' ];
                             $master_settings_list[] = $fieldset_setting;
 
-                            if( isset( $setting[ 'value' ] ) ) {
-                                $settings_defaults[$setting_name] = $setting['value'];
+                            if( isset( $fieldset_setting[ 'value' ] ) ) {
+                                $settings_defaults[$setting_name] = $fieldset_setting['value'];
                             }
                         }
                     } else {

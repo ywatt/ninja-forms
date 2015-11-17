@@ -10,11 +10,6 @@ define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
 			objectType: 'Field',
-			options: false,
-			label: '',
-			placeholder: '',
-			label_pos: 'above',
-			required: 0,
 			editActive: false
 		},
 
@@ -25,6 +20,14 @@ define( [], function() {
 			// Get our parent field type.
 			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', this.get( 'type' ) );
 			var parentType = fieldType.get( 'parentType' );
+
+			// Loop through our field type "settingDefaults" and add any default settings.
+			var that = this;
+			_.each( fieldType.get( 'settingDefaults' ), function( val, key ) {
+				if ( ! that.get( key ) ) {
+					that.set( key, val );
+				}
+			} );
 			
 			/*
 			 * Trigger an init event on three channels:
