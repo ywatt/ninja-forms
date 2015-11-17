@@ -51,7 +51,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
         'width' => 'one-half',
         'group' => 'primary',
-        'value' => 'default'
+        'value' => 'above'
     ),
 
     /*

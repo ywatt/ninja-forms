@@ -25,5 +25,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
             array( 'label', 'label_pos', 'checkbox_default_value', 'required', 'classes' )
         );
 
+        $this->_settings[ 'label_pos' ][ 'value' ] = 'right';
+
     }
 }

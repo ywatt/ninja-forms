@@ -213,11 +213,11 @@ define( [], function() {
 		 * @param  boolean 			remove 	should we remove this item from our change collection
 		 * @return void
 		 */
-		maybeRemoveChange: function( change, undoAll ) {
-			// Update preview.
-			nfRadio.channel( 'app' ).request( 'update:db' );			
+		maybeRemoveChange: function( change, undoAll ) {			
 			var undoAll = typeof undoAll !== 'undefined' ? undoAll : false;
 			if ( ! undoAll ) {
+				// Update preview.
+				nfRadio.channel( 'app' ).request( 'update:db' );
 				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
 				changeCollection.remove( change );
 				if ( 0 == changeCollection.length ) {
