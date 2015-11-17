@@ -184,6 +184,8 @@ All styles used within the drawer
 .ninja-forms-app label, .ninja-forms-app legend { color: #424242; font-size: 13px; text-transform: uppercase; }
 .ninja-forms-app input[type=text], .ninja-forms-app textarea { background: #f9f9f9; border: 0; margin-top: 5px; padding: 12px 15px; width: 100%; }
 .ninja-forms-app textarea { height: 200px; }
+.ninja-forms-app input[type=checkbox] { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: #f9f9f9; border: 0; height: 25px; width: 25px; padding: 2px 1px 0px !important; margin: -3px -5px; }
+.ninja-forms-app input[type=checkbox]:checked::before { content: "\f147"; font: 400 30px/1 dashicons; }
 
 .ninja-forms-app .nf-list-options { padding-bottom: 20px; }
 .ninja-forms-app .nf-list-options .nf-add-new { margin-left: 20px; }
