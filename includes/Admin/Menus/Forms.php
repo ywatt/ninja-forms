@@ -129,7 +129,13 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             foreach( $settings as $setting ){
 
                 $group = $setting[ 'group' ];
-                $settings_groups[ $group ][ 'settings' ][] = $setting;
+
+                if( 'fieldset' == $setting[ 'type' ] ){
+                    // Remove array keys for localization
+                    $setting[ 'settings' ] = array_values( $setting[ 'settings' ] );
+                }
+
+                $settings_groups[$group]['settings'][] = $setting;
 
                 if( isset( $setting[ 'name' ] ) ){
 

@@ -18,7 +18,14 @@ abstract class NF_Abstracts_UserInfo extends NF_Fields_Textbox
         parent::__construct();
 
         $this->_settings = $this->load_settings(
-            array( 'label', 'label_pos', 'required', 'user_info_default_value', 'placeholder', 'classes' )
+            array( 'label', 'label_pos', 'required', 'default', 'placeholder', 'classes' )
         );
+
+        $this->_settings[ 'default' ][ 'settings' ][ 'default_type' ][ 'options' ][] = array(
+            'label'  => __( 'User Meta (if logged in)', 'ninja-forms' ),
+            'value' => 'user-meta'
+        );
+
+        $this->_settings[ 'default' ][ 'settings' ][ 'default_type' ][ 'value' ] = 'user-meta';
     }
 }
