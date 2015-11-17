@@ -15,6 +15,7 @@ define( [], function() {
 		initialize: function() {
 			// When we change our domain, change the hotkeys to those within that object.
 			this.listenTo( nfRadio.channel( 'main' ), 'render:main', this.changeHotkeys );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'opened', this.changeHotkeys );
 			// Currently, these are the functions that run when the new field or new action hotkey is pressed.
 			// TODO: move these into a config module or into something more programmatic and scalable.
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'add:newField', this.addNewField );
@@ -23,6 +24,7 @@ define( [], function() {
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'changeDomain:fields', this.changeDomainFields );
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'changeDomain:actions', this.changeDomainActions );
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'changeDomain:settings', this.changeDomainSettings );
+			this.listenTo( nfRadio.channel( 'hotkeys' ), 'close:drawer', this.closeDrawer );
 		},
 
 		changeHotkeys: function() {
@@ -74,6 +76,10 @@ define( [], function() {
 			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
 			var settingsDomain = appDomainCollection.get( 'settings' );
 			nfRadio.channel( 'app' ).request( 'change:currentDomain', {}, settingsDomain );
+		},
+
+		closeDrawer: function() {
+			nfRadio.channel( 'app' ).request( 'close:drawer' );
 		}
 
 	});
