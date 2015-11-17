@@ -174,7 +174,7 @@ All styles used within the drawer
 .nf-button { border: 0; border-radius: 4px; cursor: pointer; display: inline-block; font-size: 17px; padding: 10px 30px; text-decoration: none; text-transform: uppercase; -webkit-appearance: none; -moz-appearance: none; }
 .nf-button.primary { background: #1EA9EA; color: #fff; }
 .nf-button.secondary { background: #fff; border: 1px solid #1EA9EA; color: #1EA9EA; }
-.nf-button.disabled { background: #ccc; }
+.nf-button.disabled { background: #ccc; cursor: default; }
 
 .nf-cancel { color: #999; font-size: 15px; }
 

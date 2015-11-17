@@ -20,6 +20,7 @@
     }
     &.disabled {
         background: #ccc;
+        cursor: default;
     }
 }
 .nf-cancel {
