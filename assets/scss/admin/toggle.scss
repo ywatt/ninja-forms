@@ -40,6 +40,7 @@ input[type=checkbox].nf-toggle {
             transition: all 0.3s ease;
         }
         &::before {
+            content: "";
             top: 2px;
             left: 22px;
             transition: all 0.3s ease;
