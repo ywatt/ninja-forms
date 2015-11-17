@@ -42,10 +42,12 @@ define( [], function() {
 				after: after
 			}
 
+			var settingModel = nfRadio.channel( 'fields' ).request( 'get:settingModel', name );
+
 			var label = {
 				object: 'Field',
 				label: fieldModel.get( 'label' ),
-				change: 'Changed from ' + before + ' to ' + after
+				change: 'Changed ' + settingModel.get( 'label' ) + ' from ' + before + ' to ' + after
 			};
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', fieldModel, changes, label );

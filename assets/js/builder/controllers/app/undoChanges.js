@@ -7,9 +7,10 @@ define( [], function() {
 
 		undoChanges: function() {
 			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			changeCollection.sort();
 			var that = this;
 			_.each( changeCollection.models, function( change ) {
-				that.undoSingle( change, false );
+				that.undoSingle( change, true );
 			} );
 			changeCollection.reset();
 			// Update preview.
@@ -18,8 +19,8 @@ define( [], function() {
 			nfRadio.channel( 'app' ).request( 'close:drawer' );
 		},
 
-		undoSingle: function( change, remove ) {
-			nfRadio.channel( 'changes' ).request( 'undo:' + change.get( 'action' ), change, remove );
+		undoSingle: function( change, undoAll ) {
+			nfRadio.channel( 'changes' ).request( 'undo:' + change.get( 'action' ), change, undoAll );
 		}
 
 	});

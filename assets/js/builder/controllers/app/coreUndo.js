@@ -26,16 +26,16 @@ define( [], function() {
 		 * 
 		 * @since  3.0
 		 * @param  backbone.model 	change 	model of our change
-		 * @param  boolean 			remove 	should we remove this item from our change collection
+		 * @param  boolean 			undoAll are we in the middle of an undo all action?
 		 * @return void
 		 */
-		undoChangeSetting: function( change, remove ) {
+		undoChangeSetting: function( change, undoAll ) {
 			var fieldModel = change.get( 'model' );
 			var changes = change.get( 'changes' );
 			var attr = changes.attr;
 			var before = changes.before;
 			fieldModel.set( attr, before );
-			this.maybeRemoveChange( change, remove );
+			this.maybeRemoveChange( change, undoAll );
 		},
 
 		/**
@@ -43,10 +43,10 @@ define( [], function() {
 		 * 
 		 * @since  3.0
 		 * @param  backbone.model 	change 	model of our change
-		 * @param  boolean 			remove 	should we remove this item from our change collection
+		 * @param  boolean 			undoAll are we in the middle of an undo all action?
 		 * @return void
 		 */
-		undoSortFields: function( change, remove ) {
+		undoSortFields: function( change, undoAll ) {
 			var objModels = change.get( 'data' );
 
 			_.each( objModels, function( changeModel ) {
@@ -57,7 +57,7 @@ define( [], function() {
 
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
 			fieldCollection.sort();
-			this.maybeRemoveChange( change, remove );
+			this.maybeRemoveChange( change, undoAll );
 		},
 
 		/**
@@ -66,27 +66,29 @@ define( [], function() {
 		 * 
 		 * @since  3.0
 		 * @param  backbone.model 	change 	model of our change
-		 * @param  boolean 			remove 	should we remove this item from our change collection
+		 * @param  boolean 			undoAll are we in the middle of an undo all action?
 		 * @return void
 		 */
-		undoAddField: function( change, remove ) {
+		undoAddField: function( change, undoAll ) {
 			var fieldModel = change.get( 'model' );
-			
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-			var results = changeCollection.where( { model: fieldModel } );
 
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
 			delete fieldCollection.newIDs[ fieldModel.get( 'id' ) ];
 			
-			_.each( results, function( model ) {
-				if ( model !== change ) {
-					changeCollection.remove( model );
-				}
-			} );
+			if ( ! undoAll ) {
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var results = changeCollection.where( { model: fieldModel } );
+
+				_.each( results, function( model ) {
+					if ( model !== change ) {
+						changeCollection.remove( model );
+					}
+				} );				
+			}
 			
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
 			fieldCollection.remove( fieldModel );
-			this.maybeRemoveChange( change, remove );
+			this.maybeRemoveChange( change, undoAll );
 		},		
 
 		/**
@@ -95,24 +97,26 @@ define( [], function() {
 		 * 
 		 * @since  3.0
 		 * @param  backbone.model 	change 	model of our change
-		 * @param  boolean 			remove 	should we remove this item from our change collection
+		 * @param  boolean 			undoAll are we in the middle of an undo all action?
 		 * @return void
 		 */
-		undoDuplicateField: function( change, remove ) {
+		undoDuplicateField: function( change, undoAll ) {
 			var fieldModel = change.get( 'model' );
-			
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-			var results = changeCollection.where( { model: fieldModel } );
 
-			_.each( results, function( model ) {
-				if ( model !== change ) {
-					changeCollection.remove( model );
-				}
-			} );
-			
+			if ( ! undoAll ) {
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var results = changeCollection.where( { model: fieldModel } );
+
+				_.each( results, function( model ) {
+					if ( model !== change ) {
+						changeCollection.remove( model );
+					}
+				} );				
+			}
+
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
 			fieldCollection.remove( fieldModel );
-			this.maybeRemoveChange( change, remove );
+			this.maybeRemoveChange( change, undoAll );
 		},
 
 		/**
@@ -120,74 +124,85 @@ define( [], function() {
 		 * 
 		 * @since  3.0
 		 * @param  backbone.model 	change 	model of our change
-		 * @param  boolean 			remove 	should we remove this item from our change collection
+		 * @param  boolean 			undoAll are we in the middle of an undo all action?
 		 * @return void
 		 */
-		undoRemoveField: function( change, remove ) {
+		undoRemoveField: function( change, undoAll ) {
 			var fieldModel = change.get( 'model' );
 			nfRadio.channel( 'fields' ).request( 'add:field', fieldModel );
 
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
 			delete fieldCollection.removedIDs[ fieldModel.get( 'id' ) ];
+			
+			if ( ! undoAll ) {
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var results = changeCollection.where( { model: fieldModel } );
 
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-			var results = changeCollection.where( { model: fieldModel } );
+				_.each( results, function( model ) {
+					if ( model !== change ) {
+						model.set( 'disabled', false );
+					}
+				} );				
+			}
 
-			_.each( results, function( model ) {
-				if ( model !== change ) {
-					model.set( 'disabled', false );
-				}
-			} );
+			// Trigger a reset on our field collection so that our view re-renders
+			fieldCollection.trigger( 'reset', fieldCollection );
 
-			this.maybeRemoveChange( change, remove );
+			this.maybeRemoveChange( change, undoAll );
 		},
 
-		undoAddListOption: function( change, remove ) {
+		undoAddListOption: function( change, undoAll ) {
 			var model = change.get( 'model' );
 
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-			var results = changeCollection.where( { model: model } );
+			if ( ! undoAll ) {
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var results = changeCollection.where( { model: model } );
 
-			_.each( results, function( changeModel ) {
-				if ( changeModel !== change ) {
-					changeCollection.remove( changeModel );
-				}
-			} );
+				_.each( results, function( changeModel ) {
+					if ( changeModel !== change ) {
+						changeCollection.remove( changeModel );
+					}
+				} );				
+			}
 
 			model.collection.remove( model );
-			this.maybeRemoveChange( change, remove );
+			this.maybeRemoveChange( change, undoAll );
 		},
 
-		undoRemoveListOption: function( change, remove ) {
+		undoRemoveListOption: function( change, undoAll ) {
 			var model = change.get( 'model' );
 			var collection = change.get( 'data' ).collection;
 			collection.add( model );
 
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-			var results = changeCollection.where( { model: model } );
+			if ( ! undoAll ) {
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var results = changeCollection.where( { model: model } );
 
-			_.each( results, function( model ) {
-				if ( model !== change ) {
-					model.set( 'disabled', false );
-				}
-			} );
+				_.each( results, function( model ) {
+					if ( model !== change ) {
+						model.set( 'disabled', false );
+					}
+				} );				
+			}
 
-			this.maybeRemoveChange( change, remove );
+			this.maybeRemoveChange( change, undoAll );
 		},
 
-		undoSortListOptions: function( change, remove ) {
+		undoSortListOptions: function( change, undoAll ) {
 			var data = change.get( 'data' );
 			var collection = data.collection;
+			
 			var objModels = data.objModels;
 
 			_.each( objModels, function( changeModel ) {
 				var before = changeModel.before;
 				var optionModel = changeModel.model;
 				optionModel.set( 'order', before );
-			} );
+			} );				
+
 
 			collection.sort();
-			this.maybeRemoveChange( change, remove );
+			this.maybeRemoveChange( change, undoAll );
 		},
 
 		/**
@@ -198,11 +213,11 @@ define( [], function() {
 		 * @param  boolean 			remove 	should we remove this item from our change collection
 		 * @return void
 		 */
-		maybeRemoveChange: function( change, remove ) {
+		maybeRemoveChange: function( change, undoAll ) {
 			// Update preview.
 			nfRadio.channel( 'app' ).request( 'update:db' );			
-			var remove = typeof remove !== 'undefined' ? remove : true;
-			if ( remove ) {
+			var undoAll = typeof undoAll !== 'undefined' ? undoAll : false;
+			if ( ! undoAll ) {
 				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
 				changeCollection.remove( change );
 				if ( 0 == changeCollection.length ) {
