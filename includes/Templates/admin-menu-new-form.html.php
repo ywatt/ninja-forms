@@ -34,7 +34,7 @@
 </script>
 
 <script id="nf-tmpl-app-header-action-button" type="text/template">
-    <input class="nf-button primary <%= maybeDisabled() %> publish" type="submit" value="Publish" />
+    <a href="#" class="nf-button primary <%= maybeDisabled() %> publish"><span class="spinner"></span></a>
     <%= maybeRenderCancel() %>
 </script>
 
