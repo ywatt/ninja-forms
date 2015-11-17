@@ -404,7 +404,7 @@ function nf_alpha_release_admin_notice()
         }
     </style>
     <div class="error nf-alpha-notice">
-        <h3>Ninja Forms 3.0 - ALPHA 1 - Hartnell</h3>
+        <h3>Ninja Forms 3.0 - ALPHA 1 - Troughton</h3>
         <p><strong>NOTICE:</strong> Installed is an Alpha Release of Ninja Forms. This is not intended for production.</p>
         <p>Please keep a few things in mind while exploring:</p>
         <ul>
@@ -412,16 +412,19 @@ function nf_alpha_release_admin_notice()
             <li><strong>DO</strong> install this on a clean WordPress install; by this we mean a completely new WordPress installation to which Ninja Forms 2.9.x or earlier has never been installed.</li>
             <li>There will be database conflicts if you install this alongside 2.9.x, even if 2.9.x has been deactivated or deleted.</li>
             <li>This ALPHA is best viewed at <strong>1039px wide or greater.</strong> This is because we have not fully implented the responsive UI thus far.</li>
-            <li>This release is meant to expose you to the following...
+            <li>This week’s additions are features completely novel to the WordPress form building space: the ability to view and undo bulk or line-item changes made to the form!
                 <ul>
-                    <li>Edit the default forms</li>
-                    <li>Create fields</li>
-                    <li>Change field settings</li>
-                    <li>Duplicate fields</li>
-                    <li>Reorder fields</li>
-                    <li>Delete fields</li>
-                    <li>Preview the default form that you’ve edited on the front end</li>
-                    <li>**If you need to reset your forms back to their default state for any reason, go to Forms in the WordPress dashboard and click Mock Data.</li>
+                    <li>After making any number of changes to any of the default forms, look for a history icon to the left of the Publish button</li>
+                    <li>Click that icon and a drawer will slide out from the right</li>
+                    <li>Manipulate any of the changes you made to the form by undoing item by item, all changes in bulk, or even restoring the form to its last saved state</li>
+                    <li>If updating from Alpha 1, please be sure to Restore Mock Data under Forms in the WordPress Dashboard before you begin or you will not see these changes!</li>
+                </ul>
+            <li> what we would love to know is...
+                <ul>
+                    <li>What is your overall impression of the Undo Manager functionality? Does this upgrade your workflow?</li>
+                    <li>Are you happy with having this functionality over a ‘cancel’ button?</li>
+                    <li>After stress testing, does anything break?</li>
+                    <li>Is there anything specifically that doesn’t work/potential bugs you’ve noticed with line item or bulk undoing?</li>
                 </ul>
             </li>
         </ul>
