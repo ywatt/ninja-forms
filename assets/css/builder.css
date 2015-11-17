@@ -230,6 +230,8 @@ All styles used within the drawer
 
 table.nf-changes tr td { border-bottom: 1px solid #ccc; }
 table.nf-changes tr.disabled-row td { color: #bbb; }
+table.nf-changes tr:nth-child(even) td { background: #e5e7e8 !important; }
+table.nf-changes tr:hover td { background: #fff !important; }
 
 /*
 Various custom field styles

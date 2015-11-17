@@ -8,5 +8,15 @@ table.nf-changes {
                 color:  #bbb;
             }
         }
+        &:nth-child(even) {
+            td {
+                background: #e5e7e8 !important;
+            }
+        }
+        &:hover {
+            td {
+                background: #fff !important;
+            }
+        }
     }
 }
