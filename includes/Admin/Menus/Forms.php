@@ -124,6 +124,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $settings_groups = Ninja_Forms::config( 'SettingsGroups' );
 
+            $settings_defaults = array();
+
             foreach( $settings as $setting ){
 
                 $group = $setting[ 'group' ];
@@ -137,11 +139,18 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
                             $setting_name = $fieldset_setting[ 'name' ];
                             $master_settings_list[] = $fieldset_setting;
+
+                            if( isset( $setting[ 'value' ] ) ) {
+                                $settings_defaults[$setting_name] = $setting['value'];
+                            }
                         }
                     } else {
-
                         $setting_name = $setting[ 'name' ];
                         $master_settings_list[] = $setting;
+
+                        if( isset( $setting[ 'value' ] ) ) {
+                            $settings_defaults[$setting_name] = $setting['value'];
+                        }
                     }
                 }
             }
@@ -159,28 +168,14 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'parentType' => $field->get_parent_type(),
                 'section' => $field->get_section(),
                 'type' => $field->get_type(),
-                'settingGroups' => $settings_groups
+                'settingGroups' => $settings_groups,
+                'settingDefaults' => $settings_defaults
             );
-        }
-
-        foreach( $master_settings_list as $setting ){
-
-            if( isset( $setting[ 'value' ] ) && isset( $setting[ 'name' ] ) ){
-                $setting_defaults[ $setting[ 'name' ] ] = $setting[ 'value' ];
-            } elseif( isset( $setting[ 'type' ] ) && 'fieldset' == $setting[ 'type' ] && isset( $setting[ 'settings' ] ) && isset( $setting[ 'name' ] ) ){
-
-                foreach( $setting[ 'settings' ] as $sub_setting ){
-                    if( isset( $sub_setting[ 'value' ] ) && isset( $sub_setting[ 'name' ] ) ){
-                        $setting_defaults[ $sub_setting[ 'name' ] ] = $sub_setting[ 'value' ];
-                    }
-                }
-            }
         }
         ?>
         <script>
             var fieldTypeData = <?php echo wp_json_encode( $field_type_settings ); ?>;
             var fieldSettings = <?php echo wp_json_encode( $master_settings_list ); ?>;
-            var settingDefaults = <?php echo wp_json_encode( $setting_defaults ); ?>;
             // console.log( fieldTypeData );
         </script>
         <?php
