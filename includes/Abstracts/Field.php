@@ -159,7 +159,7 @@ abstract class NF_Abstracts_Field
         if ( $parent_class->isAbstract() ) {
 
             $parent_class_name = $parent_class->getName();
-            $parent_templates = $parent_class_name::get_base_template(); // Parent Class' Static Property
+            $parent_templates = call_user_func( $parent_class_name . '::get_base_template' ); // Parent Class' Static Property
             return array_merge( $templates, (array) $parent_templates );
         }
 
