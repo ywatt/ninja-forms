@@ -114,6 +114,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         $master_settings_list = array();
 
+        $setting_defaults = array();
+
         foreach( Ninja_Forms()->fields as $field ){
 
             $name = $field->get_name();
@@ -160,10 +162,25 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'settingGroups' => $settings_groups
             );
         }
+
+        foreach( $master_settings_list as $setting ){
+
+            if( isset( $setting[ 'value' ] ) && isset( $setting[ 'name' ] ) ){
+                $setting_defaults[ $setting[ 'name' ] ] = $setting[ 'value' ];
+            } elseif( isset( $setting[ 'type' ] ) && 'fieldset' == $setting[ 'type' ] && isset( $setting[ 'settings' ] ) && isset( $setting[ 'name' ] ) ){
+
+                foreach( $setting[ 'settings' ] as $sub_setting ){
+                    if( isset( $sub_setting[ 'value' ] ) && isset( $sub_setting[ 'name' ] ) ){
+                        $setting_defaults[ $sub_setting[ 'name' ] ] = $sub_setting[ 'value' ];
+                    }
+                }
+            }
+        }
         ?>
         <script>
             var fieldTypeData = <?php echo wp_json_encode( $field_type_settings ); ?>;
             var fieldSettings = <?php echo wp_json_encode( $master_settings_list ); ?>;
+            var settingDefaults = <?php echo wp_json_encode( $setting_defaults ); ?>;
             // console.log( fieldTypeData );
         </script>
         <?php
