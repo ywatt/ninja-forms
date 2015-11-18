@@ -34,15 +34,24 @@
 </script>
 
 <script id="nf-tmpl-app-header-action-button" type="text/template">
-    <a href="#" class="nf-button primary  publish"><div class="nf-loading">
-  <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-  </ul>
-</div></a>
-
+    <%= renderPublish() %>
     <%= maybeRenderCancel() %>
+</script>
+
+<script id="nf-tmpl-app-header-publish-button" type="text/template">
+    <a href="#" class="nf-button primary <%= maybeDisabled() %> publish">PUBLISH</a>
+</script>
+
+<script id="nf-tmpl-add-header-publish-loading" type="text/template">
+    <a href="#" class="nf-button primary <%= maybeDisabled() %> publish">
+        <div class="nf-loading">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </a>
 </script>
 
 <script id="nf-tmpl-app-header-view-changes" type="text/template">

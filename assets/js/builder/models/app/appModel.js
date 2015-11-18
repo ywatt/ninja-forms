@@ -9,6 +9,10 @@
  */
 define( [], function() {
 	var model = Backbone.Model.extend( {
+		defaults: {
+			loading: false
+		},
+
 		initialize: function() {
 			// Listen to changes to our 'clean' attribute.
 			this.on( 'change:clean', this.changeStatus, this );

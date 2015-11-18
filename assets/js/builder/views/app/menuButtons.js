@@ -14,6 +14,7 @@ define( [], function() {
 		initialize: function() {
 			// Listen to changes on the app 'clean' state. When it changes, re-render.
 			this.listenTo( nfRadio.channel( 'app' ), 'change:clean', this.render, this );
+			this.listenTo( nfRadio.channel( 'app' ), 'change:loading', this.render, this );
 		},
 
 		/**
@@ -24,6 +25,21 @@ define( [], function() {
 		 */
 		templateHelpers: function () {
 	    	return {
+
+	    		/**
+	    		 * Render our Publish button. If we're loading, render the loading version.
+	    		 *
+	    		 * @since  3.0
+	    		 * @return string
+	    		 */
+	    		renderPublish: function() {
+	    			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'loading' ) ) {
+	    				return _.template( jQuery( '#nf-tmpl-add-header-publish-loading' ).html(), this );	    				
+	    			} else {
+	    				return _.template( jQuery( '#nf-tmpl-app-header-publish-button' ).html(), this );
+	    			}
+	    		},
+
 	    		/**
 	    		 * If our app state is clean, disable publish.
 	    		 * 

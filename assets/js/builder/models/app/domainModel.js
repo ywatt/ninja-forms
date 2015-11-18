@@ -14,7 +14,7 @@ define( [], function() {
 			active: false,
 			url: '',
 			hotkeys: false,
-			disabled: false			
+			disabled: false
 		}
 	} );
 	
