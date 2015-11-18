@@ -13,6 +13,8 @@ class NF_Fields_Zip extends NF_Fields_Textbox
 
     protected $_templates = array( 'zip', 'textbox', 'input' );
 
+    protected $_test_value = '37312';
+
     public function __construct()
     {
         parent::__construct();

@@ -33,7 +33,7 @@ abstract class NF_Abstracts_Field
     /**
     * @var string
     */
-    protected $_test_value = '';
+    protected $_test_value = 'test';
 
     /**
      * @var string
@@ -146,6 +146,11 @@ abstract class NF_Abstracts_Field
     public function get_settings()
     {
         return $this->_settings;
+    }
+
+    public function get_test_value()
+    {
+        return $this->_test_value;
     }
 
     public function get_templates()
