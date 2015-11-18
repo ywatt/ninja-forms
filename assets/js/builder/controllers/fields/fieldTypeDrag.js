@@ -23,6 +23,8 @@ define( [], function( ) {
 		 * When we start dragging:
 		 * get our drawer element
 		 * set its overflow property to visible !important -> forces the type drag element to be on at the top of the z-index.
+		 * get our main element
+		 * est its overflow propery to visible !important -> forces the type drag element to be on top of the z-index.
 		 * set our dragging helper clone
 		 * 
 		 * @since  3.0
@@ -32,10 +34,12 @@ define( [], function( ) {
 		 */
 		startDrag: function( context, ui ) {
 			this.drawerEl = nfRadio.channel( 'app' ).request( 'get:drawerEl' );
+			this.mainEl = nfRadio.channel( 'app' ).request( 'get:mainEl' );
 			jQuery( this.drawerEl )[0].style.setProperty( 'overflow', 'visible', 'important' );
+			jQuery( this.mainEl )[0].style.setProperty( 'overflow', 'visible', 'important' );
 
 			this.draggableHelperClone = jQuery( ui.helper ).clone();
-			
+
 		},
 
 		/**
@@ -48,6 +52,7 @@ define( [], function( ) {
 		 */
 		stopDrag: function( context, ui ) {
 			jQuery( this.drawerEl )[0].style.setProperty( 'overflow', 'hidden', 'important' );
+			jQuery( this.mainEl )[0].style.setProperty( 'overflow', 'hidden', 'important' );
 		},
 
 		getCurrentDraggableHelperClone: function() {

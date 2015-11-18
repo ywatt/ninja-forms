@@ -16,7 +16,7 @@ define( [], function() {
 			var that = this;
 			jQuery( this.el ).find( 'div.nf-one-third' ).draggable( {
 				opacity: 0.9,
-				tolerance: 'pointer',
+				tolerance: 'intersect',
 				scroll: false,
 				connectToSortable: '.nf-field-type-droppable',
 
