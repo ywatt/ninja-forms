@@ -15,6 +15,8 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
     protected $_templates = 'textbox';
 
+    protected $_test_value = 'Lorem ipsum';
+
     public function __construct()
     {
         parent::__construct();

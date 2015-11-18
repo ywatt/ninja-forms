@@ -123,11 +123,11 @@ final class NF_Database_MockData
          * ACTIONS
          */
 
-//        $action = Ninja_Forms()->form( $form_id )->action()->get();
-//        $action->update_setting( 'title',  'Mock Success Message Action' )
-//            ->update_setting( 'type', 'successmessage' )
-//            ->update_setting( 'message', 'This is a test success message' )
-//            ->save();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'title',  'Mock Success Message Action' )
+            ->update_setting( 'type', 'successmessage' )
+            ->update_setting( 'message', 'This is a test success message' )
+            ->save();
 
 //        $action = Ninja_Forms()->form( $form_id )->action()->get();
 //        $action->update_setting( 'title',  'Mock Redirect Action' )
@@ -136,14 +136,14 @@ final class NF_Database_MockData
 //            ->update_setting( 'active', 0 )
 //            ->save();
 
-//        $action = Ninja_Forms()->form( $form_id )->action()->get();
-//        $action->update_setting( 'title',  'Mock Email Action' )
-//            ->update_setting( 'type', 'email' )
-//            ->update_setting( 'to', array( 'kyle@wpninjas.com' ) )
-//            ->update_setting( 'subject', 'This is an email action.' )
-//            ->update_setting( 'message', 'Hello, Ninja Forms!' )
-//            ->update_setting( 'active', FALSE )
-//            ->save();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'title',  'Mock Email Action' )
+            ->update_setting( 'type', 'email' )
+            ->update_setting( 'to', array( 'myformbuildingbringsallthedeveloperstotheyard@wpninjas.com' ) )
+            ->update_setting( 'subject', 'This is an email action.' )
+            ->update_setting( 'message', 'Hello, Ninja Forms!' )
+            ->update_setting( 'active', FALSE )
+            ->save();
 
 //        $action = Ninja_Forms()->form( $form_id )->action()->get();
 //        $action->update_setting( 'title',  'Run WordPress Action' )
@@ -152,10 +152,10 @@ final class NF_Database_MockData
 //            ->update_setting( 'tag', 'blarg_action' )
 //            ->save();
 
-//        $action = Ninja_Forms()->form( $form_id )->action()->get();
-//        $action->update_setting( 'title',  'Mock Save Action' )
-//            ->update_setting( 'type', 'save' )
-//            ->save();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'title',  'Mock Save Action' )
+            ->update_setting( 'type', 'save' )
+            ->save();
 
         /*
          * SUBMISSIONS

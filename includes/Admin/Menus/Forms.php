@@ -191,6 +191,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     {
         $action_type_settings = array();
 
+        $master_settings_list = array();
+
         foreach( Ninja_Forms()->actions as $action ){
 
             $name = $action->get_name();
@@ -198,10 +200,13 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $settings = $action->get_settings();
 
             $action_type_settings[ $name ] = $settings;
+
+            $master_settings_list = array_merge( $master_settings_list, array_values( $settings ) );
         }
         ?>
         <script>
             var actionTypeData = <?php echo wp_json_encode( $action_type_settings ); ?>;
+            var actionSettings = <?php echo wp_json_encode( $master_settings_list ); ?>;
             // console.log( actionTypeData );
         </script>
         <?php

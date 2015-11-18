@@ -44,6 +44,24 @@ define( [], function() {
 
 			var settingModel = nfRadio.channel( 'fields' ).request( 'get:settingModel', name );
 
+			/*
+			 * TODO: Make this more dynamic.
+			 * Currently, this is a very specific work-around. It should be more generalized.
+			 */
+			if ( 'toggle' == settingModel.get( 'type' ) ) {
+				if ( 1 == before ) {
+					before = 'On';
+				} else {
+					before = 'Off';
+				}
+
+				if ( 1 == after ) {
+					after = 'On';
+				} else {
+					after = 'Off';
+				}
+			}
+
 			var label = {
 				object: 'Field',
 				label: fieldModel.get( 'label' ),
