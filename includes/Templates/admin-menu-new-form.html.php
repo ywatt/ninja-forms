@@ -39,11 +39,11 @@
 </script>
 
 <script id="nf-tmpl-app-header-publish-button" type="text/template">
-    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">PUBLISH</a>
+    <a href="#" class="nf-button primary <%= maybeDisabled() %> publish">PUBLISH</a>
 </script>
 
 <script id="nf-tmpl-add-header-publish-loading" type="text/template">
-    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">
+    <a href="#" class="nf-button primary <%= maybeDisabled() %> publish">
         <div class="nf-loading">
             <ul>
                 <li></li>
@@ -427,8 +427,10 @@
 </script>
 
 <script id="nf-tmpl-edit-field-setting-toggle" type="text/template">
-    <label><%= renderLabel() %></label>
+    <label><%= renderLabel() %>
+    <div class="nf-toggle">
     <input type="checkbox" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
+    </label>
 </script>
 
 <script id="nf-tmpl-edit-field-setting-fieldset" type="text/template">

@@ -171,7 +171,7 @@ All styles used within the drawer
 .nf-menu-expand #nf-header { margin-right: 250px; margin-left: -250px; -webkit-transition: margin 0.75s ease; transition: margin 0.75s ease; }
 .nf-menu-expand #nf-main { left: -250px; -webkit-transition: left 0.75s ease; transition: left 0.75s ease; }
 
-.nf-button { border: 0; border-radius: 4px; cursor: pointer; display: inline-block; font-size: 17px; padding: 10px 30px; text-decoration: none; text-transform: uppercase; -webkit-appearance: none; -moz-appearance: none; }
+.nf-button { border: 0; border-radius: 4px; cursor: pointer; display: inline-block; font-size: 17px; padding: 10px 30px; text-decoration: none; text-transform: uppercase; -webkit-appearance: none; -moz-appearance: none; appearance: none; }
 .nf-button.primary { background: #1EA9EA; border: 1px solid #1EA9EA; color: #fff; }
 .nf-button.secondary { background: #fff; border: 1px solid #1EA9EA; color: #1EA9EA; }
 .nf-button.disabled { background: #ccc; border: 1px solid #ccc; cursor: default; }
@@ -244,14 +244,14 @@ Various custom field styles
 .nf-add-new:hover:after, .nf-add-new:active:after, .nf-add-new.active:after { background: #fff; color: #84CC1E; -webkit-transform: rotate(360deg); -ms-transform: rotate(360deg); transform: rotate(360deg); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-add-new.nf-open-drawer { position: absolute; top: 135px; left: 40px; }
 
-input[type=checkbox].nf-toggle { background: transparent; border: 0; box-shadow: 0 0 0; display: block; margin: 19px 5px 11px; -webkit-appearance: none; position: relative; width: 40px; height: 20px; cursor: pointer; }
+input[type=checkbox].nf-toggle { background: transparent; border: 0; box-shadow: 0 0 0; display: block; margin: 19px 5px 11px; -webkit-appearance: none; -moz-appearance: none; appearance: none; position: relative; width: 40px; height: 20px; cursor: pointer; }
 input[type=checkbox].nf-toggle::after { background: #BCBDBF; border: 2px solid #BCBDBF; border-radius: 20px; content: ""; position: absolute; top: -4px; left: -4px; width: 40px; height: 20px; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
 input[type=checkbox].nf-toggle::before { background: #fff; border-radius: 20px; content: ""; position: absolute; top: -1px; left: 0; width: 18px; height: 18px; z-index: 99; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
 input[type=checkbox].nf-toggle:checked::after { background: #84CC1E; border: 2px solid #84CC1E; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
 input[type=checkbox].nf-toggle:checked::before { content: ""; top: 2px; left: 22px; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
 
 .ninja-forms-app .nf-select { position: relative; }
-.ninja-forms-app .nf-select select { background: #f9f9f9; border: 0; margin-top: 5px; height: 43px !important; padding: 0 30px 0 15px; width: 100%; -webkit-appearance: none; }
+.ninja-forms-app .nf-select select { background: #f9f9f9; border: 0; margin-top: 5px; height: 43px !important; padding: 0 30px 0 15px; width: 100%; -webkit-appearance: none; -moz-appearance: none; appearance: none; }
 .ninja-forms-app .nf-select::after { content: "\f347"; font-family: 'Dashicons'; position: absolute; width: 30px; height: 30px; right: 0; top: 19px; z-index: 101; }
 
 /*
