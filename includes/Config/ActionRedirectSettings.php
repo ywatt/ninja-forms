@@ -8,6 +8,7 @@ return array(
 
     'url' => array(
         'type' => 'text',
+        'group' => 'primary',
         'label' => __( 'URL', 'ninja-forms' ),
         'placeholder' => '',
     ),

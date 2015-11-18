@@ -20,6 +20,7 @@ return array(
 
     'from-address' => array(
         'type' => 'text',
+        'group' => 'primary',
         'label' => __( 'From Address', 'ninja-forms' ),
         'placeholder' => __( 'One email address or field', 'ninja-forms' ),
         'value' => ''
@@ -31,6 +32,7 @@ return array(
 
     'to' => array(
         'type' => 'text',
+        'group' => 'primary',
         'label' => __( 'To', 'ninja-forms' ),
         'placeholder' => __( 'Email address or search for a field', 'ninja-forms' ),
         'value' => ''
@@ -42,6 +44,7 @@ return array(
 
     'subject' => array(
         'type' => 'text',
+        'group' => 'primary',
         'label' => __( 'Subject', 'ninja-forms' ),
         'placeholder' => __( 'Subject Text or seach for a field', 'ninja-forms' ),
         'value' => ''
@@ -53,6 +56,7 @@ return array(
 
     'email-message' => array(
         'type' => 'textarea',
+        'group' => 'primary',
         'label' => __( 'Email Message', 'ninja-forms' ),
         'placeholder' => '',
         'value' => ''

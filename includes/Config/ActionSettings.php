@@ -8,6 +8,7 @@ return array(
 
     'name' => array(
         'type' => 'text',
+        'group' => 'primary',
         'label' => __( 'Action Name', 'ninja-forms' ),
         'placeholder' => '',
     ),

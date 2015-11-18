@@ -12,6 +12,7 @@ return array(
                 'action' => __( 'Action', 'ninja-forms'),
                 'filter' => __( 'Filter', 'ninja-forms' ),
             ),
+        'group' => 'primary',
         'label' => __( 'Hook', 'ninja-forms' ),
         'placeholder' => '',
     ),
@@ -22,6 +23,7 @@ return array(
 
     'tag' => array(
         'type' => 'text',
+        'group' => 'primary',
         'label' => __( 'Tag', 'ninja-forms' ),
         'placeholder' => '',
     ),
