@@ -107,7 +107,7 @@ Form field placeholders for the fields a user has added to their form
 /*
 All styles used within the drawer
 --------------------------------- */
-#nf-drawer { background: #EBEDEE; padding: 40px; width: 50%; position: absolute; top: 0; bottom: 0; right: -1400px; overflow: auto; z-index: 99; -webkit-transition: width 0.75s ease; transition: width 0.75s ease; -webkit-overflow-scrolling: touch; }
+#nf-drawer { background: #EBEDEE; padding: 40px 40px; width: 50%; position: absolute; top: 0; bottom: 0; right: -1400px; overflow: auto; z-index: 99; -webkit-transition: width 0.75s ease; transition: width 0.75s ease; -webkit-overflow-scrolling: touch; }
 #nf-drawer.nf-drawer-expand { width: 100%; }
 
 .nf-drawer-opened #nf-main { width: 50%; -webkit-transition: all 0.75s ease; transition: all 0.75s ease; }
@@ -184,11 +184,11 @@ All styles used within the drawer
 
 .ninja-forms-app fieldset { border: 1px solid #ccc; clear: both; display: block; margin-bottom: 20px; }
 .ninja-forms-app legend { margin: 0 3px 10px; padding: 0 10px; }
-.ninja-forms-app label, .ninja-forms-app legend { color: #424242; font-size: 13px; text-transform: uppercase; }
-.ninja-forms-app input[type=text], .ninja-forms-app textarea { background: #f9f9f9; border: 0; margin-top: 5px; padding: 12px 15px; width: 100%; }
+.ninja-forms-app .nf-setting-label, .ninja-forms-app label, .ninja-forms-app legend { color: #424242; display: block; font-size: 13px; text-transform: uppercase; }
+.ninja-forms-app input[type=text], .ninja-forms-app textarea { background: #f9f9f9; border: 0; margin-top: 5px; padding: 12px 15px; width: 100%; text-transform: capitalize; }
 .ninja-forms-app textarea { height: 200px; }
-.ninja-forms-app input[type=checkbox] { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: #f9f9f9; border: 0; height: 25px; width: 25px; padding: 2px 1px 0px !important; margin: -3px -5px; }
-.ninja-forms-app input[type=checkbox]:checked::before { content: "\f147"; font: 400 30px/1 dashicons; }
+.ninja-forms-app input[type=checkbox].nf-checkbox { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: #f9f9f9; border: 0; height: 25px; width: 25px; padding: 2px 1px 0px !important; margin: -3px -5px; }
+.ninja-forms-app input[type=checkbox].nf-checkbox:checked::before { content: "\f147"; font: 400 30px/1 dashicons; }
 
 .ninja-forms-app .nf-list-options { padding-bottom: 20px; }
 .ninja-forms-app .nf-list-options .nf-add-new { margin-left: 20px; }
@@ -244,15 +244,17 @@ Various custom field styles
 .nf-add-new:hover:after, .nf-add-new:active:after, .nf-add-new.active:after { background: #fff; color: #84CC1E; -webkit-transform: rotate(360deg); -ms-transform: rotate(360deg); transform: rotate(360deg); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
 .nf-add-new.nf-open-drawer { position: absolute; top: 135px; left: 40px; }
 
-input[type=checkbox].nf-toggle { background: transparent; border: 0; box-shadow: 0 0 0; display: block; margin: 19px 5px 11px; -webkit-appearance: none; -moz-appearance: none; appearance: none; position: relative; width: 40px; height: 20px; cursor: pointer; }
-input[type=checkbox].nf-toggle::after { background: #BCBDBF; border: 2px solid #BCBDBF; border-radius: 20px; content: ""; position: absolute; top: -4px; left: -4px; width: 40px; height: 20px; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
-input[type=checkbox].nf-toggle::before { background: #fff; border-radius: 20px; content: ""; position: absolute; top: -1px; left: 0; width: 18px; height: 18px; z-index: 99; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
-input[type=checkbox].nf-toggle:checked::after { background: #84CC1E; border: 2px solid #84CC1E; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
-input[type=checkbox].nf-toggle:checked::before { content: ""; top: 2px; left: 22px; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
+input[type=checkbox].nf-toggle { display: none; }
+input[type=checkbox].nf-toggle + label { text-indent: -99999px; background: transparent; border: 0; box-shadow: 0 0 0; display: block; margin: 19px 5px 11px; -webkit-appearance: none; -moz-appearance: none; appearance: none; position: relative; width: 40px; height: 20px; cursor: pointer; }
+input[type=checkbox].nf-toggle + label::after { background: #BCBDBF; border: 2px solid #BCBDBF; border-radius: 20px; content: ""; position: absolute; top: -4px; left: -4px; width: 40px; height: 20px; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
+input[type=checkbox].nf-toggle + label::before { background: #fff; border-radius: 20px; content: ""; position: absolute; top: -1px; left: 0; width: 18px; height: 18px; z-index: 99; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
+input[type=checkbox].nf-toggle:checked + label::after { background: #84CC1E; border: 2px solid #84CC1E; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
+input[type=checkbox].nf-toggle:checked + label::before { content: ""; left: 18px; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
 
 .ninja-forms-app .nf-select { position: relative; }
-.ninja-forms-app .nf-select select { background: #f9f9f9; border: 0; margin-top: 5px; height: 43px !important; padding: 0 30px 0 15px; width: 100%; -webkit-appearance: none; -moz-appearance: none; appearance: none; }
-.ninja-forms-app .nf-select::after { content: "\f347"; font-family: 'Dashicons'; position: absolute; width: 30px; height: 30px; right: 0; top: 19px; z-index: 101; }
+.ninja-forms-app .nf-select select { background: transparent; border: 0; margin-top: 5px; height: 44px !important; padding: 0 30px 0 15px; position: relative; width: 100%; text-transform: capitalize; -webkit-appearance: none; -moz-appearance: none; appearance: none; z-index: 2; }
+.ninja-forms-app .nf-select div { background: #f9f9f9; height: 44px; position: absolute; bottom: 0; width: 100%; z-index: 1; }
+.ninja-forms-app .nf-select div::after { color: #666; content: "\f347"; font-family: 'Dashicons'; font-size: 20px; position: absolute; width: 30px; height: 30px; right: 5px; bottom: 0; }
 
 /*
 All styles used for displaying table content

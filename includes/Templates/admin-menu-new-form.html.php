@@ -414,27 +414,34 @@
 </script>
 
 <script id="nf-tmpl-edit-field-setting-select" type="text/template">
-    <label for="<%= name %>"><%= label %>
-        <div class="nf-select">
-            <select id="<%= name %>">
-                <%
-                _.each( options, function( option ) {
-                    %>
-                    <option value="<%= option.value %>" <%= ( value == option.value ) ? 'selected="selected"' : '' %>><%= option.label %></option>
-                    <%
-                } );
+    <label for="<%= name %>" class="nf-select"><%= label %>
+        <select id="<%= name %>">
+            <%
+            _.each( options, function( option ) {
                 %>
-            </select>
-        </div>
+                <option value="<%= option.value %>" <%= ( value == option.value ) ? 'selected="selected"' : '' %>><%= option.label %></option>
+                <%
+            } );
+            %>
+        </select>
+        <div></div>
     </label>
 </script>
 
+<script id="nf-tmpl-edit-field-setting-checkbox" type="text/template">
+
+    <span class="nf-setting-label"><%= label %></span>
+    <input type="checkbox" id="<%= name %>" class="nf-checkbox" <%= ( 1 == value ) ? 'checked' : '' %> />
+    <label for="<%= name %>"><%= label %></label>
+
+</script>
+
 <script id="nf-tmpl-edit-field-setting-toggle" type="text/template">
-    <label for="<%= name %>"><%= label %>
-        <div class="nf-toggle" id="<%= name %>">
-            <input type="checkbox" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
-        </div>
-    </label>
+
+    <span class="nf-setting-label"><%= label %></span>
+    <input type="checkbox" id="<%= name %>" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
+    <label for="<%= name %>"><%= label %></label>
+
 </script>
 
 <script id="nf-tmpl-edit-field-setting-fieldset" type="text/template">
@@ -481,7 +488,7 @@
         <input type="text" value="<%= calc %>" data-id="calc">
     </div>
     <div>
-        <input type="checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
+        <input type="checkbox" class="nf-checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
     </div>
     <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>
