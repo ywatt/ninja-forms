@@ -10,6 +10,7 @@ return array(
         'type' => 'text',
         'label' => __( 'From Name', 'ninja-forms' ),
         'placeholder' => __( 'Name or fields', 'ninja-forms' ),
+        'value' => ''
     ),
 
     /*
@@ -20,6 +21,7 @@ return array(
         'type' => 'text',
         'label' => __( 'From Address', 'ninja-forms' ),
         'placeholder' => __( 'One email address or field', 'ninja-forms' ),
+        'value' => ''
     ),
 
     /*
@@ -30,6 +32,7 @@ return array(
         'type' => 'text',
         'label' => __( 'To', 'ninja-forms' ),
         'placeholder' => __( 'Email address or search for a field', 'ninja-forms' ),
+        'value' => ''
     ),
 
     /*
@@ -40,6 +43,7 @@ return array(
         'type' => 'text',
         'label' => __( 'Subject', 'ninja-forms' ),
         'placeholder' => __( 'Subject Text or seach for a field', 'ninja-forms' ),
+        'value' => ''
     ),
 
     /*
@@ -50,6 +54,7 @@ return array(
         'type' => 'textarea',
         'label' => __( 'Email Message', 'ninja-forms' ),
         'placeholder' => '',
+        'value' => ''
     ),
 
     /*
@@ -64,7 +69,7 @@ return array(
             ),
         'group' => 'advanced',
         'label' => __( 'Format', 'ninja-forms' ),
-        'placeholder' => '',
+        'value' => 'plain'
     ),
 
     /*
@@ -76,6 +81,7 @@ return array(
         'group' => 'advanced',
         'label' => __( 'Reply To', 'ninja-forms' ),
         'placeholder' => '',
+        'value' => ''
     ),
 
     /*
@@ -87,6 +93,7 @@ return array(
         'group' => 'advanced',
         'label' => __( 'Cc', 'ninja-forms' ),
         'placeholder' => '',
+        'value' => ''
     ),
 
     /*
@@ -98,6 +105,7 @@ return array(
         'group' => 'advanced',
         'label' => __( 'Bcc', 'ninja-forms' ),
         'placeholder' => '',
+        'value' => ''
     ),
 
 );

@@ -201,6 +201,13 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $action_type_settings[ $name ] = $settings;
 
+            foreach( $settings as $setting_name => $setting ){
+
+                if( ! isset( $setting[ 'value' ] ) ) continue;
+
+                $action_type_settings[ $name ][ 'settingDefaults' ][ $setting_name ] = $setting[ 'value' ];
+            }
+
             $master_settings_list = array_merge( $master_settings_list, array_values( $settings ) );
         }
         ?>
