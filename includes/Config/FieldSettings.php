@@ -123,54 +123,54 @@ return apply_filters( 'ninja-forms-field-settings', array(
      */
 
 
-    // 'default' => array(
-    //     'name'    => 'default',
-    //     'type'    => 'fieldset',
-    //     'label'   => __( 'Default Value', 'ninja-forms' ),
-    //     'width' => 'full',
-    //     'group' => 'advanced',
-    //     'value' => 'none',
-    //     'settings' => array(
-    //         array(
-    //             'name' => 'default_type',
-    //             'label' => 'Type',
-    //             'type' => 'select',
-    //             'options' => array(
-    //                 array(
-    //                     'value' => 'none',
-    //                     'label' => __( 'None', 'ninja-forms' )
-    //                 ),
-    //                 array(
-    //                     'value' => 'post_id',
-    //                     'label' => __( 'Post / Page ID', 'ninja-forms' )
-    //                 ),
-    //                 array(
-    //                     'value' => 'post_title',
-    //                     'label' => __( 'Post / Page Title', 'ninja-forms' )
-    //                 ),
-    //                 array(
-    //                     'value' => 'post_url',
-    //                     'label' => __( 'Post / Page URL', 'ninja-forms' )
-    //                 ),
-    //                 array(
-    //                     'value' => 'query_string',
-    //                     'label' => __( 'Query String Variable', 'ninja-forms' )
-    //                 ),
-    //                 array(
-    //                     'value' => 'custom',
-    //                     'label' => __( 'Custom Default Value', 'ninja-forms' )
-    //                 )
-    //             ),
-    //         ),
-    //         array(
-    //             'name' => 'default_value',
-    //             'label' => 'Value',
-    //             'type' => 'textbox',
-    //             'width' => 'one-half',
-    //             'value' => ''
-    //         )
-    //     )
-    // ),
+     'default' => array(
+         'name'    => 'default',
+         'type'    => 'fieldset',
+         'label'   => __( 'Default Value', 'ninja-forms' ),
+         'width' => 'full',
+         'group' => 'advanced',
+         'value' => 'none',
+         'settings' => array(
+             'default_type' => array(
+                 'name' => 'default_type',
+                 'label' => 'Type',
+                 'type' => 'select',
+                 'options' => array(
+                     array(
+                         'value' => 'none',
+                         'label' => __( 'None', 'ninja-forms' )
+                     ),
+                     array(
+                         'value' => 'post_id',
+                         'label' => __( 'Post / Page ID', 'ninja-forms' )
+                     ),
+                     array(
+                         'value' => 'post_title',
+                         'label' => __( 'Post / Page Title', 'ninja-forms' )
+                     ),
+                     array(
+                         'value' => 'post_url',
+                         'label' => __( 'Post / Page URL', 'ninja-forms' )
+                     ),
+                     array(
+                         'value' => 'query_string',
+                         'label' => __( 'Query String Variable', 'ninja-forms' )
+                     ),
+                     array(
+                         'value' => 'custom',
+                         'label' => __( 'Custom Default Value', 'ninja-forms' )
+                     )
+                 ),
+             ),
+             array(
+                 'name' => 'default_value',
+                 'label' => 'Value',
+                 'type' => 'textbox',
+                 'width' => 'one-half',
+                 'value' => ''
+             )
+         )
+     ),
 
     /*
     * CLASSES
@@ -207,24 +207,24 @@ return apply_filters( 'ninja-forms-field-settings', array(
     * Checkbox Default Value
     */
 
-    // 'checkbox_default_value' => array(
-    //     'name' => 'default_value',
-    //     'type' => 'select',
-    //     'label' => __( 'Default Value', 'ninja-forms' ),
-    //     'options' => array(
-    //         array(
-    //             'label' => __( 'Unchecked', 'ninja-forms' ),
-    //             'value' => 'unchecked'
-    //         ),
-    //         array(
-    //             'label' => __( 'Checked', 'ninja-forms'),
-    //             'value' => 'checked',
-    //         ),
-    //     ),
-    //     'width' => 'one-half',
-    //     'group' => 'primary',
-    //     'value' => 'unchecked'
-    // ),
+     'checkbox_default_value' => array(
+         'name' => 'default_value',
+         'type' => 'select',
+         'label' => __( 'Default Value', 'ninja-forms' ),
+         'options' => array(
+             array(
+                 'label' => __( 'Unchecked', 'ninja-forms' ),
+                 'value' => 'unchecked'
+             ),
+             array(
+                 'label' => __( 'Checked', 'ninja-forms'),
+                 'value' => 'checked',
+             ),
+         ),
+         'width' => 'one-half',
+         'group' => 'primary',
+         'value' => 'unchecked'
+     ),
 
    /*
     * Spam Question
@@ -545,19 +545,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //             'value' => __( 'Character(s) left' )
     //         )
     //     )
-    // ),
-
-    /*
-     * USER INFO DEFAULT VALUE
-     */
-
-    // 'user_info_default_value' => array(
-    //     'name' => 'default_value',
-    //     'type' => 'toggle',
-    //     'label' => __( 'Default to User Info', 'ninja-forms' ),
-    //     'width' => 'one-half',
-    //     'group' => 'primary'
-    //     'value' => FALSE
     // ),
 
 ));

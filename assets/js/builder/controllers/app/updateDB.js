@@ -28,6 +28,7 @@ define( [], function() {
 			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
 				return false;
 			}
+
 			// Default action to preview.
 			action = action || 'preview';
 
@@ -83,6 +84,11 @@ define( [], function() {
 			data = JSON.stringify( data );
 			// Run anything that needs to happen before we update.
 			nfRadio.channel( 'app' ).trigger( 'before:updateDB', data );
+
+			if ( 'publish' == action ) {
+				nfRadio.channel( 'app' ).request( 'update:setting', 'loading', true );
+				nfRadio.channel( 'app' ).trigger( 'change:loading' );				
+			}
 			// Update
 			jQuery.post( ajaxurl, { action: jsAction, form: data, security: nfAdmin.ajaxNonce }, function( response ) {
 				response = JSON.parse( response );

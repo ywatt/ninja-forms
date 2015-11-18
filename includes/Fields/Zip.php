@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_Zip
  */
-class NF_Fields_Zip extends NF_Abstracts_UserInfo
+class NF_Fields_Zip extends NF_Fields_Textbox
 {
     protected $_name = 'zip';
 

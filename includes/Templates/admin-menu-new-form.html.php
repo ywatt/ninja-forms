@@ -34,8 +34,24 @@
 </script>
 
 <script id="nf-tmpl-app-header-action-button" type="text/template">
-    <input class="nf-button primary <%= maybeDisabled() %> publish" type="submit" value="Publish" />
+    <%= renderPublish() %>
     <%= maybeRenderCancel() %>
+</script>
+
+<script id="nf-tmpl-app-header-publish-button" type="text/template">
+    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">PUBLISH</a>
+</script>
+
+<script id="nf-tmpl-add-header-publish-loading" type="text/template">
+    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">
+        <div class="nf-loading">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </a>
 </script>
 
 <script id="nf-tmpl-app-header-view-changes" type="text/template">
@@ -68,7 +84,7 @@
 
 <script id="nf-tmpl-main-content-field" type="text/template">
     <div id="<%= getFieldID() %>" class="<%= renderClasses() %>"> <%= label %> <%= renderRequired() %>
-        
+
             <ul class="nf-item-controls">
                 <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
                 <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>

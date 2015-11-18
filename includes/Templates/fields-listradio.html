@@ -6,7 +6,7 @@
 
 <script id='nf-tmpl-field-listradio-option' type='text/template'>
     <li>
-        <label><input type="radio" name="nf-field-<%= fieldID %>" class="<%= classes %>" value="<%= value %>" <%= ( value == currentValue ) ? 'checked="checked"' : '' %>> <%= label %></label>
+        <label><input type="radio" name="nf-field-<%= fieldID %>" class="<%= classes %>" value="<%= value %>" <%= ( value == currentValue  || 1 == selected ) ? 'checked="checked"' : '' %>> <%= label %></label>
     </li>
 </script>
 

@@ -3,7 +3,7 @@
 /**
  * Class NF_Fields_City
  */
-class NF_Fields_City extends NF_Abstracts_UserInfo
+class NF_Fields_City extends NF_Fields_Textbox
 {
     protected $_name = 'city';
 

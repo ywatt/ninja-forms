@@ -40,7 +40,7 @@ define( ['builder/models/fields/listOptionModel', 'builder/models/fields/listOpt
 		createOptionCollection: function( model ) {
 			var options = model.get( 'options' );
 			if ( ! options ) {
-				model.set( 'options', [ { calc: 1, label: 'One', value: 'one', order: 0 }, { calc: 2, label: 'Two', value: 'two', order: 1 }, { calc: 3, label: 'Three', value: 'three', order: 2 } ], { silent: true } );
+				model.set( 'options', [ { calc: 1, label: 'One', value: 'one', order: 0, selected: 0 }, { calc: 2, label: 'Two', value: 'two', order: 1, selected: 0 }, { calc: 3, label: 'Three', value: 'three', order: 2, selected: 0 } ], { silent: true } );
 			}
 
 			if ( false == options instanceof Backbone.Collection ) {
@@ -61,8 +61,18 @@ define( ['builder/models/fields/listOptionModel', 'builder/models/fields/listOpt
 		 */
 		changeOption: function( e, model, fieldModel ) {
 			var name = jQuery( e.target ).data( 'id' );
-			var value = jQuery( e.target ).val();
+			if ( 'selected' == name ) {
+				if ( jQuery( e.target ).attr( 'checked' ) ) {
+					var value = 1;
+				} else {
+					var value = 0;
+				}
+			} else {
+				var value = jQuery( e.target ).val();
+			}
+			
 			var before = model.get( name );
+
 			model.set( name, value );
 			// Triger an update on our fieldModel
 			this.triggerFieldModel( model, fieldModel );
@@ -78,7 +88,7 @@ define( ['builder/models/fields/listOptionModel', 'builder/models/fields/listOpt
 			var label = {
 				object: 'Field',
 				label: fieldModel.get( 'label' ),
-				change: 'Option ' + name + ' changed from ' + before + ' to ' + after
+				change: 'Option ' + model.get( 'label' ) + ' ' + name + ' changed from ' + before + ' to ' + after
 			};
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', model, changes, label );
@@ -93,7 +103,7 @@ define( ['builder/models/fields/listOptionModel', 'builder/models/fields/listOpt
 		 * @return void
 		 */
 		addOption: function( collection, fieldModel ) {
-			var model = new listOptionModel( { label: '', value: '', calc: '', order: collection.length } );
+			var model = new listOptionModel( { label: '', value: '', calc: '', selected: 0, order: collection.length } );
 			collection.add( model );
 
 			// Add our field addition to our change log.

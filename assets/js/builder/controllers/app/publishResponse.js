@@ -33,6 +33,9 @@ define( [], function() {
 				}
 			}
 
+			nfRadio.channel( 'app' ).request( 'update:setting', 'loading', false );
+			nfRadio.channel( 'app' ).trigger( 'change:loading' );
+
 			// Mark our app as clean. This will disable the publish button and fire anything else that cares about the state.
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );
 		}
