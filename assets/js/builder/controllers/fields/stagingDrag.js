@@ -17,6 +17,7 @@ define( [], function( ) {
 		/**
 		 * When the user starts dragging the staging area, we have to:
 		 * set the overflow property of the drawer to visible !important. If we don't, the button goes underneath the main section.
+		 * set the overflow proerty of the main to visible !important. If we don't, the dragged element goes underneath the drawer.
 		 * replace our helper with the stacked "x fields" template.
 		 * 
 		 * @since  3.0
@@ -26,7 +27,10 @@ define( [], function( ) {
 		 */
 		startDrag: function( context, ui ) {
 			this.drawerEl = nfRadio.channel( 'app' ).request( 'get:drawerEl' );
+			this.mainEl = nfRadio.channel( 'app' ).request( 'get:mainEl' );
 			jQuery( this.drawerEl )[0].style.setProperty( 'overflow', 'visible', 'important' );
+			jQuery( this.mainEl )[0].style.setProperty( 'overflow', 'visible', 'important' );
+
 			var stagedFields = nfRadio.channel( 'fields' ).request( 'get:staging' );
 			var html = _.template( jQuery( '#nf-tmpl-staged-fields-drag' ).html(), { num: stagedFields.models.length } );
 			jQuery( ui.helper ).html( html );
@@ -35,7 +39,7 @@ define( [], function( ) {
 		},
 
 		/**
-		 * When we stop dragging the staging area, we have to set the overflow property of our drawer to hidden !important
+		 * When we stop dragging the staging area, we have to set the overflow property to hidden !important
 		 * 
 		 * @since  3.0
 		 * @param  Object	 context jQuery UI Draggable
@@ -44,6 +48,7 @@ define( [], function( ) {
 		 */
 		stopDrag: function( context, ui ) {
 			jQuery( this.drawerEl )[0].style.setProperty( 'overflow', 'hidden', 'important' );
+			jQuery( this.mainEl )[0].style.setProperty( 'overflow', 'hidden', 'important' );
 		}
 	});
 
