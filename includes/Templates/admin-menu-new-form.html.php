@@ -34,7 +34,14 @@
 </script>
 
 <script id="nf-tmpl-app-header-action-button" type="text/template">
-    <a href="#" class="nf-button primary <%= maybeDisabled() %> publish"><span class="spinner"></span></a>
+    <a href="#" class="nf-button primary  publish"><div class="nf-loading">
+  <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+  </ul>
+</div></a>
+
     <%= maybeRenderCancel() %>
 </script>
 
