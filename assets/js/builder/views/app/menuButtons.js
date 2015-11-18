@@ -24,6 +24,7 @@ define( [], function() {
 		 * @return Object
 		 */
 		templateHelpers: function () {
+			var that = this;
 	    	return {
 
 	    		/**
@@ -33,6 +34,11 @@ define( [], function() {
 	    		 * @return string
 	    		 */
 	    		renderPublish: function() {
+	    			if ( that.publishWidth ) {
+	    				this.publishWidth = 'style="width:' + that.publishWidth + 'px !important"';
+	    			} else {
+	    				this.publishWidth = '';
+	    			}
 	    			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'loading' ) ) {
 	    				return _.template( jQuery( '#nf-tmpl-add-header-publish-loading' ).html(), this );	    				
 	    			} else {
@@ -67,6 +73,11 @@ define( [], function() {
 	    			}
 				},
 			};
+		},
+
+		onShow: function() {
+			var publishEL = jQuery( this.el ).find( '.publish' );
+			this.publishWidth = jQuery( publishEL ).outerWidth( true );
 		},
 
 		/**

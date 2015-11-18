@@ -39,11 +39,11 @@
 </script>
 
 <script id="nf-tmpl-app-header-publish-button" type="text/template">
-    <a href="#" class="nf-button primary <%= maybeDisabled() %> publish">PUBLISH</a>
+    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">PUBLISH</a>
 </script>
 
 <script id="nf-tmpl-add-header-publish-loading" type="text/template">
-    <a href="#" class="nf-button primary <%= maybeDisabled() %> publish">
+    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">
         <div class="nf-loading">
             <ul>
                 <li></li>
