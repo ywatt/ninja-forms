@@ -1,7 +1,7 @@
 .nf-loading {
   background: #1EA9EA;
   border-radius: 4px;
-  width: 60px;
+  width: 40px;
   margin: 0 auto;
   position: relative;
   ul {
@@ -10,7 +10,7 @@
     padding: 0;
     position: relative;
     top: -10px;
-    left: 25px;
+    left: 0;
     font-size: 0;
     li {
       height: 0;
@@ -26,15 +26,15 @@
       transform: transformZ(0);
       animation: LOADING 2s infinite;
       &:nth-child(1n) {
-        left: -20px;
+        left: 0;
         animation-delay: 0s;
       }
       &:nth-child(2n) {
-        left: 0;
+        left: 15px;
         animation-delay: 0.2s;
       }
       &:nth-child(3n) {
-        left: 20px;
+        left: 30px;
         animation-delay: 0.4s;
       }
     }
@@ -48,7 +48,7 @@
   }
   50%   {
     transform: scale(1);
-    background: #1EA9EA;
+    background: #fff;
   }
   100% {
     transform: scale(0.5);

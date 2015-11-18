@@ -11,6 +11,7 @@
     -moz-appearance: none;
     &.primary {
         background: $cta_color;
+        border: 1px solid #1EA9EA;
         color: #fff;
     }
     &.secondary {
@@ -20,6 +21,7 @@
     }
     &.disabled {
         background: #ccc;
+        border: 1px solid #ccc;
         cursor: default;
     }
 }
