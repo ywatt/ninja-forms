@@ -1,5 +1,7 @@
-input[type=checkbox] {
-    &.nf-toggle {
+input[type=checkbox].nf-toggle {
+    display: none;
+    + label {
+        text-indent: -99999px;
         background: transparent;
         border: 0;
         box-shadow: 0 0 0;
@@ -34,7 +36,9 @@ input[type=checkbox] {
             z-index: 99;
             transition: all 0.3s ease;
         }
-        &:checked {
+    }
+    &:checked  {
+        + label {
             &::after {
                 background: $accent_color;
                 border: 2px solid $accent_color;
@@ -42,8 +46,8 @@ input[type=checkbox] {
             }
             &::before {
                 content: "";
-                top: 2px;
-                left: 22px;
+                //top: 2px;
+                left: 18px;
                 transition: all 0.3s ease;
             }
         }
