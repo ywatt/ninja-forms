@@ -53,7 +53,8 @@ define(
 		/*
 		 * TODO: Actions domain controllers
 		 */
-		
+		'builder/controllers/actions/types',
+		'builder/controllers/actions/data',
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -99,11 +100,12 @@ define(
 		Fieldset,
 		ListField,
 		EditActive,
-		FieldSettings
+		FieldSettings,
 		/*
 		 * TODO: Actions domain controllers
 		 */
-		
+		ActionTypes,
+		ActionData
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -156,7 +158,8 @@ define(
 				/*
 				 * TODO: Actions domain controllers
 				 */
-				
+				new ActionTypes();
+				new ActionData();
 				/*
 				 * TODO: Settings domain controllers
 				 */

@@ -93,7 +93,7 @@
     </div>
 </script>
 
-<script id="nf-tmpl-actions" type="text/template">
+<script id="nf-tmpl-action-table" type="text/template">
     <table id="nf-table-display" class="nf-actions-table">
         <thead>
             <tr>
@@ -104,44 +104,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><input type="checkbox" class="nf-toggle" checked /></td>
-                <td>Save to Database</td>
-                <td>Save Submissions</td>
-                <td>
-                    <ul class="nf-item-controls">
-                        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-                        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-                        <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class="nf-toggle" checked /></td>
-                <td>Email to Admin</td>
-                <td>Email</td>
-                <td>
-                    <ul class="nf-item-controls">
-                        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-                        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-                        <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-                    </ul>
-                </td>
-            </tr>
-            <tr class="nf-deactivated">
-                <td><input type="checkbox" class="nf-toggle" /></td>
-                <td>Thank You Message</td>
-                <td>Sucess Message</td>
-                <td>
-                    <ul class="nf-item-controls">
-                        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-                        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-                        <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-                    </ul>
-                </td>
-            </tr>
         </tbody>
     </table>
+</script>
+
+<script id="nf-tmpl-action-item" type="text/template">
+    <td><%= renderToggle() %></td>
+    <td><%= title %></td>
+    <td><%= type %></td>
+    <td>
+        <ul class="nf-item-controls">
+            <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+            <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+            <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+        </ul>
+    </td>
 </script>
 
 <script id="nf-tmpl-settings" type="text/template">

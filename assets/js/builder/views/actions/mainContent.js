@@ -8,10 +8,15 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( [], function() {
-	var view = Marionette.ItemView.extend({
-		tagName: 'div',
-		template: '#nf-tmpl-actions'
+define( ['builder/views/actions/actionItem'], function( actionView ) {
+	var view = Marionette.CompositeView.extend({
+		template: '#nf-tmpl-action-table',
+		childView: actionView,
+		// emptyView: emptyView,
+
+		attachHtml: function( collectionView, childView ) {
+			jQuery( collectionView.el ).find( 'tbody' ).append( childView.el );
+		},
 	});
 
 	return view;

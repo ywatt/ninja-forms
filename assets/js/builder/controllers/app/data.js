@@ -16,6 +16,10 @@ define( ['builder/models/app/appModel'], function( appModel ) {
 			// Setup our initial model.
 			this.model = new appModel( {
 				currentDrawer: false,
+				/**
+				 * TODO: change 'actions' to 'fields'
+				 *
+				 */
 				currentDomain: appDomainCollection.get( 'fields' ),
 				clean: true
 			} );
