@@ -209,8 +209,6 @@ define( ['builder/models/fields/listOptionModel', 'builder/models/fields/listOpt
 				optionModel.set( 'order', index );
 				var newPos = index;
 
-				console.log( optionModel.get( 'label' ) + ' old pos - ' + oldPos );
-
 				data.objModels.push( {
 					model: optionModel,
 					attr: 'order',
