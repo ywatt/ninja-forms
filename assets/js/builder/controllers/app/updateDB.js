@@ -91,10 +91,16 @@ define( [], function() {
 			}
 			// Update
 			jQuery.post( ajaxurl, { action: jsAction, form: data, security: nfAdmin.ajaxNonce }, function( response ) {
-				response = JSON.parse( response );
-				response.action = action;
-				// Run anything that needs to happen after we update.
-				nfRadio.channel( 'app' ).trigger( 'response:updateDB', response );
+				try {
+					response = JSON.parse( response );
+					response.action = action;
+					// Run anything that needs to happen after we update.
+					nfRadio.channel( 'app' ).trigger( 'response:updateDB', response );
+				} catch( exception ) {
+					console.log( 'Something went wrong!' );
+					console.log( exception );
+				}
+				
 			} );
 		}
 

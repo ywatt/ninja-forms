@@ -24,7 +24,7 @@ define( ['builder/views/app/drawer/headerDefault', 'builder/views/app/drawer/con
 
 		onShow: function() {
 			jQuery( this.el ).parent().perfectScrollbar();
-		    jQuery( this.el ).parent().disableSelection();
+		    // jQuery( this.el ).parent().disableSelection();
 		},
 
 		loadContent: function( drawerID, data ) {

@@ -402,34 +402,38 @@
 </script>
 
 <script id="nf-tmpl-edit-field-setting-textbox" type="text/template">
-    <%= renderLabel() %>
-    <input type="text" value="<%= value %>" placeholder="<%= placeholder %>" />
+    <label for="<%= name %>"><%= label %>
+        <input type="text" id="<%= name %>" value="<%= value %>" placeholder="<%= placeholder %>" />
+    </label>
 </script>
 
 <script id="nf-tmpl-edit-field-setting-textarea" type="text/template">
-    <%= renderLabel() %>
-    <textarea><%= value %></textarea>
+    <label for="<%= name %>"><%= label %>
+        <textarea id="<%= name %>"><%= value %></textarea>
+    </label>
 </script>
 
 <script id="nf-tmpl-edit-field-setting-select" type="text/template">
-    <%= renderLabel() %>
-    <div class="nf-select">
-        <select>
-            <%
-            _.each( options, function( option ) {
-                %>
-                <option value="<%= option.value %>" <%= ( value == option.value ) ? 'selected="selected"' : '' %>><%= option.label %></option>
+    <label for="<%= name %>"><%= label %>
+        <div class="nf-select">
+            <select id="<%= name %>">
                 <%
-            } );
-            %>
-        </select>
-    </div>
+                _.each( options, function( option ) {
+                    %>
+                    <option value="<%= option.value %>" <%= ( value == option.value ) ? 'selected="selected"' : '' %>><%= option.label %></option>
+                    <%
+                } );
+                %>
+            </select>
+        </div>
+    </label>
 </script>
 
 <script id="nf-tmpl-edit-field-setting-toggle" type="text/template">
-    <label><%= renderLabel() %>
-    <div class="nf-toggle">
-    <input type="checkbox" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
+    <label for="<%= name %>"><%= label %>
+        <div class="nf-toggle" id="<%= name %>">
+            <input type="checkbox" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
+        </div>
     </label>
 </script>
 
