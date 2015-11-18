@@ -19,6 +19,7 @@ define( [], function() {
 		onShow: function() {
 			jQuery( this.el ).parent().perfectScrollbar();
 			nfRadio.channel( 'main' ).trigger( 'show:main' );
+			jQuery( this.el ).parent().disableSelection();
 		},
 
 		onRender: function() {
