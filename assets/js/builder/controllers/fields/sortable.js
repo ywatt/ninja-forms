@@ -248,7 +248,10 @@ define( [], function() {
 		 * @return void
 		 */
 		startFieldsSortable: function( ui ) {
-			jQuery( ui.item ).css( 'opacity', '0.5' ).show();
+			// If we aren't dragging an item in from types or staging, update our change log.
+			if( ! jQuery( ui.item ).hasClass( 'nf-field-type-button' ) && ! jQuery( ui.item ).hasClass( 'nf-stage' ) ) { 
+				jQuery( ui.item ).css( 'opacity', '0.5' ).show();
+			}
 		},
 
 		/**
