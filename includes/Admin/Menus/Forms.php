@@ -130,7 +130,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $unique_settings = $this->_unique_settings( $settings );
 
-            $master_settings = array_merge( $master_settings, $unique_settings );
+            $master_settings = array_merge( $master_settings, array_values( $unique_settings ) );
 
             $settings_groups = $this->_group_settings( $settings, $groups );
 
