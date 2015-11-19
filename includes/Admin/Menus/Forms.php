@@ -118,60 +118,23 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     {
         $field_type_settings = array();
 
-        $master_settings_list = array();
+        $master_settings = array();
 
         $setting_defaults = array();
 
         foreach( Ninja_Forms()->fields as $field ){
 
             $name = $field->get_name();
-
             $settings = $field->get_settings();
+            $groups = Ninja_Forms::config( 'SettingsGroups' );
 
-            $settings_groups = Ninja_Forms::config( 'SettingsGroups' );
+            $unique_settings = $this->_unique_settings( $settings );
 
-            $settings_defaults = array();
+            $master_settings = array_merge( $master_settings, $unique_settings );
 
-            foreach( $settings as $setting ){
+            $settings_groups = $this->_group_settings( $settings, $groups );
 
-                $group = $setting[ 'group' ];
-
-                if( 'fieldset' == $setting[ 'type' ] ){
-                    // Remove array keys for localization
-                    $setting[ 'settings' ] = array_values( $setting[ 'settings' ] );
-                }
-
-                $settings_groups[$group]['settings'][] = $setting;
-
-                if( isset( $setting[ 'name' ] ) ){
-
-                    if( isset( $setting[ 'type' ] ) && 'fieldset' == $setting[ 'type' ] ){
-
-                        foreach( $setting[ 'settings' ] as $fieldset_setting ){
-
-                            $setting_name = $fieldset_setting[ 'name' ];
-                            $master_settings_list[] = $fieldset_setting;
-
-                            if( isset( $fieldset_setting[ 'value' ] ) ) {
-                                $settings_defaults[$setting_name] = $fieldset_setting['value'];
-                            }
-                        }
-                    } else {
-                        $setting_name = $setting[ 'name' ];
-                        $master_settings_list[] = $setting;
-
-                        if( isset( $setting[ 'value' ] ) ) {
-                            $settings_defaults[$setting_name] = $setting['value'];
-                        }
-                    }
-                }
-            }
-
-            foreach( $settings_groups as $id => $group ) {
-                if ( empty( $group[ 'settings' ] ) ) {
-                    unset( $settings_groups[ $id ] );
-                }
-            }
+            $settings_defaults = $this->_setting_defaults( $unique_settings );
 
             $field_type_settings[ $name ] = array(
                 'id' =>  $name,
@@ -187,7 +150,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         ?>
         <script>
             var fieldTypeData = <?php echo wp_json_encode( $field_type_settings ); ?>;
-            var fieldSettings = <?php echo wp_json_encode( $master_settings_list ); ?>;
+            var fieldSettings = <?php echo wp_json_encode( $master_settings ); ?>;
             // console.log( fieldTypeData );
         </script>
         <?php
@@ -202,25 +165,17 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         foreach( Ninja_Forms()->actions as $action ){
 
             $name = $action->get_name();
-
             $settings = $action->get_settings();
+            $groups = Ninja_Forms::config( 'SettingsGroups' );
 
-            $settings_groups = Ninja_Forms::config( 'SettingsGroups' );
-
-            foreach( $settings as $setting_name => $setting ){
-
-                $group = $setting[ 'group' ];
-
-                $settings_groups[$group]['settings'][] = $setting;
-
-                if( ! isset( $setting[ 'value' ] ) ) continue;
-
-                $action_type_settings[ $name ][ 'settingDefaults' ][ $setting_name ] = $setting[ 'value' ];
-            }
-
-            $action_type_settings[ $name ][ 'settingGroups' ] = $settings_groups;
+            $settings_groups = $this->_group_settings( $settings, $groups );
 
             $master_settings_list = array_merge( $master_settings_list, array_values( $settings ) );
+
+            $action_type_settings[ $name ][ 'settingGroups' ] = $settings_groups;
+            $action_type_settings[ $name ][ 'settingDefaults' ] = $this->_setting_defaults( $master_settings_list );
+
+
         }
         ?>
         <script>
@@ -257,6 +212,12 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $group = ( isset( $setting[ 'group' ] ) ) ? $setting[ 'group' ] : '';
 
             $groups[ $group ][ 'settings'][] = $setting;
+        }
+
+        foreach( $groups as $id => $group ) {
+            if ( empty( $group[ 'settings' ] ) ) {
+                unset( $groups[ $id ] );
+            }
         }
 
         return $groups;
