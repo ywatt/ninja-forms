@@ -47,6 +47,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $this->_localize_field_type_data();
 
             $this->_localize_action_type_data();
+
+            $this->_localize_form_settings();
         } else {
 
             /*
@@ -227,6 +229,71 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             // console.log( actionTypeData );
         </script>
         <?php
+    }
+
+    protected function _localize_form_settings()
+    {
+        $settings = Ninja_Forms::config( 'FormSettings' );
+        $groups = Ninja_Forms::config( 'SettingsGroups' );
+
+        $master_settings = $this->_unique_settings( $settings );
+
+        $form_settings[ 'settingGroups' ] = $this->_group_settings( $settings, $groups );
+
+        $form_settings[ 'settingDefaults' ] = $this->_setting_defaults( $master_settings );
+
+        ?>
+        <script>
+        var formData = <?php echo wp_json_encode( $form_settings )?>;
+        var formSettings = <?php echo wp_json_encode( $master_settings )?>;
+        </script>
+        <?php
+    }
+
+    protected function _group_settings( $settings, $groups )
+    {
+        foreach( $settings as $setting ){
+
+            $group = ( isset( $setting[ 'group' ] ) ) ? $setting[ 'group' ] : '';
+
+            $groups[ $group ][ 'settings'][] = $setting;
+        }
+
+        return $groups;
+    }
+
+    protected function _unique_settings( $settings )
+    {
+        $unique_settings = array();
+
+        foreach( $settings as $setting ){
+
+            if( 'fieldset' == $setting[ 'type' ] ){
+
+                $unique_settings = array_merge( $unique_settings, $this->_unique_settings( $setting[ 'settings' ] ) );
+            } else {
+
+                $name = $setting[ 'name' ];
+                $unique_settings[ $name ] = $setting;
+            }
+
+        }
+
+        return $unique_settings;
+    }
+
+    protected function _setting_defaults( $settings )
+    {
+        $setting_defaults = array();
+
+        foreach( $settings as $setting ){
+
+            $name = $setting[ 'name' ];
+            $default = $setting[ 'value' ];
+            $setting_defaults[ $name ] = $default;
+        }
+
+        return $setting_defaults;
     }
 
 }
