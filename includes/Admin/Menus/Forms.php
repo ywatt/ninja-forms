@@ -211,6 +211,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $group = ( isset( $setting[ 'group' ] ) ) ? $setting[ 'group' ] : '';
 
+            if( isset( $setting[ 'type'] ) && 'fieldset' == $setting[ 'type' ] ){
+                $setting[ 'settings' ] = array_values( $setting[ 'settings' ] );
+            }
+
             $groups[ $group ][ 'settings'][] = $setting;
         }
 
