@@ -249,8 +249,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         foreach( $settings as $setting ){
 
-            $name = $setting[ 'name' ];
-            $default = $setting[ 'value' ];
+            $name = ( isset( $setting[ 'name' ] ) ) ? $setting[ 'name' ] : '';
+            $default = ( isset( $setting[ 'value' ] ) ) ? $setting[ 'value' ] : '';
             $setting_defaults[ $name ] = $default;
         }
 
