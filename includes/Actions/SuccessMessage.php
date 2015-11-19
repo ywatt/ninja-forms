@@ -32,6 +32,8 @@ final class NF_Actions_SuccessMessage extends NF_Abstracts_Action
     {
         parent::__construct();
 
+        $this->_nicename = __( 'Success Message', 'ninja-forms' );
+
         $settings = Ninja_Forms::config( 'ActionSuccessMessageSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );

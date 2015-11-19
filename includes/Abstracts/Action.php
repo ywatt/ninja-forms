@@ -6,9 +6,14 @@
 abstract class NF_Abstracts_Action
 {
     /**
-    * @var string
-    */
+     * @var string
+     */
     protected $_name  = '';
+
+    /**
+     * @var string
+     */
+    protected $_nicename = '';
 
     /**
      * @var array
@@ -89,6 +94,18 @@ abstract class NF_Abstracts_Action
     public function get_name()
     {
         return $this->_name;
+    }
+
+    /**
+     * Get Nicename
+     *
+     * Returns the nicename of an action.
+     *
+     * @return string
+     */
+    public function get_nicename()
+    {
+        return $this->_nicename;
     }
 
     /**

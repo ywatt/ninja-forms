@@ -172,8 +172,12 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $master_settings_list = array_merge( $master_settings_list, array_values( $settings ) );
 
-            $action_type_settings[ $name ][ 'settingGroups' ] = $settings_groups;
-            $action_type_settings[ $name ][ 'settingDefaults' ] = $this->_setting_defaults( $master_settings_list );
+            $action_type_settings[ $name ] = array(
+                'id' => $name,
+                'nicename' => $action->get_nicename(),
+                'settingGroups' => $settings_groups,
+                'settingDefaults' => $this->_setting_defaults( $master_settings_list )
+            );
 
 
         }
