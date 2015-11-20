@@ -17,7 +17,6 @@ define( [], function() {
 			var that = this;
 	    	return {
 	    		renderSetting: function(){
-	    			console.log( this.name );
 	    			if ( 'undefined' != typeof that.dataModel.get( this.name ) ) {
 	    				this.value = that.dataModel.get( this.name );
 	    			} else {

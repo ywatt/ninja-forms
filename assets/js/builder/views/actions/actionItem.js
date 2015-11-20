@@ -37,8 +37,12 @@ define( [], function() {
 				renderToggle: function() {
 					this.label = '';
 					this.value = this.active;
-					this.name = this.id + '-active';
-					return _.template( jQuery( '#nf-tmpl-edit-setting-toggle' ).html(), this );
+					var actionName = this.name;
+					this.toggleName = this.id + '-active';
+					this.name = this.toggleName;
+					var html = _.template( jQuery( '#nf-tmpl-edit-setting-toggle' ).html(), this );
+					this.name = actionName;
+					return html;
 				}
 			}
 		}

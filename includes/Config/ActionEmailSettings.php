@@ -6,8 +6,8 @@ return array(
     * From Name
     */
 
-    'from-name' => array(
-        'name' => 'from-name',
+    'from_name' => array(
+        'name' => 'from_name',
         'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'From Name', 'ninja-forms' ),
@@ -21,6 +21,7 @@ return array(
     */
 
     'reply-to' => array(
+        'name' => 'replyto',
         'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'Reply To', 'ninja-forms' ),
@@ -60,7 +61,7 @@ return array(
     */
 
     'email-message' => array(
-        'name' => 'email-message',
+        'name' => 'email_message',
         'type' => 'textarea',
         'group' => 'primary',
         'label' => __( 'Email Message', 'ninja-forms' ),
@@ -89,8 +90,8 @@ return array(
         'name' => 'format',
         'type' => 'select',
             'options' => array(
-                'html' => __( 'HTML', 'ninja-forms' ),
-                'plain' => __( 'Plain Text', 'ninja-forms' ),
+                array( 'label' => __( 'HTML', 'ninja-forms' ), 'value' => 'html' ),
+                array( 'label' => __( 'Plain Text', 'ninja-forms' ), 'value' => 'plain' )
             ),
         'group' => 'advanced',
         'label' => __( 'Format', 'ninja-forms' ),
