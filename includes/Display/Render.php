@@ -34,8 +34,6 @@ final class NF_Display_Render
 
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
-            $field->update_setting( 'value', $field_class->get_test_value() );
-
             $field->update_setting( 'id', $field->get_id() );
 
             $templates = $field_class->get_templates();
@@ -117,6 +115,8 @@ final class NF_Display_Render
             foreach( $templates as $template ) {
                 self::load_template('fields-' . $template);
             }
+
+            $field[ 'settings' ][ 'value' ] = $field_class->get_test_value();
 
             $field[ 'settings' ][ 'element_templates' ] = $templates;
             $field[ 'settings' ][ 'old_classname' ] = $field_class->get_old_classname();
