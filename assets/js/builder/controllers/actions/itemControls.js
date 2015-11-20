@@ -26,8 +26,8 @@ define( [], function() {
 		 * @return void
 		 */
 		clickEdit: function( e, model ) {
-			// nfRadio.channel( 'fields' ).request( 'clear:editActive' );
-			// model.set( 'editActive', true );
+			nfRadio.channel( 'actions' ).request( 'clear:editActive' );
+			model.set( 'editActive', true );
 			var type = nfRadio.channel( 'actions' ).request( 'get:type' , model.get( 'type' ) );
 			nfRadio.channel( 'app' ).request( 'open:drawer', 'editSettings', { model: model, groupCollection: type.get( 'settingGroups' ) } );
 		},

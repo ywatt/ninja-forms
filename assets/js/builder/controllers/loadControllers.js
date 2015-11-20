@@ -57,6 +57,8 @@ define(
 		'builder/controllers/actions/data',
 		'builder/controllers/actions/actionSettings',
 		'builder/controllers/actions/itemControls',
+		'builder/controllers/actions/editActive',
+
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -101,7 +103,7 @@ define(
 		FieldData,
 		FieldItemControls,
 		ListField,
-		EditActive,
+		FieldsEditActive,
 		FieldSettings,
 		/*
 		 * TODO: Actions domain controllers
@@ -109,7 +111,8 @@ define(
 		ActionTypes,
 		ActionData,
 		ActionSettings,
-		ActionItemControls
+		ActionItemControls,
+		ActionEditActive
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -132,7 +135,6 @@ define(
 				new AppUndoChanges();
 				new AppPublishResponse();
 				new AppChangeDomain();
-				new EditActive();
 				new CleanState();
 				new CoreUndo();
 				new CloneModelDeep();
@@ -158,6 +160,7 @@ define(
 				new ChangeSettingDefault();
 				new ToggleSetting();
 				new DrawerSettingChildView();
+				new FieldsEditActive();
 				new FieldSettings();
 				/*
 				 * TODO: Actions domain controllers
@@ -166,6 +169,7 @@ define(
 				new ActionData();
 				new ActionSettings();
 				new ActionItemControls();
+				new ActionEditActive();
 				/*
 				 * TODO: Settings domain controllers
 				 */
