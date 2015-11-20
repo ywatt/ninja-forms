@@ -62,7 +62,7 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 
                 $id = $action_data['id'];
 
-                $action = Ninja_Forms()->form( $form_data[ 'id' ] )->get_field($action_data['id']);
+                $action = Ninja_Forms()->form( $form_data[ 'id' ] )->get_action($action_data['id']);
 
                 $action->update_settings($action_data['settings'])->save();
 
