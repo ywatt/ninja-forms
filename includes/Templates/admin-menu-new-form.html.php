@@ -86,9 +86,10 @@
     <div id="<%= getFieldID() %>" class="<%= renderClasses() %>"> <%= label %> <%= renderRequired() %>
 
             <ul class="nf-item-controls">
-                <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-                <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
                 <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editField"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+                <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+
+                <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
             </ul>
     </div>
 </script>
@@ -176,31 +177,31 @@
     <section class="nf-settings nf-action-items">
         <h3>Available Actions</h3>
         <div class="nf-one-third">
-            <div class="nf-item">MailChimp</div>
+            <div class="nf-item nf-has-img" style="background-image: url('https://ninjaforms.com/wp-content/uploads/2015/11/custom-action.png');">MailChimp</div>
         </div>
         <div class="nf-one-third">
-            <div class="nf-item">Insightly</div>
+            <div class="nf-item nf-has-img">Insightly</div>
         </div>
         <div class="nf-one-third">
-            <div class="nf-item">Constant Contact</div>
+            <div class="nf-item nf-has-img">Constant Contact</div>
         </div>
         <div class="nf-one-third">
-            <div class="nf-item">Campaign Monitor</div>
+            <div class="nf-item nf-has-img">Campaign Monitor</div>
         </div>
         <div class="nf-one-third">
-            <div class="nf-item">Slack</div>
+            <div class="nf-item nf-has-img">Slack</div>
         </div>
         <div class="nf-one-third">
-            <div class="nf-item">Trello</div>
+            <div class="nf-item nf-has-img">Trello</div>
         </div>
         <div class="nf-one-third">
-            <div class="nf-item">Create Post</div>
+            <div class="nf-item nf-has-img">Create Post</div>
         </div>
         <div class="nf-one-third">
-            <div class="nf-item">Salesforce</div>
+            <div class="nf-item nf-has-img">Salesforce</div>
         </div>
         <div class="nf-one-third">
-            <div class="nf-item">Text Message</div>
+            <div class="nf-item nf-has-img">Text Message</div>
         </div>
     </section>
 </script>
