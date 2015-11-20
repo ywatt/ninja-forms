@@ -117,7 +117,7 @@
         <ul class="nf-item-controls">
             <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
             <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-            <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+            <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
         </ul>
     </td>
 </script>
@@ -239,7 +239,7 @@
     </tr>
 </script>
 
-<script id="nf-tmpl-drawer-content-edit-field" type="text/template">
+<script id="nf-tmpl-drawer-content-edit-settings" type="text/template">
     <h2><span class="dashicons dashicons-star-empty"></span> <%= renderTypeNicename() %></h2>
     <span class="nf-settings-groups"></span>
 </script>
@@ -251,7 +251,7 @@
     </section>
 </script>
 
-<script id="nf-tmpl-drawer-content-edit-field-setting-group-label" type="text/template">
+<script id="nf-tmpl-drawer-content-edit-setting-group-label" type="text/template">
     <h3 class="toggle"><span class="dashicons dashicons-arrow-<%= renderArrowDir() %>"></span><%= label %></h3>
 </script>
 
@@ -373,25 +373,25 @@
 
 <!-- Field Settings Templates -->
 
-<script id="nf-tmpl-edit-field-setting-wrap" type="text/template">
+<script id="nf-tmpl-edit-setting-wrap" type="text/template">
     <div class="nf-<%= renderWidth() %>">
         <%= renderSetting() %>
     </div>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-textbox" type="text/template">
+<script id="nf-tmpl-edit-setting-textbox" type="text/template">
     <label for="<%= name %>"><%= label %>
-        <input type="text" id="<%= name %>" value="<%= value %>" placeholder="<%= placeholder %>" />
+        <input type="text" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
     </label>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-textarea" type="text/template">
+<script id="nf-tmpl-edit-setting-textarea" type="text/template">
     <label for="<%= name %>"><%= label %>
         <textarea id="<%= name %>"><%= value %></textarea>
     </label>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-select" type="text/template">
+<script id="nf-tmpl-edit-setting-select" type="text/template">
     <label for="<%= name %>" class="nf-select"><%= label %>
         <select id="<%= name %>">
             <%
@@ -406,7 +406,7 @@
     </label>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-checkbox" type="text/template">
+<script id="nf-tmpl-edit-setting-checkbox" type="text/template">
 
     <span class="nf-setting-label"><%= label %></span>
     <input type="checkbox" id="<%= name %>" class="nf-checkbox" <%= ( 1 == value ) ? 'checked' : '' %> />
@@ -414,7 +414,7 @@
 
 </script>
 
-<script id="nf-tmpl-edit-field-setting-toggle" type="text/template">
+<script id="nf-tmpl-edit-setting-toggle" type="text/template">
 
     <span class="nf-setting-label"><%= label %></span>
     <input type="checkbox" id="<%= name %>" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
@@ -422,14 +422,14 @@
 
 </script>
 
-<script id="nf-tmpl-edit-field-setting-fieldset" type="text/template">
+<script id="nf-tmpl-edit-setting-fieldset" type="text/template">
     <fieldset>
         <legend><%= label %></legend>
         <span class="nf-field-sub-settings"></span>
     </fieldset>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-list-repeater" type="text/template">
+<script id="nf-tmpl-edit-setting-list-repeater" type="text/template">
     <fieldset class="nf-list-options">
         <legend><%= label %></legend>
         <div class="nf-div-table">
@@ -448,11 +448,11 @@
     </fieldset>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-list-empty" type="text/template">
+<script id="nf-tmpl-edit-setting-list-empty" type="text/template">
 
 </script>
 
-<script id="nf-tmpl-edit-field-setting-list-option" type="text/template">
+<script id="nf-tmpl-edit-setting-list-option" type="text/template">
     <div>
         <span class="dashicons dashicons-menu handle"></span>
     </div>

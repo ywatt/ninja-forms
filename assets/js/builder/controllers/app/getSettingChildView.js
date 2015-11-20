@@ -1,19 +1,19 @@
 /**
- * Returns the appropriate child view for our field settings drawer.
+ * Returns the appropriate child view for our settings drawer.
  *
- * This enables field types to register custom childviews for their settings.
- * The list-repeater setting for the list types is an example.
+ * This enables settings types to register custom childviews for their settings.
+ * The list-repeater setting for the list field is an example.
  * 
  * @package Ninja Forms builder
- * @subpackage Fields - Edit Field Drawer
+ * @subpackage App - Edit Settings Drawer
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/fields/drawer/typeSetting'], function( fieldTypeSettingView ) {
+define( ['builder/views/app/drawer/itemSetting'], function( itemSettingView ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Respond to requests for field settings child views.
-			nfRadio.channel( 'fields' ).reply( 'get:settingChildView', this.getSettingChildView, this );
+			nfRadio.channel( 'app' ).reply( 'get:settingChildView', this.getSettingChildView, this );
 		},
 
 		/**
@@ -27,7 +27,7 @@ define( ['builder/views/fields/drawer/typeSetting'], function( fieldTypeSettingV
 			// Get our setting type.
 			var type = model.get( 'type' );
 			// Request a setting childview from our setting type channel. (Setting type, not field type)
-			var settingChildView = nfRadio.channel( type ).request( 'get:settingChildView', model ) || fieldTypeSettingView;
+			var settingChildView = nfRadio.channel( type ).request( 'get:settingChildView', model ) || itemSettingView;
 			
 			return settingChildView
 		}

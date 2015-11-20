@@ -6,9 +6,9 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/fields/typeSettingGroupModel'], function( typeSettingGroupModel ) {
+define( ['builder/models/app/settingGroupModel'], function( settingGroupModel ) {
 	var collection = Backbone.Collection.extend( {
-		model: typeSettingGroupModel
+		model: settingGroupModel
 	} );
 	return collection;
 } );

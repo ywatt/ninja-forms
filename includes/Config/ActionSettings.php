@@ -7,9 +7,11 @@ return array(
      */
 
     'name' => array(
-        'type' => 'text',
+        'name' => 'name',
+        'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'Action Name', 'ninja-forms' ),
         'placeholder' => '',
+        'width' => 'full'
     ),
 );

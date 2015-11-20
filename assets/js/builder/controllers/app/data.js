@@ -20,7 +20,7 @@ define( ['builder/models/app/appModel'], function( appModel ) {
 				 * TODO: change 'actions' to 'fields'
 				 *
 				 */
-				currentDomain: appDomainCollection.get( 'fields' ),
+				currentDomain: appDomainCollection.get( 'actions' ),
 				clean: true
 			} );
 

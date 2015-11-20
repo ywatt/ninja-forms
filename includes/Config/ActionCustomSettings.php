@@ -7,6 +7,7 @@ return array(
      */
 
     'hook' => array(
+        'name' => 'hook',
         'type' => 'Select',
             'options' => array(
                 'action' => __( 'Action', 'ninja-forms'),
@@ -22,7 +23,8 @@ return array(
      */
 
     'tag' => array(
-        'type' => 'text',
+        'name' => 'tag',
+        'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'Tag', 'ninja-forms' ),
         'placeholder' => '',
