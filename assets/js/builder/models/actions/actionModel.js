@@ -9,7 +9,7 @@
 define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
-			objectType: 'Field',
+			objectType: 'Action',
 			editActive: false
 		},
 
@@ -25,7 +25,7 @@ define( [], function() {
 		 * @return void
 		 */
 		changeSetting: function() {
-			nfRadio.channel( 'actions' ).trigger( 'update:setting', this );
+			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
 		}
 	} );
 	

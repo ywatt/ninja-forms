@@ -42,7 +42,10 @@ define( [], function() {
 				after: after
 			}
 
-			var settingModel = nfRadio.channel( 'fields' ).request( 'get:settingModel', name );
+			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
+			var currentDomainID = currentDomain.get( 'id' );
+
+			var settingModel = nfRadio.channel( currentDomainID ).request( 'get:settingModel', name );
 
 			/*
 			 * TODO: Make this more dynamic.
@@ -63,7 +66,7 @@ define( [], function() {
 			}
 
 			var label = {
-				object: 'Field',
+				object: dataModel.get( 'objectType' ),
 				label: dataModel.get( 'label' ),
 				change: 'Changed ' + settingModel.get( 'label' ) + ' from ' + before + ' to ' + after
 			};

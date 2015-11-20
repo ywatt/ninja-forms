@@ -12,7 +12,15 @@ define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'tr',
 		template: '#nf-tmpl-action-item',
+		
+		initialize: function() {
+			this.model.on( 'change', this.render, this );
+		},
 
+		onBeforeDestroy: function() {
+			this.model.off( 'change', this.render );
+		},
+		
 		events: {
 			'click .nf-edit-settings': 'clickEdit',
 			'click .nf-delete': 'clickDelete',

@@ -16,7 +16,8 @@ define( ['builder/models/app/formModel'], function( formModel) {
 			this.model.set( 'id', preloadedFormData.id );
 			// Set our field collection
 			this.model.set( 'fields', nfRadio.channel( 'fields' ).request( 'get:fieldCollection' ) );
-			// TODO: Set our actions collection
+			// Set our actions collection
+			this.model.set( 'actions', nfRadio.channel( 'actions' ).request( 'get:actionCollection' ) );
 			// TODO: Set our settings collection
 			this.model.set( 'settings', preloadedFormData.settings );
 			// Respond to requests for form data.
