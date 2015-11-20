@@ -29,6 +29,10 @@ define(
 		'builder/controllers/app/cleanState',
 		'builder/controllers/app/coreUndo',
 		'builder/controllers/app/cloneModelDeep',
+		'builder/controllers/app/getSettingChildView',
+		'builder/controllers/app/changeSettingDefault',
+		'builder/controllers/app/fieldset',
+		'builder/controllers/app/toggleSetting',
 		/*
 		 * Fields domain controllers
 		 */
@@ -42,10 +46,6 @@ define(
 		'builder/controllers/fields/sortable',
 		'builder/controllers/fields/data',
 		'builder/controllers/fields/itemControls',
-		'builder/controllers/fields/changeSettingDefault',
-		'builder/controllers/fields/toggleSetting',
-		'builder/controllers/fields/getSettingChildView',
-		'builder/controllers/fields/fieldset',
 		'builder/controllers/fields/listField',
 		'builder/controllers/fields/editActive',
 		'builder/controllers/fields/fieldSettings',
@@ -55,6 +55,8 @@ define(
 		 */
 		'builder/controllers/actions/types',
 		'builder/controllers/actions/data',
+		'builder/controllers/actions/actionSettings',
+		'builder/controllers/actions/itemControls',
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -81,6 +83,10 @@ define(
 		CleanState,
 		CoreUndo,
 		CloneModelDeep,
+		DrawerSettingChildView,
+		ChangeSettingDefault,
+		Fieldset,
+		ToggleSetting,
 		/*
 		 * Fields domain controllers
 		 */
@@ -94,10 +100,6 @@ define(
 		MainContentFieldsSortable,
 		FieldData,
 		FieldItemControls,
-		FieldsChangeSettingDefault,
-		toggleFieldSetting,
-		DrawerFieldTypeSettingChildView,
-		Fieldset,
 		ListField,
 		EditActive,
 		FieldSettings,
@@ -105,7 +107,9 @@ define(
 		 * TODO: Actions domain controllers
 		 */
 		ActionTypes,
-		ActionData
+		ActionData,
+		ActionSettings,
+		ActionItemControls
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -151,15 +155,17 @@ define(
 				new DrawerFilterFieldTypes();
 				new MainContentFieldsSortable();
 				new FieldItemControls();
-				new FieldsChangeSettingDefault();
-				new toggleFieldSetting();
-				new DrawerFieldTypeSettingChildView();
+				new ChangeSettingDefault();
+				new ToggleSetting();
+				new DrawerSettingChildView();
 				new FieldSettings();
 				/*
 				 * TODO: Actions domain controllers
 				 */
 				new ActionTypes();
 				new ActionData();
+				new ActionSettings();
+				new ActionItemControls();
 				/*
 				 * TODO: Settings domain controllers
 				 */

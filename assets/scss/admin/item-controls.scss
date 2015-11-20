@@ -26,6 +26,16 @@
                 padding-top: 1px;
             }
         }
+        &.nf-item-delete {
+            border-left: 1px solid #ccc;
+            padding-left: 6px;
+            margin: 0 -6px 0 0;
+            &:hover {
+                .dashicons {
+                    color: red;
+                }
+            }
+        }
         &.nf-item-duplicate {
             .nf-tooltip {
                 left: -32px;

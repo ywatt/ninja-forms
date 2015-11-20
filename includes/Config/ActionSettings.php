@@ -8,9 +8,10 @@ return array(
 
     'name' => array(
         'name' => 'name',
-        'type' => 'text',
+        'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'Action Name', 'ninja-forms' ),
         'placeholder' => '',
+        'width' => 'full'
     ),
 );

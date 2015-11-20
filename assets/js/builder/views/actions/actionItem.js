@@ -13,14 +13,36 @@ define( [], function() {
 		tagName: 'tr',
 		template: '#nf-tmpl-action-item',
 
+		events: {
+			'click .nf-edit-settings': 'clickEdit',
+			'click .nf-delete': 'clickDelete',
+			'click .nf-duplicate': 'clickDuplicate'
+		},
+
+		clickEdit: function( e ) {
+			nfRadio.channel( 'actions' ).trigger( 'click:edit', e, this.model );
+		},
+
+		clickDelete: function( e ) {
+			nfRadio.channel( 'actions' ).trigger( 'click:delete', e, this.model );
+		},
+
+		clickDuplicate: function( e ) {
+			nfRadio.channel( 'actions' ).trigger( 'click:duplicate', e, this.model );
+		},
+
 		templateHelpers: function() {
 			return {
 
 				renderToggle: function() {
 					this.label = '';
 					this.value = this.active;
-					this.name = this.id + '-active';
-					return _.template( jQuery( '#nf-tmpl-edit-field-setting-toggle' ).html(), this );
+					var actionName = this.name;
+					this.toggleName = this.id + '-active';
+					this.name = this.toggleName;
+					var html = _.template( jQuery( '#nf-tmpl-edit-setting-toggle' ).html(), this );
+					this.name = actionName;
+					return html;
 				}
 			}
 		}

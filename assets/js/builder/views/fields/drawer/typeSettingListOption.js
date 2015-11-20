@@ -2,10 +2,10 @@ define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'div',
 		className: 'nf-table-row',
-		template: '#nf-tmpl-edit-field-setting-list-option',
+		template: '#nf-tmpl-edit-setting-list-option',
 
 		initialize: function( data ) {
-			this.fieldModel = data.fieldModel;
+			this.dataModel = data.dataModel;
 			this.collection = data.collection;
 		},
 
@@ -24,16 +24,16 @@ define( [], function() {
 		},
 
 		changeOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).trigger( 'change:option', e, this.model, this.fieldModel );
+			nfRadio.channel( 'list-repeater' ).trigger( 'change:option', e, this.model, this.dataModel );
 		},
 
 		deleteOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).trigger( 'click:deleteOption', this.model, this.collection, this.fieldModel );
+			nfRadio.channel( 'list-repeater' ).trigger( 'click:deleteOption', this.model, this.collection, this.dataModel );
 		},
 
 		maybeAddOption: function( e ) {
 			if ( 13 == e.keyCode ) {
-				nfRadio.channel( 'list-repeater' ).trigger( 'click:addOption', this.collection, this.fieldModel );
+				nfRadio.channel( 'list-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
 			}
 		}
 

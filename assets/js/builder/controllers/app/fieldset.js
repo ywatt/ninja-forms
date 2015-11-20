@@ -6,12 +6,12 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/fields/drawer/typeSettingFieldset','builder/models/fields/typeSettingCollection'], function( fieldsetView, fieldTypeSettingCollection ) {
+define( ['builder/views/app/drawer/typeSettingFieldset','builder/models/app/settingCollection'], function( fieldsetView, settingCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			nfRadio.channel( 'fieldset' ).reply( 'get:settingChildView', this.getSettingChildView, this );
 			// When a list type field is initialized, create an option collection.
-			this.listenTo( nfRadio.channel( 'fields-fieldset' ), 'init:fieldTypeSettingModel', this.createSettingsCollection );
+			this.listenTo( nfRadio.channel( 'fieldset' ), 'init:settingModel', this.createSettingsCollection );
 		},
 
 		getSettingChildView: function( model ) {
@@ -26,7 +26,7 @@ define( ['builder/views/fields/drawer/typeSettingFieldset','builder/models/field
 		 * @return void
 		 */
 		createSettingsCollection: function( model ) {
-			model.set( 'settings', new fieldTypeSettingCollection( model.get( 'settings' ) ) );
+			model.set( 'settings', new settingCollection( model.get( 'settings' ) ) );
 		},
 
 	});

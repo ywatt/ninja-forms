@@ -7,11 +7,12 @@ return array(
     */
 
     'message' => array(
-        'name' => 'message',
+        'name' => 'success_message',
         'type' => 'textarea',
         'group' => 'primary',
         'label' => __( 'Message', 'ninja-forms' ),
         'placeholder' => '',
+        'width' => 'full'
     ),
 
 );

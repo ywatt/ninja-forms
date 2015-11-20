@@ -11,7 +11,7 @@
 define( [
 	'builder/models/app/drawerCollection',
 	'builder/views/fields/drawer/addField',
-	'builder/views/fields/drawer/editField',
+	'builder/views/app/drawer/editSettings',
 	'builder/views/actions/drawer/addAction',
 	'builder/views/actions/drawer/editAction',
 	'builder/views/settings/drawer/editFormSettings',
@@ -20,7 +20,7 @@ define( [
 	], function(
 		drawerCollection,
 		addFieldView,
-		editFieldView,
+		editSettingsView,
 		addActionView,
 		editActionView,
 		editFormSettingsView,
@@ -39,10 +39,10 @@ define( [
 					}
 				},
 				{
-					id: 'editField',
+					id: 'editSettings',
 
 					getContentView: function( data ) {
-						return new editFieldView( data );
+						return new editSettingsView( data );
 					}
 				},
 				{

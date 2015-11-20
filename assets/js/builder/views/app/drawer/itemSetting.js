@@ -1,10 +1,10 @@
 define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'div',
-		template: '#nf-tmpl-edit-field-setting-wrap',
+		template: '#nf-tmpl-edit-setting-wrap',
 
 		initialize: function( data ) {
-			this.fieldModel = data.fieldModel;
+			this.dataModel = data.dataModel;
 		},
 
 		onShow: function() {
@@ -17,13 +17,13 @@ define( [], function() {
 			var that = this;
 	    	return {
 	    		renderSetting: function(){
-	    			if ( 'undefined' != typeof that.fieldModel.get( this.name ) ) {
-	    				this.value = that.fieldModel.get( this.name );
+	    			if ( 'undefined' != typeof that.dataModel.get( this.name ) ) {
+	    				this.value = that.dataModel.get( this.name );
 	    			} else {
 	    				this.value = '';
 	    			}
-	    			
-					return _.template( jQuery( '#nf-tmpl-edit-field-setting-' + this.type ).html(), this );
+
+					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
 				},
 				
 				renderWidth: function() {
@@ -41,7 +41,7 @@ define( [], function() {
 		},
 
 		changeSetting: function( e ) {
-			nfRadio.channel( 'fields' ).trigger( 'change:setting', e, this.model, this.fieldModel );
+			nfRadio.channel( 'app' ).trigger( 'change:setting', e, this.model, this.dataModel );
 		}
 
 	});

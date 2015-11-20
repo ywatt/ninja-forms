@@ -1,13 +1,13 @@
 define( ['builder/views/fields/drawer/typeSettingListOption', 'builder/views/fields/drawer/typeSettingListEmpty'], function( listOptionView, listEmptyView ) {
 	var view = Marionette.CompositeView.extend( {
-		template: '#nf-tmpl-edit-field-setting-wrap',
+		template: '#nf-tmpl-edit-setting-wrap',
 		childView: listOptionView,
 		emptyView: listEmptyView,
 
 		initialize: function( data ) {
-			this.collection = data.fieldModel.get( 'options' );
-			this.fieldModel = data.fieldModel;
-			this.childViewOptions = { collection: this.collection, fieldModel: data.fieldModel };
+			this.collection = data.dataModel.get( 'options' );
+			this.dataModel = data.dataModel;
+			this.childViewOptions = { collection: this.collection, dataModel: data.dataModel };
 		},
 
 		onRender: function() {
@@ -45,7 +45,7 @@ define( ['builder/views/fields/drawer/typeSettingListOption', 'builder/views/fie
 		templateHelpers: function () {
 	    	return {
 	    		renderSetting: function(){
-					return _.template( jQuery( '#nf-tmpl-edit-field-setting-' + this.type ).html(), this );
+					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
 				},
 				
 				renderWidth: function() {
@@ -67,7 +67,7 @@ define( ['builder/views/fields/drawer/typeSettingListOption', 'builder/views/fie
 		},
 
 		clickAddOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).trigger( 'click:addOption', this.collection, this.fieldModel );
+			nfRadio.channel( 'list-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
 		}
 
 	} );

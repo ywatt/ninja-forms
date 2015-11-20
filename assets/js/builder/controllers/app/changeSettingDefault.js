@@ -1,5 +1,5 @@
 /**
- * Updates our model when the user changes a field setting.
+ * Updates our model when the user changes a setting.
  * 
  * @package Ninja Forms builder
  * @subpackage Main App
@@ -9,30 +9,30 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			// Listen on our fields channel for the change setting event. Fired by the setting view.
-			this.listenTo( nfRadio.channel( 'fields' ), 'change:setting', this.changeSetting, this );
+			// Listen on our app channel for the change setting event. Fired by the setting view.
+			this.listenTo( nfRadio.channel( 'app' ), 'change:setting', this.changeSetting, this );
 		},
 
 		/**
-		 * When we change our field setting, update the model.
+		 * When we change our setting, update the model.
 		 * 
 		 * @since  3.0
 		 * @param  Object 			e                event
-		 * @param  backbone.model 	settingTypeModel model that holds our field type settings info
-		 * @param  backbone.model 	fieldModel       model that holds our field settings
+		 * @param  backbone.model 	settingModel model that holds our field type settings info
+		 * @param  backbone.model 	dataModel       model that holds our field settings
 		 * @return void
 		 */
-		changeSetting: function( e, settingTypeModel, fieldModel ) {
-			var name = settingTypeModel.get( 'name' );
-			var before = fieldModel.get( name );
+		changeSetting: function( e, settingModel, dataModel ) {
+			var name = settingModel.get( 'name' );
+			var before = dataModel.get( name );
 			// Sends out a request on the fields-type (fields-text, fields-checkbox, etc) channel to see if that field type needs to return a special value for saving.
-			var value = nfRadio.channel( 'fields-' + settingTypeModel.get( 'type' ) ).request( 'before:updateSetting', e, fieldModel, name, settingTypeModel );
+			var value = nfRadio.channel( settingModel.get( 'type' ) ).request( 'before:updateSetting', e, dataModel, name, settingModel );
 			// If we didn't get a special field-type value, get the value from the event passed.
 			if ( 'undefined' == typeof value ) {
 				value = jQuery( e.target ).val();
 			}
 			// Update our field model with the new setting value.
-			fieldModel.set( name, value );
+			dataModel.set( name, value );
 			// Register our setting change with our change tracker
 			var after = value;
 			
@@ -64,11 +64,11 @@ define( [], function() {
 
 			var label = {
 				object: 'Field',
-				label: fieldModel.get( 'label' ),
+				label: dataModel.get( 'label' ),
 				change: 'Changed ' + settingModel.get( 'label' ) + ' from ' + before + ' to ' + after
 			};
 
-			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', fieldModel, changes, label );
+			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', dataModel, changes, label );
 		}
 
 	});

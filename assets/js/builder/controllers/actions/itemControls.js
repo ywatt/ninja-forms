@@ -10,9 +10,9 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Listen for clicks to edit, delete, duplicate fields.
-			this.listenTo( nfRadio.channel( 'fields' ), 'click:editField', this.clickEdit );
-			this.listenTo( nfRadio.channel( 'fields' ), 'click:deleteField', this.clickDelete );
-			this.listenTo( nfRadio.channel( 'fields' ), 'click:duplicateField', this.clickDuplicate );
+			this.listenTo( nfRadio.channel( 'actions' ), 'click:edit', this.clickEdit );
+			this.listenTo( nfRadio.channel( 'actions' ), 'click:delete', this.clickDelete );
+			this.listenTo( nfRadio.channel( 'actions' ), 'click:duplicate', this.clickDuplicate );
 
 			// Listen for our drawer close and remove our active edit state
 		},
@@ -26,9 +26,9 @@ define( [], function() {
 		 * @return void
 		 */
 		clickEdit: function( e, model ) {
-			nfRadio.channel( 'fields' ).request( 'clear:editActive' );
-			model.set( 'editActive', true );
-			var type = nfRadio.channel( 'fields' ).request( 'get:type' , model.get( 'type' ) );
+			// nfRadio.channel( 'fields' ).request( 'clear:editActive' );
+			// model.set( 'editActive', true );
+			var type = nfRadio.channel( 'actions' ).request( 'get:type' , model.get( 'type' ) );
 			nfRadio.channel( 'app' ).request( 'open:drawer', 'editSettings', { model: model, groupCollection: type.get( 'settingGroups' ) } );
 		},
 
