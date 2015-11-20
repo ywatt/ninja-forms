@@ -8,23 +8,23 @@ return array(
 
     'from-name' => array(
         'name' => 'from-name',
-        'type' => 'text',
+        'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'From Name', 'ninja-forms' ),
         'placeholder' => __( 'Name or fields', 'ninja-forms' ),
-        'value' => ''
+        'value' => '',
+        'width' => 'full'
     ),
 
     /*
-    * From Address
+    * Reply To
     */
 
-    'from-address' => array(
-        'name' => 'from-address',
-        'type' => 'text',
+    'reply-to' => array(
+        'type' => 'textbox',
         'group' => 'primary',
-        'label' => __( 'From Address', 'ninja-forms' ),
-        'placeholder' => __( 'One email address or field', 'ninja-forms' ),
+        'label' => __( 'Reply To', 'ninja-forms' ),
+        'placeholder' => '',
         'value' => ''
     ),
 
@@ -34,7 +34,7 @@ return array(
 
     'to' => array(
         'name' => 'to',
-        'type' => 'text',
+        'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'To', 'ninja-forms' ),
         'placeholder' => __( 'Email address or search for a field', 'ninja-forms' ),
@@ -47,11 +47,12 @@ return array(
 
     'subject' => array(
         'name' => 'subject',
-        'type' => 'text',
+        'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'Subject', 'ninja-forms' ),
         'placeholder' => __( 'Subject Text or seach for a field', 'ninja-forms' ),
-        'value' => ''
+        'value' => '',
+        'width' => 'full'
     ),
 
     /*
@@ -64,6 +65,19 @@ return array(
         'group' => 'primary',
         'label' => __( 'Email Message', 'ninja-forms' ),
         'placeholder' => '',
+        'value' => '',
+        'width' => 'full'
+    ),
+
+     /*
+    * From Address
+    */
+
+    'from-address' => array(
+        'type' => 'textbox',
+        'group' => 'advanced',
+        'label' => __( 'From Address', 'ninja-forms' ),
+        'placeholder' => __( 'One email address or field', 'ninja-forms' ),
         'value' => ''
     ),
 
@@ -84,25 +98,12 @@ return array(
     ),
 
     /*
-    * Reply To
-    */
-
-    'reply-to' => array(
-        'name' => 'reply-to',
-        'type' => 'text',
-        'group' => 'advanced',
-        'label' => __( 'Reply To', 'ninja-forms' ),
-        'placeholder' => '',
-        'value' => ''
-    ),
-
-    /*
     * Cc
     */
 
     'cc' => array(
         'name' => 'cc',
-        'type' => 'text',
+        'type' => 'textbox',
         'group' => 'advanced',
         'label' => __( 'Cc', 'ninja-forms' ),
         'placeholder' => '',
@@ -115,7 +116,7 @@ return array(
 
     'bcc' => array(
         'name' => 'bcc',
-        'type' => 'text',
+        'type' => 'textbox',
         'group' => 'advanced',
         'label' => __( 'Bcc', 'ninja-forms' ),
         'placeholder' => '',

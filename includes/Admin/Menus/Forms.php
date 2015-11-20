@@ -178,8 +178,6 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'settingGroups' => $settings_groups,
                 'settingDefaults' => $this->_setting_defaults( $master_settings_list )
             );
-
-
         }
         ?>
         <script>

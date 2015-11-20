@@ -12,7 +12,7 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Respond to requests for field setting filtering.
-			nfRadio.channel( 'fields-toggle' ).reply( 'before:updateSetting', this.updateSetting, this );
+			nfRadio.channel( 'toggle' ).reply( 'before:updateSetting', this.updateSetting, this );
 		},
 
 		/**

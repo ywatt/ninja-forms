@@ -12,13 +12,13 @@
  * @since 3.0
  */
 define( [
-	'builder/models/fields/typeCollection',
-	'builder/models/fields/typeSettingCollection',
-	'builder/models/fields/typeSettingGroupCollection',
+	'builder/models/app/typeCollection',
+	'builder/models/app/settingCollection',
+	'builder/models/app/settingGroupCollection',
 	'builder/models/fields/typeSectionCollection'
 	], function(
 	fieldTypeCollection,
-	fieldTypeSettingCollection,
+	settingCollection,
 	fieldTypeSettingGroupCollection,
 	fieldTypeSectionCollection
 	) {
@@ -56,7 +56,7 @@ define( [
 					var groupTmp = {
 						label: group.label,
 						display: group.display,
-						settings: new fieldTypeSettingCollection( group.settings ),
+						settings: new settingCollection( group.settings ),
 					}
 					// Add the tmp object to our setting groups collection
 					settingGroups.add( groupTmp );

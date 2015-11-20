@@ -24,7 +24,7 @@ return array(
 
     'tag' => array(
         'name' => 'tag',
-        'type' => 'text',
+        'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'Tag', 'ninja-forms' ),
         'placeholder' => '',

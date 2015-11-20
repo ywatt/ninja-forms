@@ -3,11 +3,11 @@ define( [], function() {
 		tagName: 'div',
 
 		initialize: function( data ) {
-			this.childViewOptions = { fieldModel: data.fieldModel };
+			this.childViewOptions = { dataModel: data.dataModel };
 		},
 
 		getChildView: function( model ) {
-			return nfRadio.channel( 'fields' ).request( 'get:settingChildView', model );
+			return nfRadio.channel( 'app' ).request( 'get:settingChildView', model );
 		}
 
 	} );

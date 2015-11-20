@@ -11,32 +11,47 @@
  * @since 3.0
  */
 define( [
-	'builder/models/actions/typeCollection'
+	'builder/models/app/typeCollection',
+	'builder/models/app/settingCollection',
+	'builder/models/app/settingGroupCollection',
 	], function(
-	actionTypeCollection
+	typeCollection,
+	settingCollection,
+	settingGroupCollection
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Create our field type collection
-			this.collection = new actionTypeCollection();
-			// var that = this;
-			// _.each( actionTypeData, function( type ) {
-			// 	// Build an object for this type that we can add to our field type collection
-			// 	var actionType = {
-			// 		id: type.id,
-			// 		nicename: type.nicename,
-			// 		alias: type.alias,
-			// 		settingGroups: settingGroups,
-			// 		settingDefaults: type.settingDefaults
-			// 	}
-			// 	// Add tmp object to our field type collection
-			// 	that.collection.add( actionType );
-			// } );
+			this.collection = new typeCollection();
+			
+			var that = this;
+			_.each( actionTypeData, function( type ) {
+				var settingGroups = new settingGroupCollection();
+				// Loop through the settings groups within this field type and create an object to add to the groups collection.
+				_.each( type.settingGroups, function( group ) {
+					var groupTmp = {
+						label: group.label,
+						display: group.display,
+						settings: new settingCollection( group.settings ),
+					}
+					// Add the tmp object to our setting groups collection
+					settingGroups.add( groupTmp );
+				} );
 
-			// console.log( this.collection );
+				// Build an object for this type that we can add to our field type collection
+				var actionType = {
+					id: type.id,
+					nicename: type.nicename,
+					alias: type.alias,
+					settingGroups: settingGroups,
+					settingDefaults: type.settingDefaults
+				}
+				// Add tmp object to our field type collection
+				that.collection.add( actionType );
+			} );
 
 			// Respond to requests to get field type, collection, settings, and sections
-			nfRadio.channel( 'actions' ).reply( 'get:type', this.getFieldType, this );
+			nfRadio.channel( 'actions' ).reply( 'get:type', this.getType, this );
 			nfRadio.channel( 'actions' ).reply( 'get:typeCollection', this.getTypeCollection, this );
 			nfRadio.channel( 'actions' ).reply( 'get:typeSections', this.getTypeSections, this );
 			// Listen to clicks on field types
@@ -50,7 +65,7 @@ define( [
 		 * @param  string 			id 	field type
 		 * @return backbone.model    	field type model
 		 */
-		getFieldType: function( id ) {
+		getType: function( id ) {
         	return this.collection.get( id );
         },
 
