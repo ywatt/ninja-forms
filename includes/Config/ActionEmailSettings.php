@@ -95,7 +95,7 @@ return array(
             ),
         'group' => 'advanced',
         'label' => __( 'Format', 'ninja-forms' ),
-        'value' => 'plain'
+        'value' => 'html'
     ),
 
     /*

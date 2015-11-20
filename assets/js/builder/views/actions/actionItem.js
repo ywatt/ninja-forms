@@ -21,10 +21,19 @@ define( [], function() {
 			this.model.off( 'change', this.render );
 		},
 		
+		onRender: function() {
+			if ( this.model.get( 'editActive' ) ) {
+				jQuery( this.el ).addClass( 'active' );
+			} else {
+				jQuery( this.el ).removeClass( 'active' );
+			}
+		},
+
 		events: {
 			'click .nf-edit-settings': 'clickEdit',
 			'click .nf-delete': 'clickDelete',
-			'click .nf-duplicate': 'clickDuplicate'
+			'click .nf-duplicate': 'clickDuplicate',
+			'click': 'maybeClickEdit'
 		},
 
 		clickEdit: function( e ) {
@@ -39,9 +48,14 @@ define( [], function() {
 			nfRadio.channel( 'actions' ).trigger( 'click:duplicate', e, this.model );
 		},
 
+		maybeClickEdit: function( e ) {
+			if ( 'TR' == jQuery( e.target ).parent().prop( 'tagName' ) ) {
+				this.clickEdit();
+			}
+		},
+
 		templateHelpers: function() {
 			return {
-
 				renderToggle: function() {
 					this.label = '';
 					this.value = this.active;
