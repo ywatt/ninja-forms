@@ -7,6 +7,7 @@ return array(
     */
 
     'from-name' => array(
+        'name' => 'from-name',
         'type' => 'text',
         'group' => 'primary',
         'label' => __( 'From Name', 'ninja-forms' ),
@@ -19,6 +20,7 @@ return array(
     */
 
     'from-address' => array(
+        'name' => 'from-address',
         'type' => 'text',
         'group' => 'primary',
         'label' => __( 'From Address', 'ninja-forms' ),
@@ -31,6 +33,7 @@ return array(
      */
 
     'to' => array(
+        'name' => 'to',
         'type' => 'text',
         'group' => 'primary',
         'label' => __( 'To', 'ninja-forms' ),
@@ -43,6 +46,7 @@ return array(
     */
 
     'subject' => array(
+        'name' => 'subject',
         'type' => 'text',
         'group' => 'primary',
         'label' => __( 'Subject', 'ninja-forms' ),
@@ -55,6 +59,7 @@ return array(
     */
 
     'email-message' => array(
+        'name' => 'email-message',
         'type' => 'textarea',
         'group' => 'primary',
         'label' => __( 'Email Message', 'ninja-forms' ),
@@ -67,6 +72,7 @@ return array(
     */
 
     'format' => array(
+        'name' => 'format',
         'type' => 'select',
             'options' => array(
                 'html' => __( 'HTML', 'ninja-forms' ),
@@ -82,6 +88,7 @@ return array(
     */
 
     'reply-to' => array(
+        'name' => 'reply-to',
         'type' => 'text',
         'group' => 'advanced',
         'label' => __( 'Reply To', 'ninja-forms' ),
@@ -94,6 +101,7 @@ return array(
     */
 
     'cc' => array(
+        'name' => 'cc',
         'type' => 'text',
         'group' => 'advanced',
         'label' => __( 'Cc', 'ninja-forms' ),
@@ -106,6 +114,7 @@ return array(
     */
 
     'bcc' => array(
+        'name' => 'bcc',
         'type' => 'text',
         'group' => 'advanced',
         'label' => __( 'Bcc', 'ninja-forms' ),

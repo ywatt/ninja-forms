@@ -7,6 +7,7 @@ return array(
     */
 
     'url' => array(
+        'name' => 'url',
         'type' => 'text',
         'group' => 'primary',
         'label' => __( 'URL', 'ninja-forms' ),

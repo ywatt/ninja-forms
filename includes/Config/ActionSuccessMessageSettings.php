@@ -7,6 +7,7 @@ return array(
     */
 
     'message' => array(
+        'name' => 'message',
         'type' => 'textarea',
         'group' => 'primary',
         'label' => __( 'Message', 'ninja-forms' ),

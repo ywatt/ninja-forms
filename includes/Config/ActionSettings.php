@@ -7,6 +7,7 @@ return array(
      */
 
     'name' => array(
+        'name' => 'name',
         'type' => 'text',
         'group' => 'primary',
         'label' => __( 'Action Name', 'ninja-forms' ),
