@@ -16,6 +16,16 @@ abstract class NF_Abstracts_Action
     protected $_nicename = '';
 
     /**
+     * @var string
+     */
+    protected $_section = 'installed';
+
+    /**
+     * @var string
+     */
+    protected $_image = '';
+
+    /**
      * @var array
      */
     protected $_tags = array();
@@ -106,6 +116,30 @@ abstract class NF_Abstracts_Action
     public function get_nicename()
     {
         return $this->_nicename;
+    }
+
+    /**
+     * Get Section
+     *
+     * Returns the drawer section for an action.
+     *
+     * @return string
+     */
+    public function get_section()
+    {
+        return $this->_section;
+    }
+
+    /**
+     * Get Image
+     *
+     * Returns the url of a branded action's image.
+     *
+     * @return string
+     */
+    public function get_image()
+    {
+        return $this->_image;
     }
 
     /**

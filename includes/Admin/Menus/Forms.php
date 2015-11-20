@@ -174,13 +174,36 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $action_type_settings[ $name ] = array(
                 'id' => $name,
+                'section' => $action->get_section(),
                 'nicename' => $action->get_nicename(),
+                'image' => $action->get_image(),
                 'settingGroups' => $settings_groups,
                 'settingDefaults' => $this->_setting_defaults( $master_settings_list )
             );
-
-
         }
+
+        $external_actions = $this->_fetch_action_feed();
+
+        foreach( $external_actions as $action){
+
+            if( ! isset( $action[ 'name' ] ) || ! $action[ 'name' ] ) continue;
+
+            $name = $action[ 'name' ];
+            $nicename = ( isset( $action[ 'nicename' ] ) ) ? $action[ 'nicename' ] : '';
+            $image = ( isset( $action[ 'image' ] ) ) ? $action[ 'image' ] : '';
+            $link = ( isset( $action[ 'link' ] ) ) ? $action[ 'link' ] : '';
+
+            $action_type_settings[ $name ] = array(
+                'id' => $name,
+                'section' => 'available',
+                'nicename' => $nicename,
+                'image' => $image,
+                'link' => $link,
+                'settingGroups' => array(),
+                'settingDefaults' => array()
+            );
+        }
+
         ?>
         <script>
             var actionTypeData = <?php echo wp_json_encode( $action_type_settings ); ?>;
@@ -263,6 +286,15 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
 
         return $setting_defaults;
+    }
+
+    protected function _fetch_action_feed()
+    {
+        $actions = wp_remote_get( 'https://ninjaforms.com/?action_feed=true' );
+        $actions = wp_remote_retrieve_body( $actions );
+        $actions = json_decode( $actions, true );
+
+        return $actions;
     }
 
 }
