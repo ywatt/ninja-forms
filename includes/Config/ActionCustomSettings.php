@@ -16,6 +16,7 @@ return array(
         'group' => 'primary',
         'label' => __( 'Hook', 'ninja-forms' ),
         'placeholder' => '',
+        'value' => ''
     ),
 
     /*
@@ -28,6 +29,7 @@ return array(
         'group' => 'primary',
         'label' => __( 'Tag', 'ninja-forms' ),
         'placeholder' => '',
+        'value' => ''
     ),
     
 );

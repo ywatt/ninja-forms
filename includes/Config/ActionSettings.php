@@ -12,6 +12,7 @@ return array(
         'group' => 'primary',
         'label' => __( 'Action Name', 'ninja-forms' ),
         'placeholder' => '',
-        'width' => 'full'
+        'width' => 'full',
+        'value' => ''
     ),
 );

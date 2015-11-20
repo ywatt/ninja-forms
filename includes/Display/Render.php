@@ -14,9 +14,10 @@ final class NF_Display_Render
         'fields-error',
     );
 
+    protected static $use_test_values = FALSE;
+
     public static function localize( $form_id )
     {
-
         if( ! has_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 ) ){
             add_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 );
         }
@@ -34,7 +35,9 @@ final class NF_Display_Render
 
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
-            $field->update_setting( 'value', $field_class->get_test_value() );
+            if( self::$use_test_values ) {
+                $field->update_setting( 'value', $field_class->get_test_value() );
+            }
 
             $field->update_setting( 'id', $field->get_id() );
 
@@ -85,6 +88,8 @@ final class NF_Display_Render
 
     public static function localize_preview( $form_id )
     {
+        self::$use_test_values = TRUE;
+
         add_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 );
 
         $form = get_user_option( 'nf_form_preview_' . $form_id );
@@ -116,6 +121,10 @@ final class NF_Display_Render
 
             foreach( $templates as $template ) {
                 self::load_template('fields-' . $template);
+            }
+
+            if( self::$use_test_values ) {
+                $field['settings']['value'] = $field_class->get_test_value();
             }
 
             $field[ 'settings' ][ 'element_templates' ] = $templates;
