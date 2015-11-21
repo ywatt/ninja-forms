@@ -378,7 +378,7 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-textbox" type="text/template">
-    <label for="<%= name %>"><%= label %>
+    <label for="<%= name %>"><%= label %> <%= renderTooltip() %>
         <input type="text" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
     </label>
 </script>

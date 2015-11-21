@@ -12,7 +12,7 @@ define( [], function() {
 			this.$el.unwrap();
 			this.setElement( this.$el );
 		},
-		
+
 		templateHelpers: function () {
 			var that = this;
 	    	return {
@@ -25,13 +25,17 @@ define( [], function() {
 
 					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
 				},
-				
+
 				renderWidth: function() {
 					if ( 'undefined' != typeof this.width ) {
 						return this.width;
 					} else {
 						return 'one-half';
 					}
+				},
+
+				renderTooltip: function() {
+					return 'tooltip';
 				}
 			}
 		},
