@@ -74,7 +74,7 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
                     continue;
                 }
 
-                $old_settings = $form_data[ 'actions' ][ $id ][ 'settings' ];
+                $old_settings = ( isset ( $form_data[ 'actions' ][ $id ][ 'settings' ] ) ) ? $form_data[ 'actions' ][ $id ][ 'settings' ]: array();
 
                 $new_settings = array_merge( $old_settings, $action[ 'settings' ] );
 

@@ -19,8 +19,8 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 			nfRadio.channel( 'actions' ).reply( 'get:action', this.getAction, this );
 			nfRadio.channel( 'actions' ).reply( 'get:tmpActionID', this.getTmpActionID, this );
 
-			// nfRadio.channel( 'fields' ).reply( 'add:field', this.addField, this );
-			// nfRadio.channel( 'fields' ).reply( 'delete:field', this.deleteField, this );
+			nfRadio.channel( 'actions' ).reply( 'add:action', this.addAction, this );
+			nfRadio.channel( 'actions' ).reply( 'delete:action', this.deleteAction, this );
 			// nfRadio.channel( 'fields' ).reply( 'sort:fields', this.sortFields, this );
 			
 			// nfRadio.channel( 'fields' ).reply( 'update:removedIDs', this.updateRemovedIDs, this );
@@ -42,13 +42,13 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 		 * @param Object 	data 	field data to insert
 		 * @param bool 		silent 	prevent events from firing as a result of adding	 	
 		 */
-		addField: function( data, silent ) {
+		addAction: function( data, silent ) {
 			silent = silent || false;
 			if ( false === data instanceof Backbone.Model ) {
-				var model = new fieldModel( data );
+				var model = new actionModel( data );
 			} else {
 				var model = data;
-			}			
+			}
 
 			this.collection.add( model, { silent: silent } );
 			// Set our 'clean' status to false so that we get a notice to publish changes
@@ -72,49 +72,13 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 		},
 
 		/**
-		 * Get our fields sortable EL
-		 * 
-		 * @since  3.0
-		 * @param  Array 	order optional order array like: [field-1, field-4, field-2]
-		 * @return void
-		 */
-		sortFields: function( order, ui ) {
-			// Get our sortable element
-			var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
-			if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) { // Make sure that sortable is enabled
-				// JS ternerary for setting our order
-				var order = order || jQuery( sortableEl ).sortable( 'toArray' );
-				// Loop through all of our fields and update their order value
-				_.each( this.collection.models, function( field ) {
-					// Get our current position.
-					var oldPos = field.get( 'order' );
-					var id = field.get( 'id' );
-					if ( jQuery.isNumeric( id ) ) {
-						var search = 'field-' + id;
-					} else {
-						var search = id;
-					}
-					// Get the index of our field inside our order array
-					var newPos = order.indexOf( search ) + 1;
-					field.set( 'order', newPos );
-				} );
-				this.collection.sort();
-
-				// Set our 'clean' status to false so that we get a notice to publish changes
-				nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
-				// Update our preview
-				nfRadio.channel( 'app' ).request( 'update:db' );
-			}
-		},
-
-		/**
 		 * Delete a field from our collection.
 		 * 
 		 * @since  3.0
 		 * @param  backbone.model 	model 	field model to be deleted
 		 * @return void
 		 */
-		deleteField: function( model ) {
+		deleteAction: function( model ) {
 			this.collection.remove( model );
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
