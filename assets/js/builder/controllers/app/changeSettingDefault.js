@@ -9,6 +9,9 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
+			// Respond to requests to update settings.
+			nfRadio.channel( 'app' ).reply( 'change:setting', this.changeSetting, this );
+
 			// Listen on our app channel for the change setting event. Fired by the setting view.
 			this.listenTo( nfRadio.channel( 'app' ), 'change:setting', this.changeSetting, this );
 		},

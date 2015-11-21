@@ -33,7 +33,8 @@ define( [], function() {
 			'click .nf-edit-settings': 'clickEdit',
 			'click .nf-delete': 'clickDelete',
 			'click .nf-duplicate': 'clickDuplicate',
-			'click': 'maybeClickEdit'
+			'click': 'maybeClickEdit',
+			'change input': 'changeToggle'
 		},
 
 		clickEdit: function( e ) {
@@ -54,16 +55,21 @@ define( [], function() {
 			}
 		},
 
+		changeToggle: function( e ) {
+			var settingModel = nfRadio.channel( 'actions' ).request( 'get:settingModel', 'active' );
+			nfRadio.channel( 'app' ).request( 'change:setting', e, settingModel, this.model );
+			nfRadio.channel( 'app' ).request( 'update:db' );
+		},
+
 		templateHelpers: function() {
 			return {
 				renderToggle: function() {
+					var actionLabel = this.label;
 					this.label = '';
 					this.value = this.active;
-					var actionName = this.name;
-					this.toggleName = this.id + '-active';
-					this.name = this.toggleName;
+					this.name = this.id + '-active';
 					var html = _.template( jQuery( '#nf-tmpl-edit-setting-toggle' ).html(), this );
-					this.name = actionName;
+					this.label = actionLabel;
 					return html;
 				}
 			}

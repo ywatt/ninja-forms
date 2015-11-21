@@ -109,7 +109,7 @@
 
 <script id="nf-tmpl-action-item" type="text/template">
     <td><%= renderToggle() %></td>
-    <td><%= name %></td>
+    <td><%= label %></td>
     <td><%= type %></td>
     <td>
         <ul class="nf-item-controls">

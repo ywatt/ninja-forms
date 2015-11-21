@@ -124,36 +124,36 @@ final class NF_Database_MockData
          */
 
         $action = Ninja_Forms()->form( $form_id )->action()->get();
-        $action->update_setting( 'name',  'Mock Success Message Action' )
+        $action->update_setting( 'label',  'Mock Success Message Action' )
             ->update_setting( 'type', 'successmessage' )
-            ->update_setting( 'success_message', 'This is a test success message' )
+            ->update_setting( 'message', 'This is a test success message' )
             ->save();
 
 //        $action = Ninja_Forms()->form( $form_id )->action()->get();
-//        $action->update_setting( 'name',  'Mock Redirect Action' )
+//        $action->update_setting( 'label',  'Mock Redirect Action' )
 //            ->update_setting( 'type', 'redirect' )
 //            ->update_setting( 'url', 'http://kstover.codes' )
 //            ->update_setting( 'active', 0 )
 //            ->save();
 
         $action = Ninja_Forms()->form( $form_id )->action()->get();
-        $action->update_setting( 'name',  'Mock Email Action' )
+        $action->update_setting( 'label',  'Mock Email Action' )
             ->update_setting( 'type', 'email' )
             ->update_setting( 'to', array( 'myformbuildingbringsallthedeveloperstotheyard@wpninjas.com' ) )
             ->update_setting( 'subject', 'This is an email action.' )
-            ->update_setting( 'email_message', 'Hello, Ninja Forms!' )
+            ->update_setting( 'message', 'Hello, Ninja Forms!' )
             ->update_setting( 'active', FALSE )
             ->save();
 
 //        $action = Ninja_Forms()->form( $form_id )->action()->get();
-//        $action->update_setting( 'name',  'Run WordPress Action' )
+//        $action->update_setting( 'label',  'Run WordPress Action' )
 //            ->update_setting( 'type', 'custom' )
 //            ->update_setting( 'hook', 'action' )
 //            ->update_setting( 'tag', 'blarg_action' )
 //            ->save();
 
         $action = Ninja_Forms()->form( $form_id )->action()->get();
-        $action->update_setting( 'name',  'Mock Save Action' )
+        $action->update_setting( 'label',  'Mock Save Action' )
             ->update_setting( 'type', 'save' )
             ->save();
 

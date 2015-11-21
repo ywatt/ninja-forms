@@ -3,6 +3,16 @@
 return array(
 
     /*
+    * Active
+    */
+
+    'active' => array(
+        'name' => 'active',
+        'type' => 'toggle',
+        'label' => __( 'Active', 'ninja-forms' ),
+    ),
+
+    /*
     * From Name
     */
 
@@ -60,8 +70,8 @@ return array(
     * Email Message
     */
 
-    'email-message' => array(
-        'name' => 'email_message',
+    'message' => array(
+        'name' => 'message',
         'type' => 'textarea',
         'group' => 'primary',
         'label' => __( 'Email Message', 'ninja-forms' ),
@@ -74,7 +84,8 @@ return array(
     * From Address
     */
 
-    'from-address' => array(
+    'from_address' => array(
+        'name' => 'from_address',
         'type' => 'textbox',
         'group' => 'advanced',
         'label' => __( 'From Address', 'ninja-forms' ),

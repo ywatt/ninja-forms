@@ -14,6 +14,7 @@ define(
 		'front-end/controllers/validateRequired',
 		'front-end/controllers/submitError',
 		'front-end/controllers/actionRedirect',
+		'front-end/controllers/actionSuccess',
 		'front-end/controllers/fieldSelect'
 	],
 	function(
@@ -31,6 +32,7 @@ define(
 		ValidateRequired,
 		SubmitError,
 		ActionRedirect,
+		ActionSuccess,
 		FieldSelect
 	) {
 		var controller = Marionette.Object.extend( {
@@ -49,6 +51,7 @@ define(
 				var validateRequired = new ValidateRequired();
 				var submitError = new SubmitError();
 				var actionRedirect = new ActionRedirect();
+				var actionSuccess = new ActionSuccess();
 				var fieldSelect = new FieldSelect();
 			}
 		});
