@@ -384,13 +384,13 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-textarea" type="text/template">
-    <label for="<%= name %>"><%= label %>
+    <label for="<%= name %>"><%= label %> <%= renderTooltip() %>
         <textarea id="<%= name %>"><%= value %></textarea>
     </label>
 </script>
 
 <script id="nf-tmpl-edit-setting-select" type="text/template">
-    <label for="<%= name %>" class="nf-select"><%= label %>
+    <label for="<%= name %>" class="nf-select"><%= label %> <%= renderTooltip() %>
         <select id="<%= name %>">
             <%
             _.each( options, function( option ) {
@@ -406,7 +406,7 @@
 
 <script id="nf-tmpl-edit-setting-checkbox" type="text/template">
 
-    <span class="nf-setting-label"><%= label %></span>
+    <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
     <input type="checkbox" id="<%= name %>" class="nf-checkbox" <%= ( 1 == value ) ? 'checked' : '' %> />
     <label for="<%= name %>"><%= label %></label>
 
@@ -414,7 +414,7 @@
 
 <script id="nf-tmpl-edit-setting-toggle" type="text/template">
 
-    <span class="nf-setting-label"><%= label %></span>
+    <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
     <input type="checkbox" id="<%= name %>" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
     <label for="<%= name %>"><%= label %></label>
 

@@ -13,6 +13,30 @@ define( [], function() {
 			this.setElement( this.$el );
 		},
 
+		onRender: function() {
+			jQuery( this.el ).find( '.nf-help' ).each(function() {
+		        jQuery(this).qtip({
+		        	show: {
+	        	    	event: 'click',
+	        	   	},
+	        	   	hide: {
+	        	   		event: 'unfocus',
+	        	   	},
+		      		position: {
+		      			my: 'bottom center',
+            			at: 'top center',
+						adjust: {
+							mouse: false,
+							y: -20,
+						}
+				    },
+		            content: {
+		                text: jQuery(this).next('.nf-help-text')
+		            }
+		        });
+		    });
+		},
+
 		templateHelpers: function () {
 			var that = this;
 	    	return {
@@ -35,7 +59,11 @@ define( [], function() {
 				},
 
 				renderTooltip: function() {
-					return 'tooltip';
+					if ( 'undefined' != typeof this.help ) {
+						return '<a class="nf-help" href="#"><span class="dashicons dashicons-admin-comments"></span></a><div class="nf-help-text">' + this.help + '</div>';
+					} else {
+						return '';
+					}
 				}
 			}
 		},
