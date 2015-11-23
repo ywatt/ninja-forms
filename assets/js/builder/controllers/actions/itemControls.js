@@ -83,7 +83,6 @@ define( [], function() {
 		 * @return void
 		 */
 		clickDuplicate: function( e, model ) {
-			console.log( 'dpulicate' );
 			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', model );
 
 			// Change our label.
