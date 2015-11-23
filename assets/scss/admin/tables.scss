@@ -24,36 +24,54 @@
                 color: #BCBDBF;
             }
         }
-        .nf-new-action {
+        input[type=checkbox].nf-toggle + label {
+            margin: 2px 0 0;
+            // &::after {
+            //     border-radius: 20px;
+            //     top: 2px;
+            //     left: -4px;
+            //     width: 30px;
+            //     height: 14px;
+            // }
+            // &::before {
+            //     border-radius: 20px;
+            //     top: 4px;
+            //     left: -1px;
+            //     width: 14px;
+            //     height: 14px;
+            // }
+            // &:checked {
+            //     &::before {
+            //         top: 7px;
+            //         left: 17px;
+            //     }
+            // }
+        }
+        .active {
             td {
                 color: $accent_color;
                 font-weight: bold;
             }
             a {
-                color: $accent_color;
+                //color: $accent_color;
             }
-        }
-        .nf-toggle {
-            margin: 0;
-            width: 30px;
-            &::after {
-                border-radius: 20px;
-                top: 2px;
-                left: -4px;
-                width: 30px;
-                height: 14px;
-            }
-            &::before {
-                border-radius: 20px;
-                top: 4px;
-                left: -1px;
-                width: 14px;
-                height: 14px;
-            }
-            &:checked {
-                &::before {
-                    top: 7px;
-                    left: 17px;
+            .nf-item-controls {
+                font-weight: normal;
+                float: right;
+                a {
+                    color: #424242;
+                }
+                .nf-item-delete,
+                .nf-item-duplicate {
+                    display: none;
+                }
+                .nf-item-editing {
+                    display: inline !important;
+                }
+                .nf-item-edit {
+                    .dashicons {
+                        margin-right: 12px
+                    }
                 }
             }
         }
