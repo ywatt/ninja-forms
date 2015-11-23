@@ -71,6 +71,19 @@ define( [], function() {
 					var html = _.template( jQuery( '#nf-tmpl-edit-setting-toggle' ).html(), this );
 					this.label = actionLabel;
 					return html;
+				},
+
+				renderTypeNicename: function() {
+					var type = nfRadio.channel( 'actions' ).request( 'get:type', this.type );
+					return type.get( 'nicename' );
+				},
+
+				renderTooltip: function() {
+					if ( 'undefined' != typeof this.help ) {
+						return '<a class="nf-help" href="#"><span class="dashicons dashicons-admin-comments"></span></a><div class="nf-help-text">' + this.help + '</div>';
+					} else {
+						return '';
+					}
 				}
 			}
 		}

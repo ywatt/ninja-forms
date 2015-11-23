@@ -110,7 +110,7 @@
 <script id="nf-tmpl-action-item" type="text/template">
     <td><%= renderToggle() %></td>
     <td><%= label %></td>
-    <td><%= type %></td>
+    <td><%= renderTypeNicename() %></td>
     <td>
         <ul class="nf-item-controls">
             <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
