@@ -332,6 +332,8 @@ class NF_Abstracts_Model
      */
     public function delete()
     {
+        if( ! $this->get_id() ) return;
+
         $results = array();
 
         // Delete the object from the model's table
@@ -351,6 +353,7 @@ class NF_Abstracts_Model
         );
 
         // Query for child objects using the relationships table.
+
         $children = $this->_db->get_results(
             "
             SELECT child_id, child_type
