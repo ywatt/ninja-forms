@@ -189,7 +189,7 @@ All styles used within the drawer
 .ninja-forms-app fieldset { border: 1px solid #ccc; clear: both; display: block; margin-bottom: 20px; }
 .ninja-forms-app legend { margin: 0 3px 10px; padding: 0 10px; }
 .ninja-forms-app .nf-setting-label, .ninja-forms-app label, .ninja-forms-app legend { color: #424242; font-size: 13px; text-transform: uppercase; }
-.ninja-forms-app input[type=text], .ninja-forms-app textarea { background: #f9f9f9; border: 0; margin-top: 5px; padding: 12px 15px; width: 100%; text-transform: capitalize; }
+.ninja-forms-app input[type=text], .ninja-forms-app textarea { background: #f9f9f9; border: 0; margin-top: 5px; padding: 12px 15px; width: 100%; text-transform: default; }
 .ninja-forms-app textarea { height: 200px; }
 .ninja-forms-app input[type=checkbox].nf-checkbox { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: #f9f9f9; border: 0; height: 25px; width: 25px; padding: 2px 1px 0px !important; margin: -3px -5px; }
 .ninja-forms-app input[type=checkbox].nf-checkbox:checked::before { content: "\f147"; font: 400 30px/1 dashicons; }
@@ -271,12 +271,13 @@ All styles used for displaying table content
 .ninja-forms-app table td { color: #676F75; white-space: nowrap; }
 .ninja-forms-app table td:nth-child(2) { width: 90%; }
 .ninja-forms-app table .nf-deactivated td { color: #BCBDBF; }
-.ninja-forms-app table .nf-new-action td { color: #84CC1E; font-weight: bold; }
-.ninja-forms-app table .nf-new-action a { color: #84CC1E; }
-.ninja-forms-app table .nf-toggle { margin: 0; width: 30px; }
-.ninja-forms-app table .nf-toggle::after { border-radius: 20px; top: 2px; left: -4px; width: 30px; height: 14px; }
-.ninja-forms-app table .nf-toggle::before { border-radius: 20px; top: 4px; left: -1px; width: 14px; height: 14px; }
-.ninja-forms-app table .nf-toggle:checked::before { top: 7px; left: 17px; }
+.ninja-forms-app table input[type=checkbox].nf-toggle + label { margin: 2px 0 0; }
+.ninja-forms-app table .active td { color: #84CC1E; font-weight: bold; }
+.ninja-forms-app table .active .nf-item-controls { font-weight: normal; float: right; }
+.ninja-forms-app table .active .nf-item-controls a { color: #424242; }
+.ninja-forms-app table .active .nf-item-controls .nf-item-delete, .ninja-forms-app table .active .nf-item-controls .nf-item-duplicate { display: none; }
+.ninja-forms-app table .active .nf-item-controls .nf-item-editing { display: inline !important; }
+.ninja-forms-app table .active .nf-item-controls .nf-item-edit .dashicons { margin-right: 12px; }
 
 /* perfect-scrollbar v0.6.7 */
 .ps-container { -ms-touch-action: none; overflow: hidden !important; }
