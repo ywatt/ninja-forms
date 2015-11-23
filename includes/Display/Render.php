@@ -53,6 +53,13 @@ final class NF_Display_Render
 
             $settings = $field->get_settings();
 
+            $default_value = self::populate_default_value( $settings[ 'default_type'], $settings[ 'default_value' ] );
+            $default_value = apply_filters( 'ninja_forms_render_default_value', $default_value, $field_class, $settings );
+
+            if( $default_value ){
+                $settings[ 'value' ] = $default_value;
+            }
+
             $settings[ 'element_templates' ] = $templates;
             $settings[ 'old_classname' ] = $field_class->get_old_classname();
             $settings[ 'wrap_template' ] = $field_class->get_wrap_template();
@@ -125,6 +132,13 @@ final class NF_Display_Render
 
             if( self::$use_test_values ) {
                 $field['settings']['value'] = $field_class->get_test_value();
+            }
+
+            $default_value = self::populate_default_value( $field['settings'][ 'default_type'], $field['settings'][ 'default_value' ] );
+            $default_value = apply_filters( 'ninja_forms_render_default_value', $default_value, $field_class, $field['settings'] );
+
+            if( $default_value ){
+                $field['settings'][ 'value' ] = $default_value;
             }
 
             $field[ 'settings' ][ 'element_templates' ] = $templates;
@@ -215,6 +229,30 @@ final class NF_Display_Render
 
         // Action to Output Custom Templates
         do_action( 'nf_output_templates' );
+    }
+
+    protected static function populate_default_value( $type, $value = '' )
+    {
+        global $post;
+
+        if( empty( $type ) ) return $value;
+
+        switch( $type ){
+            case 'post_id':
+                $default = ( is_object ( $post ) ) ? $post->ID : $value;
+                break;
+            case 'post_title':
+                $default = ( is_object ( $post ) ) ? $post->post_title : $value;
+                break;
+            case 'post_url':
+                $default = ( is_object ( $post ) ) ? get_permalink( $post->ID ) : $value;
+                break;
+            case 'custom':
+            default:
+                $default = $value;
+        }
+
+        return $default;
     }
 
     /*

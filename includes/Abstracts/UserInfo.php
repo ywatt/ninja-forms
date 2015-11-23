@@ -27,5 +27,9 @@ abstract class NF_Abstracts_UserInfo extends NF_Fields_Textbox
         );
 
         $this->_settings[ 'default' ][ 'settings' ][ 'default_type' ][ 'value' ] = 'user-meta';
+
+        add_filter( 'ninja_forms_render_default_value', array( $this, 'filter_default_value' ), 10, 3 );
     }
+
+    abstract public function filter_default_value( $default_value, $field_class, $settings );
 }
