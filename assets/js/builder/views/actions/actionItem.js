@@ -27,6 +27,12 @@ define( [], function() {
 			} else {
 				jQuery( this.el ).removeClass( 'active' );
 			}
+
+			if ( 0 == this.model.get( 'active' ) ) {
+				jQuery( this.el ).addClass( 'deactivated' );
+			} else {
+				jQuery( this.el ).removeClass( 'deactivated' );
+			}
 		},
 
 		events: {

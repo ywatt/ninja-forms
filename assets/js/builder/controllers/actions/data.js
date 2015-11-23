@@ -17,7 +17,7 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 			// Respond to requests for data about fields and to update/change/delete fields from our collection.
 			nfRadio.channel( 'actions' ).reply( 'get:actionCollection', this.getActionCollection, this );
 			nfRadio.channel( 'actions' ).reply( 'get:action', this.getAction, this );
-			nfRadio.channel( 'actions' ).reply( 'get:tmpActionID', this.getTmpActionID, this );
+			nfRadio.channel( 'actions' ).reply( 'get:tmpID', this.getTmpID, this );
 
 			nfRadio.channel( 'actions' ).reply( 'add:action', this.addAction, this );
 			nfRadio.channel( 'actions' ).reply( 'delete:action', this.deleteAction, this );
@@ -55,20 +55,6 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 
 			return model;
-		},
-
-		/**
-		 * Update a field setting by ID
-		 * 
-		 * @since  3.0
-		 * @param  int 		id    field id
-		 * @param  string 	name  setting name
-		 * @param  mixed 	value setting value
-		 * @return void
-		 */
-		updateFieldSetting: function( id, name, value ) {
-			var fieldModel = this.collection.get( id );
-			fieldModel.set( name, value );
 		},
 
 		/**
@@ -112,7 +98,7 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 		 * @since  3.0
 		 * @return string
 		 */
-		getTmpActionID: function() {
+		getTmpID: function() {
 			var tmpNum = this.collection.tmpNum;
 			this.collection.tmpNum++;
 			return 'tmp-' + tmpNum;

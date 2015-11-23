@@ -113,7 +113,7 @@
     <td><%= renderTypeNicename() %></td>
     <td>
         <ul class="nf-item-controls">
-            <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+            <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing action</span></a></li>
             <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
             <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
         </ul>
@@ -157,55 +157,8 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-add-action" type="text/template">
-    <span id="nf-drawer-primary">
-        <section class="nf-settings nf-action-items">
-            <h3>Installed Actions</h3>
-            <div class="nf-one-third">
-                <div class="nf-item">Email</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item">Success Message</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item">Redirect</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item">Save Submissions</div>
-            </div>
-        </section>
-    </span>
-    <span id="nf-drawer-secondary">
-         <section class="nf-settings nf-action-items">
-            <h3>Available Actions</h3>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img" style="background-image: url('https://ninjaforms.com/wp-content/uploads/2015/11/custom-action.png');">MailChimp</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Insightly</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Constant Contact</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Campaign Monitor</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Slack</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Trello</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Create Post</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Salesforce</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Text Message</div>
-            </div>
-        </section>
-    </span>
+    <span id="nf-drawer-primary"></span>
+    <span id="nf-drawer-secondary"></span>
 </script>
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
@@ -292,7 +245,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-action-type-section" type="text/template">
-    <section class="nf-settings nf-action-items">
+    <section class="nf-settings nf-action-items <%= renderClasses() %>">
         <h3><%= renderNicename() %></h3>
         <span class="action-types"></span>
     </section>

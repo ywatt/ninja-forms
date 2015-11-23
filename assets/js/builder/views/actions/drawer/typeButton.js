@@ -19,7 +19,7 @@ define( [], function() {
 
 		clickAddAction: function( e ) {
 			if ( 'installed' == this.model.get( 'section' ) ) { // Is this an installed action?
-				console.log( 'installed' );
+				nfRadio.channel( 'actions' ).trigger( 'click:addAction', this.model );
 			} else { // This isn't an installed action
 				window.open( this.model.get( 'link' ), '_blank' );
 			}
