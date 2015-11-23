@@ -1,5 +1,5 @@
 /**
- * Listens for clicks on our field item action buttons.
+ * Listens for clicks on our action item action buttons.
  * 
  * @package Ninja Forms builder
  * @subpackage Fields - Main Sortable
@@ -9,7 +9,7 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			// Listen for clicks to edit, delete, duplicate fields.
+			// Listen for clicks to edit, delete, duplicate actions.
 			this.listenTo( nfRadio.channel( 'actions' ), 'click:edit', this.clickEdit );
 			this.listenTo( nfRadio.channel( 'actions' ), 'click:delete', this.clickDelete );
 			this.listenTo( nfRadio.channel( 'actions' ), 'click:duplicate', this.clickDuplicate );
@@ -18,11 +18,11 @@ define( [], function() {
 		},
 
 		/**
-		 * Open a drawer with our field model for editing settings.
+		 * Open a drawer with our action model for editing settings.
 		 * 
 		 * @since  3.0
 		 * @param  Object			e     	event
-		 * @param  backbone.model 	model 	field model
+		 * @param  backbone.model 	model 	action model
 		 * @return void
 		 */
 		clickEdit: function( e, model ) {
@@ -33,17 +33,17 @@ define( [], function() {
 		},
 
 		/**
-		 * Delete a field model from our collection
+		 * Delete a action model from our collection
 		 * 
 		 * @since  3.0
 		 * @param  Object			e     	event
-		 * @param  backbone.model 	model 	field model
+		 * @param  backbone.model 	model 	action model
 		 * @return void
 		 */
 		clickDelete: function( e, dataModel ) {
 			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', dataModel );
 
-			// Add our field deletion to our change log.
+			// Add our action deletion to our change log.
 			var label = {
 				object: dataModel.get( 'objectType' ),
 				label: dataModel.get( 'label' ),
@@ -75,50 +75,37 @@ define( [], function() {
 		},
 
 		/**
-		 * Duplicate a field within our collection, adding the word "copy" to the label.
+		 * Duplicate a action within our collection, adding the word "copy" to the label.
 		 * 
 		 * @since  3.0
 		 * @param  Object			e     	event
-		 * @param  backbone.model 	model 	field model
+		 * @param  backbone.model 	model 	action model
 		 * @return void
 		 */
 		clickDuplicate: function( e, model ) {
-			// Temporary value used to store any new collections.
-			var replace = {};
-			// Loop over every model attribute and if we find a collection, clone each model and instantiate a new collection.
-			_.each( model.attributes, function( val, key ) {
-				if( val instanceof Backbone.Collection ) { // Is this a backbone collection?
-					// Clone each model.
-					var models = val.map( function( model ) { return model.clone(); } );
-					var options = _.clone( val.options );
-					var copy = new val.constructor( models, options );
-					replace[ key ] = copy;
-				}
-			} );
-
-			// Clone our original model
-			var newModel = model.clone();
-			// Overwrite any collections we created above.
-			_.each( replace, function( val, key ) {
-				newModel.set( key, val );
-			} );
+			console.log( 'dpulicate' );
+			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', model );
 
 			// Change our label.
 			newModel.set( 'label', newModel.get( 'label' ) + ' Copy' );
 			// Update our ID to the new tmp id.
-			var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpFieldID' );
+			var tmpID = nfRadio.channel( 'actions' ).request( 'get:tmpID' );
 			newModel.set( 'id', tmpID );
 			// Add new model.
-			nfRadio.channel( 'fields' ).request( 'add:field', newModel );
-			// Add our field addition to our change log.
+			nfRadio.channel( 'actions' ).request( 'add:action', newModel );
+			// Add our action addition to our change log.
 			var label = {
-				object: 'Field',
+				object: model.get( 'objectType' ),
 				label: model.get( 'label' ),
 				change: 'Duplicated',
 				dashicon: 'admin-page'
 			};
 
-			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateField', newModel, null, label );
+			var data = {
+				collection: nfRadio.channel( 'actions' ).request( 'get:actionCollection' )
+			}
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateObject', newModel, null, label, data );
 			
 			// Update preview.
 			nfRadio.channel( 'app' ).request( 'update:db' );

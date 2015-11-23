@@ -80,25 +80,7 @@ define( [], function() {
 		 * @return void
 		 */
 		clickDuplicate: function( e, model ) {
-			// Temporary value used to store any new collections.
-			var replace = {};
-			// Loop over every model attribute and if we find a collection, clone each model and instantiate a new collection.
-			_.each( model.attributes, function( val, key ) {
-				if( val instanceof Backbone.Collection ) { // Is this a backbone collection?
-					// Clone each model.
-					var models = val.map( function( model ) { return model.clone(); } );
-					var options = _.clone( val.options );
-					var copy = new val.constructor( models, options );
-					replace[ key ] = copy;
-				}
-			} );
-
-			// Clone our original model
-			var newModel = model.clone();
-			// Overwrite any collections we created above.
-			_.each( replace, function( val, key ) {
-				newModel.set( key, val );
-			} );
+			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', model );
 
 			// Change our label.
 			newModel.set( 'label', newModel.get( 'label' ) + ' Copy' );
@@ -115,7 +97,11 @@ define( [], function() {
 				dashicon: 'admin-page'
 			};
 
-			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateField', newModel, null, label );
+			var data = {
+				collection: nfRadio.channel( 'fields' ).request( 'get:fieldCollection' )
+			}
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateObject', newModel, null, label, data );
 			
 			// Update preview.
 			nfRadio.channel( 'app' ).request( 'update:db' );
