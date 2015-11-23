@@ -94,12 +94,21 @@
     .nf-item {
         height: 100px;
         line-height: 75px;
+        cursor: pointer;
         &.nf-has-img {
             background-position: center center;
             text-indent: -99999px;
-            filter: grayscale(100%);
-            &:hover {
-                filter: grayscale(0);
+        }
+    }
+    &.available {
+        .nf-item {
+            &.nf-has-img {
+                filter: grayscale(100%);
+                opacity: 0.6;
+                &:hover {
+                    filter: grayscale(0);
+                    opacity: 1.0;
+                }
             }
         }
     }
