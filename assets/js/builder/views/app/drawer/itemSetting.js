@@ -17,11 +17,14 @@ define( [], function() {
 			jQuery( this.el ).find( '.nf-help' ).each(function() {
 		        jQuery(this).qtip({
 		        	show: {
-	        	    	event: 'click',
-	        	   	},
-	        	   	hide: {
-	        	   		event: 'unfocus',
-	        	   	},
+				        delay: 1500,
+				    },
+		        	// show: {
+	        	 //    	event: 'hover',
+	        	 //   	},
+	        	 //   	hide: {
+	        	 //   		event: 'unfocus',
+	        	 //   	},
 		      		position: {
 		      			my: 'bottom center',
             			at: 'top center',
