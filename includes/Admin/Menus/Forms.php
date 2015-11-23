@@ -223,6 +223,9 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         $master_settings = $this->_unique_settings( $settings );
 
         $form_settings[ 'settingGroups' ] = $this->_group_settings( $settings, $groups );
+        echo "<pre>";
+        var_dump($form_settings[ 'settingGroups' ]);
+        echo "</pre>";
 
         $form_settings[ 'settingDefaults' ] = $this->_setting_defaults( $master_settings );
 
@@ -252,6 +255,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 unset( $groups[ $id ] );
             }
         }
+
+        unset( $groups[ "" ] );
 
         return $groups;
     }
