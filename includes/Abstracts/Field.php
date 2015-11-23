@@ -207,4 +207,9 @@ abstract class NF_Abstracts_Field
         return self::$_base_template;
     }
 
+    public static function sort_by_order( $a, $b )
+    {
+        return strcmp( $a->get_setting( 'order' ), $b->get_setting( 'order' ) );
+    }
+
 }
