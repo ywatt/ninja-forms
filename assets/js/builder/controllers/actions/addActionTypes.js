@@ -9,15 +9,16 @@
 define( ['builder/models/actions/actionCollection', 'builder/models/actions/actionModel'], function( actionCollection, actionModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			// Respond to requests for data about fields and to update/change/delete fields from our collection.
-			this.listenTo( nfRadio.channel( 'actions' ), 'click:addAction', this.addAction, this );
+			this.listenTo( nfRadio.channel( 'actions' ), 'click:addAction', this.addAction );
+
+			nfRadio.channel( 'actions' ).reply( 'add:actionType', this.addAction, this );
 		},
 
 		/**
-		 * Add a field to our collection. If silent is passed as true, no events will trigger.
+		 * Add an action to our collection. If silent is passed as true, no events will trigger.
 		 * 
 		 * @since 3.0
-		 * @param Object 	data 	field data to insert
+		 * @param Object 	data 	action data to insert
 		 * @param bool 		silent 	prevent events from firing as a result of adding	 	
 		 */
 		addAction: function( type ) {
