@@ -15,6 +15,8 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
     protected $_templates = 'checkbox';
 
+    protected $_test_value = 0;
+
     public function __construct()
     {
         parent::__construct();
@@ -27,5 +29,12 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
         $this->_settings[ 'label_pos' ][ 'value' ] = 'right';
 
+    }
+
+    public function admin_form_element( $id, $value )
+    {
+        $checked = ( $value ) ? "checked" : "";
+
+        return "<input type='checkbox' name='fields[$id]' id='' $checked>";
     }
 }
