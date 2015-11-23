@@ -52,7 +52,7 @@ final class NF_Actions_SuccessMessage extends NF_Abstracts_Action
 
     public function process( $action_settings, $form_id, $data )
     {
-        $data['success_message'] = $action_settings[ 'message' ];
+        $data[ 'actions' ][ 'success_message' ] = $action_settings[ 'message' ];
 
         return $data;
     }
