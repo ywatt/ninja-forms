@@ -31,7 +31,7 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
     {
         $field = Ninja_Forms()->form()->get_field( $id );
 
-        $options = '';
+        $options = '<option>--</option>';
         foreach( $field->get_setting( 'options' ) as $option ){
             $selected = ( $value == $option[ 'value' ] ) ? "selected" : '';
             $options .= "<option value='{$option[ 'value' ]}' $selected>{$option[ 'label' ]}</option>";
