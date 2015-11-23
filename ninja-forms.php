@@ -132,7 +132,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 //                self::$instance->menus[ 'settings' ]        = new NF_Admin_Menus_Settings();
 //                self::$instance->menus[ 'add-ons' ]         = new NF_Admin_Menus_Addons();
 //                self::$instance->menus[ 'system_status']    = new NF_Admin_Menus_SystemStatus();
-                self::$instance->menus[ 'submissions']      = new NF_Admin_Menus_Submissions();
+//                self::$instance->menus[ 'submissions']      = new NF_Admin_Menus_Submissions();
                 self::$instance->menus[ 'import-export']    = new NF_Admin_Menus_ImportExport();
 
                 /*
