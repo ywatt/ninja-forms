@@ -12,7 +12,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Label', 'ninja-forms'),
         'width' => 'one-half',
         'group' => 'primary',
-        'value' => ''
+        'value' => '',
+        'help' => __( 'Enter the label of the form field. This is how users will identify individual fields.', 'ninja-forms' ),
     ),
 
     /*
@@ -51,7 +52,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
         'width' => 'one-half',
         'group' => 'primary',
-        'value' => 'above'
+        'value' => 'above',
+        'help' => __( 'Select the position of your label relative to the field element itslef.', 'ninja-forms' ),
     ),
 
     /*
@@ -64,7 +66,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Placeholder', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'advanced',
-        'value' => ''
+        'value' => '',
+        'help' => __( 'Enter text you would like displayed in the field before a user enters any data.', 'ninja-forms' ),
     ),
 
     /*
@@ -77,7 +80,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Required Field', 'ninja-forms' ),
         'width' => 'one-half',
         'group' => 'primary',
-        'value' => FALSE
+        'value' => FALSE,
+        'help' => __( 'Ensure that this field is completed before allowing the form to be submitted.', 'ninja-forms' ),
     ),
 
     /*

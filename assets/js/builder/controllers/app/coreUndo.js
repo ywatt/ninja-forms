@@ -14,6 +14,7 @@ define( [], function() {
 			nfRadio.channel( 'changes' ).reply( 'undo:sortFields', this.undoSortFields, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:addField', this.undoAddField, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:removeField', this.undoRemoveField, this );
+			nfRadio.channel( 'changes' ).reply( 'undo:removeAction', this.undoRemoveAction, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:duplicateField', this.undoDuplicateField, this );
 
 			nfRadio.channel( 'changes' ).reply( 'undo:addListOption', this.undoAddListOption, this );
@@ -147,6 +148,38 @@ define( [], function() {
 
 			// Trigger a reset on our field collection so that our view re-renders
 			fieldCollection.trigger( 'reset', fieldCollection );
+
+			this.maybeRemoveChange( change, undoAll );
+		},
+
+		/**
+		 * Undo removing an action
+		 * 
+		 * @since  3.0
+		 * @param  backbone.model 	change 	model of our change
+		 * @param  boolean 			undoAll are we in the middle of an undo all action?
+		 * @return void
+		 */
+		undoRemoveAction: function( change, undoAll ) {
+			var actionModel = change.get( 'model' );
+			nfRadio.channel( 'actions' ).request( 'add:action', actionModel );
+
+			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:actionCollection' );
+			delete actionCollection.removedIDs[ actionModel.get( 'id' ) ];
+			
+			if ( ! undoAll ) {
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var results = changeCollection.where( { model: actionModel } );
+
+				_.each( results, function( model ) {
+					if ( model !== change ) {
+						model.set( 'disabled', false );
+					}
+				} );				
+			}
+
+			// Trigger a reset on our action collection so that our view re-renders
+			actionCollection.trigger( 'reset', actionCollection );
 
 			this.maybeRemoveChange( change, undoAll );
 		},

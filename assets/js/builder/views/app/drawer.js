@@ -34,6 +34,7 @@ define( ['builder/views/app/drawer/headerDefault', 'builder/views/app/drawer/con
 
 			this.header.show( headerView );
 			this.content.show( contentView );
+
 		},
 
 		emptyContent: function() {

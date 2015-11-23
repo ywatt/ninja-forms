@@ -3,11 +3,11 @@
 return array(
 
     /*
-     * Name
+     * Label
      */
 
-    'name' => array(
-        'name' => 'name',
+    'label' => array(
+        'name' => 'label',
         'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'Action Name', 'ninja-forms' ),

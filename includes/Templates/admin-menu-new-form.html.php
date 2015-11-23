@@ -109,13 +109,13 @@
 
 <script id="nf-tmpl-action-item" type="text/template">
     <td><%= renderToggle() %></td>
-    <td><%= name %></td>
+    <td><%= label %></td>
     <td><%= type %></td>
     <td>
         <ul class="nf-item-controls">
             <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
             <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-            <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+            <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
         </ul>
     </td>
 </script>
@@ -378,19 +378,19 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-textbox" type="text/template">
-    <label for="<%= name %>"><%= label %>
+    <label for="<%= name %>"><%= label %> <%= renderTooltip() %>
         <input type="text" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
     </label>
 </script>
 
 <script id="nf-tmpl-edit-setting-textarea" type="text/template">
-    <label for="<%= name %>"><%= label %>
+    <label for="<%= name %>"><%= label %> <%= renderTooltip() %>
         <textarea id="<%= name %>"><%= value %></textarea>
     </label>
 </script>
 
 <script id="nf-tmpl-edit-setting-select" type="text/template">
-    <label for="<%= name %>" class="nf-select"><%= label %>
+    <label for="<%= name %>" class="nf-select"><%= label %> <%= renderTooltip() %>
         <select id="<%= name %>">
             <%
             _.each( options, function( option ) {
@@ -406,7 +406,7 @@
 
 <script id="nf-tmpl-edit-setting-checkbox" type="text/template">
 
-    <span class="nf-setting-label"><%= label %></span>
+    <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
     <input type="checkbox" id="<%= name %>" class="nf-checkbox" <%= ( 1 == value ) ? 'checked' : '' %> />
     <label for="<%= name %>"><%= label %></label>
 
@@ -414,7 +414,7 @@
 
 <script id="nf-tmpl-edit-setting-toggle" type="text/template">
 
-    <span class="nf-setting-label"><%= label %></span>
+    <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
     <input type="checkbox" id="<%= name %>" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
     <label for="<%= name %>"><%= label %></label>
 

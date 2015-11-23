@@ -188,7 +188,7 @@ All styles used within the drawer
 
 .ninja-forms-app fieldset { border: 1px solid #ccc; clear: both; display: block; margin-bottom: 20px; }
 .ninja-forms-app legend { margin: 0 3px 10px; padding: 0 10px; }
-.ninja-forms-app .nf-setting-label, .ninja-forms-app label, .ninja-forms-app legend { color: #424242; display: block; font-size: 13px; text-transform: uppercase; }
+.ninja-forms-app .nf-setting-label, .ninja-forms-app label, .ninja-forms-app legend { color: #424242; font-size: 13px; text-transform: uppercase; }
 .ninja-forms-app input[type=text], .ninja-forms-app textarea { background: #f9f9f9; border: 0; margin-top: 5px; padding: 12px 15px; width: 100%; text-transform: capitalize; }
 .ninja-forms-app textarea { height: 200px; }
 .ninja-forms-app input[type=checkbox].nf-checkbox { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: #f9f9f9; border: 0; height: 25px; width: 25px; padding: 2px 1px 0px !important; margin: -3px -5px; }
@@ -245,9 +245,9 @@ table.nf-changes tr:hover td { background: #fff !important; }
 Various custom field styles
 --------------------------------- */
 .nf-add-new { color: #84CC1E; padding: 0 0 0 46px; text-decoration: none; line-height: 32px; position: relative; height: 32px; z-index: 98; text-indent: 0px; overflow: hidden; -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; }
-.nf-add-new:after { background: #84CC1E; border: 2px solid #84CC1E; border-radius: 40px; color: #fff; content: "+"; font-size: 22px; padding: 8px; position: absolute; left: 0; width: 12px; height: 12px; line-height: 10px; text-indent: 0px; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; }
-.nf-add-new:hover, .nf-add-new:active, .nf-add-new.active { color: #84CC1E; -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; }
-.nf-add-new:hover:after, .nf-add-new:active:after, .nf-add-new.active:after { background: #fff; color: #84CC1E; -webkit-transform: rotate(360deg); -ms-transform: rotate(360deg); transform: rotate(360deg); -webkit-transition: all 1.0s ease; transition: all 1.0s ease; }
+.nf-add-new:after { background: #84CC1E; border: 2px solid #84CC1E; border-radius: 40px; color: #fff; content: "+"; font-size: 22px; padding: 8px; position: absolute; left: 0; width: 12px; height: 12px; line-height: 10px; text-indent: 0px; -webkit-transition: all 0.5s ease 0s; transition: all 0.5s ease 0s; }
+.nf-add-new:hover, .nf-add-new:active, .nf-add-new.active { color: #84CC1E; -webkit-transition: width 0.5s ease 0s,height 0.5s ease 0s, text-indent 0.5s ease,top 0.5s ease,left 0.5s ease; transition: width 0.5s ease 0s,height 0.5s ease 0s, text-indent 0.5s ease,top 0.5s ease,left 0.5s ease; }
+.nf-add-new:hover:after, .nf-add-new:active:after, .nf-add-new.active:after { background: #fff; color: #84CC1E; -webkit-transform: rotate(180deg); -ms-transform: rotate(180deg); transform: rotate(180deg); -webkit-transition: all 0.5s ease; transition: all 0.5s ease; }
 .nf-add-new.nf-open-drawer { position: absolute; top: 135px; left: 40px; }
 
 input[type=checkbox].nf-toggle { display: none; }
@@ -257,9 +257,9 @@ input[type=checkbox].nf-toggle + label::before { background: #fff; border-radius
 input[type=checkbox].nf-toggle:checked + label::after { background: #84CC1E; border: 2px solid #84CC1E; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
 input[type=checkbox].nf-toggle:checked + label::before { content: ""; left: 18px; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
 
-.ninja-forms-app .nf-select { position: relative; }
-.ninja-forms-app .nf-select select { background: transparent; border: 0; margin-top: 5px; height: 44px !important; padding: 0 30px 0 15px; position: relative; width: 100%; text-transform: capitalize; -webkit-appearance: none; -moz-appearance: none; appearance: none; z-index: 2; }
-.ninja-forms-app .nf-select div { background: #f9f9f9; height: 44px; position: absolute; bottom: 0; width: 100%; z-index: 1; }
+.ninja-forms-app .nf-select { display: block; position: relative; }
+.ninja-forms-app .nf-select select { background: transparent; border: 0; box-shadow: 0 0 0; margin-top: 7px; height: 43px !important; padding: 0 30px 0 15px; position: relative; width: 100%; text-transform: capitalize; -webkit-appearance: none; -moz-appearance: none; appearance: none; z-index: 2; }
+.ninja-forms-app .nf-select div { background: #f9f9f9; height: 42px; position: absolute; bottom: 1px; width: 100%; z-index: 1; }
 .ninja-forms-app .nf-select div::after { color: #666; content: "\f347"; font-family: 'Dashicons'; font-size: 20px; position: absolute; width: 30px; height: 30px; right: 5px; bottom: 0; }
 
 /*
@@ -366,6 +366,13 @@ All styles used for displaying table content
 @keyframes LOADING { 0% { -webkit-transform: scale(0.5); transform: scale(0.5); background: #fff; }
   50% { -webkit-transform: scale(1); transform: scale(1); background: #fff; }
   100% { -webkit-transform: scale(0.5); transform: scale(0.5); background: #fff; } }
+.nf-help-text { display: none; }
+
+.ninja-forms-app .nf-help { color: #ccc; margin-left: 5px; text-decoration: none; }
+.ninja-forms-app .nf-help .dashicons { font-size: 16px; height: 16px; width: 16px; }
+.ninja-forms-app .qtip-default { background-color: #424242; border: 1px solid #424242; border-radius: 4px; box-shadow: 0 5px 6px rgba(0, 0, 0, 0.3); color: #fff; font-size: 14px; line-height: 18px; padding: 10px; }
+.ninja-forms-app .qtip-default::after { content: ""; position: absolute; left: 143px; bottom: -12px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 12px solid #424242; }
+
 @media only screen and (max-width: 1255px) { .nf-cancel { display: none; }
   #nf-app-sub-header h2 { padding-left: 80px; -webkit-transition: all 1s ease 0s; transition: all 1s ease 0s; } }
 @media only screen and (max-width: 1132px) { #nf-header .preview { content: "Preview"; }
