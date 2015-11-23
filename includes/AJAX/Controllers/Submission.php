@@ -31,7 +31,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $this->validate_fields();
 
-        $this->run_actions();
+        if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ) {
+            $this->run_actions_preview();
+        } else {
+            $this->run_actions();
+        }
 
         $this->_respond();
     }
@@ -66,6 +70,26 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         foreach( $actions as $action ){
 
             $action_settings = apply_filters( 'ninja_forms_run_action_settings', $action->get_settings(), $this->_form_id, $action->get_id(), $this->_data['settings'] );
+
+            $this->_data[ 'run_action' ][ $action_settings['type'] ][ 'active' ] = $action_settings['active'];
+
+            if( ! $action_settings['active'] ) continue;
+
+            $type = $action_settings['type'];
+
+            $data = Ninja_Forms()->actions[ $type ]->process( $action_settings, $this->_form_id, $this->_data );
+
+            $this->_data = ( $data ) ? $data : $this->_data;
+        }
+    }
+
+    protected function run_actions_preview()
+    {
+        $form = get_user_option( 'nf_form_preview_' . $this->_form_id );
+
+        foreach( $form[ 'actions' ] as $action ){
+
+            $action_settings = apply_filters( 'ninja_forms_run_action_settings_preview', $action[ 'settings' ], $this->_form_id, '', $this->_data['settings'] );
 
             if( ! $action_settings['active'] ) continue;
 
