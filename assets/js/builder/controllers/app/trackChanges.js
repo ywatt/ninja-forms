@@ -28,7 +28,7 @@ define( ['builder/models/app/changeCollection', 'builder/models/app/changeModel'
 				model: model,
 				changes: changes,
 				label: label,
-				data: data				
+				data: data		
 			} );
 			this.collection.add( changeModel );
 			return changeModel;

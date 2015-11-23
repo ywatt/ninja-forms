@@ -12,7 +12,7 @@ define( [], function() {
 			nfRadio.channel( 'changes' ).reply( 'undo:changeSetting', this.undoChangeSetting, this );
 
 			nfRadio.channel( 'changes' ).reply( 'undo:sortFields', this.undoSortFields, this );
-			nfRadio.channel( 'changes' ).reply( 'undo:addField', this.undoAddField, this );
+			nfRadio.channel( 'changes' ).reply( 'undo:addObject', this.undoAddObject, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:removeField', this.undoRemoveField, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:removeAction', this.undoRemoveAction, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:duplicateField', this.undoDuplicateField, this );
@@ -70,15 +70,15 @@ define( [], function() {
 		 * @param  boolean 			undoAll are we in the middle of an undo all action?
 		 * @return void
 		 */
-		undoAddField: function( change, undoAll ) {
-			var fieldModel = change.get( 'model' );
+		undoAddObject: function( change, undoAll ) {
+			var objectModel = change.get( 'model' );
+			var collection = change.get( 'data' ).collection;
 
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
-			delete fieldCollection.newIDs[ fieldModel.get( 'id' ) ];
+			delete collection.newIDs[ objectModel.get( 'id' ) ];
 			
 			if ( ! undoAll ) {
 				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-				var results = changeCollection.where( { model: fieldModel } );
+				var results = changeCollection.where( { model: objectModel } );
 
 				_.each( results, function( model ) {
 					if ( model !== change ) {
@@ -87,8 +87,7 @@ define( [], function() {
 				} );				
 			}
 			
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
-			fieldCollection.remove( fieldModel );
+			collection.remove( objectModel );
 			this.maybeRemoveChange( change, undoAll );
 		},		
 

@@ -8,11 +8,11 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/actions/actionItem'], function( actionView ) {
+define( ['builder/views/actions/actionItem', 'builder/views/actions/mainContentEmpty'], function( actionView, emptyView ) {
 	var view = Marionette.CompositeView.extend({
 		template: '#nf-tmpl-action-table',
 		childView: actionView,
-		// emptyView: emptyView,
+		emptyView: emptyView,
 
 		attachHtml: function( collectionView, childView ) {
 			jQuery( collectionView.el ).find( 'tbody' ).append( childView.el );

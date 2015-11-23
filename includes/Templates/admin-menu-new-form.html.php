@@ -82,6 +82,15 @@
     </div>
 </script>
 
+<script id="nf-tmpl-main-content-actions-empty" type="text/template">
+    <tr class="nf-actions-empty">
+        <td colspan="4">
+            <h3>Add form actions</h3>
+            <p>Get started by adding your first form field. Just click the plus and select the actions you want. It’s that easy.</p>
+        </td>
+    </tr>
+</script>
+
 <script id="nf-tmpl-main-content-field" type="text/template">
     <div id="<%= getFieldID() %>" class="<%= renderClasses() %>"> <%= label %> <%= renderRequired() %>
         <ul class="nf-item-controls">
@@ -300,6 +309,10 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-empty" type="text/template">
+
+</script>
+
+<script id="nf-tmpl-empty" type="text/template">
 
 </script>
 

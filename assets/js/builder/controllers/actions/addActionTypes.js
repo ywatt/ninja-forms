@@ -26,10 +26,20 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 				type: type.get( 'id' ),
 				label: type.get( 'nicename' )
 			}
-			var newAction = nfRadio.channel( 'actions' ).request( 'add:action', data );
-			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:actionCollection' );
-			actionCollection.sort();
-			nfRadio.channel( 'actions' ).trigger( 'click:edit', {}, newAction );
+			var newModel = nfRadio.channel( 'actions' ).request( 'add:action', data );
+			var label = {
+				object: 'Action',
+				label: newModel.get( 'label' ),
+				change: 'Added',
+				dashicon: 'plus-alt'
+			};
+
+			var data = {
+				collection: nfRadio.channel( 'actions' ).request( 'get:actionCollection' )
+			}
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', newModel, null, label, data );
+			nfRadio.channel( 'actions' ).trigger( 'click:edit', {}, newModel );
 		}
 	});
 
