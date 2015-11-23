@@ -81,7 +81,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => FALSE,
-        'help' => __( 'Ensure that this fields is completed before allowing the form to be submitted.', 'ninja-forms' ),
+        'help' => __( 'Ensure that this field is completed before allowing the form to be submitted.', 'ninja-forms' ),
     ),
 
     /*
