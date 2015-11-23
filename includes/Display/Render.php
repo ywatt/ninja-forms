@@ -53,11 +53,13 @@ final class NF_Display_Render
 
             $settings = $field->get_settings();
 
-            $default_value = self::populate_default_value( $settings[ 'default_type'], $settings[ 'default_value' ] );
-            $default_value = apply_filters( 'ninja_forms_render_default_value', $default_value, $field_class, $settings );
+            if( isset( $settings[ 'default_type' ] ) && isset( $settings[ 'default_value' ] ) ) {
+                $default_value = self::populate_default_value($settings['default_type'], $settings['default_value']);
+                $default_value = apply_filters('ninja_forms_render_default_value', $default_value, $field_class, $settings);
 
-            if( $default_value ){
-                $settings[ 'value' ] = $default_value;
+                if ($default_value) {
+                    $settings['value'] = $default_value;
+                }
             }
 
             $settings[ 'element_templates' ] = $templates;
