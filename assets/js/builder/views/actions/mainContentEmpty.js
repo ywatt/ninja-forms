@@ -4,6 +4,7 @@ define( [], function() {
 		template: '#nf-tmpl-main-content-actions-empty',
 
 		onBeforeDestroy: function() {
+			jQuery( this.el ).parent().parent().removeClass( 'nf-actions-empty' );
 			// jQuery( this.el ).parent().removeClass( 'nf-fields-empty-droppable' ).droppable( 'destroy' );
 		},
 
@@ -14,6 +15,7 @@ define( [], function() {
 		},
 
 		onShow: function() {
+			jQuery( this.el ).parent().parent().addClass( 'nf-actions-empty' );
 			// if ( jQuery( this.el ).parent().hasClass( 'ui-sortable' ) ) {
 			// 	jQuery( this.el ).parent().sortable( 'destroy' );
 			// }
