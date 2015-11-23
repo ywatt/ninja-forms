@@ -50,18 +50,13 @@ final class NF_Actions_Custom extends NF_Abstracts_Action
 
     public function process( $action_settings, $form_id, $data )
     {
-        ob_start(); // Use the Output Buffer to suppress output
+        if( isset( $action_settings[ 'tag' ] ) ) {
+            ob_start(); // Use the Output Buffer to suppress output
 
-        switch( $action_settings['hook'] ){
-            case 'action':
-                do_action( $action_settings['tag'], $data );
-                break;
-            case 'filter':
-                $data = apply_filters( $action_settings['tag'], $data );
-                break;
+            do_action($action_settings[ 'tag' ], $data);
+
+            ob_end_clean();
         }
-
-        ob_end_clean();
 
         return $data;
     }
