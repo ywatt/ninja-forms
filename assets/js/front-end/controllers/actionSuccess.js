@@ -6,8 +6,8 @@ define([], function() {
 
 		actionSubmit: function( response ) {
 			if ( _.size( response.errors ) == 0 ) {
-				if ( 'undefined' != typeof response.data.success_message && '' != response.data.success_message ) {
-					jQuery( '.nf-response-msg' ).html( response.data.success_message );
+				if ( 'undefined' != typeof response.data.actions.success_message && '' != response.data.actions.success_message ) {
+					jQuery( '.nf-response-msg' ).html( response.data.actions.success_message );
 				}
 			}
 		}

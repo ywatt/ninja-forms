@@ -59,6 +59,8 @@ define(
 		'builder/controllers/actions/itemControls',
 		'builder/controllers/actions/editActive',
 		'builder/controllers/actions/addActionTypes',
+		'builder/controllers/actions/typeDrag',
+		'builder/controllers/actions/droppable',
 
 		/*
 		 * TODO: Settings domain controllers
@@ -114,7 +116,9 @@ define(
 		ActionSettings,
 		ActionItemControls,
 		ActionEditActive,
-		ActionAddTypes
+		ActionAddTypes,
+		ActionTypeDrag,
+		ActionDroppable
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -173,6 +177,8 @@ define(
 				new ActionItemControls();
 				new ActionEditActive();
 				new ActionAddTypes();
+				new ActionTypeDrag();
+				new ActionDroppable();
 				/*
 				 * TODO: Settings domain controllers
 				 */

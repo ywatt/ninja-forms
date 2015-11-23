@@ -14,6 +14,17 @@ define( ['builder/views/actions/actionItem', 'builder/views/actions/mainContentE
 		childView: actionView,
 		emptyView: emptyView,
 
+		onRender: function() {
+			jQuery( this.el ).droppable( {
+				accept: '.nf-one-third',
+				activeClass: 'nf-droppable-active',
+				hoverClass: 'nf-droppable-hover',
+				drop: function( e, ui ) {
+					nfRadio.channel( 'app' ).request( 'drop:actionType', e, ui );
+				}
+			} );
+		},
+
 		attachHtml: function( collectionView, childView ) {
 			jQuery( collectionView.el ).find( 'tbody' ).append( childView.el );
 		},
