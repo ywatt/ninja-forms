@@ -3,16 +3,6 @@
 return array(
 
     /*
-    * Active
-    */
-
-    'active' => array(
-        'name' => 'active',
-        'type' => 'toggle',
-        'label' => __( 'Active', 'ninja-forms' ),
-    ),
-
-    /*
     * From Name
     */
 
