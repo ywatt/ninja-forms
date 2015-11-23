@@ -404,7 +404,7 @@ function nf_alpha_release_admin_notice()
         }
     </style>
     <div class="error nf-alpha-notice">
-        <h3>Ninja Forms 3.0 - ALPHA 1 - Troughton</h3>
+        <h3>Ninja Forms 3.0 - ALPHA 3 - Pertwee</h3>
         <p><strong>NOTICE:</strong> Installed is an Alpha Release of Ninja Forms. This is not intended for production.</p>
         <p>Please keep a few things in mind while exploring:</p>
         <ul>
@@ -417,7 +417,7 @@ function nf_alpha_release_admin_notice()
                     <li>After making any number of changes to any of the default forms, look for a history icon to the left of the Publish button</li>
                     <li>Click that icon and a drawer will slide out from the right</li>
                     <li>Manipulate any of the changes you made to the form by undoing item by item, all changes in bulk, or even restoring the form to its last saved state</li>
-                    <li>If updating from Alpha 1, please be sure to Restore Mock Data under Forms in the WordPress Dashboard before you begin or you will not see these changes!</li>
+                    <li>If updating from a previous, please be sure to Restore Mock Data under Forms in the WordPress Dashboard before you begin or you will not see these changes!</li>
                 </ul>
             <li> what we would love to know is...
                 <ul>
