@@ -83,7 +83,7 @@
 </script>
 
 <script id="nf-tmpl-main-content-actions-empty" type="text/template">
-    <tr class="nf-actions-empty">
+    <tr>
         <td colspan="4">
             <h3>Add form actions</h3>
             <p>Get started by adding your first form field. Just click the plus and select the actions you want. It’s that easy.</p>
