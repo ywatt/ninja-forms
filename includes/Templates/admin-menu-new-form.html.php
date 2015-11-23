@@ -350,8 +350,6 @@
 
 </script>
 
-
-
 <!-- Field Settings Templates -->
 
 <script id="nf-tmpl-edit-setting-wrap" type="text/template">

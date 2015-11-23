@@ -14,5 +14,16 @@ return array(
         'placeholder' => '',
         'width' => 'full',
         'value' => ''
+    ),    
+
+    /*
+     * Active
+     */
+
+    'active' => array(
+        'name' => 'active',
+        'type' => 'toggle',
+        'label' => __( 'Active', 'ninja-forms' ),
+        'value' => 1
     ),
 );

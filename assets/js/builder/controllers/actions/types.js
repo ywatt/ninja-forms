@@ -49,13 +49,12 @@ define( [
 					settingGroups: settingGroups,
 					settingDefaults: type.settingDefaults,
 					image: type.image,
-					link: type.link
+					link: type.link,
+					section: type.section
 				}
 
 				// Add tmp object to the appropriate collection (either installed or available)
 				that[ type.section + 'Actions' ].add( actionType );
-				// Add tmp object to our field type collection
-				// that.collection.add( actionType );
 			} );
 
 			// Respond to requests to get field type, collection, settings, and sections

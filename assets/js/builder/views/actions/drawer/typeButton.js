@@ -18,11 +18,10 @@ define( [], function() {
 		},
 
 		clickAddAction: function( e ) {
-			console.log( this.model );
 			if ( 'installed' == this.model.get( 'section' ) ) { // Is this an installed action?
-				// console.log( 'installed' );
+				console.log( 'installed' );
 			} else { // This isn't an installed action
-				// console.log( 'available' );
+				window.open( this.model.get( 'link' ), '_blank' );
 			}
 		},
 
@@ -38,7 +37,7 @@ define( [], function() {
 
 				renderStyle: function() {
 					if ( '' != jQuery.trim( this.image ) ) {
-						return "style=\"background-image: url('https://ninjaforms.com/wp-content/uploads/2015/11/custom-action.png');\""
+						return "style=\"background-image: url(" + this.image + ");\""
 					} else {
 						return '';
 					}
