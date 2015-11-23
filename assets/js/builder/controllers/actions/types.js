@@ -23,8 +23,10 @@ define( [
 		initialize: function() {
 			// Create our field type collection
 			this.installedActions = new typeCollection();
+			this.installedActions.slug = 'installed';
 			this.installedActions.nicename = 'Installed';
 			this.availableActions = new typeCollection();
+			this.availableActions.slug = 'available';
 			this.availableActions.nicename = 'Available';
 
 			var that = this;

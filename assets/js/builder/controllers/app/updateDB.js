@@ -147,7 +147,7 @@ define( [], function() {
 					nfRadio.channel( 'app' ).trigger( 'response:updateDB', response );
 				} catch( exception ) {
 					console.log( 'Something went wrong!' );
-					console.log( exception );
+					console.log( response );
 				}
 				
 			} );

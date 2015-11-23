@@ -31,6 +31,16 @@ define( [], function() {
 						}
 					} );
 				}
+
+				// If we have any new actions, update their models with the new id.
+				if ( 'undefined' != typeof response.data.new_ids.actions ) {
+					_.each( response.data.new_ids.actions, function( newID, oldID ) {
+						var action = nfRadio.channel( 'actions' ).request( 'get:action', oldID );
+						if ( action ) {
+							action.set( 'id', newID );
+						}
+					} );
+				}
 			}
 
 			nfRadio.channel( 'app' ).request( 'update:setting', 'loading', false );

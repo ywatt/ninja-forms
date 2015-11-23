@@ -8,6 +8,10 @@ define( ['builder/views/actions/drawer/typeButton'], function( actionTypeButtonV
 			return {
 				renderNicename: function() {
 					return that.collection.nicename;
+				},
+
+				renderClasses: function() {
+					return that.collection.slug;
 				}
 			}
 		},

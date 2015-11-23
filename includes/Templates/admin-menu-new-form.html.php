@@ -157,55 +157,8 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-add-action" type="text/template">
-    <span id="nf-drawer-primary">
-        <section class="nf-settings nf-action-items">
-            <h3>Installed Actions</h3>
-            <div class="nf-one-third">
-                <div class="nf-item">Email</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item">Success Message</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item">Redirect</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item">Save Submissions</div>
-            </div>
-        </section>
-    </span>
-    <span id="nf-drawer-secondary">
-         <section class="nf-settings nf-action-items">
-            <h3>Available Actions</h3>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img" style="background-image: url('https://ninjaforms.com/wp-content/uploads/2015/11/custom-action.png');">MailChimp</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Insightly</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Constant Contact</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Campaign Monitor</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Slack</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Trello</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Create Post</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Salesforce</div>
-            </div>
-            <div class="nf-one-third">
-                <div class="nf-item nf-has-img">Text Message</div>
-            </div>
-        </section>
-    </span>
+    <span id="nf-drawer-primary"></span>
+    <span id="nf-drawer-secondary"></span>
 </script>
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
@@ -292,7 +245,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-action-type-section" type="text/template">
-    <section class="nf-settings nf-action-items">
+    <section class="nf-settings nf-action-items <%= renderClasses() %>">
         <h3><%= renderNicename() %></h3>
         <span class="action-types"></span>
     </section>

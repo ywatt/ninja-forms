@@ -58,6 +58,7 @@ define(
 		'builder/controllers/actions/actionSettings',
 		'builder/controllers/actions/itemControls',
 		'builder/controllers/actions/editActive',
+		'builder/controllers/actions/addActionTypes',
 
 		/*
 		 * TODO: Settings domain controllers
@@ -112,7 +113,8 @@ define(
 		ActionData,
 		ActionSettings,
 		ActionItemControls,
-		ActionEditActive
+		ActionEditActive,
+		ActionAddTypes
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -170,6 +172,7 @@ define(
 				new ActionSettings();
 				new ActionItemControls();
 				new ActionEditActive();
+				new ActionAddTypes();
 				/*
 				 * TODO: Settings domain controllers
 				 */
