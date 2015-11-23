@@ -230,9 +230,10 @@ All styles used within the drawer
 .nf-saved .nf-item { position: relative; }
 .nf-saved .nf-item::after { background: #30373E; border-top-left-radius: 4px; border-bottom-left-radius: 4px; content: "\f155"; font-family: "Dashicons"; padding: 9px; position: absolute; top: 0; left: 0; bottom: 0; width: 16px; height: 20px; }
 
-.nf-action-items .nf-item { height: 100px; line-height: 75px; }
-.nf-action-items .nf-item.nf-has-img { background-position: center center; text-indent: -99999px; -webkit-filter: grayscale(100%); filter: grayscale(100%); }
-.nf-action-items .nf-item.nf-has-img:hover { -webkit-filter: grayscale(0); filter: grayscale(0); }
+.nf-action-items .nf-item { height: 100px; line-height: 75px; cursor: pointer; }
+.nf-action-items .nf-item.nf-has-img { background-position: center center; text-indent: -99999px; }
+.nf-action-items.available .nf-item.nf-has-img { -webkit-filter: grayscale(100%); filter: grayscale(100%); opacity: 0.6; }
+.nf-action-items.available .nf-item.nf-has-img:hover { -webkit-filter: grayscale(0); filter: grayscale(0); opacity: 1.0; }
 
 table.nf-changes tr td { border-bottom: 1px solid #ccc; }
 table.nf-changes tr.disabled-row td { color: #bbb; }
@@ -270,7 +271,7 @@ All styles used for displaying table content
 .ninja-forms-app table th { color: #666; text-align: left; text-transform: uppercase; }
 .ninja-forms-app table td { color: #676F75; white-space: nowrap; }
 .ninja-forms-app table td:nth-child(2) { width: 90%; }
-.ninja-forms-app table .nf-deactivated td { color: #BCBDBF; }
+.ninja-forms-app table .deactivated td { color: #BCBDBF; }
 .ninja-forms-app table input[type=checkbox].nf-toggle + label { margin: 2px 0 0; }
 .ninja-forms-app table .active td { color: #84CC1E; font-weight: bold; }
 .ninja-forms-app table .active .nf-item-controls { font-weight: normal; float: right; }
