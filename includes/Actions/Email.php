@@ -32,6 +32,8 @@ final class NF_Actions_Email extends NF_Abstracts_Action
     {
         parent::__construct();
 
+        $this->_nicename = __( 'Email', 'ninja-forms' );
+
         $settings = Ninja_Forms::config( 'ActionEmailSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );

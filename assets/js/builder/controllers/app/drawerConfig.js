@@ -11,18 +11,16 @@
 define( [
 	'builder/models/app/drawerCollection',
 	'builder/views/fields/drawer/addField',
-	'builder/views/fields/drawer/editField',
+	'builder/views/app/drawer/editSettings',
 	'builder/views/actions/drawer/addAction',
-	'builder/views/actions/drawer/editAction',
 	'builder/views/settings/drawer/editFormSettings',
 	'builder/views/app/drawer/contentViewChanges',
 	'builder/views/app/drawer/headerViewChanges'
 	], function(
 		drawerCollection,
 		addFieldView,
-		editFieldView,
+		editSettingsView,
 		addActionView,
-		editActionView,
 		editFormSettingsView,
 		viewChangesView,
 		viewChangesHeaderView
@@ -39,24 +37,17 @@ define( [
 					}
 				},
 				{
-					id: 'editField',
-
-					getContentView: function( data ) {
-						return new editFieldView( data );
-					}
-				},
-				{
-					id: 'editAction',
-
-					getContentView: function( data ) {
-						return new editActionView( data );
-					}
-				},
-				{
 					id: 'addAction',
 
 					getContentView: function( data ) {
 						return new addActionView( data );
+					}
+				},				
+				{
+					id: 'editSettings',
+
+					getContentView: function( data ) {
+						return new editSettingsView( data );
 					}
 				},
 				{

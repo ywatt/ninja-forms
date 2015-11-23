@@ -1,4 +1,4 @@
-define( ['builder/views/fields/drawer/typeSettingCollection'], function( fieldTypeSettingCollectionView ) {
+define( ['builder/views/app/drawer/itemSettingCollection'], function( itemSettingCollectionView ) {
 	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-drawer-content-edit-field-setting-group',
@@ -9,7 +9,7 @@ define( ['builder/views/fields/drawer/typeSettingCollection'], function( fieldTy
 
 		initialize: function( data ) {
 			this.model.on( 'change', this.render, this );
-			this.fieldModel = data.fieldModel;
+			this.dataModel = data.dataModel;
 		},
 
 		onBeforeDestroy: function() {
@@ -18,7 +18,7 @@ define( ['builder/views/fields/drawer/typeSettingCollection'], function( fieldTy
 
 		onRender: function() {
 			if ( this.model.get( 'display' ) ) {
-				this.settings.show( new fieldTypeSettingCollectionView( { collection: this.model.get( 'settings' ), fieldModel: this.fieldModel } ) );
+				this.settings.show( new itemSettingCollectionView( { collection: this.model.get( 'settings' ), dataModel: this.dataModel } ) );
 			} else {
 				this.settings.empty();
 			}
@@ -36,8 +36,7 @@ define( ['builder/views/fields/drawer/typeSettingCollection'], function( fieldTy
 			return {
 				renderLabel: function() {
 					if ( '' != this.label ) {
-						this.arrowDir = 'down';
-						return _.template( jQuery( '#nf-tmpl-drawer-content-edit-field-setting-group-label' ).html(), this );
+						return _.template( jQuery( '#nf-tmpl-drawer-content-edit-setting-group-label' ).html(), this );
 					} else {
 						return '';
 					}
@@ -45,9 +44,9 @@ define( ['builder/views/fields/drawer/typeSettingCollection'], function( fieldTy
 
 				renderArrowDir: function() {
 					if ( this.display ) {
-						return 'up';
-					} else {
 						return 'down';
+					} else {
+						return 'right';
 					}
 				}
 			}

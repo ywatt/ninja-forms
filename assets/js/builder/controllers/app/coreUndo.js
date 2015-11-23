@@ -12,9 +12,10 @@ define( [], function() {
 			nfRadio.channel( 'changes' ).reply( 'undo:changeSetting', this.undoChangeSetting, this );
 
 			nfRadio.channel( 'changes' ).reply( 'undo:sortFields', this.undoSortFields, this );
-			nfRadio.channel( 'changes' ).reply( 'undo:addField', this.undoAddField, this );
+			nfRadio.channel( 'changes' ).reply( 'undo:addObject', this.undoAddObject, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:removeField', this.undoRemoveField, this );
-			nfRadio.channel( 'changes' ).reply( 'undo:duplicateField', this.undoDuplicateField, this );
+			nfRadio.channel( 'changes' ).reply( 'undo:removeAction', this.undoRemoveAction, this );
+			nfRadio.channel( 'changes' ).reply( 'undo:duplicateObject', this.undoDuplicateObject, this );
 
 			nfRadio.channel( 'changes' ).reply( 'undo:addListOption', this.undoAddListOption, this );
 			nfRadio.channel( 'changes' ).reply( 'undo:removeListOption', this.undoRemoveListOption, this );
@@ -69,15 +70,15 @@ define( [], function() {
 		 * @param  boolean 			undoAll are we in the middle of an undo all action?
 		 * @return void
 		 */
-		undoAddField: function( change, undoAll ) {
-			var fieldModel = change.get( 'model' );
+		undoAddObject: function( change, undoAll ) {
+			var objectModel = change.get( 'model' );
+			var collection = change.get( 'data' ).collection;
 
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
-			delete fieldCollection.newIDs[ fieldModel.get( 'id' ) ];
+			delete collection.newIDs[ objectModel.get( 'id' ) ];
 			
 			if ( ! undoAll ) {
 				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-				var results = changeCollection.where( { model: fieldModel } );
+				var results = changeCollection.where( { model: objectModel } );
 
 				_.each( results, function( model ) {
 					if ( model !== change ) {
@@ -86,8 +87,7 @@ define( [], function() {
 				} );				
 			}
 			
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
-			fieldCollection.remove( fieldModel );
+			collection.remove( objectModel );
 			this.maybeRemoveChange( change, undoAll );
 		},		
 
@@ -100,12 +100,13 @@ define( [], function() {
 		 * @param  boolean 			undoAll are we in the middle of an undo all action?
 		 * @return void
 		 */
-		undoDuplicateField: function( change, undoAll ) {
-			var fieldModel = change.get( 'model' );
+		undoDuplicateObject: function( change, undoAll ) {
+			var objectModel = change.get( 'model' );
+			var objectCollection = change.get( 'data' ).collection;
 
 			if ( ! undoAll ) {
 				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-				var results = changeCollection.where( { model: fieldModel } );
+				var results = changeCollection.where( { model: objectModel } );
 
 				_.each( results, function( model ) {
 					if ( model !== change ) {
@@ -114,8 +115,7 @@ define( [], function() {
 				} );				
 			}
 
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
-			fieldCollection.remove( fieldModel );
+			objectCollection.remove( objectModel );
 			this.maybeRemoveChange( change, undoAll );
 		},
 
@@ -147,6 +147,38 @@ define( [], function() {
 
 			// Trigger a reset on our field collection so that our view re-renders
 			fieldCollection.trigger( 'reset', fieldCollection );
+
+			this.maybeRemoveChange( change, undoAll );
+		},
+
+		/**
+		 * Undo removing an action
+		 * 
+		 * @since  3.0
+		 * @param  backbone.model 	change 	model of our change
+		 * @param  boolean 			undoAll are we in the middle of an undo all action?
+		 * @return void
+		 */
+		undoRemoveAction: function( change, undoAll ) {
+			var actionModel = change.get( 'model' );
+			nfRadio.channel( 'actions' ).request( 'add:action', actionModel );
+
+			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:actionCollection' );
+			delete actionCollection.removedIDs[ actionModel.get( 'id' ) ];
+			
+			if ( ! undoAll ) {
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var results = changeCollection.where( { model: actionModel } );
+
+				_.each( results, function( model ) {
+					if ( model !== change ) {
+						model.set( 'disabled', false );
+					}
+				} );				
+			}
+
+			// Trigger a reset on our action collection so that our view re-renders
+			actionCollection.trigger( 'reset', actionCollection );
 
 			this.maybeRemoveChange( change, undoAll );
 		},

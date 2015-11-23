@@ -7,9 +7,12 @@ return array(
     */
 
     'url' => array(
-        'type' => 'text',
+        'name' => 'url',
+        'type' => 'textbox',
+        'group' => 'primary',
         'label' => __( 'URL', 'ninja-forms' ),
         'placeholder' => '',
+        'value' => ''
     ),
 
 );

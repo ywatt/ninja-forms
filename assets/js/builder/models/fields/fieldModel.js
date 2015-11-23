@@ -50,7 +50,7 @@ define( [], function() {
 		 * @return void
 		 */
 		changeSetting: function() {
-			nfRadio.channel( 'fields' ).trigger( 'update:setting', this );
+			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
 		}
 	} );
 	

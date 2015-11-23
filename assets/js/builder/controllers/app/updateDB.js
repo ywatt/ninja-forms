@@ -38,13 +38,20 @@ define( [], function() {
 			} else if ( 'publish' == action ) {
 				var jsAction = 'nf_save_form';
 			}
+
 			// Get our form data
 			var formData = nfRadio.channel( 'app' ).request( 'get:formData' );
-			// Get the field IDs that we've deleted.
-			removedIDs = formData.get( 'fields' ).removedIDs;
+
 			// Turn our formData model into an object
 			var data = JSON.parse( JSON.stringify( formData ) );
+
+			/**
+			 * Prepare fields for submission.
+			 */
 			
+			// Get the field IDs that we've deleted.
+			var removedIDs = formData.get( 'fields' ).removedIDs;
+
 			/*
 			 * data.fields is an array of objects like:
 			 * field.label = blah
@@ -80,6 +87,48 @@ define( [], function() {
 			// Set our deleted_fields object so that we can know which fields were removed.
 			data.deleted_fields = removedIDs;
 
+			/**
+			 * Prepare actions for submission.
+			 */
+			
+			// Get the action IDs that we've deleted.
+			var removedIDs = formData.get( 'actions' ).removedIDs;
+
+			/*
+			 * data.actions is an array of objects like:
+			 * action.label = blah
+			 * action.label_pos = blah
+			 * etc.
+			 *
+			 * And we need that format to be:
+			 * action.settings.label = blah
+			 * action.settings.label_pos = blah
+			 *
+			 * So, we loop through our actions and create a field.settings object.
+			 */
+			_.each( data.actions, function( action ) {
+				var id = action.id;
+				// We dont' want to update id or parent_id
+				delete action.id;
+				delete action.parent_id;
+				var settings = {};
+				// Loop through all the attributes of our actions
+				for (var prop in action) {
+				    if ( action.hasOwnProperty( prop ) ) {
+				    	// Set our settings.prop value.
+				        settings[ prop ] = action[ prop ];
+				        // Delete the property from the action.
+				        delete action[ prop ];
+				    }
+				}
+				// Update our action object.
+				action.settings = settings;
+				action.id = id;
+			} );
+
+			// Set our deleted_actions object so that we can know which actions were removed.
+			data.deleted_actions = removedIDs;
+
 			// Turn our object into a JSON string.
 			data = JSON.stringify( data );
 			// Run anything that needs to happen before we update.
@@ -91,10 +140,16 @@ define( [], function() {
 			}
 			// Update
 			jQuery.post( ajaxurl, { action: jsAction, form: data, security: nfAdmin.ajaxNonce }, function( response ) {
-				response = JSON.parse( response );
-				response.action = action;
-				// Run anything that needs to happen after we update.
-				nfRadio.channel( 'app' ).trigger( 'response:updateDB', response );
+				try {
+					response = JSON.parse( response );
+					response.action = action;
+					// Run anything that needs to happen after we update.
+					nfRadio.channel( 'app' ).trigger( 'response:updateDB', response );
+				} catch( exception ) {
+					console.log( 'Something went wrong!' );
+					console.log( response );
+				}
+				
 			} );
 		}
 

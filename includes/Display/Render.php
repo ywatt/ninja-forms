@@ -14,9 +14,10 @@ final class NF_Display_Render
         'fields-error',
     );
 
+    protected static $use_test_values = FALSE;
+
     public static function localize( $form_id )
     {
-
         if( ! has_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 ) ){
             add_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 );
         }
@@ -34,7 +35,10 @@ final class NF_Display_Render
 
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
-            // $field->update_setting( 'value', time() );
+            if( self::$use_test_values ) {
+                $field->update_setting( 'value', $field_class->get_test_value() );
+            }
+
             $field->update_setting( 'id', $field->get_id() );
 
             $templates = $field_class->get_templates();
@@ -48,6 +52,15 @@ final class NF_Display_Render
             }
 
             $settings = $field->get_settings();
+
+            if( isset( $settings[ 'default_type' ] ) && isset( $settings[ 'default_value' ] ) ) {
+                $default_value = self::populate_default_value($settings['default_type'], $settings['default_value']);
+                $default_value = apply_filters('ninja_forms_render_default_value', $default_value, $field_class, $settings);
+
+                if ($default_value) {
+                    $settings['value'] = $default_value;
+                }
+            }
 
             $settings[ 'element_templates' ] = $templates;
             $settings[ 'old_classname' ] = $field_class->get_old_classname();
@@ -84,6 +97,8 @@ final class NF_Display_Render
 
     public static function localize_preview( $form_id )
     {
+        self::$use_test_values = TRUE;
+
         add_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 );
 
         $form = get_user_option( 'nf_form_preview_' . $form_id );
@@ -115,6 +130,19 @@ final class NF_Display_Render
 
             foreach( $templates as $template ) {
                 self::load_template('fields-' . $template);
+            }
+
+            if( self::$use_test_values ) {
+                $field['settings']['value'] = $field_class->get_test_value();
+            }
+
+            if( isset( $settings[ 'default_type' ] ) && isset( $settings[ 'default_value' ] ) ) {
+                $default_value = self::populate_default_value($field['settings']['default_type'], $field['settings']['default_value']);
+                $default_value = apply_filters('ninja_forms_render_default_value', $default_value, $field_class, $field['settings']);
+
+                if ($default_value) {
+                    $field['settings']['value'] = $default_value;
+                }
             }
 
             $field[ 'settings' ][ 'element_templates' ] = $templates;
@@ -205,6 +233,30 @@ final class NF_Display_Render
 
         // Action to Output Custom Templates
         do_action( 'nf_output_templates' );
+    }
+
+    protected static function populate_default_value( $type, $value = '' )
+    {
+        global $post;
+
+        if( empty( $type ) ) return $value;
+
+        switch( $type ){
+            case 'post_id':
+                $default = ( is_object ( $post ) ) ? $post->ID : $value;
+                break;
+            case 'post_title':
+                $default = ( is_object ( $post ) ) ? $post->post_title : $value;
+                break;
+            case 'post_url':
+                $default = ( is_object ( $post ) ) ? get_permalink( $post->ID ) : $value;
+                break;
+            case 'custom':
+            default:
+                $default = $value;
+        }
+
+        return $default;
     }
 
     /*

@@ -28,12 +28,14 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             Ninja_Forms::template( 'admin-menu-new-form.html.php' );
             wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
+            wp_enqueue_style( 'qtip2', Ninja_Forms::$url . 'assets/css/jquery.qtip.css' );
 
             wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
             wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
             wp_enqueue_script( 'backbone-undo', Ninja_Forms::$url . 'assets/js/lib/backbone.undo.js', array( 'jquery', 'backbone' ) );
             wp_enqueue_script( 'jquery-perfect-scrollbar', Ninja_Forms::$url . 'assets/js/lib/perfect-scrollbar.jquery.min.js', array( 'jquery' ) );
             wp_enqueue_script( 'jquery-hotkeys-new', Ninja_Forms::$url . 'assets/js/lib/jquery.hotkeys.js' );
+            wp_enqueue_script( 'jquery-qtip2', Ninja_Forms::$url . 'assets/js/lib/jquery.qtip.js' );
 
             wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
             wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/builder/main.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );
@@ -47,6 +49,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $this->_localize_field_type_data();
 
             $this->_localize_action_type_data();
+
+            $this->_localize_form_settings();
         } else {
 
             /*
@@ -91,9 +95,13 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         $actions_settings = array();
 
         foreach( $actions as $action ){
-            $actions_settings[] = $action->get_settings();
+
+            $settings = $action->get_settings();
+            $settings[ 'id' ] = $action->get_id();
+
+            $actions_settings[] = $settings;
         }
-        
+
         $form_data = array();
         $form_data['id'] = $form_id;
         $form_data['settings'] = $form->get_settings();
@@ -112,60 +120,23 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     {
         $field_type_settings = array();
 
-        $master_settings_list = array();
+        $master_settings = array();
 
         $setting_defaults = array();
 
         foreach( Ninja_Forms()->fields as $field ){
 
             $name = $field->get_name();
-
             $settings = $field->get_settings();
+            $groups = Ninja_Forms::config( 'SettingsGroups' );
 
-            $settings_groups = Ninja_Forms::config( 'SettingsGroups' );
+            $unique_settings = $this->_unique_settings( $settings );
 
-            $settings_defaults = array();
+            $master_settings = array_merge( $master_settings, array_values( $unique_settings ) );
 
-            foreach( $settings as $setting ){
+            $settings_groups = $this->_group_settings( $settings, $groups );
 
-                $group = $setting[ 'group' ];
-
-                if( 'fieldset' == $setting[ 'type' ] ){
-                    // Remove array keys for localization
-                    $setting[ 'settings' ] = array_values( $setting[ 'settings' ] );
-                }
-
-                $settings_groups[$group]['settings'][] = $setting;
-
-                if( isset( $setting[ 'name' ] ) ){
-
-                    if( isset( $setting[ 'type' ] ) && 'fieldset' == $setting[ 'type' ] ){
-
-                        foreach( $setting[ 'settings' ] as $fieldset_setting ){
-
-                            $setting_name = $fieldset_setting[ 'name' ];
-                            $master_settings_list[] = $fieldset_setting;
-
-                            if( isset( $fieldset_setting[ 'value' ] ) ) {
-                                $settings_defaults[$setting_name] = $fieldset_setting['value'];
-                            }
-                        }
-                    } else {
-                        $setting_name = $setting[ 'name' ];
-                        $master_settings_list[] = $setting;
-
-                        if( isset( $setting[ 'value' ] ) ) {
-                            $settings_defaults[$setting_name] = $setting['value'];
-                        }
-                    }
-                }
-            }
-
-            foreach( $settings_groups as $id => $group ) {
-                if ( empty( $group[ 'settings' ] ) ) {
-                    unset( $settings_groups[ $id ] );
-                }
-            }
+            $settings_defaults = $this->_setting_defaults( $unique_settings );
 
             $field_type_settings[ $name ] = array(
                 'id' =>  $name,
@@ -181,7 +152,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         ?>
         <script>
             var fieldTypeData = <?php echo wp_json_encode( $field_type_settings ); ?>;
-            var fieldSettings = <?php echo wp_json_encode( $master_settings_list ); ?>;
+            var fieldSettings = <?php echo wp_json_encode( $master_settings ); ?>;
             // console.log( fieldTypeData );
         </script>
         <?php
@@ -191,20 +162,151 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     {
         $action_type_settings = array();
 
+        $master_settings_list = array();
+
         foreach( Ninja_Forms()->actions as $action ){
 
             $name = $action->get_name();
-
             $settings = $action->get_settings();
+            $groups = Ninja_Forms::config( 'SettingsGroups' );
 
-            $action_type_settings[ $name ] = $settings;
+            $settings_groups = $this->_group_settings( $settings, $groups );
+
+            $master_settings_list = array_merge( $master_settings_list, array_values( $settings ) );
+
+            $action_type_settings[ $name ] = array(
+                'id' => $name,
+                'section' => $action->get_section(),
+                'nicename' => $action->get_nicename(),
+                'image' => $action->get_image(),
+                'settingGroups' => $settings_groups,
+                'settingDefaults' => $this->_setting_defaults( $master_settings_list )
+            );
         }
+
+        $external_actions = $this->_fetch_action_feed();
+
+        foreach( $external_actions as $action){
+
+            if( ! isset( $action[ 'name' ] ) || ! $action[ 'name' ] ) continue;
+
+            $name = $action[ 'name' ];
+            $nicename = ( isset( $action[ 'nicename' ] ) ) ? $action[ 'nicename' ] : '';
+            $image = ( isset( $action[ 'image' ] ) ) ? $action[ 'image' ] : '';
+            $link = ( isset( $action[ 'link' ] ) ) ? $action[ 'link' ] : '';
+
+            $action_type_settings[ $name ] = array(
+                'id' => $name,
+                'section' => 'available',
+                'nicename' => $nicename,
+                'image' => $image,
+                'link' => $link,
+                'settingGroups' => array(),
+                'settingDefaults' => array()
+            );
+        }
+
         ?>
         <script>
             var actionTypeData = <?php echo wp_json_encode( $action_type_settings ); ?>;
+            var actionSettings = <?php echo wp_json_encode( $master_settings_list ); ?>;
             // console.log( actionTypeData );
         </script>
         <?php
+    }
+
+    protected function _localize_form_settings()
+    {
+        $settings = Ninja_Forms::config( 'FormSettings' );
+        $groups = Ninja_Forms::config( 'SettingsGroups' );
+
+        $master_settings = $this->_unique_settings( $settings );
+
+        $form_settings[ 'settingGroups' ] = $this->_group_settings( $settings, $groups );
+
+        $form_settings[ 'settingDefaults' ] = $this->_setting_defaults( $master_settings );
+
+        ?>
+        <script>
+        var formData = <?php echo wp_json_encode( $form_settings )?>;
+        var formSettings = <?php echo wp_json_encode( $master_settings )?>;
+        </script>
+        <?php
+    }
+
+    protected function _group_settings( $settings, $groups )
+    {
+        foreach( $settings as $setting ){
+
+            $group = ( isset( $setting[ 'group' ] ) ) ? $setting[ 'group' ] : '';
+
+            if( isset( $setting[ 'type'] ) && 'fieldset' == $setting[ 'type' ] ){
+                $setting[ 'settings' ] = array_values( $setting[ 'settings' ] );
+            }
+
+            $groups[ $group ][ 'settings'][] = $setting;
+        }
+
+        foreach( $groups as $id => $group ) {
+            if ( empty( $group[ 'settings' ] ) ) {
+                unset( $groups[ $id ] );
+            }
+        }
+
+        unset( $groups[ "" ] );
+
+        return $groups;
+    }
+
+    protected function _unique_settings( $settings )
+    {
+        $unique_settings = array();
+
+        foreach( $settings as $setting ){
+
+            if( 'fieldset' == $setting[ 'type' ] ){
+
+                $unique_settings = array_merge( $unique_settings, $this->_unique_settings( $setting[ 'settings' ] ) );
+            } else {
+
+                $name = $setting[ 'name' ];
+                $unique_settings[ $name ] = $setting;
+            }
+
+        }
+
+        return $unique_settings;
+    }
+
+    protected function _setting_defaults( $settings )
+    {
+        $setting_defaults = array();
+
+        foreach( $settings as $setting ){
+
+            $name = ( isset( $setting[ 'name' ] ) ) ? $setting[ 'name' ] : '';
+            $default = ( isset( $setting[ 'value' ] ) ) ? $setting[ 'value' ] : '';
+            $setting_defaults[ $name ] = $default;
+        }
+
+        return $setting_defaults;
+    }
+
+    protected function _fetch_action_feed()
+    {
+        $actions = get_transient( 'ninja-forms-builder-actions-feed' );
+
+        $bust = ( isset( $_GET[ 'nf-bust-actions-feed' ] ) );
+
+        if( $bust || ! $actions ) {
+            $actions = wp_remote_get('https://ninjaforms.com/?action_feed=true');
+            $actions = wp_remote_retrieve_body($actions);
+            $actions = json_decode($actions, true);
+
+            set_transient( 'ninja-forms-builder-actions-feed', $actions, WEEK_IN_SECONDS );
+        }
+
+        return $actions;
     }
 
 }

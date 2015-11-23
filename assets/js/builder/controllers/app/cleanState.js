@@ -17,7 +17,7 @@ define( [], function() {
 				'editActive'
 			];
 
-			this.listenTo( nfRadio.channel( 'fields' ), 'update:setting', this.setAppClean );
+			this.listenTo( nfRadio.channel( 'app' ), 'update:setting', this.setAppClean );
 		},
 
 		setAppClean: function( model ) {

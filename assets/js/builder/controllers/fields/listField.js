@@ -174,7 +174,7 @@ define( ['builder/models/fields/listOptionModel', 'builder/models/fields/listOpt
 		 * @return void
 		 */
 		triggerFieldModel: function( model, fieldModel ) {
-			nfRadio.channel( 'fields' ).trigger( 'update:setting', model );	
+			nfRadio.channel( 'app' ).trigger( 'update:setting', model );	
 		},
 
 		/**

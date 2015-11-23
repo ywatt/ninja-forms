@@ -1,14 +1,14 @@
 /**
- * Collections of settings for each field type.
+ * Collection that holds our field type models. 
  * 
  * @package Ninja Forms builder
  * @subpackage Fields
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/fields/typeSettingModel'], function( typeSettingModel ) {
+define( ['builder/models/app/typeModel'], function( typeModel ) {
 	var collection = Backbone.Collection.extend( {
-		model: typeSettingModel
+		model: typeModel
 	} );
 	return collection;
 } );

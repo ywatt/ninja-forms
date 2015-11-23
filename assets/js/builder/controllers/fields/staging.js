@@ -94,7 +94,10 @@ define( ['builder/models/fields/stagingCollection'], function( stagingCollection
 						change: 'Added',
 						dashicon: 'plus-alt'
 					};
-					nfRadio.channel( 'changes' ).request( 'register:change', 'addField', newModel, null, label );
+					var data = {
+						collection: fieldCollection
+					}
+					nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', newModel, null, label, data );
 			
 				} );
 				// Trigger a reset on our field collection so that our view re-renders

@@ -1,6 +1,6 @@
 #nf-drawer {
     background: #EBEDEE;
-    padding: 40px;
+    padding: 40px 40px;
     width: 50%;
     position: absolute;
     top: 0;
@@ -89,6 +89,9 @@
         width: 50%;
         transition: width 0.75s ease;
     }
+    .nf-toggle-drawer {
+        display: block;
+    }
 }
 .nf-drawer-closed {
     #nf-main {
@@ -109,6 +112,9 @@
     .nf-setting-wrap {
         width: 33%;
         transition: width 0.75s ease;
+    }
+    .nf-toggle-drawer {
+        display: none;
     }
 }
 .nf-drawer-header {
@@ -203,7 +209,7 @@
 .nf-toggle-drawer {
     color: #aaa;
     cursor: pointer;
-    display: block;
+    display: none;
     float: right;
     margin-top: 40px;
     text-decoration: none;

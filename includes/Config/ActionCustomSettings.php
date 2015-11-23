@@ -7,13 +7,22 @@ return array(
      */
 
     'hook' => array(
-        'type' => 'Select',
+        'name' => 'hook',
+        'type' => 'select',
             'options' => array(
-                'action' => __( 'Action', 'ninja-forms'),
-                'filter' => __( 'Filter', 'ninja-forms' ),
+                array(
+                    'value' => 'action',
+                    'label' => __( 'Action', 'ninja-forms'),
+                ),
+                array(
+                    'value' => 'filter',
+                    'label' => __( 'Filter', 'ninja-forms'),
+                ),
             ),
+        'group' => 'primary',
         'label' => __( 'Hook', 'ninja-forms' ),
         'placeholder' => '',
+        'value' => ''
     ),
 
     /*
@@ -21,9 +30,12 @@ return array(
      */
 
     'tag' => array(
-        'type' => 'text',
+        'name' => 'tag',
+        'type' => 'textbox',
+        'group' => 'primary',
         'label' => __( 'Tag', 'ninja-forms' ),
         'placeholder' => '',
+        'value' => ''
     ),
     
 );

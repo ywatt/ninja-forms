@@ -82,18 +82,26 @@
     </div>
 </script>
 
+<script id="nf-tmpl-main-content-actions-empty" type="text/template">
+    <tr>
+        <td colspan="4">
+            <h3>Add form actions</h3>
+            <p>Get started by adding your first form field. Just click the plus and select the actions you want. It’s that easy.</p>
+        </td>
+    </tr>
+</script>
+
 <script id="nf-tmpl-main-content-field" type="text/template">
     <div id="<%= getFieldID() %>" class="<%= renderClasses() %>"> <%= label %> <%= renderRequired() %>
-
-            <ul class="nf-item-controls">
-                <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-                <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-                <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editField"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-            </ul>
+        <ul class="nf-item-controls">
+            <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editField"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+            <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+            <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+        </ul>
     </div>
 </script>
 
-<script id="nf-tmpl-actions" type="text/template">
+<script id="nf-tmpl-action-table" type="text/template">
     <table id="nf-table-display" class="nf-actions-table">
         <thead>
             <tr>
@@ -104,44 +112,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><input type="checkbox" class="nf-toggle" checked /></td>
-                <td>Save to Database</td>
-                <td>Save Submissions</td>
-                <td>
-                    <ul class="nf-item-controls">
-                        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-                        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-                        <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" class="nf-toggle" checked /></td>
-                <td>Email to Admin</td>
-                <td>Email</td>
-                <td>
-                    <ul class="nf-item-controls">
-                        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-                        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-                        <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-                    </ul>
-                </td>
-            </tr>
-            <tr class="nf-deactivated">
-                <td><input type="checkbox" class="nf-toggle" /></td>
-                <td>Thank You Message</td>
-                <td>Sucess Message</td>
-                <td>
-                    <ul class="nf-item-controls">
-                        <li class="nf-item-delete"><a href="#"><span class="dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-                        <li class="nf-item-duplicate"><a href="#"><span class="dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-                        <li class="nf-item-edit"><a href="#"><span class="nf-open-drawer dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-                    </ul>
-                </td>
-            </tr>
         </tbody>
     </table>
+</script>
+
+<script id="nf-tmpl-action-item" type="text/template">
+    <td><%= renderToggle() %></td>
+    <td><%= label %></td>
+    <td><%= renderTypeNicename() %></td>
+    <td>
+        <ul class="nf-item-controls">
+            <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing action</span></a></li>
+            <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+            <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
+        </ul>
+    </td>
 </script>
 
 <script id="nf-tmpl-settings" type="text/template">
@@ -181,51 +166,8 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-add-action" type="text/template">
-    <section class="nf-settings nf-action-items">
-        <h3>Installed Actions</h3>
-        <div class="nf-one-third">
-            <div class="nf-item">Email</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Success Message</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Redirect</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Save Submissions</div>
-        </div>
-    </section>
-    <section class="nf-settings nf-action-items">
-        <h3>Available Actions</h3>
-        <div class="nf-one-third">
-            <div class="nf-item">MailChimp</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Insightly</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Constant Contact</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Campaign Monitor</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Slack</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Trello</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Create Post</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Salesforce</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Text Message</div>
-        </div>
-    </section>
+    <span id="nf-drawer-primary"></span>
+    <span id="nf-drawer-secondary"></span>
 </script>
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
@@ -261,7 +203,7 @@
     </tr>
 </script>
 
-<script id="nf-tmpl-drawer-content-edit-field" type="text/template">
+<script id="nf-tmpl-drawer-content-edit-settings" type="text/template">
     <h2><span class="dashicons dashicons-star-empty"></span> <%= renderTypeNicename() %></h2>
     <span class="nf-settings-groups"></span>
 </script>
@@ -273,42 +215,8 @@
     </section>
 </script>
 
-<script id="nf-tmpl-drawer-content-edit-field-setting-group-label" type="text/template">
+<script id="nf-tmpl-drawer-content-edit-setting-group-label" type="text/template">
     <h3 class="toggle"><span class="dashicons dashicons-arrow-<%= renderArrowDir() %>"></span><%= label %></h3>
-</script>
-
-<script id="nf-tmpl-drawer-content-edit-action" type="text/template">
-    <section class="nf-settings">
-        <div class="nf-full">
-            <label>Action Name</label>
-            <input type="text" value="Email to Use" />
-        </div>
-        <div class="nf-one-half">
-            <label>From Name</label>
-            <input type="text" value="James Laws" />
-        </div>
-        <div class="nf-one-half">
-            <label>From Email</label>
-            <input type="text" value="james@wpninjas.com" />
-        </div>
-        <div class="nf-full">
-            <label>To</label>
-            <input type="text" value="" />
-        </div>
-        <div class="nf-full">
-            <label>Subject</label>
-            <input type="text" value="Email to Use" />
-        </div>
-        <fieldset class="nf-wp-editor">
-            <legend>Email Message</legend>
-            <div class="nf-full">
-
-            </div>
-            <div class="nf-full">
-                <?php //wp_editor( 'Your Email Message', 2, $settings = array() ); ?>
-            </div>
-        </fieldset>
-    </section>
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-form-settings" type="text/template">
@@ -342,6 +250,19 @@
 <script id="nf-tmpl-drawer-field-type-button" type="text/template">
     <div class="nf-field-type-button nf-one-third <%= savedField() %>" data-id="<%= id %>">
         <div class="nf-item" data-id="<%= id %>" tabindex="0"><%= nicename %></div>
+    </div>
+</script>
+
+<script id="nf-tmpl-drawer-action-type-section" type="text/template">
+    <section class="nf-settings nf-action-items <%= renderClasses() %>">
+        <h3><%= renderNicename() %></h3>
+        <span class="action-types"></span>
+    </section>
+</script>
+
+<script id="nf-tmpl-drawer-action-type-button" type="text/template">
+    <div class="nf-one-third" data-type="<%= id %>">
+        <div class="<%= renderClasses() %>" <%= renderStyle() %>><%= nicename %></div>
     </div>
 </script>
 
@@ -391,30 +312,33 @@
 
 </script>
 
+<script id="nf-tmpl-empty" type="text/template">
 
+</script>
 
 <!-- Field Settings Templates -->
 
-<script id="nf-tmpl-edit-field-setting-wrap" type="text/template">
+<script id="nf-tmpl-edit-setting-wrap" type="text/template">
     <div class="nf-<%= renderWidth() %>">
         <%= renderSetting() %>
     </div>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-textbox" type="text/template">
-    <%= renderLabel() %>
-    <input type="text" value="<%= value %>" placeholder="<%= placeholder %>" />
+<script id="nf-tmpl-edit-setting-textbox" type="text/template">
+    <label for="<%= name %>"><%= label %> <%= renderTooltip() %>
+        <input type="text" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
+    </label>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-textarea" type="text/template">
-    <%= renderLabel() %>
-    <textarea><%= value %></textarea>
+<script id="nf-tmpl-edit-setting-textarea" type="text/template">
+    <label for="<%= name %>"><%= label %> <%= renderTooltip() %>
+        <textarea id="<%= name %>"><%= value %></textarea>
+    </label>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-select" type="text/template">
-    <%= renderLabel() %>
-    <div class="nf-select">
-        <select>
+<script id="nf-tmpl-edit-setting-select" type="text/template">
+    <label for="<%= name %>" class="nf-select"><%= label %> <%= renderTooltip() %>
+        <select id="<%= name %>">
             <%
             _.each( options, function( option ) {
                 %>
@@ -423,22 +347,34 @@
             } );
             %>
         </select>
-    </div>
+        <div></div>
+    </label>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-toggle" type="text/template">
-    <label><%= renderLabel() %></label>
-    <input type="checkbox" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
+<script id="nf-tmpl-edit-setting-checkbox" type="text/template">
+
+    <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
+    <input type="checkbox" id="<%= name %>" class="nf-checkbox" <%= ( 1 == value ) ? 'checked' : '' %> />
+    <label for="<%= name %>"><%= label %></label>
+
 </script>
 
-<script id="nf-tmpl-edit-field-setting-fieldset" type="text/template">
+<script id="nf-tmpl-edit-setting-toggle" type="text/template">
+
+    <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
+    <input type="checkbox" id="<%= name %>" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
+    <label for="<%= name %>"><%= label %></label>
+
+</script>
+
+<script id="nf-tmpl-edit-setting-fieldset" type="text/template">
     <fieldset>
         <legend><%= label %></legend>
         <span class="nf-field-sub-settings"></span>
     </fieldset>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-list-repeater" type="text/template">
+<script id="nf-tmpl-edit-setting-list-repeater" type="text/template">
     <fieldset class="nf-list-options">
         <legend><%= label %></legend>
         <div class="nf-div-table">
@@ -457,11 +393,11 @@
     </fieldset>
 </script>
 
-<script id="nf-tmpl-edit-field-setting-list-empty" type="text/template">
+<script id="nf-tmpl-edit-setting-list-empty" type="text/template">
 
 </script>
 
-<script id="nf-tmpl-edit-field-setting-list-option" type="text/template">
+<script id="nf-tmpl-edit-setting-list-option" type="text/template">
     <div>
         <span class="dashicons dashicons-menu handle"></span>
     </div>
@@ -475,7 +411,7 @@
         <input type="text" value="<%= calc %>" data-id="calc">
     </div>
     <div>
-        <input type="checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
+        <input type="checkbox" class="nf-checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
     </div>
     <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>

@@ -92,7 +92,24 @@
 }
 .nf-action-items {
     .nf-item {
-        height: 75px;
-        line-height: 55px;
+        height: 100px;
+        line-height: 75px;
+        cursor: pointer;
+        &.nf-has-img {
+            background-position: center center;
+            text-indent: -99999px;
+        }
+    }
+    &.available {
+        .nf-item {
+            &.nf-has-img {
+                filter: grayscale(100%);
+                opacity: 0.6;
+                &:hover {
+                    filter: grayscale(0);
+                    opacity: 1.0;
+                }
+            }
+        }
     }
 }

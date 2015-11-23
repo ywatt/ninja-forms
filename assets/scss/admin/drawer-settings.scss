@@ -7,8 +7,7 @@
     padding: 10px 30px;
     text-decoration: none;
     text-transform: uppercase;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    appearance: none;
     &.primary {
         background: $cta_color;
         border: 1px solid #1EA9EA;
@@ -59,8 +58,9 @@
         margin: 0 3px 10px;
         padding: 0 10px;
     }
-    label, legend {
+    .nf-setting-label, label, legend {
         color: #424242;
+        //display: block;
         font-size: 13px;
         text-transform: uppercase;
     }
@@ -71,11 +71,12 @@
         margin-top: 5px;
         padding: 12px 15px;
         width: 100%;
+        text-transform: default;
     }
     textarea {
         height: 200px;
     }
-    input[type=checkbox] {
+    input[type=checkbox].nf-checkbox {
         appearance: none;
         background: #f9f9f9;
         border: 0;

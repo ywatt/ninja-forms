@@ -1,11 +1,11 @@
-define( ['builder/views/fields/drawer/typeSetting'], function( fieldTypeSettingView ) {
+define( ['builder/views/app/drawer/itemSetting'], function( itemSettingView ) {
 	var view = Marionette.CompositeView.extend( {
-		template: '#nf-tmpl-edit-field-setting-wrap',
-		childView: fieldTypeSettingView,
+		template: '#nf-tmpl-edit-setting-wrap',
+		childView: itemSettingView,
 
 		initialize: function( data ) {
 			this.collection = this.model.get( 'settings' );
-			this.childViewOptions = { fieldModel: data.fieldModel };
+			this.childViewOptions = { dataModel: data.dataModel };
 		},
 
 		onRender: function() {
@@ -21,7 +21,7 @@ define( ['builder/views/fields/drawer/typeSetting'], function( fieldTypeSettingV
 		templateHelpers: function () {
 	    	return {
 	    		renderSetting: function(){
-					return _.template( jQuery( '#nf-tmpl-edit-field-setting-' + this.type ).html(), this );
+					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
 				},
 				
 				renderWidth: function() {

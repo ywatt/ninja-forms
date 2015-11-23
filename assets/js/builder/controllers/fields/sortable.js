@@ -149,7 +149,11 @@ define( [], function() {
 				dashicon: 'plus-alt'
 			};
 
-			nfRadio.channel( 'changes' ).request( 'register:change', 'addField', newModel, null, label );
+			var data = {
+				collection: nfRadio.channel( 'fields' ).request( 'get:fieldCollection' )
+			}
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', newModel, null, label, data );
 			
 			return tmpID;
 		},

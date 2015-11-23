@@ -29,6 +29,10 @@ define(
 		'builder/controllers/app/cleanState',
 		'builder/controllers/app/coreUndo',
 		'builder/controllers/app/cloneModelDeep',
+		'builder/controllers/app/getSettingChildView',
+		'builder/controllers/app/changeSettingDefault',
+		'builder/controllers/app/fieldset',
+		'builder/controllers/app/toggleSetting',
 		/*
 		 * Fields domain controllers
 		 */
@@ -42,10 +46,6 @@ define(
 		'builder/controllers/fields/sortable',
 		'builder/controllers/fields/data',
 		'builder/controllers/fields/itemControls',
-		'builder/controllers/fields/changeSettingDefault',
-		'builder/controllers/fields/toggleSetting',
-		'builder/controllers/fields/getSettingChildView',
-		'builder/controllers/fields/fieldset',
 		'builder/controllers/fields/listField',
 		'builder/controllers/fields/editActive',
 		'builder/controllers/fields/fieldSettings',
@@ -53,7 +53,15 @@ define(
 		/*
 		 * TODO: Actions domain controllers
 		 */
-		
+		'builder/controllers/actions/types',
+		'builder/controllers/actions/data',
+		'builder/controllers/actions/actionSettings',
+		'builder/controllers/actions/itemControls',
+		'builder/controllers/actions/editActive',
+		'builder/controllers/actions/addActionTypes',
+		'builder/controllers/actions/typeDrag',
+		'builder/controllers/actions/droppable',
+
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -80,6 +88,10 @@ define(
 		CleanState,
 		CoreUndo,
 		CloneModelDeep,
+		DrawerSettingChildView,
+		ChangeSettingDefault,
+		Fieldset,
+		ToggleSetting,
 		/*
 		 * Fields domain controllers
 		 */
@@ -93,17 +105,20 @@ define(
 		MainContentFieldsSortable,
 		FieldData,
 		FieldItemControls,
-		FieldsChangeSettingDefault,
-		toggleFieldSetting,
-		DrawerFieldTypeSettingChildView,
-		Fieldset,
 		ListField,
-		EditActive,
-		FieldSettings
+		FieldsEditActive,
+		FieldSettings,
 		/*
 		 * TODO: Actions domain controllers
 		 */
-		
+		ActionTypes,
+		ActionData,
+		ActionSettings,
+		ActionItemControls,
+		ActionEditActive,
+		ActionAddTypes,
+		ActionTypeDrag,
+		ActionDroppable
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -126,7 +141,6 @@ define(
 				new AppUndoChanges();
 				new AppPublishResponse();
 				new AppChangeDomain();
-				new EditActive();
 				new CleanState();
 				new CoreUndo();
 				new CloneModelDeep();
@@ -149,14 +163,22 @@ define(
 				new DrawerFilterFieldTypes();
 				new MainContentFieldsSortable();
 				new FieldItemControls();
-				new FieldsChangeSettingDefault();
-				new toggleFieldSetting();
-				new DrawerFieldTypeSettingChildView();
+				new ChangeSettingDefault();
+				new ToggleSetting();
+				new DrawerSettingChildView();
+				new FieldsEditActive();
 				new FieldSettings();
 				/*
 				 * TODO: Actions domain controllers
 				 */
-				
+				new ActionTypes();
+				new ActionData();
+				new ActionSettings();
+				new ActionItemControls();
+				new ActionEditActive();
+				new ActionAddTypes();
+				new ActionTypeDrag();
+				new ActionDroppable();
 				/*
 				 * TODO: Settings domain controllers
 				 */

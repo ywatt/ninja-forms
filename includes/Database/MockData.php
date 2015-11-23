@@ -123,39 +123,41 @@ final class NF_Database_MockData
          * ACTIONS
          */
 
-//        $action = Ninja_Forms()->form( $form_id )->action()->get();
-//        $action->update_setting( 'title',  'Mock Success Message Action' )
-//            ->update_setting( 'type', 'successmessage' )
-//            ->update_setting( 'message', 'This is a test success message' )
-//            ->save();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'label',  'Mock Success Message Action' )
+            ->update_setting( 'type', 'successmessage' )
+            ->update_setting( 'message', 'This is a test success message' )
+            ->update_setting( 'active', TRUE )
+            ->save();
 
 //        $action = Ninja_Forms()->form( $form_id )->action()->get();
-//        $action->update_setting( 'title',  'Mock Redirect Action' )
+//        $action->update_setting( 'label',  'Mock Redirect Action' )
 //            ->update_setting( 'type', 'redirect' )
 //            ->update_setting( 'url', 'http://kstover.codes' )
 //            ->update_setting( 'active', 0 )
 //            ->save();
 
-//        $action = Ninja_Forms()->form( $form_id )->action()->get();
-//        $action->update_setting( 'title',  'Mock Email Action' )
-//            ->update_setting( 'type', 'email' )
-//            ->update_setting( 'to', array( 'kyle@wpninjas.com' ) )
-//            ->update_setting( 'subject', 'This is an email action.' )
-//            ->update_setting( 'message', 'Hello, Ninja Forms!' )
-//            ->update_setting( 'active', FALSE )
-//            ->save();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'label',  'Mock Email Action' )
+            ->update_setting( 'type', 'email' )
+            ->update_setting( 'to', array( 'myformbuildingbringsallthedeveloperstotheyard@wpninjas.com' ) )
+            ->update_setting( 'subject', 'This is an email action.' )
+            ->update_setting( 'message', 'Hello, Ninja Forms!' )
+            ->update_setting( 'active', FALSE )
+            ->save();
 
 //        $action = Ninja_Forms()->form( $form_id )->action()->get();
-//        $action->update_setting( 'title',  'Run WordPress Action' )
+//        $action->update_setting( 'label',  'Run WordPress Action' )
 //            ->update_setting( 'type', 'custom' )
 //            ->update_setting( 'hook', 'action' )
 //            ->update_setting( 'tag', 'blarg_action' )
 //            ->save();
 
-//        $action = Ninja_Forms()->form( $form_id )->action()->get();
-//        $action->update_setting( 'title',  'Mock Save Action' )
-//            ->update_setting( 'type', 'save' )
-//            ->save();
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'label',  'Mock Save Action' )
+            ->update_setting( 'type', 'save' )
+            ->update_setting( 'active', TRUE )
+            ->save();
 
         /*
          * SUBMISSIONS
@@ -279,7 +281,7 @@ final class NF_Database_MockData
          */
 
         $action = Ninja_Forms()->form( $form_id )->action()->get();
-        $action->update_setting( 'title',  'Mock Save Action' )
+        $action->update_setting( 'label',  'Mock Save Action' )
             ->update_setting( 'type', 'save' )
             ->save();
     }
@@ -384,11 +386,6 @@ final class NF_Database_MockData
             //     'label'			=> 'Button',
             //     'label_pos' 	=> 'hidden',
             // ),
-            array(
-                'type' 			=> 'submit',
-                'label'			=> 'Submit',
-                'label_pos' 	=> 'hidden',
-            ),
         );
 
         $order = 1;
@@ -415,6 +412,17 @@ final class NF_Database_MockData
             }
             $order++;
         }
+
+        $submit = Ninja_Forms()->form($form_id)->field()->get();
+        $submit->update_setting( 'label', 'Submit')
+                ->update_setting( 'type', 'submit' )
+                ->update_setting( 'order', $order)
+                ->save();
+
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'label',  'Mock Save Action' )
+            ->update_setting( 'type', 'save' )
+            ->save();
     }
 
     public function form_long_form( $num_fields = 100 )

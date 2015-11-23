@@ -8,10 +8,26 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( [], function() {
-	var view = Marionette.ItemView.extend({
-		tagName: 'div',
-		template: '#nf-tmpl-actions'
+define( ['builder/views/actions/actionItem', 'builder/views/actions/mainContentEmpty'], function( actionView, emptyView ) {
+	var view = Marionette.CompositeView.extend({
+		template: '#nf-tmpl-action-table',
+		childView: actionView,
+		emptyView: emptyView,
+
+		onRender: function() {
+			jQuery( this.el ).droppable( {
+				accept: '.nf-one-third',
+				activeClass: 'nf-droppable-active',
+				hoverClass: 'nf-droppable-hover',
+				drop: function( e, ui ) {
+					nfRadio.channel( 'app' ).request( 'drop:actionType', e, ui );
+				}
+			} );
+		},
+
+		attachHtml: function( collectionView, childView ) {
+			jQuery( collectionView.el ).find( 'tbody' ).append( childView.el );
+		},
 	});
 
 	return view;
