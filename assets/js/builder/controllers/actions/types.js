@@ -22,8 +22,11 @@ define( [
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Create our field type collection
-			this.collection = new typeCollection();
-			
+			this.installedActions = new typeCollection();
+			this.installedActions.nicename = 'Installed';
+			this.availableActions = new typeCollection();
+			this.availableActions.nicename = 'Available';
+
 			var that = this;
 			_.each( actionTypeData, function( type ) {
 				var settingGroups = new settingGroupCollection();
@@ -44,16 +47,22 @@ define( [
 					nicename: type.nicename,
 					alias: type.alias,
 					settingGroups: settingGroups,
-					settingDefaults: type.settingDefaults
+					settingDefaults: type.settingDefaults,
+					image: type.image,
+					link: type.link
 				}
+
+				// Add tmp object to the appropriate collection (either installed or available)
+				that[ type.section + 'Actions' ].add( actionType );
 				// Add tmp object to our field type collection
-				that.collection.add( actionType );
+				// that.collection.add( actionType );
 			} );
 
 			// Respond to requests to get field type, collection, settings, and sections
 			nfRadio.channel( 'actions' ).reply( 'get:type', this.getType, this );
-			nfRadio.channel( 'actions' ).reply( 'get:typeCollection', this.getTypeCollection, this );
-			nfRadio.channel( 'actions' ).reply( 'get:typeSections', this.getTypeSections, this );
+			nfRadio.channel( 'actions' ).reply( 'get:installedActions', this.getInstalledActions, this );
+			nfRadio.channel( 'actions' ).reply( 'get:availableActions', this.getAvailableActions, this );
+			// nfRadio.channel( 'actions' ).reply( 'get:typeSections', this.getTypeSections, this );
 			// Listen to clicks on field types
 			// this.listenTo( nfRadio.channel( 'drawer' ), 'click:actionType', this.addStagedField );
 		},
@@ -66,18 +75,32 @@ define( [
 		 * @return backbone.model    	field type model
 		 */
 		getType: function( id ) {
-        	return this.collection.get( id );
+			// Search our installed actions first
+			var type = this.installedActions.get( id );
+			if ( ! type ) {
+				type = this.availableActions.get( id );
+			}
+        	return type;
         },
 
         /**
-         * Return the entire field type collection
+         * Return the installed action type collection
          *
          * @since  3.0
-         * @param  string 				id 	[description]
          * @return backbone.collection    	field type collection
          */
-		getTypeCollection: function( id ) {
-        	return this.collection;
+		getInstalledActions: function() {
+        	return this.installedActions;
+        },
+
+        /**
+         * Return the available action type collection
+         *
+         * @since  3.0
+         * @return backbone.collection    	field type collection
+         */
+		getAvailableActions: function() {
+        	return this.availableActions;
         },
 
         /**

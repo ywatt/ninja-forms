@@ -157,51 +157,55 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-add-action" type="text/template">
-    <section class="nf-settings nf-action-items">
-        <h3>Installed Actions</h3>
-        <div class="nf-one-third">
-            <div class="nf-item">Email</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Success Message</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Redirect</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item">Save Submissions</div>
-        </div>
-    </section>
-    <section class="nf-settings nf-action-items">
-        <h3>Available Actions</h3>
-        <div class="nf-one-third">
-            <div class="nf-item nf-has-img" style="background-image: url('https://ninjaforms.com/wp-content/uploads/2015/11/custom-action.png');">MailChimp</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item nf-has-img">Insightly</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item nf-has-img">Constant Contact</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item nf-has-img">Campaign Monitor</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item nf-has-img">Slack</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item nf-has-img">Trello</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item nf-has-img">Create Post</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item nf-has-img">Salesforce</div>
-        </div>
-        <div class="nf-one-third">
-            <div class="nf-item nf-has-img">Text Message</div>
-        </div>
-    </section>
+    <span id="nf-drawer-primary">
+        <section class="nf-settings nf-action-items">
+            <h3>Installed Actions</h3>
+            <div class="nf-one-third">
+                <div class="nf-item">Email</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item">Success Message</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item">Redirect</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item">Save Submissions</div>
+            </div>
+        </section>
+    </span>
+    <span id="nf-drawer-secondary">
+         <section class="nf-settings nf-action-items">
+            <h3>Available Actions</h3>
+            <div class="nf-one-third">
+                <div class="nf-item nf-has-img" style="background-image: url('https://ninjaforms.com/wp-content/uploads/2015/11/custom-action.png');">MailChimp</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item nf-has-img">Insightly</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item nf-has-img">Constant Contact</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item nf-has-img">Campaign Monitor</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item nf-has-img">Slack</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item nf-has-img">Trello</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item nf-has-img">Create Post</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item nf-has-img">Salesforce</div>
+            </div>
+            <div class="nf-one-third">
+                <div class="nf-item nf-has-img">Text Message</div>
+            </div>
+        </section>
+    </span>
 </script>
 
 <script id="nf-tmpl-drawer-content-view-changes-item" type="text/template">
@@ -253,40 +257,6 @@
     <h3 class="toggle"><span class="dashicons dashicons-arrow-<%= renderArrowDir() %>"></span><%= label %></h3>
 </script>
 
-<script id="nf-tmpl-drawer-content-edit-action" type="text/template">
-    <section class="nf-settings">
-        <div class="nf-full">
-            <label>Action Name</label>
-            <input type="text" value="Email to Use" />
-        </div>
-        <div class="nf-one-half">
-            <label>From Name</label>
-            <input type="text" value="James Laws" />
-        </div>
-        <div class="nf-one-half">
-            <label>From Email</label>
-            <input type="text" value="james@wpninjas.com" />
-        </div>
-        <div class="nf-full">
-            <label>To</label>
-            <input type="text" value="" />
-        </div>
-        <div class="nf-full">
-            <label>Subject</label>
-            <input type="text" value="Email to Use" />
-        </div>
-        <fieldset class="nf-wp-editor">
-            <legend>Email Message</legend>
-            <div class="nf-full">
-
-            </div>
-            <div class="nf-full">
-                <?php //wp_editor( 'Your Email Message', 2, $settings = array() ); ?>
-            </div>
-        </fieldset>
-    </section>
-</script>
-
 <script id="nf-tmpl-drawer-content-edit-form-settings" type="text/template">
     <section class="nf-settings">
         <div class="nf-full toggle-row">
@@ -318,6 +288,19 @@
 <script id="nf-tmpl-drawer-field-type-button" type="text/template">
     <div class="nf-field-type-button nf-one-third <%= savedField() %>" data-id="<%= id %>">
         <div class="nf-item" data-id="<%= id %>" tabindex="0"><%= nicename %></div>
+    </div>
+</script>
+
+<script id="nf-tmpl-drawer-action-type-section" type="text/template">
+    <section class="nf-settings nf-action-items">
+        <h3><%= renderNicename() %></h3>
+        <span class="action-types"></span>
+    </section>
+</script>
+
+<script id="nf-tmpl-drawer-action-type-button" type="text/template">
+    <div class="nf-one-third">
+        <div class="<%= renderClasses() %>" <%= renderStyle() %>><%= nicename %></div>
     </div>
 </script>
 
