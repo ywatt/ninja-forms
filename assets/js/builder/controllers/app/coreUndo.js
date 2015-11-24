@@ -162,7 +162,7 @@ define( [], function() {
 			var actionModel = change.get( 'model' );
 			nfRadio.channel( 'actions' ).request( 'add', actionModel );
 
-			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:actionCollection' );
+			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:collection' );
 			delete actionCollection.removedIDs[ actionModel.get( 'id' ) ];
 			
 			if ( ! undoAll ) {

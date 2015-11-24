@@ -15,7 +15,7 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 			this.collection.removedIDs = {};
 
 			// Respond to requests for data about fields and to update/change/delete fields from our collection.
-			nfRadio.channel( 'actions' ).reply( 'get:actionCollection', this.getCollection, this );
+			nfRadio.channel( 'actions' ).reply( 'get:collection', this.getCollection, this );
 			nfRadio.channel( 'actions' ).reply( 'get:collection', this.getCollection, this );
 			nfRadio.channel( 'actions' ).reply( 'get:action', this.getAction, this );
 			nfRadio.channel( 'actions' ).reply( 'get:tmpID', this.getTmpID, this );

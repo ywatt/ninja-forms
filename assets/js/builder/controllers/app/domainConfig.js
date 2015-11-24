@@ -90,7 +90,7 @@ define( [
 					},
 					
 					getMainContentView: function() {
-						var collection = nfRadio.channel( 'actions' ).request( 'get:actionCollection' );
+						var collection = nfRadio.channel( 'actions' ).request( 'get:collection' );
 						return new actionsMainContentView( { collection: collection } );
 					}
 				},

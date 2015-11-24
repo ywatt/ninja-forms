@@ -36,7 +36,7 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 			};
 
 			var data = {
-				collection: nfRadio.channel( 'actions' ).request( 'get:actionCollection' )
+				collection: nfRadio.channel( 'actions' ).request( 'get:collection' )
 			}
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', newModel, null, label, data );
