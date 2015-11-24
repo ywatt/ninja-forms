@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/actions/actionCollection', 'builder/models/actions/actionModel'], function( actionCollection, actionModel ) {
+define( ['models/actions/actionCollection', 'models/actions/actionModel'], function( actionCollection, actionModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Load our action collection from our localized form data

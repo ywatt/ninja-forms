@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/app/changeCollection', 'builder/models/app/changeModel'], function( changeCollection, ChangeModel ) {
+define( ['models/app/changeCollection', 'models/app/changeModel'], function( changeCollection, ChangeModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.collection = new changeCollection();

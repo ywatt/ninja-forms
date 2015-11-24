@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/fields/fieldCollection', 'builder/models/fields/fieldModel'], function( fieldCollection, fieldModel ) {
+define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function( fieldCollection, fieldModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Load our field collection from our localized form data

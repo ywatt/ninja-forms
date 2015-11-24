@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/actions/typeModel'], function( actionTypeModel ) {
+define( ['models/actions/typeModel'], function( actionTypeModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: actionTypeModel
 	} );

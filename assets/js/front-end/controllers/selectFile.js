@@ -1,4 +1,4 @@
-define(['front-end/models/fileCollection', 'front-end/views/fileCollection'], function( fileCollection, fileCollectionView ) {
+define(['models/fileCollection', 'views/fileCollection'], function( fileCollection, fileCollectionView ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'file' ), 'init:model', this.initFile );

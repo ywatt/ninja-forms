@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/fields/listOptionModel'], function( listOptionModel ) {
+define( ['models/fields/listOptionModel'], function( listOptionModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: listOptionModel,
 		comparator: 'order',

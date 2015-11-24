@@ -9,7 +9,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/app/drawer/itemSetting'], function( itemSettingView ) {
+define( ['views/app/drawer/itemSetting'], function( itemSettingView ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Respond to requests for field settings child views.

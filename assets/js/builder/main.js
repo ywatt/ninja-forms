@@ -1,11 +1,11 @@
 require.config( {
-	baseUrl: nfAdmin.requireBaseUrl
+	baseUrl: nfAdmin.requireBaseUrl + '/builder/'
 } );
 
 var nfRadio = Backbone.Radio;
 
 jQuery( document ).ready( function( $ ) {
-	require( ['builder/views/app/builder', 'builder/controllers/loadControllers'], function( BuilderView, LoadControllers ) {
+	require( ['views/app/builder', 'controllers/loadControllers'], function( BuilderView, LoadControllers ) {
 
 		var NinjaForms = Marionette.Application.extend( {
 

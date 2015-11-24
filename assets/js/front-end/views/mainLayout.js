@@ -1,4 +1,4 @@
-define( ['front-end/views/beforeForm', 'front-end/views/formLayout', 'front-end/views/afterForm'], function( beforeForm, formLayout, afterForm ) {
+define( ['views/beforeForm', 'views/formLayout', 'views/afterForm'], function( beforeForm, formLayout, afterForm ) {
 
 	var view = Marionette.LayoutView.extend({
 		template: "#nf-tmpl-layout",

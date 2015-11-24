@@ -1,4 +1,4 @@
-define(['front-end/controllers/submitButton'], function( submitButton ) {
+define(['controllers/submitButton'], function( submitButton ) {
 	var radioChannel = nfRadio.channel( 'submit' );
 	var controller = Marionette.Object.extend( {
 		initialize: function() {

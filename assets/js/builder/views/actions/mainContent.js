@@ -8,7 +8,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/actions/actionItem', 'builder/views/actions/mainContentEmpty'], function( actionView, emptyView ) {
+define( ['views/actions/actionItem', 'views/actions/mainContentEmpty'], function( actionView, emptyView ) {
 	var view = Marionette.CompositeView.extend({
 		template: '#nf-tmpl-action-table',
 		childView: actionView,

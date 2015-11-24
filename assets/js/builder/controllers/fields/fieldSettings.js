@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/app/settingCollection'], function( settingCollection ) {
+define( ['models/app/settingCollection'], function( settingCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.collection = new settingCollection( fieldSettings );

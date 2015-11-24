@@ -1,11 +1,11 @@
 require.config( {
-	baseUrl: nfFrontEnd.requireBaseUrl
+	baseUrl: nfFrontEnd.requireBaseUrl + '/front-end/'
 } );
 
 var nfRadio = Backbone.Radio;
 
 jQuery( document ).ready( function( $ ) {
-	require( ['front-end/models/formCollection', 'front-end/models/formModel', 'front-end/models/fieldCollection', 'front-end/controllers/loadControllers', 'front-end/views/mainLayout'], function( formCollection, FormModel, FieldCollection, LoadControllers, mainLayout ) {
+	require( ['models/formCollection', 'models/formModel', 'models/fieldCollection', 'controllers/loadControllers', 'views/mainLayout'], function( formCollection, FormModel, FieldCollection, LoadControllers, mainLayout ) {
 
 		var NinjaForms = Marionette.Application.extend({
 			forms: {},

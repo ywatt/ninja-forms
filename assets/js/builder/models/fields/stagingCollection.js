@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/fields/stagingModel'], function( stagingModel ) {
+define( ['models/fields/stagingModel'], function( stagingModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: stagingModel,
 		comparator: 'order'

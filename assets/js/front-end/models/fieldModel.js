@@ -1,4 +1,4 @@
-define( ['front-end/models/fieldErrorCollection'], function( fieldErrorCollection ) {
+define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 	var model = Backbone.Model.extend( {
 		defaults: {
 			placeholder: '',

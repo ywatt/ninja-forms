@@ -10,7 +10,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/fields/listOptionModel', 'builder/models/fields/listOptionCollection', 'builder/views/fields/drawer/typeSettingListComposite'], function( listOptionModel, listOptionCollection, listCompositeView ) {
+define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 'views/fields/drawer/typeSettingListComposite'], function( listOptionModel, listOptionCollection, listCompositeView ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Respond to requests for the childView for list type fields.

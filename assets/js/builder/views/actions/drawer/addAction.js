@@ -8,7 +8,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/actions/drawer/typeCollection'], function( actionTypeCollectionView ) {
+define( ['views/actions/drawer/typeCollection'], function( actionTypeCollectionView ) {
 
 	var view = Marionette.LayoutView.extend( {
 		template: '#nf-tmpl-drawer-content-add-action',

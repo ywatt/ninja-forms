@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/app/drawer/typeSettingFieldset','builder/models/app/settingCollection'], function( fieldsetView, settingCollection ) {
+define( ['views/app/drawer/typeSettingFieldset','models/app/settingCollection'], function( fieldsetView, settingCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			nfRadio.channel( 'fieldset' ).reply( 'get:settingChildView', this.getSettingChildView, this );

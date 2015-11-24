@@ -1,4 +1,4 @@
-define( ['builder/views/fields/fieldItem', 'builder/views/fields/mainContentEmpty'], function( mainContentFieldView, mainContentFieldEmptyView ) {
+define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( mainContentFieldView, mainContentFieldEmptyView ) {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
 		childView: mainContentFieldView,

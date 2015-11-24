@@ -1,4 +1,4 @@
-define( ['front-end/views/fieldErrorItem'], function( fieldErrorItem ) {
+define( ['views/fieldErrorItem'], function( fieldErrorItem ) {
 	var view = Marionette.CollectionView.extend({
 		tagName: "nf-errors",
 		childView: fieldErrorItem

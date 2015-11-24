@@ -1,4 +1,4 @@
-define( ['front-end/views/fieldItem'], function( fieldItem ) {
+define( ['views/fieldItem'], function( fieldItem ) {
 	var view = Marionette.CollectionView.extend({
 		tagName: 'nf-fields-wrap',
 		childView: fieldItem

@@ -1,4 +1,4 @@
-define( ['front-end/views/fieldErrorCollection'], function( fieldErrorCollection ) {
+define( ['views/fieldErrorCollection'], function( fieldErrorCollection ) {
 	var view = Marionette.ItemView.extend({
 		tagName: 'nf-section',
 
