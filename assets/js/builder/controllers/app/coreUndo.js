@@ -38,29 +38,7 @@ define( [], function() {
 		},
 
 		/**
-		 * Undo field sorting.
-		 * 
-		 * @since  3.0
-		 * @param  backbone.model 	change 	model of our change
-		 * @param  boolean 			undoAll are we in the middle of an undo all action?
-		 * @return void
-		 */
-		undoSortFields: function( change, undoAll ) {
-			var objModels = change.get( 'data' );
-
-			_.each( objModels, function( changeModel ) {
-				var before = changeModel.before;
-				var fieldModel = changeModel.model;
-				fieldModel.set( 'order', before );
-			} );
-
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
-			fieldCollection.sort();
-			this.maybeRemoveChange( change, undoAll );
-		},
-
-		/**
-		 * Undo adding a field.
+		 * Undo adding a field or an action.
 		 * Loops through our change collection and removes any change models based upon the one we're removing.
 		 * 
 		 * @since  3.0
@@ -90,7 +68,7 @@ define( [], function() {
 		},		
 
 		/**
-		 * Undo adding a field.
+		 * Undo adding a field or an action.
 		 * Loops through our change collection and removes any change models based upon the one we're removing.
 		 * 
 		 * @since  3.0
@@ -118,7 +96,7 @@ define( [], function() {
 		},
 
 		/**
-		 * Undo removing a field
+		 * Undo removing a field or an action.
 		 * 
 		 * @since  3.0
 		 * @param  backbone.model 	change 	model of our change
@@ -148,37 +126,27 @@ define( [], function() {
 			collection.trigger( 'reset', collection );
 
 			this.maybeRemoveChange( change, undoAll );
-		},	
+		},
 
 		/**
-		 * Undo removing an action
+		 * Undo field sorting.
 		 * 
 		 * @since  3.0
 		 * @param  backbone.model 	change 	model of our change
 		 * @param  boolean 			undoAll are we in the middle of an undo all action?
 		 * @return void
 		 */
-		undoRemoveAction: function( change, undoAll ) {
-			var actionModel = change.get( 'model' );
-			nfRadio.channel( 'actions' ).request( 'add', actionModel );
+		undoSortFields: function( change, undoAll ) {
+			var objModels = change.get( 'data' );
 
-			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:collection' );
-			delete actionCollection.removedIDs[ actionModel.get( 'id' ) ];
-			
-			if ( ! undoAll ) {
-				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
-				var results = changeCollection.where( { model: actionModel } );
+			_.each( objModels, function( changeModel ) {
+				var before = changeModel.before;
+				var fieldModel = changeModel.model;
+				fieldModel.set( 'order', before );
+			} );
 
-				_.each( results, function( model ) {
-					if ( model !== change ) {
-						model.set( 'disabled', false );
-					}
-				} );				
-			}
-
-			// Trigger a reset on our action collection so that our view re-renders
-			actionCollection.trigger( 'reset', actionCollection );
-
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			fieldCollection.sort();
 			this.maybeRemoveChange( change, undoAll );
 		},
 
