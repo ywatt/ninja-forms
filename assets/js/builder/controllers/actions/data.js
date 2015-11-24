@@ -68,24 +68,6 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 
 		},
 
-		/**
-		 * Compare our list of current actions with our new ids to see if any new IDs were removed.
-		 * 
-		 * @since  3.0
-		 * @return {[type]} [description]
-		 */
-		updateRemovedIDs: function() {
-			this.collection.removedIDs = {};
-			if ( 0 < this.collection.newIDs.length ) {
-				var that = this;
-				// Loop through our new actions and see if any have been removed.
-				_.each( this.collection.newIDs, function( id ) {
-					if ( ! that.collection.get( id ) ) {
-						that.collection.removedIDs[ id ] = id;
-					}
-				} );
-			}
-		},
 
 		/**
 		 * Return a new tmp id for our actions.
