@@ -280,6 +280,15 @@ All styles used for displaying table content
 .ninja-forms-app table .active .nf-item-controls .nf-item-editing { display: inline !important; }
 .ninja-forms-app table .active .nf-item-controls .nf-item-edit .dashicons { margin-right: 12px; }
 
+.ui-droppable { border: 4px solid #fff; }
+
+.nf-actions-empty thead { display: none; }
+.nf-actions-empty td { border: 4px solid #fff !important; display: block; padding: 40px 20% !important; white-space: normal !important; }
+.nf-actions-empty h3 { font-size: 30px; }
+.nf-actions-empty p { font-size: 18px; }
+
+.nf-actions-table td { cursor: pointer; }
+
 /* perfect-scrollbar v0.6.7 */
 .ps-container { -ms-touch-action: none; overflow: hidden !important; }
 
