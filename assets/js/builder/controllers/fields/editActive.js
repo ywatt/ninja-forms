@@ -22,7 +22,7 @@ define( [], function() {
 		 * @return void
 		 */
         clearEditActive: function() {
-            var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+            var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
             _.each( fieldCollection.models, function( field ) {
 				field.set( 'editActive', false );
             } );

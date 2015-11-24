@@ -37,15 +37,15 @@ define( [], function() {
 		},
 
 		clickEdit: function( e ) {
-			nfRadio.channel( this.currentDomain.get( 'id' ) ).trigger( 'click:edit', e, this.model );
+			nfRadio.channel( 'app' ).trigger( 'click:edit', e, this.model );
 		},
 
 		clickDelete: function( e ) {
-			nfRadio.channel( this.currentDomain.get( 'id' ) ).trigger( 'click:delete', e, this.model );
+			nfRadio.channel( 'app' ).trigger( 'click:delete', e, this.model );
 		},
 
 		clickDuplicateField: function( e ) {
-			nfRadio.channel( this.currentDomain.get( 'id' ) ).trigger( 'click:duplicate', e, this.model );
+			nfRadio.channel( 'app' ).trigger( 'click:duplicate', e, this.model );
 		}
 
 	});

@@ -140,7 +140,7 @@ define( [], function() {
 			// Get our tmp ID
 			var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpFieldID' );
 			// Add our field
-			var newModel = nfRadio.channel( 'fields' ).request( 'add:field',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'id' ) }, silent );
+			var newModel = nfRadio.channel( 'fields' ).request( 'add',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'id' ) }, silent );
 			// Add our field addition to our change log.
 			var label = {
 				object: 'Field',
@@ -150,7 +150,7 @@ define( [], function() {
 			};
 
 			var data = {
-				collection: nfRadio.channel( 'fields' ).request( 'get:fieldCollection' )
+				collection: nfRadio.channel( 'fields' ).request( 'get:collection' )
 			}
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', newModel, null, label, data );
@@ -271,7 +271,7 @@ define( [], function() {
 			// If we aren't dragging an item in from types or staging, update our change log.
 			if( ! jQuery( ui.item ).hasClass( 'nf-field-type-button' ) && ! jQuery( ui.item ).hasClass( 'nf-stage' ) ) { 
 
-				var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+				var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 				var dragFieldID = jQuery( ui.item ).prop( 'id' ).replace( 'field-', '' );
 				var dragModel = fieldCollection.get( dragFieldID );
 

@@ -33,6 +33,7 @@ define(
 		'builder/controllers/app/changeSettingDefault',
 		'builder/controllers/app/fieldset',
 		'builder/controllers/app/toggleSetting',
+		'builder/controllers/app/itemControls',
 		/*
 		 * Fields domain controllers
 		 */
@@ -45,7 +46,6 @@ define(
 		'builder/controllers/fields/filterTypes',
 		'builder/controllers/fields/sortable',
 		'builder/controllers/fields/data',
-		'builder/controllers/fields/itemControls',
 		'builder/controllers/fields/listField',
 		'builder/controllers/fields/editActive',
 		'builder/controllers/fields/fieldSettings',
@@ -56,7 +56,6 @@ define(
 		'builder/controllers/actions/types',
 		'builder/controllers/actions/data',
 		'builder/controllers/actions/actionSettings',
-		'builder/controllers/actions/itemControls',
 		'builder/controllers/actions/editActive',
 		'builder/controllers/actions/addActionTypes',
 		'builder/controllers/actions/typeDrag',
@@ -92,6 +91,7 @@ define(
 		ChangeSettingDefault,
 		Fieldset,
 		ToggleSetting,
+		ItemControls,
 		/*
 		 * Fields domain controllers
 		 */
@@ -104,7 +104,6 @@ define(
 		DrawerFilterFieldTypes,
 		MainContentFieldsSortable,
 		FieldData,
-		FieldItemControls,
 		ListField,
 		FieldsEditActive,
 		FieldSettings,
@@ -114,7 +113,6 @@ define(
 		ActionTypes,
 		ActionData,
 		ActionSettings,
-		ActionItemControls,
 		ActionEditActive,
 		ActionAddTypes,
 		ActionTypeDrag,
@@ -144,6 +142,7 @@ define(
 				new CleanState();
 				new CoreUndo();
 				new CloneModelDeep();
+				new ItemControls();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
@@ -162,7 +161,6 @@ define(
 				new StagedFieldsSortable();
 				new DrawerFilterFieldTypes();
 				new MainContentFieldsSortable();
-				new FieldItemControls();
 				new ChangeSettingDefault();
 				new ToggleSetting();
 				new DrawerSettingChildView();
@@ -174,7 +172,6 @@ define(
 				new ActionTypes();
 				new ActionData();
 				new ActionSettings();
-				new ActionItemControls();
 				new ActionEditActive();
 				new ActionAddTypes();
 				new ActionTypeDrag();
