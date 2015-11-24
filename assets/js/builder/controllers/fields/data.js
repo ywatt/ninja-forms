@@ -2,7 +2,7 @@
  * Handles interactions with our field collection.
  * 
  * @package Ninja Forms builder
- * @subpackage Fields - New Field Drawer
+ * @subpackage Fields
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
@@ -23,9 +23,6 @@ define( ['builder/models/fields/fieldCollection', 'builder/models/fields/fieldMo
 			nfRadio.channel( 'fields' ).reply( 'add', this.addField, this );
 			nfRadio.channel( 'fields' ).reply( 'delete', this.deleteField, this );
 			nfRadio.channel( 'fields' ).reply( 'sort:fields', this.sortFields, this );
-			
-			nfRadio.channel( 'fields' ).reply( 'update:removedIDs', this.updateRemovedIDs, this );
-			nfRadio.channel( 'fields' ).reply( 'update:newIDs', this.updateRemovedIDs, this );
 		},
 
 		getFieldCollection: function() {

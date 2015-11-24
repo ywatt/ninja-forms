@@ -2,31 +2,25 @@
  * Handles interactions with our actions collection.
  * 
  * @package Ninja Forms builder
- * @subpackage Fields - New Field Drawer
+ * @subpackage Actions
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
 define( ['builder/models/actions/actionCollection', 'builder/models/actions/actionModel'], function( actionCollection, actionModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			// Load our field collection from our localized form data
+			// Load our action collection from our localized form data
 			this.collection = new actionCollection( preloadedFormData.actions );
-			// Set our removedIDs to an empty object. This will be populated when a field is removed so that we can add it to our 'deleted_fields' object.
+			// Set our removedIDs to an empty object. This will be populated when a action is removed so that we can add it to our 'deleted_actions' object.
 			this.collection.removedIDs = {};
 
-			// Respond to requests for data about fields and to update/change/delete fields from our collection.
-			nfRadio.channel( 'actions' ).reply( 'get:collection', this.getCollection, this );
+			// Respond to requests for data about actions and to update/change/delete actions from our collection.
 			nfRadio.channel( 'actions' ).reply( 'get:collection', this.getCollection, this );
 			nfRadio.channel( 'actions' ).reply( 'get:action', this.getAction, this );
 			nfRadio.channel( 'actions' ).reply( 'get:tmpID', this.getTmpID, this );
 
 			nfRadio.channel( 'actions' ).reply( 'add', this.addAction, this );
-			nfRadio.channel( 'actions' ).reply( 'delete:action', this.deleteAction, this );
 			nfRadio.channel( 'actions' ).reply( 'delete', this.deleteAction, this );
-			// nfRadio.channel( 'fields' ).reply( 'sort:fields', this.sortFields, this );
-			
-			// nfRadio.channel( 'fields' ).reply( 'update:removedIDs', this.updateRemovedIDs, this );
-			// nfRadio.channel( 'fields' ).reply( 'update:newIDs', this.updateRemovedIDs, this );
 		},
 
 		getCollection: function() {
@@ -38,10 +32,10 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 		},
 
 		/**
-		 * Add a field to our collection. If silent is passed as true, no events will trigger.
+		 * Add a action to our collection. If silent is passed as true, no events will trigger.
 		 * 
 		 * @since 3.0
-		 * @param Object 	data 	field data to insert
+		 * @param Object 	data 	action data to insert
 		 * @param bool 		silent 	prevent events from firing as a result of adding	 	
 		 */
 		addAction: function( data, silent ) {
@@ -60,10 +54,10 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 		},
 
 		/**
-		 * Delete a field from our collection.
+		 * Delete a action from our collection.
 		 * 
 		 * @since  3.0
-		 * @param  backbone.model 	model 	field model to be deleted
+		 * @param  backbone.model 	model 	action model to be deleted
 		 * @return void
 		 */
 		deleteAction: function( model ) {
@@ -75,7 +69,7 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 		},
 
 		/**
-		 * Compare our list of current fields with our new ids to see if any new IDs were removed.
+		 * Compare our list of current actions with our new ids to see if any new IDs were removed.
 		 * 
 		 * @since  3.0
 		 * @return {[type]} [description]
@@ -84,7 +78,7 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 			this.collection.removedIDs = {};
 			if ( 0 < this.collection.newIDs.length ) {
 				var that = this;
-				// Loop through our new fields and see if any have been removed.
+				// Loop through our new actions and see if any have been removed.
 				_.each( this.collection.newIDs, function( id ) {
 					if ( ! that.collection.get( id ) ) {
 						that.collection.removedIDs[ id ] = id;
@@ -94,8 +88,8 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 		},
 
 		/**
-		 * Return a new tmp id for our fields.
-		 * Gets the field collection length, adds 1, then returns that prepended with 'tmp-'.
+		 * Return a new tmp id for our actions.
+		 * Gets the action collection length, adds 1, then returns that prepended with 'tmp-'.
 		 * 
 		 * @since  3.0
 		 * @return string
