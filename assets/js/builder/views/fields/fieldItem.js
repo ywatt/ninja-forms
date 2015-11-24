@@ -1,7 +1,11 @@
-define( [], function() {
-	var view = Marionette.ItemView.extend({
+define( ['builder/views/app/itemControls'], function( itemControlsView ) {
+	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-main-content-field',
+
+		regions: {
+			itemControls: '.nf-item-controls'
+		},
 
 		initialize: function() {
 			this.model.on( 'change', this.render, this );
@@ -15,31 +19,8 @@ define( [], function() {
 			this.$el = this.$el.children();
 			this.$el.unwrap();
 			this.setElement( this.$el );
-		},
 
-		events: {
-			'click .nf-edit-settings': 'clickEditField',
-			'click .nf-delete': 'clickDeleteField',
-			'click .nf-duplicate': 'clickDuplicateField',
-			'click': 'maybeClickEditField'
-		},
-
-		clickEditField: function( e ) {
-			nfRadio.channel( 'fields' ).trigger( 'click:editField', e, this.model );
-		},
-
-		clickDeleteField: function( e ) {
-			nfRadio.channel( 'fields' ).trigger( 'click:deleteField', e, this.model );
-		},
-
-		clickDuplicateField: function( e ) {
-			nfRadio.channel( 'fields' ).trigger( 'click:duplicateField', e, this.model );
-		},
-
-		maybeClickEditField: function( e ) {
-			if ( jQuery( e.target ).parent().hasClass( 'nf-fields-sortable' ) ) {
-				this.clickEditField();
-			}
+			this.itemControls.show( new itemControlsView( { model: this.model } ) );
 		},
 
 		templateHelpers: function () {
@@ -68,6 +49,15 @@ define( [], function() {
 			};
 		},
 
+		events: {
+			'click': 'maybeClickEdit'
+		},
+
+		maybeClickEdit: function( e ) {
+			if ( jQuery( e.target ).parent().hasClass( 'nf-fields-sortable' ) ) {
+				nfRadio.channel( 'app' ).trigger( 'click:edit', e, this.model );
+			}
+		}
 
 	});
 

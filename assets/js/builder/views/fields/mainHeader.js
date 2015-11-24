@@ -4,13 +4,13 @@ define( [], function() {
 		template: '#nf-tmpl-main-header-fields',
 
 		initialize: function() {
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			this.listenTo( fieldCollection, 'add', this.render );
 			this.listenTo( fieldCollection, 'remove', this.render );
 		},
 
 		onRender: function() {
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			if ( fieldCollection.models.length == 0 ) {
 				jQuery( this.el ).hide();
 			} else {

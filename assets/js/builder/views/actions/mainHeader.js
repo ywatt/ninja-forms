@@ -14,13 +14,13 @@ define( [], function() {
 		template: '#nf-tmpl-main-header-actions',
 
 		initialize: function() {
-			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:actionCollection' );
+			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:collection' );
 			this.listenTo( actionCollection, 'add', this.render );
 			this.listenTo( actionCollection, 'remove', this.render );
 		},
 
 		onRender: function() {
-			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:actionCollection' );
+			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:collection' );
 			if ( actionCollection.models.length == 0 ) {
 				jQuery( this.el ).hide();
 			} else {

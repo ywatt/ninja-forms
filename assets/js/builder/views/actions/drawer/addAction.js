@@ -38,16 +38,17 @@ define( ['builder/views/actions/drawer/typeCollection'], function( actionTypeCol
 			return jQuery( this.el ).parent();
 		},
 
-		filteractionTypes: function( filteredSectionCollection ) {
+		filteractionTypes: function( filteredInstalled, filteredAvailable ) {
 			this.primary.reset();
 			this.secondary.reset();
-			this.filteredSectionCollection = filteredSectionCollection;
-			this.primary.show( new actionTypeCollectionView( { collection: this.filteredSectionCollection } ) );
+			this.primary.show( new actionTypeCollectionView( { collection: filteredInstalled } ) );
+			this.secondary.show( new actionTypeCollectionView( { collection: filteredAvailable } ) );
+			
 		},
 
 		removeactionTypeFilter: function () {
-			this.primary.show( new actionTypeCollectionView( { collection: this.savedCollection } ) );
-			this.secondary.show( new actionTypeCollectionView( { collection: this.fieldTypeSectionCollection } ) );
+			this.primary.show( new actionTypeCollectionView( { collection: this.installedActions } ) );
+			this.secondary.show( new actionTypeCollectionView( { collection: this.availableActions } ) );
 		}
 
 	} );

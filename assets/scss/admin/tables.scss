@@ -22,6 +22,9 @@
         .deactivated {
             td {
                 color: #BCBDBF;
+                a {
+                    color: #ddd;
+                }
             }
         }
         input[type=checkbox].nf-toggle + label {
@@ -75,5 +78,30 @@
                 }
             }
         }
+    }
+}
+.ui-droppable {
+    border: 4px solid #fff;
+}
+.nf-actions-empty {
+    thead {
+        display: none;
+    }
+    td {
+        border: 4px solid #fff !important;
+        display: block;
+        padding: 40px 20% !important;
+        white-space: normal !important;
+    }
+    h3 {
+        font-size: 30px;
+    }
+    p {
+        font-size: 18px;
+    }
+}
+.nf-actions-table {
+    td {
+        cursor: pointer;
     }
 }

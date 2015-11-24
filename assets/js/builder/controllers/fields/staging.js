@@ -76,7 +76,7 @@ define( ['builder/models/fields/stagingCollection'], function( stagingCollection
 		beforeCloseDrawer: function() {
 			if ( 0 != this.collection.models.length ) { // Make sure that we have models
 				// Get our field collection.
-				var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+				var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 
 				var fields = [];
 				// Loop through our staging collection
@@ -86,7 +86,7 @@ define( ['builder/models/fields/stagingCollection'], function( stagingCollection
 					// Create an object that can be added as a model.
 					var tmpField = { id: tmpID, label: model.get( 'nicename' ), type: model.get( 'slug' ) };
 					// Add our new field.
-					var newModel = nfRadio.channel( 'fields' ).request( 'add:field',  tmpField, false );
+					var newModel = nfRadio.channel( 'fields' ).request( 'add',  tmpField, false );
 					// Add our field addition to our change log.
 					var label = {
 						object: 'Field',

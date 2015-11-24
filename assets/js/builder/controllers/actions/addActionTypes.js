@@ -27,7 +27,7 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 				type: type.get( 'id' ),
 				label: type.get( 'nicename' )
 			}
-			var newModel = nfRadio.channel( 'actions' ).request( 'add:action', data );
+			var newModel = nfRadio.channel( 'actions' ).request( 'add', data );
 			var label = {
 				object: 'Action',
 				label: newModel.get( 'label' ),
@@ -36,11 +36,11 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 			};
 
 			var data = {
-				collection: nfRadio.channel( 'actions' ).request( 'get:actionCollection' )
+				collection: nfRadio.channel( 'actions' ).request( 'get:collection' )
 			}
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', newModel, null, label, data );
-			nfRadio.channel( 'actions' ).trigger( 'click:edit', {}, newModel );
+			nfRadio.channel( 'app' ).trigger( 'click:edit', {}, newModel );
 		}
 	});
 

@@ -10,6 +10,7 @@ define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
 			objectType: 'Action',
+			objectDomain: 'actions',
 			editActive: false
 		},
 

@@ -2,7 +2,7 @@
  * Handles interactions with our field collection.
  * 
  * @package Ninja Forms builder
- * @subpackage Fields - New Field Drawer
+ * @subpackage Fields
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
@@ -15,16 +15,14 @@ define( ['builder/models/fields/fieldCollection', 'builder/models/fields/fieldMo
 			this.collection.removedIDs = {};
 
 			// Respond to requests for data about fields and to update/change/delete fields from our collection.
-			nfRadio.channel( 'fields' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
+			nfRadio.channel( 'fields' ).reply( 'get:collection', this.getFieldCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:field', this.getField, this );
 			nfRadio.channel( 'fields' ).reply( 'get:tmpFieldID', this.getTmpFieldID, this );
+			nfRadio.channel( 'fields' ).reply( 'get:tmpID', this.getTmpFieldID, this );
 
-			nfRadio.channel( 'fields' ).reply( 'add:field', this.addField, this );
-			nfRadio.channel( 'fields' ).reply( 'delete:field', this.deleteField, this );
+			nfRadio.channel( 'fields' ).reply( 'add', this.addField, this );
+			nfRadio.channel( 'fields' ).reply( 'delete', this.deleteField, this );
 			nfRadio.channel( 'fields' ).reply( 'sort:fields', this.sortFields, this );
-			
-			nfRadio.channel( 'fields' ).reply( 'update:removedIDs', this.updateRemovedIDs, this );
-			nfRadio.channel( 'fields' ).reply( 'update:newIDs', this.updateRemovedIDs, this );
 		},
 
 		getFieldCollection: function() {
@@ -120,25 +118,6 @@ define( ['builder/models/fields/fieldCollection', 'builder/models/fields/fieldMo
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 			nfRadio.channel( 'app' ).request( 'update:db' );
 
-		},
-
-		/**
-		 * Compare our list of current fields with our new ids to see if any new IDs were removed.
-		 * 
-		 * @since  3.0
-		 * @return {[type]} [description]
-		 */
-		updateRemovedIDs: function() {
-			this.collection.removedIDs = {};
-			if ( 0 < this.collection.newIDs.length ) {
-				var that = this;
-				// Loop through our new fields and see if any have been removed.
-				_.each( this.collection.newIDs, function( id ) {
-					if ( ! that.collection.get( id ) ) {
-						that.collection.removedIDs[ id ] = id;
-					}
-				} );
-			}
 		},
 
 		/**

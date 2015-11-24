@@ -57,7 +57,7 @@ define( [], function() {
 		 */
 		maybeChangeFilter: function( e ) {
 			if ( 13 == e.keyCode ) {
-				e.addField = true;
+				e.addObject = true;
 				this.changeFilter( e );			
 			}
 		},
