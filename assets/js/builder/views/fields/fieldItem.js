@@ -55,7 +55,7 @@ define( ['builder/views/app/itemControls'], function( itemControlsView ) {
 
 		maybeClickEdit: function( e ) {
 			if ( jQuery( e.target ).parent().hasClass( 'nf-fields-sortable' ) ) {
-				nfRadio.channel( 'fields' ).trigger( 'click:edit', e, this.model );
+				nfRadio.channel( 'app' ).trigger( 'click:edit', e, this.model );
 			}
 		}
 

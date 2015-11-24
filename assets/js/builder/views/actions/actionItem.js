@@ -48,7 +48,7 @@ define( ['builder/views/app/itemControls'], function( itemControlsView ) {
 
 		maybeClickEdit: function( e ) {
 			if ( 'TR' == jQuery( e.target ).parent().prop( 'tagName' ) ) {
-				nfRadio.channel( 'actions' ).trigger( 'click:edit', e, this.model );
+				nfRadio.channel( 'app' ).trigger( 'click:edit', e, this.model );
 			}
 		},
 
