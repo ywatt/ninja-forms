@@ -3,7 +3,6 @@ require.config( {
 } );
 
 var nfRadio = Backbone.Radio;
-var nfUndoManager = new Backbone.UndoManager();
 
 jQuery( document ).ready( function( $ ) {
 	require( ['builder/views/app/builder', 'builder/controllers/loadControllers'], function( BuilderView, LoadControllers ) {
