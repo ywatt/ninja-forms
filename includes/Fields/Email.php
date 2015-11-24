@@ -15,6 +15,8 @@ class NF_Fields_Email extends NF_Abstracts_UserInfo
 
     protected $_templates = 'email';
 
+    protected  $_test_value = 'foo@bar.dev';
+
     public function __construct()
     {
         parent::__construct();
