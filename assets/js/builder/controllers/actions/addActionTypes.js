@@ -40,7 +40,7 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 			}
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', newModel, null, label, data );
-			nfRadio.channel( 'actions' ).trigger( 'click:edit', {}, newModel );
+			nfRadio.channel( 'app' ).trigger( 'click:edit', {}, newModel );
 		}
 	});
 
