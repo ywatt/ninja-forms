@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/app/settingModel'], function( settingModel ) {
+define( ['models/app/settingModel'], function( settingModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: settingModel
 	} );

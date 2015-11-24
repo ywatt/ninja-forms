@@ -1,4 +1,4 @@
-define( ['front-end/models/fieldErrorModel'], function( errorModel ) {
+define( ['models/fieldErrorModel'], function( errorModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: errorModel
 	} );

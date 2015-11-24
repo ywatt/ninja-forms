@@ -1,4 +1,4 @@
-define( ['builder/views/fields/drawer/typeSection'], function( fieldTypeSectionView ) {
+define( ['views/fields/drawer/typeSection'], function( fieldTypeSectionView ) {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
 		childView: fieldTypeSectionView,

@@ -9,7 +9,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/actions/actionModel'], function( actionModel ) {
+define( ['models/actions/actionModel'], function( actionModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: actionModel,
 		comparator: 'order',

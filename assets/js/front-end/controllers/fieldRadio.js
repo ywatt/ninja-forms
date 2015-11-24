@@ -1,4 +1,4 @@
-define(['front-end/models/fieldModel'], function( fieldModel ) {
+define(['models/fieldModel'], function( fieldModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'listradio' ), 'change:modelValue', this.changeModelValue );

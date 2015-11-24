@@ -7,7 +7,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/app/formModel'], function( formModel) {
+define( ['models/app/formModel'], function( formModel) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Instantiate Form Model

@@ -8,7 +8,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/app/itemControls'], function( itemControlsView ) {
+define( ['views/app/itemControls'], function( itemControlsView ) {
 	var view = Marionette.LayoutView.extend({
 		tagName: 'tr',
 		template: '#nf-tmpl-action-item',

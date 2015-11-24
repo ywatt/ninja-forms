@@ -1,4 +1,4 @@
-define( ['builder/views/app/drawer/itemSettingGroup'], function( itemSettingGroupView ) {
+define( ['views/app/drawer/itemSettingGroup'], function( itemSettingGroupView ) {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
 		childView: itemSettingGroupView,

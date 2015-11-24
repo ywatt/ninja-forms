@@ -10,7 +10,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/app/header', 'builder/views/app/subHeader'], function( appHeaderView, appSubHeaderView ) {
+define( ['views/app/header', 'views/app/subHeader'], function( appHeaderView, appSubHeaderView ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: "div",

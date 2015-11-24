@@ -12,7 +12,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/app/builderHeader', 'builder/views/app/main', 'builder/views/app/drawer/mobileMenu', 'builder/views/app/drawer'], function( headerView, mainView, menuDrawerView, drawerView ) {
+define( ['views/app/builderHeader', 'views/app/main', 'views/app/drawer/mobileMenu', 'views/app/drawer'], function( headerView, mainView, menuDrawerView, drawerView ) {
 	var view = Marionette.LayoutView.extend( {
 		template: "#nf-tmpl-builder",
 		el: '#nf-builder',

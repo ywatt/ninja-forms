@@ -1,4 +1,4 @@
-define( ['builder/views/app/drawer/itemSetting'], function( itemSettingView ) {
+define( ['views/app/drawer/itemSetting'], function( itemSettingView ) {
 	var view = Marionette.CompositeView.extend( {
 		template: '#nf-tmpl-edit-setting-wrap',
 		childView: itemSettingView,

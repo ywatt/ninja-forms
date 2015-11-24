@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/app/menuItem'], function( appMenuItemView ) {
+define( ['views/app/menuItem'], function( appMenuItemView ) {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
 		childView: appMenuItemView,

@@ -11,9 +11,9 @@
  * @since 3.0
  */
 define( [
-	'builder/models/app/typeCollection',
-	'builder/models/app/settingCollection',
-	'builder/models/app/settingGroupCollection',
+	'models/app/typeCollection',
+	'models/app/settingCollection',
+	'models/app/settingGroupCollection',
 	], function(
 	typeCollection,
 	settingCollection,

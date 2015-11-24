@@ -1,4 +1,4 @@
-define( ['front-end/views/fieldCollection'], function( fieldCollectionView ) {
+define( ['views/fieldCollection'], function( fieldCollectionView ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: "nf-section",

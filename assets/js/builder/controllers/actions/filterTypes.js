@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/actions/typeCollection'], function( typeCollection ) {
+define( ['models/actions/typeCollection'], function( typeCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Listen to our change filter event.

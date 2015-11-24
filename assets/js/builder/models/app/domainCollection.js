@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/app/domainModel'], function( domainModel ) {
+define( ['models/app/domainModel'], function( domainModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: domainModel
 	} );

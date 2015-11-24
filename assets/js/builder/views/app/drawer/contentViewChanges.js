@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/app/drawer/contentViewChangesItem'], function( viewChangesItem ) {
+define( ['views/app/drawer/contentViewChangesItem'], function( viewChangesItem ) {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'table',
         className: 'nf-changes',

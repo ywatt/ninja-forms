@@ -1,4 +1,4 @@
-define(['front-end/models/fieldErrorModel'], function( fieldErrorModel ) {
+define(['models/fieldErrorModel'], function( fieldErrorModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			nfRadio.channel( 'fields' ).reply( 'add:error', this.addError );

@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/views/app/menu', 'builder/views/app/menuButtons'], function( appMenuCollectionView, appMenuButtonsView ) {
+define( ['views/app/menu', 'views/app/menuButtons'], function( appMenuCollectionView, appMenuButtonsView ) {
 	var view = Marionette.LayoutView.extend( {
 		tagName: 'div',
 		template: '#nf-tmpl-app-header',
