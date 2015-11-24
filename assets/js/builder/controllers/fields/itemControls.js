@@ -10,9 +10,9 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Listen for clicks to edit, delete, duplicate fields.
-			this.listenTo( nfRadio.channel( 'fields' ), 'click:editField', this.clickEdit );
-			this.listenTo( nfRadio.channel( 'fields' ), 'click:deleteField', this.clickDelete );
-			this.listenTo( nfRadio.channel( 'fields' ), 'click:duplicateField', this.clickDuplicate );
+			this.listenTo( nfRadio.channel( 'fields' ), 'click:edit', this.clickEdit );
+			this.listenTo( nfRadio.channel( 'fields' ), 'click:delete', this.clickDelete );
+			this.listenTo( nfRadio.channel( 'fields' ), 'click:duplicate', this.clickDuplicate );
 
 			// Listen for our drawer close and remove our active edit state
 		},

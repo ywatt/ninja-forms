@@ -8,11 +8,15 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( [], function() {
-	var view = Marionette.ItemView.extend({
+define( ['builder/views/app/itemControls'], function( itemControlsView ) {
+	var view = Marionette.LayoutView.extend({
 		tagName: 'tr',
 		template: '#nf-tmpl-action-item',
 		
+		regions: {
+			itemControls: '.nf-item-controls'
+		},
+
 		initialize: function() {
 			this.model.on( 'change', this.render, this );
 		},
@@ -33,31 +37,18 @@ define( [], function() {
 			} else {
 				jQuery( this.el ).removeClass( 'deactivated' );
 			}
+
+			this.itemControls.show( new itemControlsView( { model: this.model } ) );
 		},
 
 		events: {
-			'click .nf-edit-settings': 'clickEdit',
-			'click .nf-delete': 'clickDelete',
-			'click .nf-duplicate': 'clickDuplicate',
-			'click': 'maybeClickEdit',
-			'change input': 'changeToggle'
-		},
-
-		clickEdit: function( e ) {
-			nfRadio.channel( 'actions' ).trigger( 'click:edit', e, this.model );
-		},
-
-		clickDelete: function( e ) {
-			nfRadio.channel( 'actions' ).trigger( 'click:delete', e, this.model );
-		},
-
-		clickDuplicate: function( e ) {
-			nfRadio.channel( 'actions' ).trigger( 'click:duplicate', e, this.model );
+			'change input': 'changeToggle',
+			'click': 'maybeClickEdit'
 		},
 
 		maybeClickEdit: function( e ) {
 			if ( 'TR' == jQuery( e.target ).parent().prop( 'tagName' ) ) {
-				this.clickEdit();
+				nfRadio.channel( 'actions' ).trigger( 'click:edit', e, this.model );
 			}
 		},
 
