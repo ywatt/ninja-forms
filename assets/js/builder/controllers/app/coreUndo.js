@@ -160,7 +160,7 @@ define( [], function() {
 		 */
 		undoRemoveAction: function( change, undoAll ) {
 			var actionModel = change.get( 'model' );
-			nfRadio.channel( 'actions' ).request( 'add:action', actionModel );
+			nfRadio.channel( 'actions' ).request( 'add', actionModel );
 
 			var actionCollection = nfRadio.channel( 'actions' ).request( 'get:actionCollection' );
 			delete actionCollection.removedIDs[ actionModel.get( 'id' ) ];

@@ -63,9 +63,6 @@ define( [
 			nfRadio.channel( 'actions' ).reply( 'get:type', this.getType, this );
 			nfRadio.channel( 'actions' ).reply( 'get:installedActions', this.getInstalledActions, this );
 			nfRadio.channel( 'actions' ).reply( 'get:availableActions', this.getAvailableActions, this );
-			// nfRadio.channel( 'actions' ).reply( 'get:typeSections', this.getTypeSections, this );
-			// Listen to clicks on field types
-			// this.listenTo( nfRadio.channel( 'drawer' ), 'click:actionType', this.addStagedField );
 		},
 
 		/**

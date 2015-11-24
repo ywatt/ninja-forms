@@ -20,7 +20,6 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 			nfRadio.channel( 'actions' ).reply( 'get:action', this.getAction, this );
 			nfRadio.channel( 'actions' ).reply( 'get:tmpID', this.getTmpID, this );
 
-			nfRadio.channel( 'actions' ).reply( 'add:action', this.addAction, this );
 			nfRadio.channel( 'actions' ).reply( 'add', this.addAction, this );
 			nfRadio.channel( 'actions' ).reply( 'delete:action', this.deleteAction, this );
 			nfRadio.channel( 'actions' ).reply( 'delete', this.deleteAction, this );

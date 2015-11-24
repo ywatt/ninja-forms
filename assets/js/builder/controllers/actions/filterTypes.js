@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['builder/models/actions/typeSectionCollection'], function( actionTypeSectionCollection ) {
+define( ['builder/models/actions/typeCollection'], function( typeCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Listen to our change filter event.
@@ -24,32 +24,41 @@ define( ['builder/models/actions/typeSectionCollection'], function( actionTypeSe
 		 * @return void
 		 */
 		filterActionTypes: function( search, e ) {
+
 			// Make sure that we aren't dealing with an empty string.
 			if ( '' != jQuery.trim( search ) ) {
-        		var filtered = [];
+
+        		var filteredInstalled = [];
         		/**
         		 * Call the function that actually filters our collection,
-        		 * and then loop through our collection, adding each model to our filtered array.
+        		 * and then loop through our collection, adding each model to our filteredInstalled array.
         		 */
-        		_.each( this.filterCollection( search ), function( model ) {
-        			filtered.push( model.get( 'id' ) );
+				var installedActions = nfRadio.channel( 'actions' ).request( 'get:installedActions' );
+        		_.each( this.filterCollection( search, installedActions ), function( model ) {
+        			filteredInstalled.push( model );
+        		} );
+
+        		var filteredAvailable = [];
+        		var availableActions = nfRadio.channel( 'actions' ).request( 'get:availableActions' );
+        		_.each( this.filterCollection( search, availableActions ), function( model ) {
+        			filteredAvailable.push( model );
         		} );
 
         		// Create a new Action Type Section collection with the filtered array.
-        		var filteredSectionCollection = new actionTypeSectionCollection( [
-				{ 
-					id: 'filtered',
-					nicename: 'Filtered Actions',
-					actionTypes: filtered
-				}
-				] );
+        		var newInstalled = new typeCollection( filteredInstalled );
+        		newInstalled.slug = 'installed';
+        		newInstalled.nicename = 'Installed';
+
+        		var newAvailable = new typeCollection( filteredAvailable );
+        		newAvailable.slug = 'available';
+        		newAvailable.nicename = 'Available';
 
         		// Request that our action types filter be applied, passing the collection we created above.
-        		nfRadio.channel( 'drawer' ).trigger( 'filter:actionTypes', filteredSectionCollection );
+        		nfRadio.channel( 'drawer' ).trigger( 'filter:actionTypes', newInstalled, newAvailable );
         		// If we've pressed the 'enter' key, add the action to staging and clear the filter.
-        		if ( e.addAction ) {
-        			if ( 0 < filtered.length ) {
-        				nfRadio.channel( 'actions' ).request( 'add:stagedAction', filtered[0] );
+        		if ( e.addObject ) {
+        			if ( 0 < newInstalled.length ) {
+        				nfRadio.channel( 'actions' ).request( 'add:actionType', newInstalled.models[0] );
         				nfRadio.channel( 'drawer' ).request( 'clear:filter' );
         			}
         		}
@@ -66,10 +75,8 @@ define( ['builder/models/actions/typeSectionCollection'], function( actionTypeSe
          * @param  string	 search 	string being searched for
          * @return backbone.collection
          */
-        filterCollection: function( search ) {
+        filterCollection: function( search, collection ) {
         	search = search.toLowerCase();
-        	// Get our list of action types
-        	var collection = nfRadio.channel( 'actions' ).request( 'get:typeCollection' );
         	/*
         	 * Backbone collections have a 'filter' method that loops through every model,
         	 * waiting for you to return true or false. If you return true, the model is kept.
@@ -109,6 +116,7 @@ define( ['builder/models/actions/typeSectionCollection'], function( actionTypeSe
 
 				return found;
 			} );
+
 			// Return our filtered collection.
 			return filtered;
         }

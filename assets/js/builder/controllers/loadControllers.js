@@ -60,6 +60,7 @@ define(
 		'builder/controllers/actions/addActionTypes',
 		'builder/controllers/actions/typeDrag',
 		'builder/controllers/actions/droppable',
+		'builder/controllers/actions/filterTypes',
 
 		/*
 		 * TODO: Settings domain controllers
@@ -116,7 +117,8 @@ define(
 		ActionEditActive,
 		ActionAddTypes,
 		ActionTypeDrag,
-		ActionDroppable
+		ActionDroppable,
+		ActionFilterTypes
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -176,6 +178,7 @@ define(
 				new ActionAddTypes();
 				new ActionTypeDrag();
 				new ActionDroppable();
+				new ActionFilterTypes();
 				/*
 				 * TODO: Settings domain controllers
 				 */

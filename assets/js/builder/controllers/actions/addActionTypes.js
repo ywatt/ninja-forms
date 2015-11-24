@@ -27,7 +27,7 @@ define( ['builder/models/actions/actionCollection', 'builder/models/actions/acti
 				type: type.get( 'id' ),
 				label: type.get( 'nicename' )
 			}
-			var newModel = nfRadio.channel( 'actions' ).request( 'add:action', data );
+			var newModel = nfRadio.channel( 'actions' ).request( 'add', data );
 			var label = {
 				object: 'Action',
 				label: newModel.get( 'label' ),
