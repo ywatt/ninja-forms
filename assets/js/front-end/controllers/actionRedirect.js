@@ -6,7 +6,7 @@ define([], function() {
 		},
 
 		actionRedirect: function( response ) {
-			if ( _.size( response.errors ) == 0 ) {
+			if ( _.size( response.errors ) == 0 && 'undefined' != typeof response.data.actions ) {
 				if ( 'undefined' != typeof response.data.actions.redirect && '' != response.data.actions.redirect ) {
 					window.location = response.data.actions.redirect;
 				}
