@@ -71,11 +71,6 @@ define( [
 						return new fieldsMainContentFieldCollectionView( { collection: collection } );
 					}
 				},
-
-				/**
-				 * Commented out for Alpha 1 Hartnell
-				 */
-				/*
 				{
 					id: 'actions',
 					nicename: 'Emails & Actions',
@@ -99,6 +94,10 @@ define( [
 						return new actionsMainContentView( { collection: collection } );
 					}
 				},
+				/**
+				 * Commented out for Alpha 3 Pertwee
+				 */
+				/*
 				{
 					id: 'settings',
 					nicename: 'Settings',
