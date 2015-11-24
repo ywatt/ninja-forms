@@ -103,7 +103,7 @@
     &.available {
         .nf-item {
             &.nf-has-img {
-                filter: grayscale(100%);
+                filter: grayscale(100%) !important;
                 opacity: 0.6;
                 &:hover {
                     filter: grayscale(0);
