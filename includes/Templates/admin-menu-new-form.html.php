@@ -93,12 +93,14 @@
 
 <script id="nf-tmpl-main-content-field" type="text/template">
     <div id="<%= getFieldID() %>" class="<%= renderClasses() %>"> <%= label %> <%= renderRequired() %>
-        <ul class="nf-item-controls">
-            <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editField"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
-            <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-            <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-        </ul>
+        <ul class="nf-item-controls"></ul>
     </div>
+</script>
+
+<script id="nf-tmpl-item-controls" type="text/template">
+    <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing field</span></a></li>
+    <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
+    <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
 </script>
 
 <script id="nf-tmpl-action-table" type="text/template">
@@ -121,11 +123,7 @@
     <td><%= label %></td>
     <td><%= renderTypeNicename() %></td>
     <td>
-        <ul class="nf-item-controls">
-            <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic" data-drawerid="editAction"></span><span class="nf-tooltip">Edit</span><span class="nf-item-editing">Editing action</span></a></li>
-            <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span><span class="nf-tooltip">Duplicate</span></a></li>
-            <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span><span class="nf-tooltip">Delete</span></a></li>
-        </ul>
+        <ul class="nf-item-controls"></ul>
     </td>
 </script>
 
