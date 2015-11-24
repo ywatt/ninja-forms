@@ -412,23 +412,19 @@ function nf_alpha_release_admin_notice()
             <li><strong>DO</strong> install this on a clean WordPress install; by this we mean a completely new WordPress installation to which Ninja Forms 2.9.x or earlier has never been installed.</li>
             <li>There will be database conflicts if you install this alongside 2.9.x, even if 2.9.x has been deactivated or deleted.</li>
             <li>This ALPHA is best viewed at <strong>1039px wide or greater.</strong> This is because we have not fully implented the responsive UI thus far.</li>
-            <li>This week’s additions are features completely novel to the WordPress form building space: the ability to view and undo bulk or line-item changes made to the form!
+            <li>Here some things we would like you to test and offer feedback on this week:
                 <ul>
-                    <li>After making any number of changes to any of the default forms, look for a history icon to the left of the Publish button</li>
-                    <li>Click that icon and a drawer will slide out from the right</li>
-                    <li>Manipulate any of the changes you made to the form by undoing item by item, all changes in bulk, or even restoring the form to its last saved state</li>
-                    <li>If updating from a previous, please be sure to Restore Mock Data under Forms in the WordPress Dashboard before you begin or you will not see these changes!</li>
+                    <li>Add, duplicate, delete, deactivate/activate, and modify Emails & Actions.</li>
+                    <li>Make sure changes are properly reflected in the Undo Manager and then when undone, you changes have actually been reverted to their originals.</li>
+                    <li>Test the Emails & Actions while previewing your forms. Make sure they respond in the way you expect.</li>
                 </ul>
-            <li> what we would love to know is...
+            <li>One more things to keep in mind...
                 <ul>
-                    <li>What is your overall impression of the Undo Manager functionality? Does this upgrade your workflow?</li>
-                    <li>Are you happy with having this functionality over a ‘cancel’ button?</li>
-                    <li>After stress testing, does anything break?</li>
-                    <li>Is there anything specifically that doesn’t work/potential bugs you’ve noticed with line item or bulk undoing?</li>
+                    <li>The items listed under avaiable actions is not currently usable, but is there to reflect how we will display additonal actions users can obtain.</li>
                 </ul>
             </li>
         </ul>
-        <p>Please submit all <strong>feedback</strong> to respective blog post on <a href="http://developer.ninjaforms.com/tag/alpha/">developer.ninjaforms.com</a></p>
+        <p>Please submit all <strong>feedback</strong> on our <a href="http://developer.ninjaforms.com/slack/">Slack group</a></p>
     </div>
     <?php
 }
