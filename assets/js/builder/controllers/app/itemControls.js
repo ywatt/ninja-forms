@@ -10,9 +10,9 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Listen for clicks to edit, delete, duplicate actions.
-			this.listenTo( nfRadio.channel( 'actions' ), 'click:edit', this.clickEdit );
-			this.listenTo( nfRadio.channel( 'actions' ), 'click:delete', this.clickDelete );
-			this.listenTo( nfRadio.channel( 'actions' ), 'click:duplicate', this.clickDuplicate );
+			this.listenTo( nfRadio.channel( 'app' ), 'click:edit', this.clickEdit );
+			this.listenTo( nfRadio.channel( 'app' ), 'click:delete', this.clickDelete );
+			this.listenTo( nfRadio.channel( 'app' ), 'click:duplicate', this.clickDuplicate );
 
 			// Listen for our drawer close and remove our active edit state
 		},
@@ -26,9 +26,11 @@ define( [], function() {
 		 * @return void
 		 */
 		clickEdit: function( e, model ) {
-			nfRadio.channel( 'actions' ).request( 'clear:editActive' );
+			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
+			var currentDomainID = currentDomain.get( 'id' );
+			nfRadio.channel( currentDomainID ).request( 'clear:editActive' );
 			model.set( 'editActive', true );
-			var type = nfRadio.channel( 'actions' ).request( 'get:type' , model.get( 'type' ) );
+			var type = nfRadio.channel( currentDomainID ).request( 'get:type' , model.get( 'type' ) );
 			nfRadio.channel( 'app' ).request( 'open:drawer', 'editSettings', { model: model, groupCollection: type.get( 'settingGroups' ) } );
 		},
 
@@ -48,13 +50,14 @@ define( [], function() {
 				object: dataModel.get( 'objectType' ),
 				label: dataModel.get( 'label' ),
 				change: 'Removed',
-				dashicon: 'dismiss',
-				data: {
-					collection: dataModel.collection
-				}
+				dashicon: 'dismiss'
 			};
 
-			nfRadio.channel( 'changes' ).request( 'register:change', 'removeAction', newModel, null, label );
+			var data = {
+				collection: dataModel.collection
+			};
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'removeObject', newModel, null, label, data );
 			
 			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
 			var results = changeCollection.where( { model: dataModel } );
@@ -71,7 +74,9 @@ define( [], function() {
 				changeModel.set( 'disabled', true );
 			} );
 
-			nfRadio.channel( 'actions' ).request( 'delete:action', dataModel );
+			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
+			var currentDomainID = currentDomain.get( 'id' );
+			nfRadio.channel( currentDomainID ).request( 'delete', dataModel );
 		},
 
 		/**
@@ -84,14 +89,16 @@ define( [], function() {
 		 */
 		clickDuplicate: function( e, model ) {
 			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', model );
+			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
+			var currentDomainID = currentDomain.get( 'id' );
 
 			// Change our label.
 			newModel.set( 'label', newModel.get( 'label' ) + ' Copy' );
 			// Update our ID to the new tmp id.
-			var tmpID = nfRadio.channel( 'actions' ).request( 'get:tmpID' );
+			var tmpID = nfRadio.channel( currentDomainID ).request( 'get:tmpID' );
 			newModel.set( 'id', tmpID );
 			// Add new model.
-			nfRadio.channel( 'actions' ).request( 'add:action', newModel );
+			nfRadio.channel( currentDomainID ).request( 'add', newModel );
 			// Add our action addition to our change log.
 			var label = {
 				object: model.get( 'objectType' ),
@@ -101,7 +108,7 @@ define( [], function() {
 			};
 
 			var data = {
-				collection: nfRadio.channel( 'actions' ).request( 'get:actionCollection' )
+				collection: nfRadio.channel( currentDomainID ).request( 'get:collection' )
 			}
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateObject', newModel, null, label, data );

@@ -67,7 +67,7 @@ define( [
 					},
 
 					getMainContentView: function( collection ) {
-						var collection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+						var collection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 						return new fieldsMainContentFieldCollectionView( { collection: collection } );
 					}
 				},

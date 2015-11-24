@@ -15,12 +15,13 @@ define( ['builder/models/fields/fieldCollection', 'builder/models/fields/fieldMo
 			this.collection.removedIDs = {};
 
 			// Respond to requests for data about fields and to update/change/delete fields from our collection.
-			nfRadio.channel( 'fields' ).reply( 'get:fieldCollection', this.getFieldCollection, this );
+			nfRadio.channel( 'fields' ).reply( 'get:collection', this.getFieldCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:field', this.getField, this );
 			nfRadio.channel( 'fields' ).reply( 'get:tmpFieldID', this.getTmpFieldID, this );
+			nfRadio.channel( 'fields' ).reply( 'get:tmpID', this.getTmpFieldID, this );
 
-			nfRadio.channel( 'fields' ).reply( 'add:field', this.addField, this );
-			nfRadio.channel( 'fields' ).reply( 'delete:field', this.deleteField, this );
+			nfRadio.channel( 'fields' ).reply( 'add', this.addField, this );
+			nfRadio.channel( 'fields' ).reply( 'delete', this.deleteField, this );
 			nfRadio.channel( 'fields' ).reply( 'sort:fields', this.sortFields, this );
 			
 			nfRadio.channel( 'fields' ).reply( 'update:removedIDs', this.updateRemovedIDs, this );

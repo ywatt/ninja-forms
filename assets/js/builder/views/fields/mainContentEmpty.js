@@ -37,7 +37,7 @@ define( [], function() {
 				drop: function( e, ui ) {
 					ui.item = ui.draggable;
 					nfRadio.channel( 'app' ).request( 'receive:fieldsSortable', ui );
-					var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:fieldCollection' );
+					var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 					fieldCollection.trigger( 'reset', fieldCollection );
 				},
 			} );
