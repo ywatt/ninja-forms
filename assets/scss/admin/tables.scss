@@ -22,6 +22,9 @@
         .deactivated {
             td {
                 color: #BCBDBF;
+                a {
+                    color: #ddd;
+                }
             }
         }
         input[type=checkbox].nf-toggle + label {

@@ -272,6 +272,7 @@ All styles used for displaying table content
 .ninja-forms-app table td { color: #676F75; white-space: nowrap; }
 .ninja-forms-app table td:nth-child(2) { width: 90%; }
 .ninja-forms-app table .deactivated td { color: #BCBDBF; }
+.ninja-forms-app table .deactivated td a { color: #ddd; }
 .ninja-forms-app table input[type=checkbox].nf-toggle + label { margin: 2px 0 0; }
 .ninja-forms-app table .active td { color: #84CC1E; font-weight: bold; }
 .ninja-forms-app table .active .nf-item-controls { font-weight: normal; float: right; }
