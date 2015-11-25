@@ -10,9 +10,9 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
         'name' => 'require-user-logged-in-to-view-form',
         'type' => 'toggle',
         'label' => __( 'Require user to be logged in to view form?', 'ninja-forms' ),
-        'width' => 'full',
+        'width' => 'one-half',
         'group' => 'primary',
-        'value' => 'true'
+        'value' => TRUE
     ),
 
     /*
@@ -21,7 +21,7 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
 
     'not-logged-in-message' => array(
         'name' => 'not-logged-in-message',
-        'type' => '', //TODO: Add WYSIWYG
+        'type' => 'textarea', //TODO: Add WYSIWYG
         'label' => __( 'Not Logged-In Message', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',
@@ -51,7 +51,7 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
 
     'limit-reached-message' => array(
         'name' => 'limit-reached-message',
-        'type' => '',//TODO: Add WYSIWYG
+        'type' => 'textarea',//TODO: Add WYSIWYG
         'label' => __( 'Limit Reached Message', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',

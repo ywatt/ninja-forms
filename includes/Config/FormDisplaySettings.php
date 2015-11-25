@@ -23,9 +23,9 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'name' => 'display-form-title',
         'type' => 'toggle',
         'label' => __( 'Display Form Title', 'ninja-forms' ),
-        'width' => 'full',
+        'width' => 'one-half',
         'group' => 'primary',
-        'value' => 'true'
+        'value' => TRUE
     ),
 
     /*
@@ -55,9 +55,9 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'name' => 'clear-successfully-created-form',
         'type' => 'toggle',
         'label' => __( 'Clear successfully completed form?', 'ninja-forms' ),
-        'width' => 'full',
+        'width' => 'one-half',
         'group' => 'primary',
-        'value' => 'true'
+        'value' => TRUE
         //TODO: Add following text below the element.
         //If this box is checked, Ninja Forms will clear the form values after it has been successfully submitted.
     ),
@@ -70,9 +70,9 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'name' => 'hide-successfully-completed-form',
         'type' => 'toggle',
         'label' => __( 'Hide successfully completed forms?', 'ninja-forms' ),
-        'width' => 'full',
+        'width' => 'one-half',
         'group' => 'primary',
-        'value' => 'true'
+        'value' => TRUE
         //TODO: Add following text below the element.
         //If this box is checked, Ninja Forms will hide the form after it has been successfully submitted.
     ),
