@@ -392,21 +392,21 @@ All styles used within the drawer
     .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .nf-expand-on {
       display: inline; }
 
-.nf-drawer-opened .nf-add-new.nf-open-drawer, .nf-drawer-opened .preview {
+.nf-drawer-opened .preview {
   opacity: 0.0;
   visibility: hidden;
   filter: alpha(opacity=0);
   -webkit-transition: all 0.75s ease;
   transition: all 0.75s ease; }
-  .nf-drawer-opened .nf-add-new.nf-open-drawer:hover, .nf-drawer-opened .nf-add-new.nf-open-drawer:active, .nf-drawer-opened .nf-add-new.nf-open-drawer.active, .nf-drawer-opened .preview:hover, .nf-drawer-opened .preview:active, .nf-drawer-opened .preview.active {
+  .nf-drawer-opened .preview:hover, .nf-drawer-opened .preview:active, .nf-drawer-opened .preview.active {
     opacity: 0.0;
     visibility: hidden;
     filter: alpha(opacity=0);
     -webkit-transition: all 0.75s ease;
     transition: all 0.75s ease; }
 
-.nf-drawer-opened #nf-app-sub-header h2 {
-  padding-left: 0;
+.nf-drawer-opened #nf-app-sub-header h2, .nf-drawer-opened #nf-header h2 {
+  padding-left: 50px;
   -webkit-transition: all 0.75s ease 0s;
   transition: all 0.75s ease 0s; }
 
@@ -415,6 +415,10 @@ All styles used within the drawer
   margin: 0 auto;
   -webkit-transition: all 0.75s ease;
   transition: all 0.75s ease; }
+
+.nf-drawer-opened .nf-add-new {
+  top: 95px !important;
+  text-indent: -99999px; }
 
 .nf-drawer-opened .nf-setting-wrap {
   width: 50%;
@@ -817,8 +821,8 @@ All styles used within the drawer
     text-indent: -99999px; }
 
 .nf-action-items.available .nf-item.nf-has-img {
-  -webkit-filter: grayscale(100%) !important;
-          filter: grayscale(100%) !important;
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
   opacity: 0.6; }
   .nf-action-items.available .nf-item.nf-has-img:hover {
     -webkit-filter: grayscale(0);
@@ -853,7 +857,7 @@ Various custom field styles
   line-height: 32px;
   position: relative;
   height: 32px;
-  z-index: 98;
+  z-index: 100;
   text-indent: 0px;
   overflow: hidden;
   -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;

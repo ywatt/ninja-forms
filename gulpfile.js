@@ -55,17 +55,19 @@ gulp.task('sass', function () {
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(sourcemaps.write('/'))
-    .pipe(gulp.dest('assets/css'));   
+    .pipe(gulp.dest('assets/css'));
 
     gulp.src('assets/scss/front-end/display-structure.scss')
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer())
     .pipe(sourcemaps.write('/'))
     .pipe(gulp.dest('assets/css'));
 
     gulp.src('assets/scss/front-end/display-opinions.scss')
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer())
     .pipe(sourcemaps.write('/'))
     .pipe(gulp.dest('assets/css'));
 });
