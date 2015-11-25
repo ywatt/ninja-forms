@@ -217,9 +217,13 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     protected function _localize_form_settings()
     {
         $form_settings_types = Ninja_Forms::config( 'FormSettingsTypes' );
+
         $form_settings[ 'display' ] = Ninja_Forms::config( 'FormDisplaySettings' );
         $form_settings[ 'restrictions' ] = Ninja_Forms::config( 'FormRestrictionSettings' );
+        $form_settings = apply_filters( 'ninja-forms-localize-forms-settings', $form_settings );
+
         $groups = Ninja_Forms::config( 'SettingsGroups' );
+
         $master_settings = array();
 
         foreach( $form_settings_types as $id => $type ) {
