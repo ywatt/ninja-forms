@@ -7,8 +7,6 @@ Normalize Ninja Forms fields with default structure
 .ninja-forms-form-wrap *,
 .ninja-forms-form-wrap *:after,
 .ninja-forms-form-wrap *:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box; }
 
