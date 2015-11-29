@@ -137,15 +137,20 @@ define( [], function() {
 		 * @return void
 		 */
 		undoSortFields: function( change, undoAll ) {
-			var objModels = change.get( 'data' );
+			var data = change.get( 'data' );
+			var fields = data.fields;
 
-			_.each( objModels, function( changeModel ) {
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			_.each( fields, function( changeModel ) {
 				var before = changeModel.before;
 				var fieldModel = changeModel.model;
 				fieldModel.set( 'order', before );
+				console.log( 'set ' + fieldModel.get( 'label' ) + ' to ' + before );
 			} );
+			console.log( fieldCollection.where( { label: 'Name' } ) );
+			console.log( fieldCollection.where( { label: 'Email' } ) );
 
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+
 			fieldCollection.sort();
 			this.maybeRemoveChange( change, undoAll );
 		},

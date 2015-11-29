@@ -57,23 +57,25 @@ define( [], function() {
 				collection: dataModel.collection
 			};
 
-			nfRadio.channel( 'changes' ).request( 'register:change', 'removeObject', newModel, null, label, data );
-			
 			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
 			var results = changeCollection.where( { model: dataModel } );
 
 			_.each( results, function( changeModel ) {
-				if ( 'object' == typeof changeModel.get( 'data' ) ) {
-					_.each( changeModel.get( 'data' ), function( dataModel ) {
-						if ( dataModel.model == dataModel ) {
-							dataModel.model = newModel;
+				var data = changeModel.get( 'data' );
+				if ( 'undefined' != typeof data.fields ) {
+					_.each( data.fields, function( field, index ) {
+						if ( field.model == dataModel ) {
+							data.fields[ index ].model = newModel;					
 						}
 					} );
 				}
+				changeModel.set( 'data', data );
 				changeModel.set( 'model', newModel );
 				changeModel.set( 'disabled', true );
 			} );
 
+			nfRadio.channel( 'changes' ).request( 'register:change', 'removeObject', newModel, null, label, data );
+			
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 			var currentDomainID = currentDomain.get( 'id' );
 			nfRadio.channel( currentDomainID ).request( 'delete', dataModel );

@@ -276,12 +276,12 @@ define( [], function() {
 				var dragModel = fieldCollection.get( dragFieldID );
 
 				// Add our change event to the change tracker.
-				var data = [];
+				var data = { fields: [] };
 				_.each( fieldCollection.models, function( field ) {
 					var oldPos = field._previousAttributes.order;
 					var newPos = field.get( 'order' );
 					
-					data.push( {
+					data.fields.push( {
 						model: field,
 						attr: 'order',
 						before: oldPos,

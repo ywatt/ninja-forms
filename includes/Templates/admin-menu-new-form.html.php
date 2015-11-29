@@ -11,7 +11,6 @@
     <div id="nf-app-header"></div>
     <h2><%= renderTitle() %></h2>
     <div id="nf-app-sub-header"></div>
-
 </script>
 
 <script id="nf-tmpl-sub-header-fields" type="text/template">
