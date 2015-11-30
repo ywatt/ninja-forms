@@ -237,7 +237,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         ?>
         <script>
         var formSettingsTypes = <?php echo wp_json_encode( $form_settings_types )?>;
-        var formSettings = <?php echo wp_json_encode( $master_settings )?>;
+        var formSettings = <?php echo wp_json_encode( array_values( $master_settings ) )?>;
         </script>
         <?php
     }
