@@ -3,14 +3,33 @@ define( [], function() {
 		tagName: 'div',
 		template: '#nf-tmpl-form-setting-type',
 
+		onBeforeDestroy: function() {
+			this.model.off( 'change:editActive', this.render );
+		},
+
+		initialize: function() {
+			this.model.on( 'change:editActive', this.render, this );
+		},
+
 		events: {
 			'click': 'clickEdit'
 		},
 
 		clickEdit: function( e ) {
-			var model = nfRadio.channel( 'settings' ).request( 'get:settings' );
-			nfRadio.channel( 'app' ).request( 'open:drawer', 'editSettings', { model: model, groupCollection: this.model.get( 'settingGroups' ) } );
+			nfRadio.channel( 'settings' ).trigger( 'click:edit', e, this.model );
 		},
+
+		templateHelpers: function() {
+			return {
+				renderClasses: function() {
+					var classes = 'nf-setting-wrap';
+	    			if ( this.editActive ) {
+	    				classes += ' active';
+	    			}
+	    			return classes;
+				}
+			}
+		}
 	});
 
 	return view;

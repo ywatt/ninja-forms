@@ -131,7 +131,7 @@
 </script>
 
 <script id="nf-tmpl-form-setting-type" type="text/template">
-    <div class="nf-setting-wrap"><span><%= nicename %></span></div>
+    <div class="<%= renderClasses() %>"><span><%= nicename %></span></div>
 </script>
 
 <script id="nf-tmpl-menu-drawer" type="text/template">

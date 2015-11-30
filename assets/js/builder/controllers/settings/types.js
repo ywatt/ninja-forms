@@ -44,7 +44,8 @@ define( [
 					nicename: type.nicename,
 					alias: type.alias,
 					settingGroups: settingGroups,
-					settingDefaults: type.settingDefaults
+					settingDefaults: type.settingDefaults,
+					editActive: false
 				}
 
 				// Add tmp object to the appropriate collection (either installed or available)

@@ -8,6 +8,11 @@
  */
 define( [], function() {
 	var model = Backbone.Model.extend( {
+		defaults: {
+			objectType: 'Form Setting',
+			editActive: false
+		},
+
 		initialize: function() {
 			// Listen for model attribute changes
 			this.bind( 'change', this.changeSetting, this );
