@@ -16,7 +16,7 @@ define( ['models/app/appModel'], function( appModel ) {
 			// Setup our initial model.
 			this.model = new appModel( {
 				currentDrawer: false,
-				currentDomain: appDomainCollection.get( 'fields' ),
+				currentDomain: appDomainCollection.get( 'settings' ),
 				clean: true
 			} );
 

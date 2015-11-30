@@ -18,6 +18,14 @@ define( ['views/app/drawer/itemSettingGroupCollection'], function( itemSettingGr
 
 		templateHelpers: function () {
 	    	return {
+	    		maybeRenderTitle: function() {
+	    			if ( 'undefined' !== typeof this.type ) {
+	    				return _.template( jQuery( '#nf-tmpl-drawer-content-edit-settings-title' ).html(), this );
+	    			} else {
+	    				return '';
+	    			}
+	    		},
+
 	    		renderTypeNicename: function() {
 	    			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 					var domainID = currentDomain.get( 'id' );

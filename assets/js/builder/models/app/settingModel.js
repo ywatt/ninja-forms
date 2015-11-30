@@ -21,6 +21,9 @@ define( [], function() {
 		initialize: function() {
 			// Send out two messages saying that we've initialized a setting model.
 			nfRadio.channel( 'app' ).trigger( 'init:settingModel', this );
+			if ( 'undefined' == typeof this.get( 'type' ) ) {
+				// console.log( this );
+			}
 			nfRadio.channel( this.get( 'type' ) ).trigger( 'init:settingModel', this );
 		}
 	} );

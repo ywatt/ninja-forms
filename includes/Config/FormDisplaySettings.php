@@ -6,8 +6,8 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
     * FORM TITLE
     */
 
-    'form-title' => array(
-        'name' => 'form-title',
+    'title' => array(
+        'name' => 'title',
         'type' => 'textbox',
         'label' => __( 'Form Title', 'ninja-forms' ),
         'width' => 'full',
@@ -19,8 +19,8 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
     * DISPLAY FORM TITLE
     */
 
-    'display-form-title' => array(
-        'name' => 'display-form-title',
+    'display_form_title' => array(
+        'name' => 'display_form_title',
         'type' => 'toggle',
         'label' => __( 'Display Form Title', 'ninja-forms' ),
         'width' => 'one-half',
@@ -29,30 +29,11 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
     ),
 
     /*
-    * ADD FORM TO THIS PAGE
-    */
-
-    'add-form-to-this-page' => array(
-        'name' => 'add-form-to-this-page',
-        'type' => 'select',
-        'label' => __( 'Add form to this page', 'ninja-forms' ),
-        'options' => array(
-            array(
-                'label' => __( '- None', 'ninja-forms' ),
-                'value' => 'default',
-            ),
-        ),
-        'width' => 'full',
-        'group' => 'primary',
-        'value' => ''
-    ),
-
-    /*
     * CLEAR SUCCESSFULLY COMPLETED FORM
     */
 
-    'clear-successfully-created-form' => array(
-        'name' => 'clear-successfully-created-form',
+    'clear_successfully_created_form' => array(
+        'name' => 'clear_successfully_created_form',
         'type' => 'toggle',
         'label' => __( 'Clear successfully completed form?', 'ninja-forms' ),
         'width' => 'one-half',
@@ -66,8 +47,8 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
     * HIDE SUCCESSFULLY COMPLETED FORMS
     */
 
-    'hide-successfully-completed-form' => array(
-        'name' => 'hide-successfully-completed-form',
+    'hide_successfully_completed_form' => array(
+        'name' => 'hide_successfully_completed_form',
         'type' => 'toggle',
         'label' => __( 'Hide successfully completed forms?', 'ninja-forms' ),
         'width' => 'one-half',

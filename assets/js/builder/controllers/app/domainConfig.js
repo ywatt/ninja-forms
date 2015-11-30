@@ -112,7 +112,8 @@ define( [
 					},
 					
 					getMainContentView: function() {
-						return new settingsMainContentView();
+						var collection = nfRadio.channel( 'settings' ).request( 'get:typeCollection' );
+						return new settingsMainContentView( { collection: collection } );
 					}
 				},
 				{

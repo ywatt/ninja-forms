@@ -12,7 +12,7 @@ define( [], function() {
 			// Respond to requests to remove the active class from all our fields.
 			nfRadio.channel( 'fields' ).reply( 'clear:editActive', this.clearEditActive, this );
 			// Listen for the closing drawer so that we can remove all of our active classes.
-			this.listenTo( nfRadio.channel( 'drawer' ), 'before:closeDrawer', this.clearEditActive );
+			this.listenTo( nfRadio.channel( 'drawer-fields' ), 'before:closeDrawer', this.clearEditActive );
 		},
 
 		/**

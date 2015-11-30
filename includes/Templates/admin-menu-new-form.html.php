@@ -9,8 +9,12 @@
 
 <script id="nf-tmpl-header" type="text/template">
     <div id="nf-app-header"></div>
-    <h2><%= renderTitle() %></h2>
+    <div id="nf-app-form-title"></div>
     <div id="nf-app-sub-header"></div>
+</script>
+
+<script id="nf-tmpl-header-form-title" type="text/template">
+    <h2><%= renderTitle() %></h2>
 </script>
 
 <script id="nf-tmpl-sub-header-fields" type="text/template">
@@ -126,12 +130,8 @@
     </td>
 </script>
 
-<script id="nf-tmpl-settings" type="text/template">
-    <div class="nf-setting-wrap"><span class="nf-open-drawer" data-drawerid="editFormSettings">Display Settings</span></div>
-    <div class="nf-setting-wrap"><span class="nf-open-drawer" data-drawerid="editFormSettings">Restrictions</span></div>
-    <div class="nf-setting-wrap"><span class="nf-open-drawer" data-drawerid="editFormSettings">Calculations</span></div>
-    <div class="nf-setting-wrap"><span class="nf-open-drawer" data-drawerid="editFormSettings">PayPal</span></div>
-    <div class="nf-setting-wrap"><span class="nf-open-drawer" data-drawerid="editFormSettings">Stripe</span></div>
+<script id="nf-tmpl-form-setting-type" type="text/template">
+    <div class="nf-setting-wrap"><span><%= nicename %></span></div>
 </script>
 
 <script id="nf-tmpl-menu-drawer" type="text/template">
@@ -201,8 +201,12 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-settings" type="text/template">
-    <h2><span class="dashicons dashicons-star-empty"></span> <%= renderTypeNicename() %></h2>
+    <%= maybeRenderTitle() %>
     <span class="nf-settings-groups"></span>
+</script>
+
+<script id="nf-tmpl-drawer-content-edit-settings-title" type="text/template">
+    <h2><span class="dashicons dashicons-star-empty"></span> <%= renderTypeNicename() %></h2>
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field-setting-group" type="text/template">
