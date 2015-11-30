@@ -96,7 +96,7 @@ define( [
 				},
 				{
 					id: 'settings',
-					nicename: 'Settings',
+					nicename: 'Advanced',
 					hotkeys: {
 						'Esc': 'close:drawer',
 						'Ctrl+Shift+f': 'changeDomain:fields',
