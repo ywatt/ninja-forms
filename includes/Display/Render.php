@@ -38,7 +38,7 @@ final class NF_Display_Render
          */
         $limit = $form->get_setting( 'limit_submissions' );
         $subs = Ninja_Forms()->form( $form_id )->get_subs();
-        if( count( $subs ) >= (int) $limit ){
+        if( $limit && ( count( $subs ) >= (int) $limit ) ){
             echo $form->get_setting( 'limit_reached_message' );
             return;
         }
