@@ -23,6 +23,18 @@ final class NF_Display_Render
         }
         $form = Ninja_Forms()->form( $form_id )->get();
 
+        /*
+         * Check the form submission limit
+         */
+        $limit = $form->get_settings( 'limit_submissions' );
+        $subs = Ninja_Forms()->form( $form_id )->get_subs();
+
+        if( count( $subs ) >= (int) $limit ){
+            echo $form->get_settings( 'limit_reached_message' );
+            echo "<script>var formDisplay = 0;</script>";
+            return;
+        }
+
         $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
 
         $fields = array();
@@ -77,6 +89,8 @@ final class NF_Display_Render
         ?>
         <!-- TODO: Move to Template File. -->
         <script>
+            var formDisplay = 1;
+
             // Maybe initialize nfForms object
             var nfForms = nfForms || [];
 
