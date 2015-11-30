@@ -8,7 +8,6 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
         'label'   => __( 'Logged In', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',
-        'value' => 'none',
         'settings' => array(
 
             /*
@@ -47,7 +46,6 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
         'label'   => __( 'Limit Submissions', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',
-        'value' => 'none',
         'settings' => array(
 
             /*
@@ -56,11 +54,11 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
 
             'limit_submissions' => array(
                 'name' => 'limit_submissions',
-                'type' => 'textbox',
+                'type' => 'number',
                 'label' => __( 'Limit Submission', 'ninja-forms' ),
                 'width' => 'full',
                 'group' => 'primary',
-                'value' => ''
+                'value' => NULL
                 //TODO: Add following text below the element.
                 //Select the number of submissions that this form will accept. Leave empty for no limit.
             ),
