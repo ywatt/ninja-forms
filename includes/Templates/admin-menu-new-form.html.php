@@ -323,6 +323,12 @@
     </label>
 </script>
 
+<script id="nf-tmpl-edit-setting-number" type="text/template">
+    <label for="<%= name %>"><%= label %> <%= renderTooltip() %>
+        <input type="number" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
+    </label>
+</script>
+
 <script id="nf-tmpl-edit-setting-textarea" type="text/template">
     <label for="<%= name %>"><%= label %> <%= renderTooltip() %>
         <textarea id="<%= name %>"><%= value %></textarea>
