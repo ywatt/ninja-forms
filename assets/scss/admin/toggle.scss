@@ -24,7 +24,7 @@ input[type=checkbox].nf-toggle {
             height: 20px;
             transition: all 0.3s ease;
         }
-            &::before {
+        &::before {
             background: #fff;
             border-radius: 20px;
             content: "";
@@ -49,6 +49,33 @@ input[type=checkbox].nf-toggle {
                 //top: 2px;
                 left: 18px;
                 transition: all 0.3s ease;
+            }
+        }
+    }
+}
+
+.nf-full {
+    input[type=checkbox].nf-toggle {
+        + label {
+            border-bottom: 1px solid #ccc;
+            width: 100%;
+            margin: -18px 0 0;
+            padding: 12px 0 20px;
+            &::before {
+                left: auto;
+                right: 4px;
+            }
+            &::after {
+                left: auto;
+                right: 0;
+            }
+        }
+        &:checked  {
+            + label {
+                &::before {
+                    left: auto;
+                    right: 22px;
+                }
             }
         }
     }

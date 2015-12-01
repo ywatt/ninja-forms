@@ -946,6 +946,22 @@ input[type=checkbox].nf-toggle {
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease; }
 
+.nf-full input[type=checkbox].nf-toggle + label {
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  margin: -18px 0 0;
+  padding: 12px 0 20px; }
+  .nf-full input[type=checkbox].nf-toggle + label::before {
+    left: auto;
+    right: 4px; }
+  .nf-full input[type=checkbox].nf-toggle + label::after {
+    left: auto;
+    right: 0; }
+
+.nf-full input[type=checkbox].nf-toggle:checked + label::before {
+  left: auto;
+  right: 22px; }
+
 .ninja-forms-app .nf-select {
   display: block;
   position: relative; }

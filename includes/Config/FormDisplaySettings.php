@@ -23,7 +23,7 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'name' => 'display_form_title',
         'type' => 'toggle',
         'label' => __( 'Display Form Title', 'ninja-forms' ),
-        'width' => 'one-half',
+        'width' => 'full',
         'group' => 'primary',
         'value' => TRUE
     ),
@@ -36,7 +36,7 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'name' => 'clear_successfully_created_form',
         'type' => 'toggle',
         'label' => __( 'Clear successfully completed form?', 'ninja-forms' ),
-        'width' => 'one-half',
+        'width' => 'full',
         'group' => 'primary',
         'value' => TRUE
         //TODO: Add following text below the element.
@@ -51,7 +51,7 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'name' => 'hide_successfully_completed_form',
         'type' => 'toggle',
         'label' => __( 'Hide successfully completed forms?', 'ninja-forms' ),
-        'width' => 'one-half',
+        'width' => 'full',
         'group' => 'primary',
         'value' => TRUE
         //TODO: Add following text below the element.
