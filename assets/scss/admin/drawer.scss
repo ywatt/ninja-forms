@@ -66,11 +66,12 @@
         //padding-left: 60px;
         transition: all 0.75s ease;
     }
-
-    .nf-add-new {
-        top: 95px !important;
-        text-indent: -99999px;
-        &:after {
+    #nf-app-sub-header {
+        .nf-add-new {
+            top: 95px !important;
+            text-indent: -99999px;
+            &:after {
+            }
         }
     }
     .nf-setting-wrap {
