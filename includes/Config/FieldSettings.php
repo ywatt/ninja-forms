@@ -53,7 +53,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => 'above',
-        'help' => __( 'Select the position of your label relative to the field element itslef.', 'ninja-forms' ),
+        'help' => __( 'Select the position of your label relative to the field element itself.', 'ninja-forms' ),
     ),
 
     /*

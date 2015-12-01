@@ -11,34 +11,48 @@ define( [], function() {
 			this.$el = this.$el.children();
 			this.$el.unwrap();
 			this.setElement( this.$el );
-
-			jQuery( this.el ).find( '.tooltip' ).jBox( 'Tooltip' );
 		},
 
 		onRender: function() {
 			jQuery( this.el ).find( '.nf-help' ).each(function() {
-		        jQuery(this).qtip({
-		        	show: {
-				        delay: 1500,
-				    },
-		        	// show: {
-	        	 //    	event: 'hover',
-	        	 //   	},
-	        	 //   	hide: {
-	        	 //   		event: 'unfocus',
-	        	 //   	},
-		      		position: {
-		      			my: 'bottom center',
-            			at: 'top center',
-						adjust: {
-							mouse: false,
-							y: -20,
-						}
-				    },
-		            content: {
-		                text: jQuery(this).next('.nf-help-text')
-		            }
-		        });
+				var content = jQuery(this).next('.nf-help-text');
+				jQuery( this ).jBox( 'Tooltip', {
+					content: content,
+					// delayOpen: 1500,
+					theme: 'TooltipBorder',
+					trigger: 'click',
+					closeOnClick: true
+				})
+		    });
+
+
+			var mergeTagContent = '<label class="nf-select"><select><option>- Select Tag</option>';
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			if ( 0 < fieldCollection.models.length ) {
+				mergeTagContent += '<optgroup label="Fields">';
+				_.each( fieldCollection.models, function( field ) {
+					mergeTagContent += '<option value="' + field.get( 'id' ) + '">' + field.get( 'label' ) + '</option>';
+				} );
+				mergeTagContent += '</optgroup>';
+			}
+			
+			mergeTagContent += '<optgroup label="System Tags"><option>Date</option><option>Time</option><option>IP</option></optgroup><optgroup label="User Info"><option>First Name (if logged-in)</option><option>Last Name (if logged-in)</option><option>Email (if logged-in)</option></optgroup></select><div></div></label>';
+			mergeTagContent += '<a href="#" class="nf-button secondary insert">Insert</a>';
+
+			jQuery( this.el ).find( '.merge-tags' ).each(function() {
+				jQuery( this ).jBox( 'Tooltip', {
+					title: 'Insert Merge Tag',
+					content: mergeTagContent,
+					trigger: 'click',
+					position: {
+						x: 'right',
+						y: 'center'
+					},
+					outside: 'x',
+					closeButton: 'box',
+					closeOnClick: 'body',
+					theme: 'TooltipBorder'
+				})
 		    });
 
 		    
@@ -58,7 +72,7 @@ define( [], function() {
 				},
 
 				renderLabelClasses: function() {
-					return 'merge-tags';
+					return 'has-merge-tags';
 				},
 
 				renderWidth: function() {
@@ -80,7 +94,8 @@ define( [], function() {
 		},
 
 		events: {
-			'change': 'changeSetting'
+			'change': 'changeSetting',
+			'click': 'insertMergeTag'
 		},
 
 		changeSetting: function( e ) {

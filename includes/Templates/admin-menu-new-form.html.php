@@ -309,6 +309,10 @@
 
 </script>
 
+<script id="nf-tmpl-merge-tags" type="text/template">
+    
+</script>
+
 <!-- Field Settings Templates -->
 
 <script id="nf-tmpl-edit-setting-wrap" type="text/template">
@@ -320,7 +324,7 @@
 <script id="nf-tmpl-edit-setting-textbox" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
         <input type="text" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
-        <span class="dashicons dashicons-list-view tooltip" title="tooltip1"></span>
+        <span class="dashicons dashicons-list-view merge-tags"></span>
     </label>
 </script>
 
@@ -333,7 +337,7 @@
 <script id="nf-tmpl-edit-setting-textarea" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses %>"><%= label %> <%= renderTooltip() %>
         <textarea id="<%= name %>"><%= value %></textarea>
-        <span class="dashicons dashicons-list-view tooltip" title="tooltip2"></span>
+        <span class="dashicons dashicons-list-view merge-tags"></span>
     </label>
 </script>
 
