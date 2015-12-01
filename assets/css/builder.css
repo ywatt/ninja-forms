@@ -1347,6 +1347,50 @@ All styles used for displaying table content
     border-right: 6px solid transparent;
     border-top: 12px solid #424242; }
 
+.has-merge-tags {
+  position: relative; }
+  .has-merge-tags .merge-tags {
+    color: #ccc;
+    position: absolute;
+    top: 35px;
+    right: 12px; }
+
+.jBox-TooltipBorder .jBox-container {
+  border-radius: 5px;
+  border: 2px solid #1EA9EA;
+  /*background: #EBEDEE;*/ }
+  .jBox-TooltipBorder .jBox-container h4 {
+    background: #f1f1f1;
+    padding: 5px;
+    margin: 0 0 5px; }
+  .jBox-TooltipBorder .jBox-container ul {
+    margin: 0; }
+    .jBox-TooltipBorder .jBox-container ul li a {
+      color: #1EA9EA;
+      margin: 0;
+      padding: 0 5px;
+      display: block;
+      text-decoration: none; }
+
+.jBox-TooltipBorder .jBox-pointer::after {
+  border: 2px solid #1EA9EA;
+  /*background: #EBEDEE;*/ }
+
+.jBox-TooltipBorder .jBox-pointer-top,
+.jBox-TooltipBorder .jBox-pointer-bottom {
+  width: 34px;
+  height: 12px; }
+
+.jBox-TooltipBorder .jBox-pointer-left,
+.jBox-TooltipBorder .jBox-pointer-right {
+  width: 12px;
+  height: 34px; }
+
+.jBox-TooltipBorder.jBox-closeButton-box::before {
+  width: 28px;
+  height: 28px;
+  background: #1EA9EA; }
+
 @media only screen and (max-width: 1255px) {
   .nf-cancel {
     display: none; }
