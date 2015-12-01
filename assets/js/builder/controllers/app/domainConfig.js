@@ -94,10 +94,6 @@ define( [
 						return new actionsMainContentView( { collection: collection } );
 					}
 				},
-				/**
-				 * Commented out for Alpha 3 Pertwee
-				 */
-				/*
 				{
 					id: 'settings',
 					nicename: 'Advanced',
@@ -120,7 +116,6 @@ define( [
 						return new settingsMainContentView( { collection: collection } );
 					}
 				},
-				*/
 				{
 					id: 'preview',
 					nicename: 'Preview Form',
