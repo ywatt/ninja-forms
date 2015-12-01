@@ -10,14 +10,6 @@ define([], function() {
 					jQuery( '.nf-response-msg' ).html( response.data.actions.success_message );
 				}
 			}
-
-			if ( 1 == response.data.settings.clear_successfully_created_form ) {
-				console.log( 'clear form' );
-			}
-
-			if ( 1 == response.data.settings.hide_successfully_completed_form ) {
-				console.log( 'hide form' );
-			}
 		}
 
 	});

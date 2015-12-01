@@ -10,6 +10,9 @@ define([], function() {
 			}
 
 			if ( 1 == response.data.settings.hide_successfully_completed_form ) {
+				/**
+				 * TODO: This needs to be re-worked for backbone. It's not dynamic enough.
+				 */
 				jQuery( '.nf-fields' ).hide();
 				jQuery( '.nf-form-title' ).hide();
 			}
