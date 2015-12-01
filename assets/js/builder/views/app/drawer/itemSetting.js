@@ -11,6 +11,8 @@ define( [], function() {
 			this.$el = this.$el.children();
 			this.$el.unwrap();
 			this.setElement( this.$el );
+
+			jQuery( this.el ).find( '.tooltip' ).jBox( 'Tooltip' );
 		},
 
 		onRender: function() {
@@ -38,6 +40,8 @@ define( [], function() {
 		            }
 		        });
 		    });
+
+		    
 		},
 
 		templateHelpers: function () {
@@ -51,6 +55,10 @@ define( [], function() {
 	    			}
 
 					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
+				},
+
+				renderLabelClasses: function() {
+					return 'merge-tags';
 				},
 
 				renderWidth: function() {
