@@ -26,18 +26,18 @@ define( [], function() {
 		    });
 
 
-			var mergeTagContent = '<label class="nf-select"><select><option>- Select Tag</option>';
+			var mergeTagContent = '';
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			if ( 0 < fieldCollection.models.length ) {
-				mergeTagContent += '<optgroup label="Fields">';
+				mergeTagContent += '<h4>Fields</h4><ul>';
 				_.each( fieldCollection.models, function( field ) {
-					mergeTagContent += '<option value="' + field.get( 'id' ) + '">' + field.get( 'label' ) + '</option>';
+					mergeTagContent += '<li><a href="#">' + field.get( 'label' ) + '</a></li>';
 				} );
-				mergeTagContent += '</optgroup>';
+				mergeTagContent += '</ul>';
 			}
 			
-			mergeTagContent += '<optgroup label="System Tags"><option>Date</option><option>Time</option><option>IP</option></optgroup><optgroup label="User Info"><option>First Name (if logged-in)</option><option>Last Name (if logged-in)</option><option>Email (if logged-in)</option></optgroup></select><div></div></label>';
-			mergeTagContent += '<a href="#" class="nf-button secondary insert">Insert</a>';
+			mergeTagContent += '<h4>System Tags</h4><ul>';
+			mergeTagContent += '<li><a href="#">Date</a></li><li><a href="#">Time</a></li><li><a href="#">IP</a></li></ul><h4>User Information</h4><ul><li><a href="#">First Name (if logged-in)</a></li><li><a href="#">Last Name (if logged-in)</a></li><li><a href="#">Email (if logged-in)</a></li></ul>';
 
 			jQuery( this.el ).find( '.merge-tags' ).each(function() {
 				jQuery( this ).jBox( 'Tooltip', {
@@ -45,13 +45,13 @@ define( [], function() {
 					content: mergeTagContent,
 					trigger: 'click',
 					position: {
-						x: 'right',
-						y: 'center'
+						x: 'center',
+						y: 'bottom'
 					},
-					outside: 'x',
 					closeButton: 'box',
 					closeOnClick: 'body',
-					theme: 'TooltipBorder'
+					theme: 'TooltipBorder',
+					maxHeight: 200
 				})
 		    });
 
