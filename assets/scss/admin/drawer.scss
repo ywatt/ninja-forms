@@ -42,7 +42,7 @@
             }
         }
     }
-    .nf-add-new.nf-open-drawer, .preview {
+    .preview {
         opacity: 0.0;
         visibility:hidden;
         filter: alpha(opacity=0);
@@ -54,9 +54,9 @@
             transition: all 0.75s ease;
         }
     }
-    #nf-app-sub-header {
+    #nf-app-sub-header, #nf-header {
         h2 {
-            padding-left: 0;
+            padding-left: 50px;
             transition: all 0.75s ease 0s
         }
     }
@@ -67,24 +67,12 @@
         transition: all 0.75s ease;
     }
 
-    // .nf-add-new {
-    //     padding-left: 32px;
-    //     text-indent: -500px;
-    //     width:55px;
-    //     height:52px;
-    //     top: 60px;
-    //     left: 70px;
-    //     transition: width 0.75s ease 0s,height 0.75s ease 0s, text-indent 0.75s ease,top 0.75s ease,left 0.75s ease;
-    //     &:after {
-    //         box-shadow: 0 3px 3px rgba(0,0,0,0.3);
-    //         font-size: 40px;
-    //         padding: 15px 8px 2px 10px;
-    //         width:25px;
-    //         height:25px;
-    //         text-indent: 0px;
-    //         transition: all 0.75s ease 0s
-    //     }
-    // }
+    .nf-add-new {
+        top: 95px !important;
+        text-indent: -99999px;
+        &:after {
+        }
+    }
     .nf-setting-wrap {
         width: 50%;
         transition: width 0.75s ease;

@@ -23,6 +23,26 @@ final class NF_Display_Render
         }
         $form = Ninja_Forms()->form( $form_id )->get();
 
+        /*
+         * Check if user is required to be logged in
+         */
+        $is_login_required = $form->get_setting( 'require_user_logged_in_to_view_form' );
+        $is_logged_in = wp_get_current_user()->ID;
+        if( $is_login_required && ! $is_logged_in ){
+            echo $form->get_setting( 'not_logged_in_message' );
+            return;
+        }
+
+        /*
+         * Check the form submission limit
+         */
+        $limit = $form->get_setting( 'limit_submissions' );
+        $subs = Ninja_Forms()->form( $form_id )->get_subs();
+        if( $limit && ( count( $subs ) >= (int) $limit ) ){
+            echo $form->get_setting( 'limit_reached_message' );
+            return;
+        }
+
         $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
 
         $fields = array();
@@ -77,6 +97,8 @@ final class NF_Display_Render
         ?>
         <!-- TODO: Move to Template File. -->
         <script>
+            var formDisplay = 1;
+
             // Maybe initialize nfForms object
             var nfForms = nfForms || [];
 

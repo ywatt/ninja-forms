@@ -216,19 +216,28 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
     protected function _localize_form_settings()
     {
-        $settings = Ninja_Forms::config( 'FormSettings' );
+        $form_settings_types = Ninja_Forms::config( 'FormSettingsTypes' );
+
+        $form_settings[ 'display' ] = Ninja_Forms::config( 'FormDisplaySettings' );
+        $form_settings[ 'restrictions' ] = Ninja_Forms::config( 'FormRestrictionSettings' );
+        $form_settings = apply_filters( 'ninja-forms-localize-forms-settings', $form_settings );
+
         $groups = Ninja_Forms::config( 'SettingsGroups' );
 
-        $master_settings = $this->_unique_settings( $settings );
+        $master_settings = array();
 
-        $form_settings[ 'settingGroups' ] = $this->_group_settings( $settings, $groups );
+        foreach( $form_settings_types as $id => $type ) {
 
-        $form_settings[ 'settingDefaults' ] = $this->_setting_defaults( $master_settings );
+            $unique_settings = $this->_unique_settings( $form_settings[ $id ] );
+            $master_settings = array_merge( $master_settings, $unique_settings );
 
+            $form_settings_types[ $id ]['settingGroups'] = $this->_group_settings($form_settings[ $id ], $groups);
+            $form_settings_types[ $id ]['settingDefaults'] = $this->_setting_defaults($unique_settings);
+        }
         ?>
         <script>
-        var formData = <?php echo wp_json_encode( $form_settings )?>;
-        var formSettings = <?php echo wp_json_encode( $master_settings )?>;
+        var formSettingTypeData = <?php echo wp_json_encode( $form_settings_types )?>;
+        var formSettings = <?php echo wp_json_encode( array_values( $master_settings ) )?>;
         </script>
         <?php
     }

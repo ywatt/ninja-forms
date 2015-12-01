@@ -10,7 +10,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['views/app/header', 'views/app/subHeader'], function( appHeaderView, appSubHeaderView ) {
+define( ['views/app/header', 'views/app/subHeader', 'views/app/formTitle'], function( appHeaderView, appSubHeaderView, formTitleView ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: "div",
@@ -18,6 +18,7 @@ define( ['views/app/header', 'views/app/subHeader'], function( appHeaderView, ap
 
 		regions: {
 			app: "#nf-app-header",
+			formTitle: "#nf-app-form-title",
 			appSub: "#nf-app-sub-header"
 		},
 
@@ -27,6 +28,11 @@ define( ['views/app/header', 'views/app/subHeader'], function( appHeaderView, ap
 
 		onShow: function() {
 			this.app.show( new appHeaderView() );
+
+			var formData = nfRadio.channel( 'app' ).request( 'get:formData' );
+			var formSettings = formData.get( 'settings' );
+			this.formTitle.show( new formTitleView( { model: formSettings } ) );
+
 			this.changeSubHeader();
 		},
 
@@ -34,17 +40,7 @@ define( ['views/app/header', 'views/app/subHeader'], function( appHeaderView, ap
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 			var subHeaderView = currentDomain.get( 'getSubHeaderView' ).call( currentDomain );
 			this.appSub.show( subHeaderView );
-		},
-
-		templateHelpers: function () {
-			var that = this;
-	    	return {
-	    		renderTitle: function(){
-	    			var formData = nfRadio.channel( 'app' ).request( 'get:formData' );
-	    			return formData.get( 'settings' ).title;
-				},
-			};
-		},
+		}
 	});
 
 	return view;

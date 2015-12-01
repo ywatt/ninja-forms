@@ -1,5 +1,7 @@
 <script id="nf-tmpl-layout" type="text/template">
-	<h3><%= settings.title %></h3>
+	<span class="nf-form-title">
+		<h3><%= ( 1 == settings.display_form_title ) ? settings.title : '' %></h3>
+	</span>
 	<div class="nf-form-wrap ninja-forms-form-wrap">
 		<div class="nf-response-msg"></div>
 		<div class="nf-before-form"></div>

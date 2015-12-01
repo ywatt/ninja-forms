@@ -18,8 +18,8 @@ define( ['models/app/formModel'], function( formModel) {
 			this.model.set( 'fields', nfRadio.channel( 'fields' ).request( 'get:collection' ) );
 			// Set our actions collection
 			this.model.set( 'actions', nfRadio.channel( 'actions' ).request( 'get:collection' ) );
-			// TODO: Set our settings collection
-			this.model.set( 'settings', preloadedFormData.settings );
+			// Set our settings collection
+			this.model.set( 'settings', nfRadio.channel( 'settings' ).request( 'get:settings' ) );
 			// Respond to requests for form data.
 			nfRadio.channel( 'app' ).reply( 'get:formData', this.getFormData, this );
 		},
