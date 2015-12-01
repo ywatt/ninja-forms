@@ -658,6 +658,7 @@ All styles used within the drawer
   text-transform: uppercase; }
 
 .ninja-forms-app input[type=text],
+.ninja-forms-app input[type=number],
 .ninja-forms-app textarea {
   background: #f9f9f9;
   border: 0;
