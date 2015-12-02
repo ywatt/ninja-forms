@@ -18,7 +18,7 @@ define( [], function() {
 				var content = jQuery(this).next('.nf-help-text');
 				jQuery( this ).jBox( 'Tooltip', {
 					content: content,
-					// delayOpen: 1500,
+					maxWidth: 200,
 					theme: 'TooltipBorder',
 					trigger: 'click',
 					closeOnClick: true
@@ -48,7 +48,6 @@ define( [], function() {
 						x: 'center',
 						y: 'bottom'
 					},
-					closeButton: 'box',
 					closeOnClick: 'body',
 					theme: 'TooltipBorder',
 					maxHeight: 200

@@ -310,7 +310,7 @@
 </script>
 
 <script id="nf-tmpl-merge-tags" type="text/template">
-    
+
 </script>
 
 <!-- Field Settings Templates -->
@@ -335,7 +335,7 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-textarea" type="text/template">
-    <label for="<%= name %>" class="<%= renderLabelClasses %>"><%= label %> <%= renderTooltip() %>
+    <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
         <textarea id="<%= name %>"><%= value %></textarea>
         <span class="dashicons dashicons-list-view merge-tags"></span>
     </label>
