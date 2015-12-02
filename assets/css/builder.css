@@ -1349,7 +1349,8 @@ All styles used for displaying table content
 
 .has-merge-tags {
   position: relative; }
-  .has-merge-tags input[type=text] {
+  .has-merge-tags input[type=text],
+  .has-merge-tags textarea {
     padding-right: 40px; }
   .has-merge-tags .merge-tags {
     color: #ccc;

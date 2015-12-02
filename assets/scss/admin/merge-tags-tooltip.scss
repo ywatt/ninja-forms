@@ -1,6 +1,7 @@
 .has-merge-tags {
     position: relative;
-    input[type=text] {
+    input[type=text],
+    textarea {
         padding-right: 40px;
     }
     .merge-tags {
