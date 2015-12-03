@@ -3,6 +3,12 @@
 return apply_filters( 'ninja-forms-field-settings', array(
 
     /*
+    |--------------------------------------------------------------------------
+    | Primary Settings
+    |--------------------------------------------------------------------------
+    */
+
+    /*
      * LABEL
      */
 
@@ -57,20 +63,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
     ),
 
     /*
-     * INPUT PLACEHOLDER
-     */
-
-    'placeholder' => array(
-        'name' => 'placeholder',
-        'type' => 'textbox',
-        'label' => __( 'Placeholder', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'advanced',
-        'value' => '',
-        'help' => __( 'Enter text you would like displayed in the field before a user enters any data.', 'ninja-forms' ),
-    ),
-
-    /*
      * REQUIRED
      */
 
@@ -97,7 +89,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'settings' => array(
             array(
                 'name' => 'num_min',
-                'type' => 'textbox',
+                'type' => 'number',
                 'placeholder' => '',
                 'label' => __( 'Min', 'ninja-forms' ),
                 'width' => 'one-third',
@@ -105,7 +97,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
             ),
             array(
                 'name' => 'num_max',
-                'type' => 'textbox',
+                'type' => 'number',
                 'label' => __( 'Max', 'ninja-forms' ),
                 'placeholder' => '',
                 'width' => 'one-third',
@@ -121,6 +113,33 @@ return apply_filters( 'ninja-forms-field-settings', array(
             ),
         ),
     ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Restriction Settings
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | Advanced Settings
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+     * INPUT PLACEHOLDER
+     */
+
+    'placeholder' => array(
+        'name' => 'placeholder',
+        'type' => 'textbox',
+        'label' => __( 'Placeholder', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'value' => '',
+        'help' => __( 'Enter text you would like displayed in the field before a user enters any data.', 'ninja-forms' ),
+    ),
+
 
     /*
      * DEFAULT VALUE
