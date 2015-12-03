@@ -56,7 +56,7 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
                 'name' => 'limit_submissions',
                 'type' => 'number',
                 'label' => __( 'Limit Submission', 'ninja-forms' ),
-                'width' => 'full',
+                'width' => 'one-third',
                 'group' => 'primary',
                 'value' => NULL
                 //TODO: Add following text below the element.

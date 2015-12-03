@@ -15,29 +15,46 @@ define( [], function() {
 
 		onRender: function() {
 			jQuery( this.el ).find( '.nf-help' ).each(function() {
-		        jQuery(this).qtip({
-		        	show: {
-				        delay: 1500,
-				    },
-		        	// show: {
-	        	 //    	event: 'hover',
-	        	 //   	},
-	        	 //   	hide: {
-	        	 //   		event: 'unfocus',
-	        	 //   	},
-		      		position: {
-		      			my: 'bottom center',
-            			at: 'top center',
-						adjust: {
-							mouse: false,
-							y: -20,
-						}
-				    },
-		            content: {
-		                text: jQuery(this).next('.nf-help-text')
-		            }
-		        });
+				var content = jQuery(this).next('.nf-help-text');
+				jQuery( this ).jBox( 'Tooltip', {
+					content: content,
+					maxWidth: 200,
+					theme: 'TooltipBorder',
+					trigger: 'click',
+					closeOnClick: true
+				})
 		    });
+
+
+			var mergeTagContent = '';
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			if ( 0 < fieldCollection.models.length ) {
+				mergeTagContent += '<h4>Fields</h4><ul>';
+				_.each( fieldCollection.models, function( field ) {
+					mergeTagContent += '<li><a href="#">' + field.get( 'label' ) + '</a></li>';
+				} );
+				mergeTagContent += '</ul>';
+			}
+			
+			mergeTagContent += '<h4>System Tags</h4><ul>';
+			mergeTagContent += '<li><a href="#">Date</a></li><li><a href="#">Time</a></li><li><a href="#">IP</a></li></ul><h4>User Information</h4><ul><li><a href="#">First Name (if logged-in)</a></li><li><a href="#">Last Name (if logged-in)</a></li><li><a href="#">Email (if logged-in)</a></li></ul>';
+
+			jQuery( this.el ).find( '.merge-tags' ).each(function() {
+				jQuery( this ).jBox( 'Tooltip', {
+					title: 'Insert Merge Tag',
+					content: mergeTagContent,
+					trigger: 'click',
+					position: {
+						x: 'center',
+						y: 'bottom'
+					},
+					closeOnClick: 'body',
+					theme: 'TooltipBorder',
+					maxHeight: 200
+				})
+		    });
+
+		    
 		},
 
 		templateHelpers: function () {
@@ -51,6 +68,10 @@ define( [], function() {
 	    			}
 
 					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
+				},
+
+				renderLabelClasses: function() {
+					return 'has-merge-tags';
 				},
 
 				renderWidth: function() {
@@ -72,7 +93,8 @@ define( [], function() {
 		},
 
 		events: {
-			'change': 'changeSetting'
+			'change': 'changeSetting',
+			'click': 'insertMergeTag'
 		},
 
 		changeSetting: function( e ) {

@@ -404,7 +404,7 @@ function nf_alpha_release_admin_notice()
         }
     </style>
     <div class="error nf-alpha-notice">
-        <h3>Ninja Forms 3.0 - ALPHA 3 - Pertwee</h3>
+        <h3>Ninja Forms 3.0 - ALPHA 4 - Baker</h3>
         <p><strong>NOTICE:</strong> Installed is an Alpha Release of Ninja Forms. This is not intended for production.</p>
         <p>Please keep a few things in mind while exploring:</p>
         <ul>
@@ -414,13 +414,8 @@ function nf_alpha_release_admin_notice()
             <li>This ALPHA is best viewed at <strong>1039px wide or greater.</strong> This is because we have not fully implented the responsive UI thus far.</li>
             <li>Here some things we would like you to test and offer feedback on this week:
                 <ul>
-                    <li>Add, duplicate, delete, deactivate/activate, and modify Emails & Actions.</li>
-                    <li>Make sure changes are properly reflected in the Undo Manager and then when undone, you changes have actually been reverted to their originals.</li>
-                    <li>Test the Emails & Actions while previewing your forms. Make sure they respond in the way you expect.</li>
-                </ul>
-            <li>One more things to keep in mind...
-                <ul>
-                    <li>The items listed under avaiable actions is not currently usable, but is there to reflect how we will display additonal actions users can obtain.</li>
+                    <li>A new Advanced tab next to the already established Fields and Emails & Actions tabs. Play around with these advanced settings and make sure that they function as you would expect. Are they clear? Can you view them in the Undo Manager and do they undo properly?</li>
+                    <li>We’ve added back in the submissions manager so you can now view and edit submissions. Please play around with this section and make sure it’s acting properly.</li>
                 </ul>
             </li>
         </ul>

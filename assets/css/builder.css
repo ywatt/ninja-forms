@@ -416,7 +416,7 @@ All styles used within the drawer
   -webkit-transition: all 0.75s ease;
   transition: all 0.75s ease; }
 
-.nf-drawer-opened .nf-add-new {
+.nf-drawer-opened #nf-app-sub-header .nf-add-new {
   top: 95px !important;
   text-indent: -99999px; }
 
@@ -658,6 +658,7 @@ All styles used within the drawer
   text-transform: uppercase; }
 
 .ninja-forms-app input[type=text],
+.ninja-forms-app input[type=number],
 .ninja-forms-app textarea {
   background: #f9f9f9;
   border: 0;
@@ -857,7 +858,7 @@ Various custom field styles
   line-height: 32px;
   position: relative;
   height: 32px;
-  z-index: 100;
+  z-index: 98;
   text-indent: 0px;
   overflow: hidden;
   -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;
@@ -1345,6 +1346,53 @@ All styles used for displaying table content
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 12px solid #424242; }
+
+.has-merge-tags {
+  position: relative; }
+  .has-merge-tags input[type=text],
+  .has-merge-tags textarea {
+    padding-right: 40px; }
+  .has-merge-tags .merge-tags {
+    color: #ccc;
+    position: absolute;
+    top: 33px;
+    right: 12px; }
+
+.jBox-TooltipBorder .jBox-container {
+  border-radius: 5px;
+  border: 2px solid #1EA9EA;
+  /*background: #EBEDEE;*/ }
+  .jBox-TooltipBorder .jBox-container h4 {
+    background: #f1f1f1;
+    padding: 5px;
+    margin: 0 0 5px; }
+  .jBox-TooltipBorder .jBox-container ul {
+    margin: 0; }
+    .jBox-TooltipBorder .jBox-container ul li a {
+      color: #1EA9EA;
+      margin: 0;
+      padding: 0 5px;
+      display: block;
+      text-decoration: none; }
+
+.jBox-TooltipBorder .jBox-pointer::after {
+  border: 2px solid #1EA9EA;
+  /*background: #EBEDEE;*/ }
+
+.jBox-TooltipBorder .jBox-pointer-top,
+.jBox-TooltipBorder .jBox-pointer-bottom {
+  width: 34px;
+  height: 12px; }
+
+.jBox-TooltipBorder .jBox-pointer-left,
+.jBox-TooltipBorder .jBox-pointer-right {
+  width: 12px;
+  height: 34px; }
+
+.jBox-TooltipBorder.jBox-closeButton-box::before {
+  width: 28px;
+  height: 28px;
+  background: #1EA9EA; }
 
 @media only screen and (max-width: 1255px) {
   .nf-cancel {
