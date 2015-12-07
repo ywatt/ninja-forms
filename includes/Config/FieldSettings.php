@@ -6,6 +6,9 @@ return apply_filters( 'ninja-forms-field-settings', array(
     |--------------------------------------------------------------------------
     | Primary Settings
     |--------------------------------------------------------------------------
+    |
+    | The most commonly used settings for a field.
+    |
     */
 
     /*
@@ -115,15 +118,129 @@ return apply_filters( 'ninja-forms-field-settings', array(
     ),
 
     /*
+     * Checkbox Default Value
+     */
+
+    'checkbox_default_value' => array(
+        'name' => 'default_value',
+        'type' => 'select',
+        'label' => __( 'Default Value', 'ninja-forms' ),
+        'options' => array(
+            array(
+                'label' => __( 'Unchecked', 'ninja-forms' ),
+                'value' => 'unchecked'
+            ),
+            array(
+                'label' => __( 'Checked', 'ninja-forms'),
+                'value' => 'checked',
+            ),
+        ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'value' => 'unchecked'
+    ),
+
+    /*
+     * OPTIONS
+     */
+
+    'options' => array(
+        'name' => 'options',
+        'type' => 'list-repeater',
+        'label' => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
+        'width' => 'full',
+        'group' => 'primary',
+        'value' => FALSE
+    ),
+
+    /*
     |--------------------------------------------------------------------------
     | Restriction Settings
     |--------------------------------------------------------------------------
+    |
+    | Limit the behavior or validation of an input.
+    |
     */
+
+    /*
+     * MASK
+     */
+
+    // 'mask' => array(
+    //     'name' => 'mask',
+    //     'type' => 'select',
+    //     'label' => __( 'Input Mask', 'ninja-forms'),
+    //     'width' => 'one-half',
+    //     'group' => 'restrictions',
+    //     'options' => array(
+    //         array(
+    //             'label' => __( 'none', 'ninja-forms' ),
+    //             'value' => ''
+    //         ),
+    //         array(
+    //             'label' => __( 'US Phone', 'ninja-forms' ),
+    //             'value' => 'us-phone'
+    //         ),
+    //         array(
+    //             'label' => __( 'Date', 'ninja-forms' ),
+    //             'value' => 'date'
+    //         ),
+    //     )
+    //     'value' => ''
+    // ),
+
+    /*
+     * INPUT LIMIT SET
+     */
+
+    // 'input_limit_set' => array(
+    //     'name' => 'input_limit_set',
+    //     'type' => 'fieldset',
+    //     'label' => __( 'Limit Input to this Number', 'ninja-forms' ),
+    //     'width' => 'full',
+    //     'group' => 'restrictions',
+    //     'settings' => array(
+    //         array(
+    //             'name' => 'input_limit',
+    //             'type' => 'textbox',
+    //             'placeholder' => 150,
+    //             'width' => 'one-half',
+    //             'value' => ''
+    //         ),
+    //         array(
+    //             'name' => 'input_limit_type',
+    //             'type' => 'select',
+    //             'options' => array(
+    //                 array(
+    //                     'label' => __( 'Character(s)', 'ninja-forms' ),
+    //                     'value' => 'characters'
+    //                 ),
+    //                 array(
+    //                     'label' => __( 'Word(s)', 'ninja-forms' ),
+    //                     'value' => 'words'
+    //                 ),
+    //             ),
+    //             'value' => 'characters'
+    //         ),
+    //         array(
+    //             'name' => 'input_limit_message',
+    //             'type' => 'textbox',
+    //             'label' => __( 'Text to Appear After Counter', 'ninja-forms' ),
+    //             'placeholder' => __( 'Character(s) left' ),
+    //             'width' => 'full',
+    //             'value' => __( 'Character(s) left' )
+    //         )
+    //     )
+    // ),
 
     /*
     |--------------------------------------------------------------------------
     | Advanced Settings
     |--------------------------------------------------------------------------
+    |
+    | The least commonly used settings for a field.
+    | These settings should only be used for specific reasons.
+    |
     */
 
     /*
@@ -144,7 +261,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
     /*
      * DEFAULT VALUE
      */
-
 
      'default' => array(
          'name'    => 'default',
@@ -198,8 +314,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
     /*
     * CLASSES
     */
-
-
     'classes' => array(
         'name' => 'classes',
         'type' => 'fieldset',
@@ -226,28 +340,42 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
     ),
 
-   /*
-    * Checkbox Default Value
-    */
+    /*
+     * DATEPICKER
+     */
 
-     'checkbox_default_value' => array(
-         'name' => 'default_value',
-         'type' => 'select',
-         'label' => __( 'Default Value', 'ninja-forms' ),
-         'options' => array(
-             array(
-                 'label' => __( 'Unchecked', 'ninja-forms' ),
-                 'value' => 'unchecked'
-             ),
-             array(
-                 'label' => __( 'Checked', 'ninja-forms'),
-                 'value' => 'checked',
-             ),
-         ),
-         'width' => 'one-half',
-         'group' => 'primary',
-         'value' => 'unchecked'
-     ),
+    'datepicker' => array(
+        'name' => 'datepicker',
+        'type' => 'toggle',
+        'label' => __( 'Use the JQueryUI datepicker.', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'value' => FALSE
+    ),
+
+
+
+    /*
+     * TIME SETTING
+     */
+
+    'time_submit' => array(
+        'name' => 'time_submit',
+        'type' => 'textbox',
+        'label' => __( 'Number of seconds for timed submit.', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'value' => FALSE
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Un-Grouped Settings
+    |--------------------------------------------------------------------------
+    |
+    | Hidden from grouped listings, but still searchable.
+    |
+    */
 
    /*
     * Spam Question
@@ -459,116 +587,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => '',
         'value' => FALSE
     ),
-
-    /*
-     * DATEPICKER
-     */
-
-    'datepicker' => array(
-        'name' => 'datepicker',
-        'type' => 'toggle',
-        'label' => __( 'Use the JQueryUI datepicker.', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'advanced',
-        'value' => FALSE
-    ),
-
-    /*
-     * OPTIONS
-     */
-
-    'options' => array(
-        'name' => 'options',
-        'type' => 'list-repeater',
-        'label' => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
-        'width' => 'full',
-        'group' => 'primary',
-        'value' => FALSE
-    ),
-
-    /*
-     * TIME SETTING
-     */
-
-    'time_submit' => array(
-        'name' => 'time_submit',
-        'type' => 'textbox',
-        'label' => __( 'Number of seconds for timed submit.', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'advanced',
-        'value' => FALSE
-    ),
-
-    /*
-     * MASK
-     */
-
-    // 'mask' => array(
-    //     'name' => 'mask',
-    //     'type' => 'select',
-    //     'label' => __( 'Input Mask', 'ninja-forms'),
-    //     'width' => 'one-half',
-    //     'group' => 'restrictions',
-    //     'options' => array(
-    //         array(
-    //             'label' => __( 'none', 'ninja-forms' ),
-    //             'value' => ''
-    //         ),
-    //         array(
-    //             'label' => __( 'US Phone', 'ninja-forms' ),
-    //             'value' => 'us-phone'
-    //         ),
-    //         array(
-    //             'label' => __( 'Date', 'ninja-forms' ),
-    //             'value' => 'date'
-    //         ),
-    //     )
-    //     'value' => ''
-    // ),
-
-    /*
-     * INPUT LIMIT SET
-     */
-
-    // 'input_limit_set' => array(
-    //     'name' => 'input_limit_set',
-    //     'type' => 'fieldset',
-    //     'label' => __( 'Limit Input to this Number', 'ninja-forms' ),
-    //     'width' => 'full',
-    //     'group' => 'restrictions',
-    //     'settings' => array(
-    //         array(
-    //             'name' => 'input_limit',
-    //             'type' => 'textbox',
-    //             'placeholder' => 150,
-    //             'width' => 'one-half',
-    //             'value' => ''
-    //         ),
-    //         array(
-    //             'name' => 'input_limit_type',
-    //             'type' => 'select',
-    //             'options' => array(
-    //                 array(
-    //                     'label' => __( 'Character(s)', 'ninja-forms' ),
-    //                     'value' => 'characters'
-    //                 ),
-    //                 array(
-    //                     'label' => __( 'Word(s)', 'ninja-forms' ),
-    //                     'value' => 'words'
-    //                 ),
-    //             ),
-    //             'value' => 'characters'
-    //         ),
-    //         array(
-    //             'name' => 'input_limit_message',
-    //             'type' => 'textbox',
-    //             'label' => __( 'Text to Appear After Counter', 'ninja-forms' ),
-    //             'placeholder' => __( 'Character(s) left' ),
-    //             'width' => 'full',
-    //             'value' => __( 'Character(s) left' )
-    //         )
-    //     )
-    // ),
 
 ));
 
