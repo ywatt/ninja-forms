@@ -199,6 +199,8 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 self::$instance->_logger = new NF_Database_Logger();
 
+                self::$instance->merge_tags = new NF_MergeTags();
+
                 /*
                  * Activation Hook
                  * TODO: Move to a permanent home.
