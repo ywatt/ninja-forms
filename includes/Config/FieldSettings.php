@@ -23,6 +23,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'value' => '',
         'help' => __( 'Enter the label of the form field. This is how users will identify individual fields.', 'ninja-forms' ),
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -63,6 +64,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'value' => 'above',
         'help' => __( 'Select the position of your label relative to the field element itself.', 'ninja-forms' ),
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -77,6 +79,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'value' => FALSE,
         'help' => __( 'Ensure that this field is completed before allowing the form to be submitted.', 'ninja-forms' ),
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -115,6 +118,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'value' => 1
             ),
         ),
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -137,7 +141,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
         'width' => 'one-half',
         'group' => 'primary',
-        'value' => 'unchecked'
+        'value' => 'unchecked',
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -150,7 +155,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
         'width' => 'full',
         'group' => 'primary',
-        'value' => FALSE
+        'value' => FALSE,
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -186,7 +192,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //             'value' => 'date'
     //         ),
     //     )
-    //     'value' => ''
+    //     'value' => '',
+    //     'use_merge_tags' => FALSE,
     // ),
 
     /*
@@ -230,7 +237,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //             'width' => 'full',
     //             'value' => __( 'Character(s) left' )
     //         )
-    //     )
+    //     ),
+    //     'use_merge_tags' => FALSE,
     // ),
 
     /*
@@ -255,6 +263,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'advanced',
         'value' => '',
         'help' => __( 'Enter text you would like displayed in the field before a user enters any data.', 'ninja-forms' ),
+        'use_merge_tags' => TRUE,
     ),
 
 
@@ -263,52 +272,12 @@ return apply_filters( 'ninja-forms-field-settings', array(
      */
 
      'default' => array(
-         'name'    => 'default',
-         'type'    => 'fieldset',
-         'label'   => __( 'Default Value', 'ninja-forms' ),
+         'name' => 'default',
+         'label' => __( 'Default Value' ),
+         'type' => 'textbox',
          'width' => 'full',
-         'group' => 'advanced',
-         'value' => 'none',
-         'settings' => array(
-             'default_type' => array(
-                 'name' => 'default_type',
-                 'label' => 'Type',
-                 'type' => 'select',
-                 'options' => array(
-                     array(
-                         'value' => 'none',
-                         'label' => __( 'None', 'ninja-forms' )
-                     ),
-                     array(
-                         'value' => 'post_id',
-                         'label' => __( 'Post / Page ID', 'ninja-forms' )
-                     ),
-                     array(
-                         'value' => 'post_title',
-                         'label' => __( 'Post / Page Title', 'ninja-forms' )
-                     ),
-                     array(
-                         'value' => 'post_url',
-                         'label' => __( 'Post / Page URL', 'ninja-forms' )
-                     ),
-                     array(
-                         'value' => 'query_string',
-                         'label' => __( 'Query String Variable', 'ninja-forms' )
-                     ),
-                     array(
-                         'value' => 'custom',
-                         'label' => __( 'Custom Default Value', 'ninja-forms' )
-                     )
-                 ),
-             ),
-             array(
-                 'name' => 'default_value',
-                 'label' => 'Value',
-                 'type' => 'textbox',
-                 'width' => 'one-half',
-                 'value' => ''
-             )
-         )
+         'value' => '',
+         'use_merge_tags' => TRUE,
      ),
 
     /*
@@ -327,7 +296,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'placeholder' => '',
                 'label' => __( 'Wrapper', 'ninja-forms' ),
                 'width' => 'one-half',
-                'value' => ''
+                'value' => '',
+                'use_merge_tags' => TRUE,
             ),
             array(
                 'name' => 'element_class',
@@ -335,7 +305,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'label' => __( 'Element', 'ninja-forms' ),
                 'placeholder' => '',
                 'width' => 'one-half',
-                'value' => ''
+                'value' => '',
+                'use_merge_tags' => TRUE,
             ),
         ),
     ),
@@ -350,7 +321,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Use the JQueryUI datepicker.', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'advanced',
-        'value' => FALSE
+        'value' => FALSE,
+        'use_merge_tags' => FALSE,
     ),
 
 
@@ -365,7 +337,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Number of seconds for timed submit.', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'advanced',
-        'value' => FALSE
+        'value' => FALSE,
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -388,7 +361,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'value' => __( 'Anti-Spam', 'ninja-forms' ),
         'width' => '',
         'group' => '',
-        'value' => ''
+        'value' => '',
+        'use_merge_tags' => FALSE,
     ),
 
    /*
@@ -401,7 +375,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Spam Answer', 'ninja-forms' ),
         'width' => '',
         'group' => '',
-        'value' => ''
+        'value' => '',
+        'use_merge_tags' => FALSE,
     ),
 
    /*
@@ -422,6 +397,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
    //              'value' => 10,
    //              'placeholder' => '',
    //              'width' => 'one-half',
+   //               'use_merge_tags' => FALSE,
    //          ),
    //          array(
    //              'name' => 'timed_submit_label',
@@ -430,6 +406,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
    //              'label' => __( 'Timer Label', 'ninja-forms' ),
    //              'value' => __( 'Please wait %n seconds', 'ninja-forms' ),
    //              'width' => 'one-half'
+   //               'use_merge_tags' => FALSE,
    //          ),
    //      ),
    //  ),
@@ -442,7 +419,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
                     //'Submit button text after timer expires'
                     'width' => '',
                     'group' => '',
-                    'value' => ''
+                    'value' => '',
+                    'use_merge_tags' => TRUE,
                 ),
 
                /*
@@ -456,7 +434,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
                     // This text was located below the element '%n will be used to signfify the number of seconds'
                     'value' => __( 'Please wait %n seconds', 'ninja-forms' ),
                     'width' => '',
-                    'group' => ''
+                    'group' => '',
+                    'use_merge_tags' => FALSE,
                 ),
 
                /*
@@ -471,7 +450,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
                     //"This is how long the user must waitin to submit the form"
                     'value' => 10,
                     'width' => '',
-                    'group' => ''
+                    'group' => '',
+                    'use_merge_tags' => FALSE,
                 ),
 
 
@@ -486,7 +466,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //     'label' => __( 'Enable RTE', 'ninja-forms' ),
     //     'width' => 'one-half',
     //     'group' => 'rte',
-    //     'value' => FALSE
+    //     'value' => FALSE,
+    //     'use_merge_tags' => FALSE,
     // ),
 
     // 'rte_media' => array(
@@ -495,7 +476,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //     'label' => __( 'Enable Media Button', 'ninja-forms' ),
     //     'width' => 'one-half',
     //     'group' => 'rte',
-    //     'value' => FALSE
+    //     'value' => FALSE,
+    //     'use_merge_tags' => FALSE,
     // ),
 
     // 'rte_mobile' => array(
@@ -504,7 +486,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //     'label' => __( 'Mobile Friendly', 'ninja-forms' ),
     //     'width' => 'one-half',
     //     'group' => 'rte',
-    //     'value' => FALSE
+    //     'value' => FALSE,
+    //     'use_merge_tags' => FALSE,
     // ),
 
    /*
@@ -518,7 +501,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Use this as a reistration password field. If this box is check, both
                         password and re-password textboxes will be output', 'ninja-forms' ),
         'width' => '',
-        'group' => ''
+        'group' => '',
+        'use_merge_tags' => FALSE,
     ),
 
 
@@ -532,21 +516,9 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'value' => 5,
         'label' => __( 'Number of stars', 'ninja-forms' ),
         'width' => '',
-        'group' => ''
+        'group' => '',
+        'use_merge_tags' => FALSE,
     ),
-
-   /*
-    * Text Default Value
-    */
-
-    // 'textarea_default_value' => array(
-    //     'name' => 'text_default_value',
-    //     'type' => 'textarea',// TODO: WYSIWYG editor here
-    //     'label' => __( 'Default Value', 'ninja-forms' ),
-    //     'width' => 'full',
-    //     'group' => 'advanced'
-    //     'value' => ''
-    // ),
 
    /*
     * Disable Browser Autocomplete
@@ -558,7 +530,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'value' => 'unchecked',
         'label' => __( 'Disable Browser Autocomplete', 'ninja-forms' ),
         'width' => '',
-        'group' => ''
+        'group' => '',
+        'use_merge_tags' => FALSE,
     ),
 
     //TODO: Ask about the list of states and countries.
@@ -572,7 +545,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'value' => 'unchecked',
         'label' => __( 'Use a custom first option', 'ninja-forms' ),
         'width' => '',
-        'group' => ''
+        'group' => '',
+        'use_merge_tags' => FALSE,
     ),
 
    /*
@@ -585,7 +559,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Custom first option', 'ninja-forms' ),
         'width' => '',
         'group' => '',
-        'value' => FALSE
+        'value' => FALSE,
+        'use_merge_tags' => FALSE,
     ),
 
 ));

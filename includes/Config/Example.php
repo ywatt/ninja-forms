@@ -23,6 +23,7 @@ return apply_filters( 'ninja-forms-example-settings', array(
         'group' => 'primary', // 'primary', 'restrictions', 'advanced'
         'value' => '',
         'help' => __( 'Help Text Here', 'ninja-forms' ),
+        'use_merge_tags' => TRUE, // TRUE or FALSE
     ),
 
 ));
