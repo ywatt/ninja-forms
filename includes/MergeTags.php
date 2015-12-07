@@ -3,9 +3,24 @@
 final class NF_MergeTags
 {
     private $replace_values = array(
+
+        /*
+         * USER
+         */
         'user:firstname' => 'user_firstname',
         'user:lastname' => 'user_lastname',
         'user:email' => 'user_email',
+
+        /*
+         * POST
+         */
+        'post:id' => 'post_id',
+        'post:title' => 'post_title',
+        'post:url' => 'post_url',
+
+        /*
+         * SYSTEM
+         */
         'system:date' => 'system_date',
         'system:ip' => 'system_ip'
     );
@@ -32,6 +47,10 @@ final class NF_MergeTags
         return $default_value;
     }
 
+    /*
+     * USER
+     */
+
     private function user_firstname()
     {
         $current_user = wp_get_current_user();
@@ -52,6 +71,32 @@ final class NF_MergeTags
 
         return ( $current_user ) ? $current_user->user_email : '';
     }
+
+    /*
+     * POST
+     */
+
+    private function post_id()
+    {
+        global $post;
+        return ( is_object ( $post ) ) ? $post->ID : '';
+    }
+
+    private function post_title()
+    {
+        global $post;
+        return ( is_object ( $post ) ) ? $post->post_title : '';
+    }
+
+    private function post_url()
+    {
+        global $post;
+        return ( is_object ( $post ) ) ? get_permalink( $post->ID ) : '';
+    }
+
+    /*
+     * SYSTEM
+     */
 
     private function system_date()
     {
