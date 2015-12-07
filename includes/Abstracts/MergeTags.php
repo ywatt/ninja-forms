@@ -27,5 +27,10 @@ abstract class NF_Abstracts_MergeTags
         return $subject;
     }
 
+    public function get_merge_tags()
+    {
+        return $this->merge_tags;
+    }
+
 
 } // END CLASS NF_Abstracts_MergeTags
