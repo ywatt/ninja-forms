@@ -52,6 +52,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $this->_localize_action_type_data();
 
             $this->_localize_form_settings();
+
+            $this->_localize_merge_tags();
         } else {
 
             /*
@@ -243,6 +245,22 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         </script>
         <?php
     }
+
+    protected function _localize_merge_tags()
+    {
+        $merge_tags = array();
+
+        foreach( Ninja_Forms()->merge_tags as $key => $group ){
+
+            $merge_tags[ $key ] = array_values( $group->get_merge_tags() );
+        }
+        ?>
+        <script>
+            var nfMergeTags = <?php echo wp_json_encode( $merge_tags )?>;
+        </script>
+        <?php
+    }
+
 
     protected function _group_settings( $settings, $groups )
     {

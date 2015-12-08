@@ -6,6 +6,9 @@ return apply_filters( 'ninja-forms-field-settings', array(
     |--------------------------------------------------------------------------
     | Primary Settings
     |--------------------------------------------------------------------------
+    |
+    | The most commonly used settings for a field.
+    |
     */
 
     /*
@@ -20,6 +23,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'value' => '',
         'help' => __( 'Enter the label of the form field. This is how users will identify individual fields.', 'ninja-forms' ),
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -60,6 +64,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'value' => 'above',
         'help' => __( 'Select the position of your label relative to the field element itself.', 'ninja-forms' ),
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -74,6 +79,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'value' => FALSE,
         'help' => __( 'Ensure that this field is completed before allowing the form to be submitted.', 'ninja-forms' ),
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -112,365 +118,31 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'value' => 1
             ),
         ),
+        'use_merge_tags' => FALSE,
     ),
 
     /*
-    |--------------------------------------------------------------------------
-    | Restriction Settings
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | Advanced Settings
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-     * INPUT PLACEHOLDER
+     * Checkbox Default Value
      */
 
-    'placeholder' => array(
-        'name' => 'placeholder',
-        'type' => 'textbox',
-        'label' => __( 'Placeholder', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'advanced',
-        'value' => '',
-        'help' => __( 'Enter text you would like displayed in the field before a user enters any data.', 'ninja-forms' ),
-    ),
-
-
-    /*
-     * DEFAULT VALUE
-     */
-
-
-     'default' => array(
-         'name'    => 'default',
-         'type'    => 'fieldset',
-         'label'   => __( 'Default Value', 'ninja-forms' ),
-         'width' => 'full',
-         'group' => 'advanced',
-         'value' => 'none',
-         'settings' => array(
-             'default_type' => array(
-                 'name' => 'default_type',
-                 'label' => 'Type',
-                 'type' => 'select',
-                 'options' => array(
-                     array(
-                         'value' => 'none',
-                         'label' => __( 'None', 'ninja-forms' )
-                     ),
-                     array(
-                         'value' => 'post_id',
-                         'label' => __( 'Post / Page ID', 'ninja-forms' )
-                     ),
-                     array(
-                         'value' => 'post_title',
-                         'label' => __( 'Post / Page Title', 'ninja-forms' )
-                     ),
-                     array(
-                         'value' => 'post_url',
-                         'label' => __( 'Post / Page URL', 'ninja-forms' )
-                     ),
-                     array(
-                         'value' => 'query_string',
-                         'label' => __( 'Query String Variable', 'ninja-forms' )
-                     ),
-                     array(
-                         'value' => 'custom',
-                         'label' => __( 'Custom Default Value', 'ninja-forms' )
-                     )
-                 ),
-             ),
-             array(
-                 'name' => 'default_value',
-                 'label' => 'Value',
-                 'type' => 'textbox',
-                 'width' => 'one-half',
-                 'value' => ''
-             )
-         )
-     ),
-
-    /*
-    * CLASSES
-    */
-
-
-    'classes' => array(
-        'name' => 'classes',
-        'type' => 'fieldset',
-        'label' => __( 'Custom Class Names', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'advanced',
-        'settings' => array(
+    'checkbox_default_value' => array(
+        'name' => 'default_value',
+        'type' => 'select',
+        'label' => __( 'Default Value', 'ninja-forms' ),
+        'options' => array(
             array(
-                'name' => 'wrapper_class',
-                'type' => 'textbox',
-                'placeholder' => '',
-                'label' => __( 'Wrapper', 'ninja-forms' ),
-                'width' => 'one-half',
-                'value' => ''
+                'label' => __( 'Unchecked', 'ninja-forms' ),
+                'value' => 'unchecked'
             ),
             array(
-                'name' => 'element_class',
-                'type' => 'textbox',
-                'label' => __( 'Element', 'ninja-forms' ),
-                'placeholder' => '',
-                'width' => 'one-half',
-                'value' => ''
+                'label' => __( 'Checked', 'ninja-forms'),
+                'value' => 'checked',
             ),
         ),
-    ),
-
-   /*
-    * Checkbox Default Value
-    */
-
-     'checkbox_default_value' => array(
-         'name' => 'default_value',
-         'type' => 'select',
-         'label' => __( 'Default Value', 'ninja-forms' ),
-         'options' => array(
-             array(
-                 'label' => __( 'Unchecked', 'ninja-forms' ),
-                 'value' => 'unchecked'
-             ),
-             array(
-                 'label' => __( 'Checked', 'ninja-forms'),
-                 'value' => 'checked',
-             ),
-         ),
-         'width' => 'one-half',
-         'group' => 'primary',
-         'value' => 'unchecked'
-     ),
-
-   /*
-    * Spam Question
-    */
-
-    'spam_question' => array(
-        'name' => 'spam_question',
-        'type' => 'textbox',
-        'label' => __( 'Spam Question', 'ninja-forms' ),
-        'value' => __( 'Anti-Spam', 'ninja-forms' ),
-        'width' => '',
-        'group' => '',
-        'value' => ''
-    ),
-
-   /*
-    * Spam Answer
-    */
-
-    'spam_answer' => array(
-        'name' => 'spam_answer',
-        'type' => 'textbox',
-        'label' => __( 'Spam Answer', 'ninja-forms' ),
-        'width' => '',
-        'group' => '',
-        'value' => ''
-    ),
-
-   /*
-    * Timed Submit Label
-    */
-
-   // 'timed_submit' => array(
-   //      'name' => 'timed_submit',
-   //      'type' => 'fieldset',
-   //      'label' => __( 'Timed Submit', 'ninja-forms' ),
-   //      'width' => 'full',
-   //      'group' => 'advanced',
-   //      'settings' => array(
-   //          array(
-   //              'name' => 'timed_submit_countdown',
-   //              'type' => 'number',
-   //              'label' => __( 'Countdown', 'ninja-forms' ),
-   //              'value' => 10,
-   //              'placeholder' => '',
-   //              'width' => 'one-half',
-   //          ),
-   //          array(
-   //              'name' => 'timed_submit_label',
-   //              'type' => 'textbox',
-   //              'placeholder' => '',
-   //              'label' => __( 'Timer Label', 'ninja-forms' ),
-   //              'value' => __( 'Please wait %n seconds', 'ninja-forms' ),
-   //              'width' => 'one-half'
-   //          ),
-   //      ),
-   //  ),
-
-                'timed_submit_label' => array(
-                    'name' => 'timed_submit_label',
-                    'type' => 'textbox',
-                    'label' => __( 'Label', 'ninja-forms' ),
-                    //The following text appears below the element
-                    //'Submit button text after timer expires'
-                    'width' => '',
-                    'group' => '',
-                    'value' => ''
-                ),
-
-               /*
-                * Timed Submit Timer
-                */
-
-                'timed_submit_timer' => array(
-                    'name' => 'timed_submit_timer',
-                    'type' => 'textbox',
-                    'label' => __( 'Label' , 'ninja-forms' ),
-                    // This text was located below the element '%n will be used to signfify the number of seconds'
-                    'value' => __( 'Please wait %n seconds', 'ninja-forms' ),
-                    'width' => '',
-                    'group' => ''
-                ),
-
-               /*
-                * Timed Submit Countdown
-                */
-
-                'timed_submit_countdown' => array (
-                    'name' => 'timed_submit_countdown',
-                    'type' => 'number',
-                    'label' => __( 'Number of seconds for the countdown', 'ninja-forms' ),
-                    //The following text appears to the right of the element
-                    //"This is how long the user must waitin to submit the form"
-                    'value' => 10,
-                    'width' => '',
-                    'group' => ''
-                ),
-
-
-
-   /*
-    * Show Rich Text Editor
-    */
-
-    // 'rte_enable' => array(
-    //     'name' => 'rte_enable', // TODO was rich_text_editor
-    //     'type' => 'toggle',
-    //     'label' => __( 'Enable RTE', 'ninja-forms' ),
-    //     'width' => 'one-half',
-    //     'group' => 'rte',
-    //     'value' => FALSE
-    // ),
-
-    // 'rte_media' => array(
-    //     'name' => 'rte_media', // TODO was media_upload_button
-    //     'type' => 'toggle',
-    //     'label' => __( 'Enable Media Button', 'ninja-forms' ),
-    //     'width' => 'one-half',
-    //     'group' => 'rte',
-    //     'value' => FALSE
-    // ),
-
-    // 'rte_mobile' => array(
-    //     'name' => 'rte_mobile', // TODO was disable_moblile_rich_text_editor
-    //     'type' => 'toggle',
-    //     'label' => __( 'Mobile Friendly', 'ninja-forms' ),
-    //     'width' => 'one-half',
-    //     'group' => 'rte',
-    //     'value' => FALSE
-    // ),
-
-   /*
-    * Password Registration checkbox
-    */
-
-    'password_registration_checkbox' => array(
-        'name' => 'password_registration_checkbox',
-        'type' => 'checkbox',
+        'width' => 'one-half',
+        'group' => 'primary',
         'value' => 'unchecked',
-        'label' => __( 'Use this as a reistration password field. If this box is check, both
-                        password and re-password textboxes will be output', 'ninja-forms' ),
-        'width' => '',
-        'group' => ''
-    ),
-
-
-   /*
-    * Number of Stars Textbox
-    */
-
-    'number_of_stars' => array(
-        'name' => 'number_of_stars',
-        'type' => 'textbox',
-        'value' => 5,
-        'label' => __( 'Number of stars', 'ninja-forms' ),
-        'width' => '',
-        'group' => ''
-    ),
-
-   /*
-    * Text Default Value
-    */
-
-    // 'textarea_default_value' => array(
-    //     'name' => 'text_default_value',
-    //     'type' => 'textarea',// TODO: WYSIWYG editor here
-    //     'label' => __( 'Default Value', 'ninja-forms' ),
-    //     'width' => 'full',
-    //     'group' => 'advanced'
-    //     'value' => ''
-    // ),
-
-   /*
-    * Disable Browser Autocomplete
-    */
-
-    'disable_browser_autocomplete' => array(
-        'name' => 'disable_browser_autocomplete',
-        'type' => 'checkbox',
-        'value' => 'unchecked',
-        'label' => __( 'Disable Browser Autocomplete', 'ninja-forms' ),
-        'width' => '',
-        'group' => ''
-    ),
-
-    //TODO: Ask about the list of states and countries.
-   /*
-    *  Country - Use Custom First Option
-    */
-
-    'use_custom_first_option' => array(
-        'name' => 'use_custom_first_option',
-        'type' => 'checkbox',
-        'value' => 'unchecked',
-        'label' => __( 'Use a custom first option', 'ninja-forms' ),
-        'width' => '',
-        'group' => ''
-    ),
-
-   /*
-    * Country - Custom first option
-    */
-
-    'custom_first_option' => array(
-        'name' => 'custom_first_option',
-        'type' => 'textbox',
-        'label' => __( 'Custom first option', 'ninja-forms' ),
-        'width' => '',
-        'group' => '',
-        'value' => FALSE
-    ),
-
-    /*
-     * DATEPICKER
-     */
-
-    'datepicker' => array(
-        'name' => 'datepicker',
-        'type' => 'toggle',
-        'label' => __( 'Use the JQueryUI datepicker.', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'advanced',
-        'value' => FALSE
+        'use_merge_tags' => FALSE,
     ),
 
     /*
@@ -483,21 +155,18 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
         'width' => 'full',
         'group' => 'primary',
-        'value' => FALSE
+        'value' => FALSE,
+        'use_merge_tags' => FALSE,
     ),
 
     /*
-     * TIME SETTING
-     */
-
-    'time_submit' => array(
-        'name' => 'time_submit',
-        'type' => 'textbox',
-        'label' => __( 'Number of seconds for timed submit.', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'advanced',
-        'value' => FALSE
-    ),
+    |--------------------------------------------------------------------------
+    | Restriction Settings
+    |--------------------------------------------------------------------------
+    |
+    | Limit the behavior or validation of an input.
+    |
+    */
 
     /*
      * MASK
@@ -523,7 +192,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //             'value' => 'date'
     //         ),
     //     )
-    //     'value' => ''
+    //     'value' => '',
+    //     'use_merge_tags' => FALSE,
     // ),
 
     /*
@@ -567,8 +237,331 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //             'width' => 'full',
     //             'value' => __( 'Character(s) left' )
     //         )
-    //     )
+    //     ),
+    //     'use_merge_tags' => FALSE,
     // ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Advanced Settings
+    |--------------------------------------------------------------------------
+    |
+    | The least commonly used settings for a field.
+    | These settings should only be used for specific reasons.
+    |
+    */
+
+    /*
+     * INPUT PLACEHOLDER
+     */
+
+    'placeholder' => array(
+        'name' => 'placeholder',
+        'type' => 'textbox',
+        'label' => __( 'Placeholder', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'value' => '',
+        'help' => __( 'Enter text you would like displayed in the field before a user enters any data.', 'ninja-forms' ),
+        'use_merge_tags' => TRUE,
+    ),
+
+
+    /*
+     * DEFAULT VALUE
+     */
+
+     'default' => array(
+         'name' => 'default',
+         'label' => __( 'Default Value' ),
+         'type' => 'textbox',
+         'width' => 'full',
+         'value' => '',
+         'use_merge_tags' => TRUE,
+     ),
+
+    /*
+    * CLASSES
+    */
+    'classes' => array(
+        'name' => 'classes',
+        'type' => 'fieldset',
+        'label' => __( 'Custom Class Names', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'settings' => array(
+            array(
+                'name' => 'wrapper_class',
+                'type' => 'textbox',
+                'placeholder' => '',
+                'label' => __( 'Wrapper', 'ninja-forms' ),
+                'width' => 'one-half',
+                'value' => '',
+                'use_merge_tags' => TRUE,
+            ),
+            array(
+                'name' => 'element_class',
+                'type' => 'textbox',
+                'label' => __( 'Element', 'ninja-forms' ),
+                'placeholder' => '',
+                'width' => 'one-half',
+                'value' => '',
+                'use_merge_tags' => TRUE,
+            ),
+        ),
+    ),
+
+    /*
+     * DATEPICKER
+     */
+
+    'datepicker' => array(
+        'name' => 'datepicker',
+        'type' => 'toggle',
+        'label' => __( 'Use the JQueryUI datepicker.', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'value' => FALSE,
+        'use_merge_tags' => FALSE,
+    ),
+
+
+
+    /*
+     * TIME SETTING
+     */
+
+    'time_submit' => array(
+        'name' => 'time_submit',
+        'type' => 'textbox',
+        'label' => __( 'Number of seconds for timed submit.', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'value' => FALSE,
+        'use_merge_tags' => FALSE,
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Un-Grouped Settings
+    |--------------------------------------------------------------------------
+    |
+    | Hidden from grouped listings, but still searchable.
+    |
+    */
+
+   /*
+    * Spam Question
+    */
+
+    'spam_question' => array(
+        'name' => 'spam_question',
+        'type' => 'textbox',
+        'label' => __( 'Spam Question', 'ninja-forms' ),
+        'value' => __( 'Anti-Spam', 'ninja-forms' ),
+        'width' => '',
+        'group' => '',
+        'value' => '',
+        'use_merge_tags' => FALSE,
+    ),
+
+   /*
+    * Spam Answer
+    */
+
+    'spam_answer' => array(
+        'name' => 'spam_answer',
+        'type' => 'textbox',
+        'label' => __( 'Spam Answer', 'ninja-forms' ),
+        'width' => '',
+        'group' => '',
+        'value' => '',
+        'use_merge_tags' => FALSE,
+    ),
+
+   /*
+    * Timed Submit Label
+    */
+
+   // 'timed_submit' => array(
+   //      'name' => 'timed_submit',
+   //      'type' => 'fieldset',
+   //      'label' => __( 'Timed Submit', 'ninja-forms' ),
+   //      'width' => 'full',
+   //      'group' => 'advanced',
+   //      'settings' => array(
+   //          array(
+   //              'name' => 'timed_submit_countdown',
+   //              'type' => 'number',
+   //              'label' => __( 'Countdown', 'ninja-forms' ),
+   //              'value' => 10,
+   //              'placeholder' => '',
+   //              'width' => 'one-half',
+   //               'use_merge_tags' => FALSE,
+   //          ),
+   //          array(
+   //              'name' => 'timed_submit_label',
+   //              'type' => 'textbox',
+   //              'placeholder' => '',
+   //              'label' => __( 'Timer Label', 'ninja-forms' ),
+   //              'value' => __( 'Please wait %n seconds', 'ninja-forms' ),
+   //              'width' => 'one-half'
+   //               'use_merge_tags' => FALSE,
+   //          ),
+   //      ),
+   //  ),
+
+                'timed_submit_label' => array(
+                    'name' => 'timed_submit_label',
+                    'type' => 'textbox',
+                    'label' => __( 'Label', 'ninja-forms' ),
+                    //The following text appears below the element
+                    //'Submit button text after timer expires'
+                    'width' => '',
+                    'group' => '',
+                    'value' => '',
+                    'use_merge_tags' => TRUE,
+                ),
+
+               /*
+                * Timed Submit Timer
+                */
+
+                'timed_submit_timer' => array(
+                    'name' => 'timed_submit_timer',
+                    'type' => 'textbox',
+                    'label' => __( 'Label' , 'ninja-forms' ),
+                    // This text was located below the element '%n will be used to signfify the number of seconds'
+                    'value' => __( 'Please wait %n seconds', 'ninja-forms' ),
+                    'width' => '',
+                    'group' => '',
+                    'use_merge_tags' => FALSE,
+                ),
+
+               /*
+                * Timed Submit Countdown
+                */
+
+                'timed_submit_countdown' => array (
+                    'name' => 'timed_submit_countdown',
+                    'type' => 'number',
+                    'label' => __( 'Number of seconds for the countdown', 'ninja-forms' ),
+                    //The following text appears to the right of the element
+                    //"This is how long the user must waitin to submit the form"
+                    'value' => 10,
+                    'width' => '',
+                    'group' => '',
+                    'use_merge_tags' => FALSE,
+                ),
+
+
+
+   /*
+    * Show Rich Text Editor
+    */
+
+    // 'rte_enable' => array(
+    //     'name' => 'rte_enable', // TODO was rich_text_editor
+    //     'type' => 'toggle',
+    //     'label' => __( 'Enable RTE', 'ninja-forms' ),
+    //     'width' => 'one-half',
+    //     'group' => 'rte',
+    //     'value' => FALSE,
+    //     'use_merge_tags' => FALSE,
+    // ),
+
+    // 'rte_media' => array(
+    //     'name' => 'rte_media', // TODO was media_upload_button
+    //     'type' => 'toggle',
+    //     'label' => __( 'Enable Media Button', 'ninja-forms' ),
+    //     'width' => 'one-half',
+    //     'group' => 'rte',
+    //     'value' => FALSE,
+    //     'use_merge_tags' => FALSE,
+    // ),
+
+    // 'rte_mobile' => array(
+    //     'name' => 'rte_mobile', // TODO was disable_moblile_rich_text_editor
+    //     'type' => 'toggle',
+    //     'label' => __( 'Mobile Friendly', 'ninja-forms' ),
+    //     'width' => 'one-half',
+    //     'group' => 'rte',
+    //     'value' => FALSE,
+    //     'use_merge_tags' => FALSE,
+    // ),
+
+   /*
+    * Password Registration checkbox
+    */
+
+    'password_registration_checkbox' => array(
+        'name' => 'password_registration_checkbox',
+        'type' => 'checkbox',
+        'value' => 'unchecked',
+        'label' => __( 'Use this as a reistration password field. If this box is check, both
+                        password and re-password textboxes will be output', 'ninja-forms' ),
+        'width' => '',
+        'group' => '',
+        'use_merge_tags' => FALSE,
+    ),
+
+
+   /*
+    * Number of Stars Textbox
+    */
+
+    'number_of_stars' => array(
+        'name' => 'number_of_stars',
+        'type' => 'textbox',
+        'value' => 5,
+        'label' => __( 'Number of stars', 'ninja-forms' ),
+        'width' => '',
+        'group' => '',
+        'use_merge_tags' => FALSE,
+    ),
+
+   /*
+    * Disable Browser Autocomplete
+    */
+
+    'disable_browser_autocomplete' => array(
+        'name' => 'disable_browser_autocomplete',
+        'type' => 'checkbox',
+        'value' => 'unchecked',
+        'label' => __( 'Disable Browser Autocomplete', 'ninja-forms' ),
+        'width' => '',
+        'group' => '',
+        'use_merge_tags' => FALSE,
+    ),
+
+    //TODO: Ask about the list of states and countries.
+   /*
+    *  Country - Use Custom First Option
+    */
+
+    'use_custom_first_option' => array(
+        'name' => 'use_custom_first_option',
+        'type' => 'checkbox',
+        'value' => 'unchecked',
+        'label' => __( 'Use a custom first option', 'ninja-forms' ),
+        'width' => '',
+        'group' => '',
+        'use_merge_tags' => FALSE,
+    ),
+
+   /*
+    * Country - Custom first option
+    */
+
+    'custom_first_option' => array(
+        'name' => 'custom_first_option',
+        'type' => 'textbox',
+        'label' => __( 'Custom first option', 'ninja-forms' ),
+        'width' => '',
+        'group' => '',
+        'value' => FALSE,
+        'use_merge_tags' => FALSE,
+    ),
 
 ));
 
