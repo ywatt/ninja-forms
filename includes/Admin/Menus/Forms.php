@@ -29,8 +29,6 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             Ninja_Forms::template( 'admin-menu-new-form.html.php' );
             wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
             wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
-            wp_enqueue_style( 'jBox-dark', Ninja_Forms::$url . 'assets/css/TooltipDark.css' );
-            wp_enqueue_style( 'jBox-border', Ninja_Forms::$url . 'assets/css/TooltipBorder.css' );
 
             wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
             wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
@@ -38,6 +36,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             wp_enqueue_script( 'jquery-hotkeys-new', Ninja_Forms::$url . 'assets/js/lib/jquery.hotkeys.js' );
             // wp_enqueue_script( 'jquery-qtip2', Ninja_Forms::$url . 'assets/js/lib/jquery.qtip.js' );
             wp_enqueue_script( 'jBox', Ninja_Forms::$url . 'assets/js/lib/jBox.min.js' );
+            wp_enqueue_script( 'jquery-caret', Ninja_Forms::$url . 'assets/js/lib/jquery.caret.js' );
 
             // wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
             wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/min/builder.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );

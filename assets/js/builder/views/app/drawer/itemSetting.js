@@ -1,4 +1,4 @@
-define( [], function() {
+define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) {
 	var view = Marionette.ItemView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-edit-setting-wrap',
@@ -7,13 +7,10 @@ define( [], function() {
 			this.dataModel = data.dataModel;
 		},
 
-		onShow: function() {
-			this.$el = this.$el.children();
-			this.$el.unwrap();
-			this.setElement( this.$el );
-		},
-
 		onRender: function() {
+			this.mergeTagsContentView = false;
+			var that = this;
+
 			jQuery( this.el ).find( '.nf-help' ).each(function() {
 				var content = jQuery(this).next('.nf-help-text');
 				jQuery( this ).jBox( 'Tooltip', {
@@ -25,36 +22,37 @@ define( [], function() {
 				})
 		    });
 
-
-			var mergeTagContent = '';
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
-			if ( 0 < fieldCollection.models.length ) {
-				mergeTagContent += '<h4>Fields</h4><ul>';
-				_.each( fieldCollection.models, function( field ) {
-					mergeTagContent += '<li><a href="#">' + field.get( 'label' ) + '</a></li>';
-				} );
-				mergeTagContent += '</ul>';
-			}
-			
-			mergeTagContent += '<h4>System Tags</h4><ul>';
-			mergeTagContent += '<li><a href="#">Date</a></li><li><a href="#">Time</a></li><li><a href="#">IP</a></li></ul><h4>User Information</h4><ul><li><a href="#">First Name (if logged-in)</a></li><li><a href="#">Last Name (if logged-in)</a></li><li><a href="#">Email (if logged-in)</a></li></ul>';
-
 			jQuery( this.el ).find( '.merge-tags' ).each(function() {
 				jQuery( this ).jBox( 'Tooltip', {
 					title: 'Insert Merge Tag',
-					content: mergeTagContent,
+					content: jQuery( '.merge-tags-content' ),
 					trigger: 'click',
 					position: {
 						x: 'center',
 						y: 'bottom'
 					},
 					closeOnClick: 'body',
+					closeOnEsc: true,
 					theme: 'TooltipBorder',
-					maxHeight: 200
+					maxHeight: 200,
+					onOpen: function() {
+						var currentElement = jQuery( that.el ).find( '.setting' );
+						nfRadio.channel( 'mergeTags' ).request( 'update:currentElement', currentElement );
+						nfRadio.channel( 'mergeTags' ).request( 'update:open', true );
+						nfRadio.channel( 'drawer' ).request( 'prevent:close', 'merge-tags' );
+					},
+					onCloseComplete: function() {
+						nfRadio.channel( 'mergeTags' ).request( 'update:open', false );
+						nfRadio.channel( 'drawer' ).request( 'enable:close', 'merge-tags' );
+					}
 				})
 		    });
+		},
 
-		    
+		onShow: function() {
+			this.$el = this.$el.children();
+			this.$el.unwrap();
+			this.setElement( this.$el );
 		},
 
 		templateHelpers: function () {
@@ -93,8 +91,7 @@ define( [], function() {
 		},
 
 		events: {
-			'change': 'changeSetting',
-			'click': 'insertMergeTag'
+			'change': 'changeSetting'
 		},
 
 		changeSetting: function( e ) {

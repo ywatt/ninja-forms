@@ -5,6 +5,7 @@
     <div id="nf-main" class="nf-app-main"></div>
     <!-- <div id="nf-menu-drawer"></div> -->
     <div id="nf-drawer"></div>
+    <span class="merge-tags-content" style="display:none;"></span>
 </script>
 
 <script id="nf-tmpl-header" type="text/template">
@@ -202,6 +203,7 @@
 
 <script id="nf-tmpl-drawer-content-edit-settings" type="text/template">
     <%= maybeRenderTitle() %>
+ 
     <span class="nf-settings-groups"></span>
 </script>
 
@@ -309,8 +311,17 @@
 
 </script>
 
-<script id="nf-tmpl-merge-tags" type="text/template">
+<script id="nf-tmpl-merge-tags-content" type="text/template">
+    <h4>Fields</h4>
+    <ul class="merge-tags-fields" tabindex="1"></ul>
+    <h4>System Tags</h4>
+    <ul class="merge-tags-system"></ul>
+    <h4>User Information</h4>
+    <ul class="merge-tags-user-info"></ul>
+</script>
 
+<script id="nf-tmpl-merge-tags-item" type="text/template">
+    <a href="#" tabindex="1" class="<%= renderClasses() %>"><%= label %></a>
 </script>
 
 <!-- Field Settings Templates -->
@@ -323,7 +334,7 @@
 
 <script id="nf-tmpl-edit-setting-textbox" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
-        <input type="text" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
+        <input type="text" class="setting" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
         <span class="dashicons dashicons-list-view merge-tags"></span>
     </label>
 </script>
@@ -336,7 +347,7 @@
 
 <script id="nf-tmpl-edit-setting-textarea" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
-        <textarea id="<%= name %>"><%= value %></textarea>
+        <textarea id="<%= name %>" class="setting"><%= value %></textarea>
         <span class="dashicons dashicons-list-view merge-tags"></span>
     </label>
 </script>

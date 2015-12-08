@@ -34,6 +34,7 @@ define(
 		'controllers/app/fieldset',
 		'controllers/app/toggleSetting',
 		'controllers/app/itemControls',
+		'controllers/app/mergeTags',
 		/*
 		 * Fields domain controllers
 		 */
@@ -98,6 +99,7 @@ define(
 		Fieldset,
 		ToggleSetting,
 		ItemControls,
+		MergeTags,
 		/*
 		 * Fields domain controllers
 		 */
@@ -204,6 +206,7 @@ define(
 				new FieldData();
 				new FormData();
 				new AppData();
+				new MergeTags();
 			}
 		});
 
