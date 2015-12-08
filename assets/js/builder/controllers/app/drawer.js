@@ -34,6 +34,12 @@ define( [], function() {
 			 * We use an array so that registered requests can unregister and not affect each other.
 			 */
 			this.objPreventClose = {};
+
+			/*
+			 *  Listen to focus events on the filter and stop our interval when it happens.
+			 *  This is to fix a bug that can cause the filter to gain focus every few seconds.
+			 */
+			this.listenTo( nfRadio.channel( 'drawer' ), 'filter:focused', this.filterFocused );
 		},
 
 		/**
@@ -216,6 +222,16 @@ define( [], function() {
          */
         enableClose: function( key ) {
         	delete this.objPreventClose[ key ];
+        },
+
+        /**
+         * When we focus our filter, make sure that our open drawer interval is cleared.
+         * 
+         * @since  3.0
+         * @return void
+         */
+        filterFocused: function() {
+        	clearInterval( this.checkOpenDrawerPos );
         }
 	});
 
