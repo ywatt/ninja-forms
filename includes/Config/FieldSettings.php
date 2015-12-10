@@ -589,6 +589,41 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'use_merge_tags' => FALSE,
     ),
 
+    'product_type' => array(
+        'name' => 'product_type',
+        'type' => 'select',
+        'label' => __( 'Product Type', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'options' => array(
+            array(
+                'label' => __( 'Single Product (default)', 'ninja-forms' ),
+                'value' => 'single'
+            ),
+            array(
+                'label' => __( 'Multi Product (dropdown)', 'ninja-forms' ),
+                'value' => 'dropdown'
+            ),
+            array(
+                'label' => __( 'Multi Product (checkboxes)', 'ninja-forms' ),
+                'value' => 'checkboxes'
+            ),
+            array(
+                'label' => __( 'Multi Product (radio list)', 'ninja-forms' ),
+                'value' => 'radiolist'
+            ),
+            array(
+                'label' => __( 'User Entry (textbox)', 'ninja-forms' ),
+                'value' => 'user'
+            ),
+            array(
+                'label' => __( 'Hidden', 'ninja-forms' ),
+                'value' => 'hidden'
+            ),
+        ),
+        'use_merge_tags' => FALSE
+    )
+
 ));
 
 
