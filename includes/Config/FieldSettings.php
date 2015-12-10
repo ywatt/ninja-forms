@@ -622,7 +622,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
             ),
         ),
         'use_merge_tags' => FALSE
-    )
+    ),
 
 ));
 
