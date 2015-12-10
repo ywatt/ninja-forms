@@ -11,6 +11,17 @@
         font-size: 16px;
         padding: 16px;
     }
+    .nf-product-field {
+        &.nf-element {
+            background: transparent;
+            border: 0;
+            padding: 0;
+        }
+        .nf-field-qty {
+            font-size: 16px;
+            padding: 16px;
+        }
+    }
     textarea {
         height: 200px;
     }
