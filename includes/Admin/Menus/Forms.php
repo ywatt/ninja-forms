@@ -121,6 +121,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
     private function _localize_field_type_data()
     {
+        $field_type_sections = array_values( Ninja_Forms()->config( 'FieldTypeSections' ) );
         $field_type_settings = array();
 
         $master_settings = array();
@@ -154,8 +155,9 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
         ?>
         <script>
-            var fieldTypeData = <?php echo wp_json_encode( $field_type_settings ); ?>;
-            var fieldSettings = <?php echo wp_json_encode( $master_settings ); ?>;
+            var fieldTypeData     = <?php echo wp_json_encode( $field_type_settings ); ?>;
+            var fieldSettings     = <?php echo wp_json_encode( $master_settings ); ?>;
+            var fieldTypeSections = <?php echo wp_json_encode( $field_type_sections ); ?>;
             // console.log( fieldTypeData );
         </script>
         <?php
