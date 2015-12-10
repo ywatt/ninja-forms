@@ -42,7 +42,12 @@ define( [
                     id: 'misc',
                     nicename: 'Miscellaneous Fields',
                     fieldTypes: []
-                }
+                },
+				{
+					id: 'pricing',
+					nicename: 'Pricing Fields',
+					fieldTypes: []
+				}
 			] );
 
 			// Since we want to access the "this" context later, we assign it to that so it isn't overwritten
