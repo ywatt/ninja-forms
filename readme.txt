@@ -106,6 +106,13 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Changelog ==
 
+= 2.9.29 (08 December 2015) =
+
+*Bugs:*
+
+* Fixed a bug that could cause session cookies to be set on every page, rather than just upon form submission.
+* Fixed a bug that caused Ninja Forms to override translation strings on non-submission custom post types.
+
 = 2.9.28 (30 September 2015) =
 
 *Security:*
