@@ -569,6 +569,16 @@ return apply_filters( 'ninja-forms-field-settings', array(
     |--------------------------------------------------------------------------
     */
 
+    'product_price' => array(
+        'name' => 'product_price',
+        'type' => 'textbox',
+        'label' => __( 'Price', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'value' => '0.00',
+        'use_merge_tags' => FALSE,
+    ),
+
     'product_use_quantity' => array(
         'name' => 'product_use_quantity',
         'type' => 'toggle',
