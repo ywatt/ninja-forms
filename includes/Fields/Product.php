@@ -13,7 +13,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
     protected $_type = 'textbox';
 
-    protected $_templates = 'textbox';
+    protected $_templates = 'product';
 
     protected $_test_value = 'Lorem ipsum';
 
@@ -22,7 +22,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
         parent::__construct();
 
         $this->_settings = $this->load_settings(
-            array( 'label', 'label_pos', 'required', 'placeholder', 'default', 'classes', 'input_limit_set' )
+            array( 'label', 'label_pos' )
         );
 
         $this->_nicename = __( 'Product', 'ninja-forms' );
