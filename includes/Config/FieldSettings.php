@@ -563,6 +563,22 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'use_merge_tags' => FALSE,
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Product Field Settings
+    |--------------------------------------------------------------------------
+    */
+
+    'product_use_quantity' => array(
+        'name' => 'product_use_quantity',
+        'type' => 'toggle',
+        'label' => __( 'Use Quantity', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'value' => TRUE,
+        'use_merge_tags' => FALSE,
+    ),
+
 ));
 
 
