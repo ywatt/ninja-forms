@@ -62,4 +62,24 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         //If this box is checked, Ninja Forms will hide the form after it has been successfully submitted.
     ),
 
+    /*
+     * Currency
+     */
+
+    'currency' => array(
+        'name' => 'currency',
+        'type' => 'select',
+        'label' => __( 'Currency', 'ninja-forms' ),
+        'group' => 'advanced',
+        'width' => 'full',
+        'options' => array(
+            array(
+                'label' => __( 'USD - $', 'ninja-forms' ),
+                'value' => 'usd'
+            ),
+        ),
+        'value' => 'usd',
+        'use_merge_tags' => FALSE
+    ),
+
 ));
