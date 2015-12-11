@@ -11,7 +11,7 @@
         font-size: 16px;
         padding: 16px;
     }
-    .nf-product-field {
+    .nf-product-field, {
         &.nf-element {
             background: transparent;
             border: 0;
@@ -31,6 +31,12 @@
     }
     select {
         height: 48px;
+    }
+    .nf-total {
+        background: transparent;
+        border: 0;
+        font-weight: bold;
+        padding: 0;
     }
     .label-above,
     .label-below,
