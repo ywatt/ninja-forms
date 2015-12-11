@@ -563,6 +563,87 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'use_merge_tags' => FALSE,
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Pricing Fields Settings
+    |--------------------------------------------------------------------------
+    */
+
+    'product_price' => array(
+        'name' => 'product_price',
+        'type' => 'textbox',
+        'label' => __( 'Price', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'value' => '0.00',
+        'use_merge_tags' => FALSE,
+    ),
+
+    'product_use_quantity' => array(
+        'name' => 'product_use_quantity',
+        'type' => 'toggle',
+        'label' => __( 'Use Quantity', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'value' => TRUE,
+        'use_merge_tags' => FALSE,
+    ),
+
+    'product_type' => array(
+        'name' => 'product_type',
+        'type' => 'select',
+        'label' => __( 'Product Type', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'options' => array(
+            array(
+                'label' => __( 'Single Product (default)', 'ninja-forms' ),
+                'value' => 'single'
+            ),
+            array(
+                'label' => __( 'Multi Product (dropdown)', 'ninja-forms' ),
+                'value' => 'dropdown'
+            ),
+            array(
+                'label' => __( 'Multi Product (checkboxes)', 'ninja-forms' ),
+                'value' => 'checkboxes'
+            ),
+            array(
+                'label' => __( 'Multi Product (radio list)', 'ninja-forms' ),
+                'value' => 'radiolist'
+            ),
+            array(
+                'label' => __( 'User Entry (textbox)', 'ninja-forms' ),
+                'value' => 'user'
+            ),
+            array(
+                'label' => __( 'Hidden', 'ninja-forms' ),
+                'value' => 'hidden'
+            ),
+        ),
+        'use_merge_tags' => FALSE
+    ),
+
+    'shipping_cost' => array(
+        'name' => 'shipping_cost',
+        'type' => 'textbox',
+        'label' => __( 'Cost', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'value' => '0.00',
+        'use_merge_tags' => FALSE,
+    ),
+
+    'tax_rate' => array(
+        'name' => 'tax_rate',
+        'type' => 'textbox',
+        'label' => __( 'Rate', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'value' => '0.00',
+        'use_merge_tags' => FALSE,
+    ),
+
 ));
 
 
