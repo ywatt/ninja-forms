@@ -5,6 +5,8 @@
  */
 abstract class NF_Abstracts_MergeTags
 {
+    protected $title = '';
+
     protected $merge_tags = array();
 
     public function __construct()
@@ -33,6 +35,11 @@ abstract class NF_Abstracts_MergeTags
         }
 
         return $subject;
+    }
+
+    public function get_title()
+    {
+        return $this->title;
     }
 
     public function get_merge_tags()

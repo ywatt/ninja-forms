@@ -8,6 +8,7 @@ final class NF_MergeTags_System extends NF_Abstracts_MergeTags
     public function __construct()
     {
         parent::__construct();
+        $this->title = __( 'System', 'ninja-forms' );
         $this->merge_tags = Ninja_Forms()->config( 'MergeTagsSystem' );
     }
 

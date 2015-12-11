@@ -254,7 +254,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         foreach( Ninja_Forms()->merge_tags as $key => $group ){
 
-            $merge_tags[ $key ] = array_values( $group->get_merge_tags() );
+            $merge_tags[ $key ] = array(
+                'title' => $group->get_title(),
+                'tags' => array_values( $group->get_merge_tags() )
+            );
         }
         ?>
         <script>
