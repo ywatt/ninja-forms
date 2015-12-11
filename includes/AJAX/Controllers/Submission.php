@@ -33,12 +33,6 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $this->populate_field_merge_tags( $this->_data['fields'], $field_merge_tags );
 
-        echo "<pre>";
-        var_dump( $field_merge_tags->get_merge_tags() );
-        echo "</pre>";
-
-        die();
-
         $this->validate_fields();
 
         if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ) {
