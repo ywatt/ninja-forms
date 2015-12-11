@@ -10,13 +10,21 @@ abstract class NF_Abstracts_MergeTags
     public function __construct()
     {
         add_filter( 'ninja_forms_render_default_value', array( $this, 'replace' ) );
+
+        add_filter( 'ninja_forms_run_action_settings',  array( $this, 'replace' ) );
+        add_filter( 'ninja_forms_run_action_settings_preview',  array( $this, 'replace' ) );
     }
 
     public function replace( $subject )
     {
         foreach( $this->merge_tags as $merge_tag ){
 
-            if( FALSE !== strpos( $subject, $merge_tag[ 'tag' ] ) ){
+            if( is_array( $subject ) ){
+
+                foreach( $subject as $i => $s ){
+                    $subject[ $i ] = $this->replace( $s );
+                }
+            } elseif( FALSE !== strpos( $subject, $merge_tag[ 'tag' ] ) ){
 
                 $replace = ( method_exists( $this, $merge_tag[ 'callback' ] ) ) ? $this->{$merge_tag[ 'callback' ]}() : '';
 
