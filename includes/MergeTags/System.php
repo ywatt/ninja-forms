@@ -5,6 +5,8 @@
  */
 final class NF_MergeTags_System extends NF_Abstracts_MergeTags
 {
+    protected $id = 'system';
+
     public function __construct()
     {
         parent::__construct();

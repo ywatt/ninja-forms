@@ -250,13 +250,19 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
     protected function _localize_merge_tags()
     {
-        $merge_tags = array();
+        $merge_tags = array(
+            'fields' => array(
+                'id'    => 'fields',
+                'title' => __( 'Fields', 'ninja-forms' )
+            )
+        );
 
         foreach( Ninja_Forms()->merge_tags as $key => $group ){
 
             $merge_tags[ $key ] = array(
+                'id'    => $group->get_id(),
                 'title' => $group->get_title(),
-                'tags' => array_values( $group->get_merge_tags() )
+                'tags'  => array_values( $group->get_merge_tags() )
             );
         }
         ?>

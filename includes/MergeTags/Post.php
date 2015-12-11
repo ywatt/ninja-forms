@@ -5,6 +5,8 @@
  */
 final class NF_MergeTags_Post extends NF_Abstracts_MergeTags
 {
+    protected $id = 'post';
+
     public function __construct()
     {
         parent::__construct();

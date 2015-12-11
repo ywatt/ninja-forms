@@ -5,6 +5,8 @@
  */
 final class NF_MergeTags_User extends NF_Abstracts_MergeTags
 {
+    protected $id = 'user';
+
     public function __construct()
     {
         parent::__construct();
