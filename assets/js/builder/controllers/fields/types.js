@@ -27,28 +27,7 @@ define( [
 			// Create our field type collection
 			this.collection = new fieldTypeCollection();
 			// Config for our settings sections
-			this.fieldTypeSections = new fieldTypeSectionCollection( [
-				{
-					id: 'common',
-					nicename: 'Common Fields',
-					fieldTypes: []
-				},
-				{
-					id: 'userinfo',
-					nicename: 'User Information Fields',
-					fieldTypes: []
-				},
-                {
-                    id: 'misc',
-                    nicename: 'Miscellaneous Fields',
-                    fieldTypes: []
-                },
-				{
-					id: 'pricing',
-					nicename: 'Pricing Fields',
-					fieldTypes: []
-				}
-			] );
+			this.fieldTypeSections = new fieldTypeSectionCollection( fieldTypeSections );
 
 			// Since we want to access the "this" context later, we assign it to that so it isn't overwritten
 			var that = this;
