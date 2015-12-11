@@ -15,7 +15,7 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
 
     protected $_templates = 'shipping';
 
-    protected $_test_value = 'Lorem ipsum';
+    protected $_test_value = '0.00';
 
     public function __construct()
     {
