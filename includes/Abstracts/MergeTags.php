@@ -30,7 +30,7 @@ abstract class NF_Abstracts_MergeTags
                 }
             } elseif( FALSE !== strpos( $subject, $merge_tag[ 'tag' ] ) ){
 
-                $replace = ( method_exists( $this, $merge_tag[ 'callback' ] ) ) ? $this->{$merge_tag[ 'callback' ]}() : '';
+                $replace = ( is_callable( $this, $merge_tag[ 'callback' ] ) ) ? $this->{$merge_tag[ 'callback' ]}() : '';
 
                 $subject = str_replace( $merge_tag[ 'tag' ], $replace, $subject );
             }

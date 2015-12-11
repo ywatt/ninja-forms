@@ -202,6 +202,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->merge_tags[ 'user' ] = new NF_MergeTags_User();
                 self::$instance->merge_tags[ 'post' ] = new NF_MergeTags_Post();
                 self::$instance->merge_tags[ 'system' ] = new NF_MergeTags_System();
+                self::$instance->merge_tags[ 'fields' ] = new NF_MergeTags_Fields();
 
                 /*
                  * Activation Hook
