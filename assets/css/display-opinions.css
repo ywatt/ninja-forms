@@ -26,6 +26,11 @@
     height: 200px; }
   .nf-fields select {
     height: 48px; }
+  .nf-fields .nf-total {
+    background: transparent;
+    border: 0;
+    font-weight: bold;
+    padding: 0; }
   .nf-fields .label-above > label,
   .nf-fields .label-below > label,
   .nf-fields .label-hidden > label {
