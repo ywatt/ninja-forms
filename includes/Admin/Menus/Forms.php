@@ -261,7 +261,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
         ?>
         <script>
-            var mergeTags = <?php echo wp_json_encode( $merge_tags )?>;
+            var mergeTags = <?php echo wp_json_encode( array_values( $merge_tags ) ); ?>;
         </script>
         <?php
     }
