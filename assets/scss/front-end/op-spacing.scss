@@ -17,9 +17,13 @@
             border: 0;
             padding: 0;
         }
+        span {
+            padding-right: 16px;
+        }
         .nf-field-qty {
             font-size: 16px;
-            padding: 16px;
+            padding: 5px;
+            width: 80px;
         }
     }
     textarea {

@@ -13,7 +13,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
     protected $_type = 'textbox';
 
-    protected $_templates = array( 'product', 'textbox', 'hidden' );
+    protected $_templates = array( 'product', 'textbox', 'hidden', 'listselect' );
 
     protected $_test_value = 'Lorem ipsum';
 
