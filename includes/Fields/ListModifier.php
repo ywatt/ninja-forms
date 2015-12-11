@@ -9,7 +9,7 @@ class NF_Fields_ListModifier extends NF_Abstracts_List
 
     protected $_section = 'pricing';
 
-    protected $_templates = 'listradio';
+    protected $_templates = 'list';
 
     public function __construct()
     {

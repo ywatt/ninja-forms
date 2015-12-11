@@ -1,11 +1,11 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Class NF_Field_Shipping
+ * Class NF_Field_Tax
  */
-class NF_Fields_Shipping extends NF_Abstracts_Input
+class NF_Fields_Tax extends NF_Abstracts_Input
 {
-    protected $_name = 'shipping';
+    protected $_name = 'tax';
 
     protected $_section = 'pricing';
 
@@ -22,9 +22,9 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
         parent::__construct();
 
         $this->_settings = $this->load_settings(
-            array( 'label', 'label_pos', 'shipping_cost' )
+            array( 'label', 'label_pos', 'tax_rate' )
         );
 
-        $this->_nicename = __( 'Shipping', 'ninja-forms' );
+        $this->_nicename = __( 'Tax', 'ninja-forms' );
     }
 }

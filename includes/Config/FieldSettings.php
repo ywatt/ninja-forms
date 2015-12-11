@@ -565,7 +565,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
 
     /*
     |--------------------------------------------------------------------------
-    | Product Field Settings
+    | Pricing Fields Settings
     |--------------------------------------------------------------------------
     */
 
@@ -622,6 +622,26 @@ return apply_filters( 'ninja-forms-field-settings', array(
             ),
         ),
         'use_merge_tags' => FALSE
+    ),
+
+    'shipping_cost' => array(
+        'name' => 'shipping_cost',
+        'type' => 'textbox',
+        'label' => __( 'Cost', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'value' => '0.00',
+        'use_merge_tags' => FALSE,
+    ),
+
+    'tax_rate' => array(
+        'name' => 'tax_rate',
+        'type' => 'textbox',
+        'label' => __( 'Rate', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'value' => '0.00',
+        'use_merge_tags' => FALSE,
     ),
 
 ));
