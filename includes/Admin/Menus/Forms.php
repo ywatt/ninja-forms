@@ -89,7 +89,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $settings[ 'id' ] = $field->get_id();
 
             foreach( $settings as $key => $setting ){
-                if( is_numeric( $setting ) ) $settings[ $key ] = absint( $setting );
+                if( is_numeric( $setting ) ) $settings[ $key ] = floatval( $setting );
             }
 
             $fields_settings[] = $settings;
