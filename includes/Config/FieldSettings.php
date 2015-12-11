@@ -621,6 +621,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'value' => 'hidden'
             ),
         ),
+        'value' => 'single',
         'use_merge_tags' => FALSE
     ),
 
