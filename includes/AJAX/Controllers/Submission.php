@@ -35,6 +35,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $this->validate_fields();
 
+        $this->process_fields();
+
         if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ) {
             $this->run_actions_preview();
         } else {
@@ -78,6 +80,29 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         return $errors = $field_class->validate( $field, $data );
     }
 
+    protected function process_fields()
+    {
+        foreach( $this->_data['fields'] as $field ){
+
+            $data = $this->process_field( $field, $this->_data );
+
+            if( ! empty( $data ) ){
+                $this->_data = $data;
+            }
+        }
+    }
+
+    protected function process_field( $field, $data )
+    {
+        $field_model = Ninja_Forms()->form()->field( $field['id'] )->get();
+
+        $field = array_merge( $field, $field_model->get_settings() );
+
+        $field_class = Ninja_Forms()->fields[ $field['type'] ];
+
+        return $field_class->process( $field, $data );
+    }
+
     protected function run_actions()
     {
         $actions = Ninja_Forms()->form( $this->_form_id )->get_actions();
@@ -101,6 +126,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     protected function run_actions_preview()
     {
         $form = get_user_option( 'nf_form_preview_' . $this->_form_id );
+
+        if( ! isset( $form[ 'actions' ] ) || empty( $form[ 'actions' ] ) ) return;
 
         foreach( $form[ 'actions' ] as $action ){
 

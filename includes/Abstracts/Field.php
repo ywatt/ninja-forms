@@ -98,6 +98,11 @@ abstract class NF_Abstracts_Field
         return $errors;
     }
 
+    public function process( $field, $data )
+    {
+        return $data;
+    }
+
     /**
      * Admin Form Element
      *
