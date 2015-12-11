@@ -13,7 +13,7 @@ class NF_Fields_Tax extends NF_Abstracts_Input
 
     protected $_type = 'textbox';
 
-    protected $_templates = 'textbox';
+    protected $_templates = 'tax';
 
     protected $_test_value = 'Lorem ipsum';
 
