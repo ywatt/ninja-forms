@@ -601,19 +601,19 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'value' => 'single'
             ),
             array(
-                'label' => __( 'Multi Product (dropdown)', 'ninja-forms' ),
+                'label' => __( 'Multi Product - Dropdown', 'ninja-forms' ),
                 'value' => 'dropdown'
             ),
             array(
-                'label' => __( 'Multi Product (checkboxes)', 'ninja-forms' ),
+                'label' => __( 'Multi Product - Choose Many', 'ninja-forms' ),
                 'value' => 'checkboxes'
             ),
             array(
-                'label' => __( 'Multi Product (radio list)', 'ninja-forms' ),
+                'label' => __( 'Multi Product - Choose One', 'ninja-forms' ),
                 'value' => 'radiolist'
             ),
             array(
-                'label' => __( 'User Entry (textbox)', 'ninja-forms' ),
+                'label' => __( 'User Entry', 'ninja-forms' ),
                 'value' => 'user'
             ),
             array(
