@@ -99,6 +99,10 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 = 2.9.29 (08 December 2015) =
 
+*Security:*
+
+* Fixed a security issue that could allow users to run Javascript on the front-end after a submission in some circumstances.
+
 *Bugs:*
 
 * Fixed a bug that could cause session cookies to be set on every page, rather than just upon form submission.
@@ -107,6 +111,10 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 == Changelog ==
 
 = 2.9.29 (08 December 2015) =
+
+*Security:*
+
+* Fixed a security issue that could allow users to run Javascript on the front-end after a submission in some circumstances.
 
 *Bugs:*
 
