@@ -157,12 +157,12 @@ function wp_session_cleanup() {
 		if ( ! empty( $expired_sessions ) ) {
 			$option_names = implode( "','", $expired_sessions );
 			$wpdb->query( $wpdb->prepare(
-					"
-						DELETE FROM $wpdb->options
-						WHERE option_name
-						IN ('%s')
-					",
-					$option_names
+                "
+                  DELETE FROM $wpdb->options
+                  WHERE option_name
+                  IN ('%s')
+                ",
+                $option_names
 			) );
 		}
 	}
