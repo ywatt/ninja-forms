@@ -154,17 +154,17 @@ function wp_session_cleanup() {
 		}
 
 		// Delete all expired sessions in a single query
-		if ( ! empty( $expired_sessions ) ) {
-			$option_names = implode( "','", $expired_sessions );
-			$wpdb->query( $wpdb->prepare(
+        if ( ! empty( $expired_sessions ) ) {
+            $option_names = implode( "','", $expired_sessions );
+            $wpdb->query( $wpdb->prepare(
                 "
                   DELETE FROM $wpdb->options
                   WHERE option_name
                   IN ('%s')
                 ",
                 $option_names
-			) );
-		}
+            ) );
+        }
 	}
 
 	// Allow other plugins to hook in to the garbage collection process.
