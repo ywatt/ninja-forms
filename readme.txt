@@ -101,7 +101,8 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Security:*
 
-* Fixed a serious security issue.
+* Fixed a serious security issue. Please update your version of Ninja Forms.
+
 
 *Bugs:*
 
@@ -113,7 +114,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Security:*
 
-* Fixed a serious security issue.
+* Fixed a serious security issue. Please update your version of Ninja Forms.
 
 *Bugs:*
 
