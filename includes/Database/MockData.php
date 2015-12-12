@@ -502,7 +502,7 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'product' )
             ->update_setting( 'label', 'Product')
             ->update_setting( 'label_pos', 'above' )
-            ->update_setting( 'product_price', 10.00 )
+            ->update_setting( 'product_price', 10.10 )
             ->update_setting( 'product_use_quantity', 0 )
             ->update_setting( 'order', 1 )
             ->save();

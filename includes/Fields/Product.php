@@ -49,17 +49,9 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
         $total = floatval( $product[ 'product_price' ] );
 
-        echo "<pre>";
-        var_dump($total);
-        echo "</pre>";
-
         if( isset( $related[ 'quantity' ] ) ){
             $total = $total * $related[ 'quantity' ][ 'value' ];
         }
-
-        echo "<pre>";
-        var_dump($total);
-        echo "</pre>";
 
         if( isset( $related[ 'modifier' ] ) ){
             //TODO: Handle multiple modifiers.
@@ -69,27 +61,13 @@ class NF_Fields_Product extends NF_Abstracts_Input
             $total = $total * ( 1 + ( ($related[ 'tax' ][ 'tax_rate' ] / 100 ) ) );
         }
 
-        echo "<pre>";
-        var_dump($total);
-        echo "</pre>";
-
         if( isset( $related[ 'shipping' ] ) ){
             $total += $related[ 'shipping' ][ 'shipping_cost' ];
         }
 
-        echo "<pre>";
-        var_dump($total);
-        echo "</pre>";
-
         if( isset( $related[ 'total' ] ) ){
             $related[ 'total' ][ 'value' ] = $data[ 'total' ] = number_format( $total, 2 );
         }
-
-        echo "<pre>";
-        var_dump($total);
-        echo "</pre>";
-
-        die();
 
         return $data;
     }
