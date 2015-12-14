@@ -20,11 +20,13 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
 
     public function set_merge_tags( $key, $value )
     {
-        $this->merge_tags[ $key ] = array(
+        $callback = ( is_numeric( $key ) ) ? 'field_' . $key : $key;
+
+        $this->merge_tags[ $callback ] = array(
             'id' => $key,
             'tag' => "{field:$key}",
 //            'label' => __( '', 'ninja_forms' ),
-            'callback' => $key,
+            'callback' => $callback,
             'field_value' => $value
         );
     }
