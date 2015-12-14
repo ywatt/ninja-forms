@@ -13,7 +13,12 @@ abstract class NF_Abstracts_MergeTags
 
     public function __construct()
     {
+        add_filter( 'kbj_test', array( $this, 'replace' ) );
+
         add_filter( 'ninja_forms_render_default_value', array( $this, 'replace' ) );
+
+        add_filter( 'ninja_forms_run_action_settings',  array( $this, 'replace' ) );
+        add_filter( 'ninja_forms_run_action_settings_preview',  array( $this, 'replace' ) );
 
         add_filter( 'ninja_forms_run_action_settings',  array( $this, 'replace' ) );
         add_filter( 'ninja_forms_run_action_settings_preview',  array( $this, 'replace' ) );
@@ -30,7 +35,7 @@ abstract class NF_Abstracts_MergeTags
                 }
             } elseif( FALSE !== strpos( $subject, $merge_tag[ 'tag' ] ) ){
 
-                $replace = ( is_callable( $this, $merge_tag[ 'callback' ] ) ) ? $this->{$merge_tag[ 'callback' ]}() : '';
+                $replace = ( is_callable( array( $this, $merge_tag[ 'callback' ] ) ) ) ? $this->{$merge_tag[ 'callback' ]}() : '';
 
                 $subject = str_replace( $merge_tag[ 'tag' ], $replace, $subject );
             }
