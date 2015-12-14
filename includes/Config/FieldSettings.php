@@ -23,7 +23,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'value' => '',
         'help' => __( 'Enter the label of the form field. This is how users will identify individual fields.', 'ninja-forms' ),
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*
@@ -64,7 +64,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'value' => 'above',
         'help' => __( 'Select the position of your label relative to the field element itself.', 'ninja-forms' ),
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*
@@ -79,7 +79,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'value' => FALSE,
         'help' => __( 'Ensure that this field is completed before allowing the form to be submitted.', 'ninja-forms' ),
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*
@@ -118,7 +118,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'value' => 1
             ),
         ),
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*
@@ -142,7 +142,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => 'unchecked',
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*
@@ -156,7 +156,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'full',
         'group' => 'primary',
         'value' => FALSE,
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*
@@ -193,7 +193,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //         ),
     //     )
     //     'value' => '',
-    //     'use_merge_tags' => FALSE,
+    //     
     // ),
 
     /*
@@ -238,7 +238,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //             'value' => __( 'Character(s) left' )
     //         )
     //     ),
-    //     'use_merge_tags' => FALSE,
+    //     
     // ),
 
     /*
@@ -322,7 +322,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'full',
         'group' => 'advanced',
         'value' => FALSE,
-        'use_merge_tags' => FALSE,
+        
     ),
 
 
@@ -338,7 +338,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'full',
         'group' => 'advanced',
         'value' => FALSE,
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*
@@ -362,7 +362,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => '',
         'group' => '',
         'value' => '',
-        'use_merge_tags' => FALSE,
+        
     ),
 
    /*
@@ -376,7 +376,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => '',
         'group' => '',
         'value' => '',
-        'use_merge_tags' => FALSE,
+        
     ),
 
    /*
@@ -397,7 +397,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
    //              'value' => 10,
    //              'placeholder' => '',
    //              'width' => 'one-half',
-   //               'use_merge_tags' => FALSE,
+   //               
    //          ),
    //          array(
    //              'name' => 'timed_submit_label',
@@ -406,7 +406,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
    //              'label' => __( 'Timer Label', 'ninja-forms' ),
    //              'value' => __( 'Please wait %n seconds', 'ninja-forms' ),
    //              'width' => 'one-half'
-   //               'use_merge_tags' => FALSE,
+   //               
    //          ),
    //      ),
    //  ),
@@ -435,7 +435,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
                     'value' => __( 'Please wait %n seconds', 'ninja-forms' ),
                     'width' => '',
                     'group' => '',
-                    'use_merge_tags' => FALSE,
+                    
                 ),
 
                /*
@@ -451,7 +451,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
                     'value' => 10,
                     'width' => '',
                     'group' => '',
-                    'use_merge_tags' => FALSE,
+                    
                 ),
 
 
@@ -467,7 +467,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //     'width' => 'one-half',
     //     'group' => 'rte',
     //     'value' => FALSE,
-    //     'use_merge_tags' => FALSE,
+    //     
     // ),
 
     // 'rte_media' => array(
@@ -477,7 +477,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //     'width' => 'one-half',
     //     'group' => 'rte',
     //     'value' => FALSE,
-    //     'use_merge_tags' => FALSE,
+    //     
     // ),
 
     // 'rte_mobile' => array(
@@ -487,7 +487,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
     //     'width' => 'one-half',
     //     'group' => 'rte',
     //     'value' => FALSE,
-    //     'use_merge_tags' => FALSE,
+    //     
     // ),
 
    /*
@@ -502,7 +502,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
                         password and re-password textboxes will be output', 'ninja-forms' ),
         'width' => '',
         'group' => '',
-        'use_merge_tags' => FALSE,
+        
     ),
 
 
@@ -517,7 +517,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Number of stars', 'ninja-forms' ),
         'width' => '',
         'group' => '',
-        'use_merge_tags' => FALSE,
+        
     ),
 
    /*
@@ -531,7 +531,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Disable Browser Autocomplete', 'ninja-forms' ),
         'width' => '',
         'group' => '',
-        'use_merge_tags' => FALSE,
+        
     ),
 
     //TODO: Ask about the list of states and countries.
@@ -546,7 +546,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Use a custom first option', 'ninja-forms' ),
         'width' => '',
         'group' => '',
-        'use_merge_tags' => FALSE,
+        
     ),
 
    /*
@@ -560,7 +560,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => '',
         'group' => '',
         'value' => FALSE,
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*
@@ -576,7 +576,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => '0.00',
-        'use_merge_tags' => FALSE,
+        
     ),
 
     'product_use_quantity' => array(
@@ -586,7 +586,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => TRUE,
-        'use_merge_tags' => FALSE,
+        
     ),
 
     'product_type' => array(
@@ -632,7 +632,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => '0.00',
-        'use_merge_tags' => FALSE,
+        
     ),
 
     'tax_rate' => array(
@@ -642,7 +642,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => '0.00',
-        'use_merge_tags' => FALSE,
+        
     ),
 
 ));

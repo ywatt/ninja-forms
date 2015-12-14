@@ -331,7 +331,7 @@
 <script id="nf-tmpl-edit-setting-textbox" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
         <input type="text" class="setting" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
-        <span class="dashicons dashicons-list-view merge-tags"></span>
+        <%= renderMergeTags() %>
     </label>
 </script>
 
@@ -344,7 +344,7 @@
 <script id="nf-tmpl-edit-setting-textarea" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
         <textarea id="<%= name %>" class="setting"><%= value %></textarea>
-        <span class="dashicons dashicons-list-view merge-tags"></span>
+        <%= renderMergeTags() %>
     </label>
 </script>
 

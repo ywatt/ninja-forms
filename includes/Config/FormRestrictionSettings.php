@@ -21,7 +21,7 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
                 'width' => 'one-half',
                 'group' => 'primary',
                 'value' => TRUE,
-                'use_merge_tags' => FALSE,
+                
             ),
 
             /*
@@ -35,7 +35,7 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
                 'width' => 'full',
                 'group' => 'primary',
                 'value' => '',
-                'use_merge_tags' => FALSE,
+                
                 //TODO: Add following text below the WYSIWYG.
                 //Message shown to users if the "logged in" checkbox above is checked and they are not logged-in.
             ),
@@ -61,7 +61,7 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
                 'width' => 'one-third',
                 'group' => 'primary',
                 'value' => NULL,
-                'use_merge_tags' => FALSE,
+                
                 //TODO: Add following text below the element.
                 //Select the number of submissions that this form will accept. Leave empty for no limit.
             ),
@@ -77,7 +77,7 @@ return apply_filters( 'ninja-forms-from-restriction-settings', array(
                 'width' => 'full',
                 'group' => 'primary',
                 'value' => '',
-                'use_merge_tags' => FALSE,
+                
                 //TODO: Add following text below the WYSIWYG.
                 //Please enter a message that you want displayed when this form has reached its submission limit and will not
                 //accept new submissions.

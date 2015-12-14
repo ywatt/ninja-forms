@@ -81,8 +81,16 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 				},
 
 				renderTooltip: function() {
-					if ( 'undefined' != typeof this.help ) {
+					if ( this.help ) {
 						return '<a class="nf-help" href="#"><span class="dashicons dashicons-admin-comments"></span></a><div class="nf-help-text">' + this.help + '</div>';
+					} else {
+						return '';
+					}
+				},
+
+				renderMergeTags: function() {
+					if ( this.use_merge_tags ) {
+						return '<span class="dashicons dashicons-list-view merge-tags"></span>';
 					} else {
 						return '';
 					}

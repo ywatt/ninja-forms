@@ -116,7 +116,7 @@ return array(
         'group' => 'advanced',
         'label' => __( 'Format', 'ninja-forms' ),
         'value' => 'html',
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*

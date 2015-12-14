@@ -13,7 +13,7 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'width' => 'full',
         'group' => 'primary',
         'value' => '',
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*
@@ -27,7 +27,7 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'width' => 'full',
         'group' => 'primary',
         'value' => TRUE,
-        'use_merge_tags' => FALSE,
+        
     ),
 
     /*
@@ -41,7 +41,7 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'width' => 'full',
         'group' => 'primary',
         'value' => TRUE,
-        'use_merge_tags' => FALSE,
+        
         //TODO: Add following text below the element.
         //If this box is checked, Ninja Forms will clear the form values after it has been successfully submitted.
     ),
@@ -57,7 +57,7 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'width' => 'full',
         'group' => 'primary',
         'value' => TRUE,
-        'use_merge_tags' => FALSE,
+        
         //TODO: Add following text below the element.
         //If this box is checked, Ninja Forms will hide the form after it has been successfully submitted.
     ),

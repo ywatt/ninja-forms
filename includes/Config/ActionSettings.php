@@ -14,7 +14,7 @@ return array(
         'placeholder' => '',
         'width' => 'full',
         'value' => '',
-        'use_merge_tags' => FALSE,
+        
     ),    
 
     /*

@@ -14,10 +14,27 @@ define( ['views/app/drawer/mergeTagItem'], function( mergeTagItemView ) {
 
 		initialize: function() {
 			this.collection = this.model.get( 'tags' );
+			this.model.on( 'change', this.render, this );
+			if ( 'fields' == this.model.get( 'id' ) ) {
+				var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+				fieldCollection.on( 'all', this.updateFields, this );
+			}
+		},
+
+		onBeforeDestroy: function() {
+			if ( 'fields' == this.model.get( 'id' ) ) {
+				var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+				fieldCollection.off( 'all', this.updateFields, this );
+			}
 		},
 
 		attachHtml: function( collectionView, childView ) {
 			jQuery( collectionView.el ).find( '.merge-tags' ).append( childView.el );
+		},
+
+		updateFields: function() {
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			this.model.set( 'tags', fieldCollection );
 		}
 	});
 
