@@ -61,7 +61,13 @@ define( [
 
 			// Listen for requests for our mergeTag collection.
 			nfRadio.channel( 'mergeTags' ).reply( 'get:mergeTags', this.getMergeTags, this );
+
+			/*
+			 * TODO: Hotkey support for adding tags.
+			 *
+			
 			nfRadio.channel( 'mergeTags' ).reply( 'update:open', this.updateOpen, this );
+			*/
 		},
 
 		clickMergeTag: function( e, tagModel ) {
@@ -142,7 +148,6 @@ define( [
 		},
 
 		getMergeTags: function() {
-			console.log( this.tagSectionCollection );
 			return this.tagSectionCollection;
 		},
 
