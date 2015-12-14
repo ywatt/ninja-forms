@@ -4,7 +4,7 @@ define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 			placeholder: '',
 			value: '',
 			label_pos: '',
-			classes: 'nf-element ninja-forms-field',
+			classes: 'ninja-forms-field',
 			reRender: false,
 			mirror_field: false,
 			confirm_field: false,
