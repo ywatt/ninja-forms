@@ -15,7 +15,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
     protected $_templates = array( 'product', 'textbox', 'hidden', 'listselect' );
 
-    protected $_test_value = '1';
+    protected $_test_value = '0';
 
     protected $processing_fields = array( 'quantity', 'modifier', 'shipping', 'tax', 'total' );
 
