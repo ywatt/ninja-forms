@@ -7,9 +7,18 @@
  * @since 3.0
  */
 define( ['views/app/drawer/mergeTagItem'], function( mergeTagItemView ) {
-	var view = Marionette.CollectionView.extend({
+	var view = Marionette.CompositeView.extend({
 		tagName: 'div',
-		childView: mergeTagItemView
+		childView: mergeTagItemView,
+		template: '#nf-tmpl-merge-tags-section',
+
+		initialize: function() {
+			this.collection = this.model.get( 'tags' );
+		},
+
+		attachHtml: function( collectionView, childView ) {
+			jQuery( collectionView.el ).find( '.merge-tags' ).append( childView.el );
+		}
 	});
 
 	return view;
