@@ -15,7 +15,7 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
 
     public function __call($name, $arguments)
     {
-        return $this->merge_tags[ $name ][ 'value' ];
+        return $this->merge_tags[ $name ][ 'field_value' ];
     }
 
     public function set_merge_tags( $key, $value )

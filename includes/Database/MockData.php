@@ -543,6 +543,7 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'total' )
             ->update_setting( 'label', 'Total')
             ->update_setting( 'label_pos', 'above' )
+            ->update_setting( 'key', 'total' )
             ->update_setting( 'product_assignment', $product_field_id )
             ->update_setting( 'order', 5 )
             ->save();

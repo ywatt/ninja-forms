@@ -30,12 +30,12 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         $this->_data['fields'] = $this->_form_data['fields'];
 
         $field_merge_tags = Ninja_Forms()->merge_tags[ 'fields' ];
-
-        $this->populate_field_merge_tags( $this->_data['fields'], $field_merge_tags );
-
+        
         $this->validate_fields();
 
         $this->process_fields();
+
+        $this->populate_field_merge_tags( $this->_data['fields'], $field_merge_tags );
 
         if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ) {
             $this->run_actions_preview();
@@ -49,8 +49,6 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     protected function populate_field_merge_tags( $fields, $field_merge_tags )
     {
         foreach( $fields as $field ){
-
-            $field[ 'key' ] = $field[ 'id' ];
 
             if( ! isset( $field[ 'key' ] ) ) continue;
             $field_merge_tags->set_merge_tags( $field[ 'key' ], $field[ 'value' ] );
