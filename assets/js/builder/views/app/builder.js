@@ -28,8 +28,8 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/drawer/mobileMe
 		initialize: function() {
 			// Layout views aren't self-rendering.
 			this.render();
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
-			this.mergeTagsContent.show( new mergeTagsContentView( { collection: fieldCollection } ) );
+			var mergeTags = nfRadio.channel( 'mergeTags' ).request( 'get:mergeTags' );
+			this.mergeTagsContent.show( new mergeTagsContentView( { collection: mergeTags } ) );
 			// Show our header.
 			this.header.show( new headerView() );
 			// Show our main content.

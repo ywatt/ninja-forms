@@ -311,13 +311,9 @@
 
 </script>
 
-<script id="nf-tmpl-merge-tags-content" type="text/template">
-    <h4>Fields</h4>
-    <ul class="merge-tags-fields" tabindex="1"></ul>
-    <h4>System Tags</h4>
-    <ul class="merge-tags-system"></ul>
-    <h4>User Information</h4>
-    <ul class="merge-tags-user-info"></ul>
+<script id="nf-tmpl-merge-tags-section" type="text/template">
+    <h4><%= label %></h4>
+    <ul class="merge-tags"></ul>
 </script>
 
 <script id="nf-tmpl-merge-tags-item" type="text/template">

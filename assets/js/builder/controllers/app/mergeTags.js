@@ -15,68 +15,59 @@ define( [
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
+			this.tagSectionCollection = new mergeTagCollection();
 			var that = this;
-			this.fields = new mergeTagCollection();
+			_.each( mergeTags, function( tagSection ) {
+				if ( tagSection.tags ) {
+					var tags = new mergeTagCollection( tagSection.tags );
+				} else {
+					var tags = '';
+				}
+
+				that.tagSectionCollection.add( {
+					id: tagSection.id,
+					label: tagSection.label,
+					tags: tags
+				} );
+			} );
+
+			var tags = new mergeTagCollection();
 
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			_.each( fieldCollection.models, function( field ) {
-				that.fields.add( {
+				tags.add( {
 					id: field.get( 'id' ),
 					label: field.get( 'label' ),
 					tag: '{field:' + field.get( 'id' ) + '}'
 				} );
 			} );
 
-			this.system = new mergeTagCollection( [
-				{
-					id: 'date',
-					label: 'Date',
-					tag: '{system:date}'
-				},
-				{
-					id: 'time',
-					label: 'Time',
-					tag: '{system:time}'
-				},
-				{
-					id: 'ip',
-					label: 'IP Address',
-					tag: '{system:ip}'
-				},
-			] );
-
-			this.userInfo = new mergeTagCollection( [
-				{
-					id: 'first_name',
-					label: 'First Name (If logged-in)',
-					tag: '{userinfo:first_name}'
-				},
-				{
-					id: 'last_name',
-					label: 'Last Name (If logged-in)',
-					tag: '{userinfo:last_name}'
-				},
-				{
-					id: 'email',
-					label: 'Email (If logged-in)',
-					tag: '{userinfo:email}'
-				}
-			] );
+			this.tagSectionCollection.get( 'fields' ).set( 'tags', tags );
 
 			this.currentElement = {};
 			this.open = false;
 
 			this.listenTo( nfRadio.channel( 'mergeTags' ), 'click:mergeTag', this.clickMergeTag );
+			/*
+			 * TODO: Hotkey support for adding tags.
+			 *
+			
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'open:mergeTags', this.openMergeTags );
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'up:mergeTags', this.upMergeTags );
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'down:mergeTags', this.downMergeTags );
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'return:mergeTags', this.returnMergeTags );
-
+			*/
 			nfRadio.channel( 'mergeTags' ).reply( 'update:currentElement', this.updateCurrentElement, this );
 
 			// Listen for requests for our mergeTag collection.
 			nfRadio.channel( 'mergeTags' ).reply( 'get:mergeTags', this.getMergeTags, this );
+
+			/*
+			 * TODO: Hotkey support for adding tags.
+			 *
+			
 			nfRadio.channel( 'mergeTags' ).reply( 'update:open', this.updateOpen, this );
+			*/
 		},
 
 		clickMergeTag: function( e, tagModel ) {
@@ -157,16 +148,12 @@ define( [
 		},
 
 		getMergeTags: function() {
-			return {
-				fields: this.fields,
-				system: this.system,
-				userInfo: this.userInfo
-			};
+			return this.tagSectionCollection;
 		},
 
 		updateOpen: function( open ) {
 			this.open = open;
-			_.each( this.fields.models, function( model ) {
+			_.each( this.tagSectionCollection.get( 'fields' ).models, function( model ) {
 				model.set( 'active', false );
 			} );
 		}
