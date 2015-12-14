@@ -15,7 +15,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
     protected $_templates = array( 'product', 'textbox', 'hidden', 'listselect' );
 
-    protected $_test_value = 'Lorem ipsum';
+    protected $_test_value = '1';
 
     protected $processing_fields = array( 'quantity', 'modifier', 'shipping', 'tax', 'total' );
 
@@ -49,8 +49,10 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
         $total = floatval( $product[ 'product_price' ] );
 
-        if( isset( $related[ 'quantity' ] ) ){
+        if( isset( $related[ 'quantity' ][ 'value' ] ) && $related[ 'quantity' ][ 'value' ] ){
             $total = $total * $related[ 'quantity' ][ 'value' ];
+        } elseif( $product[ 'product_use_quantity'] && $product[ 'value' ] ){
+            $total = $total * $product[ 'value' ];
         }
 
         if( isset( $related[ 'modifier' ] ) ){
