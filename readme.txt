@@ -101,8 +101,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Security:*
 
-* Fixed a serious security issue. Please update your version of Ninja Forms.
-
+* Fixed a serious security issue that could allow for possible SQL injection. Please update as soon as possible.
 
 *Bugs:*
 
@@ -114,7 +113,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Security:*
 
-* Fixed a serious security issue. Please update your version of Ninja Forms.
+* Fixed a serious security issue that could allow for possible SQL injection. Please update as soon as possible.
 
 *Bugs:*
 
@@ -124,7 +123,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Security:*
 
-* Fixed a security issue that could allow users to run Javascript on the front-end after a submission in some circumstances.
+* Fixed a security issue that could allow users to run Javascript on the front-end after a submission in some circumstances. Thank you to Kenan G. ( @K3n4nG on Twitter ) for finding this issue and reporting it to us.
 
 *Bugs:*
 
