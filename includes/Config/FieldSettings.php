@@ -675,7 +675,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label'             => __( 'Product', 'ninja-forms' ),
         'width'             => 'full',
         'group'             => 'primary',
-        'options'           => 'fields',
+        'options'           => array(),
     ),
 
 ));
