@@ -12,7 +12,7 @@
   .nf-fields .nf-element {
     font-size: 16px;
     padding: 16px; }
-  .nf-fields .nf-product-field.nf-element {
+  .nf-fields .nf-product-field.ninja-forms-field {
     background: transparent;
     border: 0;
     padding: 0; }
