@@ -514,6 +514,7 @@ final class NF_Database_MockData
             ->update_setting( 'label', 'Quantity')
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'product_assignment', $product_field_id )
+            ->update_setting( 'default', 1 )
             ->update_setting( 'num_min', 1 )
             ->update_setting( 'num_max', NULL )
             ->update_setting( 'num_step', 1 )
