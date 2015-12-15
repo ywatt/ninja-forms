@@ -419,8 +419,8 @@ function nf_alpha_release_admin_notice()
             <li>This ALPHA is best viewed at <strong>1039px wide or greater.</strong> This is because we have not fully implented the responsive UI thus far.</li>
             <li>Here some things we would like you to test and offer feedback on this week:
                 <ul>
-                    <li>A new Advanced tab next to the already established Fields and Emails & Actions tabs. Play around with these advanced settings and make sure that they function as you would expect. Are they clear? Can you view them in the Undo Manager and do they undo properly?</li>
-                    <li>We’ve added back in the submissions manager so you can now view and edit submissions. Please play around with this section and make sure it’s acting properly.</li>
+                    <li>Pricing Fields: Use the mock data Product Forms with pricing fields, and add pricing fields to those forms.</li>
+                    <li>Merge Tags: Add merge tags to field defaults and emails & actions.</li>
                 </ul>
             </li>
         </ul>
