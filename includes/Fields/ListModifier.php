@@ -7,7 +7,7 @@ class NF_Fields_ListModifier extends NF_Abstracts_List
 {
     protected $_name = 'listmodifier';
 
-    protected $_section = 'pricing';
+    protected $_section = '';
 
     protected $_templates = 'list';
 
