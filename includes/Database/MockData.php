@@ -541,6 +541,16 @@ final class NF_Database_MockData
             ->update_setting( 'label', 'Purchase')
             ->update_setting( 'order', 1000 )
             ->save();
+
+        /*
+         * ACTIONS
+         */
+
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'label',  'Success Message' )
+            ->update_setting( 'type', 'successmessage' )
+            ->update_setting( 'message', 'Your total is ${field:total}.' )
+            ->save();
     }
 
     private function _migrate()
