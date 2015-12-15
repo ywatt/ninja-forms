@@ -41,9 +41,9 @@ class NF_Fields_Product extends NF_Abstracts_Input
             $type = $field[ 'type' ];
 
             if( ! isset( $field[ 'product_assignment' ] ) ) continue;
-            
+
             if( $product[ 'id' ] != $field[ 'product_assignment' ] ) continue;
-            
+
             $related[ $type ] = &$data[ 'fields' ][ $key ]; // Assign by reference
         }
 
@@ -59,13 +59,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
             //TODO: Handle multiple modifiers.
         }
 
-        if( isset( $related[ 'shipping' ] ) ){
-            $total += $related[ 'shipping' ][ 'shipping_cost' ];
-        }
-
-        if( isset( $related[ 'total' ] ) ){
-            $related[ 'total' ][ 'value' ] = $data[ 'total' ] = number_format( $total, 2 );
-        }
+        $data[ 'product_totals' ][] = number_format( $total, 2 );
 
         return $data;
     }
