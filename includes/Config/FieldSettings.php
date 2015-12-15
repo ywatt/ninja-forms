@@ -151,11 +151,12 @@ return apply_filters( 'ninja-forms-field-settings', array(
 
     'options' => array(
         'name' => 'options',
-        'type' => 'list-repeater',
+        'type' => 'option-repeater',
         'label' => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
         'width' => 'full',
         'group' => 'primary',
-        'value' => FALSE,
+        'value' => 'option-repeater',
+        'columns' => array( 'label', 'value', 'calc', 'selected' ),
         
     ),
 
@@ -625,24 +626,56 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'use_merge_tags' => FALSE
     ),
 
-    'shipping_cost' => array(
-        'name' => 'shipping_cost',
-        'type' => 'textbox',
-        'label' => __( 'Cost', 'ninja-forms' ),
-        'width' => 'one-half',
-        'group' => 'primary',
-        'value' => '0.00',
+    'shipping_cost'         => array(
+        'name'              => 'shipping_cost',
+        'type'              => 'textbox',
+        'label'             => __( 'Cost', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'primary',
+        'value'             => '0.00',
         
     ),
 
-    'tax_rate' => array(
-        'name' => 'tax_rate',
-        'type' => 'textbox',
-        'label' => __( 'Rate', 'ninja-forms' ),
-        'width' => 'one-half',
-        'group' => 'primary',
-        'value' => '0.00',
+    'tax_rate'              => array(
+        'name'              => 'tax_rate',
+        'type'              => 'textbox',
+        'label'             => __( 'Rate', 'ninja-forms' ),
+        'width'             => 'one-half',
+        'group'             => 'primary',
+        'value'             => '0.00',
         
+    ),
+
+    'shipping_type'         => array(
+        'name'              => 'shipping_type',
+        'type'              => 'select',
+        'options'           => array(
+            array( 
+                'label'     => __( 'Single', 'ninja-forms' ),
+                'value'     => 'single',
+            ),
+            array( 
+                'label'     => __( 'Dropdown', 'ninja-forms' ),
+                'value'     => 'select',
+            ),
+        ),
+        'label'             => __( 'Type', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'advanced',
+        'value'             => 'single',
+    ),
+
+    'shipping_options'      => array(
+        'name'              => 'shipping_options',
+        'type'              => 'option-repeater',
+        'label'             => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
+        'width'             => 'full',
+        'group'             => 'advanced',
+        'value'             => 'option-repeater',
+        'columns'           => array( 'label', 'value' ),
+        'deps'              => array(
+            'shipping_type' => 'select',
+        ),
     ),
 
 ));

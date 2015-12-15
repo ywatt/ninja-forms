@@ -7,7 +7,7 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 		initialize: function( data ) {
 			this.collection = data.dataModel.get( 'options' );
 			this.dataModel = data.dataModel;
-			this.childViewOptions = { collection: this.collection, dataModel: data.dataModel };
+			this.childViewOptions = { collection: this.collection, dataModel: data.dataModel, columns: this.model.get( 'columns' ) };
 		},
 
 		onRender: function() {
@@ -29,25 +29,43 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 				tolerance: 'pointer',
 
 				start: function( e, ui ) {
-					nfRadio.channel( 'list-repeater' ).request( 'start:optionSortable', ui );
+					nfRadio.channel( 'option-repeater' ).request( 'start:optionSortable', ui );
 				},
 
 				stop: function( e, ui ) {
-					nfRadio.channel( 'list-repeater' ).request( 'stop:optionSortable', ui );
+					nfRadio.channel( 'option-repeater' ).request( 'stop:optionSortable', ui );
 				},
 
 				update: function( e, ui ) {
-					nfRadio.channel( 'list-repeater' ).request( 'update:optionSortable', ui, this, that );
+					nfRadio.channel( 'option-repeater' ).request( 'update:optionSortable', ui, this, that );
 				}
 			} );
 		},
 
 		templateHelpers: function () {
 	    	return {
-	    		renderSetting: function(){
+	    		renderHeaders: function() {
+	    			var columns = '<div>&nbsp;</div>';
+	    			if ( -1 != this.columns.indexOf( 'label' ) ) {
+	    				columns += '<div>Label</div>';
+	    			}
+	    			if ( -1 != this.columns.indexOf( 'value' ) ) {
+	    				columns += '<div>Value</div>';
+	    			}
+	    			if ( -1 != this.columns.indexOf( 'calc' ) ) {
+						columns += '<div>Calc Value</div>';
+	    			}
+	    			if ( -1 != this.columns.indexOf( 'selected' ) ) {
+	    				columns += '<div><span class="dashicons dashicons-yes"></span></div>';
+	    			}
+	    			columns += '<div>&nbsp;</div>'
+					return columns;
+				},
+
+	    		renderSetting: function() {
 					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
 				},
-				
+
 				renderWidth: function() {
 					if ( 'undefined' != typeof this.width ) {
 						return this.width;
@@ -67,7 +85,7 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 		},
 
 		clickAddOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
+			nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
 		}
 
 	} );

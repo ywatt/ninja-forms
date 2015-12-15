@@ -14,20 +14,20 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Respond to requests for the childView for list type fields.
-			nfRadio.channel( 'list-repeater' ).reply( 'get:settingChildView', this.getSettingChildView, this );
+			nfRadio.channel( 'option-repeater' ).reply( 'get:settingChildView', this.getSettingChildView, this );
 						
 			// When a list type field is initialized, create an option collection.
-			this.listenTo( nfRadio.channel( 'fields-list' ), 'init:fieldModel', this.createOptionCollection );
+			this.listenTo( nfRadio.channel( 'fields' ), 'init:fieldModel', this.createOptionCollection );
 			
 			// Listen for changes to our list options.
-			this.listenTo( nfRadio.channel( 'list-repeater' ), 'change:option', this.changeOption );
-			this.listenTo( nfRadio.channel( 'list-repeater' ), 'click:addOption', this.addOption );
-			this.listenTo( nfRadio.channel( 'list-repeater' ), 'click:deleteOption', this.deleteOption );
+			this.listenTo( nfRadio.channel( 'option-repeater' ), 'change:option', this.changeOption );
+			this.listenTo( nfRadio.channel( 'option-repeater' ), 'click:addOption', this.addOption );
+			this.listenTo( nfRadio.channel( 'option-repeater' ), 'click:deleteOption', this.deleteOption );
 
 			// Respond to requests related to our list options sortable.
-			nfRadio.channel( 'list-repeater' ).reply( 'update:optionSortable', this.updateOptionSortable, this );
-			nfRadio.channel( 'list-repeater' ).reply( 'stop:optionSortable', this.stopOptionSortable, this );
-			nfRadio.channel( 'list-repeater' ).reply( 'start:optionSortable', this.startOptionSortable, this );
+			nfRadio.channel( 'option-repeater' ).reply( 'update:optionSortable', this.updateOptionSortable, this );
+			nfRadio.channel( 'option-repeater' ).reply( 'stop:optionSortable', this.stopOptionSortable, this );
+			nfRadio.channel( 'option-repeater' ).reply( 'start:optionSortable', this.startOptionSortable, this );
 		},
 
 		/**
@@ -39,7 +39,7 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 		 */
 		createOptionCollection: function( model ) {
 			var options = model.get( 'options' );
-			if ( ! options ) {
+			if ( 'option-repeater' == options ) {
 				model.set( 'options', [ { calc: 1, label: 'One', value: 'one', order: 0, selected: 0 }, { calc: 2, label: 'Two', value: 'two', order: 1, selected: 0 }, { calc: 3, label: 'Three', value: 'three', order: 2, selected: 0 } ], { silent: true } );
 			}
 

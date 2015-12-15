@@ -7,6 +7,7 @@ define( [], function() {
 		initialize: function( data ) {
 			this.dataModel = data.dataModel;
 			this.collection = data.collection;
+			this.columns = data.columns;
 		},
 
 		onRender: function() {
@@ -24,16 +25,25 @@ define( [], function() {
 		},
 
 		changeOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).trigger( 'change:option', e, this.model, this.dataModel );
+			nfRadio.channel( 'option-repeater' ).trigger( 'change:option', e, this.model, this.dataModel );
 		},
 
 		deleteOption: function( e ) {
-			nfRadio.channel( 'list-repeater' ).trigger( 'click:deleteOption', this.model, this.collection, this.dataModel );
+			nfRadio.channel( 'option-repeater' ).trigger( 'click:deleteOption', this.model, this.collection, this.dataModel );
 		},
 
 		maybeAddOption: function( e ) {
 			if ( 13 == e.keyCode ) {
-				nfRadio.channel( 'list-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
+				nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
+			}
+		},
+
+		templateHelpers: function() {
+			var that = this;
+			return {
+				getColumns: function() {
+					return that.columns;
+				}
 			}
 		}
 

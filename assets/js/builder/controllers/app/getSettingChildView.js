@@ -2,7 +2,7 @@
  * Returns the appropriate child view for our settings drawer.
  *
  * This enables settings types to register custom childviews for their settings.
- * The list-repeater setting for the list field is an example.
+ * The option-repeater setting for the list field is an example.
  * 
  * @package Ninja Forms builder
  * @subpackage App - Edit Settings Drawer

@@ -47,7 +47,7 @@ define(
 		'controllers/fields/filterTypes',
 		'controllers/fields/sortable',
 		'controllers/fields/data',
-		'controllers/fields/listField',
+		'controllers/fields/optionRepeater',
 		'controllers/fields/editActive',
 		'controllers/fields/fieldSettings',
 
@@ -112,7 +112,7 @@ define(
 		DrawerFilterFieldTypes,
 		MainContentFieldsSortable,
 		FieldData,
-		ListField,
+		OptionRepeater,
 		FieldsEditActive,
 		FieldSettings,
 		/*
@@ -165,7 +165,7 @@ define(
 				 * This ensures that any 'init' hooks are properly registered.
 				 */
 				new Fieldset();
-				new ListField();
+				new OptionRepeater();
 
 				new FieldTypes();
 				new FieldTypeDrag();

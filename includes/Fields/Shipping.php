@@ -22,8 +22,11 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
         parent::__construct();
 
         $this->_settings = $this->load_settings(
-            array( 'label', 'label_pos', 'shipping_cost' )
+            array( 'label', 'label_pos', 'shipping_cost', 'shipping_type', 'options' )
         );
+
+        $this->_settings['options']['group'] = 'advanced';
+        $this->_settings['options']['columns'] = array( 'label', 'value' );
 
         $this->_nicename = __( 'Shipping', 'ninja-forms' );
     }

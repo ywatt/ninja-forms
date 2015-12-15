@@ -386,17 +386,12 @@
     </fieldset>
 </script>
 
-<script id="nf-tmpl-edit-setting-list-repeater" type="text/template">
+<script id="nf-tmpl-edit-setting-option-repeater" type="text/template">
     <fieldset class="nf-list-options">
         <legend><%= label %></legend>
         <div class="nf-div-table">
             <div class="nf-table-row nf-table-header">
-                <div>&nbsp;</div>
-                <div>Label</div>
-                <div>Value</div>
-                <div>Calc Value</div>
-                <div><span class="dashicons dashicons-yes"></span></div>
-                <div>&nbsp;</div>
+                <%= renderHeaders() %>
             </div>
 
             <div class="nf-list-options-tbody">
@@ -413,18 +408,45 @@
     <div>
         <span class="dashicons dashicons-menu handle"></span>
     </div>
-    <div>
-        <input type="text" value="<%= label %>" data-id="label">
-    </div>
-    <div>
-        <input type="text" value="<%= value %>" data-id="value">
-    </div>
-    <div>
-        <input type="text" value="<%= calc %>" data-id="calc">
-    </div>
-    <div>
-        <input type="checkbox" class="nf-checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
-    </div>
+    <%
+        var columns = getColumns();
+        
+        if ( -1 != columns.indexOf( 'label' ) ) {
+            %>
+             <div>
+                <input type="text" value="<%= label %>" data-id="label">
+            </div>
+            <%
+        }
+    %>
+    <%
+        if ( -1 != columns.indexOf( 'value' ) ) {
+            %>
+             <div>
+                <input type="text" value="<%= value %>" data-id="value">
+            </div>
+            <%
+        }
+    %>
+    <%
+        if ( -1 != columns.indexOf( 'calc' ) ) {
+            %>
+             <div>
+                <input type="text" value="<%= calc %>" data-id="calc">
+            </div>
+            <%
+        }
+    %>
+    <%
+        if ( -1 != columns.indexOf( 'selected' ) ) {
+            %>
+            <div>
+                <input type="checkbox" class="nf-checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
+            </div>
+            <%
+        }
+    %>
+
     <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>
     </div>
