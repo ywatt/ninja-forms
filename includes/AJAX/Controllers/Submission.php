@@ -50,6 +50,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     {
         foreach( $fields as $field ){
 
+            $field_merge_tags->set_merge_tags( $field[ 'id' ], $field[ 'value' ] );
+
             if( ! isset( $field[ 'key' ] ) ) continue;
             $field_merge_tags->set_merge_tags( $field[ 'key' ], $field[ 'value' ] );
         }
