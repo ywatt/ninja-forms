@@ -521,6 +521,8 @@ final class NF_Database_MockData
             ->update_setting( 'order', 2 )
             ->save();
 
+        $quantity_field_id = $field->get_id();
+
         $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'shipping' )
             ->update_setting( 'label', 'Shipping')
@@ -550,7 +552,7 @@ final class NF_Database_MockData
         $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'label',  'Success Message' )
             ->update_setting( 'type', 'successmessage' )
-            ->update_setting( 'message', '<div style="border: 2px solid green; padding: 10px; color: green;">Your total is ${field:total}.</div>' )
+            ->update_setting( 'message', '<div style="border: 2px solid green; padding: 10px; color: green;">You purchased {field:' . $quantity_field_id . '} product(s) for ${field:total}.</div>' )
             ->save();
     }
 
@@ -604,7 +606,7 @@ final class NF_Database_MockData
         $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'label',  'Success Message' )
             ->update_setting( 'type', 'successmessage' )
-            ->update_setting( 'message', '<div style="border: 2px solid green; padding: 10px; color: green;">Your total is ${field:total}.</div>' )
+            ->update_setting( 'message', '<div style="border: 2px solid green; padding: 10px; color: green;">You purchased {field:' . $product_field_id . '} product(s) for ${field:total}.</div>' )
             ->save();
     }
 
@@ -627,19 +629,21 @@ final class NF_Database_MockData
             ->update_setting( 'order', 1 )
             ->save();
 
-        $product_field_id = $field->get_id();
+        $product_field_A_id = $field->get_id();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'quantity' )
-            ->update_setting( 'label', 'Quantity')
+            ->update_setting( 'label', 'Quantity for Product A')
             ->update_setting( 'label_pos', 'above' )
-            ->update_setting( 'product_assignment', $product_field_id )
+            ->update_setting( 'product_assignment', $product_field_A_id )
             ->update_setting( 'default', 1 )
             ->update_setting( 'num_min', 1 )
             ->update_setting( 'num_max', NULL )
             ->update_setting( 'num_step', 1 )
             ->update_setting( 'order', 2 )
             ->save();
+
+        $quantity_field_A_id = $field->get_id();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'product' )
@@ -650,19 +654,21 @@ final class NF_Database_MockData
             ->update_setting( 'order', 3 )
             ->save();
 
-        $product_field_id = $field->get_id();
+        $product_field_B_id = $field->get_id();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'quantity' )
-            ->update_setting( 'label', 'Quantity')
+            ->update_setting( 'label', 'Quantity for Product B')
             ->update_setting( 'label_pos', 'above' )
-            ->update_setting( 'product_assignment', $product_field_id )
+            ->update_setting( 'product_assignment', $product_field_B_id )
             ->update_setting( 'default', 1 )
             ->update_setting( 'num_min', 1 )
             ->update_setting( 'num_max', NULL )
             ->update_setting( 'num_step', 1 )
             ->update_setting( 'order', 4 )
             ->save();
+
+        $quantity_field_B_id = $field->get_id();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'shipping' )
@@ -693,7 +699,7 @@ final class NF_Database_MockData
         $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'label',  'Success Message' )
             ->update_setting( 'type', 'successmessage' )
-            ->update_setting( 'message', '<div style="border: 2px solid green; padding: 10px; color: green;">Your total is ${field:total}.</div>' )
+            ->update_setting( 'message', '<div style="border: 2px solid green; padding: 10px; color: green;">You purchased {field:' . $quantity_field_A_id . '} of Product A and {field:' . $quantity_field_B_id . '} of Product B for ${field:total}.</div>' )
             ->save();
     }
 
