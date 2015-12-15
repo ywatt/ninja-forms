@@ -25,13 +25,13 @@ define( [], function() {
 
 		beforeRenderSetting: function( settingModel, dataModel, view ) {
 			if ( 'product_assignment' == settingModel.get( 'name' ) ) {
-				var productFields = this.getProductFields();
+				var productFields = this.getProductFields( settingModel );
 				settingModel.set( 'options', productFields );
 			}
 		},
 
-		getProductFields: function() {
-			var productFields = [];
+		getProductFields: function( settingModel ) {
+			var productFields = [ settingModel.get( 'select_product' ) ];
 			// Update our dataModel with all of our product fields.
 			var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			_.each( fields.models, function( field ) {
