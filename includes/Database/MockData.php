@@ -522,15 +522,6 @@ final class NF_Database_MockData
             ->save();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
-        $field->update_setting( 'type', 'tax' )
-            ->update_setting( 'label', 'Tax')
-            ->update_setting( 'label_pos', 'above' )
-            ->update_setting( 'product_assignment', $product_field_id )
-            ->update_setting( 'tax_rate', 10.00 )
-            ->update_setting( 'order', 3 )
-            ->save();
-
-        $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'shipping' )
             ->update_setting( 'label', 'Shipping')
             ->update_setting( 'label_pos', 'above' )
