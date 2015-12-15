@@ -38,7 +38,6 @@ define([], function() {
 
                 // TODO: Maybe use switch
                 if( 'product' == field.get( 'type' ) ){
-                    console.log( field );
                     productFields[ fieldID ] = field;
                 } else if( 'quantity' == field.get( 'type' ) ){
                     var productID = field.get( 'product_assignment' );
@@ -100,12 +99,10 @@ define([], function() {
                 newTotal += Number( this.productTotals[ product ] );
             }
 
-            if( newTotal ) {
+            if( newTotal && this.shippingCost ) {
                 // Only add shipping if there is a cost.
                 newTotal += Number(this.shippingCost);
             }
-
-            console.log( this.productTotals );
 
             this.totalModel.set( 'value', newTotal.toFixed( 2 ) );
             this.totalModel.set( 'reRender', true );
