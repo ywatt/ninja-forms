@@ -668,6 +668,15 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
     ),
 
+    'quantity_product'      => array(
+        'name'              => 'quantity_product',
+        'type'              => 'select',
+        'label'             => __( 'Product', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'primary',
+        'options'           => 'fields',
+    ),
+
 ));
 
 

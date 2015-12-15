@@ -21,6 +21,13 @@ class NF_Fields_Quantity extends NF_Fields_Number
     {
         parent::__construct();
 
+        $settings = $this->load_settings(
+           array( 'quantity_product' )
+        );
+       
+        $this->_settings = array_merge( $settings, $this->_settings );
+        unset( $this->_settings[ 'required'] );
+
         $this->_nicename = __( 'Quantity', 'ninja-forms' );
     }
 }
