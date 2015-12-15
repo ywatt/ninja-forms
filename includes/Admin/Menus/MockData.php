@@ -11,9 +11,27 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
     public function __construct()
     {
         parent::__construct();
+
+        if( isset( $_GET[ 'page' ] ) && 'nf-mock-data' == $_GET[ 'page' ] ) {
+            add_action('admin_init', array($this, 'mock_and_redirect'));
+        }
+    }
+
+    public function mock_and_redirect()
+    {
+        $this->mock_data();
+        wp_redirect( admin_url( 'admin.php?page=ninja-forms' ) );
+        exit;
     }
 
     public function display()
+    {
+        // Fallback if not redirected.
+        $this->mock_data();
+        echo '<div class="wrap">Migrations and Mock Data complete. <a href="' . admin_url( "admin.php?page=ninja-forms" ) . '">View Forms</a></div>';
+    }
+
+    private function mock_data()
     {
         $mock_data = new NF_Database_MockData();
 
@@ -25,8 +43,6 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $mock_data->form_email_submission();
         $mock_data->form_long_form();
         $mock_data->form_kitchen_sink();
-
-        echo '<div class="wrap">Migrations and Mock Data complete. <a href="' . admin_url( "admin.php?page=ninja-forms" ) . '">View Forms</a></div>';
     }
 
 } // End Class NF_Admin_Settings
