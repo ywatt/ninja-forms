@@ -8,8 +8,10 @@ define([], function() {
         registerQuantity: function( model ){
             var productID = model.get( 'product_assignment' );
             var product = nfRadio.channel( 'fields' ).request( 'get:field', productID );
-            product.set( 'product_use_quantity', 0 );
 
+            if( product ) {
+                product.set('product_use_quantity', 0);
+            }
         },
 
     });
