@@ -493,6 +493,7 @@ final class NF_Database_MockData
         /* FORM */
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Product Form (with Quantity Field)' );
+        $form->update_setting( 'hide_successfully_completed_form', 1 );
         $form->save();
 
         $form_id = $form->get_id();
@@ -561,6 +562,7 @@ final class NF_Database_MockData
         /* FORM */
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Product Form (Inline Quantity)' );
+        $form->update_setting( 'hide_successfully_completed_form', 1 );
         $form->save();
 
         $form_id = $form->get_id();
@@ -615,6 +617,7 @@ final class NF_Database_MockData
         /* FORM */
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Product Form (Multiple Products)' );
+        $form->update_setting( 'hide_successfully_completed_form', 1 );
         $form->save();
 
         $form_id = $form->get_id();
