@@ -409,7 +409,7 @@ function nf_alpha_release_admin_notice()
         }
     </style>
     <div class="error nf-alpha-notice">
-        <h3>Ninja Forms 3.0 - ALPHA 4 - Baker</h3>
+        <h3>Ninja Forms 3.0 - ALPHA 5 - Davison</h3>
         <p><strong>NOTICE:</strong> Installed is an Alpha Release of Ninja Forms. This is not intended for production.</p>
         <p>Please keep a few things in mind while exploring:</p>
         <ul>
