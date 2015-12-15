@@ -22,7 +22,7 @@ class NF_Fields_Quantity extends NF_Fields_Number
         parent::__construct();
 
         $settings = $this->load_settings(
-           array( 'quantity_product' )
+           array( 'product_assignment' )
         );
        
         $this->_settings = array_merge( $settings, $this->_settings );

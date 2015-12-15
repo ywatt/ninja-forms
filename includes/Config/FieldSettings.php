@@ -669,8 +669,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
     ),
 
-    'quantity_product'      => array(
-        'name'              => 'quantity_product',
+    'product_assignment'      => array(
+        'name'              => 'product_assignment',
         'type'              => 'select',
         'label'             => __( 'Product', 'ninja-forms' ),
         'width'             => 'full',
