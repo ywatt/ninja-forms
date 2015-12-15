@@ -1374,6 +1374,8 @@ All styles used for displaying table content
       padding: 0 5px;
       display: block;
       text-decoration: none; }
+    .jBox-TooltipBorder .jBox-container ul a.active {
+      background: #f1f1f1; }
 
 .jBox-TooltipBorder .jBox-pointer::after {
   border: 2px solid #1EA9EA;

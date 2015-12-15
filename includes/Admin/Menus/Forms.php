@@ -29,8 +29,6 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             Ninja_Forms::template( 'admin-menu-new-form.html.php' );
             wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
             wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
-            wp_enqueue_style( 'jBox-dark', Ninja_Forms::$url . 'assets/css/TooltipDark.css' );
-            wp_enqueue_style( 'jBox-border', Ninja_Forms::$url . 'assets/css/TooltipBorder.css' );
 
             wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
             wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
@@ -38,6 +36,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             wp_enqueue_script( 'jquery-hotkeys-new', Ninja_Forms::$url . 'assets/js/lib/jquery.hotkeys.js' );
             // wp_enqueue_script( 'jquery-qtip2', Ninja_Forms::$url . 'assets/js/lib/jquery.qtip.js' );
             wp_enqueue_script( 'jBox', Ninja_Forms::$url . 'assets/js/lib/jBox.min.js' );
+            wp_enqueue_script( 'jquery-caret', Ninja_Forms::$url . 'assets/js/lib/jquery.caret.js' );
 
             // wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
             wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/min/builder.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );
@@ -53,6 +52,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $this->_localize_action_type_data();
 
             $this->_localize_form_settings();
+
+            $this->_localize_merge_tags();
         } else {
 
             /*
@@ -88,7 +89,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $settings[ 'id' ] = $field->get_id();
 
             foreach( $settings as $key => $setting ){
-                if( is_numeric( $setting ) ) $settings[ $key ] = absint( $setting );
+                if( is_numeric( $setting ) ) $settings[ $key ] = floatval( $setting );
             }
 
             $fields_settings[] = $settings;
@@ -120,6 +121,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
     private function _localize_field_type_data()
     {
+        $field_type_sections = array_values( Ninja_Forms()->config( 'FieldTypeSections' ) );
         $field_type_settings = array();
 
         $master_settings = array();
@@ -153,8 +155,9 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
         ?>
         <script>
-            var fieldTypeData = <?php echo wp_json_encode( $field_type_settings ); ?>;
-            var fieldSettings = <?php echo wp_json_encode( $master_settings ); ?>;
+            var fieldTypeData     = <?php echo wp_json_encode( $field_type_settings ); ?>;
+            var fieldSettings     = <?php echo wp_json_encode( $master_settings ); ?>;
+            var fieldTypeSections = <?php echo wp_json_encode( $field_type_sections ); ?>;
             // console.log( fieldTypeData );
         </script>
         <?php
@@ -244,6 +247,31 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         </script>
         <?php
     }
+
+    protected function _localize_merge_tags()
+    {
+        $merge_tags = array(
+            'fields' => array(
+                'id'    => 'fields',
+                'label' => __( 'Fields', 'ninja-forms' )
+            )
+        );
+
+        foreach( Ninja_Forms()->merge_tags as $key => $group ){
+
+            $merge_tags[ $key ] = array(
+                'id'    => $group->get_id(),
+                'label' => $group->get_title(),
+                'tags'  => array_values( $group->get_merge_tags() )
+            );
+        }
+        ?>
+        <script>
+            var mergeTags = <?php echo wp_json_encode( array_values( $merge_tags ) ); ?>;
+        </script>
+        <?php
+    }
+
 
     protected function _group_settings( $settings, $groups )
     {

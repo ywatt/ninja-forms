@@ -12,7 +12,8 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'label' => __( 'Form Title', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',
-        'value' => ''
+        'value' => '',
+        
     ),
 
     /*
@@ -25,7 +26,8 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'label' => __( 'Display Form Title', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',
-        'value' => TRUE
+        'value' => TRUE,
+        
     ),
 
     /*
@@ -38,7 +40,8 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'label' => __( 'Clear successfully completed form?', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',
-        'value' => TRUE
+        'value' => TRUE,
+        
         //TODO: Add following text below the element.
         //If this box is checked, Ninja Forms will clear the form values after it has been successfully submitted.
     ),
@@ -53,9 +56,30 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'label' => __( 'Hide successfully completed forms?', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',
-        'value' => TRUE
+        'value' => TRUE,
+        
         //TODO: Add following text below the element.
         //If this box is checked, Ninja Forms will hide the form after it has been successfully submitted.
+    ),
+
+    /*
+     * Currency
+     */
+
+    'currency' => array(
+        'name' => 'currency',
+        'type' => 'select',
+        'label' => __( 'Currency', 'ninja-forms' ),
+        'group' => 'advanced',
+        'width' => 'full',
+        'options' => array(
+            array(
+                'label' => __( 'USD - $', 'ninja-forms' ),
+                'value' => 'usd'
+            ),
+        ),
+        'value' => 'usd',
+        'use_merge_tags' => FALSE
     ),
 
 ));

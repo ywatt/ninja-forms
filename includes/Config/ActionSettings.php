@@ -13,7 +13,8 @@ return array(
         'label' => __( 'Action Name', 'ninja-forms' ),
         'placeholder' => '',
         'width' => 'full',
-        'value' => ''
+        'value' => '',
+        
     ),    
 
     /*

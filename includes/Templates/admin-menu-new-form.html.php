@@ -5,6 +5,7 @@
     <div id="nf-main" class="nf-app-main"></div>
     <!-- <div id="nf-menu-drawer"></div> -->
     <div id="nf-drawer"></div>
+    <span class="merge-tags-content" style="display:none;"></span>
 </script>
 
 <script id="nf-tmpl-header" type="text/template">
@@ -202,6 +203,7 @@
 
 <script id="nf-tmpl-drawer-content-edit-settings" type="text/template">
     <%= maybeRenderTitle() %>
+ 
     <span class="nf-settings-groups"></span>
 </script>
 
@@ -309,8 +311,13 @@
 
 </script>
 
-<script id="nf-tmpl-merge-tags" type="text/template">
+<script id="nf-tmpl-merge-tags-section" type="text/template">
+    <h4><%= label %></h4>
+    <ul class="merge-tags"></ul>
+</script>
 
+<script id="nf-tmpl-merge-tags-item" type="text/template">
+    <a href="#" tabindex="1" class="<%= renderClasses() %>"><%= label %></a>
 </script>
 
 <!-- Field Settings Templates -->
@@ -323,8 +330,8 @@
 
 <script id="nf-tmpl-edit-setting-textbox" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
-        <input type="text" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
-        <!-- <span class="dashicons dashicons-list-view merge-tags"></span> -->
+        <input type="text" class="setting" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
+        <%= renderMergeTags() %>
     </label>
 </script>
 
@@ -336,8 +343,8 @@
 
 <script id="nf-tmpl-edit-setting-textarea" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
-        <textarea id="<%= name %>"><%= value %></textarea>
-        <!-- <span class="dashicons dashicons-list-view merge-tags"></span> -->
+        <textarea id="<%= name %>" class="setting"><%= value %></textarea>
+        <%= renderMergeTags() %>
     </label>
 </script>
 
@@ -379,17 +386,12 @@
     </fieldset>
 </script>
 
-<script id="nf-tmpl-edit-setting-list-repeater" type="text/template">
+<script id="nf-tmpl-edit-setting-option-repeater" type="text/template">
     <fieldset class="nf-list-options">
         <legend><%= label %></legend>
         <div class="nf-div-table">
             <div class="nf-table-row nf-table-header">
-                <div>&nbsp;</div>
-                <div>Label</div>
-                <div>Value</div>
-                <div>Calc Value</div>
-                <div><span class="dashicons dashicons-yes"></span></div>
-                <div>&nbsp;</div>
+                <%= renderHeaders() %>
             </div>
 
             <div class="nf-list-options-tbody">
@@ -406,18 +408,45 @@
     <div>
         <span class="dashicons dashicons-menu handle"></span>
     </div>
-    <div>
-        <input type="text" value="<%= label %>" data-id="label">
-    </div>
-    <div>
-        <input type="text" value="<%= value %>" data-id="value">
-    </div>
-    <div>
-        <input type="text" value="<%= calc %>" data-id="calc">
-    </div>
-    <div>
-        <input type="checkbox" class="nf-checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
-    </div>
+    <%
+        var columns = getColumns();
+        
+        if ( -1 != columns.indexOf( 'label' ) ) {
+            %>
+             <div>
+                <input type="text" value="<%= label %>" data-id="label">
+            </div>
+            <%
+        }
+    %>
+    <%
+        if ( -1 != columns.indexOf( 'value' ) ) {
+            %>
+             <div>
+                <input type="text" value="<%= value %>" data-id="value">
+            </div>
+            <%
+        }
+    %>
+    <%
+        if ( -1 != columns.indexOf( 'calc' ) ) {
+            %>
+             <div>
+                <input type="text" value="<%= calc %>" data-id="calc">
+            </div>
+            <%
+        }
+    %>
+    <%
+        if ( -1 != columns.indexOf( 'selected' ) ) {
+            %>
+            <div>
+                <input type="checkbox" class="nf-checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
+            </div>
+            <%
+        }
+    %>
+
     <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>
     </div>

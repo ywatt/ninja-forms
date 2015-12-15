@@ -4,7 +4,7 @@ define( ['views/app/drawer/itemSettingGroupCollection'], function( itemSettingGr
 		template: '#nf-tmpl-drawer-content-edit-settings',
 
 		regions: {
-			settingGroups: '.nf-settings-groups'
+			settingGroups: '.nf-settings-groups',
 		},
 
 		initialize: function( data ) {

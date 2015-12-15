@@ -23,6 +23,23 @@ define( [], function() {
 			 * This listens to requests from other parts of our app asking what the closed right position is.
 			 */
 			nfRadio.channel( 'drawer' ).reply( 'get:closedRightPos', this.getClosedDrawerPos, this );
+			
+			// Reply to requests to prevent our drawer from closing
+			nfRadio.channel( 'drawer' ).reply( 'prevent:close', this.preventClose, this );
+			// Reply to requests to enable drawer closing
+			nfRadio.channel( 'drawer' ).reply( 'enable:close', this.enableClose, this );
+
+			/*
+			 * Object that holds our array of 'prevent close' values.
+			 * We use an array so that registered requests can unregister and not affect each other.
+			 */
+			this.objPreventClose = {};
+
+			/*
+			 *  Listen to focus events on the filter and stop our interval when it happens.
+			 *  This is to fix a bug that can cause the filter to gain focus every few seconds.
+			 */
+			this.listenTo( nfRadio.channel( 'drawer' ), 'filter:focused', this.filterFocused );
 		},
 
 		/**
@@ -33,7 +50,7 @@ define( [], function() {
 		closeDrawer: function() {
 			// Get our current domain.
 			var currentDrawer = nfRadio.channel( 'app' ).request( 'get:currentDrawer' );
-			if ( ! currentDrawer ) {
+			if ( ! currentDrawer || this.maybePreventClose() ) {
 				return false;
 			}
 
@@ -169,6 +186,52 @@ define( [], function() {
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
 			var closedPos = jQuery( builderEl ).width() + 300;
 			return '-' + closedPos + 'px';
+        },
+
+        /**
+         * Check to see if anything has registered a prevent close key.
+         * 
+         * @since  3.0
+         * @return boolean
+         */
+        maybePreventClose: function() {
+        	if ( 0 == Object.keys( this.objPreventClose ).length ) {
+        		return false;
+        	} else {
+        		return true;
+        	}
+        },
+
+        /**
+         * Register a prevent close key.
+         * 
+         * @since  3.0
+         * @param  string 	key unique id for our 'prevent close' setting.
+         * @return void
+         */
+        preventClose: function( key ) {
+        	this.objPreventClose[ key ] = true;
+        },
+
+        /**
+         * Remove a previously registered prevent close key.
+         * 
+         * @since  3.0
+         * @param  string 	key unique id for our 'prevent close' setting.
+         * @return void
+         */
+        enableClose: function( key ) {
+        	delete this.objPreventClose[ key ];
+        },
+
+        /**
+         * When we focus our filter, make sure that our open drawer interval is cleared.
+         * 
+         * @since  3.0
+         * @return void
+         */
+        filterFocused: function() {
+        	clearInterval( this.checkOpenDrawerPos );
         }
 	});
 

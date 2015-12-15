@@ -22,6 +22,7 @@ define( ['views/app/drawer/itemSettingCollection'], function( itemSettingCollect
 			} else {
 				this.settings.empty();
 			}
+			nfRadio.channel( 'drawer' ).trigger( 'render:settingGroup', this );
 		},
 
 		events: {

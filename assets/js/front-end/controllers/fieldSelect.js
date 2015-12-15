@@ -1,4 +1,4 @@
-define(['models/fieldModel'], function( fieldModel ) {
+define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'listselect' ), 'init:model', this.register );

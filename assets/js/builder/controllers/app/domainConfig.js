@@ -52,10 +52,14 @@ define( [
 					id: 'fields',
 					nicename: 'Form Fields',
 					hotkeys: {
-						'Esc': 'close:drawer',
-						'Ctrl+Shift+n': 'add:newField',
-						'Ctrl+Shift+a': 'changeDomain:actions',
-						'Ctrl+Shift+s': 'changeDomain:settings'
+						'Esc'				: 'close:drawer',
+						'Ctrl+Shift+n'		: 'add:newField',
+						'Ctrl+Shift+a'		: 'changeDomain:actions',
+						'Ctrl+Shift+s'		: 'changeDomain:settings',
+						'Alt+Ctrl+t'		: 'open:mergeTags',
+						'up'				: 'up:mergeTags',
+						'down'				: 'down:mergeTags',
+						'Shift+return'		: 'return:mergeTags'
 					},
 
 					getMainHeaderView: function() {
@@ -75,10 +79,14 @@ define( [
 					id: 'actions',
 					nicename: 'Emails & Actions',
 					hotkeys: {
-						'Esc': 'close:drawer',
-						'Ctrl+Shift+n': 'add:newAction',
-						'Ctrl+Shift+f': 'changeDomain:fields',
-						'Ctrl+Shift+s': 'changeDomain:settings'
+						'Esc'				: 'close:drawer',
+						'Ctrl+Shift+n'		: 'add:newAction',
+						'Ctrl+Shift+f'		: 'changeDomain:fields',
+						'Ctrl+Shift+s'		: 'changeDomain:settings',
+						'Alt+Ctrl+t'		: 'open:mergeTags',
+						'up'				: 'up:mergeTags',
+						'down'				: 'down:mergeTags',
+						'Shift+return'		: 'return:mergeTags'
 					},
 
 					getMainHeaderView: function() {
@@ -98,9 +106,13 @@ define( [
 					id: 'settings',
 					nicename: 'Advanced',
 					hotkeys: {
-						'Esc': 'close:drawer',
-						'Ctrl+Shift+f': 'changeDomain:fields',
-						'Ctrl+Shift+a': 'changeDomain:actions'
+						'Esc'				: 'close:drawer',
+						'Ctrl+Shift+f'		: 'changeDomain:fields',
+						'Ctrl+Shift+a'		: 'changeDomain:actions',
+						'Alt+Ctrl+t'		: 'open:mergeTags',
+						'up'				: 'up:mergeTags',
+						'down'				: 'down:mergeTags',
+						'Shift+return'		: 'return:mergeTags'
 					},
 
 					getMainHeaderView: function() {

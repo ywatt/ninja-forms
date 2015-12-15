@@ -3,31 +3,10 @@
 return array(
 
     /*
-    * From Name
+    |--------------------------------------------------------------------------
+    | Primary Settings
+    |--------------------------------------------------------------------------
     */
-
-    'from_name' => array(
-        'name' => 'from_name',
-        'type' => 'textbox',
-        'group' => 'primary',
-        'label' => __( 'From Name', 'ninja-forms' ),
-        'placeholder' => __( 'Name or fields', 'ninja-forms' ),
-        'value' => '',
-        'width' => 'full'
-    ),
-
-    /*
-    * Reply To
-    */
-
-    'reply-to' => array(
-        'name' => 'replyto',
-        'type' => 'textbox',
-        'group' => 'primary',
-        'label' => __( 'Reply To', 'ninja-forms' ),
-        'placeholder' => '',
-        'value' => ''
-    ),
 
     /*
      * To
@@ -39,12 +18,14 @@ return array(
         'group' => 'primary',
         'label' => __( 'To', 'ninja-forms' ),
         'placeholder' => __( 'Email address or search for a field', 'ninja-forms' ),
-        'value' => ''
+        'value' => '',
+        'width' => 'full',
+        'use_merge_tags' => TRUE,
     ),
 
     /*
-    * Subject
-    */
+     * Subject
+     */
 
     'subject' => array(
         'name' => 'subject',
@@ -53,12 +34,13 @@ return array(
         'label' => __( 'Subject', 'ninja-forms' ),
         'placeholder' => __( 'Subject Text or seach for a field', 'ninja-forms' ),
         'value' => '',
-        'width' => 'full'
+        'width' => 'full',
+        'use_merge_tags' => TRUE,
     ),
 
     /*
-    * Email Message
-    */
+     * Email Message
+     */
 
     'message' => array(
         'name' => 'message',
@@ -67,12 +49,34 @@ return array(
         'label' => __( 'Email Message', 'ninja-forms' ),
         'placeholder' => '',
         'value' => '',
-        'width' => 'full'
+        'width' => 'full',
+        'use_merge_tags' => TRUE,
     ),
 
-     /*
-    * From Address
+    /*
+    |--------------------------------------------------------------------------
+    | Advanced Settings
+    |--------------------------------------------------------------------------
     */
+
+    /*
+     * From Name
+     */
+
+    'from_name' => array(
+        'name' => 'from_name',
+        'type' => 'textbox',
+        'group' => 'advanced',
+        'label' => __( 'From Name', 'ninja-forms' ),
+        'placeholder' => __( 'Name or fields', 'ninja-forms' ),
+        'value' => '',
+        'width' => 'one-half',
+        'use_merge_tags' => TRUE,
+    ),
+
+    /*
+     * From Address
+     */
 
     'from_address' => array(
         'name' => 'from_address',
@@ -80,12 +84,27 @@ return array(
         'group' => 'advanced',
         'label' => __( 'From Address', 'ninja-forms' ),
         'placeholder' => __( 'One email address or field', 'ninja-forms' ),
-        'value' => ''
+        'value' => '',
+        'use_merge_tags' => TRUE,
     ),
 
     /*
-    * Format
-    */
+     * Reply To
+     */
+
+    'reply-to' => array(
+        'name' => 'replyto',
+        'type' => 'textbox',
+        'group' => 'advanced',
+        'label' => __( 'Reply To', 'ninja-forms' ),
+        'placeholder' => '',
+        'value' => '',
+        'use_merge_tags' => TRUE,
+    ),
+
+    /*
+     * Format
+     */
 
     'format' => array(
         'name' => 'format',
@@ -96,12 +115,13 @@ return array(
             ),
         'group' => 'advanced',
         'label' => __( 'Format', 'ninja-forms' ),
-        'value' => 'html'
+        'value' => 'html',
+        
     ),
 
     /*
-    * Cc
-    */
+     * Cc
+     */
 
     'cc' => array(
         'name' => 'cc',
@@ -109,12 +129,13 @@ return array(
         'group' => 'advanced',
         'label' => __( 'Cc', 'ninja-forms' ),
         'placeholder' => '',
-        'value' => ''
+        'value' => '',
+        'use_merge_tags' => TRUE,
     ),
 
     /*
-    * Bcc
-    */
+     * Bcc
+     */
 
     'bcc' => array(
         'name' => 'bcc',
@@ -122,7 +143,8 @@ return array(
         'group' => 'advanced',
         'label' => __( 'Bcc', 'ninja-forms' ),
         'placeholder' => '',
-        'value' => ''
+        'value' => '',
+        'use_merge_tags' => TRUE,
     ),
 
 );

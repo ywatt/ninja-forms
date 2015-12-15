@@ -11,11 +11,32 @@
         font-size: 16px;
         padding: 16px;
     }
+    .nf-product-field, {
+        &.nf-element {
+            background: transparent;
+            border: 0;
+            padding: 0;
+        }
+        span {
+            padding-right: 16px;
+        }
+        .nf-field-qty {
+            font-size: 16px;
+            padding: 5px;
+            width: 80px;
+        }
+    }
     textarea {
         height: 200px;
     }
     select {
         height: 48px;
+    }
+    .nf-total {
+        background: transparent;
+        border: 0;
+        font-weight: bold;
+        padding: 0;
     }
     .label-above,
     .label-below,

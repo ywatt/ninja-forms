@@ -16,7 +16,9 @@ define(
 		'controllers/actionRedirect',
 		'controllers/actionSuccess',
 		'controllers/fieldSelect',
-		'controllers/coreSubmitResponse'
+		'controllers/coreSubmitResponse',
+		'controllers/fieldProduct',
+		'controllers/fieldTotal'
 	],
 	function(
 		FieldError,
@@ -35,7 +37,9 @@ define(
 		ActionRedirect,
 		ActionSuccess,
 		FieldSelect,
-		CoreSubmitResponse
+		CoreSubmitResponse,
+		FieldProduct,
+		FieldTotal
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -56,6 +60,8 @@ define(
 				var actionSuccess = new ActionSuccess();
 				var fieldSelect = new FieldSelect();
 				var coreSubmitResponse = new CoreSubmitResponse();
+				var fieldProduct = new FieldProduct();
+				var fieldTotal = new FieldTotal();
 			}
 		});
 

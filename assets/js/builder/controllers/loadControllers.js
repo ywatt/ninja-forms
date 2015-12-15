@@ -34,6 +34,7 @@ define(
 		'controllers/app/fieldset',
 		'controllers/app/toggleSetting',
 		'controllers/app/itemControls',
+		'controllers/app/mergeTags',
 		/*
 		 * Fields domain controllers
 		 */
@@ -46,7 +47,7 @@ define(
 		'controllers/fields/filterTypes',
 		'controllers/fields/sortable',
 		'controllers/fields/data',
-		'controllers/fields/listField',
+		'controllers/fields/optionRepeater',
 		'controllers/fields/editActive',
 		'controllers/fields/fieldSettings',
 
@@ -98,6 +99,7 @@ define(
 		Fieldset,
 		ToggleSetting,
 		ItemControls,
+		MergeTags,
 		/*
 		 * Fields domain controllers
 		 */
@@ -110,7 +112,7 @@ define(
 		DrawerFilterFieldTypes,
 		MainContentFieldsSortable,
 		FieldData,
-		ListField,
+		OptionRepeater,
 		FieldsEditActive,
 		FieldSettings,
 		/*
@@ -163,7 +165,7 @@ define(
 				 * This ensures that any 'init' hooks are properly registered.
 				 */
 				new Fieldset();
-				new ListField();
+				new OptionRepeater();
 
 				new FieldTypes();
 				new FieldTypeDrag();
@@ -204,6 +206,7 @@ define(
 				new FieldData();
 				new FormData();
 				new AppData();
+				new MergeTags();
 			}
 		});
 

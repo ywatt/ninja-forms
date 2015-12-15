@@ -71,6 +71,11 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-hidden button {
   width: auto; }
 
+.nf-fields .label-above .nf-product-field .nf-element,
+.nf-fields .label-below .nf-product-field .nf-element,
+.nf-fields .label-hidden .nf-product-field .nf-element {
+  width: 100%; }
+
 .nf-fields .label-right {
   vertical-align: middle; }
   .nf-fields .label-right > label {

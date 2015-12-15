@@ -12,7 +12,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['views/app/builderHeader', 'views/app/main', 'views/app/drawer/mobileMenu', 'views/app/drawer'], function( headerView, mainView, menuDrawerView, drawerView ) {
+define( ['views/app/builderHeader', 'views/app/main', 'views/app/drawer/mobileMenu', 'views/app/drawer', 'views/app/drawer/mergeTagsContent'], function( headerView, mainView, menuDrawerView, drawerView, mergeTagsContentView ) {
 	var view = Marionette.LayoutView.extend( {
 		template: "#nf-tmpl-builder",
 		el: '#nf-builder',
@@ -21,12 +21,15 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/drawer/mobileMe
 			header: "#nf-header",
 			main: "#nf-main",
 			menuDrawer: "#nf-menu-drawer",
-			drawer: "#nf-drawer"
+			drawer: "#nf-drawer",
+			mergeTagsContent: '.merge-tags-content'
 		},
 
 		initialize: function() {
 			// Layout views aren't self-rendering.
 			this.render();
+			var mergeTags = nfRadio.channel( 'mergeTags' ).request( 'get:mergeTags' );
+			this.mergeTagsContent.show( new mergeTagsContentView( { collection: mergeTags } ) );
 			// Show our header.
 			this.header.show( new headerView() );
 			// Show our main content.

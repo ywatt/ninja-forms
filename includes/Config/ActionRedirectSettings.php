@@ -13,7 +13,8 @@ return array(
         'label' => __( 'URL', 'ninja-forms' ),
         'placeholder' => '',
         'width' => 'full',
-        'value' => ''
+        'value' => '',
+        'use_merge_tags' => TRUE,
     ),
 
 );

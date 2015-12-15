@@ -31,8 +31,9 @@ define( [], function() {
 		},
 
 		events: {
-			'keyup .nf-filter': 'maybeChangeFilter',
-			'input .nf-filter': 'changeFilter'
+			'keyup .nf-filter'	: 'maybeChangeFilter',
+			'input .nf-filter'	: 'changeFilter',
+			'focus input'		: 'getFocus'
 		},
 
 		/**
@@ -97,6 +98,10 @@ define( [], function() {
 		 */
 		getEl: function() {
 			return jQuery( this.el ).find( '.nf-filter' );
+		},
+
+		getFocus: function() {
+			nfRadio.channel( 'drawer' ).trigger( 'filter:focused' );
 		}
 	});
 

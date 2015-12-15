@@ -488,6 +488,64 @@ final class NF_Database_MockData
 
     }
 
+    public function form_product_1()
+    {
+        /* FORM */
+        $form = Ninja_Forms()->form()->get();
+        $form->update_setting( 'title', 'Product Form' );
+        $form->save();
+
+        $form_id = $form->get_id();
+
+        /* Fields */
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
+        $field->update_setting( 'type', 'product' )
+            ->update_setting( 'label', 'Product')
+            ->update_setting( 'label_pos', 'above' )
+            ->update_setting( 'product_price', 10.10 )
+            ->update_setting( 'product_use_quantity', 0 )
+            ->update_setting( 'order', 1 )
+            ->save();
+
+        $product_field_id = $field->get_id();
+
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
+        $field->update_setting( 'type', 'quantity' )
+            ->update_setting( 'label', 'Quantity')
+            ->update_setting( 'label_pos', 'above' )
+            ->update_setting( 'product_assignment', $product_field_id )
+            ->update_setting( 'value', 1 )
+            ->update_setting( 'num_min', 1 )
+            ->update_setting( 'num_max', NULL )
+            ->update_setting( 'num_step', 1 )
+            ->update_setting( 'order', 2 )
+            ->save();
+
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
+        $field->update_setting( 'type', 'shipping' )
+            ->update_setting( 'label', 'Shipping')
+            ->update_setting( 'label_pos', 'above' )
+            ->update_setting( 'product_assignment', $product_field_id )
+            ->update_setting( 'shipping_cost', 2.00 )
+            ->update_setting( 'order', 4 )
+            ->save();
+
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
+        $field->update_setting( 'type', 'total' )
+            ->update_setting( 'label', 'Total')
+            ->update_setting( 'label_pos', 'above' )
+            ->update_setting( 'key', 'total' )
+            ->update_setting( 'product_assignment', $product_field_id )
+            ->update_setting( 'order', 5 )
+            ->save();
+
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
+        $field->update_setting( 'type', 'submit' )
+            ->update_setting( 'label', 'Purchase')
+            ->update_setting( 'order', 1000 )
+            ->save();
+    }
+
     private function _migrate()
     {
         $migrations = new NF_Database_Migrations();
