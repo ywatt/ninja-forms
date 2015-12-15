@@ -514,7 +514,6 @@ final class NF_Database_MockData
             ->update_setting( 'label', 'Quantity')
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'product_assignment', $product_field_id )
-            ->update_setting( 'value', 1 )
             ->update_setting( 'num_min', 1 )
             ->update_setting( 'num_max', NULL )
             ->update_setting( 'num_step', 1 )
@@ -525,7 +524,6 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'shipping' )
             ->update_setting( 'label', 'Shipping')
             ->update_setting( 'label_pos', 'above' )
-            ->update_setting( 'product_assignment', $product_field_id )
             ->update_setting( 'shipping_cost', 2.00 )
             ->update_setting( 'order', 4 )
             ->save();
@@ -535,7 +533,6 @@ final class NF_Database_MockData
             ->update_setting( 'label', 'Total')
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'key', 'total' )
-            ->update_setting( 'product_assignment', $product_field_id )
             ->update_setting( 'order', 5 )
             ->save();
 

@@ -77,9 +77,8 @@ final class NF_Display_Render
                 if( is_numeric( $setting ) ) $settings[ $key ] = floatval( $setting );
             }
 
-            if( isset( $settings[ 'default_type' ] ) && isset( $settings[ 'default_value' ] ) ) {
-                $default_value = self::populate_default_value($settings['default_type'], $settings['default_value']);
-                $default_value = apply_filters('ninja_forms_render_default_value', $default_value, $field_class, $settings);
+            if( isset( $settings[ 'default' ] ) ) {
+                $default_value = apply_filters('ninja_forms_render_default_value', $settings['default'], $field_class, $settings);
 
                 if ($default_value) {
                     $settings['value'] = $default_value;
@@ -263,30 +262,6 @@ final class NF_Display_Render
 
         // Action to Output Custom Templates
         do_action( 'nf_output_templates' );
-    }
-
-    protected static function populate_default_value( $type, $value = '' )
-    {
-        global $post;
-
-        if( empty( $type ) ) return $value;
-
-        switch( $type ){
-            case 'post_id':
-                $default = ( is_object ( $post ) ) ? $post->ID : $value;
-                break;
-            case 'post_title':
-                $default = ( is_object ( $post ) ) ? $post->post_title : $value;
-                break;
-            case 'post_url':
-                $default = ( is_object ( $post ) ) ? get_permalink( $post->ID ) : $value;
-                break;
-            case 'custom':
-            default:
-                $default = $value;
-        }
-
-        return $default;
     }
 
     /*
