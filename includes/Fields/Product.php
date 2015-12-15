@@ -59,10 +59,6 @@ class NF_Fields_Product extends NF_Abstracts_Input
             //TODO: Handle multiple modifiers.
         }
 
-        if( isset( $related[ 'tax' ] ) ){
-            $total = $total * ( 1 + ( ($related[ 'tax' ][ 'tax_rate' ] / 100 ) ) );
-        }
-
         if( isset( $related[ 'shipping' ] ) ){
             $total += $related[ 'shipping' ][ 'shipping_cost' ];
         }

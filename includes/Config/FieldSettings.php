@@ -636,16 +636,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
         
     ),
 
-    'tax_rate'              => array(
-        'name'              => 'tax_rate',
-        'type'              => 'textbox',
-        'label'             => __( 'Rate', 'ninja-forms' ),
-        'width'             => 'one-half',
-        'group'             => 'primary',
-        'value'             => '0.00',
-        
-    ),
-
     'shipping_type'         => array(
         'name'              => 'shipping_type',
         'type'              => 'select',
