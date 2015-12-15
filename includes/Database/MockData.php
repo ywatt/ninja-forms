@@ -550,7 +550,7 @@ final class NF_Database_MockData
         $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'label',  'Success Message' )
             ->update_setting( 'type', 'successmessage' )
-            ->update_setting( 'message', 'Your total is ${field:total}.' )
+            ->update_setting( 'message', '<div style="border: 2px solid green; padding: 10px; color: green;">Your total is ${field:total}.</div>' )
             ->save();
     }
 
@@ -604,7 +604,7 @@ final class NF_Database_MockData
         $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'label',  'Success Message' )
             ->update_setting( 'type', 'successmessage' )
-            ->update_setting( 'message', 'Your total is ${field:total}.' )
+            ->update_setting( 'message', '<div style="border: 2px solid green; padding: 10px; color: green;">Your total is ${field:total}.</div>' )
             ->save();
     }
 
