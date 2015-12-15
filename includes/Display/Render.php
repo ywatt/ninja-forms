@@ -73,6 +73,10 @@ final class NF_Display_Render
 
             $settings = $field->get_settings();
 
+            foreach( $settings as $key => $setting ){
+                if( is_numeric( $setting ) ) $settings[ $key ] = floatval( $setting );
+            }
+
             if( isset( $settings[ 'default_type' ] ) && isset( $settings[ 'default_value' ] ) ) {
                 $default_value = self::populate_default_value($settings['default_type'], $settings['default_value']);
                 $default_value = apply_filters('ninja_forms_render_default_value', $default_value, $field_class, $settings);
@@ -105,9 +109,9 @@ final class NF_Display_Render
             // Build Form Data
             var form = [];
             form.id = <?php echo $form_id; ?>;
-            form.settings = JSON.parse( '<?php echo WPN_Helper::addslashes( wp_json_encode( $form->get_settings() ) ); ?>' );
+            form.settings = <?php echo wp_json_encode( $form->get_settings() ); ?>;
 
-            form.fields = JSON.parse( '<?php echo WPN_Helper::addslashes( wp_json_encode( $fields ) ); ?>' );
+            form.fields = <?php echo wp_json_encode( $fields ); ?>;
 
             // Add Form Data to nfForms object
             nfForms.push( form );
@@ -141,6 +145,10 @@ final class NF_Display_Render
             $field = apply_filters( 'nf_localize_fields_preview', $field );
 
             $field_class = $field['settings']['type'];
+
+            foreach( $field[ 'settings' ] as $key => $setting ){
+                if( is_numeric( $setting ) ) $field[ 'settings' ][ $key ] = floatval( $setting );
+            }
 
             $field_class = Ninja_Forms()->fields[ $field_class ];
 
