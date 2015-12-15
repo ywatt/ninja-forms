@@ -278,6 +278,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
          'type' => 'textbox',
          'width' => 'full',
          'value' => '',
+         'group' => 'advanced',
          'use_merge_tags' => TRUE,
      ),
 
@@ -636,16 +637,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
         
     ),
 
-    'tax_rate'              => array(
-        'name'              => 'tax_rate',
-        'type'              => 'textbox',
-        'label'             => __( 'Rate', 'ninja-forms' ),
-        'width'             => 'one-half',
-        'group'             => 'primary',
-        'value'             => '0.00',
-        
-    ),
-
     'shipping_type'         => array(
         'name'              => 'shipping_type',
         'type'              => 'select',
@@ -675,6 +666,19 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'columns'           => array( 'label', 'value' ),
         'deps'              => array(
             'shipping_type' => 'select',
+        ),
+    ),
+
+    'product_assignment'      => array(
+        'name'              => 'product_assignment',
+        'type'              => 'select',
+        'label'             => __( 'Product', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'primary',
+        'options'           => array(),
+        'select_product'    => array(
+            'value'         => '',
+            'label'         => __( '- Select a Product', 'ninja-forms' ),
         ),
     ),
 

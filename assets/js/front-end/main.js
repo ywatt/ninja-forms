@@ -38,6 +38,7 @@ jQuery( document ).ready( function( $ ) {
 						nfRadio.channel( field.get( 'type' ) ).trigger( 'init:model', field );
 						nfRadio.channel( 'fields' ).trigger( 'init:model', field );
 					} );
+					nfRadio.channel( 'form-' + form.get( 'id' ) ).trigger( 'loaded', form );
 				} );
 				
 			},

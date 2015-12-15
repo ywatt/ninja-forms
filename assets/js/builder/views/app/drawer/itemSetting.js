@@ -7,6 +7,10 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 			this.dataModel = data.dataModel;
 		},
 
+		onBeforeRender: function() {
+			nfRadio.channel( 'app' ).trigger( 'before:renderSetting', this.model, this.dataModel );
+		},
+
 		onRender: function() {
 			this.mergeTagsContentView = false;
 			var that = this;

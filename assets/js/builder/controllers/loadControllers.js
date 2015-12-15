@@ -35,6 +35,7 @@ define(
 		'controllers/app/toggleSetting',
 		'controllers/app/itemControls',
 		'controllers/app/mergeTags',
+		'controllers/app/itemSettingFill',
 		/*
 		 * Fields domain controllers
 		 */
@@ -50,6 +51,7 @@ define(
 		'controllers/fields/optionRepeater',
 		'controllers/fields/editActive',
 		'controllers/fields/fieldSettings',
+		'controllers/fields/fieldQuantity',
 
 		/*
 		 * TODO: Actions domain controllers
@@ -100,6 +102,7 @@ define(
 		ToggleSetting,
 		ItemControls,
 		MergeTags,
+		ItemSettingFill,
 		/*
 		 * Fields domain controllers
 		 */
@@ -115,6 +118,7 @@ define(
 		OptionRepeater,
 		FieldsEditActive,
 		FieldSettings,
+		FieldQuantity,
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -180,6 +184,7 @@ define(
 				new DrawerSettingChildView();
 				new FieldsEditActive();
 				new FieldSettings();
+				new FieldQuantity();
 				/*
 				 * TODO: Actions domain controllers
 				 */
@@ -207,6 +212,7 @@ define(
 				new FormData();
 				new AppData();
 				new MergeTags();
+				new ItemSettingFill();
 			}
 		});
 

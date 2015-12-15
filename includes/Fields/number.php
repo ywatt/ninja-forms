@@ -13,6 +13,8 @@ class NF_Fields_Number extends NF_Abstracts_Input
 
     protected $_templates = 'number';
 
+    protected $_test_value = 0;
+
     public function __construct()
     {
         parent::__construct();
