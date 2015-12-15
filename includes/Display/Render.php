@@ -85,6 +85,15 @@ final class NF_Display_Render
                 }
             }
 
+            // TODO: Find a better way to do this.
+            if( 'shipping' == $settings[ 'type' ] ){
+                $settings[ 'shipping_cost' ] = number_format( $settings[ 'shipping_cost' ], 2 );
+            } elseif( 'product' == $settings[ 'type' ] ){
+                $settings[ 'product_price' ] = number_format( $settings[ 'product_price' ], 2 );
+            } elseif( 'total' == $settings[ 'type' ] ){
+                $settings[ 'value' ] = number_format( $settings[ 'value' ], 2 );
+            }
+
             $settings[ 'element_templates' ] = $templates;
             $settings[ 'old_classname' ] = $field_class->get_old_classname();
             $settings[ 'wrap_template' ] = $field_class->get_wrap_template();
@@ -171,6 +180,15 @@ final class NF_Display_Render
                 if ($default_value) {
                     $field['settings']['value'] = $default_value;
                 }
+            }
+
+            // TODO: Find a better way to do this.
+            if( 'shipping' == $field[ 'settings' ][ 'type' ] ){
+                $field[ 'settings' ][ 'shipping_cost' ] = number_format( $field[ 'settings' ][ 'shipping_cost' ], 2 );
+            } elseif( 'product' == $field[ 'settings' ][ 'type' ] ){
+                $field[ 'settings' ][ 'product_price' ] = number_format( $field[ 'settings' ][ 'product_price' ], 2 );
+            } elseif( 'total' == $field[ 'settings' ][ 'type' ] ){
+                $field[ 'settings' ][ 'value' ] = number_format( $field[ 'settings' ][ 'value' ], 2 );
             }
 
             $field[ 'settings' ][ 'element_templates' ] = $templates;
