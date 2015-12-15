@@ -27,4 +27,28 @@ class NF_Fields_Total extends NF_Abstracts_Input
 
         $this->_nicename = __( 'Total', 'ninja-forms' );
     }
+
+    public function process( $total, $data )
+    {
+        $subtotal = 0;
+
+        foreach( $data[ 'fields' ] as $key => $field ){
+
+            if( 'shipping' == $field[ 'type' ] ){
+                $subtotal += $field[ 'shipping_cost' ];
+            }
+        }
+
+        if( isset( $data[ 'product_totals' ] ) ){
+
+            foreach( $data[ 'product_totals' ] as $product_total ){
+
+                $subtotal += $product_total;
+            }
+        }
+
+        $data[ 'new_total' ] = number_format( $subtotal, 2 );
+
+        return $data;
+    }
 }
