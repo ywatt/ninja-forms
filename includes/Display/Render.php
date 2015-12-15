@@ -77,13 +77,21 @@ final class NF_Display_Render
                 if( is_numeric( $setting ) ) $settings[ $key ] = floatval( $setting );
             }
 
-            if( isset( $settings[ 'default_type' ] ) && isset( $settings[ 'default_value' ] ) ) {
-                $default_value = self::populate_default_value($settings['default_type'], $settings['default_value']);
-                $default_value = apply_filters('ninja_forms_render_default_value', $default_value, $field_class, $settings);
+            if( isset( $settings[ 'default' ] ) ) {
+                $default_value = apply_filters('ninja_forms_render_default_value', $settings['default'], $field_class, $settings);
 
                 if ($default_value) {
                     $settings['value'] = $default_value;
                 }
+            }
+
+            // TODO: Find a better way to do this.
+            if( 'shipping' == $settings[ 'type' ] ){
+                $settings[ 'shipping_cost' ] = number_format( $settings[ 'shipping_cost' ], 2 );
+            } elseif( 'product' == $settings[ 'type' ] ){
+                $settings[ 'product_price' ] = number_format( $settings[ 'product_price' ], 2 );
+            } elseif( 'total' == $settings[ 'type' ] ){
+                $settings[ 'value' ] = number_format( $settings[ 'value' ], 2 );
             }
 
             $settings[ 'element_templates' ] = $templates;
@@ -166,13 +174,21 @@ final class NF_Display_Render
                 $field['settings']['value'] = $field_class->get_test_value();
             }
 
-            if( isset( $settings[ 'default_type' ] ) && isset( $settings[ 'default_value' ] ) ) {
-                $default_value = self::populate_default_value($field['settings']['default_type'], $field['settings']['default_value']);
-                $default_value = apply_filters('ninja_forms_render_default_value', $default_value, $field_class, $field['settings']);
+            if( isset( $field['settings'][ 'default' ] ) ) {
+                $default_value = apply_filters('ninja_forms_render_default_value', $field['settings'][ 'default' ], $field_class, $field['settings']);
 
                 if ($default_value) {
                     $field['settings']['value'] = $default_value;
                 }
+            }
+
+            // TODO: Find a better way to do this.
+            if( 'shipping' == $field[ 'settings' ][ 'type' ] ){
+                $field[ 'settings' ][ 'shipping_cost' ] = number_format( $field[ 'settings' ][ 'shipping_cost' ], 2 );
+            } elseif( 'product' == $field[ 'settings' ][ 'type' ] ){
+                $field[ 'settings' ][ 'product_price' ] = number_format( $field[ 'settings' ][ 'product_price' ], 2 );
+            } elseif( 'total' == $field[ 'settings' ][ 'type' ] ){
+                $field[ 'settings' ][ 'value' ] = number_format( $field[ 'settings' ][ 'value' ], 2 );
             }
 
             $field[ 'settings' ][ 'element_templates' ] = $templates;
@@ -263,30 +279,6 @@ final class NF_Display_Render
 
         // Action to Output Custom Templates
         do_action( 'nf_output_templates' );
-    }
-
-    protected static function populate_default_value( $type, $value = '' )
-    {
-        global $post;
-
-        if( empty( $type ) ) return $value;
-
-        switch( $type ){
-            case 'post_id':
-                $default = ( is_object ( $post ) ) ? $post->ID : $value;
-                break;
-            case 'post_title':
-                $default = ( is_object ( $post ) ) ? $post->post_title : $value;
-                break;
-            case 'post_url':
-                $default = ( is_object ( $post ) ) ? get_permalink( $post->ID ) : $value;
-                break;
-            case 'custom':
-            default:
-                $default = $value;
-        }
-
-        return $default;
     }
 
     /*

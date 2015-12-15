@@ -278,6 +278,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
          'type' => 'textbox',
          'width' => 'full',
          'value' => '',
+         'group' => 'advanced',
          'use_merge_tags' => TRUE,
      ),
 
