@@ -9,7 +9,7 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			// Listen for the closing of the drawer and udate when it's closed.
+			// Listen for the closing of the drawer and update when it's closed.
 			this.listenTo( nfRadio.channel( 'drawer' ), 'closed', this.updateDB );
 			// Respond to requests to update the database.
 			nfRadio.channel( 'app' ).reply( 'update:db', this.updateDB, this );
