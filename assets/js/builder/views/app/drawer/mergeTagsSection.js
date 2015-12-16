@@ -17,7 +17,7 @@ define( ['views/app/drawer/mergeTagItem'], function( mergeTagItemView ) {
 			this.model.on( 'change', this.render, this );
 			if ( 'fields' == this.model.get( 'id' ) ) {
 				var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
-				fieldCollection.on( 'all', this.updateFields, this );
+				// fieldCollection.on( 'all', this.updateFields, this );
 			}
 		},
 
