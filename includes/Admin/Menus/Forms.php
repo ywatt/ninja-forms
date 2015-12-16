@@ -136,7 +136,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $unique_settings = $this->_unique_settings( $settings );
 
-            $master_settings = array_merge( $master_settings, array_values( $unique_settings ) );
+            $master_settings = array_merge( $master_settings, $unique_settings );
 
             $settings_groups = $this->_group_settings( $settings, $groups );
 
@@ -156,7 +156,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         ?>
         <script>
             var fieldTypeData     = <?php echo wp_json_encode( $field_type_settings ); ?>;
-            var fieldSettings     = <?php echo wp_json_encode( $master_settings ); ?>;
+            var fieldSettings     = <?php echo wp_json_encode( array_values( $master_settings ) ); ?>;
             var fieldTypeSections = <?php echo wp_json_encode( $field_type_sections ); ?>;
             // console.log( fieldTypeData );
         </script>
@@ -177,7 +177,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $settings_groups = $this->_group_settings( $settings, $groups );
 
-            $master_settings_list = array_merge( $master_settings_list, array_values( $settings ) );
+            $master_settings_list = array_merge( $master_settings_list, $settings );
 
             $action_type_settings[ $name ] = array(
                 'id' => $name,
@@ -214,7 +214,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         ?>
         <script>
             var actionTypeData = <?php echo wp_json_encode( $action_type_settings ); ?>;
-            var actionSettings = <?php echo wp_json_encode( $master_settings_list ); ?>;
+            var actionSettings = <?php echo wp_json_encode( array_values( $master_settings_list ) ); ?>;
             // console.log( actionTypeData );
         </script>
         <?php
