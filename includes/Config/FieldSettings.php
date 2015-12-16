@@ -23,7 +23,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         'value' => '',
         'help' => __( 'Enter the label of the form field. This is how users will identify individual fields.', 'ninja-forms' ),
-        
     ),
 
     /*
@@ -341,6 +340,21 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'advanced',
         'value' => FALSE,
         
+    ),
+
+
+    /*
+     * KEY
+     */
+
+    'key' => array(
+        'name' => 'key',
+        'type' => 'textbox',
+        'label' => __( 'Field Key', 'ninja-forms'),
+        'width' => 'full',
+        'group' => 'advanced',
+        'value' => '',
+        'help' => __( 'Programmatic name that can be used to reference this field.', 'ninja-forms' ),
     ),
 
     /*
