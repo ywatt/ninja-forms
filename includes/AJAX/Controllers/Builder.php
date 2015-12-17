@@ -1,84 +1,33 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
+class NF_AJAX_Controllers_Builder extends NF_Abstracts_Controller
 {
-    public $page_title = 'Forms';
-
-    public $menu_slug = 'ninja-forms';
-
-    public $icon_url = 'dashicons-feedback';
-
     public function __construct()
     {
-        parent::__construct();
+        add_action( 'wp_ajax_nf_builder',   array( $this, 'builder' )   );
+    }
 
-        if( ! defined( 'DOING_AJAX' ) ) {
-            add_action('admin_init', array($this, 'admin_init'));
-            add_action( 'admin_init', array( 'NF_Admin_AllFormsTable', 'process_bulk_action' ) );
+    public function builder()
+    {
+        check_ajax_referer( 'ninja_forms_ajax_nonce', 'builder' );
+
+        if( ! isset( $_POST[ 'form' ] ) ){
+            $this->_errors[] = 'Form Not Found';
+            $this->_respond();
         }
+
+        $form_id = $_POST[ 'form' ];
+
+        $this->_form_data( $form_id );
+        $this->_field_type_data();
+        $this->_action_type_data();
+        $this->_form_settings();
+        $this->_merge_tags();
+
+        $this->_respond();
     }
 
-    public function display()
-    {
-        if( isset( $_GET[ 'form_id' ] ) && $_GET[ 'form_id' ] ){
-
-            /*
-             * FORM BUILDER
-             */
-
-            Ninja_Forms::template( 'admin-menu-new-form.html.php' );
-            wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
-            wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
-
-            wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
-            wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
-            wp_enqueue_script( 'jquery-perfect-scrollbar', Ninja_Forms::$url . 'assets/js/lib/perfect-scrollbar.jquery.min.js', array( 'jquery' ) );
-            wp_enqueue_script( 'jquery-hotkeys-new', Ninja_Forms::$url . 'assets/js/lib/jquery.hotkeys.js' );
-            // wp_enqueue_script( 'jquery-qtip2', Ninja_Forms::$url . 'assets/js/lib/jquery.qtip.js' );
-            wp_enqueue_script( 'jBox', Ninja_Forms::$url . 'assets/js/lib/jBox.min.js' );
-            wp_enqueue_script( 'jquery-caret', Ninja_Forms::$url . 'assets/js/lib/jquery.caret.js' );
-
-            // wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
-            wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/min/builder.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );
-
-            wp_localize_script( 'nf-builder', 'nfAdmin', array( 'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ), 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/', 'previewurl' => site_url() . '/?nf_preview_form=' . $_GET[ 'form_id' ] ) );
-
-            delete_user_option( get_current_user_id(), 'nf_form_preview_' . $_GET[ 'form_id' ] );
-
-            if( ! isset( $_GET[ 'ajax' ] ) ) {
-                $this->_localize_form_data($_GET['form_id']);
-
-                $this->_localize_field_type_data();
-
-                $this->_localize_action_type_data();
-
-                $this->_localize_form_settings();
-
-                $this->_localize_merge_tags();
-            }
-        } else {
-
-            /*
-             * ALL FORMS TABLE
-             */
-
-            $this->table->prepare_items();
-
-            Ninja_Forms::template( 'admin-menu-all-forms.html.php', array( 'table' => $this->table ) );
-        }
-    }
-
-    public function admin_init()
-    {
-        $this->table = new NF_Admin_AllFormsTable();
-    }
-
-    public function submenu_separators()
-    {
-        add_submenu_page( 'ninja-forms', '', '', 'read', '', '' );
-    }
-
-    private function _localize_form_data( $form_id )
+    private function _form_data( $form_id )
     {
         $form = Ninja_Forms()->form( $form_id )->get();
         $fields = Ninja_Forms()->form( $form_id )->get_fields();
@@ -113,15 +62,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         $form_data['fields'] = $fields_settings;
         $form_data['actions'] = $actions_settings;
 
-        ?>
-        <script>
-            var preloadedFormData = <?php echo wp_json_encode( $form_data ); ?>;
-            // console.log( preloadedFormData );
-        </script>
-        <?php
+        $this->_data[ 'preloadedFormData' ] = wp_json_encode( $form_data );
     }
 
-    private function _localize_field_type_data()
+    private function _field_type_data()
     {
         $field_type_sections = array_values( Ninja_Forms()->config( 'FieldTypeSections' ) );
         $field_type_settings = array();
@@ -155,17 +99,13 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'settingDefaults' => $settings_defaults
             );
         }
-        ?>
-        <script>
-            var fieldTypeData     = <?php echo wp_json_encode( $field_type_settings ); ?>;
-            var fieldSettings     = <?php echo wp_json_encode( array_values( $master_settings ) ); ?>;
-            var fieldTypeSections = <?php echo wp_json_encode( $field_type_sections ); ?>;
-            // console.log( fieldTypeData );
-        </script>
-        <?php
+
+        $this->_data[ 'fieldTypeData' ]     = wp_json_encode( $field_type_settings );
+        $this->_data[ 'fieldSettings' ]     = wp_json_encode( array_values( $master_settings ) );
+        $this->_data[ 'fieldTypeSections' ] = wp_json_encode( $field_type_sections );
     }
 
-    private function _localize_action_type_data()
+    private function _action_type_data()
     {
         $action_type_settings = array();
 
@@ -222,7 +162,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         <?php
     }
 
-    protected function _localize_form_settings()
+    protected function _form_settings()
     {
         $form_settings_types = Ninja_Forms::config( 'FormSettingsTypes' );
 
@@ -244,13 +184,13 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
         ?>
         <script>
-        var formSettingTypeData = <?php echo wp_json_encode( $form_settings_types )?>;
-        var formSettings = <?php echo wp_json_encode( array_values( $master_settings ) )?>;
+            var formSettingTypeData = <?php echo wp_json_encode( $form_settings_types )?>;
+            var formSettings = <?php echo wp_json_encode( array_values( $master_settings ) )?>;
         </script>
         <?php
     }
 
-    protected function _localize_merge_tags()
+    protected function _merge_tags()
     {
         $merge_tags = array(
             'fields' => array(
@@ -267,13 +207,9 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'tags'  => array_values( $group->get_merge_tags() )
             );
         }
-        ?>
-        <script>
-            var mergeTags = <?php echo wp_json_encode( array_values( $merge_tags ) ); ?>;
-        </script>
-        <?php
-    }
 
+        $this->_data[ 'merge_tags' ] = wp_json_encode( array_values( $merge_tags ) );
+    }
 
     protected function _group_settings( $settings, $groups )
     {
@@ -349,5 +285,4 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         return $actions;
     }
-
 }
