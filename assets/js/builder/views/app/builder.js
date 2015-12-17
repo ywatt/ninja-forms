@@ -33,10 +33,10 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/drawer/mobileMe
 			// Show our header.
 			this.header.show( new headerView() );
 			// Show our main content.
-			this.main.show( new mainView() );
+			// this.main.show( new mainView() );
 			// this.menuDrawer.show( new menuDrawerView() );
 			// Show our drawer.
-			this.drawer.show( new drawerView() );
+			// this.drawer.show( new drawerView() );
 			// Respond to requests asking for the builder dom element.
 			nfRadio.channel( 'app' ).reply( 'get:builderEl', this.getBuilderEl, this );
 		},

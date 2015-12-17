@@ -425,7 +425,7 @@ final class NF_Database_MockData
             ->save();
     }
 
-    public function form_long_form( $num_fields = 1000 )
+    public function form_long_form( $num_fields = 500 )
     {
         /*
         * FORM

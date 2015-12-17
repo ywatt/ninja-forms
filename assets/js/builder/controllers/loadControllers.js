@@ -167,7 +167,7 @@ define(
 				 * 
 				 * Field-specific controllers should be loaded before our field type controller.
 				 * This ensures that any 'init' hooks are properly registered.
-				 */
+				 
 				new Fieldset();
 				new OptionRepeater();
 
@@ -187,7 +187,7 @@ define(
 				new FieldQuantity();
 				/*
 				 * TODO: Actions domain controllers
-				 */
+				 
 				new ActionTypes();
 				new ActionData();
 				new ActionSettings();
@@ -198,7 +198,7 @@ define(
 				new ActionFilterTypes();
 				/*
 				 * TODO: Settings domain controllers
-				 */
+				 
 				new SettingTypes();
 				new FormSettings();
 				new SettingData();
@@ -207,12 +207,14 @@ define(
 				/*
 				 * Data controllers need to be set after every other controller has been setup, even if they aren't domain-specific.
 				 * We load them from domains to app specificity.
-				 */
+				
 				new FieldData();
 				new FormData();
-				new AppData();
 				new MergeTags();
-				new ItemSettingFill();
+				new ItemSettingFill();				
+				*/
+				new AppData();
+
 			}
 		});
 
