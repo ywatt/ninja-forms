@@ -86,6 +86,17 @@
     </div>
 </script>
 
+<script id="nf-tmpl-main-content-loading" type="text/template">
+    Loading...
+    <div class="nf-loading">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</script>
+
 <script id="nf-tmpl-main-content-actions-empty" type="text/template">
     <tr>
         <td colspan="4">

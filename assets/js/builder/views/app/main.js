@@ -1,4 +1,4 @@
-define( [], function() {
+define( ['views/app/mainContentLoading'], function( LoadingView ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
@@ -26,7 +26,9 @@ define( [], function() {
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 			// var headerView = currentDomain.get( 'getMainHeaderView' ).call( currentDomain );
 			// this.header.show( headerView );
-			var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
+			// var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
+			console.log( 'test' );
+			var contentView = new LoadingView();
 			this.content.show( contentView );
 
 			nfRadio.channel( 'main' ).trigger( 'render:main' );
