@@ -22,7 +22,7 @@ class NF_Fields_Submit extends NF_Fields_Button
         $this->_nicename = __( 'Submit', 'ninja-forms' );
 
         $this->_settings = $this->load_settings(
-            array( 'label', 'timed_submit' )
+            array( 'label', 'timed_submit', 'processing_label' )
         );
 
         $this->_settings[ 'label' ][ 'width' ] = 'full';
