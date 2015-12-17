@@ -1386,6 +1386,20 @@ All styles used for displaying table content
             transform: scale(0.5);
     background: #1EA9EA; } }
 
+#nf-main.nf-app-loading {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
 .nf-help-text {
   display: none; }
 
