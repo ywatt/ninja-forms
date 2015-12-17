@@ -425,7 +425,7 @@ final class NF_Database_MockData
             ->save();
     }
 
-    public function form_long_form( $num_fields = 100 )
+    public function form_long_form( $num_fields = 1000 )
     {
         /*
         * FORM
@@ -447,6 +447,7 @@ final class NF_Database_MockData
                 ->update_setting('label', 'Field #' . $i)
                 ->update_setting('label_pos', 'above')
                 ->update_setting('required', 0)
+                ->update_setting('order', $i)
                 ->save();
         }
     }
