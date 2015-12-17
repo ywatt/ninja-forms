@@ -42,6 +42,8 @@ define( [], function() {
 			nfRadio.channel( 'fields' ).trigger( 'init:fieldModel', this );
 			nfRadio.channel( 'fields-' + parentType ).trigger( 'init:fieldModel', this );
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:fieldModel', this );
+
+			this.listenTo( nfRadio.channel( 'fields' ), 'update:order', this.updateOrder );
 		},
 
 		/**
@@ -52,6 +54,28 @@ define( [], function() {
 		 */
 		changeSetting: function() {
 			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
+		},
+
+		/**
+		 * Listen to update order events.
+		 * 
+		 * @since  3.0
+		 * @param  array 	order new field order
+		 * @return void
+		 */
+		updateOrder: function( order ) {
+			// Get our current position.
+			var id = this.get( 'id' );
+			if ( jQuery.isNumeric( id ) ) {
+				var search = 'field-' + id;
+			} else {
+				var search = id;
+			}
+			// Get the index of our field inside our order array
+			var newPos = order.indexOf( search ) + 1;
+			if ( newPos != this.get( 'order' ) ) {
+				this.set( 'order', newPos );
+			}
 		}
 	} );
 	

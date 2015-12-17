@@ -8,11 +8,15 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 		},
 
 		initialize: function() {
-			this.model.on( 'change', this.render, this );
+			this.model.on( 'change:editActive', this.render, this );
+			this.model.on( 'change:required', this.render, this );
+			this.model.on( 'change:label', this.render, this );
 		},
 
 		onBeforeDestroy: function() {
-			this.model.off( 'change', this.render );
+			this.model.off( 'change:editActive', this.render );
+			this.model.off( 'change:required', this.render );
+			this.model.off( 'change:label', this.render );
 		},
 
 		onRender: function() {

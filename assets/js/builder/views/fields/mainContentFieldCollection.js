@@ -7,6 +7,8 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 
 		initialize: function() {
 			nfRadio.channel( 'fields' ).reply( 'get:sortableEl', this.getSortableEl, this );
+			var fieldTemplate = Marionette.TemplateCache.get( '#nf-tmpl-main-content-field' );
+			this.childViewOptions = { fieldTemplate: fieldTemplate };
 		},
 
 		onRender: function() {

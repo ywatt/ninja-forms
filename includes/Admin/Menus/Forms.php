@@ -114,7 +114,6 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         ?>
         <script>
             var preloadedFormData = <?php echo wp_json_encode( $form_data ); ?>;
-            // console.log( preloadedFormData );
         </script>
         <?php
     }

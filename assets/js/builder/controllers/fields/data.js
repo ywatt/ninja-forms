@@ -84,20 +84,21 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) { // Make sure that sortable is enabled
 				// JS ternerary for setting our order
 				var order = order || jQuery( sortableEl ).sortable( 'toArray' );
+				nfRadio.channel( 'fields' ).trigger( 'update:order', order );
 				// Loop through all of our fields and update their order value
-				_.each( this.collection.models, function( field ) {
-					// Get our current position.
-					var oldPos = field.get( 'order' );
-					var id = field.get( 'id' );
-					if ( jQuery.isNumeric( id ) ) {
-						var search = 'field-' + id;
-					} else {
-						var search = id;
-					}
-					// Get the index of our field inside our order array
-					var newPos = order.indexOf( search ) + 1;
-					field.set( 'order', newPos );
-				} );
+				// _.each( this.collection.models, function( field ) {
+				// 	// Get our current position.
+				// 	var oldPos = field.get( 'order' );
+				// 	var id = field.get( 'id' );
+				// 	if ( jQuery.isNumeric( id ) ) {
+				// 		var search = 'field-' + id;
+				// 	} else {
+				// 		var search = id;
+				// 	}
+				// 	// Get the index of our field inside our order array
+				// 	var newPos = order.indexOf( search ) + 1;
+				// 	field.set( 'order', newPos );
+				// } );
 				this.collection.sort();
 
 				// Set our 'clean' status to false so that we get a notice to publish changes
