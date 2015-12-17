@@ -48,7 +48,7 @@
 
 <script id="nf-tmpl-add-header-publish-loading" type="text/template">
     <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">
-        <div class="nf-loading">
+        <div class="nf-loading-button">
             <ul>
                 <li></li>
                 <li></li>
@@ -87,8 +87,7 @@
 </script>
 
 <script id="nf-tmpl-main-content-loading" type="text/template">
-    Loading...
-    <div class="nf-loading">
+    <div class="nf-loading-content">
         <ul>
             <li></li>
             <li></li>
@@ -214,7 +213,7 @@
 
 <script id="nf-tmpl-drawer-content-edit-settings" type="text/template">
     <%= maybeRenderTitle() %>
- 
+
     <span class="nf-settings-groups"></span>
 </script>
 
@@ -335,7 +334,7 @@
 
 <script id="nf-tmpl-edit-setting-wrap" type="text/template">
     <div class="nf-<%= renderWidth() %>">
-        <%= renderSetting() %> 
+        <%= renderSetting() %>
     </div>
 </script>
 
@@ -421,7 +420,7 @@
     </div>
     <%
         var columns = getColumns();
-        
+
         if ( -1 != columns.indexOf( 'label' ) ) {
             %>
              <div>

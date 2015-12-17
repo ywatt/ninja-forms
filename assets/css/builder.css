@@ -1244,13 +1244,13 @@ All styles used for displaying table content
 .nf-settings .toggle {
   cursor: pointer; }
 
-.nf-loading {
+.nf-loading-button {
   background: #1EA9EA;
   border-radius: 4px;
   width: 40px;
   margin: 0 auto;
   position: relative; }
-  .nf-loading ul {
+  .nf-loading-button ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -1258,7 +1258,7 @@ All styles used for displaying table content
     top: -10px;
     left: 0;
     font-size: 0; }
-    .nf-loading ul li {
+    .nf-loading-button ul li {
       height: 0;
       position: absolute;
       top: 50%;
@@ -1272,22 +1272,22 @@ All styles used for displaying table content
       -webkit-transform: transformZ(0);
           -ms-transform: transformZ(0);
               transform: transformZ(0);
-      -webkit-animation: LOADING 2s infinite;
-              animation: LOADING 2s infinite; }
-      .nf-loading ul li:nth-child(1n) {
+      -webkit-animation: LOADINGBUTTON 2s infinite;
+              animation: LOADINGBUTTON 2s infinite; }
+      .nf-loading-button ul li:nth-child(1n) {
         left: 0;
         -webkit-animation-delay: 0s;
                 animation-delay: 0s; }
-      .nf-loading ul li:nth-child(2n) {
+      .nf-loading-button ul li:nth-child(2n) {
         left: 15px;
         -webkit-animation-delay: 0.2s;
                 animation-delay: 0.2s; }
-      .nf-loading ul li:nth-child(3n) {
+      .nf-loading-button ul li:nth-child(3n) {
         left: 30px;
         -webkit-animation-delay: 0.4s;
                 animation-delay: 0.4s; }
 
-@-webkit-keyframes LOADING {
+@-webkit-keyframes LOADINGBUTTON {
   0% {
     -webkit-transform: scale(0.5);
             transform: scale(0.5);
@@ -1301,7 +1301,7 @@ All styles used for displaying table content
             transform: scale(0.5);
     background: #fff; } }
 
-@keyframes LOADING {
+@keyframes LOADINGBUTTON {
   0% {
     -webkit-transform: scale(0.5);
             transform: scale(0.5);
@@ -1314,6 +1314,77 @@ All styles used for displaying table content
     -webkit-transform: scale(0.5);
             transform: scale(0.5);
     background: #fff; } }
+
+.nf-loading-content {
+  border-radius: 4px;
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
+  position: relative; }
+  .nf-loading-content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -10px;
+    left: 0;
+    font-size: 0; }
+    .nf-loading-content ul li {
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 0;
+      margin: 0;
+      height: 50px;
+      width: 50px;
+      border: 3px solid #fff;
+      border-radius: 100%;
+      -webkit-transform: transformZ(0);
+          -ms-transform: transformZ(0);
+              transform: transformZ(0);
+      -webkit-animation: LOADINGCONTENT 2s infinite;
+              animation: LOADINGCONTENT 2s infinite; }
+      .nf-loading-content ul li:nth-child(1n) {
+        left: 0;
+        -webkit-animation-delay: 0s;
+                animation-delay: 0s; }
+      .nf-loading-content ul li:nth-child(2n) {
+        left: 50px;
+        -webkit-animation-delay: 0.3s;
+                animation-delay: 0.3s; }
+      .nf-loading-content ul li:nth-child(3n) {
+        left: 100px;
+        -webkit-animation-delay: 0.6s;
+                animation-delay: 0.6s; }
+
+@-webkit-keyframes LOADINGCONTENT {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    background: #1EA9EA; }
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    background: #1EA9EA; }
+  100% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    background: #1EA9EA; } }
+
+@keyframes LOADINGCONTENT {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    background: #1EA9EA; }
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    background: #1EA9EA; }
+  100% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    background: #1EA9EA; } }
 
 .nf-help-text {
   display: none; }
