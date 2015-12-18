@@ -15,6 +15,7 @@ final class NF_Admin_Menus_Addons extends NF_Abstracts_Submenu
 
     public function display()
     {
+        wp_enqueue_style( 'nf-admin-addons', Ninja_Forms::$url . 'assets/css/admin-addons.css' );
         $items = wp_remote_get( 'https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h' );
         $items = wp_remote_retrieve_body( $items );
         $items = json_decode( $items, true );
