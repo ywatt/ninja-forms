@@ -13,6 +13,7 @@
 
 .nf-extend h2 {
     white-space: nowrap;
+    overflow: hidden;
 }
 
 .nf-extend-content p {
