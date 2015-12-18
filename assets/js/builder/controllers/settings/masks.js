@@ -18,6 +18,12 @@ define([], function() {
                 aSep: this.thousandsSeparator,
                 aDec: this.decimalPoint
             });
+
+            jQuery( "#shipping_cost" ).autoNumeric({
+                aSign: '$', // TODO: Use form setting
+                aSep: this.thousandsSeparator,
+                aDec: this.decimalPoint
+            });
         }
 
     });
