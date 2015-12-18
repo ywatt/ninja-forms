@@ -592,7 +592,10 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => '0.00',
-        
+        'mask' => array( //TODO: Not Yet Supported
+            'type' => 'numeric', // 'numeric', 'currency', 'custom'
+            'options' => array()
+        )
     ),
 
     'product_use_quantity' => array(
