@@ -3,9 +3,10 @@ require.config( {
 } );
 
 var nfRadio = Backbone.Radio;
+var nfAppLoading = true;
 
 jQuery( document ).ready( function( $ ) {
-	require( ['views/app/builder', 'controllers/loadControllers'], function( BuilderView, LoadControllers ) {
+	require( ['views/app/builder', 'controllers/appControllers'], function( BuilderView, AppControllers ) {
 
 		var NinjaForms = Marionette.Application.extend( {
 
@@ -13,7 +14,7 @@ jQuery( document ).ready( function( $ ) {
 				// Trigger an event before we load our controllers.
 				nfRadio.channel( 'app' ).trigger( 'before:loadControllers', this );
 				// Load our controllers.
-				var loadControllers = new LoadControllers();
+				var appControllers = new AppControllers();
 				// Trigger an event after we load our controllers.
 				nfRadio.channel( 'app' ).trigger( 'after:loadControllers', this );
 			},

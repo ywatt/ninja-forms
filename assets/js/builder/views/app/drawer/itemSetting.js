@@ -51,6 +51,8 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 					}
 				})
 		    });
+
+		    nfRadio.channel( 'app' ).trigger( 'render:setting', this.el, this.model, this.dataModel );
 		},
 
 		onShow: function() {

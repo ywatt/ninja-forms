@@ -1,4 +1,4 @@
-define( ['views/app/mainContentLoading'], function( LoadingView ) {
+define( ['views/app/mainContentLoading', 'controllers/fieldsControllers', 'controllers/actionsControllers', 'controllers/dataControllers'], function( LoadingView, FieldControllers, ActionControllers, DataControllers ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
@@ -26,12 +26,22 @@ define( ['views/app/mainContentLoading'], function( LoadingView ) {
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 			// var headerView = currentDomain.get( 'getMainHeaderView' ).call( currentDomain );
 			// this.header.show( headerView );
-			// var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
-			console.log( 'test' );
 			var contentView = new LoadingView();
 			this.content.show( contentView );
 
+			if ( nfAppLoading ) {
+				nfRadio.channel( 'app' ).request( 'load:controllers' );
+				nfAppLoading = false;
+				new FieldControllers();
+				new ActionControllers();
+				new DataControllers();
+			}
+
+			// var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
+			
+			// this.content.show( contentView );
 			nfRadio.channel( 'main' ).trigger( 'render:main' );
+
 		},
 
 		getMainEl: function() {
