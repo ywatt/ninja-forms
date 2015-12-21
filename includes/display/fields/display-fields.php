@@ -116,6 +116,9 @@ function ninja_forms_display_fields($form_id){
 					//Check to see if there is a registered display function. If so, call it.
 					if($display_function != ''){
 
+						$data = filter_var( $data, FILTER_SANITIZE_STRING );
+						$data = filter_var( $data, FILTER_SANITIZE_SPECIAL_CHARS );
+
 						do_action( 'ninja_forms_display_before_field_function', $field_id, $data );
 						$arguments['field_id'] = $field_id;
 						$arguments['data'] = $data;
