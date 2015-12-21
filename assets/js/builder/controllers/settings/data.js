@@ -10,7 +10,7 @@ define( ['models/settings/settingsModel'], function( settingsModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Load our action collection from our localized form data
-			this.model = new settingsModel( preloadedFormData.settings );
+			this.model = new settingsModel( nfAppLoadingData.preloadedFormData.settings );
 			nfRadio.channel( 'settings' ).reply( 'get:settings', this.getSettings, this );
 		},
 

@@ -30,7 +30,7 @@ define( [
 			this.availableActions.nicename = 'Available';
 
 			var that = this;
-			_.each( actionTypeData, function( type ) {
+			_.each( nfAppLoadingData.actionTypeData, function( type ) {
 				var settingGroups = new settingGroupCollection();
 				// Loop through the settings groups within this field type and create an object to add to the groups collection.
 				_.each( type.settingGroups, function( group ) {

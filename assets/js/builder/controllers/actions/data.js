@@ -10,7 +10,7 @@ define( ['models/actions/actionCollection', 'models/actions/actionModel'], funct
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Load our action collection from our localized form data
-			this.collection = new actionCollection( preloadedFormData.actions );
+			this.collection = new actionCollection( nfAppLoadingData.preloadedFormData.actions );
 			// Set our removedIDs to an empty object. This will be populated when a action is removed so that we can add it to our 'deleted_actions' object.
 			this.collection.removedIDs = {};
 

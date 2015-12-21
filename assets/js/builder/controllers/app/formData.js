@@ -13,7 +13,7 @@ define( ['models/app/formModel'], function( formModel) {
 			// Instantiate Form Model
 			this.model = new formModel;
 			// Set our form ID
-			this.model.set( 'id', preloadedFormData.id );
+			this.model.set( 'id', nfAppLoadingData.preloadedFormData.id );
 			// Set our field collection
 			this.model.set( 'fields', nfRadio.channel( 'fields' ).request( 'get:collection' ) );
 			// Set our actions collection

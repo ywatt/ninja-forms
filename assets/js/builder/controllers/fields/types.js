@@ -27,13 +27,13 @@ define( [
 			// Create our field type collection
 			this.collection = new fieldTypeCollection();
 			// Config for our settings sections
-			this.fieldTypeSections = new fieldTypeSectionCollection( fieldTypeSections );
+			this.fieldTypeSections = new fieldTypeSectionCollection( nfAppLoadingData.fieldTypeSections );
 
 			// Since we want to access the "this" context later, we assign it to that so it isn't overwritten
 			var that = this;
 
 			// Loop through the field type data variable and add it to the field type collection array
-			_.each( fieldTypeData, function ( type ) {
+			_.each( nfAppLoadingData.fieldTypeData, function ( type ) {
 				var settingGroups = new fieldTypeSettingGroupCollection();
 				// Loop through the settings groups within this field type and create an object to add to the groups collection.
 				_.each( type.settingGroups, function( group ) {
@@ -64,6 +64,7 @@ define( [
 				that.collection.add( fieldType );
 			} );
 
+			console.log( nfAppLoadingData.fieldTypeSections );
 			// Respond to requests to get field type, collection, settings, and sections
 			nfRadio.channel( 'fields' ).reply( 'get:type', this.getFieldType, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeCollection', this.getTypeCollection, this );

@@ -40,18 +40,18 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             // wp_enqueue_script( 'jquery-qtip2', Ninja_Forms::$url . 'assets/js/lib/jquery.qtip.js' );
             wp_enqueue_script( 'jBox', Ninja_Forms::$url . 'assets/js/lib/jBox.min.js' );
             wp_enqueue_script( 'jquery-caret', Ninja_Forms::$url . 'assets/js/lib/jquery.caret.js' );
-
             // wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
             wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/min/builder.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );
 
             wp_localize_script( 'nf-builder', 'nfAdmin', array(
                 'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ),
                 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
-                'previewurl' => site_url() . '/?nf_preview_form=' . $_GET[ 'form_id' ],
-                'wp_locale' => $wp_locale->number_format
+                'previewurl' => site_url() . '/?nf_preview_form=' . absint( $_GET[ 'form_id' ] ),
+                'wp_locale' => $wp_locale->number_format,
+                'formID'    => absint( $_GET[ 'form_id' ] )
             ));
 
-            delete_user_option( get_current_user_id(), 'nf_form_preview_' . $_GET[ 'form_id' ] );
+            delete_user_option( get_current_user_id(), 'nf_form_preview_' . absint( $_GET[ 'form_id' ] ) );
 
             if( ! isset( $_GET[ 'ajax' ] ) ) {
                 $this->_localize_form_data($_GET['form_id']);

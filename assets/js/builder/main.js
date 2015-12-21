@@ -4,6 +4,7 @@ require.config( {
 
 var nfRadio = Backbone.Radio;
 var nfAppLoading = true;
+var nfAppLoadingData = {};
 
 jQuery( document ).ready( function( $ ) {
 	require( ['views/app/builder', 'controllers/appControllers'], function( BuilderView, AppControllers ) {

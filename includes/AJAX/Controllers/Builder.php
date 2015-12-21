@@ -9,7 +9,7 @@ class NF_AJAX_Controllers_Builder extends NF_Abstracts_Controller
 
     public function builder()
     {
-        check_ajax_referer( 'ninja_forms_ajax_nonce', 'builder' );
+        check_ajax_referer( 'ninja_forms_ajax_nonce', 'security' );
 
         if( ! isset( $_POST[ 'form' ] ) ){
             $this->_errors[] = 'Form Not Found';
@@ -62,7 +62,7 @@ class NF_AJAX_Controllers_Builder extends NF_Abstracts_Controller
         $form_data['fields'] = $fields_settings;
         $form_data['actions'] = $actions_settings;
 
-        $this->_data[ 'preloadedFormData' ] = wp_json_encode( $form_data );
+        $this->_data[ 'preloadedFormData' ] = $form_data;
     }
 
     private function _field_type_data()
@@ -100,16 +100,16 @@ class NF_AJAX_Controllers_Builder extends NF_Abstracts_Controller
             );
         }
 
-        $this->_data[ 'fieldTypeData' ]     = wp_json_encode( $field_type_settings );
-        $this->_data[ 'fieldSettings' ]     = wp_json_encode( array_values( $master_settings ) );
-        $this->_data[ 'fieldTypeSections' ] = wp_json_encode( $field_type_sections );
+        $this->_data[ 'fieldTypeData' ]     = $field_type_settings;
+        $this->_data[ 'fieldSettings' ]     = array_values( $master_settings );
+        $this->_data[ 'fieldTypeSections' ] = $field_type_sections;
     }
 
     private function _action_type_data()
     {
         $action_type_settings = array();
 
-        $master_settings_list = array();
+        $master_settings = array();
 
         foreach( Ninja_Forms()->actions as $action ){
 
@@ -119,7 +119,7 @@ class NF_AJAX_Controllers_Builder extends NF_Abstracts_Controller
 
             $settings_groups = $this->_group_settings( $settings, $groups );
 
-            $master_settings_list = array_merge( $master_settings_list, $settings );
+            $master_settings = array_merge( $master_settings, $settings );
 
             $action_type_settings[ $name ] = array(
                 'id' => $name,
@@ -127,7 +127,7 @@ class NF_AJAX_Controllers_Builder extends NF_Abstracts_Controller
                 'nicename' => $action->get_nicename(),
                 'image' => $action->get_image(),
                 'settingGroups' => $settings_groups,
-                'settingDefaults' => $this->_setting_defaults( $master_settings_list )
+                'settingDefaults' => $this->_setting_defaults( $master_settings )
             );
         }
 
@@ -153,13 +153,8 @@ class NF_AJAX_Controllers_Builder extends NF_Abstracts_Controller
             );
         }
 
-        ?>
-        <script>
-            var actionTypeData = <?php echo wp_json_encode( $action_type_settings ); ?>;
-            var actionSettings = <?php echo wp_json_encode( array_values( $master_settings_list ) ); ?>;
-            // console.log( actionTypeData );
-        </script>
-        <?php
+        $this->_data[ 'actionTypeData' ]     = $action_type_settings;
+        $this->_data[ 'actionSettings' ]     = array_values( $master_settings );
     }
 
     protected function _form_settings()
@@ -182,12 +177,9 @@ class NF_AJAX_Controllers_Builder extends NF_Abstracts_Controller
             $form_settings_types[ $id ]['settingGroups'] = $this->_group_settings($form_settings[ $id ], $groups);
             $form_settings_types[ $id ]['settingDefaults'] = $this->_setting_defaults($unique_settings);
         }
-        ?>
-        <script>
-            var formSettingTypeData = <?php echo wp_json_encode( $form_settings_types )?>;
-            var formSettings = <?php echo wp_json_encode( array_values( $master_settings ) )?>;
-        </script>
-        <?php
+
+        $this->_data[ 'formSettingTypeData' ]   = $form_settings_types;
+        $this->_data[ 'formSettings' ]          = array_values( $master_settings );
     }
 
     protected function _merge_tags()
@@ -208,7 +200,7 @@ class NF_AJAX_Controllers_Builder extends NF_Abstracts_Controller
             );
         }
 
-        $this->_data[ 'merge_tags' ] = wp_json_encode( array_values( $merge_tags ) );
+        $this->_data[ 'mergeTags' ] = array_values( $merge_tags );
     }
 
     protected function _group_settings( $settings, $groups )

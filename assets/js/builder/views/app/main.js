@@ -26,26 +26,39 @@ define( ['views/app/mainContentLoading', 'controllers/fieldsControllers', 'contr
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 			// var headerView = currentDomain.get( 'getMainHeaderView' ).call( currentDomain );
 			// this.header.show( headerView );
-			var contentView = new LoadingView();
-			this.content.show( contentView );
-
-			if ( nfAppLoading ) {
-				nfRadio.channel( 'app' ).request( 'load:controllers' );
-				nfAppLoading = false;
-				new FieldControllers();
-				new ActionControllers();
-				new DataControllers();
-			}
-
-			// var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
-			
+			// var contentView = new LoadingView();
 			// this.content.show( contentView );
+			
+			if ( nfAppLoading ) {
+				nfRadio.channel( 'app' ).trigger( 'load:controllers' );
+				nfAppLoading = false;
+				var that = this;
+				jQuery.post( ajaxurl, { action: 'nf_builder', form: nfAdmin.formID, security: nfAdmin.ajaxNonce }, function( response ) {
+					var response = JSON.parse( response );
+					nfAppLoadingData = response.data;
+					
+					that.test();
+					var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
+					that.content.show( contentView );
+				} );
+			} else {
+				var contentView = currentDomain.get( 'getMainContentView' ).call( currentDomain );
+				this.content.show( contentView );
+			}
+			
+
 			nfRadio.channel( 'main' ).trigger( 'render:main' );
 
 		},
 
 		getMainEl: function() {
 			return jQuery( this.el ).parent();
+		},
+
+		test: function() {
+			new FieldControllers();
+			new ActionControllers();
+			new DataControllers();
 		}
 
 	});

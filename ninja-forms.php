@@ -156,6 +156,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->controllers[ 'preview' ]    = new NF_AJAX_Controllers_Preview();
                 self::$instance->controllers[ 'uploads' ]    = new NF_AJAX_Controllers_Uploads();
                 self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();
+                self::$instance->controllers[ 'builder' ]    = new NF_AJAX_Controllers_Builder();
 
                 /*
                  * Field Class Registration

@@ -17,7 +17,7 @@ define( [
 		initialize: function() {
 			this.tagSectionCollection = new mergeTagCollection();
 			var that = this;
-			_.each( mergeTags, function( tagSection ) {
+			_.each( nfAppLoadingData.mergeTags, function( tagSection ) {
 				if ( tagSection.tags ) {
 					var tags = new mergeTagCollection( tagSection.tags );
 				} else {
