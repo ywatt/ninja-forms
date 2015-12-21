@@ -97,15 +97,19 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9.31 (16 December 2015) =
+= 2.9.32 (21 December 2015) =
 
 *Security:*
 
-*Bugs:*
-
-* Our last security fix was a bit over-zealous. This version should prevent all occurances of the phrase 'script' from being stripped from textarea inputs.
+* In our attempt to back-off some of our over-zealous filtering, we uncorked a previously patched XSS issue. This version fixes both issues.
 
 == Changelog ==
+
+= 2.9.32 (21 December 2015) =
+
+*Security:*
+
+* In our attempt to back-off some of our over-zealous filtering, we uncorked a previously patched XSS issue. This version fixes both issues.
 
 = 2.9.31 (16 December 2015) =
 
