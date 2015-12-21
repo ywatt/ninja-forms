@@ -72,7 +72,8 @@ define(
 		'controllers/settings/data',
 		'controllers/settings/formSettings',
 		'controllers/settings/editActive',
-		'controllers/settings/clickEdit'
+		'controllers/settings/clickEdit',
+		'controllers/settings/masks'
 	],
 	function(
 		/*
@@ -137,7 +138,8 @@ define(
 		SettingData,
 		FormSettings,
 		SettingsEditActive,
-		SettingsClickEdit
+		SettingsClickEdit,
+		Masks
 		
 	) {
 		var controller = Marionette.Object.extend( {
@@ -204,6 +206,7 @@ define(
 				new SettingData();
 				new SettingsEditActive();
 				new SettingsClickEdit();
+				new Masks();
 				/*
 				 * Data controllers need to be set after every other controller has been setup, even if they aren't domain-specific.
 				 * We load them from domains to app specificity.
