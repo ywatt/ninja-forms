@@ -238,9 +238,6 @@ function nf_wp_kses_post_deep( $value ){
         array_map( 'nf_wp_kses_post_deep', $value ) :
         wp_kses_post($value);
 
-	$value = filter_var($value, FILTER_SANITIZE_STRING);
-	$value = filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
-
     return $value;
 }
 
