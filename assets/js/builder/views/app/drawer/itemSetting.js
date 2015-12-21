@@ -57,6 +57,39 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 			this.$el = this.$el.children();
 			this.$el.unwrap();
 			this.setElement( this.$el );
+
+
+			/*
+			 * Apply Setting Field Masks
+			 */
+			var mask = this.model.get( 'mask' );
+
+			if( typeof mask != "undefined" ){
+
+				var input = jQuery( this.$el ).find( 'input' );
+
+				switch( mask.type ){
+					case 'numeric':
+						input.autoNumeric({
+							aSep: this.thousandsSeparator,
+							aDec: this.decimalPoint
+						});
+						break;
+					case 'currency':
+						input.autoNumeric({
+							aSign: '$', // TODO: Use form setting
+							aSep: this.thousandsSeparator,
+							aDec: this.decimalPoint
+						});
+						break;
+					case 'custom':
+						if( mask.format ) input.mask( mask.format )
+						break;
+					default:
+						// TODO: Error Logging.
+						console.log( 'Notice: Mask type of "' + mask.type + '" is not supported.' );
+				}
+			}
 		},
 
 		templateHelpers: function () {

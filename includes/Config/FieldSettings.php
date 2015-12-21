@@ -592,8 +592,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => '0.00',
-        'mask' => array( //TODO: Not Yet Supported
-            'type' => 'numeric', // 'numeric', 'currency', 'custom'
+        'mask' => array(
+            'type' => 'currency', // 'numeric', 'currency', 'custom'
             'options' => array()
         )
     ),
@@ -651,7 +651,10 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width'             => 'full',
         'group'             => 'primary',
         'value'             => '0.00',
-        
+        'mask' => array(
+            'type' => 'currency', // 'numeric', 'currency', 'custom'
+            'options' => array()
+        )
     ),
 
     'shipping_type'         => array(
