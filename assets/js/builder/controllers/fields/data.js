@@ -78,26 +78,43 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 		 * @param  Array 	order optional order array like: [field-1, field-4, field-2]
 		 * @return void
 		 */
-		sortFields: function( order, ui ) {
+		sortFields: function( order, ui, oldOrder ) {
 			// Get our sortable element
 			var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
 			if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) { // Make sure that sortable is enabled
 				// JS ternerary for setting our order
 				var order = order || jQuery( sortableEl ).sortable( 'toArray' );
-				// Loop through all of our fields and update their order value
-				_.each( this.collection.models, function( field ) {
-					// Get our current position.
-					var oldPos = field.get( 'order' );
-					var id = field.get( 'id' );
-					if ( jQuery.isNumeric( id ) ) {
-						var search = 'field-' + id;
-					} else {
-						var search = id;
-					}
-					// Get the index of our field inside our order array
-					var newPos = order.indexOf( search ) + 1;
-					field.set( 'order', newPos );
-				} );
+				var oldOrder = oldOrder || false;
+
+				/*
+				if( oldOrder ) {
+					// Remove any items from our oldOrder array that don't have a value.
+					oldOrder = oldOrder.filter(function(n){ return n != '' } ); 
+					for (var i = order.length - 1; i >= 0; i--) {
+						if ( order[i] != oldOrder[i] ) {
+							// Update our field order
+							console.log( order[i] );
+							// this.getField( order[i] ).set( 'order', i + 1 );
+						}
+					};
+				} else {
+					// Loop through all of our fields and update their order value
+					_.each( this.collection.models, function( field ) {
+						// Get our current position.
+						var oldPos = field.get( 'order' );
+						var id = field.get( 'id' );
+						if ( jQuery.isNumeric( id ) ) {
+							var search = 'field-' + id;
+						} else {
+							var search = id;
+						}
+						// Get the index of our field inside our order array
+						var newPos = order.indexOf( search ) + 1;
+						field.set( 'order', newPos );
+					} );					
+				}
+				*/
+			
 				this.collection.sort();
 
 				// Set our 'clean' status to false so that we get a notice to publish changes

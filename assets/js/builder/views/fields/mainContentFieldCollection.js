@@ -34,7 +34,7 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 					},
 
 					start: function( e, ui ) {
-						nfRadio.channel( 'app' ).request( 'start:fieldsSortable', ui );
+						nfRadio.channel( 'app' ).request( 'start:fieldsSortable', ui, this );
 					},
 
 					update: function( e, ui ) {

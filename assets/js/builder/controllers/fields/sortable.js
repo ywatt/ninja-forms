@@ -24,10 +24,11 @@ define( [], function() {
 			 * stop - stopped sorting/dragging
 			 * start - started sorting/dragging
 			 * update - stopped sorting/dragging and order has changed
-			 */
+			 *
 			nfRadio.channel( 'app' ).reply( 'receive:fieldsSortable', this.receiveFieldsSortable, this );
 			nfRadio.channel( 'app' ).reply( 'over:fieldsSortable', this.overfieldsSortable, this );
 			nfRadio.channel( 'app' ).reply( 'out:fieldsSortable', this.outFieldsSortable, this );
+			*/
 			nfRadio.channel( 'app' ).reply( 'stop:fieldsSortable', this.stopFieldsSortable, this );
 			nfRadio.channel( 'app' ).reply( 'start:fieldsSortable', this.startFieldsSortable, this );
 			nfRadio.channel( 'app' ).reply( 'update:fieldsSortable', this.updateFieldsSortable, this );
@@ -41,7 +42,7 @@ define( [], function() {
 		 */
 		addActiveClass: function() {
 			var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
-			jQuery( sortableEl ).addClass( 'nf-droppable-active' );	
+			jQuery( sortableEl ).addClass( 'nf-droppable-active' );
 		},
 
 		/**
@@ -251,10 +252,11 @@ define( [], function() {
 		 * @param  Object 	ui jQuery UI element
 		 * @return void
 		 */
-		startFieldsSortable: function( ui ) {
+		startFieldsSortable: function( ui, el ) {
 			// If we aren't dragging an item in from types or staging, update our change log.
 			if( ! jQuery( ui.item ).hasClass( 'nf-field-type-button' ) && ! jQuery( ui.item ).hasClass( 'nf-stage' ) ) { 
 				jQuery( ui.item ).css( 'opacity', '0.5' ).show();
+				this.oldOrder = jQuery( el ).sortable( 'toArray' );
 			}
 		},
 
@@ -266,7 +268,7 @@ define( [], function() {
 		 * @return void
 		 */
 		updateFieldsSortable: function( ui ) {
-			nfRadio.channel( 'fields' ).request( 'sort:fields' );
+			nfRadio.channel( 'fields' ).request( 'sort:fields', null, ui, this.oldOrder );
 
 			// If we aren't dragging an item in from types or staging, update our change log.
 			if( ! jQuery( ui.item ).hasClass( 'nf-field-type-button' ) && ! jQuery( ui.item ).hasClass( 'nf-stage' ) ) { 
