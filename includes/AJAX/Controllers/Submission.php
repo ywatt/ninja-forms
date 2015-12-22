@@ -37,6 +37,10 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $this->populate_field_merge_tags( $this->_data['fields'], $field_merge_tags );
 
+        if( isset( $this->_data[ 'settings' ][ 'calculations' ] ) ) {
+            $this->process_calculations( $this->_data[ 'settings' ][ 'calculations' ] );
+        }
+
         if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ) {
             $this->run_actions_preview();
         } else {
@@ -44,6 +48,13 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         }
 
         $this->_respond();
+    }
+
+    protected function process_calculations( $calcs )
+    {
+        foreach( $calcs as $calc ) {
+            $this->_data['calcs'][] = eval( 'return ' . $calc[ 'calc' ] . ';');
+        }
     }
 
     protected function populate_field_merge_tags( $fields, $field_merge_tags )

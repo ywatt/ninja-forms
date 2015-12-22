@@ -707,6 +707,27 @@ final class NF_Database_MockData
             ->save();
     }
 
+    public function form_calc_form()
+    {
+        /*
+         * FORM
+         */
+
+        $form = Ninja_Forms()->form()->get();
+        $form->update_setting( 'title', 'Form with Calculations' );
+        $form->update_setting( 'calculations', array(
+            array(
+                'name' => 'My Calculation',
+                'calc' => '2 * 3'
+            ),
+            array(
+                'name' => 'My Calculation',
+                'calc' => '4 + 1'
+            )
+        ));
+        $form->save();
+    }
+
     private function _migrate()
     {
         $migrations = new NF_Database_Migrations();
