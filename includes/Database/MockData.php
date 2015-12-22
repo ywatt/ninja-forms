@@ -717,15 +717,29 @@ final class NF_Database_MockData
         $form->update_setting( 'title', 'Form with Calculations' );
         $form->update_setting( 'calculations', array(
             array(
-                'name' => 'My Calculation',
+                'name' => 'My First Calculation',
                 'calc' => '2 * 3'
             ),
             array(
-                'name' => 'My Calculation',
+                'name' => 'My Second Calculation',
                 'calc' => '4 + 1'
             )
         ));
         $form->save();
+
+        $form_id = $form->get_id();
+
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
+        $field->update_setting( 'type', 'submit' )
+            ->update_setting( 'label', 'Purchase')
+            ->update_setting( 'order', 1000 )
+            ->save();
+
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'label',  'Success Message' )
+            ->update_setting( 'type', 'successmessage' )
+            ->update_setting( 'message', 'Calculations are returned with the AJAX response ( response -> data -> calcs' )
+            ->save();
     }
 
     private function _migrate()

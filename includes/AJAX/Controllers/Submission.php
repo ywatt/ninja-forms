@@ -53,7 +53,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     protected function process_calculations( $calcs )
     {
         foreach( $calcs as $calc ) {
-            $this->_data['calcs'][] = Ninja_Forms()->eos()->solve( $calc[ 'calc' ] );
+            $tmp_key = $calc[ 'name' ] . ': ' . $calc[ 'calc' ];
+            $this->_data['calcs'][ $tmp_key ] = Ninja_Forms()->eos()->solve( $calc[ 'calc' ] );
         }
     }
 
