@@ -42,7 +42,9 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         $mock_data->form_product_2();
         $mock_data->form_product_3();
         $mock_data->form_email_submission();
-        $mock_data->form_long_form();
+        $mock_data->form_long_form( 100 );
+        $mock_data->form_long_form( 300 );
+        $mock_data->form_long_form( 500 );
         $mock_data->form_kitchen_sink();
     }
 

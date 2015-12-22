@@ -432,7 +432,7 @@ final class NF_Database_MockData
         */
 
         $form = Ninja_Forms()->form()->get();
-        $form->update_setting( 'title', 'The Long Form' );
+        $form->update_setting( 'title', 'Long Form - ' . $num_fields . ' Fields' );
         $form->save();
 
         $form_id = $form->get_id();
