@@ -11,6 +11,10 @@ abstract class NF_Abstracts_Input extends NF_Abstracts_Field
 
     protected $_type = 'text';
 
+    protected $_settings_all_fields = array(
+        'label', 'label_pos'
+    );
+
     public function __construct()
     {
         parent::__construct();
