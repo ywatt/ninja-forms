@@ -26,13 +26,23 @@ abstract class NF_Abstracts_Field
     protected $_aliases = array();
 
     /**
-    * @var array
-    */
+     * @var array
+     */
     protected $_settings = array();
 
     /**
-    * @var string
-    */
+     * @var array
+     */
+    protected $_settings_all_fields = array();
+
+    /**
+     * @var array
+     */
+    protected $_settings_exclude = array();
+
+    /**
+     * @var string
+     */
     protected $_test_value = 'test';
 
     /**
