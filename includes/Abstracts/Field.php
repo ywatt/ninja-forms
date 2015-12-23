@@ -217,16 +217,16 @@ abstract class NF_Abstracts_Field
 
     protected function load_settings( $only_settings = array() )
     {
+        $settings = array();
+
         // Loads a settings array from the FieldSettings configuration file.
-        $settings = Ninja_Forms::config( 'FieldSettings' );
+        $all_settings = Ninja_Forms::config( 'FieldSettings' );
 
-        if( ! empty( $only_settings ) ){
+        foreach( $only_settings as $setting ){
 
-            foreach( $settings as $key => $setting ){
+            if( isset( $all_settings[ $setting ]) ){
 
-                if( ! in_array( $key, $only_settings) ){
-                    unset( $settings[ $key ] );
-                }
+                $settings[ $setting ] = $all_settings[ $setting ];
             }
         }
 
