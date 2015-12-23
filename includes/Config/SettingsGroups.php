@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return array(
+return apply_filters( 'ninja-forms-field-settings-groups', array(
 
     'primary' => array(
         'id' => 'primary',
@@ -28,4 +28,4 @@ return array(
         'label' => __( 'Administration', 'ninja-forms' )
     )
 
-);
+));
