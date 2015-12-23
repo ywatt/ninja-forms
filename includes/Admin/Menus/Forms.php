@@ -20,8 +20,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
     public function display()
     {
-        if( isset( $_GET[ 'form_id' ] ) && $_GET[ 'form_id' ] ){
+        if( isset( $_GET[ 'form_id' ] ) ){
             global $wp_locale;
+
+            $form_id = ( is_numeric( $_GET[ 'form_id' ] ) ) ? absint( $_GET[ 'form_id' ] ) : '';
 
             /*
              * FORM BUILDER
@@ -48,14 +50,14 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             wp_localize_script( 'nf-builder', 'nfAdmin', array(
                 'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ),
                 'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
-                'previewurl' => site_url() . '/?nf_preview_form=' . $_GET[ 'form_id' ],
+                'previewurl' => site_url() . '/?nf_preview_form=' . $form_id,
                 'wp_locale' => $wp_locale->number_format
             ));
 
-            delete_user_option( get_current_user_id(), 'nf_form_preview_' . $_GET[ 'form_id' ] );
+            delete_user_option( get_current_user_id(), 'nf_form_preview_' . $form_id );
 
             if( ! isset( $_GET[ 'ajax' ] ) ) {
-                $this->_localize_form_data($_GET['form_id']);
+                $this->_localize_form_data( $form_id );
 
                 $this->_localize_field_type_data();
 
@@ -73,7 +75,11 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $this->table->prepare_items();
 
-            Ninja_Forms::template( 'admin-menu-all-forms.html.php', array( 'table' => $this->table ) );
+            Ninja_Forms::template( 'admin-menu-all-forms.html.php', array(
+                'table' => $this->table,
+                'add_new_url' => admin_url( 'admin.php?page=ninja-forms&form_id=new' ),
+                'add_new_text' => __( 'Add New Form', 'ninja-forms' )
+            ) );
         }
     }
 
@@ -90,30 +96,34 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     private function _localize_form_data( $form_id )
     {
         $form = Ninja_Forms()->form( $form_id )->get();
-        $fields = Ninja_Forms()->form( $form_id )->get_fields();
-        $actions = Ninja_Forms()->form( $form_id )->get_actions();
+        $fields = ( $form_id ) ? Ninja_Forms()->form( $form_id )->get_fields() : array();
+        $actions = ( $form_id ) ? Ninja_Forms()->form( $form_id )->get_actions() : array();
 
         $fields_settings = array();
 
-        foreach( $fields as $field ){
-            $settings = $field->get_settings();
-            $settings[ 'id' ] = $field->get_id();
+        if( ! empty( $fields ) ) {
+            foreach ($fields as $field) {
+                $settings = $field->get_settings();
+                $settings['id'] = $field->get_id();
 
-            foreach( $settings as $key => $setting ){
-                if( is_numeric( $setting ) ) $settings[ $key ] = floatval( $setting );
+                foreach ($settings as $key => $setting) {
+                    if (is_numeric($setting)) $settings[$key] = floatval($setting);
+                }
+
+                $fields_settings[] = $settings;
             }
-
-            $fields_settings[] = $settings;
         }
 
         $actions_settings = array();
 
-        foreach( $actions as $action ){
+        if( ! empty( $actions ) ) {
+            foreach ($actions as $action) {
 
-            $settings = $action->get_settings();
-            $settings[ 'id' ] = $action->get_id();
+                $settings = $action->get_settings();
+                $settings['id'] = $action->get_id();
 
-            $actions_settings[] = $settings;
+                $actions_settings[] = $settings;
+            }
         }
 
         $form_data = array();
