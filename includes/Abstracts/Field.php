@@ -41,6 +41,11 @@ abstract class NF_Abstracts_Field
     protected $_settings_exclude = array();
 
     /**
+     * @var array
+     */
+    protected $_settings_only = array();
+
+    /**
      * @var string
      */
     protected $_test_value = 'test';
@@ -87,9 +92,14 @@ abstract class NF_Abstracts_Field
         // Translate the nicename property.
         $this->_nicename = __( $this->_nicename, 'ninja-forms' );
 
-        $this->_settings = array_merge( $this->_settings_all_fields, $this->_settings );
+        if( ! empty( $this->_settings_only ) ){
 
-        $this->_settings = array_diff( $this->_settings, $this->_settings_exclude );
+            $this->_settings = $this->_settings_only;
+        } else {
+
+            $this->_settings = array_merge( $this->_settings_all_fields, $this->_settings );
+            $this->_settings = array_diff( $this->_settings, $this->_settings_exclude );
+        }
 
         $this->_settings = $this->load_settings( $this->_settings );
     }
