@@ -199,10 +199,18 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 self::$instance->_logger = new NF_Database_Logger();
 
+                /*
+                 * Merge Tags
+                 */
                 self::$instance->merge_tags[ 'user' ] = new NF_MergeTags_User();
                 self::$instance->merge_tags[ 'post' ] = new NF_MergeTags_Post();
                 self::$instance->merge_tags[ 'system' ] = new NF_MergeTags_System();
                 self::$instance->merge_tags[ 'fields' ] = new NF_MergeTags_Fields();
+
+                /*
+                 * EOS Parser
+                 */
+                self::$instance->_eos[ 'parser' ] = require_once 'includes/Libraries/EOS/Parser.php';
 
                 /*
                  * Activation Hook
@@ -275,6 +283,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         public function logger()
         {
             return $this->_logger;
+        }
+
+        public function eos()
+        {
+            return new Parser();
         }
 
         /**

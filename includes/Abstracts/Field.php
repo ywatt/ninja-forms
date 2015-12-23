@@ -150,7 +150,8 @@ abstract class NF_Abstracts_Field
 
     public function get_settings()
     {
-        return $this->_settings;
+        $settings = $this->load_settings( 'key' );
+        return array_merge( $this->_settings, $settings );
     }
 
     public function get_test_value()
