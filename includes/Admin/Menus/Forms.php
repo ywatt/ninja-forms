@@ -8,6 +8,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
     public $icon_url = 'dashicons-feedback';
 
+    public $position = '35.1337';
+
     public function __construct()
     {
         parent::__construct();
