@@ -352,7 +352,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'type' => 'textbox',
         'label' => __( 'Field Key', 'ninja-forms'),
         'width' => 'full',
-        'group' => 'advanced',
+        'group' => 'administration',
         'value' => '',
         'help' => __( 'Programmatic name that can be used to reference this field.', 'ninja-forms' ),
     ),
