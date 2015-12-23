@@ -12,7 +12,7 @@ abstract class NF_Abstracts_Input extends NF_Abstracts_Field
     protected $_type = 'text';
 
     protected $_settings_all_fields = array(
-        'key', 'label_pos', 'label', 'required', 'placeholder', 'default', 'classes', 'input_limit_set'
+        'key', 'label', 'label_pos', 'required', 'placeholder', 'default', 'classes', 'input_limit_set'
     );
 
     public function __construct()
