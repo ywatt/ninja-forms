@@ -317,6 +317,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         unset( $groups[ "" ] );
 
+        usort($groups, "self::setting_group_priority");
+
         return $groups;
     }
 
@@ -370,5 +372,14 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         return $actions;
     }
+
+    protected static function setting_group_priority( $a, $b )
+    {
+        $priority[ 0 ] = ( $a[ 'priority' ] ) ? $a[ 'priority' ] : 500;
+        $priority[ 1 ] = ( $b[ 'priority' ] ) ? $b[ 'priority' ] : 500;
+
+        return $priority[ 0 ] - $priority[ 1 ];
+    }
+
 
 }
