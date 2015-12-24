@@ -676,19 +676,6 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'value'             => 'single',
     ),
 
-    'shipping_options'      => array(
-        'name'              => 'shipping_options',
-        'type'              => 'option-repeater',
-        'label'             => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
-        'width'             => 'full',
-        'group'             => 'advanced',
-        'value'             => 'option-repeater',
-        'columns'           => array( 'label', 'value' ),
-        'deps'              => array(
-            'shipping_type' => 'select',
-        ),
-    ),
-
     'product_assignment'      => array(
         'name'              => 'product_assignment',
         'type'              => 'select',
