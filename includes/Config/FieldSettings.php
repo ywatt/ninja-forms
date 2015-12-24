@@ -298,7 +298,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'label' => __( 'Wrapper', 'ninja-forms' ),
                 'width' => 'one-half',
                 'value' => '',
-                'use_merge_tags' => TRUE,
+                'use_merge_tags' => FALSE,
             ),
             array(
                 'name' => 'element_class',
@@ -307,7 +307,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'placeholder' => '',
                 'width' => 'one-half',
                 'value' => '',
-                'use_merge_tags' => TRUE,
+                'use_merge_tags' => FALSE,
             ),
         ),
     ),
