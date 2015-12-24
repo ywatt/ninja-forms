@@ -672,7 +672,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
         'label'             => __( 'Type', 'ninja-forms' ),
         'width'             => 'full',
-        'group'             => 'advanced',
+        'group'             => 'advanced_shipping',
         'value'             => 'single',
     ),
 
