@@ -21,13 +21,14 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
 
     public function __construct()
     {
-        add_filter( 'ninja-forms-field-settings-groups', array( $this, 'add_setting_group' ) );
         parent::__construct();
 
         $this->_settings['options']['group'] = 'advanced_shipping';
         $this->_settings['options']['columns'] = array( 'label', 'value' );
 
         $this->_nicename = __( 'Shipping', 'ninja-forms' );
+
+        add_filter( 'ninja-forms-field-settings-groups', array( $this, 'add_setting_group' ) );
     }
 
     public function add_setting_group( $groups )
