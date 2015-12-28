@@ -18,6 +18,8 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
         /** @global wpdb $wpdb */
         global $wpdb;
 
+        wp_enqueue_style( 'nf-admin-system-status', Ninja_Forms::$url . 'assets/css/admin-system-status.css' );
+
         //PHP locale
         $locale = localeconv();
 
