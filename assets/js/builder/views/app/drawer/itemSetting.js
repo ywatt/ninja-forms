@@ -5,6 +5,26 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 
 		initialize: function( data ) {
 			this.dataModel = data.dataModel;
+
+			var deps = this.model.get( 'deps' );
+			if ( deps ) {
+				for ( var name in deps ) {
+				    if ( deps.hasOwnProperty( name ) ) {
+				    	this.dataModel.on( 'change:' + name, this.render, this );
+				    }
+				}
+			}
+		},
+
+		onBeforeDestroy: function() {
+			var deps = this.model.get( 'deps' );
+			if ( deps ) {
+				for (var name in deps) {
+				    if ( deps.hasOwnProperty( name ) ) {
+				    	this.dataModel.off( 'change:' + name, this.render );
+				    }
+				}
+			}
 		},
 
 		onBeforeRender: function() {
@@ -12,6 +32,9 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 		},
 
 		onRender: function() {
+			if ( this.model.get( 'name' ) == 'shipping_cost' ) {
+				console.log( this.dataModel.get( 'shipping_type' ) );
+			}
 			this.mergeTagsContentView = false;
 			var that = this;
 
@@ -54,14 +77,61 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 		},
 
 		onShow: function() {
-			this.$el = this.$el.children();
-			this.$el.unwrap();
-			this.setElement( this.$el );
+			// this.$el = this.$el.children();
+			// this.$el.unwrap();
+			// this.setElement( this.$el );
+
+
+			/*
+			 * Apply Setting Field Masks
+			 */
+			var mask = this.model.get( 'mask' );
+
+			if( typeof mask != "undefined" ){
+
+				var input = jQuery( this.$el ).find( 'input' );
+
+				switch( mask.type ){
+					case 'numeric':
+						input.autoNumeric({
+							aSep: this.thousandsSeparator,
+							aDec: this.decimalPoint
+						});
+						break;
+					case 'currency':
+						input.autoNumeric({
+							aSign: '$', // TODO: Use form setting
+							aSep: this.thousandsSeparator,
+							aDec: this.decimalPoint
+						});
+						break;
+					case 'custom':
+						if( mask.format ) input.mask( mask.format )
+						break;
+					default:
+						// TODO: Error Logging.
+						console.log( 'Notice: Mask type of "' + mask.type + '" is not supported.' );
+				}
+			}
 		},
 
 		templateHelpers: function () {
 			var that = this;
 	    	return {
+
+	    		renderVisible: function() {
+					if ( this.deps ) {
+						for (var name in this.deps) {
+						    if ( this.deps.hasOwnProperty( name ) ) {
+						        if ( that.dataModel.get( name ) != this.deps[ name ] ) {
+						        	return 'style="display:none;"';
+						        }
+						    }
+						}
+					}
+	    			return '';
+	    		},
+
 	    		renderSetting: function(){
 	    			if ( 'undefined' != typeof that.dataModel.get( this.name ) ) {
 	    				this.value = that.dataModel.get( this.name );

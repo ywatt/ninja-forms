@@ -130,7 +130,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->menus[ 'forms' ]           = new NF_Admin_Menus_Forms();
 //                self::$instance->menus[ 'all-forms' ]       = new NF_Admin_Menus_AllForms();
 //                self::$instance->menus[ 'settings' ]        = new NF_Admin_Menus_Settings();
-//                self::$instance->menus[ 'add-ons' ]         = new NF_Admin_Menus_Addons();
+                self::$instance->menus[ 'add-ons' ]         = new NF_Admin_Menus_Addons();
 //                self::$instance->menus[ 'system_status']    = new NF_Admin_Menus_SystemStatus();
                 self::$instance->menus[ 'submissions']      = new NF_Admin_Menus_Submissions();
                 self::$instance->menus[ 'import-export']    = new NF_Admin_Menus_ImportExport();
@@ -199,10 +199,18 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 self::$instance->_logger = new NF_Database_Logger();
 
+                /*
+                 * Merge Tags
+                 */
                 self::$instance->merge_tags[ 'user' ] = new NF_MergeTags_User();
                 self::$instance->merge_tags[ 'post' ] = new NF_MergeTags_Post();
                 self::$instance->merge_tags[ 'system' ] = new NF_MergeTags_System();
                 self::$instance->merge_tags[ 'fields' ] = new NF_MergeTags_Fields();
+
+                /*
+                 * EOS Parser
+                 */
+                self::$instance->_eos[ 'parser' ] = require_once 'includes/Libraries/EOS/Parser.php';
 
                 /*
                  * Activation Hook
@@ -275,6 +283,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         public function logger()
         {
             return $this->_logger;
+        }
+
+        public function eos()
+        {
+            return new Parser();
         }
 
         /**
@@ -398,17 +411,20 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
     Ninja_Forms();
 }
 
-add_action( 'admin_notices', 'nf_alpha_release_admin_notice' );
+add_action( 'admin_notices', 'nf_alpha_release_admin_notice', -1 );
 function nf_alpha_release_admin_notice()
 {
     ?>
     <style>
+        .nf-alpha-notice {
+            border-left: 4px solid #EF4748; /* Ninja Forms Red */
+        }
         .nf-alpha-notice ul {
             list-style-type: disc;
             padding-left: 40px;
         }
     </style>
-    <div class="error nf-alpha-notice">
+    <div class="update-nag nf-alpha-notice">
         <h3>Ninja Forms 3.0 - ALPHA 5 - Davison</h3>
         <p><strong>NOTICE:</strong> Installed is an Alpha Release of Ninja Forms. This is not intended for production.</p>
         <p>Please keep a few things in mind while exploring:</p>

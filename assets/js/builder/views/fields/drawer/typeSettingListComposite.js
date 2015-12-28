@@ -8,6 +8,26 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 			this.collection = data.dataModel.get( 'options' );
 			this.dataModel = data.dataModel;
 			this.childViewOptions = { collection: this.collection, dataModel: data.dataModel, columns: this.model.get( 'columns' ) };
+
+			var deps = this.model.get( 'deps' );
+			if ( deps ) {
+				for ( var name in deps ) {
+				    if ( deps.hasOwnProperty( name ) ) {
+				    	this.dataModel.on( 'change:' + name, this.render, this );
+				    }
+				}
+			}
+		},
+
+		onBeforeDestroy: function() {
+			var deps = this.model.get( 'deps' );
+			if ( deps ) {
+				for (var name in deps) {
+				    if ( deps.hasOwnProperty( name ) ) {
+				    	this.dataModel.off( 'change:' + name, this.render );
+				    }
+				}
+			}
 		},
 
 		onRender: function() {
@@ -43,6 +63,7 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 		},
 
 		templateHelpers: function () {
+			var that = this;
 	    	return {
 	    		renderHeaders: function() {
 	    			var columns = '<div>&nbsp;</div>';
@@ -72,7 +93,20 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 					} else {
 						return 'one-half';
 					}
-				}
+				},
+
+				renderVisible: function() {
+					if ( this.deps ) {
+						for (var name in this.deps) {
+						    if ( this.deps.hasOwnProperty( name ) ) {
+						        if ( that.dataModel.get( name ) !== this.deps[ name ] ) {
+						        	return 'style="display:none;"';
+						        }
+						    }
+						}
+					}
+	    			return '';
+	    		},
 			};
 		},
 

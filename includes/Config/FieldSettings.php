@@ -298,7 +298,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'label' => __( 'Wrapper', 'ninja-forms' ),
                 'width' => 'one-half',
                 'value' => '',
-                'use_merge_tags' => TRUE,
+                'use_merge_tags' => FALSE,
             ),
             array(
                 'name' => 'element_class',
@@ -307,7 +307,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
                 'placeholder' => '',
                 'width' => 'one-half',
                 'value' => '',
-                'use_merge_tags' => TRUE,
+                'use_merge_tags' => FALSE,
             ),
         ),
     ),
@@ -352,7 +352,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'type' => 'textbox',
         'label' => __( 'Field Key', 'ninja-forms'),
         'width' => 'full',
-        'group' => 'advanced',
+        'group' => 'administration',
         'value' => '',
         'help' => __( 'Programmatic name that can be used to reference this field.', 'ninja-forms' ),
     ),
@@ -607,7 +607,10 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => '0.00',
-        
+        'mask' => array(
+            'type' => 'currency', // 'numeric', 'currency', 'custom'
+            'options' => array()
+        )
     ),
 
     'product_use_quantity' => array(
@@ -663,7 +666,13 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'width'             => 'full',
         'group'             => 'primary',
         'value'             => '0.00',
-        
+        'mask' => array(
+            'type' => 'currency', // 'numeric', 'currency', 'custom'
+            'options' => array()
+        ),
+        'deps'              => array(
+            'shipping_type' => 'single',
+        ),
     ),
 
     'shipping_type'         => array(
@@ -681,21 +690,8 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
         'label'             => __( 'Type', 'ninja-forms' ),
         'width'             => 'full',
-        'group'             => 'advanced',
+        'group'             => 'advanced_shipping',
         'value'             => 'single',
-    ),
-
-    'shipping_options'      => array(
-        'name'              => 'shipping_options',
-        'type'              => 'option-repeater',
-        'label'             => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
-        'width'             => 'full',
-        'group'             => 'advanced',
-        'value'             => 'option-repeater',
-        'columns'           => array( 'label', 'value' ),
-        'deps'              => array(
-            'shipping_type' => 'select',
-        ),
     ),
 
     'product_assignment'      => array(

@@ -1,11 +1,12 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return array(
+return apply_filters( 'ninja-forms-field-settings-groups', array(
 
     'primary' => array(
         'id' => 'primary',
         'label' => '',
-        'display' => TRUE
+        'display' => TRUE,
+        'priority' => 100
     ),
 
     'rte' => array(
@@ -20,12 +21,14 @@ return array(
 
     'advanced' => array(
         'id' => 'advanced',
-        'label' => __( 'Advanced', 'ninja-forms' )
+        'label' => __( 'Advanced', 'ninja-forms' ),
+        'priority' => 800
     ),
 
     'administration' => array(
         'id' => 'administration',
-        'label' => __( 'Administration', 'ninja-forms' )
+        'label' => __( 'Administration', 'ninja-forms' ),
+        'priority' => 900
     )
 
-);
+));

@@ -26,13 +26,28 @@ abstract class NF_Abstracts_Field
     protected $_aliases = array();
 
     /**
-    * @var array
-    */
+     * @var array
+     */
     protected $_settings = array();
 
     /**
-    * @var string
-    */
+     * @var array
+     */
+    protected $_settings_all_fields = array();
+
+    /**
+     * @var array
+     */
+    protected $_settings_exclude = array();
+
+    /**
+     * @var array
+     */
+    protected $_settings_only = array();
+
+    /**
+     * @var string
+     */
     protected $_test_value = 'test';
 
     /**
@@ -77,6 +92,16 @@ abstract class NF_Abstracts_Field
         // Translate the nicename property.
         $this->_nicename = __( $this->_nicename, 'ninja-forms' );
 
+        if( ! empty( $this->_settings_only ) ){
+
+            $this->_settings = $this->_settings_only;
+        } else {
+
+            $this->_settings = array_merge( $this->_settings_all_fields, $this->_settings );
+            $this->_settings = array_diff( $this->_settings, $this->_settings_exclude );
+        }
+
+        $this->_settings = $this->load_settings( $this->_settings );
     }
 
     /**
@@ -150,7 +175,8 @@ abstract class NF_Abstracts_Field
 
     public function get_settings()
     {
-        return $this->_settings;
+        $settings = $this->load_settings( array( 'key' ) );
+        return array_merge( $this->_settings, $settings );
     }
 
     public function get_test_value()
@@ -191,16 +217,16 @@ abstract class NF_Abstracts_Field
 
     protected function load_settings( $only_settings = array() )
     {
+        $settings = array();
+
         // Loads a settings array from the FieldSettings configuration file.
-        $settings = Ninja_Forms::config( 'FieldSettings' );
+        $all_settings = Ninja_Forms::config( 'FieldSettings' );
 
-        if( ! empty( $only_settings ) ){
+        foreach( $only_settings as $setting ){
 
-            foreach( $settings as $key => $setting ){
+            if( isset( $all_settings[ $setting ]) ){
 
-                if( ! in_array( $key, $only_settings) ){
-                    unset( $settings[ $key ] );
-                }
+                $settings[ $setting ] = $all_settings[ $setting ];
             }
         }
 

@@ -425,14 +425,14 @@ final class NF_Database_MockData
             ->save();
     }
 
-    public function form_long_form( $num_fields = 100 )
+    public function form_long_form( $num_fields = 500 )
     {
         /*
         * FORM
         */
 
         $form = Ninja_Forms()->form()->get();
-        $form->update_setting( 'title', 'The Long Form' );
+        $form->update_setting( 'title', 'Long Form - ' . $num_fields . ' Fields' );
         $form->save();
 
         $form_id = $form->get_id();
@@ -447,6 +447,7 @@ final class NF_Database_MockData
                 ->update_setting('label', 'Field #' . $i)
                 ->update_setting('label_pos', 'above')
                 ->update_setting('required', 0)
+                ->update_setting('order', $i)
                 ->save();
         }
     }
@@ -703,6 +704,41 @@ final class NF_Database_MockData
         $action->update_setting( 'label',  'Success Message' )
             ->update_setting( 'type', 'successmessage' )
             ->update_setting( 'message', '<div style="border: 2px solid green; padding: 10px; color: green;">You purchased {field:' . $quantity_field_A_id . '} of Product A and {field:' . $quantity_field_B_id . '} of Product B for ${field:total}.</div>' )
+            ->save();
+    }
+
+    public function form_calc_form()
+    {
+        /*
+         * FORM
+         */
+
+        $form = Ninja_Forms()->form()->get();
+        $form->update_setting( 'title', 'Form with Calculations' );
+        $form->update_setting( 'calculations', array(
+            array(
+                'name' => 'My First Calculation',
+                'calc' => '2 * 3'
+            ),
+            array(
+                'name' => 'My Second Calculation',
+                'calc' => '4 + 1'
+            )
+        ));
+        $form->save();
+
+        $form_id = $form->get_id();
+
+        $field = Ninja_Forms()->form( $form_id )->field()->get();
+        $field->update_setting( 'type', 'submit' )
+            ->update_setting( 'label', 'Purchase')
+            ->update_setting( 'order', 1000 )
+            ->save();
+
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'label',  'Success Message' )
+            ->update_setting( 'type', 'successmessage' )
+            ->update_setting( 'message', 'Calculations are returned with the AJAX response ( response -> data -> calcs' )
             ->save();
     }
 

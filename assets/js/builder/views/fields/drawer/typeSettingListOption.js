@@ -15,7 +15,10 @@ define( [], function() {
 		},
 
 		onShow: function() {
-			jQuery( this.el ).find( 'input:first' ).focus();
+			if ( this.model.get( 'new' ) ) {
+				jQuery( this.el ).find( 'input:first' ).focus();
+				this.model.set( 'new', false );
+			}
 		},
 
 		events: {
