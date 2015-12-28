@@ -71,9 +71,9 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
         //TODO: May need refactored
         $default_timezone = date_default_timezone_get();
         if ( 'UTC' !== $default_timezone ) {
-            echo sprintf( __( 'Default timezone is %s - it should be UTC', 'ninja-forms' ), $default_timezone );
+            $default_timezone = sprintf( __( 'Default timezone is %s - it should be UTC', 'ninja-forms' ), $default_timezone );
         } else {
-            echo sprintf( __( 'Default timezone is %s', 'ninja-forms' ), $default_timezone );
+            $default_timezone =  sprintf( __( 'Default timezone is %s', 'ninja-forms' ), $default_timezone );
         }
 
         //Check for active plugins
