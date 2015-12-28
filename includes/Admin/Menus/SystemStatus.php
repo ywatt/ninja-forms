@@ -18,6 +18,8 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
         /** @global wpdb $wpdb */
         global $wpdb;
 
+        wp_enqueue_style( 'nf-admin-system-status', Ninja_Forms::$url . 'assets/css/admin-system-status.css' );
+        wp_enqueue_script( 'nf-admin-system-status-script', Ninja_Forms::$url . 'assets/js/admin-system-status.js', array( 'jquery' ) );
         //PHP locale
         $locale = localeconv();
 
@@ -69,9 +71,9 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
         //TODO: May need refactored
         $default_timezone = date_default_timezone_get();
         if ( 'UTC' !== $default_timezone ) {
-            echo sprintf( __( 'Default timezone is %s - it should be UTC', 'ninja-forms' ), $default_timezone );
+            $default_timezone = sprintf( __( 'Default timezone is %s - it should be UTC', 'ninja-forms' ), $default_timezone );
         } else {
-            echo sprintf( __( 'Default timezone is %s', 'ninja-forms' ), $default_timezone );
+            $default_timezone =  sprintf( __( 'Default timezone is %s', 'ninja-forms' ), $default_timezone );
         }
 
         //Check for active plugins
