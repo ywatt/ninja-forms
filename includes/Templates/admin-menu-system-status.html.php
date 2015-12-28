@@ -1,17 +1,17 @@
-<!--<div class="wrap">-->
-<!--    <div class="nf-box">-->
-<!--        <div>-->
-<!--    		<h4>--><?php //_e( 'Please include this information when requesting support:', 'ninja-forms' ); ?><!-- </h4>-->
-<!--    		<p class="submit debug-report">-->
-<!--                <a href="#" class="button-primary">--><?php //_e( 'Get System Report', 'ninja-forms' ); ?><!--</a>-->
-<!--            </p>-->
-<!--    	</div>-->
-<!--    	<div id="debug-report">-->
-<!--            <textarea readonly="readonly"></textarea>-->
-<!--        </div>-->
-<!--    </div>-->
-<!---->
-<!--</div>-->
+<div class="wrap">
+    <div class="nf-box">
+        <div>
+    		<h4><?php _e( 'Please include this information when requesting support:', 'ninja-forms' ); ?> </h4>
+    		<p class="submit debug-report">
+                <a href="#" class="button-primary"><?php _e( 'Get System Report', 'ninja-forms' ); ?></a>
+            </p>
+    	</div>
+    	<div id="debug-report">
+            <textarea readonly="readonly"></textarea>
+        </div>
+    </div>
+
+</div>
 <br/>
 <table class="nf-status-table" cellspacing="0">
 	<thead>
