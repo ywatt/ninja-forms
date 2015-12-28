@@ -86,6 +86,8 @@ define([], function() {
 	                        // Handle errors here
 	                        console.log('ERRORS: ' + textStatus);
 	                        // STOP LOADING SPINNER
+
+							nfRadio.channel( 'submit' ).trigger( 'submit:response', 'error', textStatus, jqXHR, errorThrown );
 	                    }
 	                });
 				}

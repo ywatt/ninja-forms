@@ -581,6 +581,21 @@ return apply_filters( 'ninja-forms-field-settings', array(
 
     /*
     |--------------------------------------------------------------------------
+    | Submit Button Settings
+    |--------------------------------------------------------------------------
+    */
+
+    'processing_label' => array(
+        'name' => 'processing_label',
+        'type' => 'textbox',
+        'label' => __( 'Processing Label', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'primary',
+        'value' => __( 'Processing', 'ninja-forms' )
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
     | Pricing Fields Settings
     |--------------------------------------------------------------------------
     */
