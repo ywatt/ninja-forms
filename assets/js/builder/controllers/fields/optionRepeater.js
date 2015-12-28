@@ -1,12 +1,12 @@
 /**
- * Handles list field stuff.
+ * Handles tasks associated with our option-repeater.
  * 
- * When we instantiate a new field with the list type as a parent, we need to instantiate a new listOptionCollection for the 'options' attribute
+ * Return our repeater child view.
  *
  * Also listens for changes to the options settings.
  * 
  * @package Ninja Forms builder
- * @subpackage Fields
+ * @subpackage App
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
@@ -15,9 +15,6 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 		initialize: function() {
 			// Respond to requests for the childView for list type fields.
 			nfRadio.channel( 'option-repeater' ).reply( 'get:settingChildView', this.getSettingChildView, this );
-						
-			// When a list type field is initialized, create an option collection.
-			this.listenTo( nfRadio.channel( 'fields' ), 'init:fieldModel', this.createOptionCollection );
 			
 			// Listen for changes to our list options.
 			this.listenTo( nfRadio.channel( 'option-repeater' ), 'change:option', this.changeOption );
@@ -31,35 +28,15 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 		},
 
 		/**
-		 * Instantiate an option collection when a list field type is initialized.
-		 * 
-		 * @since  3.0
-		 * @param  backbone.model 	model 	field model being initialized
-		 * @return void
-		 */
-		createOptionCollection: function( model ) {
-			var options = model.get( 'options' );
-			if ( 'option-repeater' == options ) {
-				model.set( 'options', [ { calc: 1, label: 'One', value: 'one', order: 0, selected: 0 }, { calc: 2, label: 'Two', value: 'two', order: 1, selected: 0 }, { calc: 3, label: 'Three', value: 'three', order: 2, selected: 0 } ], { silent: true } );
-			}
-
-			if ( false == options instanceof Backbone.Collection ) {
-				var optionCollection = new listOptionCollection();
-				optionCollection.add( model.get( 'options' ) );
-				model.set( 'options', optionCollection, { silent: true } );
-			}
-		},
-
-		/**
 		 * Update an option value in our model.
 		 * 
 		 * @since  3.0
 		 * @param  Object			e          event
 		 * @param  backbone.model 	model      option model
-		 * @param  backbone.model 	fieldModel field model
+		 * @param  backbone.model 	dataModel
 		 * @return void
 		 */
-		changeOption: function( e, model, fieldModel ) {
+		changeOption: function( e, model, dataModel ) {
 			var name = jQuery( e.target ).data( 'id' );
 			if ( 'selected' == name ) {
 				if ( jQuery( e.target ).attr( 'checked' ) ) {
@@ -74,8 +51,8 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 			var before = model.get( name );
 
 			model.set( name, value );
-			// Triger an update on our fieldModel
-			this.triggerFieldModel( model, fieldModel );
+			// Triger an update on our dataModel
+			this.triggerDataModel( model, dataModel );
 
 			var after = value;
 			
@@ -86,8 +63,8 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 			}
 
 			var label = {
-				object: 'Field',
-				label: fieldModel.get( 'label' ),
+				object: dataModel.get( 'objectType' ),
+				label: dataModel.get( 'label' ),
 				change: 'Option ' + model.get( 'label' ) + ' ' + name + ' changed from ' + before + ' to ' + after
 			};
 
@@ -99,24 +76,24 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 		 * 
 		 * @since 3.0
 		 * @param backbone.collection 	collection 	list option collection
-		 * @param backbone.model 		fieldModel 	field model
+		 * @param backbone.model 		dataModel
 		 * @return void
 		 */
-		addOption: function( collection, fieldModel ) {
+		addOption: function( collection, dataModel ) {
 			var model = new listOptionModel( { label: '', value: '', calc: '', selected: 0, order: collection.length, new: true } );
 			collection.add( model );
 
 			// Add our field addition to our change log.
 			var label = {
-				object: 'Field',
-				label: fieldModel.get( 'label' ),
+				object: dataModel.get( 'objectType' ),
+				label: dataModel.get( 'label' ),
 				change: 'Option Added',
 				dashicon: 'plus-alt'
 			};
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'addListOption', model, null, label );
 			
-			this.triggerFieldModel( model, fieldModel );
+			this.triggerDataModel( model, dataModel );
 		},
 
 		/**
@@ -125,16 +102,16 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 		 * @since  3.0
 		 * @param backbone.model 		model       list option model
 		 * @param backbone.collection 	collection 	list option collection
-		 * @param backbone.model 		fieldModel 	field model
+		 * @param backbone.model 		dataModel
 		 * @return void
 		 */
-		deleteOption: function( model, collection, fieldModel ) {
+		deleteOption: function( model, collection, dataModel ) {
 			var newModel = nfRadio.channel( 'app' ).request( 'clone:modelDeep', model );
 
 			// Add our field deletion to our change log.
 			var label = {
-				object: 'Field',
-				label: fieldModel.get( 'label' ),
+				object: dataModel.get( 'objectType' ),
+				label: dataModel.get( 'label' ),
 				change: 'Option ' + newModel.get( 'label' ) + ' Removed',
 				dashicon: 'dismiss'
 			};
@@ -151,7 +128,7 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 			_.each( results, function( changeModel ) {
 				if ( 'object' == typeof changeModel.get( 'data' ) ) {
 					_.each( changeModel.get( 'data' ), function( dataModel ) {
-						if ( dataModel.model == fieldModel ) {
+						if ( dataModel.model == dataModel ) {
 							dataModel.model = newModel;
 						}
 					} );
@@ -161,19 +138,19 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 			} );
 
 			collection.remove( model );
-			this.triggerFieldModel( model, fieldModel );
+			this.triggerDataModel( model, dataModel );
 		},
 
 		/**
 		 * Creates an arbitrary value on our collection, then clones and updates that collection.
-		 * This forces a change event to be fired on the fieldModel where the list option collection data is stored.
+		 * This forces a change event to be fired on the dataModel where the list option collection data is stored.
 		 * 
 		 * @since  3.0
 		 * @param backbone.collection 	collection 	list option collection
-		 * @param backbone.model 		fieldModel 	field model
+		 * @param backbone.model 		dataModel
 		 * @return void
 		 */
-		triggerFieldModel: function( model, fieldModel ) {
+		triggerDataModel: function( model, dataModel ) {
 			nfRadio.channel( 'app' ).trigger( 'update:setting', model );	
 		},
 
@@ -220,15 +197,15 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 			setting.collection.sort();
 
 			var label = {
-				object: 'Field',
-				label: setting.fieldModel.get( 'label' ),
+				object: setting.dataModel.get( 'objectType' ),
+				label: setting.dataModel.get( 'label' ),
 				change: 'Option ' + dragModel.get( 'label' ) + ' re-ordered from ' + dragModel._previousAttributes.order + ' to ' + dragModel.get( 'order' ),
 				dashicon: 'sort'
 			};
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'sortListOptions', dragModel, null, label, data );
 
-			this.triggerFieldModel( dragModel, setting.fieldModel );
+			this.triggerDataModel( dragModel, setting.dataModel );
 		},
 
 		/**

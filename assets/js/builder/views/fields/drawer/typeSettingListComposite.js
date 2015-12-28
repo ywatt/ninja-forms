@@ -1,13 +1,26 @@
-define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeSettingListEmpty'], function( listOptionView, listEmptyView ) {
+define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeSettingListEmpty', 'models/fields/listOptionCollection'], function( listOptionView, listEmptyView, listOptionCollection ) {
 	var view = Marionette.CompositeView.extend( {
 		template: '#nf-tmpl-edit-setting-wrap',
 		childView: listOptionView,
 		emptyView: listEmptyView,
 
 		initialize: function( data ) {
-			this.collection = data.dataModel.get( 'options' );
+
+			/*
+			 * Our options are stored in our database as objects, not collections.
+			 * Before we attempt to render them, we need to convert them to a collection if they aren't already one.
+			 */ 
+			var optionCollection = data.dataModel.get( this.model.get( 'name' ) );
+
+			if ( false == optionCollection instanceof Backbone.Collection ) {
+				optionCollection = new listOptionCollection();
+				optionCollection.add( data.dataModel.get( this.model.get( 'name' ) ) );
+				data.dataModel.set( this.model.get( 'name' ), optionCollection, { silent: true } );
+			}
+
+			this.collection = optionCollection;
 			this.dataModel = data.dataModel;
-			this.childViewOptions = { collection: this.collection, dataModel: data.dataModel, columns: this.model.get( 'columns' ) };
+			this.childViewOptions = { settingModel: this.model, collection: this.collection, dataModel: data.dataModel, columns: this.model.get( 'columns' ) };
 
 			var deps = this.model.get( 'deps' );
 			if ( deps ) {
@@ -60,6 +73,11 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 					nfRadio.channel( 'option-repeater' ).request( 'update:optionSortable', ui, this, that );
 				}
 			} );
+
+			/*
+			 * Send out a radio message.
+			 */
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
 		},
 
 		templateHelpers: function () {

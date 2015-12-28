@@ -154,7 +154,12 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'label' => __( 'Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
         'width' => 'full',
         'group' => 'primary',
-        'value' => 'option-repeater',
+        // 'value' => 'option-repeater',
+        'value' => array(
+            array( 'label' => 'One', 'value' => 'one', 'calc' => '', 'selected' => 0, 'order' => 0 ),
+            array( 'label' => 'Two', 'value' => 'two', 'calc' => '', 'selected' => 0, 'order' => 1 ),
+            array( 'label' => 'Three', 'value' => 'three', 'calc' => '', 'selected' => 0, 'order' => 2 ),
+        ),
         'columns' => array( 'label', 'value', 'calc', 'selected' ),
         
     ),
@@ -675,22 +680,39 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
     ),
 
+    'shipping_options' => array(
+        'name' => 'shipping_options',
+        'type' => 'option-repeater',
+        'label' => __( 'Cost Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
+        'width' => 'full',
+        'group' => 'primary',
+        'value' => array(
+            array( 'label' => 'One', 'value' => '1.00', 'order' => 0 ),
+            array( 'label' => 'Two', 'value' => '2.00', 'order' => 1 ),
+            array( 'label' => 'Three', 'value' => '3.00', 'order' => 2 ),
+        ),
+        'columns' => array( 'label', 'value' ),
+        'deps'              => array(
+            'shipping_type' => 'select'
+        ),
+    ),
+
     'shipping_type'         => array(
         'name'              => 'shipping_type',
         'type'              => 'select',
         'options'           => array(
             array( 
-                'label'     => __( 'Single', 'ninja-forms' ),
+                'label'     => __( 'Single Cost', 'ninja-forms' ),
                 'value'     => 'single',
             ),
             array( 
-                'label'     => __( 'Dropdown', 'ninja-forms' ),
+                'label'     => __( 'Cost Dropdown', 'ninja-forms' ),
                 'value'     => 'select',
             ),
         ),
-        'label'             => __( 'Type', 'ninja-forms' ),
+        'label'             => __( 'Cost Type', 'ninja-forms' ),
         'width'             => 'full',
-        'group'             => 'advanced_shipping',
+        'group'             => 'primary',
         'value'             => 'single',
     ),
 
