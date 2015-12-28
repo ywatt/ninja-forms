@@ -103,7 +103,7 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 		 * @return void
 		 */
 		addOption: function( collection, fieldModel ) {
-			var model = new listOptionModel( { label: '', value: '', calc: '', selected: 0, order: collection.length } );
+			var model = new listOptionModel( { label: '', value: '', calc: '', selected: 0, order: collection.length, new: true } );
 			collection.add( model );
 
 			// Add our field addition to our change log.

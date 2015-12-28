@@ -323,7 +323,7 @@
 <!-- Field Settings Templates -->
 
 <script id="nf-tmpl-edit-setting-wrap" type="text/template">
-    <div class="nf-<%= renderWidth() %>">
+    <div class="nf-<%= renderWidth() %>" <%= renderVisible() %>>
         <%= renderSetting() %> 
     </div>
 </script>
@@ -387,7 +387,7 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-option-repeater" type="text/template">
-    <fieldset class="nf-list-options">
+    <fieldset class="nf-list-options" <%= renderVisible() %>>
         <legend><%= label %></legend>
         <div class="nf-div-table">
             <div class="nf-table-row nf-table-header">

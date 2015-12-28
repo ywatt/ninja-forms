@@ -654,7 +654,10 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'mask' => array(
             'type' => 'currency', // 'numeric', 'currency', 'custom'
             'options' => array()
-        )
+        ),
+        'deps'              => array(
+            'shipping_type' => 'single',
+        ),
     ),
 
     'shipping_type'         => array(
