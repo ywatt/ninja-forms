@@ -23,7 +23,6 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
     {
         parent::__construct();
 
-        $this->_settings['options']['group'] = 'advanced_shipping';
         $this->_settings['options']['columns'] = array( 'label', 'value' );
         $this->_settings['options']['deps'] = array(
             'shipping_type' => 'select'
