@@ -49,6 +49,8 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         add_action( 'admin_footer-edit.php', array( $this, 'bulk_admin_footer' ) );
 
         add_action( 'load-edit.php', array( $this, 'export_listen' ) );
+
+        add_action('admin_head', array( $this, 'hide_page_title_action' ) );
     }
 
     /**
@@ -321,6 +323,16 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
             echo $myfile;
 
             die();
+        }
+    }
+
+    public function hide_page_title_action() {
+
+        if(
+            ( isset( $_GET[ 'post_type' ] ) && 'nf_sub' == $_GET[ 'post_type'] ) ||
+            'nf_sub' == get_post_type()
+        ){
+            echo '<style type="text/css">.page-title-action{display: none;}</style>';
         }
     }
 
