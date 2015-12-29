@@ -211,7 +211,7 @@ final class NF_Display_Render
 
             // Build Form Data
             var form = [];
-            form.id = <?php echo $form['id']; ?>;
+            form.id = '<?php echo $form['id']; ?>';
             form.settings = JSON.parse( '<?php echo WPN_Helper::addslashes( wp_json_encode( $form['settings'] ) ); ?>' );
 
             form.fields = JSON.parse( '<?php echo WPN_Helper::addslashes( wp_json_encode(  $fields ) ); ?>' );

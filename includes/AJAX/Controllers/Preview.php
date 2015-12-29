@@ -120,22 +120,31 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
 
         if( ! $form_data ){
 
-            $form = Ninja_Forms()->form( $form_id )->get();
-            $form_data[ 'id' ] = $form_id;
-            $form_data[ 'settings' ] = $form->get_settings();
+            if( is_string( $form_id ) ){
+                $form = Ninja_Forms()->form()->get();
+                $form_data['id'] = $form_id;
+                $form_data[ 'settings' ] = array();
+                $form_data[ 'fields' ] = array();
+                $form_data[ 'actions' ] = array();
+            } else {
+                $form = Ninja_Forms()->form($form_id)->get();
+                $form_data['id'] = $form_id;
 
-            $fields = Ninja_Forms()->form( $form_id )->get_fields();
-            foreach( $fields as $field ){
+                $form_data[ 'settings' ] = $form->get_settings();
 
-                $field_id = $field->get_id();
-                $form_data[ 'fields' ][ $field_id ][ 'settings' ] = $field->get_settings();
-            }
+                $fields = Ninja_Forms()->form( $form_id )->get_fields();
+                foreach( $fields as $field ){
 
-            $actions = Ninja_Forms()->form( $form_id )->get_actions();
-            foreach( $actions as $action ){
+                    $field_id = $field->get_id();
+                    $form_data[ 'fields' ][ $field_id ][ 'settings' ] = $field->get_settings();
+                }
 
-                $action_id = $action->get_id();
-                $form_data[ 'actions' ][ $action_id ][ 'settings' ] = $action->get_settings();
+                $actions = Ninja_Forms()->form( $form_id )->get_actions();
+                foreach( $actions as $action ){
+
+                    $action_id = $action->get_id();
+                    $form_data[ 'actions' ][ $action_id ][ 'settings' ] = $action->get_settings();
+                }
             }
         }
 
