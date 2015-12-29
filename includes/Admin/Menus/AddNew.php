@@ -1,14 +1,14 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-final class NF_Admin_Menus_AllForms extends NF_Abstracts_Submenu
+final class NF_Admin_Menus_AddNew extends NF_Abstracts_Submenu
 {
     public $parent_slug = 'ninja-forms';
 
-    public $page_title = 'All Forms';
+    public $page_title = 'Add New';
 
-    public $menu_slug = 'admin.php?page=ninja-forms';
+    public $menu_slug = 'admin.php?page=ninja-forms&form_id=new';
 
-    public $priority = 1;
+    public $priority = 2;
 
     public function __construct()
     {

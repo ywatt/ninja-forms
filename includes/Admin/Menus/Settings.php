@@ -4,7 +4,9 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 {
     public $parent_slug = 'ninja-forms';
 
-    public $page_title = 'Form Settings';
+    public $page_title = 'Settings';
+
+    public $priority = 11;
 
     public function __construct()
     {
@@ -13,7 +15,9 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
     public function display()
     {
-        Ninja_Forms::template( 'admin-menu-settings.html.php' );
+        $settings[ 'general' ] = Ninja_Forms()->config( 'PluginSettingsGeneral' );
+
+        Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'settings' ) );
     }
 
 } // End Class NF_Admin_Settings
