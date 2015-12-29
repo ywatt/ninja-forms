@@ -19,15 +19,17 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 
         $form_data = json_decode( stripslashes( $_POST['form'] ), ARRAY_A );
 
-        $form = Ninja_Forms()->form( $form_data[ 'id' ] )->get();
+        if( is_string( $form_data[ 'id' ] ) ) {
+            $tmp_id = $form_data[ 'id' ];
+            $form = Ninja_Forms()->form()->get();
+            $form->save();
+            $form_data[ 'id' ] = $form->get_id();
+            $this->_data[ 'new_ids' ][ 'forms' ][ $tmp_id ] = $form_data[ 'id' ];
+        } else {
+            $form = Ninja_Forms()->form($form_data['id'])->get();
+        }
 
         $form->update_settings( $form_data[ 'settings' ] )->save();
-
-        if( $form->get_tmp_id() ){
-
-            $tmp_id = $form->get_tmp_id();
-            $this->_data[ 'new_ids' ][ 'forms' ][ $tmp_id ] = $form->get_id();
-        }
 
         if( isset( $form_data[ 'fields' ] ) ) {
             foreach ($form_data['fields'] as $field_data) {
