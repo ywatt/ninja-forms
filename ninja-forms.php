@@ -218,6 +218,9 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  * TODO: Move to a permanent home.
                  */
                 register_activation_hook( __FILE__, array( self::$instance, 'activation' ) );
+
+                //TODO: Remove before deploy.
+                include_once 'example-payment-gateway.php';
             }
 
             return self::$instance;
