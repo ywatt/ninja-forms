@@ -23,38 +23,21 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     public function display()
     {
         if( isset( $_GET[ 'form_id' ] ) ){
-            global $wp_locale;
 
-            $form_id = ( is_numeric( $_GET[ 'form_id' ] ) ) ? absint( $_GET[ 'form_id' ] ) : '';
+
+            if( 'new' == $_GET[ 'form_id' ] ){
+                $form_id = 'tmp-' . time();
+            } else {
+                $form_id = (is_numeric($_GET['form_id'])) ? absint($_GET['form_id']) : '';
+            }
 
             /*
              * FORM BUILDER
              */
 
             Ninja_Forms::template( 'admin-menu-new-form.html.php' );
-            wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
-            wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
 
-            wp_enqueue_script( 'jquery-autoNumeric', Ninja_Forms::$url . 'assets/js/lib/jquery.autoNumeric.min.js', array( 'jquery', 'backbone' ) );
-            wp_enqueue_script( 'jquery-maskedinput', Ninja_Forms::$url . 'assets/js/lib/jquery.maskedinput.min.js', array( 'jquery', 'backbone' ) );
-
-            wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
-            wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
-            wp_enqueue_script( 'jquery-perfect-scrollbar', Ninja_Forms::$url . 'assets/js/lib/perfect-scrollbar.jquery.min.js', array( 'jquery' ) );
-            wp_enqueue_script( 'jquery-hotkeys-new', Ninja_Forms::$url . 'assets/js/lib/jquery.hotkeys.js' );
-            // wp_enqueue_script( 'jquery-qtip2', Ninja_Forms::$url . 'assets/js/lib/jquery.qtip.js' );
-            wp_enqueue_script( 'jBox', Ninja_Forms::$url . 'assets/js/lib/jBox.min.js' );
-            wp_enqueue_script( 'jquery-caret', Ninja_Forms::$url . 'assets/js/lib/jquery.caret.js' );
-
-            // wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
-            wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/min/builder.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );
-
-            wp_localize_script( 'nf-builder', 'nfAdmin', array(
-                'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ),
-                'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
-                'previewurl' => site_url() . '/?nf_preview_form=' . $form_id,
-                'wp_locale' => $wp_locale->number_format
-            ));
+            $this->_enqueue_the_things( $form_id );
 
             delete_user_option( get_current_user_id(), 'nf_form_preview_' . $form_id );
 
@@ -95,11 +78,46 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         add_submenu_page( 'ninja-forms', '', '', 'read', '', '' );
     }
 
+    private function _enqueue_the_things( $form_id )
+    {
+        global $wp_locale;
+
+        wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
+        wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
+
+        wp_enqueue_script( 'jquery-autoNumeric', Ninja_Forms::$url . 'assets/js/lib/jquery.autoNumeric.min.js', array( 'jquery', 'backbone' ) );
+        wp_enqueue_script( 'jquery-maskedinput', Ninja_Forms::$url . 'assets/js/lib/jquery.maskedinput.min.js', array( 'jquery', 'backbone' ) );
+
+        wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
+        wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
+        wp_enqueue_script( 'jquery-perfect-scrollbar', Ninja_Forms::$url . 'assets/js/lib/perfect-scrollbar.jquery.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'jquery-hotkeys-new', Ninja_Forms::$url . 'assets/js/lib/jquery.hotkeys.js' );
+        // wp_enqueue_script( 'jquery-qtip2', Ninja_Forms::$url . 'assets/js/lib/jquery.qtip.js' );
+        wp_enqueue_script( 'jBox', Ninja_Forms::$url . 'assets/js/lib/jBox.min.js' );
+        wp_enqueue_script( 'jquery-caret', Ninja_Forms::$url . 'assets/js/lib/jquery.caret.js' );
+
+        // wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
+        wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/min/builder.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );
+
+        wp_localize_script( 'nf-builder', 'nfAdmin', array(
+            'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ),
+            'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
+            'previewurl' => site_url() . '/?nf_preview_form=' . $form_id,
+            'wp_locale' => $wp_locale->number_format
+        ));
+    }
+
     private function _localize_form_data( $form_id )
     {
         $form = Ninja_Forms()->form( $form_id )->get();
-        $fields = ( $form_id ) ? Ninja_Forms()->form( $form_id )->get_fields() : array();
-        $actions = ( $form_id ) ? Ninja_Forms()->form( $form_id )->get_actions() : array();
+
+        if( ! $form->get_tmp_id() ) {
+            $fields = ($form_id) ? Ninja_Forms()->form($form_id)->get_fields() : array();
+            $actions = ($form_id) ? Ninja_Forms()->form($form_id)->get_actions() : array();
+        } else {
+            $fields = array();
+            $actions = array();
+        }
 
         $fields_settings = array();
 
@@ -126,6 +144,11 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
                 $actions_settings[] = $settings;
             }
+        }
+
+        if( $form->get_tmp_id() ){
+
+            $actions_settings = Ninja_Forms()->config( 'FormActionDefaults' );
         }
 
         $form_data = array();
