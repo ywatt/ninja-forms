@@ -7,9 +7,11 @@
     <?php endforeach; ?>
 </select>
 
+<?php if( isset( $_GET[ 'form_id' ] ) ): ?>
 <input type="text" name="begin_date" class="datepicker" placeholder="<?php echo __( 'Being Date', 'ninja-forms' ); ?>" value="<?php echo $begin_date; ?>">
 
 <input type="text" name="end_date" class="datepicker" placeholder="<?php echo __( 'End Date', 'ninja-forms' ); ?>" value="<?php echo $end_date; ?>">
+<?php endif; ?>
 
 <script>
     jQuery( document).ready( function($) {
