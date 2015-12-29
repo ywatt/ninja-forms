@@ -41,6 +41,7 @@ final class NF_Database_MockData
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'required', 1 )
             ->update_setting( 'order', 1 )
+            ->update_setting( 'key', 'name' )
             ->save();
 
         $name_field_id = $field->get_id();
@@ -51,6 +52,7 @@ final class NF_Database_MockData
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'required', 1 )
             ->update_setting( 'order', 2 )
+            ->update_setting( 'key', 'email' )
             ->save();
 
         $email_field_id = $field->get_id();
@@ -70,6 +72,7 @@ final class NF_Database_MockData
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'required', 1 )
             ->update_setting( 'order', 3 )
+            ->update_setting( 'key', 'message' )
             ->save();
 
         // $field = Ninja_Forms()->form( $form_id )->field()->get();
@@ -111,6 +114,7 @@ final class NF_Database_MockData
             ->update_setting( 'label', "James' List")
             ->update_setting( 'options', $options)
             ->update_setting( 'order', 4 )
+            ->update_setting( 'key', 'james_list' )
             ->save();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
@@ -206,6 +210,7 @@ final class NF_Database_MockData
                 'label'			=> 'Name',
                 'label_pos' 	=> 'above',
                 'order'         => 1,
+                'key'           => 'name',
             ),
             array(
                 'id'			=> 12,
@@ -213,6 +218,7 @@ final class NF_Database_MockData
                 'label'			=> 'Email',
                 'label_pos'		=> 'above',
                 'order'         => 2,
+                'key'           => 'email',
             ),
             array(
                 'id'			=> 5,
@@ -220,6 +226,7 @@ final class NF_Database_MockData
                 'label'			=> 'What Can We Help You With?',
                 'label_pos'		=> 'above',
                 'order'         => 3,
+                'key'           => 'message',
             ),
             array(
                 'id'			=> 6,
@@ -227,6 +234,7 @@ final class NF_Database_MockData
                 'label'			=> 'Agree?',
                 'label_pos'		=> 'right',
                 'order'         => 4,
+                'key'           => 'agree',
             ),
             array(
                 'id'			=> 9,
@@ -259,6 +267,7 @@ final class NF_Database_MockData
                 'show_other'	=> 1,
                 'required'      => 1,
                 'order'         => 5,
+                'key'           => 'contact_method',
             ),
             array(
                 'id'			=> 7,
@@ -305,23 +314,28 @@ final class NF_Database_MockData
             array(
                 'type' 			=> 'textbox',
                 'label'			=> 'Textbox',
+                'key'           => 'textbox',
             ),
             array(
                 'type' 			=> 'firstname',
                 'label'			=> 'First Name',
+                'key'           => 'first_name',
             ),
             array(
                 'type' 			=> 'lastname',
                 'label'			=> 'Last Name',
+                'key'           => 'last_name',
             ),
             array(
                 'type' 			=> 'hidden',
                 'label'			=> 'Hidden',
                 'label_pos' 	=> 'hidden',
+                'key'           => 'hidden',
             ),
             array(
                 'type' 			=> 'textarea',
                 'label'			=> 'Textarea',
+                'key'           => 'textarea',
             ),
             array(
                 'type' 			=> 'listselect',
@@ -348,7 +362,8 @@ final class NF_Database_MockData
                         'order' => 3,
                         'selected' => 0,
                     )
-                )
+                ),
+                'key'           => 'select_list',
             ),
             array(
                 'type' 			=> 'listradio',
@@ -375,11 +390,13 @@ final class NF_Database_MockData
                         'order' => 3,
                         'selected' => 0,
                     )
-                )
+                ),
+                'key'           => 'radio_list',
             ),
             array(
                 'type' 			=> 'checkbox',
                 'label'			=> 'Checkbox',
+                'key'           => 'checkbox',
             ),
             // array(
             //     'type' 			=> 'button',
@@ -443,11 +460,12 @@ final class NF_Database_MockData
 
         for( $i = 1; $i <= $num_fields; $i++ ) {
             $field = Ninja_Forms()->form($form_id)->field()->get();
-            $field->update_setting('type', 'textbox')
-                ->update_setting('label', 'Field #' . $i)
-                ->update_setting('label_pos', 'above')
-                ->update_setting('required', 0)
-                ->update_setting('order', $i)
+            $field->update_setting( 'type', 'textbox' )
+                ->update_setting( 'label', 'Field #' . $i )
+                ->update_setting( 'label_pos', 'above' )
+                ->update_setting( 'required', 0 )
+                ->update_setting( 'order', $i )
+                ->update_setting( 'key', 'field_' . $i )
                 ->save();
         }
     }
@@ -476,6 +494,7 @@ final class NF_Database_MockData
             ->update_setting( 'order', 1 )
             ->update_setting( 'placeholder', 'Enter your email address' )
             ->update_setting( 'wrapper_class', 'three-fourths first' )
+            ->update_setting( 'key', 'email' )
             ->save();
 
         $email_field_id = $field->get_id();
@@ -507,6 +526,7 @@ final class NF_Database_MockData
             ->update_setting( 'product_price', 10.10 )
             ->update_setting( 'product_use_quantity', 0 )
             ->update_setting( 'order', 1 )
+            ->update_setting( 'key', 'product' )
             ->save();
 
         $product_field_id = $field->get_id();
@@ -521,6 +541,7 @@ final class NF_Database_MockData
             ->update_setting( 'num_max', NULL )
             ->update_setting( 'num_step', 1 )
             ->update_setting( 'order', 2 )
+            ->update_setting( 'key', 'quantity' )
             ->save();
 
         $quantity_field_id = $field->get_id();
@@ -531,6 +552,7 @@ final class NF_Database_MockData
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'shipping_cost', 2.00 )
             ->update_setting( 'order', 4 )
+            ->update_setting( 'key', 'shipping' )
             ->save();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
@@ -539,6 +561,7 @@ final class NF_Database_MockData
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'key', 'total' )
             ->update_setting( 'order', 5 )
+            ->update_setting( 'key', 'total' )
             ->save();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
@@ -576,6 +599,7 @@ final class NF_Database_MockData
             ->update_setting( 'product_price', 10.10 )
             ->update_setting( 'product_use_quantity', 1 )
             ->update_setting( 'order', 1 )
+            ->update_setting( 'key', 'product' )
             ->save();
 
         $product_field_id = $field->get_id();
@@ -586,6 +610,7 @@ final class NF_Database_MockData
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'shipping_cost', 2.00 )
             ->update_setting( 'order', 4 )
+            ->update_setting( 'key', 'shipping' )
             ->save();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
@@ -594,6 +619,7 @@ final class NF_Database_MockData
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'key', 'total' )
             ->update_setting( 'order', 5 )
+            ->update_setting( 'key', 'total' )
             ->save();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
@@ -631,6 +657,7 @@ final class NF_Database_MockData
             ->update_setting( 'product_price', 10.10 )
             ->update_setting( 'product_use_quantity', 0 )
             ->update_setting( 'order', 1 )
+            ->update_setting( 'key', 'product_a' )
             ->save();
 
         $product_field_A_id = $field->get_id();
@@ -645,6 +672,7 @@ final class NF_Database_MockData
             ->update_setting( 'num_max', NULL )
             ->update_setting( 'num_step', 1 )
             ->update_setting( 'order', 2 )
+            ->update_setting( 'key', 'qauntity_for_product_a' )
             ->save();
 
         $quantity_field_A_id = $field->get_id();
@@ -656,6 +684,7 @@ final class NF_Database_MockData
             ->update_setting( 'product_price', 9.23 )
             ->update_setting( 'product_use_quantity', 0 )
             ->update_setting( 'order', 3 )
+            ->update_setting( 'key', 'product_b' )
             ->save();
 
         $product_field_B_id = $field->get_id();
@@ -670,6 +699,7 @@ final class NF_Database_MockData
             ->update_setting( 'num_max', NULL )
             ->update_setting( 'num_step', 1 )
             ->update_setting( 'order', 4 )
+            ->update_setting( 'key', 'quantity_for_product_b' )
             ->save();
 
         $quantity_field_B_id = $field->get_id();
@@ -680,6 +710,7 @@ final class NF_Database_MockData
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'shipping_cost', 2.00 )
             ->update_setting( 'order', 998 )
+            ->update_setting( 'key', 'shipping' )
             ->save();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
@@ -688,6 +719,7 @@ final class NF_Database_MockData
             ->update_setting( 'label_pos', 'above' )
             ->update_setting( 'key', 'total' )
             ->update_setting( 'order', 999 )
+            ->update_setting( 'key', 'total' )
             ->save();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();

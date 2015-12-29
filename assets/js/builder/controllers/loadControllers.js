@@ -53,6 +53,7 @@ define(
 		'controllers/fields/fieldSettings',
 		'controllers/fields/fieldQuantity',
 		'controllers/fields/fieldShipping',
+		'controllers/fields/key',
 
 		/*
 		 * TODO: Actions domain controllers
@@ -121,6 +122,7 @@ define(
 		FieldSettings,
 		FieldQuantity,
 		FieldShipping,
+		FieldKey,
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -188,6 +190,7 @@ define(
 				new FieldSettings();
 				new FieldQuantity();
 				new FieldShipping();
+				new FieldKey();
 				/*
 				 * TODO: Actions domain controllers
 				 */
