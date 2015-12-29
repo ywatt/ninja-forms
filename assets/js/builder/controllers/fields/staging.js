@@ -82,7 +82,7 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 				// Loop through our staging collection
 				_.each( this.collection.models, function( model ) {
 					// Get a tmp ID for our new field.
-					var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpFieldID' );
+					var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpID' );
 					// Create an object that can be added as a model.
 					var tmpField = { id: tmpID, label: model.get( 'nicename' ), type: model.get( 'slug' ) };
 					// Add our new field.

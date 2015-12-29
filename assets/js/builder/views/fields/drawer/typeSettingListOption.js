@@ -3,15 +3,22 @@ define( [], function() {
 		tagName: 'div',
 		className: 'nf-table-row',
 		template: '#nf-tmpl-edit-setting-list-option',
+		id: function() {
+			return this.model.cid;
+		},
 
 		initialize: function( data ) {
+			this.settingModel = data.settingModel;
 			this.dataModel = data.dataModel;
 			this.collection = data.collection;
 			this.columns = data.columns;
 		},
 
 		onRender: function() {
-			jQuery( this.el ).prop( 'id', this.model.cid );
+			/*
+			 * Send out a radio message.
+			 */
+			nfRadio.channel( 'setting-' + this.settingModel.get( 'name' ) + '-option' ).trigger( 'render:setting', this.model, this.dataModel, this );
 		},
 
 		onShow: function() {

@@ -32,9 +32,6 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 		},
 
 		onRender: function() {
-			if ( this.model.get( 'name' ) == 'shipping_cost' ) {
-				console.log( this.dataModel.get( 'shipping_type' ) );
-			}
 			this.mergeTagsContentView = false;
 			var that = this;
 
@@ -74,13 +71,6 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 					}
 				})
 		    });
-		},
-
-		onShow: function() {
-			// this.$el = this.$el.children();
-			// this.$el.unwrap();
-			// this.setElement( this.$el );
-
 
 			/*
 			 * Apply Setting Field Masks
@@ -94,15 +84,15 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 				switch( mask.type ){
 					case 'numeric':
 						input.autoNumeric({
-							aSep: this.thousandsSeparator,
-							aDec: this.decimalPoint
+							aSep: thousandsSeparator,
+							aDec: decimalPoint
 						});
 						break;
 					case 'currency':
 						input.autoNumeric({
 							aSign: '$', // TODO: Use form setting
-							aSep: this.thousandsSeparator,
-							aDec: this.decimalPoint
+							aSep: thousandsSeparator,
+							aDec: decimalPoint
 						});
 						break;
 					case 'custom':
@@ -113,6 +103,11 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 						console.log( 'Notice: Mask type of "' + mask.type + '" is not supported.' );
 				}
 			}
+
+			/*
+			 * Send out a radio message.
+			 */
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
 		},
 
 		templateHelpers: function () {

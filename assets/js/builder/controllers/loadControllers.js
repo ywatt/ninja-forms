@@ -52,6 +52,8 @@ define(
 		'controllers/fields/editActive',
 		'controllers/fields/fieldSettings',
 		'controllers/fields/fieldQuantity',
+		'controllers/fields/fieldShipping',
+		'controllers/fields/key',
 
 		/*
 		 * TODO: Actions domain controllers
@@ -119,6 +121,8 @@ define(
 		FieldsEditActive,
 		FieldSettings,
 		FieldQuantity,
+		FieldShipping,
+		FieldKey,
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -185,6 +189,8 @@ define(
 				new FieldsEditActive();
 				new FieldSettings();
 				new FieldQuantity();
+				new FieldShipping();
+				new FieldKey();
 				/*
 				 * TODO: Actions domain controllers
 				 */

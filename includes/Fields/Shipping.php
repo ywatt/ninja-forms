@@ -17,16 +17,11 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
 
     protected $_test_value = '0.00';
 
-    protected $_settings =  array( 'shipping_cost', 'shipping_type', 'options' );
+    protected $_settings =  array( 'shipping_type', 'shipping_cost', 'shipping_options' );
 
     public function __construct()
     {
         parent::__construct();
-
-        $this->_settings['options']['columns'] = array( 'label', 'value' );
-        $this->_settings['options']['deps'] = array(
-            'shipping_type' => 'select'
-        );
 
         $this->_nicename = __( 'Shipping', 'ninja-forms' );
 
