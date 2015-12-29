@@ -15,6 +15,8 @@ class NF_Fields_Submit extends NF_Fields_Button
 
     protected $_wrap_template = 'wrap-no-label';
 
+    protected $_settings_exclude = array( 'key' );
+
     public function __construct()
     {
         parent::__construct();

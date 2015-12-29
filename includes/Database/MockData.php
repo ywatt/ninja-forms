@@ -42,6 +42,10 @@ final class NF_Database_MockData
             ->update_setting( 'required', 1 )
             ->update_setting( 'order', 1 )
             ->update_setting( 'key', 'name' )
+            ->update_setting( 'placeholder', '' )
+            ->update_setting( 'default', '' )
+            ->update_setting( 'wrapper_class', '' )
+            ->update_setting( 'element_class', '' )
             ->save();
 
         $name_field_id = $field->get_id();
@@ -53,6 +57,10 @@ final class NF_Database_MockData
             ->update_setting( 'required', 1 )
             ->update_setting( 'order', 2 )
             ->update_setting( 'key', 'email' )
+            ->update_setting( 'placeholder', '' )
+            ->update_setting( 'default', '' )
+            ->update_setting( 'wrapper_class', '' )
+            ->update_setting( 'element_class', '' )
             ->save();
 
         $email_field_id = $field->get_id();
@@ -73,6 +81,10 @@ final class NF_Database_MockData
             ->update_setting( 'required', 1 )
             ->update_setting( 'order', 3 )
             ->update_setting( 'key', 'message' )
+            ->update_setting( 'placeholder', '' )
+            ->update_setting( 'default', '' )
+            ->update_setting( 'wrapper_class', '' )
+            ->update_setting( 'element_class', '' )
             ->save();
 
         // $field = Ninja_Forms()->form( $form_id )->field()->get();
@@ -112,15 +124,22 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'listradio' )
             ->update_setting( 'label_pos', 'above')
             ->update_setting( 'label', "James' List")
+            ->update_setting( 'required', 0)
             ->update_setting( 'options', $options)
             ->update_setting( 'order', 4 )
             ->update_setting( 'key', 'james_list' )
+            ->update_setting( 'placeholder', '' )
+            ->update_setting( 'default', '' )
+            ->update_setting( 'wrapper_class', '' )
+            ->update_setting( 'element_class', '' )
             ->save();
 
         $field = Ninja_Forms()->form( $form_id )->field()->get();
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Submit')
+            ->update_setting( 'processing_label', 'Processing' )
             ->update_setting( 'order', 5 )
+            ->update_setting( 'key', '' )
             ->save();
 
         /*

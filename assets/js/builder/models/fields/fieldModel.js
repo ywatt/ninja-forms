@@ -25,7 +25,7 @@ define( [], function() {
 			// Loop through our field type "settingDefaults" and add any default settings.
 			var that = this;
 			_.each( fieldType.get( 'settingDefaults' ), function( val, key ) {
-				if ( ! that.get( key ) ) {
+				if ( 'undefined' == typeof that.get( key ) ) {
 					that.set( key, val );
 				}
 			} );
@@ -45,13 +45,15 @@ define( [], function() {
 		},
 
 		/**
+		 * Fires an event on the fieldSetting-{key} channel saying we've updated a setting.
 		 * When we change the model attributes, fire an event saying we've changed something.
 		 * 
 		 * @since  3.0
 		 * @return void
 		 */
-		changeSetting: function() {
+		changeSetting: function( model ) {
 			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
+			nfRadio.channel( 'fieldSetting-' + _.keys( model.changedAttributes() )[0] ).trigger( 'update:setting', this ) ;
 		}
 	} );
 	

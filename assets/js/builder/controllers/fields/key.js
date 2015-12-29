@@ -11,12 +11,35 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.updateKey );
+			// When we add a field, update its key.
+			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.addKey );
+
+			// When we edit a key, check for places that key might be used.
+			this.listenTo( nfRadio.channel( 'fieldSetting-key' ), 'update:setting', this.updateKey );
 		},
 
-		updateKey: function( model ) {
+		/**
+		 * Add a key to our new field model.
+		 * 
+		 * @since 3.0
+		 * @param backbone.model model new field model
+		 * @return void
+		 */
+		addKey: function( model ) {
 			var num = nfRadio.channel( 'fields' ).request( 'get:tmpID' );
 			model.set( 'key', model.get( 'type' ) + '-' + num );
+		},
+
+		/**
+		 * When a field key is updated, find any merge tags using the key and update them.
+		 * 
+		 * @since  3.0
+		 * @param  backbone.model model field model
+		 * @return void
+		 */
+		updateKey: function( model ) {
+			
+			console.log( model.changedAttributes().key );
 		}
 
 	});
