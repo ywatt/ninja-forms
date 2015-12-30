@@ -26,6 +26,11 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
     protected $_priority = '10';
 
     /**
+     * @var array
+     */
+    protected $payment_gateways = array();
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -38,14 +43,10 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
 
         $this->_settings = array_merge( $this->_settings, $settings );
 
-        add_action( 'plugins_loaded', array( $this, 'filter_payment_gateways' ) );
+        add_action( 'plugins_loaded', array( $this, 'register_payment_gateways' ) );
 
         add_filter( 'ninja_forms_action_type_settings', array( $this, 'maybe_remove_action' ) );
     }
-
-    /*
-    * PUBLIC METHODS
-    */
 
     public function save()
     {
@@ -59,24 +60,28 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
         return $data;
     }
 
-    public function filter_payment_gateways()
+    public function register_payment_gateways()
     {
-        $payment_gateways = $this->_settings[ 'payment_gateways' ][ 'options' ];
+        $this->payment_gateways = apply_filters( 'ninja_forms_register_payment_gateways', array() );
 
-        $this->_settings[ 'payment_gateways' ][ 'options' ] = apply_filters(
-            'ninja_forms_payment_gateways',
-            $payment_gateways
-        );
+        foreach( $this->payment_gateways as $gateway ){
 
-        $this->_settings = apply_filters(
-            'ninja_forms_payment_gateway_settings',
-            $this->_settings
-        );
+            if( ! is_subclass_of( $gateway, 'NF_Abstracts_PaymentGateway' ) ){
+                continue;
+            }
+
+            $this->_settings[ 'payment_gateways' ][ 'options' ][] = array(
+                'label' => $gateway->get_name(),
+                'value' => $gateway->get_slug(),
+            );
+
+            $this->_settings = array_merge( $this->_settings, $gateway->get_settings() );
+        }
     }
 
     public function maybe_remove_action( $action_type_settings )
     {
-        if( count( $this->_settings[ 'payment_gateways' ][ 'options' ] ) == 1 ){
+        if( empty( $this->payment_gateways ) ){
             unset( $action_type_settings[ $this->_name ] );
         }
 
