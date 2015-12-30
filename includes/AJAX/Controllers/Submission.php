@@ -55,7 +55,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     public function resume()
     {
-        $this->_data = array(); // TODO: Get processing data from transient.
+        $this->_data = $this->_form_data;
 
         unset( $this->_data[ 'halt' ] );
 

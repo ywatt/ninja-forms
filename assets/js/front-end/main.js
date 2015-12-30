@@ -9,7 +9,37 @@ jQuery( document ).ready( function( $ ) {
 
 		var NinjaForms = Marionette.Application.extend({
 			forms: {},
-			initialize: function( options ) {		
+			initialize: function( options ) {
+
+				// TODO: Maybe move the resumeProcessing elsewhere.
+				if( 'undefined' != typeof nfFrontEnd.resumeProcessing ){
+					var formData = JSON.stringify( nfFrontEnd.resumeProcessing );
+					var data = {
+						'action': 'nf_ajax_resume',
+						'security': nfFrontEnd.ajaxNonce,
+						'formData': formData
+					};
+
+					jQuery.ajax({
+						url: nfFrontEnd.adminAjax,
+						type: 'POST',
+						data: data,
+						cache: false,
+						success: function( data, textStatus, jqXHR ) {
+							var response = jQuery.parseJSON( data );
+
+							nfRadio.channel( 'submit' ).trigger( 'submit:response', response, textStatus, jqXHR );
+						},
+						error: function( jqXHR, textStatus, errorThrown ) {
+							// Handle errors here
+							console.log('ERRORS: ' + textStatus);
+							// STOP LOADING SPINNER
+
+							nfRadio.channel( 'submit' ).trigger( 'submit:response', 'error', textStatus, jqXHR, errorThrown );
+						}
+					});
+				}
+
 				nfRadio.channel( 'fields' ).reply( 'get:field', this.getField, this );
 				nfRadio.channel( 'form' ).reply( 'get:form', this.getForm, this );
 				nfRadio.channel( 'form' ).reply( 'submit:form', this.submitForm, this );
