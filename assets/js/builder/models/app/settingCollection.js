@@ -8,7 +8,11 @@
  */
 define( ['models/app/settingModel'], function( settingModel ) {
 	var collection = Backbone.Collection.extend( {
-		model: settingModel
+		model: settingModel,
+
+		initialize: function( models, options ) {
+			this.options = options || {};
+		}
 	} );
 	return collection;
 } );

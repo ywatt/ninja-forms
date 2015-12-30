@@ -9,7 +9,7 @@
 define( ['models/app/settingCollection'], function( settingCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.collection = new settingCollection( formSettings );
+			this.collection = new settingCollection( formSettings, { objectType: 'settings' } );
 
 			// Responds to requests for settings models.
 			nfRadio.channel( 'settings' ).reply( 'get:settingModel', this.getSettingModel, this );

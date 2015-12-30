@@ -171,11 +171,17 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 		},
 
 		events: {
-			'change': 'changeSetting'
+			'change': 'changeSetting',
+			'keyup': 'keyUpSetting'
 		},
 
 		changeSetting: function( e ) {
 			nfRadio.channel( 'app' ).trigger( 'change:setting', e, this.model, this.dataModel );
+		},
+
+		keyUpSetting: function( e ) {
+			nfRadio.channel( 'app' ).trigger( 'keyup:setting', e, this.model, this.dataModel );
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'keyup:setting', e, this.model, this.dataModel );
 		}
 
 	});

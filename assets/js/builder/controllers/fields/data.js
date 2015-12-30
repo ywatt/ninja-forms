@@ -114,6 +114,7 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 		 * @return void
 		 */
 		deleteField: function( model ) {
+			nfRadio.channel( 'fields' ).trigger( 'delete:field', model );
 			this.collection.remove( model );
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );

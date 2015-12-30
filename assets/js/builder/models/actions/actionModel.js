@@ -39,6 +39,8 @@ define( [], function() {
 			 */ 
 			nfRadio.channel( 'actions' ).trigger( 'init:fieldModel', this );
 			nfRadio.channel( 'actions-' + this.get( 'type' ) ).trigger( 'init:fieldModel', this );
+
+			this.listenTo( nfRadio.channel( 'actions' ), 'update:fieldKey', this.updateFieldKey );
 		},
 
 		/**
@@ -49,6 +51,10 @@ define( [], function() {
 		 */
 		changeSetting: function() {
 			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
+		},
+
+		updateFieldKey: function( keyModel, settingModel ) {
+			nfRadio.channel( 'app' ).request( 'replace:fieldKey', this, keyModel, settingModel );
 		}
 	} );
 	

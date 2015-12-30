@@ -40,7 +40,7 @@ define( [
 					tags.add( {
 						id: field.get( 'id' ),
 						label: field.get( 'label' ),
-						tag: '{field:' + field.get( 'key' ) + '}'
+						tag: that.getFieldKeyFormat( field.get( 'key' ) )
 					} );					
 				}
 			} );
@@ -51,15 +51,9 @@ define( [
 			this.open = false;
 
 			this.listenTo( nfRadio.channel( 'mergeTags' ), 'click:mergeTag', this.clickMergeTag );
-			/*
-			 * TODO: Hotkey support for adding tags.
-			 *
+			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.addFieldTags );
+			this.listenTo( nfRadio.channel( 'fields' ), 'delete:field', this.deleteFieldTags );
 			
-			this.listenTo( nfRadio.channel( 'hotkeys' ), 'open:mergeTags', this.openMergeTags );
-			this.listenTo( nfRadio.channel( 'hotkeys' ), 'up:mergeTags', this.upMergeTags );
-			this.listenTo( nfRadio.channel( 'hotkeys' ), 'down:mergeTags', this.downMergeTags );
-			this.listenTo( nfRadio.channel( 'hotkeys' ), 'return:mergeTags', this.returnMergeTags );
-			*/
 			nfRadio.channel( 'mergeTags' ).reply( 'update:currentElement', this.updateCurrentElement, this );
 
 			// Listen for requests for our mergeTag collection.
@@ -68,10 +62,17 @@ define( [
 			// When we edit a key, check for places that key might be used.
 			this.listenTo( nfRadio.channel( 'fieldSetting-key' ), 'update:setting', this.updateKey );
 
+			// Reply to requests to check a data model for a field key when one is updated.
+			nfRadio.channel( 'app' ).reply( 'replace:fieldKey', this.replaceFieldKey, this );
+
 			/*
 			 * TODO: Hotkey support for adding tags.
 			 *
 			
+			this.listenTo( nfRadio.channel( 'hotkeys' ), 'open:mergeTags', this.openMergeTags );
+			this.listenTo( nfRadio.channel( 'hotkeys' ), 'up:mergeTags', this.upMergeTags );
+			this.listenTo( nfRadio.channel( 'hotkeys' ), 'down:mergeTags', this.downMergeTags );
+			this.listenTo( nfRadio.channel( 'hotkeys' ), 'return:mergeTags', this.returnMergeTags );
 			nfRadio.channel( 'mergeTags' ).reply( 'update:open', this.updateOpen, this );
 			*/
 		},
@@ -82,6 +83,23 @@ define( [
 			var newPos = currentPos + tagModel.get( 'tag' ).length;
 			currentValue = currentValue.substr( 0, currentPos ) + tagModel.get( 'tag' ) + currentValue.substr( currentPos );
 			jQuery( this.currentElement ).val( currentValue ).caret( newPos ).trigger( 'change' );
+		},
+
+		addFieldTags: function( fieldModel ) {
+			// TODO: Make this dynamic
+			if ( 'submit' !== fieldModel.get( 'type' ) ) {
+				this.tagSectionCollection.get( 'fields' ).get( 'tags' ).add( {
+					id: fieldModel.get( 'id' ),
+					label: fieldModel.get( 'label' ),
+					tag: this.getFieldKeyFormat( fieldModel.get( 'key' ) )
+				} );
+			}
+		},
+
+		deleteFieldTags: function( fieldModel ) {
+			var fieldID = fieldModel.get( 'id' );
+			var tagModel = this.tagSectionCollection.get( 'fields' ).get( 'tags' ).get( fieldID );
+			this.tagSectionCollection.get( 'fields' ).get( 'tags' ).remove( tagModel );
 		},
 
 		openMergeTags: function( e ) {
@@ -166,8 +184,27 @@ define( [
 
 		updateKey: function( fieldModel ) {
 			var newKey = fieldModel.get( 'key' );
-			var oldTag = this.tagSectionCollection.get( 'fields' ).get( 'tags' ).get( 1 );
-			oldTag.set( 'tag', '{field:' + newKey + '}' );
+			var oldTag = this.tagSectionCollection.get( 'fields' ).get( 'tags' ).get( fieldModel.get( 'id' ) );
+			if ( 'undefined' != typeof oldTag ) {
+				oldTag.set( 'tag', this.getFieldKeyFormat( newKey ) );				
+			}
+
+		},
+
+		getFieldKeyFormat: function( key ) {
+			return '{field:' + key + '}';
+		},
+
+		replaceFieldKey: function( dataModel, keyModel, settingModel ) {
+			var oldKey = this.getFieldKeyFormat( keyModel._previousAttributes[ 'key' ] );
+			var newKey = this.getFieldKeyFormat( keyModel.get( 'key' ) );
+			var settingName = settingModel.get( 'name' );
+			var oldVal = dataModel.get( settingName );
+			if ( oldVal ) {
+				var re = new RegExp( oldKey, 'g' );
+				newVal = oldVal.replace( re, newKey );
+				dataModel.set( settingName, newVal );
+			}
 		}
 
 	});
