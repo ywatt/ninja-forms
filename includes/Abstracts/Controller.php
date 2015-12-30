@@ -38,9 +38,13 @@ abstract class NF_Abstracts_Controller
      *
      * A wrapper for the WordPress AJAX response pattern.
      */
-    protected function _respond()
+    protected function _respond( $data = array() )
     {
-        $response = array( 'errors' => $this->_errors, 'data' => $this->_data );
+        if( empty( $data ) ){
+            $data = $this->_data;
+        }
+
+        $response = array( 'errors' => $this->_errors, 'data' => $data );
 
         echo wp_json_encode( $response );
 

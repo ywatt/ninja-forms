@@ -11,6 +11,9 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         if( isset( $_POST['formData'] ) ) $this->_form_data = json_decode( stripslashes( $_POST['formData'] ), TRUE  );
         add_action( 'wp_ajax_nf_ajax_submit',   array( $this, 'process' )  );
         add_action( 'wp_ajax_nopriv_nf_ajax_submit',   array( $this, 'process' )  );
+
+        add_action( 'wp_ajax_nf_ajax_resume',   array( $this, 'resume' )  );
+        add_action( 'wp_ajax_nopriv_nf_ajax_resume',   array( $this, 'resume' )  );
     }
 
     public function process()
@@ -46,6 +49,15 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         } else {
             $this->run_actions();
         }
+
+        $this->_respond();
+    }
+
+    public function resume()
+    {
+        $this->_data = array(); // TODO: Get processing data from transient.
+
+        unset( $this->_data[ 'halt' ] );
 
         $this->_respond();
     }
@@ -132,6 +144,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $data = Ninja_Forms()->actions[ $type ]->process( $action_settings, $this->_form_id, $this->_data );
 
             $this->_data = ( $data ) ? $data : $this->_data;
+
+            $this->maybe_halt();
         }
     }
 
@@ -152,6 +166,18 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $data = Ninja_Forms()->actions[ $type ]->process( $action_settings, $this->_form_id, $this->_data );
 
             $this->_data = ( $data ) ? $data : $this->_data;
+
+            $this->maybe_halt();
+        }
+    }
+
+    protected function maybe_halt()
+    {
+        if( isset( $this->_data[ 'halt' ] ) && $this->_data[ 'halt' ] ){
+
+            // TODO: Set processing data transient
+
+            $this->_respond();
         }
     }
 }
