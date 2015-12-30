@@ -39,6 +39,8 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
         $this->_settings = array_merge( $this->_settings, $settings );
 
         add_action( 'plugins_loaded', array( $this, 'filter_payment_gateways' ) );
+
+        add_filter( 'ninja_forms_action_type_settings', array( $this, 'maybe_remove_action' ) );
     }
 
     /*
@@ -70,5 +72,14 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
             'ninja_forms_payment_gateway_settings',
             $this->_settings
         );
+    }
+
+    public function maybe_remove_action( $action_type_settings )
+    {
+        if( count( $this->_settings[ 'payment_gateways' ][ 'options' ] ) == 1 ){
+            unset( $action_type_settings[ $this->_name ] );
+        }
+
+        return $action_type_settings;
     }
 }

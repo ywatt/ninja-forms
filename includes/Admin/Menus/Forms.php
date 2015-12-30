@@ -257,6 +257,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             );
         }
 
+        $action_type_settings = apply_filters( 'ninja_forms_action_type_settings', $action_type_settings );
+
         ?>
         <script>
             var actionTypeData = <?php echo wp_json_encode( $action_type_settings ); ?>;
