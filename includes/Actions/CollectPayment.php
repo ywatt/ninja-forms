@@ -55,9 +55,11 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
 
     public function process( $action_settings, $form_id, $data )
     {
-        $data = apply_filter( 'ninja_forms_collect_payment_process', $action_settings, $form_id, $data );
+        $payment_gateway = $action_settings[ 'payment_gateways' ];
 
-        return $data;
+        $payment_gateway_class = $this->payment_gateways[ $payment_gateway ];
+
+        return $payment_gateway_class->process( $action_settings, $form_id, $data );
     }
 
     public function register_payment_gateways()
