@@ -35,11 +35,14 @@ define( [
 
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			_.each( fieldCollection.models, function( field ) {
-				tags.add( {
-					id: field.get( 'id' ),
-					label: field.get( 'label' ),
-					tag: '{field:' + field.get( 'id' ) + '}'
-				} );
+				// TODO: Make this dynamic
+				if ( 'submit' !== field.get( 'type' ) ) {
+					tags.add( {
+						id: field.get( 'id' ),
+						label: field.get( 'label' ),
+						tag: '{field:' + field.get( 'key' ) + '}'
+					} );					
+				}
 			} );
 
 			this.tagSectionCollection.get( 'fields' ).set( 'tags', tags );
@@ -61,6 +64,9 @@ define( [
 
 			// Listen for requests for our mergeTag collection.
 			nfRadio.channel( 'mergeTags' ).reply( 'get:mergeTags', this.getMergeTags, this );
+
+			// When we edit a key, check for places that key might be used.
+			this.listenTo( nfRadio.channel( 'fieldSetting-key' ), 'update:setting', this.updateKey );
 
 			/*
 			 * TODO: Hotkey support for adding tags.
@@ -156,6 +162,12 @@ define( [
 			_.each( this.tagSectionCollection.get( 'fields' ).models, function( model ) {
 				model.set( 'active', false );
 			} );
+		},
+
+		updateKey: function( fieldModel ) {
+			var newKey = fieldModel.get( 'key' );
+			var oldTag = this.tagSectionCollection.get( 'fields' ).get( 'tags' ).get( 1 );
+			oldTag.set( 'tag', '{field:' + newKey + '}' );
 		}
 
 	});
