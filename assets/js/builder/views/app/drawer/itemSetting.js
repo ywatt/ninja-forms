@@ -5,6 +5,7 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 
 		initialize: function( data ) {
 			this.dataModel = data.dataModel;
+			this.dataModel.on( 'change:' + this.model.get( 'name' ), this.render, this );
 
 			var deps = this.model.get( 'deps' );
 			if ( deps ) {
@@ -17,6 +18,8 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 		},
 
 		onBeforeDestroy: function() {
+			this.dataModel.off( 'change:' + this.model.get( 'name' ), this.render );
+
 			var deps = this.model.get( 'deps' );
 			if ( deps ) {
 				for (var name in deps) {
