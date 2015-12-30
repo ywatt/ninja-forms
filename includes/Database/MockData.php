@@ -425,12 +425,15 @@ final class NF_Database_MockData
         );
 
         $order = 1;
+        $i = 1;
         foreach( array( 'above', 'right', 'below', 'left', 'hidden' ) as $label_pos ) {
 
 
             foreach ($fields as $settings) {
 
                 unset($settings['id']);
+
+                $settings[ 'key' ] = $settings[ 'key' ] . '-' . $i;
 
                 if ( ! isset( $settings['label_pos'] ) ) $settings['label_pos'] = $label_pos;
 
@@ -447,6 +450,7 @@ final class NF_Database_MockData
                 $order++;
             }
             $order++;
+            $i++;
         }
 
         $submit = Ninja_Forms()->form($form_id)->field()->get();
