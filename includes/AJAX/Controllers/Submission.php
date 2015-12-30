@@ -26,7 +26,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $this->_respond();
         }
 
-        $this->_form_id = $this->_form_data['id'];
+        $this->_form_id = $this->_data[ 'form_id' ] = $this->_form_data['id'];
 
         $this->_data['settings'] = $this->_form_data['settings'];
 
