@@ -22,7 +22,7 @@ class NF_Fields_Total extends NF_Abstracts_Input
         parent::__construct();
 
         $this->_settings = $this->load_settings(
-            array( 'label', 'label_pos' )
+            array( 'key', 'label', 'label_pos' )
         );
 
         $this->_nicename = __( 'Total', 'ninja-forms' );

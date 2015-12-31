@@ -87,10 +87,14 @@ final class NF_Display_Render
 
             // TODO: Find a better way to do this.
             if( 'shipping' == $settings[ 'type' ] ){
+                // TODO: Does the currency marker need to stripped here?
+                $settings[ 'shipping_cost' ] = str_replace( '$', '', $settings[ 'shipping_cost' ] );
                 $settings[ 'shipping_cost' ] = number_format( $settings[ 'shipping_cost' ], 2 );
             } elseif( 'product' == $settings[ 'type' ] ){
+                // TODO: Does the currency marker need to stripped here?
+                $settings[ 'product_price' ] = str_replace( '$', '', $settings[ 'product_price' ] );
                 $settings[ 'product_price' ] = number_format( $settings[ 'product_price' ], 2 );
-            } elseif( 'total' == $settings[ 'type' ] ){
+            } elseif( 'total' == $settings[ 'type' ] && isset( $settings[ 'value' ] ) ){
                 $settings[ 'value' ] = number_format( $settings[ 'value' ], 2 );
             }
 
