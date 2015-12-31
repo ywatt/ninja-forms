@@ -426,7 +426,7 @@ function nf_alpha_release_admin_notice()
         }
     </style>
     <div class="update-nag nf-alpha-notice">
-        <h3>Ninja Forms 3.0 - BETA 1 - C.Baker</h3>
+        <h3>Ninja Forms 3.0 - BETA 1 - <a href="https://en.wikipedia.org/wiki/Sixth_Doctor" target="_blank">C.Baker</a></h3>
         <p><strong>NOTICE:</strong> Installed is a Beta Release of Ninja Forms. This is not intended for production.</p>
         <p>Please keep a few things in mind while exploring:</p>
         <ul>
