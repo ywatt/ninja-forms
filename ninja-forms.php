@@ -426,8 +426,8 @@ function nf_alpha_release_admin_notice()
         }
     </style>
     <div class="update-nag nf-alpha-notice">
-        <h3>Ninja Forms 3.0 - ALPHA 5 - Davison</h3>
-        <p><strong>NOTICE:</strong> Installed is an Alpha Release of Ninja Forms. This is not intended for production.</p>
+        <h3>Ninja Forms 3.0 - BETA 1 - C.Baker</h3>
+        <p><strong>NOTICE:</strong> Installed is a Beta Release of Ninja Forms. This is not intended for production.</p>
         <p>Please keep a few things in mind while exploring:</p>
         <ul>
             <li><strong>DO NOT</strong> attempt to install this release on a live website. (If this site falls in that category, remove this plugin)</li>
