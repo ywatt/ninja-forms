@@ -433,7 +433,7 @@ function nf_alpha_release_admin_notice()
             <li><strong>DO NOT</strong> attempt to install this release on a live website. (If this site falls in that category, remove this plugin)</li>
             <li><strong>DO</strong> install this on a clean WordPress install; by this we mean a completely new WordPress installation to which Ninja Forms 2.9.x or earlier has never been installed.</li>
             <li>There will be database conflicts if you install this alongside 2.9.x, even if 2.9.x has been deactivated or deleted.</li>
-            <li>This ALPHA is best viewed at <strong>1039px wide or greater.</strong> This is because we have not fully implented the responsive UI thus far.</li>
+            <li>This BETA is best viewed at <strong>1039px wide or greater.</strong> This is because we have not fully implented the responsive UI thus far.</li>
             <li>Here some things we would like you to test and offer feedback on this week:
                 <ul>
                     <li>Pricing Fields: Use the mock data Product Forms with pricing fields, and add pricing fields to those forms.</li>
