@@ -1,10 +1,16 @@
-define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) {
-	var view = Marionette.ItemView.extend({
+define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], function( mergeTagsContentView, settingErrorView ) {
+	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-edit-setting-wrap',
 
+		regions: {
+			error: '.nf-setting-error'
+		},
+
 		initialize: function( data ) {
 			this.dataModel = data.dataModel;
+			this.dataModel.on( 'change:' + this.model.get( 'name' ), this.render, this );
+			this.model.on( 'change:error', this.renderError, this );
 
 			var deps = this.model.get( 'deps' );
 			if ( deps ) {
@@ -17,6 +23,9 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 		},
 
 		onBeforeDestroy: function() {
+			this.dataModel.off( 'change:' + this.model.get( 'name' ), this.render );
+			this.model.off( 'change:error', this.renderError );
+
 			var deps = this.model.get( 'deps' );
 			if ( deps ) {
 				for (var name in deps) {
@@ -69,7 +78,7 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 						nfRadio.channel( 'mergeTags' ).request( 'update:open', false );
 						nfRadio.channel( 'drawer' ).request( 'enable:close', 'merge-tags' );
 					}
-				})
+				});
 		    });
 
 			/*
@@ -103,11 +112,21 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 						console.log( 'Notice: Mask type of "' + mask.type + '" is not supported.' );
 				}
 			}
+			
+			this.renderError();
 
 			/*
 			 * Send out a radio message.
 			 */
 			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
+		},
+
+		renderError: function() {
+			if ( this.model.get( 'error' ) ) {
+				this.error.show( new settingErrorView( { model: this.model } ) );
+			} else {
+				this.error.empty();
+			}
 		},
 
 		templateHelpers: function () {
@@ -141,12 +160,19 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 					return 'has-merge-tags';
 				},
 
-				renderWidth: function() {
+				renderClasses: function() {
+					var classes = '';
 					if ( 'undefined' != typeof this.width ) {
-						return this.width;
+						classes += this.width;
 					} else {
-						return 'one-half';
+						classes += ' one-half';
 					}
+
+					if ( this.error ) {
+						classes += ' nf-error';
+					}
+
+					return classes;
 				},
 
 				renderTooltip: function() {
@@ -168,13 +194,18 @@ define( ['views/app/drawer/mergeTagsContent'], function( mergeTagsContentView ) 
 		},
 
 		events: {
-			'change': 'changeSetting'
+			'change': 'changeSetting',
+			'keyup': 'keyUpSetting'
 		},
 
 		changeSetting: function( e ) {
 			nfRadio.channel( 'app' ).trigger( 'change:setting', e, this.model, this.dataModel );
-		}
+		},
 
+		keyUpSetting: function( e ) {
+			nfRadio.channel( 'app' ).trigger( 'keyup:setting', e, this.model, this.dataModel );
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'keyup:setting', e, this.model, this.dataModel );
+		}
 	});
 
 	return view;

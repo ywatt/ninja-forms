@@ -48,8 +48,6 @@ define( [], function() {
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 			var currentDomainID = currentDomain.get( 'id' );
 
-			var settingModel = nfRadio.channel( currentDomainID ).request( 'get:settingModel', name );
-
 			/*
 			 * TODO: Make this more dynamic.
 			 * Currently, this is a very specific work-around. It should be more generalized.

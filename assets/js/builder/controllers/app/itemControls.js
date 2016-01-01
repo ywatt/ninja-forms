@@ -28,8 +28,6 @@ define( [], function() {
 		clickEdit: function( e, model ) {
 			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 			var currentDomainID = currentDomain.get( 'id' );
-			nfRadio.channel( currentDomainID ).request( 'clear:editActive' );
-			model.set( 'editActive', true );
 			var type = nfRadio.channel( currentDomainID ).request( 'get:type' , model.get( 'type' ) );
 			nfRadio.channel( 'app' ).request( 'open:drawer', 'editSettings', { model: model, groupCollection: type.get( 'settingGroups' ) } );
 		},

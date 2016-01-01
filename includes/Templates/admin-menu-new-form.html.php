@@ -323,9 +323,14 @@
 <!-- Field Settings Templates -->
 
 <script id="nf-tmpl-edit-setting-wrap" type="text/template">
-    <div class="nf-<%= renderWidth() %>" <%= renderVisible() %>>
-        <%= renderSetting() %> 
+    <div class="nf-<%= renderClasses() %>" <%= renderVisible() %>>
+        <%= renderSetting() %>
+        <span class="nf-setting-error"></span>
     </div>
+</script>
+
+<script id="nf-tmpl-edit-setting-error" type="text/template">
+    <div><%= error %></div>
 </script>
 
 <script id="nf-tmpl-edit-setting-textbox" type="text/template">

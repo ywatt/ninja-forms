@@ -58,12 +58,26 @@ define( ['views/app/drawer/itemSetting'], function( itemSettingView ) {
 					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
 				},
 				
-				renderWidth: function() {
+				renderClasses: function() {
+					var classes = '';
 					if ( 'undefined' != typeof this.width ) {
-						return this.width;
+						classes += this.width;
 					} else {
-						return 'one-half';
+						classes += ' one-half';
 					}
+
+					if ( this.error ) {
+						classes += ' nf-error';
+					}
+
+					return classes;
+				},
+
+				renderError: function() {
+					if ( this.error ) {
+						return this.error;
+					}
+					return '';
 				}
 			}
 		},

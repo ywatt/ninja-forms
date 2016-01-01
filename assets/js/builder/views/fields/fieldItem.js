@@ -9,11 +9,13 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 
 		initialize: function() {
 			this.model.on( 'change:editActive', this.render, this );
+			this.model.on( 'change:label', this.render, this );
 			this.model.on( 'change:required', this.render, this );
 		},
 
 		onBeforeDestroy: function() {
 			this.model.off( 'change:editActive', this.render );
+			this.model.off( 'change:label', this.render );
 			this.model.off( 'change:required', this.render );
 		},
 
