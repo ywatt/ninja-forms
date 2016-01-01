@@ -65,6 +65,9 @@ define( [
 			// Reply to requests to check a data model for a field key when one is updated.
 			nfRadio.channel( 'app' ).reply( 'replace:fieldKey', this.replaceFieldKey, this );
 
+			// Reply to requests to check a data model for a field key when one is updated.
+			nfRadio.channel( 'app' ).reply( 'get:fieldKeyFormat', this.getFieldKeyFormat, this );
+
 			/*
 			 * TODO: Hotkey support for adding tags.
 			 *

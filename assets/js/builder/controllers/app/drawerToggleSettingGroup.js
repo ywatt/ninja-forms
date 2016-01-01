@@ -23,12 +23,22 @@ define( [], function() {
 		 */
 		toggleSettingGroup: function( e, model ) {
 			if ( model.get( 'display' ) ) {
-				model.set( 'display', false );
+				/*
+				 * Make sure that none of our settings have errors
+				 */
+				var errors = false;
+				_.each( model.get( 'settings' ).models, function( setting ) {
+					if ( setting.get( 'error' ) ) {
+						errors = true;
+					}
+				} );
+				if ( ! errors ) {
+					model.set( 'display', false );
+				}
 			} else {
 				model.set( 'display', true );
 			}
 		}
-
 	});
 
 	return controller;
