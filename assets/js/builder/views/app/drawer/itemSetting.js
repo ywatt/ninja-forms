@@ -123,8 +123,10 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 
 		renderError: function() {
 			if ( this.model.get( 'error' ) ) {
+				jQuery( this.el ).find( '.nf-setting' ).addClass( 'nf-error' );
 				this.error.show( new settingErrorView( { model: this.model } ) );
 			} else {
+				jQuery( this.el ).find( '.nf-setting' ).removeClass( 'nf-error' );
 				this.error.empty();
 			}
 		},
@@ -161,11 +163,11 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				},
 
 				renderClasses: function() {
-					var classes = '';
+					var classes = 'nf-setting ';
 					if ( 'undefined' != typeof this.width ) {
-						classes += this.width;
+						classes += 'nf-' + this.width;
 					} else {
-						classes += ' one-half';
+						classes += ' nf-one-half';
 					}
 
 					if ( this.error ) {
