@@ -41,7 +41,7 @@ define( [], function() {
 			/*
 			 * If we haven't entered a key manually, update our key when our label changes.
 			 */
-			if ( ! model.get( 'manual_key' ) ) {
+			if ( ! model.get( 'manual_key' ) && 0 != jQuery.trim( model.get( 'label' ) ).length ) {
 				/*
 				 * When we're editing settings, we expect the edits to fire one at a time.
 				 * Since we're calling this in the middle of our label update, anything that inquires about what has changed after we set our key will see both label and key.
@@ -62,6 +62,7 @@ define( [], function() {
 		 */
 		updateKey: function( dataModel ) {
 			var key = dataModel.get( 'key' );
+			this.settingModel = nfRadio.channel( 'fields' ).request( 'get:settingModel', 'key' );
 			this.setError( key, dataModel );
 		},
 
