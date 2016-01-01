@@ -60,32 +60,19 @@ define( [], function() {
 		 * @param  backbone.model model field model
 		 * @return void
 		 */
-		updateKey: function( model ) {
-			var key = model.get( 'key' );
-			var error = false;
-			if ( '' == jQuery.trim( key ) ) {
-				error = 'Field keys can\'t be empty. Please enter a key.';
-			} else if ( this.keyExists( key, model ) ) {
-				error = 'Field keys must be unique. Please enter another key.'
-			}
-
-			if ( error ) {
-				this.settingModel.set( 'error', error );
-				nfRadio.channel( 'drawer' ).request( 'prevent:close', 'fieldSetting-key-error' );
-				nfRadio.channel( 'app' ).request( 'prevent:changeDomain', 'fieldSetting-key-error' );
-			} else {
-				nfRadio.channel( 'app' ).trigger( 'update:fieldKey', model );
-				this.settingModel.set( 'error', false );
-				nfRadio.channel( 'drawer' ).request( 'enable:close', 'fieldSetting-key-error' );
-				nfRadio.channel( 'app' ).request( 'enable:changeDomain', 'fieldSetting-key-error' );
-			}
+		updateKey: function( dataModel ) {
+			var key = dataModel.get( 'key' );
+			this.setError( key, dataModel );
 		},
 
 		keyUp: function( e, settingModel, dataModel ) {
 			dataModel.set( 'manual_key', true );
 			this.settingModel = settingModel;
 			var key = jQuery( e.target ).val();
+			this.setError( key, dataModel );
+		},
 
+		setError: function( key, dataModel ) {
 			var error = false;
 			if ( '' == jQuery.trim( key ) ) {
 				error = 'Field keys can\'t be empty. Please enter a key.';
@@ -95,22 +82,18 @@ define( [], function() {
 
 			if ( error ) {
 				this.settingModel.set( 'error', error );
-				nfRadio.channel( 'drawer' ).request( 'prevent:close', 'fieldSetting-key-error' );
-				nfRadio.channel( 'app' ).request( 'prevent:changeDomain', 'fieldSetting-key-error' );
 			} else {
 				nfRadio.channel( 'app' ).trigger( 'update:fieldKey', dataModel );
 				this.settingModel.set( 'error', false );
-				nfRadio.channel( 'drawer' ).request( 'enable:close', 'fieldSetting-key-error' );
-				nfRadio.channel( 'app' ).request( 'enable:changeDomain', 'fieldSetting-key-error' );
 			}
 		},
 
-		keyExists: function( key, model ) {
+		keyExists: function( key, dataModel ) {
 			key = jQuery.slugify( key );
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			var found = false;
 			_.each( fieldCollection.models, function( field ) {
-				if ( model != field && key == field.get( 'key' ) ) {
+				if ( dataModel != field && key == field.get( 'key' ) ) {
 					found = true;
 				}
 			} );

@@ -23,6 +23,8 @@ define( [], function() {
 			nfRadio.channel( 'app' ).trigger( 'init:settingModel', this );
 			nfRadio.channel( this.get( 'type' ) ).trigger( 'init:settingModel', this );
 
+			this.on( 'change:error', this.maybePreventUI, this );
+
 			/*
 			 * If we have an objectType set on our collection, then we're creating a model for the generic settings collection.
 			 * If we're using merge tags in this setting
@@ -43,6 +45,16 @@ define( [], function() {
 		 */
 		updateKey: function( keyModel ) {
 			nfRadio.channel( this.collection.options.objectType ).trigger( 'update:fieldKey', keyModel, this );
+		},
+
+		maybePreventUI: function() {
+			if ( this.get( 'error' ) ) {
+				nfRadio.channel( 'drawer' ).request( 'prevent:close', 'fieldSetting-key-error' );
+				nfRadio.channel( 'app' ).request( 'prevent:changeDomain', 'fieldSetting-key-error' );				
+			} else {
+				nfRadio.channel( 'drawer' ).request( 'enable:close', 'fieldSetting-key-error' );
+				nfRadio.channel( 'app' ).request( 'enable:changeDomain', 'fieldSetting-key-error' );
+			}
 		}
 	} );
 	
