@@ -40,7 +40,7 @@ define( [], function() {
 			}
 
 			// Get our form data
-			var formData = nfRadio.channel( 'app' ).request( 'get:formData' );
+			var formData = nfRadio.channel( 'app' ).request( 'get:formModel' );
 
 			// Turn our formData model into an object
 			var data = JSON.parse( JSON.stringify( formData ) );

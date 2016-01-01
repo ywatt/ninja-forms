@@ -16,7 +16,7 @@ define( [], function() {
 
 		initialize: function() {
 			// Listen for model attribute changes
-			this.bind( 'change', this.changeSetting, this );
+			this.on( 'change', this.changeSetting, this );
 
 			// Get our parent field type.
 			var actionType = nfRadio.channel( 'actions' ).request( 'get:type', this.get( 'type' ) );

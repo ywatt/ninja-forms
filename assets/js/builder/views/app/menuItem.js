@@ -91,7 +91,8 @@ define( [], function() {
 				 */
 				renderUrl: function() {
 					if ( '' != this.url ) {
-						return this.url;
+						var formModel = nfRadio.channel( 'app' ).request( 'get:formModel' );
+						return this.url + formModel.get( 'id' );
 					} else {
 						return '#';
 					}

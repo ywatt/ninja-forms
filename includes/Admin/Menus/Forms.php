@@ -103,7 +103,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_localize_script( 'nf-builder', 'nfAdmin', array(
             'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ),
             'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
-            'previewurl' => site_url() . '/?nf_preview_form=' . $form_id,
+            'previewurl' => site_url() . '/?nf_preview_form=',
             'wp_locale' => $wp_locale->number_format
         ));
     }

@@ -42,9 +42,11 @@ define( [], function() {
 					} );
 				}
 
-				// If we have any new actions, update their models with the new id.
+				// If we have a new form id, update the model with the new id.
 				if ( 'undefined' != typeof response.data.new_ids.forms ) {
 					_.each( response.data.new_ids.forms, function( newID, oldID ) {
+						var formModel = nfRadio.channel( 'app' ).request( 'get:formModel' );
+						formModel.set( 'id', newID );
 						history.replaceState( '', '', 'admin.php?page=ninja-forms&form_id=' + newID );
 					} );
 				}
