@@ -9,7 +9,7 @@ Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
 Domain Path: /lang/
-Copyright 2015 WP Ninjas. 
+Copyright 2016 WP Ninjas. 
 */
 
 include 'deprecated/ninja-forms.php';
