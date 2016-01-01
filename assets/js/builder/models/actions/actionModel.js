@@ -25,7 +25,7 @@ define( [], function() {
 			var that = this;
 			_.each( actionType.get( 'settingDefaults' ), function( val, key ) {
 				if ( ! that.get( key ) ) {
-					that.set( key, val );
+					that.set( key, val, { silent: true } );
 				}
 			} );
 			

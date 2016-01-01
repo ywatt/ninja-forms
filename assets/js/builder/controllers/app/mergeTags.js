@@ -203,7 +203,7 @@ define( [
 			var newKey = this.getFieldKeyFormat( keyModel.get( 'key' ) );
 			var settingName = settingModel.get( 'name' );
 			var oldVal = dataModel.get( settingName );
-			if ( oldVal ) {
+			if ( 'string' == typeof oldVal ) {
 				var re = new RegExp( oldKey, 'g' );
 				newVal = oldVal.replace( re, newKey );
 				dataModel.set( settingName, newVal );

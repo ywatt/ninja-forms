@@ -26,7 +26,7 @@ define( [], function() {
 			var that = this;
 			_.each( fieldType.get( 'settingDefaults' ), function( val, key ) {
 				if ( 'undefined' == typeof that.get( key ) ) {
-					that.set( key, val );
+					that.set( key, val, { silent: true } );
 				}
 			} );
 			
