@@ -154,6 +154,7 @@ define( [], function() {
 			 * request that the app update its current drawer to the one we opened
 			 * trigger a drawer opened message
 			 */
+			
 			this.checkOpenDrawerPos = setInterval( function() {
 	        	if ( '0px' == jQuery( drawerEl ).css( 'right' ) ) {
 	        		clearInterval( that.checkOpenDrawerPos );

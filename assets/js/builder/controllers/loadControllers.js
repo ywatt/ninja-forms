@@ -36,6 +36,7 @@ define(
 		'controllers/app/itemControls',
 		'controllers/app/mergeTags',
 		'controllers/app/itemSettingFill',
+		'controllers/app/confirmPublish',
 		/*
 		 * Fields domain controllers
 		 */
@@ -105,6 +106,7 @@ define(
 		ItemControls,
 		MergeTags,
 		ItemSettingFill,
+		ConfirmPublish,
 		/*
 		 * Fields domain controllers
 		 */
@@ -165,6 +167,7 @@ define(
 				new CoreUndo();
 				new CloneModelDeep();
 				new ItemControls();
+				new ConfirmPublish();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
