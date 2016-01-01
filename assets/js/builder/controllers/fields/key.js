@@ -72,10 +72,12 @@ define( [], function() {
 			if ( error ) {
 				this.settingModel.set( 'error', error );
 				nfRadio.channel( 'drawer' ).request( 'prevent:close', 'fieldSetting-key-error' );
+				nfRadio.channel( 'app' ).request( 'prevent:changeDomain', 'fieldSetting-key-error' );
 			} else {
 				nfRadio.channel( 'app' ).trigger( 'update:fieldKey', model );
 				this.settingModel.set( 'error', false );
 				nfRadio.channel( 'drawer' ).request( 'enable:close', 'fieldSetting-key-error' );
+				nfRadio.channel( 'app' ).request( 'enable:changeDomain', 'fieldSetting-key-error' );
 			}
 		},
 
@@ -94,10 +96,12 @@ define( [], function() {
 			if ( error ) {
 				this.settingModel.set( 'error', error );
 				nfRadio.channel( 'drawer' ).request( 'prevent:close', 'fieldSetting-key-error' );
+				nfRadio.channel( 'app' ).request( 'prevent:changeDomain', 'fieldSetting-key-error' );
 			} else {
 				nfRadio.channel( 'app' ).trigger( 'update:fieldKey', dataModel );
 				this.settingModel.set( 'error', false );
 				nfRadio.channel( 'drawer' ).request( 'enable:close', 'fieldSetting-key-error' );
+				nfRadio.channel( 'app' ).request( 'enable:changeDomain', 'fieldSetting-key-error' );
 			}
 		},
 
