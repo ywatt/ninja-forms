@@ -124,7 +124,7 @@ define( [], function() {
 			 *
 			 * TODO: Make this more dynamic. I'm not sure that it fits in the drawer controller.
 			 */
-			if ( 'undefined' != data.model ) {
+			if ( 'undefined' != typeof data.model ) {
 				var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
 				var currentDomainID = currentDomain.get( 'id' );
 				nfRadio.channel( currentDomainID ).request( 'clear:editActive' );

@@ -32,6 +32,7 @@ define( [], function() {
 		 * @return void
 		 */
 		newFieldKey: function( model ) {
+			var key = this.keyExists( model.get( 'type' ) );
 			model.set( 'key', key );
 			model.set( 'manual_key', false );	
 		},
@@ -49,7 +50,8 @@ define( [], function() {
 				 * 
 				 */
 				delete model.changed.label;
-				model.set( 'key', jQuery.slugify( model.get( 'label' ) ) );				
+				var key = this.keyExists( model.get( 'label' ) );
+				model.set( 'key', key );				
 			}
 		},
 
@@ -77,7 +79,7 @@ define( [], function() {
 			var error = false;
 			if ( '' == jQuery.trim( key ) ) {
 				error = 'Field keys can\'t be empty. Please enter a key.';
-			} else if ( this.keyExists( key, dataModel ) ) {
+			} else if ( key != this.keyExists( key, dataModel ) ) {
 				error = 'Field keys must be unique. Please enter another key.'
 			}
 
@@ -92,13 +94,17 @@ define( [], function() {
 		keyExists: function( key, dataModel ) {
 			key = jQuery.slugify( key );
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
-			var found = false;
+			var x = 1;
+			var testKey = key;
 			_.each( fieldCollection.models, function( field ) {
-				if ( dataModel != field && key == field.get( 'key' ) ) {
-					found = true;
+				if ( dataModel != field && testKey == field.get( 'key' ) ) {
+					testKey = key + '-' + x;
+					x++;
 				}
 			} );
-			return found;
+			key = testKey;
+
+			return key;
 		}
 	});
 
