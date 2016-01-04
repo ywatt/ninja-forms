@@ -22,6 +22,8 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
         $grouped_settings[ 'recaptcha' ] = Ninja_Forms()->config( 'PluginSettingsReCaptcha' );
 
+        $grouped_settings[ 'general' ][ 'version' ][ 'value' ] = Ninja_Forms::VERSION;
+
         Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'grouped_settings' ) );
 
     }
