@@ -17,10 +17,13 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
     public function display()
     {
         $grouped_settings[ 'general' ]   = Ninja_Forms()->config( 'PluginSettingsGeneral' );
-
         $grouped_settings[ 'advanced' ]  = Ninja_Forms()->config( 'PluginSettingsAdvanced' );
-
         $grouped_settings[ 'recaptcha' ] = Ninja_Forms()->config( 'PluginSettingsReCaptcha' );
+
+        foreach( $grouped_settings as $group => $settings ){
+            foreach( $settings as $key => $setting ){}
+            $grouped_settings[ $group ][ $key ][ 'value' ] = '';
+        }
 
         $grouped_settings[ 'general' ][ 'version' ][ 'value' ] = Ninja_Forms::VERSION;
 
