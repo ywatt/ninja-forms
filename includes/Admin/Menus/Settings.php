@@ -11,13 +11,18 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
     public function __construct()
     {
         parent::__construct();
+
     }
 
     public function display()
     {
-        $settings[ 'general' ] = Ninja_Forms()->config( 'PluginSettingsGeneral' );
+        $grouped_settings[ 'general' ]   = Ninja_Forms()->config( 'PluginSettingsGeneral' );
 
-        Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'settings' ) );
+        $grouped_settings[ 'advanced' ]  = Ninja_Forms()->config( 'PluginSettingsAdvanced' );
+
+        $grouped_settings[ 'recaptcha' ] = Ninja_Forms()->config( 'PluginSettingsReCaptcha' );
+
+        Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'grouped_settings' ) );
+
     }
-
 } // End Class NF_Admin_Settings
