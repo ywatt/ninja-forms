@@ -19,13 +19,11 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
     protected $processing_fields = array( 'quantity', 'modifier', 'shipping', 'tax', 'total' );
 
+    protected $_settings = array( 'product_use_quantity', 'product_price', 'product_type', 'product_type' );
+
     public function __construct()
     {
         parent::__construct();
-
-        $this->_settings = $this->load_settings(
-            array( 'label', 'label_pos', 'product_use_quantity', 'product_price', 'product_type', 'product_type', 'classes' )
-        );
 
         $this->_nicename = __( 'Product', 'ninja-forms' );
     }

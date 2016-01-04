@@ -17,13 +17,11 @@ class NF_Fields_Total extends NF_Abstracts_Input
 
     protected $_test_value = '0.00';
 
+    protected $_settings_exclude = array( 'placeholder', 'default' );
+
     public function __construct()
     {
         parent::__construct();
-
-        $this->_settings = $this->load_settings(
-            array( 'key', 'label', 'label_pos' )
-        );
 
         $this->_nicename = __( 'Total', 'ninja-forms' );
     }

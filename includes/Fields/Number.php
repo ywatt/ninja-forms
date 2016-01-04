@@ -15,11 +15,11 @@ class NF_Fields_Number extends NF_Abstracts_Input
 
     protected $_test_value = 0;
 
+    protected $_settings = array( 'number' );
+
     public function __construct()
     {
         parent::__construct();
-
-        $this->_settings = $this->load_settings( array( 'label', 'label_pos', 'required', 'placeholder', 'number', 'default', 'classes' ) );
 
         $this->_nicename = __( 'Number', 'ninja-forms' );
     }

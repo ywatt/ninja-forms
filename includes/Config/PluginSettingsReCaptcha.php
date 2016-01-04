@@ -10,7 +10,7 @@ return apply_filters( 'ninja-forms-plugin-settings-recaptcha', array(
 
     'recaptcha_site_key' => array(
         'id'    => 'recaptcha_site_key',
-        'type'  => 'text',
+        'type'  => 'textbox',
         'label' => __( 'reCAPTCHA Site Key', 'ninja-forms' ),
         'desc'  => sprintf( __( 'Get a site key for your domain by registering  %shere%s', 'ninja-forms' ), '<a href="https://www.google.com/recaptcha/intro/index.html" target="_blank">', '</a>' )
     ),
@@ -24,7 +24,7 @@ return apply_filters( 'ninja-forms-plugin-settings-recaptcha', array(
     'recaptcha_secret_key' => array(
         'id'    => 'recaptcha_secret_key',
         'type'  => 'textbox',
-        'label' => __( 'reCAPTCHA Secret K', 'ninja-forms' ),
+        'label' => __( 'reCAPTCHA Secret Key', 'ninja-forms' ),
         'desc'  => '',
     ),
 

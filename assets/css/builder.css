@@ -954,14 +954,18 @@ input[type=checkbox].nf-toggle {
   padding: 12px 0 20px; }
   .nf-full input[type=checkbox].nf-toggle + label::before {
     left: auto;
-    right: 4px; }
+    right: 22px;
+    -webkit-transition: right 0.3s ease;
+    transition: right 0.3s ease; }
   .nf-full input[type=checkbox].nf-toggle + label::after {
     left: auto;
     right: 0; }
 
 .nf-full input[type=checkbox].nf-toggle:checked + label::before {
   left: auto;
-  right: 22px; }
+  right: 4px;
+  -webkit-transition: right 0.3s ease;
+  transition: right 0.3s ease; }
 
 .ninja-forms-app .nf-select {
   display: block;
