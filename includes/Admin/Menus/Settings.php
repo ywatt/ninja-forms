@@ -22,8 +22,9 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
 
         foreach( $grouped_settings as $group => $settings ){
-            foreach( $settings as $key => $setting ){}
-            $grouped_settings[ $group ][ $key ][ 'value' ] = '';
+            foreach( $settings as $key => $setting ){
+                $grouped_settings[ $group ][ $key ][ 'value' ] = '';
+            }
         }
 
         $grouped_settings[ 'general' ][ 'version' ][ 'value' ] = Ninja_Forms::VERSION;
