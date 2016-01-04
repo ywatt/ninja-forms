@@ -17,8 +17,9 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
     public function display()
     {
         $grouped_settings[ 'general' ]   = Ninja_Forms()->config( 'PluginSettingsGeneral' );
-        $grouped_settings[ 'advanced' ]  = Ninja_Forms()->config( 'PluginSettingsAdvanced' );
         $grouped_settings[ 'recaptcha' ] = Ninja_Forms()->config( 'PluginSettingsReCaptcha' );
+        $grouped_settings[ 'advanced' ]  = Ninja_Forms()->config( 'PluginSettingsAdvanced' );
+
 
         foreach( $grouped_settings as $group => $settings ){
             foreach( $settings as $key => $setting ){}

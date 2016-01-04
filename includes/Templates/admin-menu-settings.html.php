@@ -3,9 +3,7 @@
     echo "<pre>";
     var_dump(array_keys( $grouped_settings ) );
     echo "</pre>";
-    ?>Z
-
-
+    ?>
     <?php foreach( $grouped_settings as $group => $settings ) : ?>
         <div id="ninja_forms_metabox_general_settings" class="postbox ">
 			<span class="item-controls">
@@ -27,9 +25,10 @@
                                     break;
                                 case 'textbox' :
                                         echo "<input type='text' class='code widefat' name='{$setting['id']}' id='' value='{$setting['value']}'>";
+                                        echo $setting[ 'desc' ];
                                     break;
                                 case 'checkbox':
-                                    echo  "<input type='hidden' name='{$setting['id']}' value='0'>";
+                                    echo "<input type='hidden' name='{$setting['id']}' value='0'>";
                                     echo "<input type='checkbox' name='{$setting['id']}' value='1' id='{$setting['id']}' class='widefat'>";
                                 }
                             ?>
@@ -42,4 +41,3 @@
         </div>
     <?php endforeach; ?>
 </div>
-
