@@ -17,16 +17,13 @@ class NF_Fields_Quantity extends NF_Fields_Number
 
     protected $_test_value = 'Lorem ipsum';
 
+    protected $_settings = array( 'product_assignment' );
+
+    protected $_settings_exclude = array( 'required' );
+
     public function __construct()
     {
         parent::__construct();
-
-        $settings = $this->load_settings(
-           array( 'product_assignment' )
-        );
-       
-        $this->_settings = array_merge( $settings, $this->_settings );
-        unset( $this->_settings[ 'required'] );
 
         $this->_nicename = __( 'Quantity', 'ninja-forms' );
     }
