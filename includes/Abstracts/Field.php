@@ -94,7 +94,7 @@ abstract class NF_Abstracts_Field
 
         if( ! empty( $this->_settings_only ) ){
 
-            $this->_settings = $this->_settings_only;
+            $this->_settings = array_merge( $this->_settings, $this->_settings_only );
         } else {
 
             $this->_settings = array_merge( $this->_settings_all_fields, $this->_settings );
