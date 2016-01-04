@@ -64,6 +64,7 @@ define( [], function() {
 			// To close our drawer, we have to add our closed class to the builder and remove the opened class.
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
 			jQuery( builderEl ).addClass( 'nf-drawer-closed' ).removeClass( 'nf-drawer-opened' );
+			jQuery( builderEl ).removeClass( 'disable-main' );
 
 			// Get the right position of our closed drawer. Should be container size in -px.
 			var rightClosed = this.getClosedDrawerPos();
@@ -71,7 +72,7 @@ define( [], function() {
 			// Get our drawer element and give change the 'right' property to our closed position.
 			var drawerEl = nfRadio.channel( 'app' ).request( 'get:drawerEl' );
 			jQuery( drawerEl ).css( { 'right': rightClosed } );
-					
+
 			// In order to access properties in 'this' context in our interval below, we have to set it here.	
 			var that = this;
 
@@ -87,7 +88,9 @@ define( [], function() {
 	        	if ( rightClosed == jQuery( drawerEl ).css( 'right' ) ) {
 	        		clearInterval( that.checkCloseDrawerPos );
 		    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', false );
+		    		nfRadio.channel( 'app' ).request( 'remove:overlay' );
 		    		nfRadio.channel( 'drawer' ).trigger( 'closed' );
+
 	        	}
 			}, 150 );
 		},

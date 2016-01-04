@@ -1,6 +1,7 @@
 <div id="nf-builder" class="grey"></div>
 
 <script id="nf-tmpl-builder" type="text/template">
+    <div id="nf-overlay"></div>
     <div id="nf-header"></div>
     <div id="nf-main" class="nf-app-main"></div>
     <!-- <div id="nf-menu-drawer"></div> -->
@@ -295,14 +296,8 @@
 
 <script id="nf-tmpl-drawer-content-new-form" type="text/template">
     <span class="new-form-name"></span>
-
-    Before you publish your form, make sure that you have:
-    <ul>
-        <li>Added fields</li>
-        <li>Configured emails and actions</li>
-    </ul>
     <div>
-        <a href="#" class="nf-button secondary nf-close-drawer" style="float:left;" tabindex="-1">Cancel</a>
+        <a href="#" class="nf-button secondary nf-close-drawer" style="float:left;" tabindex="-1">Not Yet</a>
     </div>
     <a href="#" class="nf-button primary nf-close-drawer publish" tabindex="-1">Publish</a>
 </script>
