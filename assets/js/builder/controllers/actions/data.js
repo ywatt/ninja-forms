@@ -11,6 +11,17 @@ define( ['models/actions/actionCollection', 'models/actions/actionModel'], funct
 		initialize: function() {
 			// Load our action collection from our localized form data
 			this.collection = new actionCollection( preloadedFormData.actions );
+			this.collection.tmpNum = 1;
+
+			if ( 0 != this.collection.models.length ) {
+				var that = this;
+				_.each( this.collection.models, function( action ) {
+					if ( ! jQuery.isNumeric( action.get( 'id' ) ) ) {
+						that.collection.tmpNum++;
+					}
+				} );
+			}
+			console.log( this.collection.tmpNum );
 			// Set our removedIDs to an empty object. This will be populated when a action is removed so that we can add it to our 'deleted_actions' object.
 			this.collection.removedIDs = {};
 
@@ -40,6 +51,7 @@ define( ['models/actions/actionCollection', 'models/actions/actionModel'], funct
 		 */
 		addAction: function( data, silent ) {
 			silent = silent || false;
+
 			if ( false === data instanceof Backbone.Model ) {
 				var model = new actionModel( data );
 			} else {
