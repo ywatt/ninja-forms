@@ -287,6 +287,26 @@
     </header>
 </script>
 
+<script id="nf-tmpl-drawer-header-new-form" type="text/template">
+    <header class="nf-drawer-header">
+        <h3>Almost there...</h3>
+    </header>
+</script>
+
+<script id="nf-tmpl-drawer-content-new-form" type="text/template">
+    <span class="new-form-name"></span>
+
+    Before you publish your form, make sure that you have:
+    <ul>
+        <li>Added fields</li>
+        <li>Configured emails and actions</li>
+    </ul>
+    <div>
+        <a href="#" class="nf-button secondary nf-close-drawer" style="float:left;" tabindex="-1">Cancel</a>
+    </div>
+    <a href="#" class="nf-button primary nf-close-drawer publish" tabindex="-1">Publish</a>
+</script>
+
 <script id="nf-tmpl-app-menu-item" type="text/template">
     <li><a href="<%= renderUrl() %>" class="<%= renderClasses() %>" target="<%= renderTarget() %>" <%= renderDisabled() %>><%= nicename %><%= renderDashicons() %></a></li>
 </script>
@@ -323,9 +343,14 @@
 <!-- Field Settings Templates -->
 
 <script id="nf-tmpl-edit-setting-wrap" type="text/template">
-    <div class="nf-<%= renderWidth() %>" <%= renderVisible() %>>
-        <%= renderSetting() %> 
+    <div class="<%= renderClasses() %>" <%= renderVisible() %>>
+        <%= renderSetting() %>
+        <span class="nf-setting-error"></span>
     </div>
+</script>
+
+<script id="nf-tmpl-edit-setting-error" type="text/template">
+    <div><%= error %></div>
 </script>
 
 <script id="nf-tmpl-edit-setting-textbox" type="text/template">

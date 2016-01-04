@@ -39,8 +39,17 @@ define( [], function() {
 				var jsAction = 'nf_save_form';
 			}
 
+			var formModel = nfRadio.channel( 'app' ).request( 'get:formModel' );
+
+			if ( 'publish' == action && formModel.get( 'show_publish_options' ) ) {
+				nfRadio.channel( 'app' ).request( 'open:drawer', 'newForm' );
+				var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
+				jQuery( builderEl ).addClass( 'disable-main' );
+				return false;
+			}
+
 			// Get our form data
-			var formData = nfRadio.channel( 'app' ).request( 'get:formData' );
+			var formData = nfRadio.channel( 'app' ).request( 'get:formModel' );
 
 			// Turn our formData model into an object
 			var data = JSON.parse( JSON.stringify( formData ) );

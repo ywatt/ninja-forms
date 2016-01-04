@@ -16,6 +16,8 @@ define( [], function() {
 		initialize: function() {
 			// Listen for model attribute changes
 			this.bind( 'change', this.changeSetting, this );
+
+			this.listenTo( nfRadio.channel( 'settings' ), 'update:fieldKey', this.updateFieldKey );
 		},
 
 		/**
@@ -26,6 +28,10 @@ define( [], function() {
 		 */
 		changeSetting: function() {
 			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
+		},
+
+		updateFieldKey: function( keyModel, settingModel ) {
+			nfRadio.channel( 'app' ).request( 'replace:fieldKey', this, keyModel, settingModel );
 		}
 	} );
 	

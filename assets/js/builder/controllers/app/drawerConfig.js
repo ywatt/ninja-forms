@@ -15,7 +15,9 @@ define( [
 	'views/actions/drawer/addAction',
 	'views/settings/drawer/editFormSettings',
 	'views/app/drawer/contentViewChanges',
-	'views/app/drawer/headerViewChanges'
+	'views/app/drawer/headerViewChanges',
+	'views/app/drawer/contentNewForm',
+	'views/app/drawer/headerNewForm'
 	], function(
 		drawerCollection,
 		addFieldView,
@@ -23,7 +25,9 @@ define( [
 		addActionView,
 		editFormSettingsView,
 		viewChangesView,
-		viewChangesHeaderView
+		viewChangesHeaderView,
+		newFormView,
+		newFormHeaderView
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
@@ -51,13 +55,6 @@ define( [
 					}
 				},
 				{
-					id: 'editFormSettings',
-
-					getContentView: function( data ) {
-						return new editFormSettingsView( data );
-					}
-				},
-				{
 					id: 'viewChanges',
 
 					// getHeaderView() is defined by default, but we need to override it for the viewChanges drawer.
@@ -67,6 +64,18 @@ define( [
 
 					getContentView: function( data ) {
 						return new viewChangesView( data );
+					}
+				},
+				{
+					id: 'newForm',
+
+					// getHeaderView() is defined by default, but we need to override it for the newForm drawer.
+					getHeaderView: function( data ) {
+						return new newFormHeaderView( data );
+					},
+
+					getContentView: function( data ) {
+						return new newFormView( data );
 					}
 				}
 			] );

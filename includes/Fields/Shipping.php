@@ -37,4 +37,30 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
 
         return $groups;
     }
+
+    public function admin_form_element( $id, $value )
+    {
+        $field = Ninja_Forms()->form()->get_field( $id );
+
+        $value = $field->get_setting( 'shipping_cost' );
+
+        switch( $field->get_setting( 'shipping_type' ) ){
+            case 'single':
+
+                return "<input class='widefat' name='fields[$id]' value='$value' />";
+
+            case 'select':
+
+                $options = '<option>--</option>';
+                foreach( $field->get_setting( 'shipping_options' ) as $option ){
+                    $selected = ( $value == $option[ 'value' ] ) ? "selected" : '';
+                    $options .= "<option value='{$option[ 'value' ]}' $selected>{$option[ 'label' ]}</option>";
+                }
+
+                return "<select class='widefat' name='fields[$id]' id=''>$options</select>";
+
+            default:
+                return "";
+        }
+    }
 }

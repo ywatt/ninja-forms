@@ -29,7 +29,7 @@ define( ['views/app/header', 'views/app/subHeader', 'views/app/formTitle'], func
 		onShow: function() {
 			this.app.show( new appHeaderView() );
 
-			var formData = nfRadio.channel( 'app' ).request( 'get:formData' );
+			var formData = nfRadio.channel( 'app' ).request( 'get:formModel' );
 			var formSettings = formData.get( 'settings' );
 			this.formTitle.show( new formTitleView( { model: formSettings } ) );
 

@@ -38,7 +38,7 @@ define( [], function() {
 			var that = this;
 	    	return {
 	    		renderTitle: function(){
-	    			var formData = nfRadio.channel( 'app' ).request( 'get:formData' );
+	    			var formData = nfRadio.channel( 'app' ).request( 'get:formModel' );
 	    			return formData.get( 'settings' ).get( 'title' );
 				},
 			}

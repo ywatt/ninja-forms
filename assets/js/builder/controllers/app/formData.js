@@ -21,7 +21,7 @@ define( ['models/app/formModel'], function( formModel) {
 			// Set our settings collection
 			this.model.set( 'settings', nfRadio.channel( 'settings' ).request( 'get:settings' ) );
 			// Respond to requests for form data.
-			nfRadio.channel( 'app' ).reply( 'get:formData', this.getFormData, this );
+			nfRadio.channel( 'app' ).reply( 'get:formModel', this.getFormModel, this );
 		},
 
 		/**
@@ -30,7 +30,7 @@ define( ['models/app/formModel'], function( formModel) {
 		 * @since  3.0
 		 * @return backbone.model
 		 */
-		getFormData: function() {
+		getFormModel: function() {
 			return this.model;
 		}
 

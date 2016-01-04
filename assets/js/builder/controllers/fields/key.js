@@ -12,10 +12,16 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// When we add a field, update its key.
-			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.addKey );
+			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.newFieldKey );
+
+			// When we edit a label, update our key.
+			this.listenTo( nfRadio.channel( 'fieldSetting-label' ), 'update:setting', this.updateLabel );
 
 			// When we edit a key, check for places that key might be used.
 			this.listenTo( nfRadio.channel( 'fieldSetting-key' ), 'update:setting', this.updateKey );
+
+			// When we type inside the admin key field, we need to save our manual_key setting.
+			this.listenTo( nfRadio.channel( 'setting-key' ), 'keyup:setting', this.keyUp );
 		},
 
 		/**
@@ -25,9 +31,28 @@ define( [], function() {
 		 * @param backbone.model model new field model
 		 * @return void
 		 */
-		addKey: function( model ) {
-			var num = nfRadio.channel( 'fields' ).request( 'get:tmpID' );
-			model.set( 'key', model.get( 'type' ) + '-' + num );
+		newFieldKey: function( model ) {
+			var key = this.keyExists( model.get( 'type' ) );
+			model.set( 'key', key );
+			model.set( 'manual_key', false );	
+		},
+
+		updateLabel: function( model ) {
+
+			/*
+			 * If we haven't entered a key manually, update our key when our label changes.
+			 */
+			if ( ! model.get( 'manual_key' ) && 0 != jQuery.trim( model.get( 'label' ) ).length ) {
+				/*
+				 * When we're editing settings, we expect the edits to fire one at a time.
+				 * Since we're calling this in the middle of our label update, anything that inquires about what has changed after we set our key will see both label and key.
+				 * We need to remove the label from our model.changed property so that all that has changed is the key.
+				 * 
+				 */
+				delete model.changed.label;
+				var key = this.keyExists( model.get( 'label' ) );
+				model.set( 'key', key );				
+			}
 		},
 
 		/**
@@ -37,11 +62,50 @@ define( [], function() {
 		 * @param  backbone.model model field model
 		 * @return void
 		 */
-		updateKey: function( model ) {
-			
-			console.log( model.changedAttributes().key );
-		}
+		updateKey: function( dataModel ) {
+			var key = dataModel.get( 'key' );
+			this.settingModel = nfRadio.channel( 'fields' ).request( 'get:settingModel', 'key' );
+			this.setError( key, dataModel );
+		},
 
+		keyUp: function( e, settingModel, dataModel ) {
+			dataModel.set( 'manual_key', true );
+			this.settingModel = settingModel;
+			var key = jQuery( e.target ).val();
+			this.setError( key, dataModel );
+		},
+
+		setError: function( key, dataModel ) {
+			var error = false;
+			if ( '' == jQuery.trim( key ) ) {
+				error = 'Field keys can\'t be empty. Please enter a key.';
+			} else if ( key != this.keyExists( key, dataModel ) ) {
+				error = 'Field keys must be unique. Please enter another key.'
+			}
+
+			if ( error ) {
+				this.settingModel.set( 'error', error );
+			} else {
+				nfRadio.channel( 'app' ).trigger( 'update:fieldKey', dataModel );
+				this.settingModel.set( 'error', false );
+			}
+		},
+
+		keyExists: function( key, dataModel ) {
+			key = jQuery.slugify( key );
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			var x = 1;
+			var testKey = key;
+			_.each( fieldCollection.models, function( field ) {
+				if ( dataModel != field && testKey == field.get( 'key' ) ) {
+					testKey = key + '-' + x;
+					x++;
+				}
+			} );
+			key = testKey;
+
+			return key;
+		}
 	});
 
 	return controller;

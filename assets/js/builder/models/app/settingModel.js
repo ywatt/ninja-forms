@@ -21,10 +21,40 @@ define( [], function() {
 		initialize: function() {
 			// Send out two messages saying that we've initialized a setting model.
 			nfRadio.channel( 'app' ).trigger( 'init:settingModel', this );
-			if ( 'undefined' == typeof this.get( 'type' ) ) {
-				// console.log( this );
-			}
 			nfRadio.channel( this.get( 'type' ) ).trigger( 'init:settingModel', this );
+
+			this.on( 'change:error', this.maybePreventUI, this );
+
+			/*
+			 * If we have an objectType set on our collection, then we're creating a model for the generic settings collection.
+			 * If we're using merge tags in this setting
+			 */
+			if ( this.get( 'use_merge_tags' ) && 'undefined' != typeof this.collection.options.objectType ) {
+				this.listenTo( nfRadio.channel( 'app' ), 'update:fieldKey', this.updateKey );
+			}
+		},
+
+		/**
+		 * When a field key is updated, send out a radio message requesting that this setting be checked for the old key.
+		 * We want to send the message on the objectType channel.
+		 * This means that if this setting is for fields, it will trigger on the fields channel, actions, etc.
+		 * 
+		 * @since  3.0
+		 * @param  Backbone.Model 	keyModel data model representing the field for which the key just changed
+		 * @return void
+		 */
+		updateKey: function( keyModel ) {
+			nfRadio.channel( this.collection.options.objectType ).trigger( 'update:fieldKey', keyModel, this );
+		},
+
+		maybePreventUI: function() {
+			if ( this.get( 'error' ) ) {
+				nfRadio.channel( 'drawer' ).request( 'prevent:close', 'fieldSetting-key-error' );
+				nfRadio.channel( 'app' ).request( 'prevent:changeDomain', 'fieldSetting-key-error' );				
+			} else {
+				nfRadio.channel( 'drawer' ).request( 'enable:close', 'fieldSetting-key-error' );
+				nfRadio.channel( 'app' ).request( 'enable:changeDomain', 'fieldSetting-key-error' );
+			}
 		}
 	} );
 	

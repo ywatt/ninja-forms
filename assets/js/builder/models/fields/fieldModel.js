@@ -16,7 +16,7 @@ define( [], function() {
 
 		initialize: function() {
 			// Listen for model attribute changes
-			this.bind( 'change', this.changeSetting, this );
+			this.on( 'change', this.changeSetting, this );
 			
 			// Get our parent field type.
 			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', this.get( 'type' ) );
@@ -26,7 +26,7 @@ define( [], function() {
 			var that = this;
 			_.each( fieldType.get( 'settingDefaults' ), function( val, key ) {
 				if ( 'undefined' == typeof that.get( key ) ) {
-					that.set( key, val );
+					that.set( key, val, { silent: true } );
 				}
 			} );
 			
@@ -42,18 +42,24 @@ define( [], function() {
 			nfRadio.channel( 'fields' ).trigger( 'init:fieldModel', this );
 			nfRadio.channel( 'fields-' + parentType ).trigger( 'init:fieldModel', this );
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:fieldModel', this );
+
+			this.listenTo( nfRadio.channel( 'fields' ), 'update:fieldKey', this.updateFieldKey );
 		},
 
 		/**
-		 * Fires an event on the fieldSetting-{key} channel saying we've updated a setting.
+		 * Fires an event on the fieldSetting-{name} channel saying we've updated a setting.
 		 * When we change the model attributes, fire an event saying we've changed something.
 		 * 
 		 * @since  3.0
 		 * @return void
 		 */
 		changeSetting: function( model ) {
-			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
 			nfRadio.channel( 'fieldSetting-' + _.keys( model.changedAttributes() )[0] ).trigger( 'update:setting', this ) ;
+			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
+		},
+
+		updateFieldKey: function( keyModel, settingModel ) {
+			nfRadio.channel( 'app' ).request( 'replace:fieldKey', this, keyModel, settingModel );
 		}
 	} );
 	

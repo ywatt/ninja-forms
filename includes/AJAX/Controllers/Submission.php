@@ -9,14 +9,14 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     public function __construct()
     {
         if( isset( $_POST['formData'] ) ) $this->_form_data = json_decode( stripslashes( $_POST['formData'] ), TRUE  );
-        add_action( 'wp_ajax_nf_ajax_submit',   array( $this, 'process' )  );
-        add_action( 'wp_ajax_nopriv_nf_ajax_submit',   array( $this, 'process' )  );
+        add_action( 'wp_ajax_nf_ajax_submit',   array( $this, 'submit' )  );
+        add_action( 'wp_ajax_nopriv_nf_ajax_submit',   array( $this, 'submit' )  );
 
         add_action( 'wp_ajax_nf_ajax_resume',   array( $this, 'resume' )  );
         add_action( 'wp_ajax_nopriv_nf_ajax_resume',   array( $this, 'resume' )  );
     }
 
-    public function process()
+    public function submit()
     {
         check_ajax_referer( 'ninja_forms_ajax_nonce', 'security' );
 
@@ -32,32 +32,39 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $this->_data['fields'] = $this->_form_data['fields'];
 
-        $field_merge_tags = Ninja_Forms()->merge_tags[ 'fields' ];
-        
         $this->validate_fields();
 
         $this->process_fields();
 
-        $this->populate_field_merge_tags( $this->_data['fields'], $field_merge_tags );
-
         if( isset( $this->_data[ 'settings' ][ 'calculations' ] ) ) {
             $this->process_calculations( $this->_data[ 'settings' ][ 'calculations' ] );
         }
+
+        $this->process();
+    }
+
+    public function resume()
+    {
+        $this->_data = Ninja_Forms()->session()->get( 'nf_processing_data' );
+
+        $this->_form_id = $this->_data[ 'form_id' ];
+
+        unset( $this->_data[ 'halt' ] );
+
+        $this->process();
+    }
+
+    protected function process()
+    {
+        $field_merge_tags = Ninja_Forms()->merge_tags[ 'fields' ];
+
+        $this->populate_field_merge_tags( $this->_data['fields'], $field_merge_tags );
 
         if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ) {
             $this->run_actions_preview();
         } else {
             $this->run_actions();
         }
-
-        $this->_respond();
-    }
-
-    public function resume()
-    {
-        $this->_data = $this->_form_data;
-
-        unset( $this->_data[ 'halt' ] );
 
         $this->_respond();
     }
@@ -135,7 +142,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
             $action_settings = apply_filters( 'ninja_forms_run_action_settings', $action->get_settings(), $this->_form_id, $action->get_id(), $this->_data['settings'] );
 
-            $this->_data[ 'run_action' ][ $action_settings['type'] ][ 'active' ] = $action_settings['active'];
+            if( isset( $this->_data[ 'processed_actions' ][ $action->get_id() ] ) ) continue;
 
             if( ! $action_settings['active'] ) continue;
 
@@ -144,6 +151,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $data = Ninja_Forms()->actions[ $type ]->process( $action_settings, $this->_form_id, $this->_data );
 
             $this->_data = ( $data ) ? $data : $this->_data;
+
+            $this->_data[ 'processed_actions' ][ $action->get_id() ] = $this->_data;
 
             $this->maybe_halt();
         }
@@ -175,7 +184,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     {
         if( isset( $this->_data[ 'halt' ] ) && $this->_data[ 'halt' ] ){
 
-            // TODO: Set processing data transient
+            Ninja_Forms()->session()->set( 'nf_processing_data', $this->_data );
 
             $this->_respond();
         }

@@ -100,6 +100,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         protected $_logger = '';
 
         /**
+         * @var NF_Session
+         */
+        protected $session = '';
+
+        /**
          * Main Ninja_Forms Instance
          *
          * Insures that only one instance of Ninja_Forms exists in memory at any one
@@ -213,6 +218,8 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                  */
                 self::$instance->_eos[ 'parser' ] = require_once 'includes/Libraries/EOS/Parser.php';
 
+                self::$instance->session = new NF_Session();
+
                 /*
                  * Activation Hook
                  * TODO: Move to a permanent home.
@@ -289,6 +296,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         public function eos()
         {
             return new Parser();
+        }
+
+        public function session()
+        {
+            return $this->session;
         }
 
         /**

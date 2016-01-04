@@ -149,7 +149,7 @@ final class NF_Database_MockData
         $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'label',  'Mock Success Message Action' )
             ->update_setting( 'type', 'successmessage' )
-            ->update_setting( 'message', 'This is a test success message' )
+            ->update_setting( 'message', 'Thank you {field:name} for filling out my form!' )
             ->update_setting( 'active', TRUE )
             ->save();
 
@@ -163,7 +163,7 @@ final class NF_Database_MockData
         $action = Ninja_Forms()->form( $form_id )->action()->get();
         $action->update_setting( 'label',  'Mock Email Action' )
             ->update_setting( 'type', 'email' )
-            ->update_setting( 'to', array( 'myformbuildingbringsallthedeveloperstotheyard@wpninjas.com' ) )
+            ->update_setting( 'to', 'myformbuildingbringsallthedeveloperstotheyard@wpninjas.com' )
             ->update_setting( 'subject', 'This is an email action.' )
             ->update_setting( 'message', 'Hello, Ninja Forms!' )
             ->update_setting( 'active', FALSE )

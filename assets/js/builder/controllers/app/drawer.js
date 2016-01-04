@@ -112,8 +112,24 @@ define( [], function() {
 		 * @return void
 		 */
 		openDrawer: function( drawerID, data ) {
-			// If we haven't sent a data object, set the variable to false.
-			data = data || false;
+			if ( this.maybePreventClose() ) {
+				return false;
+			}
+
+			// If we haven't sent a data object, set the variable to an empty object.
+			data = data || {};
+
+			/*
+			 * If we're dealing with something that has a model, set the proper active state.
+			 *
+			 * TODO: Make this more dynamic. I'm not sure that it fits in the drawer controller.
+			 */
+			if ( 'undefined' != typeof data.model ) {
+				var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
+				var currentDomainID = currentDomain.get( 'id' );
+				nfRadio.channel( currentDomainID ).request( 'clear:editActive' );
+				data.model.set( 'editActive', true );
+			}
 
 			// Send out a message requesting our drawer view to load the content for our drawer ID.
 			nfRadio.channel( 'drawer' ).request( 'load:drawerContent', drawerID, data );
@@ -138,6 +154,7 @@ define( [], function() {
 			 * request that the app update its current drawer to the one we opened
 			 * trigger a drawer opened message
 			 */
+			
 			this.checkOpenDrawerPos = setInterval( function() {
 	        	if ( '0px' == jQuery( drawerEl ).css( 'right' ) ) {
 	        		clearInterval( that.checkOpenDrawerPos );
