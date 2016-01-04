@@ -465,6 +465,145 @@ final class NF_Database_MockData
             ->save();
     }
 
+    public function form_bathroom_sink()
+    {
+        /*
+         * FORM
+         */
+        $form = Ninja_Forms()->form()->get();
+        $form->update_setting( 'title', 'Bathroom Sink' );
+        $form->save();
+
+        $form_id = $form->get_id();
+
+        /*
+         * FIELDS
+         */
+
+        $fields = array(
+            array(
+                'type' 			=> 'textbox',
+                'label'			=> 'Textbox',
+                'key'           => 'textbox',
+            ),
+            array(
+                'type' 			=> 'firstname',
+                'label'			=> 'First Name',
+                'key'           => 'first_name',
+            ),
+            array(
+                'type' 			=> 'lastname',
+                'label'			=> 'Last Name',
+                'key'           => 'last_name',
+            ),
+            array(
+                'type' 			=> 'hidden',
+                'label'			=> 'Hidden',
+                'label_pos' 	=> 'hidden',
+                'key'           => 'hidden',
+            ),
+            array(
+                'type' 			=> 'textarea',
+                'label'			=> 'Textarea',
+                'key'           => 'textarea',
+            ),
+            array(
+                'type' 			=> 'listselect',
+                'label'			=> 'Select List',
+                'options'      => array(
+                    array(
+                        'label' => 'Option One',
+                        'value' => 1,
+                        'calc'  => '',
+                        'order' => 1,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'label' => 'Option Two',
+                        'value' => 2,
+                        'calc'  => '',
+                        'order' => 2,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'label' => 'Option Three',
+                        'value' => 3,
+                        'calc'  => '',
+                        'order' => 3,
+                        'selected' => 0,
+                    )
+                ),
+                'key'           => 'select_list',
+            ),
+            array(
+                'type' 			=> 'listradio',
+                'label'			=> 'Radio List',
+                'options'       => array(
+                    array(
+                        'label' => 'Option One',
+                        'value' => 1,
+                        'calc'  => '',
+                        'order' => 1,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'label' => 'Option Two',
+                        'value' => 2,
+                        'calc'  => '',
+                        'order' => 2,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'label' => 'Option Three',
+                        'value' => 3,
+                        'calc'  => '',
+                        'order' => 3,
+                        'selected' => 0,
+                    )
+                ),
+                'key'           => 'radio_list',
+            ),
+            array(
+                'type' 			=> 'checkbox',
+                'label'			=> 'Checkbox',
+                'key'           => 'checkbox',
+            ),
+            // array(
+            //     'type' 			=> 'button',
+            //     'label'			=> 'Button',
+            //     'label_pos' 	=> 'hidden',
+            // ),
+        );
+
+        $order = 1;
+        foreach ($fields as $settings) {
+
+            unset($settings['id']);
+
+            $field = Ninja_Forms()->form($form_id)->field()->get();
+
+            $settings[ 'order' ] = $order;
+
+            $settings[ 'label_pos' ] = 'above';
+
+            $field->update_settings($settings)->save();
+
+            $order++;
+        }
+
+        $submit = Ninja_Forms()->form($form_id)->field()->get();
+        $submit->update_setting( 'label', 'Submit')
+            ->update_setting( 'type', 'submit' )
+            ->update_setting( 'order', $order)
+            ->update_setting( 'process_label', 'processing' )
+            ->save();
+
+        $action = Ninja_Forms()->form( $form_id )->action()->get();
+        $action->update_setting( 'label',  'Mock Save Action' )
+            ->update_setting( 'type', 'save' )
+            ->save();
+    }
+
     public function form_long_form( $num_fields = 500 )
     {
         /*
