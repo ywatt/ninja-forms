@@ -9,6 +9,9 @@
                 <table class="form-table">
                     <tbody>
                         <?php foreach( $settings as $key => $setting ) : ?>
+
+                            <?php if( 'prompt' == $setting[ 'type' ] ) continue; ?>
+
                             <tr id="row_<?php echo $setting[ 'id' ]; ?>">
                                 <th scope="row">
                                     <label for="<?php echo $setting[ 'id' ]; ?>"><?php echo $setting[ 'label' ]; ?></label>
