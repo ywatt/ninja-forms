@@ -1,3 +1,12 @@
+/* ---------------------------------
+/  Generic styles & classes
+----------------------------------*/
+.nf-box {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
 
 .nf-extend {
     float: left;
