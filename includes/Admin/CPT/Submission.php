@@ -12,6 +12,9 @@ class NF_Admin_CPT_Submission
     {
         add_action( 'init', array( $this, 'custom_post_type' ), 0 );
 
+        // Add the appropriate data for our custom columns.
+        add_action( 'manage_posts_custom_column', array( $this, 'custom_columns' ), 10, 2 );
+
         add_action( 'save_post', array( $this, 'save_nf_sub' ), 10, 2 );
 
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 2 );
@@ -60,6 +63,10 @@ class NF_Admin_CPT_Submission
             'capability_type'     => 'page',
         );
         register_post_type( 'nf_sub', $args );
+    }
+
+    public function custom_columns( $column, $sub_id ) {
+
     }
 
     public function save_nf_sub( $nf_sub_id, $nf_sub )
