@@ -11,6 +11,8 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
 
     protected $_type = 'list';
 
+    protected $_test_value = FALSE;
+
     public static $_base_template = 'list';
 
     public function __construct()

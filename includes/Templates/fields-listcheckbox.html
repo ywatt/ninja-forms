@@ -6,7 +6,7 @@
 
 <script id='nf-tmpl-field-listcheckbox-option' type='text/template'>
     <li>
-        <label><input type="checkbox" name="nf-field-<%= fieldID %>" class="<%= classes %> nf-element" value="<%= value %>" <%= ( value == currentValue ) ? 'checked="checked"' : '' %>> <%= label %></label>
+        <label><input type="checkbox" name="nf-field-<%= fieldID %>" class="<%= classes %> nf-element" value="<%= value %>" <%= ( 1 == selected ) ? 'checked="checked"' : '' %>> <%= label %></label>
     </li>
 </script>
 

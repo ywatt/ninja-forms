@@ -4,6 +4,7 @@ define(
 		'controllers/changeField',
 		'controllers/changeEmail',
 		'controllers/fieldCheckbox',
+		'controllers/fieldCheckboxList',
 		'controllers/fieldRadio',
 		'controllers/mirrorField',
 		'controllers/confirmField',
@@ -27,6 +28,7 @@ define(
 		ChangeField,
 		ChangeEmail,
 		FieldCheckbox,
+		FieldCheckboxList,
 		FieldRadio,
 		MirrorField,
 		ConfirmField,
@@ -51,6 +53,7 @@ define(
 				var changeField = new ChangeField();
 				var changeEmail = new ChangeEmail();
 				var fieldCheckbox = new FieldCheckbox();
+				var fieldCheckboxList = new FieldCheckboxList();
 				var fieldRadio = new FieldRadio();
 				var mirrorField = new MirrorField();
 				var confirmField = new ConfirmField();
