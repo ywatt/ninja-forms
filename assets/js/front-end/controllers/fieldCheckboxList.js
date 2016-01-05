@@ -1,6 +1,7 @@
 define([], function() {
     var controller = Marionette.Object.extend( {
         initialize: function() {
+            this.listenTo( nfRadio.channel( 'listcheckbox' ), 'change:field', this.fieldChange );
             this.listenTo( nfRadio.channel( 'listcheckbox' ), 'change:modelValue', this.changeModelValue );
             this.listenTo( nfRadio.channel( 'listcheckbox' ), 'init:model', this.register );
         },
@@ -8,12 +9,36 @@ define([], function() {
         register: function( model ) {
             model.set( 'renderOptions', this.renderOptions );
             model.set( 'renderOtherText', this.renderOtherText );
+            model.set( 'selected', [] );
+        },
+
+        fieldChange: function( el, model ) {
+
+            var selected = model.get( 'selected' ) || [];
+            if ( typeof selected == 'string' ) selected = [ selected ];
+
+            var value = jQuery( el).val();
+            var checked = jQuery( el ).attr( 'checked' );
+            if ( checked ) {
+                selected.push( value );
+            } else {
+
+                var i = selected.indexOf( value );
+                if( -1 != i ){
+                    selected.splice( i, 1 );
+                }
+            }
+
+            model.set( 'selected', selected );
         },
 
         changeModelValue: function( model ) {
             if ( 1 == model.get( 'show_other' ) ) {
                 model.set( 'reRender', true );
             }
+
+            var selected = model.get( 'selected' );
+            model.set( 'value', selected );
         },
 
         renderOptions: function() {
@@ -34,7 +59,9 @@ define([], function() {
                 option.classes = that.classes;
                 option.currentValue = that.value;
 
-                console.log( option.selected );
+                if( option.selected ){
+                    that.selected.push( option.value );
+                }
 
                 html += _.template( jQuery( '#nf-tmpl-field-listcheckbox-option' ).html(), option );
             } );
