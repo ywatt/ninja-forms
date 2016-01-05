@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Ninja Forms - Three Alpha
+Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
 Version: 3.0-Beta-1-CBaker
@@ -12,9 +12,7 @@ Domain Path: /lang/
 Copyright 2015 WP Ninjas.
 */
 
-define( 'LOAD_DEPRECATED', FALSE );
-
-if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
+if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
 
     include 'deprecated/ninja-forms.php';
 
@@ -124,6 +122,8 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 
                 self::$url = plugin_dir_url( __FILE__ );
 
+                update_option( 'ninja_forms_version', self::VERSION );
+
                 /*
                  * Register our autoloader
                  */
@@ -219,6 +219,11 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
                 self::$instance->_eos[ 'parser' ] = require_once 'includes/Libraries/EOS/Parser.php';
 
                 self::$instance->session = new NF_Session();
+
+                /*
+                 * Plugin Settings
+                 */
+                self::$instance->settings = get_option( 'ninja_forms_settings' );
 
                 /*
                  * Activation Hook
