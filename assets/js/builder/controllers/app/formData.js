@@ -11,9 +11,7 @@ define( ['models/app/formModel'], function( formModel) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Instantiate Form Model
-			this.model = new formModel;
-			// Set our form ID
-			this.model.set( 'id', preloadedFormData.id );
+			this.model = new formModel( { id: preloadedFormData.id } );
 			// Set our field collection
 			this.model.set( 'fields', nfRadio.channel( 'fields' ).request( 'get:collection' ) );
 			// Set our actions collection
