@@ -103,6 +103,14 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
         protected $session = '';
 
         /**
+         * Plugin Settings
+         *
+         * @since 3.0
+         * @var array
+         */
+        protected $settings = array();
+
+        /**
          * Main Ninja_Forms Instance
          *
          * Insures that only one instance of Ninja_Forms exists in memory at any one
@@ -307,6 +315,31 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
         {
             return $this->session;
         }
+
+        public function get_setting( $key = '' )
+        {
+            if( empty( $key ) || ! isset( $this->settings[ $key ] ) ) return FALSE;
+
+            return $this->settings[ $key ];
+        }
+
+        public function get_settings()
+        {
+            return $this->settings;
+        }
+
+        public function update_setting( $key, $value )
+        {
+            $this->settings[ $key ] = $value;
+            $this->update_settings();
+        }
+
+        public function update_settings( $settings = array() )
+        {
+            $this->settings = array_merge( $this->settings, $settings );
+            update_option( 'ninja_forms_settings', $this->settings );
+        }
+
 
         /**
          * Display Wrapper
