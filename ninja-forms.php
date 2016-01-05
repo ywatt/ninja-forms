@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms - Three Alpha
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 3.0-Alpha-4-Baker
+Version: 3.0-Beta-1-CBaker
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -29,7 +29,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
         /**
          * @since 3.0
          */
-        const VERSION = '2.9.27';
+        const VERSION = '3.0';
 
         /**
          * @var Ninja_Forms
