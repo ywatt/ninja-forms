@@ -1,6 +1,6 @@
 <div class="wrap">
     <?php foreach( $grouped_settings as $group => $settings ) : ?>
-        <div id="ninja_forms_metabox_<?php echo $group; ?>" class="postbox ">
+        <div id="ninja_forms_metabox_<?php echo $group; ?>_settings" class="postbox">
 			<span class="item-controls">
 				<a class="item-edit metabox-item-edit" id="edit_id" title="Edit Menu Item" href="#">Edit Menu Item</a>
 			</span>
@@ -21,16 +21,16 @@
                                     switch ( $setting[ 'type' ] ) {
                                         case 'desc' :
                                             echo $setting[ 'value' ];
-                                            echo $setting[ 'desc' ];
+                                            echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                             break;
                                         case 'textbox' :
-                                            echo "<input type='text' class='code widefat' name='{$setting['id']}' id='' value='{$setting['value']}'>";
-                                            echo $setting[ 'desc' ];
+                                            echo "<input type='text' class='code widefat' name='{$setting['id']}' id='{$setting['id']}' value='{$setting['value']}'>";
+                                            echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                             break;
                                         case 'checkbox' :
                                             echo "<input type='hidden' name='{$setting['id']}' value='0'>";
                                             echo "<input type='checkbox' name='{$setting['id']}' value='1' id='{$setting['id']}' class='widefat'>";
-                                            echo '<br>' . $setting[ 'desc' ];
+                                            echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                     }
                                 ?>
                             </td>
@@ -42,4 +42,3 @@
         </div>
     <?php endforeach; ?>
 </div>
-
