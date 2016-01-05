@@ -10,11 +10,16 @@ class NF_Admin_CPT_Submission
      */
     public function __construct()
     {
-        add_action( 'init', array( $this, 'custom_post_type' ), 0 );
+        // Register our submission custom post type.
+        add_action( 'init', array( $this, 'custom_post_type' ), 5 );
+
+        // Change our submission columns.
+        add_filter( 'manage_nf_sub_posts_columns', array( $this, 'change_columns' ) );
 
         // Add the appropriate data for our custom columns.
         add_action( 'manage_posts_custom_column', array( $this, 'custom_columns' ), 10, 2 );
 
+        // Save our metabox values
         add_action( 'save_post', array( $this, 'save_nf_sub' ), 10, 2 );
 
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 2 );
@@ -65,7 +70,43 @@ class NF_Admin_CPT_Submission
         register_post_type( 'nf_sub', $args );
     }
 
-    public function custom_columns( $column, $sub_id ) {
+    public function change_columns( $columns )
+    {
+        if( ! isset( $_GET[ 'form_id' ] ) ) return $columns;
+
+        $columns = array(
+            'cb'    => '<input type="checkbox" />',
+            'id' => __( '#', 'ninja-forms' ),
+        );
+
+        $form_id = absint( $_GET[ 'form_id' ] );
+
+        $fields = Ninja_Forms()->form( $form_id )->get_fields();
+
+        foreach( $fields as $field ) {
+            $id = $field->get_id();
+            $label = $field->get_setting( 'label' );
+            $columns[ $id ] = $label;
+        }
+
+        $columns['sub_date'] = __( 'Date', 'ninja-forms' );
+
+        return $columns;
+    }
+
+    public function custom_columns( $column, $sub_id )
+    {
+        $sub = Ninja_Forms()->form()->get_sub( $sub_id );
+
+        if( 'id' == $column ) {
+            echo $sub->get_seq_num();
+        }
+
+        if( is_numeric( $column ) ){
+            $value = $sub->get_field_value( $column );
+            $field = Ninja_Forms()->form()->get_field( $column );
+            echo apply_filters( 'ninja_forms_custom_columns', $value, $field );
+        }
 
     }
 
