@@ -24,7 +24,7 @@
     width: 80px; }
   .nf-fields textarea {
     height: 200px; }
-  .nf-fields select {
+  .nf-fields .listselect-wrap select {
     height: 48px; }
   .nf-fields .nf-static {
     background: transparent;

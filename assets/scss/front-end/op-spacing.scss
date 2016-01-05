@@ -29,8 +29,10 @@
     textarea {
         height: 200px;
     }
-    select {
-        height: 48px;
+    .listselect-wrap {
+        select {
+            height: 48px;
+        }
     }
     .nf-static {
         background: transparent;
