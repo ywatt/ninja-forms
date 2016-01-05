@@ -11,7 +11,7 @@ class NF_Fields_ListMultiselect extends NF_Abstracts_List
 
     protected $_section = '';
 
-    protected $_templates = 'listmultiselect';
+    protected $_templates = 'listselect';
 
     protected $_old_classname = 'list-multiselect';
 

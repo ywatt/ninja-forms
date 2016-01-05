@@ -2,10 +2,12 @@ define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'listselect' ), 'init:model', this.register );
+			this.listenTo( nfRadio.channel( 'listmultiselect' ), 'init:model', this.register );
 		},
 
 		register: function( model ) {
 			model.set( 'renderOptions', this.renderOptions );
+			model.set( 'renderOtherAttributes', this.renderOtherAttributes );
 		},
 
 		renderOptions: function() {
@@ -27,7 +29,19 @@ define([], function() {
 			} );
 
 			return html;
+		},
+
+		renderOtherAttributes: function() {
+			var that = this;
+			var otherAttributes = '';
+
+			if( 'listmultiselect' == that.type ){
+				otherAttributes = otherAttributes + ' multiple';
+			}
+
+			return otherAttributes;
 		}
+
 	});
 
 	return controller;
