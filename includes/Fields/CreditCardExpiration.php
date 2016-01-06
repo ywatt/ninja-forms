@@ -3,15 +3,15 @@
 /**
  * Class NF_Fields_CreditCardExpiration
  */
-class NF_Fields_CreditCardExpiration extends NF_Abstracts_Field
+class NF_Fields_CreditCardExpiration extends NF_Abstracts_Input
 {
     protected $_name = 'creditcardexpiration';
 
     protected $_section = '';
 
-    protected $_templates = '';
+    protected $_templates = 'textbox';
 
-    protected $_test_value = '';
+    protected $_test_value = '01/2025';
 
     public function __construct()
     {
