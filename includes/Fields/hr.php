@@ -9,6 +9,8 @@ class NF_Fields_Hr extends NF_Abstracts_Input
 
     protected $_section = 'misc';
 
+    protected $_aliases = array( 'html' );
+
     protected $_type = 'hr';
 
     protected $_templates = 'hr';
