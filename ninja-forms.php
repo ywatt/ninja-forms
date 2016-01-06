@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 3.0-Beta-1-CBaker
+Version: 3.0-Beta-1-SMcCoy
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -476,7 +476,7 @@ function nf_alpha_release_admin_notice()
         }
     </style>
     <div class="update-nag nf-alpha-notice">
-        <h3>Ninja Forms 3.0 - BETA 1 - <a href="https://en.wikipedia.org/wiki/Sixth_Doctor" target="_blank">C.Baker</a></h3>
+        <h3>Ninja Forms 3.0 - BETA 1 - <a href="https://en.wikipedia.org/wiki/Seventh_Doctor" target="_blank">S.McCoy</a></h3>
         <p><strong>NOTICE:</strong> Installed is a Beta Release of Ninja Forms. This is not intended for production.</p>
         <p>Please keep a few things in mind while exploring:</p>
         <ul>
@@ -484,12 +484,6 @@ function nf_alpha_release_admin_notice()
             <li><strong>DO</strong> install this on a clean WordPress install; by this we mean a completely new WordPress installation to which Ninja Forms 2.9.x or earlier has never been installed.</li>
             <li>There will be database conflicts if you install this alongside 2.9.x, even if 2.9.x has been deactivated or deleted.</li>
             <li>This BETA is best viewed at <strong>1039px wide or greater.</strong> This is because we have not fully implented the responsive UI thus far.</li>
-            <li>Here some things we would like you to test and offer feedback on this week:
-                <ul>
-                    <li>Pricing Fields: Use the mock data Product Forms with pricing fields, and add pricing fields to those forms.</li>
-                    <li>Merge Tags: Add merge tags to field defaults and emails & actions.</li>
-                </ul>
-            </li>
         </ul>
         <p>Please submit all <strong>feedback</strong> on our <a href="http://developer.ninjaforms.com/slack/">Slack group</a></p>
     </div>
