@@ -3,15 +3,15 @@
 /**
  * Class NF_Fields_CreditCardCVC
  */
-class NF_Fields_CreditCardCVC extends NF_Abstracts_Field
+class NF_Fields_CreditCardCVC extends NF_Abstracts_Input
 {
     protected $_name = 'creditcardcvc';
 
     protected $_section = '';
 
-    protected $_templates = 'creditcardcvc';
+    protected $_templates = 'textbox';
 
-    protected $_test_value = '';
+    protected $_test_value = '1234';
 
     public function __construct()
     {

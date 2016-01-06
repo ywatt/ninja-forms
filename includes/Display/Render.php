@@ -120,7 +120,7 @@ final class NF_Display_Render
 
             // Build Form Data
             var form = [];
-            form.id = <?php echo $form_id; ?>;
+            form.id = '<?php echo $form_id; ?>';
             form.settings = <?php echo wp_json_encode( $form->get_settings() ); ?>;
 
             form.fields = <?php echo wp_json_encode( $fields ); ?>;

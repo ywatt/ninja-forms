@@ -80,7 +80,7 @@ define( [], function() {
 				// Remove the helper. Gets rid of a weird type artifact.
 				jQuery( ui.helper ).remove();
 				// Trigger a drop field type event.
-				nfRadio.channel( 'fields' ).trigger( 'drop:fieldType', type );
+				nfRadio.channel( 'fields' ).trigger( 'drop:fieldType', type, tmpID );
 			} else if ( jQuery( ui.item ).hasClass( 'nf-stage' ) ) { // Staging
 				// Later, we want to reference 'this' context, so we define it here.
 				var that = this;
