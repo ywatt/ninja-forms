@@ -23,8 +23,8 @@ class NF_Fields_Textarea extends NF_Abstracts_Input
 
         $this->_nicename = __( 'Textarea', 'ninja-forms' );
 
-        $this->_settings[ 'default' ][ 'type' ] = 'textarea';
-        $this->_settings[ 'placeholder' ][ 'type' ] = 'textarea';
+        $this->_settings[ 'default' ][ 'type' ] = 'rte';
+        $this->_settings[ 'placeholder' ][ 'type' ] = 'rte';
     }
 
     public function admin_form_element( $id, $value )

@@ -368,6 +368,12 @@
     </label>
 </script>
 
+<script id="nf-tmpl-edit-setting-rte" type="text/template">
+    <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
+        <?php wp_editor( 'hello world', 'tmp' ); ?>
+    </label>
+</script>
+
 <script id="nf-tmpl-edit-setting-select" type="text/template">
     <label for="<%= name %>" class="nf-select"><%= label %> <%= renderTooltip() %>
         <select id="<%= name %>">
@@ -471,3 +477,9 @@
         <span class="dashicons dashicons-dismiss nf-delete"></span>
     </div>
 </script>
+
+<div style="display:none;">
+    <?php
+    wp_editor('', '_empty_rte');
+    ?>
+</div>
