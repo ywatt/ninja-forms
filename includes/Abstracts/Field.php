@@ -102,6 +102,8 @@ abstract class NF_Abstracts_Field
         }
 
         $this->_settings = $this->load_settings( $this->_settings );
+
+        $this->_test_value = apply_filters( 'ninja_forms_field_' . $this->_name . '_test_value', $this->_test_value );
     }
 
     /**
