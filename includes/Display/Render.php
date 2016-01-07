@@ -18,6 +18,10 @@ final class NF_Display_Render
 
     public static function localize( $form_id )
     {
+        if( isset( $_GET[ 'ninja_forms_test_values' ] ) ){
+            self::$use_test_values = TRUE;
+        }
+
         if( ! has_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 ) ){
             add_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 );
         }
@@ -139,7 +143,9 @@ final class NF_Display_Render
 
     public static function localize_preview( $form_id )
     {
-        self::$use_test_values = TRUE;
+        if( isset( $_GET[ 'ninja_forms_test_values' ] ) ){
+            self::$use_test_values = TRUE;
+        }
 
         add_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 );
 
