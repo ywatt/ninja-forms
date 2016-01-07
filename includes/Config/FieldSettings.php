@@ -594,6 +594,15 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'value'             => 'single',
     ),
 
+    'fieldset' => array(
+        'name' => 'fieldset',
+        'type' => 'fieldset',
+        'label' => __( 'Settings', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'primary',
+        'settings' => array(),
+    ),
+
     /*
     |--------------------------------------------------------------------------
     | Submit Button Settings

@@ -13,9 +13,11 @@ class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
 
     protected $_templates = 'optin';
 
-    protected $_settings = array( 'type' );
+    protected $_settings = array( 'type', 'fieldset' );
 
     protected $_settings_exclude = array( 'required', 'placeholder' );
+
+    protected $_lists = array();
 
     public function __construct()
     {
@@ -31,5 +33,29 @@ class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
                 'value'     => 'multiple',
             ),
         );
+
+        $this->_settings[ 'fieldset' ][ 'label' ] = __( 'Lists', 'ninja-forms' );
+        $this->_settings[ 'fieldset' ][ 'deps' ] = array( 'type' => 'multiple' );
     }
+
+    protected function addList( $name, $label )
+    {
+        $this->_settings[ 'fieldset' ][ 'settings' ][] = array(
+            'name' => $name,
+            'type' => 'toggle',
+            'label' => $label,
+            'width' => 'full',
+            'value' => ''
+        );
+    }
+
+    protected function addLists( array $lists = array() )
+    {
+        if( empty( $lists ) ) return;
+
+        foreach( $lists as $name => $label ){
+            $this->addList( $name, $label );
+        }
+    }
+
 }
