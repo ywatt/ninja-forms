@@ -19,6 +19,8 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
     protected $_settings =  array( 'checkbox_default_value' );
 
+    protected $_settings_exclude = array( 'required', 'placeholder' );
+
     public function __construct()
     {
         parent::__construct();
