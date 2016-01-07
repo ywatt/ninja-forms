@@ -648,6 +648,11 @@ All styles used within the drawer
   display: block;
   margin-bottom: 20px; }
 
+.ninja-forms-app label::after {
+  clear: both;
+  content: "";
+  display: block; }
+
 .ninja-forms-app legend {
   margin: 0 3px 10px;
   padding: 0 10px; }

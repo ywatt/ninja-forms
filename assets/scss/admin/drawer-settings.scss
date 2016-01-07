@@ -54,6 +54,13 @@
         display: block;
         margin-bottom: 20px;
     }
+    label {
+        &::after {
+            clear: both;
+            content: "";
+            display: block;
+        }
+    }
     legend {
         margin: 0 3px 10px;
         padding: 0 10px;

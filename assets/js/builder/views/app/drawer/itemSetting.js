@@ -203,7 +203,15 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				},
 
 				renderLabelClasses: function() {
-					return 'has-merge-tags';
+					var classes = '';
+					if ( this.use_merge_tags ) {
+						classes += ' has-merge-tags';
+					}
+					if ( 'rte' == this.type ) {
+						classes += ' rte';
+					}
+
+					return classes;
 				},
 
 				renderClasses: function() {
