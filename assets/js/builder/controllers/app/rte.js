@@ -22,7 +22,7 @@ define( [], function() {
 			this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'drawer:opened', this.drawerOpened );
 
 			// When our drawer closes, remove our RTE.
-			this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'drawer:closed', this.drawerClosed );
+			// this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'drawer:closed', this.drawerClosed );
 		},
 
 		initRTE: function( settingModel, dataModel, settingView ) {
