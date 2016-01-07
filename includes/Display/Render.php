@@ -203,6 +203,8 @@ final class NF_Display_Render
                 if ('shipping' == $field['settings']['type']) {
                     $field['settings']['shipping_cost'] = number_format($field['settings']['shipping_cost'], 2);
                 } elseif ('product' == $field['settings']['type']) {
+                    // TODO: Does the currency marker need to stripped here?
+                    $field['settings']['product_price'] = str_replace('$', '', $field['settings']['product_price'] );
                     $field['settings']['product_price'] = number_format($field['settings']['product_price'], 2);
                 } elseif ('total' == $field['settings']['type']) {
                     $field['settings']['value'] = number_format($field['settings']['value'], 2);
