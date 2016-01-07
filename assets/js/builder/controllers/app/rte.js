@@ -41,7 +41,7 @@ define( [], function() {
 			    };
 
 				tinymce.init( tinyMCEInit.mceInit[ settingName ] );
-				// quicktags( tinyMCEInit.qtInit[ settingName ] );
+				quicktags( tinyMCEInit.qtInit[ settingName ] );
 			}
 
 			this.setContent( settingModel, dataModel, settingView );
