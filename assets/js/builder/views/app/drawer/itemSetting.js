@@ -9,7 +9,18 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 
 		initialize: function( data ) {
 			this.dataModel = data.dataModel;
-			this.dataModel.on( 'change:' + this.model.get( 'name' ), this.render, this );
+
+			/*
+			 * Send out a request on the setting-type-{type} channel asking if we should render on dataModel change.
+			 * Defaults to true.
+			 * This lets specific settings, like RTEs, say that they don't want to be re-rendered when their data model changes.
+			 */
+			var renderOnChange = ( 'undefined' == typeof nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).request( 'renderOnChange' ) ) ? true: nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).request( 'renderOnChange' );
+			
+			if ( renderOnChange ) {
+				this.dataModel.on( 'change:' + this.model.get( 'name' ), this.render, this );
+			}
+
 			this.model.on( 'change:error', this.renderError, this );
 
 			var deps = this.model.get( 'deps' );
@@ -20,6 +31,16 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				    }
 				}
 			}
+
+			/*
+			 * When our drawer opens, send out a radio message on our setting type channel.
+			 */
+			this.listenTo( nfRadio.channel( 'drawer' ), 'opened', this.drawerOpened );
+
+			/*
+			 * When our drawer closes, send out a radio message on our setting type channel.
+			 */
+			this.listenTo( nfRadio.channel( 'drawer' ), 'closed', this.drawerClosed );
 		},
 
 		onBeforeDestroy: function() {
@@ -34,6 +55,12 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				    }
 				}
 			}
+
+			/*
+			 * Send out a radio message.
+			 */
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'destroy:setting', this.model, this.dataModel, this );
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'destroy:setting', this.model, this.dataModel, this );
 		},
 
 		onBeforeRender: function() {
@@ -119,6 +146,23 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 			 * Send out a radio message.
 			 */
 			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
+		},
+
+		onShow: function() {			
+			/*
+			 * Send out a radio message.
+			 */
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'show:setting', this.model, this.dataModel, this );
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'show:setting', this.model, this.dataModel, this );
+		},
+
+		onAttach: function() {			
+			/*
+			 * Send out a radio message.
+			 */
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'attach:setting', this.model, this.dataModel, this );
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'attach:setting', this.model, this.dataModel, this );
 		},
 
 		renderError: function() {
@@ -207,6 +251,14 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 		keyUpSetting: function( e ) {
 			nfRadio.channel( 'app' ).trigger( 'keyup:setting', e, this.model, this.dataModel );
 			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'keyup:setting', e, this.model, this.dataModel );
+		},
+
+		drawerOpened: function() {
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'drawer:opened', this.model, this.dataModel, this );
+		},
+
+		drawerClosed: function() {
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'drawer:closed', this.model, this.dataModel, this );
 		}
 	});
 
