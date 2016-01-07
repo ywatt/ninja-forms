@@ -268,7 +268,7 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'advanced',
         'value' => '',
         'help' => __( 'Enter text you would like displayed in the field before a user enters any data.', 'ninja-forms' ),
-        'use_merge_tags' => TRUE,
+        'use_merge_tags' => FALSE,
     ),
 
 
