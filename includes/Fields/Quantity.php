@@ -17,7 +17,7 @@ class NF_Fields_Quantity extends NF_Fields_Number
 
     protected $_test_value = 'Lorem ipsum';
 
-    protected $_settings = array( 'product_assignment' );
+    protected $_settings = array( 'product_assignment', 'number' );
 
     protected $_settings_exclude = array( 'required' );
 
