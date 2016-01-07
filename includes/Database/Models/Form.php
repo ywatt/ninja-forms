@@ -145,6 +145,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
             $field_settings = $field->get_settings();
 
+            $field_settings[ 'parent_id' ] = $new_form_id;
+
             $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
             $new_field->update_settings( $field_settings )->save();
         }
