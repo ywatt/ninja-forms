@@ -4,6 +4,13 @@
     textarea {
         padding-right: 40px;
     }
+    &.rte {
+        display: block;
+        .merge-tags {
+            z-index: 100;
+            top: 103px;
+        }
+    }
     .merge-tags {
         color: #ccc;
         position: absolute;
