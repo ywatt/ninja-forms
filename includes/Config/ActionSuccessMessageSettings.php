@@ -8,7 +8,7 @@ return array(
 
     'message' => array(
         'name' => 'message',
-        'type' => 'textarea',
+        'type' => 'rte',
         'group' => 'primary',
         'label' => __( 'Message', 'ninja-forms' ),
         'placeholder' => '',

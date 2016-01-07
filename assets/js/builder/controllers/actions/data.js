@@ -21,7 +21,6 @@ define( ['models/actions/actionCollection', 'models/actions/actionModel'], funct
 					}
 				} );
 			}
-			console.log( this.collection.tmpNum );
 			// Set our removedIDs to an empty object. This will be populated when a action is removed so that we can add it to our 'deleted_actions' object.
 			this.collection.removedIDs = {};
 

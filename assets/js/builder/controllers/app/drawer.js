@@ -90,7 +90,6 @@ define( [], function() {
 		    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', false );
 		    		nfRadio.channel( 'app' ).request( 'remove:overlay' );
 		    		nfRadio.channel( 'drawer' ).trigger( 'closed' );
-
 	        	}
 			}, 150 );
 		},
@@ -157,13 +156,17 @@ define( [], function() {
 			 * request that the app update its current drawer to the one we opened
 			 * trigger a drawer opened message
 			 */
-			
+			this.hasFocus = false;
+
 			this.checkOpenDrawerPos = setInterval( function() {
 	        	if ( '0px' == jQuery( drawerEl ).css( 'right' ) ) {
 	        		clearInterval( that.checkOpenDrawerPos );
-	        		that.focusFilter();
-		    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', drawerID );
-		    		nfRadio.channel( 'drawer' ).trigger( 'opened' );
+					if ( ! that.hasFocus ) {
+		        		that.focusFilter();
+						that.hasFocus = true;
+			    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', drawerID );
+			    		nfRadio.channel( 'drawer' ).trigger( 'opened' );
+					}   		
 	        	}
 			}, 150 );
 		},
