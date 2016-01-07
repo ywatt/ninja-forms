@@ -584,6 +584,18 @@ return apply_filters( 'ninja-forms-field-settings', array(
 
     ),
 
+    'type'         => array(
+        'name'              => 'type',
+        'type'              => 'select',
+        'options'           => array(
+
+        ),
+        'label'             => __( 'Type', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'primary',
+        'value'             => 'single',
+    ),
+
     /*
     |--------------------------------------------------------------------------
     | Submit Button Settings
