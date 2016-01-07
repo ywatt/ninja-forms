@@ -19,6 +19,9 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
         if( isset( $_FILES[ 'nf_import_form' ] ) && $_FILES[ 'nf_import_form' ] ){
 
             $import = file_get_contents( $_FILES[ 'nf_import_form' ][ 'tmp_name' ] );
+
+            $import = unserialize( base64_decode( $import ) );
+
             Ninja_Forms()->form()->import_form( $import );
         }
     }

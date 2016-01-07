@@ -28,18 +28,6 @@ return apply_filters( 'ninja-forms-field-type-sections', array(
 
     /*
     |--------------------------------------------------------------------------
-    | Miscellaneous Fields
-    |--------------------------------------------------------------------------
-    */
-
-    'misc' => array(
-        'id' => 'misc',
-        'nicename' => __( 'Miscellaneous Fields', 'ninja-forms' ),
-        'fieldTypes' => array(),
-    ),
-
-    /*
-    |--------------------------------------------------------------------------
     | Pricing Fields
     |--------------------------------------------------------------------------
     */
@@ -47,6 +35,30 @@ return apply_filters( 'ninja-forms-field-type-sections', array(
     'pricing' => array(
         'id' => 'pricing',
         'nicename' => __( 'Pricing Fields', 'ninja-forms' ),
+        'fieldTypes' => array(),
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Layout Fields
+    |--------------------------------------------------------------------------
+    */
+
+    'layout' => array(
+        'id' => 'layout',
+        'nicename' => __( 'Layout Fields', 'ninja-forms' ),
+        'fieldTypes' => array(),
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Miscellaneous Fields
+    |--------------------------------------------------------------------------
+    */
+
+    'misc' => array(
+        'id' => 'misc',
+        'nicename' => __( 'Miscellaneous Fields', 'ninja-forms' ),
         'fieldTypes' => array(),
     ),
 ));

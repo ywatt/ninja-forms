@@ -53,6 +53,7 @@ define(
 		'controllers/fields/optionRepeater',
 		'controllers/fields/editActive',
 		'controllers/fields/fieldSettings',
+		'controllers/fields/fieldCreditCard',
 		'controllers/fields/fieldQuantity',
 		'controllers/fields/fieldShipping',
 		'controllers/fields/key',
@@ -124,6 +125,7 @@ define(
 		OptionRepeater,
 		FieldsEditActive,
 		FieldSettings,
+		FieldCreditCard,
 		FieldQuantity,
 		FieldShipping,
 		FieldKey,
@@ -194,6 +196,7 @@ define(
 				new DrawerSettingChildView();
 				new FieldsEditActive();
 				new FieldSettings();
+				new FieldCreditCard();
 				new FieldQuantity();
 				new FieldShipping();
 				new FieldKey();

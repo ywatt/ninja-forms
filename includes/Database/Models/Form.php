@@ -105,6 +105,9 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         foreach( $import[ 'fields' ] as $settings ){
 
             $field = Ninja_Forms()->form( $form_id )->field()->get();
+
+            $settings[ 'parent_id' ] = $form_id;
+
             $field->update_settings( $settings )->save();
         }
 
@@ -141,6 +144,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         foreach( $fields as $field ){
 
             $field_settings = $field->get_settings();
+
+            $field_settings[ 'parent_id' ] = $new_form_id;
 
             $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
             $new_field->update_settings( $field_settings )->save();
@@ -197,7 +202,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             header( 'Pragma: no-cache');
             header( 'Expires: 0' );
             echo apply_filters( 'nf_form_export_bom',"\xEF\xBB\xBF" ) ; // Byte Order Mark
-            echo maybe_serialize( $export );
+            echo base64_encode( maybe_serialize( $export ) );
 
             die();
         }

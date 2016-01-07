@@ -51,7 +51,10 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 				nicename: fieldType.get( 'nicename' )
 			}
 			// 
-			this.collection.add( data );
+			var model = this.collection.add( data );
+
+			nfRadio.channel( 'fields').trigger( 'add:stagedField', model );
+
 			return tmpID;
 		},
 
