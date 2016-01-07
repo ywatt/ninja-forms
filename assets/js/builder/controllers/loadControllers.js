@@ -37,6 +37,7 @@ define(
 		'controllers/app/mergeTags',
 		'controllers/app/itemSettingFill',
 		'controllers/app/confirmPublish',
+		'controllers/app/rte',
 		/*
 		 * Fields domain controllers
 		 */
@@ -107,6 +108,7 @@ define(
 		MergeTags,
 		ItemSettingFill,
 		ConfirmPublish,
+		RTE,
 		/*
 		 * Fields domain controllers
 		 */
@@ -168,6 +170,7 @@ define(
 				new CloneModelDeep();
 				new ItemControls();
 				new ConfirmPublish();
+				new RTE();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers

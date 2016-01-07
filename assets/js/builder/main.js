@@ -3,6 +3,7 @@ require.config( {
 } );
 
 var nfRadio = Backbone.Radio;
+var nfDataTmp = {};
 
 jQuery( document ).ready( function( $ ) {
 	require( ['views/app/builder', 'controllers/loadControllers'], function( BuilderView, LoadControllers ) {
@@ -16,21 +17,16 @@ jQuery( document ).ready( function( $ ) {
 				var loadControllers = new LoadControllers();
 				// Trigger an event after we load our controllers.
 				nfRadio.channel( 'app' ).trigger( 'after:loadControllers', this );
+
+				if ( 'undefined' !== nfDataTmp.tinyMCEPreInit ) {
+					nfDataTmp.tinyMCEPreInit = JSON.stringify( tinyMCEPreInit );
+				}
 			},
 
 			onStart: function() {
 				var builderView = new BuilderView();
-
-				// Setup our default domain
-				// var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
-
-				// var appDomains = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
-				// var defaultDomain = appDomains.get( 'fields' );
-				// nfRadio.channel( 'app' ).trigger( 'click:menu', {}, defaultDomain );
-
 				// Trigger our after start event.
 				nfRadio.channel( 'app' ).trigger( 'after:appStart', this );
-				// nfUndoManager.startTracking();	
 			}
 		} );
 	

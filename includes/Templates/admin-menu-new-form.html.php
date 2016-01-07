@@ -370,7 +370,7 @@
 
 <script id="nf-tmpl-edit-setting-rte" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
-        <?php wp_editor( 'hello world', 'tmp' ); ?>
+        <?php wp_editor( '', '_empty_rte' ); ?>
     </label>
 </script>
 
@@ -477,9 +477,3 @@
         <span class="dashicons dashicons-dismiss nf-delete"></span>
     </div>
 </script>
-
-<div style="display:none;">
-    <?php
-    wp_editor('', '_empty_rte');
-    ?>
-</div>
