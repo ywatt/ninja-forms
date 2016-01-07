@@ -42,9 +42,8 @@ define( [], function() {
 
 				tinymce.init( tinyMCEInit.mceInit[ settingName ] );
 				quicktags( tinyMCEInit.qtInit[ settingName ] );
+				tinyMCE.get( settingName ).setContent( dataModel.get( settingName ) );
 			}
-
-			this.setContent( settingModel, dataModel, settingView );
 		},
 
 		showSetting: function( settingModel, dataModel, settingView ) {
@@ -53,13 +52,6 @@ define( [], function() {
 
 		destroySetting: function( settingModel, dataModel, settingView ) {
 			this.removeRTE( settingModel, dataModel, settingView );
-		},
-
-		setContent: function( settingModel, dataModel, settingView ) {
-			var settingName = settingModel.get( 'name' );
-			if ( tinyMCE.get( settingName ) ) {
-				tinyMCE.get( settingName ).setContent( dataModel.get( settingName ) );
-			}
 		},
 
 		removeRTE: function( settingModel, dataModel, settingView ) {
