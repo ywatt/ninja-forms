@@ -13,7 +13,7 @@ define( [], function() {
 			nfRadio.channel( 'setting-type-rte' ).reply( 'renderOnChange', function(){ return false } );
 
 			// When an RTE setting is shown, re-render RTE.
-			this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'show:setting', this.showSetting );
+			// this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'show:setting', this.showSetting );
 
 			// When an RTE setting view is destroyed, remove our RTE.
 			this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'destroy:setting', this.destroySetting );
@@ -42,11 +42,12 @@ define( [], function() {
 
 				tinymce.init( tinyMCEInit.mceInit[ settingName ] );
 				quicktags( tinyMCEInit.qtInit[ settingName ] );
-				tinyMCE.get( settingName ).setContent( dataModel.get( settingName ) );
+				tinymce.get( settingName ).setContent( dataModel.get( settingName ) );
 			}
 		},
 
 		showSetting: function( settingModel, dataModel, settingView ) {
+			console.log( 'show' );
 			this.initRTE( settingModel, dataModel,settingView );
 		},
 
