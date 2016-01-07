@@ -47,62 +47,66 @@ final class NF_Display_Render
 
         $fields = array();
 
-        foreach( $form_fields as $field ){
+        if( empty( $form_fields ) ){
+            echo __( 'No Fields Found.', 'ninja-forms' );
+        } else {
+            foreach ($form_fields as $field) {
 
-            $field = apply_filters( 'nf_localize_fields', $field );
+                $field = apply_filters('nf_localize_fields', $field);
 
-            $field_class = $field->get_settings( 'type' );
+                $field_class = $field->get_settings('type');
 
-            $field_class = Ninja_Forms()->fields[ $field_class ];
+                $field_class = Ninja_Forms()->fields[$field_class];
 
-            if( self::$use_test_values ) {
-                $field->update_setting( 'value', $field_class->get_test_value() );
-            }
-
-            $field->update_setting( 'id', $field->get_id() );
-
-            $templates = $field_class->get_templates();
-
-            if( ! array( $templates ) ){
-                $templates = array( $templates );
-            }
-
-            foreach( $templates as $template ) {
-                self::load_template('fields-' . $template);
-            }
-
-            $settings = $field->get_settings();
-
-            foreach( $settings as $key => $setting ){
-                if( is_numeric( $setting ) ) $settings[ $key ] = floatval( $setting );
-            }
-
-            if( isset( $settings[ 'default' ] ) ) {
-                $default_value = apply_filters('ninja_forms_render_default_value', $settings['default'], $field_class, $settings);
-
-                if ($default_value) {
-                    $settings['value'] = $default_value;
+                if (self::$use_test_values) {
+                    $field->update_setting('value', $field_class->get_test_value());
                 }
+
+                $field->update_setting('id', $field->get_id());
+
+                $templates = $field_class->get_templates();
+
+                if (!array($templates)) {
+                    $templates = array($templates);
+                }
+
+                foreach ($templates as $template) {
+                    self::load_template('fields-' . $template);
+                }
+
+                $settings = $field->get_settings();
+
+                foreach ($settings as $key => $setting) {
+                    if (is_numeric($setting)) $settings[$key] = floatval($setting);
+                }
+
+                if (isset($settings['default'])) {
+                    $default_value = apply_filters('ninja_forms_render_default_value', $settings['default'], $field_class, $settings);
+
+                    if ($default_value) {
+                        $settings['value'] = $default_value;
+                    }
+                }
+
+                // TODO: Find a better way to do this.
+                if ('shipping' == $settings['type']) {
+                    // TODO: Does the currency marker need to stripped here?
+                    $settings['shipping_cost'] = str_replace('$', '', $settings['shipping_cost']);
+                    $settings['shipping_cost'] = number_format($settings['shipping_cost'], 2);
+                } elseif ('product' == $settings['type']) {
+                    // TODO: Does the currency marker need to stripped here?
+                    $settings['product_price'] = str_replace('$', '', $settings['product_price']);
+                    $settings['product_price'] = number_format($settings['product_price'], 2);
+                } elseif ('total' == $settings['type'] && isset($settings['value'])) {
+                    $settings['value'] = number_format($settings['value'], 2);
+                }
+
+                $settings['element_templates'] = $templates;
+                $settings['old_classname'] = $field_class->get_old_classname();
+                $settings['wrap_template'] = $field_class->get_wrap_template();
+
+                $fields[] = $settings;
             }
-
-            // TODO: Find a better way to do this.
-            if( 'shipping' == $settings[ 'type' ] ){
-                // TODO: Does the currency marker need to stripped here?
-                $settings[ 'shipping_cost' ] = str_replace( '$', '', $settings[ 'shipping_cost' ] );
-                $settings[ 'shipping_cost' ] = number_format( $settings[ 'shipping_cost' ], 2 );
-            } elseif( 'product' == $settings[ 'type' ] ){
-                // TODO: Does the currency marker need to stripped here?
-                $settings[ 'product_price' ] = str_replace( '$', '', $settings[ 'product_price' ] );
-                $settings[ 'product_price' ] = number_format( $settings[ 'product_price' ], 2 );
-            } elseif( 'total' == $settings[ 'type' ] && isset( $settings[ 'value' ] ) ){
-                $settings[ 'value' ] = number_format( $settings[ 'value' ], 2 );
-            }
-
-            $settings[ 'element_templates' ] = $templates;
-            $settings[ 'old_classname' ] = $field_class->get_old_classname();
-            $settings[ 'wrap_template' ] = $field_class->get_wrap_template();
-
-            $fields[] = $settings;
         }
 
         // Output Form Container
@@ -150,56 +154,60 @@ final class NF_Display_Render
 
         $fields = array();
 
-        foreach( $form['fields'] as $field_id => $field ){
+        if( empty( $form['fields'] ) ){
+            echo __( 'No Fields Found.', 'ninja-forms' );
+        } else {
+            foreach ($form['fields'] as $field_id => $field) {
 
-            $field['settings'][ 'id' ] = $field_id;
+                $field['settings']['id'] = $field_id;
 
-            $field = apply_filters( 'nf_localize_fields_preview', $field );
+                $field = apply_filters('nf_localize_fields_preview', $field);
 
-            $field_class = $field['settings']['type'];
+                $field_class = $field['settings']['type'];
 
-            foreach( $field[ 'settings' ] as $key => $setting ){
-                if( is_numeric( $setting ) ) $field[ 'settings' ][ $key ] = floatval( $setting );
-            }
-
-            $field_class = Ninja_Forms()->fields[ $field_class ];
-
-            $templates = $field_class->get_templates();
-
-            if( ! array( $templates ) ){
-                $templates = array( $templates );
-            }
-
-            foreach( $templates as $template ) {
-                self::load_template('fields-' . $template);
-            }
-
-            if( self::$use_test_values ) {
-                $field['settings']['value'] = $field_class->get_test_value();
-            }
-
-            if( isset( $field['settings'][ 'default' ] ) ) {
-                $default_value = apply_filters('ninja_forms_render_default_value', $field['settings'][ 'default' ], $field_class, $field['settings']);
-
-                if ($default_value) {
-                    $field['settings']['value'] = $default_value;
+                foreach ($field['settings'] as $key => $setting) {
+                    if (is_numeric($setting)) $field['settings'][$key] = floatval($setting);
                 }
+
+                $field_class = Ninja_Forms()->fields[$field_class];
+
+                $templates = $field_class->get_templates();
+
+                if (!array($templates)) {
+                    $templates = array($templates);
+                }
+
+                foreach ($templates as $template) {
+                    self::load_template('fields-' . $template);
+                }
+
+                if (self::$use_test_values) {
+                    $field['settings']['value'] = $field_class->get_test_value();
+                }
+
+                if (isset($field['settings']['default'])) {
+                    $default_value = apply_filters('ninja_forms_render_default_value', $field['settings']['default'], $field_class, $field['settings']);
+
+                    if ($default_value) {
+                        $field['settings']['value'] = $default_value;
+                    }
+                }
+
+                // TODO: Find a better way to do this.
+                if ('shipping' == $field['settings']['type']) {
+                    $field['settings']['shipping_cost'] = number_format($field['settings']['shipping_cost'], 2);
+                } elseif ('product' == $field['settings']['type']) {
+                    $field['settings']['product_price'] = number_format($field['settings']['product_price'], 2);
+                } elseif ('total' == $field['settings']['type']) {
+                    $field['settings']['value'] = number_format($field['settings']['value'], 2);
+                }
+
+                $field['settings']['element_templates'] = $templates;
+                $field['settings']['old_classname'] = $field_class->get_old_classname();
+                $field['settings']['wrap_template'] = $field_class->get_wrap_template();
+
+                $fields[] = $field['settings'];
             }
-
-            // TODO: Find a better way to do this.
-            if( 'shipping' == $field[ 'settings' ][ 'type' ] ){
-                $field[ 'settings' ][ 'shipping_cost' ] = number_format( $field[ 'settings' ][ 'shipping_cost' ], 2 );
-            } elseif( 'product' == $field[ 'settings' ][ 'type' ] ){
-                $field[ 'settings' ][ 'product_price' ] = number_format( $field[ 'settings' ][ 'product_price' ], 2 );
-            } elseif( 'total' == $field[ 'settings' ][ 'type' ] ){
-                $field[ 'settings' ][ 'value' ] = number_format( $field[ 'settings' ][ 'value' ], 2 );
-            }
-
-            $field[ 'settings' ][ 'element_templates' ] = $templates;
-            $field[ 'settings' ][ 'old_classname' ] = $field_class->get_old_classname();
-            $field[ 'settings' ][ 'wrap_template' ] = $field_class->get_wrap_template();
-
-            $fields[] = $field['settings'];
         }
 
         // Output Form Container
