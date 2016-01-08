@@ -23,7 +23,24 @@ define( [], function() {
 		},
 
 		initRTE: function( settingModel, dataModel, settingView ) {
-			jQuery( settingView.el ).find( 'div.setting' ).summernote();
+			/*
+			 * Custom Button for links
+			 */
+			var linkButton = this.linkButton();
+			var toolbar = [
+				[ 'paragraphStyle', ['style'] ],
+				[ 'fontStyle', [ 'bold', 'italic', 'underline', 'clear' ] ],
+			    [ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+			    [ 'color', [ 'color', 'customLink' ] ],
+			    [ 'customGroup', [ 'linkButton' ] ]
+			];
+
+			jQuery( settingView.el ).find( 'div.setting' ).summernote( {
+				toolbar: toolbar,
+				buttons: {
+					linkButton: linkButton
+				}
+			} );
 		},
 
 		renderSetting: function( settingModel, dataModel, settingView ) {
@@ -40,8 +57,33 @@ define( [], function() {
 
 		drawerOpened: function( settingModel, dataModel, settingView ) {
 			this.initRTE( settingModel, dataModel, settingView );
-		}
+		},
 
+		linkButton: function( context ) {
+			var ui = jQuery.summernote.ui;
+			return ui.buttonGroup([
+				ui.button({
+	            className: 'dropdown-toggle',
+	            contents: '<span class="dashicons dashicons-admin-links"></span>',
+	            tooltip: 'Insert Link',
+	            data: {
+	              toggle: 'dropdown'
+	            }
+	          }),
+				ui.dropdown([
+	            ui.buttonGroup({
+	              className: 'note-align',
+	              children: [
+	                ui.button({
+	                  contents: '<div style="width:350px" class="summernote-url"><input type="url" style="width:85%"> <input type="button" style="width:15%" value="Insert"></div>',
+	                  tooltip: '',
+	                  click: ''
+	                }),
+	              ]
+	            })
+	          ])
+			]).render();
+		},
 	});
 
 	return controller;
