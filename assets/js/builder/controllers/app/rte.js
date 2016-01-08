@@ -39,8 +39,8 @@ define( [], function() {
 		        // 'font': 'dashicons fa-font',
 		        // 'frame': 'dashicons fa-frame',
 		        'italic': 'dashicons dashicons-editor-italic',
-		        // 'link': 'dashicons fa-link',
-		        // 'unlink': 'dashicons fa-chain-broken',
+		        'link': 'dashicons dashicons-admin-links',
+		        'unlink': 'dashicons dashicons-editor-unlink',
 		        'magic': 'dashicons dashicons-editor-paragraph',
 		        // 'menuCheck': 'dashicons fa-check',
 		        'minus': 'dashicons dashicons-minus',
@@ -68,6 +68,7 @@ define( [], function() {
 			 * Custom Button for links
 			 */
 			var linkButton = this.linkButton();
+			var unlinkButton = this.unlinkButton();
 			var mergeTags = this.mergeTags();
 			var mediaButton = this.mediaButton();
 
@@ -76,7 +77,7 @@ define( [], function() {
 				[ 'fontStyle', [ 'bold', 'italic', 'underline','clear' ] ],
 				[ 'lists', [ 'ul', 'ol' ] ],
 			    [ 'paragraph', [ 'paragraph' ] ],
-			    [ 'customGroup', [ 'linkButton' ] ],
+			    [ 'customGroup', [ 'linkButton', 'unlinkButton' ] ],
 			    [ 'codeview', [ 'codeview' ] ],
 			    [ 'mergeTags', [ 'mergeTags' ] ],
 			    [ 'mediaButton', [ 'mediaButton' ] ]			    
@@ -86,8 +87,14 @@ define( [], function() {
 				toolbar: toolbar,
 				buttons: {
 					linkButton: linkButton,
+					unlinkButton: unlinkButton,
 					mergeTags: mergeTags,
 					mediaButton: mediaButton
+				},
+				height: 150,   //set editable area's height
+				codemirror: { // codemirror options
+				    theme: 'monokai',
+				    lineNumbers: true
 				}
 			} );
 		},
@@ -133,6 +140,16 @@ define( [], function() {
 	            })
 	          ])
 			]).render();
+		},
+
+		unlinkButton: function( context ) {
+			var ui = jQuery.summernote.ui;
+			var unlinkButton = _.template( jQuery( '#nf-tmpl-rte-unlink-button' ).html(), {} );
+			return ui.button({
+	            className: 'dropdown-toggle',
+	            contents: unlinkButton,
+	            tooltip: 'Unlink'
+	          }).render();
 		},
 
 		mergeTags: function( context ) {

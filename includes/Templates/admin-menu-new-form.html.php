@@ -493,6 +493,10 @@
     <span class="dashicons dashicons-admin-links"></span>
 </script>
 
+<script id="nf-tmpl-rte-unlink-button" type="text/template">
+    <span class="dashicons dashicons-editor-unlink"></span>
+</script>
+
 <script id="nf-tmpl-rte-link-dropdown" type="text/template">
     <div class="summernote-url">
         <input type="url" class="widefat code" placeholder="URL"> <br />
