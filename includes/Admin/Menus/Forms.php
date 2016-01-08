@@ -85,7 +85,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
         wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
         wp_enqueue_style( 'summernote', Ninja_Forms::$url . 'assets/css/summernote.css' );
-        wp_enqueue_style( 'bootstrap', Ninja_Forms::$url . 'assets/css/bootstrap.css' );
+        //wp_enqueue_style( 'bootstrap', Ninja_Forms::$url . 'assets/css/bootstrap.css' );
         wp_enqueue_style( 'font-awesome', 'http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css' );
 
         wp_enqueue_script( 'jquery-autoNumeric', Ninja_Forms::$url . 'assets/js/lib/jquery.autoNumeric.min.js', array( 'jquery', 'backbone' ) );
