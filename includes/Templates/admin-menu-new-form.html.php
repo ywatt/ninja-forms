@@ -478,3 +478,15 @@
         <span class="dashicons dashicons-dismiss nf-delete"></span>
     </div>
 </script>
+
+<script id="nf-tmpl-rte-link-button" type="text/template">
+    <span class="dashicons dashicons-admin-links"></span>
+</script>
+
+<script id="nf-tmpl-rte-link-dropdown" type="text/template">
+    <div class="summernote-url">
+        <input type="url" class="widefat code"> <br />
+        <input type="checkbox"> Open in new window 
+        <input type="button" style="" value="Insert">
+    </div>
+</script>

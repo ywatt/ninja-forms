@@ -32,6 +32,7 @@ define( [], function() {
 				[ 'fontStyle', [ 'bold', 'italic', 'underline', 'clear' ] ],
 			    [ 'para', [ 'ul', 'ol', 'paragraph' ] ],
 			    [ 'color', [ 'color', 'customLink' ] ],
+			    [ 'codeview', [ 'codeview' ] ],
 			    [ 'customGroup', [ 'linkButton' ] ]
 			];
 
@@ -61,10 +62,12 @@ define( [], function() {
 
 		linkButton: function( context ) {
 			var ui = jQuery.summernote.ui;
+			var linkButton = _.template( jQuery( '#nf-tmpl-rte-link-button' ).html(), {} );
+			var linkDropdown = _.template( jQuery( '#nf-tmpl-rte-link-dropdown' ).html(), {} );
 			return ui.buttonGroup([
 				ui.button({
 	            className: 'dropdown-toggle',
-	            contents: '<span class="dashicons dashicons-admin-links"></span>',
+	            contents: linkButton,
 	            tooltip: 'Insert Link',
 	            data: {
 	              toggle: 'dropdown'
@@ -72,10 +75,9 @@ define( [], function() {
 	          }),
 				ui.dropdown([
 	            ui.buttonGroup({
-	              className: 'note-align',
 	              children: [
 	                ui.button({
-	                  contents: '<div style="width:350px" class="summernote-url"><input type="url" style="width:85%"> <input type="button" style="width:15%" value="Insert"></div>',
+	                  contents: linkDropdown,
 	                  tooltip: '',
 	                  click: ''
 	                }),
