@@ -13,21 +13,19 @@ define( [], function() {
 			nfRadio.channel( 'setting-type-rte' ).reply( 'renderOnChange', function(){ return false } );
 
 			// When an RTE setting is shown, re-render RTE.
-			// this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'show:setting', this.showSetting );
+			this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'show:setting', this.showSetting );
 
 			// When an RTE setting view is destroyed, remove our RTE.
 			this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'destroy:setting', this.destroySetting );
 
 			// When our drawer opens, re-render any RTEs we have.
 			this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'drawer:opened', this.drawerOpened );
-
-			// When our drawer closes, remove our RTE.
-			// this.listenTo( nfRadio.channel( 'setting-type-rte' ), 'drawer:closed', this.drawerClosed );
 		},
 
 		initRTE: function( settingModel, dataModel, settingView ) {
 			var settingName = settingModel.get( 'name' );
-			if ( ! tinyMCE.get( settingName ) ) {
+			var currentDrawer = nfRadio.channel( 'app' ).request( 'get:currentDrawer' );
+			if ( currentDrawer ) {
 				var html = jQuery( settingView.el ).html();
 				html = html.replace( /_empty_rte/gi, settingName );
 				jQuery( settingView.el ).html( html );
@@ -42,12 +40,14 @@ define( [], function() {
 
 				tinymce.init( tinyMCEInit.mceInit[ settingName ] );
 				quicktags( tinyMCEInit.qtInit[ settingName ] );
-				tinymce.get( settingName ).setContent( dataModel.get( settingName ) );
+
+				if ( null != tinymce.get( settingName ) ) {
+					tinymce.get( settingName ).setContent( dataModel.get( settingName ) );
+				}
 			}
 		},
 
 		showSetting: function( settingModel, dataModel, settingView ) {
-			console.log( 'show' );
 			this.initRTE( settingModel, dataModel,settingView );
 		},
 
