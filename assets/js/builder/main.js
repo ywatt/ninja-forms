@@ -3,7 +3,6 @@ require.config( {
 } );
 
 var nfRadio = Backbone.Radio;
-var nfDataTmp = {};
 
 jQuery( document ).ready( function( $ ) {
 	require( ['views/app/builder', 'controllers/loadControllers'], function( BuilderView, LoadControllers ) {
@@ -17,10 +16,6 @@ jQuery( document ).ready( function( $ ) {
 				var loadControllers = new LoadControllers();
 				// Trigger an event after we load our controllers.
 				nfRadio.channel( 'app' ).trigger( 'after:loadControllers', this );
-
-				if ( 'undefined' !== nfDataTmp.tinyMCEPreInit ) {
-					nfDataTmp.tinyMCEPreInit = JSON.stringify( tinyMCEPreInit );
-				}
 			},
 
 			onStart: function() {

@@ -89,7 +89,7 @@ define( [], function() {
 	        		clearInterval( that.checkCloseDrawerPos );
 		    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', false );
 		    		nfRadio.channel( 'drawer' ).trigger( 'closed' );
-		    		jQuery( drawerEl ).scrollTop( 0 );
+		    		// jQuery( drawerEl ).scrollTop( 0 );
 	        	}
 			}, 150 );
 		},
@@ -165,6 +165,7 @@ define( [], function() {
 		        		that.focusFilter();
 						that.hasFocus = true;
 			    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', drawerID );
+			    		// jQuery( drawerEl ).scrollTop( 0 );
 			    		nfRadio.channel( 'drawer' ).trigger( 'opened' );
 					}   		
 	        	}

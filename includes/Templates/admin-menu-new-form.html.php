@@ -369,10 +369,10 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-rte" type="text/template">
-    <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
-        <?php wp_editor( '', '_empty_rte' ); ?>
+    <label class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %></label>
+        <div id="<%= name %>" class="setting"><%= value %></div>
         <%= renderMergeTags() %>
-    </label>
+    
 </script>
 
 <script id="nf-tmpl-edit-setting-select" type="text/template">
