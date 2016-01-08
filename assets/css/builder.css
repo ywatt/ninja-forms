@@ -1429,11 +1429,17 @@ All styles used for displaying table content
     display: none; }
   .ninja-forms-app .note-editor .btn-group {
     float: left; }
+    .ninja-forms-app .note-editor .btn-group.note-codeview, .ninja-forms-app .note-editor .btn-group.note-mergeTags, .ninja-forms-app .note-editor .btn-group.note-mediaButton {
+      float: right; }
   .ninja-forms-app .note-editor .btn {
     background: #f9f9f9;
     border: 0;
     border-radius: 4px;
-    color: #666; }
+    color: #666;
+    margin-right: 4px; }
+    .ninja-forms-app .note-editor .btn.disabled {
+      background: transparent;
+      color: #aaa; }
 
 .ninja-forms-app .tooltip {
   position: absolute;

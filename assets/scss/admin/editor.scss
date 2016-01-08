@@ -20,12 +20,22 @@
         }
         .btn-group {
             float: left;
+            &.note-codeview,
+            &.note-mergeTags,
+            &.note-mediaButton {
+                float: right;
+            }
         }
         .btn {
             background: #f9f9f9;
             border: 0;
             border-radius: 4px;
             color: #666;
+            margin-right: 4px;
+            &.disabled {
+                background: transparent;
+                color: #aaa;
+            }
         }
     }
     .tooltip {
