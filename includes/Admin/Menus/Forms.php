@@ -252,6 +252,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $image = ( isset( $action[ 'image' ] ) ) ? $action[ 'image' ] : '';
             $link = ( isset( $action[ 'link' ] ) ) ? $action[ 'link' ] : '';
 
+            if( isset( $action_type_settings[ $name ] ) ) continue;
+
             $action_type_settings[ $name ] = array(
                 'id' => $name,
                 'section' => 'available',
