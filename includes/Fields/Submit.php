@@ -15,7 +15,7 @@ class NF_Fields_Submit extends NF_Fields_Button
 
     protected $_wrap_template = 'wrap-no-label';
 
-    protected $_settings = array( 'label', 'timed_submit', 'processing_label' );
+    protected $_settings = array( 'label', 'timed_submit', 'processing_label', 'classes' );
 
     public function __construct()
     {
