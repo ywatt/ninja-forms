@@ -479,6 +479,16 @@
     </div>
 </script>
 
+<!-- Rich Text Editor Templates -->
+
+<script id="nf-tmpl-rte-media-button" type="text/template">
+    <span class="dashicons dashicons-admin-media"></span>
+</script>
+
+<script id="nf-tmpl-rte-merge-tags-button" type="text/template">
+    <span class="dashicons dashicons-list-view merge-tags"></span>
+</script>
+
 <script id="nf-tmpl-rte-link-button" type="text/template">
     <span class="dashicons dashicons-admin-links"></span>
 </script>

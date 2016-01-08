@@ -81,6 +81,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     private function _enqueue_the_things( $form_id )
     {
         global $wp_locale;
+        
+        wp_enqueue_media();
 
         wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
         wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );

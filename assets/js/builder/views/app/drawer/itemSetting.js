@@ -71,6 +71,12 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 			this.mergeTagsContentView = false;
 			var that = this;
 
+			/*
+			 * Send out a radio message.
+			 */
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
+
 			jQuery( this.el ).find( '.nf-help' ).each(function() {
 				var content = jQuery(this).next('.nf-help-text');
 				jQuery( this ).jBox( 'Tooltip', {
@@ -141,12 +147,6 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 			}
 			
 			this.renderError();
-
-			/*
-			 * Send out a radio message.
-			 */
-			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
-			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
 		},
 
 		onShow: function() {			
