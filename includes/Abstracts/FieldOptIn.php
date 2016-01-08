@@ -34,7 +34,7 @@ class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
             ),
         );
 
-        $this->_settings[ 'fieldset' ][ 'label' ] = __( 'Lists', 'ninja-forms' );
+        $this->_settings[ 'fieldset' ][ 'label' ] = __( 'Lists', 'ninja-forms' ) . ' <a href="#"><small>' . __( 'refresh', 'ninja-forms' ) . '</small></a>';
         $this->_settings[ 'fieldset' ][ 'deps' ] = array( 'type' => 'multiple' );
     }
 
