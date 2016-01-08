@@ -1413,6 +1413,233 @@ All styles used for displaying table content
   height: 28px;
   background: #1EA9EA; }
 
+.note-popover {
+  display: none; }
+
+.ninja-forms-app .note-editor {
+  border: 0 !important; }
+  .ninja-forms-app .note-editor .note-toolbar::after {
+    clear: both;
+    content: "";
+    display: block; }
+  .ninja-forms-app .note-editor .note-editable {
+    background: #f9f9f9;
+    display: block; }
+  .ninja-forms-app .note-editor .modal {
+    display: none; }
+  .ninja-forms-app .note-editor .btn-group {
+    float: left; }
+  .ninja-forms-app .note-editor .btn {
+    background: #aaa;
+    border: 0;
+    border-radius: 4px;
+    color: #fff; }
+
+.ninja-forms-app .dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); }
+
+.ninja-forms-app .dropdown-menu.pull-right {
+  right: 0;
+  left: auto; }
+
+.ninja-forms-app .dropdown-menu .divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5; }
+
+.ninja-forms-app .dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap; }
+
+.ninja-forms-app .dropdown-menu > li > a:hover,
+.ninja-forms-app .dropdown-menu > li > a:focus {
+  color: #262626;
+  text-decoration: none;
+  background-color: #f5f5f5; }
+
+.ninja-forms-app .dropdown-menu > .active > a,
+.ninja-forms-app .dropdown-menu > .active > a:hover,
+.ninja-forms-app .dropdown-menu > .active > a:focus {
+  color: #fff;
+  text-decoration: none;
+  background-color: #337ab7;
+  outline: 0; }
+
+.ninja-forms-app .dropdown-menu > .disabled > a,
+.ninja-forms-app .dropdown-menu > .disabled > a:hover,
+.ninja-forms-app .dropdown-menu > .disabled > a:focus {
+  color: #777; }
+
+.ninja-forms-app .dropdown-menu > .disabled > a:hover,
+.ninja-forms-app .dropdown-menu > .disabled > a:focus {
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); }
+
+.ninja-forms-app .open > .dropdown-menu {
+  display: block; }
+
+.ninja-forms-app .open > a {
+  outline: 0; }
+
+.ninja-forms-app .dropdown-menu-right {
+  right: 0;
+  left: auto; }
+
+.ninja-forms-app .dropdown-menu-left {
+  right: auto;
+  left: 0; }
+
+.ninja-forms-app .dropdown-header {
+  display: block;
+  padding: 3px 20px;
+  font-size: 12px;
+  line-height: 1.42857143;
+  color: #777;
+  white-space: nowrap; }
+
+.ninja-forms-app .dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 990; }
+
+.ninja-forms-app .pull-right > .dropdown-menu {
+  right: 0;
+  left: auto; }
+
+.ninja-forms-app .dropup .caret,
+.ninja-forms-app .navbar-fixed-bottom .dropdown .caret {
+  content: "";
+  border-top: 0;
+  border-bottom: 4px dashed;
+  border-bottom: 4px solid \9; }
+
+.ninja-forms-app .dropup .dropdown-menu,
+.ninja-forms-app .navbar-fixed-bottom .dropdown .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 2px; }
+
+@media (min-width: 768px) {
+  .ninja-forms-app .navbar-right .dropdown-menu {
+    right: 0;
+    left: auto; }
+  .ninja-forms-app .navbar-right .dropdown-menu-left {
+    right: auto;
+    left: 0; } }
+
+.ninja-forms-app .btn-group-justified > .btn-group .dropdown-menu {
+  left: auto; }
+
+.ninja-forms-app .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+  top: auto;
+  left: auto; }
+
+.ninja-forms-app .nav-justified > .dropdown .dropdown-menu {
+  top: auto;
+  left: auto; }
+
+.ninja-forms-app .nav-tabs .dropdown-menu {
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+
+@media (max-width: 767px) {
+  .ninja-forms-app .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none; }
+  .ninja-forms-app .navbar-nav .open .dropdown-menu > li > a,
+  .ninja-forms-app .navbar-nav .open .dropdown-menu .dropdown-header {
+    padding: 5px 15px 5px 25px; }
+  .ninja-forms-app .navbar-nav .open .dropdown-menu > li > a {
+    line-height: 20px; }
+  .ninja-forms-app .navbar-nav .open .dropdown-menu > li > a:hover,
+  .ninja-forms-app .navbar-nav .open .dropdown-menu > li > a:focus {
+    background-image: none; } }
+
+.ninja-forms-app .navbar-nav > li > .dropdown-menu {
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+
+.ninja-forms-app .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
+  margin-bottom: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }
+
+@media (max-width: 767px) {
+  .ninja-forms-app .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #777; }
+  .ninja-forms-app .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .ninja-forms-app .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #333;
+    background-color: transparent; }
+  .ninja-forms-app .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .ninja-forms-app .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .ninja-forms-app .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #555;
+    background-color: #e7e7e7; }
+  .ninja-forms-app .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
+  .ninja-forms-app .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .ninja-forms-app .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #ccc;
+    background-color: transparent; } }
+
+@media (max-width: 767px) {
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: #080808; }
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
+    background-color: #080808; }
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #9d9d9d; }
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #fff;
+    background-color: transparent; }
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #080808; }
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .ninja-forms-app .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #444;
+    background-color: transparent; } }
+
 @media only screen and (max-width: 1255px) {
   .nf-cancel {
     display: none; }

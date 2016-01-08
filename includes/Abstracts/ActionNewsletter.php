@@ -3,7 +3,7 @@
 /**
  * Class NF_Abstracts_ActionNewsletter
  */
-final class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
+abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 {
     /**
      * @var array
