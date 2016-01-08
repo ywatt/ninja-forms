@@ -88,8 +88,8 @@ define( [], function() {
 	        	if ( rightClosed == jQuery( drawerEl ).css( 'right' ) ) {
 	        		clearInterval( that.checkCloseDrawerPos );
 		    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', false );
-		    		nfRadio.channel( 'app' ).request( 'remove:overlay' );
 		    		nfRadio.channel( 'drawer' ).trigger( 'closed' );
+		    		jQuery( drawerEl ).scrollTop( 0 );
 	        	}
 			}, 150 );
 		},
