@@ -495,8 +495,10 @@
 
 <script id="nf-tmpl-rte-link-dropdown" type="text/template">
     <div class="summernote-url">
-        <input type="url" class="widefat code"> <br />
-        <input type="checkbox"> Open in new window 
+        <input type="url" class="widefat code" placeholder="URL"> <br />
+        <label>
+            <input type="checkbox"> Open in new window
+        </label>
         <input type="button" style="" value="Insert">
     </div>
 </script>

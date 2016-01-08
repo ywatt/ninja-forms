@@ -20,6 +20,47 @@ define( [], function() {
 
 			// Instantiates the variable that holds the media library frame.
 			this.meta_image_frame;
+
+			jQuery.summernote.options.icons = {
+		        'align': 'dashicons dashicons-editor-alignleft',
+		        'alignCenter': 'dashicons dashicons-editor-aligncenter',
+		        'alignJustify': 'dashicons dashicons-editor-justify',
+		        'alignLeft': 'dashicons dashicons-editor-alignleft',
+		        'alignRight': 'dashicons dashicons-editor-alignright',
+		        'indent': 'dashicons dashicons-editor-indent',
+		        'outdent': 'dashicons dashicons-editor-outdent',
+		        // 'arrowsAlt': 'dashicons fa-arrows-alt',
+		        'bold': 'dashicons dashicons-editor-bold',
+		        'caret': 'dashicons dashicons-arrow-down',
+		        // 'circle': 'dashicons fa-circle',
+		        'close': 'dashicons dashicons-dismiss',
+		        'code': 'dashicons dashicons-editor-code',
+		        'eraser': 'dashicons dashicons-editor-removeformatting',
+		        // 'font': 'dashicons fa-font',
+		        // 'frame': 'dashicons fa-frame',
+		        'italic': 'dashicons dashicons-editor-italic',
+		        // 'link': 'dashicons fa-link',
+		        // 'unlink': 'dashicons fa-chain-broken',
+		        'magic': 'dashicons dashicons-editor-paragraph',
+		        // 'menuCheck': 'dashicons fa-check',
+		        'minus': 'dashicons dashicons-minus',
+		        'orderedlist': 'dashicons dashicons-editor-ol',
+		        // 'pencil': 'dashicons fa-pencil',
+		        // 'picture': 'dashicons fa-picture-o',
+		        // 'question': 'dashicons fa-question',
+		        'redo': 'dashicons dashicons-redo',
+		        'square': 'dashicons fa-square',
+		        // 'strikethrough': 'dashicons fa-strikethrough',
+		        // 'subscript': 'dashicons fa-subscript',
+		        // 'superscript': 'dashicons fa-superscript',
+		        'table': 'dashicons dashicons-editor-table',
+		        // 'textHeight': 'dashicons fa-text-height',
+		        // 'trash': 'dashicons fa-trash',
+		        'underline': 'dashicons dashicons-editor-underline',
+		        'undo': 'dashicons dashicons-undo',
+		        'unorderedlist': 'dashicons dashicons-editor-ul',
+		        // 'video': 'dashicons fa-youtube-play'
+		      }
 		},
 
 		initRTE: function( settingModel, dataModel, settingView ) {
@@ -32,18 +73,13 @@ define( [], function() {
 
 			var toolbar = [
 				[ 'paragraphStyle', ['style'] ],
-				[ 'bold', [ 'bold' ] ],
-				[ 'italic', [ 'italic' ] ],
-				[ 'underline', [ 'underline' ] ],
-				[ 'clear', ['clear' ] ],
-			    [ 'ul', [ 'ul' ] ],
-			    [ 'ol', [ 'ol' ] ],
+				[ 'fontStyle', [ 'bold', 'italic', 'underline','clear' ] ],
+				[ 'lists', [ 'ul', 'ol' ] ],
 			    [ 'paragraph', [ 'paragraph' ] ],
-			    [ 'color', [ 'color' ] ],
-			    [ 'codeview', [ 'codeview' ] ],
 			    [ 'customGroup', [ 'linkButton' ] ],
+			    [ 'codeview', [ 'codeview' ] ],
 			    [ 'mergeTags', [ 'mergeTags' ] ],
-			    [ 'mediaButton', [ 'mediaButton' ] ]
+			    [ 'mediaButton', [ 'mediaButton' ] ]			    
 			];
 
 			jQuery( settingView.el ).find( 'div.setting' ).summernote( {
@@ -116,11 +152,11 @@ define( [], function() {
 	            className: 'dropdown-toggle',
 	            contents: mediaButton,
 	            tooltip: 'Insert Media',
-	            click: this.coolTestFunction
+	            click: this.openMediaManager
 	          }).render();
 		},
 
-		coolTestFunction: function() {
+		openMediaManager: function() {
 			// If the frame already exists, re-open it.
 			if ( this.meta_image_frame ) {
 				this.meta_image_frame.open();
