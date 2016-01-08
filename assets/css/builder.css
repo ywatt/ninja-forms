@@ -368,25 +368,25 @@ All styles used within the drawer
 
 .nf-drawer-opened #nf-main {
   width: 50%;
-  -webkit-transition: all 0.75s ease;
-  transition: all 0.75s ease; }
+  -webkit-transition: all 0.50s ease;
+  transition: all 0.50s ease; }
   .nf-drawer-opened #nf-main .nf-button {
     display: none; }
 
 .nf-drawer-opened #nf-drawer {
   right: 0;
-  -webkit-transition: all 0.75s ease;
-  transition: all 0.75s ease; }
+  -webkit-transition: all 0.50s ease;
+  transition: all 0.50s ease; }
   .nf-drawer-opened #nf-drawer.nf-drawer-expand {
     width: 100%;
-    -webkit-transition: all 0.75s ease;
-    transition: all 0.75s ease; }
+    -webkit-transition: all 0.50s ease;
+    transition: all 0.50s ease; }
     .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .dashicons {
       -webkit-transform: rotate(180deg);
           -ms-transform: rotate(180deg);
               transform: rotate(180deg);
-      -webkit-transition: all 0.75s ease;
-      transition: all 0.75s ease; }
+      -webkit-transition: all 0.50s ease;
+      transition: all 0.50s ease; }
     .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .nf-expand-off {
       display: none; }
     .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .nf-expand-on {
@@ -396,25 +396,25 @@ All styles used within the drawer
   opacity: 0.0;
   visibility: hidden;
   filter: alpha(opacity=0);
-  -webkit-transition: all 0.75s ease;
-  transition: all 0.75s ease; }
+  -webkit-transition: all 0.50s ease;
+  transition: all 0.50s ease; }
   .nf-drawer-opened .preview:hover, .nf-drawer-opened .preview:active, .nf-drawer-opened .preview.active {
     opacity: 0.0;
     visibility: hidden;
     filter: alpha(opacity=0);
-    -webkit-transition: all 0.75s ease;
-    transition: all 0.75s ease; }
+    -webkit-transition: all 0.50s ease;
+    transition: all 0.50s ease; }
 
 .nf-drawer-opened #nf-app-sub-header h2, .nf-drawer-opened #nf-header h2 {
   padding-left: 50px;
-  -webkit-transition: all 0.75s ease 0s;
-  transition: all 0.75s ease 0s; }
+  -webkit-transition: all 0.50s ease 0s;
+  transition: all 0.50s ease 0s; }
 
 .nf-drawer-opened #nf-main-content,
 .nf-drawer-opened #nf-main-header {
   margin: 0 auto;
-  -webkit-transition: all 0.75s ease;
-  transition: all 0.75s ease; }
+  -webkit-transition: all 0.50s ease;
+  transition: all 0.50s ease; }
 
 .nf-drawer-opened #nf-app-sub-header .nf-add-new {
   top: 95px !important;
@@ -422,8 +422,8 @@ All styles used within the drawer
 
 .nf-drawer-opened .nf-setting-wrap {
   width: 50%;
-  -webkit-transition: width 0.75s ease;
-  transition: width 0.75s ease; }
+  -webkit-transition: width 0.50s ease;
+  transition: width 0.50s ease; }
 
 .nf-drawer-opened .nf-toggle-drawer {
   display: block; }
@@ -431,25 +431,25 @@ All styles used within the drawer
 .nf-drawer-closed #nf-main {
   width: 100%;
   left: 0;
-  -webkit-transition: width 0.75s ease, left 0.75s ease;
-  transition: width 0.75s ease, left 0.75s ease; }
+  -webkit-transition: width 0.50s ease, left 0.50s ease;
+  transition: width 0.50s ease, left 0.50s ease; }
 
 .nf-drawer-closed #nf-drawer {
   right: -1400px;
-  -webkit-transition: right 0.75s ease;
-  transition: right 0.75s ease; }
+  -webkit-transition: right 0.50s ease;
+  transition: right 0.50s ease; }
 
 .nf-drawer-closed .nf-add-new {
   opacity: 1.0;
   visibility: visible;
   filter: alpha(opacity=100);
-  -webkit-transition: all 0.75s ease;
-  transition: all 0.75s ease; }
+  -webkit-transition: all 0.50s ease;
+  transition: all 0.50s ease; }
 
 .nf-drawer-closed .nf-setting-wrap {
   width: 33%;
-  -webkit-transition: width 0.75s ease;
-  transition: width 0.75s ease; }
+  -webkit-transition: width 0.50s ease;
+  transition: width 0.50s ease; }
 
 .nf-drawer-closed .nf-toggle-drawer {
   display: none; }
@@ -544,8 +544,8 @@ All styles used within the drawer
   right: 0; }
   .nf-toggle-drawer .dashicons {
     margin-right: 5px;
-    -webkit-transition: all 1.0s ease;
-    transition: all 1.0s ease; }
+    -webkit-transition: all 0.50s ease;
+    transition: all 0.50s ease; }
   .nf-toggle-drawer .nf-expand-off {
     display: inline; }
   .nf-toggle-drawer .nf-expand-on {
@@ -560,8 +560,8 @@ All styles used within the drawer
   bottom: 0;
   right: -250px;
   z-index: 999;
-  -webkit-transition: right 0.75s ease;
-  transition: right 0.75s ease; }
+  -webkit-transition: right 0.50s ease;
+  transition: right 0.50s ease; }
   #nf-menu-drawer ul {
     margin: 0; }
     #nf-menu-drawer ul li a {
@@ -582,19 +582,19 @@ All styles used within the drawer
 
 .nf-menu-expand #nf-menu-drawer {
   right: 0;
-  -webkit-transition: right 0.75s ease;
-  transition: right 0.75s ease; }
+  -webkit-transition: right 0.50s ease;
+  transition: right 0.50s ease; }
 
 .nf-menu-expand #nf-header {
   margin-right: 250px;
   margin-left: -250px;
-  -webkit-transition: margin 0.75s ease;
-  transition: margin 0.75s ease; }
+  -webkit-transition: margin 0.50s ease;
+  transition: margin 0.50s ease; }
 
 .nf-menu-expand #nf-main {
   left: -250px;
-  -webkit-transition: left 0.75s ease;
-  transition: left 0.75s ease; }
+  -webkit-transition: left 0.50s ease;
+  transition: left 0.50s ease; }
 
 .nf-button {
   border: 0;
@@ -1363,9 +1363,12 @@ All styles used for displaying table content
     padding-right: 40px; }
   .has-merge-tags.rte {
     display: block; }
+    .has-merge-tags.rte .wp-editor-tabs {
+      margin-right: 40px; }
     .has-merge-tags.rte .merge-tags {
+      color: #999;
       z-index: 100;
-      top: 103px; }
+      top: 26px; }
   .has-merge-tags .merge-tags {
     color: #ccc;
     position: absolute;

@@ -6,9 +6,13 @@
     }
     &.rte {
         display: block;
+        .wp-editor-tabs {
+            margin-right: 40px;
+        }
         .merge-tags {
+            color: #999;
             z-index: 100;
-            top: 103px;
+            top: 26px;
         }
     }
     .merge-tags {
