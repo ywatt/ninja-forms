@@ -2,7 +2,7 @@ define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'div',
 		className: 'nf-table-row',
-		template: '#nf-tmpl-edit-setting-list-option',
+		template: '#nf-tmpl-edit-setting-option-repeater-default-row',
 		id: function() {
 			return this.model.cid;
 		},
@@ -12,6 +12,10 @@ define( [], function() {
 			this.dataModel = data.dataModel;
 			this.collection = data.collection;
 			this.columns = data.columns;
+
+			if ( 'undefined' != typeof this.settingModel.get( 'tmpl_row' ) ) {
+				this.template = '#' + this.settingModel.get( 'tmpl_row' );
+			}
 		},
 
 		onRender: function() {
@@ -29,7 +33,7 @@ define( [], function() {
 		},
 
 		events: {
-			'change input': 'changeOption',
+			'change .setting': 'changeOption',
 			'click .nf-delete': 'deleteOption',
 			'keyup': 'maybeAddOption'
 		},

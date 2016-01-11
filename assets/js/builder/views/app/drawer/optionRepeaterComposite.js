@@ -1,4 +1,4 @@
-define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeSettingListEmpty', 'models/fields/listOptionCollection'], function( listOptionView, listEmptyView, listOptionCollection ) {
+define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeaterEmpty', 'models/app/optionRepeaterCollection'], function( listOptionView, listEmptyView, listOptionCollection ) {
 	var view = Marionette.CompositeView.extend( {
 		template: '#nf-tmpl-edit-setting-wrap',
 		childView: listOptionView,
@@ -13,7 +13,7 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 			var optionCollection = data.dataModel.get( this.model.get( 'name' ) );
 
 			if ( false == optionCollection instanceof Backbone.Collection ) {
-				optionCollection = new listOptionCollection();
+				optionCollection = new listOptionCollection( [], { settingModel: this.model } );
 				optionCollection.add( data.dataModel.get( this.model.get( 'name' ) ) );
 				data.dataModel.set( this.model.get( 'name' ), optionCollection, { silent: true } );
 			}
@@ -74,6 +74,8 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 				}
 			} );
 
+			nfRadio.channel( 'mergeTags' ).request( 'init:mergeTags', this );
+
 			/*
 			 * Send out a radio message.
 			 */
@@ -85,19 +87,10 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 	    	return {
 	    		renderHeaders: function() {
 	    			var columns = '<div>&nbsp;</div>';
-	    			if ( -1 != this.columns.indexOf( 'label' ) ) {
-	    				columns += '<div>Label</div>';
-	    			}
-	    			if ( -1 != this.columns.indexOf( 'value' ) ) {
-	    				columns += '<div>Value</div>';
-	    			}
-	    			if ( -1 != this.columns.indexOf( 'calc' ) ) {
-						columns += '<div>Calc Value</div>';
-	    			}
-	    			if ( -1 != this.columns.indexOf( 'selected' ) ) {
-	    				columns += '<div><span class="dashicons dashicons-yes"></span></div>';
-	    			}
-	    			columns += '<div>&nbsp;</div>'
+	    			_.each( this.columns, function( col ) {
+	    				columns += '<div>' + col.header + '</div>';
+	    			} );
+	    			columns += '<div>&nbsp;</div>';
 					return columns;
 				},
 
@@ -138,12 +131,17 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 						return this.error;
 					}
 					return '';
+				},
+
+				renderFieldsetClasses: function() {
+					return that.model.get( 'name' );
 				}
 			};
 		},
 
 		attachHtml: function( collectionView, childView ) {
 			jQuery( collectionView.el ).find( '.nf-list-options-tbody' ).append( childView.el );
+			nfRadio.channel( 'mergeTags' ).request( 'init:mergeTags', this );
 		},
 
 		events: {
@@ -153,7 +151,6 @@ define( ['views/fields/drawer/typeSettingListOption', 'views/fields/drawer/typeS
 		clickAddOption: function( e ) {
 			nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
 		}
-
 	} );
 
 	return view;

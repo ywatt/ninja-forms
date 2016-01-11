@@ -28,9 +28,9 @@ define( [
 	'views/actions/subHeader',
 	'views/actions/mainContent',
 	// Require our settings domain files
-	'views/settings/mainHeader',
-	'views/settings/subHeader',
-	'views/settings/mainContent',
+	'views/advanced/mainHeader',
+	'views/advanced/subHeader',
+	'views/advanced/mainContent',
 	], 
 	function( 
 		appDomainCollection,

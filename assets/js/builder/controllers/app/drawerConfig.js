@@ -13,7 +13,7 @@ define( [
 	'views/fields/drawer/addField',
 	'views/app/drawer/editSettings',
 	'views/actions/drawer/addAction',
-	'views/settings/drawer/editFormSettings',
+	'views/advanced/drawer/editFormSettings',
 	'views/app/drawer/contentViewChanges',
 	'views/app/drawer/headerViewChanges',
 	'views/app/drawer/contentNewForm',

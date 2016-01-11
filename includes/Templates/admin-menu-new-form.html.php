@@ -414,7 +414,7 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-option-repeater" type="text/template">
-    <fieldset class="nf-list-options" <%= renderVisible() %>>
+    <fieldset class="nf-list-options <%= renderFieldsetClasses() %>" <%= renderVisible() %>>
         <legend><%= label %></legend>
         <div class="nf-div-table">
             <div class="nf-table-row nf-table-header">
@@ -427,18 +427,18 @@
     </fieldset>
 </script>
 
-<script id="nf-tmpl-edit-setting-list-empty" type="text/template">
+<script id="nf-tmpl-edit-setting-option-repeater-empty" type="text/template">
 
 </script>
 
-<script id="nf-tmpl-edit-setting-list-option" type="text/template">
+<script id="nf-tmpl-edit-setting-option-repeater-default-row" type="text/template">
     <div>
         <span class="dashicons dashicons-menu handle"></span>
     </div>
     <%
         var columns = getColumns();
         
-        if ( -1 != columns.indexOf( 'label' ) ) {
+        if ( 'undefined' != columns.label ) {
             %>
              <div>
                 <input type="text" class="setting" value="<%= label %>" data-id="label">
@@ -447,7 +447,7 @@
         }
     %>
     <%
-        if ( -1 != columns.indexOf( 'value' ) ) {
+        if ( 'undefined' != columns.value ) {
             %>
              <div>
                 <input type="text" class="setting" value="<%= value %>" data-id="value">
@@ -456,7 +456,7 @@
         }
     %>
     <%
-        if ( -1 != columns.indexOf( 'calc' ) ) {
+        if ( 'undefined' != columns.calc ) {
             %>
              <div>
                 <input type="text" class="setting" value="<%= calc %>" data-id="calc">
@@ -465,7 +465,7 @@
         }
     %>
     <%
-        if ( -1 != columns.indexOf( 'selected' ) ) {
+        if ( 'undefined' != columns.selected ) {
             %>
             <div>
                 <input type="checkbox" class="setting" class="nf-checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
@@ -474,6 +474,24 @@
         }
     %>
 
+    <div>
+        <span class="dashicons dashicons-dismiss nf-delete"></span>
+    </div>
+</script>
+
+<!-- Calculation Row Template -->
+
+<script id="nf-tmpl-edit-setting-calculation-repeater-row" type="text/template">
+    <div>
+        <span class="dashicons dashicons-menu handle"></span>
+    </div>
+    <div>
+        <input type="text" class="setting" value="<%= var_name %>" data-id="var_name">
+    </div>
+    <div>
+        <textarea class="setting" data-id="eq"><%= eq %></textarea>
+        <span class="dashicons dashicons-list-view merge-tags"></span>
+    </div>
     <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>
     </div>

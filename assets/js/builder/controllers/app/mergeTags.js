@@ -50,6 +50,8 @@ define( [
 			this.currentElement = {};
 			this.open = false;
 
+			nfRadio.channel( 'mergeTags' ).reply( 'init:mergeTags', this.initMergeTags, this );
+
 			this.listenTo( nfRadio.channel( 'mergeTags' ), 'click:mergeTag', this.clickMergeTag );
 			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.addFieldTags );
 			this.listenTo( nfRadio.channel( 'fields' ), 'delete:field', this.deleteFieldTags );
@@ -79,6 +81,41 @@ define( [
 			this.listenTo( nfRadio.channel( 'hotkeys' ), 'return:mergeTags', this.returnMergeTags );
 			nfRadio.channel( 'mergeTags' ).reply( 'update:open', this.updateOpen, this );
 			*/
+		},
+
+		/**
+		 * Init merge tags within the passed view.
+		 * @since  3.0
+		 * @param  backbone.view view to be searched for merge tags.
+		 * @return void
+		 */
+		initMergeTags: function( view ) {
+			jQuery( view.el ).find( '.merge-tags' ).each(function() {
+				jQuery( this ).jBox( 'Tooltip', {
+					title: 'Insert Merge Tag',
+					content: jQuery( '.merge-tags-content' ),
+					trigger: 'click',
+					position: {
+						x: 'center',
+						y: 'bottom'
+					},
+					closeOnClick: 'body',
+					closeOnEsc: true,
+					theme: 'TooltipBorder',
+					maxHeight: 200,
+					onOpen: function() {
+						var currentElement = jQuery( this.target ).prev( '.setting' );
+						nfRadio.channel( 'mergeTags' ).request( 'update:currentSetting', view.model );
+						nfRadio.channel( 'mergeTags' ).request( 'update:currentElement', currentElement );
+						nfRadio.channel( 'mergeTags' ).request( 'update:open', true );
+						nfRadio.channel( 'drawer' ).request( 'prevent:close', 'merge-tags' );
+					},
+					onCloseComplete: function() {
+						nfRadio.channel( 'mergeTags' ).request( 'update:open', false );
+						nfRadio.channel( 'drawer' ).request( 'enable:close', 'merge-tags' );
+					}
+				});
+		    });
 		},
 
 		clickMergeTag: function( e, tagModel ) {

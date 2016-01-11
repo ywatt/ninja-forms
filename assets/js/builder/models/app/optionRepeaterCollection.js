@@ -6,16 +6,17 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['models/fields/listOptionModel'], function( listOptionModel ) {
+define( ['models/app/optionRepeaterModel'], function( listOptionModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: listOptionModel,
 		comparator: 'order',
 
-		initialize: function() {
+		initialize: function( models, options ) {
 			// Listen to the 'sort' event
 			this.on( 'sort', this.changeCollection, this );
 			// Listen to the 'add' event
 			this.on( 'add', this.addOption, this );
+			this.settingModel = options.settingModel;
 		},
 
 		changeCollection: function() {

@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['models/settings/settingsModel'], function( settingsModel ) {
+define( ['models/advanced/settingsModel'], function( settingsModel ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Load our action collection from our localized form data
