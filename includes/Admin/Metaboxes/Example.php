@@ -7,7 +7,7 @@ final class NF_Admin_Metaboxes_Example extends NF_Abstracts_SubmissionMetabox
     {
         parent::__construct();
 
-        $this->_title = __( 'Example Metabox' );
+//        $this->_title = __( 'Example Metabox', 'ninja-forms' );
     }
 
     public function render_metabox( $post, $metabox )
