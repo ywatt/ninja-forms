@@ -1414,7 +1414,7 @@ All styles used for displaying table content
   background: #1EA9EA; }
 
 .note-popover {
-  display: none; }
+  display: none !important; }
 
 .ninja-forms-app .note-editor {
   border: 0 !important; }

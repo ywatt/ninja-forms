@@ -357,7 +357,7 @@
 
 <script id="nf-tmpl-edit-setting-number" type="text/template">
     <label for="<%= name %>"><%= label %> <%= renderTooltip() %>
-        <input type="number" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
+        <input type="number" class="setting" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
     </label>
 </script>
 
@@ -377,7 +377,7 @@
 
 <script id="nf-tmpl-edit-setting-select" type="text/template">
     <label for="<%= name %>" class="nf-select"><%= label %> <%= renderTooltip() %>
-        <select id="<%= name %>">
+        <select id="<%= name %>" class="setting">
             <%
             _.each( options, function( option ) {
                 %>
@@ -393,7 +393,7 @@
 <script id="nf-tmpl-edit-setting-checkbox" type="text/template">
 
     <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
-    <input type="checkbox" id="<%= name %>" class="nf-checkbox" <%= ( 1 == value ) ? 'checked' : '' %> />
+    <input type="checkbox" id="<%= name %>" class="nf-checkbox setting" <%= ( 1 == value ) ? 'checked' : '' %> />
     <label for="<%= name %>"><%= label %></label>
 
 </script>
@@ -401,7 +401,7 @@
 <script id="nf-tmpl-edit-setting-toggle" type="text/template">
 
     <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
-    <input type="checkbox" id="<%= name %>" class="nf-toggle" <%= ( 1 == value ) ? 'checked' : '' %> />
+    <input type="checkbox" id="<%= name %>" class="nf-toggle setting" <%= ( 1 == value ) ? 'checked' : '' %> />
     <label for="<%= name %>"><%= label %></label>
 
 </script>
@@ -441,7 +441,7 @@
         if ( -1 != columns.indexOf( 'label' ) ) {
             %>
              <div>
-                <input type="text" value="<%= label %>" data-id="label">
+                <input type="text" class="setting" value="<%= label %>" data-id="label">
             </div>
             <%
         }
@@ -450,7 +450,7 @@
         if ( -1 != columns.indexOf( 'value' ) ) {
             %>
              <div>
-                <input type="text" value="<%= value %>" data-id="value">
+                <input type="text" class="setting" value="<%= value %>" data-id="value">
             </div>
             <%
         }
@@ -459,7 +459,7 @@
         if ( -1 != columns.indexOf( 'calc' ) ) {
             %>
              <div>
-                <input type="text" value="<%= calc %>" data-id="calc">
+                <input type="text" class="setting" value="<%= calc %>" data-id="calc">
             </div>
             <%
         }
@@ -468,7 +468,7 @@
         if ( -1 != columns.indexOf( 'selected' ) ) {
             %>
             <div>
-                <input type="checkbox" class="nf-checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
+                <input type="checkbox" class="setting" class="nf-checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
             </div>
             <%
         }
@@ -498,11 +498,15 @@
 </script>
 
 <script id="nf-tmpl-rte-link-dropdown" type="text/template">
-    <div class="summernote-url">
-        <input type="url" class="widefat code" placeholder="URL"> <br />
+    <div class="summernote-link">
+        URL
+        <input type="url" class="widefat code link-url"> <br />
+        Text
+        <input type="url" class="widefat code link-text"> <br />
         <label>
-            <input type="checkbox"> Open in new window
+            <input type="checkbox" class="link-new-window"> Open in new window
         </label>
-        <input type="button" style="" value="Insert">
+        <input type="button" class="cancel-link extra" value="Cancel">
+        <input type="button" class="insert-link extra" value="Insert">
     </div>
 </script>

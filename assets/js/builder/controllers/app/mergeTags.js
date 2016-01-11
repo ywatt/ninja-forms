@@ -55,6 +55,7 @@ define( [
 			this.listenTo( nfRadio.channel( 'fields' ), 'delete:field', this.deleteFieldTags );
 			
 			nfRadio.channel( 'mergeTags' ).reply( 'update:currentElement', this.updateCurrentElement, this );
+			nfRadio.channel( 'mergeTags' ).reply( 'update:currentSetting', this.updateCurrentSetting, this );
 
 			// Listen for requests for our mergeTag collection.
 			nfRadio.channel( 'mergeTags' ).reply( 'get:mergeTags', this.getMergeTags, this );
@@ -81,11 +82,21 @@ define( [
 		},
 
 		clickMergeTag: function( e, tagModel ) {
-			var currentValue = jQuery( this.currentElement ).val();
-			var currentPos = jQuery( this.currentElement ).caret();
-			var newPos = currentPos + tagModel.get( 'tag' ).length;
-			currentValue = currentValue.substr( 0, currentPos ) + tagModel.get( 'tag' ) + currentValue.substr( currentPos );
-			jQuery( this.currentElement ).val( currentValue ).caret( newPos ).trigger( 'change' );
+			/*
+			 * TODO: Make this more dynamic.
+			 * Currently, the RTE is the only section that modifies how merge tags work,
+			 * but another type of setting might need to do this in the future.
+			 */
+			if ( 'rte' != this.settingModel.get( 'type' ) ) {
+				var currentValue = jQuery( this.currentElement ).val();
+				var currentPos = jQuery( this.currentElement ).caret();
+				var newPos = currentPos + tagModel.get( 'tag' ).length;
+				currentValue = currentValue.substr( 0, currentPos ) + tagModel.get( 'tag' ) + currentValue.substr( currentPos );
+				jQuery( this.currentElement ).val( currentValue ).caret( newPos ).trigger( 'change' );				
+			} else { // We're in an RTE
+				jQuery( this.currentElement ).summernote( 'insertText', tagModel.get( 'tag' ) );
+			}
+
 		},
 
 		addFieldTags: function( fieldModel ) {
@@ -172,6 +183,10 @@ define( [
 
 		updateCurrentElement: function( element ) {
 			this.currentElement = element;
+		},
+
+		updateCurrentSetting: function( settingModel ) {
+			this.settingModel = settingModel;
 		},
 
 		getMergeTags: function() {

@@ -15,7 +15,8 @@
 define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
-			settings: false
+			settings: false,
+			hide_merge_tags: false
 		},
 
 		initialize: function() {
