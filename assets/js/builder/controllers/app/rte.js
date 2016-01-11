@@ -1,6 +1,6 @@
 /**
  * Handles actions related to settings that utilise the Rich Text Editor
- * 
+ *
  * @package Ninja Forms builder
  * @subpackage App - Settings Drawer
  * @copyright (c) 2015 WP Ninjas
@@ -96,9 +96,7 @@ define( [], function() {
 			    [ 'customGroup', [ 'linkButton', 'unlink' ] ],
 			    [ 'table', [ 'table' ] ],
 			    [ 'actions', [ 'undo', 'redo' ] ],
-			    [ 'codeview', [ 'codeview' ] ],
-			    [ 'mergeTags', [ 'mergeTags' ] ],
-			    [ 'mediaButton', [ 'mediaButton' ] ]			    
+			    [ 'tools', [ 'mediaButton', 'mergeTags', 'codeview' ] ]
 			];
 
 			jQuery( settingView.el ).find( 'div.setting' ).summernote( {
@@ -119,7 +117,7 @@ define( [], function() {
 						var name = settingModel.get( 'name' );
 						var before = dataModel.get( name );
 						var after = jQuery( this ).summernote( 'code' );
-			
+
 						var changes = {
 							attr: name,
 							before: before,
@@ -135,7 +133,7 @@ define( [], function() {
 						nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', dataModel, changes, label );
 
 						dataModel.set( settingModel.get( 'name' ), after );
-					}					
+					}
 				}
 			} );
 		},
@@ -243,7 +241,7 @@ define( [], function() {
 			context.invoke( 'editor.saveRange' );
 			var text = range.toString()
 			this.currentContext = context;
-			
+
 			jQuery( e.target ).closest( '.note-customGroup > .note-btn-group' ).on ('hide.bs.dropdown', function ( e ) {
 				return false;
 			});
@@ -270,7 +268,7 @@ define( [], function() {
 			textEl.val( '' );
 			urlEl.val( '' );
 			isNewWindowEl.prop( 'checked', false );
-			jQuery( e.target ).closest( 'div.note-btn-group.open' ).removeClass( 'open' );	
+			jQuery( e.target ).closest( 'div.note-btn-group.open' ).removeClass( 'open' );
 		},
 
 		insertMedia: function( media, context ) {
@@ -280,7 +278,7 @@ define( [], function() {
 			} else {
 				context.invoke( 'editor.createLink', { text: media.filename, url: media.url } );
 			}
-			
+
 		}
 	});
 
