@@ -2,13 +2,13 @@
 
 abstract class NF_Abstracts_SubmissionMetabox
 {
-    protected $_id = '';
+    protected $_id = ''; // Dynamically set in constructor using the class name.
 
-    protected $_title = '';
+    protected $_title = ''; // Should be set (and translated) in the constructor.
 
     protected $_callback = 'render_metabox';
 
-    protected $_post_types = array( 'nf_sub', 'nf_subs' );
+    protected $_post_types = array( 'nf_sub' );
 
     protected $_context = 'side';
 
@@ -16,16 +16,21 @@ abstract class NF_Abstracts_SubmissionMetabox
 
     protected $_callback_args = array();
 
+    protected $_capability = 'edit_post';
+
     public function __construct()
     {
-        $this->_id = 'nf_sub_metabox_' . strtolower( __CLASS__ );
-        $this->_title = __( 'Example Metabox' );
+        if( ! isset( $_GET[ 'post' ] ) ) return;
+
+        $this->_id = strtolower( get_class( $this ) );
+        $this->_title = __( 'Submission Metabox', 'ninja-forms' );
 
         $post_id = absint( $_GET[ 'post' ] );
 
         $this->_callback_args[ 'sub' ] = Ninja_Forms()->form()->get_sub( $post_id );
         
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+        add_action( 'save_post', array( $this, '_save_post' ) );
     }
 
     public function add_meta_boxes()
@@ -42,6 +47,39 @@ abstract class NF_Abstracts_SubmissionMetabox
     }
 
     abstract public function render_metabox( $post, $metabox );
+
+    public function _save_post( $post_id )
+    {
+        $nonce = 'myplugin_meta_box_nonce';
+
+        // Check if our nonce is set.
+        if ( ! isset( $_POST[ $nonce ] ) ) return;
+
+        // Verify that the nonce is valid.
+        if ( ! wp_verify_nonce( $_POST[ $nonce ], $nonce ) ) return;
+
+        // If this is an autosave, our form has not been submitted, so we don't want to do anything.
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+
+        // Check Post Type
+        if ( ! isset( $_POST['post_type'] ) ||  'nf_sub' != $_POST['post_type'] ) return;
+
+        // TODO: Maybe update with Ninja Forms specific capabilities.
+        if ( ! current_user_can( $this->_capability, $post_id ) ) return;
+
+        /* OK, it's safe for us to save the data now. */
+
+        // TODO: Make sure that it is set.
+
+        // TODO: Sanitize user input.
+
+        $this->save_post( $post_id );
+    }
+
+    protected function save_post( $post_id )
+    {
+        // This section intentionally left blank.
+    }
 
     protected function get_field_values()
     {
