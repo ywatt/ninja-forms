@@ -156,11 +156,29 @@ return apply_filters( 'ninja-forms-field-settings', array(
         'group' => 'primary',
         // 'value' => 'option-repeater',
         'value' => array(
-            array( 'label' => 'One', 'value' => 'one', 'calc' => '', 'selected' => 0, 'order' => 0 ),
-            array( 'label' => 'Two', 'value' => 'two', 'calc' => '', 'selected' => 0, 'order' => 1 ),
-            array( 'label' => 'Three', 'value' => 'three', 'calc' => '', 'selected' => 0, 'order' => 2 ),
+            array( 'label'  => 'One', 'value' => 'one', 'calc' => '', 'selected' => 0, 'order' => 0 ),
+            array( 'label'  => 'Two', 'value' => 'two', 'calc' => '', 'selected' => 0, 'order' => 1 ),
+            array( 'label'  => 'Three', 'value' => 'three', 'calc' => '', 'selected' => 0, 'order' => 2 ),
         ),
-        'columns' => array( 'label', 'value', 'calc', 'selected' ),
+        'columns'           => array( 
+           'label'          => array(
+                'header'    => __( 'Label', 'ninja-forms' ),
+                'default'   => '',
+            ),
+            
+            'value'         => array(
+                'header'    => __( 'Value', 'ninja-forms' ),
+                'default'   => '',
+            ),
+            'calc'          => array(
+                'header'    =>__( 'Calc Value', 'ninja-forms' ),
+                'default'   => '',
+            ),
+            'selected'      => array(
+                'header'    => '<span class="dashicons dashicons-yes"></span>',
+                'default'   => 0,
+            ),
+        ),
 
     ),
 
@@ -699,18 +717,28 @@ return apply_filters( 'ninja-forms-field-settings', array(
         ),
     ),
 
-    'shipping_options' => array(
-        'name' => 'shipping_options',
-        'type' => 'option-repeater',
-        'label' => __( 'Cost Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
-        'width' => 'full',
-        'group' => 'primary',
-        'value' => array(
-            array( 'label' => 'One', 'value' => '1.00', 'order' => 0 ),
-            array( 'label' => 'Two', 'value' => '2.00', 'order' => 1 ),
-            array( 'label' => 'Three', 'value' => '3.00', 'order' => 2 ),
+    'shipping_options'      => array(
+        'name'              => 'shipping_options',
+        'type'              => 'option-repeater',
+        'label'             => __( 'Cost Options', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
+        'width'             => 'full',
+        'group'             => 'primary',
+        'value'             => array(
+            array( 'label'  => 'One', 'value' => '1.00', 'order' => 0 ),
+            array( 'label'  => 'Two', 'value' => '2.00', 'order' => 1 ),
+            array( 'label'  => 'Three', 'value' => '3.00', 'order' => 2 ),
         ),
-        'columns' => array( 'label', 'value' ),
+         'columns'          => array( 
+            'label'         => array(
+                'header'    => __( 'Label', 'ninja-forms' ),
+                'default'   => '',
+            ),
+            
+            'value'         => array(
+                'header'    => __( 'Value', 'ninja-forms' ),
+                'default'   => '',
+            ),
+        ),
         'deps'              => array(
             'shipping_type' => 'select'
         ),

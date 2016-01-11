@@ -50,7 +50,7 @@ define(
 		'controllers/fields/filterTypes',
 		'controllers/fields/sortable',
 		'controllers/fields/data',
-		'controllers/fields/optionRepeater',
+		'controllers/app/optionRepeater',
 		'controllers/fields/editActive',
 		'controllers/fields/fieldSettings',
 		'controllers/fields/fieldCreditCard',

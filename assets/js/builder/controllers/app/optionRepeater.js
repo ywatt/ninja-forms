@@ -10,7 +10,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 'views/fields/drawer/typeSettingListComposite'], function( listOptionModel, listOptionCollection, listCompositeView ) {
+define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection', 'views/app/drawer/optionRepeaterComposite'], function( listOptionModel, listOptionCollection, listCompositeView ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Respond to requests for the childView for list type fields.
@@ -80,7 +80,14 @@ define( ['models/fields/listOptionModel', 'models/fields/listOptionCollection', 
 		 * @return void
 		 */
 		addOption: function( collection, dataModel ) {
-			var model = new listOptionModel( { label: '', value: '', calc: '', selected: 0, order: collection.length, new: true } );
+			var modelData = {
+				order: collection.length,
+				new: true
+			};
+			_.each( collection.settingModel.get( 'columns' ), function( col, key ) {
+				modelData[ key ] = col.default;
+			} );
+			var model = new listOptionModel( modelData );
 			collection.add( model );
 
 			// Add our field addition to our change log.
