@@ -1425,21 +1425,34 @@ All styles used for displaying table content
   .ninja-forms-app .note-editor .note-editable {
     background: #f9f9f9;
     display: block; }
+    .ninja-forms-app .note-editor .note-editable p {
+      font-size: 16px; }
+    .ninja-forms-app .note-editor .note-editable ul {
+      list-style-type: disc;
+      margin-left: 2em; }
+    .ninja-forms-app .note-editor .note-editable table td {
+      border: 1px solid #ccc;
+      width: auto; }
   .ninja-forms-app .note-editor .modal {
     display: none; }
   .ninja-forms-app .note-editor .btn-group {
     float: left; }
-    .ninja-forms-app .note-editor .btn-group.note-codeview, .ninja-forms-app .note-editor .btn-group.note-mergeTags, .ninja-forms-app .note-editor .btn-group.note-mediaButton {
+    .ninja-forms-app .note-editor .btn-group.note-tools {
       float: right; }
   .ninja-forms-app .note-editor .btn {
     background: #f9f9f9;
     border: 0;
     border-radius: 4px;
     color: #666;
-    margin-right: 4px; }
+    cursor: pointer;
+    margin-right: 2px;
+    padding-top: 4px; }
     .ninja-forms-app .note-editor .btn.disabled {
       background: transparent;
       color: #aaa; }
+      .ninja-forms-app .note-editor .btn.disabled .merge-tags {
+        background: #f9f9f9;
+        color: #666; }
 
 .ninja-forms-app .tooltip {
   position: absolute;

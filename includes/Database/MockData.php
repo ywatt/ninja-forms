@@ -189,8 +189,8 @@ final class NF_Database_MockData
         $sub = Ninja_Forms()->form( $form_id )->sub()->get();
         $sub->update_field_value( 1, 'Kyle Johnson' )
             ->update_field_value( 2, 'kyle@wpninjas.com' )
-            ->update_field_value( 3, 'kyle@wpninjas.com' )
-            ->update_field_value( 4, 'This is a test.' )
+            ->update_field_value( 3, 'This is a test' )
+            ->update_field_value( 4, '2' )
             ->update_field_value( 5, 'Kyle Johnson' );
         $sub->save();
 
@@ -200,8 +200,8 @@ final class NF_Database_MockData
         $sub = Ninja_Forms()->form( $form_id )->sub()->get();
         $sub->update_field_value( 1, 'John Doe' )
             ->update_field_value( 2, 'user@gmail.com' )
-            ->update_field_value( 3, 'user@gmail.com' )
-            ->update_field_value( 4, 'This is another test.' )
+            ->update_field_value( 3, 'This is another test.' )
+            ->update_field_value( 4, '3' )
             ->update_field_value( 5, 'John Doe' );
         $sub->save();
     }

@@ -238,6 +238,8 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
                  * TODO: Move to a permanent home.
                  */
                 register_activation_hook( __FILE__, array( self::$instance, 'activation' ) );
+
+                new NF_Admin_Metaboxes_Example();
             }
 
             return self::$instance;

@@ -512,14 +512,45 @@ class NF_Abstracts_Model
             );
         }
 
-        $result = $this->_db->replace(
-            $this->_meta_table_name,
-            array(
-                'key' => $key,
-                'value' => $value,
-                'parent_id' => $this->_id,
-            )
+        $meta_row = $this->_db->get_row(
+            "
+                SELECT `value`
+                FROM   `$this->_meta_table_name`
+                WHERE  `parent_id` = $this->_id
+                AND    `key` = '$key'
+                "
         );
+
+        if( $meta_row ){
+
+            $result = $this->_db->update(
+                $this->_meta_table_name,
+                array(
+                    'value' => $value
+                ),
+                array(
+                    'key' => $key,
+                    'parent_id' => $this->_id
+                )
+            );
+
+        } else {
+
+            $result = $this->_db->insert(
+                $this->_meta_table_name,
+                array(
+                    'key' => $key,
+                    'value' => $value,
+                    'parent_id' => $this->_id
+                ),
+                array(
+                    '%s',
+                    '%s',
+                    '%d'
+                )
+            );
+        }
+
 
         return $result;
     }

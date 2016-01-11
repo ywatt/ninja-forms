@@ -14,15 +14,26 @@
         .note-editable {
             background: #f9f9f9;
             display: block;
+            p {
+                font-size: 16px;
+            }
+            ul {
+                list-style-type: disc;
+                margin-left: 2em;
+            }
+            table {
+                td {
+                    border: 1px solid #ccc;
+                    width: auto;
+                }
+            }
         }
         .modal {
             display: none;
         }
         .btn-group {
             float: left;
-            &.note-codeview,
-            &.note-mergeTags,
-            &.note-mediaButton {
+            &.note-tools, {
                 float: right;
             }
         }
@@ -31,10 +42,16 @@
             border: 0;
             border-radius: 4px;
             color: #666;
-            margin-right: 4px;
+            cursor: pointer;
+            margin-right: 2px;
+            padding-top: 4px;
             &.disabled {
                 background: transparent;
                 color: #aaa;
+                .merge-tags {
+                    background: #f9f9f9;
+                    color: #666;
+                }
             }
         }
     }
