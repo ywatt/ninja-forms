@@ -1430,6 +1430,9 @@ All styles used for displaying table content
     .ninja-forms-app .note-editor .note-editable ul {
       list-style-type: disc;
       margin-left: 2em; }
+    .ninja-forms-app .note-editor .note-editable table td {
+      border: 1px solid #ccc;
+      width: auto; }
   .ninja-forms-app .note-editor .modal {
     display: none; }
   .ninja-forms-app .note-editor .btn-group {

@@ -21,6 +21,12 @@
                 list-style-type: disc;
                 margin-left: 2em;
             }
+            table {
+                td {
+                    border: 1px solid #ccc;
+                    width: auto;
+                }
+            }
         }
         .modal {
             display: none;
