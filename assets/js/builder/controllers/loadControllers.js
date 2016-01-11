@@ -73,11 +73,11 @@ define(
 		/*
 		 * TODO: Settings domain controllers
 		 */
-		'controllers/settings/types',
-		'controllers/settings/data',
-		'controllers/settings/formSettings',
-		'controllers/settings/editActive',
-		'controllers/settings/clickEdit'
+		'controllers/advanced/types',
+		'controllers/advanced/data',
+		'controllers/advanced/formSettings',
+		'controllers/advanced/editActive',
+		'controllers/advanced/clickEdit'
 	],
 	function(
 		/*
