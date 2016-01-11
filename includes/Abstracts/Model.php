@@ -512,14 +512,32 @@ class NF_Abstracts_Model
             );
         }
 
-        $result = $this->_db->replace(
+        $result = $this->_db->update(
             $this->_meta_table_name,
             array(
+                'value' => $value
+            ),
+            array(
                 'key' => $key,
-                'value' => $value,
-                'parent_id' => $this->_id,
+                'parent_id' => $this->_id
             )
         );
+
+        if( 0 == $result ){
+            $result = $this->_db->insert(
+                $this->_meta_table_name,
+                array(
+                    'key' => $key,
+                    'value' => $value,
+                    'parent_id' => $this->_id
+                ),
+                array(
+                    '%s',
+                    '%s',
+                    '%d'
+                )
+            );
+        }
 
         return $result;
     }
