@@ -74,6 +74,8 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 				}
 			} );
 
+			nfRadio.channel( 'mergeTags' ).request( 'init:mergeTags', this );
+
 			/*
 			 * Send out a radio message.
 			 */
@@ -129,12 +131,17 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 						return this.error;
 					}
 					return '';
+				},
+
+				renderFieldsetClasses: function() {
+					return that.model.get( 'name' );
 				}
 			};
 		},
 
 		attachHtml: function( collectionView, childView ) {
 			jQuery( collectionView.el ).find( '.nf-list-options-tbody' ).append( childView.el );
+			nfRadio.channel( 'mergeTags' ).request( 'init:mergeTags', this );
 		},
 
 		events: {
@@ -144,7 +151,6 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 		clickAddOption: function( e ) {
 			nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
 		}
-
 	} );
 
 	return view;

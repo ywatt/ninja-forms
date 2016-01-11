@@ -414,7 +414,7 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-option-repeater" type="text/template">
-    <fieldset class="nf-list-options" <%= renderVisible() %>>
+    <fieldset class="nf-list-options <%= renderFieldsetClasses() %>" <%= renderVisible() %>>
         <legend><%= label %></legend>
         <div class="nf-div-table">
             <div class="nf-table-row nf-table-header">
@@ -490,6 +490,7 @@
     </div>
     <div>
         <textarea class="setting" data-id="eq"><%= eq %></textarea>
+        <span class="dashicons dashicons-list-view merge-tags"></span>
     </div>
     <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>

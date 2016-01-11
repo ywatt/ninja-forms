@@ -49,7 +49,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 			}
 			
 			var before = model.get( name );
-			console.log( 'update' );
+
 			model.set( name, value );
 			// Triger an update on our dataModel
 			this.triggerDataModel( model, dataModel );

@@ -26,7 +26,6 @@ define( [], function() {
 		 * @return void
 		 */
 		changeSetting: function( e, settingModel, dataModel ) {
-			console.log( 'changed' );
 			var name = settingModel.get( 'name' );
 			var before = dataModel.get( name );
 			// Sends out a request on the fields-type (fields-text, fields-checkbox, etc) channel to see if that field type needs to return a special value for saving.

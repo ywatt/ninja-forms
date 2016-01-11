@@ -21,7 +21,8 @@ define(
 		'controllers/fieldProduct',
 		'controllers/fieldTotal',
 		'controllers/fieldQuantity',
-		'controllers/fieldSubmit'
+		'controllers/fieldSubmit',
+		'controllers/calculations'
 	],
 	function(
 		FieldError,
@@ -45,32 +46,34 @@ define(
 		FieldProduct,
 		FieldTotal,
 		FieldQuantity,
-		FieldSubmit
+		FieldSubmit,
+		Calculations
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
-				var fieldError = new FieldError();
-				var changeField = new ChangeField();
-				var changeEmail = new ChangeEmail();
-				var fieldCheckbox = new FieldCheckbox();
-				var fieldCheckboxList = new FieldCheckboxList();
-				var fieldRadio = new FieldRadio();
-				var mirrorField = new MirrorField();
-				var confirmField = new ConfirmField();
-				var updateFieldModel = new UpdateFieldModel();
-				var submitInit = new SubmitInit();
-				var getFormErrors = new GetFormErrors();
-				var selectFile = new SelectFile();
-				var validateRequired = new ValidateRequired();
-				var submitError = new SubmitError();
-				var actionRedirect = new ActionRedirect();
-				var actionSuccess = new ActionSuccess();
-				var fieldSelect = new FieldSelect();
-				var coreSubmitResponse = new CoreSubmitResponse();
-				var fieldProduct = new FieldProduct();
-				var fieldTotal = new FieldTotal();
-				var fieldQuantity = new FieldQuantity();
-				var fieldSubmit = new FieldSubmit();
+				new FieldError();
+				new ChangeField();
+				new ChangeEmail();
+				new FieldCheckbox();
+				new FieldCheckboxList();
+				new FieldRadio();
+				new MirrorField();
+				new ConfirmField();
+				new UpdateFieldModel();
+				new SubmitInit();
+				new GetFormErrors();
+				new SelectFile();
+				new ValidateRequired();
+				new SubmitError();
+				new ActionRedirect();
+				new ActionSuccess();
+				new FieldSelect();
+				new CoreSubmitResponse();
+				new FieldProduct();
+				new FieldTotal();
+				new FieldQuantity();
+				new FieldSubmit();
+				new Calculations();
 			}
 		});
 

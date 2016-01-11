@@ -88,32 +88,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				})
 		    });
 
-			jQuery( this.el ).find( '.merge-tags' ).each(function() {
-				jQuery( this ).jBox( 'Tooltip', {
-					title: 'Insert Merge Tag',
-					content: jQuery( '.merge-tags-content' ),
-					trigger: 'click',
-					position: {
-						x: 'center',
-						y: 'bottom'
-					},
-					closeOnClick: 'body',
-					closeOnEsc: true,
-					theme: 'TooltipBorder',
-					maxHeight: 200,
-					onOpen: function() {
-						var currentElement = jQuery( that.el ).find( '.setting' );
-						nfRadio.channel( 'mergeTags' ).request( 'update:currentSetting', that.model );
-						nfRadio.channel( 'mergeTags' ).request( 'update:currentElement', currentElement );
-						nfRadio.channel( 'mergeTags' ).request( 'update:open', true );
-						nfRadio.channel( 'drawer' ).request( 'prevent:close', 'merge-tags' );
-					},
-					onCloseComplete: function() {
-						nfRadio.channel( 'mergeTags' ).request( 'update:open', false );
-						nfRadio.channel( 'drawer' ).request( 'enable:close', 'merge-tags' );
-					}
-				});
-		    });
+			nfRadio.channel( 'mergeTags' ).request( 'init:mergeTags', this );
 
 			/*
 			 * Apply Setting Field Masks
