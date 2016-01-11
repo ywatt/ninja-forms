@@ -103,6 +103,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 					maxHeight: 200,
 					onOpen: function() {
 						var currentElement = jQuery( that.el ).find( '.setting' );
+						nfRadio.channel( 'mergeTags' ).request( 'update:currentSetting', that.model );
 						nfRadio.channel( 'mergeTags' ).request( 'update:currentElement', currentElement );
 						nfRadio.channel( 'mergeTags' ).request( 'update:open', true );
 						nfRadio.channel( 'drawer' ).request( 'prevent:close', 'merge-tags' );
@@ -238,7 +239,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				},
 
 				renderMergeTags: function() {
-					if ( this.use_merge_tags ) {
+					if ( this.use_merge_tags && ! this.hide_merge_tags ) {
 						return '<span class="dashicons dashicons-list-view merge-tags"></span>';
 					} else {
 						return '';
@@ -248,8 +249,10 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 		},
 
 		events: {
-			'change': 'changeSetting',
-			'keyup': 'keyUpSetting'
+			'change .setting': 'changeSetting',
+			'keyup .setting': 'keyUpSetting',
+			'click .setting': 'clickSetting',
+			'click .extra': 'clickExtra'
 		},
 
 		changeSetting: function( e ) {
@@ -259,6 +262,15 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 		keyUpSetting: function( e ) {
 			nfRadio.channel( 'app' ).trigger( 'keyup:setting', e, this.model, this.dataModel );
 			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'keyup:setting', e, this.model, this.dataModel );
+		},
+
+		clickSetting: function( e ) {
+			nfRadio.channel( 'app' ).trigger( 'click:setting', e, this.model, this.dataModel );
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'click:setting', e, this.model, this.dataModel, this );
+		},
+
+		clickExtra: function( e ) {
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'click:extra', e, this.model, this.dataModel, this );
 		},
 
 		drawerOpened: function() {
