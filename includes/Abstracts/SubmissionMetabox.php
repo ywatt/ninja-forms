@@ -18,6 +18,8 @@ abstract class NF_Abstracts_SubmissionMetabox
 
     public function __construct()
     {
+        if( ! isset( $_GET[ 'post' ] ) ) return;
+
         $this->_id = 'nf_sub_metabox_' . strtolower( __CLASS__ );
         $this->_title = __( 'Example Metabox' );
 
