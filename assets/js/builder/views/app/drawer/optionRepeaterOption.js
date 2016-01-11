@@ -33,7 +33,7 @@ define( [], function() {
 		},
 
 		events: {
-			'change input': 'changeOption',
+			'change .setting': 'changeOption',
 			'click .nf-delete': 'deleteOption',
 			'keyup': 'maybeAddOption'
 		},

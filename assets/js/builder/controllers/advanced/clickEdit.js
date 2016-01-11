@@ -14,7 +14,7 @@ define( ['models/advanced/settingsModel'], function( settingsModel ) {
 
 		clickEdit: function( e, typeModel ) {
 			var model = nfRadio.channel( 'settings' ).request( 'get:settings' );
-			nfRadio.channel( 'app' ).request( 'open:drawer', 'editSettings', { model: typeModel, groupCollection: typeModel.get( 'settingGroups' ) } );
+			nfRadio.channel( 'app' ).request( 'open:drawer', 'editSettings', { model: model, groupCollection: typeModel.get( 'settingGroups' ) } );
 		}
 	});
 
