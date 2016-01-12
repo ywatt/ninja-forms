@@ -710,6 +710,28 @@ All styles used within the drawer
     padding: 20px 5px 5px; }
     .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row.nf-table-header div:nth-child(1), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row.nf-table-header div:nth-child(6) {
       padding: 0 25px; }
+  .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div {
+    vertical-align: top;
+    position: relative; }
+    .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div:nth-child(1), .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div:nth-child(4) {
+      padding: 0 15px;
+      width: 20px;
+      min-width: 20px; }
+    .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div:nth-child(2) {
+      width: 30%; }
+    .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div:nth-child(3) {
+      width: 70%; }
+    .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div textarea {
+      margin: 0;
+      height: 100px; }
+    .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div .merge-tags {
+      color: #999;
+      position: absolute;
+      right: 15px;
+      top: 5px; }
+    .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div .dashicons {
+      color: #999;
+      margin-top: 10px; }
 
 .nf-drawer-buttons {
   display: none;
