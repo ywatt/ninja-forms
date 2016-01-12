@@ -65,6 +65,8 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 
 		onBeforeRender: function() {
 			nfRadio.channel( 'app' ).trigger( 'before:renderSetting', this.model, this.dataModel );
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'before:renderSetting', this.model, this.dataModel, this );
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'before:renderSetting', this.model, this.dataModel, this );
 		},
 
 		onRender: function() {
