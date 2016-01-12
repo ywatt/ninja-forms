@@ -18,11 +18,15 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 		},
 
 		initialize: function() {
-			this.model.on( 'change', this.render, this );
+			this.model.on( 'change:label', this.render, this );
+			this.model.on( 'change:editActive', this.render, this );
+			this.model.on( 'change:active', this.maybeDeactivate, this );
 		},
 
 		onBeforeDestroy: function() {
-			this.model.off( 'change', this.render );
+			this.model.off( 'change:label', this.render );
+			this.model.off( 'change:editActive', this.render );
+			this.model.off( 'change:active', this.maybeDeactivate );
 		},
 		
 		onRender: function() {
@@ -32,13 +36,17 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 				jQuery( this.el ).removeClass( 'active' );
 			}
 
+			this.maybeDeactivate();
+			
+			this.itemControls.show( new itemControlsView( { model: this.model } ) );
+		},
+
+		maybeDeactivate: function() {
 			if ( 0 == this.model.get( 'active' ) ) {
 				jQuery( this.el ).addClass( 'deactivated' );
 			} else {
 				jQuery( this.el ).removeClass( 'deactivated' );
 			}
-
-			this.itemControls.show( new itemControlsView( { model: this.model } ) );
 		},
 
 		events: {
