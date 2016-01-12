@@ -98,7 +98,7 @@ define( [], function() {
 			var testKey = key;
 			_.each( fieldCollection.models, function( field ) {
 				if ( dataModel != field && testKey == field.get( 'key' ) ) {
-					testKey = key + '-' + x;
+					testKey = key + '_' + x;
 					x++;
 				}
 			} );
