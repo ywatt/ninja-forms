@@ -51,9 +51,6 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         add_action( 'load-edit.php', array( $this, 'export_listen' ) );
 
         add_action('admin_head', array( $this, 'hide_page_title_action' ) );
-
-        /* Compatibility */
-        add_filter( 'nf_submission_filter_form_options', array( $this, 'compatibility_nf_submission_form_ids' ) );
     }
 
     /**
@@ -419,12 +416,6 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         }
 
         return $vars;
-    }
-
-    /* Compatibility */
-    public function compatibility_nf_submission_form_ids( $form_options )
-    {
-
     }
 
 }
