@@ -133,7 +133,9 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
         $form_title = $form->get_setting( 'title' );
 
-        $new_form->update_setting( 'title', $form_title . " - duplicate" );
+        $new_form_title = $form_title . " - " . __( 'copy', 'ninja-forms' );
+
+        $new_form->update_setting( 'title', $new_form_title );
 
         $new_form->save();
 
