@@ -174,12 +174,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
                 /*
                  * Field Class Registration
                  */
-                self::$instance->fields = apply_filters( 'nf_register_fields', self::load_classes( 'Fields' ) );
+                self::$instance->fields = apply_filters( 'ninja_forms_register_fields', self::load_classes( 'Fields' ) );
 
                 /*
                  * Form Action Registration
                  */
-                self::$instance->actions = apply_filters( 'nf_register_actions', self::load_classes( 'Actions' ) );
+                self::$instance->actions = apply_filters( 'ninja_forms_register_actions', self::load_classes( 'Actions' ) );
 
                 /*
                  * WP-CLI Commands
