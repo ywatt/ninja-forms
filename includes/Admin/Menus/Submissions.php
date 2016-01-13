@@ -148,6 +148,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         foreach( $forms as $form ){
             $form_options[ $form->get_id() ] = $form->get_setting( 'title' );
         }
+        $form_options = apply_filters( 'nf_submission_filter_form_options', $form_options );
 
         if( isset( $_GET[ 'form_id' ] ) ) {
             $form_selected = $_GET[ 'form_id' ];
