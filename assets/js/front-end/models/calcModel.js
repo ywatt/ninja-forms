@@ -9,7 +9,7 @@ define( [], function() {
 			var eqValues = eq;
 			// Check to see if we have any merge tags in our equation.
 			var fields = eq.match( new RegExp( /{field:(.*?)}/g ) );
-			var value = '';
+			var process = true;
 			fields = fields.map( function( field ) {
 				var key = field;
 				key = key.replace( '}', '' ).replace( '{field:', '' ); 
@@ -19,24 +19,25 @@ define( [], function() {
 				 * Send out a request on the field type and parent type channel asking if they need to modify the calc value.
 				 * This is helpful for fields like lists that can have a different calc_value than selected value.
 				 */
-				value = nfRadio.channel( fieldModel.get( 'type' ) ).request( 'get:calcValue', fieldModel ) || false;
+				var value = nfRadio.channel( fieldModel.get( 'type' ) ).request( 'get:calcValue', fieldModel );
 
-				if ( ! value ) {
+				if ( 'undefined' == typeof value ) {
 					if ( jQuery.isNumeric( fieldModel.get( 'value' ) ) ) {
 						value = fieldModel.get( 'value' );
 					} else {
-
 						value = 0;
 					}
 				}
+
+				value = ( jQuery.isNumeric( value ) ) ? value : 0;
 
 				that.fields[ key ] = value;
 				eqValues = eqValues.replace( field, value );
 			} );
 
-			// console.log( eqValues + ' = ' );
+			console.log( eqValues + ' = ' );
 			this.set( 'value', math.eval( eqValues ) );
-			// console.log( this.get( 'value' ) );
+			console.log( this.get( 'value' ) );
 		},
 
 		changeField: function( fieldModel ) {
@@ -46,26 +47,33 @@ define( [], function() {
 			 * Send out a request on the field type and parent type channel asking if they need to modify the calc value.
 			 * This is helpful for fields like lists that can have a different calc_value than selected value.
 			 */
-			var value = nfRadio.channel( fieldModel.get( 'type' ) ).request( 'get:calcValue', fieldModel ) || false;
+			var value = nfRadio.channel( fieldModel.get( 'type' ) ).request( 'get:calcValue', fieldModel );
 
-			if ( ! value ) {
+			if ( 'undefined' == typeof value ) {
 				if ( jQuery.isNumeric( fieldModel.get( 'value' ) ) ) {
 					value = fieldModel.get( 'value' );
 				} else {
-
 					value = 0;
 				}
 			}
 
+			value = ( jQuery.isNumeric( value ) ) ? value : 0;
+
 			this.fields[ key ] = value;
 
 			var eqValues = this.get( 'eq' );
+			var process = true;
 			_.each( this.fields, function( value, key ) {
 				eqValues = eqValues.replace( '{field:' + key + '}', value );
+				if ( 'undefined' == value ) {
+					process = false;
+				}				
 			} );
-			console.log( eqValues + ' = ' );
-			this.set( 'value', math.eval( eqValues ) );
-			console.log( this.get( 'value' ) );
+			if ( process ) {
+				console.log( eqValues + ' = ' );
+				this.set( 'value', math.eval( eqValues ) );
+				console.log( this.get( 'value' ) );				
+			}
 		}
 	} );
 
