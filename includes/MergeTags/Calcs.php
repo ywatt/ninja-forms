@@ -7,6 +7,8 @@ final class NF_MergeTags_Calcs extends NF_Abstracts_MergeTags
 {
     protected $id = 'calcs';
 
+    protected $_default_group = FALSE;
+
     public function __construct()
     {
         parent::__construct();
