@@ -5,7 +5,7 @@ class NF_Database_Migrations_Fields extends NF_Abstracts_Migration
     public function __construct()
     {
         parent::__construct(
-            'nf_fields',
+            'ninja_forms_fields',
             'nf_migration_create_table_fields'
         );
     }

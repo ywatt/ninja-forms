@@ -5,7 +5,7 @@ class NF_Database_Migrations_Relationships extends NF_Abstracts_Migration
     public function __construct()
     {
         parent::__construct(
-            'nf_relationships',
+            'ninja_forms_relationships',
             'nf_migration_create_table_relationships'
         );
     }

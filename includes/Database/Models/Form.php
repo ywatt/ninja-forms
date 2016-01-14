@@ -7,9 +7,9 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 {
     protected $_type = 'form';
 
-    protected $_table_name = 'nf_forms';
+    protected $_table_name = 'ninja_forms_forms';
 
-    protected $_meta_table_name = 'nf_form_meta';
+    protected $_meta_table_name = 'ninja_forms_form_meta';
 
     protected $_columns = array(
         'title',
