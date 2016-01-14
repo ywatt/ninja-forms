@@ -105,6 +105,10 @@ define( [
 					maxHeight: 200,
 					onOpen: function() {
 						var currentElement = jQuery( this.target ).prev( '.setting' );
+						// jQuery( currentElement ).highlightTextarea({
+						//     words: '{field:(.*?)}',
+						//     color: '#44DB36'
+						// });
 						nfRadio.channel( 'mergeTags' ).request( 'update:currentSetting', view.model );
 						nfRadio.channel( 'mergeTags' ).request( 'update:currentElement', currentElement );
 						nfRadio.channel( 'mergeTags' ).request( 'update:open', true );
