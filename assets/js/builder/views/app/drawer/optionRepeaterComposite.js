@@ -74,7 +74,7 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 				}
 			} );
 
-			nfRadio.channel( 'mergeTags' ).request( 'init:mergeTags', this );
+			nfRadio.channel( 'mergeTags' ).request( 'init', this );
 
 			/*
 			 * Send out a radio message.
@@ -141,7 +141,7 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 
 		attachHtml: function( collectionView, childView ) {
 			jQuery( collectionView.el ).find( '.nf-list-options-tbody' ).append( childView.el );
-			nfRadio.channel( 'mergeTags' ).request( 'init:mergeTags', this );
+			nfRadio.channel( 'mergeTags' ).request( 'init', this );
 		},
 
 		events: {

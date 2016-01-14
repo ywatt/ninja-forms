@@ -9,7 +9,6 @@ define( [], function() {
 		getChildView: function( model ) {
 			return nfRadio.channel( 'app' ).request( 'get:settingChildView', model );
 		}
-
 	} );
 
 	return view;
