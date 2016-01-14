@@ -92,7 +92,7 @@ define( [], function() {
 		},
 
 		keyExists: function( key, dataModel ) {
-			key = jQuery.slugify( key );
+			key = jQuery.slugify( key, { separator: '_' } );
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			var x = 1;
 			var testKey = key;
