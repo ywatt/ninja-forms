@@ -301,7 +301,11 @@ return apply_filters( 'ninja-forms-field-settings', array(
          'width' => 'full',
          'value' => '',
          'group' => 'advanced',
-         'use_merge_tags' => TRUE,
+         'use_merge_tags' => array(
+             'exclude' => array(
+                 'fields'
+             )
+         ),
      ),
 
     /*
