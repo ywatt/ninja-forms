@@ -194,6 +194,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
                 self::$instance->preview = new NF_Display_Preview();
 
                 /*
+                 * Shortcodes
+                 */
+                self::$instance->shortcodes = new NF_Display_Shortcodes();
+
+                /*
                  * Temporary Shortcodes
                  *
                  * TODO: removed once building is complete

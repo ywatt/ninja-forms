@@ -60,7 +60,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         $this->populate_field_merge_tags( $this->_data['fields'], $field_merge_tags );
 
         $calcs_merge_tags = Ninja_Forms()->merge_tags[ 'calcs' ];
-        $this->populate_calc_merge_tags( array(), $calcs_merge_tags );
+        $this->populate_calcs_merge_tags( array(), $calcs_merge_tags );
 
         if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ) {
             $this->run_actions_preview();

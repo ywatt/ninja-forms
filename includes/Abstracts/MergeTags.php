@@ -11,6 +11,8 @@ abstract class NF_Abstracts_MergeTags
 
     protected $merge_tags = array();
 
+    protected $_default_group = TRUE;
+
     public function __construct()
     {
         add_filter( 'kbj_test', array( $this, 'replace' ) );
@@ -57,6 +59,11 @@ abstract class NF_Abstracts_MergeTags
     public function get_merge_tags()
     {
         return $this->merge_tags;
+    }
+
+    public function is_default_group()
+    {
+        return $this->_default_group;
     }
 
 

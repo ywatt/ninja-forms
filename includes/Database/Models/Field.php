@@ -9,9 +9,9 @@ final class NF_Database_Models_Field extends NF_Abstracts_Model
 
     protected $_type = 'field';
 
-    protected $_table_name = 'nf_fields';
+    protected $_table_name = 'ninja_forms_fields';
 
-    protected $_meta_table_name = 'nf_field_meta';
+    protected $_meta_table_name = 'ninja_forms_field_meta';
 
     protected $_columns = array(
         'label',

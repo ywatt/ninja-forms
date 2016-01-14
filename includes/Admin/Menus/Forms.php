@@ -333,7 +333,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $merge_tags[ $key ] = array(
                 'id'    => $group->get_id(),
                 'label' => $group->get_title(),
-                'tags'  => array_values( $group->get_merge_tags() )
+                'tags'  => array_values( $group->get_merge_tags() ),
+                'default_group' => $group->is_default_group()
             );
         }
         ?>

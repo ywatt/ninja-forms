@@ -9,7 +9,8 @@
 define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
-			active: false
+			active: false,
+			exclude: false
 		}
 	} );
 	

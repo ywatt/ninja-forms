@@ -22,8 +22,12 @@ class NF_Fields_HTML extends NF_Abstracts_Input
         parent::__construct();
 
         $this->_settings[ 'default' ][ 'group' ] = 'primary';
-
         $this->_settings[ 'default' ][ 'type' ]  = 'textarea';
+        $this->_settings[ 'default' ][ 'use_merge_tags' ]  = array(
+            'include' => array(
+                'calcs'
+            ),
+        );
 
         $this->_nicename = __( 'HTML', 'ninja-forms' );
     }

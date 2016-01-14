@@ -27,7 +27,8 @@ define( [
 				that.tagSectionCollection.add( {
 					id: tagSection.id,
 					label: tagSection.label,
-					tags: tags
+					tags: tags,
+					default_group: tagSection.default_group
 				} );
 			} );
 
@@ -48,9 +49,10 @@ define( [
 			this.tagSectionCollection.get( 'fields' ).set( 'tags', tags );
 
 			this.currentElement = {};
+			this.settingModel = {};
 			this.open = false;
 
-			nfRadio.channel( 'mergeTags' ).reply( 'init:mergeTags', this.initMergeTags, this );
+			nfRadio.channel( 'mergeTags' ).reply( 'init', this.initMergeTags, this );
 
 			this.listenTo( nfRadio.channel( 'mergeTags' ), 'click:mergeTag', this.clickMergeTag );
 			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.addFieldTags );
@@ -60,7 +62,8 @@ define( [
 			nfRadio.channel( 'mergeTags' ).reply( 'update:currentSetting', this.updateCurrentSetting, this );
 
 			// Listen for requests for our mergeTag collection.
-			nfRadio.channel( 'mergeTags' ).reply( 'get:mergeTags', this.getMergeTags, this );
+			nfRadio.channel( 'mergeTags' ).reply( 'get:collection', this.getCollection, this );
+			nfRadio.channel( 'mergeTags' ).reply( 'get:mergeTag', this.getSectionModel, this );
 
 			// When we edit a key, check for places that key might be used.
 			this.listenTo( nfRadio.channel( 'fieldSetting-key' ), 'update:setting', this.updateKey );
@@ -90,10 +93,11 @@ define( [
 		 * @return void
 		 */
 		initMergeTags: function( view ) {
+			var mergeTagsView = nfRadio.channel( 'mergeTags' ).request( 'get:view' );
+			// Apply merge tags jQuery plugin
 			jQuery( view.el ).find( '.merge-tags' ).each(function() {
 				jQuery( this ).jBox( 'Tooltip', {
 					title: 'Insert Merge Tag',
-					content: jQuery( '.merge-tags-content' ),
 					trigger: 'click',
 					position: {
 						x: 'center',
@@ -103,18 +107,18 @@ define( [
 					closeOnEsc: true,
 					theme: 'TooltipBorder',
 					maxHeight: 200,
+
 					onOpen: function() {
+						mergeTagsView.reRender( view.model );
+						this.setContent( jQuery( '.merge-tags-content' ) );
 						var currentElement = jQuery( this.target ).prev( '.setting' );
-						// jQuery( currentElement ).highlightTextarea({
-						//     words: '{field:(.*?)}',
-						//     color: '#44DB36'
-						// });
+
 						nfRadio.channel( 'mergeTags' ).request( 'update:currentSetting', view.model );
 						nfRadio.channel( 'mergeTags' ).request( 'update:currentElement', currentElement );
 						nfRadio.channel( 'mergeTags' ).request( 'update:open', true );
 						nfRadio.channel( 'drawer' ).request( 'prevent:close', 'merge-tags' );
 					},
-					onCloseComplete: function() {
+					onClose: function() {
 						nfRadio.channel( 'mergeTags' ).request( 'update:open', false );
 						nfRadio.channel( 'drawer' ).request( 'enable:close', 'merge-tags' );
 					}
@@ -230,8 +234,12 @@ define( [
 			this.settingModel = settingModel;
 		},
 
-		getMergeTags: function() {
+		getCollection: function() {
 			return this.tagSectionCollection;
+		},
+
+		getSectionModel: function( id ) {
+			return this.tagSectionCollection.get( id );
 		},
 
 		updateOpen: function( open ) {

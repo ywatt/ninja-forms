@@ -5,7 +5,7 @@ class NF_Database_Migrations_ObjectMeta extends NF_Abstracts_Migration
     public function __construct()
     {
         parent::__construct(
-            'nf_object_meta',
+            'ninja_forms_object_meta',
             'nf_migration_create_table_object_meta'
         );
     }

@@ -28,8 +28,9 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/drawer/mobileMe
 		initialize: function() {
 			// Layout views aren't self-rendering.
 			this.render();
-			var mergeTags = nfRadio.channel( 'mergeTags' ).request( 'get:mergeTags' );
-			this.mergeTagsContent.show( new mergeTagsContentView( { collection: mergeTags } ) );
+			var mergeTags = nfRadio.channel( 'mergeTags' ).request( 'get:collection' );
+			var mergeTagsClone = mergeTags.clone();
+			this.mergeTagsContent.show( new mergeTagsContentView( { collection: mergeTagsClone } ) );
 			// Show our header.
 			this.header.show( new headerView() );
 			// Show our main content.
@@ -39,10 +40,16 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/drawer/mobileMe
 			this.drawer.show( new drawerView() );
 			// Respond to requests asking for the builder dom element.
 			nfRadio.channel( 'app' ).reply( 'get:builderEl', this.getBuilderEl, this );
+			// Respond to requests asking for the builder view
+			nfRadio.channel( 'app' ).reply( 'get:builderView', this.getBuilderView, this );
 		},
 
 		getBuilderEl: function() {
 			return this.el;
+		},
+
+		getBuilderView: function() {
+			return this;
 		},
 
 		// Listen for clicks

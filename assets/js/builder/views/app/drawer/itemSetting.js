@@ -90,7 +90,9 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				})
 		    });
 
-			nfRadio.channel( 'mergeTags' ).request( 'init:mergeTags', this );
+		    if ( this.model.get( 'use_merge_tags' ) ) {
+		    	nfRadio.channel( 'mergeTags' ).request( 'init', this );
+		    }
 
 			/*
 			 * Apply Setting Field Masks
