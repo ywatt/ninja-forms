@@ -61,7 +61,10 @@ abstract class NF_Abstracts_Action
     /**
      * Save
      */
-    public abstract function save();
+    public function save()
+    {
+        // This section intentionally left blank.
+    }
 
     /**
      * Process

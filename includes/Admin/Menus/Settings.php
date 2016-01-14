@@ -8,6 +8,8 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
     public $priority = 11;
 
+    protected $_prefix = 'ninja_forms';
+
     public function __construct()
     {
         parent::__construct();
@@ -23,11 +25,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
         $groups = Ninja_Forms()->config( 'PluginSettingsGroups' );
 
-        $grouped_settings = array(
-            'general' => Ninja_Forms()->config( 'PluginSettingsGeneral' ),
-            'recaptcha' => Ninja_Forms()->config( 'PluginSettingsReCaptcha' ),
-            'advanced' => Ninja_Forms()->config( 'PluginSettingsAdvanced' ),
-        );
+        $grouped_settings = $this->get_settings();
 
         $save_button_text = __( 'Save Settings', 'ninja-forms' );
 
@@ -39,6 +37,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
                 $default = ( isset( $setting_defaults[ $key ] ) ) ? $setting_defaults[$key] : '';
 
+                $grouped_settings[$group][$key]['id'] = $this->prefix( $grouped_settings[$group][$key]['id'] );
                 $grouped_settings[$group][$key]['value'] = $default;
             }
         }
@@ -51,19 +50,26 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
     private function update_settings()
     {
-        $settings = array();
-        $settings = array_merge( $settings, Ninja_Forms()->config( 'PluginSettingsGeneral' ) );
-        $settings = array_merge( $settings, Ninja_Forms()->config( 'PluginSettingsReCaptcha' ) );
-        $settings = array_merge( $settings, Ninja_Forms()->config( 'PluginSettingsAdvanced' ) );
+        if( ! isset( $_POST[ $this->_prefix ] ) ) return;
 
-        foreach( $settings as $setting ){
+        $settings = $_POST[ 'ninja_forms' ];
 
-            $setting_id = $setting[ 'id' ];
-
-            if( ! isset( $_POST[ $setting_id ] ) ) continue;
-
-            Ninja_Forms()->update_setting( $setting_id, sanitize_text_field( $_POST[ $setting_id ] ) );
+        foreach( $settings as $id => $value ){
+            Ninja_Forms()->update_setting( $id, sanitize_text_field( $value ) );
         }
+    }
+
+    private function get_settings()
+    {
+        return apply_filters( 'ninja_forms_plugin_settings', array(
+            'general' => Ninja_Forms()->config( 'PluginSettingsGeneral' ),
+            'recaptcha' => Ninja_Forms()->config( 'PluginSettingsReCaptcha' ),
+            'advanced' => Ninja_Forms()->config( 'PluginSettingsAdvanced' ),
+        ));
+    }
+
+    private function prefix( $value ){
+        return "{$this->_prefix}[$value]";
     }
 
 } // End Class NF_Admin_Settings

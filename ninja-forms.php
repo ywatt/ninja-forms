@@ -174,12 +174,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
                 /*
                  * Field Class Registration
                  */
-                self::$instance->fields = apply_filters( 'nf_register_fields', self::load_classes( 'Fields' ) );
+                self::$instance->fields = apply_filters( 'ninja_forms_register_fields', self::load_classes( 'Fields' ) );
 
                 /*
                  * Form Action Registration
                  */
-                self::$instance->actions = apply_filters( 'nf_register_actions', self::load_classes( 'Actions' ) );
+                self::$instance->actions = apply_filters( 'ninja_forms_register_actions', self::load_classes( 'Actions' ) );
 
                 /*
                  * WP-CLI Commands
@@ -220,6 +220,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
                 self::$instance->merge_tags[ 'post' ] = new NF_MergeTags_Post();
                 self::$instance->merge_tags[ 'system' ] = new NF_MergeTags_System();
                 self::$instance->merge_tags[ 'fields' ] = new NF_MergeTags_Fields();
+                self::$instance->merge_tags[ 'calcs' ] = new NF_MergeTags_Calcs();
 
                 /*
                  * EOS Parser
