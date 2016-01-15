@@ -14,7 +14,7 @@ return apply_filters( 'ninja-forms-from-calculation-settings', array(
         'group' => 'primary',
         'tmpl_row' => 'nf-tmpl-edit-setting-calculation-repeater-row',
         'columns' => array(
-            'var_name'      => array(
+            'name'      => array(
                 'header'    => __( 'Variable Name', 'ninja-forms' ),
                 'default'   => '',
             ),

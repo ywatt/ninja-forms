@@ -11,16 +11,8 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			// Listen for setting model init.
-			// this.listenTo( nfRadio.channel( 'product_assignment' ), 'init:model', this.register );
 			// Listen for messages that are fired before a setting view is rendered.
 			this.listenTo( nfRadio.channel( 'app' ), 'before:renderSetting', this.beforeRenderSetting );
-		},
-
-		register: function( settingModel ) {
-			// Listen for changes to our field collection.
-			// var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
-			// fields.on( 'add', this.maybeUpdateProductFields, )
 		},
 
 		beforeRenderSetting: function( settingModel, dataModel, view ) {

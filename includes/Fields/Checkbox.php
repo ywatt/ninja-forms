@@ -17,7 +17,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
     protected $_test_value = 0;
 
-    protected $_settings =  array( 'checkbox_default_value' );
+    protected $_settings =  array( 'checkbox_default_value', 'checked_calc_value', 'unchecked_calc_value' );
 
     protected $_settings_exclude = array( 'required', 'placeholder' );
 

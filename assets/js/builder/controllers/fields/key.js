@@ -92,13 +92,13 @@ define( [], function() {
 		},
 
 		keyExists: function( key, dataModel ) {
-			key = jQuery.slugify( key );
+			key = jQuery.slugify( key, { separator: '_' } );
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			var x = 1;
 			var testKey = key;
 			_.each( fieldCollection.models, function( field ) {
 				if ( dataModel != field && testKey == field.get( 'key' ) ) {
-					testKey = key + '-' + x;
+					testKey = key + '_' + x;
 					x++;
 				}
 			} );

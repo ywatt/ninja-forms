@@ -13,9 +13,28 @@ define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 		},
 
 		initialize: function() {
+			this.set( 'formID', this.collection.options.formModel.get( 'id' ) );
+
     		this.bind( 'change', this.changeModel, this );
     		this.bind( 'change:value', this.changeValue, this );
     		this.set( 'errors', new fieldErrorCollection() );
+
+    		/*
+			 * Trigger an init event on two channels:
+			 * 
+			 * fields
+			 * field-type
+			 *
+			 * This lets specific field types modify model attributes before anything uses them.
+			 */ 
+			nfRadio.channel( 'fields' ).trigger( 'init:model', this );
+			nfRadio.channel( this.get( 'type' ) ).trigger( 'init:model', this );
+			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:model', this );
+
+			/*
+			 * When we load our form, fire another event for this field.
+			 */
+			this.listenTo( nfRadio.channel( 'form-' + this.get( 'formID' ) ), 'loaded', this.formLoaded );
 		},
 
 		changeModel: function() {
@@ -36,6 +55,11 @@ define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 
 		removeWrapperClass: function( cl ) {
 			this.set( 'removeWrapperClass', cl );
+		},
+
+		formLoaded: function() {
+			nfRadio.channel( 'fields' ).trigger( 'formLoaded', this );
+			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'formLoaded', this );
 		}
 
 	} );

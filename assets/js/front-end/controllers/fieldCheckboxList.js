@@ -1,44 +1,26 @@
 define([], function() {
     var controller = Marionette.Object.extend( {
         initialize: function() {
-            this.listenTo( nfRadio.channel( 'listcheckbox' ), 'change:field', this.fieldChange );
-            this.listenTo( nfRadio.channel( 'listcheckbox' ), 'change:modelValue', this.changeModelValue );
             this.listenTo( nfRadio.channel( 'listcheckbox' ), 'init:model', this.register );
+            nfRadio.channel( 'listcheckbox' ).reply( 'before:updateField', this.beforeUpdateField, this );
+            nfRadio.channel( 'listcheckbox' ).reply( 'get:calcValue', this.getCalcValue, this );
         },
 
         register: function( model ) {
             model.set( 'renderOptions', this.renderOptions );
             model.set( 'renderOtherText', this.renderOtherText );
             model.set( 'selected', [] );
-        },
 
-        fieldChange: function( el, model ) {
-
-            var selected = model.get( 'selected' ) || [];
-            if ( typeof selected == 'string' ) selected = [ selected ];
-
-            var value = jQuery( el).val();
-            var checked = jQuery( el ).attr( 'checked' );
-            if ( checked ) {
-                selected.push( value );
-            } else {
-
-                var i = selected.indexOf( value );
-                if( -1 != i ){
-                    selected.splice( i, 1 );
-                }
+            /*
+             * When we init a model, we need to set our 'value' to the selected option's value.
+             * This is the list equivalent of a 'default value'.
+             */ 
+            if ( 0 != model.get( 'options' ).length ) {
+                var selected = _.filter( model.get( 'options' ), function( opt ) { return 1 == opt.selected } );
+                selected = _.map( selected, function( opt ) { return opt.value } );
+                model.set( 'value', selected );
             }
 
-            model.set( 'selected', selected );
-        },
-
-        changeModelValue: function( model ) {
-            if ( 1 == model.get( 'show_other' ) ) {
-                model.set( 'reRender', true );
-            }
-
-            var selected = model.get( 'selected' );
-            model.set( 'value', selected );
         },
 
         renderOptions: function() {
@@ -96,6 +78,42 @@ define([], function() {
                 };
                 return _.template( jQuery( '#nf-tmpl-field-listcheckbox-other-text' ).html(), data );
             }
+        },
+
+        getCalcValue: function( fieldModel ) {
+            var calc_value = 0;
+            var options = fieldModel.get( 'options' );
+            if ( 0 != options.length ) {
+                _.each( fieldModel.get( 'value' ), function( val ) {
+                    var tmp_opt = _.find( options, function( opt ) { return opt.value == val } );
+                    calc_value = math.add( calc_value, tmp_opt.calc );
+                } );
+            }
+            return calc_value;
+        },
+
+        beforeUpdateField: function( el, model ) {
+            var selected = model.get( 'selected' ) || [];
+            if ( typeof selected == 'string' ) selected = [ selected ];
+
+            var value = jQuery( el).val();
+            var checked = jQuery( el ).attr( 'checked' );
+            if ( checked ) {
+                selected.push( value );
+            } else {
+                var i = selected.indexOf( value );
+                if( -1 != i ){
+                    selected.splice( i, 1 );
+                }
+            }
+
+            model.set( 'selected', selected );
+
+            if ( 1 == model.get( 'show_other' ) ) {
+                model.set( 'reRender', true );
+            }
+
+            return _.clone( selected );
         }
     });
 

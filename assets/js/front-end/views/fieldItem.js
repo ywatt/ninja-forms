@@ -45,8 +45,8 @@ define( ['views/fieldErrorCollection'], function( fieldErrorCollection ) {
 
 		maybeRender: function() {
 			if ( this.model.get( 'reRender' ) ) {
-				this.render();
 				this.model.set( 'reRender', false, { silent: true } );
+				this.render();
 			}
 		},
 

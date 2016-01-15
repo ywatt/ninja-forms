@@ -642,6 +642,30 @@ return apply_filters( 'ninja-forms-field-settings', array(
 
     /*
     |--------------------------------------------------------------------------
+    | Calc Value that is used for checkbox fields
+    |--------------------------------------------------------------------------
+    */
+   
+    'checked_calc_value'    => array(
+        'name'      => 'checked_calc_value',
+        'type'      => 'textbox',
+        'label'     => __( 'Checked Calculation Value', 'ninja-forms' ),
+        'width'     => 'one-half',
+        'group'     => 'advanced',
+        'help'      => __( 'This number will be used in calculations if the box is checked.', 'ninja-forms' ),
+    ),
+
+    'unchecked_calc_value'    => array(
+        'name'      => 'unchecked_calc_value',
+        'type'      => 'textbox',
+        'label'     => __( 'Unchecked Calculation Value', 'ninja-forms' ),
+        'width'     => 'one-half',
+        'group'     => 'advanced',
+        'help'      => __( 'This number will be used in calculations if the box is unchecked.', 'ninja-forms' ),
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
     | Pricing Fields Settings
     |--------------------------------------------------------------------------
     */

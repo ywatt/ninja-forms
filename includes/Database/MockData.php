@@ -912,11 +912,11 @@ final class NF_Database_MockData
         $form->update_setting( 'calculations', array(
             array(
                 'name' => 'My First Calculation',
-                'calc' => '2 * 3'
+                'eq' => '2 * 3'
             ),
             array(
                 'name' => 'My Second Calculation',
-                'calc' => '4 + 1'
+                'eq' => '4 + 1'
             )
         ));
         $form->save();

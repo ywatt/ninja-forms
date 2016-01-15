@@ -1,5 +1,6 @@
 define(
 	[
+		'controllers/formData',
 		'controllers/fieldError',
 		'controllers/changeField',
 		'controllers/changeEmail',
@@ -25,6 +26,7 @@ define(
 		'controllers/calculations'
 	],
 	function(
+		FormData,
 		FieldError,
 		ChangeField,
 		ChangeEmail,
@@ -74,6 +76,7 @@ define(
 				new FieldQuantity();
 				new FieldSubmit();
 				new Calculations();
+				new FormData();
 			}
 		});
 

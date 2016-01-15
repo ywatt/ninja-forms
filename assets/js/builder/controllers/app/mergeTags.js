@@ -32,13 +32,13 @@ define( [
 				} );
 			} );
 
-			var tags = new mergeTagCollection();
+			var fieldTags = new mergeTagCollection();
 
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			_.each( fieldCollection.models, function( field ) {
 				// TODO: Make this dynamic
 				if ( 'submit' !== field.get( 'type' ) ) {
-					tags.add( {
+					fieldTags.add( {
 						id: field.get( 'id' ),
 						label: field.get( 'label' ),
 						tag: that.getFieldKeyFormat( field.get( 'key' ) )
@@ -46,7 +46,21 @@ define( [
 				}
 			} );
 
-			this.tagSectionCollection.get( 'fields' ).set( 'tags', tags );
+			this.tagSectionCollection.get( 'fields' ).set( 'tags', fieldTags );
+
+			var calcTags = new mergeTagCollection();
+
+			var formModel = nfRadio.channel( 'app' ).request( 'get:formModel' );
+			var calcCollection = formModel.get( 'settings' ).get( 'calculations' );
+			_.each( calcCollection, function( calc ) {
+				calcTags.add( {
+					label: calc.name,
+					tag: '{calc:' + calc.name + '}'
+				} );					
+				
+			} );
+
+			this.tagSectionCollection.get( 'calcs' ).set( 'tags', calcTags );
 
 			this.currentElement = {};
 			this.settingModel = {};
@@ -94,6 +108,7 @@ define( [
 		 */
 		initMergeTags: function( view ) {
 			var mergeTagsView = nfRadio.channel( 'mergeTags' ).request( 'get:view' );
+			var that = this;
 			// Apply merge tags jQuery plugin
 			jQuery( view.el ).find( '.merge-tags' ).each(function() {
 				jQuery( this ).jBox( 'Tooltip', {
@@ -111,15 +126,12 @@ define( [
 					onOpen: function() {
 						mergeTagsView.reRender( view.model );
 						this.setContent( jQuery( '.merge-tags-content' ) );
-						var currentElement = jQuery( this.target ).prev( '.setting' );
-
-						nfRadio.channel( 'mergeTags' ).request( 'update:currentSetting', view.model );
-						nfRadio.channel( 'mergeTags' ).request( 'update:currentElement', currentElement );
-						nfRadio.channel( 'mergeTags' ).request( 'update:open', true );
+						var currentElement = jQuery( view.el ).find( '.setting' );
+						that.updateCurrentSetting( view.model );
+						that.updateCurrentElement( currentElement );
 						nfRadio.channel( 'drawer' ).request( 'prevent:close', 'merge-tags' );
 					},
 					onClose: function() {
-						nfRadio.channel( 'mergeTags' ).request( 'update:open', false );
 						nfRadio.channel( 'drawer' ).request( 'enable:close', 'merge-tags' );
 					}
 				});
