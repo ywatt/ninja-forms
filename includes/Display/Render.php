@@ -6,6 +6,8 @@ final class NF_Display_Render
         'app-layout',
         'app-before-form',
         'app-after-form',
+        'app-before-field',
+        'app-after-field',
         'form-layout',
         'fields-wrap',
         'fields-wrap-no-label',
