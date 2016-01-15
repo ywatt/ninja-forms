@@ -19,11 +19,14 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			this.listenTo( nfRadio.channel( 'calc' ), 'change:calc', this.changeCalc );
 
 			/*
-			 * Listen to our field model init for html fields.
+			 * Listen to our field model init for fields that want to display calc values.
 			 * If that field has a calc merge tag, replace it with the default calc value.
 			 */
-			this.listenTo( nfRadio.channel( 'fields-html' ), 'init:model', this.initHTML );
-
+			var that = this;
+			_.each( nfFrontEnd.use_merge_tags.calculations, function( fieldType ) {
+				that.listenTo( nfRadio.channel( 'fields-' + fieldType ), 'init:model', that.initDisplayField );
+			} );
+			
 			// When we change our calc value, update any display fields.
 			this.listenTo( nfRadio.channel( 'calc' ), 'change:value', this.updateDisplayFields );
 
@@ -250,7 +253,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			// console.log( eqValues + ' = ' + calcModel.get( 'value' ) );		
 		},
 
-		initHTML: function( fieldModel ) {
+		initDisplayField: function( fieldModel ) {
 			var calcs = fieldModel.get( 'default' ).match( new RegExp( /{calc:(.*?)}/g ) );
 			if ( calcs ) {
 				var that = this;
