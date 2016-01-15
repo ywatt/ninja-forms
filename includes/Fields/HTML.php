@@ -17,6 +17,8 @@ class NF_Fields_HTML extends NF_Abstracts_Input
 
     protected $_settings_only = array( 'label', 'default', 'classes' );
 
+    protected $_use_merge_tags_include = array( 'calculations' );
+
     public function __construct()
     {
         parent::__construct();

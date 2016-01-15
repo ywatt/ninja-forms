@@ -246,6 +246,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
                 register_activation_hook( __FILE__, array( self::$instance, 'activation' ) );
 
                 new NF_Admin_Metaboxes_Example();
+                new NF_Admin_Metaboxes_AppendAForm();
             }
 
             return self::$instance;

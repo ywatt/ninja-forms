@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return apply_filters( 'ninja-forms-field-settings-groups', array(
+return apply_filters( 'ninja_forms_field_settings_groups', array(
 
     'primary' => array(
         'id' => 'primary',
