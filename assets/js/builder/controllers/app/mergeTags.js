@@ -109,32 +109,46 @@ define( [
 		initMergeTags: function( view ) {
 			var mergeTagsView = nfRadio.channel( 'mergeTags' ).request( 'get:view' );
 			var that = this;
-			// Apply merge tags jQuery plugin
+			/*
+			 * Apply merge tags jQuery plugin.
+			 *
+			 * Prevent jBox from being called multiple times on the same element
+			 */
+			this.jBoxes = {};
+			var that = this;
 			jQuery( view.el ).find( '.merge-tags' ).each(function() {
-				jQuery( this ).jBox( 'Tooltip', {
-					title: 'Insert Merge Tag',
-					trigger: 'click',
-					position: {
-						x: 'center',
-						y: 'bottom'
-					},
-					closeOnClick: 'body',
-					closeOnEsc: true,
-					theme: 'TooltipBorder',
-					maxHeight: 200,
+				if ( 'undefined' == typeof jQuery( this ).data( 'jBox-id' ) ) {
+					var jBox = jQuery( this ).jBox( 'Tooltip', {
+						title: 'Insert Merge Tag',
+						trigger: 'click',
+						position: {
+							x: 'center',
+							y: 'bottom'
+						},
+						closeOnClick: 'body',
+						closeOnEsc: true,
+						theme: 'TooltipBorder',
+						maxHeight: 200,
 
-					onOpen: function() {
-						mergeTagsView.reRender( view.model );
-						this.setContent( jQuery( '.merge-tags-content' ) );
-						var currentElement = jQuery( view.el ).find( '.setting' );
-						that.updateCurrentSetting( view.model );
-						that.updateCurrentElement( currentElement );
-						nfRadio.channel( 'drawer' ).request( 'prevent:close', 'merge-tags' );
-					},
-					onClose: function() {
-						nfRadio.channel( 'drawer' ).request( 'enable:close', 'merge-tags' );
-					}
-				});
+						onOpen: function() {
+							mergeTagsView.reRender( view.model );
+							this.setContent( jQuery( '.merge-tags-content' ) );
+							var currentElement = jQuery( this.target ).prev( '.setting' );
+							if ( 0 == currentElement.length ) {
+								currentElement = jQuery( view.el ).find( '.setting' );
+							}
+													
+							that.updateCurrentSetting( view.model );
+							that.updateCurrentElement( currentElement );
+							nfRadio.channel( 'drawer' ).request( 'prevent:close', 'merge-tags' );
+						},
+						onClose: function() {
+							nfRadio.channel( 'drawer' ).request( 'enable:close', 'merge-tags' );
+						}
+					});
+					
+					jQuery( this ).data( 'jBox-id', jBox.id );					
+				}
 		    });
 		},
 
