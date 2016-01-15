@@ -25,8 +25,11 @@ class NF_Fields_Hidden extends NF_Abstracts_Input
     {
         parent::__construct();
 
+        $use_merge_tags = array( 'include' => array( 'calculations' ) );
+
         $this->_settings[ 'label' ][ 'width' ] = 'full';
         $this->_settings[ 'default' ][ 'group' ] = 'primary';
+        $this->_settings[ 'default' ][ 'user_merge_tags' ] = $use_merge_tags;
 
         $this->_nicename = __( 'Hidden', 'ninja-forms' );
     }
