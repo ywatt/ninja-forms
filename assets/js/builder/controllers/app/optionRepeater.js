@@ -181,12 +181,14 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 		 * @return void
 		 */
 		updateOptionSortable: function( ui, sortable, setting ) {
+			
 			var newOrder = jQuery( sortable ).sortable( 'toArray' );
 			var dragModel = setting.collection.get( { cid: jQuery( ui.item ).prop( 'id' ) } );
 			var data = {
 				collection: setting.collection,
 				objModels: []
 			};
+
 			_.each( newOrder, function( cid, index ) {
 				var optionModel = setting.collection.get( { cid: cid } );
 				var oldPos = optionModel.get( 'order' );
@@ -201,8 +203,8 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 				} );
 			} );
 			
-			setting.collection.sort();
-
+			setting.collection.sort( { silent: true } );
+			
 			var label = {
 				object: setting.dataModel.get( 'objectType' ),
 				label: setting.dataModel.get( 'label' ),
@@ -211,8 +213,9 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 			};
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'sortListOptions', dragModel, null, label, data );
-
+			
 			this.triggerDataModel( dragModel, setting.dataModel );
+			
 		},
 
 		/**
