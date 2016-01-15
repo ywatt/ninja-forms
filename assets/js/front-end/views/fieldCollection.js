@@ -1,7 +1,7 @@
-define( ['views/fieldItem'], function( fieldItem ) {
+define( ['views/fieldLayout'], function( fieldLayout ) {
 	var view = Marionette.CollectionView.extend({
 		tagName: 'nf-fields-wrap',
-		childView: fieldItem
+		childView: fieldLayout
 
 	});
 

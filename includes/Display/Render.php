@@ -9,6 +9,9 @@ final class NF_Display_Render
         'app-before-field',
         'app-after-field',
         'form-layout',
+        'field-layout',
+        'field-before',
+        'field-after',
         'fields-wrap',
         'fields-wrap-no-label',
         'fields-wrap-no-container',
@@ -69,6 +72,18 @@ final class NF_Display_Render
                 }
 
                 $field->update_setting('id', $field->get_id());
+
+                /*
+                 * TODO: For backwards compatibility, run the original action, get contents from the output buffer, and return the contents through the filter. Also display a PHP Notice for a deprecate filter.
+                 */
+
+                $display_before = apply_filters( 'ninja_forms_display_before_field_type_' . $field->get_setting( 'type' ), '' );
+                $display_before = apply_filters( 'ninja_forms_display_before_field_key_' . $field->get_setting( 'key' ), $display_before );
+                $field->update_setting( 'beforeField', $display_before );
+
+                $display_after = apply_filters( 'ninja_forms_display_after_field_type_' . $field->get_setting( 'type' ), '' );
+                $display_after = apply_filters( 'ninja_forms_display_after_field_key_' . $field->get_setting( 'key' ), $display_after );
+                $field->update_setting( 'afterField', $display_after );
 
                 $templates = $field_class->get_templates();
 
