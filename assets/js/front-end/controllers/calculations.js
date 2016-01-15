@@ -80,7 +80,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			// We want to keep our original eq intact, so we use a different var for string replacment.
 			var eqValues = eq;
 
-			/*
+			/* TODO:
 			 * It might be possible to refactor these two if statements.
 			 * The difficulty is that each has a different method of retreiving the specific data model.
 			 */
