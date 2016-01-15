@@ -85,18 +85,20 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_enqueue_media();
 
         wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
+        /**
+         * CSS Libraries
+         */
         wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
-        
-        // wp_enqueue_style( 'bootstrap', 'http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css' );
-        wp_enqueue_style( 'font-awesome', 'http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css' );
-        
         wp_enqueue_style( 'summernote', Ninja_Forms::$url . 'assets/css/summernote.css' );
         wp_enqueue_style( 'codemirror', '//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css' );
         wp_enqueue_style( 'codemirror-monokai', '//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css' );
+        wp_enqueue_style( 'jquery-highlight-textarea', Ninja_Forms::$url . 'assets/css/jquery.highlighttextarea.min.css' );
 
+        /**
+         * JS Libraries
+         */
         wp_enqueue_script( 'jquery-autoNumeric', Ninja_Forms::$url . 'assets/js/lib/jquery.autoNumeric.min.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'jquery-maskedinput', Ninja_Forms::$url . 'assets/js/lib/jquery.maskedinput.min.js', array( 'jquery', 'backbone' ) );
-
         wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'jquery-perfect-scrollbar', Ninja_Forms::$url . 'assets/js/lib/perfect-scrollbar.jquery.min.js', array( 'jquery' ) );
@@ -105,6 +107,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_enqueue_script( 'jquery-caret', Ninja_Forms::$url . 'assets/js/lib/jquery.caret.js' );
         wp_enqueue_script( 'speakingurl', Ninja_Forms::$url . 'assets/js/lib/speakingurl.js' );
         wp_enqueue_script( 'jquery-slugify', Ninja_Forms::$url . 'assets/js/lib/slugify.min.js', array( 'jquery', 'speakingurl' ) );
+        wp_enqueue_script( 'jquery-highlight-textarea', Ninja_Forms::$url . 'assets/js/lib/jquery.highlighttextarea.min.js', array( 'jquery' ) );
        
         wp_enqueue_script( 'bootstrap','http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js', array( 'jquery' ) );
         wp_enqueue_script( 'codemirror','//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js', array( 'jquery' ) );

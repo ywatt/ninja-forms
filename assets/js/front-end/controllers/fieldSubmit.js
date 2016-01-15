@@ -7,7 +7,6 @@ define([], function() {
         },
 
         register: function (submitModel) {
-            console.log( submitModel );
             this.submitModel = submitModel;
 
             this.listenTo( nfRadio.channel( 'submit' ), 'click:field', this.onClick );

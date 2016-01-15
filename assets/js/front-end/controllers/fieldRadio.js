@@ -3,11 +3,30 @@ define([], function() {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'listradio' ), 'change:modelValue', this.changeModelValue );
 			this.listenTo( nfRadio.channel( 'listradio' ), 'init:model', this.register );
+			nfRadio.channel( 'listradio' ).reply( 'get:calcValue', this.getCalcValue, this );
 		},
 
 		register: function( model ) {
 			model.set( 'renderOptions', this.renderOptions );
 			model.set( 'renderOtherText', this.renderOtherText );
+			/*
+			 * When we init a model, we need to set our 'value' to the selected option's value.
+			 * This is the list equivalent of a 'default value'.
+			 */ 
+			if ( 0 != model.get( 'options' ).length ) {
+				/*
+				 * Check to see if we have a selected value.
+				 */
+				var selected = _.find( model.get( 'options' ), function( opt ) { return 1 == opt.selected } );
+				/*
+				 * We don't have a selected value, so use our first option.
+				 */
+				if ( 'undefined' == typeof selected ) {
+					selected = model.get( 'options' )[0];
+				}
+
+				model.set( 'value', selected.value );
+			}
 		},
 
 		changeModelValue: function( model ) {
@@ -67,7 +86,27 @@ define([], function() {
 				};
 				return _.template( jQuery( '#nf-tmpl-field-listradio-other-text' ).html(), data );
 			}
+		},
+
+		getCalcValue: function( fieldModel ) {
+			var calc_value = 0;
+			if ( 0 != fieldModel.get( 'options' ).length ) {
+				/*
+				 * Check to see if we have a selected value.
+				 */
+				var selected = _.find( fieldModel.get( 'options' ), function( opt ) { return fieldModel.get( 'value' ) == opt.value } );
+				/*
+				 * We don't have a selected value, so use our first option.
+				 */
+				if ( 'undefined' == typeof selected ) {
+					selected = fieldModel.get( 'options' )[0];
+				}
+
+				var calc_value = selected.calc;
+			}
+			return calc_value;
 		}
+
 	});
 
 	return controller;

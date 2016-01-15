@@ -44,7 +44,7 @@ define([], function() {
 				jQuery( el ).closest( '.nf-field-wrap' ).find( '.nf-field-submit-error' ).show();
 			} else {
 				// Get our form model.
-				var formModel = nfRadio.channel( 'form' ).request( 'get:form', model.get( 'formID' ) );
+				var formModel = nfRadio.channel( 'app' ).request( 'get:form', model.get( 'formID' ) );
 				// Before we submit, check to make sure that all of our required fields aren't empty.
 				_.each( formModel.get( 'fields' ).models, function( field ) {
 					nfRadio.channel( 'submit' ).trigger( 'validate:field', field );

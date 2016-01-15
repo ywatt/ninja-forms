@@ -6,7 +6,7 @@ define([], function() {
 		},
 
 		getFormErrors: function( formID ) {
-			var formModel = nfRadio.channel( 'form' ).request( 'get:form', formID );
+			var formModel = nfRadio.channel( 'app' ).request( 'get:form', formID );
 			var errors = false;
 			if ( formModel ) {
 				_.each( formModel.get( 'fields' ).models, function( field ) {
