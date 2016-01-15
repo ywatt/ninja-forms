@@ -261,8 +261,15 @@ final class NF_Display_Render
         $data = apply_filters( 'ninja_forms_render_localize_script_data', array(
             'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ),
             'adminAjax' => admin_url( 'admin-ajax.php' ),
-            'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/'
+            'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
+            'use_merge_tags' => array()
         ));
+
+        foreach( Ninja_Forms()->fields as $field ){
+            foreach( $field->use_merge_tags() as $merge_tag ){
+                $data[ 'use_merge_tags' ][ $merge_tag ][ $field->get_type() ] = $field->get_type();
+            }
+        }
 
         wp_localize_script( 'nf-front-end', 'nfFrontEnd', $data );
 

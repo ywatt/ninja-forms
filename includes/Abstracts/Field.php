@@ -46,6 +46,21 @@ abstract class NF_Abstracts_Field
     protected $_settings_only = array();
 
     /**
+     * @var array
+     */
+    protected $_use_merge_tags = array( 'user', 'post', 'system', 'fields' );
+
+    /**
+     * @var array
+     */
+    protected $_use_merge_tags_include = array();
+
+    /**
+     * @var array
+     */
+    protected $_use_merge_tags_exclude = array();
+
+    /**
      * @var string
      */
     protected $_test_value = 'test';
@@ -178,6 +193,14 @@ abstract class NF_Abstracts_Field
     public function get_settings()
     {
         return $this->_settings;
+    }
+
+    public function use_merge_tags()
+    {
+        $use_merge_tags = array_merge( $this->_use_merge_tags, $this->_use_merge_tags_include );
+        $use_merge_tags = array_diff( $use_merge_tags, $this->_use_merge_tags_exclude );
+
+        return $use_merge_tags;
     }
 
     public function get_test_value()
