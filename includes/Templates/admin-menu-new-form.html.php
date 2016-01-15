@@ -486,7 +486,7 @@
         <span class="dashicons dashicons-menu handle"></span>
     </div>
     <div>
-        <input type="text" class="setting" value="<%= var_name %>" data-id="var_name">
+        <input type="text" class="setting" value="<%= name %>" data-id="name">
     </div>
     <div>
         <textarea class="setting" data-id="eq"><%= eq %></textarea>

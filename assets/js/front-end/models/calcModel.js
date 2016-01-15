@@ -12,6 +12,8 @@ define( [], function() {
 			this.set( 'fields', {} );
 			// Trigger a radio message to let controllers know we've inited this model.
 			nfRadio.channel( 'calc' ).trigger( 'init:model', this );
+			// When we change the value of this calculation, send out a radio message
+			this.on( 'change:value', this.changeValue, this );
 		},
 
 		/**
@@ -24,6 +26,14 @@ define( [], function() {
 		 */
 		changeField: function( fieldModel ) {
 			nfRadio.channel( 'calc' ).trigger( 'change:field', this, fieldModel );
+		},
+
+		changeCalc: function( targetCalcModel ) {
+			nfRadio.channel( 'calc' ).trigger( 'change:calc', this, targetCalcModel );
+		},
+
+		changeValue: function() {
+			nfRadio.channel( 'calc' ).trigger( 'change:value', this );
 		}
 	} );
 

@@ -20,22 +20,22 @@ define(['models/formModel', 'models/formCollection', 'models/fieldCollection'], 
 
 			_.each( nfForms, function( form, index ) {
 				var formModel = new FormModel( form );
-				var fields = new FieldCollection( form.fields );
-				fields.sort();
-				formModel.set( 'fields', fields );
 				that.formCollection.add( formModel );
+				var fields = new FieldCollection( form.fields, { formModel: formModel } );
+				formModel.set( 'fields', fields );
+				nfRadio.channel( 'form' ).trigger( 'loaded', formModel );
+				nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'loaded', formModel );
 			} );
 
-			_.each( this.formCollection.models, function( form ) {
-				_.each( form.get( 'fields' ).models, function( field ) {
-					field.set( 'formID', form.get( 'id' ) );
-					nfRadio.channel( field.get( 'type' ) ).trigger( 'init:model', field );
-					nfRadio.channel( 'fields' ).trigger( 'init:model', field );
-				} );
+			// _.each( this.formCollection.models, function( form ) {
+			// 	_.each( form.get( 'fields' ).models, function( field ) {
+			// 		nfRadio.channel( field.get( 'type' ) ).trigger( 'init:model', field );
+			// 		nfRadio.channel( 'fields' ).trigger( 'init:model', field );
+			// 	} );
 				
-				nfRadio.channel( 'form' ).trigger( 'loaded', form );
-				nfRadio.channel( 'form-' + form.get( 'id' ) ).trigger( 'loaded', form );
-			} );
+			// 	nfRadio.channel( 'form' ).trigger( 'loaded', form );
+			// 	nfRadio.channel( 'form-' + form.get( 'id' ) ).trigger( 'loaded', form );
+			// } );
 
 			nfRadio.channel( 'app' ).reply( 'get:form', this.getForm, this );
 			nfRadio.channel( 'app' ).reply( 'get:forms', this.getForms, this );
