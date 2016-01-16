@@ -6,6 +6,8 @@ final class NF_Display_Render
         'app-layout',
         'app-before-form',
         'app-after-form',
+        'app-before-fields',
+        'app-after-fields',
         'app-before-field',
         'app-after-field',
         'form-layout',
@@ -34,6 +36,12 @@ final class NF_Display_Render
 
         $before_form = apply_filters( 'ninja_forms_display_before_form', '' );
         $form->update_setting( 'beforeForm', $before_form );
+
+        $before_fields = apply_filters( 'ninja_forms_display_before_fields', '' );
+        $form->update_setting( 'beforeFields', $before_fields );
+
+        $after_fields = apply_filters( 'ninja_forms_display_after_fields', '' );
+        $form->update_setting( 'afterFields', $after_fields );
 
         $after_form = apply_filters( 'ninja_forms_display_after_form', '' );
         $form->update_setting( 'afterForm', $after_form );
