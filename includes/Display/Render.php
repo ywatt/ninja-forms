@@ -32,6 +32,12 @@ final class NF_Display_Render
         }
         $form = Ninja_Forms()->form( $form_id )->get();
 
+        $before_form = apply_filters( 'ninja_forms_display_before_form', '' );
+        $form->update_setting( 'beforeForm', $before_form );
+
+        $after_form = apply_filters( 'ninja_forms_display_after_form', '' );
+        $form->update_setting( 'afterForm', $after_form );
+
         /*
          * Check if user is required to be logged in
          */
