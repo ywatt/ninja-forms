@@ -189,6 +189,18 @@ final class NF_Display_Render
 
         $form[ 'settings' ][ 'is_preview' ] = TRUE;
 
+        $before_form = apply_filters( 'ninja_forms_display_before_form', '' );
+        $form[ 'settings' ][ 'beforeForm'] = $before_form;
+
+        $before_fields = apply_filters( 'ninja_forms_display_before_fields', '' );
+        $form[ 'settings' ][ 'beforeFields'] = $before_fields;
+
+        $after_fields = apply_filters( 'ninja_forms_display_after_fields', '' );
+        $form[ 'settings' ][ 'afterFields'] = $after_fields;
+
+        $after_form = apply_filters( 'ninja_forms_display_after_form', '' );
+        $form[ 'settings' ][ 'afterForm'] = $after_form;
+
         $fields = array();
 
         if( empty( $form['fields'] ) ){
@@ -199,6 +211,14 @@ final class NF_Display_Render
                 $field['settings']['id'] = $field_id;
 
                 $field = apply_filters('nf_localize_fields_preview', $field);
+
+                $display_before = apply_filters( 'ninja_forms_display_before_field_type_' . $field['settings'][ 'type' ], '' );
+                $display_before = apply_filters( 'ninja_forms_display_before_field_key_' . $field['settings'][ 'key' ], $display_before );
+                $field['settings'][ 'beforeField' ] = $display_before;
+
+                $display_after = apply_filters( 'ninja_forms_display_after_field_type_' . $field['settings'][ 'type' ], '' );
+                $display_after = apply_filters( 'ninja_forms_display_after_field_key_' . $field['settings'][ 'key' ], $display_after );
+                $field['settings'][ 'afterField' ] = $display_after;
 
                 $field_class = $field['settings']['type'];
 
