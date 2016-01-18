@@ -10,11 +10,25 @@ final class NF_Display_Shortcodes
 
     public function display_form_front_end( $atts = array() )
     {
-        if( ! isset( $atts[ 'id' ] ) ) return '<!-- ' . __( 'Notice: "No Form ID." <3 Ninja Forms', 'ninja-forms' ) . ' -->';
+        if( ! isset( $atts[ 'id' ] ) ) return $this->display_no_id();
 
         ob_start();
         Ninja_Forms()->display( $atts['id'] );
         return ob_get_clean();
     }
 
+    /**
+     * TODO: Extract output to template files.
+     * @return string
+     */
+    private function display_no_id()
+    {
+        $output = __( 'Notice: Ninja Forms shortcode used without specifying a form.', 'ninja-forms' );
+
+        if( ! current_user_can( 'manage_options' ) ) return "<!-- $output -->";
+
+        trigger_error( 'Ninja Forms shortcode used without specifying a form.' );
+
+        return "<div style='border: 3px solid red; padding: 1em; margin: 1em auto;'>$output</div>";
+    }
 }
