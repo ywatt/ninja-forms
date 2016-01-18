@@ -12,11 +12,7 @@ final class NF_Display_Shortcodes
     {
         if( ! isset( $atts[ 'id' ] ) ) return $this->display_no_id();
 
-        $noscript_message = __( 'Notice: JavaScript is required for this content.', 'ninja-forms' );
-        $noscript_message = apply_filters( 'ninja_forms_noscript_message', $noscript_message );
-
         ob_start();
-        Ninja_Forms()->template( 'display-noscript-message.html.php', array( 'message' => $noscript_message ) );
         Ninja_Forms()->display( $atts['id'] );
         return ob_get_clean();
     }
