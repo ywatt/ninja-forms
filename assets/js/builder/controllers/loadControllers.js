@@ -77,7 +77,8 @@ define(
 		'controllers/advanced/data',
 		'controllers/advanced/formSettings',
 		'controllers/advanced/editActive',
-		'controllers/advanced/clickEdit'
+		'controllers/advanced/clickEdit',
+		'controllers/advanced/calculations'
 	],
 	function(
 		/*
@@ -147,7 +148,8 @@ define(
 		SettingData,
 		FormSettings,
 		SettingsEditActive,
-		SettingsClickEdit
+		SettingsClickEdit,
+		AdvancedCalculations
 		
 	) {
 		var controller = Marionette.Object.extend( {
@@ -219,6 +221,7 @@ define(
 				new SettingData();
 				new SettingsEditActive();
 				new SettingsClickEdit();
+				new AdvancedCalculations();
 				/*
 				 * Data controllers need to be set after every other controller has been setup, even if they aren't domain-specific.
 				 * AppData() was after FormData();

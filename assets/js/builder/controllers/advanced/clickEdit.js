@@ -2,7 +2,7 @@
  * Listens for clicks on our form settings sections.
  * 
  * @package Ninja Forms builder
- * @subpackage Actions
+ * @subpackage Advanced
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */

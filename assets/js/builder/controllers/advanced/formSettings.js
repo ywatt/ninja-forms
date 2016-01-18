@@ -2,7 +2,7 @@
  * Fetches settings models so that we can get setting information
  * 
  * @package Ninja Forms builder
- * @subpackage Main App
+ * @subpackage Advanced
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */

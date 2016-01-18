@@ -2,7 +2,7 @@
  * Handles interactions with our form settings collection.
  * 
  * @package Ninja Forms builder
- * @subpackage Actions
+ * @subpackage Advanced
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */

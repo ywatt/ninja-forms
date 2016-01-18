@@ -2,7 +2,7 @@
  * Handles adding and removing the active class from form settings currently being edited.
  * 
  * @package Ninja Forms builder
- * @subpackage Form Settings
+ * @subpackage Advanced
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
