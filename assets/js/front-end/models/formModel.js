@@ -4,7 +4,9 @@ define( [], function() {
 			beforeForm: '',
 			afterForm: '',
 			beforeFields: '',
-			afterFields: ''
+			afterFields: '',
+			wrapper_class: '',
+			element_class: ''
 		},
 
 		initialize: function() {
