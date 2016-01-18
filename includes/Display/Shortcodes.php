@@ -25,8 +25,11 @@ final class NF_Display_Shortcodes
     {
         $output = __( 'Notice: Ninja Forms shortcode used without specifying a form.', 'ninja-forms' );
 
+        // TODO: Maybe support filterable permissions.
         if( ! current_user_can( 'manage_options' ) ) return "<!-- $output -->";
 
+        // TODO: Log error for support reference.
+        // TODO: Maybe display notice if not logged in.
         trigger_error( 'Ninja Forms shortcode used without specifying a form.' );
 
         return "<div style='border: 3px solid red; padding: 1em; margin: 1em auto;'>$output</div>";
