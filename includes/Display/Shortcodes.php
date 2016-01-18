@@ -8,9 +8,9 @@ final class NF_Display_Shortcodes
         add_shortcode( 'ninja_forms', array( $this, 'display_form_front_end' ) );
     }
 
-    public function display_form_front_end( array $atts = array() )
+    public function display_form_front_end( $atts = array() )
     {
-        if( ! isset( $atts[ 'id' ] ) ) return;
+        if( ! isset( $atts[ 'id' ] ) ) return '<!-- ' . __( 'Notice: "No Form ID." <3 Ninja Forms', 'ninja-forms' ) . ' -->';
 
         ob_start();
         Ninja_Forms()->display( $atts['id'] );
