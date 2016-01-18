@@ -6,9 +6,14 @@ final class NF_Display_Render
         'app-layout',
         'app-before-form',
         'app-after-form',
+        'app-before-fields',
+        'app-after-fields',
         'app-before-field',
         'app-after-field',
         'form-layout',
+        'field-layout',
+        'field-before',
+        'field-after',
         'fields-wrap',
         'fields-wrap-no-label',
         'fields-wrap-no-container',
@@ -28,6 +33,18 @@ final class NF_Display_Render
             add_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 );
         }
         $form = Ninja_Forms()->form( $form_id )->get();
+
+        $before_form = apply_filters( 'ninja_forms_display_before_form', '' );
+        $form->update_setting( 'beforeForm', $before_form );
+
+        $before_fields = apply_filters( 'ninja_forms_display_before_fields', '' );
+        $form->update_setting( 'beforeFields', $before_fields );
+
+        $after_fields = apply_filters( 'ninja_forms_display_after_fields', '' );
+        $form->update_setting( 'afterFields', $after_fields );
+
+        $after_form = apply_filters( 'ninja_forms_display_after_form', '' );
+        $form->update_setting( 'afterForm', $after_form );
 
         /*
          * Check if user is required to be logged in
@@ -69,6 +86,18 @@ final class NF_Display_Render
                 }
 
                 $field->update_setting('id', $field->get_id());
+
+                /*
+                 * TODO: For backwards compatibility, run the original action, get contents from the output buffer, and return the contents through the filter. Also display a PHP Notice for a deprecate filter.
+                 */
+
+                $display_before = apply_filters( 'ninja_forms_display_before_field_type_' . $field->get_setting( 'type' ), '' );
+                $display_before = apply_filters( 'ninja_forms_display_before_field_key_' . $field->get_setting( 'key' ), $display_before );
+                $field->update_setting( 'beforeField', $display_before );
+
+                $display_after = apply_filters( 'ninja_forms_display_after_field_type_' . $field->get_setting( 'type' ), '' );
+                $display_after = apply_filters( 'ninja_forms_display_after_field_key_' . $field->get_setting( 'key' ), $display_after );
+                $field->update_setting( 'afterField', $display_after );
 
                 $templates = $field_class->get_templates();
 

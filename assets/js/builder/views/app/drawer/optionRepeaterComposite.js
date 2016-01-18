@@ -3,6 +3,7 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 		template: '#nf-tmpl-edit-setting-wrap',
 		childView: listOptionView,
 		emptyView: listEmptyView,
+		reorderOnSort: false,
 
 		initialize: function( data ) {
 

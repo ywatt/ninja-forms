@@ -1,4 +1,4 @@
-define( ['views/fieldCollection'], function( fieldCollectionView ) {
+define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], function( fieldCollectionView, afterFields, beforeFields ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: "nf-section",
@@ -17,7 +17,9 @@ define( ['views/fieldCollection'], function( fieldCollectionView ) {
 		},
 
 		onShow: function() {
+			this.beforeFields.show( new beforeFields( { model: this.model } ) );
 			this.fields.show( new fieldCollectionView( { collection: this.options.fieldCollection } ) );
+			this.afterFields.show( new afterFields( { model: this.model } ) );
 		}
 
 	});
