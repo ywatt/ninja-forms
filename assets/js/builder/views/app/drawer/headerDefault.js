@@ -13,6 +13,11 @@ define( [], function() {
 		tagName: 'div',
 		template: '#nf-tmpl-drawer-header-default',
 
+		initialize: function() {
+			// Get our current domain.
+			this.model.on( 'change:drawerDisabled', this.render, this );
+		},
+
 		/**
 		 * When we render, remove the extra div added by backbone and add listeners related to our filter.
 		 * 
@@ -28,6 +33,10 @@ define( [], function() {
 			nfRadio.channel( 'drawer' ).reply( 'clear:filter', this.clearFilter, this );
 			nfRadio.channel( 'drawer' ).reply( 'blur:filter', this.blurFilter, this );
 			nfRadio.channel( 'drawer' ).reply( 'get:filterEl', this.getEl, this );
+		},
+
+		onBeforeDestroy: function() {
+			this.model.off( 'change:drawerDisabled', this.render );
 		},
 
 		events: {
@@ -102,6 +111,19 @@ define( [], function() {
 
 		getFocus: function() {
 			nfRadio.channel( 'drawer' ).trigger( 'filter:focused' );
+		},
+
+		templateHelpers: function() {
+			return {
+				renderDisabled: function() {
+					// Get our current domain.
+					if ( this.drawerDisabled ) {
+						return 'disabled';
+					} else {
+						return '';
+					}
+				}
+			}
 		}
 	});
 

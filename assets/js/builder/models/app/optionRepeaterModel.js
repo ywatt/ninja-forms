@@ -8,7 +8,8 @@
  */
 define( [], function() {
 	var model = Backbone.Model.extend( {
-	
+		defaults: {
+			error: false		}
 	} );
 	
 	return model;

@@ -8,7 +8,7 @@
  * Fieldset, for instance, uses this hook to instantiate its settings as a collection.
  * 
  * @package Ninja Forms builder
- * @subpackage Fields
+ * @subpackage App
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
@@ -16,7 +16,8 @@ define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
 			settings: false,
-			hide_merge_tags: false
+			hide_merge_tags: false,
+			error: false
 		},
 
 		initialize: function() {
@@ -50,11 +51,11 @@ define( [], function() {
 
 		maybePreventUI: function() {
 			if ( this.get( 'error' ) ) {
-				nfRadio.channel( 'drawer' ).request( 'prevent:close', 'fieldSetting-key-error' );
-				nfRadio.channel( 'app' ).request( 'prevent:changeDomain', 'fieldSetting-key-error' );				
+				nfRadio.channel( 'drawer' ).request( 'prevent:close', 'fieldSetting-' + this.get( 'name' ) + '-error' );
+				nfRadio.channel( 'app' ).request( 'prevent:changeDomain', 'fieldSetting-' + this.get( 'name' ) + '-error' );				
 			} else {
-				nfRadio.channel( 'drawer' ).request( 'enable:close', 'fieldSetting-key-error' );
-				nfRadio.channel( 'app' ).request( 'enable:changeDomain', 'fieldSetting-key-error' );
+				nfRadio.channel( 'drawer' ).request( 'enable:close', 'fieldSetting-' + this.get( 'name' ) + '-error' );
+				nfRadio.channel( 'app' ).request( 'enable:changeDomain', 'fieldSetting-' + this.get( 'name' ) + '-error' );
 			}
 		}
 	} );

@@ -140,10 +140,10 @@ define( [
 													
 							that.updateCurrentSetting( view.model );
 							that.updateCurrentElement( currentElement );
-							nfRadio.channel( 'drawer' ).request( 'prevent:close', 'merge-tags' );
+							// nfRadio.channel( 'drawer' ).request( 'prevent:close', 'merge-tags' );
 						},
 						onClose: function() {
-							nfRadio.channel( 'drawer' ).request( 'enable:close', 'merge-tags' );
+							// nfRadio.channel( 'drawer' ).request( 'enable:close', 'merge-tags' );
 						}
 					});
 					

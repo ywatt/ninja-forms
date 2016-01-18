@@ -1,5 +1,5 @@
-define( [], function() {
-	var view = Marionette.ItemView.extend({
+define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
+	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
 		className: 'nf-table-row',
 		template: '#nf-tmpl-edit-setting-option-repeater-default-row',
@@ -7,15 +7,24 @@ define( [], function() {
 			return this.model.cid;
 		},
 
+		regions: {
+			error: '.nf-option-error'
+		},
+
 		initialize: function( data ) {
 			this.settingModel = data.settingModel;
 			this.dataModel = data.dataModel;
 			this.collection = data.collection;
 			this.columns = data.columns;
+			this.model.on( 'change:error', this.renderError, this );
 
 			if ( 'undefined' != typeof this.settingModel.get( 'tmpl_row' ) ) {
 				this.template = '#' + this.settingModel.get( 'tmpl_row' );
 			}
+		},
+
+		onBeforeDestroy: function() {
+			this.model.off( 'change:error', this.renderError );
 		},
 
 		onRender: function() {
@@ -35,20 +44,39 @@ define( [], function() {
 		events: {
 			'change .setting': 'changeOption',
 			'click .nf-delete': 'deleteOption',
-			'keyup': 'maybeAddOption'
+			'keyup': 'keyupOption'
 		},
 
 		changeOption: function( e ) {
-			nfRadio.channel( 'option-repeater' ).trigger( 'change:option', e, this.model, this.dataModel );
+			nfRadio.channel( 'option-repeater' ).trigger( 'change:option', e, this.model, this.dataModel, this.settingModel );
 		},
 
 		deleteOption: function( e ) {
 			nfRadio.channel( 'option-repeater' ).trigger( 'click:deleteOption', this.model, this.collection, this.dataModel );
 		},
 
+		keyupOption: function( e ) {
+			this.maybeAddOption( e );
+			nfRadio.channel( 'option-repeater' ).trigger( 'keyup:option', e, this.model, this.dataModel, this.settingModel )
+		},
+
 		maybeAddOption: function( e ) {
 			if ( 13 == e.keyCode ) {
 				nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
+			}
+		},
+
+		renderError: function() {
+			/*
+			 * We don't want to redraw the entire row, which would remove focus from the eq textarea,
+			 * so we add and remove error classes manually.
+			 */
+			if ( ! this.model.get( 'error' ) ) {
+				this.error.empty();
+				jQuery( this.el ).removeClass( 'nf-error' );
+			} else {
+				this.error.show( new ErrorView( { model: this.model } ) );
+				jQuery( this.el ).addClass( 'nf-error' );
 			}
 		},
 

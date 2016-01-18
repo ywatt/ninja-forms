@@ -7,14 +7,14 @@ return apply_filters( 'ninja-forms-from-calculation-settings', array(
     */
 
     'calculations' => array(
-        'name' => 'calculations',
-        'type' => 'option-repeater',
-        'label' => ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
-        'width' => 'full',
-        'group' => 'primary',
-        'tmpl_row' => 'nf-tmpl-edit-setting-calculation-repeater-row',
-        'columns' => array(
-            'name'      => array(
+        'name'              => 'calculations',
+        'type'              => 'option-repeater',
+        'label'             => ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
+        'width'             => 'full',
+        'group'             => 'primary',
+        'tmpl_row'          => 'nf-tmpl-edit-setting-calculation-repeater-row',
+        'columns'           => array(
+            'name'          => array(
                 'header'    => __( 'Variable Name', 'ninja-forms' ),
                 'default'   => '',
             ),
@@ -23,7 +23,11 @@ return apply_filters( 'ninja-forms-from-calculation-settings', array(
                 'default'   => '',
             ),
         ),
-        
+        'use_merge_tags'    => array(
+            'exclude'       => array(
+                'user', 'system', 'post'
+            ),
+        ),
     ),
 
 

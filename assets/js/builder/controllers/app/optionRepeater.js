@@ -36,7 +36,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 		 * @param  backbone.model 	dataModel
 		 * @return void
 		 */
-		changeOption: function( e, model, dataModel ) {
+		changeOption: function( e, model, dataModel, settingModel ) {
 			var name = jQuery( e.target ).data( 'id' );
 			if ( 'selected' == name ) {
 				if ( jQuery( e.target ).attr( 'checked' ) ) {
@@ -69,7 +69,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 			};
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', model, changes, label );
-			nfRadio.channel( 'option-repeater' ).trigger( 'update:option', model );
+			nfRadio.channel( 'option-repeater' ).trigger( 'update:option', model, dataModel, settingModel );
 		},
 
 		/**
@@ -215,7 +215,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 			};
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'sortListOptions', dragModel, null, label, data );
-			nfRadio.channel( 'option-repeater' ).trigger( 'sort:option', dragModel );
+			nfRadio.channel( 'option-repeater' ).trigger( 'sort:option', dragModel, setting.model );
 			this.triggerDataModel( dragModel, setting.dataModel );
 		},
 

@@ -275,7 +275,7 @@
         <div class="nf-search">
             <input type="search" class="nf-filter" value="" placeholder="Filter" tabindex="-1" />
         </div>
-        <a href="#" class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
+        <a href="#" class="nf-button primary nf-close-drawer <%= renderDisabled() %>" tabindex="-1">Done</a>
     </header>
 </script>
 
@@ -431,6 +431,10 @@
 
 </script>
 
+<script id="nf-tmpl-edit-setting-option-repeater-error" type="text/template">
+    <%= error %>
+</script>
+
 <script id="nf-tmpl-edit-setting-option-repeater-default-row" type="text/template">
     <div>
         <span class="dashicons dashicons-menu handle"></span>
@@ -487,6 +491,7 @@
     </div>
     <div>
         <input type="text" class="setting" value="<%= name %>" data-id="name">
+        <span class="nf-option-error"></span>
     </div>
     <div>
         <textarea class="setting" data-id="eq"><%= eq %></textarea>

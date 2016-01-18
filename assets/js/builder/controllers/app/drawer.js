@@ -28,6 +28,8 @@ define( [], function() {
 			nfRadio.channel( 'drawer' ).reply( 'prevent:close', this.preventClose, this );
 			// Reply to requests to enable drawer closing
 			nfRadio.channel( 'drawer' ).reply( 'enable:close', this.enableClose, this );
+			// Reply to requests for our disabled/enabled state.
+			nfRadio.channel( 'drawer' ).reply( 'get:preventClose', this.maybePreventClose, this );
 
 			/*
 			 * Object that holds our array of 'prevent close' values.
@@ -131,6 +133,7 @@ define( [], function() {
 				var currentDomainID = currentDomain.get( 'id' );
 				nfRadio.channel( currentDomainID ).request( 'clear:editActive' );
 				data.model.set( 'editActive', true );
+				this.dataModel = data.model;
 			}
 
 			// Send out a message requesting our drawer view to load the content for our drawer ID.
@@ -235,6 +238,11 @@ define( [], function() {
          */
         preventClose: function( key ) {
         	this.objPreventClose[ key ] = true;
+        	/*
+        	 * When we disable closing the drawer, add the disable class.
+        	 */
+        	// Get our current drawer.
+			this.dataModel.set( 'drawerDisabled', true );
         },
 
         /**
@@ -246,6 +254,13 @@ define( [], function() {
          */
         enableClose: function( key ) {
         	delete this.objPreventClose[ key ];
+        	 /*
+        	 * When we remove all of our disables preventing closing the drawer, remove the disable class.
+        	 */
+        	if ( ! this.maybePreventClose() ) {
+	        	// Get our current drawer.
+				this.dataModel.set( 'drawerDisabled', false );        		
+        	}
         },
 
         /**
@@ -256,6 +271,10 @@ define( [], function() {
          */
         filterFocused: function() {
         	clearInterval( this.checkOpenDrawerPos );
+        },
+
+        getPreventClose: function() {
+        	return this.objPreventClose;
         }
 	});
 
