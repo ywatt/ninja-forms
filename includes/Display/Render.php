@@ -120,6 +120,10 @@ final class NF_Display_Render
 
                     if ($default_value) {
                         $settings['value'] = $default_value;
+
+                        ob_start();
+                        do_shortcode( $settings['value'] );
+                        $settings['value'] = ob_get_clean();
                     }
                 }
 
