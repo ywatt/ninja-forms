@@ -114,4 +114,18 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         ),
     ),
 
+    /*
+     * KEY
+     */
+
+    'key' => array(
+        'name' => 'key',
+        'type' => 'textbox',
+        'label' => __( 'Form Key', 'ninja-forms'),
+        'width' => 'full',
+        'group' => 'administration',
+        'value' => '',
+        'help' => __( 'Programmatic name that can be used to reference this form.', 'ninja-forms' ),
+    ),
+
 ));
