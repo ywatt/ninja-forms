@@ -82,4 +82,36 @@ return apply_filters( 'ninja-forms-from-display-settings', array(
         'use_merge_tags' => FALSE
     ),
 
+    /*
+     * Classes
+     */
+
+    'classes' => array(
+        'name' => 'classes',
+        'type' => 'fieldset',
+        'label' => __( 'Custom Class Names', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'settings' => array(
+            array(
+                'name' => 'wrapper_class',
+                'type' => 'textbox',
+                'placeholder' => '',
+                'label' => __( 'Wrapper', 'ninja-forms' ),
+                'width' => 'one-half',
+                'value' => '',
+                'use_merge_tags' => FALSE,
+            ),
+            array(
+                'name' => 'element_class',
+                'type' => 'textbox',
+                'label' => __( 'Element', 'ninja-forms' ),
+                'placeholder' => '',
+                'width' => 'one-half',
+                'value' => '',
+                'use_merge_tags' => FALSE,
+            ),
+        ),
+    ),
+
 ));

@@ -20,12 +20,11 @@ abstract class NF_Abstracts_Metabox
 
     public function __construct()
     {
-        add_action( 'save_post', array( $this, '_save_post' ) );
-
-        if( ! isset( $_GET[ 'post' ] ) ) return;
-
         $this->_id = strtolower( get_class( $this ) );
+
         $this->_title = __( 'Metabox', 'ninja-forms' );
+
+        add_action( 'save_post', array( $this, '_save_post' ) );
 
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
     }

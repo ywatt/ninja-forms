@@ -4,16 +4,20 @@ define( [], function() {
 			beforeForm: '',
 			afterForm: '',
 			beforeFields: '',
-			afterFields: ''
+			afterFields: '',
+			wrapper_class: '',
+			element_class: ''
 		},
 
 		initialize: function() {
 
-			var settings = this.get( 'settings' );
-			this.set( 'beforeForm', settings.beforeForm );
-			this.set( 'beforeFields', settings.beforeFields );
-			this.set( 'afterFields', settings.afterFields );
-			this.set( 'afterForm', settings.afterForm );
+			/*
+			 * Loop over settings and map to attributes
+			 */
+			var that = this;
+			_.each( this.get( 'settings' ), function( value, setting ) {
+				that.set( setting, value );
+			});
 
 			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'get:fieldByKey', this.getFieldByKey, this );
 			nfRadio.channel( 'forms' ).trigger( 'init:model', this );
