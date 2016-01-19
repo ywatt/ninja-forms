@@ -271,3 +271,25 @@
         transition: left 0.50s ease;
     }
 }
+
+.nf-div-table {
+    .nf-table-row {
+        &.nf-error {
+            textarea {
+                border: 1px solid red;
+            }
+            span.nf-option-error {
+                background: red;
+                color: #fff;
+                display: block;
+                padding: 5px 0;
+                width: 100%;
+                div.nf-error {
+                    display: block;
+                    width: 100% !important;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
