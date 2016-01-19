@@ -51,11 +51,11 @@ define( [], function() {
 
 		maybePreventUI: function() {
 			if ( this.get( 'error' ) ) {
-				nfRadio.channel( 'drawer' ).request( 'prevent:close', 'fieldSetting-' + this.get( 'name' ) + '-error' );
-				nfRadio.channel( 'app' ).request( 'prevent:changeDomain', 'fieldSetting-' + this.get( 'name' ) + '-error' );				
+				nfRadio.channel( 'drawer' ).request( 'prevent:close', 'setting-' + this.get( 'name' ) + '-error' );
+				nfRadio.channel( 'app' ).request( 'prevent:changeDomain', 'setting-' + this.get( 'name' ) + '-error' );				
 			} else {
-				nfRadio.channel( 'drawer' ).request( 'enable:close', 'fieldSetting-' + this.get( 'name' ) + '-error' );
-				nfRadio.channel( 'app' ).request( 'enable:changeDomain', 'fieldSetting-' + this.get( 'name' ) + '-error' );
+				nfRadio.channel( 'drawer' ).request( 'enable:close', 'setting-' + this.get( 'name' ) + '-error' );
+				nfRadio.channel( 'app' ).request( 'enable:changeDomain', 'setting-' + this.get( 'name' ) + '-error' );
 			}
 		}
 	} );

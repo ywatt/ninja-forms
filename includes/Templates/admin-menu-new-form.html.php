@@ -432,7 +432,7 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-option-repeater-error" type="text/template">
-    <%= error %>
+    <%= errors[ Object.keys( errors )[0] ] %>
 </script>
 
 <script id="nf-tmpl-edit-setting-option-repeater-default-row" type="text/template">

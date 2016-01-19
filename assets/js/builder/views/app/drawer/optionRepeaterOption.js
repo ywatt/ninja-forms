@@ -16,7 +16,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 			this.dataModel = data.dataModel;
 			this.collection = data.collection;
 			this.columns = data.columns;
-			this.model.on( 'change:error', this.renderError, this );
+			this.model.on( 'change:errors', this.renderErrors, this );
 
 			if ( 'undefined' != typeof this.settingModel.get( 'tmpl_row' ) ) {
 				this.template = '#' + this.settingModel.get( 'tmpl_row' );
@@ -24,7 +24,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 		},
 
 		onBeforeDestroy: function() {
-			this.model.off( 'change:error', this.renderError );
+			this.model.off( 'change:errors', this.renderErrors );
 		},
 
 		onRender: function() {
@@ -66,12 +66,12 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 			}
 		},
 
-		renderError: function() {
+		renderErrors: function() {
 			/*
 			 * We don't want to redraw the entire row, which would remove focus from the eq textarea,
 			 * so we add and remove error classes manually.
 			 */
-			if ( ! this.model.get( 'error' ) ) {
+			if ( ! this.model.get( 'errors' ) ) {
 				this.error.empty();
 				jQuery( this.el ).removeClass( 'nf-error' );
 			} else {
