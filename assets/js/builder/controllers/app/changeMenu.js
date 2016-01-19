@@ -17,6 +17,7 @@ define( [], function() {
         initialize: function () {
             this.editFormText = nfAdmin.editFormText || 'Edit Form';
             this.listenTo(nfRadio.channel('app'), 'after:appStart', this.changeMenu);
+            this.listenTo( nfRadio.channel( 'app' ), 'response:updateDB', this.formPublish );
         },
 
         changeMenu: function () {
@@ -44,6 +45,11 @@ define( [], function() {
                 jQuery( '.wp-submenu li' ).removeClass( 'current' );
                 jQuery( 'a[href="admin.php?page=ninja-forms&form_id=new"]' ).parent().after( html );
             }
+        },
+
+        formPublish: function( response ) {
+            if ( 'publish' !== response.action ) return false;
+            this.changeMenu();
         }
     });
 
