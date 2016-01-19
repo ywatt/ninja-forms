@@ -38,6 +38,7 @@ define(
 		'controllers/app/itemSettingFill',
 		'controllers/app/confirmPublish',
 		'controllers/app/rte',
+		'controllers/app/changeMenu',
 		/*
 		 * Fields domain controllers
 		 */
@@ -110,6 +111,7 @@ define(
 		ItemSettingFill,
 		ConfirmPublish,
 		RTE,
+		ChangeMenu,
 		/*
 		 * Fields domain controllers
 		 */
@@ -173,6 +175,7 @@ define(
 				new ItemControls();
 				new ConfirmPublish();
 				new RTE();
+				new ChangeMenu();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
