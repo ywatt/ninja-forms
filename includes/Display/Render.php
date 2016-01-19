@@ -251,6 +251,10 @@ final class NF_Display_Render
 
                     if ($default_value) {
                         $field['settings']['value'] = $default_value;
+
+                        ob_start();
+                        do_shortcode( $field['settings']['value'] );
+                        $field['settings']['value'] = ob_get_clean();
                     }
                 }
 
