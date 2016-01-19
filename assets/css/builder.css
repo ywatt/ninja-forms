@@ -596,6 +596,20 @@ All styles used within the drawer
   -webkit-transition: left 0.50s ease;
   transition: left 0.50s ease; }
 
+.nf-div-table .nf-table-row.nf-error textarea {
+  border: 1px solid red; }
+
+.nf-div-table .nf-table-row.nf-error span.nf-option-error {
+  background: red;
+  color: #fff;
+  display: block;
+  padding: 5px 0;
+  width: 100%; }
+  .nf-div-table .nf-table-row.nf-error span.nf-option-error div.nf-error {
+    display: block;
+    width: 100% !important;
+    text-align: center; }
+
 .nf-button {
   border: 0;
   border-radius: 4px;
