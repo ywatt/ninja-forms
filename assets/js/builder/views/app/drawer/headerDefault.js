@@ -14,8 +14,10 @@ define( [], function() {
 		template: '#nf-tmpl-drawer-header-default',
 
 		initialize: function() {
-			// Get our current domain.
-			this.model.on( 'change:drawerDisabled', this.render, this );
+			if ( this.model ) {
+				// Listen for our drawer being disabled.
+				this.model.on( 'change:drawerDisabled', this.render, this );				
+			}
 		},
 
 		/**
@@ -36,7 +38,9 @@ define( [], function() {
 		},
 
 		onBeforeDestroy: function() {
-			this.model.off( 'change:drawerDisabled', this.render );
+			if ( this.model ) {
+				this.model.off( 'change:drawerDisabled', this.render );
+			}
 		},
 
 		events: {

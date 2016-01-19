@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['views/app/drawer/headerDefault', 'views/app/drawer/contentEmpty'], function( drawerHeaderView, drawerEmptyView ) {
+define( ['views/app/drawer/contentEmpty'], function( drawerEmptyView ) {
 
 	var view = Marionette.LayoutView.extend( {
 		template: '#nf-tmpl-drawer',
