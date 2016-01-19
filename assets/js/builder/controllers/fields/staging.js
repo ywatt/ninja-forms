@@ -109,7 +109,7 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 				this.collection.reset();
 			}
 			// Sort our fields.
-			nfRadio.channel( 'fields' ).request( 'sort:fields' );
+			nfRadio.channel( 'fields' ).request( 'sort:fields', null, null, false );
 		},
 
 		/**

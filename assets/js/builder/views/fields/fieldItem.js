@@ -11,12 +11,14 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 			this.model.on( 'change:editActive', this.render, this );
 			this.model.on( 'change:label', this.render, this );
 			this.model.on( 'change:required', this.render, this );
+			this.model.on( 'change:id', this.render, this );
 		},
 
 		onBeforeDestroy: function() {
 			this.model.off( 'change:editActive', this.render );
 			this.model.off( 'change:label', this.render );
 			this.model.off( 'change:required', this.render );
+			this.model.off( 'change:id', this.render );
 		},
 
 		onRender: function() {
