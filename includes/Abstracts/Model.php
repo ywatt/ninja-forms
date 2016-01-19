@@ -81,7 +81,7 @@ class NF_Abstracts_Model
      * ? Deprecated ?
      * @var string
      */
-    protected $_relationships_table = 'nf_relationships';
+    protected $_relationships_table = 'ninja_forms_relationships';
 
     /**
      * Columns
