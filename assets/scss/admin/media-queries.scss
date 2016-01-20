@@ -72,11 +72,30 @@
     }
     .nf-add-new.nf-open-drawer {
         position: fixed;
+        text-indent: -9999px;
+        height: 42px;
+        width: 42px;
         top: auto;
         left: auto;
         bottom: 20px;
         right: 20px;
         transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease;
+        &:after {
+            background: $accent_color;
+            border: 2px solid $accent_color;
+            border-radius: 40px;
+            color: #fff;
+            content: "+";
+            font-size: 38px;
+            padding: 8px;
+            position: absolute;
+            left: 0;
+            width: 22px;
+            height: 22px;
+            line-height: 20px;
+            text-indent: 0px;
+            transition: all 0.5s ease 0s
+        }
     }
     #nf-main-header {
         .nf-button {

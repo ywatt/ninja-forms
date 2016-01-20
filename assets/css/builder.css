@@ -1844,12 +1844,31 @@ All styles used for displaying table content
     transition: all 1.0s ease 0s; }
   .nf-add-new.nf-open-drawer {
     position: fixed;
+    text-indent: -9999px;
+    height: 42px;
+    width: 42px;
     top: auto;
     left: auto;
     bottom: 20px;
     right: 20px;
     -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease;
     transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease; }
+    .nf-add-new.nf-open-drawer:after {
+      background: #84CC1E;
+      border: 2px solid #84CC1E;
+      border-radius: 40px;
+      color: #fff;
+      content: "+";
+      font-size: 38px;
+      padding: 8px;
+      position: absolute;
+      left: 0;
+      width: 22px;
+      height: 22px;
+      line-height: 20px;
+      text-indent: 0px;
+      -webkit-transition: all 0.5s ease 0s;
+      transition: all 0.5s ease 0s; }
   #nf-main-header .nf-button {
     display: none; }
   .nf-item-controls li {
