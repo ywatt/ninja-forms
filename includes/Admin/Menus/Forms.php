@@ -109,7 +109,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_enqueue_script( 'speakingurl', Ninja_Forms::$url . 'assets/js/lib/speakingurl.js' );
         wp_enqueue_script( 'jquery-slugify', Ninja_Forms::$url . 'assets/js/lib/slugify.min.js', array( 'jquery', 'speakingurl' ) );
         wp_enqueue_script( 'jquery-highlight-textarea', Ninja_Forms::$url . 'assets/js/lib/jquery.highlighttextarea.min.js', array( 'jquery' ) );
-        wp_enqueue_script( 'jquery-ui-touch-punch', Ninja_Forms::$url . 'assets/js/lib/jquery.ui.touch-punch.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'jquery-mobile-events', Ninja_Forms::$url . 'assets/js/lib/jquery.mobile-events.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'jquery-ui-touch-punch', Ninja_Forms::$url . 'assets/js/lib/jquery.ui.touch-punch.js', array( 'jquery' ) );
        
         wp_enqueue_script( 'bootstrap','http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js', array( 'jquery' ) );
         wp_enqueue_script( 'codemirror','//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js', array( 'jquery' ) );
