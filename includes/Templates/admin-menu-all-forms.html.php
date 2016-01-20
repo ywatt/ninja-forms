@@ -1,7 +1,7 @@
 <div class="wrap">
 
     <h2>Forms
-        <a href="<?php echo $add_new_url; ?>" class="page-title-action">
+        <a href="<?php echo $add_new_url; ?>" class="add-new-h2">
             <?php echo $add_new_text; ?>
         </a>
     </h2>
