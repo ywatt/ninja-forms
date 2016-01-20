@@ -18,24 +18,24 @@ define( [], function() {
 		},
 
 		initWiggle: function( view ) {
-			var fieldELs = jQuery( view.el ).find( '.nf-field-wrap' ).ClassyWiggle( { delay: 70 } );
-			jQuery( fieldELs ).on( 'taphold', function() {
-				jQuery( this ).ClassyWiggle( 'start' );
-			} );
-			// if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-				// jQuery( ui.helper ).ClassyWiggle( 'start', { delay: 70 } );
-			// }
+			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+				jQuery( view.el ).find( '.nf-field-wrap' ).on( 'taphold', function() {
+					jQuery( this ).ClassyWiggle( 'start', { degrees: ['.65', '1', '.65', '0', '-.65', '-1', '-.65', '0'], delay: 50 } );
+				} );
+			}
 		},
 
 		startWiggle: function( ui ) {
-			jQuery( ui.item ).ClassyWiggle( 'stop' );
-			jQuery( ui.helper ).ClassyWiggle( 'start', { delay: 70 } );
+			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+				jQuery( ui.item ).ClassyWiggle( 'stop' );
+				jQuery( ui.helper ).css( 'opacity', '0.75' ).ClassyWiggle( 'start', { degrees: ['.5', '1', '.5', '0', '-.5', '-1', '-.5', '0'] } );
+			}
 		},
 
 		stopWiggle: function( ui ) {
-			// if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
 				jQuery( ui.helper ).ClassyWiggle( 'stop' );
-			// }
+			}
 		}
 
 	});

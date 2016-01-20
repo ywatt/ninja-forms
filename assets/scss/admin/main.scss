@@ -16,6 +16,11 @@
     margin: 0 auto;
     max-width: 700px;
     transition: all 1.0s ease;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 #nf-main-header {
     padding: 0 0 20px;
