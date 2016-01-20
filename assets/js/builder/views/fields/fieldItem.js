@@ -28,6 +28,13 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 
 			this.itemControls.show( new itemControlsView( { model: this.model } ) );
 			jQuery( this.el ).disableSelection();
+
+			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+				jQuery( this.el ).on( 'taphold', function() {
+					jQuery( this ).ClassyWiggle( 'start', { degrees: ['.65', '1', '.65', '0', '-.65', '-1', '-.65', '0'], delay: 50 } );
+				} );
+			}
+
 		},
 
 		templateHelpers: function () {
