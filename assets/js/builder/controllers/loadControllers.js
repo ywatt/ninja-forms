@@ -58,6 +58,7 @@ define(
 		'controllers/fields/fieldQuantity',
 		'controllers/fields/fieldShipping',
 		'controllers/fields/key',
+		'controllers/fields/notices',
 
 		/*
 		 * TODO: Actions domain controllers
@@ -132,6 +133,7 @@ define(
 		FieldQuantity,
 		FieldShipping,
 		FieldKey,
+		Notices,
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -205,6 +207,7 @@ define(
 				new FieldQuantity();
 				new FieldShipping();
 				new FieldKey();
+				new Notices();
 				/*
 				 * TODO: Actions domain controllers
 				 */

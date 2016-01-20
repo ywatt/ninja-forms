@@ -21,6 +21,17 @@ define( ['models/app/appModel'], function( appModel ) {
 			} );
 
 			/*
+			 * Set the mobile setting used to track whether or not we're on a mobile device.
+			 */
+			var mobile = ( 1 == nfAdmin.mobile ) ? true : false;
+			this.model.set( 'mobile', mobile );
+
+			/*
+			 * Respond to requests to see if we are on mobile.
+			 */
+			nfRadio.channel( 'app' ).reply( 'is:mobile', this.isMobile, this );
+
+			/*
 			 * Respond to app channel requests for information about the state of our app.
 			 */
 			nfRadio.channel( 'app' ).reply( 'get:data', this.getData, this );
@@ -66,6 +77,10 @@ define( ['models/app/appModel'], function( appModel ) {
 		getCurrentDrawer: function() {
 			var currentDrawerID = this.model.get( 'currentDrawer' );
 			return nfRadio.channel( 'app' ).request( 'get:drawer', currentDrawerID );
+		},
+
+		isMobile: function() {
+			return this.model.get( 'mobile' );
 		}
 
 

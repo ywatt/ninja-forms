@@ -23,7 +23,9 @@ define( ['views/app/drawer/contentEmpty'], function( drawerEmptyView ) {
 		},
 
 		onShow: function() {
-			jQuery( this.el ).parent().perfectScrollbar();
+			if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+				jQuery( this.el ).parent().perfectScrollbar();
+			}
 		    // jQuery( this.el ).parent().disableSelection();
 		},
 

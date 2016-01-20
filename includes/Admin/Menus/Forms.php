@@ -93,6 +93,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_enqueue_style( 'codemirror', '//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css' );
         wp_enqueue_style( 'codemirror-monokai', '//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css' );
         wp_enqueue_style( 'jquery-highlight-textarea', Ninja_Forms::$url . 'assets/css/jquery.highlighttextarea.min.css' );
+        wp_enqueue_style( 'jBox-notice-border', Ninja_Forms::$url . 'assets/css/NoticeBorder.css' );
 
         /**
          * JS Libraries
@@ -121,11 +122,12 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/min/builder.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable' ) );
 
         wp_localize_script( 'nf-builder', 'nfAdmin', array(
-            'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ),
-            'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
-            'previewurl' => site_url() . '/?nf_preview_form=',
-            'wp_locale' => $wp_locale->number_format,
-            'editFormText' => __( 'Edit Form', 'ninja-forms' ),
+            'ajaxNonce'         => wp_create_nonce( 'ninja_forms_ajax_nonce' ),
+            'requireBaseUrl'    => Ninja_Forms::$url . 'assets/js/',
+            'previewurl'        => site_url() . '/?nf_preview_form=',
+            'wp_locale'         => $wp_locale->number_format,
+            'editFormText'      => __( 'Edit Form', 'ninja-forms' ),
+            'mobile'            => ( wp_is_mobile() ) ? 1: 0
         ));
     }
 
