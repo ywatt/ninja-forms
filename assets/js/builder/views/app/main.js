@@ -17,7 +17,7 @@ define( [], function() {
 		},
 
 		onShow: function() {
-			if ( 0 == nfAdmin.isMobile ) {
+			if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
 				jQuery( this.el ).parent().perfectScrollbar();
 				jQuery( this.el ).parent().disableSelection();
 			}
