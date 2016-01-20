@@ -52,7 +52,36 @@
         display: none;
     }
 }
+
+@-webkit-keyframes color_change {
+    from { background-color: #1EA9EA; color: #fff }
+    to { background-color: #3B454D; color: #A2A5A8 }
+}
+@-moz-keyframes color_change {
+    from { background-color: #1EA9EA; color: #fff }
+    to { background-color: #3B454D; color: #A2A5A8 }
+}
+@-ms-keyframes color_change {
+    from { background-color: #1EA9EA; color: #fff }
+    to { background-color: #3B454D; color: #A2A5A8 }
+}
+@-o-keyframes color_change {
+    from { background-color: #1EA9EA; color: #fff }
+    to { background-color: #3B454D; color: #A2A5A8 }
+}
+@keyframes color_change {
+    from { background-color: #1EA9EA; color: #fff }
+    to { background-color: #3B454D; color: #A2A5A8 }
+}
+
 @media only screen and (max-width: 1030px) {
+    .nf-item.clicked {
+        //background: #1EA9EA;
+        animation-name: color_change;
+        animation-duration: 2s;
+        animation-iteration-count: 1;
+        animation-direction: alternate;
+    }
     #nf-header {
         ul {
             display: none;
@@ -244,6 +273,9 @@
                 }
             }
         }
+    }
+    .nf-drawer-opened .nf-toggle-drawer {
+        display: none;
     }
 }
 

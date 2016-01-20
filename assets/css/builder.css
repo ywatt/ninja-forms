@@ -1831,7 +1831,32 @@ All styles used for displaying table content
   .nf-cancel {
     display: none; } }
 
+@-webkit-keyframes color_change {
+  from {
+    background-color: #1EA9EA;
+    color: #fff; }
+  to {
+    background-color: #3B454D;
+    color: #A2A5A8; } }
+
+@keyframes color_change {
+  from {
+    background-color: #1EA9EA;
+    color: #fff; }
+  to {
+    background-color: #3B454D;
+    color: #A2A5A8; } }
+
 @media only screen and (max-width: 1030px) {
+  .nf-item.clicked {
+    -webkit-animation-name: color_change;
+            animation-name: color_change;
+    -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+    -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+    -webkit-animation-direction: alternate;
+            animation-direction: alternate; }
   #nf-header ul {
     display: none; }
   #nf-header .nf-button.primary {
@@ -1963,7 +1988,9 @@ All styles used for displaying table content
     bottom: 0;
     right: 0; }
     .ninja-forms-app.auto-fold #wpcontent #wpbody {
-      left: 0; } }
+      left: 0; }
+  .nf-drawer-opened .nf-toggle-drawer {
+    display: none; } }
 
 @media only screen and (max-width: 782px) {
   .ninja-forms-app.folded #wpcontent, .ninja-forms-app.auto-fold #wpcontent {
