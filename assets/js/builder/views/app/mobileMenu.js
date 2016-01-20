@@ -1,5 +1,5 @@
 /**
- * Menu view used on smaller screens.
+ * Single item view used for the menu drawer.
  *
  * @package Ninja Forms builder
  * @subpackage App
@@ -7,7 +7,7 @@
  * @since 3.0
  */
 define( [], function() {
-	var view = Marionette.ItemView.extend({
+	var view = Marionette.CompositeView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-menu-drawer'
 	});

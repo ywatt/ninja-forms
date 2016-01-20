@@ -4,7 +4,7 @@
     <div id="nf-overlay"></div>
     <div id="nf-header"></div>
     <div id="nf-main" class="nf-app-main"></div>
-    <!-- <div id="nf-menu-drawer"></div> -->
+    <div id="nf-menu-drawer"></div>
     <div id="nf-drawer"></div>
     <span class="merge-tags-content" style="display:none;"></span>
 </script>
@@ -34,7 +34,7 @@
 <script id="nf-tmpl-app-header" type="text/template">
     <div id="nf-logo"></div>
     <ul class="nf-app-menu"></ul>
-    <a class="nf-mobile" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
+    <a class="nf-mobile-menu" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
     <span class="nf-app-buttons"></span>
 </script>
 
@@ -137,10 +137,10 @@
 </script>
 
 <script id="nf-tmpl-menu-drawer" type="text/template">
-    <ul>
+    <ul class="primary">
         <li class="nf-publish">Publish</li>
     </ul>
-    <ul>
+    <ul class="secondary">
         <li><a href="#" tabindex="-1"><span class="dashicons dashicons-menu"></span>Form Fields</a></li>
         <li><a href="http://three.ninjaforms.com/wp-admin/admin.php?page=edit-action" tabindex="-1"><span class="dashicons dashicons-external"></span>Emails & Actions</a></li>
         <li><a href="#" tabindex="-1"><span class="dashicons dashicons-admin-generic"></span>Settings</a></li>

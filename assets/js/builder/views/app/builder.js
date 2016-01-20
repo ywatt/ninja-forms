@@ -12,7 +12,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( ['views/app/builderHeader', 'views/app/main', 'views/app/drawer/mobileMenu', 'views/app/drawer', 'views/app/drawer/mergeTagsContent'], function( headerView, mainView, menuDrawerView, drawerView, mergeTagsContentView ) {
+define( ['views/app/builderHeader', 'views/app/main', 'views/app/mobileMenu', 'views/app/drawer', 'views/app/drawer/mergeTagsContent'], function( headerView, mainView, mobileMenuView, drawerView, mergeTagsContentView ) {
 	var view = Marionette.LayoutView.extend( {
 		template: "#nf-tmpl-builder",
 		el: '#nf-builder',
@@ -35,7 +35,9 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/drawer/mobileMe
 			this.header.show( new headerView() );
 			// Show our main content.
 			this.main.show( new mainView() );
-			// this.menuDrawer.show( new menuDrawerView() );
+			// Show our mobile menu
+			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
+			this.menuDrawer.show( new mobileMenuView() );
 			// Show our drawer.
 			this.drawer.show( new drawerView() );
 			// Respond to requests asking for the builder dom element.

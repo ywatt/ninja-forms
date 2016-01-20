@@ -24,7 +24,7 @@ Normalize WordPress admin for Ninja Forms App
   .ninja-forms-app.folded #wpcontent #wpbody {
     left: 36px; }
 
-.ninja-forms-app .grey .nf-mobile {
+.ninja-forms-app .grey .nf-mobile-menu {
   background: #ccc !important; }
 
 .ninja-forms-app .grey .nf-publish {
@@ -72,7 +72,7 @@ Header and Nav for Ninja Forms App
     margin: 0; }
     #nf-header ul li {
       float: left; }
-      #nf-header ul li.nf-mobile {
+      #nf-header ul li.nf-mobile-menu {
         display: none; }
       #nf-header ul li a {
         color: #424242;
@@ -643,7 +643,7 @@ All styles used within the drawer
   color: #999;
   font-size: 15px; }
 
-.nf-mobile {
+.nf-mobile-menu {
   background: #1EA9EA;
   border-radius: 4px;
   color: #fff;
@@ -653,11 +653,11 @@ All styles used within the drawer
   text-decoration: none;
   -webkit-transition: margin 0.5s ease;
   transition: margin 0.5s ease; }
-  .nf-mobile .dashicons {
+  .nf-mobile-menu .dashicons {
     font-size: 30px;
     width: 32px;
     height: 30px; }
-  .nf-mobile:hover {
+  .nf-mobile-menu:hover {
     color: #fff; }
 
 .ninja-forms-app fieldset {
@@ -1883,7 +1883,7 @@ All styles used for displaying table content
   .nf-fields-sortable {
     border: 0;
     padding: 0; }
-  .nf-mobile {
+  .nf-mobile-menu {
     display: inline-block; }
   #nf-app-sub-header h2 {
     padding-left: 0;

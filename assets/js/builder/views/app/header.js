@@ -18,6 +18,10 @@ define( ['views/app/menu', 'views/app/menuButtons'], function( appMenuCollection
 			buttons: '.nf-app-buttons'
 		},
 
+		events: {
+			'click .nf-mobile-menu': 'clickMobileMenu'
+		},
+
 		/**
 		 * Since this is a layout region, we need to fill the two areas: menu and buttons whenever we show this view.
 		 * 
@@ -30,6 +34,11 @@ define( ['views/app/menu', 'views/app/menuButtons'], function( appMenuCollection
 			// show the menu area using the appropriate view, passing our domain collection.
 			this.menu.show( new appMenuCollectionView( { collection: appDomainCollection } ) );
 			this.buttons.show( new appMenuButtonsView() );
+		},
+
+		clickMobileMenu: function( e) {
+			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
+			jQuery( builderEl ).toggleClass( 'nf-menu-expand' );
 		}
 	} );
 
