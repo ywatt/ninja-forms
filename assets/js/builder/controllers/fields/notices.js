@@ -26,7 +26,7 @@ define( [], function() {
 					open:'slide:top',
 					close:'move:left'
 				}
-				var autoClose = 1000;
+				var autoClose = 2000;
 				var offset = {
 					x: 0,
 					y: 55
