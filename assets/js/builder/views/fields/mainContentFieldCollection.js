@@ -46,6 +46,8 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 					}
 				} );
 			}
+
+			nfRadio.channel( 'app' ).trigger( 'render:fieldsSortable', this );
 		},
 
 		getSortableEl: function() {

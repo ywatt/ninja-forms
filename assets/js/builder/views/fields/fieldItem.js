@@ -27,6 +27,7 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 			this.setElement( this.$el );
 
 			this.itemControls.show( new itemControlsView( { model: this.model } ) );
+			jQuery( this.el ).disableSelection();
 		},
 
 		templateHelpers: function () {

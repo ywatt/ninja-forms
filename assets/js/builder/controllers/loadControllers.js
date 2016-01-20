@@ -59,6 +59,7 @@ define(
 		'controllers/fields/fieldShipping',
 		'controllers/fields/key',
 		'controllers/fields/notices',
+		'controllers/fields/mobile',
 
 		/*
 		 * TODO: Actions domain controllers
@@ -134,6 +135,7 @@ define(
 		FieldShipping,
 		FieldKey,
 		Notices,
+		FieldsMobile,
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -208,6 +210,7 @@ define(
 				new FieldShipping();
 				new FieldKey();
 				new Notices();
+				new FieldsMobile();
 				/*
 				 * TODO: Actions domain controllers
 				 */

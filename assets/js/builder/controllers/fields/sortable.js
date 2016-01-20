@@ -240,6 +240,7 @@ define( [], function() {
 		stopFieldsSortable: function( ui ) {
 			jQuery( ui.item ).css( 'opacity', '' )
 			jQuery( ui.helper ).remove();
+			nfRadio.channel( 'fields' ).trigger( 'sortable:stop', ui );
 		},
 
 		/**
@@ -256,6 +257,7 @@ define( [], function() {
 			if( ! jQuery( ui.item ).hasClass( 'nf-field-type-button' ) && ! jQuery( ui.item ).hasClass( 'nf-stage' ) ) { 
 				jQuery( ui.item ).css( 'opacity', '0.5' ).show();
 			}
+			nfRadio.channel( 'fields' ).trigger( 'sortable:start', ui );
 		},
 
 		/**
