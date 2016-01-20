@@ -83,6 +83,7 @@
         animation-direction: alternate;
     }
     .nf-field-wrap.ui-sortable-helper {
+        background: transparent;
         border: 2px solid $accent_color;
     }
     #nf-header {
@@ -94,6 +95,20 @@
         }
     }
     #nf-main {
+        border: 0;
+    }
+    .nf-field-wrap {
+        border: 0;
+        border-top: 8px solid #f1f1f1;
+        border-radius: 0;
+        margin: 0;
+        padding: 20px;
+        &:first-child {
+            border-top: 8px solid #fff;
+        }
+    }
+    .nf-fields-sortable-placeholder { margin-top: 0; margin-bottom: 0; border: 4px solid #84CC1E }
+    .nf-fields-sortable-placeholder + .nf-field-wrap {
         border: 0;
     }
     .nf-fields-sortable {
@@ -308,16 +323,16 @@
     .nf-one-half, .nf-one-third {
         width: 100%;
     }
-    .nf-field-wrap {
-        border: 0;
-        border-bottom: 1px solid #ccc;
-        border-radius: 0;
-        margin: 0;
-        padding: 20px;
-        &:first-child {
-            border-top: 1px solid #ccc;
-        }
-    }
+    // .nf-field-wrap {
+    //     border: 0;
+    //     border-bottom: 1px solid #ccc;
+    //     border-radius: 0;
+    //     margin: 0;
+    //     padding: 20px;
+    //     &:first-child {
+    //         border-top: 1px solid #ccc;
+    //     }
+    // }
     .nf-actions-table {
         td:nth-child(3),th:nth-child(3) {
             display: none;
