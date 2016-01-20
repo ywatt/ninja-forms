@@ -1857,6 +1857,8 @@ All styles used for displaying table content
             animation-iteration-count: 1;
     -webkit-animation-direction: alternate;
             animation-direction: alternate; }
+  .nf-field-wrap.ui-sortable-helper {
+    border: 2px solid #84CC1E; }
   #nf-header ul {
     display: none; }
   #nf-header .nf-button.primary {

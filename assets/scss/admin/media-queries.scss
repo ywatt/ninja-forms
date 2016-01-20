@@ -54,23 +54,23 @@
 }
 
 @-webkit-keyframes color_change {
-    from { background-color: #1EA9EA; color: #fff }
+    from { background-color: $cta_color; color: #fff }
     to { background-color: #3B454D; color: #A2A5A8 }
 }
 @-moz-keyframes color_change {
-    from { background-color: #1EA9EA; color: #fff }
+    from { background-color: $cta_color; color: #fff }
     to { background-color: #3B454D; color: #A2A5A8 }
 }
 @-ms-keyframes color_change {
-    from { background-color: #1EA9EA; color: #fff }
+    from { background-color: $cta_color; color: #fff }
     to { background-color: #3B454D; color: #A2A5A8 }
 }
 @-o-keyframes color_change {
-    from { background-color: #1EA9EA; color: #fff }
+    from { background-color: $cta_color; color: #fff }
     to { background-color: #3B454D; color: #A2A5A8 }
 }
 @keyframes color_change {
-    from { background-color: #1EA9EA; color: #fff }
+    from { background-color: $cta_color; color: #fff }
     to { background-color: #3B454D; color: #A2A5A8 }
 }
 
@@ -81,6 +81,9 @@
         animation-duration: 2s;
         animation-iteration-count: 1;
         animation-direction: alternate;
+    }
+    .nf-field-wrap.ui-sortable-helper {
+        border: 2px solid $accent_color;
     }
     #nf-header {
         ul {
