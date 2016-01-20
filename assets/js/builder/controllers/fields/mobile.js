@@ -10,7 +10,7 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			// Listen for the start of our sorting.
-			this.listenTo( nfRadio.channel( 'app' ), 'render:fieldsSortable', this.initWiggle );
+			// this.listenTo( nfRadio.channel( 'app' ), 'render:fieldsSortable', this.initWiggle );
 			// Listen for when we start sorting.
 			this.listenTo( nfRadio.channel( 'fields' ), 'sortable:start', this.startWiggle );
 			// Listen for when we stop sorting.
