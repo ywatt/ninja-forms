@@ -77,7 +77,7 @@ Header and Nav for Ninja Forms App
       #nf-header ul li a {
         color: #424242;
         display: block;
-        margin: 16px 28px;
+        margin: 16px 20px;
         padding-bottom: 8px;
         text-decoration: none; }
         #nf-header ul li a.active {
@@ -1821,20 +1821,6 @@ All styles used for displaying table content
     color: #444;
     background-color: transparent; } }
 
-@media only screen and (max-width: 1255px) {
-  .nf-cancel {
-    display: none; }
-  #nf-app-sub-header h2 {
-    padding-left: 80px;
-    -webkit-transition: all 1.0s ease 0s;
-    transition: all 1.0s ease 0s; } }
-
-@media only screen and (max-width: 1132px) {
-  #nf-header .preview {
-    content: "Preview"; }
-  .nf-cancel {
-    display: none; } }
-
 @-webkit-keyframes color_change {
   from {
     background-color: #1EA9EA;
@@ -1851,16 +1837,23 @@ All styles used for displaying table content
     background-color: #3B454D;
     color: #A2A5A8; } }
 
-@media only screen and (max-width: 1030px) {
-  .nf-item.clicked {
-    -webkit-animation-name: color_change;
-            animation-name: color_change;
-    -webkit-animation-duration: 2s;
-            animation-duration: 2s;
-    -webkit-animation-iteration-count: 1;
-            animation-iteration-count: 1;
-    -webkit-animation-direction: alternate;
-            animation-direction: alternate; }
+.nf-item.clicked {
+  -webkit-animation-name: color_change;
+          animation-name: color_change;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate; }
+
+@media only screen and (max-width: 1065px) {
+  .nf-app-menu .preview .app-menu-text {
+    text-indent: -9999px;
+    display: inline-block;
+    width: 0; } }
+
+@media only screen and (max-width: 900px) {
   #nf-header ul {
     display: none; }
   #nf-header .nf-button.primary {
@@ -1871,6 +1864,31 @@ All styles used for displaying table content
     padding-left: 0;
     -webkit-transition: all 1.0s ease 0s;
     transition: all 1.0s ease 0s; }
+  .nf-add-new.nf-open-drawer {
+    position: fixed;
+    text-indent: -9999px;
+    height: 54px;
+    width: 54px;
+    top: auto;
+    left: auto;
+    bottom: 20px;
+    right: 20px; }
+    .nf-add-new.nf-open-drawer:after {
+      background: #84CC1E;
+      border: 2px solid #84CC1E;
+      border-radius: 40px;
+      color: #fff;
+      content: "+";
+      font-size: 50px;
+      padding: 8px;
+      position: absolute;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      line-height: 24px;
+      text-indent: 0px;
+      -webkit-transition: all 0.5s ease 0s;
+      transition: all 0.5s ease 0s; }
   #nf-main-header .nf-button {
     display: none; }
   .nf-item-controls li {
@@ -2000,34 +2018,7 @@ All styles used for displaying table content
     padding: 0; }
   .nf-field-wrap.ui-sortable-helper {
     background: transparent;
-    border: 2px solid #84CC1E; }
-  .nf-add-new.nf-open-drawer {
-    position: fixed;
-    text-indent: -9999px;
-    height: 54px;
-    width: 54px;
-    top: auto;
-    left: auto;
-    bottom: 20px;
-    right: 20px;
-    -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease;
-    transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease; }
-    .nf-add-new.nf-open-drawer:after {
-      background: #84CC1E;
-      border: 2px solid #84CC1E;
-      border-radius: 40px;
-      color: #fff;
-      content: "+";
-      font-size: 50px;
-      padding: 8px;
-      position: absolute;
-      left: 0;
-      width: 28px;
-      height: 28px;
-      line-height: 24px;
-      text-indent: 0px;
-      -webkit-transition: all 0.5s ease 0s;
-      transition: all 0.5s ease 0s; } }
+    border: 2px solid #84CC1E; } }
 
 @media only screen and (max-width: 660px) {
   .nf-one-half, .nf-one-third {

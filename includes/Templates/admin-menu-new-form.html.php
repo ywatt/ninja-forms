@@ -202,7 +202,7 @@
 
 <script id="nf-tmpl-drawer-content-edit-settings" type="text/template">
     <%= maybeRenderTitle() %>
- 
+
     <span class="nf-settings-groups"></span>
 </script>
 
@@ -301,7 +301,7 @@
 </script>
 
 <script id="nf-tmpl-app-menu-item" type="text/template">
-    <li><a href="<%= renderUrl() %>" class="<%= renderClasses() %>" target="<%= renderTarget() %>" <%= renderDisabled() %>><%= nicename %><%= renderDashicons() %></a></li>
+    <li><a href="<%= renderUrl() %>" class="<%= renderClasses() %>" target="<%= renderTarget() %>" <%= renderDisabled() %>><span class="app-menu-text"><%= nicename %></span><%= renderDashicons() %></a></li>
 </script>
 
 <script id="nf-tmpl-staged-fields-drag" type="text/template">
@@ -370,7 +370,7 @@
     <label class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %></label>
         <div id="<%= name %>" class="setting"><%= value %></div>
         <%= renderMergeTags() %>
-    
+
 </script>
 
 <script id="nf-tmpl-edit-setting-select" type="text/template">
@@ -439,7 +439,7 @@
     </div>
     <%
         var columns = getColumns();
-        
+
         if ( 'undefined' != columns.label ) {
             %>
              <div>
