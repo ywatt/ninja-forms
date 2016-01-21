@@ -58,13 +58,21 @@ define( [], function() {
 
 		events: {
 			'click .nf-item': 'clickFieldType',
-			'keydown .nf-item': 'maybeClickFieldType'
+			'keydown .nf-item': 'maybeClickFieldType',
+			'mousedown .nf-item': 'mousedownFieldType'
 		},
 
 		clickFieldType: function( e ) {
 			if ( ! this.dragging ) {
 				nfRadio.channel( 'drawer' ).trigger( 'click:fieldType', e );
 			}
+		},
+
+		mousedownFieldType: function( e ) {
+			jQuery( e.target).addClass( 'clicked' );
+			setTimeout( function() {
+				jQuery( e.target ).removeClass( 'clicked' );
+			}, 1500 );
 		},
 
 		maybeClickFieldType: function( e ) {
