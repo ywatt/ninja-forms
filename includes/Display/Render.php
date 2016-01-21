@@ -34,16 +34,16 @@ final class NF_Display_Render
         }
         $form = Ninja_Forms()->form( $form_id )->get();
 
-        $before_form = apply_filters( 'ninja_forms_display_before_form', '' );
+        $before_form = apply_filters( 'ninja_forms_display_before_form', '', $form_id );
         $form->update_setting( 'beforeForm', $before_form );
 
-        $before_fields = apply_filters( 'ninja_forms_display_before_fields', '' );
+        $before_fields = apply_filters( 'ninja_forms_display_before_fields', '', $form_id );
         $form->update_setting( 'beforeFields', $before_fields );
 
-        $after_fields = apply_filters( 'ninja_forms_display_after_fields', '' );
+        $after_fields = apply_filters( 'ninja_forms_display_after_fields', '', $form_id );
         $form->update_setting( 'afterFields', $after_fields );
 
-        $after_form = apply_filters( 'ninja_forms_display_after_form', '' );
+        $after_form = apply_filters( 'ninja_forms_display_after_form', '', $form_id );
         $form->update_setting( 'afterForm', $after_form );
 
         /*
@@ -193,16 +193,16 @@ final class NF_Display_Render
 
         $form[ 'settings' ][ 'is_preview' ] = TRUE;
 
-        $before_form = apply_filters( 'ninja_forms_display_before_form', '' );
+        $before_form = apply_filters( 'ninja_forms_display_before_form', '', $form_id, TRUE );
         $form[ 'settings' ][ 'beforeForm'] = $before_form;
 
-        $before_fields = apply_filters( 'ninja_forms_display_before_fields', '' );
+        $before_fields = apply_filters( 'ninja_forms_display_before_fields', '', $form_id, TRUE );
         $form[ 'settings' ][ 'beforeFields'] = $before_fields;
 
-        $after_fields = apply_filters( 'ninja_forms_display_after_fields', '' );
+        $after_fields = apply_filters( 'ninja_forms_display_after_fields', '', $form_id, TRUE );
         $form[ 'settings' ][ 'afterFields'] = $after_fields;
 
-        $after_form = apply_filters( 'ninja_forms_display_after_form', '' );
+        $after_form = apply_filters( 'ninja_forms_display_after_form', '', $form_id, TRUE );
         $form[ 'settings' ][ 'afterForm'] = $after_form;
 
         $fields = array();
