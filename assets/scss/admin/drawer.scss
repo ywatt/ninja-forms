@@ -251,7 +251,15 @@
         padding: 20px;
         text-align: center;
         text-transform: uppercase;
+        cursor:pointer;
+
+        &.disabled {
+            background: #ccc;
+            border: 1px solid #ccc;
+            cursor: default;
+        }
     }
+   
 }
 
 

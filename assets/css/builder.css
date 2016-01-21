@@ -24,12 +24,6 @@ Normalize WordPress admin for Ninja Forms App
   .ninja-forms-app.folded #wpcontent #wpbody {
     left: 36px; }
 
-.ninja-forms-app .grey .nf-mobile-menu {
-  background: #ccc !important; }
-
-.ninja-forms-app .grey .nf-publish {
-  background: #ccc !important; }
-
 .ninja-forms-app .grey #nf-drawer .nf-button {
   padding: 15px 30px; }
 
@@ -582,7 +576,12 @@ All styles used within the drawer
     color: #fff;
     padding: 20px;
     text-align: center;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    cursor: pointer; }
+    #nf-menu-drawer .nf-publish.disabled {
+      background: #ccc;
+      border: 1px solid #ccc;
+      cursor: default; }
 
 .nf-menu-expand #nf-menu-drawer {
   right: 0;

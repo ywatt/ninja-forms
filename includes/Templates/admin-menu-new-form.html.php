@@ -34,13 +34,17 @@
 <script id="nf-tmpl-app-header" type="text/template">
     <div id="nf-logo"></div>
     <ul class="nf-app-menu"></ul>
-    <a class="nf-mobile-menu" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
+    <span class="nf-mobile-menu-button"></span>
     <span class="nf-app-buttons"></span>
 </script>
 
 <script id="nf-tmpl-app-header-action-button" type="text/template">
     <%= renderPublish() %>
     <%= maybeRenderCancel() %>
+</script>
+
+<script id="nf-tmpl-mobile-menu-button" type="text/template">
+    <a class="nf-button nf-mobile-menu <%= maybeDisabled() %>" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
 </script>
 
 <script id="nf-tmpl-app-header-publish-button" type="text/template">
@@ -138,10 +142,11 @@
 
 <script id="nf-tmpl-mobile-menu" type="text/template">
     <ul class="primary">
-        <li class="nf-publish">Publish</li>
+        <li class="nf-publish <%= maybeDisabled() %>">Publish</li>
     </ul>
     <ul class="secondary"></ul>
 </script>
+
 <script id="nf-tmpl-mobile-menu-item" type="text/template">
     <li><a href="<%= renderUrl() %>" tabindex="-1" target="<%= renderTarget() %>" <%= renderDisabled() %> ><%= renderDashicons() %><%= nicename %></a></li>
 </script>
