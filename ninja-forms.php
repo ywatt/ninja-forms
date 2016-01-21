@@ -172,16 +172,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
                 self::$instance->controllers[ 'submission' ] = new NF_AJAX_Controllers_Submission();
 
                 /*
-                 * Field Class Registration
-                 */
-                self::$instance->fields = apply_filters( 'ninja_forms_register_fields', self::load_classes( 'Fields' ) );
-
-                /*
-                 * Form Action Registration
-                 */
-                self::$instance->actions = apply_filters( 'ninja_forms_register_actions', self::load_classes( 'Actions' ) );
-
-                /*
                  * WP-CLI Commands
                  */
                 if( class_exists( 'WP_CLI_Command' ) ) {
@@ -249,7 +239,23 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
                 new NF_Admin_Metaboxes_AppendAForm();
             }
 
+            add_action( 'plugins_loaded', array( self::$instance, 'plugins_loaded' ) );
+
             return self::$instance;
+        }
+
+        public function plugins_loaded()
+        {
+            /*
+             * Field Class Registration
+             */
+            self::$instance->fields = apply_filters( 'ninja_forms_register_fields', self::load_classes( 'Fields' ) );
+
+            /*
+             * Form Action Registration
+             */
+            self::$instance->actions = apply_filters( 'ninja_forms_register_actions', self::load_classes( 'Actions' ) );
+
         }
 
         /**
