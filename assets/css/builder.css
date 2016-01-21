@@ -614,6 +614,10 @@ All styles used within the drawer
     width: 100% !important;
     text-align: center; }
 
+.ninja-forms-app .jBox-Notice .jBox-container {
+  background: #84CC1E;
+  font-size: 18px; }
+
 .nf-button {
   border: 0;
   border-radius: 4px;
