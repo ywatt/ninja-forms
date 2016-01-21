@@ -39,6 +39,7 @@ define(
 		'controllers/app/confirmPublish',
 		'controllers/app/rte',
 		'controllers/app/changeMenu',
+		'controllers/app/mobile',
 		/*
 		 * Fields domain controllers
 		 */
@@ -115,6 +116,7 @@ define(
 		ConfirmPublish,
 		RTE,
 		ChangeMenu,
+		AppMobile,
 		/*
 		 * Fields domain controllers
 		 */
@@ -182,6 +184,7 @@ define(
 				new ConfirmPublish();
 				new RTE();
 				new ChangeMenu();
+				new AppMobile();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers

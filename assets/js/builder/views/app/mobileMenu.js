@@ -6,10 +6,15 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( [], function() {
+define( ['views/app/mobileMenuItem'], function( mobileMenuItemView ) {
 	var view = Marionette.CompositeView.extend({
 		tagName: 'div',
-		template: '#nf-tmpl-menu-drawer'
+		template: '#nf-tmpl-mobile-menu',
+		childView: mobileMenuItemView,
+
+		attachHtml: function( collectionView, childView ) {
+			jQuery( collectionView.el ).find( '.secondary' ).append( childView.el );
+		}
 	});
 
 	return view;
