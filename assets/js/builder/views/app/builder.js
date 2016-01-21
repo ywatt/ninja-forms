@@ -37,7 +37,7 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/mobileMenu', 'v
 			this.main.show( new mainView() );
 			// Show our mobile menu
 			var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
-			this.menuDrawer.show( new mobileMenuView() );
+			this.menuDrawer.show( new mobileMenuView( { collection: appDomainCollection } ) );
 			// Show our drawer.
 			this.drawer.show( new drawerView() );
 			// Respond to requests asking for the builder dom element.

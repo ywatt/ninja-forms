@@ -136,16 +136,14 @@
     <div class="<%= renderClasses() %>"><span><%= nicename %></span></div>
 </script>
 
-<script id="nf-tmpl-menu-drawer" type="text/template">
+<script id="nf-tmpl-mobile-menu" type="text/template">
     <ul class="primary">
         <li class="nf-publish">Publish</li>
     </ul>
-    <ul class="secondary">
-        <li><a href="#" tabindex="-1"><span class="dashicons dashicons-menu"></span>Form Fields</a></li>
-        <li><a href="http://three.ninjaforms.com/wp-admin/admin.php?page=edit-action" tabindex="-1"><span class="dashicons dashicons-external"></span>Emails & Actions</a></li>
-        <li><a href="#" tabindex="-1"><span class="dashicons dashicons-admin-generic"></span>Settings</a></li>
-        <li><a href="#" tabindex="-1"><span class="dashicons dashicons-visibility"></span>Preview</a></li>
-    </ul>
+    <ul class="secondary"></ul>
+</script>
+<script id="nf-tmpl-mobile-menu-item" type="text/template">
+    <li><a href="<%= renderUrl() %>" tabindex="-1" target="<%= renderTarget() %>" <%= renderDisabled() %> ><%= renderDashicons() %><%= nicename %></a></li>
 </script>
 
 <script id="nf-tmpl-drawer" type="text/template">

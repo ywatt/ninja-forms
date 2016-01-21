@@ -61,6 +61,7 @@ define( [
 						'down'				: 'down:mergeTags',
 						'Shift+return'		: 'return:mergeTags'
 					},
+					mobileDashicon: 'dashicons-menu',
 
 					getMainHeaderView: function() {
 						return new fieldsMainHeaderView();
@@ -88,6 +89,7 @@ define( [
 						'down'				: 'down:mergeTags',
 						'Shift+return'		: 'return:mergeTags'
 					},
+					mobileDashicon: 'dashicons-external',
 
 					getMainHeaderView: function() {
 						return new actionsMainHeaderView();
@@ -114,6 +116,7 @@ define( [
 						'down'				: 'down:mergeTags',
 						'Shift+return'		: 'return:mergeTags'
 					},
+					mobileDashicon: 'dashicons-admin-generic',
 
 					getMainHeaderView: function() {
 						return new settingsMainHeaderView();
@@ -133,6 +136,7 @@ define( [
 					nicename: 'Preview Form',
 					classes: 'preview',
 					dashicons: 'dashicons-visibility',
+					mobileDashicon: 'dashicons-visibility',
 					url: nfAdmin.previewurl
 				}
 			] );

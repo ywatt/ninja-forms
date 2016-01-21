@@ -11,6 +11,11 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 
 		onRender: function() {
 			if ( this.collection.models.length > 0 ) {
+				if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+					var tolerance = 'pointer';
+				} else {
+					var tolerance = 'intersect';
+				}
 				jQuery( this.el ).addClass( 'nf-field-type-droppable' ).addClass( 'nf-fields-sortable' );
 				var that = this;
 				jQuery( this.el ).sortable( {
@@ -19,7 +24,7 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 					cancel: '.nf-item-controls',
 					placeholder: 'nf-fields-sortable-placeholder',
 					opacity: 0.95,
-					tolerance: 'intersect',
+					tolerance: tolerance,
 
 					receive: function( e, ui ) {
 						nfRadio.channel( 'app' ).request( 'receive:fieldsSortable', ui );
