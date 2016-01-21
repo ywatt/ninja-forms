@@ -371,7 +371,7 @@ final class NF_Display_Render
         <?php
 
         // Action to Output Custom Templates
-        do_action( 'nf_output_templates' );
+        do_action( 'ninja_forms_output_templates' );
     }
 
     /*
