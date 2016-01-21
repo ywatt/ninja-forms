@@ -61,7 +61,7 @@ abstract class NF_Abstracts_Action
     /**
      * Save
      */
-    public function save()
+    public function save( $action_settings )
     {
         // This section intentionally left blank.
     }
