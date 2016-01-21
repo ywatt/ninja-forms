@@ -30,11 +30,10 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 			jQuery( this.el ).disableSelection();
 
 			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-				jQuery( this.el ).on( 'taphold', function() {
+				jQuery( this.el ).on( 'taphold', function( e, touch ) {
 					jQuery( this ).ClassyWiggle( 'start', { degrees: ['.65', '1', '.65', '0', '-.65', '-1', '-.65', '0'], delay: 50 } );
 				} );
 			}
-
 		},
 
 		templateHelpers: function () {
