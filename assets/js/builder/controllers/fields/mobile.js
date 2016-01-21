@@ -27,7 +27,7 @@ define( [], function() {
 
 		startWiggle: function( ui ) {
 			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-				jQuery( ui.item ).ClassyWiggle( 'stop' );
+				jQuery( ui.item ).removeClass( 'ui-sortable-helper' ).ClassyWiggle( 'stop' );
 				jQuery( ui.helper ).css( 'opacity', '0.75' ).ClassyWiggle( 'start', { degrees: ['.5', '1', '.5', '0', '-.5', '-1', '-.5', '0'] } );
 			}
 		},
@@ -35,6 +35,7 @@ define( [], function() {
 		stopWiggle: function( ui ) {
 			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
 				jQuery( ui.helper ).ClassyWiggle( 'stop' );
+				jQuery( ui.item ).removeClass( 'ui-sortable-helper drag-selected' );
 			}
 		}
 

@@ -31,6 +31,7 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 
 			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
 				jQuery( this.el ).on( 'taphold', function( e, touch ) {
+					jQuery( this ).addClass( 'ui-sortable-helper drag-selected' );
 					jQuery( this ).ClassyWiggle( 'start', { degrees: ['.65', '1', '.65', '0', '-.65', '-1', '-.65', '0'], delay: 50 } );
 				} );
 			}
