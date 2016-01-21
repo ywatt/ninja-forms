@@ -38,7 +38,6 @@ define( [], function() {
 				jQuery( ui.item ).removeClass( 'ui-sortable-helper drag-selected' );
 			}
 		}
-
 	});
 
 	return controller;
