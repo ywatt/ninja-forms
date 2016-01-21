@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return apply_filters( 'ninja-forms-from-restriction-settings', array(
+return apply_filters( 'ninja_forms_from_restriction_settings', array(
 
     'logged-in-set' => array(
         'name'    => 'logged-in-set',

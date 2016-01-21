@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return apply_filters( 'ninja-forms-from-calculation-settings', array(
+return apply_filters( 'ninja_forms_from_calculation_settings', array(
 
     /*
     * Calculation

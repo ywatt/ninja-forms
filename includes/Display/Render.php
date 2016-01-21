@@ -75,7 +75,7 @@ final class NF_Display_Render
         } else {
             foreach ($form_fields as $field) {
 
-                $field = apply_filters('nf_localize_fields', $field);
+                $field = apply_filters('ninja_forms_localize_fields', $field);
 
                 $field_class = $field->get_settings('type');
 
@@ -214,7 +214,7 @@ final class NF_Display_Render
 
                 $field['settings']['id'] = $field_id;
 
-                $field = apply_filters('nf_localize_fields_preview', $field);
+                $field = apply_filters('ninja_forms_localize_fields_preview', $field);
 
                 $display_before = apply_filters( 'ninja_forms_display_before_field_type_' . $field['settings'][ 'type' ], '' );
                 $display_before = apply_filters( 'ninja_forms_display_before_field_key_' . $field['settings'][ 'key' ], $display_before );

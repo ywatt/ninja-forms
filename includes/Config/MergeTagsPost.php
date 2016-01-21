@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return apply_filters( 'ninja-forms-merge-tags-post', array(
+return apply_filters( 'ninja_forms_merge_tags_post', array(
 
     /*
     |--------------------------------------------------------------------------

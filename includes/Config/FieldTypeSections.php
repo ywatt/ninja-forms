@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return apply_filters( 'ninja-forms-field-type-sections', array(
+return apply_filters( 'ninja_forms_field_type_sections', array(
 
     /*
     |--------------------------------------------------------------------------

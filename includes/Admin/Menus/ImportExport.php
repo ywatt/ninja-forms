@@ -36,7 +36,7 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
     public function display()
     {
-        $tabs = apply_filters( 'nf-import-export-tabs', array(
+        $tabs = apply_filters( 'ninja_forms_import_export_tabs', array(
             'forms' => __( 'Form', 'ninja-forms' ),
             'favorite_fields' => __( 'Favorite Fields', 'ninja-forms' )
             )
