@@ -123,7 +123,11 @@ final class NF_Display_Render
 
                         ob_start();
                         do_shortcode( $settings['value'] );
-                        $settings['value'] = ob_get_clean();
+                        $ob = ob_get_clean();
+
+                        if( $ob ){
+                            $settings['value'] = $ob;
+                        }
                     }
                 }
 
