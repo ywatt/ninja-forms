@@ -15,6 +15,7 @@ final class NF_Database_Models_Action extends NF_Abstracts_Model
 
     protected $_columns = array(
         'title',
+        'key',
         'type',
         'active',
         'created_at'

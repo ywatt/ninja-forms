@@ -15,6 +15,7 @@ final class NF_Database_Models_Field extends NF_Abstracts_Model
 
     protected $_columns = array(
         'label',
+        'key',
         'parent_id',
         'type',
         'created_at'
