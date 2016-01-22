@@ -49,7 +49,8 @@ final class NF_Actions_Email extends NF_Abstracts_Action
     {
         $headers = $this->_get_headers( $action_settings );
 
-        $attachments = $this->_get_attachments( $action_settings, $data );
+        $attachments = array();
+//        $attachments = $this->_get_attachments( $action_settings, $data );
 
         wp_mail(
             $action_settings['to'],
@@ -60,6 +61,7 @@ final class NF_Actions_Email extends NF_Abstracts_Action
         );
 
         $data[ 'actions' ][ 'email' ][ 'headers' ] = $headers;
+        $data[ 'actions' ][ 'email' ][ 'csv' ] = $this->_create_csv( $data[ 'fields' ] );
 
         return $data;
     }
@@ -82,9 +84,9 @@ final class NF_Actions_Email extends NF_Abstracts_Action
     {
         $attachments = array();
 
-        if( $settings[ 'attach_csv' ] ){
-            $attachments[] = $this->_create_csv( $settings, $data );
-        }
+//        if( $settings[ 'attach_csv' ] ){
+//            $attachments[] = $this->_create_csv( $settings, $data );
+//        }
 
         $attachments = apply_filters( 'ninja_forms_action_email_attachments', $attachments, $settings[ 'key' ], $settings[ 'id' ] );
 
@@ -139,7 +141,18 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
     private function _create_csv( $fields )
     {
+        $csv_array = array();
 
+        foreach( $fields as $field ){
+            $csv_array[ 0 ][] = $field[ 'label' ];
+            $csv_array[ 1 ][] = WPN_Helper::stripslashes( $field[ 'value' ] );
+        }
+
+        return WPN_Helper::str_putcsv( $csv_array,
+            apply_filters( 'nf_sub_csv_delimiter', ',' ),
+            apply_filters( 'nf_sub_csv_enclosure', '"' ),
+            apply_filters( 'nf_sub_csv_terminator', "\n" )
+        );
     }
 
     /*
