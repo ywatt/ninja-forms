@@ -45,10 +45,24 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
     public function process( $action_settings, $form_id, $data )
     {
+        $headers = array();
+        $attachments = array();
+
+        if( 'html' == $action_settings[ 'format' ] ){
+            $headers[] = 'Content-Type: text/html; charset=UTF-8';
+        }
+
         wp_mail(
             $action_settings['to'],
             $action_settings['subject'],
-            $action_settings['message']
+            $action_settings['message'],
+            $headers,
+            $attachments
         );
+    }
+
+    private function create_csv( $fields )
+    {
+
     }
 }
