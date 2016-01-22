@@ -160,25 +160,6 @@ define( [], function() {
 					response.action = action;
 					// Run anything that needs to happen after we update.
 					nfRadio.channel( 'app' ).trigger( 'response:updateDB', response );
-					/*
-					 * TODO: Move this to a different controller specifically for preview stuff.
-					 */
-					if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) && 'preview' == action ) {
-						nfRadio.channel( 'notices' ).request( 'add', 'previewUpdated', 'Form Preview Updated', { 
-							position: {
-								x: 'right',
-								y: 'top'
-							},
-							animation: {
-								open: 'slide:right',
-								close: 'slide:right'
-							},
-							offset: {
-								x: -40,
-								y: 120
-							}
-						} );
-					}
 				} catch( exception ) {
 					console.log( 'Something went wrong!' );
 					console.log( response );
