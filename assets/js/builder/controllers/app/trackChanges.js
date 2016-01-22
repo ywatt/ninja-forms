@@ -31,6 +31,8 @@ define( ['models/app/changeCollection', 'models/app/changeModel'], function( cha
 				data: data		
 			} );
 			this.collection.add( changeModel );
+			// Show a notice that we've made the change.
+			nfRadio.channel( 'notices' ).request( 'add', 'action', label.label + ' ' + label.change );
 			return changeModel;
 		},
 
