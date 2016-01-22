@@ -216,6 +216,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
                 self::$instance->merge_tags[ 'system' ] = new NF_MergeTags_System();
                 self::$instance->merge_tags[ 'fields' ] = new NF_MergeTags_Fields();
                 self::$instance->merge_tags[ 'calcs' ] = new NF_MergeTags_Calcs();
+                self::$instance->merge_tags[ 'querystrings' ] = new NF_MergeTags_QueryStrings();
 
                 /*
                  * EOS Parser

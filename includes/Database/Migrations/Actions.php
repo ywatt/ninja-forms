@@ -15,6 +15,7 @@ class NF_Database_Migrations_Actions extends NF_Abstracts_Migration
         $query = "CREATE TABLE IF NOT EXISTS $this->table_name (
             `id` int NOT NULL AUTO_INCREMENT,
             `title` longtext,
+            `key` longtext,
             `type` longtext,
             `active` boolean DEFAULT TRUE,
             `parent_id` int NOT NULL,

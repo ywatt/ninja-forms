@@ -180,4 +180,15 @@ final class WPN_Helper
         return $returnString;
     }
 
+    public static function get_query_string( $key )
+    {
+        if( ! isset( $_GET[ $key ] ) ) return '';
+
+        $value = self::htmlspecialchars( $_GET[ $key ] );
+
+        if( is_array( $value ) ) $value = $value[ 0 ];
+
+        return $value;
+    }
+
 } // End Class WPN_Helper

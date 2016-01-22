@@ -32,7 +32,7 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
     * PUBLIC METHODS
     */
 
-    public function save()
+    public function save( $action_settings )
     {
 
     }

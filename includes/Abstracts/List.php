@@ -24,6 +24,8 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
         );
 
         add_filter( 'ninja_forms_custom_columns', array( $this, 'custom_columns' ), 10, 2 );
+
+        add_filter( 'ninja_forms_render_options', array( $this, 'query_string_default' ), 10, 2 );
     }
 
     public function get_parent_type()
@@ -60,5 +62,25 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
         }
 
         return $output;
+    }
+
+    public function query_string_default( $options, $settings )
+    {
+        if( ! isset( $settings[ 'key' ] ) ) return $options;
+
+        $field_key = $settings[ 'key' ];
+
+        if( ! isset( $_GET[ $field_key ] ) ) return $options;
+
+        foreach( $options as $key => $option ){
+
+            if( ! isset( $option[ 'value' ] ) ) continue;
+
+            if( $option[ 'value' ] != $_GET[ $field_key ] ) continue;
+
+            $options[ $key ][ 'selected' ] = 1;
+        }
+
+        return $options;
     }
 }
