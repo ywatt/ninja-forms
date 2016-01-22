@@ -263,7 +263,7 @@ final class NF_Display_Render
                         $ob = ob_get_clean();
 
                         if( $ob ){
-                            $settings['value'] = $ob;
+                            $field['settings']['value'] = $ob;
                         }
                     }
                 }
