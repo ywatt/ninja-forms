@@ -77,9 +77,9 @@ final class NF_Display_Render
 
                 $field = apply_filters('ninja_forms_localize_fields', $field);
 
-                $field_class = $field->get_settings('type');
+                $field_type = $field->get_settings('type');
 
-                $field_class = Ninja_Forms()->fields[$field_class];
+                $field_class = Ninja_Forms()->fields[$field_type];
 
                 if (self::$use_test_values) {
                     $field->update_setting('value', $field_class->get_test_value());
@@ -115,8 +115,12 @@ final class NF_Display_Render
                     if (is_numeric($setting)) $settings[$key] = floatval($setting);
                 }
 
+                if( 'list' == $field_class->get_parent_type() && isset( $settings[ 'options' ] ) && is_array( $settings[ 'options' ] ) ){
+                    $settings[ 'options' ] = apply_filters( 'ninja_forms_render_options', $settings[ 'options' ], $settings );
+                }
+                
                 if (isset($settings['default'])) {
-                    $default_value = apply_filters('ninja_forms_render_default_value', $settings['default'], $field_class, $settings);
+                    $default_value = apply_filters('ninja_forms_render_default_value', $settings['default'], $field_type, $settings);
 
                     $default_value = preg_replace( '/{.*}/', '', $default_value );
 
@@ -230,13 +234,13 @@ final class NF_Display_Render
                 $display_after = apply_filters( 'ninja_forms_display_after_field_key_' . $field['settings'][ 'key' ], $display_after );
                 $field['settings'][ 'afterField' ] = $display_after;
 
-                $field_class = $field['settings']['type'];
+                $field_type = $field['settings']['type'];
 
                 foreach ($field['settings'] as $key => $setting) {
                     if (is_numeric($setting)) $field['settings'][$key] = floatval($setting);
                 }
 
-                $field_class = Ninja_Forms()->fields[$field_class];
+                $field_class = Ninja_Forms()->fields[$field_type];
 
                 $templates = $field_class->get_templates();
 
@@ -252,8 +256,12 @@ final class NF_Display_Render
                     $field['settings']['value'] = $field_class->get_test_value();
                 }
 
+                if( 'list' == $field_class->get_parent_type() && isset( $field['settings'][ 'options' ] ) && is_array( $field['settings'][ 'options' ] ) ){
+                    $field['settings'][ 'options' ] = apply_filters( 'ninja_forms_render_options', $field['settings'][ 'options' ], $field['settings'] );
+                }
+
                 if (isset($field['settings']['default'])) {
-                    $default_value = apply_filters('ninja_forms_render_default_value', $field['settings']['default'], $field_class, $field['settings']);
+                    $default_value = apply_filters('ninja_forms_render_default_value', $field['settings']['default'], $field_type, $field['settings']);
 
                     $default_value = preg_replace( '/{.*}/', '', $default_value );
 
