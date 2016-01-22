@@ -152,7 +152,20 @@ class NF_Abstracts_Model
         if( is_numeric( $id ) ) {
             $this->_id = absint( $id );
         } else {
-            $this->_tmp_id = $id;
+
+            $field = $this->_db->get_row(
+                "
+                SELECT `id`
+                FROM   `$this->_table_name`
+                WHERE  `key` = '$id'
+                "
+            );
+
+            if( $field ){
+                $this->_id = $field->id;
+            } else {
+                $this->_tmp_id = $id;
+            }
         }
 
         /*
