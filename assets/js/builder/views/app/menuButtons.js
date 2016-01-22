@@ -84,7 +84,8 @@ define( [], function() {
 
 		onRender: function() {
 			// var viewChangesIcon = this.getViewChangesIcon();
-			// jQuery( viewChangesIcon ).ClassyWiggle( 'start', { degrees: ['.65', '1', '.65', '0', '-.65', '-1', '-.65', '0'], delay: 50 } );
+			// jQuery( viewChangesIcon ).find( '.nf-cancel' ).ClassyWiggle( 'start', { degrees: ['1', '6', '1', '0', '-1', '-6', '-1', '0'], delay: 150 } );
+			// jQuery( this.el).find( '.publish' ).ClassyWiggle( 'start', { degrees: ['.65', '1', '.65', '0', '-.65', '-1', '-.65', '0'], delay: 50 } );
 		},
 
 		/**
