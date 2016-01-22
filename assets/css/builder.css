@@ -755,10 +755,10 @@ All styles used within the drawer
 
 .nf-drawer-buttons {
   display: none;
-  margin: 40px -20px -20px;
+  margin: 0 -20px;
   padding: 0; }
   .nf-drawer-buttons li {
-    background: #fff;
+    background: #424242;
     border-right: 1px solid #f1f1f1;
     float: left;
     margin: 0;
@@ -785,6 +785,7 @@ All styles used within the drawer
     background: transparent;
     box-shadow: 0 0 0;
     border: 0;
+    margin-bottom: 3px;
     padding: 12px 0 12px 50px;
     width: 60%; }
   .nf-search::before {
