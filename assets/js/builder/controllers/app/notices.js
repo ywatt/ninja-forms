@@ -21,7 +21,11 @@ define( [], function() {
 				color: 'green',
 				zIndex:12000,
 				constructOnInit: true,
-				stack: false
+				stack: false,
+				animation: {
+					open: 'flip',
+					close: 'flip'
+				}
 			};
 
 			var mobileDefaults = {
@@ -41,20 +45,11 @@ define( [], function() {
 			};
 
 			var desktopDefaults = {
-				position: {},
 				attributes: {
 					x: 'left',
 					y: 'bottom'
 				},
-				animation: {
-					open:'slide:bottom',
-					close:'slide:left'
-				},
-				autoClose: 3000,
-				offset: {
-					x: 0,
-					y: 0
-				}
+				autoClose: 4000
 			};
 
 			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {

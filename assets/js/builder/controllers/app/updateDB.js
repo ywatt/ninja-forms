@@ -160,6 +160,9 @@ define( [], function() {
 					response.action = action;
 					// Run anything that needs to happen after we update.
 					nfRadio.channel( 'app' ).trigger( 'response:updateDB', response );
+					if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) && 'preview' == action ) {
+						nfRadio.channel( 'notices' ).request( 'add', 'previewUpdate', 'Preview Updated'	);
+					}
 				} catch( exception ) {
 					console.log( 'Something went wrong!' );
 					console.log( response );
