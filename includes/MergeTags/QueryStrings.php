@@ -25,7 +25,8 @@ final class NF_MergeTags_QueryStrings extends NF_Abstracts_MergeTags
         if( ! is_array( $_GET ) ) return;
 
         foreach( $_GET as $key => $value ){
-            $this->set_merge_tags( $key, htmlspecialchars( $value, ENT_QUOTES ) );
+            $value = WPN_Helper::get_query_string( $key );
+            $this->set_merge_tags( $key, $value );
         }
     }
 
