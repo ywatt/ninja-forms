@@ -37,6 +37,8 @@ final class NF_Actions_Email extends NF_Abstracts_Action
         $settings = Ninja_Forms::config( 'ActionEmailSettings' );
 
         $this->_settings = array_merge( $this->_settings, $settings );
+
+        $this->_backwards_compatibility();
     }
 
     /*
@@ -45,9 +47,9 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
     public function process( $action_settings, $form_id, $data )
     {
-        $attachments = array();
+        $headers = $this->_get_headers( $action_settings );
 
-        $headers = $this->_format_headers( $action_settings );
+        $attachments = $this->_get_attachments( $action_settings, $data );
 
         wp_mail(
             $action_settings['to'],
@@ -62,7 +64,7 @@ final class NF_Actions_Email extends NF_Abstracts_Action
         return $data;
     }
 
-    private function _format_headers( $settings )
+    private function _get_headers( $settings )
     {
         $headers = array();
 
@@ -74,6 +76,19 @@ final class NF_Actions_Email extends NF_Abstracts_Action
         $headers = array_merge( $headers, $this->_format_recipients( $settings ) );
 
         return $headers;
+    }
+
+    private function _get_attachments( $settings, $data )
+    {
+        $attachments = array();
+
+        if( $settings[ 'attach_csv' ] ){
+            $attachments[] = $this->_create_csv( $settings, $data );
+        }
+
+        $attachments = apply_filters( 'ninja_forms_action_email_attachments', $attachments, $settings[ 'key' ], $settings[ 'id' ] );
+
+        return $attachments;
     }
 
     private function _format_from( $settings )
@@ -96,7 +111,7 @@ final class NF_Actions_Email extends NF_Abstracts_Action
         $recipient_settings = array(
             'Cc' => $settings[ 'cc' ],
             'Bcc' => $settings[ 'bcc' ],
-            'Reply-to' => $settings[ 'reply-to' ],
+            'Reply-to' => $settings[ 'reply_to' ],
         );
 
         foreach( $recipient_settings as $type => $emails ){
@@ -126,4 +141,19 @@ final class NF_Actions_Email extends NF_Abstracts_Action
     {
 
     }
+
+    /*
+     * Backwards Compatibility
+     */
+
+    private function _backwards_compatibility()
+    {
+        add_filter( 'ninja_forms_action_email_attachments', array( $this, 'ninja_forms_action_email_attachments'), 10, 3 );
+    }
+
+    public function ninja_forms_action_email_attachments( $attachments, $action_key, $action_id )
+    {
+        return apply_filters( 'nf_email_notification_attachments', $attachments, $action_id );
+    }
+
 }

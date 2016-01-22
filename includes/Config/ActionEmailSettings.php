@@ -92,8 +92,8 @@ return array(
      * Reply To
      */
 
-    'reply-to' => array(
-        'name' => 'reply-to', // Uses a hyphen for email header formatting.
+    'reply_to' => array(
+        'name' => 'reply_to',
         'type' => 'textbox',
         'group' => 'advanced',
         'label' => __( 'Reply To', 'ninja-forms' ),
@@ -145,6 +145,17 @@ return array(
         'placeholder' => '',
         'value' => '',
         'use_merge_tags' => TRUE,
+    ),
+
+    /*
+     * Attach CSV
+     */
+
+    'attach_csv' => array(
+        'name' => 'attach_csv',
+        'type' => 'toggle',
+        'group' => 'advanced',
+        'label' => __( 'Attach CSV', 'ninja-forms' ),
     ),
 
 );
