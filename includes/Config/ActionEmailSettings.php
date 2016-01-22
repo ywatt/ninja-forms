@@ -93,7 +93,7 @@ return array(
      */
 
     'reply-to' => array(
-        'name' => 'replyto',
+        'name' => 'reply-to', // Uses a hyphen for email header formatting.
         'type' => 'textbox',
         'group' => 'advanced',
         'label' => __( 'Reply To', 'ninja-forms' ),
