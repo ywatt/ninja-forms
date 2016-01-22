@@ -1,4 +1,46 @@
 /*!
+ *
+ * This library has been modified! This function has been changed: mouseProto._mouseInit
+ *
+ * Original Version:
+ *
+ *     mouseProto._mouseInit = function () {
+ *   
+ *       var self = this;
+ *
+ *       // Delegate the touch handlers to the widget's element
+ *       self.element.bind({
+ *         touchstart: $.proxy(self, '_touchStart'),
+ *         touchmove: $.proxy(self, '_touchMove'),
+ *         touchend: $.proxy(self, '_touchEnd')
+ *         });
+ *
+ *       // Call the original $.ui.mouse init method
+ *       _mouseInit.call(self);
+ *     };
+ *
+ * 
+ * New Version:
+ * 
+ *     mouseProto._mouseInit = function () {
+ *
+ *        var self = this;
+ *
+ *        // Delegate the touch handlers to the widget's element
+ *        self.element
+ *           .bind('taphold', $.proxy(self, '_touchStart'))   // IMPORTANT!MOD FOR TAPHOLD TO START SORTABLE
+ *           .bind('touchmove', $.proxy(self, '_touchMove'))
+ *           .bind('touchend', $.proxy(self, '_touchEnd'));
+ *
+ *         // Call the original $.ui.mouse init method
+ *         _mouseInit.call(self);
+ *     };  
+ *
+ * Why?
+ *
+ *  The original version mapped any tap start to a click. This means that you weren't able to scroll through
+ *  the sortable on a mobile device, as every attempt to scroll was intercepted as a click.
+ * 
  * jQuery UI Touch Punch 0.2.3
  *
  * Copyright 2011–2014, Dave Furfero
@@ -144,19 +186,19 @@
    * translate touch events to mouse events and pass them to the widget's
    * original mouse event handling methods.
    */
-mouseProto._mouseInit = function () {
+  mouseProto._mouseInit = function () {
 
-var self = this;
+  var self = this;
 
-// Delegate the touch handlers to the widget's element
-self.element
-    .bind('taphold', $.proxy(self, '_touchStart'))   // IMPORTANT!MOD FOR TAPHOLD TO START SORTABLE
-    .bind('touchmove', $.proxy(self, '_touchMove'))
-    .bind('touchend', $.proxy(self, '_touchEnd'));
+  // Delegate the touch handlers to the widget's element
+  self.element
+      .bind('taphold', $.proxy(self, '_touchStart'))   // IMPORTANT!MOD FOR TAPHOLD TO START SORTABLE
+      .bind('touchmove', $.proxy(self, '_touchMove'))
+      .bind('touchend', $.proxy(self, '_touchEnd'));
 
-// Call the original $.ui.mouse init method
-_mouseInit.call(self);
-};  
+  // Call the original $.ui.mouse init method
+  _mouseInit.call(self);
+  };  
 
 
   /**
