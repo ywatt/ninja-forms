@@ -163,8 +163,8 @@ define( [], function() {
 					/*
 					 * TODO: Move this to a different controller specifically for preview stuff.
 					 */
-					if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-						nfRadio.channel( 'notices' ).request( 'add', 'previewUpdated', 'Forms Preview Updated', { 
+					if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) && 'preview' == action ) {
+						nfRadio.channel( 'notices' ).request( 'add', 'previewUpdated', 'Form Preview Updated', { 
 							position: {
 								x: 'right',
 								y: 'top'

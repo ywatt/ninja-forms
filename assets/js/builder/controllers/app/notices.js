@@ -65,6 +65,7 @@ define( [], function() {
 			defaults = jQuery.extend( defaults, appDefaults );
 
 			var options = jQuery.extend( defaults, options );
+			// console.log( options );
 			this.notices[ key ] = new jBox( 'Notice', options );
 		},
 
