@@ -17,8 +17,7 @@ define( [
 	'views/app/drawer/contentViewChanges',
 	'views/app/drawer/headerViewChanges',
 	'views/app/drawer/contentNewForm',
-	'views/app/drawer/headerNewForm',
-	'views/app/drawer/mobileItemControls'
+	'views/app/drawer/headerNewForm'
 	], function(
 		drawerCollection,
 		addFieldView,
@@ -54,10 +53,6 @@ define( [
 
 					getContentView: function( data ) {
 						return new editSettingsView( data );
-					},
-
-					getFooterView: function( data ) {
-						return new mobileItemControlsView( data );
 					}
 				},
 				{

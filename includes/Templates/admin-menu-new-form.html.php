@@ -326,14 +326,6 @@
     <span></span>
 </script>
 
-<script id="nf-tmpl-drawer-footer-edit-settings" type="text/template">
-
-</script>
-
-<script id="nf-tmpl-drawer-content-empty" type="text/template">
-
-</script>
-
 <script id="nf-tmpl-empty" type="text/template">
 
 </script>
