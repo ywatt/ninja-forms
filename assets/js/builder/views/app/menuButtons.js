@@ -15,6 +15,8 @@ define( [], function() {
 			// Listen to changes on the app 'clean' state. When it changes, re-render.
 			this.listenTo( nfRadio.channel( 'app' ), 'change:clean', this.render, this );
 			this.listenTo( nfRadio.channel( 'app' ), 'change:loading', this.render, this );
+
+			nfRadio.channel( 'app' ).reply( 'get:viewChangesIcon', this.getViewChangesIcon, this );
 		},
 
 		/**
@@ -80,6 +82,12 @@ define( [], function() {
 			this.publishWidth = jQuery( publishEL ).outerWidth( true );
 		},
 
+		onRender: function() {
+			// var viewChangesIcon = this.getViewChangesIcon();
+			// jQuery( viewChangesIcon ).find( '.nf-cancel' ).ClassyWiggle( 'start', { degrees: ['1', '6', '1', '0', '-1', '-6', '-1', '0'], delay: 150 } );
+			// jQuery( this.el).find( '.publish' ).ClassyWiggle( 'start', { degrees: ['.65', '1', '.65', '0', '-.65', '-1', '-.65', '0'], delay: 50 } );
+		},
+
 		/**
 		 * Listen for clicks on the Publish or view changes button.
 		 * @type {Object}
@@ -111,6 +119,10 @@ define( [], function() {
 		 */
 		clickViewChanges: function( e ) {
 			nfRadio.channel( 'app' ).trigger( 'click:viewChanges', e );
+		},
+
+		getViewChangesIcon: function() {
+			return jQuery( this.el ).find( '.nf-cancel' );
 		}
 
 	});

@@ -66,11 +66,13 @@
         //padding-left: 60px;
         transition: all 0.50s ease;
     }
-    #nf-app-sub-header {
-        .nf-add-new {
-            top: 95px !important;
-            text-indent: -99999px;
-            &:after {
+    @media only screen and (min-width: 901px) {
+        #nf-app-sub-header {
+            .nf-add-new {
+                top: 95px !important;
+                text-indent: -99999px;
+                &:after {
+                }
             }
         }
     }
@@ -251,7 +253,15 @@
         padding: 20px;
         text-align: center;
         text-transform: uppercase;
+        cursor:pointer;
+
+        &.disabled {
+            background: #ccc;
+            border: 1px solid #ccc;
+            cursor: default;
+        }
     }
+
 }
 
 
@@ -290,6 +300,14 @@
                     text-align: center;
                 }
             }
+        }
+    }
+}
+.ninja-forms-app {
+    .jBox-Notice {
+        .jBox-container {
+            background: $accent_color;
+            font-size: 18px;
         }
     }
 }

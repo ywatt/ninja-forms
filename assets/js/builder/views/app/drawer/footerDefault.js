@@ -1,6 +1,6 @@
 /**
- * Menu view used on smaller screens.
- *
+ * Default drawer footer
+ * 
  * @package Ninja Forms builder
  * @subpackage App
  * @copyright (c) 2015 WP Ninjas
@@ -9,7 +9,7 @@
 define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'div',
-		template: '#nf-tmpl-menu-drawer'
+		template: '#nf-tmpl-empty'
 	});
 
 	return view;

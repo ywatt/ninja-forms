@@ -5,6 +5,7 @@
         background: transparent;
         box-shadow: 0 0 0;
         border: 0;
+        margin-bottom:3px;
         padding: 12px 0 12px 50px;
         width: 60%;
     }
@@ -22,6 +23,11 @@
 }
 .nf-stage {
     position: relative;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     .nf-stage-controls {
         background: #F8F8F9;
         padding: 5px;

@@ -20,13 +20,13 @@
         margin: 0;
         li {
             float: left;
-            &.nf-mobile {
+            &.nf-mobile-menu {
                 display: none;
             }
             a {
                 color: #424242;
                 display: block;
-                margin: 16px 28px;
+                margin: 16px 20px;
                 padding-bottom: 8px;
                 text-decoration: none;
                 &.active {

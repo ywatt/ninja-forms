@@ -24,12 +24,6 @@ Normalize WordPress admin for Ninja Forms App
   .ninja-forms-app.folded #wpcontent #wpbody {
     left: 36px; }
 
-.ninja-forms-app .grey .nf-mobile {
-  background: #ccc !important; }
-
-.ninja-forms-app .grey .nf-publish {
-  background: #ccc !important; }
-
 .ninja-forms-app .grey #nf-drawer .nf-button {
   padding: 15px 30px; }
 
@@ -72,12 +66,12 @@ Header and Nav for Ninja Forms App
     margin: 0; }
     #nf-header ul li {
       float: left; }
-      #nf-header ul li.nf-mobile {
+      #nf-header ul li.nf-mobile-menu {
         display: none; }
       #nf-header ul li a {
         color: #424242;
         display: block;
-        margin: 16px 28px;
+        margin: 16px 20px;
         padding-bottom: 8px;
         text-decoration: none; }
         #nf-header ul li a.active {
@@ -149,8 +143,10 @@ Header and Nav for Ninja Forms App
 #nf-main-header {
   margin: 0 auto;
   max-width: 700px;
-  -webkit-transition: all 1.0s ease;
-  transition: all 1.0s ease; }
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
 
 #nf-main-header {
   padding: 0 0 20px; }
@@ -240,6 +236,7 @@ Form field placeholders for the fields a user has added to their form
       display: none; }
       .nf-item-controls li.nf-item-expand .dashicons {
         -webkit-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
                 transform: rotate(-90deg); }
     .nf-item-controls li .nf-item-editing {
       display: none; }
@@ -325,6 +322,7 @@ Form field placeholders for the fields a user has added to their form
     color: #84CC1E; }
     .nf-group-wrap.expanded .nf-item-expand .dashicons {
       -webkit-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
               transform: rotate(90deg); }
     .nf-group-wrap.expanded .nf-field-wrap {
       opacity: 1.0;
@@ -381,6 +379,7 @@ All styles used within the drawer
     transition: all 0.50s ease; }
     .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .dashicons {
       -webkit-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
               transform: rotate(180deg);
       -webkit-transition: all 0.50s ease;
       transition: all 0.50s ease; }
@@ -413,9 +412,10 @@ All styles used within the drawer
   -webkit-transition: all 0.50s ease;
   transition: all 0.50s ease; }
 
-.nf-drawer-opened #nf-app-sub-header .nf-add-new {
-  top: 95px !important;
-  text-indent: -99999px; }
+@media only screen and (min-width: 901px) {
+  .nf-drawer-opened #nf-app-sub-header .nf-add-new {
+    top: 95px !important;
+    text-indent: -99999px; } }
 
 .nf-drawer-opened .nf-setting-wrap {
   width: 50%;
@@ -575,7 +575,12 @@ All styles used within the drawer
     color: #fff;
     padding: 20px;
     text-align: center;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    cursor: pointer; }
+    #nf-menu-drawer .nf-publish.disabled {
+      background: #ccc;
+      border: 1px solid #ccc;
+      cursor: default; }
 
 .nf-menu-expand #nf-menu-drawer {
   right: 0;
@@ -607,6 +612,10 @@ All styles used within the drawer
     width: 100% !important;
     text-align: center; }
 
+.ninja-forms-app .jBox-Notice .jBox-container {
+  background: #84CC1E;
+  font-size: 18px; }
+
 .nf-button {
   border: 0;
   border-radius: 4px;
@@ -636,7 +645,7 @@ All styles used within the drawer
   color: #999;
   font-size: 15px; }
 
-.nf-mobile {
+.nf-mobile-menu {
   background: #1EA9EA;
   border-radius: 4px;
   color: #fff;
@@ -646,11 +655,11 @@ All styles used within the drawer
   text-decoration: none;
   -webkit-transition: margin 0.5s ease;
   transition: margin 0.5s ease; }
-  .nf-mobile .dashicons {
+  .nf-mobile-menu .dashicons {
     font-size: 30px;
     width: 32px;
     height: 30px; }
-  .nf-mobile:hover {
+  .nf-mobile-menu:hover {
     color: #fff; }
 
 .ninja-forms-app fieldset {
@@ -746,10 +755,10 @@ All styles used within the drawer
 
 .nf-drawer-buttons {
   display: none;
-  margin: 40px -20px -20px;
+  margin: 0 -20px;
   padding: 0; }
   .nf-drawer-buttons li {
-    background: #fff;
+    background: #424242;
     border-right: 1px solid #f1f1f1;
     float: left;
     margin: 0;
@@ -776,6 +785,7 @@ All styles used within the drawer
     background: transparent;
     box-shadow: 0 0 0;
     border: 0;
+    margin-bottom: 3px;
     padding: 12px 0 12px 50px;
     width: 60%; }
   .nf-search::before {
@@ -790,7 +800,11 @@ All styles used within the drawer
     left: 10px; }
 
 .nf-stage {
-  position: relative; }
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
   .nf-stage .nf-stage-controls {
     background: #F8F8F9;
     padding: 5px;
@@ -898,9 +912,7 @@ Various custom field styles
   height: 32px;
   z-index: 98;
   text-indent: 0px;
-  overflow: hidden;
-  -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;
-  transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; }
+  overflow: hidden; }
   .nf-add-new:after {
     background: #84CC1E;
     border: 2px solid #84CC1E;
@@ -925,6 +937,7 @@ Various custom field styles
       background: #fff;
       color: #84CC1E;
       -webkit-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
               transform: rotate(180deg);
       -webkit-transition: all 0.5s ease;
       transition: all 0.5s ease; }
@@ -1311,6 +1324,7 @@ All styles used for displaying table content
       border: 3px solid #fff;
       border-radius: 100%;
       -webkit-transform: transformZ(0);
+          -ms-transform: transformZ(0);
               transform: transformZ(0);
       -webkit-animation: LOADING 2s infinite;
               animation: LOADING 2s infinite; }
@@ -1804,26 +1818,44 @@ All styles used for displaying table content
     color: #444;
     background-color: transparent; } }
 
-@media only screen and (max-width: 1255px) {
-  .nf-cancel {
-    display: none; }
-  #nf-app-sub-header h2 {
-    padding-left: 80px;
-    -webkit-transition: all 1.0s ease 0s;
-    transition: all 1.0s ease 0s; } }
+@-webkit-keyframes color_change {
+  from {
+    background-color: #1EA9EA;
+    color: #fff; }
+  to {
+    background-color: #3B454D;
+    color: #A2A5A8; } }
 
-@media only screen and (max-width: 1132px) {
-  #nf-header .preview {
-    content: "Preview"; }
-  .nf-cancel {
-    display: none; } }
+@keyframes color_change {
+  from {
+    background-color: #1EA9EA;
+    color: #fff; }
+  to {
+    background-color: #3B454D;
+    color: #A2A5A8; } }
 
-@media only screen and (max-width: 1030px) {
+.nf-item.clicked {
+  -webkit-animation-name: color_change;
+          animation-name: color_change;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate; }
+
+@media only screen and (max-width: 1065px) {
+  .nf-app-menu .preview .app-menu-text {
+    text-indent: -9999px;
+    display: inline-block;
+    width: 0; } }
+
+@media only screen and (max-width: 900px) {
   #nf-header ul {
     display: none; }
   #nf-header .nf-button.primary {
     display: none; }
-  .nf-mobile {
+  .nf-mobile-menu {
     display: inline-block; }
   #nf-app-sub-header h2 {
     padding-left: 0;
@@ -1831,16 +1863,32 @@ All styles used for displaying table content
     transition: all 1.0s ease 0s; }
   .nf-add-new.nf-open-drawer {
     position: fixed;
+    text-indent: -9999px;
+    height: 54px;
+    width: 54px;
     top: auto;
     left: auto;
     bottom: 20px;
-    right: 20px;
-    -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease;
-    transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease; }
+    right: 20px; }
+    .nf-add-new.nf-open-drawer:after {
+      background: #84CC1E;
+      border: 2px solid #84CC1E;
+      border-radius: 40px;
+      color: #fff;
+      content: "+";
+      font-size: 50px;
+      padding: 8px;
+      position: absolute;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      line-height: 24px;
+      text-indent: 0px; }
   #nf-main-header .nf-button {
     display: none; }
   .nf-item-controls li {
-    margin: -4px 15px 0; }
+    margin: -4px 15px 0;
+    height: 26px; }
     .nf-item-controls li a {
       width: 30px;
       height: 30px; }
@@ -1864,10 +1912,13 @@ All styles used for displaying table content
       left: -16px; }
       .nf-item-controls li.nf-item-edit .nf-tooltip:after {
         left: 20px; }
+    .nf-item-controls li.nf-item-delete {
+      margin-top: -4px; }
     .nf-item-controls li.nf-item-expand {
       display: none; }
       .nf-item-controls li.nf-item-expand .dashicons {
         -webkit-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
                 transform: rotate(-90deg); }
     .nf-item-controls li .nf-item-editing {
       display: none; }
@@ -1925,7 +1976,9 @@ All styles used for displaying table content
     bottom: 0;
     right: 0; }
     .ninja-forms-app.auto-fold #wpcontent #wpbody {
-      left: 0; } }
+      left: 0; }
+  .nf-drawer-opened .nf-toggle-drawer {
+    display: none; } }
 
 @media only screen and (max-width: 782px) {
   .ninja-forms-app.folded #wpcontent, .ninja-forms-app.auto-fold #wpcontent {
@@ -1935,19 +1988,36 @@ All styles used for displaying table content
   #nf-main {
     padding: 0 0 80px; }
   #nf-drawer {
-    padding: 20px; } }
-
-@media only screen and (max-width: 660px) {
-  .nf-one-half, .nf-one-third {
-    width: 100%; }
+    padding: 20px; }
+  #nf-main-content {
+    width: 100%;
+    max-width: 100%; }
+  #nf-main {
+    border: 0; }
   .nf-field-wrap {
     border: 0;
-    border-bottom: 1px solid #ccc;
+    border-top: 8px solid #f1f1f1;
     border-radius: 0;
     margin: 0;
     padding: 20px; }
     .nf-field-wrap:first-child {
-      border-top: 1px solid #ccc; }
+      border-top: 8px solid #fff; }
+  .nf-fields-sortable-placeholder {
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 4px solid #84CC1E; }
+  .nf-fields-sortable-placeholder + .nf-field-wrap {
+    border: 0; }
+  .nf-fields-sortable {
+    border: 0;
+    padding: 0; }
+  .nf-field-wrap.ui-sortable-helper {
+    background: transparent;
+    border: 2px solid #84CC1E; } }
+
+@media only screen and (max-width: 660px) {
+  .nf-one-half, .nf-one-third {
+    width: 100%; }
   .nf-actions-table td:nth-child(3), .nf-actions-table th:nth-child(3) {
     display: none; }
   #nf-table-display .nf-item-controls {

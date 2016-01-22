@@ -13,7 +13,8 @@ define( ['views/app/drawer/contentEmpty'], function( drawerEmptyView ) {
 
 		regions: {
 			header: '#nf-drawer-header',
-			content: '#nf-drawer-content'
+			content: '#nf-drawer-content',
+			footer: '#nf-drawer-footer'
 		},
 
 		initialize: function() {
@@ -23,7 +24,9 @@ define( ['views/app/drawer/contentEmpty'], function( drawerEmptyView ) {
 		},
 
 		onShow: function() {
-			jQuery( this.el ).parent().perfectScrollbar();
+			if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+				jQuery( this.el ).parent().perfectScrollbar();
+			}
 		    // jQuery( this.el ).parent().disableSelection();
 		},
 
@@ -31,15 +34,18 @@ define( ['views/app/drawer/contentEmpty'], function( drawerEmptyView ) {
 			var drawer = nfRadio.channel( 'app' ).request( 'get:drawer', drawerID );
 			var contentView = drawer.get( 'getContentView' ).call( drawer, data );
 			var headerView = drawer.get( 'getHeaderView' ).call( drawer, data );
+			var footerView = drawer.get( 'getFooterView' ).call( drawer, data );
 
 			this.header.show( headerView );
 			this.content.show( contentView );
+			this.footer.show( footerView );
 
 		},
 
 		emptyContent: function() {
-			this.header.show( new drawerEmptyView() );
-			this.content.show( new drawerEmptyView() );
+			this.header.empty();
+			this.content.empty();
+			this.footer.empty();
 		},
 
 		getEl: function() {

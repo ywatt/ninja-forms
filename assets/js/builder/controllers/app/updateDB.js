@@ -145,7 +145,12 @@ define( [], function() {
 
 			if ( 'publish' == action ) {
 				nfRadio.channel( 'app' ).request( 'update:setting', 'loading', true );
-				nfRadio.channel( 'app' ).trigger( 'change:loading' );				
+				nfRadio.channel( 'app' ).trigger( 'change:loading' );	
+
+				// If we're on mobile, show a notice that we're publishing
+				if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+					nfRadio.channel( 'notices' ).request( 'add', 'publishing', 'Your Changes Are Being Published', { autoClose: false } );
+				}
 			}
 
 			// Update
@@ -155,6 +160,9 @@ define( [], function() {
 					response.action = action;
 					// Run anything that needs to happen after we update.
 					nfRadio.channel( 'app' ).trigger( 'response:updateDB', response );
+					if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) && 'preview' == action ) {
+						nfRadio.channel( 'notices' ).request( 'add', 'previewUpdate', 'Preview Updated'	);
+					}
 				} catch( exception ) {
 					console.log( 'Something went wrong!' );
 					console.log( response );

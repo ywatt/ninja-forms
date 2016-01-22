@@ -55,6 +55,12 @@ define( [], function() {
 			nfRadio.channel( 'app' ).request( 'update:setting', 'loading', false );
 			nfRadio.channel( 'app' ).trigger( 'change:loading' );
 
+			// If we're on mobile, show a notice that we're publishing
+			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+				nfRadio.channel( 'notices' ).request( 'close', 'publishing' );
+			}
+			// Add a notice that we've published.
+			nfRadio.channel( 'notices' ).request( 'add', 'published', 'Changes Published' );	
 			// Mark our app as clean. This will disable the publish button and fire anything else that cares about the state.
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );
 		}

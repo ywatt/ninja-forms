@@ -4,7 +4,7 @@
     <div id="nf-overlay"></div>
     <div id="nf-header"></div>
     <div id="nf-main" class="nf-app-main"></div>
-    <!-- <div id="nf-menu-drawer"></div> -->
+    <div id="nf-menu-drawer"></div>
     <div id="nf-drawer"></div>
     <span class="merge-tags-content" style="display:none;"></span>
 </script>
@@ -34,13 +34,17 @@
 <script id="nf-tmpl-app-header" type="text/template">
     <div id="nf-logo"></div>
     <ul class="nf-app-menu"></ul>
-    <a class="nf-mobile" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
+    <span class="nf-mobile-menu-button"></span>
     <span class="nf-app-buttons"></span>
 </script>
 
 <script id="nf-tmpl-app-header-action-button" type="text/template">
     <%= renderPublish() %>
     <%= maybeRenderCancel() %>
+</script>
+
+<script id="nf-tmpl-mobile-menu-button" type="text/template">
+    <a class="nf-button nf-mobile-menu <%= maybeDisabled() %>" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
 </script>
 
 <script id="nf-tmpl-app-header-publish-button" type="text/template">
@@ -136,16 +140,15 @@
     <div class="<%= renderClasses() %>"><span><%= nicename %></span></div>
 </script>
 
-<script id="nf-tmpl-menu-drawer" type="text/template">
-    <ul>
-        <li class="nf-publish">Publish</li>
+<script id="nf-tmpl-mobile-menu" type="text/template">
+    <ul class="primary">
+        <li class="nf-publish <%= maybeDisabled() %>">Publish</li>
     </ul>
-    <ul>
-        <li><a href="#" tabindex="-1"><span class="dashicons dashicons-menu"></span>Form Fields</a></li>
-        <li><a href="http://three.ninjaforms.com/wp-admin/admin.php?page=edit-action" tabindex="-1"><span class="dashicons dashicons-external"></span>Emails & Actions</a></li>
-        <li><a href="#" tabindex="-1"><span class="dashicons dashicons-admin-generic"></span>Settings</a></li>
-        <li><a href="#" tabindex="-1"><span class="dashicons dashicons-visibility"></span>Preview</a></li>
-    </ul>
+    <ul class="secondary"></ul>
+</script>
+
+<script id="nf-tmpl-mobile-menu-item" type="text/template">
+    <li><a href="<%= renderUrl() %>" tabindex="-1" target="<%= renderTarget() %>" <%= renderDisabled() %> ><%= renderDashicons() %><%= nicename %></a></li>
 </script>
 
 <script id="nf-tmpl-drawer" type="text/template">
@@ -154,6 +157,7 @@
     <a class="nf-toggle-drawer">
         <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
     </a>
+    <span id="nf-drawer-footer"></span>
 </script>
 
 <script id="nf-tmpl-drawer-content-add-field" type="text/template">
@@ -204,7 +208,7 @@
 
 <script id="nf-tmpl-drawer-content-edit-settings" type="text/template">
     <%= maybeRenderTitle() %>
- 
+
     <span class="nf-settings-groups"></span>
 </script>
 
@@ -303,7 +307,7 @@
 </script>
 
 <script id="nf-tmpl-app-menu-item" type="text/template">
-    <li><a href="<%= renderUrl() %>" class="<%= renderClasses() %>" target="<%= renderTarget() %>" <%= renderDisabled() %>><%= nicename %><%= renderDashicons() %></a></li>
+    <li><a href="<%= renderUrl() %>" class="<%= renderClasses() %>" target="<%= renderTarget() %>" <%= renderDisabled() %>><span class="app-menu-text"><%= nicename %></span><%= renderDashicons() %></a></li>
 </script>
 
 <script id="nf-tmpl-staged-fields-drag" type="text/template">
@@ -316,10 +320,6 @@
 
 <script id="nf-tmpl-drawer-staged-fields-empty" type="text/template">
     <span></span>
-</script>
-
-<script id="nf-tmpl-drawer-content-empty" type="text/template">
-
 </script>
 
 <script id="nf-tmpl-empty" type="text/template">
@@ -372,7 +372,7 @@
     <label class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %></label>
         <div id="<%= name %>" class="setting"><%= value %></div>
         <%= renderMergeTags() %>
-    
+
 </script>
 
 <script id="nf-tmpl-edit-setting-select" type="text/template">
@@ -441,7 +441,7 @@
     </div>
     <%
         var columns = getColumns();
-        
+
         if ( 'undefined' != columns.label ) {
             %>
              <div>

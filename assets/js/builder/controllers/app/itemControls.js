@@ -99,6 +99,7 @@ define( [], function() {
 			newModel.set( 'id', tmpID );
 			// Add new model.
 			nfRadio.channel( currentDomainID ).request( 'add', newModel );
+			
 			// Add our action addition to our change log.
 			var label = {
 				object: model.get( 'objectType' ),
@@ -113,6 +114,8 @@ define( [], function() {
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'duplicateObject', newModel, null, label, data );
 			
+			model.trigger( 'change:label', model );
+
 			// Update preview.
 			nfRadio.channel( 'app' ).request( 'update:db' );
 		}

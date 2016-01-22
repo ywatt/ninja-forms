@@ -39,6 +39,8 @@ define(
 		'controllers/app/confirmPublish',
 		'controllers/app/rte',
 		'controllers/app/changeMenu',
+		'controllers/app/mobile',
+		'controllers/app/notices',
 		/*
 		 * Fields domain controllers
 		 */
@@ -59,6 +61,8 @@ define(
 		'controllers/fields/fieldQuantity',
 		'controllers/fields/fieldShipping',
 		'controllers/fields/key',
+		'controllers/fields/notices',
+		'controllers/fields/mobile',
 
 		/*
 		 * TODO: Actions domain controllers
@@ -114,6 +118,8 @@ define(
 		ConfirmPublish,
 		RTE,
 		ChangeMenu,
+		AppMobile,
+		AppNotices,
 		/*
 		 * Fields domain controllers
 		 */
@@ -134,6 +140,8 @@ define(
 		FieldQuantity,
 		FieldShipping,
 		FieldKey,
+		Notices,
+		FieldsMobile,
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -180,6 +188,8 @@ define(
 				new ConfirmPublish();
 				new RTE();
 				new ChangeMenu();
+				new AppMobile();
+				new AppNotices();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
@@ -208,6 +218,8 @@ define(
 				new FieldQuantity();
 				new FieldShipping();
 				new FieldKey();
+				new Notices();
+				new FieldsMobile();
 				/*
 				 * TODO: Actions domain controllers
 				 */

@@ -1,58 +1,43 @@
-@media only screen and (max-width: 1255px) {
-    .nf-cancel {
-        display: none;
-    }
-    #nf-app-sub-header {
-        h2 {
-            padding-left: 80px;
-            transition: all 1.0s ease 0s
-        }
-    }
-    // .nf-add-new.nf-open-drawer {
-    //     padding-left: 32px;
-    //     text-indent: -500px;
-    //     width:60px;
-    //     height:60px;
-    //     top: 70px;
-    //     left: 43px;
-    //     transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;
-    //     &:after {
-    //         //box-shadow: 0 3px 3px rgba(0,0,0,0.3);
-    //         font-size: 40px;
-    //         padding: 16px;
-    //         line-height: 21px;
-    //         width:24px;
-    //         height:24px;
-    //         text-indent: 0px;
-    //         transition: all 1.0s ease 0s
-    //     }
-    //     &:hover {
-    //         &:after {
-    //             //box-shadow: 0 -3px 3px rgba(0,0,0,0.3);
-    //         }
-    //     }
-    // }
 
-    .folded {
-    }
-
+@-webkit-keyframes color_change {
+    from { background-color: $cta_color; color: #fff }
+    to { background-color: #3B454D; color: #A2A5A8 }
 }
-
-@media only screen and (max-width: 1132px) {
-    #nf-header {
+@-moz-keyframes color_change {
+    from { background-color: $cta_color; color: #fff }
+    to { background-color: #3B454D; color: #A2A5A8 }
+}
+@-ms-keyframes color_change {
+    from { background-color: $cta_color; color: #fff }
+    to { background-color: #3B454D; color: #A2A5A8 }
+}
+@-o-keyframes color_change {
+    from { background-color: $cta_color; color: #fff }
+    to { background-color: #3B454D; color: #A2A5A8 }
+}
+@keyframes color_change {
+    from { background-color: $cta_color; color: #fff }
+    to { background-color: #3B454D; color: #A2A5A8 }
+}
+.nf-item.clicked {
+    //background: #1EA9EA;
+    animation-name: color_change;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+}
+@media only screen and (max-width: 1065px) {
+    .nf-app-menu {
         .preview {
-            content: "Preview";
+            .app-menu-text {
+                text-indent: -9999px;
+                display: inline-block;
+                width: 0;
+            }
         }
     }
-    #nf-main-content,
-    #nf-main-header {
-        //margin: 0 10% 0 30%;
-    }
-    .nf-cancel {
-        display: none;
-    }
 }
-@media only screen and (max-width: 1030px) {
+@media only screen and (max-width: 900px) {
     #nf-header {
         ul {
             display: none;
@@ -61,7 +46,8 @@
             display: none;
         }
     }
-    .nf-mobile {
+
+    .nf-mobile-menu {
         display: inline-block;
     }
     #nf-app-sub-header {
@@ -70,14 +56,33 @@
             transition: all 1.0s ease 0s
         }
     }
+
     .nf-add-new.nf-open-drawer {
         position: fixed;
+        text-indent: -9999px;
+        height: 54px;
+        width: 54px;
         top: auto;
         left: auto;
         bottom: 20px;
         right: 20px;
-        transition: width 1.0s ease 0s,height 1.0s ease 0s, text-indent 1.0s ease,bottom 1.0s ease,right 1.0s ease;
+        &:after {
+            background: $accent_color;
+            border: 2px solid $accent_color;
+            border-radius: 40px;
+            color: #fff;
+            content: "+";
+            font-size: 50px;
+            padding: 8px;
+            position: absolute;
+            left: 0;
+            width: 28px;
+            height: 28px;
+            line-height: 24px;
+            text-indent: 0px;
+        }
     }
+
     #nf-main-header {
         .nf-button {
             display: none;
@@ -86,6 +91,7 @@
     .nf-item-controls {
         li {
             margin: -4px 15px 0;
+            height: 26px;
             a {
                 width: 30px;
                 height: 30px;
@@ -119,6 +125,9 @@
                         left: 20px;
                     }
                 }
+            }
+            &.nf-item-delete {
+                margin-top: -4px;
             }
             &.nf-item-expand {
                 display: none;
@@ -219,6 +228,10 @@
             }
         }
     }
+    .nf-drawer-opened .nf-toggle-drawer {
+        display: none;
+    }
+
 }
 
 @media only screen and (max-width: 782px) {
@@ -238,6 +251,38 @@
     #nf-drawer {
         padding: 20px;
     }
+
+
+    #nf-main-content {
+        width: 100%;
+        max-width: 100%;
+    }
+    #nf-main {
+        border: 0;
+    }
+    .nf-field-wrap {
+        border: 0;
+        border-top: 8px solid #f1f1f1;
+        border-radius: 0;
+        margin: 0;
+        padding: 20px;
+        &:first-child {
+            border-top: 8px solid #fff;
+        }
+    }
+    .nf-fields-sortable-placeholder { margin-top: 0; margin-bottom: 0; border: 4px solid #84CC1E }
+    .nf-fields-sortable-placeholder + .nf-field-wrap {
+        border: 0;
+    }
+    .nf-fields-sortable {
+        border: 0;
+        padding: 0;
+    }
+    .nf-field-wrap.ui-sortable-helper {
+        background: transparent;
+        border: 2px solid $accent_color;
+    }
+
 }
 @media only screen and (max-width: 660px) {
 
@@ -247,16 +292,16 @@
     .nf-one-half, .nf-one-third {
         width: 100%;
     }
-    .nf-field-wrap {
-        border: 0;
-        border-bottom: 1px solid #ccc;
-        border-radius: 0;
-        margin: 0;
-        padding: 20px;
-        &:first-child {
-            border-top: 1px solid #ccc;
-        }
-    }
+    // .nf-field-wrap {
+    //     border: 0;
+    //     border-bottom: 1px solid #ccc;
+    //     border-radius: 0;
+    //     margin: 0;
+    //     padding: 20px;
+    //     &:first-child {
+    //         border-top: 1px solid #ccc;
+    //     }
+    // }
     .nf-actions-table {
         td:nth-child(3),th:nth-child(3) {
             display: none;

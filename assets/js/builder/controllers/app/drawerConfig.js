@@ -27,7 +27,8 @@ define( [
 		viewChangesView,
 		viewChangesHeaderView,
 		newFormView,
-		newFormHeaderView
+		newFormHeaderView,
+		mobileItemControlsView
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {

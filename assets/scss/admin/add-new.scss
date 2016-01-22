@@ -9,7 +9,6 @@
     z-index: 98;
     text-indent: 0px;
     overflow: hidden;
-    transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;
     &:after {
         background: $accent_color;
         border: 2px solid $accent_color;

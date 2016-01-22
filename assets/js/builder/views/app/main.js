@@ -17,9 +17,11 @@ define( [], function() {
 		},
 
 		onShow: function() {
-			jQuery( this.el ).parent().perfectScrollbar();
+			if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+				jQuery( this.el ).parent().perfectScrollbar();
+				jQuery( this.el ).parent().disableSelection();
+			}
 			nfRadio.channel( 'main' ).trigger( 'show:main' );
-			jQuery( this.el ).parent().disableSelection();
 		},
 
 		onRender: function() {

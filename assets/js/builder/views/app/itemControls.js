@@ -32,11 +32,18 @@ define( [], function() {
 
 		events: {
 			'click .nf-edit-settings': 'clickEdit',
+			'singletap .nf-edit-settings': 'singleTapEdit',
 			'click .nf-delete': 'clickDelete',
 			'click .nf-duplicate': 'clickDuplicateField'
 		},
 
 		clickEdit: function( e ) {
+			if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+				nfRadio.channel( 'app' ).trigger( 'click:edit', e, this.model );
+			}
+		},
+
+		singleTapEdit: function( e ) {
 			nfRadio.channel( 'app' ).trigger( 'click:edit', e, this.model );
 		},
 
@@ -47,7 +54,6 @@ define( [], function() {
 		clickDuplicateField: function( e ) {
 			nfRadio.channel( 'app' ).trigger( 'click:duplicate', e, this.model );
 		}
-
 	});
 
 	return view;
