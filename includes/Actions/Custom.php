@@ -43,7 +43,7 @@ final class NF_Actions_Custom extends NF_Abstracts_Action
     * PUBLIC METHODS
     */
 
-    public function save()
+    public function save( $action_settings )
     {
 
     }

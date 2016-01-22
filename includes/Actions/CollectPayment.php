@@ -48,7 +48,7 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
         add_filter( 'ninja_forms_action_type_settings', array( $this, 'maybe_remove_action' ) );
     }
 
-    public function save()
+    public function save( $action_settings )
     {
 
     }
