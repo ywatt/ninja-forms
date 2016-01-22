@@ -35,7 +35,6 @@ define( ['views/app/drawer/contentEmpty'], function( drawerEmptyView ) {
 			var contentView = drawer.get( 'getContentView' ).call( drawer, data );
 			var headerView = drawer.get( 'getHeaderView' ).call( drawer, data );
 			var footerView = drawer.get( 'getFooterView' ).call( drawer, data );
-			console.log( drawer.get( 'getFooterView' ) );
 
 			this.header.show( headerView );
 			this.content.show( contentView );
