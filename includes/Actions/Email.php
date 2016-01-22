@@ -43,11 +43,6 @@ final class NF_Actions_Email extends NF_Abstracts_Action
     * PUBLIC METHODS
     */
 
-    public function save()
-    {
-
-    }
-
     public function process( $action_settings, $form_id, $data )
     {
         wp_mail(

@@ -92,7 +92,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
     public static function import( array $import )
     {
-        $import = apply_filters( 'nf_before_import_form', $import );
+        $import = apply_filters( 'ninja_forms_before_import_form', $import );
 
         /*
         * Create Form
@@ -196,14 +196,14 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         } else {
 
             $today = date( $date_format, current_time( 'timestamp' ) );
-            $filename = apply_filters( 'nf_form_export_filename', 'nf_form_' . $today );
+            $filename = apply_filters( 'ninja_forms_form_export_filename', 'nf_form_' . $today );
             $filename = $filename . ".nff";
 
             header( 'Content-type: application/nff');
             header( 'Content-Disposition: attachment; filename="'.$filename .'"' );
             header( 'Pragma: no-cache');
             header( 'Expires: 0' );
-            echo apply_filters( 'nf_form_export_bom',"\xEF\xBB\xBF" ) ; // Byte Order Mark
+            echo apply_filters( 'ninja_forms_form_export_bom',"\xEF\xBB\xBF" ) ; // Byte Order Mark
             echo base64_encode( maybe_serialize( $export ) );
 
             die();

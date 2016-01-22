@@ -79,7 +79,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
 
         $fields = Ninja_Forms()->form( $form_id )->get_fields();
 
-        $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
+        $hidden_field_types = apply_filters( 'ninja_forms_sub_hidden_field_types', array() );
 
         foreach( $fields as $field ){
 
@@ -148,7 +148,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         foreach( $forms as $form ){
             $form_options[ $form->get_id() ] = $form->get_setting( 'title' );
         }
-        $form_options = apply_filters( 'nf_submission_filter_form_options', $form_options );
+        $form_options = apply_filters( 'ninja_forms_submission_filter_form_options', $form_options );
 
         if( isset( $_GET[ 'form_id' ] ) ) {
             $form_selected = $_GET[ 'form_id' ];
@@ -188,7 +188,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
 
         $vars = $this->table_filter_by_date( $vars );
 
-        $vars = apply_filters( 'nf_sub_table_qv', $vars, $form_id );
+        $vars = apply_filters( 'ninja_forms_sub_table_qv', $vars, $form_id );
     }
 
     public function search( $pieces ) {
@@ -314,7 +314,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
 
             $today = date('Y-m-d', current_time('timestamp'));
 
-            $filename = apply_filters('nf_download_all_filename', $form_name . '-all-subs-' . $today);
+            $filename = apply_filters('ninja_forms_download_all_filename', $form_name . '-all-subs-' . $today);
 
             header('Content-type: application/csv');
             header('Content-Disposition: attachment; filename="' . $filename . '.csv"');

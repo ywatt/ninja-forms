@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return apply_filters( 'ninja-forms-config-country-list', array(
+return apply_filters( 'ninja_forms_config_country_list', array(
 
     /**
      * Country List

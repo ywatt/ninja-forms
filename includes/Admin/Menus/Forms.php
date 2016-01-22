@@ -303,7 +303,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         $form_settings[ 'display' ] = Ninja_Forms::config( 'FormDisplaySettings' );
         $form_settings[ 'restrictions' ] = Ninja_Forms::config( 'FormRestrictionSettings' );
         $form_settings[ 'calculations' ] = Ninja_Forms::config( 'FormCalculationSettings' );
-        $form_settings = apply_filters( 'ninja-forms-localize-forms-settings', $form_settings );
+        $form_settings = apply_filters( 'ninja_forms_localize_forms_settings', $form_settings );
 
         $groups = Ninja_Forms::config( 'SettingsGroups' );
 
@@ -372,7 +372,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         unset( $groups[ "" ] );
 
-        usort($groups, "self::setting_group_priority");
+        usort($groups, array( $this, 'setting_group_priority' ) );
 
         return $groups;
     }
@@ -428,7 +428,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         return $actions;
     }
 
-    protected static function setting_group_priority( $a, $b )
+    protected function setting_group_priority( $a, $b )
     {
         $priority[ 0 ] = ( $a[ 'priority' ] ) ? $a[ 'priority' ] : 500;
         $priority[ 1 ] = ( $b[ 'priority' ] ) ? $b[ 'priority' ] : 500;

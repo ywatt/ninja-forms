@@ -168,7 +168,7 @@ class NF_AJAX_Controllers_Builder extends NF_Abstracts_Controller
 
         $form_settings[ 'display' ] = Ninja_Forms::config( 'FormDisplaySettings' );
         $form_settings[ 'restrictions' ] = Ninja_Forms::config( 'FormRestrictionSettings' );
-        $form_settings = apply_filters( 'ninja-forms-localize-forms-settings', $form_settings );
+        $form_settings = apply_filters( 'ninja_forms_localize_forms_settings', $form_settings );
 
         $groups = Ninja_Forms::config( 'SettingsGroups' );
 

@@ -37,7 +37,8 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 		 * @param string type Type of field we're adding
 		 * @return tmpID
 		 */
-		addStagedField: function( type ) {
+		addStagedField: function( type, silent ) {
+			var silent = silent || false;
 			// Get our type model from the string.
 			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', type );
 			// Our tmp ID is a string with the time appended to make it unique.
@@ -53,7 +54,7 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 			// 
 			var model = this.collection.add( data );
 
-			nfRadio.channel( 'fields').trigger( 'add:stagedField', model );
+			if( ! silent ) nfRadio.channel( 'fields').trigger( 'add:stagedField', model );
 
 			return tmpID;
 		},

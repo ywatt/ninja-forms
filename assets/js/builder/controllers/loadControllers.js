@@ -56,6 +56,7 @@ define(
 		'controllers/fields/editActive',
 		'controllers/fields/fieldSettings',
 		'controllers/fields/fieldCreditCard',
+		'controllers/fields/fieldPassword',
 		'controllers/fields/fieldQuantity',
 		'controllers/fields/fieldShipping',
 		'controllers/fields/key',
@@ -133,6 +134,7 @@ define(
 		FieldsEditActive,
 		FieldSettings,
 		FieldCreditCard,
+		FieldPassword,
 		FieldQuantity,
 		FieldShipping,
 		FieldKey,
@@ -209,6 +211,7 @@ define(
 				new FieldsEditActive();
 				new FieldSettings();
 				new FieldCreditCard();
+				new FieldPassword;
 				new FieldQuantity();
 				new FieldShipping();
 				new FieldKey();

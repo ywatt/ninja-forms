@@ -17,6 +17,9 @@ define(['models/fieldErrorModel'], function( fieldErrorModel ) {
 
 		removeError: function( targetID, id ) {
 			var model = nfRadio.channel( 'fields' ).request( 'get:field', targetID );
+
+			if( 'undefined' == typeof model ) return;
+
 			var errors = model.get( 'errors' );
 			var targetError = errors.get( id );
 			if ( 'undefined' != targetError ) {

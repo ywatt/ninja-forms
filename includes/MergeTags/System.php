@@ -33,7 +33,7 @@ final class NF_MergeTags_System extends NF_Abstracts_MergeTags
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
-        return apply_filters( 'nf_get_ip', $ip );
+        return apply_filters( 'ninja_forms-get_ip', apply_filters( 'nf_get_ip', $ip ) );
     }
 
 } // END CLASS NF_MergeTags_System
