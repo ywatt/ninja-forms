@@ -143,12 +143,10 @@ Header and Nav for Ninja Forms App
 #nf-main-header {
   margin: 0 auto;
   max-width: 700px;
-  -webkit-transition: all 1.0s ease;
-  transition: all 1.0s ease;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
 
 #nf-main-header {
   padding: 0 0 20px; }
@@ -414,9 +412,10 @@ All styles used within the drawer
   -webkit-transition: all 0.50s ease;
   transition: all 0.50s ease; }
 
-.nf-drawer-opened #nf-app-sub-header .nf-add-new {
-  top: 95px !important;
-  text-indent: -99999px; }
+@media only screen and (min-width: 901px) {
+  .nf-drawer-opened #nf-app-sub-header .nf-add-new {
+    top: 95px !important;
+    text-indent: -99999px; } }
 
 .nf-drawer-opened .nf-setting-wrap {
   width: 50%;
@@ -912,9 +911,7 @@ Various custom field styles
   height: 32px;
   z-index: 98;
   text-indent: 0px;
-  overflow: hidden;
-  -webkit-transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease;
-  transition: width 1.0s ease 0s,height 1.0s ease 0s,text-indent 1.0s ease,top 1.0s ease,left 1.0s ease; }
+  overflow: hidden; }
   .nf-add-new:after {
     background: #84CC1E;
     border: 2px solid #84CC1E;
@@ -1885,9 +1882,7 @@ All styles used for displaying table content
       width: 28px;
       height: 28px;
       line-height: 24px;
-      text-indent: 0px;
-      -webkit-transition: all 0.5s ease 0s;
-      transition: all 0.5s ease 0s; }
+      text-indent: 0px; }
   #nf-main-header .nf-button {
     display: none; }
   .nf-item-controls li {
