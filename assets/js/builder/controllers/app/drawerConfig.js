@@ -17,7 +17,8 @@ define( [
 	'views/app/drawer/contentViewChanges',
 	'views/app/drawer/headerViewChanges',
 	'views/app/drawer/contentNewForm',
-	'views/app/drawer/headerNewForm'
+	'views/app/drawer/headerNewForm',
+	'views/app/drawer/mobileItemControls'
 	], function(
 		drawerCollection,
 		addFieldView,
@@ -27,7 +28,8 @@ define( [
 		viewChangesView,
 		viewChangesHeaderView,
 		newFormView,
-		newFormHeaderView
+		newFormHeaderView,
+		mobileItemControlsView
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
@@ -52,6 +54,10 @@ define( [
 
 					getContentView: function( data ) {
 						return new editSettingsView( data );
+					},
+
+					getFooterView: function( data ) {
+						return new mobileItemControlsView( data );
 					}
 				},
 				{

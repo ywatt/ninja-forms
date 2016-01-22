@@ -157,6 +157,7 @@
     <a class="nf-toggle-drawer">
         <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
     </a>
+    <span id="nf-drawer-footer"></span>
 </script>
 
 <script id="nf-tmpl-drawer-content-add-field" type="text/template">
@@ -319,6 +320,13 @@
 
 <script id="nf-tmpl-drawer-staged-fields-empty" type="text/template">
     <span></span>
+</script>
+
+<script id="nf-tmpl-drawer-footer-edit-settings" type="text/template">
+    <ul class="nf-drawer-buttons">
+        <li class="nf-drawer-delete"><span class="dashicons dashicons-dismiss"></span>Delete</li>
+        <li class="nf-drawer-duplicate"><span class="dashicons dashicons-admin-page"></span>Duplicate</li>
+    </ul>
 </script>
 
 <script id="nf-tmpl-drawer-content-empty" type="text/template">
