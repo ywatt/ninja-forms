@@ -145,7 +145,12 @@ define( [], function() {
 
 			if ( 'publish' == action ) {
 				nfRadio.channel( 'app' ).request( 'update:setting', 'loading', true );
-				nfRadio.channel( 'app' ).trigger( 'change:loading' );				
+				nfRadio.channel( 'app' ).trigger( 'change:loading' );	
+
+				// If we're on mobile, show a notice that we're publishing
+				if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+					nfRadio.channel( 'notices' ).request( 'add', 'publishing', 'Your Form Is Being Published', { autoClose: false } );
+				}
 			}
 
 			// Update

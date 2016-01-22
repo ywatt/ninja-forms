@@ -13,53 +13,7 @@ define( [], function() {
 		},
 
 		addStagedField: function( model ) {
-			/*
-			 * If we're using a mobile browser, set specific notice settings.
-			 */
-			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-				var position = {
-					x: 'center',
-					y: 'top'
-				}
-				var attributes = {};
-				var animation = {
-					open:'slide:top',
-					close:'move:left'
-				}
-				var autoClose = 2000;
-				var offset = {
-					x: 0,
-					y: 55
-				}
-			} else {
-				var position = {};
-				var attributes = {
-					x: 'left',
-					y: 'bottom'
-				}
-				var animation = {
-					open:'slide:bottom',
-					close:'move:left'
-				}
-				var autoClose = 3000;
-				var offset = {
-					x: 0,
-					y: 0
-				}
-			}
-
-			new jBox( 'Notice', {
-				animation: animation,
-				theme: 'NoticeBorder',
-				position: position,
-				attributes: attributes,
-				offset: offset,
-				autoClose: autoClose,
-				content: model.get( 'nicename' ) + ' added to staging',
-				color: 'green',
-				zIndex:12000
-			} );
-			
+			nfRadio.channel( 'notices' ).request( 'add', 'addStagedField', model.get( 'nicename' ) + ' added to staging' );
 		}
 	});
 

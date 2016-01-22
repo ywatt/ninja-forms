@@ -40,6 +40,7 @@ define(
 		'controllers/app/rte',
 		'controllers/app/changeMenu',
 		'controllers/app/mobile',
+		'controllers/app/notices',
 		/*
 		 * Fields domain controllers
 		 */
@@ -118,6 +119,7 @@ define(
 		RTE,
 		ChangeMenu,
 		AppMobile,
+		AppNotices,
 		/*
 		 * Fields domain controllers
 		 */
@@ -187,6 +189,7 @@ define(
 				new RTE();
 				new ChangeMenu();
 				new AppMobile();
+				new AppNotices();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
