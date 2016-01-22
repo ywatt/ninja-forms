@@ -280,10 +280,6 @@
             <input type="search" class="nf-filter" value="" placeholder="Filter" tabindex="-1" />
         </div>
         <a href="#" class="nf-button primary nf-close-drawer <%= renderDisabled() %>" tabindex="-1">Done</a>
-        <ul class="nf-drawer-buttons">
-            <li class="nf-drawer-delete"><span class="dashicons dashicons-dismiss"></span>Delete</li>
-            <li class="nf-drawer-duplicate"><span class="dashicons dashicons-admin-page"></span>Duplicate</li>
-        </ul>
     </header>
 </script>
 
