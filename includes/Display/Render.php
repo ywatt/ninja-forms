@@ -118,6 +118,8 @@ final class NF_Display_Render
                 if (isset($settings['default'])) {
                     $default_value = apply_filters('ninja_forms_render_default_value', $settings['default'], $field_class, $settings);
 
+                    $default_value = preg_replace( '/{.*}/', '', $default_value );
+
                     if ($default_value) {
                         $settings['value'] = $default_value;
 
