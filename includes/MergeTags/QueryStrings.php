@@ -13,8 +13,7 @@ final class NF_MergeTags_QueryStrings extends NF_Abstracts_MergeTags
         $this->title = __( 'Query Strings', 'ninja-forms' );
 
         $this->merge_tags = array(
-            'querystringexample' => array(
-                'id' => 'querystringexample',
+            '' => array(
                 'tag' => '{query_string_key}',
                 'label' => __( 'Query String', 'ninja_forms' ),
             ),
