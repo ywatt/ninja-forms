@@ -19,7 +19,9 @@ define( [], function() {
 			var appDefaults = {
 				content: msg,
 				color: 'green',
-				zIndex:12000
+				zIndex:12000,
+				constructOnInit: true,
+				stack: false
 			};
 
 			var mobileDefaults = {
@@ -29,7 +31,7 @@ define( [], function() {
 				},
 				animation: {
 					open:'slide:top',
-					close:'move:left'
+					close:'slide:left'
 				},
 				autoClose: 2000,
 				offset: {
@@ -46,7 +48,7 @@ define( [], function() {
 				},
 				animation: {
 					open:'slide:bottom',
-					close:'move:left'
+					close:'slide:left'
 				},
 				autoClose: 3000,
 				offset: {

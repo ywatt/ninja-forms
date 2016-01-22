@@ -145,10 +145,10 @@ define( [], function() {
 				var before = changeModel.before;
 				var fieldModel = changeModel.model;
 				fieldModel.set( 'order', before );
-				console.log( 'set ' + fieldModel.get( 'label' ) + ' to ' + before );
+				// console.log( 'set ' + fieldModel.get( 'label' ) + ' to ' + before );
 			} );
-			console.log( fieldCollection.where( { label: 'Name' } ) );
-			console.log( fieldCollection.where( { label: 'Email' } ) );
+			// console.log( fieldCollection.where( { label: 'Name' } ) );
+			// console.log( fieldCollection.where( { label: 'Email' } ) );
 
 
 			fieldCollection.sort();

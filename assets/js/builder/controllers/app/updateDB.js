@@ -149,7 +149,7 @@ define( [], function() {
 
 				// If we're on mobile, show a notice that we're publishing
 				if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-					nfRadio.channel( 'notices' ).request( 'add', 'publishing', 'Your Form Is Being Published', { autoClose: false } );
+					nfRadio.channel( 'notices' ).request( 'add', 'publishing', 'Your Changes Are Being Published', { autoClose: false } );
 				}
 			}
 
@@ -160,6 +160,25 @@ define( [], function() {
 					response.action = action;
 					// Run anything that needs to happen after we update.
 					nfRadio.channel( 'app' ).trigger( 'response:updateDB', response );
+					/*
+					 * TODO: Move this to a different controller specifically for preview stuff.
+					 */
+					if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+						nfRadio.channel( 'notices' ).request( 'add', 'previewUpdated', 'Forms Preview Updated', { 
+							position: {
+								x: 'right',
+								y: 'top'
+							},
+							animation: {
+								open: 'slide:right',
+								close: 'slide:right'
+							},
+							offset: {
+								x: -40,
+								y: 120
+							}
+						} );
+					}
 				} catch( exception ) {
 					console.log( 'Something went wrong!' );
 					console.log( response );

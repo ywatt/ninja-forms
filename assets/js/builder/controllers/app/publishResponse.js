@@ -57,10 +57,26 @@ define( [], function() {
 
 			// If we're on mobile, show a notice that we're publishing
 			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-				nfRadio.channel( 'notices' ).request( 'close', 'publishing' );		
+				nfRadio.channel( 'notices' ).request( 'close', 'publishing' );
+				var options = {}		
+			} else {
+				var options = {
+					position: {
+						x: 'right',
+						y: 'top'
+					},
+					animation: {
+						open: 'slide:right',
+						close: 'slide:right'
+					},
+					offset: {
+						x: -40,
+						y: 120
+					}
+				}
 			}
 			// Add a notice that we've published.
-			nfRadio.channel( 'notices' ).request( 'add', 'published', 'Form Published' );	
+			nfRadio.channel( 'notices' ).request( 'add', 'published', 'Changes Published', options );	
 			// Mark our app as clean. This will disable the publish button and fire anything else that cares about the state.
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );
 		}
