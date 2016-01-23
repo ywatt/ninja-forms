@@ -158,9 +158,9 @@ final class NF_Actions_Email extends NF_Abstracts_Action
         }
 
         $csv_content = WPN_Helper::str_putcsv( $csv_array,
-            apply_filters( 'nf_sub_csv_delimiter', ',' ),
-            apply_filters( 'nf_sub_csv_enclosure', '"' ),
-            apply_filters( 'nf_sub_csv_terminator', "\n" )
+            apply_filters( 'ninja_forms_sub_csv_delimiter', ',' ),
+            apply_filters( 'ninja_forms_sub_csv_enclosure', '"' ),
+            apply_filters( 'ninja_forms_sub_csv_terminator', "\n" )
         );
 
         $upload_dir = wp_upload_dir();
@@ -198,12 +198,29 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
     private function _backwards_compatibility()
     {
-        add_filter( 'ninja_forms_action_email_attachments', array( $this, 'ninja_forms_action_email_attachments'), 10, 3 );
+        add_filter( 'ninja_forms_sub_csv_delimiter',        array( $this, 'ninja_forms_sub_csv_delimiter'        ), 10, 1 );
+        add_filter( 'ninja_sub_csv_enclosure',              array( $this, 'ninja_sub_csv_enclosure'              ), 10, 1 );
+        add_filter( 'ninja_sub_csv_terminator',             array( $this, 'ninja_sub_csv_terminator'             ), 10, 1 );
+        add_filter( 'ninja_forms_action_email_attachments', array( $this, 'ninja_forms_action_email_attachments' ), 10, 3 );
+    }
+
+    public function ninja_forms_sub_csv_delimiter( $delimiter )
+    {
+        return apply_filters( 'nf_sub_csv_delimiter', $delimiter );
+    }
+
+    public function ninja_sub_csv_enclosure( $enclosure )
+    {
+        return apply_filters( 'nf_sub_csv_enclosure', $enclosure );
+    }
+
+    public function ninja_sub_csv_terminator( $terminator )
+    {
+        return apply_filters( 'nf_sub_csv_terminator', $terminator );
     }
 
     public function ninja_forms_action_email_attachments( $attachments, $action_key, $action_id )
     {
         return apply_filters( 'nf_email_notification_attachments', $attachments, $action_id );
     }
-
 }
