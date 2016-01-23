@@ -130,7 +130,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'removeListOption', newModel, null, label, data );
 			
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 			var results = changeCollection.where( { model: model } );
 
 			_.each( results, function( changeModel ) {

@@ -53,7 +53,7 @@ define( [], function() {
 			delete collection.newIDs[ objectModel.get( 'id' ) ];
 			
 			if ( ! undoAll ) {
-				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 				var results = changeCollection.where( { model: objectModel } );
 
 				_.each( results, function( model ) {
@@ -81,7 +81,7 @@ define( [], function() {
 			var objectCollection = change.get( 'data' ).collection;
 
 			if ( ! undoAll ) {
-				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 				var results = changeCollection.where( { model: objectModel } );
 
 				_.each( results, function( model ) {
@@ -112,7 +112,7 @@ define( [], function() {
 			delete collection.removedIDs[ dataModel.get( 'id' ) ];
 			
 			if ( ! undoAll ) {
-				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 				var results = changeCollection.where( { model: dataModel } );
 
 				_.each( results, function( model ) {
@@ -159,7 +159,7 @@ define( [], function() {
 			var model = change.get( 'model' );
 
 			if ( ! undoAll ) {
-				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 				var results = changeCollection.where( { model: model } );
 
 				_.each( results, function( changeModel ) {
@@ -179,7 +179,7 @@ define( [], function() {
 			collection.add( model );
 
 			if ( ! undoAll ) {
-				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 				var results = changeCollection.where( { model: model } );
 
 				_.each( results, function( model ) {
@@ -222,7 +222,7 @@ define( [], function() {
 			if ( ! undoAll ) {
 				// Update preview.
 				nfRadio.channel( 'app' ).request( 'update:db' );
-				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+				var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 				changeCollection.remove( change );
 				if ( 0 == changeCollection.length ) {
 					nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );

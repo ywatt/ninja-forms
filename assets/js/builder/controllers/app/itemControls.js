@@ -55,7 +55,7 @@ define( [], function() {
 				collection: dataModel.collection
 			};
 
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 			var results = changeCollection.where( { model: dataModel } );
 
 			_.each( results, function( changeModel ) {

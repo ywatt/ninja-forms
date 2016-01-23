@@ -20,7 +20,7 @@ define( [], function() {
 		},
 
 		viewChanges: function() {
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 			nfRadio.channel( 'app' ).request( 'open:drawer', 'viewChanges', { collection: changeCollection } );
 		}
 

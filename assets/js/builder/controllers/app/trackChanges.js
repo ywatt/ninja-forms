@@ -13,7 +13,7 @@ define( ['models/app/changeCollection', 'models/app/changeModel'], function( cha
 			// Respond to any requests to add a change directly.
 			nfRadio.channel( 'changes' ).reply( 'register:change', this.registerChange, this );
 			// Respond to requests for the change collection
-			nfRadio.channel( 'changes' ).reply( 'get:changeCollection', this.getCollection, this );
+			nfRadio.channel( 'changes' ).reply( 'get:collection', this.getCollection, this );
 			// Listen for changes in our clean state. If it goes to clean, clear our collection.
 			this.listenTo( nfRadio.channel( 'app' ), 'change:clean', this.maybeResetCollection );
 		},

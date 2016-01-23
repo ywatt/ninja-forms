@@ -6,7 +6,7 @@ define( [], function() {
 		},
 
 		undoChanges: function() {
-			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:changeCollection' );
+			var changeCollection = nfRadio.channel( 'changes' ).request( 'get:collection' );
 			changeCollection.sort();
 			var that = this;
 			_.each( changeCollection.models, function( change ) {
