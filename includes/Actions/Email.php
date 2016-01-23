@@ -49,10 +49,9 @@ final class NF_Actions_Email extends NF_Abstracts_Action
     {
         $headers = $this->_get_headers( $action_settings );
 
-        $attachments = array();
-//        $attachments = $this->_get_attachments( $action_settings, $data );
+        $attachments = $this->_get_attachments( $action_settings, $data );
 
-        wp_mail(
+        $sent = wp_mail(
             $action_settings['to'],
             $action_settings['subject'],
             $action_settings['message'],
@@ -60,8 +59,10 @@ final class NF_Actions_Email extends NF_Abstracts_Action
             $attachments
         );
 
+        $data[ 'actions' ][ 'email' ][ 'to' ] = $action_settings['to'];
+        $data[ 'actions' ][ 'email' ][ 'sent' ] = $sent;
         $data[ 'actions' ][ 'email' ][ 'headers' ] = $headers;
-        $data[ 'actions' ][ 'email' ][ 'csv' ] = $this->_create_csv( $data[ 'fields' ] );
+        $data[ 'actions' ][ 'email' ][ 'attachments' ] = $attachments;
 
         return $data;
     }
@@ -84,9 +85,11 @@ final class NF_Actions_Email extends NF_Abstracts_Action
     {
         $attachments = array();
 
-//        if( $settings[ 'attach_csv' ] ){
-//            $attachments[] = $this->_create_csv( $settings, $data );
-//        }
+        if( $settings[ 'attach_csv' ] ){
+            $attachments[] = $this->_create_csv( $data[ 'fields' ] );
+        }
+
+        if( ! isset( $settings[ 'id' ] ) ) $settings[ 'id' ] = '';
 
         $attachments = apply_filters( 'ninja_forms_action_email_attachments', $attachments, $settings[ 'key' ], $settings[ 'id' ] );
 
@@ -121,6 +124,9 @@ final class NF_Actions_Email extends NF_Abstracts_Action
             $emails = explode( ',', $emails );
 
             foreach( $emails as $email ) {
+
+                if( ! $email ) continue;
+
                 $headers[] = $this->_format_recipient($type, $email);
             }
         }
@@ -144,15 +150,46 @@ final class NF_Actions_Email extends NF_Abstracts_Action
         $csv_array = array();
 
         foreach( $fields as $field ){
+
+            if( ! isset( $field[ 'label' ] ) ) continue;
+
             $csv_array[ 0 ][] = $field[ 'label' ];
             $csv_array[ 1 ][] = WPN_Helper::stripslashes( $field[ 'value' ] );
         }
 
-        return WPN_Helper::str_putcsv( $csv_array,
+        $csv_content = WPN_Helper::str_putcsv( $csv_array,
             apply_filters( 'nf_sub_csv_delimiter', ',' ),
             apply_filters( 'nf_sub_csv_enclosure', '"' ),
             apply_filters( 'nf_sub_csv_terminator', "\n" )
         );
+
+        $upload_dir = wp_upload_dir();
+        $path = trailingslashit( $upload_dir['path'] );
+
+        // create temporary file
+        $path = tempnam( $path, 'Sub' );
+        $temp_file = fopen( $path, 'r+' );
+
+        // write to temp file
+        fwrite( $temp_file, $csv_content );
+        fclose( $temp_file );
+
+        // find the directory we will be using for the final file
+        $path = pathinfo( $path );
+        $dir = $path['dirname'];
+        $basename = $path['basename'];
+
+        // create name for file
+        $new_name = apply_filters( 'ninja_forms_submission_csv_name', 'ninja-forms-submission' );
+
+        // remove a file if it already exists
+        if( file_exists( $dir.'/'.$new_name.'.csv' ) ) {
+            unlink( $dir.'/'.$new_name.'.csv' );
+        }
+
+        // move file
+        rename( $dir.'/'.$basename, $dir.'/'.$new_name.'.csv' );
+        return $dir.'/'.$new_name.'.csv';
     }
 
     /*
