@@ -533,3 +533,29 @@
         <input type="button" class="insert-link extra" value="Insert">
     </div>
 </script>
+
+<script id="nf-tmpl-edit-crm-field-map-repeater-row" type="text/template">
+    <div>
+        <span class="dashicons dashicons-menu handle"></span>
+    </div>
+    <div>
+        <select id="crm_field" class="setting">
+            <option value="test">Testing</option>
+            <%
+            value = 2;
+            _.each( options, function(option) {
+            %>
+            <option value="<%= option.value %>" <%= ( value == option.value ) ? 'selected="selected"' : '' %>><%= option.label %></option>
+            <%
+            } );
+            %>
+        </select>
+    </div>
+    <div>
+        <input type="text" class="setting" value="<%= form_field %>" data-id="form_field">
+        <span class="dashicons dashicons-list-view merge-tags"></span>
+    </div>
+    <div>
+        <span class="dashicons dashicons-dismiss nf-delete"></span>
+    </div>
+</script>

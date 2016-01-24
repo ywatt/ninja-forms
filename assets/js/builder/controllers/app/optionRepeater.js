@@ -83,12 +83,17 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 		addOption: function( collection, dataModel ) {
 			var modelData = {
 				order: collection.length,
-				new: true
+				new: true,
 			};
 			_.each( collection.settingModel.get( 'columns' ), function( col, key ) {
 				modelData[ key ] = col.default;
+
+				if( 'undefined' != typeof col.options ){
+					modelData.options = col.options;
+				}
 			} );
 			var model = new listOptionModel( modelData );
+			console.log( model );
 			collection.add( model );
 
 			// Add our field addition to our change log.

@@ -9,7 +9,7 @@
 define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
-			errors: {}		
+			errors: {},
 		},
 
 		initialize: function() {
