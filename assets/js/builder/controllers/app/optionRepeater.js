@@ -84,12 +84,13 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 			var modelData = {
 				order: collection.length,
 				new: true,
+				options: {}
 			};
 			_.each( collection.settingModel.get( 'columns' ), function( col, key ) {
 				modelData[ key ] = col.default;
 
 				if( 'undefined' != typeof col.options ){
-					modelData.options = col.options;
+					modelData.options[ key ] = col.options;
 				}
 			} );
 			var model = new listOptionModel( modelData );
