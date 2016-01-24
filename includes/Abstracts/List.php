@@ -13,15 +13,15 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
 
     protected $_test_value = FALSE;
 
+    protected $_settings_all_fields = array(
+        'key', 'label', 'label_pos', 'required', 'options', 'classes'
+    );
+
     public static $_base_template = 'list';
 
     public function __construct()
     {
         parent::__construct();
-
-        $this->_settings = $this->load_settings(
-            array( 'key', 'label', 'label_pos', 'required', 'options', 'classes' )
-        );
 
         add_filter( 'ninja_forms_custom_columns', array( $this, 'custom_columns' ), 10, 2 );
 
