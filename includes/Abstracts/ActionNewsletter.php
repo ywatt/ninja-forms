@@ -43,4 +43,22 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
     {
 
     }
+
+    protected function add_map_field( $field )
+    {
+        $this->_settings[ 'field_map' ][ 'columns' ][ 'map_field' ][ 'options' ][] = array(
+            'value' => $field[ 'value' ],
+            'label' => $field[ 'label' ]
+        );
+    }
+
+    protected function add_map_fields( $fields )
+    {
+        if( ! is_array( $fields ) ) return;
+
+        foreach( $fields as $field ){
+            $this->add_map_field( $field );
+        }
+    }
+
 }
