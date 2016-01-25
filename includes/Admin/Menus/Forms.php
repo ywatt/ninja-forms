@@ -225,6 +225,12 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'settingDefaults' => $settings_defaults
             );
         }
+
+        $field_type_settings[ 'textbox2' ] = $field_type_settings[ 'textbox' ];
+        $field_type_settings[ 'textbox2' ][ 'id' ] = 'textbox2';
+        $field_type_settings[ 'textbox2' ][ 'nicename' ] = 'Textbox 2';
+        $field_type_settings[ 'textbox2' ][ 'section' ] = 'saved';
+
         ?>
         <script>
             var fieldTypeData     = <?php echo wp_json_encode( $field_type_settings ); ?>;
