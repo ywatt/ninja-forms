@@ -68,6 +68,7 @@ define( [
 			nfRadio.channel( 'fields' ).reply( 'get:type', this.getFieldType, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeCollection', this.getTypeCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeSections', this.getTypeSections, this );
+			nfRadio.channel( 'fields' ).reply( 'get:savedFields', this.getSavedFields, this );
 			// Listen to clicks on field types
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addStagedField );
 		},
@@ -114,6 +115,16 @@ define( [
          */
         getTypeSections: function() {
             return this.fieldTypeSections;
+        },
+
+        /**
+         * Return our saved fields
+         *
+         * @since  3.0
+         * @return backbone.collection
+         */
+        getSavedFields: function() {
+        	this.fieldTypeSections.get( 'saved' );
         }
 	});
 

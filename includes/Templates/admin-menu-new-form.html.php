@@ -207,13 +207,16 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-settings" type="text/template">
-    <%= maybeRenderTitle() %>
-
-    <span class="nf-settings-groups"></span>
+    <span class="nf-setting-title"></span>
+    <span class="nf-setting-groups"></span>
 </script>
 
-<script id="nf-tmpl-drawer-content-edit-settings-title" type="text/template">
-    <h2><span class="dashicons dashicons-star-empty"></span> <%= renderTypeNicename() %></h2>
+<script id="nf-tmpl-drawer-content-edit-settings-title-default" type="text/template">
+    <h2><%= renderTypeNicename() %></h2>
+</script>
+
+<script id="nf-tmpl-drawer-content-edit-settings-title-fields" type="text/template">
+    <h2><%= renderSavedStar() %> <%= renderTypeNicename() %></h2>
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field-setting-group" type="text/template">

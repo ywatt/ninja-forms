@@ -6,7 +6,7 @@
  * @copyright (c) 2015 WP Ninjas
  * @since 3.0
  */
-define( [], function() {
+define( ['views/app/drawer/defaultSettingsTitle'], function( defaultSettingsTitleView ) {
 	var model = Backbone.Model.extend( {
 		defaults: {
 			dashicons: '',
@@ -14,7 +14,11 @@ define( [], function() {
 			active: false,
 			url: '',
 			hotkeys: false,
-			disabled: false
+			disabled: false,
+
+			getSettingsTitleView: function( data ) {
+				return new defaultSettingsTitleView( data );
+			}
 		}
 	} );
 	

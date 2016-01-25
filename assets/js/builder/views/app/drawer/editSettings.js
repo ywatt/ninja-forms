@@ -4,7 +4,8 @@ define( ['views/app/drawer/itemSettingGroupCollection'], function( itemSettingGr
 		template: '#nf-tmpl-drawer-content-edit-settings',
 
 		regions: {
-			settingGroups: '.nf-settings-groups',
+			settingTitle: '.nf-setting-title',
+			settingGroups: '.nf-setting-groups'
 		},
 
 		initialize: function( data ) {
@@ -13,7 +14,25 @@ define( ['views/app/drawer/itemSettingGroupCollection'], function( itemSettingGr
 		},
 
 		onRender: function() {
+			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
+			var titleView = currentDomain.get( 'getSettingsTitleView' ).call( currentDomain, { model: this.model } );
+
+			this.settingTitle.show( titleView );
 			this.settingGroups.show( new itemSettingGroupCollectionView( { collection: this.groupCollection, dataModel: this.dataModel } ) );
+		},
+
+		onShow: function() {
+			jQuery( this.el ).find( '.dashicons-star-empty' ).jBox( 'Tooltip', {
+				trigger: 'click',
+				content: '<input type="text" placeholder="Saved Field Name" value="Email"> <input type="button" class="nf-button primary" value="Add">',
+				title: 'Add to Saved Fields',
+				position: {
+					x:'left',
+					y:'center'
+				},
+				outside:'x',
+				closeOnClick: 'body'
+			} );
 		},
 
 		templateHelpers: function () {
