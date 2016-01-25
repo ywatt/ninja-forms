@@ -667,7 +667,9 @@ class NF_Abstracts_Model
         $join_statement = implode( ' ', $join_statement );
 
         $where_statement = implode( ' AND ', $where_statement );
-        if( $where_statement ) $where_statement = "AND " . $where_statement;
+
+        // TODO: Breaks SQL. Needs more testing.
+        // if( $where_statement ) $where_statement = "AND " . $where_statement;
 
         if( $parent_id ){
             $where_statement = "$this->_table_name.parent_id = $parent_id $where_statement";
