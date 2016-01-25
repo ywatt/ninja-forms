@@ -13,7 +13,7 @@ define( ['views/fields/drawer/stagingCollection', 'models/fields/stagingCollecti
 			this.listenTo( nfRadio.channel( 'drawer' ), 'filter:fieldTypes', this.filterFieldTypes );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'clear:filter', this.removeFieldTypeFilter );
 		
-			this.savedCollection = nfRadio.channel( 'drawer' ).request( 'get:savedFields' );
+			this.savedCollection = nfRadio.channel( 'fields' ).request( 'get:savedFields' );
 			this.primaryCollection = this.savedCollection;
 
 			this.fieldTypeSectionCollection = nfRadio.channel( 'fields' ).request( 'get:typeSections' );

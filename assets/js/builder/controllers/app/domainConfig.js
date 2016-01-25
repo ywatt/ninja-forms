@@ -23,6 +23,7 @@ define( [
 	'views/fields/mainHeader',
 	'views/fields/subHeader',
 	'views/fields/mainContentFieldCollection',
+	'views/fields/drawer/settingsTitle',
 	// Require our actions domain files
 	'views/actions/mainHeader', 
 	'views/actions/subHeader',
@@ -37,6 +38,7 @@ define( [
 		fieldsMainHeaderView,
 		fieldsSubHeaderView,
 		fieldsMainContentFieldCollectionView,
+		fieldsSettingsTitleView,
 		actionsMainHeaderView,
 		actionsSubHeaderView,
 		actionsMainContentView,
@@ -74,6 +76,10 @@ define( [
 					getMainContentView: function( collection ) {
 						var collection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 						return new fieldsMainContentFieldCollectionView( { collection: collection } );
+					},
+
+					getSettingsTitleView: function( data ) {
+						return new fieldsSettingsTitleView( data );
 					}
 				},
 				{

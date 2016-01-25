@@ -47,7 +47,6 @@ define(
 		'controllers/fields/types',
 		'controllers/fields/fieldTypeDrag',
 		'controllers/fields/stagingDrag',
-		'controllers/fields/savedFieldsSection',
 		'controllers/fields/staging',
 		'controllers/fields/stagingSortable',
 		'controllers/fields/filterTypes',
@@ -126,7 +125,6 @@ define(
 		FieldTypes,
 		FieldTypeDrag,
 		FieldStagingDrag,
-		SavedFields,
 		StagedFieldsData,
 		StagedFieldsSortable,
 		DrawerFilterFieldTypes,
@@ -203,7 +201,6 @@ define(
 				new FieldTypes();
 				new FieldTypeDrag();
 				new FieldStagingDrag();
-				new SavedFields();
 				new StagedFieldsData();
 				new StagedFieldsSortable();
 				new DrawerFilterFieldTypes();
