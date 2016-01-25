@@ -8,6 +8,17 @@ final class NF_Database_MockData
         $this->_migrate();
     }
 
+    public function saved_fields()
+    {
+        $field = Ninja_Forms()->form()->field()->get();
+        $field->update_setting( 'label', 'My Saved Field' );
+        $field->update_setting( 'key', 'my-saved-field' );
+        $field->update_setting( 'type', 'textbox' );
+        $field->update_setting( 'placeholder', 'Foo Bar Baz Qux' );
+        $field->update_setting( 'saved', 1 );
+        $field->save();
+    }
+
     public function form_blank_form()
     {
         /*
