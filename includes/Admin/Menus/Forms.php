@@ -229,15 +229,23 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         $saved_fields = Ninja_Forms()->form()->get_fields( array( 'saved' => 1) );
 
         foreach( $saved_fields as $saved_field ){
-            $type  = $saved_field->get_setting( 'type' );
-            $key   = $saved_field->get_setting( 'key' );
-            $label = $saved_field->get_setting( 'label' );
+
+            $settings = $saved_field->get_settings();
+
+            $key    = $settings[ 'key' ];
+            $type   = $settings[ 'type' ];
+            $label  = $settings[ 'label' ];
 
             $field_type_settings[ $key ] = $field_type_settings[ $type ];
             $field_type_settings[ $key ][ 'id' ] = $key;
             $field_type_settings[ $key ][ 'nicename' ] = $label;
             $field_type_settings[ $key ][ 'section' ] = 'saved';
-            $field_type_settings[ $key ][ 'settingDefaults' ][ 'isSaved' ] = TRUE;
+
+            $defaults = $field_type_settings[ $key ][ 'settingDefaults' ];
+            $defaults = array_merge( $defaults, $settings );
+            $defaults[ 'isSaved' ] = TRUE;
+
+            $field_type_settings[ $key ][ 'settingDefaults' ] = $defaults;
         }
 
         ?>
