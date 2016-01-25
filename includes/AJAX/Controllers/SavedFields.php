@@ -50,6 +50,13 @@ class NF_AJAX_Controllers_SavedFields extends NF_Abstracts_Controller
             $this->_respond();
         }
 
+        $id = absint( $_POST[ 'field' ][ 'id' ] );
+
+        $errors = Ninja_Forms()->form()->get_field( $id )->delete();
+
+        $this->_data[ 'id' ] = $id;
+        $this->_data[ 'errors' ] = $errors;
+
         $this->_respond();
     }
 }
