@@ -46,12 +46,35 @@ abstract class NF_Abstracts_Action
     protected $_settings = array();
 
     /**
+     * @var array
+     */
+    protected $_settings_all = array( 'label', 'active' );
+
+    /**
+     * @var array
+     */
+    protected $_settings_exclude = array();
+
+    /**
+     * @var array
+     */
+    protected $_settings_only = array();
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        // Loads a settings array from the ActionSettings configuration file.
-        $this->_settings = Ninja_Forms::config( 'ActionSettings' );
+        if( ! empty( $this->_settings_only ) ){
+
+            $this->_settings = array_merge( $this->_settings, $this->_settings_only );
+        } else {
+
+            $this->_settings = array_merge( $this->_settings_all, $this->_settings );
+            $this->_settings = array_diff( $this->_settings, $this->_settings_exclude );
+        }
+
+        $this->_settings = $this->load_settings( $this->_settings );
     }
 
     //-----------------------------------------------------
@@ -182,6 +205,24 @@ abstract class NF_Abstracts_Action
 
         // Compare Timing
         return $a->timing < $b->timing ? 1 : -1;
+    }
+
+    protected function load_settings( $only_settings = array() )
+    {
+        $settings = array();
+
+        // Loads a settings array from the FieldSettings configuration file.
+        $all_settings = Ninja_Forms::config( 'ActionSettings' );
+
+        foreach( $only_settings as $setting ){
+
+            if( isset( $all_settings[ $setting ]) ){
+
+                $settings[ $setting ] = $all_settings[ $setting ];
+            }
+        }
+
+        return $settings;
     }
 
 } // END CLASS NF_Abstracts_Action

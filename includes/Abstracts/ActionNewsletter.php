@@ -20,6 +20,8 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
      */
     protected $_priority = '10';
 
+    protected $_settings = array( 'field_map' );
+
     /**
      * Constructor
      */
