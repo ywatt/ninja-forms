@@ -18,8 +18,6 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             add_action('admin_init', array($this, 'admin_init'));
             add_action( 'admin_init', array( 'NF_Admin_AllFormsTable', 'process_bulk_action' ) );
         }
-        
-        $form = Ninja_Forms()->form( 2 )->get();
     }
 
     public function display()
