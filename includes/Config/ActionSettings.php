@@ -45,14 +45,14 @@ return array(
             ),
         ),
         'columns' => array(
-            'form_field' => array(
-                'header' => __( 'Form Field', 'ninja-forms' ),
-                'default' => '',
-            ),
             'map_field' => array(
                 'header' => __( 'Map Field', 'ninja-forms' ),
                 'default' => '',
                 'options' =>array(),
+            ),
+            'form_field' => array(
+                'header' => __( 'Form Field', 'ninja-forms' ),
+                'default' => '',
             ),
         ),
     ),
