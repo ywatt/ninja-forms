@@ -226,10 +226,19 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             );
         }
 
-        $field_type_settings[ 'textbox2' ] = $field_type_settings[ 'textbox' ];
-        $field_type_settings[ 'textbox2' ][ 'id' ] = 'textbox2';
-        $field_type_settings[ 'textbox2' ][ 'nicename' ] = 'Textbox 2';
-        $field_type_settings[ 'textbox2' ][ 'section' ] = 'saved';
+        $saved_fields = Ninja_Forms()->form()->get_fields( array( 'saved' => 1) );
+
+        foreach( $saved_fields as $saved_field ){
+            $type  = $saved_field->get_setting( 'type' );
+            $key   = $saved_field->get_setting( 'key' );
+            $label = $saved_field->get_setting( 'label' );
+
+            $field_type_settings[ $key ] = $field_type_settings[ $type ];
+            $field_type_settings[ $key ][ 'id' ] = $key;
+            $field_type_settings[ $key ][ 'nicename' ] = $label;
+            $field_type_settings[ $key ][ 'section' ] = 'saved';
+            $field_type_settings[ $key ][ 'settingDefaults' ][ 'isSaved' ] = TRUE;
+        }
 
         ?>
         <script>
