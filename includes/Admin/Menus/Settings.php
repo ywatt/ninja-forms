@@ -44,6 +44,18 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
         $grouped_settings[ 'general' ][ 'version' ][ 'value' ] = Ninja_Forms::VERSION;
 
+        $saved_fields = Ninja_Forms()->form()->get_fields( array( 'saved' => 1 ) );
+
+        foreach( $saved_fields as $saved_field ){
+            $grouped_settings[ 'saved_fields'][] = array(
+                'id' => '',
+                'type' => 'html',
+                'html' => '<a href="#">Delete</a>',
+                'label' => $saved_field->get_setting( 'label' ),
+
+            );
+        }
+
         Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'groups', 'grouped_settings', 'save_button_text' ) );
 
     }

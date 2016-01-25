@@ -21,6 +21,9 @@
                                 <td>
                                     <?php
                                         switch ( $setting[ 'type' ] ) {
+                                            case 'html':
+                                                echo $setting[ 'html'];
+                                                break;
                                             case 'desc' :
                                                 echo $setting[ 'value' ];
                                                 echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
