@@ -50,7 +50,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
             $grouped_settings[ 'saved_fields'][] = array(
                 'id' => '',
                 'type' => 'html',
-                'html' => '<a href="#">Delete</a>',
+                'html' => '<a href="#">' . __( 'Delete' ) . '</a>',
                 'label' => $saved_field->get_setting( 'label' ),
 
             );
