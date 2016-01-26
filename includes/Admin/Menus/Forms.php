@@ -232,20 +232,20 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $settings = $saved_field->get_settings();
 
-            $key    = $settings[ 'key' ];
+            $id     = $saved_field->get_id();
             $type   = $settings[ 'type' ];
             $label  = $settings[ 'label' ];
 
-            $field_type_settings[ $key ] = $field_type_settings[ $type ];
-            $field_type_settings[ $key ][ 'id' ] = $key;
-            $field_type_settings[ $key ][ 'nicename' ] = $label;
-            $field_type_settings[ $key ][ 'section' ] = 'saved';
+            $field_type_settings[ $id ] = $field_type_settings[ $type ];
+            $field_type_settings[ $id ][ 'id' ] = $id;
+            $field_type_settings[ $id ][ 'nicename' ] = $label;
+            $field_type_settings[ $id ][ 'section' ] = 'saved';
 
-            $defaults = $field_type_settings[ $key ][ 'settingDefaults' ];
+            $defaults = $field_type_settings[ $id ][ 'settingDefaults' ];
             $defaults = array_merge( $defaults, $settings );
             $defaults[ 'isSaved' ] = TRUE;
 
-            $field_type_settings[ $key ][ 'settingDefaults' ] = $defaults;
+            $field_type_settings[ $id ][ 'settingDefaults' ] = $defaults;
         }
 
         ?>

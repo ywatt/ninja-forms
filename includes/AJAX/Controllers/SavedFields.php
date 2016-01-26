@@ -23,8 +23,9 @@ class NF_AJAX_Controllers_SavedFields extends NF_Abstracts_Controller
         $field = Ninja_Forms()->form()->field()->get();
         $field->update_settings( $field_settings );
         $field->update_setting( 'saved', 1 );
+        $field->save();
 
-        $this->_data[ 'new_id' ] = $field->save();
+        $this->_data[ 'id' ] = $field->get_id();
 
         $this->_respond();
     }
@@ -59,4 +60,6 @@ class NF_AJAX_Controllers_SavedFields extends NF_Abstracts_Controller
 
         $this->_respond();
     }
+
+
 }
