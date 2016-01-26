@@ -15,6 +15,7 @@ class NF_Database_Migrations
         $this->migrations[ 'objects' ]       = new NF_Database_Migrations_Objects();
         $this->migrations[ 'object_meta' ]   = new NF_Database_Migrations_ObjectMeta();
         $this->migrations[ 'relationships' ] = new NF_Database_Migrations_Relationships();
+        $this->migrations[ 'settings' ]      = new NF_Database_Migrations_Settings();
     }
 
     public function migrate()
@@ -31,6 +32,8 @@ class NF_Database_Migrations
         global $wpdb;
 
         foreach( $this->migrations as $migration ){
+
+            if( ! $migration->table_name ) continue;
 
             if( 0 == $wpdb->query( "SHOW TABLES LIKE '" . $migration->table_name . "'" ) ) continue;
 
