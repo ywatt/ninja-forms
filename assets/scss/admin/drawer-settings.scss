@@ -108,7 +108,7 @@
         }
         .nf-div-table {
             .nf-table-row {
-                div {
+                > div {
                     //border-top: 16px solid red;
                     display: table-cell;
                     padding: 5px;

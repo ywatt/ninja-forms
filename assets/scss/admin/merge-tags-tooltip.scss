@@ -17,11 +17,23 @@
     }
     .merge-tags {
         color: #ccc;
+        pointer: cursor;
         position: absolute;
+    }
+}
+div.has-merge-tags {
+    .merge-tags {
+        top: 16px;
+        right: 12px;
+    }
+}
+label.has-merge-tags {
+    .merge-tags {
         top: 33px;
         right: 12px;
     }
 }
+
 
 .jBox-TooltipBorder {
     .jBox-container {

@@ -236,6 +236,7 @@ Form field placeholders for the fields a user has added to their form
       display: none; }
       .nf-item-controls li.nf-item-expand .dashicons {
         -webkit-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
                 transform: rotate(-90deg); }
     .nf-item-controls li .nf-item-editing {
       display: none; }
@@ -321,6 +322,7 @@ Form field placeholders for the fields a user has added to their form
     color: #84CC1E; }
     .nf-group-wrap.expanded .nf-item-expand .dashicons {
       -webkit-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
               transform: rotate(90deg); }
     .nf-group-wrap.expanded .nf-field-wrap {
       opacity: 1.0;
@@ -377,6 +379,7 @@ All styles used within the drawer
     transition: all 0.50s ease; }
     .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .dashicons {
       -webkit-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
               transform: rotate(180deg);
       -webkit-transition: all 0.50s ease;
       transition: all 0.50s ease; }
@@ -710,17 +713,17 @@ All styles used within the drawer
   padding-bottom: 20px; }
   .ninja-forms-app .nf-list-options .nf-add-new {
     margin-left: 20px; }
-  .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div {
+  .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row > div {
     display: table-cell;
     padding: 5px; }
-    .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(1), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(6) {
+    .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row > div:nth-child(1), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row > div:nth-child(6) {
       padding: 0 15px;
       width: 20px; }
-    .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(2), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(3) {
+    .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row > div:nth-child(2), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row > div:nth-child(3) {
       width: 45%; }
-    .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div:nth-child(4) {
+    .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row > div:nth-child(4) {
       min-width: 100px; }
-    .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row div input {
+    .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row > div input {
       margin: 0; }
   .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row.nf-table-header div {
     font-size: 12px;
@@ -934,6 +937,7 @@ Various custom field styles
       background: #fff;
       color: #84CC1E;
       -webkit-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
               transform: rotate(180deg);
       -webkit-transition: all 0.5s ease;
       transition: all 0.5s ease; }
@@ -1047,6 +1051,13 @@ input[type=checkbox].nf-toggle {
     height: 30px;
     right: 5px;
     bottom: 0; }
+
+.ninja-forms-app div.nf-select div {
+  bottom: 7px;
+  width: 95%; }
+
+.ninja-forms-app div.nf-select select {
+  margin-top: 0; }
 
 /*
 All styles used for displaying table content
@@ -1320,6 +1331,7 @@ All styles used for displaying table content
       border: 3px solid #fff;
       border-radius: 100%;
       -webkit-transform: transformZ(0);
+          -ms-transform: transformZ(0);
               transform: transformZ(0);
       -webkit-animation: LOADING 2s infinite;
               animation: LOADING 2s infinite; }
@@ -1411,9 +1423,16 @@ All styles used for displaying table content
       top: 26px; }
   .has-merge-tags .merge-tags {
     color: #ccc;
-    position: absolute;
-    top: 33px;
-    right: 12px; }
+    pointer: cursor;
+    position: absolute; }
+
+div.has-merge-tags .merge-tags {
+  top: 16px;
+  right: 12px; }
+
+label.has-merge-tags .merge-tags {
+  top: 33px;
+  right: 12px; }
 
 .jBox-TooltipBorder .jBox-container {
   border-radius: 5px;
@@ -1913,6 +1932,7 @@ All styles used for displaying table content
       display: none; }
       .nf-item-controls li.nf-item-expand .dashicons {
         -webkit-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
                 transform: rotate(-90deg); }
     .nf-item-controls li .nf-item-editing {
       display: none; }

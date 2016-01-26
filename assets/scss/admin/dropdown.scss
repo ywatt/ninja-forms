@@ -36,4 +36,13 @@
             bottom: 0;
         }
     }
+    div.nf-select {
+        div {
+            bottom: 7px;
+            width: 95%;
+        }
+        select {
+            margin-top: 0;
+        }
+    }
 }

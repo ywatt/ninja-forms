@@ -538,7 +538,7 @@
     <div>
         <span class="dashicons dashicons-menu handle"></span>
     </div>
-    <div>
+    <div class="nf-select">
         <select id="map_field" class="setting">
             <option>-</option>
             <%
@@ -549,8 +549,9 @@
             });
             %>
         </select>
+        <div></div>
     </div>
-    <div>
+    <div class="has-merge-tags">
         <input type="text" class="setting" value="<%= form_field %>" data-id="form_field">
         <span class="dashicons dashicons-list-view merge-tags"></span>
     </div>
