@@ -55,6 +55,7 @@ define( [], function() {
 		 */
 		changeSetting: function( model ) {
 			nfRadio.channel( 'fieldSetting-' + _.keys( model.changedAttributes() )[0] ).trigger( 'update:setting', this ) ;
+			nfRadio.channel( 'fields' ).trigger( 'update:setting', this );
 			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
 		},
 

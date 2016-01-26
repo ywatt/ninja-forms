@@ -217,6 +217,11 @@
 
 <script id="nf-tmpl-drawer-content-edit-settings-title-fields" type="text/template">
     <h2><%= renderSavedStar() %> <%= renderTypeNicename() %></h2>
+    <span class="nf-add-saved-field" style="display:none"></span>
+</script>
+
+<script id="nf-tmpl-add-saved-field" type="text/template">
+    <input type="text" placeholder="Saved Field Name" value="<%= label %>"> <input type="button" class="nf-button primary" value="Add">
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field-setting-group" type="text/template">
@@ -228,23 +233,6 @@
 
 <script id="nf-tmpl-drawer-content-edit-setting-group-label" type="text/template">
     <h3 class="toggle"><span class="dashicons dashicons-arrow-<%= renderArrowDir() %>"></span><%= label %></h3>
-</script>
-
-<script id="nf-tmpl-drawer-content-edit-form-settings" type="text/template">
-    <section class="nf-settings">
-        <div class="nf-full toggle-row">
-            <label>Display Form Title</label>
-            <input type="checkbox" class="nf-toggle" />
-        </div>
-        <div class="nf-full toggle-row">
-            <label>Clear form values after successful submission kjh hkja askh askjh jkasfhj kjhasf</label>
-            <input type="checkbox" class="nf-toggle" />
-        </div>
-        <div class="nf-full toggle-row">
-            <label>Hide form after successful submission</label>
-            <input type="checkbox" class="nf-toggle" />
-        </div>
-    </section>
 </script>
 
 <script id="nf-tmpl-drawer-staged-field" type="text/template">

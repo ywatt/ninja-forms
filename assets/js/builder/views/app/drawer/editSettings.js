@@ -21,20 +21,6 @@ define( ['views/app/drawer/itemSettingGroupCollection'], function( itemSettingGr
 			this.settingGroups.show( new itemSettingGroupCollectionView( { collection: this.groupCollection, dataModel: this.dataModel } ) );
 		},
 
-		onShow: function() {
-			jQuery( this.el ).find( '.dashicons-star-empty' ).jBox( 'Tooltip', {
-				trigger: 'click',
-				content: '<input type="text" placeholder="Saved Field Name" value="Email"> <input type="button" class="nf-button primary" value="Add">',
-				title: 'Add to Saved Fields',
-				position: {
-					x:'left',
-					y:'center'
-				},
-				outside:'x',
-				closeOnClick: 'body'
-			} );
-		},
-
 		templateHelpers: function () {
 	    	return {
 	    		maybeRenderTitle: function() {

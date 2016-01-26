@@ -33,8 +33,8 @@ define( [], function() {
 		 */
 		newFieldKey: function( model ) {
 			var key = this.keyExists( model.get( 'type' ) );
-			model.set( 'key', key );
-			model.set( 'manual_key', false );	
+			model.set( 'key', key, { silent: true } );
+			model.set( 'manual_key', false, { silent: true } );	
 		},
 
 		updateLabel: function( model ) {

@@ -62,6 +62,7 @@ define(
 		'controllers/fields/key',
 		'controllers/fields/notices',
 		'controllers/fields/mobile',
+		'controllers/fields/savedFields',
 
 		/*
 		 * TODO: Actions domain controllers
@@ -140,6 +141,7 @@ define(
 		FieldKey,
 		Notices,
 		FieldsMobile,
+		SavedFields,
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -217,6 +219,7 @@ define(
 				new FieldKey();
 				new Notices();
 				new FieldsMobile();
+				new SavedFields();
 				/*
 				 * TODO: Actions domain controllers
 				 */

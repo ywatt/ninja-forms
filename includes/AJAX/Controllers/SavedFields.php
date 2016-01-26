@@ -18,7 +18,7 @@ class NF_AJAX_Controllers_SavedFields extends NF_Abstracts_Controller
             $this->_respond();
         }
 
-        $field_settings = json_decode( stripslashes( $_POST[ 'field' ] ), ARRAY_A );
+        $field_settings = WPN_Helper::stripslashes( $_POST[ 'field' ] );
 
         $field = Ninja_Forms()->form()->field()->get();
         $field->update_settings( $field_settings );
