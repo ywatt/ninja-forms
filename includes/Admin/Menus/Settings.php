@@ -88,16 +88,9 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
                         'security': nf_ajax_nonce
                     };
 
-                    var tr = $( that ).closest( 'tr' );
-
-                    tr.fadeOut();
-
                     $.post( ajaxurl, data )
                         .done( function( response ) {
-                            tr.remove();
-                        })
-                        .fail(function( xhr, textStatus, errorThrown ) {
-                            tr.fadeIn();
+                            $( that ).closest( 'tr').fadeOut().remove();
                         });
                 });
             });

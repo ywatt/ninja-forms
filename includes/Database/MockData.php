@@ -11,10 +11,23 @@ final class NF_Database_MockData
     public function saved_fields()
     {
         $field = Ninja_Forms()->form()->field()->get();
-        $field->update_setting( 'label', 'My Saved Field' );
-        $field->update_setting( 'key', 'my-saved-field' );
+        $field->update_setting( 'label', 'Foo' );
+        $field->update_setting( 'key', 'foo' );
         $field->update_setting( 'type', 'textbox' );
-        $field->update_setting( 'placeholder', 'Foo Bar Baz Qux' );
+        $field->update_setting( 'saved', 1 );
+        $field->save();
+
+        $field = Ninja_Forms()->form()->field()->get();
+        $field->update_setting( 'label', 'Bar' );
+        $field->update_setting( 'key', 'bar' );
+        $field->update_setting( 'type', 'checkbox' );
+        $field->update_setting( 'saved', 1 );
+        $field->save();
+
+        $field = Ninja_Forms()->form()->field()->get();
+        $field->update_setting( 'label', 'Baz' );
+        $field->update_setting( 'key', 'baz' );
+        $field->update_setting( 'type', 'listselect' );
         $field->update_setting( 'saved', 1 );
         $field->save();
     }
