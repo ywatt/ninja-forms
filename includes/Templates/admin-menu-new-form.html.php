@@ -414,6 +414,7 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-option-repeater" type="text/template">
+
     <fieldset class="nf-list-options <%= renderFieldsetClasses() %>" <%= renderVisible() %>>
         <legend><%= label %></legend>
         <div class="nf-div-table">
@@ -531,31 +532,5 @@
         </label>
         <input type="button" class="cancel-link extra" value="Cancel">
         <input type="button" class="insert-link extra" value="Insert">
-    </div>
-</script>
-
-<script id="nf-tmpl-field-map-repeater-row" type="text/template">
-    <div>
-        <span class="dashicons dashicons-menu handle"></span>
-    </div>
-    <div class="nf-select">
-        <select id="map_field" class="setting">
-            <option>-</option>
-            <%
-            _.each( options.map_field, function(option) {
-            %>
-            <option value="<%= option.value %>" <%= ( map_field == option.value ) ? 'selected="selected"' : '' %>><%= option.label %></option>
-            <%
-            });
-            %>
-        </select>
-        <div></div>
-    </div>
-    <div class="has-merge-tags">
-        <input type="text" class="setting" value="<%= form_field %>" data-id="form_field">
-        <span class="dashicons dashicons-list-view merge-tags"></span>
-    </div>
-    <div>
-        <span class="dashicons dashicons-dismiss nf-delete"></span>
     </div>
 </script>

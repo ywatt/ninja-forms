@@ -25,10 +25,7 @@ define( ['models/app/optionRepeaterModel'], function( listOptionModel ) {
 		},
 
 		addOption: function( model, collection ) {
-			if ( ! model.get( 'order' ) ) {
-				// console.log( collection.length );
-				// model.set( 'order', this.length );
-			}
+			model.set( 'settingModel', this.settingModel );
 		}
 	} );
 	return collection;
