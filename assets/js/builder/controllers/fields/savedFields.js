@@ -10,7 +10,9 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		ignoreAttributes: [
 			'editActive',
-			'order'
+			'order',
+			'isSaved',
+			'jBox'
 		],
 
 		initialize: function() {
@@ -52,7 +54,7 @@ define( [], function() {
 			var type = nfRadio.channel( 'fields' ).request( 'get:type', fieldData.type );
 			var newType = type.attributes;
 			var nicename = jQuery( e.target ).parent().parent().find( 'input' ).val();
-			newType.nicename = nicename
+			newType.nicename = nicename;
 			fieldData.label = nicename;
 			fieldData.nicename = nicename;
 			dataModel.set( 'addSavedLoading', true );
@@ -66,12 +68,10 @@ define( [], function() {
 				var newModel = typeCollection.add( newType );
 				var typeSections = nfRadio.channel( 'fields' ).request( 'get:typeSections' );
 				typeSections.get( 'saved' ).get( 'fieldTypes' ).push( newType.id );
-				
-				dataModel.set( 'isSaved', true );
-
 				dataModel.set( 'addSavedLoading', false );
 				dataModel.unset( 'addSavedLoading', { silent: true } );
 				dataModel.get( 'jBox' ).close();
+				dataModel.set( 'isSaved', true );
 				nfRadio.channel( 'notices' ).request( 'add', 'addSaved', 'Saved Field Added' );
 			} );
 		}

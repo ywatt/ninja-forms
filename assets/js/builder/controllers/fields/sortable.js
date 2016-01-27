@@ -140,7 +140,7 @@ define( [], function() {
 			// Get our tmp ID
 			var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpID' );
 			// Add our field
-			var newModel = nfRadio.channel( 'fields' ).request( 'add',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'id' ) }, silent );
+			var newModel = nfRadio.channel( 'fields' ).request( 'add',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'type' ) }, silent );
 			// Add our field addition to our change log.
 			var label = {
 				object: 'Field',
