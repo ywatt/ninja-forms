@@ -27,29 +27,30 @@ define( [], function() {
 		 * @since  3.0
 		 * @return void
 		 */
-		changeErrors: function() {
+		changeErrors: function( model ) {
 			/*
 			 * The errors attribute will be an object, so if we don't have any keys, it's empty.
 			 * If we have an empty object, check to see if we can remove the error from our setting model.
 			 */
-			if ( 0 == _.size( this.get( 'errors' ) ) ) {
+
+			if ( 0 == _.size( model.get( 'errors' ) ) ) {
 				/*
 				 * Loop through our collection to see if we have any other errors.
 				 */
 				var errorsFound = false;
-				_.each( this.collection.models, function( opt ) {
+				_.each( model.collection.models, function( opt ) {
 					if ( 0 != _.size( opt.get( 'errors' ) ) ) {
 						errorsFound = true;
 					}
 				} );
 				if ( ! errorsFound ) {
-					this.collection.settingModel.set( 'error', false );
+					model.collection.settingModel.set( 'error', false );
 				}
 			} else {
 				/*
 				 * We have errors, so make sure that the setting model has an error set.
 				 */
-				this.collection.settingModel.set( 'error', true );
+				model.collection.settingModel.set( 'error', true );
 			}
 		}
 	} );

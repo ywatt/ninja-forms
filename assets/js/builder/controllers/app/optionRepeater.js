@@ -94,7 +94,6 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 				}
 			} );
 			var model = new listOptionModel( modelData );
-			console.log( model );
 			collection.add( model );
 
 			// Add our field addition to our change log.

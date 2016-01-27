@@ -13,6 +13,7 @@ define( ['views/fields/drawer/addSavedField'], function( addSavedFieldView ) {
 
 		initialize: function() {
 			this.model.on( 'change:isSaved', this.render, this );
+			this.model.on( 'change:label', this.renderjBoxContent, this );
 		},
 
 		regions: {
@@ -22,10 +23,11 @@ define( ['views/fields/drawer/addSavedField'], function( addSavedFieldView ) {
 		onBeforeDestroy: function() {
 			this.model.off( 'change:isSaved', this.render );
 			this.addSavedjBox.destroy();
+			this.model.unset( 'jBox', { silent: true } );
 		},
 
 		onRender: function() {
-			this.addSaved.show( new addSavedFieldView( { model: this.model } ) );
+			this.renderjBoxContent();
 			var that = this;
 			this.addSavedjBox = new jBox( 'Tooltip', {
 				trigger: 'click',
@@ -42,7 +44,11 @@ define( ['views/fields/drawer/addSavedField'], function( addSavedFieldView ) {
 				}
 			} );
 			this.addSavedjBox.attach( jQuery( this.el ).find( '.dashicons') );
-			this.model.set( 'jBox', this.addSavedjBox );
+			this.model.set( 'jBox', this.addSavedjBox, { silent: true } );
+		},
+
+		renderjBoxContent: function() {
+			this.addSaved.show( new addSavedFieldView( { model: this.model } ) );
 		},
 
 		templateHelpers: function () {

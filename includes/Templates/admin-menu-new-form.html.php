@@ -221,7 +221,24 @@
 </script>
 
 <script id="nf-tmpl-add-saved-field" type="text/template">
-    <input type="text" placeholder="Saved Field Name" value="<%= label %>"> <input type="button" class="nf-button primary" value="Add">
+    <input type="text" placeholder="Saved Field Name" value="<%= label %>"> 
+    <%= renderAddButton() %>
+</script>
+
+<script id="nf-tmpl-add-saved-field-button" type="text/template">
+    <a href="#" class="nf-button primary">Add</a>
+</script>
+
+<script id="nf-tmpl-add-saved-field-loading" type="text/template">
+    <a href="#" class="nf-button primary">&nbsp;
+        <div class="nf-loading">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </a>
 </script>
 
 <script id="nf-tmpl-drawer-content-edit-field-setting-group" type="text/template">
