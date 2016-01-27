@@ -47,7 +47,7 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 			var data = {
 				id: tmpID,
 				// i.e. firstname, textbox, etc.
-				slug: fieldType.get( 'id' ),
+				slug: fieldType.get( 'type' ),
 				// i.e. First Name, Textbox, etc.
 				nicename: fieldType.get( 'nicename' )
 			}

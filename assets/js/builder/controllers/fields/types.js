@@ -54,6 +54,7 @@ define( [
 				// Build an object for this type that we can add to our field type collection
 				var fieldType = {
 					id: type.id,
+					type: type.type,
 					nicename: type.nicename,
 					alias: type.alias,
 					parentType: type.parentType,
