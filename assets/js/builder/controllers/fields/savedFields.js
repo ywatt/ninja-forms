@@ -54,8 +54,8 @@ define( [], function() {
 			var newType = type.attributes;
 			
 			dataModel.set( 'addSavedLoading', true );
-			fieldData = JSON.stringify( fieldData );
-			jQuery.post( ajaxurl, { action: 'nf_create_saved_field', field: fieldData, security: nfAdmin.ajaxNonce }, function( response ) {
+			var newTypeDefaults = JSON.stringify( fieldData );
+			jQuery.post( ajaxurl, { action: 'nf_create_saved_field', field: newTypeDefaults, security: nfAdmin.ajaxNonce }, function( response ) {
 				response = JSON.parse( response );
 				newType.id = response.data.id;
 				newType.nicename = fieldData.label;
