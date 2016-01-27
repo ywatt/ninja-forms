@@ -238,6 +238,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
             $field_type_settings[ $id ] = $field_type_settings[ $type ];
             $field_type_settings[ $id ][ 'id' ] = $id;
+            $field_type_settings[ $id ][ 'type' ] = $type;
             $field_type_settings[ $id ][ 'nicename' ] = $label;
             $field_type_settings[ $id ][ 'section' ] = 'saved';
 
