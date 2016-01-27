@@ -136,11 +136,11 @@ define( [], function() {
 			// Default to false
 			silent = silent || false;
 			// Get our field type model
-			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', type );
+			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', type ); 
 			// Get our tmp ID
 			var tmpID = nfRadio.channel( 'fields' ).request( 'get:tmpID' );
 			// Add our field
-			var newModel = nfRadio.channel( 'fields' ).request( 'add',  { id: tmpID, label: fieldType.get( 'nicename' ), type: fieldType.get( 'type' ) }, silent );
+			var newModel = nfRadio.channel( 'fields' ).request( 'add',  { id: tmpID, label: fieldType.get( 'nicename' ), type: type }, silent );
 			// Add our field addition to our change log.
 			var label = {
 				object: 'Field',

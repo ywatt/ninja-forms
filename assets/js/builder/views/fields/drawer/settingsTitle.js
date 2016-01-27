@@ -58,10 +58,10 @@ define( ['views/fields/drawer/addSavedField'], function( addSavedFieldView ) {
 					var domainID = currentDomain.get( 'id' );
 	    			var type = nfRadio.channel( domainID ).request( 'get:type', this.type );
 	    			var displayName = type.get( 'nicename' );
-	    			console.log( type );
-	    			if ( this.isSaved ) {	
-	    				// var parentType = nfRadio.channel( domainID ).request( 'get:type', type.get( 'type' ) );
-	    				// displayName += ' - ' + parentType.get( 'nicename' );
+
+	    			if ( this.isSaved ) {
+	    				var realType = nfRadio.channel( domainID ).request( 'get:type', type.get( 'type' ) );
+	    				displayName += ' - ' + realType.get( 'nicename' );
 	    			}
 	    			return displayName;
 				},
