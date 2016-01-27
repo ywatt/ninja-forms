@@ -7,6 +7,8 @@ class NF_Fields_ListSelect extends NF_Abstracts_List
 {
     protected $_name = 'listselect';
 
+    protected $_type = 'listselect';
+
     protected $_nicename = 'Select';
 
     protected $_section = 'common';

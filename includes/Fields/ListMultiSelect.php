@@ -7,6 +7,8 @@ class NF_Fields_ListMultiselect extends NF_Abstracts_List
 {
     protected $_name = 'listmultiselect';
 
+    protected $_type = 'listmultiselect';
+
     protected $_nicename = 'Mulit-Select';
 
     protected $_section = '';

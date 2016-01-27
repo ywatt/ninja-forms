@@ -7,11 +7,11 @@ class NF_Fields_ListState extends NF_Abstracts_List
 {
     protected $_name = 'liststate';
 
+    protected $_type = 'liststate';
+
     protected $_nicename = 'State';
 
     protected $_section = 'userinfo';
-
-    protected $_type = 'liststate';
 
     protected $_templates = 'liststate';
 

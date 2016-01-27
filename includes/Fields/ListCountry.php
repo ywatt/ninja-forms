@@ -7,6 +7,8 @@ class NF_Fields_ListCountry extends NF_Abstracts_List
 {
     protected $_name = 'listcountry';
 
+    protected $_type = 'listcountry';
+
     protected $_nicename = 'Country';
 
     protected $_section = 'userinfo';
