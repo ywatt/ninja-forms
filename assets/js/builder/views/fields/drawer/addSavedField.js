@@ -4,7 +4,20 @@ define( [], function() {
 		template: '#nf-tmpl-add-saved-field',
 
 		initialize: function() {
-			this.model.on( 'change:addSavedLoading', this.render, this );
+			this.model.on( 'change:addSavedLoading', this.renderAddButton, this );
+		},
+
+		onRender: function() {
+			this.renderAddButton();
+		},
+
+		renderAddButton: function() {
+			if ( this.model.get( 'addSavedLoading' ) ) {
+				var button = _.template( jQuery( '#nf-tmpl-add-saved-field-loading' ).html(), this );
+			} else {
+				var button = _.template( jQuery( '#nf-tmpl-add-saved-field-button' ).html(), this );
+			}
+			jQuery( this.el ).find( '.add-button' ).html( button );
 		},
 
 		onBeforeDestroy: function() {
@@ -17,19 +30,6 @@ define( [], function() {
 
 		clickAddSavedField: function( e ) {
 			nfRadio.channel( 'drawer' ).trigger( 'click:addSavedField', e, this.model );
-		},
-
-		templateHelpers: function() {
-			return {
-				renderAddButton: function() {
-					if ( this.addSavedLoading ) {
-						return _.template( jQuery( '#nf-tmpl-add-saved-field-loading' ).html(), this );
-					} else {
-						return _.template( jQuery( '#nf-tmpl-add-saved-field-button' ).html(), this );
-					}
-					
-				}
-			};
 		}
 	});
 

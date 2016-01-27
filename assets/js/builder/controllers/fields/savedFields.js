@@ -48,17 +48,18 @@ define( [], function() {
 			delete fieldData.order;
 			delete fieldData.id;
 			delete fieldData.formID;
-
 			
 			var type = nfRadio.channel( 'fields' ).request( 'get:type', fieldData.type );
 			var newType = type.attributes;
-			
+			var nicename = jQuery( e.target ).parent().parent().find( 'input' ).val();
+			newType.nicename = nicename
+			fieldData.label = nicename;
+			fieldData.nicename = nicename;
 			dataModel.set( 'addSavedLoading', true );
 			var newTypeDefaults = JSON.stringify( fieldData );
 			jQuery.post( ajaxurl, { action: 'nf_create_saved_field', field: newTypeDefaults, security: nfAdmin.ajaxNonce }, function( response ) {
 				response = JSON.parse( response );
 				newType.id = response.data.id;
-				newType.nicename = fieldData.label;
 				newType.type = fieldData.type;
 				newType.settingDefaults = fieldData;
 				var typeCollection = nfRadio.channel( 'fields' ).request( 'get:typeCollection' );

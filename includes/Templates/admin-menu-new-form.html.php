@@ -222,7 +222,7 @@
 
 <script id="nf-tmpl-add-saved-field" type="text/template">
     <input type="text" placeholder="Saved Field Name" value="<%= label %>"> 
-    <%= renderAddButton() %>
+    <span class="add-button"></span>
 </script>
 
 <script id="nf-tmpl-add-saved-field-button" type="text/template">
