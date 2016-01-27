@@ -225,6 +225,29 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'settingDefaults' => $settings_defaults
             );
         }
+
+        $saved_fields = Ninja_Forms()->form()->get_fields( array( 'saved' => 1) );
+
+        foreach( $saved_fields as $saved_field ){
+
+            $settings = $saved_field->get_settings();
+
+            $id     = $saved_field->get_id();
+            $type   = $settings[ 'type' ];
+            $label  = $settings[ 'label' ];
+
+            $field_type_settings[ $id ] = $field_type_settings[ $type ];
+            $field_type_settings[ $id ][ 'id' ] = $id;
+            $field_type_settings[ $id ][ 'nicename' ] = $label;
+            $field_type_settings[ $id ][ 'section' ] = 'saved';
+
+            $defaults = $field_type_settings[ $id ][ 'settingDefaults' ];
+            $defaults = array_merge( $defaults, $settings );
+            $defaults[ 'isSaved' ] = TRUE;
+
+            $field_type_settings[ $id ][ 'settingDefaults' ] = $defaults;
+        }
+
         ?>
         <script>
             var fieldTypeData     = <?php echo wp_json_encode( $field_type_settings ); ?>;

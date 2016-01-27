@@ -4,7 +4,8 @@ define( ['views/app/drawer/itemSettingGroupCollection'], function( itemSettingGr
 		template: '#nf-tmpl-drawer-content-edit-settings',
 
 		regions: {
-			settingGroups: '.nf-settings-groups',
+			settingTitle: '.nf-setting-title',
+			settingGroups: '.nf-setting-groups'
 		},
 
 		initialize: function( data ) {
@@ -13,6 +14,10 @@ define( ['views/app/drawer/itemSettingGroupCollection'], function( itemSettingGr
 		},
 
 		onRender: function() {
+			var currentDomain = nfRadio.channel( 'app' ).request( 'get:currentDomain' );
+			var titleView = currentDomain.get( 'getSettingsTitleView' ).call( currentDomain, { model: this.model } );
+
+			this.settingTitle.show( titleView );
 			this.settingGroups.show( new itemSettingGroupCollectionView( { collection: this.groupCollection, dataModel: this.dataModel } ) );
 		},
 

@@ -163,8 +163,6 @@ class NF_Abstracts_ModelFactory
 
             $form_id = $this->_object->get_id();
 
-            if( ! $form_id ) return array();
-
             $model_shell = new NF_Database_Models_Field( $this->_db, 0 );
 
             $fields = $model_shell->find( $form_id, $where );

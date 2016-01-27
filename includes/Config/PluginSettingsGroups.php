@@ -17,4 +17,9 @@ return apply_filters( 'ninja_forms_plugin_settings_groups', array(
         'label' => __( 'Advanced Settings', 'ninja-forms' ),
     ),
 
+    'saved_fields' => array(
+        'id' => 'saved_fields',
+        'label' => __( 'Saved Fields', 'ninja-forms' ),
+    ),
+
 ));

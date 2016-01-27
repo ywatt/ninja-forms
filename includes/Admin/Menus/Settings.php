@@ -44,9 +44,60 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
         $grouped_settings[ 'general' ][ 'version' ][ 'value' ] = Ninja_Forms::VERSION;
 
+        $saved_fields = Ninja_Forms()->form()->get_fields( array( 'saved' => 1 ) );
+
+        foreach( $saved_fields as $saved_field ){
+
+            $saved_field_id = $saved_field->get_id();
+
+            $grouped_settings[ 'saved_fields'][] = array(
+                'id' => '',
+                'type' => 'html',
+                'html' => '<a class="js-delete-saved-field button button-secondary" data-id="' . $saved_field_id . '">' . __( 'Delete' ) . '</a>',
+                'label' => $saved_field->get_setting( 'label' ),
+
+            );
+        }
+
+        if( $saved_fields ){
+            add_action( 'admin_footer', array( $this, 'add_saved_field_javascript' ) );
+        }
+
         Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'groups', 'grouped_settings', 'save_button_text' ) );
 
     }
+
+    public function add_saved_field_javascript()
+    {
+        //TODO: Move this.
+        ?>
+        <script type="text/javascript" >
+            var ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
+            var nf_ajax_nonce = '<?php echo wp_create_nonce( "ninja_forms_ajax_nonce" ); ?>';
+
+            jQuery(document).ready(function($) {
+                $( '.js-delete-saved-field' ).click( function(){
+
+                    var that = this;
+
+                    var data = {
+                        'action': 'nf_delete_saved_field',
+                        'field': {
+                            id: $( that ).data( 'id' )
+                        },
+                        'security': nf_ajax_nonce
+                    };
+
+                    $.post( ajaxurl, data )
+                        .done( function( response ) {
+                            $( that ).closest( 'tr').fadeOut().remove();
+                        });
+                });
+            });
+        </script>
+        <?php
+    }
+
 
     private function update_settings()
     {

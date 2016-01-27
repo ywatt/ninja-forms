@@ -47,7 +47,6 @@ define(
 		'controllers/fields/types',
 		'controllers/fields/fieldTypeDrag',
 		'controllers/fields/stagingDrag',
-		'controllers/fields/savedFieldsSection',
 		'controllers/fields/staging',
 		'controllers/fields/stagingSortable',
 		'controllers/fields/filterTypes',
@@ -63,6 +62,7 @@ define(
 		'controllers/fields/key',
 		'controllers/fields/notices',
 		'controllers/fields/mobile',
+		'controllers/fields/savedFields',
 
 		/*
 		 * TODO: Actions domain controllers
@@ -126,7 +126,6 @@ define(
 		FieldTypes,
 		FieldTypeDrag,
 		FieldStagingDrag,
-		SavedFields,
 		StagedFieldsData,
 		StagedFieldsSortable,
 		DrawerFilterFieldTypes,
@@ -142,6 +141,7 @@ define(
 		FieldKey,
 		Notices,
 		FieldsMobile,
+		SavedFields,
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -203,7 +203,6 @@ define(
 				new FieldTypes();
 				new FieldTypeDrag();
 				new FieldStagingDrag();
-				new SavedFields();
 				new StagedFieldsData();
 				new StagedFieldsSortable();
 				new DrawerFilterFieldTypes();
@@ -220,6 +219,7 @@ define(
 				new FieldKey();
 				new Notices();
 				new FieldsMobile();
+				new SavedFields();
 				/*
 				 * TODO: Actions domain controllers
 				 */
