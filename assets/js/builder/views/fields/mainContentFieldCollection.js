@@ -1,11 +1,11 @@
 define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( mainContentFieldView, mainContentFieldEmptyView ) {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
-		childView: mainContentFieldView,
 		emptyView: mainContentFieldEmptyView,
 		reorderOnSort: true,
 
 		initialize: function() {
+			this.childView = nfRadio.channel( 'views' ).request( 'get:fieldItem' );
 			nfRadio.channel( 'fields' ).reply( 'get:sortableEl', this.getSortableEl, this );
 			nfRadio.channel( 'fields' ).reply( 'init:sortable', this.initSortable, this );
 			nfRadio.channel( 'fields' ).reply( 'destroy:sortable', this.destroySortable, this );

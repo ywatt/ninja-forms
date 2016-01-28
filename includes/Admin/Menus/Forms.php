@@ -131,6 +131,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             'editFormText'      => __( 'Edit Form', 'ninja-forms' ),
             'mobile'            => ( wp_is_mobile() ) ? 1: 0
         ));
+
+        do_action( 'nf_admin_enqueue_scripts' );
     }
 
     private function _localize_form_data( $form_id )

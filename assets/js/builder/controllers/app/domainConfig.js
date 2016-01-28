@@ -148,6 +148,11 @@ define( [
 			] );
 
 			/*
+			 * Send out a radio message with our domain config collection.
+			 */
+			nfRadio.channel( 'app' ).trigger( 'init:domainCollection', this.collection );
+
+			/*
 			 * Respond to requests to get the app domain collection.
 			 */
 			nfRadio.channel( 'app' ).reply( 'get:domainCollection', this.getDomainCollection, this );

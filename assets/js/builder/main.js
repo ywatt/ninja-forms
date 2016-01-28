@@ -1,11 +1,7 @@
-require.config( {
-	baseUrl: nfAdmin.requireBaseUrl + '/builder/'
-} );
-
 var nfRadio = Backbone.Radio;
 
 jQuery( document ).ready( function( $ ) {
-	require( ['views/app/builder', 'controllers/loadControllers'], function( BuilderView, LoadControllers ) {
+	require( ['views/app/builder', 'controllers/loadControllers', 'views/loadViews'], function( BuilderView, LoadControllers, LoadViews ) {
 
 		var NinjaForms = Marionette.Application.extend( {
 
@@ -16,6 +12,12 @@ jQuery( document ).ready( function( $ ) {
 				var loadControllers = new LoadControllers();
 				// Trigger an event after we load our controllers.
 				nfRadio.channel( 'app' ).trigger( 'after:loadControllers', this );
+
+				// Trigger an event before we load un-instantiated views
+				nfRadio.channel( 'app' ).trigger( 'before:loadViews', this );
+				var loadViews = new LoadViews();
+				// Trigger an event after we load un-instantiated views.
+				nfRadio.channel( 'app' ).trigger( 'after:loadViews', this );
 			},
 
 			onStart: function() {
