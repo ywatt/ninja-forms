@@ -451,7 +451,7 @@
     <%
         var columns = getColumns();
 
-        if ( 'undefined' != columns.label ) {
+        if ( 'undefined' != typeof columns.label ) {
             %>
              <div>
                 <input type="text" class="setting" value="<%= label %>" data-id="label">
@@ -460,7 +460,7 @@
         }
     %>
     <%
-        if ( 'undefined' != columns.value ) {
+        if ( 'undefined' != typeof columns.value ) {
             %>
              <div>
                 <input type="text" class="setting" value="<%= value %>" data-id="value">
@@ -469,7 +469,7 @@
         }
     %>
     <%
-        if ( 'undefined' != columns.calc ) {
+        if ( 'undefined' != typeof columns.calc ) {
             %>
              <div>
                 <input type="text" class="setting" value="<%= calc %>" data-id="calc">
@@ -478,7 +478,7 @@
         }
     %>
     <%
-        if ( 'undefined' != columns.selected ) {
+        if ( 'undefined' != typeof columns.selected ) {
             %>
             <div>
                 <input type="checkbox" class="setting" class="nf-checkbox" <%= ( 1 == selected ) ? 'checked="checked"' : '' %> value="1" data-id="selected">
