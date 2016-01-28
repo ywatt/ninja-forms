@@ -81,7 +81,6 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 			 * Send out a radio message.
 			 */
 			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
-			console.log( 'render options' );
 		},
 
 		templateHelpers: function () {
