@@ -45,13 +45,13 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 		},
 
 		onRender: function() {
-			this.$el = this.$el.children();
-			this.$el.unwrap();
-			this.setElement( this.$el );
+			// this.$el = this.$el.children();
+			// this.$el.unwrap();
+			// this.setElement( this.$el );
 
-			this.$el = this.$el.children();
-			this.$el.unwrap();
-			this.setElement( this.$el );
+			// this.$el = this.$el.children();
+			// this.$el.unwrap();
+			// this.setElement( this.$el );
 		
 			var that = this;
 			jQuery( this.el ).find( '.nf-list-options-tbody' ).sortable( {
@@ -81,6 +81,7 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 			 * Send out a radio message.
 			 */
 			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
+			console.log( 'render options' );
 		},
 
 		templateHelpers: function () {
