@@ -29,6 +29,25 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
     {
         parent::__construct();
 
+        $this->get_list_settings();
+    }
+
+    /*
+    * PUBLIC METHODS
+    */
+
+    public function save( $action_settings )
+    {
+
+    }
+
+    public function process( $action_settings, $form_id, $data )
+    {
+
+    }
+
+    private function get_list_settings()
+    {
         $lists = $this->get_lists();
 
         if( empty( $lists ) ) return;
@@ -71,19 +90,5 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
             'group' => 'primary',
             'settings' => $fields
         );
-    }
-
-    /*
-    * PUBLIC METHODS
-    */
-
-    public function save( $action_settings )
-    {
-
-    }
-
-    public function process( $action_settings, $form_id, $data )
-    {
-
     }
 }
