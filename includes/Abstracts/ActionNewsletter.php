@@ -20,7 +20,7 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
      */
     protected $_priority = '10';
 
-    protected $_settings = array( 'field_map' );
+    protected $_settings = array();
 
     /**
      * Constructor
@@ -28,6 +28,49 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
     public function __construct()
     {
         parent::__construct();
+
+        $lists = $this->get_lists();
+
+        if( empty( $lists ) ) return;
+
+        $this->_settings[ 'newsletter_list' ] = array(
+            'name' => 'newsletter_list',
+            'type' => 'select',
+            'label' => __( 'List', 'ninja-forms' ),
+            'group' => 'primary',
+            'value' => '2',
+            'options' => array(),
+        );
+
+        $fields = array();
+        foreach( $lists as $list ){
+            $this->_settings[ 'newsletter_list' ][ 'options' ][] = $list;
+
+            foreach( $list[ 'fields' ] as $field ){
+                $name = $list[ 'value' ] . '_' . $field[ 'value' ];
+                $fields[] = array(
+                    'name' => $name,
+                    'type' => 'textbox',
+                    'label' => $field[ 'label' ],
+                    'use_merge_tags' => array(
+                        'exclude' => array(
+                            'user', 'post', 'system', 'querystrings'
+                        )
+                    ),
+                    'deps' => array(
+                        'newsletter_list' => $list[ 'value' ]
+                    )
+                );
+            }
+        }
+
+        $this->_settings[ 'newsletter_list_fieldset' ] = array(
+            'name' => 'newsletter_list_fieldset',
+            'label' => __( 'List Field Mapping', 'ninja-forms' ),
+            'type' => 'fieldset',
+            'group' => 'primary',
+            'settings' => $fields
+        );
     }
 
     /*
@@ -43,22 +86,4 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
     {
 
     }
-
-    protected function add_map_field( $field )
-    {
-        $this->_settings[ 'field_map' ][ 'columns' ][ 'map_field' ][ 'options' ][] = array(
-            'value' => $field[ 'value' ],
-            'label' => $field[ 'label' ]
-        );
-    }
-
-    protected function add_map_fields( $fields )
-    {
-        if( ! is_array( $fields ) ) return;
-
-        foreach( $fields as $field ){
-            $this->add_map_field( $field );
-        }
-    }
-
 }
