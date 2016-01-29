@@ -75,6 +75,7 @@ define(
 		'controllers/actions/typeDrag',
 		'controllers/actions/droppable',
 		'controllers/actions/filterTypes',
+		'controllers/actions/newsletterList',
 
 		/*
 		 * TODO: Settings domain controllers
@@ -153,6 +154,7 @@ define(
 		ActionTypeDrag,
 		ActionDroppable,
 		ActionFilterTypes,
+		ActionNewsletterList,
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -223,6 +225,7 @@ define(
 				/*
 				 * TODO: Actions domain controllers
 				 */
+				new ActionNewsletterList();
 				new ActionTypes();
 				new ActionData();
 				new ActionSettings();

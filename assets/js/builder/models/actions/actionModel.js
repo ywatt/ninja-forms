@@ -49,8 +49,10 @@ define( [], function() {
 		 * @since  3.0
 		 * @return void
 		 */
-		changeSetting: function() {
-			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
+		changeSetting: function( model ) {
+            nfRadio.channel( 'actionSetting-' + _.keys( this.changedAttributes() )[0] ).trigger( 'update:setting', this ) ;
+			nfRadio.channel( 'actions').trigger( 'update:setting', this );
+            nfRadio.channel( 'app' ).trigger( 'update:setting', this );
 		},
 
 		updateFieldKey: function( keyModel, settingModel ) {

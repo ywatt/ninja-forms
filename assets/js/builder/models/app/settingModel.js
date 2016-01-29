@@ -24,7 +24,7 @@ define( [], function() {
 			// Send out two messages saying that we've initialized a setting model.
 			nfRadio.channel( 'app' ).trigger( 'init:settingModel', this );
 			nfRadio.channel( this.get( 'type' ) ).trigger( 'init:settingModel', this );
-
+			nfRadio.channel( 'setting-name-' + this.get( 'name' ) ).trigger( 'init:settingModel', this );
 			this.on( 'change:error', this.maybePreventUI, this );
 
 			/*

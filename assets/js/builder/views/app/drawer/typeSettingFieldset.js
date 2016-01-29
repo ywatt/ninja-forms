@@ -7,7 +7,6 @@ define( ['views/app/drawer/itemSetting'], function( itemSettingView ) {
 			this.collection = this.model.get( 'settings' );
 			this.childViewOptions = { dataModel: data.dataModel };
 			this.dataModel = data.dataModel;
-
 			var deps = this.model.get( 'deps' );
 			if ( deps ) {
 				for ( var name in deps ) {
@@ -85,7 +84,6 @@ define( ['views/app/drawer/itemSetting'], function( itemSettingView ) {
 		attachHtml: function( collectionView, childView ) {
 			jQuery( collectionView.el ).find( '.nf-field-sub-settings' ).append( childView.el );
 		}
-
 	} );
 
 	return view;
