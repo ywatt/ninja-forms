@@ -91,7 +91,7 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
         if( ! isset( $settings[ 'id' ] ) ) $settings[ 'id' ] = '';
 
-        $attachments = apply_filters( 'ninja_forms_action_email_attachments', $attachments, $settings[ 'key' ], $settings[ 'id' ] );
+        $attachments = apply_filters( 'ninja_forms_action_email_attachments', $attachments, '' /* TODO: Action Key */, $settings[ 'id' ] );
 
         return $attachments;
     }
