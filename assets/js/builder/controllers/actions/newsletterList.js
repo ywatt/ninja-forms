@@ -13,6 +13,9 @@ define( [], function( ) {
         },
 
         maybeRenderFieldset: function( dataModel, settingModel ) {
+
+            if( 'undefined' == typeof settingModel ) return;
+
             var selectedList = dataModel.get( 'newsletter_list' );
             var lists = settingModel.get( 'options' );
             _.each( lists, function( list ) {
@@ -20,6 +23,8 @@ define( [], function( ) {
                     nfRadio.channel( 'newsletter_list_fieldset').trigger( 'update:fieldMapping', list.fields );
                 }
             } );
+
+            dataModel.set( 'newsletter_list_fieldset', 0 );
         },
 
         registerListener: function ( model ) {
@@ -41,6 +46,7 @@ define( [], function( ) {
         },
 
         updateLists: function( settingModel, lists, settingView, dataModel ) {
+            lists.unshift({ label: '-', value: 0, fields: [] });
             settingModel.set( 'options', lists );
             settingView.render();
         },
