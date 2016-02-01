@@ -44,6 +44,10 @@ define( [], function( ) {
         },
 
         clickListUpdate: function( e, settingModel, dataModel, settingView ) {
+
+            console.log( e.srcElement );
+            jQuery( e.srcElement).addClass( 'spin' );
+
             var data = {
                 action: 'nf_' + dataModel.attributes.type + '_get_lists',
                 security: nfAdmin.ajaxNonce
