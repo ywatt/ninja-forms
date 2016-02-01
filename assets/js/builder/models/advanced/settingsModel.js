@@ -26,8 +26,8 @@ define( [], function() {
 		 * @since  3.0
 		 * @return void
 		 */
-		changeSetting: function() {
-			nfRadio.channel( 'app' ).trigger( 'update:setting', this );
+		changeSetting: function( model, options) {
+			nfRadio.channel( 'app' ).trigger( 'update:setting', this, options.settingModel );
 		},
 
 		updateFieldKey: function( keyModel, settingModel ) {

@@ -35,7 +35,7 @@ define( [], function() {
 				value = jQuery( e.target ).val();
 			}
 			// Update our field model with the new setting value.
-			dataModel.set( name, value );
+			dataModel.set( name, value, { settingModel: settingModel } );
 			// Register our setting change with our change tracker
 			var after = value;
 			
