@@ -775,7 +775,7 @@ All styles used within the drawer
     content: "";
     display: block; }
 
-.nf-setting .extra .dashicons.spin {
+.dashicons.spin {
   -webkit-animation: dashicons-spin 1s infinite;
           animation: dashicons-spin 1s infinite;
   -webkit-animation-timing-function: linear;
