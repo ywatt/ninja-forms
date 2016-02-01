@@ -12,11 +12,14 @@ define( [], function( ) {
             this.listenTo( nfRadio.channel( 'actionSetting-newsletter_list' ), 'update:setting', this.maybeRenderFieldset );
         },
 
-        maybeRenderFieldset: function( lists ) {
-            // model.changedAttributes(); -> { name: new_value } If name is list, then
-            // Use: nfRadio.channel( 'newsletter_list_fieldset').trigger( 'update:fieldMapping', response.lists );
-            console.log( 'change list' );
-
+        maybeRenderFieldset: function( dataModel, settingModel ) {
+            var selectedList = dataModel.get( 'newsletter_list' );
+            var lists = settingModel.get( 'options' );
+            _.each( lists, function( list ) {
+                if ( selectedList == list.value ) {
+                    nfRadio.channel( 'newsletter_list_fieldset').trigger( 'update:fieldMapping', list.fields );
+                }
+            } );
         },
 
         registerListener: function ( model ) {
@@ -33,7 +36,7 @@ define( [], function( ) {
             jQuery.post( ajaxurl, data, function( response ){
                 var response = JSON.parse( response );
                 that.updateLists( settingModel, response.lists, settingView, dataModel );
-                dataModel.set( 'newsletter_list', response.lists[0].value );
+                dataModel.set( 'newsletter_list', response.lists[0].value, { settingModel: settingModel } );
             });
         },
 
@@ -42,23 +45,17 @@ define( [], function( ) {
             settingView.render();
         },
 
-        updateFieldMapping: function( lists ) {
+        updateFieldMapping: function( fields ) {
            var settings = this.get( 'settings' );
             settings.reset();
-            _.each( lists, function( list ){
+            _.each( fields, function( field ){
 
-                _.each( list.fields, function( field ) {
-                    var newSetting = settings.add({
-                        name: field.value,
-                        type: 'textbox',
-                        label: field.label,
-                        width: 'full',
-                        use_merge_tags: {
-                            exclude: [
-                                'user', 'post', 'system', 'querystrings'
-                            ]
-                        }
-                    });
+                settings.add({
+                    name: field.value,
+                    type: 'textbox',
+                    label: field.label,
+                    width: 'full',
+                    use_merge_tags: { exclude: [ 'user', 'post', 'system', 'querystrings' ] }
                 });
             });
             this.set( 'settings', settings );
