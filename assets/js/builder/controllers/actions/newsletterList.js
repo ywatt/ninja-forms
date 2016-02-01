@@ -9,7 +9,19 @@ define( [], function( ) {
         initialize: function() {
             this.listenTo( nfRadio.channel( 'setting-type-newsletter_list' ), 'click:extra', this.clickListUpdate );
             this.listenTo( nfRadio.channel( 'setting-name-newsletter_list_fieldset' ), 'init:settingModel', this.registerListener );
+            this.listenTo( nfRadio.channel( 'setting-newsletter_list' ), 'show:setting', this.defaultFields );
+            this.listenTo( nfRadio.channel( 'setting-name-newsletter_list' ), 'init:settingModel', this.addEmptyOption );
             this.listenTo( nfRadio.channel( 'actionSetting-newsletter_list' ), 'update:setting', this.maybeRenderFieldset );
+        },
+
+        defaultFields: function( settingModel, dataModel ) {
+            this.maybeRenderFieldset( dataModel, settingModel );
+        },
+
+        addEmptyOption: function( model ) {
+            var lists = model.get( 'options' );
+            lists.unshift({ label: '-', value: 0, fields: [] });
+            model.set( 'options', lists );
         },
 
         maybeRenderFieldset: function( dataModel, settingModel ) {
