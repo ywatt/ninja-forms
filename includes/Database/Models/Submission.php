@@ -179,7 +179,7 @@ final class NF_Database_Models_Submission
     {
         if( property_exists( $this, $key ) ) return FALSE;
 
-        return $this->_extra_values[ $key ] = update_post_meta( $this->_id, $key, $value );
+        return $this->_extra_values[ $key ] = $value;
     }
 
     public function update_extra_values( $values )

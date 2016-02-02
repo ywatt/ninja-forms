@@ -46,6 +46,8 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
     public function process( $action_settings, $form_id, $data )
     {
+        $data[ 'extra' ][ 'foo' ] = 'bar';
+
         if( isset( $data['settings']['is_preview'] ) && $data['settings']['is_preview'] ){
             return $data;
         }
@@ -55,6 +57,10 @@ final class NF_Actions_Save extends NF_Abstracts_Action
         foreach( $data['fields'] as $field ){
 
             $sub->update_field_value( $field['id'], $field['value'] );
+        }
+
+        if( isset( $data[ 'extra' ] ) ) {
+            $sub->update_extra_values( $data['extra'] );
         }
 
         $sub->save();
