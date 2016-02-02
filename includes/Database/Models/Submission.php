@@ -21,6 +21,8 @@ final class NF_Database_Models_Submission
 
     protected $_field_values = array();
 
+    protected $_extra_values = array();
+
     public function __construct( $id = '', $form_id = '' )
     {
         $this->_id = $id;
@@ -154,7 +156,12 @@ final class NF_Database_Models_Submission
 
     public function get_extra_value( $key )
     {
-        return get_post_meta( $this->_id, $key, '' );
+        if( ! isset( $this->_extra_values[ $key ] ) ||  ! $this->_extra_values[ $key ] ){
+            $id = ( $this->_id ) ? $this->_id : 0;
+            $this->_extra_values[ $key ] = get_post_meta( $id, $key, '' );
+        }
+
+        return $this->_extra_values[ $key ];
     }
 
     public function get_extra_values( $keys )
@@ -172,7 +179,7 @@ final class NF_Database_Models_Submission
     {
         if( property_exists( $this, $key ) ) return FALSE;
 
-        update_post_meta( $this->_id, $key, $value );
+        return $this->_extra_values[ $key ] = update_post_meta( $this->_id, $key, $value );
     }
 
     public function update_extra_values( $values )
