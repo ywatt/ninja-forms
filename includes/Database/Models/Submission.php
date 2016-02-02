@@ -152,6 +152,36 @@ final class NF_Database_Models_Submission
         return $this;
     }
 
+    public function get_extra_value( $key )
+    {
+        return get_post_meta( $this->_id, $key, '' );
+    }
+
+    public function get_extra_values( $keys )
+    {
+        $values = array();
+
+        foreach( $keys as $key ) {
+            $values[ $key ] = $this->get_extra_value( $key );
+        }
+
+        return $values;
+    }
+
+    public function update_extra_value( $key, $value )
+    {
+        if( property_exists( $this, $key ) ) return FALSE;
+
+        update_post_meta( $this->_id, $key, $value );
+    }
+
+    public function update_extra_values( $values )
+    {
+        foreach( $values as $key => $value ){
+            $this->update_extra_value( $key, $value );
+        }
+    }
+
     /**
      * Find Submissions
      *
@@ -338,6 +368,13 @@ final class NF_Database_Models_Submission
         foreach( $this->_field_values as $field_id => $value )
         {
             $this->_save_field_value( $field_id, $value );
+        }
+
+        foreach( $this->_extra_values as $key => $value )
+        {
+            if( property_exists( $this, $key ) ) continue;
+
+            update_post_meta( $this->_id, $key, $value );
         }
 
         update_post_meta( $this->_id, '_form_id', $this->_form_id );
