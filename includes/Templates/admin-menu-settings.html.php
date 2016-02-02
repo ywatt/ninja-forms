@@ -1,6 +1,13 @@
 <div class="wrap">
     <form action="" method="POST">
 
+        <?php if( $errors ): ?>
+            <?php foreach( $errors as $error_id => $error ): ?>
+                <?php $message = $error . " <a href='#$error_id'>" . __( 'Fix it.', 'ninja-forms' ) . '</a>'; ?>
+                <?php Ninja_Forms::template( 'admin-notice.html.php', array( 'class' => 'error', 'message' => $message ) ); ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
         <?php foreach( $grouped_settings as $group => $settings ) : ?>
             <div id="ninja_forms_metabox_<?php echo $group; ?>_settings" class="postbox">
                 <span class="item-controls">
@@ -38,6 +45,13 @@
                                                 echo "<input type='checkbox' name='{$setting['id']}' value='1' id='{$setting['id']}' class='widefat' $checked>";
                                                 echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                         }
+                                    ?>
+                                    <?php
+                                    if( isset( $setting[ 'errors' ] ) ){
+                                        foreach( $setting[ 'errors' ] as $error_id => $error ){
+                                            echo "<div id='$error_id' class='error'><p>$error</p></div>";
+                                        }
+                                    }
                                     ?>
                                 </td>
                                 </tr>
