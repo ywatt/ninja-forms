@@ -224,7 +224,10 @@ abstract class NF_Abstracts_Field
         }
 
         $parent_class_name = strtolower( str_replace('NF_Fields_', '', $parent_class->getName() ) );
-        $parent = Ninja_Forms()->fields[$parent_class_name];
+
+        if( ! isset( Ninja_Forms()->fields[ $parent_class_name ] ) ) return $templates;
+
+        $parent = Ninja_Forms()->fields[ $parent_class_name ];
         return array_merge($templates, $parent->get_templates());
 
     }
