@@ -60,21 +60,6 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 
         $this->cache_lists( $lists );
 
-        $lists[] = array(
-            'value' => 3,
-            'label' => 'Other Stuff',
-            'fields' => array(
-                array(
-                    'value' => 'one',
-                    'label' => __( 'Foo', 'ninja-forms-mail-chimp' )
-                ),
-                array(
-                    'value' => 'two',
-                    'label' => __( 'Bar', 'ninja-forms-mail-chimp' )
-                ),
-            )
-        );
-
         echo wp_json_encode( array( 'lists' => $lists ) );
 
         wp_die(); // this is required to terminate immediately and return a proper response
