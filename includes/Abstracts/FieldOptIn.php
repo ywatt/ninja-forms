@@ -53,9 +53,8 @@ class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
          * Single Opt-In Default. Multiple Opt-In will use the groups fieldset.
          */
         $this->_settings[ 'default' ][ 'type' ] = 'toggle';
-        $this->_settings[ 'default' ][ 'group' ] = 'primary';
         $this->_settings[ 'default' ][ 'value' ] = 0;
-        $this->_settings[ 'default' ][ 'label' ] = __( 'Opt-In by default', 'ninja-forms-mail-chimp');
+        $this->_settings[ 'default' ][ 'label' ] = __( 'Opt-In by default', 'ninja-forms');
     }
 
     protected function addList( $name, $label )
