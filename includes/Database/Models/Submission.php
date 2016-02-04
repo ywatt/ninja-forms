@@ -158,7 +158,7 @@ final class NF_Database_Models_Submission
     {
         if( ! isset( $this->_extra_values[ $key ] ) ||  ! $this->_extra_values[ $key ] ){
             $id = ( $this->_id ) ? $this->_id : 0;
-            $this->_extra_values[ $key ] = get_post_meta( $id, $key, '' );
+            $this->_extra_values[ $key ] = get_post_meta( $id, $key, TRUE );
         }
 
         return $this->_extra_values[ $key ];
