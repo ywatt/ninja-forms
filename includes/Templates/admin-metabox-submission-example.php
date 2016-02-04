@@ -1,3 +1,7 @@
-<h4>Submision Data</h4>
+<h4>Submission Data</h4>
 
-<?php echo $data; ?>
+<?php
+echo "<pre>";
+var_dump($data);
+echo "</pre>";
+?>
