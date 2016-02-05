@@ -2,6 +2,14 @@
 
 /**
  * Class NF_Abstracts_FieldOptIn
+ *
+ * Opt-In fields should extend this class.
+ *
+ * Supports:
+ * - Checkbox value processing
+ *
+ * Planned Support:
+ * - Single / Multiple Type Opt-In
  */
 abstract class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
 {
