@@ -115,7 +115,9 @@ final class NF_Display_Render
                     if (is_numeric($setting)) $settings[$key] = floatval($setting);
                 }
 
-                if( 'list' == $field_class->get_parent_type() && isset( $settings[ 'options' ] ) && is_array( $settings[ 'options' ] ) ){
+                $settings[ 'parentType' ] = $field_class->get_parent_type();
+
+                if( 'list' == $settings[ 'parentType' ] && isset( $settings[ 'options' ] ) && is_array( $settings[ 'options' ] ) ){
                     $settings[ 'options' ] = apply_filters( 'ninja_forms_render_options', $settings[ 'options' ], $settings );
                 }
                 
@@ -256,7 +258,9 @@ final class NF_Display_Render
                     $field['settings']['value'] = $field_class->get_test_value();
                 }
 
-                if( 'list' == $field_class->get_parent_type() && isset( $field['settings'][ 'options' ] ) && is_array( $field['settings'][ 'options' ] ) ){
+                $field[ 'settings' ][ 'parentType' ] = $field_class->get_parent_type();
+
+                if( 'list' == $field[ 'settings' ][ 'parentType' ] && isset( $field['settings'][ 'options' ] ) && is_array( $field['settings'][ 'options' ] ) ){
                     $field['settings'][ 'options' ] = apply_filters( 'ninja_forms_render_options', $field['settings'][ 'options' ], $field['settings'] );
                 }
 

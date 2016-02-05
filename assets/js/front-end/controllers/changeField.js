@@ -18,6 +18,7 @@ define([], function() {
 		changeField: function( el, model ) {
 			// Get our current value.
 			var value = nfRadio.channel( model.get( 'type' ) ).request( 'before:updateField', el, model );
+			value = ( 'undefined' != typeof value ) ? value : nfRadio.channel( model.get( 'parentType' ) ).request( 'before:updateField', el, model );
 			value = ( 'undefined' != typeof value ) ? value : jQuery( el ).val();
 
 			// Set our 'isUpdated' flag to false.

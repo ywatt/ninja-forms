@@ -78,6 +78,11 @@ abstract class NF_Abstracts_Field
     /**
      * @var string
      */
+    protected $_parent_type = '';
+
+    /**
+     * @var string
+     */
     public static $_base_template = 'input';
 
     /**
@@ -186,8 +191,11 @@ abstract class NF_Abstracts_Field
 
     public function get_parent_type()
     {
+        if( $this->_parent_type ){
+            return $this->_parent_type;
+        }
         // If a type is not set, return 'textbox'
-        return ( get_parent_class() ) ? parent::_type : 'textbox';
+        return ( get_parent_class() ) ? parent::$_type : 'textbox';
     }
 
     public function get_settings()

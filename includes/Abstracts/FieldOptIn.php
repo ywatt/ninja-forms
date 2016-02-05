@@ -3,13 +3,13 @@
 /**
  * Class NF_Abstracts_FieldOptIn
  */
-class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
+abstract class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
 {
     protected $_name = 'optin';
 
     protected $_section = 'misc';
 
-    protected $_type = 'optin';
+    protected $_parent_type = 'checkbox';
 
     protected $_templates = 'optin';
 
