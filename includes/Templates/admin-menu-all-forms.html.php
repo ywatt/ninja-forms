@@ -1,10 +1,10 @@
 <div class="wrap">
 
-    <h2>Forms
-        <a href="<?php echo $add_new_url; ?>" class="add-new-h2">
+    <h1>Forms
+        <a href="<?php echo $add_new_url; ?>" class="page-title-action">
             <?php echo $add_new_text; ?>
         </a>
-    </h2>
+    </h1>
 
     <form method="post">
         <?php $table->display(); ?>
