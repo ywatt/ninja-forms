@@ -42,7 +42,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
                 $grouped_settings[$group][$id]['id'] = $this->prefix( $grouped_settings[$group][$id]['id'] );
                 $grouped_settings[$group][$id]['value'] = $value;
 
-                $grouped_settings[$group][$id] = apply_filters( 'ninja_forms_setting_' . $id, $grouped_settings[$group][$id] );
+                $grouped_settings[$group][$id] = apply_filters( 'ninja_forms_check_setting_' . $id, $grouped_settings[$group][$id] );
 
                 if( ! isset( $grouped_settings[$group][$id][ 'errors' ] ) || ! $grouped_settings[$group][$id][ 'errors' ] ) continue;
 
@@ -120,7 +120,10 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
         $settings = $_POST[ 'ninja_forms' ];
 
         foreach( $settings as $id => $value ){
-            Ninja_Forms()->update_setting( $id, sanitize_text_field( $value ) );
+            $value = sanitize_text_field( $value );
+            $value = apply_filters( 'ninja_forms_update_setting_' . $id, $value );
+            Ninja_Forms()->update_setting( $id, $value );
+            do_action( 'ninja_forms_after_update_setting_' . $id, $value );
         }
     }
 
