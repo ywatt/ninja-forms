@@ -123,7 +123,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
             $value = sanitize_text_field( $value );
             $value = apply_filters( 'ninja_forms_update_setting_' . $id, $value );
             Ninja_Forms()->update_setting( $id, $value );
-            do_action( 'ninja_forms_after_update_setting_' . $id, $value );
+            do_action( 'ninja_forms_save_setting_' . $id, $value );
         }
     }
 
