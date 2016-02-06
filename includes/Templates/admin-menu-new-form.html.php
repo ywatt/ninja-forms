@@ -101,7 +101,7 @@
 </script>
 
 <script id="nf-tmpl-main-content-field" type="text/template">
-    <div id="<%= getFieldID() %>" class="<%= renderClasses() %>"> <%= label %> <%= renderRequired() %>
+    <div id="<%= getFieldID() %>" class="<%= renderClasses() %>" data-id="<%= id %>"> <%= label %> <%= renderRequired() %>
         <ul class="nf-item-controls"></ul>
     </div>
 </script>
