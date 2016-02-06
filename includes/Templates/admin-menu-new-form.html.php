@@ -1,3 +1,5 @@
+<h1><?php _e( 'Form Builder', 'ninja-forms' ); ?></h1>
+
 <div id="nf-builder" class="grey"></div>
 
 <script id="nf-tmpl-builder" type="text/template">

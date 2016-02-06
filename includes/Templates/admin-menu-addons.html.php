@@ -1,5 +1,7 @@
 <div class="wrap">
 
+    <h1><?php _e( 'Add-Ons', 'ninja-forms' ); ?></h1>
+
     <?php foreach ($notices as $notice): ?>
 
         <div class="nf-addon-notice">

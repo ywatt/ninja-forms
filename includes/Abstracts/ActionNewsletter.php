@@ -22,6 +22,10 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 
     protected $_settings = array();
 
+    protected $_transient = '';
+
+    protected $_transient_expiration = '';
+
     /**
      * Constructor
      */
@@ -52,25 +56,11 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
     {
         check_ajax_referer( 'ninja_forms_ajax_nonce', 'security' );
 
-        $response[ 'lists' ] = $this->get_lists();
-        $response[ 'lists' ] = array(
-            array(
-                'value' => 3,
-                'label' => 'Other Stuff',
-                'fields' => array(
-                    array(
-                        'value' => 'one',
-                        'label' => __( 'Foo', 'ninja-forms-mail-chimp' )
-                    ),
-                    array(
-                        'value' => 'two',
-                        'label' => __( 'Bar', 'ninja-forms-mail-chimp' )
-                    ),
-                )
-            ),
-        );
+        $lists = $this->get_lists();
 
-        echo wp_json_encode( $response );
+        $this->cache_lists( $lists );
+
+        echo wp_json_encode( array( 'lists' => $lists ) );
 
         wp_die(); // this is required to terminate immediately and return a proper response
     }
@@ -87,7 +77,12 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 
     private function get_list_settings()
     {
-        $lists = $this->get_lists();
+        $lists = get_transient( $this->_transient );
+
+        if( ! $lists ) {
+            $lists = $this->get_lists();
+            $this->cache_lists( $lists );
+        }
 
         if( empty( $lists ) ) return;
 
@@ -97,7 +92,7 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
             'label' => __( 'List', 'ninja-forms' ) . ' <a class="js-newsletter-list-update extra"><span class="dashicons dashicons-update"></span></a>',
             'width' => 'full',
             'group' => 'primary',
-            'value' => '2',
+            'value' => '0',
             'options' => array(),
         );
 
@@ -126,7 +121,12 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
             'label' => __( 'List Field Mapping', 'ninja-forms' ),
             'type' => 'fieldset',
             'group' => 'primary',
-            'settings' => $fields
+            'settings' => []
         );
+    }
+
+    private function cache_lists( $lists )
+    {
+        set_transient( $this->_transient, $lists, $this->_transient_expiration );
     }
 }

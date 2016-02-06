@@ -1,4 +1,7 @@
 <div class="wrap">
+
+    <h1><?php _e( 'System Status', 'ninja-forms' ); ?></h1>
+
     <div class="nf-box">
         <div>
     		<h4><?php _e( 'Please include this information when requesting support:', 'ninja-forms' ); ?> </h4>

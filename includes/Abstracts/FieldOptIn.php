@@ -2,14 +2,22 @@
 
 /**
  * Class NF_Abstracts_FieldOptIn
+ *
+ * Opt-In fields should extend this class.
+ *
+ * Supports:
+ * - Checkbox value processing
+ *
+ * Planned Support:
+ * - Single / Multiple Type Opt-In
  */
-class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
+abstract class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
 {
     protected $_name = 'optin';
 
     protected $_section = 'misc';
 
-    protected $_type = 'optin';
+    protected $_parent_type = 'checkbox';
 
     protected $_templates = 'optin';
 
@@ -23,6 +31,9 @@ class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
     {
         parent::__construct();
 
+        /*
+         * Setup 'type' options for the opt-in field.
+         */
         $this->_settings[ 'type' ][ 'options' ] = array(
             array(
                 'label'     => __( 'Single', 'ninja-forms' ),
@@ -34,8 +45,24 @@ class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
             ),
         );
 
+        /*
+         * Add a refresh extra for the groups fieldset.
+         */
         $this->_settings[ 'fieldset' ][ 'label' ] = __( 'Lists', 'ninja-forms' ) . ' <a href="#"><small>' . __( 'refresh', 'ninja-forms' ) . '</small></a>';
         $this->_settings[ 'fieldset' ][ 'deps' ] = array( 'type' => 'multiple' );
+
+        /*
+         * Hide the 'type' and 'fieldset' ('groups') settings until they are ready for use.
+         */
+        $this->_settings[ 'type' ][ 'group' ] = '';
+        $this->_settings[ 'fieldset' ][ 'group' ] = '';
+
+        /*
+         * Single Opt-In Default. Multiple Opt-In will use the groups fieldset.
+         */
+        $this->_settings[ 'default' ][ 'type' ] = 'toggle';
+        $this->_settings[ 'default' ][ 'value' ] = 0;
+        $this->_settings[ 'default' ][ 'label' ] = __( 'Opt-In by default', 'ninja-forms');
     }
 
     protected function addList( $name, $label )

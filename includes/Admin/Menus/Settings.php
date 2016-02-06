@@ -31,14 +31,29 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
         $setting_defaults = Ninja_Forms()->get_settings();
 
+        $errors = array();
+
         foreach( $grouped_settings as $group => $settings ){
 
-            foreach( $settings as $key => $setting ){
+            foreach( $settings as $id => $setting ){
 
-                $default = ( isset( $setting_defaults[ $key ] ) ) ? $setting_defaults[$key] : '';
+                $value = ( isset( $setting_defaults[ $id ] ) ) ? $setting_defaults[$id] : '';
 
-                $grouped_settings[$group][$key]['id'] = $this->prefix( $grouped_settings[$group][$key]['id'] );
-                $grouped_settings[$group][$key]['value'] = $default;
+                $grouped_settings[$group][$id]['id'] = $this->prefix( $grouped_settings[$group][$id]['id'] );
+                $grouped_settings[$group][$id]['value'] = $value;
+
+                $grouped_settings[$group][$id] = apply_filters( 'ninja_forms_check_setting_' . $id, $grouped_settings[$group][$id] );
+
+                if( ! isset( $grouped_settings[$group][$id][ 'errors' ] ) || ! $grouped_settings[$group][$id][ 'errors' ] ) continue;
+
+                if( ! is_array( $grouped_settings[$group][$id][ 'errors' ] ) ) $grouped_settings[$group][$id][ 'errors' ] = array( $grouped_settings[$group][$id][ 'errors' ] );
+
+                foreach( $grouped_settings[$group][$id][ 'errors' ] as $old_key => $error ){
+                    $new_key = $grouped_settings[$group][$id][ 'id' ] . "[" . $old_key . "]";
+                    $errors[ $new_key ] = $error;
+                    $grouped_settings[$group][$id][ 'errors'][ $new_key ] = $error;
+                    unset( $grouped_settings[$group][$id][ 'errors' ][ $old_key ] );
+                }
             }
         }
 
@@ -63,7 +78,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
             add_action( 'admin_footer', array( $this, 'add_saved_field_javascript' ) );
         }
 
-        Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'groups', 'grouped_settings', 'save_button_text' ) );
+        Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'groups', 'grouped_settings', 'save_button_text', 'errors' ) );
 
     }
 
@@ -98,7 +113,6 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
         <?php
     }
 
-
     private function update_settings()
     {
         if( ! isset( $_POST[ $this->_prefix ] ) ) return;
@@ -106,7 +120,10 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
         $settings = $_POST[ 'ninja_forms' ];
 
         foreach( $settings as $id => $value ){
-            Ninja_Forms()->update_setting( $id, sanitize_text_field( $value ) );
+            $value = sanitize_text_field( $value );
+            $value = apply_filters( 'ninja_forms_update_setting_' . $id, $value );
+            Ninja_Forms()->update_setting( $id, $value );
+            do_action( 'ninja_forms_save_setting_' . $id, $value );
         }
     }
 
