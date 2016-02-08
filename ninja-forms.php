@@ -451,14 +451,8 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
          * TODO: Move to a permanent home
          */
         public function activation() {
-            $mock_data = new NF_Database_MockData();
-            $mock_data->saved_fields();
-            $mock_data->form_blank_form();
-            $mock_data->form_contact_form_1();
-            $mock_data->form_contact_form_2();
-            $mock_data->form_email_submission();
-            $mock_data->form_kitchen_sink();
-//            $mock_data->form_long_form();
+            $migrations = new NF_Database_Migrations();
+            $migrations->migrate();
         }
 
     } // End Class Ninja_Forms

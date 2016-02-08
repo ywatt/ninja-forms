@@ -5,7 +5,7 @@ class NF_Database_Migrations_Objects extends NF_Abstracts_Migration
     public function __construct()
     {
         parent::__construct(
-            'ninja_forms_objects',
+            'nf3_objects',
             'nf_migration_create_table_objects'
         );
     }
