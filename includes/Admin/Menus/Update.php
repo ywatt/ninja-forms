@@ -32,6 +32,8 @@ final class NF_Admin_Menus_Update extends NF_Abstracts_Submenu
 
             foreach( $old_form[ 'settings' ] as $key => $value ){
 
+                if( in_array( $key, array( 'form_title', 'ajax' ) ) ) continue;
+
                 switch( $key ){
                     case 'hide_complete':
                         $key = 'hide_successfully_completed_form';
