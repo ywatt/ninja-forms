@@ -499,14 +499,11 @@ function nf_alpha_release_admin_notice()
         }
     </style>
     <div class="update-nag nf-alpha-notice">
-        <h3>Ninja Forms 3.0 - BETA 1 - <a href="https://en.wikipedia.org/wiki/Seventh_Doctor" target="_blank">S.McCoy</a></h3>
-        <p><strong>NOTICE:</strong> Installed is a Beta Release of Ninja Forms. This is not intended for production.</p>
+        <h3>Ninja Forms 3.0 - Release Candidate 1</h3>
+        <p><strong>NOTICE:</strong> Installed is a Release Candidate of Ninja Forms. This is <strong>not</strong> intended for production.</p>
         <p>Please keep a few things in mind while exploring:</p>
         <ul>
             <li><strong>DO NOT</strong> attempt to install this release on a live website. (If this site falls in that category, remove this plugin)</li>
-            <li><strong>DO</strong> install this on a clean WordPress install; by this we mean a completely new WordPress installation to which Ninja Forms 2.9.x or earlier has never been installed.</li>
-            <li>There will be database conflicts if you install this alongside 2.9.x, even if 2.9.x has been deactivated or deleted.</li>
-            <li>This BETA is best viewed at <strong>1039px wide or greater.</strong> This is because we have not fully implented the responsive UI thus far.</li>
         </ul>
         <p>Please submit all <strong>feedback</strong> on our <a href="http://developer.ninjaforms.com/slack/">Slack group</a></p>
     </div>
