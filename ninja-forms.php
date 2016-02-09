@@ -358,7 +358,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
 
         public function update_settings( $settings = array() )
         {
-            $this->settings = array_merge( $this->settings, $settings );
+            if( ! is_array( $this->settings ) ) $this->settings = array( $this->settings );
+
+            if( $settings && is_array( $settings ) ) {
+                $this->settings = array_merge($this->settings, $settings);
+            }
+
             update_option( 'ninja_forms_settings', $this->settings );
         }
 
