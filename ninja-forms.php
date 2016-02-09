@@ -258,6 +258,8 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
              */
             self::$instance->actions = apply_filters( 'ninja_forms_register_actions', self::load_classes( 'Actions' ) );
 
+            do_action( 'ninja_forms_loaded' );
+
         }
 
         /**
