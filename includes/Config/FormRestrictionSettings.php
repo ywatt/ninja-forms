@@ -14,8 +14,8 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
              * REQUIRE USER TO BE LOGGED IN TO VIEW FORM?
              */
 
-            'require_user_logged_in_to_view_form' => array(
-                'name' => 'require_user_logged_in_to_view_form',
+            'logged_in' => array(
+                'name' => 'logged_in',
                 'type' => 'toggle',
                 'label' => __( 'Require user to be logged in to view form?', 'ninja-forms' ),
                 'width' => 'one-half',
@@ -28,8 +28,8 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
              * NOT LOGGED-IN MESSAGE
              */
 
-            'not_logged_in_message' => array(
-                'name' => 'not_logged_in_message',
+            'not_logged_in_msg' => array(
+                'name' => 'not_logged_in_msg',
                 'type' => 'textarea', //TODO: Add WYSIWYG
                 'label' => __( 'Not Logged-In Message', 'ninja-forms' ),
                 'width' => 'full',
@@ -54,8 +54,8 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
              * LIMIT SUBMISSIONS
              */
 
-            'limit_submissions' => array(
-                'name' => 'limit_submissions',
+            'sub_limit_number' => array(
+                'name' => 'sub_limit_number',
                 'type' => 'number',
                 'label' => __( 'Limit Submission', 'ninja-forms' ),
                 'width' => 'one-third',
@@ -70,8 +70,8 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
              * LIMIT REACHED MESSAGE
              */
 
-            'limit_reached_message' => array(
-                'name' => 'limit_reached_message',
+            'sub_limit_msg' => array(
+                'name' => 'sub_limit_msg',
                 'type' => 'textarea',//TODO: Add WYSIWYG
                 'label' => __( 'Limit Reached Message', 'ninja-forms' ),
                 'width' => 'full',
