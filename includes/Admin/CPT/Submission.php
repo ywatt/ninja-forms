@@ -5,6 +5,7 @@
  */
 class NF_Admin_CPT_Submission
 {
+    protected $cpt_slug = 'nf_sub';
     /**
      * Constructor
      */
@@ -12,6 +13,9 @@ class NF_Admin_CPT_Submission
     {
         // Register our submission custom post type.
         add_action( 'init', array( $this, 'custom_post_type' ), 5 );
+
+        // Filter Post Row Actions
+        add_filter( 'post_row_actions', array( $this, 'post_row_actions' ) );
 
         // Change our submission columns.
         add_filter( 'manage_nf_sub_posts_columns', array( $this, 'change_columns' ) );
@@ -67,7 +71,16 @@ class NF_Admin_CPT_Submission
             'publicly_queryable'  => true,
             'capability_type'     => 'page',
         );
-        register_post_type( 'nf_sub', $args );
+        register_post_type( $this->cpt_slug, $args );
+    }
+
+    public function post_row_actions( $actions )
+    {
+        if( $this->cpt_slug == get_post_type() ){
+            unset( $actions[ 'view' ] );
+            unset( $actions[ 'inline hide-if-no-js' ] );
+        }
+        return $actions;
     }
 
     public function change_columns( $columns )
