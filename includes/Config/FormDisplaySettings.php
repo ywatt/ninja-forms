@@ -17,11 +17,11 @@ return apply_filters( 'ninja_forms_from_display_settings', array(
     ),
 
     /*
-    * DISPLAY FORM TITLE
+    * SHOW FORM TITLE
     */
 
-    'display_form_title' => array(
-        'name' => 'display_form_title',
+    'show_title' => array(
+        'name' => 'show_title',
         'type' => 'toggle',
         'label' => __( 'Display Form Title', 'ninja-forms' ),
         'width' => 'full',
@@ -34,8 +34,8 @@ return apply_filters( 'ninja_forms_from_display_settings', array(
     * CLEAR SUCCESSFULLY COMPLETED FORM
     */
 
-    'clear_successfully_created_form' => array(
-        'name' => 'clear_successfully_created_form',
+    'clear_complete' => array(
+        'name' => 'clear_complete',
         'type' => 'toggle',
         'label' => __( 'Clear successfully completed form?', 'ninja-forms' ),
         'width' => 'full',
@@ -50,8 +50,8 @@ return apply_filters( 'ninja_forms_from_display_settings', array(
     * HIDE SUCCESSFULLY COMPLETED FORMS
     */
 
-    'hide_successfully_completed_form' => array(
-        'name' => 'hide_successfully_completed_form',
+    'hide_complete' => array(
+        'name' => 'hide_complete',
         'type' => 'toggle',
         'label' => __( 'Hide successfully completed forms?', 'ninja-forms' ),
         'width' => 'full',
