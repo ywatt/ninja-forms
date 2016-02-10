@@ -58,6 +58,8 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 
         $lists = $this->get_lists();
 
+        array_unshift( $lists, array( 'value' => 0, 'label' => '-', 'fields' => array(), 'groups' => array() ) );
+
         $this->cache_lists( $lists );
 
         echo wp_json_encode( array( 'lists' => $lists ) );
@@ -116,9 +118,17 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
             }
         }
 
-        $this->_settings[ 'newsletter_list_fieldset' ] = array(
-            'name' => 'newsletter_list_fieldset',
+        $this->_settings[ 'newsletter_list_fields' ] = array(
+            'name' => 'newsletter_list_fields',
             'label' => __( 'List Field Mapping', 'ninja-forms' ),
+            'type' => 'fieldset',
+            'group' => 'primary',
+            'settings' => []
+        );
+
+        $this->_settings[ 'newsletter_list_groups' ] = array(
+            'name' => 'newsletter_list_groups',
+            'label' => __( 'Interest Groups', 'ninja-forms' ),
             'type' => 'fieldset',
             'group' => 'primary',
             'settings' => []
