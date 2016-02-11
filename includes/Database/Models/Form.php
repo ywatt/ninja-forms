@@ -144,11 +144,6 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $form->save();
         $form_id = $form->get_id();
 
-        echo "<pre>";
-        var_dump($import[ 'fields' ]);
-        echo "</pre>";
-        die();
-
         foreach( $import[ 'fields' ] as $settings ){
 
             $field = Ninja_Forms()->form( $form_id )->field()->get();
