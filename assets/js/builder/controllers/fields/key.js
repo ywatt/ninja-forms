@@ -34,7 +34,10 @@ define( [], function() {
 		newFieldKey: function( model ) {
 			var key = this.keyExists( model.get( 'type' ) );
 			model.set( 'key', key, { silent: true } );
-			model.set( 'manual_key', false, { silent: true } );	
+
+			if( 'undefined' == model.get( 'manual_key' ) ) {
+				model.set('manual_key', false, {silent: true});
+			}
 		},
 
 		updateLabel: function( model ) {
