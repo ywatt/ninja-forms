@@ -27,8 +27,8 @@ return array(
      * Subject
      */
 
-    'subject' => array(
-        'name' => 'subject',
+    'email_subject' => array(
+        'name' => 'email_subject',
         'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'Subject', 'ninja-forms' ),
@@ -42,8 +42,8 @@ return array(
      * Email Message
      */
 
-    'message' => array(
-        'name' => 'message',
+    'email_message' => array(
+        'name' => 'email_message',
         'type' => 'rte',
         'group' => 'primary',
         'label' => __( 'Email Message', 'ninja-forms' ),
@@ -106,8 +106,8 @@ return array(
      * Format
      */
 
-    'format' => array(
-        'name' => 'format',
+    'email_format' => array(
+        'name' => 'email_format',
         'type' => 'select',
             'options' => array(
                 array( 'label' => __( 'HTML', 'ninja-forms' ), 'value' => 'html' ),

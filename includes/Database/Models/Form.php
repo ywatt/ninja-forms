@@ -75,15 +75,64 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
         // Combine Field and Field Data
         foreach( $import[ 'fields' ] as $key => $field ){
-
             // TODO: Split Credit Card field into multiple fields.
-
             $field = $this->import_field_backwards_compatibility( $field );
-
             $import[ 'fields' ][ $key ] = $field;
         }
 
+        foreach( $import[ 'actions' ] as $key => $action ){
+            $action = $this->import_action_backwards_compatibility( $action );
+            $import[ 'actions' ][ $key ] = $action;
+        }
+
+        $import = $this->import_merge_tags_backwards_compatibility( $import );
+
         return $import;
+    }
+
+    public function import_merge_tags_backwards_compatibility( $import )
+    {
+        $field_lookup = array();
+
+        foreach( $import[ 'fields' ] as $key => $field ){
+            $field_id  = $field[ 'id' ];
+            $field_key = $field[ 'type' ] . '_' . $field_id;
+            $field_lookup[ $field_id ] = $import[ 'fields' ][ $key ][ 'key' ] = $field_key;
+        }
+
+        foreach( $import[ 'actions' ] as $key => $action_settings ){
+            foreach( $action_settings as $setting => $value ){
+                foreach( $field_lookup as $field_id => $field_key ){
+                    $token = 'field_' . $field_id;
+                    if( FALSE === strpos( $value, $token ) ) continue;
+                    $value = str_replace( $token, '{field:' . $field_key . '}', $value );
+                }
+
+                if( FALSE !== strpos( $value, '[ninja_forms_all_fields]' ) ) {
+                    $value = str_replace( '[ninja_forms_all_fields]', '{field:all_fields}', $value );
+                }
+                $action_settings[ $setting ] = $value;
+                $import[ 'actions' ][ $key ] = $action_settings;
+            }
+        }
+
+        return $import;
+    }
+
+    public function import_action_backwards_compatibility( $action )
+    {
+        // Remove `_` from type
+        if( isset( $action[ 'type' ] ) ) {
+            $action['type'] = str_replace('_', '', $action['type']);
+        }
+
+        // Convert `name` to `label`
+        if( isset( $action[ 'name' ] ) ) {
+            $action['label'] = $action['name'];
+            unset($action['name']);
+        }
+
+        return $action;
     }
 
     public function import_field_backwards_compatibility( $field )
@@ -105,6 +154,19 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         // Type: `text` -> `textbox`
         if( 'text' == $field[ 'type' ] ){
             $field[ 'type' ] = 'textbox';
+        }
+
+        if( isset( $field[ 'class' ] ) ){
+            $field[ 'element_class' ] = $field[ 'class' ];
+            unset( $field[ 'class' ] );
+        }
+
+        if( isset( $field[ 'default_value_type' ] ) ){
+            if( '_custom' == $field[ 'default_value_type' ] && isset( $field[ 'default_value' ] ) ){
+                $field[ 'default' ] = $field[ 'default_value' ];
+            }
+            unset( $field[ 'default_value' ] );
+            unset( $field[ 'default_value_type' ] );
         }
 
         // Convert `textbox` to other field types
