@@ -25,6 +25,11 @@ class NF_Fields_Spam extends NF_Abstracts_Input
         $this->_settings[ 'label' ][ 'label' ] = __( 'Question', 'ninja-forms' );
         $this->_settings[ 'label_pos' ][ 'label' ] = __( 'Question Position', 'ninja-forms' );
 
+        // Manually set Field Key and stop tracking.
+        $this->_settings[ 'key' ][ 'value' ] = 'spam';
+        $this->_settings[ 'manual_key' ][ 'value' ] = TRUE;
+
+
         // Default Required setting to TRUE and hide setting.
         $this->_settings[ 'required' ][ 'value' ] = 1;
         $this->_settings[ 'required' ][ 'group' ] = '';

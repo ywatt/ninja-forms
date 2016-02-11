@@ -393,33 +393,10 @@ return apply_filters( 'ninja_forms_field_settings', array(
     |
     */
 
-   /*
-    * Spam Question
-    */
-
-    'spam_question' => array(
-        'name' => 'spam_question',
-        'type' => 'textbox',
-        'label' => __( 'Spam Question', 'ninja-forms' ),
-        'value' => __( 'Anti-Spam', 'ninja-forms' ),
-        'width' => '',
-        'group' => '',
-        'value' => '',
-
-    ),
-
-   /*
-    * Spam Answer
-    */
-
-    'spam_answer' => array(
-        'name' => 'spam_answer',
-        'type' => 'textbox',
-        'label' => __( 'Spam Answer', 'ninja-forms' ),
-        'width' => '',
-        'group' => '',
-        'value' => '',
-
+    'manual_key' => array(
+        'name' => 'manual_key',
+        'type' => 'bool',
+        'value' => FALSE,
     ),
 
    /*
