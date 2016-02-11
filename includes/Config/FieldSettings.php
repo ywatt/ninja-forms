@@ -804,6 +804,25 @@ return apply_filters( 'ninja_forms_field_settings', array(
         ),
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Anti-Spam Field Settings
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+     * Spam Answer
+     */
+
+    'spam_answer' => array(
+        'name' => 'spam_answer',
+        'type' => 'textbox',
+        'label' => __( 'Answer', 'ninja-forms'),
+        'width' => 'full',
+        'group' => 'primary',
+        'value' => '',
+    ),
+
 ));
 
 
