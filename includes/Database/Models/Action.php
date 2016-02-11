@@ -9,9 +9,9 @@ final class NF_Database_Models_Action extends NF_Abstracts_Model
 
     protected $_type = 'action';
 
-    protected $_table_name = 'ninja_forms_actions';
+    protected $_table_name = 'nf3_actions';
 
-    protected $_meta_table_name = 'ninja_forms_action_meta';
+    protected $_meta_table_name = 'nf3_action_meta';
 
     protected $_columns = array(
         'title',
