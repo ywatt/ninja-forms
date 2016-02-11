@@ -21,7 +21,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
     public function __construct( $db, $id = '' )
     {
-        add_action( 'nf_before_import_form', array( $this, 'import_form_backwards_compatibility' ) );
+        add_action( 'ninja_forms_before_import_form', array( $this, 'import_form_backwards_compatibility' ) );
         parent::__construct( $db, $id );
     }
 
@@ -62,22 +62,63 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             unset( $import[ 'settings' ][ 'form_title' ] );
         }
 
+        // Make sure
+        if( ! isset( $import[ 'fields' ] ) ){
+            $import[ 'fields' ] = array();
+        }
+
         // `Field` to `Fields`
-        if( ! isset( $import[ 'fields'] ) && isset( $import[ 'field' ] ) ){
+        if( isset( $import[ 'field' ] ) ){
             $import[ 'fields' ] = $import[ 'field' ];
             unset( $import[ 'field' ] );
         }
 
         // Combine Field and Field Data
-        foreach( $import[ 'fields' ] as $field ){
+        foreach( $import[ 'fields' ] as $key => $field ){
 
-            if( isset( $field[ 'data' ] ) ){
-                $field = array_merge( $field, $field[ 'data' ] );
-                unset( $field[ 'data' ] );
-            }
+            // TODO: Split Credit Card field into multiple fields.
+
+            $field = $this->import_field_backwards_compatibility( $field );
+
+            $import[ 'fields' ][ $key ] = $field;
         }
 
         return $import;
+    }
+
+    public function import_field_backwards_compatibility( $field )
+    {
+        // Flatten field settings array
+        if( isset( $field[ 'data' ] ) ){
+            $field = array_merge( $field, $field[ 'data' ] );
+            unset( $field[ 'data' ] );
+        }
+
+        // Drop form_id in favor of parent_id, which is set by the form.
+        if( isset( $field[ 'form_id' ] ) ){
+            unset( $field[ 'form_id' ] );
+        }
+
+        // Remove `_` prefix from type setting
+        if( 0 === strpos( $field[ 'type' ], '_' ) ){
+
+        }
+
+        // Type: `text` -> `textbox`
+        if( 'text' == $field[ 'type' ] ){
+            $field[ 'type' ] = 'textbox';
+        }
+
+        // Convert `textbox` to other field types
+        foreach( array( 'fist_name', 'last_name', 'user_zip', 'user_city', 'user_state', 'user_phone', 'user_email', 'user_address_1', 'user_address_2', 'datepicker' ) as $item ) {
+            if ( isset( $field[ $item ] ) && $field[ $item ] ) {
+                $field[ 'type' ] = str_replace( array( '_', 'user', '1', '2', 'picker' ), '', $item );
+                unset( $field[ $item ] );
+            }
+        }
+
+
+        return $field;
     }
 
     public static function get_next_sub_seq( $form_id )
@@ -102,6 +143,11 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $form->update_settings( $import[ 'settings' ] );
         $form->save();
         $form_id = $form->get_id();
+
+        echo "<pre>";
+        var_dump($import[ 'fields' ]);
+        echo "</pre>";
+        die();
 
         foreach( $import[ 'fields' ] as $settings ){
 
