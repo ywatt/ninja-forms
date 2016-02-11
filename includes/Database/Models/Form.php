@@ -100,9 +100,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         }
 
         // Remove `_` prefix from type setting
-        if( 0 === strpos( $field[ 'type' ], '_' ) ){
-
-        }
+        $field[ 'type' ] = ltrim( $field[ 'type' ], '_' );
 
         // Type: `text` -> `textbox`
         if( 'text' == $field[ 'type' ] ){
@@ -116,7 +114,6 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
                 unset( $field[ $item ] );
             }
         }
-
 
         return $field;
     }
