@@ -18,8 +18,6 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
 
 		onShow: function() {
 
-            console.log( this.model );
-
 			this.beforeFields.show( new beforeFields( { model: this.model } ) );
 			this.fields.show( new fieldCollectionView( { collection: this.options.fieldCollection } ) );
 			this.afterFields.show( new afterFields( { model: this.model } ) );
