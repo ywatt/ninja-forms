@@ -87,7 +87,7 @@ define( [], function() {
 						var formModel = nfRadio.channel( 'app' ).request( 'get:formModel' );
 						return this.url + formModel.get( 'id' );
 					} else {
-						return '#';
+						return '#' + this.id;
 					}
 				},
 				/**
