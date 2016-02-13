@@ -32,12 +32,16 @@ define( [], function() {
 		},
 
 		initAppDomain: function() {
-			var hash = window.location.hash;
-			if( hash ) {
-				var appDomains = nfRadio.channel('app').request('get:domainCollection');
-				var initialDomain = appDomains.get( hash.substr(1) );
-				this.changeAppDomain( '', initialDomain );
+
+			var hash = window.location.hash.substr(1);
+			if( ! hash ){
+				hash = window.location.hash ='fields';
 			}
+
+			var appDomains = nfRadio.channel('app').request('get:domainCollection');
+			var domainModel = appDomains.get( hash );
+
+			this.changeAppDomain( '', domainModel );
 		},
 
 		changeAppDomain: function( e, model ) {
