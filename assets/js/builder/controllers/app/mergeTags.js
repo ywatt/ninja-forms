@@ -32,9 +32,8 @@ define( [
 				} );
 			} );
 
-			console.log( this.tagSectionCollection );
+			var fieldTags = this.tagSectionCollection.get( 'fields').get( 'tags' );
 
-			var fieldTags = this.tagSectionCollection.get( 'fields' );
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			_.each( fieldCollection.models, function( field ) {
 				// TODO: Make this dynamic
