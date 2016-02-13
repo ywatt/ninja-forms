@@ -60,7 +60,9 @@ define( [], function() {
 				nfRadio.channel( 'notices' ).request( 'close', 'publishing' );
 			}
 			// Add a notice that we've published.
-			nfRadio.channel( 'notices' ).request( 'add', 'published', 'Changes Published' );	
+			nfRadio.channel( 'notices' ).request( 'add', 'published', 'Changes Published' );
+			nfRadio.channel( 'app' ).trigger( 'app:published', response );
+
 			// Mark our app as clean. This will disable the publish button and fire anything else that cares about the state.
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );
 		}
