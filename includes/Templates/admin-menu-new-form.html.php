@@ -22,11 +22,11 @@
 </script>
 
 <script id="nf-tmpl-sub-header-fields" type="text/template">
-    <a class="nf-add-new nf-open-drawer" href="#" data-drawerid="addField">Add new field</a>
+    <a class="nf-add-new nf-open-drawer" data-drawerid="addField">Add new field</a>
 </script>
 
 <script id="nf-tmpl-sub-header-actions" type="text/template">
-    <a class="nf-add-new nf-open-drawer" href="#" data-drawerid="addAction">Add new action</a>
+    <a class="nf-add-new nf-open-drawer" data-drawerid="addAction">Add new action</a>
 </script>
 
 <script id="nf-tmpl-sub-header-settings" type="text/template">
@@ -46,15 +46,15 @@
 </script>
 
 <script id="nf-tmpl-mobile-menu-button" type="text/template">
-    <a class="nf-button nf-mobile-menu <%= maybeDisabled() %>" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
+    <a class="nf-button nf-mobile-menu <%= maybeDisabled() %>"><span class="dashicons dashicons-editor-ul"></span></a>
 </script>
 
 <script id="nf-tmpl-app-header-publish-button" type="text/template">
-    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">PUBLISH</a>
+    <a <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">PUBLISH</a>
 </script>
 
 <script id="nf-tmpl-add-header-publish-loading" type="text/template">
-    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">
+    <a <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish">
         <div class="nf-loading">
             <ul>
                 <li></li>
@@ -66,7 +66,7 @@
 </script>
 
 <script id="nf-tmpl-app-header-view-changes" type="text/template">
-    <a class="nf-cancel viewChanges" style="text-decoration: none;" href="#"><span class="dashicons dashicons-backup"></span></a>
+    <a class="nf-cancel viewChanges" style="text-decoration: none;"><span class="dashicons dashicons-backup"></span></a>
 </script>
 
 <script id="nf-tmpl-main" type="text/template">
@@ -109,9 +109,9 @@
 </script>
 
 <script id="nf-tmpl-item-controls" type="text/template">
-    <li class="nf-item-edit"><a href="#"><span class="nf-edit-settings dashicons dashicons-admin-generic"></span><span class="nf-item-editing">Editing <%= objectType %></span></a></li>
-    <li class="nf-item-duplicate"><a href="#"><span class="nf-duplicate dashicons dashicons-admin-page"></span></a></li>
-    <li class="nf-item-delete"><a href="#"><span class="nf-delete dashicons dashicons-dismiss"></span></a></li>
+    <li class="nf-item-edit"><a><span class="nf-edit-settings dashicons dashicons-admin-generic"></span><span class="nf-item-editing">Editing <%= objectType %></span></a></li>
+    <li class="nf-item-duplicate"><a><span class="nf-duplicate dashicons dashicons-admin-page"></span></a></li>
+    <li class="nf-item-delete"><a><span class="nf-delete dashicons dashicons-dismiss"></span></a></li>
 </script>
 
 <script id="nf-tmpl-action-table" type="text/template">
@@ -196,7 +196,7 @@
         </td>
         <td>
             <% if ( ! disabled ) { %>
-                <a href="#" class="undoSingle disabled" style="text-decoration:none;">
+                <a class="undoSingle disabled" style="text-decoration:none;">
             <% } %>
 
             <span class="dashicons dashicons-image-rotate <%= ( disabled ) ? 'disabled' : '' %>"></span>
@@ -228,11 +228,11 @@
 </script>
 
 <script id="nf-tmpl-add-saved-field-button" type="text/template">
-    <a href="#" class="nf-button primary">Add</a>
+    <a class="nf-button primary">Add</a>
 </script>
 
 <script id="nf-tmpl-add-saved-field-loading" type="text/template">
-    <a href="#" class="nf-button primary">&nbsp;
+    <a class="nf-button primary">&nbsp;
         <div class="nf-loading">
             <ul>
                 <li></li>
@@ -289,16 +289,16 @@
         <div class="nf-search">
             <input type="search" class="nf-filter" value="" placeholder="Filter" tabindex="-1" />
         </div>
-        <a href="#" class="nf-button primary nf-close-drawer <%= renderDisabled() %>" tabindex="-1">Done</a>
+        <a class="nf-button primary nf-close-drawer <%= renderDisabled() %>" tabindex="-1">Done</a>
     </header>
 </script>
 
 <script id="nf-tmpl-drawer-header-view-changes" type="text/template">
     <header class="nf-drawer-header">
         <div>
-            <a href="#" class="nf-button secondary undoChanges" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
+            <a class="nf-button secondary undoChanges" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
         </div>
-        <a href="#" class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
+        <a class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
     </header>
 </script>
 
@@ -311,9 +311,9 @@
 <script id="nf-tmpl-drawer-content-new-form" type="text/template">
     <span class="new-form-name"></span>
     <div>
-        <a href="#" class="nf-button secondary nf-close-drawer" style="float:left;" tabindex="-1">Not Yet</a>
+        <a class="nf-button secondary nf-close-drawer" style="float:left;" tabindex="-1">Not Yet</a>
     </div>
-    <a href="#" class="nf-button primary nf-close-drawer publish" tabindex="-1">Publish</a>
+    <a class="nf-button primary nf-close-drawer publish" tabindex="-1">Publish</a>
 </script>
 
 <script id="nf-tmpl-app-menu-item" type="text/template">
@@ -342,7 +342,7 @@
 </script>
 
 <script id="nf-tmpl-merge-tags-item" type="text/template">
-    <a href="#" tabindex="1" class="<%= renderClasses() %>"><%= label %></a>
+    <a tabindex="1" class="<%= renderClasses() %>"><%= label %></a>
 </script>
 
 <!-- Field Settings Templates -->
