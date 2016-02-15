@@ -7,8 +7,6 @@ define( [], function() {
 
         addListener: function( model, dataModel ) {
 
-            console.log( 'listener added' );
-
             var listenTo = model.get( 'ajax' ).listen;
 
             // TODO: Change seems to be triggering twice on each update.
@@ -19,7 +17,6 @@ define( [], function() {
         },
 
         updateSetting: function( field, setting ) {
-            console.log( 'change' );
             nfRadio.channel( 'setting-ajax' ).trigger( 'fetch', field );
         },
 
