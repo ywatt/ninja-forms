@@ -37,6 +37,7 @@ define( [], function() {
                 security: ( remote.security ) ? remote.security : nfAdmin.ajaxNonce
             };
 
+            // TODO: Disable setting and lock drawer while updating.
             var that = this;
             jQuery.post( ajaxurl, data, function( response ){
                 var response = JSON.parse( response );

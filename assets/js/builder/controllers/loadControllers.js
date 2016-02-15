@@ -11,7 +11,7 @@ define(
 		/*
 		 * Application controllers
 		 */
-		'controllers/app/ajaxSetting',
+		'controllers/app/remote',
 		'controllers/app/drawer',
 		'controllers/app/drawerConfig',
 		'controllers/app/domainConfig',
@@ -92,7 +92,7 @@ define(
 		/*
 		 * Application controllers
 		 */
-		AjaxSetting,
+		Remote,
 		Drawer,
 		DrawerConfig,
 		DomainConfig,
@@ -174,7 +174,7 @@ define(
 				 * Application controllers
 				 */
 				new Hotkeys();
-				new AjaxSetting();
+				new Remote();
 				new Drawer();
 				new DrawerConfig();
 				new DomainConfig();
