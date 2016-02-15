@@ -38,6 +38,10 @@ define( [], function() {
 
                 if( 'select' == that.get( 'type' ) ) {
                     that.set( 'options', response.options );
+                    that.trigger( 'rerender' );
+                    console.log( response.options );
+                    console.log( that );
+                    console.log( 'Should ReRender.' );
                 }
             });
         },

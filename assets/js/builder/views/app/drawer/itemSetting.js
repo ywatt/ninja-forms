@@ -30,9 +30,10 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				    }
 				}
 			}
-			var ajax = this.model.get( 'ajax' );
-			if( ajax ) {
+
+			if( this.model.get( 'ajax' ) ) {
 				nfRadio.channel( 'setting' ).trigger( 'ajax', this.model, this.dataModel, this );
+				this.model.on( 'rerender', this.render, this );
 			}
 
 			/*
@@ -57,6 +58,10 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				    	this.dataModel.off( 'change:' + name, this.render );
 				    }
 				}
+			}
+
+			if( this.model.get( 'ajax' ) ) {
+				this.model.off( 'rerender', this.render, this );
 			}
 
 			/*
