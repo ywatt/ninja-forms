@@ -6,7 +6,6 @@ define( [], function() {
 
         addListener: function( model, dataModel ) {
             var listenTo = model.get( 'ajax' ).listen;
-            console.log( 'Listening to ' + listenTo );
 
             // TODO: Change seems to be triggering twice on each update.
             this.listenTo( nfRadio.channel( 'fieldSetting-' + listenTo ), 'update:setting', this.updateSetting );
@@ -39,9 +38,6 @@ define( [], function() {
                 if( 'select' == that.get( 'type' ) ) {
                     that.set( 'options', response.options );
                     that.trigger( 'rerender' );
-                    console.log( response.options );
-                    console.log( that );
-                    console.log( 'Should ReRender.' );
                 }
             });
         },
