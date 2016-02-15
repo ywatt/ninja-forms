@@ -15,19 +15,19 @@ define( [], function() {
 
             this.listenTo( nfRadio.channel( 'setting-type-' + model.get( 'type' ) ), 'click:extra', this.clickExtra );
 
-            model.listenTo( nfRadio.channel( 'setting-remote' ), 'fetch', this.fetch, model );
+            model.listenTo( nfRadio.channel( 'setting-remote' ), 'get:remote', this.getRemote, model );
         },
 
         clickExtra: function( e, settingModel, dataModel, settingView ) {
             jQuery( e.srcElement ).addClass( 'spin' );
-            nfRadio.channel( 'setting-remote' ).trigger( 'fetch', dataModel );
+            nfRadio.channel( 'setting-remote' ).trigger( 'get:remote', dataModel );
         },
 
         updateSetting: function( dataModel, settingModel ) {
-            nfRadio.channel( 'setting-remote' ).trigger( 'fetch', dataModel );
+            nfRadio.channel( 'setting-remote' ).trigger( 'get:remote', dataModel );
         },
 
-        fetch: function( dataModel ) {
+        getRemote: function( dataModel ) {
 
             var remote = this.get( 'remote' );
 
