@@ -30,6 +30,10 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				    }
 				}
 			}
+			var ajax = this.model.get( 'ajax' );
+			if( ajax ) {
+				nfRadio.channel( 'setting' ).trigger( 'ajax', this.model, this.dataModel, this );
+			}
 
 			/*
 			 * When our drawer opens, send out a radio message on our setting type channel.
