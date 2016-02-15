@@ -18,13 +18,12 @@ define( [], function() {
         },
 
         fetch: function( parentModel ) {
-            var action  = this.get( 'ajax' ).action;
-            var listen = this.get( 'ajax' ).listen;
+            var ajaxSetting = this.get( 'ajax' );
 
             var data = {
-                parentValue: parentModel.get( listen ),
-                action: this.get( 'ajax' ).action,
-                security: ( this.get( 'ajax' ).security ) ? this.get( 'ajax' ).security : nfAdmin.ajaxNonce
+                parentValue: parentModel.get( ajaxSetting.listen ),
+                action: ajaxSetting.action,
+                security: ( ajaxSetting.security ) ? ajaxSetting.security : nfAdmin.ajaxNonce
             };
 
             var that = this;
