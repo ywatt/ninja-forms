@@ -1,5 +1,5 @@
 define( [], function() {
-    var controller = Marionette.Object.extend( {
+    return Marionette.Object.extend( {
         initialize: function() {
             this.listenTo( nfRadio.channel( 'setting' ), 'ajax', this.addListener );
         },
@@ -43,6 +43,4 @@ define( [], function() {
         },
 
     });
-
-    return controller;
 } );
