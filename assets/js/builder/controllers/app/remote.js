@@ -16,6 +16,9 @@ define( [], function() {
             this.listenTo( nfRadio.channel( 'setting-type-' + model.get( 'type' ) ), 'click:extra', this.clickExtra );
 
             model.listenTo( nfRadio.channel( 'setting-remote' ), 'get:remote', this.getRemote, model );
+
+            // Auto-trigger get:remote on drawer load.
+            nfRadio.channel( 'setting-remote' ).trigger( 'get:remote', dataModel );
         },
 
         clickExtra: function( e, settingModel, dataModel, settingView ) {
