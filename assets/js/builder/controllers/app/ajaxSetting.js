@@ -1,3 +1,4 @@
+
 define( [], function() {
     return Marionette.Object.extend( {
         initialize: function() {
@@ -5,16 +6,21 @@ define( [], function() {
         },
 
         addListener: function( model, dataModel ) {
+
+            console.log( 'listener added' );
+
             var listenTo = model.get( 'ajax' ).listen;
 
             // TODO: Change seems to be triggering twice on each update.
             this.listenTo( nfRadio.channel( 'fieldSetting-' + listenTo ), 'update:setting', this.updateSetting );
+            this.listenTo( nfRadio.channel( 'actionSetting-' + listenTo ), 'update:setting', this.updateSetting );
 
-            model.listenTo( nfRadio.channel( 'fieldSetting-ajax' ), 'fetch', this.fetch, model );
+            model.listenTo( nfRadio.channel( 'setting-ajax' ), 'fetch', this.fetch, model );
         },
 
         updateSetting: function( field, setting ) {
-            nfRadio.channel( 'fieldSetting-ajax' ).trigger( 'fetch', field );
+            console.log( 'change' );
+            nfRadio.channel( 'setting-ajax' ).trigger( 'fetch', field );
         },
 
         fetch: function( parentModel ) {
