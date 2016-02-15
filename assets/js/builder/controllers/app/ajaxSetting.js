@@ -13,18 +13,25 @@ define( [], function() {
             this.listenTo( nfRadio.channel( 'fieldSetting-' + listenTo ), 'update:setting', this.updateSetting );
             this.listenTo( nfRadio.channel( 'actionSetting-' + listenTo ), 'update:setting', this.updateSetting );
 
+            this.listenTo( nfRadio.channel( 'setting-type-' + model.get( 'type' ) ), 'click:extra', this.clickExtra );
+
             model.listenTo( nfRadio.channel( 'setting-ajax' ), 'fetch', this.fetch, model );
         },
 
-        updateSetting: function( field, setting ) {
-            nfRadio.channel( 'setting-ajax' ).trigger( 'fetch', field );
+        clickExtra: function( e, settingModel, dataModel, settingView ) {
+            nfRadio.channel( 'setting-ajax' ).trigger( 'fetch', dataModel );
         },
 
-        fetch: function( parentModel ) {
+        updateSetting: function( dataModel, settingModel ) {
+            nfRadio.channel( 'setting-ajax' ).trigger( 'fetch', dataModel );
+        },
+
+        fetch: function( dataModel ) {
+
             var ajaxSetting = this.get( 'ajax' );
 
             var data = {
-                parentValue: parentModel.get( ajaxSetting.listen ),
+                parentValue: dataModel.get( ajaxSetting.listen ),
                 action: ajaxSetting.action,
                 security: ( ajaxSetting.security ) ? ajaxSetting.security : nfAdmin.ajaxNonce
             };
@@ -34,7 +41,7 @@ define( [], function() {
                 var response = JSON.parse( response );
 
                 if( 'textbox' == that.get( 'type' ) ) {
-                    parentModel.set( that.get('name'), response.value );
+                    dataModel.set( that.get('name'), response.value );
                 }
 
                 if( 'select' == that.get( 'type' ) ) {

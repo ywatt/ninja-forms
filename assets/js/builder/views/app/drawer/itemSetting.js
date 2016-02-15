@@ -32,6 +32,8 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 			}
 
 			if( this.model.get( 'ajax' ) ) {
+                var label = this.model.get( 'label' );
+                this.model.set( 'label', label + ' <a class="extra"><span class="dashicons dashicons-update"></span></a>' );
 				nfRadio.channel( 'setting' ).trigger( 'ajax', this.model, this.dataModel, this );
 				this.model.on( 'rerender', this.render, this );
 			}
