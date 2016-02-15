@@ -2,12 +2,12 @@
 define( [], function() {
     return Marionette.Object.extend( {
         initialize: function() {
-            this.listenTo( nfRadio.channel( 'setting' ), 'ajax', this.addListener );
+            this.listenTo( nfRadio.channel( 'setting' ), 'remote', this.addListener );
         },
 
         addListener: function( model, dataModel ) {
 
-            var listenTo = model.get( 'ajax' ).listen;
+            var listenTo = model.get( 'remote' ).listen;
 
             // TODO: Change seems to be triggering twice on each update.
             this.listenTo( nfRadio.channel( 'fieldSetting-' + listenTo ), 'update:setting', this.updateSetting );
@@ -15,25 +15,26 @@ define( [], function() {
 
             this.listenTo( nfRadio.channel( 'setting-type-' + model.get( 'type' ) ), 'click:extra', this.clickExtra );
 
-            model.listenTo( nfRadio.channel( 'setting-ajax' ), 'fetch', this.fetch, model );
+            model.listenTo( nfRadio.channel( 'setting-remote' ), 'fetch', this.fetch, model );
         },
 
         clickExtra: function( e, settingModel, dataModel, settingView ) {
-            nfRadio.channel( 'setting-ajax' ).trigger( 'fetch', dataModel );
+            jQuery( e.srcElement ).addClass( 'spin' );
+            nfRadio.channel( 'setting-remote' ).trigger( 'fetch', dataModel );
         },
 
         updateSetting: function( dataModel, settingModel ) {
-            nfRadio.channel( 'setting-ajax' ).trigger( 'fetch', dataModel );
+            nfRadio.channel( 'setting-remote' ).trigger( 'fetch', dataModel );
         },
 
         fetch: function( dataModel ) {
 
-            var ajaxSetting = this.get( 'ajax' );
+            var remote = this.get( 'remote' );
 
             var data = {
-                parentValue: dataModel.get( ajaxSetting.listen ),
-                action: ajaxSetting.action,
-                security: ( ajaxSetting.security ) ? ajaxSetting.security : nfAdmin.ajaxNonce
+                parentValue: dataModel.get( remote.listen ),
+                action: remote.action,
+                security: ( remote.security ) ? remote.security : nfAdmin.ajaxNonce
             };
 
             var that = this;

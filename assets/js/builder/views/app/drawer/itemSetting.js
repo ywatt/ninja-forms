@@ -31,10 +31,13 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				}
 			}
 
-			if( this.model.get( 'ajax' ) ) {
+			if( this.model.get( 'remote' ) ) {
+
+                // Add 'update' icons
                 var label = this.model.get( 'label' );
                 this.model.set( 'label', label + ' <a class="extra"><span class="dashicons dashicons-update"></span></a>' );
-				nfRadio.channel( 'setting' ).trigger( 'ajax', this.model, this.dataModel, this );
+
+				nfRadio.channel( 'setting' ).trigger( 'remote', this.model, this.dataModel, this );
 				this.model.on( 'rerender', this.render, this );
 			}
 
@@ -62,7 +65,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				}
 			}
 
-			if( this.model.get( 'ajax' ) ) {
+			if( this.model.get( 'remote' ) ) {
 				this.model.off( 'rerender', this.render, this );
 			}
 
