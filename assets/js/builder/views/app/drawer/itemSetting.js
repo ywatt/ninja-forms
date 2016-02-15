@@ -31,11 +31,14 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				}
 			}
 
-			if( this.model.get( 'remote' ) ) {
+            var remote = this.model.get( 'remote' );
+			if( remote ) {
 
-                // Add 'update' icons
-                var label = this.model.get( 'label' );
-                this.model.set( 'label', label + ' <a class="extra"><span class="dashicons dashicons-update"></span></a>' );
+                if( 'undefined' != typeof remote.refresh || remote.refresh ) {
+                    // Add 'update' icons
+                    var label = this.model.get('label');
+                    this.model.set('label', label + ' <a class="extra"><span class="dashicons dashicons-update"></span></a>');
+                }
 
 				nfRadio.channel( 'setting' ).trigger( 'remote', this.model, this.dataModel, this );
 				this.model.on( 'rerender', this.render, this );
