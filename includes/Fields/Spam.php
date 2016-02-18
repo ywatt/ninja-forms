@@ -31,8 +31,8 @@ class NF_Fields_Spam extends NF_Abstracts_Input
 
 
         // Default Required setting to TRUE and hide setting.
-        $this->_settings[ 'req' ][ 'value' ] = 1;
-        $this->_settings[ 'req' ][ 'group' ] = '';
+        $this->_settings[ 'required' ][ 'value' ] = 1;
+        $this->_settings[ 'required' ][ 'group' ] = '';
     }
 
     /**
