@@ -54,7 +54,8 @@ define( ['views/app/drawer/itemSetting'], function( itemSettingView ) {
 	    			return '';
 	    		},
 	    		renderSetting: function(){
-					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
+					var setting = _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html() );
+					return setting( this );
 				},
 				
 				renderClasses: function() {

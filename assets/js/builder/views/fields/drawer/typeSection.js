@@ -90,7 +90,8 @@ define( [], function() {
 			        _.each( this.fieldTypes, function( id ) {
 			            var type = nfRadio.channel( 'fields' ).request( 'get:type', id );
 			            var nicename = type.get( 'nicename' );
-			            html += _.template( jQuery( '#nf-tmpl-drawer-field-type-button' ).html(), { id: id, nicename: nicename, type: type, savedField: that.isSavedField } );
+			            var renderType = _.template( jQuery( '#nf-tmpl-drawer-field-type-button' ).html() );
+			            html += renderType( { id: id, nicename: nicename, type: type, savedField: that.isSavedField } );
 			        } );
 			        return html;
 				},
