@@ -7,46 +7,28 @@
 define( [], function( ) {
     var controller = Marionette.Object.extend( {
         initialize: function() {
-            this.listenTo( nfRadio.channel( 'setting-type-newsletter_list' ), 'click:extra', this.clickListUpdate );
-            this.listenTo( nfRadio.channel( 'setting-name-newsletter_list_fieldset' ), 'init:settingModel', this.registerListener );
-            this.listenTo( nfRadio.channel( 'setting-newsletter_list' ), 'show:setting', this.defaultFields );
-            this.listenTo( nfRadio.channel( 'setting-name-newsletter_list' ), 'init:settingModel', this.addEmptyOption );
-            this.listenTo( nfRadio.channel( 'actionSetting-newsletter_list' ), 'update:setting', this.maybeRenderFieldset );
+            this.listenTo( nfRadio.channel( 'setting-newsletter_list' ),             'show:setting',      this.defaultFields );
+            this.listenTo( nfRadio.channel( 'setting-type-newsletter_list' ),        'click:extra',       this.clickListUpdate );
+            this.listenTo( nfRadio.channel( 'actionSetting-newsletter_list' ),       'update:setting',    this.maybeRenderFields );
+            this.listenTo( nfRadio.channel( 'actionSetting-newsletter_list' ),       'update:setting',    this.maybeRenderGroups );
+            this.listenTo( nfRadio.channel( 'setting-name-newsletter_list_fields' ), 'init:settingModel', this.registerFieldsListener );
+            this.listenTo( nfRadio.channel( 'setting-name-newsletter_list_groups' ), 'init:settingModel', this.registerGroupsListener );
         },
 
         defaultFields: function( settingModel, dataModel ) {
-            this.maybeRenderFieldset( dataModel, settingModel );
+            this.maybeRenderFields( dataModel, settingModel );
+            this.maybeRenderGroups( dataModel, settingModel );
         },
 
-        addEmptyOption: function( model ) {
-            var lists = model.get( 'options' );
-            lists.unshift({ label: '-', value: 0, fields: [] });
-            model.set( 'options', lists );
+        registerFieldsListener: function ( model ) {
+            model.listenTo( nfRadio.channel( 'newsletter_list_fields' ), 'update:fieldMapping', this.updateFieldMapping, model );
         },
 
-        maybeRenderFieldset: function( dataModel, settingModel ) {
-
-            if( 'undefined' == typeof settingModel ) return;
-
-            var selectedList = dataModel.get( 'newsletter_list' );
-            var lists = settingModel.get( 'options' );
-            _.each( lists, function( list ) {
-                if ( selectedList == list.value ) {
-                    nfRadio.channel( 'newsletter_list_fieldset').trigger( 'update:fieldMapping', list.fields );
-                }
-            } );
-
-            dataModel.set( 'newsletter_list_fieldset', 0 );
-        },
-
-        registerListener: function ( model ) {
-            model.listenTo( nfRadio.channel( 'newsletter_list_fieldset' ), 'update:fieldMapping', this.updateFieldMapping, model );
+        registerGroupsListener: function ( model ) {
+            model.listenTo( nfRadio.channel( 'newsletter_list_groups' ), 'update:interestGroups', this.updateInterestGroups, model );
         },
 
         clickListUpdate: function( e, settingModel, dataModel, settingView ) {
-
-            console.log( e.srcElement );
-            jQuery( e.srcElement).addClass( 'spin' );
 
             var data = {
                 action: 'nf_' + dataModel.attributes.type + '_get_lists',
@@ -54,17 +36,48 @@ define( [], function( ) {
             };
 
             var that = this;
+            jQuery( e.srcElement ).addClass( 'spin' );
             jQuery.post( ajaxurl, data, function( response ){
                 var response = JSON.parse( response );
                 that.updateLists( settingModel, response.lists, settingView, dataModel );
                 dataModel.set( 'newsletter_list', response.lists[0].value, { settingModel: settingModel } );
+            }).always( function() {
+                jQuery( e.srcElement ).removeClass( 'spin' );
             });
         },
 
         updateLists: function( settingModel, lists, settingView, dataModel ) {
-            lists.unshift({ label: '-', value: 0, fields: [] });
             settingModel.set( 'options', lists );
             settingView.render();
+        },
+
+        maybeRenderFields: function( dataModel, settingModel ) {
+
+            if( 'undefined' == typeof settingModel ) return;
+
+            var selectedList = dataModel.get( 'newsletter_list' );
+            var lists = settingModel.get( 'options' );
+            _.each( lists, function( list ) {
+                if ( selectedList == list.value ) {
+                    nfRadio.channel( 'newsletter_list_fields').trigger( 'update:fieldMapping', list.fields );
+                }
+            } );
+
+            dataModel.set( 'newsletter_list_fields', 0 );
+        },
+
+        maybeRenderGroups: function( dataModel, settingModel ) {
+            if( 'undefined' == typeof settingModel ) return;
+
+            var selectedList = dataModel.get( 'newsletter_list' );
+            var lists = settingModel.get( 'options' );
+            _.each( lists, function( list ) {
+                if ( selectedList == list.value ) {
+                    nfRadio.channel( 'newsletter_list_groups').trigger( 'update:interestGroups', list.groups );
+                }
+            } );
+
+            dataModel.set( 'newsletter_list_fields', 0 );
         },
 
         updateFieldMapping: function( fields ) {
@@ -81,7 +94,22 @@ define( [], function( ) {
                 });
             });
             this.set( 'settings', settings );
-        }
+        },
+
+        updateInterestGroups: function( groups ) {
+            var settings = this.get( 'settings' );
+            settings.reset();
+            _.each( groups, function( group ){
+
+                settings.add({
+                    name: group.value,
+                    type: 'toggle',
+                    label: group.label,
+                    width: 'full',
+                });
+            });
+            this.set( 'settings', settings );
+        },
 
     });
 

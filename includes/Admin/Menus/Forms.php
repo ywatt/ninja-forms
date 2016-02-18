@@ -167,6 +167,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         if( ! empty( $actions ) ) {
             foreach ($actions as $action) {
 
+                $type = $action->get_setting( 'type' );
+
+                if( ! isset( Ninja_Forms()->actions[ $type ] ) ) continue;
+
                 $settings = $action->get_settings();
                 $settings['id'] = $action->get_id();
 

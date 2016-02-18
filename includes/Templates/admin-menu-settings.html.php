@@ -62,7 +62,8 @@
             </div>
         <?php endforeach; ?>
 
-        <input type="submit" name="update_ninja_forms_settings" class="button button-primary" value="<?php echo $save_button_text; ?>">
+        <input type="hidden" name="update_ninja_forms_settings">
+        <input type="submit" class="button button-primary" value="<?php echo $save_button_text; ?>">
 
     </form>
 </div>

@@ -136,12 +136,10 @@ abstract class NF_Abstracts_Field
     public function validate( $field, $data )
     {
         $errors = array();
-
         // Required check.
         if( isset( $field['required'] ) && $field['required'] && ! trim( $field['value'] ) ){
             $errors[] = 'Field is required.';
         }
-
         return $errors;
     }
 

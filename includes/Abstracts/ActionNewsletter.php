@@ -26,6 +26,12 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 
     protected $_transient_expiration = '';
 
+    protected $_setting_labels = array(
+        'list'   => 'List',
+        'fields' => 'List Field Mapping',
+        'groups' => 'Interest Groups',
+    );
+
     /**
      * Constructor
      */
@@ -58,6 +64,8 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 
         $lists = $this->get_lists();
 
+        array_unshift( $lists, array( 'value' => 0, 'label' => '-', 'fields' => array(), 'groups' => array() ) );
+
         $this->cache_lists( $lists );
 
         echo wp_json_encode( array( 'lists' => $lists ) );
@@ -77,6 +85,15 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 
     private function get_list_settings()
     {
+        $label_defaults = array(
+            'list'   => 'List',
+            'fields' => 'List Field Mapping',
+            'groups' => 'Interest Groups',
+        );
+        $labels = array_merge( $label_defaults, $this->_setting_labels );
+
+        $prefix = $this->get_name();
+
         $lists = get_transient( $this->_transient );
 
         if( ! $lists ) {
@@ -86,10 +103,10 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 
         if( empty( $lists ) ) return;
 
-        $this->_settings[ 'newsletter_list' ] = array(
+        $this->_settings[ $prefix . 'newsletter_list' ] = array(
             'name' => 'newsletter_list',
             'type' => 'select',
-            'label' => __( 'List', 'ninja-forms' ) . ' <a class="js-newsletter-list-update extra"><span class="dashicons dashicons-update"></span></a>',
+            'label' => $labels[ 'list' ] . ' <a class="js-newsletter-list-update extra"><span class="dashicons dashicons-update"></span></a>',
             'width' => 'full',
             'group' => 'primary',
             'value' => '0',
@@ -98,7 +115,7 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 
         $fields = array();
         foreach( $lists as $list ){
-            $this->_settings[ 'newsletter_list' ][ 'options' ][] = $list;
+            $this->_settings[ $prefix . 'newsletter_list' ][ 'options' ][] = $list;
 
             foreach( $list[ 'fields' ] as $field ){
                 $name = $list[ 'value' ] . '_' . $field[ 'value' ];
@@ -116,9 +133,17 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
             }
         }
 
-        $this->_settings[ 'newsletter_list_fieldset' ] = array(
-            'name' => 'newsletter_list_fieldset',
+        $this->_settings[ $prefix . 'newsletter_list_fields' ] = array(
+            'name' => 'newsletter_list_fields',
             'label' => __( 'List Field Mapping', 'ninja-forms' ),
+            'type' => 'fieldset',
+            'group' => 'primary',
+            'settings' => []
+        );
+
+        $this->_settings[ $prefix . 'newsletter_list_groups' ] = array(
+            'name' => 'newsletter_list_groups',
+            'label' => __( 'Interest Groups', 'ninja-forms' ),
             'type' => 'fieldset',
             'group' => 'primary',
             'settings' => []

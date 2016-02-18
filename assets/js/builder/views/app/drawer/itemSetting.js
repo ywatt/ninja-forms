@@ -31,6 +31,19 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				}
 			}
 
+            var remote = this.model.get( 'remote' );
+			if( remote ) {
+
+                if( 'undefined' != typeof remote.refresh || remote.refresh ) {
+                    // Add 'update' icons
+                    var label = this.model.get('label');
+                    this.model.set('label', label + ' <a class="extra"><span class="dashicons dashicons-update"></span></a>');
+                }
+
+				nfRadio.channel( 'setting' ).trigger( 'remote', this.model, this.dataModel, this );
+				this.model.on( 'rerender', this.render, this );
+			}
+
 			/*
 			 * When our drawer opens, send out a radio message on our setting type channel.
 			 */
@@ -53,6 +66,10 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				    	this.dataModel.off( 'change:' + name, this.render );
 				    }
 				}
+			}
+
+			if( this.model.get( 'remote' ) ) {
+				this.model.off( 'rerender', this.render, this );
 			}
 
 			/*

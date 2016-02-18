@@ -32,7 +32,7 @@ define( [
 				} );
 			} );
 
-			var fieldTags = new mergeTagCollection();
+			var fieldTags = this.tagSectionCollection.get( 'fields').get( 'tags' );
 
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			_.each( fieldCollection.models, function( field ) {
@@ -45,8 +45,6 @@ define( [
 					} );					
 				}
 			} );
-
-			this.tagSectionCollection.get( 'fields' ).set( 'tags', fieldTags );
 
 			var calcTags = new mergeTagCollection();
 

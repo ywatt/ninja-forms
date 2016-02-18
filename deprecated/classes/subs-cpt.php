@@ -10,7 +10,7 @@
  * @since       2.7
 */
 
-class NF_Sub_CPT {
+class NF_Subs_CPT {
 
 	var $form_id;
 
