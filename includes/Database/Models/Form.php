@@ -156,6 +156,14 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $field[ 'type' ] = 'textbox';
         }
 
+        if( isset( $field[ 'email' ] ) ){
+
+            if( 'textbox' == $field[ 'type' ] ) {
+                $field['type'] = 'email';
+            }
+            unset( $field[ 'email' ] );
+        }
+
         if( isset( $field[ 'class' ] ) ){
             $field[ 'element_class' ] = $field[ 'class' ];
             unset( $field[ 'class' ] );
