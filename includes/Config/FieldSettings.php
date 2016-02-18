@@ -385,6 +385,20 @@ return apply_filters( 'ninja_forms_field_settings', array(
     ),
 
     /*
+     * NUMERIC SORT
+     */
+
+    'num_sort' => array(
+        'name' => 'num_sort',
+        'type' => 'toggle',
+        'label' => __( 'Sort as Numeric', 'ninja-forms'),
+        'width' => 'full',
+        'group' => 'administration',
+        'value' => '',
+        'help' => __( 'This column in the submissions table will sort by number.', 'ninja-forms' ),
+    ),
+
+    /*
     |--------------------------------------------------------------------------
     | Un-Grouped Settings
     |--------------------------------------------------------------------------
