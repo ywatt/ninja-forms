@@ -195,7 +195,9 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 	    				this.value = '';
 	    			}
 
-					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
+					var setting = _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html() );
+
+					return setting( this );
 				},
 
 				renderLabelClasses: function() {

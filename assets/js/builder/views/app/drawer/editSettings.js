@@ -25,7 +25,8 @@ define( ['views/app/drawer/itemSettingGroupCollection'], function( itemSettingGr
 	    	return {
 	    		maybeRenderTitle: function() {
 	    			if ( 'undefined' !== typeof this.type ) {
-	    				return _.template( jQuery( '#nf-tmpl-drawer-content-edit-settings-title' ).html(), this );
+	    				var title = _.template( jQuery( '#nf-tmpl-drawer-content-edit-settings-title' ).html() );
+	    				return title( this );
 	    			} else {
 	    				return '';
 	    			}

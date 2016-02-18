@@ -42,10 +42,11 @@ define( [], function() {
 	    				this.publishWidth = '';
 	    			}
 	    			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'loading' ) ) {
-	    				return _.template( jQuery( '#nf-tmpl-add-header-publish-loading' ).html(), this );	    				
+	    				var template = _.template( jQuery( '#nf-tmpl-add-header-publish-loading' ).html() );
 	    			} else {
-	    				return _.template( jQuery( '#nf-tmpl-app-header-publish-button' ).html(), this );
+	    				var template = _.template( jQuery( '#nf-tmpl-app-header-publish-button' ).html() );
 	    			}
+	    			return template( this );
 	    		},
 
 	    		/**
@@ -69,7 +70,8 @@ define( [], function() {
 	    		 */
 	    		maybeRenderCancel: function() {
 	    			if ( ! nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
-	    				return _.template( jQuery( '#nf-tmpl-app-header-view-changes' ).html(), this );	    				
+	    				var viewChanges = _.template( jQuery( '#nf-tmpl-app-header-view-changes' ).html() );
+	    				return viewChanges( this );
 	    			} else {
 	    				return '';
 	    			}

@@ -13,11 +13,11 @@ define( [], function() {
 
 		renderAddButton: function() {
 			if ( this.model.get( 'addSavedLoading' ) ) {
-				var button = _.template( jQuery( '#nf-tmpl-add-saved-field-loading' ).html(), this );
+				var button = _.template( jQuery( '#nf-tmpl-add-saved-field-loading' ).html() );
 			} else {
-				var button = _.template( jQuery( '#nf-tmpl-add-saved-field-button' ).html(), this );
+				var button = _.template( jQuery( '#nf-tmpl-add-saved-field-button' ).html() );
 			}
-			jQuery( this.el ).find( '.add-button' ).html( button );
+			jQuery( this.el ).find( '.add-button' ).html( button( this ) );
 		},
 
 		onBeforeDestroy: function() {

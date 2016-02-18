@@ -73,7 +73,8 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 					this.label = '';
 					this.value = this.active;
 					this.name = this.id + '-active';
-					var html = _.template( jQuery( '#nf-tmpl-edit-setting-toggle' ).html(), this );
+					var html = _.template( jQuery( '#nf-tmpl-edit-setting-toggle' ).html() );
+					html = html( this );
 					this.label = actionLabel;
 					return html;
 				},

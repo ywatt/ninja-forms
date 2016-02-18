@@ -96,7 +96,8 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 				},
 
 	    		renderSetting: function() {
-					return _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html(), this );
+					var setting = _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html() );
+					return setting( this );
 				},
 
 				renderClasses: function() {
