@@ -194,14 +194,34 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             unset( $field[ 'default_value_type' ] );
         }
 
+        if( 'list' == $field[ 'type' ] ) {
+
+            if ( isset( $field[ 'list_type' ] ) ) {
+
+                if ('dropdown' == $field['list_type']) {
+                    $field['type'] = 'listselect';
+                }
+                if ('radio' == $field['list_type']) {
+                    $field['type'] = 'listradio';
+                }
+                if ('checkbox' == $field['list_type']) {
+                    $field['type'] = 'listcheckbox';
+                }
+                if ('multi' == $field['list_type']) {
+                    $field['type'] = 'listmultiselect';
+                }
+            }
+
+            if( isset( $field[ 'list' ][ 'options' ] ) ) {
+                $field[ 'options' ] = $field[ 'list' ][ 'options' ];
+                unset( $field[ 'list' ][ 'options' ] );
+            }
+        }
+
         // Convert `textbox` to other field types
-        foreach( array( 'fist_name', 'last_name', 'user_zip', 'user_city', 'user_state', 'user_phone', 'user_email', 'user_address_1', 'user_address_2', 'datepicker' ) as $item ) {
+        foreach( array( 'fist_name', 'last_name', 'user_zip', 'user_city', 'user_phone', 'user_email', 'user_address_1', 'user_address_2', 'datepicker' ) as $item ) {
             if ( isset( $field[ $item ] ) && $field[ $item ] ) {
                 $field[ 'type' ] = str_replace( array( '_', 'user', '1', '2', 'picker' ), '', $item );
-
-                if( 'state' == $field[ 'type' ] ){
-                    $field[ 'type' ] = 'liststate';
-                }
 
                 unset( $field[ $item ] );
             }
