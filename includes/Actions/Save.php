@@ -67,5 +67,9 @@ final class NF_Actions_Save extends NF_Abstracts_Action
         do_action( 'ninja_forms_save_sub', $sub->get_id() );
 
         $sub->save();
+
+        $data[ 'actions' ][ 'save' ][ 'id' ] = $sub->get_id();
+
+        return $data;
     }
 }
