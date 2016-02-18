@@ -163,7 +163,6 @@ final class NF_Database_MockData
             ->update_setting( 'label', 'Submit')
             ->update_setting( 'processing_label', 'Processing' )
             ->update_setting( 'order', 5 )
-            ->update_setting( 'key', '' )
             ->save();
 
         /*
@@ -248,7 +247,6 @@ final class NF_Database_MockData
 
         $fields = array(
             array(
-                'id'			=> 4,
                 'type' 			=> 'textbox',
                 'label'			=> 'Name',
                 'label_pos' 	=> 'above',
@@ -256,7 +254,6 @@ final class NF_Database_MockData
                 'key'           => 'name',
             ),
             array(
-                'id'			=> 12,
                 'type'			=> 'email',
                 'label'			=> 'Email',
                 'label_pos'		=> 'above',
@@ -264,7 +261,6 @@ final class NF_Database_MockData
                 'key'           => 'email',
             ),
             array(
-                'id'			=> 5,
                 'type' 			=> 'textarea',
                 'label'			=> 'What Can We Help You With?',
                 'label_pos'		=> 'above',
@@ -272,7 +268,6 @@ final class NF_Database_MockData
                 'key'           => 'message',
             ),
             array(
-                'id'			=> 6,
                 'type' 			=> 'checkbox',
                 'label'			=> 'Agree?',
                 'label_pos'		=> 'right',
@@ -280,7 +275,6 @@ final class NF_Database_MockData
                 'key'           => 'agree',
             ),
             array(
-                'id'			=> 9,
                 'type' 			=> 'listradio',
                 'label'			=> 'Best Contact Method?',
                 'label_pos'		=> 'above',
@@ -313,7 +307,6 @@ final class NF_Database_MockData
                 'key'           => 'contact_method',
             ),
             array(
-                'id'			=> 7,
                 'type'			=> 'submit',
                 'label'			=> 'Send',
                 'order'         => 6,
@@ -321,8 +314,6 @@ final class NF_Database_MockData
         );
 
         foreach( $fields as $settings ){
-
-            unset( $settings[ 'id' ] );
 
             $field = Ninja_Forms()->form( $form_id )->field()->get();
             $field->update_settings( $settings )->save();
