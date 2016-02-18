@@ -70,8 +70,8 @@ return apply_filters( 'ninja_forms_field_settings', array(
      * REQUIRED
      */
 
-    'req' => array(
-        'name' => 'req',
+    'required' => array(
+        'name' => 'required',
         'type' => 'toggle',
         'label' => __( 'Required Field', 'ninja-forms' ),
         'width' => 'one-half',
