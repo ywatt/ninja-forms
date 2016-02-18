@@ -190,6 +190,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             if( 'querystring' == $field[ 'default_value_type' ] && isset( $field[ 'default_value' ] ) ){
                 $field[ 'default' ] = '{' . $field[ 'default_value' ] . '}';
             }
+
             unset( $field[ 'default_value' ] );
             unset( $field[ 'default_value_type' ] );
         }
