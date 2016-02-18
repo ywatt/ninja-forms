@@ -3,6 +3,7 @@ define([], function() {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'listselect' ), 'init:model', this.register );
 			this.listenTo( nfRadio.channel( 'listmultiselect' ), 'init:model', this.register );
+			this.listenTo( nfRadio.channel( 'liststate' ), 'init:model', this.register );
 			nfRadio.channel( 'listselect' ).reply( 'get:calcValue', this.getCalcValue, this );
 			nfRadio.channel( 'listmultiselect' ).reply( 'get:calcValue', this.getCalcValue, this );
 		},
