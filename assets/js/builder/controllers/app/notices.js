@@ -21,7 +21,7 @@ define( [], function() {
 				color: 'green',
 				zIndex:12000,
 				constructOnInit: true,
-				stack: false,
+				stack: true,
 				animation: {
 					open: 'flip',
 					close: 'flip'
