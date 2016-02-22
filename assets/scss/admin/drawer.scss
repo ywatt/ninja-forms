@@ -306,8 +306,16 @@
 .ninja-forms-app {
     .jBox-Notice {
         .jBox-container {
-            background: $accent_color;
             font-size: 18px;
         }
+    }
+    .jBox-Notice-green .jBox-container {
+        background: $accent_color;
+    }
+    .jBox-Notice-yellow .jBox-container {
+        background: #ffd665;
+    }
+    .jBox-Notice-red .jBox-container {
+        background: #ee2222;
     }
 }

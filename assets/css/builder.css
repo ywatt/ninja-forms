@@ -610,8 +610,16 @@ All styles used within the drawer
     text-align: center; }
 
 .ninja-forms-app .jBox-Notice .jBox-container {
-  background: #84CC1E;
   font-size: 18px; }
+
+.ninja-forms-app .jBox-Notice-green .jBox-container {
+  background: #84CC1E; }
+
+.ninja-forms-app .jBox-Notice-yellow .jBox-container {
+  background: #ffd665; }
+
+.ninja-forms-app .jBox-Notice-red .jBox-container {
+  background: #ee2222; }
 
 .nf-button {
   border: 0;
