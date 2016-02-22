@@ -10,7 +10,10 @@
  */
 define( [], function() {
 	var controller = Marionette.Object.extend( {
-		initialize: function() {
+	initialize: function() {
+
+			this.listenTo( nfRadio.channel( 'app' ), 'after:appStart', this.initAppDomain );
+
 			// Listen for both menu and submenu clicks.
 			this.listenTo( nfRadio.channel( 'app' ), 'click:menu', this.changeAppDomain );
 			// Reply to specific requests to change the domain
@@ -26,6 +29,19 @@ define( [], function() {
 			 * We use an array so that registered requests can unregister and not affect each other.
 			 */
 			this.objPreventChange = {};
+		},
+
+		initAppDomain: function() {
+
+			var hash = window.location.hash.substr(1);
+			if( ! hash ){
+				hash = window.location.hash ='fields';
+			}
+
+			var appDomains = nfRadio.channel('app').request('get:domainCollection');
+			var domainModel = appDomains.get( hash );
+
+			this.changeAppDomain( '', domainModel );
 		},
 
 		changeAppDomain: function( e, model ) {
