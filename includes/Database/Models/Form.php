@@ -19,6 +19,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
     protected $_fields;
 
+    protected static $imported_form_id;
+
     public function __construct( $db, $id = '' )
     {
         add_action( 'ninja_forms_before_import_form', array( $this, 'import_form_backwards_compatibility' ) );
@@ -80,9 +82,13 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $action->update_settings( $settings )->save();
         }
 
-//        add_action( 'admin_notices', function() use ( $form_id ){
-//            Ninja_Forms()->template( 'admin-notice-form-import.html.php', compact( 'form_id' ) );
-//        });
+        self::$imported_form_id = $form_id;
+        add_action( 'admin_notices', array( 'NF_Database_Models_Form', 'import_admin_notice' ) );
+    }
+
+    public static function import_admin_notice()
+    {
+        Ninja_Forms()->template( 'admin-notice-form-import.html.php', array( 'form_id'=> self::$imported_form_id ) );
     }
 
     public static function duplicate( $form_id )
