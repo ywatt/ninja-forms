@@ -745,3 +745,23 @@ function Ninja_Forms() {
 }
 
 Ninja_Forms();
+
+/*
+|--------------------------------------------------------------------------
+| Ninja Forms THREE Upgrade
+|--------------------------------------------------------------------------
+*/
+
+add_action( 'init', 'ninja_forms_three_submenu' );
+function ninja_forms_three_submenu(){
+    include plugin_dir_path( __FILE__ ) . 'upgrade/class-submenu.php';
+}
+
+add_action( 'admin_notices', 'ninja_forms_three_admin_notice' );
+function ninja_forms_three_admin_notice(){
+    ?>
+    <div class="notice is-dismissible">
+        <p><?php _e( 'Done!', 'sample-text-domain' ); ?></p>
+    </div>
+    <?php
+}
