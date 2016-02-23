@@ -66,10 +66,15 @@ class NF_Notices
                 }
 
                 // Check for proper page to display on
-                if ( isset( $admin_notices[ $slug ][ 'pages' ] ) && is_array( $admin_notices[ $slug ][ 'pages' ] ) ) {
-                        if ( ! $this->admin_notice_pages( $admin_notices[ $slug ][ 'pages' ] ) ) {
-                                return false;
-                        }
+                if ( isset( $admin_notices[ $slug ][ 'pages' ] ) && is_array( $admin_notices[ $slug ][ 'pages' ] )
+                     || isset( $admin_notices[ $slug ][ 'blacklist' ] ) && is_array( $admin_notices[ $slug ][ 'blacklist' ] )
+                ) {
+
+                    if( ( isset( $admin_notices[ $slug ][ 'blacklist' ] ) && $this->admin_notice_pages_blacklist( $admin_notices[ $slug ][ 'blacklist' ] ) )
+                        || ( isset( $admin_notices[ $slug ][ 'pages' ] ) && ! $this->admin_notice_pages( $admin_notices[ $slug ][ 'pages' ] ) )
+                    ) {
+                        return false;
+                    }
                 }
 
                 // Check for required fields
@@ -179,6 +184,25 @@ class NF_Notices
                 $query_str = remove_query_arg( array( 'nf_admin_notice_temp_ignore', 'nf_int' ) );
                 wp_redirect( $query_str );
                 exit;
+        }
+    }
+
+    public function admin_notice_pages_blacklist( $pages ) {
+
+        foreach( $pages as $key => $page ) {
+            if ( is_array( $page ) ) {
+                if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page'] == $page[0] && isset( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] == $page[1] ) {
+                    return true;
+                }
+            } else {
+                if ( get_current_screen()->id === $page ) {
+                    return true;
+                }
+                if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page'] == $page ) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
