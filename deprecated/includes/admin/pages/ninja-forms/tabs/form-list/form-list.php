@@ -42,6 +42,27 @@ function ninja_forms_register_tab_form_list(){
 add_action('admin_init', 'ninja_forms_register_tab_form_list');
 
 function ninja_forms_tab_form_list(){
+	wp_enqueue_script( 'cheet', NINJA_FORMS_URL . 'assets/js/lib/cheet.min.js', array( 'jquery' ) );
+	wp_enqueue_script( 'howler', NINJA_FORMS_URL . 'assets/js/lib/howler.core.min.js', array( 'jquery' ) );
+	wp_localize_script( 'howler', 'nfUnlock', array( 'audioUrl' => NINJA_FORMS_URL . 'assets/audio/smw_power_up.wav', 'aboutPage' => menu_page_url( 'ninja-forms-three', false ) ) );
+	?>
+	<script type="text/javascript">
+
+		jQuery( document ).ready( function() {
+		  	var sound = new Howl({
+			  src: [ nfUnlock.audioUrl ],
+			  onend: function() {
+			  	window.location = nfUnlock.aboutPage;
+			  }
+			});		
+
+			cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+				sound.play();
+			});
+		} );
+	</script>
+
+	<?php
 
 	do_action( 'nf_admin_before_form_list' );
 
