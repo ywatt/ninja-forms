@@ -42,203 +42,6 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         }
     }
 
-    public function import_form_backwards_compatibility( $import )
-    {
-        // Rename `data` to `settings`
-        if( isset( $import[ 'data' ] ) ){
-            $import[ 'settings' ] = $import[ 'data' ];
-            unset( $import[ 'data' ] );
-        }
-
-        // Rename `notifications` to `actions`
-        if( isset( $import[ 'notifications' ] ) ){
-            $import[ 'actions' ] = $import[ 'notifications' ];
-            unset( $import[ 'notifications' ] );
-        }
-
-        // Rename `form_title` to `title`
-        if( isset( $import[ 'settings' ][ 'form_title' ] ) ){
-            $import[ 'settings' ][ 'title' ] = $import[ 'settings' ][ 'form_title' ];
-            unset( $import[ 'settings' ][ 'form_title' ] );
-        }
-
-        // Make sure
-        if( ! isset( $import[ 'fields' ] ) ){
-            $import[ 'fields' ] = array();
-        }
-
-        // `Field` to `Fields`
-        if( isset( $import[ 'field' ] ) ){
-            $import[ 'fields' ] = $import[ 'field' ];
-            unset( $import[ 'field' ] );
-        }
-
-        // Combine Field and Field Data
-        foreach( $import[ 'fields' ] as $key => $field ){
-            // TODO: Split Credit Card field into multiple fields.
-            $field = $this->import_field_backwards_compatibility( $field );
-            $import[ 'fields' ][ $key ] = $field;
-        }
-
-        foreach( $import[ 'actions' ] as $key => $action ){
-            $action = $this->import_action_backwards_compatibility( $action );
-            $import[ 'actions' ][ $key ] = $action;
-        }
-
-        $import = $this->import_merge_tags_backwards_compatibility( $import );
-
-        return $import;
-    }
-
-    public function import_merge_tags_backwards_compatibility( $import )
-    {
-        $field_lookup = array();
-
-        foreach( $import[ 'fields' ] as $key => $field ){
-            $field_id  = $field[ 'id' ];
-            $field_key = $field[ 'type' ] . '_' . $field_id;
-            $field_lookup[ $field_id ] = $import[ 'fields' ][ $key ][ 'key' ] = $field_key;
-        }
-
-        foreach( $import[ 'actions' ] as $key => $action_settings ){
-            foreach( $action_settings as $setting => $value ){
-                foreach( $field_lookup as $field_id => $field_key ){
-                    $token = 'field_' . $field_id;
-                    if( FALSE === strpos( $value, $token ) ) continue;
-                    $value = str_replace( $token, '{field:' . $field_key . '}', $value );
-                }
-
-                if( FALSE !== strpos( $value, '[ninja_forms_all_fields]' ) ) {
-                    $value = str_replace( '[ninja_forms_all_fields]', '{field:all_fields}', $value );
-                }
-                $action_settings[ $setting ] = $value;
-                $import[ 'actions' ][ $key ] = $action_settings;
-            }
-        }
-
-        return $import;
-    }
-
-    public function import_action_backwards_compatibility( $action )
-    {
-        // Remove `_` from type
-        if( isset( $action[ 'type' ] ) ) {
-            $action['type'] = str_replace('_', '', $action['type']);
-        }
-
-        // Convert `name` to `label`
-        if( isset( $action[ 'name' ] ) ) {
-            $action['label'] = $action['name'];
-            unset($action['name']);
-        }
-
-        return $action;
-    }
-
-    public function import_field_backwards_compatibility( $field )
-    {
-        // Flatten field settings array
-        if( isset( $field[ 'data' ] ) ){
-            $field = array_merge( $field, $field[ 'data' ] );
-            unset( $field[ 'data' ] );
-        }
-
-        // Drop form_id in favor of parent_id, which is set by the form.
-        if( isset( $field[ 'form_id' ] ) ){
-            unset( $field[ 'form_id' ] );
-        }
-
-        // Remove `_` prefix from type setting
-        $field[ 'type' ] = ltrim( $field[ 'type' ], '_' );
-
-        // Type: `text` -> `textbox`
-        if( 'text' == $field[ 'type' ] ){
-            $field[ 'type' ] = 'textbox';
-        }
-
-        if( isset( $field[ 'email' ] ) ){
-
-            if( 'textbox' == $field[ 'type' ] ) {
-                $field['type'] = 'email';
-            }
-            unset( $field[ 'email' ] );
-        }
-
-        if( isset( $field[ 'class' ] ) ){
-            $field[ 'element_class' ] = $field[ 'class' ];
-            unset( $field[ 'class' ] );
-        }
-
-        if( isset( $field[ 'req' ] ) ){
-            $field[ 'required' ] = $field[ 'req' ];
-            unset( $field[ 'req' ] );
-        }
-
-        if( isset( $field[ 'default_value_type' ] ) ){
-
-            /* User Data */
-            if( '_user_id' == $field[ 'default_value_type' ] )           $field[ 'default' ] = '{user:id}';
-            if( '_user_email' == $field[ 'default_value_type' ] )        $field[ 'default' ] = '{user:email}';
-            if( '_user_lastname' == $field[ 'default_value_type' ] )     $field[ 'default' ] = '{user:last_name}';
-            if( '_user_firstname' == $field[ 'default_value_type' ] )    $field[ 'default' ] = '{user:first_name}';
-            if( '_user_display_name' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{user:display_name}';
-
-            /* Post Data */
-            if( 'post_id' == $field[ 'default_value_type' ] )    $field[ 'default' ] = '{post:id}';
-            if( 'post_url' == $field[ 'default_value_type' ] )   $field[ 'default' ] = '{post:url}';
-            if( 'post_title' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{post:title}';
-
-            /* System Data */
-            if( 'today' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{system:date}';
-
-            /* Miscellaneous */
-            if( '_custom' == $field[ 'default_value_type' ] && isset( $field[ 'default_value' ] ) ){
-                $field[ 'default' ] = $field[ 'default_value' ];
-            }
-            if( 'querystring' == $field[ 'default_value_type' ] && isset( $field[ 'default_value' ] ) ){
-                $field[ 'default' ] = '{' . $field[ 'default_value' ] . '}';
-            }
-
-            unset( $field[ 'default_value' ] );
-            unset( $field[ 'default_value_type' ] );
-        }
-
-        if( 'list' == $field[ 'type' ] ) {
-
-            if ( isset( $field[ 'list_type' ] ) ) {
-
-                if ('dropdown' == $field['list_type']) {
-                    $field['type'] = 'listselect';
-                }
-                if ('radio' == $field['list_type']) {
-                    $field['type'] = 'listradio';
-                }
-                if ('checkbox' == $field['list_type']) {
-                    $field['type'] = 'listcheckbox';
-                }
-                if ('multi' == $field['list_type']) {
-                    $field['type'] = 'listmultiselect';
-                }
-            }
-
-            if( isset( $field[ 'list' ][ 'options' ] ) ) {
-                $field[ 'options' ] = $field[ 'list' ][ 'options' ];
-                unset( $field[ 'list' ][ 'options' ] );
-            }
-        }
-
-        // Convert `textbox` to other field types
-        foreach( array( 'fist_name', 'last_name', 'user_zip', 'user_city', 'user_phone', 'user_email', 'user_address_1', 'user_address_2', 'datepicker' ) as $item ) {
-            if ( isset( $field[ $item ] ) && $field[ $item ] ) {
-                $field[ 'type' ] = str_replace( array( '_', 'user', '1', '2', 'picker' ), '', $item );
-
-                unset( $field[ $item ] );
-            }
-        }
-
-        return $field;
-    }
-
     public static function get_next_sub_seq( $form_id )
     {
         $form = Ninja_Forms()->form( $form_id )->get();
@@ -368,6 +171,224 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
             die();
         }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Backwards Compatibility
+    |--------------------------------------------------------------------------
+    */
+
+    public function import_form_backwards_compatibility( $import )
+    {
+        // Rename `data` to `settings`
+        if( isset( $import[ 'data' ] ) ){
+            $import[ 'settings' ] = $import[ 'data' ];
+            unset( $import[ 'data' ] );
+        }
+
+        // Rename `notifications` to `actions`
+        if( isset( $import[ 'notifications' ] ) ){
+            $import[ 'actions' ] = $import[ 'notifications' ];
+            unset( $import[ 'notifications' ] );
+        }
+
+        // Rename `form_title` to `title`
+        if( isset( $import[ 'settings' ][ 'form_title' ] ) ){
+            $import[ 'settings' ][ 'title' ] = $import[ 'settings' ][ 'form_title' ];
+            unset( $import[ 'settings' ][ 'form_title' ] );
+        }
+
+        // Make sure
+        if( ! isset( $import[ 'fields' ] ) ){
+            $import[ 'fields' ] = array();
+        }
+
+        // `Field` to `Fields`
+        if( isset( $import[ 'field' ] ) ){
+            $import[ 'fields' ] = $import[ 'field' ];
+            unset( $import[ 'field' ] );
+        }
+
+        // Combine Field and Field Data
+        foreach( $import[ 'fields' ] as $key => $field ){
+            // TODO: Split Credit Card field into multiple fields.
+            $field = $this->import_field_backwards_compatibility( $field );
+            $import[ 'fields' ][ $key ] = $field;
+        }
+
+        $has_save_action = FALSE;
+        foreach( $import[ 'actions' ] as $key => $action ){
+            $action = $this->import_action_backwards_compatibility( $action );
+            $import[ 'actions' ][ $key ] = $action;
+
+            if( 'save' == $action[ 'type' ] ) $has_save_action = TRUE;
+        }
+
+        if( ! $has_save_action ) {
+            $import[ 'actions' ][] = array(
+                'type' => 'save',
+                'label' => 'Save Form',
+                'active' => TRUE
+            );
+        }
+
+        $import = $this->import_merge_tags_backwards_compatibility( $import );
+
+        return $import;
+    }
+
+    public function import_merge_tags_backwards_compatibility( $import )
+    {
+        $field_lookup = array();
+
+        foreach( $import[ 'fields' ] as $key => $field ){
+            $field_id  = $field[ 'id' ];
+            $field_key = $field[ 'type' ] . '_' . $field_id;
+            $field_lookup[ $field_id ] = $import[ 'fields' ][ $key ][ 'key' ] = $field_key;
+        }
+
+        foreach( $import[ 'actions' ] as $key => $action_settings ){
+            foreach( $action_settings as $setting => $value ){
+                foreach( $field_lookup as $field_id => $field_key ){
+                    $token = 'field_' . $field_id;
+                    if( FALSE === strpos( $value, $token ) ) continue;
+                    $value = str_replace( $token, '{field:' . $field_key . '}', $value );
+                }
+
+                if( FALSE !== strpos( $value, '[ninja_forms_all_fields]' ) ) {
+                    $value = str_replace( '[ninja_forms_all_fields]', '{field:all_fields}', $value );
+                }
+                $action_settings[ $setting ] = $value;
+                $import[ 'actions' ][ $key ] = $action_settings;
+            }
+        }
+
+        return $import;
+    }
+
+    public function import_action_backwards_compatibility( $action )
+    {
+        // Remove `_` from type
+        if( isset( $action[ 'type' ] ) ) {
+            $action['type'] = str_replace('_', '', $action['type']);
+        }
+
+        // Convert `name` to `label`
+        if( isset( $action[ 'name' ] ) ) {
+            $action['label'] = $action['name'];
+            unset($action['name']);
+        }
+
+        return $action;
+    }
+
+    public function import_field_backwards_compatibility( $field )
+    {
+        // Flatten field settings array
+        if( isset( $field[ 'data' ] ) ){
+            $field = array_merge( $field, $field[ 'data' ] );
+            unset( $field[ 'data' ] );
+        }
+
+        // Drop form_id in favor of parent_id, which is set by the form.
+        if( isset( $field[ 'form_id' ] ) ){
+            unset( $field[ 'form_id' ] );
+        }
+
+        // Remove `_` prefix from type setting
+        $field[ 'type' ] = ltrim( $field[ 'type' ], '_' );
+
+        // Type: `text` -> `textbox`
+        if( 'text' == $field[ 'type' ] ){
+            $field[ 'type' ] = 'textbox';
+        }
+
+        if( 'submit' == $field[ 'type' ] ){
+            $field[ 'processing_label' ] = 'Processing';
+        }
+
+        if( isset( $field[ 'email' ] ) ){
+
+            if( 'textbox' == $field[ 'type' ] && $field[ 'email' ] ) {
+                $field['type'] = 'email';
+            }
+            unset( $field[ 'email' ] );
+        }
+
+        if( isset( $field[ 'class' ] ) ){
+            $field[ 'element_class' ] = $field[ 'class' ];
+            unset( $field[ 'class' ] );
+        }
+
+        if( isset( $field[ 'req' ] ) ){
+            $field[ 'required' ] = $field[ 'req' ];
+            unset( $field[ 'req' ] );
+        }
+
+        if( isset( $field[ 'default_value_type' ] ) ){
+
+            /* User Data */
+            if( '_user_id' == $field[ 'default_value_type' ] )           $field[ 'default' ] = '{user:id}';
+            if( '_user_email' == $field[ 'default_value_type' ] )        $field[ 'default' ] = '{user:email}';
+            if( '_user_lastname' == $field[ 'default_value_type' ] )     $field[ 'default' ] = '{user:last_name}';
+            if( '_user_firstname' == $field[ 'default_value_type' ] )    $field[ 'default' ] = '{user:first_name}';
+            if( '_user_display_name' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{user:display_name}';
+
+            /* Post Data */
+            if( 'post_id' == $field[ 'default_value_type' ] )    $field[ 'default' ] = '{post:id}';
+            if( 'post_url' == $field[ 'default_value_type' ] )   $field[ 'default' ] = '{post:url}';
+            if( 'post_title' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{post:title}';
+
+            /* System Data */
+            if( 'today' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{system:date}';
+
+            /* Miscellaneous */
+            if( '_custom' == $field[ 'default_value_type' ] && isset( $field[ 'default_value' ] ) ){
+                $field[ 'default' ] = $field[ 'default_value' ];
+            }
+            if( 'querystring' == $field[ 'default_value_type' ] && isset( $field[ 'default_value' ] ) ){
+                $field[ 'default' ] = '{' . $field[ 'default_value' ] . '}';
+            }
+
+            unset( $field[ 'default_value' ] );
+            unset( $field[ 'default_value_type' ] );
+        }
+
+        if( 'list' == $field[ 'type' ] ) {
+
+            if ( isset( $field[ 'list_type' ] ) ) {
+
+                if ('dropdown' == $field['list_type']) {
+                    $field['type'] = 'listselect';
+                }
+                if ('radio' == $field['list_type']) {
+                    $field['type'] = 'listradio';
+                }
+                if ('checkbox' == $field['list_type']) {
+                    $field['type'] = 'listcheckbox';
+                }
+                if ('multi' == $field['list_type']) {
+                    $field['type'] = 'listmultiselect';
+                }
+            }
+
+            if( isset( $field[ 'list' ][ 'options' ] ) ) {
+                $field[ 'options' ] = $field[ 'list' ][ 'options' ];
+                unset( $field[ 'list' ][ 'options' ] );
+            }
+        }
+
+        // Convert `textbox` to other field types
+        foreach( array( 'fist_name', 'last_name', 'user_zip', 'user_city', 'user_phone', 'user_email', 'user_address_1', 'user_address_2', 'datepicker' ) as $item ) {
+            if ( isset( $field[ $item ] ) && $field[ $item ] ) {
+                $field[ 'type' ] = str_replace( array( '_', 'user', '1', '2', 'picker' ), '', $item );
+
+                unset( $field[ $item ] );
+            }
+        }
+
+        return $field;
     }
 
 } // End NF_Database_Models_Form
