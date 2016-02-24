@@ -8,7 +8,7 @@
     p {
         font-size: 16px;
     }
-    ul {
+    ol {
         list-style-type: disc;
         margin-left: 20px;
         font-size: 16px;
@@ -16,6 +16,7 @@
     .nf-logo {
         display: block;
         margin: 0 auto;
+        max-width: 300px;
     }
     .nf-upgrade {
         margin: 0 auto;
@@ -54,25 +55,11 @@
     <h1>Congratulations!</h1>
     <h2>You are elgible to update to Ninja Forms THREE!</h2>
 
-    <p>You are only moments away from the biggest thing to happen to the WordPress form building experience...ever</p>
+    <p>You are only moments away from the biggest thing to ever happen to the WordPress form building experience.</p>
 
-    <p>Ninja Forms THREE is the most...</p>
-    <ul>
-        <li>intuitive</li>
-        <li>powerful</li>
-        <li>enjoyable</li>
-    </ul>
-    <p>...form builder you will ever use.</p>
+    <p>Ninja Forms THREE is the most <em>intuitive</em>, <em>powerful</em>, and <em>enjoyable</em> form builder you will ever use.</p>
 
-    <h2>You are about to experience it live, right on your own site,<br />
-    but first there are some things you should know.</h2>
-
-    <ul>
-        <li><strong>This is a Pre-release.</strong> This means that while we have tested everything that we could and we think it's ready for the world, there could be some minor bugs we were unable to detect. If you choose to update you are acknowledging this and promising to update us if you fund anything acting unexpected. Remember, you promised.</li>
-        <li><strong></strong></li>
-        <li><strong></strong></li>
-    </ul>
-
+<<<<<<< HEAD
     <hr>
 
     <h2>Form Upgrade Compatibility</h2>
@@ -93,5 +80,19 @@
         <?php endforeach; ?>
         </tbody>
     </table>
+=======
+    <h2>Before you update, we want to make you aware of a few <strong>very important points:</stong></h2>
+>>>>>>> 2103369b8e7d8a277d832faa83b532894e200ad4
 
+    <ol>
+      <li><strong>This is a pre-release.</strong>
+          <p>We have tested everything we can and consider this release ready, but if you have any issues please report them via the "Get Help" item in the "Forms" menu.</p>
+      </li>
+      <li><strong>Calculations will not convert.</strong>
+          <p>Any forms with calculations will be converted to Ninja Forms THREE, but calculations within those forms will need recreated as a result of our vastly improved calculations system.</p>
+      </li>
+      <li><strong>We have resources to help you with the transition to THREE.</strong>
+          <p>The Ninja Forms THREE documentation, development process, FAQ, and more <a href='http://ninjaforms.com/three/'>can be found here.</a></p>
+      </li>
+    </ol>
 </div>
