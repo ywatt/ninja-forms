@@ -58,7 +58,8 @@ define([], function() {
 				option.classes = that.classes;
 				option.currentValue = that.value;
 				
-				html += _.template( jQuery( '#nf-tmpl-field-listselect-option' ).html(), option );
+				var template = _.template( jQuery( '#nf-tmpl-field-listselect-option' ).html() );
+				html += template( option );
 			} );
 
 			return html;

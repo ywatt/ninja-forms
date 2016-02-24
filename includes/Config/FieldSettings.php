@@ -376,9 +376,10 @@ return apply_filters( 'ninja_forms_field_settings', array(
             ),
             array(
                 'label' => 'Friday, November 18, 2019',
-                'value' => 'D,m,d,Y',
+                'value' => 'dddd, MMMM D YYYY',
             ),
         ),
+        'value'         => 'DD/MM/YYYY',
     ),
 
     /*

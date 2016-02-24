@@ -73,11 +73,13 @@ define( ['views/fieldErrorCollection'], function( fieldErrorCollection ) {
 							return true;
 						}
 					} );
-					return _.template( jQuery( '#nf-tmpl-field-' + tmpl ).html(), this );
+					var template = _.template( jQuery( '#nf-tmpl-field-' + tmpl ).html() );
+					return template( this );
 				},
 
 				renderLabel: function() {
-					return _.template( jQuery( '#nf-tmpl-field-label' ).html(), this );
+					var template = _.template( jQuery( '#nf-tmpl-field-label' ).html() );
+					return template( this );
 				},
 
 				setPlaceholder: function() {
