@@ -1,6 +1,6 @@
 <div class="wrap">
 
-    <h1><?php _e( 'System Status', 'ninja-forms' ); ?></h1>
+    <h1><?php _e( 'Get Help', 'ninja-forms' ); ?></h1>
 
     <div class="nf-box">
         <div>

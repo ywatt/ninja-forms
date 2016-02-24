@@ -28,23 +28,28 @@
     <h1>Congratulations!</h1>
     <h2>You are elgible to update to Ninja Forms THREE!</h2>
 
-    <p>You are only moments away from the biggest thing to happen to the WordPress form building experience...ever</p>
+    <p>You are only moments away from the biggest thing to ever happen to the WordPress form building experience.</p>
 
-    <p>Ninja Forms THREE is the most...</p>
-    <ul>
-        <li>intuitive</li>
-        <li>powerful</li>
-        <li>enjoyable</li>
-    </ul>
-    <p>...form builder you will ever use.</p>
+    <p>Ninja Forms THREE is the most <em>intuitive</em>, <em>powerful</em>, and <em>enjoyable</em> form builder you will ever use.</p>
 
-    <h2>You are about to experience it live, right on your own site,<br />
-    but first there are some things you should know.</h2>
+    <h2>Before you update, we want to make you aware of a few <strong>very important points:</stong></h2>
 
     <ul>
-        <li><strong>This is a Pre-release.</strong> This means that while we have tested everything that we could and we think it's ready for the world, there could be some minor bugs we were unable to detect. If you choose to update you are acknowledging this and promising to update us if you fund anything acting unexpected. Remember, you promised.</li>
-        <li><strong></strong></li>
-        <li><strong></strong></li>
+      <li><strong>This is a pre-release.</strong>
+        <ul>
+          <li>We have tested everything we can and consider this release ready, but if you have any issues please report them via the "Get Help" item in the "Forms" menu.</li>
+        </ul>
+      </li>
+      <li><strong>Calculations will not convert.</strong>
+        <ul>
+          <li>Any forms with calculations will be converted to Ninja Forms THREE, but calculations within those forms will need recreated as a result of our vastly improved calculations system.</li>
+        </ul>
+      </li>
+      <li><strong>We are here to help with the transition!</strong>
+        <ul>
+          <li>The Ninja Forms THREE documentation, development process, FAQ, and more <a href='http://ninjaforms.com/three/'>can be found here.</a></li>
+        </ul>
+      </li>
     </ul>
 
 
