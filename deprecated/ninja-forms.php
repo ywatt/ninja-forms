@@ -764,3 +764,28 @@ function ninja_forms_three_admin_notice(){
     wp_enqueue_style( 'nf-admin-notices', NINJA_FORMS_URL .'assets/css/admin-notices.css?nf_ver=' . NF_PLUGIN_VERSION );
     include plugin_dir_path( __FILE__ ) . 'upgrade/tmpl-notice.html.php';
 }
+
+add_action( 'admin_init', 'ninja_forms_three_addons_version_check' );
+function ninja_forms_three_addons_version_check(){
+    $items = wp_remote_get( 'https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h' );
+    $items = wp_remote_retrieve_body( $items );
+    $items = json_decode( $items, true );
+
+    foreach ($items as $item) {
+
+        if( empty( $item['plugin'] ) ) continue;
+        if( ! file_exists( WP_PLUGIN_DIR.'/'.$item['plugin'] ) ) continue;
+
+        $plugin_data = get_plugin_data( WP_PLUGIN_DIR.'/'.$item['plugin'], false, true );
+
+        if( ! $plugin_data[ 'Version' ] ) continue;
+        if( version_compare( $plugin_data['Version'], '3', '>=' ) ) continue;
+
+        /*
+         * There are non-compatible add-ons installed.
+         */
+
+        // ...
+    }
+}
+
