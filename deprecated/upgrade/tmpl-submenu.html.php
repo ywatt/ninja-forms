@@ -56,19 +56,16 @@
         color: green;
     }
     .dashicons-flag {
-        color: #ffba00;
+        color: #ffba00; /* WP Update Nag Yellow */
     }
     .dashicons-warning {
-        color: #ffba00; /* WP Update Nag Yellow */
+        color: gray;
     }
 
     ol .dashicons {
         margin-top: 2px;
         margin-right: 8px;
         margin-left: -30px;
-    }
-    .dashicons-warning {
-        color: gray;
     }
 </style>
 
