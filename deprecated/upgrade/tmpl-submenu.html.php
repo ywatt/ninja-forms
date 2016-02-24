@@ -5,8 +5,12 @@
     h1 {
         line-height: 32px;
     }
+    h2 {
+        margin: 40px auto 20px;
+    }
     p {
         font-size: 16px;
+        padding-top: 20px;
     }
     ol {
         list-style-type: disc;
