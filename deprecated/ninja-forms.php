@@ -765,7 +765,36 @@ function ninja_forms_three_admin_notice(){
     include plugin_dir_path( __FILE__ ) . 'upgrade/tmpl-notice.html.php';
 }
 
-add_action( 'admin_init', 'ninja_forms_three_addons_version_check' );
+add_action( 'nf_admin_before_form_list', 'ninja_forms_konami' );
+function ninja_forms_konami(){
+
+    if( ! ninja_forms_three_addons_version_check() ) return;
+
+    wp_enqueue_script( 'cheet', NINJA_FORMS_URL . 'assets/js/lib/cheet.min.js', array( 'jquery' ) );
+    wp_enqueue_script( 'howler', NINJA_FORMS_URL . 'assets/js/lib/howler.core.min.js', array( 'jquery' ) );
+    wp_localize_script( 'howler', 'nfUnlock', array( 'audioUrl' => NINJA_FORMS_URL . 'assets/audio/smw_power_up.wav', 'aboutPage' => menu_page_url( 'ninja-forms-three', false ) ) );
+    ?>
+    <script type="text/javascript">
+
+        jQuery( document ).ready( function() {
+            var sound = new Howl({
+                src: [ nfUnlock.audioUrl ],
+                onend: function() {
+                    jQuery( '#nf-admin-notice-upgrade' ).fadeIn( 'slow', function() {
+                        window.location = nfUnlock.aboutPage;
+                    });
+                }
+            });
+
+            cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+                sound.play();
+            });
+        } );
+    </script>
+    <?php
+}
+
+
 function ninja_forms_three_addons_version_check(){
     $items = wp_remote_get( 'https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h' );
     $items = wp_remote_retrieve_body( $items );
@@ -785,7 +814,9 @@ function ninja_forms_three_addons_version_check(){
          * There are non-compatible add-ons installed.
          */
 
-        // ...
+        return FALSE;
     }
+
+    return TRUE;
 }
 

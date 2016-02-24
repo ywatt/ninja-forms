@@ -68,6 +68,8 @@ class NF_THREE_Submenu
      */
     public function register()
     {
+        if( ! ninja_forms_three_addons_version_check() ) return;
+
         $function = ( $this->function ) ? array( $this, $this->function ) : NULL;
 
         add_submenu_page(
