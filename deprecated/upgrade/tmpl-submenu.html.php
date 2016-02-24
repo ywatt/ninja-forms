@@ -21,6 +21,32 @@
         margin: 0 auto;
         max-width: 800px;
     }
+
+    hr {
+        margin: 50px 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th {
+        text-align: left;
+    }
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+    .dashicons-yes {
+        color: green;
+    }
+    .dashicons-no {
+        color: red;
+    }
 </style>
 
 <img class="nf-logo" src="<?php echo NF_PLUGIN_URL . 'images/nf-logo.png'; ?>">
@@ -47,5 +73,25 @@
         <li><strong></strong></li>
     </ul>
 
+    <hr>
+
+    <h2>Form Upgrade Compatibility</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Form Title</th>
+                <th>Ready to Convert</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach( $forms as $form ): ?>
+            <tr>
+                <td><?php echo $form[ 'form_title' ]; ?></td>
+                <td><?php echo ( $form[ 'can_upgrade' ] ) ? '<span class="dashicons dashicons-yes"></span>' : '<span class="dashicons dashicons-no"></span>'; ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 
 </div>

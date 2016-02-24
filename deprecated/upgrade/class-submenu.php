@@ -59,6 +59,8 @@ class NF_THREE_Submenu
         $this->capability = add_filter( 'submenu_' . $this->menu_slug . '_capability', $this->capability );
 
         add_action( 'admin_menu', array( $this, 'register' ), $this->priority );
+
+        add_action( 'wp_ajax_ninja_forms_upgrade_check', 'upgrade_check' );
     }
 
     /**
@@ -82,7 +84,39 @@ class NF_THREE_Submenu
      * Display the menu page.
      */
     public function display(){
+
+        $all_forms = Ninja_Forms()->forms()->get_all();
+
+        $forms = array();
+        foreach( $all_forms as $form_id ){
+
+            $can_upgrade = TRUE;
+
+            $fields = Ninja_Forms()->form( $form_id )->fields;
+            $settings = Ninja_Forms()->form( $form_id )->get_all_settings();
+
+            foreach( $fields as $field ){
+                if( '_calc' == $field[ 'type' ] ){
+                    $can_upgrade = FALSE;
+                }
+            }
+
+            $forms[ $form_id ] = array(
+                'form_title' => $settings[ 'form_title' ],
+                'can_upgrade' => $can_upgrade
+            );
+        }
+
         include plugin_dir_path( __FILE__ ) . 'tmpl-submenu.html.php';
+    }
+
+    public function upgrade_check(){
+
+        $response = array();
+
+        echo wp_json_encode( $response );
+
+        wp_die(); // this is required to terminate immediately and return a proper response
     }
 
 }
