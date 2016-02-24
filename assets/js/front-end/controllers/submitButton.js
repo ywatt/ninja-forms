@@ -39,6 +39,14 @@ define([], function() {
 		},
 
 		submitForm: function( el, model ) {
+			/*
+			 * Check to see if our honeypot has been filled in. If it has, add an error and don't submit.
+			 */
+			var hpVal = jQuery( el ).closest( '.nf-form-wrap' ).find( '.nf-field-hp' ).val();
+			if ( '' != jQuery.trim( hpVal ) ) {
+				// Add an error to our form.
+				return false;
+			}
 			var formErrors = nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) );
 			if ( formErrors ) {
 				jQuery( el ).closest( '.nf-field-wrap' ).find( '.nf-field-submit-error' ).show();
