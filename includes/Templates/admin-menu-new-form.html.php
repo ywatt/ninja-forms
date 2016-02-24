@@ -365,6 +365,12 @@
     </label>
 </script>
 
+<script id="nf-tmpl-edit-setting-datepicker" type="text/template">
+    <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
+        <input type="text" class="setting" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
+    </label>
+</script>
+
 <script id="nf-tmpl-edit-setting-number" type="text/template">
     <label for="<%= name %>"><%= label %> <%= renderTooltip() %>
         <input type="number" class="setting" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />

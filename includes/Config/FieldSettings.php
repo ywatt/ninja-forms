@@ -340,20 +340,58 @@ return apply_filters( 'ninja_forms_field_settings', array(
     ),
 
     /*
-     * DATEPICKER
+     * DATE FORMAT
      */
 
-    'datepicker' => array(
-        'name' => 'datepicker',
-        'type' => 'toggle',
-        'label' => __( 'Use the JQueryUI datepicker.', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'advanced',
-        'value' => FALSE,
-
+    'date_format'        => array(
+        'name'          => 'date_format',
+        'type'          => 'select',
+        'label'         => __( 'Format', 'ninja-forms' ),
+        'width'         => 'full',
+        'group'         => 'primary',
+        'options'       => array(
+            array(
+                'label' => 'DD/MM/YYYY',
+                'value' => 'DD/MM/YYYY',
+            ),
+            array(
+                'label' => 'DD-MM-YYYY',
+                'value' => 'DD-MM-YYYY',
+            ),
+            array(
+                'label' => 'MM/DD/YYYY',
+                'value' => 'MM/DD/YYYY',
+            ),
+            array(
+                'label' => 'MM-DD-YYYY',
+                'value' => 'MM-DD-YYYY',
+            ),
+            array(
+                'label' => 'YYYY-MM-DD',
+                'value' => 'YYYY-MM-DD',
+            ),
+            array(
+                'label' => 'YYYY/MM/DD',
+                'value' => 'YYYY/MM/DD',
+            ),
+            array(
+                'label' => 'Friday, November 18, 2019',
+                'value' => 'D,m,d,Y',
+            ),
+        ),
     ),
 
+    /*
+     * DATE DEFAULT
+     */
 
+    'date_default'       => array(
+        'name'          => 'date_default',
+        'type'          => 'toggle',
+        'label'         => __( 'Default To Current Date', 'ninja-forms' ),
+        'width'         => 'one-half',
+        'group'         => 'primary'
+    ),
 
     /*
      * TIME SETTING
@@ -368,7 +406,6 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'value' => FALSE,
 
     ),
-
 
     /*
      * KEY
