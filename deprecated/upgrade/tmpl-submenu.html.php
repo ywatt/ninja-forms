@@ -13,20 +13,10 @@
         padding-top: 20px;
     }
     ol {
-        list-style-type: disc;
-        margin-left: 20px;
         font-size: 16px;
+        margin-left: 40px;
+        list-style-type: none;
     }
-    .nf-logo {
-        display: block;
-        margin: 0 auto;
-        max-width: 300px;
-    }
-    .nf-upgrade {
-        margin: 0 auto;
-        max-width: 800px;
-    }
-
     hr {
         margin: 50px 20px;
     }
@@ -46,11 +36,39 @@
     tr:nth-child(even) {
         background-color: #f2f2f2
     }
+
+
+    .nf-logo {
+        display: block;
+        margin: 0 auto;
+        max-width: 300px;
+    }
+    .nf-upgrade {
+        margin: 0 auto;
+        max-width: 800px;
+    }
+
+    /*
+     * Dashicons
+     */
+
     .dashicons-yes {
         color: green;
     }
-    .dashicons-no {
+    .dashicons-flag {
         color: red;
+    }
+    .dashicons-warning {
+        color: #ffba00; /* WP Update Nag Yellow */
+    }
+
+    ol .dashicons {
+        margin-top: 2px;
+        margin-right: 8px;
+        margin-left: -30px;
+    }
+    .dashicons-warning {
+        color: #ffba00; /* WP Update Nag Yellow */
     }
 </style>
 
@@ -66,14 +84,16 @@
     <h2>Before you update, we want to make you aware of a few <strong>very important points:</strong></h2>
 
     <ol>
-        <li><strong>This is a pre-release.</strong>
-            <p>We have tested everything we can and consider this release ready, but if you have any issues please report them via the "Get Help" item in the "Forms" menu.</p>
+        <li>
+            <p>
+                <span class="dashicons dashicons-warning"></span><strong>This is a pre-release.</strong> We have tested everything we can and consider this release ready, but if you have any issues please report them via the "Get Help" item in the "Forms" menu.
+            </p>
         </li>
-        <li><strong>Calculations will not convert.</strong>
-            <p>Any forms with calculations will be converted to Ninja Forms THREE, but calculations within those forms will need recreated as a result of our vastly improved calculations system.</p>
+        <li><p><span class="dashicons dashicons-warning"></span><strong>Calculations will not convert.</strong>
+            Any forms with calculations will be converted to Ninja Forms THREE, but calculations within those forms will need recreated as a result of our vastly improved calculations system.</p>
         </li>
-        <li><strong>We have resources to help you with the transition to THREE.</strong>
-            <p>The Ninja Forms THREE documentation, development process, FAQ, and more <a href='http://ninjaforms.com/three/'>can be found here.</a></p>
+        <li><p><span class="dashicons dashicons-warning"></span><strong>We have resources to help you with the transition to THREE.</strong>
+            The Ninja Forms THREE documentation, development process, FAQ, and more <a href='http://ninjaforms.com/three/'>can be found here.</a></p>
         </li>
     </ol>
 
@@ -81,18 +101,21 @@
 
     <h2>Form Upgrade Compatibility</h2>
 
+    <span class="dashicons dashicons-yes"></span> = No Issues Detected &nbsp; <span class="dashicons dashicons-flag"></span> = Will Need Attention
+
     <table>
         <thead>
             <tr>
-                <th>Form Title</th>
-                <th>Ready to Convert</th>
+                <th colspan="2">Form Title</th>
             </tr>
         </thead>
         <tbody>
         <?php foreach( $forms as $form ): ?>
             <tr>
                 <td><?php echo $form[ 'form_title' ]; ?></td>
-                <td><?php echo ( $form[ 'can_upgrade' ] ) ? '<span class="dashicons dashicons-yes"></span>' : '<span class="dashicons dashicons-no"></span>'; ?></td>
+                <td>
+                    <?php echo ( $form[ 'can_upgrade' ] ) ? '<span class="dashicons dashicons-yes"></span>' : '<span class="dashicons dashicons-flag"></span>'; ?>
+                </td>
             </tr>
         <?php endforeach; ?>
         </tbody>
