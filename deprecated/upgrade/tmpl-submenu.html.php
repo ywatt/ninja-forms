@@ -86,14 +86,21 @@
     <ol>
         <li>
             <p>
-                <span class="dashicons dashicons-warning"></span><strong>This is a pre-release.</strong> We have tested everything we can and consider this release ready, but if you have any issues please report them via the "Get Help" item in the "Forms" menu.
+                <span class="dashicons dashicons-warning"></span><strong>This is a pre-release.</strong>
+                <br />We have tested everything we can and consider this release ready, but if you have any issues please report them via the "Get Help" item in the "Forms" menu.
             </p>
         </li>
-        <li><p><span class="dashicons dashicons-warning"></span><strong>Calculations will not convert.</strong>
-            Any forms with calculations will be converted to Ninja Forms THREE, but calculations within those forms will need recreated as a result of our vastly improved calculations system.</p>
+        <li>
+            <p>
+                <span class="dashicons dashicons-warning"></span><strong>Calculations will not convert.</strong>
+                <br />Any forms with calculations will be converted to Ninja Forms THREE, but calculations within those forms will need recreated as a result of our vastly improved calculations system.
+            </p>
         </li>
-        <li><p><span class="dashicons dashicons-warning"></span><strong>We have resources to help you with the transition to THREE.</strong>
-            The Ninja Forms THREE documentation, development process, FAQ, and more <a href='http://ninjaforms.com/three/'>can be found here.</a></p>
+        <li>
+            <p>
+                <span class="dashicons dashicons-warning"></span><strong>We have resources to help you with the transition to THREE.</strong>
+                <br />The Ninja Forms THREE documentation, development process, FAQ, and more <a href='http://ninjaforms.com/three/'>can be found here.</a>
+            </p>
         </li>
     </ol>
 
