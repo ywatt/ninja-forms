@@ -56,7 +56,7 @@
         color: green;
     }
     .dashicons-flag {
-        color: red;
+        color: #ffba00;
     }
     .dashicons-warning {
         color: #ffba00; /* WP Update Nag Yellow */
@@ -68,7 +68,7 @@
         margin-left: -30px;
     }
     .dashicons-warning {
-        color: #ffba00; /* WP Update Nag Yellow */
+        color: gray;
     }
 </style>
 
