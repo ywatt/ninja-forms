@@ -59,7 +59,20 @@
 
     <p>Ninja Forms THREE is the most <em>intuitive</em>, <em>powerful</em>, and <em>enjoyable</em> form builder you will ever use.</p>
 
-<<<<<<< HEAD
+    <h2>Before you update, we want to make you aware of a few <strong>very important points:</strong></h2>
+
+    <ol>
+        <li><strong>This is a pre-release.</strong>
+            <p>We have tested everything we can and consider this release ready, but if you have any issues please report them via the "Get Help" item in the "Forms" menu.</p>
+        </li>
+        <li><strong>Calculations will not convert.</strong>
+            <p>Any forms with calculations will be converted to Ninja Forms THREE, but calculations within those forms will need recreated as a result of our vastly improved calculations system.</p>
+        </li>
+        <li><strong>We have resources to help you with the transition to THREE.</strong>
+            <p>The Ninja Forms THREE documentation, development process, FAQ, and more <a href='http://ninjaforms.com/three/'>can be found here.</a></p>
+        </li>
+    </ol>
+
     <hr>
 
     <h2>Form Upgrade Compatibility</h2>
@@ -80,19 +93,5 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-=======
-    <h2>Before you update, we want to make you aware of a few <strong>very important points:</stong></h2>
->>>>>>> 2103369b8e7d8a277d832faa83b532894e200ad4
 
-    <ol>
-      <li><strong>This is a pre-release.</strong>
-          <p>We have tested everything we can and consider this release ready, but if you have any issues please report them via the "Get Help" item in the "Forms" menu.</p>
-      </li>
-      <li><strong>Calculations will not convert.</strong>
-          <p>Any forms with calculations will be converted to Ninja Forms THREE, but calculations within those forms will need recreated as a result of our vastly improved calculations system.</p>
-      </li>
-      <li><strong>We have resources to help you with the transition to THREE.</strong>
-          <p>The Ninja Forms THREE documentation, development process, FAQ, and more <a href='http://ninjaforms.com/three/'>can be found here.</a></p>
-      </li>
-    </ol>
 </div>
