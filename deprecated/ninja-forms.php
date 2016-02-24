@@ -760,7 +760,7 @@ function ninja_forms_three_submenu(){
 add_action( 'admin_notices', 'ninja_forms_three_admin_notice' );
 function ninja_forms_three_admin_notice(){
     $currentScreen = get_current_screen();
-    if( ! in_array( $currentScreen->id, array( 'dashboard', 'toplevel_page_ninja-forms' ) ) ) return;
+    if( ! in_array( $currentScreen->id, array( 'toplevel_page_ninja-forms' ) ) ) return;
     wp_enqueue_style( 'nf-admin-notices', NINJA_FORMS_URL .'assets/css/admin-notices.css?nf_ver=' . NF_PLUGIN_VERSION );
     include plugin_dir_path( __FILE__ ) . 'upgrade/tmpl-notice.html.php';
 }

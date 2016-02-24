@@ -52,7 +52,9 @@ function ninja_forms_tab_form_list(){
 		  	var sound = new Howl({
 			  src: [ nfUnlock.audioUrl ],
 			  onend: function() {
-			  	window.location = nfUnlock.aboutPage;
+				  jQuery( '#nf-admin-notice-upgrade' ).slideDown( 'slow', function() {
+					  window.location = nfUnlock.aboutPage;
+				  });
 			  }
 			});		
 
