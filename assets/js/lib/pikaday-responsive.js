@@ -32,6 +32,7 @@
         format: "YYYY-MM-DD",
         outputFormat: "YYYY-MM-DD",
         checkIfNativeDate: function () {
+            alert( Modernizr.touch );
             return Modernizr.inputtypes.date && (Modernizr.touch && navigator.appVersion.indexOf("Win") === -1);
         },
         classes: "",
@@ -71,6 +72,7 @@
         $container = $el.parent(".pikaday__container");
 
         if (settings.checkIfNativeDate()) {
+            alert( 'NATIVE!' );
             // Use native date picker
             $input = $("<input type='date' class='pikaday__invisible' placeholder='" + settings.placeholder + "' />");
             $container.append($input);
