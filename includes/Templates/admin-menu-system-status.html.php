@@ -1,6 +1,13 @@
 <div class="wrap">
 
     <h1><?php _e( 'Get Help', 'ninja-forms' ); ?></h1>
+<h2>Before requesting help from our support team please review:</h2>
+<ol>
+  <li><a href='http://ninjaforms.com/three/'>Ninja Forms THREE documentation</a></li>
+  <li><a href='http://docs.ninjaforms.com/customer/en/portal/articles/2045713-troubleshooting-ninja-forms'>What to try before contacting support</a></li>
+  <li><a href='http://ninjaforms.com/scope-of-support/'>Our Scope of Support</a></li>
+</ol>
+
 
     <div class="nf-box">
         <div>

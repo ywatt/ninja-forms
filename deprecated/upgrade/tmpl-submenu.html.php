@@ -8,7 +8,7 @@
     p {
         font-size: 16px;
     }
-    ul {
+    ol {
         list-style-type: disc;
         margin-left: 20px;
         font-size: 16px;
@@ -16,6 +16,7 @@
     .nf-logo {
         display: block;
         margin: 0 auto;
+        max-width: 300px;
     }
     .nf-upgrade {
         margin: 0 auto;
@@ -34,23 +35,15 @@
 
     <h2>Before you update, we want to make you aware of a few <strong>very important points:</stong></h2>
 
-    <ul>
+    <ol>
       <li><strong>This is a pre-release.</strong>
-        <ul>
-          <li>We have tested everything we can and consider this release ready, but if you have any issues please report them via the "Get Help" item in the "Forms" menu.</li>
-        </ul>
+          <p>We have tested everything we can and consider this release ready, but if you have any issues please report them via the "Get Help" item in the "Forms" menu.</p>
       </li>
       <li><strong>Calculations will not convert.</strong>
-        <ul>
-          <li>Any forms with calculations will be converted to Ninja Forms THREE, but calculations within those forms will need recreated as a result of our vastly improved calculations system.</li>
-        </ul>
+          <p>Any forms with calculations will be converted to Ninja Forms THREE, but calculations within those forms will need recreated as a result of our vastly improved calculations system.</p>
       </li>
-      <li><strong>We are here to help with the transition!</strong>
-        <ul>
-          <li>The Ninja Forms THREE documentation, development process, FAQ, and more <a href='http://ninjaforms.com/three/'>can be found here.</a></li>
-        </ul>
+      <li><strong>We have resources to help you with the transition to THREE.</strong>
+          <p>The Ninja Forms THREE documentation, development process, FAQ, and more <a href='http://ninjaforms.com/three/'>can be found here.</a></p>
       </li>
-    </ul>
-
-
+    </ol>
 </div>
