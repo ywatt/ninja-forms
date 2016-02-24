@@ -519,3 +519,44 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
         <?php
     }
 }
+
+final class NF_VersionSwitcher
+{
+    public function __construct()
+    {
+        if( isset( $_GET[ 'nf-switcher' ] ) ){
+            switch( $_GET[ 'nf-switcher' ] ){
+                case 'rollback':
+                    update_option( 'ninja_forms_load_deprecated', TRUE );
+                    break;
+                case 'upgrade':
+                    update_option( 'ninja_forms_load_deprecated', FALSE );
+                    break;
+            }
+        }
+        add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 999 );
+    }
+    public function admin_bar_menu( $wp_admin_bar )
+    {
+        $args = array(
+            'id'    => 'nf',
+            'title' => 'Ninja Forms',
+            'href'  => '#',
+        );
+        $wp_admin_bar->add_node( $args );
+        $args = array(
+            'id' => 'nf_switcher',
+            'href' => admin_url(),
+            'parent' => 'nf'
+        );
+        if( ! get_option( 'ninja_forms_load_deprecated' ) ) {
+            $args[ 'title' ] = 'Rollback to 2.9.x';
+            $args[ 'href' ] .= '?nf-switcher=rollback';
+        } else {
+            $args[ 'title' ] = 'Upgrade to 3.0.x';
+            $args[ 'href' ] .= '?nf-switcher=upgrade';
+        }
+        $wp_admin_bar->add_node($args);
+    }
+}
+new NF_VersionSwitcher();
