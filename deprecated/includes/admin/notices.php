@@ -18,7 +18,7 @@ function nf_admin_notices( $notices ) {
         'msg' => sprintf( __( 'A major update is coming to Ninja Forms. %sLearn more about new features, backwards compatibility, and more Frequently Asked Questions.%s', 'ninja-forms' ), '<a target="_blank" href="https://ninjaforms.com/three/?utm_medium=plugin&utm_source=admin-notice&utm_campaign=Ninja+Forms+THREE&utm_content=Learn+More">', '</a>' ),
         'link' => '',
         'int' => 0,
-        'blacklist' => array( 'ninja-forms' ),
+        'blacklist' => array( 'ninja-forms', 'ninja-forms-three' ),
     );
 
     $one_week_support = add_query_arg( array( 'nf_admin_notice_ignore' => 'one_week_support' ) );
