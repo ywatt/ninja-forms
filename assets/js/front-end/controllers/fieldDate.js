@@ -8,7 +8,8 @@ define([], function() {
         initDatepicker: function ( view ) {
             console.log( view.model.get( 'date_format' ) );
             var dateObject = pikadayResponsive( jQuery( view.el ).find( '.nf-element' )[0], {
-                format: view.model.get( 'date_format' )
+                format: view.model.get( 'date_format' ),
+                classes: 'ninja-forms-field'
             } );
         }
 
