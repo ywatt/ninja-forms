@@ -65,14 +65,17 @@ class NF_Notices
                         return false;
                 }
 
-            // Check for proper page to display on
-            if ( isset( $admin_notices[ $slug ][ 'pages' ] ) && is_array( $admin_notices[ $slug ][ 'pages' ] )
-                || isset( $admin_notices[ $slug ][ 'blacklist' ] ) && is_array( $admin_notices[ $slug ][ 'blacklist' ] )
-            ) {
-                if( ( isset( $admin_notices[ $slug ][ 'blacklist' ] ) && $this->admin_notice_pages_blacklist( $admin_notices[ $slug ][ 'blacklist' ] ) )
-                    || ( isset( $admin_notices[ $slug ][ 'pages' ] ) && ! $this->admin_notice_pages( $admin_notices[ $slug ][ 'pages' ] ) )
+
+                // Check for proper page to display on
+                if ( isset( $admin_notices[ $slug ][ 'pages' ] ) && is_array( $admin_notices[ $slug ][ 'pages' ] )
+                     || isset( $admin_notices[ $slug ][ 'blacklist' ] ) && is_array( $admin_notices[ $slug ][ 'blacklist' ] )
                 ) {
-                    return false;
+
+                    if( ( isset( $admin_notices[ $slug ][ 'blacklist' ] ) && $this->admin_notice_pages_blacklist( $admin_notices[ $slug ][ 'blacklist' ] ) )
+                        || ( isset( $admin_notices[ $slug ][ 'pages' ] ) && ! $this->admin_notice_pages( $admin_notices[ $slug ][ 'pages' ] ) )
+                    ) {
+                        return false;
+                    }
                 }
             }
 
@@ -187,6 +190,7 @@ class NF_Notices
     }
 
     public function admin_notice_pages_blacklist( $pages ) {
+
         foreach( $pages as $key => $page ) {
             if ( is_array( $page ) ) {
                 if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page'] == $page[0] && isset( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] == $page[1] ) {
@@ -200,8 +204,10 @@ class NF_Notices
                     return true;
                 }
             }
+
+            return false;
         }
-        return false;
+
     }
 
     // Page check function - This should be called from class extensions if the notice should only show on specific admin pages
