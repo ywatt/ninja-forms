@@ -29,11 +29,26 @@
         text-align: left;
     }
     th, td {
-        width: 50%;
         padding: 15px;
         text-align: left;
         border-bottom: 1px solid #ddd;
     }
+
+    th:nth-child( 1 ),
+    td:nth-child( 1 ) {
+        width: 10%;
+    }
+    th:nth-child( 2 ),
+    td:nth-child( 2 ) {
+        width: 80%;
+    }
+
+    th:nth-child( 3 ),
+    td:nth-child( 3 ) {
+        width: 10%;
+    }
+
+
     tbody tr:nth-child(odd) {
         background-color: #f2f2f2
     }
@@ -45,12 +60,16 @@
         max-width: 300px;
     }
     .nf-upgrade {
-        margin: 0 auto;
+        margin: 0 auto 50px auto;
         max-width: 800px;
     }
 
     #nfThreeUpgradeTable {
-        margin-bottom: 50px;
+        margin-bottom: 20px;
+    }
+
+    #goNinjaGo {
+        display: none;
     }
 
     /*
@@ -86,6 +105,41 @@
         margin-right: 8px;
         margin-left: -30px;
     }
+
+    /*
+     * Progress Bar
+     */
+    .progress-bar,
+    .progress-bar--wrapper {
+        height: 10px;
+    }
+    .progress-bar {
+        width: 0;
+        background-color: green;
+    }
+    .progress-bar--wrapper {
+        width: 100%;
+    }
+
+    /*
+     * Button
+     */
+    button.button.go-ninja-go {
+        color: white;
+        background-color: green;
+        padding: 10px 20px;
+        height: auto;
+        margin: auto;
+        display: block;
+        border: 2px solid transparent;
+    }
+    button.button.go-ninja-go:hover,
+    button.button.go-ninja-go:active {
+        color: green;
+        font-weight: bold;
+        border-color: green;
+    }
+    button.button.go-ninja-go:hover,
 </style>
 
 <img class="nf-logo" src="<?php echo NF_PLUGIN_URL . 'images/nf-logo.png'; ?>">
@@ -131,17 +185,23 @@
     <table id="nfThreeUpgradeTable">
         <thead>
             <tr>
-                <th>Form Title</th>
+                <th>ID#</th>
+                <th>Title</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
             <tr id="nfThreeUpgradeEmptyRow">
-                <td colspan="2" style="text-align: center;">
+                <td colspan="3" style="text-align: center;">
                     <span class="dashicons dashicons-update spin"></span>
+                    <div class="progress-bar--wrapper">
+                        <div class="progress-bar"></div>
+                    </div>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <button id="goNinjaGo" class="button go-ninja-go"><?php echo __( 'Update to THREE', 'ninja-forms' ); ?></button>
 
 </div>

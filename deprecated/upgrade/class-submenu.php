@@ -115,9 +115,9 @@ class NF_THREE_Submenu
         }
 
         $this->respond( array(
-            'form_id' => $form_id,
-            'form_title' => $settings[ 'form_title' ],
-            'can_upgrade' => $can_upgrade
+            'id' => $form_id,
+            'title' => $settings[ 'form_title' ],
+            'canUpgrade' => $can_upgrade
         ) );
     }
 
