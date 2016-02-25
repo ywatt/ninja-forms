@@ -60,7 +60,7 @@ class NF_THREE_Submenu
 
         add_action( 'admin_menu', array( $this, 'register' ), $this->priority );
 
-        add_action( 'wp_ajax_ninja_forms_upgrade_check', 'upgrade_check' );
+        add_action( 'wp_ajax_ninja_forms_upgrade_check', array( $this, 'upgrade_check' ) );
     }
 
     /**
@@ -85,41 +85,48 @@ class NF_THREE_Submenu
     /**
      * Display the menu page.
      */
-    public function display(){
-
+    public function display()
+    {
         $all_forms = Ninja_Forms()->forms()->get_all();
 
-        $forms = array();
-        foreach( $all_forms as $form_id ){
-
-            $can_upgrade = TRUE;
-
-            $fields = Ninja_Forms()->form( $form_id )->fields;
-            $settings = Ninja_Forms()->form( $form_id )->get_all_settings();
-
-            foreach( $fields as $field ){
-                if( '_calc' == $field[ 'type' ] ){
-                    $can_upgrade = FALSE;
-                }
-            }
-
-            $forms[ $form_id ] = array(
-                'form_title' => $settings[ 'form_title' ],
-                'can_upgrade' => $can_upgrade
-            );
-        }
+        wp_enqueue_script( 'ninja-forms-three-upgrade', plugin_dir_url(__FILE__) . 'upgrade.js', array( 'jquery', 'underscore' ), '', TRUE );
+        wp_localize_script( 'ninja-forms-three-upgrade', 'nfThreeUpgrade', array(
+            'forms' => $all_forms
+        ) );
 
         include plugin_dir_path( __FILE__ ) . 'tmpl-submenu.html.php';
     }
 
-    public function upgrade_check(){
+    public function upgrade_check()
+    {
+        if( ! isset( $_POST[ 'formID' ] ) ) $this->respond( array( 'error' => 'Form ID not found.' ) );
 
-        $response = array();
+        $form_id = absint( $_POST[ 'formID' ] );
 
+        $can_upgrade = TRUE;
+
+        $fields = Ninja_Forms()->form( $form_id )->fields;
+        $settings = Ninja_Forms()->form( $form_id )->get_all_settings();
+
+        foreach( $fields as $field ){
+            if( '_calc' == $field[ 'type' ] ){
+                $can_upgrade = FALSE;
+            }
+        }
+
+        $this->respond( array(
+            'form_id' => $form_id,
+            'form_title' => $settings[ 'form_title' ],
+            'can_upgrade' => $can_upgrade
+        ) );
+    }
+
+    private function respond( $response =  array() )
+    {
         echo wp_json_encode( $response );
-
         wp_die(); // this is required to terminate immediately and return a proper response
     }
+
 
 }
 

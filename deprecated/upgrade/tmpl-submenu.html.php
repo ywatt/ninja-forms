@@ -29,11 +29,12 @@
         text-align: left;
     }
     th, td {
+        width: 50%;
         padding: 15px;
         text-align: left;
         border-bottom: 1px solid #ddd;
     }
-    tr:nth-child(even) {
+    tbody tr:nth-child(odd) {
         background-color: #f2f2f2
     }
 
@@ -48,6 +49,10 @@
         max-width: 800px;
     }
 
+    #nfThreeUpgradeTable {
+        margin-bottom: 50px;
+    }
+
     /*
      * Dashicons
      */
@@ -60,6 +65,20 @@
     }
     .dashicons-warning {
         color: gray;
+    }
+
+    .dashicons.spin {
+        margin-left: -1px;
+        animation: dashicons-spin 1s infinite;
+        animation-timing-function: linear;
+    }
+    @keyframes dashicons-spin {
+        0% {
+            transform: rotate( 0deg );
+        }
+        100% {
+            transform: rotate( 360deg );
+        }
     }
 
     ol .dashicons {
@@ -109,21 +128,19 @@
     <?php $will_need_attention = __( 'Will Need Attention', 'ninja-forms' ); ?>
     <span class="dashicons dashicons-yes"></span> = <?php echo $no_issues_detected; ?> &nbsp; <span class="dashicons dashicons-flag"></span> = <?php echo $will_need_attention; ?>
 
-    <table>
+    <table id="nfThreeUpgradeTable">
         <thead>
             <tr>
-                <th colspan="2">Form Title</th>
+                <th>Form Title</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
-        <?php foreach( $forms as $form ): ?>
-            <tr>
-                <td><?php echo $form[ 'form_title' ]; ?></td>
-                <td>
-                    <?php echo ( $form[ 'can_upgrade' ] ) ? "<span class='dashicons dashicons-yes' title='$no_issues_detected'></span>" : "<span class='dashicons dashicons-flag' title='$will_need_attention'></span>"; ?>
+            <tr id="nfThreeUpgradeEmptyRow">
+                <td colspan="2" style="text-align: center;">
+                    <span class="dashicons dashicons-update spin"></span>
                 </td>
             </tr>
-        <?php endforeach; ?>
         </tbody>
     </table>
 
