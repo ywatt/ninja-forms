@@ -77,7 +77,6 @@ class NF_Notices
                         return false;
                     }
                 }
-            }
 
                 // Check for required fields
                 if ( ! $this->required_fields( $admin_notices[ $slug ] ) ) {
@@ -137,8 +136,8 @@ class NF_Notices
             if ( $output_css ) {
                 wp_enqueue_style( 'nf-admin-notices', NINJA_FORMS_URL .'assets/css/admin-notices.css?nf_ver=' . NF_PLUGIN_VERSION );
             }
-            }
         }
+    }
     }
 
     // Spam protection check
