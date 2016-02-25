@@ -22,8 +22,8 @@ define(
 		'controllers/fieldProduct',
 		'controllers/fieldTotal',
 		'controllers/fieldQuantity',
-		'controllers/fieldSubmit',
-		'controllers/calculations'
+		'controllers/calculations',
+		'controllers/fieldDate'
 	],
 	function(
 		FormData,
@@ -48,8 +48,8 @@ define(
 		FieldProduct,
 		FieldTotal,
 		FieldQuantity,
-		FieldSubmit,
-		Calculations
+		Calculations,
+		FieldDate
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -74,8 +74,8 @@ define(
 				new FieldProduct();
 				new FieldTotal();
 				new FieldQuantity();
-				new FieldSubmit();
 				new Calculations();
+				new FieldDate();
 				new FormData();
 			}
 		});

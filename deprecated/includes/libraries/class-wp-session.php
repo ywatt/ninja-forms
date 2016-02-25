@@ -13,6 +13,14 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/*
+* MODIFICATIONS
+*
+* - Remove `set_cooke()` from constructor
+* - Give `set_cookie()` public access
+* - Manually call `set_cookie()` on form submission
+*/
+
 /**
  * WordPress Session class for managing user session data.
  *
@@ -77,6 +85,13 @@ final class WP_Session extends Recursive_ArrayAccess implements Iterator, Counta
 			$cookie_crumbs = explode( '||', $cookie );
 
 			$this->session_id = $cookie_crumbs[0];
+
+			if( $this->is_valid_md5( $cookie_crumbs[0] ) ){
+				$this->session_id = $cookie_crumbs[0];
+			} else {
+				$this->session_id = $this->generate_id();
+			}
+
 			$this->expires = $cookie_crumbs[1];
 			$this->exp_variant = $cookie_crumbs[2];
 
@@ -93,7 +108,10 @@ final class WP_Session extends Recursive_ArrayAccess implements Iterator, Counta
 
 		$this->read_data();
 
-		$this->set_cookie();
+		/*
+		 * Only set the cookie manually, on form submission.
+		 */
+		//$this->set_cookie();
 
 	}
 
@@ -122,8 +140,10 @@ final class WP_Session extends Recursive_ArrayAccess implements Iterator, Counta
 
 	/**
 	 * Set the session cookie
+	 *
+	 * IMPORTANT: Made public
 	 */
-	protected function set_cookie() {
+	public function set_cookie() {
 		@setcookie( WP_SESSION_COOKIE, $this->session_id . '||' . $this->expires . '||' . $this->exp_variant , $this->expires, COOKIEPATH, COOKIE_DOMAIN );
 	}
 
@@ -235,6 +255,16 @@ final class WP_Session extends Recursive_ArrayAccess implements Iterator, Counta
 	 */
 	public function reset() {
 		$this->container = array();
+	}
+
+	/**
+	 * Checks if is valid md5 string
+	 *
+	 * @param string $md5
+	 * @return int
+	 */
+	protected function is_valid_md5( $md5 = '' ){
+		return preg_match( '/^[a-f0-9]{32}$/', $md5 );
 	}
 
 	/*****************************************************************/

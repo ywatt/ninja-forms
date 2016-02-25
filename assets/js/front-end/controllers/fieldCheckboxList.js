@@ -45,7 +45,9 @@ define([], function() {
                     that.selected.push( option.value );
                 }
 
-                html += _.template( jQuery( '#nf-tmpl-field-listcheckbox-option' ).html(), option );
+                var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-option' ).html() );
+
+                html += template( option );
             } );
 
             if ( 1 == this.show_other ) {
@@ -59,7 +61,9 @@ define([], function() {
                     renderOtherText: this.renderOtherText,
                     valueFound: valueFound
                 };
-                html += _.template( jQuery( '#nf-tmpl-field-listcheckbox-other' ).html(), data );
+
+                var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-other' ).html() );
+                html += template( data );
 
             }
 
@@ -76,7 +80,8 @@ define([], function() {
                     classes: this.classes,
                     currentValue: this.currentValue
                 };
-                return _.template( jQuery( '#nf-tmpl-field-listcheckbox-other-text' ).html(), data );
+                var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-other-text' ).html() );
+                return template( data );
             }
         },
 

@@ -237,6 +237,7 @@ function nf_wp_kses_post_deep( $value ){
     $value = is_array( $value ) ?
         array_map( 'nf_wp_kses_post_deep', $value ) :
         wp_kses_post($value);
+
     return $value;
 }
 

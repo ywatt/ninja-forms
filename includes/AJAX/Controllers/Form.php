@@ -60,6 +60,10 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
         }
 
         if( isset( $form_data[ 'actions' ] ) ) {
+
+            /*
+             * Loop Actions and fire Save() hooks.
+             */
             foreach ($form_data['actions'] as $action_data) {
 
                 $id = $action_data['id'];
@@ -78,13 +82,6 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
                         $action_data['settings'] = $action_settings;
                         $action->update_settings( $action_settings )->save();
                     }
-
-                    if( $action->get_setting( 'active' ) && method_exists( $action_class, 'publish' ) ) {
-                        $data = $action_class->publish($this->_data);
-                        if ($data) {
-                            $this->_data = $data;
-                        }
-                    }
                 }
 
                 if ($action->get_tmp_id()) {
@@ -94,6 +91,29 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
                 }
 
                 $this->_data[ 'actions' ][ $id ] = $action->get_settings();
+            }
+        }
+
+        /*
+         * Loop Actions and fire Publish() hooks.
+         */
+        foreach ($form_data['actions'] as $action_data) {
+
+            $action = Ninja_Forms()->form( $form_data[ 'id' ] )->get_action( $action_data['id'] );
+
+            $action->update_settings($action_data['settings'])->save();
+
+            $action_type = $action->get_setting( 'type' );
+
+            if( isset( Ninja_Forms()->actions[ $action_type ] ) ) {
+                $action_class = Ninja_Forms()->actions[ $action_type ];
+
+                if( $action->get_setting( 'active' ) && method_exists( $action_class, 'publish' ) ) {
+                    $data = $action_class->publish( $this->_data );
+                    if ($data) {
+                        $this->_data = $data;
+                    }
+                }
             }
         }
 

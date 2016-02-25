@@ -92,6 +92,12 @@ function ninja_forms_tab_form_list(){
 
 	?>
 
+	<div class="update-nag nf-admin-notice">
+		<div class="nf-notice-logo"></div> <p class="nf-notice-title">THREE is coming! </p> <p class="nf-notice-body">A major update is coming to Ninja Forms. <a target="_blank" href="https://ninjaforms.com/three/?utm_medium=plugin&amp;utm_source=admin-notice&amp;utm_campaign=Ninja+Forms+THREE&amp;utm_content=Learn+More">Learn more about new features, backwards compatibility, and more Frequently Asked Questions.</a> </p>
+	</div>
+
+	<?php wp_enqueue_style( 'nf-admin-notices', NINJA_FORMS_URL .'assets/css/admin-notices.css?nf_ver=' . NF_PLUGIN_VERSION ); ?>
+
 	<ul class="subsubsub">
 		<li class="all"><a href="" class="current"><?php _e( 'All', 'ninja-forms' ); ?> <span class="count">(<?php echo $form_count;?>)</span></a>
 	</ul>
