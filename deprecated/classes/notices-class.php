@@ -65,12 +65,16 @@ class NF_Notices
                         return false;
                 }
 
-                // Check for proper page to display on
-                if ( isset( $admin_notices[ $slug ][ 'pages' ] ) && is_array( $admin_notices[ $slug ][ 'pages' ] ) ) {
-                        if ( ! $this->admin_notice_pages( $admin_notices[ $slug ][ 'pages' ] ) ) {
-                                return false;
-                        }
+            // Check for proper page to display on
+            if ( isset( $admin_notices[ $slug ][ 'pages' ] ) && is_array( $admin_notices[ $slug ][ 'pages' ] )
+                || isset( $admin_notices[ $slug ][ 'blacklist' ] ) && is_array( $admin_notices[ $slug ][ 'blacklist' ] )
+            ) {
+                if( ( isset( $admin_notices[ $slug ][ 'blacklist' ] ) && $this->admin_notice_pages_blacklist( $admin_notices[ $slug ][ 'blacklist' ] ) )
+                    || ( isset( $admin_notices[ $slug ][ 'pages' ] ) && ! $this->admin_notice_pages( $admin_notices[ $slug ][ 'pages' ] ) )
+                ) {
+                    return false;
                 }
+            }
 
                 // Check for required fields
                 if ( ! $this->required_fields( $admin_notices[ $slug ] ) ) {
@@ -182,6 +186,24 @@ class NF_Notices
         }
     }
 
+    public function admin_notice_pages_blacklist( $pages ) {
+        foreach( $pages as $key => $page ) {
+            if ( is_array( $page ) ) {
+                if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page'] == $page[0] && isset( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] == $page[1] ) {
+                    return true;
+                }
+            } else {
+                if ( get_current_screen()->id === $page ) {
+                    return true;
+                }
+                if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page'] == $page ) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // Page check function - This should be called from class extensions if the notice should only show on specific admin pages
     // Expects an array in the form of IE: array( 'dashboard', 'ninja-forms', array( 'ninja-forms', 'builder' ) )
     // Function accepts dashboard as a special check and also whatever is passed to page or tab as parameters
@@ -204,8 +226,8 @@ class NF_Notices
                         return true;
                 }
             }
-            return false;
         }
+        return false;
     }
 
     // Required fields check

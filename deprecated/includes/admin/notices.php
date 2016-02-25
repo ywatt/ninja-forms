@@ -12,6 +12,14 @@
 
 function nf_admin_notices( $notices ) {
 
+    $three_info = add_query_arg( array( 'nf_admin_notice_ignore' => 'three_info' ) );
+    $notices['three_info'] = array(
+        'title' => __( 'THREE is coming!', 'ninja-forms' ),
+        'msg' => sprintf( __( 'A major update is coming to Ninja Forms. %sLearn more about new features, backwards compatibility, and more Frequently Asked Questions.%s', 'ninja-forms' ), '<a target="_blank" href="https://ninjaforms.com/three/?utm_medium=plugin&utm_source=admin-notice&utm_campaign=Ninja+Forms+THREE&utm_content=Learn+More">', '</a>' ),
+        'link' => '',
+        'int' => 0,
+        'blacklist' => array( 'ninja-forms', 'ninja-forms-three' ),
+    );
 
     $one_week_support = add_query_arg( array( 'nf_admin_notice_ignore' => 'one_week_support' ) );
     $notices['one_week_support'] = array(
@@ -20,19 +28,20 @@ function nf_admin_notices( $notices ) {
         'link' => '<li><span class="dashicons dashicons-media-text"></span><a target="_blank" href="http://docs.ninjaforms.com/?utm_medium=plugin&utm_source=admin-notice&utm_campaign=Ninja+Forms+Upsell&utm_content=Ninja+Forms+Docs">' . __( 'Check out our documentation', 'ninja-forms' ) . '</a></li>
                     <li><span class="dashicons dashicons-sos"></span><a target="_blank" href="https://ninjaforms.com/contact/?utm_medium=plugin&utm_source=admin-notice&utm_campaign=Ninja+Forms+Upsell&utm_content=Ninja+Forms+Support">' . __( 'Get Some Help' ,'ninja-forms' ) . '</a></li>
                     <li><span class="dashicons dashicons-dismiss"></span><a href="' . $one_week_support . '">' . __( 'Dismiss' ,'ninja-forms' ) . '</a></li>',
-        'int' => 7
+        'int' => 7,
+        'blacklist' => array( 'ninja-forms-three' ),
     );
 
-    $two_week_review_ignore = add_query_arg( array( 'nf_admin_notice_ignore' => 'two_week_review' ) );
-    $two_week_review_temp = add_query_arg( array( 'nf_admin_notice_temp_ignore' => 'two_week_review', 'int' => 14 ) );
-    $notices['two_week_review'] = array(
-        'title' => __( 'Leave A Review?', 'ninja-forms' ),
-        'msg' => __( 'We hope you\'ve enjoyed using Ninja Forms! Would you consider leaving us a review on WordPress.org?', 'ninja-forms' ),
-        'link' => '<li> <span class="dashicons dashicons-smiley"></span><a href="' . $two_week_review_ignore . '"> ' . __( 'I\'ve already left a review', 'ninja-forms' ) . '</a></li>
-                    <li><span class="dashicons dashicons-calendar-alt"></span><a href="' . $two_week_review_temp . '">' . __( 'Maybe Later' ,'ninja-forms' ) . '</a></li>
-                    <li><span class="dashicons dashicons-external"></span><a href="http://wordpress.org/support/view/plugin-reviews/ninja-forms?filter=5" target="_blank">' . __( 'Sure! I\'d love to!', 'ninja-forms' ) . '</a></li>',
-        'int' => 14
-    );
+//    $two_week_review_ignore = add_query_arg( array( 'nf_admin_notice_ignore' => 'two_week_review' ) );
+//    $two_week_review_temp = add_query_arg( array( 'nf_admin_notice_temp_ignore' => 'two_week_review', 'int' => 14 ) );
+//    $notices['two_week_review'] = array(
+//        'title' => __( 'Leave A Review?', 'ninja-forms' ),
+//        'msg' => __( 'We hope you\'ve enjoyed using Ninja Forms! Would you consider leaving us a review on WordPress.org?', 'ninja-forms' ),
+//        'link' => '<li> <span class="dashicons dashicons-smiley"></span><a href="' . $two_week_review_ignore . '"> ' . __( 'I\'ve already left a review', 'ninja-forms' ) . '</a></li>
+//                    <li><span class="dashicons dashicons-calendar-alt"></span><a href="' . $two_week_review_temp . '">' . __( 'Maybe Later' ,'ninja-forms' ) . '</a></li>
+//                    <li><span class="dashicons dashicons-external"></span><a href="http://wordpress.org/support/view/plugin-reviews/ninja-forms?filter=5" target="_blank">' . __( 'Sure! I\'d love to!', 'ninja-forms' ) . '</a></li>',
+//        'int' => 14
+//    );
 
 
     return $notices;
