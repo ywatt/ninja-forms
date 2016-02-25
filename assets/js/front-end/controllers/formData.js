@@ -5,7 +5,7 @@
  * Replies to requests for field data.
  * Updates field models.
  */
-define(['models/formModel', 'models/formCollection', 'models/fieldCollection'], function( FormModel, FormCollection, FieldCollection ) {
+define(['models/formModel', 'models/formCollection', 'models/fieldCollection', 'models/formErrorCollection'], function( FormModel, FormCollection, FieldCollection, ErrorCollection ) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			/*
@@ -23,6 +23,8 @@ define(['models/formModel', 'models/formCollection', 'models/fieldCollection'], 
 				that.formCollection.add( formModel );
 				var fields = new FieldCollection( form.fields, { formModel: formModel } );
 				formModel.set( 'fields', fields );
+				var errors = new ErrorCollection();
+				formModel.set( 'errors', errors );
 				nfRadio.channel( 'form' ).trigger( 'loaded', formModel );
 				nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'loaded', formModel );
 			} );

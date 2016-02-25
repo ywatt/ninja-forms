@@ -45,9 +45,15 @@ define([], function() {
 			var hpVal = jQuery( el ).closest( '.nf-form-wrap' ).find( '.nf-field-hp' ).val();
 			if ( '' != jQuery.trim( hpVal ) ) {
 				// Add an error to our form.
+				nfRadio.channel( 'form-' + model.get( 'formID' ) ).request( 'add:error', 'hp', 'Honeypot Error' );
 				return false;
+			} else {
+				// Remove our form error.
+				nfRadio.channel( 'form-' + model.get( 'formID' ) ).request( 'remove:error', 'hp' );
 			}
+
 			var formErrors = nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) );
+
 			if ( formErrors ) {
 				jQuery( el ).closest( '.nf-field-wrap' ).find( '.nf-field-submit-error' ).show();
 			} else {
@@ -60,14 +66,18 @@ define([], function() {
 					nfRadio.channel( 'fields' ).trigger( 'before:submit', field );
 				} );
 
-				console.log( 'before radio message' );
+				// console.log( 'before radio message' );
 
 				// Send out a message on the radio saying we're about to submit.
 				nfRadio.channel( 'submit' ).trigger( 'before:submit', formModel );
 
-				console.log( 'after radio message' );
+				// console.log( 'after radio message' );
 
-				// Check again for form errors.
+				/*
+				 * Check again for form errors.
+				 *
+				 * If the user's click on the submit button was the thing that blurred another field, an error could have been added in the code above.
+				 */ 
 				formErrors = nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) );
 
 				if ( formErrors ) {

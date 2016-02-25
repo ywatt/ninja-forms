@@ -8,7 +8,7 @@ define( ['views/fieldErrorCollection'], function( fieldErrorCollection ) {
     		this.model.bind( 'change:errors', this.changeError, this );
     		this.model.bind( 'change:addWrapperClass', this.addWrapperClass, this );
     		this.model.bind( 'change:removeWrapperClass', this.removeWrapperClass, this );
-    		this.listenTo( nfRadio.channel( 'submit' ), 'before:submit', this.test );
+    		// this.listenTo( nfRadio.channel( 'submit' ), 'before:submit', this.test );
 
     		this.template = '#nf-tmpl-field-' + this.model.get( 'wrap_template' );
 		},
