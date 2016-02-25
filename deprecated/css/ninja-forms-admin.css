@@ -838,6 +838,17 @@ p.debug-report {
 	top: -5px;
 }
 
+.branch-4-5 .inside::after {
+	clear: both;
+	content: "";
+	display: block;
+}
+.branch-4-5.nav-menus-php .item-edit {
+	visibility: hidden;
+}
+.branch-4-5.nav-menus-php .item-edit::before {
+	visibility: visible;
+}
 
 .nf-more-actions {
   display: inline-block;
