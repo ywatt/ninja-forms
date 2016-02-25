@@ -20,12 +20,25 @@ define( [], function() {
 			});
 
 			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'get:fieldByKey', this.getFieldByKey, this );
+			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'add:error', this.addError, this );
+			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'remove:error', this.removeError, this );
 			nfRadio.channel( 'forms' ).trigger( 'init:model', this );
 			nfRadio.channel( 'form-' + this.get( 'id' ) ).trigger( 'init:model', this );
 		},
 
 		getFieldByKey: function( key ) {
 			return this.get( 'fields' ).findWhere( { key: key } );
+		},
+
+		addError: function( id, msg ) {
+			var errors = this.get( 'errors' );
+			errors.add( { id: id, msg: msg } );
+		},
+
+		removeError: function( id ) {
+			var errors = this.get( 'errors' );
+			var errorModel = errors.get( id );
+			errors.remove( errorModel );
 		}
 	} );
 
