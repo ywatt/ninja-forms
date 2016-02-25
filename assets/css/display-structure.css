@@ -90,9 +90,10 @@ Make sure all Ninja Forms label positons function properly
   .nf-fields .label-right > input,
   .nf-fields .label-right textarea,
   .nf-fields .label-right select,
-  .nf-fields .label-right .pikaday__container,
-  .nf-fields .label-right .pikaday__display {
+  .nf-fields .label-right .pikaday__container {
     width: 50%; }
+  .nf-fields .label-right .pikaday__display {
+    width: 100%; }
   .nf-fields .label-right > input[type=radio],
   .nf-fields .label-right input[type=checkbox] {
     width: auto; }
@@ -114,10 +115,11 @@ Make sure all Ninja Forms label positons function properly
   .nf-fields .label-left > input,
   .nf-fields .label-left textarea,
   .nf-fields .label-left select,
-  .nf-fields .label-left .pikaday__container,
-  .nf-fields .label-left .pikaday__display {
+  .nf-fields .label-left .pikaday__container {
     float: right;
     width: 49%; }
+  .nf-fields .label-left .pikaday__display {
+    width: 100%; }
   .nf-fields .label-left > input[type=radio],
   .nf-fields .label-left > input[type=checkbox] {
     float: none;

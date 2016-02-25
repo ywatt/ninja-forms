@@ -31,9 +31,11 @@
         > input,
         textarea,
         select,
-        .pikaday__container,
-        .pikaday__display {
+        .pikaday__container {
             width: 50%;
+        }
+        .pikaday__display {
+            width: 100%;
         }
         > input[type=radio],
         input[type=checkbox] {
@@ -60,10 +62,12 @@
         > input,
         textarea,
         select,
-        .pikaday__container,
-        .pikaday__display {
+        .pikaday__container {
             float: right;
             width: 49%;
+        }
+        .pikaday__display {
+            width: 100%;
         }
         > input[type=radio],
         > input[type=checkbox] {

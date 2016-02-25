@@ -42,7 +42,8 @@
     margin-bottom: 0; }
   .nf-fields .label-right > input,
   .nf-fields .label-right textarea,
-  .nf-fields .label-right select {
+  .nf-fields .label-right select,
+  .nf-fields .label-right .pikaday__container {
     margin-right: 10px; }
   .nf-fields .label-right > input[type=radio],
   .nf-fields .label-right input[type=checkbox] {
@@ -54,7 +55,8 @@
     margin-top: 5px; }
   .nf-fields .label-left > input,
   .nf-fields .label-left textarea,
-  .nf-fields .label-left select {
+  .nf-fields .label-left select,
+  .nf-fields .label-left .pikaday__container {
     margin-left: 10px; }
   .nf-fields .label-left > input[type=radio],
   .nf-fields .label-left input[type=checkbox] {
