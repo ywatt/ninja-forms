@@ -105,7 +105,9 @@
 
     <h2>Form Upgrade Compatibility</h2>
 
-    <span class="dashicons dashicons-yes"></span> = No Issues Detected &nbsp; <span class="dashicons dashicons-flag"></span> = Will Need Attention
+    <?php $no_issues_detected  = __( 'No Issues Detected', 'ninja-forms' ); ?>
+    <?php $will_need_attention = __( 'Will Need Attention', 'ninja-forms' ); ?>
+    <span class="dashicons dashicons-yes"></span> = <?php echo $no_issues_detected; ?> &nbsp; <span class="dashicons dashicons-flag"></span> = <?php echo $will_need_attention; ?>
 
     <table>
         <thead>
@@ -118,7 +120,7 @@
             <tr>
                 <td><?php echo $form[ 'form_title' ]; ?></td>
                 <td>
-                    <?php echo ( $form[ 'can_upgrade' ] ) ? '<span class="dashicons dashicons-yes"></span>' : '<span class="dashicons dashicons-flag"></span>'; ?>
+                    <?php echo ( $form[ 'can_upgrade' ] ) ? "<span class='dashicons dashicons-yes' title='$no_issues_detected'></span>" : "<span class='dashicons dashicons-flag' title='$will_need_attention'></span>"; ?>
                 </td>
             </tr>
         <?php endforeach; ?>
