@@ -7,7 +7,7 @@
     padding: 5px;
     max-width: 1000px;
     margin: 0 auto;
-    .nf-element {
+    .ninja-forms-field {
         font-size: 16px;
         padding: 16px;
     }
@@ -59,7 +59,8 @@
         }
         > input,
         textarea,
-        select {
+        select,
+        .pikaday__container {
             margin-right: 10px;
         }
         > input[type=radio],
@@ -77,7 +78,8 @@
         }
         > input,
         textarea,
-        select {
+        select,
+        .pikaday__container {
             margin-left: 10px;
         }
         > input[type=radio],
