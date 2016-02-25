@@ -39,13 +39,20 @@ define([], function() {
 		},
 
 		submitForm: function( el, model ) {
+			this.processingLabel();
 			/*
 			 * Check to see if our honeypot has been filled in. If it has, add an error and don't submit.
+			 * TODO:
+			 * Abstract this logic to another controller.
+			 * Create a view just for honeypot.
 			 */
-			var hpVal = jQuery( el ).closest( '.nf-form-wrap' ).find( '.nf-field-hp' ).val();
+			var formEl = nfRadio.channel( 'form' ).request( 'get:el' );
+			var hpVal = jQuery( formEl ).find( '.nf-field-hp' ).val();
 			if ( '' != jQuery.trim( hpVal ) ) {
 				// Add an error to our form.
 				nfRadio.channel( 'form-' + model.get( 'formID' ) ).request( 'add:error', 'hp', 'Honeypot Error' );
+				nfRadio.channel( 'submit' ).trigger( 'error', model.get( 'formID' ) );
+				this.resetLabel();
 				return false;
 			} else {
 				// Remove our form error.
@@ -55,7 +62,9 @@ define([], function() {
 			var formErrors = nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) );
 
 			if ( formErrors ) {
+				nfRadio.channel( 'submit' ).trigger( 'error', model.get( 'formID' ) );
 				jQuery( el ).closest( '.nf-field-wrap' ).find( '.nf-field-submit-error' ).show();
+				return false;
 			} else {
 				// Get our form model.
 				var formModel = nfRadio.channel( 'app' ).request( 'get:form', model.get( 'formID' ) );
@@ -81,6 +90,8 @@ define([], function() {
 				formErrors = nfRadio.channel( 'form' ).request( 'get:errors', this.model.get( 'formID' ) );
 
 				if ( formErrors ) {
+					nfRadio.channel( 'submit' ).trigger( 'error', model.get( 'formID' ) );
+					this.resetLabel();
 					return false;
 				} else {
 					var formData = JSON.stringify( formModel );
@@ -89,6 +100,8 @@ define([], function() {
 	                	'security': nfFrontEnd.ajaxNonce,
 	                	'formData': formData
 					}
+
+					var that = this;
 
 					jQuery.ajax({
 	                    url: nfFrontEnd.adminAjax,
@@ -99,6 +112,7 @@ define([], function() {
 	                   		var response = jQuery.parseJSON( data );
 	                   		
 	                        nfRadio.channel( 'submit' ).trigger( 'submit:response', response, textStatus, jqXHR );
+	                    	that.resetLabel();
 	                    },
 	                    error: function( jqXHR, textStatus, errorThrown ) {
 	                        // Handle errors here
@@ -106,11 +120,24 @@ define([], function() {
 	                        // STOP LOADING SPINNER
 
 							nfRadio.channel( 'submit' ).trigger( 'submit:response', 'error', textStatus, jqXHR, errorThrown );
+	                    	that.resetLabel();
 	                    }
 	                });
 				}
 			}
-		}
+		},
+
+		processingLabel: function() {
+            this.label = this.model.get( 'label' );
+            var processingLabel = this.model.get( 'processing_label' );
+            this.model.set( 'label', processingLabel );
+            this.model.set( 'reRender', true );
+        },
+
+        resetLabel: function() {
+            this.model.set( 'label', this.label );
+            this.model.set( 'reRender', true );
+        }
 	});
 
 	return controller;

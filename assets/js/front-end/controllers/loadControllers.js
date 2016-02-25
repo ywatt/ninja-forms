@@ -22,7 +22,6 @@ define(
 		'controllers/fieldProduct',
 		'controllers/fieldTotal',
 		'controllers/fieldQuantity',
-		'controllers/fieldSubmit',
 		'controllers/calculations',
 		'controllers/fieldDate'
 	],
@@ -49,7 +48,6 @@ define(
 		FieldProduct,
 		FieldTotal,
 		FieldQuantity,
-		FieldSubmit,
 		Calculations,
 		FieldDate
 	) {
@@ -76,7 +74,6 @@ define(
 				new FieldProduct();
 				new FieldTotal();
 				new FieldQuantity();
-				new FieldSubmit();
 				new Calculations();
 				new FieldDate();
 				new FormData();
