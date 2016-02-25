@@ -78,7 +78,6 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'group' => 'primary',
         'value' => FALSE,
         'help' => __( 'Ensure that this field is completed before allowing the form to be submitted.', 'ninja-forms' ),
-
     ),
 
     /*
@@ -420,6 +419,20 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'group' => 'administration',
         'value' => '',
         'help' => __( 'Programmatic name that can be used to reference this field.', 'ninja-forms' ),
+    ),
+
+    /*
+     * NUMERIC SORT
+     */
+
+    'num_sort' => array(
+        'name' => 'num_sort',
+        'type' => 'toggle',
+        'label' => __( 'Sort as Numeric', 'ninja-forms'),
+        'width' => 'full',
+        'group' => 'administration',
+        'value' => '',
+        'help' => __( 'This column in the submissions table will sort by number.', 'ninja-forms' ),
     ),
 
     /*
@@ -836,6 +849,22 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'width' => 'full',
         'group' => 'primary',
         'value' => '',
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Backwards Compatibility Field Settings
+    |--------------------------------------------------------------------------
+    */
+
+    'user_state' => array(
+        'name' => 'user_state',
+        'type' => 'toggle',
+        'label' => __( 'This is a user\'s state.', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'administration',
+        'value' => FALSE,
+        'help' => __( 'Used for marking a field for processing.', 'ninja-forms' ),
     ),
 
 ));
