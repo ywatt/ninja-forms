@@ -52,8 +52,8 @@ define([], function() {
 				option.fieldID = that.id;
 				option.classes = that.classes;
 				option.currentValue = that.value;
-				
-				html += _.template( jQuery( '#nf-tmpl-field-listradio-option' ).html(), option );
+				var template = _.template( jQuery( '#nf-tmpl-field-listradio-option' ).html() );
+				html += template( option );
 			} );
 
 			if ( 1 == this.show_other ) {
@@ -67,7 +67,8 @@ define([], function() {
 					renderOtherText: this.renderOtherText,
 					valueFound: valueFound
 				};
-				html += _.template( jQuery( '#nf-tmpl-field-listradio-other' ).html(), data );
+				var template = _.template( jQuery( '#nf-tmpl-field-listradio-other' ).html() );
+				html += template( data );
 
 			}
 
@@ -84,7 +85,8 @@ define([], function() {
 					classes: this.classes,
 					currentValue: this.currentValue
 				};
-				return _.template( jQuery( '#nf-tmpl-field-listradio-other-text' ).html(), data );
+				var template = _.template( jQuery( '#nf-tmpl-field-listradio-other-text' ).html() );
+				return template( data );
 			}
 		},
 

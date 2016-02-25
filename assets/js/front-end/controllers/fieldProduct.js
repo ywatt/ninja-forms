@@ -13,23 +13,28 @@ define([], function() {
         renderProduct: function(){
             switch( this.product_type ) {
                 case 'user':
-                    return _.template( jQuery( '#nf-tmpl-field-textbox' ).html(), this );
+                    var template = _.template( jQuery( '#nf-tmpl-field-textbox' ).html() );
+                    return template( this );
                     break;
                 case 'hidden':
-                    return _.template( jQuery( '#nf-tmpl-field-hidden' ).html(), this );
+                    var template = _.template( jQuery( '#nf-tmpl-field-hidden' ).html() );
+                    return template( this );
                     break;
 
                 case 'dropdown':
-                    return _.template( jQuery( '#nf-tmpl-product-dropdown' ).html(), this );
+                    var template = _.template( jQuery( '#nf-tmpl-product-dropdown' ).html() );
+                    return template( this );
                     break;
                 default:
-                    return _.template( jQuery( '#nf-tmpl-product-single' ).html(), this );
+                    var template = _.template( jQuery( '#nf-tmpl-product-single' ).html() );
+                    return template( this );
             }
         },
 
         renderProductQuantity: function(){
             if ( 1 == this.product_use_quantity ) {
-                return _.template( jQuery( '#nf-tmpl-product-quantity' ).html(), this );
+                var template = _.template( jQuery( '#nf-tmpl-product-quantity' ).html() );
+                return template( this );
             }
         },
 
@@ -48,7 +53,9 @@ define([], function() {
                 option.classes = that.classes;
                 option.currentValue = that.value;
 
-                html += _.template( jQuery( '#nf-tmpl-product-' + that.product_type + '-option' ).html(), option );
+                var template = _.template( jQuery( '#nf-tmpl-product-' + that.product_type + '-option' ).html() );
+
+                html += template( option );
             } );
 
             return html;

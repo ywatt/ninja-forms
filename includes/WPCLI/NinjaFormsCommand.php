@@ -49,6 +49,41 @@ class NF_WPCLI_NinjaFormsCommand extends WP_CLI_Command
     }
 
     /**
+     * @subcommand list
+     * @alias list-forms
+     */
+    public function list_forms( $args, $assoc_args )
+    {
+        foreach( Ninja_Forms()->form()->get_forms() as $form ){
+            WP_CLI::line( '#' . $form->get_id() . ' - ' . $form->get_setting( 'title' ) );
+        }
+    }
+
+    /**
+     * @synopsis <id>
+     * @subcommand get
+     * @alias get-form
+     */
+    public function get_form( $args, $assoc_args )
+    {
+        list( $id ) = $args;
+
+        $form = Ninja_Forms()->form( $id )->get();
+
+        WP_CLI::line( '#' . $form->get_id() . ' - ' . $form->get_setting( 'title' ) );
+
+        foreach( Ninja_Forms()->form( $id )->get_fields() as $field ){
+
+            $key = $field->get_setting( 'key' );
+            $label = $field->get_setting( 'label' );
+
+            if( ! $key ) $key = strtolower( str_replace( ' ', '', $label ) );
+
+            WP_CLI::line( "'$key': $label" );
+        }
+    }
+
+    /**
      * Installs mock form data
      */
     public function mock()

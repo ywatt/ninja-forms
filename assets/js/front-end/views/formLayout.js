@@ -10,6 +10,10 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
 			afterFields: ".nf-after-fields",
 		},
 
+		initialize: function() {
+			nfRadio.channel( 'form' ).reply( 'get:el', this.getEl, this );
+		},
+
 		onRender: function() {
 			this.$el = this.$el.children();
 			this.$el.unwrap();
@@ -21,6 +25,10 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
 			this.beforeFields.show( new beforeFields( { model: this.model } ) );
 			this.fields.show( new fieldCollectionView( { collection: this.options.fieldCollection } ) );
 			this.afterFields.show( new afterFields( { model: this.model } ) );
+		},
+
+		getEl: function() {
+			return this.el;
 		},
 
         templateHelpers: function () {
