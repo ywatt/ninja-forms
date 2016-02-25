@@ -6,12 +6,14 @@ define([], function() {
         },
 
         initDatepicker: function ( view ) {
-            console.log( view.model.get( 'date_format' ) );
-            var dateObject = pikadayResponsive( jQuery( view.el ).find( '.nf-element' )[0], {
+            var $el = jQuery( view.el ).find( '.nf-element' );
+            var dateObject = pikadayResponsive( $el, {
                 format: view.model.get( 'date_format' )
             } );
+            if ( 1 == view.model.get( 'date_default' ) ) {
+               dateObject.setDate( moment() ); 
+            }
         }
-
     });
 
     return controller;

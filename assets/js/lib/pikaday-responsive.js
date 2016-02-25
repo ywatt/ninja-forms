@@ -1,3 +1,11 @@
+/**
+ * This file has been modified from its original version.
+ *
+ * var $ = jQuery; has been added for jQuery no conflict mode.
+ * $el.wrap("<span class='pikaday__container'></span>"); has been changed to $el.wrap("<div class='pikaday__container'></div>"); so that the container is a div.
+ * placeholder: "Select a date", has been changed to placeholder: "", to remove the placeholder.
+ */
+
 (function (root, factory) {
     if (typeof define === 'function') {
         define('pikaday-responsive', ['exports'], function (exports) {
@@ -35,7 +43,7 @@
             return Modernizr.inputtypes.date && (Modernizr.touch && navigator.appVersion.indexOf("Win") === -1);
         },
         classes: "",
-        placeholder: "Select a date",
+        placeholder: "",
         pikadayOptions: {},
         dayOffset: 0
     };
@@ -67,7 +75,7 @@
         // The original input field is made hidden. This field will contain the actual value.
         $el.attr("type", "hidden");
         // Wrap the input in a container
-        $el.wrap("<span class='pikaday__container'></span>");
+        $el.wrap("<div class='pikaday__container'></div>");
         $container = $el.parent(".pikaday__container");
 
         if (settings.checkIfNativeDate()) {
