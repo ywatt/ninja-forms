@@ -7,7 +7,9 @@
         }
         > input,
         textarea,
-        select {
+        select,
+        .pikaday__container,
+        .pikaday__display {
             width: 100%;
         }
         input[type="submit"],
@@ -28,7 +30,9 @@
         }
         > input,
         textarea,
-        select {
+        select,
+        .pikaday__container,
+        .pikaday__display {
             width: 50%;
         }
         > input[type=radio],
@@ -55,7 +59,9 @@
         }
         > input,
         textarea,
-        select {
+        select,
+        .pikaday__container,
+        .pikaday__display {
             float: right;
             width: 49%;
         }

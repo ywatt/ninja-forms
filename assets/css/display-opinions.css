@@ -9,7 +9,7 @@
   padding: 5px;
   max-width: 1000px;
   margin: 0 auto; }
-  .nf-fields .nf-element {
+  .nf-fields .ninja-forms-field {
     font-size: 16px;
     padding: 16px; }
   .nf-fields .nf-product-field.ninja-forms-field {
@@ -187,15 +187,15 @@ input[type=checkbox].nf-toggle {
 .field-wrap > label {
   font-weight: bold; }
 
-.nf-element {
+.ninja-forms-field {
   background: #f7f7f7;
   border: 1px solid #eaeaea; }
-  .nf-element:focus {
+  .ninja-forms-field:focus {
     background: #fff;
     border-color: #c1c1c1;
     outline: none; }
 
-.nf-error .nf-element {
+.nf-error .ninja-forms-field {
   border-color: red; }
 
 .nf-error .nf-error-msg {
