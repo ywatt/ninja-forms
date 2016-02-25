@@ -12,6 +12,8 @@ Domain Path: /lang/
 Copyright 2015 WP Ninjas.
 */
 
+new NF_VersionSwitcher();
+
 if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
 
     include 'deprecated/ninja-forms.php';
@@ -559,4 +561,3 @@ final class NF_VersionSwitcher
         $wp_admin_bar->add_node($args);
     }
 }
-new NF_VersionSwitcher();
