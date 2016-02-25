@@ -20,7 +20,7 @@ define([], function() {
 			if ( 1 != model.get( 'required' ) ) {
 				return false;
 			}
-			
+
 			var currentValue = jQuery( el ).val();
 			var customReqValidation = nfRadio.channel( model.get( 'type' ) ).request( 'validate:required', el, model );
 			var defaultReqValidation = true;
