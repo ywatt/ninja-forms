@@ -763,6 +763,12 @@ function ninja_forms_three_admin_notice(){
     if( ! in_array( $currentScreen->id, array( 'toplevel_page_ninja-forms' ) ) ) return;
     wp_enqueue_style( 'nf-admin-notices', NINJA_FORMS_URL .'assets/css/admin-notices.css?nf_ver=' . NF_PLUGIN_VERSION );
     include plugin_dir_path( __FILE__ ) . 'upgrade/tmpl-notice.html.php';
+
+    ?>
+    <div id="nf-admin-notice-three-is-coming" class="update-nag nf-admin-notice">
+		<div class="nf-notice-logo"></div> <p class="nf-notice-title">THREE is coming! </p> <p class="nf-notice-body">A major update is coming to Ninja Forms. <a target="_blank" href="https://ninjaforms.com/three/?utm_medium=plugin&amp;utm_source=admin-notice&amp;utm_campaign=Ninja+Forms+THREE&amp;utm_content=Learn+More">Learn more about new features, backwards compatibility, and more Frequently Asked Questions.</a> </p>
+	</div>
+    <?php
 }
 
 add_action( 'nf_admin_before_form_list', 'ninja_forms_konami' );
@@ -780,8 +786,10 @@ function ninja_forms_konami(){
             var sound = new Howl({
                 src: [ nfUnlock.audioUrl ],
                 onend: function() {
-                    jQuery( '#nf-admin-notice-upgrade' ).fadeIn( 'slow', function() {
-                        window.location = nfUnlock.aboutPage;
+                    jQuery( '#nf-admin-notice-three-is-coming' ).fadeOut( 'slow', function() {
+                        jQuery( '#nf-admin-notice-upgrade' ).fadeIn( 'slow', function() {
+                            window.location = nfUnlock.aboutPage;
+                        });
                     });
                 }
             });
