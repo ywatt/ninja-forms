@@ -133,7 +133,7 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
             __('PHP Time Limit','ninja-forms' ) => ini_get('max_execution_time'),
             __( 'PHP Max Input Vars','ninja-forms' ) => ini_get('max_input_vars'),
             __( 'SUHOSIN Installed','ninja-forms' ) => $suhosin,
-            __( 'IP Address', 'ninja-forms' ) => $server_ip,
+            __( 'Server IP Address', 'ninja-forms' ) => $server_ip,
             __( 'Host Name', 'ninja-forms' ) => $host_name,
             __( 'SMTP','ninja-forms' ) => ini_get('SMTP'),
             __( 'smtp_port','ninja-forms' ) => ini_get('smtp_port'),
