@@ -96,6 +96,15 @@ define( ['views/fieldErrorCollection'], function( fieldErrorCollection ) {
 					}
 				},
 
+				renderInputLimit: function() {
+					this.current_count = this.value.length;
+					if ( '' != jQuery.trim( this.input_limit ) ) {
+						var template = _.template( jQuery( '#nf-tmpl-field-input-limit' ).html() );
+						return template( this );						
+					}
+
+				},
+
 				renderWrapClass: function() {
 					var wrapClass = 'field-wrap ' + this.type + '-wrap label-' + this.label_pos;
 

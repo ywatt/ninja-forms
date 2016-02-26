@@ -19,7 +19,8 @@ final class NF_Display_Render
         'fields-wrap-no-container',
         'fields-label',
         'fields-error',
-        'form-error'
+        'form-error',
+        'field-input-limit'
     );
 
     protected static $use_test_values = FALSE;
