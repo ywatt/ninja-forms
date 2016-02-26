@@ -341,8 +341,8 @@ final class NF_Display_Render
         wp_enqueue_script( 'moment', Ninja_Forms::$url . 'assets/js/lib/moment-with-locales.min.js', array( 'jquery' ) );
         wp_enqueue_script( 'pikaday', Ninja_Forms::$url . 'assets/js/lib/pikaday.js', array( 'jquery' ) );
         wp_enqueue_script( 'pikaday-responsive', Ninja_Forms::$url . 'assets/js/lib/pikaday-responsive.js', array( 'jquery' ) );
-        wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=en', array( 'jquery' ) );
-
+        $recaptcha_lang = Ninja_Forms()->get_setting( 'recaptcha_lang' );
+        wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $recaptcha_lang, array( 'jquery' ) );
 
         wp_enqueue_script( 'nf-global', Ninja_Forms::$url . 'assets/js/min/global.js', array( 'jquery' ) );
 
