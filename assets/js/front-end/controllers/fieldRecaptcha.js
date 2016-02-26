@@ -12,6 +12,7 @@ define([], function() {
 
         updateResponse: function( response ) {
         	this.model.set( 'value', response );
+            nfRadio.channel( 'fields' ).request( 'remove:error', this.model.get( 'id' ), 'required-error' );
         }
     });
 
