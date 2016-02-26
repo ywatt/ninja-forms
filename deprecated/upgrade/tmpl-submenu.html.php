@@ -1,4 +1,9 @@
 <style>
+
+    #nfThreeFormConvert {
+        display: none;
+    }
+
     html {
         background: #fff;
     }
@@ -23,6 +28,7 @@
 
     table {
         width: 100%;
+        margin-bottom: 20px;
         border-collapse: collapse;
     }
     th {
@@ -62,14 +68,6 @@
     .nf-upgrade {
         margin: 0 auto 50px auto;
         max-width: 800px;
-    }
-
-    #nfThreeUpgradeTable {
-        margin-bottom: 20px;
-    }
-
-    #goNinjaGo {
-        display: none;
     }
 
     /*
@@ -124,6 +122,17 @@
     /*
      * Button
      */
+    #goToThree,
+    #goNinjaGo {
+        display: none;
+    }
+    #goToThree {
+        text-decoration: none;
+        width: 100px;
+        display: block;
+        text-align: center;
+    }
+    #goToThree,
     button.button.go-ninja-go {
         color: white;
         background-color: green;
@@ -133,13 +142,14 @@
         display: block;
         border: 2px solid transparent;
     }
+    #goToThree:hover,
+    #goToThree:active,
     button.button.go-ninja-go:hover,
     button.button.go-ninja-go:active {
         color: green;
         font-weight: bold;
         border-color: green;
     }
-    button.button.go-ninja-go:hover,
 </style>
 
 <img class="nf-logo" src="<?php echo NF_PLUGIN_URL . 'images/nf-logo.png'; ?>">
@@ -176,22 +186,24 @@
 
     <hr>
 
-    <h2>Form Upgrade Compatibility</h2>
+    <div id="nfThreeFormCheck">
 
-    <?php $no_issues_detected  = __( 'No Issues Detected', 'ninja-forms' ); ?>
-    <?php $will_need_attention = __( 'Will Need Attention', 'ninja-forms' ); ?>
-    <span class="dashicons dashicons-yes"></span> = <?php echo $no_issues_detected; ?> &nbsp; <span class="dashicons dashicons-flag"></span> = <?php echo $will_need_attention; ?>
+        <h2>Form Upgrade Compatibility</h2>
 
-    <table id="nfThreeUpgradeTable">
-        <thead>
+        <?php $no_issues_detected  = __( 'No Issues Detected', 'ninja-forms' ); ?>
+        <?php $will_need_attention = __( 'Will Need Attention', 'ninja-forms' ); ?>
+        <span class="dashicons dashicons-yes"></span> = <?php echo $no_issues_detected; ?> &nbsp; <span class="dashicons dashicons-flag"></span> = <?php echo $will_need_attention; ?>
+
+        <table id="nfThreeFormCheckTable">
+            <thead>
             <tr>
                 <th>ID#</th>
                 <th>Title</th>
                 <th>Status</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr id="nfThreeUpgradeEmptyRow">
+            </thead>
+            <tbody>
+            <tr id="nfThreeFormCheckEmptyRow">
                 <td colspan="3" style="text-align: center;">
                     <span class="dashicons dashicons-update spin"></span>
                     <div class="progress-bar--wrapper">
@@ -199,9 +211,36 @@
                     </div>
                 </td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <button id="goNinjaGo" class="button go-ninja-go"><?php echo __( 'Update to THREE', 'ninja-forms' ); ?></button>
+        <button id="goNinjaGo" class="button go-ninja-go"><?php echo __( 'Update to THREE', 'ninja-forms' ); ?></button>
+
+    </div>
+
+    <div id="nfThreeFormConvert">
+
+        <h2>Converting Forms</h2>
+
+        <table id="nfThreeFormConvertTable">
+            <thead>
+            <tr>
+                <th>ID#</th>
+                <th>Title</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="js-tmp-row">
+                    <td colspan="3" style="text-align: center;">
+                        <span class="dashicons dashicons-update spin"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="<?php echo admin_url( 'nf-switcher=upgrade' ); ?>" id="goToThree">Go To Three</a>
+
+    </div>
 
 </div>

@@ -752,6 +752,14 @@ Ninja_Forms();
 |--------------------------------------------------------------------------
 */
 
+add_action( 'wp_ajax_nfThreeUpgrade_GetSerializedForm', 'nfThreeUpgrade_GetSerializedForm' );
+function nfThreeUpgrade_GetSerializedForm(){
+    $id = absint( $_POST[ 'formID' ] );
+    $form_row = ninja_forms_serialize_form( $id );
+    echo json_encode( array( 'id' => $id, 'serialized' => $form_row ) );
+    wp_die();
+}
+
 add_action( 'init', 'ninja_forms_three_submenu' );
 function ninja_forms_three_submenu(){
     include plugin_dir_path( __FILE__ ) . 'upgrade/class-submenu.php';

@@ -14,11 +14,28 @@ Copyright 2015 WP Ninjas.
 
 new NF_VersionSwitcher();
 
-if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
+if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2to3' ] ) ) {
 
     include 'deprecated/ninja-forms.php';
 
 } else {
+
+    add_action( 'wp_ajax_ninja_forms_ajax_migrate_database', 'ninja_forms_ajax_migrate_database' );
+    function ninja_forms_ajax_migrate_database(){
+        $migrations = new NF_Database_Migrations();
+        $migrations->nuke( true, true );
+        $migrations->migrate();
+        echo json_encode( array( 'migrate' => 'true' ) );
+        wp_die();
+    }
+
+    add_action( 'wp_ajax_ninja_forms_ajax_import_form', 'ninja_forms_ajax_import_form' );
+    function ninja_forms_ajax_import_form(){
+        $import = stripslashes( $_POST[ 'import' ] ); // TODO: How to sanitize serialized string?
+        Ninja_Forms()->form()->import_form( $import );
+        echo json_encode( array( 'export' => $_POST[ 'import' ], 'import' => $import ) );
+        wp_die();
+    }
 
     /**
      * Class Ninja_Forms
