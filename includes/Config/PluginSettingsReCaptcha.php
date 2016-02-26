@@ -41,4 +41,20 @@ return apply_filters( 'ninja_forms_plugin_settings_recaptcha', array(
         'desc'  => 'e.g. en, da - ' . sprintf( __( 'Language used by reCAPTCHA. To get the code for your language click %shere%s', 'ninja-forms' ), '<a href="https://developers.google.com/recaptcha/docs/language" target="_blank">', '</a>' )
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Theme
+    |--------------------------------------------------------------------------
+    */
+
+    'recaptcha_theme' => array(
+        'id'    => 'recaptcha_theme',
+        'type'  => 'select',
+        'options'   => array(
+            array( 'label' => __( 'Light', 'ninja-forms' ), 'value' => 'light' ),
+            array( 'label' => __( 'Dark', 'ninja-forms' ), 'value' => 'dark' ),
+        ),
+        'label' => __( 'reCAPTCHA Theme', 'ninja-forms' ),
+        'desc'  => '',
+    ),
 ));

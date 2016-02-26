@@ -44,6 +44,16 @@
                                                 echo "<input type='hidden' name='{$setting['id']}' value='0'>";
                                                 echo "<input type='checkbox' name='{$setting['id']}' value='1' id='{$setting['id']}' class='widefat' $checked>";
                                                 echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
+                                                break;
+                                            case 'select' :
+                                                echo "<select name='{$setting['id']}'
+                                                id='{$setting['id']}'>";
+                                                    foreach( $setting['options'] as $option ) {
+                                                        $selected = ( $setting['value'] == $option['value'] ) ? 'selected="selected"' : '';
+                                                        echo "<option value='{$option['value']}' {$selected}>{$option['label']}</option>";
+                                                    }
+                                                echo "</select>";
+                                                break;
                                         }
                                     ?>
                                     <?php

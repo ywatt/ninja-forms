@@ -23,7 +23,8 @@ define(
 		'controllers/fieldTotal',
 		'controllers/fieldQuantity',
 		'controllers/calculations',
-		'controllers/fieldDate'
+		'controllers/fieldDate',
+		'controllers/fieldRecaptcha'
 	],
 	function(
 		FormData,
@@ -49,16 +50,30 @@ define(
 		FieldTotal,
 		FieldQuantity,
 		Calculations,
-		FieldDate
+		FieldDate,
+		FieldRecaptcha
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
-				new FieldError();
-				new ChangeField();
-				new ChangeEmail();
+				/**
+				 * Field type controllers
+				 */
 				new FieldCheckbox();
 				new FieldCheckboxList();
 				new FieldRadio();
+				new FieldSelect();
+				new FieldProduct();
+				new FieldTotal();
+				new FieldQuantity();
+				new FieldRecaptcha();
+				
+				/**
+				 * Misc controllers
+				 */
+				new FieldError();
+				new ChangeField();
+				new ChangeEmail();
+				
 				new MirrorField();
 				new ConfirmField();
 				new UpdateFieldModel();
@@ -69,14 +84,16 @@ define(
 				new SubmitError();
 				new ActionRedirect();
 				new ActionSuccess();
-				new FieldSelect();
+				
 				new CoreSubmitResponse();
-				new FieldProduct();
-				new FieldTotal();
-				new FieldQuantity();
 				new Calculations();
+
+				/**
+				 * Data controllers
+				 */
 				new FieldDate();
 				new FormData();
+				
 			}
 		});
 
