@@ -786,6 +786,7 @@ function ninja_forms_konami(){
             var sound = new Howl({
                 src: [ nfUnlock.audioUrl ],
                 onend: function() {
+                    window.scrollTo( 0, 0 );
                     jQuery( '#nf-admin-notice-three-is-coming' ).fadeOut( 'slow', function() {
                         jQuery( '#nf-admin-notice-upgrade' ).fadeIn( 'slow', function() {
                             window.location = nfUnlock.aboutPage;
