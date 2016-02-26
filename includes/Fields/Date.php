@@ -9,11 +9,17 @@ class NF_Fields_Date extends NF_Fields_Textbox
 
     protected $_nicename = 'Date';
 
-    protected $_section = '';
+    protected $_section = 'common';
 
-    protected $_type = 'textbox';
+    protected $_type = 'date';
 
     protected $_templates = 'date';
+
+    protected $_test_value = '12/12/2022';
+
+    protected $_settings = array( 'date_default', 'date_format' );
+
+    protected $_settings_exclude = array( 'default', 'placeholder' );
 
     public function __construct()
     {

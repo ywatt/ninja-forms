@@ -90,10 +90,10 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
          */
         wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
         wp_enqueue_style( 'summernote', Ninja_Forms::$url . 'assets/css/summernote.css' );
-        wp_enqueue_style( 'codemirror', '//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css' );
-        wp_enqueue_style( 'codemirror-monokai', '//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css' );
+        wp_enqueue_style( 'codemirror', Ninja_Forms::$url . 'assets/css/codemirror.css' );
+        wp_enqueue_style( 'codemirror-monokai', Ninja_Forms::$url . 'assets/css/monokai-theme.css' );
         wp_enqueue_style( 'jquery-highlight-textarea', Ninja_Forms::$url . 'assets/css/jquery.highlighttextarea.min.css' );
-        //wp_enqueue_style( 'jBox-notice-border', Ninja_Forms::$url . 'assets/css/NoticeBorder.css' );
+        wp_enqueue_style( 'pikaday-responsive', Ninja_Forms::$url . 'assets/css/pikaday-package.css' );
 
         /**
          * JS Libraries
@@ -113,14 +113,13 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_enqueue_script( 'jquery-ui-touch-punch', Ninja_Forms::$url . 'assets/js/lib/jquery.ui.touch-punch.js', array( 'jquery' ) );
         wp_enqueue_script( 'jquery-classy-wiggle', Ninja_Forms::$url . 'assets/js/lib/jquery.classywiggle.min.js', array( 'jquery' ) );
 
-        wp_enqueue_script( 'bootstrap','http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js', array( 'jquery' ) );
-        wp_enqueue_script( 'codemirror','//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js', array( 'jquery' ) );
-        wp_enqueue_script( 'codemirror-xml','//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js', array( 'jquery' ) );
-        wp_enqueue_script( 'codemirror-formatting','//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js', array( 'jquery' ) );
-
+        wp_enqueue_script( 'bootstrap', Ninja_Forms::$url . 'assets/js/lib/bootstrap.js', array( 'jquery' ) );
+        wp_enqueue_script( 'codemirror', Ninja_Forms::$url . 'assets/js/lib/codemirror.js', array( 'jquery' ) );
+        wp_enqueue_script( 'codemirror-xml', Ninja_Forms::$url . 'assets/js/lib/codemirror-xml.js', array( 'jquery' ) );
+        wp_enqueue_script( 'codemirror-formatting', Ninja_Forms::$url . 'assets/js/lib/codemirror-formatting.js', array( 'jquery' ) );
         wp_enqueue_script( 'summernote', Ninja_Forms::$url . 'assets/js/lib/summernote.js', array( 'jquery', 'speakingurl' ) );
 
-        // wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
+
         wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/min/builder.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable', 'jquery-effects-bounce' ) );
 
         wp_localize_script( 'nf-builder', 'nfAdmin', array(

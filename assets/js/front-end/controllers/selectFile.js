@@ -6,7 +6,8 @@ define(['models/fileCollection', 'views/fileCollection'], function( fileCollecti
 		},
 
 		renderFileInput: function() {
-			return _.template( jQuery( '#nf-tmpl-field-file-input' ).html(), this );
+			var template = _.template( jQuery( '#nf-tmpl-field-file-input' ).html() );
+			return template( this );
 		},
 
 		initFile: function( model ) {

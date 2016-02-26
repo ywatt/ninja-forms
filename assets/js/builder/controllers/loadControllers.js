@@ -64,6 +64,7 @@ define(
 		'controllers/fields/notices',
 		'controllers/fields/mobile',
 		'controllers/fields/savedFields',
+		'controllers/fields/fieldDatepicker',
 
 		/*
 		 * TODO: Actions domain controllers
@@ -145,6 +146,7 @@ define(
 		Notices,
 		FieldsMobile,
 		SavedFields,
+		FieldDatepicker,
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -225,6 +227,7 @@ define(
 				new Notices();
 				new FieldsMobile();
 				new SavedFields();
+				new FieldDatepicker();
 				/*
 				 * TODO: Actions domain controllers
 				 */

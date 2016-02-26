@@ -41,6 +41,12 @@ RADIO & CHECKBOX LISTS
 .list-checkbox-wrap li {
   padding-left: 10px; }
 
+/* ---------------------------------
+HONEYPOT
+----------------------------------*/
+.nf-hp {
+  visibility: hidden; }
+
 /*
 Make sure all Ninja Forms label positons function properly
 ---------------------------------------------*/

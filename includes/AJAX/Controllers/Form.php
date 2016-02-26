@@ -101,8 +101,6 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 
             $action = Ninja_Forms()->form( $form_data[ 'id' ] )->get_action( $action_data['id'] );
 
-            $action->update_settings($action_data['settings'])->save();
-
             $action_type = $action->get_setting( 'type' );
 
             if( isset( Ninja_Forms()->actions[ $action_type ] ) ) {
