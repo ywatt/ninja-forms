@@ -5,11 +5,15 @@ define([], function() {
             this.listenTo( nfRadio.channel( 'recaptcha' ), 'init:model', this.initRecaptcha );
         },
 
-        initRecaptcha: function ( model ) {
-            
-        }
+       	initRecaptcha: function ( model ) {
+       		this.model = model;
+        	nfRadio.channel( 'recaptcha' ).reply( 'update:response', this.updateResponse, this );
+        },
 
+        updateResponse: function( response ) {
+        	this.model.set( 'value', response );
+        }
     });
 
     return controller;
-});
+} );

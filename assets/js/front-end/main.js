@@ -1,9 +1,3 @@
-require.config( {
-	baseUrl: nfFrontEnd.requireBaseUrl + '/front-end/'
-} );
-
-var nfRadio = Backbone.Radio;
-
 jQuery( document ).ready( function( $ ) {
 	require( ['models/formCollection', 'models/formModel', 'models/fieldCollection', 'controllers/loadControllers', 'views/mainLayout'], function( formCollection, FormModel, FieldCollection, LoadControllers, mainLayout ) {
 

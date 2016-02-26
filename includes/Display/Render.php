@@ -157,7 +157,7 @@ final class NF_Display_Render
                 $settings['old_classname'] = $field_class->get_old_classname();
                 $settings['wrap_template'] = $field_class->get_wrap_template();
 
-                $fields[] = $settings;
+                $fields[] = apply_filters( 'ninja_forms_localize_field_settings_' . $field_type, $settings, $form );
             }
         }
 
@@ -298,7 +298,7 @@ final class NF_Display_Render
                 $field['settings']['old_classname'] = $field_class->get_old_classname();
                 $field['settings']['wrap_template'] = $field_class->get_wrap_template();
 
-                $fields[] = $field['settings'];
+                $fields[] = apply_filters( 'ninja_forms_localize_field_settings_' . $field_type, $field['settings'], $form );
             }
         }
 
@@ -341,6 +341,10 @@ final class NF_Display_Render
         wp_enqueue_script( 'moment', Ninja_Forms::$url . 'assets/js/lib/moment-with-locales.min.js', array( 'jquery' ) );
         wp_enqueue_script( 'pikaday', Ninja_Forms::$url . 'assets/js/lib/pikaday.js', array( 'jquery' ) );
         wp_enqueue_script( 'pikaday-responsive', Ninja_Forms::$url . 'assets/js/lib/pikaday-responsive.js', array( 'jquery' ) );
+        wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=en', array( 'jquery' ) );
+
+
+        wp_enqueue_script( 'nf-global', Ninja_Forms::$url . 'assets/js/min/global.js', array( 'jquery' ) );
 
         // wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'nf-front-end', Ninja_Forms::$url . 'assets/js/min/front-end.js', array( 'jquery', 'backbone', 'backbone-radio', 'backbone-marionette', 'math' ) );
@@ -360,6 +364,18 @@ final class NF_Display_Render
 
         wp_localize_script( 'nf-front-end', 'nfFrontEnd', $data );
 
+
+        /*
+        ?>
+        <script type="text/javascript">
+            function nf_recaptcha_set_field_value( inpval ) {
+                console.log( inpval );
+                jQuery( "#nf-field-<%= id %>" ).val( inpval );
+            }
+
+        </script>
+        <?php
+        */
     }
 
     protected static function load_template( $file_name = '' )
