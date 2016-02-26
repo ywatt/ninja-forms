@@ -203,10 +203,8 @@ class NF_Notices
                     return true;
                 }
             }
-
-            return false;
         }
-
+        return false;
     }
 
     // Page check function - This should be called from class extensions if the notice should only show on specific admin pages
