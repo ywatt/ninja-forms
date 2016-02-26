@@ -47,7 +47,7 @@ return apply_filters( 'ninja_forms_plugin_settings_recaptcha', array(
     |--------------------------------------------------------------------------
     */
 
-    'recaptcha_them' => array(
+    'recaptcha_theme' => array(
         'id'    => 'recaptcha_theme',
         'type'  => 'select',
         'options'   => array(

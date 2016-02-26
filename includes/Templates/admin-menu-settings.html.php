@@ -46,7 +46,6 @@
                                                 echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                                 break;
                                             case 'select' :
-                                                var_dump( $setting['value'] );
                                                 echo "<select name='{$setting['id']}'
                                                 id='{$setting['id']}'>";
                                                     foreach( $setting['options'] as $option ) {
