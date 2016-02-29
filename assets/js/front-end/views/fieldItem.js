@@ -3,14 +3,21 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 		tagName: 'nf-section',
 
 		initialize: function() {
-			_.bindAll( this, 'render' );
-    		this.model.bind( 'change:reRender', this.maybeRender, this );
-    		this.model.bind( 'change:errors', this.changeError, this );
-    		this.model.bind( 'change:addWrapperClass', this.addWrapperClass, this );
-    		this.model.bind( 'change:removeWrapperClass', this.removeWrapperClass, this );
+			// _.bindAll( this, 'render' );
+    		this.model.on( 'change:reRender', this.maybeRender, this );
+    		this.model.on( 'change:errors', this.changeError, this );
+    		this.model.on( 'change:addWrapperClass', this.addWrapperClass, this );
+    		this.model.on( 'change:removeWrapperClass', this.removeWrapperClass, this );
     		// this.listenTo( nfRadio.channel( 'submit' ), 'before:submit', this.test );
 
     		this.template = '#nf-tmpl-field-' + this.model.get( 'wrap_template' );
+		},
+
+		onBeforeDestroy: function() {
+			this.model.off( 'change:reRender', this.maybeRender );
+    		this.model.off( 'change:errors', this.changeError );
+    		this.model.off( 'change:addWrapperClass', this.addWrapperClass );
+    		this.model.off( 'change:removeWrapperClass', this.removeWrapperClass );
 		},
 
 		test: function( model ) {
