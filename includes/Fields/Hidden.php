@@ -18,7 +18,7 @@ class NF_Fields_Hidden extends NF_Abstracts_Input
     protected $_wrap_template = 'wrap-no-label';
 
     protected $_settings_only = array(
-        'key', 'label', 'default'
+        'key', 'label', 'default', 'admin_label'
     );
 
     protected $_use_merge_tags_include = array( 'calculations' );

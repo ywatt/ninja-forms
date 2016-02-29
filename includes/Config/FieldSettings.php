@@ -443,6 +443,20 @@ return apply_filters( 'ninja_forms_field_settings', array(
     ),
 
     /*
+     * ADMIN LABEL
+     */
+    
+    'admin_label'   => array(
+        'name'      => 'admin_label',
+        'type'      => 'textbox',
+        'label'     => __( 'Admin Label', 'ninja-forms' ),
+        'width'     => 'full',
+        'group'     => 'administration',
+        'value'     => '',
+        'help'      => __( 'Label used when viewing and exporting submissions.', 'ninja-forms' ),        
+    ),
+
+    /*
     |--------------------------------------------------------------------------
     | Un-Grouped Settings
     |--------------------------------------------------------------------------

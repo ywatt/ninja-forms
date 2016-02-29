@@ -18,7 +18,7 @@ abstract class NF_Abstracts_UserInfo extends NF_Fields_Textbox
         parent::__construct();
 
         $this->_settings = $this->load_settings(
-            array( 'key', 'label', 'label_pos', 'required', 'default', 'placeholder', 'classes' )
+            array( 'key', 'label', 'label_pos', 'required', 'default', 'placeholder', 'classes', 'admin_label' )
         );
 
         $this->_settings[ 'default' ][ 'settings' ][ 'default_type' ][ 'options' ][] = array(
