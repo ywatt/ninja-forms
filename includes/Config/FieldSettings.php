@@ -585,12 +585,22 @@ return apply_filters( 'ninja_forms_field_settings', array(
 
     'disable_browser_autocomplete' => array(
         'name' => 'disable_browser_autocomplete',
-        'type' => 'checkbox',
-        'value' => 'unchecked',
+        'type' => 'toggle',
         'label' => __( 'Disable Browser Autocomplete', 'ninja-forms' ),
         'width' => '',
-        'group' => '',
+        'group' => 'advanced',
+    ),
 
+    /*
+     * Disable input
+     */
+    
+    'disable_input' => array(
+        'name'      => 'disable_input',
+        'type'      => 'toggle',
+        'label'     => __( 'Disable Input', 'ninja-forms' ),
+        'width'     => 'full',
+        'group'     => 'advanced',
     ),
 
     //TODO: Ask about the list of states and countries.
