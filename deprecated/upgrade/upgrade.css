@@ -124,7 +124,7 @@ ol .dashicons {
     display: block;
     margin: auto;
     border: 2px solid transparent;
-    transition: all 2s;
+    transition: all .5s;
 }
 .nf-upgrade-button:hover,
 .nf-upgrade-button:active {

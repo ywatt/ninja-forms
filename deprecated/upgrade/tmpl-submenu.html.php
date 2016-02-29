@@ -66,7 +66,7 @@
                 </tr>
                 <# }); #>
 
-                <# if( ! data.readyToConvert ) { #>
+                <# if( 'checking' == data.step && ! data.readyToConvert ) { #>
                 <tr>
                     <td colspan="2" style="text-align: center;"><span class="dashicons dashicons-update"></span></td>
                 </tr>
@@ -76,8 +76,8 @@
 
         </table>
 
-        <# if( data.readyToConvert ) { #>
-            <button class="nf-upgrade-button">{{data.next}}</button>
+        <# if( 'checking' == data.step && data.readyToConvert ) { #>
+            <button class="nf-upgrade-button js-nfUpgrade-startConversion">{{data.next}}</button>
         <# } #>
     </script>
 

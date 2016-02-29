@@ -6,11 +6,11 @@ jQuery(document).ready(function($) {
      |--------------------------------------------------------------------------
      */
 
-    var upgradeApp = {
+    var nfUpgradeApp = {
 
         forms: [],
 
-        checkedForms: [],
+        step: 'checking',
 
         container: '#nfUpgradeApp',
 
@@ -23,20 +23,32 @@ jQuery(document).ready(function($) {
         updateTable: function(){
 
             var data = {
-                title: 'Form Upgrade Compatibility',
-                legend: this.tmpl.legend( {
+                title: '',
+                headers: [ 'Status', 'Title' ],
+                rows: this.forms,
+                step: this.step
+            };
+
+            if( 'checking' == this.step ) {
+
+                data.title = 'Form Upgrade Compatibility';
+
+                data.legend = this.tmpl.legend( {
                     no_issues_detected: 'No Issues Detected',
                     will_need_attention: 'Will Need Attention After Upgrade',
                 }),
-                headers: [ 'Status', 'Title' ],
-                rows: this.forms,
-                readyToConvert: 1,
-                next: 'Upgrade Forms'
-            };
 
-            _.each( this.forms, function( form ) {
-                if( ! form.checked ) data.readyToConvert = 0;
-            }, this );
+                data.next = 'Upgrade Forms';
+
+                data.readyToConvert = 1;
+                _.each(this.forms, function (form) {
+                    if ( ! form.checked ) data.readyToConvert = 0;
+                }, this);
+            }
+
+            if( 'converting' == this.step ) {
+                data.title = 'Converting Forms';
+            }
 
             jQuery( this.container ).html( this.tmpl.table( data ) );
         },
@@ -67,17 +79,32 @@ jQuery(document).ready(function($) {
                     id: formID,
                     title: '',
                     icon: 'update',
-                    checked: false
+                    checked: false,
+                    converted: false
                 }
             }, this );
             _.each( this.forms, this.checkForm, this );
             this.updateTable();
+
+            var that = this;
+            jQuery( '#nfUpgradeApp' ).on( 'click','.js-nfUpgrade-startConversion', function() {
+                that.startConversion( that );
+            } );
+        },
+
+        startConversion: function( app ) {
+            console.log( 'HERE' );
+            console.log( app );
+            app.step = 'converting';
+            _.each( app.forms, function( form ) {
+                form.icon = 'update';
+            });
+            app.updateTable();
         }
 
     };
 
-    upgradeApp.start();
-    return;
+    nfUpgradeApp.start();
 
     //var forms = [];
     //var convertedFormsCount = 0;
