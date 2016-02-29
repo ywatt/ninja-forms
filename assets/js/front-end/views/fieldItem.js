@@ -131,6 +131,14 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 					if ( 'undefined' != typeof this.element_class && 0 < jQuery.trim( this.element_class ).length ) {
 						this.classes += ' ' + this.element_class;
 					}
+				},
+
+				maybeDisabled: function() {
+					if ( 1 == this.disable_input ) {
+						return 'disabled';
+					} else {
+						return '';
+					}
 				}
 			};
 		},
