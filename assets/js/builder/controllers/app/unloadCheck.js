@@ -14,11 +14,9 @@ define( [], function() {
 
 		maybePrompt: function( model ) {
 			// If our app is clean, don't show a warning.
-			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
-				return false;
+			if ( ! nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
+				return 'You have unsaved changes.';
 			}
-
-			return 'You have unsaved changes.';
 		}
 
 	});
