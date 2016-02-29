@@ -23,6 +23,7 @@ define(['models/formModel', 'models/formCollection', 'models/fieldCollection', '
 				that.formCollection.add( formModel );
 				var fields = new FieldCollection( form.fields, { formModel: formModel } );
 				formModel.set( 'fields', fields );
+				formModel.set( 'loadedFields', form.fields );
 				var errors = new ErrorCollection();
 				formModel.set( 'errors', errors );
 				nfRadio.channel( 'form' ).trigger( 'loaded', formModel );
