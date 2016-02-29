@@ -15,16 +15,16 @@ define( [], function() {
 			 * When someone types in the "name" or "eq" portion of our calculation, we need to make sure
 			 * that they haven't duplicated a name or made a bad EQ reference.
 			 */
-			this.listenTo( nfRadio.channel( 'option-repeater' ), 'keyup:option', this.keyUp );
+			this.listenTo( nfRadio.channel( 'option-repeater-calculations' ), 'keyup:option', this.keyUp );
 			/*
 			 * Same thing for when our calculation option is updated
 			 */
-			this.listenTo( nfRadio.channel( 'option-repeater' ), 'update:option', this.updateCalc );
+			this.listenTo( nfRadio.channel( 'option-repeater-calculations' ), 'update:option', this.updateCalc );
 			/*
 			 * When we sort our calcluations, we need to make sure that we don't get any bad EQ
 			 * references.
 			 */
-			this.listenTo( nfRadio.channel( 'option-repeater' ), 'sort:option', this.sortCalc );
+			this.listenTo( nfRadio.channel( 'option-repeater-calculations' ), 'sort:option', this.sortCalc );
 		},
 
 		keyUp: function( e, optionModel ) {

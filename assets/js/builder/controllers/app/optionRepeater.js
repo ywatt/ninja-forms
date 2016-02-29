@@ -70,6 +70,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', model, changes, label );
 			nfRadio.channel( 'option-repeater' ).trigger( 'update:option', model, dataModel, settingModel );
+			nfRadio.channel( 'option-repeater-' + settingModel.get( 'name' ) ).trigger( 'update:option', model, dataModel, settingModel );
 		},
 
 		/**
@@ -222,6 +223,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 			nfRadio.channel( 'changes' ).request( 'register:change', 'sortListOptions', dragModel, null, label, data );
 			this.triggerDataModel( dragModel, setting.dataModel );
 			nfRadio.channel( 'option-repeater' ).trigger( 'sort:option', dragModel, setting );
+			nfRadio.channel( 'option-repeater-' + setting.get( 'name' ) ).trigger( 'sort:option', dragModel, setting );
 		},
 
 		/**

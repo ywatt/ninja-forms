@@ -60,6 +60,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 		keyupOption: function( e ) {
 			this.maybeAddOption( e );
 			nfRadio.channel( 'option-repeater' ).trigger( 'keyup:option', e, this.model, this.dataModel, this.settingModel )
+			nfRadio.channel( 'option-repeater-' + this.settingModel.get( 'name' ) ).trigger( 'keyup:option', e, this.model, this.dataModel, this.settingModel )
 		},
 
 		maybeAddOption: function( e ) {
@@ -69,6 +70,9 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 		},
 
 		renderErrors: function() {
+			if ( jQuery.isEmptyObject( this.model.get( 'errors' ) ) ) {
+				return false;
+			}
 			/*
 			 * We don't want to redraw the entire row, which would remove focus from the eq textarea,
 			 * so we add and remove error classes manually.
