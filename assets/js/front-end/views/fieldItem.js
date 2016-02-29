@@ -1,4 +1,4 @@
-define( ['views/fieldErrorCollection'], function( fieldErrorCollection ) {
+define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldErrorCollection, InputLimitView ) {
 	var view = Marionette.ItemView.extend({
 		tagName: 'nf-section',
 
@@ -57,6 +57,14 @@ define( ['views/fieldErrorCollection'], function( fieldErrorCollection ) {
 
 			var el = jQuery( this.el ).children( '.nf-error-wrap' );
     		this.errorCollectionView = new fieldErrorCollection( { el: el, collection: this.model.get( 'errors' ), thisModel: this.model } );
+
+    		/*
+    		 * If we have an input limit set, render the view that contains our counter
+    		 */
+    		if ( '' != this.model.get( 'input_limit' ) ) {
+    			el = jQuery( this.el ).children( '.nf-input-limit');
+    			this.inputLimitView = new InputLimitView( { el: el, model: this.model } );
+    		}
 
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'render:view', this );
 			nfRadio.channel( 'fields' ).trigger( 'render:view', this );

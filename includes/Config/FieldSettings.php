@@ -223,46 +223,47 @@ return apply_filters( 'ninja_forms_field_settings', array(
      * INPUT LIMIT SET
      */
 
-    // 'input_limit_set' => array(
-    //     'name' => 'input_limit_set',
-    //     'type' => 'fieldset',
-    //     'label' => __( 'Limit Input to this Number', 'ninja-forms' ),
-    //     'width' => 'full',
-    //     'group' => 'restrictions',
-    //     'settings' => array(
-    //         array(
-    //             'name' => 'input_limit',
-    //             'type' => 'textbox',
-    //             'placeholder' => 150,
-    //             'width' => 'one-half',
-    //             'value' => ''
-    //         ),
-    //         array(
-    //             'name' => 'input_limit_type',
-    //             'type' => 'select',
-    //             'options' => array(
-    //                 array(
-    //                     'label' => __( 'Character(s)', 'ninja-forms' ),
-    //                     'value' => 'characters'
-    //                 ),
-    //                 array(
-    //                     'label' => __( 'Word(s)', 'ninja-forms' ),
-    //                     'value' => 'words'
-    //                 ),
-    //             ),
-    //             'value' => 'characters'
-    //         ),
-    //         array(
-    //             'name' => 'input_limit_message',
-    //             'type' => 'textbox',
-    //             'label' => __( 'Text to Appear After Counter', 'ninja-forms' ),
-    //             'placeholder' => __( 'Character(s) left' ),
-    //             'width' => 'full',
-    //             'value' => __( 'Character(s) left' )
-    //         )
-    //     ),
-    //
-    // ),
+    'input_limit_set' => array(
+        'name' => 'input_limit_set',
+        'type' => 'fieldset',
+        'label' => __( 'Limit Input to this Number', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'settings' => array(
+            array(
+                'name' => 'input_limit',
+                'type' => 'textbox',
+                'width' => 'one-half',
+                'value' => '',
+                'label' => '',
+            ),
+            array(
+                'name' => 'input_limit_type',
+                'type' => 'select',
+                'options' => array(
+                    array(
+                        'label' => __( 'Character(s)', 'ninja-forms' ),
+                        'value' => 'characters'
+                    ),
+                    array(
+                        'label' => __( 'Word(s)', 'ninja-forms' ),
+                        'value' => 'words'
+                    ),
+                ),
+                'value' => 'characters',
+                'label' => '',
+            ),
+            array(
+                'name' => 'input_limit_message',
+                'type' => 'textbox',
+                'label' => __( 'Text to Appear After Counter', 'ninja-forms' ),
+                'placeholder' => __( 'Character(s) left' ),
+                'width' => 'full',
+                'value' => __( 'Character(s) left', 'ninja-forms' )
+            )
+        ),
+    
+    ),
 
     /*
     |--------------------------------------------------------------------------

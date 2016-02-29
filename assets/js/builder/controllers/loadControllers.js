@@ -42,6 +42,7 @@ define(
 		'controllers/app/changeMenu',
 		'controllers/app/mobile',
 		'controllers/app/notices',
+		'controllers/app/unloadCheck',
 		/*
 		 * Fields domain controllers
 		 */
@@ -124,6 +125,7 @@ define(
 		ChangeMenu,
 		AppMobile,
 		AppNotices,
+		AppUnloadCheck,
 		/*
 		 * Fields domain controllers
 		 */
@@ -197,6 +199,7 @@ define(
 				new ChangeMenu();
 				new AppMobile();
 				new AppNotices();
+				new AppUnloadCheck();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
