@@ -200,7 +200,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'type' => 'select',
         'label' => __( 'Input Mask', 'ninja-forms'),
         'width' => 'one-half',
-        'group' => 'advanced',
+        'group' => 'restrictions',
         'options' => array(
             array(
                 'label' => __( 'none', 'ninja-forms' ),
@@ -230,7 +230,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'type'          => 'textbox',
         'label'         => __( 'Custom Mask', 'ninja-forms'),
         'width'         => 'one-half',
-        'group'         => 'advanced',
+        'group'         => 'restrictions',
         'value'         => '',
         'deps'          => array(
             'mask'      => 'custom'
@@ -621,7 +621,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'type' => 'toggle',
         'label' => __( 'Disable Browser Autocomplete', 'ninja-forms' ),
         'width' => 'full',
-        'group' => 'advanced',
+        'group' => 'restrictions',
     ),
 
     /*
@@ -633,7 +633,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'type'      => 'toggle',
         'label'     => __( 'Disable Input', 'ninja-forms' ),
         'width'     => 'full',
-        'group'     => 'advanced',
+        'group'     => 'restrictions',
     ),
 
     //TODO: Ask about the list of states and countries.
