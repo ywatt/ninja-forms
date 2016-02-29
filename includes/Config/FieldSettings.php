@@ -587,7 +587,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'name' => 'disable_browser_autocomplete',
         'type' => 'toggle',
         'label' => __( 'Disable Browser Autocomplete', 'ninja-forms' ),
-        'width' => '',
+        'width' => 'full',
         'group' => 'advanced',
     ),
 

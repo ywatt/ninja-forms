@@ -139,6 +139,14 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 					} else {
 						return '';
 					}
+				},
+
+				maybeDisableAutocomplete: function() {
+					if ( 1 == this.disable_browser_autocomplete ) {
+						return 'autocomplete="off"';
+					} else {
+						return '';
+					}
 				}
 			};
 		},
