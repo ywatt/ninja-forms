@@ -115,29 +115,20 @@ ol .dashicons {
 /*
  * Button
  */
-#goToThree,
-#goNinjaGo {
-    display: none;
-}
-#goToThree {
-    text-decoration: none;
-    width: 100px;
-    text-align: center;
-}
-#goToThree,
-button.button.go-ninja-go {
+
+.nf-upgrade-button {
     color: white;
     background-color: green;
     padding: 10px 20px;
     height: auto;
+    display: block;
     margin: auto;
     border: 2px solid transparent;
+    transition: all 2s;
 }
-#goToThree:hover,
-#goToThree:active,
-button.button.go-ninja-go:hover,
-button.button.go-ninja-go:active {
+.nf-upgrade-button:hover,
+.nf-upgrade-button:active {
     color: green;
-    font-weight: bold;
     border-color: green;
+    background-color: white;
 }

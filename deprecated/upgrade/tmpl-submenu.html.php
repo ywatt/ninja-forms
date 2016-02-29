@@ -77,7 +77,7 @@
         </table>
 
         <# if( data.readyToConvert ) { #>
-            <button>{{data.next}}</button>
+            <button class="nf-upgrade-button">{{data.next}}</button>
         <# } #>
     </script>
 
