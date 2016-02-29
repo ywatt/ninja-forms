@@ -10,7 +10,17 @@ define( [], function() {
         },
 
         updateCount: function( el, model ) {
-        	this.count = jQuery( el ).val().length;
+            var value = jQuery( el ).val();
+            var regex = /\s+/gi;
+            var wordCount = value.trim().replace(regex, ' ').split(' ').length;
+            var charCount = value.trim().length;
+
+            if ( 'characters' == this.model.get( 'input_limit_type' ) ) {
+                this.count = charCount;
+            } else {
+                this.count = wordCount;
+            }
+
         	this.render();
         },
 
@@ -24,7 +34,6 @@ define( [], function() {
         	var that = this;
         	return {
         		currentCount: function() {
-        			console.log( that.count );
         			return that.count;
         		}
         	}
