@@ -24,12 +24,6 @@ define( [], function() {
         	this.render();
         },
 
-        onRender: function() {
-        	if ( this.count > this.model.get( 'input_limit' ) ) {
-        		console.log( 'over' );
-        	}
-        },
-
         templateHelpers: function() {
         	var that = this;
         	return {

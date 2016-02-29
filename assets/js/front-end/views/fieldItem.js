@@ -161,6 +161,14 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 					} else {
 						return '';
 					}
+				},
+
+				maybeInputLimit: function() {
+					if ( '' != jQuery.trim( this.input_limit ) ) {
+						return 'maxlength="' + this.input_limit + '"';
+					} else {
+						return '';
+					}
 				}
 			};
 		},
