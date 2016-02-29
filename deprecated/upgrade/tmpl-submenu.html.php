@@ -129,7 +129,6 @@
     #goToThree {
         text-decoration: none;
         width: 100px;
-        display: block;
         text-align: center;
     }
     #goToThree,
@@ -139,7 +138,6 @@
         padding: 10px 20px;
         height: auto;
         margin: auto;
-        display: block;
         border: 2px solid transparent;
     }
     #goToThree:hover,
@@ -239,7 +237,7 @@
             </tbody>
         </table>
 
-        <a href="<?php echo admin_url( 'nf-switcher=upgrade' ); ?>" id="goToThree">Go To Three</a>
+        <a href="<?php echo admin_url( '?nf-switcher=upgrade' ); ?>" id="goToThree">Go To Three</a>
 
     </div>
 

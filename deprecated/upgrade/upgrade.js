@@ -1,6 +1,7 @@
 jQuery(document).ready(function($) {
 
     var forms = [];
+    var convertedFormsCount = 0;
 
     _.each( nfThreeUpgrade.forms, function ( formID ) {
 
@@ -26,15 +27,22 @@ jQuery(document).ready(function($) {
 
                     $.post(ajaxurl, { nf2to3: 1, action: 'ninja_forms_ajax_import_form', import: form.serialized }, function (repsonse) {
 
+                        convertedFormsCount += 1;
                         $('#nfThreeFormConvertTable tbody').prepend("<tr><td>" + form.id + "</td><td></td><td>" + icon + "</td></tr>");
-                        $('#nfThreeFormConvertTable .js-tmp-row').remove();
+                        maybeDisplayGoToThreeButton();
                     }, 'json' );
                 }, 'json' );
             });
         }, 'json' );
+    });
+
+    function maybeDisplayGoToThreeButton(){
+
+        if( forms.length != convertedFormsCount ) return;
 
         $( '#goToThree' ).css( 'display', 'block' );
-    });
+        $('#nfThreeFormConvertTable .js-tmp-row').remove();
+    }
 
     function maybeDisplayFormsCheckTable( forms ){
 
