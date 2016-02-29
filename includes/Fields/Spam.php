@@ -33,6 +33,8 @@ class NF_Fields_Spam extends NF_Abstracts_Input
         // Default Required setting to TRUE and hide setting.
         $this->_settings[ 'required' ][ 'value' ] = 1;
         $this->_settings[ 'required' ][ 'group' ] = '';
+
+        add_filter( 'nf_sub_hidden_field_types', array( $this, 'hide_field_type' ) );
     }
 
     /**
@@ -59,6 +61,13 @@ class NF_Fields_Spam extends NF_Abstracts_Input
     public function get_parent_type()
     {
         return 'spam';
+    }
+
+    function hide_field_type( $field_types )
+    {
+        $field_types[] = $this->_name;
+
+        return $field_types;
     }
 
 }
