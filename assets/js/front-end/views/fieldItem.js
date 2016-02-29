@@ -60,10 +60,24 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 
     		/*
     		 * If we have an input limit set, render the view that contains our counter
+    		 * TODO: Move this to a controller so that the logic isn't in the view.
     		 */
     		if ( 'undefined' != typeof this.model.get( 'input_limit' ) && '' != jQuery.trim( this.model.get( 'input_limit' ) ) ){
     			el = jQuery( this.el ).children( '.nf-input-limit');
     			this.inputLimitView = new InputLimitView( { el: el, model: this.model } );
+    		}
+
+    		/*
+    		 * If we have an input mask, init that mask.
+    		 * TODO: Move this to a controller so that the logic isn't in the view.
+    		 */
+    		if ( 'undefined' != typeof this.model.get( 'mask' ) && '' != jQuery.trim( this.model.get( 'mask' ) ) ) {
+    			if ( 'custom' == this.model.get( 'mask') ) {
+    				var mask = this.model.get( 'custom_mask' );
+    			} else {
+    				var mask = this.model.get( 'mask' );
+    			}
+    			jQuery( this.el ).find( '.nf-element' ).mask( mask );
     		}
 
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'render:view', this );

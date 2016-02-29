@@ -195,29 +195,48 @@ return apply_filters( 'ninja_forms_field_settings', array(
      * MASK
      */
 
-    // 'mask' => array(
-    //     'name' => 'mask',
-    //     'type' => 'select',
-    //     'label' => __( 'Input Mask', 'ninja-forms'),
-    //     'width' => 'one-half',
-    //     'group' => 'restrictions',
-    //     'options' => array(
-    //         array(
-    //             'label' => __( 'none', 'ninja-forms' ),
-    //             'value' => ''
-    //         ),
-    //         array(
-    //             'label' => __( 'US Phone', 'ninja-forms' ),
-    //             'value' => 'us-phone'
-    //         ),
-    //         array(
-    //             'label' => __( 'Date', 'ninja-forms' ),
-    //             'value' => 'date'
-    //         ),
-    //     )
-    //     'value' => '',
-    //
-    // ),
+    'mask' => array(
+        'name' => 'mask',
+        'type' => 'select',
+        'label' => __( 'Input Mask', 'ninja-forms'),
+        'width' => 'one-half',
+        'group' => 'advanced',
+        'options' => array(
+            array(
+                'label' => __( 'none', 'ninja-forms' ),
+                'value' => ''
+            ),
+            array(
+                'label' => __( 'US Phone', 'ninja-forms' ),
+                'value' => '(999) 999-9999',
+            ),
+            array(
+                'label' => __( 'Date', 'ninja-forms' ),
+                'value' => '99/99/9999',
+            ),
+            array(
+                'label' => __( 'Custom', 'ninja-forms' ),
+                'value' => 'custom',
+            ),
+        ),
+        'value' => '',
+    ),
+    /*
+     * CUSTOM MASK
+     */
+
+    'custom_mask'       => array(
+        'name'          => 'custom_mask',
+        'type'          => 'textbox',
+        'label'         => __( 'Custom Mask', 'ninja-forms'),
+        'width'         => 'one-half',
+        'group'         => 'advanced',
+        'value'         => '',
+        'deps'          => array(
+            'mask'      => 'custom'
+        ),
+        'placeholder'   => '',
+    ),
 
     /*
      * INPUT LIMIT SET

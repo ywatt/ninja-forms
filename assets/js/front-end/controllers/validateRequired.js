@@ -25,7 +25,14 @@ define([], function() {
 			var customReqValidation = nfRadio.channel( model.get( 'type' ) ).request( 'validate:required', el, model );
 			var defaultReqValidation = true;
 
-			if ( ! jQuery.trim( currentValue ) ) {
+			var maskPlaceholder = model.get( 'mask' );
+			if ( maskPlaceholder ) {
+				maskPlaceholder = maskPlaceholder.replace( /9/g, '_' );
+				maskPlaceholder = maskPlaceholder.replace( /a/g, '_' );
+				maskPlaceholder = maskPlaceholder.replace( /\*/g, '_' );
+			}
+
+			if ( ! jQuery.trim( currentValue ) || currentValue == maskPlaceholder ) {
 				defaultReqValidation = false;
 			}
 

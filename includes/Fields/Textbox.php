@@ -17,7 +17,7 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
     protected $_test_value = 'Lorem ipsum';
 
-    protected $_settings = array( 'disable_browser_autocomplete' );
+    protected $_settings = array( 'disable_browser_autocomplete', 'mask', 'custom_mask' );
 
     public function __construct()
     {
