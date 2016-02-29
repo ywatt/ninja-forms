@@ -6,7 +6,7 @@ define([], function() {
 
 		actionSubmit: function( response ) {
 			if ( 1 == response.data.settings.clear_successfully_created_form ) {
-				
+				nfRadio.channel( 'form' ).trigger( 'reset' );
 			}
 
 			if ( 1 == response.data.settings.hide_successfully_completed_form ) {
