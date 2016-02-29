@@ -89,7 +89,9 @@ class NF_THREE_Submenu
     {
         $all_forms = Ninja_Forms()->forms()->get_all();
 
-        wp_enqueue_script( 'ninja-forms-three-upgrade', plugin_dir_url(__FILE__) . 'upgrade.js', array( 'jquery', 'underscore' ), '', TRUE );
+        wp_enqueue_style( 'ninja-forms-three-upgrade-styles', plugin_dir_url(__FILE__) . 'upgrade.css' );
+
+        wp_enqueue_script( 'ninja-forms-three-upgrade', plugin_dir_url(__FILE__) . 'upgrade.js', array( 'jquery', 'wp-util' ), '', TRUE );
         wp_localize_script( 'ninja-forms-three-upgrade', 'nfThreeUpgrade', array(
             'forms' => $all_forms
         ) );
