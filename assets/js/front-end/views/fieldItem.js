@@ -61,7 +61,7 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
     		/*
     		 * If we have an input limit set, render the view that contains our counter
     		 */
-    		if ( 'undefined' != typeof this.model.get( 'input_limit' ) && '' != this.model.get( 'input_limit' ) ) {
+    		if ( 'undefined' != typeof this.model.get( 'input_limit' ) && '' != jQuery.trim( this.model.get( 'input_limit' ) ) ){
     			el = jQuery( this.el ).children( '.nf-input-limit');
     			this.inputLimitView = new InputLimitView( { el: el, model: this.model } );
     		}
