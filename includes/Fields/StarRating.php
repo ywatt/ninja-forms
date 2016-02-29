@@ -11,7 +11,7 @@ class NF_Fields_StarRating extends NF_Abstracts_Input
 
     protected $_aliases = array( 'rating' );
 
-    protected $_type = 'rating';
+    protected $_type = 'star-rating';
 
     protected $_templates = 'starrating';
 
