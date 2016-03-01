@@ -32,7 +32,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
     add_action( 'wp_ajax_ninja_forms_ajax_import_form', 'ninja_forms_ajax_import_form' );
     function ninja_forms_ajax_import_form(){
         $import = stripslashes( $_POST[ 'import' ] ); // TODO: How to sanitize serialized string?
-        Ninja_Forms()->form()->import_form( $import );
+        $form_id = ( isset( $_POST[ 'formID' ] ) ) ? absint( $_POST[ 'formID' ] ) : '';
+
+        Ninja_Forms()->form()->import_form( $import, $form_id );
         echo json_encode( array( 'export' => $_POST[ 'import' ], 'import' => $import ) );
         wp_die();
     }

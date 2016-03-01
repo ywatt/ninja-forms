@@ -55,14 +55,14 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         return $last_seq_num;
     }
 
-    public static function import( array $import )
+    public static function import( array $import, $id = '' )
     {
         $import = apply_filters( 'ninja_forms_before_import_form', $import );
 
         /*
         * Create Form
         */
-        $form = Ninja_Forms()->form()->get();
+        $form = Ninja_Forms()->form( $id )->get();
         $form->update_settings( $import[ 'settings' ] );
         $form->save();
         $form_id = $form->get_id();

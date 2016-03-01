@@ -118,7 +118,7 @@ jQuery(document).ready(function($) {
         convertForm: function( form ) {
             var app =  this;
             $.post(ajaxurl, {action: 'nfThreeUpgrade_GetSerializedForm', formID: form.id}, function ( formExport ) {
-                $.post(ajaxurl, { nf2to3: 1, action: 'ninja_forms_ajax_import_form', import: formExport.serialized }, function ( formImport ) {
+                $.post(ajaxurl, { nf2to3: 1, action: 'ninja_forms_ajax_import_form', formID: form.id, import: formExport.serialized }, function ( formImport ) {
                     form.converted = true;
                     form.icon = 'yes';
                     app.updateTable();

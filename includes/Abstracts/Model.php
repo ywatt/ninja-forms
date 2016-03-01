@@ -450,6 +450,13 @@ class NF_Abstracts_Model
 
             // Assign the New ID
             $this->_id = $this->_db->insert_id;
+        } else {
+
+            $result = $this->_db->get_row( "SELECT * FROM $this->_table_name WHERE id = $this->_id" );
+
+            if( ! $result ){
+                $this->_insert_row( array( 'id' => $this->_id ) );
+            }
         }
 
         $this->_save_settings();
@@ -458,6 +465,21 @@ class NF_Abstracts_Model
         if( $this->_tmp_id ){
             return array( $this->_tmp_id => $this->_id );
         }
+    }
+
+    public function _insert_row( $data = array() )
+    {
+        $data[ 'created_at' ] = time();
+
+        if( $this->_parent_id ){
+            $data['parent_id'] = $this->_parent_id;
+        }
+
+        // Create a new row in the database
+        $result = $this->_db->insert(
+            $this->_table_name,
+            $data
+        );
     }
 
     /**
