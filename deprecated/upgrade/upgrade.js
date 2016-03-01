@@ -48,6 +48,12 @@ jQuery(document).ready(function($) {
 
             if( 'converting' == this.step ) {
                 data.title = 'Converting Forms';
+
+                var redirectToThree = 1;
+                _.each(this.forms, function (form) {
+                    if ( ! form.converted ) redirectToThree = 0;
+                }, this);
+                if( redirectToThree ) window.location.href = nfThreeUpgrade.redirectURL;
             }
 
             jQuery( this.container ).html( this.tmpl.table( data ) );
@@ -98,8 +104,20 @@ jQuery(document).ready(function($) {
             app.step = 'converting';
             _.each( app.forms, function( form ) {
                 form.icon = 'update';
-            });
+                this.convertForm( form );
+            }, this );
             app.updateTable();
+        },
+
+        convertForm: function( form ) {
+            var app =  this;
+            $.post(ajaxurl, {action: 'nfThreeUpgrade_GetSerializedForm', formID: form.id}, function ( formExport ) {
+                $.post(ajaxurl, { nf2to3: 1, action: 'ninja_forms_ajax_import_form', import: formExport.serialized }, function ( formImport ) {
+                    form.converted = true;
+                    form.icon = 'yes';
+                    app.updateTable();
+                }, 'json' );
+            }, 'json' );
         }
 
     };
