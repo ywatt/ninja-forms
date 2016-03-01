@@ -6,8 +6,8 @@ return array(
     * Message
     */
 
-    'message' => array(
-        'name' => 'message',
+    'success_msg' => array(
+        'name' => 'success_msg',
         'type' => 'rte',
         'group' => 'primary',
         'label' => __( 'Message', 'ninja-forms' ),

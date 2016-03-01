@@ -5,7 +5,7 @@ class NF_Database_Migrations_Actions extends NF_Abstracts_Migration
     public function __construct()
     {
         parent::__construct(
-            'ninja_forms_actions',
+            'nf3_actions',
             'nf_migration_create_table_actions'
         );
     }

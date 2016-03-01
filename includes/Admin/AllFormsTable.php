@@ -191,7 +191,24 @@ class NF_Admin_AllFormsTable extends WP_List_Table
         $preview_url = add_query_arg( 'nf_preview_form', $item[ 'id' ], site_url() );
         $submissions_url = add_query_arg( 'form_id', $item[ 'id' ], admin_url( 'edit.php?post_type=nf_sub') );
 
-        Ninja_Forms::template( 'admin-menu-all-forms-column-title.html.php', compact( 'title', 'edit_url', 'delete_url', 'duplicate_url', 'preview_url', 'submissions_url' ) );
+        $form = Ninja_Forms()->form( $item[ 'id' ] )->get();
+        $locked = $form->get_setting( 'lock' );
+
+        Ninja_Forms::template( 'admin-menu-all-forms-column-title.html.php', compact( 'title', 'edit_url', 'delete_url', 'duplicate_url', 'preview_url', 'submissions_url', 'locked' ) );
+    }
+
+    public function single_row( $item )
+    {
+        $form = Ninja_Forms()->form( $item[ 'id' ] )->get();
+        $locked = $form->get_setting( 'lock' );
+
+        if( $locked ) {
+            echo '<tr class="flagged">';
+        } else {
+            echo '<tr>';
+        }
+        $this->single_row_columns( $item );
+        echo '</tr>';
     }
 
     /**

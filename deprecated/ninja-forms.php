@@ -265,7 +265,7 @@ class Ninja_Forms {
 
         // Plugin version
         if ( ! defined( 'NF_PLUGIN_VERSION' ) )
-            define( 'NF_PLUGIN_VERSION', '2.9.27' );
+            define( 'NF_PLUGIN_VERSION', '2.9.33' );
 
         // Plugin Folder Path
         if ( ! defined( 'NF_PLUGIN_DIR' ) )
@@ -745,3 +745,95 @@ function Ninja_Forms() {
 }
 
 Ninja_Forms();
+
+/*
+|--------------------------------------------------------------------------
+| Ninja Forms THREE Upgrade
+|--------------------------------------------------------------------------
+*/
+
+add_action( 'wp_ajax_nfThreeUpgrade_GetSerializedForm', 'nfThreeUpgrade_GetSerializedForm' );
+function nfThreeUpgrade_GetSerializedForm(){
+    $id = absint( $_POST[ 'formID' ] );
+    $form_row = ninja_forms_serialize_form( $id );
+    echo json_encode( array( 'id' => $id, 'serialized' => $form_row ) );
+    wp_die();
+}
+
+add_action( 'init', 'ninja_forms_three_submenu' );
+function ninja_forms_three_submenu(){
+    include plugin_dir_path( __FILE__ ) . 'upgrade/class-submenu.php';
+}
+
+add_action( 'admin_notices', 'ninja_forms_three_admin_notice' );
+function ninja_forms_three_admin_notice(){
+    $currentScreen = get_current_screen();
+    if( ! in_array( $currentScreen->id, array( 'toplevel_page_ninja-forms' ) ) ) return;
+    wp_enqueue_style( 'nf-admin-notices', NINJA_FORMS_URL .'assets/css/admin-notices.css?nf_ver=' . NF_PLUGIN_VERSION );
+    include plugin_dir_path( __FILE__ ) . 'upgrade/tmpl-notice.html.php';
+
+    ?>
+    <div id="nf-admin-notice-three-is-coming" class="update-nag nf-admin-notice">
+		<div class="nf-notice-logo"></div> <p class="nf-notice-title">THREE is coming! </p> <p class="nf-notice-body">A major update is coming to Ninja Forms. <a target="_blank" href="https://ninjaforms.com/three/?utm_medium=plugin&amp;utm_source=admin-notice&amp;utm_campaign=Ninja+Forms+THREE&amp;utm_content=Learn+More">Learn more about new features, backwards compatibility, and more Frequently Asked Questions.</a> </p>
+	</div>
+    <?php
+}
+
+add_action( 'nf_admin_before_form_list', 'ninja_forms_konami' );
+function ninja_forms_konami(){
+
+    if( ! ninja_forms_three_addons_version_check() ) return;
+
+    wp_enqueue_script( 'cheet', NINJA_FORMS_URL . 'assets/js/lib/cheet.min.js', array( 'jquery' ) );
+    wp_enqueue_script( 'howler', NINJA_FORMS_URL . 'assets/js/lib/howler.core.min.js', array( 'jquery' ) );
+    wp_localize_script( 'howler', 'nfUnlock', array( 'audioUrl' => NINJA_FORMS_URL . 'assets/audio/smw_power_up.wav', 'aboutPage' => menu_page_url( 'ninja-forms-three', false ) ) );
+    ?>
+    <script type="text/javascript">
+
+        jQuery( document ).ready( function() {
+            var sound = new Howl({
+                src: [ nfUnlock.audioUrl ],
+                onend: function() {
+                    window.scrollTo( 0, 0 );
+                    jQuery( '#nf-admin-notice-three-is-coming' ).fadeOut( 'slow', function() {
+                        jQuery( '#nf-admin-notice-upgrade' ).fadeIn( 'slow', function() {
+                            window.location = nfUnlock.aboutPage;
+                        });
+                    });
+                }
+            });
+
+            cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+                sound.play();
+            });
+        } );
+    </script>
+    <?php
+}
+
+
+function ninja_forms_three_addons_version_check(){
+    $items = wp_remote_get( 'https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h' );
+    $items = wp_remote_retrieve_body( $items );
+    $items = json_decode( $items, true );
+
+    foreach ($items as $item) {
+
+        if( empty( $item['plugin'] ) ) continue;
+        if( ! file_exists( WP_PLUGIN_DIR.'/'.$item['plugin'] ) ) continue;
+
+        $plugin_data = get_plugin_data( WP_PLUGIN_DIR.'/'.$item['plugin'], false, true );
+
+        if( ! $plugin_data[ 'Version' ] ) continue;
+        if( version_compare( $plugin_data['Version'], '3', '>=' ) ) continue;
+
+        /*
+         * There are non-compatible add-ons installed.
+         */
+
+        return FALSE;
+    }
+
+    return TRUE;
+}
+

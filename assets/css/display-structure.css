@@ -58,12 +58,18 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-above > input,
 .nf-fields .label-above textarea,
 .nf-fields .label-above select,
+.nf-fields .label-above .pikaday__container,
+.nf-fields .label-above .pikaday__display,
 .nf-fields .label-below > input,
 .nf-fields .label-below textarea,
 .nf-fields .label-below select,
+.nf-fields .label-below .pikaday__container,
+.nf-fields .label-below .pikaday__display,
 .nf-fields .label-hidden > input,
 .nf-fields .label-hidden textarea,
-.nf-fields .label-hidden select {
+.nf-fields .label-hidden select,
+.nf-fields .label-hidden .pikaday__container,
+.nf-fields .label-hidden .pikaday__display {
   width: 100%; }
 
 .nf-fields .label-above input[type="submit"],
@@ -83,8 +89,11 @@ Make sure all Ninja Forms label positons function properly
     display: inline-block; }
   .nf-fields .label-right > input,
   .nf-fields .label-right textarea,
-  .nf-fields .label-right select {
+  .nf-fields .label-right select,
+  .nf-fields .label-right .pikaday__container {
     width: 50%; }
+  .nf-fields .label-right .pikaday__display {
+    width: 100%; }
   .nf-fields .label-right > input[type=radio],
   .nf-fields .label-right input[type=checkbox] {
     width: auto; }
@@ -105,9 +114,12 @@ Make sure all Ninja Forms label positons function properly
     width: 49%; }
   .nf-fields .label-left > input,
   .nf-fields .label-left textarea,
-  .nf-fields .label-left select {
+  .nf-fields .label-left select,
+  .nf-fields .label-left .pikaday__container {
     float: right;
     width: 49%; }
+  .nf-fields .label-left .pikaday__display {
+    width: 100%; }
   .nf-fields .label-left > input[type=radio],
   .nf-fields .label-left > input[type=checkbox] {
     float: none;

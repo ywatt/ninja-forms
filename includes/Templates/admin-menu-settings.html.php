@@ -33,27 +33,26 @@
                                                 break;
                                             case 'desc' :
                                                 echo $setting[ 'value' ];
-                                                echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                                 break;
                                             case 'textbox' :
                                                 echo "<input type='text' class='code widefat' name='{$setting['id']}' id='{$setting['id']}' value='{$setting['value']}'>";
-                                                echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                                 break;
                                             case 'checkbox' :
                                                 $checked = ( $setting[ 'value' ] ) ? 'checked' : '';
                                                 echo "<input type='hidden' name='{$setting['id']}' value='0'>";
                                                 echo "<input type='checkbox' name='{$setting['id']}' value='1' id='{$setting['id']}' class='widefat' $checked>";
-                                                echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                                 break;
                                             case 'select' :
-                                                echo "<select name='{$setting['id']}'
-                                                id='{$setting['id']}'>";
+                                                echo "<select name='{$setting['id']}' id='{$setting['id']}'>";
                                                     foreach( $setting['options'] as $option ) {
                                                         $selected = ( $setting['value'] == $option['value'] ) ? 'selected="selected"' : '';
                                                         echo "<option value='{$option['value']}' {$selected}>{$option['label']}</option>";
                                                     }
                                                 echo "</select>";
                                                 break;
+                                        }
+                                        if( isset( $setting[ 'desc' ] ) ) {
+                                            echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                         }
                                     ?>
                                     <?php

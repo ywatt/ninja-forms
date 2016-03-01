@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 3.0-Beta-1-SMcCoy
+Version: 3.0-Beta
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -12,11 +12,40 @@ Domain Path: /lang/
 Copyright 2015 WP Ninjas.
 */
 
-if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
+new NF_VersionSwitcher();
+
+if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2to3' ] ) ) {
 
     include 'deprecated/ninja-forms.php';
 
 } else {
+
+    add_action( 'wp_ajax_ninja_forms_ajax_migrate_database', 'ninja_forms_ajax_migrate_database' );
+    function ninja_forms_ajax_migrate_database(){
+        $migrations = new NF_Database_Migrations();
+        $migrations->nuke( true, true );
+        $migrations->migrate();
+        echo json_encode( array( 'migrate' => 'true' ) );
+        wp_die();
+    }
+
+    add_action( 'wp_ajax_ninja_forms_ajax_import_form', 'ninja_forms_ajax_import_form' );
+    function ninja_forms_ajax_import_form(){
+        $import = stripslashes( $_POST[ 'import' ] ); // TODO: How to sanitize serialized string?
+        $form_id = ( isset( $_POST[ 'formID' ] ) ) ? absint( $_POST[ 'formID' ] ) : '';
+
+        Ninja_Forms()->form()->import_form( $import, $form_id );
+
+        if( isset( $_POST[ 'flagged' ] ) && $_POST[ 'flagged' ] ){
+            $form = Ninja_Forms()->form( $form_id )->get();
+            $form->update_setting( 'lock', TRUE );
+            $form->save();
+        }
+
+
+        echo json_encode( array( 'export' => $_POST[ 'import' ], 'import' => $import ) );
+        wp_die();
+    }
 
     /**
      * Class Ninja_Forms
@@ -148,6 +177,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
                 self::$instance->menus[ 'system_status']    = new NF_Admin_Menus_SystemStatus();
                 self::$instance->menus[ 'submissions']      = new NF_Admin_Menus_Submissions();
                 self::$instance->menus[ 'import-export']    = new NF_Admin_Menus_ImportExport();
+                self::$instance->menus[ 'update']           = new NF_Admin_Menus_Update();
 
                 /*
                  * Admin menus used for building out the admin UI
@@ -461,14 +491,8 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
          * TODO: Move to a permanent home
          */
         public function activation() {
-            $mock_data = new NF_Database_MockData();
-            $mock_data->saved_fields();
-            $mock_data->form_blank_form();
-            $mock_data->form_contact_form_1();
-            $mock_data->form_contact_form_2();
-            $mock_data->form_email_submission();
-            $mock_data->form_kitchen_sink();
-//            $mock_data->form_long_form();
+            $migrations = new NF_Database_Migrations();
+            $migrations->migrate();
         }
 
     } // End Class Ninja_Forms
@@ -517,5 +541,45 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
             <p>Please submit all <strong>feedback</strong> on our <a href="http://developer.ninjaforms.com/slack/">Slack group</a></p>
         </div>
         <?php
+    }
+}
+
+final class NF_VersionSwitcher
+{
+    public function __construct()
+    {
+        if( isset( $_GET[ 'nf-switcher' ] ) ){
+            switch( $_GET[ 'nf-switcher' ] ){
+                case 'rollback':
+                    update_option( 'ninja_forms_load_deprecated', TRUE );
+                    break;
+                case 'upgrade':
+                    update_option( 'ninja_forms_load_deprecated', FALSE );
+                    break;
+            }
+        }
+        add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 999 );
+    }
+    public function admin_bar_menu( $wp_admin_bar )
+    {
+        $args = array(
+            'id'    => 'nf',
+            'title' => 'Ninja Forms',
+            'href'  => '#',
+        );
+        $wp_admin_bar->add_node( $args );
+        $args = array(
+            'id' => 'nf_switcher',
+            'href' => admin_url(),
+            'parent' => 'nf'
+        );
+        if( ! get_option( 'ninja_forms_load_deprecated' ) ) {
+            $args[ 'title' ] = 'Rollback to 2.9.x';
+            $args[ 'href' ] .= '?nf-switcher=rollback';
+        } else {
+            $args[ 'title' ] = 'Upgrade to 3.0.x';
+            $args[ 'href' ] .= '?nf-switcher=upgrade';
+        }
+        $wp_admin_bar->add_node($args);
     }
 }

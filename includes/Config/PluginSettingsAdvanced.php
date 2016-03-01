@@ -43,4 +43,31 @@ return apply_filters( 'ninja_forms_plugin_settings_advanced', array(
         'desc'  => __( 'Never see an admin notice on the dashboard from Ninja Forms. Uncheck to see them again.', 'ninja-forms' ),
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Disable Opinionated Styles
+    |--------------------------------------------------------------------------
+    */
+
+    'disable_opinionated_styles' => array(
+        'id'    => 'disable_opinionated_styles',
+        'type'  => 'checkbox',
+        'label' => __( 'Disable Opinionated Styles', 'ninja-forms' ),
+        'desc'  => __( 'Do not use default Ninja Forms styling conventions.', 'ninja-forms' ),
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rollback to v2.9.x
+    |--------------------------------------------------------------------------
+    */
+
+    'rollback' => array(
+        'id'    => 'rollback',
+        'type'  => 'html',
+        'html' => '<a href="' . admin_url( 'admin.php?page=ninja-forms&nf-switcher=rollback' ) . '" class="button">' . __( 'Rollback', 'ninja-forms' ) . '</a>',
+        'label' => __( 'Rollback to v2.9.x', 'ninja-forms' ),
+        'desc'  => __( 'Rollback to the most recent 2.9.x release.', 'ninja-forms' ),
+    ),
+
 ));

@@ -53,8 +53,8 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
         $sent = wp_mail(
             $action_settings['to'],
-            $action_settings['subject'],
-            $action_settings['message'],
+            $action_settings['email_subject'],
+            $action_settings['email_message'],
             $headers,
             $attachments
         );
@@ -71,7 +71,7 @@ final class NF_Actions_Email extends NF_Abstracts_Action
     {
         $headers = array();
 
-        $headers[] = 'Content-Type: text/' . $settings[ 'format' ];
+        $headers[] = 'Content-Type: text/' . $settings[ 'email_format' ];
         $headers[] = 'charset=UTF-8';
 
         $headers[] = $this->_format_from( $settings );

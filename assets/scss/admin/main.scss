@@ -31,3 +31,7 @@
         display: block;
     }
 }
+
+#the-list tr.flagged th:first-child {
+    border-left: 5px solid yellow;
+}

@@ -5,7 +5,7 @@
     }
 }
 
-.nf-element {
+.ninja-forms-field {
     background: #f7f7f7;
     border: 1px solid #eaeaea;
     &:focus {
@@ -16,7 +16,7 @@
 }
 
 .nf-error {
-    .nf-element {
+    .ninja-forms-field {
         border-color: red;
     }
     .nf-error-msg {
