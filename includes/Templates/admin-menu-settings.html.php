@@ -33,17 +33,17 @@
                                                 break;
                                             case 'desc' :
                                                 echo $setting[ 'value' ];
-                                                echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                                 break;
                                             case 'textbox' :
                                                 echo "<input type='text' class='code widefat' name='{$setting['id']}' id='{$setting['id']}' value='{$setting['value']}'>";
-                                                echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                                 break;
                                             case 'checkbox' :
                                                 $checked = ( $setting[ 'value' ] ) ? 'checked' : '';
                                                 echo "<input type='hidden' name='{$setting['id']}' value='0'>";
                                                 echo "<input type='checkbox' name='{$setting['id']}' value='1' id='{$setting['id']}' class='widefat' $checked>";
-                                                echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
+                                        }
+                                        if( isset( $setting[ 'desc' ] ) ) {
+                                            echo "<p class='description'>" . $setting[ 'desc' ] . "</p>";
                                         }
                                     ?>
                                     <?php

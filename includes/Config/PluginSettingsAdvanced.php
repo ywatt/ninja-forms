@@ -43,4 +43,18 @@ return apply_filters( 'ninja_forms_plugin_settings_advanced', array(
         'desc'  => __( 'Never see an admin notice on the dashboard from Ninja Forms. Uncheck to see them again.', 'ninja-forms' ),
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Rollback to v2.9.x
+    |--------------------------------------------------------------------------
+    */
+
+    'disable_admin_notices' => array(
+        'id'    => 'rollback',
+        'type'  => 'html',
+        'html' => '<a href="#" class="button">' . __( 'Rollback', 'ninja-forms' ) . '</a>',
+        'label' => __( 'Rollback to v2.9.x', 'ninja-forms' ),
+        'desc'  => __( 'Rollback to the most recent 2.9.x release.', 'ninja-forms' ),
+    ),
+
 ));
