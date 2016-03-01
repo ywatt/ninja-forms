@@ -65,9 +65,11 @@ jQuery(document).ready(function($) {
             $.post( ajaxurl, { action: 'ninja_forms_upgrade_check', formID: form.id }, function( response ) {
 
                 var icon = ( response.canUpgrade ) ? 'yes' : 'flag';
+                var flagged = ( response.canUpgrade ) ? 0 : 1;
                 that.updateForm( form.id, 'title', response.title );
                 that.updateForm( form.id, 'icon', icon );
                 that.updateForm( form.id, 'checked', true );
+                that.updateForm( form.id, 'flagged', flagged );
                 that.updateTable();
             }, 'json' );
         },
@@ -118,7 +120,7 @@ jQuery(document).ready(function($) {
         convertForm: function( form ) {
             var app =  this;
             $.post(ajaxurl, {action: 'nfThreeUpgrade_GetSerializedForm', formID: form.id}, function ( formExport ) {
-                $.post(ajaxurl, { nf2to3: 1, action: 'ninja_forms_ajax_import_form', formID: form.id, import: formExport.serialized }, function ( formImport ) {
+                $.post(ajaxurl, { nf2to3: 1, action: 'ninja_forms_ajax_import_form', formID: form.id, import: formExport.serialized, flagged: form.flagged }, function ( formImport ) {
                     form.converted = true;
                     form.icon = 'yes';
                     app.updateTable();

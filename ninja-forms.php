@@ -35,6 +35,14 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
         $form_id = ( isset( $_POST[ 'formID' ] ) ) ? absint( $_POST[ 'formID' ] ) : '';
 
         Ninja_Forms()->form()->import_form( $import, $form_id );
+
+        if( isset( $_POST[ 'flagged' ] ) && $_POST[ 'flagged' ] ){
+            $form = Ninja_Forms()->form( $form_id )->get();
+            $form->update_setting( 'lock', TRUE );
+            $form->save();
+        }
+
+
         echo json_encode( array( 'export' => $_POST[ 'import' ], 'import' => $import ) );
         wp_die();
     }
