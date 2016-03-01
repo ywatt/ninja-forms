@@ -20,7 +20,6 @@ define( [], function() {
 			
 			// Get our parent field type.
 			var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', this.get( 'type' ) );
-			console.log( this.get( 'type' ) );
 			var parentType = fieldType.get( 'parentType' );
 
 			// Loop through our field type "settingDefaults" and add any default settings.
