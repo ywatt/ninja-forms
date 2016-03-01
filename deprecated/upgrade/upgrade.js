@@ -102,10 +102,16 @@ jQuery(document).ready(function($) {
             console.log( 'HERE' );
             console.log( app );
             app.step = 'converting';
-            _.each( app.forms, function( form ) {
+
+            $.post( ajaxurl, { nf2to3: 1, action: 'ninja_forms_ajax_migrate_database' }, function( response ) {
+                _.each(app.forms, function (form) {
+                    this.convertForm(form);
+                }, app );
+            });
+
+            _.each(app.forms, function (form) {
                 form.icon = 'update';
-                this.convertForm( form );
-            }, this );
+            }, app );
             app.updateTable();
         },
 
