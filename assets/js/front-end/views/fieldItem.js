@@ -181,6 +181,24 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 				getHelpText: function() {
 					this.help_text = jQuery( this.help_text ).html();
 					return this.help_text.replace( /"/g, "&quot;" );
+				},
+
+				maybeRenderHelp: function() {
+					var check_text = '<p>' + this.help_text + '</p>';
+					if ( 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
+						return '<span class="dashicons dashicons-admin-comments nf-help" data-text="' + this.getHelpText() + '"></span>';
+					} else {
+						return '';
+					}
+				},
+
+				renderDescText: function() {
+					var check_text = '<p>' + this.desc_text + '</p>';
+					if ( 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
+						return this.desc_text;
+					} else {
+						return '';
+					}
 				}
 			};
 		},
