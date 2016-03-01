@@ -159,6 +159,9 @@ Header and Nav for Ninja Forms App
     content: "";
     display: block; }
 
+#the-list tr.flagged th:first-child {
+  border-left: 5px solid yellow; }
+
 .nf-fields-empty {
   padding: 40px 20%; }
   .nf-fields-empty h3 {
