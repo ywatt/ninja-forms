@@ -99,6 +99,10 @@ class NF_Admin_CPT_Submission
         foreach( $fields as $field ) {
             $id = $field->get_id();
             $label = $field->get_setting( 'label' );
+
+            $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
+            if( in_array( $field->get_setting( 'type' ), array_values( $hidden_field_types ) ) ) continue;
+
             $columns[ $id ] = $label;
         }
 
