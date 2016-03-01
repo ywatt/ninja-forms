@@ -331,7 +331,11 @@ final class NF_Display_Render
     public static function enqueue_scripts()
     {
         wp_enqueue_style( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure.css' );
-        wp_enqueue_style( 'nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css' );
+
+        if( ! Ninja_Forms()->get_setting( 'disable_opinionated_styles' ) ) {
+            wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css');
+        }
+
         wp_enqueue_style( 'pikaday-responsive', Ninja_Forms::$url . 'assets/css/pikaday-package.css' );
 
         wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
