@@ -176,6 +176,11 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 					} else {
 						return '';
 					}
+				},
+
+				getHelpText: function() {
+					this.help_text = jQuery( this.help_text ).html();
+					return this.help_text.replace( /"/g, "&quot;" );
 				}
 			};
 		},

@@ -457,6 +457,34 @@ return apply_filters( 'ninja_forms_field_settings', array(
     ),
 
     /*
+     * HELP TEXT
+     */
+
+    'help_text'   => array(
+        'name'      => 'help_text',
+        'type'      => 'rte',
+        'label'     => __( 'Help Text', 'ninja-forms' ),
+        'width'     => 'full',
+        'group'     => 'advanced',
+        'value'     => '',
+        'help'      => __( 'Shown to users as a hover.', 'ninja-forms' ),        
+    ),
+    
+    /*
+     * HELP TEXT
+     */
+
+    'help_text'   => array(
+        'name'      => 'help_text',
+        'type'      => 'rte',
+        'label'     => __( 'Help Text', 'ninja-forms' ),
+        'width'     => 'full',
+        'group'     => 'advanced',
+        'value'     => '',
+        'help'      => __( 'Shown to users as a hover.', 'ninja-forms' ),        
+    ),
+
+    /*
     |--------------------------------------------------------------------------
     | Un-Grouped Settings
     |--------------------------------------------------------------------------

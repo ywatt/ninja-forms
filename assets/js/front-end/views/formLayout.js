@@ -11,7 +11,7 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
 		},
 
 		initialize: function() {
-			nfRadio.channel( 'form' ).reply( 'get:el', this.getEl, this );
+			nfRadio.channel( 'form-' + this.model.get( 'id' ) ).reply( 'get:el', this.getEl, this );
 		},
 
 		onRender: function() {

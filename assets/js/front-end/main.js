@@ -41,6 +41,7 @@ jQuery( document ).ready( function( $ ) {
 				var formCollection = nfRadio.channel( 'app' ).request( 'get:forms' );
 				_.each( formCollection.models, function( form, index ) {
 					var layoutView = new mainLayout( { model: form, fieldCollection: form.get( 'fields' ) } );			
+					nfRadio.channel( 'form' ).trigger( 'render:view', layoutView );
 				} );
 			}
 		});

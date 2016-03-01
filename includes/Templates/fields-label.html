@@ -1,3 +1,3 @@
 <script id="nf-tmpl-field-label" type="text/template">
-	<label for="nf-field-<%= id %>"><%= label %> <%= ( 'undefined' != typeof required && 1 == required ) ? '*' : '' %></label>
+	<label for="nf-field-<%= id %>"><%= label %> <%= ( 'undefined' != typeof required && 1 == required ) ? '*' : '' %> <%= ( '' != help_text ) ? '<span class="dashicons dashicons-admin-comments nf-help" data-text="' + getHelpText() + '"></span>' : '' %></label>
 </script>
