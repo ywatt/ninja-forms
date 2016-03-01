@@ -1,3 +1,17 @@
 <script id="nf-tmpl-field-label" type="text/template">
+	<%
+	/*
+	 * Render our description text if the position is set to before label.
+	 */
+	%>
+	<%= ( 'before_label' == desc_pos ) ? desc_text : '' %>
+
 	<label for="nf-field-<%= id %>"><%= label %> <%= ( 'undefined' != typeof required && 1 == required ) ? '*' : '' %> <%= ( '' != help_text ) ? '<span class="dashicons dashicons-admin-comments nf-help" data-text="' + getHelpText() + '"></span>' : '' %></label>
+
+	<%
+	/*
+	 * Render our description text if the position is set to after label.
+	 */
+	%>
+	<%= ( 'after_label' == desc_pos ) ? desc_text : '' %>
 </script>

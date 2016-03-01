@@ -446,43 +446,99 @@ return apply_filters( 'ninja_forms_field_settings', array(
      * ADMIN LABEL
      */
     
-    'admin_label'   => array(
-        'name'      => 'admin_label',
-        'type'      => 'textbox',
-        'label'     => __( 'Admin Label', 'ninja-forms' ),
-        'width'     => 'full',
-        'group'     => 'administration',
-        'value'     => '',
-        'help'      => __( 'Label used when viewing and exporting submissions.', 'ninja-forms' ),        
+    'admin_label'           => array(
+        'name'              => 'admin_label',
+        'type'              => 'textbox',
+        'label'             => __( 'Admin Label', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'administration',
+        'value'             => '',
+        'help'              => __( 'Label used when viewing and exporting submissions.', 'ninja-forms' ),        
     ),
 
     /*
-     * HELP TEXT
+     * HELP
      */
 
-    'help_text'   => array(
-        'name'      => 'help_text',
-        'type'      => 'rte',
-        'label'     => __( 'Help Text', 'ninja-forms' ),
-        'width'     => 'full',
-        'group'     => 'advanced',
-        'value'     => '',
-        'help'      => __( 'Shown to users as a hover.', 'ninja-forms' ),        
+    'help'           => array(
+        'name'              => 'help',
+        'type'              => 'fieldset',
+        'label'             => __( 'Help Text', 'ninja-forms' ),
+        'group'             => 'advanced',
+        'help'              => __( 'Shown to users as a hover.', 'ninja-forms' ),  
+        'settings'          => array(
+            /*
+             * HELP TEXT
+             */
+
+            'help_text'             => array(
+                'name'              => 'help_text',
+                'type'              => 'rte',
+                'label'             => '',
+                'width'             => 'full',
+                'group'             => 'advanced',
+                'value'             => '',
+            ),
+        ),
     ),
     
+    
     /*
-     * HELP TEXT
+     * DESCRIPTION
      */
+    'description'           => array(
+        'name'              => 'description',
+        'type'              => 'fieldset',
+        'label'             => __( 'Description', 'ninja-forms' ),
+        'group'             => 'advanced',
+        'settings'          => array(
+            /*
+             * DESCRIPTION TEXT
+             */
 
-    'help_text'   => array(
-        'name'      => 'help_text',
-        'type'      => 'rte',
-        'label'     => __( 'Help Text', 'ninja-forms' ),
-        'width'     => 'full',
-        'group'     => 'advanced',
-        'value'     => '',
-        'help'      => __( 'Shown to users as a hover.', 'ninja-forms' ),        
+            'desc_text'           => array(
+                'name'              => 'desc_text',
+                'type'              => 'rte',
+                'label'             => '',
+                'width'             => 'full',   
+            ),
+
+            /*
+             * DESCRIPTION POSITION
+             */
+
+            'desc_pos'              => array(
+                'name'              => 'desc_pos',
+                'type'              => 'select',
+                'options'           => array(
+                    array(
+                        'label'     => __( 'None', 'ninja-forms' ),
+                        'value'     => 'none',
+                    ),            
+                    array(
+                        'label'     => __( 'Before Everything', 'ninja-forms' ),
+                        'value'     => 'before_everything',
+                    ),           
+                    array(
+                        'label'     => __( 'Before Label', 'ninja-forms' ),
+                        'value'     => 'before_label',
+                    ),            
+                    array(
+                        'label'     => __( 'After Label', 'ninja-forms' ),
+                        'value'     => 'after_label',
+                    ),            
+                    array(
+                        'label'     => __( 'After Everything', 'ninja-forms' ),
+                        'value'     => 'after_everything',
+                    ),
+                ),
+                'label'             => __( 'Display Position', 'ninja-forms' ),
+                'width'             => 'full',
+            ),
+
+        ),
     ),
+    
 
     /*
     |--------------------------------------------------------------------------
