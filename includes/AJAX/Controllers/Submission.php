@@ -8,7 +8,9 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     public function __construct()
     {
-        if( isset( $_POST['formData'] ) ) $this->_form_data = json_decode( stripslashes( $_POST['formData'] ), TRUE  );
+        if( isset( $_POST['formData'] ) ) $this->_form_data = json_decode( $_POST['formData'], TRUE  );
+
+
         add_action( 'wp_ajax_nf_ajax_submit',   array( $this, 'submit' )  );
         add_action( 'wp_ajax_nopriv_nf_ajax_submit',   array( $this, 'submit' )  );
 
@@ -22,7 +24,12 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         if( ! $this->_form_data ) {
 
-            $this->_errors[] = 'Form Data not found.';
+            if( json_last_error() ){
+                $this->_errors[] = json_last_error_msg();
+            } else {
+                $this->_errors[] = __( 'An unexpected error occurred.', 'ninja-forms' );
+            }
+
             $this->_respond();
         }
 
