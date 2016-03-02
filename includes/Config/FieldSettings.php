@@ -335,7 +335,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'type' => 'fieldset',
         'label' => __( 'Custom Class Names', 'ninja-forms' ),
         'width' => 'full',
-        'group' => 'advanced',
+        'group' => 'display',
         'settings' => array(
             array(
                 'name' => 'wrapper_class',
@@ -463,8 +463,8 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'name'              => 'help',
         'type'              => 'fieldset',
         'label'             => __( 'Help Text', 'ninja-forms' ),
-        'group'             => 'advanced',
-        'help'              => __( 'Shown to users as a hover.', 'ninja-forms' ),  
+        'group'             => 'display',
+        'help'              => __( 'Shown to users as a hover.', 'ninja-forms' ),
         'settings'          => array(
             /*
              * HELP TEXT
@@ -489,7 +489,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'name'              => 'description',
         'type'              => 'fieldset',
         'label'             => __( 'Description', 'ninja-forms' ),
-        'group'             => 'advanced',
+        'group'             => 'display',
         'settings'          => array(
             /*
              * DESCRIPTION TEXT
