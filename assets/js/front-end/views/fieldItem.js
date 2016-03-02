@@ -199,6 +199,17 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 					} else {
 						return '';
 					}
+				},
+
+				maybeChecked: function() {
+					if( 'checkbox' == this.type
+						&& 'undefined' != typeof this.default_value
+						&& 'checked' == this.default_value )
+					{
+						return ' checked';
+					} else {
+						return '';
+					}
 				}
 			};
 		},
