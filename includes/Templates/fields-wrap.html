@@ -30,7 +30,7 @@
 		 * Render our description text if the position is set to before everything.
 		 */
 		%>
-		 <%= ( 'before_everything' == desc_pos ) ? renderDescText() : '' %> 
+		 <%= ( 'undefined' != typeof desc_pos && 'before_everything' == desc_pos ) ? renderDescText() : '' %>
 		<%
 		/*
 		 * Render our label if the position is set to above or left.
@@ -54,7 +54,7 @@
 		 * Render our description text if the position is set to after everything.
 		 */
 		%>
-		 <%= ( 'after_everything' == desc_pos ) ? renderDescText() : '' %> 
+		 <%= ( 'undefined' != typeof desc_pos && 'after_everything' == desc_pos ) ? renderDescText() : '' %>
 		<%
 		/*
 		 * Render our error section if we have an error.
