@@ -394,6 +394,10 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             }
         }
 
+        if( 'timed_submit' == $field[ 'type' ] ) {
+            $field[ 'type' ] = 'submit';
+        }
+
         return $field;
     }
 
