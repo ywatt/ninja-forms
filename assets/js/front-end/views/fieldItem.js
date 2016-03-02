@@ -171,7 +171,7 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 				},
 
 				maybeInputLimit: function() {
-					if ( '' != jQuery.trim( this.input_limit ) ) {
+					if ( 'characters' == this.input_limit_type && '' != jQuery.trim( this.input_limit ) ) {
 						return 'maxlength="' + this.input_limit + '"';
 					} else {
 						return '';
