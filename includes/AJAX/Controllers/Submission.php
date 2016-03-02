@@ -24,7 +24,10 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         if( ! $this->_form_data ) {
 
-            if( json_last_error() ){
+            //
+            if( function_exists( 'json_last_error' ) // Function not supported in php5.2
+                && function_exists( 'json_last_error_msg' )// Function not supported in php5.2
+                && json_last_error() ){
                 $this->_errors[] = json_last_error_msg();
             } else {
                 $this->_errors[] = __( 'An unexpected error occurred.', 'ninja-forms' );
