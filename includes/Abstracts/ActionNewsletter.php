@@ -138,7 +138,7 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
             'label' => __( 'List Field Mapping', 'ninja-forms' ),
             'type' => 'fieldset',
             'group' => 'primary',
-            'settings' => []
+            'settings' => array()
         );
 
         $this->_settings[ $prefix . 'newsletter_list_groups' ] = array(
@@ -146,7 +146,7 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
             'label' => __( 'Interest Groups', 'ninja-forms' ),
             'type' => 'fieldset',
             'group' => 'primary',
-            'settings' => []
+            'settings' => array()
         );
     }
 
