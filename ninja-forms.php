@@ -377,7 +377,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
 
         public function get_settings()
         {
-            return $this->settings;
+            return ( is_array( $this->settings ) ) ? $this->settings : array();
         }
 
         public function update_setting( $key, $value )
