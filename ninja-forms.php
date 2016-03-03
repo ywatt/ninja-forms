@@ -262,6 +262,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
                 self::$instance->settings = get_option( 'ninja_forms_settings' );
 
                 /*
+                 * Admin Notices System
+                 */
+                self::$instance->notices = new NF_Admin_Notices();
+
+                /*
                  * Activation Hook
                  * TODO: Move to a permanent home.
                  */
@@ -271,9 +276,18 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
                 new NF_Admin_Metaboxes_AppendAForm();
             }
 
+            add_action( 'admin_notices', array( self::$instance, 'admin_notices' ) );
+
             add_action( 'plugins_loaded', array( self::$instance, 'plugins_loaded' ) );
 
             return self::$instance;
+        }
+
+        public function admin_notices()
+        {
+            // Notices filter and run the notices function.
+            $admin_notices = Ninja_Forms()->config( 'AdminNotices' );
+            self::$instance->notices->admin_notice( apply_filters( 'nf_admin_notices', $admin_notices ) );
         }
 
         public function plugins_loaded()
