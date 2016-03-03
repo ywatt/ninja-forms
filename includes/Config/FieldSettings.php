@@ -782,6 +782,45 @@ return apply_filters( 'ninja_forms_field_settings', array(
 
     /*
     |--------------------------------------------------------------------------
+    | Textarea Settings
+    |--------------------------------------------------------------------------
+    */
+    
+    'textarea_rte'          => array(
+        'name'              => 'textarea_rte',
+        'type'              => 'toggle',
+        'label'             => __( 'Show Rich Text Editor', 'ninja-forms' ),
+        'width'             => 'one-third',
+        'group'             => 'advanced',
+        'value'             => '',
+    ),  
+
+    'textarea_media'          => array(
+        'name'              => 'textarea_media',
+        'type'              => 'toggle',
+        'label'             => __( 'Show Media Upload Button', 'ninja-forms' ),
+        'width'             => 'one-third',
+        'group'             => 'advanced',
+        'value'             => '',
+        'deps'              => array(
+            'textarea_rte'  => 1
+        )
+    ),
+
+    'disable_rte_mobile'    => array(
+        'name'              => 'disable_rte_mobile',
+        'type'              => 'toggle',
+        'label'             => __( 'Disable Rich Text Editor on Mobile', 'ninja-forms' ),
+        'width'             => 'one-third',
+        'group'             => 'advanced',
+        'value'             => '',
+        'deps'              => array(
+            'textarea_rte'  => 1
+        )
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
     | Submit Button Settings
     |--------------------------------------------------------------------------
     */

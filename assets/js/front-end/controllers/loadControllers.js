@@ -25,7 +25,8 @@ define(
 		'controllers/calculations',
 		'controllers/fieldDate',
 		'controllers/fieldRecaptcha',
-		'controllers/helpText'
+		'controllers/helpText',
+		'controllers/fieldTextareaRTE'
 	],
 	function(
 		FormData,
@@ -53,7 +54,8 @@ define(
 		Calculations,
 		FieldDate,
 		FieldRecaptcha,
-		HelpText
+		HelpText,
+		FieldTextareaRTE
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -69,6 +71,7 @@ define(
 				new FieldQuantity();
 				new FieldRecaptcha();
 				new HelpText();
+				new FieldTextareaRTE();
 				/**
 				 * Misc controllers
 				 */
