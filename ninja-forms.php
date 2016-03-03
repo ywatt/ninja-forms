@@ -19,6 +19,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
 
     include 'deprecated/ninja-forms.php';
 
+    register_activation_hook( __FILE__, 'ninja_forms_activation_deprecated' );
+    function ninja_forms_activation_deprecated( $network_wide ){
+        include_once 'deprecated/includes/activation.php';
+        ninja_forms_activation( $network_wide );
+    }
+
 } else {
 
     add_action( 'wp_ajax_ninja_forms_ajax_migrate_database', 'ninja_forms_ajax_migrate_database' );

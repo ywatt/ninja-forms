@@ -369,17 +369,25 @@ class Ninja_Forms {
             // Include our download all submissions php files
             require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
 
-            // Include Upgrade Base Class
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade.php');
 
-            // Include Upgrades
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms-reset.php' );
+            $upgraded_from = get_option( 'nf_version_upgraded_from', FALSE );
+            if( $upgraded_from && version_compare( $upgraded_from, '2.9', '<=') ) {
 
-            // Include Upgrade Handler
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-handler-page.php');
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade-handler.php');
+                echo "<pre>";
+                var_dump($upgraded_from);
+                echo "</pre>";
+                // Include Upgrade Base Class
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade.php');
+
+                // Include Upgrades
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms-reset.php' );
+
+                // Include Upgrade Handler
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-handler-page.php');
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade-handler.php');
+            }
         }
 
         // Include our upgrade files.
