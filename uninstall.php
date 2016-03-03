@@ -83,7 +83,7 @@ if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
 	}
 
 } else {
-
+	require_once plugin_dir_path() . '/includes/Database/Migrations.php';
 	$migrations = new NF_Database_Migrations();
 	$migrations->nuke(TRUE, TRUE);
 
