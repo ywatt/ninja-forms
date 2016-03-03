@@ -10,11 +10,6 @@ final class NF_VersionSwitcher
     {
         $this->listener();
         add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 999 );
-
-        // Init Freemius and override plugin's version.
-        if ( ! has_filter( 'fs_plugin_version_ninja-forms' ) ) {
-            add_filter( 'fs_plugin_version_ninja-forms', 'nf_plugin_version' );
-        }
     }
 
     public function listener()
@@ -88,7 +83,7 @@ final class NF_VersionSwitcher
         // Turn Freemius on.
         update_option( 'ninja_forms_freemius', 1 );
 
-        nf_override_plugin_version();
+        $this->override_plugin_version();
 
         if ( ! $this->freemius()->is_registered() && $this->freemius()->has_api_connectivity() ) {
             if ( $this->freemius()->opt_in() ) {
@@ -118,4 +113,13 @@ final class NF_VersionSwitcher
         // Turn Freemius off.
         update_option( 'ninja_forms_freemius', 0 );
     }
+
+    public function override_plugin_version()
+    {
+        // Init Freemius and override plugin's version.
+        if ( ! has_filter( 'fs_plugin_version_ninja-forms' ) ) {
+            add_filter( 'fs_plugin_version_ninja-forms', 'nf_plugin_version' );
+        }
+    }
+
 }
