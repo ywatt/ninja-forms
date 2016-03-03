@@ -8,7 +8,12 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     public function __construct()
     {
-        if( isset( $_POST['formData'] ) ) $this->_form_data = json_decode( $_POST['formData'], TRUE  );
+        if( isset( $_POST['formData'] ) ) {
+            $this->_form_data = json_decode( $_POST['formData'], TRUE  );
+
+            // php5.2 fallback
+            if( ! $this->_form_data ) $this->_form_data = json_decode( stripslashes( $_POST['formData'] ), TRUE  );
+        }
 
 
         add_action( 'wp_ajax_nf_ajax_submit',   array( $this, 'submit' )  );
