@@ -258,6 +258,9 @@
 
 		$plugin_file = null;
 		for ( $i = 1, $bt = debug_backtrace(), $len = count( $bt ); $i < $len; $i ++ ) {
+
+			if( ! isset( $bt[ $i ]['file'] ) ) continue;
+
 			if ( in_array( fs_normalize_path( $bt[ $i ]['file'] ), $all_plugins_paths ) ) {
 				$plugin_file = $bt[ $i ]['file'];
 				break;
