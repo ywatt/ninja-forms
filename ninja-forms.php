@@ -533,30 +533,4 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
 
     Ninja_Forms();
 
-    add_action( 'admin_notices', 'nf_alpha_release_admin_notice', -1 );
-    function nf_alpha_release_admin_notice()
-    {
-        ?>
-        <style>
-            .nf-alpha-notice {
-                border-left: 4px solid #EF4748; /* Ninja Forms Red */
-            }
-            .nf-alpha-notice ul {
-                list-style-type: disc;
-                padding-left: 40px;
-            }
-        </style>
-        <div class="update-nag nf-alpha-notice">
-            <h3>Ninja Forms 3.0 - Beta</h3>
-            <p><strong>NOTICE:</strong> Installed is a Beta Candidate of Ninja Forms. This is <strong>not</strong> intended for production.</p>
-            <p>Please keep a few things in mind while exploring:</p>
-            <ul>
-                <li><strong>DO NOT</strong> attempt to install this release on a live website. (If this site falls in that category, remove this plugin)</li>
-            </ul>
-            <p>Please submit all <strong>feedback</strong> on our <a href="http://developer.ninjaforms.com/slack/">Slack group</a></p>
-        </div>
-        <?php
-    }
 }
-
-
