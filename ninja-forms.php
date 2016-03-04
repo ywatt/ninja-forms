@@ -568,6 +568,8 @@ final class NF_VersionSwitcher
                     update_option( 'ninja_forms_load_deprecated', TRUE );
                     break;
             }
+
+            header( 'Location: ' . admin_url( 'admin.php?page=ninja-forms' ) );
         }
     }
 
