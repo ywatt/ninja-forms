@@ -97,13 +97,15 @@ class NF_Admin_CPT_Submission
         $fields = Ninja_Forms()->form( $form_id )->get_fields();
 
         foreach( $fields as $field ) {
-            $id = $field->get_id();
-            $label = $field->get_setting( 'label' );
 
             $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
             if( in_array( $field->get_setting( 'type' ), array_values( $hidden_field_types ) ) ) continue;
 
-            $columns[ $id ] = $label;
+            $id = $field->get_id();
+            $label = $field->get_setting( 'label' );
+            $admin_label = $field->get_setting( 'admin_label' );
+
+            $columns[ $id ] = ( $admin_label ) ? $admin_label : $label;
         }
 
         $columns['sub_date'] = __( 'Date', 'ninja-forms' );
