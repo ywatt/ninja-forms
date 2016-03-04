@@ -29,7 +29,7 @@ final class NF_MergeTags_Calcs extends NF_Abstracts_MergeTags
             'tag' => "{calc:$key}",
 //            'label' => __( '', 'ninja_forms' ),
             'callback' => $callback,
-            'calc_value' => $value
+            'calc_value' => Ninja_Forms()->eos()->solve( $value )
         );
     }
 

@@ -50,10 +50,6 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $this->process_fields();
 
-        if( isset( $this->_data[ 'settings' ][ 'calculations' ] ) ) {
-            $this->process_calculations( $this->_data[ 'settings' ][ 'calculations' ] );
-        }
-
         $this->process();
     }
 
@@ -73,8 +69,10 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         $field_merge_tags = Ninja_Forms()->merge_tags[ 'fields' ];
         $this->populate_field_merge_tags( $this->_data['fields'], $field_merge_tags );
 
-        $calcs_merge_tags = Ninja_Forms()->merge_tags[ 'calcs' ];
-        $this->populate_calcs_merge_tags( array(), $calcs_merge_tags );
+        if( isset( $this->_data[ 'settings' ][ 'calculations' ] ) ) {
+            $calcs_merge_tags = Ninja_Forms()->merge_tags[ 'calcs' ];
+            $this->populate_calcs_merge_tags( $this->_data[ 'settings' ][ 'calculations' ], $calcs_merge_tags );
+        }
 
         if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ) {
             $this->run_actions_preview();
@@ -83,14 +81,6 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         }
 
         $this->_respond();
-    }
-
-    protected function process_calculations( $calcs )
-    {
-        foreach( $calcs as $calc ) {
-            $tmp_key = $calc[ 'name' ] . ': ' . $calc[ 'calc' ];
-            $this->_data['calcs'][ $tmp_key ] = Ninja_Forms()->eos()->solve( $calc[ 'calc' ] );
-        }
     }
 
     protected function populate_field_merge_tags( $fields, $field_merge_tags )
@@ -105,10 +95,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     {
         foreach( $calcs as $calc ){
 
-            $calcs_merge_tags->set_merge_tags( '' /* ID */, '' /* VALUE */ );
-
-            if( ! isset( $calc[ 'key' ] ) ) continue;
-            $calcs_merge_tags->set_merge_tags(  '' /* ID */, '' /* VALUE */ ,  '' /* ID */, '' /* VALUE */  );
+            $calcs_merge_tags->set_merge_tags( $calc[ 'name' ], apply_filters( 'ninja_forms_calc_setting', $calc[ 'eq' ] ) );
         }
     }
 
