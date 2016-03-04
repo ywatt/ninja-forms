@@ -82,9 +82,11 @@ final class NF_Display_Render
         } else {
             foreach ($form_fields as $field) {
 
-                $field = apply_filters('ninja_forms_localize_fields', $field);
-
                 $field_type = $field->get_settings('type');
+
+                if( ! isset( Ninja_Forms()->fields[ $field_type ] ) ) continue;
+
+                $field = apply_filters('ninja_forms_localize_fields', $field);
 
                 $field_class = Ninja_Forms()->fields[$field_type];
 
@@ -231,6 +233,10 @@ final class NF_Display_Render
         } else {
             foreach ($form['fields'] as $field_id => $field) {
 
+                $field_type = $field['settings']['type'];
+
+                if( ! isset( Ninja_Forms()->fields[ $field_type ] ) ) continue;
+
                 $field['settings']['id'] = $field_id;
 
                 $field = apply_filters('ninja_forms_localize_fields_preview', $field);
@@ -242,8 +248,6 @@ final class NF_Display_Render
                 $display_after = apply_filters( 'ninja_forms_display_after_field_type_' . $field['settings'][ 'type' ], '' );
                 $display_after = apply_filters( 'ninja_forms_display_after_field_key_' . $field['settings'][ 'key' ], $display_after );
                 $field['settings'][ 'afterField' ] = $display_after;
-
-                $field_type = $field['settings']['type'];
 
                 foreach ($field['settings'] as $key => $setting) {
                     if (is_numeric($setting)) $field['settings'][$key] = floatval($setting);
