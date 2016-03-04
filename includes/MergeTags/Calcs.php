@@ -24,12 +24,18 @@ final class NF_MergeTags_Calcs extends NF_Abstracts_MergeTags
     {
         $callback = ( is_numeric( $key ) ) ? 'calc_' . $key : $key;
 
+        try {
+            $calculated_value = Ninja_Forms()->eos()->solve($value);
+        } catch( Exception $e ){
+            $calculated_value = FALSE;
+        }
+
         $this->merge_tags[ $callback ] = array(
             'id' => $key,
             'tag' => "{calc:$key}",
 //            'label' => __( '', 'ninja_forms' ),
             'callback' => $callback,
-            'calc_value' => Ninja_Forms()->eos()->solve( $value )
+            'calc_value' => $calculated_value
         );
     }
 
