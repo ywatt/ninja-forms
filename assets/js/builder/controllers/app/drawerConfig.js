@@ -12,6 +12,7 @@ define( [
 	'models/app/drawerCollection',
 	'views/fields/drawer/addField',
 	'views/app/drawer/editSettings',
+	'views/app/drawer/headerEditSettings',
 	'views/actions/drawer/addAction',
 	'views/app/drawer/contentViewChanges',
 	'views/app/drawer/headerViewChanges',
@@ -21,6 +22,7 @@ define( [
 		drawerCollection,
 		addFieldView,
 		editSettingsView,
+		editSettingsHeaderView,
 		addActionView,
 		viewChangesView,
 		viewChangesHeaderView,
@@ -48,6 +50,13 @@ define( [
 				},				
 				{
 					id: 'editSettings',
+
+					/*
+					 * TODO: Add filtering when editing settings. For now, removing them from settings.
+					 */
+					getHeaderView: function( data ) {
+						return new editSettingsHeaderView( data );
+					},
 
 					getContentView: function( data ) {
 						return new editSettingsView( data );
