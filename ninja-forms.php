@@ -161,11 +161,27 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
             if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Ninja_Forms ) ) {
                 self::$instance = new Ninja_Forms;
 
+                // Plugin Root File
+                if ( ! defined( 'NF_PLUGIN_FILE' ) )
+                    define( 'NF_PLUGIN_FILE', __FILE__ );
+
                 self::$dir = plugin_dir_path( __FILE__ );
+
+                // Plugin Folder Path
+                if ( ! defined( 'NF_PLUGIN_DIR' ) )
+                    define( 'NF_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
                 self::$url = plugin_dir_url( __FILE__ );
 
+                // Plugin Folder URL
+                if ( ! defined( 'NF_PLUGIN_URL' ) )
+                    define( 'NF_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+
                 update_option( 'ninja_forms_version', self::VERSION );
+
+                // Plugin version
+                if ( ! defined( 'NF_PLUGIN_VERSION' ) )
+                    define( 'NF_PLUGIN_VERSION', self::VERSION );
 
                 /*
                  * Register our autoloader
