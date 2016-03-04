@@ -106,6 +106,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
         $new_form->update_setting( 'title', $new_form_title );
 
+        $new_form->update_setting( 'lock', 0 );
+
         $new_form->save();
 
         $new_form_id = $new_form->get_id();
