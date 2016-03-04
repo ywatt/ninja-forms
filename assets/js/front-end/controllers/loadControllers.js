@@ -7,6 +7,7 @@ define(
 		'controllers/fieldCheckbox',
 		'controllers/fieldCheckboxList',
 		'controllers/fieldRadio',
+		'controllers/fieldNumber',
 		'controllers/mirrorField',
 		'controllers/confirmField',
 		'controllers/updateFieldModel',
@@ -35,6 +36,7 @@ define(
 		FieldCheckbox,
 		FieldCheckboxList,
 		FieldRadio,
+		FieldNumber,
 		MirrorField,
 		ConfirmField,
 		UpdateFieldModel,
@@ -63,6 +65,7 @@ define(
 				new FieldCheckbox();
 				new FieldCheckboxList();
 				new FieldRadio();
+				new FieldNumber();
 				new FieldSelect();
 				new FieldProduct();
 				new FieldTotal();
