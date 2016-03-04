@@ -19,7 +19,7 @@ class NF_Fields_Date extends NF_Fields_Textbox
 
     protected $_settings = array( 'date_default', 'date_format' );
 
-    protected $_settings_exclude = array( 'default', 'placeholder' );
+    protected $_settings_exclude = array( 'default', 'placeholder', 'input_limit_set' );
 
     public function __construct()
     {
