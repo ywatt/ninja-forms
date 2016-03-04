@@ -246,7 +246,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'type' => 'fieldset',
         'label' => __( 'Limit Input to this Number', 'ninja-forms' ),
         'width' => 'full',
-        'group' => 'advanced',
+        'group' => 'restrictions',
         'settings' => array(
             array(
                 'name' => 'input_limit',
