@@ -31,6 +31,9 @@ define( [], function() {
 			 * If we have an objectType set on our collection, then we're creating a model for the generic settings collection.
 			 * If we're using merge tags in this setting
 			 */
+
+			if( 'undefined' == typeof this.collection ) return;
+
 			if ( this.get( 'use_merge_tags' ) && 'undefined' != typeof this.collection.options.objectType ) {
 				this.listenTo( nfRadio.channel( 'app' ), 'update:fieldKey', this.updateKey );
 			}
