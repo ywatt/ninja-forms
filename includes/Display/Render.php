@@ -36,6 +36,11 @@ final class NF_Display_Render
         }
         $form = Ninja_Forms()->form( $form_id )->get();
 
+        if( $form->get_setting( 'lock' ) ){
+            echo __( 'This form is not available.', 'ninja-forms' );
+            return;
+        }
+
         $before_form = apply_filters( 'ninja_forms_display_before_form', '', $form_id );
         $form->update_setting( 'beforeForm', $before_form );
 
