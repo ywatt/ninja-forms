@@ -40,7 +40,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
         $import = stripslashes( $_POST[ 'import' ] ); // TODO: How to sanitize serialized string?
         $form_id = ( isset( $_POST[ 'formID' ] ) ) ? absint( $_POST[ 'formID' ] ) : '';
 
-        Ninja_Forms()->form()->import_form( $import, $form_id );
+        Ninja_Forms()->form()->import_form( $import, $form_id, TRUE );
 
         if( isset( $_POST[ 'flagged' ] ) && $_POST[ 'flagged' ] ){
             $form = Ninja_Forms()->form( $form_id )->get();

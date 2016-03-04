@@ -55,7 +55,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         return $last_seq_num;
     }
 
-    public static function import( array $import, $id = '' )
+    public static function import( array $import, $id = '', $is_conversion )
     {
         $import = apply_filters( 'ninja_forms_before_import_form', $import );
 
@@ -69,7 +69,14 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
         foreach( $import[ 'fields' ] as $settings ){
 
-            $field = Ninja_Forms()->form( $form_id )->field()->get();
+            if( $is_conversion ) {
+
+                $field_id = $settings[ 'id' ];
+
+                $field = Ninja_Forms()->form($form_id)->field( $field_id )->get();
+            } else {
+                $field = Ninja_Forms()->form($form_id)->field()->get();
+            }
 
             $settings[ 'parent_id' ] = $form_id;
 
@@ -78,7 +85,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
         foreach( $import[ 'actions' ] as $settings ){
 
-            $action = Ninja_Forms()->form( $form_id )->action()->get();
+            $action = Ninja_Forms()->form($form_id)->action()->get();
+
             $action->update_settings( $settings )->save();
         }
 
