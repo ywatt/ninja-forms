@@ -790,6 +790,7 @@ function ninja_forms_three_admin_notice(){
 add_action( 'nf_admin_before_form_list', 'ninja_forms_konami' );
 function ninja_forms_konami(){
 
+    if( ! ninja_forms_three_calc_check() ) return;
     if( ! ninja_forms_three_addons_version_check() ) return;
 
     wp_enqueue_script( 'cheet', NINJA_FORMS_URL . 'assets/js/lib/cheet.min.js', array( 'jquery' ) );
@@ -819,6 +820,14 @@ function ninja_forms_konami(){
     <?php
 }
 
+function ninja_forms_three_calc_check()
+{
+    global $wpdb;
+
+    $rows = $wpdb->get_results( "SELECT * FROM " . NINJA_FORMS_FIELDS_TABLE_NAME . " WHERE type = '_calc'" );
+
+    return ( $rows ) ? FALSE : TRUE ;
+}
 
 function ninja_forms_three_addons_version_check(){
     $items = wp_remote_get( 'https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h' );
