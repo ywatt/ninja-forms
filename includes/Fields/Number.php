@@ -17,6 +17,8 @@ class NF_Fields_Number extends NF_Abstracts_Input
 
     protected $_settings = array( 'number' );
 
+    protected $_settings_exclude = array( 'input_limit_set' );
+
     public function __construct()
     {
         parent::__construct();
