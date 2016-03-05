@@ -47,13 +47,14 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
             $import = file_get_contents( $_FILES[ 'nf_import_fields' ][ 'tmp_name' ] );
 
-            $data = unserialize( base64_decode( $import ) );
+            $data = unserialize( $import );
 
-            if( ! $data ) {
-                $data = unserialize( $import );
+            foreach( $data[ 'fields' ] as $settings ){
+
+                $field = Ninja_Forms()->form()->field()->get();
+                $field->update_settings( $settings );
+                $field->save();
             }
-
-//            Ninja_Forms()->form()->import_form( $data );
         }
     }
 
@@ -74,7 +75,7 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
             header("Pragma: no-cache");
             header("Expires: 0");
 
-            echo serialize( $fields );
+            echo serialize( array( 'fields' => $fields ) );
 
             die();
         }
