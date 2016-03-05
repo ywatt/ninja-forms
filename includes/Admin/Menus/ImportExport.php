@@ -14,6 +14,8 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
         add_action( 'plugins_loaded', array( $this, 'import_fields_listener' ) );
         add_action( 'plugins_loaded', array( $this, 'export_fields_listener' ) );
 
+        add_filter( 'ninja_forms_before_import_fields', array( $this, 'import_fields_backwards_compatibility' ) );
+
         parent::__construct();
     }
 
@@ -47,9 +49,9 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
             $import = file_get_contents( $_FILES[ 'nf_import_fields' ][ 'tmp_name' ] );
 
-            $data = unserialize( $import );
+            $fields = unserialize( $import );
 
-            foreach( $data[ 'fields' ] as $settings ){
+            foreach( $fields as $settings ){
 
                 $field = Ninja_Forms()->form()->field()->get();
                 $field->update_settings( apply_filters( 'ninja_forms_before_import_fields', $settings ) );
@@ -75,7 +77,7 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
             header("Pragma: no-cache");
             header("Expires: 0");
 
-            echo serialize( array( 'fields' => $fields ) );
+            echo serialize( $fields );
 
             die();
         }
@@ -161,5 +163,23 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
     {
         $fields = Ninja_Forms()->form()->get_fields( array( 'saved' => 1) );
         Ninja_Forms::template( 'admin-metabox-import-export-favorite-fields-export.html.php', compact( 'fields' ) );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Backwards Compatibility
+    |--------------------------------------------------------------------------
+    */
+
+    public function import_fields_backwards_compatibility( $settings )
+    {
+        $data = $settings[ 'data' ];
+        unset( $settings[ 'data' ] );
+
+        $settings[ 'type' ] = ltrim( $settings[ 'type' ], '_' );
+
+        $settings[ 'saved' ] = 1;
+
+        return array_merge( $settings, $data );
     }
 }
