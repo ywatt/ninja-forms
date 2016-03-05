@@ -66,12 +66,7 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
             foreach( $field_ids as $field_id ){
                 $field = Ninja_Forms()->form()->field( $field_id )->get();
 
-                $fields[] = array(
-                    'id'   => $field->get_id(),
-                    'name' => $field->get_setting( 'label' ),
-                    'type' => $field->get_setting( 'type' ),
-                    'data' => $field->get_settings(),
-                );
+                $fields[] = $field->get_settings();
             }
 
             header("Content-type: application/csv");
