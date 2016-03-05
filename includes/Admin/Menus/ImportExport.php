@@ -11,6 +11,9 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
         add_action( 'plugins_loaded', array( $this, 'import_form_listener' ) );
         add_action( 'plugins_loaded', array( $this, 'export_form_listener' ) );
 
+        add_action( 'plugins_loaded', array( $this, 'import_fields_listener' ) );
+        add_action( 'plugins_loaded', array( $this, 'export_fields_listener' ) );
+
         parent::__construct();
     }
 
@@ -37,6 +40,31 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
             Ninja_Forms()->form( $form_id )->export_form();
         }
     }
+
+    public function import_fields_listener()
+    {
+        if( isset( $_FILES[ 'nf_import_fields' ] ) && $_FILES[ 'nf_import_fields' ] ){
+
+            $import = file_get_contents( $_FILES[ 'nf_import_fields' ][ 'tmp_name' ] );
+
+            $data = unserialize( base64_decode( $import ) );
+
+            if( ! $data ) {
+                $data = unserialize( $import );
+            }
+
+//            Ninja_Forms()->form()->import_form( $data );
+        }
+    }
+
+    public function export_fields_listener()
+    {
+        if( isset( $_REQUEST[ 'nf_export_fields' ] ) && $_REQUEST[ 'nf_export_fields' ] ){
+            $field_ids = $_REQUEST[ 'nf_export_fields' ];
+//            Ninja_Forms()->form( $form_id )->export_form();
+        }
+    }
+
 
     public function display()
     {
@@ -115,6 +143,7 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
     public function template_export_favorite_fields()
     {
-        Ninja_Forms::template( 'admin-metabox-import-export-favorite-fields-export.html.php' );
+        $fields = Ninja_Forms()->form()->get_fields( array( 'saved' => 1) );
+        Ninja_Forms::template( 'admin-metabox-import-export-favorite-fields-export.html.php', compact( 'fields' ) );
     }
 }
