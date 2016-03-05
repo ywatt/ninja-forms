@@ -52,7 +52,7 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
             foreach( $data[ 'fields' ] as $settings ){
 
                 $field = Ninja_Forms()->form()->field()->get();
-                $field->update_settings( $settings );
+                $field->update_settings( apply_filters( 'ninja_forms_before_import_fields', $settings ) );
                 $field->save();
             }
         }
