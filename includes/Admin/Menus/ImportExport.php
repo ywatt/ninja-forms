@@ -61,7 +61,27 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
     {
         if( isset( $_REQUEST[ 'nf_export_fields' ] ) && $_REQUEST[ 'nf_export_fields' ] ){
             $field_ids = $_REQUEST[ 'nf_export_fields' ];
-//            Ninja_Forms()->form( $form_id )->export_form();
+
+            $fields = array();
+            foreach( $field_ids as $field_id ){
+                $field = Ninja_Forms()->form()->field( $field_id )->get();
+
+                $fields[] = array(
+                    'id'   => $field->get_id(),
+                    'name' => $field->get_setting( 'label' ),
+                    'type' => $field->get_setting( 'type' ),
+                    'data' => $field->get_settings(),
+                );
+            }
+
+            header("Content-type: application/csv");
+            header("Content-Disposition: attachment; filename=favorites-" . time() . ".nff");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+
+            echo serialize( $fields );
+
+            die();
         }
     }
 
