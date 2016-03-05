@@ -173,13 +173,17 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
     public function import_fields_backwards_compatibility( $settings )
     {
+        // TODO: Apply form field backwards compatibility.
         $data = $settings[ 'data' ];
         unset( $settings[ 'data' ] );
+        $settings = array_merge( $settings, $data );
 
         $settings[ 'type' ] = ltrim( $settings[ 'type' ], '_' );
 
+        $settings[ 'nicename' ] = $settings[ 'label' ];
+
         $settings[ 'saved' ] = 1;
 
-        return array_merge( $settings, $data );
+        return $settings;
     }
 }
