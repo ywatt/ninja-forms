@@ -53,8 +53,11 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
             foreach( $fields as $settings ){
 
+                $settings = apply_filters( 'ninja_forms_before_import_fields', $settings );
+                $settings[ 'saved' ] = 1;
+
                 $field = Ninja_Forms()->form()->field()->get();
-                $field->update_settings( apply_filters( 'ninja_forms_before_import_fields', $settings ) );
+                $field->update_settings( $settings );
                 $field->save();
             }
         }
@@ -171,19 +174,169 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
     |--------------------------------------------------------------------------
     */
 
-    public function import_fields_backwards_compatibility( $settings )
+//    public function import_fields_backwards_compatibility( $settings )
+//    {
+//        // TODO: Apply form field backwards compatibility.
+//        $data = $settings[ 'data' ];
+//        unset( $settings[ 'data' ] );
+//        $settings = array_merge( $settings, $data );
+//
+//        $settings[ 'type' ] = ltrim( $settings[ 'type' ], '_' );
+//
+//        $settings[ 'nicename' ] = $settings[ 'label' ];
+//
+//        $settings[ 'saved' ] = 1;
+//
+//        return $settings;
+//    }
+
+    public function import_fields_backwards_compatibility( $field )
     {
-        // TODO: Apply form field backwards compatibility.
-        $data = $settings[ 'data' ];
-        unset( $settings[ 'data' ] );
-        $settings = array_merge( $settings, $data );
+        // Flatten field settings array
+        if( isset( $field[ 'data' ] ) ){
+            $field = array_merge( $field, $field[ 'data' ] );
+            unset( $field[ 'data' ] );
+        }
 
-        $settings[ 'type' ] = ltrim( $settings[ 'type' ], '_' );
+        // Drop form_id in favor of parent_id, which is set by the form.
+        if( isset( $field[ 'form_id' ] ) ){
+            unset( $field[ 'form_id' ] );
+        }
 
-        $settings[ 'nicename' ] = $settings[ 'label' ];
+        // Remove `_` prefix from type setting
+        $field[ 'type' ] = ltrim( $field[ 'type' ], '_' );
 
-        $settings[ 'saved' ] = 1;
+        // Type: `text` -> `textbox`
+        if( 'text' == $field[ 'type' ] ){
+            $field[ 'type' ] = 'textbox';
+        }
 
-        return $settings;
+        if( 'submit' == $field[ 'type' ] ){
+            $field[ 'processing_label' ] = 'Processing';
+        }
+
+        if( 'calc' == $field[ 'type' ] ){
+            $field[ 'type' ] = 'note';
+
+            if( isset( $field[ 'calc_method' ] ) ) {
+
+                switch( $field[ 'calc_method' ] ){
+                    case 'eq':
+                        $method = __( 'Equation (Advanced)', 'ninja-forms' );
+                        break;
+                    case 'fields':
+                        $method = __( 'Operations and Fields (Advanced)', 'ninja-forms' );
+                        break;
+                    case 'auto':
+                        $method = __( 'Auto-Total Fields', 'ninja-forms' );
+                        break;
+                    default:
+                        $method = '';
+                }
+                $field['default'] = $method . "\r\n";
+
+                if ('eq' == $field['calc_method'] && isset( $field['calc_eq'] ) ) {
+                    $field['default'] .= $field['calc_eq'];
+                }
+
+                if ('fields' == $field['calc_method'] && isset( $field['calc'] ) ) {
+                    // TODO: Support 'operations and fields (advanced)' calculations.
+                }
+
+                if ('auto' == $field['calc_method'] && isset( $field['calc'] ) ) {
+                    // TODO: Support 'auto-totaling' calculations.
+                }
+            }
+
+            unset( $field[ 'calc' ] );
+            unset( $field[ 'calc_eq' ] );
+            unset( $field[ 'calc_method' ] );
+        }
+
+        if( isset( $field[ 'email' ] ) ){
+
+            if( 'textbox' == $field[ 'type' ] && $field[ 'email' ] ) {
+                $field['type'] = 'email';
+            }
+            unset( $field[ 'email' ] );
+        }
+
+        if( isset( $field[ 'class' ] ) ){
+            $field[ 'element_class' ] = $field[ 'class' ];
+            unset( $field[ 'class' ] );
+        }
+
+        if( isset( $field[ 'req' ] ) ){
+            $field[ 'required' ] = $field[ 'req' ];
+            unset( $field[ 'req' ] );
+        }
+
+        if( isset( $field[ 'default_value_type' ] ) ){
+
+            /* User Data */
+            if( '_user_id' == $field[ 'default_value_type' ] )           $field[ 'default' ] = '{user:id}';
+            if( '_user_email' == $field[ 'default_value_type' ] )        $field[ 'default' ] = '{user:email}';
+            if( '_user_lastname' == $field[ 'default_value_type' ] )     $field[ 'default' ] = '{user:last_name}';
+            if( '_user_firstname' == $field[ 'default_value_type' ] )    $field[ 'default' ] = '{user:first_name}';
+            if( '_user_display_name' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{user:display_name}';
+
+            /* Post Data */
+            if( 'post_id' == $field[ 'default_value_type' ] )    $field[ 'default' ] = '{post:id}';
+            if( 'post_url' == $field[ 'default_value_type' ] )   $field[ 'default' ] = '{post:url}';
+            if( 'post_title' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{post:title}';
+
+            /* System Data */
+            if( 'today' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{system:date}';
+
+            /* Miscellaneous */
+            if( '_custom' == $field[ 'default_value_type' ] && isset( $field[ 'default_value' ] ) ){
+                $field[ 'default' ] = $field[ 'default_value' ];
+            }
+            if( 'querystring' == $field[ 'default_value_type' ] && isset( $field[ 'default_value' ] ) ){
+                $field[ 'default' ] = '{' . $field[ 'default_value' ] . '}';
+            }
+
+            unset( $field[ 'default_value' ] );
+            unset( $field[ 'default_value_type' ] );
+        }
+
+        if( 'list' == $field[ 'type' ] ) {
+
+            if ( isset( $field[ 'list_type' ] ) ) {
+
+                if ('dropdown' == $field['list_type']) {
+                    $field['type'] = 'listselect';
+                }
+                if ('radio' == $field['list_type']) {
+                    $field['type'] = 'listradio';
+                }
+                if ('checkbox' == $field['list_type']) {
+                    $field['type'] = 'listcheckbox';
+                }
+                if ('multi' == $field['list_type']) {
+                    $field['type'] = 'listmultiselect';
+                }
+            }
+
+            if( isset( $field[ 'list' ][ 'options' ] ) ) {
+                $field[ 'options' ] = $field[ 'list' ][ 'options' ];
+                unset( $field[ 'list' ][ 'options' ] );
+            }
+        }
+
+        // Convert `textbox` to other field types
+        foreach( array( 'fist_name', 'last_name', 'user_zip', 'user_city', 'user_phone', 'user_email', 'user_address_1', 'user_address_2', 'datepicker' ) as $item ) {
+            if ( isset( $field[ $item ] ) && $field[ $item ] ) {
+                $field[ 'type' ] = str_replace( array( '_', 'user', '1', '2', 'picker' ), '', $item );
+
+                unset( $field[ $item ] );
+            }
+        }
+
+        if( 'timed_submit' == $field[ 'type' ] ) {
+            $field[ 'type' ] = 'submit';
+        }
+
+        return $field;
     }
 }
