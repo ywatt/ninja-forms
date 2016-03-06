@@ -55,7 +55,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         return $last_seq_num;
     }
 
-    public static function import( array $import, $id = '' )
+    public static function import( array $import, $id = '', $is_conversion )
     {
         $import = apply_filters( 'ninja_forms_before_import_form', $import );
 
@@ -69,7 +69,14 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
         foreach( $import[ 'fields' ] as $settings ){
 
-            $field = Ninja_Forms()->form( $form_id )->field()->get();
+            if( $is_conversion ) {
+
+                $field_id = $settings[ 'id' ];
+
+                $field = Ninja_Forms()->form($form_id)->field( $field_id )->get();
+            } else {
+                $field = Ninja_Forms()->form($form_id)->field()->get();
+            }
 
             $settings[ 'parent_id' ] = $form_id;
 
@@ -78,7 +85,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
         foreach( $import[ 'actions' ] as $settings ){
 
-            $action = Ninja_Forms()->form( $form_id )->action()->get();
+            $action = Ninja_Forms()->form($form_id)->action()->get();
+
             $action->update_settings( $settings )->save();
         }
 
@@ -105,6 +113,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $new_form_title = $form_title . " - " . __( 'copy', 'ninja-forms' );
 
         $new_form->update_setting( 'title', $new_form_title );
+
+        $new_form->update_setting( 'lock', 0 );
 
         $new_form->save();
 
@@ -314,6 +324,44 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $field[ 'processing_label' ] = 'Processing';
         }
 
+        if( 'calc' == $field[ 'type' ] ){
+            $field[ 'type' ] = 'note';
+
+            if( isset( $field[ 'calc_method' ] ) ) {
+
+                switch( $field[ 'calc_method' ] ){
+                    case 'eq':
+                        $method = __( 'Equation (Advanced)', 'ninja-forms' );
+                        break;
+                    case 'fields':
+                        $method = __( 'Operations and Fields (Advanced)', 'ninja-forms' );
+                        break;
+                    case 'auto':
+                        $method = __( 'Auto-Total Fields', 'ninja-forms' );
+                        break;
+                    default:
+                        $method = '';
+                }
+                $field['default'] = $method . "\r\n";
+
+                if ('eq' == $field['calc_method'] && isset( $field['calc_eq'] ) ) {
+                    $field['default'] .= $field['calc_eq'];
+                }
+
+                if ('fields' == $field['calc_method'] && isset( $field['calc'] ) ) {
+                    // TODO: Support 'operations and fields (advanced)' calculations.
+                }
+
+                if ('auto' == $field['calc_method'] && isset( $field['calc'] ) ) {
+                    // TODO: Support 'auto-totaling' calculations.
+                }
+            }
+
+            unset( $field[ 'calc' ] );
+            unset( $field[ 'calc_eq' ] );
+            unset( $field[ 'calc_method' ] );
+        }
+
         if( isset( $field[ 'email' ] ) ){
 
             if( 'textbox' == $field[ 'type' ] && $field[ 'email' ] ) {
@@ -392,6 +440,10 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
                 unset( $field[ $item ] );
             }
+        }
+
+        if( 'timed_submit' == $field[ 'type' ] ) {
+            $field[ 'type' ] = 'submit';
         }
 
         return $field;

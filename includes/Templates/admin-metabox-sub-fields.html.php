@@ -15,7 +15,7 @@
             <?php if( in_array( $field->get_setting( 'type' ), $hidden_field_types ) ) continue; ?>
 
             <tr>
-                <td><?php echo $field->get_setting( 'label' ); ?></td>
+                <td><?php echo ( $field->get_setting( 'admin_label' ) ) ? $field->get_setting( 'admin_label' ) : $field->get_setting( 'label' ) ; ?></td>
 
                 <?php
                 $field_class = Ninja_Forms()->fields[ $field->get_setting( 'type' ) ];

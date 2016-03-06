@@ -48,7 +48,9 @@ define( ['views/fields/drawer/addSavedField'], function( addSavedFieldView ) {
 		},
 
 		renderjBoxContent: function() {
-			this.addSaved.show( new addSavedFieldView( { model: this.model } ) );
+			if ( this.addSaved ) {
+				this.addSaved.show( new addSavedFieldView( { model: this.model } ) );
+			}
 		},
 
 		templateHelpers: function () {

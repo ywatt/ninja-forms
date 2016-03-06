@@ -171,7 +171,7 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 				},
 
 				maybeInputLimit: function() {
-					if ( '' != jQuery.trim( this.input_limit ) ) {
+					if ( 'characters' == this.input_limit_type && '' != jQuery.trim( this.input_limit ) ) {
 						return 'maxlength="' + this.input_limit + '"';
 					} else {
 						return '';
@@ -180,12 +180,13 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 
 				getHelpText: function() {
 					this.help_text = jQuery( this.help_text ).html();
-					return this.help_text.replace( /"/g, "&quot;" );
+
+					return ( 'undefined' != typeof this.help_text ) ? this.help_text.replace(/"/g, "&quot;") : '';
 				},
 
 				maybeRenderHelp: function() {
 					var check_text = '<p>' + this.help_text + '</p>';
-					if ( 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
+					if ( 'undefined' != typeof this.help_text && 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
 						return '<span class="dashicons dashicons-admin-comments nf-help" data-text="' + this.getHelpText() + '"></span>';
 					} else {
 						return '';
@@ -196,6 +197,16 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 					var check_text = '<p>' + this.desc_text + '</p>';
 					if ( 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
 						return this.desc_text;
+					} else {
+						return '';
+					}
+				},
+
+				maybeChecked: function() {
+					if( 'undefined' != typeof this.default_value
+						&& 'checked' == this.default_value )
+					{
+						return ' checked';
 					} else {
 						return '';
 					}

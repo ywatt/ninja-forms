@@ -293,6 +293,12 @@
     </header>
 </script>
 
+<script id="nf-tmpl-drawer-header-edit-settings" type="text/template">
+    <header class="nf-drawer-header">
+        <a href="#" class="nf-button primary nf-close-drawer <%= renderDisabled() %>" tabindex="-1">Done</a>
+    </header>
+</script>
+
 <script id="nf-tmpl-drawer-header-view-changes" type="text/template">
     <header class="nf-drawer-header">
         <div>

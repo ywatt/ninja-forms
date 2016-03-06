@@ -4,7 +4,7 @@
 	 * Render our description text if the position is set to before label.
 	 */
 	%>
-	<%= ( 'before_label' == desc_pos ) ? renderDescText() : '' %>
+	<%= ( 'undefined' != typeof desc_pos && 'before_label' == desc_pos ) ? renderDescText() : '' %>
 
 	<label for="nf-field-<%= id %>"><%= label %> <%= ( 'undefined' != typeof required && 1 == required ) ? '*' : '' %> <%= maybeRenderHelp() %></label>
 
@@ -13,5 +13,5 @@
 	 * Render our description text if the position is set to after label.
 	 */
 	%>
-	<%= ( 'after_label' == desc_pos ) ? renderDescText() : '' %>
+	<%= ( 'undefined' != typeof desc_pos && 'after_label' == desc_pos ) ? renderDescText() : '' %>
 </script>

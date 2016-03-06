@@ -19,7 +19,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
     protected $_settings =  array( 'checkbox_default_value', 'checked_calc_value', 'unchecked_calc_value' );
 
-    protected $_settings_exclude = array( 'default', 'placeholder' );
+    protected $_settings_exclude = array( 'default', 'placeholder', 'input_limit_set' );
 
     public function __construct()
     {
@@ -29,6 +29,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
         $this->_settings[ 'label_pos' ][ 'value' ] = 'right';
 
+        add_filter( 'ninja_forms_custom_columns', array( $this, 'custom_columns' ), 10, 2 );
     }
 
     public function admin_form_element( $id, $value )
@@ -36,5 +37,13 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
         $checked = ( $value ) ? "checked" : "";
 
         return "<input type='checkbox' name='fields[$id]' id='' $checked>";
+    }
+
+    public function custom_columns( $value, $field )
+    {
+        if( 'checkbox' == $field->get_setting( 'type' ) ){
+            $value = ( $value ) ? __( 'checked', 'ninja-forms' ) : __( 'unchecked', 'ninja-forms' );
+        }
+        return $value;
     }
 }

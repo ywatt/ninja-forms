@@ -85,4 +85,8 @@ abstract class NF_Abstracts_FieldOptIn extends NF_Abstracts_Input
         }
     }
 
+    public function get_parent_type(){
+        return $this->_parent_type;
+    }
+
 }

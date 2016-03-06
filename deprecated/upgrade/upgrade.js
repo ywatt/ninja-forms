@@ -26,7 +26,8 @@ jQuery(document).ready(function($) {
                 title: '',
                 headers: [ 'Status', 'Title' ],
                 rows: this.forms,
-                step: this.step
+                step: this.step,
+                showSupportLink: 0,
             };
 
             if( 'checking' == this.step ) {
@@ -52,6 +53,7 @@ jQuery(document).ready(function($) {
                 var redirectToThree = 1;
                 _.each(this.forms, function (form) {
                     if ( ! form.converted ) redirectToThree = 0;
+                    if ( form.failed ) data.showSupportLink = 1;
                 }, this);
                 if( redirectToThree ) window.location.href = nfThreeUpgrade.redirectURL;
             }
@@ -88,7 +90,8 @@ jQuery(document).ready(function($) {
                     title: '',
                     icon: 'update',
                     checked: false,
-                    converted: false
+                    converted: false,
+                    failed: false,
                 }
             }, this );
             _.each( this.forms, this.checkForm, this );
@@ -106,6 +109,7 @@ jQuery(document).ready(function($) {
             app.step = 'converting';
 
             $.post( ajaxurl, { nf2to3: 1, action: 'ninja_forms_ajax_migrate_database' }, function( response ) {
+
                 _.each(app.forms, function (form) {
                     this.convertForm(form);
                 }, app );
@@ -124,7 +128,13 @@ jQuery(document).ready(function($) {
                     form.converted = true;
                     form.icon = 'yes';
                     app.updateTable();
-                }, 'json' );
+                }, 'json').fail( function() {
+                    form.converted = false;
+                    form.failed = true;
+                    form.icon = 'no';
+                    app.updateTable();
+                });
+
             }, 'json' );
         }
 

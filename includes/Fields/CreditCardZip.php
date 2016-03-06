@@ -6,6 +6,7 @@
 class NF_Fields_CreditCardZip extends NF_Fields_Zip
 {
     protected $_name = 'creditcardzip';
+    protected $_type = 'creditcardzip';
 
     protected $_section = '';
 

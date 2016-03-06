@@ -99,6 +99,9 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					var key = field.replace( '}', '' ).replace( '{field:', '' );
 					// Get our field model
 					fieldModel = nfRadio.channel( 'form-' + calcModel.get( 'formID' ) ).request( 'get:fieldByKey', key );
+
+					if( 'undefined' == typeof fieldModel ) return;
+
 					fieldModel.on( 'change:value', calcModel.changeField, calcModel );
 					// Get our calc value from our field model.
 					var calcValue = that.getCalcValue( fieldModel );
@@ -135,7 +138,11 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			}
 
 			// Evaluate the equation and update the value of this model.
-			calcModel.set( 'value', math.eval( eqValues ) );
+			try {
+				calcModel.set('value', math.eval(eqValues));
+			} catch( e ) {
+				console.log( e );
+			}
 
 			// Debugging console statement.
 			// console.log( eqValues + ' = ' + calcModel.get( 'value' ) );

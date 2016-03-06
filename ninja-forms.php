@@ -18,6 +18,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
 
     include 'deprecated/ninja-forms.php';
 
+    register_activation_hook( __FILE__, 'ninja_forms_activation_deprecated' );
+    function ninja_forms_activation_deprecated( $network_wide ){
+        include_once 'deprecated/includes/activation.php';
+        ninja_forms_activation( $network_wide );
+    }
+
 } else {
 
     add_action( 'wp_ajax_ninja_forms_ajax_migrate_database', 'ninja_forms_ajax_migrate_database' );
@@ -34,7 +40,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
         $import = stripslashes( $_POST[ 'import' ] ); // TODO: How to sanitize serialized string?
         $form_id = ( isset( $_POST[ 'formID' ] ) ) ? absint( $_POST[ 'formID' ] ) : '';
 
-        Ninja_Forms()->form()->import_form( $import, $form_id );
+        Ninja_Forms()->form()->import_form( $import, $form_id, TRUE );
 
         if( isset( $_POST[ 'flagged' ] ) && $_POST[ 'flagged' ] ){
             $form = Ninja_Forms()->form( $form_id )->get();
@@ -177,7 +183,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
                 self::$instance->menus[ 'system_status']    = new NF_Admin_Menus_SystemStatus();
                 self::$instance->menus[ 'submissions']      = new NF_Admin_Menus_Submissions();
                 self::$instance->menus[ 'import-export']    = new NF_Admin_Menus_ImportExport();
-                self::$instance->menus[ 'update']           = new NF_Admin_Menus_Update();
 
                 /*
                  * Admin menus used for building out the admin UI
@@ -262,6 +267,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
                 self::$instance->settings = get_option( 'ninja_forms_settings' );
 
                 /*
+                 * Admin Notices System
+                 */
+                self::$instance->notices = new NF_Admin_Notices();
+
+                /*
                  * Activation Hook
                  * TODO: Move to a permanent home.
                  */
@@ -271,9 +281,18 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
                 new NF_Admin_Metaboxes_AppendAForm();
             }
 
+            add_action( 'admin_notices', array( self::$instance, 'admin_notices' ) );
+
             add_action( 'plugins_loaded', array( self::$instance, 'plugins_loaded' ) );
 
             return self::$instance;
+        }
+
+        public function admin_notices()
+        {
+            // Notices filter and run the notices function.
+            $admin_notices = Ninja_Forms()->config( 'AdminNotices' );
+            self::$instance->notices->admin_notice( apply_filters( 'nf_admin_notices', $admin_notices ) );
         }
 
         public function plugins_loaded()
@@ -377,7 +396,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
 
         public function get_settings()
         {
-            return $this->settings;
+            return ( is_array( $this->settings ) ) ? $this->settings : array();
         }
 
         public function update_setting( $key, $value )
@@ -518,48 +537,42 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
 
     Ninja_Forms();
 
-    add_action( 'admin_notices', 'nf_alpha_release_admin_notice', -1 );
-    function nf_alpha_release_admin_notice()
-    {
-        ?>
-        <style>
-            .nf-alpha-notice {
-                border-left: 4px solid #EF4748; /* Ninja Forms Red */
-            }
-            .nf-alpha-notice ul {
-                list-style-type: disc;
-                padding-left: 40px;
-            }
-        </style>
-        <div class="update-nag nf-alpha-notice">
-            <h3>Ninja Forms 3.0 - Beta</h3>
-            <p><strong>NOTICE:</strong> Installed is a Beta Candidate of Ninja Forms. This is <strong>not</strong> intended for production.</p>
-            <p>Please keep a few things in mind while exploring:</p>
-            <ul>
-                <li><strong>DO NOT</strong> attempt to install this release on a live website. (If this site falls in that category, remove this plugin)</li>
-            </ul>
-            <p>Please submit all <strong>feedback</strong> on our <a href="http://developer.ninjaforms.com/slack/">Slack group</a></p>
-        </div>
-        <?php
-    }
 }
+
+/*
+|--------------------------------------------------------------------------
+| Ninja Forms Version Switcher
+|--------------------------------------------------------------------------
+|
+| Added here so that the Freemius can identify Ninja forms using debug_backtrace().
+|
+*/
 
 final class NF_VersionSwitcher
 {
     public function __construct()
     {
+        $this->listener();
+        add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 999 );
+    }
+
+    public function listener()
+    {
         if( isset( $_GET[ 'nf-switcher' ] ) ){
+
             switch( $_GET[ 'nf-switcher' ] ){
-                case 'rollback':
-                    update_option( 'ninja_forms_load_deprecated', TRUE );
-                    break;
                 case 'upgrade':
                     update_option( 'ninja_forms_load_deprecated', FALSE );
                     break;
+                case 'rollback':
+                    update_option( 'ninja_forms_load_deprecated', TRUE );
+                    break;
             }
+
+            header( 'Location: ' . admin_url( 'admin.php?page=ninja-forms' ) );
         }
-        add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 999 );
     }
+
     public function admin_bar_menu( $wp_admin_bar )
     {
         $args = array(
@@ -582,4 +595,5 @@ final class NF_VersionSwitcher
         }
         $wp_admin_bar->add_node($args);
     }
+
 }
