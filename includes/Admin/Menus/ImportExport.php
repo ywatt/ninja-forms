@@ -21,18 +21,19 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
     public function import_form_listener()
     {
-        if( isset( $_FILES[ 'nf_import_form' ] ) && $_FILES[ 'nf_import_form' ] ){
+        if( ! isset( $_FILES[ 'nf_import_form' ] ) || ! $_FILES[ 'nf_import_form' ] ) return;
 
-            $import = file_get_contents( $_FILES[ 'nf_import_form' ][ 'tmp_name' ] );
+        $this->upload_error_check( $_FILES[ 'nf_import_form' ] );
 
-            $data = unserialize( base64_decode( $import ) );
+        $import = file_get_contents( $_FILES[ 'nf_import_form' ][ 'tmp_name' ] );
 
-            if( ! $data ) {
-                $data = unserialize( $import );
-            }
+        $data = unserialize( base64_decode( $import ) );
 
-            Ninja_Forms()->form()->import_form( $data );
+        if( ! $data ) {
+            $data = unserialize( $import );
         }
+
+        Ninja_Forms()->form()->import_form( $data );
     }
 
     public function export_form_listener()
@@ -45,21 +46,22 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
     public function import_fields_listener()
     {
-        if( isset( $_FILES[ 'nf_import_fields' ] ) && $_FILES[ 'nf_import_fields' ] ){
+        if( ! isset( $_FILES[ 'nf_import_fields' ] ) || ! $_FILES[ 'nf_import_fields' ] ) return;
 
-            $import = file_get_contents( $_FILES[ 'nf_import_fields' ][ 'tmp_name' ] );
+        $this->upload_error_check( $_FILES[ 'nf_import_fields' ] );
 
-            $fields = unserialize( $import );
+        $import = file_get_contents( $_FILES[ 'nf_import_fields' ][ 'tmp_name' ] );
 
-            foreach( $fields as $settings ){
+        $fields = unserialize( $import );
 
-                $settings = apply_filters( 'ninja_forms_before_import_fields', $settings );
-                $settings[ 'saved' ] = 1;
+        foreach( $fields as $settings ){
 
-                $field = Ninja_Forms()->form()->field()->get();
-                $field->update_settings( $settings );
-                $field->save();
-            }
+            $settings = apply_filters( 'ninja_forms_before_import_fields', $settings );
+            $settings[ 'saved' ] = 1;
+
+            $field = Ninja_Forms()->form()->field()->get();
+            $field->update_settings( $settings );
+            $field->save();
         }
     }
 
@@ -323,5 +325,45 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
         }
 
         return $field;
+    }
+
+    private function upload_error_check( $file )
+    {
+        if( ! $file[ 'error' ] ) return;
+
+        switch ( $file[ 'error' ] ) {
+            case UPLOAD_ERR_INI_SIZE:
+                $error_message = __( 'The uploaded file exceeds the upload_max_filesize directive in php.ini.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_FORM_SIZE:
+                $error_message = __( 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_PARTIAL:
+                $error_message = __( 'The uploaded file was only partially uploaded.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                $error_message = __( 'No file was uploaded.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_NO_TMP_DIR:
+                $error_message = __( 'Missing a temporary folder.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_CANT_WRITE:
+                $error_message = __( 'Failed to write file to disk.', 'ninja-forms' );
+                break;
+            case UPLOAD_ERR_EXTENSION:
+                $error_message = __( 'File upload stopped by extension.', 'ninja-forms' );
+                break;
+            default:
+                $error_message = __( 'Unknown upload error.', 'ninja-forms' );
+                break;
+        }
+
+        $args = array(
+            'title' => __( 'File Upload Error', 'ninja-forms' ),
+            'message' => $error_message,
+            'debug' => $file,
+        );
+        $message = Ninja_Forms()->template( 'admin-wp-die.html.php', $args );
+        wp_die( $message, $args[ 'title' ], array( 'back_link' => TRUE ) );
     }
 }
