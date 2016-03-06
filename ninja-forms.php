@@ -183,6 +183,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
                 self::$instance->menus[ 'system_status']    = new NF_Admin_Menus_SystemStatus();
                 self::$instance->menus[ 'submissions']      = new NF_Admin_Menus_Submissions();
                 self::$instance->menus[ 'import-export']    = new NF_Admin_Menus_ImportExport();
+                self::$instance->menus[ 'licenses']         = new NF_Admin_Menus_Licenses();
 
                 /*
                  * Admin menus used for building out the admin UI
