@@ -8,7 +8,6 @@ define([], function() {
 		},
 
 		initTextareaRTEs: function( view ) {
-			console.log( 'init rte' )
 			jQuery.summernote.options.icons = {
 		        'align': 'dashicons dashicons-editor-alignleft',
 		        'alignCenter': 'dashicons dashicons-editor-aligncenter',
