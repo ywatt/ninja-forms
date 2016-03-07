@@ -56,6 +56,9 @@ define([], function() {
 		},
 
 		initTextareaRTEs: function( view ) {
+			if ( 1 != view.model.get( 'textarea_rte' ) ) {
+				return false;
+			}
 			/*
 			 * Custom Button for links
 			 */
