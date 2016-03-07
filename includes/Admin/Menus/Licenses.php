@@ -5,27 +5,88 @@
  */
 final class NF_Admin_Menus_Licenses
 {
+    private $licenses = array();
+
     public function __construct()
     {
-        add_filter( 'ninja_forms_plugin_settings',        array( $this, 'plugin_settings'        ), 10, 1 );
-        add_filter( 'ninja_forms_plugin_settings_groups', array( $this, 'plugin_settings_groups' ), 10, 1 );
+        add_action( 'admin_init', array( $this, 'register_licenses' ), 10 );
+        add_action( 'admin_init', array( $this, 'submit_listener'   ), 11 );
+        add_action( 'admin_init', array( $this, 'add_meta_boxes'    ), 12 );
     }
 
-    public function plugin_settings( $settings )
+    public function submit_listener()
     {
-        $settings[ 'licenses' ] = array(); //NF_MailChimp()->config( 'PluginSettings' );
-        return $settings;
+        if( ! isset( $_POST[ 'ninja_forms_license' ] ) || ! $_POST[ 'ninja_forms_license' ] ) return;
+
+        $key    = sanitize_text_field( $_POST[ 'ninja_forms_license' ][ 'key' ]    );
+        $name   = sanitize_text_field( $_POST[ 'ninja_forms_license' ][ 'name' ]   );
+        $action = sanitize_text_field( $_POST[ 'ninja_forms_license' ][ 'action' ] );
+
+        switch( $action ){
+            case 'activate':
+                $this->activate_license( $name, $key );
+                break;
+            case 'deactivate':
+                $this->deactivate_license( $name );
+                break;
+        }
     }
 
-    public function plugin_settings_groups( $groups )
+    public function register_licenses()
     {
-        $groups = array_merge( $groups, array(
-            'licenses' => array(
-                'id' => 'licenses',
-                'label' => __( 'Licenses', 'ninja-forms' ),
-            )
-        ) );
-        return $groups;
+        $this->licenses = apply_filters( 'ninja_forms_settings_licenses_addons', array() );
+    }
+
+    public function add_meta_boxes()
+    {
+        add_meta_box(
+            'nf_settings_licenses',
+            __( 'Add-On Licenses', 'ninja-forms' ),
+            array( $this, 'display' ),
+            'nf_settings_licenses'
+        );
+    }
+
+    public function display()
+    {
+        $data = array();
+        foreach( $this->licenses as $license ){
+            $data[] = array(
+                'id' => $license->product_name,
+                'name' => $license->product_nice_name,
+                'version' => $license->version,
+                'is_valid' => $license->is_valid(),
+                'license' => $this->get_license( $license->product_name ),
+                'error' => Ninja_Forms()->get_setting( $license->product_name . '_license_error' ),
+            );
+        }
+
+        Ninja_Forms()->template( 'admin-menu-settings-licenses.html.php', array( 'licenses' => $data ) );
+    }
+
+    private function get_license( $name )
+    {
+        return Ninja_Forms()->get_setting( $name . '_license' );
+    }
+
+    private function activate_license( $name, $key )
+    {
+        foreach( $this->licenses as $license ){
+
+            if( ! $name == $license->product_name ) continue;
+
+            $license->activate_license( $key );
+        }
+    }
+
+    private function deactivate_license( $name )
+    {
+        foreach( $this->licenses as $license ){
+
+            if( ! $name == $license->product_name ) continue;
+
+            $license->deactivate_license();
+        }
     }
 
 } // End Class NF_Admin_Menus_Licenses

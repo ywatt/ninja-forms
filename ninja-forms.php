@@ -280,6 +280,15 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
 
                 new NF_Admin_Metaboxes_Example();
                 new NF_Admin_Metaboxes_AppendAForm();
+
+                /*
+                 * Require EDD auto-update file
+                 */
+                if( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
+                    // Load our custom updater if it doesn't already exist
+                    require_once( self::$dir . 'includes/Integrations/EDD/EDD_SL_Plugin_Updater.php');
+                }
+                require_once self::$dir . 'includes/Integrations/EDD/class-extension-updater.php';
             }
 
             add_action( 'admin_notices', array( self::$instance, 'admin_notices' ) );
