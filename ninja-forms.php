@@ -176,12 +176,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
 
                 self::$dir = plugin_dir_path( __FILE__ );
                 if( ! defined( 'NF_PLUGIN_DIR' ) ){
-                    denife( 'NF_PLUGIN_DIR', self::$dir );
+                    define( 'NF_PLUGIN_DIR', self::$dir );
                 }
 
                 self::$url = plugin_dir_url( __FILE__ );
                 if( ! defined( 'NF_PLUGIN_URL' ) ){
-                    denife( 'NF_PLUGIN_URL', self::$url );
+                    define( 'NF_PLUGIN_URL', self::$url );
                 }
 
                 update_option( 'ninja_forms_version', self::VERSION );
