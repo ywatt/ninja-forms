@@ -74,7 +74,7 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 		},
 
 		maybeClickEdit: function( e ) {
-			if ( jQuery( e.target ).parent().hasClass( 'nf-fields-sortable' ) && ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+			if ( ( jQuery( e.target ).parent().hasClass( 'nf-fields-sortable' ) || jQuery( e.target ).parent().hasClass( 'nf-field-wrap' ) ) && ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
 				nfRadio.channel( 'app' ).trigger( 'click:edit', e, this.model );
 			}
 		},
