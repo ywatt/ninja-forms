@@ -241,6 +241,14 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 					} else {
 						return '';
 					}
+				},
+
+				renderPlaceholder: function() {
+					if ( this.placeholder ) {
+						return 'placeholder="' + this.placeholder + '"';
+					} else {
+						return '';
+					}
 				}
 			}
 		},

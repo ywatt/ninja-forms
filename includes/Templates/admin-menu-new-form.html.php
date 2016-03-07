@@ -366,14 +366,14 @@
 
 <script id="nf-tmpl-edit-setting-textbox" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
-        <input type="text" class="setting" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
+        <input type="text" class="setting" id="<%= name %>" value="<%= value %>" <%= renderPlaceholder() %> />
         <%= renderMergeTags() %>
     </label>
 </script>
 
 <script id="nf-tmpl-edit-setting-datepicker" type="text/template">
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
-        <input type="text" class="setting" id="<%= name %>" value="<%= value %>" placeholder="<%= ( 'undefined' != typeof placeholder ) ? placeholder : '' %>" />
+        <input type="text" class="setting" id="<%= name %>" value="<%= value %>" <%= renderPlaceholder() %> />
     </label>
 </script>
 
