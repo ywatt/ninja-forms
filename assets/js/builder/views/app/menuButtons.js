@@ -81,7 +81,7 @@ define( [], function() {
 
 		onShow: function() {
 			var publishEL = jQuery( this.el ).find( '.publish' );
-			this.publishWidth = jQuery( publishEL ).outerWidth( true );
+			// this.publishWidth = jQuery( publishEL ).outerWidth( true );
 		},
 
 		/**
