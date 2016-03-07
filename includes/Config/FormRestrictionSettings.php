@@ -21,7 +21,7 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
                 'width' => 'one-half',
                 'group' => 'primary',
                 'value' => TRUE,
-                
+
             ),
 
             /*
@@ -35,7 +35,7 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
                 'width' => 'full',
                 'group' => 'primary',
                 'value' => '',
-                
+
                 //TODO: Add following text below the WYSIWYG.
                 //Message shown to users if the "logged in" checkbox above is checked and they are not logged-in.
             ),
@@ -57,11 +57,11 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
             'sub_limit_number' => array(
                 'name' => 'sub_limit_number',
                 'type' => 'number',
-                'label' => __( 'Limit Submission', 'ninja-forms' ),
+                'label' => __( 'Submission Limit', 'ninja-forms' ),
                 'width' => 'one-third',
                 'group' => 'primary',
                 'value' => NULL,
-                
+
                 //TODO: Add following text below the element.
                 //Select the number of submissions that this form will accept. Leave empty for no limit.
             ),
@@ -77,7 +77,7 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
                 'width' => 'full',
                 'group' => 'primary',
                 'value' => '',
-                
+
                 //TODO: Add following text below the WYSIWYG.
                 //Please enter a message that you want displayed when this form has reached its submission limit and will not
                 //accept new submissions.
