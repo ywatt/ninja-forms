@@ -342,6 +342,10 @@ final class NF_Display_Render
     {
         wp_enqueue_style( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure.css' );
         wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
+        wp_enqueue_style( 'summernote', Ninja_Forms::$url . 'assets/css/summernote.css' );
+        wp_enqueue_style( 'codemirror', Ninja_Forms::$url . 'assets/css/codemirror.css' );
+        wp_enqueue_style( 'codemirror-monokai', Ninja_Forms::$url . 'assets/css/monokai-theme.css' );
+
 
         if( ! Ninja_Forms()->get_setting( 'disable_opinionated_styles' ) ) {
             wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css');

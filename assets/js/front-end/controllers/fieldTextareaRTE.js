@@ -62,7 +62,6 @@ define([], function() {
 			var mediaButton = function( context ) {
 				return that.mediaButton( context );
 			}
-			var mergeTags = this.mergeTags();
 
 			var toolbar = [
 				[ 'paragraphStyle', ['style'] ],
@@ -72,15 +71,14 @@ define([], function() {
 			    [ 'customGroup', [ 'linkButton', 'unlink' ] ],
 			    [ 'table', [ 'table' ] ],
 			    [ 'actions', [ 'undo', 'redo' ] ],
-			    [ 'tools', [ 'mediaButton', 'mergeTags', 'codeview' ] ]
+			    [ 'tools', [ 'mediaButton', 'codeview' ] ]
 			];
 
-			jQuery( settingView.el ).find( 'div.setting' ).summernote( {
+			jQuery( view.el ).find( '.nf-element' ).summernote( {
 				toolbar: toolbar,
 				buttons: {
 					linkButton: linkButton,
-					mergeTags: mergeTags,
-					mediaButton: mediaButton
+					// mediaButton: mediaButton
 				},
 				height: 150,   //set editable area's height
 				codemirror: { // codemirror options
@@ -89,29 +87,109 @@ define([], function() {
 				},
 				prettifyHtml: true,
 				callbacks: {
-					onBlur: function() {
-						var name = settingModel.get( 'name' );
-						var before = dataModel.get( name );
-						var after = jQuery( this ).summernote( 'code' );
-
-						var changes = {
-							attr: name,
-							before: before,
-							after: after
-						}
-
-						var label = {
-							object: dataModel.get( 'objectType' ),
-							label: dataModel.get( 'label' ),
-							change: 'Changed ' + settingModel.get( 'label' ) + ' from ' + before + ' to ' + after
-						};
-
-						nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', dataModel, changes, label );
-
-						dataModel.set( settingModel.get( 'name' ), after );
+					onKeyup: function( e ) {
+						view.model.set( 'value', jQuery( this ).summernote( 'code' ) );
 					}
 				}
 			} );
+		},
+
+		linkButton: function( context ) {
+			var that = this;
+			var ui = jQuery.summernote.ui;
+			var linkButton = _.template( jQuery( '#nf-tmpl-rte-link-button' ).html() );
+			var linkDropdown = _.template( jQuery( '#nf-tmpl-rte-link-dropdown' ).html() );
+			return ui.buttonGroup([
+				ui.button({
+	            className: 'dropdown-toggle',
+	            contents: linkButton({}),
+	            tooltip: 'Insert Link',
+	            click: function( e ) {
+	            	that.clickLinkButton( e, context );
+	            },
+	            data: {
+	              toggle: 'dropdown'
+	            }
+	          }),
+				ui.dropdown([
+	            ui.buttonGroup({
+	              children: [
+	                ui.button({
+	                  contents: linkDropdown({}),
+	                  tooltip: ''
+	                }),
+	              ]
+	            })
+	          ])
+			]).render();
+		},
+
+		mediaButton: function( context ) {
+			var that = this;
+			var ui = jQuery.summernote.ui;
+			var mediaButton = _.template( jQuery( '#nf-tmpl-rte-media-button' ).html() );
+			return ui.button({
+	            className: 'dropdown-toggle',
+	            contents: mediaButton({}),
+	            tooltip: 'Insert Media',
+	            click: function( e ) {
+	            	that.openMediaManager( e, context );
+	            }
+	          }).render();
+		},
+
+		openMediaManager: function( e, context ) {
+			context.invoke( 'editor.saveRange' );
+			// If the frame already exists, re-open it.
+			if ( this.meta_image_frame ) {
+				this.meta_image_frame.open();
+				return;
+			}
+
+			// Sets up the media library frame
+			this.meta_image_frame = wp.media.frames.meta_image_frame = wp.media({
+				title: 'Select a file',
+				button: { text:  'insert' }
+			});
+
+			var that = this;
+
+			// Runs when an image is selected.
+			this.meta_image_frame.on('select', function(){
+
+				// Grabs the attachment selection and creates a JSON representation of the model.
+				var media_attachment = that.meta_image_frame.state().get('selection').first().toJSON();
+				that.insertMedia( media_attachment, context );
+			});
+
+			// Opens the media library frame.
+			this.meta_image_frame.open();
+		},
+
+		clickLinkButton: function ( e, context ) {
+			var range = context.invoke( 'editor.createRange' );
+			context.invoke( 'editor.saveRange' );
+			var text = range.toString()
+			this.currentContext = context;
+
+			jQuery( e.target ).closest( '.note-customGroup > .note-btn-group' ).on ('hide.bs.dropdown', function ( e ) {
+				return false;
+			});
+
+			jQuery( e.target ).closest( '.note-customGroup > .note-btn-group' ).on ('shown.bs.dropdown', function ( e ) {
+				jQuery( e.target ).parent().parent().find( '.link-text' ).val( text );
+				jQuery( e.target ).parent().parent().find( '.link-url' ).focus();
+			});
+		},
+
+		insertMedia: function( media, context ) {
+			context.invoke( 'editor.restoreRange' );
+			if ( 'image' == media.type ) {
+				context.invoke( 'editor.insertImage', media.url );
+			} else {
+				context.invoke( 'editor.createLink', { text: media.filename, url: media.url } );
+			}
+
 		}
 	});
 
