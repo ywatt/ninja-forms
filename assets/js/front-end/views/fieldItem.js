@@ -218,6 +218,7 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 			'change .nf-element': 'fieldChange',
 			'keyup .nf-element': 'fieldKeyup',
 			'click .nf-element': 'fieldClick',
+			'click .extra': 'extraClick',
 			'blur .nf-element': 'fieldBlur'
 		},
 
@@ -239,6 +240,12 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 			nfRadio.channel( 'field-' + this.model.get( 'id' ) ).trigger( 'click:field', el, this.model );
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'click:field', el, this.model );
 			nfRadio.channel( 'fields' ).trigger( 'click:field', el, this.model );
+		},
+
+		extraClick: function( e ) {
+			nfRadio.channel( 'field-' + this.model.get( 'id' ) ).trigger( 'click:extra', e, this.model );
+			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'click:extra', e, this.model );
+			nfRadio.channel( 'fields' ).trigger( 'click:extra', e, this.model );
 		},
 
 		fieldBlur: function( e ) {

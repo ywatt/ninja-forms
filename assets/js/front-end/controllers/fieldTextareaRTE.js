@@ -5,9 +5,11 @@ define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'textarea' ), 'render:view', this.initTextareaRTEs );
-		},
+			this.listenTo( nfRadio.channel( 'fields' ), 'click:extra', this.clickExtra );
 
-		initTextareaRTEs: function( view ) {
+			// Instantiates the variable that holds the media library frame.
+			this.meta_image_frame;
+
 			jQuery.summernote.options.icons = {
 		        'align': 'dashicons dashicons-editor-alignleft',
 		        'alignCenter': 'dashicons dashicons-editor-aligncenter',
@@ -47,7 +49,10 @@ define([], function() {
 		        'undo': 'dashicons dashicons-undo',
 		        'unorderedlist': 'dashicons dashicons-editor-ul',
 		        // 'video': 'dashicons fa-youtube-play'
-		      };
+		      }
+
+		      this.currentContext = {};
+
 		},
 
 		initTextareaRTEs: function( view ) {
@@ -71,14 +76,17 @@ define([], function() {
 			    [ 'customGroup', [ 'linkButton', 'unlink' ] ],
 			    [ 'table', [ 'table' ] ],
 			    [ 'actions', [ 'undo', 'redo' ] ],
-			    [ 'tools', [ 'mediaButton', 'codeview' ] ]
 			];
+
+			if ( 1 == view.model.get( 'textarea_media' ) && 0 != userSettings.uid ) {
+				toolbar.push( [ 'tools', [ 'mediaButton' ] ] );
+			}
 
 			jQuery( view.el ).find( '.nf-element' ).summernote( {
 				toolbar: toolbar,
 				buttons: {
 					linkButton: linkButton,
-					// mediaButton: mediaButton
+					mediaButton: mediaButton
 				},
 				height: 150,   //set editable area's height
 				codemirror: { // codemirror options
@@ -87,7 +95,7 @@ define([], function() {
 				},
 				prettifyHtml: true,
 				callbacks: {
-					onKeyup: function( e ) {
+					onChange: function( e ) {
 						view.model.set( 'value', jQuery( this ).summernote( 'code' ) );
 					}
 				}
@@ -180,6 +188,25 @@ define([], function() {
 				jQuery( e.target ).parent().parent().find( '.link-text' ).val( text );
 				jQuery( e.target ).parent().parent().find( '.link-url' ).focus();
 			});
+		},
+
+		clickExtra: function( e ) {
+			var textEl = jQuery( e.target ).parent().find( '.link-text' );
+			var urlEl = jQuery( e.target ).parent().find( '.link-url' );
+			var isNewWindowEl = jQuery( e.target ).parent().find( '.link-new-window' );
+			this.currentContext.invoke( 'editor.restoreRange' );
+			if ( jQuery( e.target ).hasClass( 'insert-link' ) ) {
+				var text = textEl.val();
+				var url = urlEl.val();
+				var isNewWindow = ( isNewWindowEl.prop( 'checked' ) ) ? true: false;
+				if ( 0 != text.length && 0 != url.length ) {
+					this.currentContext.invoke( 'editor.createLink', { text:text, url: url, isNewWindow: isNewWindow } );
+				}
+			}
+			textEl.val( '' );
+			urlEl.val( '' );
+			isNewWindowEl.prop( 'checked', false );
+			jQuery( e.target ).closest( 'div.note-btn-group.open' ).removeClass( 'open' );
 		},
 
 		insertMedia: function( media, context ) {
