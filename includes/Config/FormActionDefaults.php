@@ -15,7 +15,7 @@ return apply_filters( 'ninja_forms_from_display_settings', array(
         'id'      => 'tmp-2',
         'label'   => 'Admin Email',
         'type'    => 'email',
-        'to'      => array( 'myformbuildingbringsallthedeveloperstotheyard@wpninjas.com' ),
+        'to'      => array( get_option( 'admin_email' ) ),
         'subject' => 'This is an email action.',
         'message' => 'Hello, Ninja Forms!',
         'order'   => 2,
