@@ -17,5 +17,14 @@ class NF_Fields_CreditCardZip extends NF_Fields_Zip
         parent::__construct();
 
         $this->_nicename = __( 'Credit Card Zip', 'ninja-forms' );
+
+        add_filter( 'nf_sub_hidden_field_types', array( $this, 'hide_field_type' ) );
+    }
+
+    function hide_field_type( $field_types )
+    {
+        $field_types[] = $this->_name;
+
+        return $field_types;
     }
 }
