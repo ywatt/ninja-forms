@@ -6,6 +6,7 @@
 class NF_Fields_CreditCardExpiration extends NF_Abstracts_Input
 {
     protected $_name = 'creditcardexpiration';
+    protected $_type = 'creditcardexpiration';
 
     protected $_section = '';
 

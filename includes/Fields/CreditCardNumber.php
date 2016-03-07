@@ -6,6 +6,7 @@
 class NF_Fields_CreditCardNumber extends NF_Abstracts_Input
 {
     protected $_name = 'creditcardnumber';
+    protected $_type = 'creditcardnumber';
 
     protected $_section = '';
 

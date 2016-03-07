@@ -76,6 +76,13 @@
 
         </table>
 
+        <# if( 'undefined' != typeof data.showSupportLink && data.showSupportLink ) { #>
+            <div style="text-align: center;">
+                There was an error converting one or more of your forms.<br />
+                Please contact <a href="http://ninjaforms.com/contact/">support</a>.
+            </div>
+        <# } #>
+
         <# if( 'checking' == data.step && data.readyToConvert ) { #>
             <button class="nf-upgrade-button js-nfUpgrade-startConversion">{{data.next}}</button>
         <# } #>

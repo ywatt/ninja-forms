@@ -21,6 +21,15 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
     public function display()
     {
+        $tabs = apply_filters( 'ninja_forms_settings_tabs', array(
+                'settings' => __( 'Settings', 'ninja-forms' ),
+                'licenses' => __( 'Licenses', 'ninja-forms' )
+            )
+        );
+
+        $tab_keys = array_keys( $tabs );
+        $active_tab = ( isset( $_GET[ 'tab' ] ) ) ? $_GET[ 'tab' ] : reset( $tab_keys );
+
         wp_enqueue_style( 'nf-admin-settings', Ninja_Forms::$url . 'assets/css/admin-settings.css' );
 
         $groups = Ninja_Forms()->config( 'PluginSettingsGroups' );
@@ -78,7 +87,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
             add_action( 'admin_footer', array( $this, 'add_saved_field_javascript' ) );
         }
 
-        Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'groups', 'grouped_settings', 'save_button_text', 'errors' ) );
+        Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'tabs', 'active_tab', 'groups', 'grouped_settings', 'save_button_text', 'errors' ) );
 
     }
 

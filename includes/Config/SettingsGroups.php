@@ -19,6 +19,12 @@ return apply_filters( 'ninja_forms_field_settings_groups', array(
         'label' => __( 'Restrictions', 'ninja-forms' )
     ),
 
+    'display' => array(
+        'id' => 'display',
+        'label' => __( 'Display', 'ninja-forms' ),
+        'priority' => 700
+    ),
+
     'advanced' => array(
         'id' => 'advanced',
         'label' => __( 'Advanced', 'ninja-forms' ),

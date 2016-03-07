@@ -369,17 +369,25 @@ class Ninja_Forms {
             // Include our download all submissions php files
             require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
 
-            // Include Upgrade Base Class
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade.php');
 
-            // Include Upgrades
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms-reset.php' );
+            $upgraded_from = get_option( 'nf_version_upgraded_from', FALSE );
+            if( $upgraded_from && version_compare( $upgraded_from, '2.9', '<=') ) {
 
-            // Include Upgrade Handler
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-handler-page.php');
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade-handler.php');
+                echo "<pre>";
+                var_dump($upgraded_from);
+                echo "</pre>";
+                // Include Upgrade Base Class
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade.php');
+
+                // Include Upgrades
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms-reset.php' );
+
+                // Include Upgrade Handler
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-handler-page.php');
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade-handler.php');
+            }
         }
 
         // Include our upgrade files.
@@ -782,6 +790,7 @@ function ninja_forms_three_admin_notice(){
 add_action( 'nf_admin_before_form_list', 'ninja_forms_konami' );
 function ninja_forms_konami(){
 
+    if( ! ninja_forms_three_calc_check() ) return;
     if( ! ninja_forms_three_addons_version_check() ) return;
 
     wp_enqueue_script( 'cheet', NINJA_FORMS_URL . 'assets/js/lib/cheet.min.js', array( 'jquery' ) );
@@ -811,27 +820,37 @@ function ninja_forms_konami(){
     <?php
 }
 
+function ninja_forms_three_calc_check()
+{
+    global $wpdb;
+
+    $rows = $wpdb->get_results( "SELECT * FROM " . NINJA_FORMS_FIELDS_TABLE_NAME . " WHERE type = '_calc'" );
+
+    return ( $rows ) ? FALSE : TRUE ;
+}
 
 function ninja_forms_three_addons_version_check(){
     $items = wp_remote_get( 'https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h' );
     $items = wp_remote_retrieve_body( $items );
     $items = json_decode( $items, true );
 
-    foreach ($items as $item) {
+    if( is_array( $items ) ) {
+        foreach ($items as $item) {
 
-        if( empty( $item['plugin'] ) ) continue;
-        if( ! file_exists( WP_PLUGIN_DIR.'/'.$item['plugin'] ) ) continue;
+            if (empty($item['plugin'])) continue;
+            if (!file_exists(WP_PLUGIN_DIR . '/' . $item['plugin'])) continue;
 
-        $plugin_data = get_plugin_data( WP_PLUGIN_DIR.'/'.$item['plugin'], false, true );
+            $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $item['plugin'], false, true);
 
-        if( ! $plugin_data[ 'Version' ] ) continue;
-        if( version_compare( $plugin_data['Version'], '3', '>=' ) ) continue;
+            if (!$plugin_data['Version']) continue;
+            if (version_compare($plugin_data['Version'], '3', '>=')) continue;
 
-        /*
-         * There are non-compatible add-ons installed.
-         */
+            /*
+             * There are non-compatible add-ons installed.
+             */
 
-        return FALSE;
+            return FALSE;
+        }
     }
 
     return TRUE;

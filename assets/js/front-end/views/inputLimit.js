@@ -12,13 +12,19 @@ define( [], function() {
         updateCount: function( el, model ) {
             var value = jQuery( el ).val();
             var regex = /\s+/gi;
-            var wordCount = value.trim().replace(regex, ' ').split(' ').length;
+            var words = value.trim().replace(regex, ' ').split(' ');
+            var wordCount = words.length;
             var charCount = value.trim().length;
 
             if ( 'characters' == this.model.get( 'input_limit_type' ) ) {
                 this.count = charCount;
             } else {
                 this.count = wordCount;
+
+                var limit = this.model.get( 'input_limit' );
+                if( wordCount > limit ){
+                    jQuery( el ).val( words.slice( 0, limit).join( ' ' ) );
+                }
             }
 
         	this.render();

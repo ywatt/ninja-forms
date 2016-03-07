@@ -19,6 +19,8 @@ abstract class NF_Abstracts_MergeTags
 
         add_filter( 'ninja_forms_render_default_value', array( $this, 'replace' ) );
 
+        add_filter( 'ninja_forms_calc_setting',  array( $this, 'replace' ) );
+
         add_filter( 'ninja_forms_run_action_settings',  array( $this, 'replace' ) );
         add_filter( 'ninja_forms_run_action_settings_preview',  array( $this, 'replace' ) );
 
