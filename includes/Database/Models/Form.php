@@ -446,6 +446,30 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $field[ 'type' ] = 'submit';
         }
 
+        if( 'checkbox' == $field[ 'type' ] ){
+
+            if( isset( $field[ 'calc_value' ] ) ){
+
+                if( isset( $field[ 'calc_value' ][ 'checked' ] ) ){
+                    $field[ 'checked_calc_value' ] = $field[ 'calc_value' ][ 'checked' ];
+                    unset( $field[ 'calc_value' ][ 'checked' ] );
+                }
+                if( isset( $field[ 'calc_value' ][ 'unchecked' ] ) ){
+                    $field[ 'unchecked_calc_value' ] = $field[ 'calc_value' ][ 'unchecked' ];
+                    unset( $field[ 'calc_value' ][ 'unchecked' ] );
+                }
+            }
+        }
+
+        if( 'rating' == $field[ 'type' ] ){
+            $field[ 'type' ] = 'starrating';
+
+            if( isset( $field[ 'rating_stars' ] ) ){
+                $field[ 'default' ] = $field[ 'rating_stars' ];
+                unset( $field[ 'rating_stars' ] );
+            }
+        }
+
         return $field;
     }
 
