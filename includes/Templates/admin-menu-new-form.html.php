@@ -103,7 +103,7 @@
 </script>
 
 <script id="nf-tmpl-main-content-field" type="text/template">
-    <div id="<%= getFieldID() %>" class="<%= renderClasses() %>" data-id="<%= id %>"> <%= label %> <%= renderRequired() %>
+    <div id="<%= getFieldID() %>" class="<%= renderClasses() %>" data-id="<%= id %>"><span class="nf-field-label"><%= label %> <%= renderRequired() %></span>
         <ul class="nf-item-controls"></ul>
     </div>
 </script>
@@ -223,7 +223,7 @@
 </script>
 
 <script id="nf-tmpl-add-saved-field" type="text/template">
-    <input type="text" placeholder="Saved Field Name" value="<%= label %>"> 
+    <input type="text" placeholder="Saved Field Name" value="<%= label %>">
     <span class="add-button"></span>
 </script>
 
