@@ -30,7 +30,7 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
 
             'not_logged_in_msg' => array(
                 'name' => 'not_logged_in_msg',
-                'type' => 'textarea', //TODO: Add WYSIWYG
+                'type' => 'rte', //TODO: Add WYSIWYG
                 'label' => __( 'Not Logged-In Message', 'ninja-forms' ),
                 'width' => 'full',
                 'group' => 'primary',
@@ -72,7 +72,7 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
 
             'sub_limit_msg' => array(
                 'name' => 'sub_limit_msg',
-                'type' => 'textarea',//TODO: Add WYSIWYG
+                'type' => 'rte',//TODO: Add WYSIWYG
                 'label' => __( 'Limit Reached Message', 'ninja-forms' ),
                 'width' => 'full',
                 'group' => 'primary',
