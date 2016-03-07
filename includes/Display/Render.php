@@ -347,6 +347,7 @@ final class NF_Display_Render
         wp_enqueue_style( 'summernote', Ninja_Forms::$url . 'assets/css/summernote.css' );
         wp_enqueue_style( 'codemirror', Ninja_Forms::$url . 'assets/css/codemirror.css' );
         wp_enqueue_style( 'codemirror-monokai', Ninja_Forms::$url . 'assets/css/monokai-theme.css' );
+        wp_enqueue_style( 'rating', Ninja_Forms::$url . 'assets/css/rating.css' );
 
 
         if( ! Ninja_Forms()->get_setting( 'disable_opinionated_styles' ) ) {
@@ -372,6 +373,7 @@ final class NF_Display_Render
         wp_enqueue_script( 'codemirror-formatting', Ninja_Forms::$url . 'assets/js/lib/codemirror-formatting.js', array( 'jquery' ) );
         wp_enqueue_script( 'summernote', Ninja_Forms::$url . 'assets/js/lib/summernote.js', array( 'jquery' ) );
         wp_enqueue_script( 'jBox', Ninja_Forms::$url . 'assets/js/lib/jBox.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'starrating', Ninja_Forms::$url . 'assets/js/lib/rating.js', array( 'jquery' ) );
         wp_enqueue_script( 'nf-global', Ninja_Forms::$url . 'assets/js/min/global.js', array( 'jquery' ) );
 
         // wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );

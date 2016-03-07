@@ -42,6 +42,12 @@ RADIO & CHECKBOX LISTS
   padding-left: 10px; }
 
 /* ---------------------------------
+STAR RATING
+----------------------------------*/
+.starrating .star {
+  border-bottom: 0; }
+
+/* ---------------------------------
 HONEYPOT
 ----------------------------------*/
 .nf-hp {
