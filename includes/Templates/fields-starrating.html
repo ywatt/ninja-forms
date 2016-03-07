@@ -1,9 +1,9 @@
 <script id="nf-tmpl-field-starrating" type="text/template">
 	<span class="starrating">
-		<input type="radio" name="nf-field-<%= id %>" class="<%= classes %> nf-element rating" value="1" />
-	    <input type="radio" name="nf-field-<%= id %>" class="<%= classes %> nf-element rating" value="2" />
-	    <input type="radio" name="nf-field-<%= id %>" class="<%= classes %> nf-element rating" value="3" />
-	    <input type="radio" name="nf-field-<%= id %>" class="<%= classes %> nf-element rating" value="4" />
-	    <input type="radio" name="nf-field-<%= id %>" class="<%= classes %> nf-element rating" value="5" />
+		<%= renderRatings() %>
     </span>
+</script>
+
+<script id="nf-tmpl-field-starrating-star" type="text/template">
+	<input type="radio" name="nf-field-<%= id %>" class="<%= classes %> nf-element" value="<%= num %>" />
 </script>
