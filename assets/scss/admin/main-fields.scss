@@ -8,13 +8,13 @@
     }
 }
 
-// .nf-field-label {
-//     display: inline-block;
-//     white-space: nowrap;
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     width: 80%;
-//     .nf-drawer-opened & {
-//         width: 66%;
-//     }
-// }
+.nf-field-label {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
+    .nf-drawer-opened & {
+        width: 66%;
+    }
+}
