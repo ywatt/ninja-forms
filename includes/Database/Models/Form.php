@@ -461,6 +461,15 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             }
         }
 
+        if( 'rating' == $field[ 'type' ] ){
+            $field[ 'type' ] = 'starrating';
+
+            if( isset( $field[ 'rating_stars' ] ) ){
+                $field[ 'default' ] = $field[ 'rating_stars' ];
+                unset( $field[ 'rating_stars' ] );
+            }
+        }
+
         return $field;
     }
 
