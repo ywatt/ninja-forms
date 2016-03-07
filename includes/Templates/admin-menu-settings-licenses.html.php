@@ -16,10 +16,17 @@
                     <form action="" method="POST">
                         <input type="hidden" name="ninja_forms_license[name]" value="<?php echo $license[ 'id' ]; ?>">
                         <input type="text" class="widefat" name="ninja_forms_license[key]" value="<?php echo $license[ 'license' ];?>">
+
+                        <?php if( $license[ 'error' ] ): ?>
+                        <div>
+                            <?php echo $license[ 'error' ]; ?>
+                        </div>
+                        <?php endif; ?>
+
                         <?php if( ! $license[ 'is_valid' ] ): ?>
-                            <button type="submit" class="button button-primary" name="ninja_forms_license[action]" value="activate"><?php _e( 'Activate', 'ninja-forms' ); ?></button>
+                        <button type="submit" class="button button-primary" name="ninja_forms_license[action]" value="activate"><?php _e( 'Activate', 'ninja-forms' ); ?></button>
                         <?php else: ?>
-                            <button type="submit" class="button button-secondary" name="ninja_forms_license[action]" value="deactivate"><?php _e( 'De-activate', 'ninja-forms' ); ?></button>
+                        <button type="submit" class="button button-secondary" name="ninja_forms_license[action]" value="deactivate"><?php _e( 'De-activate', 'ninja-forms' ); ?></button>
                         <?php endif; ?>
                     </form>
                 </td>

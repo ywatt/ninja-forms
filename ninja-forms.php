@@ -12,7 +12,7 @@ Domain Path: /lang/
 Copyright 2015 WP Ninjas.
 */
 
-new NF_VersionSwitcher();
+require_once dirname( __FILE__ ) . '/lib/NF_VersionSwitcher.php';
 
 if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2to3' ] ) ) {
 
@@ -546,64 +546,5 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
     }
 
     Ninja_Forms();
-
-}
-
-/*
-|--------------------------------------------------------------------------
-| Ninja Forms Version Switcher
-|--------------------------------------------------------------------------
-|
-| Added here so that the Freemius can identify Ninja forms using debug_backtrace().
-|
-*/
-
-final class NF_VersionSwitcher
-{
-    public function __construct()
-    {
-        $this->listener();
-        add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 999 );
-    }
-
-    public function listener()
-    {
-        if( isset( $_GET[ 'nf-switcher' ] ) ){
-
-            switch( $_GET[ 'nf-switcher' ] ){
-                case 'upgrade':
-                    update_option( 'ninja_forms_load_deprecated', FALSE );
-                    break;
-                case 'rollback':
-                    update_option( 'ninja_forms_load_deprecated', TRUE );
-                    break;
-            }
-
-            header( 'Location: ' . admin_url( 'admin.php?page=ninja-forms' ) );
-        }
-    }
-
-    public function admin_bar_menu( $wp_admin_bar )
-    {
-        $args = array(
-            'id'    => 'nf',
-            'title' => 'Ninja Forms',
-            'href'  => '#',
-        );
-        $wp_admin_bar->add_node( $args );
-        $args = array(
-            'id' => 'nf_switcher',
-            'href' => admin_url(),
-            'parent' => 'nf'
-        );
-        if( ! get_option( 'ninja_forms_load_deprecated' ) ) {
-            $args[ 'title' ] = 'Rollback to 2.9.x';
-            $args[ 'href' ] .= '?nf-switcher=rollback';
-        } else {
-            $args[ 'title' ] = 'Upgrade to 3.0.x';
-            $args[ 'href' ] .= '?nf-switcher=upgrade';
-        }
-        $wp_admin_bar->add_node($args);
-    }
 
 }
