@@ -41,6 +41,11 @@ final class NF_Display_Render
             return;
         }
 
+        if( $form->get_setting( 'logged_in' ) ){
+            echo $form->get_setting( 'not_logged_in_msg' );
+            return;
+        }
+
         $before_form = apply_filters( 'ninja_forms_display_before_form', '', $form_id );
         $form->update_setting( 'beforeForm', $before_form );
 
@@ -209,6 +214,11 @@ final class NF_Display_Render
 
         if( ! $form ){
             self::localize( $form_id );
+            return;
+        }
+
+        if( $form[ 'settings' ][ 'logged_in' ] ){
+            echo $form[ 'settings' ][ 'not_logged_in_msg' ];
             return;
         }
 
