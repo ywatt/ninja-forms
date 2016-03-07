@@ -15,7 +15,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) exit;
 // Load NF file
 include_once( 'ninja-forms.php' );
 
-if( defined( 'LOAD_DEPRECATED') AND LOAD_DEPRECATED ) {
+if( get_option( 'ninja_forms_load_deprecated', FALSE ) ) {
 
 	global $wpdb;
 
