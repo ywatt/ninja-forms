@@ -11,7 +11,7 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
 
     protected $_aliases = array();
 
-    protected $_type = 'textbox';
+    protected $_type = 'shipping';
 
     protected $_templates = 'shipping';
 

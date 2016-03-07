@@ -11,7 +11,7 @@ class NF_Fields_Quantity extends NF_Fields_Number
 
     protected $_aliases = array();
 
-    protected $_type = 'number';
+    protected $_type = 'quantity';
 
     protected $_templates = 'number';
 

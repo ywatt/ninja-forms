@@ -11,7 +11,7 @@ class NF_Fields_Total extends NF_Abstracts_Input
 
     protected $_aliases = array();
 
-    protected $_type = 'textbox';
+    protected $_type = 'total';
 
     protected $_templates = 'total';
 
