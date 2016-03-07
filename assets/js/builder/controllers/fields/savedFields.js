@@ -51,11 +51,13 @@ define( [], function() {
 			delete fieldData.order;
 			delete fieldData.id;
 			delete fieldData.formID;
+			delete fieldData.parent_id;
 			
 			var type = nfRadio.channel( 'fields' ).request( 'get:type', fieldData.type );
 			var newType = _.clone( type.attributes );
 
 			var nicename = jQuery( e.target ).parent().parent().find( 'input' ).val();
+			console.log( nicename );
 			newType.nicename = nicename;
 			fieldData.label = nicename;
 			fieldData.nicename = nicename;
@@ -65,6 +67,7 @@ define( [], function() {
 			jQuery.post( ajaxurl, { action: 'nf_create_saved_field', field: newTypeDefaults, security: nfAdmin.ajaxNonce }, function( response ) {
 				response = JSON.parse( response );
 				newType.id = response.data.id;
+				newType.nicename = nicename;
 				newType.settingDefaults = fieldData;
 
 				var typeCollection = nfRadio.channel( 'fields' ).request( 'get:typeCollection' );
@@ -73,11 +76,11 @@ define( [], function() {
 				var typeSections = nfRadio.channel( 'fields' ).request( 'get:typeSections' );
 				typeSections.get( 'saved' ).get( 'fieldTypes' ).push( newType.id );
 
-				dataModel.set( 'type', response.data.id );
+				// dataModel.set( 'type', response.data.id );
 				dataModel.set( 'addSavedLoading', false );
 				dataModel.unset( 'addSavedLoading', { silent: true } );
 				dataModel.get( 'jBox' ).close();
-				dataModel.set( 'isSaved', true );
+				// dataModel.set( 'isSaved', true );
 
 				nfRadio.channel( 'notices' ).request( 'add', 'addSaved', 'Saved Field Added' );
 			} );

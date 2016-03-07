@@ -45,9 +45,22 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 				var model = new fieldModel( data );
 			} else {
 				var model = data;
-			}			
+			}
 
-			this.collection.add( model, { silent: silent } );
+			/*
+			 * TODO: Add an nfRadio message filter for the model variable.
+			 * Currently, we manually replace for saved fields; this should be moved to a separate controller.
+			 * 
+			 * If we're adding a saved field, make sure that we set the type to the parentType.
+			 */
+
+			if ( jQuery.isNumeric( model.get( 'type' ) ) ) {
+				var savedType = nfRadio.channel( 'fields' ).request( 'get:type', model.get( 'type' ) );
+				model.set( 'type', savedType.get( 'parentType' ) );
+			}
+
+			var newModel = this.collection.add( model, { silent: silent } );
+			
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 
