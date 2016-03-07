@@ -3,11 +3,11 @@
 return array(
 
     /*
-    * URL
+    * Redirect URL
     */
 
-    'url' => array(
-        'name' => 'url',
+    'redirect_url' => array(
+        'name' => 'redirect_url',
         'type' => 'textbox',
         'group' => 'primary',
         'label' => __( 'URL', 'ninja-forms' ),
