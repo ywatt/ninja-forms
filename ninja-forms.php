@@ -53,6 +53,19 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! isset( $_POST[ 'nf2t
         wp_die();
     }
 
+    add_action( 'wp_ajax_ninja_forms_ajax_import_fields', 'ninja_forms_ajax_import_fields' );
+    function ninja_forms_ajax_import_fields(){
+        $fields = stripslashes( $_POST[ 'fields' ] ); // TODO: How to sanitize serialized string?
+        $fields = maybe_unserialize( $fields );
+
+        foreach( $fields as $field ) {
+            Ninja_Forms()->form()->import_field( $field, $field[ 'id' ], TRUE );
+        }
+
+        echo json_encode( array( 'export' => $_POST[ 'fields' ], 'import' => $fields ) );
+        wp_die();
+    }
+
     /**
      * Class Ninja_Forms
      */

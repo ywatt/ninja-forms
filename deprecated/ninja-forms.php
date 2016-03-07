@@ -768,6 +768,14 @@ function nfThreeUpgrade_GetSerializedForm(){
     wp_die();
 }
 
+add_action( 'wp_ajax_nfThreeUpgrade_GetSerializedFields', 'nfThreeUpgrade_GetSerializedFields' );
+function nfThreeUpgrade_GetSerializedFields(){
+    $fields = ninja_forms_get_all_favs();
+
+    echo json_encode( array( 'serialized' => maybe_serialize( $fields ) ) ) ;
+    wp_die();
+}
+
 add_action( 'init', 'ninja_forms_three_submenu' );
 function ninja_forms_three_submenu(){
     include plugin_dir_path( __FILE__ ) . 'upgrade/class-submenu.php';

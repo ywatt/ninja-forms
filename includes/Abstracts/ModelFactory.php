@@ -177,6 +177,20 @@ class NF_Abstracts_ModelFactory
         return $this->_fields;
     }
 
+    /**
+     * Import Field
+     *
+     * A wrapper for the Form Model import method.
+     *
+     * @param $import
+     */
+    public function import_field( $settings, $field_id = '', $is_conversion = FALSE )
+    {
+        $settings = maybe_unserialize( $settings );
+        NF_Database_Models_Field::import( $settings, $field_id, $is_conversion );
+    }
+
+
     /*
      * ACTIONS
      */
