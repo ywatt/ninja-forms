@@ -642,42 +642,6 @@ return apply_filters( 'ninja_forms_field_settings', array(
 
                 ),
 
-
-
-   /*
-    * Show Rich Text Editor
-    */
-
-    // 'rte_enable' => array(
-    //     'name' => 'rte_enable', // TODO was rich_text_editor
-    //     'type' => 'toggle',
-    //     'label' => __( 'Enable RTE', 'ninja-forms' ),
-    //     'width' => 'one-half',
-    //     'group' => 'rte',
-    //     'value' => FALSE,
-    //
-    // ),
-
-    // 'rte_media' => array(
-    //     'name' => 'rte_media', // TODO was media_upload_button
-    //     'type' => 'toggle',
-    //     'label' => __( 'Enable Media Button', 'ninja-forms' ),
-    //     'width' => 'one-half',
-    //     'group' => 'rte',
-    //     'value' => FALSE,
-    //
-    // ),
-
-    // 'rte_mobile' => array(
-    //     'name' => 'rte_mobile', // TODO was disable_moblile_rich_text_editor
-    //     'type' => 'toggle',
-    //     'label' => __( 'Mobile Friendly', 'ninja-forms' ),
-    //     'width' => 'one-half',
-    //     'group' => 'rte',
-    //     'value' => FALSE,
-    //
-    // ),
-
    /*
     * Password Registration checkbox
     */
@@ -778,6 +742,45 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'width' => 'full',
         'group' => 'primary',
         'settings' => array(),
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Textarea Settings
+    |--------------------------------------------------------------------------
+    */
+    
+    'textarea_rte'          => array(
+        'name'              => 'textarea_rte',
+        'type'              => 'toggle',
+        'label'             => __( 'Show Rich Text Editor', 'ninja-forms' ),
+        'width'             => 'one-third',
+        'group'             => 'display',
+        'value'             => '',
+    ),  
+
+    'textarea_media'          => array(
+        'name'              => 'textarea_media',
+        'type'              => 'toggle',
+        'label'             => __( 'Show Media Upload Button', 'ninja-forms' ),
+        'width'             => 'one-third',
+        'group'             => 'display',
+        'value'             => '',
+        'deps'              => array(
+            'textarea_rte'  => 1
+        )
+    ),
+
+    'disable_rte_mobile'    => array(
+        'name'              => 'disable_rte_mobile',
+        'type'              => 'toggle',
+        'label'             => __( 'Disable Rich Text Editor on Mobile', 'ninja-forms' ),
+        'width'             => 'one-third',
+        'group'             => 'display',
+        'value'             => '',
+        'deps'              => array(
+            'textarea_rte'  => 1
+        )
     ),
 
     /*
