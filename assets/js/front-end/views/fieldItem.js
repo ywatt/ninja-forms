@@ -223,6 +223,7 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 		},
 
 		fieldChange: function( e ) {
+			console.log( 'change' );
 			var el = jQuery( e.currentTarget );
 			var response = nfRadio.channel( 'nfAdmin' ).request( 'change:field', el, this.model );
 		},
