@@ -16,7 +16,7 @@ define( [], function() {
 		},
 
 		beforeRenderSetting: function( settingModel, dataModel, view ) {
-			console.log( 'render!' );
+			// console.log( 'render!' );
 		},
 
 		getProductFields: function( settingModel ) {
