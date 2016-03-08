@@ -12,6 +12,8 @@
   .nf-fields .ninja-forms-field {
     font-size: 16px;
     padding: 16px; }
+  .nf-fields hr.ninja-forms-field {
+    padding: 0; }
   .nf-fields .nf-product-field.ninja-forms-field {
     background: transparent;
     border: 0;
