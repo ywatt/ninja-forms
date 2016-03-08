@@ -963,7 +963,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         ),
         'label'             => __( 'Cost Type', 'ninja-forms' ),
         'width'             => 'full',
-        'group'             => 'primary',
+        'group'             => '', //'primary',
         'value'             => 'single',
     ),
 
