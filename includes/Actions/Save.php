@@ -54,7 +54,14 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
         $sub = Ninja_Forms()->form( $form_id )->sub()->get();
 
+        $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
+
         foreach( $data['fields'] as $field ){
+
+            if( in_array( $field[ 'type' ], array_values( $hidden_field_types ) ) ) {
+                $data['actions']['save']['hidden'][] = $field['type'];
+                continue;
+            }
 
             $sub->update_field_value( $field['id'], $field['value'] );
         }

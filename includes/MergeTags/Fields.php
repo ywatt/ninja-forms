@@ -31,7 +31,8 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
 
     public function add_field( $field )
     {
-        if( in_array( $field[ 'type' ], array( 'submit' ) ) ) return;
+        $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
+        if( in_array( $field[ 'type' ], $hidden_field_types ) ) return;
 
         $callback = 'field_' . $field[ 'id' ];
 
