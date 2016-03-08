@@ -13,7 +13,7 @@ class NF_Fields_ListCountry extends NF_Abstracts_List
 
     protected $_section = 'userinfo';
 
-    protected $_templates = 'listcountry';
+    protected $_templates = array( 'listcountry', 'listselect' );
 
     public function __construct()
     {
