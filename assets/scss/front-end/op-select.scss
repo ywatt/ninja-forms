@@ -1,5 +1,7 @@
 .nf-fields {
-    .listselect-wrap {
+    .listselect-wrap,
+    .liststate-wrap,
+    .listcountry-wrap {
         span {
             position: relative;
             &::after {

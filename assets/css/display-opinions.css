@@ -26,7 +26,9 @@
     width: 80px; }
   .nf-fields textarea {
     height: 200px; }
-  .nf-fields .listselect-wrap select {
+  .nf-fields .listselect-wrap select,
+  .nf-fields .liststate-wrap select,
+  .nf-fields .listcountry-wrap select {
     height: 48px; }
   .nf-fields .nf-static {
     background: transparent;

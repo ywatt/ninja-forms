@@ -22,5 +22,26 @@ class NF_Fields_ListState extends NF_Abstracts_List
         parent::__construct();
 
         $this->_nicename = __( 'State', 'ninja-forms' );
+
+        $this->_settings[ 'options' ][ 'value' ] = $this->get_options();
+    }
+
+    private function get_options()
+    {
+        $order = 0;
+        $options = array();
+        foreach( Ninja_Forms()->config( 'StateList' ) as $label => $value ){
+            $options[] = array(
+                'label'  => $label,
+                'value' => $value,
+                'calc' => '',
+                'selected' => 0,
+                'order' => $order
+            );
+
+            $order++;
+        }
+
+        return $options;
     }
 }
