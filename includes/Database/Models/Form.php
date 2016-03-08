@@ -267,9 +267,18 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         foreach( $import[ 'actions' ] as $key => $action_settings ){
             foreach( $action_settings as $setting => $value ){
                 foreach( $field_lookup as $field_id => $field_key ){
+
+                    // Convert Tokenizer
                     $token = 'field_' . $field_id;
-                    if( FALSE === strpos( $value, $token ) ) continue;
-                    $value = str_replace( $token, '{field:' . $field_key . '}', $value );
+                    if( FALSE !== strpos( $value, $token ) ) {
+                        $value = str_replace( $token, '{field:' . $field_key . '}', $value );
+                    }
+
+                    // Convert Shortcodes
+                    $shortcode = "[ninja_forms_field id=$field_id]";
+                    if( FALSE !== strpos( $value, $shortcode ) ){
+                        $value = str_replace( $shortcode, '{field:' . $field_key . '}', $value );
+                    }
                 }
 
                 if( FALSE !== strpos( $value, '[ninja_forms_all_fields]' ) ) {
