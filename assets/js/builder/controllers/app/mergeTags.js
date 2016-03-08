@@ -69,6 +69,9 @@ define( [
 			this.listenTo( nfRadio.channel( 'mergeTags' ), 'click:mergeTag', this.clickMergeTag );
 			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.addFieldTags );
 			this.listenTo( nfRadio.channel( 'fields' ), 'delete:field', this.deleteFieldTags );
+			this.listenTo( nfRadio.channel( 'option-repeater-calculations' ), 'update:option', this.updateCalcTags );
+			this.listenTo( nfRadio.channel( 'option-repeater-calculations' ), 'remove:option', this.updateCalcTags );
+
 			
 			nfRadio.channel( 'mergeTags' ).reply( 'update:currentElement', this.updateCurrentElement, this );
 			nfRadio.channel( 'mergeTags' ).reply( 'update:currentSetting', this.updateCurrentSetting, this );
@@ -183,6 +186,22 @@ define( [
 			var fieldID = fieldModel.get( 'id' );
 			var tagModel = this.tagSectionCollection.get( 'fields' ).get( 'tags' ).get( fieldID );
 			this.tagSectionCollection.get( 'fields' ).get( 'tags' ).remove( tagModel );
+		},
+
+		updateCalcTags: function( optionModel ) {
+			var calcTags = new mergeTagCollection();
+
+			var formModel = nfRadio.channel( 'app' ).request( 'get:formModel' );
+			var calcCollection = formModel.get( 'settings' ).get( 'calculations' );
+
+			_.each( calcCollection.models, function( calc ) {
+				calcTags.add( {
+					label: calc.get( 'name' ),
+					tag: '{calc:' + calc.get( 'name' ) + '}'
+				} );
+			} );
+
+			this.tagSectionCollection.get( 'calcs' ).set( 'tags', calcTags );
 		},
 
 		openMergeTags: function( e ) {

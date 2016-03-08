@@ -824,6 +824,24 @@ return apply_filters( 'ninja_forms_field_settings', array(
 
     /*
     |--------------------------------------------------------------------------
+    | DISPLAY CALCULATION SETTINGS
+    |--------------------------------------------------------------------------
+    */
+    'calc_var'              => array(
+        'name'              => 'calc_var',
+        'type'              => 'select',
+        'label'             => __( 'Display This Calculation Variable', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'primary',
+        'options'           => array(),
+        'select_product'    => array(
+            'value'         => '',
+            'label'         => __( '- Select a Variable', 'ninja-forms' ),
+        ),
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
     | Pricing Fields Settings
     |--------------------------------------------------------------------------
     */
