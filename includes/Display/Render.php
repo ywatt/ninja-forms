@@ -41,9 +41,26 @@ final class NF_Display_Render
             return;
         }
 
-        if( $form->get_setting( 'logged_in' ) ){
+        if( $form->get_setting( 'logged_in' ) && ! is_user_logged_in() ){
             echo $form->get_setting( 'not_logged_in_msg' );
             return;
+        }
+
+        if( $form->get_setting( 'sub_limit_number' ) ){
+            $subs = Ninja_Forms()->form( $form_id )->get_subs();
+
+            // TODO: Optimize Query
+            global $wpdb;
+            $count = 0;
+            $subs = $wpdb->get_results( "SELECT post_id FROM wp_postmeta WHERE `meta_key` = '_form_id' AND `meta_value` = $form_id" );
+            foreach( $subs as $sub ){
+                if( 'publish' == get_post_status( $sub->post_id ) ) $count++;
+            }
+
+            if( $count >= $form->get_setting( 'sub_limit_number' ) ) {
+                echo $form->get_setting( 'sub_limit_msg' );
+                return;
+            }
         }
 
         $before_form = apply_filters( 'ninja_forms_display_before_form', '', $form_id );
@@ -57,26 +74,6 @@ final class NF_Display_Render
 
         $after_form = apply_filters( 'ninja_forms_display_after_form', '', $form_id );
         $form->update_setting( 'afterForm', $after_form );
-
-        /*
-         * Check if user is required to be logged in
-         */
-        $is_login_required = $form->get_setting( 'require_user_logged_in_to_view_form' );
-        $is_logged_in = wp_get_current_user()->ID;
-        if( $is_login_required && ! $is_logged_in ){
-            echo $form->get_setting( 'not_logged_in_message' );
-            return;
-        }
-
-        /*
-         * Check the form submission limit
-         */
-        $limit = $form->get_setting( 'limit_submissions' );
-        $subs = Ninja_Forms()->form( $form_id )->get_subs();
-        if( $limit && ( count( $subs ) >= (int) $limit ) ){
-            echo $form->get_setting( 'limit_reached_message' );
-            return;
-        }
 
         $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
 
@@ -217,7 +214,7 @@ final class NF_Display_Render
             return;
         }
 
-        if( $form[ 'settings' ][ 'logged_in' ] ){
+        if( $form[ 'settings' ][ 'logged_in' ] && ! is_user_logged_in() ){
             echo $form[ 'settings' ][ 'not_logged_in_msg' ];
             return;
         }
