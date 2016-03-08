@@ -261,6 +261,9 @@ define(['models/calcCollection'], function( CalcCollection ) {
 		},
 
 		initDisplayField: function( fieldModel ) {
+
+			if( ! fieldModel.get( 'default' ) ) return;
+
 			var calcs = fieldModel.get( 'default' ).match( new RegExp( /{calc:(.*?)}/g ) );
 			if ( calcs ) {
 				var that = this;
