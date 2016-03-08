@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
                     will_need_attention: 'Will Need Attention After Upgrade',
                 }),
 
-                data.next = 'Upgrade Forms';
+                data.next = 'Start Upgrade';
 
                 data.readyToConvert = 1;
                 _.each(this.forms, function (form) {
