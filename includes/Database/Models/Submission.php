@@ -404,7 +404,10 @@ final class NF_Database_Models_Submission
     protected function format_meta_query( array $where = array() )
     {
         $return = array(
-            '_form_id' => $this->_form_id
+            array(
+                'key' => '_form_id',
+                'value' => $this->_form_id
+            )
         );
 
         if( ! empty( $where ) ) {
