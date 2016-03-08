@@ -85,6 +85,9 @@
 
         <# if( 'checking' == data.step && data.readyToConvert ) { #>
             <button class="nf-upgrade-button js-nfUpgrade-startConversion">{{data.next}}</button>
+            <p>
+                <small>By upgrading to the Ninja Forms THREE Release Candidate you agree to allow data to be collected about your Ninja Forms install.</small>
+            </p>
         <# } #>
     </script>
 
