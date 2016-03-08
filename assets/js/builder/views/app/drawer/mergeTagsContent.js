@@ -32,7 +32,7 @@ define( ['views/app/drawer/mergeTagsSection', 'models/app/mergeTagCollection'], 
 				if ( 'undefined' != typeof useMergeTags.include ) {
 					_.each( mergeTagCollection.models, function( sectionModel ) {
 						if ( -1 != useMergeTags.include.indexOf( sectionModel.get( 'id' ) ) ) {
-							console.log( sectionModel );
+							// console.log( sectionModel );
 							that.collection.add( sectionModel );
 						}
 					} );

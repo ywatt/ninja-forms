@@ -148,6 +148,11 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         $fields_settings = array();
 
+        // echo "<pre>";
+        // print_r( $fields );
+        // echo "</pre>";
+        // die();
+
         if( ! empty( $fields ) ) {
             foreach ($fields as $field) {
 

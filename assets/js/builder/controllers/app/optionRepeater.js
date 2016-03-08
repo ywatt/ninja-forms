@@ -106,6 +106,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 			};
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'addListOption', model, null, label );
+			nfRadio.channel( 'option-repeater-' + collection.settingModel.get( 'name' ) ).trigger( 'add:option', model );
 			nfRadio.channel( 'option-repeater' ).trigger( 'add:option', model );
 			this.triggerDataModel( model, dataModel );
 		},
@@ -153,6 +154,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 
 			collection.remove( model );
 			nfRadio.channel( 'option-repeater' ).trigger( 'remove:option', model );
+			nfRadio.channel( 'option-repeater-' + collection.settingModel.get( 'name' ) ).trigger( 'remove:option', model );
 			this.triggerDataModel( model, dataModel );
 		},
 
