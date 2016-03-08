@@ -1,7 +1,16 @@
 define([], function() {
     var controller = Marionette.Object.extend( {
         initialize: function() {
+            this.listenTo( nfRadio.channel( 'number' ), 'init:model', this.maybeMinDefault );
             this.listenTo( nfRadio.channel( 'number' ), 'keyup:field', this.validateMinMax );
+        },
+
+        maybeMinDefault: function( model ) {
+
+            if( '' == model.get( 'value' ) ){
+                var min = model.get( 'num_min' );
+                model.set( 'value', min );
+            }
         },
 
         validateMinMax: function( el, model ) {
@@ -11,13 +20,13 @@ define([], function() {
             var max = $el.attr( 'max' );
             var step = $el.attr( 'step' );
 
-            if( value < min ){
+            if( min && value < min ){
                 nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'number-min', 'Number Min Error' );
             } else {
                 nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'number-min' );
             }
 
-            if ( value > max ){
+            if ( max && value > max ){
                 nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'number-max', 'Number Max Error' );
             } else {
                 nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'number-max' );
