@@ -27,4 +27,35 @@ class NF_Fields_Date extends NF_Fields_Textbox
 
         $this->_nicename = __( 'Date', 'ninja-forms' );
     }
+
+    public function process( $field, $data )
+    {
+
+        foreach( $data[ 'fields' ] as $key => $field ){
+
+            if( 'date' != $field[ 'type' ] ) continue;
+            if( ! isset( $field[ 'date_format' ] ) || ! $field[ 'date_format' ] ) continue;
+
+            $format = $this->get_format( $field[ 'date_format' ] );
+            $data[ 'fields' ][ $key ][ 'value' ] = date( $format, strtotime( $field[ 'value' ] ) );
+        }
+
+        return $data;
+    }
+
+    private function get_format( $format )
+    {
+        $lookup = array(
+            'DD/MM/YYYY' => 'm/d/Y',
+            'DD-MM-YYYY' => 'd-m-Y',
+            'MM/DD/YYYY' => 'm/d/Y',
+            'MM-DD-YYYY' => 'm-d-Y',
+            'YYYY-MM-DD' => 'Y-m-d',
+            'YYYY/MM/DD' => 'Y/m/d',
+            'dddd, MMMM D YYYY' => 'l, F d Y'
+        );
+
+        return ( isset( $lookup[ $format ] ) ) ? $lookup[ $format ] : $format;
+    }
+
 }
