@@ -214,7 +214,7 @@ final class NF_Display_Render
             return;
         }
 
-        if( $form[ 'settings' ][ 'logged_in' ] && ! is_user_logged_in() ){
+        if( isset( $form[ 'settings' ][ 'logged_in' ] ) && $form[ 'settings' ][ 'logged_in' ] && ! is_user_logged_in() ){
             echo $form[ 'settings' ][ 'not_logged_in_msg' ];
             return;
         }
