@@ -7,7 +7,7 @@ class NF_Fields_HTML extends NF_Abstracts_Input
 {
     protected $_name = 'html';
 
-    protected $_section = 'misc';
+    protected $_section = 'layout';
 
     protected $_aliases = array( 'html' );
 
