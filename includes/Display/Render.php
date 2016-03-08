@@ -311,6 +311,7 @@ final class NF_Display_Render
                     $field['settings']['product_price'] = str_replace('$', '', $field['settings']['product_price'] );
                     $field['settings']['product_price'] = number_format($field['settings']['product_price'], 2);
                 } elseif ('total' == $field['settings']['type']) {
+                    if( ! isset( $field[ 'settings' ][ 'value' ] ) ) $field[ 'settings' ][ 'value' ] = 0;
                     $field['settings']['value'] = number_format($field['settings']['value'], 2);
                 }
 
