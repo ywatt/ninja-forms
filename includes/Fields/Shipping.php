@@ -26,6 +26,8 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
         $this->_nicename = __( 'Shipping', 'ninja-forms' );
 
         add_filter( 'ninja-forms-field-settings-groups', array( $this, 'add_setting_group' ) );
+
+        add_filter( 'ninja_forms_merge_tag_value_shipping', array( $this, 'merge_tag_value' ), 10, 2 );
     }
 
     public function add_setting_group( $groups )
@@ -62,5 +64,22 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
             default:
                 return "";
         }
+    }
+
+    public function merge_tag_value( $value, $field )
+    {
+        if( isset( $field[ 'shipping_type' ] ) ){
+
+            switch( $field[ 'shipping_type' ] ){
+                case 'single':
+                    $value = $field[ 'shipping_cost' ];
+                    break;
+                case 'select':
+                    $value = $field[ 'shipping_options' ];
+                    break;
+            }
+        }
+
+        return $value;
     }
 }

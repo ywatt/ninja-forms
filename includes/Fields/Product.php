@@ -26,6 +26,8 @@ class NF_Fields_Product extends NF_Abstracts_Input
         parent::__construct();
 
         $this->_nicename = __( 'Product', 'ninja-forms' );
+
+        add_filter( 'ninja_forms_merge_tag_value_product', array( $this, 'merge_tag_value' ), 10, 2 );
     }
 
     public function process( $product, $data )
@@ -60,5 +62,14 @@ class NF_Fields_Product extends NF_Abstracts_Input
         $data[ 'product_totals' ][] = number_format( $total, 2 );
 
         return $data;
+    }
+
+    public function merge_tag_value( $value, $field )
+    {
+        if( isset( $field[ 'product_price' ] ) ){
+            $value = $field[ 'product_price' ];
+        }
+
+        return $value;
     }
 }
