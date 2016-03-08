@@ -21,7 +21,7 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
                 'width' => 'one-half',
                 'group' => 'primary',
                 'value' => TRUE,
-
+                'help' => __( 'Does apply to form preview.', 'ninja-forms' )
             ),
 
             /*
@@ -61,6 +61,7 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
                 'width' => 'one-third',
                 'group' => 'primary',
                 'value' => NULL,
+                'help' => __( 'Does NOT apply to form preview.', 'ninja-forms' )
 
                 //TODO: Add following text below the element.
                 //Select the number of submissions that this form will accept. Leave empty for no limit.
