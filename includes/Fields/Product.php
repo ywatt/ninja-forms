@@ -21,6 +21,8 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
     protected $_settings = array( 'product_use_quantity', 'product_price', 'product_type', 'product_type' );
 
+    protected $_settings_exclude = array( 'input_limit_set' );
+
     public function __construct()
     {
         parent::__construct();

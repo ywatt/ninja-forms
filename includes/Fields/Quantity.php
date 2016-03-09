@@ -19,7 +19,7 @@ class NF_Fields_Quantity extends NF_Fields_Number
 
     protected $_settings = array( 'product_assignment', 'number' );
 
-    protected $_settings_exclude = array( 'required' );
+    protected $_settings_exclude = array( 'required', 'input_limit_set' );
 
     public function __construct()
     {
