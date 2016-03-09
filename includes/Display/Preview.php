@@ -29,8 +29,10 @@ final class NF_Display_Preview
     /**
      * @return string
      */
-    function the_title()
+    function the_title( $title )
     {
+        if( ! in_the_loop() ) return $title;
+
         $form_title = Ninja_Forms()->form( $this->_form_id )->get()->get_setting( 'title' );
 
         return $form_title . " " . __( 'Preview', 'ninja-forms' );
