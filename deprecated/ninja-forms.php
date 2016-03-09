@@ -832,7 +832,7 @@ function ninja_forms_three_calc_check()
 {
     global $wpdb;
 
-    $rows = $wpdb->get_results( "SELECT * FROM " . NINJA_FORMS_FIELDS_TABLE_NAME . " WHERE type = '_calc'" );
+    $rows = $wpdb->get_results( "SELECT * FROM " . NINJA_FORMS_FIELDS_TABLE_NAME . " WHERE type = '_calc' OR type = '_country'" );
 
     return ( $rows ) ? FALSE : TRUE ;
 }
