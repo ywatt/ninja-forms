@@ -864,3 +864,33 @@ function ninja_forms_three_addons_version_check(){
     return TRUE;
 }
 
+function ninja_forms_three_addons_check(){
+    $items = wp_remote_get( 'https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h' );
+    $items = wp_remote_retrieve_body( $items );
+    $items = json_decode( $items, true );
+
+    $has_addons = FALSE;
+    if( is_array( $items ) ) {
+        foreach ($items as $item) {
+
+            if (empty($item['plugin'])) continue;
+            if (!file_exists(WP_PLUGIN_DIR . '/' . $item['plugin'])) continue;
+
+            $has_addons = TRUE;
+
+            $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $item['plugin'], false, true);
+
+            if (!$plugin_data['Version']) continue;
+            if (version_compare($plugin_data['Version'], '3', '>=')) continue;
+
+            /*
+             * There are non-compatible add-ons installed.
+             */
+
+            return FALSE;
+        }
+    }
+
+    return $has_addons;
+}
+
