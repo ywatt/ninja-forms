@@ -6,6 +6,7 @@
 class NF_Fields_Zip extends NF_Fields_Textbox
 {
     protected $_name = 'zip';
+    protected $_type = 'zip';
 
     protected $_nicename = 'Zip';
 

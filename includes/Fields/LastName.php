@@ -6,6 +6,7 @@
 class NF_Fields_LastName extends NF_Abstracts_UserInfo
 {
     protected $_name = 'lastname';
+    protected $_type = 'lastname';
 
     protected $_nicename = 'Last Name';
 

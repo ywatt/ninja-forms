@@ -6,6 +6,7 @@
 class NF_Fields_Address extends NF_Fields_Textbox
 {
     protected $_name = 'address';
+    protected $_type = 'address';
 
     protected $_nicename = 'Address';
 

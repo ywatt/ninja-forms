@@ -6,6 +6,7 @@
 class NF_Fields_City extends NF_Fields_Textbox
 {
     protected $_name = 'city';
+    protected $_type = 'city';
 
     protected $_nicename = 'City';
 
