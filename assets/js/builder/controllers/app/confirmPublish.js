@@ -14,6 +14,10 @@ define( [], function() {
 
 		confirmPublish: function() {
 			var formModel = nfRadio.channel( 'app' ).request( 'get:formModel' );
+			// Check to see if we need to add a submit button.
+			if ( 1 == formModel.get( 'settings' ).get( 'add_submit' ) ) {
+				nfRadio.channel( 'fields' ).request( 'add', { type: 'submit', label: 'Submit', order: 9999 } );
+			}
 			formModel.set( 'show_publish_options', false );
 			nfRadio.channel( 'app' ).request( 'update:db', 'publish' );
 		}
