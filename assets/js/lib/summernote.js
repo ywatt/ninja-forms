@@ -6,6 +6,11 @@
  * Copyright 2013-2015 Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license./
  *
+ *
+ * MODIFIED: Adding support for CodeMirror callbacks.
+ * If we've got any callbacks for code mirror, register them.
+ * Line 4670
+ *
  * Date: 2015-12-31T12:09Z
  */
 (function (factory) {
@@ -4660,6 +4665,25 @@
       // activate CodeMirror as codable
       if (agent.hasCodeMirror) {
         var cmEditor = CodeMirror.fromTextArea($codable[0], options.codemirror);
+        /*
+         * MODIFIED: Adding support for CodeMirror callbacks.
+         * If we've got any callbacks for code mirror, register them.
+         */
+        if ( 'undefined' != typeof options.codemirror.callbacks ) {
+          for ( var key in options.codemirror.callbacks ) {
+            if ( options.codemirror.callbacks.hasOwnProperty( key ) ) {
+                if ( 'onBlur' == key ) {
+                  var event = 'blur';
+                } else if ( 'onFocus' == key ) {
+                  var event = 'focus';
+                } else if ( 'onChange' == key ) {
+                  var event = 'change';
+                }
+
+                cmEditor.on( event, options.codemirror.callbacks[ key ], cmEditor );
+            }
+          }          
+        }
 
         // CodeMirror TernServer
         if (options.codemirror.tern) {
