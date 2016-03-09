@@ -84,6 +84,11 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
     			} else {
     				var mask = this.model.get( 'mask' );
     			}
+
+    			if ( Number.isInteger( mask ) ) {
+    				mask = mask.toString();
+    			}
+
     			jQuery( this.el ).find( '.nf-element' ).mask( mask );
     		}
 
