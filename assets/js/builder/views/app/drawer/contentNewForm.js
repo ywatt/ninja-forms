@@ -21,7 +21,14 @@ define( ['views/app/drawer/itemSetting'], function( itemSettingView) {
 			var addSubmitSettingModel = nfRadio.channel( 'settings' ).request( 'get:settingModel', 'add_submit' );
 			var dataModel = nfRadio.channel( 'settings' ).request( 'get:settings' );
 			this.formName.show( new itemSettingView( { model: titleSettingModel, dataModel: dataModel } ) );
-			this.formSubmit.show( new itemSettingView( { model: addSubmitSettingModel, dataModel: dataModel } ) );
+			/*
+			 * If we don't have any submit buttons on the form, prompt the user to add one on publish.
+			 */
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			var submitButtons = fieldCollection.findWhere( { type: 'submit' } );
+			if ( 'undefined' == typeof submitButtons ) {
+				this.formSubmit.show( new itemSettingView( { model: addSubmitSettingModel, dataModel: dataModel } ) );				
+			}
 		},
 
 		events: {
