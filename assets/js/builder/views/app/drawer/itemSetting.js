@@ -191,7 +191,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 	    		renderSetting: function(){
 	    			if ( 'undefined' != typeof that.dataModel.get( this.name ) ) {
 	    				this.value = that.dataModel.get( this.name );
-	    			} else {
+	    			} else if ( 'undefined' == typeof this.value ) {
 	    				this.value = '';
 	    			}
 

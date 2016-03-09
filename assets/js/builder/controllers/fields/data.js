@@ -42,6 +42,9 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 		addField: function( data, silent ) {
 			silent = silent || false;
 			if ( false === data instanceof Backbone.Model ) {
+				if ( 'undefined' == typeof ( data.id ) ) {
+					data.id = this.getTmpFieldID();
+				}
 				var model = new fieldModel( data );
 			} else {
 				var model = data;

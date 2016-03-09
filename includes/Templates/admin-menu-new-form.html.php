@@ -316,6 +316,7 @@
 
 <script id="nf-tmpl-drawer-content-new-form" type="text/template">
     <span class="new-form-name"></span>
+    <div class="new-form-submit"></div>
     <div>
         <a href="#" title="Not Yet" class="nf-button secondary nf-close-drawer" style="float:left;" tabindex="-1">Not Yet</a>
     </div>

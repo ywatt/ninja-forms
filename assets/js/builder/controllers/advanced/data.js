@@ -11,6 +11,7 @@ define( ['models/advanced/settingsModel'], function( settingsModel ) {
 		initialize: function() {
 			// Load our action collection from our localized form data
 			this.model = new settingsModel( preloadedFormData.settings );
+
 			nfRadio.channel( 'settings' ).reply( 'get:settings', this.getSettings, this );
 		},
 

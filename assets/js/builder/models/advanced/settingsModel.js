@@ -16,6 +16,16 @@ define( [], function() {
 		initialize: function() {
 			// Listen for model attribute changes
 			this.bind( 'change', this.changeSetting, this );
+			var that = this;
+			/*
+			 * Check to see if we have any setting defaults to set.
+			 */
+			var formSettings = nfRadio.channel( 'settings' ).request( 'get:collection' );
+			_.each( formSettings.models, function( settingModel ) {
+				if ( settingModel.get( 'value' ) ) {
+					that.set( settingModel.get( 'name' ), settingModel.get( 'value' ), { silent: true } );
+				}
+			} );
 
 			this.listenTo( nfRadio.channel( 'settings' ), 'update:fieldKey', this.updateFieldKey );
 		},

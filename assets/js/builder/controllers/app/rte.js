@@ -109,33 +109,44 @@ define( [], function() {
 				height: 150,   //set editable area's height
 				codemirror: { // codemirror options
 				    theme: 'monokai',
-				    lineNumbers: true
+				    lineNumbers: true,
+				    callbacks: {
+				    	onBlur: function( editor ) {
+				    		var value = editor.getValue();
+				    		that.updateDataModel( settingModel, dataModel, value );
+				    	}
+				    }
 				},
 				prettifyHtml: true,
 				callbacks: {
 					onBlur: function() {
-						var name = settingModel.get( 'name' );
-						var before = dataModel.get( name );
-						var after = jQuery( this ).summernote( 'code' );
-
-						var changes = {
-							attr: name,
-							before: before,
-							after: after
-						}
-
-						var label = {
-							object: dataModel.get( 'objectType' ),
-							label: dataModel.get( 'label' ),
-							change: 'Changed ' + settingModel.get( 'label' ) + ' from ' + before + ' to ' + after
-						};
-
-						nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', dataModel, changes, label );
-
-						dataModel.set( settingModel.get( 'name' ), after );
+						var value = jQuery( this ).summernote( 'code' );
+						that.updateDataModel( settingModel, dataModel, value );
 					}
 				}
 			} );
+		},
+
+		updateDataModel: function( settingModel, dataModel, value ) {
+			var name = settingModel.get( 'name' );
+			var before = dataModel.get( name );
+			var after = value;
+
+			var changes = {
+				attr: name,
+				before: before,
+				after: after
+			}
+
+			var label = {
+				object: dataModel.get( 'objectType' ),
+				label: dataModel.get( 'label' ),
+				change: 'Changed ' + settingModel.get( 'label' ) + ' from ' + before + ' to ' + after
+			};
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'changeSetting', dataModel, changes, label );
+
+			dataModel.set( settingModel.get( 'name' ), after );
 		},
 
 		renderSetting: function( settingModel, dataModel, settingView ) {

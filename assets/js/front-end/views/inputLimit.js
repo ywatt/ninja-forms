@@ -5,7 +5,7 @@ define( [], function() {
 
         initialize: function() {
         	this.listenTo( nfRadio.channel( 'field-' + this.model.get( 'id' ) ), 'keyup:field', this.updateCount );
-        	this.count = 0;
+        	this.count = this.model.get( 'input_limit' );
         	this.render();
         },
 
@@ -14,12 +14,14 @@ define( [], function() {
             var regex = /\s+/gi;
             var words = value.trim().replace(regex, ' ').split(' ');
             var wordCount = words.length;
-            var charCount = value.trim().length;
+            var charCount = value.length;
 
             if ( 'characters' == this.model.get( 'input_limit_type' ) ) {
-                this.count = charCount;
+                this.count = this.model.get( 'input_limit' ) - charCount;
+                // this.count = charCount;
             } else {
-                this.count = wordCount;
+                this.count = this.model.get( 'input_limit' ) - wordCount;
+                // this.count = wordCount;
 
                 var limit = this.model.get( 'input_limit' );
                 if( wordCount > limit ){
