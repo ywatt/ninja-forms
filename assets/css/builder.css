@@ -702,6 +702,7 @@ All styles used within the drawer
   margin-top: 5px;
   padding: 12px 15px;
   width: 100%;
+  height: auto;
   text-transform: default; }
 
 .ninja-forms-app textarea {
