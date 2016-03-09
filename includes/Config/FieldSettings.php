@@ -200,6 +200,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'label' => __( 'Input Mask', 'ninja-forms'),
         'width' => 'one-half',
         'group' => 'restrictions',
+        'help'  => __( 'Restricts the kind of input your users can put into this field.', 'ninja-forms' ),
         'options' => array(
             array(
                 'label' => __( 'none', 'ninja-forms' ),
@@ -231,10 +232,17 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'width'         => 'one-half',
         'group'         => 'restrictions',
         'value'         => '',
+
         'deps'          => array(
             'mask'      => 'custom'
         ),
         'placeholder'   => '',
+        'help'  => __( '<ul>
+                            <li>a - Represents an alpha character (A-Z,a-z) - Only allows letters to be entered. </li>
+                            <li>9 - Represents a numeric character (0-9) - Only allows numbers to be entered.</li>
+                            <li>* - Represents an alphanumeric character (A-Z,a-z,0-9) - This allows both numbers and
+                            letters to be entered.</li>
+                        </ul>', 'ninja-forms' ),
     ),
 
     /*
@@ -345,6 +353,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
                 'width' => 'one-half',
                 'value' => '',
                 'use_merge_tags' => FALSE,
+                'help' => __( 'Adds an extra class to your field wrapper.', 'ninja-forms' ),
             ),
             array(
                 'name' => 'element_class',
@@ -354,6 +363,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
                 'width' => 'one-half',
                 'value' => '',
                 'use_merge_tags' => FALSE,
+                'help' => __( 'Adds an extra class to your field element.', 'ninja-forms' ),
             ),
         ),
     ),
@@ -438,7 +448,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'width' => 'full',
         'group' => 'administration',
         'value' => '',
-        'help' => __( 'Programmatic name that can be used to reference this field.', 'ninja-forms' ),
+        'help' => __( 'Creates a unique key to identify and target your field for custom development.', 'ninja-forms' ),
     ),
 
     /*
@@ -533,6 +543,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
                 ),
                 'label'             => __( 'Display Position', 'ninja-forms' ),
                 'width'             => 'full',
+                'help'      => __( 'Determines the position of the label relative to the field element.', 'ninja-forms' ),
             ),
 
         ),
@@ -757,6 +768,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'width'             => 'one-third',
         'group'             => 'display',
         'value'             => '',
+        'help'              => __( 'Allows rich text input.', 'ninja-forms' ),
     ),  
 
     'textarea_media'          => array(
@@ -866,6 +878,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'value' => TRUE,
+        'help'  => __( 'Allows users to choose more than one of this product.', 'ninja-forms' ),
 
     ),
 
@@ -997,6 +1010,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'width' => 'full',
         'group' => 'primary',
         'value' => '',
+        'help'  => __( 'A case sensitive answer to help prevent spam submissions of your form.', 'ninja-forms' ),
     ),
 
     /*
