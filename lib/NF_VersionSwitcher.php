@@ -112,12 +112,12 @@ function nf_fs() {
 
     if ( ! isset( $nf_fs ) ) {
         // Include Freemius SDK.
-        require_once dirname( __FILE__ ) . '/freemius/start.php';
+        require_once dirname( __FILE__ ) . '/Freemius/start.php';
 
         $nf_fs = fs_dynamic_init( array(
             'slug'           => 'ninja-forms',
-            'id'             => '219',
-            'public_key'     => 'pk_c15496cc04a1d46d3f18389dc3a4b',
+            'id'             => '209',
+            'public_key'     => 'pk_f2f84038951d45fc8e4ff9747da6d',
             'is_premium'     => false,
             'has_addons'     => false,
             'has_paid_plans' => false,

@@ -311,10 +311,10 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
     public function import_field_backwards_compatibility( $field )
     {
         // Flatten field settings array
-        if( isset( $field[ 'data' ] ) ){
+        if( isset( $field[ 'data' ] ) && is_array( $field[ 'data' ] ) ){
             $field = array_merge( $field, $field[ 'data' ] );
-            unset( $field[ 'data' ] );
         }
+        unset( $field[ 'data' ] );
 
         // Drop form_id in favor of parent_id, which is set by the form.
         if( isset( $field[ 'form_id' ] ) ){
