@@ -5,13 +5,13 @@ define([], function() {
 		},
 
 		actionSubmit: function( response ) {
-			if ( 1 == response.data.settings.clear_successfully_created_form ) {
+			if ( 1 == response.data.settings.clear_complete ) {
 				// nfRadio.channel( 'form-' + response.data.form_id ).trigger( 'reset' );
 				var formModel = nfRadio.channel( 'app' ).request( 'get:form', response.data.form_id );
 				formModel.get( 'fields' ).reset( formModel.get( 'loadedFields' ) );
 			}
 
-			if ( 1 == response.data.settings.hide_successfully_completed_form ) {
+			if ( 1 == response.data.settings.hide_complete ) {
 				/**
 				 * TODO: This needs to be re-worked for backbone. It's not dynamic enough.
 				 */
