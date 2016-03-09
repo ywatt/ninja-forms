@@ -5047,6 +5047,8 @@ class Freemius extends Freemius_Abstract {
 	function opt_in( $email = false, $first = false, $last = false ) {
 		$this->_logger->entrance();
 
+		self::require_pluggable_essentials();
+
 		if ( false === $email ) {
 			$current_user = wp_get_current_user();
 			$email        = $current_user->user_email;

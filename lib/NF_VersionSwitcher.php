@@ -177,14 +177,15 @@ function ninja_forms_actions() {
 
 function nf_fs_upgrade(){
     update_option( 'ninja_forms_version', '3.0' );
-    // Turn Freemius on.
-    update_option( 'ninja_forms_freemius', 1 );
 
     nf_override_plugin_version();
 
     if ( ! nf_fs()->is_registered() && nf_fs()->has_api_connectivity() ) {
         if ( nf_fs()->opt_in() ) {
             // Successful opt-in into Freemius.
+
+            // Turn Freemius on.
+            update_option( 'ninja_forms_freemius', 1 );
         }
     } else if ( nf_fs()->is_registered() ) {
         // Send immediate re-upgrade event.
@@ -194,6 +195,9 @@ function nf_fs_upgrade(){
 
 function nf_fs_downgrade(){
     update_option( 'ninja_forms_version', '2.9' );
+
+    if ( ! nf_is_freemius_on() ) return;
+
     if ( nf_fs()->is_registered() ) {
         // Send immediate downgrade event.
         nf_fs()->_run_sync_install();
