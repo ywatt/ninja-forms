@@ -14,7 +14,11 @@ Copyright 2015 WP Ninjas.
 
 require_once dirname( __FILE__ ) . '/lib/NF_VersionSwitcher.php';
 
-if( ( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) || get_option( 'ninja_forms_load_deprecated', FALSE ) ) && ! isset( $_POST[ 'nf2to3' ] ) ) {
+if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ) {
+    update_option( 'ninja_forms_load_deprecated', TRUE );
+}
+
+if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2to3' ] ) ) {
 
     include 'deprecated/ninja-forms.php';
 
