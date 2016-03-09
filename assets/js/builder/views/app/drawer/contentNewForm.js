@@ -12,13 +12,16 @@ define( ['views/app/drawer/itemSetting'], function( itemSettingView) {
 		template: '#nf-tmpl-drawer-content-new-form',
 
 		regions: {
-			formName: '.new-form-name'
+			formName: '.new-form-name',
+			formSubmit: '.new-form-submit'
 		},
 
 		onRender: function() {
-			var settingModel = nfRadio.channel( 'settings' ).request( 'get:settingModel', 'title' );
+			var titleSettingModel = nfRadio.channel( 'settings' ).request( 'get:settingModel', 'title' );
+			var addSubmitSettingModel = nfRadio.channel( 'settings' ).request( 'get:settingModel', 'add_submit' );
 			var dataModel = nfRadio.channel( 'settings' ).request( 'get:settings' );
-			this.formName.show( new itemSettingView( { model: settingModel, dataModel: dataModel } ) );
+			this.formName.show( new itemSettingView( { model: titleSettingModel, dataModel: dataModel } ) );
+			this.formSubmit.show( new itemSettingView( { model: addSubmitSettingModel, dataModel: dataModel } ) );
 		},
 
 		events: {

@@ -26,7 +26,7 @@ return apply_filters( 'ninja_forms_from_display_settings', array(
         'label' => __( 'Display Form Title', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',
-        'value' => TRUE,
+        'value' => 1,
 
     ),
 
@@ -40,7 +40,7 @@ return apply_filters( 'ninja_forms_from_display_settings', array(
         'label' => __( 'Clear successfully completed form?', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',
-        'value' => TRUE,
+        'value' => 1,
 
         //TODO: Add following text below the element.
         //If this box is checked, Ninja Forms will clear the form values after it has been successfully submitted.
@@ -56,7 +56,7 @@ return apply_filters( 'ninja_forms_from_display_settings', array(
         'label' => __( 'Hide successfully completed form?', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'primary',
-        'value' => TRUE,
+        'value' => 1,
 
         //TODO: Add following text below the element.
         //If this box is checked, Ninja Forms will hide the form after it has been successfully submitted.
@@ -127,5 +127,21 @@ return apply_filters( 'ninja_forms_from_display_settings', array(
         'value' => '',
         'help' => __( 'Programmatic name that can be used to reference this form.', 'ninja-forms' ),
     ),
+
+    /*
+     * ADD SUBMIT CHECKBOX
+     */
+
+    'add_submit' => array(
+        'name' => 'add_submit',
+        'type' => 'toggle',
+        'label' => __( 'Add Submit Button', 'ninja-forms'),
+        'width' => 'full',
+        'group' => '',
+        'value' => 1,
+        'help' => __( 'We\'ve noticed that don\'t have a submit button on your form. We can add one for your automatically.', 'ninja-forms' ),
+    ),
+
+
 
 ));
