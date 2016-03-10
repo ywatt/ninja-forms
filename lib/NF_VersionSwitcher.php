@@ -63,45 +63,6 @@ new NF_VersionSwitcher();
 |--------------------------------------------------------------------------
 */
 
-function fs_ninja_add_settings_page() {
-    $hook = add_menu_page(
-        'Settings',
-        'Ninja Upgrade',
-        'manage_options',
-        'fs-manual-optin',
-        'fs_ninja_render_settings_page'
-    );
-}
-
-function fs_ninja_render_settings_page() {
-    ninja_forms_actions();
-
-    ?>
-    <h1>Manual Opt-in</h1>
-    <h3>Current version: <?php echo nf_plugin_version( '' ) ?></h3>
-    <?php if ( '2.9' === nf_plugin_version( '' ) ) : ?>
-        <form action="" method="post">
-            <input type="hidden" name="ninja_action" value="upgrade">
-            <button class="button button-primary">Upgrade Ninja Forms</button>
-        </form>
-    <?php else : ?>
-        <form action="" method="post">
-            <input type="hidden" name="ninja_action" value="downgrade">
-            <button class="button">Downgrade Ninja Forms</button>
-        </form>
-    <?php endif ?>
-    <?php if ( nf_is_freemius_on() && nf_fs()->is_registered() ) : ?>
-        <br>
-        <form action="" method="post">
-            <input type="hidden" name="ninja_action" value="opt_out">
-            <button class="button">Opt-out from Freemius</button>
-        </form>
-    <?php endif ?>
-    <?php
-}
-
-add_action( 'admin_menu', 'fs_ninja_add_settings_page' );
-
 function nf_plugin_version( $version ) {
     return get_option( 'ninja_forms_version', '2.9' );
 }
