@@ -70,7 +70,11 @@ class NF_THREE_Submenu
     {
         if( ! ninja_forms_three_calc_check() ) return;
         if( ! ninja_forms_three_addons_version_check() ) return;
-        if( ! ninja_forms_three_addons_check() ) return;
+
+        if( ! ninja_forms_three_addons_check() ){
+            // Hide the submenu
+            $this->parent_slug = '';
+        }
 
         $function = ( $this->function ) ? array( $this, $this->function ) : NULL;
 
