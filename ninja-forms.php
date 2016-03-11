@@ -25,6 +25,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
     register_activation_hook( __FILE__, 'ninja_forms_activation_deprecated' );
     function ninja_forms_activation_deprecated( $network_wide ){
         include_once 'deprecated/includes/activation.php';
+        update_option( 'ninja_forms_freemius', 1 );
         ninja_forms_activation( $network_wide );
     }
 
@@ -539,9 +540,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
 
         /**
          * Activation
-         * TODO: Move to a permanent home
          */
         public function activation() {
+            update_option( 'ninja_forms_freemius', 1 );
             $migrations = new NF_Database_Migrations();
             $migrations->migrate();
         }
