@@ -12,7 +12,10 @@
 
     <?php endforeach; ?>
 
-    <?php $u_id = apply_filters( 'ninja_forms_affiliate_id', false ); ?>
+    <?php
+    $u_id = get_option( 'nf_aff', false );
+    if ( !$u_id ) $u_id = apply_filters( 'ninja_forms_affiliate_id', false ); 
+    ?>
 
     <?php foreach ($items as $item): ?>
 

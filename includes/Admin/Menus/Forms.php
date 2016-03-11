@@ -301,7 +301,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
 
         $external_actions = $this->_fetch_action_feed();
-        $u_id = apply_filters( 'ninja_forms_affiliate_id', false );
+        $u_id = get_option( 'nf_aff', false );
+        if ( !$u_id ) $u_id = apply_filters( 'ninja_forms_affiliate_id', false );
         foreach( $external_actions as $action){
 
             if( ! isset( $action[ 'name' ] ) || ! $action[ 'name' ] ) continue;

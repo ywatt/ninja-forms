@@ -42,7 +42,9 @@ function ninja_forms_tab_addons(){
         }
     }
 
-    $u_id = apply_filters( 'ninja_forms_affiliate_id', false );
+    $u_id = get_option( 'nf_aff', false );
+    if ( !$u_id ) $u_id = apply_filters( 'ninja_forms_affiliate_id', false );
+    
     foreach ($items as $item) {
         
         $link = $item[ 'link' ];
