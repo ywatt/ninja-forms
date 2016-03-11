@@ -301,7 +301,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
 
         $external_actions = $this->_fetch_action_feed();
-
+        $u_id = apply_filters( 'ninja_forms_affiliate_id', false );
         foreach( $external_actions as $action){
 
             if( ! isset( $action[ 'name' ] ) || ! $action[ 'name' ] ) continue;
@@ -311,8 +311,12 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $image = ( isset( $action[ 'image' ] ) ) ? $action[ 'image' ] : '';
             $link = ( isset( $action[ 'link' ] ) ) ? $action[ 'link' ] : '';
 
-            $link = apply_filters( 'ninja_forms_addon_link', $link );
-            $link = apply_filters( 'ninja_forms_addon_link_' . sanitize_title( $nicename ), $link );
+            if ( $u_id ) {
+                $last_slash = strripos( $link, '/' );
+                $link = substr( $link, 0, $last_slash );
+                $link =  urlencode( $link );
+                $link = 'http://www.shareasale.com/r.cfm?u=' . $u_id . '&b=812237&m=63061&afftrack=&urllink=' . $link;            
+            }
 
             if( isset( $action_type_settings[ $name ] ) ) continue;
 

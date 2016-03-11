@@ -12,7 +12,19 @@
 
     <?php endforeach; ?>
 
+    <?php $u_id = apply_filters( 'ninja_forms_affiliate_id', false ); ?>
+
     <?php foreach ($items as $item): ?>
+
+    <?php
+        $link = $item[ 'link' ];
+        if ( $u_id ) {
+            $last_slash = strripos( $link, '/' );
+            $link = substr( $link, 0, $last_slash );
+            $link =  urlencode( $link );
+            $link = 'http://www.shareasale.com/r.cfm?u=' . $u_id . '&b=812237&m=63061&afftrack=&urllink=' . $link;            
+        }
+    ?>
 
     <div class="nf-extend nf-box">
 
@@ -47,13 +59,13 @@
 
                     <?php else: ?>
 
-                    <a href="<?php echo apply_filters( 'ninja_forms_addon_link_' . sanitize_title( $item['title'] ), apply_filters( 'ninja_forms_addon_link', $item['link'] ) ); ?>" title="<?php echo $item['title']; ?>" class="button-primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
+                    <a href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="button-primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
 
                     <?php endif; ?>
 
                 <?php else: ?>
 
-                <a href="<?php echo apply_filters( 'ninja_forms_addon_link_' . sanitize_title( $item['title'] ), apply_filters( 'ninja_forms_addon_link', $item['link'] ) ); ?>" title="<?php echo $item['title']; ?>" class="button-primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
+                <a href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="button-primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
 
                 <?php endif; ?>
 

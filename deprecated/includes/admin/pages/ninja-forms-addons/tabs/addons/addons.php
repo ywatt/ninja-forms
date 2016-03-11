@@ -42,7 +42,16 @@ function ninja_forms_tab_addons(){
         }
     }
 
+    $u_id = apply_filters( 'ninja_forms_affiliate_id', false );
     foreach ($items as $item) {
+        
+        $link = $item[ 'link' ];
+        if ( $u_id ) {
+            $last_slash = strripos( $link, '/' );
+            $link = substr( $link, 0, $last_slash );
+            $link =  urlencode( $link );
+            $link = 'http://www.shareasale.com/r.cfm?u=' . $u_id . '&b=812237&m=63061&afftrack=&urllink=' . $link;            
+        }
 
         echo '<div class="nf-extend nf-box">';
             echo '<img src="' . $item['image'] . '" />';
@@ -62,10 +71,10 @@ function ninja_forms_tab_addons(){
                     } elseif( is_plugin_inactive( $item['plugin'] ) ) {
                         echo '<span class="button-secondary nf-button">' . __( 'Installed', 'ninja-forms' ) . '</span>';
                     } else {
-                        echo '<a href="' . apply_filters( 'ninja_forms_addon_link_' . sanitize_title( $item['title'] ), apply_filters( 'ninja_forms_addon_link', $item['link'] ) ) . '" title="' . $item['title'] . '" class="button-primary nf-button">' . __( 'Learn More', 'ninja-forms' ) . '</a>';
+                        echo '<a href="' . $link . '" title="' . $item['title'] . '" class="button-primary nf-button">' . __( 'Learn More', 'ninja-forms' ) . '</a>';
                     }
                 }else{
-                    echo '<a href="' . apply_filters( 'ninja_forms_addon_link_' . sanitize_title( $item['title'] ), apply_filters( 'ninja_forms_addon_link', $item['link'] ) ) . '" title="' . $item['title'] . '" class="button-primary nf-button">' . __( 'Learn More', 'ninja-forms' ) . '</a>';
+                    echo '<a href="' . $link . '" title="' . $item['title'] . '" class="button-primary nf-button">' . __( 'Learn More', 'ninja-forms' ) . '</a>';
                 }
                 echo '</div>';
 
