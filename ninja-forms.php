@@ -280,6 +280,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
                 self::$instance->merge_tags[ 'querystrings' ] = new NF_MergeTags_QueryStrings();
 
                 /*
+                 * Add Form Modal
+                 */
+                self::$instance->add_form_modal = new NF_Admin_AddFormModal();
+
+                /*
                  * EOS Parser
                  */
                 self::$instance->_eos[ 'parser' ] = require_once 'includes/Libraries/EOS/Parser.php';
