@@ -311,6 +311,9 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             $image = ( isset( $action[ 'image' ] ) ) ? $action[ 'image' ] : '';
             $link = ( isset( $action[ 'link' ] ) ) ? $action[ 'link' ] : '';
 
+            $link = apply_filters( 'ninja_forms_addon_link', $link );
+            $link = apply_filters( 'ninja_forms_addon_link_' . sanitize_title( $nicename ), $link );
+
             if( isset( $action_type_settings[ $name ] ) ) continue;
 
             $action_type_settings[ $name ] = array(

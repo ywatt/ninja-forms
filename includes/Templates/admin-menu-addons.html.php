@@ -47,13 +47,13 @@
 
                     <?php else: ?>
 
-                    <a href="<?php echo $item['link']; ?>" title="<?php echo $item['title']; ?>" class="button-primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
+                    <a href="<?php echo apply_filters( 'ninja_forms_addon_link_' . sanitize_title( $item['title'] ), apply_filters( 'ninja_forms_addon_link', $item['link'] ) ); ?>" title="<?php echo $item['title']; ?>" class="button-primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
 
                     <?php endif; ?>
 
                 <?php else: ?>
 
-                <a href="<?php echo $item['link']; ?>" title="<?php echo $item['title']; ?>" class="button-primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
+                <a href="<?php echo apply_filters( 'ninja_forms_addon_link_' . sanitize_title( $item['title'] ), apply_filters( 'ninja_forms_addon_link', $item['link'] ) ); ?>" title="<?php echo $item['title']; ?>" class="button-primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
 
                 <?php endif; ?>
 

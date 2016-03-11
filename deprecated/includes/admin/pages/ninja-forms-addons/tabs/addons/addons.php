@@ -62,10 +62,10 @@ function ninja_forms_tab_addons(){
                     } elseif( is_plugin_inactive( $item['plugin'] ) ) {
                         echo '<span class="button-secondary nf-button">' . __( 'Installed', 'ninja-forms' ) . '</span>';
                     } else {
-                        echo '<a href="' . $item['link'] . '" title="' . $item['title'] . '" class="button-primary nf-button">' . __( 'Learn More', 'ninja-forms' ) . '</a>';
+                        echo '<a href="' . apply_filters( 'ninja_forms_addon_link_' . sanitize_title( $item['title'] ), apply_filters( 'ninja_forms_addon_link', $item['link'] ) ) . '" title="' . $item['title'] . '" class="button-primary nf-button">' . __( 'Learn More', 'ninja-forms' ) . '</a>';
                     }
                 }else{
-                    echo '<a href="' . $item['link'] . '" title="' . $item['title'] . '" class="button-primary nf-button">' . __( 'Learn More', 'ninja-forms' ) . '</a>';
+                    echo '<a href="' . apply_filters( 'ninja_forms_addon_link_' . sanitize_title( $item['title'] ), apply_filters( 'ninja_forms_addon_link', $item['link'] ) ) . '" title="' . $item['title'] . '" class="button-primary nf-button">' . __( 'Learn More', 'ninja-forms' ) . '</a>';
                 }
                 echo '</div>';
 
