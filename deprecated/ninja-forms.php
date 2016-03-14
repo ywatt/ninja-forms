@@ -373,9 +373,6 @@ class Ninja_Forms {
             $upgraded_from = get_option( 'nf_version_upgraded_from', FALSE );
             if( $upgraded_from && version_compare( $upgraded_from, '2.9', '<=') ) {
 
-                echo "<pre>";
-                var_dump($upgraded_from);
-                echo "</pre>";
                 // Include Upgrade Base Class
                 require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade.php');
 
