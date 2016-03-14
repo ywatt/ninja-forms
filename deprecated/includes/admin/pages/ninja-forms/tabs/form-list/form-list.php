@@ -91,6 +91,7 @@ function ninja_forms_tab_form_list(){
 	}
 
 	?>
+
 	<ul class="subsubsub">
 		<li class="all"><a href="" class="current"><?php _e( 'All', 'ninja-forms' ); ?> <span class="count">(<?php echo $form_count;?>)</span></a>
 	</ul>

@@ -38,11 +38,11 @@ var nfField = Backbone.Model.extend( {
 				if ( 'undefined' != typeof tinymce ) {
 					try {
 						var editor_id = jQuery( this ).find( 'textarea.wp-editor-area' ).prop( 'id' );
-						tinymce.remove( '#' + editor_id );	
+						tinymce.remove( '#' + editor_id );
 					} catch (e ) {
 
 					}
-									
+
 				}
 
 			} );
@@ -69,7 +69,7 @@ var nfField = Backbone.Model.extend( {
 		jQuery.post( ajaxurl, { field_id: field_id, data: data, action:'nf_output_field_settings_html', nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function( response ) {
 			jQuery( '#ninja_forms_metabox_field_' + field_id ).find( '.spinner' ).hide();
 			// Remove our no-padding class.
-			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).removeClass( 'no-padding' );	
+			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).removeClass( 'no-padding' );
 			jQuery( '#ninja_forms_field_' + field_id + '_inside' ).append( response );
 			if ( typeof nf_ajax_rte_editors !== 'undefined' && 'undefined' !== typeof tinyMCE ) {
 				for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
@@ -102,13 +102,13 @@ var nfField = Backbone.Model.extend( {
 
 			}
 		}
-		
+
 		var data = jQuery('[name^=ninja_forms_field_' + field_id + ']');
 		var field_data = jQuery(data).serializeFullArray();
 
 		if ( typeof field_data['ninja_forms_field_' + field_id] != 'undefined' ) {
 			var field = field_data['ninja_forms_field_' + field_id];
-			
+
 			for( var prop in field ) {
 			    if ( field.hasOwnProperty( prop ) ) {
 			        nfFields.get( field_id ).set( prop, field[ prop ] );
@@ -232,7 +232,7 @@ var nfFields = Backbone.Collection.extend({
 					var value_name = 'ninja_forms_field_' + field_id + '[list][options][' + x + '][value]';
 					var calc_name = 'ninja_forms_field_' + field_id + '[list][options][' + x + '][calc]';
 					var selected_name = 'ninja_forms_field_' + field_id + '[list][options][' + x + '][selected]';
-					
+
 					jQuery( '#' + id ).find( '.ninja-forms-field-list-option-label' ).attr( 'name', label_name );
 					jQuery( '#' + id ).find( '.ninja-forms-field-list-option-value' ).attr( 'name', value_name );
 					jQuery( '#' + id ).find( '.ninja-forms-field-list-option-calc' ).attr( 'name', calc_name );
@@ -256,7 +256,7 @@ var nfForm = Backbone.Model.extend( {
 		this.changeMenu();
 	},
 	changeMenu: function() {
-		
+
 		if ( 'new' == this.get( 'status' ) ) { // If we're working with a new form, highlight the "Add New" menu item.
 			jQuery( '.wp-submenu li' ).removeClass( 'current' );
 			jQuery( 'a[href="admin.php?page=ninja-forms&tab=builder&form_id=new"]' ).parent().addClass( 'current' );
@@ -285,7 +285,7 @@ var nfForm = Backbone.Model.extend( {
 			// Open our save form modal.
 			jQuery( '#nf-save-title' ).nfAdminModal( 'open' );
 			jQuery( '#modal-contents-wrapper' ).find( '#nf-form-title' ).focus();
-			return false;			
+			return false;
 		}
 
 		nfFields.updateData();
@@ -293,7 +293,7 @@ var nfForm = Backbone.Model.extend( {
 		var field_data = JSON.stringify( nfFields.toJSON() );
 		var field_order = {};
 		var current_order = jQuery( '#ninja_forms_field_list' ).sortable( 'toArray' );
-	
+
 		for ( var i = 0; i < current_order.length; i++ ) {
 			field_order[i] = current_order[i];
 		};
@@ -304,7 +304,7 @@ var nfForm = Backbone.Model.extend( {
 		jQuery( document ).data( 'field_data', field_data );
 
 		jQuery( document ).triggerHandler( 'nfAdminSaveFields' );
-		
+
 		var field_order = jQuery( document ).data( 'field_order' );
 		var data = jQuery( document ).data( 'field_data' );
 
@@ -342,7 +342,7 @@ var nfForm = Backbone.Model.extend( {
 			jQuery( '#_submit' ).click();
 		} else {
 			jQuery( '#nf-save-title' ).nfAdminModal( 'close' );
-			this.save();	
+			this.save();
 		}
 	}
 } );
@@ -366,7 +366,7 @@ $( document ).ready( function( $ ) {
 
 		// Get our field id.
 		var field_id = jQuery( e.target ).data( 'field' );
-		nfFields.get( field_id ).toggleMetabox();		
+		nfFields.get( field_id ).toggleMetabox();
 
 		// Get our current metabox state.
 		var current_metabox_state = nfFields.get( field_id ).get( 'metabox_state' );
@@ -446,7 +446,7 @@ $( document ).ready( function( $ ) {
 
 		if( e.keyCode == 13 && this.value.length > 0 ){
 			nfForm.saveTitle();
-		}		
+		}
 	} );
 
 	// Make the field list sortable
@@ -493,14 +493,14 @@ $( document ).ready( function( $ ) {
 
 	$( document ).on( 'click', '.nf-field-sub-section-toggle', function(e) {
 		e.preventDefault();
-		if ( $( this ).hasClass( 'dashicons-arrow-down' ) ) {
-			$( this ).removeClass( 'dashicons-arrow-down' ).addClass( 'dashicons-arrow-up' );
+		if ( $( this ).hasClass( 'dashicons-arrow-right' ) ) {
+			$( this ).removeClass( 'dashicons-arrow-right' ).addClass( 'dashicons-arrow-up' );
 		} else {
-			$( this ).removeClass( 'dashicons-arrow-up' ).addClass( 'dashicons-arrow-down' );
+			$( this ).removeClass( 'dashicons-arrow-up' ).addClass( 'dashicons-arrow-right' );
 		}
 		$( this ).parent().next( '.inside' ).slideToggle();
 	} );
-	
+
 	$( window ).bind( 'beforeunload', function() {
 		if ( 'new' == nfForm.get( 'status' ) ) { // Prompt the user to give a name if they leave the builder before naming their form.
 			$( '#nf-save-title' ).nfAdminModal( 'open' );

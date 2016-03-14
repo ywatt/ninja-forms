@@ -1,9 +1,9 @@
 === Ninja Forms ===
 Contributors: wpninjasllc, kstover, jameslaws, wpnzach, kbjohnson90, aman086, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
-Requires at least: 3.9
-Tested up to: 4.2.2
-Stable tag: 2.9.27
+Requires at least: 4.2
+Tested up to: 4.4
+Stable tag: 2.9.34
 License: GPLv2 or later
 
 Create forms and manage submissions easily with a simple drag and drop interface. Contact forms, subscription forms, or any other form for WordPress.
@@ -97,15 +97,66 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9.27 (13 August 2015) =
+= 2.9.34 (11 March 2016) =
+
+*Changes:*
+
+* Preparing for the release of 3.0. 
+
+== Changelog ==
+
+= 2.9.34 (11 March 2016) =
+
+*Changes:*
+
+* Preparing for the release of 3.0. 
+
+= 2.9.33 (22 December 2015) =
 
 *Bugs:*
 
-* Fixed a bug that could cause bulk downloads to fail.
-* Google reCaptcha should now work properly with AJAX submissions.
-* Calculations in regions that don't use decimals as separators shouldn't fail.
+* Our security filtering was still filtering out good code. We needed to back off the over-zealous filtering a bit more. 
 
-== Changelog ==
+= 2.9.32 (21 December 2015) =
+
+*Security:*
+
+* In our attempt to back-off some of our over-zealous filtering, we uncorked a previously patched XSS issue. This version fixes both issues.
+
+= 2.9.31 (16 December 2015) =
+
+*Security:*
+
+*Bugs:*
+
+* Our last security fix was a bit over-zealous. This version should prevent all occurances of the phrase 'script' from being stripped from textarea inputs.
+
+= 2.9.30 (11 December 2015) =
+
+*Security:*
+
+* Fixed a serious security issue that could allow for possible SQL injection. Please update as soon as possible.
+
+*Bugs:*
+
+* Fixed a bug that could cause HTML elements in success messages and redirects to be accidentally stripped.
+
+= 2.9.29 (08 December 2015) =
+
+*Security:*
+
+* Fixed a security issue that could allow users to run Javascript on the front-end after a submission in some circumstances. Thank you to Kenan G. ( @K3n4nG on Twitter ) for finding this issue and reporting it to us.
+
+*Bugs:*
+
+* Fixed a bug that could cause session cookies to be set on every page, rather than just upon form submission.
+* Fixed a bug that caused Ninja Forms to override translation strings on non-submission custom post types.
+
+= 2.9.28 (30 September 2015) =
+
+*Security:*
+
+* Fixed a security issue that could allow macros to be ran in Excel if a CSV with malicious content was exported. Thanks to Smit B. Shah and Hely H. Shah for the report.
 
 = 2.9.27 (13 August 2015) =
 

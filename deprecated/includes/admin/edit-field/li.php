@@ -9,11 +9,11 @@ function ninja_forms_edit_field_output_li( $field_id, $new = false ) {
 	} else {
 		$current_page = '';
 	}
-	
+
 	$field_type = $field_row['type'];
 	$field_data = $field_row['data'];
 	$plugin_settings = nf_get_settings();
-	
+
 	if ( isset( $ninja_forms_fields[$field_type]['use_li'] ) && $ninja_forms_fields[$field_type]['use_li'] ) {
 
 		if ( isset( $field_row['fav_id'] ) && $field_row['fav_id'] != 0 ) {
@@ -43,7 +43,7 @@ function ninja_forms_edit_field_output_li( $field_id, $new = false ) {
 		}
 
 		$form_id = $field_row['form_id'];
-		
+
 		if ( isset( $ninja_forms_fields[$field_type] ) ) {
 			$reg_field = $ninja_forms_fields[$field_type];
 			$type_name = $reg_field['name'];
@@ -88,7 +88,7 @@ function ninja_forms_edit_field_output_li( $field_id, $new = false ) {
 			$li_label = stripslashes( $li_label );
 			$li_label = ninja_forms_esc_html_deep( $li_label );
 
-			if ( 
+			if (
 			isset( $reg_field ) &&
 			isset( $reg_field['conditional'] ) &&
 			isset( $reg_field['conditional']['value'] ) &&
@@ -354,7 +354,7 @@ function nf_output_registered_field_settings( $field_id, $data = array() ) {
 	}
 
 	/**
-	 * We need to get a list of all of our RTEs. 
+	 * We need to get a list of all of our RTEs.
 	 * If we're submitting via ajax, we'll need to use this list.
 	 */
 	if ( ! isset ( $nf_rte_editors ) )
@@ -416,7 +416,7 @@ function nf_output_registered_field_settings( $field_id, $data = array() ) {
 				$value = $default;
 			}
 
-			ninja_forms_edit_field_el_output( $field_id, $type, $label, $name, $value, $width, $options, $class, $desc, $label_class );						
+			ninja_forms_edit_field_el_output( $field_id, $type, $label, $name, $value, $width, $options, $class, $desc, $label_class );
 		}
 	}
 
@@ -490,7 +490,7 @@ function nf_output_registered_field_settings( $field_id, $data = array() ) {
 							$value = $default;
 						}
 
-						ninja_forms_edit_field_el_output( $field_id, $type, $label, $name, $value, $width, $options, $class, $desc, $label_class );						
+						ninja_forms_edit_field_el_output( $field_id, $type, $label, $name, $value, $width, $options, $class, $desc, $label_class );
 					}
 				}
 

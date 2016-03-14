@@ -1,56 +1,4 @@
 <?php
-
-/*
-Plugin Name: Ninja Forms
-Plugin URI: http://ninjaforms.com/
-Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.9.27
-Author: The WP Ninjas
-Author URI: http://ninjaforms.com
-Text Domain: ninja-forms
-Domain Path: /lang/
-
-Copyright 2011 WP Ninjas/Kevin Stover.
-
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-Ninja Forms also uses the following jQuery plugins. Their licenses can be found in their respective files.
-
-    jQuery TipTip Tooltip v1.3
-    code.drewwilson.com/entry/tiptip-jquery-plugin
-    www.drewwilson.com
-    Copyright 2010 Drew Wilson
-
-    jQuery MaskedInput v.1.3.1
-    http://digitalbush.co
-    Copyright (c) 2007-2011 Josh Bush
-
-    jQuery Tablesorter Plugin v.2.0.5
-    http://tablesorter.com
-    Copyright (c) Christian Bach 2012
-
-    jQuery AutoNumeric Plugin v.1.9.15
-    http://www.decorplanit.com/plugin/
-    By: Bob Knothe And okolov Yura aka funny_falcon
-
-    word-and-character-counter.js
-    v2.4 (c) Wilkins Fernandez
-
-*/
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
     exit;
@@ -317,7 +265,7 @@ class Ninja_Forms {
 
         // Plugin version
         if ( ! defined( 'NF_PLUGIN_VERSION' ) )
-            define( 'NF_PLUGIN_VERSION', '2.9.27' );
+            define( 'NF_PLUGIN_VERSION', '2.9.33' );
 
         // Plugin Folder Path
         if ( ! defined( 'NF_PLUGIN_DIR' ) )
@@ -421,17 +369,25 @@ class Ninja_Forms {
             // Include our download all submissions php files
             require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
 
-            // Include Upgrade Base Class
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade.php');
 
-            // Include Upgrades
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms-reset.php' );
+            $upgraded_from = get_option( 'nf_version_upgraded_from', FALSE );
+            if( $upgraded_from && version_compare( $upgraded_from, '2.9', '<=') ) {
 
-            // Include Upgrade Handler
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-handler-page.php');
-            require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade-handler.php');
+                echo "<pre>";
+                var_dump($upgraded_from);
+                echo "</pre>";
+                // Include Upgrade Base Class
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade.php');
+
+                // Include Upgrades
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php' );
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrades.php' );
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-forms-reset.php' );
+
+                // Include Upgrade Handler
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-handler-page.php');
+                require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/class-upgrade-handler.php');
+            }
         }
 
         // Include our upgrade files.
@@ -797,3 +753,144 @@ function Ninja_Forms() {
 }
 
 Ninja_Forms();
+
+/*
+|--------------------------------------------------------------------------
+| Ninja Forms THREE Upgrade
+|--------------------------------------------------------------------------
+*/
+
+add_action( 'wp_ajax_nfThreeUpgrade_GetSerializedForm', 'nfThreeUpgrade_GetSerializedForm' );
+function nfThreeUpgrade_GetSerializedForm(){
+    $id = absint( $_POST[ 'formID' ] );
+    $form_row = ninja_forms_serialize_form( $id );
+    echo json_encode( array( 'id' => $id, 'serialized' => $form_row ) );
+    wp_die();
+}
+
+add_action( 'wp_ajax_nfThreeUpgrade_GetSerializedFields', 'nfThreeUpgrade_GetSerializedFields' );
+function nfThreeUpgrade_GetSerializedFields(){
+    $fields = ninja_forms_get_all_favs();
+
+    echo json_encode( array( 'serialized' => maybe_serialize( $fields ) ) ) ;
+    wp_die();
+}
+
+add_action( 'init', 'ninja_forms_three_submenu' );
+function ninja_forms_three_submenu(){
+    include plugin_dir_path( __FILE__ ) . 'upgrade/class-submenu.php';
+}
+
+add_action( 'admin_notices', 'ninja_forms_three_admin_notice' );
+function ninja_forms_three_admin_notice(){
+    $currentScreen = get_current_screen();
+    if( ! in_array( $currentScreen->id, array( 'toplevel_page_ninja-forms' ) ) ) return;
+    wp_enqueue_style( 'nf-admin-notices', NINJA_FORMS_URL .'assets/css/admin-notices.css?nf_ver=' . NF_PLUGIN_VERSION );
+    include plugin_dir_path( __FILE__ ) . 'upgrade/tmpl-notice.html.php';
+
+    ?>
+    <div id="nf-admin-notice-three-is-coming" class="update-nag nf-admin-notice">
+		<div class="nf-notice-logo"></div> <p class="nf-notice-title">THREE is coming! </p> <p class="nf-notice-body">A major update is coming to Ninja Forms. <a target="_blank" href="https://ninjaforms.com/three/?utm_medium=plugin&amp;utm_source=admin-notice&amp;utm_campaign=Ninja+Forms+THREE&amp;utm_content=Learn+More">Learn more about new features, backwards compatibility, and more Frequently Asked Questions.</a> </p>
+	</div>
+    <?php
+}
+
+add_action( 'nf_admin_before_form_list', 'ninja_forms_konami' );
+function ninja_forms_konami(){
+
+    if( ! ninja_forms_three_calc_check() ) return;
+    if( ! ninja_forms_three_addons_version_check() ) return;
+
+    wp_enqueue_script( 'cheet', NINJA_FORMS_URL . 'assets/js/lib/cheet.min.js', array( 'jquery' ) );
+    wp_enqueue_script( 'howler', NINJA_FORMS_URL . 'assets/js/lib/howler.core.min.js', array( 'jquery' ) );
+    wp_localize_script( 'howler', 'nfUnlock', array( 'audioUrl' => NINJA_FORMS_URL . 'assets/audio/smw_power_up.wav', 'aboutPage' => menu_page_url( 'ninja-forms-three', false ) ) );
+    ?>
+    <script type="text/javascript">
+
+        jQuery( document ).ready( function() {
+            var sound = new Howl({
+                src: [ nfUnlock.audioUrl ],
+                onend: function() {
+                    window.scrollTo( 0, 0 );
+                    jQuery( '#nf-admin-notice-three-is-coming' ).fadeOut( 'slow', function() {
+                        jQuery( '#nf-admin-notice-upgrade' ).fadeIn( 'slow', function() {
+                            window.location = nfUnlock.aboutPage;
+                        });
+                    });
+                }
+            });
+
+            cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+                sound.play();
+            });
+        } );
+    </script>
+    <?php
+}
+
+function ninja_forms_three_calc_check()
+{
+    global $wpdb;
+
+    $rows = $wpdb->get_results( "SELECT * FROM " . NINJA_FORMS_FIELDS_TABLE_NAME . " WHERE type = '_calc' OR type = '_country'" );
+
+    return ( $rows ) ? FALSE : TRUE ;
+}
+
+function ninja_forms_three_addons_version_check(){
+    $items = wp_remote_get( 'https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h' );
+    $items = wp_remote_retrieve_body( $items );
+    $items = json_decode( $items, true );
+
+    if( is_array( $items ) ) {
+        foreach ($items as $item) {
+
+            if (empty($item['plugin'])) continue;
+            if (!file_exists(WP_PLUGIN_DIR . '/' . $item['plugin'])) continue;
+
+            $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $item['plugin'], false, true);
+
+            if (!$plugin_data['Version']) continue;
+            if (version_compare($plugin_data['Version'], '3', '>=')) continue;
+
+            /*
+             * There are non-compatible add-ons installed.
+             */
+
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+function ninja_forms_three_addons_check(){
+    $items = wp_remote_get( 'https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h' );
+    $items = wp_remote_retrieve_body( $items );
+    $items = json_decode( $items, true );
+
+    $has_addons = FALSE;
+    if( is_array( $items ) ) {
+        foreach ($items as $item) {
+
+            if (empty($item['plugin'])) continue;
+            if (!file_exists(WP_PLUGIN_DIR . '/' . $item['plugin'])) continue;
+
+            $has_addons = TRUE;
+
+            $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $item['plugin'], false, true);
+
+            if (!$plugin_data['Version']) continue;
+            if (version_compare($plugin_data['Version'], '3', '>=')) continue;
+
+            /*
+             * There are non-compatible add-ons installed.
+             */
+
+            return FALSE;
+        }
+    }
+
+    return $has_addons;
+}
+
