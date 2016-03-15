@@ -105,14 +105,6 @@ function nf_override_plugin_version() {
     }
 }
 
-if ( nf_is_freemius_on() ) {
-    // Override plugin's version, should be executed before Freemius init.
-    nf_override_plugin_version();
-
-    // Init Freemius.
-    nf_fs();
-}
-
 function ninja_forms_actions() {
     if ( empty( $_POST['ninja_action'] ) || ! in_array( $_POST['ninja_action'], array(
             'upgrade',
@@ -183,5 +175,13 @@ function nf_fs_custom_message( $message, $user_first_name, $plugin_title, $user_
     );
 }
 
-nf_fs()->add_filter('connect_message', 'nf_fs_custom_message', 10, 6);
-nf_fs()->add_filter('connect_message_on_update', 'nf_fs_custom_message', 10, 6);
+// Maybe Init Freemius
+if ( nf_is_freemius_on() ) {
+    // Override plugin's version, should be executed before Freemius init.
+    nf_override_plugin_version();
+
+    // Init Freemius.
+    nf_fs();
+    nf_fs()->add_filter('connect_message', 'nf_fs_custom_message', 10, 6);
+    nf_fs()->add_filter('connect_message_on_update', 'nf_fs_custom_message', 10, 6);
+}
