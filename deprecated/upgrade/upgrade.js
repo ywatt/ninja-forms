@@ -85,14 +85,14 @@ jQuery(document).ready(function($) {
 
         start: function () {
             _.each( nfThreeUpgrade.forms, function( formID ) {
-                this.forms[ formID ] = {
+                this.forms.push({
                     id: formID,
                     title: '',
                     icon: 'update',
                     checked: false,
                     converted: false,
                     failed: false,
-                }
+                });
             }, this );
             _.each( this.forms, this.checkForm, this );
             this.updateTable();
