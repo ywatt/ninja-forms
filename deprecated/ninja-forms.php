@@ -944,6 +944,7 @@ function ninja_forms_uninstall(){
 
 
         // Remove upgrade last step options
+        require_once 'includes/admin/upgrades/class-upgrade.php';
         require_once 'includes/admin/upgrades/class-upgrade-handler.php';
         $upgrades = NF_UpgradeHandler()->upgrades;
 
