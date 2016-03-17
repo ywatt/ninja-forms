@@ -372,24 +372,23 @@ final class NF_Display_Render
         wp_enqueue_script( 'backbone-marionette', Ninja_Forms::$url . 'assets/js/lib/backbone.marionette.min.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'backbone-radio', Ninja_Forms::$url . 'assets/js/lib/backbone.radio.min.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'math', Ninja_Forms::$url . 'assets/js/lib/math.min.js', array( 'jquery' ) );
-        wp_enqueue_script( 'modernizr', Ninja_Forms::$url . 'assets/js/lib/modernizr.js', array( 'jquery' ) );
-        wp_enqueue_script( 'moment', Ninja_Forms::$url . 'assets/js/lib/moment-with-locales.js', array( 'jquery' ) );
-        wp_enqueue_script( 'pikaday', Ninja_Forms::$url . 'assets/js/lib/pikaday.js', array( 'jquery' ) );
-        wp_enqueue_script( 'pikaday-responsive', Ninja_Forms::$url . 'assets/js/lib/pikaday-responsive.js', array( 'jquery' ) );
+        wp_enqueue_script( 'modernizr', Ninja_Forms::$url . 'assets/js/lib/modernizr.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'moment', Ninja_Forms::$url . 'assets/js/lib/moment-with-locales.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'pikaday', Ninja_Forms::$url . 'assets/js/lib/pikaday.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'pikaday-responsive', Ninja_Forms::$url . 'assets/js/lib/pikaday-responsive.min.js', array( 'jquery' ) );
         $recaptcha_lang = Ninja_Forms()->get_setting( 'recaptcha_lang' );
         wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $recaptcha_lang, array( 'jquery' ) );
-        wp_enqueue_script( 'masked-input', Ninja_Forms::$url . 'assets/js/lib/jquery.maskedinput.js', array( 'jquery' ) );
+        wp_enqueue_script( 'masked-input', Ninja_Forms::$url . 'assets/js/lib/jquery.maskedinput.min.js', array( 'jquery' ) );
 
-        wp_enqueue_script( 'bootstrap', Ninja_Forms::$url . 'assets/js/lib/bootstrap.js', array( 'jquery' ) );
-        wp_enqueue_script( 'codemirror', Ninja_Forms::$url . 'assets/js/lib/codemirror.js', array( 'jquery' ) );
-        wp_enqueue_script( 'codemirror-xml', Ninja_Forms::$url . 'assets/js/lib/codemirror-xml.js', array( 'jquery' ) );
-        wp_enqueue_script( 'codemirror-formatting', Ninja_Forms::$url . 'assets/js/lib/codemirror-formatting.js', array( 'jquery' ) );
-        wp_enqueue_script( 'summernote', Ninja_Forms::$url . 'assets/js/lib/summernote.js', array( 'jquery' ) );
+        wp_enqueue_script( 'bootstrap', Ninja_Forms::$url . 'assets/js/lib/bootstrap.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'codemirror', Ninja_Forms::$url . 'assets/js/lib/codemirror.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'codemirror-xml', Ninja_Forms::$url . 'assets/js/lib/codemirror-xml.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'codemirror-formatting', Ninja_Forms::$url . 'assets/js/lib/codemirror-formatting.min.js', array( 'jquery' ) );
+        wp_enqueue_script( 'summernote', Ninja_Forms::$url . 'assets/js/lib/summernote.min.js', array( 'jquery' ) );
         wp_enqueue_script( 'jBox', Ninja_Forms::$url . 'assets/js/lib/jBox.min.js', array( 'jquery' ) );
-        wp_enqueue_script( 'starrating', Ninja_Forms::$url . 'assets/js/lib/rating.js', array( 'jquery' ) );
+        wp_enqueue_script( 'starrating', Ninja_Forms::$url . 'assets/js/lib/rating.min.js', array( 'jquery' ) );
         wp_enqueue_script( 'nf-global', Ninja_Forms::$url . 'assets/js/min/global.js', array( 'jquery' ) );
 
-        // wp_enqueue_script( 'requirejs', Ninja_Forms::$url . 'assets/js/lib/require.js', array( 'jquery', 'backbone' ) );
         wp_enqueue_script( 'nf-front-end', Ninja_Forms::$url . 'assets/js/min/front-end.js', array( 'jquery', 'backbone', 'backbone-radio', 'backbone-marionette', 'math' ) );
 
         $data = apply_filters( 'ninja_forms_render_localize_script_data', array(
