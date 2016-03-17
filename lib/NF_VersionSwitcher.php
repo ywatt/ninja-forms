@@ -34,7 +34,7 @@ final class NF_VersionSwitcher
     {
         $args = array(
             'id'    => 'nf',
-            'title' => 'Ninja Forms',
+            'title' => 'Ninja Forms DEBUG',
             'href'  => '#',
         );
         $wp_admin_bar->add_node( $args );
