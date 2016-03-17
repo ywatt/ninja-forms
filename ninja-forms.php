@@ -25,7 +25,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
     register_activation_hook( __FILE__, 'ninja_forms_activation_deprecated' );
     function ninja_forms_activation_deprecated( $network_wide ){
         include_once 'deprecated/includes/activation.php';
-        update_option( 'ninja_forms_freemius', 1 );
+
+        if( ! get_option( 'nf_aff', FALSE ) ) {
+            update_option('ninja_forms_freemius', 1);
+        }
+
         ninja_forms_activation( $network_wide );
     }
 
