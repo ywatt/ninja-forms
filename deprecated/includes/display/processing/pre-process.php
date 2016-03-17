@@ -8,7 +8,7 @@ function ninja_forms_setup_processing_class( $form_id = '' ){
 		Ninja_Forms()->session->init()->set_cookie();
 	}
 
-	$transient_id = Ninja_Forms()->session->get( 'nf_transient_id' );
+	$cache = Ninja_Forms()->session->get( 'nf_cache' );
 	//Set the form id
 	if ( $form_id == '' ) {
 		if ( isset ( $_REQUEST['_form_id'] ) ) {
