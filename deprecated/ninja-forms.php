@@ -863,12 +863,13 @@ function ninja_forms_three_addons_version_check(){
 
 function ninja_forms_three_addons_check(){
     $items = array();
-    if( ! get_transient( 'ninja_forms_addons_check_items' ) ) {
-        $items = wp_remote_get('https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h');
-        $items = wp_remote_retrieve_body($items);
+//    if( ! get_transient( 'ninja_forms_addons_check_items' ) ) {
+//        $items = wp_remote_get('https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h');
+//        $items = wp_remote_retrieve_body($items);
+        $items = file_get_contents( dirname( __FILE__ ) . '/addons-feed.json' );
         $items = json_decode($items, true);
-        set_transient( 'ninja_forms_addons_check_items', $items, 60 * 60 * 24 );
-    }
+//        set_transient( 'ninja_forms_addons_check_items', $items, 60 * 60 * 24 );
+//    }
 
     $has_addons = FALSE;
     if( is_array( $items ) ) {
