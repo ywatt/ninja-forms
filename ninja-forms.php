@@ -184,8 +184,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
                 self::$instance = new Ninja_Forms;
 
                 self::$dir = plugin_dir_path( __FILE__ );
+
+                // Define old constants for backwards compatibility.
                 if( ! defined( 'NF_PLUGIN_DIR' ) ){
                     define( 'NF_PLUGIN_DIR', self::$dir );
+                    define( 'NINJA_FORMS_DIR', self::$dir );
                 }
 
                 self::$url = plugin_dir_url( __FILE__ );
