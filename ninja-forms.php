@@ -579,4 +579,29 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
 
     Ninja_Forms();
 
+    /*
+    |--------------------------------------------------------------------------
+    | Uninstall Hook
+    |--------------------------------------------------------------------------
+    */
+
+    if ( nf_is_freemius_on() ) {
+        // Override plugin's version, should be executed before Freemius init.
+        nf_override_plugin_version();
+        // Init Freemius.
+        nf_fs();
+        nf_fs()->add_action( 'after_uninstall', 'ninja_forms_uninstall' );
+    } else {
+        register_uninstall_hook( __FILE__, 'ninja_forms_uninstall' );
+    }
+
+    function ninja_forms_uninstall(){
+
+        if( Ninja_Forms()->get_setting( 'delete_on_uninstall ') ) {
+            require_once plugin_dir_path(__FILE__) . '/includes/Database/Migrations.php';
+            $migrations = new NF_Database_Migrations();
+            $migrations->nuke(TRUE, TRUE);
+        }
+    }
+
 }
