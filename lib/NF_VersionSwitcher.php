@@ -44,10 +44,10 @@ final class NF_VersionSwitcher
             'parent' => 'nf'
         );
         if( ! get_option( 'ninja_forms_load_deprecated' ) ) {
-            $args[ 'title' ] = 'Switch to 2.9.x';
+            $args[ 'title' ] = 'DEBUG: Switch to 2.9.x';
             $args[ 'href' ] .= '?nf-switcher=rollback';
         } else {
-            $args[ 'title' ] = 'Switch to 3.0.x';
+            $args[ 'title' ] = 'DEBUG: Switch to 3.0.x';
             $args[ 'href' ] .= '?nf-switcher=upgrade';
         }
         $wp_admin_bar->add_node($args);
