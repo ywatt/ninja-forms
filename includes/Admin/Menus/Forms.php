@@ -349,6 +349,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         $form_settings[ 'display' ] = Ninja_Forms::config( 'FormDisplaySettings' );
         $form_settings[ 'restrictions' ] = Ninja_Forms::config( 'FormRestrictionSettings' );
         $form_settings[ 'calculations' ] = Ninja_Forms::config( 'FormCalculationSettings' );
+        $form_settings[ 'sub_display' ] = Ninja_Forms::config( 'FormSubDisplaySettings' );
         $form_settings = apply_filters( 'ninja_forms_localize_forms_settings', $form_settings );
 
         $groups = Ninja_Forms::config( 'SettingsGroups' );
