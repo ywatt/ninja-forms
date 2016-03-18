@@ -13,9 +13,18 @@
 function nf_admin_notices( $notices ) {
 
     $three_info = add_query_arg( array( 'nf_admin_notice_ignore' => 'three_info' ) );
+    $three_link = 'https://ninjaforms.com/three/?utm_medium=plugin&utm_source=admin-notice&utm_campaign=Ninja+Forms+THREE&utm_content=Learn+More';
+    
+    $u_id = apply_filters( 'ninja_forms_affiliate_id', false );
+    $u_id = get_option( 'nf_aff', $u_id );
+    if ( $u_id ) {
+        $three_link =  urlencode( $three_link );
+        $three_link = 'http://www.shareasale.com/r.cfm?u=' . $u_id . '&b=812237&m=63061&afftrack=&urllink=' . $three_link;
+    }
+
     $notices['three_info'] = array(
         'title' => __( 'THREE is coming!', 'ninja-forms' ),
-        'msg' => sprintf( __( 'A major update is coming to Ninja Forms. %sLearn more about new features, backwards compatibility, and more Frequently Asked Questions.%s', 'ninja-forms' ), '<a target="_blank" href="https://ninjaforms.com/three/?utm_medium=plugin&utm_source=admin-notice&utm_campaign=Ninja+Forms+THREE&utm_content=Learn+More">', '</a>' ),
+        'msg' => sprintf( __( 'A major update is coming to Ninja Forms. %sLearn more about new features, backwards compatibility, and more Frequently Asked Questions.%s', 'ninja-forms' ), '<a target="_blank" href="' . $three_link . '">', '</a>' ),
         'link' => '',
         'int' => 0,
         'blacklist' => array( 'ninja-forms', 'ninja-forms-three' ),
