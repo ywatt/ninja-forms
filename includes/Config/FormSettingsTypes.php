@@ -17,9 +17,9 @@ return apply_filters( 'ninja_forms_from_settings_types', array(
     	'nicename' 		=> __( 'Calculations', 'ninja-forms')
     ),
 
-    'sub_display' 		=> array(
-        'id' 			=> 'sub_display',
-        'nicename' 		=> __( 'Submission Display', 'ninja-forms')
+    'subs_display' 		=> array(
+        'id' 			=> 'subs_display',
+        'nicename' 		=> __( 'Submissions Display', 'ninja-forms')
     ),
 
 ));
