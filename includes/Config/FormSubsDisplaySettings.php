@@ -21,8 +21,8 @@ return apply_filters( 'ninja_forms_from_subs_display_settings', array(
      * Subs Display (Loop)
      */
 
-    'sub_display' => array(
-        'name' => 'sub_display',
+    'subs_display' => array(
+        'name' => 'subs_display',
         'type' => 'textarea',
         'label' => __( 'Submissions Display Loop', 'ninja-forms' ),
         'group' => 'primary',

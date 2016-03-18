@@ -47,7 +47,7 @@ final class NF_Display_Shortcodes
         $subs = Ninja_Forms()->form( $id )->get_subs();
 
 
-        echo $form->get_setting( 'sub_view_before' );
+        echo $form->get_setting( 'subs_display_before' );
         foreach( array_reverse( $subs ) as $sub ){
 
             $merge_tags = Ninja_Forms()->merge_tags[ 'fields' ];
@@ -63,8 +63,8 @@ final class NF_Display_Shortcodes
                 ));
             }
 
-            echo apply_filters( 'kbj_test', $form->get_setting( 'sub_view' ) );
+            echo apply_filters( 'kbj_test', $form->get_setting( 'subs_display' ) );
         }
-        echo $form->get_setting( 'sub_view_after' );
+        echo $form->get_setting( 'subs_display_after' );
     }
 }
