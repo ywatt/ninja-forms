@@ -432,24 +432,50 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
             return $this->session;
         }
 
-        public function get_setting( $key = '' )
+	    /**
+	     * Get a setting
+	     *
+	     * @param string     $key
+	     * @param bool|false $default
+	     * @return bool
+	     */
+        public function get_setting( $key = '', $default = false )
         {
-            if( empty( $key ) || ! isset( $this->settings[ $key ] ) ) return FALSE;
+            if( empty( $key ) || ! isset( $this->settings[ $key ] ) ) return $default;
 
             return $this->settings[ $key ];
         }
 
+	    /**
+	     * Get all the settings
+	     *
+	     * @return array
+	     */
         public function get_settings()
         {
             return ( is_array( $this->settings ) ) ? $this->settings : array();
         }
 
-        public function update_setting( $key, $value )
+	    /**
+	     * Update a setting
+	     *
+	     * @param string           $key
+	     * @param mixed           $value
+	     * @param bool|false $defer_update Defer the database update of all settings
+	     */
+        public function update_setting( $key, $value, $defer_update = false )
         {
-            $this->settings[ $key ] = $value;
-            $this->update_settings();
+	        $this->settings[ $key ] = $value;
+	        if ( ! $defer_update ) {
+		        $this->update_settings();
+	        }
         }
 
+	    /**
+	     * Save settings to database
+	     *
+	     * @param array $settings
+	     */
         public function update_settings( $settings = array() )
         {
             if( ! is_array( $this->settings ) ) $this->settings = array( $this->settings );
