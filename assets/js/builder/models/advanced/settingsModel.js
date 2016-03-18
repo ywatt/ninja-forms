@@ -22,7 +22,7 @@ define( [], function() {
 			 */
 			var formSettings = nfRadio.channel( 'settings' ).request( 'get:collection' );
 			_.each( formSettings.models, function( settingModel ) {
-				if ( settingModel.get( 'value' ) ) {
+				if ( 'undefined' == typeof that.get( settingModel.get( 'name' ) ) ) {
 					that.set( settingModel.get( 'name' ), settingModel.get( 'value' ), { silent: true } );
 				}
 			} );
