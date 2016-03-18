@@ -7,7 +7,7 @@ final class NF_Display_Shortcodes
         add_shortcode( 'ninja_form',  array( $this, 'display_form_front_end' ) );
         add_shortcode( 'ninja_forms', array( $this, 'display_form_front_end' ) );
 
-        add_shortcode( 'ninja_forms_view', array( $this, 'ninja_forms_view' ) );
+        add_shortcode( 'ninja_forms_subs', array( $this, 'ninja_forms_subs' ) );
     }
 
     public function display_form_front_end( $atts = array() )
@@ -37,9 +37,9 @@ final class NF_Display_Shortcodes
         return "<div style='border: 3px solid red; padding: 1em; margin: 1em auto;'>$output</div>";
     }
 
-    function ninja_forms_view( $atts = array() )
+    function ninja_forms_subs( $atts = array() )
     {
-        $id = $atts['id'];
+        $id = $atts['form_id'];
 
         $form = Ninja_Forms()->form( $id )->get();
         $fields = Ninja_Forms()->form( $id )->get_fields();
