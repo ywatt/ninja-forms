@@ -28,6 +28,11 @@ define( [], function() {
 			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
 				return false;
 			}
+
+			var fieldContentFilters = nfRadio.channel( 'fieldContents' ).request( 'get:filters' );
+			if( 0 < fieldContentFilters.length ) {
+				
+			}
 			
 			// Default action to preview.
 			action = action || 'preview';
