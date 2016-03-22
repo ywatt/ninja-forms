@@ -2,7 +2,7 @@
 Contributors: wpninjasllc, kstover, jameslaws, wpnzach, kbjohnson90, aman086, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.2
-Tested up to: 4.4
+Tested up to: 4.4.2
 Stable tag: 2.9.38
 License: GPLv2 or later
 
