@@ -308,6 +308,8 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
                  */
                 self::$instance->notices = new NF_Admin_Notices();
 
+                self::$instance->widgets[] = new NF_Widget();
+
                 /*
                  * Activation Hook
                  * TODO: Move to a permanent home.
