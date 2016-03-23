@@ -12,27 +12,27 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			/*
-			 * Init our fieldContents filter array.
+			 * Init our fieldContents view filter array.
 			 */
-			this.filters = [];
+			this.viewFilters = [];
 
 			/*
 			 * Listen for requests to add new fieldContent filters. 
 			 */
-			nfRadio.channel( 'fieldContents' ).reply( 'add:filter', this.addFilter, this );
+			nfRadio.channel( 'fieldContents' ).reply( 'add:viewFilter', this.addViewFilter, this );
 
 			/*
 			 * Listen for requests to get our fieldContent filters.
 			 */
-			nfRadio.channel( 'fieldContents' ).reply( 'get:filters', this.getFilters, this );
+			nfRadio.channel( 'fieldContents' ).reply( 'get:viewFilters', this.getViewFilters, this );
 		},
 
-		addFilter: function( callback, priority ) {
-			this.filters[ priority ] = callback;
+		addViewFilter: function( callback, priority ) {
+			this.viewFilters[ priority ] = callback;
 		},
 
-		getFilters: function() {
-			return this.filters;
+		getViewFilters: function() {
+			return this.viewFilters;
 		}
 
 	});
