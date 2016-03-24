@@ -89,7 +89,7 @@ define( [
 						 * Temporary method for adding data to our formModel.
 						 * Can be removed once we start saving data for layouts.
 						 */ 
-						nfRadio.channel( 'tmp' ).request( 'update:layoutCollection' );
+						// nfRadio.channel( 'tmp' ).request( 'update:layoutCollection' );
 						/*
 						 * Get our field collection. We'll use this as the default if we don't have a defined fieldContentsData.
 						 */ 				
@@ -100,9 +100,15 @@ define( [
 						var fieldContentsData = nfRadio.channel( 'settings' ).request( 'get:setting', 'fieldContentsData' );
 						/*
 						 * If we don't have a filter for our fieldContentsData, default to fieldCollection.
-						 */ 
-						if ( 'undefined' == typeof fieldContentsData ) {
-							fieldContentsData = fieldCollection
+						 */
+						var fieldContentsLoadFilters = nfRadio.channel( 'fieldContents' ).request( 'get:loadFilters' );
+						if ( 0 != fieldContentsLoadFilters.length ) {
+							/* 
+							* Get our first filter, this will be the one with the highest priority.
+							*/
+							var sortedArray = _.without( fieldContentsLoadFilters, undefined );
+							var callback = _.first( sortedArray );
+							fieldContentsData = callback( fieldContentsData );
 						}
 						/*
 						 * Set our default fieldContentsView.
@@ -121,6 +127,13 @@ define( [
 							var callback = _.first( sortedArray );
 							fieldContentsView = callback();
 						}
+						/*
+						 * If we don't have any fieldContentsData set yet, default to our field collection.
+						 */
+						if ( 'undefined' == typeof fieldContentsData ) {
+							fieldContentsData = fieldCollection;
+						}
+						nfRadio.channel( 'settings' ).request( 'update:setting', 'fieldContentsData', fieldContentsData, true );
 						return new fieldContentsView( { collection: fieldContentsData } );
 					},
 

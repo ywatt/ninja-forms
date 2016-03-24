@@ -15,16 +15,22 @@ define( [], function() {
 			 * Init our fieldContents view filter array.
 			 */
 			this.viewFilters = [];
+			this.saveFilters = [];
+			this.loadFilters = [];
 
 			/*
 			 * Listen for requests to add new fieldContent filters. 
 			 */
 			nfRadio.channel( 'fieldContents' ).reply( 'add:viewFilter', this.addViewFilter, this );
+			nfRadio.channel( 'fieldContents' ).reply( 'add:saveFilter', this.addSaveFilter, this );
+			nfRadio.channel( 'fieldContents' ).reply( 'add:loadFilter', this.addLoadFilter, this );
 
 			/*
 			 * Listen for requests to get our fieldContent filters.
 			 */
 			nfRadio.channel( 'fieldContents' ).reply( 'get:viewFilters', this.getViewFilters, this );
+			nfRadio.channel( 'fieldContents' ).reply( 'get:saveFilters', this.getSaveFilters, this );
+			nfRadio.channel( 'fieldContents' ).reply( 'get:loadFilters', this.getLoadFilters, this );
 		},
 
 		addViewFilter: function( callback, priority ) {
@@ -33,6 +39,22 @@ define( [], function() {
 
 		getViewFilters: function() {
 			return this.viewFilters;
+		},
+
+		addSaveFilter: function( callback, priority ) {
+			this.saveFilters[ priority ] = callback;
+		},
+
+		getSaveFilters: function() {
+			return this.saveFilters;
+		},
+
+		addLoadFilter: function( callback, priority ) {
+			this.loadFilters[ priority ] = callback;
+		},
+
+		getLoadFilters: function() {
+			return this.loadFilters;
 		}
 
 	});
