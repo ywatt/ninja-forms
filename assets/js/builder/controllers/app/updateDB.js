@@ -65,7 +65,7 @@ define( [], function() {
 			/*
 			 * Update our fieldContentsData form setting.
 			 */
-			nfRadio.channel( 'settings' ).request( 'update:setting', 'fieldContentsData', fieldContentsData );
+			// nfRadio.channel( 'settings' ).request( 'update:setting', 'fieldContentsData', fieldContentsData );
 			
 			if ( 'publish' == action && formModel.get( 'show_publish_options' ) ) {
 				nfRadio.channel( 'app' ).request( 'open:drawer', 'newForm' );
@@ -79,7 +79,7 @@ define( [], function() {
 
 			// Turn our formData model into an object
 			var data = JSON.parse( JSON.stringify( formData ) );
-
+			data.settings.fieldContentsData = fieldContentsData;
 			/**
 			 * Prepare fields for submission.
 			 */
