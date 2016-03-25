@@ -26,6 +26,10 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/mobileMenu', 'v
 		},
 
 		initialize: function() {
+			// Respond to requests asking for the builder dom element.
+			nfRadio.channel( 'app' ).reply( 'get:builderEl', this.getBuilderEl, this );
+			// Respond to requests asking for the builder view
+			nfRadio.channel( 'app' ).reply( 'get:builderView', this.getBuilderView, this );
 			// Layout views aren't self-rendering.
 			this.render();
 			var mergeTags = nfRadio.channel( 'mergeTags' ).request( 'get:collection' );
@@ -40,10 +44,12 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/mobileMenu', 'v
 			this.menuDrawer.show( new mobileMenuView( { collection: appDomainCollection } ) );
 			// Show our drawer.
 			this.drawer.show( new drawerView() );
-			// Respond to requests asking for the builder dom element.
-			nfRadio.channel( 'app' ).reply( 'get:builderEl', this.getBuilderEl, this );
-			// Respond to requests asking for the builder view
-			nfRadio.channel( 'app' ).reply( 'get:builderView', this.getBuilderView, this );
+
+			
+		},
+
+		onRender: function() {
+			
 		},
 
 		getBuilderEl: function() {

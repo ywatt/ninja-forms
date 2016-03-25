@@ -43,6 +43,7 @@ define(
 		'controllers/app/mobile',
 		'controllers/app/notices',
 		'controllers/app/unloadCheck',
+		'controllers/app/fieldContentsFilters',
 		/*
 		 * Fields domain controllers
 		 */
@@ -127,6 +128,7 @@ define(
 		AppMobile,
 		AppNotices,
 		AppUnloadCheck,
+		FieldContentsFilters,
 		/*
 		 * Fields domain controllers
 		 */
@@ -202,6 +204,7 @@ define(
 				new AppMobile();
 				new AppNotices();
 				new AppUnloadCheck();
+				new FieldContentsFilters();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers

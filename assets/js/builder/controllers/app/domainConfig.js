@@ -73,9 +73,72 @@ define( [
 						return new fieldsSubHeaderView();
 					},
 
+					/**
+					 * Get the fieldContents view that should be used in our builder.
+					 * Uses two filters:
+					 * 1) One for our fieldContentsData
+					 * 2) One for our fieldContentsView
+					 *
+					 * If we don't have any view filters, we use the default fieldContentsView.
+					 * 
+					 * @since  3.0
+					 * @return fieldContentsView backbone view.
+					 */
 					getMainContentView: function( collection ) {
-						var collection = nfRadio.channel( 'fields' ).request( 'get:collection' );
-						return new fieldsMainContentFieldCollectionView( { collection: collection } );
+						/*
+						 * Temporary method for adding data to our formModel.
+						 * Can be removed once we start saving data for layouts.
+						 */ 
+						// nfRadio.channel( 'tmp' ).request( 'update:layoutCollection' );
+						/*
+						 * Get our field collection. We'll use this as the default if we don't have a defined fieldContentsData.
+						 */ 				
+						var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+						/*
+						 * Set our fieldContentsData to our form setting 'fieldContentsData'
+						 */
+						var fieldContentsData = nfRadio.channel( 'settings' ).request( 'get:setting', 'fieldContentsData' );
+						/*
+						 * If we don't have a filter for our fieldContentsData, default to fieldCollection.
+						 */
+						var fieldContentsLoadFilters = nfRadio.channel( 'fieldContents' ).request( 'get:loadFilters' );
+						if ( 0 != fieldContentsLoadFilters.length ) {
+							/* 
+							* Get our first filter, this will be the one with the highest priority.
+							*/
+							var sortedArray = _.without( fieldContentsLoadFilters, undefined );
+							var callback = _.first( sortedArray );
+							fieldContentsData = callback( fieldContentsData );
+						} else {
+							fieldContentsData = fieldCollection;
+						}
+
+						/*
+						 * Set our default fieldContentsView.
+						 */
+						var fieldContentsView = fieldsMainContentFieldCollectionView;
+						/*
+						 * Check our fieldContentViewsFilter to see if we have any defined.
+						 * If we do, overwrite our default with the view returned from the filter.
+						 */
+						var fieldContentsViewFilters = nfRadio.channel( 'fieldContents' ).request( 'get:viewFilters' );
+						if ( 0 != fieldContentsViewFilters.length ) {
+							/* 
+							* Get our first filter, this will be the one with the highest priority.
+							*/
+							var sortedArray = _.without( fieldContentsViewFilters, undefined );
+							var callback = _.first( sortedArray );
+							fieldContentsView = callback();
+						}
+						/*
+						 * If we don't have any fieldContentsData set yet, default to our field collection.
+						 */
+						if ( 'undefined' == typeof fieldContentsData ) {
+							fieldContentsData = fieldCollection;
+						}
+
+						nfRadio.channel( 'settings' ).request( 'update:setting', 'fieldContentsData', fieldContentsData, true );
+						return new fieldContentsView( { collection: fieldContentsData } );
 					},
 
 					getSettingsTitleView: function( data ) {

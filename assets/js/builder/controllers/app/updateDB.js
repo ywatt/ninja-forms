@@ -28,7 +28,7 @@ define( [], function() {
 			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
 				return false;
 			}
-			
+
 			// Default action to preview.
 			action = action || 'preview';
 
@@ -40,7 +40,33 @@ define( [], function() {
 			}
 
 			var formModel = nfRadio.channel( 'app' ).request( 'get:formModel' );
-
+			/*
+			 * The main content of our form is called the fieldContents.
+			 * In this next section, we check to see if any add-ons want to modify that contents before we save.
+			 * If there aren't any filters found, we default to the field collection.
+			 * 
+			 */
+			var fieldContentsData = nfRadio.channel( 'settings' ).request( 'get:setting', 'fieldContentsData' );
+			var fieldContentsSaveDataFilters = nfRadio.channel( 'fieldContents' ).request( 'get:saveFilters' );
+			
+			if ( 0 != fieldContentsSaveDataFilters.length ) {
+				/* 
+				* Get our first filter, this will be the one with the highest priority.
+				*/
+				var sortedArray = _.without( fieldContentsSaveDataFilters, undefined );
+				var callback = _.first( sortedArray );
+				/*
+				 * Set our fieldContentsData to the callback specified in the filter, passing our current fieldContentsData.
+				 */
+				fieldContentsData = callback( fieldContentsData );
+			} else { // Default to our field collection.
+				fieldContentsData = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			}
+			/*
+			 * Update our fieldContentsData form setting.
+			 */
+			// nfRadio.channel( 'settings' ).request( 'update:setting', 'fieldContentsData', fieldContentsData );
+			
 			if ( 'publish' == action && formModel.get( 'show_publish_options' ) ) {
 				nfRadio.channel( 'app' ).request( 'open:drawer', 'newForm' );
 				var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
@@ -53,7 +79,7 @@ define( [], function() {
 
 			// Turn our formData model into an object
 			var data = JSON.parse( JSON.stringify( formData ) );
-
+			data.settings.fieldContentsData = fieldContentsData;
 			/**
 			 * Prepare fields for submission.
 			 */
