@@ -109,6 +109,8 @@ define( [
 							var sortedArray = _.without( fieldContentsLoadFilters, undefined );
 							var callback = _.first( sortedArray );
 							fieldContentsData = callback( fieldContentsData );
+						} else {
+							fieldContentsData = fieldCollection;
 						}
 						/*
 						 * Set our default fieldContentsView.
