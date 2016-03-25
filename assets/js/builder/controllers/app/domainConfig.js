@@ -112,6 +112,7 @@ define( [
 						} else {
 							fieldContentsData = fieldCollection;
 						}
+
 						/*
 						 * Set our default fieldContentsView.
 						 */
@@ -135,6 +136,7 @@ define( [
 						if ( 'undefined' == typeof fieldContentsData ) {
 							fieldContentsData = fieldCollection;
 						}
+
 						nfRadio.channel( 'settings' ).request( 'update:setting', 'fieldContentsData', fieldContentsData, true );
 						return new fieldContentsView( { collection: fieldContentsData } );
 					},
