@@ -417,6 +417,7 @@ final class NF_Display_Render
         </script>
         <?php
         */
+        do_action( 'nf_display_enqueue_scripts' );
     }
 
     protected static function load_template( $file_name = '' )
