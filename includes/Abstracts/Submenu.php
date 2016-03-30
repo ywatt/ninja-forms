@@ -63,6 +63,10 @@ abstract class NF_Abstracts_Submenu
         if( ! $this->menu_slug ) {
             $this->menu_slug = 'nf-' . strtolower( preg_replace( '/[^A-Za-z0-9-]+/', '-', $this->menu_title ) );
         }
+        
+        if( $this->get_count() ){
+            $this->menu_title .= '<span class="update-plugins" style="margin-left: 5px;"><span class="plugin-count">' . $this->get_count() . '</span></span>';
+        }
 
         $this->capability = apply_filters( 'submenu_' . $this->menu_slug . '_capability', $this->capability );
 
@@ -95,6 +99,17 @@ abstract class NF_Abstracts_Submenu
         }
 
         return $classes;
+    }
+
+    /**
+     * Returns a count to be displayed as a number badge next to the menu title.
+     * Emulates the update count badge for the plugin menu item.
+     *
+     * @return int | bool
+     */
+    public function get_count()
+    {
+        return FALSE; // by default
     }
 
     /**
