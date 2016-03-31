@@ -215,6 +215,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
                 self::$instance->menus[ 'submissions']      = new NF_Admin_Menus_Submissions();
                 self::$instance->menus[ 'import-export']    = new NF_Admin_Menus_ImportExport();
                 self::$instance->menus[ 'licenses']         = new NF_Admin_Menus_Licenses();
+                self::$instance->menus[ 'upgrade' ]         = new NF_Admin_Menus_Upgrade();
 
                 /*
                  * Admin menus used for building out the admin UI
@@ -238,6 +239,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
                 self::$instance->controllers[ 'uploads' ]     = new NF_AJAX_Controllers_Uploads();
                 self::$instance->controllers[ 'submission' ]  = new NF_AJAX_Controllers_Submission();
                 self::$instance->controllers[ 'savedfields' ] = new NF_AJAX_Controllers_SavedFields();
+                self::$instance->controllers[ 'upgrade' ]     = new NF_AJAX_Controllers_Upgrade();
 
                 /*
                  * WP-CLI Commands

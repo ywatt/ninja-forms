@@ -191,4 +191,9 @@ final class WPN_Helper
         return $value;
     }
 
+    public static function admin_notice( $class, $message )
+    {
+        printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $message );
+    }
+
 } // End Class WPN_Helper
