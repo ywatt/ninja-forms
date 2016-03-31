@@ -163,6 +163,7 @@ final class NF_Database_MockData
             ->update_setting( 'label', 'Submit')
             ->update_setting( 'processing_label', 'Processing' )
             ->update_setting( 'order', 5 )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         /*
@@ -310,6 +311,7 @@ final class NF_Database_MockData
                 'type'			=> 'submit',
                 'label'			=> 'Send',
                 'order'         => 6,
+                'key'           => 'submit',
             )
         );
 
@@ -472,6 +474,7 @@ final class NF_Database_MockData
         $submit->update_setting( 'label', 'Submit')
                 ->update_setting( 'type', 'submit' )
                 ->update_setting( 'order', $order)
+                ->update_setting( 'key', 'submit' )
                 ->save();
 
         $action = Ninja_Forms()->form( $form_id )->action()->get();
@@ -611,6 +614,7 @@ final class NF_Database_MockData
             ->update_setting( 'type', 'submit' )
             ->update_setting( 'order', $order)
             ->update_setting( 'process_label', 'processing' )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         $action = Ninja_Forms()->form( $form_id )->action()->get();
@@ -681,6 +685,7 @@ final class NF_Database_MockData
             ->update_setting( 'label', 'Subscribe')
             ->update_setting( 'order', 5 )
             ->update_setting( 'wrapper_class', 'one-fourth' )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
     }
@@ -745,6 +750,7 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Purchase')
             ->update_setting( 'order', 1000 )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         /*
@@ -803,6 +809,7 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Purchase')
             ->update_setting( 'order', 1000 )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         /*
@@ -903,6 +910,7 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Purchase')
             ->update_setting( 'order', 1000 )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         /*
@@ -942,6 +950,7 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Purchase')
             ->update_setting( 'order', 1000 )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         $action = Ninja_Forms()->form( $form_id )->action()->get();

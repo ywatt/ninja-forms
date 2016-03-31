@@ -35,6 +35,7 @@ jQuery( document ).ready( function( $ ) {
 				}
 
 				var loadControllers = new LoadControllers();
+				nfRadio.channel( 'app' ).trigger( 'after:loadControllers' );
 			},
 			
 			onStart: function() {
