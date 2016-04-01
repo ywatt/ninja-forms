@@ -119,8 +119,8 @@ class NF_Session {
 	 * @return void
 	 */
 	public function delete() {
-		delete_option( '_wp_session_' . $this->session->session_id );
-		delete_option( '_wp_session_expires_' . $this->session->session_id );
+		delete_option( '_wp_session_' . $this->get_id() );
+		delete_option( '_wp_session_expires_' . $this->get_id() );
 	}
 
 	/**
