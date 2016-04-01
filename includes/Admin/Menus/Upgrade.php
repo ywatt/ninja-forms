@@ -16,7 +16,8 @@ final class NF_Admin_Menus_Upgrade extends NF_Abstracts_Submenu
         
         parent::__construct();
 
-        add_action( 'admin_notices', array( $this, 'admin_notice' ) );
+        add_action( 'admin_notices', array( $this, 'upgrade_notice' ) );
+        add_action( 'admin_notices', array( $this, 'upgrade_success_notice' ) );
     }
 
     public function display()
@@ -40,7 +41,17 @@ final class NF_Admin_Menus_Upgrade extends NF_Abstracts_Submenu
         return count( $upgrades );
     }
 
-    public function admin_notice(){
+    public function upgrade_notice()
+    {
+        if( 0 == $this->get_count() ) return;
+
+        WPN_Helper::admin_notice(
+            'notice notice-warning',
+            sprintf( __( 'Ninja Forms needs to upgrade your forms data. %sUpgrade Now%s.', 'ninja-forms' ), '<a href="' . admin_url( 'admin.php?page=nf_upgrade' ) . '">', '</a>' )
+        );
+    }
+
+    public function upgrade_success_notice(){
 
         if( ! isset( $_GET[ 'page' ] ) || 'ninja-forms' != $_GET[ 'page' ] ) return;
         if( ! isset( $_GET[ 'nf-upgrade' ] ) || ! $_GET[ 'nf-upgrade' ] ) return;
