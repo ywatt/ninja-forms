@@ -31,7 +31,8 @@ class NF_AJAX_Controllers_Upgrade extends NF_Abstracts_Controller
         }
 
         foreach( Ninja_Forms()->form( $form_id )->get_actions() as $action ){
-            $type = $action->get_type();
+            $type = $action->get_setting( 'type' );
+            $this->_data[ 'action_types' ][] = $type;
             $settings = apply_filters( 'ninja_forms_upgrade_action_' . $type, $action->get_settings() );
             $action->update_settings( $settings )->save();
         }
