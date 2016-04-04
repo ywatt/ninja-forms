@@ -158,4 +158,4 @@ return apply_filters( 'ninja_forms_action_email_settings', array(
         'label' => __( 'Attach CSV', 'ninja-forms' ),
     ),
 
-);
+));
