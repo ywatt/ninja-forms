@@ -1,4 +1,4 @@
-<div id="app-output" class="wrap"></div>
+<div id="app-output" class="wrap ninja-forms-upgrade-wrap"></div>
 
 <script id="layout-view-template" type="text/template">
 
@@ -15,13 +15,8 @@
 <script id="nf-tmpl-before" type="text/template">
 
     <h2>Ninja Forms Upgrades</h2>
-
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit corrupti, distinctio consequatur recusandae veritatis, totam, neque quaerat voluptatum nobis autem quam quia! Voluptate veniam temporibus laudantium commodi minima iusto provident.
-    </p>
-
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit corrupti, distinctio consequatur recusandae veritatis, totam, neque quaerat voluptatum nobis autem quam quia! Voluptate veniam temporibus laudantium commodi minima iusto provident.
+        The following add-ons need to upgrade your form data: <%= upgrades() %>
     </p>
 </script>
 

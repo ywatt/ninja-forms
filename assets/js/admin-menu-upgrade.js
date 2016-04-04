@@ -64,7 +64,15 @@ var UpgradesCollectionView = Marionette.CollectionView.extend({
  */
 
 var AppBeforeView = Marionette.ItemView.extend({
-    template: '#nf-tmpl-before'
+    template: '#nf-tmpl-before',
+
+    templateHelpers: function() {
+        return {
+            upgrades: function() {
+                return nf_upgrades.toString();
+            }
+        }
+    }
 });
 
 var AppAfterView = Backbone.View.extend({

@@ -10,8 +10,12 @@ final class NF_Admin_Menus_Upgrade extends NF_Abstracts_Submenu
 
     public $priority = 14;
 
+    public $upgrades = array();
+
     public function __construct()
     {
+        $this->upgrades = apply_filters('ninja_forms_upgrades', $this->upgrades);
+
         if( ! $this->get_count() ) return;
         
         parent::__construct();
@@ -31,6 +35,7 @@ final class NF_Admin_Menus_Upgrade extends NF_Abstracts_Submenu
         wp_enqueue_script( 'nf-admin-menu-upgrade-js', Ninja_Forms::$url . 'assets/js/admin-menu-upgrade.js', array( 'nf-backbone-marionette' ) );
 
         wp_localize_script( 'nf-admin-menu-upgrade-js', 'nf_forms', $forms );
+        wp_localize_script( 'nf-admin-menu-upgrade-js', 'nf_upgrades', $this->upgrades );
         wp_localize_script( 'nf-admin-menu-upgrade-js', 'nf_redirect', admin_url( 'admin.php?page=ninja-forms&nf-upgrade=1' ) );
 
         Ninja_Forms::template( 'admin-menu-upgrade.html.php' );
@@ -38,12 +43,12 @@ final class NF_Admin_Menus_Upgrade extends NF_Abstracts_Submenu
 
     public function get_count()
     {
-        $upgrades = apply_filters( 'ninja_forms_upgrades', array() );
-        return count( $upgrades );
+        return count( $this->upgrades );
     }
 
     public function upgrade_notice()
     {
+        if( isset( $_GET['page']) && 'nf_upgrade' == $_GET['page']) return;
         if( 0 == $this->get_count() ) return;
 
         WPN_Helper::admin_notice(
