@@ -36,7 +36,8 @@ final class NF_Admin_Menus_Upgrade extends NF_Abstracts_Submenu
         Ninja_Forms::template( 'admin-menu-upgrade.html.php' );
     }
 
-    public function get_count(){
+    public function get_count()
+    {
         $upgrades = apply_filters( 'ninja_forms_upgrades', array() );
         return count( $upgrades );
     }
