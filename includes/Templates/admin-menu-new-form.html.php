@@ -266,8 +266,8 @@
 </script>
 
 <script id="nf-tmpl-drawer-field-type-button" type="text/template">
-    <div class="nf-field-type-button nf-one-half <%= savedField() %>" data-id="<%= id %>">
-        <div class="nf-item" data-id="<%= id %>" tabindex="0"><%= nicename %></div>
+    <div class="nf-field-type-button nf-one-third <%= savedField() %>" data-id="<%= id %>">
+        <div class="nf-item" data-id="<%= id %>" tabindex="0"><span class="fa fa-<%= icon %>"></span><%= nicename %></div>
     </div>
 </script>
 

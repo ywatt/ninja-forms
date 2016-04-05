@@ -9,6 +9,8 @@ class NF_Fields_Textbox extends NF_Abstracts_Input
 
     protected $_section = 'common';
 
+    protected $_icon = 'text-width';
+
     protected $_aliases = array( 'input' );
 
     protected $_type = 'textbox';

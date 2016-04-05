@@ -9,6 +9,8 @@ class NF_Fields_Textarea extends NF_Abstracts_Input
 
     protected $_section = 'common';
 
+    protected $_icon = 'paragraph';
+
     protected $_type = 'textarea';
 
     protected $_templates = 'textarea';

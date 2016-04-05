@@ -2,7 +2,7 @@ define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-drawer-field-type-section',
-		
+
 		initialize: function() {
 			_.bindAll( this, 'render' );
 			nfRadio.channel( 'fields' ).reply( 'get:typeSection', this.getTypeSection, this );
@@ -52,7 +52,7 @@ define( [], function() {
 			    	jQuery( this ).addClass( 'active' );
 			    } ).blur( function() {
 			    	jQuery( this ).removeClass( 'active' );
-			    } );			
+			    } );
 			}
 		},
 
@@ -90,8 +90,9 @@ define( [], function() {
 			        _.each( this.fieldTypes, function( id ) {
 			            var type = nfRadio.channel( 'fields' ).request( 'get:type', id );
 			            var nicename = type.get( 'nicename' );
+			            var icon = type.get( 'icon' );
 			            var renderType = _.template( jQuery( '#nf-tmpl-drawer-field-type-button' ).html() );
-			            html += renderType( { id: id, nicename: nicename, type: type, savedField: that.isSavedField } );
+			            html += renderType( { id: id, nicename: nicename, icon: icon, type: type, savedField: that.isSavedField } );
 			        } );
 			        return html;
 				},
