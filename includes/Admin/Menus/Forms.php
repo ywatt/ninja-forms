@@ -85,6 +85,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_enqueue_media();
 
         wp_enqueue_style( 'nf-builder', Ninja_Forms::$url . 'assets/css/builder.css' );
+        wp_enqueue_style( 'nf-font-awesome', Ninja_Forms::$url . 'assets/css/font-awesome.min.css' );
         /**
          * CSS Libraries
          */
