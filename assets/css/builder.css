@@ -1919,6 +1919,10 @@ label.has-merge-tags .merge-tags {
   -webkit-animation-direction: alternate;
           animation-direction: alternate; }
 
+@media only screen and (max-width: 1400px) {
+  .nf-field-type-button {
+    width: 50%; } }
+
 @media only screen and (max-width: 1065px) {
   .nf-app-menu .preview .app-menu-text {
     text-indent: -9999px;

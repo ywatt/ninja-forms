@@ -26,6 +26,11 @@
     animation-iteration-count: 1;
     animation-direction: alternate;
 }
+@media only screen and (max-width: 1400px) {
+    .nf-field-type-button {
+        width: 50%;
+    }
+}
 @media only screen and (max-width: 1065px) {
     .nf-app-menu {
         .preview {
