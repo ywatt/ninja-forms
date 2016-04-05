@@ -935,6 +935,12 @@ All styles used within the drawer
             filter: grayscale(0);
     opacity: 1.0; }
 
+.nf-field-type-button {
+  float: left;
+  margin-bottom: 15px;
+  padding: 0 2%;
+  width: 33.33%; }
+
 table.nf-changes tr td {
   border-bottom: 1px solid #ccc; }
 
