@@ -56,6 +56,7 @@ define( [
 					id: type.id,
 					type: type.type,
 					nicename: type.nicename,
+                    icon: type.icon,
 					alias: type.alias,
 					parentType: type.parentType,
 					settingGroups: settingGroups,

@@ -28,7 +28,7 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 		 * @return void
 		 */
 		receiveStagedFields: function( ui ) {
-			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) {
+			if( jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) ) {
 				var type = jQuery( ui.item ).data( 'id' );
 				var tmpID = nfRadio.channel( 'fields' ).request( 'add:stagedField', type );
 				jQuery( ui.helper ).prop( 'id', tmpID );
@@ -68,13 +68,13 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 		 * @return void
 		 */
 		overStagedFields: function( e, ui ) {
-			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) {
+			if( jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) ) {
 				var type = jQuery( ui.item ).data( 'id' );
 				var fieldType = nfRadio.channel( 'fields' ).request( 'get:type', type );
 				var nicename = fieldType.get( 'nicename' );
 				this.currentHelper = ui.helper 
 				jQuery( ui.helper ).html( nicename + '<span class="dashicons dashicons-dismiss"></span>' );
-				jQuery( ui.helper ).removeClass( 'nf-one-third' ).addClass( 'nf-item-dock' ).css( { 'opacity': '0.8', 'width': '', 'height': '' } );
+				jQuery( ui.helper ).removeClass( 'nf-field-type-button' ).addClass( 'nf-item-dock' ).css( { 'opacity': '0.8', 'width': '', 'height': '' } );
 				var sortableEl = nfRadio.channel( 'app' ).request( 'get:stagedFieldsEl' );
 				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
 					jQuery( sortableEl ).addClass( 'nf-droppable-hover' );
@@ -91,10 +91,10 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 		 * @return void
 		 */
 		outStagedFields: function( ui ) {
-			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) {
+			if( jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) ) {
 				var helperClone = nfRadio.channel( 'drawer-addField' ).request( 'get:typeHelperClone' );	
 				jQuery( this.currentHelper ).html( jQuery( helperClone ).html() );
-				jQuery( this.currentHelper ).removeClass( 'nf-item-dock' ).addClass( 'nf-one-third' );
+				jQuery( this.currentHelper ).removeClass( 'nf-item-dock' ).addClass( 'nf-field-type-button' );
 				var sortableEl = nfRadio.channel( 'app' ).request( 'get:stagedFieldsEl' );
 				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
 					jQuery( sortableEl ).removeClass( 'nf-droppable-hover' );

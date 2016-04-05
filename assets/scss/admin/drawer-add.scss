@@ -63,6 +63,9 @@
             font-size: 14px;
             margin: 2px 0 -4px 5px;
         }
+        .fa {
+            margin-right: 10px;
+        }
     }
 }
 .nf-item {
@@ -71,10 +74,24 @@
     color: #A2A5A8;
     font-size: 14px;
     padding: 10px;
+    position: relative;
     text-align: center;
     &.active {
         background: $cta_color;
         color: #fff;
+    }
+    .fa {
+        background: #30373E;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        padding: 9px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 34px;
+        height: 37px;
+        line-height: 20px;
     }
 }
 .nf-saved {
@@ -118,4 +135,11 @@
             }
         }
     }
+}
+
+.nf-field-type-button {
+    float: left;
+    margin-bottom: 15px;
+    padding: 0 2%;
+    width: 33.33%;
 }
