@@ -233,6 +233,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 'alias' => $field->get_aliases(),
                 'parentType' => $field->get_parent_type(),
                 'section' => $field->get_section(),
+                'icon' => $field->get_icon(),
                 'type' => $field->get_type(),
                 'settingGroups' => $settings_groups,
                 'settingDefaults' => $settings_defaults
@@ -314,7 +315,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 $last_slash = strripos( $link, '/' );
                 $link = substr( $link, 0, $last_slash );
                 $link =  urlencode( $link );
-                $link = 'http://www.shareasale.com/r.cfm?u=' . $u_id . '&b=812237&m=63061&afftrack=&urllink=' . $link;            
+                $link = 'http://www.shareasale.com/r.cfm?u=' . $u_id . '&b=812237&m=63061&afftrack=&urllink=' . $link;
             }
 
             if( isset( $action_type_settings[ $name ] ) ) continue;

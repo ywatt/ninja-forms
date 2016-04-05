@@ -61,6 +61,10 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 					} else {
 						return this.id;
 					}
+				},
+				renderIcon: function() {
+					var type = nfRadio.channel( 'fields' ).request( 'get:type', this.type );
+					return '<span class="fa fa-' + type.get( 'icon' ) + '"></span>';
 				}
 			};
 		},
