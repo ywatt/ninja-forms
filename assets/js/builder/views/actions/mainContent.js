@@ -16,7 +16,7 @@ define( ['views/actions/actionItem', 'views/actions/mainContentEmpty'], function
 
 		onRender: function() {
 			jQuery( this.el ).droppable( {
-				accept: '.nf-one-third',
+				accept: '.nf-field-type-draggable',
 				activeClass: 'nf-droppable-active',
 				hoverClass: 'nf-droppable-hover',
 				drop: function( e, ui ) {

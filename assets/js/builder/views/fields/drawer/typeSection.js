@@ -19,7 +19,7 @@ define( [], function() {
 			 * If we're on a mobile device, we don't want to enable dragging for our field type buttons.
 			 */
 			if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-				jQuery( this.el ).find( 'div.nf-one-third' ).draggable( {
+				jQuery( this.el ).find( 'div.nf-field-type-draggable' ).draggable( {
 					opacity: 0.9,
 					tolerance: 'intersect',
 					scroll: false,

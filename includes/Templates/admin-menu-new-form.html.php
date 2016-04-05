@@ -255,7 +255,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-staged-field" type="text/template">
-     <span class="nf-item-dock" id="<%= id %>" data-id="<%= slug %>"><%= nicename %><span class="dashicons dashicons-dismiss"></span>
+     <span class="nf-item-dock" id="<%= id %>" data-id="<%= slug %>"><span class="fa fa-<%= icon %>"></span><%= nicename %><span class="dashicons dashicons-dismiss"></span>
 </script>
 
 <script id="nf-tmpl-drawer-field-type-section" type="text/template">
@@ -266,7 +266,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-field-type-button" type="text/template">
-    <div class="nf-field-type-button <%= savedField() %>" data-id="<%= id %>">
+    <div class="nf-field-type-button nf-field-type-draggable <%= savedField() %>" data-id="<%= id %>">
         <div class="nf-item" data-id="<%= id %>" tabindex="0"><span class="fa fa-<%= icon %>"></span><%= nicename %></div>
     </div>
 </script>
