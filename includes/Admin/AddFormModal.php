@@ -112,7 +112,7 @@ class NF_Admin_AddFormModal {
                 jQuery( document ).on( 'click', '#nf-insert-form', function( e ) {
                     e.preventDefault();
                     var form_id = jQuery( '#nf-form-select' ).val();
-                    var shortcode = '[ninja_form id=' + form_id + ']';
+                    var shortcode = '<?php echo apply_filters( 'ninja_forms_tinymce_shortcode', "[ninja_form id=' + form_id + ']" ); ?>';
                     window.parent.send_to_editor( shortcode );
                     jBox.close();
                     jQuery( '#nf-form-select' ).val( '' );
