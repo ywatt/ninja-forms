@@ -557,3 +557,5 @@
         <input type="button" class="insert-link extra" value="Insert">
     </div>
 </script>
+
+<?php do_action( 'ninja_forms_builder_templates' ); ?>

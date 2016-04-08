@@ -92,7 +92,20 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 			return {
 				getColumns: function() {
 					return that.columns;
+				},
+				renderOptions: function( column, value ) {
+
+					if( 'undefined' == typeof that.options.columns[ column ] ) return;
+
+					var html = '';
+					_.each( that.options.columns[ column ].options, function( option ){
+						var selected = ( value == option.value ) ? ' selected' : '';
+						html += '<option value="' + option.value + '"' +  selected + '>' + option.label + '</option>';
+					});
+					
+					return html;
 				}
+
 			}
 		}
 
