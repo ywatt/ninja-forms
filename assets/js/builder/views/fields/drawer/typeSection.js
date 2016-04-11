@@ -44,7 +44,11 @@ define( [], function() {
 					stop: function( e, ui ) {
 						that.dragging = false;
 						nfRadio.channel( 'drawer-addField' ).trigger( 'stopDrag:type', this, ui );
-					}
+					},
+
+					drag: function(e, ui) {
+						nfRadio.channel( 'drawer-addField' ).trigger( 'drag:type', this, ui );
+					 }
 
 				} ).disableSelection();
 
