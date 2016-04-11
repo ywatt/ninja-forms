@@ -2130,6 +2130,12 @@ label.has-merge-tags .merge-tags {
   .nf-saved .nf-item::after {
     padding: 14px; } }
 
+@media only screen and (max-width: 600px) {
+  #nf-app-form-title {
+    margin-top: -55px; }
+  #nf-main {
+    top: 120px; } }
+
 .rtl.ninja-forms-app #wpcontent {
   margin-right: 140px; }
   .rtl.ninja-forms-app #wpcontent #wpbody {
