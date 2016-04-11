@@ -27,7 +27,9 @@ define( ['views/app/drawer/itemSetting'], function( itemSettingView) {
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			var submitButtons = fieldCollection.findWhere( { type: 'submit' } );
 			if ( 'undefined' == typeof submitButtons ) {
-				this.formSubmit.show( new itemSettingView( { model: addSubmitSettingModel, dataModel: dataModel } ) );				
+				this.formSubmit.show( new itemSettingView( { model: addSubmitSettingModel, dataModel: dataModel } ) );
+			} else {
+				dataModel.set( 'add_submit', 0 );
 			}
 		},
 

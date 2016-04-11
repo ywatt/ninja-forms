@@ -423,7 +423,7 @@
 
 <script id="nf-tmpl-edit-setting-toggle" type="text/template">
 
-    <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
+    <span class="nf-setting-label"><%= label %><%= renderTooltip() %></span>
     <input type="checkbox" id="<%= name %>" class="nf-toggle setting" <%= ( 1 == value ) ? 'checked' : '' %> />
     <label for="<%= name %>"><%= label %></label>
 
@@ -557,3 +557,5 @@
         <input type="button" class="insert-link extra" value="Insert">
     </div>
 </script>
+
+<?php do_action( 'ninja_forms_builder_templates' ); ?>

@@ -141,6 +141,14 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
         public $actions = array();
 
         /**
+         * Merge Tags
+         *
+         * @since 3.0
+         * @var array
+         */
+        public $merge_tags = array();
+
+        /**
          * Model Factory
          *
          * @var object
@@ -353,6 +361,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
              * Form Action Registration
              */
             self::$instance->actions = apply_filters( 'ninja_forms_register_actions', self::load_classes( 'Actions' ) );
+
+            /*
+             * Merge Tag Registration
+             */
+            self::$instance->merge_tags = apply_filters( 'ninja_forms_register_merge_tags', self::$instance->merge_tags );
 
             /*
              * It's Ninja Time: Hook for Extensions
