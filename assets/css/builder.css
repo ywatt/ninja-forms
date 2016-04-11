@@ -2060,7 +2060,11 @@ label.has-merge-tags .merge-tags {
     .ninja-forms-app.auto-fold #wpcontent #wpbody {
       left: 0; }
   .nf-drawer-opened .nf-toggle-drawer {
-    display: none; } }
+    display: none; }
+  #nf-app-form-title {
+    margin-top: -55px; }
+  #nf-main {
+    top: 120px; } }
 
 @media only screen and (max-width: 782px) {
   .ninja-forms-app.folded #wpcontent, .ninja-forms-app.auto-fold #wpcontent {
@@ -2129,12 +2133,6 @@ label.has-merge-tags .merge-tags {
     padding: 15px; }
   .nf-saved .nf-item::after {
     padding: 14px; } }
-
-@media only screen and (max-width: 600px) {
-  #nf-app-form-title {
-    margin-top: -55px; }
-  #nf-main {
-    top: 120px; } }
 
 .rtl.ninja-forms-app #wpcontent {
   margin-right: 140px; }
