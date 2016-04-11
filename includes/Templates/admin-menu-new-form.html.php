@@ -3,12 +3,17 @@
 <div id="nf-builder" class="grey"></div>
 
 <script id="nf-tmpl-builder" type="text/template">
+    <div id="nf-app-admin-header"><div id="nf-logo"></div><a href="admin.php?page=ninja-forms" class="fa fa-times"></a></div>
     <div id="nf-overlay"></div>
     <div id="nf-header"></div>
     <div id="nf-main" class="nf-app-main"></div>
     <div id="nf-menu-drawer"></div>
     <div id="nf-drawer"></div>
     <span class="merge-tags-content" style="display:none;"></span>
+</script>
+
+<script id="nf-tmpl-admin-header" type="text/template">
+    <div id="nf-app-admin-header"></div>
 </script>
 
 <script id="nf-tmpl-header" type="text/template">
@@ -34,7 +39,7 @@
 </script>
 
 <script id="nf-tmpl-app-header" type="text/template">
-    <div id="nf-logo"></div>
+    <!-- <div id="nf-logo"></div> -->
     <ul class="nf-app-menu"></ul>
     <span class="nf-mobile-menu-button"></span>
     <span class="nf-app-buttons"></span>
