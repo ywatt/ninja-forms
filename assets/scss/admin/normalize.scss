@@ -1,17 +1,16 @@
 .ninja-forms-app {
+    height: 0;
+    #adminmenumain,
     #wpfooter {
         display: none;
     }
+    #wpwrap {
+        height: 0;
+        min-height: 0;
+    }
     #wpcontent {
-        background: #fff;
-        margin-left: 140px;
         #wpbody {
             font-size: 16px;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            left: 160px;
         }
         * {
             -webkit-box-sizing: border-box;
@@ -22,23 +21,12 @@
             box-sizing: initial;
         }
     }
-    &.folded {
-        #wpcontent {
-            margin-left: 16px;
-            #wpbody {
-                left: 36px;
-            }
-        }
-    }
     .grey {
         #nf-drawer {
             .nf-button {
                 padding: 15px 30px;
             }
         }
-    }
-    .after {
-        display: none;
     }
 }
 
@@ -47,9 +35,16 @@
     padding: 30px 40px;
     overflow: hidden;
     width: 100%;
-    position: absolute;
+    padding-top: 80px;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 10000000
+}
+
+.product-content article>*:not(img) {
+    padding-left: 30px;
+    padding-right: 30px;
 }

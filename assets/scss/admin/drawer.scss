@@ -3,7 +3,7 @@
     padding: 40px 40px;
     width: 50%;
     position: absolute;
-    top: 0;
+    top: 60px;
     bottom: 0;
     right: -1400px;
     overflow: auto;
@@ -69,7 +69,7 @@
     @media only screen and (min-width: 901px) {
         #nf-app-sub-header {
             .nf-add-new {
-                top: 95px !important;
+                top: 139px !important;
                 text-indent: -99999px;
                 &:after {
                 }
