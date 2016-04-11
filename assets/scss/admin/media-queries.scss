@@ -173,6 +173,23 @@
             width: 33%;
         }
     }
+
+    #nf-app-form-title {
+        margin-top: -55px;
+    }
+    #nf-main {
+        top: 120px;
+    }
+
+    #nf-table-display {
+        .nf-item-controls {
+            width: auto;
+        }
+    }
+    .nf-item-delete,
+    .nf-item-duplicate {
+        display: none;
+    }
 }
 @media only screen and (max-width: 1023px) {
     .ninja-forms-app {
@@ -237,12 +254,7 @@
         display: none;
     }
 
-    #nf-app-form-title {
-        margin-top: -55px;
-    }
-    #nf-main {
-        top: 120px;
-    }
+
 
 }
 
@@ -358,15 +370,7 @@
     //     td:nth-of-type(3):before { content: "Type"; }
     //     td:nth-of-type(4):before { content: "Actions"; }
     // }
-    #nf-table-display {
-        .nf-item-controls {
-            width: auto;
-        }
-    }
-    .nf-item-delete,
-    .nf-item-duplicate {
-        display: none;
-    }
+
     .nf-drawer-buttons {
         display: block;
     }
