@@ -16,7 +16,7 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 				jQuery( this.el ).addClass( 'nf-field-type-droppable' ).addClass( 'nf-fields-sortable' );
 				var that = this;
 				/* TODO: There's a bug with some Android phones and chrome. The fix below hasn't been implement.
-				
+
 				 * Instantiate our sortable field list, but only if we aren't on a mobile device.
 				 *
 				 * On Android, our sortable list isn't scrollable if it's instantiated at render.
@@ -24,7 +24,7 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 				 * destroy it when the drag stops.
 				 */
 				// if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-					this.initSortable();				
+					this.initSortable();
 				// }
 			}
 
