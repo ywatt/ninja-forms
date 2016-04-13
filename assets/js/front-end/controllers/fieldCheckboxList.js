@@ -2,8 +2,11 @@ define([], function() {
     var controller = Marionette.Object.extend( {
         initialize: function() {
             this.listenTo( nfRadio.channel( 'listcheckbox' ), 'init:model', this.register );
+            this.listenTo( nfRadio.channel( 'terms' ), 'init:model', this.register );
             nfRadio.channel( 'listcheckbox' ).reply( 'before:updateField', this.beforeUpdateField, this );
+            nfRadio.channel( 'terms' ).reply( 'before:updateField', this.beforeUpdateField, this );
             nfRadio.channel( 'listcheckbox' ).reply( 'get:calcValue', this.getCalcValue, this );
+            nfRadio.channel( 'terms' ).reply( 'get:calcValue', this.getCalcValue, this );
         },
 
         register: function( model ) {
