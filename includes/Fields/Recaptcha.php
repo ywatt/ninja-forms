@@ -15,6 +15,8 @@ class NF_Fields_Recaptcha extends NF_Abstracts_Field
 
     protected $_templates = 'recaptcha';
 
+    protected $_settings = array( 'classes' );
+
     protected $_test_value = '';
 
     public function __construct()
@@ -22,6 +24,8 @@ class NF_Fields_Recaptcha extends NF_Abstracts_Field
         parent::__construct();
 
         $this->_nicename = __( 'Recaptcha', 'ninja-forms' );
+
+        $this->_settings[ 'classes' ][ 'group' ] = 'primary';
 
         add_filter( 'nf_sub_hidden_field_types', array( $this, 'hide_field_type' ) );
     }
