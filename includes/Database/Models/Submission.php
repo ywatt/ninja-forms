@@ -101,7 +101,7 @@ final class NF_Database_Models_Submission
      */
     public function get_field_value( $field_ref )
     {
-        $field_id = ( is_int( $field_ref ) ) ? $field_ref : $this->get_field_id_by_key( $field_ref );
+        $field_id = ( is_string( $field_ref ) ) ? $field_ref : $this->get_field_id_by_key( $field_ref );
 
         $field = '_field_' . $field_id;
 
@@ -119,7 +119,7 @@ final class NF_Database_Models_Submission
     {
         if( ! empty( $this->_field_values ) ) return $this->_field_values;
 
-        return $this->_field_values = get_post_meta( $this->_id );
+        return $this->_field_values = get_post_meta( $this->_id, '' );
     }
 
     /**
@@ -411,9 +411,11 @@ final class NF_Database_Models_Submission
         );
 
         if( ! empty( $where ) ) {
-            foreach ($where as $key => $value) {
+            foreach ($where as $ref => $value) {
 
-                $return[] = (is_array($value)) ? $value : array('key' => $key, 'value' => $value);
+                $field_id = ( is_int( $ref ) ) ? $ref : $this->get_field_id_by_key( $ref );
+
+                $return[] = ( is_array($value) ) ? $value : array('key' => "_field_$field_id", 'value' => $value);
             }
         }
 
@@ -428,7 +430,11 @@ final class NF_Database_Models_Submission
      */
     protected function get_field_id_by_key( $field_key )
     {
-        return $field_key;
+        global $wpdb;
+
+        $field_id = $wpdb->get_var( "SELECT id FROM {$wpdb->prefix}nf3_fields WHERE `key` = '{$field_key}' AND `parent_id` = {$this->_form_id}" );
+
+        return $field_id;
     }
 
 
