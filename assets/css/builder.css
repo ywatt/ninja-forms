@@ -1498,6 +1498,9 @@ label.has-merge-tags .merge-tags {
   top: 33px;
   right: 12px; }
 
+.jBox-Tooltip {
+  z-index: 100000000 !important; }
+
 .jBox-TooltipBorder .jBox-container {
   border-radius: 5px;
   border: 2px solid #1EA9EA;
