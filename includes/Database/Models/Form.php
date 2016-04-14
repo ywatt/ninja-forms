@@ -90,8 +90,9 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $action->update_settings( $settings )->save();
         }
 
-        self::$imported_form_id = $form_id;
         add_action( 'admin_notices', array( 'NF_Database_Models_Form', 'import_admin_notice' ) );
+
+        return self::$imported_form_id = $form_id;
     }
 
     public static function import_admin_notice()
