@@ -39,6 +39,7 @@ define(
 		'controllers/app/itemSettingFill',
 		'controllers/app/confirmPublish',
 		'controllers/app/rte',
+		'controllers/app/settingHTML',
 		'controllers/app/changeMenu',
 		'controllers/app/mobile',
 		'controllers/app/notices',
@@ -124,6 +125,7 @@ define(
 		ItemSettingFill,
 		ConfirmPublish,
 		RTE,
+		SettingHTML,
 		ChangeMenu,
 		AppMobile,
 		AppNotices,
@@ -200,6 +202,7 @@ define(
 				new ItemControls();
 				new ConfirmPublish();
 				new RTE();
+				new SettingHTML();
 				new ChangeMenu();
 				new AppMobile();
 				new AppNotices();

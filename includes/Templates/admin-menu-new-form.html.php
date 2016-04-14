@@ -512,6 +512,12 @@
     </div>
 </script>
 
+<script id="nf-tmpl-edit-setting-html" type="text/template">
+    <div class="nf-note">
+        <%= value %>
+    </div>
+</script>
+
 <!-- Calculation Row Template -->
 
 <script id="nf-tmpl-edit-setting-calculation-repeater-row" type="text/template">
