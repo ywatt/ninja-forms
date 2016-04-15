@@ -177,9 +177,7 @@ final class NF_Display_Render
         }
 
         // Output Form Container
-        ?>
-            <div id="nf-form-<?php echo $form_id; ?>-cont"></div>
-        <?php
+        Ninja_Forms::template( 'display-form-container.html.php', compact( 'form_id' ) );
 
         ?>
         <!-- TODO: Move to Template File. -->
@@ -331,9 +329,7 @@ final class NF_Display_Render
         }
 
         // Output Form Container
-        ?>
-        <div id="nf-form-<?php echo $form_id; ?>-cont"></div>
-        <?php
+        Ninja_Forms::template( 'display-form-container.html.php', compact( 'form_id' ) );
 
         ?>
         <!-- TODO: Move to Template File. -->
