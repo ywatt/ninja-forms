@@ -33,7 +33,9 @@ label.has-merge-tags {
         right: 12px;
     }
 }
-
+.jBox-Tooltip {
+    z-index: 100000000 !important;
+}
 
 .jBox-TooltipBorder {
     .jBox-container {

@@ -1,7 +1,5 @@
 <div id="nf-pre-builder" style="background:#fff;position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999999;"></div>
 
-<h1><?php _e( 'Form Builder', 'ninja-forms' ); ?></h1>
-
 <div id="nf-builder" class="grey"></div>
 
 <script id="nf-tmpl-builder" type="text/template">
@@ -511,6 +509,12 @@
 
     <div>
         <span class="dashicons dashicons-dismiss nf-delete"></span>
+    </div>
+</script>
+
+<script id="nf-tmpl-edit-setting-html" type="text/template">
+    <div class="nf-note">
+        <%= value %>
     </div>
 </script>
 
