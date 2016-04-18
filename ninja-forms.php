@@ -573,13 +573,19 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
          * @param string $file_name
          * @param array $data
          */
-        public static function template( $file_name = '', array $data = array() )
+        public static function template( $file_name = '', array $data = array(), $return = FALSE )
         {
-            if( ! $file_name ) return;
+            if( ! $file_name ) return FALSE;
 
             extract( $data );
 
-            include self::$dir . 'includes/Templates/' . $file_name;
+            $path = self::$dir . 'includes/Templates/' . $file_name;
+
+            if( ! file_exists( $path ) ) return FALSE;
+
+            if( $return ) return file_get_contents( $path );
+
+            include $path;
         }
 
         /**
