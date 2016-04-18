@@ -95,6 +95,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         $form_id = Ninja_Forms()->form()->import_form( $form );
 
         header( "Location: " . admin_url( "admin.php?page=ninja-forms&form_id=$form_id" ) );
+        exit();
     }
 
     private function _enqueue_the_things( $form_id )
