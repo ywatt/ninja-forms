@@ -35,6 +35,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
 
 } else {
 
+    include_once 'lib/NF_AddonChecker.php';
     require_once 'includes/deprecated.php';
 
     add_action( 'wp_ajax_ninja_forms_ajax_migrate_database', 'ninja_forms_ajax_migrate_database' );
