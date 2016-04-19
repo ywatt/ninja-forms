@@ -21,9 +21,10 @@ define( [], function() {
 			if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
 				jQuery( this.el ).find( 'div.nf-field-type-draggable' ).draggable( {
 					opacity: 0.9,
-					tolerance: 'intersect',
+					tolerance: 'pointer',
 					scroll: false,
 					connectToSortable: '.nf-field-type-droppable',
+					appendTo: '#nf-main',
 
 					helper: function( e ) {
 						var width = jQuery( e.target ).parent().width();
@@ -32,7 +33,7 @@ define( [], function() {
 						var left = width / 4;
 						var top = height / 2;
 						jQuery( this ).draggable( 'option', 'cursorAt', { top: top, left: left } );
-
+						jQuery( element ).zIndex( 1000 );
 						return element;
 					},
 
@@ -47,8 +48,10 @@ define( [], function() {
 					},
 
 					drag: function(e, ui) {
-						nfRadio.channel( 'drawer-addField' ).trigger( 'drag:type', this, ui );
-					 }
+						nfRadio.channel( 'drawer-addField' ).trigger( 'drag:type', this, ui, e );
+						// var draggableInstance = jQuery( this ).draggable( 'instance' );
+						// console.log( draggableInstance );
+					}
 
 				} ).disableSelection();
 
