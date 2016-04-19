@@ -35,6 +35,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
 
 } else {
 
+    include_once 'lib/NF_AddonChecker.php';
+    require_once 'includes/deprecated.php';
+
     add_action( 'wp_ajax_ninja_forms_ajax_migrate_database', 'ninja_forms_ajax_migrate_database' );
     function ninja_forms_ajax_migrate_database(){
         $migrations = new NF_Database_Migrations();
@@ -243,7 +246,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
                  */
                 self::$instance->controllers[ 'form' ]        = new NF_AJAX_Controllers_Form();
                 self::$instance->controllers[ 'preview' ]     = new NF_AJAX_Controllers_Preview();
-                self::$instance->controllers[ 'uploads' ]     = new NF_AJAX_Controllers_Uploads();
+//                self::$instance->controllers[ 'uploads' ]     = new NF_AJAX_Controllers_Uploads();
                 self::$instance->controllers[ 'submission' ]  = new NF_AJAX_Controllers_Submission();
                 self::$instance->controllers[ 'savedfields' ] = new NF_AJAX_Controllers_SavedFields();
 
@@ -571,13 +574,19 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
          * @param string $file_name
          * @param array $data
          */
-        public static function template( $file_name = '', array $data = array() )
+        public static function template( $file_name = '', array $data = array(), $return = FALSE )
         {
-            if( ! $file_name ) return;
+            if( ! $file_name ) return FALSE;
 
             extract( $data );
 
-            include self::$dir . 'includes/Templates/' . $file_name;
+            $path = self::$dir . 'includes/Templates/' . $file_name;
+
+            if( ! file_exists( $path ) ) return FALSE;
+
+            if( $return ) return file_get_contents( $path );
+
+            include $path;
         }
 
         /**
