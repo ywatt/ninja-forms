@@ -26,6 +26,7 @@ define( [], function() {
 					connectToSortable: '.nf-field-type-droppable',
 					appendTo: '#nf-main',
 					refreshPositions: true,
+					grid: [ 3, 3 ],
 
 					helper: function( e ) {
 						var width = jQuery( e.target ).parent().width();
@@ -41,6 +42,7 @@ define( [], function() {
 					start: function( e, ui ) {
 						that.dragging = true;
 						nfRadio.channel( 'drawer-addField' ).trigger( 'startDrag:type', this, ui );
+						that.tmp = false;
 					},
 
 					stop: function( e, ui ) {
@@ -49,7 +51,7 @@ define( [], function() {
 					},
 
 					drag: function(e, ui) {
-						nfRadio.channel( 'drawer-addField' ).trigger( 'drag:type', this, ui, e );
+						nfRadio.channel( 'drawer-addField' ).trigger( 'drag:type', this, ui, e );	
 						// var draggableInstance = jQuery( this ).draggable( 'instance' );
 						// console.log( draggableInstance );
 					}
