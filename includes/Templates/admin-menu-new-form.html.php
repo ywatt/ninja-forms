@@ -168,9 +168,9 @@
 </script>
 
 <script id="nf-tmpl-drawer-content-add-field" type="text/template">
-    <section id="nf-drawer-staging" class="nf-settings nf-stage">
+    <div id="nf-drawer-staging" class="nf-settings nf-stage">
         <div class="nf-reservoir nf-drawer-staged-fields nf-field-type-droppable"></div>
-    </section>
+    </div>
     <span id="nf-drawer-primary"></span>
     <span id="nf-drawer-secondary"></span>
 </script>
@@ -334,9 +334,9 @@
 
 <script id="nf-tmpl-staged-fields-drag" type="text/template">
     <div class="nf-staged-fields-drag">
-        <div id="drag-item-1" class="nf-field-wrap"><%= num %> Fields</div>
-        <div id="drag-item-2" class="nf-field-wrap">&nbsp;</div>
-        <div id="drag-item-3" class="nf-field-wrap">&nbsp;</div>
+        <div id="drag-item-1" class="nf-staged-fields-drag-wrap"><%= num %> Fields</div>
+        <div id="drag-item-2" class="nf-staged-fields-drag-wrap">&nbsp;</div>
+        <div id="drag-item-3" class="nf-staged-fields-drag-wrap">&nbsp;</div>
     </div>
 </script>
 

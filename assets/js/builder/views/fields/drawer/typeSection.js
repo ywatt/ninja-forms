@@ -22,7 +22,6 @@ define( [], function() {
 				jQuery( this.el ).find( 'div.nf-field-type-draggable' ).draggable( {
 					opacity: 0.9,
 					tolerance: 'pointer',
-					scroll: false,
 					connectToSortable: '.nf-field-type-droppable',
 					appendTo: '#nf-main',
 					refreshPositions: true,
@@ -42,7 +41,6 @@ define( [], function() {
 					start: function( e, ui ) {
 						that.dragging = true;
 						nfRadio.channel( 'drawer-addField' ).trigger( 'startDrag:type', this, ui );
-						that.tmp = false;
 					},
 
 					stop: function( e, ui ) {
@@ -52,8 +50,6 @@ define( [], function() {
 
 					drag: function(e, ui) {
 						nfRadio.channel( 'drawer-addField' ).trigger( 'drag:type', this, ui, e );	
-						// var draggableInstance = jQuery( this ).draggable( 'instance' );
-						// console.log( draggableInstance );
 					}
 
 				} ).disableSelection();

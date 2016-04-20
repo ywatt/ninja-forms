@@ -1327,7 +1327,7 @@ All styles used for displaying table content
     clear: both;
     content: '';
     display: block; }
-  .nf-staged-fields-drag .nf-field-wrap {
+  .nf-staged-fields-drag .nf-staged-fields-drag-wrap {
     position: absolute;
     width: 500px; }
   .nf-staged-fields-drag #drag-item-1,
@@ -1346,6 +1346,30 @@ All styles used for displaying table content
     bottom: 10px;
     left: 10px;
     z-index: 1; }
+
+.nf-staged-fields-drag-wrap {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #888;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 15px 20px; }
+  .nf-staged-fields-drag-wrap.active {
+    border: 2px solid #84CC1E;
+    color: #424242;
+    font-weight: bold; }
+    .nf-staged-fields-drag-wrap.active .nf-item-controls {
+      font-weight: normal; }
+      .nf-staged-fields-drag-wrap.active .nf-item-controls a {
+        color: #424242; }
+      .nf-staged-fields-drag-wrap.active .nf-item-controls .nf-item-delete,
+      .nf-staged-fields-drag-wrap.active .nf-item-controls .nf-item-duplicate {
+        display: none; }
+      .nf-staged-fields-drag-wrap.active .nf-item-controls .nf-item-editing {
+        display: inline; }
+      .nf-staged-fields-drag-wrap.active .nf-item-controls .nf-item-edit .dashicons {
+        margin-right: 12px; }
 
 .nf-staged-fields-sortable-placeholder {
   float: left;
