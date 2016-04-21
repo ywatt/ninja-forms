@@ -14,10 +14,8 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
     {
         parent::__construct();
 
-        if( ! current_user_can( apply_filters( 'ninja_forms_admin_form_settings_capabilities', 'manage_options' ) ) ) return;
-
         if( isset( $_POST[ 'update_ninja_forms_settings' ] ) ) {
-            $this->update_settings();
+            add_action( 'admin_init', array( $this, 'update_settings' ) );
         }
     }
 
@@ -98,8 +96,10 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
     }
 
-    private function update_settings()
+    public function update_settings()
     {
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_form_settings_capabilities', 'manage_options' ) ) ) return;
+
         if( ! isset( $_POST[ $this->_prefix ] ) ) return;
 
         $settings = $_POST[ 'ninja_forms' ];
