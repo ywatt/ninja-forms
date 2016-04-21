@@ -84,42 +84,16 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
         }
 
         if( $saved_fields ){
-            add_action( 'admin_footer', array( $this, 'add_saved_field_javascript' ) );
+            wp_register_script( 'ninja_forms_admin_menu_settings', Ninja_Forms::$url . 'assets/js/admin-settings.js', array( 'jquery' ), FALSE, TRUE );
+            wp_localize_script( 'ninja_forms_admin_menu_settings', 'nf_settings', array(
+                'ajax_url' => admin_url( 'admin-ajax.php' ),
+                'nonce'    => wp_create_nonce( "ninja_forms_ajax_nonce" )
+            ));
+            wp_enqueue_script( 'ninja_forms_admin_menu_settings' );
         }
 
         Ninja_Forms::template( 'admin-menu-settings.html.php', compact( 'tabs', 'active_tab', 'groups', 'grouped_settings', 'save_button_text', 'errors' ) );
 
-    }
-
-    public function add_saved_field_javascript()
-    {
-        //TODO: Move this.
-        ?>
-        <script type="text/javascript" >
-            var ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
-            var nf_ajax_nonce = '<?php echo wp_create_nonce( "ninja_forms_ajax_nonce" ); ?>';
-
-            jQuery(document).ready(function($) {
-                $( '.js-delete-saved-field' ).click( function(){
-
-                    var that = this;
-
-                    var data = {
-                        'action': 'nf_delete_saved_field',
-                        'field': {
-                            id: $( that ).data( 'id' )
-                        },
-                        'security': nf_ajax_nonce
-                    };
-
-                    $.post( ajaxurl, data )
-                        .done( function( response ) {
-                            $( that ).closest( 'tr').fadeOut().remove();
-                        });
-                });
-            });
-        </script>
-        <?php
     }
 
     private function update_settings()
