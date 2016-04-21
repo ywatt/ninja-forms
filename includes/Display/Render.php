@@ -392,7 +392,7 @@ final class NF_Display_Render
         wp_enqueue_script( 'nf-front-end', Ninja_Forms::$url . 'assets/js/min/front-end.js', array( 'jquery', 'backbone', 'backbone-radio', 'backbone-marionette', 'math' ) );
 
         $data = apply_filters( 'ninja_forms_render_localize_script_data', array(
-            'ajaxNonce' => wp_create_nonce( 'ninja_forms_ajax_nonce' ),
+            'ajaxNonce' => wp_create_nonce( 'ninja_forms_display_nonce' ),
             'adminAjax' => admin_url( 'admin-ajax.php' ),
             'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
             'use_merge_tags' => array()
