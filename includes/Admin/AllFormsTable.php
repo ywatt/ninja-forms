@@ -227,6 +227,8 @@ class NF_Admin_AllFormsTable extends WP_List_Table
 
     public static function process_bulk_action()
     {
+        if( ! isset( $_GET[ 'page' ] ) || 'ninja-forms' != $_GET[ 'page' ] ) return;
+
         if ( isset( $_REQUEST[ 'action' ] ) && 'duplicate' === $_REQUEST[ 'action' ] ) {
 
             // In our file that handles the request, verify the nonce.
