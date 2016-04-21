@@ -14,6 +14,8 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
     {
         parent::__construct();
 
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_form_settings_capabilities', 'manage_options' ) ) ) return;
+
         if( isset( $_POST[ 'update_ninja_forms_settings' ] ) ) {
             $this->update_settings();
         }

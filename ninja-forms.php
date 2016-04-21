@@ -40,6 +40,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
 
     add_action( 'wp_ajax_ninja_forms_ajax_migrate_database', 'ninja_forms_ajax_migrate_database' );
     function ninja_forms_ajax_migrate_database(){
+
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_migrate_database_capabilities', 'manage_options' ) ) ) {
+            echo json_encode( array( 'error' => __( 'Permission Denied.', 'ninja-forms' ) ) );
+            wp_die();
+        }
+
         $migrations = new NF_Database_Migrations();
         $migrations->nuke( true, true );
         $migrations->migrate();
@@ -49,6 +55,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
 
     add_action( 'wp_ajax_ninja_forms_ajax_import_form', 'ninja_forms_ajax_import_form' );
     function ninja_forms_ajax_import_form(){
+
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_import_form_capabilities', 'manage_options' ) ) ) {
+            echo json_encode( array( 'error' => __( 'Permission Denied.', 'ninja-forms' ) ) );
+            wp_die();
+        }
+
         $import = stripslashes( $_POST[ 'import' ] ); // TODO: How to sanitize serialized string?
         $form_id = ( isset( $_POST[ 'formID' ] ) ) ? absint( $_POST[ 'formID' ] ) : '';
 
@@ -67,6 +79,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
 
     add_action( 'wp_ajax_ninja_forms_ajax_import_fields', 'ninja_forms_ajax_import_fields' );
     function ninja_forms_ajax_import_fields(){
+
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_impport_fields_capabilities', 'manage_options' ) ) ) {
+            echo json_encode( array( 'error' => __( 'Permission Denied.', 'ninja-forms' ) ) );
+            wp_die();
+        }
+
         $fields = stripslashes( $_POST[ 'fields' ] ); // TODO: How to sanitize serialized string?
         $fields = maybe_unserialize( $fields );
 
