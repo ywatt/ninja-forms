@@ -40,7 +40,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
 
     require_once 'includes/deprecated.php';
 
-
     /**
      * Class Ninja_Forms
      */

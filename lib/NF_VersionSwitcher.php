@@ -4,6 +4,8 @@ final class NF_VersionSwitcher
 {
     public function __construct()
     {
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_version_switcher_capabilities', 'manage_options' ) ) ) return;
+        
         $this->listener();
 
         if( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
