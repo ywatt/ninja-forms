@@ -87,7 +87,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
             wp_register_script( 'ninja_forms_admin_menu_settings', Ninja_Forms::$url . 'assets/js/admin-settings.js', array( 'jquery' ), FALSE, TRUE );
             wp_localize_script( 'ninja_forms_admin_menu_settings', 'nf_settings', array(
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
-                'nonce'    => wp_create_nonce( "ninja_forms_ajax_nonce" )
+                'nonce'    => wp_create_nonce( "ninja_forms_settings_nonce" )
             ));
             wp_enqueue_script( 'ninja_forms_admin_menu_settings' );
         }

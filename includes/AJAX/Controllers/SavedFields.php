@@ -44,7 +44,7 @@ class NF_AJAX_Controllers_SavedFields extends NF_Abstracts_Controller
 
     public function delete()
     {
-        check_ajax_referer( 'ninja_forms_builder_nonce', 'security' );
+        check_ajax_referer( 'ninja_forms_settings_nonce', 'security' );
 
         if( ! isset( $_POST[ 'field' ] ) ){
             $this->_errors[] = 'Field Not Found';
