@@ -255,16 +255,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
                 self::$instance->shortcodes = new NF_Display_Shortcodes();
 
                 /*
-                 * Temporary Shortcodes
-                 *
-                 * TODO: removed once building is complete
-                 */
-                require_once( self::$dir . 'includes/Display/Shortcodes/tmp-frontend.php' );
-                require_once( self::$dir . 'includes/Display/Shortcodes/tmp-preview.php' );
-                require_once( self::$dir . 'includes/Display/Shortcodes/tmp-frontendform.php' );
-                require_once( self::$dir . 'includes/Display/Shortcodes/tmp-file-upload.php' );
-
-                /*
                  * Submission CPT
                  */
                 new NF_Admin_CPT_Submission();
