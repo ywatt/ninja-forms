@@ -46,7 +46,9 @@ define( [], function() {
             var options = [];
             _.each( fieldCollection.models, function( field ){
 
-                if( 'undefined' == typeof fieldTypes || 0 == fieldTypes.length || ! _.contains( fieldTypes, field.get( 'type' ) ) ) return;
+                if( dataModel.get( 'id' ) == field.get( 'id' ) ) return;
+
+                if( 'undefined' != typeof fieldTypes && 0 != fieldTypes.length && ! _.contains( fieldTypes, field.get( 'type' ) ) ) return;
 
                 options.push({
                     label: field.get( 'label' ),
