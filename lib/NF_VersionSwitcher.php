@@ -4,7 +4,7 @@ final class NF_VersionSwitcher
 {
     public function __construct()
     {
-        $this->listener();
+        add_action( 'admin_init', array( $this, 'listener' )  );
 
         if( ! defined( 'NF_DEV' ) || ! NF_DEV ) return;
 
@@ -13,6 +13,8 @@ final class NF_VersionSwitcher
 
     public function listener()
     {
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_version_switcher_capabilities', 'manage_options' ) ) ) return;
+
         if( isset( $_GET[ 'nf-switcher' ] ) ){
 
             switch( $_GET[ 'nf-switcher' ] ){
