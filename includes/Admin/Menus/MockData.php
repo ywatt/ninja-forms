@@ -19,6 +19,19 @@ final class NF_Admin_Menus_MockData extends NF_Abstracts_Submenu
         }
     }
 
+    public function register()
+    {
+        add_submenu_page(
+            'ninja-forms',
+            '----',
+            '----',
+            'manage_options',
+            '#'
+        );
+
+        parent::register();
+    }
+
     public function mock_and_redirect()
     {
         $this->mock_data();
