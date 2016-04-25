@@ -6,9 +6,9 @@ final class NF_VersionSwitcher
     {
         $this->listener();
 
-        if( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-            add_action('admin_bar_menu', array($this, 'admin_bar_menu'), 999);
-        }
+        if( ! defined( 'NF_DEV' ) || ! NF_DEV ) return;
+
+        add_action('admin_bar_menu', array($this, 'admin_bar_menu'), 999);
     }
 
     public function listener()
@@ -34,7 +34,7 @@ final class NF_VersionSwitcher
     {
         $args = array(
             'id'    => 'nf',
-            'title' => 'Ninja Forms DEBUG',
+            'title' => 'Ninja Forms Dev',
             'href'  => '#',
         );
         $wp_admin_bar->add_node( $args );
