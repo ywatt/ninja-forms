@@ -15,7 +15,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
         parent::__construct();
 
         if( isset( $_POST[ 'update_ninja_forms_settings' ] ) ) {
-            $this->update_settings();
+            add_action( 'admin_init', array( $this, 'update_settings' ) );
         }
     }
 
@@ -87,7 +87,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
             wp_register_script( 'ninja_forms_admin_menu_settings', Ninja_Forms::$url . 'assets/js/admin-settings.js', array( 'jquery' ), FALSE, TRUE );
             wp_localize_script( 'ninja_forms_admin_menu_settings', 'nf_settings', array(
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
-                'nonce'    => wp_create_nonce( "ninja_forms_ajax_nonce" )
+                'nonce'    => wp_create_nonce( "ninja_forms_settings_nonce" )
             ));
             wp_enqueue_script( 'ninja_forms_admin_menu_settings' );
         }
@@ -96,8 +96,10 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
     }
 
-    private function update_settings()
+    public function update_settings()
     {
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_form_settings_capabilities', 'manage_options' ) ) ) return;
+
         if( ! isset( $_POST[ $this->_prefix ] ) ) return;
 
         $settings = $_POST[ 'ninja_forms' ];
