@@ -189,6 +189,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
                 self::$instance->menus[ 'licenses']         = new NF_Admin_Menus_Licenses();
                 self::$instance->menus[ 'system_status']    = new NF_Admin_Menus_SystemStatus();
                 self::$instance->menus[ 'add-ons' ]         = new NF_Admin_Menus_Addons();
+                self::$instance->menus[ 'divider']          = new NF_Admin_Menus_Divider();
                 self::$instance->menus[ 'mock-data']        = new NF_Admin_Menus_MockData();
 
                 /*
