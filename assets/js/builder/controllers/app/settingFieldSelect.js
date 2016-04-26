@@ -8,6 +8,7 @@
  */
 define( [], function() {
     var controller = Marionette.Object.extend( {
+
         initialize: function() {
 
             // Bind field key listener to field-select setting type.
@@ -15,6 +16,15 @@ define( [], function() {
 
             // The first time settingModel and the dataModel meet.
             this.listenTo( nfRadio.channel( 'setting-type-field-select' ), 'before:renderSetting', this.beforeRender );
+
+            // Add setting change listener only in drawers with a field-select setting.
+            this.listenTo( nfRadio.channel( 'field-select' ), 'init:settingModel', function() {
+                this.listenTo( nfRadio.channel( 'app' ), 'change:setting', this.maybeSwitchToFieldsDomain );
+            });
+
+            this.listenTo( nfRadio.channel( 'app' ), 'change:currentDomain', this.autoOpenDrawer );
+
+            this.listenTo( nfRadio.channel( 'drawer' ), 'opened', this.filterDrawerContents );
         },
 
         trackKeyChanges: function( settingModel ) {
@@ -61,7 +71,49 @@ define( [], function() {
                 });
             });
 
+            if( 0 != fieldTypes.length ) {
+                _.each( fieldTypes, function( fieldType ){
+                    options.push({
+                        label: '-- Add ' + fieldType + ' Field',
+                        value: 'addField:' + fieldType,
+                    });
+                } );
+            }
+
             settingModel.set( 'options', options );
+        },
+
+        maybeSwitchToFieldsDomain: function( e, model, dataModel ) {
+
+            if( 'field-select' != model.get( 'type' ) ) return;
+
+            var name = model.get( 'name' );
+            var value = dataModel.get( name );
+            var rubble = value.split( ':' );
+
+            if( 'addField' != rubble[0] ) return;
+
+            this.openDrawer = 'addField';
+            this.filterDrawer = rubble[1];
+
+            dataModel.set( name, '' );
+
+            var fieldDomainModel = nfRadio.channel( 'app' ).request( 'get:domainModel', 'fields' );
+            nfRadio.channel( 'app' ).request( 'change:currentDomain', null, fieldDomainModel );
+        },
+
+        autoOpenDrawer: function() {
+            if( this.openDrawer ) {
+                nfRadio.channel( 'app' ).request( 'open:drawer', this.openDrawer );
+                this.openDrawer = null;
+            }
+        },
+
+        filterDrawerContents: function() {
+            if( this.filterDrawer ) {
+                nfRadio.channel('drawer-addField').trigger('change:filter', this.filterDrawer);
+                this.filterDrawer = null;
+            }
         }
     });
 
