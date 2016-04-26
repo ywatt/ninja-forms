@@ -46,7 +46,7 @@ define( [], function() {
             var options = [
                 {
                     label: '--',
-                    value: false
+                    value: 0
                 }
             ];
             _.each( fieldCollection.models, function( field ){
