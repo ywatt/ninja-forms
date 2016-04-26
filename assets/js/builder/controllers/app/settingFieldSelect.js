@@ -47,8 +47,6 @@ define( [], function() {
 
         beforeRender: function( settingModel, dataModel ) {
 
-            if( 'undefined' == settingModel.get( 'field_types' ) ) return;
-
             var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 
             var fieldTypes = settingModel.get( 'field_types' );
@@ -71,7 +69,7 @@ define( [], function() {
                 });
             });
 
-            if( 0 != fieldTypes.length ) {
+            if( 'undefined' != typeof fieldTypes && 0 != fieldTypes.length ) {
                 _.each( fieldTypes, function( fieldType ){
                     options.push({
                         label: '-- Add ' + fieldType + ' Field',
