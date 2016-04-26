@@ -43,7 +43,12 @@ define( [], function() {
 
             var fieldTypes = settingModel.get( 'field_types' );
 
-            var options = [];
+            var options = [
+                {
+                    label: '--',
+                    value: false
+                }
+            ];
             _.each( fieldCollection.models, function( field ){
 
                 if( dataModel.get( 'id' ) == field.get( 'id' ) ) return;
@@ -57,7 +62,7 @@ define( [], function() {
             });
 
             settingModel.set( 'options', options );
-        },
+        }
     });
 
     return controller;
