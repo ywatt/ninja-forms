@@ -18,7 +18,7 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ) 
     update_option( 'ninja_forms_load_deprecated', TRUE );
 }
 
-if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2to3' ] ) ) {
+if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf2to3' ] ) && ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) ){
 
     include 'deprecated/ninja-forms.php';
 
@@ -235,7 +235,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE )  && ! isset( $_POST[ 'nf2
                  */
                 self::$instance->controllers[ 'form' ]        = new NF_AJAX_Controllers_Form();
                 self::$instance->controllers[ 'preview' ]     = new NF_AJAX_Controllers_Preview();
-                self::$instance->controllers[ 'uploads' ]     = new NF_AJAX_Controllers_Uploads();
                 self::$instance->controllers[ 'submission' ]  = new NF_AJAX_Controllers_Submission();
                 self::$instance->controllers[ 'savedfields' ] = new NF_AJAX_Controllers_SavedFields();
 

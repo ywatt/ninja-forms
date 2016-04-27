@@ -15,7 +15,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
         parent::__construct();
 
         if( isset( $_POST[ 'update_ninja_forms_settings' ] ) ) {
-            $this->update_settings();
+            add_action( 'admin_init', array( $this, 'update_settings' ) );
         }
     }
 
@@ -97,7 +97,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
         ?>
         <script type="text/javascript" >
             var ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
-            var nf_ajax_nonce = '<?php echo wp_create_nonce( "ninja_forms_ajax_nonce" ); ?>';
+            var nf_ajax_nonce = '<?php echo wp_create_nonce( "ninja_forms_settings_nonce" ); ?>';
 
             jQuery(document).ready(function($) {
                 $( '.js-delete-saved-field' ).click( function(){
@@ -122,7 +122,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
         <?php
     }
 
-    private function update_settings()
+    public function update_settings()
     {
         if( ! isset( $_POST[ $this->_prefix ] ) ) return;
 
