@@ -4,11 +4,42 @@ final class NF_VersionSwitcher
 {
     public function __construct()
     {
+        $this->ajax_check();
+
+        add_action( 'init', array( $this, 'version_bypass_check' ) );
+
         add_action( 'admin_init', array( $this, 'listener' )  );
 
-        if( ! defined( 'NF_DEV' ) || ! NF_DEV ) return;
+        if( defined( 'NF_DEV' ) && NF_DEV ) {
+            add_action('admin_bar_menu', array( $this, 'admin_bar_menu'), 999);
+        }
+    }
 
-        add_action('admin_bar_menu', array($this, 'admin_bar_menu'), 999);
+    public function ajax_check()
+    {
+        $nf2to3 = isset( $_POST[ 'nf2to3' ] );
+        $doing_ajax = ( defined( 'DOING_AJAX' ) && DOING_AJAX );
+        if( $nf2to3 && ! $doing_ajax ){
+            wp_die(
+                __( 'You do not have permission.', 'ninja-forms' ),
+                __( 'Permission Denied', 'ninja-forms' )
+            );
+        }
+    }
+
+    public function version_bypass_check()
+    {
+        if( ! isset( $_POST[ 'nf2to3' ] ) ) return TRUE;
+
+        $capability = apply_filters( 'ninja_forms_admin_version_bypass_capabilities', 'manage_options' );
+        $current_user_can = current_user_can( $capability );
+
+        if( $current_user_can ) return TRUE;
+
+        wp_die(
+            __( 'You do not have permission.', 'ninja-forms' ),
+            __( 'Permission Denied', 'ninja-forms' )
+        );
     }
 
     public function listener()
