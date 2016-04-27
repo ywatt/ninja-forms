@@ -84,25 +84,37 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
         $this->_settings[ 'options' ][ 'group' ] = '';
     }
 
+    public function process( $field, $data )
+    {
+        return $data;
+    }
+
     public function add_term_options( $field )
     {
-        if( ! isset( $field[ 'settings' ][ 'taxonomy' ] ) ) return $field;
+        $settings = ( is_object( $field ) ) ? $field->get_settings() : $field[ 'settings' ];
+        if( ! isset( $settings[ 'taxonomy' ] ) ) return $field;
 
-        $terms = get_terms( $field[ 'settings' ][ 'taxonomy' ], array( 'hide_empty' => false ) );
+        $terms = get_terms( $settings[ 'taxonomy' ], array( 'hide_empty' => false ) );
 
-        $field['settings']['options'] = array();
+        $settings['options'] = array();
         foreach( $terms as $term ) {
 
-            if( ! isset( $field[ 'settings' ][ 'taxonomy_term_' . $term->term_id ] ) ) continue;
-            if( ! $field[ 'settings' ][ 'taxonomy_term_' . $term->term_id ] ) continue;
+            if( ! isset( $settings[ 'taxonomy_term_' . $term->term_id ] ) ) continue;
+            if( ! $settings[ 'taxonomy_term_' . $term->term_id ] ) continue;
 
-            $field['settings']['options'][] = array(
+            $settings['options'][] = array(
                 'label' => $term->name,
                 'value' => $term->term_id,
                 'calc' => '',
                 'selected' => 0,
                 'order' => 0
             );
+        }
+
+        if( is_object( $field ) ) {
+            $field->update_settings( $settings );
+        } else {
+            $field[ 'settings' ] = $settings;
         }
 
         return $field;
