@@ -65,7 +65,7 @@ define( [], function() {
 
                 options.push({
                     label: field.get( 'label' ),
-                    value: field.get( 'key' )
+                    value: '{field:' + field.get( 'key' ) + '}'
                 });
             });
 
