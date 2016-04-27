@@ -27,7 +27,8 @@ final class NF_Display_Render
 
     public static function localize( $form_id )
     {
-        if( isset( $_GET[ 'ninja_forms_test_values' ] ) ){
+        $capability = apply_filters( 'ninja_forms_display_test_values_capabilities', 'read' );
+        if( isset( $_GET[ 'ninja_forms_test_values' ] ) && current_user_can( $capability ) ){
             self::$use_test_values = TRUE;
         }
 
@@ -203,7 +204,8 @@ final class NF_Display_Render
 
     public static function localize_preview( $form_id )
     {
-        if( isset( $_GET[ 'ninja_forms_test_values' ] ) ){
+        $capability = apply_filters( 'ninja_forms_display_test_values_capabilities', 'read' );
+        if( isset( $_GET[ 'ninja_forms_test_values' ] ) && current_user_can( $capability ) ){
             self::$use_test_values = TRUE;
         }
 
