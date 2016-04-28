@@ -122,6 +122,13 @@ function nf_fs() {
                 'contact' => false,
             ),
         ) );
+
+            if ( function_exists( 'fs_override_i18n' ) ) {
+        fs_override_i18n( array(
+                'deactivation-modal-button-deactivate' => __( 'Skip & Deactivate', 'ninja-forms' ),
+                'deactivation-share-reason' => __( 'If you have a moment, please let us know why you are deactivating (optional)', 'ninja-forms' ),
+            ), 'ninja-forms' );
+        }
     }
 
     return $nf_fs;
