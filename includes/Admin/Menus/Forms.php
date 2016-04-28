@@ -20,7 +20,9 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         }
 
         if( isset( $_GET[ 'form_id' ] ) && ! is_numeric( $_GET[ 'form_id' ] ) && 'new' != $_GET[ 'form_id' ] ) {
-            $this->import_from_template();
+            if( current_user_can( apply_filters( 'ninja_forms_admin_import_template_capabilities', 'manage_options' ) ) ) {
+                $this->import_from_template();
+            }
         }
     }
 
