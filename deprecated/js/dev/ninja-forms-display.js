@@ -192,7 +192,7 @@ var init_all_the_ninja_things = function() {
 	var countdown = {};
 	jQuery('.countdown-timer').each(function( index ) {
 
-		jQuery(this).attr('disabled', 'disabled').prev('input.no-js').remove();
+		jQuery(this).attr('disabled', 'disabled').parents('.field-wrap:first').find('input.no-js').remove();
 		id = jQuery(this).attr('id');
 		countdown.index = window.setInterval(function(){ninja_forms_countdown(id, index)},1000);
 
