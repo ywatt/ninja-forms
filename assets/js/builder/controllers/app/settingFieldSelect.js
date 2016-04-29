@@ -25,6 +25,7 @@ define( [], function() {
             this.listenTo( nfRadio.channel( 'app' ), 'change:currentDomain', this.autoOpenDrawer );
 
             this.listenTo( nfRadio.channel( 'drawer' ), 'opened', this.filterDrawerContents );
+            this.listenTo( nfRadio.channel( 'drawer' ), 'closed', this.SwitchToFieldsDomain );
         },
 
         trackKeyChanges: function( settingModel ) {
@@ -96,8 +97,16 @@ define( [], function() {
 
             dataModel.set( name, '' );
 
-            var fieldDomainModel = nfRadio.channel( 'app' ).request( 'get:domainModel', 'fields' );
-            nfRadio.channel( 'app' ).request( 'change:currentDomain', null, fieldDomainModel );
+            this.switchDomain = true;
+            nfRadio.channel( 'app' ).request( 'close:drawer' );
+        },
+
+        SwitchToFieldsDomain: function() {
+            if( this.switchDomain ) {
+                var fieldDomainModel = nfRadio.channel( 'app' ).request( 'get:domainModel', 'fields' );
+                nfRadio.channel('app').request('change:currentDomain', null, fieldDomainModel);
+                this.switchDomain = null;
+            }
         },
 
         autoOpenDrawer: function() {
