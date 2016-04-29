@@ -60,7 +60,7 @@ define( [], function() {
             ];
             _.each( fieldCollection.models, function( field ){
 
-                if( dataModel.get( 'id' ) == field.get( 'id' ) ) return;
+                if( dataModel.cid == field.cid ) return;
 
                 if( 'undefined' != typeof fieldTypes && 0 != fieldTypes.length && ! _.contains( fieldTypes, field.get( 'type' ) ) ) return;
 
