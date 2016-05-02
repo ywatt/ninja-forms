@@ -46,6 +46,7 @@ define(
 		'controllers/app/notices',
 		'controllers/app/unloadCheck',
 		'controllers/app/fieldContentsFilters',
+		'controllers/app/cloneCollectionDeep',
 		/*
 		 * Fields domain controllers
 		 */
@@ -134,6 +135,7 @@ define(
 		AppNotices,
 		AppUnloadCheck,
 		FieldContentsFilters,
+		CloneCollectionDeep,
 		/*
 		 * Fields domain controllers
 		 */
@@ -213,6 +215,7 @@ define(
 				new AppNotices();
 				new AppUnloadCheck();
 				new FieldContentsFilters();
+				new CloneCollectionDeep();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
