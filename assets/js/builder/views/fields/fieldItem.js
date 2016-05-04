@@ -102,6 +102,18 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 		tapend: function( e, touch ) {
 			jQuery( this.el ).ClassyWiggle( 'stop' );
 			jQuery( this.el ).removeClass( 'ui-sortable-helper drag-selected' );
+		},
+
+		remove: function(){
+			if ( nfRadio.channel( 'fields' ).request( 'get:removing' ) ) {
+				this.$el.hide( 'clip', function(){
+					jQuery( this ).remove();
+				});
+			} else {
+				this.$el.remove();
+			}
+
+			nfRadio.channel( 'fields' ).request( 'set:removing', false );
 		}
 
 	});
