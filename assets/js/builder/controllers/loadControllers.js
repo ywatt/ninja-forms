@@ -47,6 +47,7 @@ define(
 		'controllers/app/unloadCheck',
 		'controllers/app/fieldContentsFilters',
 		'controllers/app/cloneCollectionDeep',
+		'controllers/app/trackKeyDown',
 		/*
 		 * Fields domain controllers
 		 */
@@ -136,6 +137,7 @@ define(
 		AppUnloadCheck,
 		FieldContentsFilters,
 		CloneCollectionDeep,
+		TrackKeyDown,
 		/*
 		 * Fields domain controllers
 		 */
@@ -216,6 +218,7 @@ define(
 				new AppUnloadCheck();
 				new FieldContentsFilters();
 				new CloneCollectionDeep();
+				new TrackKeyDown();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers

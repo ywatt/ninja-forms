@@ -78,8 +78,15 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 
 		destroySortable: function() {
 			jQuery( this.el ).sortable( 'destroy' );
-		}
+		},
 
+		onAddChild: function( childView ) {
+			if ( nfRadio.channel( 'fields' ).request( 'get:adding' ) ) {
+				childView.$el.hide().show( 'clip' );
+				nfRadio.channel( 'fields' ).request( 'set:adding', false );
+			}
+		}
+		
 	} );
 
 	return view;
