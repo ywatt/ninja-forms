@@ -154,7 +154,7 @@ define( [], function() {
 			}
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', newModel, null, label, data );
-			
+
 			return tmpID;
 		},
 
