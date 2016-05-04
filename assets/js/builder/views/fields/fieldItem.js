@@ -2,6 +2,7 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-main-content-field',
+		doingShortcut: false,
 
 		regions: {
 			itemControls: '.nf-item-controls'
@@ -70,6 +71,7 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 		},
 
 		events: {
+			'mousedown': 'maybeShortcut',
 			'click': 'maybeClickEdit',
 			'singletap': 'maybeTapEdit',
 			'swipeleft': 'swipeLeft',
@@ -78,9 +80,33 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 		},
 
 		maybeClickEdit: function( e ) {
+			if ( this.doingShortcut ) {
+				this.doingShortcut = false;
+				return false;
+			}
 			if ( ( jQuery( e.target ).parent().hasClass( 'nf-fields-sortable' ) || jQuery( e.target ).parent().hasClass( 'nf-field-wrap' ) ) && ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
 				nfRadio.channel( 'app' ).trigger( 'click:edit', e, this.model );
 			}
+		},
+
+		maybeShortcut: function( e ) {
+			var keys = nfRadio.channel( 'app' ).request( 'get:keydown' );
+			/*
+			 * If the shift key isn't held down, return.
+			 */
+			if ( -1 == keys.indexOf( 16 ) ) {
+				return false;
+			}
+			/*
+			 * If we are pressing D, delete this field.
+			 */
+			if ( -1 != keys.indexOf( 68 ) ) {
+				nfRadio.channel( 'app' ).trigger( 'click:delete', e, this.model );
+			} else if ( -1 != keys.indexOf( 67 ) ) {
+				nfRadio.channel( 'app' ).trigger( 'click:duplicate', e, this.model );
+			}
+
+			this.doingShortcut = true;
 		},
 
 		maybeTapEdit: function( e ) {
