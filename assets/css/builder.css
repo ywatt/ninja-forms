@@ -303,7 +303,10 @@ Form field placeholders for the fields a user has added to their form
     .nf-field-wrap.active .nf-item-controls {
       font-weight: normal; }
       .nf-field-wrap.active .nf-item-controls a {
-        color: #424242; }
+        background: #fff;
+        color: #84CC1E; }
+        .nf-field-wrap.active .nf-item-controls a:hover {
+          border-color: #fff; }
       .nf-field-wrap.active .nf-item-controls .nf-item-delete,
       .nf-field-wrap.active .nf-item-controls .nf-item-duplicate {
         display: none; }
