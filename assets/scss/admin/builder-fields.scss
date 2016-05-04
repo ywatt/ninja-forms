@@ -15,7 +15,11 @@
         .nf-item-controls {
             font-weight: normal;
             a {
-                color: #424242;
+                background: #fff;
+                color: $accent_color;
+                &:hover {
+                    border-color: #fff;
+                }
             }
             .nf-item-delete,
             .nf-item-duplicate {
