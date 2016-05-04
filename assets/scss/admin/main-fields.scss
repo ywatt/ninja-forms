@@ -13,6 +13,7 @@
 
 .nf-field-label {
     display: inline-block;
+    margin-left: 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -24,8 +25,8 @@
 
 .nf-field-wrap {
     .fa {
-        margin-right: 10px;
-        width: 24px;
+        // margin-right: 10px;
+        // width: 24px;
     }
 }
 .template-box {
