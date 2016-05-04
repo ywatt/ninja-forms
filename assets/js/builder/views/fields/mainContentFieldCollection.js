@@ -48,7 +48,6 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 				cancel: '.nf-item-controls',
 				placeholder: 'nf-fields-sortable-placeholder',
 				opacity: 0.95,
-				tolerance: tolerance,
 
 				receive: function( e, ui ) {
 					nfRadio.channel( 'app' ).request( 'receive:fieldsSortable', ui );
