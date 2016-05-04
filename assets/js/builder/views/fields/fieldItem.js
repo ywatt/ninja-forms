@@ -95,18 +95,20 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 			 * If the shift key isn't held down, return.
 			 */
 			if ( -1 == keys.indexOf( 16 ) ) {
-				return false;
+				return true;
 			}
 			/*
 			 * If we are pressing D, delete this field.
 			 */
 			if ( -1 != keys.indexOf( 68 ) ) {
 				nfRadio.channel( 'app' ).trigger( 'click:delete', e, this.model );
+				this.doingShortcut = true;
+				return false;
 			} else if ( -1 != keys.indexOf( 67 ) ) {
+				this.doingShortcut = true;
 				nfRadio.channel( 'app' ).trigger( 'click:duplicate', e, this.model );
+				return false;
 			}
-
-			this.doingShortcut = true;
 		},
 
 		maybeTapEdit: function( e ) {
