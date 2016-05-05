@@ -18,12 +18,12 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
     /**
      * @var string
      */
-    protected $_timing = 'early';
+    protected $_timing = 'late';
 
     /**
      * @var int
      */
-    protected $_priority = '10';
+    protected $_priority = 0;
 
     /**
      * @var array

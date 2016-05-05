@@ -5,13 +5,16 @@ jQuery( document ).ready( function( $ ) {
 			forms: {},
 			initialize: function( options ) {
 
+				// Underscore one-liner for getting URL Parameters
+				var urlParameters = _.object(_.compact(_.map(location.search.slice(1).split('&'), function(item) {  if (item) return item.split('='); })));
+
 				// TODO: Maybe move the resumeProcessing elsewhere.
-				if( 'undefined' != typeof nfFrontEnd.resumeProcessing ){
+				if( 'undefined' != typeof urlParameters.nf_resume ){
 					var formData = JSON.stringify( nfFrontEnd.resumeProcessing );
 					var data = {
-						'action': 'nf_ajax_resume',
+						'action': 'nf_ajax_submit',
 						'security': nfFrontEnd.ajaxNonce,
-						'formData': formData
+						'nf_resume': urlParameters
 					};
 
 					jQuery.ajax({
