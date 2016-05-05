@@ -36,7 +36,7 @@ define( [], function() {
 		moveRail: function() {
 			var drawerEl = nfRadio.channel( 'app' ).request( 'get:drawerEl' );
 			var movedPos = jQuery( drawerEl ).outerWidth();
-			console.log( movedPos );
+
 			jQuery( '#ps-scrollbar-css' ).text( '.ps-scrollbar-moved { right: ' + movedPos + 'px !important; } ' );
 			jQuery( '#nf-main .ps-scrollbar-y-rail' ).addClass( 'ps-scrollbar-moved ' );
 			

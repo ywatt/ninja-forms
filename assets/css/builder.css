@@ -1313,6 +1313,10 @@ All styles used for displaying table content
   overflow: auto !important;
   overflow-y: hidden !important; }
 
+#nf-drawer.ps-container {
+  overflow: auto !important;
+  overflow-y: hidden !important; }
+
 .ui-sortable-helper.nf-field-wrap {
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); }
 
