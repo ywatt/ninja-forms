@@ -6,7 +6,7 @@
     top: 60px;
     bottom: 0;
     right: -1400px;
-    overflow: auto;
+    overflow: hidden;
     z-index: 101;
     transition: width 0.75s ease;
     -webkit-overflow-scrolling: touch;
@@ -15,7 +15,7 @@
     }
 }
 .nf-drawer-opened {
-    #nf-main {
+    .nf-main-test {
         width: 50%;
         transition: all 0.50s ease;
         .nf-button {

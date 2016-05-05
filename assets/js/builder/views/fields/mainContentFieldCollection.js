@@ -47,7 +47,11 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 				helper: 'clone',
 				cancel: '.nf-item-controls',
 				placeholder: 'nf-fields-sortable-placeholder',
-				opacity: 0.95,
+				// opacity: 0.95,
+				// grid: [ 5, 5 ],
+				// scroll: false,
+				// appendTo: '#nf-main',
+				scrollSensitivity: 10,
 
 				receive: function( e, ui ) {
 					nfRadio.channel( 'app' ).request( 'receive:fieldsSortable', ui );
