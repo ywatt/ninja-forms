@@ -167,8 +167,6 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
             $action_settings = apply_filters( 'ninja_forms_run_action_settings', $action->get_settings(), $this->_form_id, $action->get_id(), $this->_data['settings'] );
 
-            if( isset( $this->_data[ 'processed_actions' ][ $action->get_id() ] ) ) continue;
-
             if( ! $action_settings['active'] ) continue;
 
             $type = $action_settings['type'];
