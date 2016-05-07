@@ -6,16 +6,33 @@ jQuery( document ).ready( function( $ ) {
 			initialize: function( options ) {
 
 				// Underscore one-liner for getting URL Parameters
-				var urlParameters = _.object(_.compact(_.map(location.search.slice(1).split('&'), function(item) {  if (item) return item.split('='); })));
+				this.urlParameters = _.object(_.compact(_.map(location.search.slice(1).split('&'), function(item) {  if (item) return item.split('='); })));
 
-				// TODO: Maybe move the resumeProcessing elsewhere.
-				if( 'undefined' != typeof urlParameters.nf_resume ){
-					var formData = JSON.stringify( nfFrontEnd.resumeProcessing );
+				if( 'undefined' != typeof this.urlParameters.nf_resume ) {
+					this.listenTo(nfRadio.channel('form-' + this.urlParameters.nf_resume), 'loaded', this.restart);
+				}
+
+				var loadControllers = new LoadControllers();
+			},
+			
+			onStart: function() {
+				var formCollection = nfRadio.channel( 'app' ).request( 'get:forms' );
+				_.each( formCollection.models, function( form, index ) {
+					var layoutView = new mainLayout( { model: form, fieldCollection: form.get( 'fields' ) } );			
+					nfRadio.channel( 'form' ).trigger( 'render:view', layoutView );
+				} );
+			},
+
+			restart: function( formModel ) {
+				if( 'undefined' != typeof this.urlParameters.nf_resume ){
 					var data = {
 						'action': 'nf_ajax_submit',
 						'security': nfFrontEnd.ajaxNonce,
-						'nf_resume': urlParameters
+						'nf_resume': this.urlParameters
 					};
+
+					nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'disable:submit' );
+					nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'processingLabel' );
 
 					jQuery.ajax({
 						url: nfFrontEnd.adminAjax,
@@ -36,16 +53,6 @@ jQuery( document ).ready( function( $ ) {
 						}
 					});
 				}
-
-				var loadControllers = new LoadControllers();
-			},
-			
-			onStart: function() {
-				var formCollection = nfRadio.channel( 'app' ).request( 'get:forms' );
-				_.each( formCollection.models, function( form, index ) {
-					var layoutView = new mainLayout( { model: form, fieldCollection: form.get( 'fields' ) } );			
-					nfRadio.channel( 'form' ).trigger( 'render:view', layoutView );
-				} );
 			}
 		});
 	

@@ -12,6 +12,7 @@ define([], function() {
 
 			this.listenTo( formChannel, 'disable:submit', this.disableSubmit, this );
 			this.listenTo( formChannel, 'enable:submit', this.enableSubmit, this );
+			this.listenTo( formChannel, 'processingLabel', this.processingLabel, this );
 		},
 
 		updateSubmit: function( model, id, msg ) {
