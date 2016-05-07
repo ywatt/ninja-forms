@@ -177,13 +177,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
             if( ! isset( Ninja_Forms()->actions[ $type ] ) ) continue;
 
-            $data = Ninja_Forms()->actions[ $type ]->process( $action_settings, $this->_form_id, $this->_data );
+            $data = Ninja_Forms()->actions[$type]->process($action_settings, $this->_form_id, $this->_data);
 
             $this->_data = ( $data ) ? $data : $this->_data;
 
-            array_push( $this->_data[ 'processed_actions' ], $action->get_id() );
-
-            $this->maybe_halt();
+            $this->maybe_halt( $action->get_id() );
         }
     }
 
@@ -210,13 +208,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
             $this->_data = ( $data ) ? $data : $this->_data;
 
-            array_push( $this->_data[ 'processed_actions' ], $action_id );
-
-            $this->maybe_halt();
+            $this->maybe_halt( $action_id );
         }
     }
 
-    protected function maybe_halt()
+    protected function maybe_halt( $action_id )
     {
         if( isset( $this->_data[ 'halt' ] ) && $this->_data[ 'halt' ] ){
 
@@ -224,6 +220,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
             $this->_respond();
         }
+
+        array_push( $this->_data[ 'processed_actions' ], $action_id );
     }
 
     protected function sort_form_actions( $a, $b )
