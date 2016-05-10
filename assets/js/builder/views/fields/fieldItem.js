@@ -71,6 +71,7 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 		},
 
 		events: {
+			'mouseover .nf-item-control': 'mouseoverItemControl',
 			'mousedown': 'maybeShortcut',
 			'click': 'maybeClickEdit',
 			'singletap': 'maybeTapEdit',
@@ -142,6 +143,10 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 			}
 
 			nfRadio.channel( 'fields' ).request( 'set:removing', false );
+		},
+
+		mouseoverItemControl: function( e ) {
+			jQuery( this.el ).find( '.nf-item-control' ).css( 'display', '' );
 		}
 
 	});
