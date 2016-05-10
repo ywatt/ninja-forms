@@ -25,7 +25,7 @@ define( [], function() {
 					connectToSortable: '.nf-field-type-droppable',
 					refreshPositions: true,
 					grid: [ 5, 5 ],
-					// appendTo: '#nf-drawer',
+					appendTo: '#nf-main',
 
 					helper: function( e ) {
 						var width = jQuery( e.target ).parent().width();
