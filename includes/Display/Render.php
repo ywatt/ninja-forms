@@ -135,7 +135,7 @@ final class NF_Display_Render
                     $settings[ 'options' ] = apply_filters( 'ninja_forms_render_options', $settings[ 'options' ], $settings );
                     $settings[ 'options' ] = apply_filters( 'ninja_forms_render_options_' . $field_type, $settings[ 'options' ], $settings );
                 }
-                
+
                 if (isset($settings['default'])) {
                     $default_value = apply_filters('ninja_forms_render_default_value', $settings['default'], $field_type, $settings);
 
@@ -365,8 +365,15 @@ final class NF_Display_Render
         wp_enqueue_style( 'rating', Ninja_Forms::$url . 'assets/css/rating.css' );
 
 
-        if( ! Ninja_Forms()->get_setting( 'disable_opinionated_styles' ) ) {
-            wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css');
+        if( Ninja_Forms()->get_setting( 'opinionated_styles' ) ) {
+
+            if( 'light' == Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
+                wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions-light.css');
+            }
+
+            if( 'dark' == Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
+                wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions-dark.css');
+            }
         }
 
         wp_enqueue_style( 'pikaday-responsive', Ninja_Forms::$url . 'assets/css/pikaday-package.css' );
