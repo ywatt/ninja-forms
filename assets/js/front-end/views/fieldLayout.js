@@ -14,6 +14,8 @@ define( ['views/fieldItem', 'views/beforeField', 'views/afterField'], function( 
             this.$el = this.$el.children();
             this.$el.unwrap();
             this.setElement( this.$el );
+
+            jQuery( this.el ).addClass( 'nf-field-container' );
         },
 
         onShow: function() {
