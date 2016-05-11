@@ -1,4 +1,4 @@
-define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldErrorCollection, InputLimitView ) {
+define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'nf-section',
 
@@ -30,8 +30,6 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 			} else {
 				this.model.addWrapperClass( 'nf-error' );
 			}
-
-			this.errorCollectionView.render();
 		},
 
 		addWrapperClass: function() {
@@ -63,16 +61,6 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
 			this.setElement( this.$el );
 
 			var el = jQuery( this.el ).children( '.nf-error-wrap' );
-    		this.errorCollectionView = new fieldErrorCollection( { el: el, collection: this.model.get( 'errors' ), thisModel: this.model } );
-
-    		/*
-    		 * If we have an input limit set, render the view that contains our counter
-    		 * TODO: Move this to a controller so that the logic isn't in the view.
-    		 */
-    		if ( 'undefined' != typeof this.model.get( 'input_limit' ) && '' != jQuery.trim( this.model.get( 'input_limit' ) ) ){
-    			el = jQuery( this.el ).children( '.nf-input-limit');
-    			this.inputLimitView = new InputLimitView( { el: el, model: this.model } );
-    		}
 
     		/*
     		 * If we have an input mask, init that mask.

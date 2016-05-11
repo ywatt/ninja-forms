@@ -25,6 +25,7 @@ define( [], function() {
             this.listenTo( nfRadio.channel( 'app' ), 'change:currentDomain', this.autoOpenDrawer );
 
             this.listenTo( nfRadio.channel( 'drawer' ), 'opened', this.filterDrawerContents );
+            this.listenTo( nfRadio.channel( 'drawer' ), 'closed', this.SwitchToFieldsDomain );
         },
 
         trackKeyChanges: function( settingModel ) {
@@ -59,7 +60,7 @@ define( [], function() {
             ];
             _.each( fieldCollection.models, function( field ){
 
-                if( dataModel.get( 'id' ) == field.get( 'id' ) ) return;
+                if( dataModel.cid == field.cid ) return;
 
                 if( 'undefined' != typeof fieldTypes && 0 != fieldTypes.length && ! _.contains( fieldTypes, field.get( 'type' ) ) ) return;
 
@@ -96,8 +97,16 @@ define( [], function() {
 
             dataModel.set( name, '' );
 
-            var fieldDomainModel = nfRadio.channel( 'app' ).request( 'get:domainModel', 'fields' );
-            nfRadio.channel( 'app' ).request( 'change:currentDomain', null, fieldDomainModel );
+            this.switchDomain = true;
+            nfRadio.channel( 'app' ).request( 'close:drawer' );
+        },
+
+        SwitchToFieldsDomain: function() {
+            if( this.switchDomain ) {
+                var fieldDomainModel = nfRadio.channel( 'app' ).request( 'get:domainModel', 'fields' );
+                nfRadio.channel('app').request('change:currentDomain', null, fieldDomainModel);
+                this.switchDomain = null;
+            }
         },
 
         autoOpenDrawer: function() {

@@ -46,6 +46,9 @@ define(
 		'controllers/app/notices',
 		'controllers/app/unloadCheck',
 		'controllers/app/fieldContentsFilters',
+		'controllers/app/cloneCollectionDeep',
+		'controllers/app/trackKeyDown',
+		'controllers/app/perfectScroll',
 		/*
 		 * Fields domain controllers
 		 */
@@ -134,6 +137,9 @@ define(
 		AppNotices,
 		AppUnloadCheck,
 		FieldContentsFilters,
+		CloneCollectionDeep,
+		TrackKeyDown,
+		PerfectScroll,
 		/*
 		 * Fields domain controllers
 		 */
@@ -213,6 +219,9 @@ define(
 				new AppNotices();
 				new AppUnloadCheck();
 				new FieldContentsFilters();
+				new CloneCollectionDeep();
+				new TrackKeyDown();
+				new PerfectScroll();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
