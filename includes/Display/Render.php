@@ -365,8 +365,17 @@ final class NF_Display_Render
         wp_enqueue_style( 'rating', Ninja_Forms::$url . 'assets/css/rating.css' );
 
 
-        if( ! Ninja_Forms()->get_setting( 'disable_opinionated_styles' ) ) {
+        if( Ninja_Forms()->get_setting( 'opinionated_styles' ) ) {
+
             wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions.css');
+
+            if( 'light' == Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
+                wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions-light.css');
+            }
+
+            if( 'dark' == Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
+                wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions-dark.css');
+            }
         }
 
         wp_enqueue_style( 'pikaday-responsive', Ninja_Forms::$url . 'assets/css/pikaday-package.css' );
