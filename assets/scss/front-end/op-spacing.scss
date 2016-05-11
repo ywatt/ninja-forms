@@ -1,6 +1,9 @@
 .field-wrap,
 #ninja_forms_required_items {
     margin-bottom: 20px;
+    &.hidden-wrap {
+        margin: 0;
+    }
 }
 
 .nf-fields {
@@ -9,11 +12,23 @@
     margin: 0 auto;
     .ninja-forms-field {
         font-size: 16px;
+        line-height: 16px;
+        margin: 0;
         padding: 16px;
-
+    }
+    input.ninja-forms-field,
+    select.ninja-forms-field {
+        height: 50px;
+    }
+    textarea.ninja-forms-field {
+        height: 200px;
     }
     hr.ninja-forms-field {
         padding: 0;
+    }
+    input[type="radio"].ninja-forms-field,
+    input[type="checkbox"].ninja-forms-field  {
+        height: auto;
     }
     .nf-product-field {
         &.ninja-forms-field {
@@ -30,14 +45,11 @@
             width: 80px;
         }
     }
-    textarea {
-        height: 200px;
-    }
     .listselect-wrap,
     .liststate-wrap,
     .listcountry-wrap {
         select {
-            height: 48px;
+            //height: 50px;
         }
     }
     .nf-static {
