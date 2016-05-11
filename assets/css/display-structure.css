@@ -51,7 +51,8 @@ STAR RATING
 HONEYPOT
 ----------------------------------*/
 .nf-hp {
-  visibility: hidden; }
+  visibility: hidden;
+  position: absolute; }
 
 .note-popover {
   display: none !important; }
