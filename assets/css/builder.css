@@ -18,6 +18,9 @@ Normalize WordPress admin for Ninja Forms App
   .ninja-forms-app .grey #nf-drawer .nf-button {
     padding: 15px 30px; }
 
+.media-modal {
+  z-index: 100000000; }
+
 #nf-builder {
   background: #fff;
   padding: 30px 40px;
