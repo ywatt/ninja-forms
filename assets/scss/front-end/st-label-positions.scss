@@ -23,6 +23,19 @@
             // }
         }
     }
+    .label-right,
+    .label-left {
+        label {
+            padding: 16px 0;
+        }
+        &.checkbox-wrap,
+        &.listcheckbox-wrap,
+        &.listradio-wrap {
+            label {
+                padding: 0;
+            }
+        }
+    }
     .label-right {
         vertical-align: middle;
         > label {
@@ -55,15 +68,14 @@
             display: inline-block;
             float: left;
             line-height: 16px;
-            padding: 16px;
             text-align: right;
-            width: 49%;
+            width: 46%;
         }
         > input,
         textarea,
         select,
         .pikaday__container {
-            float: right;
+            float: left;
             width: 49%;
         }
         .pikaday__display {

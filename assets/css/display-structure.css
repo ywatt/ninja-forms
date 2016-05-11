@@ -29,7 +29,7 @@ RADIO & CHECKBOX LISTS
 .list-radio-wrap ul, .list-radio-wrap li,
 .list-checkbox-wrap ul,
 .list-checkbox-wrap li {
-  list-style: none;
+  list-style: none !important;
   margin: 0;
   padding: 0; }
   .list-radio-wrap ul input, .list-radio-wrap li input,
@@ -487,6 +487,16 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-hidden button {
   width: auto; }
 
+.nf-fields .label-right label,
+.nf-fields .label-left label {
+  padding: 16px 0; }
+
+.nf-fields .label-right.checkbox-wrap label, .nf-fields .label-right.listcheckbox-wrap label, .nf-fields .label-right.listradio-wrap label,
+.nf-fields .label-left.checkbox-wrap label,
+.nf-fields .label-left.listcheckbox-wrap label,
+.nf-fields .label-left.listradio-wrap label {
+  padding: 0; }
+
 .nf-fields .label-right {
   vertical-align: middle; }
   .nf-fields .label-right > label {
@@ -513,14 +523,13 @@ Make sure all Ninja Forms label positons function properly
     display: inline-block;
     float: left;
     line-height: 16px;
-    padding: 16px;
     text-align: right;
-    width: 49%; }
+    width: 46%; }
   .nf-fields .label-left > input,
   .nf-fields .label-left textarea,
   .nf-fields .label-left select,
   .nf-fields .label-left .pikaday__container {
-    float: right;
+    float: left;
     width: 49%; }
   .nf-fields .label-left .pikaday__display {
     width: 100%; }

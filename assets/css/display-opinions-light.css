@@ -4,6 +4,9 @@
 .field-wrap,
 #ninja_forms_required_items {
   margin-bottom: 20px; }
+  .field-wrap.hidden-wrap,
+  #ninja_forms_required_items.hidden-wrap {
+    margin: 0; }
 
 .nf-fields {
   padding: 5px;
@@ -11,9 +14,19 @@
   margin: 0 auto; }
   .nf-fields .ninja-forms-field {
     font-size: 16px;
+    line-height: 16px;
+    margin: 0;
     padding: 16px; }
+  .nf-fields input.ninja-forms-field,
+  .nf-fields select.ninja-forms-field {
+    height: 50px; }
+  .nf-fields textarea.ninja-forms-field {
+    height: 200px; }
   .nf-fields hr.ninja-forms-field {
     padding: 0; }
+  .nf-fields input[type="radio"].ninja-forms-field,
+  .nf-fields input[type="checkbox"].ninja-forms-field {
+    height: auto; }
   .nf-fields .nf-product-field.ninja-forms-field {
     background: transparent;
     border: 0;
@@ -24,12 +37,6 @@
     font-size: 16px;
     padding: 5px;
     width: 80px; }
-  .nf-fields textarea {
-    height: 200px; }
-  .nf-fields .listselect-wrap select,
-  .nf-fields .liststate-wrap select,
-  .nf-fields .listcountry-wrap select {
-    height: 48px; }
   .nf-fields .nf-static {
     background: transparent;
     border: 0;
