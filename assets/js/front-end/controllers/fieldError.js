@@ -12,6 +12,7 @@ define(['models/fieldErrorModel'], function( fieldErrorModel ) {
 			errors.add( { 'id': id, 'msg' : msg } );
 			model.set( 'errors', errors );
 			model.trigger( 'change:errors', model );
+			model.set( 'clean', false );
 			nfRadio.channel( 'fields' ).trigger( 'add:error', model, id, msg );
 		},
 

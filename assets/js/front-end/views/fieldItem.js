@@ -27,7 +27,11 @@ define( [], function() {
 		changeError: function() {
 			if ( 0 == this.model.get( 'errors' ).models.length ) {
 				this.model.removeWrapperClass( 'nf-error' );
+				this.model.removeWrapperClass( 'nf-fail' );
+				this.model.addWrapperClass( 'nf-pass' );
 			} else {
+				this.model.removeWrapperClass( 'nf-pass' );
+				this.model.addWrapperClass( 'nf-fail' );
 				this.model.addWrapperClass( 'nf-error' );
 			}
 		},
