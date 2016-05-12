@@ -4,6 +4,8 @@ define([], function() {
 			this.listenTo( nfRadio.channel( 'listradio' ), 'change:modelValue', this.changeModelValue );
 			this.listenTo( nfRadio.channel( 'listradio' ), 'init:model', this.register );
 			nfRadio.channel( 'listradio' ).reply( 'get:calcValue', this.getCalcValue, this );
+			
+			this.listenTo( nfRadio.channel( 'listradio' ), 'change:field', this.updateCheckedClass, this );
 		},
 
 		register: function( model ) {
@@ -107,6 +109,12 @@ define([], function() {
 				var calc_value = selected.calc;
 			}
 			return calc_value;
+		},
+
+		updateCheckedClass: function( el, model ) {
+			var name = jQuery( el ).attr( 'name' );
+			jQuery( '[name="' + name + '"]' ).removeClass( 'nf-checked' );
+			jQuery( el ).addClass( 'nf-checked' );
 		}
 
 	});

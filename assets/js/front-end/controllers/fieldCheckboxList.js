@@ -35,7 +35,7 @@ define([], function() {
                 var valueFound = false;
             }
 
-            _.each( this.options, function( option ) {
+            _.each( this.options, function( option, index ) {
                 if ( option.value == that.value ) {
                     valueFound = true;
                 }
@@ -43,6 +43,7 @@ define([], function() {
                 option.fieldID = that.id;
                 option.classes = that.classes;
                 option.currentValue = that.value;
+                option.index = index;
 
                 if( option.selected ){
                     that.selected.push( option.value );
@@ -108,7 +109,9 @@ define([], function() {
             var checked = jQuery( el ).attr( 'checked' );
             if ( checked ) {
                 selected.push( value );
+                jQuery( el ).addClass( 'nf-checked' );
             } else {
+                jQuery( el ).removeClass( 'nf-checked' );
                 var i = selected.indexOf( value );
                 if( -1 != i ){
                     selected.splice( i, 1 );
