@@ -406,7 +406,8 @@ final class NF_Display_Render
             'ajaxNonce' => wp_create_nonce( 'ninja_forms_display_nonce' ),
             'adminAjax' => admin_url( 'admin-ajax.php' ),
             'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
-            'use_merge_tags' => array()
+            'use_merge_tags' => array(),
+            'opinionated_styles' => Ninja_Forms()->get_setting( 'opinionated_styles' )
         ));
 
         foreach( Ninja_Forms()->fields as $field ){

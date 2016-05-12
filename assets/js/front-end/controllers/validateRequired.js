@@ -10,8 +10,11 @@ define([], function() {
 		},
 		
 		validateKeyup: function( el, model, keyCode ) {
-			var errorExists = nfRadio.channel( 'fields' ).request( 'get:error', model.get( 'id' ), 'required-error' );
-			if ( ( errorExists || ! model.get( 'clean' ) ) && 1 == model.get( 'required' ) ) {
+			if ( 1 != model.get( 'required' ) ) {
+				return false;
+			}
+
+			if ( ! model.get( 'clean' ) ) {
 				this.validateRequired( el, model );
 			}
 		},
