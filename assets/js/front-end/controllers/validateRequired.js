@@ -53,6 +53,13 @@ define([], function() {
 				return false;
 			}
 
+			/*
+			 * If we already have a required error on this model, return false
+			 */
+			if ( model.get( 'errors' ).get( 'required-error' ) ) {
+				return false;
+			}
+
 			currentValue = model.get( 'value' );
 			
 			var defaultReqValidation = true;
@@ -62,7 +69,7 @@ define([], function() {
 			}
 
 			var valid = defaultReqValidation;
-			
+
 			this.maybeError( valid, model );
 
 		},
