@@ -148,9 +148,7 @@
   clear: both;
   margin-left: 0; }
 
-.nf-fields .listselect-wrap div,
-.nf-fields .liststate-wrap div,
-.nf-fields .listcountry-wrap div {
+.nf-fields .list-select-wrap div {
   position: absolute;
   font-size: 16px;
   line-height: 16px;
@@ -161,9 +159,7 @@
   right: 0;
   left: 0;
   z-index: 1; }
-  .nf-fields .listselect-wrap div::after,
-  .nf-fields .liststate-wrap div::after,
-  .nf-fields .listcountry-wrap div::after {
+  .nf-fields .list-select-wrap div::after {
     content: "\f078";
     color: #999;
     font-family: FontAwesome;
@@ -171,27 +167,19 @@
     position: absolute;
     right: 10px; }
 
-.nf-fields .listselect-wrap.label-right div,
-.nf-fields .liststate-wrap.label-right div,
-.nf-fields .listcountry-wrap.label-right div {
+.nf-fields .list-select-wrap.label-right div {
   width: 50%; }
 
-.nf-fields .listselect-wrap.label-below div,
-.nf-fields .liststate-wrap.label-below div,
-.nf-fields .listcountry-wrap.label-below div {
+.nf-fields .list-select-wrap.label-below div {
   top: 0;
   bottom: auto; }
 
-.nf-fields .listselect-wrap.label-left div,
-.nf-fields .liststate-wrap.label-left div,
-.nf-fields .listcountry-wrap.label-left div {
+.nf-fields .list-select-wrap.label-left div {
   width: 59%;
   left: 41%;
   right: 40px; }
 
-.nf-fields .listselect-wrap select,
-.nf-fields .liststate-wrap select,
-.nf-fields .listcountry-wrap select {
+.nf-fields .list-select-wrap select {
   background: transparent;
   border: 0;
   -webkit-appearance: none;
@@ -200,7 +188,7 @@
   position: relative;
   z-index: 2; }
 
-.nf-fields listmultiselect-wrap select {
+.nf-fields .listmultiselect-wrap select {
   -webkit-appearance: normal;
      -moz-appearance: normal;
           appearance: normal; }

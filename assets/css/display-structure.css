@@ -26,6 +26,9 @@ Normalize Ninja Forms fields with default structure
   height: auto;
   vertical-align: inherit; }
 
+.nf-fields textarea {
+  height: 200px; }
+
 /* ---------------------------------
 RADIO & CHECKBOX LISTS
 ----------------------------------*/
@@ -55,6 +58,26 @@ HONEYPOT
 ----------------------------------*/
 .nf-hp {
   visibility: hidden; }
+
+/* ---------------------------------
+SELECT LIST
+----------------------------------*/
+.list-select-wrap div {
+  display: none; }
+
+/* ---------------------------------
+COLORS
+As minimal as possible
+----------------------------------*/
+.ninja-forms-req-symbol,
+.nf-error-msg {
+  color: #E80000; }
+
+.nf-error .ninja-forms-field {
+  border: 1px solid #E80000; }
+
+.nf-field-submit-error {
+  padding: 15px; }
 
 .note-popover {
   display: none !important; }
@@ -493,20 +516,16 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-hidden button {
   width: auto; }
 
-.nf-fields .label-right.checkbox-wrap label, .nf-fields .label-right.listcheckbox-wrap label, .nf-fields .label-right.listradio-wrap label,
-.nf-fields .label-left.checkbox-wrap label,
-.nf-fields .label-left.listcheckbox-wrap label,
-.nf-fields .label-left.listradio-wrap label {
-  padding: 0; }
-
 .nf-fields .label-right > label {
-  display: inline-block; }
+  display: inline-block;
+  margin-left: 1%;
+  width: 36%; }
 
 .nf-fields .label-right > input,
 .nf-fields .label-right textarea,
 .nf-fields .label-right select,
 .nf-fields .label-right .pikaday__container {
-  width: 50%; }
+  width: 59%; }
 
 .nf-fields .label-right .pikaday__display {
   width: 100%; }
@@ -520,12 +539,15 @@ Make sure all Ninja Forms label positons function properly
 
 .nf-fields .label-right ul {
   float: left;
-  width: 50%; }
+  width: 59%; }
+  .nf-fields .label-right ul + label {
+    margin-left: 1.2%; }
+  .nf-fields .label-right ul input {
+    float: right;
+    margin-top: 5px; }
 
 .nf-fields .label-left > label {
   display: inline-block;
-  float: left;
-  line-height: 16px;
   padding-right: 16px;
   text-align: right;
   width: 40%; }
@@ -534,7 +556,6 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-left textarea,
 .nf-fields .label-left select,
 .nf-fields .label-left .pikaday__container {
-  float: left;
   width: 59%; }
 
 .nf-fields .label-left .pikaday__display {

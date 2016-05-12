@@ -1,8 +1,6 @@
 
 .nf-fields {
-    .listselect-wrap,
-    .liststate-wrap,
-    .listcountry-wrap {
+    .list-select-wrap {
         div {
             position: absolute;
             font-size: 16px;
@@ -54,8 +52,7 @@
             z-index: 2;
         }
     }
-
-    listmultiselect-wrap {
+    .listmultiselect-wrap {
         select {
             appearance: normal;
         }
