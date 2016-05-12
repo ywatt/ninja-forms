@@ -4,8 +4,11 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 		emptyView: mainContentFieldEmptyView,
 		reorderOnSort: true,
 
+		getChildView: function() {
+			return nfRadio.channel( 'views' ).request( 'get:fieldItem' );
+		},
+
 		initialize: function() {
-			this.childView = nfRadio.channel( 'views' ).request( 'get:fieldItem' );
 			nfRadio.channel( 'fields' ).reply( 'get:sortableEl', this.getSortableEl, this );
 			nfRadio.channel( 'fields' ).reply( 'init:sortable', this.initSortable, this );
 			nfRadio.channel( 'fields' ).reply( 'destroy:sortable', this.destroySortable, this );
@@ -27,7 +30,6 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 					this.initSortable();
 				// }
 			}
-
 			nfRadio.channel( 'app' ).trigger( 'render:fieldsSortable', this );
 		},
 
