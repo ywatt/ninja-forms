@@ -19,6 +19,9 @@ Normalize Ninja Forms fields with default structure
     clear: both;
     content: "";
     display: block; }
+  .nf-field-container.hidden,
+  #ninja_forms_required_items.hidden {
+    margin: 0; }
 
 .nf-fields input,
 .nf-fields select,
@@ -82,6 +85,16 @@ As minimal as possible
 
 .nf-field-submit-error {
   padding: 15px; }
+
+.ninja-forms-noscript-message {
+  background: #f1f1f1;
+  border: 4px dashed #ccc;
+  color: #333;
+  display: block;
+  font-size: 20px;
+  margin: 20px 0;
+  padding: 40px;
+  text-align: center; }
 
 .note-popover {
   display: none !important; }
@@ -554,7 +567,7 @@ Make sure all Ninja Forms label positons function properly
   display: inline-block;
   padding-right: 16px;
   text-align: right;
-  width: 40%; }
+  width: 39%; }
 
 .nf-fields .label-left > input,
 .nf-fields .label-left textarea,
