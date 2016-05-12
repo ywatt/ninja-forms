@@ -14,21 +14,16 @@ define([], function() {
 				return false;
 			}
 
-			/*
-			var errorExists = nfRadio.channel( 'fields' ).request( 'get:error', model.get( 'id' ), 'required-error' );
-			if ( ( errorExists || ! model.get( 'clean' ) ) && 1 == model.get( 'required' ) ) {
-				this.validateRequired( el, model );
-			}
-			*/
-			// console.log( 'req key up ');
-			// console.log( model.get( 'clean' ) );
 			if ( ! model.get( 'clean' ) ) {
-				// console.log( 'check required' );
 				this.validateRequired( el, model );
 			}
 		},
 
 		validateRequired: function( el, model ) {
+			if ( 1 != model.get( 'required' ) ) {
+				return false;
+			}
+
 			var currentValue = jQuery( el ).val();
 			var customReqValidation = nfRadio.channel( model.get( 'type' ) ).request( 'validate:required', el, model );
 			var defaultReqValidation = true;

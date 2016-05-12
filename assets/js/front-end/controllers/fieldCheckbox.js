@@ -6,6 +6,10 @@ define([], function() {
 			radioChannel.reply( 'validate:required', this.validateRequired );
             nfRadio.channel( 'checkbox' ).reply( 'before:updateField', this.beforeUpdateField, this );
             nfRadio.channel( 'checkbox' ).reply( 'get:calcValue', this.getCalcValue, this );
+			/*
+			 * When we render this view, if we have opinionated styles turned on, move the label to after the field.
+			 */
+			this.listenTo( nfRadio.channel( 'checkbox' ), 'render:view', this.maybeMoveLabel );
 		},
 
 		beforeUpdateField: function( el, model ) {
@@ -33,6 +37,17 @@ define([], function() {
 			}
 
 			return calcValue;
+		},
+
+		maybeMoveLabel: function( view ) {
+			if ( nfFrontEnd.opinionated_styles ) {
+				/*
+				 * Move our label to after the input element.
+				 */
+				var input = jQuery( view.el ).find( 'input' );
+				var label = jQuery( view.el ).find( 'label' );
+				input.after( label );
+			}
 		}
 	});
 
