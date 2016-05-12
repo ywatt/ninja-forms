@@ -29,6 +29,9 @@
         height: auto;
         vertical-align: inherit;
     }
+    textarea {
+        height: 200px;
+    }
 }
 
 /* ---------------------------------
@@ -63,4 +66,31 @@ HONEYPOT
 
 .nf-hp {
     visibility: hidden;
+}
+
+/* ---------------------------------
+SELECT LIST
+----------------------------------*/
+.list-select-wrap {
+    div {
+        display: none;
+    }
+}
+
+
+/* ---------------------------------
+COLORS
+As minimal as possible
+----------------------------------*/
+.ninja-forms-req-symbol,
+.nf-error-msg, {
+    color: #E80000;
+}
+.nf-error {
+    .ninja-forms-field {
+        border: 1px solid #E80000;
+    }
+}
+.nf-field-submit-error {
+    padding: 15px;
 }
