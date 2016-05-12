@@ -1,0 +1,56 @@
+.nf-fields {
+    .checkbox-wrap,
+    .listcheckbox-wrap
+    {
+        label {
+            &:hover {
+                &::after {
+                    border-color: #999 !important;
+                }
+            }
+        }
+        input[type="checkbox"] {
+            display: none;
+            + label {
+                position: relative;
+                margin-left: 30px;
+                &::after {
+                    background: #fff;
+                    border: 2px solid #eaeaea;
+                    content: "";
+                    width: 18px;
+                    height: 18px;
+                    position: absolute;
+                    left: -30px;
+                    top: 2px;
+                }
+            }
+            &:checked {
+                + label {
+                    &::after {
+                        border-color: #999;
+                    }
+                }
+                + label {
+                    &::before {
+                        color: #666;
+                        content: "\f00c";
+                        font-family: FontAwesome;
+                        font-size: 24px;
+                        width: 24px;
+                        height: 24px;
+                        position: absolute;
+                        left: -30px;
+                        top: -10px;
+                        z-index: 2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.nf-fields {
+    .checkbox-wrap {
+    }
+}

@@ -9,7 +9,8 @@
         textarea,
         select,
         .pikaday__container,
-        .pikaday__display {
+        .pikaday__display,
+        .listselect-wrap > div {
             width: 100%;
         }
         input[type="submit"],
@@ -26,7 +27,7 @@
     .label-right,
     .label-left {
         label {
-            padding: 16px 0;
+            //padding: 16px 0;
         }
         &.checkbox-wrap,
         &.listcheckbox-wrap,
@@ -37,7 +38,7 @@
         }
     }
     .label-right {
-        vertical-align: middle;
+        //vertical-align: middle;
         > label {
             display: inline-block;
         }
@@ -63,20 +64,21 @@
         }
     }
     .label-left {
-        vertical-align: middle;
+        //vertical-align: middle;
         > label {
             display: inline-block;
             float: left;
             line-height: 16px;
+            padding-right: 16px;
             text-align: right;
-            width: 46%;
+            width: 40%;
         }
         > input,
         textarea,
         select,
         .pikaday__container {
             float: left;
-            width: 49%;
+            width: 59%;
         }
         .pikaday__display {
             width: 100%;
@@ -85,14 +87,14 @@
         > input[type=checkbox] {
             float: none;
             width: auto;
-            margin-left: 10px;
+            margin-left: 1%;
         }
         &.textarea-wrap {
             vertical-align: top;
         }
         ul {
             float: right;
-            width: 49%;
+            width: 59%;
         }
     }
 }

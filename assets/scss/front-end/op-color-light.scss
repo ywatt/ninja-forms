@@ -5,22 +5,73 @@
     }
 }
 
-.ninja-forms-field {
-    background: #f7f7f7;
-    border: 1px solid #eaeaea;
-    &:focus {
+.nf-fields {
+    .ninja-forms-field,
+    .listselect-wrap > div,
+    .liststate-wrap > div,
+    .listcountry-wrap > div {
+        background: #f7f7f7;
+        border: 1px solid #eaeaea;
+        border-radius: 0;
+        box-shadow: none;
+        &:hover,
+        &:focus {
+            background: #fff;
+            border: 0;
+            box-shadow: -3px 3px 10px #ccc;
+            outline: none;
+        }
+    }
+    .listselect-wrap:hover > div,
+    .liststate-wrap:hover > div,
+    .listcountry-wrap:hover > div {
         background: #fff;
-        border-color: #c1c1c1;
+        border: 0;
+        box-shadow: -3px 3px 10px #ccc;
         outline: none;
+    }
+    select.ninja-forms-field {
+        &:hover,
+        &:focus {
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            outline: none;
+        }
     }
 }
 
 .nf-error {
+    position: relative;
     .ninja-forms-field {
         border-color: red;
     }
+    &.field-wrap::after {
+        color: red;
+        font-family: FontAwesome;
+        font-size: 30px;
+        content: "\f06a";
+        position: absolute;
+        right: 16px;
+        bottom: 1px;
+    }
     .nf-error-msg {
         color: red;
+    }
+}
+.nf-pass {
+    position: relative;
+    .ninja-forms-field {
+        border-color: green;
+    }
+    &.field-wrap::after {
+        color: green;
+        font-family: FontAwesome;
+        font-size: 30px;
+        content: "\f058";
+        position: absolute;
+        right: 16px;
+        bottom: 1px;
     }
 }
 
@@ -33,4 +84,30 @@
     margin: 20px 0;
     padding: 40px;
     text-align: center;
+}
+
+.nf-field-submit-error {
+    border: 1px solid;
+    margin: 10px 0px;
+    padding: 15px 15px 15px 50px;
+    position: relative;
+    z-index: 1;
+    &::after {
+        position: absolute;
+        content: "\f06a";
+        font-family: FontAwesome;
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        left: 15px;
+        top: 6px;
+        z-index: 2;
+    }
+}
+
+.nf-field-submit-error {
+    border-color: #D8000C;
+    color: #D8000C;
+    background-color: #FFBABA;
 }

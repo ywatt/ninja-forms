@@ -13,6 +13,7 @@
 
 .field-wrap,
 #ninja_forms_required_items {
+    position: relative;
     &::after {
         clear: both;
         content: "";
