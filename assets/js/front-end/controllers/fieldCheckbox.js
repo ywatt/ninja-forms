@@ -12,8 +12,10 @@ define([], function() {
 			var checked = jQuery( el ).attr( 'checked' );
 			if ( checked ) {
 				var value = 1;
+				jQuery( el ).addClass( 'nf-checked' );
 			} else {
 				var value = 0;
+				jQuery( el ).removeClass( 'nf-checked' );
 			}
 
 			return value;
