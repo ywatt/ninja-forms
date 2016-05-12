@@ -5,6 +5,9 @@
   padding: 5px;
   max-width: 1000px;
   margin: 0 auto; }
+  .nf-fields label {
+    font-size: 18px;
+    line-height: 20px; }
   .nf-fields .ninja-forms-field,
   .nf-fields .listselect-wrap > div {
     font-size: 16px;
@@ -40,12 +43,12 @@
   .nf-fields .label-above > label,
   .nf-fields .label-below > label,
   .nf-fields .label-hidden > label {
-    margin-bottom: 5px; }
+    margin-bottom: 10px; }
   .nf-fields .label-below > label {
     margin-bottom: 0;
-    margin-top: 5px; }
+    margin-top: 10px; }
   .nf-fields .label-right > label {
-    margin-bottom: 0; }
+    margin: 0; }
   .nf-fields .label-right > input,
   .nf-fields .label-right textarea,
   .nf-fields .label-right select,
@@ -57,8 +60,7 @@
   .nf-fields .label-right ul {
     margin-right: 1%; }
   .nf-fields .label-left > label {
-    margin-bottom: 0;
-    margin-top: 5px; }
+    margin: 0; }
   .nf-fields .label-left > input,
   .nf-fields .label-left textarea,
   .nf-fields .label-left select,
@@ -193,14 +195,14 @@
     margin-left: 30px; }
     .nf-fields .checkbox-wrap input[type="checkbox"] + label::after,
     .nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
-      background: #fff;
+      background: #f7f7f7;
       border: 2px solid #eaeaea;
       content: "";
       width: 18px;
       height: 18px;
       position: absolute;
-      left: -30px;
-      top: 2px; }
+      left: -28px;
+      bottom: 0; }
   .nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::after,
   .nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::after {
     border-color: #999; }
@@ -210,11 +212,78 @@
     content: "\f00c";
     font-family: FontAwesome;
     font-size: 24px;
-    width: 24px;
-    height: 24px;
     position: absolute;
     left: -30px;
-    top: -10px;
+    bottom: 0;
+    z-index: 2; }
+
+.nf-fields div.checkbox-wrap.label-above label {
+  height: 50px;
+  display: block; }
+
+.nf-fields div.checkbox-wrap.label-above input[type="checkbox"] + label {
+  margin-left: 0; }
+  .nf-fields div.checkbox-wrap.label-above input[type="checkbox"] + label::after {
+    left: 0;
+    bottom: 0; }
+
+.nf-fields div.checkbox-wrap.label-above input[type="checkbox"].nf-checked + label::before {
+  left: -2px;
+  bottom: 0; }
+
+.nf-fields div.checkbox-wrap.label-below label {
+  height: 50px;
+  display: table-cell;
+  vertical-align: bottom; }
+
+.nf-fields div.checkbox-wrap.label-below input[type="checkbox"] + label {
+  margin-left: 0; }
+  .nf-fields div.checkbox-wrap.label-below input[type="checkbox"] + label::after {
+    left: 0;
+    bottom: auto;
+    top: 0; }
+
+.nf-fields div.checkbox-wrap.label-below input[type="checkbox"].nf-checked + label::before {
+  left: -2px;
+  bottom: auto;
+  top: -2px; }
+
+.nf-fields div.checkbox-wrap.label-left input[type="checkbox"] + label {
+  margin-left: 0; }
+  .nf-fields div.checkbox-wrap.label-left input[type="checkbox"] + label::after {
+    left: auto;
+    bottom: 0;
+    right: -32px; }
+
+.nf-fields div.checkbox-wrap.label-left input[type="checkbox"].nf-checked + label::before {
+  left: auto;
+  bottom: 0;
+  right: -37px; }
+
+.nf-fields .listradio-wrap input[type="radio"] {
+  display: none; }
+  .nf-fields .listradio-wrap input[type="radio"] + label {
+    position: relative;
+    margin-left: 30px; }
+    .nf-fields .listradio-wrap input[type="radio"] + label::after {
+      background: #f7f7f7;
+      border: 2px solid #eaeaea;
+      content: "";
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      left: -28px;
+      bottom: 0; }
+  .nf-fields .listradio-wrap input[type="radio"].nf-checked + label::after {
+    border-color: #999; }
+  .nf-fields .listradio-wrap input[type="radio"].nf-checked + label::before {
+    color: #3366CC;
+    content: "\f00c";
+    font-family: FontAwesome;
+    font-size: 24px;
+    position: absolute;
+    left: -30px;
+    bottom: 0;
     z-index: 2; }
 
 input[type=checkbox].nf-toggle {
@@ -272,13 +341,16 @@ input[type=checkbox].nf-toggle {
 .field-wrap > label {
   font-weight: bold; }
 
-.nf-fields .ninja-forms-field,
+.nf-fields input:not([type='button']),
+.nf-fields textarea,
 .nf-fields .list-select-wrap > div {
   background: #f7f7f7;
   border: 1px solid #eaeaea;
   border-radius: 0;
   box-shadow: none; }
-  .nf-fields .ninja-forms-field:hover, .nf-fields .ninja-forms-field:focus,
+  .nf-fields input:not([type='button']):hover, .nf-fields input:not([type='button']):focus,
+  .nf-fields textarea:hover,
+  .nf-fields textarea:focus,
   .nf-fields .list-select-wrap > div:hover,
   .nf-fields .list-select-wrap > div:focus {
     background: #fff;
@@ -299,22 +371,23 @@ input[type=checkbox].nf-toggle {
 .nf-error {
   position: relative; }
   .nf-error .ninja-forms-field {
-    border-color: red; }
+    border-color: #E80000 !important; }
   .nf-error.field-wrap::after {
-    color: red;
+    color: #E80000;
     font-family: FontAwesome;
     font-size: 30px;
     content: "\f06a";
     position: absolute;
     right: 16px;
-    bottom: 1px; }
+    height: 50px;
+    line-height: 50px; }
   .nf-error .nf-error-msg {
-    color: red; }
+    color: #E80000; }
 
 .nf-pass {
   position: relative; }
   .nf-pass .ninja-forms-field {
-    border-color: green; }
+    border-color: green !important; }
   .nf-pass.field-wrap::after {
     color: green;
     font-family: FontAwesome;
@@ -322,17 +395,8 @@ input[type=checkbox].nf-toggle {
     content: "\f058";
     position: absolute;
     right: 16px;
-    bottom: 1px; }
-
-.ninja-forms-noscript-message {
-  background: #f1f1f1;
-  border: 4px dashed #ccc;
-  color: #333;
-  display: block;
-  font-size: 20px;
-  margin: 20px 0;
-  padding: 40px;
-  text-align: center; }
+    height: 50px;
+    line-height: 50px; }
 
 .nf-field-submit-error {
   border: 1px solid;
@@ -341,15 +405,14 @@ input[type=checkbox].nf-toggle {
   position: relative;
   z-index: 1; }
   .nf-field-submit-error::after {
-    position: absolute;
     content: "\f06a";
     font-family: FontAwesome;
     font-size: 24px;
-    width: 24px;
-    height: 24px;
     position: absolute;
+    top: 0;
     left: 15px;
-    top: 6px;
+    height: 50px;
+    line-height: 50px;
     z-index: 2; }
 
 .nf-field-submit-error {

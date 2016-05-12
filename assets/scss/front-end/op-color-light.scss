@@ -6,7 +6,8 @@
 }
 
 .nf-fields {
-    .ninja-forms-field,
+    input:not([type='button']),
+    textarea,
     .list-select-wrap > div {
         background: #f7f7f7;
         border: 1px solid #eaeaea;
@@ -40,25 +41,26 @@
 .nf-error {
     position: relative;
     .ninja-forms-field {
-        border-color: red;
+        border-color: #E80000 !important;
     }
     &.field-wrap::after {
-        color: red;
+        color: #E80000;
         font-family: FontAwesome;
         font-size: 30px;
         content: "\f06a";
         position: absolute;
         right: 16px;
-        bottom: 1px;
+        height: 50px;
+        line-height: 50px;
     }
     .nf-error-msg {
-        color: red;
+        color: #E80000;
     }
 }
 .nf-pass {
     position: relative;
     .ninja-forms-field {
-        border-color: green;
+        border-color: green !important;
     }
     &.field-wrap::after {
         color: green;
@@ -67,19 +69,9 @@
         content: "\f058";
         position: absolute;
         right: 16px;
-        bottom: 1px;
+        height: 50px;
+        line-height: 50px;
     }
-}
-
-.ninja-forms-noscript-message {
-    background: #f1f1f1;
-    border: 4px dashed #ccc;
-    color: #333;
-    display: block;
-    font-size: 20px;
-    margin: 20px 0;
-    padding: 40px;
-    text-align: center;
 }
 
 .nf-field-submit-error {
@@ -89,15 +81,14 @@
     position: relative;
     z-index: 1;
     &::after {
-        position: absolute;
         content: "\f06a";
         font-family: FontAwesome;
         font-size: 24px;
-        width: 24px;
-        height: 24px;
         position: absolute;
+        top: 0;
         left: 15px;
-        top: 6px;
+        height: 50px;
+        line-height: 50px;
         z-index: 2;
     }
 }

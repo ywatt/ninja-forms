@@ -5,6 +5,9 @@
   padding: 5px;
   max-width: 1000px;
   margin: 0 auto; }
+  .nf-fields label {
+    font-size: 18px;
+    line-height: 20px; }
   .nf-fields .ninja-forms-field,
   .nf-fields .listselect-wrap > div {
     font-size: 16px;
@@ -40,12 +43,12 @@
   .nf-fields .label-above > label,
   .nf-fields .label-below > label,
   .nf-fields .label-hidden > label {
-    margin-bottom: 5px; }
+    margin-bottom: 10px; }
   .nf-fields .label-below > label {
     margin-bottom: 0;
-    margin-top: 5px; }
+    margin-top: 10px; }
   .nf-fields .label-right > label {
-    margin-bottom: 0; }
+    margin: 0; }
   .nf-fields .label-right > input,
   .nf-fields .label-right textarea,
   .nf-fields .label-right select,
@@ -57,8 +60,7 @@
   .nf-fields .label-right ul {
     margin-right: 1%; }
   .nf-fields .label-left > label {
-    margin-bottom: 0;
-    margin-top: 5px; }
+    margin: 0; }
   .nf-fields .label-left > input,
   .nf-fields .label-left textarea,
   .nf-fields .label-left select,

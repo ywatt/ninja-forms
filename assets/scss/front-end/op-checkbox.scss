@@ -14,14 +14,14 @@
                 position: relative;
                 margin-left: 30px;
                 &::after {
-                    background: #fff;
+                    background: #f7f7f7;
                     border: 2px solid #eaeaea;
                     content: "";
                     width: 18px;
                     height: 18px;
                     position: absolute;
-                    left: -30px;
-                    top: 2px;
+                    left: -28px;
+                    bottom: 0;
                 }
             }
             &.nf-checked {
@@ -36,12 +36,82 @@
                         content: "\f00c";
                         font-family: FontAwesome;
                         font-size: 24px;
-                        width: 24px;
-                        height: 24px;
                         position: absolute;
                         left: -30px;
-                        top: -10px;
+                        bottom: 0;
                         z-index: 2;
+                    }
+                }
+            }
+        }
+    }
+    div.checkbox-wrap {
+        &.label-above {
+            label {
+                height: 50px;
+                display: block;
+            }
+            input[type="checkbox"] {
+                + label {
+                    margin-left: 0;
+                    &::after {
+                        left: 0;
+                        bottom: 0;
+                    }
+                }
+                &.nf-checked {
+                    + label {
+                        &::before {
+                            left: -2px;
+                            bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+        &.label-below {
+            label {
+                height: 50px;
+                display: table-cell;
+                vertical-align: bottom;
+            }
+            input[type="checkbox"] {
+                + label {
+                    margin-left: 0;
+                    &::after {
+                        left: 0;
+                        bottom: auto;
+                        top: 0;
+                    }
+                }
+                &.nf-checked {
+                    + label {
+                        &::before {
+                            left: -2px;
+                            bottom: auto;
+                            top: -2px;
+                        }
+                    }
+                }
+            }
+        }
+        &.label-left {
+            input[type="checkbox"] {
+                + label {
+                    margin-left: 0;
+                    &::after {
+                        left: auto;
+                        bottom: 0;
+                        right: -32px
+                    }
+                }
+                &.nf-checked {
+                    + label {
+                        &::before {
+                            left: auto;
+                            bottom: 0;
+                            right: -37px
+                        }
                     }
                 }
             }

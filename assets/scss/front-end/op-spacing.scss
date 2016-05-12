@@ -2,6 +2,10 @@
     padding: 5px;
     max-width: 1000px;
     margin: 0 auto;
+    label {
+        font-size: 18px;
+        line-height: 20px;
+    }
     .ninja-forms-field,
     .listselect-wrap > div {
         font-size: 16px;
@@ -56,18 +60,18 @@
     .label-below,
     .label-hidden {
         > label {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
     }
     .label-below {
         > label {
             margin-bottom: 0;
-            margin-top: 5px;
+            margin-top: 10px;
         }
     }
     .label-right {
         > label {
-            margin-bottom: 0;
+            margin: 0;
         }
         > input,
         textarea,
@@ -85,8 +89,7 @@
     }
     .label-left {
         > label {
-            margin-bottom: 0;
-            margin-top: 5px;
+            margin: 0;
         }
         > input,
         textarea,

@@ -16,6 +16,7 @@ define( ['views/fieldItem', 'views/beforeField', 'views/afterField'], function( 
             this.setElement( this.$el );
 
             jQuery( this.el ).addClass( 'nf-field-container' );
+            jQuery( this.el ).addClass( this.model.get( 'type' ) );
         },
 
         onShow: function() {
