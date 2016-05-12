@@ -1,11 +1,14 @@
 define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( mainContentFieldView, mainContentFieldEmptyView ) {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
-		emptyView: mainContentFieldEmptyView,
 		reorderOnSort: true,
 
 		getChildView: function() {
 			return nfRadio.channel( 'views' ).request( 'get:fieldItem' );
+		},
+
+		getEmptyView: function() {
+			return nfRadio.channel( 'views' ).request( 'get:mainContentEmpty' );
 		},
 
 		initialize: function() {
