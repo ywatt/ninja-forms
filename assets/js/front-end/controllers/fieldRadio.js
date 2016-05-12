@@ -46,7 +46,7 @@ define([], function() {
 				var valueFound = false;
 			}
 			
-			_.each( this.options, function( option ) {
+			_.each( this.options, function( option, index ) {
 				if ( option.value == that.value ) {
 					valueFound = true;
 				}
@@ -54,6 +54,7 @@ define([], function() {
 				option.fieldID = that.id;
 				option.classes = that.classes;
 				option.currentValue = that.value;
+				option.index = index;
 				var template = _.template( jQuery( '#nf-tmpl-field-listradio-option' ).html() );
 				html += template( option );
 			} );
