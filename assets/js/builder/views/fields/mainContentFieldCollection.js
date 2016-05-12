@@ -1,4 +1,4 @@
-define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( mainContentFieldView, mainContentFieldEmptyView ) {
+define( [], function() {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
 		reorderOnSort: true,
