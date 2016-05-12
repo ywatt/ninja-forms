@@ -1,14 +1,13 @@
 .nf-fields {
     .checkbox-wrap,
-    .listcheckbox-wrap
-    {
-        label {
-            &:hover {
-                &::after {
-                    border-color: #999 !important;
-                }
-            }
-        }
+    .listcheckbox-wrap {
+        // label {
+        //     &:hover {
+        //         &::after {
+        //             border-color: #999 !important;
+        //         }
+        //     }
+        // }
         input[type="checkbox"] {
             display: none;
             + label {
@@ -25,7 +24,7 @@
                     top: 2px;
                 }
             }
-            &:checked {
+            &.nf-checked {
                 + label {
                     &::after {
                         border-color: #999;
@@ -33,7 +32,7 @@
                 }
                 + label {
                     &::before {
-                        color: #666;
+                        color: #3366CC;
                         content: "\f00c";
                         font-family: FontAwesome;
                         font-size: 24px;
@@ -47,10 +46,5 @@
                 }
             }
         }
-    }
-}
-
-.nf-fields {
-    .checkbox-wrap {
     }
 }

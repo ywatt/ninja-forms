@@ -10,10 +10,11 @@ Normalize Ninja Forms fields with default structure
   -ms-box-sizing: border-box;
   box-sizing: border-box; }
 
-.field-wrap,
+.nf-field-container,
 #ninja_forms_required_items {
-  position: relative; }
-  .field-wrap::after,
+  position: relative;
+  margin-bottom: 16px; }
+  .nf-field-container::after,
   #ninja_forms_required_items::after {
     clear: both;
     content: "";
@@ -28,6 +29,9 @@ Normalize Ninja Forms fields with default structure
 
 .nf-fields textarea {
   height: 200px; }
+
+.nf-fields .field-wrap > label {
+  font-weight: bold; }
 
 /* ---------------------------------
 RADIO & CHECKBOX LISTS

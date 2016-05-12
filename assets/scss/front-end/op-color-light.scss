@@ -7,9 +7,7 @@
 
 .nf-fields {
     .ninja-forms-field,
-    .listselect-wrap > div,
-    .liststate-wrap > div,
-    .listcountry-wrap > div {
+    .list-select-wrap > div {
         background: #f7f7f7;
         border: 1px solid #eaeaea;
         border-radius: 0;
@@ -17,17 +15,15 @@
         &:hover,
         &:focus {
             background: #fff;
-            border: 0;
-            box-shadow: -3px 3px 10px #ccc;
+            border-color: #ccc;
+            //box-shadow: -3px 3px 10px #ccc;
             outline: none;
         }
     }
-    .listselect-wrap:hover > div,
-    .liststate-wrap:hover > div,
-    .listcountry-wrap:hover > div {
+    .list-select-wrap:hover > div {
         background: #fff;
-        border: 0;
-        box-shadow: -3px 3px 10px #ccc;
+        border-color: #ccc;
+        //box-shadow: -3px 3px 10px #ccc;
         outline: none;
     }
     select.ninja-forms-field {

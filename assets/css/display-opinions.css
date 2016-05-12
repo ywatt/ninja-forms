@@ -1,14 +1,6 @@
 /*
 
 ---------------------------------------------*/
-.nf-field-container,
-#ninja_forms_required_items {
-  margin-bottom: 10px;
-  position: relative; }
-  .nf-field-container.hidden-wrap,
-  #ninja_forms_required_items.hidden-wrap {
-    margin: 0; }
-
 .nf-fields {
   padding: 5px;
   max-width: 1000px;

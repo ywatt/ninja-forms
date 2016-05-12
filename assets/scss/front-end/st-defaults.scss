@@ -11,9 +11,10 @@
     box-sizing: border-box;
 }
 
-.field-wrap,
+.nf-field-container,
 #ninja_forms_required_items {
     position: relative;
+    margin-bottom: 16px;
     &::after {
         clear: both;
         content: "";
@@ -31,6 +32,11 @@
     }
     textarea {
         height: 200px;
+    }
+    .field-wrap {
+        > label {
+            font-weight: bold;
+        }
     }
 }
 

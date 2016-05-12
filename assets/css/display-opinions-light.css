@@ -1,14 +1,6 @@
 /*
 
 ---------------------------------------------*/
-.nf-field-container,
-#ninja_forms_required_items {
-  margin-bottom: 10px;
-  position: relative; }
-  .nf-field-container.hidden-wrap,
-  #ninja_forms_required_items.hidden-wrap {
-    margin: 0; }
-
 .nf-fields {
   padding: 5px;
   max-width: 1000px;
@@ -148,54 +140,49 @@
   clear: both;
   margin-left: 0; }
 
-.nf-fields .list-select-wrap div {
-  position: absolute;
-  font-size: 16px;
-  line-height: 16px;
-  margin: 0;
-  padding: 16px;
-  height: 50px;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 1; }
-  .nf-fields .list-select-wrap div::after {
-    content: "\f078";
-    color: #999;
-    font-family: FontAwesome;
-    font-size: 20px;
+.nf-fields .list-select-wrap {
+  position: relative; }
+  .nf-fields .list-select-wrap div {
+    display: block;
     position: absolute;
-    right: 10px; }
-
-.nf-fields .list-select-wrap.label-right div {
-  width: 50%; }
-
-.nf-fields .list-select-wrap.label-below div {
-  top: 0;
-  bottom: auto; }
-
-.nf-fields .list-select-wrap.label-left div {
-  width: 59%;
-  left: 41%;
-  right: 40px; }
-
-.nf-fields .list-select-wrap select {
-  background: transparent;
-  border: 0;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  position: relative;
-  z-index: 2; }
+    font-size: 16px;
+    line-height: 16px;
+    margin: 0;
+    padding: 16px;
+    height: 50px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1; }
+    .nf-fields .list-select-wrap div::after {
+      content: "\f078";
+      color: #999;
+      font-family: FontAwesome;
+      font-size: 20px;
+      position: absolute;
+      right: 10px; }
+  .nf-fields .list-select-wrap.label-right div {
+    width: 59%; }
+  .nf-fields .list-select-wrap.label-below div {
+    top: 0;
+    bottom: auto; }
+  .nf-fields .list-select-wrap.label-left div {
+    width: 59%;
+    left: 41%;
+    right: 40px; }
+  .nf-fields .list-select-wrap select {
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    position: relative;
+    z-index: 2; }
 
 .nf-fields .listmultiselect-wrap select {
   -webkit-appearance: normal;
      -moz-appearance: normal;
           appearance: normal; }
-
-.nf-fields .checkbox-wrap label:hover::after,
-.nf-fields .listcheckbox-wrap label:hover::after {
-  border-color: #999 !important; }
 
 .nf-fields .checkbox-wrap input[type="checkbox"],
 .nf-fields .listcheckbox-wrap input[type="checkbox"] {
@@ -214,12 +201,12 @@
       position: absolute;
       left: -30px;
       top: 2px; }
-  .nf-fields .checkbox-wrap input[type="checkbox"]:checked + label::after,
-  .nf-fields .listcheckbox-wrap input[type="checkbox"]:checked + label::after {
+  .nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::after,
+  .nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::after {
     border-color: #999; }
-  .nf-fields .checkbox-wrap input[type="checkbox"]:checked + label::before,
-  .nf-fields .listcheckbox-wrap input[type="checkbox"]:checked + label::before {
-    color: #666;
+  .nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::before,
+  .nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+    color: #3366CC;
     content: "\f00c";
     font-family: FontAwesome;
     font-size: 24px;
@@ -286,31 +273,21 @@ input[type=checkbox].nf-toggle {
   font-weight: bold; }
 
 .nf-fields .ninja-forms-field,
-.nf-fields .listselect-wrap > div,
-.nf-fields .liststate-wrap > div,
-.nf-fields .listcountry-wrap > div {
+.nf-fields .list-select-wrap > div {
   background: #f7f7f7;
   border: 1px solid #eaeaea;
   border-radius: 0;
   box-shadow: none; }
   .nf-fields .ninja-forms-field:hover, .nf-fields .ninja-forms-field:focus,
-  .nf-fields .listselect-wrap > div:hover,
-  .nf-fields .listselect-wrap > div:focus,
-  .nf-fields .liststate-wrap > div:hover,
-  .nf-fields .liststate-wrap > div:focus,
-  .nf-fields .listcountry-wrap > div:hover,
-  .nf-fields .listcountry-wrap > div:focus {
+  .nf-fields .list-select-wrap > div:hover,
+  .nf-fields .list-select-wrap > div:focus {
     background: #fff;
-    border: 0;
-    box-shadow: -3px 3px 10px #ccc;
+    border-color: #ccc;
     outline: none; }
 
-.nf-fields .listselect-wrap:hover > div,
-.nf-fields .liststate-wrap:hover > div,
-.nf-fields .listcountry-wrap:hover > div {
+.nf-fields .list-select-wrap:hover > div {
   background: #fff;
-  border: 0;
-  box-shadow: -3px 3px 10px #ccc;
+  border-color: #ccc;
   outline: none; }
 
 .nf-fields select.ninja-forms-field:hover, .nf-fields select.ninja-forms-field:focus {

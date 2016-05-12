@@ -1,7 +1,9 @@
 
 .nf-fields {
     .list-select-wrap {
+        position: relative;
         div {
+            display: block;
             position: absolute;
             font-size: 16px;
             line-height: 16px;
@@ -25,7 +27,7 @@
         }
         &.label-right {
             div {
-                width: 50%;
+                width: 59%;
                 // &::after {
                 //     right: 20px;
                 // }
