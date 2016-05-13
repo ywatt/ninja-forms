@@ -24,7 +24,14 @@
         margin: 0;
     }
 }
-
+// .field-wrap {
+//     margin-bottom: 16px;
+//     &::after {
+//         clear: both;
+//         content: "";
+//         display: block;
+//     }
+// }
 .nf-fields {
     input,
     select,

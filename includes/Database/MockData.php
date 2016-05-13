@@ -348,6 +348,11 @@ final class NF_Database_MockData
 
         $fields = array(
             array(
+                'type'          => 'html',
+                'label'         => 'Textbox',
+                'key'           => 'textbox',
+            ),
+            array(
                 'type' 			=> 'textbox',
                 'label'			=> 'Textbox',
                 'key'           => 'textbox',
@@ -505,29 +510,18 @@ final class NF_Database_MockData
                 'key'           => 'textbox',
             ),
             array(
-                'type' 			=> 'firstname',
-                'label'			=> 'First Name',
-                'key'           => 'first_name',
-            ),
-            array(
-                'type' 			=> 'lastname',
-                'label'			=> 'Last Name',
-                'key'           => 'last_name',
-            ),
-            array(
-                'type' 			=> 'hidden',
-                'label'			=> 'Hidden',
-                'label_pos' 	=> 'hidden',
-                'key'           => 'hidden',
-            ),
-            array(
-                'type' 			=> 'textarea',
-                'label'			=> 'Textarea',
+                'type'          => 'textarea',
+                'label'         => 'Textarea',
                 'key'           => 'textarea',
             ),
             array(
-                'type' 			=> 'listselect',
-                'label'			=> 'Select List',
+                'type'          => 'checkbox',
+                'label'         => 'Checkbox',
+                'key'           => 'checkbox',
+            ),
+            array(
+                'type'          => 'listselect',
+                'label'         => 'Select List',
                 'options'      => array(
                     array(
                         'label' => 'Option One',
@@ -554,8 +548,8 @@ final class NF_Database_MockData
                 'key'           => 'select_list',
             ),
             array(
-                'type' 			=> 'listradio',
-                'label'			=> 'Radio List',
+                'type'          => 'listradio',
+                'label'         => 'Radio List',
                 'options'       => array(
                     array(
                         'label' => 'Option One',
@@ -582,10 +576,21 @@ final class NF_Database_MockData
                 'key'           => 'radio_list',
             ),
             array(
-                'type' 			=> 'checkbox',
-                'label'			=> 'Checkbox',
-                'key'           => 'checkbox',
+                'type'          => 'hidden',
+                'label'         => 'Hidden',
+                'label_pos'     => 'hidden',
+                'key'           => 'hidden',
             ),
+            array(
+                'type' 			=> 'firstname',
+                'label'			=> 'First Name',
+                'key'           => 'first_name',
+            ),
+            array(
+                'type' 			=> 'lastname',
+                'label'			=> 'Last Name',
+                'key'           => 'last_name',
+            )
             // array(
             //     'type' 			=> 'button',
             //     'label'			=> 'Button',
