@@ -1,14 +1,5 @@
 <script id="nf-tmpl-field-submit" type="text/template">
-	<%
-	/*
-	 * If the submit button is disabled, hide it.
-	 */
-	var style="display:block";
-	if ( 'disabled' == disabled ) {
-		style = "display:none";
-	}
-	%>
-	<input id="nf-field-<%= id %>" class="<%= classes %> nf-element " type="button" value="<%= label %>" <%= disabled %> style="<%= style %>">
+	<input id="nf-field-<%= id %>" class="<%= classes %> nf-element " type="button" value="<%= label %>" <%= disabled %>>
 	<%=	maybeRenderError() %>
 </script>
 
