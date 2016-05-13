@@ -28,9 +28,21 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
 
         $this->_nicename = __( 'Terms List', 'ninja-forms' );
 
+        add_action( 'admin_init', array( $this, 'init_settings' ) );
+
         add_filter( 'ninja_forms_localize_field_' . $this->_type, array( $this, 'add_term_options' ) );
         add_filter( 'ninja_forms_localize_field_' . $this->_type . '_preview', array( $this, 'add_term_options' ) );
 
+        $this->_settings[ 'options' ][ 'group' ] = '';
+    }
+
+    public function process( $field, $data )
+    {
+        return $data;
+    }
+
+    public function init_settings()
+    {
         $term_settings = array();
         $taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
         foreach( $taxonomies as $name => $taxonomy ){
@@ -80,13 +92,6 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
             'group' => 'primary',
             'settings' => $term_settings
         );
-
-        $this->_settings[ 'options' ][ 'group' ] = '';
-    }
-
-    public function process( $field, $data )
-    {
-        return $data;
     }
 
     public function add_term_options( $field )
