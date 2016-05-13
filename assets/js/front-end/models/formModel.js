@@ -5,7 +5,7 @@ define( [], function() {
 			afterForm: '',
 			beforeFields: '',
 			afterFields: '',
-			wrapper_class: '',
+			container_class: '',
 			element_class: ''
 		},
 
