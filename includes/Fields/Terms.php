@@ -79,7 +79,8 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
                     'width' => 'one-third',
                     'deps' => array(
                         'taxonomy' => $name
-                    )
+                    ),
+                    'value' => 1
                 );
             }
         }
