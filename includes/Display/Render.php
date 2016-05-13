@@ -129,6 +129,10 @@ final class NF_Display_Render
                     if (is_numeric($setting)) $settings[$key] = floatval($setting);
                 }
 
+                if( ! isset( $settings[ 'label_pos' ] ) || 'default' == $settings[ 'label_pos' ] ){
+                    $settings[ 'label_pos' ] = $form->get_setting( 'default_label_pos' );
+                }
+
                 $settings[ 'parentType' ] = $field_class->get_parent_type();
 
                 if( 'list' == $settings[ 'parentType' ] && isset( $settings[ 'options' ] ) && is_array( $settings[ 'options' ] ) ){
@@ -265,6 +269,12 @@ final class NF_Display_Render
 
                 foreach ($field['settings'] as $key => $setting) {
                     if (is_numeric($setting)) $field['settings'][$key] = floatval($setting);
+                }
+
+                if( ! isset( $field['settings'][ 'label_pos' ] ) || 'default' == $field['settings'][ 'label_pos' ] ){
+                    if( isset( $form[ 'settings' ][ 'default_label_pos' ] ) ) {
+                        $field['settings'][ 'label_pos' ] = $form[ 'settings' ][ 'default_label_pos' ];
+                    }
                 }
 
                 $field_class = Ninja_Forms()->fields[$field_type];
