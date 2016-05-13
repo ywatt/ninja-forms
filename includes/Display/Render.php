@@ -129,7 +129,7 @@ final class NF_Display_Render
                     if (is_numeric($setting)) $settings[$key] = floatval($setting);
                 }
 
-                if( 'default' == $settings[ 'label_pos' ] ){
+                if( ! isset( $settings[ 'label_pos' ] ) || 'default' == $settings[ 'label_pos' ] ){
                     $settings[ 'label_pos' ] = $form->get_setting( 'default_label_pos' );
                 }
 
@@ -271,7 +271,7 @@ final class NF_Display_Render
                     if (is_numeric($setting)) $field['settings'][$key] = floatval($setting);
                 }
 
-                if( isset( $field['settings'][ 'label_pos' ] ) && 'default' == $field['settings'][ 'label_pos' ] ){
+                if( ! isset( $field['settings'][ 'label_pos' ] ) || 'default' == $field['settings'][ 'label_pos' ] ){
                     if( isset( $form[ 'settings' ][ 'default_label_pos' ] ) ) {
                         $field['settings'][ 'label_pos' ] = $form[ 'settings' ][ 'default_label_pos' ];
                     }
