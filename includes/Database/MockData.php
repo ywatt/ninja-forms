@@ -607,7 +607,7 @@ final class NF_Database_MockData
 
             $settings[ 'order' ] = $order;
 
-            $settings[ 'label_pos' ] = 'above';
+            $settings[ 'label_pos' ] = 'default';
 
             $field->update_settings($settings)->save();
 
