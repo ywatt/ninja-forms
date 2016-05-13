@@ -80,7 +80,6 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
                     'deps' => array(
                         'taxonomy' => $name
                     ),
-                    'value' => 1
                 );
             }
         }
