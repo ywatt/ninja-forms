@@ -25,6 +25,10 @@
   .nf-fields input[type="radio"].ninja-forms-field,
   .nf-fields input[type="checkbox"].ninja-forms-field {
     height: auto; }
+  .nf-fields .listradio-wrap li,
+  .nf-fields .listcheckbox-wrap li {
+    margin-bottom: 14px;
+    line-height: 0; }
   .nf-fields .nf-product-field.ninja-forms-field {
     background: transparent;
     border: 0;
@@ -43,7 +47,8 @@
   .nf-fields .label-above > label,
   .nf-fields .label-below > label,
   .nf-fields .label-hidden > label {
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    padding: 0; }
   .nf-fields .label-below > label {
     margin-bottom: 0;
     margin-top: 10px; }
@@ -69,6 +74,9 @@
   .nf-fields .label-left > input[type=radio],
   .nf-fields .label-left input[type=checkbox] {
     margin-left: 1%; }
+  .nf-fields .nf-input-limit {
+    font-size: 12px;
+    margin-top: 5px; }
 
 /* Column Classes
     Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css
@@ -260,6 +268,12 @@
   bottom: 0;
   right: -37px; }
 
+.nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
+  bottom: 2px; }
+
+.nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+  bottom: 2px; }
+
 .nf-fields .listradio-wrap input[type="radio"] {
   display: none; }
   .nf-fields .listradio-wrap input[type="radio"] + label {
@@ -268,22 +282,24 @@
     .nf-fields .listradio-wrap input[type="radio"] + label::after {
       background: #f7f7f7;
       border: 2px solid #eaeaea;
+      border-radius: 50%;
       content: "";
       width: 18px;
       height: 18px;
       position: absolute;
-      left: -28px;
-      bottom: 0; }
+      left: -30px;
+      bottom: 2px; }
   .nf-fields .listradio-wrap input[type="radio"].nf-checked + label::after {
-    border-color: #999; }
+    border-color: #3366CC; }
   .nf-fields .listradio-wrap input[type="radio"].nf-checked + label::before {
-    color: #3366CC;
-    content: "\f00c";
-    font-family: FontAwesome;
-    font-size: 24px;
+    background: #3366CC;
+    border-radius: 50%;
+    content: "";
+    height: 10px;
+    width: 10px;
     position: absolute;
-    left: -30px;
-    bottom: 0;
+    left: -26px;
+    bottom: 6px;
     z-index: 2; }
 
 input[type=checkbox].nf-toggle {
@@ -338,9 +354,6 @@ input[type=checkbox].nf-toggle {
     margin-left: 22px;
     margin-top: 20px; }
 
-.field-wrap > label {
-  font-weight: bold; }
-
 .nf-fields input:not([type='button']),
 .nf-fields textarea,
 .nf-fields .list-select-wrap > div {
@@ -367,6 +380,32 @@ input[type=checkbox].nf-toggle {
   border: 0;
   box-shadow: none;
   outline: none; }
+
+.nf-fields .list-select-wrap div::after {
+  color: #999; }
+
+.nf-fields .listradio-wrap input[type="radio"] + label::after {
+  background: #f7f7f7;
+  border: 2px solid #eaeaea; }
+
+.nf-fields .listradio-wrap input[type="radio"].nf-checked + label::after {
+  border-color: #333; }
+
+.nf-fields .listradio-wrap input[type="radio"].nf-checked + label::before {
+  background: #333; }
+
+.nf-fields .checkbox-wrap input[type="checkbox"] + label::after,
+.nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
+  background: #f7f7f7;
+  border: 2px solid #eaeaea; }
+
+.nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::after,
+.nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::after {
+  border-color: #999; }
+
+.nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::before,
+.nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+  color: #333; }
 
 .nf-error {
   position: relative; }

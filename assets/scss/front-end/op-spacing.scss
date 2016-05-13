@@ -28,6 +28,13 @@
     input[type="checkbox"].ninja-forms-field  {
         height: auto;
     }
+    .listradio-wrap,
+    .listcheckbox-wrap {
+        li {
+            margin-bottom: 14px;
+            line-height: 0;
+        }
+    }
     .nf-product-field {
         &.ninja-forms-field {
             background: transparent;
@@ -61,6 +68,7 @@
     .label-hidden {
         > label {
             margin-bottom: 10px;
+            padding: 0;
         }
     }
     .label-below {
@@ -104,5 +112,9 @@
         // ul {
         //     margin-left: 15px;
         // }
+    }
+    .nf-input-limit {
+        font-size: 12px;
+        margin-top: 5px;
     }
 }

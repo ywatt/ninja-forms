@@ -533,6 +533,16 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-hidden button {
   width: auto; }
 
+.nf-fields .label-right.checkbox-wrap label, .nf-fields .label-right.listcheckbox-wrap label, .nf-fields .label-right.listradio-wrap label,
+.nf-fields .label-left.checkbox-wrap label,
+.nf-fields .label-left.listcheckbox-wrap label,
+.nf-fields .label-left.listradio-wrap label {
+  padding: 0; }
+
+.nf-fields .label-right .ninja-forms-field,
+.nf-fields .label-left .ninja-forms-field {
+  display: inline-block; }
+
 .nf-fields .label-right > label {
   display: inline-block;
   margin-left: 1%;

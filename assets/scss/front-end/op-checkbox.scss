@@ -117,4 +117,20 @@
             }
         }
     }
+    .listcheckbox-wrap {
+        input[type="checkbox"] {
+            + label {
+                &::after {
+                    bottom: 2px;
+                }
+            }
+            &.nf-checked {
+                + label {
+                    &::before {
+                        bottom: 2px;
+                    }
+                }
+            }
+        }
+    }
 }

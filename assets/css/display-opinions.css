@@ -25,6 +25,10 @@
   .nf-fields input[type="radio"].ninja-forms-field,
   .nf-fields input[type="checkbox"].ninja-forms-field {
     height: auto; }
+  .nf-fields .listradio-wrap li,
+  .nf-fields .listcheckbox-wrap li {
+    margin-bottom: 14px;
+    line-height: 0; }
   .nf-fields .nf-product-field.ninja-forms-field {
     background: transparent;
     border: 0;
@@ -43,7 +47,8 @@
   .nf-fields .label-above > label,
   .nf-fields .label-below > label,
   .nf-fields .label-hidden > label {
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    padding: 0; }
   .nf-fields .label-below > label {
     margin-bottom: 0;
     margin-top: 10px; }
@@ -69,6 +74,9 @@
   .nf-fields .label-left > input[type=radio],
   .nf-fields .label-left input[type=checkbox] {
     margin-left: 1%; }
+  .nf-fields .nf-input-limit {
+    font-size: 12px;
+    margin-top: 5px; }
 
 /* Column Classes
     Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css

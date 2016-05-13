@@ -8,29 +8,31 @@
                 &::after {
                     background: #f7f7f7;
                     border: 2px solid #eaeaea;
+                    border-radius: 50%;
                     content: "";
                     width: 18px;
                     height: 18px;
                     position: absolute;
-                    left: -28px;
-                    bottom: 0;
+                    left: -30px;
+                    bottom: 2px;
                 }
             }
             &.nf-checked {
                 + label {
                     &::after {
-                        border-color: #999;
+                        border-color: #3366CC;
                     }
                 }
                 + label {
                     &::before {
-                        color: #3366CC;
-                        content: "\f00c";
-                        font-family: FontAwesome;
-                        font-size: 24px;
+                        background: #3366CC;
+                        border-radius: 50%;
+                        content: "";
+                        height: 10px;
+                        width: 10px;
                         position: absolute;
-                        left: -30px;
-                        bottom: 0;
+                        left: -26px;
+                        bottom: 6px;
                         z-index: 2;
                     }
                 }

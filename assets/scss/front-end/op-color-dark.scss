@@ -2,21 +2,22 @@
     input:not([type='button']),
     textarea,
     .list-select-wrap > div {
-        background: #f7f7f7;
-        border: 1px solid #eaeaea;
+        background: #333;
+        border: 1px solid #666;
         border-radius: 0;
         box-shadow: none;
+        color: #ccc;
         &:hover,
         &:focus {
-            background: #fff;
-            border-color: #ccc;
+            background: #666;
+            border-color: #999;
             //box-shadow: -3px 3px 10px #ccc;
             outline: none;
         }
     }
     .list-select-wrap:hover > div {
-        background: #fff;
-        border-color: #ccc;
+        background: #666;
+        border-color: #999;
         //box-shadow: -3px 3px 10px #ccc;
         outline: none;
     }
@@ -33,9 +34,19 @@
 
 .nf-fields {
     .list-select-wrap {
+        select {
+            color: #ccc;
+        }
         div {
             &::after {
-                color: #999;
+                color: #666;
+            }
+        }
+        &:hover {
+            div {
+                &::after {
+                    color: #999;
+                }
             }
         }
     }
@@ -46,19 +57,19 @@
         input[type="radio"] {
             + label {
                 &::after {
-                    background: #f7f7f7;
-                    border: 2px solid #eaeaea;
+                    background: #333;
+                    border: 2px solid #666;
                 }
             }
             &.nf-checked {
                 + label {
                     &::after {
-                        border-color: #333;
+                        border-color: #fff;
                     }
                 }
                 + label {
                     &::before {
-                        background: #333;
+                        background: #fff;
                     }
                 }
             }
@@ -72,8 +83,8 @@
         input[type="checkbox"] {
             + label {
                 &::after {
-                    background: #f7f7f7;
-                    border: 2px solid #eaeaea;
+                    background: #333;
+                    border: 2px solid #666;
                 }
             }
             &.nf-checked {
@@ -84,7 +95,7 @@
                 }
                 + label {
                     &::before {
-                        color: #333;
+                        color: #fff;
                     }
                 }
             }
