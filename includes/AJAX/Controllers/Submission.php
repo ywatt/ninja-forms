@@ -4,6 +4,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 {
     protected $_form_data = array();
 
+    protected $_preview_data = array();
+
     protected $_form_id = '';
 
     public function __construct()
@@ -41,6 +43,15 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         }
 
         $this->_form_id = $this->_data[ 'form_id' ] = $this->_form_data['id'];
+
+        if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ){
+            $this->_preview_data = get_user_option( 'nf_form_preview_' . $this->_form_id );
+
+            if( ! $this->_preview_data ){
+                $this->_errors[ 'preview' ] = __( 'Preview does not exist.', 'ninja-forms' );
+                $this->_respond();
+            }
+        }
 
         $this->_data['settings'] = $this->_form_data['settings'];
 
@@ -115,9 +126,15 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     protected function validate_field( $field, $data )
     {
-        $field_model = Ninja_Forms()->form()->field( $field['id'] )->get();
+        if( $this->_preview_data ) {
+            if( ! isset( $this->_preview_data[ 'fields' ][ $field[ 'id' ] ][ 'settings' ] ) ) return;
+            $settings = $this->_preview_data[ 'fields' ][ $field[ 'id' ] ][ 'settings' ];
+        } else {
+            $field_model = Ninja_Forms()->form()->field($field['id'])->get();
+            $settings = $field_model->get_settings();
+        }
 
-        $field = array_merge( $field, $field_model->get_settings() );
+        $field = array_merge($field, $settings );
 
         $field_class = Ninja_Forms()->fields[ $field['type'] ];
 
@@ -138,11 +155,18 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     protected function process_field( $field, $data )
     {
-        $field_model = Ninja_Forms()->form()->field( $field['id'] )->get();
+        if( $this->_preview_data ) {
+            if( ! isset( $this->_preview_data[ 'fields' ][ $field[ 'id' ] ][ 'settings' ] ) ) return;
+            $settings = $this->_preview_data[ 'fields' ][ $field[ 'id' ] ][ 'settings' ];
+        } else {
+            $field_model = Ninja_Forms()->form()->field($field['id'])->get();
+            $settings = $field_model->get_settings();
+        }
 
-        $field = array_merge( $field, $field_model->get_settings() );
+        $field = array_merge($field, $settings );
 
         $field_class = Ninja_Forms()->fields[ $field['type'] ];
+
 
         return $field_class->process( $field, $data );
     }
