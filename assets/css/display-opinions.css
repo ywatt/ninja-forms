@@ -1,19 +1,34 @@
 /*
 
 ---------------------------------------------*/
-.field-wrap,
-#ninja_forms_required_items {
-  margin-bottom: 20px; }
-
 .nf-fields {
   padding: 5px;
   max-width: 1000px;
   margin: 0 auto; }
-  .nf-fields .ninja-forms-field {
+  .nf-fields label {
+    font-size: 18px;
+    line-height: 20px; }
+  .nf-fields .ninja-forms-field,
+  .nf-fields .listselect-wrap > div {
     font-size: 16px;
+    line-height: 20px;
+    margin: 0;
     padding: 16px; }
+  .nf-fields input.ninja-forms-field,
+  .nf-fields select.ninja-forms-field,
+  .nf-fields .listselect-wrap > div {
+    height: 50px; }
+  .nf-fields textarea.ninja-forms-field {
+    height: 200px; }
   .nf-fields hr.ninja-forms-field {
     padding: 0; }
+  .nf-fields input[type="radio"].ninja-forms-field,
+  .nf-fields input[type="checkbox"].ninja-forms-field {
+    height: auto; }
+  .nf-fields .listradio-wrap li,
+  .nf-fields .listcheckbox-wrap li {
+    margin-bottom: 14px;
+    line-height: 0; }
   .nf-fields .nf-product-field.ninja-forms-field {
     background: transparent;
     border: 0;
@@ -24,12 +39,6 @@
     font-size: 16px;
     padding: 5px;
     width: 80px; }
-  .nf-fields textarea {
-    height: 200px; }
-  .nf-fields .listselect-wrap select,
-  .nf-fields .liststate-wrap select,
-  .nf-fields .listcountry-wrap select {
-    height: 48px; }
   .nf-fields .nf-static {
     background: transparent;
     border: 0;
@@ -38,33 +47,36 @@
   .nf-fields .label-above > label,
   .nf-fields .label-below > label,
   .nf-fields .label-hidden > label {
-    margin-bottom: 5px; }
+    margin-bottom: 10px;
+    padding: 0; }
   .nf-fields .label-below > label {
     margin-bottom: 0;
-    margin-top: 5px; }
+    margin-top: 10px; }
   .nf-fields .label-right > label {
-    margin-bottom: 0; }
+    margin: 0; }
   .nf-fields .label-right > input,
   .nf-fields .label-right textarea,
   .nf-fields .label-right select,
   .nf-fields .label-right .pikaday__container {
-    margin-right: 10px; }
+    margin-right: 1%; }
   .nf-fields .label-right > input[type=radio],
   .nf-fields .label-right input[type=checkbox] {
-    margin-right: 10px; }
+    margin-right: 1%; }
   .nf-fields .label-right ul {
-    margin-right: 15px; }
+    margin-right: 1%; }
   .nf-fields .label-left > label {
-    margin-bottom: 0;
-    margin-top: 5px; }
+    margin: 0; }
   .nf-fields .label-left > input,
   .nf-fields .label-left textarea,
   .nf-fields .label-left select,
   .nf-fields .label-left .pikaday__container {
-    margin-left: 10px; }
+    margin-left: 1%; }
   .nf-fields .label-left > input[type=radio],
   .nf-fields .label-left input[type=checkbox] {
-    margin-left: 10px; }
+    margin-left: 1%; }
+  .nf-fields .nf-input-limit {
+    font-size: 12px;
+    margin-top: 5px; }
 
 /* Column Classes
     Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css

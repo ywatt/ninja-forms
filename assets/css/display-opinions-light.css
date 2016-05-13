@@ -1,19 +1,34 @@
 /*
 
 ---------------------------------------------*/
-.field-wrap,
-#ninja_forms_required_items {
-  margin-bottom: 20px; }
-
 .nf-fields {
   padding: 5px;
   max-width: 1000px;
   margin: 0 auto; }
-  .nf-fields .ninja-forms-field {
+  .nf-fields label {
+    font-size: 18px;
+    line-height: 20px; }
+  .nf-fields .ninja-forms-field,
+  .nf-fields .listselect-wrap > div {
     font-size: 16px;
+    line-height: 20px;
+    margin: 0;
     padding: 16px; }
+  .nf-fields input.ninja-forms-field,
+  .nf-fields select.ninja-forms-field,
+  .nf-fields .listselect-wrap > div {
+    height: 50px; }
+  .nf-fields textarea.ninja-forms-field {
+    height: 200px; }
   .nf-fields hr.ninja-forms-field {
     padding: 0; }
+  .nf-fields input[type="radio"].ninja-forms-field,
+  .nf-fields input[type="checkbox"].ninja-forms-field {
+    height: auto; }
+  .nf-fields .listradio-wrap li,
+  .nf-fields .listcheckbox-wrap li {
+    margin-bottom: 14px;
+    line-height: 0; }
   .nf-fields .nf-product-field.ninja-forms-field {
     background: transparent;
     border: 0;
@@ -24,12 +39,6 @@
     font-size: 16px;
     padding: 5px;
     width: 80px; }
-  .nf-fields textarea {
-    height: 200px; }
-  .nf-fields .listselect-wrap select,
-  .nf-fields .liststate-wrap select,
-  .nf-fields .listcountry-wrap select {
-    height: 48px; }
   .nf-fields .nf-static {
     background: transparent;
     border: 0;
@@ -38,33 +47,36 @@
   .nf-fields .label-above > label,
   .nf-fields .label-below > label,
   .nf-fields .label-hidden > label {
-    margin-bottom: 5px; }
+    margin-bottom: 10px;
+    padding: 0; }
   .nf-fields .label-below > label {
     margin-bottom: 0;
-    margin-top: 5px; }
+    margin-top: 10px; }
   .nf-fields .label-right > label {
-    margin-bottom: 0; }
+    margin: 0; }
   .nf-fields .label-right > input,
   .nf-fields .label-right textarea,
   .nf-fields .label-right select,
   .nf-fields .label-right .pikaday__container {
-    margin-right: 10px; }
+    margin-right: 1%; }
   .nf-fields .label-right > input[type=radio],
   .nf-fields .label-right input[type=checkbox] {
-    margin-right: 10px; }
+    margin-right: 1%; }
   .nf-fields .label-right ul {
-    margin-right: 15px; }
+    margin-right: 1%; }
   .nf-fields .label-left > label {
-    margin-bottom: 0;
-    margin-top: 5px; }
+    margin: 0; }
   .nf-fields .label-left > input,
   .nf-fields .label-left textarea,
   .nf-fields .label-left select,
   .nf-fields .label-left .pikaday__container {
-    margin-left: 10px; }
+    margin-left: 1%; }
   .nf-fields .label-left > input[type=radio],
   .nf-fields .label-left input[type=checkbox] {
-    margin-left: 10px; }
+    margin-left: 1%; }
+  .nf-fields .nf-input-limit {
+    font-size: 12px;
+    margin-top: 5px; }
 
 /* Column Classes
     Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css
@@ -138,6 +150,158 @@
   clear: both;
   margin-left: 0; }
 
+.nf-fields .list-select-wrap {
+  position: relative; }
+  .nf-fields .list-select-wrap div {
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    line-height: 16px;
+    margin: 0;
+    padding: 16px;
+    height: 50px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1; }
+    .nf-fields .list-select-wrap div::after {
+      content: "\f078";
+      color: #999;
+      font-family: FontAwesome;
+      font-size: 20px;
+      position: absolute;
+      right: 10px; }
+  .nf-fields .list-select-wrap.label-right div {
+    width: 59%; }
+  .nf-fields .list-select-wrap.label-below div {
+    top: 0;
+    bottom: auto; }
+  .nf-fields .list-select-wrap.label-left div {
+    width: 59%;
+    left: 41%;
+    right: 40px; }
+  .nf-fields .list-select-wrap select {
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    position: relative;
+    z-index: 2; }
+
+.nf-fields .listmultiselect-wrap select {
+  -webkit-appearance: normal;
+     -moz-appearance: normal;
+          appearance: normal; }
+
+.nf-fields .checkbox-wrap input[type="checkbox"],
+.nf-fields .listcheckbox-wrap input[type="checkbox"] {
+  display: none; }
+  .nf-fields .checkbox-wrap input[type="checkbox"] + label,
+  .nf-fields .listcheckbox-wrap input[type="checkbox"] + label {
+    position: relative;
+    margin-left: 30px; }
+    .nf-fields .checkbox-wrap input[type="checkbox"] + label::after,
+    .nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
+      background: #f7f7f7;
+      border: 2px solid #eaeaea;
+      content: "";
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      left: -28px;
+      bottom: 0; }
+  .nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::after,
+  .nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::after {
+    border-color: #999; }
+  .nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::before,
+  .nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+    color: #3366CC;
+    content: "\f00c";
+    font-family: FontAwesome;
+    font-size: 24px;
+    position: absolute;
+    left: -30px;
+    bottom: 0;
+    z-index: 2; }
+
+.nf-fields div.checkbox-wrap.label-above label {
+  height: 50px;
+  display: block; }
+
+.nf-fields div.checkbox-wrap.label-above input[type="checkbox"] + label {
+  margin-left: 0; }
+  .nf-fields div.checkbox-wrap.label-above input[type="checkbox"] + label::after {
+    left: 0;
+    bottom: 0; }
+
+.nf-fields div.checkbox-wrap.label-above input[type="checkbox"].nf-checked + label::before {
+  left: -2px;
+  bottom: 0; }
+
+.nf-fields div.checkbox-wrap.label-below label {
+  height: 50px;
+  display: table-cell;
+  vertical-align: bottom; }
+
+.nf-fields div.checkbox-wrap.label-below input[type="checkbox"] + label {
+  margin-left: 0; }
+  .nf-fields div.checkbox-wrap.label-below input[type="checkbox"] + label::after {
+    left: 0;
+    bottom: auto;
+    top: 0; }
+
+.nf-fields div.checkbox-wrap.label-below input[type="checkbox"].nf-checked + label::before {
+  left: -2px;
+  bottom: auto;
+  top: -2px; }
+
+.nf-fields div.checkbox-wrap.label-left input[type="checkbox"] + label {
+  margin-left: 0; }
+  .nf-fields div.checkbox-wrap.label-left input[type="checkbox"] + label::after {
+    left: auto;
+    bottom: 0;
+    right: -32px; }
+
+.nf-fields div.checkbox-wrap.label-left input[type="checkbox"].nf-checked + label::before {
+  left: auto;
+  bottom: 0;
+  right: -37px; }
+
+.nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
+  bottom: 2px; }
+
+.nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+  bottom: 2px; }
+
+.nf-fields .listradio-wrap input[type="radio"] {
+  display: none; }
+  .nf-fields .listradio-wrap input[type="radio"] + label {
+    position: relative;
+    margin-left: 30px; }
+    .nf-fields .listradio-wrap input[type="radio"] + label::after {
+      background: #f7f7f7;
+      border: 2px solid #eaeaea;
+      border-radius: 50%;
+      content: "";
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      left: -30px;
+      bottom: 2px; }
+  .nf-fields .listradio-wrap input[type="radio"].nf-checked + label::after {
+    border-color: #3366CC; }
+  .nf-fields .listradio-wrap input[type="radio"].nf-checked + label::before {
+    background: #3366CC;
+    border-radius: 50%;
+    content: "";
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    left: -26px;
+    bottom: 6px;
+    z-index: 2; }
+
 input[type=checkbox].nf-toggle {
   background: transparent;
   border: 0;
@@ -190,31 +354,109 @@ input[type=checkbox].nf-toggle {
     margin-left: 22px;
     margin-top: 20px; }
 
-.field-wrap > label {
-  font-weight: bold; }
-
-.ninja-forms-field {
+.nf-fields input:not([type='button']),
+.nf-fields textarea,
+.nf-fields .list-select-wrap > div {
   background: #f7f7f7;
-  border: 1px solid #eaeaea; }
-  .ninja-forms-field:focus {
+  border: 1px solid #eaeaea;
+  border-radius: 0;
+  box-shadow: none; }
+  .nf-fields input:not([type='button']):hover, .nf-fields input:not([type='button']):focus,
+  .nf-fields textarea:hover,
+  .nf-fields textarea:focus,
+  .nf-fields .list-select-wrap > div:hover,
+  .nf-fields .list-select-wrap > div:focus {
     background: #fff;
-    border-color: #c1c1c1;
+    border-color: #ccc;
     outline: none; }
 
-.nf-error .ninja-forms-field {
-  border-color: red; }
+.nf-fields .list-select-wrap:hover > div {
+  background: #fff;
+  border-color: #ccc;
+  outline: none; }
 
-.nf-error .nf-error-msg {
-  color: red; }
+.nf-fields select.ninja-forms-field:hover, .nf-fields select.ninja-forms-field:focus {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  outline: none; }
 
-.ninja-forms-noscript-message {
-  background: #f1f1f1;
-  border: 4px dashed #ccc;
-  color: #333;
-  display: block;
-  font-size: 20px;
-  margin: 20px 0;
-  padding: 40px;
-  text-align: center; }
+.nf-fields .list-select-wrap div::after {
+  color: #999; }
+
+.nf-fields .listradio-wrap input[type="radio"] + label::after {
+  background: #f7f7f7;
+  border: 2px solid #eaeaea; }
+
+.nf-fields .listradio-wrap input[type="radio"].nf-checked + label::after {
+  border-color: #333; }
+
+.nf-fields .listradio-wrap input[type="radio"].nf-checked + label::before {
+  background: #333; }
+
+.nf-fields .checkbox-wrap input[type="checkbox"] + label::after,
+.nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
+  background: #f7f7f7;
+  border: 2px solid #eaeaea; }
+
+.nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::after,
+.nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::after {
+  border-color: #999; }
+
+.nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::before,
+.nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+  color: #333; }
+
+.nf-error {
+  position: relative; }
+  .nf-error .ninja-forms-field {
+    border-color: #E80000 !important; }
+  .nf-error.field-wrap::after {
+    color: #E80000;
+    font-family: FontAwesome;
+    font-size: 30px;
+    content: "\f06a";
+    position: absolute;
+    right: 16px;
+    height: 50px;
+    line-height: 50px; }
+  .nf-error .nf-error-msg {
+    color: #E80000; }
+
+.nf-pass {
+  position: relative; }
+  .nf-pass .ninja-forms-field {
+    border-color: green !important; }
+  .nf-pass.field-wrap::after {
+    color: green;
+    font-family: FontAwesome;
+    font-size: 30px;
+    content: "\f058";
+    position: absolute;
+    right: 16px;
+    height: 50px;
+    line-height: 50px; }
+
+.nf-field-submit-error {
+  border: 1px solid;
+  margin: 10px 0px;
+  padding: 15px 15px 15px 50px;
+  position: relative;
+  z-index: 1; }
+  .nf-field-submit-error::after {
+    content: "\f06a";
+    font-family: FontAwesome;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    height: 50px;
+    line-height: 50px;
+    z-index: 2; }
+
+.nf-field-submit-error {
+  border-color: #D8000C;
+  color: #D8000C;
+  background-color: #FFBABA; }
 
 /*# sourceMappingURL=display-opinions-light.css.map */

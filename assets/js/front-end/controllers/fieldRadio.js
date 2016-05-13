@@ -4,6 +4,8 @@ define([], function() {
 			this.listenTo( nfRadio.channel( 'listradio' ), 'change:modelValue', this.changeModelValue );
 			this.listenTo( nfRadio.channel( 'listradio' ), 'init:model', this.register );
 			nfRadio.channel( 'listradio' ).reply( 'get:calcValue', this.getCalcValue, this );
+			
+			this.listenTo( nfRadio.channel( 'listradio' ), 'change:field', this.updateCheckedClass, this );
 		},
 
 		register: function( model ) {
@@ -44,7 +46,7 @@ define([], function() {
 				var valueFound = false;
 			}
 			
-			_.each( this.options, function( option ) {
+			_.each( this.options, function( option, index ) {
 				if ( option.value == that.value ) {
 					valueFound = true;
 				}
@@ -52,6 +54,7 @@ define([], function() {
 				option.fieldID = that.id;
 				option.classes = that.classes;
 				option.currentValue = that.value;
+				option.index = index;
 				var template = _.template( jQuery( '#nf-tmpl-field-listradio-option' ).html() );
 				html += template( option );
 			} );
@@ -107,6 +110,12 @@ define([], function() {
 				var calc_value = selected.calc;
 			}
 			return calc_value;
+		},
+
+		updateCheckedClass: function( el, model ) {
+			var name = jQuery( el ).attr( 'name' );
+			jQuery( '[name="' + name + '"]' ).removeClass( 'nf-checked' );
+			jQuery( el ).addClass( 'nf-checked' );
 		}
 
 	});

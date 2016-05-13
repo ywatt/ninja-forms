@@ -163,6 +163,7 @@ final class NF_Database_MockData
             ->update_setting( 'label', 'Submit')
             ->update_setting( 'processing_label', 'Processing' )
             ->update_setting( 'order', 5 )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         /*
@@ -310,6 +311,7 @@ final class NF_Database_MockData
                 'type'			=> 'submit',
                 'label'			=> 'Send',
                 'order'         => 6,
+                'key'           => 'submit',
             )
         );
 
@@ -345,6 +347,11 @@ final class NF_Database_MockData
          */
 
         $fields = array(
+            array(
+                'type'          => 'html',
+                'label'         => 'Textbox',
+                'key'           => 'textbox',
+            ),
             array(
                 'type' 			=> 'textbox',
                 'label'			=> 'Textbox',
@@ -472,6 +479,7 @@ final class NF_Database_MockData
         $submit->update_setting( 'label', 'Submit')
                 ->update_setting( 'type', 'submit' )
                 ->update_setting( 'order', $order)
+                ->update_setting( 'key', 'submit' )
                 ->save();
 
         $action = Ninja_Forms()->form( $form_id )->action()->get();
@@ -502,29 +510,18 @@ final class NF_Database_MockData
                 'key'           => 'textbox',
             ),
             array(
-                'type' 			=> 'firstname',
-                'label'			=> 'First Name',
-                'key'           => 'first_name',
-            ),
-            array(
-                'type' 			=> 'lastname',
-                'label'			=> 'Last Name',
-                'key'           => 'last_name',
-            ),
-            array(
-                'type' 			=> 'hidden',
-                'label'			=> 'Hidden',
-                'label_pos' 	=> 'hidden',
-                'key'           => 'hidden',
-            ),
-            array(
-                'type' 			=> 'textarea',
-                'label'			=> 'Textarea',
+                'type'          => 'textarea',
+                'label'         => 'Textarea',
                 'key'           => 'textarea',
             ),
             array(
-                'type' 			=> 'listselect',
-                'label'			=> 'Select List',
+                'type'          => 'checkbox',
+                'label'         => 'Checkbox',
+                'key'           => 'checkbox',
+            ),
+            array(
+                'type'          => 'listselect',
+                'label'         => 'Select List',
                 'options'      => array(
                     array(
                         'label' => 'Option One',
@@ -551,8 +548,8 @@ final class NF_Database_MockData
                 'key'           => 'select_list',
             ),
             array(
-                'type' 			=> 'listradio',
-                'label'			=> 'Radio List',
+                'type'          => 'listradio',
+                'label'         => 'Radio List',
                 'options'       => array(
                     array(
                         'label' => 'Option One',
@@ -579,10 +576,21 @@ final class NF_Database_MockData
                 'key'           => 'radio_list',
             ),
             array(
-                'type' 			=> 'checkbox',
-                'label'			=> 'Checkbox',
-                'key'           => 'checkbox',
+                'type'          => 'hidden',
+                'label'         => 'Hidden',
+                'label_pos'     => 'hidden',
+                'key'           => 'hidden',
             ),
+            array(
+                'type' 			=> 'firstname',
+                'label'			=> 'First Name',
+                'key'           => 'first_name',
+            ),
+            array(
+                'type' 			=> 'lastname',
+                'label'			=> 'Last Name',
+                'key'           => 'last_name',
+            )
             // array(
             //     'type' 			=> 'button',
             //     'label'			=> 'Button',
@@ -599,7 +607,7 @@ final class NF_Database_MockData
 
             $settings[ 'order' ] = $order;
 
-            $settings[ 'label_pos' ] = 'above';
+            $settings[ 'label_pos' ] = 'default';
 
             $field->update_settings($settings)->save();
 
@@ -611,6 +619,7 @@ final class NF_Database_MockData
             ->update_setting( 'type', 'submit' )
             ->update_setting( 'order', $order)
             ->update_setting( 'process_label', 'processing' )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         $action = Ninja_Forms()->form( $form_id )->action()->get();
@@ -681,6 +690,7 @@ final class NF_Database_MockData
             ->update_setting( 'label', 'Subscribe')
             ->update_setting( 'order', 5 )
             ->update_setting( 'wrapper_class', 'one-fourth' )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
     }
@@ -745,6 +755,7 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Purchase')
             ->update_setting( 'order', 1000 )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         /*
@@ -803,6 +814,7 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Purchase')
             ->update_setting( 'order', 1000 )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         /*
@@ -903,6 +915,7 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Purchase')
             ->update_setting( 'order', 1000 )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         /*
@@ -942,6 +955,7 @@ final class NF_Database_MockData
         $field->update_setting( 'type', 'submit' )
             ->update_setting( 'label', 'Purchase')
             ->update_setting( 'order', 1000 )
+            ->update_setting( 'key', 'submit' )
             ->save();
 
         $action = Ninja_Forms()->form( $form_id )->action()->get();

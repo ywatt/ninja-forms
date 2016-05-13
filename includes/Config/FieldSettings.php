@@ -61,7 +61,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         ),
         'width' => 'one-half',
         'group' => 'primary',
-        'value' => 'above',
+        'value' => 'default',
         'help' => __( 'Select the position of your label relative to the field element itself.', 'ninja-forms' ),
 
     ),
@@ -346,10 +346,10 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'group' => 'display',
         'settings' => array(
             array(
-                'name' => 'wrapper_class',
+                'name' => 'container_class',
                 'type' => 'textbox',
                 'placeholder' => '',
-                'label' => __( 'Wrapper', 'ninja-forms' ),
+                'label' => __( 'Container', 'ninja-forms' ),
                 'width' => 'one-half',
                 'value' => '',
                 'use_merge_tags' => FALSE,

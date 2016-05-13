@@ -27,7 +27,11 @@ define( [], function() {
 		changeError: function() {
 			if ( 0 == this.model.get( 'errors' ).models.length ) {
 				this.model.removeWrapperClass( 'nf-error' );
+				this.model.removeWrapperClass( 'nf-fail' );
+				this.model.addWrapperClass( 'nf-pass' );
 			} else {
+				this.model.removeWrapperClass( 'nf-pass' );
+				this.model.addWrapperClass( 'nf-fail' );
 				this.model.addWrapperClass( 'nf-error' );
 			}
 		},
@@ -121,18 +125,12 @@ define( [], function() {
 				renderWrapClass: function() {
 					var wrapClass = 'field-wrap ' + this.type + '-wrap label-' + this.label_pos;
 
-					// if we have a wrapper_class field setting, add that to our wrap.
-					if ( 'undefined' != typeof this.wrapper_class && 0 < jQuery.trim( this.wrapper_class ).length ) {
-						wrapClass += ' ' + this.wrapper_class;
-					}
-
 					// If we have an old_classname defined, output wrap class for backward compatibility
 					if ( 'undefined' != typeof this.old_classname && 0 < jQuery.trim( this.old_classname ).length ) {
 						wrapClass += ' ' + this.old_classname + '-wrap';
 					}
 
 					return wrapClass;
-
 				},
 
 				setClasses: function() {
@@ -216,7 +214,6 @@ define( [], function() {
 		},
 
 		fieldChange: function( e ) {
-			console.log( 'change' );
 			var el = jQuery( e.currentTarget );
 			var response = nfRadio.channel( 'nfAdmin' ).request( 'change:field', el, this.model );
 		},

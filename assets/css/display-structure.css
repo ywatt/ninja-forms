@@ -10,11 +10,18 @@ Normalize Ninja Forms fields with default structure
   -ms-box-sizing: border-box;
   box-sizing: border-box; }
 
-.field-wrap::after,
-#ninja_forms_required_items::after {
-  clear: both;
-  content: "";
-  display: block; }
+.nf-field-container,
+#ninja_forms_required_items {
+  position: relative;
+  margin-bottom: 16px; }
+  .nf-field-container::after,
+  #ninja_forms_required_items::after {
+    clear: both;
+    content: "";
+    display: block; }
+  .nf-field-container.hidden,
+  #ninja_forms_required_items.hidden {
+    margin: 0; }
 
 .nf-fields input,
 .nf-fields select,
@@ -23,13 +30,19 @@ Normalize Ninja Forms fields with default structure
   height: auto;
   vertical-align: inherit; }
 
+.nf-fields textarea {
+  height: 200px; }
+
+.nf-fields .field-wrap > label {
+  font-weight: bold; }
+
 /* ---------------------------------
 RADIO & CHECKBOX LISTS
 ----------------------------------*/
 .list-radio-wrap ul, .list-radio-wrap li,
 .list-checkbox-wrap ul,
 .list-checkbox-wrap li {
-  list-style: none;
+  list-style: none !important;
   margin: 0;
   padding: 0; }
   .list-radio-wrap ul input, .list-radio-wrap li input,
@@ -51,8 +64,37 @@ STAR RATING
 HONEYPOT
 ----------------------------------*/
 .nf-hp {
-  visibility: hidden;
-  position: absolute; }
+  visibility: hidden; }
+
+/* ---------------------------------
+SELECT LIST
+----------------------------------*/
+.list-select-wrap div {
+  display: none; }
+
+/* ---------------------------------
+COLORS
+As minimal as possible
+----------------------------------*/
+.ninja-forms-req-symbol,
+.nf-error-msg {
+  color: #E80000; }
+
+.nf-error .ninja-forms-field {
+  border: 1px solid #E80000; }
+
+.nf-field-submit-error {
+  padding: 15px; }
+
+.ninja-forms-noscript-message {
+  background: #f1f1f1;
+  border: 4px dashed #ccc;
+  color: #333;
+  display: block;
+  font-size: 20px;
+  margin: 20px 0;
+  padding: 40px;
+  text-align: center; }
 
 .note-popover {
   display: none !important; }
@@ -465,16 +507,19 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-above select,
 .nf-fields .label-above .pikaday__container,
 .nf-fields .label-above .pikaday__display,
+.nf-fields .label-above .listselect-wrap > div,
 .nf-fields .label-below > input,
 .nf-fields .label-below textarea,
 .nf-fields .label-below select,
 .nf-fields .label-below .pikaday__container,
 .nf-fields .label-below .pikaday__display,
+.nf-fields .label-below .listselect-wrap > div,
 .nf-fields .label-hidden > input,
 .nf-fields .label-hidden textarea,
 .nf-fields .label-hidden select,
 .nf-fields .label-hidden .pikaday__container,
-.nf-fields .label-hidden .pikaday__display {
+.nf-fields .label-hidden .pikaday__display,
+.nf-fields .label-hidden .listselect-wrap > div {
   width: 100%; }
 
 .nf-fields .label-above input[type="submit"],
@@ -488,52 +533,72 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-hidden button {
   width: auto; }
 
-.nf-fields .label-right {
-  vertical-align: middle; }
-  .nf-fields .label-right > label {
-    display: inline-block; }
-  .nf-fields .label-right > input,
-  .nf-fields .label-right textarea,
-  .nf-fields .label-right select,
-  .nf-fields .label-right .pikaday__container {
-    width: 50%; }
-  .nf-fields .label-right .pikaday__display {
-    width: 100%; }
-  .nf-fields .label-right > input[type=radio],
-  .nf-fields .label-right input[type=checkbox] {
-    width: auto; }
-  .nf-fields .label-right.textarea-wrap {
-    vertical-align: top; }
-  .nf-fields .label-right ul {
-    float: left;
-    width: 50%; }
+.nf-fields .label-right.checkbox-wrap label, .nf-fields .label-right.listcheckbox-wrap label, .nf-fields .label-right.listradio-wrap label,
+.nf-fields .label-left.checkbox-wrap label,
+.nf-fields .label-left.listcheckbox-wrap label,
+.nf-fields .label-left.listradio-wrap label {
+  padding: 0; }
 
-.nf-fields .label-left {
-  vertical-align: middle; }
-  .nf-fields .label-left > label {
-    display: inline-block;
-    float: left;
-    line-height: 16px;
-    padding: 16px;
-    text-align: right;
-    width: 49%; }
-  .nf-fields .label-left > input,
-  .nf-fields .label-left textarea,
-  .nf-fields .label-left select,
-  .nf-fields .label-left .pikaday__container {
+.nf-fields .label-right .ninja-forms-field,
+.nf-fields .label-left .ninja-forms-field {
+  display: inline-block; }
+
+.nf-fields .label-right > label {
+  display: inline-block;
+  margin-left: 1%;
+  width: 36%; }
+
+.nf-fields .label-right > input,
+.nf-fields .label-right textarea,
+.nf-fields .label-right select,
+.nf-fields .label-right .pikaday__container {
+  width: 59%; }
+
+.nf-fields .label-right .pikaday__display {
+  width: 100%; }
+
+.nf-fields .label-right > input[type=radio],
+.nf-fields .label-right input[type=checkbox] {
+  width: auto; }
+
+.nf-fields .label-right.textarea-wrap {
+  vertical-align: top; }
+
+.nf-fields .label-right ul {
+  float: left;
+  width: 59%; }
+  .nf-fields .label-right ul + label {
+    margin-left: 1.2%; }
+  .nf-fields .label-right ul input {
     float: right;
-    width: 49%; }
-  .nf-fields .label-left .pikaday__display {
-    width: 100%; }
-  .nf-fields .label-left > input[type=radio],
-  .nf-fields .label-left > input[type=checkbox] {
-    float: none;
-    width: auto;
-    margin-left: 10px; }
-  .nf-fields .label-left.textarea-wrap {
-    vertical-align: top; }
-  .nf-fields .label-left ul {
-    float: right;
-    width: 49%; }
+    margin-top: 5px; }
+
+.nf-fields .label-left > label {
+  display: inline-block;
+  padding-right: 16px;
+  text-align: right;
+  width: 39%; }
+
+.nf-fields .label-left > input,
+.nf-fields .label-left textarea,
+.nf-fields .label-left select,
+.nf-fields .label-left .pikaday__container {
+  width: 59%; }
+
+.nf-fields .label-left .pikaday__display {
+  width: 100%; }
+
+.nf-fields .label-left > input[type=radio],
+.nf-fields .label-left > input[type=checkbox] {
+  float: none;
+  width: auto;
+  margin-left: 1%; }
+
+.nf-fields .label-left.textarea-wrap {
+  vertical-align: top; }
+
+.nf-fields .label-left ul {
+  float: right;
+  width: 59%; }
 
 /*# sourceMappingURL=display-structure.css.map */

@@ -11,15 +11,27 @@
     box-sizing: border-box;
 }
 
-.field-wrap,
+.nf-field-container,
 #ninja_forms_required_items {
+    position: relative;
+    margin-bottom: 16px;
     &::after {
         clear: both;
         content: "";
         display: block;
     }
+    &.hidden {
+        margin: 0;
+    }
 }
-
+// .field-wrap {
+//     margin-bottom: 16px;
+//     &::after {
+//         clear: both;
+//         content: "";
+//         display: block;
+//     }
+// }
 .nf-fields {
     input,
     select,
@@ -27,6 +39,14 @@
         width: auto;
         height: auto;
         vertical-align: inherit;
+    }
+    textarea {
+        height: 200px;
+    }
+    .field-wrap {
+        > label {
+            font-weight: bold;
+        }
     }
 }
 
@@ -37,7 +57,7 @@ RADIO & CHECKBOX LISTS
 .list-radio-wrap,
 .list-checkbox-wrap {
     ul, li {
-        list-style: none;
+        list-style: none !important;
         margin: 0;
         padding: 0;
         input {
@@ -62,5 +82,42 @@ HONEYPOT
 
 .nf-hp {
     visibility: hidden;
-    position: absolute;
+}
+
+/* ---------------------------------
+SELECT LIST
+----------------------------------*/
+.list-select-wrap {
+    div {
+        display: none;
+    }
+}
+
+
+/* ---------------------------------
+COLORS
+As minimal as possible
+----------------------------------*/
+.ninja-forms-req-symbol,
+.nf-error-msg, {
+    color: #E80000;
+}
+.nf-error {
+    .ninja-forms-field {
+        border: 1px solid #E80000;
+    }
+}
+.nf-field-submit-error {
+    padding: 15px;
+}
+
+.ninja-forms-noscript-message {
+    background: #f1f1f1;
+    border: 4px dashed #ccc;
+    color: #333;
+    display: block;
+    font-size: 20px;
+    margin: 20px 0;
+    padding: 40px;
+    text-align: center;
 }

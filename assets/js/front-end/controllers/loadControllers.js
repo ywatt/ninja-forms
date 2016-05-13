@@ -28,7 +28,9 @@ define(
 		'controllers/fieldRecaptcha',
 		'controllers/helpText',
 		'controllers/fieldTextareaRTE',
-		'controllers/fieldStarRating'
+		'controllers/fieldStarRating',
+		'controllers/fieldContentsFilters',
+		'controllers/loadViews'
 	],
 	function(
 		FormData,
@@ -59,10 +61,18 @@ define(
 		FieldRecaptcha,
 		HelpText,
 		FieldTextareaRTE,
-		FieldStarRating
+		FieldStarRating,
+		FieldContentsFilters,
+		LoadViews
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
+
+				/**
+				 * App Controllers
+				 */
+				new LoadViews();
+				
 				/**
 				 * Field type controllers
 				 */
@@ -78,6 +88,7 @@ define(
 				new HelpText();
 				new FieldTextareaRTE();
 				new FieldStarRating();
+				new FieldContentsFilters();
 				/**
 				 * Misc controllers
 				 */

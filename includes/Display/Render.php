@@ -129,6 +129,10 @@ final class NF_Display_Render
                     if (is_numeric($setting)) $settings[$key] = floatval($setting);
                 }
 
+                if( ! isset( $settings[ 'label_pos' ] ) || 'default' == $settings[ 'label_pos' ] ){
+                    $settings[ 'label_pos' ] = $form->get_setting( 'default_label_pos' );
+                }
+
                 $settings[ 'parentType' ] = $field_class->get_parent_type();
 
                 if( 'list' == $settings[ 'parentType' ] && isset( $settings[ 'options' ] ) && is_array( $settings[ 'options' ] ) ){
@@ -267,6 +271,12 @@ final class NF_Display_Render
                     if (is_numeric($setting)) $field['settings'][$key] = floatval($setting);
                 }
 
+                if( ! isset( $field['settings'][ 'label_pos' ] ) || 'default' == $field['settings'][ 'label_pos' ] ){
+                    if( isset( $form[ 'settings' ][ 'default_label_pos' ] ) ) {
+                        $field['settings'][ 'label_pos' ] = $form[ 'settings' ][ 'default_label_pos' ];
+                    }
+                }
+
                 $field_class = Ninja_Forms()->fields[$field_type];
 
                 $templates = $field_class->get_templates();
@@ -369,10 +379,12 @@ final class NF_Display_Render
 
             if( 'light' == Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
                 wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions-light.css');
+                wp_enqueue_style( 'nf-font-awesome', Ninja_Forms::$url . 'assets/css/font-awesome.min.css' );
             }
 
             if( 'dark' == Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
                 wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions-dark.css');
+                wp_enqueue_style( 'nf-font-awesome', Ninja_Forms::$url . 'assets/css/font-awesome.min.css' );
             }
         }
 
@@ -404,7 +416,8 @@ final class NF_Display_Render
             'ajaxNonce' => wp_create_nonce( 'ninja_forms_display_nonce' ),
             'adminAjax' => admin_url( 'admin-ajax.php' ),
             'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
-            'use_merge_tags' => array()
+            'use_merge_tags' => array(),
+            'opinionated_styles' => Ninja_Forms()->get_setting( 'opinionated_styles' )
         ));
 
         foreach( Ninja_Forms()->fields as $field ){
@@ -428,6 +441,7 @@ final class NF_Display_Render
         </script>
         <?php
         */
+        do_action( 'nf_display_enqueue_scripts' );
     }
 
     protected static function load_template( $file_name = '' )
