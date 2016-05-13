@@ -95,18 +95,18 @@ define([], function() {
 					return false;
 				} else {
 					var formID = formModel.get( 'id' );
-					var fields = formModel.get( 'fields' );
-					_.each( fields.models, function( field ) {
-						var value = field.get( 'value' );
-						var id = field.get( 'id' );
-						field.clear( { silent: true } );
-						field.set( 'value', value, { silent: true } );
-						field.set( 'id', id, { silent: true } );
+					var fields = [];
+					_.each( formModel.get( 'fields' ).models, function( field ) {
+						fields.push( {
+							value:field.get( 'value' ),
+							id:field.get( 'id' )
+						} );
 					} );
 					var settings = formModel.get( 'settings' );
+					delete settings.fieldContentsData;
 					var formData = JSON.stringify( { id: formID, fields: fields, settings: settings } );
 					// var formData = JSON.stringify( formModel );
-					console.log( formData );
+					console.log( JSON.stringify( formModel ) );
 					var data = {
 	                	'action': 'nf_ajax_submit',
 	                	'security': nfFrontEnd.ajaxNonce,
