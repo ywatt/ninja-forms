@@ -50,7 +50,11 @@
         > input,
         textarea,
         select,
+        .nf-product-field,
+        .starrating,
+        .nf-static,
         .pikaday__container {
+            display: inline-block;
             width: 59%;
         }
         .pikaday__display {
@@ -81,19 +85,28 @@
                 margin-top: 5px;
             }
         }
+        .nf-product-field,
+        .starrating {
+            padding-right: 10px;
+            .stars {
+                float: right;
+            }
+        }
     }
     .label-left {
         //vertical-align: middle;
         > label {
             display: inline-block;
-            padding-right: 16px;
+            // padding-right: 16px;
             text-align: right;
             width: 39%;
         }
         > input,
         textarea,
         select,
+        .starrating,
         .pikaday__container {
+            display: inline-block;
             width: 59%;
         }
         .pikaday__display {
@@ -111,6 +124,11 @@
         ul {
             float: right;
             width: 59%;
+        }
+        .nf-product-price-label,
+        .nf-static,
+        .starrating {
+            padding-left: 10px;
         }
     }
 }

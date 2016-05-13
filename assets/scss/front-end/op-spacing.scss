@@ -37,9 +37,9 @@
     }
     .nf-product-field {
         &.ninja-forms-field {
-            background: transparent;
-            border: 0;
-            padding: 0;
+            // background: transparent;
+            // border: 0;
+            // padding: 0;
         }
         span {
             padding-right: 16px;
@@ -84,6 +84,9 @@
         > input,
         textarea,
         select,
+        .nf-product-field,
+        .starrating,
+        .nf-static,
         .pikaday__container {
             margin-right: 1%;
         }
