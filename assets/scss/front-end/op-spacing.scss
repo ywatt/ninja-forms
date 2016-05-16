@@ -9,9 +9,9 @@
     .ninja-forms-field,
     .listselect-wrap > div {
         font-size: 16px;
-        line-height: 20px;
+        //line-height: 0 !important;
         margin: 0;
-        padding: 16px;
+        padding: 12px;
     }
     input.ninja-forms-field,
     select.ninja-forms-field,
@@ -31,15 +31,15 @@
     .listradio-wrap,
     .listcheckbox-wrap {
         li {
-            margin-bottom: 14px;
+            margin-bottom: 12px !important;
             line-height: 0;
         }
     }
     .nf-product-field {
         &.ninja-forms-field {
-            background: transparent;
-            border: 0;
-            padding: 0;
+            // background: transparent;
+            // border: 0;
+            // padding: 0;
         }
         span {
             padding-right: 16px;
@@ -84,6 +84,9 @@
         > input,
         textarea,
         select,
+        .nf-product-field,
+        .starrating,
+        .nf-static,
         .pikaday__container {
             margin-right: 1%;
         }

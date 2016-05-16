@@ -94,7 +94,19 @@ define([], function() {
 					this.resetLabel();
 					return false;
 				} else {
-					var formData = JSON.stringify( formModel );
+					var formID = formModel.get( 'id' );
+					var fields = [];
+					_.each( formModel.get( 'fields' ).models, function( field ) {
+						fields.push( {
+							value:field.get( 'value' ),
+							id:field.get( 'id' )
+						} );
+					} );
+					var settings = formModel.get( 'settings' );
+					delete settings.fieldContentsData;
+					var formData = JSON.stringify( { id: formID, fields: fields, settings: settings } );
+					// var formData = JSON.stringify( formModel );
+					console.log( JSON.stringify( formModel ) );
 					var data = {
 	                	'action': 'nf_ajax_submit',
 	                	'security': nfFrontEnd.ajaxNonce,

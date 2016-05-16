@@ -1,6 +1,6 @@
 define( [], function() {
 	var view = Marionette.ItemView.extend({
-		tagName: 'nf-section',
+		tagName: 'div',
 
 		initialize: function() {
 			// _.bindAll( this, 'render' );
@@ -123,7 +123,7 @@ define( [], function() {
 				},
 
 				renderWrapClass: function() {
-					var wrapClass = 'field-wrap ' + this.type + '-wrap label-' + this.label_pos;
+					var wrapClass = 'field-wrap ' + this.type + '-wrap';
 
 					// If we have an old_classname defined, output wrap class for backward compatibility
 					if ( 'undefined' != typeof this.old_classname && 0 < jQuery.trim( this.old_classname ).length ) {

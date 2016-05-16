@@ -115,6 +115,7 @@
         content: "\f06a";
         position: absolute;
         right: 16px;
+        bottom: 0;
         height: 50px;
         line-height: 50px;
     }
@@ -162,4 +163,13 @@
     border-color: #D8000C;
     color: #D8000C;
     background-color: #FFBABA;
+}
+
+.nf-icons {
+    .nf-fields {
+        .field-wrap::before {
+            // background: #666;
+            color: #333;
+        }
+    }
 }

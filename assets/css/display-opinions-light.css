@@ -11,9 +11,8 @@
   .nf-fields .ninja-forms-field,
   .nf-fields .listselect-wrap > div {
     font-size: 16px;
-    line-height: 20px;
     margin: 0;
-    padding: 16px; }
+    padding: 12px; }
   .nf-fields input.ninja-forms-field,
   .nf-fields select.ninja-forms-field,
   .nf-fields .listselect-wrap > div {
@@ -27,12 +26,8 @@
     height: auto; }
   .nf-fields .listradio-wrap li,
   .nf-fields .listcheckbox-wrap li {
-    margin-bottom: 14px;
+    margin-bottom: 12px !important;
     line-height: 0; }
-  .nf-fields .nf-product-field.ninja-forms-field {
-    background: transparent;
-    border: 0;
-    padding: 0; }
   .nf-fields .nf-product-field span {
     padding-right: 16px; }
   .nf-fields .nf-product-field .nf-field-qty {
@@ -57,6 +52,9 @@
   .nf-fields .label-right > input,
   .nf-fields .label-right textarea,
   .nf-fields .label-right select,
+  .nf-fields .label-right .nf-product-field,
+  .nf-fields .label-right .starrating,
+  .nf-fields .label-right .nf-static,
   .nf-fields .label-right .pikaday__container {
     margin-right: 1%; }
   .nf-fields .label-right > input[type=radio],
@@ -170,7 +168,10 @@
       font-family: FontAwesome;
       font-size: 20px;
       position: absolute;
-      right: 10px; }
+      right: 10px;
+      bottom: 0;
+      height: 50px;
+      line-height: 50px; }
   .nf-fields .list-select-wrap.label-right div {
     width: 59%; }
   .nf-fields .list-select-wrap.label-below div {
@@ -178,7 +179,7 @@
     bottom: auto; }
   .nf-fields .list-select-wrap.label-left div {
     width: 59%;
-    left: 41%;
+    left: 40.5%;
     right: 40px; }
   .nf-fields .list-select-wrap select {
     background: transparent;
@@ -203,20 +204,15 @@
     margin-left: 30px; }
     .nf-fields .checkbox-wrap input[type="checkbox"] + label::after,
     .nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
-      background: #f7f7f7;
-      border: 2px solid #eaeaea;
+      border: 2px solid;
       content: "";
       width: 18px;
       height: 18px;
       position: absolute;
       left: -28px;
       bottom: 0; }
-  .nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::after,
-  .nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::after {
-    border-color: #999; }
   .nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::before,
   .nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
-    color: #3366CC;
     content: "\f00c";
     font-family: FontAwesome;
     font-size: 24px;
@@ -257,7 +253,8 @@
   top: -2px; }
 
 .nf-fields div.checkbox-wrap.label-left input[type="checkbox"] + label {
-  margin-left: 0; }
+  margin-left: 0;
+  width: 39%; }
   .nf-fields div.checkbox-wrap.label-left input[type="checkbox"] + label::after {
     left: auto;
     bottom: 0;
@@ -354,6 +351,73 @@ input[type=checkbox].nf-toggle {
     margin-left: 22px;
     margin-top: 20px; }
 
+.nf-icons .nf-fields .field-wrap::before {
+  font-family: FontAwesome;
+  font-size: 20px;
+  position: absolute;
+  left: 1px;
+  bottom: 1px;
+  height: 48px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  z-index: 1; }
+
+.nf-icons .nf-fields .label-left.field-wrap::before {
+  left: 40.5%; }
+
+.nf-icons .nf-fields .label-below.field-wrap::before {
+  bottom: auto;
+  top: 1px; }
+
+.nf-icons .nf-fields .date-wrap input,
+.nf-icons .nf-fields .number-wrap input,
+.nf-icons .nf-fields .quantity-wrap input,
+.nf-icons .nf-fields .email-wrap input,
+.nf-icons .nf-fields .phone-wrap input,
+.nf-icons .nf-fields .firstname-wrap input,
+.nf-icons .nf-fields .lastname-wrap input,
+.nf-icons .nf-fields .address-wrap input,
+.nf-icons .nf-fields .city-wrap input,
+.nf-icons .nf-fields .state-wrap input,
+.nf-icons .nf-fields .zip-wrap input,
+.nf-icons .nf-fields .creditcardfullname-wrap input,
+.nf-icons .nf-fields .creditcardnumber-wrap input,
+.nf-icons .nf-fields .creditcardcvc-wrap input,
+.nf-icons .nf-fields .creditcardexpiration-wrap input,
+.nf-icons .nf-fields .creditcardzip-wrap input {
+  padding-left: 60px; }
+
+.nf-icons .nf-fields .date-wrap::before {
+  content: "\f073"; }
+
+.nf-icons .nf-fields .number-wrap::before,
+.nf-icons .nf-fields .quantity-wrap::before {
+  content: "\f292"; }
+
+.nf-icons .nf-fields .email-wrap::before {
+  content: "\f0e0"; }
+
+.nf-icons .nf-fields .phone-wrap::before {
+  content: "\f095"; }
+
+.nf-icons .nf-fields .firstname-wrap::before,
+.nf-icons .nf-fields .lastname-wrap::before {
+  content: "\f007"; }
+
+.nf-icons .nf-fields .address-wrap::before,
+.nf-icons .nf-fields .city-wrap::before,
+.nf-icons .nf-fields .state-wrap::before,
+.nf-icons .nf-fields .zip-wrap::before {
+  content: "\f041"; }
+
+.nf-icons .nf-fields .creditcardfullname-wrap::before,
+.nf-icons .nf-fields .creditcardnumber-wrap::before,
+.nf-icons .nf-fields .creditcardcvc-wrap::before,
+.nf-icons .nf-fields .creditcardexpiration-wrap::before,
+.nf-icons .nf-fields .creditcardzip-wrap::before {
+  content: "\f283"; }
+
 .nf-fields input:not([type='button']),
 .nf-fields textarea,
 .nf-fields .list-select-wrap > div {
@@ -361,10 +425,8 @@ input[type=checkbox].nf-toggle {
   border: 1px solid #eaeaea;
   border-radius: 0;
   box-shadow: none; }
-  .nf-fields input:not([type='button']):hover, .nf-fields input:not([type='button']):focus,
-  .nf-fields textarea:hover,
+  .nf-fields input:not([type='button']):focus,
   .nf-fields textarea:focus,
-  .nf-fields .list-select-wrap > div:hover,
   .nf-fields .list-select-wrap > div:focus {
     background: #fff;
     border-color: #ccc;
@@ -375,7 +437,7 @@ input[type=checkbox].nf-toggle {
   border-color: #ccc;
   outline: none; }
 
-.nf-fields select.ninja-forms-field:hover, .nf-fields select.ninja-forms-field:focus {
+.nf-fields select.ninja-forms-field:focus {
   background: transparent;
   border: 0;
   box-shadow: none;
@@ -397,7 +459,7 @@ input[type=checkbox].nf-toggle {
 .nf-fields .checkbox-wrap input[type="checkbox"] + label::after,
 .nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
   background: #f7f7f7;
-  border: 2px solid #eaeaea; }
+  border-color: #eaeaea; }
 
 .nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::after,
 .nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::after {
@@ -418,6 +480,7 @@ input[type=checkbox].nf-toggle {
     content: "\f06a";
     position: absolute;
     right: 16px;
+    bottom: 0;
     height: 50px;
     line-height: 50px; }
   .nf-error .nf-error-msg {
@@ -458,5 +521,8 @@ input[type=checkbox].nf-toggle {
   border-color: #D8000C;
   color: #D8000C;
   background-color: #FFBABA; }
+
+.nf-icons .nf-fields .field-wrap::before {
+  color: #aaa; }
 
 /*# sourceMappingURL=display-opinions-light.css.map */

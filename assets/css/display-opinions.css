@@ -11,9 +11,8 @@
   .nf-fields .ninja-forms-field,
   .nf-fields .listselect-wrap > div {
     font-size: 16px;
-    line-height: 20px;
     margin: 0;
-    padding: 16px; }
+    padding: 12px; }
   .nf-fields input.ninja-forms-field,
   .nf-fields select.ninja-forms-field,
   .nf-fields .listselect-wrap > div {
@@ -27,12 +26,8 @@
     height: auto; }
   .nf-fields .listradio-wrap li,
   .nf-fields .listcheckbox-wrap li {
-    margin-bottom: 14px;
+    margin-bottom: 12px !important;
     line-height: 0; }
-  .nf-fields .nf-product-field.ninja-forms-field {
-    background: transparent;
-    border: 0;
-    padding: 0; }
   .nf-fields .nf-product-field span {
     padding-right: 16px; }
   .nf-fields .nf-product-field .nf-field-qty {
@@ -57,6 +52,9 @@
   .nf-fields .label-right > input,
   .nf-fields .label-right textarea,
   .nf-fields .label-right select,
+  .nf-fields .label-right .nf-product-field,
+  .nf-fields .label-right .starrating,
+  .nf-fields .label-right .nf-static,
   .nf-fields .label-right .pikaday__container {
     margin-right: 1%; }
   .nf-fields .label-right > input[type=radio],
