@@ -125,6 +125,9 @@
         height: 50px;
         line-height: 50px;
     }
+    // &.field-wrap::before {
+    //     border-color: green !important;
+    // }
 }
 
 .nf-field-submit-error {
@@ -154,7 +157,7 @@
 .nf-icons {
     .nf-fields {
         .field-wrap::before {
-            background: #eaeaea;
+            // background: #eaeaea;
             color: #aaa;
         }
     }

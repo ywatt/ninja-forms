@@ -353,7 +353,7 @@ input[type=checkbox].nf-toggle {
 
 .nf-icons .nf-fields .field-wrap::before {
   font-family: FontAwesome;
-  font-size: 24px;
+  font-size: 20px;
   position: absolute;
   left: 1px;
   bottom: 1px;
@@ -532,7 +532,6 @@ input[type=checkbox].nf-toggle {
   background-color: #FFBABA; }
 
 .nf-icons .nf-fields .field-wrap::before {
-  background: #666;
   color: #333; }
 
 /*# sourceMappingURL=display-opinions-dark.css.map */

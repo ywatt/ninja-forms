@@ -3,8 +3,9 @@
 .nf-icons {
     .nf-fields {
         .field-wrap::before {
+            //border: 1px;
             font-family: FontAwesome;
-            font-size: 24px;
+            font-size: 20px;
             position: absolute;
             left: 1px;
             bottom: 1px;
@@ -15,6 +16,7 @@
             z-index: 1;
         }
         .label-left.field-wrap::before {
+            //border-right: 0;
             left: 40.5%;
         }
         .label-below.field-wrap::before {

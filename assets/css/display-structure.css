@@ -507,41 +507,47 @@ As minimal as possible
 /*
 Make sure all Ninja Forms label positons function properly
 ---------------------------------------------*/
-.nf-fields .label-above > label,
-.nf-fields .label-below > label,
-.nf-fields .label-hidden > label {
+.nf-fields .label-above .field-wrap > label,
+.nf-fields .label-below .field-wrap > label,
+.nf-fields .label-hidden .field-wrap > label {
   display: block; }
 
-.nf-fields .label-above > input,
-.nf-fields .label-above textarea,
-.nf-fields .label-above select,
-.nf-fields .label-above .pikaday__container,
-.nf-fields .label-above .pikaday__display,
-.nf-fields .label-above .listselect-wrap > div,
-.nf-fields .label-below > input,
-.nf-fields .label-below textarea,
-.nf-fields .label-below select,
-.nf-fields .label-below .pikaday__container,
-.nf-fields .label-below .pikaday__display,
-.nf-fields .label-below .listselect-wrap > div,
-.nf-fields .label-hidden > input,
-.nf-fields .label-hidden textarea,
-.nf-fields .label-hidden select,
-.nf-fields .label-hidden .pikaday__container,
-.nf-fields .label-hidden .pikaday__display,
-.nf-fields .label-hidden .listselect-wrap > div {
+.nf-fields .label-above .field-wrap > input,
+.nf-fields .label-above .field-wrap textarea,
+.nf-fields .label-above .field-wrap select,
+.nf-fields .label-above .field-wrap .pikaday__container,
+.nf-fields .label-above .field-wrap .pikaday__display,
+.nf-fields .label-above .field-wrap .listselect-wrap > div,
+.nf-fields .label-below .field-wrap > input,
+.nf-fields .label-below .field-wrap textarea,
+.nf-fields .label-below .field-wrap select,
+.nf-fields .label-below .field-wrap .pikaday__container,
+.nf-fields .label-below .field-wrap .pikaday__display,
+.nf-fields .label-below .field-wrap .listselect-wrap > div,
+.nf-fields .label-hidden .field-wrap > input,
+.nf-fields .label-hidden .field-wrap textarea,
+.nf-fields .label-hidden .field-wrap select,
+.nf-fields .label-hidden .field-wrap .pikaday__container,
+.nf-fields .label-hidden .field-wrap .pikaday__display,
+.nf-fields .label-hidden .field-wrap .listselect-wrap > div {
   width: 100%; }
 
-.nf-fields .label-above input[type="submit"],
-.nf-fields .label-above input[type="button"],
-.nf-fields .label-above button,
-.nf-fields .label-below input[type="submit"],
-.nf-fields .label-below input[type="button"],
-.nf-fields .label-below button,
-.nf-fields .label-hidden input[type="submit"],
-.nf-fields .label-hidden input[type="button"],
-.nf-fields .label-hidden button {
+.nf-fields .label-above .field-wrap input[type="submit"],
+.nf-fields .label-above .field-wrap input[type="button"],
+.nf-fields .label-above .field-wrap button,
+.nf-fields .label-below .field-wrap input[type="submit"],
+.nf-fields .label-below .field-wrap input[type="button"],
+.nf-fields .label-below .field-wrap button,
+.nf-fields .label-hidden .field-wrap input[type="submit"],
+.nf-fields .label-hidden .field-wrap input[type="button"],
+.nf-fields .label-hidden .field-wrap button {
   width: auto; }
+
+.nf-fields .label-above .field-wrap > label {
+  margin-bottom: 10px; }
+
+.nf-fields .label-below .field-wrap > label {
+  margin-top: 10px; }
 
 .nf-fields .label-right.checkbox-wrap label, .nf-fields .label-right.listcheckbox-wrap label, .nf-fields .label-right.listradio-wrap label,
 .nf-fields .label-left.checkbox-wrap label,
