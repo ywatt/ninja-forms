@@ -2,26 +2,42 @@
     .label-above,
     .label-below,
     .label-hidden {
-        > label {
-            display: block;
+        .field-wrap {
+            > label {
+                display: block;
+            }
+            > input,
+            textarea,
+            select,
+            .pikaday__container,
+            .pikaday__display,
+            .listselect-wrap > div {
+                width: 100%;
+            }
+            input[type="submit"],
+            input[type="button"],
+            button {
+                width: auto;
+            }
+            .nf-product-field {
+                // .nf-element {
+                //     width: 100%;
+                // }
+            }
         }
-        > input,
-        textarea,
-        select,
-        .pikaday__container,
-        .pikaday__display,
-        .listselect-wrap > div {
-            width: 100%;
+    }
+    .label-above {
+        .field-wrap {
+            > label {
+                margin-bottom: 10px;
+            }
         }
-        input[type="submit"],
-        input[type="button"],
-        button {
-            width: auto;
-        }
-        .nf-product-field {
-            // .nf-element {
-            //     width: 100%;
-            // }
+    }
+    .label-below {
+        .field-wrap {
+            > label {
+                margin-top: 10px;
+            }
         }
     }
     .label-right,
