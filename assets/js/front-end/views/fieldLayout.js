@@ -1,7 +1,7 @@
 define( ['views/fieldItem', 'views/beforeField', 'views/afterField'], function( fieldItem, beforeField, afterField ) {
 
     var view = Marionette.LayoutView.extend({
-        tagName: "nf-section",
+        tagName: "nf-field",
         template: "#nf-tmpl-field-layout",
 
         regions: {
@@ -11,9 +11,9 @@ define( ['views/fieldItem', 'views/beforeField', 'views/afterField'], function( 
         },
 
         onRender: function() {
-            this.$el = this.$el.children();
-            this.$el.unwrap();
-            this.setElement( this.$el );
+            // this.$el = this.$el.children();
+            // this.$el.unwrap();
+            // this.setElement( this.$el );
         },
 
         onShow: function() {

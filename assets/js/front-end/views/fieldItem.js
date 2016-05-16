@@ -1,6 +1,6 @@
 define( [], function() {
 	var view = Marionette.ItemView.extend({
-		tagName: 'nf-section',
+		tagName: 'div',
 
 		initialize: function() {
 			// _.bindAll( this, 'render' );
