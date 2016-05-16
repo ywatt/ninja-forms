@@ -9,13 +9,13 @@
     font-size: 18px;
     line-height: 20px; }
   .nf-fields .ninja-forms-field,
-  .nf-fields .listselect-wrap > div {
+  .nf-fields .listselect-wrap > div div {
     font-size: 16px;
     margin: 0;
     padding: 12px; }
   .nf-fields input.ninja-forms-field,
   .nf-fields select.ninja-forms-field,
-  .nf-fields .listselect-wrap > div {
+  .nf-fields .listselect-wrap > div div {
     height: 50px; }
   .nf-fields textarea.ninja-forms-field {
     height: 200px; }
@@ -33,7 +33,7 @@
   .nf-fields .nf-product-field .nf-field-qty {
     font-size: 16px;
     padding: 5px;
-    width: 80px; }
+    width: 80px !important; }
   .nf-fields .nf-static {
     background: transparent;
     border: 0;
@@ -49,32 +49,11 @@
     margin-top: 10px; }
   .nf-fields .label-right > label {
     margin: 0; }
-  .nf-fields .label-right > input,
-  .nf-fields .label-right textarea,
-  .nf-fields .label-right select,
-  .nf-fields .label-right .nf-product-field,
-  .nf-fields .label-right .starrating,
-  .nf-fields .label-right .nf-static,
-  .nf-fields .label-right .pikaday__container {
-    margin-right: 1%; }
   .nf-fields .label-right > input[type=radio],
   .nf-fields .label-right input[type=checkbox] {
     margin-right: 1%; }
   .nf-fields .label-right ul {
     margin-right: 1%; }
-  .nf-fields .label-left > label {
-    margin: 0; }
-  .nf-fields .label-left > input,
-  .nf-fields .label-left textarea,
-  .nf-fields .label-left select,
-  .nf-fields .label-left .pikaday__container {
-    margin-left: 1%; }
-  .nf-fields .label-left > input[type=radio],
-  .nf-fields .label-left input[type=checkbox] {
-    margin-left: 1%; }
-  .nf-fields .nf-input-limit {
-    font-size: 12px;
-    margin-top: 5px; }
 
 /* Column Classes
     Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css
@@ -148,9 +127,9 @@
   clear: both;
   margin-left: 0; }
 
-.nf-fields .list-select-wrap {
+.nf-fields .list-select-wrap > div {
   position: relative; }
-  .nf-fields .list-select-wrap div {
+  .nf-fields .list-select-wrap > div div {
     display: block;
     position: absolute;
     font-size: 16px;
@@ -162,7 +141,7 @@
     right: 0;
     left: 0;
     z-index: 1; }
-    .nf-fields .list-select-wrap div::after {
+    .nf-fields .list-select-wrap > div div::after {
       content: "\f078";
       color: #999;
       font-family: FontAwesome;
@@ -172,16 +151,16 @@
       bottom: 0;
       height: 50px;
       line-height: 50px; }
-  .nf-fields .list-select-wrap.label-right div {
+  .nf-fields .list-select-wrap > div.label-right div {
     width: 59%; }
-  .nf-fields .list-select-wrap.label-below div {
+  .nf-fields .list-select-wrap > div.label-below div {
     top: 0;
     bottom: auto; }
-  .nf-fields .list-select-wrap.label-left div {
+  .nf-fields .list-select-wrap > div.label-left div {
     width: 59%;
     left: 40.5%;
     right: 40px; }
-  .nf-fields .list-select-wrap select {
+  .nf-fields .list-select-wrap > div select {
     background: transparent;
     border: 0;
     -webkit-appearance: none;
@@ -195,15 +174,15 @@
      -moz-appearance: normal;
           appearance: normal; }
 
-.nf-fields .checkbox-wrap input[type="checkbox"],
-.nf-fields .listcheckbox-wrap input[type="checkbox"] {
+.checkbox-wrap input[type="checkbox"],
+.listcheckbox-wrap input[type="checkbox"] {
   display: none; }
-  .nf-fields .checkbox-wrap input[type="checkbox"] + label,
-  .nf-fields .listcheckbox-wrap input[type="checkbox"] + label {
+  .checkbox-wrap input[type="checkbox"] + label,
+  .listcheckbox-wrap input[type="checkbox"] + label {
     position: relative;
     margin-left: 30px; }
-    .nf-fields .checkbox-wrap input[type="checkbox"] + label::after,
-    .nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
+    .checkbox-wrap input[type="checkbox"] + label::after,
+    .listcheckbox-wrap input[type="checkbox"] + label::after {
       border: 2px solid;
       content: "";
       width: 18px;
@@ -211,8 +190,8 @@
       position: absolute;
       left: -28px;
       bottom: 0; }
-  .nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::before,
-  .nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+  .checkbox-wrap input[type="checkbox"].nf-checked + label::before,
+  .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
     content: "\f00c";
     font-family: FontAwesome;
     font-size: 24px;
@@ -221,54 +200,63 @@
     bottom: 0;
     z-index: 2; }
 
-.nf-fields div.checkbox-wrap.label-above label {
+.checkbox-container.label-above label {
   height: 50px;
   display: block; }
 
-.nf-fields div.checkbox-wrap.label-above input[type="checkbox"] + label {
+.checkbox-container.label-above input[type="checkbox"] + label {
   margin-left: 0; }
-  .nf-fields div.checkbox-wrap.label-above input[type="checkbox"] + label::after {
+  .checkbox-container.label-above input[type="checkbox"] + label::after {
     left: 0;
     bottom: 0; }
 
-.nf-fields div.checkbox-wrap.label-above input[type="checkbox"].nf-checked + label::before {
+.checkbox-container.label-above input[type="checkbox"].nf-checked + label::before {
   left: -2px;
   bottom: 0; }
 
-.nf-fields div.checkbox-wrap.label-below label {
+.checkbox-container.label-below label {
   height: 50px;
   display: table-cell;
   vertical-align: bottom; }
 
-.nf-fields div.checkbox-wrap.label-below input[type="checkbox"] + label {
+.checkbox-container.label-below input[type="checkbox"] + label {
   margin-left: 0; }
-  .nf-fields div.checkbox-wrap.label-below input[type="checkbox"] + label::after {
+  .checkbox-container.label-below input[type="checkbox"] + label::after {
     left: 0;
     bottom: auto;
     top: 0; }
 
-.nf-fields div.checkbox-wrap.label-below input[type="checkbox"].nf-checked + label::before {
+.checkbox-container.label-below input[type="checkbox"].nf-checked + label::before {
   left: -2px;
   bottom: auto;
   top: -2px; }
 
-.nf-fields div.checkbox-wrap.label-left input[type="checkbox"] + label {
+.checkbox-container.label-left .field-wrap > div {
+  width: 100%; }
+
+.checkbox-container.label-left .field-wrap label {
+  text-align: right; }
+
+.checkbox-container.label-left input[type="checkbox"] + label {
   margin-left: 0;
   width: 39%; }
-  .nf-fields div.checkbox-wrap.label-left input[type="checkbox"] + label::after {
+  .checkbox-container.label-left input[type="checkbox"] + label::after {
     left: auto;
     bottom: 0;
     right: -32px; }
 
-.nf-fields div.checkbox-wrap.label-left input[type="checkbox"].nf-checked + label::before {
+.checkbox-container.label-left input[type="checkbox"].nf-checked + label::before {
   left: auto;
   bottom: 0;
   right: -37px; }
 
-.nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
+.checkbox-container.label-right .field-wrap > div {
+  width: 100%; }
+
+.listcheckbox-wrap input[type="checkbox"] + label::after {
   bottom: 2px; }
 
-.nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+.listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
   bottom: 2px; }
 
 .nf-fields .listradio-wrap input[type="radio"] {
@@ -351,71 +339,89 @@ input[type=checkbox].nf-toggle {
     margin-left: 22px;
     margin-top: 20px; }
 
-.nf-icons .nf-fields .field-wrap::before {
-  font-family: FontAwesome;
-  font-size: 20px;
-  position: absolute;
-  left: 1px;
-  bottom: 1px;
-  height: 48px;
-  width: 50px;
-  line-height: 50px;
-  text-align: center;
-  z-index: 1; }
+.nf-icons .field-wrap > div {
+  position: relative; }
+  .nf-icons .field-wrap > div::before {
+    font-family: FontAwesome;
+    font-size: 20px;
+    position: absolute;
+    left: 1px;
+    bottom: 1px;
+    height: 48px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    z-index: 1; }
 
-.nf-icons .nf-fields .label-left.field-wrap::before {
-  left: 40.5%; }
-
-.nf-icons .nf-fields .label-below.field-wrap::before {
-  bottom: auto;
-  top: 1px; }
-
-.nf-icons .nf-fields .date-wrap input,
-.nf-icons .nf-fields .number-wrap input,
-.nf-icons .nf-fields .quantity-wrap input,
-.nf-icons .nf-fields .email-wrap input,
-.nf-icons .nf-fields .phone-wrap input,
-.nf-icons .nf-fields .firstname-wrap input,
-.nf-icons .nf-fields .lastname-wrap input,
-.nf-icons .nf-fields .address-wrap input,
-.nf-icons .nf-fields .city-wrap input,
-.nf-icons .nf-fields .state-wrap input,
-.nf-icons .nf-fields .zip-wrap input,
-.nf-icons .nf-fields .creditcardfullname-wrap input,
-.nf-icons .nf-fields .creditcardnumber-wrap input,
-.nf-icons .nf-fields .creditcardcvc-wrap input,
-.nf-icons .nf-fields .creditcardexpiration-wrap input,
-.nf-icons .nf-fields .creditcardzip-wrap input {
+.nf-icons .date-wrap > div input,
+.nf-icons .number-wrap > div input,
+.nf-icons .quantity-wrap > div input,
+.nf-icons .email-wrap > div input,
+.nf-icons .phone-wrap > div input,
+.nf-icons .firstname-wrap > div input,
+.nf-icons .lastname-wrap > div input,
+.nf-icons .address-wrap > div input,
+.nf-icons .city-wrap > div input,
+.nf-icons .state-wrap > div input,
+.nf-icons .zip-wrap > div input,
+.nf-icons .creditcardfullname-wrap > div input,
+.nf-icons .creditcardnumber-wrap > div input,
+.nf-icons .creditcardcvc-wrap > div input,
+.nf-icons .creditcardexpiration-wrap > div input,
+.nf-icons .creditcardzip-wrap > div input {
   padding-left: 60px; }
 
-.nf-icons .nf-fields .date-wrap::before {
+.nf-icons.right .field-wrap > div::before {
+  left: auto;
+  right: 1px; }
+
+.nf-icons.right .date-wrap > div input,
+.nf-icons.right .number-wrap > div input,
+.nf-icons.right .quantity-wrap > div input,
+.nf-icons.right .email-wrap > div input,
+.nf-icons.right .phone-wrap > div input,
+.nf-icons.right .firstname-wrap > div input,
+.nf-icons.right .lastname-wrap > div input,
+.nf-icons.right .address-wrap > div input,
+.nf-icons.right .city-wrap > div input,
+.nf-icons.right .state-wrap > div input,
+.nf-icons.right .zip-wrap > div input,
+.nf-icons.right .creditcardfullname-wrap > div input,
+.nf-icons.right .creditcardnumber-wrap > div input,
+.nf-icons.right .creditcardcvc-wrap > div input,
+.nf-icons.right .creditcardexpiration-wrap > div input,
+.nf-icons.right .creditcardzip-wrap > div input {
+  padding-left: 12px;
+  padding-right: 60px; }
+
+.nf-icons .date-wrap > div::before {
   content: "\f073"; }
 
-.nf-icons .nf-fields .number-wrap::before,
-.nf-icons .nf-fields .quantity-wrap::before {
+.nf-icons .number-wrap > div::before,
+.nf-icons .quantity-wrap > div::before {
   content: "\f292"; }
 
-.nf-icons .nf-fields .email-wrap::before {
+.nf-icons .email-wrap > div::before {
   content: "\f0e0"; }
 
-.nf-icons .nf-fields .phone-wrap::before {
+.nf-icons .phone-wrap > div::before {
   content: "\f095"; }
 
-.nf-icons .nf-fields .firstname-wrap::before,
-.nf-icons .nf-fields .lastname-wrap::before {
+.nf-icons .firstname-wrap > div::before,
+.nf-icons .lastname-wrap > div::before {
   content: "\f007"; }
 
-.nf-icons .nf-fields .address-wrap::before,
-.nf-icons .nf-fields .city-wrap::before,
-.nf-icons .nf-fields .state-wrap::before,
-.nf-icons .nf-fields .zip-wrap::before {
+.nf-icons .address-wrap > div::before,
+.nf-icons .city-wrap > div::before,
+.nf-icons .state-wrap > div::before,
+.nf-icons .zip-wrap > div::before {
   content: "\f041"; }
 
-.nf-icons .nf-fields .creditcardfullname-wrap::before,
-.nf-icons .nf-fields .creditcardnumber-wrap::before,
-.nf-icons .nf-fields .creditcardcvc-wrap::before,
-.nf-icons .nf-fields .creditcardexpiration-wrap::before,
-.nf-icons .nf-fields .creditcardzip-wrap::before {
+.nf-icons .creditcardfullname-wrap > div::before,
+.nf-icons .creditcardnumber-wrap > div::before,
+.nf-icons .creditcardcvc-wrap > div::before,
+.nf-icons .creditcardexpiration-wrap > div::before,
+.nf-icons .creditcardzip-wrap > div::before {
   content: "\f283"; }
 
 .nf-fields input:not([type='button']),
@@ -473,7 +479,7 @@ input[type=checkbox].nf-toggle {
   position: relative; }
   .nf-error .ninja-forms-field {
     border-color: #E80000 !important; }
-  .nf-error.field-wrap::after {
+  .nf-error.field-wrap > div::after {
     color: #E80000;
     font-family: FontAwesome;
     font-size: 30px;
@@ -490,12 +496,13 @@ input[type=checkbox].nf-toggle {
   position: relative; }
   .nf-pass .ninja-forms-field {
     border-color: green !important; }
-  .nf-pass.field-wrap::after {
+  .nf-pass.field-wrap > div::after {
     color: green;
     font-family: FontAwesome;
     font-size: 30px;
     content: "\f058";
     position: absolute;
+    top: 0;
     right: 16px;
     height: 50px;
     line-height: 50px; }
@@ -522,7 +529,8 @@ input[type=checkbox].nf-toggle {
   color: #D8000C;
   background-color: #FFBABA; }
 
-.nf-icons .nf-fields .field-wrap::before {
+.nf-icons .field-wrap > div::before {
+  background: #eaeaea;
   color: #aaa; }
 
 /*# sourceMappingURL=display-opinions-light.css.map */

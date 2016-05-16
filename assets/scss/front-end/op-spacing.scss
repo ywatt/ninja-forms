@@ -7,7 +7,7 @@
         line-height: 20px;
     }
     .ninja-forms-field,
-    .listselect-wrap > div {
+    .listselect-wrap > div div {
         font-size: 16px;
         //line-height: 0 !important;
         margin: 0;
@@ -15,7 +15,7 @@
     }
     input.ninja-forms-field,
     select.ninja-forms-field,
-    .listselect-wrap > div {
+    .listselect-wrap > div div {
         height: 50px;
     }
     textarea.ninja-forms-field {
@@ -47,7 +47,7 @@
         .nf-field-qty {
             font-size: 16px;
             padding: 5px;
-            width: 80px;
+            width: 80px !important;
         }
     }
     .listselect-wrap,
@@ -88,7 +88,7 @@
         .starrating,
         .nf-static,
         .pikaday__container {
-            margin-right: 1%;
+            // margin-right: 1%;
         }
         > input[type=radio],
         input[type=checkbox] {
@@ -99,25 +99,21 @@
         }
     }
     .label-left {
-        > label {
-            margin: 0;
-        }
-        > input,
-        textarea,
-        select,
-        .pikaday__container {
-            margin-left: 1%;
-        }
-        > input[type=radio],
-        input[type=checkbox] {
-            margin-left: 1%;
-        }
+        // > label {
+        //     margin: 0;
+        // }
+        // > input,
+        // textarea,
+        // select,
+        // .pikaday__container {
+        //     // margin-left: 1%;
+        // }
+        // > input[type=radio],
+        // input[type=checkbox] {
+        //     margin-left: 1%;
+        // }
         // ul {
         //     margin-left: 15px;
         // }
-    }
-    .nf-input-limit {
-        font-size: 12px;
-        margin-top: 5px;
     }
 }

@@ -1,121 +1,134 @@
-.nf-fields {
-    .checkbox-wrap,
-    .listcheckbox-wrap {
-        input[type="checkbox"] {
-            display: none;
+.checkbox-wrap,
+.listcheckbox-wrap {
+    input[type="checkbox"] {
+        display: none;
+        + label {
+            position: relative;
+            margin-left: 30px;
+            &::after {
+                border: 2px solid;
+                content: "";
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                left: -28px;
+                bottom: 0;
+            }
+        }
+        &.nf-checked {
             + label {
-                position: relative;
-                margin-left: 30px;
-                &::after {
-                    border: 2px solid;
-                    content: "";
-                    width: 18px;
-                    height: 18px;
+                &::before {
+                    content: "\f00c";
+                    font-family: FontAwesome;
+                    font-size: 24px;
                     position: absolute;
-                    left: -28px;
+                    left: -30px;
+                    bottom: 0;
+                    z-index: 2;
+                }
+            }
+        }
+    }
+}
+.checkbox-container {
+    &.label-above {
+        label {
+            height: 50px;
+            display: block;
+        }
+        input[type="checkbox"] {
+            + label {
+                margin-left: 0;
+                &::after {
+                    left: 0;
                     bottom: 0;
                 }
             }
             &.nf-checked {
                 + label {
                     &::before {
-                        content: "\f00c";
-                        font-family: FontAwesome;
-                        font-size: 24px;
-                        position: absolute;
-                        left: -30px;
+                        left: -2px;
                         bottom: 0;
-                        z-index: 2;
                     }
                 }
             }
         }
     }
-    div.checkbox-wrap {
-        &.label-above {
-            label {
-                height: 50px;
-                display: block;
-            }
-            input[type="checkbox"] {
-                + label {
-                    margin-left: 0;
-                    &::after {
-                        left: 0;
-                        bottom: 0;
-                    }
-                }
-                &.nf-checked {
-                    + label {
-                        &::before {
-                            left: -2px;
-                            bottom: 0;
-                        }
-                    }
-                }
-            }
+    &.label-below {
+        label {
+            height: 50px;
+            display: table-cell;
+            vertical-align: bottom;
         }
-        &.label-below {
-            label {
-                height: 50px;
-                display: table-cell;
-                vertical-align: bottom;
-            }
-            input[type="checkbox"] {
-                + label {
-                    margin-left: 0;
-                    &::after {
-                        left: 0;
-                        bottom: auto;
-                        top: 0;
-                    }
-                }
-                &.nf-checked {
-                    + label {
-                        &::before {
-                            left: -2px;
-                            bottom: auto;
-                            top: -2px;
-                        }
-                    }
-                }
-            }
-        }
-        &.label-left {
-            input[type="checkbox"] {
-                + label {
-                    margin-left: 0;
-                    width: 39%;
-                    &::after {
-                        left: auto;
-                        bottom: 0;
-                        right: -32px
-                    }
-                }
-                &.nf-checked {
-                    + label {
-                        &::before {
-                            left: auto;
-                            bottom: 0;
-                            right: -37px
-                        }
-                    }
-                }
-            }
-        }
-    }
-    .listcheckbox-wrap {
         input[type="checkbox"] {
             + label {
+                margin-left: 0;
                 &::after {
-                    bottom: 2px;
+                    left: 0;
+                    bottom: auto;
+                    top: 0;
                 }
             }
             &.nf-checked {
                 + label {
                     &::before {
-                        bottom: 2px;
+                        left: -2px;
+                        bottom: auto;
+                        top: -2px;
                     }
+                }
+            }
+        }
+    }
+    &.label-left {
+        .field-wrap {
+            > div {
+                width: 100%;
+            }
+            label {
+                text-align: right;
+            }
+        }
+        input[type="checkbox"] {
+            + label {
+                margin-left: 0;
+                width: 39%;
+                &::after {
+                    left: auto;
+                    bottom: 0;
+                    right: -32px
+                }
+            }
+            &.nf-checked {
+                + label {
+                    &::before {
+                        left: auto;
+                        bottom: 0;
+                        right: -37px
+                    }
+                }
+            }
+        }
+    }
+    &.label-right {
+        .field-wrap {
+            > div {
+                width: 100%;
+            }
+        }
+    }
+}
+.listcheckbox-wrap {
+    input[type="checkbox"] {
+        + label {
+            &::after {
+                bottom: 2px;
+            }
+        }
+        &.nf-checked {
+            + label {
+                &::before {
+                    bottom: 2px;
                 }
             }
         }

@@ -14,7 +14,7 @@
 .nf-field-container,
 #ninja_forms_required_items {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     &::after {
         clear: both;
         content: "";
@@ -50,6 +50,13 @@
             font-weight: bold;
         }
     }
+    .nf-input-limit {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+    .nf-static {
+        padding: 0 10px;
+    }
 }
 
 /* ---------------------------------
@@ -76,6 +83,25 @@ RADIO & CHECKBOX LISTS
             margin: 0;
             width: auto;
         }
+        input {
+            width: auto !important;
+        }
+    }
+}
+
+/* ---------------------------------
+PRODUCT FIELD
+----------------------------------*/
+.product-wrap {
+    > div {
+        input {
+            width: 80px !important;
+        }
+        .nf-product-field {
+            span {
+                padding: 0 5px;
+            }
+        }
     }
 }
 
@@ -98,7 +124,7 @@ HONEYPOT
 SELECT LIST
 ----------------------------------*/
 .list-select-wrap {
-    div {
+    div div {
         display: none;
     }
 }

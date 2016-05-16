@@ -1,27 +1,52 @@
-
-
 .nf-icons {
-    .nf-fields {
-        .field-wrap::before {
-            //border: 1px;
-            font-family: FontAwesome;
-            font-size: 20px;
-            position: absolute;
-            left: 1px;
-            bottom: 1px;
-            height: 48px;
-            width: 50px;
-            line-height: 50px;
-            text-align: center;
-            z-index: 1;
+    .field-wrap {
+        > div {
+            position: relative;
+            &::before {
+                //border: 1px;
+                font-family: FontAwesome;
+                font-size: 20px;
+                position: absolute;
+                left: 1px;
+                bottom: 1px;
+                height: 48px;
+                width: 50px;
+                line-height: 50px;
+                text-align: center;
+                z-index: 1;
+            }
         }
-        .label-left.field-wrap::before {
-            //border-right: 0;
-            left: 40.5%;
+    }
+    .date-wrap,
+    .number-wrap,
+    .quantity-wrap,
+    .email-wrap,
+    .phone-wrap,
+    .firstname-wrap,
+    .lastname-wrap,
+    .address-wrap,
+    .city-wrap,
+    .state-wrap,
+    .zip-wrap,
+    .creditcardfullname-wrap,
+    .creditcardnumber-wrap,
+    .creditcardcvc-wrap,
+    .creditcardexpiration-wrap,
+    .creditcardzip-wrap {
+        > div {
+            input {
+                padding-left: 60px;
+            }
         }
-        .label-below.field-wrap::before {
-            bottom: auto;
-            top: 1px;
+    }
+    &.right {
+        .field-wrap {
+            > div {
+                &::before {
+                    left: auto;
+                    right: 1px;
+                }
+            }
         }
         .date-wrap,
         .number-wrap,
@@ -39,39 +64,42 @@
         .creditcardcvc-wrap,
         .creditcardexpiration-wrap,
         .creditcardzip-wrap {
-            input {
-                padding-left: 60px;
+            > div {
+                input {
+                    padding-left: 12px;
+                    padding-right: 60px;
+                }
             }
         }
-        .date-wrap::before {
-            content: "\f073";
-        }
-        .number-wrap::before,
-        .quantity-wrap::before {
-            content: "\f292";
-        }
-        .email-wrap::before {
-            content: "\f0e0";
-        }
-        .phone-wrap::before {
-            content: "\f095";
-        }
-        .firstname-wrap::before,
-        .lastname-wrap::before {
-            content: "\f007";
-        }
-        .address-wrap::before,
-        .city-wrap::before,
-        .state-wrap::before,
-        .zip-wrap::before {
-            content: "\f041";
-        }
-        .creditcardfullname-wrap::before,
-        .creditcardnumber-wrap::before,
-        .creditcardcvc-wrap::before,
-        .creditcardexpiration-wrap::before,
-        .creditcardzip-wrap::before {
-            content: "\f283";
-        }
+    }
+    .date-wrap > div::before {
+        content: "\f073";
+    }
+    .number-wrap > div::before,
+    .quantity-wrap > div::before {
+        content: "\f292";
+    }
+    .email-wrap > div::before {
+        content: "\f0e0";
+    }
+    .phone-wrap > div::before {
+        content: "\f095";
+    }
+    .firstname-wrap > div::before,
+    .lastname-wrap > div::before {
+        content: "\f007";
+    }
+    .address-wrap > div::before,
+    .city-wrap > div::before,
+    .state-wrap > div::before,
+    .zip-wrap > div::before {
+        content: "\f041";
+    }
+    .creditcardfullname-wrap > div::before,
+    .creditcardnumber-wrap > div::before,
+    .creditcardcvc-wrap > div::before,
+    .creditcardexpiration-wrap > div::before,
+    .creditcardzip-wrap > div::before {
+        content: "\f283";
     }
 }

@@ -13,7 +13,7 @@ Normalize Ninja Forms fields with default structure
 .nf-field-container,
 #ninja_forms_required_items {
   position: relative;
-  margin-bottom: 20px; }
+  margin-bottom: 25px; }
   .nf-field-container::after,
   #ninja_forms_required_items::after {
     clear: both;
@@ -37,6 +37,13 @@ Normalize Ninja Forms fields with default structure
 
 .nf-fields .field-wrap > label {
   font-weight: bold; }
+
+.nf-fields .nf-input-limit {
+  font-size: 12px;
+  margin-top: 5px; }
+
+.nf-fields .nf-static {
+  padding: 0 10px; }
 
 /* ---------------------------------
 RADIO & CHECKBOX LISTS
@@ -63,6 +70,18 @@ RADIO & CHECKBOX LISTS
     float: initial;
     margin: 0;
     width: auto; }
+  .list-radio-wrap li input,
+  .list-checkbox-wrap li input {
+    width: auto !important; }
+
+/* ---------------------------------
+PRODUCT FIELD
+----------------------------------*/
+.product-wrap > div input {
+  width: 80px !important; }
+
+.product-wrap > div .nf-product-field span {
+  padding: 0 5px; }
 
 /* ---------------------------------
 STAR RATING
@@ -79,7 +98,7 @@ HONEYPOT
 /* ---------------------------------
 SELECT LIST
 ----------------------------------*/
-.list-select-wrap div {
+.list-select-wrap div div {
   display: none; }
 
 /* ---------------------------------
@@ -507,143 +526,104 @@ As minimal as possible
 /*
 Make sure all Ninja Forms label positons function properly
 ---------------------------------------------*/
-.nf-fields .label-above .field-wrap > label,
-.nf-fields .label-below .field-wrap > label,
-.nf-fields .label-hidden .field-wrap > label {
+/* ---------------------------------
+STANDARDIZE ALL FIELDS
+----------------------------------*/
+.field-wrap > label {
   display: block; }
 
-.nf-fields .label-above .field-wrap > input,
-.nf-fields .label-above .field-wrap textarea,
-.nf-fields .label-above .field-wrap select,
-.nf-fields .label-above .field-wrap .pikaday__container,
-.nf-fields .label-above .field-wrap .pikaday__display,
-.nf-fields .label-above .field-wrap .listselect-wrap > div,
-.nf-fields .label-below .field-wrap > input,
-.nf-fields .label-below .field-wrap textarea,
-.nf-fields .label-below .field-wrap select,
-.nf-fields .label-below .field-wrap .pikaday__container,
-.nf-fields .label-below .field-wrap .pikaday__display,
-.nf-fields .label-below .field-wrap .listselect-wrap > div,
-.nf-fields .label-hidden .field-wrap > input,
-.nf-fields .label-hidden .field-wrap textarea,
-.nf-fields .label-hidden .field-wrap select,
-.nf-fields .label-hidden .field-wrap .pikaday__container,
-.nf-fields .label-hidden .field-wrap .pikaday__display,
-.nf-fields .label-hidden .field-wrap .listselect-wrap > div {
+.field-wrap > div input,
+.field-wrap textarea,
+.field-wrap select,
+.field-wrap .pikaday__container,
+.field-wrap .pikaday__display,
+.field-wrap .listselect-wrap > div {
   width: 100%; }
 
-.nf-fields .label-above .field-wrap input[type="submit"],
-.nf-fields .label-above .field-wrap input[type="button"],
-.nf-fields .label-above .field-wrap button,
-.nf-fields .label-below .field-wrap input[type="submit"],
-.nf-fields .label-below .field-wrap input[type="button"],
-.nf-fields .label-below .field-wrap button,
-.nf-fields .label-hidden .field-wrap input[type="submit"],
-.nf-fields .label-hidden .field-wrap input[type="button"],
-.nf-fields .label-hidden .field-wrap button {
+.field-wrap input[type="submit"],
+.field-wrap input[type="button"],
+.field-wrap button {
   width: auto; }
 
-.nf-fields .label-above .field-wrap > label {
+/* ---------------------------------
+LABEL ABOVE
+----------------------------------*/
+.label-above .field-wrap > label {
   margin-bottom: 10px; }
 
-.nf-fields .label-below .field-wrap > label {
+/* ---------------------------------
+LABEL BELOW
+----------------------------------*/
+.label-below .field-wrap > label {
   margin-top: 10px; }
 
-.nf-fields .label-right.checkbox-wrap label, .nf-fields .label-right.listcheckbox-wrap label, .nf-fields .label-right.listradio-wrap label,
-.nf-fields .label-left.checkbox-wrap label,
-.nf-fields .label-left.listcheckbox-wrap label,
-.nf-fields .label-left.listradio-wrap label {
-  padding: 0; }
+/* ---------------------------------
+LABEL LEFT
+----------------------------------*/
+.label-left .field-wrap > label {
+  display: inline-block;
+  margin-right: 1%;
+  text-align: right;
+  width: 39%; }
 
-.nf-fields .label-right .ninja-forms-field,
-.nf-fields .label-left .ninja-forms-field {
-  display: inline-block; }
+.label-left .field-wrap > div {
+  display: inline-block;
+  width: 59%; }
 
-.nf-fields .label-right input[type=submit],
-.nf-fields .label-right input[type=button],
-.nf-fields .label-left input[type=submit],
-.nf-fields .label-left input[type=button] {
-  width: auto; }
+.label-left .field-wrap input[type=submit],
+.label-left .field-wrap input[type=button] {
+  margin-left: 41%; }
 
-.nf-fields .label-right > label {
+/* ---------------------------------
+LABEL RIGHT
+----------------------------------*/
+.label-right .field-wrap > label {
   display: inline-block;
   margin-left: 1%;
   width: 36%; }
 
-.nf-fields .label-right > input,
-.nf-fields .label-right textarea,
-.nf-fields .label-right select,
-.nf-fields .label-right .nf-product-field,
-.nf-fields .label-right .starrating,
-.nf-fields .label-right .nf-static,
-.nf-fields .label-right .pikaday__container {
+.label-right .field-wrap > div {
   display: inline-block;
   width: 59%; }
 
-.nf-fields .label-right .pikaday__display {
-  width: 100%; }
+.label-right .checkbox-wrap > div {
+  width: 20px; }
 
-.nf-fields .label-right > input[type=radio],
-.nf-fields .label-right input[type=checkbox] {
-  width: auto; }
+/* ---------------------------------
+ADJUST SOME LABEL ABOVE & BELOW ISSUES
+----------------------------------*/
+.label-below .field-wrap > div input,
+.label-below .field-wrap textarea,
+.label-below .field-wrap select,
+.label-below .field-wrap .pikaday__container,
+.label-below .field-wrap .pikaday__display,
+.label-below .field-wrap .listselect-wrap > div,
+.label-above .field-wrap > div input,
+.label-above .field-wrap textarea,
+.label-above .field-wrap select,
+.label-above .field-wrap .pikaday__container,
+.label-above .field-wrap .pikaday__display,
+.label-above .field-wrap .listselect-wrap > div {
+  margin: 0; }
 
-.nf-fields .label-right.textarea-wrap {
+/* ---------------------------------
+ADJUST SOME LABEL LEFT & RIGHT ISSUES
+----------------------------------*/
+.label-left .textarea-wrap > label,
+.label-left .listradio-wrap > label,
+.label-left .listcheckbox-wrap > label,
+.label-right .textarea-wrap > label,
+.label-right .listradio-wrap > label,
+.label-right .listcheckbox-wrap > label {
+  margin-top: 5px;
   vertical-align: top; }
 
-.nf-fields .label-right ul {
-  float: left;
-  width: 59%; }
-  .nf-fields .label-right ul + label {
-    margin-left: 1.2%; }
-  .nf-fields .label-right ul input {
-    float: right;
-    margin-top: 5px; }
-
-.nf-fields .label-right .nf-product-field,
-.nf-fields .label-right .starrating {
-  padding-right: 10px; }
-  .nf-fields .label-right .nf-product-field .stars,
-  .nf-fields .label-right .starrating .stars {
-    float: right; }
-
-.nf-fields .label-left > label {
-  display: inline-block;
-  text-align: right;
-  width: 39%;
-  margin-right: 1%; }
-
-.nf-fields .label-left > input,
-.nf-fields .label-left textarea,
-.nf-fields .label-left select,
-.nf-fields .label-left .nf-product-field,
-.nf-fields .label-left .starrating,
-.nf-fields .label-left .pikaday__container {
-  display: inline-block;
-  width: 59%; }
-
-.nf-fields .label-left .pikaday__display {
+.label-left .html-wrap > div,
+.label-left .hr-wrap > div,
+.label-right .html-wrap > div,
+.label-right .hr-wrap > div {
+  display: block;
+  margin: 0;
   width: 100%; }
-
-.nf-fields .label-left > input[type=radio],
-.nf-fields .label-left > input[type=checkbox] {
-  float: none;
-  width: auto;
-  margin-left: 1%; }
-
-.nf-fields .label-left.textarea-wrap {
-  vertical-align: top; }
-
-.nf-fields .label-left ul {
-  float: right;
-  width: 59%; }
-
-.nf-fields .label-left .nf-product-price-label,
-.nf-fields .label-left .nf-static,
-.nf-fields .label-left .starrating {
-  padding-left: 10px; }
-
-.nf-fields .label-left input[type=submit],
-.nf-fields .label-left input[type=button] {
-  margin-left: 40%; }
 
 /*# sourceMappingURL=display-structure.css.map */

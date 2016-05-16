@@ -9,13 +9,13 @@
     font-size: 18px;
     line-height: 20px; }
   .nf-fields .ninja-forms-field,
-  .nf-fields .listselect-wrap > div {
+  .nf-fields .listselect-wrap > div div {
     font-size: 16px;
     margin: 0;
     padding: 12px; }
   .nf-fields input.ninja-forms-field,
   .nf-fields select.ninja-forms-field,
-  .nf-fields .listselect-wrap > div {
+  .nf-fields .listselect-wrap > div div {
     height: 50px; }
   .nf-fields textarea.ninja-forms-field {
     height: 200px; }
@@ -33,7 +33,7 @@
   .nf-fields .nf-product-field .nf-field-qty {
     font-size: 16px;
     padding: 5px;
-    width: 80px; }
+    width: 80px !important; }
   .nf-fields .nf-static {
     background: transparent;
     border: 0;
@@ -49,32 +49,11 @@
     margin-top: 10px; }
   .nf-fields .label-right > label {
     margin: 0; }
-  .nf-fields .label-right > input,
-  .nf-fields .label-right textarea,
-  .nf-fields .label-right select,
-  .nf-fields .label-right .nf-product-field,
-  .nf-fields .label-right .starrating,
-  .nf-fields .label-right .nf-static,
-  .nf-fields .label-right .pikaday__container {
-    margin-right: 1%; }
   .nf-fields .label-right > input[type=radio],
   .nf-fields .label-right input[type=checkbox] {
     margin-right: 1%; }
   .nf-fields .label-right ul {
     margin-right: 1%; }
-  .nf-fields .label-left > label {
-    margin: 0; }
-  .nf-fields .label-left > input,
-  .nf-fields .label-left textarea,
-  .nf-fields .label-left select,
-  .nf-fields .label-left .pikaday__container {
-    margin-left: 1%; }
-  .nf-fields .label-left > input[type=radio],
-  .nf-fields .label-left input[type=checkbox] {
-    margin-left: 1%; }
-  .nf-fields .nf-input-limit {
-    font-size: 12px;
-    margin-top: 5px; }
 
 /* Column Classes
     Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css
