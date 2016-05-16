@@ -10,12 +10,6 @@ define( ['views/fieldItem', 'views/beforeField', 'views/afterField'], function( 
             afterField: ".nf-after-field",
         },
 
-        onRender: function() {
-            // this.$el = this.$el.children();
-            // this.$el.unwrap();
-            // this.setElement( this.$el );
-        },
-
         onShow: function() {
             this.beforeField.show( new beforeField( { model: this.model } ) );
             this.field.show( new fieldItem( { model: this.model } ) );
