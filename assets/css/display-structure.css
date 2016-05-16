@@ -574,6 +574,9 @@ LABEL LEFT
 .label-left .field-wrap input[type=button] {
   margin-left: 41%; }
 
+.label-left .nf-after-field {
+  margin-left: 41.5%; }
+
 /* ---------------------------------
 LABEL RIGHT
 ----------------------------------*/
