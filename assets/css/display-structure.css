@@ -13,15 +13,17 @@ Normalize Ninja Forms fields with default structure
 .nf-field-container,
 #ninja_forms_required_items {
   position: relative;
-  margin-bottom: 16px; }
+  margin-bottom: 20px; }
   .nf-field-container::after,
   #ninja_forms_required_items::after {
     clear: both;
     content: "";
     display: block; }
-  .nf-field-container.hidden,
-  #ninja_forms_required_items.hidden {
-    margin: 0; }
+  .nf-field-container.hidden-container, .nf-field-container.hr-container,
+  #ninja_forms_required_items.hidden-container,
+  #ninja_forms_required_items.hr-container {
+    margin: 0;
+    height: auto; }
 
 .nf-fields input,
 .nf-fields select,
@@ -43,8 +45,8 @@ RADIO & CHECKBOX LISTS
 .list-checkbox-wrap ul,
 .list-checkbox-wrap li {
   list-style: none !important;
-  margin: 0;
-  padding: 0; }
+  margin: 0 !important;
+  padding: 0 !important; }
   .list-radio-wrap ul input, .list-radio-wrap li input,
   .list-checkbox-wrap ul input,
   .list-checkbox-wrap li input {
@@ -52,12 +54,20 @@ RADIO & CHECKBOX LISTS
 
 .list-radio-wrap li,
 .list-checkbox-wrap li {
-  padding-left: 10px; }
+  padding-left: 10px;
+  margin: 0 0 5px !important;
+  text-indent: initial !important; }
+  .list-radio-wrap li label,
+  .list-checkbox-wrap li label {
+    display: inline-block;
+    float: initial;
+    margin: 0;
+    width: auto; }
 
 /* ---------------------------------
 STAR RATING
 ----------------------------------*/
-.starrating .star {
+.starrating-wrap .star {
   border-bottom: 0; }
 
 /* ---------------------------------
@@ -543,6 +553,12 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-left .ninja-forms-field {
   display: inline-block; }
 
+.nf-fields .label-right input[type=submit],
+.nf-fields .label-right input[type=button],
+.nf-fields .label-left input[type=submit],
+.nf-fields .label-left input[type=button] {
+  width: auto; }
+
 .nf-fields .label-right > label {
   display: inline-block;
   margin-left: 1%;
@@ -551,7 +567,11 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-right > input,
 .nf-fields .label-right textarea,
 .nf-fields .label-right select,
+.nf-fields .label-right .nf-product-field,
+.nf-fields .label-right .starrating,
+.nf-fields .label-right .nf-static,
 .nf-fields .label-right .pikaday__container {
+  display: inline-block;
   width: 59%; }
 
 .nf-fields .label-right .pikaday__display {
@@ -573,16 +593,26 @@ Make sure all Ninja Forms label positons function properly
     float: right;
     margin-top: 5px; }
 
+.nf-fields .label-right .nf-product-field,
+.nf-fields .label-right .starrating {
+  padding-right: 10px; }
+  .nf-fields .label-right .nf-product-field .stars,
+  .nf-fields .label-right .starrating .stars {
+    float: right; }
+
 .nf-fields .label-left > label {
   display: inline-block;
-  padding-right: 16px;
   text-align: right;
-  width: 39%; }
+  width: 39%;
+  margin-right: 1%; }
 
 .nf-fields .label-left > input,
 .nf-fields .label-left textarea,
 .nf-fields .label-left select,
+.nf-fields .label-left .nf-product-field,
+.nf-fields .label-left .starrating,
 .nf-fields .label-left .pikaday__container {
+  display: inline-block;
   width: 59%; }
 
 .nf-fields .label-left .pikaday__display {
@@ -600,5 +630,14 @@ Make sure all Ninja Forms label positons function properly
 .nf-fields .label-left ul {
   float: right;
   width: 59%; }
+
+.nf-fields .label-left .nf-product-price-label,
+.nf-fields .label-left .nf-static,
+.nf-fields .label-left .starrating {
+  padding-left: 10px; }
+
+.nf-fields .label-left input[type=submit],
+.nf-fields .label-left input[type=button] {
+  margin-left: 40%; }
 
 /*# sourceMappingURL=display-structure.css.map */

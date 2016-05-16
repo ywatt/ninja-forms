@@ -23,6 +23,9 @@
                 //transform: rotate(90deg);
                 position: absolute;
                 right: 10px;
+                bottom: 0;
+                height: 50px;
+                line-height: 50px;
             }
         }
         &.label-right {
@@ -42,7 +45,7 @@
         &.label-left {
             div {
                 width: 59%;
-                left: 41%;
+                left: 40.5%;
                 right: 40px;
             }
         }

@@ -40,6 +40,7 @@ final class NF_Database_MockData
 
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Blank Forms' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->save();
     }
 
@@ -51,6 +52,7 @@ final class NF_Database_MockData
 
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Contact Me' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->save();
 
         $form_id = $form->get_id();
@@ -238,6 +240,7 @@ final class NF_Database_MockData
 
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Get Help' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->save();
 
         $form_id = $form->get_id();
@@ -338,6 +341,7 @@ final class NF_Database_MockData
          */
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Kitchen Sink' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->save();
 
         $form_id = $form->get_id();
@@ -495,6 +499,7 @@ final class NF_Database_MockData
          */
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Bathroom Sink' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->save();
 
         $form_id = $form->get_id();
@@ -504,6 +509,13 @@ final class NF_Database_MockData
          */
 
         $fields = array(
+            array(
+                'type'          => 'html',
+                'label'         => '',
+                'label_pos'     => 'hidden',
+                'key'           => 'html_1',
+                'default'       => '<div style="background:#DBF0FD; padding: 15px;"><h3>Common Fields</h3><div>These are all the most common generic fields one might use.</div></div>',
+            ),
             array(
                 'type' 			=> 'textbox',
                 'label'			=> 'Textbox',
@@ -576,10 +588,64 @@ final class NF_Database_MockData
                 'key'           => 'radio_list',
             ),
             array(
+                'type'          => 'listcheckbox',
+                'label'         => 'Checkbox List',
+                'options'       => array(
+                    array(
+                        'label' => 'Option One',
+                        'value' => 1,
+                        'calc'  => '',
+                        'order' => 1,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'label' => 'Option Two',
+                        'value' => 2,
+                        'calc'  => '',
+                        'order' => 2,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'label' => 'Option Three',
+                        'value' => 3,
+                        'calc'  => '',
+                        'order' => 3,
+                        'selected' => 0,
+                    )
+                ),
+                'key'           => 'checkbox_list',
+            ),
+            array(
+                'type'          => 'date',
+                'label'         => 'Date',
+                'key'           => 'date',
+            ),
+            array(
+                'type'          => 'number',
+                'label'         => 'Number',
+                'key'           => 'number',
+                'num_min'       => '0',
+                'num_max'       => '100',
+                'num_step'      => '1',
+            ),
+            array(
                 'type'          => 'hidden',
                 'label'         => 'Hidden',
                 'label_pos'     => 'hidden',
                 'key'           => 'hidden',
+            ),
+            // array(
+            //     'type'          => 'hr',
+            //     'label'         => 'Divider',
+            //     'label_pos'     => 'hidden',
+            //     'key'           => 'hr_1',
+            // ),
+            array(
+                'type'          => 'html',
+                'label'         => '',
+                'label_pos'     => 'hidden',
+                'key'           => 'html_2',
+                'default'       => '<div style="background:#DBF0FD; padding: 15px;"><h3>User Information Fields</h3><div>These are all the fields in the User Information section.</div></div>',
             ),
             array(
                 'type' 			=> 'firstname',
@@ -590,12 +656,127 @@ final class NF_Database_MockData
                 'type' 			=> 'lastname',
                 'label'			=> 'Last Name',
                 'key'           => 'last_name',
-            )
+            ),
+            array(
+                'type'          => 'email',
+                'label'         => 'Email',
+                'key'           => 'email',
+            ),
+            array(
+                'type'          => 'phone',
+                'label'         => 'Phone',
+                'key'           => 'phone',
+            ),
+            array(
+                'type'          => 'address',
+                'label'         => 'Address',
+                'key'           => 'address',
+            ),
+            array(
+                'type'          => 'city',
+                'label'         => 'City',
+                'key'           => 'city',
+            ),
             // array(
-            //     'type' 			=> 'button',
-            //     'label'			=> 'Button',
-            //     'label_pos' 	=> 'hidden',
+            //     'type'          => 'liststate',
+            //     'label'         => 'State',
+            //     'key'           => 'state',
             // ),
+            array(
+                'type'          => 'zip',
+                'label'         => 'Zip Code',
+                'key'           => 'zip',
+            ),
+            array(
+                'type'          => 'html',
+                'label'         => '',
+                'label_pos'     => 'hidden',
+                'key'           => 'html_3',
+                'default'       => '<div style="background:#DBF0FD; padding: 15px;"><h3>Pricing Fields</h3><div>These are all the fields in the Pricing section.</div></div>',
+            ),
+            array(
+                'type'                  => 'product',
+                'label'                 => 'Product (quanitity included)',
+                'key'                   => 'product_qty',
+                'product_use_quantity'  => 1,
+                'product_price'         => '5.00',
+            ),
+            array(
+                'type'                  => 'product',
+                'label'                 => 'Product (seperate quantity)',
+                'key'                   => 'product',
+                'product_use_quantity'  => 0,
+                'product_price'         => '5.00',
+            ),
+            array(
+                'type'                  => 'quantity',
+                'label'                 => 'Quantity',
+                'key'                   => 'quantity',
+                'product_assignment'    => '999',
+                'num_min'               => '0',
+                'num_max'               => '',
+                'num_step'              => '1',
+            ),
+            array(
+                'type'                  => 'shipping',
+                'label'                 => 'Shipping',
+                'key'                   => 'shipping',
+                'shipping_cost'         => '10.00',
+            ),
+            array(
+                'type'          => 'total',
+                'label'         => 'Total',
+                'key'           => 'total',
+            ),
+            array(
+                'type'          => 'creditcardfullname',
+                'label'         => 'Credit Card Full Name',
+                'key'           => 'creditcardfullname',
+            ),
+            array(
+                'type'          => 'creditcardnumber',
+                'label'         => 'Credit Card Number',
+                'key'           => 'creditcardnumber',
+            ),
+            array(
+                'type'          => 'creditcardcvc',
+                'label'         => 'Credit Card CVV',
+                'key'           => 'creditcardcvc',
+            ),
+            array(
+                'type'          => 'creditcardexpiration',
+                'label'         => 'Credit Card Expiration',
+                'key'           => 'creditcardexpiration',
+            ),
+            array(
+                'type'          => 'creditcardzip',
+                'label'         => 'Credit Card Zip Code',
+                'key'           => 'creditcardzip',
+            ),
+            array(
+                'type'          => 'html',
+                'label'         => '',
+                'label_pos'     => 'hidden',
+                'key'           => 'html_3',
+                'default'       => '<div style="background:#DBF0FD; padding: 15px;"><h3>Miscellaneous Fields</h3><div>These are various special fields.</div></div>',
+            ),
+            array(
+                'type'          => 'starrating',
+                'label'         => 'Star Rating',
+                'key'           => 'starrating',
+                'default'       => '5',
+            ),
+            array(
+                'type'          => 'spam',
+                'label'         => 'Anti-Spam Question (Answer = answer)',
+                'key'           => 'spam',
+                'spam_answer'   => 'answer',
+            ),
+            array(
+                'type'          => 'hr',
+                'label'         => '',
+                'key'           => 'hr',
+            ),
         );
 
         $order = 1;
@@ -636,6 +817,7 @@ final class NF_Database_MockData
 
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Long Form - ' . $num_fields . ' Fields' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->save();
 
         $form_id = $form->get_id();
@@ -664,6 +846,7 @@ final class NF_Database_MockData
 
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Email Subscription Form' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->save();
 
         $form_id = $form->get_id();
@@ -700,6 +883,7 @@ final class NF_Database_MockData
         /* FORM */
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Product Form (with Quantity Field)' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->update_setting( 'hide_successfully_completed_form', 1 );
         $form->save();
 
@@ -774,6 +958,7 @@ final class NF_Database_MockData
         /* FORM */
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Product Form (Inline Quantity)' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->update_setting( 'hide_successfully_completed_form', 1 );
         $form->save();
 
@@ -833,6 +1018,7 @@ final class NF_Database_MockData
         /* FORM */
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Product Form (Multiple Products)' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->update_setting( 'hide_successfully_completed_form', 1 );
         $form->save();
 
@@ -937,6 +1123,7 @@ final class NF_Database_MockData
 
         $form = Ninja_Forms()->form()->get();
         $form->update_setting( 'title', 'Form with Calculations' );
+        $form->update_setting( 'default_label_pos', 'above' );
         $form->update_setting( 'calculations', array(
             array(
                 'name' => 'My First Calculation',
