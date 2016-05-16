@@ -235,7 +235,9 @@
   width: 100%; }
 
 .checkbox-container.label-left .field-wrap label {
-  text-align: right; }
+  text-align: right;
+  display: inline-block;
+  font-weight: bold; }
 
 .checkbox-container.label-left input[type="checkbox"] + label {
   margin-left: 0;
