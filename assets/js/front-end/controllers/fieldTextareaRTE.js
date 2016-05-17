@@ -5,7 +5,7 @@ define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'textarea' ), 'render:view', this.initTextareaRTEs );
-			this.listenTo( nfRadio.channel( 'fields' ), 'click:extra', this.clickExtra );
+			this.listenTo( nfRadio.channel( 'textarea' ), 'click:extra', this.clickExtra );
 
 			// Instantiates the variable that holds the media library frame.
 			this.meta_image_frame;

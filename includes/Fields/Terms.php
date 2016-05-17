@@ -14,7 +14,9 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
 
     protected $_icon = 'tags';
 
-    protected $_settings = array( 'taxonomy' );
+    protected $_templates = array( 'terms', 'listcheckbox' );
+
+    protected $_settings = array( 'taxonomy', 'add_new_terms' );
 
     protected $_settings_exclude = array( 'required' );
 
@@ -123,5 +125,10 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
         }
 
         return $field;
+    }
+
+    public function get_parent_type()
+    {
+        return 'listcheckbox';
     }
 }

@@ -1038,6 +1038,18 @@ return apply_filters( 'ninja_forms_field_settings', array(
     ),
 
     /*
+     * Add New Terms
+     */
+
+    'add_new_terms' => array(
+        'name' => 'add_new_terms',
+        'type' => 'toggle',
+        'label' => __( 'Add New Terms', 'ninja-forms'),
+        'width' => 'full',
+        'group' => 'advanced',
+    ),
+
+    /*
     |--------------------------------------------------------------------------
     | Backwards Compatibility Field Settings
     |--------------------------------------------------------------------------
