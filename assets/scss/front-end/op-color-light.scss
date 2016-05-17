@@ -97,15 +97,19 @@
     }
     &.field-wrap {
         > div::after {
-            color: #E80000;
+            background: #E80000;
+            color: #fff;
             font-family: FontAwesome;
-            font-size: 30px;
-            content: "\f06a";
+            font-size: 20px;
+            content: "\f12a";
             position: absolute;
-            right: 16px;
-            bottom: 0;
-            height: 50px;
+            top: 1px;
+            right: 1px;
+            bottom: 1px;
+            height: 48px;
+            width: 50px;
             line-height: 50px;
+            text-align: center;
         }
     }
     .nf-error-msg {

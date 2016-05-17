@@ -367,7 +367,6 @@ final class NF_Display_Render
     public static function enqueue_scripts( $form_id )
     {
         wp_enqueue_media();
-        wp_enqueue_style( 'nf-display-structure', Ninja_Forms::$url . 'assets/css/display-structure.css' );
         wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
         wp_enqueue_style( 'summernote', Ninja_Forms::$url . 'assets/css/summernote.css' );
         wp_enqueue_style( 'codemirror', Ninja_Forms::$url . 'assets/css/codemirror.css' );
@@ -378,14 +377,16 @@ final class NF_Display_Render
         if( Ninja_Forms()->get_setting( 'opinionated_styles' ) ) {
 
             if( 'light' == Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
-                wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions-light.css');
+                wp_enqueue_style('nf-display', Ninja_Forms::$url . 'assets/css/display-opinions-light.css');
                 wp_enqueue_style( 'nf-font-awesome', Ninja_Forms::$url . 'assets/css/font-awesome.min.css' );
             }
 
             if( 'dark' == Ninja_Forms()->get_setting( 'opinionated_styles' ) ){
-                wp_enqueue_style('nf-display-opinions', Ninja_Forms::$url . 'assets/css/display-opinions-dark.css');
+                wp_enqueue_style('nf-display', Ninja_Forms::$url . 'assets/css/display-opinions-dark.css');
                 wp_enqueue_style( 'nf-font-awesome', Ninja_Forms::$url . 'assets/css/font-awesome.min.css' );
             }
+        } else {
+            wp_enqueue_style( 'nf-display', Ninja_Forms::$url . 'assets/css/display-structure.css' );
         }
 
         wp_enqueue_style( 'pikaday-responsive', Ninja_Forms::$url . 'assets/css/pikaday-package.css' );

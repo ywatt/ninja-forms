@@ -45,6 +45,10 @@ Normalize Ninja Forms fields with default structure
 .nf-fields .nf-static {
   padding: 0 10px; }
 
+.nf-fields .nf-error-msg {
+  margin-right: 10px;
+  text-align: right; }
+
 /* ---------------------------------
 RADIO & CHECKBOX LISTS
 ----------------------------------*/
@@ -93,6 +97,7 @@ STAR RATING
 HONEYPOT
 ----------------------------------*/
 .nf-hp {
+  position: absolute;
   visibility: hidden; }
 
 /* ---------------------------------
@@ -124,6 +129,21 @@ As minimal as possible
   margin: 20px 0;
   padding: 40px;
   text-align: center; }
+
+/* ---------------------------------
+HELPER CLASSES
+----------------------------------*/
+.two-col-list ul li {
+  float: left;
+  width: 50%; }
+
+.three-col-list ul li {
+  float: left;
+  width: 33.33%; }
+
+.four-col-list ul li {
+  float: left;
+  width: 25%; }
 
 .note-popover {
   display: none !important; }
@@ -592,6 +612,9 @@ LABEL RIGHT
 .label-right .checkbox-wrap > div {
   width: 20px; }
 
+.label-right .nf-after-field {
+  width: 59%; }
+
 /* ---------------------------------
 ADJUST SOME LABEL ABOVE & BELOW ISSUES
 ----------------------------------*/
@@ -618,8 +641,11 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
 .label-right .textarea-wrap > label,
 .label-right .listradio-wrap > label,
 .label-right .listcheckbox-wrap > label {
-  margin-top: 5px;
   vertical-align: top; }
+
+.label-left .textarea-wrap > label,
+.label-right .textarea-wrap > label {
+  margin-top: 5px; }
 
 .label-left .html-wrap > div,
 .label-left .hr-wrap > div,
