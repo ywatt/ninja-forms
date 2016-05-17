@@ -84,7 +84,7 @@ LABEL RIGHT
             margin-left: 1%;
             width: 36%;
         }
-        > div {
+        > div, {
             display: inline-block;
             width: 59%;
         }
@@ -97,6 +97,9 @@ LABEL RIGHT
         > div {
             width: 20px;
         }
+    }
+    .nf-after-field {
+        width: 59%;
     }
 }
 
@@ -126,8 +129,12 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     .listradio-wrap,
     .listcheckbox-wrap {
         > label {
-            margin-top: 5px;
             vertical-align: top;
+        }
+    }
+    .textarea-wrap {
+        > label {
+            margin-top: 5px;
         }
     }
     .html-wrap,

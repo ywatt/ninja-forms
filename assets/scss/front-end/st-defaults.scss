@@ -57,6 +57,10 @@
     .nf-static {
         padding: 0 10px;
     }
+    .nf-error-msg {
+        margin-right: 10px;
+        text-align: right;
+    }
 }
 
 /* ---------------------------------
@@ -117,6 +121,7 @@ HONEYPOT
 ----------------------------------*/
 
 .nf-hp {
+    position: absolute;
     visibility: hidden;
 }
 
@@ -156,4 +161,32 @@ As minimal as possible
     margin: 20px 0;
     padding: 40px;
     text-align: center;
+}
+
+/* ---------------------------------
+HELPER CLASSES
+----------------------------------*/
+.two-col-list {
+    ul {
+        li {
+            float: left;
+            width: 50%
+        }
+    }
+}
+.three-col-list {
+    ul {
+        li {
+            float: left;
+            width: 33.33%
+        }
+    }
+}
+.four-col-list {
+    ul {
+        li {
+            float: left;
+            width: 25%
+        }
+    }
 }
