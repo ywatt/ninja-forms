@@ -29,6 +29,7 @@ define(
 		'controllers/helpText',
 		'controllers/fieldTextareaRTE',
 		'controllers/fieldStarRating',
+		'controllers/fieldTerms',
 		'controllers/fieldContentsFilters',
 		'controllers/loadViews'
 	],
@@ -62,6 +63,7 @@ define(
 		HelpText,
 		FieldTextareaRTE,
 		FieldStarRating,
+		FieldTerms,
 		FieldContentsFilters,
 		LoadViews
 	) {
@@ -88,6 +90,7 @@ define(
 				new HelpText();
 				new FieldTextareaRTE();
 				new FieldStarRating();
+				new FieldTerms();
 				new FieldContentsFilters();
 				/**
 				 * Misc controllers
