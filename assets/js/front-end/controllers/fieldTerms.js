@@ -27,9 +27,13 @@ define([], function() {
             var new_option = {
                 label: value,
                 value: value,
-                selected: 1,
+                selected: 0,
             };
             options.push( new_option );
+
+            var selected = model.get( 'value' );
+            selected.push( value );
+
             model.set( 'reRender', true );
         }
         

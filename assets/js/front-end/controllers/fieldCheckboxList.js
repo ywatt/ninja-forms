@@ -42,12 +42,13 @@ define([], function() {
 
                 option.fieldID = that.id;
                 option.classes = that.classes;
-                option.currentValue = that.value;
                 option.index = index;
 
                 if( option.selected ){
                     that.selected.push( option.value );
                 }
+
+                option.isSelected = ( -1 != that.value.indexOf( option.value.toString() ) );
 
                 var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-option' ).html() );
 
@@ -102,10 +103,10 @@ define([], function() {
         },
 
         beforeUpdateField: function( el, model ) {
-            var selected = model.get( 'selected' ) || [];
+            var selected = model.get( 'value' ) || [];
             if ( typeof selected == 'string' ) selected = [ selected ];
 
-            var value = jQuery( el).val();
+            var value = jQuery( el ).val();
             var checked = jQuery( el ).attr( 'checked' );
             if ( checked ) {
                 selected.push( value );
@@ -120,11 +121,9 @@ define([], function() {
                 }
             }
 
-            model.set( 'selected', selected );
-
-            if ( 1 == model.get( 'show_other' ) ) {
-                model.set( 'reRender', true );
-            }
+            // if ( 1 == model.get( 'show_other' ) ) {
+            //     model.set( 'reRender', true );
+            // }
 
             return _.clone( selected );
         }
