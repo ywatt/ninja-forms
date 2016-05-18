@@ -11,18 +11,6 @@ define([], function() {
 			radioChannel.reply( 'validate:required', this.validateRequired );
             nfRadio.channel( 'checkbox' ).reply( 'before:updateField', this.beforeUpdateField, this );
             nfRadio.channel( 'checkbox' ).reply( 'get:calcValue', this.getCalcValue, this );
-		
-
-           	this.listenTo( nfRadio.channel( 'lastname' ), 'init:model', this.test );
-
-		},
-
-		test: function( model ) {
-			model.set( 'customPlaceholder', this.test2 );
-		},
-
-		test2: function( placeholder ) {
-			return 'bleep it!';
 		},
 
 		beforeUpdateField: function( el, model ) {
@@ -61,7 +49,7 @@ define([], function() {
 		},
 
 		customClasses: function( classes ) {
-			if ( 'undefined' != typeof this.default_value && 'checked' == this.default_value ) {
+			if ( 1 == this.value || ( 'undefined' != typeof this.default_value && 'checked' == this.default_value ) ) {
 				classes += ' nf-checked';
 			} else {
 				classes.replace( 'nf-checked', '' );
@@ -70,7 +58,7 @@ define([], function() {
 		},
 
 		customLabelClasses: function( classes ) {
-			if ( 'undefined' != typeof this.default_value && 'checked' == this.default_value ) {
+			if ( 1 == this.value || ( 'undefined' != typeof this.default_value && 'checked' == this.default_value ) ) {
 				classes += ' nf-checked-label';
 			} else {
 				classes.replace( 'nf-checked-label', '' );
@@ -79,7 +67,7 @@ define([], function() {
 		},
 
 		maybeChecked: function() {
-			if( 'undefined' != typeof this.default_value && 'checked' == this.default_value ) {
+			if ( 1 == this.value || ( 'undefined' != typeof this.default_value && 'checked' == this.default_value ) ) {
 				return ' checked';
 			} else {
 				return '';
