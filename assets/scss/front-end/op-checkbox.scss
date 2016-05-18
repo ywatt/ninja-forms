@@ -1,8 +1,8 @@
 .checkbox-wrap,
 .listcheckbox-wrap {
-    input[type="checkbox"] {
-        display: none;
-        + label {
+    .nf-field-label,
+    .nf-field-element {
+        label {
             position: relative;
             margin-left: 30px;
             &::after {
@@ -14,9 +14,7 @@
                 left: -28px;
                 bottom: 0;
             }
-        }
-        &.nf-checked {
-            + label {
+            &.nf-checked-label {
                 &::before {
                     content: "\f00c";
                     font-family: FontAwesome;
@@ -31,88 +29,99 @@
     }
 }
 .checkbox-container {
+    .nf-field-element {
+        input {
+            display: none;
+        }
+    }
+    &.label-above,
+    &.label-below {
+        .nf-field-label {
+            display: position;
+        }
+        // .nf-field-element {
+        //     input {
+        //         display: none;
+        //     }
+        // }
+    }
     &.label-above {
         label {
             height: 50px;
+            margin: 0;
             display: block;
-        }
-        input[type="checkbox"] {
-            + label {
-                margin-left: 0;
-                &::after {
-                    left: 0;
-                    bottom: 0;
-                }
+            &::after {
+                left: 0;
+                bottom: 0;
             }
-            &.nf-checked {
-                + label {
-                    &::before {
-                        left: -2px;
-                        bottom: 0;
-                    }
+            &.nf-checked-label {
+                &::before {
+                    left: -2px;
+                    bottom: 0;
                 }
             }
         }
     }
     &.label-below {
         label {
-            height: 50px;
-            display: table-cell;
-            vertical-align: bottom;
-        }
-        input[type="checkbox"] {
-            + label {
-                margin-left: 0;
-                &::after {
-                    left: 0;
-                    bottom: auto;
-                    top: 0;
-                }
+            margin: 0;
+            display: block;
+            margin-top: 20px;
+            &::after {
+                left: 0;
+                bottom: auto;
+                top: -25px;
             }
-            &.nf-checked {
-                + label {
-                    &::before {
-                        left: -2px;
-                        bottom: auto;
-                        top: -2px;
-                    }
+            &.nf-checked-label {
+                &::before {
+                    left: -2px;
+                    bottom: auto;
+                    top: -27px;
                 }
             }
         }
     }
     &.label-left {
-        .field-wrap {
-            > div {
-                width: 100%;
+        label {
+            margin: 0;
+            display: block;
+            &::after {
+                left: auto;
+                bottom: 0;
+                right: -31px;
             }
-            label {
-                text-align: right;
-                display: inline-block;
-                font-weight: bold;
-            }
-        }
-        input[type="checkbox"] {
-            + label {
-                margin-left: 0;
-                width: 39%;
-                &::after {
+            &.nf-checked-label {
+                &::before {
                     left: auto;
                     bottom: 0;
-                    right: -32px
-                }
-            }
-            &.nf-checked {
-                + label {
-                    &::before {
-                        left: auto;
-                        bottom: 0;
-                        right: -37px
-                    }
+                    top: -36px;
                 }
             }
         }
     }
     &.label-right {
+        .nf-field-label {
+            padding: 0;
+            order: 10;
+        }
+        .nf-field-element {
+            order: 5;
+            display: none;
+        }
+        label {
+            margin: 0 0 0 30px;
+            display: block;
+            &::after {
+                left: -28px;
+                bottom: 0;
+            }
+            &.nf-checked-label {
+                &::before {
+                    left: -30px;
+                    bottom: 0;
+                }
+            }
+        }
         .field-wrap {
             display: flex;
             > div {
@@ -126,25 +135,23 @@
         }
     }
 }
-.listcheckbox-wrap {
-    input[type="checkbox"] {
-        + label {
-            &::after {
-                bottom: 0;
-            }
+.listcheckbox-container {
+    .nf-field-label {
+        label::after {
+            border: 0;
         }
-        &.nf-checked {
-            + label {
-                &::before {
-                    bottom: -2px;
-                }
+    }
+    .nf-field-element {
+        input {
+            display: none;
+        }
+    }
+    &.label-above,
+    &.label-below {
+        .nf-field-label {
+            label {
+                margin: 0;
             }
         }
     }
 }
-// .listcheckbox-wrap,
-// .listradio-wrap {
-//     > div {
-//         margin-top: 6px;
-//     }
-// }
