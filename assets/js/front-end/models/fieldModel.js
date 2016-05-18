@@ -27,7 +27,7 @@ define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 			 * field-type
 			 *
 			 * This lets specific field types modify model attributes before anything uses them.
-			 */ 
+			 */
 			nfRadio.channel( 'fields' ).trigger( 'init:model', this );
 			nfRadio.channel( this.get( 'type' ) ).trigger( 'init:model', this );
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:model', this );

@@ -92,8 +92,6 @@ define( [], function() {
 	    	return {
 
 				renderElement: function(){
-					this.setPlaceholder();
-					this.setClasses();
 					var tmpl = _.find( this.element_templates, function( tmpl ) {
 						if ( 0 < jQuery( '#nf-tmpl-field-' + tmpl ).length ) {
 							return true;
@@ -108,15 +106,23 @@ define( [], function() {
 					return template( this );
 				},
 
-				setPlaceholder: function() {
-					if ( 'inside' == this.label_pos ) {
-						this.placeholder = this.label;
+				renderLabelClasses: function () {
+					var classes = '';
+					if ( 'undefined' != typeof this.customLabelClasses ) {
+						classes = this.customLabelClasses( classes );
 					}
+					return classes;
 				},
 
 				renderPlaceholder: function() {
-					if( '' != jQuery.trim( this.placeholder ) ) {
-						return 'placeholder="' + this.placeholder + '"';
+					var placeholder = this.placeholder;
+					
+					if ( 'undefined' != typeof this.customPlaceholder ) {
+						placeholder = this.customPlaceholder( placeholder );
+					}
+
+					if( '' != jQuery.trim( placeholder ) ) {
+						return 'placeholder="' + placeholder + '"';
 					} else {
 						return '';
 					}
@@ -130,19 +136,35 @@ define( [], function() {
 						wrapClass += ' ' + this.old_classname + '-wrap';
 					}
 
+					if ( 'undefined' != typeof customWrapClass ) {
+						wrapClass = customWrapClass( wrapClass );
+					}
+
 					return wrapClass;
 				},
 
-				setClasses: function() {
+				renderClasses: function() {
+					var classes = this.classes;
+
 					if ( this.error ) {
-						this.classes += ' nf-error';
+						classes += ' nf-error';
 					} else {
-						this.classes = this.classes.replace( 'nf-error', '' );
+						classes = classes.replace( 'nf-error', '' );
 					}
 
 					if ( 'undefined' != typeof this.element_class && 0 < jQuery.trim( this.element_class ).length ) {
-						this.classes += ' ' + this.element_class;
+						classes += ' ' + this.element_class;
 					}
+
+					/*
+					 * If we have a function for adding extra classes, add those.
+					 */
+					
+					if ( 'undefined' != typeof this.customClasses ) {
+						classes = this.customClasses( classes );
+					}
+
+					return classes;
 				},
 
 				maybeDisabled: function() {
@@ -188,16 +210,6 @@ define( [], function() {
 					var check_text = '<p>' + this.desc_text + '</p>';
 					if ( 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
 						return this.desc_text;
-					} else {
-						return '';
-					}
-				},
-
-				maybeChecked: function() {
-					if( 'undefined' != typeof this.default_value
-						&& 'checked' == this.default_value )
-					{
-						return ' checked';
 					} else {
 						return '';
 					}

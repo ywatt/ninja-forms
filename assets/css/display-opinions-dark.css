@@ -25,18 +25,24 @@ Normalize Ninja Forms fields with default structure
     margin: 0;
     height: auto; }
 
-.nf-fields input,
-.nf-fields select,
-.nf-fields textarea {
+.nf-field-element input,
+.nf-field-element select,
+.nf-field-element textarea {
+  margin: 0;
   width: auto;
   height: auto;
   vertical-align: inherit; }
 
-.nf-fields textarea {
+.nf-field-element textarea {
   height: 200px; }
 
-.nf-fields .field-wrap > label {
-  font-weight: bold; }
+.nf-field-label label {
+  font-weight: bold;
+  margin: 0;
+  padding: 0; }
+
+.nf-fields .nf-field-element {
+  position: relative; }
 
 .nf-fields .nf-input-limit {
   font-size: 12px;
@@ -49,6 +55,9 @@ Normalize Ninja Forms fields with default structure
   margin-right: 10px;
   text-align: right; }
 
+/* ---------------------------------
+CHECKBOX FIELD
+----------------------------------*/
 /* ---------------------------------
 RADIO & CHECKBOX LISTS
 ----------------------------------*/
@@ -549,50 +558,91 @@ Make sure all Ninja Forms label positons function properly
 /* ---------------------------------
 STANDARDIZE ALL FIELDS
 ----------------------------------*/
-.field-wrap > label {
-  display: block; }
-
-.field-wrap > div input,
-.field-wrap textarea,
-.field-wrap select,
-.field-wrap .pikaday__container,
-.field-wrap .pikaday__display,
-.field-wrap .listselect-wrap > div {
-  width: 100%; }
-
-.field-wrap input[type="submit"],
-.field-wrap input[type="button"],
-.field-wrap button {
-  width: auto; }
+.field-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  .field-wrap > label {
+    display: block; }
+  .field-wrap > div input,
+  .field-wrap textarea,
+  .field-wrap select,
+  .field-wrap .pikaday__container,
+  .field-wrap .pikaday__display,
+  .field-wrap .listselect-wrap > div {
+    width: 100%; }
+  .field-wrap input[type="submit"],
+  .field-wrap input[type="button"],
+  .field-wrap button {
+    width: auto; }
 
 /* ---------------------------------
 LABEL ABOVE
 ----------------------------------*/
-.label-above .field-wrap > label {
-  margin-bottom: 10px; }
+.label-above .nf-field-label {
+  margin-bottom: 10px;
+  -webkit-box-ordinal-group: 6;
+  -webkit-order: 5;
+      -ms-flex-order: 5;
+          order: 5; }
+
+.label-above .nf-field-element {
+  -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
+      -ms-flex-order: 10;
+          order: 10; }
 
 /* ---------------------------------
 LABEL BELOW
 ----------------------------------*/
-.label-below .field-wrap > label {
-  margin-top: 10px; }
+.label-below .nf-field-label {
+  margin-top: 10px;
+  -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
+      -ms-flex-order: 10;
+          order: 10; }
+
+.label-below .nf-field-element {
+  -webkit-box-ordinal-group: 6;
+  -webkit-order: 5;
+      -ms-flex-order: 5;
+          order: 5; }
 
 /* ---------------------------------
 LABEL LEFT
 ----------------------------------*/
-.label-left .field-wrap > label {
-  display: inline-block;
-  margin-right: 1%;
-  text-align: right;
-  width: 39%; }
-
-.label-left .field-wrap > div {
-  display: inline-block;
-  width: 59%; }
-
-.label-left .field-wrap input[type=submit],
-.label-left .field-wrap input[type=button] {
-  margin-left: 41%; }
+.label-left .field-wrap {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row wrap;
+      -ms-flex-direction: row wrap;
+          flex-direction: row wrap;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
+  .label-left .field-wrap .nf-field-label {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-right: 1%;
+    text-align: right;
+    width: 40%; }
+    .label-left .field-wrap .nf-field-label label {
+      width: 100%; }
+  .label-left .field-wrap .nf-field-element {
+    display: inline-block;
+    width: 60%; }
 
 .label-left .nf-after-field {
   margin-left: 41.5%; }
@@ -600,17 +650,69 @@ LABEL LEFT
 /* ---------------------------------
 LABEL RIGHT
 ----------------------------------*/
-.label-right .field-wrap > label {
-  display: inline-block;
-  margin-left: 1%;
-  width: 36%; }
+.label-right .field-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row wrap;
+      -ms-flex-direction: row wrap;
+          flex-direction: row wrap;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
+  .label-right .field-wrap .nf-field-label {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-left: 1%;
+    width: 40%;
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+        -ms-flex-order: 2;
+            order: 2; }
+  .label-right .field-wrap .nf-field-element {
+    display: inline-block;
+    width: 60%;
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+        -ms-flex-order: 1;
+            order: 1; }
 
-.label-right .field-wrap > div {
-  display: inline-block;
-  width: 59%; }
-
-.label-right .checkbox-wrap > div {
-  width: 20px; }
+.label-right .checkbox-wrap {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row wrap;
+      -ms-flex-direction: row wrap;
+          flex-direction: row wrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start; }
+  .label-right .checkbox-wrap .nf-field-label {
+    width: auto;
+    -webkit-box-ordinal-group: 11;
+    -webkit-order: 10;
+        -ms-flex-order: 10;
+            order: 10; }
+  .label-right .checkbox-wrap .nf-field-element {
+    width: 20px;
+    -webkit-box-ordinal-group: 6;
+    -webkit-order: 5;
+        -ms-flex-order: 5;
+            order: 5; }
 
 .label-right .nf-after-field {
   width: 59%; }
@@ -618,42 +720,57 @@ LABEL RIGHT
 /* ---------------------------------
 ADJUST SOME LABEL ABOVE & BELOW ISSUES
 ----------------------------------*/
-.label-below .field-wrap > div input,
-.label-below .field-wrap textarea,
-.label-below .field-wrap select,
-.label-below .field-wrap .pikaday__container,
-.label-below .field-wrap .pikaday__display,
-.label-below .field-wrap .listselect-wrap > div,
-.label-above .field-wrap > div input,
-.label-above .field-wrap textarea,
-.label-above .field-wrap select,
-.label-above .field-wrap .pikaday__container,
-.label-above .field-wrap .pikaday__display,
-.label-above .field-wrap .listselect-wrap > div {
+.label-below .field-wrap,
+.label-above .field-wrap {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-flex-flow: wrap;
+      -ms-flex-flow: wrap;
+          flex-flow: wrap; }
+
+.label-below .nf-field-element,
+.label-above .nf-field-element {
+  margin: 0;
+  width: 100%; }
+
+.label-below .checkbox-wrap .nf-field-label,
+.label-above .checkbox-wrap .nf-field-label {
   margin: 0; }
 
 /* ---------------------------------
 ADJUST SOME LABEL LEFT & RIGHT ISSUES
 ----------------------------------*/
-.label-left .textarea-wrap > label,
-.label-left .listradio-wrap > label,
-.label-left .listcheckbox-wrap > label,
-.label-right .textarea-wrap > label,
-.label-right .listradio-wrap > label,
-.label-right .listcheckbox-wrap > label {
-  vertical-align: top; }
+.label-left .textarea-wrap .nf-field-label,
+.label-left .listradio-wrap .nf-field-label,
+.label-left .listcheckbox-wrap .nf-field-label,
+.label-right .textarea-wrap .nf-field-label,
+.label-right .listradio-wrap .nf-field-label,
+.label-right .listcheckbox-wrap .nf-field-label {
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+              -ms-grid-row-align: flex-start;
+          align-items: flex-start; }
 
-.label-left .textarea-wrap > label,
-.label-right .textarea-wrap > label {
+.label-left .textarea-wrap .nf-field-label,
+.label-right .textarea-wrap .nf-field-label {
   margin-top: 5px; }
 
-.label-left .html-wrap > div,
-.label-left .hr-wrap > div,
-.label-right .html-wrap > div,
-.label-right .hr-wrap > div {
-  display: block;
-  margin: 0;
-  width: 100%; }
+.label-left .html-wrap,
+.label-left .hr-wrap,
+.label-right .html-wrap,
+.label-right .hr-wrap {
+  display: block; }
+  .label-left .html-wrap .nf-field-element,
+  .label-left .hr-wrap .nf-field-element,
+  .label-right .html-wrap .nf-field-element,
+  .label-right .hr-wrap .nf-field-element {
+    display: block;
+    margin: 0;
+    width: 100%; }
 
 .nf-fields {
   padding: 5px;
@@ -663,13 +780,13 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     font-size: 18px;
     line-height: 20px; }
   .nf-fields .ninja-forms-field,
-  .nf-fields .listselect-wrap > div div {
+  .nf-fields .listselect-wrap .nf-field-element div {
     font-size: 16px;
     margin: 0;
     padding: 12px; }
   .nf-fields input.ninja-forms-field,
   .nf-fields select.ninja-forms-field,
-  .nf-fields .listselect-wrap > div div {
+  .nf-fields .listselect-wrap .nf-field-element div {
     height: 50px; }
   .nf-fields textarea.ninja-forms-field {
     height: 200px; }
@@ -693,15 +810,15 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     border: 0;
     font-weight: bold;
     padding: 0; }
-  .nf-fields .label-above > label,
-  .nf-fields .label-below > label,
-  .nf-fields .label-hidden > label {
+  .nf-fields .label-above .nf-field-label,
+  .nf-fields .label-below .nf-field-label,
+  .nf-fields .label-hidden .nf-field-label {
     margin-bottom: 10px;
     padding: 0; }
-  .nf-fields .label-below > label {
+  .nf-fields .label-below .nf-field-label {
     margin-bottom: 0;
     margin-top: 10px; }
-  .nf-fields .label-right > label {
+  .nf-fields .label-right .nf-field-label {
     margin: 0; }
   .nf-fields .label-right > input[type=radio],
   .nf-fields .label-right input[type=checkbox] {
@@ -828,24 +945,27 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
      -moz-appearance: normal;
           appearance: normal; }
 
-.checkbox-wrap input[type="checkbox"],
-.listcheckbox-wrap input[type="checkbox"] {
-  display: none; }
-  .checkbox-wrap input[type="checkbox"] + label,
-  .listcheckbox-wrap input[type="checkbox"] + label {
-    position: relative;
-    margin-left: 30px; }
-    .checkbox-wrap input[type="checkbox"] + label::after,
-    .listcheckbox-wrap input[type="checkbox"] + label::after {
-      border: 2px solid;
-      content: "";
-      width: 18px;
-      height: 18px;
-      position: absolute;
-      left: -28px;
-      bottom: 0; }
-  .checkbox-wrap input[type="checkbox"].nf-checked + label::before,
-  .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+.checkbox-wrap .nf-field-label label,
+.checkbox-wrap .nf-field-element label,
+.listcheckbox-wrap .nf-field-label label,
+.listcheckbox-wrap .nf-field-element label {
+  position: relative;
+  margin-left: 30px; }
+  .checkbox-wrap .nf-field-label label::after,
+  .checkbox-wrap .nf-field-element label::after,
+  .listcheckbox-wrap .nf-field-label label::after,
+  .listcheckbox-wrap .nf-field-element label::after {
+    border: 2px solid;
+    content: "";
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: -28px;
+    bottom: 0; }
+  .checkbox-wrap .nf-field-label label.nf-checked-label::before,
+  .checkbox-wrap .nf-field-element label.nf-checked-label::before,
+  .listcheckbox-wrap .nf-field-label label.nf-checked-label::before,
+  .listcheckbox-wrap .nf-field-element label.nf-checked-label::before {
     content: "\f00c";
     font-family: FontAwesome;
     font-size: 24px;
@@ -854,73 +974,98 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     bottom: 0;
     z-index: 2; }
 
+.checkbox-container .nf-field-element input {
+  display: none; }
+
+.checkbox-container.label-above .nf-field-label, .checkbox-container.label-below .nf-field-label {
+  display: position; }
+
 .checkbox-container.label-above label {
   height: 50px;
+  margin: 0;
   display: block; }
-
-.checkbox-container.label-above input[type="checkbox"] + label {
-  margin-left: 0; }
-  .checkbox-container.label-above input[type="checkbox"] + label::after {
+  .checkbox-container.label-above label::after {
     left: 0;
     bottom: 0; }
-
-.checkbox-container.label-above input[type="checkbox"].nf-checked + label::before {
-  left: -2px;
-  bottom: 0; }
+  .checkbox-container.label-above label.nf-checked-label::before {
+    left: -2px;
+    bottom: 0; }
 
 .checkbox-container.label-below label {
-  height: 50px;
-  display: table-cell;
-  vertical-align: bottom; }
-
-.checkbox-container.label-below input[type="checkbox"] + label {
-  margin-left: 0; }
-  .checkbox-container.label-below input[type="checkbox"] + label::after {
+  margin: 0;
+  display: block;
+  margin-top: 20px; }
+  .checkbox-container.label-below label::after {
     left: 0;
     bottom: auto;
-    top: 0; }
+    top: -25px; }
+  .checkbox-container.label-below label.nf-checked-label::before {
+    left: -2px;
+    bottom: auto;
+    top: -27px; }
 
-.checkbox-container.label-below input[type="checkbox"].nf-checked + label::before {
-  left: -2px;
-  bottom: auto;
-  top: -2px; }
-
-.checkbox-container.label-left .field-wrap > div {
-  width: 100%; }
-
-.checkbox-container.label-left .field-wrap label {
-  text-align: right;
-  display: inline-block;
-  font-weight: bold; }
-
-.checkbox-container.label-left input[type="checkbox"] + label {
-  margin-left: 0;
-  width: 39%; }
-  .checkbox-container.label-left input[type="checkbox"] + label::after {
+.checkbox-container.label-left label {
+  margin: 0;
+  display: block; }
+  .checkbox-container.label-left label::after {
     left: auto;
     bottom: 0;
-    right: -32px; }
+    right: -31px; }
+  .checkbox-container.label-left label.nf-checked-label::before {
+    left: auto;
+    bottom: 0;
+    top: -36px; }
 
-.checkbox-container.label-left input[type="checkbox"].nf-checked + label::before {
-  left: auto;
-  bottom: 0;
-  right: -37px; }
+.checkbox-container.label-right .nf-field-label {
+  padding: 0;
+  -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
+      -ms-flex-order: 10;
+          order: 10; }
 
-.checkbox-container.label-right .field-wrap > div {
-  width: 100%; }
-
-.listcheckbox-wrap input[type="checkbox"] + label::after {
-  bottom: 2px; }
-
-.listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
-  bottom: 2px; }
-
-.nf-fields .listradio-wrap input[type="radio"] {
+.checkbox-container.label-right .nf-field-element {
+  -webkit-box-ordinal-group: 6;
+  -webkit-order: 5;
+      -ms-flex-order: 5;
+          order: 5;
   display: none; }
-  .nf-fields .listradio-wrap input[type="radio"] + label {
+
+.checkbox-container.label-right label {
+  margin: 0 0 0 30px;
+  display: block; }
+  .checkbox-container.label-right label::after {
+    left: -28px;
+    bottom: 0; }
+  .checkbox-container.label-right label.nf-checked-label::before {
+    left: -30px;
+    bottom: 0; }
+
+.checkbox-container.label-right .field-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  .checkbox-container.label-right .field-wrap > div {
+    width: 100%; }
+
+.checkbox-container.label-right label::after {
+  bottom: 2px !important; }
+
+.listcheckbox-container .nf-field-label label::after {
+  border: 0; }
+
+.listcheckbox-container .nf-field-element input {
+  display: none; }
+
+.listcheckbox-container.label-above .nf-field-label label, .listcheckbox-container.label-below .nf-field-label label {
+  margin: 0; }
+
+.listradio-wrap input[type="radio"] {
+  display: none; }
+  .listradio-wrap input[type="radio"] + label {
     position: relative;
     margin-left: 30px; }
-    .nf-fields .listradio-wrap input[type="radio"] + label::after {
+    .listradio-wrap input[type="radio"] + label::after {
       background: #f7f7f7;
       border: 2px solid #eaeaea;
       border-radius: 50%;
@@ -929,10 +1074,10 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
       height: 18px;
       position: absolute;
       left: -30px;
-      bottom: 2px; }
-  .nf-fields .listradio-wrap input[type="radio"].nf-checked + label::after {
+      bottom: 1px; }
+  .listradio-wrap input[type="radio"].nf-checked + label::after {
     border-color: #3366CC; }
-  .nf-fields .listradio-wrap input[type="radio"].nf-checked + label::before {
+  .listradio-wrap input[type="radio"].nf-checked + label::before {
     background: #3366CC;
     border-radius: 50%;
     content: "";
@@ -940,7 +1085,7 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     width: 10px;
     position: absolute;
     left: -26px;
-    bottom: 6px;
+    bottom: 5px;
     z-index: 2; }
 
 input[type=checkbox].nf-toggle {

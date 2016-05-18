@@ -2,6 +2,7 @@
 STANDARDIZE ALL FIELDS
 ----------------------------------*/
 .field-wrap {
+    display: flex;
     > label {
         display: block;
     }
@@ -25,14 +26,17 @@ STANDARDIZE ALL FIELDS
     }
 }
 
+
 /* ---------------------------------
 LABEL ABOVE
 ----------------------------------*/
 .label-above {
-    .field-wrap {
-        > label {
-            margin-bottom: 10px;
-        }
+    .nf-field-label {
+        margin-bottom: 10px;
+        order: 5;
+    }
+    .nf-field-element {
+        order: 10;
     }
 }
 
@@ -40,10 +44,12 @@ LABEL ABOVE
 LABEL BELOW
 ----------------------------------*/
 .label-below {
-    .field-wrap {
-        > label {
-            margin-top: 10px;
-        }
+    .nf-field-label {
+        margin-top: 10px;
+        order: 10;
+    }
+    .nf-field-element {
+        order: 5;
     }
 }
 
@@ -51,21 +57,23 @@ LABEL BELOW
 LABEL LEFT
 ----------------------------------*/
 .label-left {
-    //vertical-align: middle;
     .field-wrap {
-        > label {
-            display: inline-block;
-            margin-right: 1%;
+        flex-direction: row wrap;
+        justify-content: space-around;
+        .nf-field-label {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-right: 1%;
             text-align: right;
-            width: 39%;
+            width: 40%;
+            label {
+                width: 100%;
+            }
         }
-        > div {
+        .nf-field-element {
             display: inline-block;
-            width: 59%;
-        }
-        input[type=submit],
-        input[type=button] {
-            margin-left: 41%;
+            width: 60%;
         }
     }
     .nf-after-field {
@@ -78,43 +86,54 @@ LABEL RIGHT
 ----------------------------------*/
 .label-right {
     .field-wrap {
-        //vertical-align: middle;
-        > label {
-            display: inline-block;
-            margin-left: 1%;
-            width: 36%;
+        display: flex;
+        flex-direction: row wrap;
+        justify-content: space-around;
+        .nf-field-label {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-left: 1%;
+            width: 40%;
+            order: 2;
         }
-        > div, {
+        .nf-field-element {
             display: inline-block;
-            width: 59%;
-        }
-        input[type=submit],
-        input[type=button] {
-            //margin-left: 41%;
+            width: 60%;
+            order: 1;
         }
     }
     .checkbox-wrap {
-        > div {
+        flex-direction: row wrap;
+        justify-content: flex-start;
+        .nf-field-label {
+            width: auto;
+            order: 10;
+        }
+        .nf-field-element {
             width: 20px;
+            order: 5;
         }
     }
     .nf-after-field {
         width: 59%;
     }
 }
-
 /* ---------------------------------
 ADJUST SOME LABEL ABOVE & BELOW ISSUES
 ----------------------------------*/
 .label-below,
 .label-above {
     .field-wrap {
-        > div input,
-        textarea,
-        select,
-        .pikaday__container,
-        .pikaday__display,
-        .listselect-wrap > div {
+        flex-direction: column;
+        flex-flow: wrap;
+    }
+    .nf-field-element {
+        margin: 0;
+        width: 100%;
+    }
+    .checkbox-wrap {
+        .nf-field-label {
             margin: 0;
         }
     }
@@ -128,18 +147,19 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     .textarea-wrap,
     .listradio-wrap,
     .listcheckbox-wrap {
-        > label {
-            vertical-align: top;
+        .nf-field-label {
+            align-items: flex-start;
         }
     }
     .textarea-wrap {
-        > label {
+        .nf-field-label {
             margin-top: 5px;
         }
     }
     .html-wrap,
     .hr-wrap {
-        > div {
+        display: block;
+        .nf-field-element {
             display: block;
             margin: 0;
             width: 100%;
