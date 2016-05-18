@@ -105,10 +105,10 @@ define([], function() {
         },
 
         beforeUpdateField: function( el, model ) {
-            var selected = model.get( 'selected' ) || [];
+            var selected = model.get( 'value' ) || [];
             if ( typeof selected == 'string' ) selected = [ selected ];
 
-            var value = jQuery( el).val();
+            var value = jQuery( el ).val();
             var checked = jQuery( el ).attr( 'checked' );
             if ( checked ) {
                 selected.push( value );
@@ -121,11 +121,9 @@ define([], function() {
                 }
             }
 
-            model.set( 'selected', selected );
-
-            if ( 1 == model.get( 'show_other' ) ) {
-                model.set( 'reRender', true );
-            }
+            // if ( 1 == model.get( 'show_other' ) ) {
+            //     model.set( 'reRender', true );
+            // }
 
             return _.clone( selected );
         }
