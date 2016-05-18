@@ -108,6 +108,14 @@ define( [], function() {
 					return template( this );
 				},
 
+				renderLabelClasses: function () {
+					var classes = '';
+					if ( 'undefined' != typeof this.customLabelClasses ) {
+						classes = this.customLabelClasses( classes );
+					}
+					return classes;
+				},
+
 				setPlaceholder: function() {
 					if ( 'inside' == this.label_pos ) {
 						this.placeholder = this.label;
@@ -191,16 +199,6 @@ define( [], function() {
 					} else {
 						return '';
 					}
-				},
-
-				maybeChecked: function() {
-					if( 'undefined' != typeof this.default_value
-						&& 'checked' == this.default_value )
-					{
-						return ' checked';
-					} else {
-						return '';
-					}
 				}
 			};
 		},
@@ -221,7 +219,7 @@ define( [], function() {
 		fieldKeyup: function( e ) {
 			var el = jQuery( e.currentTarget );
 			var keyCode = e.keyCode;
-			nfRadio.channel( 'field-' + this.model.get( 'id' ) ).trigger( 'keyup:field', el, this.model );
+			nfRadio.channel( 'field-' + this.model.get( 'id' ) ).trigger( 'keyup:field', el, this.model, keyCode );
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'keyup:field', el, this.model, keyCode );
 			nfRadio.channel( 'fields' ).trigger( 'keyup:field', el, this.model, keyCode );
 		},

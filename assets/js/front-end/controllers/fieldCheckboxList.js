@@ -110,8 +110,10 @@ define([], function() {
             if ( checked ) {
                 selected.push( value );
                 jQuery( el ).addClass( 'nf-checked' );
+                jQuery( el ).parent().find( 'label[for="' + jQuery( el ).prop( 'id' ) + '"]' ).addClass( 'nf-checked-label' );
             } else {
                 jQuery( el ).removeClass( 'nf-checked' );
+                jQuery( el ).parent().find( 'label[for="' + jQuery( el ).prop( 'id' ) + '"]' ).removeClass( 'nf-checked-label' );
                 var i = selected.indexOf( value );
                 if( -1 != i ){
                     selected.splice( i, 1 );
