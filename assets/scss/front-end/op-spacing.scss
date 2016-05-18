@@ -7,7 +7,7 @@
         line-height: 20px;
     }
     .ninja-forms-field,
-    .listselect-wrap > div div {
+    .listselect-wrap .nf-field-element div {
         font-size: 16px;
         //line-height: 0 !important;
         margin: 0;
@@ -15,7 +15,7 @@
     }
     input.ninja-forms-field,
     select.ninja-forms-field,
-    .listselect-wrap > div div {
+    .listselect-wrap .nf-field-element div {
         height: 50px;
     }
     textarea.ninja-forms-field {
@@ -66,19 +66,19 @@
     .label-above,
     .label-below,
     .label-hidden {
-        > label {
+        .nf-field-label {
             margin-bottom: 10px;
             padding: 0;
         }
     }
     .label-below {
-        > label {
+        .nf-field-label {
             margin-bottom: 0;
             margin-top: 10px;
         }
     }
     .label-right {
-        > label {
+        .nf-field-label {
             margin: 0;
         }
         > input,

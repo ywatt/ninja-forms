@@ -25,35 +25,24 @@
 		 *
 		 * is NOT ok because each of those items is on the top-level.
 		 */
-
-		/*
-		 * Render our description text if the position is set to before everything.
-		 */
 		%>
-		 <%= ( 'undefined' != typeof desc_pos && 'before_everything' == desc_pos ) ? renderDescText() : '' %>
 		<%
 		/*
-		 * Render our label if the position is set to above or left.
+		 * Render our label.
 		 */
 		%>
-		<%= ( 'above' == label_pos || 'left' == label_pos ) ? renderLabel() : '' %>
+		<%= renderLabel() %>
 		<%
 		/*
 		 * Render our field element. Uses the template for the field being rendered.
 		 */
 		%>
-		<div><%= renderElement() %></div>
+		<div class="nf-field-element"><%= renderElement() %></div>
 		<%
 		/*
-		 * Render our label if the position is set to below or right.
+		 * Render our Description Text.
 		 */
 		%>
-		<%= ( 'below' == label_pos || 'right' == label_pos ) ? renderLabel() : '' %>
-		<%
-		/*
-		 * Render our description text if the position is set to after everything.
-		 */
-		%>
-		 <%= ( 'undefined' != typeof desc_pos && 'after_everything' == desc_pos ) ? renderDescText() : '' %>
+		<%= renderDescText() %>
 	</div>
 </script>

@@ -34,10 +34,12 @@
 //         display: block;
 //     }
 // }
-.nf-fields {
+
+.nf-field-element {
     input,
     select,
     textarea {
+        margin: 0;
         width: auto;
         height: auto;
         vertical-align: inherit;
@@ -45,10 +47,17 @@
     textarea {
         height: 200px;
     }
-    .field-wrap {
-        > label {
-            font-weight: bold;
-        }
+}
+.nf-field-label {
+    label {
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+    }
+}
+.nf-fields {
+    .nf-field-element {
+        position: relative;
     }
     .nf-input-limit {
         font-size: 12px;
@@ -62,6 +71,12 @@
         text-align: right;
     }
 }
+
+/* ---------------------------------
+CHECKBOX FIELD
+----------------------------------*/
+
+
 
 /* ---------------------------------
 RADIO & CHECKBOX LISTS

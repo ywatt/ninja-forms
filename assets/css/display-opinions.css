@@ -9,13 +9,13 @@
     font-size: 18px;
     line-height: 20px; }
   .nf-fields .ninja-forms-field,
-  .nf-fields .listselect-wrap > div div {
+  .nf-fields .listselect-wrap .nf-field-element div {
     font-size: 16px;
     margin: 0;
     padding: 12px; }
   .nf-fields input.ninja-forms-field,
   .nf-fields select.ninja-forms-field,
-  .nf-fields .listselect-wrap > div div {
+  .nf-fields .listselect-wrap .nf-field-element div {
     height: 50px; }
   .nf-fields textarea.ninja-forms-field {
     height: 200px; }
@@ -39,15 +39,15 @@
     border: 0;
     font-weight: bold;
     padding: 0; }
-  .nf-fields .label-above > label,
-  .nf-fields .label-below > label,
-  .nf-fields .label-hidden > label {
+  .nf-fields .label-above .nf-field-label,
+  .nf-fields .label-below .nf-field-label,
+  .nf-fields .label-hidden .nf-field-label {
     margin-bottom: 10px;
     padding: 0; }
-  .nf-fields .label-below > label {
+  .nf-fields .label-below .nf-field-label {
     margin-bottom: 0;
     margin-top: 10px; }
-  .nf-fields .label-right > label {
+  .nf-fields .label-right .nf-field-label {
     margin: 0; }
   .nf-fields .label-right > input[type=radio],
   .nf-fields .label-right input[type=checkbox] {
