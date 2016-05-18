@@ -24,11 +24,12 @@ define([], function() {
         addOption: function( model, value ) {
             if( ! value ) return;
             var options = model.get( 'options' );
-            var clone = _.clone( _.first( options ) );
-            clone.label = value;
-            clone.value = value;
-            clone.selected = 1;
-            options.push( clone );
+            var new_option = {
+                label: value,
+                value: value,
+                selected: 1,
+            };
+            options.push( new_option );
             model.set( 'reRender', true );
         }
         
