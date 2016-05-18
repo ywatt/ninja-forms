@@ -49,6 +49,10 @@ define([], function() {
                     that.selected.push( option.value );
                 }
 
+                option.isSelected = function(){
+                    return ( -1 != option.currentValue.indexOf( option.value ) );
+                };
+
                 var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-option' ).html() );
 
                 html += template( option );
