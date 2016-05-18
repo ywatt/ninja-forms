@@ -944,24 +944,27 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
      -moz-appearance: normal;
           appearance: normal; }
 
-.checkbox-wrap input[type="checkbox"],
-.listcheckbox-wrap input[type="checkbox"] {
-  display: none; }
-  .checkbox-wrap input[type="checkbox"] + label,
-  .listcheckbox-wrap input[type="checkbox"] + label {
-    position: relative;
-    margin-left: 30px; }
-    .checkbox-wrap input[type="checkbox"] + label::after,
-    .listcheckbox-wrap input[type="checkbox"] + label::after {
-      border: 2px solid;
-      content: "";
-      width: 18px;
-      height: 18px;
-      position: absolute;
-      left: -28px;
-      bottom: 0; }
-  .checkbox-wrap input[type="checkbox"].nf-checked + label::before,
-  .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+.checkbox-wrap .nf-field-label label,
+.checkbox-wrap .nf-field-element label,
+.listcheckbox-wrap .nf-field-label label,
+.listcheckbox-wrap .nf-field-element label {
+  position: relative;
+  margin-left: 30px; }
+  .checkbox-wrap .nf-field-label label::after,
+  .checkbox-wrap .nf-field-element label::after,
+  .listcheckbox-wrap .nf-field-label label::after,
+  .listcheckbox-wrap .nf-field-element label::after {
+    border: 2px solid;
+    content: "";
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: -28px;
+    bottom: 0; }
+  .checkbox-wrap .nf-field-label label.nf-checked-label::before,
+  .checkbox-wrap .nf-field-element label.nf-checked-label::before,
+  .listcheckbox-wrap .nf-field-label label.nf-checked-label::before,
+  .listcheckbox-wrap .nf-field-element label.nf-checked-label::before {
     content: "\f00c";
     font-family: FontAwesome;
     font-size: 24px;
@@ -970,57 +973,71 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     bottom: 0;
     z-index: 2; }
 
+.checkbox-container .nf-field-element input {
+  display: none; }
+
+.checkbox-container.label-above .nf-field-label, .checkbox-container.label-below .nf-field-label {
+  display: position; }
+
 .checkbox-container.label-above label {
   height: 50px;
+  margin: 0;
   display: block; }
-
-.checkbox-container.label-above input[type="checkbox"] + label {
-  margin-left: 0; }
-  .checkbox-container.label-above input[type="checkbox"] + label::after {
+  .checkbox-container.label-above label::after {
     left: 0;
     bottom: 0; }
-
-.checkbox-container.label-above input[type="checkbox"].nf-checked + label::before {
-  left: -2px;
-  bottom: 0; }
+  .checkbox-container.label-above label.nf-checked-label::before {
+    left: -2px;
+    bottom: 0; }
 
 .checkbox-container.label-below label {
-  height: 50px;
-  display: table-cell;
-  vertical-align: bottom; }
-
-.checkbox-container.label-below input[type="checkbox"] + label {
-  margin-left: 0; }
-  .checkbox-container.label-below input[type="checkbox"] + label::after {
+  margin: 0;
+  display: block;
+  margin-top: 20px; }
+  .checkbox-container.label-below label::after {
     left: 0;
     bottom: auto;
-    top: 0; }
+    top: -25px; }
+  .checkbox-container.label-below label.nf-checked-label::before {
+    left: -2px;
+    bottom: auto;
+    top: -27px; }
 
-.checkbox-container.label-below input[type="checkbox"].nf-checked + label::before {
-  left: -2px;
-  bottom: auto;
-  top: -2px; }
-
-.checkbox-container.label-left .field-wrap > div {
-  width: 100%; }
-
-.checkbox-container.label-left .field-wrap label {
-  text-align: right;
-  display: inline-block;
-  font-weight: bold; }
-
-.checkbox-container.label-left input[type="checkbox"] + label {
-  margin-left: 0;
-  width: 39%; }
-  .checkbox-container.label-left input[type="checkbox"] + label::after {
+.checkbox-container.label-left label {
+  margin: 0;
+  display: block; }
+  .checkbox-container.label-left label::after {
     left: auto;
     bottom: 0;
-    right: -32px; }
+    right: -31px; }
+  .checkbox-container.label-left label.nf-checked-label::before {
+    left: auto;
+    bottom: 0;
+    top: -36px; }
 
-.checkbox-container.label-left input[type="checkbox"].nf-checked + label::before {
-  left: auto;
-  bottom: 0;
-  right: -37px; }
+.checkbox-container.label-right .nf-field-label {
+  padding: 0;
+  -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
+      -ms-flex-order: 10;
+          order: 10; }
+
+.checkbox-container.label-right .nf-field-element {
+  -webkit-box-ordinal-group: 6;
+  -webkit-order: 5;
+      -ms-flex-order: 5;
+          order: 5;
+  display: none; }
+
+.checkbox-container.label-right label {
+  margin: 0 0 0 30px;
+  display: block; }
+  .checkbox-container.label-right label::after {
+    left: -28px;
+    bottom: 0; }
+  .checkbox-container.label-right label.nf-checked-label::before {
+    left: -30px;
+    bottom: 0; }
 
 .checkbox-container.label-right .field-wrap {
   display: -webkit-box;
@@ -1033,11 +1050,14 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
 .checkbox-container.label-right label::after {
   bottom: 2px !important; }
 
-.listcheckbox-wrap input[type="checkbox"] + label::after {
-  bottom: 0; }
+.listcheckbox-container .nf-field-label label::after {
+  border: 0; }
 
-.listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
-  bottom: -2px; }
+.listcheckbox-container .nf-field-element input {
+  display: none; }
+
+.listcheckbox-container.label-above .nf-field-label label, .listcheckbox-container.label-below .nf-field-label label {
+  margin: 0; }
 
 .listradio-wrap input[type="radio"] {
   display: none; }
