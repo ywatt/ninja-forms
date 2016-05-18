@@ -48,9 +48,7 @@ define([], function() {
                     that.selected.push( option.value );
                 }
 
-                option.isSelected = function(){
-                    return ( -1 != that.value.indexOf( option.value ) );
-                };
+                option.isSelected = ( -1 != that.value.indexOf( option.value.toString() ) );
 
                 var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-option' ).html() );
 
