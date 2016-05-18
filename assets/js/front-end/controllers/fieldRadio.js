@@ -113,9 +113,12 @@ define([], function() {
 		},
 
 		updateCheckedClass: function( el, model ) {
-			var name = jQuery( el ).attr( 'name' );
-			jQuery( '[name="' + name + '"]' ).removeClass( 'nf-checked' );
+			jQuery( '[name="' + jQuery( el ).attr( 'name' ) + '"]' ).removeClass( 'nf-checked' );
+			jQuery( el ).closest( 'ul' ).find( 'label' ).removeClass( 'nf-checked-label' );
 			jQuery( el ).addClass( 'nf-checked' );
+			jQuery( el ).closest( 'li' ).find( 'label[for="' + jQuery( el ).prop( 'id' ) + '"]' ).addClass( 'nf-checked-label' );
+
+
 		}
 
 	});
