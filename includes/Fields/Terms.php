@@ -49,6 +49,8 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
         $taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
         foreach( $taxonomies as $name => $taxonomy ){
 
+            $tax_term_settings = array();
+
             if( in_array( $name, $this->_excluded_taxonomies ) ) continue;
 
             $this->_settings[ 'taxonomy' ][ 'options' ][] = array(
@@ -58,8 +60,23 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
 
             $terms = get_terms( $name, array( 'hide_empty' => false ) );
 
-            if( ! $terms ){
-                $term_settings[] =  array(
+            foreach( $terms as $term ){
+
+                if( 1 == $term->term_id ) continue;
+
+                $tax_term_settings[] =  array(
+                    'name' => 'taxonomy_term_' . $term->term_id,
+                    'type' => 'toggle',
+                    'label' => $term->name . ' (' . $term->count .')',
+                    'width' => 'one-third',
+                    'deps' => array(
+                        'taxonomy' => $name
+                    ),
+                );
+            }
+
+            if( empty( $tax_term_settings ) ){
+                $tax_term_settings[] =  array(
                     'name' => $name . '_no_terms',
                     'type' => 'html',
                     'width' => 'full',
@@ -70,21 +87,19 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
                 );
             }
 
-            foreach( $terms as $term ){
+            $term_settings = array_merge( $term_settings, $tax_term_settings );
 
-                if( 1 == $term->term_id ) continue;
-
-                $term_settings[] =  array(
-                    'name' => 'taxonomy_term_' . $term->term_id,
-                    'type' => 'toggle',
-                    'label' => $term->name . ' (' . $term->count .')',
-                    'width' => 'one-third',
-                    'deps' => array(
-                        'taxonomy' => $name
-                    ),
-                );
-            }
         }
+
+        $term_settings[] =  array(
+            'name' => '_no_taxonomy',
+            'type' => 'html',
+            'width' => 'full',
+            'value' => __( 'No taxonomy selected.', 'ninja-forms' ),
+            'deps' => array(
+                'taxonomy' => ''
+            )
+        );
 
         $this->_settings[ 'taxonomy_terms' ] = array(
             'name' => 'taxonomy_terms',
