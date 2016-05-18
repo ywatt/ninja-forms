@@ -76,11 +76,6 @@ LABEL LEFT
             width: 60%;
         }
     }
-    .checkbox-wrap {
-        .nf-field-label {
-            display: none;
-        }
-    }
     .nf-after-field {
         margin-left: 41.5%;
     }
@@ -109,12 +104,15 @@ LABEL RIGHT
         }
     }
     .checkbox-wrap {
-        display: block;
+        flex-direction: row wrap;
+        justify-content: flex-start;
         .nf-field-label {
-            display: inline-block;
+            width: auto;
+            order: 10;
         }
         .nf-field-element {
             width: 20px;
+            order: 5;
         }
     }
     .nf-after-field {

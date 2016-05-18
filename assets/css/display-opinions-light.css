@@ -644,9 +644,6 @@ LABEL LEFT
     display: inline-block;
     width: 60%; }
 
-.label-left .checkbox-wrap .nf-field-label {
-  display: none; }
-
 .label-left .nf-after-field {
   margin-left: 41.5%; }
 
@@ -695,11 +692,27 @@ LABEL RIGHT
             order: 1; }
 
 .label-right .checkbox-wrap {
-  display: block; }
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row wrap;
+      -ms-flex-direction: row wrap;
+          flex-direction: row wrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start; }
   .label-right .checkbox-wrap .nf-field-label {
-    display: inline-block; }
+    width: auto;
+    -webkit-box-ordinal-group: 11;
+    -webkit-order: 10;
+        -ms-flex-order: 10;
+            order: 10; }
   .label-right .checkbox-wrap .nf-field-element {
-    width: 20px; }
+    width: 20px;
+    -webkit-box-ordinal-group: 6;
+    -webkit-order: 5;
+        -ms-flex-order: 5;
+            order: 5; }
 
 .label-right .nf-after-field {
   width: 59%; }
