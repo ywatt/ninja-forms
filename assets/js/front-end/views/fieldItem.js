@@ -108,6 +108,14 @@ define( [], function() {
 					return template( this );
 				},
 
+				renderLabelClasses: function () {
+					var classes = '';
+					if ( 'undefined' != typeof this.customLabelClasses ) {
+						classes = this.customLabelClasses( classes );
+					}
+					return classes;
+				},
+
 				setPlaceholder: function() {
 					if ( 'inside' == this.label_pos ) {
 						this.placeholder = this.label;
@@ -188,16 +196,6 @@ define( [], function() {
 					var check_text = '<p>' + this.desc_text + '</p>';
 					if ( 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
 						return this.desc_text;
-					} else {
-						return '';
-					}
-				},
-
-				maybeChecked: function() {
-					if( 'undefined' != typeof this.default_value
-						&& 'checked' == this.default_value )
-					{
-						return ' checked';
 					} else {
 						return '';
 					}
