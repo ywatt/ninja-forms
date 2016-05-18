@@ -114,8 +114,14 @@
     }
     &.label-right {
         .field-wrap {
+            display: flex;
             > div {
                 width: 100%;
+            }
+        }
+        label {
+            &::after {
+                bottom: 2px !important;
             }
         }
     }
@@ -124,13 +130,13 @@
     input[type="checkbox"] {
         + label {
             &::after {
-                bottom: 2px;
+                bottom: 0;
             }
         }
         &.nf-checked {
             + label {
                 &::before {
-                    bottom: 2px;
+                    bottom: -2px;
                 }
             }
         }

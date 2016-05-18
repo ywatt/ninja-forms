@@ -25,18 +25,24 @@ Normalize Ninja Forms fields with default structure
     margin: 0;
     height: auto; }
 
-.nf-fields input,
-.nf-fields select,
-.nf-fields textarea {
+.nf-field-element input,
+.nf-field-element select,
+.nf-field-element textarea {
+  margin: 0;
   width: auto;
   height: auto;
   vertical-align: inherit; }
 
-.nf-fields textarea {
+.nf-field-element textarea {
   height: 200px; }
 
-.nf-fields .field-wrap > label {
-  font-weight: bold; }
+.nf-field-label label {
+  font-weight: bold;
+  margin: 0;
+  padding: 0; }
+
+.nf-fields .nf-field-element {
+  position: relative; }
 
 .nf-fields .nf-input-limit {
   font-size: 12px;
@@ -49,6 +55,9 @@ Normalize Ninja Forms fields with default structure
   margin-right: 10px;
   text-align: right; }
 
+/* ---------------------------------
+CHECKBOX FIELD
+----------------------------------*/
 /* ---------------------------------
 RADIO & CHECKBOX LISTS
 ----------------------------------*/
@@ -549,50 +558,94 @@ Make sure all Ninja Forms label positons function properly
 /* ---------------------------------
 STANDARDIZE ALL FIELDS
 ----------------------------------*/
-.field-wrap > label {
-  display: block; }
-
-.field-wrap > div input,
-.field-wrap textarea,
-.field-wrap select,
-.field-wrap .pikaday__container,
-.field-wrap .pikaday__display,
-.field-wrap .listselect-wrap > div {
-  width: 100%; }
-
-.field-wrap input[type="submit"],
-.field-wrap input[type="button"],
-.field-wrap button {
-  width: auto; }
+.field-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  .field-wrap > label {
+    display: block; }
+  .field-wrap > div input,
+  .field-wrap textarea,
+  .field-wrap select,
+  .field-wrap .pikaday__container,
+  .field-wrap .pikaday__display,
+  .field-wrap .listselect-wrap > div {
+    width: 100%; }
+  .field-wrap input[type="submit"],
+  .field-wrap input[type="button"],
+  .field-wrap button {
+    width: auto; }
 
 /* ---------------------------------
 LABEL ABOVE
 ----------------------------------*/
-.label-above .field-wrap > label {
-  margin-bottom: 10px; }
+.label-above .nf-field-label {
+  margin-bottom: 10px;
+  -webkit-box-ordinal-group: 6;
+  -webkit-order: 5;
+      -ms-flex-order: 5;
+          order: 5; }
+
+.label-above .nf-field-element {
+  -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
+      -ms-flex-order: 10;
+          order: 10; }
 
 /* ---------------------------------
 LABEL BELOW
 ----------------------------------*/
-.label-below .field-wrap > label {
-  margin-top: 10px; }
+.label-below .nf-field-label {
+  margin-top: 10px;
+  -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
+      -ms-flex-order: 10;
+          order: 10; }
+
+.label-below .nf-field-element {
+  -webkit-box-ordinal-group: 6;
+  -webkit-order: 5;
+      -ms-flex-order: 5;
+          order: 5; }
 
 /* ---------------------------------
 LABEL LEFT
 ----------------------------------*/
-.label-left .field-wrap > label {
-  display: inline-block;
-  margin-right: 1%;
-  text-align: right;
-  width: 39%; }
+.label-left .field-wrap {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row wrap;
+      -ms-flex-direction: row wrap;
+          flex-direction: row wrap;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
+  .label-left .field-wrap .nf-field-label {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-right: 1%;
+    text-align: right;
+    width: 40%; }
+    .label-left .field-wrap .nf-field-label label {
+      width: 100%; }
+  .label-left .field-wrap .nf-field-element {
+    display: inline-block;
+    width: 60%; }
 
-.label-left .field-wrap > div {
-  display: inline-block;
-  width: 59%; }
-
-.label-left .field-wrap input[type=submit],
-.label-left .field-wrap input[type=button] {
-  margin-left: 41%; }
+.label-left .checkbox-wrap .nf-field-label {
+  display: none; }
 
 .label-left .nf-after-field {
   margin-left: 41.5%; }
@@ -600,17 +653,53 @@ LABEL LEFT
 /* ---------------------------------
 LABEL RIGHT
 ----------------------------------*/
-.label-right .field-wrap > label {
-  display: inline-block;
-  margin-left: 1%;
-  width: 36%; }
+.label-right .field-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row wrap;
+      -ms-flex-direction: row wrap;
+          flex-direction: row wrap;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
+  .label-right .field-wrap .nf-field-label {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-left: 1%;
+    width: 40%;
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+        -ms-flex-order: 2;
+            order: 2; }
+  .label-right .field-wrap .nf-field-element {
+    display: inline-block;
+    width: 60%;
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+        -ms-flex-order: 1;
+            order: 1; }
 
-.label-right .field-wrap > div {
-  display: inline-block;
-  width: 59%; }
-
-.label-right .checkbox-wrap > div {
-  width: 20px; }
+.label-right .checkbox-wrap {
+  display: block; }
+  .label-right .checkbox-wrap .nf-field-label {
+    display: inline-block; }
+  .label-right .checkbox-wrap .nf-field-element {
+    width: 20px; }
 
 .label-right .nf-after-field {
   width: 59%; }
@@ -618,41 +707,55 @@ LABEL RIGHT
 /* ---------------------------------
 ADJUST SOME LABEL ABOVE & BELOW ISSUES
 ----------------------------------*/
-.label-below .field-wrap > div input,
-.label-below .field-wrap textarea,
-.label-below .field-wrap select,
-.label-below .field-wrap .pikaday__container,
-.label-below .field-wrap .pikaday__display,
-.label-below .field-wrap .listselect-wrap > div,
-.label-above .field-wrap > div input,
-.label-above .field-wrap textarea,
-.label-above .field-wrap select,
-.label-above .field-wrap .pikaday__container,
-.label-above .field-wrap .pikaday__display,
-.label-above .field-wrap .listselect-wrap > div {
+.label-below .field-wrap,
+.label-above .field-wrap {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-flex-flow: wrap;
+      -ms-flex-flow: wrap;
+          flex-flow: wrap; }
+
+.label-below .nf-field-element,
+.label-above .nf-field-element {
+  margin: 0;
+  width: 100%; }
+
+.label-below .checkbox-wrap .nf-field-label,
+.label-above .checkbox-wrap .nf-field-label {
   margin: 0; }
 
 /* ---------------------------------
 ADJUST SOME LABEL LEFT & RIGHT ISSUES
 ----------------------------------*/
-.label-left .textarea-wrap > label,
-.label-left .listradio-wrap > label,
-.label-left .listcheckbox-wrap > label,
-.label-right .textarea-wrap > label,
-.label-right .listradio-wrap > label,
-.label-right .listcheckbox-wrap > label {
-  vertical-align: top; }
+.label-left .textarea-wrap .nf-field-label,
+.label-left .listradio-wrap .nf-field-label,
+.label-left .listcheckbox-wrap .nf-field-label,
+.label-right .textarea-wrap .nf-field-label,
+.label-right .listradio-wrap .nf-field-label,
+.label-right .listcheckbox-wrap .nf-field-label {
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start; }
 
-.label-left .textarea-wrap > label,
-.label-right .textarea-wrap > label {
+.label-left .textarea-wrap .nf-field-label,
+.label-right .textarea-wrap .nf-field-label {
   margin-top: 5px; }
 
-.label-left .html-wrap > div,
-.label-left .hr-wrap > div,
-.label-right .html-wrap > div,
-.label-right .hr-wrap > div {
-  display: block;
-  margin: 0;
-  width: 100%; }
+.label-left .html-wrap,
+.label-left .hr-wrap,
+.label-right .html-wrap,
+.label-right .hr-wrap {
+  display: block; }
+  .label-left .html-wrap .nf-field-element,
+  .label-left .hr-wrap .nf-field-element,
+  .label-right .html-wrap .nf-field-element,
+  .label-right .hr-wrap .nf-field-element {
+    display: block;
+    margin: 0;
+    width: 100%; }
 
 /*# sourceMappingURL=display-structure.css.map */

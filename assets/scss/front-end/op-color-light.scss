@@ -1,7 +1,7 @@
 .nf-fields {
     input:not([type='button']),
     textarea,
-    .list-select-wrap > div {
+    .list-select-wrap .nf-field-element > div {
         background: #f7f7f7;
         border: 1px solid #eaeaea;
         border-radius: 0;
@@ -12,12 +12,6 @@
             //box-shadow: -3px 3px 10px #ccc;
             outline: none;
         }
-    }
-    .list-select-wrap:hover > div {
-        background: #fff;
-        border-color: #ccc;
-        //box-shadow: -3px 3px 10px #ccc;
-        outline: none;
     }
     select.ninja-forms-field {
         &:focus {
@@ -96,7 +90,7 @@
         border-color: #E80000 !important;
     }
     &.field-wrap {
-        > div::after {
+        .nf-field-element::after {
             background: #E80000;
             color: #fff;
             font-family: FontAwesome;
@@ -122,7 +116,7 @@
         border-color: green !important;
     }
     &.field-wrap {
-        > div::after {
+        .nf-field-element::after {
             color: green;
             font-family: FontAwesome;
             font-size: 30px;

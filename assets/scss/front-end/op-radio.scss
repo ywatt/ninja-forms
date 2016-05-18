@@ -1,40 +1,38 @@
-.nf-fields {
-    .listradio-wrap {
-        input[type="radio"] {
-            display: none;
+.listradio-wrap {
+    input[type="radio"] {
+        display: none;
+        + label {
+            position: relative;
+            margin-left: 30px;
+            &::after {
+                background: #f7f7f7;
+                border: 2px solid #eaeaea;
+                border-radius: 50%;
+                content: "";
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                left: -30px;
+                bottom: 1px;
+            }
+        }
+        &.nf-checked {
             + label {
-                position: relative;
-                margin-left: 30px;
                 &::after {
-                    background: #f7f7f7;
-                    border: 2px solid #eaeaea;
-                    border-radius: 50%;
-                    content: "";
-                    width: 18px;
-                    height: 18px;
-                    position: absolute;
-                    left: -30px;
-                    bottom: 2px;
+                    border-color: #3366CC;
                 }
             }
-            &.nf-checked {
-                + label {
-                    &::after {
-                        border-color: #3366CC;
-                    }
-                }
-                + label {
-                    &::before {
-                        background: #3366CC;
-                        border-radius: 50%;
-                        content: "";
-                        height: 10px;
-                        width: 10px;
-                        position: absolute;
-                        left: -26px;
-                        bottom: 6px;
-                        z-index: 2;
-                    }
+            + label {
+                &::before {
+                    background: #3366CC;
+                    border-radius: 50%;
+                    content: "";
+                    height: 10px;
+                    width: 10px;
+                    position: absolute;
+                    left: -26px;
+                    bottom: 5px;
+                    z-index: 2;
                 }
             }
         }
