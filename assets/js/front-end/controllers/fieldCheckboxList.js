@@ -42,7 +42,6 @@ define([], function() {
 
                 option.fieldID = that.id;
                 option.classes = that.classes;
-                option.currentValue = that.value;
                 option.index = index;
 
                 if( option.selected ){
@@ -50,7 +49,7 @@ define([], function() {
                 }
 
                 option.isSelected = function(){
-                    return ( -1 != option.currentValue.indexOf( option.value ) );
+                    return ( -1 != that.value.indexOf( option.value ) );
                 };
 
                 var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-option' ).html() );
