@@ -82,6 +82,13 @@
         }
     }
     &.label-left {
+        .nf-field-label {
+            width: 42%;
+            padding-right: 3%;
+        }
+        .nf-field-element {
+            width: 58%;
+        }
         label {
             margin: 0;
             display: block;
@@ -94,7 +101,7 @@
                 &::before {
                     left: auto;
                     bottom: 0;
-                    top: -36px;
+                    right: -36px;
                 }
             }
         }
@@ -138,6 +145,7 @@
 .listcheckbox-container {
     .nf-field-label {
         label::after {
+            background: transparent !important;
             border: 0;
         }
     }
@@ -147,7 +155,8 @@
         }
     }
     &.label-above,
-    &.label-below {
+    &.label-below,
+    &.label-right {
         .nf-field-label {
             label {
                 margin: 0;

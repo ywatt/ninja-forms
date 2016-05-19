@@ -1,12 +1,9 @@
 .listradio-wrap {
-    input[type="radio"] {
-        display: none;
-        + label {
+    .nf-field-element {
+        label {
             position: relative;
             margin-left: 30px;
             &::after {
-                background: #f7f7f7;
-                border: 2px solid #eaeaea;
                 border-radius: 50%;
                 content: "";
                 width: 18px;
@@ -15,16 +12,8 @@
                 left: -30px;
                 bottom: 1px;
             }
-        }
-        &.nf-checked {
-            + label {
-                &::after {
-                    border-color: #3366CC;
-                }
-            }
-            + label {
+            &.nf-checked-label {
                 &::before {
-                    background: #3366CC;
                     border-radius: 50%;
                     content: "";
                     height: 10px;
@@ -35,6 +24,9 @@
                     z-index: 2;
                 }
             }
+        }
+        input {
+            display: none;
         }
     }
 }

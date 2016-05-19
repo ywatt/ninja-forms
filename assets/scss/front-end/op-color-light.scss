@@ -23,61 +23,59 @@
     }
 }
 
-.nf-fields {
-    .list-select-wrap {
-        div {
+
+.list-select-wrap {
+    div {
+        &::after {
+            color: #999;
+        }
+    }
+    select {
+        &:active,
+        &:focus {
+            + div {
+                background: #fff !important;
+                border-color: #ccc !important;
+            }
+        }
+    }
+}
+
+
+.listradio-wrap {
+    .nf-field-element {
+        label {
             &::after {
-                color: #999;
+                background: #f7f7f7;
+                border: 2px solid #eaeaea;
             }
-        }
-    }
-}
-
-.nf-fields {
-    .listradio-wrap {
-        input[type="radio"] {
-            + label {
+            &.nf-checked-label {
                 &::after {
-                    background: #f7f7f7;
-                    border: 2px solid #eaeaea;
+                    border-color: #333;
                 }
-            }
-            &.nf-checked {
-                + label {
-                    &::after {
-                        border-color: #333;
-                    }
-                }
-                + label {
-                    &::before {
-                        background: #333;
-                    }
+                &::before {
+                    background: #333;
                 }
             }
         }
     }
 }
 
-.nf-fields {
-    .checkbox-wrap,
-    .listcheckbox-wrap {
-        input[type="checkbox"] {
-            + label {
-                &::after {
-                    background: #f7f7f7;
-                    border-color: #eaeaea;
-                }
+.checkbox-wrap,
+.listcheckbox-wrap {
+    .nf-field-label,
+    .nf-field-element {
+        label {
+            &::after {
+                background: #f7f7f7;
+                border-color: #eaeaea;
             }
-            &.nf-checked {
-                + label {
-                    &::after {
-                        border-color: #999;
-                    }
+            &.nf-checked-label {
+                &::after {
+                    border-color: #999;
                 }
-                + label {
-                    &::before {
-                        color: #333;
-                    }
+                &::before {
+                    color: #333;
                 }
             }
         }

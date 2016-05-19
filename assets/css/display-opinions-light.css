@@ -752,7 +752,6 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
       -ms-flex-align: start;
-              -ms-grid-row-align: flex-start;
           align-items: flex-start; }
 
 .label-left .textarea-wrap .nf-field-label,
@@ -1004,6 +1003,13 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     bottom: auto;
     top: -27px; }
 
+.checkbox-container.label-left .nf-field-label {
+  width: 42%;
+  padding-right: 3%; }
+
+.checkbox-container.label-left .nf-field-element {
+  width: 58%; }
+
 .checkbox-container.label-left label {
   margin: 0;
   display: block; }
@@ -1014,7 +1020,7 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
   .checkbox-container.label-left label.nf-checked-label::before {
     left: auto;
     bottom: 0;
-    top: -36px; }
+    right: -36px; }
 
 .checkbox-container.label-right .nf-field-label {
   padding: 0;
@@ -1052,33 +1058,27 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
   bottom: 2px !important; }
 
 .listcheckbox-container .nf-field-label label::after {
+  background: transparent !important;
   border: 0; }
 
 .listcheckbox-container .nf-field-element input {
   display: none; }
 
-.listcheckbox-container.label-above .nf-field-label label, .listcheckbox-container.label-below .nf-field-label label {
+.listcheckbox-container.label-above .nf-field-label label, .listcheckbox-container.label-below .nf-field-label label, .listcheckbox-container.label-right .nf-field-label label {
   margin: 0; }
 
-.listradio-wrap input[type="radio"] {
-  display: none; }
-  .listradio-wrap input[type="radio"] + label {
-    position: relative;
-    margin-left: 30px; }
-    .listradio-wrap input[type="radio"] + label::after {
-      background: #f7f7f7;
-      border: 2px solid #eaeaea;
-      border-radius: 50%;
-      content: "";
-      width: 18px;
-      height: 18px;
-      position: absolute;
-      left: -30px;
-      bottom: 1px; }
-  .listradio-wrap input[type="radio"].nf-checked + label::after {
-    border-color: #3366CC; }
-  .listradio-wrap input[type="radio"].nf-checked + label::before {
-    background: #3366CC;
+.listradio-wrap .nf-field-element label {
+  position: relative;
+  margin-left: 30px; }
+  .listradio-wrap .nf-field-element label::after {
+    border-radius: 50%;
+    content: "";
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: -30px;
+    bottom: 1px; }
+  .listradio-wrap .nf-field-element label.nf-checked-label::before {
     border-radius: 50%;
     content: "";
     height: 10px;
@@ -1087,6 +1087,9 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     left: -26px;
     bottom: 5px;
     z-index: 2; }
+
+.listradio-wrap .nf-field-element input {
+  display: none; }
 
 input[type=checkbox].nf-toggle {
   background: transparent;
@@ -1245,30 +1248,40 @@ input[type=checkbox].nf-toggle {
   box-shadow: none;
   outline: none; }
 
-.nf-fields .list-select-wrap div::after {
+.list-select-wrap div::after {
   color: #999; }
 
-.nf-fields .listradio-wrap input[type="radio"] + label::after {
+.list-select-wrap select:active + div, .list-select-wrap select:focus + div {
+  background: #fff !important;
+  border-color: #ccc !important; }
+
+.listradio-wrap .nf-field-element label::after {
   background: #f7f7f7;
   border: 2px solid #eaeaea; }
 
-.nf-fields .listradio-wrap input[type="radio"].nf-checked + label::after {
+.listradio-wrap .nf-field-element label.nf-checked-label::after {
   border-color: #333; }
 
-.nf-fields .listradio-wrap input[type="radio"].nf-checked + label::before {
+.listradio-wrap .nf-field-element label.nf-checked-label::before {
   background: #333; }
 
-.nf-fields .checkbox-wrap input[type="checkbox"] + label::after,
-.nf-fields .listcheckbox-wrap input[type="checkbox"] + label::after {
+.checkbox-wrap .nf-field-label label::after,
+.checkbox-wrap .nf-field-element label::after,
+.listcheckbox-wrap .nf-field-label label::after,
+.listcheckbox-wrap .nf-field-element label::after {
   background: #f7f7f7;
   border-color: #eaeaea; }
 
-.nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::after,
-.nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::after {
+.checkbox-wrap .nf-field-label label.nf-checked-label::after,
+.checkbox-wrap .nf-field-element label.nf-checked-label::after,
+.listcheckbox-wrap .nf-field-label label.nf-checked-label::after,
+.listcheckbox-wrap .nf-field-element label.nf-checked-label::after {
   border-color: #999; }
 
-.nf-fields .checkbox-wrap input[type="checkbox"].nf-checked + label::before,
-.nf-fields .listcheckbox-wrap input[type="checkbox"].nf-checked + label::before {
+.checkbox-wrap .nf-field-label label.nf-checked-label::before,
+.checkbox-wrap .nf-field-element label.nf-checked-label::before,
+.listcheckbox-wrap .nf-field-label label.nf-checked-label::before,
+.listcheckbox-wrap .nf-field-element label.nf-checked-label::before {
   color: #333; }
 
 .nf-error {
