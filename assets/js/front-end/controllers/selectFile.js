@@ -7,7 +7,6 @@ define(['models/fileCollection', 'views/fileCollection'], function( fileCollecti
 
 		renderFileInput: function() {
 			var template = Marionette.TemplateCache.get( '#nf-tmpl-field-file-input' );
-			// var template = _.template( jQuery( '#nf-tmpl-field-file-input' ).html() );
 			return template( this );
 		},
 

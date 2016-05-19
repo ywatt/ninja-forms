@@ -195,8 +195,6 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 	    				this.value = '';
 	    			}
 	    			var setting = Marionette.TemplateCache.get( '#nf-tmpl-edit-setting-' + this.type );
-					// var setting = _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html() );
-
 					return setting( this );
 				},
 

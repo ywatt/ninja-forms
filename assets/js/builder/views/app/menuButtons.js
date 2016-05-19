@@ -43,10 +43,8 @@ define( [], function() {
 	    			}
 	    			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'loading' ) ) {
 	    				var template = Marionette.TemplateCache.get( '#nf-tmpl-add-header-publish-loading' );
-	    				// var template = _.template( jQuery( '#nf-tmpl-add-header-publish-loading' ).html() );
 	    			} else {
 	    				var template = Marionette.TemplateCache.get( '#nf-tmpl-app-header-publish-button' );
-	    				// var template = _.template( jQuery( '#nf-tmpl-app-header-publish-button' ).html() );
 	    			}
 	    			return template( this );
 	    		},
@@ -73,7 +71,6 @@ define( [], function() {
 	    		maybeRenderCancel: function() {
 	    			if ( ! nfRadio.channel( 'app' ).request( 'get:setting', 'clean' ) ) {
 	    				var viewChanges = Marionette.TemplateCache.get( '#nf-tmpl-app-header-view-changes' );
-	    				// var viewChanges = _.template( jQuery( '#nf-tmpl-app-header-view-changes' ).html() );
 	    				return viewChanges( this );
 	    			} else {
 	    				return '';

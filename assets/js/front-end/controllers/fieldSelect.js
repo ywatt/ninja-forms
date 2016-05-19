@@ -60,7 +60,6 @@ define([], function() {
 				option.classes = that.classes;
 				option.currentValue = that.value;
 				var template = Marionette.TemplateCache.get( '#nf-tmpl-field-listselect-option' );
-				// var template = _.template( jQuery( '#nf-tmpl-field-listselect-option' ).html() );
 				html += template( option );
 			} );
 

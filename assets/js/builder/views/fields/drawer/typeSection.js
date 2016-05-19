@@ -98,7 +98,6 @@ define( [], function() {
 			            var nicename = type.get( 'nicename' );
 			            var icon = type.get( 'icon' );
 			            var renderType = Marionette.TemplateCache.get( '#nf-tmpl-drawer-field-type-button' );
-			            // var renderType = _.template( jQuery( '#nf-tmpl-drawer-field-type-button' ).html() );
 			            html += renderType( { id: id, nicename: nicename, icon: icon, type: type, savedField: that.isSavedField } );
 			        } );
 			        return html;

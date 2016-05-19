@@ -74,7 +74,6 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 					this.value = this.active;
 					this.name = this.id + '-active';
 					var html = Marionette.TemplateCache.get( '#nf-tmpl-edit-setting-toggle' );
-					// var html = _.template( jQuery( '#nf-tmpl-edit-setting-toggle' ).html() );
 					html = html( this );
 					this.label = actionLabel;
 					return html;

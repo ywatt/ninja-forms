@@ -97,7 +97,6 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 
 	    		renderSetting: function() {
 	    			var setting = Marionette.TemplateCache.get( '#nf-tmpl-edit-setting-' + this.type );
-					// var setting = _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html() );
 					return setting( this );
 				},
 

@@ -50,8 +50,6 @@ define([], function() {
 
                 option.isSelected = ( -1 != that.value.indexOf( option.value.toString() ) );
                 var template = Marionette.TemplateCache.get( '#nf-tmpl-field-listcheckbox-option' );
-                // var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-option' ).html() );
-
                 html += template( option );
             } );
 
@@ -68,7 +66,6 @@ define([], function() {
                 };
 
                 var template = Marionette.TemplateCache.get( '#nf-tmpl-field-listcheckbox-other' );
-                // var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-other' ).html() );
                 html += template( data );
 
             }
@@ -87,7 +84,6 @@ define([], function() {
                     currentValue: this.currentValue
                 };
                 var template = Marionette.TemplateCache.get( '#nf-tmpl-field-listcheckbox-other-text' );
-                // var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-other-text' ).html() );
                 return template( data );
             }
         },
