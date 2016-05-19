@@ -1,20 +1,18 @@
 .nf-icons {
-    .field-wrap {
-        > div {
-            position: relative;
-            &::before {
-                //border: 1px;
-                font-family: FontAwesome;
-                font-size: 20px;
-                position: absolute;
-                left: 1px;
-                bottom: 1px;
-                height: 48px;
-                width: 50px;
-                line-height: 50px;
-                text-align: center;
-                z-index: 1;
-            }
+    .nf-field-element {
+        position: relative;
+        &::before {
+            //border: 1px;
+            font-family: FontAwesome;
+            font-size: 20px;
+            position: absolute;
+            left: 1px;
+            bottom: 1px;
+            height: 48px;
+            width: 50px;
+            line-height: 50px;
+            text-align: center;
+            z-index: 1;
         }
     }
     .date-wrap,
@@ -33,19 +31,17 @@
     .creditcardcvc-wrap,
     .creditcardexpiration-wrap,
     .creditcardzip-wrap {
-        > div {
+        .nf-field-element {
             input {
                 padding-left: 60px;
             }
         }
     }
     &.right {
-        .field-wrap {
-            > div {
-                &::before {
-                    left: auto;
-                    right: 1px;
-                }
+        .nf-field-element {
+            &::before {
+                left: auto;
+                right: 1px;
             }
         }
         .date-wrap,
@@ -72,34 +68,34 @@
             }
         }
     }
-    .date-wrap > div::before {
+    .date-wrap .nf-field-element::before {
         content: "\f073";
     }
-    .number-wrap > div::before,
+    .number-wrap .nf-field-element::before,
     .quantity-wrap > div::before {
         content: "\f292";
     }
-    .email-wrap > div::before {
+    .email-wrap .nf-field-element::before {
         content: "\f0e0";
     }
-    .phone-wrap > div::before {
+    .phone-wrap .nf-field-element::before {
         content: "\f095";
     }
-    .firstname-wrap > div::before,
-    .lastname-wrap > div::before {
+    .firstname-wrap .nf-field-element::before,
+    .lastname-wrap .nf-field-element::before {
         content: "\f007";
     }
-    .address-wrap > div::before,
-    .city-wrap > div::before,
-    .state-wrap > div::before,
-    .zip-wrap > div::before {
+    .address-wrap .nf-field-element::before,
+    .city-wrap .nf-field-element::before,
+    .state-wrap .nf-field-element::before,
+    .zip-wrap .nf-field-element::before {
         content: "\f041";
     }
-    .creditcardfullname-wrap > div::before,
-    .creditcardnumber-wrap > div::before,
-    .creditcardcvc-wrap > div::before,
-    .creditcardexpiration-wrap > div::before,
-    .creditcardzip-wrap > div::before {
+    .creditcardfullname-wrap .nf-field-element::before,
+    .creditcardnumber-wrap .nf-field-element::before,
+    .creditcardcvc-wrap .nf-field-element::before,
+    .creditcardexpiration-wrap .nf-field-element::before,
+    .creditcardzip-wrap .nf-field-element::before {
         content: "\f283";
     }
 }

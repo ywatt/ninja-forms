@@ -1143,9 +1143,9 @@ input[type=checkbox].nf-toggle {
     margin-left: 22px;
     margin-top: 20px; }
 
-.nf-icons .field-wrap > div {
+.nf-icons .nf-field-element {
   position: relative; }
-  .nf-icons .field-wrap > div::before {
+  .nf-icons .nf-field-element::before {
     font-family: FontAwesome;
     font-size: 20px;
     position: absolute;
@@ -1157,25 +1157,25 @@ input[type=checkbox].nf-toggle {
     text-align: center;
     z-index: 1; }
 
-.nf-icons .date-wrap > div input,
-.nf-icons .number-wrap > div input,
-.nf-icons .quantity-wrap > div input,
-.nf-icons .email-wrap > div input,
-.nf-icons .phone-wrap > div input,
-.nf-icons .firstname-wrap > div input,
-.nf-icons .lastname-wrap > div input,
-.nf-icons .address-wrap > div input,
-.nf-icons .city-wrap > div input,
-.nf-icons .state-wrap > div input,
-.nf-icons .zip-wrap > div input,
-.nf-icons .creditcardfullname-wrap > div input,
-.nf-icons .creditcardnumber-wrap > div input,
-.nf-icons .creditcardcvc-wrap > div input,
-.nf-icons .creditcardexpiration-wrap > div input,
-.nf-icons .creditcardzip-wrap > div input {
+.nf-icons .date-wrap .nf-field-element input,
+.nf-icons .number-wrap .nf-field-element input,
+.nf-icons .quantity-wrap .nf-field-element input,
+.nf-icons .email-wrap .nf-field-element input,
+.nf-icons .phone-wrap .nf-field-element input,
+.nf-icons .firstname-wrap .nf-field-element input,
+.nf-icons .lastname-wrap .nf-field-element input,
+.nf-icons .address-wrap .nf-field-element input,
+.nf-icons .city-wrap .nf-field-element input,
+.nf-icons .state-wrap .nf-field-element input,
+.nf-icons .zip-wrap .nf-field-element input,
+.nf-icons .creditcardfullname-wrap .nf-field-element input,
+.nf-icons .creditcardnumber-wrap .nf-field-element input,
+.nf-icons .creditcardcvc-wrap .nf-field-element input,
+.nf-icons .creditcardexpiration-wrap .nf-field-element input,
+.nf-icons .creditcardzip-wrap .nf-field-element input {
   padding-left: 60px; }
 
-.nf-icons.right .field-wrap > div::before {
+.nf-icons.right .nf-field-element::before {
   left: auto;
   right: 1px; }
 
@@ -1198,34 +1198,34 @@ input[type=checkbox].nf-toggle {
   padding-left: 12px;
   padding-right: 60px; }
 
-.nf-icons .date-wrap > div::before {
+.nf-icons .date-wrap .nf-field-element::before {
   content: "\f073"; }
 
-.nf-icons .number-wrap > div::before,
+.nf-icons .number-wrap .nf-field-element::before,
 .nf-icons .quantity-wrap > div::before {
   content: "\f292"; }
 
-.nf-icons .email-wrap > div::before {
+.nf-icons .email-wrap .nf-field-element::before {
   content: "\f0e0"; }
 
-.nf-icons .phone-wrap > div::before {
+.nf-icons .phone-wrap .nf-field-element::before {
   content: "\f095"; }
 
-.nf-icons .firstname-wrap > div::before,
-.nf-icons .lastname-wrap > div::before {
+.nf-icons .firstname-wrap .nf-field-element::before,
+.nf-icons .lastname-wrap .nf-field-element::before {
   content: "\f007"; }
 
-.nf-icons .address-wrap > div::before,
-.nf-icons .city-wrap > div::before,
-.nf-icons .state-wrap > div::before,
-.nf-icons .zip-wrap > div::before {
+.nf-icons .address-wrap .nf-field-element::before,
+.nf-icons .city-wrap .nf-field-element::before,
+.nf-icons .state-wrap .nf-field-element::before,
+.nf-icons .zip-wrap .nf-field-element::before {
   content: "\f041"; }
 
-.nf-icons .creditcardfullname-wrap > div::before,
-.nf-icons .creditcardnumber-wrap > div::before,
-.nf-icons .creditcardcvc-wrap > div::before,
-.nf-icons .creditcardexpiration-wrap > div::before,
-.nf-icons .creditcardzip-wrap > div::before {
+.nf-icons .creditcardfullname-wrap .nf-field-element::before,
+.nf-icons .creditcardnumber-wrap .nf-field-element::before,
+.nf-icons .creditcardcvc-wrap .nf-field-element::before,
+.nf-icons .creditcardexpiration-wrap .nf-field-element::before,
+.nf-icons .creditcardzip-wrap .nf-field-element::before {
   content: "\f283"; }
 
 .nf-fields input:not([type='button']),
