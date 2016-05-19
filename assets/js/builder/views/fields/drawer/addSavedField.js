@@ -13,9 +13,11 @@ define( [], function() {
 
 		renderAddButton: function() {
 			if ( this.model.get( 'addSavedLoading' ) ) {
-				var button = _.template( jQuery( '#nf-tmpl-add-saved-field-loading' ).html() );
+				var button = Marionette.TemplateCache.get( '#nf-tmpl-add-saved-field-loading' );
+				// var button = _.template( jQuery( '#nf-tmpl-add-saved-field-loading' ).html() );
 			} else {
-				var button = _.template( jQuery( '#nf-tmpl-add-saved-field-button' ).html() );
+				var button = Marionette.TemplateCache.get( '#nf-tmpl-add-saved-field-button' );
+				// var button = _.template( jQuery( '#nf-tmpl-add-saved-field-button' ).html() );
 			}
 			jQuery( this.el ).find( '.add-button' ).html( button( this ) );
 		},

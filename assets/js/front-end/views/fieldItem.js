@@ -97,12 +97,14 @@ define( [], function() {
 							return true;
 						}
 					} );
-					var template = _.template( jQuery( '#nf-tmpl-field-' + tmpl ).html() );
+					var template = Marionette.TemplateCache.get( '#nf-tmpl-field-' + tmpl );
+					// var template = _.template( jQuery( '#nf-tmpl-field-' + tmpl ).html() );
 					return template( this );
 				},
 
 				renderLabel: function() {
-					var template = _.template( jQuery( '#nf-tmpl-field-label' ).html() );
+					var template = Marionette.TemplateCache.get( '#nf-tmpl-field-label' );
+					// var template = _.template( jQuery( '#nf-tmpl-field-label' ).html() );
 					return template( this );
 				},
 

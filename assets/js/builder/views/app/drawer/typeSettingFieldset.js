@@ -54,7 +54,8 @@ define( ['views/app/drawer/itemSetting'], function( itemSettingView ) {
 	    			return '';
 	    		},
 	    		renderSetting: function(){
-					var setting = _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html() );
+	    			var setting = Marionette.TemplateCache.get( '#nf-tmpl-edit-setting-' + this.type );
+					// var setting = _.template( jQuery( '#nf-tmpl-edit-setting-' + this.type ).html() );
 					return setting( this );
 				},
 				

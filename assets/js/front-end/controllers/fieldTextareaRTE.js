@@ -108,8 +108,10 @@ define([], function() {
 		linkButton: function( context ) {
 			var that = this;
 			var ui = jQuery.summernote.ui;
-			var linkButton = _.template( jQuery( '#nf-tmpl-rte-link-button' ).html() );
-			var linkDropdown = _.template( jQuery( '#nf-tmpl-rte-link-dropdown' ).html() );
+			var linkButton = Marionette.TemplateCache.get( '#nf-tmpl-rte-link-button' );
+			// var linkButton = _.template( jQuery( '#nf-tmpl-rte-link-button' ).html() );
+			var linkDropdown = Marionette.TemplateCache.get( '#nf-tmpl-rte-link-dropdown' );
+			// var linkDropdown = _.template( jQuery( '#nf-tmpl-rte-link-dropdown' ).html() );
 			return ui.buttonGroup([
 				ui.button({
 	            className: 'dropdown-toggle',
@@ -138,7 +140,8 @@ define([], function() {
 		mediaButton: function( context ) {
 			var that = this;
 			var ui = jQuery.summernote.ui;
-			var mediaButton = _.template( jQuery( '#nf-tmpl-rte-media-button' ).html() );
+			var mediaButton = Marionette.TemplateCache.get( '#nf-tmpl-rte-media-button' );
+			// var mediaButton = _.template( jQuery( '#nf-tmpl-rte-media-button' ).html() );
 			return ui.button({
 	            className: 'dropdown-toggle',
 	            contents: mediaButton({}),

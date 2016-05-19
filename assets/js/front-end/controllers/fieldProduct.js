@@ -13,27 +13,32 @@ define([], function() {
         renderProduct: function(){
             switch( this.product_type ) {
                 case 'user':
-                    var template = _.template( jQuery( '#nf-tmpl-field-textbox' ).html() );
+                    var template = Marionette.TemplateCache.get( '#nf-tmpl-field-textbox' );
+                    // var template = _.template( jQuery( '#nf-tmpl-field-textbox' ).html() );
                     return template( this );
                     break;
                 case 'hidden':
-                    var template = _.template( jQuery( '#nf-tmpl-field-hidden' ).html() );
+                    var template = Marionette.TemplateCache.get( '#nf-tmpl-field-hidden' );
+                    // var template = _.template( jQuery( '#nf-tmpl-field-hidden' ).html() );
                     return template( this );
                     break;
 
                 case 'dropdown':
-                    var template = _.template( jQuery( '#nf-tmpl-product-dropdown' ).html() );
+                    var template = Marionette.TemplateCache.get( '#nf-tmpl-product-dropdown' );
+                    // var template = _.template( jQuery( '#nf-tmpl-product-dropdown' ).html() );
                     return template( this );
                     break;
                 default:
-                    var template = _.template( jQuery( '#nf-tmpl-product-single' ).html() );
+                    var template = Marionette.TemplateCache.get( '#nf-tmpl-product-single' );
+                    // var template = _.template( jQuery( '#nf-tmpl-product-single' ).html() );
                     return template( this );
             }
         },
 
         renderProductQuantity: function(){
             if ( 1 == this.product_use_quantity ) {
-                var template = _.template( jQuery( '#nf-tmpl-product-quantity' ).html() );
+                var template = Marionette.TemplateCache.get( '#nf-tmpl-product-quantity' );
+                // var template = _.template( jQuery( '#nf-tmpl-product-quantity' ).html() );
                 return template( this );
             }
         },
@@ -53,7 +58,8 @@ define([], function() {
                 option.classes = that.classes;
                 option.currentValue = that.value;
 
-                var template = _.template( jQuery( '#nf-tmpl-product-' + that.product_type + '-option' ).html() );
+                var template = Marionette.TemplateCache.get( '#nf-tmpl-product-' + that.product_type + '-option' );
+                // var template = _.template( jQuery( '#nf-tmpl-product-' + that.product_type + '-option' ).html() );
 
                 html += template( option );
             } );
