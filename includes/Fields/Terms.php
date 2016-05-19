@@ -114,23 +114,28 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
     public function add_term_options( $field )
     {
         $settings = ( is_object( $field ) ) ? $field->get_settings() : $field[ 'settings' ];
-        if( ! isset( $settings[ 'taxonomy' ] ) ) return $field;
 
-        $terms = get_terms( $settings[ 'taxonomy' ], array( 'hide_empty' => false ) );
+        $settings[ 'options' ] = array();
 
-        $settings['options'] = array();
-        foreach( $terms as $term ) {
+        if( ! isset( $settings[ 'taxonomy' ] ) || ! $settings[ 'taxonomy' ] ){
 
-            if( ! isset( $settings[ 'taxonomy_term_' . $term->term_id ] ) ) continue;
-            if( ! $settings[ 'taxonomy_term_' . $term->term_id ] ) continue;
+            $terms = get_terms( $settings[ 'taxonomy' ], array( 'hide_empty' => false ) );
 
-            $settings['options'][] = array(
-                'label' => $term->name,
-                'value' => $term->term_id,
-                'calc' => '',
-                'selected' => 0,
-                'order' => 0
-            );
+            if( ! is_wp_error( $terms ) ){
+                foreach( $terms as $term ) {
+
+                    if( ! isset( $settings[ 'taxonomy_term_' . $term->term_id ] ) ) continue;
+                    if( ! $settings[ 'taxonomy_term_' . $term->term_id ] ) continue;
+
+                    $settings['options'][] = array(
+                        'label' => $term->name,
+                        'value' => $term->term_id,
+                        'calc' => '',
+                        'selected' => 0,
+                        'order' => 0
+                    );
+                }
+            }
         }
 
         if( is_object( $field ) ) {
