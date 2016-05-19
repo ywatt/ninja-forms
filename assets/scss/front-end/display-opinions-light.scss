@@ -7,6 +7,10 @@
 @import "op-radio";
 @import "op-toggle";
 @import "op-icons";
-@import "op-color-light";
+
+$base: #f7f7f7;
+$accent: #333;
+@import "op-variables-light";
+@import "op-color";
 
 @import "st-media-queries";

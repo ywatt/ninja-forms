@@ -25,33 +25,40 @@ Normalize Ninja Forms fields with default structure
     margin: 0;
     height: auto; }
 
-.nf-field-element input,
-.nf-field-element select,
-.nf-field-element textarea {
-  margin: 0;
-  width: auto;
-  height: auto;
-  vertical-align: inherit; }
-
-.nf-field-element textarea {
-  height: 200px; }
-
 .nf-field-label label {
   font-weight: bold;
   margin: 0;
   padding: 0; }
 
-.nf-fields .nf-field-element {
+.nf-field-element {
   position: relative; }
+  .nf-field-element input,
+  .nf-field-element select,
+  .nf-field-element textarea {
+    margin: 0;
+    width: auto;
+    height: auto;
+    vertical-align: inherit; }
+  .nf-field-element textarea {
+    height: 200px; }
 
-.nf-fields .nf-input-limit {
+.nf-field-description p:last-child {
+  margin: 0; }
+
+.nf-help {
+  background: url("../img/help-info.png") no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 16px; }
+
+.nf-input-limit {
   font-size: 12px;
   margin-top: 5px; }
 
-.nf-fields .nf-static {
+.nf-static {
   padding: 0 10px; }
 
-.nf-fields .nf-error-msg {
+.nf-error-msg {
   margin-right: 10px;
   text-align: right; }
 
@@ -593,6 +600,14 @@ LABEL ABOVE
       -ms-flex-order: 10;
           order: 10; }
 
+.label-above .nf-field-description {
+  font-size: 14px;
+  width: 100%;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1; }
+
 /* ---------------------------------
 LABEL BELOW
 ----------------------------------*/
@@ -752,7 +767,6 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
       -ms-flex-align: start;
-              -ms-grid-row-align: flex-start;
           align-items: flex-start; }
 
 .label-left .textarea-wrap .nf-field-label,

@@ -25,33 +25,40 @@ Normalize Ninja Forms fields with default structure
     margin: 0;
     height: auto; }
 
-.nf-field-element input,
-.nf-field-element select,
-.nf-field-element textarea {
-  margin: 0;
-  width: auto;
-  height: auto;
-  vertical-align: inherit; }
-
-.nf-field-element textarea {
-  height: 200px; }
-
 .nf-field-label label {
   font-weight: bold;
   margin: 0;
   padding: 0; }
 
-.nf-fields .nf-field-element {
+.nf-field-element {
   position: relative; }
+  .nf-field-element input,
+  .nf-field-element select,
+  .nf-field-element textarea {
+    margin: 0;
+    width: auto;
+    height: auto;
+    vertical-align: inherit; }
+  .nf-field-element textarea {
+    height: 200px; }
 
-.nf-fields .nf-input-limit {
+.nf-field-description p:last-child {
+  margin: 0; }
+
+.nf-help {
+  background: url("../img/help-info.png") no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 16px; }
+
+.nf-input-limit {
   font-size: 12px;
   margin-top: 5px; }
 
-.nf-fields .nf-static {
+.nf-static {
   padding: 0 10px; }
 
-.nf-fields .nf-error-msg {
+.nf-error-msg {
   margin-right: 10px;
   text-align: right; }
 
@@ -593,6 +600,14 @@ LABEL ABOVE
       -ms-flex-order: 10;
           order: 10; }
 
+.label-above .nf-field-description {
+  font-size: 14px;
+  width: 100%;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1; }
+
 /* ---------------------------------
 LABEL BELOW
 ----------------------------------*/
@@ -752,7 +767,6 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
       -ms-flex-align: start;
-              -ms-grid-row-align: flex-start;
           align-items: flex-start; }
 
 .label-left .textarea-wrap .nf-field-label,
@@ -771,6 +785,9 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     display: block;
     margin: 0;
     width: 100%; }
+
+.nf-help {
+  background: none; }
 
 .nf-fields {
   padding: 5px;
@@ -914,7 +931,6 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     z-index: 1; }
     .nf-fields .list-select-wrap > div div::after {
       content: "\f078";
-      color: #999;
       font-family: FontAwesome;
       font-size: 20px;
       position: absolute;
@@ -1233,32 +1249,36 @@ input[type=checkbox].nf-toggle {
 .nf-fields textarea,
 .nf-fields .list-select-wrap .nf-field-element > div {
   background: #f7f7f7;
-  border: 1px solid #eaeaea;
+  border: 1px solid #c4c4c4;
   border-radius: 0;
-  box-shadow: none; }
+  box-shadow: none;
+  color: #787878; }
   .nf-fields input:not([type='button']):focus,
   .nf-fields textarea:focus,
   .nf-fields .list-select-wrap .nf-field-element > div:focus {
-    background: #fff;
-    border-color: #ccc;
+    background: white;
+    border-color: #919191;
+    color: #919191;
     outline: none; }
 
-.nf-fields select.ninja-forms-field:focus {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  outline: none; }
+.nf-fields select.ninja-forms-field {
+  color: #787878; }
+  .nf-fields select.ninja-forms-field:focus {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    outline: none; }
 
 .list-select-wrap div::after {
-  color: #999; }
+  color: #787878; }
 
 .list-select-wrap select:active + div, .list-select-wrap select:focus + div {
-  background: #fff !important;
-  border-color: #ccc !important; }
+  background: white !important;
+  border-color: #919191 !important; }
 
 .listradio-wrap .nf-field-element label::after {
   background: #f7f7f7;
-  border: 2px solid #eaeaea; }
+  border: 2px solid #c4c4c4; }
 
 .listradio-wrap .nf-field-element label.nf-checked-label::after {
   border-color: #333; }
@@ -1271,13 +1291,13 @@ input[type=checkbox].nf-toggle {
 .listcheckbox-wrap .nf-field-label label::after,
 .listcheckbox-wrap .nf-field-element label::after {
   background: #f7f7f7;
-  border-color: #eaeaea; }
+  border-color: #c4c4c4; }
 
 .checkbox-wrap .nf-field-label label.nf-checked-label::after,
 .checkbox-wrap .nf-field-element label.nf-checked-label::after,
 .listcheckbox-wrap .nf-field-label label.nf-checked-label::after,
 .listcheckbox-wrap .nf-field-element label.nf-checked-label::after {
-  border-color: #999; }
+  border-color: #b7b7b7; }
 
 .checkbox-wrap .nf-field-label label.nf-checked-label::before,
 .checkbox-wrap .nf-field-element label.nf-checked-label::before,
@@ -1344,8 +1364,11 @@ input[type=checkbox].nf-toggle {
   background-color: #FFBABA; }
 
 .nf-icons .field-wrap > div::before {
-  background: #eaeaea;
-  color: #aaa; }
+  background: #c4c4c4;
+  color: #f7f7f7; }
+
+.nf-help {
+  color: #333; }
 
 @media only screen and (max-width: 800px) {
   .label-left .field-wrap > div,

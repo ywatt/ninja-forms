@@ -7,6 +7,29 @@
 @import "op-radio";
 @import "op-toggle";
 @import "op-icons";
-@import "op-color-dark";
+
+/* ---------------------------------
+DEFAULT DARK COLORS
+----------------------------------*/
+$base: #222;
+$accent: #fff;
+@import "op-variables-dark";
+@import "op-color";
+
+/* ---------------------------------
+DARK COLORS - nf-brown
+----------------------------------*/
+// $load-background: #3E2B15;
+// $load-border: #5F3910;
+
+// $focus-background: #666;
+// $focus-border: #999;
+
+// $selected-background: #666;
+// $selected-border: #999;
+// $selected-font: #fff;
+// .nf-brown {
+//     @import "op-color";
+// }
 
 @import "st-media-queries";
