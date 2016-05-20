@@ -207,6 +207,9 @@ define( [], function() {
 				},
 
 				renderDescText: function() {
+					if ( 'undefined' == typeof this.desc_text ) {
+						return '';
+					}
 					var check_text = '<p>' + this.desc_text + '</p>';
 					if ( 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
 						return '<div class="nf-field-description">' + this.desc_text + '</div>';
