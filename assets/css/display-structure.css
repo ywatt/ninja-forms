@@ -650,7 +650,7 @@ LABEL LEFT
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
-    padding-right: 1%;
+    padding-right: 2%;
     text-align: right;
     width: 40%; }
     .label-left .field-wrap .nf-field-label label {
@@ -692,7 +692,7 @@ LABEL RIGHT
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
-    padding-left: 1%;
+    padding-left: 2%;
     width: 40%;
     -webkit-box-ordinal-group: 3;
     -webkit-order: 2;
