@@ -7,7 +7,7 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
 		regions: {
 			beforeFields: ".nf-before-fields",
 			fields: ".nf-fields",
-			afterFields: ".nf-after-fields",
+			afterFields: ".nf-after-fields"
 		},
 
 		initialize: function() {
@@ -60,7 +60,6 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
 			}
 
 			this.fields.show( new fieldContentsView( { collection: fieldContentsData } ) );
-			
 			this.afterFields.show( new afterFields( { model: this.model } ) );
 		},
 

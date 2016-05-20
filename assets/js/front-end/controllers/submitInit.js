@@ -6,18 +6,7 @@ define(['controllers/submitButton'], function( submitButton ) {
 		},
 
 		registerSubmit: function( model ) {
-			model.set( 'maybeRenderError', this.maybeRenderError );
 			new submitButton( model );
-		},
-
-		maybeRenderError: function() {
-			if ( nfRadio.channel( 'form' ).request( 'get:errors', this.formID ) ) {
-				var template = Marionette.TemplateCache.get( '#nf-tmpl-field-submit-error-msg' );
-				return template( this );
-			} else {
-				return '';
-			}
-			
 		}
 
 	});

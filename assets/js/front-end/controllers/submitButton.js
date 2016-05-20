@@ -63,7 +63,7 @@ define([], function() {
 
 			if ( formErrors ) {
 				nfRadio.channel( 'submit' ).trigger( 'error', model.get( 'formID' ) );
-				jQuery( el ).closest( '.nf-field-wrap' ).find( '.nf-field-submit-error' ).show();
+				// nfRadio.channel( 'form-' + this.model.get( 'formID' ) ).request( 'add:error', 'submit-error', 'BLEEP!!!.' );
 				return false;
 			} else {
 				// Get our form model.
@@ -92,6 +92,7 @@ define([], function() {
 				if ( formErrors ) {
 					nfRadio.channel( 'submit' ).trigger( 'error', model.get( 'formID' ) );
 					this.resetLabel();
+					// nfRadio.channel( 'form-' + this.model.get( 'formID' ) ).request( 'add:error', 'submit-error', 'BLEEP!!!.' );
 					return false;
 				} else {
 					var formID = formModel.get( 'id' );

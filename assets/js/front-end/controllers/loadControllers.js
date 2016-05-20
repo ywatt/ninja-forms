@@ -31,7 +31,8 @@ define(
 		'controllers/fieldStarRating',
 		'controllers/fieldTerms',
 		'controllers/fieldContentsFilters',
-		'controllers/loadViews'
+		'controllers/loadViews',
+		'controllers/formErrors'
 	],
 	function(
 		FormData,
@@ -65,7 +66,8 @@ define(
 		FieldStarRating,
 		FieldTerms,
 		FieldContentsFilters,
-		LoadViews
+		LoadViews,
+		FormErrors
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -74,6 +76,7 @@ define(
 				 * App Controllers
 				 */
 				new LoadViews();
+				new FormErrors();
 				
 				/**
 				 * Field type controllers
