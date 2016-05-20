@@ -1,3 +1,6 @@
+.nf-help {
+    background: none;
+}
 .nf-fields {
     padding: 5px;
     max-width: 1000px;
@@ -9,7 +12,6 @@
     .ninja-forms-field,
     .listselect-wrap .nf-field-element div {
         font-size: 16px;
-        //line-height: 0 !important;
         margin: 0;
         padding: 12px;
     }

@@ -48,7 +48,11 @@ define([], function() {
                     that.selected.push( option.value );
                 }
 
-                option.isSelected = ( -1 != that.value.indexOf( option.value.toString() ) );
+                var testValues = _.map( that.value, function( value ) {
+                    return value.toString();
+                } );
+
+                option.isSelected = ( -1 != testValues.indexOf( option.value.toString() ) );
                 var template = Marionette.TemplateCache.get( '#nf-tmpl-field-listcheckbox-option' );
                 html += template( option );
             } );

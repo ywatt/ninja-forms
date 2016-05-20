@@ -116,7 +116,7 @@ define( [], function() {
 
 				renderPlaceholder: function() {
 					var placeholder = this.placeholder;
-					
+
 					if ( 'undefined' != typeof this.customPlaceholder ) {
 						placeholder = this.customPlaceholder( placeholder );
 					}
@@ -159,7 +159,7 @@ define( [], function() {
 					/*
 					 * If we have a function for adding extra classes, add those.
 					 */
-					
+
 					if ( 'undefined' != typeof this.customClasses ) {
 						classes = this.customClasses( classes );
 					}
@@ -200,16 +200,19 @@ define( [], function() {
 				maybeRenderHelp: function() {
 					var check_text = '<p>' + this.help_text + '</p>';
 					if ( 'undefined' != typeof this.help_text && 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
-						return '<span class="dashicons dashicons-admin-comments nf-help" data-text="' + this.getHelpText() + '"></span>';
+						return '<span class="fa fa-info-circle nf-help" data-text="' + this.getHelpText() + '"></span>';
 					} else {
 						return '';
 					}
 				},
 
 				renderDescText: function() {
+					if ( 'undefined' == typeof this.desc_text ) {
+						return '';
+					}
 					var check_text = '<p>' + this.desc_text + '</p>';
 					if ( 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
-						return this.desc_text;
+						return '<div class="nf-field-description">' + this.desc_text + '</div>';
 					} else {
 						return '';
 					}

@@ -1,6 +1,9 @@
 /*
 
 ---------------------------------------------*/
+.nf-help {
+  background: none; }
+
 .nf-fields {
   padding: 5px;
   max-width: 1000px;

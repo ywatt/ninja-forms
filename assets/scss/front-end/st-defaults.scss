@@ -26,16 +26,16 @@
         height: auto;
     }
 }
-// .field-wrap {
-//     margin-bottom: 16px;
-//     &::after {
-//         clear: both;
-//         content: "";
-//         display: block;
-//     }
-// }
 
+.nf-field-label {
+    label {
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+    }
+}
 .nf-field-element {
+    position: relative;
     input,
     select,
     textarea {
@@ -48,29 +48,30 @@
         height: 200px;
     }
 }
-.nf-field-label {
-    label {
-        font-weight: bold;
+.nf-field-description {
+    p:last-child {
         margin: 0;
-        padding: 0;
     }
 }
-.nf-fields {
-    .nf-field-element {
-        position: relative;
-    }
-    .nf-input-limit {
-        font-size: 12px;
-        margin-top: 5px;
-    }
-    .nf-static {
-        padding: 0 10px;
-    }
-    .nf-error-msg {
-        margin-right: 10px;
-        text-align: right;
-    }
+.nf-help {
+    background: url( '../img/help-info.png' ) no-repeat;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
 }
+
+.nf-input-limit {
+    font-size: 12px;
+    margin-top: 5px;
+}
+.nf-static {
+    padding: 0 10px;
+}
+.nf-error-msg {
+    margin-right: 10px;
+    text-align: right;
+}
+
 
 /* ---------------------------------
 CHECKBOX FIELD
