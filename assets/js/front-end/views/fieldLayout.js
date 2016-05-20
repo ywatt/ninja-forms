@@ -20,7 +20,11 @@ define( ['views/fieldItem', 'views/beforeField', 'views/afterField'], function( 
             return {
                 renderContainerClass: function() {
                     var containerClass = ' label-' + this.label_pos + ' ';
-                    // if we have a container_class field setting, add that to our wrap.
+                    // If we have a description position, add that to our container.
+                    if ( 'undefined' != typeof this.desc_pos ) {
+                        containerClass += 'desc-' + this.desc_pos + ' ';
+                    }
+                    // if we have a container_class field setting, add that to our container.
                     if ( 'undefined' != typeof this.container_class && 0 < jQuery.trim( this.container_class ).length ) {
                         containerClass += this.container_class + ' ';
                     }
