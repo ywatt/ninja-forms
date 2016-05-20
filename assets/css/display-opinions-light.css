@@ -1245,6 +1245,9 @@ input[type=checkbox].nf-toggle {
 .nf-icons .creditcardzip-wrap .nf-field-element::before {
   content: "\f283"; }
 
+/* ---------------------------------
+DEFAULT LIGHT COLORS
+----------------------------------*/
 .nf-fields input:not([type='button']),
 .nf-fields textarea,
 .nf-fields .list-select-wrap .nf-field-element > div {
@@ -1363,12 +1366,397 @@ input[type=checkbox].nf-toggle {
   color: #D8000C;
   background-color: #FFBABA; }
 
-.nf-icons .field-wrap > div::before {
+.nf-icons .nf-field-element::before,
+.nf-icons .nf-field-element::before {
   background: #c4c4c4;
   color: #f7f7f7; }
 
 .nf-help {
   color: #333; }
+
+/* ---------------------------------
+LIGHT COLORS - nf-brown
+----------------------------------*/
+.nf-brown .nf-fields input:not([type='button']),
+.nf-brown .nf-fields textarea,
+.nf-brown .nf-fields .list-select-wrap .nf-field-element > div {
+  background: #F3EFDD;
+  border: 1px solid #d8cc92;
+  border-radius: 0;
+  box-shadow: none;
+  color: #9a8837; }
+  .nf-brown .nf-fields input:not([type='button']):focus,
+  .nf-brown .nf-fields textarea:focus,
+  .nf-brown .nf-fields .list-select-wrap .nf-field-element > div:focus {
+    background: white;
+    border-color: #bea846;
+    color: #bea846;
+    outline: none; }
+
+.nf-brown .nf-fields select.ninja-forms-field {
+  color: #9a8837; }
+  .nf-brown .nf-fields select.ninja-forms-field:focus {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    outline: none; }
+
+.nf-brown .list-select-wrap div::after {
+  color: #9a8837; }
+
+.nf-brown .list-select-wrap select:active + div, .nf-brown .list-select-wrap select:focus + div {
+  background: white !important;
+  border-color: #bea846 !important; }
+
+.nf-brown .listradio-wrap .nf-field-element label::after {
+  background: #F3EFDD;
+  border: 2px solid #d8cc92; }
+
+.nf-brown .listradio-wrap .nf-field-element label.nf-checked-label::after {
+  border-color: #736628; }
+
+.nf-brown .listradio-wrap .nf-field-element label.nf-checked-label::before {
+  background: #736628; }
+
+.nf-brown .checkbox-wrap .nf-field-label label::after,
+.nf-brown .checkbox-wrap .nf-field-element label::after,
+.nf-brown .listcheckbox-wrap .nf-field-label label::after,
+.nf-brown .listcheckbox-wrap .nf-field-element label::after {
+  background: #F3EFDD;
+  border-color: #d8cc92; }
+
+.nf-brown .checkbox-wrap .nf-field-label label.nf-checked-label::after,
+.nf-brown .checkbox-wrap .nf-field-element label.nf-checked-label::after,
+.nf-brown .listcheckbox-wrap .nf-field-label label.nf-checked-label::after,
+.nf-brown .listcheckbox-wrap .nf-field-element label.nf-checked-label::after {
+  border-color: #d2c37f; }
+
+.nf-brown .checkbox-wrap .nf-field-label label.nf-checked-label::before,
+.nf-brown .checkbox-wrap .nf-field-element label.nf-checked-label::before,
+.nf-brown .listcheckbox-wrap .nf-field-label label.nf-checked-label::before,
+.nf-brown .listcheckbox-wrap .nf-field-element label.nf-checked-label::before {
+  color: #736628; }
+
+.nf-brown .nf-error {
+  position: relative; }
+  .nf-brown .nf-error .ninja-forms-field {
+    border-color: #E80000 !important; }
+  .nf-brown .nf-error.field-wrap .nf-field-element::after {
+    background: #E80000;
+    color: #fff;
+    font-family: FontAwesome;
+    font-size: 20px;
+    content: "\f12a";
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    height: 48px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center; }
+  .nf-brown .nf-error .nf-error-msg {
+    color: #E80000; }
+
+.nf-brown .nf-pass {
+  position: relative; }
+  .nf-brown .nf-pass .ninja-forms-field {
+    border-color: green !important; }
+  .nf-brown .nf-pass.field-wrap .nf-field-element::after {
+    color: green;
+    font-family: FontAwesome;
+    font-size: 30px;
+    content: "\f058";
+    position: absolute;
+    top: 0;
+    right: 16px;
+    height: 50px;
+    line-height: 50px; }
+
+.nf-brown .nf-field-submit-error {
+  border: 1px solid;
+  margin: 10px 0px;
+  padding: 15px 15px 15px 50px;
+  position: relative;
+  z-index: 1; }
+  .nf-brown .nf-field-submit-error::after {
+    content: "\f06a";
+    font-family: FontAwesome;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    height: 50px;
+    line-height: 50px;
+    z-index: 2; }
+
+.nf-brown .nf-field-submit-error {
+  border-color: #D8000C;
+  color: #D8000C;
+  background-color: #FFBABA; }
+
+.nf-brown .nf-icons .nf-field-element::before, .nf-brown.nf-icons .nf-field-element::before {
+  background: #d8cc92;
+  color: #F3EFDD; }
+
+.nf-brown .nf-help {
+  color: #736628; }
+
+/* ---------------------------------
+LIGHT COLORS - nf-red
+----------------------------------*/
+.nf-red .nf-fields input:not([type='button']),
+.nf-red .nf-fields textarea,
+.nf-red .nf-fields .list-select-wrap .nf-field-element > div {
+  background: #F0E3E3;
+  border: 1px solid #cca1a1;
+  border-radius: 0;
+  box-shadow: none;
+  color: #8a4a4a; }
+  .nf-red .nf-fields input:not([type='button']):focus,
+  .nf-red .nf-fields textarea:focus,
+  .nf-red .nf-fields .list-select-wrap .nf-field-element > div:focus {
+    background: white;
+    border-color: #a95e5e;
+    color: #a95e5e;
+    outline: none; }
+
+.nf-red .nf-fields select.ninja-forms-field {
+  color: #8a4a4a; }
+  .nf-red .nf-fields select.ninja-forms-field:focus {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    outline: none; }
+
+.nf-red .list-select-wrap div::after {
+  color: #8a4a4a; }
+
+.nf-red .list-select-wrap select:active + div, .nf-red .list-select-wrap select:focus + div {
+  background: white !important;
+  border-color: #a95e5e !important; }
+
+.nf-red .listradio-wrap .nf-field-element label::after {
+  background: #F0E3E3;
+  border: 2px solid #cca1a1; }
+
+.nf-red .listradio-wrap .nf-field-element label.nf-checked-label::after {
+  border-color: #8A5252; }
+
+.nf-red .listradio-wrap .nf-field-element label.nf-checked-label::before {
+  background: #8A5252; }
+
+.nf-red .checkbox-wrap .nf-field-label label::after,
+.nf-red .checkbox-wrap .nf-field-element label::after,
+.nf-red .listcheckbox-wrap .nf-field-label label::after,
+.nf-red .listcheckbox-wrap .nf-field-element label::after {
+  background: #F0E3E3;
+  border-color: #cca1a1; }
+
+.nf-red .checkbox-wrap .nf-field-label label.nf-checked-label::after,
+.nf-red .checkbox-wrap .nf-field-element label.nf-checked-label::after,
+.nf-red .listcheckbox-wrap .nf-field-label label.nf-checked-label::after,
+.nf-red .listcheckbox-wrap .nf-field-element label.nf-checked-label::after {
+  border-color: #c49090; }
+
+.nf-red .checkbox-wrap .nf-field-label label.nf-checked-label::before,
+.nf-red .checkbox-wrap .nf-field-element label.nf-checked-label::before,
+.nf-red .listcheckbox-wrap .nf-field-label label.nf-checked-label::before,
+.nf-red .listcheckbox-wrap .nf-field-element label.nf-checked-label::before {
+  color: #8A5252; }
+
+.nf-red .nf-error {
+  position: relative; }
+  .nf-red .nf-error .ninja-forms-field {
+    border-color: #E80000 !important; }
+  .nf-red .nf-error.field-wrap .nf-field-element::after {
+    background: #E80000;
+    color: #fff;
+    font-family: FontAwesome;
+    font-size: 20px;
+    content: "\f12a";
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    height: 48px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center; }
+  .nf-red .nf-error .nf-error-msg {
+    color: #E80000; }
+
+.nf-red .nf-pass {
+  position: relative; }
+  .nf-red .nf-pass .ninja-forms-field {
+    border-color: green !important; }
+  .nf-red .nf-pass.field-wrap .nf-field-element::after {
+    color: green;
+    font-family: FontAwesome;
+    font-size: 30px;
+    content: "\f058";
+    position: absolute;
+    top: 0;
+    right: 16px;
+    height: 50px;
+    line-height: 50px; }
+
+.nf-red .nf-field-submit-error {
+  border: 1px solid;
+  margin: 10px 0px;
+  padding: 15px 15px 15px 50px;
+  position: relative;
+  z-index: 1; }
+  .nf-red .nf-field-submit-error::after {
+    content: "\f06a";
+    font-family: FontAwesome;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    height: 50px;
+    line-height: 50px;
+    z-index: 2; }
+
+.nf-red .nf-field-submit-error {
+  border-color: #D8000C;
+  color: #D8000C;
+  background-color: #FFBABA; }
+
+.nf-red .nf-icons .nf-field-element::before, .nf-red.nf-icons .nf-field-element::before {
+  background: #cca1a1;
+  color: #F0E3E3; }
+
+.nf-red .nf-help {
+  color: #8A5252; }
+
+/* ---------------------------------
+LIGHT COLORS - nf-blue
+----------------------------------*/
+.nf-blue .nf-fields input:not([type='button']),
+.nf-blue .nf-fields textarea,
+.nf-blue .nf-fields .list-select-wrap .nf-field-element > div {
+  background: #DFEFF5;
+  border: 1px solid #91c8dd;
+  border-radius: 0;
+  box-shadow: none;
+  color: #3384a2; }
+  .nf-blue .nf-fields input:not([type='button']):focus,
+  .nf-blue .nf-fields textarea:focus,
+  .nf-blue .nf-fields .list-select-wrap .nf-field-element > div:focus {
+    background: white;
+    border-color: #44a1c4;
+    color: #44a1c4;
+    outline: none; }
+
+.nf-blue .nf-fields select.ninja-forms-field {
+  color: #3384a2; }
+  .nf-blue .nf-fields select.ninja-forms-field:focus {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    outline: none; }
+
+.nf-blue .list-select-wrap div::after {
+  color: #3384a2; }
+
+.nf-blue .list-select-wrap select:active + div, .nf-blue .list-select-wrap select:focus + div {
+  background: white !important;
+  border-color: #44a1c4 !important; }
+
+.nf-blue .listradio-wrap .nf-field-element label::after {
+  background: #DFEFF5;
+  border: 2px solid #91c8dd; }
+
+.nf-blue .listradio-wrap .nf-field-element label.nf-checked-label::after {
+  border-color: #4F9DBF; }
+
+.nf-blue .listradio-wrap .nf-field-element label.nf-checked-label::before {
+  background: #4F9DBF; }
+
+.nf-blue .checkbox-wrap .nf-field-label label::after,
+.nf-blue .checkbox-wrap .nf-field-element label::after,
+.nf-blue .listcheckbox-wrap .nf-field-label label::after,
+.nf-blue .listcheckbox-wrap .nf-field-element label::after {
+  background: #DFEFF5;
+  border-color: #91c8dd; }
+
+.nf-blue .checkbox-wrap .nf-field-label label.nf-checked-label::after,
+.nf-blue .checkbox-wrap .nf-field-element label.nf-checked-label::after,
+.nf-blue .listcheckbox-wrap .nf-field-label label.nf-checked-label::after,
+.nf-blue .listcheckbox-wrap .nf-field-element label.nf-checked-label::after {
+  border-color: #7ebed7; }
+
+.nf-blue .checkbox-wrap .nf-field-label label.nf-checked-label::before,
+.nf-blue .checkbox-wrap .nf-field-element label.nf-checked-label::before,
+.nf-blue .listcheckbox-wrap .nf-field-label label.nf-checked-label::before,
+.nf-blue .listcheckbox-wrap .nf-field-element label.nf-checked-label::before {
+  color: #4F9DBF; }
+
+.nf-blue .nf-error {
+  position: relative; }
+  .nf-blue .nf-error .ninja-forms-field {
+    border-color: #E80000 !important; }
+  .nf-blue .nf-error.field-wrap .nf-field-element::after {
+    background: #E80000;
+    color: #fff;
+    font-family: FontAwesome;
+    font-size: 20px;
+    content: "\f12a";
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    height: 48px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center; }
+  .nf-blue .nf-error .nf-error-msg {
+    color: #E80000; }
+
+.nf-blue .nf-pass {
+  position: relative; }
+  .nf-blue .nf-pass .ninja-forms-field {
+    border-color: green !important; }
+  .nf-blue .nf-pass.field-wrap .nf-field-element::after {
+    color: green;
+    font-family: FontAwesome;
+    font-size: 30px;
+    content: "\f058";
+    position: absolute;
+    top: 0;
+    right: 16px;
+    height: 50px;
+    line-height: 50px; }
+
+.nf-blue .nf-field-submit-error {
+  border: 1px solid;
+  margin: 10px 0px;
+  padding: 15px 15px 15px 50px;
+  position: relative;
+  z-index: 1; }
+  .nf-blue .nf-field-submit-error::after {
+    content: "\f06a";
+    font-family: FontAwesome;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    height: 50px;
+    line-height: 50px;
+    z-index: 2; }
+
+.nf-blue .nf-field-submit-error {
+  border-color: #D8000C;
+  color: #D8000C;
+  background-color: #FFBABA; }
+
+.nf-blue .nf-icons .nf-field-element::before, .nf-blue.nf-icons .nf-field-element::before {
+  background: #91c8dd;
+  color: #DFEFF5; }
+
+.nf-blue .nf-help {
+  color: #4F9DBF; }
 
 @media only screen and (max-width: 800px) {
   .label-left .field-wrap > div,

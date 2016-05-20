@@ -19,17 +19,30 @@ $accent: #fff;
 /* ---------------------------------
 DARK COLORS - nf-brown
 ----------------------------------*/
-// $load-background: #3E2B15;
-// $load-border: #5F3910;
+$base: #3e2b13;
+$accent: #ea981b;
+@import "op-variables-dark";
+.nf-brown {
+    @import "op-color";
+}
 
-// $focus-background: #666;
-// $focus-border: #999;
-
-// $selected-background: #666;
-// $selected-border: #999;
-// $selected-font: #fff;
-// .nf-brown {
-//     @import "op-color";
-// }
+/* ---------------------------------
+DARK COLORS - nf-red
+----------------------------------*/
+$base: #350000;
+$accent: red;
+@import "op-variables-dark";
+.nf-red {
+    @import "op-color";
+}
+/* ---------------------------------
+DARK COLORS - nf-blue
+----------------------------------*/
+$base: #001C33;
+$accent: #00AEFF;
+@import "op-variables-dark";
+.nf-blue {
+    @import "op-color";
+}
 
 @import "st-media-queries";
