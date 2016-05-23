@@ -20,6 +20,11 @@
         pointer: cursor;
         position: absolute;
     }
+    input[type=text] {
+        + .merge-tags {
+            top: 12px;
+        }
+    }
 }
 div.has-merge-tags {
     .merge-tags {
