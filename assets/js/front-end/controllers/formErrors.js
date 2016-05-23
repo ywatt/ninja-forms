@@ -6,7 +6,7 @@
  */
 define([], function() {
 	var controller = Marionette.Object.extend( {
-		fieldErrors: [],
+		fieldErrors: {},
 		initialize: function() {
 			/*
 			 * Listen for error messages being added to and removed from fields.
@@ -17,7 +17,7 @@ define([], function() {
 			/*
 			 * Respond to requests to get form errors
 			 */
-			nfRadio.channel( 'form' ).reply( 'get:errors', this.getFormErrors );
+			nfRadio.channel( 'form' ).reply( 'get:errors', this.getFieldErrors );
 		},
 
 		addError: function( fieldModel, errorID, errorMsg ) {
@@ -36,7 +36,7 @@ define([], function() {
 			 * We have at least one field error, so submmission should be prevented.
 			 * Add a form error.
 			 */ 
-			nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ).request( 'add:error', 'submit-error', 'Please correct errors before submitting this form.' );
+			nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ).request( 'add:error', 'field-errors', 'Please correct errors before submitting this form.' );
 		},
 
 		removeError: function( fieldModel, errorID ) {
@@ -51,13 +51,16 @@ define([], function() {
 				delete this.fieldErrors[ fieldModel.get( 'id' ) ];
 			}
 
-			if ( 0 == this.fieldErrors.length ) {
+			// console.log( this.fieldErrors.length );
+
+			if ( 0 == _.size( this.fieldErrors ) ) {
+				// console.log( 'remove our form error' );
 				// Remove our form error.
-				nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ).request( 'remove:error', 'submit-error' );
+				nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ).request( 'remove:error', 'field-errors' );
 			}
 		},
 
-		getFormErrors: function( formID ) {
+		getFieldErrors: function( formID ) {
 			var formModel = nfRadio.channel( 'app' ).request( 'get:form', formID );
 			var errors = false;
 			

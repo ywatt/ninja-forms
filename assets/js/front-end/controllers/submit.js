@@ -40,15 +40,6 @@ define([], function() {
 			nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'before:submit', formModel );
 
 			/*
-			 * Loop through our fields, sending out a message asking them to validate.
-			 */
-			// _.each( formModel.get( 'fields' ).models, function( field ) {
-			// 	nfRadio.channel( 'submit' ).trigger( 'validate:field', field );
-			// 	nfRadio.channel( field.get( 'type' ) ).trigger( 'before:submit', field );
-			// 	nfRadio.channel( 'fields' ).trigger( 'before:submit', field );
-			// } );
-
-			/*
 			 * Make sure we don't have any form errors before we submit.
 			 * Return false if we do.
 			 */
@@ -57,6 +48,50 @@ define([], function() {
 				nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:failed', formModel );
 				return false;
 			}
+
+			/*
+			 * Actually submit our form, and send out a message with our response.
+			 */
+
+ 			var formID = formModel.get( 'id' );
+			var fields = [];
+			_.each( formModel.get( 'fields' ).models, function( field ) {
+				fields.push( {
+					value:field.get( 'value' ),
+					id:field.get( 'id' )
+				} );
+			} );
+			var settings = formModel.get( 'settings' );
+			delete settings.fieldContentsData;
+			var formData = JSON.stringify( { id: formID, fields: fields, settings: settings } );
+			var data = {
+				'action': 'nf_ajax_submit',
+				'security': nfFrontEnd.ajaxNonce,
+				'formData': formData
+			}
+
+			var that = this;
+
+			jQuery.ajax({
+			    url: nfFrontEnd.adminAjax,
+			    type: 'POST',
+			    data: data,
+			    cache: false,
+			   	success: function( data, textStatus, jqXHR ) {
+			   		var response = jQuery.parseJSON( data );
+			   		
+			        nfRadio.channel( 'submit' ).trigger( 'submit:response', response, textStatus, jqXHR );
+			    	that.resetLabel();
+			    },
+			    error: function( jqXHR, textStatus, errorThrown ) {
+			        // Handle errors here
+			        console.log('ERRORS: ' + textStatus);
+			        // STOP LOADING SPINNER
+
+					nfRadio.channel( 'submit' ).trigger( 'submit:response', 'error', textStatus, jqXHR, errorThrown );
+			    	that.resetLabel();
+			    }
+			});
 
 		}
 
