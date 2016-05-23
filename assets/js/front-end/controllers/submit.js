@@ -79,17 +79,14 @@ define([], function() {
 			    cache: false,
 			   	success: function( data, textStatus, jqXHR ) {
 			   		var response = jQuery.parseJSON( data );
-			   		
-			        nfRadio.channel( 'submit' ).trigger( 'submit:response', response, textStatus, jqXHR );
-			    	that.resetLabel();
+			        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR );
+			    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR )
 			    },
 			    error: function( jqXHR, textStatus, errorThrown ) {
 			        // Handle errors here
 			        console.log('ERRORS: ' + textStatus);
 			        // STOP LOADING SPINNER
-
-					nfRadio.channel( 'submit' ).trigger( 'submit:response', 'error', textStatus, jqXHR, errorThrown );
-			    	that.resetLabel();
+					nfRadio.channel( 'forms' ).trigger( 'submit:response', 'error', textStatus, jqXHR, errorThrown );
 			    }
 			});
 

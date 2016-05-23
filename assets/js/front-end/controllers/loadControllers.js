@@ -11,7 +11,7 @@ define(
 		'controllers/mirrorField',
 		'controllers/confirmField',
 		'controllers/updateFieldModel',
-		'controllers/submitInit',
+		'controllers/submitButton',
 		'controllers/getFormErrors',
 		'controllers/selectFile',
 		'controllers/validateRequired',
@@ -47,7 +47,7 @@ define(
 		MirrorField,
 		ConfirmField,
 		UpdateFieldModel,
-		SubmitInit,
+		SubmitButton,
 		GetFormErrors,
 		SelectFile,
 		ValidateRequired,
@@ -108,7 +108,7 @@ define(
 				new MirrorField();
 				new ConfirmField();
 				new UpdateFieldModel();
-				new SubmitInit();
+				new SubmitButton();
 				new GetFormErrors();
 				new SelectFile();
 				new ValidateRequired();

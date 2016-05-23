@@ -6,7 +6,6 @@
  */
 define([], function() {
 	var controller = Marionette.Object.extend( {
-		fieldErrors: {},
 		initialize: function() {
 			/*
 			 * Listen for error messages being added to and removed from fields.
@@ -17,21 +16,22 @@ define([], function() {
 			/*
 			 * Respond to requests to get form errors
 			 */
-			nfRadio.channel( 'form' ).reply( 'get:errors', this.getFieldErrors );
+			nfRadio.channel( 'form' ).reply( 'get:errors', this.getFormErrors );
 		},
 
 		addError: function( fieldModel, errorID, errorMsg ) {
+			var formModel = nfRadio.channel( 'app' ).request( 'get:form', fieldModel.get( 'formID' ) );
 			/*
 			 * We store our errors in this object by field ID so that we don't have to loop over all our fields when we're testing for errors.
 			 * They are stored as an object within an array, using the field ID as the key.
 			 *
 			 * If we haven't setup an array item for this field, set it as an object.
 			 */
-			if ( 'undefined' == typeof this.fieldErrors[ fieldModel.get( 'id' ) ] ) {
-				this.fieldErrors[ fieldModel.get( 'id' ) ] = {};
+			if ( 'undefined' == typeof formModel.get( 'fieldErrors' )[ fieldModel.get( 'id' ) ] ) {
+				formModel.get( 'fieldErrors' )[ fieldModel.get( 'id' ) ] = {};
 			}
 			// Add an error to our tracking array
-			this.fieldErrors[ fieldModel.get( 'id' ) ][ errorID ] = errorMsg;
+			formModel.get( 'fieldErrors' )[ fieldModel.get( 'id' ) ][ errorID ] = errorMsg;
 			/*
 			 * We have at least one field error, so submmission should be prevented.
 			 * Add a form error.
@@ -40,27 +40,25 @@ define([], function() {
 		},
 
 		removeError: function( fieldModel, errorID ) {
+			var formModel = nfRadio.channel( 'app' ).request( 'get:form', fieldModel.get( 'formID' ) );
 			// Remove this error ID from our tracking array.
-			this.fieldErrors[ fieldModel.get( 'id' ) ] = _.omit( this.fieldErrors[ fieldModel.get( 'id' ) ], errorID );
+			formModel.get( 'fieldErrors' )[ fieldModel.get( 'id' ) ] = _.omit( formModel.get( 'fieldErrors' )[ fieldModel.get( 'id' ) ], errorID );
 			/*
 			 * If we don't have any more error IDs on this field, then we need to remove this field from the array.
 			 *
 			 * Then, if the fieldErrors tracking array has a length of 0, we remove our form error, because all field errors have been dealt with.
 			 */
-			if ( 0 == _.size( this.fieldErrors[ fieldModel.get( 'id' ) ] ) ) {
-				delete this.fieldErrors[ fieldModel.get( 'id' ) ];
+			if ( 0 == _.size( formModel.get( 'fieldErrors' )[ fieldModel.get( 'id' ) ] ) ) {
+				delete formModel.get( 'fieldErrors' )[ fieldModel.get( 'id' ) ];
 			}
 
-			// console.log( this.fieldErrors.length );
-
-			if ( 0 == _.size( this.fieldErrors ) ) {
-				// console.log( 'remove our form error' );
+			if ( 0 == _.size( formModel.get( 'fieldErrors' ) ) ) {
 				// Remove our form error.
 				nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ).request( 'remove:error', 'field-errors' );
 			}
 		},
 
-		getFieldErrors: function( formID ) {
+		getFormErrors: function( formID ) {
 			var formModel = nfRadio.channel( 'app' ).request( 'get:form', formID );
 			var errors = false;
 			
@@ -79,7 +77,6 @@ define([], function() {
 			}
 			return errors;
 		}
-
 	});
 
 	return controller;

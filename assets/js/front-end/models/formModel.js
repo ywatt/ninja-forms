@@ -7,7 +7,8 @@ define( [], function() {
 			afterFields: '',
 			wrapper_class: '',
 			element_class: '',
-			hp: ''
+			hp: '',
+			fieldErrors: {}
 		},
 
 		initialize: function() {
