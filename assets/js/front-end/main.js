@@ -20,17 +20,16 @@ jQuery( document ).ready( function( $ ) {
 						data: data,
 						cache: false,
 						success: function( data, textStatus, jqXHR ) {
-							var response = jQuery.parseJSON( data );
-
-							nfRadio.channel( 'submit' ).trigger( 'submit:response', response, textStatus, jqXHR );
-						},
-						error: function( jqXHR, textStatus, errorThrown ) {
-							// Handle errors here
-							console.log('ERRORS: ' + textStatus);
-							// STOP LOADING SPINNER
-
-							nfRadio.channel( 'submit' ).trigger( 'submit:response', 'error', textStatus, jqXHR, errorThrown );
-						}
+					   		var response = jQuery.parseJSON( data );
+					        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR );
+					    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR )
+					    },
+					    error: function( jqXHR, textStatus, errorThrown ) {
+					        // Handle errors here
+					        console.log('ERRORS: ' + textStatus);
+					        // STOP LOADING SPINNER
+							nfRadio.channel( 'forms' ).trigger( 'submit:response', 'error', textStatus, jqXHR, errorThrown );
+					    }
 					});
 				}
 

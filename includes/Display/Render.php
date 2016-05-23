@@ -11,6 +11,7 @@ final class NF_Display_Render
         'app-before-field',
         'app-after-field',
         'form-layout',
+        'form-hp',
         'field-layout',
         'field-before',
         'field-after',
@@ -89,6 +90,7 @@ final class NF_Display_Render
 
                 if( ! isset( Ninja_Forms()->fields[ $field_type ] ) ) continue;
                 if( ! apply_filters( 'ninja_forms_display_type_' . $field_type, TRUE ) ) continue;
+                if( ! apply_filters( 'ninja_forms_display_field', $field ) ) continue;
 
                 $field = apply_filters('ninja_forms_localize_fields', $field);
                 $field = apply_filters('ninja_forms_localize_field_' . $field_type, $field);
@@ -253,6 +255,7 @@ final class NF_Display_Render
 
                 if( ! isset( Ninja_Forms()->fields[ $field_type ] ) ) continue;
                 if( ! apply_filters( 'ninja_forms_preview_display_type_' . $field_type, TRUE ) ) continue;
+                if( ! apply_filters( 'ninja_forms_preview_display_field', $field ) ) continue;
 
                 $field['settings']['id'] = $field_id;
 

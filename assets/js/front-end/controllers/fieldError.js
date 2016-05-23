@@ -23,7 +23,7 @@ define(['models/fieldErrorModel'], function( fieldErrorModel ) {
 
 			var errors = model.get( 'errors' );
 			var targetError = errors.get( id );
-			if ( 'undefined' != targetError ) {
+			if ( 'undefined' != typeof targetError ) {
 				errors.remove( targetError );
 				model.set( 'errors', errors );
 				model.trigger( 'change:errors', model );

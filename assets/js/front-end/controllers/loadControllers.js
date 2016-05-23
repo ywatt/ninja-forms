@@ -11,7 +11,7 @@ define(
 		'controllers/mirrorField',
 		'controllers/confirmField',
 		'controllers/updateFieldModel',
-		'controllers/submitInit',
+		'controllers/submitButton',
 		'controllers/getFormErrors',
 		'controllers/selectFile',
 		'controllers/validateRequired',
@@ -31,7 +31,9 @@ define(
 		'controllers/fieldStarRating',
 		'controllers/fieldTerms',
 		'controllers/fieldContentsFilters',
-		'controllers/loadViews'
+		'controllers/loadViews',
+		'controllers/formErrors',
+		'controllers/submit'
 	],
 	function(
 		FormData,
@@ -45,7 +47,7 @@ define(
 		MirrorField,
 		ConfirmField,
 		UpdateFieldModel,
-		SubmitInit,
+		SubmitButton,
 		GetFormErrors,
 		SelectFile,
 		ValidateRequired,
@@ -65,7 +67,9 @@ define(
 		FieldStarRating,
 		FieldTerms,
 		FieldContentsFilters,
-		LoadViews
+		LoadViews,
+		FormErrors,
+		Submit
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -74,6 +78,8 @@ define(
 				 * App Controllers
 				 */
 				new LoadViews();
+				new FormErrors();
+				new Submit();
 				
 				/**
 				 * Field type controllers
@@ -102,7 +108,7 @@ define(
 				new MirrorField();
 				new ConfirmField();
 				new UpdateFieldModel();
-				new SubmitInit();
+				new SubmitButton();
 				new GetFormErrors();
 				new SelectFile();
 				new ValidateRequired();
