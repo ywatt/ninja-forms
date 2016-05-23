@@ -117,7 +117,7 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
 
         $settings[ 'options' ] = array();
 
-        if( ! isset( $settings[ 'taxonomy' ] ) || ! $settings[ 'taxonomy' ] ){
+        if( isset( $settings[ 'taxonomy' ] ) && $settings[ 'taxonomy' ] ){
 
             $terms = get_terms( $settings[ 'taxonomy' ], array( 'hide_empty' => false ) );
 
