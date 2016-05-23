@@ -20,9 +20,11 @@
         pointer: cursor;
         position: absolute;
     }
-    input[type=text] {
-        + .merge-tags {
-            top: 12px;
+    .nf-list-options {
+        input[type=text] {
+            + .merge-tags {
+                top: 12px;
+            }
         }
     }
 }
@@ -38,6 +40,14 @@ label.has-merge-tags {
         right: 12px;
     }
 }
+.nf-list-options {
+    label.has-merge-tags {
+        .merge-tags {
+            top: 12px;
+        }
+    }
+}
+
 .jBox-Tooltip {
     z-index: 100000000 !important;
 }
