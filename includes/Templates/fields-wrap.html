@@ -43,6 +43,6 @@
 		 * Render our Description Text.
 		 */
 		%>
-		<%= renderDescText() %>
+		<%= ( 'undefined' != typeof desc_pos && 'none' != desc_pos ) ? renderDescText() : '' %>
 	</div>
 </script>

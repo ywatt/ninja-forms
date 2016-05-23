@@ -567,6 +567,7 @@ STANDARDIZE ALL FIELDS
 ----------------------------------*/
 .field-wrap {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
   .field-wrap > label {
@@ -589,20 +590,36 @@ LABEL ABOVE
 .label-above .nf-field-label {
   margin-bottom: 10px;
   -webkit-box-ordinal-group: 6;
+  -webkit-order: 5;
       -ms-flex-order: 5;
           order: 5; }
 
 .label-above .nf-field-element {
   -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
       -ms-flex-order: 10;
           order: 10; }
 
-.label-above .nf-field-description {
-  font-size: 14px;
+.label-above.desc-before_everything .nf-field-description, .label-above.desc-before_label .nf-field-description {
   width: 100%;
   -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
       -ms-flex-order: 1;
           order: 1; }
+
+.label-above.desc-after_label .nf-field-description {
+  width: 100%;
+  -webkit-box-ordinal-group: 7;
+  -webkit-order: 6;
+      -ms-flex-order: 6;
+          order: 6; }
+
+.label-above.desc-after_everything .nf-field-description {
+  width: 100%;
+  -webkit-box-ordinal-group: 12;
+  -webkit-order: 11;
+      -ms-flex-order: 11;
+          order: 11; }
 
 /* ---------------------------------
 LABEL BELOW
@@ -610,13 +627,36 @@ LABEL BELOW
 .label-below .nf-field-label {
   margin-top: 10px;
   -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
       -ms-flex-order: 10;
           order: 10; }
 
 .label-below .nf-field-element {
   -webkit-box-ordinal-group: 6;
+  -webkit-order: 5;
       -ms-flex-order: 5;
           order: 5; }
+
+.label-below.desc-before_everything .nf-field-description {
+  width: 100%;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1; }
+
+.label-below.desc-before_label .nf-field-description {
+  width: 100%;
+  -webkit-box-ordinal-group: 7;
+  -webkit-order: 6;
+      -ms-flex-order: 6;
+          order: 6; }
+
+.label-below.desc-after_label .nf-field-description, .label-below.desc-after_everything .nf-field-description {
+  width: 100%;
+  -webkit-box-ordinal-group: 12;
+  -webkit-order: 11;
+      -ms-flex-order: 11;
+          order: 11; }
 
 /* ---------------------------------
 LABEL LEFT
@@ -624,90 +664,212 @@ LABEL LEFT
 .label-left .field-wrap {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row wrap;
-          flex-direction: row wrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around; }
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
   .label-left .field-wrap .nf-field-label {
     display: -webkit-box;
+    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
         -ms-flex-direction: row;
             flex-direction: row;
     -webkit-box-align: center;
+    -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
     padding-right: 2%;
     text-align: right;
-    width: 40%; }
+    width: 40%;
+    -webkit-box-ordinal-group: 6;
+    -webkit-order: 5;
+        -ms-flex-order: 5;
+            order: 5; }
     .label-left .field-wrap .nf-field-label label {
       width: 100%; }
   .label-left .field-wrap .nf-field-element {
     display: inline-block;
-    width: 60%; }
+    width: 60%;
+    -webkit-box-ordinal-group: 11;
+    -webkit-order: 10;
+        -ms-flex-order: 10;
+            order: 10; }
 
 .label-left .nf-after-field {
   margin-left: 41.5%; }
+
+.label-left.desc-before_everything .field-wrap, .label-left.desc-before_label .field-wrap {
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap; }
+
+.label-left.desc-before_everything .nf-field-description, .label-left.desc-before_label .nf-field-description {
+  margin-right: 10px;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1;
+  width: 40%; }
+
+.label-left.desc-after_label .field-wrap {
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap; }
+
+.label-left.desc-after_label .nf-field-description {
+  margin-right: 10px;
+  -webkit-box-ordinal-group: 7;
+  -webkit-order: 6;
+      -ms-flex-order: 6;
+          order: 6;
+  width: 60%; }
+
+.label-left.desc-after_everything .field-wrap {
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap; }
+
+.label-left.desc-after_everything .nf-field-description {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 10px;
+  -webkit-box-ordinal-group: 12;
+  -webkit-order: 11;
+      -ms-flex-order: 11;
+          order: 11;
+  width: 60%; }
 
 /* ---------------------------------
 LABEL RIGHT
 ----------------------------------*/
 .label-right .field-wrap {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
+  -webkit-flex-direction: row wrap;
       -ms-flex-direction: row wrap;
           flex-direction: row wrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around; }
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
   .label-right .field-wrap .nf-field-label {
     display: -webkit-box;
+    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
         -ms-flex-direction: row;
             flex-direction: row;
     -webkit-box-align: center;
+    -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
     padding-left: 2%;
     width: 40%;
     -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
         -ms-flex-order: 2;
             order: 2; }
   .label-right .field-wrap .nf-field-element {
     display: inline-block;
     width: 60%;
     -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
         -ms-flex-order: 1;
             order: 1; }
 
 .label-right .checkbox-wrap {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
+  -webkit-flex-direction: row wrap;
       -ms-flex-direction: row wrap;
           flex-direction: row wrap;
   -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
       -ms-flex-pack: start;
           justify-content: flex-start; }
   .label-right .checkbox-wrap .nf-field-label {
     width: auto;
     -webkit-box-ordinal-group: 11;
+    -webkit-order: 10;
         -ms-flex-order: 10;
             order: 10; }
   .label-right .checkbox-wrap .nf-field-element {
     width: 20px;
     -webkit-box-ordinal-group: 6;
+    -webkit-order: 5;
         -ms-flex-order: 5;
             order: 5; }
 
 .label-right .nf-after-field {
   width: 59%; }
+
+.label-right.desc-before_everything .field-wrap, .label-right.desc-before_label .field-wrap {
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap; }
+
+.label-right.desc-before_everything .nf-field-description, .label-right.desc-before_label .nf-field-description {
+  margin-right: 10px;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1;
+  width: 60%; }
+
+.label-right.desc-after_label .field-wrap {
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap; }
+
+.label-right.desc-after_label .nf-field-description {
+  margin-right: 10px;
+  -webkit-box-ordinal-group: 7;
+  -webkit-order: 6;
+      -ms-flex-order: 6;
+          order: 6;
+  width: 60%; }
+
+.label-right.desc-after_everything .field-wrap {
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap; }
+
+.label-right.desc-after_everything .nf-field-description {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 10px;
+  -webkit-box-ordinal-group: 12;
+  -webkit-order: 11;
+      -ms-flex-order: 11;
+          order: 11;
+  width: 40%; }
 
 /* ---------------------------------
 ADJUST SOME LABEL ABOVE & BELOW ISSUES
@@ -716,10 +878,12 @@ ADJUST SOME LABEL ABOVE & BELOW ISSUES
 .label-above .field-wrap {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-flow: wrap;
-      flex-flow: wrap; }
+  -webkit-flex-flow: wrap;
+      -ms-flex-flow: wrap;
+          flex-flow: wrap; }
 
 .label-below .nf-field-element,
 .label-above .nf-field-element {
@@ -740,8 +904,8 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
 .label-right .listradio-wrap .nf-field-label,
 .label-right .listcheckbox-wrap .nf-field-label {
   -webkit-box-align: start;
+  -webkit-align-items: flex-start;
       -ms-flex-align: start;
-              -ms-grid-row-align: flex-start;
           align-items: flex-start; }
 
 .label-left .textarea-wrap .nf-field-label,
@@ -760,5 +924,9 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
     display: block;
     margin: 0;
     width: 100%; }
+
+/* ---------------------------------
+FIELD DESCRIPTION POSITIONS
+----------------------------------*/
 
 /*# sourceMappingURL=display-structure.css.map */

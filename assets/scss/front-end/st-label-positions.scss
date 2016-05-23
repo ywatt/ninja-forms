@@ -38,10 +38,24 @@ LABEL ABOVE
     .nf-field-element {
         order: 10;
     }
-    .nf-field-description {
-        font-size: 14px;
-        width: 100%;
-        order: 1;
+    &.desc-before_everything,
+    &.desc-before_label {
+        .nf-field-description {
+            width: 100%;
+            order: 1;
+        }
+    }
+    &.desc-after_label {
+        .nf-field-description {
+            width: 100%;
+            order: 6;
+        }
+    }
+    &.desc-after_everything {
+        .nf-field-description {
+            width: 100%;
+            order: 11;
+        }
     }
 }
 
@@ -56,6 +70,25 @@ LABEL BELOW
     .nf-field-element {
         order: 5;
     }
+    &.desc-before_everything {
+        .nf-field-description {
+            width: 100%;
+            order: 1;
+        }
+    }
+    &.desc-before_label {
+        .nf-field-description {
+            width: 100%;
+            order: 6;
+        }
+    }
+    &.desc-after_label,
+    &.desc-after_everything {
+        .nf-field-description {
+            width: 100%;
+            order: 11;
+        }
+    }
 }
 
 /* ---------------------------------
@@ -63,8 +96,9 @@ LABEL LEFT
 ----------------------------------*/
 .label-left {
     .field-wrap {
-        flex-direction: row wrap;
+        flex-direction: row;
         justify-content: space-around;
+        flex-wrap: wrap;
         .nf-field-label {
             display: flex;
             flex-direction: row;
@@ -72,6 +106,7 @@ LABEL LEFT
             padding-right: 2%;
             text-align: right;
             width: 40%;
+            order: 5;
             label {
                 width: 100%;
             }
@@ -79,10 +114,50 @@ LABEL LEFT
         .nf-field-element {
             display: inline-block;
             width: 60%;
+            order: 10;
         }
     }
     .nf-after-field {
         margin-left: 41.5%;
+    }
+    &.desc-before_everything,
+    &.desc-before_label {
+        .field-wrap {
+            flex-wrap: nowrap;
+        }
+        .nf-field-description {
+            margin-right: 10px;
+            order: 1;
+            width: 40%;
+        }
+    }
+    &.desc-after_label {
+        .field-wrap {
+            flex-wrap: nowrap;
+        }
+        .nf-field-label {
+            label {
+            }
+        }
+        .nf-field-element {
+        }
+        .nf-field-description {
+            margin-right: 10px;
+            order: 6;
+            width: 60%;
+        }
+    }
+    &.desc-after_everything {
+        .field-wrap {
+            flex-wrap: nowrap;
+        }
+        .nf-field-description {
+            align-items: center;
+            display: flex;
+            margin-left: 10px;
+            order: 11;
+            width: 60%;
+        }
     }
 }
 
@@ -122,6 +197,45 @@ LABEL RIGHT
     }
     .nf-after-field {
         width: 59%;
+    }
+    &.desc-before_everything,
+    &.desc-before_label {
+        .field-wrap {
+            flex-wrap: nowrap;
+        }
+        .nf-field-description {
+            margin-right: 10px;
+            order: 1;
+            width: 60%;
+        }
+    }
+    &.desc-after_label {
+        .field-wrap {
+            flex-wrap: nowrap;
+        }
+        .nf-field-label {
+            label {
+            }
+        }
+        .nf-field-element {
+        }
+        .nf-field-description {
+            margin-right: 10px;
+            order: 6;
+            width: 60%;
+        }
+    }
+    &.desc-after_everything {
+        .field-wrap {
+            flex-wrap: nowrap;
+        }
+        .nf-field-description {
+            align-items: center;
+            display: flex;
+            margin-left: 10px;
+            order: 11;
+            width: 40%;
+        }
     }
 }
 /* ---------------------------------
@@ -171,3 +285,7 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
         }
     }
 }
+
+/* ---------------------------------
+FIELD DESCRIPTION POSITIONS
+----------------------------------*/
