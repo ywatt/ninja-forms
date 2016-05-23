@@ -26,6 +26,17 @@ STANDARDIZE ALL FIELDS
     }
 }
 
+.nf-field-label {
+    order: 5;
+}
+.nf-field-description {
+    width: 100%;
+    order: 10;
+}
+.nf-field-element {
+    order: 15;
+}
+
 
 /* ---------------------------------
 LABEL ABOVE
@@ -33,29 +44,6 @@ LABEL ABOVE
 .label-above {
     .nf-field-label {
         margin-bottom: 10px;
-        order: 5;
-    }
-    .nf-field-element {
-        order: 10;
-    }
-    &.desc-before_everything,
-    &.desc-before_label {
-        .nf-field-description {
-            width: 100%;
-            order: 1;
-        }
-    }
-    &.desc-after_label {
-        .nf-field-description {
-            width: 100%;
-            order: 6;
-        }
-    }
-    &.desc-after_everything {
-        .nf-field-description {
-            width: 100%;
-            order: 11;
-        }
     }
 }
 
@@ -65,29 +53,30 @@ LABEL BELOW
 .label-below {
     .nf-field-label {
         margin-top: 10px;
-        order: 10;
+        order: 15;
     }
     .nf-field-element {
         order: 5;
     }
-    &.desc-before_everything {
-        .nf-field-description {
-            width: 100%;
-            order: 1;
-        }
+}
+
+/* ---------------------------------
+LABEL HIDDEN
+----------------------------------*/
+.label-hidden {
+    .field-wrap {
+        flex-wrap: wrap;
     }
-    &.desc-before_label {
-        .nf-field-description {
-            width: 100%;
-            order: 6;
-        }
+    .nf-field-label {
+        height: 0;
+        width: 100%;
+        visibility: hidden;
     }
-    &.desc-after_label,
-    &.desc-after_everything {
-        .nf-field-description {
-            width: 100%;
-            order: 11;
-        }
+    .nf-field-description {
+        width: 100%;
+    }
+    .nf-field-element {
+        width: 100%;
     }
 }
 
@@ -97,67 +86,30 @@ LABEL LEFT
 .label-left {
     .field-wrap {
         flex-direction: row;
-        justify-content: space-around;
         flex-wrap: wrap;
-        .nf-field-label {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding-right: 2%;
-            text-align: right;
-            width: 40%;
-            order: 5;
-            label {
-                width: 100%;
-            }
+    }
+    .nf-field-label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-right: 2%;
+        text-align: right;
+        width: 35%;
+        order: 5;
+        label {
+            width: 100%;
         }
-        .nf-field-element {
-            display: inline-block;
-            width: 60%;
-            order: 10;
-        }
+    }
+    .nf-field-description {
+        margin-left: 35%;
+    }
+    .nf-field-element {
+        display: inline-block;
+        width: 65%;
+        order: 10;
     }
     .nf-after-field {
-        margin-left: 41.5%;
-    }
-    &.desc-before_everything,
-    &.desc-before_label {
-        .field-wrap {
-            flex-wrap: nowrap;
-        }
-        .nf-field-description {
-            margin-right: 10px;
-            order: 1;
-            width: 40%;
-        }
-    }
-    &.desc-after_label {
-        .field-wrap {
-            flex-wrap: nowrap;
-        }
-        .nf-field-label {
-            label {
-            }
-        }
-        .nf-field-element {
-        }
-        .nf-field-description {
-            margin-right: 10px;
-            order: 6;
-            width: 60%;
-        }
-    }
-    &.desc-after_everything {
-        .field-wrap {
-            flex-wrap: nowrap;
-        }
-        .nf-field-description {
-            align-items: center;
-            display: flex;
-            margin-left: 10px;
-            order: 11;
-            width: 60%;
-        }
+        margin-left: 36.5%;
     }
 }
 
@@ -166,76 +118,36 @@ LABEL RIGHT
 ----------------------------------*/
 .label-right {
     .field-wrap {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .nf-field-label {
         display: flex;
-        flex-direction: row wrap;
-        justify-content: space-around;
-        .nf-field-label {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding-left: 2%;
-            width: 40%;
-            order: 2;
-        }
-        .nf-field-element {
-            display: inline-block;
-            width: 60%;
-            order: 1;
-        }
+        flex-direction: row;
+        align-items: center;
+        padding-left: 2%;
+        width: 35%;
+        order: 10;
+    }
+    .nf-field-description {
+        margin-right: 35%;
+        order: 15;
+    }
+    .nf-field-element {
+        display: inline-block;
+        width: 65%;
+        order: 5;
     }
     .checkbox-wrap {
-        flex-direction: row wrap;
-        justify-content: flex-start;
         .nf-field-label {
             width: auto;
-            order: 10;
         }
         .nf-field-element {
             width: 20px;
-            order: 5;
         }
     }
     .nf-after-field {
-        width: 59%;
-    }
-    &.desc-before_everything,
-    &.desc-before_label {
-        .field-wrap {
-            flex-wrap: nowrap;
-        }
-        .nf-field-description {
-            margin-right: 10px;
-            order: 1;
-            width: 60%;
-        }
-    }
-    &.desc-after_label {
-        .field-wrap {
-            flex-wrap: nowrap;
-        }
-        .nf-field-label {
-            label {
-            }
-        }
-        .nf-field-element {
-        }
-        .nf-field-description {
-            margin-right: 10px;
-            order: 6;
-            width: 60%;
-        }
-    }
-    &.desc-after_everything {
-        .field-wrap {
-            flex-wrap: nowrap;
-        }
-        .nf-field-description {
-            align-items: center;
-            display: flex;
-            margin-left: 10px;
-            order: 11;
-            width: 40%;
-        }
+        width: 65%;
     }
 }
 /* ---------------------------------
