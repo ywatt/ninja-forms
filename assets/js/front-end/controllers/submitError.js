@@ -1,8 +1,7 @@
 define([], function() {
-	var radioChannel = nfRadio.channel( 'submit' );
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( radioChannel, 'submit:response', this.submitErrors );
+			this.listenTo( nfRadio.channel( 'forms' ), 'submit:response', this.submitErrors );
 		},
 
 		submitErrors: function( response ) {
