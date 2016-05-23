@@ -41,7 +41,6 @@
     }
 }
 
-
 .list-select-wrap {
     div {
         &::after {
@@ -60,7 +59,6 @@
         }
     }
 }
-
 
 .listradio-wrap {
     .nf-field-element {
@@ -191,6 +189,7 @@
     color: #D8000C;
     background-color: #FFBABA;
 }
+
 .nf-icons,
 &.nf-icons {
     .nf-field-element::before {
@@ -198,6 +197,7 @@
         color: $field-background;
     }
 }
+
 .nf-help {
     color: $selected-font;
 }
