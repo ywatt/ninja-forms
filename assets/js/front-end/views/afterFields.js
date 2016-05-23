@@ -1,15 +1,17 @@
-define( ['views/formErrorCollection'], function( FormErrors ) {
+define( ['views/formErrorCollection', 'views/honeyPot'], function( FormErrors, HoneyPot ) {
 
     var view = Marionette.LayoutView.extend({
         tagName: "nf-section",
         template: "#nf-tmpl-after-fields",
 
 		regions: {
-			errors: ".nf-form-errors"
+			errors: ".nf-form-errors",
+            hp: ".nf-form-hp"
 		},
 
         onShow: function() {
         	this.errors.show( new FormErrors( { collection: this.model.get( 'errors' ) } ) );
+            this.hp.show( new HoneyPot( { model: this.model } ) );
         }
 
     });

@@ -11,6 +11,7 @@ final class NF_Display_Render
         'app-before-field',
         'app-after-field',
         'form-layout',
+        'form-hp',
         'field-layout',
         'field-before',
         'field-after',

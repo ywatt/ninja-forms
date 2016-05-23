@@ -33,7 +33,8 @@ define([], function() {
 
 		changeModelValue: function( model ) {
 			if ( 1 == model.get( 'show_other' ) ) {
-				model.set( 'reRender', true );
+				// model.set( 'reRender', true );
+				model.trigger( 'reRender');
 			}
 		},
 

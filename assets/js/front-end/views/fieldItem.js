@@ -3,8 +3,7 @@ define( [], function() {
 		tagName: 'div',
 
 		initialize: function() {
-			// _.bindAll( this, 'render' );
-    		this.model.on( 'change:reRender', this.maybeRender, this );
+    		this.model.on( 'reRender', this.render, this );
     		this.model.on( 'change:errors', this.changeError, this );
     		this.model.on( 'change:addWrapperClass', this.addWrapperClass, this );
     		this.model.on( 'change:removeWrapperClass', this.removeWrapperClass, this );
@@ -14,7 +13,7 @@ define( [], function() {
 		},
 
 		onBeforeDestroy: function() {
-			this.model.off( 'change:reRender', this.maybeRender );
+			this.model.off( 'reRender', this.render );
     		this.model.off( 'change:errors', this.changeError );
     		this.model.off( 'change:addWrapperClass', this.addWrapperClass );
     		this.model.off( 'change:removeWrapperClass', this.removeWrapperClass );
@@ -49,13 +48,6 @@ define( [], function() {
 			if ( '' != cl ) {
 				jQuery( this.el ).removeClass( cl );
 				this.model.set( 'removeWrapperClass', '' );
-			}
-		},
-
-		maybeRender: function() {
-			if ( this.model.get( 'reRender' ) ) {
-				this.model.set( 'reRender', false, { silent: true } );
-				this.render();
 			}
 		},
 

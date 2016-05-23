@@ -34,7 +34,8 @@ define([], function() {
             var selected = model.get( 'value' );
             selected.push( value );
 
-            model.set( 'reRender', true );
+            // model.set( 'reRender', true );
+            model.trigger( 'reRender' );
         }
         
     });
