@@ -32,6 +32,7 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
 
         add_action( 'admin_init', array( $this, 'init_settings' ) );
 
+        add_filter( 'ninja_forms_display_field', array( $this, 'active_taxonomy_field_check' ) );
         add_filter( 'ninja_forms_localize_field_' . $this->_type, array( $this, 'add_term_options' ) );
         add_filter( 'ninja_forms_localize_field_' . $this->_type . '_preview', array( $this, 'add_term_options' ) );
 
@@ -109,6 +110,17 @@ class NF_Fields_Terms extends NF_Fields_ListCheckbox
             'group' => 'primary',
             'settings' => $term_settings
         );
+    }
+
+    public function active_taxonomy_field_check( $field )
+    {
+        if( $this->_type != $field->get_setting( 'type' ) ) return $field;
+
+        $taxonomy = $field->get_setting( 'taxonomy' );
+
+        if( ! taxonomy_exists( $taxonomy ) ) return FALSE;
+
+        return $field;
     }
 
     public function add_term_options( $field )
