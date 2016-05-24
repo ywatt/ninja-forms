@@ -353,6 +353,7 @@ Form field placeholders for the fields a user has added to their form
     color: #84CC1E; }
     .nf-group-wrap.expanded .nf-item-expand .dashicons {
       -webkit-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
               transform: rotate(90deg); }
     .nf-group-wrap.expanded .nf-field-wrap {
       opacity: 1.0;
@@ -409,6 +410,7 @@ All styles used within the drawer
     transition: all 0.50s ease; }
     .nf-drawer-opened #nf-drawer.nf-drawer-expand .nf-toggle-drawer .dashicons {
       -webkit-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
               transform: rotate(180deg);
       -webkit-transition: all 0.50s ease;
       transition: all 0.50s ease; }
@@ -1011,6 +1013,7 @@ Various custom field styles
       background: #fff;
       color: #84CC1E;
       -webkit-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
               transform: rotate(180deg);
       -webkit-transition: all 0.5s ease;
       transition: all 0.5s ease; }
@@ -1453,6 +1456,7 @@ All styles used for displaying table content
       border: 3px solid #fff;
       border-radius: 100%;
       -webkit-transform: transformZ(0);
+          -ms-transform: transformZ(0);
               transform: transformZ(0);
       -webkit-animation: LOADING 2s infinite;
               animation: LOADING 2s infinite; }
@@ -1546,6 +1550,8 @@ All styles used for displaying table content
     color: #ccc;
     pointer: cursor;
     position: absolute; }
+  .has-merge-tags .nf-list-options input[type=text] + .merge-tags {
+    top: 12px; }
 
 div.has-merge-tags .merge-tags {
   top: 16px;
@@ -1554,6 +1560,9 @@ div.has-merge-tags .merge-tags {
 label.has-merge-tags .merge-tags {
   top: 33px;
   right: 12px; }
+
+.nf-list-options label.has-merge-tags .merge-tags {
+  top: 12px; }
 
 .jBox-Tooltip {
   z-index: 100000000 !important; }

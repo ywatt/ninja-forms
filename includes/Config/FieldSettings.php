@@ -159,12 +159,12 @@ return apply_filters( 'ninja_forms_field_settings', array(
             array( 'label'  => 'Two', 'value' => 'two', 'calc' => '', 'selected' => 0, 'order' => 1 ),
             array( 'label'  => 'Three', 'value' => 'three', 'calc' => '', 'selected' => 0, 'order' => 2 ),
         ),
-        'columns'           => array( 
+        'columns'           => array(
            'label'          => array(
                 'header'    => __( 'Label', 'ninja-forms' ),
                 'default'   => '',
             ),
-            
+
             'value'         => array(
                 'header'    => __( 'Value', 'ninja-forms' ),
                 'default'   => '',
@@ -288,7 +288,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
                 'value' => __( 'Character(s) left', 'ninja-forms' )
             )
         ),
-    
+
     ),
 
     /*
@@ -454,7 +454,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
     /*
      * ADMIN LABEL
      */
-    
+
     'admin_label'           => array(
         'name'              => 'admin_label',
         'type'              => 'textbox',
@@ -462,7 +462,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'width'             => 'full',
         'group'             => 'administration',
         'value'             => '',
-        'help'              => __( 'Label used when viewing and exporting submissions.', 'ninja-forms' ),        
+        'help'              => __( 'Label used when viewing and exporting submissions.', 'ninja-forms' ),
     ),
 
     /*
@@ -491,8 +491,8 @@ return apply_filters( 'ninja_forms_field_settings', array(
             ),
         ),
     ),
-    
-    
+
+
     /*
      * DESCRIPTION
      */
@@ -518,39 +518,39 @@ return apply_filters( 'ninja_forms_field_settings', array(
              * DESCRIPTION POSITION
              */
 
-            'desc_pos'              => array(
-                'name'              => 'desc_pos',
-                'type'              => 'select',
-                'options'           => array(
-                    array(
-                        'label'     => __( 'None', 'ninja-forms' ),
-                        'value'     => 'none',
-                    ),            
-                    array(
-                        'label'     => __( 'Before Everything', 'ninja-forms' ),
-                        'value'     => 'before_everything',
-                    ),           
-                    array(
-                        'label'     => __( 'Before Label', 'ninja-forms' ),
-                        'value'     => 'before_label',
-                    ),            
-                    array(
-                        'label'     => __( 'After Label', 'ninja-forms' ),
-                        'value'     => 'after_label',
-                    ),            
-                    array(
-                        'label'     => __( 'After Everything', 'ninja-forms' ),
-                        'value'     => 'after_everything',
-                    ),
-                ),
-                'label'             => __( 'Display Position', 'ninja-forms' ),
-                'width'             => 'full',
-                'help'      => __( 'Determines the position of the label relative to the field element.', 'ninja-forms' ),
-            ),
+            // 'desc_pos'              => array(
+            //     'name'              => 'desc_pos',
+            //     'type'              => 'select',
+            //     'options'           => array(
+            //         array(
+            //             'label'     => __( 'None', 'ninja-forms' ),
+            //             'value'     => 'none',
+            //         ),
+            //         array(
+            //             'label'     => __( 'Before Everything', 'ninja-forms' ),
+            //             'value'     => 'before_everything',
+            //         ),
+            //         array(
+            //             'label'     => __( 'Before Label', 'ninja-forms' ),
+            //             'value'     => 'before_label',
+            //         ),
+            //         array(
+            //             'label'     => __( 'After Label', 'ninja-forms' ),
+            //             'value'     => 'after_label',
+            //         ),
+            //         array(
+            //             'label'     => __( 'After Everything', 'ninja-forms' ),
+            //             'value'     => 'after_everything',
+            //         ),
+            //     ),
+            //     'label'             => __( 'Display Position', 'ninja-forms' ),
+            //     'width'             => 'full',
+            //     'help'      => __( 'Determines the position of the label relative to the field element.', 'ninja-forms' ),
+            // ),
 
         ),
     ),
-    
+
     /*
      * NUMERIC SORT
      */
@@ -700,7 +700,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
     /*
      * Disable input
      */
-    
+
     'disable_input' => array(
         'name'      => 'disable_input',
         'type'      => 'toggle',
@@ -762,7 +762,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
     | Textarea Settings
     |--------------------------------------------------------------------------
     */
-    
+
     'textarea_rte'          => array(
         'name'              => 'textarea_rte',
         'type'              => 'toggle',
@@ -771,7 +771,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'group'             => 'display',
         'value'             => '',
         'help'              => __( 'Allows rich text input.', 'ninja-forms' ),
-    ),  
+    ),
 
     'textarea_media'          => array(
         'name'              => 'textarea_media',
@@ -817,7 +817,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
     | Calc Value that is used for checkbox fields
     |--------------------------------------------------------------------------
     */
-   
+
     'checked_calc_value'    => array(
         'name'      => 'checked_calc_value',
         'type'      => 'textbox',
@@ -947,12 +947,12 @@ return apply_filters( 'ninja_forms_field_settings', array(
             array( 'label'  => 'Two', 'value' => '2.00', 'order' => 1 ),
             array( 'label'  => 'Three', 'value' => '3.00', 'order' => 2 ),
         ),
-         'columns'          => array( 
+         'columns'          => array(
             'label'         => array(
                 'header'    => __( 'Label', 'ninja-forms' ),
                 'default'   => '',
             ),
-            
+
             'value'         => array(
                 'header'    => __( 'Value', 'ninja-forms' ),
                 'default'   => '',

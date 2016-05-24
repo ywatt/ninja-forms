@@ -584,52 +584,40 @@ STANDARDIZE ALL FIELDS
   .field-wrap button {
     width: auto; }
 
-/* ---------------------------------
-LABEL ABOVE
-----------------------------------*/
-.label-above .nf-field-label {
-  margin-bottom: 10px;
+.nf-field-label {
   -webkit-box-ordinal-group: 6;
   -webkit-order: 5;
       -ms-flex-order: 5;
           order: 5; }
 
-.label-above .nf-field-element {
+.nf-field-description {
+  width: 100%;
   -webkit-box-ordinal-group: 11;
   -webkit-order: 10;
       -ms-flex-order: 10;
           order: 10; }
 
-.label-above.desc-before_everything .nf-field-description, .label-above.desc-before_label .nf-field-description {
-  width: 100%;
-  -webkit-box-ordinal-group: 2;
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1; }
+.nf-field-element {
+  -webkit-box-ordinal-group: 16;
+  -webkit-order: 15;
+      -ms-flex-order: 15;
+          order: 15; }
 
-.label-above.desc-after_label .nf-field-description {
-  width: 100%;
-  -webkit-box-ordinal-group: 7;
-  -webkit-order: 6;
-      -ms-flex-order: 6;
-          order: 6; }
-
-.label-above.desc-after_everything .nf-field-description {
-  width: 100%;
-  -webkit-box-ordinal-group: 12;
-  -webkit-order: 11;
-      -ms-flex-order: 11;
-          order: 11; }
+/* ---------------------------------
+LABEL ABOVE
+----------------------------------*/
+.label-above .nf-field-label {
+  margin-bottom: 10px; }
 
 /* ---------------------------------
 LABEL BELOW
 ----------------------------------*/
 .label-below .nf-field-label {
   margin-top: 10px;
-  -webkit-box-ordinal-group: 11;
-  -webkit-order: 10;
-      -ms-flex-order: 10;
-          order: 10; }
+  -webkit-box-ordinal-group: 16;
+  -webkit-order: 15;
+      -ms-flex-order: 15;
+          order: 15; }
 
 .label-below .nf-field-element {
   -webkit-box-ordinal-group: 6;
@@ -637,26 +625,28 @@ LABEL BELOW
       -ms-flex-order: 5;
           order: 5; }
 
-.label-below.desc-before_everything .nf-field-description {
-  width: 100%;
-  -webkit-box-ordinal-group: 2;
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1; }
+/* ---------------------------------
+LABEL HIDDEN
+----------------------------------*/
+.label-hidden .field-wrap {
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
 
-.label-below.desc-before_label .nf-field-description {
+.label-hidden .nf-field-label {
+  height: 0;
   width: 100%;
-  -webkit-box-ordinal-group: 7;
-  -webkit-order: 6;
-      -ms-flex-order: 6;
-          order: 6; }
+  visibility: hidden; }
 
-.label-below.desc-after_label .nf-field-description, .label-below.desc-after_everything .nf-field-description {
+.label-hidden .nf-field-description {
   width: 100%;
-  -webkit-box-ordinal-group: 12;
-  -webkit-order: 11;
-      -ms-flex-order: 11;
-          order: 11; }
+  -webkit-box-ordinal-group: 21;
+  -webkit-order: 20;
+      -ms-flex-order: 20;
+          order: 20; }
+
+.label-hidden .nf-field-element {
+  width: 100%; }
 
 /* ---------------------------------
 LABEL LEFT
@@ -667,209 +657,105 @@ LABEL LEFT
   -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap; }
-  .label-left .field-wrap .nf-field-label {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
-    padding-right: 2%;
-    text-align: right;
-    width: 40%;
-    -webkit-box-ordinal-group: 6;
-    -webkit-order: 5;
-        -ms-flex-order: 5;
-            order: 5; }
-    .label-left .field-wrap .nf-field-label label {
-      width: 100%; }
-  .label-left .field-wrap .nf-field-element {
-    display: inline-block;
-    width: 60%;
-    -webkit-box-ordinal-group: 11;
-    -webkit-order: 10;
-        -ms-flex-order: 10;
-            order: 10; }
 
-.label-left .nf-after-field {
-  margin-left: 41.5%; }
-
-.label-left.desc-before_everything .field-wrap, .label-left.desc-before_label .field-wrap {
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap; }
-
-.label-left.desc-before_everything .nf-field-description, .label-left.desc-before_label .nf-field-description {
-  margin-right: 10px;
-  -webkit-box-ordinal-group: 2;
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
-  width: 40%; }
-
-.label-left.desc-after_label .field-wrap {
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap; }
-
-.label-left.desc-after_label .nf-field-description {
-  margin-right: 10px;
-  -webkit-box-ordinal-group: 7;
-  -webkit-order: 6;
-      -ms-flex-order: 6;
-          order: 6;
-  width: 60%; }
-
-.label-left.desc-after_everything .field-wrap {
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap; }
-
-.label-left.desc-after_everything .nf-field-description {
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+.label-left .nf-field-label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-left: 10px;
-  -webkit-box-ordinal-group: 12;
-  -webkit-order: 11;
-      -ms-flex-order: 11;
-          order: 11;
-  width: 60%; }
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 2%;
+  text-align: right;
+  width: 35%;
+  -webkit-box-ordinal-group: 6;
+  -webkit-order: 5;
+      -ms-flex-order: 5;
+          order: 5; }
+  .label-left .nf-field-label label {
+    width: 100%; }
+
+.label-left .nf-field-description {
+  margin-left: 35%; }
+
+.label-left .nf-field-element {
+  display: inline-block;
+  width: 65%;
+  -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
+      -ms-flex-order: 10;
+          order: 10; }
+
+.label-left .nf-after-field {
+  margin-left: 36.5%; }
 
 /* ---------------------------------
 LABEL RIGHT
 ----------------------------------*/
 .label-right .field-wrap {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+
+.label-right .nf-field-label {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: row wrap;
-      -ms-flex-direction: row wrap;
-          flex-direction: row wrap;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around; }
-  .label-right .field-wrap .nf-field-label {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
-    padding-left: 2%;
-    width: 40%;
-    -webkit-box-ordinal-group: 3;
-    -webkit-order: 2;
-        -ms-flex-order: 2;
-            order: 2; }
-  .label-right .field-wrap .nf-field-element {
-    display: inline-block;
-    width: 60%;
-    -webkit-box-ordinal-group: 2;
-    -webkit-order: 1;
-        -ms-flex-order: 1;
-            order: 1; }
-
-.label-right .checkbox-wrap {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row wrap;
-      -ms-flex-direction: row wrap;
-          flex-direction: row wrap;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-      -ms-flex-pack: start;
-          justify-content: flex-start; }
-  .label-right .checkbox-wrap .nf-field-label {
-    width: auto;
-    -webkit-box-ordinal-group: 11;
-    -webkit-order: 10;
-        -ms-flex-order: 10;
-            order: 10; }
-  .label-right .checkbox-wrap .nf-field-element {
-    width: 20px;
-    -webkit-box-ordinal-group: 6;
-    -webkit-order: 5;
-        -ms-flex-order: 5;
-            order: 5; }
-
-.label-right .nf-after-field {
-  width: 59%; }
-
-.label-right.desc-before_everything .field-wrap, .label-right.desc-before_label .field-wrap {
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap; }
-
-.label-right.desc-before_everything .nf-field-description, .label-right.desc-before_label .nf-field-description {
-  margin-right: 10px;
-  -webkit-box-ordinal-group: 2;
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
-  width: 60%; }
-
-.label-right.desc-after_label .field-wrap {
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap; }
-
-.label-right.desc-after_label .nf-field-description {
-  margin-right: 10px;
-  -webkit-box-ordinal-group: 7;
-  -webkit-order: 6;
-      -ms-flex-order: 6;
-          order: 6;
-  width: 60%; }
-
-.label-right.desc-after_everything .field-wrap {
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap; }
-
-.label-right.desc-after_everything .nf-field-description {
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-left: 10px;
-  -webkit-box-ordinal-group: 12;
-  -webkit-order: 11;
-      -ms-flex-order: 11;
-          order: 11;
-  width: 40%; }
+  padding-left: 2%;
+  width: 35%;
+  -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
+      -ms-flex-order: 10;
+          order: 10; }
+
+.label-right .nf-field-description {
+  margin-right: 35%;
+  -webkit-box-ordinal-group: 16;
+  -webkit-order: 15;
+      -ms-flex-order: 15;
+          order: 15; }
+
+.label-right .nf-field-element {
+  display: inline-block;
+  width: 65%;
+  -webkit-box-ordinal-group: 6;
+  -webkit-order: 5;
+      -ms-flex-order: 5;
+          order: 5; }
+
+.label-right .checkbox-wrap .nf-field-label {
+  width: auto; }
+
+.label-right .checkbox-wrap .nf-field-element {
+  width: 20px; }
+
+.label-right .nf-after-field {
+  width: 65%; }
 
 /* ---------------------------------
 ADJUST SOME LABEL ABOVE & BELOW ISSUES
@@ -890,10 +776,6 @@ ADJUST SOME LABEL ABOVE & BELOW ISSUES
   margin: 0;
   width: 100%; }
 
-.label-below .checkbox-wrap .nf-field-label,
-.label-above .checkbox-wrap .nf-field-label {
-  margin: 0; }
-
 /* ---------------------------------
 ADJUST SOME LABEL LEFT & RIGHT ISSUES
 ----------------------------------*/
@@ -906,7 +788,6 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
       -ms-flex-align: start;
-              -ms-grid-row-align: flex-start;
           align-items: flex-start; }
 
 .label-left .textarea-wrap .nf-field-label,
@@ -1117,7 +998,7 @@ FIELD DESCRIPTION POSITIONS
   .checkbox-wrap .nf-field-element label::after,
   .listcheckbox-wrap .nf-field-label label::after,
   .listcheckbox-wrap .nf-field-element label::after {
-    border: 2px solid;
+    border: 1px solid;
     content: "";
     width: 18px;
     height: 18px;
@@ -1139,9 +1020,6 @@ FIELD DESCRIPTION POSITIONS
 
 .checkbox-container .nf-field-element input {
   display: none; }
-
-.checkbox-container.label-above .nf-field-label, .checkbox-container.label-below .nf-field-label {
-  display: position; }
 
 .checkbox-container.label-above label {
   height: 50px;
@@ -1168,8 +1046,8 @@ FIELD DESCRIPTION POSITIONS
     top: -27px; }
 
 .checkbox-container.label-left .nf-field-label {
-  width: 42%;
-  padding-right: 3%; }
+  width: 38%;
+  padding-right: 5%; }
 
 .checkbox-container.label-left .nf-field-element {
   width: 58%; }
@@ -2112,27 +1990,5 @@ DARK COLORS - nf-blue
 
 .nf-blue .nf-help {
   color: #00AEFF; }
-
-@media only screen and (max-width: 800px) {
-  .label-left .field-wrap > div,
-  .label-left .field-wrap label,
-  .label-right .field-wrap > div,
-  .label-right .field-wrap label {
-    margin-bottom: 10px;
-    text-align: left;
-    width: 100%; }
-  .label-left input[type="checkbox"] {
-    display: none; }
-    .label-left input[type="checkbox"] + label {
-      margin-left: 30px !important;
-      width: 100% !important;
-      text-align: left !important; }
-      .label-left input[type="checkbox"] + label::after {
-        left: -28px !important; }
-    .label-left input[type="checkbox"].nf-checked + label::before {
-      left: -30px !important; }
-  .label-left .nf-after-field,
-  .label-left .field-wrap input[type=button] {
-    margin-left: 0 !important; } }
 
 /*# sourceMappingURL=display-opinions-dark.css.map */
