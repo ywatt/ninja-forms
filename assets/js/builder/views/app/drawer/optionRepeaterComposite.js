@@ -75,8 +75,6 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 				}
 			} );
 
-			nfRadio.channel( 'mergeTags' ).request( 'init', this );
-
 			/*
 			 * Send out a radio message.
 			 */
