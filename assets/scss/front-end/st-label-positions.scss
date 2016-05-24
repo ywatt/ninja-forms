@@ -74,6 +74,7 @@ LABEL HIDDEN
     }
     .nf-field-description {
         width: 100%;
+        order: 20;
     }
     .nf-field-element {
         width: 100%;
@@ -165,7 +166,7 @@ ADJUST SOME LABEL ABOVE & BELOW ISSUES
     }
     .checkbox-wrap {
         .nf-field-label {
-            margin: 0;
+            //margin: 0;
         }
     }
 }

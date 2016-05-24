@@ -639,7 +639,11 @@ LABEL HIDDEN
   visibility: hidden; }
 
 .label-hidden .nf-field-description {
-  width: 100%; }
+  width: 100%;
+  -webkit-box-ordinal-group: 21;
+  -webkit-order: 20;
+      -ms-flex-order: 20;
+          order: 20; }
 
 .label-hidden .nf-field-element {
   width: 100%; }
@@ -771,10 +775,6 @@ ADJUST SOME LABEL ABOVE & BELOW ISSUES
 .label-above .nf-field-element {
   margin: 0;
   width: 100%; }
-
-.label-below .checkbox-wrap .nf-field-label,
-.label-above .checkbox-wrap .nf-field-label {
-  margin: 0; }
 
 /* ---------------------------------
 ADJUST SOME LABEL LEFT & RIGHT ISSUES
@@ -998,7 +998,7 @@ FIELD DESCRIPTION POSITIONS
   .checkbox-wrap .nf-field-element label::after,
   .listcheckbox-wrap .nf-field-label label::after,
   .listcheckbox-wrap .nf-field-element label::after {
-    border: 2px solid;
+    border: 1px solid;
     content: "";
     width: 18px;
     height: 18px;
@@ -1020,9 +1020,6 @@ FIELD DESCRIPTION POSITIONS
 
 .checkbox-container .nf-field-element input {
   display: none; }
-
-.checkbox-container.label-above .nf-field-label, .checkbox-container.label-below .nf-field-label {
-  display: position; }
 
 .checkbox-container.label-above label {
   height: 50px;
@@ -1049,8 +1046,8 @@ FIELD DESCRIPTION POSITIONS
     top: -27px; }
 
 .checkbox-container.label-left .nf-field-label {
-  width: 42%;
-  padding-right: 3%; }
+  width: 38%;
+  padding-right: 5%; }
 
 .checkbox-container.label-left .nf-field-element {
   width: 58%; }
@@ -1993,27 +1990,5 @@ DARK COLORS - nf-blue
 
 .nf-blue .nf-help {
   color: #00AEFF; }
-
-@media only screen and (max-width: 800px) {
-  .label-left .field-wrap > div,
-  .label-left .field-wrap label,
-  .label-right .field-wrap > div,
-  .label-right .field-wrap label {
-    margin-bottom: 10px;
-    text-align: left;
-    width: 100%; }
-  .label-left input[type="checkbox"] {
-    display: none; }
-    .label-left input[type="checkbox"] + label {
-      margin-left: 30px !important;
-      width: 100% !important;
-      text-align: left !important; }
-      .label-left input[type="checkbox"] + label::after {
-        left: -28px !important; }
-    .label-left input[type="checkbox"].nf-checked + label::before {
-      left: -30px !important; }
-  .label-left .nf-after-field,
-  .label-left .field-wrap input[type=button] {
-    margin-left: 0 !important; } }
 
 /*# sourceMappingURL=display-opinions-dark.css.map */

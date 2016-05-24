@@ -639,7 +639,11 @@ LABEL HIDDEN
   visibility: hidden; }
 
 .label-hidden .nf-field-description {
-  width: 100%; }
+  width: 100%;
+  -webkit-box-ordinal-group: 21;
+  -webkit-order: 20;
+      -ms-flex-order: 20;
+          order: 20; }
 
 .label-hidden .nf-field-element {
   width: 100%; }
@@ -771,10 +775,6 @@ ADJUST SOME LABEL ABOVE & BELOW ISSUES
 .label-above .nf-field-element {
   margin: 0;
   width: 100%; }
-
-.label-below .checkbox-wrap .nf-field-label,
-.label-above .checkbox-wrap .nf-field-label {
-  margin: 0; }
 
 /* ---------------------------------
 ADJUST SOME LABEL LEFT & RIGHT ISSUES
