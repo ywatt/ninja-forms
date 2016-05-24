@@ -42,7 +42,7 @@ jQuery( document ).ready( function( $ ) {
 						cache: false,
 						success: function( data, textStatus, jqXHR ) {
 					   		var response = jQuery.parseJSON( data );
-					        nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR );
+					        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR );
 					    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR );
 					    },
 					    error: function( jqXHR, textStatus, errorThrown ) {
