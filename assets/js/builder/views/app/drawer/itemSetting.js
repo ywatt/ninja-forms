@@ -105,7 +105,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 					closeOnClick: true
 				})
 		    });
-
+			
 		    if ( this.model.get( 'use_merge_tags' ) ) {
 		    	nfRadio.channel( 'mergeTags' ).request( 'init', this );
 		    }

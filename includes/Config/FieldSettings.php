@@ -487,6 +487,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
                 'width'             => 'full',
                 'group'             => 'advanced',
                 'value'             => '',
+                'use_merge_tags'    => true,
             ),
         ),
     ),
@@ -510,6 +511,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
                 'type'              => 'rte',
                 'label'             => '',
                 'width'             => 'full',
+                'use_merge_tags'    => true,
             ),
 
             /*
