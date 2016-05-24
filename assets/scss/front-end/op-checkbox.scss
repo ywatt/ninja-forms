@@ -19,7 +19,6 @@
                 font-family: FontAwesome;
                 font-size: 24px;
                 position: absolute;
-                left: -30px;
                 bottom: 0;
                 opacity: 0;
                 z-index: 2;
@@ -149,6 +148,11 @@
         input {
             display: none;
         }
+        label {
+            &::before {
+                left: -30px;
+            }
+        }
     }
     &.label-above,
     &.label-below,
@@ -156,6 +160,9 @@
         .nf-field-label {
             label {
                 margin: 0;
+                &::before {
+                    left: -30px;
+                }
             }
         }
     }
