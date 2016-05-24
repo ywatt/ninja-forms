@@ -1,11 +1,17 @@
-define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( mainContentFieldView, mainContentFieldEmptyView ) {
+define( [], function() {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
-		emptyView: mainContentFieldEmptyView,
 		reorderOnSort: true,
 
+		getChildView: function() {
+			return nfRadio.channel( 'views' ).request( 'get:fieldItem' );
+		},
+
+		getEmptyView: function() {
+			return nfRadio.channel( 'views' ).request( 'get:mainContentEmpty' );
+		},
+
 		initialize: function() {
-			this.childView = nfRadio.channel( 'views' ).request( 'get:fieldItem' );
 			nfRadio.channel( 'fields' ).reply( 'get:sortableEl', this.getSortableEl, this );
 			nfRadio.channel( 'fields' ).reply( 'init:sortable', this.initSortable, this );
 			nfRadio.channel( 'fields' ).reply( 'destroy:sortable', this.destroySortable, this );
@@ -27,7 +33,6 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 					this.initSortable();
 				// }
 			}
-
 			nfRadio.channel( 'app' ).trigger( 'render:fieldsSortable', this );
 		},
 
@@ -47,10 +52,10 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 				helper: 'clone',
 				cancel: '.nf-item-controls',
 				placeholder: 'nf-fields-sortable-placeholder',
-				// opacity: 0.95,
-				// grid: [ 5, 5 ],
+				opacity: 0.95,
+				grid: [ 5, 5 ],
 				// scroll: false,
-				// appendTo: '#nf-main',
+				appendTo: '#nf-main',
 				scrollSensitivity: 10,
 
 				receive: function( e, ui ) {

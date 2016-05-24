@@ -64,6 +64,16 @@ define( [], function() {
 
                 if( 'undefined' != typeof fieldTypes && 0 != fieldTypes.length && ! _.contains( fieldTypes, field.get( 'type' ) ) ) return;
 
+                var fieldFilter = settingModel.get( 'field_filter' );
+                if( fieldFilter && 'undefined' != typeof fieldFilter[ field.get( 'type' ) ] ) {
+                    var bail = false;
+                    _.each( fieldFilter[ field.get( 'type' ) ], function( value, setting ){
+                        console.log( value + ":" + field.get( setting )  );
+                        if( value != field.get( setting ) ) bail = true;
+                    } );
+                    if( bail ) return;
+                }
+
                 options.push({
                     label: field.get( 'label' ),
                     value: '{field:' + field.get( 'key' ) + '}'

@@ -46,7 +46,7 @@
         content: '';
         display: block;
     }
-    .nf-field-wrap {
+    .nf-staged-fields-drag-wrap {
         position: absolute;
         width: 500px;
     }
@@ -69,6 +69,40 @@
         bottom: 10px;
         left: 10px;
         z-index: 1;
+    }
+}
+
+.nf-staged-fields-drag-wrap {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #888;
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    &.active {
+        //background: #fafafa;
+        border: 2px solid #84CC1E;
+        color: #424242;
+        font-weight: bold;
+        .nf-item-controls {
+            font-weight: normal;
+            a {
+                color: #424242;
+            }
+            .nf-item-delete,
+            .nf-item-duplicate {
+                display: none;
+            }
+            .nf-item-editing {
+                display: inline;
+            }
+            .nf-item-edit {
+                .dashicons {
+                    margin-right: 12px
+                }
+            }
+        }
     }
 }
 

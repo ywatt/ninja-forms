@@ -58,16 +58,16 @@ define( [], function() {
 
 			if ( 'undefined' !== typeof confirmModel ) {
 				if ( '' == confirmValue ) {
-					confirmModel.removeWrapperClass( 'nf-fail' );
-					confirmModel.removeWrapperClass( 'nf-pass' );
+					// confirmModel.removeWrapperClass( 'nf-fail' );
+					// confirmModel.removeWrapperClass( 'nf-pass' );
 					nfRadio.channel( 'fields' ).request( 'remove:error', confirmID, errorID );				
 				} else if ( currentValue == compareValue ) {
-					confirmModel.removeWrapperClass( 'nf-fail' );
-					confirmModel.addWrapperClass( 'nf-pass' );
+					// confirmModel.removeWrapperClass( 'nf-fail' );
+					// confirmModel.addWrapperClass( 'nf-pass' );
 					nfRadio.channel( 'fields' ).request( 'remove:error', confirmID, errorID );				
 				} else {
-					confirmModel.removeWrapperClass( 'nf-pass' );
-					confirmModel.addWrapperClass( 'nf-fail' );
+					// confirmModel.removeWrapperClass( 'nf-pass' );
+					// confirmModel.addWrapperClass( 'nf-fail' );
 					nfRadio.channel( 'fields' ).request( 'add:error', confirmID, errorID, errorMsg );				
 				}				
 			}
