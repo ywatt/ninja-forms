@@ -82,6 +82,13 @@
     margin: -4px 0 -4px 0;
 }
 
-.nf-fields-empty-droppable { border: 4px solid #FFF; }
+.nf-fields-empty-droppable {
+    border: 4px solid #FFF;
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
+    }
+}
 
 .nf-settings .toggle { cursor: pointer; }

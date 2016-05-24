@@ -24,6 +24,8 @@ define( [], function() {
 					tolerance: 'intersect',
 					scroll: false,
 					connectToSortable: '.nf-field-type-droppable',
+					grid: [ 5, 5 ],
+					// appendTo: '#nf-drawer',
 
 					helper: function( e ) {
 						var width = jQuery( e.target ).parent().width();

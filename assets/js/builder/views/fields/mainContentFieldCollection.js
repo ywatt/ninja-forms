@@ -47,8 +47,11 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 				helper: 'clone',
 				cancel: '.nf-item-controls',
 				placeholder: 'nf-fields-sortable-placeholder',
-				opacity: 0.95,
-				tolerance: tolerance,
+				// opacity: 0.95,
+				// grid: [ 5, 5 ],
+				// scroll: false,
+				// appendTo: '#nf-main',
+				scrollSensitivity: 10,
 
 				receive: function( e, ui ) {
 					nfRadio.channel( 'app' ).request( 'receive:fieldsSortable', ui );
@@ -78,8 +81,15 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 
 		destroySortable: function() {
 			jQuery( this.el ).sortable( 'destroy' );
-		}
+		},
 
+		onAddChild: function( childView ) {
+			if ( nfRadio.channel( 'fields' ).request( 'get:adding' ) ) {
+				childView.$el.hide().show( 'clip' );
+				nfRadio.channel( 'fields' ).request( 'set:adding', false );
+			}
+		}
+		
 	} );
 
 	return view;

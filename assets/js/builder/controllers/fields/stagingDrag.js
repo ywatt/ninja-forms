@@ -29,7 +29,7 @@ define( [], function( ) {
 			this.drawerEl = nfRadio.channel( 'app' ).request( 'get:drawerEl' );
 			this.mainEl = nfRadio.channel( 'app' ).request( 'get:mainEl' );
 			jQuery( this.drawerEl )[0].style.setProperty( 'overflow', 'visible', 'important' );
-			jQuery( this.mainEl )[0].style.setProperty( 'overflow', 'visible', 'important' );
+			// jQuery( this.mainEl )[0].style.setProperty( 'overflow', 'visible', 'important' );
 
 			var stagedFields = nfRadio.channel( 'fields' ).request( 'get:staging' );
 			var html = _.template( jQuery( '#nf-tmpl-staged-fields-drag' ).html() );
@@ -48,7 +48,7 @@ define( [], function( ) {
 		 */
 		stopDrag: function( context, ui ) {
 			jQuery( this.drawerEl )[0].style.setProperty( 'overflow', 'hidden', 'important' );
-			jQuery( this.mainEl )[0].style.setProperty( 'overflow', 'hidden', 'important' );
+			// jQuery( this.mainEl )[0].style.setProperty( 'overflow', 'hidden', 'important' );
 		}
 	});
 
