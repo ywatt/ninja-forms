@@ -62,9 +62,6 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $this->_data['fields'] = $this->_form_data['fields'];
 
-        $this->_errors[ 'form' ][ 'test-error' ] = 'This is a form error.';
-//        $this->_errors[ 'fields' ][ '1' ] = 'This is a field error.';
-
         $this->validate_fields();
 
         $this->process_fields();

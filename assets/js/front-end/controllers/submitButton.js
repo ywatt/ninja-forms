@@ -55,9 +55,6 @@ define(['controllers/submitButton'], function( submitButton ) {
 		},
 
 		resetLabel: function( response ) {
-
-			console.log( this );
-
 			this.set( 'label', this.get( 'oldLabel' ) );
 			this.set( 'disabled', false );
 			this.trigger( 'reRender' );
