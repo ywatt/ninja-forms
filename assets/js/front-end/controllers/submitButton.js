@@ -26,7 +26,7 @@ define(['controllers/submitButton'], function( submitButton ) {
 
 		beforeSubmit: function() {
 			this.set( 'disabled', true );
-
+			nfRadio.channel( 'form-' + this.get( 'formID' ) ).trigger( 'processingLabel', this );
 		},
 
 		maybeDisable: function( fieldModel ) {
@@ -55,6 +55,9 @@ define(['controllers/submitButton'], function( submitButton ) {
 		},
 
 		resetLabel: function( response ) {
+
+			console.log( this );
+
 			this.set( 'label', this.get( 'oldLabel' ) );
 			this.set( 'disabled', false );
 			this.trigger( 'reRender' );
