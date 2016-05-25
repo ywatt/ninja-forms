@@ -12,7 +12,9 @@ define(['controllers/submitButton'], function( submitButton ) {
 			fieldModel.listenTo( nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ), 'before:submit', this.beforeSubmit, fieldModel );
 			fieldModel.listenTo( nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ), 'submit:failed', this.resetLabel, fieldModel );
 			fieldModel.listenTo( nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ), 'submit:response', this.resetLabel, fieldModel );
-			
+			fieldModel.listenTo( nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ), 'disable:submit', this.maybeDisable, fieldModel );
+			fieldModel.listenTo( nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ), 'processingLabel', this.processingLabel, fieldModel );
+
 			fieldModel.listenTo( nfRadio.channel( 'fields' ), 'add:error', this.maybeDisable, fieldModel );
 			fieldModel.listenTo( nfRadio.channel( 'fields' ), 'remove:error', this.maybeEnable, fieldModel );
 		},
@@ -24,9 +26,7 @@ define(['controllers/submitButton'], function( submitButton ) {
 
 		beforeSubmit: function() {
 			this.set( 'disabled', true );
-			this.set( 'oldLabel', this.get( 'label' ) );
-            this.set( 'label', this.get( 'processing_label' ) );
-			this.trigger( 'reRender' );
+
 		},
 
 		maybeDisable: function( fieldModel ) {
@@ -48,8 +48,15 @@ define(['controllers/submitButton'], function( submitButton ) {
 			}
 		},
 
+		processingLabel: function() {
+			this.set( 'oldLabel', this.get( 'label' ) );
+			this.set( 'label', this.get( 'processing_label' ) );
+			this.trigger( 'reRender' );
+		},
+
 		resetLabel: function( response ) {
 			this.set( 'label', this.get( 'oldLabel' ) );
+			this.set( 'disabled', false );
 			this.trigger( 'reRender' );
 		}
 

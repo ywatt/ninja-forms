@@ -10,6 +10,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     public function __construct()
     {
+        if( isset( $_POST[ 'nf_resume' ] ) && isset( $_COOKIE[ 'nf_wp_session' ] ) ){
+            add_action( 'ninja_forms_loaded', array( $this, 'resume' ) );
+            return;
+        }
+
         if( isset( $_POST['formData'] ) ) {
             $this->_form_data = json_decode( $_POST['formData'], TRUE  );
 
@@ -67,10 +72,12 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     public function resume()
     {
         $this->_data = Ninja_Forms()->session()->get( 'nf_processing_data' );
+        $this->_data[ 'resume' ] = $_POST[ 'nf_resume' ];
 
         $this->_form_id = $this->_data[ 'form_id' ];
 
         unset( $this->_data[ 'halt' ] );
+        unset( $this->_data[ 'actions' ][ 'redirect' ] );
 
         $this->process();
     }
@@ -95,7 +102,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $this->populate_calcs_merge_tags( $this->_data[ 'settings' ][ 'calculations' ], $calcs_merge_tags );
         }
 
-        if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ) {
+        if( isset( $this->_data[ 'settings' ][ 'is_preview' ] ) && $this->_data[ 'settings' ][ 'is_preview' ] ) {
             $this->run_actions_preview();
         } else {
             $this->run_actions();
@@ -185,11 +192,14 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     {
         $actions = Ninja_Forms()->form( $this->_form_id )->get_actions();
 
+        usort($actions, array($this, 'sort_form_actions'));
+
+        if( ! isset( $this->_data[ 'processed_actions' ] ) ) $this->_data[ 'processed_actions' ] = array();
         foreach( $actions as $action ){
 
-            $action_settings = apply_filters( 'ninja_forms_run_action_settings', $action->get_settings(), $this->_form_id, $action->get_id(), $this->_data['settings'] );
+            if( in_array( $action->get_id(), $this->_data[ 'processed_actions' ] ) ) continue;
 
-            if( isset( $this->_data[ 'processed_actions' ][ $action->get_id() ] ) ) continue;
+            $action_settings = apply_filters( 'ninja_forms_run_action_settings', $action->get_settings(), $this->_form_id, $action->get_id(), $this->_data['settings'] );
 
             if( ! $action_settings['active'] ) continue;
 
@@ -201,13 +211,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
             if( ! isset( Ninja_Forms()->actions[ $type ] ) ) continue;
 
-            $data = Ninja_Forms()->actions[ $type ]->process( $action_settings, $this->_form_id, $this->_data );
+            $data = Ninja_Forms()->actions[$type]->process($action_settings, $this->_form_id, $this->_data);
 
             $this->_data = ( $data ) ? $data : $this->_data;
 
-            $this->_data[ 'processed_actions' ][ $action->get_id() ] = $this->_data;
-
-            $this->maybe_halt();
+            $this->maybe_halt( $action->get_id() );
         }
     }
 
@@ -217,7 +225,12 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         if( ! isset( $form[ 'actions' ] ) || empty( $form[ 'actions' ] ) ) return;
 
-        foreach( $form[ 'actions' ] as $action ){
+        usort( $form[ 'actions' ], array( $this, 'sort_form_actions' ) );
+
+        if( ! isset( $this->_data[ 'processed_actions' ] ) ) $this->_data[ 'processed_actions' ] = array();
+        foreach( $form[ 'actions' ] as $action_id => $action ){
+
+            if( in_array( $action_id, $this->_data[ 'processed_actions' ] ) ) continue;
 
             $action_settings = apply_filters( 'ninja_forms_run_action_settings_preview', $action[ 'settings' ], $this->_form_id, '', $this->_data['settings'] );
 
@@ -229,11 +242,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
             $this->_data = ( $data ) ? $data : $this->_data;
 
-            $this->maybe_halt();
+            $this->maybe_halt( $action_id );
         }
     }
 
-    protected function maybe_halt()
+    protected function maybe_halt( $action_id )
     {
         if( isset( $this->_data[ 'halt' ] ) && $this->_data[ 'halt' ] ){
 
@@ -241,5 +254,31 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
             $this->_respond();
         }
+
+        array_push( $this->_data[ 'processed_actions' ], $action_id );
+    }
+
+    protected function sort_form_actions( $a, $b )
+    {
+        if( is_object( $a ) ) {
+            $a = Ninja_Forms()->actions[ $a->get_setting( 'type' ) ];
+        } else {
+            $a = Ninja_Forms()->actions[ $a[ 'settings' ][ 'type' ] ];
+        }
+
+        if( is_object( $b ) ) {
+            $b = Ninja_Forms()->actions[ $b->get_setting( 'type' ) ];
+        } else {
+            $b = Ninja_Forms()->actions[ $b[ 'settings' ][ 'type' ] ];
+        }
+
+        if ( $a->get_timing() == $b->get_timing() ) {
+            if ( $a->get_priority() == $b->get_priority() ) {
+                return 0;
+            }
+            return ( $a->get_priority() < $b->get_priority() ) ? -1 : 1;
+        }
+
+        return ( $a->get_timing() < $b->get_timing() ) ? -1 : 1;
     }
 }
