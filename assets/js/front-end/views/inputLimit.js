@@ -16,7 +16,7 @@ define( [], function() {
             var wordCount = words.length;
             var charCount = value.length;
 
-            if ( 'characters' == this.model.get( 'input_limit_type' ) ) {
+            if ( 'char' == this.model.get( 'input_limit_type' ) ) {
                 this.count = this.model.get( 'input_limit' ) - charCount;
                 // this.count = charCount;
             } else {
@@ -37,7 +37,10 @@ define( [], function() {
         	return {
         		currentCount: function() {
         			return that.count;
-        		}
+        		},
+                inputLimitMessage: function() {
+                    return that.model.get( 'input_limit_msg' );
+                }
         	}
         }
 
