@@ -17,12 +17,10 @@ define( [], function() {
             var charCount = value.length;
 
             if ( 'char' == this.model.get( 'input_limit_type' ) ) {
+                jQuery( el ).attr( 'maxlength', this.model.get( 'input_limit' ) );
                 this.count = this.model.get( 'input_limit' ) - charCount;
-                // this.count = charCount;
             } else {
                 this.count = this.model.get( 'input_limit' ) - wordCount;
-                // this.count = wordCount;
-
                 var limit = this.model.get( 'input_limit' );
                 if( wordCount > limit ){
                     jQuery( el ).val( words.slice( 0, limit).join( ' ' ) );
@@ -37,10 +35,7 @@ define( [], function() {
         	return {
         		currentCount: function() {
         			return that.count;
-        		},
-                inputLimitMessage: function() {
-                    return that.model.get( 'input_limit_msg' );
-                }
+        		}
         	}
         }
 
