@@ -269,18 +269,18 @@ return apply_filters( 'ninja_forms_field_settings', array(
                 'options' => array(
                     array(
                         'label' => __( 'Character(s)', 'ninja-forms' ),
-                        'value' => 'characters'
+                        'value' => 'char'
                     ),
                     array(
                         'label' => __( 'Word(s)', 'ninja-forms' ),
-                        'value' => 'words'
+                        'value' => 'word'
                     ),
                 ),
                 'value' => 'characters',
                 'label' => '',
             ),
             array(
-                'name' => 'input_limit_message',
+                'name' => 'input_limit_msg',
                 'type' => 'textbox',
                 'label' => __( 'Text to Appear After Counter', 'ninja-forms' ),
                 'placeholder' => __( 'Character(s) left' ),
