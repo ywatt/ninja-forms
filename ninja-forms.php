@@ -14,7 +14,13 @@ Copyright 2016 WP Ninjas.
 
 require_once dirname( __FILE__ ) . '/lib/NF_VersionSwitcher.php';
 
-if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ) {
+function ninja_forms_three_table_exists(){
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'nf3_forms';
+    return ( $wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name );
+}
+
+if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) || ! ninja_forms_three_table_exists() ) {
     update_option( 'ninja_forms_load_deprecated', TRUE );
 }
 
