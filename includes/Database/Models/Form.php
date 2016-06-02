@@ -492,8 +492,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
                 unset( $field[ 'rating_stars' ] );
             }
         }
-
-        return $field;
+        
+        return apply_filters( 'ninja_forms_upgrade_field', $field );
     }
 
 } // End NF_Database_Models_Form
