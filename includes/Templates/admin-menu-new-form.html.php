@@ -480,6 +480,10 @@
 
 </script>
 
+<script id="nf-tmpl-edit-setting-color" type="text/template">
+    COLOR PICKER HERE
+</script>
+
 <script id="nf-tmpl-edit-setting-fieldset" type="text/template">
     <fieldset>
         <legend><%= label %></legend>
