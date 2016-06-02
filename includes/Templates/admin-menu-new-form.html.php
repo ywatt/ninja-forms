@@ -481,7 +481,11 @@
 </script>
 
 <script id="nf-tmpl-edit-setting-color" type="text/template">
-    COLOR PICKER HERE
+
+    <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
+        <input type="text" value="<%= value %>" class="js-ninja-forms-styles-color-field setting" data-default-color="#F9F9F9" />
+    </label>
+
 </script>
 
 <script id="nf-tmpl-edit-setting-fieldset" type="text/template">
