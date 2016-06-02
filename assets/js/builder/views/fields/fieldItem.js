@@ -85,7 +85,8 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 				this.doingShortcut = false;
 				return false;
 			}
-			if ( ( jQuery( e.target ).parent().hasClass( 'nf-fields-sortable' ) || jQuery( e.target ).parent().hasClass( 'nf-field-wrap' ) ) && ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
+
+			if ( ( jQuery( e.target ).parent().hasClass( 'nf-fields-sortable' ) || jQuery( e.target ).parent().hasClass( 'nf-field-wrap' ) || jQuery( e.target ).hasClass( 'nf-field-wrap' ) ) && ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
 				nfRadio.channel( 'app' ).trigger( 'click:edit', e, this.model );
 			}
 		},
