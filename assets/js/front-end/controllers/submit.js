@@ -57,7 +57,7 @@ define([], function() {
 			var fields = [];
 			_.each( formModel.get( 'fields' ).models, function( field ) {
 				var fieldDataDefaults = { value:field.get( 'value' ), id:field.get( 'id' ) };
-				var fieldData = nfRadio.channel( field.get( 'type' ) ).request( 'get:submitData', fieldDataDefaults ) || fieldDataDefaults;
+				var fieldData = nfRadio.channel( field.get( 'type' ) ).request( 'get:submitData', fieldDataDefaults, field ) || fieldDataDefaults;
 				fields.push( fieldData );
 			} );
 			var settings = formModel.get( 'settings' );
