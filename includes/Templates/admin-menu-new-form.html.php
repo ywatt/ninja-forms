@@ -482,9 +482,13 @@
 
 <script id="nf-tmpl-edit-setting-color" type="text/template">
 
-    <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %>
-        <input type="text" value="<%= value %>" class="js-ninja-forms-styles-color-field setting" data-default-color="#F9F9F9" />
-    </label>
+    <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %></label>
+
+    <input type="text" value="<%= value %>" class="js-ninja-forms-styles-color-field setting" data-default-color="#F9F9F9" />
+
+    <div class="nf-colorpicker">
+
+    </div>
 
 </script>
 

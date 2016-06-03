@@ -41,6 +41,7 @@ define(
 		'controllers/app/rte',
 		'controllers/app/settingFieldSelect',
 		'controllers/app/settingHTML',
+		'controllers/app/settingColor',
 		'controllers/app/changeMenu',
 		'controllers/app/mobile',
 		'controllers/app/notices',
@@ -132,6 +133,7 @@ define(
 		RTE,
 		SettingFieldSelect,
 		SettingHTML,
+		SettingColor,
 		ChangeMenu,
 		AppMobile,
 		AppNotices,
@@ -214,6 +216,7 @@ define(
 				new RTE();
 				new SettingFieldSelect();
 				new SettingHTML();
+				new SettingColor();
 				new ChangeMenu();
 				new AppMobile();
 				new AppNotices();

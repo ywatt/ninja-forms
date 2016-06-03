@@ -111,6 +111,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         /**
          * CSS Libraries
          */
+        wp_enqueue_style( 'wp-color-picker' );
         wp_enqueue_style( 'jBox', Ninja_Forms::$url . 'assets/css/jBox.css' );
         wp_enqueue_style( 'summernote', Ninja_Forms::$url . 'assets/css/summernote.css' );
         wp_enqueue_style( 'codemirror', Ninja_Forms::$url . 'assets/css/codemirror.css' );
@@ -141,7 +142,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         wp_enqueue_script( 'summernote', Ninja_Forms::$url . 'assets/js/lib/summernote.min.js', array( 'jquery', 'speakingurl' ) );
 
 
-        wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/min/builder.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable', 'jquery-effects-bounce' ) );
+        wp_enqueue_script( 'nf-builder', Ninja_Forms::$url . 'assets/js/min/builder.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable', 'jquery-effects-bounce', 'wp-color-picker' ) );
 
         wp_localize_script( 'nf-builder', 'nfAdmin', array(
             'ajaxNonce'         => wp_create_nonce( 'ninja_forms_builder_nonce' ),
