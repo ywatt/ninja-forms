@@ -275,7 +275,7 @@ abstract class NF_Abstracts_Field
             }
         }
 
-        return $settings = apply_filters( 'ninja_forms_field_load_settings', $settings, $this->_name );
+        return $settings = apply_filters( 'ninja_forms_field_load_settings', $settings, $this->_name, $this->get_parent_type() );
     }
 
     public static function get_base_template()
