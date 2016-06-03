@@ -2312,11 +2312,12 @@ WP Color Picker (Iris) Styles
   box-sizing: content-box; }
 
 .wp-picker-container {
-  margin-top: 15px; }
+  margin-top: 15px;
+  width: 100%; }
 
 .wp-color-result {
   height: 44px;
-  width: 200px;
+  width: 100%;
   margin-top: 5px;
   padding-left: 60px; }
 
@@ -2326,7 +2327,11 @@ WP Color Picker (Iris) Styles
 .wp-color-result.wp-picker-open {
   display: none; }
 
-.wp-color-picker {
-  width: auto !important; }
+.wp-color-picker,
+.wp-picker-input-wrap {
+  width: 100% !important; }
+
+.wp-picker-input-wrap > .button.wp-picker-default {
+  display: none; }
 
 /*# sourceMappingURL=builder.css.map */
