@@ -484,7 +484,7 @@
 
     <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %></label>
 
-    <input type="text" id="<%= name %>" value="<%= value %>" class="js-ninja-forms-styles-color-field setting" data-default-color="#F9F9F9" />
+    <input type="text" id="<%= name %>" value="<%= value %>" class="setting" data-default-color="#F9F9F9" />
 
     <div class="nf-colorpicker">
 

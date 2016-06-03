@@ -9,23 +9,33 @@
 define( [], function() {
     var controller = Marionette.Object.extend( {
         initialize: function() {
+            // We don't want to re-render this setting type when the data changes.
+            nfRadio.channel( 'setting-type-color' ).reply( 'renderOnChange', this.setRenderFalse );
+            // We want to close any color pickers before we close our styling tab or drawer.
+            this.listenTo( nfRadio.channel( 'setting-type-color' ), 'destroy:setting', this.closeColorPickers );
 
             // The first time settingModel and the dataModel meet.
-            this.listenTo( nfRadio.channel( 'setting-type-color' ), 'attach:setting', this.init );
+            this.listenTo( nfRadio.channel( 'setting-type-color' ), 'render:setting', this.initColorPicker );
         },
 
-        init: function( settingModel, dataModel ) {
+        initColorPicker: function( settingModel, dataModel, view ) {
 
             var name = settingModel.get( 'name' );
+            var el = jQuery( view.el ).find( 'input' );
 
-            jQuery( '#' + name ).wpColorPicker({
-                target: '.nf-colorpicker',
+            jQuery( el ).wpColorPicker( {
                 change: function( event, ui ){
-                    console.log( ui.color.toString() );
-                    console.log( name );
-                    // dataModel.set( name, ui.color.toString() );
+                    nfRadio.channel( 'app' ).request( 'change:setting', event, settingModel, dataModel, ui.color.toString() );
                 }
-            });
+            } );
+        },
+
+        setRenderFalse: function() {
+            return false;
+        },
+
+        closeColorPickers: function( settingModel, dataModel, view ) {
+            jQuery( view.el ).find( '.wp-color-picker' ).wpColorPicker( 'close' );
         }
     });
 
