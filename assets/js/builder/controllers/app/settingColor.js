@@ -15,17 +15,17 @@ define( [], function() {
         },
 
         init: function( settingModel, dataModel ) {
-            jQuery('.js-ninja-forms-styles-color-field').wpColorPicker({
+
+            var name = settingModel.get( 'name' );
+
+            jQuery( '#' + name ).wpColorPicker({
                 target: '.nf-colorpicker',
-                change: this.update
+                change: function( event, ui ){
+                    console.log( ui.color.toString() );
+                    console.log( name );
+                    // dataModel.set( name, ui.color.toString() );
+                }
             });
-        },
-
-        update: function( event, ui ) {
-
-            console.log( ui.color.toString() );
-            // Mirror the default value setting value.
-            // dataModel.set( this.get( 'name' ), changedSettingValue );
         }
     });
 
