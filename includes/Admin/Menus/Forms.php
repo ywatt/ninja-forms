@@ -381,7 +381,9 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         foreach( $form_settings_types as $id => $type ) {
 
-            $unique_settings = ( isset( $form_settings[ $id ] ) ) ? $this->_unique_settings( $form_settings[ $id ] ) : array();
+            if( ! isset( $form_settings[ $id ] ) ) $form_settings[ $id ] = '';
+
+            $unique_settings = $this->_unique_settings( $form_settings[ $id ] );
             $master_settings = array_merge( $master_settings, $unique_settings );
 
             $form_settings_types[ $id ]['settingGroups'] = $this->_group_settings($form_settings[ $id ], $groups);
@@ -423,6 +425,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
     protected function _group_settings( $settings, $groups )
     {
+        if( ! is_array( $settings ) ) return $groups;
+
         foreach( $settings as $setting ){
 
             $group = ( isset( $setting[ 'group' ] ) ) ? $setting[ 'group' ] : '';
@@ -450,6 +454,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     protected function _unique_settings( $settings )
     {
         $unique_settings = array();
+
+        if( ! is_array( $settings ) ) return $unique_settings;
 
         foreach( $settings as $setting ){
 
