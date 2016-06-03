@@ -11,11 +11,14 @@ define( [], function() {
         initialize: function() {
             // We don't want to re-render this setting type when the data changes.
             nfRadio.channel( 'setting-type-color' ).reply( 'renderOnChange', this.setRenderFalse );
+            // We want to close any color pickers before we close our styling tab or drawer.
+            this.listenTo( nfRadio.channel( 'setting-type-color' ), 'destroy:setting', this.closeColorPickers );
+
             // The first time settingModel and the dataModel meet.
-            this.listenTo( nfRadio.channel( 'setting-type-color' ), 'render:setting', this.init );
+            this.listenTo( nfRadio.channel( 'setting-type-color' ), 'render:setting', this.initColorPicker );
         },
 
-        init: function( settingModel, dataModel, view ) {
+        initColorPicker: function( settingModel, dataModel, view ) {
 
             var name = settingModel.get( 'name' );
             var el = jQuery( view.el ).find( 'input' );
@@ -29,6 +32,10 @@ define( [], function() {
 
         setRenderFalse: function() {
             return false;
+        },
+
+        closeColorPickers: function( settingModel, dataModel, view ) {
+            jQuery( view.el ).find( '.wp-color-picker' ).wpColorPicker( 'close' );
         }
     });
 
