@@ -191,4 +191,12 @@ final class WPN_Helper
         return $value;
     }
 
+    public static function sanitize_text_field( $data )
+    {
+        if( is_array( $data ) ){
+            return array_map( array( 'self', 'sanitize_text_field' ), $data );
+        }
+        return sanitize_text_field( $data );
+    }
+
 } // End Class WPN_Helper
