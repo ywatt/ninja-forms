@@ -500,6 +500,16 @@ function init_all_the_ninja_things() {
 								var current_value = jQuery("#ninja_forms_field_" + calc_id).html();
 							}
 
+							// Strip the Thousands Separator
+							current_value = current_value.replace( /thousandsSeparator/g, "" );
+
+							// If the Decimal Point is not `.`
+							if ( '.' != decimalPoint ) {
+
+								// Replace the Decimal Point
+								current_value = current_value.replace( decimalPoint, "." );
+							}
+
 							// Make sure that our current total is made up of numbers.
 							if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' && typeof current_value != 'undefined' ) {
 
@@ -665,8 +675,6 @@ function init_all_the_ninja_things() {
 							}
 
 							var calc_value = eval(tmp_eq);
-
-							console.log( calc_value );
 						}
 
 						// Find out what kind of element our total field is - either span or textbox.
