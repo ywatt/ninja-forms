@@ -1,3 +1,6 @@
 <script id="nf-tmpl-before-form" type="text/template">
+	<% if( 'undefined' != typeof show_title && 1 == show_title ){ %>
+		<h2 class="ninja-forms-form-title"><%= title %></h2>
+	<% } %>
 	<%= beforeForm %>
 </script>
