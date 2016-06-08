@@ -375,6 +375,11 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         $form_settings[ 'calculations' ] = Ninja_Forms::config( 'FormCalculationSettings' );
         $form_settings = apply_filters( 'ninja_forms_localize_forms_settings', $form_settings );
 
+        foreach( $form_settings_types as $group_name => $form_setting_group ){
+            if( ! isset( $form_settings[ $group_name ] ) ) $form_settings[ $group_name ] = array();
+            $form_settings[ $group_name ] = apply_filters( 'ninja_forms_localize_form_' . $group_name . '_settings', $form_settings[ $group_name ] );
+        }
+
         $groups = Ninja_Forms::config( 'SettingsGroups' );
 
         $master_settings = array();
