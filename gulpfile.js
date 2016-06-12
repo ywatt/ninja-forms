@@ -93,8 +93,10 @@ gulp.task('watch', function() {
     gulp.watch('assets/scss/**/*.scss', ['sass']);
 });
 
+gulp.task('build', ['js', 'sass']);
 // Default Task
-gulp.task('default', ['js', 'sass', 'watch']);
+gulp.task('default', ['build', 'watch']);
+
 
 function swallowError (error) {
     //If you want details of the error in the console
