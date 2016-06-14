@@ -7,6 +7,8 @@ class NF_Fields_PasswordConfirm extends NF_Fields_Password
 {
     protected $_name = 'passwordconfirm';
 
+    protected $_type = 'passwordconfirm';
+
     protected $_nicename = 'Password Confirm';
 
     protected $_section = '';
