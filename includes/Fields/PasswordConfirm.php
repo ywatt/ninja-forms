@@ -15,11 +15,17 @@ class NF_Fields_PasswordConfirm extends NF_Fields_Password
 
     protected $_error_message = '';
 
+    protected $_settings = array( 'confirm_field' );
+
     public function __construct()
     {
         parent::__construct();
 
         $this->_nicename = __( 'Password Confirm', 'ninja-forms' );
+
+        $this->_settings[ 'confirm_field' ][ 'value' ] = 'password';
+        $this->_settings[ 'confirm_field' ][ 'field_types' ] = array( 'password' );
+        $this->_settings[ 'confirm_field' ][ 'field_value_format' ] = 'key';
     }
 
     public function validate( $field, $data )
