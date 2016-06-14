@@ -24,6 +24,14 @@
     &.hr-container {
         margin: 0;
         height: auto;
+        .nf-field-label {
+            display: none;
+        }
+    }
+    &.html-container {
+        .nf-field-label {
+            display: none;
+        }
     }
 }
 
