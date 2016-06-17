@@ -75,9 +75,11 @@
 .nf-static {
     padding: 0 10px;
 }
-.nf-error-msg {
-    margin-right: 10px;
-    text-align: right;
+.nf-after-field {
+    .nf-error-msg {
+        margin-right: 10px;
+        text-align: right;
+    }
 }
 
 
@@ -212,5 +214,12 @@ HELPER CLASSES
             float: left;
             width: 25%
         }
+    }
+}
+
+
+body {
+    .pika-label {
+        background: transparent;
     }
 }

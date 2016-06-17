@@ -65,7 +65,7 @@ Normalize Ninja Forms fields with default structure
 .nf-static {
   padding: 0 10px; }
 
-.nf-error-msg {
+.nf-after-field .nf-error-msg {
   margin-right: 10px;
   text-align: right; }
 
@@ -167,6 +167,9 @@ HELPER CLASSES
 .four-col-list ul li {
   float: left;
   width: 25%; }
+
+body .pika-label {
+  background: transparent; }
 
 .note-popover {
   display: none !important; }
@@ -795,7 +798,6 @@ ADJUST SOME LABEL LEFT & RIGHT ISSUES
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
       -ms-flex-align: start;
-              -ms-grid-row-align: flex-start;
           align-items: flex-start; }
 
 .label-left .textarea-wrap .nf-field-label,
