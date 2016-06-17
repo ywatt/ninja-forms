@@ -20,6 +20,8 @@ define( ['models/app/appModel'], function( appModel ) {
 				clean: true
 			} );
 
+			this.maybeOpenTutorial( appDomainCollection.get( 'fields' ) );
+
 			/*
 			 * Set the mobile setting used to track whether or not we're on a mobile device.
 			 */
@@ -45,11 +47,38 @@ define( ['models/app/appModel'], function( appModel ) {
 			nfRadio.channel( 'app' ).reply( 'update:currentDomain', this.updateCurrentDomain, this );
 			nfRadio.channel( 'app' ).reply( 'update:currentDrawer', this.updateCurrentDrawer, this );
 			nfRadio.channel( 'app' ).reply( 'update:setting', this.updateSetting, this );
+		},
+
+		maybeOpenTutorial: function( model ) {
+			if ( model.get( 'tutorial' ) && ! model.get( 'tutorialDismissed' ) ) {
+				/*
+				 * Open a jBox when the domain renders
+				 */
+				var tmp = new jBox('Modal', {
+				    maxHeight: 500,
+				    width: 700,
+				    zIndex: 99999999,
+				    title: model.get( 'tutorial' ).title,
+				    content: model.get( 'tutorial' ).content,
+				    closeButton: 'title',
+				    closeOnClick: false,
+				    addClass: 'nf-tutorial-modal',
+				    onClose: function() {
+				    	model.set( 'tutorialDismissed', true );
+				    }
+				});				
+
+				setTimeout( function() { 
+					tmp.open();
+				}, 1000 );
+							
+			}
 
 		},
 
 		updateCurrentDomain: function( model ) {
 			this.updateSetting( 'currentDomain', model );
+			this.maybeOpenTutorial( model );
 		},
 
 		updateSetting: function( setting, value ) {

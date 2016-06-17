@@ -15,6 +15,8 @@ define( ['views/app/drawer/defaultSettingsTitle'], function( defaultSettingsTitl
 			url: '',
 			hotkeys: false,
 			disabled: false,
+			tutorial: false,
+			tutorialDismissed: false,
 
 			getSettingsTitleView: function( data ) {
 				return new defaultSettingsTitleView( data );
