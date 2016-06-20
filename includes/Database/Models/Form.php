@@ -264,7 +264,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
         $import = $this->import_merge_tags_backwards_compatibility( $import );
 
-        return $import;
+        return apply_filters( 'ninja_forms_after_upgrade_settings', $import );
     }
 
     public function import_merge_tags_backwards_compatibility( $import )
