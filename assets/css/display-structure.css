@@ -12,6 +12,7 @@ Normalize Ninja Forms fields with default structure
 
 .nf-field-container,
 #ninja_forms_required_items {
+  clear: both;
   position: relative;
   margin-bottom: 25px; }
   .nf-field-container::after,

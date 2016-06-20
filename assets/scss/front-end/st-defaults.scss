@@ -13,6 +13,7 @@
 
 .nf-field-container,
 #ninja_forms_required_items {
+    clear: both;
     position: relative;
     margin-bottom: 25px;
     &::after {
