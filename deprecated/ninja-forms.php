@@ -789,6 +789,10 @@ function ninja_forms_three_submenu(){
 
 add_action( 'admin_notices', 'ninja_forms_three_admin_notice' );
 function ninja_forms_three_admin_notice(){
+
+    $settings = Ninja_Forms()->get_plugin_settings();
+    if( isset( $settings[ 'disable_admin_notices' ] ) && $settings[ 'disable_admin_notices' ] ) return;
+
     $currentScreen = get_current_screen();
     if( ! in_array( $currentScreen->id, array( 'toplevel_page_ninja-forms' ) ) ) return;
     wp_enqueue_style( 'nf-admin-notices', NINJA_FORMS_URL .'assets/css/admin-notices.css?nf_ver=' . NF_PLUGIN_VERSION );
