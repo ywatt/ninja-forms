@@ -1117,8 +1117,10 @@ FIELD DESCRIPTION POSITIONS
 .listcheckbox-container .nf-field-element input {
   display: none; }
 
-.listcheckbox-container .nf-field-element label::before {
-  left: -30px; }
+.listcheckbox-container .nf-field-element label {
+  margin-left: 30px !important; }
+  .listcheckbox-container .nf-field-element label::before {
+    left: -30px; }
 
 .listcheckbox-container.label-above .nf-field-label label, .listcheckbox-container.label-below .nf-field-label label, .listcheckbox-container.label-right .nf-field-label label {
   margin: 0; }
