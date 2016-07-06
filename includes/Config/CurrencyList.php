@@ -3,107 +3,107 @@
 return apply_filters( 'ninja_forms_config_currency_list', array(
 
     'AUD' => array(
-        'name' => __( 'Australian Dollars', 'ninja-forms' ),
+        'label' => __( 'Australian Dollars', 'ninja-forms' ),
         'value' => 'AUD'
     ),
 
     'CAD' => array(
-        'name' => __( 'Canadian Dollars', 'ninja-forms' ),
+        'label' => __( 'Canadian Dollars', 'ninja-forms' ),
         'value' => 'CAD'
     ),
 
     'CZK' => array(
-        'name' => __( 'Czech Koruna', 'ninja-forms' ),
+        'label' => __( 'Czech Koruna', 'ninja-forms' ),
         'value' => 'CZK'
     ),
 
     'DKK' => array(
-        'name' => __( 'Danish Krone', 'ninja-forms' ),
+        'label' => __( 'Danish Krone', 'ninja-forms' ),
         'value' => 'DKK'
     ),
 
     'EUR' => array(
-        'name' => __( 'Euros', 'ninja-forms' ),
+        'label' => __( 'Euros', 'ninja-forms' ),
         'value' => 'EUR'
     ),
 
     'HKD' => array(
-        'name' => __( 'Hong Kong Dollars', 'ninja-forms' ),
+        'label' => __( 'Hong Kong Dollars', 'ninja-forms' ),
         'value' => 'HKD'
     ),
 
     'HUF' => array(
-        'name' => __( 'Hungarian Forints', 'ninja-forms' ),
+        'label' => __( 'Hungarian Forints', 'ninja-forms' ),
         'value' => 'HUF'
     ),
 
     'ILS' => array(
-        'name' => __( 'Israeli New Sheqels', 'ninja-forms' ),
+        'label' => __( 'Israeli New Sheqels', 'ninja-forms' ),
         'value' => 'ILS'
     ),
 
     'JPY' => array(
-        'name' => __( 'Japanese Yen', 'ninja-forms' ),
+        'label' => __( 'Japanese Yen', 'ninja-forms' ),
         'value' => 'JPY'
     ),
 
     'MXN' => array(
-        'name' => __( 'Mexican Pesos', 'ninja-forms' ),
+        'label' => __( 'Mexican Pesos', 'ninja-forms' ),
         'value' => 'MXN'
     ),
 
     'NOK' => array(
-        'name' => __( 'Norwegian Krone', 'ninja-forms' ),
+        'label' => __( 'Norwegian Krone', 'ninja-forms' ),
         'value' => 'NOK'
     ),
 
     'NZD' => array(
-        'name' => __( 'New Zealand Dollars', 'ninja-forms' ),
+        'label' => __( 'New Zealand Dollars', 'ninja-forms' ),
         'value' => 'NZD'
     ),
 
     'PHP' => array(
-        'name' => __( 'Philippine Pesos', 'ninja-forms' ),
+        'label' => __( 'Philippine Pesos', 'ninja-forms' ),
         'value' => 'PHP'
     ),
 
     'PLN' => array(
-        'name' => __( 'Polish Zloty', 'ninja-forms' ),
+        'label' => __( 'Polish Zloty', 'ninja-forms' ),
         'value' => 'PLN'
     ),
 
     'GBP' => array(
-        'name' => __( 'Pound Sterling', 'ninja-forms' ),
+        'label' => __( 'Pound Sterling', 'ninja-forms' ),
         'value' => 'GBP'
     ),
 
     'SGD' => array(
-        'name' => __( 'Singapore Dollars', 'ninja-forms' ),
+        'label' => __( 'Singapore Dollars', 'ninja-forms' ),
         'value' => 'SGD'
     ),
 
     'SEK' => array(
-        'name' => __( 'Swedish Krona', 'ninja-forms' ),
+        'label' => __( 'Swedish Krona', 'ninja-forms' ),
         'value' => 'SEK'
     ),
 
     'CHF' => array(
-        'name' => __( 'Swiss Franc', 'ninja-forms' ),
+        'label' => __( 'Swiss Franc', 'ninja-forms' ),
         'value' => 'CHF'
     ),
 
     'TWD' => array(
-        'name' => __( 'Taiwan New Dollars', 'ninja-forms' ),
+        'label' => __( 'Taiwan New Dollars', 'ninja-forms' ),
         'value' => 'TWD'
     ),
 
     'THB' => array(
-        'name' => __( 'Thai Baht', 'ninja-forms' ),
+        'label' => __( 'Thai Baht', 'ninja-forms' ),
         'value' => 'THB'
     ),
 
     'USD' => array(
-        'name' => __( 'U.S. Dollars', 'ninja-forms' ),
+        'label' => __( 'U.S. Dollars', 'ninja-forms' ),
         'value' => 'USD'
     ),
 
