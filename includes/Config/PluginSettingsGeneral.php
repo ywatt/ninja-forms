@@ -41,4 +41,18 @@ return apply_filters( 'ninja_forms_plugin_settings_general', array(
         'desc'  => 'e.g. $, &pound;, &euro;'
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Currency
+    |--------------------------------------------------------------------------
+    */
+
+    'currency' => array(
+        'id'    => 'currency',
+        'type'  => 'select',
+        'label' => __( 'Currency', 'ninja-forms' ),
+        'options' => Ninja_Forms::config( 'CurrencyList' ),
+        'value' => 'USD'
+    ),
+
 ));
