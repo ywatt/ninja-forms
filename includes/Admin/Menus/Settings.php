@@ -46,7 +46,7 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
             foreach( $settings as $id => $setting ){
 
-                $value = ( isset( $setting_defaults[ $id ] ) ) ? $setting_defaults[$id] : '';
+                $value = ( isset( $setting_defaults[ $id ] ) && $setting_defaults[ $id ] ) ? $setting_defaults[$id] : ( ( isset( $setting[ 'value' ] ) ) ? $setting[ 'value' ] : ''  );
 
                 $grouped_settings[$group][$id]['id'] = $this->prefix( $grouped_settings[$group][$id]['id'] );
                 $grouped_settings[$group][$id]['value'] = $value;
