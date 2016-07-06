@@ -33,9 +33,25 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
         'name' => 'payment_total',
         'type' => 'textbox',
         'label' => __( 'Payment Total', 'ninja-forms' ),
-        'width' => 'full',
+        'width' => 'one-half',
         'group' => 'primary',
         'use_merge_tags' => TRUE
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Currency
+    |--------------------------------------------------------------------------
+    */
+
+    'currency' => array(
+        'name' => 'currency',
+        'type' => 'select',
+        'label' => __( 'Currency', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'options' => Ninja_Forms::config( 'CurrencyList' ),
+        'value' => Ninja_Forms()->get_setting( 'currency', 'USD' )
     ),
 
 ));
