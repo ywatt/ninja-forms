@@ -5,8 +5,9 @@ define([], function() {
         },
 
         submitDebug: function( response, textStatus, jqXHR, formID ) {
+            
             if( 'undefined' == typeof response.debug ) return;
-
+            
             var debugMessages = '';
             _.each( response.debug, function( message, index ){
                 debugMessages += message + '<br />';

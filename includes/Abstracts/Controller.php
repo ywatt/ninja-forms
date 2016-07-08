@@ -55,6 +55,10 @@ abstract class NF_Abstracts_Controller
             $this->_debug = array_merge( $this->_debug, $this->_data[ 'debug' ] );
         }
 
+        if( isset( $this->_data['errors'] ) ) {
+            $this->_errors = array_merge( $this->_errors, $this->_data[ 'errors' ] );
+        }
+
         $response = array( 'data' => $data, 'errors' => $this->_errors, 'debug' => $this->_debug );
 
         echo wp_json_encode( $response );
