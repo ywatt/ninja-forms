@@ -2,6 +2,8 @@
 
 class NF_Download_All_Subs extends NF_Step_Processing {
 
+	public $test = false;
+
 	function __construct() {
 		$this->action = 'download_all_subs';
 
@@ -9,14 +11,14 @@ class NF_Download_All_Subs extends NF_Step_Processing {
 	}
 
 	public function loading() {
-
 		$form_id  = isset( $this->args['form_id'] ) ? absint( $this->args['form_id'] ) : 0;
 
 		if ( empty( $form_id ) ) {
+
 			return array( 'complete' => true );
 		}
-			
-	 	$sub_count = nf_get_sub_count( $form_id );
+
+		$sub_count = nf_get_sub_count( $form_id );
 
 		if( empty( $this->total_steps ) || $this->total_steps <= 1 ) {
 			$this->total_steps = round( ( $sub_count / 250 ), 0 ) + 2;
@@ -30,11 +32,17 @@ class NF_Download_All_Subs extends NF_Step_Processing {
 		update_user_option( get_current_user_id(), 'nf_download_all_subs_filename', $this->args['filename'] );
 		$this->redirect = esc_url_raw( add_query_arg( array( 'download_all' => $this->args['filename'] ), $this->args['redirect'] ) );
 
+		$this->loaded = true;
 		return $args;
 	}
 
 	public function step() {
-		
+		if( ! is_numeric( $this->args[ 'form_id' ] ) ){
+			wp_die( __( 'Invalid form id', 'ninja-forms' ) );
+		}
+
+		$this->args[ 'filename' ] = wp_kses( $this->args[ 'filename' ] );
+
 		$exported_subs = get_user_option( get_current_user_id(), 'nf_download_all_subs_ids' );
 		if ( ! is_array( $exported_subs ) ) {
 			$exported_subs = array();
@@ -50,7 +58,7 @@ class NF_Download_All_Subs extends NF_Step_Processing {
 			'paged' => $this->step,
 			'post_type' => 'nf_sub',
 			'meta_query' => array(
-				array( 
+				array(
 					'key' => '_form_id',
 					'value' => $this->args['form_id'],
 				),
@@ -72,7 +80,7 @@ class NF_Download_All_Subs extends NF_Step_Processing {
 				}
 				if ( ! in_array( $sub->ID, $exported_subs ) ) {
 					$export .= $sub_export;
-					$exported_subs[] = $sub->ID;					
+					$exported_subs[] = $sub->ID;
 				}
 				$x++;
 			}
@@ -90,7 +98,7 @@ class NF_Download_All_Subs extends NF_Step_Processing {
 
 	/**
 	 * Add an integar to the end of our filename to make sure it is unique
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7.6
 	 * @return $filename
@@ -99,7 +107,7 @@ class NF_Download_All_Subs extends NF_Step_Processing {
 		$upload_dir = wp_upload_dir();
 		$file_path = trailingslashit( $upload_dir['path'] ) . $filename . '.csv';
 		if ( file_exists ( $file_path ) ) {
-			for ($x = 0; $x < 999 ; $x++) { 
+			for ($x = 0; $x < 999 ; $x++) {
 				$tmp_name = $filename . '-' . $x;
 				$tmp_path = trailingslashit( $upload_dir['path'] );
 				if ( file_exists( $tmp_path . $tmp_name . '.csv' ) ) {
