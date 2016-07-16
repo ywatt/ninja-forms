@@ -13,6 +13,7 @@ Copyright 2016 WP Ninjas.
 */
 
 require_once dirname( __FILE__ ) . '/lib/NF_VersionSwitcher.php';
+require_once dirname( __FILE__ ) . '/lib/NF_Tracking.php';
 
 function ninja_forms_three_table_exists(){
     global $wpdb;
