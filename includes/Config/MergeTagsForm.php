@@ -10,9 +10,9 @@ return apply_filters( 'ninja_forms_merge_tags_form', array(
 
     'sub_seq' => array(
         'id' => 'sub_seq',
-        'tag' => '{form:sub_seq}',
+        'tag' => '{submission:sequence}',
         'label' => __( 'Sub Sequence', 'ninja_forms' ),
-        'callback' => 'get_sub_seq',
+        'callback' => 'getSubSeq',
     ),
 
 ));
