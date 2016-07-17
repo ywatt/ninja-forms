@@ -83,6 +83,9 @@ final class NF_Tracking
                 sprintf( __( '%sDo not allow%s', 'ninja-forms' ), '<a href="' . $this->get_opt_out_url( admin_url( 'admin.php?page=ninja-forms' ) ) . '" class="button-secondary" id="ninja-forms-do-not-allow-tracking">', '</a>' ),
             )),
             'int' => 0, // No delay
+            'blacklist' => array(
+                'ninja-forms-three'
+            )
         );
 
         return $notices;
