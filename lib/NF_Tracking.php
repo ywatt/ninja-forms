@@ -31,6 +31,8 @@ final class NF_Tracking
         }
 
         add_filter( 'nf_admin_notices', array( $this, 'admin_notice' ) );
+
+        add_action( 'ninja_forms_upgrade', array( $this, 'opt_in' ) );
     }
 
     /**
@@ -118,7 +120,7 @@ final class NF_Tracking
      * @access private
      * @return null
      */
-    private function opt_in()
+    public function opt_in()
     {
         update_option( 'ninja_forms_allow_tracking', true );
     }

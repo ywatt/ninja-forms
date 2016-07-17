@@ -51,9 +51,11 @@ final class NF_VersionSwitcher
             switch( $_GET[ 'nf-switcher' ] ){
                 case 'upgrade':
                     update_option( 'ninja_forms_load_deprecated', FALSE );
+                    do_action( 'ninja_forms_upgrade' );
                     break;
                 case 'rollback':
                     update_option( 'ninja_forms_load_deprecated', TRUE );
+                    do_action( 'ninja_forms_rollback' );
                     break;
             }
 
