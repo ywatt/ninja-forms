@@ -82,84 +82,7 @@ function init_all_the_ninja_things() {
 		});
 	});
 
-	/* * * Begin ajaxForms JS * * */
-
-	/*
-	 * Attaching events to these elements can allow devs to mimic a priority system for event firing.
-	 * Priority is handled by the element that the event handlers are attached to:
-	 * 1) Event handlers attached to the form itself will be fired first.
-	 * 2) Event handlers attached to the 'body' element will be fired second.
-	 * 3) Event handlers attached to the document element will be fired last.
-	 * These lines give examples of the elements that can have events attached to them for beforeSubmit actions.
-
-	jQuery("#ninja_forms_form_2").on('beforeSubmit.example', function(e, formData, jqForm, options){
-		alert('hello world');
-		return true;
-	});
-
-	jQuery(".ninja-forms-form").on('beforeSubmit.example', function(e, formData, jqForm, options){
-		alert('hello world');
-		return true;
-	});
-
-	jQuery('body').on('beforeSubmit.example', function(e, formData, jqForm, options ){
-		alert('hello world');
-		return true;
-	});
-
-	jQuery(document).on('beforeSubmit.example', function(e, formData, jqForm, options ){
-		alert('world');
-		return true;
-	});
-
-	* If you want to remove an event handler, you can use the jQuery .off() method.
-
-	jQuery(document).off('beforeSubmit.example');
-
-	*/
-
-	jQuery(".ninja-forms-form").each(function(){
-		var form_id = this.id.replace("ninja_forms_form_", "");
-		var settings = window['ninja_forms_form_' + form_id + '_settings'];
-		if ( typeof settings != 'undefined' ) {
-			ajax = settings.ajax
-		} else {
-			ajax = 0;
-		}
-		
-		if(ajax == 1){
-			var options = {
-            beforeSerialize: function($form, add_product_form_options) {
-            	if ( typeof tinyMCE !== 'undefined' ) {
-            		tinyMCE.triggerSave();
-            	}
-            },
-			beforeSubmit:  ninja_forms_before_submit,
-			success:       ninja_forms_response,
-			dataType: 'json'
-			};
-			jQuery(this).ajaxForm(options);
-
-			// Add our default response handler if "custom" hasn't been selected.
-			jQuery(this).on('submitResponse.default', function(e, response){
-				return ninja_forms_default_response( response );
-			});
-
-			// Add our default beforeSubmit handler.
-			jQuery(this).on('beforeSubmit.default', function(e, formData, jqForm, options){
-				return ninja_forms_default_before_submit( formData, jqForm, options );
-			});
-		} else {
-			jQuery(this).submit( function(e){
-				var formData = jQuery(this).serialize();
-				var jqForm = this;
-				var options = '';
-				return ninja_forms_before_submit(formData, jqForm, options);
-			});
-		}
-	});
-
-	/* * * End ajaxForm JS * * */
+	ninja_forms_init_ajax_forms();
 
 	/*
 	 * Password Field JS
@@ -973,3 +896,93 @@ function ninja_forms_var_operator(op) {
         }
     }
 }
+
+jQuery( document ).ready( function() {
+	/*
+	 * Duplicate call on document.ready
+	 */
+	ninja_forms_init_ajax_forms();
+});
+
+function ninja_forms_init_ajax_forms() {
+	/* * * Begin ajaxForms JS * * */
+
+	/*
+	 * Attaching events to these elements can allow devs to mimic a priority system for event firing.
+	 * Priority is handled by the element that the event handlers are attached to:
+	 * 1) Event handlers attached to the form itself will be fired first.
+	 * 2) Event handlers attached to the 'body' element will be fired second.
+	 * 3) Event handlers attached to the document element will be fired last.
+	 * These lines give examples of the elements that can have events attached to them for beforeSubmit actions.
+
+	 jQuery("#ninja_forms_form_2").on('beforeSubmit.example', function(e, formData, jqForm, options){
+	 alert('hello world');
+	 return true;
+	 });
+
+	 jQuery(".ninja-forms-form").on('beforeSubmit.example', function(e, formData, jqForm, options){
+	 alert('hello world');
+	 return true;
+	 });
+
+	 jQuery('body').on('beforeSubmit.example', function(e, formData, jqForm, options ){
+	 alert('hello world');
+	 return true;
+	 });
+
+	 jQuery(document).on('beforeSubmit.example', function(e, formData, jqForm, options ){
+	 alert('world');
+	 return true;
+	 });
+
+	 * If you want to remove an event handler, you can use the jQuery .off() method.
+
+	 jQuery(document).off('beforeSubmit.example');
+
+	 */
+
+	jQuery(".ninja-forms-form").each(function(){
+		var form_id = this.id.replace("ninja_forms_form_", "");
+		var settings = window['ninja_forms_form_' + form_id + '_settings'];
+		if ( typeof settings != 'undefined' ) {
+			ajax = settings.ajax
+		} else {
+			ajax = 0;
+		}
+
+		if(ajax == 1){
+			var options = {
+				beforeSerialize: function($form, add_product_form_options) {
+					if ( typeof tinyMCE !== 'undefined' ) {
+						tinyMCE.triggerSave();
+					}
+				},
+				beforeSubmit:  ninja_forms_before_submit,
+				success:       ninja_forms_response,
+				dataType: 'json'
+			};
+			jQuery(this).ajaxForm(options);
+
+			// Add our default response handler if "custom" hasn't been selected.
+			jQuery(this).on('submitResponse.default', function(e, response){
+				return ninja_forms_default_response( response );
+			});
+
+			// Add our default beforeSubmit handler.
+			jQuery(this).on('beforeSubmit.default', function(e, formData, jqForm, options){
+				return ninja_forms_default_before_submit( formData, jqForm, options );
+			});
+		} else {
+			jQuery(this).submit( function(e){
+				var formData = jQuery(this).serialize();
+				var jqForm = this;
+				var options = '';
+				return ninja_forms_before_submit(formData, jqForm, options);
+			});
+		}
+	});
+
+	/* * * End ajaxForm JS * * */
+
+}
+
