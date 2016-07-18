@@ -2,8 +2,6 @@
 
 class NF_Download_All_Subs extends NF_Step_Processing {
 
-	public $loaded = false;
-
 	function __construct() {
 		$this->action = 'download_all_subs';
 
