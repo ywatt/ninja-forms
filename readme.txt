@@ -97,23 +97,13 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9.52 (18 July 2016) =
-
-*Security:*
-
-* Fixed a security vulnerability that could allow Cross-Site scripting if the attacker was logged-in as an admin.
-
-*Bugs:*
-
-* Fixed a bug that caused the Ninja Forms cookie to be set on every page load rather than when a form was submitted.
-
 == Changelog ==
 
 = 2.9.52 (18 July 2016) =
 
 *Security:*
 
-* Fixed a security vulnerability that could allow Cross-Site scripting if the attacker was logged-in as an admin.
+* Fixed a security vulnerability that could allow Cross-Site scripting if the attacker was logged-in as an admin. (reported by Sumofpwn.nl)
 
 *Bugs:*
 
