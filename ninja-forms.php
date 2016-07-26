@@ -241,6 +241,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 self::$instance->merge_tags[ 'fields' ] = new NF_MergeTags_Fields();
                 self::$instance->merge_tags[ 'calcs' ] = new NF_MergeTags_Calcs();
                 self::$instance->merge_tags[ 'querystrings' ] = new NF_MergeTags_QueryStrings();
+                self::$instance->merge_tags[ 'form' ] = new NF_MergeTags_Form();
 
                 /*
                  * Add Form Modal
