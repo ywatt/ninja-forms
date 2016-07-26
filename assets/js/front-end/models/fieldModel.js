@@ -9,7 +9,8 @@ define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 			mirror_field: false,
 			confirm_field: false,
 			clean: true,
-			disabled: ''
+			disabled: '',
+			visible: true
 		},
 
 		initialize: function() {
@@ -31,6 +32,10 @@ define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 			nfRadio.channel( 'fields' ).trigger( 'init:model', this );
 			nfRadio.channel( this.get( 'type' ) ).trigger( 'init:model', this );
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:model', this );
+
+			if( 'undefined' != this.get( 'parentType' ) ){
+				nfRadio.channel( this.get( 'parentType' ) ).trigger( 'init:model', this );
+			}
 
 			/*
 			 * When we load our form, fire another event for this field.

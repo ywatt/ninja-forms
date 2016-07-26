@@ -32,6 +32,7 @@ define([], function() {
 		 * @return void
 		 */
 		submit: function( formModel ) {
+
 			/*
 			 * Send out a radio message saying that we're about to begin submitting.
 			 * First we send on the generic forms channel, and then on the form-specific channel.

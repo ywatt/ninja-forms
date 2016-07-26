@@ -180,9 +180,9 @@ final class WPN_Helper
         return $returnString;
     }
 
-    public static function get_query_string( $key )
+    public static function get_query_string( $key, $default = FALSE )
     {
-        if( ! isset( $_GET[ $key ] ) ) return '';
+        if( ! isset( $_GET[ $key ] ) ) return $default;
 
         $value = self::htmlspecialchars( $_GET[ $key ] );
 

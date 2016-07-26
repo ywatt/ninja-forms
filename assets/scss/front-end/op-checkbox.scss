@@ -139,9 +139,11 @@
 }
 .listcheckbox-container {
     .nf-field-label {
-        label::after {
-            background: transparent !important;
-            border: 0;
+        label {
+            &::after {
+                background: transparent !important;
+                border: 0;
+            }
         }
     }
     .nf-field-element {
@@ -149,6 +151,7 @@
             display: none;
         }
         label {
+            margin-left: 30px !important;
             &::before {
                 left: -30px;
             }

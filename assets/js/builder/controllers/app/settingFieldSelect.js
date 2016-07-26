@@ -74,9 +74,19 @@ define( [], function() {
                     if( bail ) return;
                 }
 
+                var value = field.get( 'key' );
+                switch ( settingModel.get( 'field_value_format' ) ) {
+                    case 'key':
+                        value = field.get( 'key' );
+                        break;
+                    case 'merge_tag':
+                    default:
+                        value = '{field:' + field.get( 'key' ) + '}';
+                }
+
                 options.push({
                     label: field.get( 'label' ),
-                    value: '{field:' + field.get( 'key' ) + '}'
+                    value: value
                 });
             });
 
