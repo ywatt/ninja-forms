@@ -31,7 +31,7 @@
 </script>
 
 <script id="nf-tmpl-sub-header-actions" type="text/template">
-    <a class="nf-master-control nf-open-drawer" title="Add New Action" href="#" data-drawerid="addAction">Add new action</a>
+    <a class="nf-master-control nf-open-drawer" title="Add New Action" data-drawerid="addAction" href="#"><i class="fa fa-plus" data-drawerid="addAction" aria-hidden="true"></i><span>Add new action</span></a>
 </script>
 
 <script id="nf-tmpl-sub-header-settings" type="text/template">
