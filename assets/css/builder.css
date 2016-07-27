@@ -632,6 +632,8 @@ All styles used within the drawer
     background: #ccc;
     border: 1px solid #ccc;
     cursor: default; }
+  .nf-button.publish {
+    float: right; }
 
 .nf-cancel {
   color: #999;
