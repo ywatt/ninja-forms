@@ -1967,7 +1967,9 @@ WP Color Picker (Iris) Styles
   .nf-app-menu .preview .app-menu-text {
     text-indent: -9999px;
     display: inline-block;
-    width: 0; } }
+    width: 0; }
+  .nf-drawer-opened .nf-actions-table th:nth-child(3), .nf-drawer-opened .nf-actions-table td:nth-child(3) {
+    display: none; } }
 
 @media only screen and (max-width: 900px) {
   #nf-header ul {
