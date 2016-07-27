@@ -809,7 +809,7 @@ function ninja_forms_three_admin_notice(){
                 <li><span class="dashicons dashicons-awards"></span><a href="<?php echo admin_url( 'admin.php?page=ninja-forms-three' ); ?>">Upgrade to the Release Candidate</a></li>
             </ul>
         </div>
-        <?
+        <?php
     } else {
         include plugin_dir_path( __FILE__ ) . 'upgrade/tmpl-notice.html.php';
         $three_link = nf_aff_link( 'https://ninjaforms.com/three/?utm_medium=plugin&utm_source=admin-notice&utm_campaign=Ninja+Forms+THREE&utm_content=Learn+More' );
