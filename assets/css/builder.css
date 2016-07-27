@@ -965,50 +965,36 @@ Various custom field styles
     left: 40px; }
 
 .nf-master-control {
+  background: #1EA9EA;
+  border: 2px solid #1EA9EA;
+  border-radius: 40px;
+  cursor: pointer;
   position: absolute;
-  text-indent: -9999px;
   height: 60px;
   width: 60px;
   top: auto;
   left: auto;
   bottom: 20px;
   right: 30px;
+  transition: all 0.5s ease;
   z-index: 98; }
-  .nf-master-control:after {
-    background: #1EA9EA;
-    border: 2px solid #1EA9EA;
-    border-radius: 40px;
-    content: "";
-    padding: 8px;
-    position: absolute;
-    left: 10px;
-    width: 36px;
-    height: 36px;
-    transition: all 0.5s ease 0s; }
-  .nf-master-control:before {
+  .nf-master-control span {
+    display: block;
+    text-indent: -9999px; }
+  .nf-master-control .fa {
     color: #fff;
-    content: "+";
-    font-size: 40px;
-    position: absolute;
-    top: 12px;
-    left: 25px;
-    width: 28px;
-    height: 28px;
-    line-height: 24px;
-    text-indent: 0px;
-    z-index: 99;
-    transition: all 0.5s ease 0s; }
+    cursor: pointer;
+    font-size: 28px;
+    line-height: 28px;
+    margin: 15px 0 0 16px;
+    transition: all 0.5s ease; }
   .nf-master-control:hover, .nf-master-control:active, .nf-master-control.active {
+    background: #fff;
     color: #1EA9EA;
-    transition: width 0.5s ease 0s,height 0.5s ease 0s, text-indent 0.5s ease,top 0.5s ease,left 0.5s ease; }
-    .nf-master-control:hover:after, .nf-master-control:active:after, .nf-master-control.active:after {
-      background: #fff;
+    transition: all 0.5s ease; }
+    .nf-master-control:hover .fa, .nf-master-control:active .fa, .nf-master-control.active .fa {
       color: #1EA9EA;
-      transition: all 0.5s ease; }
-    .nf-master-control:hover:before, .nf-master-control:active:before, .nf-master-control.active:before {
-      color: #1EA9EA;
-      top: 16px;
-      left: 21px;
+      margin: 12px 0 0 16px;
       transform: rotate(180deg);
       transition: all 0.5s ease; }
 
@@ -2080,7 +2066,7 @@ WP Color Picker (Iris) Styles
   #nf-builder {
     padding: 80px 20px 10px; }
   #nf-main {
-    padding: 0 0 80px; }
+    padding: 20px 0 80px; }
   #nf-drawer {
     padding: 20px; }
   #nf-main-content {
