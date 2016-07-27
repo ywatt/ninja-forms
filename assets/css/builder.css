@@ -2061,8 +2061,6 @@ WP Color Picker (Iris) Styles
 @media only screen and (max-width: 782px) {
   .ninja-forms-app.folded #wpcontent, .ninja-forms-app.auto-fold #wpcontent {
     margin-left: 0; }
-  .nf-item-controls {
-    top: 15px; }
   #nf-builder {
     padding: 80px 20px 10px; }
   #nf-main {
@@ -2074,14 +2072,6 @@ WP Color Picker (Iris) Styles
     max-width: 100%; }
   #nf-main {
     border: 0; }
-  .nf-field-wrap {
-    border: 0;
-    border-top: 8px solid #f1f1f1;
-    border-radius: 0;
-    margin: 0;
-    padding: 20px; }
-    .nf-field-wrap:first-child {
-      border-top: 8px solid #fff; }
   .nf-fields-sortable-placeholder {
     margin-top: 0;
     margin-bottom: 0;
