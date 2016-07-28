@@ -168,7 +168,7 @@
     //         }
     //     }
     // }
-    .nf-one-half, .nf-on-third {
+    .nf-one-half, .nf-one-third {
         float: none;
         width: 100%;
     }
@@ -302,18 +302,18 @@
     //         border-top: 8px solid #fff;
     //     }
     // }
-    .nf-fields-sortable-placeholder { margin-top: 0; margin-bottom: 0; border: 4px solid #84CC1E }
-    .nf-fields-sortable-placeholder + .nf-field-wrap {
-        border: 0;
-    }
-    .nf-fields-sortable {
-        border: 0;
-        padding: 0;
-    }
-    .nf-field-wrap.ui-sortable-helper {
-        background: transparent;
-        border: 2px solid $accent_color;
-    }
+    // .nf-fields-sortable-placeholder { margin-top: 0; margin-bottom: 0; border: 4px solid #84CC1E }
+    // .nf-fields-sortable-placeholder + .nf-field-wrap {
+    //     border: 0;
+    // }
+    // .nf-fields-sortable {
+    //     border: 0;
+    //     padding: 0;
+    // }
+    // .nf-field-wrap.ui-sortable-helper {
+    //     background: transparent;
+    //     border: 2px solid $accent_color;
+    // }
 
 }
 @media only screen and (max-width: 660px) {
@@ -382,28 +382,32 @@
     .nf-drawer-buttons {
         display: block;
     }
-    .nf-drawer-header {
-        background: #fff;
-        margin: -20px -20px 20px;
-        padding: 0;
-        h2 {
-            font-size: 16px;
-            line-height: 46px;
-            margin: 0;
-            .dashicons {
-                background: #fff;
-                font-size: 30px;
-                padding-top: 7px;
-                width: 45px;
-                height: 45px;
-            }
-        }
-        .nf-button {
-            border-radius: 0;
-        }
-    }
+    // .nf-drawer-header {
+    //     background: #fff;
+    //     margin: -20px -20px 20px;
+    //     //padding: 0;
+    //     h2 {
+    //         font-size: 16px;
+    //         line-height: 46px;
+    //         margin: 0;
+    //         .dashicons {
+    //             background: #fff;
+    //             font-size: 30px;
+    //             padding-top: 7px;
+    //             width: 45px;
+    //             height: 45px;
+    //         }
+    //     }
+    //     .nf-button {
+    //         border-radius: 0;
+    //     }
+    // }
     .nf-item {
         padding: 15px;
+        .fa {
+            padding: 14px;
+            width: 48px;
+        }
     }
     .nf-saved .nf-item::after {
         padding: 14px;
