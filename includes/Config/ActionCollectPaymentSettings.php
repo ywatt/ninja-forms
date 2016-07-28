@@ -48,8 +48,8 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
         'name' => 'currency',
         'type' => 'select',
         'label' => __( 'Currency', 'ninja-forms' ),
-        'width' => 'one-half',
-        'group' => 'primary',
+        'width' => 'full',
+        'group' => 'advanced',
         'options' => Ninja_Forms::config( 'CurrencyList' ),
         'value' => Ninja_Forms()->get_setting( 'currency', 'USD' )
     ),
