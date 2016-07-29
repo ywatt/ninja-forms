@@ -8,7 +8,8 @@ define( [], function() {
 			wrapper_class: '',
 			element_class: '',
 			hp: '',
-			fieldErrors: {}
+			fieldErrors: {},
+			extra: {}
 		},
 
 		initialize: function() {
@@ -26,6 +27,13 @@ define( [], function() {
 			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'remove:error', this.removeError, this );
 			nfRadio.channel( 'forms' ).trigger( 'init:model', this );
 			nfRadio.channel( 'form-' + this.get( 'id' ) ).trigger( 'init:model', this );
+
+			/*
+			 * Extra Data
+			 */
+			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'get:extra',    this.getExtra,    this );
+			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'add:extra',    this.addExtra,    this );
+			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'remove:extra', this.removeExtra, this );
 		},
 
 		getFieldByKey: function( key ) {
@@ -43,7 +51,29 @@ define( [], function() {
 			var errorModel = errors.get( id );
 			errors.remove( errorModel );
 			nfRadio.channel( 'form-' + this.get( 'id' ) ).trigger( 'remove:error', this, id );
-		}
+		},
+
+		/*
+		 * Extra Data
+		 */
+
+		getExtra: function( key ) {
+			var extraData = this.get( 'extra' );
+			if( 'undefined' == typeof key ) return extraData;
+			return extraData[ key ];
+		},
+
+		addExtra: function( key, value ) {
+			var extraData = this.get( 'extra' );
+			extraData[ key ] = value;
+			nfRadio.channel( 'form-' + this.get( 'id' ) ).trigger( 'add:extra', this, key, value );
+		},
+
+		removeExtra: function( key ) {
+			var extraData = this.get( 'extra' );
+			delete extraData[ key ];
+			nfRadio.channel( 'form-' + this.get( 'id' ) ).trigger( 'remove:extra', this, key );
+		},
 	} );
 
 	return model;

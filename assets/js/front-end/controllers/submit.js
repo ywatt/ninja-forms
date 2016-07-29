@@ -69,9 +69,10 @@ define([], function() {
 				var fieldData = nfRadio.channel( field.get( 'type' ) ).request( 'get:submitData', fieldDataDefaults, field ) || fieldDataDefaults;
 				fields.push( fieldData );
 			} );
+			var extra = formModel.get( 'extra' );
 			var settings = formModel.get( 'settings' );
 			delete settings.fieldContentsData;
-			var formData = JSON.stringify( { id: formID, fields: fields, settings: settings } );
+			var formData = JSON.stringify( { id: formID, fields: fields, settings: settings, extra: extra } );
 			var data = {
 				'action': 'nf_ajax_submit',
 				'security': nfFrontEnd.ajaxNonce,
