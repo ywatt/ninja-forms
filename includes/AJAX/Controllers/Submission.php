@@ -60,6 +60,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $this->_data['settings'] = $this->_form_data['settings'];
 
+        $this->_data['extra'] = $this->_form_data['extra'];
+
         $this->_data['fields'] = $this->_form_data['fields'];
 
         $this->validate_fields();
