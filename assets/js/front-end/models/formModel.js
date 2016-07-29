@@ -14,31 +14,42 @@ define( [], function() {
 
 		initialize: function() {
 
-			/*
-			 * Loop over settings and map to attributes
-			 */
-			var that = this;
+			// Loop over settings and map to attributes
 			_.each( this.get( 'settings' ), function( value, setting ) {
-				that.set( setting, value );
-			});
+				this.set( setting, value );
+			}, this );
 
-			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'get:fieldByKey', this.getFieldByKey, this );
-			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'add:error', this.addError, this );
-			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'remove:error', this.removeError, this );
 			nfRadio.channel( 'forms' ).trigger( 'init:model', this );
 			nfRadio.channel( 'form-' + this.get( 'id' ) ).trigger( 'init:model', this );
 
-			/*
-			 * Extra Data
-			 */
+			// Fields
+			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'get:fieldByKey', this.getFieldByKey, this );
+
+			// Form Errors
+			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'add:error',    this.addError, this    );
+			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'remove:error', this.removeError, this );
+
+			// Extra Data
 			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'get:extra',    this.getExtra,    this );
 			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'add:extra',    this.addExtra,    this );
 			nfRadio.channel( 'form-' + this.get( 'id' ) ).reply( 'remove:extra', this.removeExtra, this );
 		},
 
+		/*
+		 |--------------------------------------------------------------------------
+		 | Fields
+		 |--------------------------------------------------------------------------
+		 */
+
 		getFieldByKey: function( key ) {
 			return this.get( 'fields' ).findWhere( { key: key } );
 		},
+
+		/*
+		 |--------------------------------------------------------------------------
+		 | Form Errors
+		 |--------------------------------------------------------------------------
+		 */
 
 		addError: function( id, msg ) {
 			var errors = this.get( 'errors' );
@@ -54,7 +65,9 @@ define( [], function() {
 		},
 
 		/*
-		 * Extra Data
+		 |--------------------------------------------------------------------------
+		 | Extra Data
+		 |--------------------------------------------------------------------------
 		 */
 
 		getExtra: function( key ) {
