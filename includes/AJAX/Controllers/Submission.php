@@ -141,6 +141,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
                 $this->_errors[ 'fields' ][ $field['id'] ] = $errors;
             }
         }
+
+        if( $this->_errors ) $this->_respond();
     }
 
     protected function validate_field( $field, $data )
