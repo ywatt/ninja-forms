@@ -138,7 +138,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $errors = $this->validate_field( $field, $this->_data );
 
             if( ! empty( $errors ) ){
-                $this->_errors[ $field['id'] ] = $errors;
+                $this->_errors[ 'fields' ][ $field['id'] ] = $errors;
             }
         }
     }
