@@ -80,7 +80,7 @@ abstract class NF_Abstracts_Menu
         add_menu_page(
             $this->page_title,
             $this->menu_title,
-            apply_filters( 'menu_' . $this->menu_slug . '_capability', $this->capability ),
+            apply_filters( 'ninja_forms_menu_' . $this->menu_slug . '_capability', $this->capability ),
             $this->menu_slug,
             array( $this, $this->function ),
             $this->icon_url,

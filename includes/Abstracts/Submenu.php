@@ -78,7 +78,7 @@ abstract class NF_Abstracts_Submenu
             $this->parent_slug,
             $this->page_title,
             $this->menu_title,
-            apply_filters( 'submenu_' . $this->menu_slug . '_capability', $this->capability ),
+            apply_filters( 'ninja_forms_submenu_' . $this->menu_slug . '_capability', $this->capability ),
             $this->menu_slug,
             $function
         );
