@@ -111,7 +111,17 @@ final class NF_Tracking
      */
     private function is_opted_in()
     {
-        return (bool) get_option( 'ninja_forms_allow_tracking', false );
+        return (bool) get_option( 'ninja_forms_allow_tracking', $this->is_freemius_opted_in() );
+    }
+
+    private function is_freemius_opted_in()
+    {
+        $freemius = get_option( 'fs_accounts' );
+        if( ! $freemius ) return false;
+        if( ! isset( $freemius[ 'plugin_data' ] ) ) return false;
+        if( ! isset( $freemius[ 'plugin_data' ][ 'ninja-forms' ] ) ) return false;
+        if( ! isset( $freemius[ 'plugin_data' ][ 'ninja-forms' ][ 'activation_timestamp' ] ) ) return false;
+        return true;
     }
 
     /**
@@ -145,7 +155,17 @@ final class NF_Tracking
      */
     private function is_opted_out()
     {
-        return (bool) get_option( 'ninja_forms_do_not_allow_tracking', false );
+        return (bool) get_option( 'ninja_forms_do_not_allow_tracking', $this->is_freemius_opted_out() );
+    }
+
+    private function is_freemius_opted_out()
+    {
+        $freemius = get_option( 'fs_accounts' );
+        if( ! $freemius ) return false;
+        if( ! isset( $freemius[ 'plugin_data' ] ) ) return false;
+        if( ! isset( $freemius[ 'plugin_data' ][ 'ninja-forms' ] ) ) return false;
+        if( ! isset( $freemius[ 'plugin_data' ][ 'ninja-forms' ][ 'is_anonymous' ] ) ) return false;
+        return true;
     }
 
     /**
