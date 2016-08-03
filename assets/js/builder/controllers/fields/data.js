@@ -41,7 +41,12 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 		},
 
 		getField: function( id ) {
-			return this.collection.get( id );
+			if ( jQuery.isNumeric( id ) ) {
+				return this.collection.get( id );
+			} else {
+				return this.collection.findWhere( { 'key': id } );
+			}
+			
 		},
 
 		/**

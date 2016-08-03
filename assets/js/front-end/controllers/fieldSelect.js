@@ -55,6 +55,14 @@ define([], function() {
 					var selected = false;
 				}
 
+				/*
+                 * TODO: This is a bandaid fix for making sure that each option has a "visible" property.
+                 * This should be moved to creation so that when an option is added, it has a visible property by default.
+                 */
+                if ( 'undefined' == typeof option.visible ) {
+                    option.visible = true;
+                }
+
 				option.selected = selected;
 				option.fieldID = that.id;
 				option.classes = that.classes;
