@@ -27,6 +27,7 @@ define(['models/formModel', 'models/formCollection', 'models/fieldCollection', '
 				var errors = new ErrorCollection();
 				formModel.set( 'errors', errors );
 				nfRadio.channel( 'form' ).trigger( 'loaded', formModel );
+				nfRadio.channel( 'form' ).trigger( 'after:loaded', formModel );
 				nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'loaded', formModel );
 			} );
 
