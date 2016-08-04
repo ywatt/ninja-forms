@@ -31,16 +31,6 @@ define(['models/formModel', 'models/formCollection', 'models/fieldCollection', '
 				nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'loaded', formModel );
 			} );
 
-			// _.each( this.formCollection.models, function( form ) {
-			// 	_.each( form.get( 'fields' ).models, function( field ) {
-			// 		nfRadio.channel( field.get( 'type' ) ).trigger( 'init:model', field );
-			// 		nfRadio.channel( 'fields' ).trigger( 'init:model', field );
-			// 	} );
-				
-			// 	nfRadio.channel( 'form' ).trigger( 'loaded', form );
-			// 	nfRadio.channel( 'form-' + form.get( 'id' ) ).trigger( 'loaded', form );
-			// } );
-
 			nfRadio.channel( 'app' ).reply( 'get:form', this.getForm, this );
 			nfRadio.channel( 'app' ).reply( 'get:forms', this.getForms, this );
 
