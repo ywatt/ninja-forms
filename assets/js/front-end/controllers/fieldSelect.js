@@ -46,7 +46,6 @@ define([], function() {
 		},
 
 		renderOptions: function() {
-			var that = this;
 			var html = '';
 			_.each( this.options, function( option ) {
 				if ( 1 == option.selected ) {
@@ -64,12 +63,13 @@ define([], function() {
                 }
 
 				option.selected = selected;
-				option.fieldID = that.id;
-				option.classes = that.classes;
-				option.currentValue = that.value;
+				option.fieldID = this.id;
+				option.classes = this.classes;
+				option.currentValue = this.value;
+
 				var template = Marionette.TemplateCache.get( '#nf-tmpl-field-listselect-option' );
 				html += template( option );
-			} );
+			}, this );
 
 			return html;
 		},
