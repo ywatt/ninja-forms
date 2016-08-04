@@ -64,6 +64,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $this->_data['fields'] = $this->_form_data['fields'];
 
+        $this->_data = apply_filters( 'ninja_forms_submit_data', $this->_data );
+
         $this->validate_fields();
 
         $this->process_fields();
