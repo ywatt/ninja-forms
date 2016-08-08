@@ -198,6 +198,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     {
         $actions = Ninja_Forms()->form( $this->_form_id )->get_actions();
 
+        $actions = apply_filters( 'ninja_forms_submission_actions', $actions, $this->_form_data );
+
         usort($actions, array($this, 'sort_form_actions'));
 
         if( ! isset( $this->_data[ 'processed_actions' ] ) ) $this->_data[ 'processed_actions' ] = array();
@@ -230,6 +232,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         $form = get_user_option( 'nf_form_preview_' . $this->_form_id );
 
         if( ! isset( $form[ 'actions' ] ) || empty( $form[ 'actions' ] ) ) return;
+
+        $form[ 'actions' ] = apply_filters( 'ninja_forms_submission_actions_preview', $form[ 'actions' ], $this->_form_data );
 
         usort( $form[ 'actions' ], array( $this, 'sort_form_actions' ) );
 
