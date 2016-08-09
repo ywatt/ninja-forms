@@ -136,7 +136,7 @@ final class NF_Tracking
 
         if ( ! ( $current_user instanceof WP_User ) ) return;
 
-        $data[ 'ninja' ] = array(
+        $data[ 'event' ] = array(
             "event" => "install",
             "user"  => array(
                 "email"      => $current_user->user_email,
