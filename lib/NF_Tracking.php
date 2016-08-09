@@ -132,6 +132,31 @@ final class NF_Tracking
      */
     public function opt_in()
     {
+        $current_user = wp_get_current_user();
+
+        if ( ! ( $current_user instanceof WP_User ) ) return;
+
+        $data[ 'ninja' ] = array(
+            "event" => "install",
+            "user"  => array(
+                "email"      => $current_user->user_email,
+                "first_name" => $current_user->user_firstname,
+                "last_name"  => $current_user->user_lastname,
+            ),
+            "site" => array(
+                "url" => site_url(),
+            ),
+        );
+
+        $response = wp_remote_post( 'http://api.ninjaforms.com/core.php' , array( 'body' => $data ) );
+
+        if( is_wp_error( $response ) ){
+            update_option( 'ninja_forms_allow_tracking_error', array(
+                'data' => $data,
+                'response' => $response
+            ) );
+        }
+
         update_option( 'ninja_forms_allow_tracking', true );
     }
 
