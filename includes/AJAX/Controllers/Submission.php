@@ -233,7 +233,14 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         if( ! isset( $form[ 'actions' ] ) || empty( $form[ 'actions' ] ) ) return;
 
-        $form[ 'actions' ] = apply_filters( 'ninja_forms_submission_actions_preview', $form[ 'actions' ], $this->_form_data );
+        foreach( $this->_form_data[ 'fields' ] as $key => $field ){
+            if( ! isset( $form[ 'fields' ] ) ) continue;
+            $field_tmp_id = $field[ 'id' ];
+            $field_key = $form[ 'fields' ][ $field_tmp_id ][ 'settings' ][ 'key' ];
+            $this->_form_data[ 'fields' ][ $key ][ 'key' ] = $field_key;
+        }
+
+        $form[ 'actions' ] = apply_filters( 'ninja_forms_submission_actions_preview', $form[ 'actions' ], array_merge( $form, $this->_form_data ) );
 
         usort( $form[ 'actions' ], array( $this, 'sort_form_actions' ) );
 
