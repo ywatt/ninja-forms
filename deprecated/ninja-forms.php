@@ -860,11 +860,7 @@ function ninja_forms_konami(){
 
 function ninja_forms_three_calc_check()
 {
-    global $wpdb;
-
-    $rows = $wpdb->get_results( "SELECT * FROM " . NINJA_FORMS_FIELDS_TABLE_NAME . " WHERE type = '_calc' OR type = '_country'" );
-
-    return ( $rows ) ? FALSE : TRUE ;
+    return true;
 }
 
 function ninja_forms_three_addons_version_check(){
