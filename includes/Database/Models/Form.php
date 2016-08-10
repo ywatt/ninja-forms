@@ -361,44 +361,6 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $field[ 'processing_label' ] = 'Processing';
         }
 
-        if( 'calc' == $field[ 'type' ] ){
-            $field[ 'type' ] = 'note';
-
-            if( isset( $field[ 'calc_method' ] ) ) {
-
-                switch( $field[ 'calc_method' ] ){
-                    case 'eq':
-                        $method = __( 'Equation (Advanced)', 'ninja-forms' );
-                        break;
-                    case 'fields':
-                        $method = __( 'Operations and Fields (Advanced)', 'ninja-forms' );
-                        break;
-                    case 'auto':
-                        $method = __( 'Auto-Total Fields', 'ninja-forms' );
-                        break;
-                    default:
-                        $method = '';
-                }
-                $field['default'] = $method . "\r\n";
-
-                if ('eq' == $field['calc_method'] && isset( $field['calc_eq'] ) ) {
-                    $field['default'] .= $field['calc_eq'];
-                }
-
-                if ('fields' == $field['calc_method'] && isset( $field['calc'] ) ) {
-                    // TODO: Support 'operations and fields (advanced)' calculations.
-                }
-
-                if ('auto' == $field['calc_method'] && isset( $field['calc'] ) ) {
-                    // TODO: Support 'auto-totaling' calculations.
-                }
-            }
-
-            unset( $field[ 'calc' ] );
-            unset( $field[ 'calc_eq' ] );
-            unset( $field[ 'calc_method' ] );
-        }
-
         if( isset( $field[ 'email' ] ) ){
 
             if( 'textbox' == $field[ 'type' ] && $field[ 'email' ] ) {
