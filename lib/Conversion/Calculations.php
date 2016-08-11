@@ -2,7 +2,7 @@
 
 final class NF_Conversion_Calculations implements NF_Conversion
 {
-    const OPERATIONS = array(
+    private $operations = array(
         'add' => '+',
         'subtract' => '-',
         'multiply' => '*',
@@ -80,7 +80,7 @@ final class NF_Conversion_Calculations implements NF_Conversion
     private function reduce_operations( $eq, $calc )
     {
         $operation = $calc[ 'op' ];
-        return ' ' . $eq . self::OPERATIONS[ $operation ] . ' field_' . $calc[ 'field' ] . ' ';
+        return ' ' . $eq . $this->operations[ $operation ] . ' field_' . $calc[ 'field' ] . ' ';
     }
 
     private function reduce_auto_total( $eq, $field )
