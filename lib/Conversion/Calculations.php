@@ -1,8 +1,15 @@
 <?php
 
 // TODO: Convert Auto Total Fields
+// TODO: Recursively convert calculations.
 final class NF_Conversion_Calculations implements NF_Conversion
 {
+    const OPERATIONS = array(
+        'add' => '+',
+        'subtract' => '-',
+        'multiply' => '*',
+        'divide' => '/'
+    );
     private $form = array();
 
     public function __construct( $form_data )
@@ -28,12 +35,10 @@ final class NF_Conversion_Calculations implements NF_Conversion
                     $calculation[ 'eq' ] = $field[ 'calc_eq' ];
                     break;
                 case 'fields':
-                    // TODO: Convert operations.
-                    $calculation[ 'eq' ] = 'TODO: Convert operations.';
+                    $calculation[ 'eq' ] = trim( array_reduce( $field[ 'calc' ], array( $this, 'reduce_operations' ), '' ) );
                     break;
                 case 'auto':
-                    // TODO: Convert auto-totals.
-                    $calculation[ 'eq' ] = 'TODO: Convert auto-totals.';
+                    $calculation[ 'eq' ] = trim( array_reduce( $this->form[ 'fields' ], array( $this, 'reduce_auto_total' ), '' ) );
                     break;
             }
 
@@ -45,7 +50,7 @@ final class NF_Conversion_Calculations implements NF_Conversion
             foreach ($this->form['fields'] as $field) {
 
                 $search = 'field_' . $field['id'];
-                $replace = '{field:' . $field['key'] . '}';
+                $replace = $this->merge_tag( $field );
 
                 foreach ($this->form['settings']['calculations'] as $key => $calculation) {
                     $this->form['settings']['calculations'][ $key ]['eq'] = str_replace($search, $replace, $calculation['eq']);
@@ -63,14 +68,34 @@ final class NF_Conversion_Calculations implements NF_Conversion
             if( 'html' == $field[ 'calc_display_type' ] ){
                 // TODO: HTML Output fields seem to loose the label.
                 $search = '[ninja_forms_calc]';
-                $replace = '{calc:' . $field[ 'key' ] . '}';
-                $this->form[ 'fields' ][ $key ][ 'default' ] = str_replace( $search, $replace, $field[ 'calc_display_html' ] );
+                $replace = $this->merge_tag( $field );
+                $subject = $field[ 'calc_display_html' ];
+                $this->form[ 'fields' ][ $key ][ 'default' ] = str_replace( $search, $replace, $subject );
             } else {
-                $this->form[ 'fields' ][ $key ][ 'default' ] = '{calc:' . $field[ 'key' ] . '}';
+                $this->form[ 'fields' ][ $key ][ 'default' ] = $this->merge_tag( $field );
             }
         }
 
         return $this->form;
+    }
+
+    private function reduce_operations( $eq, $calc )
+    {
+        $operation = $calc[ 'op' ];
+        return ' ' . $eq . self::OPERATIONS[ $operation ] . ' field_' . $calc[ 'field' ] . ' ';
+    }
+
+    private function reduce_auto_total( $eq, $field )
+    {
+        if( ! isset( $field[ 'calc_auto_include' ] ) || 1 != $field[ 'calc_auto_include' ] ) return $eq;
+        return $eq . '+ {field:' . $field[ 'key' ] . '} ';
+    }
+
+    private function merge_tag( $field )
+    {
+        $tag = $field[ 'key' ];
+        $type = ( 'calc' == $field[ 'type' ] ) ? 'calc' : 'field';
+        return '{' . $type . ':' . $tag . '}';
     }
 
 }
