@@ -75,6 +75,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
                 $field = Ninja_Forms()->form($form_id)->field( $field_id )->get();
             } else {
+                unset( $settings[ 'id' ] );
                 $field = Ninja_Forms()->form($form_id)->field()->get();
             }
 
