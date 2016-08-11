@@ -52,6 +52,12 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ){
             $this->_preview_data = get_user_option( 'nf_form_preview_' . $this->_form_id );
 
+            // Add preview field keys to form data.
+            foreach( $this->_form_data[ 'fields' ] as $key => $field ){
+                $field_id = $field[ 'id' ];
+                $this->_form_data[ 'fields' ][ $key ][ 'key' ] = $this->_preview_data[ 'fields' ][ $field_id ][ 'settings' ][ 'key' ];
+            }
+
             if( ! $this->_preview_data ){
                 $this->_errors[ 'preview' ] = __( 'Preview does not exist.', 'ninja-forms' );
                 $this->_respond();
