@@ -386,7 +386,7 @@ function nf_get_sub_count( $form_id, $post_status = 'publish' ) {
 	AND p.post_type = 'nf_sub'
 	AND p.post_status = '$post_status'";
 
-	$count = $wpdb->get_var($sql);
+	$count = $wpdb->get_var( $wpdb->prepare( $sql ) );
 
 	return $count;
 }
