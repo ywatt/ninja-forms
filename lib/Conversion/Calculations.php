@@ -1,6 +1,5 @@
 <?php
 
-// TODO: Convert Auto Total Fields
 final class NF_Conversion_Calculations implements NF_Conversion
 {
     const OPERATIONS = array(
