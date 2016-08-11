@@ -71,7 +71,7 @@ final class NF_Conversion_Calculations implements NF_Conversion
                 $subject = $field[ 'calc_display_html' ];
                 $this->form[ 'fields' ][ $key ][ 'default' ] = str_replace( $search, $replace, $subject );
             } else {
-                $this->form[ 'fields' ][ $key ][ 'default' ] = $this->merge_tag( $field );
+                $this->form[ 'fields' ][ $key ][ 'default' ] = '<strong>' . $field[ 'label' ] . '</strong><br />' . $this->merge_tag( $field );
             }
         }
 
