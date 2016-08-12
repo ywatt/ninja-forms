@@ -46,7 +46,7 @@ define(
 		'controllers/app/mobile',
 		'controllers/app/notices',
 		'controllers/app/unloadCheck',
-		'controllers/app/fieldContentsFilters',
+		'controllers/app/formContentFilters',
 		'controllers/app/cloneCollectionDeep',
 		'controllers/app/trackKeyDown',
 		'controllers/app/perfectScroll',
@@ -138,7 +138,7 @@ define(
 		AppMobile,
 		AppNotices,
 		AppUnloadCheck,
-		FieldContentsFilters,
+		FormContentFilters,
 		CloneCollectionDeep,
 		TrackKeyDown,
 		PerfectScroll,
@@ -195,6 +195,7 @@ define(
 				/*
 				 * Application controllers
 				 */
+				new FormContentFilters();
 				new Hotkeys();
 				new Remote();
 				new Drawer();
@@ -220,7 +221,6 @@ define(
 				new AppMobile();
 				new AppNotices();
 				new AppUnloadCheck();
-				new FieldContentsFilters();
 				new UpdateDB();
 				new CloneCollectionDeep();
 				new TrackKeyDown();

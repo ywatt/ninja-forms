@@ -71,7 +71,7 @@ define([], function() {
 			} );
 			var extra = formModel.get( 'extra' );
 			var settings = formModel.get( 'settings' );
-			delete settings.fieldContentsData;
+			delete settings.formContentData;
 			var formData = JSON.stringify( { id: formID, fields: fields, settings: settings, extra: extra } );
 			var data = {
 				'action': 'nf_ajax_submit',

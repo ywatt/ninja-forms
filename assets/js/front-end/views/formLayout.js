@@ -1,25 +1,25 @@
-define( [ 'views/fieldCollection','views/afterFields', 'views/beforeFields', 'models/fieldCollection' ], function( fieldCollectionView, afterFields, beforeFields, FieldCollection ) {
+define( [ 'views/fieldCollection','views/afterFormContent', 'views/beforeFormContent', 'models/fieldCollection' ], function( fieldCollectionView, AfterFormContent, BeforeFormContent, FieldCollection ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: "nf-section",
 		template: "#nf-tmpl-form-layout",
 
 		regions: {
-			beforeFields: ".nf-before-fields",
-			fields: ".nf-fields",
-			afterFields: ".nf-after-fields"
+			beforeFormContent: ".nf-before-form-content",
+			formContent: ".nf-form-content",
+			afterFormContent: ".nf-after-form-content"
 		},
 
 		initialize: function() {
 			nfRadio.channel( 'form-' + this.model.get( 'id' ) ).reply( 'get:el', this.getEl, this );
 			/*
-			 * Set our default fieldContentsView.
+			 * Set our default formContentView.
 			 */
-			nfRadio.channel( 'fieldContents' ).request( 'add:viewFilter', this.defaultFieldContentsView, 10, this );
+			nfRadio.channel( 'formContent' ).request( 'add:viewFilter', this.defaultformContentView, 10, this );
 			/*
-			 * Set our default fieldContents load filter
+			 * Set our default formContent load filter
 			 */
-			nfRadio.channel( 'fieldContents' ).request( 'add:loadFilter', this.defaultFieldContentsLoad, 10, this );
+			nfRadio.channel( 'formContent' ).request( 'add:loadFilter', this.defaultformContentLoad, 10, this );
 		},
 
 		onRender: function() {
@@ -29,36 +29,46 @@ define( [ 'views/fieldCollection','views/afterFields', 'views/beforeFields', 'mo
 		},
 
 		onShow: function() {
-			this.beforeFields.show( new beforeFields( { model: this.model } ) );
+			this.beforeFormContent.show( new BeforeFormContent( { model: this.model } ) );
 			
 			/*
-			 * Set our fieldContentsData to our form setting 'fieldContentsData'
+			 * Set our formContentData to our form setting 'formContentData'
 			 */
-			var fieldContentsData = this.model.get( 'fieldContentsData' );
+			var formContentData = this.model.get( 'formContentData' );
 
+			/*
+			 * The formContentData variable used to be fieldContentsData.
+			 * If we don't have a 'formContentData' setting, check to see if we have an old 'fieldContentsData'.
+			 * 
+			 * TODO: This is for backwards compatibility and should be removed eventually. 
+			 */
+			if ( ! formContentData ) {
+				formContentData = this.model.get( 'fieldContentsData' );
+			}
+			
 			/*
 			 * Check our fieldContentViewsFilter to see if we have any defined.
 			 * If we do, overwrite our default with the view returned from the filter.
 			 */
-			var fieldContentsViewFilters = nfRadio.channel( 'fieldContents' ).request( 'get:viewFilters' );
+			var formContentViewFilters = nfRadio.channel( 'formContent' ).request( 'get:viewFilters' );
 			
 			/* 
 			* Get our first filter, this will be the one with the highest priority.
 			*/
-			var sortedArray = _.without( fieldContentsViewFilters, undefined );
+			var sortedArray = _.without( formContentViewFilters, undefined );
 			var callback = _.first( sortedArray );
-			fieldContentsView = callback();
+			formContentView = callback();
 			
-			var fieldContentsLoadFilters = nfRadio.channel( 'fieldContents' ).request( 'get:loadFilters' );
+			var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
 			/* 
 			* Get our first filter, this will be the one with the highest priority.
 			*/
-			var sortedArray = _.without( fieldContentsLoadFilters, undefined );
+			var sortedArray = _.without( formContentLoadFilters, undefined );
 			var callback = _.first( sortedArray );
-			fieldContentsData = callback( fieldContentsData, this.model, this );
+			formContentData = callback( formContentData, this.model, this );
 			
-			this.fields.show( new fieldContentsView( { collection: fieldContentsData } ) );
-			this.afterFields.show( new afterFields( { model: this.model } ) );
+			this.formContent.show( new formContentView( { collection: formContentData } ) );
+			this.afterFormContent.show( new AfterFormContent( { model: this.model } ) );
 		},
 
 		getEl: function() {
@@ -75,12 +85,12 @@ define( [ 'views/fieldCollection','views/afterFields', 'views/beforeFields', 'mo
             };
         },
 
-        defaultFieldContentsView: function() {
+        defaultformContentView: function() {
         	return fieldCollectionView;
         },
 
-        defaultFieldContentsLoad: function( fieldContentsData, formModel, context ) {
-        	var fieldModels = _.map( fieldContentsData, function( key ) {
+        defaultformContentLoad: function( formContentData, formModel, context ) {
+        	var fieldModels = _.map( formContentData, function( key ) {
         		return formModel.get( 'fields' ).findWhere( { key: key } );
         	}, this );
 

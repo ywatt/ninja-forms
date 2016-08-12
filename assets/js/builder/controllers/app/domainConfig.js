@@ -37,7 +37,7 @@ define( [
 		appDomainCollection,
 		fieldsMainHeaderView,
 		fieldsSubHeaderView,
-		fieldsMainContentFieldCollectionView,
+		FieldsMainContentFieldCollectionView,
 		fieldsSettingsTitleView,
 		actionsMainHeaderView,
 		actionsSubHeaderView,
@@ -48,6 +48,16 @@ define( [
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
+			/*
+			 * Add our default formContentView filter.
+			 */
+			nfRadio.channel( 'formContent' ).request( 'add:viewFilter', this.defaultFormContentView, 10, this );
+			
+			/*
+			 * Add our default formContentData filter.
+			 */
+			nfRadio.channel( 'formContent' ).request( 'add:loadFilter', this.defaultFormContentLoad, 10, this );
+
 			// Define our app domains
 			this.collection = new appDomainCollection( [
 				{
@@ -74,71 +84,65 @@ define( [
 					},
 
 					/**
-					 * Get the fieldContents view that should be used in our builder.
+					 * Get the formContent view that should be used in our builder.
 					 * Uses two filters:
-					 * 1) One for our fieldContentsData
-					 * 2) One for our fieldContentsView
+					 * 1) One for our formContentData
+					 * 2) One for our formContentView
 					 *
-					 * If we don't have any view filters, we use the default fieldContentsView.
+					 * If we don't have any view filters, we use the default formContentView.
 					 * 
 					 * @since  3.0
-					 * @return fieldContentsView backbone view.
+					 * @return formContentView backbone view.
 					 */
 					getMainContentView: function( collection ) {
-						/*
-						 * Temporary method for adding data to our formModel.
-						 * Can be removed once we start saving data for layouts.
-						 */ 
-						// nfRadio.channel( 'tmp' ).request( 'update:layoutCollection' );
-						/*
-						 * Get our field collection. We'll use this as the default if we don't have a defined fieldContentsData.
-						 */ 				
-						var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
-						/*
-						 * Set our fieldContentsData to our form setting 'fieldContentsData'
-						 */
-						var fieldContentsData = nfRadio.channel( 'settings' ).request( 'get:setting', 'fieldContentsData' );
-						/*
-						 * If we don't have a filter for our fieldContentsData, default to fieldCollection.
-						 */
-						var fieldContentsLoadFilters = nfRadio.channel( 'fieldContents' ).request( 'get:loadFilters' );
-						if ( 0 != fieldContentsLoadFilters.length ) {
-							/* 
-							* Get our first filter, this will be the one with the highest priority.
-							*/
-							var sortedArray = _.without( fieldContentsLoadFilters, undefined );
-							var callback = _.first( sortedArray );
-							fieldContentsData = callback( fieldContentsData );
-						} else {
-							fieldContentsData = fieldCollection;
-						}
+						var formContentData = nfRadio.channel( 'settings' ).request( 'get:setting', 'formContentData' );
 
 						/*
-						 * Set our default fieldContentsView.
+						 * As of version 3.0, 'fieldContentsData' has deprecated in favour of 'formContentData'.
+						 * If we don't have this setting, then we check for this deprecated value.
+						 * 
+						 * Set our fieldContentsData to our form setting 'fieldContentsData'
+						 *
+						 * TODO: Remove this backwards compatibility eventually.
 						 */
-						var fieldContentsView = fieldsMainContentFieldCollectionView;
+						if ( ! formContentData ) {
+							formContentData = nfRadio.channel( 'settings' ).request( 'get:setting', 'fieldContentsData' );
+						}
+						
+						/*
+						 * If we don't have a filter for our formContentData, default to fieldCollection.
+						 */
+						var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
+						
+						/* 
+						* Get our first filter, this will be the one with the highest priority.
+						*/
+						var sortedArray = _.without( formContentLoadFilters, undefined );
+						var callback = _.first( sortedArray );
+						formContentData = callback( formContentData );
+						
 						/*
 						 * Check our fieldContentViewsFilter to see if we have any defined.
 						 * If we do, overwrite our default with the view returned from the filter.
 						 */
-						var fieldContentsViewFilters = nfRadio.channel( 'fieldContents' ).request( 'get:viewFilters' );
-						if ( 0 != fieldContentsViewFilters.length ) {
-							/* 
-							* Get our first filter, this will be the one with the highest priority.
-							*/
-							var sortedArray = _.without( fieldContentsViewFilters, undefined );
-							var callback = _.first( sortedArray );
-							fieldContentsView = callback();
-						}
+						var formContentViewFilters = nfRadio.channel( 'formContent' ).request( 'get:viewFilters' );
+						
+						/* 
+						* Get our first filter, this will be the one with the highest priority.
+						*/
+						var sortedArray = _.without( formContentViewFilters, undefined );
+						var callback = _.first( sortedArray );
+						formContentView = callback();
+
 						/*
-						 * If we don't have any fieldContentsData set yet, default to our field collection.
+						 * If we don't have any formContentData set yet, default to our field collection.
 						 */
-						if ( 'undefined' == typeof fieldContentsData ) {
-							fieldContentsData = fieldCollection;
+						if ( 'undefined' == typeof formContentData ) {
+							formContentData = fieldCollection;
 						}
 
-						nfRadio.channel( 'settings' ).request( 'update:setting', 'fieldContentsData', fieldContentsData, true );
-						return new fieldContentsView( { collection: fieldContentsData } );
+						nfRadio.channel( 'settings' ).request( 'update:setting', 'formContentData', formContentData, true );
+						return new formContentView( { collection: formContentData } );
 					},
 
 					getSettingsTitleView: function( data ) {
@@ -228,6 +232,14 @@ define( [
 
 		getDomainModel: function( id ) {
 			return this.collection.get( id );
+		},
+
+		defaultFormContentView: function( formContentData ) {
+			return FieldsMainContentFieldCollectionView;
+		},
+
+		defaultFormContentLoad: function( formContentData ) {
+			return nfRadio.channel( 'fields' ).request( 'get:collection' );
 		}
 
 	});
