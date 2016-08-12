@@ -1,4 +1,4 @@
-define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], function( fieldCollectionView, afterFields, beforeFields ) {
+define( [ 'views/fieldCollection','views/afterFields', 'views/beforeFields', 'models/fieldCollection' ], function( fieldCollectionView, afterFields, beforeFields, FieldCollection ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: "nf-section",
@@ -12,6 +12,14 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
 
 		initialize: function() {
 			nfRadio.channel( 'form-' + this.model.get( 'id' ) ).reply( 'get:el', this.getEl, this );
+			/*
+			 * Set our default fieldContentsView.
+			 */
+			nfRadio.channel( 'fieldContents' ).request( 'add:viewFilter', this.defaultFieldContentsView, 10, this );
+			/*
+			 * Set our default fieldContents load filter
+			 */
+			nfRadio.channel( 'fieldContents' ).request( 'add:loadFilter', this.defaultFieldContentsLoad, 10, this );
 		},
 
 		onRender: function() {
@@ -29,36 +37,26 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
 			var fieldContentsData = this.model.get( 'fieldContentsData' );
 
 			/*
-			 * Set our default fieldContentsView.
-			 */
-			var fieldContentsView = fieldCollectionView;
-			/*
 			 * Check our fieldContentViewsFilter to see if we have any defined.
 			 * If we do, overwrite our default with the view returned from the filter.
 			 */
-
 			var fieldContentsViewFilters = nfRadio.channel( 'fieldContents' ).request( 'get:viewFilters' );
-			if ( 'undefined' != typeof fieldContentsData && 0 != fieldContentsViewFilters.length ) {
-				/* 
-				* Get our first filter, this will be the one with the highest priority.
-				*/
-				var sortedArray = _.without( fieldContentsViewFilters, undefined );
-				var callback = _.first( sortedArray );
-				fieldContentsView = callback();
-			}
+			
+			/* 
+			* Get our first filter, this will be the one with the highest priority.
+			*/
+			var sortedArray = _.without( fieldContentsViewFilters, undefined );
+			var callback = _.first( sortedArray );
+			fieldContentsView = callback();
 			
 			var fieldContentsLoadFilters = nfRadio.channel( 'fieldContents' ).request( 'get:loadFilters' );
-			if ( 'undefined' != typeof fieldContentsData && 0 != fieldContentsLoadFilters.length ) {
-				/* 
-				* Get our first filter, this will be the one with the highest priority.
-				*/
-				var sortedArray = _.without( fieldContentsLoadFilters, undefined );
-				var callback = _.first( sortedArray );
-				fieldContentsData = callback( fieldContentsData, this.model );
-			} else {
-				fieldContentsData = this.options.fieldCollection;
-			}
-
+			/* 
+			* Get our first filter, this will be the one with the highest priority.
+			*/
+			var sortedArray = _.without( fieldContentsLoadFilters, undefined );
+			var callback = _.first( sortedArray );
+			fieldContentsData = callback( fieldContentsData, this.model, this );
+			
 			this.fields.show( new fieldContentsView( { collection: fieldContentsData } ) );
 			this.afterFields.show( new afterFields( { model: this.model } ) );
 		},
@@ -75,6 +73,18 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
                 }
 
             };
+        },
+
+        defaultFieldContentsView: function() {
+        	return fieldCollectionView;
+        },
+
+        defaultFieldContentsLoad: function( fieldContentsData, formModel, context ) {
+        	var fieldModels = _.map( fieldContentsData, function( key ) {
+        		return formModel.get( 'fields' ).findWhere( { key: key } );
+        	}, this );
+
+        	return new FieldCollection( fieldModels );
         }
 
 	});

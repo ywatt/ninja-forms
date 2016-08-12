@@ -13,6 +13,11 @@ define( [], function() {
 			this.listenTo( nfRadio.channel( 'drawer' ), 'closed', this.updateDB );
 			// Respond to requests to update the database.
 			nfRadio.channel( 'app' ).reply( 'update:db', this.updateDB, this );
+			/*
+			 * Register our default fieldContents save filter.
+			 * This converts our collection into an array of keys.
+			 */
+			nfRadio.channel( 'fieldContents' ).request( 'add:saveFilter', this.defaultSaveFilter, 10, this );
 		},
 
 		/**
@@ -58,20 +63,17 @@ define( [], function() {
 			 */
 			var fieldContentsData = nfRadio.channel( 'settings' ).request( 'get:setting', 'fieldContentsData' );
 			var fieldContentsSaveDataFilters = nfRadio.channel( 'fieldContents' ).request( 'get:saveFilters' );
+						
+			/* 
+			* Get our first filter, this will be the one with the highest priority.
+			*/
+			var sortedArray = _.without( fieldContentsSaveDataFilters, undefined );
+			var callback = _.first( sortedArray );
+			/*
+			 * Set our fieldContentsData to the callback specified in the filter, passing our current fieldContentsData.
+			 */
+			fieldContentsData = callback( fieldContentsData );
 			
-			if ( 0 != fieldContentsSaveDataFilters.length ) {
-				/* 
-				* Get our first filter, this will be the one with the highest priority.
-				*/
-				var sortedArray = _.without( fieldContentsSaveDataFilters, undefined );
-				var callback = _.first( sortedArray );
-				/*
-				 * Set our fieldContentsData to the callback specified in the filter, passing our current fieldContentsData.
-				 */
-				fieldContentsData = callback( fieldContentsData );
-			} else { // Default to our field collection.
-				fieldContentsData = nfRadio.channel( 'fields' ).request( 'get:collection' );
-			}
 			/*
 			 * Update our fieldContentsData form setting.
 			 */
@@ -205,6 +207,10 @@ define( [], function() {
 				}
 				
 			} );
+		},
+
+		defaultSaveFilter: function( fieldContentsData ) {
+			return fieldContentsData.pluck( 'key' );
 		}
 
 	});

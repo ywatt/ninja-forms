@@ -201,7 +201,6 @@ define(
 				new DrawerConfig();
 				new DomainConfig();
 				new DrawerToggleSettingGroup();
-				new UpdateDB();
 				new PreviewLink();
 				new AppMenuButtons();
 				new AppTrackChanges();
@@ -222,6 +221,7 @@ define(
 				new AppNotices();
 				new AppUnloadCheck();
 				new FieldContentsFilters();
+				new UpdateDB();
 				new CloneCollectionDeep();
 				new TrackKeyDown();
 				new PerfectScroll();
