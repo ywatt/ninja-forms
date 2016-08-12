@@ -90,11 +90,16 @@ define( [ 'views/fieldCollection','views/afterFormContent', 'views/beforeFormCon
         },
 
         defaultformContentLoad: function( formContentData, formModel, context ) {
-        	var fieldModels = _.map( formContentData, function( key ) {
-        		return formModel.get( 'fields' ).findWhere( { key: key } );
-        	}, this );
+        	if ( formContentData ) {
+	        	var fieldModels = _.map( formContentData, function( key ) {
+	        		return formModel.get( 'fields' ).findWhere( { key: key } );
+	        	}, this );
 
-        	return new FieldCollection( fieldModels );
+	        	return new FieldCollection( fieldModels );
+        	}
+
+        	return formModel.get( 'fields' );
+
         }
 
 	});
