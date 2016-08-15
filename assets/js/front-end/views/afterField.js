@@ -14,7 +14,7 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
         	 * TODO: Perhaps move to a controller?
         	 */
         	var errorEl = jQuery( this.el ).children( '.nf-error-wrap' );
-    		this.errorCollectionView = new fieldErrorCollection( { el: errorEl, collection: this.model.get( 'errors' ), thisModel: this.model } );
+    		this.errorCollectionView = new fieldErrorCollection( { el: errorEl, collection: this.model.get( 'errors' ), fieldModel: this.model } );
         
     		/*
     		 * If we have an input limit set, render the view that contains our counter
@@ -27,12 +27,6 @@ define( ['views/fieldErrorCollection', 'views/inputLimit'], function( fieldError
         },
 
         changeError: function() {
-			if ( 0 == this.model.get( 'errors' ).models.length ) {
-				this.model.removeWrapperClass( 'nf-error' );
-			} else {
-				this.model.addWrapperClass( 'nf-error' );
-			}
-
 			this.errorCollectionView.render();
 		},
 
