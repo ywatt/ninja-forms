@@ -67,7 +67,23 @@ define( [ 'views/fieldCollection','views/afterFormContent', 'views/beforeFormCon
 			var callback = _.first( sortedArray );
 			formContentData = callback( formContentData, this.model, this );
 			
-			this.formContent.show( new formContentView( { collection: formContentData } ) );
+			var options = {
+				data: formContentData,
+				formModel: this.model
+			};
+			
+			/*
+			 * If we have a collection, pass the returned data as the collection.
+			 *
+			 * If we have a model, pass the returned data as the collection.
+			 */
+			if ( false !== formContentData instanceof Backbone.Collection ) {
+				options.collection = formContentData;
+			} else if ( false !== formContentData instanceof Backbone.Model ) {
+				options.model = formContentData;
+			}
+
+			this.formContent.show( new formContentView( options ) );
 			this.afterFormContent.show( new AfterFormContent( { model: this.model } ) );
 		},
 
