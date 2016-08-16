@@ -20,6 +20,11 @@ define( [ 'views/fieldCollection','views/afterFormContent', 'views/beforeFormCon
 			 * Set our default formContent load filter
 			 */
 			nfRadio.channel( 'formContent' ).request( 'add:loadFilter', this.defaultformContentLoad, 10, this );
+			
+			/*
+			 * If we need to hide a form, set the visibility of this form to hidden.
+			 */
+			 this.listenTo( this.model, 'hide', this.hide );
 		},
 
 		onRender: function() {
@@ -116,6 +121,10 @@ define( [ 'views/fieldCollection','views/afterFormContent', 'views/beforeFormCon
 
         	return formModel.get( 'fields' );
 
+        },
+
+        hide: function() {
+        	jQuery( this.el ).hide();
         }
 
 	});
