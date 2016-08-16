@@ -5,6 +5,12 @@ define( ['models/fieldModel'], function( fieldModel ) {
 
 		initialize: function( models, options ) {
 			this.options = options;
+		},
+
+		validateFields: function() {
+			_.each( this.models, function( fieldModel ) {
+				nfRadio.channel( 'submit' ).trigger( 'validate:field', fieldModel );
+			}, this );
 		}
 	} );
 	return collection;

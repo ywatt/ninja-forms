@@ -39,6 +39,12 @@ define([], function() {
 			 */
 			nfRadio.channel( 'forms' ).trigger( 'before:submit', formModel );
 			nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'before:submit', formModel );
+			/*
+			 * Validate our field models.
+			 *
+			 * This method is defined in our models/fieldCollection.js file.
+			 */
+			formModel.get( 'fields' ).validateFields();
 
 			var submit = nfRadio.channel( 'form-' + formModel.get( 'id' ) ).request( 'maybe:submit', formModel );
 
