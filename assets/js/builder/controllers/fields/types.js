@@ -72,7 +72,7 @@ define( [
 			nfRadio.channel( 'fields' ).reply( 'get:typeSections', this.getTypeSections, this );
 			nfRadio.channel( 'fields' ).reply( 'get:savedFields', this.getSavedFields, this );
 			// Listen to clicks on field types
-			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addStagedField );
+			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addField );
 		},
 
 		/**
@@ -98,15 +98,40 @@ define( [
         },
 
         /**
-         * Add a field type to our staging area when the field type button is clicked.
+         * Add a field type to our fields sortable when the field type button is clicked.
          *
          * @since 3.0
          * @param Object e event
          * @return void
          */
-        addStagedField: function( e ) {
+        addField: function( e ) {
         	var type = jQuery( e.target ).data( 'id' );
-        	nfRadio.channel( 'fields' ).request( 'add:stagedField', type );
+
+			if( e.shiftKey ){
+				nfRadio.channel( 'fields' ).request( 'add:stagedField', type );
+				return;
+			}
+
+        	var fieldModel = nfRadio.channel( 'fields' ).request( 'add', {
+				type: type,
+				label: nfRadio.channel( 'fields' ).request( 'get:type', type ).get( 'nicename' )
+			});
+
+			var label = {
+				object: 'Field',
+				label: fieldModel.get( 'label' ),
+				change: 'Added',
+				dashicon: 'plus-alt'
+			};
+
+			var data = {
+				collection: nfRadio.channel( 'fields' ).request( 'get:collection' )
+			}
+
+			nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', fieldModel, null, label, data );
+
+			// Re-Draw the Field Collection
+			nfRadio.channel( 'fields' ).request( 'redraw:collection' );
         },
 
         /**
