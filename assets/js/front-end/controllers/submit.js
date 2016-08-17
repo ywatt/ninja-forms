@@ -44,7 +44,7 @@ define([], function() {
 			 *
 			 * This method is defined in our models/fieldCollection.js file.
 			 */
-			formModel.get( 'fields' ).validateFields();
+			formModel.get( 'formContentData' ).validateFields();
 
 			var submit = nfRadio.channel( 'form-' + formModel.get( 'id' ) ).request( 'maybe:submit', formModel );
 

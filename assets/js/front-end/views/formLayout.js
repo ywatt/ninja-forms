@@ -72,6 +72,8 @@ define( [ 'views/fieldCollection','views/afterFormContent', 'views/beforeFormCon
 			var callback = _.first( sortedArray );
 			formContentData = callback( formContentData, this.model, this );
 			
+			this.model.set( 'formContentData', formContentData );
+
 			var options = {
 				data: formContentData,
 				formModel: this.model
