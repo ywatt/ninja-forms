@@ -1,17 +1,30 @@
-define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], function( fieldCollectionView, afterFields, beforeFields ) {
+define( [ 'views/fieldCollection','views/afterFormContent', 'views/beforeFormContent', 'models/fieldCollection' ], function( fieldCollectionView, AfterFormContent, BeforeFormContent, FieldCollection ) {
 
 	var view = Marionette.LayoutView.extend({
 		tagName: "nf-section",
 		template: "#nf-tmpl-form-layout",
 
 		regions: {
-			beforeFields: ".nf-before-fields",
-			fields: ".nf-fields",
-			afterFields: ".nf-after-fields"
+			beforeFormContent: ".nf-before-form-content",
+			formContent: ".nf-form-content",
+			afterFormContent: ".nf-after-form-content"
 		},
 
 		initialize: function() {
 			nfRadio.channel( 'form-' + this.model.get( 'id' ) ).reply( 'get:el', this.getEl, this );
+			/*
+			 * Set our default formContentView.
+			 */
+			nfRadio.channel( 'formContent' ).request( 'add:viewFilter', this.defaultformContentView, 10, this );
+			/*
+			 * Set our default formContent load filter
+			 */
+			nfRadio.channel( 'formContent' ).request( 'add:loadFilter', this.defaultformContentLoad, 10, this );
+			
+			/*
+			 * If we need to hide a form, set the visibility of this form to hidden.
+			 */
+			 this.listenTo( this.model, 'hide', this.hide );
 		},
 
 		onRender: function() {
@@ -21,46 +34,64 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
 		},
 
 		onShow: function() {
-			this.beforeFields.show( new beforeFields( { model: this.model } ) );
+			this.beforeFormContent.show( new BeforeFormContent( { model: this.model } ) );
 			
 			/*
-			 * Set our fieldContentsData to our form setting 'fieldContentsData'
+			 * Set our formContentData to our form setting 'formContentData'
 			 */
-			var fieldContentsData = this.model.get( 'fieldContentsData' );
+			var formContentData = this.model.get( 'formContentData' );
 
 			/*
-			 * Set our default fieldContentsView.
+			 * The formContentData variable used to be fieldContentsData.
+			 * If we don't have a 'formContentData' setting, check to see if we have an old 'fieldContentsData'.
+			 * 
+			 * TODO: This is for backwards compatibility and should be removed eventually. 
 			 */
-			var fieldContentsView = fieldCollectionView;
+			if ( ! formContentData ) {
+				formContentData = this.model.get( 'fieldContentsData' );
+			}
+			
 			/*
 			 * Check our fieldContentViewsFilter to see if we have any defined.
 			 * If we do, overwrite our default with the view returned from the filter.
 			 */
-
-			var fieldContentsViewFilters = nfRadio.channel( 'fieldContents' ).request( 'get:viewFilters' );
-			if ( 'undefined' != typeof fieldContentsData && 0 != fieldContentsViewFilters.length ) {
-				/* 
-				* Get our first filter, this will be the one with the highest priority.
-				*/
-				var sortedArray = _.without( fieldContentsViewFilters, undefined );
-				var callback = _.first( sortedArray );
-				fieldContentsView = callback();
-			}
+			var formContentViewFilters = nfRadio.channel( 'formContent' ).request( 'get:viewFilters' );
 			
-			var fieldContentsLoadFilters = nfRadio.channel( 'fieldContents' ).request( 'get:loadFilters' );
-			if ( 'undefined' != typeof fieldContentsData && 0 != fieldContentsLoadFilters.length ) {
-				/* 
-				* Get our first filter, this will be the one with the highest priority.
-				*/
-				var sortedArray = _.without( fieldContentsLoadFilters, undefined );
-				var callback = _.first( sortedArray );
-				fieldContentsData = callback( fieldContentsData, this.model );
-			} else {
-				fieldContentsData = this.options.fieldCollection;
+			/* 
+			* Get our first filter, this will be the one with the highest priority.
+			*/
+			var sortedArray = _.without( formContentViewFilters, undefined );
+			var callback = _.first( sortedArray );
+			formContentView = callback();
+			
+			var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
+			/* 
+			* Get our first filter, this will be the one with the highest priority.
+			*/
+			var sortedArray = _.without( formContentLoadFilters, undefined );
+			var callback = _.first( sortedArray );
+			formContentData = callback( formContentData, this.model, this );
+			
+			this.model.set( 'formContentData', formContentData );
+
+			var options = {
+				data: formContentData,
+				formModel: this.model
+			};
+			
+			/*
+			 * If we have a collection, pass the returned data as the collection.
+			 *
+			 * If we have a model, pass the returned data as the collection.
+			 */
+			if ( false !== formContentData instanceof Backbone.Collection ) {
+				options.collection = formContentData;
+			} else if ( false !== formContentData instanceof Backbone.Model ) {
+				options.model = formContentData;
 			}
 
-			this.fields.show( new fieldContentsView( { collection: fieldContentsData } ) );
-			this.afterFields.show( new afterFields( { model: this.model } ) );
+			this.formContent.show( new formContentView( options ) );
+			this.afterFormContent.show( new AfterFormContent( { model: this.model } ) );
 		},
 
 		getEl: function() {
@@ -75,6 +106,27 @@ define( ['views/fieldCollection','views/afterFields', 'views/beforeFields'], fun
                 }
 
             };
+        },
+
+        defaultformContentView: function() {
+        	return fieldCollectionView;
+        },
+
+        defaultformContentLoad: function( formContentData, formModel, context ) {
+        	if ( formContentData ) {
+	        	var fieldModels = _.map( formContentData, function( key ) {
+	        		return formModel.get( 'fields' ).findWhere( { key: key } );
+	        	}, this );
+
+	        	return new FieldCollection( fieldModels );
+        	}
+
+        	return formModel.get( 'fields' );
+
+        },
+
+        hide: function() {
+        	jQuery( this.el ).hide();
         }
 
 	});
