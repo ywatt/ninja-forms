@@ -4,7 +4,7 @@
     "image": "https://ninjaforms.com/wp-content/uploads/edd/2012/10/conditional-logic.png",
     "content": "Show or hide fields, change field values, or send specific notifications all based upon user input.",
     "link": "https://ninjaforms.com/extensions/conditional-logic/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Conditional+Logic",
-    "plugin": "ninja-forms-conditional-logic/conditionals.php",
+    "plugin": "ninja-forms-conditional-logic/ninja-forms-conditional-logic.php",
     "docs": "http://docs.ninjaforms.com/customer/portal/articles/search?q=Conditional+Logic&utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Conditional+Logic+Docs",
     "version": "1.4.0"
   },
