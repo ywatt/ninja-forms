@@ -3,8 +3,10 @@ define( [], function() {
 	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-main',
+		className: 'nf-main-test',
 
 		regions: {
+			header: '#nf-main-header',
 			content: '#nf-main-content'
 		},
 
