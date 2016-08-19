@@ -33,7 +33,9 @@ define( [
 	'views/advanced/subHeader',
 	'views/advanced/mainContent',
 	// Empty View
-	'views/app/empty'
+	'views/app/empty',
+	// FieldCollection: used by the default formContentData filter
+	'models/fields/fieldCollection'
 	], 
 	function( 
 		appDomainCollection,
@@ -47,7 +49,8 @@ define( [
 		settingsMainHeaderView,
 		settingsSubHeaderView,
 		settingsMainContentView,
-		EmptyView
+		EmptyView,
+		FieldCollection
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
@@ -283,7 +286,16 @@ define( [
 		},
 
 		defaultFormContentLoad: function( formContentData ) {
-			return nfRadio.channel( 'fields' ).request( 'get:collection' );
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			if ( formContentData ) {
+	        	var fieldModels = _.map( formContentData, function( key ) {
+	        		return fieldCollection.findWhere( { key: key } );
+	        	}, this );
+
+	        	return new FieldCollection( fieldModels );
+        	}
+
+        	return fieldCollection;
 		},
 
 		defaultFormContentGutterView: function( formContentData ) {
