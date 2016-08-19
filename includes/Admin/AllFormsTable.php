@@ -200,13 +200,7 @@ class NF_Admin_AllFormsTable extends WP_List_Table
     public function single_row( $item )
     {
         $form = Ninja_Forms()->form( $item[ 'id' ] )->get();
-        $locked = $form->get_setting( 'lock' );
-
-        if( $locked ) {
-            echo '<tr class="flagged">';
-        } else {
-            echo '<tr>';
-        }
+        echo '<tr>';
         $this->single_row_columns( $item );
         echo '</tr>';
     }
