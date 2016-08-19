@@ -81,7 +81,11 @@
 </script>
 
 <script id="nf-tmpl-main" type="text/template">
-    <div id="nf-main-content" class="nf-app-area"></div>
+    <div id="nf-main-content" class="nf-app-area">
+        <div id="nf-main-gutter-left"></div>
+        <div id="nf-main-body"></div>
+        <div id="nf-main-gutter-right"></div>
+    </div>
 </script>
 
 <script id="nf-tmpl-main-header-fields" type="text/template">

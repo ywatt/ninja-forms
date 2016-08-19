@@ -47,6 +47,7 @@ define(
 		'controllers/app/notices',
 		'controllers/app/unloadCheck',
 		'controllers/app/formContentFilters',
+		'controllers/app/formContentGutterFilters',
 		'controllers/app/cloneCollectionDeep',
 		'controllers/app/trackKeyDown',
 		'controllers/app/perfectScroll',
@@ -139,6 +140,7 @@ define(
 		AppNotices,
 		AppUnloadCheck,
 		FormContentFilters,
+		FormContentGutterFilters,
 		CloneCollectionDeep,
 		TrackKeyDown,
 		PerfectScroll,
@@ -196,6 +198,7 @@ define(
 				 * Application controllers
 				 */
 				new FormContentFilters();
+				new FormContentGutterFilters();
 				new Hotkeys();
 				new Remote();
 				new Drawer();

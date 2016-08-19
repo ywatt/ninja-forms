@@ -58,7 +58,12 @@ define( [], function() {
 
 			// Triggers the before close drawer action on our current domain's drawer channel.
 			nfRadio.channel( 'drawer-' + currentDrawer.get( 'id' ) ).trigger( 'before:closeDrawer' );
+			/*
+			 * The 'before:closeDrawer' message is deprecated as of version 3.0 in favour of 'before:close'.
+			 * TODO: Remove this radio message in the future.
+			 */
 			nfRadio.channel( 'drawer' ).trigger( 'before:closeDrawer' );
+			nfRadio.channel( 'drawer' ).trigger( 'before:close' );
 			
 			// Send a message to our drawer to empty its contents.
 			nfRadio.channel( 'drawer' ).request( 'empty:drawerContent' );
@@ -138,7 +143,8 @@ define( [], function() {
 
 			// Send out a message requesting our drawer view to load the content for our drawer ID.
 			nfRadio.channel( 'drawer' ).request( 'load:drawerContent', drawerID, data );
-
+			nfRadio.channel( 'drawer' ).trigger( 'before:open' );
+			
 			// To open our drawer, we have to add our opened class to our builder element and remove the closed class.
 			var builderEl = nfRadio.channel( 'app' ).request( 'get:builderEl' );
 			jQuery( builderEl ).addClass( 'nf-drawer-opened' ).removeClass( 'nf-drawer-closed' );
