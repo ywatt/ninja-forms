@@ -81,8 +81,8 @@ define( [], function() {
 			var leftEl = context.gutterLeft.el;
 			var rightEl = context.gutterRight.el;
 			
-			context.resizeGutter( leftEl );
-			context.resizeGutter( rightEl );
+			context.resizeGutter( leftEl, context );
+			context.resizeGutter( rightEl, context );
 
 			context.setBothGuttersAbsolute( context );
 
@@ -96,11 +96,12 @@ define( [], function() {
 			context.maybeDone = setTimeout( context.setBothGuttersFixed, 100, context );
 		},
 
-		resizeGutter: function( el ) {
+		resizeGutter: function( el, context ) {
 			var top = jQuery( el ).offset().top;
-			var viewHeight = ( jQuery( window ).height() > jQuery( this.body.el ).height() ) ? jQuery( this.body.el ).height() : jQuery( window ).height(); 
+			// var viewHeight = ( jQuery( window ).height() > jQuery( context.body.el ).height() ) ? jQuery( this.body.el ).height() : jQuery( window ).height(); 
+			var viewHeight = jQuery( window ).height();
 			var height = viewHeight - top;
-			jQuery( el ).height( height + 70 );
+			jQuery( el ).height( height );
 		},
 
 		setBothGuttersFixed: function( context ) {
