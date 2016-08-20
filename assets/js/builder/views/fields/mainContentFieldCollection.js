@@ -48,14 +48,14 @@ define( [], function() {
 			}
 
 			jQuery( this.el ).sortable( {
-				containment: '#nf-main',
+				//containment: '#nf-main',
 				helper: 'clone',
 				cancel: '.nf-item-controls',
 				placeholder: 'nf-fields-sortable-placeholder',
 				opacity: 0.95,
 				grid: [ 5, 5 ],
 				// scroll: false,
-				appendTo: '#nf-main',
+				appendTo: '#nf-builder',
 				scrollSensitivity: 10,
 
 				receive: function( e, ui ) {
