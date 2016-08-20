@@ -15,6 +15,8 @@ define( [], function() {
 		},
 
 		initialize: function() {
+			if ( 'undefined' == typeof this.get( 'type' ) ) return;
+
 			// Listen for model attribute changes
 			this.on( 'change', this.changeSetting, this );
 
