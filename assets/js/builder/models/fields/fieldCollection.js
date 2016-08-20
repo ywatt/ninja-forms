@@ -18,6 +18,8 @@ define( ['models/fields/fieldModel'], function( fieldModel ) {
 		initialize: function() {
 			this.on( 'add', this.addField, this );
 			this.on( 'remove', this.removeField, this );
+
+			this.listenTo( this, 'add:field', this.addNewField );
 			this.newIDs = [];
 		},
 
@@ -40,6 +42,10 @@ define( ['models/fields/fieldModel'], function( fieldModel ) {
 		 */
 		removeField: function( model ) {
 			this.removedIDs[ model.get( 'id' ) ] = model.get( 'id' );
+		},
+
+		addNewField: function( model ) {
+			this.add( model );
 		}
 	} );
 	return collection;
