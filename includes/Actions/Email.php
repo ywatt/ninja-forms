@@ -51,7 +51,11 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
         $attachments = $this->_get_attachments( $action_settings, $data );
 
-        $message = ( 'html' == $action_settings[ 'format' ] ) ? $action_settings['email_message' ] : $action_settings['email_message_plain' ];
+        if( 'html' == $action_settings[ 'format' ] ) {
+            $message =  $action_settings['email_message'];
+        } else {
+            $message = $this->format_plain_text_message( $action_settings[ 'email_message_plain' ] );
+        }
 
         $sent = wp_mail(
             $action_settings['to'],
@@ -224,5 +228,13 @@ final class NF_Actions_Email extends NF_Abstracts_Action
     public function ninja_forms_action_email_attachments( $attachments, $form_data, $action_settings )
     {
         return apply_filters( 'nf_email_notification_attachments', $attachments, $action_settings[ 'id' ] );
+    }
+
+    private function format_plain_text_message( $message )
+    {
+        $message =  str_replace( array( '<table>', '</table>', '<tr><td>', '' ), '', $message );
+        $message =  str_replace( '</td><td>', ' ', $message );
+        $message =  str_replace( '</td></tr>', "\r\n", $message );
+        return strip_tags( $message );
     }
 }
