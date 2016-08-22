@@ -75,7 +75,7 @@ define( [], function() {
 				},
 
 				update: function( e, ui ) {
-					nfRadio.channel( 'app' ).request( 'update:fieldsSortable', ui );
+					nfRadio.channel( 'app' ).request( 'update:fieldsSortable', ui, this );
 				},
 
 				stop: function( e, ui ) {
