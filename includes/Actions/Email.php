@@ -51,10 +51,12 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
         $attachments = $this->_get_attachments( $action_settings, $data );
 
+        $message = ( 'html' == $action_settings[ 'format' ] ) ? $action_settings['email_message' ] : $action_settings['email_message_plain' ];
+
         $sent = wp_mail(
             $action_settings['to'],
             $action_settings['email_subject'],
-            $action_settings['email_message'],
+            $message,
             $headers,
             $attachments
         );
