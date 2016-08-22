@@ -146,13 +146,6 @@ define( [
 						var callback = _.first( sortedArray );
 						formContentView = callback();
 
-						/*
-						 * If we don't have any formContentData set yet, default to our field collection.
-						 */
-						if ( 'undefined' == typeof formContentData ) {
-							formContentData = fieldCollection;
-						}
-
 						nfRadio.channel( 'settings' ).request( 'update:setting', 'formContentData', formContentData, true );
 						return new formContentView( { collection: formContentData } );
 					},
@@ -287,15 +280,14 @@ define( [
 
 		defaultFormContentLoad: function( formContentData ) {
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
-			if ( formContentData ) {
-	        	var fieldModels = _.map( formContentData, function( key ) {
-	        		return fieldCollection.findWhere( { key: key } );
-	        	}, this );
+	
+			if ( 'undefined' == typeof formContentData || true === formContentData instanceof Backbone.Collection ) return fieldCollection;
 
-	        	return new FieldCollection( fieldModels );
-        	}
+        	var fieldModels = _.map( formContentData, function( key ) {
+        		return fieldCollection.findWhere( { key: key } );
+        	}, this );
 
-        	return fieldCollection;
+        	return new FieldCollection( fieldModels );
 		},
 
 		defaultFormContentGutterView: function( formContentData ) {
