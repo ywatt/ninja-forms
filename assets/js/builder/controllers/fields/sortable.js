@@ -64,11 +64,6 @@ define( [], function() {
 		 * @return void
 		 */
 		receiveFieldsSortable: function( ui ) {
-			if ( jQuery( ui.item ).data( 'cancel' ) ) {
-				jQuery( sortable ).sortable( 'cancel' );
-				return;
-			}
-
 			/*
 			 * We have to do different things if we're dealing with a field type button or staging area.
 			 */ 
@@ -274,10 +269,6 @@ define( [], function() {
 		 * @return void
 		 */
 		updateFieldsSortable: function( ui, sortable ) {
-			if ( jQuery( ui.item ).data( 'cancel' ) ) {
-				jQuery( sortable ).sortable( 'cancel' );
-				return;
-			}
 			
 			nfRadio.channel( 'fields' ).request( 'sort:fields' );
 
