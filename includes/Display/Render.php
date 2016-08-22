@@ -371,6 +371,9 @@ final class NF_Display_Render
 
     public static function enqueue_scripts( $form_id )
     {
+        $form = Ninja_Forms()->form( $form_id )->get();
+        $is_preview = ( $form->get_tmp_id() );
+
         $js_dir  = Ninja_Forms::$url . 'assets/js/min/';
         $css_dir = Ninja_Forms::$url . 'assets/css/';
 
@@ -395,14 +398,31 @@ final class NF_Display_Render
                 wp_enqueue_style( 'nf-display',      $css_dir . 'display-structure.css'     );
         }
 
-        $recaptcha_lang = Ninja_Forms()->get_setting( 'recaptcha_lang' );
-        wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $recaptcha_lang, array( 'jquery' ) );
+        if( $is_preview || self::form_uses_recaptcha( $form_id ) ) {
+            $recaptcha_lang = Ninja_Forms()->get_setting('recaptcha_lang');
+            wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $recaptcha_lang, array('jquery'));
+        }
 
-        wp_enqueue_script( 'nf-front-end--datepicker', $js_dir . 'front-end--datepicker.min.js', array( 'jquery' ) );
-        wp_enqueue_script( 'nf-front-end--inputmask',  $js_dir . 'front-end--inputmask.min.js',  array( 'jquery' ) );
-        wp_enqueue_script( 'nf-front-end--rte',        $js_dir . 'front-end--rte.min.js',        array( 'jquery' ) );
-        wp_enqueue_script( 'nf-front-end--helptext',   $js_dir . 'front-end--helptext.min.js',   array( 'jquery' ) );
-        wp_enqueue_script( 'nf-front-end--starrating', $js_dir . 'front-end--starrating.min.js', array( 'jquery' ) );
+        if( $is_preview || self::form_uses_datepicker( $form_id ) ) {
+            wp_enqueue_script('nf-front-end--datepicker', $js_dir . 'front-end--datepicker.min.js', array('jquery'));
+        }
+
+        if( $is_preview || self::form_uses_inputmask( $form_id ) ) {
+            wp_enqueue_script('nf-front-end--inputmask', $js_dir . 'front-end--inputmask.min.js', array('jquery'));
+        }
+
+//        if( $is_preview || self::form_uses_rte( $form_id ) ) {
+            wp_enqueue_script('nf-front-end--rte', $js_dir . 'front-end--rte.min.js', array('jquery'));
+//        }
+
+        if( $is_preview || self::form_uses_helptext( $form_id ) ) {
+            wp_enqueue_script('nf-front-end--helptext', $js_dir . 'front-end--helptext.min.js', array('jquery'));
+        }
+
+        if( $is_preview || self::form_uses_starrating( $form_id ) ) {
+            wp_enqueue_script('nf-front-end--starrating', $js_dir . 'front-end--starrating.min.js', array('jquery'));
+        }
+
         wp_enqueue_script( 'nf-front-end',             $js_dir . 'front-end.min.js',             array( 'jquery', 'backbone' ) );
 
         wp_localize_script( 'nf-front-end', 'nfi18n', Ninja_Forms::config( 'i18nFrontEnd' ) );
@@ -477,6 +497,54 @@ final class NF_Display_Render
     protected static function is_template_loaded( $template_name )
     {
         return ( in_array( $template_name, self::$loaded_templates ) ) ? TRUE : FALSE ;
+    }
+
+    protected static function form_uses_recaptcha( $form_id )
+    {
+        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
+            if( 'recaptcha' == $field->get_setting( 'type' ) ) return true;
+        }
+        return false;
+    }
+
+    protected static function form_uses_datepicker( $form_id )
+    {
+        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
+            if( 'date' == $field->get_setting( 'type' ) ) return true;
+        }
+        return false;
+    }
+
+    protected static function form_uses_inputmask( $form_id )
+    {
+        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
+            if( $field->get_setting( 'mask' ) ) return true;
+        }
+        return false;
+    }
+
+    protected static function form_uses_rte( $form_id )
+    {
+        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
+            if( $field->get_setting( 'textarea_rte' ) ) return true;
+        }
+        return false;
+    }
+
+    protected static function form_uses_helptext( $form_id )
+    {
+        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
+            if( strip_tags( $field->get_setting( 'help_text' ) ) ) return true;
+        }
+        return false;
+    }
+
+    protected static function form_uses_starrating( $form_id )
+    {
+        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
+            if( 'starrating' == $field->get_setting( 'type' ) ) return true;
+        }
+        return false;
     }
 
 } // End Class NF_Display_Render
