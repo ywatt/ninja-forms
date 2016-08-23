@@ -11,7 +11,8 @@ define( [], function() {
 		defaults: {
 			objectType: 'Field',
 			objectDomain: 'fields',
-			editActive: false
+			editActive: false,
+			order: 999
 		},
 
 		initialize: function() {
