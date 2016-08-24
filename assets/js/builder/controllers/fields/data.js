@@ -99,8 +99,10 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 
-			nfRadio.channel( 'fields' ).trigger( 'add:field', model );
-
+			if ( ! silent ) {
+				nfRadio.channel( 'fields' ).trigger( 'add:field', model );
+			}
+			
 			return model;
 		},
 
