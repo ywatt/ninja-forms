@@ -1,49 +1,95 @@
 /**
+ * The Field List setting is a container of settings (like the Fieldset setting), in which its children are instantiated.
+ * Unlike the Fieldset setting, Field List settings are dynamically created based on the list of form fields.
+ *
+ * Note: Field references in the dynamic setting names are based on field keys, which may change.
+ * Unlike regular field key tracking, a new setting needs to be created with the same value as the previous.
+ *
  * @package Ninja Forms builder
- * @subpackage Main App
- * @copyright (c) 2015 WP Ninjas
+ * @subpackage Action Settings
+ * @copyright (c) 2016 WP Ninjas
+ * @author Kyle B. Johnson
  * @since 3.0
  */
-define( [], function() {
-    var controller = Marionette.Object.extend( {
+define( ['views/app/drawer/typeSettingFieldset','models/app/settingCollection'], function( fieldsetView, settingCollection ) {
+    return Marionette.Object.extend( {
+
+        /**
+         * A reference list of Field List setting models.
+         */
+        fieldListSettings: [],
 
         initialize: function() {
-            // The first time settingModel and the dataModel meet.
-            this.listenTo( nfRadio.channel( 'setting-type-field-list' ), 'before:renderSetting', this.beforeRender );
+            this.listenTo( nfRadio.channel( 'field-list' ),       'init:settingModel',    this.registerFieldListSettings  );
+            this.listenTo( nfRadio.channel( 'fields' ),           'update:setting',       this.updateFieldListSettingKeys );
+                           nfRadio.channel( 'field-list' ).reply( 'get:settingChildView', this.getSettingChildView, this  );
         },
 
-        beforeRender: function( settingModel, dataModel ) {
+        /**
+         * Build a reference list of Field List setting models for later reference.
+         *
+         * @param settingModel
+         */
+        registerFieldListSettings: function( settingModel ){
+            this.fieldListSettings.push( settingModel.get( 'name' ) );
+        },
 
-            var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+        /**
+         * Field List settings contain field keys in the setting names.
+         * When a field key changes, so too must the Field List setting name.
+         *
+         * @param fieldModel
+         */
+        updateFieldListSettingKeys: function( fieldModel ){
 
-            var fieldTypes = settingModel.get( 'field_types' );
+            // We are only interested in field key changes.
+            if( 'undefined' == typeof fieldModel.changed.key ) return;
 
-            var options = [];
-            _.each( fieldCollection.models, function( field ){
+            var oldKey = fieldModel._previousAttributes.key;
+            var newKey = fieldModel.changed.key;
 
-                if( dataModel.cid == field.cid ) return;
-
-                if( 'undefined' != typeof fieldTypes && 0 != fieldTypes.length && ! _.contains( fieldTypes, field.get( 'type' ) ) ) return;
-
-                var fieldFilter = settingModel.get( 'field_filter' );
-                if( fieldFilter && 'undefined' != typeof fieldFilter[ field.get( 'type' ) ] ) {
-                    var bail = false;
-                    _.each( fieldFilter[ field.get( 'type' ) ], function( value, setting ){
-                        console.log( value + ":" + field.get( setting )  );
-                        if( value != field.get( setting ) ) bail = true;
-                    } );
-                    if( bail ) return;
-                }
-
-                options.push({
-                    label: field.get( 'label' ),
-                    value: field.get( 'key' )
+            /*
+             * This is an absolute (functional) mess of nesting. I apologize to my future self, or Kenny.
+             *
+             * Each setting of each action model must be checked against each registered Field List setting.
+             */
+            var that = this;
+            _.each( Backbone.Radio.channel( 'actions' ).request( 'get:collection' ).models, function( actionModel ) {
+                _.each( actionModel.attributes, function( value, setting ) {
+                    var lastChanged = ''; // Used to avoid resetting the change with a duplicate call.
+                    _.each( that.fieldListSettings, function( prefix ) {
+                        if( setting != prefix + '-' + oldKey || lastChanged == oldKey ) return;
+                        var oldValue = actionModel.get( prefix + '-' + oldKey );
+                        actionModel.set( prefix + '-' + newKey, oldValue );
+                        actionModel.set( prefix + '-' + oldKey, 0 );
+                        lastChanged = oldKey;
+                    });
                 });
             });
-
-            settingModel.set( 'options', options );
         },
-    });
 
-    return controller;
+        /**
+         * Set the view for Field List sub-settings, just like the Fieldset setting.
+         *
+         * @param settingModel
+         * @returns {*}
+         */
+        getSettingChildView: function( settingModel ) {
+
+            // Dynamically build field-list settings as needed.
+            var settings = _.map( nfRadio.channel( 'fields' ).request( 'get:collection' ).models, function( field ) {
+                return {
+                    name: settingModel.get( 'name' ) + '-' + field.get( 'key' ),
+                    type: 'toggle',
+                    label: field.get( 'label' ),
+                    width: 'full'
+                };
+            });
+
+            settingModel.set( 'settings', new settingCollection( settings ) );
+
+            return fieldsetView;
+        },
+
+    });
 } );

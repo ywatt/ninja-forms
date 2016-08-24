@@ -476,16 +476,9 @@
 
 <script id="nf-tmpl-edit-setting-field-list" type="text/template">
     <fieldset>
-        <legend><%= label %> <%= renderTooltip() %></legend>
-        <% _.each( options, function( option ) { %>
-        <div class="nf-setting nf-full">
-            <span class="nf-setting-label"><%= option.label %></span>
-            <input type="checkbox" id="<%= name %>-<%= option.value %>" class="nf-toggle setting" <%= ( false ) ? 'checked' : '' %> />
-            <label for="<%= name %>-<%= option.value %>"><%= option.label %></label>
-        </div>
-        <% }); %>
+        <legend><%= label %></legend>
+        <span class="nf-field-sub-settings"></span>
     </fieldset>
-    </label>
 </script>
 
 <script id="nf-tmpl-edit-setting-checkbox" type="text/template">
