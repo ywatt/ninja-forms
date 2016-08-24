@@ -76,8 +76,17 @@ define( ['views/app/drawer/typeSettingFieldset','models/app/settingCollection'],
          */
         getSettingChildView: function( settingModel ) {
 
-            // Dynamically build field-list settings as needed.
-            var settings = _.map( nfRadio.channel( 'fields' ).request( 'get:collection' ).models, function( field ) {
+            /**
+             * Dynamically build field-list settings as needed for the view.
+             */
+
+            // Filter fields based on the field_types setting property.
+            var fields = _.filter( nfRadio.channel( 'fields' ).request( 'get:collection' ).models, function( field ) {
+                return _.contains( settingModel.get( 'field_types' ), field.get( 'type' ) );
+            });
+
+            // Map fields into setting definitions.
+            var settings = _.map( fields, function( field ) {
                 return {
                     name: settingModel.get( 'name' ) + '-' + field.get( 'key' ),
                     type: 'toggle',
@@ -88,6 +97,7 @@ define( ['views/app/drawer/typeSettingFieldset','models/app/settingCollection'],
 
             settingModel.set( 'settings', new settingCollection( settings ) );
 
+            // return the child view.
             return fieldsetView;
         },
 
