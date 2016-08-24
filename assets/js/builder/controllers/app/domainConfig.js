@@ -280,8 +280,16 @@ define( [
 
 		defaultFormContentLoad: function( formContentData ) {
 			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
-	
-			if ( 'undefined' == typeof formContentData || true === formContentData instanceof Backbone.Collection ) return fieldCollection;
+			/*
+			 * If we only have one load filter, we can just return the field collection.
+			 */
+			var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
+			var sortedArray = _.without( formContentLoadFilters, undefined );
+			if ( 1 == sortedArray.length || 'undefined' == typeof formContentData || true === formContentData instanceof Backbone.Collection ) return fieldCollection;
+
+			/*
+			 * If another filter is registered, we are calling this from somewhere else.
+			 */
 
         	var fieldModels = _.map( formContentData, function( key ) {
         		return fieldCollection.findWhere( { key: key } );
