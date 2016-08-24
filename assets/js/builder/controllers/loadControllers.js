@@ -51,6 +51,7 @@ define(
 		'controllers/app/cloneCollectionDeep',
 		'controllers/app/trackKeyDown',
 		'controllers/app/perfectScroll',
+		'controllers/app/dataFilters',
 		/*
 		 * Fields domain controllers
 		 */
@@ -144,6 +145,7 @@ define(
 		CloneCollectionDeep,
 		TrackKeyDown,
 		PerfectScroll,
+		DataFilters,
 		/*
 		 * Fields domain controllers
 		 */
@@ -279,7 +281,6 @@ define(
 				new SettingTypes();
 				new FormSettings();
 				new AdvancedCalculations();
-				new SettingData();
 				new SettingsEditActive();
 				new SettingsClickEdit();
 				
@@ -287,11 +288,19 @@ define(
 				 * Data controllers need to be set after every other controller has been setup, even if they aren't domain-specific.
 				 * AppData() was after FormData();
 				 */
-				new AppData();
+				new SettingData();
 				new FieldData();
 				new FormData();
 				new MergeTags();
 				new ItemSettingFill();
+				new AppData();
+
+				/*
+				 * Trigger radio message for data filters
+				 */
+				nfRadio.channel( 'app' ).trigger( 'add:dataFilters' );
+
+				new DataFilters();
 			}
 		});
 
