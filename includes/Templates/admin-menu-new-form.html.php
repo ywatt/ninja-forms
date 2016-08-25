@@ -29,7 +29,7 @@
 <script id="nf-tmpl-sub-header-fields" type="text/template">
     <a class="nf-master-control nf-open-drawer" title="<?php _e( 'Add new field', 'ninja-forms' ); ?>" href="#" data-drawerid="addField">
         <i class="fa fa-plus" data-drawerid="addField" aria-hidden="true"></i>
-        <span><?php _e( 'Add new field', 'ninja-forms' ); ?></span>
+        <span data-drawerid="addField"><?php _e( 'Add new field', 'ninja-forms' ); ?></span>
     </a>
 </script>
 
