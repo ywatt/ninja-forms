@@ -81,7 +81,11 @@
 </script>
 
 <script id="nf-tmpl-main" type="text/template">
-    <div id="nf-main-content" class="nf-app-area"></div>
+    <div id="nf-main-content" class="nf-app-area">
+        <div id="nf-main-gutter-left"></div>
+        <div id="nf-main-body"></div>
+        <div id="nf-main-gutter-right"></div>
+    </div>
 </script>
 
 <script id="nf-tmpl-main-header-fields" type="text/template">
@@ -105,12 +109,6 @@
             <div class="template-box-inside">
                 <h4><?php _e( 'Contact Form', 'ninja-forms' ); ?></h4>
                 <p class="template-desc"><?php _e( 'Allow your users to contact you with this simple contact form. You can add and remove fields as needed.', 'ninja-forms' ); ?></p>
-            </div>
-        </a>
-        <a href="?page=ninja-forms&form_id=formtemplate-quoterequest" class="nf-one-third template-box">
-            <div class="template-box-inside">
-                <h4><?php _e( 'Quote Request', 'ninja-forms' ); ?></h4>
-                <p class="template-desc"><?php _e( 'Start collecting leads with this pre-made Request a quote form. You can add and remove fields as needed.', 'ninja-forms' ); ?></p>
             </div>
         </a>
 

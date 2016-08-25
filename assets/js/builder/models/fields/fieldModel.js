@@ -11,10 +11,13 @@ define( [], function() {
 		defaults: {
 			objectType: 'Field',
 			objectDomain: 'fields',
-			editActive: false
+			editActive: false,
+			order: 999
 		},
 
 		initialize: function() {
+			if ( 'undefined' == typeof this.get( 'type' ) ) return;
+
 			// Listen for model attribute changes
 			this.on( 'change', this.changeSetting, this );
 

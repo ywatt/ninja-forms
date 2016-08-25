@@ -38,11 +38,6 @@ final class NF_Display_Render
         }
         $form = Ninja_Forms()->form( $form_id )->get();
 
-        if( $form->get_setting( 'lock' ) ){
-            echo __( 'This form is not available.', 'ninja-forms' );
-            return;
-        }
-
         if( $form->get_setting( 'logged_in' ) && ! is_user_logged_in() ){
             echo $form->get_setting( 'not_logged_in_msg' );
             return;

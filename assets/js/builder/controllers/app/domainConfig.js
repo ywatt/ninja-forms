@@ -32,6 +32,10 @@ define( [
 	'views/advanced/mainHeader',
 	'views/advanced/subHeader',
 	'views/advanced/mainContent',
+	// Empty View
+	'views/app/empty',
+	// FieldCollection: used by the default formContentData filter
+	'models/fields/fieldCollection'
 	], 
 	function( 
 		appDomainCollection,
@@ -44,7 +48,9 @@ define( [
 		actionsMainContentView,
 		settingsMainHeaderView,
 		settingsSubHeaderView,
-		settingsMainContentView
+		settingsMainContentView,
+		EmptyView,
+		FieldCollection
 	) {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
@@ -57,6 +63,12 @@ define( [
 			 * Add our default formContentData filter.
 			 */
 			nfRadio.channel( 'formContent' ).request( 'add:loadFilter', this.defaultFormContentLoad, 10, this );
+
+			/*
+			 * Add our default formContentGutterView filters.
+			 */
+			nfRadio.channel( 'formContentGutters' ).request( 'add:leftFilter', this.defaultFormContentGutterView, 10, this );
+			nfRadio.channel( 'formContentGutters' ).request( 'add:rightFilter', this.defaultFormContentGutterView, 10, this );
 
 			// Define our app domains
 			this.collection = new appDomainCollection( [
@@ -134,20 +146,48 @@ define( [
 						var callback = _.first( sortedArray );
 						formContentView = callback();
 
-						/*
-						 * If we don't have any formContentData set yet, default to our field collection.
-						 */
-						if ( 'undefined' == typeof formContentData ) {
-							formContentData = fieldCollection;
-						}
-
 						nfRadio.channel( 'settings' ).request( 'update:setting', 'formContentData', formContentData, true );
 						return new formContentView( { collection: formContentData } );
 					},
 
 					getSettingsTitleView: function( data ) {
 						return new fieldsSettingsTitleView( data );
+					},
+
+					getGutterLeftView: function( data ) {
+						/*
+						 * Check our fieldContentViewsFilter to see if we have any defined.
+						 * If we do, overwrite our default with the view returned from the filter.
+						 */
+						var gutterFilters = nfRadio.channel( 'formContentGutters' ).request( 'get:leftFilters' );
+
+						/* 
+						* Get our first filter, this will be the one with the highest priority.
+						*/
+						var sortedArray = _.without( gutterFilters, undefined );
+						var callback = _.first( sortedArray );
+						gutterView = callback();
+
+						return new gutterView(); 
+					},
+
+					getGutterRightView: function() {
+						/*
+						 * Check our fieldContentViewsFilter to see if we have any defined.
+						 * If we do, overwrite our default with the view returned from the filter.
+						 */
+						var gutterFilters = nfRadio.channel( 'formContentGutters' ).request( 'get:rightFilters' );
+						
+						/* 
+						* Get our first filter, this will be the one with the highest priority.
+						*/
+						var sortedArray = _.without( gutterFilters, undefined );
+						var callback = _.first( sortedArray );
+						gutterView = callback();
+
+						return new gutterView(); 
 					}
+
 				},
 				{
 					id: 'actions',
@@ -239,7 +279,27 @@ define( [
 		},
 
 		defaultFormContentLoad: function( formContentData ) {
-			return nfRadio.channel( 'fields' ).request( 'get:collection' );
+			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			/*
+			 * If we only have one load filter, we can just return the field collection.
+			 */
+			var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
+			var sortedArray = _.without( formContentLoadFilters, undefined );
+			if ( 1 == sortedArray.length || 'undefined' == typeof formContentData || true === formContentData instanceof Backbone.Collection ) return fieldCollection;
+
+			/*
+			 * If another filter is registered, we are calling this from somewhere else.
+			 */
+
+        	var fieldModels = _.map( formContentData, function( key ) {
+        		return fieldCollection.findWhere( { key: key } );
+        	}, this );
+
+        	return new FieldCollection( fieldModels );
+		},
+
+		defaultFormContentGutterView: function( formContentData ) {
+			return EmptyView;
 		}
 
 	});
