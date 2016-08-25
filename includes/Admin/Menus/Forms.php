@@ -92,7 +92,11 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         if( ! $form ) die( 'Template not found' );
 
-        $form = base64_decode( $form );
+        $form = json_decode( html_entity_decode( $form ), true );
+
+        if( json_last_error() ){
+            wp_die( json_last_error_msg() );
+        }
 
         $form_id = Ninja_Forms()->form()->import_form( $form );
 
