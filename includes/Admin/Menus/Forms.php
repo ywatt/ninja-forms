@@ -94,11 +94,12 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         $form = json_decode( html_entity_decode( $form ), true );
 
-        if( json_last_error() ){
-            wp_die( json_last_error_msg() );
-        }
-
         $form_id = Ninja_Forms()->form()->import_form( $form );
+
+        if( ! $form_id ){
+            $error_message = ( function_exists( 'json_last_error_msg' ) && json_last_error_msg() ) ? json_last_error_msg() : __( 'Form Template Import Error.', 'ninja-forms' );
+            wp_die( $error_message );
+        }
 
         header( "Location: " . admin_url( "admin.php?page=ninja-forms&form_id=$form_id" ) );
         exit();

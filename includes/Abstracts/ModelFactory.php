@@ -117,7 +117,14 @@ class NF_Abstracts_ModelFactory
         if( ! is_array( $import ) ){
             $data = json_decode( $import, true );
 
-            $import = ( json_last_error() ) ? maybe_unserialize( $import ) : $data;
+            if( ! is_array( $data ) ){
+                $data = maybe_unserialize( $import );
+
+                if( ! is_array( $data ) ){
+                    return false;
+                }
+            }
+            $import = $data;
         }
 
         return NF_Database_Models_Form::import( $import, $id, $is_conversion );
