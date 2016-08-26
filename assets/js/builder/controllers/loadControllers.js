@@ -52,6 +52,7 @@ define(
 		'controllers/app/cloneCollectionDeep',
 		'controllers/app/trackKeyDown',
 		'controllers/app/perfectScroll',
+		'controllers/app/getNewSettingGroupCollection',
 		/*
 		 * Fields domain controllers
 		 */
@@ -146,6 +147,7 @@ define(
 		CloneCollectionDeep,
 		TrackKeyDown,
 		PerfectScroll,
+		GetNewSettingGroupCollection,
 		/*
 		 * Fields domain controllers
 		 */
@@ -231,6 +233,7 @@ define(
 				new CloneCollectionDeep();
 				new TrackKeyDown();
 				new PerfectScroll();
+				new GetNewSettingGroupCollection();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
