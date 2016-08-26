@@ -150,9 +150,9 @@ define( [
 						return new formContentView( { collection: formContentData } );
 					},
 
-					getSettingsTitleView: function( data ) {
-						return new fieldsSettingsTitleView( data );
-					},
+					// getSettingsTitleView: function( data ) {
+					// 	return new fieldsSettingsTitleView( data );
+					// },
 
 					getGutterLeftView: function( data ) {
 						/*
