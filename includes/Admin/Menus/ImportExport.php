@@ -29,7 +29,7 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
         $import = file_get_contents( $_FILES[ 'nf_import_form' ][ 'tmp_name' ] );
 
-        $data = json_decode( html_entity_decode( $import ), true );
+        $data = json_decode( $import, true );
 
         $last_json_error = json_last_error();
         if( $last_json_error ) {
