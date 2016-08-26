@@ -468,6 +468,13 @@
     </label>
 </script>
 
+<script id="nf-tmpl-edit-setting-field-list" type="text/template">
+    <fieldset>
+        <legend><%= label %></legend>
+        <span class="nf-field-sub-settings"></span>
+    </fieldset>
+</script>
+
 <script id="nf-tmpl-edit-setting-checkbox" type="text/template">
 
     <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
