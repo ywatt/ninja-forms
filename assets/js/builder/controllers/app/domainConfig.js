@@ -20,7 +20,6 @@ define( [
 	// Require our domain collection
 	'models/app/domainCollection',
 	// Require our fields domain files
-	'views/fields/mainHeader',
 	'views/fields/subHeader',
 	'views/fields/mainContentFieldCollection',
 	'views/fields/drawer/settingsTitle',
@@ -39,7 +38,6 @@ define( [
 	], 
 	function( 
 		appDomainCollection,
-		fieldsMainHeaderView,
 		fieldsSubHeaderView,
 		FieldsMainContentFieldCollectionView,
 		fieldsSettingsTitleView,
