@@ -39,6 +39,20 @@ define([], function() {
 			 */
 			nfRadio.channel( 'forms' ).trigger( 'before:submit', formModel );
 			nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'before:submit', formModel );
+			/*
+			 * Validate our field models.
+			 *
+			 * This method is defined in our models/fieldCollection.js file.
+			 */
+			formModel.get( 'formContentData' ).validateFields();
+
+			var submit = nfRadio.channel( 'form-' + formModel.get( 'id' ) ).request( 'maybe:submit', formModel );
+
+			if ( false == submit ) {
+				nfRadio.channel( 'forms' ).trigger( 'submit:cancel', formModel );
+				nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:cancel', formModel );
+				return;
+			}
 
 			/*
 			 * Make sure we don't have any form errors before we submit.
@@ -61,9 +75,10 @@ define([], function() {
 				var fieldData = nfRadio.channel( field.get( 'type' ) ).request( 'get:submitData', fieldDataDefaults, field ) || fieldDataDefaults;
 				fields.push( fieldData );
 			} );
+			var extra = formModel.get( 'extra' );
 			var settings = formModel.get( 'settings' );
-			delete settings.fieldContentsData;
-			var formData = JSON.stringify( { id: formID, fields: fields, settings: settings } );
+			delete settings.formContentData;
+			var formData = JSON.stringify( { id: formID, fields: fields, settings: settings, extra: extra } );
 			var data = {
 				'action': 'nf_ajax_submit',
 				'security': nfFrontEnd.ajaxNonce,
@@ -78,9 +93,14 @@ define([], function() {
 			    data: data,
 			    cache: false,
 			   	success: function( data, textStatus, jqXHR ) {
-			   		var response = jQuery.parseJSON( data );
-			        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR, formModel.get( 'id' ) );
-			    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR )
+			   		try {
+				   		var response = jQuery.parseJSON( data );
+				        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR, formModel.get( 'id' ) );
+				    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR );
+			   		} catch( e ) {
+			   			console.log( 'Parse Error' );
+			   		}
+
 			    },
 			    error: function( jqXHR, textStatus, errorThrown ) {
 			        // Handle errors here

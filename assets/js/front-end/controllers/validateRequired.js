@@ -20,7 +20,7 @@ define([], function() {
 		},
 
 		validateRequired: function( el, model ) {
-			if ( 1 != model.get( 'required' ) ) {
+			if ( 1 != model.get( 'required' ) || ! model.get( 'visible' ) ) {
 				return false;
 			}
 
@@ -49,7 +49,7 @@ define([], function() {
 		},
 
 		validateModelData: function( model ) {
-			if ( 1 != model.get( 'required' ) ) {
+			if ( 1 != model.get( 'required' ) || ! model.get( 'visible' ) ) {
 				return false;
 			}
 
@@ -61,14 +61,19 @@ define([], function() {
 			}
 
 			currentValue = model.get( 'value' );
-			
+
 			var defaultReqValidation = true;
 
 			if ( ! jQuery.trim( currentValue ) ) {
 				defaultReqValidation = false;
 			}
 
-			var valid = defaultReqValidation;
+			var customReqValidation = nfRadio.channel( model.get( 'type' ) ).request( 'validate:modelData', model );
+			if ( 'undefined' !== typeof customReqValidation ) {
+				var valid = customReqValidation;
+			} else {
+				var valid = defaultReqValidation;
+			}
 
 			this.maybeError( valid, model );
 
@@ -76,7 +81,7 @@ define([], function() {
 
 		maybeError: function( valid, model ) {
 			if ( ! valid ) {
-				nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'required-error', 'This is a required field.' );
+				nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'required-error', nfi18n.validateRequiredField );
 			} else {
 				nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'required-error' );
 			}			

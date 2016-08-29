@@ -23,6 +23,9 @@
         border: 1px solid #ccc;
         cursor: default;
     }
+    &.publish {
+        float: right;
+    }
 }
 .nf-cancel {
     color: #999;
@@ -76,7 +79,7 @@
     textarea {
         background: #f9f9f9;
         border: 0;
-        margin-top: 5px;
+        margin-top: 7px;
         padding: 12px 15px;
         width: 100%;
         height: 41px;

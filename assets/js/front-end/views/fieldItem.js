@@ -3,36 +3,15 @@ define( [], function() {
 		tagName: 'div',
 
 		initialize: function() {
-    		this.model.on( 'reRender', this.render, this );
-    		this.model.on( 'change:errors', this.changeError, this );
-    		this.model.on( 'change:addWrapperClass', this.addWrapperClass, this );
-    		this.model.on( 'change:removeWrapperClass', this.removeWrapperClass, this );
-    		// this.listenTo( nfRadio.channel( 'submit' ), 'before:submit', this.test );
+    		this.listenTo( this.model, 'reRender', this.render, this );
+    		this.listenTo( this.model, 'change:addWrapperClass', this.addWrapperClass, this );
+    		this.listenTo( this.model, 'change:removeWrapperClass', this.removeWrapperClass, this );
 
     		this.template = '#nf-tmpl-field-' + this.model.get( 'wrap_template' );
 		},
 
-		onBeforeDestroy: function() {
-			this.model.off( 'reRender', this.render );
-    		this.model.off( 'change:errors', this.changeError );
-    		this.model.off( 'change:addWrapperClass', this.addWrapperClass );
-    		this.model.off( 'change:removeWrapperClass', this.removeWrapperClass );
-		},
-
 		test: function( model ) {
 			console.log( 'firing from trigger 1' );
-		},
-
-		changeError: function() {
-			if ( 0 == this.model.get( 'errors' ).models.length ) {
-				this.model.removeWrapperClass( 'nf-error' );
-				this.model.removeWrapperClass( 'nf-fail' );
-				this.model.addWrapperClass( 'nf-pass' );
-			} else {
-				this.model.removeWrapperClass( 'nf-pass' );
-				this.model.addWrapperClass( 'nf-fail' );
-				this.model.addWrapperClass( 'nf-error' );
-			}
 		},
 
 		addWrapperClass: function() {
@@ -56,9 +35,7 @@ define( [], function() {
 			this.$el.unwrap();
 			this.setElement( this.$el );
 
-			var el = jQuery( this.el ).children( '.nf-error-wrap' );
-
-    		/*
+	   		/*
     		 * If we have an input mask, init that mask.
     		 * TODO: Move this to a controller so that the logic isn't in the view.
     		 */

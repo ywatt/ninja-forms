@@ -38,11 +38,6 @@ final class NF_Display_Render
         }
         $form = Ninja_Forms()->form( $form_id )->get();
 
-        if( $form->get_setting( 'lock' ) ){
-            echo __( 'This form is not available.', 'ninja-forms' );
-            return;
-        }
-
         if( $form->get_setting( 'logged_in' ) && ! is_user_logged_in() ){
             echo $form->get_setting( 'not_logged_in_msg' );
             return;
@@ -417,6 +412,7 @@ final class NF_Display_Render
         wp_enqueue_script( 'nf-global', Ninja_Forms::$url . 'assets/js/min/global.js', array( 'jquery' ) );
 
         wp_enqueue_script( 'nf-front-end', Ninja_Forms::$url . 'assets/js/min/front-end.js', array( 'jquery', 'backbone', 'backbone-radio', 'backbone-marionette', 'math' ) );
+        wp_localize_script( 'nf-front-end', 'nfi18n', Ninja_Forms::config( 'i18nFrontEnd' ) );
 
         $data = apply_filters( 'ninja_forms_render_localize_script_data', array(
             'ajaxNonce' => wp_create_nonce( 'ninja_forms_display_nonce' ),

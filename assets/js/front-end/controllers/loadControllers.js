@@ -31,7 +31,7 @@ define(
 		'controllers/fieldTextareaRTE',
 		'controllers/fieldStarRating',
 		'controllers/fieldTerms',
-		'controllers/fieldContentsFilters',
+		'controllers/formContentFilters',
 		'controllers/loadViews',
 		'controllers/formErrors',
 		'controllers/submit'
@@ -68,7 +68,7 @@ define(
 		FieldTextareaRTE,
 		FieldStarRating,
 		FieldTerms,
-		FieldContentsFilters,
+		FormContentFilters,
 		LoadViews,
 		FormErrors,
 		Submit
@@ -99,7 +99,7 @@ define(
 				new FieldTextareaRTE();
 				new FieldStarRating();
 				new FieldTerms();
-				new FieldContentsFilters();
+				new FormContentFilters();
 				/**
 				 * Misc controllers
 				 */

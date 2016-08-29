@@ -20,6 +20,7 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			// Respond to requests for data about fields and to update/change/delete fields from our collection.
 			nfRadio.channel( 'fields' ).reply( 'get:collection', this.getFieldCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:field', this.getField, this );
+			nfRadio.channel( 'fields' ).reply( 'redraw:collection', this.redrawFieldCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:tmpID', this.getTmpFieldID, this );
 
 			nfRadio.channel( 'fields' ).reply( 'add', this.addField, this );
@@ -40,8 +41,22 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			return this.collection;
 		},
 
+		redrawFieldCollection: function() {
+			this.collection.trigger( 'reset', this.collection );
+		},
+
 		getField: function( id ) {
-			return this.collection.get( id );
+			if ( this.collection.findWhere( { key: id } ) ) {
+				/*
+				 * First we check to see if a key matches what we were sent.
+				 */				
+				return this.collection.findWhere( { key: id } );
+			} else {
+				/*
+				 * If it doesn't, we try to return an ID that matches.
+				 */
+				return this.collection.get( id );
+			}
 		},
 
 		/**
@@ -84,8 +99,10 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 
-			nfRadio.channel( 'fields' ).trigger( 'add:field', model );
-
+			if ( ! silent ) {
+				nfRadio.channel( 'fields' ).trigger( 'add:field', model );
+			}
+			
 			return model;
 		},
 
