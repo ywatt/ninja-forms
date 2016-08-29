@@ -17,6 +17,8 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 	 */
 	function __construct() {
 		$this->name = __( 'Email', 'ninja-forms' );
+
+		add_action( 'add_meta_boxes', array( $this, 'add_email_info' ), 11, 2 );
 	}
 
 	/**
@@ -352,7 +354,20 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
             $to = explode( ",", $this->flatten_array_recursive( ',', $to ) );
 
-			wp_mail( $to, $subject, $message, $headers, $attachments );
+			$sent = wp_mail( $to, $subject, $message, $headers, $attachments );
+
+			$sub_id = $ninja_forms_processing->get_form_setting( 'sub_id' );
+			$meta = Ninja_Forms()->sub( $sub_id )->get_meta( '_email_status' );
+			$meta[] = array(
+				'to' => $to,
+				'subject' => $subject,
+				'message' => $message,
+				'headers' => $headers,
+				'attachments' => $attachments,
+				'sent' => $sent
+			);
+			Ninja_Forms()->sub( $sub_id )->add_meta( '_email_status', $meta );
+
 		}
 
 		// Delete our admin CSV if one is present.
@@ -407,6 +422,40 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		// gotta keep the old filter in case anyone was using it.
 		return apply_filters( 'nf_email_notification_process_setting', $setting, $setting_name, $id );
 	}
+
+	public function add_email_info(  $post_type, $post )
+	{
+		add_meta_box( 'nf_email_info', __( 'Email Information', 'ninja-forms' ), array( $this, 'email_info_metabox' ), 'nf_sub', 'side', 'default');
+	}
+
+	function email_info_metabox( $sub ) {
+		$form_id = Ninja_Forms()->sub( $sub->ID )->form_id;
+		$email_status = Ninja_Forms()->sub( $sub->ID )->get_meta( '_email_status' );
+		if( ! $email_status ) return;
+
+		foreach( $email_status as $status ) {
+
+			?>
+			<div class="submitbox" id="submitpost">
+				<dl>
+					<dt>To</dt>
+					<dd><?php echo implode( ',', $status[ 'to' ] ); ?></dd>
+					<dt>Subject</dt>
+					<dd><?php echo $status[ 'subject' ]; ?></dd>
+					<dt>Message</dt>
+					<dd><?php echo $status[ 'message' ]; ?></dd>
+					<dt>Headers</dt>
+					<dd><?php echo implode( '<br />', $status[ 'headers' ] ); ?></dd>
+					<dt>Attachments</dt>
+					<dd><?php echo implode( '<br />', $status[ 'attachments' ] ); ?></dd>
+					<dt>Status</dt>
+					<dd><?php echo ($status[ 'sent'] ) ? '<span style="color: green;">✓</span> Sent' : '<span style="color: red;">✗</span> Failed'; ?></dd>
+				</dl>
+			</div>
+			<hr>
+			<?php
+		}
+	} // function stripe_info_metabox
 
 }
 
