@@ -1071,7 +1071,7 @@ FIELD DESCRIPTION POSITIONS
 
 .listradio-wrap .nf-field-element label {
   position: relative;
-  margin-left: 30px; }
+  margin-left: 30px !important; }
   .listradio-wrap .nf-field-element label::after {
     border-radius: 50%;
     content: "";
