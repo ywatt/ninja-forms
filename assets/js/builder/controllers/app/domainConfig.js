@@ -87,10 +87,6 @@ define( [
 					},
 					mobileDashicon: 'dashicons-menu',
 
-					getMainHeaderView: function() {
-						return new fieldsMainHeaderView();
-					},
-
 					getSubHeaderView: function() {
 						return new fieldsSubHeaderView();
 					},
@@ -212,10 +208,6 @@ define( [
 					},
 					mobileDashicon: 'dashicons-external',
 
-					getMainHeaderView: function() {
-						return new actionsMainHeaderView();
-					},
-
 					getSubHeaderView: function() {
 						return new actionsSubHeaderView();
 					},
@@ -238,10 +230,6 @@ define( [
 						'Shift+return'		: 'return:mergeTags'
 					},
 					mobileDashicon: 'dashicons-admin-generic',
-
-					getMainHeaderView: function() {
-						return new settingsMainHeaderView();
-					},
 
 					getSubHeaderView: function() {
 						return new settingsSubHeaderView();
