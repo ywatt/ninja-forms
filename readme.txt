@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, wpnzach, kbjohnson90, aman086, da
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.3
 Tested up to: 4.6
-Stable tag: 2.9.56.2
+Stable tag: 2.9.57
 License: GPLv2 or later
 
 Create forms and manage submissions easily with a simple drag and drop interface. Contact forms, subscription forms, or any other form for WordPress.
@@ -97,17 +97,33 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9.56.2 (17 August 2016) =
+= 2.9.57 (30 August 2016) =
 
 *Changes:*
 
-* Update localized add-on listings for upgrade checks.
+* [THREE Only] Removed the "disable input" setting from non-input field types (ie product, shipping, and total).
+* [THREE Only] Added missing "download all submissions" button.
+* [THREE Only] Concatenate and minify JavaScript files by feature dependencies.
 
 *Bugs:*
 
-* Fixed a bug with form builder styling in WordPress v4.6.
+* Fixed a bug with a PHP notice when sanitizing the textarea field.
+* [THREE Only] Fixed a bug with plain text email containing raw HTML.
 
 == Changelog ==
+
+= 2.9.57 (30 August 2016) =
+
+*Changes:*
+
+* [THREE Only] Removed the "disable input" setting from non-input field types (ie product, shipping, and total).
+* [THREE Only] Added missing "download all submissions" button.
+* [THREE Only] Concatenate and minify JavaScript files by feature dependencies.
+
+*Bugs:*
+
+* Fixed a bug with a PHP notice when sanitizing the textarea field.
+* [THREE Only] Fixed a bug with plain text email containing raw HTML.
 
 = 2.9.56.1 (17 August 2016) =
 
