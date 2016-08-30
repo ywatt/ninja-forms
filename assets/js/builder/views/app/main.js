@@ -130,9 +130,7 @@ define( [], function() {
 		},
 
 		updateGutters: function() {
-			this.setBothGuttersAbsolute();
 			this.resizeBothGutters();
-			this.setBothGuttersFixed();
 		}
 
 	});
