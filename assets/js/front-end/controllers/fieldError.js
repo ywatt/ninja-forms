@@ -8,10 +8,14 @@ define(['models/fieldErrorModel'], function( fieldErrorModel ) {
 
 		addError: function( targetID, id, msg ) {
 			var model = nfRadio.channel( 'fields' ).request( 'get:field', targetID );
+
+			if( 'undefined' == typeof model ) return;
+
 			var errors = model.get( 'errors' );
 			errors.add( { 'id': id, 'msg' : msg } );
 			model.set( 'errors', errors );
 			model.trigger( 'change:errors', model );
+			model.set( 'clean', false );
 			nfRadio.channel( 'fields' ).trigger( 'add:error', model, id, msg );
 		},
 
@@ -22,7 +26,7 @@ define(['models/fieldErrorModel'], function( fieldErrorModel ) {
 
 			var errors = model.get( 'errors' );
 			var targetError = errors.get( id );
-			if ( 'undefined' != targetError ) {
+			if ( 'undefined' != typeof targetError ) {
 				errors.remove( targetError );
 				model.set( 'errors', errors );
 				model.trigger( 'change:errors', model );

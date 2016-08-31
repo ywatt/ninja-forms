@@ -50,12 +50,11 @@ define( [
 
 			var formModel = nfRadio.channel( 'app' ).request( 'get:formModel' );
 			var calcCollection = formModel.get( 'settings' ).get( 'calculations' );
-			_.each( calcCollection, function( calc ) {
+			_.each( calcCollection.models, function( calcModel ) {
 				calcTags.add( {
-					label: calc.name,
-					tag: '{calc:' + calc.name + '}'
-				} );					
-				
+					label: calcModel.get( 'name' ),
+					tag: '{calc:' + calcModel.get( 'name' ) + '}'
+				} );
 			} );
 
 			this.tagSectionCollection.get( 'calcs' ).set( 'tags', calcTags );
@@ -84,7 +83,7 @@ define( [
 			this.listenTo( nfRadio.channel( 'fieldSetting-key' ), 'update:setting', this.updateKey );
 
 			// Reply to requests to check a data model for a field key when one is updated.
-			nfRadio.channel( 'app' ).reply( 'replace:fieldKey', this.replaceFieldKey, this );
+			this.listenTo( nfRadio.channel( 'app' ), 'replace:fieldKey', this.replaceFieldKey );
 
 			// Reply to requests to check a data model for a field key when one is updated.
 			nfRadio.channel( 'app' ).reply( 'get:fieldKeyFormat', this.getFieldKeyFormat, this );

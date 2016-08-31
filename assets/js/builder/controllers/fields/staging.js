@@ -49,7 +49,9 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 				// i.e. firstname, textbox, etc.
 				slug: fieldType.get( 'type' ),
 				// i.e. First Name, Textbox, etc.
-				nicename: fieldType.get( 'nicename' )
+				nicename: fieldType.get( 'nicename' ),
+				// i.e. calendar, envelope, etc.
+				icon: fieldType.get( 'icon' )
 			}
 			// 
 			var model = this.collection.add( data );
@@ -69,6 +71,7 @@ define( ['models/fields/stagingCollection'], function( stagingCollection ) {
 		 */
 		removeStagedField: function( e, model ) {
 			this.collection.remove( model );
+			nfRadio.channel( 'fields' ).trigger( 'remove:stagedField', model );
 		},
 
 		/**

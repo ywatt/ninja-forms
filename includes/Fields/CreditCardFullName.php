@@ -10,10 +10,14 @@ class NF_Fields_CreditCardFullName extends NF_Abstracts_Input
 
     protected $_section = '';
 
+    protected $_icon = 'credit-card';
+
     protected $_templates = 'textbox';
 
     protected $_test_value = 'Tester T. Test';
 
+    protected $_settings_exclude = array( 'input_limit_set', 'disable_input' );
+    
     public function __construct()
     {
         parent::__construct();

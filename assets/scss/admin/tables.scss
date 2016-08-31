@@ -15,6 +15,7 @@
         td {
             color: #676F75;
             white-space:nowrap;
+            position: relative;
             &:nth-child(2) {
                 width: 90%;
             }
@@ -62,7 +63,7 @@
                 font-weight: normal;
                 float: right;
                 a {
-                    color: #424242;
+                    color: $accent_color;
                 }
                 .nf-item-delete,
                 .nf-item-duplicate {
@@ -103,5 +104,8 @@
 .nf-actions-table {
     td {
         cursor: pointer;
+    }
+    .nf-item-controls {
+        top: 12px;
     }
 }

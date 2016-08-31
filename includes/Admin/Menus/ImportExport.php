@@ -21,23 +21,29 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
     public function import_form_listener()
     {
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_import_form_capabilities', 'manage_options' ) ) ) return;
+
         if( ! isset( $_FILES[ 'nf_import_form' ] ) || ! $_FILES[ 'nf_import_form' ] ) return;
 
         $this->upload_error_check( $_FILES[ 'nf_import_form' ] );
 
-        $import = file_get_contents( $_FILES[ 'nf_import_form' ][ 'tmp_name' ] );
+        $data = file_get_contents( $_FILES[ 'nf_import_form' ][ 'tmp_name' ] );
 
-        $data = unserialize( base64_decode( $import ) );
+        $import = Ninja_Forms()->form()->import_form( $data );
 
-        if( ! $data ) {
-            $data = unserialize( $import );
+        if( ! $import ){
+
+            wp_die(
+                __( 'There uploaded file is not a valid format.', 'ninja-forms' ) . ' ' . ( function_exists( 'json_last_error' ) ) ? json_last_error_msg() : '',
+                __( 'Invalid Form Upload.', 'ninja-forms' )
+            );
         }
-
-        Ninja_Forms()->form()->import_form( $data );
     }
 
     public function export_form_listener()
     {
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_export_form_capabilities', 'manage_options' ) ) ) return;
+
         if( isset( $_REQUEST[ 'nf_export_form' ] ) && $_REQUEST[ 'nf_export_form' ] ){
             $form_id = $_REQUEST[ 'nf_export_form' ];
             Ninja_Forms()->form( $form_id )->export_form();
@@ -46,6 +52,8 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
     public function import_fields_listener()
     {
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_import_fields_capabilities', 'manage_options' ) ) ) return;
+
         if( ! isset( $_FILES[ 'nf_import_fields' ] ) || ! $_FILES[ 'nf_import_fields' ] ) return;
 
         $this->upload_error_check( $_FILES[ 'nf_import_fields' ] );
@@ -61,6 +69,8 @@ final class NF_Admin_Menus_ImportExport extends NF_Abstracts_Submenu
 
     public function export_fields_listener()
     {
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_export_fields_capabilities', 'manage_options' ) ) ) return;
+
         if( isset( $_REQUEST[ 'nf_export_fields' ] ) && $_REQUEST[ 'nf_export_fields' ] ){
             $field_ids = $_REQUEST[ 'nf_export_fields' ];
 

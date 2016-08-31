@@ -8,6 +8,9 @@
  */
 define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function( fieldCollection, fieldModel ) {
 	var controller = Marionette.Object.extend( {
+		adding: false,
+		removing: false,
+		
 		initialize: function() {
 			// Load our field collection from our localized form data
 			this.collection = new fieldCollection( preloadedFormData.fields );
@@ -17,19 +20,43 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			// Respond to requests for data about fields and to update/change/delete fields from our collection.
 			nfRadio.channel( 'fields' ).reply( 'get:collection', this.getFieldCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:field', this.getField, this );
+			nfRadio.channel( 'fields' ).reply( 'redraw:collection', this.redrawFieldCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:tmpID', this.getTmpFieldID, this );
 
 			nfRadio.channel( 'fields' ).reply( 'add', this.addField, this );
 			nfRadio.channel( 'fields' ).reply( 'delete', this.deleteField, this );
 			nfRadio.channel( 'fields' ).reply( 'sort:fields', this.sortFields, this );
+
+			/*
+			 * Respond to requests to set our 'adding' and 'removing' state. This state is used to track whether or not
+			 * we should run animations in our fields collection.
+			 */
+			nfRadio.channel( 'fields' ).reply( 'get:adding', this.getAdding, this );
+			nfRadio.channel( 'fields' ).reply( 'set:adding', this.setAdding, this );
+			nfRadio.channel( 'fields' ).reply( 'get:removing', this.getRemoving, this );
+			nfRadio.channel( 'fields' ).reply( 'set:removing', this.setRemoving, this );
 		},
 
 		getFieldCollection: function() {
 			return this.collection;
 		},
 
+		redrawFieldCollection: function() {
+			this.collection.trigger( 'reset', this.collection );
+		},
+
 		getField: function( id ) {
-			return this.collection.get( id );
+			if ( this.collection.findWhere( { key: id } ) ) {
+				/*
+				 * First we check to see if a key matches what we were sent.
+				 */				
+				return this.collection.findWhere( { key: id } );
+			} else {
+				/*
+				 * If it doesn't, we try to return an ID that matches.
+				 */
+				return this.collection.get( id );
+			}
 		},
 
 		/**
@@ -40,6 +67,11 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 		 * @param bool 		silent 	prevent events from firing as a result of adding	 	
 		 */
 		addField: function( data, silent ) {
+			/*
+			 * Set our fields 'adding' value to true. This enables our add field animation.
+			 */
+			nfRadio.channel( 'fields' ).request( 'set:adding', true );
+
 			silent = silent || false;
 			if ( false === data instanceof Backbone.Model ) {
 				if ( 'undefined' == typeof ( data.id ) ) {
@@ -67,8 +99,10 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 
-			nfRadio.channel( 'fields' ).trigger( 'add:field', model );
-
+			// if ( ! silent ) {
+				nfRadio.channel( 'fields' ).trigger( 'add:field', model );
+			// }
+			
 			return model;
 		},
 
@@ -138,7 +172,9 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 		 */
 		deleteField: function( model ) {
 			nfRadio.channel( 'fields' ).trigger( 'delete:field', model );
+			this.removing = true;
 			this.collection.remove( model );
+			
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 			nfRadio.channel( 'app' ).request( 'update:db' );
@@ -156,6 +192,22 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			var tmpNum = this.collection.tmpNum;
 			this.collection.tmpNum++;
 			return 'tmp-' + tmpNum;
+		},
+
+		getAdding: function() {
+			return this.adding;
+		},
+
+		setAdding: function( val ) {
+			this.adding = val;
+		},
+
+		getRemoving: function() {
+			return this.removing;
+		},
+
+		setRemoving: function( val ) {
+			this.removing = val;
 		}
 	});
 

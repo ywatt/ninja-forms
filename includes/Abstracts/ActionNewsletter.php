@@ -39,6 +39,10 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
     {
         parent::__construct();
 
+        if( ! $this->_transient ){
+            $this->_transient = $this->get_name() . '_newsletter_lists';
+        }
+
         add_action( 'wp_ajax_nf_' . $this->_name . '_get_lists', array( $this, '_get_lists' ) );
 
         $this->get_list_settings();
@@ -60,7 +64,7 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
 
     public function _get_lists()
     {
-        check_ajax_referer( 'ninja_forms_ajax_nonce', 'security' );
+        check_ajax_referer( 'ninja_forms_builder_nonce', 'security' );
 
         $lists = $this->get_lists();
 
@@ -106,7 +110,7 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
         $this->_settings[ $prefix . 'newsletter_list' ] = array(
             'name' => 'newsletter_list',
             'type' => 'select',
-            'label' => $labels[ 'list' ] . ' <a class="js-newsletter-list-update extra"><span class="dashicons dashicons-update"></span></a>',
+            'label' => $labels[ 'list' ] . ' <a class=' . __( "js-newsletter-list-update extra", 'ninja-forms' ) . '><span class=' . __( "dashicons dashicons-update", 'ninja-forms' ) . '></span></a>',
             'width' => 'full',
             'group' => 'primary',
             'value' => '0',

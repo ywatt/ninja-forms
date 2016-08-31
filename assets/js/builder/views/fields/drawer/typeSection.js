@@ -2,7 +2,7 @@ define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'div',
 		template: '#nf-tmpl-drawer-field-type-section',
-		
+
 		initialize: function() {
 			_.bindAll( this, 'render' );
 			nfRadio.channel( 'fields' ).reply( 'get:typeSection', this.getTypeSection, this );
@@ -19,11 +19,13 @@ define( [], function() {
 			 * If we're on a mobile device, we don't want to enable dragging for our field type buttons.
 			 */
 			if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-				jQuery( this.el ).find( 'div.nf-one-third' ).draggable( {
+				jQuery( this.el ).find( 'div.nf-field-type-draggable' ).draggable( {
 					opacity: 0.9,
-					tolerance: 'intersect',
-					scroll: false,
+					tolerance: 'pointer',
 					connectToSortable: '.nf-field-type-droppable',
+					refreshPositions: true,
+					grid: [ 5, 5 ],
+					appendTo: '#nf-builder',
 
 					helper: function( e ) {
 						var width = jQuery( e.target ).parent().width();
@@ -32,7 +34,7 @@ define( [], function() {
 						var left = width / 4;
 						var top = height / 2;
 						jQuery( this ).draggable( 'option', 'cursorAt', { top: top, left: left } );
-
+						jQuery( element ).zIndex( 1000 );
 						return element;
 					},
 
@@ -44,6 +46,10 @@ define( [], function() {
 					stop: function( e, ui ) {
 						that.dragging = false;
 						nfRadio.channel( 'drawer-addField' ).trigger( 'stopDrag:type', this, ui );
+					},
+
+					drag: function(e, ui) {
+						nfRadio.channel( 'drawer-addField' ).trigger( 'drag:type', this, ui, e );	
 					}
 
 				} ).disableSelection();
@@ -52,7 +58,7 @@ define( [], function() {
 			    	jQuery( this ).addClass( 'active' );
 			    } ).blur( function() {
 			    	jQuery( this ).removeClass( 'active' );
-			    } );			
+			    } );
 			}
 		},
 
@@ -90,8 +96,9 @@ define( [], function() {
 			        _.each( this.fieldTypes, function( id ) {
 			            var type = nfRadio.channel( 'fields' ).request( 'get:type', id );
 			            var nicename = type.get( 'nicename' );
-			            var renderType = _.template( jQuery( '#nf-tmpl-drawer-field-type-button' ).html() );
-			            html += renderType( { id: id, nicename: nicename, type: type, savedField: that.isSavedField } );
+			            var icon = type.get( 'icon' );
+			            var renderType = Marionette.TemplateCache.get( '#nf-tmpl-drawer-field-type-button' );
+			            html += renderType( { id: id, nicename: nicename, icon: icon, type: type, savedField: that.isSavedField } );
 			        } );
 			        return html;
 				},

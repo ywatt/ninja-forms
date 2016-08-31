@@ -16,6 +16,7 @@ define( [], function() {
 			// When our field staging is dragged, we need to add or remove the active (blue) class.
 			this.listenTo( nfRadio.channel( 'drawer-addField' ), 'startDrag:fieldStaging', this.addActiveClass );
 			this.listenTo( nfRadio.channel( 'drawer-addField' ), 'stopDrag:fieldStaging', this.removeActiveClass );
+			
 			/*
 			 * Handles all the events fired by our sortable:
 			 * receive - dropped from type button or staging
@@ -66,7 +67,7 @@ define( [], function() {
 			/*
 			 * We have to do different things if we're dealing with a field type button or staging area.
 			 */ 
-			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) { // Field Type Button
+			if( jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) ) { // Field Type Button
 				// Get our type string
 				var type = jQuery( ui.item ).data( 'id' );
 				// Add a field (returns the tmp ID )
@@ -154,7 +155,7 @@ define( [], function() {
 			}
 
 			nfRadio.channel( 'changes' ).request( 'register:change', 'addObject', newModel, null, label, data );
-			
+
 			return tmpID;
 		},
 
@@ -166,7 +167,7 @@ define( [], function() {
 		 * @return void
 		 */
 		overfieldsSortable: function( ui ) {
-			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) { // Field Type
+			if( jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) ) { // Field Type
 				// String type
 				var type = jQuery( ui.helper ).data( 'id' );
 				// Get our field type model.
@@ -182,7 +183,7 @@ define( [], function() {
 				// Update our helper label.
 				jQuery( ui.helper ).html( label );
 				// Remove the field type draggable classes and add sortable classes.
-				jQuery( ui.helper ).removeClass( 'nf-one-third' ).addClass( 'nf-field-wrap' ).css( { 'width': fieldWidth, 'height': '50px' } );						
+				jQuery( ui.helper ).removeClass( 'nf-field-type-button' ).addClass( 'nf-field-wrap' ).css( { 'width': fieldWidth, 'height': '50px' } );						
 				// Add our hover class if our sortable has been initialized.
 				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
 					jQuery( sortableEl ).addClass( 'nf-droppable-hover' );
@@ -205,7 +206,7 @@ define( [], function() {
 		 * @return void
 		 */
 		outFieldsSortable: function( ui ) {
-			if( jQuery( ui.item ).hasClass( 'nf-field-type-button' ) ) { // Field Type
+			if( jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) ) { // Field Type
 				/*
 				 * Get our helper clone.
 				 * This will let us access the previous label and classes of our helper.
@@ -213,7 +214,7 @@ define( [], function() {
 				var helperClone = nfRadio.channel( 'drawer-addField' ).request( 'get:typeHelperClone' );
 				// Set our helper label, remove our sortable class, and add the type class back to the type draggable.
 				jQuery( this.currentHelper ).html( jQuery( helperClone ).html() );
-				jQuery( this.currentHelper ).removeClass( 'nf-field-wrap' ).addClass( 'nf-one-third' ).css( { 'width': '', 'height': '' } );
+				jQuery( this.currentHelper ).removeClass( 'nf-field-wrap' ).addClass( 'nf-field-type-button' ).css( { 'width': '', 'height': '' } );
 				// Get our sortable and if it has been intialized, remove the droppable hover class.
 				var sortableEl = nfRadio.channel( 'fields' ).request( 'get:sortableEl' );
 				if ( jQuery( sortableEl ).hasClass( 'ui-sortable' ) ) {
@@ -238,7 +239,7 @@ define( [], function() {
 		 * @return void
 		 */
 		stopFieldsSortable: function( ui ) {
-			jQuery( ui.item ).css( 'opacity', '' )
+			jQuery( ui.item ).css( 'opacity', '' );
 			jQuery( ui.helper ).remove();
 			nfRadio.channel( 'fields' ).trigger( 'sortable:stop', ui );
 		},
@@ -254,7 +255,7 @@ define( [], function() {
 		 */
 		startFieldsSortable: function( ui ) {
 			// If we aren't dragging an item in from types or staging, update our change log.
-			if( ! jQuery( ui.item ).hasClass( 'nf-field-type-button' ) && ! jQuery( ui.item ).hasClass( 'nf-stage' ) ) { 
+			if( ! jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) && ! jQuery( ui.item ).hasClass( 'nf-stage' ) ) { 
 				jQuery( ui.item ).css( 'opacity', '0.5' ).show();
 			}
 			nfRadio.channel( 'fields' ).trigger( 'sortable:start', ui );
@@ -267,11 +268,12 @@ define( [], function() {
 		 * @param  Object 	ui jQuery UI element
 		 * @return void
 		 */
-		updateFieldsSortable: function( ui ) {
+		updateFieldsSortable: function( ui, sortable ) {
+			
 			nfRadio.channel( 'fields' ).request( 'sort:fields' );
 
 			// If we aren't dragging an item in from types or staging, update our change log.
-			if( ! jQuery( ui.item ).hasClass( 'nf-field-type-button' ) && ! jQuery( ui.item ).hasClass( 'nf-stage' ) ) { 
+			if( ! jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) && ! jQuery( ui.item ).hasClass( 'nf-stage' ) ) { 
 
 				var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
 				var dragFieldID = jQuery( ui.item ).prop( 'id' ).replace( 'field-', '' );
@@ -301,8 +303,6 @@ define( [], function() {
 
 				nfRadio.channel( 'changes' ).request( 'register:change', 'sortFields', dragModel, null, label, data );
 			}
-
-			
 		}
 	});
 

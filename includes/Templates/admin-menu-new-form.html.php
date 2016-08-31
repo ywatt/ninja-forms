@@ -1,14 +1,19 @@
-<h1><?php _e( 'Form Builder', 'ninja-forms' ); ?></h1>
+<div id="nf-pre-builder" style="background:#fff;position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999999;"></div>
 
 <div id="nf-builder" class="grey"></div>
 
 <script id="nf-tmpl-builder" type="text/template">
+    <div id="nf-app-admin-header"><div id="nf-logo"></div><a href="admin.php?page=ninja-forms" class="fa fa-times"></a></div>
     <div id="nf-overlay"></div>
     <div id="nf-header"></div>
     <div id="nf-main" class="nf-app-main"></div>
     <div id="nf-menu-drawer"></div>
     <div id="nf-drawer"></div>
     <span class="merge-tags-content" style="display:none;"></span>
+</script>
+
+<script id="nf-tmpl-admin-header" type="text/template">
+    <div id="nf-app-admin-header"></div>
 </script>
 
 <script id="nf-tmpl-header" type="text/template">
@@ -22,11 +27,17 @@
 </script>
 
 <script id="nf-tmpl-sub-header-fields" type="text/template">
-    <a class="nf-add-new nf-open-drawer" title="Add New Field" href="#" data-drawerid="addField">Add new field</a>
+    <a class="nf-master-control nf-open-drawer" title="<?php _e( 'Add new field', 'ninja-forms' ); ?>" href="#" data-drawerid="addField">
+        <i class="fa fa-plus" data-drawerid="addField" aria-hidden="true"></i>
+        <span data-drawerid="addField"><?php _e( 'Add new field', 'ninja-forms' ); ?></span>
+    </a>
 </script>
 
 <script id="nf-tmpl-sub-header-actions" type="text/template">
-    <a class="nf-add-new nf-open-drawer" title="Add New Action" href="#" data-drawerid="addAction">Add new action</a>
+    <a class="nf-master-control nf-open-drawer" title="<?php _e( 'Add new action', 'ninja-forms' ); ?>" href="#" data-drawerid="addAction">
+        <i class="fa fa-plus" data-drawerid="addAction" aria-hidden="true"></i>
+        <span><?php _e( 'Add new action', 'ninja-forms' ); ?></span>
+    </a>
 </script>
 
 <script id="nf-tmpl-sub-header-settings" type="text/template">
@@ -34,7 +45,7 @@
 </script>
 
 <script id="nf-tmpl-app-header" type="text/template">
-    <div id="nf-logo"></div>
+    <!-- <div id="nf-logo"></div> -->
     <ul class="nf-app-menu"></ul>
     <span class="nf-mobile-menu-button"></span>
     <span class="nf-app-buttons"></span>
@@ -46,15 +57,15 @@
 </script>
 
 <script id="nf-tmpl-mobile-menu-button" type="text/template">
-    <a class="nf-button nf-mobile-menu title="Expand Menu" <%= maybeDisabled() %>" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
+    <a class="nf-button nf-mobile-menu" title="<?php _e( 'Expand Menu', 'ninja-forms' ); ?>" <%= maybeDisabled() %>" href="#"><span class="dashicons dashicons-editor-ul"></span></a>
 </script>
 
 <script id="nf-tmpl-app-header-publish-button" type="text/template">
-    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish" title="Publish">PUBLISH</a>
+    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish" title="<?php _e( 'Publish', 'ninja-forms' ); ?>"><?php _e( 'PUBLISH', 'ninja-forms' ); ?></a>
 </script>
 
 <script id="nf-tmpl-add-header-publish-loading" type="text/template">
-    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish" title="Loading">
+    <a href="#" <%= publishWidth %> class="nf-button primary <%= maybeDisabled() %> publish" title="<?php _e( 'Loading', 'ninja-forms' ); ?>">
         <div class="nf-loading">
             <ul>
                 <li></li>
@@ -66,20 +77,15 @@
 </script>
 
 <script id="nf-tmpl-app-header-view-changes" type="text/template">
-    <a class="nf-cancel viewChanges" title="View Changes" style="text-decoration: none;" href="#"><span class="dashicons dashicons-backup"></span></a>
+    <a class="nf-cancel viewChanges" title="<?php _e( 'View Changes', 'ninja-forms' ); ?>" style="text-decoration: none;" href="#"><span class="dashicons dashicons-backup"></span></a>
 </script>
 
 <script id="nf-tmpl-main" type="text/template">
-    <div id="nf-main-header" class="nf-app-area"></div>
-    <div id="nf-main-content" class="nf-app-area"></div>
-</script>
-
-<script id="nf-tmpl-main-header-fields" type="text/template">
-    <input class="nf-button secondary nf-change-domain" data-domain="actions" type="button" value="Edit Emails and Actions" />
-</script>
-
-<script id="nf-tmpl-main-header-actions" type="text/template">
-    <input class="nf-button secondary nf-change-domain" data-domain="settings" type="button" value="Manage Settings" />
+    <div id="nf-main-content" class="nf-app-area">
+        <div id="nf-main-gutter-left"></div>
+        <div id="nf-main-body"></div>
+        <div id="nf-main-gutter-right"></div>
+    </div>
 </script>
 
 <script id="nf-tmpl-main-header-settings" type="text/template">
@@ -88,30 +94,56 @@
 
 <script id="nf-tmpl-main-content-fields-empty" type="text/template">
     <div class="nf-fields-empty">
-        <h3>Add form fields</h3>
-        <p>Get started by adding your first form field. Just click the plus and select the fields you want. It’s that easy.</p>
+        <h3><?php _e( 'Add form fields', 'ninja-forms' ); ?></h3>
+        <p><?php _e( 'Get started by adding your first form field.', 'ninja-forms' ); ?> <a class="nf-open-drawer" title="<?php _e( 'Add New Field', 'ninja-forms' ); ?>" href="#" data-drawerid="addField"><?php _e( 'Just click here and select the fields you want.', 'ninja-forms' ); ?></a><?php _e( "It's that easy. Or...", 'ninja-forms' ); ?>
+        <h3><?php _e( 'Start from a template', 'ninja-forms' ); ?></h3>
+        <a href="?page=ninja-forms&form_id=formtemplate-contactform" class="nf-one-third template-box">
+            <div class="template-box-inside">
+                <h4><?php _e( 'Contact Us', 'ninja-forms' ); ?></h4>
+                <p class="template-desc"><?php _e( 'Allow your users to contact you with this simple contact form. You can add and remove fields as needed.', 'ninja-forms' ); ?></p>
+            </div>
+        </a>
+
+        <a href="?page=ninja-forms&form_id=formtemplate-quoterequest" class="nf-one-third template-box">
+            <div class="template-box-inside">
+                <h4><?php _e( 'Quote Request', 'ninja-forms' ); ?></h4>
+                <p class="template-desc"><?php _e( 'Manage quote requests from your website easily with this remplate. You can add and remove fields as needed.', 'ninja-forms' ); ?></p>
+            </div>
+        </a>
+        <a href="?page=ninja-forms&form_id=formtemplate-eventregistration" class="nf-one-third template-box">
+            <div class="template-box-inside">
+                <h4><?php _e( 'Event Registration', 'ninja-forms' ); ?></h4>
+                <p class="template-desc"><?php _e( 'Allow user to register for your next event this easy to complete form. You can add and remove fields as needed.', 'ninja-forms' ); ?></p>
+            </div>
+        </a>
+        <!--<a href="#" class="nf-one-third template-box">
+            <div class="template-box-inside">
+                <h4><?php _e( 'Newsletter Sign Up Form', 'ninja-forms' ); ?></h4>
+                <p class="template-desc"><?php _e( 'Add subscribers and grow your email list with this newsletter signup form. You can add and remove fields as needed.', 'ninja-forms' ); ?></p>
+            </div>
+        </a> -->
     </div>
 </script>
 
 <script id="nf-tmpl-main-content-actions-empty" type="text/template">
     <tr>
         <td colspan="4">
-            <h3>Add form actions</h3>
-            <p>Get started by adding your first form field. Just click the plus and select the actions you want. It’s that easy.</p>
+            <h3><?php _e( 'Add form actions', 'ninja-forms' ); ?></h3>
+            <p><?php _e( "Get started by adding your first form field. Just click the plus and select the actions you want. It's that easy.", 'ninja-forms' ); ?></p>
         </td>
     </tr>
 </script>
 
 <script id="nf-tmpl-main-content-field" type="text/template">
-    <div id="<%= getFieldID() %>" class="<%= renderClasses() %>" data-id="<%= id %>"><span class="nf-field-label"><%= label %> <%= renderRequired() %></span>
-        <ul class="nf-item-controls"></ul>
+    <div id="<%= getFieldID() %>" class="<%= renderClasses() %>" data-id="<%= id %>"><%= renderIcon() %><span class="nf-field-label"><%= label %> <%= renderRequired() %></span>
+        <div class="nf-item-controls"></div>
     </div>
 </script>
 
 <script id="nf-tmpl-item-controls" type="text/template">
-    <li class="nf-item-edit"><a href="#" title="Edit"><span class="nf-edit-settings dashicons dashicons-admin-generic"></span><span class="nf-item-editing">Editing <%= objectType %></span></a></li>
-    <li class="nf-item-duplicate"><a href="#" title="Duplicate"><span class="nf-duplicate dashicons dashicons-admin-page"></span></a></li>
-    <li class="nf-item-delete"><a href="#" title="Delete"><span class="nf-delete dashicons dashicons-dismiss"></span></a></li>
+    <div class="nf-item-edit nf-item-control"><a href="#" title="<?php _e( 'Edit', 'ninja-forms' ); ?>"><i class="nf-edit-settings fa fa-cog" aria-hidden="true"></i><!-- <span class="nf-item-editing">Editing <%= objectType %></span> --></a></div>
+    <div class="nf-item-duplicate nf-item-control"><a href="#" title="<?php _e( 'Duplicate (^ + C + click)', 'ninja-forms' ); ?>"><i class="nf-duplicate fa fa-files-o" aria-hidden="true"></i></a></div>
+    <div class="nf-item-delete nf-item-control"><a href="#" title="<?php _e( 'Delete (^ + D + click)', 'ninja-forms' ); ?>"><i class="nf-delete fa fa-trash" aria-hidden="true"></i></a></div>
 </script>
 
 <script id="nf-tmpl-action-table" type="text/template">
@@ -119,9 +151,9 @@
         <thead>
             <tr>
                 <th></th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Actions</th>
+                <th><?php _e( 'Name', 'ninja-forms' ); ?></th>
+                <th><?php _e( 'Type', 'ninja-forms' ); ?></th>
+                <th><?php _e( 'Actions', 'ninja-forms' ); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -134,7 +166,7 @@
     <td><%= label %></td>
     <td><%= renderTypeNicename() %></td>
     <td>
-        <ul class="nf-item-controls"></ul>
+        <div class="nf-item-controls"></div>
     </td>
 </script>
 
@@ -144,7 +176,7 @@
 
 <script id="nf-tmpl-mobile-menu" type="text/template">
     <ul class="primary">
-        <li class="nf-publish <%= maybeDisabled() %>">Publish</li>
+        <li class="nf-publish <%= maybeDisabled() %>"><?php _e( 'Publish', 'ninja-forms' ); ?></li>
     </ul>
     <ul class="secondary"></ul>
 </script>
@@ -156,16 +188,16 @@
 <script id="nf-tmpl-drawer" type="text/template">
     <div id="nf-drawer-header"></div>
     <span id="nf-drawer-content"></span>
-    <a class="nf-toggle-drawer" title="Toggle Drawer">
-        <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off">Full screen</span><span class="nf-expand-on">Half screen</span>
+    <a class="nf-toggle-drawer" title="<?php _e ( 'Toggle Drawer', 'ninja-forms' ); ?>">
+        <span class="dashicons dashicons-admin-collapse"></span><span class="nf-expand-off"><?php _e( 'Full screen', 'ninja-forms' ); ?></span><span class="nf-expand-on"><?php _e( 'Half screen', 'ninja-forms' ); ?></span>
     </a>
     <span id="nf-drawer-footer"></span>
 </script>
 
 <script id="nf-tmpl-drawer-content-add-field" type="text/template">
-    <section id="nf-drawer-staging" class="nf-settings nf-stage">
+    <div id="nf-drawer-staging" class="nf-settings nf-stage">
         <div class="nf-reservoir nf-drawer-staged-fields nf-field-type-droppable"></div>
-    </section>
+    </div>
     <span id="nf-drawer-primary"></span>
     <span id="nf-drawer-secondary"></span>
 </script>
@@ -196,7 +228,7 @@
         </td>
         <td>
             <% if ( ! disabled ) { %>
-                <a href="#" title="Undo" class="undoSingle disabled" style="text-decoration:none;">
+                <a href="#" title="<?php _e( 'Undo', 'ninja-forms' ); ?>" class="undoSingle disabled" style="text-decoration:none;">
             <% } %>
 
             <span class="dashicons dashicons-image-rotate <%= ( disabled ) ? 'disabled' : '' %>"></span>
@@ -228,7 +260,7 @@
 </script>
 
 <script id="nf-tmpl-add-saved-field-button" type="text/template">
-    <a href="#" title="Add" class="nf-button primary">Add</a>
+    <a href="#" title="<?php _e( 'Add', 'ninja-forms' ); ?>" class="nf-button primary"><?php _e( 'Add', 'ninja-forms' ); ?></a>
 </script>
 
 <script id="nf-tmpl-add-saved-field-loading" type="text/template">
@@ -255,7 +287,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-staged-field" type="text/template">
-     <span class="nf-item-dock" id="<%= id %>" data-id="<%= slug %>"><%= nicename %><span class="dashicons dashicons-dismiss"></span>
+     <span class="nf-item-dock" id="<%= id %>" data-id="<%= slug %>"><span class="fa fa-<%= icon %>"></span><%= nicename %><span class="dashicons dashicons-dismiss"></span>
 </script>
 
 <script id="nf-tmpl-drawer-field-type-section" type="text/template">
@@ -266,8 +298,8 @@
 </script>
 
 <script id="nf-tmpl-drawer-field-type-button" type="text/template">
-    <div class="nf-field-type-button nf-one-third <%= savedField() %>" data-id="<%= id %>">
-        <div class="nf-item" data-id="<%= id %>" tabindex="0"><%= nicename %></div>
+    <div class="nf-field-type-button nf-field-type-draggable <%= savedField() %>" data-id="<%= id %>">
+        <div class="nf-item" data-id="<%= id %>" tabindex="0"><span class="fa fa-<%= icon %>"></span><%= nicename %></div>
     </div>
 </script>
 
@@ -279,7 +311,7 @@
 </script>
 
 <script id="nf-tmpl-drawer-action-type-button" type="text/template">
-    <div class="nf-one-third" data-type="<%= id %>">
+    <div class="nf-one-third nf-action-type-draggable" data-type="<%= id %>">
         <div class="<%= renderClasses() %>" <%= renderStyle() %>><%= nicename %></div>
     </div>
 </script>
@@ -289,28 +321,28 @@
         <div class="nf-search">
             <input type="search" class="nf-filter" value="" placeholder="Filter" tabindex="-1" />
         </div>
-        <a href="#" title="Done" class="nf-button primary nf-close-drawer <%= renderDisabled() %>" tabindex="-1">Done</a>
+        <a href="#" title="<?php _e( 'Done', 'ninja-forms' ); ?>" class="nf-button primary nf-close-drawer <%= renderDisabled() %>" tabindex="-1"><?php _e( 'Done', 'ninja-forms' ); ?></a>
     </header>
 </script>
 
 <script id="nf-tmpl-drawer-header-edit-settings" type="text/template">
     <header class="nf-drawer-header">
-        <a href="#" title="Done" class="nf-button primary nf-close-drawer <%= renderDisabled() %>" tabindex="-1">Done</a>
+        <a href="#" title="<?php _e( 'Done', 'ninja-forms' ); ?>" class="nf-button primary nf-close-drawer <%= renderDisabled() %>" tabindex="-1"><?php _e( 'Done', 'ninja-forms' ); ?></a>
     </header>
 </script>
 
 <script id="nf-tmpl-drawer-header-view-changes" type="text/template">
     <header class="nf-drawer-header">
         <div>
-            <a href="#" title="Undo All" class="nf-button secondary undoChanges" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span> Undo All</a>
+            <a href="#" title="<?php _e( 'Undo All', 'ninja-forms' ); ?>" class="nf-button secondary undoChanges" style="float:left;" tabindex="-1"><span class="dashicons dashicons-backup"></span><?php _e( ' Undo All', 'ninja-forms' ); ?></a>
         </div>
-        <a href="#" title="Done" class="nf-button primary nf-close-drawer" tabindex="-1">Done</a>
+        <a href="#" title="<?php _e( 'Done', 'ninja-forms' ); ?>" class="nf-button primary nf-close-drawer" tabindex="-1"><?php _e( 'Done', 'ninja-forms' ); ?></a>
     </header>
 </script>
 
 <script id="nf-tmpl-drawer-header-new-form" type="text/template">
     <header class="nf-drawer-header">
-        <h3>Almost there...</h3>
+        <h3><?php _e( 'Almost there...', 'ninja-forms' ); ?></h3>
     </header>
 </script>
 
@@ -318,9 +350,9 @@
     <span class="new-form-name"></span>
     <div class="new-form-submit"></div>
     <div>
-        <a href="#" title="Not Yet" class="nf-button secondary nf-close-drawer" style="float:left;" tabindex="-1">Not Yet</a>
+        <a href="#" title="<?php _e( 'Not Yet', 'ninja-forms' ); ?>" class="nf-button secondary nf-close-drawer" style="float:left;" tabindex="-1"><?php _e( 'Not Yet', 'ninja-forms' ); ?></a>
     </div>
-    <a href="#" title="Publish" class="nf-button primary nf-close-drawer publish" tabindex="-1">Publish</a>
+    <a href="#" title="<?php _e( 'Publish', 'ninja-forms' ); ?>" class="nf-button primary nf-close-drawer publish" tabindex="-1"><?php _e( 'Publish', 'ninja-forms' ); ?></a>
 </script>
 
 <script id="nf-tmpl-app-menu-item" type="text/template">
@@ -329,14 +361,14 @@
 
 <script id="nf-tmpl-staged-fields-drag" type="text/template">
     <div class="nf-staged-fields-drag">
-        <div id="drag-item-1" class="nf-field-wrap"><%= num %> Fields</div>
-        <div id="drag-item-2" class="nf-field-wrap">&nbsp;</div>
-        <div id="drag-item-3" class="nf-field-wrap">&nbsp;</div>
+        <div id="drag-item-1" class="nf-staged-fields-drag-wrap"><%= num %><? _e( ' Fields', 'ninja-forms' ); ?></div>
+        <div id="drag-item-2" class="nf-staged-fields-drag-wrap">&nbsp;</div>
+        <div id="drag-item-3" class="nf-staged-fields-drag-wrap">&nbsp;</div>
     </div>
 </script>
 
 <script id="nf-tmpl-drawer-staged-fields-empty" type="text/template">
-    <span></span>
+    <div class="nf-staged-fields-empty"></div>
 </script>
 
 <script id="nf-tmpl-empty" type="text/template">
@@ -413,6 +445,28 @@
     </label>
 </script>
 
+<script id="nf-tmpl-edit-setting-field-select" type="text/template">
+    <label for="<%= name %>" class="nf-select"><%= label %> <%= renderTooltip() %>
+        <select id="<%= name %>" class="setting">
+            <%
+            _.each( options, function( option ) {
+            %>
+            <option value="<%= option.value %>" <%= ( value == option.value ) ? 'selected="selected"' : '' %>><%= option.label %></option>
+            <%
+            } );
+            %>
+        </select>
+        <div></div>
+    </label>
+</script>
+
+<script id="nf-tmpl-edit-setting-field-list" type="text/template">
+    <fieldset>
+        <legend><%= label %></legend>
+        <span class="nf-field-sub-settings"></span>
+    </fieldset>
+</script>
+
 <script id="nf-tmpl-edit-setting-checkbox" type="text/template">
 
     <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
@@ -423,9 +477,21 @@
 
 <script id="nf-tmpl-edit-setting-toggle" type="text/template">
 
-    <span class="nf-setting-label"><%= label %></span> <%= renderTooltip() %>
+    <span class="nf-setting-label"><%= label %><%= renderTooltip() %></span>
     <input type="checkbox" id="<%= name %>" class="nf-toggle setting" <%= ( 1 == value ) ? 'checked' : '' %> />
     <label for="<%= name %>"><%= label %></label>
+
+</script>
+
+<script id="nf-tmpl-edit-setting-color" type="text/template">
+
+    <label for="<%= name %>" class="<%= renderLabelClasses() %>"><%= label %> <%= renderTooltip() %></label>
+
+    <input type="text" id="<%= name %>" value="<%= value %>" class="setting" data-default-color="#F9F9F9" />
+
+    <div class="nf-colorpicker">
+
+    </div>
 
 </script>
 
@@ -507,6 +573,12 @@
     </div>
 </script>
 
+<script id="nf-tmpl-edit-setting-html" type="text/template">
+    <div class="nf-note">
+        <%= value %>
+    </div>
+</script>
+
 <!-- Calculation Row Template -->
 
 <script id="nf-tmpl-edit-setting-calculation-repeater-row" type="text/template">
@@ -551,9 +623,11 @@
         Text
         <input type="url" class="widefat code link-text"> <br />
         <label>
-            <input type="checkbox" class="link-new-window"> Open in new window
+            <input type="checkbox" class="link-new-window"><?php _e( ' Open in new window', 'ninja-forms' ); ?>
         </label>
         <input type="button" class="cancel-link extra" value="Cancel">
         <input type="button" class="insert-link extra" value="Insert">
     </div>
 </script>
+
+<?php do_action( 'ninja_forms_builder_templates' ); ?>

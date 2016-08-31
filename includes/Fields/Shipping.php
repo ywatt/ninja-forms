@@ -9,6 +9,8 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
 
     protected $_section = 'pricing';
 
+    protected $_icon = 'truck';
+
     protected $_aliases = array();
 
     protected $_type = 'shipping';
@@ -19,7 +21,7 @@ class NF_Fields_Shipping extends NF_Abstracts_Input
 
     protected $_settings =  array( 'shipping_type', 'shipping_cost', 'shipping_options' );
 
-    protected $_settings_exclude = array( 'input_limit_set' );
+    protected $_settings_exclude = array( 'input_limit_set', 'disable_input', 'required' );
 
     public function __construct()
     {

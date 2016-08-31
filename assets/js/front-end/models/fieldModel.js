@@ -9,7 +9,8 @@ define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 			mirror_field: false,
 			confirm_field: false,
 			clean: true,
-			disabled: ''
+			disabled: '',
+			visible: true
 		},
 
 		initialize: function() {
@@ -27,29 +28,24 @@ define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 			 * field-type
 			 *
 			 * This lets specific field types modify model attributes before anything uses them.
-			 */ 
+			 */
 			nfRadio.channel( 'fields' ).trigger( 'init:model', this );
 			nfRadio.channel( this.get( 'type' ) ).trigger( 'init:model', this );
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:model', this );
+
+			if( 'undefined' != this.get( 'parentType' ) ){
+				nfRadio.channel( this.get( 'parentType' ) ).trigger( 'init:model', this );
+			}
 
 			/*
 			 * When we load our form, fire another event for this field.
 			 */
 			this.listenTo( nfRadio.channel( 'form-' + this.get( 'formID' ) ), 'loaded', this.formLoaded );
-		},
-
-		resetModel: function() {
+		
 			/*
-			 * Trigger an init event on two channels:
-			 * 
-			 * fields
-			 * field-type
-			 *
-			 * This lets specific field types modify model attributes before anything uses them.
-			 */ 
-			// nfRadio.channel( 'fields' ).trigger( 'init:model', this );
-			// nfRadio.channel( this.get( 'type' ) ).trigger( 'init:model', this );
-			// nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:model', this );
+			 * Before we submit our form, send out a message so that this field can be modified if necessary.
+			 */
+			this.listenTo( nfRadio.channel( 'form-' + this.get( 'formID' ) ), 'before:submit', this.beforeSubmit );
 		},
 
 		changeModel: function() {
@@ -75,6 +71,11 @@ define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 		formLoaded: function() {
 			nfRadio.channel( 'fields' ).trigger( 'formLoaded', this );
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'formLoaded', this );
+		},
+
+		beforeSubmit: function( formModel ) {
+			nfRadio.channel( this.get( 'type' ) ).trigger( 'before:submit', this );
+			nfRadio.channel( 'fields' ).trigger( 'before:submit', this );
 		}
 
 	} );

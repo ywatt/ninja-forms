@@ -41,6 +41,11 @@
                     }
                 }
             }
+            &:first-child {
+                a {
+                    margin-left: 0;
+                }
+            }
         }
         &:after {
             clear: both;
@@ -92,5 +97,10 @@
     float: right;
     .publish {
         float: right;
+    }
+}
+#nf-app-form-title {
+    h2 {
+        margin: 15px 0;
     }
 }

@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return apply_filters( 'ninja_forms_from_display_settings', array(
+return apply_filters( 'ninja_forms_form_display_settings', array(
 
     /*
     * FORM TITLE
@@ -41,9 +41,7 @@ return apply_filters( 'ninja_forms_from_display_settings', array(
         'width' => 'full',
         'group' => 'primary',
         'value' => 1,
-
-        //TODO: Add following text below the element.
-        //If this box is checked, Ninja Forms will clear the form values after it has been successfully submitted.
+        'help'  => __( 'If this box is checked, Ninja Forms will clear the form values after it has been successfully submitted.', 'ninja-forms' ),
     ),
 
     /*
@@ -61,23 +59,38 @@ return apply_filters( 'ninja_forms_from_display_settings', array(
     ),
 
     /*
-     * Currency
-     */
+    * Default Label Position
+    */
 
-    'currency' => array(
-        'name' => 'currency',
+    'default_label_pos' => array(
+        'name' => 'default_label_pos',
         'type' => 'select',
-        'label' => __( 'Currency', 'ninja-forms' ),
-        'group' => 'advanced',
+        'label' => __( 'Default Label Position', 'ninja-forms' ),
         'width' => 'full',
+        'group' => 'advanced',
         'options' => array(
             array(
-                'label' => __( 'USD - $', 'ninja-forms' ),
-                'value' => 'usd'
+                'label' => __( 'Above Element', 'ninja-forms' ),
+                'value' => 'above'
+            ),
+            array(
+                'label' => __( 'Below Element', 'ninja-forms' ),
+                'value' => 'below'
+            ),
+            array(
+                'label' => __( 'Left of Element', 'ninja-forms' ),
+                'value' => 'left'
+            ),
+            array(
+                'label' => __( 'Right of Element', 'ninja-forms' ),
+                'value' => 'right'
+            ),
+            array(
+                'label' => __( 'Hidden', 'ninja-forms' ),
+                'value' => 'hidden'
             ),
         ),
-        'value' => 'usd',
-        'use_merge_tags' => FALSE
+        'value' => 'above',
     ),
 
     /*

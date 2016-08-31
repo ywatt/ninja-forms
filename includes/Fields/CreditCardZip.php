@@ -10,7 +10,11 @@ class NF_Fields_CreditCardZip extends NF_Fields_Zip
 
     protected $_section = '';
 
+    protected $_icon = 'credit-card';
+
     protected $_templates = array( 'zip', 'textbox' );
+
+    protected $_settings_exclude = array( 'disable_input', 'input_limit_set' );
 
     public function __construct()
     {

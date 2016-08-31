@@ -18,12 +18,12 @@ final class NF_Actions_Save extends NF_Abstracts_Action
     /**
     * @var string
     */
-    protected $_timing = 'normal';
+    protected $_timing = 'late';
 
     /**
     * @var int
     */
-    protected $_priority = '10';
+    protected $_priority = '-1';
 
     /**
     * Constructor
@@ -46,8 +46,6 @@ final class NF_Actions_Save extends NF_Abstracts_Action
 
     public function process( $action_settings, $form_id, $data )
     {
-        $data[ 'extra' ][ 'foo' ] = 'bar';
-
         if( isset( $data['settings']['is_preview'] ) && $data['settings']['is_preview'] ){
             return $data;
         }
@@ -70,12 +68,12 @@ final class NF_Actions_Save extends NF_Abstracts_Action
             $sub->update_extra_values( $data['extra'] );
         }
 
+        $sub->save();
+
         do_action( 'nf_save_sub', $sub->get_id() );
         do_action( 'ninja_forms_save_sub', $sub->get_id() );
 
-        $sub->save();
-
-        $data[ 'actions' ][ 'save' ][ 'id' ] = $sub->get_id();
+        $data[ 'actions' ][ 'save' ][ 'sub_id' ] = $sub->get_id();
 
         return $data;
     }

@@ -1,11 +1,17 @@
-define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( mainContentFieldView, mainContentFieldEmptyView ) {
+define( [], function() {
 	var view = Marionette.CollectionView.extend( {
 		tagName: 'div',
-		emptyView: mainContentFieldEmptyView,
 		reorderOnSort: true,
 
+		getChildView: function() {
+			return nfRadio.channel( 'views' ).request( 'get:fieldItem' );
+		},
+
+		getEmptyView: function() {
+			return nfRadio.channel( 'views' ).request( 'get:mainContentEmpty' );
+		},
+
 		initialize: function() {
-			this.childView = nfRadio.channel( 'views' ).request( 'get:fieldItem' );
 			nfRadio.channel( 'fields' ).reply( 'get:sortableEl', this.getSortableEl, this );
 			nfRadio.channel( 'fields' ).reply( 'init:sortable', this.initSortable, this );
 			nfRadio.channel( 'fields' ).reply( 'destroy:sortable', this.destroySortable, this );
@@ -16,7 +22,7 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 				jQuery( this.el ).addClass( 'nf-field-type-droppable' ).addClass( 'nf-fields-sortable' );
 				var that = this;
 				/* TODO: There's a bug with some Android phones and chrome. The fix below hasn't been implement.
-				
+
 				 * Instantiate our sortable field list, but only if we aren't on a mobile device.
 				 *
 				 * On Android, our sortable list isn't scrollable if it's instantiated at render.
@@ -24,10 +30,9 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 				 * destroy it when the drag stops.
 				 */
 				// if ( ! nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
-					this.initSortable();				
+					this.initSortable();
 				// }
 			}
-
 			nfRadio.channel( 'app' ).trigger( 'render:fieldsSortable', this );
 		},
 
@@ -43,34 +48,43 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 			}
 
 			jQuery( this.el ).sortable( {
-				containment: '#nf-main',
+				//containment: '#nf-main',
 				helper: 'clone',
 				cancel: '.nf-item-controls',
 				placeholder: 'nf-fields-sortable-placeholder',
 				opacity: 0.95,
-				tolerance: tolerance,
+				grid: [ 5, 5 ],
+				// scroll: false,
+				appendTo: '#nf-builder',
+				scrollSensitivity: 10,
 
 				receive: function( e, ui ) {
+					if ( ui.item.dropping ) return;
 					nfRadio.channel( 'app' ).request( 'receive:fieldsSortable', ui );
 				},
 
 				over: function( e, ui ) {
+					if ( ui.item.dropping ) return;
 					nfRadio.channel( 'app' ).request( 'over:fieldsSortable', ui );
 				},
 
 				out: function( e, ui ) {
+					if ( ui.item.dropping ) return;
 					nfRadio.channel( 'app' ).request( 'out:fieldsSortable', ui );
 				},
 
 				start: function( e, ui ) {
+					if ( ui.item.dropping ) return;
 					nfRadio.channel( 'app' ).request( 'start:fieldsSortable', ui );
 				},
 
 				update: function( e, ui ) {
-					nfRadio.channel( 'app' ).request( 'update:fieldsSortable', ui );
+					if ( ui.item.dropping ) return;
+					nfRadio.channel( 'app' ).request( 'update:fieldsSortable', ui, this );
 				},
 
 				stop: function( e, ui ) {
+					if ( ui.item.dropping ) return;
 					nfRadio.channel( 'app' ).request( 'stop:fieldsSortable', ui );
 				}
 			} );
@@ -78,8 +92,15 @@ define( ['views/fields/fieldItem', 'views/fields/mainContentEmpty'], function( m
 
 		destroySortable: function() {
 			jQuery( this.el ).sortable( 'destroy' );
-		}
+		},
 
+		onAddChild: function( childView ) {
+			if ( nfRadio.channel( 'fields' ).request( 'get:adding' ) ) {
+				childView.$el.hide().show( 'clip' );
+				nfRadio.channel( 'fields' ).request( 'set:adding', false );
+			}
+		}
+		
 	} );
 
 	return view;

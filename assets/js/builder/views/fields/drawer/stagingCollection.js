@@ -4,6 +4,8 @@ define( ['views/fields/drawer/stagedField', 'views/fields/drawer/stagingEmpty'],
 		childView: stagedFieldView,
 		emptyView: stagedFieldsEmptyView,
 
+		activeClass: 'nf-staged-fields-active', // CSS Class for showing the reservoir.
+
 		initialize: function() {
 			nfRadio.channel( 'app' ).reply( 'get:stagedFieldsEl', this.getStagedFieldsEl, this );
 		},
@@ -48,7 +50,11 @@ define( ['views/fields/drawer/stagedField', 'views/fields/drawer/stagingEmpty'],
 
 			jQuery( this.el ).parent().draggable( {
 				opacity: 0.9,
-				connectToSortable: '.nf-fields-sortable',
+				connectToSortable: '.nf-field-type-droppable',
+				appendTo: '#nf-main',
+				refreshPositions: true,
+				grid: [ 3, 3 ],
+				tolerance: 'pointer',
 
 				helper: function( e ) {
 					var width = jQuery( e.target ).parent().width();
@@ -57,9 +63,10 @@ define( ['views/fields/drawer/stagedField', 'views/fields/drawer/stagingEmpty'],
 					var left = width / 4;
 					var top = height / 2;
 					jQuery( this ).draggable( 'option', 'cursorAt', { top: top, left: left } );
-
+					jQuery( element ).zIndex( 1000 );
 					return element;
 				},
+
 				start: function( e, ui ) {
 					nfRadio.channel( 'drawer-addField' ).trigger( 'startDrag:fieldStaging', this, ui );
 				},
@@ -71,6 +78,19 @@ define( ['views/fields/drawer/stagedField', 'views/fields/drawer/stagingEmpty'],
 
 		getStagedFieldsEl: function() {
 			return jQuery( this.el );
+		},
+
+		onAddChild: function() {
+			jQuery( this.el ).addClass( this.activeClass );
+		},
+
+		onRemoveChild: function() {
+			if( this.hasStagedFields() ) return;
+			jQuery( this.el ).removeClass( this.activeClass );
+		},
+
+		hasStagedFields: function() {
+			return  0 != this.collection.length;
 		}
 
 	} );

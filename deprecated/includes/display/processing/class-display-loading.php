@@ -138,7 +138,7 @@ class Ninja_Forms_Loading {
 			$default_value_type = isset ( $data['default_value_type'] ) ? $data['default_value_type'] : '';
 
 			// Check to see if our default value is one of our preset values:
-			get_currentuserinfo();
+			wp_get_current_user();
 			$user_ID 			= $current_user->ID;
 			if ( $user_ID and !empty( $user_ID ) ) {
 				$user_firstname 	= $current_user->user_firstname;
@@ -200,7 +200,7 @@ class Ninja_Forms_Loading {
 					break;
 				default:
 					if ( 'querystring' == $default_value_type ) {
-						$default_value = isset ( $_GET[ $default_value ] ) ? esc_html( $_GET[ $default_value ] ) : '';
+						$default_value = isset ( $_GET[ $default_value ] ) ? stripslashes( esc_html( $_GET[ $default_value ] ) ) : '';
 					}
 					break;
 			}

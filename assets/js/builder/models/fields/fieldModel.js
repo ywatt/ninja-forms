@@ -11,10 +11,13 @@ define( [], function() {
 		defaults: {
 			objectType: 'Field',
 			objectDomain: 'fields',
-			editActive: false
+			editActive: false,
+			order: 999
 		},
 
 		initialize: function() {
+			if ( 'undefined' == typeof this.get( 'type' ) ) return;
+
 			// Listen for model attribute changes
 			this.on( 'change', this.changeSetting, this );
 
@@ -23,13 +26,12 @@ define( [], function() {
 			var parentType = fieldType.get( 'parentType' );
 
 			// Loop through our field type "settingDefaults" and add any default settings.
-			var that = this;
 			_.each( fieldType.get( 'settingDefaults' ), function( val, key ) {
-				if ( 'undefined' == typeof that.get( key ) ) {
-					that.set( key, val, { silent: true } );
+				if ( 'undefined' == typeof this.get( key ) ) {
+					this.set( key, val, { silent: true } );
 				}
-			} );
-			
+			}, this );
+
 			/*
 			 * Trigger an init event on three channels:
 			 * 
@@ -43,7 +45,7 @@ define( [], function() {
 			nfRadio.channel( 'fields-' + parentType ).trigger( 'init:fieldModel', this );
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:fieldModel', this );
 
-			this.listenTo( nfRadio.channel( 'fields' ), 'update:fieldKey', this.updateFieldKey );
+			this.listenTo( nfRadio.channel( 'app' ), 'fire:updateFieldKey', this.updateFieldKey );
 		},
 
 		/**
@@ -60,7 +62,7 @@ define( [], function() {
 		},
 
 		updateFieldKey: function( keyModel, settingModel ) {
-			nfRadio.channel( 'app' ).request( 'replace:fieldKey', this, keyModel, settingModel );
+			nfRadio.channel( 'app' ).trigger( 'replace:fieldKey', this, keyModel, settingModel );
 		}
 	} );
 	

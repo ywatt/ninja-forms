@@ -2,8 +2,11 @@ define([], function() {
     var controller = Marionette.Object.extend( {
         initialize: function() {
             this.listenTo( nfRadio.channel( 'listcheckbox' ), 'init:model', this.register );
+            this.listenTo( nfRadio.channel( 'terms' ), 'init:model', this.register );
             nfRadio.channel( 'listcheckbox' ).reply( 'before:updateField', this.beforeUpdateField, this );
+            nfRadio.channel( 'terms' ).reply( 'before:updateField', this.beforeUpdateField, this );
             nfRadio.channel( 'listcheckbox' ).reply( 'get:calcValue', this.getCalcValue, this );
+            nfRadio.channel( 'terms' ).reply( 'get:calcValue', this.getCalcValue, this );
         },
 
         register: function( model ) {
@@ -24,31 +27,44 @@ define([], function() {
         },
 
         renderOptions: function() {
-            var that = this;
             var html = '';
+
             if ( '' == this.value ) {
                 var valueFound = true;
             } else {
                 var valueFound = false;
             }
 
-            _.each( this.options, function( option ) {
-                if ( option.value == that.value ) {
+            _.each( this.options, function( option, index ) {
+                if ( option.value == this.value ) {
                     valueFound = true;
                 }
 
-                option.fieldID = that.id;
-                option.classes = that.classes;
-                option.currentValue = that.value;
-
-                if( option.selected ){
-                    that.selected.push( option.value );
+                /*
+                 * TODO: This is a bandaid fix for making sure that each option has a "visible" property.
+                 * This should be moved to creation so that when an option is added, it has a visible property by default.
+                 */
+                if ( 'undefined' == typeof option.visible ) {
+                    option.visible = true;
                 }
 
-                var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-option' ).html() );
+                option.fieldID = this.id;
+                option.classes = this.classes;
+                option.index = index;
 
+                if( option.selected ){
+                    option.isSelected = true;
+                } else {
+                    var testValues = _.map( this.value, function( value ) {
+                        return value.toString();
+                    } );               
+                    
+                    option.isSelected = ( -1 != testValues.indexOf( option.value.toString() ) );
+                }
+
+                var template = Marionette.TemplateCache.get( '#nf-tmpl-field-listcheckbox-option' );
                 html += template( option );
-            } );
+            }, this );
 
             if ( 1 == this.show_other ) {
                 if ( 'nf-other' == this.value ) {
@@ -62,7 +78,7 @@ define([], function() {
                     valueFound: valueFound
                 };
 
-                var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-other' ).html() );
+                var template = Marionette.TemplateCache.get( '#nf-tmpl-field-listcheckbox-other' );
                 html += template( data );
 
             }
@@ -80,7 +96,7 @@ define([], function() {
                     classes: this.classes,
                     currentValue: this.currentValue
                 };
-                var template = _.template( jQuery( '#nf-tmpl-field-listcheckbox-other-text' ).html() );
+                var template = Marionette.TemplateCache.get( '#nf-tmpl-field-listcheckbox-other-text' );
                 return template( data );
             }
         },
@@ -98,25 +114,27 @@ define([], function() {
         },
 
         beforeUpdateField: function( el, model ) {
-            var selected = model.get( 'selected' ) || [];
+            var selected = model.get( 'value' ) || [];
             if ( typeof selected == 'string' ) selected = [ selected ];
 
-            var value = jQuery( el).val();
+            var value = jQuery( el ).val();
             var checked = jQuery( el ).attr( 'checked' );
             if ( checked ) {
                 selected.push( value );
+                jQuery( el ).addClass( 'nf-checked' );
+                jQuery( el ).parent().find( 'label[for="' + jQuery( el ).prop( 'id' ) + '"]' ).addClass( 'nf-checked-label' );
             } else {
+                jQuery( el ).removeClass( 'nf-checked' );
+                jQuery( el ).parent().find( 'label[for="' + jQuery( el ).prop( 'id' ) + '"]' ).removeClass( 'nf-checked-label' );
                 var i = selected.indexOf( value );
                 if( -1 != i ){
                     selected.splice( i, 1 );
                 }
             }
 
-            model.set( 'selected', selected );
-
-            if ( 1 == model.get( 'show_other' ) ) {
-                model.set( 'reRender', true );
-            }
+            // if ( 1 == model.get( 'show_other' ) ) {
+            //     model.set( 'reRender', true );
+            // }
 
             return _.clone( selected );
         }

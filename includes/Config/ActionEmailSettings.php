@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
-return array(
+return apply_filters( 'ninja_forms_action_email_settings', array(
 
     /*
     |--------------------------------------------------------------------------
@@ -51,6 +51,23 @@ return array(
         'value' => '',
         'width' => 'full',
         'use_merge_tags' => TRUE,
+        'deps' => array(
+            'email_format' => 'html'
+        )
+    ),
+
+    'email_message_plain' => array(
+        'name' => 'email_message_plain',
+        'type' => 'textarea',
+        'group' => 'primary',
+        'label' => __( 'Email Message', 'ninja-forms' ),
+        'placeholder' => '',
+        'value' => '',
+        'width' => 'full',
+        'use_merge_tags' => TRUE,
+        'deps' => array(
+            'email_format' => 'plain'
+        )
     ),
 
     /*
@@ -158,4 +175,4 @@ return array(
         'label' => __( 'Attach CSV', 'ninja-forms' ),
     ),
 
-);
+));

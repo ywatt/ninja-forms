@@ -26,23 +26,30 @@ abstract class NF_Abstracts_MergeTags
 
         add_filter( 'ninja_forms_run_action_settings',  array( $this, 'replace' ) );
         add_filter( 'ninja_forms_run_action_settings_preview',  array( $this, 'replace' ) );
+
+        /* Manually trigger Merge Tag replacement */
+        add_filter( 'ninja_forms_merge_tags', array( $this, 'replace' ) );
     }
 
     public function replace( $subject )
     {
-        foreach( $this->merge_tags as $merge_tag ){
-
-            if( is_array( $subject ) ){
-
-                foreach( $subject as $i => $s ){
-                    $subject[ $i ] = $this->replace( $s );
-                }
-            } elseif( FALSE !== strpos( $subject, $merge_tag[ 'tag' ] ) ){
-
-                $replace = ( is_callable( array( $this, $merge_tag[ 'callback' ] ) ) ) ? $this->{$merge_tag[ 'callback' ]}() : '';
-
-                $subject = str_replace( $merge_tag[ 'tag' ], $replace, $subject );
+        if( is_array( $subject ) ){
+            foreach( $subject as $i => $s ){
+                $subject[ $i ] = $this->replace( $s );
             }
+            return $subject;
+        }
+
+        preg_match_all("/{(.*?)}/", $subject, $matches );
+
+        if( empty( $matches[0] ) ) return $subject;
+
+        foreach( $this->merge_tags as $merge_tag ){
+            if( ! in_array( $merge_tag[ 'tag' ], $matches[0] ) ) continue;
+
+            $replace = ( is_callable( array( $this, $merge_tag[ 'callback' ] ) ) ) ? $this->{$merge_tag[ 'callback' ]}() : '';
+
+            $subject = str_replace( $merge_tag[ 'tag' ], $replace, $subject );
         }
 
         return $subject;

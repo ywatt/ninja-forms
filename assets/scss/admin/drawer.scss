@@ -6,8 +6,8 @@
     top: 0;
     bottom: 0;
     right: -1400px;
-    overflow: auto;
-    z-index: 99;
+    overflow: hidden;
+    z-index: 101;
     transition: width 0.75s ease;
     -webkit-overflow-scrolling: touch;
     &.nf-drawer-expand {
@@ -15,7 +15,7 @@
     }
 }
 .nf-drawer-opened {
-    #nf-main {
+    .nf-main-test {
         width: 50%;
         transition: all 0.50s ease;
         .nf-button {
@@ -54,12 +54,6 @@
             transition: all 0.50s ease;
         }
     }
-    #nf-app-sub-header, #nf-header {
-        h2 {
-            padding-left: 50px;
-            transition: all 0.50s ease 0s
-        }
-    }
     #nf-main-content,
     #nf-main-header {
         margin: 0 auto;
@@ -69,7 +63,7 @@
     @media only screen and (min-width: 901px) {
         #nf-app-sub-header {
             .nf-add-new {
-                top: 95px !important;
+                top: 139px !important;
                 text-indent: -99999px;
                 &:after {
                 }

@@ -9,6 +9,8 @@ class NF_Fields_Total extends NF_Abstracts_Input
 
     protected $_section = 'pricing';
 
+    protected $_icon = 'money';
+
     protected $_aliases = array();
 
     protected $_type = 'total';
@@ -17,7 +19,7 @@ class NF_Fields_Total extends NF_Abstracts_Input
 
     protected $_test_value = '0.00';
 
-    protected $_settings_exclude = array( 'placeholder', 'default', 'input_limit_set' );
+    protected $_settings_exclude = array( 'placeholder', 'default', 'input_limit_set', 'disable_input', 'required' );
 
     public function __construct()
     {

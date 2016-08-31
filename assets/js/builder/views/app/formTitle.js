@@ -17,18 +17,6 @@ define( [], function() {
 		},
 
 		/**
-		 * When we render this view, remove the extra <div> tag created by backbone.
-		 * 
-		 * @since  3.0
-		 * @return void
-		 */
-		onRender: function() {
-			this.$el = this.$el.children();
-			this.$el.unwrap();
-			this.setElement( this.$el );
-		},
-
-		/**
 		 * These functions are available to templates, and help us to remove logic from template files.
 		 * 
 		 * @since  3.0

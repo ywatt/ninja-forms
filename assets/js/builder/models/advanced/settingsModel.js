@@ -16,18 +16,18 @@ define( [], function() {
 		initialize: function() {
 			// Listen for model attribute changes
 			this.bind( 'change', this.changeSetting, this );
-			var that = this;
 			/*
 			 * Check to see if we have any setting defaults to set.
 			 */
 			var formSettings = nfRadio.channel( 'settings' ).request( 'get:collection' );
 			_.each( formSettings.models, function( settingModel ) {
-				if ( settingModel.get( 'value' ) ) {
-					that.set( settingModel.get( 'name' ), settingModel.get( 'value' ), { silent: true } );
+				if ( 'undefined' == typeof this.get( settingModel.get( 'name' ) ) ) {
+					this.set( settingModel.get( 'name' ), settingModel.get( 'value' ), { silent: true } );
 				}
-			} );
+				nfRadio.channel( settingModel.get( 'type' ) ).trigger( 'init:dataModel', this, settingModel );
+			}, this );
 
-			this.listenTo( nfRadio.channel( 'settings' ), 'update:fieldKey', this.updateFieldKey );
+			this.listenTo( nfRadio.channel( 'app' ), 'fire:updateFieldKey', this.updateFieldKey );
 		},
 
 		/**
@@ -41,7 +41,7 @@ define( [], function() {
 		},
 
 		updateFieldKey: function( keyModel, settingModel ) {
-			nfRadio.channel( 'app' ).request( 'replace:fieldKey', this, keyModel, settingModel );
+			nfRadio.channel( 'app' ).trigger( 'replace:fieldKey', this, keyModel, settingModel );
 		}
 	} );
 	

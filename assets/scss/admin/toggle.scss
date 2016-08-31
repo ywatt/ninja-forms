@@ -55,12 +55,14 @@ input[type=checkbox].nf-toggle {
 }
 
 .nf-full {
+    position: relative;
     input[type=checkbox].nf-toggle {
         + label {
-            border-bottom: 1px solid #ccc;
-            width: 100%;
             margin: -18px 0 0;
             padding: 12px 0 20px;
+            position: absolute;
+            top: 24px;
+            right: 10px;
             &::before {
                 left: auto;
                 right: 22px;
@@ -80,5 +82,9 @@ input[type=checkbox].nf-toggle {
                 }
             }
         }
+    }
+    .nf-setting-label {
+        border-bottom: 1px solid #ccc;
+        padding: 5px 0 20px;
     }
 }

@@ -39,10 +39,20 @@ define(
 		'controllers/app/itemSettingFill',
 		'controllers/app/confirmPublish',
 		'controllers/app/rte',
+		'controllers/app/settingFieldSelect',
+		'controllers/app/settingFieldList',
+		'controllers/app/settingHTML',
+		'controllers/app/settingColor',
 		'controllers/app/changeMenu',
 		'controllers/app/mobile',
 		'controllers/app/notices',
 		'controllers/app/unloadCheck',
+		'controllers/app/formContentFilters',
+		'controllers/app/formContentGutterFilters',
+		'controllers/app/cloneCollectionDeep',
+		'controllers/app/trackKeyDown',
+		'controllers/app/perfectScroll',
+		'controllers/app/getNewSettingGroupCollection',
 		/*
 		 * Fields domain controllers
 		 */
@@ -58,6 +68,7 @@ define(
 		'controllers/fields/editActive',
 		'controllers/fields/fieldSettings',
 		'controllers/fields/fieldCreditCard',
+		'controllers/fields/fieldList',
 		'controllers/fields/fieldPassword',
 		'controllers/fields/fieldQuantity',
 		'controllers/fields/fieldShipping',
@@ -123,10 +134,20 @@ define(
 		ItemSettingFill,
 		ConfirmPublish,
 		RTE,
+		SettingFieldSelect,
+		SettingFieldList,
+		SettingHTML,
+		SettingColor,
 		ChangeMenu,
 		AppMobile,
 		AppNotices,
 		AppUnloadCheck,
+		FormContentFilters,
+		FormContentGutterFilters,
+		CloneCollectionDeep,
+		TrackKeyDown,
+		PerfectScroll,
+		GetNewSettingGroupCollection,
 		/*
 		 * Fields domain controllers
 		 */
@@ -142,6 +163,7 @@ define(
 		FieldsEditActive,
 		FieldSettings,
 		FieldCreditCard,
+		FieldList,
 		FieldPassword,
 		FieldQuantity,
 		FieldShipping,
@@ -179,13 +201,14 @@ define(
 				/*
 				 * Application controllers
 				 */
+				new FormContentFilters();
+				new FormContentGutterFilters();
 				new Hotkeys();
 				new Remote();
 				new Drawer();
 				new DrawerConfig();
 				new DomainConfig();
 				new DrawerToggleSettingGroup();
-				new UpdateDB();
 				new PreviewLink();
 				new AppMenuButtons();
 				new AppTrackChanges();
@@ -198,10 +221,19 @@ define(
 				new ItemControls();
 				new ConfirmPublish();
 				new RTE();
+				new SettingFieldSelect();
+				new SettingFieldList();
+				new SettingHTML();
+				new SettingColor();
 				new ChangeMenu();
 				new AppMobile();
 				new AppNotices();
 				new AppUnloadCheck();
+				new UpdateDB();
+				new CloneCollectionDeep();
+				new TrackKeyDown();
+				new PerfectScroll();
+				new GetNewSettingGroupCollection();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers
@@ -225,6 +257,7 @@ define(
 				new FieldsEditActive();
 				new FieldSettings();
 				new FieldCreditCard();
+				new FieldList();
 				new FieldPassword;
 				new FieldQuantity();
 				new FieldShipping();
@@ -251,10 +284,11 @@ define(
 				 */
 				new SettingTypes();
 				new FormSettings();
+				new AdvancedCalculations();
 				new SettingData();
 				new SettingsEditActive();
 				new SettingsClickEdit();
-				new AdvancedCalculations();
+				
 				/*
 				 * Data controllers need to be set after every other controller has been setup, even if they aren't domain-specific.
 				 * AppData() was after FormData();
