@@ -105,7 +105,6 @@ gulp.task('js:frontend', function(){
         'assets/js/lib/math.min.js',
         'assets/js/lib/modernizr.min.js',
         'assets/js/min/global.js',
-        'assets/js/min/front-end.js'
     ])
     .pipe(concat('front-end-deps.js'))
     .pipe(gulp.dest('assets/js/min/'));
