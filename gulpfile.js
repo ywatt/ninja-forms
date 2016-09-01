@@ -107,7 +107,9 @@ gulp.task('js:frontend', function(){
         'assets/js/min/global.js',
         'assets/js/min/front-end.js'
     ])
+    .pipe(sourcemaps.init())
     .pipe(concat('front-end.min.js'))
+    .pipe(sourcemaps.write('/'))
     .pipe(gulp.dest('assets/js/min/'));
 });
 
