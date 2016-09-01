@@ -290,7 +290,18 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 
             add_action( 'plugins_loaded', array( self::$instance, 'plugins_loaded' ) );
 
+            add_action( 'ninja_forms_available_actions', array( self::$instance, 'scrub_available_actions' ) );
+
             return self::$instance;
+        }
+
+        public function scrub_available_actions( $actions )
+        {
+            foreach( $actions as $key => $action ){
+                if ( ! is_plugin_active( $action[ 'plugin_path' ] ) )  continue;
+                unset( $actions[ $key ] );
+            }
+            return $actions;
         }
 
         public function admin_notices()
