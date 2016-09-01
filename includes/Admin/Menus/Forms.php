@@ -505,19 +505,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
     protected function _fetch_action_feed()
     {
-        $actions = get_transient( 'ninja-forms-builder-actions-feed' );
-
-        $bust = ( isset( $_GET[ 'nf-bust-actions-feed' ] ) );
-
-        if( $bust || ! $actions ) {
-            $actions = wp_remote_get('https://ninjaforms.com/?action_feed=true');
-            $actions = wp_remote_retrieve_body($actions);
-            $actions = json_decode($actions, true);
-
-            set_transient( 'ninja-forms-builder-actions-feed', $actions, WEEK_IN_SECONDS );
-        }
-
-        return $actions;
+        return Ninja_Forms::config( 'AvailableActions' );
     }
 
     protected function setting_group_priority( $a, $b )
