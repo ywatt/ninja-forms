@@ -23,15 +23,12 @@ function ninja_forms_three_table_exists(){
     return ( $wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name );
 }
 
-if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) || ! ninja_forms_three_table_exists() ) {
-    update_option( 'ninja_forms_load_deprecated', TRUE );
-}
-
 if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf2to3' ] ) && ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) ){
 
     include 'deprecated/ninja-forms.php';
 
     register_activation_hook( __FILE__, 'ninja_forms_activation_deprecated' );
+
     function ninja_forms_activation_deprecated( $network_wide ){
         include_once 'deprecated/includes/activation.php';
 
@@ -166,7 +163,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 // Define old constants for backwards compatibility.
                 if( ! defined( 'NF_PLUGIN_DIR' ) ){
                     define( 'NF_PLUGIN_DIR', self::$dir );
-                    define( 'NINJA_FORMS_DIR', self::$dir );
+                    define( 'NINJA_FORMS_DIR', self::$dir . 'deprecated' );
                 }
 
                 self::$url = plugin_dir_url( __FILE__ );
@@ -564,6 +561,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         public function activation() {
             $migrations = new NF_Database_Migrations();
             $migrations->migrate();
+
+            $form = Ninja_Forms::template( 'formtemplate-contactform.nff', array(), TRUE );
+            Ninja_Forms()->form()->import_form( $form );
         }
 
     } // End Class Ninja_Forms
@@ -605,5 +605,4 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             $migrations->nuke(TRUE, TRUE);
         }
     }
-
 }
