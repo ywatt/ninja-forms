@@ -125,7 +125,7 @@ define( [
 						*/
 						var sortedArray = _.without( formContentLoadFilters, undefined );
 						var callback = _.first( sortedArray );
-						formContentData = callback( formContentData );
+						formContentData = callback( formContentData, nfRadio.channel( 'app' ).request( 'get:formModel' ), true );
 						
 						/*
 						 * Check our fieldContentViewsFilter to see if we have any defined.
