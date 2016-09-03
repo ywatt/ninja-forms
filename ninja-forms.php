@@ -315,6 +315,15 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
              */
             self::$instance->fields = apply_filters( 'ninja_forms_register_fields', self::load_classes( 'Fields' ) );
 
+            if( ! apply_filters( 'ninja_forms_enable_credit_card_fields', false ) ){
+                unset( self::$instance->fields[ 'creditcard' ] );
+                unset( self::$instance->fields[ 'creditcardcvc' ] );
+                unset( self::$instance->fields[ 'creditcardexpiration' ] );
+                unset( self::$instance->fields[ 'creditcardfullname' ] );
+                unset( self::$instance->fields[ 'creditcardnumber' ] );
+                unset( self::$instance->fields[ 'creditcardzip' ] );
+            }
+
             /*
              * Form Action Registration
              */
