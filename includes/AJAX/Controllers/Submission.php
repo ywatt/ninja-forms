@@ -271,7 +271,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     protected function maybe_halt( $action_id )
     {
-        if( $this->_data[ 'errors' ] ){
+        if( isset( $this->_data[ 'errors' ] ) && $this->_data[ 'errors' ] ){
             $this->_respond();
         }
 
