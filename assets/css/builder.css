@@ -204,7 +204,8 @@ Header and Nav for Ninja Forms App
 .nf-fields-empty {
   padding: 0 40px; }
   .nf-fields-empty h3 {
-    font-size: 30px; }
+    font-size: 30px;
+    line-height: 32px; }
   .nf-fields-empty p {
     font-size: 18px; }
   .nf-fields-empty a {
@@ -240,6 +241,12 @@ Header and Nav for Ninja Forms App
     box-shadow: 0 0 20px #1EA9EA;
     color: #1EA9EA;
     transition: all 0.2s ease-in-out 0.1s, box-shadow 0.2s ease-in-out 0.1s; }
+  .nf-drawer-opened .template-box {
+    width: 50%; }
+
+@media only screen and (max-width: 1400px) {
+  .nf-drawer-opened .template-box {
+    width: 100%; } }
 
 .nf-setting-wrap {
   cursor: pointer;
