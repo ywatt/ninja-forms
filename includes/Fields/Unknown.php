@@ -13,6 +13,8 @@ class NF_Fields_Unknown extends NF_Fields_Hidden
 
     protected $_icon = 'question';
 
+    protected $_templates = 'null';
+
     protected $_aliases = array();
 
     protected $_settings_only = array(
@@ -36,9 +38,6 @@ class NF_Fields_Unknown extends NF_Fields_Hidden
         $this->_settings[ 'label' ][ 'group' ] = '';
 
         unset( $this->_settings[ 'default' ] ); // TODO: Seeing an error when removing default form the $_settings_only property, so just unsetting it here for now.
-
-        add_filter( 'ninja_forms_display_type_exception', '__return_false' );
-        add_filter( 'ninja_forms_preview_display_type_exception', '__return_false' );
 
         add_filter( 'nf_sub_hidden_field_types', array( $this, 'hide_field_type' ) );
     }
