@@ -4,7 +4,7 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
 {
     public $parent_slug = 'ninja-forms';
 
-    public $page_title = 'Get Help';
+    public $menu_slug = 'system-status';
 
     public $priority = 12;
 
