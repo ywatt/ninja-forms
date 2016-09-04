@@ -56,6 +56,7 @@ class NF_Fields_Unknown extends NF_Fields_Hidden
             'id'      => $field->get_id(),
             'label'   => $field->get_setting( 'label' ),
             'order'   => $field->get_setting( 'order' ),
+            'key'     => $field->get_setting( 'key' ),
             'type'    => 'unknown',
             'message' => sprintf( __( 'Field type "%s" not found.', 'ninja-forms' ), $field->get_setting( 'type' ) )
         ));
