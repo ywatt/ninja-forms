@@ -88,7 +88,6 @@
     </div>
 </script>
 
-<<<<<<< HEAD
 <script id="tmpl-nf-main-header-fields" type="text/template">
     <input class="nf-button secondary nf-change-domain" data-domain="actions" type="button" value="Edit Emails and Actions" />
 </script>
@@ -98,9 +97,6 @@
 </script>
 
 <script id="tmpl-nf-main-header-settings" type="text/template">
-=======
-<script id="nf-tmpl-main-header-settings" type="text/template">
->>>>>>> master
 
 </script>
 
@@ -220,7 +216,7 @@
 </script>
 
 <script id="tmpl-nf-drawer-content-view-changes-item" type="text/template">
-    <# if ( ! disabled ) { #>
+    <# if ( ! data.disabled ) { #>
     <tr>
     <# } else { #>
     <tr class="disabled-row">
@@ -239,19 +235,13 @@
             {{{ data.label.change }}}
         </td>
         <td>
-<<<<<<< HEAD
-            <# if ( ! disabled ) { #>
-                <a href="#" title="Undo" class="undoSingle disabled" style="text-decoration:none;">
-            <# } #>
-=======
-            <% if ( ! disabled ) { %>
+            <# if ( ! data.disabled ) { #>
                 <a href="#" title="<?php _e( 'Undo', 'ninja-forms' ); ?>" class="undoSingle disabled" style="text-decoration:none;">
-            <% } %>
->>>>>>> master
+            <# } #>
 
             <span class="dashicons dashicons-image-rotate <# ( data.disabled ) ? 'disabled' : '' #>"></span>
 
-            <# if ( ! disabled ) { #>
+            <# if ( ! data.disabled ) { #>
                 </a>
             <# } #>
         </td>
@@ -328,15 +318,9 @@
     </section>
 </script>
 
-<<<<<<< HEAD
 <script id="tmpl-nf-drawer-action-type-button" type="text/template">
     <div class="nf-one-third nf-action-type-draggable" data-type="{{{ data.id }}}">
         <div class="{{{ data.renderClasses() }}}" {{{ data.renderStyle() }}}>{{{ data.nicename }}}</div>
-=======
-<script id="nf-tmpl-drawer-action-type-button" type="text/template">
-    <div class="nf-one-third nf-action-type-draggable" data-type="<%= id %>">
-        <div class="<%= renderClasses() %>" title="<%= nicename %>" <%= renderStyle() %>"><%= nicename %></div>
->>>>>>> master
     </div>
 </script>
 
