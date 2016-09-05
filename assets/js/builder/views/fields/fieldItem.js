@@ -9,14 +9,26 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 		},
 
 		initialize: function() {
-			this.listenTo( this.model, 'change:editActive', this.render, this );
-			this.listenTo( this.model, 'change:label', this.render, this );
-			this.listenTo( this.model, 'change:required', this.render, this );
-			this.listenTo( this.model, 'change:id', this.render, this );
+			this.model.on( 'change:editActive', this.render, this );
+			this.model.on( 'change:label', this.render, this );
+			this.model.on( 'change:required', this.render, this );
+			this.model.on( 'change:id', this.render, this );
+		},
+
+		onBeforeDestroy: function() {
+			this.model.off( 'change:editActive', this.render );
+			this.model.off( 'change:label', this.render );
+			this.model.off( 'change:required', this.render );
+			this.model.off( 'change:id', this.render );
 		},
 
 		onRender: function() {
+			this.$el = this.$el.children();
+			this.$el.unwrap();
+			this.setElement( this.$el );
+
 			this.itemControls.show( new itemControlsView( { model: this.model } ) );
+			jQuery( this.el ).disableSelection();
 
 			if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
 				jQuery( this.el ).on( 'taphold', function( e, touch ) {
