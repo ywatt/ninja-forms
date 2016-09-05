@@ -115,7 +115,7 @@
         <a href="?page=ninja-forms&form_id=formtemplate-quoterequest" class="nf-one-third template-box">
             <div class="template-box-inside">
                 <h4><?php _e( 'Quote Request', 'ninja-forms' ); ?></h4>
-                <p class="template-desc"><?php _e( 'Manage quote requests from your website easily with this remplate. You can add and remove fields as needed.', 'ninja-forms' ); ?></p>
+                <p class="template-desc"><?php _e( 'Manage quote requests from your website easily with this template. You can add and remove fields as needed.', 'ninja-forms' ); ?></p>
             </div>
         </a>
         <a href="?page=ninja-forms&form_id=formtemplate-eventregistration" class="nf-one-third template-box">
