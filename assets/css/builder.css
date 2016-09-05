@@ -7,6 +7,9 @@ html {
   float: left;
   left: 0; }
 
+#wp-auth-check-wrap #wp-auth-check {
+  z-index: 1000000000000; }
+
 .ninja-forms-app {
   height: 0; }
   .ninja-forms-app #adminmenumain,

@@ -408,9 +408,9 @@ final class NF_Display_Render
             wp_enqueue_script('nf-front-end--inputmask', $js_dir . 'front-end--inputmask.min.js', array('jquery'));
         }
 
-//        if( $is_preview || self::form_uses_rte( $form_id ) ) {
+        // if( $is_preview || self::form_uses_rte( $form_id ) ) {
             wp_enqueue_script('nf-front-end--rte', $js_dir . 'front-end--rte.min.js', array('jquery'));
-//        }
+        // }
 
         if( $is_preview || self::form_uses_helptext( $form_id ) ) {
             wp_enqueue_script('nf-front-end--helptext', $js_dir . 'front-end--helptext.min.js', array('jquery'));
