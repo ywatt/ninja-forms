@@ -279,7 +279,7 @@ define( [
 			 */
 			var formContentLoadFilters = nfRadio.channel( 'formContent' ).request( 'get:loadFilters' );
 			var sortedArray = _.without( formContentLoadFilters, undefined );
-			if ( 1 == sortedArray.length || 'undefined' == typeof formContentData || true === formContentData instanceof Backbone.Collection ) return fieldCollection;
+			if ( 1 <= sortedArray.length || 'undefined' == typeof formContentData || true === formContentData instanceof Backbone.Collection ) return fieldCollection;
 
 			/*
 			 * If another filter is registered, we are calling this from somewhere else.
