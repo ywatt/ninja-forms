@@ -105,6 +105,7 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			if ( renderTrigger ) {
 				nfRadio.channel( 'fields' ).trigger( 'render:newField', newModel );
 			}
+			nfRadio.channel( 'fields' ).trigger( 'after:addField', model );
 			
 			return model;
 		},
