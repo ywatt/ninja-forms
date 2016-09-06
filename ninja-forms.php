@@ -573,6 +573,8 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             $migrations = new NF_Database_Migrations();
             $migrations->migrate();
 
+            if( Ninja_Forms()->form()->get_forms() ) return;
+
             $form = Ninja_Forms::template( 'formtemplate-contactform.nff', array(), TRUE );
             Ninja_Forms()->form()->import_form( $form );
         }
