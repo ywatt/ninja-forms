@@ -239,7 +239,7 @@
                 <a href="#" title="<?php _e( 'Undo', 'ninja-forms' ); ?>" class="undoSingle disabled" style="text-decoration:none;">
             <# } #>
 
-            <span class="dashicons dashicons-image-rotate <# ( data.disabled ) ? 'disabled' : '' #>"></span>
+            <span class="dashicons dashicons-image-rotate {{{ ( data.disabled ) ? 'disabled' : '' }}}"></span>
 
             <# if ( ! data.disabled ) { #>
                 </a>
@@ -420,7 +420,7 @@
 
 <script id="tmpl-nf-edit-setting-number" type="text/template">
     <label for="{{{ data.name }}}">{{{ data.label }}} {{{ data.renderTooltip() }}}
-        <input type="number" class="setting" id="{{{ data.name }}}" value="{{{ data.value }}}" placeholder="<# ( 'undefined' != typeof data.placeholder ) ? data.placeholder : '' #>" />
+        <input type="number" class="setting" id="{{{ data.name }}}" value="{{{ data.value }}}" placeholder="{{{ ( 'undefined' != typeof data.placeholder ) ? data.placeholder : '' }}}" />
     </label>
 </script>
 
@@ -570,7 +570,7 @@
         if ( 'undefined' != typeof columns.selected ) {
             #>
             <div>
-                <input type="checkbox" class="setting" class="nf-checkbox" <# ( 1 == data.selected ) ? 'checked="checked"' : '' #> value="1" data-id="selected">
+                <input type="checkbox" class="setting" class="nf-checkbox" {{{ ( 1 == data.selected ) ? 'checked="checked"' : '' }}} value="1" data-id="selected">
             </div>
             <#
         }
