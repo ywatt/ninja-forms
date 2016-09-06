@@ -459,8 +459,8 @@
             <#
             _.each( data.options, function( option ) {
                 #>
-                <option value="{{{ option.value }}}" <# ( data.value == option.value ) ? 'selected="selected"' : '' #>>{{{ option.label }}}</option>
-                #>
+                <option value="{{{ option.value }}}" {{{ ( data.value == option.value ) ? 'selected="selected"' : '' }}}>{{{ option.label }}}</option>
+                <#
             } );
             #>
         </select>
