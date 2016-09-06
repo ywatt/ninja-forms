@@ -468,14 +468,14 @@
     </label>
 </script>
 
-<script id="nf-tmpl-edit-setting-field-list" type="text/template">
+<script id="tmpl-nf-edit-setting-field-list" type="text/template">
     <fieldset>
-        <legend><%= label %></legend>
+        <legend> {{{ data.label }}} </legend>
         <span class="nf-field-sub-settings"></span>
     </fieldset>
 </script>
 
-<script id="nf-tmpl-edit-setting-checkbox" type="text/template">
+<script id="tmpl-nf-edit-setting-checkbox" type="text/template">
 
     <span class="nf-setting-label">{{{ data.label }}}</span> {{{ data.renderTooltip() }}}
     <input type="checkbox" id="{{{ data.name }}}" class="nf-checkbox setting" {{{ ( 1 == data.value ) ? 'checked' : '' }}} />
