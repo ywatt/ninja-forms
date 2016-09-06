@@ -121,7 +121,7 @@ class NF_THREE_Submenu
 
         foreach( $fields as $field ){
             if( '_calc' == $field[ 'type' ] ){
-                $can_upgrade = FALSE;
+                // $can_upgrade = FALSE;
             }
         }
 
