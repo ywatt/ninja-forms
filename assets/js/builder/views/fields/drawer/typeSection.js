@@ -98,12 +98,12 @@ define( [], function() {
 			            var nicename = type.get( 'nicename' );
 			            var icon = type.get( 'icon' );
 			            var renderType = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-drawer-field-type-button' );
-			            html += renderType( { id: id, nicename: nicename, icon: icon, type: type, savedField: that.isSavedField } );
+			            html += renderType( { id: id, nicename: nicename, icon: icon, type: type, savedField: that.savedField } );
 			        } );
 			        return html;
 				},
 
-				isSavedField: function() {
+				savedField: function() {
 					if( this.type.get( 'savedField' ) ) {
 						return 'nf-saved';
 					} else {
