@@ -14,7 +14,7 @@
         <li>
             <p>
                 <span class="dashicons dashicons-welcome-widgets-menus"></span><strong>This is completely new form building experience</strong>
-                <br />The Ninja Forms 3.0 form builder looks nothing like what your used to currenly. We've spent considerable resources to improve this over all experience, but we want you ro be prepared for the difference.
+                <br />The Ninja Forms 3.0 form builder looks nothing like what you're used to currenly. We've spent considerable resources to improve this over all experience, but we want you to be prepared for the difference.
             </p>
         </li>
         <li>
