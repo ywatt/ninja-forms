@@ -16,6 +16,8 @@ define( ['views/fields/drawer/stagedField', 'views/fields/drawer/stagingEmpty'],
 			jQuery( this.$el ).find( 'span:first' ).unwrap();
 			this.setElement( this.$el );
 
+			jQuery( this.el ).addClass( 'nf-staged-fields-active' );
+
 			var that = this;
 
 			jQuery( this.el ).sortable( {
