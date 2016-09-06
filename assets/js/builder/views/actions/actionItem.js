@@ -81,6 +81,8 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 
 				renderTypeNicename: function() {
 					var type = nfRadio.channel( 'actions' ).request( 'get:type', this.type );
+					if ( 'undefined' == typeof type ) return;
+			
 					return type.get( 'nicename' );
 				},
 
