@@ -51,7 +51,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         /**
          * @since 3.0
          */
-        const VERSION = '3.0';
+        const VERSION = '3.0.0';
 
         /**
          * @var Ninja_Forms
