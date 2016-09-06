@@ -538,7 +538,7 @@
         <span class="dashicons dashicons-menu handle"></span>
     </div>
     <#
-        var columns = getColumns();
+        var columns = data.getColumns();
 
         if ( 'undefined' != typeof columns.label ) {
         #>
