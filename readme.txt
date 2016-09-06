@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, wpnzach, kbjohnson90, aman086, da
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.3
 Tested up to: 4.6
-Stable tag: 2.9.58
+Stable tag: 3.0
 License: GPLv2 or later
 
 Create forms and manage submissions easily with a simple drag and drop interface. Contact forms, subscription forms, or any other form for WordPress.
@@ -97,14 +97,19 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9.58 (30 August 2016) =
+= 3.0 (6 September 2016) =
 
-*Bugs:*
+*Changes:*
 
-* [THREE Only] Fixed a bug with the add field event in the builder.
-* [THREE Only] Fixed a bug with adding credit card fields in the builder.
+* Release of Ninja Forms THREE
 
 == Changelog ==
+
+= 3.0 (6 September 2016) =
+
+*Changes:*
+
+* Release of Ninja Forms THREE
 
 = 2.9.58 (30 August 2016) =
 
