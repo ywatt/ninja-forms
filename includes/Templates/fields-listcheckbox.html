@@ -13,8 +13,8 @@
 </script>
 
 <script id='tmpl-nf-field-listcheckbox-other' type='text/template'>
-    <li <# ( ! data.visible ) ? 'style="display:none"' : '' #>>
-        <input type="checkbox" name="nf-field-{{{ data.fieldID }}}" class="{{{ data.classes }}} nf-element" value="nf-other" <# ( ! data.valueFound ) ? 'checked="checked"' : '' #>>
+    <li {{{ ( ! data.visible ) ? 'style="display:none"' : '' }}}>
+        <input type="checkbox" name="nf-field-{{{ data.fieldID }}}" class="{{{ data.classes }}} nf-element" value="nf-other" {{{ ( ! data.valueFound ) ? 'checked="checked"' : '' }}}>
          <label>Other
             {{{ data.renderOtherText() }}}
         </label>

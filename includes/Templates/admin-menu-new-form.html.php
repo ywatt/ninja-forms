@@ -223,7 +223,7 @@
     <# } #>
 
         <td>
-            <span class="dashicons dashicons-{{{ data.label.dashicon }}}"></span> <span class="nf-changes-item <# ( data.disabled ) ? 'disabled' : '' #>"></span>
+            <span class="dashicons dashicons-{{{ data.label.dashicon }}}"></span> <span class="nf-changes-item {{{ ( data.disabled ) ? 'disabled' : '' }}}"></span>
         </td>
         <td>
             {{{ data.label.object }}}
