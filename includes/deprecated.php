@@ -15,7 +15,8 @@ function ninja_forms_display_form( $form_id = '' ){
  * Included for backwards compatibility with Visual Composer.
  */
 function ninja_forms_get_all_forms(){
-    return Ninja_Forms()->form()->get_forms();
+    Ninja_Forms::deprecated_notice( 'ninja_forms_get_all_forms', '3.0', 'Ninja_Forms()->form()->get_forms()', debug_backtrace() );
+    return array();
 }
 
 /*
