@@ -8,7 +8,7 @@ define( [], function( ) {
 			return {
 
 				renderFieldsMarkedRequired: function() {
-					var requiredFields = _.filter( this.fields.models, function( field ) { return field.get( 'required' ) } );
+					var requiredFields = this.fields.filter( { required: 1 } );
 					return ( requiredFields.length ) ? nfi18n.fieldsMarkedRequired : '';
 				},
 			};
