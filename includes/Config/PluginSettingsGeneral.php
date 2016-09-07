@@ -30,16 +30,15 @@ return apply_filters( 'ninja_forms_plugin_settings_general', array(
 
     /*
     |--------------------------------------------------------------------------
-    | Currency
+    | Currency Symbol
     |--------------------------------------------------------------------------
     */
 
-    'currency' => array(
-        'id'      => 'currency',
-        'type'    => 'select',
-        'options' => Ninja_Forms::config( 'Currency' ),
-        'label'   => __( 'Currency', 'ninja-forms' ),
-        'value'   => 'USD'
+    'currency_symbol' => array(
+        'id'    => 'currency_symbol',
+        'type'  => 'textbox',
+        'label' => __( 'Currency Symbol', 'ninja-forms' ),
+        'desc'  => 'e.g. $, &pound;, &euro;'
     ),
 
 ));

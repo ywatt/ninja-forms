@@ -58,7 +58,6 @@ define( [], function() {
 		},
 
 		templateHelpers: function () {
-			var that = this;
 	    	return {
 
 				renderElement: function(){
@@ -186,11 +185,6 @@ define( [], function() {
 					} else {
 						return '';
 					}
-				},
-
-				currencySymbol: function() {
-					var form = nfRadio.channel( 'app' ).request( 'get:form', that.model.get( 'formID' ) );
-					return form.get( 'settings' ).currency_symbol;
 				}
 			};
 		},
