@@ -892,8 +892,25 @@ function ninja_forms_three_addons_version_check(){
 }
 
 function ninja_forms_three_addons_check(){
-    // Public release, add-ons not required for upgrade.
-    return true;
+    $items = file_get_contents( dirname( __FILE__ ) . '/addons-feed.json' );
+    $items = json_decode($items, true);
+
+    $has_addons = FALSE;
+    if( is_array( $items ) ) {
+        foreach ($items as $item) {
+            if (empty($item['plugin'])) continue;
+            if (!file_exists(WP_PLUGIN_DIR . '/' . $item['plugin'])) continue;
+            $has_addons = TRUE;
+            $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $item['plugin'], false, true);
+            if (!$plugin_data['Version']) continue;
+            if (version_compare($plugin_data['Version'], '3', '>=')) continue;
+            /*
+             * There are non-compatible add-ons installed.
+             */
+            return FALSE;
+        }
+    }
+    return $has_addons;
 }
 
 /*
