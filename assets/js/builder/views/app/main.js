@@ -19,6 +19,9 @@ define( [], function() {
 		className: 'nf-main-test',
 		maybeDone: false,
 
+		offsetRight: false,
+		offsetLeft: false,
+
 		regions: {
 			gutterLeft: '#nf-main-gutter-left',
 			body: '#nf-main-body',
@@ -110,6 +113,7 @@ define( [], function() {
 
 		setBothGuttersFixed: function( context ) {
 			context = context || this;
+
 			var offsetLeft = jQuery( context.gutterLeft.el ).offset();
 			var topLeft = offsetLeft.top;
 			var leftLeft = offsetLeft.left;
@@ -125,8 +129,14 @@ define( [], function() {
 
 		setBothGuttersAbsolute: function( context ) {
 			context = context || this;
-			jQuery( context.gutterLeft.el ).css( { position: 'absolute', left: 0, top: 0 } );
-			jQuery( context.gutterRight.el ).css( { position: 'absolute', top: 0, right: 0, left: 'auto' } );
+
+			var offsetLeft = jQuery( context.gutterLeft.el ).offset();
+			var offsetRight = jQuery( context.gutterRight.el ).offset();
+
+			var scrollTop = jQuery( '#nf-main' ).scrollTop();
+
+			jQuery( context.gutterLeft.el ).css( { position: 'absolute', left: 0, top: scrollTop } );
+			jQuery( context.gutterRight.el ).css( { position: 'absolute', top: scrollTop, right: 0, left: 'auto' } );
 		},
 
 		updateGutters: function() {
