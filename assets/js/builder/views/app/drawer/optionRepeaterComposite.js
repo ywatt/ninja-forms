@@ -135,6 +135,10 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 
 				renderFieldsetClasses: function() {
 					return that.model.get( 'name' );
+				},
+
+				currencySymbol: function() {
+					return nfRadio.channel( 'settings' ).request( 'get:setting', 'currency' ) || nfi18n.currency_symbol;
 				}
 			};
 		},
