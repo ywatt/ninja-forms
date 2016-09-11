@@ -257,3 +257,16 @@ function _nf_removed_hooks() {
     }
 }
 
+/**
+ * Checks whether function is disabled.
+ *
+ * @since 2.7
+ *
+ * @param string  $function Name of the function.
+ * @return bool Whether or not function is disabled.
+ */
+function nf_is_func_disabled( $function ) {
+    $disabled = explode( ',',  ini_get( 'disable_functions' ) );
+
+    return in_array( $function, $disabled );
+}
