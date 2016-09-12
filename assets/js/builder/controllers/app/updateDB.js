@@ -124,16 +124,35 @@ define( [], function() {
 				// We dont' want to update id or parent_id
 				delete field.id;
 				delete field.parent_id;
+
+				// TODO: These should probably be chained.
+				var fieldType              = _.findWhere( fieldTypeData, { id: field.type } );
+				var fieldTypeSettingGroups = _.pluck( fieldType.settingGroups, 'settings' );
+				var fieldTypeSettings      = _.flatten( fieldTypeSettingGroups );
+				var fieldTypeSettingNames  = [ 'type' ];
+
+				_.each( fieldTypeSettings, function extractFieldSettings( setting ) {
+					if( 'fieldset' == setting.type ){
+						_.each( setting.settings, extractFieldSettings );
+					} else {
+						fieldTypeSettingNames.push(setting.name);
+					}
+				});
+
 				var settings = {};
 				// Loop through all the attributes of our fields
 				for (var prop in field) {
 				    if ( field.hasOwnProperty( prop ) ) {
-				    	// Set our settings.prop value.
-				        settings[ prop ] = field[ prop ];
+				    	if( _.contains( fieldTypeSettingNames, prop ) ){
+							// Set our settings.prop value.
+							settings[ prop ] = field[ prop ];
+						}
 				        // Delete the property from the field.
 				        delete field[ prop ];
 				    }
 				}
+
+
 				// Update our field object.
 				field.settings = settings;
 				field.id = id;
