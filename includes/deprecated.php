@@ -155,6 +155,10 @@ function ninja_forms_addslashes_deep( $value ){
     return WPN_Helper::addslashes( $value );
 }
 
+function utf8_encode_recursive( $input ){
+    Ninja_Forms::deprecated_notice( 'utf8_encode_recursive', '3.0', 'WPN_Helper::utf8_encode()', debug_backtrace() );
+    return WPN_Helper::utf8_encode( $input );
+}
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
