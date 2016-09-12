@@ -143,6 +143,13 @@ function ninja_forms_update_field( $args ){
     $field->save();
 }
 
+function ninja_forms_delete_field( $field_id ){
+    Ninja_Forms::deprecated_notice( 'ninja_forms_delete_field', '3.0', '$field->delete()', debug_backtrace() );
+
+    $field = Ninja_Forms()->form()->get_field( $field_id );
+    $field->delete();
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
