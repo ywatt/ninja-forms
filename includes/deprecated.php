@@ -206,6 +206,11 @@ function nf_wp_kses_post_deep( $value ){
     return WPN_Helper::kses_post( $value );
 }
 
+function ninja_forms_strip_tags_deep( $value ){
+    Ninja_Forms::deprecated_notice( 'ninja_forms_strip_tags_deep', '3.0', 'WPN_Helper::strip_tags()', debug_backtrace() );
+    return WPN_Helper::strip_tags( $value );
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
