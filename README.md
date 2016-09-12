@@ -31,7 +31,7 @@ Please feel free to visit our [demo site](http://demo.ninjaforms.com/) where you
 
 ## Extensions
 
-[We have over more integrations](https://ninjaforms.com/extensions/) than any other WordPress form builder, with more added regularly!
+[We have more integrations](https://ninjaforms.com/extensions/) than any other WordPress form builder, with more added regularly!
 
 * [PayPal Express](http://ninjaforms.com/downloads/paypal-express/) - Accept payments using PayPal Express and Ninja Forms!
 * [Front-End Editor](http://ninjaforms.com/downloads/front-end-editor/) - Give your users the ability to create, edit, or delete posts, pages, or any custom post type and allow your users to edit their Ninja Forms submissions all from the front-end. Also included is front-end profile editing, custom registration forms, login and password resetting, all without needing to see the default, WordPress branded login page.
