@@ -186,6 +186,11 @@ function ninja_forms_html_entity_decode_deep( $value, $flag = ENT_COMPAT ){
     return WPN_Helper::html_entity_decode( $value, $flag = ENT_COMPAT );
 }
 
+function ninja_forms_htmlspecialchars_deep( $value ){
+    Ninja_Forms::deprecated_notice( 'ninja_forms_htmlspecialchars_deep', '3.0', 'WPN_Helper::htmlspecialchars()', debug_backtrace() );
+    return WPN_Helper::htmlspecialchars( $value );
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
