@@ -20,6 +20,9 @@ jQuery(document).ready(function($) {
             legend: wp.template( 'legend' ),
         },
 
+        formCheckPointer: 0,
+        formConvertPointer: 0,
+
         updateTable: function(){
 
             var data = {
@@ -61,6 +64,12 @@ jQuery(document).ready(function($) {
             jQuery( this.container ).html( this.tmpl.table( data ) );
         },
 
+        checkForms: function() {
+            var form = this.forms[ this.formCheckPointer ] || null;
+            if( form ) this.checkForm( form );
+            this.formCheckPointer++;
+        },
+
         checkForm: function( form ) {
 
             var that = this;
@@ -73,6 +82,8 @@ jQuery(document).ready(function($) {
                 that.updateForm( form.id, 'checked', true );
                 that.updateForm( form.id, 'flagged', flagged );
                 that.updateTable();
+
+                that.checkForms();
             }, 'json' );
         },
 
@@ -94,7 +105,8 @@ jQuery(document).ready(function($) {
                     failed: false,
                 });
             }, this );
-            _.each( this.forms, this.checkForm, this );
+
+            this.checkForms();
             this.updateTable();
 
             var that = this;
@@ -112,9 +124,7 @@ jQuery(document).ready(function($) {
 
                 $.post( ajaxurl, { action: 'nfThreeUpgrade_GetSerializedFields' }, function( fieldsExport ) {
                     $.post(ajaxurl, { nf2to3: 1, fields: fieldsExport.serialized, action: 'ninja_forms_ajax_import_fields' }, function ( fieldsImport ) {
-                        _.each(app.forms, function (form) {
-                            this.convertForm(form);
-                        }, app );
+                        app.convertForms();
                     }, 'json' );
                 }, 'json' );
             });
@@ -126,8 +136,16 @@ jQuery(document).ready(function($) {
         },
 
 
+        convertForms: function() {
+            var form = this.forms[ this.formConvertPointer ] || null;
+            if( form ) this.convertForm( form );
+            this.formConvertPointer++;
+        },
+
         convertForm: function( form ) {
             var app =  this;
+            console.log( 'Converting...' );
+            console.log( form );
             $.post(ajaxurl, {action: 'nfThreeUpgrade_GetSerializedForm', formID: form.id}, function ( formExport ) {
                 $.post(ajaxurl, { nf2to3: 1, action: 'ninja_forms_ajax_import_form', formID: form.id, import: formExport.serialized, flagged: form.flagged }, function ( formImport ) {
                     form.converted = true;
@@ -138,6 +156,8 @@ jQuery(document).ready(function($) {
                     form.failed = true;
                     form.icon = 'no';
                     app.updateTable();
+                }).always( function() {
+                    app.convertForms();
                 });
 
             }, 'json' );
