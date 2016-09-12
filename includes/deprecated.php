@@ -28,18 +28,15 @@ function ninja_forms_get_all_forms(){
 function ninja_forms_insert_field( $form_id, $args = array() ){
     Ninja_Forms::deprecated_notice( 'ninja_forms_insert_field', '3.0', 'Ninja_Forms()->form()->field()->get()', debug_backtrace() );
 
+    $form_shell = Ninja_Forms()->form()->get();
+
+    $args[ 'type' ]  = ( isset( $args[ 'type' ] ) ) ? $args[ 'type' ] : 'unknown';
+    $args[ 'order' ] = ( isset( $args[ 'order' ] ) ) ? $args[ 'order' ] : 999;
+    $settings = $form_shell->import_field_backwards_compatibility( $args );
+
     $field = Ninja_Forms()->form( $form_id )->field()->get();
 
-    if( isset( $args[ 'data' ] ) ){
-        $field->update_settings( $args[ 'data' ] );
-    }
-
-    $type = ( isset( $args[ 'type' ] ) ) ? $args[ 'type' ] : 'unknown';
-    $field->update_setting( 'type', $type );
-
-    $order = ( isset( $args[ 'order' ] ) ) ? $args[ 'order' ] : 999;
-    $field->update_setting( 'order', $order );
-
+    $field->update_settings( $settings );
     $field->save();
 
     return $field->get_id();
