@@ -159,6 +159,12 @@ function utf8_encode_recursive( $input ){
     Ninja_Forms::deprecated_notice( 'utf8_encode_recursive', '3.0', 'WPN_Helper::utf8_encode()', debug_backtrace() );
     return WPN_Helper::utf8_encode( $input );
 }
+
+function ninja_forms_str_replace_deep( $search, $replace, $subject ){
+    Ninja_Forms::deprecated_notice( 'ninja_forms_str_replace_deep', '3.0', 'WPN_Helper::str_replace()', debug_backtrace() );
+    return WPN_Helper::str_replace(  $search, $replace, $subject  );
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
