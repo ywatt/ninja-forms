@@ -78,6 +78,28 @@ function ninja_forms_get_field_by_id( $field_id ){
     );
 }
 
+function ninja_forms_get_fields_by_form_id( $form_id, $orderby = false ){
+    Ninja_Forms::deprecated_notice( 'ninja_forms_get_fields_by_form_id', '3.0', 'Ninja_Forms()->form( $form_id )->get_fields()', debug_backtrace() );
+
+    $fields = Ninja_Forms()->form( $form_id )->get_fields();
+
+    $return = array();
+
+    foreach( $fields as $field ){
+        $return[] = array(
+            'id'      => $field->get_id(),
+            'form_id' => $field->get_setting( 'parent_id' ),
+            'type'    => $field->get_setting( 'type' ),
+            'order'   => $field->get_setting( 'order' ),
+            'data'    => $field->get_settings(),
+            'fav_id'  => null,
+            'def_id'  => null
+        );
+    }
+
+    return $return;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
