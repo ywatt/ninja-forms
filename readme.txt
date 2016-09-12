@@ -13,10 +13,11 @@ Ninja Forms is the easiest way to build any form you need for your WordPress web
 
 **Features of Ninja Forms include, but are not limited to:**
 
-* Over a dozen types of fields you can add to your form.
+* A gorgeous and intuitove from builder user interface.
+* Over two dozen types of fields you can add to your form.
 * Absolutely no limitations to the number of forms, fields, emails, actions, or submissions.
 * Custom input masks allow you to restrict user input in your forms for things like phone numbers, currency, and dates.
-* Manage, Edit, and Export form user submissions.
+* Manage, Edit, and Export user submissions.
 * Save fields as favorites and re-use them in multiple forms.
 * Export and Import forms and favorite fields.
 * Set required fields.
@@ -29,8 +30,6 @@ Ninja Forms is the easiest way to build any form you need for your WordPress web
 * Please note that if you are using a version of PHP lower than 5.3, you may experience some problems using AJAX Submissions. These can be minimized by using simple success/error messages without any quotes or special characters.
 
 More information at [ninjaforms.com](https://ninjaforms.com/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Home+Page)
-
-[youtube https://www.youtube.com/watch?v=DFAz8kKVi08]
 
 = Ninja Forms also has a complete library of add-ons to take your forms to new heights: =
 
@@ -79,7 +78,11 @@ If you're a developer and would like to talk about creating some premium extensi
 
 == Screenshots ==
 
-To see up to date screenshots and documentation, visit [here](http://docs.ninjaforms.com/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Ninja+Forms+Docs).
+1. The most intuitive and beautiful form building experience
+2. Field Options
+3. Emails and Actions
+4. Advanced Settings
+5. Beatiful Forms Every Time!
 
 == Installation ==
 
@@ -93,7 +96,7 @@ Shortcodes have been re-implemented. They are used like so: [ninja_form id=3] wh
 
 == Use ==
 
-For help and video tutorials, please visit our website: [Ninja Forms Documentation](http://docs.ninjaforms.com/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Ninja+Forms+Docs)
+For help and video tutorials, please visit our website: [Ninja Forms Documentation](https://ninjaforms.com/documentation/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Ninja+Forms+Docs)
 
 == Upgrade Notice ==
 
@@ -356,7 +359,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Changes:*
 
-* Removed Freemius prompt for new users. We will re-enable when things are more stable with 3.0. 
+* Removed Freemius prompt for new users. We will re-enable when things are more stable with 3.0.
 
 = 2.9.35 (14 March 2016) =
 
@@ -368,13 +371,13 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Changes:*
 
-* Preparing for the release of 3.0. 
+* Preparing for the release of 3.0.
 
 = 2.9.33 (22 December 2015) =
 
 *Bugs:*
 
-* Our security filtering was still filtering out good code. We needed to back off the over-zealous filtering a bit more. 
+* Our security filtering was still filtering out good code. We needed to back off the over-zealous filtering a bit more.
 
 = 2.9.32 (21 December 2015) =
 
