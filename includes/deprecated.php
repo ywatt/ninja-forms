@@ -34,8 +34,16 @@ function ninja_forms_get_fields_by_form_id($form_id, $orderby = 'ORDER BY `order
  * Included for backwards compatibility with Visual Composer.
  */
 function ninja_forms_get_all_forms(){
-    Ninja_Forms::deprecated_notice( 'ninja_forms_get_all_forms', '3.0', 'Ninja_Forms()->form()->get_forms()', debug_backtrace() );
-    return array();
+//    Ninja_Forms::deprecated_notice( 'ninja_forms_get_all_forms', '3.0', 'Ninja_Forms()->form()->get_forms()', debug_backtrace() );
+    $forms = array();
+    foreach( Ninja_Forms()->form()->get_forms() as $form ){
+        $forms[] = array(
+            'id' => $form->get_id(),
+            'data' => $form->get_settings(),
+            'name' => $form->get_setting( 'title' )
+        );
+    }
+    return $forms;
 }
 
 function nf_is_func_disabled( $function ){
