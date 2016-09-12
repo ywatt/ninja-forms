@@ -6,27 +6,25 @@ Tested up to: 4.6
 Stable tag: 3.0.2
 License: GPLv2 or later
 
-Create forms and manage submissions easily with a simple drag and drop interface. Contact forms, subscription forms, or any other form for WordPress.
+With a simple drag and drop interface you can create contact forms, email subscription forms, order forms, payment forms, and any other type of form for your WordPress site.
 
 == Description ==
-Ninja Forms is the easiest way to build any form you need for your WordPress website. No longer mess with code or worry about made-up limitations. Create the form you want, when you want with a simple drag and drop interface provided by the very powerful Ninja Forms framework.
+Ninja Forms is the ultimate FREE form creation tool for WordPress. Build forms within minutes using a simple yet powerful drag-and-drop form creator. For beginners, quickly and easily design complex forms with absolutely no code. For developers, utilize built-in hooks, filters, and even custom field templates to do whatever you need at any step in the form building or submission using Ninja Forms as a framework.
 
 **Features of Ninja Forms include, but are not limited to:**
 
-* A gorgeous and intuitove from builder user interface.
-* Over two dozen types of fields you can add to your form.
-* Absolutely no limitations to the number of forms, fields, emails, actions, or submissions.
-* Custom input masks allow you to restrict user input in your forms for things like phone numbers, currency, and dates.
-* Manage, Edit, and Export user submissions.
-* Save fields as favorites and re-use them in multiple forms.
+* A gorgeous and intuitive user interface.
+* NO LIMITATIONS on the number of forms, fields, emails, actions, or submissions.
+* Dedicated, easy to use fields for emails, dates (w/ datepicker), phone numbers, addresses and more
+* Modify your own field then save them as favorites to re-use later (even in other forms!)
+* Force required fields and correct data formatting with custom input masks
+* Give your users a success message or redirect them elsewhere after they complete a form.
+* Manage, Edit, and Export form user submissions.
 * Export and Import forms and favorite fields.
-* Set required fields.
-* Add a datepicker to text fields.
-* Email form results to any number of pre-determined email addresses, as well as specific messages to the user filling out the form.
-* Customize form emails with the WordPress editor.
-* 4 Anti-Spam options.
-* Extremely developer friendly.
-* Submit your form by reloading the page or asynchronously with AJAX.
+* Email form data to administrators and/or users every time a form is processed.
+* Customize emails and add raw HTML(for photos, videos, and more) with the powerful Summernote HTML editor.
+* Several anti-spam options including Google reCaptcha, question/response fields, and honeypot fields
+* Form submission via AJAX, allowing a seamless user experience without page refreshes
 * Please note that if you are using a version of PHP lower than 5.3, you may experience some problems using AJAX Submissions. These can be minimized by using simple success/error messages without any quotes or special characters.
 
 More information at [ninjaforms.com](https://ninjaforms.com/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Home+Page)
@@ -39,11 +37,11 @@ More information at [ninjaforms.com](https://ninjaforms.com/?utm_medium=referral
 
 Beautiful forms convert better than crowded unorganized forms. While Ninja Forms looks great on any well styled theme and is easy to style further if your are comforatble with CSS, [Layout and Styles](https://ninjaforms.com/extensions/layout-styles/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Layout+and+Styles) makes it easy to create columns for your forms as well as style specific elements.
 
-**Build your mailing lists with ease**
+**Build your mailing list**
 
 Use the mailing list tool of your choice. [MailChimp](https://ninjaforms.com/extensions/mail-chimp/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=MailChimp), [Constant Contact](https://ninjaforms.com/extensions/constant-contact/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Constant+Contact), [Campaign Monitor](https://ninjaforms.com/extensions/campaign-monitor/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Campaign+Monitor), [Emma](hhttps://ninjaforms.com/extensions/emma/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Emma), [Aweber](https://ninjaforms.com/extensions/aweber/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Aweber), [MailPoet](https://ninjaforms.com/extensions/mailpoet/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=MailPoet), [iContact](https://ninjaforms.com/extensions/icontact/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=iContact), [GetResponse](https://ninjaforms.com/extensions/getresponse/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=GetResponse), [CleverReach](https://ninjaforms.com/extensions/cleverreach/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=CleverReach), [Sendy](https://ninjaforms.com/extensions/sendy/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Sendy), and [Mad Mimi](https://ninjaforms.com/extensions/mad-mimi/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Mad+Mimi) are all supported for your list building needs.
 
-**Easily collect payments**
+**Collect payments**
 
 Ninja Forms gives you the ability to collect payments through [PayPal Express](https://ninjaforms.com/extensions/paypal-express/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=PayPal+Express), [Stripe](https://ninjaforms.com/extensions/stripe/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Stripe), or [Elavon](https://ninjaforms.com/extensions/elavon/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Elavon). More payment gateways coming.
 
@@ -63,9 +61,9 @@ With over 40 add-ons available and new ones being added regularly, it’s likely
 
 = Become a Ninja Forms Member =
 
-Want access to everything we have and everything we release in the future? Want the ultimate form creation toolkit? That and so much more is exactly what we offer through our Developer Membership.
+Want access to everything we offer, or perhaps just our form building toolkit "Builder PRO"?
 
-[Find our more about the Ninja Forms Developer Membership here.](https://ninjaforms.com/extensions/ninja-forms-membership-bundle/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Developer+Membership)
+[Find our more about our Ninja Forms Memberships here.](https://ninjaforms.com/pricing/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Developer+Membership)
 
 = Demo Site =
 Please feel free to visit our [demo site](http://demo.ninjaforms.com?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme) where you can test the features of Ninja Forms and all of our extensions.
@@ -74,7 +72,7 @@ Please feel free to visit our [demo site](http://demo.ninjaforms.com?utm_medium=
 
 The Ninja Forms framework is on [GitHub](https://github.com/wpninjas/ninja-forms)! If you're a developer and want to help make Ninja Forms better, check it out. It's also a great resource for developers who are interested in creating add-ons for our online store.
 
-If you're a developer and would like to talk about creating some premium extensions for Ninja Forms, here is everything you need to know.
+If you're a developer and would like to talk about creating some premium extensions for Ninja Forms, send us an email: info@wpninjas.com.
 
 == Screenshots ==
 
@@ -92,7 +90,7 @@ This section describes how to install the plugin and get it working.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Visit the 'Forms' menu item in your admin sidebar
 
-Shortcodes have been re-implemented. They are used like so: [ninja_form id=3] where 3 is the ID number of the form you want to display.
+Shortcodes have been re-implemented. They are used like so: [ninja_form id=#] where # is the ID number of the form you want to display.
 
 == Use ==
 
