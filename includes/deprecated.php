@@ -154,6 +154,25 @@ function nf_get_fields_by_form_id( $form_id, $orderby = false ){
     return ninja_forms_get_fields_by_form_id( $form_id );
 }
 
+function nf_get_sub_count( $form_id, $post_status = 'publish' ) {
+    global $wpdb;
+
+    $meta_key = '_form_id';
+    $meta_value = $form_id;
+
+    $sql = "SELECT count(DISTINCT pm.post_id)
+	FROM $wpdb->postmeta pm
+	JOIN $wpdb->posts p ON (p.ID = pm.post_id)
+	WHERE pm.meta_key = %s
+	AND pm.meta_value = %s
+	AND p.post_type = 'nf_sub'
+	AND p.post_status = %s";
+
+    $count = $wpdb->get_var( $wpdb->prepare( $sql, $meta_key, $meta_value, $post_status ) );
+
+    return $count;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Helper Functions
