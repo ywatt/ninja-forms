@@ -412,6 +412,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
             unset( $field[ 'default_value' ] );
             unset( $field[ 'default_value_type' ] );
+        } else if ( isset ( $field[ 'default_value' ] ) ) {
+            $field[ 'default' ] = $field[ 'default_value' ];
         }
 
         if( 'list' == $field[ 'type' ] ) {
