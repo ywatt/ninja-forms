@@ -150,6 +150,11 @@ function ninja_forms_delete_field( $field_id ){
     $field->delete();
 }
 
+function ninja_forms_addslashes_deep( $value ){
+    Ninja_Forms::deprecated_notice( 'ninja_forms_addslashes_deep', '3.0', 'WPN_Helper::addslashes()', debug_backtrace() );
+    return WPN_Helper::addslashes( $value );
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
