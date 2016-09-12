@@ -201,6 +201,11 @@ function ninja_forms_esc_html_deep( $value ){
     return WPN_Helper::esc_html( $value );
 }
 
+function nf_wp_kses_post_deep( $value ){
+    Ninja_Forms::deprecated_notice( 'nf_wp_kses_post_deep', '3.0', 'WPN_Helper::kses_post()', debug_backtrace() );
+    return WPN_Helper::kses_post( $value );
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
