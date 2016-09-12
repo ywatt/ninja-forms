@@ -19,6 +19,11 @@ function ninja_forms_get_all_forms(){
     return array();
 }
 
+function nf_is_func_disabled( $function ){
+    Ninja_Forms::deprecated_notice( 'nf_is_func_disabled', '3.0', 'WPN_Helper::is_func_disabled()', debug_backtrace() );
+    return WPN_Helper::is_func_disabled( $function );
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
