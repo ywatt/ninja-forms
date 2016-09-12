@@ -19,6 +19,25 @@ function ninja_forms_get_all_forms(){
     return array();
 }
 
+function ninja_forms_insert_field( $form_id, $args = array() ){
+
+    $field = Ninja_Forms()->form( $form_id )->field()->get();
+
+    if( isset( $args[ 'data' ] ) ){
+        $field->update_settings( $args[ 'data' ] );
+    }
+
+    $type = ( isset( $args[ 'type' ] ) ) ? $args[ 'type' ] : 'unknown';
+    $field->update_setting( 'type', $type );
+
+    $order = ( isset( $args[ 'order' ] ) ) ? $args[ 'order' ] : 999;
+    $field->update_setting( 'order', $order );
+
+    $field->save();
+
+    return $field->get_id();
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
