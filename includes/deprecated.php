@@ -32,6 +32,7 @@ function ninja_forms_insert_field( $form_id, $args = array() ){
 
     $args[ 'type' ]  = ( isset( $args[ 'type' ] ) ) ? $args[ 'type' ] : 'unknown';
     $args[ 'order' ] = ( isset( $args[ 'order' ] ) ) ? $args[ 'order' ] : 999;
+    $args[ 'data' ]  = maybe_unserialize( $args[ 'data' ] );
     $settings = $form_shell->import_field_backwards_compatibility( $args );
 
     $field = Ninja_Forms()->form( $form_id )->field()->get();
