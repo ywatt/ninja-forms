@@ -433,7 +433,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             }
 
             if( isset( $field[ 'list' ][ 'options' ] ) ) {
-                $field[ 'options' ] = $field[ 'list' ][ 'options' ];
+                $field[ 'options' ] = array_values( $field[ 'list' ][ 'options' ] );
                 unset( $field[ 'list' ][ 'options' ] );
             }
 
