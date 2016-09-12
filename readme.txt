@@ -6,7 +6,7 @@ Tested up to: 4.6
 Stable tag: 3.0.2
 License: GPLv2 or later
 
-With a simple drag and drop interface you can create contact forms, email subscription forms, order forms, payment forms, and any other type of form for your WordPress site.
+Drag and drop fields in an intuitive UI to create create contact forms, email subscription forms, order forms, payment forms, send emails and more!
 
 == Description ==
 Ninja Forms is the ultimate FREE form creation tool for WordPress. Build forms within minutes using a simple yet powerful drag-and-drop form creator. For beginners, quickly and easily design complex forms with absolutely no code. For developers, utilize built-in hooks, filters, and even custom field templates to do whatever you need at any step in the form building or submission using Ninja Forms as a framework.
@@ -81,6 +81,10 @@ If you're a developer and would like to talk about creating some premium extensi
 3. Emails and Actions
 4. Advanced Settings
 5. Beatiful Forms Every Time!
+
+== Frequently Asked Questions ==
+
+[Our documentation can be found here.](https://ninjaforms.com/documentation/)
 
 == Installation ==
 
