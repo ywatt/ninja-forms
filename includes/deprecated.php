@@ -122,6 +122,27 @@ function ninja_forms_get_all_fields(){
     return $return;
 }
 
+function ninja_forms_update_field( $args ){
+    Ninja_Forms::deprecated_notice( 'ninja_forms_update_field', '3.0', '$field->update_settings( $args )', debug_backtrace() );
+
+    $update_array = $args[ 'update_array' ];
+
+    if( isset( $update_array[ 'data' ] ) ){
+        $data = $update_array[ 'data' ];
+        unset( $update_array[ 'data' ] );
+        $update_array = array_merge( $data, $update_array );
+    }
+
+    if( ! isset( $args[ 'where' ][ 'id' ] ) ) return;
+
+    $field = Ninja_Forms()->form()->get_field( $args[ 'where' ][ 'id' ] );
+
+    if( ! $field->get_setting( 'parent_id' ) ) return;
+
+    $field->update_settings( $update_array );
+    $field->save();
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
