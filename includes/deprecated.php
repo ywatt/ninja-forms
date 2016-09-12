@@ -6,16 +6,16 @@
 |--------------------------------------------------------------------------
 */
 
-/*
-|--------------------------------------------------------------------------
-| Deprecated Functions
-|--------------------------------------------------------------------------
-*/
-
 function ninja_forms_display_form( $form_id = '' ){
     Ninja_Forms::deprecated_notice( 'ninja_forms_display_form', '3.0', 'Ninja_Forms()->display( $form_id, $is_preview )', debug_backtrace() );
     Ninja_Forms()->display( $form_id );
 }
+
+/*
+|--------------------------------------------------------------------------
+| Deprecated API Functions
+|--------------------------------------------------------------------------
+*/
 
 /**
  * Included for backwards compatibility with Visual Composer.
@@ -149,6 +149,16 @@ function ninja_forms_delete_field( $field_id ){
     $field = Ninja_Forms()->form()->get_field( $field_id );
     $field->delete();
 }
+
+function nf_get_fields_by_form_id( $form_id, $orderby = false ){
+    return ninja_forms_get_fields_by_form_id( $form_id );
+}
+
+/*
+|--------------------------------------------------------------------------
+| Deprecated Helper Functions
+|--------------------------------------------------------------------------
+*/
 
 function ninja_forms_addslashes_deep( $value ){
     Ninja_Forms::deprecated_notice( 'ninja_forms_addslashes_deep', '3.0', 'WPN_Helper::addslashes()', debug_backtrace() );
