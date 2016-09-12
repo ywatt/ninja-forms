@@ -191,6 +191,11 @@ function ninja_forms_htmlspecialchars_deep( $value ){
     return WPN_Helper::htmlspecialchars( $value );
 }
 
+function ninja_forms_stripslashes_deep( $value ){
+    Ninja_Forms::deprecated_notice( 'ninja_forms_stripslashes_deep', '3.0', 'WPN_Helper::stripslashes()', debug_backtrace() );
+    return WPN_Helper::stripslashes( $value );
+}
+
 /*
 |--------------------------------------------------------------------------
 | Deprecated Hooks
