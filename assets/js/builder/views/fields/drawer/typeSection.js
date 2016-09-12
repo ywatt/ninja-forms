@@ -1,7 +1,7 @@
 define( [], function() {
 	var view = Marionette.ItemView.extend({
 		tagName: 'div',
-		template: '#nf-tmpl-drawer-field-type-section',
+		template: '#tmpl-nf-drawer-field-type-section',
 
 		initialize: function() {
 			_.bindAll( this, 'render' );
@@ -97,13 +97,13 @@ define( [], function() {
 			            var type = nfRadio.channel( 'fields' ).request( 'get:type', id );
 			            var nicename = type.get( 'nicename' );
 			            var icon = type.get( 'icon' );
-			            var renderType = Marionette.TemplateCache.get( '#nf-tmpl-drawer-field-type-button' );
-			            html += renderType( { id: id, nicename: nicename, icon: icon, type: type, savedField: that.isSavedField } );
+			            var renderType = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-drawer-field-type-button' );
+			            html += renderType( { id: id, nicename: nicename, icon: icon, type: type, savedField: that.savedField } );
 			        } );
 			        return html;
 				},
 
-				isSavedField: function() {
+				savedField: function() {
 					if( this.type.get( 'savedField' ) ) {
 						return 'nf-saved';
 					} else {

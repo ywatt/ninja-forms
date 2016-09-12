@@ -2,7 +2,7 @@ define( ['views/fieldItem', 'views/beforeField', 'views/afterField'], function( 
 
     var view = Marionette.LayoutView.extend({
         tagName: "nf-field",
-        template: "#nf-tmpl-field-layout",
+        template: "#tmpl-nf-field-layout",
 
         regions: {
             beforeField: ".nf-before-field",
@@ -11,13 +11,7 @@ define( ['views/fieldItem', 'views/beforeField', 'views/afterField'], function( 
         },
 
         initialize: function() {
-            this.model.on( 'change:visible', this.render, this );
-        },
-
-        onShow: function() {
-            // this.beforeField.show( new beforeField( { model: this.model } ) );
-            // this.field.show( new fieldItem( { model: this.model } ) );
-            // this.afterField.show( new afterField( { model: this.model } ) );
+            this.listenTo( this.model, 'change:visible', this.render, this );
         },
 
         onRender: function() {

@@ -34,6 +34,7 @@ define( [
 			nfRadio.channel( 'fields' ).reply( 'get:typeCollection', this.getTypeCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:typeSections', this.getTypeSections, this );
 			nfRadio.channel( 'fields' ).reply( 'get:savedFields', this.getSavedFields, this );
+
 			// Listen to clicks on field types
 			this.listenTo( nfRadio.channel( 'drawer' ), 'click:fieldType', this.addField );
 		},
@@ -120,6 +121,7 @@ define( [
          * @return backbone.collection
          */
         getSavedFields: function() {
+        	console.log( this.sections.get( 'saved' ) );
         	this.sections.get( 'saved' );
         }
 	});

@@ -36,19 +36,32 @@ define([], function() {
 					 * We don't have a selected value, so use our first option.
 					 */
 					if ( 'undefined' == typeof selected ) {
-						selected = model.get( 'options' )[0];
+						selected = _.first( model.get( 'options' ) );
 					}
-					var value = selected.value;
+
+					if ( 'undefined' != typeof selected && 'undefined' != typeof selected.value ) {
+						var value = selected.value;
+					} else if ( 'undefined' != typeof selected ) {
+						var value = selected.label;
+					}	
 				}
 
-				model.set( 'value', value );
+				if ( 'undefined' != typeof selected ) {
+					model.set( 'value', value );
+				}
 			}
 		},
 
 		renderOptions: function() {
 			var html = '';
 			_.each( this.options, function( option ) {
-				if ( 1 == option.selected ) {
+				
+
+				if ( ( 1 == option.selected && this.clean ) ) {
+					var selected = true;
+				} else if ( _.isArray( this.value ) && -1 != _.indexOf( this.value, option.value ) ) {
+					var selected = true;
+				} else if ( ! _.isArray( this.value ) && option.value == this.value ) {
 					var selected = true;
 				} else {
 					var selected = false;
@@ -67,7 +80,7 @@ define([], function() {
 				option.classes = this.classes;
 				option.currentValue = this.value;
 
-				var template = Marionette.TemplateCache.get( '#nf-tmpl-field-listselect-option' );
+				var template = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-field-listselect-option' );
 				html += template( option );
 			}, this );
 
