@@ -6,6 +6,12 @@
 |--------------------------------------------------------------------------
 */
 
+/*
+|--------------------------------------------------------------------------
+| Deprecated Functions
+|--------------------------------------------------------------------------
+*/
+
 function ninja_forms_display_form( $form_id = '' ){
     Ninja_Forms::deprecated_notice( 'ninja_forms_display_form', '3.0', 'Ninja_Forms()->display( $form_id, $is_preview )', debug_backtrace() );
     Ninja_Forms()->display( $form_id );
@@ -20,6 +26,7 @@ function ninja_forms_get_all_forms(){
 }
 
 function ninja_forms_insert_field( $form_id, $args = array() ){
+    Ninja_Forms::deprecated_notice( 'ninja_forms_insert_field', '3.0', 'Ninja_Forms()->form()->field()->get()', debug_backtrace() );
 
     $field = Ninja_Forms()->form( $form_id )->field()->get();
 
@@ -36,6 +43,21 @@ function ninja_forms_insert_field( $form_id, $args = array() ){
     $field->save();
 
     return $field->get_id();
+}
+
+function ninja_forms_get_form_ids_by_post_id( $post_id ){
+
+    /* Note: The append page has been removed as of v3 */
+
+    $post = get_post( $post_id );
+
+    $form_ids = array();
+
+    if( $post->ninja_forms_form ){
+        $form_ids[] = $post->ninja_forms_form;
+    }
+
+    return $form_ids;
 }
 
 /*
