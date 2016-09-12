@@ -11,6 +11,25 @@ function ninja_forms_display_form( $form_id = '' ){
     Ninja_Forms()->display( $form_id );
 }
 
+function ninja_forms_get_fields_by_form_id($form_id, $orderby = 'ORDER BY `order` ASC'){
+
+    $fields = Ninja_Forms()->form( $form_id )->get_fields();
+
+    $field_results = array();
+    foreach( $fields as $field ){
+        $field_results[] = array(
+            'id'      => $field->get_id(),
+            'form_id' => $form_id,
+            'type'    => $field->get_setting( 'type' ),
+            'order'   => $field->get_setting( 'order' ),
+            'data'    => $field->get_settings(),
+            'fav_id'  => null,
+            'def_id'  => null,
+        );
+    }
+    return $field_results;
+}
+
 /**
  * Included for backwards compatibility with Visual Composer.
  */
