@@ -1,7 +1,7 @@
 define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], function( mergeTagsContentView, settingErrorView ) {
 	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
-		template: '#nf-tmpl-edit-setting-wrap',
+		template: '#tmpl-nf-edit-setting-wrap',
 
 		regions: {
 			error: '.nf-setting-error'
@@ -194,7 +194,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 	    			} else if ( 'undefined' == typeof this.value ) {
 	    				this.value = '';
 	    			}
-	    			var setting = Marionette.TemplateCache.get( '#nf-tmpl-edit-setting-' + this.type );
+	    			var setting = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-edit-setting-' + this.type );
 					return setting( this );
 				},
 
@@ -275,6 +275,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 		clickExtra: function( e ) {
 			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'click:extra', e, this.model, this.dataModel, this );
 			nfRadio.channel( 'setting-type-' + this.model.get( 'name' ) ).trigger( 'click:extra', e, this.model, this.dataModel, this );
+			nfRadio.channel( 'setting-name-' + this.model.get( 'name' ) ).trigger( 'click:extra', e, this.model, this.dataModel, this );
 		},
 
 		drawerOpened: function() {

@@ -20,6 +20,7 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			// Respond to requests for data about fields and to update/change/delete fields from our collection.
 			nfRadio.channel( 'fields' ).reply( 'get:collection', this.getFieldCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:field', this.getField, this );
+			nfRadio.channel( 'fields' ).reply( 'redraw:collection', this.redrawFieldCollection, this );
 			nfRadio.channel( 'fields' ).reply( 'get:tmpID', this.getTmpFieldID, this );
 
 			nfRadio.channel( 'fields' ).reply( 'add', this.addField, this );
@@ -38,6 +39,10 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 
 		getFieldCollection: function() {
 			return this.collection;
+		},
+
+		redrawFieldCollection: function() {
+			this.collection.trigger( 'reset', this.collection );
 		},
 
 		getField: function( id ) {
@@ -61,13 +66,16 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 		 * @param Object 	data 	field data to insert
 		 * @param bool 		silent 	prevent events from firing as a result of adding	 	
 		 */
-		addField: function( data, silent ) {
+		addField: function( data, silent, renderTrigger ) {
+			
 			/*
 			 * Set our fields 'adding' value to true. This enables our add field animation.
 			 */
 			nfRadio.channel( 'fields' ).request( 'set:adding', true );
 
 			silent = silent || false;
+			renderTrigger = ( 'undefined' == typeof renderTrigger ) ? true : renderTrigger;
+
 			if ( false === data instanceof Backbone.Model ) {
 				if ( 'undefined' == typeof ( data.id ) ) {
 					data.id = this.getTmpFieldID();
@@ -93,9 +101,12 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			
 			// Set our 'clean' status to false so that we get a notice to publish changes
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
-
 			nfRadio.channel( 'fields' ).trigger( 'add:field', model );
-
+			if ( renderTrigger ) {
+				nfRadio.channel( 'fields' ).trigger( 'render:newField', newModel );
+			}
+			nfRadio.channel( 'fields' ).trigger( 'after:addField', model );
+			
 			return model;
 		},
 

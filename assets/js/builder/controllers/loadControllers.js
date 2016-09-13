@@ -40,16 +40,19 @@ define(
 		'controllers/app/confirmPublish',
 		'controllers/app/rte',
 		'controllers/app/settingFieldSelect',
+		'controllers/app/settingFieldList',
 		'controllers/app/settingHTML',
 		'controllers/app/settingColor',
 		'controllers/app/changeMenu',
 		'controllers/app/mobile',
 		'controllers/app/notices',
 		'controllers/app/unloadCheck',
-		'controllers/app/fieldContentsFilters',
+		'controllers/app/formContentFilters',
+		'controllers/app/formContentGutterFilters',
 		'controllers/app/cloneCollectionDeep',
 		'controllers/app/trackKeyDown',
 		'controllers/app/perfectScroll',
+		'controllers/app/getNewSettingGroupCollection',
 		/*
 		 * Fields domain controllers
 		 */
@@ -132,16 +135,19 @@ define(
 		ConfirmPublish,
 		RTE,
 		SettingFieldSelect,
+		SettingFieldList,
 		SettingHTML,
 		SettingColor,
 		ChangeMenu,
 		AppMobile,
 		AppNotices,
 		AppUnloadCheck,
-		FieldContentsFilters,
+		FormContentFilters,
+		FormContentGutterFilters,
 		CloneCollectionDeep,
 		TrackKeyDown,
 		PerfectScroll,
+		GetNewSettingGroupCollection,
 		/*
 		 * Fields domain controllers
 		 */
@@ -195,13 +201,14 @@ define(
 				/*
 				 * Application controllers
 				 */
+				new FormContentFilters();
+				new FormContentGutterFilters();
 				new Hotkeys();
 				new Remote();
 				new Drawer();
 				new DrawerConfig();
 				new DomainConfig();
 				new DrawerToggleSettingGroup();
-				new UpdateDB();
 				new PreviewLink();
 				new AppMenuButtons();
 				new AppTrackChanges();
@@ -215,16 +222,18 @@ define(
 				new ConfirmPublish();
 				new RTE();
 				new SettingFieldSelect();
+				new SettingFieldList();
 				new SettingHTML();
 				new SettingColor();
 				new ChangeMenu();
 				new AppMobile();
 				new AppNotices();
 				new AppUnloadCheck();
-				new FieldContentsFilters();
+				new UpdateDB();
 				new CloneCollectionDeep();
 				new TrackKeyDown();
 				new PerfectScroll();
+				new GetNewSettingGroupCollection();
 				// new Pushstate();
 				/*
 				 * Fields domain controllers

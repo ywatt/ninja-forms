@@ -39,6 +39,12 @@ define([], function() {
 			 */
 			nfRadio.channel( 'forms' ).trigger( 'before:submit', formModel );
 			nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'before:submit', formModel );
+			/*
+			 * Validate our field models.
+			 *
+			 * This method is defined in our models/fieldCollection.js file.
+			 */
+			formModel.get( 'formContentData' ).validateFields();
 
 			var submit = nfRadio.channel( 'form-' + formModel.get( 'id' ) ).request( 'maybe:submit', formModel );
 
@@ -71,7 +77,7 @@ define([], function() {
 			} );
 			var extra = formModel.get( 'extra' );
 			var settings = formModel.get( 'settings' );
-			delete settings.fieldContentsData;
+			delete settings.formContentData;
 			var formData = JSON.stringify( { id: formID, fields: fields, settings: settings, extra: extra } );
 			var data = {
 				'action': 'nf_ajax_submit',
@@ -87,9 +93,14 @@ define([], function() {
 			    data: data,
 			    cache: false,
 			   	success: function( data, textStatus, jqXHR ) {
-			   		var response = jQuery.parseJSON( data );
-			        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR, formModel.get( 'id' ) );
-			    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR )
+			   		try {
+				   		var response = jQuery.parseJSON( data );
+				        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR, formModel.get( 'id' ) );
+				    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR );
+			   		} catch( e ) {
+			   			console.log( 'Parse Error' );
+			   		}
+
 			    },
 			    error: function( jqXHR, textStatus, errorThrown ) {
 			        // Handle errors here

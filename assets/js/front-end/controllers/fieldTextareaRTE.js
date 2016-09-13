@@ -10,6 +10,10 @@ define([], function() {
 			// Instantiates the variable that holds the media library frame.
 			this.meta_image_frame;
 
+			this.currentContext = {};
+
+			if( 'undefined' == typeof jQuery.summernote ) return;
+
 			jQuery.summernote.options.icons = {
 		        'align': 'dashicons dashicons-editor-alignleft',
 		        'alignCenter': 'dashicons dashicons-editor-aligncenter',
@@ -49,9 +53,7 @@ define([], function() {
 		        'undo': 'dashicons dashicons-undo',
 		        'unorderedlist': 'dashicons dashicons-editor-ul',
 		        // 'video': 'dashicons fa-youtube-play'
-		      }
-
-		      this.currentContext = {};
+		      };
 
 		},
 
@@ -108,13 +110,13 @@ define([], function() {
 		linkButton: function( context ) {
 			var that = this;
 			var ui = jQuery.summernote.ui;
-			var linkButton = Marionette.TemplateCache.get( '#nf-tmpl-rte-link-button' );
-			var linkDropdown = Marionette.TemplateCache.get( '#nf-tmpl-rte-link-dropdown' );
+			var linkButton = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-link-button' );
+			var linkDropdown = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-link-dropdown' );
 			return ui.buttonGroup([
 				ui.button({
 	            className: 'dropdown-toggle',
 	            contents: linkButton({}),
-	            tooltip: 'Insert Link',
+	            tooltip: nfi18n.fieldTextareaRTEInsertLink,
 	            click: function( e ) {
 	            	that.clickLinkButton( e, context );
 	            },
@@ -138,11 +140,11 @@ define([], function() {
 		mediaButton: function( context ) {
 			var that = this;
 			var ui = jQuery.summernote.ui;
-			var mediaButton = Marionette.TemplateCache.get( '#nf-tmpl-rte-media-button' );
+			var mediaButton = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-media-button' );
 			return ui.button({
 	            className: 'dropdown-toggle',
 	            contents: mediaButton({}),
-	            tooltip: 'Insert Media',
+	            tooltip: nfi18n.fieldTextareaRTEInsertMedia,
 	            click: function( e ) {
 	            	that.openMediaManager( e, context );
 	            }
@@ -159,7 +161,7 @@ define([], function() {
 
 			// Sets up the media library frame
 			this.meta_image_frame = wp.media.frames.meta_image_frame = wp.media({
-				title: 'Select a file',
+				title: nfi18n.fieldTextareaRTESelectAFile,
 				button: { text:  'insert' }
 			});
 

@@ -18,6 +18,10 @@ define( ['models/fields/fieldModel'], function( fieldModel ) {
 		initialize: function() {
 			this.on( 'add', this.addField, this );
 			this.on( 'remove', this.removeField, this );
+
+			this.listenTo( this, 'add:field', this.addNewField );
+			this.listenTo( this, 'append:field', this.appendNewField );
+			this.listenTo( this, 'remove:field', this.removeFieldResponse );
 			this.newIDs = [];
 		},
 
@@ -39,7 +43,31 @@ define( ['models/fields/fieldModel'], function( fieldModel ) {
 		 * @param void
 		 */
 		removeField: function( model ) {
+			this.removedIDs = this.removedIDs || {};
 			this.removedIDs[ model.get( 'id' ) ] = model.get( 'id' );
+		},
+
+		addNewField: function( model ) {
+			this.add( model );
+		},
+
+		appendNewField: function( model ) {
+			if ( 0 == this.length ) {
+				var order = 0;
+			} else {
+				var order = this.at( this.length -1 ).get( 'order' ) + 1;	
+			}
+			
+			model.set( 'order', order, { silent: true } );
+			this.add( model );
+		},
+
+		removeFieldResponse: function( model ) {
+			this.remove( model );
+		},
+
+		fieldExists: function( fieldModel ) {
+			return -1 != this.indexOf( fieldModel );
 		}
 	} );
 	return collection;
