@@ -102,13 +102,35 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.0.2 (7 September 2016) =
+= 3.0.3 (13 September 2016) =
 
 *Bugs:*
 
-* Fixed a bug that caused PHP notices to be displayed.
+* Added isInteger polyfill for IE11.
+* Added deprecated functions to prevent PHP errors.
+* Required fields message should now not show when the form is hidden.
+* Field-specific scripts should only load when that field is present.
+* Updating translatable text.
+* Radio lists should no longer select an option by default.
+* Conversions should be more stable.
+* Text to HTML field conversion should now happen correctly.
+* Fixed a conflict with Visual Composer.
 
 == Changelog ==
+
+= 3.0.3 (13 September 2016) =
+
+*Bugs:*
+
+* Added isInteger polyfill for IE11.
+* Added deprecated functions to prevent PHP errors.
+* Required fields message should now not show when the form is hidden.
+* Field-specific scripts should only load when that field is present.
+* Updating translatable text.
+* Radio lists should no longer select an option by default.
+* Conversions should be more stable.
+* Text to HTML field conversion should now happen correctly.
+* Fixed a conflict with Visual Composer.
 
 = 3.0.2 (7 September 2016) =
 
