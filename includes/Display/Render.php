@@ -392,16 +392,16 @@ final class NF_Display_Render
 
         if( $is_preview || self::form_uses_recaptcha( $form_id ) ) {
             $recaptcha_lang = Ninja_Forms()->get_setting('recaptcha_lang');
-            wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $recaptcha_lang, array('jquery'));
+            wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $recaptcha_lang, array( 'jquery' ), Ninja_Forms::VERSION );
         }
 
         if( $is_preview || self::form_uses_datepicker( $form_id ) ) {
-            wp_enqueue_style( 'pikaday-responsive', $css_dir . 'pikaday-package.css' );
-            wp_enqueue_script('nf-front-end--datepicker', $js_dir . 'front-end--datepicker.min.js', array('jquery'));
+            wp_enqueue_style( 'pikaday-responsive', $css_dir . 'pikaday-package.css', Ninja_Forms::VERSION );
+            wp_enqueue_script('nf-front-end--datepicker', $js_dir . 'front-end--datepicker.min.js', array( 'jquery' ), Ninja_Forms::VERSION );
         }
 
         if( $is_preview || self::form_uses_inputmask( $form_id ) ) {
-            wp_enqueue_script('nf-front-end--inputmask', $js_dir . 'front-end--inputmask.min.js', array('jquery'));
+            wp_enqueue_script('nf-front-end--inputmask', $js_dir . 'front-end--inputmask.min.js', array( 'jquery' ), Ninja_Forms::VERSION );
         }
 
          if( $is_preview || self::form_uses_rte( $form_id ) ) {
@@ -409,24 +409,24 @@ final class NF_Display_Render
                 wp_enqueue_media();
              }
 
-            wp_enqueue_style( 'summernote',         $css_dir . 'summernote.css'    );
-            wp_enqueue_style( 'codemirror',         $css_dir . 'codemirror.css'    );
-            wp_enqueue_style( 'codemirror-monokai', $css_dir . 'monokai-theme.css' );
-            wp_enqueue_script('nf-front-end--rte', $js_dir . 'front-end--rte.min.js', array('jquery'));
+            wp_enqueue_style( 'summernote',         $css_dir . 'summernote.css'   , Ninja_Forms::VERSION );
+            wp_enqueue_style( 'codemirror',         $css_dir . 'codemirror.css'   , Ninja_Forms::VERSION );
+            wp_enqueue_style( 'codemirror-monokai', $css_dir . 'monokai-theme.css', Ninja_Forms::VERSION );
+            wp_enqueue_script('nf-front-end--rte', $js_dir . 'front-end--rte.min.js', array( 'jquery' ), Ninja_Forms::VERSION );
          }
 
         if( $is_preview || self::form_uses_helptext( $form_id ) ) {
-            wp_enqueue_style( 'jBox', $css_dir . 'jBox.css' );
-            wp_enqueue_script('nf-front-end--helptext', $js_dir . 'front-end--helptext.min.js', array('jquery'));
+            wp_enqueue_style( 'jBox', $css_dir . 'jBox.css', Ninja_Forms::VERSION );
+            wp_enqueue_script('nf-front-end--helptext', $js_dir . 'front-end--helptext.min.js', array( 'jquery' ), Ninja_Forms::VERSION );
         }
 
         if( $is_preview || self::form_uses_starrating( $form_id ) ) {
-            wp_enqueue_style( 'rating', $css_dir . 'rating.css' );
-            wp_enqueue_script('nf-front-end--starrating', $js_dir . 'front-end--starrating.min.js', array('jquery'));
+            wp_enqueue_style( 'rating', $css_dir . 'rating.css', Ninja_Forms::VERSION );
+            wp_enqueue_script('nf-front-end--starrating', $js_dir . 'front-end--starrating.min.js', array( 'jquery' ), Ninja_Forms::VERSION );
         }
 
-        wp_enqueue_script( 'nf-front-end-deps', $js_dir . 'front-end-deps.js', array( 'jquery', 'backbone' ) );
-        wp_enqueue_script( 'nf-front-end',      $js_dir . 'front-end.js',      array( 'nf-front-end-deps'  ) );
+        wp_enqueue_script( 'nf-front-end-deps', $js_dir . 'front-end-deps.js', array( 'jquery', 'backbone' ), Ninja_Forms::VERSION );
+        wp_enqueue_script( 'nf-front-end',      $js_dir . 'front-end.js',      array( 'nf-front-end-deps'  ), Ninja_Forms::VERSION );
 
         wp_localize_script( 'nf-front-end', 'nfi18n', Ninja_Forms::config( 'i18nFrontEnd' ) );
 
