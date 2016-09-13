@@ -110,6 +110,12 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Changelog ==
 
+= 3.0.5 (13 September 2016) =
+
+*Bugs:*
+
+* Fixed a bug with checking for a disabled PHP functions that might cause a fatal error.
+
 = 3.0.4 (13 September 2016) =
 
 *Bugs:*
