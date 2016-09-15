@@ -151,6 +151,13 @@ define( [], function() {
 
 		renderSetting: function( settingModel, dataModel, settingView ) {
 			this.initRTE( settingModel, dataModel,settingView );
+			var linkMenu = jQuery( settingView.el ).find( '.link-button' ).next( '.dropdown-menu' ).find( 'button' );
+			linkMenu.replaceWith(function () {
+			    return jQuery( '<div/>', {
+			        class: jQuery( linkMenu ).attr( 'class' ),
+			        html: this.innerHTML
+			    } );
+			} );
 		},
 
 		destroySetting: function( settingModel, dataModel, settingView ) {
@@ -172,7 +179,7 @@ define( [], function() {
 			var linkDropdown = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-link-dropdown' );
 			return ui.buttonGroup([
 				ui.button({
-	            className: 'dropdown-toggle',
+	            className: 'dropdown-toggle link-button',
 	            contents: linkButton({}),
 	            tooltip: 'Insert Link',
 	            click: function( e ) {
@@ -199,7 +206,7 @@ define( [], function() {
 			var ui = jQuery.summernote.ui;
 			var mergeTagsButton = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-merge-tags-button' );
 			return ui.button({
-				className: 'dropdown-toggle',
+				className: 'dropdown-toggle merge-tags-button',
 				contents: mergeTagsButton({}),
 				tooltip: 'Merge Tags'
 			}).render();
