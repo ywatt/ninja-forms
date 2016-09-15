@@ -75,11 +75,12 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
         }
 
         $callback = 'field_' . $field[ 'key' ] . '_calc';
+        $calc_value = apply_filters( 'ninja_forms_merge_tag_calc_value_' . $field[ 'type' ], $field['value'], $field );
         $this->merge_tags[$callback] = array(
             'id' => $field['key'],
             'tag' => '{field:' . $field['key'] . ':calc}',
             'callback' => $callback,
-            'field_value' => apply_filters( 'ninja_forms_merge_tag_calc_value_' . $field[ 'type' ], $field['value'], $field )
+            'field_value' => $calc_value
         );
     }
 
