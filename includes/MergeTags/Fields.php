@@ -64,15 +64,22 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
             'field_value' => apply_filters( 'ninja_forms_merge_tag_value_' . $field[ 'type' ], $field[ 'value' ], $field )
         );
 
-        if( ! isset( $field[ 'key' ] ) ) return;
+        if( isset( $field[ 'key' ] ) ) {
+            $callback = 'field_' . $field['key'];
+            $this->merge_tags[$callback] = array(
+                'id' => $field['key'],
+                'tag' => '{field:' . $field['key'] . '}',
+                'callback' => $callback,
+                'field_value' => apply_filters('ninja_forms_merge_tag_value_' . $field['type'], $field['value'], $field)
+            );
+        }
 
-        $callback = 'field_' . $field[ 'key' ];
-
-        $this->merge_tags[ $callback ] = array(
-            'id' => $field[ 'key' ],
-            'tag' => '{field:' . $field[ 'key' ] . '}',
+        $callback = 'field_' . $field[ 'key' ] . '_calc';
+        $this->merge_tags[$callback] = array(
+            'id' => $field['key'],
+            'tag' => '{field:' . $field['key'] . ':calc}',
             'callback' => $callback,
-            'field_value' => apply_filters( 'ninja_forms_merge_tag_value_' . $field[ 'type' ], $field[ 'value' ], $field )
+            'field_value' => apply_filters( 'ninja_forms_merge_tag_calc_value_' . $field[ 'type' ], $field['value'], $field )
         );
     }
 
