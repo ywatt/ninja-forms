@@ -105,6 +105,14 @@ define([], function() {
 					}
 				}
 			} );
+
+			var linkMenu = jQuery( view.el ).find( '.link-button' ).next( '.dropdown-menu' ).find( 'button' );
+			linkMenu.replaceWith(function () {
+			    return jQuery( '<div/>', {
+			        class: jQuery( linkMenu ).attr( 'class' ),
+			        html: this.innerHTML
+			    } );
+			} );
 		},
 
 		linkButton: function( context ) {
@@ -114,7 +122,7 @@ define([], function() {
 			var linkDropdown = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-link-dropdown' );
 			return ui.buttonGroup([
 				ui.button({
-	            className: 'dropdown-toggle',
+	            className: 'dropdown-toggle link-button',
 	            contents: linkButton({}),
 	            tooltip: nfi18n.fieldTextareaRTEInsertLink,
 	            click: function( e ) {
