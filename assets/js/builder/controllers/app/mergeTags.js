@@ -117,7 +117,7 @@ define( [
 			this.jBoxes = {};
 			var that = this;
 
-			jQuery( view.el ).find( '.merge-tags-button' ).each(function() {
+			jQuery( view.el ).find( '.merge-tags' ).each(function() {
 				if ( 'undefined' == typeof jQuery( this ).data( 'jBox-id' ) ) {
 					var jBox = jQuery( this ).jBox( 'Tooltip', {
 						title: 'Insert Merge Tag',

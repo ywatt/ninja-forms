@@ -206,7 +206,7 @@ define( [], function() {
 			var ui = jQuery.summernote.ui;
 			var mergeTagsButton = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-merge-tags-button' );
 			return ui.button({
-				className: 'dropdown-toggle merge-tags-button',
+				className: 'dropdown-toggle merge-tags',
 				contents: mergeTagsButton({}),
 				tooltip: 'Merge Tags'
 			}).render();
