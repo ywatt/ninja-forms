@@ -94,10 +94,12 @@ final class NF_Conversion_Calculations implements NF_Conversion
     private function merge_tag( $field )
     {
         $tag = $field[ 'key' ];
-        $type = ( 'calc' == $field[ 'type' ] ) ? 'calc' : 'field';
-        return '{' . $type . ':' . $tag . ':calc}';
+        if( 'calc' == $field[ 'type' ] ){
+            return '{calc:' . $tag . '}';
+        } else {
+            return '{field:' . $tag . ':calc}';
+        }
     }
-
 }
 
 add_filter( 'ninja_forms_after_upgrade_settings', 'ninja_forms_conversion_calculations' );
