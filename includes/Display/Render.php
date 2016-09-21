@@ -154,8 +154,8 @@ final class NF_Display_Render
                         do_shortcode( $settings['value'] );
                         $ob = ob_get_clean();
 
-                        if( $ob ){
-                            $settings['value'] = $ob;
+                        if( ! $ob ) {
+                            $settings['value'] = do_shortcode( $settings['value'] );
                         }
                     }
                 }
