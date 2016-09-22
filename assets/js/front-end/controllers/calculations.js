@@ -86,6 +86,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			 */
 			// Check to see if we have any field merge tags in our equation.
 			var fields = eq.match( new RegExp( /{field:(.*?)}/g ) );
+
 			if ( fields ) {
 				/*
 				 * fields is now an array of field keys that looks like:
@@ -96,7 +97,8 @@ define(['models/calcCollection'], function( CalcCollection ) {
 				
 				fields = fields.map( function( field ) {
 					// field will be {field:key}
-					var key = field.replace( '}', '' ).replace( '{field:', '' );
+					var key = field.replace( ':calc}', '' ).replace( '}', '' ).replace( '{field:', '' );
+
 					// Get our field model
 					fieldModel = nfRadio.channel( 'form-' + calcModel.get( 'formID' ) ).request( 'get:fieldByKey', key );
 
@@ -211,9 +213,17 @@ define(['models/calcCollection'], function( CalcCollection ) {
 		 */
 		replaceKey: function( type, key, calcValue, eq ) {
 			eq = eq || calcModel.get( 'eq' );
-			key = '{' + type + ':' + key + '}';
-			var re = new RegExp( key, 'g' );
-			return eq.replace( re, calcValue );
+
+			tag = '{' + type + ':' + key + '}';
+			var reTag = new RegExp( tag, 'g' );
+
+			calcTag = '{' + type + ':' + key + ':calc}';
+			var reCalcTag = new RegExp( calcTag, 'g' );
+
+			eq = eq.replace( reTag, calcValue );
+			eq = eq.replace( reCalcTag, calcValue );
+
+			return eq;
 		},
 
 		/**
