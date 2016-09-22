@@ -40,6 +40,17 @@ class NF_Database_Migrations
             $wpdb->query( "DROP TABLE $migration->table_name" );
 
         }
+
+        $wpdb->query( "DROP TABLE {$wpdb->prefix}nf_objectmeta" );
+        $wpdb->query( "DROP TABLE {$wpdb->prefix}nf_objects" );
+        $wpdb->query( "DROP TABLE {$wpdb->prefix}nf_relationships" );
+        $wpdb->query( "DROP TABLE {$wpdb->prefix}ninja_forms_fav_fields" );
+        $wpdb->query( "DROP TABLE {$wpdb->prefix}ninja_forms_fields" );
+
+        delete_option( 'ninja_forms_settings' );
+        delete_option( 'ninja_forms_load_deprecated' );
+        delete_option( 'ninja_forms_allow_tracking' );
+        delete_option( 'ninja_forms_do_not_allow_tracking' );
     }
 
 }
