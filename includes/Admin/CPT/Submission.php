@@ -227,7 +227,7 @@ class NF_Admin_CPT_Submission
 
         $mod_date = apply_filters( 'nf_edit_sub_date_modified', $sub->get_mod_date( 'm/d/Y H:i' ), $post->ID );
 
-        Ninja_Forms::template( 'admin-metabox-sub-info.html.php', compact( 'seq_num', 'status', 'user', 'form_title', 'sub_date', 'mod_date' ) );
+        Ninja_Forms::template( 'admin-metabox-sub-info.html.php', compact( 'post', 'seq_num', 'status', 'user', 'form_title', 'sub_date', 'mod_date' ) );
     }
 
     /**
