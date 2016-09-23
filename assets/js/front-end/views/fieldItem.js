@@ -164,8 +164,7 @@ define( [], function() {
 				},
 
 				getHelpText: function() {
-					this.help_text = jQuery( this.help_text ).html();
-
+					// this.help_text = jQuery( this.help_text ).html();
 					return ( 'undefined' != typeof this.help_text ) ? this.help_text.replace(/"/g, "&quot;") : '';
 				},
 
