@@ -127,8 +127,12 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 						});
 						break;
 					case 'currency':
+
+						var currency = nfRadio.channel( 'settings' ).request( 'get:setting', 'currency' );
+						var currencySymbol = nfAdmin.currencySymbols[ currency ] || '';
+
 						input.autoNumeric({
-							aSign: '$', // TODO: Use form setting
+							aSign:  jQuery('<div />').html(currencySymbol).text(),
 							aSep: thousandsSeparator,
 							aDec: decimalPoint
 						});
