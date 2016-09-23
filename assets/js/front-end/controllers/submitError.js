@@ -14,6 +14,7 @@ define([], function() {
 
 			if ( _.size( response.errors.form ) > 0 ) {
 				_.each( response.errors.form, function( msg, errorID ) {
+					nfRadio.channel( 'form-' + formID ).request( 'remove:error', errorID );
 					nfRadio.channel( 'form-' + formID ).request( 'add:error', errorID, msg );
 				} );
 			}
