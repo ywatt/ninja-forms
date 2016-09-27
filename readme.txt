@@ -125,6 +125,27 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Changelog ==
 
+= 3.0.6 (27 September 2016) =
+
+*Changes:*
+
+* Added the $post variable to the submission info metabox.
+* Suppressed HTML fields from submission data.
+* Suppressed HTML fields from all fields merge tags
+* Added description text to the Rollback Setting (Advanced).
+* Disabled the "Edit" page link when previewing a form.
+* Added a plugin wide currency setting in place of the static currency symbol setting.
+
+*Bugs:*
+
+* Fixed a bug with validating email addresses (ie properly evaluate "+"s).
+* Fixed a bug with browser compatibility.
+* Fixed a bug with displaying column content on other post types.
+* Fixed a bug with updating form submission error messages.
+* Fixed a bug with creating empty settings on activation.
+* Fixed a bug with column class collisions in CSS.
+* Fixed a bug with field help text not displaying on the form.
+
 = 3.0.5 (13 September 2016) =
 
 *Bugs:*
