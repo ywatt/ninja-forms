@@ -154,20 +154,6 @@ return apply_filters( 'ninja_forms_form_display_settings', array(
     ),
 
     /*
-     * CURRENCY
-     */
-
-    'currency' => array(
-        'name'      => 'currency',
-        'type'    => 'select',
-        'options' => array_merge( array( array( 'label' => __( 'Plugin Default', 'ninja-forms' ), 'value' => '' ) ), Ninja_Forms::config( 'Currency' ) ),
-        'label'   => __( 'Currency', 'ninja-forms' ),
-        'width' => 'full',
-        'group' => 'advanced',
-        'value'   => ''
-    ),
-
-    /*
      * Form Labels
      */
 
@@ -239,6 +225,20 @@ return apply_filters( 'ninja_forms_form_display_settings', array(
                 'label' => sprintf( __( 'Fields marked with an %s*%s are required', 'ninja-forms' ), '<span class="ninja-forms-req-symbol">', '</span>' )
             ),
         )
-    )
+    ),
+
+    /*
+     * CURRENCY
+     */
+
+    'currency' => array(
+        'name'      => 'currency',
+        'type'    => 'select',
+        'options' => array_merge( array( array( 'label' => __( 'Plugin Default', 'ninja-forms' ), 'value' => '' ) ), Ninja_Forms::config( 'Currency' ) ),
+        'label'   => __( 'Currency', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'value'   => ''
+    ),
 
 ));
