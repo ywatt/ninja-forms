@@ -167,4 +167,78 @@ return apply_filters( 'ninja_forms_form_display_settings', array(
         'value'   => ''
     ),
 
+    /*
+     * Form Labels
+     */
+
+    'custom_messages' => array(
+        'name' => 'custom_messages',
+        'type' => 'fieldset',
+        'label' => __( 'Custom Labels', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'settings' => array(
+            array(
+                'name' => 'changeEmailErrorMsg',
+                'type' => 'textbox',
+                'label' => __( 'Please enter a valid email address!', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'confirmFieldErrorMsg',
+                'type' => 'textbox',
+                'label' => __( 'These fields must match!', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'fieldNumberNumMinError',
+                'type' => 'textbox',
+                'label' => __( 'Number Min Error', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'fieldNumberNumMaxError',
+                'type' => 'textbox',
+                'label' => __( 'Number Max Error', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'fieldNumberIncrementBy',
+                'type' => 'textbox',
+                'label' => __( 'Please increment by ', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'fieldTextareaRTEInsertLink',
+                'type' => 'textbox',
+                'label' => __( 'Insert Link', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'fieldTextareaRTEInsertMedia',
+                'type' => 'textbox',
+                'label' => __( 'Insert Media', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'fieldTextareaRTESelectAFile',
+                'type' => 'textbox',
+                'label' => __( 'Select A File', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'formErrorsCorrectErrors',
+                'type' => 'textbox',
+                'label' => __( 'Please correct errors before submitting this form.', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'validateRequiredField',
+                'type' => 'textbox',
+                'label' => __( 'This is a required field.', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'honeypotHoneypotError',
+                'type' => 'textbox',
+                'label' => __( 'Honeypot Error', 'ninja-forms' )
+            ),
+            array(
+                'name' => 'fieldsMarkedRequired',
+                'type' => 'textbox',
+                'label' => sprintf( __( 'Fields marked with an %s*%s are required', 'ninja-forms' ), '<span class="ninja-forms-req-symbol">', '</span>' )
+            ),
+        )
+    )
+
 ));
