@@ -115,6 +115,10 @@ class NF_Admin_CPT_Submission
 
     public function custom_columns( $column, $sub_id )
     {
+        if( 'nf_sub' != get_post_type() ) {
+            return;
+        }
+
         $sub = Ninja_Forms()->form()->get_sub( $sub_id );
 
         if( 'id' == $column ) {
