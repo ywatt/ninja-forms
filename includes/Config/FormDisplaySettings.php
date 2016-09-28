@@ -190,21 +190,6 @@ return apply_filters( 'ninja_forms_form_display_settings', array(
                 'label' => __( 'Please increment by ', 'ninja-forms' )
             ),
             array(
-                'name' => 'fieldTextareaRTEInsertLink',
-                'type' => 'textbox',
-                'label' => __( 'Insert Link', 'ninja-forms' )
-            ),
-            array(
-                'name' => 'fieldTextareaRTEInsertMedia',
-                'type' => 'textbox',
-                'label' => __( 'Insert Media', 'ninja-forms' )
-            ),
-            array(
-                'name' => 'fieldTextareaRTESelectAFile',
-                'type' => 'textbox',
-                'label' => __( 'Select A File', 'ninja-forms' )
-            ),
-            array(
                 'name' => 'formErrorsCorrectErrors',
                 'type' => 'textbox',
                 'label' => __( 'Please correct errors before submitting this form.', 'ninja-forms' )
