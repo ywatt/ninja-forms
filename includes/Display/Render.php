@@ -39,6 +39,10 @@ final class NF_Display_Render
         }
         $form = Ninja_Forms()->form( $form_id )->get();
 
+        $settings = $form->get_settings();
+        $settings = array_merge( Ninja_Forms::config( 'i18nFrontEnd' ), $settings );
+        $form->update_settings( $settings );
+
         if( $form->get_setting( 'logged_in' ) && ! is_user_logged_in() ){
             echo $form->get_setting( 'not_logged_in_msg' );
             return;
@@ -232,6 +236,8 @@ final class NF_Display_Render
             echo $form[ 'settings' ][ 'not_logged_in_msg' ];
             return;
         }
+
+        $form[ 'settings' ] = array_merge( Ninja_Forms::config( 'i18nFrontEnd' ), $form[ 'settings' ] );
 
         $form[ 'settings' ][ 'is_preview' ] = TRUE;
 
