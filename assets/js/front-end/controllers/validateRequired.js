@@ -81,7 +81,9 @@ define([], function() {
 
 		maybeError: function( valid, model ) {
 			if ( ! valid ) {
-				nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'required-error', nfi18n.validateRequiredField );
+				var fieldModel = nfRadio.channel( 'fields' ).request( 'get:field', model.get( 'id' ) );
+				var formModel  = nfRadio.channel( 'app'    ).request( 'get:form',  fieldModel.get( 'formID' ) );
+				nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'required-error', formModel.get( 'settings' ).validateRequiredField );
 			} else {
 				nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'required-error' );
 			}			

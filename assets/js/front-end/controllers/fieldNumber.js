@@ -21,19 +21,25 @@ define([], function() {
             var step = $el.attr( 'step' );
 
             if( min && value < min ){
-                nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'number-min', nfi18n.fieldNumberNumMinError );
+                var fieldModel = nfRadio.channel( 'fields' ).request( 'get:field', model.get( 'id' ) );
+                var formModel  = nfRadio.channel( 'app'    ).request( 'get:form',  fieldModel.get( 'formID' ) );
+                nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'number-min', formModel.get( 'settings' ).fieldNumberNumMinError );
             } else {
                 nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'number-min' );
             }
 
             if ( max && value > max ){
-                nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'number-max', nfi18n.fieldNumberNumMaxError );
+                var fieldModel = nfRadio.channel( 'fields' ).request( 'get:field', model.get( 'id' ) );
+                var formModel  = nfRadio.channel( 'app'    ).request( 'get:form',  fieldModel.get( 'formID' ) );
+                nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'number-max', formModel.get( 'settings' ).fieldNumberNumMaxError );
             } else {
                 nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'number-max' );
             }
 
             if( value && 0 !== value % step ){
-                nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'number-step', nfi18n.fieldNumberIncrementBy + step );
+                var fieldModel = nfRadio.channel( 'fields' ).request( 'get:field', model.get( 'id' ) );
+                var formModel  = nfRadio.channel( 'app'    ).request( 'get:form',  fieldModel.get( 'formID' ) );
+                nfRadio.channel( 'fields' ).request( 'add:error', model.get( 'id' ), 'number-step', formModel.get( 'settings' ).fieldNumberIncrementBy + step );
             } else {
                 nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'number-step' );
             }
