@@ -330,7 +330,7 @@ final class NF_Database_Models_Submission
                 $field_value = $sub->get_field_value( $field_id );
 
                 if( is_array( $field_value ) ){
-                    $field_value = implode( '|', $field_value );
+                    $field_value = implode( ' | ', $field_value );
                 }
 
                 $value[ $field_id ] = $field_value;
