@@ -302,6 +302,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 
         public function admin_init()
         {
+            require_once Ninja_Forms::$dir . 'includes/Libraries/BackgroundProcessing/wp-background-processing.php';
             do_action( 'nf_admin_init', self::$instance );
         }
 
