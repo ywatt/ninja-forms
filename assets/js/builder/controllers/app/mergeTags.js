@@ -116,6 +116,7 @@ define( [
 			 */
 			this.jBoxes = {};
 			var that = this;
+
 			jQuery( view.el ).find( '.merge-tags' ).each(function() {
 				if ( 'undefined' == typeof jQuery( this ).data( 'jBox-id' ) ) {
 					var jBox = jQuery( this ).jBox( 'Tooltip', {
@@ -158,16 +159,28 @@ define( [
 			 * Currently, the RTE is the only section that modifies how merge tags work,
 			 * but another type of setting might need to do this in the future.
 			 */
-			if ( 'rte' != this.settingModel.get( 'type' ) ) {
+
+			if( 'undefined' != typeof this.settingModel.get( 'settingModel' ) && 'calculations' == this.settingModel.get( 'settingModel' ).get( 'name' ) ) {
+
+				console.log( tagModel );
+
+				var currentValue = jQuery( this.currentElement ).val();
+				var currentPos = jQuery( this.currentElement ).caret();
+				var newPos = currentPos + tagModel.get( 'tag' ).length;
+
+				var tag = ( 'undefined' != typeof tagModel.get( 'calcTag' ) ) ? tagModel.get( 'calcTag' ) : tagModel.get( 'tag' );
+
+				currentValue = currentValue.substr( 0, currentPos ) + tag + currentValue.substr( currentPos );
+				jQuery( this.currentElement ).val( currentValue ).caret( newPos ).trigger( 'change' );
+			} else if( 'rte' == this.settingModel.get( 'type' ) ) {
+				jQuery( this.currentElement ).summernote( 'insertText', tagModel.get( 'tag' ) );
+			} else {
 				var currentValue = jQuery( this.currentElement ).val();
 				var currentPos = jQuery( this.currentElement ).caret();
 				var newPos = currentPos + tagModel.get( 'tag' ).length;
 				currentValue = currentValue.substr( 0, currentPos ) + tagModel.get( 'tag' ) + currentValue.substr( currentPos );
-				jQuery( this.currentElement ).val( currentValue ).caret( newPos ).trigger( 'change' );				
-			} else { // We're in an RTE
-				jQuery( this.currentElement ).summernote( 'insertText', tagModel.get( 'tag' ) );
+				jQuery( this.currentElement ).val( currentValue ).caret( newPos ).trigger( 'change' );
 			}
-
 		},
 
 		addFieldTags: function( fieldModel ) {
@@ -176,7 +189,8 @@ define( [
 				this.tagSectionCollection.get( 'fields' ).get( 'tags' ).add( {
 					id: fieldModel.get( 'id' ),
 					label: fieldModel.get( 'label' ),
-					tag: this.getFieldKeyFormat( fieldModel.get( 'key' ) )
+					tag: this.getFieldKeyFormat( fieldModel.get( 'key' ) ),
+					calcTag: this.getFieldKeyFormatCalc( fieldModel.get( 'key' ) )
 				} );
 			}
 		},
@@ -302,6 +316,10 @@ define( [
 
 		getFieldKeyFormat: function( key ) {
 			return '{field:' + key + '}';
+		},
+
+		getFieldKeyFormatCalc: function( key ) {
+			return '{field:' + key + ':calc}';
 		},
 
 		replaceFieldKey: function( dataModel, keyModel, settingModel ) {

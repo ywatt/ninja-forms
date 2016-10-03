@@ -151,6 +151,13 @@ define( [], function() {
 
 		renderSetting: function( settingModel, dataModel, settingView ) {
 			this.initRTE( settingModel, dataModel,settingView );
+			var linkMenu = jQuery( settingView.el ).find( '.link-button' ).next( '.dropdown-menu' ).find( 'button' );
+			linkMenu.replaceWith(function () {
+			    return jQuery( '<div/>', {
+			        class: jQuery( linkMenu ).attr( 'class' ),
+			        html: this.innerHTML
+			    } );
+			} );
 		},
 
 		destroySetting: function( settingModel, dataModel, settingView ) {
@@ -168,11 +175,11 @@ define( [], function() {
 		linkButton: function( context ) {
 			var that = this;
 			var ui = jQuery.summernote.ui;
-			var linkButton = Marionette.TemplateCache.get( '#nf-tmpl-rte-link-button' );
-			var linkDropdown = Marionette.TemplateCache.get( '#nf-tmpl-rte-link-dropdown' );
+			var linkButton = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-link-button' );
+			var linkDropdown = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-link-dropdown' );
 			return ui.buttonGroup([
 				ui.button({
-	            className: 'dropdown-toggle',
+	            className: 'dropdown-toggle link-button',
 	            contents: linkButton({}),
 	            tooltip: 'Insert Link',
 	            click: function( e ) {
@@ -197,9 +204,9 @@ define( [], function() {
 
 		mergeTags: function( context ) {
 			var ui = jQuery.summernote.ui;
-			var mergeTagsButton = Marionette.TemplateCache.get( '#nf-tmpl-rte-merge-tags-button' );
+			var mergeTagsButton = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-merge-tags-button' );
 			return ui.button({
-				className: 'dropdown-toggle',
+				className: 'dropdown-toggle merge-tags',
 				contents: mergeTagsButton({}),
 				tooltip: 'Merge Tags'
 			}).render();
@@ -208,7 +215,7 @@ define( [], function() {
 		mediaButton: function( context ) {
 			var that = this;
 			var ui = jQuery.summernote.ui;
-			var mediaButton = Marionette.TemplateCache.get( '#nf-tmpl-rte-media-button' );
+			var mediaButton = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-rte-media-button' );
 			return ui.button({
 	            className: 'dropdown-toggle',
 	            contents: mediaButton({}),

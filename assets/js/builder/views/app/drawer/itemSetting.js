@@ -1,7 +1,7 @@
 define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], function( mergeTagsContentView, settingErrorView ) {
 	var view = Marionette.LayoutView.extend({
 		tagName: 'div',
-		template: '#nf-tmpl-edit-setting-wrap',
+		template: '#tmpl-nf-edit-setting-wrap',
 
 		regions: {
 			error: '.nf-setting-error'
@@ -127,8 +127,12 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 						});
 						break;
 					case 'currency':
+
+						var currency = nfRadio.channel( 'settings' ).request( 'get:setting', 'currency' );
+						var currencySymbol = nfAdmin.currencySymbols[ currency ] || '';
+
 						input.autoNumeric({
-							aSign: '$', // TODO: Use form setting
+							aSign:  jQuery('<div />').html(currencySymbol).text(),
 							aSep: thousandsSeparator,
 							aDec: decimalPoint
 						});
@@ -194,7 +198,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 	    			} else if ( 'undefined' == typeof this.value ) {
 	    				this.value = '';
 	    			}
-	    			var setting = Marionette.TemplateCache.get( '#nf-tmpl-edit-setting-' + this.type );
+	    			var setting = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-edit-setting-' + this.type );
 					return setting( this );
 				},
 

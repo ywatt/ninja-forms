@@ -1,6 +1,7 @@
 define([], function() {
 	var radioChannel = nfRadio.channel( 'email' );
-	var emailReg = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+	// var emailReg = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+	var emailReg = /^([\w-+]+(?:\.[\w-+]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 	var errorID = 'invalid-email';
 	var errorMsg = nfi18n.changeEmailErrorMsg;
 
@@ -47,6 +48,7 @@ define([], function() {
 		 * @return {void}
 		 */
 		emailKeyup: function( el, model, keyCode ) {
+			
 			/*
 			 * If we pressed the 'tab' key to get to this field, return false.
 			 */
@@ -66,13 +68,20 @@ define([], function() {
 			/*
 			 * Check our value to see if it is a valid email.
 			 */
+		
 			
 			if ( 0 == value.length ) {
 				nfRadio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
-			} else if ( ! emailReg.test( value ) ) {
+			} else if ( ! emailReg.test( value ) && ! model.get( 'clean' ) ) {
 				nfRadio.channel( 'fields' ).request( 'add:error', fieldID, errorID, errorMsg );
+				model.removeWrapperClass( 'nf-pass' );
 			} else if ( emailReg.test( value ) ) {
 				nfRadio.channel( 'fields' ).request( 'remove:error', fieldID, errorID );
+				/*
+				 * Add nf-pass class to the wrapper.
+				 */
+				model.addWrapperClass( 'nf-pass' );
+				model.set( 'clean', false );
 			}
 		}
 	});

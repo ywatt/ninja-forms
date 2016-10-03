@@ -9,7 +9,7 @@
 define( [], function() {
     var controller = Marionette.Object.extend( {
         initialize: function() {
-            this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.dropCreditCardField );
+          this.listenTo( nfRadio.channel( 'fields' ), 'after:addField', this.dropCreditCardField );
         },
 
         dropCreditCardField: function( fieldModel ) {

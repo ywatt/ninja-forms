@@ -211,7 +211,7 @@ define( [], function() {
 					}
 				} catch( exception ) {
 					console.log( 'Something went wrong!' );
-					console.log( response );
+					console.log( exception );
 				}
 				
 			} );

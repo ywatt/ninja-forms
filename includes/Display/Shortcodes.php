@@ -8,6 +8,8 @@ final class NF_Display_Shortcodes
         add_shortcode( 'ninja_form',  array( $this, 'display_form_front_end' ) );
         add_shortcode( 'ninja_forms', array( $this, 'display_form_front_end' ) );
 
+        add_shortcode( 'ninja_forms_display_form', array( $this, 'display_form_front_end' ) );
+
         add_shortcode( 'ninja_forms_subs', array( $this, 'ninja_forms_subs' ) );
     }
 
