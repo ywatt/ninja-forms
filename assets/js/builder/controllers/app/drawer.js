@@ -174,7 +174,7 @@ define( [], function() {
 		        		that.focusFilter();
 						that.hasFocus = true;
 			    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', drawerID );
-			    		// jQuery( drawerEl ).scrollTop( 0 );
+			    		jQuery( drawerEl ).scrollTop( 0 );
 			    		nfRadio.channel( 'drawer' ).trigger( 'opened' );
 					}   		
 	        	}
