@@ -223,13 +223,16 @@ class NF_Abstracts_Model
         $form_cache = get_option( 'nf_form_' . $this->_parent_id );
         if( $form_cache ){
 
-            if( isset( $form_cache[ $this->_type ] ) ) {
+            if( 'field'== $this->_type ) {
 
-                foreach ($form_cache[ $this->_type ] as $object_id => $object) {
-                    if ($this->_id != $object_id) continue;
+                if (isset($form_cache[ 'fields' ])) {
 
-                    $this->update_settings($object['settings']);
-                    break;
+                    foreach ($form_cache[ 'fields' ] as $object_id => $object) {
+                        if ($this->_id != $object_id) continue;
+
+                        $this->update_settings($object['settings']);
+                        break;
+                    }
                 }
             }
         }
