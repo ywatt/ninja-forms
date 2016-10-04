@@ -220,6 +220,20 @@ class NF_Abstracts_Model
         // If the ID is not set, then we cannot pull settings from the Database.
         if( ! $this->_id ) return $this->_settings;
 
+        $form_cache = get_option( 'nf_form_' . $this->_parent_id );
+        if( $form_cache ){
+
+            if( isset( $form_cache[ $this->_type ] ) ) {
+
+                foreach ($form_cache[ $this->_type ] as $object_id => $object) {
+                    if ($this->_id != $object_id) continue;
+
+                    $this->update_settings($object['settings']);
+                    break;
+                }
+            }
+        }
+
         // Only query if settings haven't been already queried or cache is FALSE.
         if( ! $this->_settings || ! $this->_cache ) {
 
