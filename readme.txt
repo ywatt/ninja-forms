@@ -102,7 +102,6 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-<<<<<<< HEAD
 = 3.0.8 (11 October 2016) =
 
 *Changes:*
@@ -110,17 +109,9 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Fixed a typo in the Submission Date Filter.
 * Added a filter (ninja_forms_display_fields) for removing fields form display.
 * Added a check for misconfigured shortcodes that break output.
-=======
-= 3.0.7 (06 October 2016) =
 
-*Changes:*
+*Bugs:*
 
-* Added background processing for publishing long forms to avoid timeout errors.
->>>>>>> 0550948a6c85bc65f0271817741958e3621f011f
-
-== Changelog ==
-
-<<<<<<< HEAD
 * Fixed a bug with exporting list fields in submissions.
 * Fixed a bug with outputting extra text on the submission submenu.
 * Fixed a bug with importing checkbox lists and default values.
@@ -130,13 +121,8 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Fixed a bug with using hidden fields in calculations.
 * Fixed a bug with refreshing newsletter lists in form actions.
 * Fixed a bug with field calculation values in merge tags.
-=======
-= 3.0.7 (06 October 2016) =
->>>>>>> 0550948a6c85bc65f0271817741958e3621f011f
 
-*Changes:*
-
-* Added background processing for publishing long forms to avoid timeout errors.
+== Changelog ==
 
 = 3.0.8 (11 October 2016) =
 
