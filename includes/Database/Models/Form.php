@@ -551,7 +551,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         /*
          * Convert inside label position over to placeholder
          */
-        if ( 'inside' == $field[ 'label_pos' ] ) {
+        if ( isset ( $field[ 'label_pos' ] ) && 'inside' == $field[ 'label_pos' ] ) {
             if ( ! isset ( $field[ 'placeholder' ] ) || empty ( $field[ 'placeholder' ] ) ) {
                 $field[ 'placeholder' ] = $field[ 'label' ];
             }
