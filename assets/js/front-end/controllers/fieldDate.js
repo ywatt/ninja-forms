@@ -10,6 +10,7 @@ define([], function() {
             var el = jQuery( view.el ).find( '.nf-element' )[0];
             var dateObject = pikadayResponsive( el, {
                 format: view.model.get( 'date_format' ),
+                outputFormat: view.model.get( 'date_format' ),
                 classes: jQuery( el ).attr( "class" )
             } );
             if ( 1 == view.model.get( 'date_default' ) ) {
