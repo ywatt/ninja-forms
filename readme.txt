@@ -102,27 +102,19 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.0.8 (11 October 2016) =
-
-*Changes:*
-
-* Fixed a typo in the Submission Date Filter.
-* Added a filter (ninja_forms_display_fields) for removing fields form display.
-* Added a check for misconfigured shortcodes that break output.
+= 3.0.9 (12 October 2016) =
 
 *Bugs:*
 
-* Fixed a bug with exporting list fields in submissions.
-* Fixed a bug with outputting extra text on the submission submenu.
-* Fixed a bug with importing checkbox lists and default values.
-* Fixed a bug with imported forms that contain HTML in fields.
-* Fixed a bug with date field formatting.
-* Fixed a bug with the builder drawer not scrolling to the top when opened.
-* Fixed a bug with using hidden fields in calculations.
-* Fixed a bug with refreshing newsletter lists in form actions.
-* Fixed a bug with field calculation values in merge tags.
+* Fixed a bug with loading the form builder form cache.
 
 == Changelog ==
+
+= 3.0.9 (12 October 2016) =
+
+*Bugs:*
+
+* Fixed a bug with loading the form builder form cache.
 
 = 3.0.8 (11 October 2016) =
 
