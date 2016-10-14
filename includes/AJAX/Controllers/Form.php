@@ -42,7 +42,7 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 
         if( isset( $form_data[ 'fields' ] ) ) {
 
-            foreach ($form_data['fields'] as $field_data) {
+            foreach ($form_data['fields'] as &$field_data) {
 
                 if( 'unknown' == $field_data[ 'settings' ][ 'type' ] ) continue;
 
@@ -55,6 +55,7 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
                     $field->save();
                     $tmp_id = $field->get_tmp_id();
                     $this->_data['new_ids']['fields'][$tmp_id] = $field->get_id();
+                    $field_data[ 'id' ] = $field->get_id();
                 }
 
                 $this->publish_processing->push_to_queue( array(
