@@ -168,7 +168,12 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $field = apply_filters( 'ninja_forms_pre_validate_field_settings', array_merge($field, $settings ) );
 
+
+        if( ! $field[ 'type' ] ) return false;
+
         $field_class = Ninja_Forms()->fields[ $field['type'] ];
+
+        if( ! $field_class ) return false;
 
         return $errors = $field_class->validate( $field, $data );
     }
@@ -197,8 +202,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
         $field = array_merge($field, $settings );
 
+        if( ! $field[ 'type' ] ) return false;
+
         $field_class = Ninja_Forms()->fields[ $field['type'] ];
 
+        if( ! $field_class ) return false;
 
         return $field_class->process( $field, $data );
     }
