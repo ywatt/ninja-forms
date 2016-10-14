@@ -84,7 +84,7 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
             /*
              * Loop Actions and fire Save() hooks.
              */
-            foreach ($form_data['actions'] as $action_data) {
+            foreach ($form_data['actions'] as &$action_data) {
 
                 $id = $action_data['id'];
 
@@ -108,6 +108,7 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
 
                     $tmp_id = $action->get_tmp_id();
                     $this->_data['new_ids']['actions'][$tmp_id] = $action->get_id();
+                    $action_data[ 'id' ] = $action->get_id();
                 }
 
                 $this->_data[ 'actions' ][ $id ] = $action->get_settings();
