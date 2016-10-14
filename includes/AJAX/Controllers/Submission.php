@@ -47,6 +47,9 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $this->_respond();
         }
 
+
+        register_shutdown_function( array( $this, 'shutdown' ) );
+
         $this->_form_id = $this->_data[ 'form_id' ] = $this->_form_data['id'];
 
         if( isset( $this->_form_data[ 'settings' ][ 'is_preview' ] ) && $this->_form_data[ 'settings' ][ 'is_preview' ] ){
@@ -315,5 +318,12 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         }
 
         return ( $a->get_timing() < $b->get_timing() ) ? -1 : 1;
+    }
+
+    public function shutdown() {
+        $error = error_get_last();
+        if( $error ) {
+            var_dump( $error );
+        }
     }
 }
