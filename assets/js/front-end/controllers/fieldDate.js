@@ -16,6 +16,8 @@ define([], function() {
             if ( 1 == view.model.get( 'date_default' ) ) {
                dateObject.setDate( moment() ); 
             }
+
+            nfRadio.channel( 'pikaday' ).trigger( 'init', dateObject, view.model );
         }
     });
 
