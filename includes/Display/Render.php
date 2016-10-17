@@ -309,6 +309,7 @@ final class NF_Display_Render
 
                 if( 'list' == $field[ 'settings' ][ 'parentType' ] && isset( $field['settings'][ 'options' ] ) && is_array( $field['settings'][ 'options' ] ) ){
                     $field['settings'][ 'options' ] = apply_filters( 'ninja_forms_render_options', $field['settings'][ 'options' ], $field['settings'] );
+                    $field['settings'][ 'options' ] = apply_filters( 'ninja_forms_render_options_' . $field['settings'][ 'type' ], $field['settings'][ 'options' ], $field['settings'] );
                 }
 
                 if (isset($field['settings']['default'])) {
