@@ -34,6 +34,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     {
         check_ajax_referer( 'ninja_forms_display_nonce', 'security' );
 
+        register_shutdown_function( array( $this, 'shutdown' ) );
+
         if( ! $this->_form_data ) {
 
             if( function_exists( 'json_last_error' ) // Function not supported in php5.2
@@ -319,5 +321,15 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         }
 
         return ( $a->get_timing() < $b->get_timing() ) ? -1 : 1;
+    }
+
+    public function shutdown()
+    {
+        $error = error_get_last();
+        if( $error !== NULL ) {
+            $this->_errors[ 'form' ][ 'last' ] = __( 'The server encountered an error during processing.', 'ninja-forms' );
+            $this->_errors[ 'last' ] = $error;
+            $this->_respond();
+        }
     }
 }
