@@ -223,26 +223,11 @@ class NF_Abstracts_Model
         $form_cache = get_option( 'nf_form_' . $this->_parent_id );
         if( $form_cache ){
 
-            // TODO: Duplication. Needs refactoring.
-
             if( 'field'== $this->_type ) {
 
                 if (isset($form_cache[ 'fields' ])) {
 
                     foreach ($form_cache[ 'fields' ] as $object) {
-                        if ($this->_id != $object[ 'id' ]) continue;
-
-                        $this->update_settings($object['settings']);
-                        break;
-                    }
-                }
-            }
-
-            if( 'action'== $this->_type ) {
-
-                if (isset($form_cache[ 'actions' ])) {
-
-                    foreach ($form_cache[ 'actions' ] as $object) {
                         if ($this->_id != $object[ 'id' ]) continue;
 
                         $this->update_settings($object['settings']);
