@@ -142,6 +142,8 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
          */
         protected $settings = array();
 
+        protected $requests = array();
+
         /**
          * Main Ninja_Forms Instance
          *
@@ -200,6 +202,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 self::$instance->controllers[ 'preview' ]     = new NF_AJAX_Controllers_Preview();
                 self::$instance->controllers[ 'submission' ]  = new NF_AJAX_Controllers_Submission();
                 self::$instance->controllers[ 'savedfields' ] = new NF_AJAX_Controllers_SavedFields();
+
+                /*
+                 * Async Requests
+                 */
+                require_once Ninja_Forms::$dir . 'includes/Libraries/BackgroundProcessing/classes/wp-async-request.php';
+                self::$instance->requests[ 'delete-field' ] = new NF_AJAX_Requests_DeleteField();
 
                 /*
                  * WP-CLI Commands
@@ -427,6 +435,13 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         public function session()
         {
             return $this->session;
+        }
+
+        public function request( $action )
+        {
+            if( ! isset( $this->requests[ $action ] ) ) return new NF_AJAX_Requests_NullRequest();
+
+            return $this->requests[ $action ];
         }
 
 	    /**
