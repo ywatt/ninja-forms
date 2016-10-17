@@ -279,7 +279,15 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
 
         $form_data = array();
         $form_data['id'] = $form_id;
-        $form_data['settings'] = $form->get_settings();
+
+        // Use form cache for form settings.
+        // TODO: Defer to refactor of factory/model.
+        if( isset( $form_cache[ 'settings' ] ) ) {
+            $form_data['settings'] = $form_cache[ 'settings' ];
+        } else {
+            $form_data['settings'] = $form->get_settings();
+        }
+
         $form_data['fields'] = $fields_settings;
         $form_data['actions'] = $actions_settings;
 
