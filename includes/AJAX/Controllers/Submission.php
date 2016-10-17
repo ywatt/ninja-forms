@@ -99,7 +99,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
                 if( ! isset( $this->_preview_data[ 'fields' ][ $field[ 'id' ] ][ 'settings' ] ) ) return;
                 $settings = $this->_preview_data[ 'fields' ][ $field[ 'id' ] ][ 'settings' ];
             } else {
-                $field_model = Ninja_Forms()->form()->field($field['id'])->get();
+                $field_model = Ninja_Forms()->form( $this->_form_id )->field($field['id'])->get();
                 $settings = $field_model->get_settings();
             }
             $this->_data[ 'fields' ][ $field_id ] = array_merge( $this->_data[ 'fields' ][ $field_id ], $settings );
@@ -159,7 +159,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             if( ! isset( $this->_preview_data[ 'fields' ][ $field[ 'id' ] ][ 'settings' ] ) ) return;
             $settings = $this->_preview_data[ 'fields' ][ $field[ 'id' ] ][ 'settings' ];
         } else {
-            $field_model = Ninja_Forms()->form()->field($field['id'])->get();
+            $field_model = Ninja_Forms()->form( $this->_form_id )->field($field['id'])->get();
             $settings = $field_model->get_settings();
         }
 
