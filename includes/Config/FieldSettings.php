@@ -827,21 +827,47 @@ return apply_filters( 'ninja_forms_field_settings', array(
     */
 
     'checked_calc_value'    => array(
-        'name'      => 'checked_calc_value',
-        'type'      => 'textbox',
-        'label'     => __( 'Checked Calculation Value', 'ninja-forms' ),
-        'width'     => 'one-half',
-        'group'     => 'advanced',
-        'help'      => __( 'This number will be used in calculations if the box is checked.', 'ninja-forms' ),
+        'name'              => 'checked_calc_value',
+        'type'              => 'textbox',
+        'label'             => __( 'Checked Calculation Value', 'ninja-forms' ),
+        'width'             => 'one-half',
+        'group'             => 'advanced',
+        'help'              => __( 'This number will be used in calculations if the box is checked.', 'ninja-forms' ),
     ),
 
-    'unchecked_calc_value'    => array(
-        'name'      => 'unchecked_calc_value',
+    'unchecked_calc_value'  => array(
+        'name'              => 'unchecked_calc_value',
+        'type'              => 'textbox',
+        'label'             => __( 'Unchecked Calculation Value', 'ninja-forms' ),
+        'width'             => 'one-half',
+        'group'             => 'advanced',
+        'help'              => __( 'This number will be used in calculations if the box is unchecked.', 'ninja-forms' ),
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | "Checked" or "Unchecked" string that is used in merge tags for checkbox fields
+    |--------------------------------------------------------------------------
+    */
+
+    'checked_merge_value'    => array(
+        'name'      => 'checked_merge_value',
         'type'      => 'textbox',
-        'label'     => __( 'Unchecked Calculation Value', 'ninja-forms' ),
+        'label'     => __( 'Checked Merge Tag Value', 'ninja-forms' ),
         'width'     => 'one-half',
         'group'     => 'advanced',
-        'help'      => __( 'This number will be used in calculations if the box is unchecked.', 'ninja-forms' ),
+        'help'      => __( 'This string will be used in merge tags for this field. i.e. "checked".', 'ninja-forms' ),
+        'placeholder'       => __( 'checked', 'ninja-forms' ),
+    ),
+
+    'unchecked_merge_value'    => array(
+        'name'      => 'unchecked_merge_value',
+        'type'      => 'textbox',
+        'label'     => __( 'Unchecked Merge Tag Value', 'ninja-forms' ),
+        'width'     => 'one-half',
+        'group'     => 'advanced',
+        'help'      => __( 'This string will be used in merge tags for this field. i.e. "unchecked".', 'ninja-forms' ),
+        'placeholder'       => __( 'unchecked', 'ninja-forms' ),
     ),
 
     /*

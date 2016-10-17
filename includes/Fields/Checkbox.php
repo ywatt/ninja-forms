@@ -19,7 +19,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
     protected $_test_value = 0;
 
-    protected $_settings =  array( 'checkbox_default_value', 'checked_calc_value', 'unchecked_calc_value' );
+    protected $_settings =  array( 'checkbox_default_value', 'checked_calc_value', 'unchecked_calc_value', 'checked_merge_value', 'unchecked_merge_value' );
 
     protected $_settings_exclude = array( 'default', 'placeholder', 'input_limit_set' );
 
@@ -54,15 +54,15 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
     public function filter_merge_tag_value( $value, $field )
     {
-        if( $value && isset( $field[ 'checked_calc_value' ] ) ){
-            return $field[ 'checked_calc_value' ];
+        if( 1 == $value && isset( $field[ 'checked_merge_value' ] ) && ! empty( $field[ 'checked_merge_value' ] ) ){
+            return $field[ 'checked_merge_value' ];
         }
 
-        if( ! $value && isset( $field[ 'unchecked_calc_value' ] ) ){
-            return $field[ 'unchecked_calc_value' ];
+        if( 0 == $value && isset( $field[ 'unchecked_merge_value' ] ) && ! empty( $field[ 'unchecked_merge_value' ] ) ){
+            return $field[ 'unchecked_merge_value' ];
         }
 
-        return $value;
+        return ( 1 == $value ) ? __( 'checked', 'ninja-forms' ) : __( 'unchecked', 'ninja-forms' );
     }
 
     public function filter_merge_tag_value_calc( $value, $field )
