@@ -67,29 +67,50 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $form->save();
         $form_id = $form->get_id();
 
+        $form_cache = array(
+            'id' => $form_id,
+            'fields' => array(),
+            'actions' => array(),
+            'settings' => $form->get_settings()
+        );
+        $update_process = Ninja_Forms()->background_process( 'update-fields' );
         foreach( $import[ 'fields' ] as $settings ){
-
             if( $is_conversion ) {
-
                 $field_id = $settings[ 'id' ];
-
                 $field = Ninja_Forms()->form($form_id)->field( $field_id )->get();
             } else {
                 unset( $settings[ 'id' ] );
                 $field = Ninja_Forms()->form($form_id)->field()->get();
+                $field->save();
             }
 
             $settings[ 'parent_id' ] = $form_id;
 
-            $field->update_settings( $settings )->save();
+            array_push( $form_cache[ 'fields' ], array(
+                'id' => $field->get_id(),
+                'settings' => $settings
+            ));
+
+            $update_process->push_to_queue(array(
+                'id' => $field->get_id(),
+                'settings' => $settings
+            ));
         }
+        $update_process->save()->dispatch();
 
         foreach( $import[ 'actions' ] as $settings ){
 
             $action = Ninja_Forms()->form($form_id)->action()->get();
 
             $action->update_settings( $settings )->save();
+
+            array_push( $form_cache[ 'actions' ], array(
+                'id' => $action->get_id(),
+                'settings' => $settings
+            ));
         }
+
+        update_option( 'nf_form_' . $form_id, $form_cache );
 
         add_action( 'admin_notices', array( 'NF_Database_Models_Form', 'import_admin_notice' ) );
 
