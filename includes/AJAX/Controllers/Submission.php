@@ -326,7 +326,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     public function shutdown()
     {
         $error = error_get_last();
-        if( $error !== NULL ) {
+        if( $error !== NULL && in_array( $error[ 'type' ], array( E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR ) ) ) {
             $this->_errors[ 'form' ][ 'last' ] = __( 'The server encountered an error during processing.', 'ninja-forms' );
             $this->_errors[ 'last' ] = $error;
             $this->_respond();
