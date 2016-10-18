@@ -76,7 +76,7 @@ class NF_Admin_CPT_Submission
             'show_in_nav_menus'   => true,
             'can_export'          => true,
             'has_archive'         => true,
-            'exclude_from_search' => false,
+            'exclude_from_search' => true,
             'publicly_queryable'  => true,
             'capability_type'     => 'page',
         );
