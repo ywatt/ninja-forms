@@ -102,7 +102,7 @@ final class NF_Display_Render
                  * TODO: Replace unique field key checks with a refactored model/factory.
                  */
                 $field_key = $field->get_setting( 'key' );
-                if( in_array( $field_key, $unique_field_keys ) ){
+                if( in_array( $field_key, $unique_field_keys ) || '' == $field_key ){
 
                     // Delete the field.
                     Ninja_Forms()->request( 'delete-field' )->data( array( 'field_id' => $field_id ) )->dispatch();
