@@ -64,7 +64,7 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
                     'settings' => $field_data[ 'settings' ]
                 ));
 
-                $this->_data[ 'fields' ][ $id ] = $field->get_settings();
+                $this->_data[ 'fields' ][ $field->get_id() ] = $field->get_settings();
             }
 
             $this->publish_processing->save()->dispatch();
