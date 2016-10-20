@@ -117,7 +117,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             if( ! isset( $this->_form_data[ 'fields' ][ $field_id ] ) ) continue;
             if( ! isset( $this->_form_data[ 'fields' ][ $field_id ][ 'value' ] ) ) continue;
 
-            $field[ 'settings' ][ 'value' ] = $this->_form_data[ 'fields' ][ $field_id ][ 'value' ];
+            // Duplicate field value to settings and top level array item for backwards compatible access (ie Save Action).
+            $field[ 'settings' ][ 'value' ] = $field[ 'value' ] = $this->_form_data[ 'fields' ][ $field_id ][ 'value' ];
 
             // Duplicate the Field ID for access as a setting.
             $field[ 'settings' ][ 'id' ] = $field[ 'id' ];
