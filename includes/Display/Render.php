@@ -151,7 +151,9 @@ final class NF_Display_Render
                     $field[ 'value' ] = $field_class->get_test_value();
                 }
 
-//                $field->update_setting('id', $field->get_id());
+                // Copy field ID into the field settings array for use in localized data.
+                $field[ 'settings' ][ 'id' ] = $field[ 'id' ];
+
 
                 /*
                  * TODO: For backwards compatibility, run the original action, get contents from the output buffer, and return the contents through the filter. Also display a PHP Notice for a deprecate filter.
