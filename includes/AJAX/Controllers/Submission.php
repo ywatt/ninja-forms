@@ -233,6 +233,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
     {
         $field_settings = apply_filters( 'ninja_forms_pre_validate_field_settings', $field_settings );
 
+        if( ! is_string( $field_settings['type'] ) ) return;
+
         $field_class = Ninja_Forms()->fields[ $field_settings['type'] ];
 
         if( ! method_exists( $field_class, 'validate' ) ) return;
@@ -245,6 +247,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     protected function process_field( $field_settings )
     {
+        if( ! is_string( $field_settings['type'] ) ) return;
+
         $field_class = Ninja_Forms()->fields[ $field_settings['type'] ];
 
         if( ! method_exists( $field_class, 'process' ) ) return;

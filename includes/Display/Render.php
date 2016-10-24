@@ -137,6 +137,8 @@ final class NF_Display_Render
 
                 $field_type = $field[ 'settings' ][ 'type' ];
 
+                if( ! is_string( $field_type ) ) continue;
+
                 if( ! isset( Ninja_Forms()->fields[ $field_type ] ) ) {
                     $field = NF_Fields_Unknown::create( $field );
                     $field_type = $field[ 'settings' ][ 'type' ];
