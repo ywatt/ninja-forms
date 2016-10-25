@@ -449,6 +449,11 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             }
         }
 
+        if( 'country' == $field[ 'type' ] ){
+            $field[ 'type' ] = 'listcountry';
+            $field[ 'options' ] = array();
+        }
+
         // Convert `textbox` to other field types
         foreach( array( 'fist_name', 'last_name', 'user_zip', 'user_city', 'user_phone', 'user_email', 'user_address_1', 'user_address_2', 'datepicker' ) as $item ) {
             if ( isset( $field[ $item ] ) && $field[ $item ] ) {
