@@ -235,6 +235,17 @@ class NF_Abstracts_Model
                     }
                 }
             }
+
+            if( 'form' == $this->_type ){
+                if( isset( $form_cache[ 'settings' ] ) ) {
+                    $this->update_settings($form_cache['settings']);
+                }
+            }
+
+            if( 'action' == $this->_type ){
+                // This section intentionally left blank.
+                // There was previously an issue with saving form actions to the cache, so we need to localize form the database.
+            }
         }
 
         // Only query if settings haven't been already queried or cache is FALSE.
