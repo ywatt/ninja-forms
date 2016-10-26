@@ -46,11 +46,15 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
     public static function get_next_sub_seq( $form_id )
     {
-        $form = Ninja_Forms()->form( $form_id )->get();
+        global $wpdb;
 
-        $last_seq_num = $form->get_setting( '_seq_num', 1 );
+        // TODO: Leverage form cache.
 
-        $form->update_setting( '_seq_num', $last_seq_num + 1 )->save();
+        $last_seq_num = $wpdb->get_var( $wpdb->prepare(
+            'SELECT value FROM ' . $wpdb->prefix . 'nf3_form_meta WHERE `key` = "_seq_num" AND `parent_id` ="' . $form_id . '"'
+        ));
+
+        $wpdb->update( $wpdb->prefix . 'nf3_form_meta', array( 'value' => $last_seq_num + 1 ), array( 'key' => '_seq_num', 'parent_id' => $form_id ) );
 
         return $last_seq_num;
     }
@@ -464,6 +468,11 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
                 if( isset( $option[ 'value' ] ) && $option[ 'value' ] ) continue;
                 $option[ 'value' ] = $option[ 'label' ];
             }
+        }
+
+        if( 'country' == $field[ 'type' ] ){
+            $field[ 'type' ] = 'listcountry';
+            $field[ 'options' ] = array();
         }
 
         // Convert `textbox` to other field types
