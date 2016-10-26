@@ -167,8 +167,9 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $actions = Ninja_Forms()->form($this->_form_id)->get_actions();
             $this->_form_cache[ 'actions' ] = array();
             foreach( $actions as $action ){
-                $this->_form_cache[ 'actions' ][] = array(
-                    'id' => $action->get_id(),
+                $action_id = $action->get_id();
+                $this->_form_cache[ 'actions' ][ $action_id ] = array(
+                    'id' => $action_id,
                     'settings' => $action->get_settings()
                 );
             }
