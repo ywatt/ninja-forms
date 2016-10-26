@@ -159,6 +159,25 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         |--------------------------------------------------------------------------
         */
 
+        /*
+         * TODO: Add async fix for duplicate actions in Form Cache.
+         * Bypass form cache for actions.
+         */
+        if( ! $this->is_preview() ) {
+            $actions = Ninja_Forms()->form($this->_form_id)->get_actions();
+            $this->_form_cache[ 'actions' ] = array();
+            foreach( $actions as $action ){
+                $this->_form_cache[ 'actions' ][] = array(
+                    'id' => $action->get_id(),
+                    'settings' => $action->get_settings()
+                );
+            }
+        } else {
+            $preview_data = get_user_option( 'nf_form_preview_' . $this->_form_id );
+            $this->_form_cache[ 'actions' ] = $preview_data[ 'actions' ];
+        }
+        /* END form cache bypass. */
+
         // Sort Actions by Timing Order, then by Priority Order.
         usort( $this->_form_cache[ 'actions' ], array( $this, 'sort_form_actions' ) );
 
