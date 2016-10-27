@@ -66,6 +66,11 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $form->update_settings( $import[ 'settings' ] );
         $form->save();
         $form_id = $form->get_id();
+        
+        /*
+         * Bust any cache that may exist for this form ID.
+         */
+        delete_option( 'nf_form_' . $form_id );
 
         foreach( $import[ 'fields' ] as $settings ){
 
