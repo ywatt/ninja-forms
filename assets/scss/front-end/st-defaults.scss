@@ -218,6 +218,22 @@ HELPER CLASSES
         }
     }
 }
+.five-col-list {
+    ul {
+        li {
+            float: left;
+            width: 20%
+        }
+    }
+}
+.six-col-list {
+    ul {
+        li {
+            float: left;
+            width: 16.66%
+        }
+    }
+}
 
 
 body {
