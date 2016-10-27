@@ -51,12 +51,11 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         // TODO: Leverage form cache.
 
         $last_seq_num = $wpdb->get_var( $wpdb->prepare(
-            'SELECT value FROM ' . $wpdb->prefix . 'nf3_form_meta WHERE `key` = "_seq_num" AND `parent_id` ="' . $form_id . '"'
-        ));
+            'SELECT value FROM ' . $wpdb->prefix . 'nf3_form_meta WHERE `key` = "_seq_num" AND `parent_id` = %s'
+        , $form_id ) );
 
         if( $last_seq_num ) {
             $wpdb->update( $wpdb->prefix . 'nf3_form_meta', array( 'value' => $last_seq_num + 1 ), array( 'key' => '_seq_num', 'parent_id' => $form_id ) );
-
         } else {
             $last_seq_num = 1;
             $wpdb->insert( $wpdb->prefix . 'nf3_form_meta', array( 'key' => '_seq_num', 'value' => $last_seq_num + 1, 'parent_id' => $form_id ) );
