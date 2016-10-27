@@ -134,6 +134,13 @@ define( [], function() {
 				        delete field[ prop ];
 				    }
 				}
+
+				for( var setting in settings ){
+					if( null === settings[ setting ] || '' == settings[ setting ] ) {
+						delete settings[setting];
+					}
+				}
+
 				// Update our field object.
 				field.settings = settings;
 				field.id = id;
