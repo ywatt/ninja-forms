@@ -84,6 +84,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         $this->_data[ 'form_id' ] = $this->_form_id;
         $this->_data[ 'settings' ] = $this->_form_cache[ 'settings' ];
         $this->_data[ 'settings' ][ 'is_preview' ];
+        $this->_data[ 'extra' ] = $this->_form_data[ 'extra' ];
 
         /*
         |--------------------------------------------------------------------------
