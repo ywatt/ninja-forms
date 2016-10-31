@@ -69,11 +69,12 @@ define([], function() {
 			 */
 
  			var formID = formModel.get( 'id' );
-			var fields = [];
+			var fields = {};
 			_.each( formModel.get( 'fields' ).models, function( field ) {
 				var fieldDataDefaults = { value:field.get( 'value' ), id:field.get( 'id' ) };
-				var fieldData = nfRadio.channel( field.get( 'type' ) ).request( 'get:submitData', fieldDataDefaults, field ) || fieldDataDefaults;
-				fields.push( fieldData );
+
+				// Add field data at the field ID for efficient access.
+				fields[ field.get( 'id' ) ] = nfRadio.channel( field.get( 'type' ) ).request( 'get:submitData', fieldDataDefaults, field ) || fieldDataDefaults;;
 			} );
 			var extra = formModel.get( 'extra' );
 			var settings = formModel.get( 'settings' );
