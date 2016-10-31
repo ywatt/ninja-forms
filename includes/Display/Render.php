@@ -488,7 +488,8 @@ final class NF_Display_Render
             'adminAjax' => admin_url( 'admin-ajax.php' ),
             'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
             'use_merge_tags' => array(),
-            'opinionated_styles' => Ninja_Forms()->get_setting( 'opinionated_styles' )
+            'opinionated_styles' => Ninja_Forms()->get_setting( 'opinionated_styles' ),
+            'rest_url' => rest_url() . 'ninja-forms/v1/form/'
         ));
 
         foreach( Ninja_Forms()->fields as $field ){

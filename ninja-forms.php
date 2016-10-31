@@ -640,24 +640,67 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         }
 
         public function register_rest_routes() {
-            register_rest_route( 'ninja-forms/v1', '/form/(?P<form>\S+)/fields', array(
+            register_rest_route( 'ninja-forms/v1', '/form/(?P<id>\d+)', array(
                 'methods' => 'GET',
-                'callback' => array( $this, 'rest_fields_comp' ),
-                'permission_callback' => array( $this, 'check_rest_permissions' )
+                'callback' => array( $this, 'rest_form' )
             ) );
 
-            register_rest_route( 'ninja-forms/v1', '/form/(?P<form>\S+)/field/(?P<field>\S+)', array(
+            register_rest_route( 'ninja-forms/v1', '/form/(?P<id>\d+)/fields', array(
                 'methods' => 'GET',
-                'callback' => array( $this, 'rest_field_comp' ),
+                'callback' => array( $this, 'rest_fields' )
             ) );
         }
 
-        public function rest_fields_comp( $data ) {
-            return '{"648":{"settings":{"label":"Submit","key":"submit","parent_id":"111","type":"submit","created_at":"2016-10-04 15:17:35","objectType":"Field","objectDomain":"fields","editActive":"","order":4,"processing_label":"Processing","container_class":"","element_class":"","wrap_styles_background-color":"","wrap_styles_border":"","wrap_styles_border-style":"","wrap_styles_border-color":"","wrap_styles_color":"","wrap_styles_height":"","wrap_styles_width":"","wrap_styles_font-size":"","wrap_styles_margin":"","wrap_styles_padding":"","wrap_styles_display":"","wrap_styles_float":"","wrap_styles_show_advanced_css":0,"wrap_styles_advanced":"","label_styles_background-color":"","label_styles_border":"","label_styles_border-style":"","label_styles_border-color":"","label_styles_color":"","label_styles_height":"","label_styles_width":"","label_styles_font-size":"","label_styles_margin":"","label_styles_padding":"","label_styles_display":"","label_styles_float":"","label_styles_show_advanced_css":0,"label_styles_advanced":"","element_styles_background-color":"","element_styles_border":"","element_styles_border-style":"","element_styles_border-color":"","element_styles_color":"","element_styles_height":"","element_styles_width":"","element_styles_font-size":"","element_styles_margin":"","element_styles_padding":"","element_styles_display":"","element_styles_float":"","element_styles_show_advanced_css":0,"element_styles_advanced":"","submit_element_hover_styles_background-color":"","submit_element_hover_styles_border":"","submit_element_hover_styles_border-style":"","submit_element_hover_styles_border-color":"","submit_element_hover_styles_color":"","submit_element_hover_styles_height":"","submit_element_hover_styles_width":"","submit_element_hover_styles_font-size":"","submit_element_hover_styles_margin":"","submit_element_hover_styles_padding":"","submit_element_hover_styles_display":"","submit_element_hover_styles_float":"","submit_element_hover_styles_show_advanced_css":0,"submit_element_hover_styles_advanced":"","cellcid":"c4226"}},"647":{"settings":{"label":"Email","key":"email","parent_id":"111","type":"email","created_at":"2016-10-04 15:17:35","objectType":"Field","objectDomain":"fields","editActive":"","order":3,"label_pos":"default","required":"","default":"","placeholder":"","container_class":"","element_class":"","admin_label":"","help_text":"","desc_text":"","wrap_styles_background-color":"","wrap_styles_border":"","wrap_styles_border-style":"","wrap_styles_border-color":"","wrap_styles_color":"","wrap_styles_height":"","wrap_styles_width":"","wrap_styles_font-size":"","wrap_styles_margin":"","wrap_styles_padding":"","wrap_styles_display":"","wrap_styles_float":"","wrap_styles_show_advanced_css":0,"wrap_styles_advanced":"","label_styles_background-color":"","label_styles_border":"","label_styles_border-style":"","label_styles_border-color":"","label_styles_color":"","label_styles_height":"","label_styles_width":"","label_styles_font-size":"","label_styles_margin":"","label_styles_padding":"","label_styles_display":"","label_styles_float":"","label_styles_show_advanced_css":0,"label_styles_advanced":"","element_styles_background-color":"","element_styles_border":"","element_styles_border-style":"","element_styles_border-color":"","element_styles_color":"","element_styles_height":"","element_styles_width":"","element_styles_font-size":"","element_styles_margin":"","element_styles_padding":"","element_styles_display":"","element_styles_float":"","element_styles_show_advanced_css":0,"element_styles_advanced":"","cellcid":"c4223"}},"646":{"settings":{"label":"Last Name","key":"lastname","parent_id":"111","type":"lastname","created_at":"2016-10-04 15:17:35","objectType":"Field","objectDomain":"fields","editActive":"","order":2,"label_pos":"default","required":"","default":"","placeholder":"","container_class":"","element_class":"","admin_label":"","help_text":"","desc_text":"","wrap_styles_background-color":"","wrap_styles_border":"","wrap_styles_border-style":"","wrap_styles_border-color":"","wrap_styles_color":"","wrap_styles_height":"","wrap_styles_width":"","wrap_styles_font-size":"","wrap_styles_margin":"","wrap_styles_padding":"","wrap_styles_display":"","wrap_styles_float":"","wrap_styles_show_advanced_css":0,"wrap_styles_advanced":"","label_styles_background-color":"","label_styles_border":"","label_styles_border-style":"","label_styles_border-color":"","label_styles_color":"","label_styles_height":"","label_styles_width":"","label_styles_font-size":"","label_styles_margin":"","label_styles_padding":"","label_styles_display":"","label_styles_float":"","label_styles_show_advanced_css":0,"label_styles_advanced":"","element_styles_background-color":"","element_styles_border":"","element_styles_border-style":"","element_styles_border-color":"","element_styles_color":"","element_styles_height":"","element_styles_width":"","element_styles_font-size":"","element_styles_margin":"","element_styles_padding":"","element_styles_display":"","element_styles_float":"","element_styles_show_advanced_css":0,"element_styles_advanced":"","cellcid":"c4220"}},"645":{"settings":{"label":"First Name","key":"firstname","parent_id":"111","type":"firstname","created_at":"2016-10-04 15:17:35","objectType":"Field","objectDomain":"fields","editActive":"","order":1,"label_pos":"default","required":"","default":"","placeholder":"","container_class":"","element_class":"","admin_label":"","help_text":"","desc_text":"","wrap_styles_background-color":"","wrap_styles_border":"","wrap_styles_border-style":"","wrap_styles_border-color":"","wrap_styles_color":"","wrap_styles_height":"","wrap_styles_width":"","wrap_styles_font-size":"","wrap_styles_margin":"","wrap_styles_padding":"","wrap_styles_display":"","wrap_styles_float":"","wrap_styles_show_advanced_css":0,"wrap_styles_advanced":"","label_styles_background-color":"","label_styles_border":"","label_styles_border-style":"","label_styles_border-color":"","label_styles_color":"","label_styles_height":"","label_styles_width":"","label_styles_font-size":"","label_styles_margin":"","label_styles_padding":"","label_styles_display":"","label_styles_float":"","label_styles_show_advanced_css":0,"label_styles_advanced":"","element_styles_background-color":"","element_styles_border":"","element_styles_border-style":"","element_styles_border-color":"","element_styles_color":"","element_styles_height":"","element_styles_width":"","element_styles_font-size":"","element_styles_margin":"","element_styles_padding":"","element_styles_display":"","element_styles_float":"","element_styles_show_advanced_css":0,"element_styles_advanced":"","cellcid":"c4354"}}}';
+        public function rest_form( $data ) {
+            /*
+             * Check the usermeta cache for form data
+             */
+            $private_cache = get_user_meta ( get_current_user_id(), 'wp_nf_form_preview_' . $data[ 'id' ], true );
+            if ( $private_cache ) {
+                return json_encode( maybe_unserialize( $private_cache ) );
+            }
+
+            /*
+             * Check the wp_option cache for form data
+             */
+            $public_cache = get_option( 'nf_form_' . $data[ 'id' ] );
+            if ( $public_cache ) {
+                return json_encode( maybe_unserialize( $public_cache ) );
+            }
+
+            return false;
         }
 
-        public function rest_field_comp( $data ) {
-            return '{"settings":{"label":"Submit","key":"submit","parent_id":"111","type":"submit","created_at":"2016-10-04 15:17:35","objectType":"Field","objectDomain":"fields","editActive":"","order":4,"processing_label":"Processing","container_class":"","element_class":"","wrap_styles_background-color":"","wrap_styles_border":"","wrap_styles_border-style":"","wrap_styles_border-color":"","wrap_styles_color":"","wrap_styles_height":"","wrap_styles_width":"","wrap_styles_font-size":"","wrap_styles_margin":"","wrap_styles_padding":"","wrap_styles_display":"","wrap_styles_float":"","wrap_styles_show_advanced_css":0,"wrap_styles_advanced":"","label_styles_background-color":"","label_styles_border":"","label_styles_border-style":"","label_styles_border-color":"","label_styles_color":"","label_styles_height":"","label_styles_width":"","label_styles_font-size":"","label_styles_margin":"","label_styles_padding":"","label_styles_display":"","label_styles_float":"","label_styles_show_advanced_css":0,"label_styles_advanced":"","element_styles_background-color":"","element_styles_border":"","element_styles_border-style":"","element_styles_border-color":"","element_styles_color":"","element_styles_height":"","element_styles_width":"","element_styles_font-size":"","element_styles_margin":"","element_styles_padding":"","element_styles_display":"","element_styles_float":"","element_styles_show_advanced_css":0,"element_styles_advanced":"","submit_element_hover_styles_background-color":"","submit_element_hover_styles_border":"","submit_element_hover_styles_border-style":"","submit_element_hover_styles_border-color":"","submit_element_hover_styles_color":"","submit_element_hover_styles_height":"","submit_element_hover_styles_width":"","submit_element_hover_styles_font-size":"","submit_element_hover_styles_margin":"","submit_element_hover_styles_padding":"","submit_element_hover_styles_display":"","submit_element_hover_styles_float":"","submit_element_hover_styles_show_advanced_css":0,"submit_element_hover_styles_advanced":"","cellcid":"c4226"}}';
+        public function rest_fields( $data ) {
+            /*
+             * Check the usermeta cache for form data
+             */
+            $cache = get_user_meta ( get_current_user_id(), 'wp_nf_form_preview_' . $data[ 'id' ], true );
+            
+            /*
+             * If we don't have user_meta cache, check the options table.
+             */
+            if ( ! $cache ) {
+                $cache = get_option( 'nf_form_' . $data[ 'id' ] );
+            }
+
+            /*
+             * Unserialize our cache and return JSON.
+             */
+            if ( $cache ) {
+                $form = maybe_unserialize( $cache );
+                /*
+                 * Loop over our fields and move ['settings'] to the top level.
+                 */
+                foreach( $form[ 'fields' ] as &$field ) {
+                    $settings = $field[ 'settings' ];
+                    unset( $field[ 'settings' ] );
+                    $field = array_merge( $field, $settings );
+                }
+                return $form[ 'fields' ];
+            }
+
+            return false;
         }
 
         public function check_rest_permissions() {
