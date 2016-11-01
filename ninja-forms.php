@@ -654,56 +654,54 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             }
         }
 
-        public function register_rest_routes() {
-            register_rest_route( 'ninja-forms/v1', '/form/(?P<id>\d+)', array(
-                'methods' => 'GET',
-                'callback' => array( $this, 'rest_form' )
-            ) );
-
-            register_rest_route( 'ninja-forms/v1', '/form/(?P<id>\d+)/fields', array(
-                'methods' => 'GET',
-                'callback' => array( $this, 'rest_fields' )
-            ) );
-        }
-
-        public function rest_form( $data ) {
+        public function db_stuff( $id ) {
             /*
              * Check the usermeta cache for form data
              */
-            $private_cache = get_user_meta ( get_current_user_id(), 'wp_nf_form_preview_' . $data[ 'id' ], true );
-            if ( $private_cache ) {
-                return json_encode( maybe_unserialize( $private_cache ) );
-            }
-
-            /*
-             * Check the wp_option cache for form data
-             */
-            $public_cache = get_option( 'nf_form_' . $data[ 'id' ] );
-            if ( $public_cache ) {
-                return json_encode( maybe_unserialize( $public_cache ) );
-            }
-
-            return false;
-        }
-
-        public function rest_fields( $data ) {
-            /*
-             * Check the usermeta cache for form data
-             */
-            $cache = get_user_meta ( get_current_user_id(), 'wp_nf_form_preview_' . $data[ 'id' ], true );
+            $form = get_user_meta ( get_current_user_id(), 'wp_nf_form_preview_' . $id, true );
             
             /*
              * If we don't have user_meta cache, check the options table.
              */
-            if ( ! $cache ) {
-                $cache = get_option( 'nf_form_' . $data[ 'id' ] );
+            if ( ! $form ) {
+                $form = get_option( 'nf_form_' . $id );
             }
+
+            /*
+             * TODO: We dont' have any caches, so pull everything from the DB and create a public cache.
+             */
+
+            return maybe_unserialize( $form );
+        }
+
+        public function register_rest_routes() {
+            register_rest_route( 'ninja-forms/v1', '/form/(?P<id>\d+)', array(
+                'methods' => 'GET',
+                'callback' => array( $this, 'rest_get_form' )
+            ) );
+
+            register_rest_route( 'ninja-forms/v1', '/form/(?P<id>\d+)/fields', array(
+                'methods' => 'GET',
+                'callback' => array( $this, 'rest_get_fields' )
+            ) );
+
+            register_rest_route( 'ninja-forms/v1', '/form/(?P<id>\d+)/settings', array(
+                'methods' => 'GET',
+                'callback' => array( $this, 'rest_get_settings' )
+            ) );
+        }
+
+        public function rest_get_form( $data ) {
+            return $this->db_stuff( $data[ 'id' ] );
+        }
+
+        public function rest_get_fields( $data ) {
+            $form = $this->db_stuff( $data[ 'id' ] );
 
             /*
              * Unserialize our cache and return JSON.
              */
-            if ( $cache ) {
-                $form = maybe_unserialize( $cache );
+            if ( $form ) {
                 /*
                  * Loop over our fields and move ['settings'] to the top level.
                  */
@@ -718,13 +716,16 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             return false;
         }
 
+        public function rest_get_settings( $data ) {
+            $form = $this->db_stuff( $data[ 'id' ] );
+            return $form[ 'settings' ];
+        }
+
         public function check_rest_permissions() {
             return current_user_can( 'manage_options' );
         }
 
     } // End Class Ninja_Forms
-
-
 
     /**
      * The main function responsible for returning The Highlander Ninja_Forms
