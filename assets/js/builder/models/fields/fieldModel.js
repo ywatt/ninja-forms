@@ -18,6 +18,11 @@ define( [], function() {
 		initialize: function() {
 			if ( 'undefined' == typeof this.get( 'type' ) ) return;
 
+			/*
+			 * Force order to be an integer.
+			 */
+			this.set( 'order', parseInt( this.get( 'order' ) ) );
+
 			// Listen for model attribute changes
 			this.on( 'change', this.changeSetting, this );
 
