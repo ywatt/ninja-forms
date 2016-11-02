@@ -675,17 +675,17 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         }
 
         public function register_rest_routes() {
-            register_rest_route( 'ninja-forms/v1', '/form/(?P<id>\d+)', array(
+            register_rest_route( 'ninja-forms/v1', '/forms/(?P<id>\d+)', array(
                 'methods' => 'GET',
                 'callback' => array( $this, 'rest_get_form' )
             ) );
 
-            register_rest_route( 'ninja-forms/v1', '/form/(?P<id>\d+)/fields', array(
+            register_rest_route( 'ninja-forms/v1', '/forms/(?P<id>\d+)/fields', array(
                 'methods' => 'GET',
                 'callback' => array( $this, 'rest_get_fields' )
             ) );
 
-            register_rest_route( 'ninja-forms/v1', '/form/(?P<id>\d+)/settings', array(
+            register_rest_route( 'ninja-forms/v1', '/forms/(?P<id>\d+)/settings', array(
                 'methods' => 'GET',
                 'callback' => array( $this, 'rest_get_settings' )
             ) );
