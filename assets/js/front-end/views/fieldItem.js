@@ -54,7 +54,6 @@ define( [], function() {
 
     			jQuery( this.el ).find( '.nf-element' ).mask( mask );
     		}
-    		console.log( this.model.get( 'label' ) );
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'render:view', this );
 			nfRadio.channel( 'fields' ).trigger( 'render:view', this );
 		},
