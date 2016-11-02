@@ -81,8 +81,14 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         // Init Calc Merge Tags.
         $calcs_merge_tags = Ninja_Forms()->merge_tags[ 'calcs' ];
 
+        $form_settings = $this->_form_cache[ 'settings' ];
+        if( ! $form_settings ){
+            $form = Ninja_Forms()->form( $this->_form_id )->get();
+            $form_settings = $form->get_settings();
+        }
+
         $this->_data[ 'form_id' ] = $this->_form_id;
-        $this->_data[ 'settings' ] = $this->_form_cache[ 'settings' ];
+        $this->_data[ 'settings' ] = $form_settings;
         $this->_data[ 'settings' ][ 'is_preview' ];
         $this->_data[ 'extra' ] = $this->_form_data[ 'extra' ];
 
@@ -92,6 +98,9 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         |--------------------------------------------------------------------------
         */
 
+        $form_fields = $this->_form_cache['fields'];
+        if( empty( $form_fields ) ) $form_fields = Ninja_Forms()->form( $this->_form_id )->get_fields();
+
         /**
          * The Field Processing Loop.
          *
@@ -99,7 +108,14 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
          * For performance reasons, this should be the only time that the fields array is traversed.
          * Anything needing to loop through fields should integrate here.
          */
-        foreach( $this->_form_cache['fields'] as $key => $field ){
+        foreach( $form_fields as $key => $field ){
+
+            if( is_object( $field ) ) {
+                $field = array(
+                    'id' => $field->get_id(),
+                    'settings' => $field->get_settings()
+                );
+            }
 
             /** Get the field ID */
             /*
