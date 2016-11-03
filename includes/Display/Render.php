@@ -89,7 +89,8 @@ final class NF_Display_Render
         $form->update_setting( 'afterForm', $after_form );
 
         $form_cache = get_option( 'nf_form_' . $form_id, false );
-        $form_fields = $form_cache[ 'fields' ]; // $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
+        $form_fields = $form_cache[ 'fields' ];
+        if( empty( $form_fields ) ) $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
         $fields = array();
 
         if( empty( $form_fields ) ){
@@ -101,6 +102,13 @@ final class NF_Display_Render
             $cache_updated = false;
 
             foreach ($form_fields as $field) {
+
+                if( is_object( $field ) ) {
+                    $field = array(
+                        'id' => $field->get_id(),
+                        'settings' => $field->get_settings()
+                    );
+                }
 
                 $field_id = $field[ 'id' ];
 
