@@ -48,6 +48,28 @@ final class NF_Display_Render
         $form = Ninja_Forms()->form( $form_id )->get();
 
         $settings = $form->get_settings();
+
+        foreach( $settings as $name => $value ){
+            if( ! in_array(
+                    $name,
+                    array(
+                        'changeEmailErrorMsg',
+                        'confirmFieldErrorMsg',
+                        'fieldNumberNumMinError',
+                        'fieldNumberNumMaxError',
+                        'fieldNumberIncrementBy',
+                        'formErrorsCorrectErrors',
+                        'validateRequiredField',
+                        'honeypotHoneypotError',
+                        'fieldsMarkedRequired',
+                    )
+            ) ) continue;
+
+            if( $value ) continue;
+
+            unset( $settings[ $name ] );
+        }
+
         $settings = array_merge( Ninja_Forms::config( 'i18nFrontEnd' ), $settings );
         $form->update_settings( $settings );
 
