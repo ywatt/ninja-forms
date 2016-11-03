@@ -47,6 +47,32 @@ final class NF_Display_Render
         }
         $form = Ninja_Forms()->form( $form_id )->get();
 
+        $settings = $form->get_settings();
+
+        foreach( $settings as $name => $value ){
+            if( ! in_array(
+                    $name,
+                    array(
+                        'changeEmailErrorMsg',
+                        'confirmFieldErrorMsg',
+                        'fieldNumberNumMinError',
+                        'fieldNumberNumMaxError',
+                        'fieldNumberIncrementBy',
+                        'formErrorsCorrectErrors',
+                        'validateRequiredField',
+                        'honeypotHoneypotError',
+                        'fieldsMarkedRequired',
+                    )
+            ) ) continue;
+
+            if( $value ) continue;
+
+            unset( $settings[ $name ] );
+        }
+
+        $settings = array_merge( Ninja_Forms::config( 'i18nFrontEnd' ), $settings );
+        $form->update_settings( $settings );
+
         if( $form->get_setting( 'logged_in' ) && ! is_user_logged_in() ){
             echo $form->get_setting( 'not_logged_in_msg' );
             return;
@@ -89,7 +115,8 @@ final class NF_Display_Render
         $form->update_setting( 'afterForm', $after_form );
 
         $form_cache = get_option( 'nf_form_' . $form_id, false );
-        $form_fields = $form_cache[ 'fields' ]; // $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
+        $form_fields = $form_cache[ 'fields' ];
+        if( empty( $form_fields ) ) $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
         $fields = array();
 
         if( empty( $form_fields ) ){
@@ -101,6 +128,13 @@ final class NF_Display_Render
             $cache_updated = false;
 
             foreach ($form_fields as $field) {
+
+                if( is_object( $field ) ) {
+                    $field = array(
+                        'id' => $field->get_id(),
+                        'settings' => $field->get_settings()
+                    );
+                }
 
                 $field_id = $field[ 'id' ];
 
@@ -311,6 +345,8 @@ final class NF_Display_Render
             return;
         }
 
+        $form[ 'settings' ] = array_merge( Ninja_Forms::config( 'i18nFrontEnd' ), $form[ 'settings' ] );
+
         $form[ 'settings' ][ 'is_preview' ] = TRUE;
 
         $currency = ( isset( $form[ 'settings' ][ 'currency' ] ) && $form[ 'settings' ][ 'currency' ] ) ? $form[ 'settings' ][ 'currency' ] : Ninja_Forms()->get_setting( 'currency' ) ;
@@ -451,13 +487,12 @@ final class NF_Display_Render
         </script>
 
         <?php
-        self::enqueue_scripts( $form_id );
+        self::enqueue_scripts( $form_id, true );
     }
 
-    public static function enqueue_scripts( $form_id )
+    public static function enqueue_scripts( $form_id, $is_preview = false )
     {
         $form = Ninja_Forms()->form( $form_id )->get();
-        $is_preview = ( $form->get_tmp_id() );
 
         $ver     = Ninja_Forms::VERSION;
         $js_dir  = Ninja_Forms::$url . 'assets/js/min/';
