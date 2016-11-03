@@ -84,7 +84,7 @@ define([], function() {
 
 				var formModel  = nfRadio.channel( 'form-' + model.get( 'formID' ) ).request( 'get:form' );
 
-				if( 'undefined' == typeof formModel ) {
+				if( 'undefined' != typeof formModel ) {
 					nfRadio.channel('fields').request('add:error', model.get('id'), 'required-error', formModel.get('settings').validateRequiredField);
 				}
 			} else {
