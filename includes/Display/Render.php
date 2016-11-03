@@ -486,13 +486,12 @@ final class NF_Display_Render
         </script>
 
         <?php
-        self::enqueue_scripts( $form_id );
+        self::enqueue_scripts( $form_id, true );
     }
 
-    public static function enqueue_scripts( $form_id )
+    public static function enqueue_scripts( $form_id, $is_preview = false )
     {
         $form = Ninja_Forms()->form( $form_id )->get();
-        $is_preview = ( $form->get_tmp_id() );
 
         $ver     = Ninja_Forms::VERSION;
         $js_dir  = Ninja_Forms::$url . 'assets/js/min/';
