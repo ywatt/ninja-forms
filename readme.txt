@@ -102,23 +102,12 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.0.12 (01 November 2016) =
-
-*Bugs:*
-
-* Fixed a bug with 0 (zero) values failing required validation.
-* Fixed a bug with Star Rating field values displaying in reverse order.
-* Fixed a bug with Success Message showing on all forms on a page.
-* Fixed a bug with the Modernizr library adding extra CSS classes to the page.
-* Fixed a bug with converting the Country Field from v2.9.x to v3.x.
-* Fixed a bug with repeating submission sequence numbers.
+= 3.0.14 (03 November 2016) =
 
 *Changes:*
 
-* Added empty ninja_forms_get_form_by_id() function to avoid fatal errors.
-* Performance enhancements for form display and submission processing for long forms.
-* Added a field ID specific field class for styling.
-
+* Added per-form label settings under Advanced.
+* Re-instated the changes and bug-fixes in version 3.0.12 (See below)
 
 == Changelog ==
 
