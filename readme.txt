@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, wpnzach,
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.4
 Tested up to: 4.6.1
-Stable tag: 3.0.6
+Stable tag: 3.0.12
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -102,28 +102,91 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.0.6 (27 September 2016) =
-
-*Changes:*
-
-* Added the $post variable to the submission info metabox.
-* Suppressed HTML fields from submission data.
-* Suppressed HTML fields from all fields merge tags
-* Added description text to the Rollback Setting (Advanced).
-* Disabled the "Edit" page link when previewing a form.
-* Added a plugin wide currency setting in place of the static currency symbol setting.
+= 3.0.12 (01 November 2016) =
 
 *Bugs:*
 
-* Fixed a bug with validating email addresses (ie properly evaluate "+"s).
-* Fixed a bug with browser compatibility.
-* Fixed a bug with displaying column content on other post types.
-* Fixed a bug with updating form submission error messages.
-* Fixed a bug with creating empty settings on activation.
-* Fixed a bug with column class collisions in CSS.
-* Fixed a bug with field help text not displaying on the form.
+* Fixed a bug with 0 (zero) values failing required validation.
+* Fixed a bug with Star Rating field values displaying in reverse order.
+* Fixed a bug with Success Message showing on all forms on a page.
+* Fixed a bug with the Modernizr library adding extra CSS classes to the page.
+* Fixed a bug with converting the Country Field from v2.9.x to v3.x.
+* Fixed a bug with repeating submission sequence numbers.
+
+*Changes:*
+
+* Added empty ninja_forms_get_form_by_id() function to avoid fatal errors.
+* Performance enhancements for form display and submission processing for long forms.
+* Added a field ID specific field class for styling.
+
 
 == Changelog ==
+
+= 3.0.11 (18 October 2016) =
+
+*Bugs:*
+
+* Fixed a bug with overly strict error catching that might stall form submission.
+
+*Changes:*
+
+* Updated field validation to not check required settings on unknown field types.
+* Added a process to remove empty fields without field keys.
+
+= 3.0.10 (18 October 2016) =
+
+*Bugs:*
+
+* Fixed a bug with non-visible fields generating empty HTML on display.
+* Fixed a bug with dashicons not showing for non-logged in users.
+* Fixed a bug with converting fields with 'inside' labels.
+* Fixed a bug with showing custom columns in submissions per-form.
+* Fixed a bug with field IDs not properly being updated on form publish.
+* Fixed a bug with the country field not displaying the country list in the form.
+* Fixed a bug with formatting of textareas and merge tags.
+* Fixed a bug with displaying calculation values for checkboxes and merge tags.
+* Fixed a bug with duplicate fields breaking the builder and form display.
+* Fixed a bug with consistency and form cache data for the builder and form display.
+
+*Changes:*
+
+* Added a hook in the JavaScript for the Pikaday datepicker.
+* Removed the Submission Post Type from the Admin Bar display.
+* Excluded the Submission Post Type from public query.
+* Added better error reporting for 500 Internal Server Errors for troubleshooting.
+* Added a cleanup routine for duplicate fields in forms.
+
+= 3.0.9 (12 October 2016) =
+
+*Bugs:*
+
+* Fixed a bug with loading the form builder form cache.
+
+= 3.0.8 (11 October 2016) =
+
+*Changes:*
+
+* Fixed a typo in the Submission Date Filter.
+* Added a filter (ninja_forms_display_fields) for removing fields form display.
+* Added a check for misconfigured shortcodes that break output.
+
+*Bugs:*
+
+* Fixed a bug with exporting list fields in submissions.
+* Fixed a bug with outputting extra text on the submission submenu.
+* Fixed a bug with importing checkbox lists and default values.
+* Fixed a bug with imported forms that contain HTML in fields.
+* Fixed a bug with date field formatting.
+* Fixed a bug with the builder drawer not scrolling to the top when opened.
+* Fixed a bug with using hidden fields in calculations.
+* Fixed a bug with refreshing newsletter lists in form actions.
+* Fixed a bug with field calculation values in merge tags.
+
+= 3.0.7 (06 October 2016) =
+
+*Changes:*
+
+* Added background processing for publishing long forms to avoid timeout errors.
 
 = 3.0.6 (27 September 2016) =
 
