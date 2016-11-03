@@ -62,6 +62,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
     public function resume()
     {
+        $this->_form_data = Ninja_Forms()->session()->get( 'nf_processing_form_data' );
+        $this->_form_cache = Ninja_Forms()->session()->get( 'nf_processing_form_cache' );
         $this->_data = Ninja_Forms()->session()->get( 'nf_processing_data' );
         $this->_data[ 'resume' ] = $_POST[ 'nf_resume' ];
 
@@ -214,7 +216,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         }
 
         // Initialize the process actions log.
-        if( ! isset( $this->_form_cache[ 'processed_actions' ] ) ) $this->_form_cache[ 'processed_actions' ] = array();
+        if( ! isset( $this->_data[ 'processed_actions' ] ) ) $this->_data[ 'processed_actions' ] = array();
 
         /**
          * The Action Processing Loop
@@ -309,6 +311,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         if( isset( $this->_data[ 'halt' ] ) && $this->_data[ 'halt' ] ){
 
             Ninja_Forms()->session()->set( 'nf_processing_data', $this->_data );
+            Ninja_Forms()->session()->set( 'nf_processing_form_data', $this->_form_data );
+            Ninja_Forms()->session()->set( 'nf_processing_form_cache', $this->_form_cache );
 
             $this->_respond();
         }
