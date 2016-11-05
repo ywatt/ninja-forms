@@ -174,7 +174,11 @@ final class NF_Display_Render
                 if( ! is_string( $field_type ) ) continue;
 
                 if( ! isset( Ninja_Forms()->fields[ $field_type ] ) ) {
-                    $field = NF_Fields_Unknown::create( $field );
+                    $unknown_field = NF_Fields_Unknown::create( $field );
+                    $field = array(
+                        'settings' => $unknown_field->get_settings(),
+                        'id' => $unknown_field->get_id()
+                    );
                     $field_type = $field[ 'settings' ][ 'type' ];
                 }
 
@@ -251,13 +255,13 @@ final class NF_Display_Render
                 if ('shipping' == $settings['type']) {
                     $settings['shipping_cost'] = preg_replace ('/[^\d,\.]/', '', $settings['shipping_cost']);
                     $settings['shipping_cost'] = str_replace( Ninja_Forms()->get_setting( 'currency_symbol' ), '', $settings['shipping_cost']);
-                    $settings['shipping_cost'] = number_format($settings['shipping_cost'], 2);
+                    $settings['shipping_cost'] = WPN_Helper::number_format($settings['shipping_cost'], 2);
                 } elseif ('product' == $settings['type']) {
                     $settings['product_price'] = preg_replace ('/[^\d,\.]/', '', $settings[ 'product_price' ] );
                     $settings['product_price'] = str_replace( Ninja_Forms()->get_setting( 'currency_symbol' ), '', $settings['product_price']);
-                    $settings['product_price'] = number_format($settings['product_price'], 2);
+                    $settings['product_price'] = WPN_Helper::number_format($settings['product_price'], 2);
                 } elseif ('total' == $settings['type'] && isset($settings['value'])) {
-                    $settings['value'] = number_format($settings['value'], 2);
+                    $settings['value'] = WPN_Helper::number_format($settings['value'], 2);
                 }
 
                 $settings['element_templates'] = $templates;
@@ -445,15 +449,15 @@ final class NF_Display_Render
                 if ('shipping' == $field['settings']['type']) {
                     $field['settings']['shipping_cost'] = preg_replace ('/[^\d,\.]/', '', $field['settings']['shipping_cost'] );
                     $field['settings']['shipping_cost'] = str_replace( Ninja_Forms()->get_setting( 'currency_symbol' ), '', $field['settings']['shipping_cost'] );
-                    $field['settings']['shipping_cost'] = number_format($field['settings']['shipping_cost'], 2);
+                    $field['settings']['shipping_cost'] = WPN_Helper::number_format($field['settings']['shipping_cost'], 2);
                 } elseif ('product' == $field['settings']['type']) {
                     // TODO: Does the currency marker need to stripped here?
                     $field['settings']['product_price'] = preg_replace ('/[^\d,\.]/', '', $field['settings']['product_price'] );
                     $field['settings']['product_price'] = str_replace( Ninja_Forms()->get_setting( 'currency_symbol' ), '', $field['settings']['product_price'] );
-                    $field['settings']['product_price'] = number_format($field['settings']['product_price'], 2);
+                    $field['settings']['product_price'] = WPN_Helper::number_format($field['settings']['product_price'], 2);
                 } elseif ('total' == $field['settings']['type']) {
                     if( ! isset( $field[ 'settings' ][ 'value' ] ) ) $field[ 'settings' ][ 'value' ] = 0;
-                    $field['settings']['value'] = number_format($field['settings']['value'], 2);
+                    $field['settings']['value'] = WPN_Helper::number_format($field['settings']['value'], 2);
                 }
 
                 $field['settings']['element_templates'] = $templates;
