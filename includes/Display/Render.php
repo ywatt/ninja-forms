@@ -285,7 +285,7 @@ final class NF_Display_Render
                     array_push( self::$form_uses_textarea_media, $form_id );
                 }
                 if( isset( $field[ 'settings' ][ 'help_text' ] ) && strip_tags( $field[ 'settings' ][ 'help_text' ] ) ){
-                    array_push( self::$form_uses_textarea_media, $form_id );
+                    array_push( self::$form_uses_helptext, $form_id );
                 }
             }
 
