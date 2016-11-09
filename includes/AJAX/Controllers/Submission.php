@@ -89,7 +89,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $form_settings = $form->get_settings();
         }
 
-        $this->_data[ 'form_id' ] = $this->_form_id;
+        $this->_data[ 'form_id' ] = $this->_form_data[ 'form_id' ] = $this->_form_id;
         $this->_data[ 'settings' ] = $form_settings;
         $this->_data[ 'settings' ][ 'is_preview' ];
         $this->_data[ 'extra' ] = $this->_form_data[ 'extra' ];
@@ -145,14 +145,21 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             // Duplicate the Field ID for access as a setting.
             $field[ 'settings' ][ 'id' ] = $field[ 'id' ];
 
+            // Combine with submitted data.
+            $field = array_merge( $field, $this->_form_data[ 'fields' ][ $field_id ] );
+
+            // Flatten the field array.
+            $field = array_merge( $field, $field[ 'settings' ] );
+
             /** Validate the Field */
-            $this->validate_field( $field[ 'settings' ] );
+            $this->validate_field( $field );
 
             /** Process the Field */
-            $this->process_field( $field[ 'settings' ] );
+            $this->process_field( $field );
+            $field = array_merge( $field, $this->_form_data[ 'fields' ][ $field_id ] );
 
             /** Populate Field Merge Tag */
-            $field_merge_tags->add_field( $field[ 'settings' ] );
+            $field_merge_tags->add_field( $field );
 
             $this->_data[ 'fields' ][ $field_id ] = $field;
         }
