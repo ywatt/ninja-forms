@@ -215,4 +215,20 @@ final class WPN_Helper
         return in_array( $function, $disabled );
     }
 
+    public static function number_format( $number , $decimals = 0 , $dec_point = "." , $thousands_sep = "," )
+    {
+        global $wp_locale;
+
+        if ( isset( $wp_locale ) ) {
+
+            // Remove thousands separator.
+            $number = str_replace( $wp_locale->number_format['thousands_sep'], '', $number );
+
+            // Force decimal point.
+            $number = str_replace( $wp_locale->number_format['decimal_point'], '.', $number );
+        }
+
+        return number_format( $number , $decimals, $dec_point, $thousands_sep );
+    }
+
 } // End Class WPN_Helper

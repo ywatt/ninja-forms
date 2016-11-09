@@ -26,6 +26,8 @@ class NF_Fields_Total extends NF_Abstracts_Input
         parent::__construct();
 
         $this->_nicename = __( 'Total', 'ninja-forms' );
+
+        add_filter( 'ninja_forms_merge_tag_value_total', array( $this, 'merge_tag_value' ), 10, 2 );
     }
 
     public function process( $total, $data )
@@ -50,5 +52,10 @@ class NF_Fields_Total extends NF_Abstracts_Input
         $data[ 'new_total' ] = number_format( $subtotal, 2 );
 
         return $data;
+    }
+
+    public function merge_tag_value( $value, $field )
+    {
+        return number_format_i18n( $value, 2 ); // Convert calculation to locale number format.
     }
 }

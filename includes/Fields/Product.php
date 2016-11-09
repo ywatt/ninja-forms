@@ -107,9 +107,10 @@ class NF_Fields_Product extends NF_Abstracts_Input
     public function merge_tag_value( $value, $field )
     {
         $product_price = preg_replace ('/[^\d,\.]/', '', $field[ 'product_price' ] );
+        $product_price = WPN_Helper::number_format( $product_price, 2 ); // Force format for product price.
 
         $product_quantity = ( isset( $field[ 'product_use_quantity' ] ) && 1 == $field[ 'product_use_quantity' ] ) ? $value : 1;
 
-        return number_format( $product_price * $product_quantity, 2 );
+        return number_format_i18n( $product_price * $product_quantity, 2 ); // Convert calculation to locale number format.
     }
 }
