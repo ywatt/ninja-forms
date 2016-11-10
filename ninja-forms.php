@@ -116,14 +116,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         public $merge_tags = array();
 
         /**
-         * Metaboxes
-         *
-         * @since 3.0
-         * @var array
-         */
-        public $metaboxes = array();
-
-        /**
          * Model Factory
          *
          * @var object
@@ -295,7 +287,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 register_activation_hook( __FILE__, array( self::$instance, 'activation' ) );
 
-                self::$instance->metaboxes[ 'append-form' ] = new NF_Admin_Metaboxes_AppendAForm();
+                new NF_Admin_Metaboxes_AppendAForm();
 
                 /*
                  * Require EDD auto-update file
