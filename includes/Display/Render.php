@@ -526,7 +526,7 @@ final class NF_Display_Render
         }
 
          if( $is_preview || in_array( $form_id, self::$form_uses_rte ) ) {
-             if( $is_preview || self::form_uses_textarea_media( $form_id ) ) {
+             if( $is_preview || in_array( $form_id, self::$form_uses_textarea_media ) ) {
                 wp_enqueue_media();
              }
 
