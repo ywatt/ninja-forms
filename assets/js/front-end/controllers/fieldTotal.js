@@ -49,7 +49,12 @@ define([], function() {
 
                 var product = productFields[ productID ];
 
-                var productPrice = Number( product.get( 'product_price' ) );
+                console.log( product.get( 'product_price' ) );
+
+                var productPrice = this.Number( product.get( 'product_price' ) );
+
+                console.log(  productPrice );
+                console.log( '----' );
 
                 if( quantityFields[ productID ] ){
 
@@ -69,8 +74,8 @@ define([], function() {
 
         onChangeProduct: function( model ){
             var productID = model.get( 'id' );
-            var productPrice = Number( model.get( 'product_price' ) );
-            var productQuantity = Number( model.get( 'value' ) );
+            var productPrice = this.Number( model.get( 'product_price' ) );
+            var productQuantity = this.Number( model.get( 'value' ) );
             var newTotal = productQuantity * productPrice;
             this.productTotals[ productID ] = newTotal;
 
@@ -80,9 +85,9 @@ define([], function() {
         onChangeQuantity: function( model ){
             var productID = model.get( 'product_assignment' );
             var productField = nfRadio.channel( 'fields' ).request( 'get:field', productID );
-            var productPrice = Number( productField.get( 'product_price' ) );
+            var productPrice = this.Number( productField.get( 'product_price' ) );
 
-            var quantity = Number( model.get( 'value' ) );
+            var quantity = this.Number( model.get( 'value' ) );
 
             var newTotal = quantity * productPrice;
 
@@ -96,18 +101,25 @@ define([], function() {
             var newTotal = 0;
 
             for( var product in this.productTotals ){
-                newTotal += Number( this.productTotals[ product ] );
+
+                newTotal += this.Number( this.productTotals[ product ] );
             }
 
             if( newTotal && this.shippingCost ) {
                 // Only add shipping if there is a cost.
-                newTotal += Number(this.shippingCost);
+                newTotal += this.Number(this.shippingCost);
             }
 
             this.totalModel.set( 'value', newTotal.toFixed( 2 ) );
             // this.totalModel.set( 'reRender', true );
             // this.totalModel.set( 'reRender', false );
             this.totalModel.trigger( 'reRender' );
+        },
+
+        Number: function( number ){
+
+            number = String( number ).replace( ',', '' );
+            return Number( number );
         }
     });
 
