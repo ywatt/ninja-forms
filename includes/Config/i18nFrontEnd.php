@@ -1,5 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
+global $wp_locale;
+
 return apply_filters( 'ninja_forms_i18n_front_end', array(
 
     'ninjaForms' => __( 'Ninja Forms', 'ninja-forms' ),
@@ -17,5 +19,7 @@ return apply_filters( 'ninja_forms_i18n_front_end', array(
     'fileUploadOldCodeFileUploadInProgress' => __( 'File Upload in Progress.', 'ninja-forms' ),
     'fileUploadOldCodeFileUpload' => __( 'FILE UPLOAD', 'ninja-forms' ),
     'currencySymbol'   => Ninja_Forms()->get_setting( 'currency_symbol' ),
-    'fieldsMarkedRequired' => sprintf( __( 'Fields marked with an %s*%s are required', 'ninja-forms' ), '<span class="ninja-forms-req-symbol">', '</span>' )
+    'fieldsMarkedRequired' => sprintf( __( 'Fields marked with an %s*%s are required', 'ninja-forms' ), '<span class="ninja-forms-req-symbol">', '</span>' ),
+    'thousands_sep' => ( $wp_locale->number_format[ 'thousands_sep' ] ) ? $wp_locale->number_format[ 'thousands_sep' ] : ',',
+    'decimal_point' => ( $wp_locale->number_format[ 'decimal_point' ] ) ? $wp_locale->number_format[ 'decimal_point' ] : '.',
 ));
