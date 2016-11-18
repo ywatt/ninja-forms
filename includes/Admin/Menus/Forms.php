@@ -33,7 +33,9 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             }
         }
 
-        $this->table = new NF_Admin_AllFormsTable();
+        if( isset( $_GET[ 'page' ] ) && $this->menu_slug == $_GET[ 'page' ] ) {
+            $this->table = new NF_Admin_AllFormsTable();
+        }
     }
 
     public function display()
