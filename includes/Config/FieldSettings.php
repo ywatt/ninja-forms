@@ -216,7 +216,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
             ),
             array(
                 'label' => __( 'Custom', 'ninja-forms' ),
-                'value' => __( 'custom', 'ninja-forms' ),
+                'value' => 'custom',
             ),
         ),
         'value' => '',
@@ -421,6 +421,32 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'label'         => __( 'Default To Current Date', 'ninja-forms' ),
         'width'         => 'one-half',
         'group'         => 'primary'
+    ),
+
+    /*
+     * Year Range
+     */
+
+    'year_range' => array(
+        'name' => 'year_range',
+        'type' => 'fieldset',
+        'label' => __( 'Year Range', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'settings' => array(
+            array(
+                'name' => 'year_range_start',
+                'type' => 'number',
+                'label' => __( 'Start Year', 'ninja_forms' ),
+                'value' => ''
+            ),
+            array(
+                'name' => 'year_range_end',
+                'type' => 'number',
+                'label' => __( 'End Year', 'ninja_forms' ),
+                'value' => ''
+            ),
+        )
     ),
 
     /*

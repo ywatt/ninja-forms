@@ -35,8 +35,8 @@ define([], function() {
 			/*
 			 * We have at least one field error, so submmission should be prevented.
 			 * Add a form error.
-			 */ 
-			nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ).request( 'add:error', 'field-errors', nfi18n.formErrorsCorrectErrors );
+			 */
+			nfRadio.channel( 'form-' + fieldModel.get( 'formID' ) ).request( 'add:error', 'field-errors', formModel.get( 'settings' ).formErrorsCorrectErrors );
 		},
 
 		removeError: function( fieldModel, errorID ) {
