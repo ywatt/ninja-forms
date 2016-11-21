@@ -106,24 +106,6 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-<<<<<<< HEAD
-= 3.0.15 (09 November 2016) =
-
-*Bugs:*
-
-* Fixed a bug with custom field processing not updating field data properly.
-
-*Bugs:*
-
-* Fixed a bug with input masks that prevented custom masks from working properly.
-
-*Changes:*
-
-* Added better support for extensions interacting with field duplication in the builder.
-
-== Changelog ==
-
-=======
 = 3.0.16 (21 November 2016) =
 
 *Bugs:*
@@ -174,7 +156,6 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Added a year range setting for the date field's datepicker.
 * Added a filter to email action settings before the email is sent.
 
->>>>>>> develop
 = 3.0.15 (09 November 2016) =
 
 *Bugs:*
