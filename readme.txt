@@ -3,7 +3,11 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, wpnzach,
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.4
 Tested up to: 4.6.1
+<<<<<<< HEAD
 Stable tag: 3.0.15
+=======
+Stable tag: 3.0.16
+>>>>>>> develop
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -102,6 +106,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
+<<<<<<< HEAD
 = 3.0.15 (09 November 2016) =
 
 *Bugs:*
@@ -118,6 +123,58 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Changelog ==
 
+=======
+= 3.0.16 (21 November 2016) =
+
+*Bugs:*
+
+* Fixed a bug with export values and the Country Field to show full labels as opposed to abbreviations.
+* Fixed a bug with duplicate field keys when duplicating a field.
+* Fixed a bug with merge tags not being replaced in actions.
+* Fixed a bug with unknown field types.
+* Fixed a bug with capabilities and granting access to forms and submissions.
+* Fixed a bug with restricting decimal steps in the number fields ( i.e. set increments by .01 ).
+* Fixed a bug with reCaptcha validation not halting the form submission.
+* Fixed a bug with displaying help text on the form display.
+* Fixed a bug with enqueueing the media library scripts for the rich text editor.
+* Fixed a bug with the submitting button text disappearing when a form was cleared after submission.
+* Fixed a bug with converting email actions with multiple emails addresses in a single setting.
+* Fixed a bug with prefixing the postmeta database table with custom prefixes.
+* Fixed a bug with reCaptcha not showing due to a script loading race condition.
+
+*Changes:*
+
+* Added an additional parameter for calculations to force 2 decimal rounding.
+* Added a year range setting for the date field's datepicker.
+* Added a filter to email action settings before the email is sent.
+
+== Changelog ==
+
+= 3.0.16 (21 November 2016) =
+
+*Bugs:*
+
+* Fixed a bug with export values and the Country Field to show full labels as opposed to abbreviations.
+* Fixed a bug with duplicate field keys when duplicating a field.
+* Fixed a bug with merge tags not being replaced in actions.
+* Fixed a bug with unknown field types.
+* Fixed a bug with capabilities and granting access to forms and submissions.
+* Fixed a bug with restricting decimal steps in the number fields ( i.e. set increments by .01 ).
+* Fixed a bug with reCaptcha validation not halting the form submission.
+* Fixed a bug with displaying help text on the form display.
+* Fixed a bug with enqueueing the media library scripts for the rich text editor.
+* Fixed a bug with the submitting button text disappearing when a form was cleared after submission.
+* Fixed a bug with converting email actions with multiple emails addresses in a single setting.
+* Fixed a bug with prefixing the postmeta database table with custom prefixes.
+* Fixed a bug with reCaptcha not showing due to a script loading race condition.
+
+*Changes:*
+
+* Added an additional parameter for calculations to force 2 decimal rounding.
+* Added a year range setting for the date field's datepicker.
+* Added a filter to email action settings before the email is sent.
+
+>>>>>>> develop
 = 3.0.15 (09 November 2016) =
 
 *Bugs:*
