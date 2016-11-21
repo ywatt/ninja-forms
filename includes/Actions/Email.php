@@ -57,7 +57,7 @@ final class NF_Actions_Email extends NF_Abstracts_Action
             $message = $this->format_plain_text_message( $action_settings[ 'email_message_plain' ] );
         }
 
-        $message = apply_filters( 'ninja_forms_action_email_message', $message, $data, $settings );
+        $message = apply_filters( 'ninja_forms_action_email_message', $message, $data, $action_settings );
 
         $sent = wp_mail(
             $action_settings['to'],
