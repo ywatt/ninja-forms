@@ -84,7 +84,7 @@ final class NF_Display_Render
             // TODO: Optimize Query
             global $wpdb;
             $count = 0;
-            $subs = $wpdb->get_results( "SELECT post_id FROM wp_postmeta WHERE `meta_key` = '_form_id' AND `meta_value` = $form_id" );
+            $subs = $wpdb->get_results( "SELECT post_id FROM " . $wpdb->postmeta . " WHERE `meta_key` = '_form_id' AND `meta_value` = $form_id" );
             foreach( $subs as $sub ){
                 if( 'publish' == get_post_status( $sub->post_id ) ) $count++;
             }
