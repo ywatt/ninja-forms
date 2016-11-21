@@ -133,11 +133,14 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $field_id = $field[ 'id' ];
 
             // Check that the field ID exists in the submitted for data and has a submitted value.
-            if( ! isset( $this->_form_data[ 'fields' ][ $field_id ] ) ) continue;
-            if( ! isset( $this->_form_data[ 'fields' ][ $field_id ][ 'value' ] ) ) continue;
+            if( isset( $this->_form_data[ 'fields' ][ $field_id ] ) && isset( $this->_form_data[ 'fields' ][ $field_id ][ 'value' ] ) ){
+                $field[ 'value' ] = $this->_form_data[ 'fields' ][ $field_id ][ 'value' ];
+            } else {
+                $field[ 'value' ] = '';
+            }
 
             // Duplicate field value to settings and top level array item for backwards compatible access (ie Save Action).
-            $field[ 'settings' ][ 'value' ] = $field[ 'value' ] = $this->_form_data[ 'fields' ][ $field_id ][ 'value' ];
+            $field[ 'settings' ][ 'value' ] = $field[ 'value' ];
 
             // Duplicate field value to form cache for passing to the action filter.
             $this->_form_cache[ 'fields' ][ $key ][ 'settings' ][ 'value' ] = $this->_form_data[ 'fields' ][ $field_id ][ 'value' ];
