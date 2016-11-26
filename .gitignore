@@ -15,6 +15,5 @@ node_modules
 # Project Stuff
 deploy.sh
 deploy-old.sh
-tests/
 vendor/
 composer.lock
