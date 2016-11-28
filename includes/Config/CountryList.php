@@ -173,6 +173,7 @@ return apply_filters( 'ninja_forms_config_country_list', array(
     __( 'Norway', 'ninja-forms' ) => 'NO',
     __( 'Oman', 'ninja-forms' ) => 'OM',
     __( 'Pakistan', 'ninja-forms' ) => 'PK',
+    __( 'Palestine', 'ninja-forms' ) => 'PS',
     __( 'Palau', 'ninja-forms' ) => 'PW',
     __( 'Panama', 'ninja-forms' ) => 'PA',
     __( 'Papua New Guinea', 'ninja-forms' ) => 'PG',
