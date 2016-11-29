@@ -11,10 +11,10 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 			this.dataModel = data.dataModel;
 			/*
 			 * Send out a request on the setting-type-{type} channel asking if we should render on dataModel change.
-			 * Defaults to true.
+			 * Defaults to false.
 			 * This lets specific settings, like RTEs, say that they don't want to be re-rendered when their data model changes.
 			 */
-			var renderOnChange = ( 'undefined' == typeof nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).request( 'renderOnChange' ) ) ? true: nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).request( 'renderOnChange' );
+			var renderOnChange = ( 'undefined' == typeof nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).request( 'renderOnChange' ) ) ? false : nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).request( 'renderOnChange' );
 			
 			if ( renderOnChange ) {
 				this.dataModel.on( 'change:' + this.model.get( 'name' ), this.render, this );

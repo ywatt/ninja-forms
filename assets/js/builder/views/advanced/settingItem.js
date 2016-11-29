@@ -22,7 +22,7 @@ define( [], function() {
 		templateHelpers: function() {
 			return {
 				renderClasses: function() {
-					var classes = 'nf-setting-wrap';
+					var classes = 'nf-setting-wrap ' + this.id;
 	    			if ( this.editActive ) {
 	    				classes += ' active';
 	    			}

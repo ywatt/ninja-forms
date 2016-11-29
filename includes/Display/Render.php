@@ -47,6 +47,32 @@ final class NF_Display_Render
         }
         $form = Ninja_Forms()->form( $form_id )->get();
 
+        $settings = $form->get_settings();
+
+        foreach( $settings as $name => $value ){
+            if( ! in_array(
+                    $name,
+                    array(
+                        'changeEmailErrorMsg',
+                        'confirmFieldErrorMsg',
+                        'fieldNumberNumMinError',
+                        'fieldNumberNumMaxError',
+                        'fieldNumberIncrementBy',
+                        'formErrorsCorrectErrors',
+                        'validateRequiredField',
+                        'honeypotHoneypotError',
+                        'fieldsMarkedRequired',
+                    )
+            ) ) continue;
+
+            if( $value ) continue;
+
+            unset( $settings[ $name ] );
+        }
+
+        $settings = array_merge( Ninja_Forms::config( 'i18nFrontEnd' ), $settings );
+        $form->update_settings( $settings );
+
         if( $form->get_setting( 'logged_in' ) && ! is_user_logged_in() ){
             echo $form->get_setting( 'not_logged_in_msg' );
             return;
@@ -58,7 +84,7 @@ final class NF_Display_Render
             // TODO: Optimize Query
             global $wpdb;
             $count = 0;
-            $subs = $wpdb->get_results( "SELECT post_id FROM wp_postmeta WHERE `meta_key` = '_form_id' AND `meta_value` = $form_id" );
+            $subs = $wpdb->get_results( "SELECT post_id FROM " . $wpdb->postmeta . " WHERE `meta_key` = '_form_id' AND `meta_value` = $form_id" );
             foreach( $subs as $sub ){
                 if( 'publish' == get_post_status( $sub->post_id ) ) $count++;
             }
@@ -89,7 +115,8 @@ final class NF_Display_Render
         $form->update_setting( 'afterForm', $after_form );
 
         $form_cache = get_option( 'nf_form_' . $form_id, false );
-        $form_fields = $form_cache[ 'fields' ]; // $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
+        $form_fields = $form_cache[ 'fields' ];
+        if( empty( $form_fields ) ) $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
         $fields = array();
 
         if( empty( $form_fields ) ){
@@ -101,6 +128,13 @@ final class NF_Display_Render
             $cache_updated = false;
 
             foreach ($form_fields as $field) {
+
+                if( is_object( $field ) ) {
+                    $field = array(
+                        'id' => $field->get_id(),
+                        'settings' => $field->get_settings()
+                    );
+                }
 
                 $field_id = $field[ 'id' ];
 
@@ -140,7 +174,11 @@ final class NF_Display_Render
                 if( ! is_string( $field_type ) ) continue;
 
                 if( ! isset( Ninja_Forms()->fields[ $field_type ] ) ) {
-                    $field = NF_Fields_Unknown::create( $field );
+                    $unknown_field = NF_Fields_Unknown::create( $field );
+                    $field = array(
+                        'settings' => $unknown_field->get_settings(),
+                        'id' => $unknown_field->get_id()
+                    );
                     $field_type = $field[ 'settings' ][ 'type' ];
                 }
 
@@ -251,7 +289,7 @@ final class NF_Display_Render
                     array_push( self::$form_uses_textarea_media, $form_id );
                 }
                 if( isset( $field[ 'settings' ][ 'help_text' ] ) && strip_tags( $field[ 'settings' ][ 'help_text' ] ) ){
-                    array_push( self::$form_uses_textarea_media, $form_id );
+                    array_push( self::$form_uses_helptext, $form_id );
                 }
             }
 
@@ -309,6 +347,8 @@ final class NF_Display_Render
             echo $form[ 'settings' ][ 'not_logged_in_msg' ];
             return;
         }
+
+        $form[ 'settings' ] = array_merge( Ninja_Forms::config( 'i18nFrontEnd' ), $form[ 'settings' ] );
 
         $form[ 'settings' ][ 'is_preview' ] = TRUE;
 
@@ -450,13 +490,12 @@ final class NF_Display_Render
         </script>
 
         <?php
-        self::enqueue_scripts( $form_id );
+        self::enqueue_scripts( $form_id, true );
     }
 
-    public static function enqueue_scripts( $form_id )
+    public static function enqueue_scripts( $form_id, $is_preview = false )
     {
         $form = Ninja_Forms()->form( $form_id )->get();
-        $is_preview = ( $form->get_tmp_id() );
 
         $ver     = Ninja_Forms::VERSION;
         $js_dir  = Ninja_Forms::$url . 'assets/js/min/';
@@ -478,7 +517,7 @@ final class NF_Display_Render
 
         if( $is_preview || in_array( $form_id, self::$form_uses_recaptcha ) ) {
             $recaptcha_lang = Ninja_Forms()->get_setting('recaptcha_lang');
-            wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $recaptcha_lang, array( 'jquery' ), $ver );
+            wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $recaptcha_lang . '&onload=nfRenderRecaptcha&render=explicit', array( 'jquery', 'nf-front-end-deps' ), $ver, TRUE );
         }
 
         if( $is_preview || in_array( $form_id, self::$form_uses_datepicker ) ) {
@@ -491,7 +530,7 @@ final class NF_Display_Render
         }
 
          if( $is_preview || in_array( $form_id, self::$form_uses_rte ) ) {
-             if( $is_preview || self::form_uses_textarea_media( $form_id ) ) {
+             if( $is_preview || in_array( $form_id, self::$form_uses_textarea_media ) ) {
                 wp_enqueue_media();
              }
 

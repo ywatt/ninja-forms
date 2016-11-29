@@ -32,7 +32,9 @@ define( [], function() {
 		 * @return void
 		 */
 		newFieldKey: function( model ) {
-			var key = this.keyExists( model.get( 'type' ) );
+			var d = new Date();
+			var n = d.valueOf();
+			var key = this.keyExists( model.get( 'type' ) + '_' + n );
 			model.set( 'key', key, { silent: true } );
 
 			if( 'undefined' == model.get( 'manual_key' ) ) {

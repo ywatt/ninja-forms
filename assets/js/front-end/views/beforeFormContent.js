@@ -8,8 +8,9 @@ define( [], function( ) {
             return {
 
                 renderFieldsMarkedRequired: function() {
+
                     var requiredFields = this.fields.filter( { required: 1 } );
-                    return ( requiredFields.length ) ? nfi18n.fieldsMarkedRequired : '';
+                    return ( requiredFields.length ) ? this.fieldsMarkedRequired : '';
                 },
             };
         },
