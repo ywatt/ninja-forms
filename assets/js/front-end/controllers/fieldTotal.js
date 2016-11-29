@@ -110,7 +110,7 @@ define([], function() {
                 newTotal += this.Number(this.shippingCost);
             }
 
-            this.totalModel.set( 'value', newTotal.toFixed( 2 ) );
+            this.totalModel.set( 'value', newTotal );
             // this.totalModel.set( 'reRender', true );
             // this.totalModel.set( 'reRender', false );
             this.totalModel.trigger( 'reRender' );
