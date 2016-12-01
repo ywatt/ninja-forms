@@ -64,6 +64,8 @@ class NF_Step_Processing
 //        }
 
         add_action( 'wp_ajax_nf_' . $this->action, array( $this, 'processing' ) );
+
+        register_shutdown_function( array( $this, 'shutdown' ) );
     }
 
     /**
@@ -186,6 +188,14 @@ class NF_Step_Processing
         // This space left intentionally blank.
     }
 
-
+    public function shutdown()
+    {
+        $error = error_get_last();
+        if( $error !== NULL && in_array( $error[ 'type' ], array( E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR ) ) ) {
+            $return['errors'][] = $error;
+            echo json_encode( $return );
+            die();
+        }
+    }
 
 }
