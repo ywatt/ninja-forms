@@ -25,6 +25,8 @@ final class NF_Display_Render
         'field-null'
     );
 
+    protected static $form_list = array();
+
     protected static $use_test_values = FALSE;
 
     protected static $form_uses_recaptcha      = array();
@@ -555,13 +557,16 @@ final class NF_Display_Render
 
         wp_localize_script( 'nf-front-end', 'nfi18n', Ninja_Forms::config( 'i18nFrontEnd' ) );
 
+        $form_list[] = $form_id;
+
         $data = apply_filters( 'ninja_forms_render_localize_script_data', array(
             'ajaxNonce' => wp_create_nonce( 'ninja_forms_display_nonce' ),
             'adminAjax' => admin_url( 'admin-ajax.php' ),
             'requireBaseUrl' => Ninja_Forms::$url . 'assets/js/',
             'use_merge_tags' => array(),
             'opinionated_styles' => Ninja_Forms()->get_setting( 'opinionated_styles' ),
-            'rest_url' => rest_url() . 'ninja-forms/v1/form/'
+            'rest_url' => rest_url() . 'ninja-forms/v1/form/',
+            'form_list' => $form_list,
         ));
 
         foreach( Ninja_Forms()->fields as $field ){

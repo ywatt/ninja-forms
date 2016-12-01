@@ -101,8 +101,8 @@ gulp.task('js:frontend', function(){
         .pipe(gulp.dest('assets/js/min/'));
 
     gulp.src([
-        'assets/js/lib/backbone.marionette.min.js',
         'assets/js/lib/backbone.radio.min.js',
+        'assets/js/lib/backbone.marionette.min.js',
         'assets/js/lib/math.min.js',
         'assets/js/lib/modernizr.min.js',
         'assets/js/min/global.js',
