@@ -252,9 +252,19 @@ class NF_Admin_CPT_Submission
 
         $fields = Ninja_Forms()->form( $form_id )->get_fields();
 
+        usort( $fields, array( $this, 'sort_fields' ) );
+
         $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
 
         Ninja_Forms::template( 'admin-metabox-sub-fields.html.php', compact( 'fields', 'sub', 'hidden_field_types' ) );
+    }
+
+    public static function sort_fields( $a, $b )
+    {
+        if ( $a->get_setting( 'order' ) == $b->get_setting( 'order' ) ) {
+            return 0;
+        }
+        return ( $a->get_setting( 'order' ) < $b->get_setting( 'order' ) ) ? -1 : 1;
     }
 
     /**
