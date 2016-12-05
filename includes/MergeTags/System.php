@@ -16,7 +16,10 @@ final class NF_MergeTags_System extends NF_Abstracts_MergeTags
 
     protected function system_date()
     {
-        $format = 'm/d/Y';
+        $format = Ninja_Forms()->get_setting( 'date_format' );
+        if ( empty( $format ) ) {
+            $format = 'Y/m/d';
+        }
         return date( $format, time() );
     }
 
