@@ -175,7 +175,7 @@ class NF_Admin_CPT_Submission
         if( is_numeric( $column ) ){
             $value = $sub->get_field_value( $column );
             $field = Ninja_Forms()->form()->get_field( $column );
-            echo apply_filters( 'ninja_forms_custom_columns', $value, $field );
+            echo apply_filters( 'ninja_forms_custom_columns', $value, $field, $sub_id );
         }
 
     }
