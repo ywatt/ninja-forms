@@ -755,7 +755,6 @@ add_filter( 'cron_schedules', 'nf_custom_cron_job_recurrence' );
 
 // Schedule Cron Job Event
 function nf_optin_send_admin_email_cron_job() {
-    wp_clear_scheduled_hook( 'nf_optin_cron' );
     if ( ! wp_next_scheduled( 'nf_optin_cron' ) ) {
         nf_optin_send_admin_email();
         wp_schedule_event( current_time( 'timestamp' ), 'nf-monthly', 'nf_optin_cron' );
