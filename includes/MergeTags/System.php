@@ -44,4 +44,14 @@ final class NF_MergeTags_System extends NF_Abstracts_MergeTags
         return get_option( 'admin_email' );
     }
 
+    protected function site_title()
+    {
+        return get_bloginfo( 'name' );
+    }
+
+    protected function site_url()
+    {
+        return get_bloginfo( 'url' );
+    }
+
 } // END CLASS NF_MergeTags_System
