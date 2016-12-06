@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, wpnzach,
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.4
 Tested up to: 4.6.1
-Stable tag: 3.0.17
+Stable tag: 3.0.18
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -102,10 +102,11 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.0.17 (06 December 2016) =
+= 3.0.18 (06 December 2016) =
 
 *Bugs:*
 
+* Fixed a bug with the deprecated code base and version 3.0.17.
 * When using the RTE setting on the textarea field, the media button should show on all themes.
 * The Modernizr library should only be loaded if you are using the RTE on the front-end.
 * System date merge tag should respect the date format plugin setting.
@@ -128,6 +129,12 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Field selectors in the builder should always show the "nicename" of the field rather than the programmatic name.
 
 == Changelog ==
+
+= 3.0.18 (06 December 2016) =
+
+*Bugs:*
+
+* Fixed a bug with 3.0.17 and the deprecated code base.
 
 = 3.0.17 (06 December 2016) =
 
