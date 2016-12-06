@@ -144,6 +144,7 @@ final class NF_Display_Render
                  * TODO: Replace unique field key checks with a refactored model/factory.
                  */
                 $field_key = $field[ 'settings' ][ 'key' ];
+
                 if( in_array( $field_key, $unique_field_keys ) || '' == $field_key ){
 
                     // Delete the field.
