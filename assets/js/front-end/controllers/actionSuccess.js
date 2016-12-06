@@ -9,6 +9,10 @@ define([], function() {
 				if ( 'undefined' != typeof response.data.actions.success_message && '' != response.data.actions.success_message ) {
 					var form_id = response.data.form_id;
 					jQuery( '#nf-form-' + form_id + '-cont .nf-response-msg' ).html( response.data.actions.success_message );
+
+					jQuery('html, body').animate({
+						scrollTop: ( jQuery( '#nf-form-' + form_id + '-cont .nf-response-msg' ).offset().top - 50 )
+					}, 0 );
 				}
 			}
 		}

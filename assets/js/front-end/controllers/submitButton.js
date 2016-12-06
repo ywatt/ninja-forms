@@ -31,6 +31,9 @@ define(['controllers/submitButton'], function( submitButton ) {
 		},
 
 		maybeDisable: function( fieldModel ) {
+
+			if( fieldModel.get( 'formID' ) != this.get( 'formID' ) ) return;
+
 			this.set( 'disabled', true );
 			this.trigger( 'reRender' );
 		},

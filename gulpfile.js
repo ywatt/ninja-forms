@@ -80,6 +80,7 @@ gulp.task('js:frontend', function(){
 
     gulp.src([
         'assets/js/lib/bootstrap.min.js',
+        'assets/js/lib/modernizr.min.js',
         'assets/js/lib/codemirror.min.js',
         'assets/js/lib/codemirror-xml.min.js',
         'assets/js/lib/codemirror-formatting.min.js',
@@ -104,7 +105,6 @@ gulp.task('js:frontend', function(){
         'assets/js/lib/backbone.marionette.min.js',
         'assets/js/lib/backbone.radio.min.js',
         'assets/js/lib/math.min.js',
-        'assets/js/lib/modernizr.min.js',
         'assets/js/min/global.js',
     ])
     .pipe(concat('front-end-deps.js'))
