@@ -164,6 +164,10 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 = 3.0.14 (03 November 2016) =
 
+*Bugs:*
+
+* Fixed a bug with input masks that prevented custom masks from working properly.
+
 *Changes:*
 
 * Added per-form label settings under Advanced.
