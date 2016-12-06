@@ -102,7 +102,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.0.17 (6 December 2016) =
+= 3.0.17 (06 December 2016) =
 
 *Bugs:*
 
@@ -129,7 +129,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Changelog ==
 
-= 3.0.17 (6 December 2016) =
+= 3.0.17 (06 December 2016) =
 
 *Bugs:*
 
