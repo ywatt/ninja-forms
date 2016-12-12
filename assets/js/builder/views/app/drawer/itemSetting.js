@@ -77,9 +77,28 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 			 */
 			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'destroy:setting', this.model, this.dataModel, this );
 			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'destroy:setting', this.model, this.dataModel, this );
+		
+			/*
+			 * Unescape any HTML being saved if we are a textbox.
+			 */
+			if ( 'textbox' == this.model.get( 'type' ) ) {
+				var setting = this.model.get( 'name' );
+				var value = this.dataModel.get( setting );
+				this.dataModel.set( setting, _.unescape( value ), { silent: true } );
+			}
+
 		},
 
 		onBeforeRender: function() {
+			/*
+			 * We want to escape any HTML being output if we are a textbox.
+			 */
+			if ( 'textbox' == this.model.get( 'type' ) ) {
+				var setting = this.model.get( 'name' );
+				var value = this.dataModel.get( setting );
+				this.dataModel.set( setting, _.escape( value ), { silent: true } );
+			}
+			
 			nfRadio.channel( 'app' ).trigger( 'before:renderSetting', this.model, this.dataModel );
 			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'before:renderSetting', this.model, this.dataModel, this );
 			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'before:renderSetting', this.model, this.dataModel, this );

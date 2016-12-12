@@ -26,9 +26,20 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 			this.hasErrors = false;
 		},
 
-		onBeforeDestroy: function() {
+		onBeforeDestroy: function() {	
 			this.model.off( 'change', this.render );
 			this.model.off( 'change:errors', this.renderErrors );
+		},
+
+		onBeforeRender: function() {
+			/*
+			 * We want to escape any HTML being output for our label.
+			 */
+			if ( this.model.get( 'label' ) ) {
+				var label = this.model.get( 'label' );
+				this.model.set( 'label', _.escape( label ), { silent: true } );
+			}
+			
 		},
 
 		onRender: function() {
@@ -37,6 +48,13 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 			 * Send out a radio message.
 			 */
 			nfRadio.channel( 'setting-' + this.settingModel.get( 'name' ) + '-option' ).trigger( 'render:setting', this.model, this.dataModel, this );
+			/*
+			 * We want to unescape any HTML being output for our label.
+			 */
+			if ( this.model.get( 'label' ) ) {
+				var label = this.model.get( 'label' );
+				this.model.set( 'label', _.unescape( label ), { silent: true } );
+			}
 		},
 
 		onShow: function() {
@@ -53,6 +71,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 		},
 
 		changeOption: function( e ) {
+
 			nfRadio.channel( 'option-repeater' ).trigger( 'change:option', e, this.model, this.dataModel, this.settingModel );
 		},
 
