@@ -193,11 +193,10 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 		 * 
 		 * @since  3.0
 		 * @param  Object	 		sortable 	jQuery UI element
-		 * @param  backbone.model 	setting  	Setting model
+		 * @param  backbone.view 	setting  	Setting view
 		 * @return void
 		 */
 		updateOptionSortable: function( ui, sortable, setting ) {
-			
 			var newOrder = jQuery( sortable ).sortable( 'toArray' );
 			var dragModel = setting.collection.get( { cid: jQuery( ui.item ).prop( 'id' ) } );
 			var data = {
@@ -231,7 +230,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 			nfRadio.channel( 'changes' ).request( 'register:change', 'sortListOptions', dragModel, null, label, data );
 			this.triggerDataModel( dragModel, setting.dataModel );
 			nfRadio.channel( 'option-repeater' ).trigger( 'sort:option', dragModel, setting );
-			nfRadio.channel( 'option-repeater-' + setting.get( 'name' ) ).trigger( 'sort:option', dragModel, setting );
+			nfRadio.channel( 'option-repeater-' + setting.model.get( 'name' ) ).trigger( 'sort:option', dragModel, setting );
 		},
 
 		/**
