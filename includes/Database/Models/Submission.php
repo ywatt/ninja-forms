@@ -298,7 +298,7 @@ final class NF_Database_Models_Submission
 
         $fields = Ninja_Forms()->form( $form_id )->get_fields();
 
-        usort( $fields, array( self, sort_fields ) );
+        usort( $fields, array( 'NF_Database_Models_Submission', 'sort_fields' ) );
 
         $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
 
