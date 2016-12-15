@@ -21,6 +21,11 @@ class NF_Admin_AllFormsTable extends WP_List_Table
             'plural'   => __( 'Forms', 'ninja-forms' ), //plural name of the listed records
             'ajax'     => false //should this table support ajax?
         ) );
+
+        wp_enqueue_script( 'nf-all-forms', Ninja_Forms::$url . 'assets/js/all-forms.js' );
+        wp_localize_script( 'nf-all-forms', 'nfi18n', array(
+            'confirm_delete' => __( 'Really Delete This Form? This will remove all fields and submission data. Recovery is not possible.', 'ninja-forms' ),
+        ) );
     }
 
     public function no_items() {
