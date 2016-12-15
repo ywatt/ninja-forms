@@ -16,6 +16,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 			this.dataModel = data.dataModel;
 			this.collection = data.collection;
 			this.columns = data.columns;
+			this.parentView = data.parentView;
 			this.model.on( 'change:errors', this.renderErrors, this );
 			this.model.on( 'change', this.render, this );
 
@@ -71,23 +72,23 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 		},
 
 		changeOption: function( e ) {
-
-			nfRadio.channel( 'option-repeater' ).trigger( 'change:option', e, this.model, this.dataModel, this.settingModel );
+			nfRadio.channel( 'option-repeater' ).trigger( 'change:option', e, this.model, this.dataModel, this.settingModel, this );
 		},
 
 		deleteOption: function( e ) {
-			nfRadio.channel( 'option-repeater' ).trigger( 'click:deleteOption', this.model, this.collection, this.dataModel );
+			nfRadio.channel( 'option-repeater' ).trigger( 'click:deleteOption', this.model, this.collection, this.dataModel, this );
 		},
 
 		keyupOption: function( e ) {
 			this.maybeAddOption( e );
-			nfRadio.channel( 'option-repeater' ).trigger( 'keyup:option', e, this.model, this.dataModel, this.settingModel )
-			nfRadio.channel( 'option-repeater-' + this.settingModel.get( 'name' ) ).trigger( 'keyup:option', e, this.model, this.dataModel, this.settingModel )
+			nfRadio.channel( 'option-repeater' ).trigger( 'keyup:option', e, this.model, this.dataModel, this.settingModel, this )
+			nfRadio.channel( 'option-repeater-' + this.settingModel.get( 'name' ) ).trigger( 'keyup:option', e, this.model, this.dataModel, this.settingModel, this )
 		},
 
 		maybeAddOption: function( e ) {
 			if ( 13 == e.keyCode ) {
-				nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
+				nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel, this );
+				jQuery( this.parentView.children.findByIndex(this.parentView.children.length - 1).el ).find( '[data-id="label"]' ).focus();
 			}
 		},
 
