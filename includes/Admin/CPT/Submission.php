@@ -19,7 +19,7 @@ class NF_Admin_CPT_Submission
         add_action( 'admin_print_styles', array( $this, 'enqueue_scripts' ) );
 
         // Filter Post Row Actions
-        add_filter( 'post_row_actions', array( $this, 'post_row_actions' ) );
+        add_filter( 'post_row_actions', array( $this, 'post_row_actions' ), 10, 2 );
 
         // Change our submission columns.
         add_filter( 'manage_nf_sub_posts_columns', array( $this, 'change_columns' ) );
@@ -113,12 +113,16 @@ class NF_Admin_CPT_Submission
         wp_localize_script( 'subs-cpt', 'nf_sub', array( 'form_id' => $form_id ) );
     }
 
-    public function post_row_actions( $actions )
+    public function post_row_actions( $actions, $sub )
     {
         if( $this->cpt_slug == get_post_type() ){
             unset( $actions[ 'view' ] );
             unset( $actions[ 'inline hide-if-no-js' ] );
         }
+
+        $export_url = add_query_arg( array( 'action' => 'export', 'post[]' => $sub->ID ) );
+        $actions[ 'export' ] = sprintf( '<a href="%s">%s</a>', $export_url, __( 'Export', 'ninja-forms' ) );
+
         return $actions;
     }
 
