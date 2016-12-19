@@ -12,10 +12,11 @@ define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'setting-type-datepicker' ), 'render:setting', this.addDatepicker );
+			this.listenTo( nfRadio.channel( 'setting-date_blackouts-option' ), 'render:setting', this.addDatepicker );
 		},
 
 		addDatepicker: function( settingModel, dataModel, view ) {
-			var dateObject = pikadayResponsive( jQuery( view.el ).find( '.setting' )[0] );			
+			var dateObject = pikadayResponsive( jQuery( view.el ).find( '.setting' )[0] );
 		}
 	});
 

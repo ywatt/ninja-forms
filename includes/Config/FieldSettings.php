@@ -462,6 +462,52 @@ return apply_filters( 'ninja_forms_field_settings', array(
     ),
 
     /*
+     * Date Range
+     */
+    
+    'date_range' => array(
+        'name' => 'date_range',
+        'type' => 'fieldset',
+        'label' => __( 'User Can Select Dates Between', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'settings' => array(
+            array(
+                'name' => 'date_range_start',
+                'type' => 'datepicker',
+                'label' => __( 'Start Date', 'ninja_forms' ),
+                'value' => ''
+            ),
+            array(
+                'name' => 'date_range_end',
+                'type' => 'datepicker',
+                'label' => __( 'End Date', 'ninja_forms' ),
+                'value' => ''
+            ),
+        )
+    ),    
+
+    /*
+     * Date Blackouts
+     */
+    
+    'date_blackouts'      => array(
+        'name'              => 'date_blackouts',
+        'type'              => 'option-repeater',
+        'label'             => __( 'Blackout These Dates', 'ninja-forms' ) . ' <a href="#" class="nf-add-new">' . __( 'Add New', 'ninja-forms' ) . '</a>',
+        'width'             => 'full',
+        'tmpl_row'          => 'tmpl-nf-edit-setting-date-blackout-repeater-row',
+        'group'             => 'advanced',
+         'columns'          => array(
+            'date'         => array(
+                'header'    => __( 'Date', 'ninja-forms' ),
+                'default'   => '',
+            ),
+        ),
+    ),
+
+
+    /*
      * TIME SETTING
      */
 

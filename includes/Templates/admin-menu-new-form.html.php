@@ -606,6 +606,21 @@
     </div>
 </script>
 
+<!-- Date Blackout Row Template -->
+
+<script id="tmpl-nf-edit-setting-date-blackout-repeater-row" type="text/template">
+    <div>
+        <span class="dashicons dashicons-menu handle"></span>
+    </div>
+    <div>
+        <input type="text" class="setting" value="{{{ data.name }}}" data-id="date">
+        <span class="nf-option-error"></span>
+    </div>
+    <div>
+        <span class="dashicons dashicons-dismiss nf-delete"></span>
+    </div>
+</script>
+
 <!-- Rich Text Editor Templates -->
 
 <script id="tmpl-nf-rte-media-button" type="text/template">

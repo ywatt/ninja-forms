@@ -7,6 +7,11 @@ return apply_filters( 'ninja_forms_plugin_settings_groups', array(
         'label' => __( 'General Settings', 'ninja-forms' ),
     ),
 
+    'date' => array(
+        'id' => 'date',
+        'label' => __( 'Date Settings', 'ninja-forms' ),
+    ),
+
     'recaptcha' => array(
         'id' => 'recaptcha',
         'label' => __( 'reCaptcha Settings', 'ninja-forms' ),

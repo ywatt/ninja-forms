@@ -17,7 +17,7 @@
  */
 
 .pika-single {
-    z-index: 9999;
+    z-index: 99999999999999999999;
     display: block;
     position: relative;
     color: #333;
@@ -63,7 +63,7 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     display: inline-block;
     *display: inline;
     position: relative;
-    z-index: 9999;
+    z-index: 99999999999999999999;
     overflow: hidden;
     margin: 0;
     padding: 5px 3px;

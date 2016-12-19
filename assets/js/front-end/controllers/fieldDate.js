@@ -13,7 +13,16 @@ define([], function() {
                 outputFormat: view.model.get( 'date_format' ),
                 classes: jQuery( el ).attr( "class" ),
                 pikadayOptions: {
-                    yearRange:  this.getYearRange( view.model )
+                    yearRange:  this.getYearRange( view.model ),
+                    minDate:  new Date( view.model.get( 'date_range_start' ) + ' 00:00:00' ),
+                    maxDate: new Date( view.model.get( 'date_range_end' ) + ' 00:00:00' ),
+                    i18n: {
+                        previousMonth : 'FUCK YOU',
+                        nextMonth     : 'Next Month',
+                        months        : ['FUCK','YOU','March','April','May','June','July','August','September','October','November','December'],
+                        weekdays      : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+                        weekdaysShort : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+                    }
                 }
             } );
             if ( 1 == view.model.get( 'date_default' ) ) {
