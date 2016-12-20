@@ -43,7 +43,38 @@ class NF_Extension_Updater
 		}
 
 		$this->version = $version;
+
+		/*
+		 * We're in the deprecated folder, but the plugin we wish to update is in the main folder.
+		 */
 		$this->file = str_replace( '/deprecated', '', $file );
+		
+		/*
+		 * A few of our add-ons have different filenames in the deprecated folder than in the main one.
+		 * We have to check for those and account for them. 
+		 */
+		switch ( $this->product_name ) {
+			case 'paypal_express':
+				$this->file = str_replace( 'paypal-express.php', 'ninja-forms-paypal-express.php', $this->file );
+				break;
+
+			case 'post_creation':
+				$this->file = str_replace( 'post-creation.php', 'ninja-forms-post-creation.php', $this->file );
+				break;
+					
+			case 'slack':
+				$this->file = str_replace( 'ninja-forms-slack-integration.php', 'ninja-forms-slack.php', $this->file );
+				break;
+							
+			case 'stripe':
+				$this->file = str_replace( 'stripe.php', 'ninja-forms-stripe.php', $this->file );
+				break;
+										
+			case 'webhooks':
+				$this->file = str_replace( 'webhooks.php', 'ninja-forms-webhooks.php', $this->file );
+				break;
+		}
+
 		$this->author = $author;
 
 		$this->add_license_fields();
