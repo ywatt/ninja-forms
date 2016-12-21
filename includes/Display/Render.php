@@ -97,6 +97,8 @@ final class NF_Display_Render
             }
         }
 
+        if( ! apply_filters( 'ninja_forms_display_show_form', true, $form_id, $form ) ) return;
+
         $currency = $form->get_setting( 'currency', Ninja_Forms()->get_setting( 'currency' ) );
         $currency_symbol = Ninja_Forms::config( 'CurrencySymbol' );
         $form->update_setting( 'currency_symbol', ( isset( $currency_symbol[ $currency ] ) ) ? $currency_symbol[ $currency ] : '' );
