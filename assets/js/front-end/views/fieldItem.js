@@ -245,6 +245,10 @@ define( [], function() {
 			nfRadio.channel( 'field-' + this.model.get( 'id' ) ).trigger( 'blur:field', el, this.model );
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'blur:field', el, this.model );
 			nfRadio.channel( 'fields' ).trigger( 'blur:field', el, this.model );
+		},
+
+		onAttach: function() {
+			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'attach:view', this );
 		}
 	});
 
