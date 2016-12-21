@@ -30,7 +30,7 @@ class NF_Admin_CPT_Submission
         // Save our metabox values
         add_action( 'save_post', array( $this, 'save_nf_sub' ), 10, 2 );
 
-        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 2 );
+        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 1 );
         add_action( 'add_meta_boxes', array( $this, 'remove_meta_boxes' ) );
 
         // Filter our submission capabilities
@@ -222,7 +222,7 @@ class NF_Admin_CPT_Submission
     /**
      * Meta Boxes
      */
-    public function add_meta_boxes( $post_type, $post )
+    public function add_meta_boxes( $post_type )
     {
         add_meta_box(
             'nf_sub_fields',
