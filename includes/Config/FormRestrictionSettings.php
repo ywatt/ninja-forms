@@ -58,6 +58,8 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
                 'width' => 'one-third',
                 'group' => 'primary',
                 'value' => NULL,
+                'min'   => 0,
+                'step'  => 1,
                 'help' => __( 'Does NOT apply to form preview.', 'ninja-forms' )
 
                 //TODO: Add following text below the element.

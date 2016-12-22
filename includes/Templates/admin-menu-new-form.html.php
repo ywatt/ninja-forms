@@ -420,7 +420,7 @@
 
 <script id="tmpl-nf-edit-setting-number" type="text/template">
     <label for="{{{ data.name }}}">{{{ data.label }}} {{{ data.renderTooltip() }}}
-        <input type="number" class="setting" id="{{{ data.name }}}" value="{{{ data.value }}}" placeholder="{{{ ( 'undefined' != typeof data.placeholder ) ? data.placeholder : '' }}}" />
+        <input type="number" class="setting" id="{{{ data.name }}}" value="{{{ data.value }}}" min="{{{ ( 'undefined' != typeof data.min ) ? data.min : '' }}}" max="{{{ ( 'undefined' != typeof data.max ) ? data.max : '' }}}" step="{{{ ( 'undefined' != typeof data.step ) ? data.step : '' }}}" placeholder="{{{ ( 'undefined' != typeof data.placeholder ) ? data.placeholder : '' }}}" />
     </label>
 </script>
 
