@@ -108,11 +108,17 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
 
     public function update_settings()
     {
-        if( ! current_user_can( apply_filters( 'ninja_forms_admin_form_settings_capabilities', 'manage_options' ) ) ) return;
+        if( ! current_user_can( apply_filters( 'ninja_forms_admin_settings_capabilities', 'manage_options' ) ) ) return;
 
         if( ! isset( $_POST[ $this->_prefix ] ) ) return;
 
         $settings = $_POST[ 'ninja_forms' ];
+
+        if( isset( $settings[ 'currency' ] ) ){
+            $currency = sanitize_text_field( $settings[ 'currency' ] );
+            $currency_symbols = Ninja_Forms::config( 'CurrencySymbol' );
+            $settings[ 'currency_symbol' ] = ( isset( $currency_symbols[ $currency ] ) ) ? $currency_symbols[ $currency ] : '';
+        }
 
         foreach( $settings as $id => $value ){
             $value = sanitize_text_field( $value );

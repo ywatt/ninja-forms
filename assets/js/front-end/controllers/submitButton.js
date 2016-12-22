@@ -31,6 +31,9 @@ define(['controllers/submitButton'], function( submitButton ) {
 		},
 
 		maybeDisable: function( fieldModel ) {
+
+			if( 'undefined' != typeof fieldModel && fieldModel.get( 'formID' ) != this.get( 'formID' ) ) return;
+
 			this.set( 'disabled', true );
 			this.trigger( 'reRender' );
 		},
@@ -57,7 +60,9 @@ define(['controllers/submitButton'], function( submitButton ) {
 		},
 
 		resetLabel: function( response ) {
-			this.set( 'label', this.get( 'oldLabel' ) );
+			if ( 'undefined' != typeof this.get( 'oldLabel' ) ) {
+				this.set( 'label', this.get( 'oldLabel' ) );
+			}
 			this.set( 'disabled', false );
 			this.trigger( 'reRender' );
 		}

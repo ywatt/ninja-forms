@@ -21,7 +21,7 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 
 			this.collection = optionCollection;
 			this.dataModel = data.dataModel;
-			this.childViewOptions = { settingModel: this.model, collection: this.collection, dataModel: data.dataModel, columns: this.model.get( 'columns' ) };
+			this.childViewOptions = { parentView: this, settingModel: this.model, collection: this.collection, dataModel: data.dataModel, columns: this.model.get( 'columns' ) };
 
 			var deps = this.model.get( 'deps' );
 			if ( deps ) {
@@ -135,6 +135,10 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 
 				renderFieldsetClasses: function() {
 					return that.model.get( 'name' );
+				},
+
+				currencySymbol: function() {
+					return nfRadio.channel( 'settings' ).request( 'get:setting', 'currency' ) || nfi18n.currency_symbol;
 				}
 			};
 		},
@@ -150,6 +154,7 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 
 		clickAddOption: function( e ) {
 			nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
+			jQuery( this.children.findByIndex(this.children.length - 1).el ).find( '[data-id="label"]' ).focus();
 		}
 	} );
 

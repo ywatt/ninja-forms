@@ -24,7 +24,7 @@ define( [ 'views/fieldCollection', 'models/fieldCollection' ], function( FieldCo
 		},
 
 		defaultFormContentLoad: function( formContentData, formModel, context ) {
-			var fieldCollection = nfRadio.channel( 'fields' ).request( 'get:collection' );
+			var fieldCollection = formModel.get( 'fields' );
 			/*
 			 * If we only have one load filter, we can just return the field collection.
 			 */
@@ -36,12 +36,27 @@ define( [ 'views/fieldCollection', 'models/fieldCollection' ], function( FieldCo
         		return formModel.get( 'fields' ).findWhere( { key: key } );
         	}, this );
 
-        	return new FieldCollection( fieldModels );
+        	var currentFieldCollection = new FieldCollection( fieldModels );
+
+        	fieldCollection.on( 'reset', function( collection ) {
+        		var resetFields = [];
+        		currentFieldCollection.each( function( fieldModel ) {
+        			if ( 'submit' != fieldModel.get( 'type' ) ) {
+        				resetFields.push( collection.findWhere( { key: fieldModel.get( 'key' ) } ) );
+        			} else {
+        				resetFields.push( fieldModel );
+        			}
+        		} );
+
+        		currentFieldCollection.reset( resetFields );
+        	} );
+
+        	return currentFieldCollection;
         },
 
         defaultFormContentView: function() {
         	return FieldCollectionView;
-        },
+        }
 
 	});
 

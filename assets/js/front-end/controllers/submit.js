@@ -69,11 +69,12 @@ define([], function() {
 			 */
 
  			var formID = formModel.get( 'id' );
-			var fields = [];
+			var fields = {};
 			_.each( formModel.get( 'fields' ).models, function( field ) {
 				var fieldDataDefaults = { value:field.get( 'value' ), id:field.get( 'id' ) };
-				var fieldData = nfRadio.channel( field.get( 'type' ) ).request( 'get:submitData', fieldDataDefaults, field ) || fieldDataDefaults;
-				fields.push( fieldData );
+
+				// Add field data at the field ID for efficient access.
+				fields[ field.get( 'id' ) ] = nfRadio.channel( field.get( 'type' ) ).request( 'get:submitData', fieldDataDefaults, field ) || fieldDataDefaults;;
 			} );
 			var extra = formModel.get( 'extra' );
 			var settings = formModel.get( 'settings' );
@@ -104,7 +105,17 @@ define([], function() {
 			    },
 			    error: function( jqXHR, textStatus, errorThrown ) {
 			        // Handle errors here
-			        console.log('ERRORS: ' + textStatus);
+			        console.log('ERRORS: ' + errorThrown);
+					console.log( jqXHR );
+
+					try {
+						var response = jQuery.parseJSON( jqXHR.responseText );
+						nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR, formModel.get( 'id' ) );
+						nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR );
+					} catch( e ) {
+						console.log( 'Parse Error' );
+					}
+
 			        // STOP LOADING SPINNER
 					nfRadio.channel( 'forms' ).trigger( 'submit:response', 'error', textStatus, jqXHR, errorThrown );
 			    }

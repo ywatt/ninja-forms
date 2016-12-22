@@ -27,8 +27,18 @@ final class NF_Display_Render
 
     protected static $use_test_values = FALSE;
 
+    protected static $form_uses_recaptcha      = array();
+    protected static $form_uses_datepicker     = array();
+    protected static $form_uses_inputmask      = array();
+    protected static $form_uses_rte            = array();
+    protected static $form_uses_textarea_media = array();
+    protected static $form_uses_helptext       = array();
+    protected static $form_uses_starrating     = array();
+
     public static function localize( $form_id )
     {
+        global $wp_locale;
+
         $capability = apply_filters( 'ninja_forms_display_test_values_capabilities', 'read' );
         if( isset( $_GET[ 'ninja_forms_test_values' ] ) && current_user_can( $capability ) ){
             self::$use_test_values = TRUE;
@@ -38,6 +48,32 @@ final class NF_Display_Render
             add_action( 'wp_footer', 'NF_Display_Render::output_templates', 9999 );
         }
         $form = Ninja_Forms()->form( $form_id )->get();
+
+        $settings = $form->get_settings();
+
+        foreach( $settings as $name => $value ){
+            if( ! in_array(
+                    $name,
+                    array(
+                        'changeEmailErrorMsg',
+                        'confirmFieldErrorMsg',
+                        'fieldNumberNumMinError',
+                        'fieldNumberNumMaxError',
+                        'fieldNumberIncrementBy',
+                        'formErrorsCorrectErrors',
+                        'validateRequiredField',
+                        'honeypotHoneypotError',
+                        'fieldsMarkedRequired',
+                    )
+            ) ) continue;
+
+            if( $value ) continue;
+
+            unset( $settings[ $name ] );
+        }
+
+        $settings = array_merge( Ninja_Forms::config( 'i18nFrontEnd' ), $settings );
+        $form->update_settings( $settings );
 
         if( $form->get_setting( 'logged_in' ) && ! is_user_logged_in() ){
             echo $form->get_setting( 'not_logged_in_msg' );
@@ -50,7 +86,7 @@ final class NF_Display_Render
             // TODO: Optimize Query
             global $wpdb;
             $count = 0;
-            $subs = $wpdb->get_results( "SELECT post_id FROM wp_postmeta WHERE `meta_key` = '_form_id' AND `meta_value` = $form_id" );
+            $subs = $wpdb->get_results( "SELECT post_id FROM " . $wpdb->postmeta . " WHERE `meta_key` = '_form_id' AND `meta_value` = $form_id" );
             foreach( $subs as $sub ){
                 if( 'publish' == get_post_status( $sub->post_id ) ) $count++;
             }
@@ -60,6 +96,10 @@ final class NF_Display_Render
                 return;
             }
         }
+
+        $currency = $form->get_setting( 'currency', Ninja_Forms()->get_setting( 'currency' ) );
+        $currency_symbol = Ninja_Forms::config( 'CurrencySymbol' );
+        $form->update_setting( 'currency_symbol', ( isset( $currency_symbol[ $currency ] ) ) ? $currency_symbol[ $currency ] : '' );
 
         $title = apply_filters( 'ninja_forms_form_title', $form->get_setting( 'title' ), $form_id );
         $form->update_setting( 'title', $title );
@@ -76,20 +116,73 @@ final class NF_Display_Render
         $after_form = apply_filters( 'ninja_forms_display_after_form', '', $form_id );
         $form->update_setting( 'afterForm', $after_form );
 
-        $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
-
+        $form_cache = get_option( 'nf_form_' . $form_id, false );
+        $form_fields = $form_cache[ 'fields' ];
+        if( empty( $form_fields ) ) $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
         $fields = array();
 
         if( empty( $form_fields ) ){
             echo __( 'No Fields Found.', 'ninja-forms' );
         } else {
+
+            // TODO: Replace unique field key checks with a refactored model/factory.
+            $unique_field_keys = array();
+            $cache_updated = false;
+
             foreach ($form_fields as $field) {
 
-                $field_type = $field->get_settings('type');
+                if( is_object( $field ) ) {
+                    $field = array(
+                        'id' => $field->get_id(),
+                        'settings' => $field->get_settings()
+                    );
+                }
+
+                $field_id = $field[ 'id' ];
+
+
+                /*
+                 * Duplicate field check.
+                 * TODO: Replace unique field key checks with a refactored model/factory.
+                 */
+                $field_key = $field[ 'settings' ][ 'key' ];
+
+                if( in_array( $field_key, $unique_field_keys ) || '' == $field_key ){
+
+                    // Delete the field.
+                    Ninja_Forms()->request( 'delete-field' )->data( array( 'field_id' => $field_id ) )->dispatch();
+
+                    // Remove the field from cache.
+                    if( $form_cache ) {
+                        if( isset( $form_cache[ 'fields' ] ) ){
+                            foreach( $form_cache[ 'fields' ] as $cached_field_key => $cached_field ){
+                                if( ! isset( $cached_field[ 'id' ] ) ) continue;
+                                if( $field_id != $cached_field[ 'id' ] ) continue;
+
+                                // Flag cache to update.
+                                $cache_updated = true;
+
+                                unset( $form_cache[ 'fields' ][ $cached_field_key ] ); // Remove the field.
+                            }
+                        }
+                    }
+
+                    continue; // Skip the duplicate field.
+                }
+                array_push( $unique_field_keys, $field_key ); // Log unique key.
+                /* END Duplicate field check. */
+
+                $field_type = $field[ 'settings' ][ 'type' ];
+
+                if( ! is_string( $field_type ) ) continue;
 
                 if( ! isset( Ninja_Forms()->fields[ $field_type ] ) ) {
-                    $field = NF_Fields_Unknown::create( $field );
-                    $field_type = $field->get_setting( 'type' );
+                    $unknown_field = NF_Fields_Unknown::create( $field );
+                    $field = array(
+                        'settings' => $unknown_field->get_settings(),
+                        'id' => $unknown_field->get_id()
+                    );
+                    $field_type = $field[ 'settings' ][ 'type' ];
                 }
 
                 $field = apply_filters('ninja_forms_localize_fields', $field);
@@ -98,22 +191,24 @@ final class NF_Display_Render
                 $field_class = Ninja_Forms()->fields[$field_type];
 
                 if (self::$use_test_values) {
-                    $field->update_setting('value', $field_class->get_test_value());
+                    $field[ 'value' ] = $field_class->get_test_value();
                 }
 
-                $field->update_setting('id', $field->get_id());
+                // Copy field ID into the field settings array for use in localized data.
+                $field[ 'settings' ][ 'id' ] = $field[ 'id' ];
+
 
                 /*
                  * TODO: For backwards compatibility, run the original action, get contents from the output buffer, and return the contents through the filter. Also display a PHP Notice for a deprecate filter.
                  */
 
-                $display_before = apply_filters( 'ninja_forms_display_before_field_type_' . $field->get_setting( 'type' ), '' );
-                $display_before = apply_filters( 'ninja_forms_display_before_field_key_' . $field->get_setting( 'key' ), $display_before );
-                $field->update_setting( 'beforeField', $display_before );
+                $display_before = apply_filters( 'ninja_forms_display_before_field_type_' . $field[ 'settings' ][ 'type' ], '' );
+                $display_before = apply_filters( 'ninja_forms_display_before_field_key_' . $field[ 'settings' ][ 'key' ], $display_before );
+                $field[ 'settings' ][ 'beforeField' ] = $display_before;
 
-                $display_after = apply_filters( 'ninja_forms_display_after_field_type_' . $field->get_setting( 'type' ), '' );
-                $display_after = apply_filters( 'ninja_forms_display_after_field_key_' . $field->get_setting( 'key' ), $display_after );
-                $field->update_setting( 'afterField', $display_after );
+                $display_after = apply_filters( 'ninja_forms_display_after_field_type_' . $field[ 'settings' ][ 'type' ], '' );
+                $display_after = apply_filters( 'ninja_forms_display_after_field_key_' . $field[ 'settings' ][ 'key' ], $display_after );
+                $field[ 'settings' ][ 'afterField' ] = $display_after;
 
                 $templates = $field_class->get_templates();
 
@@ -125,8 +220,7 @@ final class NF_Display_Render
                     self::load_template('fields-' . $template);
                 }
 
-                $settings = $field->get_settings();
-
+                $settings = $field[ 'settings' ];
                 foreach ($settings as $key => $setting) {
                     if (is_numeric($setting)) $settings[$key] = floatval($setting);
                 }
@@ -142,8 +236,9 @@ final class NF_Display_Render
                     $settings[ 'options' ] = apply_filters( 'ninja_forms_render_options_' . $field_type, $settings[ 'options' ], $settings );
                 }
 
-                if (isset($settings['default'])) {
-                    $default_value = apply_filters('ninja_forms_render_default_value', $settings['default'], $field_type, $settings);
+                $default_value = ( isset( $settings[ 'default' ] ) ) ? $settings[ 'default' ] : null;
+                $default_value = apply_filters('ninja_forms_render_default_value', $default_value, $field_type, $settings);
+                if ( $default_value ) {
 
                     $default_value = preg_replace( '/{.*}/', '', $default_value );
 
@@ -154,23 +249,31 @@ final class NF_Display_Render
                         do_shortcode( $settings['value'] );
                         $ob = ob_get_clean();
 
-                        if( $ob ){
-                            $settings['value'] = $ob;
+                        if( ! $ob ) {
+                            $settings['value'] = do_shortcode( $settings['value'] );
                         }
                     }
                 }
 
+                $thousands_sep = $wp_locale->number_format[ 'thousands_sep'];
+                $decimal_point = $wp_locale->number_format[ 'decimal_point' ];
+                   
                 // TODO: Find a better way to do this.
                 if ('shipping' == $settings['type']) {
-                    // TODO: Does the currency marker need to stripped here?
-                    $settings['shipping_cost'] = str_replace( array( '$', '£', '€' ), '', $settings['shipping_cost']);
-                    $settings['shipping_cost'] = str_replace( Ninja_Forms()->get_setting( 'currency_symbol' ), '', $settings['shipping_cost']);
-                    $settings['shipping_cost'] = number_format($settings['shipping_cost'], 2);
+                    $settings[ 'shipping_cost' ] = preg_replace ('/[^\d,\.]/', '', $settings[ 'shipping_cost' ] );
+                    $settings[ 'shipping_cost' ] = str_replace( Ninja_Forms()->get_setting( 'currency_symbol' ), '', $settings[ 'shipping_cost' ] );
+                    
+                    $settings[ 'shipping_cost' ] = str_replace( $decimal_point, '||', $settings[ 'shipping_cost' ] );
+                    $settings[ 'shipping_cost' ] = str_replace( $thousands_sep, '', $settings[ 'shipping_cost' ] );
+                    $settings[ 'shipping_cost' ] = str_replace( '||', '.', $settings[ 'shipping_cost' ] );
                 } elseif ('product' == $settings['type']) {
-                    // TODO: Does the currency marker need to stripped here?
-                    $settings['product_price'] = str_replace( array( '$', '£', '€' ), '', $settings['product_price']);
+                    $settings['product_price'] = preg_replace ('/[^\d,\.]/', '', $settings[ 'product_price' ] );
                     $settings['product_price'] = str_replace( Ninja_Forms()->get_setting( 'currency_symbol' ), '', $settings['product_price']);
-                    $settings['product_price'] = number_format($settings['product_price'], 2);
+
+                    $settings[ 'product_price' ] = str_replace( $decimal_point, '||', $settings[ 'product_price' ] );
+                    $settings[ 'product_price' ] = str_replace( $thousands_sep, '', $settings[ 'product_price' ] );
+                    $settings[ 'product_price' ] = str_replace( '||', '.', $settings[ 'product_price' ] );
+
                 } elseif ('total' == $settings['type'] && isset($settings['value'])) {
                     $settings['value'] = number_format($settings['value'], 2);
                 }
@@ -180,8 +283,36 @@ final class NF_Display_Render
                 $settings['wrap_template'] = $field_class->get_wrap_template();
 
                 $fields[] = apply_filters( 'ninja_forms_localize_field_settings_' . $field_type, $settings, $form );
+
+                if( 'recaptcha' == $field[ 'settings' ][ 'type' ] ){
+                    array_push( self::$form_uses_recaptcha, $form_id );
+                }
+                if( 'date' == $field[ 'settings' ][ 'type' ] ){
+                    array_push( self::$form_uses_datepicker, $form_id );
+                }
+                if( 'starrating' == $field[ 'settings' ][ 'type' ] ){
+                    array_push( self::$form_uses_starrating, $form_id );
+                }
+                if( isset( $field[ 'settings' ][ 'mask' ] ) && $field[ 'settings' ][ 'mask' ] ){
+                    array_push( self::$form_uses_inputmask, $form_id );
+                }
+                if( isset( $field[ 'settings' ][ 'textarea_rte' ] ) && $field[ 'settings' ][ 'textarea_rte' ] ){
+                    array_push( self::$form_uses_rte, $form_id );
+                }
+                if( isset( $field[ 'settings' ][ 'textarea_media' ] ) && $field[ 'settings' ][ 'textarea_media' ] ){
+                    array_push( self::$form_uses_textarea_media, $form_id );
+                }
+                if( isset( $field[ 'settings' ][ 'help_text' ] ) && strip_tags( $field[ 'settings' ][ 'help_text' ] ) ){
+                    array_push( self::$form_uses_helptext, $form_id );
+                }
+            }
+
+            if( $cache_updated ) {
+                update_option('nf_form_' . $form_id, $form_cache); // Update form cache without duplicate fields.
             }
         }
+
+        $fields = apply_filters( 'ninja_forms_display_fields', $fields );
 
         // Output Form Container
         do_action( 'ninja_forms_before_container', $form_id, $form->get_settings(), $form_fields );
@@ -231,7 +362,13 @@ final class NF_Display_Render
             return;
         }
 
+        $form[ 'settings' ] = array_merge( Ninja_Forms::config( 'i18nFrontEnd' ), $form[ 'settings' ] );
+
         $form[ 'settings' ][ 'is_preview' ] = TRUE;
+
+        $currency = ( isset( $form[ 'settings' ][ 'currency' ] ) && $form[ 'settings' ][ 'currency' ] ) ? $form[ 'settings' ][ 'currency' ] : Ninja_Forms()->get_setting( 'currency' ) ;
+        $currency_symbol = Ninja_Forms::config( 'CurrencySymbol' );
+        $form[ 'settings' ][ 'currency_symbol' ] = ( isset( $currency_symbol[ $currency ] ) ) ? $currency_symbol[ $currency ] : '';
 
         $before_form = apply_filters( 'ninja_forms_display_before_form', '', $form_id, TRUE );
         $form[ 'settings' ][ 'beforeForm'] = $before_form;
@@ -301,10 +438,12 @@ final class NF_Display_Render
 
                 if( 'list' == $field[ 'settings' ][ 'parentType' ] && isset( $field['settings'][ 'options' ] ) && is_array( $field['settings'][ 'options' ] ) ){
                     $field['settings'][ 'options' ] = apply_filters( 'ninja_forms_render_options', $field['settings'][ 'options' ], $field['settings'] );
+                    $field['settings'][ 'options' ] = apply_filters( 'ninja_forms_render_options_' . $field['settings'][ 'type' ], $field['settings'][ 'options' ], $field['settings'] );
                 }
 
-                if (isset($field['settings']['default'])) {
-                    $default_value = apply_filters('ninja_forms_render_default_value', $field['settings']['default'], $field_type, $field['settings']);
+                $default_value = ( isset( $field[ 'settings' ][ 'default' ] ) ) ? $field[ 'settings' ][ 'default' ] : null;
+                $default_value = apply_filters( 'ninja_forms_render_default_value', $default_value, $field_type, $field[ 'settings' ]);
+                if( $default_value ){
 
                     $default_value = preg_replace( '/{.*}/', '', $default_value );
 
@@ -315,20 +454,20 @@ final class NF_Display_Render
                         do_shortcode( $field['settings']['value'] );
                         $ob = ob_get_clean();
 
-                        if( $ob ){
-                            $field['settings']['value'] = $ob;
+                        if( ! $ob ) {
+                            $field['settings']['value'] = do_shortcode( $field['settings']['value'] );
                         }
                     }
                 }
 
                 // TODO: Find a better way to do this.
                 if ('shipping' == $field['settings']['type']) {
-                    $field['settings']['shipping_cost'] = str_replace( array( '$', '£', '€' ), '', $field['settings']['shipping_cost'] );
+                    $field['settings']['shipping_cost'] = preg_replace ('/[^\d,\.]/', '', $field['settings']['shipping_cost'] );
                     $field['settings']['shipping_cost'] = str_replace( Ninja_Forms()->get_setting( 'currency_symbol' ), '', $field['settings']['shipping_cost'] );
                     $field['settings']['shipping_cost'] = number_format($field['settings']['shipping_cost'], 2);
                 } elseif ('product' == $field['settings']['type']) {
                     // TODO: Does the currency marker need to stripped here?
-                    $field['settings']['product_price'] = str_replace( array( '$', '£', '€' ), '', $field['settings']['product_price'] );
+                    $field['settings']['product_price'] = preg_replace ('/[^\d,\.]/', '', $field['settings']['product_price'] );
                     $field['settings']['product_price'] = str_replace( Ninja_Forms()->get_setting( 'currency_symbol' ), '', $field['settings']['product_price'] );
                     $field['settings']['product_price'] = number_format($field['settings']['product_price'], 2);
                 } elseif ('total' == $field['settings']['type']) {
@@ -366,13 +505,13 @@ final class NF_Display_Render
         </script>
 
         <?php
-        self::enqueue_scripts( $form_id );
+        self::enqueue_scripts( $form_id, true );
     }
 
-    public static function enqueue_scripts( $form_id )
+    public static function enqueue_scripts( $form_id, $is_preview = false )
     {
+        global $wp_locale;
         $form = Ninja_Forms()->form( $form_id )->get();
-        $is_preview = ( $form->get_tmp_id() );
 
         $ver     = Ninja_Forms::VERSION;
         $js_dir  = Ninja_Forms::$url . 'assets/js/min/';
@@ -381,33 +520,33 @@ final class NF_Display_Render
 
         switch( Ninja_Forms()->get_setting( 'opinionated_styles' ) ) {
             case 'light':
-                wp_enqueue_style( 'nf-display',      $css_dir . 'display-opinions-light.css' );
+                wp_enqueue_style( 'nf-display',      $css_dir . 'display-opinions-light.css', array( 'dashicons' ) );
                 wp_enqueue_style( 'nf-font-awesome', $css_dir . 'font-awesome.min.css'       );
                 break;
             case 'dark':
-                wp_enqueue_style( 'nf-display',      $css_dir . 'display-opinions-dark.css' );
+                wp_enqueue_style( 'nf-display',      $css_dir . 'display-opinions-dark.css', array( 'dashicons' )  );
                 wp_enqueue_style( 'nf-font-awesome', $css_dir . 'font-awesome.min.css'      );
                 break;
             default:
-                wp_enqueue_style( 'nf-display',      $css_dir . 'display-structure.css'     );
+                wp_enqueue_style( 'nf-display',      $css_dir . 'display-structure.css', array( 'dashicons' ) );
         }
 
-        if( $is_preview || self::form_uses_recaptcha( $form_id ) ) {
+        if( $is_preview || in_array( $form_id, self::$form_uses_recaptcha ) ) {
             $recaptcha_lang = Ninja_Forms()->get_setting('recaptcha_lang');
-            wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $recaptcha_lang, array( 'jquery' ), $ver );
+            wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?hl=' . $recaptcha_lang . '&onload=nfRenderRecaptcha&render=explicit', array( 'jquery', 'nf-front-end-deps' ), $ver, TRUE );
         }
 
-        if( $is_preview || self::form_uses_datepicker( $form_id ) ) {
+        if( $is_preview || in_array( $form_id, self::$form_uses_datepicker ) ) {
             wp_enqueue_style( 'pikaday-responsive', $css_dir . 'pikaday-package.css', $ver );
             wp_enqueue_script('nf-front-end--datepicker', $js_dir . 'front-end--datepicker.min.js', array( 'jquery' ), $ver );
         }
 
-        if( $is_preview || self::form_uses_inputmask( $form_id ) ) {
+        if( $is_preview || in_array( $form_id, self::$form_uses_inputmask ) ) {
             wp_enqueue_script('nf-front-end--inputmask', $js_dir . 'front-end--inputmask.min.js', array( 'jquery' ), $ver );
         }
 
-         if( $is_preview || self::form_uses_rte( $form_id ) ) {
-             if( $is_preview || self::form_uses_textarea_media( $form_id ) ) {
+         if( $is_preview || in_array( $form_id, self::$form_uses_rte ) ) {
+             if( $is_preview || in_array( $form_id, self::$form_uses_textarea_media ) ) {
                 wp_enqueue_media();
              }
 
@@ -417,12 +556,12 @@ final class NF_Display_Render
             wp_enqueue_script('nf-front-end--rte', $js_dir . 'front-end--rte.min.js', array( 'jquery' ), $ver );
          }
 
-        if( $is_preview || self::form_uses_helptext( $form_id ) ) {
+        if( $is_preview || in_array( $form_id, self::$form_uses_helptext ) ) {
             wp_enqueue_style( 'jBox', $css_dir . 'jBox.css', $ver );
             wp_enqueue_script('nf-front-end--helptext', $js_dir . 'front-end--helptext.min.js', array( 'jquery' ), $ver );
         }
 
-        if( $is_preview || self::form_uses_starrating( $form_id ) ) {
+        if( $is_preview || in_array( $form_id, self::$form_uses_starrating ) ) {
             wp_enqueue_style( 'rating', $css_dir . 'rating.css', Ninja_Forms::VERSION );
             wp_enqueue_script('nf-front-end--starrating', $js_dir . 'front-end--starrating.min.js', array( 'jquery' ), $ver );
         }
@@ -502,62 +641,6 @@ final class NF_Display_Render
     protected static function is_template_loaded( $template_name )
     {
         return ( in_array( $template_name, self::$loaded_templates ) ) ? TRUE : FALSE ;
-    }
-
-    protected static function form_uses_recaptcha( $form_id )
-    {
-        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
-            if( 'recaptcha' == $field->get_setting( 'type' ) ) return true;
-        }
-        return false;
-    }
-
-    protected static function form_uses_datepicker( $form_id )
-    {
-        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
-            if( 'date' == $field->get_setting( 'type' ) ) return true;
-        }
-        return false;
-    }
-
-    protected static function form_uses_inputmask( $form_id )
-    {
-        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
-            if( $field->get_setting( 'mask' ) ) return true;
-        }
-        return false;
-    }
-
-    protected static function form_uses_rte( $form_id )
-    {
-        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
-            if( $field->get_setting( 'textarea_rte' ) ) return true;
-        }
-        return false;
-    }
-
-    protected static function form_uses_textarea_media( $form_id )
-    {
-        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
-            if( $field->get_setting( 'textarea_media' ) ) return true;
-        }
-        return false;
-    }
-
-    protected static function form_uses_helptext( $form_id )
-    {
-        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
-            if( strip_tags( $field->get_setting( 'help_text' ) ) ) return true;
-        }
-        return false;
-    }
-
-    protected static function form_uses_starrating( $form_id )
-    {
-        foreach( Ninja_Forms()->form( $form_id )->get_fields() as $field ){
-            if( 'starrating' == $field->get_setting( 'type' ) ) return true;
-        }
-        return false;
     }
 
 } // End Class NF_Display_Render

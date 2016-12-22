@@ -104,7 +104,6 @@ gulp.task('js:frontend', function(){
         'assets/js/lib/backbone.marionette.min.js',
         'assets/js/lib/backbone.radio.min.js',
         'assets/js/lib/math.min.js',
-        'assets/js/lib/modernizr.min.js',
         'assets/js/min/global.js',
     ])
     .pipe(concat('front-end-deps.js'))

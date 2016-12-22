@@ -92,8 +92,11 @@ define( [], function() {
 
             if( 'undefined' != typeof fieldTypes && 0 != fieldTypes.length ) {
                 _.each( fieldTypes, function( fieldType ){
+
+                    var fieldTypeModel = nfRadio.channel( 'fields' ).request( 'get:type', fieldType );
+
                     options.push({
-                        label: '-- Add ' + fieldType + ' Field',
+                        label: '-- Add ' + fieldTypeModel.get( 'nicename' ) + ' Field',
                         value: 'addField:' + fieldType,
                     });
                 } );
