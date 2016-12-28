@@ -1,10 +1,11 @@
 define([], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
-			this.listenTo( nfRadio.channel( 'listselect' ), 'init:model', this.register );
-			this.listenTo( nfRadio.channel( 'liststate' ), 'init:model', this.register );
-			this.listenTo( nfRadio.channel( 'listcountry' ), 'init:model', this.register );
-			this.listenTo( nfRadio.channel( 'listmultiselect' ), 'init:model', this.register );
+
+			this.listenTo( nfRadio.channel( 'fields' ), 'init:model', function( model ){
+				if( 'list' == model.get( 'parentType' ) ) this.register( model );
+			}, this );
+
 			nfRadio.channel( 'listselect' ).reply( 'get:calcValue', this.getCalcValue, this );
 			nfRadio.channel( 'listmultiselect' ).reply( 'get:calcValue', this.getCalcValue, this );
 		},

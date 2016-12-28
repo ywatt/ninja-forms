@@ -146,10 +146,6 @@ define( [], function() {
 					}
 				},
 
-				renderOtherAttributes:function() {
-					return '';
-				},
-
 				maybeDisableAutocomplete: function() {
 					if ( 1 == this.disable_browser_autocomplete ) {
 						return 'autocomplete="off"';
