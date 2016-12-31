@@ -49,6 +49,10 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 	    			}
 	    			return classes;
 	    		},
+				renderLabel: function() {
+	    			// Strip HTML from field label output.
+					return this.label.replace(/(<([^>]+)>)/ig,"");
+				},
 	    		renderRequired: function() {
 	    			if ( 1 == this.required ) {
 	    				return '<span class="required">*</span>';
