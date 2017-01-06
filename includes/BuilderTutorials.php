@@ -9,7 +9,9 @@ final class NF_BuilderTutorials
         'example' => array(
             'id' => 'example',
             'title' => 'Example',
-            'content' => 'This is an example.'
+            'content' => 'This is an example.',
+            'trigger' => 'domain:actions',
+            'priority' => 10
         )
     );
     private $rss_feeds;
@@ -22,7 +24,7 @@ final class NF_BuilderTutorials
 
     public function get_tutorials( WP_REST_Request $request )
     {
-        return $this->tutorials;
+        return array_values( $this->tutorials );
     }
 
     public function fetch_feeds()
