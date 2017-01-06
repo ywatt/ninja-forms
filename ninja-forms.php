@@ -140,6 +140,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         public $tracking;
 
         /**
+         * var NF_BuilderTutorials
+         */
+        protected $builder_tutorials;
+
+        /**
          * Plugin Settings
          *
          * @since 3.0
@@ -290,6 +295,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  * Opt-In Tracking
                  */
                 self::$instance->tracking = new NF_Tracking();
+
+                /*
+                 * Builder Tutorials
+                 */
+                self::$instance->builder_tutorials = new NF_BuilderTutorials();
 
                 /*
                  * Activation Hook
