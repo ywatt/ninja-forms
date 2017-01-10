@@ -19,22 +19,7 @@ return apply_filters( 'ninja_forms_action_email_settings', array(
         'label' => __( 'To', 'ninja-forms' ),
         'placeholder' => __( 'Email address or search for a field', 'ninja-forms' ),
         'value' => '',
-        'width' => 'one-half',
-        'use_merge_tags' => TRUE,
-    ),
-
-    /*
-     * Reply To
-     */
-
-    'reply_to' => array(
-        'name' => 'reply_to',
-        'type' => 'textbox',
-        'group' => 'primary',
-        'label' => __( 'Reply To', 'ninja-forms' ),
-        'placeholder' => '',
-        'value' => '',
-        'width' => 'one-half',
+        'width' => 'full',
         'use_merge_tags' => TRUE,
     ),
 
@@ -116,6 +101,20 @@ return apply_filters( 'ninja_forms_action_email_settings', array(
         'group' => 'advanced',
         'label' => __( 'From Address', 'ninja-forms' ),
         'placeholder' => __( 'One email address or field', 'ninja-forms' ),
+        'value' => '',
+        'use_merge_tags' => TRUE,
+    ),
+
+    /*
+     * Reply To
+     */
+
+    'reply_to' => array(
+        'name' => 'reply_to',
+        'type' => 'textbox',
+        'group' => 'advanced',
+        'label' => __( 'Reply To', 'ninja-forms' ),
+        'placeholder' => '',
         'value' => '',
         'use_merge_tags' => TRUE,
     ),
