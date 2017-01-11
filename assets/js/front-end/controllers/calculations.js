@@ -332,6 +332,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 
 		changeCalc: function( calcModel, targetCalcModel ) {
 			var eqValues = this.replaceAllKeys( calcModel );
+			eqValues = eqValues.replace( '[', '' ).replace( ']', '' );
 			calcModel.set( 'value', math.eval( eqValues ) );
 		}
 	});
