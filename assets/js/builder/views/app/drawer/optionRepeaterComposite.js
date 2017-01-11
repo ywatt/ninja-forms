@@ -1,6 +1,6 @@
 define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeaterEmpty', 'models/app/optionRepeaterCollection'], function( listOptionView, listEmptyView, listOptionCollection ) {
 	var view = Marionette.CompositeView.extend( {
-		template: '#tmpl-nf-edit-setting-wrap',
+		template: '#tmpl-nf-edit-setting-option-repeater-wrap',
 		childView: listOptionView,
 		emptyView: listEmptyView,
 		reorderOnSort: false,
@@ -79,6 +79,34 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 			 * Send out a radio message.
 			 */
 			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
+		
+		},
+
+		onAttach: function() {
+            
+			var importLink = jQuery( this.el ).find( '.nf-open-import-tooltip' );
+			var jBox = jQuery( importLink ).jBox( 'Tooltip', {
+                title: '<h3>Please enter your options below:</h3>',
+                content: jQuery( this.el ).find( '.nf-import-options' ),
+                trigger: 'click',
+                closeOnClick: 'body',
+                closeButton: 'box',
+                offset: { x: 20, y: 0 },
+                addClass: 'import-options',
+
+                onOpen: function() {
+                	var that = this;
+                	setTimeout( function() { jQuery( that.content ).find( 'textarea' ).focus(); }, 200 );
+                }
+            } );
+
+			jQuery( this.el ).find( '.nf-import' ).on( 'click', { view: this, jBox: jBox }, this.clickImport );
+
+			/*
+			 * Send out a radio message.
+			 */
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'attach:setting', this.model, this.dataModel, this );
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'attach:setting', this.model, this.dataModel, this );
 		},
 
 		templateHelpers: function () {
@@ -149,13 +177,76 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 		},
 
 		events: {
-			'click .nf-add-new': 'clickAddOption'
+			'click .nf-add-new': 'clickAddOption',
+			'click .extra': 'clickExtra'
 		},
 
 		clickAddOption: function( e ) {
 			nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );
 			jQuery( this.children.findByIndex(this.children.length - 1).el ).find( '[data-id="label"]' ).focus();
-		}
+		},
+
+		clickExtra: function( e ) {
+			nfRadio.channel( 'option-repeater' ).trigger( 'click:extra', e, this.collection, this.dataModel );
+			nfRadio.channel( 'option-repeater-' + this.model.get( 'name' ) ).trigger( 'click:extra', e, this.model, this.collection, this.dataModel );
+		},
+
+		clickImport: function( e ) {
+			var textarea = jQuery( e.data.jBox.content ).find( 'textarea' );
+			var value = textarea.val().trimLeft().trimRight();
+			/*
+			 * Return early if we have no strings.
+			 */
+			if ( 0 == value.length ) {
+				e.data.jBox.close();
+				return false;
+			}			
+			/*
+			 * Split our value based on new lines.
+			 */
+
+			var lines = value.split(/\n/);
+			if ( _.isArray( lines ) ) {
+				/*
+				 * Loop over 
+				 */
+				_.each( lines, function( line ) {
+					var row = line.split( ',' );
+					var label = row[0];
+					var value = row[1] || jQuery.slugify( label, { separator: '-' } );
+					var calc = row[2] || '';
+
+					label = label.trimLeft().trimRight();
+					value = value.trimLeft().trimRight();
+					calc = calc.trimLeft().trimRight();
+					/*
+					 * Add our row to the collection
+					 */
+					var model = e.data.view.collection.add( { label: row[0], value: value, calc: calc } );
+					// Add our field addition to our change log.
+					var label = {
+						object: 'field',
+						label: row[0],
+						change: 'Option Added',
+						dashicon: 'plus-alt'
+					};
+
+					nfRadio.channel( 'changes' ).request( 'register:change', 'addListOption', model, null, label );
+					nfRadio.channel( 'option-repeater-' + e.data.view.model.get( 'name' ) ).trigger( 'add:option', model );
+					nfRadio.channel( 'option-repeater' ).trigger( 'add:option', model );
+					nfRadio.channel( 'app' ).trigger( 'update:setting', model );
+				}, this );
+				/*
+				 * Set our state to unclean so that the user can publish.
+				 */
+			} else {
+				/*
+				 * TODO: Error Handling Here
+				 */
+			}
+			textarea.val( '' );
+			e.data.jBox.close();
+		},
 	} );
 
 	return view;
