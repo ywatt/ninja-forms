@@ -111,6 +111,9 @@ define( [], function() {
 
             var name = model.get( 'name' );
             var value = dataModel.get( name );
+
+            if( ! value ) return;
+
             var rubble = value.split( ':' );
 
             if( 'addField' != rubble[0] ) return;

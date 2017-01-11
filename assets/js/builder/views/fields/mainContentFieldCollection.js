@@ -55,7 +55,7 @@ define( [], function() {
 				opacity: 0.95,
 				grid: [ 5, 5 ],
 				// scroll: false,
-				appendTo: '#nf-builder',
+				appendTo: '#nf-main',
 				scrollSensitivity: 10,
 
 				receive: function( e, ui ) {
