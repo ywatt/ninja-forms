@@ -90,7 +90,8 @@ final class NF_Actions_Email extends NF_Abstracts_Action
             if( ! isset( $action_settings[ $setting ] ) ) continue;
             if( ! $action_settings[ $setting ] ) continue;
 
-            $email_addresses = explode( ',', $action_settings[ $setting ] );
+
+            $email_addresses = is_array( $action_settings[ $setting ] ) ? $action_settings[ $setting ] : explode( ',', $action_settings[ $setting ] );
             foreach( (array) $email_addresses as $email ){
                 $email = trim( $email );
                 if( ! is_email( $email ) ) {
