@@ -49,8 +49,14 @@ abstract class NF_Abstracts_MergeTags
 
             if( ! isset($merge_tag[ 'callback' ])) continue;
 
-            $replace = ( is_callable( array( $this, $merge_tag[ 'callback' ] ) ) ) ? $this->{$merge_tag[ 'callback' ]}() : '';
-
+            if ( is_callable( array( $this, $merge_tag[ 'callback' ] ) ) ) {
+				$replace = $this->{$merge_tag[ 'callback' ]}();
+			} elseif ( is_callable( $merge_tag[ 'callback' ] ) ) {
+				$replace = $merge_tag[ 'callback' ]();
+			} else {
+				$replace = '';
+			}
+            
             $subject = str_replace( $merge_tag[ 'tag' ], $replace, $subject );
         }
 
