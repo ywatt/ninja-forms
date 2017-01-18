@@ -75,7 +75,7 @@ define( [
          * @return void
          */
         addField: function( e ) {
-        	var type = jQuery( e.target ).data( 'id' );
+        	var type = nfRadio.channel( 'fields' ).request( 'get:type', jQuery( e.target ).data( 'id' ) );
 
 			if( e.shiftKey ){
 				nfRadio.channel( 'fields' ).request( 'add:stagedField', type );
