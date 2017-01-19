@@ -69,7 +69,7 @@ define( [], function() {
 			 */ 
 			if( jQuery( ui.item ).hasClass( 'nf-field-type-draggable' ) ) { // Field Type Button
 				// Get our type string
-				var type = nfRadio.channel( 'fields' ).request( 'get:type', jQuery( ui.item ).data( 'id' ) );
+				var type = jQuery( ui.item ).data( 'id' );
 				// Add a field (returns the tmp ID )
 				var tmpID = this.addField( type, false );
 				/*
