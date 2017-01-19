@@ -33,6 +33,13 @@ define( [], function() {
 			}, this );
 
 			/*
+			 * If our field type is a saved field, set our field type to the actual field type
+			 */
+			if ( 'saved' == fieldType.get( 'section' ) ) {
+				this.set( 'type', fieldType.get( 'type' ) );
+			}
+
+			/*
 			 * Trigger an init event on three channels:
 			 * 
 			 * fields
