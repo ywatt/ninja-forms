@@ -75,7 +75,7 @@ define( [
          * @return void
          */
         addField: function( e ) {
-        	var type = jQuery( e.target ).data( 'id' );
+			var type = jQuery( e.target ).data( 'id' );
 
 			if( e.shiftKey ){
 				nfRadio.channel( 'fields' ).request( 'add:stagedField', type );
@@ -121,7 +121,6 @@ define( [
          * @return backbone.collection
          */
         getSavedFields: function() {
-        	console.log( this.sections.get( 'saved' ) );
         	this.sections.get( 'saved' );
         }
 	});

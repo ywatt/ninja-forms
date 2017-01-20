@@ -11,7 +11,7 @@ define( [ 'models/app/optionRepeaterCollection' ], function( ListOptionCollectio
         initialize: function() {
             this.listenTo( nfRadio.channel( 'option-repeater-option-label' ), 'update:option', this.updateOptionLabel );
             this.listenTo( nfRadio.channel( 'option-repeater-option-value' ), 'update:option', this.updateOptionValue );
-        
+            
             /*
              * When we init our model, convert our options from an array of objects to a collection of models.
              */
