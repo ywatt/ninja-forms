@@ -78,6 +78,7 @@ define(
 		'controllers/fields/savedFields',
 		'controllers/fields/fieldDatepicker',
 		'controllers/fields/fieldDisplayCalc',
+        'controllers/fields/fieldTax',
 
 		/*
 		 * TODO: Actions domain controllers
@@ -173,6 +174,7 @@ define(
 		SavedFields,
 		FieldDatepicker,
 		FieldDisplayCalc,
+        FieldTax,
 		/*
 		 * TODO: Actions domain controllers
 		 */
@@ -267,6 +269,7 @@ define(
 				new SavedFields();
 				new FieldDatepicker();
 				new FieldDisplayCalc();
+                new FieldTax();
 				/*
 				 * TODO: Actions domain controllers
 				 */

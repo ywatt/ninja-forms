@@ -965,6 +965,15 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'value' => 'single',
         'use_merge_tags' => FALSE
     ),
+    
+    'tax_rate'              => array(
+        'name'              => 'tax_rate',
+        'type'              => 'textbox',
+        'label'             => __( 'Tax Rate', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'primary',
+        'help'              => __( 'Enter the tax rate as a percentage.', 'ninja-forms' )
+    ),
 
     'shipping_cost'         => array(
         'name'              => 'shipping_cost',

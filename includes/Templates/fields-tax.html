@@ -1,3 +1,4 @@
 <script id="tmpl-nf-field-tax" type="text/template">
-    <input id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element" type="text" value="{{{ data.tax_rate }}}%" disabled>
+    <!--<input id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element" type="text" value="{{{ data.tax_rate }}}%" disabled>-->
+    <span id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" class="nf-static {{{ data.renderClasses() }}} nf-element">{{{ data.renderCurrencyFormatting( data.value ) }}}</span>
 </script>

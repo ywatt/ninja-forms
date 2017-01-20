@@ -35,7 +35,8 @@ define(
 		'controllers/formErrors',
 		'controllers/submit',
 		'controllers/defaultFilters',
-        'controllers/fieldDonation'
+        'controllers/fieldDonation',
+        'controllers/fieldTax'
 	],
 	function(
 		FormData,
@@ -73,7 +74,8 @@ define(
 		FormErrors,
 		Submit,
 		DefaultFilters,
-        FieldDonation
+        FieldDonation,
+        FieldTax
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -95,6 +97,7 @@ define(
 				new FieldSelect();
 				new FieldProduct();
 				new FieldTotal();
+                new FieldTax();
 				new FieldQuantity();
 				new FieldRecaptcha();
 				new HelpText();
