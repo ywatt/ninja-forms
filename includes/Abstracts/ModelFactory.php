@@ -121,6 +121,7 @@ class NF_Abstracts_ModelFactory
     public function import_form( $import, $id = FALSE, $is_conversion = FALSE )
     {
         if( ! is_array( $import ) ){
+
             $data = WPN_Helper::utf8_decode( json_decode( html_entity_decode( $import ), true ) );
 
             if( ! is_array( $data ) ) {
@@ -128,7 +129,7 @@ class NF_Abstracts_ModelFactory
             }
 
             if( ! is_array( $data ) ){
-                $data = maybe_unserialize( $import );
+                $data = WPN_Helper::maybe_unserialize( $import );
 
                 if( ! is_array( $data ) ){
                     return false;
