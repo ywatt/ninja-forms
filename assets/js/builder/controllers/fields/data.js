@@ -69,7 +69,7 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 		 * @param string  	action			action context - are we performing a higher level action? i.e. duplicate
 		 */
 		addField: function( data, silent, renderTrigger, action ) {
-			
+
 			/*
 			 * Set our fields 'adding' value to true. This enables our add field animation.
 			 */
@@ -87,6 +87,8 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			} else {
 				var model = data;
 			}
+
+			// console.log( model );
 
 			/*
 			 * TODO: Add an nfRadio message filter for the model variable.
