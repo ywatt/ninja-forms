@@ -1,7 +1,7 @@
 var nfRadio = Backbone.Radio;
 
 jQuery( document ).ready( function( $ ) {
-	require( ['views/app/builder', 'controllers/loadControllers', 'views/loadViews'], function( BuilderView, LoadControllers, LoadViews ) {
+	require( ['views/app/builder', 'controllers/loadControllers', 'views/loadViews', 'views/app/builderLoading'], function( BuilderView, LoadControllers, LoadViews, BuilderLoadingView ) {
 
 		var NinjaForms = Marionette.Application.extend( {
 
@@ -30,9 +30,26 @@ jQuery( document ).ready( function( $ ) {
 			},
 
 			onStart: function() {
-				var builderView = new BuilderView();
+				/*
+				 * Render our loading view.
+				 */
+				new BuilderLoadingView();
+				
+				/*
+				 * Add a listener to the appModel so that we can re-render our appView when the loadingBlockers attribute changes
+				 */
+				var appModel = nfRadio.channel( 'app' ).request( 'get:data' );
+				this.listenTo( appModel, 'change:loadingBlockers', this.renderAppView );
+				
 				// Trigger our after start event.
 				nfRadio.channel( 'app' ).trigger( 'after:appStart', this );
+			},
+
+			renderAppView: function() {
+				var loadingBlockers = nfRadio.channel( 'app' ).request( 'get:loadingBlockers' );
+				if ( 0 == Object.keys( loadingBlockers ).length ) {
+					new BuilderView();
+				}
 			},
 
 			template: function( template ) {

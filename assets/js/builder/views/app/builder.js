@@ -44,8 +44,6 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/mobileMenu', 'v
 			this.menuDrawer.show( new mobileMenuView( { collection: appDomainCollection } ) );
 			// Show our drawer.
 			this.drawer.show( new drawerView() );
-
-
 		},
 
 		onRender: function() {

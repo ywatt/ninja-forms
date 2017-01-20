@@ -10,7 +10,8 @@
 define( [], function() {
 	var model = Backbone.Model.extend( {
 		defaults: {
-			loading: false
+			loading: false,
+			loadingBlockers: {}
 		},
 
 		initialize: function() {

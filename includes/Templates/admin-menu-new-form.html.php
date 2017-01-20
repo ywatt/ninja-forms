@@ -383,6 +383,10 @@
 
 </script>
 
+<script id="tmpl-nf-builder-loading" type="text/template">
+LOADING...
+</script>
+
 <script id="tmpl-nf-merge-tags-section" type="text/template">
     <h4>{{{ data.label }}}</h4>
     <ul class="merge-tags"></ul>

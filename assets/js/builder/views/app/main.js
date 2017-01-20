@@ -62,7 +62,7 @@ define( [], function() {
 			var gutterRightView = currentDomain.get( 'getGutterRightView' ).call( currentDomain );
 			this.gutterRight.show( gutterRightView );
 			
-			nfRadio.channel( 'main' ).trigger( 'render:main' );
+			nfRadio.channel( 'main' ).trigger( 'render:main', this );
 		},
 
 		getMainEl: function() {

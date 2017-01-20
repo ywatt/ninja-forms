@@ -9,8 +9,9 @@ final class NF_BuilderTutorials
         'example' => array(
             'id' => 'example',
             'title' => 'Example',
-            'content' => 'This is an example.',
-            'trigger' => 'domain:actions',
+            'video_url' => 'https://www.youtube.com/watch?v=RySHDUU2juM',
+            'description' => 'This is an example.',
+            'trigger' => 'builder:load',
             'priority' => 10
         )
     );

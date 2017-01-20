@@ -53,6 +53,7 @@ define(
 		'controllers/app/trackKeyDown',
 		'controllers/app/perfectScroll',
 		'controllers/app/getNewSettingGroupCollection',
+		'controllers/app/loadTutorials',
 		/*
 		 * Fields domain controllers
 		 */
@@ -148,6 +149,7 @@ define(
 		TrackKeyDown,
 		PerfectScroll,
 		GetNewSettingGroupCollection,
+		LoadTutorials,
 		/*
 		 * Fields domain controllers
 		 */
@@ -298,6 +300,7 @@ define(
 				new FormData();
 				new MergeTags();
 				new ItemSettingFill();
+				new LoadTutorials();
 			}
 		});
 

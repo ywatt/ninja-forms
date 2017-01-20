@@ -47,6 +47,12 @@ define( ['models/app/appModel'], function( appModel ) {
 			nfRadio.channel( 'app' ).reply( 'update:currentDrawer', this.updateCurrentDrawer, this );
 			nfRadio.channel( 'app' ).reply( 'update:setting', this.updateSetting, this );
 
+			/*
+			 * Respond to requests to add and remove loading blockers.
+			 */
+			nfRadio.channel( 'app' ).reply( 'add:loadingBlocker', this.addLoadingBlocker, this );
+			nfRadio.channel( 'app' ).reply( 'remove:loadingBlocker', this.removeLoadingBlocker, this );
+			nfRadio.channel( 'app' ).reply( 'get:loadingBlockers', this.getLoadingBlockers, this );
 		},
 
 		updateCurrentDomain: function( model ) {
@@ -82,6 +88,24 @@ define( ['models/app/appModel'], function( appModel ) {
 
 		isMobile: function() {
 			return this.model.get( 'mobile' );
+		},
+
+		addLoadingBlocker: function( slug ) {
+			var loadingBlockers = this.model.get( 'loadingBlockers' );
+			loadingBlockers[ slug ] = true;
+			this.model.set( 'loadingBlockers', loadingBlockers );
+			this.model.trigger( 'change:loadingBlockers' );
+		},
+
+		removeLoadingBlocker: function( slug ) {
+			var loadingBlockers = this.model.get( 'loadingBlockers' );
+			delete loadingBlockers[ slug ];
+			this.model.set( 'loadingBlockers', loadingBlockers );
+			this.model.trigger( 'change:loadingBlockers' );
+		},
+
+		getLoadingBlockers: function() {
+			return this.model.get( 'loadingBlockers' );
 		}
 
 
