@@ -27,7 +27,7 @@ class NF_Admin_CPT_DownloadAllSubmissions extends NF_Step_Processing {
         $sub_count = $this->get_sub_count( $form_id );
 
         if( empty( $this->total_steps ) || $this->total_steps <= 1 ) {
-            $this->total_steps = round( ( $sub_count / 250 ), 0 ) + 2;
+            $this->total_steps = round( ( $sub_count / 10 ), 0 ) + 2;
         }
 
         $args = array(
@@ -60,7 +60,7 @@ class NF_Admin_CPT_DownloadAllSubmissions extends NF_Step_Processing {
         }
 
         $args = array(
-            'posts_per_page' => 250,
+            'posts_per_page' => 10,
             'paged' => $this->step,
             'post_type' => 'nf_sub',
             'meta_query' => array(
