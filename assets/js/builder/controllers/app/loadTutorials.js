@@ -19,9 +19,7 @@ define( [ 'models/app/tutorialModel', 'models/app/tutorialCollection' ], functio
 			var tutorialCollection = new TutorialCollection();
 			tutorialCollection.fetch( {
 				success: function( collection, response, options ) {
-					setTimeout( function() {
 						nfRadio.channel( 'app' ).request( 'remove:loadingBlocker', 'tutorials' );
-					}, 2000 );
 				}
 			} );
 		}

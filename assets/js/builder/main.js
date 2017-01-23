@@ -48,7 +48,7 @@ jQuery( document ).ready( function( $ ) {
 			renderAppView: function() {
 				var loadingBlockers = nfRadio.channel( 'app' ).request( 'get:loadingBlockers' );
 				if ( 0 == Object.keys( loadingBlockers ).length ) {
-					// new BuilderView();
+					new BuilderView();
 				}
 			},
 
