@@ -370,11 +370,9 @@ final class NF_Database_Models_Submission
                     SELECT `meta_value`
                     FROM `" . $wpdb->postmeta . "`
                     WHERE post_id = %d
+                    AND   `meta_key` LIKE '%s'
                     ORDER BY FIELD( meta_key, " . implode( ',', $fields_order_by ) . " )
-                ", $sub->get_id() ) );
-
-                array_shift( $field_values ); // Remove form ID value from array.
-                array_shift( $field_values ); // Remove duplicate sequence number value from array.
+                ", $sub->get_id(), '_field_%' ) );
 
                 if( is_array( $field_type_filters ) && ! empty( $field_type_filters ) ){
                     foreach( $field_type_filters as $i => $type ){
