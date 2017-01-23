@@ -636,6 +636,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             $migrations = new NF_Database_Migrations();
             $migrations->migrate();
 
+            /*
+             * Add an option for showing tutorials.
+             * We only want to show them on new installs/activations.
+             */
+            update_option( 'nf_show_tutorials', true );
+
             if( Ninja_Forms()->form()->get_forms() ) return;
 
             $form = Ninja_Forms::template( 'formtemplate-contactform.nff', array(), TRUE );

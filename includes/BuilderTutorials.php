@@ -25,7 +25,32 @@ final class NF_BuilderTutorials
 
     public function get_tutorials( WP_REST_Request $request )
     {
+        /*
+         * Loop over our tutorials and make sure that they should be displayed.
+         * If they shouldn't, then we unset the trigger.
+         * TODO: Allow the tutorials to be opened later via a menu.
+         */
+        $show_tutorials = get_option( 'nf_show_tutorials', false );
+        $closed_tutorials = get_user_option( 'nf_closed_tutorials', array() );
+        
+        // update_user_option( get_current_user_id(), 'nf_closed_tutorials', array( 'example' ) );
+
+        foreach( $this->tutorials as &$tutorial ) {
+            /*
+             * If we don't want to auto-play any tutorials, then we need to unset the trigger for each.
+             */
+            if ( ! $show_tutorials || in_array( $tutorial[ 'id' ], $closed_tutorials ) ) {
+              $tutorial[ 'trigger' ] = '';
+            }
+            
+        }
+
         return array_values( $this->tutorials );
+    }
+
+    public function update_user_option( $data ) {
+        var_dump( $data );
+        die( 'fuck it' );
     }
 
     public function fetch_feeds()
@@ -56,6 +81,10 @@ final class NF_BuilderTutorials
         register_rest_route( 'ninja-forms/v1', '/tutorials', array(
             'methods' => 'GET',
             'callback' => array( $this, 'get_tutorials' )
+        ) );
+        register_rest_route( 'ninja-forms/v1', '/tutorials', array(
+            'methods' => 'POST',
+            'callback' => array( $this, 'update_user_option' )
         ) );
     }
 }

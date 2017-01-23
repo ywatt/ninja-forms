@@ -168,7 +168,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             'mobile'            => ( wp_is_mobile() ) ? 1: 0,
             'currencySymbols'   => array_merge( array( '' => Ninja_Forms()->get_setting( 'currency_symbol' ) ), Ninja_Forms::config( 'CurrencySymbol' ) ),
             'dateFormat'        => Ninja_Forms()->get_setting( 'date_format' ),
-            'rest_url'          => get_rest_url( null, 'ninja-forms/v1/tutorials/' )
+            'rest_url'          => get_rest_url( null, 'ninja-forms/v1/tutorials/' ),
+            'restNonce'         => wp_create_nonce( 'wp_rest' )
         ));
 
         do_action( 'nf_admin_enqueue_scripts' );

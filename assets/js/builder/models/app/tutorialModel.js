@@ -29,22 +29,28 @@ define( [], function() {
 				videoUrl: this.get( 'video_url' )
 			}
 
-			console.log( this.get( 'video_url' ) );
-
 			var template = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-tutorial-content' )
 			var content = template( templateData );
-
+			var that = this;
 			this.modal = new jBox('Modal', {
 				title: this.get( 'title' ),
 				content: content,
 				zIndex: 99999999,
-				closeButton: 'box'
+				closeButton: 'box',
+				onClose: function() {
+					that.closeModal();
+				}
 			});
 		},
 
 		showModal: function() {
-			console.log( this.modal );
 			this.modal.open();
+		},
+
+		closeModal: function() {
+			console.log( 'close Modal' );
+			// this.set( 'closed', true );
+			// this.save();
 		}
 	} );
 	
