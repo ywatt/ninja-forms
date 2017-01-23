@@ -47,7 +47,8 @@ define( ['views/app/builderHeader', 'views/app/main', 'views/app/mobileMenu', 'v
 		},
 
 		onRender: function() {
-
+			nfRadio.channel( 'app' ).trigger( 'render:builder', this );
+			nfRadio.channel( 'tutorials' ).trigger( 'render:builder', this );
 		},
 
 		getBuilderEl: function() {

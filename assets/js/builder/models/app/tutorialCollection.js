@@ -6,14 +6,10 @@
  * @copyright (c) 2017 WP Ninjas
  * @since 3.0.25
  */
-define( ['models/app/typeModel'], function( typeModel ) {
+define( ['models/app/tutorialModel'], function( TutorialModel ) {
 	var collection = Backbone.Collection.extend( {
-		model: typeModel,
-		url: nfAdmin.rest_url,
-
-		initialize: function( models, options ) {
-
-		}
+		model: TutorialModel,
+		url: nfAdmin.rest_url
 	} );
 	return collection;
 } );

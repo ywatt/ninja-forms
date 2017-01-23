@@ -407,6 +407,13 @@
     <a href="#" title="{{{ data.label }}}" tabindex="1" class="{{{ data.renderClasses() }}}">{{{ data.label }}}</a>
 </script>
 
+<script id="tmpl-nf-tutorial-content" type="text/template">
+    <iframe width="560" height="315" src="{{{ data.videoUrl }}}" frameborder="0" allowfullscreen></iframe>
+    <div class="nf-tutorial-description">
+        {{{ data.description }}}
+    </div>
+</script>
+
 <!-- Field Settings Templates -->
 
 <script id="tmpl-nf-edit-setting-wrap" type="text/template">

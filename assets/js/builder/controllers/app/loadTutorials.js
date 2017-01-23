@@ -19,7 +19,7 @@ define( [ 'models/app/tutorialModel', 'models/app/tutorialCollection' ], functio
 			var tutorialCollection = new TutorialCollection();
 			tutorialCollection.fetch( {
 				success: function( collection, response, options ) {
-						nfRadio.channel( 'app' ).request( 'remove:loadingBlocker', 'tutorials' );
+					nfRadio.channel( 'app' ).request( 'remove:loadingBlocker', 'tutorials' );
 				}
 			} );
 		}

@@ -5,22 +5,22 @@
  */
 final class NF_BuilderTutorials
 {
-    private $tutorials = array(
-        'example' => array(
-            'id' => 'example',
-            'title' => 'Example',
-            'video_url' => 'https://www.youtube.com/watch?v=RySHDUU2juM',
-            'description' => 'This is an example.',
-            'trigger' => 'builder:load',
-            'priority' => 10
-        )
-    );
+    private $tutorials = array();
     private $rss_feeds;
 
     public function __construct()
     {
         add_action( 'admin_init',    array( $this, 'register_tutorials' ) );
         add_action( 'rest_api_init', array( $this, 'register_routes'    ) );
+
+        $this->tutorials[ 'example'] = array(
+            'id' => 'example',
+            'title' => 'Example',
+            'video_url' => 'https://www.youtube.com/embed/RySHDUU2juM',
+            'description' => '<h2>' . __( 'This is an example', 'ninja-forms' ) . '</h2><p>TEST THIS OUT!</p>',
+            'trigger' => 'render:builder',
+            'priority' => 10
+        );
     }
 
     public function get_tutorials( WP_REST_Request $request )
