@@ -36,7 +36,8 @@ define(
 		'controllers/submit',
 		'controllers/defaultFilters',
         'controllers/fieldDonation',
-        'controllers/fieldTax'
+        'controllers/fieldTax',
+        'controllers/fieldProductOptions'
 	],
 	function(
 		FormData,
@@ -75,7 +76,8 @@ define(
 		Submit,
 		DefaultFilters,
         FieldDonation,
-        FieldTax
+        FieldTax,
+        FieldProductOptions
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -104,6 +106,7 @@ define(
 				new FieldTextareaRTE();
 				new FieldStarRating();
 				new FieldTerms();
+                new FieldProductOptions();
 				new FormContentFilters();
 				/**
 				 * Misc controllers
