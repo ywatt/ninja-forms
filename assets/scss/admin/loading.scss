@@ -55,3 +55,57 @@
     background: #fff;
   }
 }
+
+
+.nf-loading-container {
+    //background: #424242;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    /*-ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+
+    align-items: center;*/
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.nf-loading-wrap {
+    margin: auto;
+    position: relative;
+    #nf-logo {
+      background-image: url("../img/ninja-forms-loading-logo.png");
+margin: auto;
+position: absolute;
+top: 22px;
+left: 5px;
+background-size: 172px 86px;
+width: 208px;
+height: 80px;
+    }
+}
+
+.icon-loading {
+  width: 12em;
+  height: 12em;
+}
+.nf-loading-text {
+  position: absolute;
+  top: 115px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  color: $accent-color;
+  animation: opaa 2s infinite;
+}
+@keyframes opaa {
+  0% {opacity: 1;}
+  50% {opacity: 0.4}
+  100% {opacity: 1}
+}

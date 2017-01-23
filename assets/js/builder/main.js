@@ -34,13 +34,13 @@ jQuery( document ).ready( function( $ ) {
 				 * Render our loading view.
 				 */
 				new BuilderLoadingView();
-				
+
 				/*
 				 * Add a listener to the appModel so that we can re-render our appView when the loadingBlockers attribute changes
 				 */
 				var appModel = nfRadio.channel( 'app' ).request( 'get:data' );
 				this.listenTo( appModel, 'change:loadingBlockers', this.renderAppView );
-				
+
 				// Trigger our after start event.
 				nfRadio.channel( 'app' ).trigger( 'after:appStart', this );
 			},
@@ -48,7 +48,7 @@ jQuery( document ).ready( function( $ ) {
 			renderAppView: function() {
 				var loadingBlockers = nfRadio.channel( 'app' ).request( 'get:loadingBlockers' );
 				if ( 0 == Object.keys( loadingBlockers ).length ) {
-					new BuilderView();
+					// new BuilderView();
 				}
 			},
 
@@ -61,7 +61,7 @@ jQuery( document ).ready( function( $ ) {
 				} );
 			}
 		} );
-	
+
 		var ninjaForms = new NinjaForms();
 		ninjaForms.start();
 	} );

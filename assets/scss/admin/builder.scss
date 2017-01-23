@@ -1,3 +1,5 @@
+$grey: #424242;
+$ninja_red: #ED494E;
 $accent_color: #84CC1E;
 $cta_color: #1EA9EA;
 
@@ -74,21 +76,20 @@ All styles used for displaying table content
         height: 60px;
         width: 60px;
     }
-    #nf-logo {
-        background-image: url("../img/ninja-forms-app-header-logo@2x.png");
-        background-size: 130px 50px;
-        background-position: center bottom;
-        background-repeat: no-repeat;
-        float: left;
-        width: 160px;
-        height: 60px;
-        opacity: 1.0;
-        filter: alpha(opacity=100);
-        -webkit-transition: all 1.0s ease;
-        transition: all 1.0s ease;
-    }
 }
-
+#nf-logo {
+    background-image: url("../img/ninja-forms-app-header-logo@2x.png");
+    background-size: 130px 50px;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    float: left;
+    width: 160px;
+    height: 60px;
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    -webkit-transition: all 1.0s ease;
+    transition: all 1.0s ease;
+}
 .scrollWrap{
     overflow : hidden;
     height   : 100%;
