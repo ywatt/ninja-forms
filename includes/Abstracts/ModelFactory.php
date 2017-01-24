@@ -181,6 +181,8 @@ class NF_Abstracts_ModelFactory
      */
     public function get_fields( $where = array(), $fresh = FALSE)
     {
+
+        $field_by_key = array();
         if( $where || $fresh || ! $this->_fields ){
 
             $form_id = $this->_object->get_id();
@@ -191,20 +193,35 @@ class NF_Abstracts_ModelFactory
                 $model_shell = new NF_Database_Models_Field($this->_db, 0);
 
                 $fields = $model_shell->find($form_id, $where);
-
+                
                 foreach ($fields as $field) {
                     $this->_fields[$field->get_id()] = $field;
+                    $field_by_key[ $field->get_setting( 'key' ) ] = $field;
                 }
             } else {
                 foreach( $form_cache[ 'fields' ] as $cached_field ){
                     $field = Ninja_Forms()->form( $form_id )->get_field( $cached_field[ 'id' ] );
                     $field->update_settings( $cached_field[ 'settings' ] );
                     $this->_fields[$field->get_id()] = $field;
+                    $field_by_key[ $field->get_setting( 'key' ) ] = $field;
                 }
             }
         }
 
-        usort( $this->_fields, "NF_Abstracts_Field::sort_by_order" );
+        /* 
+         * If a filter is registered to modify field order, then use that filter.
+         * If not, then usort??.
+         */
+        $order = apply_filters( 'ninja_forms_get_fields_sorted', array(), $this->_fields, $field_by_key, $form_id );
+
+        if ( ! empty( $order ) ) {
+            return $order;
+        }
+
+        /*
+         * Broke the sub edit screen order when I have this enabled.
+         */
+        // usort( $this->_fields, "NF_Abstracts_Field::sort_by_order" );
 
         return $this->_fields;
     }

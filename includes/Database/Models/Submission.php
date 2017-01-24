@@ -283,7 +283,6 @@ final class NF_Database_Models_Submission
     {
         $date_format = Ninja_Forms()->get_setting( 'date_format' );
 
-
         /*
          * Labels
          */
@@ -298,7 +297,14 @@ final class NF_Database_Models_Submission
 
         $fields = Ninja_Forms()->form( $form_id )->get_fields();
 
-        usort( $fields, array( 'NF_Database_Models_Submission', 'sort_fields' ) );
+        /*
+         * If we are using an add-on that filters our field order, we don't want to call sort again.
+         *
+         * TODO: This is probably not the most effecient way to handle this. It should be re-thought.
+         */
+        if ( ! has_filter( 'ninja_forms_get_fields_sorted' ) ) {
+            usort( $fields, array( 'NF_Database_Models_Submission', 'sort_fields' ) );
+        }
 
         $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
 
@@ -355,7 +361,7 @@ final class NF_Database_Models_Submission
                         $field_value = implode(' | ', $field_value);
                     }
 
-                    $value[$field_id] = $field_value;
+                    $value[$field_id] = maybe_unserialize( $field_value );
                 }
 
                 $value_array[] = $value;
@@ -370,11 +376,9 @@ final class NF_Database_Models_Submission
                     SELECT `meta_value`
                     FROM `" . $wpdb->postmeta . "`
                     WHERE post_id = %d
+                    AND   `meta_key` LIKE '%s'
                     ORDER BY FIELD( meta_key, " . implode( ',', $fields_order_by ) . " )
-                ", $sub->get_id() ) );
-
-                array_shift( $field_values ); // Remove form ID value from array.
-                array_shift( $field_values ); // Remove duplicate sequence number value from array.
+                ", $sub->get_id(), '_field_%' ) );
 
                 if( is_array( $field_type_filters ) && ! empty( $field_type_filters ) ){
                     foreach( $field_type_filters as $i => $type ){

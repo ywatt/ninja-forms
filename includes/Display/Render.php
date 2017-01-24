@@ -118,9 +118,7 @@ final class NF_Display_Render
         $after_form = apply_filters( 'ninja_forms_display_after_form', '', $form_id );
         $form->update_setting( 'afterForm', $after_form );
 
-        $form_cache = get_option( 'nf_form_' . $form_id, false );
-        $form_fields = $form_cache[ 'fields' ];
-        if( empty( $form_fields ) ) $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
+        $form_fields = Ninja_Forms()->form( $form_id )->get_fields();
         $fields = array();
 
         if( empty( $form_fields ) ){
