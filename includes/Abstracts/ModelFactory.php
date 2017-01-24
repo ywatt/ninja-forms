@@ -210,7 +210,7 @@ class NF_Abstracts_ModelFactory
 
         /* 
          * If a filter is registered to modify field order, then use that filter.
-         * If not, then usort.
+         * If not, then usort??.
          */
         $order = apply_filters( 'ninja_forms_get_fields_sorted', array(), $this->_fields, $field_by_key, $form_id );
 
@@ -218,7 +218,10 @@ class NF_Abstracts_ModelFactory
             return $order;
         }
 
-        usort( $this->_fields, "NF_Abstracts_Field::sort_by_order" );
+        /*
+         * Broke the sub edit screen order when I have this enabled.
+         */
+        // usort( $this->_fields, "NF_Abstracts_Field::sort_by_order" );
 
         return $this->_fields;
     }
