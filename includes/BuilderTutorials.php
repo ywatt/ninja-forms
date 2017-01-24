@@ -13,10 +13,10 @@ final class NF_BuilderTutorials
         add_action( 'admin_init',    array( $this, 'register_tutorials' ) );
         add_action( 'rest_api_init', array( $this, 'register_routes'    ) );
 
-        $this->tutorials[ 'example'] = array(
-            'id' => 'example',
+        $this->tutorials[ 'example2'] = array(
+            'id' => 'example2',
             'title' => 'Example',
-            'video_url' => 'https://www.youtube.com/embed/RySHDUU2juM',
+            'video_url' => 'https://www.youtube.com/embed/O-nvBpss6Z8',
             'description' => '<h2>' . __( 'This is an example', 'ninja-forms' ) . '</h2><p>TEST THIS OUT!</p>',
             'trigger' => 'render:builder',
             'priority' => 10
@@ -49,8 +49,13 @@ final class NF_BuilderTutorials
     }
 
     public function update_user_option( $data ) {
-        var_dump( $data );
-        die( 'fuck it' );
+        $closed_tutorials = get_user_option( 'nf_closed_tutorials', array() );
+        $closed_tutorials[] = $data[ 'id' ];
+        update_user_option( get_current_user_id(), 'nf_closed_tutorials', $closed_tutorials );
+    }
+
+    public function get_tutorial( $data ) {
+        
     }
 
     public function fetch_feeds()
@@ -82,9 +87,15 @@ final class NF_BuilderTutorials
             'methods' => 'GET',
             'callback' => array( $this, 'get_tutorials' )
         ) );
-        register_rest_route( 'ninja-forms/v1', '/tutorials', array(
-            'methods' => 'POST',
-            'callback' => array( $this, 'update_user_option' )
+        register_rest_route( 'ninja-forms/v1', '/tutorials/(?P<id>\S+)', array(
+            'methods' => 'PUT',
+            'callback' => array( $this, 'update_user_option' ),
+            'permission_callback' => array( $this, 'check_permissions' ),
         ) );
     }
+
+    public function check_permissions() {
+        return current_user_can( apply_filters( 'ninja_forms_admin_settings_capabilities', 'manage_options' ) );
+    }
+    
 }
