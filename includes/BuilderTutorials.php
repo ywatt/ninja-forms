@@ -13,14 +13,7 @@ final class NF_BuilderTutorials
         add_action( 'admin_init',    array( $this, 'register_tutorials' ) );
         add_action( 'rest_api_init', array( $this, 'register_routes'    ) );
 
-        $this->tutorials[ 'example2'] = array(
-            'id' => 'example2',
-            'title' => 'Example',
-            'video_url' => 'https://www.youtube.com/embed/O-nvBpss6Z8',
-            'description' => '<h2>' . __( 'This is an example', 'ninja-forms' ) . '</h2><p>TEST THIS OUT!</p>',
-            'trigger' => 'render:builder',
-            'priority' => 10
-        );
+        $this->tutorials = Ninja_Forms()->config( 'BuilderTutorials' );
     }
 
     public function get_tutorials( WP_REST_Request $request )
