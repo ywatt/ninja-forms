@@ -24,8 +24,8 @@ final class NF_BuilderTutorials
          * TODO: Allow the tutorials to be opened later via a menu.
          */
         $show_tutorials = get_option( 'nf_show_tutorials', false );
-        $closed_tutorials = is_array( get_user_option( 'nf_closed_tutorials' ) ) : get_user_option( 'nf_closed_tutorials' ) ? array();
-        
+        $closed_tutorials = is_array( get_user_option( 'nf_closed_tutorials' ) ) ? get_user_option( 'nf_closed_tutorials' ) : array();
+
         // update_user_option( get_current_user_id(), 'nf_closed_tutorials', array( 'example' ) );
 
         foreach( $this->tutorials as &$tutorial ) {
@@ -35,7 +35,7 @@ final class NF_BuilderTutorials
             if ( ! $show_tutorials || in_array( $tutorial[ 'id' ], $closed_tutorials ) ) {
               $tutorial[ 'trigger' ] = '';
             }
-            
+
         }
 
         return array_values( $this->tutorials );
@@ -48,7 +48,7 @@ final class NF_BuilderTutorials
     }
 
     public function get_tutorial( $data ) {
-        
+
     }
 
     public function fetch_feeds()
@@ -90,5 +90,5 @@ final class NF_BuilderTutorials
     public function check_permissions() {
         return current_user_can( apply_filters( 'ninja_forms_admin_settings_capabilities', 'manage_options' ) );
     }
-    
+
 }
