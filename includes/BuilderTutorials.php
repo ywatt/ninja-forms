@@ -24,7 +24,7 @@ final class NF_BuilderTutorials
          * TODO: Allow the tutorials to be opened later via a menu.
          */
         $show_tutorials = get_option( 'nf_show_tutorials', false );
-        $closed_tutorials = get_user_option( 'nf_closed_tutorials', array() );
+        $closed_tutorials = get_user_option( 'nf_closed_tutorials' ) || array();
         
         // update_user_option( get_current_user_id(), 'nf_closed_tutorials', array( 'example' ) );
 
