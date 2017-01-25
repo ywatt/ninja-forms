@@ -402,15 +402,15 @@ class NF_Abstracts_ModelFactory
      * @param bool|FALSE $fresh
      * @return array
      */
-    public function get_subs( $where = array(), $fresh = FALSE )
+    public function get_subs( $where = array(), $fresh = FALSE, $sub_ids = array() )
     {
-        if( $where || $fresh || ! $this->_objects ){
+        if( $where || $fresh || $sub_ids || ! $this->_objects ){
 
             $form_id = $this->_object->get_id();
 
             $model_shell = new NF_Database_Models_Submission( 0 );
 
-            $objects = $model_shell->find( $form_id, $where );
+            $objects = $model_shell->find( $form_id, $where, $sub_ids );
 
             foreach( $objects as $object ){
                 $this->_objects[ $object->get_id() ] = $object;

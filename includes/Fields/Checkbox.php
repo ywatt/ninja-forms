@@ -80,7 +80,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
     }
 
     public function export_value( $value ) {
-        if ( 1 === $value ) {
+        if ( 1 == $value ) {
             return __( 'checked', 'ninja-forms' );
         } else {
             return __( 'unchecked', 'ninja-forms' );
