@@ -19,6 +19,15 @@ define([], function() {
 				} );
 			}
 
+			if ( 'undefined' != typeof response.errors.last ) {
+				if( 'undefined' != typeof response.errors.last.message ) {
+					var style = 'background: rgba( 255, 207, 115, .5 ); color: #FFA700; display: block;';
+					console.log( '%c NINJA FORMS SUPPORT: SERVER ERROR', style );
+					console.log( response.errors.last.message );
+					console.log( '%c END SERVER ERROR MESSAGE', style );
+				}
+			}
+
 			/**
 			 * TODO: This needs to be re-worked for backbone. It's not dynamic enough.
 			 */
