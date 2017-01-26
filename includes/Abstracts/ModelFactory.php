@@ -21,6 +21,11 @@ class NF_Abstracts_ModelFactory
     protected $_object;
 
     /**
+     * Form
+     */
+     protected $_form;
+
+    /**
      * Fields
      *
      * An array of field model objects.
@@ -60,7 +65,7 @@ class NF_Abstracts_ModelFactory
     {
         $this->_db = $db;
 
-        $this->_object = new NF_Database_Models_Form( $this->_db, $id );
+        $this->_object = $this->_form = new NF_Database_Models_Form( $this->_db, $id );
 
         $form_cache = get_option( 'nf_form_' . $id, false );
 
@@ -78,7 +83,9 @@ class NF_Abstracts_ModelFactory
      */
     public function get()
     {
-        return $this->_object;
+        $object = $this->_object;
+        $this->_object = $this->_form;
+        return $object;
     }
 
     /**
@@ -183,9 +190,10 @@ class NF_Abstracts_ModelFactory
     {
 
         $field_by_key = array();
-        if( $where || $fresh || ! $this->_fields ){
 
-            $form_id = $this->_object->get_id();
+        $form_id = $this->_object->get_id();
+
+        if( $where || $fresh || ! $this->_fields ){
 
             $form_cache = get_option( 'nf_form_' . $form_id, false );
 
@@ -193,7 +201,7 @@ class NF_Abstracts_ModelFactory
                 $model_shell = new NF_Database_Models_Field($this->_db, 0);
 
                 $fields = $model_shell->find($form_id, $where);
-                
+
                 foreach ($fields as $field) {
                     $this->_fields[$field->get_id()] = $field;
                     $field_by_key[ $field->get_setting( 'key' ) ] = $field;
@@ -206,16 +214,16 @@ class NF_Abstracts_ModelFactory
                     $field_by_key[ $field->get_setting( 'key' ) ] = $field;
                 }
             }
-        }
 
-        /* 
-         * If a filter is registered to modify field order, then use that filter.
-         * If not, then usort??.
-         */
-        $order = apply_filters( 'ninja_forms_get_fields_sorted', array(), $this->_fields, $field_by_key, $form_id );
+            /*
+             * If a filter is registered to modify field order, then use that filter.
+             * If not, then usort??.
+             */
+            $order = apply_filters( 'ninja_forms_get_fields_sorted', array(), $this->_fields, $field_by_key, $form_id );
 
-        if ( ! empty( $order ) ) {
-            return $order;
+            if ( ! empty( $order ) ) {
+                $this->_fields = $order;
+            }
         }
 
         /*
