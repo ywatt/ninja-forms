@@ -65,6 +65,13 @@ define([], function() {
 			}
 
 			/*
+			 * Send out a radio message saying that we're about to begin submitting.
+			 * First we send on the generic forms channel, and then on the form-specific channel.
+			 */
+			nfRadio.channel( 'forms' ).trigger( 'after:submitValidation', formModel );
+			nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'after:submitValidation', formModel );
+
+			/*
 			 * Actually submit our form, and send out a message with our response.
 			 */
 
