@@ -214,16 +214,16 @@ class NF_Abstracts_ModelFactory
                     $field_by_key[ $field->get_setting( 'key' ) ] = $field;
                 }
             }
-        }
 
-        /*
-         * If a filter is registered to modify field order, then use that filter.
-         * If not, then usort??.
-         */
-        $order = apply_filters( 'ninja_forms_get_fields_sorted', array(), $this->_fields, $field_by_key, $form_id );
+            /*
+             * If a filter is registered to modify field order, then use that filter.
+             * If not, then usort??.
+             */
+            $order = apply_filters( 'ninja_forms_get_fields_sorted', array(), $this->_fields, $field_by_key, $form_id );
 
-        if ( ! empty( $order ) ) {
-            return $order;
+            if ( ! empty( $order ) ) {
+                $this->_fields = $order;
+            }
         }
 
         /*
