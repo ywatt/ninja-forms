@@ -13,7 +13,7 @@ class NF_Fields_ProductOptions extends NF_Abstracts_List
 
     protected $_section = 'pricing';
 
-    protected $_icon = 'tag';
+    protected $_icon = 'tags';
 
     protected $_templates = array( 'listselect', 'listradio', 'listcheckbox' );
     

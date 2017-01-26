@@ -9,7 +9,7 @@ class NF_Fields_Tax extends NF_Abstracts_Input
 
     protected $_section = 'pricing';
 
-    protected $_icon = 'money';
+    protected $_icon = 'percent';
 
     protected $_aliases = array();
 
