@@ -217,8 +217,9 @@ final class NF_Database_Models_Submission
      * @param array $where
      * @return array
      */
-    public function find( $form_id, array $where = array() )
+    public function find( $form_id, array $where = array(), array $ids = array() )
     {
+
         $this->_form_id = $form_id;
 
         $args = array(
@@ -226,6 +227,10 @@ final class NF_Database_Models_Submission
             'posts_per_page' => -1,
             'meta_query' => $this->format_meta_query( $where )
         );
+
+        if ( ! empty ( $ids ) ) {
+            $args[ 'post__in' ] = $ids;
+        }
 
         $subs = get_posts( $args );
 
@@ -319,8 +324,7 @@ final class NF_Database_Models_Submission
             } else {
                 $field_labels[ $field->get_id() ] = $field->get_setting( 'label' );
             }
-            $fields_order_by[] = "'_field_{$field->get_id()}'";
-
+            $fields_order_by[] = $field->get_id();
             if( has_filter( 'ninja_forms_subs_export_field_value_' . $field->get_setting( 'type' ) ) ){
                 // $i represents the relative field order for later reference when running filters on a specific value.
                 $field_type_filters[ $i ] = $field->get_setting( 'type' );
@@ -332,13 +336,9 @@ final class NF_Database_Models_Submission
          * Submissions
          */
 
-        $value_array = array();
-
-        $subs = Ninja_Forms()->form( $form_id )->get_subs();
+        $subs = Ninja_Forms()->form( $form_id )->get_subs( array(), FALSE, $sub_ids );
 
         foreach( $subs as $sub ){
-
-            if( ! in_array( $sub->get_id(), $sub_ids ) ) continue;
 
             $value[ '_seq_num' ] = $sub->get_seq_num();
             $value[ '_date_submitted' ] = $sub->get_sub_date( $date_format );
@@ -372,13 +372,17 @@ final class NF_Database_Models_Submission
                  */
 
                 global $wpdb;
-                $field_values = $wpdb->get_col( $wpdb->prepare("
-                    SELECT `meta_value`
-                    FROM `" . $wpdb->postmeta . "`
-                    WHERE post_id = %d
-                    AND   `meta_key` LIKE '%s'
-                    ORDER BY FIELD( meta_key, " . implode( ',', $fields_order_by ) . " )
-                ", $sub->get_id(), '_field_%' ) );
+                $field_values = $wpdb->get_col( "
+                    SELECT IFNULL( meta_value, '' )
+                    FROM ". $wpdb->postmeta . " as postmeta
+                    RIGHT JOIN (
+                        SELECT id FROM wp_nf3_fields
+                        WHERE id IN ( " . implode( ',', $fields_order_by ) . " ) 
+                        ORDER BY FIELD( id, " . implode( ',', $fields_order_by ) . " )
+                    ) as fields
+                    ON postmeta.meta_key LIKE CONCAT( '%', fields.id, '%' )
+                        AND postmeta.post_id = " . $sub->get_id()
+                );
 
                 if( is_array( $field_type_filters ) && ! empty( $field_type_filters ) ){
                     foreach( $field_type_filters as $i => $type ){
