@@ -427,8 +427,14 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         public function form( $id = '' )
         {
             global $wpdb;
+            
+            static $forms;
+            if ( isset ( $forms[ $id ] ) ) {
+                return $forms[ $id ];
+            }
 
-            return new NF_Abstracts_ModelFactory( $wpdb, $id );
+            $forms[ $id ] = new NF_Abstracts_ModelFactory( $wpdb, $id );
+            return $forms[ $id ];
         }
 
         /**
