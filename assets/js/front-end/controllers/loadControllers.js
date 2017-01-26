@@ -37,7 +37,8 @@ define(
 		'controllers/defaultFilters',
         'controllers/fieldDonation',
         'controllers/fieldTax',
-        'controllers/fieldProductOptions'
+        'controllers/fieldProductOptions',
+        'controllers/calcSubtotal'
 	],
 	function(
 		FormData,
@@ -77,7 +78,8 @@ define(
 		DefaultFilters,
         FieldDonation,
         FieldTax,
-        FieldProductOptions
+        FieldProductOptions,
+        CalcSubtotal
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -137,6 +139,7 @@ define(
 				new FieldDate();
                 new FieldDonation();
 				new FormData();
+                new CalcSubtotal();
 				
 			}
 		});
