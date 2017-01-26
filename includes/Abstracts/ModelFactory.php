@@ -21,6 +21,11 @@ class NF_Abstracts_ModelFactory
     protected $_object;
 
     /**
+     * Form
+     */
+     protected $_form;
+
+    /**
      * Fields
      *
      * An array of field model objects.
@@ -60,7 +65,7 @@ class NF_Abstracts_ModelFactory
     {
         $this->_db = $db;
 
-        $this->_object = new NF_Database_Models_Form( $this->_db, $id );
+        $this->_object = $this->_form = new NF_Database_Models_Form( $this->_db, $id );
 
         $form_cache = get_option( 'nf_form_' . $id, false );
 
@@ -78,7 +83,9 @@ class NF_Abstracts_ModelFactory
      */
     public function get()
     {
-        return $this->_object;
+        $object = $this->_object;
+        $this->_object = $this->_form;
+        return $object;
     }
 
     /**
@@ -193,7 +200,7 @@ class NF_Abstracts_ModelFactory
                 $model_shell = new NF_Database_Models_Field($this->_db, 0);
 
                 $fields = $model_shell->find($form_id, $where);
-                
+
                 foreach ($fields as $field) {
                     $this->_fields[$field->get_id()] = $field;
                     $field_by_key[ $field->get_setting( 'key' ) ] = $field;
@@ -208,7 +215,7 @@ class NF_Abstracts_ModelFactory
             }
         }
 
-        /* 
+        /*
          * If a filter is registered to modify field order, then use that filter.
          * If not, then usort??.
          */
