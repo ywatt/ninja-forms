@@ -190,9 +190,10 @@ class NF_Abstracts_ModelFactory
     {
 
         $field_by_key = array();
-        if( $where || $fresh || ! $this->_fields ){
 
-            $form_id = $this->_object->get_id();
+        $form_id = $this->_object->get_id();
+
+        if( $where || $fresh || ! $this->_fields ){
 
             $form_cache = get_option( 'nf_form_' . $form_id, false );
 
