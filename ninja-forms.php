@@ -328,6 +328,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             add_action( 'init', array( self::$instance, 'init' ), 5 );
             add_action( 'admin_init', array( self::$instance, 'admin_init' ), 5 );
 
+            add_action( 'rest_api_init', array( self::$instance, 'register_routes' ) );
+
+
             return self::$instance;
         }
 
@@ -676,6 +679,150 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                     // Alternatively we could dump this to a file.
                 }
             }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | REST ENDPOINTS
+        |--------------------------------------------------------------------------
+        */
+
+        public function register_routes()
+        {
+            register_rest_route( 'ninja-forms/v1', '/field-types', array(
+                'methods' => 'GET',
+                'callback' => array( self::$instance, 'get_field_types' )
+            ) );
+            // register_rest_route( 'ninja-forms/v1', '/tutorials/(?P<id>\S+)', array(
+            //     'methods' => 'PUT',
+            //     'callback' => array( $this, 'update_user_option' ),
+            //     'permission_callback' => array( $this, 'check_permissions' ),
+            // ) );
+        }
+
+        public function get_field_types() {
+            $field_type_sections = array_values( Ninja_Forms()->config( 'FieldTypeSections' ) );
+            $field_type_settings = array();
+
+            $master_settings = array();
+
+            $setting_defaults = array();
+
+            foreach( Ninja_Forms()->fields as $field ){
+
+                $name = $field->get_name();
+                $settings = $field->get_settings();
+                $groups = Ninja_Forms::config( 'SettingsGroups' );
+
+                $unique_settings = $this->_unique_settings( $settings );
+
+                $master_settings = array_merge( $master_settings, $unique_settings );
+
+                $settings_groups = $this->_group_settings( $settings, $groups );
+
+                $settings_defaults = $this->_setting_defaults( $unique_settings );
+
+                $field_type_settings[ $name ] = array(
+                    'id' =>  $name,
+                    'nicename' => $field->get_nicename(),
+                    'alias' => $field->get_aliases(),
+                    'parentType' => $field->get_parent_type(),
+                    'section' => $field->get_section(),
+                    'icon' => $field->get_icon(),
+                    'type' => $field->get_type(),
+                    'settingGroups' => $settings_groups,
+                    'settingDefaults' => $settings_defaults
+                );
+            }
+
+            $saved_fields = Ninja_Forms()->form()->get_fields( array( 'saved' => 1) );
+
+            foreach( $saved_fields as $saved_field ){
+
+                $settings = $saved_field->get_settings();
+
+                $id     = $saved_field->get_id();
+                $type   = $settings[ 'type' ];
+                $label  = $settings[ 'label' ];
+
+                $field_type_settings[ $id ] = $field_type_settings[ $type ];
+                $field_type_settings[ $id ][ 'id' ] = $id;
+                $field_type_settings[ $id ][ 'type' ] = $type;
+                $field_type_settings[ $id ][ 'nicename' ] = $label;
+                $field_type_settings[ $id ][ 'section' ] = 'saved';
+
+                $defaults = $field_type_settings[ $id ][ 'settingDefaults' ];
+                $defaults = array_merge( $defaults, $settings );
+                $defaults[ 'saved' ] = TRUE;
+
+                $field_type_settings[ $id ][ 'settingDefaults' ] = $defaults;
+            }
+
+            return $field_type_settings;
+        }
+
+        protected function _unique_settings( $settings )
+        {
+            $unique_settings = array();
+
+            if( ! is_array( $settings ) ) return $unique_settings;
+
+            foreach( $settings as $setting ){
+
+                if( 'fieldset' == $setting[ 'type' ] ){
+
+                    $unique_settings = array_merge( $unique_settings, $this->_unique_settings( $setting[ 'settings' ] ) );
+                } else {
+
+                    $name = $setting[ 'name' ];
+                    $unique_settings[ $name ] = $setting;
+                }
+
+            }
+
+            return $unique_settings;
+        }
+
+        protected function _group_settings( $settings, $groups )
+        {
+            if( ! is_array( $settings ) ) return $groups;
+
+            foreach( $settings as $setting ){
+
+                $group = ( isset( $setting[ 'group' ] ) ) ? $setting[ 'group' ] : '';
+
+                if( isset( $setting[ 'type'] ) && 'fieldset' == $setting[ 'type' ] ){
+                    $setting[ 'settings' ] = array_values( $setting[ 'settings' ] );
+                }
+
+                $groups[ $group ][ 'settings'][] = $setting;
+            }
+
+            foreach( $groups as $id => $group ) {
+                if ( empty( $group[ 'settings' ] ) ) {
+                    unset( $groups[ $id ] );
+                }
+            }
+
+            unset( $groups[ "" ] );
+
+            usort($groups, array( $this, 'setting_group_priority' ) );
+
+            return $groups;
+        }
+
+        protected function _setting_defaults( $settings )
+        {
+            $setting_defaults = array();
+
+            foreach( $settings as $setting ){
+
+                $name = ( isset( $setting[ 'name' ] ) ) ? $setting[ 'name' ] : '';
+                $default = ( isset( $setting[ 'value' ] ) ) ? $setting[ 'value' ] : '';
+                $setting_defaults[ $name ] = $default;
+            }
+
+            return $setting_defaults;
         }
 
     } // End Class Ninja_Forms

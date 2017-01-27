@@ -9,7 +9,7 @@
 define( ['models/app/tutorialModel'], function( TutorialModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: TutorialModel,
-		url: nfAdmin.rest_url,
+		url: nfAdmin.rest_url + 'tutorials',
 
 		/**
 		 * Extend Backbone.Collection.sync to add nince and pagination support.

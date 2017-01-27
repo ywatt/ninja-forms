@@ -1,7 +1,19 @@
 var nfRadio = Backbone.Radio;
 
 jQuery( document ).ready( function( $ ) {
-	require( ['views/app/builder', 'controllers/loadControllers', 'views/loadViews', 'views/app/builderLoading'], function( BuilderView, LoadControllers, LoadViews, BuilderLoadingView ) {
+	require( [
+		'views/app/builder',
+		'controllers/loadControllers',
+		'views/loadViews',
+		'views/app/builderLoading',
+		'models/app/typeCollection'
+	], function( 
+		BuilderView, 
+		LoadControllers, 
+		LoadViews, 
+		BuilderLoadingView, 
+		TypeCollection 
+	) {
 
 		var NinjaForms = Marionette.Application.extend( {
 
@@ -12,6 +24,24 @@ jQuery( document ).ready( function( $ ) {
 					var template = that.template( template );
 					return template( data );
 				};
+
+				nfRadio.channel( 'app' ).trigger( 'before:loadData' );
+
+				/*
+				 * Load controllers that don't need any data to be present to run.
+				 */
+
+
+				/*
+				 * Initialise and fetch data..
+				 * We don't continue loading until all of our dat has been fetched.
+				 */
+				this.initCollections();
+
+				/*
+				 * Continue loading our controllers that need data to be present.
+				 */
+
 
 				// Trigger an event before we load our controllers.
 				nfRadio.channel( 'app' ).trigger( 'before:loadControllers', this );
@@ -50,6 +80,19 @@ jQuery( document ).ready( function( $ ) {
 				if ( 0 == Object.keys( loadingBlockers ).length ) {
 					new BuilderView();
 				}
+			},
+
+			initCollections: function() {
+				/*
+				 * Init our field type collection and fetch.
+				 */
+				nfRadio.channel( 'app' ).request( 'add:loadingBlocker', 'typeCollection' );
+				new TypeCollection( [], { type: 'fields' } ).fetch( {
+					success: function( collection, response, options ) {
+						console.log( collection );
+						nfRadio.channel( 'app' ).request( 'remove:loadingBlocker', 'typeCollection' );
+					}
+				} );
 			},
 
 			template: function( template ) {
