@@ -7,12 +7,14 @@ jQuery( document ).ready( function( $ ) {
 		'views/loadViews',
 		'views/app/builderLoading',
 		'models/app/typeCollection'
+		'models/app/appModel'
 	], function( 
 		BuilderView, 
 		LoadControllers, 
 		LoadViews, 
 		BuilderLoadingView, 
-		TypeCollection 
+		TypeCollection ,
+		AppModel
 	) {
 
 		var NinjaForms = Marionette.Application.extend( {
@@ -24,6 +26,19 @@ jQuery( document ).ready( function( $ ) {
 					var template = that.template( template );
 					return template( data );
 				};
+
+				/*
+				 * Setup our appModel
+				 */
+				// Get the collection that represents all the parts of our application.
+				// var appDomainCollection = nfRadio.channel( 'app' ).request( 'get:domainCollection' );
+
+				this.model = new appModel( {
+					currentDrawer: false,
+					// currentDomain: appDomainCollection.get( 'fields' ),
+					clean: true
+				} );
+
 
 				nfRadio.channel( 'app' ).trigger( 'before:loadData' );
 
@@ -89,7 +104,6 @@ jQuery( document ).ready( function( $ ) {
 				nfRadio.channel( 'app' ).request( 'add:loadingBlocker', 'typeCollection' );
 				new TypeCollection( [], { type: 'fields' } ).fetch( {
 					success: function( collection, response, options ) {
-						console.log( collection );
 						nfRadio.channel( 'app' ).request( 'remove:loadingBlocker', 'typeCollection' );
 					}
 				} );
