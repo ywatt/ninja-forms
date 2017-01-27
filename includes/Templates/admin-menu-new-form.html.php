@@ -577,7 +577,7 @@ Label Three, value-three, 3
 </script>
 
 <script id="tmpl-nf-edit-setting-option-repeater-error" type="text/template">
-    {{{ data.errors[ Object.keys( errors )[0] ] }}}
+    {{{ data.renderErrors() }}}
 </script>
 
 <script id="tmpl-nf-edit-setting-option-repeater-default-row" type="text/template">
