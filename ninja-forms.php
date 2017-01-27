@@ -758,7 +758,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 $field_type_settings[ $id ][ 'settingDefaults' ] = $defaults;
             }
 
-            return $field_type_settings;
+            return array_values( $field_type_settings );
         }
 
         protected function _unique_settings( $settings )
