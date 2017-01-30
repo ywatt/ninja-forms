@@ -21,7 +21,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
     protected $processing_fields = array( 'quantity', 'modifier', 'shipping', 'tax', 'total' );
 
-    protected $_settings = array( 'product_use_quantity', 'product_price', 'product_type', 'product_type' );
+    protected $_settings = array( 'product_use_quantity', 'product_price', 'product_type' );
 
     protected $_settings_exclude = array( 'input_limit_set', 'disable_input', 'required' );
 
