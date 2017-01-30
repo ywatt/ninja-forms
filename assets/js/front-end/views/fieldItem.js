@@ -63,7 +63,8 @@ define( [], function() {
 	    	return {
 
 				renderElement: function(){
-					var tmpl = _.find( this.element_templates, function( tmpl ) {
+                    var elementTemplates = nfRadio.channel(that.model.get('type')).request('get:template', that.model) || this.element_templates;
+					var tmpl = _.find( elementTemplates, function( tmpl ) {
 						if ( 0 < jQuery( '#tmpl-nf-field-' + tmpl ).length ) {
 							return true;
 						}

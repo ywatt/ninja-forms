@@ -28,6 +28,7 @@ final class NF_Display_Render
     protected static $use_test_values = FALSE;
 
     protected static $form_uses_recaptcha      = array();
+    protected static $form_uses_autonumeric    = array();
     protected static $form_uses_datepicker     = array();
     protected static $form_uses_inputmask      = array();
     protected static $form_uses_rte            = array();
@@ -293,6 +294,9 @@ final class NF_Display_Render
                 if( 'starrating' == $field[ 'settings' ][ 'type' ] ){
                     array_push( self::$form_uses_starrating, $form_id );
                 }
+                if( 'donation' == $field[ 'settings' ][ 'type' ] ){
+                    array_push( self::$form_uses_autonumeric, $form_id );
+                }
                 if( isset( $field[ 'settings' ][ 'mask' ] ) && $field[ 'settings' ][ 'mask' ] ){
                     array_push( self::$form_uses_inputmask, $form_id );
                 }
@@ -531,6 +535,10 @@ final class NF_Display_Render
 
         if( $is_preview || in_array( $form_id, self::$form_uses_inputmask ) ) {
             wp_enqueue_script('nf-front-end--inputmask', $js_dir . 'front-end--inputmask.min.js', array( 'jquery' ), $ver );
+        }
+        
+        if( $is_preview || in_array ($form_id, self::$form_uses_autonumeric ) ) {
+            wp_enqueue_script( 'nf-front-end--autonumeric', $js_dir . 'front-end--autonumeric.min.js', array( 'jquery' ), $ver );
         }
 
          if( $is_preview || in_array( $form_id, self::$form_uses_rte ) ) {

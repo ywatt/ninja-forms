@@ -965,6 +965,38 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'value' => 'single',
         'use_merge_tags' => FALSE
     ),
+    
+    'tax_rate'              => array(
+        'name'              => 'tax_rate',
+        'type'              => 'textbox',
+        'label'             => __( 'Tax Rate', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'primary',
+        'help'              => __( 'Enter the tax rate as a percentage.', 'ninja-forms' )
+    ),
+    
+    'options_display_as'    => array(
+        'name'              => 'options_display_as',
+        'type'              => 'select',
+        'options'           => array(
+            array(
+                'label'     => __( 'Select List', 'ninja-forms' ),
+                'value'     => 'listselect'
+            ),
+            array(
+                'label'     => __( 'Radio List', 'ninja-forms' ),
+                'value'     => 'listradio'
+            ),
+            array(
+                'label'     => __( 'Checkbox List', 'ninja-forms' ),
+                'value'     => 'listcheckbox'
+            )
+        ),
+        'label'             => __( 'Display List Options As', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'primary',
+        'value'             => 'listselect'
+    ),
 
     'shipping_cost'         => array(
         'name'              => 'shipping_cost',
@@ -1030,8 +1062,9 @@ return apply_filters( 'ninja_forms_field_settings', array(
 
     'product_assignment'      => array(
         'name'              => 'product_assignment',
-        'type'              => 'select',
-        'label'             => __( 'Product', 'ninja-forms' ),
+        'type'              => 'field-select',
+        'field_types'       => array( 'product' ),
+        'label'             => __( 'Associated Product', 'ninja-forms' ),
         'width'             => 'full',
         'group'             => 'primary',
         'options'           => array(),

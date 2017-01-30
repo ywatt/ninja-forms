@@ -34,7 +34,11 @@ define(
 		'controllers/loadViews',
 		'controllers/formErrors',
 		'controllers/submit',
-		'controllers/defaultFilters'
+		'controllers/defaultFilters',
+        'controllers/fieldDonation',
+        'controllers/fieldTax',
+        'controllers/fieldProductOptions',
+        'controllers/calcSubtotal'
 	],
 	function(
 		FormData,
@@ -71,7 +75,11 @@ define(
 		LoadViews,
 		FormErrors,
 		Submit,
-		DefaultFilters
+		DefaultFilters,
+        FieldDonation,
+        FieldTax,
+        FieldProductOptions,
+        CalcSubtotal
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -93,12 +101,14 @@ define(
 				new FieldSelect();
 				new FieldProduct();
 				new FieldTotal();
+                new FieldTax();
 				new FieldQuantity();
 				new FieldRecaptcha();
 				new HelpText();
 				new FieldTextareaRTE();
 				new FieldStarRating();
 				new FieldTerms();
+                new FieldProductOptions();
 				new FormContentFilters();
 				/**
 				 * Misc controllers
@@ -127,7 +137,9 @@ define(
 				 * Data controllers
 				 */
 				new FieldDate();
+                new FieldDonation();
 				new FormData();
+                new CalcSubtotal();
 				
 			}
 		});
