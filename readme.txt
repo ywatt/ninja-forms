@@ -116,6 +116,15 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 * Field data should populate properly in all submission exports.
 
+
+= 3.0.26 (30 January 2017) =
+
+*Bugs:*
+
+* Field data should populate properly in submission exports.
+* Email errors upon form submission should be clearer.
+* Fixed a compatibility bug with other plugins that use the WP List Table.
+
 = 3.0.26 (30 January 2017) =
 
 *Bugs:*

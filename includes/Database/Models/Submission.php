@@ -326,7 +326,7 @@ final class NF_Database_Models_Submission
 
             foreach ($fields as $field_id => $field) {
 
-                if (!is_int($field_id)) continue;
+              if (!is_int($field_id)) continue;
                 if( in_array( $field->get_setting( 'type' ), $hidden_field_types ) ) continue;
 
                 if ( $field->get_setting( 'admin_label' ) ) {
