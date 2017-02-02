@@ -34,7 +34,8 @@ define( [], function() {
 		newFieldKey: function( model ) {
 			var d = new Date();
 			var n = d.valueOf();
-			var key = this.keyExists( model.get( 'type' ) + '_' + n );
+			var key = this.slugify( model.get( 'type' ) + '_' + n );
+
 			model.set( 'key', key, { silent: true } );
 
 			if( 'undefined' == model.get( 'manual_key' ) ) {
@@ -55,7 +56,9 @@ define( [], function() {
 				 *
 				 */
 				delete model.changed.label;
-				var key = this.keyExists( model.get( 'label' ) );
+				var d = new Date();
+				var n = d.valueOf();
+				var key = this.slugify( model.get( 'label' ) + '_' + n );
 				model.set( 'key', key );
 			}
 		},

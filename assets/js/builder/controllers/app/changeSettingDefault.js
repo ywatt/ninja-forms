@@ -40,7 +40,7 @@ define( [], function() {
 			
 			// Update our field model with the new setting value.
 			dataModel.set( name, value, { settingModel: settingModel } );
-			nfRadio.channel( 'setting-' + name, 'after:updateSetting', dataModel, settingModel );
+			nfRadio.channel( 'setting-' + name ).trigger( 'after:updateSetting', dataModel, settingModel );
 			// Register our setting change with our change tracker
 			var after = value;
 			
