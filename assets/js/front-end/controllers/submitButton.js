@@ -54,7 +54,9 @@ define(['controllers/submitButton'], function( submitButton ) {
 		},
 
 		processingLabel: function() {
-			this.set( 'oldLabel', this.get( 'label' ) );
+			if( 'undefined' == typeof( this.get( 'oldLabel' ) ) ) {
+                this.set( 'oldLabel', this.get( 'label' ) );
+            }
 			this.set( 'label', this.get( 'processing_label' ) );
 			this.trigger( 'reRender' );
 		},
