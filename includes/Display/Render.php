@@ -364,7 +364,7 @@ final class NF_Display_Render
         }
 
         $form[ 'settings' ] = array_merge( Ninja_Forms::config( 'i18nFrontEnd' ), $form[ 'settings' ] );
-        $form[ 'settings' ] = apply_filters( 'ninja_forms_display_form_settings', $settings, $form_id );
+        $form[ 'settings' ] = apply_filters( 'ninja_forms_display_form_settings', $form[ 'settings' ], $form_id );
 
 
         $form[ 'settings' ][ 'is_preview' ] = TRUE;
