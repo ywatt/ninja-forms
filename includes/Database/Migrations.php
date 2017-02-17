@@ -59,6 +59,7 @@ class NF_Database_Migrations
             delete_option( 'ninja_forms_do_not_allow_tracking' );
 
             /* Delete possible options */
+            $wpdb->query( "DELETE FROM `{$wpdb->options}` WHERE `option_name` LIKE 'wp_nf_%'" );
             $wpdb->query( "DELETE FROM `{$wpdb->options}` WHERE `option_name` LIKE 'ninja_forms_%'" );
 
             /* Delete background processing flags */
