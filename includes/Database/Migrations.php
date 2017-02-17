@@ -31,7 +31,7 @@ class NF_Database_Migrations
 
         global $wpdb;
 
-        if( is_multiste() ){
+        if( function_exists( 'is_multisite' ) && is_multisite() ){
             $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
         } else {
             $blog_ids = array( get_current_blog_id() );
