@@ -29,6 +29,7 @@ jQuery( document ).ready( function( $ ) {
 				_.each( formCollection.models, function( form, index ) {
 					var layoutView = new mainLayout( { model: form, fieldCollection: form.get( 'fields' ) } );			
 					nfRadio.channel( 'form' ).trigger( 'render:view', layoutView );
+					jQuery( document ).trigger( 'nfFormReady', layoutView );
 				} );
 			},
 
