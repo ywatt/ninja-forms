@@ -267,7 +267,6 @@ class Ninja_Forms {
         if ( ! defined( 'NF_PLUGIN_VERSION' ) )
             define( 'NF_PLUGIN_VERSION', '3.0.28' );
 
-
         // Plugin Folder Path
         if ( ! defined( 'NF_PLUGIN_DIR' ) )
             define( 'NF_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
