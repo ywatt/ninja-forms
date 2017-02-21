@@ -40,7 +40,7 @@ abstract class NF_Abstracts_MergeTags
             return $subject;
         }
 
-        preg_match_all("/{(.*?)}/", $subject, $matches );
+        preg_match_all("/{([^}]*)}/", $subject, $matches );
 
         if( empty( $matches[0] ) ) return $subject;
 
