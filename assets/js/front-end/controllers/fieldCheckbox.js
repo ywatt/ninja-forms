@@ -13,7 +13,7 @@ define([], function() {
 		},
 
 		beforeUpdateField: function( el, model ) {
-			var checked = jQuery( el ).attr( 'checked' );
+			var checked = jQuery( el ).prop( 'checked' );
 			if ( checked ) {
 				var value = 1;
 				jQuery( el ).addClass( 'nf-checked' );
