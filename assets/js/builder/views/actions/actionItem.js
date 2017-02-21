@@ -88,7 +88,7 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 
 				renderTooltip: function() {
 					if ( this.help ) {
-						return '<a class="nf-help" href="#"><span class="dashicons dashicons-admin-comments"></span></a><div class="nf-help-text">' + this.help + '</div>';
+						return '<a class="nf-help" href="#" tabindex="-1"><span class="dashicons dashicons-admin-comments"></span></a><div class="nf-help-text">' + this.help + '</div>';
 					} else {
 						return '';
 					}
