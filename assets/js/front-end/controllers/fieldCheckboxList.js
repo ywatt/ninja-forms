@@ -118,7 +118,7 @@ define([], function() {
             if ( typeof selected == 'string' ) selected = [ selected ];
 
             var value = jQuery( el ).val();
-            var checked = jQuery( el ).attr( 'checked' );
+            var checked = jQuery( el ).prop( 'checked' );
             if ( checked ) {
                 selected.push( value );
                 jQuery( el ).addClass( 'nf-checked' );

@@ -9,7 +9,7 @@ define([], function() {
 
 		/**
 		 * Register the submission handler function.
-		 * 
+		 *
 		 * @since  3.0
 		 * @param  Backbone.model 	formModel
 		 * @return void
@@ -26,7 +26,7 @@ define([], function() {
 		 * 2) Check the form for errors
 		 * 3) Submit the data
 		 * 4) Send out a message with our response
-		 * 
+		 *
 		 * @since  3.0
 		 * @param  Backbone.model 	formModel
 		 * @return void
@@ -39,29 +39,36 @@ define([], function() {
 			 */
 			nfRadio.channel( 'forms' ).trigger( 'before:submit', formModel );
 			nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'before:submit', formModel );
+
 			/*
 			 * Validate our field models.
-			 *
-			 * This method is defined in our models/fieldCollection.js file.
 			 */
-			formModel.get( 'formContentData' ).validateFields();
+			var validate = nfRadio.channel( 'forms' ).request( 'maybe:validate', formModel );
+		 	if( false !== validate ){
+
+				/*
+				 * This method is defined in our models/fieldCollection.js file.
+				 */
+				formModel.get( 'formContentData' ).validateFields();
+			}
 
 			var submit = nfRadio.channel( 'form-' + formModel.get( 'id' ) ).request( 'maybe:submit', formModel );
-
 			if ( false == submit ) {
 				nfRadio.channel( 'forms' ).trigger( 'submit:cancel', formModel );
 				nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:cancel', formModel );
 				return;
 			}
 
-			/*
-			 * Make sure we don't have any form errors before we submit.
-			 * Return false if we do.
-			 */
-			if ( 0 != _.size( formModel.get( 'fieldErrors' ) ) ) {
-				nfRadio.channel( 'forms' ).trigger( 'submit:failed', formModel );
-				nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:failed', formModel );
-				return false;
+			if( false !== validate ){
+				/*
+				 * Make sure we don't have any form errors before we submit.
+				 * Return false if we do.
+				 */
+				if ( 0 != _.size( formModel.get( 'fieldErrors' ) ) ) {
+					nfRadio.channel( 'forms' ).trigger( 'submit:failed', formModel );
+					nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:failed', formModel );
+					return false;
+				}
 			}
 
 			/*
@@ -106,7 +113,9 @@ define([], function() {
 				        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR, formModel.get( 'id' ) );
 				    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR );
 			   		} catch( e ) {
+			   			console.log( e );
 			   			console.log( 'Parse Error' );
+						console.log( e );
 			   		}
 
 			    },
