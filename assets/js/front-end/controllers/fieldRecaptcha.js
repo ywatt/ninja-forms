@@ -17,6 +17,7 @@ define([], function() {
         },
 
         resetRecaptcha: function() {
+            if ( 'undefined' == typeof grecaptcha ) return false;
             grecaptcha.reset();
         }
     });

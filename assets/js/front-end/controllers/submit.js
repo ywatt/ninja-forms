@@ -106,6 +106,7 @@ define([], function() {
 				        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR, formModel.get( 'id' ) );
 				    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR );
 			   		} catch( e ) {
+			   			console.log( e );
 			   			console.log( 'Parse Error' );
 			   		}
 
