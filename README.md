@@ -4,7 +4,7 @@
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.5
 Tested up to: 4.7.2
-Stable tag: 3.0.28
+Stable tag: 3.0.29
 
 
 License: GPLv2 or later
