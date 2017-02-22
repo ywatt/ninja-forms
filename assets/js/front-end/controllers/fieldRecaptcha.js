@@ -17,8 +17,11 @@ define([], function() {
         },
 
         resetRecaptcha: function() {
-            if ( 'undefined' == typeof grecaptcha ) return false;
-            grecaptcha.reset();
+            try {
+                grecaptcha.reset();
+            } catch( e ){
+                console.log( 'Notice: Error trying to reset grecaptcha.' );
+            }
         }
     });
 
