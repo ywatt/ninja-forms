@@ -53,6 +53,7 @@ define(
 		'controllers/app/trackKeyDown',
 		'controllers/app/perfectScroll',
 		'controllers/app/getNewSettingGroupCollection',
+		'controllers/app/settingMedia',
 		/*
 		 * Fields domain controllers
 		 */
@@ -148,6 +149,7 @@ define(
 		TrackKeyDown,
 		PerfectScroll,
 		GetNewSettingGroupCollection,
+		SettingMedia,
 		/*
 		 * Fields domain controllers
 		 */
@@ -225,6 +227,7 @@ define(
 				new SettingFieldList();
 				new SettingHTML();
 				new SettingColor();
+				new SettingMedia();
 				new ChangeMenu();
 				new AppMobile();
 				new AppNotices();
