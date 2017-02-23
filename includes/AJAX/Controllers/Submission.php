@@ -135,7 +135,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $field_id = $field[ 'id' ];
 
             // If a field has already been validated and processed (ie resume submission), do not re-process.
-            if( in_array( $field_id, $this->_data[ 'processed_fields' ] ) ) continue;
+            $processed_fields = empty( $this->_data[ 'processed_fields' ] ) ? array() : $this->_data[ 'processed_fields' ];
+	        if( in_array( $field_id, $processed_fields ) ) continue;
 
             // Check that the field ID exists in the submitted for data and has a submitted value.
             if( isset( $this->_form_data[ 'fields' ][ $field_id ] ) && isset( $this->_form_data[ 'fields' ][ $field_id ][ 'value' ] ) ){
@@ -174,7 +175,8 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $this->_data[ 'fields' ][ $field_id ] = $field;
 
             // Validate and Process each field only once (ie avoid re-processing on resuming submission from a redirect).
-            array_push( $this->_data[ 'processed_fields' ], $field_id );
+	        array_push( $processed_fields, $field_id );
+	        $this->_data[ 'processed_fields' ] = $processed_fields;
         }
 
         /*
