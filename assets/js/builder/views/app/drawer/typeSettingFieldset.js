@@ -15,6 +15,7 @@ define( ['views/app/drawer/itemSetting'], function( itemSettingView ) {
 				    }
 				}
 			}
+			this.model.on( 'rerender', this.render, this );
 		},
 
 		onBeforeDestroy: function() {
@@ -28,14 +29,18 @@ define( ['views/app/drawer/itemSetting'], function( itemSettingView ) {
 			}
 		},
 
-		onRender: function() {
-			// this.$el = this.$el.children();
-			// this.$el.unwrap();
-			// this.setElement( this.$el );
+		onBeforeRender: function() {
+			nfRadio.channel( 'app' ).trigger( 'before:renderSetting', this.model, this.dataModel );
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'before:renderSetting', this.model, this.dataModel, this );
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'before:renderSetting', this.model, this.dataModel, this );
+		},
 
-			// this.$el = this.$el.children();
-			// this.$el.unwrap();
-			// this.setElement( this.$el );
+		onRender: function() {
+			/*
+			 * Send out a radio message.
+			 */
+			nfRadio.channel( 'setting-' + this.model.get( 'name' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
+			nfRadio.channel( 'setting-type-' + this.model.get( 'type' ) ).trigger( 'render:setting', this.model, this.dataModel, this );
 		},
 
 		templateHelpers: function () {
