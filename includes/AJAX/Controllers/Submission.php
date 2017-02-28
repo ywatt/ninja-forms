@@ -171,6 +171,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $this->_data[ 'fields' ][ $field_id ] = $field;
         }
 
+        // Check for errors after validating/processing fields.
+        if( isset( $this->_data[ 'errors' ] ) && $this->_data[ 'errors' ] ){
+            $this->_respond();
+        }
+
         /*
         |--------------------------------------------------------------------------
         | Calculations
