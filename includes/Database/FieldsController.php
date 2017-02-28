@@ -65,7 +65,7 @@ final class NF_Database_FieldsController
                 'type' => $field_data[ 'settings' ][ 'type' ]
             );
 
-            if( is_string( $field_id ) ){
+            if( ! is_numeric( $field_id ) ) {
                 $this->insert_field( $settings ); // New Field.
             } else {
                 $this->update_field( $field_id, $settings );
@@ -121,7 +121,7 @@ final class NF_Database_FieldsController
         foreach( $this->fields_data as $i => $field_data ){
 
             $field_key = $field_data[ 'settings' ][ 'key' ];
-            if( is_string( $field_data[ 'id' ] ) && isset( $field_id_lookup[ $field_key ] ) ){
+            if( ! is_numeric( $field_data[ 'id' ] ) && isset( $field_id_lookup[ $field_key ] ) ){
                 $tmp_id = $field_data[ 'id' ];
                 $this->fields_data[ $i ][ 'id' ] = $this->new_field_ids[ $tmp_id ] = $field_id_lookup[ $field_key ]->id;
             }
@@ -206,9 +206,12 @@ final class NF_Database_FieldsController
     private function insert_field_meta( $field_id, $key, $value )
     {
         static $counter;
+
+        
         $this->db->escape_by_ref( $field_id );
         $this->db->escape_by_ref( $key );
         $this->db->escape_by_ref( $value );
+        $value = maybe_serialize( $value );
 
         if( ! $this->insert_field_meta[ $this->insert_field_meta_chunk ] ) $this->insert_field_meta[ $this->insert_field_meta_chunk ] = '';
         $this->insert_field_meta[ $this->insert_field_meta_chunk ] .= "('{$field_id}','{$key}','{$value}' ),";
@@ -238,12 +241,14 @@ final class NF_Database_FieldsController
     private function update_field_meta( $field_id, $key, $value )
     {
         static $counter;
+
+        $value = maybe_serialize( $value );
         $this->db->escape_by_ref( $key   );
         $this->db->escape_by_ref( $value );
 
         if( ! $this->update_field_meta[ $this->update_field_meta_chunk ] ) $this->update_field_meta[ $this->update_field_meta_chunk ] = '';
-        $this->update_field_meta[ $this->update_field_meta_chunk ] .= " WHEN `parent_id` = '{$field_id}' AND 'key' = '{$key}' THEN '{$value}'";
-
+        $this->update_field_meta[ $this->update_field_meta_chunk ] .= " WHEN `parent_id` = '{$field_id}' AND `key` = '{$key}' THEN '{$value}'";
+        
         $counter++;
         if( 0 == $counter % 5000 ) $this->update_field_meta_chunk++;
     }
