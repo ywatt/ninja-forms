@@ -136,7 +136,7 @@ define( [], function() {
 				}
 
 				for( var setting in settings ){
-					if( null === settings[ setting ] || '' === settings[ setting ] ) {
+					if( null === settings[ setting ] ) {
 						delete settings[setting];
 					}
 				}
