@@ -20,6 +20,14 @@ final class NF_MergeTags_PostMeta extends NF_Abstracts_MergeTags
         // Set a translatable, human-readable title for use in the builder.
         $this->title = __( 'Post Meta', 'ninja-forms' );
 
+        $this->merge_tags = array(
+            '' => array(
+                'tag' => '{post_meta:}',
+                'label' => __( 'Post Meta', 'ninja_forms' ),
+                'callback' => null,
+            ),
+        );
+
         // Setup merge tag data for each post in The Loop.
         add_action( 'the_post', array( $this, 'init' ) );
 
