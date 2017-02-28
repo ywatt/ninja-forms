@@ -13,6 +13,23 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
         parent::__construct();
         $this->title = __( 'Fields', 'ninja-forms' );
         $this->merge_tags = Ninja_Forms()->config( 'MergeTagsFields' );
+
+        add_action( 'admin_init', array( $this, 'load_deprecated_merge_tags' ) );
+    }
+
+    public function load_deprecated_merge_tags()
+    {
+        /*
+         * Only load during Form Submission, ie Doing AJAX.
+         */
+        if( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) return;
+        $this->merge_tags[ 'all_fields' ] = array(
+            'id' => 'all_fields',
+            'tag' => '{field:all_fields}',
+            'label' => __( 'All Fields', 'ninja_forms' ),
+            'callback' => 'all_fields',
+            'fields' => array()
+        );
     }
 
     public function __call($name, $arguments)
@@ -23,7 +40,7 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
     public function all_fields()
     {
         $return = '<table>';
-        $hidden_field_types = array( 'html', 'submit' );
+        $hidden_field_types = array( 'html', 'submit', 'password', 'passwordconfirm' );
 
         foreach( $this->get_fields_sorted() as $field ){
 
@@ -35,6 +52,54 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
             if( is_array( $field[ 'value' ] ) ) $field[ 'value' ] = implode( ', ', $field[ 'value' ] );
 
             $return .= '<tr><td>' . $field[ 'label' ] .':</td><td>' . $field[ 'value' ] . '</td></tr>';
+        }
+        $return .= '</table>';
+        return $return;
+    }
+
+    public function all_fields_table()
+    {
+        $return = '<table>';
+
+        $hidden_field_types = array( 'submit', 'password', 'passwordconfirm' );
+
+        foreach( $this->get_fields_sorted() as $field ){
+            if( ! isset( $field[ 'type' ] ) ) continue;
+
+            // Skip specific field types.
+            if( in_array( $field[ 'type' ], array_values( $hidden_field_types ) ) ) continue;
+
+            $field[ 'value' ] = apply_filters( 'ninja_forms_merge_tag_value_' . $field[ 'type' ], $field[ 'value' ], $field );
+            if( is_array( $field[ 'value' ] ) ) $field[ 'value' ] = implode( ', ', $field[ 'value' ] );
+            $return .= '<tr><td valign="top">' . $field[ 'label' ] .':</td><td>' . $field[ 'value' ] . '</td></tr>';
+        }
+        $return .= '</table>';
+        return $return;
+    }
+
+    public function fields_table()
+    {
+        $return = '<table>';
+        $hidden_field_types = array( 'html', 'submit', 'password', 'passwordconfirm' );
+
+        foreach( $this->get_fields_sorted() as $field ){
+
+            if( ! isset( $field[ 'type' ] ) ) continue;
+
+            // Skip specific field types.
+            if( in_array( $field[ 'type' ], array_values( $hidden_field_types ) ) ) continue;
+
+            // TODO: Skip hidden fields, ie conditionally hidden.
+            if( isset( $field[ 'visible' ] ) && false === $field[ 'visible' ] ) continue;
+
+            $field[ 'value' ] = apply_filters( 'ninja_forms_merge_tag_value_' . $field[ 'type' ], $field[ 'value' ], $field );
+
+            // Skip fields without values.
+            if( ! $field[ 'value' ] ) continue;
+
+            if( is_array( $field[ 'value' ] ) ) $field[ 'value' ] = implode( ', ', $field[ 'value' ] );
+
+            $return .= '<tr><td valign="top">' . $field[ 'label' ] .':</td><td>' . $field[ 'value' ] . '</td></tr>';
         }
         $return .= '</table>';
         return $return;
@@ -59,6 +124,11 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
     public function add_field( $field )
     {
         $hidden_field_types = apply_filters( 'nf_sub_hidden_field_types', array() );
+
+        if( 'html' == $field[ 'type' ] ) { // Include HTML fields in the All Fields Table Merge Tag.
+            $this->merge_tags[ 'all_fields' ][ 'fields' ][ $field['id'] ] = $field;
+        }
+
         if( in_array( $field[ 'type' ], $hidden_field_types ) ) return;
 
         $field_id  = $field[ 'id' ];
