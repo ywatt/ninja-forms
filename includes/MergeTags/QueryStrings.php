@@ -20,12 +20,23 @@ final class NF_MergeTags_QueryStrings extends NF_Abstracts_MergeTags
             ),
         );
 
-        if( is_admin() ) return;
+        add_action( 'init', array( $this, 'init' ) );
+    }
 
-        if( ! is_array( $_GET ) ) return;
+    public function init()
+    {
+        if( is_admin() ) {
+            if( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) return;
+            $url_query = parse_url( wp_get_referer(), PHP_URL_QUERY );
+            parse_str( $url_query, $variables );
+        } else {
+            $variables = $_GET;
+        }
 
-        foreach( $_GET as $key => $value ){
-            $value = WPN_Helper::get_query_string( $key );
+        if( ! is_array( $variables ) ) return;
+
+        foreach( $variables as $key => $value ){
+            $value = wp_kses_post( $value );
             $this->set_merge_tags( $key, $value );
         }
     }
@@ -40,6 +51,13 @@ final class NF_MergeTags_QueryStrings extends NF_Abstracts_MergeTags
         $callback = ( is_numeric( $key ) ) ? 'querystring_' . $key : $key;
 
         $this->merge_tags[ $callback ] = array(
+            'id' => $key,
+            'tag' => "{querystring:" . $key . "}",
+            'callback' => $callback,
+            'value' => $value
+        );
+
+        $this->merge_tags[ $callback . '_deprecated' ] = array(
             'id' => $key,
             'tag' => "{" . $key . "}",
             'callback' => $callback,
