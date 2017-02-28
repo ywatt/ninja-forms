@@ -70,10 +70,18 @@
         padding: 0 10px;
     }
     .nf-setting-label, label, legend {
+        position: relative;
         color: #424242;
         display: block;
         font-size: 13px;
         text-transform: uppercase;
+        .open-media-manager {
+            position: absolute;
+            color: #ccc;
+            right: 15px;
+            top: 5px;
+            text-decoration: none;
+        }
     }
     input[type=text],
     input[type=number],
