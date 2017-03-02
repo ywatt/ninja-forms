@@ -324,7 +324,6 @@ final class NF_Display_Render
         <!-- TODO: Move to Template File. -->
         <script>
             var formDisplay = 1;
-
             /* Maybe initialize nfForms object */
             var nfForms = nfForms || [];
 

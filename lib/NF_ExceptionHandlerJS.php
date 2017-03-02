@@ -19,7 +19,7 @@ final class NF_ExceptionHandlerJS
         <script type="text/javascript">
             window.addEventListener( 'error', function (e) {
 
-                var source = e.filename.match( /plugins\/(...)/gi ) || e.filename;
+                var source = e.filename.match( /(plugins|themes)\/([a-zA-Z0-9]|-|_|)+\//gi ) || e.filename;
 
                 var message = document.createElement( 'pre' );
                 message.innerHTML = '[ADMIN NOTICE] Form Rendering Error' +
