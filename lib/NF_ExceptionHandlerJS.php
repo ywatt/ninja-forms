@@ -21,17 +21,15 @@ final class NF_ExceptionHandlerJS
 
                 var source = e.filename.match( /plugins\/(...)/gi ) || e.filename;
 
-                var message = '<pre>' +
-                    '[ADMIN NOTICE] Form Rendering Error' +
-                    '\r\rSource: ' + source +
-                    '\r\r<span style="color:red;">' + e.error + '</span>' +
-                    '</pre>';
-
+                var message = document.createElement( 'pre' );
+                message.innerHTML = '[ADMIN NOTICE] Form Rendering Error' +
+                        '\r\rSource: ' + source +
+                        '\r\r<span style="color:red;">' + e.error + '</span>';
 
                 // Replace form loading animation.
                 var forms = document.getElementsByClassName( 'nf-form-cont' );
                 for ( var i = 0; i < forms.length; i++ ) {
-                    forms[i].innerHTML = message;
+                    forms[i].append( message );
                 }
             });
         </script>
