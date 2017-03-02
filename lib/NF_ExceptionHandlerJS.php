@@ -22,9 +22,12 @@ final class NF_ExceptionHandlerJS
                 var source = e.filename.match( /(plugins|themes)\/([a-zA-Z0-9]|-|_|)+\//gi ) || e.filename;
 
                 var message = document.createElement( 'pre' );
-                message.innerHTML = '[ADMIN NOTICE] Form Rendering Error' +
-                        '\r\rSource: ' + source +
-                        '\r\r<span style="color:red;">' + e.error + '</span>';
+                message.innerHTML = '<span style="width: 100%;display:inline-block;text-align: center;text-decoration:underline;">This message is displayed for the ADMIN ONLY.</span>' +
+                    '\r\rNinja Forms detected a JavaScript error.' +
+                    '\rThis error may cause issues with your form.' +
+                    '\r\r\<span style="text-decoration:underline;">Details</span>' +
+                    '\rSource: ' + source +
+                    '\r<span style="color:red;">' + e.error + '</span>';
 
                 // Replace form loading animation.
                 var forms = document.getElementsByClassName( 'nf-form-cont' );
