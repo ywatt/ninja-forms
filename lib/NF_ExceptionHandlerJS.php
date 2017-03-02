@@ -17,7 +17,7 @@ final class NF_ExceptionHandlerJS
         if( ! current_user_can( 'manage_options' ) ) return;
         ?>
         <script type="text/javascript">
-            window.addEventListener( 'error', function (e) {
+            function ninjaFormsExceptionHandler(e) {
 
                 var source = e.filename.match( /(plugins|themes)\/([a-zA-Z0-9]|-|_|)+\//gi ) || e.filename;
 
@@ -34,7 +34,8 @@ final class NF_ExceptionHandlerJS
                 for ( var i = 0; i < forms.length; i++ ) {
                     forms[i].append( message );
                 }
-            });
+            }
+            window.addEventListener( 'error', ninjaFormsExceptionHandler );
         </script>
         <?php
     }
