@@ -67,6 +67,7 @@ jQuery( document ).ready( function( $ ) {
 					var layoutView = new mainLayout( { model: form, fieldCollection: form.get( 'fields' ) } );			
 					nfRadio.channel( 'form' ).trigger( 'render:view', layoutView );
 					jQuery( document ).trigger( 'nfFormReady', layoutView );
+                    window.removeEventListener( 'error', ninjaFormsExceptionHandler );
 				} );
 			},
 
