@@ -32,7 +32,7 @@ final class NF_ExceptionHandlerJS
                 // Replace form loading animation.
                 var forms = document.getElementsByClassName( 'nf-form-cont' );
                 for ( var i = 0; i < forms.length; i++ ) {
-                    forms[i].append( message );
+                    forms[i].appendChild( message );
                 }
             }
             window.addEventListener( 'error', ninjaFormsExceptionHandler );
