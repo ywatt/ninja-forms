@@ -5,8 +5,6 @@ Tags: form, forms, contact form, custom form, form builder, form creator, form m
 Requires at least: 4.5
 Tested up to: 4.7.2
 Stable tag: 3.0.30
-
-
 License: GPLv2 or later
 
 With a simple drag and drop interface you can create contact forms, email subscription forms, order forms, payment forms, and any other type of form for your WordPress site.
