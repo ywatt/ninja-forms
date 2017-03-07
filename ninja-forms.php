@@ -294,8 +294,10 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 
                 /*
                  * JS Exception Handler
+                 *
+                 * TODO: Review PR#2492 for improvements.
                  */
-                self::$instance->exception_handler_js = new NF_ExceptionHandlerJS();
+                // self::$instance->exception_handler_js = new NF_ExceptionHandlerJS();
 
                 /*
                  * Activation Hook
