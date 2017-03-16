@@ -21,10 +21,16 @@ var autoprefixer      = require('gulp-autoprefixer');
 var autoprefixer      = require('autoprefixer');
 var requirejsOptimize = require('gulp-requirejs-optimize');
 var gettext           = require('gulp-gettext');
+var cssnano           = require('cssnano');
 
 function getPostCssProcessors() {
     return [
         autoprefixer({browsers: ['last 2 versions']}),
+        cssnano({
+            safe: true,
+            autoprefixer: false,
+            convertValues: false,
+        }),
     ];
 }
 
