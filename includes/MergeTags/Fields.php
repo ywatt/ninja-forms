@@ -15,6 +15,8 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
         $this->merge_tags = Ninja_Forms()->config( 'MergeTagsFields' );
 
         add_action( 'admin_init', array( $this, 'load_deprecated_merge_tags' ) );
+
+        add_filter( 'ninja_forms_calc_setting', array( $this, 'pre_parse_calc_settings' ), 9 );
     }
 
     public function load_deprecated_merge_tags()
@@ -196,6 +198,26 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
             return 0;
         }
         return ( $a[ 'order' ] < $b[ 'order' ] ) ? -1 : 1;
+    }
+
+    /*
+     |--------------------------------------------------------------------------
+     | Calculations
+     |--------------------------------------------------------------------------
+     | Force {field:...:calc} in this context of calculations.
+     |      Example: {field:list} -> {field:list:calc}
+     | When parsing the {field:...:calc} tag, if no calc value is found then the value will be used.
+     | TODO: This makes explicit list field "values" inaccessible in calculations.
+     */
+
+    public function pre_parse_calc_settings( $eq )
+    {
+        return preg_replace_callback( '/{field:([a-z0-9]|_)*}/', array( $this, 'force_field_calc_tags' ), $eq );
+    }
+
+    private function force_field_calc_tags( $matches )
+    {
+        return str_replace( '}', ':calc}', $matches[0] );
     }
 
 } // END CLASS NF_MergeTags_Fields
