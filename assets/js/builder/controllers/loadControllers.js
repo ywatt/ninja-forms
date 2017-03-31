@@ -36,6 +36,7 @@ define(
 		'controllers/app/toggleSetting',
 		'controllers/app/itemControls',
 		'controllers/app/mergeTags',
+		'controllers/app/mergeTagBox',
 		'controllers/app/itemSettingFill',
 		'controllers/app/confirmPublish',
 		'controllers/app/rte',
@@ -132,6 +133,7 @@ define(
 		ToggleSetting,
 		ItemControls,
 		MergeTags,
+		MergeTagsBox,
 		ItemSettingFill,
 		ConfirmPublish,
 		RTE,
@@ -300,6 +302,7 @@ define(
 				new FieldData();
 				new FormData();
 				new MergeTags();
+				new MergeTagsBox();
 				new ItemSettingFill();
 			}
 		});

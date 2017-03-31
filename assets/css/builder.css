@@ -974,12 +974,10 @@ All styles used within the drawer
     text-indent: -99999px; }
 
 .nf-action-items.available .nf-item.nf-has-img {
-  -webkit-filter: grayscale(100%);
-          filter: grayscale(100%);
+  filter: grayscale(100%);
   opacity: 0.6; }
   .nf-action-items.available .nf-item.nf-has-img:hover {
-    -webkit-filter: grayscale(0);
-            filter: grayscale(0);
+    filter: grayscale(0);
     opacity: 1.0; }
 
 .nf-field-type-button {
@@ -2376,5 +2374,54 @@ body.fakescroll-grabbed {
 .rtl .nf-one-third,
 .rtl .nf-one-fourth {
   float: right; }
+
+/* MERGE TAG BOX STYLES */
+#merge-tags-box {
+  display: none;
+  background-color: #EBEDEE;
+  height: 320px;
+  z-index: 1001;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* domain section > wrapper > item */ }
+  #merge-tags-box .merge-tag-filter {
+    clear: both;
+    margin-bottom: 20px; }
+  #merge-tags-box .merge-tag-sections,
+  #merge-tags-box .merge-tag-list {
+    float: left;
+    background-color: #F5F5F5;
+    padding: 20px;
+    height: 200px;
+    overflow-y: auto; }
+  #merge-tags-box .merge-tag-sections {
+    width: 33.3%;
+    border-right: 5px solid #EBEDEE; }
+  #merge-tags-box .merge-tag-list {
+    width: 66.6%;
+    border-left: 5px solid #EBEDEE; }
+  #merge-tags-box .merge-tag-sections > div > div,
+  #merge-tags-box .merge-tag-list > div > div {
+    margin-bottom: 10px;
+    cursor: pointer; }
+  #merge-tags-box .merge-tag-sections > div > div:hover,
+  #merge-tags-box .merge-tag-list > div > div:hover {
+    color: #1EA9EA; }
+
+.nf-setting.merge-tag-focus {
+  position: relative;
+  z-index: 1000; }
+
+.nf-setting.merge-tag-focus::after {
+  position: fixed;
+  z-index: -1;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.5); }
 
 /*# sourceMappingURL=builder.css.map */

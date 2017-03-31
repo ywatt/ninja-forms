@@ -160,3 +160,63 @@ body.fakescroll-grabbed{
 }
 
 @import "rtl";
+
+/* MERGE TAG BOX STYLES */
+#merge-tags-box {
+    display: none;
+    background-color: #EBEDEE;
+    height: 320px;
+    z-index: 1001;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    & .merge-tag-filter {
+        clear: both;
+        margin-bottom: 20px;
+    }
+
+    & .merge-tag-sections,
+    & .merge-tag-list {
+        float: left;
+        background-color: #F5F5F5;
+        padding: 20px;
+        height: 200px;
+        overflow-y: auto;
+    }
+    & .merge-tag-sections {
+        width: 33.3%;
+        border-right: 5px solid #EBEDEE;
+    }
+    & .merge-tag-list {
+        width: 66.6%;
+        border-left: 5px solid #EBEDEE;
+    }
+
+    /* domain section > wrapper > item */
+    & .merge-tag-sections > div > div,
+    & .merge-tag-list > div > div {
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    & .merge-tag-sections > div > div:hover,
+    & .merge-tag-list > div > div:hover {
+        color: #1EA9EA;
+    }
+}
+.nf-setting.merge-tag-focus {
+    position: relative;
+    z-index: 1000;
+}
+.nf-setting.merge-tag-focus::after {
+    position: fixed;
+    z-index: -1;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, .5);
+}

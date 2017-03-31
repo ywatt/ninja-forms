@@ -32,7 +32,25 @@
     <div id="nf-menu-drawer"></div>
     <div id="nf-drawer"></div>
     <span class="merge-tags-content" style="display:none;"></span>
+    <div id="merge-tags-box"></div>
 </script>
+
+<!-- MERGE TAGS BOX TEMPLATES -->
+<script id="tmpl-nf-merge-tag-box" type="text/template">
+    <div class="merge-tag-filter"></div>
+    <div class="merge-tag-sections"></div>
+    <div class="merge-tag-list"></div>
+</script>
+<script id="tmpl-nf-merge-tag-box-section" type="text/template">
+    <div class="js-click">{{{ data.label }}}</div>
+</script>
+<script id="tmpl-nf-merge-tag-box-tag" type="text/template">
+    {{{ data.label }}} <small>{{{data.tag}}}</small>
+</script>
+<script id="tmpl-nf-merge-tag-box-filter" type="text/template">
+    <input type="text" placeholder="Search for merge tags" >
+</script>
+<!-- END: MERGE TAGS BOX TEMPLATES -->
 
 <script id="tmpl-nf-admin-header" type="text/template">
     <div id="nf-app-admin-header"></div>
