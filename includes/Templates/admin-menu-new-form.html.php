@@ -42,7 +42,7 @@
     <div class="merge-tag-list"></div>
 </script>
 <script id="tmpl-nf-merge-tag-box-section" type="text/template">
-    <div class="js-click">{{{ data.label }}}</div>
+    {{{ data.label }}}
 </script>
 <script id="tmpl-nf-merge-tag-box-tag" type="text/template">
     {{{ data.label }}} <small>{{{data.tag}}}</small>
