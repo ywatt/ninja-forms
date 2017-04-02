@@ -8,7 +8,7 @@ define( [], function() {
     var view = Marionette.ItemView.extend({
         template: '#tmpl-nf-merge-tag-box-section',
         events: {
-            "click .js-click": "updateTags"
+            "click": "updateTags"
         },
 
         updateTags: function() {

@@ -7,6 +7,14 @@
 define( [], function() {
     var view = Marionette.ItemView.extend({
         template: '#tmpl-nf-merge-tag-box-tag',
+
+        events: {
+            "click": "insertTag"
+        },
+
+        insertTag: function() {
+            nfRadio.channel( 'mergeTags' ).request( 'insert:tag', this.model.get( 'tag' ) );
+        }
     });
 
     return view;
