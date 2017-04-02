@@ -38,8 +38,10 @@
 <!-- MERGE TAGS BOX TEMPLATES -->
 <script id="tmpl-nf-merge-tag-box" type="text/template">
     <div class="merge-tag-filter"></div>
-    <div class="merge-tag-sections"></div>
-    <div class="merge-tag-list"></div>
+    <div class="merge-tag-container">
+        <div class="merge-tag-sections"></div>
+        <div class="merge-tag-list"></div>
+    </div>
 </script>
 <script id="tmpl-nf-merge-tag-box-section" type="text/template">
     <div class="js-click">{{{ data.label }}}</div>

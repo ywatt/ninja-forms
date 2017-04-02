@@ -107,3 +107,75 @@ label.has-merge-tags {
         }
     }
 }
+
+/* MERGE TAG BOX STYLES */
+#merge-tags-box {
+    display: none;
+    background-color: #EBEDEE;
+    max-height: 400px;
+    z-index: 1001;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left:12px;
+    right: 10px;
+
+    .merge-tag-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .merge-tag-sections,
+    .merge-tag-list {
+        float: left;
+        background-color: #f9f9f9;
+        overflow-y: auto;
+    }
+
+    .merge-tag-sections {
+        background-color: #DBDDDD;
+        div {
+            div {
+                div {
+                    background-color: #DBDDDD;
+                    cursor: pointer;
+                    padding: 6px;
+                    &:hover {
+                        color: #1EA9EA;
+                    }
+                }
+            }
+        }
+    }
+
+    .merge-tag-list {
+        flex-grow: 1;
+        padding: 20px;
+        max-height: 360px;
+    }
+
+    .merge-tag-filter {
+        border-bottom: 2px solid #DBDDDD;
+        clear: both;
+    }
+}
+.nf-setting.merge-tag-focus {
+    position: relative;
+    z-index: 1000;
+}
+.nf-setting.merge-tag-focus::after {
+    position: fixed;
+    z-index: -1;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.nf-one-half {
+    #merge-tags-box {
+        width: 538px;
+        left: auto;
+    }
+}
