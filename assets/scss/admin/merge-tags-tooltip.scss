@@ -111,12 +111,11 @@ label.has-merge-tags {
 /* MERGE TAG BOX STYLES */
 #merge-tags-box {
     display: none;
-    background-color: #EBEDEE;
-    max-height: 400px;
+    background-color: #DBDDDD;
+    max-height: 360px;
     z-index: 1001;
-    padding: 10px;
     position: absolute;
-    top: 0;
+    top: -1px;
     left:12px;
     right: 10px;
 
@@ -128,21 +127,24 @@ label.has-merge-tags {
     .merge-tag-sections,
     .merge-tag-list {
         float: left;
+        font-size: 14px;
         background-color: #f9f9f9;
+        height: 300px;
         overflow-y: auto;
     }
 
     .merge-tag-sections {
-        background-color: #DBDDDD;
+        background-color: #f9f9f9;
+        border-right: 2px solid #DBDDDD;
         div {
             div {
-                div {
-                    background-color: #DBDDDD;
-                    cursor: pointer;
-                    padding: 6px;
-                    &:hover {
-                        color: #1EA9EA;
-                    }
+                border-bottom: 1px solid #DBDDDD;
+                cursor: pointer;
+                font-size: 14px;
+                padding: 8px;
+                &:hover {
+                    background: #DBDDDD;
+                    color: #1EA9EA;
                 }
             }
         }
@@ -151,11 +153,16 @@ label.has-merge-tags {
     .merge-tag-list {
         flex-grow: 1;
         padding: 20px;
-        max-height: 360px;
+        div {
+            div {
+                line-height: 22px;
+            }
+        }
     }
 
     .merge-tag-filter {
         border-bottom: 2px solid #DBDDDD;
+        margin: 3px 10px 10px 10px;
         clear: both;
     }
 }
