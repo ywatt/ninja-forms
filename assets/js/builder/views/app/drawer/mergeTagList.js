@@ -6,6 +6,7 @@
  */
 define( [ 'views/app/drawer/mergeTag' ], function( mergeTagView ) {
     var view = Marionette.CollectionView.extend({
+        tagName: 'ul',
         childView: mergeTagView
     });
 

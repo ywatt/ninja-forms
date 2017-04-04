@@ -6,6 +6,7 @@
  */
 define( [], function() {
     var view = Marionette.ItemView.extend({
+        tagName: 'li',
         template: '#tmpl-nf-merge-tag-box-tag',
 
         events: {

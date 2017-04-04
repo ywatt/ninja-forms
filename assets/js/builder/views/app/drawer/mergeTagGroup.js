@@ -6,13 +6,24 @@
  */
 define( [], function() {
     var view = Marionette.ItemView.extend({
+        tagName: 'li',
         template: '#tmpl-nf-merge-tag-box-section',
         events: {
-            "click": "updateTags"
+            "click": "onClick"
+        },
+
+        onClick: function(){
+          this.updateTags();
+          this.setActive();
         },
 
         updateTags: function() {
             nfRadio.channel( 'merge-tags' ).request( 'update:taglist', this.model.get( 'id' ) );
+        },
+
+        setActive: function(){
+            this.$el.addClass( 'active' );
+            this.$el.siblings().removeClass( 'active' );
         }
     });
 
