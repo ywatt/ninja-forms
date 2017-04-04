@@ -71,8 +71,9 @@ define( [
 
             nfRadio.channel( 'merge-tags' ).reply( 'filtersearch', function( term ){
                 mergeTagListView.filter = function( child, index, collection ){
-                    return child.get( 'label' ).toLowerCase().indexOf( term.toLowerCase() ) >= 0
-                        || child.get( 'tag' ).toLowerCase().indexOf( term.toLowerCase() ) >= 0;
+                    var label = child.get( 'label' ).toLowerCase().indexOf( term.toLowerCase().replace( ':', '' ) ) >= 0;
+                    var tag   = child.get( 'tag' ).toLowerCase().indexOf( term.toLowerCase() ) >= 0;
+                    return label || tag;
                 }
                 mergeTagListView.render();
             });
@@ -120,6 +121,9 @@ define( [
                     that.old = mergetags[0];
                     jQuery('#merge-tags-box').show();
                     jQuery(view.el).find('input').closest('.nf-setting').addClass('merge-tag-focus');
+
+                    var value = mergetags[0].replace( '{', '' );
+                    nfRadio.channel( 'merge-tags' ).request( 'filtersearch', value );
                 } else {
                     jQuery( '#merge-tags-box' ).css( 'display', 'none' );
                     jQuery( view.el ).find( 'input' ).closest( '.nf-setting' ).removeClass( 'merge-tag-focus' );
