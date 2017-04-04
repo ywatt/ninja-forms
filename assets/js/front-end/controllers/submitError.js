@@ -7,8 +7,12 @@ define([], function() {
 		submitErrors: function( response, textStatus, jqXHR, formID ) {
 
 			if ( _.size( response.errors.fields ) > 0 ) {
-				_.each( response.errors.fields, function( msg, fieldID ) {
-					nfRadio.channel( 'fields' ).request( 'add:error', fieldID, 'required-error', msg );
+				_.each( response.errors.fields, function( data, fieldID ) {
+                    if ( typeof( data ) === 'object' ) {
+                        nfRadio.channel( 'fields' ).request( 'add:error', fieldID, data.slug, data.message );
+                    } else {
+                        nfRadio.channel( 'fields' ).request( 'add:error', fieldID, 'required-error', data );
+                    }
 				} );
 			}
 
