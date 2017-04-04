@@ -92,6 +92,7 @@ define( [
         },
 
         renderSetting: function( settingModel, dataModel, view ){
+
             // On input focus, move the Merge Tag Box into position.
             jQuery( view.el ).find( 'input' ).on( 'focus', function(){
                 var offset = jQuery( view.el ).find( 'input' ).closest( '.nf-setting' ).outerHeight();
@@ -118,7 +119,11 @@ define( [
 
                 // If an open merge tag is found, show the Merge Tag Box, else hide.
                 if( 0 !== mergetags.length ) {
+
                     that.old = mergetags[0];
+
+                    jQuery( '#merge-tags-box' ).addClass( that.getWidthClass( settingModel ) );
+
                     jQuery('#merge-tags-box').show();
                     jQuery(view.el).find('input').closest('.nf-setting').addClass('merge-tag-focus');
 
@@ -126,6 +131,7 @@ define( [
                     nfRadio.channel( 'merge-tags' ).request( 'filtersearch', value );
                 } else {
                     jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                    jQuery( '#merge-tags-box' ).removeClass();
                     jQuery( view.el ).find( 'input' ).closest( '.nf-setting' ).removeClass( 'merge-tag-focus' );
                 }
             });
@@ -159,6 +165,36 @@ define( [
             jQuery( '#merge-tags-box' ).css( 'display', 'none' );
             jQuery( '#merge-tags-box' ).closest( '.nf-setting' ).removeClass( 'merge-tag-focus' );
         },
+
+        getWidthClass: function( settingModel ){
+            var index = settingModel.collection.indexOf( settingModel );
+            var width = settingModel.get( 'width' );
+
+            var widthClass = width;
+            switch( width ){
+                case 'one-third':
+                    if( width == settingModel.collection.at( index-1 ).get( 'width' )
+                        && width == settingModel.collection.at( index+1 ).get( 'width' ) ){
+                        widthClass = width + '--second';
+                    } else if( width == settingModel.collection.at( index+1 ).get( 'width' ) ){
+                        widthClass = width + '--first';
+                    } else {
+                        widthClass = width + '--third';
+                    }
+                    break;
+                case 'one-half':
+                    if( width == settingModel.collection.at( index-1 ).get( 'width' ) ){
+                        widthClass = width + '--second';
+                    } else {
+                        widthClass = width + '--first'
+                    }
+                    break;
+                default:
+                    widthClass = width;
+            }
+
+            return widthClass;
+        }
 
     } );
 
