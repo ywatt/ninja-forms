@@ -6,6 +6,8 @@
     position: absolute;
     top: 9px;
     right: 10px;
+    display:none;
+    z-index: 100;
     .nf-item-control {
         visibility: hidden;
         margin: 0;

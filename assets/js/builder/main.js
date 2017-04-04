@@ -36,6 +36,7 @@ jQuery( document ).ready( function( $ ) {
 			},
 
 			template: function( template ) {
+				// console.log( template );
 				return _.template( $( template ).html(),  {
 					evaluate:    /<#([\s\S]+?)#>/g,
 					interpolate: /\{\{\{([\s\S]+?)\}\}\}/g,

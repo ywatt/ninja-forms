@@ -1243,7 +1243,9 @@ DEFAULT LIGHT COLORS
 ----------------------------------*/
 .nf-form-content input:not([type='button']),
 .nf-form-content textarea,
-.nf-form-content .list-select-wrap .nf-field-element > div {
+.nf-form-content .list-select-wrap .nf-field-element > div, #nf-main-content input:not([type='button']),
+#nf-main-content textarea,
+#nf-main-content .list-select-wrap .nf-field-element > div {
   background: #f7f7f7;
   border: 1px solid #c4c4c4;
   border-radius: 0;
@@ -1252,7 +1254,9 @@ DEFAULT LIGHT COLORS
   transition: all .5s; }
   .nf-form-content input:not([type='button']):focus,
   .nf-form-content textarea:focus,
-  .nf-form-content .list-select-wrap .nf-field-element > div:focus {
+  .nf-form-content .list-select-wrap .nf-field-element > div:focus, #nf-main-content input:not([type='button']):focus,
+  #nf-main-content textarea:focus,
+  #nf-main-content .list-select-wrap .nf-field-element > div:focus {
     background: white;
     border-color: #919191;
     color: #919191;
@@ -1261,21 +1265,25 @@ DEFAULT LIGHT COLORS
 
 .nf-form-content input[type="submit"],
 .nf-form-content input[type="button"],
-.nf-form-content button {
+.nf-form-content button, #nf-main-content input[type="submit"],
+#nf-main-content input[type="button"],
+#nf-main-content button {
   background: #333;
   border: 0;
   color: #f7f7f7;
   transition: all .5s; }
   .nf-form-content input[type="submit"]:hover,
   .nf-form-content input[type="button"]:hover,
-  .nf-form-content button:hover {
+  .nf-form-content button:hover, #nf-main-content input[type="submit"]:hover,
+  #nf-main-content input[type="button"]:hover,
+  #nf-main-content button:hover {
     background: #c4c4c4;
     color: #787878;
     transition: all .5s; }
 
-.nf-form-content select.ninja-forms-field {
+.nf-form-content select.ninja-forms-field, #nf-main-content select.ninja-forms-field {
   color: #787878; }
-  .nf-form-content select.ninja-forms-field:focus {
+  .nf-form-content select.ninja-forms-field:focus, #nf-main-content select.ninja-forms-field:focus {
     background: transparent;
     border: 0;
     box-shadow: none;
@@ -1412,7 +1420,9 @@ LIGHT COLORS - nf-brown
 ----------------------------------*/
 .nf-brown .nf-form-content input:not([type='button']),
 .nf-brown .nf-form-content textarea,
-.nf-brown .nf-form-content .list-select-wrap .nf-field-element > div {
+.nf-brown .nf-form-content .list-select-wrap .nf-field-element > div, .nf-brown #nf-main-content input:not([type='button']),
+.nf-brown #nf-main-content textarea,
+.nf-brown #nf-main-content .list-select-wrap .nf-field-element > div {
   background: #F3EFDD;
   border: 1px solid #d8cc92;
   border-radius: 0;
@@ -1421,7 +1431,9 @@ LIGHT COLORS - nf-brown
   transition: all .5s; }
   .nf-brown .nf-form-content input:not([type='button']):focus,
   .nf-brown .nf-form-content textarea:focus,
-  .nf-brown .nf-form-content .list-select-wrap .nf-field-element > div:focus {
+  .nf-brown .nf-form-content .list-select-wrap .nf-field-element > div:focus, .nf-brown #nf-main-content input:not([type='button']):focus,
+  .nf-brown #nf-main-content textarea:focus,
+  .nf-brown #nf-main-content .list-select-wrap .nf-field-element > div:focus {
     background: white;
     border-color: #bea846;
     color: #bea846;
@@ -1430,21 +1442,25 @@ LIGHT COLORS - nf-brown
 
 .nf-brown .nf-form-content input[type="submit"],
 .nf-brown .nf-form-content input[type="button"],
-.nf-brown .nf-form-content button {
+.nf-brown .nf-form-content button, .nf-brown #nf-main-content input[type="submit"],
+.nf-brown #nf-main-content input[type="button"],
+.nf-brown #nf-main-content button {
   background: #736628;
   border: 0;
   color: #F3EFDD;
   transition: all .5s; }
   .nf-brown .nf-form-content input[type="submit"]:hover,
   .nf-brown .nf-form-content input[type="button"]:hover,
-  .nf-brown .nf-form-content button:hover {
+  .nf-brown .nf-form-content button:hover, .nf-brown #nf-main-content input[type="submit"]:hover,
+  .nf-brown #nf-main-content input[type="button"]:hover,
+  .nf-brown #nf-main-content button:hover {
     background: #d8cc92;
     color: #9a8837;
     transition: all .5s; }
 
-.nf-brown .nf-form-content select.ninja-forms-field {
+.nf-brown .nf-form-content select.ninja-forms-field, .nf-brown #nf-main-content select.ninja-forms-field {
   color: #9a8837; }
-  .nf-brown .nf-form-content select.ninja-forms-field:focus {
+  .nf-brown .nf-form-content select.ninja-forms-field:focus, .nf-brown #nf-main-content select.ninja-forms-field:focus {
     background: transparent;
     border: 0;
     box-shadow: none;
@@ -1580,7 +1596,9 @@ LIGHT COLORS - nf-red
 ----------------------------------*/
 .nf-red .nf-form-content input:not([type='button']),
 .nf-red .nf-form-content textarea,
-.nf-red .nf-form-content .list-select-wrap .nf-field-element > div {
+.nf-red .nf-form-content .list-select-wrap .nf-field-element > div, .nf-red #nf-main-content input:not([type='button']),
+.nf-red #nf-main-content textarea,
+.nf-red #nf-main-content .list-select-wrap .nf-field-element > div {
   background: #F0E3E3;
   border: 1px solid #cca1a1;
   border-radius: 0;
@@ -1589,7 +1607,9 @@ LIGHT COLORS - nf-red
   transition: all .5s; }
   .nf-red .nf-form-content input:not([type='button']):focus,
   .nf-red .nf-form-content textarea:focus,
-  .nf-red .nf-form-content .list-select-wrap .nf-field-element > div:focus {
+  .nf-red .nf-form-content .list-select-wrap .nf-field-element > div:focus, .nf-red #nf-main-content input:not([type='button']):focus,
+  .nf-red #nf-main-content textarea:focus,
+  .nf-red #nf-main-content .list-select-wrap .nf-field-element > div:focus {
     background: white;
     border-color: #a95e5e;
     color: #a95e5e;
@@ -1598,21 +1618,25 @@ LIGHT COLORS - nf-red
 
 .nf-red .nf-form-content input[type="submit"],
 .nf-red .nf-form-content input[type="button"],
-.nf-red .nf-form-content button {
+.nf-red .nf-form-content button, .nf-red #nf-main-content input[type="submit"],
+.nf-red #nf-main-content input[type="button"],
+.nf-red #nf-main-content button {
   background: #8A5252;
   border: 0;
   color: #F0E3E3;
   transition: all .5s; }
   .nf-red .nf-form-content input[type="submit"]:hover,
   .nf-red .nf-form-content input[type="button"]:hover,
-  .nf-red .nf-form-content button:hover {
+  .nf-red .nf-form-content button:hover, .nf-red #nf-main-content input[type="submit"]:hover,
+  .nf-red #nf-main-content input[type="button"]:hover,
+  .nf-red #nf-main-content button:hover {
     background: #cca1a1;
     color: #8a4a4a;
     transition: all .5s; }
 
-.nf-red .nf-form-content select.ninja-forms-field {
+.nf-red .nf-form-content select.ninja-forms-field, .nf-red #nf-main-content select.ninja-forms-field {
   color: #8a4a4a; }
-  .nf-red .nf-form-content select.ninja-forms-field:focus {
+  .nf-red .nf-form-content select.ninja-forms-field:focus, .nf-red #nf-main-content select.ninja-forms-field:focus {
     background: transparent;
     border: 0;
     box-shadow: none;
@@ -1748,7 +1772,9 @@ LIGHT COLORS - nf-blue
 ----------------------------------*/
 .nf-blue .nf-form-content input:not([type='button']),
 .nf-blue .nf-form-content textarea,
-.nf-blue .nf-form-content .list-select-wrap .nf-field-element > div {
+.nf-blue .nf-form-content .list-select-wrap .nf-field-element > div, .nf-blue #nf-main-content input:not([type='button']),
+.nf-blue #nf-main-content textarea,
+.nf-blue #nf-main-content .list-select-wrap .nf-field-element > div {
   background: #DFEFF5;
   border: 1px solid #91c8dd;
   border-radius: 0;
@@ -1757,7 +1783,9 @@ LIGHT COLORS - nf-blue
   transition: all .5s; }
   .nf-blue .nf-form-content input:not([type='button']):focus,
   .nf-blue .nf-form-content textarea:focus,
-  .nf-blue .nf-form-content .list-select-wrap .nf-field-element > div:focus {
+  .nf-blue .nf-form-content .list-select-wrap .nf-field-element > div:focus, .nf-blue #nf-main-content input:not([type='button']):focus,
+  .nf-blue #nf-main-content textarea:focus,
+  .nf-blue #nf-main-content .list-select-wrap .nf-field-element > div:focus {
     background: white;
     border-color: #44a1c4;
     color: #44a1c4;
@@ -1766,21 +1794,25 @@ LIGHT COLORS - nf-blue
 
 .nf-blue .nf-form-content input[type="submit"],
 .nf-blue .nf-form-content input[type="button"],
-.nf-blue .nf-form-content button {
+.nf-blue .nf-form-content button, .nf-blue #nf-main-content input[type="submit"],
+.nf-blue #nf-main-content input[type="button"],
+.nf-blue #nf-main-content button {
   background: #4F9DBF;
   border: 0;
   color: #DFEFF5;
   transition: all .5s; }
   .nf-blue .nf-form-content input[type="submit"]:hover,
   .nf-blue .nf-form-content input[type="button"]:hover,
-  .nf-blue .nf-form-content button:hover {
+  .nf-blue .nf-form-content button:hover, .nf-blue #nf-main-content input[type="submit"]:hover,
+  .nf-blue #nf-main-content input[type="button"]:hover,
+  .nf-blue #nf-main-content button:hover {
     background: #91c8dd;
     color: #3384a2;
     transition: all .5s; }
 
-.nf-blue .nf-form-content select.ninja-forms-field {
+.nf-blue .nf-form-content select.ninja-forms-field, .nf-blue #nf-main-content select.ninja-forms-field {
   color: #3384a2; }
-  .nf-blue .nf-form-content select.ninja-forms-field:focus {
+  .nf-blue .nf-form-content select.ninja-forms-field:focus, .nf-blue #nf-main-content select.ninja-forms-field:focus {
     background: transparent;
     border: 0;
     box-shadow: none;

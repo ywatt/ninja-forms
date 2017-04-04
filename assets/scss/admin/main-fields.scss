@@ -12,17 +12,17 @@
     }
 }
 
-.nf-field-label {
-    display: inline-block;
-    margin-left: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 80%;
-    .nf-drawer-opened & {
-        width: 60%;
-    }
-}
+// .nf-field-label {
+//     display: inline-block;
+//     margin-left: 16px;
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     width: 80%;
+//     .nf-drawer-opened & {
+//         width: 60%;
+//     }
+// }
 
 .nf-field-wrap {
     .fa {

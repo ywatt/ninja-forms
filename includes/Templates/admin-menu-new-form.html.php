@@ -141,9 +141,60 @@
     </tr>
 </script>
 
-<script id="tmpl-nf-main-content-field" type="text/template">
-    <div id="{{{ data.getFieldID() }}}" class="{{{ data.renderClasses() }}}" data-id="{{{ data.id }}}">{{{ data.renderIcon() }}}<span class="nf-field-label">{{{ _.escape( data.label ) }}} {{{ data.renderRequired() }}}</span>
+<?php
+/**
+ * Generic field template.
+ * If the field-specific template doesn't exist, use the generic tempalte.
+ */
+?>
+
+<script id="tmpl-nf-main-content-field-generic" type="text/template">
+    
+    <div id="{{{ data.getFieldID() }}}" class="{{{ data.renderClasses() }}} nf-generic-field" data-id="{{{ data.id }}}">
+        {{{ data.renderIcon() }}}
+        <span class="nf-field-label">
+            {{{ _.escape( data.label ) }}} {{{ data.renderRequired() }}}
+        </span>
+
         <div class="nf-item-controls"></div>
+    </div>
+
+</script>
+
+<script id="tmpl-nf-main-content-field-wrap" type="text/template">
+    <div id="{{{ data.getFieldID() }}}" class="{{{ data.renderClasses() }}}" data-id="{{{ data.id }}}">
+        <div class="nf-item-controls"></div>
+        <div class="nf-field-overlay"></div>
+        
+        <div id="nf-field-{{{ data.id }}}-container" class="nf-field-container {{{ data.type }}}-container {{{ data.renderContainerClass() }}}">
+            <div class="nf-before-field"></div>
+            <div class="nf-field">
+                <div id="nf-field-{{{ data.id }}}-wrap" class="{{{ data.renderWrapClass() }}}" data-field-id="{{{ data.id }}}">
+                    {{{ data.renderLabel() }}}
+                    <div class="nf-field-element">{{{ data.renderElement() }}}</div>
+                    {{{ data.renderDescText() }}}
+                </div>
+            </div>
+            <div class="nf-after-field"></div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl-nf-main-content-field-wrap-no-label" type="text/template">
+    <div id="{{{ data.getFieldID() }}}" class="{{{ data.renderClasses() }}}" data-id="{{{ data.id }}}">
+        <div class="nf-item-controls"></div>
+        <div class="nf-field-overlay"></div>
+        
+        <div id="nf-field-{{{ data.id }}}-container" class="nf-field-container {{{ data.type }}}-container {{{ data.renderContainerClass() }}}">
+            <div class="nf-before-field"></div>
+            <div class="nf-field">
+                <div id="nf-field-{{{ data.id }}}-wrap" class="{{{ data.renderWrapClass() }}}" data-field-id="{{{ data.id }}}">
+                    <div class="nf-field-element">{{{ data.renderElement() }}}</div>
+                    {{{ data.renderDescText() }}}
+                </div>
+            </div>
+            <div class="nf-after-field"></div>
+        </div>
     </div>
 </script>
 
@@ -668,5 +719,70 @@ Label Three, value-three, 3
         <input type="button" class="insert-link extra" value="Insert">
     </div>
 </script>
+
+
+<?php
+/**
+ * Pull in all of our templates.
+ */
+
+$loaded_templates = array(
+    'app-layout',
+    'app-before-form',
+    'app-after-form',
+    'app-before-fields',
+    'app-after-fields',
+    'app-before-field',
+    'app-after-field',
+    'form-layout',
+    'form-hp',
+    'field-layout',
+    'field-before',
+    'field-after',
+    'fields-wrap',
+    'fields-wrap-no-label',
+    'fields-wrap-no-container',
+    'fields-label',
+    'fields-error',
+    'form-error',
+    'field-input-limit',
+    'field-null'
+);
+
+foreach( Ninja_Forms()->fields as $field_class ) {
+    $templates = $field_class->get_templates();
+
+    if (!array($templates)) {
+        $templates = array($templates);
+    }
+
+    foreach ($templates as $template) {
+        $template_name = 'fields-' . $template;
+        if ( ! in_array( $template_name, $loaded_templates ) ) {
+            $loaded_templates[] = $template_name;
+        }
+    }  
+}
+
+// Build File Path Hierarchy
+$file_paths = apply_filters( 'ninja_forms_field_template_file_paths', array(
+    get_template_directory() . '/ninja-forms/templates/',
+));
+
+$file_paths[] = Ninja_Forms::$dir . 'includes/Templates/';
+
+// Search for and Output File Templates
+foreach( $loaded_templates as $file_name ) {
+    foreach( $file_paths as $path ){
+        if( file_exists( $path . "$file_name.html" ) ){
+            echo file_get_contents( $path . "$file_name.html" );
+            break;
+        }
+    }
+}
+
+
+
+?>
 
 <?php do_action( 'ninja_forms_builder_templates' ); ?>

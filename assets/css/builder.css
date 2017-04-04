@@ -220,16 +220,6 @@ Header and Nav for Ninja Forms App
   .nf-fields-empty a {
     text-decoration: none; }
 
-.nf-field-label {
-  display: inline-block;
-  margin-left: 16px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 80%; }
-  .nf-drawer-opened .nf-field-label {
-    width: 60%; }
-
 .template-box {
   text-decoration: none; }
   .template-box .template-box-inside {
@@ -290,7 +280,9 @@ Form field placeholders for the fields a user has added to their form
   margin: 0;
   position: absolute;
   top: 9px;
-  right: 10px; }
+  right: 10px;
+  display: none;
+  z-index: 100; }
   .nf-item-controls .nf-item-control {
     visibility: hidden;
     margin: 0;
@@ -342,13 +334,17 @@ Form field placeholders for the fields a user has added to their form
 
 .nf-field-wrap {
   background: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
   border-radius: 4px;
   color: #888;
   cursor: pointer;
   margin-bottom: 20px;
   padding: 15px 20px;
   position: relative; }
+  .nf-field-wrap:hover {
+    border: 1px solid #ccc; }
+    .nf-field-wrap:hover .nf-item-controls {
+      display: block; }
   .nf-field-wrap.active {
     border: 2px solid #84CC1E;
     color: #424242;
@@ -367,6 +363,15 @@ Form field placeholders for the fields a user has added to their form
         display: inline; }
       .nf-field-wrap.active .nf-item-controls .nf-item-edit .dashicons {
         margin-right: 12px; }
+  .nf-field-wrap.nf-generic-field {
+    border: 1px solid #ccc; }
+  .nf-field-wrap .nf-field-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 99; }
 
 .nf-group-wrap {
   background: #fff;
@@ -377,6 +382,7 @@ Form field placeholders for the fields a user has added to their form
   padding: 15px 30px;
   position: relative; }
   .nf-group-wrap .nf-item-controls {
+    display: none;
     width: 128px; }
   .nf-group-wrap .nf-item-expand {
     display: inline !important; }
