@@ -204,6 +204,7 @@ class NF_Abstracts_Model
             $return =  $this->_settings[ $setting ];
         } else {
             $return = $this->get_settings($setting);
+            if( is_array( $return ) && empty( $return ) ) $return = false;
         }
 
         return ( $return !== false ) ? $return : $default;
