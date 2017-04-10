@@ -94,15 +94,15 @@ define( [
         renderSetting: function( settingModel, dataModel, view ){
 
             // On input focus, move the Merge Tag Box into position.
-            jQuery( view.el ).find( 'input' ).on( 'focus', function(){
-                var offset = jQuery( view.el ).find( 'input' ).closest( '.nf-setting' ).outerHeight();
-                jQuery( view.el ).find( 'input' ).closest( '.nf-setting' ).append( jQuery( '#merge-tags-box' ) );
+            jQuery( view.el ).find( '.setting' ).on( 'focus', function(){
+                var offset = jQuery( view.el ).find( '.setting' ).closest( '.nf-setting' ).outerHeight();
+                jQuery( view.el ).find( '.setting' ).closest( '.nf-setting' ).append( jQuery( '#merge-tags-box' ) );
                 jQuery( '#merge-tags-box' ).css( 'top', offset );
             });
 
             // On input keyup, maybe show Merge Tag Box.
             var that = this;
-            jQuery( view.el ).find( 'input' ).on( 'keyup', function( e ){
+            jQuery( view.el ).find( '.setting' ).on( 'keyup', function( e ){
                 var $this = jQuery( this );
 
                 // Store the current caret position.
@@ -125,14 +125,14 @@ define( [
                     jQuery( '#merge-tags-box' ).addClass( that.getWidthClass( settingModel ) );
 
                     jQuery('#merge-tags-box').show();
-                    jQuery(view.el).find('input').closest('.nf-setting').addClass('merge-tag-focus');
+                    jQuery(view.el).find('.setting').closest('.nf-setting').addClass('merge-tag-focus');
 
                     var value = mergetags[0].replace( '{', '' );
                     nfRadio.channel( 'merge-tags' ).request( 'filtersearch', value );
                 } else {
                     jQuery( '#merge-tags-box' ).css( 'display', 'none' );
                     jQuery( '#merge-tags-box' ).removeClass();
-                    jQuery( view.el ).find( 'input' ).closest( '.nf-setting' ).removeClass( 'merge-tag-focus' );
+                    jQuery( view.el ).find( '.setting' ).closest( '.nf-setting' ).removeClass( 'merge-tag-focus' );
                 }
             });
         },
