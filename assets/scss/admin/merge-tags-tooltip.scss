@@ -136,11 +136,13 @@ label.has-merge-tags {
     .merge-tag-sections {
         background-color: #f9f9f9;
         border-right: 2px solid #DBDDDD;
-        div {
-            div {
+        ul {
+            margin: 0;
+            li {
                 border-bottom: 1px solid #DBDDDD;
                 cursor: pointer;
                 font-size: 14px;
+                margin: 0;
                 padding: 8px;
                 &:hover {
                     background: #DBDDDD;
@@ -180,9 +182,12 @@ label.has-merge-tags {
     background-color: rgba(0, 0, 0, .5);
 }
 
-.nf-one-half {
-    #merge-tags-box {
-        width: 538px;
-        left: auto;
-    }
+#merge-tags-box.one-half--first {
+    width: 538px;
+    left: 12px;
+}
+#merge-tags-box.one-half--second {
+    width: 538px;
+    right: 10px;
+    left: auto;
 }
