@@ -119,20 +119,24 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Fields should be properly sorted in CSV files attached to emails.
 * Sequential IDs for submissions on converted or imported forms should not reset.
 
-= 3.0.31 (07 March 2017) =
+== Changelog ==
 
-*Bugs:*
-
-* Confirmed password fields should work properly.
-* Fixed a bug with List Fields that caused the Import button to overlap the Add New button.
-* Closed a possible security vulnerability by escaping HTML in the builder.
-* CSV files should now be deleted from the server after they are emailed when attached to an email action.
+= 3.0.32 (11 April 2017) =
 
 *Changes:*
 
-* Added a filter so that add-ons and custom code can add forms to the templates section of the New Form builder.
+* Added an admin warning notice if Contact Form 7 is installed.
+* Users who upgrade to version 3.0 will now see an admin notice instructing them to check their converted forms.
+* Added the TLS version, if installed, to the get help page.
 
-== Changelog ==
+*Bugs:*
+
+* Fixed a bug that caused field labels to be output multiple times in submission exports.
+* Removed several PHP Warnings related to publishing longer forms.
+* Updated inline email check so that it should work on longer domains, i.e. co.uk.
+* Editing submissions with single checkboxes should now save properly.
+* Fields should be properly sorted in CSV files attached to emails.
+* Sequential IDs for submissions on converted or imported forms should not reset.
 
 = 3.0.31 (07 March 2017) =
 
