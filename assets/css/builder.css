@@ -518,6 +518,15 @@ All styles used within the drawer
   .nf-drawer-header .nf-button {
     float: right; }
 
+.nf-drawer-error {
+  background-color: #FFBABA;
+  border: 1px solid #FFBABA;
+  border-radius: 5px;
+  color: #D8000C;
+  font-size: 12px;
+  margin: 10px 0px;
+  padding: 10px 10px; }
+
 .nf-settings h3 {
   color: #424242;
   font-size: 14px;

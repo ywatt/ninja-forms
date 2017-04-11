@@ -2,8 +2,8 @@
 Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, wpnzach, aman086, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.5
-Tested up to: 4.7.2
-Stable tag: 3.0.31
+Tested up to: 4.7
+Stable tag: 3.0.32
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -101,6 +101,23 @@ Shortcodes have been re-implemented. They are used like so: [ninja_form id=#] wh
 For help and video tutorials, please visit our website: [Ninja Forms Documentation](https://ninjaforms.com/documentation/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ninja+Forms+Readme&utm_content=Ninja+Forms+Docs)
 
 == Upgrade Notice ==
+
+= 3.0.32 (11 April 2017) =
+
+*Changes:*
+
+* Added an admin warning notice if Contact Form 7 is installed.
+* Users who upgrade to version 3.0 will now see an admin notice instructing them to check their converted forms.
+* Added the TLS version, if installed, to the get help page.
+
+*Bugs:*
+
+* Fixed a bug that caused field labels to be output multiple times in submission exports.
+* Removed several PHP Warnings related to publishing longer forms.
+* Updated inline email check so that it should work on longer domains, i.e. co.uk.
+* Editing submissions with single checkboxes should now save properly.
+* Fields should be properly sorted in CSV files attached to emails.
+* Sequential IDs for submissions on converted or imported forms should not reset.
 
 = 3.0.31 (07 March 2017) =
 
