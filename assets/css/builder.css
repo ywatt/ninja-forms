@@ -974,10 +974,12 @@ All styles used within the drawer
     text-indent: -99999px; }
 
 .nf-action-items.available .nf-item.nf-has-img {
-  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
   opacity: 0.6; }
   .nf-action-items.available .nf-item.nf-has-img:hover {
-    filter: grayscale(0);
+    -webkit-filter: grayscale(0);
+            filter: grayscale(0);
     opacity: 1.0; }
 
 .nf-field-type-button {
@@ -1651,14 +1653,17 @@ label.has-merge-tags .merge-tags {
   #merge-tags-box .merge-tag-sections {
     background-color: #f9f9f9;
     border-right: 2px solid #DBDDDD; }
-    #merge-tags-box .merge-tag-sections div div {
-      border-bottom: 1px solid #DBDDDD;
-      cursor: pointer;
-      font-size: 14px;
-      padding: 8px; }
-      #merge-tags-box .merge-tag-sections div div:hover {
-        background: #DBDDDD;
-        color: #1EA9EA; }
+    #merge-tags-box .merge-tag-sections ul {
+      margin: 0; }
+      #merge-tags-box .merge-tag-sections ul li {
+        border-bottom: 1px solid #DBDDDD;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 0;
+        padding: 8px; }
+        #merge-tags-box .merge-tag-sections ul li:hover {
+          background: #DBDDDD;
+          color: #1EA9EA; }
   #merge-tags-box .merge-tag-list {
     -ms-flex-positive: 1;
         flex-grow: 1;
@@ -1683,8 +1688,13 @@ label.has-merge-tags .merge-tags {
   left: 0px;
   background-color: rgba(0, 0, 0, 0.5); }
 
-.nf-one-half #merge-tags-box {
+#merge-tags-box.one-half--first {
   width: 538px;
+  left: 12px; }
+
+#merge-tags-box.one-half--second {
+  width: 538px;
+  right: 10px;
   left: auto; }
 
 .note-popover {
