@@ -58,27 +58,6 @@ define( [
                 collection: mergeTagCollection
             });
 
-            mergeTagListView.filter = function( child, index, collection ){
-                return 'fields' == child.get( 'section' );
-            }
-
-            nfRadio.channel( 'merge-tags' ).reply( 'update:taglist', function( section ){
-                mergeTagListView.filter = function( child, index, collection ){
-                    return section == child.get( 'section' );
-                }
-                mergeTagListView.render();
-            });
-
-            nfRadio.channel( 'merge-tags' ).reply( 'filtersearch', function( term ){
-                mergeTagListView.filter = function( child, index, collection ){
-                    var label = child.get( 'label' ).toLowerCase().indexOf( term.toLowerCase().replace( ':', '' ) ) >= 0;
-                    var tag   = child.get( 'tag' ).toLowerCase().indexOf( term.toLowerCase() ) >= 0;
-                    return label || tag;
-                }
-                mergeTagListView.render();
-            });
-
-
             layout.getRegion('tags').show(mergeTagListView);
             layout.getRegion('sections').show(mergeTagGroupListView);
             layout.getRegion('filter').show(new MergeTagFilterView);
