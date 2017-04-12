@@ -6,7 +6,6 @@
  */
 
 /*
- * TODO: Track drawer scrolling to follow focused setting.
  * TODO: Support RTE Summernote settings.
  * TODO: Add back focus overlay.
  */
@@ -85,6 +84,24 @@ define( [
             if( 0 == jQuery( '#merge-tags-box' ).length ){
                 this.afterAppStart();
             }
+
+            // Track Scrolling.
+            jQuery( '#nf-drawer' ).on( 'scroll', function(){
+               // COPIED AND MODIFIED FROM FOCUS
+                var posY = jQuery( '.merge-tag-focus' ).offset().top - jQuery(window).scrollTop();
+                var height = jQuery( '.merge-tag-focus' ).outerHeight();
+                jQuery( '#merge-tags-box' ).css( 'top', posY + height );
+
+                var repeaterRow = jQuery( '.merge-tag-focus' ).closest( '.nf-list-options-tbody' );
+                if( 0 != repeaterRow.length ){
+                    var left = repeaterRow.offset().left - jQuery(window).scrollLeft();
+                    jQuery( '#merge-tags-box' ).css( 'left', left );
+                } else {
+                    var posX = jQuery( '.merge-tag-focus' ).closest( '.nf-settings' ).offset().left - jQuery(window).scrollLeft();
+                    jQuery( '#merge-tags-box' ).css( 'left', posX );
+                    jQuery( '#merge-tags-box' ).css( 'width', jQuery( '.merge-tag-focus' ).closest( '.nf-settings' ).width() );
+                }
+            });
 
             // TODO: Maybe move to view events.
             // On input focus, move the Merge Tag Box into position.
