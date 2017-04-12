@@ -974,12 +974,10 @@ All styles used within the drawer
     text-indent: -99999px; }
 
 .nf-action-items.available .nf-item.nf-has-img {
-  -webkit-filter: grayscale(100%);
-          filter: grayscale(100%);
+  filter: grayscale(100%);
   opacity: 0.6; }
   .nf-action-items.available .nf-item.nf-has-img:hover {
-    -webkit-filter: grayscale(0);
-            filter: grayscale(0);
+    filter: grayscale(0);
     opacity: 1.0; }
 
 .nf-field-type-button {
@@ -1675,11 +1673,13 @@ label.has-merge-tags .merge-tags {
     margin: 3px 10px 10px 10px;
     clear: both; }
 
-.nf-setting.merge-tag-focus {
+.merge-tag-focus {
   position: relative;
   z-index: 1000; }
 
-.nf-setting.merge-tag-focus::after {
+.merge-tag-focus::after {
+  content: '';
+  display: block;
   position: fixed;
   z-index: -1;
   top: 0px;

@@ -4,6 +4,13 @@
  * @copyright (c) 2017 WP Ninjas
  * @since 3.1
  */
+
+/*
+ * TODO: Track drawer scrolling to follow focused setting.
+ * TODO: Support RTE Summernote settings.
+ * TODO: Add back focus overlay.
+ */
+
 define( [
     'models/app/mergeTagModel',
     'models/app/mergeTagLookupCollection',
@@ -34,6 +41,9 @@ define( [
             this.listenTo( nfRadio.channel( 'drawer' ), 'before:close', this.beforeDrawerClose );
 
             nfRadio.channel( 'mergeTags' ).reply( 'insert:tag', this.insertTag.bind( this ) );
+            
+            /* CALCULATIONS */
+            this.listenTo( nfRadio.channel( 'setting-calculations-option' ), 'render:setting', this.renderSetting );
         },
 
         afterAppStart: function() {
@@ -72,17 +82,52 @@ define( [
 
         renderSetting: function( settingModel, dataModel, view ){
 
+            if( 0 == jQuery( '#merge-tags-box' ).length ){
+                this.afterAppStart();
+            }
+
+            // TODO: Maybe move to view events.
             // On input focus, move the Merge Tag Box into position.
             jQuery( view.el ).find( '.setting' ).on( 'focus', function(){
-                var offset = jQuery( view.el ).find( '.setting' ).closest( '.nf-setting' ).outerHeight();
-                jQuery( view.el ).find( '.setting' ).closest( '.nf-setting' ).append( jQuery( '#merge-tags-box' ) );
-                jQuery( '#merge-tags-box' ).css( 'top', offset );
+
+                jQuery( '.merge-tag-focus' ).each(function(index, el){
+                    if( this == el ) return;
+                    el.removeClass( 'merge-tag-focus' );
+                });
+
+                console.log( 'FOCUS' );
+
+                var posY = jQuery( this ).offset().top - jQuery(window).scrollTop();
+                var height = jQuery( this ).outerHeight();
+                jQuery( '#merge-tags-box' ).css( 'top', posY + height );
+
+                var repeaterRow = jQuery( this ).closest( '.nf-list-options-tbody' );
+                if( 0 != repeaterRow.length ){
+                    var left = repeaterRow.offset().left - jQuery(window).scrollLeft();
+                    jQuery( '#merge-tags-box' ).css( 'left', left );
+                } else {
+                    var posX = jQuery( this ).closest( '.nf-settings' ).offset().left - jQuery(window).scrollLeft();
+                    jQuery( '#merge-tags-box' ).css( 'left', posX );
+                    jQuery( '#merge-tags-box' ).css( 'width', jQuery( this ).closest( '.nf-settings' ).width() );
+                }
+
+               var dataID = jQuery( this ).data( 'id' );
+               if( dataID && 'eq' != dataID ) return;
+
+                nfRadio.channel( 'merge-tags' ).trigger( 'open' );
+                // var offset = jQuery( view.el ).find( '.setting' ).parent().outerHeight();
+                // jQuery( view.el ).find( '.setting' ).parent().append( jQuery( '#merge-tags-box' ) );
+                // jQuery( '#merge-tags-box' ).css( 'top', offset );
             });
 
+            // TODO: Maybe move to view events.
             // On input keyup, maybe show Merge Tag Box.
             var that = this;
             jQuery( view.el ).find( '.setting' ).on( 'keyup', function( e ){
                 var $this = jQuery( this );
+
+                var dataID = jQuery( this ).data( 'id' );
+                if( dataID && 'eq' != dataID ) return;
 
                 // Store the current caret position.
                 that.caret = $this.caret();
@@ -101,34 +146,44 @@ define( [
 
                     that.old = mergetags[0];
 
-                    jQuery( '#merge-tags-box' ).addClass( that.getWidthClass( settingModel ) );
-
                     jQuery('#merge-tags-box').show();
-                    jQuery(view.el).find('.setting').closest('.nf-setting').addClass('merge-tag-focus');
+                    $this.addClass('merge-tag-focus');
 
                     var value = mergetags[0].replace( '{', '' );
                     nfRadio.channel( 'merge-tags' ).request( 'filtersearch', value );
+
+                    console.log( 'SHOW' );
                 } else {
                     jQuery( '#merge-tags-box' ).css( 'display', 'none' );
                     jQuery( '#merge-tags-box' ).removeClass();
-                    jQuery( view.el ).find( '.setting' ).closest( '.nf-setting' ).removeClass( 'merge-tag-focus' );
+                    jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                    console.log( 'HIDE' );
                 }
             });
         },
 
+        // TODO: Maybe move to view class.
         beforeDrawerClose: function(){
             jQuery( '#merge-tags-box' ).css( 'display', 'none' );
-            jQuery( 'body' ).append( jQuery( '#merge-tags-box' ) );
+            // jQuery( 'body' ).append( jQuery( '#merge-tags-box' ) );
         },
 
         insertTag: function( tag ) {
 
-            var $input = jQuery( '#merge-tags-box' ).closest( '.nf-setting' ).find( '.setting' );
+            var $input = jQuery( '.merge-tag-focus' );
+            if( 1 < $input.length ){ $input = $input.first(); }
+
+            console.log( $input );
 
             var str = $input.val();
             var find = this.old;
             var replace = tag;
             var caretPos = this.caret;
+
+            console.log( str );
+            console.log( this.old );
+            console.log( replace );
+            console.log( caretPos );
 
             var patt = /{([a-z0-9]|:|_|})*/g;
 
@@ -142,38 +197,10 @@ define( [
             }
 
             jQuery( '#merge-tags-box' ).css( 'display', 'none' );
-            jQuery( '#merge-tags-box' ).closest( '.nf-setting' ).removeClass( 'merge-tag-focus' );
+            $input.change(); // Trigger a change event after inserting the merge tag so that it saves to the model.
+            $input.removeClass( 'merge-tag-focus' );
+            console.log( 'REMOVE CLASS' );
         },
-
-        getWidthClass: function( settingModel ){
-            var index = settingModel.collection.indexOf( settingModel );
-            var width = settingModel.get( 'width' );
-
-            var widthClass = width;
-            switch( width ){
-                case 'one-third':
-                    if( width == settingModel.collection.at( index-1 ).get( 'width' )
-                        && width == settingModel.collection.at( index+1 ).get( 'width' ) ){
-                        widthClass = width + '--second';
-                    } else if( width == settingModel.collection.at( index+1 ).get( 'width' ) ){
-                        widthClass = width + '--first';
-                    } else {
-                        widthClass = width + '--third';
-                    }
-                    break;
-                case 'one-half':
-                    if( width == settingModel.collection.at( index-1 ).get( 'width' ) ){
-                        widthClass = width + '--second';
-                    } else {
-                        widthClass = width + '--first'
-                    }
-                    break;
-                default:
-                    widthClass = width;
-            }
-
-            return widthClass;
-        }
 
     } );
 

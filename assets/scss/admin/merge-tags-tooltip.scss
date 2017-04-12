@@ -168,11 +168,13 @@ label.has-merge-tags {
         clear: both;
     }
 }
-.nf-setting.merge-tag-focus {
+.merge-tag-focus {
     position: relative;
     z-index: 1000;
 }
-.nf-setting.merge-tag-focus::after {
+.merge-tag-focus::after {
+    content: '';
+    display: block;
     position: fixed;
     z-index: -1;
     top: 0px;
