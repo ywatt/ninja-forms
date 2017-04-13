@@ -119,9 +119,16 @@ define( [], function() {
 				},
 				prettifyHtml: true,
 				callbacks: {
-					onBlur: function() {
+					onBlur: function( e, context ) {
 						var value = jQuery( this ).summernote( 'code' );
 						that.updateDataModel( settingModel, dataModel, value );
+                        nfRadio.channel( 'summernote' ).trigger( 'blur', settingModel, dataModel, value );
+					},
+                    onFocus: function( e, context ) {
+                        nfRadio.channel( 'summernote' ).trigger( 'focus', this, context );
+                    },
+                    onKeyup: function( e, context ) {
+                        nfRadio.channel( 'summernote' ).trigger( 'keyup', this, context );
 					}
 				}
 			} );
