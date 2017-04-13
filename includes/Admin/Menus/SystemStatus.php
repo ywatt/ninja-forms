@@ -131,6 +131,7 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
             __( 'PHP Version','ninja-forms' ) => esc_html( phpversion() ),
             //TODO: Possibly Refactor with Ninja forms global $_db?
             __( 'MySQL Version','ninja-forms' ) => $wpdb->db_version(),
+            __( 'Collation', 'ninja-forms' ) => $wpdb->get_charset_collate(),
             __( 'PHP Locale','ninja-forms' ) =>  $data,
             //TODO: Possibly move the ninja_forms_letters_to_numbers function over.
             __( 'WP Memory Limit','ninja-forms' ) => WP_MEMORY_LIMIT,
