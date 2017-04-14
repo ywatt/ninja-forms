@@ -93,6 +93,12 @@ define( [
             layout.getRegion('tags').show(mergeTagListView);
             layout.getRegion('sections').show(mergeTagGroupListView);
             layout.getRegion('filter').show(new MergeTagFilterView);
+
+            var that = this;
+            this.listenTo( nfRadio.channel( 'mergeTags' ), 'open', function(){
+                // layout.destroy();
+                that.afterAppStart();
+            });
         },
 
         beforeRenderSetting: function( settingModel, dataModel ){
@@ -144,6 +150,7 @@ define( [
         beforeDrawerClose: function(){
             jQuery( '#merge-tags-box' ).css( 'display', 'none' );
             // jQuery( 'body' ).append( jQuery( '#merge-tags-box' ) );
+            nfRadio.channel( 'mergeTags' ).trigger( 'open' );
         },
 
         insertTag: function( tag ) {
@@ -239,7 +246,6 @@ define( [
             var dataID = jQuery( this ).data( 'id' );
             if( dataID && 'eq' != dataID ) return;
 
-            nfRadio.channel( 'merge-tags' ).trigger( 'open' );
             // var offset = jQuery( view.el ).find( '.setting' ).parent().outerHeight();
             // jQuery( view.el ).find( '.setting' ).parent().append( jQuery( '#merge-tags-box' ) );
             // jQuery( '#merge-tags-box' ).css( 'top', offset );
