@@ -194,20 +194,46 @@ define( [
 
                 if( $input.hasClass( 'note-editable' ) ){
                     $input.closest( '.nf-setting' ).find( '.setting' ).summernote( 'code', string );
-                    // TODO: Re-position caret for RTE.
-                    // console.log( $input.data( 'range' ) );
 
-                    // http://stackoverflow.com/a/6249440
+                    // Reposition the caret. http://stackoverflow.com/a/6249440 TODO: Determine the appropriate childNode.
                     var el = $input;
+                    console.log( $input );
+                    var childNode = null; // Default to first childNode.
+                    _.each( el[0].childNodes, function( node, index ){
+                        if( childNode ) return;
+                        // console.log( index );
+                        // console.log( node );
+                        // console.log( typeof node );
+                        // console.log(  );
+                        // console.log( caretPos );
+                        // console.log( caretPos + '  |  ' + node.indexOf( find ) );
+                        console.log( node );
+                        console.log( node.nodeValue );
+                        if( ! node.nodeValue && ! node.innerHTML ) return;
+                        if( node.nodeValue ) {
+                            var position = node.nodeValue.indexOf(replace) + find.length;
+                        } else if( node.innerHTML ){
+                            var position = node.innerHTML.indexOf(replace) + find.length;
+                        }
+                        console.log( position );
+                        if( caretPos == position ) childNode = el[0].childNodes[index];
+                        console.log( index );
+                    });
+                    if( ! childNode ) childNode = el[0].childNodes[0];
+                    console.log( childNode );
+                    console.log( childNode.childNodes );
                     var offset = caretPos - find.length + replace.length;
                     var range = document.createRange();
                     var sel = window.getSelection();
-                    range.setStart(el[0].childNodes[0], offset);
+                    if( 0 != childNode.childNodes.length ) {
+                        range.setStart(childNode.childNodes[0], offset);
+                    } else {
+                        range.setStart(childNode, offset);
+                    }
                     range.collapse(true);
                     sel.removeAllRanges();
                     sel.addRange(range);
 
-                    // $input.closest( '.nf-setting' ).find( '.setting' ).summernote( 'restoreRange' );
 
                 } else {
                     $input.val(string); // Update input value with parsed string.
