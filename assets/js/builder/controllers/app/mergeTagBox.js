@@ -60,11 +60,15 @@ define( [
             this.listenTo( nfRadio.channel( 'setting-calculations-option' ), 'render:setting', this.renderSetting );
 
             /* SUMMERNOTE */
-            this.listenTo( nfRadio.channel( 'summernote' ), 'keyup', function( selector ){
-                that.keyupCallback( that, selector );
-            } );
             this.listenTo( nfRadio.channel( 'summernote' ), 'focus', function( selector ) {
                 that.focusCallback( false, selector );
+            } );
+            this.listenTo( nfRadio.channel( 'summernote' ), 'keydown', function( selector ){
+                jQuery( selector ).closest( '.nf-setting' ).find( '.setting' ).summernote( 'saveRange' );
+                console.log( jQuery( selector ).closest('.nf-setting' ).find( '.note-editable' ).data( 'range' ) );
+            } );
+            this.listenTo( nfRadio.channel( 'summernote' ), 'keyup', function( selector ){
+                that.keyupCallback( that, selector );
             } );
         },
 
@@ -191,6 +195,20 @@ define( [
                 if( $input.hasClass( 'note-editable' ) ){
                     $input.closest( '.nf-setting' ).find( '.setting' ).summernote( 'code', string );
                     // TODO: Re-position caret for RTE.
+                    // console.log( $input.data( 'range' ) );
+
+                    // http://stackoverflow.com/a/6249440
+                    var el = $input;
+                    var offset = caretPos - find.length + replace.length;
+                    var range = document.createRange();
+                    var sel = window.getSelection();
+                    range.setStart(el[0].childNodes[0], offset);
+                    range.collapse(true);
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+
+                    // $input.closest( '.nf-setting' ).find( '.setting' ).summernote( 'restoreRange' );
+
                 } else {
                     $input.val(string); // Update input value with parsed string.
                     $input.change(); // Trigger a change event after inserting the merge tag so that it saves to the model.
@@ -227,16 +245,21 @@ define( [
             jQuery( '#merge-tags-box' ).css( 'top', posY + height );
 
             var repeaterRow = jQuery( this ).closest( '.nf-list-options-tbody' );
-            if( 0 != repeaterRow.length ){
+            if( 0 != repeaterRow.length )
+            {
                 console.log( 'CALC!' );
                 var left = repeaterRow.offset().left - jQuery(window).scrollLeft();
                 jQuery( '#merge-tags-box' ).css( 'left', left );
-            } else if( 'undefined' != typeof target ) {
+            }
+            else if( 'undefined' != typeof target )
+            {
                 console.log( 'RTE' );
                 var posX = jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ).offset().left - jQuery(window).scrollLeft();
                 jQuery( '#merge-tags-box' ).css( 'left', posX );
                 jQuery( '#merge-tags-box' ).css( 'width', jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ).width() );
-            } else {
+            }
+            else
+            {
                 console.log( 'INPUT!' );
                 var posX = jQuery( this ).closest( '.nf-settings' ).offset().left - jQuery(window).scrollLeft();
                 jQuery( '#merge-tags-box' ).css( 'left', posX );
@@ -264,6 +287,9 @@ define( [
                 var $this = jQuery( this );
             }
 
+            // Disable Browser Autocomplete
+            // $this.attr()
+
             console.log( this );
             console.log( jQuery( this ) );
 
@@ -274,8 +300,18 @@ define( [
             // Store the current caret position.
             // that.caret = $this.caret();
             if( 'undefined' != typeof target ){
-                var caretPos = $this.summernote('createRange').so; // or .eo?
-                $this.summernote( 'saveRange' );
+                var range = $this.summernote('createRange');
+                console.log( range );
+                if( range ) {
+                    var caretPos = range.so; // or .eo?
+                } else {
+                    var caretPos = 0;
+                }
+                // $this.closest( '.nf-setting' ).find( '.note-editable.panel-body' ).data( 'range', range );
+                // console.log( $this.closest( '.nf-setting' ) );
+                // console.log( $this.closest( '.nf-setting' ).find( '.note-editable.panel-body' ) );
+                // console.log( caretPos );
+                $this.closest( '.nf-setting' ).find( '.setting' ).summernote( 'saveRange' );
             } else {
                 var caretPos = $this.caret();
             }

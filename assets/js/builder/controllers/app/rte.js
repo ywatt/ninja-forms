@@ -127,6 +127,9 @@ define( [], function() {
                     onFocus: function( e, context ) {
                         nfRadio.channel( 'summernote' ).trigger( 'focus', this, context );
                     },
+                    onKeydown: function( e, context ) {
+                        nfRadio.channel( 'summernote' ).trigger( 'keydown', this, context );
+                    },
                     onKeyup: function( e, context ) {
                         nfRadio.channel( 'summernote' ).trigger( 'keyup', this, context );
 					}
