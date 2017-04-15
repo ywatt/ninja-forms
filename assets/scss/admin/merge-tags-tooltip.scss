@@ -200,6 +200,10 @@ label.has-merge-tags {
 .setting + .merge-tags {
     color: rgba( 204, 204, 204, .3 );
 }
-.setting:focus + .merge-tags {
+.setting:focus + .merge-tags,
+.merge-tag-focus-overlay .merge-tags {
     color: rgba( 204, 204, 204, 1 );
+}
+.merge-tag-focus-overlay .merge-tags {
+    z-index: 1000;
 }

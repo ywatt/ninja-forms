@@ -1703,8 +1703,12 @@ label.has-merge-tags .merge-tags {
 .setting + .merge-tags {
   color: rgba(204, 204, 204, 0.3); }
 
-.setting:focus + .merge-tags {
+.setting:focus + .merge-tags,
+.merge-tag-focus-overlay .merge-tags {
   color: #cccccc; }
+
+.merge-tag-focus-overlay .merge-tags {
+  z-index: 1000; }
 
 .note-popover {
   display: none !important; }

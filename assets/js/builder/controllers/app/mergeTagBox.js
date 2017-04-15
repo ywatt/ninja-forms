@@ -38,9 +38,10 @@ define( [
                 jQuery( '.merge-tags' ).on( 'click', function( e ){
                     console.log( 'CLICKED' );
                     var $this = jQuery( this );
-                    if( $this.hasClass( 'merge-tag-focus' ) ){
+                    if( $this.siblings().hasClass( 'merge-tag-focus' ) ){
                         jQuery( '#merge-tags-box' ).css( 'display', 'none' );
                         jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                        jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
                         return;
                     }
                     var text = $this.closest( '.nf-setting' ).find( '.setting' ).val();
@@ -57,12 +58,17 @@ define( [
                     // $this.closest( '.nf-setting' ).find( '.setting' ).focus(); //.addClass( 'merge-tag-focus' );
                     $this.closest( '.nf-setting' ).find( '.setting' ).addClass( 'merge-tag-focus' ); //.addClass( 'merge-tag-focus' );
 
-                    jQuery( '#merge-tags-box' ).show({
-                        complete: function(){
-                            console.log( 'SHOW!' );
-                            jQuery( '#merge-tags-box' ).find( '.merge-tag-filter' ).find( 'input' ).focus();
-                        }
-                    });
+                    var $overlayElement = $this.closest( '.nf-setting, .nf-table-row' );
+                    if( 0 != $overlayElement.find( '.note-editor' ).length ){
+                        $overlayElement.find('.note-editor' ).addClass('merge-tag-focus-overlay');
+                    } else {
+                        $overlayElement.addClass('merge-tag-focus-overlay');
+                    }
+
+                    jQuery( '#merge-tags-box' ).css( 'display', 'block' );
+                    setTimeout(function(){
+                        jQuery( '#merge-tags-box' ).find( '.merge-tag-filter' ).find( 'input' ).focus();
+                    }, 500 );
                 });
             } );
 
@@ -395,7 +401,7 @@ define( [
                 // that.old = mergetags[0];
                 nfRadio.channel( 'mergeTags' ).request( 'set:old', mergetags[0] );
 
-                jQuery('#merge-tags-box').show();
+                jQuery('#merge-tags-box').css( 'display', 'block' );
                 $this.addClass('merge-tag-focus');
 
                 var $overlayElement = $this.closest( '.nf-setting, .nf-table-row' );
