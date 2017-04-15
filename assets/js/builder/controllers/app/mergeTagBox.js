@@ -58,6 +58,11 @@ define( [
                     // $this.closest( '.nf-setting' ).find( '.setting' ).focus(); //.addClass( 'merge-tag-focus' );
                     $this.closest( '.nf-setting' ).find( '.setting' ).addClass( 'merge-tag-focus' ); //.addClass( 'merge-tag-focus' );
 
+                    // Disable browser autocomplete.
+                    var autocomplete = $this.attr( 'autocomplete' );
+                    $this.attr( 'autocomplete', 'off' );
+                    $this.data( 'autocomplete', autocomplete );
+
                     var $overlayElement = $this.closest( '.nf-setting, .nf-table-row' );
                     if( 0 != $overlayElement.find( '.note-editor' ).length ){
                         $overlayElement.find('.note-editor' ).addClass('merge-tag-focus-overlay');
@@ -403,6 +408,11 @@ define( [
 
                 jQuery('#merge-tags-box').css( 'display', 'block' );
                 $this.addClass('merge-tag-focus');
+
+                // Disable browser autocomplete.
+                var autocomplete = $this.attr( 'autocomplete' );
+                $this.attr( 'autocomplete', 'off' );
+                $this.data( 'autocomplete', autocomplete );
 
                 var $overlayElement = $this.closest( '.nf-setting, .nf-table-row' );
                 if( 0 != $overlayElement.find( '.note-editor' ).length ){
