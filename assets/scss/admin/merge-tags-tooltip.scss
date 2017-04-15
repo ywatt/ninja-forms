@@ -174,16 +174,17 @@ label.has-merge-tags {
     position: relative;
     z-index: 1000;
 }
-.merge-tag-focus::after {
-    content: '';
-    display: block;
-    position: fixed;
-    z-index: -1;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    background-color: rgba(0, 0, 0, .5);
+.merge-tag-focus-overlay {
+    &:before {
+        content: '';
+        position: fixed;
+        top: 0; right: 0; bottom: 0; left: 0;
+        background-color: rgba( 0, 0, 0, .5 );
+        z-index: 100;
+    }
+    &.note-editor:before { // Summernote RTE Support
+        z-index: 0;
+    }
 }
 
 #merge-tags-box.one-half--first {

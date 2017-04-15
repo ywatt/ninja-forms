@@ -5,10 +5,6 @@
  * @since 3.1
  */
 
-/*
- * TODO: Add back focus overlay.
- */
-
 define( [
     'models/app/mergeTagModel',
     'models/app/mergeTagLookupCollection',
@@ -277,6 +273,7 @@ define( [
 
             jQuery( '#merge-tags-box' ).css( 'display', 'none' );
             $input.removeClass( 'merge-tag-focus' );
+            $input.closest( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
             console.log( 'REMOVE CLASS' );
         },
 
@@ -401,6 +398,13 @@ define( [
                 jQuery('#merge-tags-box').show();
                 $this.addClass('merge-tag-focus');
 
+                var $overlayElement = $this.closest( '.nf-setting, .nf-table-row' );
+                if( 0 != $overlayElement.find( '.note-editor' ).length ){
+                    $overlayElement.find('.note-editor' ).addClass('merge-tag-focus-overlay');
+                } else {
+                    $overlayElement.addClass('merge-tag-focus-overlay');
+                }
+
                 var value = mergetags[0].replace( '{', '' );
                 nfRadio.channel( 'merge-tags' ).request( 'filtersearch', value );
 
@@ -409,6 +413,7 @@ define( [
                 jQuery( '#merge-tags-box' ).css( 'display', 'none' );
                 jQuery( '#merge-tags-box' ).removeClass();
                 jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
                 console.log( 'HIDE' );
             }
         }
