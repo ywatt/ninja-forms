@@ -144,8 +144,10 @@ label.has-merge-tags {
                 font-size: 14px;
                 margin: 0;
                 padding: 8px;
-                &:hover {
+                &.active, &:hover {
                     background: #DBDDDD;
+                }
+                &:hover {
                     color: #1EA9EA;
                 }
             }
@@ -192,4 +194,11 @@ label.has-merge-tags {
     width: 538px;
     right: 10px;
     left: auto;
+}
+
+.setting + .merge-tags {
+    color: rgba( 204, 204, 204, .3 );
+}
+.setting:focus + .merge-tags {
+    color: rgba( 204, 204, 204, 1 );
 }

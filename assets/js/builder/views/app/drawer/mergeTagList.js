@@ -23,6 +23,7 @@ define( [ 'views/app/drawer/mergeTag' ], function( mergeTagView ) {
                 return section == child.get( 'section' );
             }
             this.render();
+            nfRadio.channel( 'merge-tags' ).trigger( 'after:filtersearch' );
         },
 
         searchFilter: function( term ){
@@ -32,6 +33,8 @@ define( [ 'views/app/drawer/mergeTag' ], function( mergeTagView ) {
                 return label || tag;
             }
             this.render();
+            nfRadio.channel( 'merge-tags' ).trigger( 'after:filtersearch' );
+
         }
     });
 

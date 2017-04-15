@@ -34,9 +34,41 @@ define( [
         old: '', // THe old merge tag that will be replaced.
 
         initialize: function(){
+
             this.listenTo( nfRadio.channel( 'app' ), 'after:appStart', this.afterAppStart );
             this.listenTo( nfRadio.channel( 'app' ), 'before:renderSetting', this.beforeRenderSetting );
             this.listenTo( nfRadio.channel( 'drawer' ), 'before:close', this.beforeDrawerClose );
+            this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
+                jQuery( '.merge-tags' ).on( 'click', function( e ){
+                    console.log( 'CLICKED' );
+                    var $this = jQuery( this );
+                    if( $this.hasClass( 'merge-tag-focus' ) ){
+                        jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                        jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                        return;
+                    }
+                    var text = $this.closest( '.nf-setting' ).find( '.setting' ).val();
+                    if( undefined != text ) {
+                        $this.closest( '.nf-setting' ).find( '.setting' ).val( text + '{' ).change();
+                        nfRadio.channel('mergeTags').request('set:caret', text.length + 1 );
+                    } else {
+                        $this.closest( '.nf-setting' ).find( '.setting' ).val( '{' ).change();
+                        nfRadio.channel('mergeTags').request('set:caret', 1 );
+                    }
+
+                    nfRadio.channel('mergeTags').request('set:old', '{' );
+
+                    // $this.closest( '.nf-setting' ).find( '.setting' ).focus(); //.addClass( 'merge-tag-focus' );
+                    $this.closest( '.nf-setting' ).find( '.setting' ).addClass( 'merge-tag-focus' ); //.addClass( 'merge-tag-focus' );
+
+                    jQuery( '#merge-tags-box' ).show({
+                        complete: function(){
+                            console.log( 'SHOW!' );
+                            jQuery( '#merge-tags-box' ).find( '.merge-tag-filter' ).find( 'input' ).focus();
+                        }
+                    });
+                });
+            } );
 
             var that = this;
             nfRadio.channel( 'mergeTags' ).reply( 'set:caret', function( position ){

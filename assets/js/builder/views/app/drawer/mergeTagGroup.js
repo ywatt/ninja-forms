@@ -12,6 +12,10 @@ define( [], function() {
             "click": "onClick"
         },
 
+        initialize: function () {
+            this.listenTo( nfRadio.channel( 'merge-tags' ), 'after:filtersearch', this.removeActive );
+        },
+
         onClick: function(){
           this.updateTags();
           this.setActive();
@@ -24,6 +28,10 @@ define( [], function() {
         setActive: function(){
             this.$el.addClass( 'active' );
             this.$el.siblings().removeClass( 'active' );
+        },
+
+        removeActive: function(){
+            this.$el.removeClass( 'active' );
         }
     });
 

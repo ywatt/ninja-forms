@@ -1659,8 +1659,9 @@ label.has-merge-tags .merge-tags {
         font-size: 14px;
         margin: 0;
         padding: 8px; }
+        #merge-tags-box .merge-tag-sections ul li.active, #merge-tags-box .merge-tag-sections ul li:hover {
+          background: #DBDDDD; }
         #merge-tags-box .merge-tag-sections ul li:hover {
-          background: #DBDDDD;
           color: #1EA9EA; }
   #merge-tags-box .merge-tag-list {
     -ms-flex-positive: 1;
@@ -1696,6 +1697,12 @@ label.has-merge-tags .merge-tags {
   width: 538px;
   right: 10px;
   left: auto; }
+
+.setting + .merge-tags {
+  color: rgba(204, 204, 204, 0.3); }
+
+.setting:focus + .merge-tags {
+  color: #cccccc; }
 
 .note-popover {
   display: none !important; }
