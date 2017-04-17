@@ -1,16 +1,16 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Class NF_MergeTags_QueryStrings
+ * Class NF_MergeTags_Other
  */
-final class NF_MergeTags_QueryStrings extends NF_Abstracts_MergeTags
+final class NF_MergeTags_Other extends NF_Abstracts_MergeTags
 {
-    protected $id = 'querystrings';
+    protected $id = 'other';
 
     public function __construct()
     {
         parent::__construct();
-        $this->title = __( 'Query Strings', 'ninja-forms' );
+        $this->title = __( 'Other', 'ninja-forms' );
 
         $this->merge_tags = array(
             '' => array(
@@ -47,4 +47,4 @@ final class NF_MergeTags_QueryStrings extends NF_Abstracts_MergeTags
         );
     }
 
-} // END CLASS NF_MergeTags_Fields
+} // END CLASS NF_MergeTags_Other
