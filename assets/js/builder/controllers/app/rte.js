@@ -125,13 +125,13 @@ define( [], function() {
                         nfRadio.channel( 'summernote' ).trigger( 'blur', settingModel, dataModel, value );
 					},
                     onFocus: function( e, context ) {
-                        nfRadio.channel( 'summernote' ).trigger( 'focus', this, context );
+                        nfRadio.channel( 'summernote' ).trigger( 'focus', e, this, context );
                     },
                     onKeydown: function( e, context ) {
-                        nfRadio.channel( 'summernote' ).trigger( 'keydown', this, context );
+                        nfRadio.channel( 'summernote' ).trigger( 'keydown', e, this, context );
                     },
                     onKeyup: function( e, context ) {
-                        nfRadio.channel( 'summernote' ).trigger( 'keyup', this, context );
+                        nfRadio.channel( 'summernote' ).trigger( 'keyup', e, this, context );
 					}
 				}
 			} );

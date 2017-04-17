@@ -47,7 +47,7 @@
     {{{ data.label }}}
 </script>
 <script id="tmpl-nf-merge-tag-box-tag" type="text/template">
-    {{{ data.label }}} <small>{{{data.tag}}}</small>
+    <span data-tag="{{{data.tag}}}">{{{ data.label }}} <small>{{{data.tag}}}</small></span>
 </script>
 <script id="tmpl-nf-merge-tag-box-filter" type="text/template">
     <input type="text" placeholder="Search for merge tags" >

@@ -162,6 +162,17 @@ label.has-merge-tags {
                 line-height: 22px;
             }
         }
+        &:hover li { // Uses !important to override first-of-type selector.
+            &:hover {
+                color: #1EA9EA !important;
+            }
+            color: black !important;
+        }
+        li {
+            &:first-of-type {
+                color: #1EA9EA;
+            }
+        }
     }
 
     .merge-tag-filter {

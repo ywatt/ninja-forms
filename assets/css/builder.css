@@ -1669,6 +1669,12 @@ label.has-merge-tags .merge-tags {
     padding: 20px; }
     #merge-tags-box .merge-tag-list div div {
       line-height: 22px; }
+    #merge-tags-box .merge-tag-list:hover li {
+      color: black !important; }
+      #merge-tags-box .merge-tag-list:hover li:hover {
+        color: #1EA9EA !important; }
+    #merge-tags-box .merge-tag-list li:first-of-type {
+      color: #1EA9EA; }
   #merge-tags-box .merge-tag-filter {
     border-bottom: 2px solid #DBDDDD;
     margin: 3px 10px 10px 10px;
