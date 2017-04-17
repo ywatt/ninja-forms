@@ -169,6 +169,7 @@ label.has-merge-tags {
             color: black !important;
         }
         li {
+            cursor: pointer;
             &:first-of-type {
                 color: #1EA9EA;
             }

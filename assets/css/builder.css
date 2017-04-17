@@ -1673,8 +1673,10 @@ label.has-merge-tags .merge-tags {
       color: black !important; }
       #merge-tags-box .merge-tag-list:hover li:hover {
         color: #1EA9EA !important; }
-    #merge-tags-box .merge-tag-list li:first-of-type {
-      color: #1EA9EA; }
+    #merge-tags-box .merge-tag-list li {
+      cursor: pointer; }
+      #merge-tags-box .merge-tag-list li:first-of-type {
+        color: #1EA9EA; }
   #merge-tags-box .merge-tag-filter {
     border-bottom: 2px solid #DBDDDD;
     margin: 3px 10px 10px 10px;
