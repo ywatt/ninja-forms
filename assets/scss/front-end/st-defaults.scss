@@ -11,6 +11,10 @@
     box-sizing: border-box;
 }
 
+.nf-response-msg {
+    display: none;
+}
+
 .nf-field-container,
 #ninja_forms_required_items {
     clear: both;
