@@ -35,5 +35,10 @@ var nfRecaptcha = Marionette.Object.extend( {
 
 var nfRenderRecaptcha = function() {
 	new nfRecaptcha();
-    grecaptcha.execute();
+
+    try {
+        grecaptcha.execute();
+    } catch( e ){
+        console.log( 'Notice: Error trying to execute grecaptcha.' );
+    }
 }
