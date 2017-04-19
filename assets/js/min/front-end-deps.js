@@ -91,7 +91,7 @@ var nfRecaptcha = Marionette.Object.extend( {
 	renderCaptcha: function() {
 		jQuery( '.g-recaptcha' ).each( function() {
 			var opts = {
-                size: jQuery( this ).data( 'size' ),
+				size: jQuery( this ).data( 'size' ),
 				theme: jQuery( this ).data( 'theme' ),
 				sitekey: jQuery( this ).data( 'sitekey' ),
 				callback: nf_recaptcha_response
@@ -106,9 +106,9 @@ var nfRecaptcha = Marionette.Object.extend( {
 var nfRenderRecaptcha = function() {
 	new nfRecaptcha();
 
-    try {
-        grecaptcha.execute();
-    } catch( e ){
-        console.log( 'Notice: Error trying to execute grecaptcha.' );
-    }
+	try {
+		grecaptcha.execute();
+	} catch( e ){
+		console.log( 'Notice: Error trying to execute grecaptcha.' );
+	}
 }
