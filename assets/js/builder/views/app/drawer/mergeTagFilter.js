@@ -10,7 +10,22 @@ define( [], function() {
         events: {
             "keyup input": "updateFilter",
         },
-        updateFilter: function( e ) {
+        updateFilter: function( event ) {
+
+            if( /* ENTER */ 13 == event.keyCode ){ // Copied from Keyup Callback.
+                // Get top listed merge tag.
+                var firstFilteredTag = jQuery( '#merge-tags-box .merge-tag-list ul li span' ).first().data( 'tag' );
+
+                nfRadio.channel( 'mergeTags' ).request( 'insert:tag', firstFilteredTag );
+
+                // COPIED FROM BELOW
+                jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                jQuery( '#merge-tags-box' ).removeClass();
+                jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
+                console.log( 'HIDE' );
+                return;
+            }
             var value = this.$el.find( 'input' ).val();
             nfRadio.channel( 'merge-tags' ).request( 'filtersearch', value );
         }
