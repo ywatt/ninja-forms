@@ -59,6 +59,7 @@
         margin-bottom: 20px;
     }
     label {
+        position: relative;
         &::after {
             clear: both;
             content: "";
@@ -74,6 +75,13 @@
         display: block;
         font-size: 13px;
         text-transform: uppercase;
+        .open-media-manager {
+            position: absolute;
+            color: #ccc;
+            right: 15px;
+            top: 5px;
+            text-decoration: none;
+        }
     }
     input[type=text],
     input[type=number],
@@ -106,6 +114,12 @@
     }
 }
 .ninja-forms-app {
+    .jBox-wrapper.import-options {
+        padding: 12px 20px 0px !important;
+    }
+    .jBox-wrapper.import-options.jBox-pointerPosition-top.jBox-closeButton-box:before {
+        right: 10px;
+    }
     .nf-list-options {
         padding-bottom: 20px;
         .nf-add-new {
@@ -175,6 +189,21 @@
                         }
                     }
                 }
+            }
+        }
+    }
+    .options {
+        position: relative;
+        legend {
+            .nf-open-import-tooltip {
+                background: #EBEDEE;
+                color: $cta_color;
+                font-size: 16px;
+                padding: 6px 15px;
+                text-decoration: none;
+                position: absolute;
+                right: 15px;
+                top: 0;
             }
         }
     }

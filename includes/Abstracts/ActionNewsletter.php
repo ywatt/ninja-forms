@@ -110,7 +110,7 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
         $this->_settings[ $prefix . 'newsletter_list' ] = array(
             'name' => 'newsletter_list',
             'type' => 'select',
-            'label' => $labels[ 'list' ] . ' <a class=' . __( "js-newsletter-list-update extra", 'ninja-forms' ) . '><span class=' . __( "dashicons dashicons-update", 'ninja-forms' ) . '></span></a>',
+            'label' => $labels[ 'list' ] . ' <a class="js-newsletter-list-update extra"><span class="dashicons dashicons-update"></span></a>',
             'width' => 'full',
             'group' => 'primary',
             'value' => '0',
@@ -118,22 +118,26 @@ abstract class NF_Abstracts_ActionNewsletter extends NF_Abstracts_Action
         );
 
         $fields = array();
-        foreach( $lists as $list ){
+        foreach( $lists as $list ) {
             $this->_settings[ $prefix . 'newsletter_list' ][ 'options' ][] = $list;
 
-            foreach( $list[ 'fields' ] as $field ){
-                $name = $list[ 'value' ] . '_' . $field[ 'value' ];
-                $fields[] = array(
-                    'name' => $name,
-                    'type' => 'textbox',
-                    'label' => $field[ 'label' ],
-                    'width' => 'full',
-                    'use_merge_tags' => array(
-                        'exclude' => array(
-                            'user', 'post', 'system', 'querystrings'
+            //Check to see if list has fields array set.
+            if ( isset( $list[ 'fields' ] ) ) {
+
+                foreach ( $list[ 'fields' ] as $field ) {
+                    $name = $list[ 'value' ] . '_' . $field[ 'value' ];
+                    $fields[] = array(
+                        'name' => $name,
+                        'type' => 'textbox',
+                        'label' => $field[ 'label' ],
+                        'width' => 'full',
+                        'use_merge_tags' => array(
+                            'exclude' => array(
+                                'user', 'post', 'system', 'querystrings'
+                            )
                         )
-                    )
-                );
+                    );
+                }
             }
         }
 

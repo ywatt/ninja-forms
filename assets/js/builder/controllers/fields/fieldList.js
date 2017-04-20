@@ -11,16 +11,16 @@ define( [ 'models/app/optionRepeaterCollection' ], function( ListOptionCollectio
         initialize: function() {
             this.listenTo( nfRadio.channel( 'option-repeater-option-label' ), 'update:option', this.updateOptionLabel );
             this.listenTo( nfRadio.channel( 'option-repeater-option-value' ), 'update:option', this.updateOptionValue );
-        
+            
             /*
              * When we init our model, convert our options from an array of objects to a collection of models.
              */
             this.listenTo( nfRadio.channel( 'fields-list' ), 'init:fieldModel', this.convertOptions );
         },
 
-        updateOptionLabel: function( e, model, dataModel, settingModel ) {
+        updateOptionLabel: function( e, model, dataModel, settingModel, optionView ) {
 
-            if( 'list' != fieldTypeData[ dataModel.get( 'type' ) ].parentType ) return;
+            if( 'list' != _.findWhere( fieldTypeData, { id: dataModel.get( 'type' ) } ).parentType ) return;
 
             if( model.get( 'manual_value' ) ) return;
 
@@ -29,15 +29,18 @@ define( [ 'models/app/optionRepeaterCollection' ], function( ListOptionCollectio
             model.set( 'value', value );
             model.trigger( 'change', model );
 
-            // TODO: Set focus on value input
-            // jQuery( e.target ).closest( 'nf-table-row' ).find( '*[data-id="value"] ).focus();
+            // Set focus on value input
+            jQuery( optionView.el ).find( '[data-id="value"]' ).focus().select();
         },
 
-        updateOptionValue: function( e, model, dataModel, settingModel ) {
+        updateOptionValue: function( e, model, dataModel, settingModel, optionView ) {
 
-            if( 'list' != fieldTypeData[ dataModel.get( 'type' ) ].parentType ) return;
+            if( 'list' != _.findWhere( fieldTypeData, { id: dataModel.get( 'type' ) } ).parentType ) return;
 
             model.set( 'manual_value', true );
+            
+            // Set focus on calc input
+            jQuery( optionView.el ).find( '[data-id="calc"]' ).focus().select();
         },
 
         convertOptions: function( fieldModel ) {

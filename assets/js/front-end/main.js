@@ -1,3 +1,40 @@
+/*
+ * Because our backbone listens to .change() events on elements, changes made using jQuery .val() don't bubble properly.
+ * This patch overwrites the default behaviour of jQuery .val() so that IF the item has an nf-element class, we fire a change event.
+ */
+( function( jQuery ) {
+	/*
+	 * Store our original .val() function.
+	 */
+    var originalVal = jQuery.fn.val;
+    /*
+     * Create our own .val() function.
+     */
+    jQuery.fn.val = function(){
+        var prev;
+        /* 
+         * Store a copy of the results of the original .val() call.
+         * We use this to make sure that we've actually changed something.
+         */
+        if( arguments.length > 0 ){
+            prev = originalVal.apply( this,[] );
+        }
+        /*
+         * Get the results of the original .val() call. 
+         */
+        var result = originalVal.apply( this, arguments );
+
+        /*
+         * If we have arguments, we have actually made a change, AND this has the nf-element class, trigger .change().
+         */
+        if( arguments.length > 0 && prev != originalVal.apply( this, [] ) && jQuery( this ).hasClass( 'nf-element' ) ) {
+			jQuery(this).change();
+        }
+
+        return result;
+    };
+} ) ( jQuery );
+
 jQuery( document ).ready( function( $ ) {
 	require( [ 'models/formCollection', 'models/formModel', 'models/fieldCollection', 'controllers/loadControllers', 'views/mainLayout'], function( formCollection, FormModel, FieldCollection, LoadControllers, mainLayout ) {
 
@@ -29,6 +66,7 @@ jQuery( document ).ready( function( $ ) {
 				_.each( formCollection.models, function( form, index ) {
 					var layoutView = new mainLayout( { model: form, fieldCollection: form.get( 'fields' ) } );			
 					nfRadio.channel( 'form' ).trigger( 'render:view', layoutView );
+					jQuery( document ).trigger( 'nfFormReady', layoutView );
 				} );
 			},
 

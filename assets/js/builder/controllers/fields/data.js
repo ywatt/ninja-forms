@@ -63,17 +63,20 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 		 * Add a field to our collection. If silent is passed as true, no events will trigger.
 		 * 
 		 * @since 3.0
-		 * @param Object 	data 	field data to insert
-		 * @param bool 		silent 	prevent events from firing as a result of adding	 	
+		 * @param Object 	data 			field data to insert
+		 * @param bool 		silent 			prevent events from firing as a result of adding
+		 * @param bool  	renderTrigger	should this cause the view to re-render?
+		 * @param string  	action			action context - are we performing a higher level action? i.e. duplicate
 		 */
-		addField: function( data, silent, renderTrigger ) {
-			
+		addField: function( data, silent, renderTrigger, action ) {
+
 			/*
 			 * Set our fields 'adding' value to true. This enables our add field animation.
 			 */
 			nfRadio.channel( 'fields' ).request( 'set:adding', true );
 
 			silent = silent || false;
+			action = action || '';
 			renderTrigger = ( 'undefined' == typeof renderTrigger ) ? true : renderTrigger;
 
 			if ( false === data instanceof Backbone.Model ) {
@@ -84,6 +87,8 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			} else {
 				var model = data;
 			}
+
+			// console.log( model );
 
 			/*
 			 * TODO: Add an nfRadio message filter for the model variable.
@@ -103,7 +108,7 @@ define( ['models/fields/fieldCollection', 'models/fields/fieldModel'], function(
 			nfRadio.channel( 'app' ).request( 'update:setting', 'clean', false );
 			nfRadio.channel( 'fields' ).trigger( 'add:field', model );
 			if ( renderTrigger ) {
-				nfRadio.channel( 'fields' ).trigger( 'render:newField', newModel );
+				nfRadio.channel( 'fields' ).trigger( 'render:newField', newModel, action );
 			}
 			nfRadio.channel( 'fields' ).trigger( 'after:addField', model );
 			

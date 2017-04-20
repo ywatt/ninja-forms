@@ -96,7 +96,8 @@ define(['models/calcCollection'], function( CalcCollection ) {
 				
 				fields = fields.map( function( field ) {
 					// field will be {field:key}
-					var key = field.replace( '}', '' ).replace( '{field:', '' );
+					var key = field.replace( ':calc}', '' ).replace( '}', '' ).replace( '{field:', '' );
+
 					// Get our field model
 					fieldModel = nfRadio.channel( 'form-' + calcModel.get( 'formID' ) ).request( 'get:fieldByKey', key );
 
@@ -211,9 +212,17 @@ define(['models/calcCollection'], function( CalcCollection ) {
 		 */
 		replaceKey: function( type, key, calcValue, eq ) {
 			eq = eq || calcModel.get( 'eq' );
-			key = '{' + type + ':' + key + '}';
-			var re = new RegExp( key, 'g' );
-			return eq.replace( re, calcValue );
+
+			tag = '{' + type + ':' + key + '}';
+			var reTag = new RegExp( tag, 'g' );
+
+			calcTag = '{' + type + ':' + key + ':calc}';
+			var reCalcTag = new RegExp( calcTag, 'g' );
+
+			eq = eq.replace( reTag, calcValue );
+			eq = eq.replace( reCalcTag, calcValue );
+
+			return eq;
 		},
 
 		/**
@@ -266,16 +275,15 @@ define(['models/calcCollection'], function( CalcCollection ) {
 
 		initDisplayField: function( fieldModel ) {
 
-			if( ! fieldModel.get( 'default' ) ) return;
+			if( ! fieldModel.get( 'default' ) || 'string' != typeof fieldModel.get( 'default' ) ) return;
 
 			var calcs = fieldModel.get( 'default' ).match( new RegExp( /{calc:(.*?)}/g ) );
 			if ( calcs ) {
-				var that = this;
 				_.each( calcs, function( calcName ) {
-					calcName = calcName.replace( '{calc:', '' ).replace( '}', '' );
-					that.displayFields[ calcName ] = that.displayFields[ calcName ] || [];
-					that.displayFields[ calcName ].push( fieldModel );
-				} );
+					calcName = calcName.replace( '{calc:', '' ).replace( '}', '' ).replace( ':2', '' );
+					this.displayFields[ calcName ] = this.displayFields[ calcName ] || [];
+					this.displayFields[ calcName ].push( fieldModel );
+				}, this );
 			}
 		},
 
@@ -286,11 +294,27 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					var value = fieldModel.get( 'default' );
 					var calcs = value.match( new RegExp( /{calc:(.*?)}/g ) );
 					_.each( calcs, function( calc ) {
-						// calc will be {calc:key}
+						var rounding = false;
+						// calc will be {calc:key} or {calc:key:2}
 						var name = calc.replace( '}', '' ).replace( '{calc:', '' );
+
+						/*
+						 * TODO: Bandaid for rounding calculations to two decimal places when displaying the merge tag.
+						 * Checks to see if we have a :2. If we do, remove it and set our rounding variable to true.
+						 */
+						if ( -1 != name.indexOf( ':2' ) ) {
+							rounding = true;
+							name = name.replace( ':2', '' );
+						}
+
 						var calcModel = that.calcs[ fieldModel.get( 'formID' ) ].findWhere( { name: name } );
 						var re = new RegExp( calc, 'g' );
-						value = value.replace( re, calcModel.get( 'value' ) );
+						var calcValue = calcModel.get( 'value' ) ;
+						if ( rounding ) {
+							calcValue = calcValue.toFixed( 2 );
+							rounding = false;
+						}
+						value = value.replace( re, calcValue );
 					} );
 					fieldModel.set( 'value', value );
 					if ( ! that.init[ calcModel.get( 'name' ) ] ) {
@@ -308,6 +332,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 
 		changeCalc: function( calcModel, targetCalcModel ) {
 			var eqValues = this.replaceAllKeys( calcModel );
+			eqValues = eqValues.replace( '[', '' ).replace( ']', '' );
 			calcModel.set( 'value', math.eval( eqValues ) );
 		}
 	});

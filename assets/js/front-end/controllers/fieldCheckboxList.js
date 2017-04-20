@@ -52,7 +52,7 @@ define([], function() {
                 option.classes = this.classes;
                 option.index = index;
 
-                if( option.selected && this.clean ){
+                if( ( option.selected && "0" != option.selected ) && this.clean ){
                     option.isSelected = true;
                 } else {
                     var testValues = _.map( this.value, function( value ) {
@@ -118,7 +118,7 @@ define([], function() {
             if ( typeof selected == 'string' ) selected = [ selected ];
 
             var value = jQuery( el ).val();
-            var checked = jQuery( el ).attr( 'checked' );
+            var checked = jQuery( el ).prop( 'checked' );
             if ( checked ) {
                 selected.push( value );
                 jQuery( el ).addClass( 'nf-checked' );

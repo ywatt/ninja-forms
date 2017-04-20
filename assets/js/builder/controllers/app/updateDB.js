@@ -152,6 +152,11 @@ define( [], function() {
 				    }
 				}
 
+				for( var setting in settings ){
+					if( null === settings[ setting ] ) {
+						delete settings[setting];
+					}
+				}
 
 				// Update our field object.
 				field.settings = settings;
