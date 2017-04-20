@@ -23,7 +23,6 @@ define( [], function() {
                 jQuery( '#merge-tags-box' ).removeClass();
                 jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
                 jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
-                console.log( 'HIDE' );
                 return;
             }
             var value = this.$el.find( 'input' ).val();

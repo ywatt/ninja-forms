@@ -36,7 +36,6 @@ define( [
             this.listenTo( nfRadio.channel( 'drawer' ), 'before:close', this.beforeDrawerClose );
             this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
                 jQuery( '.merge-tags' ).on( 'click', function( e ){
-                    console.log( 'CLICKED' );
                     var $this = jQuery( this );
                     if( $this.siblings().hasClass( 'merge-tag-focus' ) ){
                         jQuery( '#merge-tags-box' ).css( 'display', 'none' );
@@ -103,9 +102,7 @@ define( [
                 that.focusCallback( false, selector );
             } );
             this.listenTo( nfRadio.channel( 'summernote' ), 'keydown', function( e, selector ){
-                console.log( e );
                 jQuery( selector ).closest( '.nf-setting' ).find( '.setting' ).summernote( 'saveRange' );
-                console.log( jQuery( selector ).closest('.nf-setting' ).find( '.note-editable' ).data( 'range' ) );
             } );
             this.listenTo( nfRadio.channel( 'summernote' ), 'keyup', function( e, selector ){
                 that.keyupCallback( e, selector );
@@ -207,8 +204,6 @@ define( [
 
             if( 1 < $input.length ){ $input = $input.first(); }
 
-            console.log( $input );
-
             if( $input.hasClass( 'note-editable' ) ){
                 var str = $input.closest( '.nf-setting' ).find( '.setting' ).summernote( 'code' );
             } else {
@@ -218,11 +213,6 @@ define( [
             var find = nfRadio.channel( 'mergeTags' ).request( 'get:old' );
             var replace = tag;
             var caretPos = nfRadio.channel( 'mergeTags' ).request( 'get:caret' );
-
-            console.log( str );
-            console.log( find );
-            console.log( replace );
-            console.log( caretPos );
 
             var patt = /{([a-z0-9]|:|_|})*/g;
 
@@ -237,31 +227,18 @@ define( [
 
                     // Reposition the caret. http://stackoverflow.com/a/6249440 TODO: Determine the appropriate childNode.
                     var el = $input;
-                    console.log( $input );
                     var childNode = null; // Default to first childNode.
                     _.each( el[0].childNodes, function( node, index ){
                         if( childNode ) return;
-                        // console.log( index );
-                        // console.log( node );
-                        // console.log( typeof node );
-                        // console.log(  );
-                        // console.log( caretPos );
-                        // console.log( caretPos + '  |  ' + node.indexOf( find ) );
-                        console.log( node );
-                        console.log( node.nodeValue );
                         if( ! node.nodeValue && ! node.innerHTML ) return;
                         if( node.nodeValue ) {
                             var position = node.nodeValue.indexOf(replace) + find.length;
                         } else if( node.innerHTML ){
                             var position = node.innerHTML.indexOf(replace) + find.length;
                         }
-                        console.log( position );
                         if( caretPos == position ) childNode = el[0].childNodes[index];
-                        console.log( index );
                     });
                     if( ! childNode ) childNode = el[0].childNodes[0];
-                    console.log( childNode );
-                    console.log( childNode.childNodes );
                     var offset = caretPos - find.length + replace.length;
                     var range = document.createRange();
                     var sel = window.getSelection();
@@ -286,15 +263,9 @@ define( [
             jQuery( '#merge-tags-box' ).css( 'display', 'none' );
             $input.removeClass( 'merge-tag-focus' );
             $input.closest( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
-            console.log( 'REMOVE CLASS' );
         },
 
         focusCallback: function( e, target ){
-
-            // jQuery( '.merge-tag-focus' ).each(function(index, el){ el.removeClass( 'merge-tag-focus' ); }); // Copied from onFocus.
-            // jQuery( summernote ).closest( '.nf-setting' ).find( '.note-editable' ).addClass( 'merge-tag-focus' );
-
-            console.log( this );
 
             jQuery( '.merge-tag-focus' ).each(function(index, el){
                 if( this == el ) return;
@@ -302,7 +273,6 @@ define( [
             });
 
             if( 'undefined' != typeof target ) {
-                console.log( jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ) );
                 var posY = jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ).offset().top - jQuery(window).scrollTop();
                 var height = jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ).outerHeight();
             } else {
@@ -312,22 +282,16 @@ define( [
             jQuery( '#merge-tags-box' ).css( 'top', posY + height );
 
             var repeaterRow = jQuery( this ).closest( '.nf-list-options-tbody' );
-            if( 0 != repeaterRow.length )
-            {
-                console.log( 'CALC!' );
+            if( 0 != repeaterRow.length ) {
                 var left = repeaterRow.offset().left - jQuery(window).scrollLeft();
                 jQuery( '#merge-tags-box' ).css( 'left', left );
-            }
-            else if( 'undefined' != typeof target )
-            {
-                console.log( 'RTE' );
+            } else if( 'undefined' != typeof target ) {
                 var posX = jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ).offset().left - jQuery(window).scrollLeft();
                 jQuery( '#merge-tags-box' ).css( 'left', posX );
                 jQuery( '#merge-tags-box' ).css( 'width', jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ).width() );
             }
             else
             {
-                console.log( 'INPUT!' );
                 var posX = jQuery( this ).closest( '.nf-settings' ).offset().left - jQuery(window).scrollLeft();
                 jQuery( '#merge-tags-box' ).css( 'left', posX );
                 jQuery( '#merge-tags-box' ).css( 'width', jQuery( this ).closest( '.nf-settings' ).width() );
@@ -343,9 +307,6 @@ define( [
 
         keyupCallback: function( event, target ){
 
-            console.log( 'KEYUP' );
-            console.log( event.keyCode );
-
             if( /* ENTER */ 13 == event.keyCode ){
 
                 // Get top listed merge tag.
@@ -358,7 +319,6 @@ define( [
                 jQuery( '#merge-tags-box' ).removeClass();
                 jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
                 jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
-                console.log( 'HIDE' );
 
                 return;
             }
@@ -374,11 +334,8 @@ define( [
                 var $this = jQuery( this );
             }
 
-            // Disable Browser Autocomplete
+            // TODO: Disable Browser Autocomplete
             // $this.attr()
-
-            console.log( this );
-            console.log( jQuery( this ) );
 
 
             var dataID = jQuery( this ).data( 'id' );
@@ -387,32 +344,22 @@ define( [
             // Store the current caret position.
             if( 'undefined' != typeof target ){
                 var range = $this.summernote('createRange');
-                console.log( range );
                 if( range ) {
                     var caretPos = range.so; // or .eo?
                 } else {
                     var caretPos = 0;
                 }
-                // $this.closest( '.nf-setting' ).find( '.note-editable.panel-body' ).data( 'range', range );
-                // console.log( $this.closest( '.nf-setting' ) );
-                // console.log( $this.closest( '.nf-setting' ).find( '.note-editable.panel-body' ) );
-                // console.log( caretPos );
                 $this.closest( '.nf-setting' ).find( '.setting' ).summernote( 'saveRange' );
             } else {
                 var caretPos = $this.caret();
             }
             nfRadio.channel( 'mergeTags' ).request( 'set:caret', caretPos );
-            console.log( nfRadio.channel( 'mergeTags' ).request( 'get:caret' ) );
-
-            console.log( $this.val() );
 
             // Find merge tags.
             if( 'undefined' == typeof target ) {
                 var mergetags = $this.val().match(new RegExp(/{([a-z0-9]|:|_|})*/g));
             } else {
-                console.log( $this.summernote( 'code' ) );
                 var mergetags = $this.summernote( 'code' ).match(new RegExp(/{([a-z0-9]|:|_|})*/g));
-                console.log( mergetags );
             }
 
             // Filter out closed merge tags.
@@ -442,14 +389,11 @@ define( [
 
                 var value = mergetags[0].replace( '{', '' );
                 nfRadio.channel( 'merge-tags' ).request( 'filtersearch', value );
-
-                console.log( 'SHOW' );
             } else {
                 jQuery( '#merge-tags-box' ).css( 'display', 'none' );
                 jQuery( '#merge-tags-box' ).removeClass();
                 jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
                 jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
-                console.log( 'HIDE' );
             }
         }
 
