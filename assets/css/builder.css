@@ -322,7 +322,7 @@ Form field placeholders for the fields a user has added to their form
     .nf-item-controls .nf-item-control.nf-item-edit {
       opacity: 100;
       visibility: visible;
-      z-index: 100; }
+      z-index: auto; }
   .nf-item-controls:hover a {
     background: #1EA9EA;
     color: #fff; }
@@ -425,7 +425,7 @@ All styles used within the drawer
   bottom: 0;
   right: -1400px;
   overflow: hidden;
-  z-index: 101;
+  z-index: auto;
   transition: width 0.75s ease;
   -webkit-overflow-scrolling: touch; }
   #nf-drawer.nf-drawer-expand {
@@ -1224,6 +1224,7 @@ All styles used for displaying table content
     .ninja-forms-app table .deactivated td a {
       color: #ddd; }
   .ninja-forms-app table input[type=checkbox].nf-toggle + label {
+    z-index: 0;
     margin: 2px 0 0; }
   .ninja-forms-app table .active td {
     color: #84CC1E;
