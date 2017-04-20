@@ -327,8 +327,6 @@ define( [
 
         keyupCallback: function( event, target ){
 
-            console.log( event.keyCode );
-
             if( /* ENTER */ 13 == event.keyCode ){
 
                 // Get top listed merge tag.
