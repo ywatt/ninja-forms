@@ -39,6 +39,7 @@ define( [
                     var $this = jQuery( this );
                     if( $this.siblings().hasClass( 'merge-tag-focus' ) ){
                         jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                        nfRadio.channel( 'drawer' ).request( 'enable:close' );
                         jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
                         jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
                         return;
@@ -70,6 +71,7 @@ define( [
                     }
 
                     jQuery( '#merge-tags-box' ).css( 'display', 'block' );
+                    nfRadio.channel( 'drawer' ).request( 'prevent:close' );
                     setTimeout(function(){
                         jQuery( '#merge-tags-box' ).find( '.merge-tag-filter' ).find( 'input' ).focus();
                     }, 500 );
@@ -107,6 +109,18 @@ define( [
             this.listenTo( nfRadio.channel( 'summernote' ), 'keyup', function( e, selector ){
                 that.keyupCallback( e, selector );
             } );
+
+            jQuery( document ).on( 'keyup', function( event ){
+               if( 27 == event.keyCode ){
+                   // Copied from KeyupCallback.
+                   jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                   nfRadio.channel( 'drawer' ).request( 'enable:close' );
+                   jQuery( '#merge-tags-box' ).removeClass();
+                   jQuery( '.merge-tag-focus' ).blur();
+                   jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                   jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
+               }
+            });
         },
 
         afterAppStart: function() {
@@ -190,6 +204,7 @@ define( [
         // TODO: Maybe move to view class.
         beforeDrawerClose: function(){
             jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+            nfRadio.channel( 'drawer' ).request( 'enable:close' );
             // jQuery( 'body' ).append( jQuery( '#merge-tags-box' ) );
             nfRadio.channel( 'mergeTags' ).trigger( 'open' );
         },
@@ -261,6 +276,7 @@ define( [
             }
 
             jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+            nfRadio.channel( 'drawer' ).request( 'enable:close' );
             $input.removeClass( 'merge-tag-focus' );
             $input.closest( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
         },
@@ -307,6 +323,8 @@ define( [
 
         keyupCallback: function( event, target ){
 
+            console.log( event.keyCode );
+
             if( /* ENTER */ 13 == event.keyCode ){
 
                 // Get top listed merge tag.
@@ -316,6 +334,7 @@ define( [
 
                 // COPIED FROM BELOW
                 jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                nfRadio.channel( 'drawer' ).request( 'enable:close' );
                 jQuery( '#merge-tags-box' ).removeClass();
                 jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
                 jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
@@ -373,6 +392,7 @@ define( [
                 nfRadio.channel( 'mergeTags' ).request( 'set:old', mergetags[0] );
 
                 jQuery('#merge-tags-box').css( 'display', 'block' );
+                nfRadio.channel( 'drawer' ).request( 'prevent:close' );
                 $this.addClass('merge-tag-focus');
 
                 // Disable browser autocomplete.
@@ -390,6 +410,7 @@ define( [
                 $overlayElement.on( 'click', function( event ){
                     if( -1 !== jQuery( event.target ).attr( 'class' ).indexOf( 'merge-tag-focus-overlay' ) ){
                         jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                        nfRadio.channel( 'drawer' ).request( 'enable:close' );
                         jQuery( '#merge-tags-box' ).removeClass();
                         jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
                         jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
@@ -400,6 +421,7 @@ define( [
                 nfRadio.channel( 'merge-tags' ).request( 'filtersearch', value );
             } else {
                 jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                nfRadio.channel( 'drawer' ).request( 'enable:close' );
                 jQuery( '#merge-tags-box' ).removeClass();
                 jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
                 jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
