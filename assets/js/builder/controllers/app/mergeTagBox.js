@@ -53,6 +53,10 @@ define( [
                         nfRadio.channel('mergeTags').request('set:caret', 1 );
                     }
 
+                    if( $this.parent().hasClass( 'note-tools' ) ){
+                        $this.closest( '.nf-setting' ).find( '.setting' ).summernote( 'insertText', '{' );
+                    }
+
                     nfRadio.channel('mergeTags').request('set:old', '{' );
 
                     // $this.closest( '.nf-setting' ).find( '.setting' ).focus(); //.addClass( 'merge-tag-focus' );
