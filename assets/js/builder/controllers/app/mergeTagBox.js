@@ -387,6 +387,15 @@ define( [
                     $overlayElement.addClass('merge-tag-focus-overlay');
                 }
 
+                $overlayElement.on( 'click', function( event ){
+                    if( -1 !== jQuery( event.target ).attr( 'class' ).indexOf( 'merge-tag-focus-overlay' ) ){
+                        jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                        jQuery( '#merge-tags-box' ).removeClass();
+                        jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                        jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
+                    }
+                });
+
                 var value = mergetags[0].replace( '{', '' );
                 nfRadio.channel( 'merge-tags' ).request( 'filtersearch', value );
             } else {
