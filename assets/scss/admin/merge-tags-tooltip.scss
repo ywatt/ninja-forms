@@ -128,24 +128,40 @@ label.has-merge-tags {
     .merge-tag-list {
         float: left;
         font-size: 14px;
-        background-color: #f9f9f9;
+        background-color: #fff;
         height: 300px;
         overflow-y: auto;
     }
 
     .merge-tag-sections {
-        background-color: #f9f9f9;
-        border-right: 2px solid #DBDDDD;
+        background-color: #DBDDDD;
         ul {
             margin: 0;
             li {
-                border-bottom: 1px solid #DBDDDD;
+                background: #DBDDDD;
+                border-bottom: 1px solid #fff;
                 cursor: pointer;
                 font-size: 14px;
                 margin: 0;
-                padding: 8px;
-                &.active, &:hover {
-                    background: #DBDDDD;
+                padding: 8px 26px 8px 16px;
+                &:hover {
+                    background: #f6f6f6;
+                }
+                &.active {
+                    position: relative;
+                }
+                &.active::after {
+                    clear: both;
+                    content: "";
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    border-top: 17px solid transparent;
+                    border-bottom: 17px solid transparent;
+                    border-right: 24px solid #fff;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
                 }
                 &:hover {
                     color: #1EA9EA;
@@ -156,7 +172,7 @@ label.has-merge-tags {
 
     .merge-tag-list {
         flex-grow: 1;
-        padding: 20px;
+        padding-top: 10px;
         div {
             div {
                 line-height: 22px;
@@ -168,8 +184,19 @@ label.has-merge-tags {
             }
             color: black !important;
         }
+        ul {
+            margin: 0;
+        }
         li {
             cursor: pointer;
+            margin-bottom: 0;
+            span {
+                padding: 4px 16px;
+                display: block;
+                small {
+                    font-family: "Courier New", Courier, monospace, sans-serif;
+                }
+            }
             &:first-of-type {
                 color: #1EA9EA;
             }

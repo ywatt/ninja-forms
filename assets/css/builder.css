@@ -1657,36 +1657,58 @@ label.has-merge-tags .merge-tags {
   #merge-tags-box .merge-tag-list {
     float: left;
     font-size: 14px;
-    background-color: #f9f9f9;
+    background-color: #fff;
     height: 300px;
     overflow-y: auto; }
   #merge-tags-box .merge-tag-sections {
-    background-color: #f9f9f9;
-    border-right: 2px solid #DBDDDD; }
+    background-color: #DBDDDD; }
     #merge-tags-box .merge-tag-sections ul {
       margin: 0; }
       #merge-tags-box .merge-tag-sections ul li {
-        border-bottom: 1px solid #DBDDDD;
+        background: #DBDDDD;
+        border-bottom: 1px solid #fff;
         cursor: pointer;
         font-size: 14px;
         margin: 0;
-        padding: 8px; }
-        #merge-tags-box .merge-tag-sections ul li.active, #merge-tags-box .merge-tag-sections ul li:hover {
-          background: #DBDDDD; }
+        padding: 8px 26px 8px 16px; }
+        #merge-tags-box .merge-tag-sections ul li:hover {
+          background: #f6f6f6; }
+        #merge-tags-box .merge-tag-sections ul li.active {
+          position: relative; }
+        #merge-tags-box .merge-tag-sections ul li.active::after {
+          clear: both;
+          content: "";
+          display: block;
+          width: 0;
+          height: 0;
+          border-top: 17px solid transparent;
+          border-bottom: 17px solid transparent;
+          border-right: 24px solid #fff;
+          position: absolute;
+          top: 0;
+          right: 0; }
         #merge-tags-box .merge-tag-sections ul li:hover {
           color: #1EA9EA; }
   #merge-tags-box .merge-tag-list {
     -ms-flex-positive: 1;
         flex-grow: 1;
-    padding: 20px; }
+    padding-top: 10px; }
     #merge-tags-box .merge-tag-list div div {
       line-height: 22px; }
     #merge-tags-box .merge-tag-list:hover li {
       color: black !important; }
       #merge-tags-box .merge-tag-list:hover li:hover {
         color: #1EA9EA !important; }
+    #merge-tags-box .merge-tag-list ul {
+      margin: 0; }
     #merge-tags-box .merge-tag-list li {
-      cursor: pointer; }
+      cursor: pointer;
+      margin-bottom: 0; }
+      #merge-tags-box .merge-tag-list li span {
+        padding: 4px 16px;
+        display: block; }
+        #merge-tags-box .merge-tag-list li span small {
+          font-family: "Courier New", Courier, monospace, sans-serif; }
       #merge-tags-box .merge-tag-list li:first-of-type {
         color: #1EA9EA; }
   #merge-tags-box .merge-tag-filter {
