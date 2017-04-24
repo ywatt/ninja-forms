@@ -35,6 +35,7 @@ final class NF_Database_FieldsController
         if( ! empty( $update_fields_query ) ){
             $this->db->query( $update_fields_query );
         }
+
         /* FIELD META */
         $this->parse_field_meta();
         $this->run_insert_field_meta_query();

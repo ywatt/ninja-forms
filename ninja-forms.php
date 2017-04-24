@@ -254,6 +254,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 new NF_Admin_CPT_Submission();
                 new NF_Admin_CPT_DownloadAllSubmissions();
                 require_once Ninja_Forms::$dir . 'lib/StepProcessing/menu.php';
+                
+                /*
+                 * Submission Metabox
+                 */
+                new NF_Admin_Metaboxes_Calculations();
 
                 /*
                  * Logger
@@ -265,6 +270,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 self::$instance->merge_tags[ 'user' ] = new NF_MergeTags_User();
                 self::$instance->merge_tags[ 'post' ] = new NF_MergeTags_Post();
+                self::$instance->merge_tags[ 'post_meta' ] = new NF_MergeTags_PostMeta();
                 self::$instance->merge_tags[ 'system' ] = new NF_MergeTags_System();
                 self::$instance->merge_tags[ 'fields' ] = new NF_MergeTags_Fields();
                 self::$instance->merge_tags[ 'calcs' ] = new NF_MergeTags_Calcs();

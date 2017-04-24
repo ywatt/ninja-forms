@@ -1,0 +1,73 @@
+/*
+Notices
+---------------------------------------------*/
+/* This section intentionally left blank. */
+/*
+Sections
+---------------------------------------------*/
+.widget {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: white; }
+
+/* This section intentionally left blank. */
+/* This section intentionally left blank. */
+/*
+Widgets
+---------------------------------------------*/
+th {
+  font-weight: bold; }
+
+.widget-forms header {
+  display: -ms-flexbox;
+  display: flex; }
+  .widget-forms header div {
+    -ms-flex: 1;
+        flex: 1; }
+
+.widget-forms .action,
+.widget-forms .action2 {
+  display: -ms-flexbox;
+  display: flex; }
+
+#wpwrap,
+#wpcontent {
+  background-color: #F3F6F8; }
+
+#wpcontent {
+  padding: 0; }
+  #wpcontent .wrap {
+    margin: 0; }
+
+#ninja-forms-dashboard {
+  box-sizing: border-box; }
+  #ninja-forms-dashboard .topbar,
+  #ninja-forms-dashboard .sections,
+  #ninja-forms-dashboard .content {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: white; }
+  #ninja-forms-dashboard header {
+    background-color: white; }
+    #ninja-forms-dashboard header .app-title {
+      width: 600px;
+      max-width: 100%;
+      margin: auto;
+      padding: 10px; }
+  #ninja-forms-dashboard nav {
+    width: 600px;
+    max-width: 100%;
+    margin: auto;
+    margin-bottom: 20px; }
+    #ninja-forms-dashboard nav ul {
+      display: -ms-flexbox;
+      display: flex; }
+      #ninja-forms-dashboard nav ul li {
+        cursor: pointer;
+        padding-right: 15px; }
+  #ninja-forms-dashboard main {
+    width: 600px;
+    max-width: 100%;
+    margin: auto; }
+
+/*# sourceMappingURL=dashboard.min.css.map */

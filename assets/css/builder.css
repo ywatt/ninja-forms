@@ -802,6 +802,8 @@ All styles used within the drawer
     padding: 20px 5px 5px; }
     .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row.nf-table-header div:nth-child(1), .ninja-forms-app .nf-list-options .nf-div-table .nf-table-row.nf-table-header div:nth-child(6) {
       padding: 0 25px; }
+  .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-header div:nth-child(4) {
+    display: none; }
   .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div {
     vertical-align: top;
     position: relative; }
@@ -815,7 +817,8 @@ All styles used within the drawer
       width: 70%; }
     .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div textarea {
       margin: 0;
-      height: 100px; }
+      height: 100px;
+      padding-right: 40px; }
     .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div .merge-tags {
       color: #999;
       position: absolute;
@@ -824,6 +827,22 @@ All styles used within the drawer
     .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row div .dashicons {
       color: #999;
       margin-top: 10px; }
+  .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row .calc-left div {
+    display: inline-block; }
+    .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row .calc-left div:nth-child(1) {
+      width: 100%;
+      padding: 0px; }
+    .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row .calc-left div:nth-child(2) {
+      width: 60%;
+      text-align: right;
+      font-size: 12px;
+      float: left;
+      padding-top: 20px;
+      padding-right: 10px; }
+    .ninja-forms-app .nf-list-options.calculations .nf-div-table .nf-table-row .calc-left div:nth-child(3) {
+      width: 50px;
+      float: left;
+      padding-top: 10px; }
 
 .ninja-forms-app .options {
   position: relative; }
@@ -983,12 +1002,10 @@ All styles used within the drawer
     text-indent: -99999px; }
 
 .nf-action-items.available .nf-item.nf-has-img {
-  -webkit-filter: grayscale(100%);
-          filter: grayscale(100%);
+  filter: grayscale(100%);
   opacity: 0.6; }
   .nf-action-items.available .nf-item.nf-has-img:hover {
-    -webkit-filter: grayscale(0);
-            filter: grayscale(0);
+    filter: grayscale(0);
     opacity: 1.0; }
 
 .nf-field-type-button {

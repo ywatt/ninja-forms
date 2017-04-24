@@ -107,7 +107,7 @@ define([], function() {
             if ( 0 != options.length ) {
                 _.each( fieldModel.get( 'value' ), function( val ) {
                     var tmp_opt = _.find( options, function( opt ) { return opt.value == val } );
-                    calc_value = math.add( calc_value, tmp_opt.calc );
+                    calc_value = Number( calc_value ) + Number( tmp_opt.calc );
                 } );
             }
             return calc_value;

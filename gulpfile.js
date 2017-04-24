@@ -103,7 +103,7 @@ gulp.task('js:frontend', function(){
     gulp.src([
         'assets/js/lib/backbone.marionette.min.js',
         'assets/js/lib/backbone.radio.min.js',
-        'assets/js/lib/math.min.js',
+        'assets/js/lib/math-expression-evaluator.min.js',
         'assets/js/min/global.js',
     ])
     .pipe(concat('front-end-deps.js'))
