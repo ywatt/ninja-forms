@@ -29,6 +29,7 @@
             }
         }
         input[type=checkbox].nf-toggle + label {
+            z-index: 0; // Set to fix a bug with the merge tag box overlay with RTEs.
             margin: 2px 0 0;
             // &::after {
             //     border-radius: 20px;

@@ -18,7 +18,9 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 			this.columns = data.columns;
 			this.parentView = data.parentView;
 			this.model.on( 'change:errors', this.renderErrors, this );
-			this.model.on( 'change', this.render, this );
+
+			// Removed because the re-render was breaking tag insertion for merge tags.
+			// this.model.on( 'change', this.render, this );
 
 			if ( 'undefined' != typeof this.settingModel.get( 'tmpl_row' ) ) {
 				this.template = '#' + this.settingModel.get( 'tmpl_row' );

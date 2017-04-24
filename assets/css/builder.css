@@ -322,7 +322,7 @@ Form field placeholders for the fields a user has added to their form
     .nf-item-controls .nf-item-control.nf-item-edit {
       opacity: 100;
       visibility: visible;
-      z-index: 100; }
+      z-index: auto; }
   .nf-item-controls:hover a {
     background: #1EA9EA;
     color: #fff; }
@@ -425,7 +425,7 @@ All styles used within the drawer
   bottom: 0;
   right: -1400px;
   overflow: hidden;
-  z-index: 101;
+  z-index: auto;
   transition: width 0.75s ease;
   -webkit-overflow-scrolling: touch; }
   #nf-drawer.nf-drawer-expand {
@@ -983,10 +983,12 @@ All styles used within the drawer
     text-indent: -99999px; }
 
 .nf-action-items.available .nf-item.nf-has-img {
-  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
   opacity: 0.6; }
   .nf-action-items.available .nf-item.nf-has-img:hover {
-    filter: grayscale(0);
+    -webkit-filter: grayscale(0);
+            filter: grayscale(0);
     opacity: 1.0; }
 
 .nf-field-type-button {
@@ -1224,6 +1226,7 @@ All styles used for displaying table content
     .ninja-forms-app table .deactivated td a {
       color: #ddd; }
   .ninja-forms-app table input[type=checkbox].nf-toggle + label {
+    z-index: 0;
     margin: 2px 0 0; }
   .ninja-forms-app table .active td {
     color: #84CC1E;
@@ -1634,6 +1637,98 @@ label.has-merge-tags .merge-tags {
   width: 28px;
   height: 28px;
   background: #1EA9EA; }
+
+/* MERGE TAG BOX STYLES */
+#merge-tags-box {
+  display: none;
+  background-color: #DBDDDD;
+  max-height: 360px;
+  z-index: 1001;
+  position: absolute;
+  top: -1px;
+  left: 12px;
+  right: 10px; }
+  #merge-tags-box .merge-tag-container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+        justify-content: space-between; }
+  #merge-tags-box .merge-tag-sections,
+  #merge-tags-box .merge-tag-list {
+    float: left;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    height: 300px;
+    overflow-y: auto; }
+  #merge-tags-box .merge-tag-sections {
+    background-color: #f9f9f9;
+    border-right: 2px solid #DBDDDD; }
+    #merge-tags-box .merge-tag-sections ul {
+      margin: 0; }
+      #merge-tags-box .merge-tag-sections ul li {
+        border-bottom: 1px solid #DBDDDD;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 0;
+        padding: 8px; }
+        #merge-tags-box .merge-tag-sections ul li.active, #merge-tags-box .merge-tag-sections ul li:hover {
+          background: #DBDDDD; }
+        #merge-tags-box .merge-tag-sections ul li:hover {
+          color: #1EA9EA; }
+  #merge-tags-box .merge-tag-list {
+    -ms-flex-positive: 1;
+        flex-grow: 1;
+    padding: 20px; }
+    #merge-tags-box .merge-tag-list div div {
+      line-height: 22px; }
+    #merge-tags-box .merge-tag-list:hover li {
+      color: black !important; }
+      #merge-tags-box .merge-tag-list:hover li:hover {
+        color: #1EA9EA !important; }
+    #merge-tags-box .merge-tag-list li {
+      cursor: pointer; }
+      #merge-tags-box .merge-tag-list li:first-of-type {
+        color: #1EA9EA; }
+  #merge-tags-box .merge-tag-filter {
+    border-bottom: 2px solid #DBDDDD;
+    margin: 3px 10px 10px 10px;
+    clear: both; }
+
+.merge-tag-focus {
+  position: relative;
+  z-index: 1000; }
+
+.merge-tag-focus-overlay:before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100; }
+
+.merge-tag-focus-overlay.note-editor:before {
+  z-index: 0; }
+
+#merge-tags-box.one-half--first {
+  width: 538px;
+  left: 12px; }
+
+#merge-tags-box.one-half--second {
+  width: 538px;
+  right: 10px;
+  left: auto; }
+
+.setting + .merge-tags {
+  color: rgba(204, 204, 204, 0.3); }
+
+.setting:focus + .merge-tags,
+.merge-tag-focus-overlay .merge-tags {
+  color: #cccccc; }
+
+.merge-tag-focus-overlay .merge-tags {
+  z-index: 1000; }
 
 .note-popover {
   display: none !important; }

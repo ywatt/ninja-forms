@@ -63,7 +63,8 @@ define( [
 			this.settingModel = {};
 			this.open = false;
 
-			nfRadio.channel( 'mergeTags' ).reply( 'init', this.initMergeTags, this );
+			// Unhook jBox Merge Tag stuff.
+			// nfRadio.channel( 'mergeTags' ).reply( 'init', this.initMergeTags, this );
 
 			this.listenTo( nfRadio.channel( 'mergeTags' ), 'click:mergeTag', this.clickMergeTag );
 			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.addFieldTags );
