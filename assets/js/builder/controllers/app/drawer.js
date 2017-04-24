@@ -263,7 +263,7 @@ define( [], function() {
         	 /*
         	 * When we remove all of our disables preventing closing the drawer, remove the disable class.
         	 */
-        	if ( ! this.maybePreventClose() ) {
+        	if ( ! this.maybePreventClose() && 'undefined' != typeof this.dataModel ) {
 	        	// Get our current drawer.
 				this.dataModel.set( 'drawerDisabled', false );        		
         	}
