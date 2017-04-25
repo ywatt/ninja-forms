@@ -187,6 +187,9 @@ define( [
                 }
                 jQuery( '#merge-tags-box' ).css( 'top', posY + height );
 
+                var boxHeight = jQuery( '#merge-tags-box' ).outerHeight();
+                jQuery( '#nf-drawer' ).css( 'padding-bottom', boxHeight + 'px' );
+
                 var repeaterRow = jQuery( '.merge-tag-focus' ).closest( '.nf-list-options-tbody' );
                 if( 0 != repeaterRow.length ){
                     var left = repeaterRow.offset().left - jQuery(window).scrollLeft();
@@ -397,6 +400,9 @@ define( [
                 jQuery('#merge-tags-box').css( 'display', 'block' );
                 nfRadio.channel( 'drawer' ).request( 'prevent:close' );
                 $this.addClass('merge-tag-focus');
+
+                var boxHeight = jQuery( '#merge-tags-box' ).outerHeight();
+                jQuery( '#nf-drawer' ).css( 'padding-bottom', boxHeight + 'px' );
 
                 // Disable browser autocomplete.
                 var autocomplete = $this.attr( 'autocomplete' );
