@@ -38,6 +38,7 @@ define( [
                 jQuery( '.merge-tags' ).on( 'click', function( e ){
                     var $this = jQuery( this );
                     if( $this.siblings().hasClass( 'merge-tag-focus' ) ){
+                        nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
                         jQuery( '#merge-tags-box' ).css( 'display', 'none' );
                         nfRadio.channel( 'drawer' ).request( 'enable:close' );
                         jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
@@ -411,6 +412,7 @@ define( [
 
                 $overlayElement.on( 'click', function( event ){
                     if( -1 !== jQuery( event.target ).attr( 'class' ).indexOf( 'merge-tag-focus-overlay' ) ){
+                        nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
                         jQuery( '#merge-tags-box' ).css( 'display', 'none' );
                         nfRadio.channel( 'drawer' ).request( 'enable:close' );
                         jQuery( '#merge-tags-box' ).removeClass();
