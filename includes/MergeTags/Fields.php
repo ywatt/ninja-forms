@@ -13,26 +13,13 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
         parent::__construct();
         $this->title = __( 'Fields', 'ninja-forms' );
         $this->merge_tags = Ninja_Forms()->config( 'MergeTagsFields' );
-        
-        add_action( 'admin_init', array( $this, 'load_deprecated_merge_tags' ) );
+
+        if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+            $this->merge_tags = array_merge( $this->merge_tags, Ninja_Forms()->config( 'MergeTagsFieldsAJAX' ) );
+        }
 
         add_filter( 'ninja_forms_calc_setting', array( $this, 'pre_parse_calc_settings' ), 9 );
         //add_filter( 'ninja_forms_calc_setting',  array( $this, 'calc_replace' ) );
-    }
-
-    public function load_deprecated_merge_tags()
-    {
-        /*
-         * Only load during Form Submission, ie Doing AJAX.
-         */
-        if( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) return;
-        $this->merge_tags[ 'all_fields' ] = array(
-            'id' => 'all_fields',
-            'tag' => '{field:all_fields}',
-            'label' => __( 'All Fields', 'ninja_forms' ),
-            'callback' => 'all_fields',
-            'fields' => array()
-        );
     }
 
     public function __call($name, $arguments)
