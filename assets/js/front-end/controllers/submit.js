@@ -64,7 +64,7 @@ define([], function() {
 				 * Make sure we don't have any form errors before we submit.
 				 * Return false if we do.
 				 */
-				if ( 0 != _.size( formModel.get( 'fieldErrors' ) ) ) {
+				if ( 0 != _.size( formModel.get( 'errors' ) ) ) {
 					nfRadio.channel( 'forms' ).trigger( 'submit:failed', formModel );
 					nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:failed', formModel );
 					return false;
