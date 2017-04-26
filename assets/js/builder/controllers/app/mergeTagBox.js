@@ -46,13 +46,10 @@ define( [
                         return;
                     }
                     var text = $this.closest( '.nf-setting' ).find( '.setting' ).val();
-                    if( undefined != text ) {
-                        $this.closest( '.nf-setting' ).find( '.setting' ).val( text + '{' ).change();
-                        nfRadio.channel('mergeTags').request('set:caret', text.length + 1 );
-                    } else {
-                        $this.closest( '.nf-setting' ).find( '.setting' ).val( '{' ).change();
-                        nfRadio.channel('mergeTags').request('set:caret', 1 );
-                    }
+                    text = text || '';
+                    
+                    $this.closest( '.nf-setting' ).find( '.setting' ).val( text + '{' ).change().keyup();
+                    nfRadio.channel('mergeTags').request('set:caret', text.length + 1 );
 
                     if( $this.parent().hasClass( 'note-tools' ) ){
                         $this.closest( '.nf-setting' ).find( '.setting' ).summernote( 'insertText', '{' );
@@ -116,15 +113,16 @@ define( [
             } );
 
             jQuery( document ).on( 'keyup', function( event ){
-               if( 27 == event.keyCode ){
-                   // Copied from KeyupCallback.
-                   jQuery( '#merge-tags-box' ).css( 'display', 'none' );
-                   nfRadio.channel( 'drawer' ).request( 'enable:close' );
-                   jQuery( '#merge-tags-box' ).removeClass();
-                   jQuery( '.merge-tag-focus' ).blur();
-                   jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
-                   jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
-               }
+                if( 27 == event.keyCode ){
+                    nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
+                    // Copied from KeyupCallback.
+                    jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                    nfRadio.channel( 'drawer' ).request( 'enable:close' );
+                    jQuery( '#merge-tags-box' ).removeClass();
+                    jQuery( '.merge-tag-focus' ).blur();
+                    jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                    jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
+                }
             });
         },
 
