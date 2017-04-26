@@ -242,7 +242,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
          * ninja_forms_submission_actions
          * ninja_forms_submission_actions_preview
          */
-        $this->_form_cache[ 'actions' ] = apply_filters( 'ninja_forms_submission_actions', $this->_form_cache[ 'actions' ], $this->_form_cache );
+        $this->_form_cache[ 'actions' ] = apply_filters( 'ninja_forms_submission_actions', $this->_form_cache[ 'actions' ], $this->_form_cache, $this->_form_data );
         if( $this->is_preview() ) {
             $this->_form_cache['actions'] = apply_filters('ninja_forms_submission_actions_preview', $this->_form_cache['actions'], $this->_form_cache);
         }
