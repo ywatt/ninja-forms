@@ -184,7 +184,7 @@ final class NF_Database_FieldsController
         $this->db->escape_by_ref( $key );
         $this->db->escape_by_ref( $value );
 
-        if( ! isset( $this->insert_field_meta[ insert_field_meta_chunk ] ) || ! $this->insert_field_meta[ $this->insert_field_meta_chunk ] ) {
+        if( ! isset( $this->insert_field_meta[ $this->insert_field_meta_chunk ] ) || ! $this->insert_field_meta[ $this->insert_field_meta_chunk ] ) {
             $this->insert_field_meta[ $this->insert_field_meta_chunk ] = '';
         }
         $this->insert_field_meta[ $this->insert_field_meta_chunk ] .= "('{$field_id}','{$key}','{$value}' ),";
