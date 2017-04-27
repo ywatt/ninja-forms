@@ -48,7 +48,7 @@ define( [
                     var text = $this.closest( '.nf-setting' ).find( '.setting' ).val();
                     text = text || '';
                     
-                    $this.closest( '.nf-setting' ).find( '.setting' ).val( text + '{' ).change().keyup();
+                    $this.closest( '.nf-setting' ).find( '.setting' ).val( text + '{' ).change();
                     nfRadio.channel('mergeTags').request('set:caret', text.length + 1 );
 
                     if( $this.parent().hasClass( 'note-tools' ) ){
@@ -264,9 +264,19 @@ define( [
                     var range = document.createRange();
                     var sel = window.getSelection();
                     if( 0 != childNode.childNodes.length ) {
-                        range.setStart(childNode.childNodes[0], offset);
+                        try{
+                           range.setStart(childNode.childNodes[0], offset); 
+                        } catch( err ) {
+                            console.log( 'error' );
+                        }
+                        
                     } else {
-                        range.setStart(childNode, offset);
+                        try {
+                            range.setStart(childNode, offset);
+                        } catch( err ) {
+                            console.log( 'error' );
+                        }
+                        
                     }
                     range.collapse(true);
                     sel.removeAllRanges();

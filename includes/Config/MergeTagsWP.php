@@ -75,7 +75,7 @@ return apply_filters( 'ninja_forms_merge_tags_wp', array(
 
     'post_meta' => array(
         'id' => 'post_meta',
-        'tag' => '{wp:post_meta:YOUR_META_KEY}',
+        'tag' => '{post_meta:YOUR_META_KEY}',
         'label' => __( 'Post Meta', 'ninja_forms' ),
         'callback' => null
     ),

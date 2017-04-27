@@ -32,45 +32,6 @@ final class NF_MergeTags_Deprecated extends NF_Abstracts_MergeTags
         $this->setup_post_meta( $this->post_id() );
     }
 
-    public function replace( $subject )
-    {
-
-        /*
-         * If we are dealing with a post meta merge tag, we need to overwrite the parent replace() method.
-         *
-         * Otherwise, we use the parent's method.
-         */
-        
-        /**
-         * {post_meta:foo} --> meta key is 'foo'
-         */
-        preg_match_all("/{post_meta:(.*?)}/", $subject, $matches );
-
-        // If not matching merge tags are found, then return early.
-        if( empty( $matches[0] ) ) return parent::replace( $subject );
-
-
-        // Recursively replace merge tags.
-        if( is_array( $subject ) ){
-            foreach( $subject as $i => $s ){
-                $subject[ $i ] = $this->replace( $s );
-            }
-            return $subject;
-        }
-
-        /**
-         * $matches[0][$i]  merge tag match     {post_meta:foo}
-         * $matches[1][$i]  captured meta key   foo
-         */
-        foreach( $matches[0] as $i => $search ){
-            $meta_key = $matches[ 1 ][ $i ];
-            if( ! isset( $this->post_meta[ $meta_key ] ) ) continue;
-            $subject = str_replace( $search, $this->post_meta[ $meta_key ], $subject );
-        }
-
-        return $subject;
-    }
-
     protected function post_id()
     {
         global $post;

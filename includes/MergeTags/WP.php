@@ -45,7 +45,7 @@ final class NF_MergeTags_WP extends NF_Abstracts_MergeTags
         /**
          * {post_meta:foo} --> meta key is 'foo'
          */
-        preg_match_all("/{wp:post_meta:(.*?)}/", $subject, $matches );
+        preg_match_all("/{post_meta:(.*?)}/", $subject, $matches );
 
         // If not matching merge tags are found, then return early.
         if( empty( $matches[0] ) ) return parent::replace( $subject );

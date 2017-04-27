@@ -508,6 +508,13 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         );
 
         foreach( Ninja_Forms()->merge_tags as $key => $group ){
+            /*
+             * If the merge tag group doesn't have a title, don't localise it.
+             * 
+             * This convention is used to allow merge tags to continue to function,
+             * even though they can't be added to new forms.
+             */
+            if ( empty( $group->get_title() ) ) continue;
 
             $merge_tags[ $key ] = array(
                 'id'    => $group->get_id(),
