@@ -174,6 +174,13 @@ final class NF_MergeTags_WP extends NF_Abstracts_MergeTags
 
         return ( $current_user ) ? $current_user->user_email : '';
     }
+
+    protected function user_url()
+    {
+        $current_user = wp_get_current_user();
+
+        return ( $current_user ) ? $current_user->user_url : '';
+    }
     
     protected function admin_email()
     {
