@@ -11,14 +11,7 @@ final class NF_MergeTags_Other extends NF_Abstracts_MergeTags
     {
         parent::__construct();
         $this->title = __( 'Other', 'ninja-forms' );
-
-        $this->merge_tags = array(
-            '' => array(
-                'tag' => '{query_string_key}',
-                'label' => __( 'Query String', 'ninja_forms' ),
-                'callback' => null,
-            ),
-        );
+        $this->merge_tags = Ninja_Forms()->config( 'MergeTagsOther' );
 
         add_action( 'init', array( $this, 'init' ) );
     }
@@ -64,5 +57,31 @@ final class NF_MergeTags_Other extends NF_Abstracts_MergeTags
             'value' => $value
         );
     }
+
+    protected function system_date()
+    {
+        $format = Ninja_Forms()->get_setting( 'date_format' );
+        if ( empty( $format ) ) {
+            $format = 'Y/m/d';
+        }
+        return date( $format, time() );
+    }
+
+    protected function user_ip()
+    {
+        $ip = '127.0.0.1';
+        if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+            //check ip from share internet
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+            //to check ip is pass from proxy
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } elseif( ! empty( $_SERVER['REMOTE_ADDR'] ) ) {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        return apply_filters( 'ninja_forms-get_ip', apply_filters( 'nf_get_ip', $ip ) );
+    }
+
 
 } // END CLASS NF_MergeTags_Other

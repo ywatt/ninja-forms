@@ -268,14 +268,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 /*
                  * Merge Tags
                  */
-                self::$instance->merge_tags[ 'user' ] = new NF_MergeTags_User();
-                self::$instance->merge_tags[ 'post' ] = new NF_MergeTags_Post();
-                self::$instance->merge_tags[ 'post_meta' ] = new NF_MergeTags_PostMeta();
-                self::$instance->merge_tags[ 'system' ] = new NF_MergeTags_System();
+                self::$instance->merge_tags[ 'wp' ] = new NF_MergeTags_WP();
                 self::$instance->merge_tags[ 'fields' ] = new NF_MergeTags_Fields();
                 self::$instance->merge_tags[ 'calcs' ] = new NF_MergeTags_Calcs();
                 self::$instance->merge_tags[ 'form' ] = new NF_MergeTags_Form();
                 self::$instance->merge_tags[ 'other' ] = new NF_MergeTags_Other();
+                self::$instance->merge_tags[ 'deprecated' ] = new NF_MergeTags_Deprecated();
 
                 /*
                  * Add Form Modal
