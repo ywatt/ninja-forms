@@ -74,6 +74,18 @@ define( [
 
                     jQuery( '#merge-tags-box' ).css( 'display', 'block' );
                     nfRadio.channel( 'drawer' ).request( 'prevent:close' );
+
+                    jQuery( '.merge-tag-focus-overlay' ).on( 'click', function( e ) {
+                        if ( jQuery( e.target ).hasClass( 'note-editor' ) ) {
+                            nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
+                            jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                            nfRadio.channel( 'drawer' ).request( 'enable:close' );
+                            jQuery( '#merge-tags-box' ).removeClass();
+                            jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                            jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
+                        }
+                    } );
+
                     setTimeout(function(){
                         jQuery( '#merge-tags-box' ).find( '.merge-tag-filter' ).find( 'input' ).focus();
                     }, 500 );
@@ -425,7 +437,8 @@ define( [
                 }
 
                 $overlayElement.on( 'click', function( event ){
-                    if( -1 !== jQuery( event.target ).attr( 'class' ).indexOf( 'merge-tag-focus-overlay' ) ){
+                    var elementClasses = jQuery( event.target ).attr( 'class' ) || [];
+                    if( -1 !== elementClasses.indexOf( 'merge-tag-focus-overlay' ) ){
                         nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
                         jQuery( '#merge-tags-box' ).css( 'display', 'none' );
                         nfRadio.channel( 'drawer' ).request( 'enable:close' );
