@@ -314,7 +314,9 @@ define(['models/calcCollection'], function( CalcCollection ) {
 //							calcValue = calcValue.toFixed( 2 );
 //							rounding = false;
 //						}
-                        calcValue = that.applyLocaleFormatting( calcValue );
+                        if( 'undefined' != typeof( calcValue ) ) {
+                            calcValue = that.applyLocaleFormatting( calcValue );
+                        }
 						value = value.replace( re, calcValue );
 					} );
 					fieldModel.set( 'value', value );
