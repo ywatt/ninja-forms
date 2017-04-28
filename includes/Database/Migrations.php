@@ -71,6 +71,30 @@ class NF_Database_Migrations
 
         /* Delete background processing flags */
         $wpdb->query( "DELETE FROM `{$wpdb->options}` WHERE `option_name` LIKE 'wp_nf_update_fields_%'" );
+    }
+
+    public function nuke_deprecated(  $areYouSure = FALSE, $areYouReallySure = FALSE  )
+    {
+        if( ! $areYouSure || ! $areYouReallySure ) return;
+
+        global $wpdb;
+
+        if( ! function_exists( 'is_multisite' ) || ! is_multisite() ){
+            $this->_nuke_deprecated();
+        }
+
+        $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
+
+        foreach( $blog_ids as $blog_id ){
+            switch_to_blog( $blog_id );
+            $this->_nuke_deprecated();
+            restore_current_blog(); // Call after EVERY switch_to_blog().
+        }
+    }
+
+    public function _nuke_deprecated()
+    {
+        global $wpdb;
 
         /* Drop Deprecated Tables (v2.9.x) */
         $wpdb->query( "DROP TABLE `{$wpdb->prefix}nf_objectmeta`" );
