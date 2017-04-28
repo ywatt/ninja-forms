@@ -29,8 +29,9 @@ define( [], function() {
         },
 
         templateContext: function() {
+            var model = this.model;
             return {
-                created_at: moment( this.created_at ).format( 'MM/DD/YY h:mm A' )
+                created_at: moment( model.get( 'created_at' ) ).format( 'MM/DD/YY h:mm A' )
             }
         }
     } );
