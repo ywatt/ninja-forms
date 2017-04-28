@@ -29,34 +29,42 @@
 
     <div class="nf-extend nf-box">
 
-        <img src="<?php echo $item['image']; ?>" />
+        <div class="nf-box-inside">
 
-        <h2><?php echo $item['title']; ?></h2>
+            <img src="<?php echo $item['image']; ?>" />
 
-        <div class="nf-extend-content">
+            <h2><?php echo $item['title']; ?></h2>
 
-            <p><?php echo $item['content']; ?></p>
+            <div class="nf-extend-content">
 
-            <div class="nf-extend-buttons">
+                <p><?php echo $item['content']; ?></p>
 
-                <?php if( ! empty( $item['docs'] ) ): ?>
+                <div class="nf-extend-buttons">
 
-                <a href="<?php echo $item['docs']; ?>" class="nf-button secondary nf-doc-button"><?php _e( 'Docs', 'ninja-forms' ); ?></a>
-                <?php else: ?>
+                    <?php if( ! empty( $item['docs'] ) ): ?>
 
-                <p><a><?php _e( 'Documentation coming soon.', 'ninja-forms' ); ?></a></p>
+                    <a href="<?php echo $item['docs']; ?>" class="nf-button secondary nf-doc-button"><?php _e( 'Docs', 'ninja-forms' ); ?></a>
+                    <?php else: ?>
 
-                <?php endif; ?>
+                    <p><a><?php _e( 'Documentation coming soon.', 'ninja-forms' ); ?></a></p>
 
-                <?php if( ! empty( $item['plugin'] ) && file_exists( WP_PLUGIN_DIR.'/'.$item['plugin'] ) ): ?>
+                    <?php endif; ?>
 
-                    <?php if( is_plugin_active( $item['plugin'] ) ): ?>
+                    <?php if( ! empty( $item['plugin'] ) && file_exists( WP_PLUGIN_DIR.'/'.$item['plugin'] ) ): ?>
 
-                    <span class="secondary nf-button"><?php _e( 'Active', 'ninja-forms' ); ?></span>
+                        <?php if( is_plugin_active( $item['plugin'] ) ): ?>
 
-                    <?php elseif( is_plugin_inactive( $item['plugin'] ) ): ?>
+                        <span class="secondary nf-button"><?php _e( 'Active', 'ninja-forms' ); ?></span>
 
-                    <span class="secondary nf-button"><?php _e( 'Installed', 'ninja-forms' ); ?></span>
+                        <?php elseif( is_plugin_inactive( $item['plugin'] ) ): ?>
+
+                        <span class="secondary nf-button"><?php _e( 'Installed', 'ninja-forms' ); ?></span>
+
+                        <?php else: ?>
+
+                        <a href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
+
+                        <?php endif; ?>
 
                     <?php else: ?>
 
@@ -64,11 +72,7 @@
 
                     <?php endif; ?>
 
-                <?php else: ?>
-
-                <a href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
-
-                <?php endif; ?>
+                </div>
 
             </div>
 
