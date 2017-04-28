@@ -17,19 +17,19 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
         },
 
         events: {
-            'click .widgets': function(e){
+            'click .widgets a': function(e){
                 this.showChildView( 'content', new WidgetView() );
                 jQuery( '.' + this.currentView).find( 'a' ).removeClass( 'active' );
                 e.target.classList.add( 'active' );
                 this.currentView = 'widgets';
             },
-            'click .apps': function(e){
+            'click .apps a': function(e){
                 this.showChildView( 'content', new AppsView() );
                 jQuery( '.' + this.currentView).find( 'a' ).removeClass( 'active' );
                 e.target.classList.add( 'active' );
                 this.currentView = 'apps';
             },
-            'click .memberships': function(e){
+            'click .memberships a': function(e){
                 this.showChildView( 'content', new MembershipsView() );
                 jQuery( '.' + this.currentView).find( 'a' ).removeClass( 'active' );
                 e.target.classList.add( 'active' );
