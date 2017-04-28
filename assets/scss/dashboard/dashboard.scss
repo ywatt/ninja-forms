@@ -30,6 +30,11 @@ a {
   }
 }
 
+/** Hide anything that isn't our page wrap, ie Admin Notices */
+#wpbody-content > div:not(.wrap) {
+  display: none;
+}
+
 @mixin wrap {
   width: 100%;
   max-width: 50rem;

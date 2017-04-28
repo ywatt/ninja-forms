@@ -20,6 +20,9 @@ a {
   #wpcontent .wrap {
     margin: 0; }
 
+#wpbody-content > div:not(.wrap) {
+  display: none; }
+
 #ninja-forms-dashboard {
   box-sizing: border-box; }
   #ninja-forms-dashboard .nf-widget {
