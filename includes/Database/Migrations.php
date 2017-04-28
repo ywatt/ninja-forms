@@ -57,7 +57,30 @@ class NF_Database_Migrations
         $wpdb->query( "DELETE FROM `{$wpdb->options}` WHERE `option_name` LIKE 'nf_form_%'" );
         $wpdb->query( "DELETE FROM `{$wpdb->options}` WHERE `option_name` LIKE '_transient_nf_form_%'" );
         $wpdb->query( "DELETE FROM `{$wpdb->options}` WHERE `option_name` LIKE '_transient_timeout_nf_form_%'" );
+    }
 
+    public function nuke_settings( $areYouSure = FALSE, $areYouReallySure = FALSE )
+    {
+        if( ! $areYouSure || ! $areYouReallySure ) return;
+
+        global $wpdb;
+
+        if( ! function_exists( 'is_multisite' ) || ! is_multisite() ){
+            $this->_nuke_settings();
+        }
+
+        $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
+
+        foreach( $blog_ids as $blog_id ){
+            switch_to_blog( $blog_id );
+            $this->_nuke_settings();
+            restore_current_blog(); // Call after EVERY switch_to_blog().
+        }
+    }
+
+    private function _nuke_settings()
+    {
+        global $wpdb;
         /* Delete known options */
         delete_option( 'nf_admin_notice' );
         delete_option( 'ninja_forms_settings' );
@@ -92,7 +115,7 @@ class NF_Database_Migrations
         }
     }
 
-    public function _nuke_deprecated()
+    private function _nuke_deprecated()
     {
         global $wpdb;
 
