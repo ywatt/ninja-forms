@@ -1,5 +1,5 @@
 <div class="wrap apps-container">
-
+<!--
     <?php foreach ($notices as $notice): ?>
 
         <div class="nf-addon-notice">
@@ -9,7 +9,7 @@
         </div>
 
     <?php endforeach; ?>
-
+-->
     <?php
     $u_id = get_option( 'nf_aff', false );
     if ( !$u_id ) $u_id = apply_filters( 'ninja_forms_affiliate_id', false );
