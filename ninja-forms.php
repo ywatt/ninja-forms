@@ -200,7 +200,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  * Admin Menus
                  */
                 self::$instance->menus[ 'forms' ]           = new NF_Admin_Menus_Forms();
-                self::$instance->menus[ 'all-forms' ]       = new NF_Admin_Menus_AllForms();
+                self::$instance->menus[ 'dashboard' ]       = new NF_Admin_Menus_Dashboard();
                 self::$instance->menus[ 'add-new' ]         = new NF_Admin_Menus_AddNew();
                 self::$instance->menus[ 'submissions']      = new NF_Admin_Menus_Submissions();
                 self::$instance->menus[ 'import-export']    = new NF_Admin_Menus_ImportExport();
@@ -218,6 +218,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 self::$instance->controllers[ 'preview' ]     = new NF_AJAX_Controllers_Preview();
                 self::$instance->controllers[ 'submission' ]  = new NF_AJAX_Controllers_Submission();
                 self::$instance->controllers[ 'savedfields' ] = new NF_AJAX_Controllers_SavedFields();
+
+                /*
+                 * REST Controllers
+                 */
+                self::$instance->controllers[ 'REST' ][ 'forms' ] = new NF_AJAX_REST_Forms();
+                self::$instance->controllers[ 'REST' ][ 'new-form-templates' ] = new NF_AJAX_REST_NewFormTemplates();
 
                 /*
                  * Async Requests

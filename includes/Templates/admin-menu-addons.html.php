@@ -1,6 +1,4 @@
-<div class="wrap">
-
-    <h1><?php _e( 'Add-Ons', 'ninja-forms' ); ?></h1>
+<div class="wrap apps-container">
 
     <?php foreach ($notices as $notice): ?>
 
@@ -14,7 +12,7 @@
 
     <?php
     $u_id = get_option( 'nf_aff', false );
-    if ( !$u_id ) $u_id = apply_filters( 'ninja_forms_affiliate_id', false ); 
+    if ( !$u_id ) $u_id = apply_filters( 'ninja_forms_affiliate_id', false );
     ?>
 
     <?php foreach ($items as $item): ?>
@@ -25,7 +23,7 @@
             $last_slash = strripos( $link, '/' );
             $link = substr( $link, 0, $last_slash );
             $link =  urlencode( $link );
-            $link = 'http://www.shareasale.com/r.cfm?u=' . $u_id . '&b=812237&m=63061&afftrack=&urllink=' . $link;            
+            $link = 'http://www.shareasale.com/r.cfm?u=' . $u_id . '&b=812237&m=63061&afftrack=&urllink=' . $link;
         }
     ?>
 
@@ -43,7 +41,7 @@
 
                 <?php if( ! empty( $item['docs'] ) ): ?>
 
-                <a href="<?php echo $item['docs']; ?>" class="button-secondary nf-doc-button"><?php _e( 'Documentation', 'ninja-forms' ); ?></a>
+                <a href="<?php echo $item['docs']; ?>" class="nf-button secondary nf-doc-button"><?php _e( 'Docs', 'ninja-forms' ); ?></a>
                 <?php else: ?>
 
                 <p><a><?php _e( 'Documentation coming soon.', 'ninja-forms' ); ?></a></p>
@@ -54,21 +52,21 @@
 
                     <?php if( is_plugin_active( $item['plugin'] ) ): ?>
 
-                    <span class="button-secondary nf-button"><?php _e( 'Active', 'ninja-forms' ); ?></span>
+                    <span class="secondary nf-button"><?php _e( 'Active', 'ninja-forms' ); ?></span>
 
                     <?php elseif( is_plugin_inactive( $item['plugin'] ) ): ?>
 
-                    <span class="button-secondary nf-button"><?php _e( 'Installed', 'ninja-forms' ); ?></span>
+                    <span class="secondary nf-button"><?php _e( 'Installed', 'ninja-forms' ); ?></span>
 
                     <?php else: ?>
 
-                    <a href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="button-primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
+                    <a href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
 
                     <?php endif; ?>
 
                 <?php else: ?>
 
-                <a href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="button-primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
+                <a href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
 
                 <?php endif; ?>
 

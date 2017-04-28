@@ -110,6 +110,27 @@ gulp.task('js:frontend', function(){
     .pipe(gulp.dest('assets/js/min/'));
 });
 
+gulp.task('js:dashboard', function(){
+    gulp.src('client/dashboard/**/*.js')
+        .pipe(sourcemaps.init())
+        .pipe(requirejsOptimize(function(file) {
+            return {
+                name: '../../assets/js/lib/almond', // Path to AlmondJS, relative to baseUrl.
+                optimize: 'uglify2',
+                wrap: true,
+                baseUrl: 'client/dashboard',
+                include: ['main'],
+                preserveLicenseComments: false
+            };
+        }))
+        .pipe(rename('dashboard.min.js'))
+        .pipe(sourcemaps.write('/'))
+        .pipe(gulp.dest('assets/js/min'));
+    gulp.src('node_modules/backbone.marionette/lib/backbone.marionette.min.js')
+        .pipe(rename('backbone.marionette3.min.js'))
+        .pipe(gulp.dest('assets/js/lib/'))
+});
+
 gulp.task('css:builder', function(){
     gulp.src('assets/scss/admin/builder.scss')
     .pipe(sourcemaps.init())
@@ -155,6 +176,16 @@ gulp.task('css:display-opinions-dark', function(){
     .pipe(gulp.dest('assets/css'));
 });
 
+gulp.task('css:dashboard', function(){
+    gulp.src('assets/scss/dashboard/dashboard.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss(getPostCssProcessors()))
+        .pipe(rename('dashboard.min.css'))
+        .pipe(sourcemaps.write('/'))
+        .pipe(gulp.dest('assets/css'));
+});
+
 gulp.task('gettext', function() {
     gulp.src('lang/*.po')
     .pipe(gettext())
@@ -165,12 +196,20 @@ gulp.task('gettext', function() {
 gulp.task('watch', function() {
     gulp.watch('assets/js/builder/**/*.js', ['js:builder']);
     gulp.watch('assets/js/front-end/**/*.js', ['js:frontend']);
+    gulp.watch('client/dashboard/**/*.js', ['js:dashboard']);
 
     gulp.watch('assets/scss/**/*.scss', ['css']);
 });
 
-gulp.task('js', ['js:builder', 'js:frontend']);
-gulp.task('css', [ 'css:builder', 'css:display-structure', 'css:display-opinions', 'css:display-opinions-light', 'css:display-opinions-dark']);
+gulp.task( 'watch:dashboard', function(){
+    gulp.watch('client/dashboard/**/*.js', ['js:dashboard']);
+    gulp.watch('assets/scss/dashboard/**/*.scss', ['css']);
+});
+
+gulp.task('dashboard', ['js:dashboard', 'css:dashboard', 'watch:dashboard']);
+
+gulp.task('js', ['js:builder', 'js:frontend', 'js:dashboard']);
+gulp.task('css', [ 'css:builder', 'css:display-structure', 'css:display-opinions', 'css:display-opinions-light', 'css:display-opinions-dark', 'css:dashboard']);
 
 gulp.task('build', ['js', 'css']);
 // Default Task
