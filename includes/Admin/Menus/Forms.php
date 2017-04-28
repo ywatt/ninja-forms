@@ -514,7 +514,8 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
              * This convention is used to allow merge tags to continue to function,
              * even though they can't be added to new forms.
              */
-            if ( empty( $group->get_title() ) ) continue;
+            $title = $group->get_title();
+            if ( empty( $title ) ) continue;
 
             $merge_tags[ $key ] = array(
                 'id'    => $group->get_id(),
