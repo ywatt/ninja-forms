@@ -122,6 +122,16 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 				getColumns: function() {
 					return that.columns;
 				},
+				renderFieldSelect: function( dataID, value ){
+					var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
+					var _return = '<label class="nf-select"><select class="setting" data-id="' + dataID + '">';
+					fields.each( function( field ){
+						var selected = ( value == field.get( 'key' ) ) ? ' selected' : '';
+						_return += '<option value="' + field.get( 'key' ) + '"' + selected + '>' + field.get( 'label' ) + '</option>';
+					});
+					_return += '</select><div></div></label>';
+					return _return;
+				},
 				renderOptions: function( column, value ) {
 
 					if( 'undefined' == typeof that.options.columns[ column ] ) return;
