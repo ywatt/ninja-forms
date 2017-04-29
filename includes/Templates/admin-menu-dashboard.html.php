@@ -57,7 +57,7 @@
                     </div>
                     <div>
                         <i class="fa fa-money" aria-hidden="true"></i>
-                        <span class="pricing-body-title"><?php _e( '50% of recurring renewals', 'ninja-forms' ); ?></span>
+                        <span class="pricing-body-title"><?php _e( '50% off recurring renewals', 'ninja-forms' ); ?></span>
                         <span><?php _e( 'Renews at $249.50/year', 'ninja-forms' ); ?></span>
                     </div>
                     <div>
@@ -98,7 +98,7 @@
                     </div>
                     <div>
                         <i class="fa fa-money" aria-hidden="true"></i>
-                        <span class="pricing-body-title"><?php _e( '50% of recurring renewals', 'ninja-forms' ); ?></span>
+                        <span class="pricing-body-title"><?php _e( '50% off recurring renewals', 'ninja-forms' ); ?></span>
                         <span><?php _e( 'Renews at $99.50/year', 'ninja-forms' ); ?></span>
                     </div>
                     <div>
@@ -131,7 +131,7 @@
                     </div>
                     <div>
                         <i class="fa fa-money" aria-hidden="true"></i>
-                        <span class="pricing-body-title"><?php _e( '50% of recurring renewals', 'ninja-forms' ); ?></span>
+                        <span class="pricing-body-title"><?php _e( '50% off recurring renewals', 'ninja-forms' ); ?></span>
                         <span><?php _e( 'Renews at $49.50/year', 'ninja-forms' ); ?></span>
                     </div>
                     <div>
