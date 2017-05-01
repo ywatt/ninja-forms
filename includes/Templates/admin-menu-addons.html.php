@@ -43,7 +43,7 @@
 
                     <?php if( ! empty( $item['docs'] ) ): ?>
 
-                    <a href="<?php echo $item['docs']; ?>" class="nf-button secondary nf-doc-button"><?php _e( 'Docs', 'ninja-forms' ); ?></a>
+                    <a target="_blank" href="<?php echo $item['docs']; ?>" class="nf-button secondary nf-doc-button"><?php _e( 'Docs', 'ninja-forms' ); ?></a>
                     <?php else: ?>
 
                     <p><a><?php _e( 'Documentation coming soon.', 'ninja-forms' ); ?></a></p>
@@ -62,13 +62,13 @@
 
                         <?php else: ?>
 
-                        <a href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
+                        <a target="_blank" href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
 
                         <?php endif; ?>
 
                     <?php else: ?>
 
-                    <a href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
+                    <a target="_blank" href="<?php echo $link; ?>" title="<?php echo $item['title']; ?>" class="primary nf-button"><?php _e( 'Learn More', 'ninja-forms' ); ?></a>
 
                     <?php endif; ?>
 
