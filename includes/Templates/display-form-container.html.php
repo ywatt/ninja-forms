@@ -6,7 +6,9 @@
 	/*
 	 * If we have a form wrapper, output it in the nf-form-cont div.
 	 */
-	$wrapper_class = ( ! empty( Ninja_Forms()->form( $form_id )->get()->get_setting( 'wrapper_class' ) ) ) ? ' ' . Ninja_Forms()->form( $form_id )->get()->get_setting( 'wrapper_class' ) : '';
+	$form_wrap = Ninja_Forms()->form( $form_id )->get()->get_setting( 'wrapper_class' );
+
+	$wrapper_class = ( ! empty( $form_wrap ) ) ? ' ' . Ninja_Forms()->form( $form_id )->get()->get_setting( 'wrapper_class' ) : '';
 ?>
 <div id="nf-form-<?php echo $form_id; ?>-cont" class="nf-form-cont<?php echo $wrapper_class; ?>">
 

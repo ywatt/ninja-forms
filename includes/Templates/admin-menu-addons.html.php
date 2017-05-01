@@ -31,7 +31,7 @@
 
         <div class="nf-box-inside">
 
-            <img src="<?php echo $item['image']; ?>" />
+            <img src="<?php echo NF_PLUGIN_URL . $item['image']; ?>" />
 
             <h2><?php echo $item['title']; ?></h2>
 

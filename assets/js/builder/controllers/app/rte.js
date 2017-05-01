@@ -237,7 +237,10 @@ define( [], function() {
 		},
 
 		openMediaManager: function( e, context ) {
+			context.invoke( 'editor.createRange' );
 			context.invoke( 'editor.saveRange' );
+			this.currentContext = context;
+			
 			// If the frame already exists, re-open it.
 			if ( this.meta_image_frame ) {
 				this.meta_image_frame.open();
@@ -300,11 +303,11 @@ define( [], function() {
 		},
 
 		insertMedia: function( media, context ) {
-			context.invoke( 'editor.restoreRange' );
+			this.currentContext.invoke( 'editor.restoreRange' );
 			if ( 'image' == media.type ) {
-				context.invoke( 'editor.insertImage', media.url );
+				this.currentContext.invoke( 'editor.insertImage', media.url );
 			} else {
-				context.invoke( 'editor.createLink', { text: media.filename, url: media.url } );
+				this.currentContext.invoke( 'editor.createLink', { text: media.filename, url: media.url } );
 			}
 
 		}
