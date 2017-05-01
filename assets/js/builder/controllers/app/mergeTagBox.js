@@ -35,61 +35,7 @@ define( [
             this.listenTo( nfRadio.channel( 'app' ), 'before:renderSetting', this.beforeRenderSetting );
             this.listenTo( nfRadio.channel( 'drawer' ), 'before:close', this.beforeDrawerClose );
             this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
-                jQuery( '.merge-tags' ).on( 'click', function( e ){
-                    var $this = jQuery( this );
-                    if( $this.siblings().hasClass( 'merge-tag-focus' ) ){
-                        nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
-                        jQuery( '#merge-tags-box' ).css( 'display', 'none' );
-                        nfRadio.channel( 'drawer' ).request( 'enable:close' );
-                        jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
-                        jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
-                        return;
-                    }
-                    var text = $this.closest( '.nf-setting' ).find( '.setting' ).val();
-                    text = text || '';
-                    
-                    $this.closest( '.nf-setting' ).find( '.setting' ).val( text + '{' ).change();
-                    nfRadio.channel('mergeTags').request('set:caret', text.length + 1 );
-
-                    if( $this.parent().hasClass( 'note-tools' ) ){
-                        $this.closest( '.nf-setting' ).find( '.setting' ).summernote( 'insertText', '{' );
-                    }
-
-                    nfRadio.channel('mergeTags').request('set:old', '{' );
-
-                    // $this.closest( '.nf-setting' ).find( '.setting' ).focus(); //.addClass( 'merge-tag-focus' );
-                    $this.closest( '.nf-setting' ).find( '.setting' ).addClass( 'merge-tag-focus' ); //.addClass( 'merge-tag-focus' );
-
-                    // Disable browser autocomplete.
-                    var autocomplete = $this.attr( 'autocomplete' );
-                    $this.attr( 'autocomplete', 'off' );
-                    $this.data( 'autocomplete', autocomplete );
-
-                    var $overlayElement = $this.closest( '.nf-setting, .nf-table-row' );
-                    if( 0 != $overlayElement.find( '.note-editor' ).length ){
-                        $overlayElement.find('.note-editor' ).addClass('merge-tag-focus-overlay');
-                    } else {
-                        $overlayElement.addClass('merge-tag-focus-overlay');
-                    }
-
-                    jQuery( '#merge-tags-box' ).css( 'display', 'block' );
-                    nfRadio.channel( 'drawer' ).request( 'prevent:close' );
-
-                    jQuery( '.merge-tag-focus-overlay' ).on( 'click', function( e ) {
-                        if ( jQuery( e.target ).hasClass( 'note-editor' ) ) {
-                            nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
-                            jQuery( '#merge-tags-box' ).css( 'display', 'none' );
-                            nfRadio.channel( 'drawer' ).request( 'enable:close' );
-                            jQuery( '#merge-tags-box' ).removeClass();
-                            jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
-                            jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
-                        }
-                    } );
-
-                    setTimeout(function(){
-                        jQuery( '#merge-tags-box' ).find( '.merge-tag-filter' ).find( 'input' ).focus();
-                    }, 500 );
-                });
+                jQuery( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
             } );
 
             var that = this;
@@ -109,19 +55,34 @@ define( [
             });
 
             nfRadio.channel( 'mergeTags' ).reply( 'insert:tag', this.insertTag.bind( this ) );
-            
+
+            /** OPTION REPEATER */
+            this.listenTo( nfRadio.channel( 'option-repeater' ), 'add:option', function( model ){
+                var selector = '#' + model.cid + ' .has-merge-tags input.setting';
+                jQuery( selector ).on( 'focus', function( event ){
+                   that.focusCallback( event, selector, 'option-repeater' );
+                });
+                jQuery( selector ).on( 'keyup', function( event ){
+                    that.keyupCallback( event, selector, 'option-repeater' );
+                });
+                jQuery( selector ).siblings( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
+            } );
+
             /* CALCULATIONS */
             this.listenTo( nfRadio.channel( 'setting-calculations-option' ), 'render:setting', this.renderSetting );
+            this.listenTo( nfRadio.channel( 'setting-calculations-option' ), 'render:setting', function( settingModel, dataModel, view ){
+                view.$el.find( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
+            } );
 
             /* SUMMERNOTE */
             this.listenTo( nfRadio.channel( 'summernote' ), 'focus', function( e, selector ) {
-                that.focusCallback( false, selector );
+                that.focusCallback( false, selector, 'rte' );
             } );
             this.listenTo( nfRadio.channel( 'summernote' ), 'keydown', function( e, selector ){
                 jQuery( selector ).closest( '.nf-setting' ).find( '.setting' ).summernote( 'saveRange' );
             } );
             this.listenTo( nfRadio.channel( 'summernote' ), 'keyup', function( e, selector ){
-                that.keyupCallback( e, selector );
+                that.keyupCallback( e, selector, 'rte' );
             } );
 
             jQuery( document ).on( 'keyup', function( event ){
@@ -179,6 +140,8 @@ define( [
         },
 
         renderSetting: function( settingModel, dataModel, view ){
+
+            view.$el.find( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
 
             if( 0 == jQuery( '#merge-tags-box' ).length ) this.afterAppStart();
 
@@ -309,36 +272,99 @@ define( [
             $input.closest( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
         },
 
-        focusCallback: function( e, target ){
+        mergeTagsButtonClick: function( e ){
+            var $this = jQuery( this );
+            if( $this.siblings().hasClass( 'merge-tag-focus' ) ){
+                nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
+                jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                nfRadio.channel( 'drawer' ).request( 'enable:close' );
+                jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
+                return;
+            }
+
+            var $inputSetting = $this.siblings( '.setting' ).first();
+
+            if( 0 !== $this.closest( '.nf-setting, .nf-table-row' ).find( '.note-tools' ).length ){
+                $this.closest( '.nf-setting' ).find( '.setting' ).summernote( 'insertText', '{' );
+            } else {
+                var text = $inputSetting.val() || '';
+                $inputSetting.val( text + '{' ).change();
+                nfRadio.channel('mergeTags').request('set:caret', text.length + 1 );
+            }
+
+            if( $this.parent().hasClass( 'note-tools' ) ){
+                // $this.closest( '.nf-setting' ).find( '.setting' ).summernote( 'insertText', '{' );
+            }
+
+            nfRadio.channel('mergeTags').request('set:old', '{' );
+
+            $inputSetting.addClass( 'merge-tag-focus' );
+
+            // Disable browser autocomplete.
+            var autocomplete = $this.attr( 'autocomplete' );
+            $this.attr( 'autocomplete', 'off' );
+            $this.data( 'autocomplete', autocomplete );
+
+            var $overlayElement = $this.closest( '.nf-setting, .nf-table-row' );
+            if( 0 != $overlayElement.find( '.note-editor' ).length ){
+                $overlayElement.find('.note-editor' ).addClass('merge-tag-focus-overlay');
+            } else {
+                $overlayElement.addClass('merge-tag-focus-overlay');
+            }
+
+            jQuery( '#merge-tags-box' ).css( 'display', 'block' );
+            nfRadio.channel( 'drawer' ).request( 'prevent:close' );
+
+            jQuery( '.merge-tag-focus-overlay' ).on( 'click', function( e ) {
+                if ( jQuery( e.target ).hasClass( 'note-editor' ) ) {
+                    nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
+                    jQuery( '#merge-tags-box' ).css( 'display', 'none' );
+                    nfRadio.channel( 'drawer' ).request( 'enable:close' );
+                    jQuery( '#merge-tags-box' ).removeClass();
+                    jQuery( '.merge-tag-focus' ).removeClass( 'merge-tag-focus' );
+                    jQuery( '.merge-tag-focus-overlay' ).removeClass( 'merge-tag-focus-overlay' );
+                }
+            } );
+
+            setTimeout(function(){
+                jQuery( '#merge-tags-box' ).find( '.merge-tag-filter' ).find( 'input' ).focus();
+            }, 500 );
+        },
+
+        focusCallback: function( e, target, type ){
+
+            var type = type || 'setting';
+            var $this = ( 'undefined' == typeof target ) ? jQuery( this ) : jQuery( target );
 
             jQuery( '.merge-tag-focus' ).each(function(index, el){
                 if( this == el ) return;
                 el.removeClass( 'merge-tag-focus' );
             });
 
-            if( 'undefined' != typeof target ) {
-                var posY = jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ).offset().top - jQuery(window).scrollTop();
-                var height = jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ).outerHeight();
+            if( 'rte' == type ) {
+                var posY = $this.closest( '.nf-setting' ).find( '.note-editor' ).offset().top - jQuery(window).scrollTop();
+                var height = $this.closest( '.nf-setting' ).find( '.note-editor' ).outerHeight();
             } else {
-                var posY = jQuery(this).offset().top - jQuery(window).scrollTop();
-                var height = jQuery(this).outerHeight();
+                var posY = $this.offset().top - jQuery(window).scrollTop();
+                var height = $this.outerHeight();
             }
             jQuery( '#merge-tags-box' ).css( 'top', posY + height );
 
-            var repeaterRow = jQuery( this ).closest( '.nf-list-options-tbody' );
+            var repeaterRow = $this.closest( '.nf-list-options-tbody' );
             if( 0 != repeaterRow.length ) {
                 var left = repeaterRow.offset().left - jQuery(window).scrollLeft();
                 jQuery( '#merge-tags-box' ).css( 'left', left );
-            } else if( 'undefined' != typeof target ) {
-                var posX = jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ).offset().left - jQuery(window).scrollLeft();
+            } else if( 'rte' == type ) {
+                var posX = $this.closest( '.nf-setting' ).find( '.note-editor' ).offset().left - jQuery(window).scrollLeft();
                 jQuery( '#merge-tags-box' ).css( 'left', posX );
-                jQuery( '#merge-tags-box' ).css( 'width', jQuery( target ).closest( '.nf-setting' ).find( '.note-editor' ).width() );
+                jQuery( '#merge-tags-box' ).css( 'width', $this.closest( '.nf-setting' ).find( '.note-editor' ).width() );
             }
             else
             {
                 var posX = jQuery( this ).closest( '.nf-settings' ).offset().left - jQuery(window).scrollLeft();
                 jQuery( '#merge-tags-box' ).css( 'left', posX );
-                jQuery( '#merge-tags-box' ).css( 'width', jQuery( this ).closest( '.nf-settings' ).width() );
+                jQuery( '#merge-tags-box' ).css( 'width', $this.closest( '.nf-settings' ).width() );
             }
 
             var dataID = jQuery( this ).data( 'id' );
@@ -349,7 +375,9 @@ define( [
             // jQuery( '#merge-tags-box' ).css( 'top', offset );
         },
 
-        keyupCallback: function( event, target ){
+        keyupCallback: function( event, target, type ){
+
+            var type = type || 'setting';
 
             if( /* ENTER */ 13 == event.keyCode ){
 
@@ -387,7 +415,7 @@ define( [
             if( dataID && 'eq' != dataID ) return;
 
             // Store the current caret position.
-            if( 'undefined' != typeof target ){
+            if( 'rte' == type ){
                 var range = $this.summernote('createRange');
                 if( range ) {
                     var caretPos = range.so; // or .eo?
@@ -401,10 +429,10 @@ define( [
             nfRadio.channel( 'mergeTags' ).request( 'set:caret', caretPos );
 
             // Find merge tags.
-            if( 'undefined' == typeof target ) {
-                var mergetags = $this.val().match(new RegExp(/{([a-z0-9]|:|_|})*/g));
-            } else {
+            if( 'rte' == type ) {
                 var mergetags = $this.summernote( 'code' ).match(new RegExp(/{([a-z0-9]|:|_|})*/g));
+            } else {
+                var mergetags = $this.val().match(new RegExp(/{([a-z0-9]|:|_|})*/g));
             }
 
             // Filter out closed merge tags.

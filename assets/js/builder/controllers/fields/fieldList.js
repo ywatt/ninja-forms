@@ -35,7 +35,9 @@ define( [ 'models/app/optionRepeaterCollection' ], function( ListOptionCollectio
 
         updateOptionValue: function( e, model, dataModel, settingModel, optionView ) {
 
-            if( 'list' != _.findWhere( fieldTypeData, { id: dataModel.get( 'type' ) } ).parentType ) return;
+            var findWhere = _.findWhere( fieldTypeData, { id: dataModel.get( 'type' ) } );
+            if( 'undefined' == typeof findWhere ) return;
+            if( 'list' != findWhere.parentType ) return;
 
             model.set( 'manual_value', true );
             
