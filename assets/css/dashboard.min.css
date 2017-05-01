@@ -20,6 +20,7 @@ a {
   #wpcontent .wrap {
     margin: 0; }
 
+/** Hide anything that isn't our page wrap, ie Admin Notices */
 #wpbody-content > div:not(.wrap) {
   display: none; }
 
@@ -171,9 +172,6 @@ Sections
   .widget-plan-notice .nf-button {
     margin-bottom: 20px; }
 
-.nf-extend {
-  margin-right: 10px !important; }
-
 /* This section intentionally left blank. */
 /*
 Widgets
@@ -310,9 +308,38 @@ Loading Spinner
   display: flex;
   -ms-flex-pack: justify;
       justify-content: space-between;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+  padding: 10px; }
   .apps-container .nf-box {
-    width: 45%; }
+    background: #fff;
+    -ms-flex-preferred-size: 48%;
+        flex-basis: 48%; }
+  .apps-container .nf-box-inside {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px; }
+  .apps-container .nf-extend {
+    float: left;
+    margin: 0 0 20px 0;
+    width: 300px;
+    position: relative; }
+  .apps-container .nf-extend img {
+    margin-bottom: 10px;
+    max-width: 100%;
+    height: auto; }
+  .apps-container .nf-extend h2 {
+    white-space: nowrap;
+    overflow: hidden; }
+  .apps-container .nf-extend-content p {
+    min-height: 60px; }
+  .apps-container .nf-extend-buttons::after {
+    clear: both;
+    content: "";
+    display: block; }
+  .apps-container .nf-extend .nf-button {
+    float: right; }
+  .apps-container .nf-extend .nf-doc-button {
+    float: left; }
 
 /*# sourceMappingURL=dashboard.min.css.map */
