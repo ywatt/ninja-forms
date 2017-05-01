@@ -47,7 +47,7 @@
                     <div class="pricing-title"><?php _e( 'Agency', 'ninja-forms' ); ?></div>
                     <div class="pricing-price">$499</div>
                     <div class="pricing-savings"><?php _e( 'Save', 'ninja-forms' ); ?> $2000+</div>
-                    <div class="pricing-cta"><a href="https://ninjaforms.com/checkout/?edd_action=add_to_cart&download_id=203757&utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Agency+Membership" class="nf-button primary"><?php _e( 'Buy Now', 'ninja-forms' ); ?></a></div>
+                    <div class="pricing-cta"><a target="_blank" href="https://ninjaforms.com/checkout/?edd_action=add_to_cart&download_id=203757&utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Agency+Membership" class="nf-button primary"><?php _e( 'Buy Now', 'ninja-forms' ); ?></a></div>
                 </div>
                 <div class="pricing-body">
                     <div>
@@ -88,7 +88,7 @@
                     <div class="pricing-title"><?php _e( 'Professional', 'ninja-forms' ); ?></div>
                     <div class="pricing-price">$199</div>
                     <div class="pricing-savings"><?php _e( 'Save $197', 'ninja-forms' ); ?></div>
-                    <div class="pricing-cta"><a href="https://ninjaforms.com/checkout/?edd_action=add_to_cart&download_id=471355&utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Professional+Membership" class="nf-button primary"><?php _e( 'Buy Now', 'ninja-forms' ); ?></a></div>
+                    <div class="pricing-cta"><a target="_blank" href="https://ninjaforms.com/checkout/?edd_action=add_to_cart&download_id=471355&utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Professional+Membership" class="nf-button primary"><?php _e( 'Buy Now', 'ninja-forms' ); ?></a></div>
                 </div>
                 <div class="pricing-body">
                     <div>
@@ -121,7 +121,7 @@
                     <div class="pricing-title"><?php _e( 'Personal', 'ninja-forms' ); ?></div>
                     <div class="pricing-price">$99</div>
                     <div class="pricing-savings"><?php _e( 'Save $57', 'ninja-forms' ); ?></div>
-                    <div class="pricing-cta"><a href="https://ninjaforms.com/checkout/?edd_action=add_to_cart&download_id=471356&utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Personal+Membership" class="nf-button primary"><?php _e( 'Buy Now', 'ninja-forms' ); ?></a></div>
+                    <div class="pricing-cta"><a target="_blank" href="https://ninjaforms.com/checkout/?edd_action=add_to_cart&download_id=471356&utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Personal+Membership" class="nf-button primary"><?php _e( 'Buy Now', 'ninja-forms' ); ?></a></div>
                 </div>
                 <div class="pricing-body">
                     <div>
@@ -154,9 +154,9 @@
 
     <div class="widget widget-plan-notice">
         <p class="widget-title"><?php _e( 'That sounds amazing! What else comes with Ninja Forms?', 'ninja-forms' ); ?></p>
-        <a href="https://ninjaforms.com/features/?utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Features" target="_blank" class="nf-button primary feature-list-link"><?php _e( 'We\'re glad you asked! Checkout our full list of features!', 'ninja-forms' ); ?> <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+        <a target="_blank" href="https://ninjaforms.com/features/?utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Features" target="_blank" class="nf-button primary feature-list-link"><?php _e( 'We\'re glad you asked! Checkout our full list of features!', 'ninja-forms' ); ?> <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
         <div><em><?php _e( 'All plans include 50% discount on automatic renewals, and a 14 day money back guarantee.', 'ninja-forms' ); ?></em></div>
-        <div><?php _e( 'Requires a current active license and subject to our', 'ninja-forms' ); ?> <a href="https://ninjaforms.com/terms-conditions/?utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Terms+Conditions"><?php _e( 'Terms & Conditions', 'ninja-forms' ); ?></a>.</div>
+        <div><?php _e( 'Requires a current active license and subject to our', 'ninja-forms' ); ?> <a target="_blank" href="https://ninjaforms.com/terms-conditions/?utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Terms+Conditions"><?php _e( 'Terms & Conditions', 'ninja-forms' ); ?></a>.</div>
     </div>
 </script>
 
@@ -200,14 +200,14 @@
 <script id="tmpl-nf-widget-forms-table-row" type="text/template">
     <td class="">
         <span class="title">
-            <a href="admin.php?page=ninja-forms&form_id={{{ data.id }}}">{{{ data.title }}}</a>
+            <a target="_blank" href="admin.php?page=ninja-forms&form_id={{{ data.id }}}">{{{ data.title }}}</a>
         </span>
         <ul class="form-row-actions">
-            <li><a href="admin.php?page=ninja-forms&form_id={{{ data.id }}}"><?php _e( 'Edit', 'ninja-forms' ); ?></a></li>
+            <li><a target="_blank" href="admin.php?page=ninja-forms&form_id={{{ data.id }}}"><?php _e( 'Edit', 'ninja-forms' ); ?></a></li>
             <li><a class="delete"><?php _e( 'Delete', 'ninja-forms' ); ?></a></li>
             <li><a class="duplicate"><?php _e( 'Duplicate', 'ninja-forms' ); ?></a></li>
-            <li><a href="<?php print( get_home_url() ); ?>/?nf_preview_form={{{ data.id }}}" target="_blank"><?php _e( 'Preview Form', 'ninja-forms' ); ?></a></li>
-            <li><a href="edit.php?post_status=all&post_type=nf_sub&form_id={{{ data.id }}}" target="_blank"><?php _e( 'View Submissions', 'ninja-forms' ); ?></a></li>
+            <li><a target="_blank" href="<?php print( get_home_url() ); ?>/?nf_preview_form={{{ data.id }}}" target="_blank"><?php _e( 'Preview Form', 'ninja-forms' ); ?></a></li>
+            <li><a target="_blank" href="edit.php?post_status=all&post_type=nf_sub&form_id={{{ data.id }}}" target="_blank"><?php _e( 'View Submissions', 'ninja-forms' ); ?></a></li>
         </ul>
     </td>
     <td>
@@ -230,7 +230,7 @@
 <!-- Widget: Forms - New Forms Templates -->
 <script id="tmpl-nf-widget-forms-template" type="text/template">
     <div class="template">
-        <a href="admin.php?page=ninja-forms&form_id={{{ data.id }}}">
+        <a target="_blank" href="admin.php?page=ninja-forms&form_id={{{ data.id }}}">
             <strong class="title">{{{ data.title }}}</strong>
             <div class="desc">{{{ data.desc }}}</div>
         </a>
