@@ -154,7 +154,6 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * After successful submission, the page should only scroll to the success message if it is not fully visible.
 * Inline email validation should work properly for longer email domains, i.e. @liverpool.ac.uk
 
-
 = 3.0.34.1 (25 April 2017) =
 
 *Security:*
