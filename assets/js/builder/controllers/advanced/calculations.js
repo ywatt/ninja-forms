@@ -158,6 +158,8 @@ define( [], function() {
          * @return void
          */
         checkDec: function( dec, optionModel ) {
+            // If dec isn't defined, bail...
+            if( 'undefined' === typeof(dec) ) return false;
 			// Get our current errors, if any.
 			var errors = optionModel.get( 'errors' );
             /**

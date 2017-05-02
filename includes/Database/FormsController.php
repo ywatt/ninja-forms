@@ -9,7 +9,6 @@ final class NF_Database_FormsController
     {
         global $wpdb;
         $this->db = $wpdb;
-        $this->forms_data = $this->setFormsData();
     }
     
     public function setFormsData()
@@ -29,6 +28,9 @@ final class NF_Database_FormsController
     
     public function getFormsData()
     {
+        if( empty( $this->forms_data ) ) {
+            $this->forms_data = $this->setFormsData();
+        }
         return(  array_values( $this->forms_data ) );
     }
 }

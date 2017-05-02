@@ -31,12 +31,14 @@ define( [
 
         initialize: function(){
 
+            this.listenTo( nfRadio.channel( 'drawer' ), 'render:settingGroup', function(){
+                jQuery( '.merge-tags' ).off( 'click' );
+                jQuery( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
+            });
+
             this.listenTo( nfRadio.channel( 'app' ), 'after:appStart', this.afterAppStart );
             this.listenTo( nfRadio.channel( 'app' ), 'before:renderSetting', this.beforeRenderSetting );
             this.listenTo( nfRadio.channel( 'drawer' ), 'before:close', this.beforeDrawerClose );
-            this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
-                jQuery( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
-            } );
 
             var that = this;
             nfRadio.channel( 'mergeTags' ).reply( 'set:caret', function( position ){
@@ -65,13 +67,22 @@ define( [
                 jQuery( selector ).on( 'keyup', function( event ){
                     that.keyupCallback( event, selector, 'option-repeater' );
                 });
-                jQuery( selector ).siblings( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
+                jQuery( selector ).siblings( '.nf-list-options .merge-tags' ).off( 'click' );
+                jQuery( selector ).siblings( '.nf-list-options .merge-tags' ).on( 'click', this.mergeTagsButtonClick );
+            } );
+            this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
+                jQuery( '.nf-list-options .merge-tags' ).off( 'click' );
+                jQuery( '.nf-list-options .merge-tags' ).on( 'click', this.mergeTagsButtonClick );
             } );
 
             /* CALCULATIONS */
             this.listenTo( nfRadio.channel( 'setting-calculations-option' ), 'render:setting', this.renderSetting );
-            this.listenTo( nfRadio.channel( 'setting-calculations-option' ), 'render:setting', function( settingModel, dataModel, view ){
-                view.$el.find( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
+            // this.listenTo( nfRadio.channel( 'setting-calculations-option' ), 'render:setting', function( settingModel, dataModel, view ){
+            //     view.$el.find( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
+            // } );
+            this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
+                jQuery( '.nf-list-options.calculations .merge-tags' ).off( 'click' );
+                jQuery( '.nf-list-options.calculations .merge-tags' ).on( 'click', this.mergeTagsButtonClick );
             } );
 
             /* SUMMERNOTE */
@@ -83,6 +94,10 @@ define( [
             } );
             this.listenTo( nfRadio.channel( 'summernote' ), 'keyup', function( e, selector ){
                 that.keyupCallback( e, selector, 'rte' );
+            } );
+            this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
+                jQuery( '.note-editor .merge-tags' ).off( 'click' );
+                jQuery( '.note-editor .merge-tags' ).on( 'click', this.mergeTagsButtonClick );
             } );
 
             jQuery( document ).on( 'keyup', function( event ){
@@ -141,6 +156,7 @@ define( [
 
         renderSetting: function( settingModel, dataModel, view ){
 
+            view.$el.find( '.merge-tags' ).off( 'click' );
             view.$el.find( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
 
             if( 0 == jQuery( '#merge-tags-box' ).length ) this.afterAppStart();
@@ -210,7 +226,7 @@ define( [
             var replace = tag;
             var caretPos = nfRadio.channel( 'mergeTags' ).request( 'get:caret' );
 
-            var patt = /{([a-z0-9]|:|_|})*/g;
+            var patt = /{([a-z0-9]|:|_||-})*/g;
 
             // Loop through matches to find insert/replace index range.
             // Reference: http://codepen.io/kjohnson/pen/36c3a782644dfff40fe3c1f05f8739d9?editors=0012
@@ -273,7 +289,9 @@ define( [
         },
 
         mergeTagsButtonClick: function( e ){
+
             var $this = jQuery( this );
+
             if( $this.siblings().hasClass( 'merge-tag-focus' ) ){
                 nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
                 jQuery( '#merge-tags-box' ).css( 'display', 'none' );
@@ -283,11 +301,11 @@ define( [
                 return;
             }
 
-            var $inputSetting = $this.siblings( '.setting' ).first();
-
             if( 0 !== $this.closest( '.nf-setting, .nf-table-row' ).find( '.note-tools' ).length ){
+                var $inputSetting = $this.closest( '.note-editor' ).siblings( '.setting' ).first();
                 $this.closest( '.nf-setting' ).find( '.setting' ).summernote( 'insertText', '{' );
             } else {
+                var $inputSetting = $this.siblings( '.setting' ).first();
                 var text = $inputSetting.val() || '';
                 $inputSetting.val( text + '{' ).change();
                 nfRadio.channel('mergeTags').request('set:caret', text.length + 1 );
@@ -316,6 +334,7 @@ define( [
             jQuery( '#merge-tags-box' ).css( 'display', 'block' );
             nfRadio.channel( 'drawer' ).request( 'prevent:close' );
 
+            jQuery( '.merge-tag-focus-overlay' ).off( 'click' );
             jQuery( '.merge-tag-focus-overlay' ).on( 'click', function( e ) {
                 if ( jQuery( e.target ).hasClass( 'note-editor' ) ) {
                     nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
@@ -430,9 +449,9 @@ define( [
 
             // Find merge tags.
             if( 'rte' == type ) {
-                var mergetags = $this.summernote( 'code' ).match(new RegExp(/{([a-z0-9]|:|_|})*/g));
+                var mergetags = $this.summernote( 'code' ).match(new RegExp(/{([a-z0-9]|:|_|-|})*/g));
             } else {
-                var mergetags = $this.val().match(new RegExp(/{([a-z0-9]|:|_|})*/g));
+                var mergetags = $this.val().match(new RegExp(/{([a-z0-9]|:|_|-|})*/g));
             }
 
             // Filter out closed merge tags.
@@ -464,6 +483,7 @@ define( [
                     $overlayElement.addClass('merge-tag-focus-overlay');
                 }
 
+                $overlayElement.off( 'click' );
                 $overlayElement.on( 'click', function( event ){
                     var elementClasses = jQuery( event.target ).attr( 'class' ) || [];
                     if( -1 !== elementClasses.indexOf( 'merge-tag-focus-overlay' ) ){

@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, krmoorho
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.5
 Tested up to: 4.7
-Stable tag: 3.1
+Stable tag: 3.1.1
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -114,26 +114,19 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.1 (02 May 2017) =
-
-*Changes:*
-
-* Added a dashboard view for forms, removing the "All Forms" and "Add New" submenus.
-* All new Merge Tag UI for inserting Merge Tags into forms and actions.
-* Refactored calculations, as well as adding an option to set calculation rounding.
-* Updated the WordPress.org readme file.
-* Opening the "new form" page should automatically open the drawer to add new fields.
+= 3.1.1 (02 May 2017) =
 
 *Bugs:*
 
-* Fixed several bugs with calculations and locales that use non-American thousands and decimal separators.
-* Products with a price over 999 should now render and calculate properly.
-* Editing a submission and using a single quote should not break the submission editor.
-* Fixed several PHP notices.
-* After successful submission, the page should only scroll to the success message if it is not fully visible.
-* Inline email validation should work properly for longer email domains, i.e. @liverpool.ac.uk
+* Fixed bugs in the new Merge Tag UI that prevented it from being opened properly via clicks.
 
 == Changelog ==
+
+= 3.1.1 (02 May 2017) =
+
+*Bugs:*
+
+* Fixed bugs in the new Merge Tag UI that prevented it from being opened properly via clicks.
 
 = 3.1 (02 May 2017) =
 
