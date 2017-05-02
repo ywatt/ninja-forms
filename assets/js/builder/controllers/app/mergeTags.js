@@ -63,7 +63,8 @@ define( [
 			this.settingModel = {};
 			this.open = false;
 
-			nfRadio.channel( 'mergeTags' ).reply( 'init', this.initMergeTags, this );
+			// Unhook jBox Merge Tag stuff.
+			// nfRadio.channel( 'mergeTags' ).reply( 'init', this.initMergeTags, this );
 
 			this.listenTo( nfRadio.channel( 'mergeTags' ), 'click:mergeTag', this.clickMergeTag );
 			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.addFieldTags );
@@ -323,10 +324,28 @@ define( [
 		},
 
 		replaceFieldKey: function( dataModel, keyModel, settingModel ) {
-			var oldKey = this.getFieldKeyFormat( keyModel._previousAttributes[ 'key' ] );
+            var oldKey = this.getFieldKeyFormat( keyModel._previousAttributes[ 'key' ] );
 			var newKey = this.getFieldKeyFormat( keyModel.get( 'key' ) );
 			var settingName = settingModel.get( 'name' );
 			var oldVal = dataModel.get( settingName );
+            if(settingName == 'calculations' && 'undefined' != typeof(dataModel.get('calculations'))) {
+                var calcModel = dataModel.get( 'calculations' );
+                calcModel.each( function( model ) {
+                    var oldCalcKey = oldKey.slice( 0, (oldKey.length - 1) ) + ':calc}';
+                    var newCalcKey = newKey.slice( 0, (newKey.length - 1 ) ) + ':calc}';
+                    oldVal = model.get( 'eq' );
+                    if ( 'string' == typeof( oldVal ) ) {
+                        var re = new RegExp( oldCalcKey, 'g' );
+                        var newVal = oldVal.replace( re, newCalcKey );
+                        re = new RegExp( oldKey, 'g' );
+                        // TODO: We won't need this second replace when we no longer
+                        // have to append :calc to merge tags.
+                        newVal = newVal.replace( re, newKey );
+                        model.set( 'eq', newVal );
+                    }
+                } );
+                return false;
+            }
 			if ( 'string' == typeof oldVal ) {
 				var re = new RegExp( oldKey, 'g' );
 				newVal = oldVal.replace( re, newKey );

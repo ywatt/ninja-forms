@@ -33,6 +33,13 @@ jQuery( document ).ready( function( $ ) {
 				var builderView = new BuilderView();
 				// Trigger our after start event.
 				nfRadio.channel( 'app' ).trigger( 'after:appStart', this );
+
+				/*
+				 * If we're on the new forms builder, open the add fields drawer.
+				 */
+				if ( 0 == nfAdmin.formID ) {
+					nfRadio.channel( 'app' ).request( 'open:drawer', 'addField' );
+				}
 			},
 
 			template: function( template ) {

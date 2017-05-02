@@ -30,7 +30,6 @@ define( ['views/app/drawer/contentEmpty'], function( drawerEmptyView ) {
 		},
 
 		loadContent: function( drawerID, data ) {
-			console.log( data );
 			var drawer = nfRadio.channel( 'app' ).request( 'get:drawer', drawerID );
 			var contentView = drawer.get( 'getContentView' ).call( drawer, data );
 			var headerView = drawer.get( 'getHeaderView' ).call( drawer, data );

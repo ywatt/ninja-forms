@@ -7,7 +7,7 @@
     bottom: 0;
     right: -1400px;
     overflow: hidden;
-    z-index: 101;
+    z-index: auto; // Changed from 101 to Auto to fix a bug with the merge tag overlay in Safari.
     transition: width 0.75s ease;
     -webkit-overflow-scrolling: touch;
     &.nf-drawer-expand {
