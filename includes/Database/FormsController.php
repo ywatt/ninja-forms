@@ -14,8 +14,12 @@ final class NF_Database_FormsController
     
     public function setFormsData()
     {
-        $sql = "SELECT `id`, `title`, `created_at` FROM `{$this->db->prefix}nf3_forms`";
-        $forms_data = $this->db->get_results( $sql, OBJECT_K );
+        try {
+            $sql = "SELECT `id`, `title`, `created_at` FROM `{$this->db->prefix}nf3_forms`";
+            $forms_data = $this->db->get_results($sql, OBJECT_K);
+        } catch( Exception $e ) {
+            return array();
+        }
         
         // Provided as array of
         // object {id => Str, title => Str, created_at => Str}
