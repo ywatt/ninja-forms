@@ -31,6 +31,11 @@ define( [
 
         initialize: function(){
 
+            this.listenTo( nfRadio.channel( 'drawer' ), 'render:settingGroup', function(){
+                jQuery( '.merge-tags' ).off( 'click' );
+                jQuery( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
+            });
+
             this.listenTo( nfRadio.channel( 'app' ), 'after:appStart', this.afterAppStart );
             this.listenTo( nfRadio.channel( 'app' ), 'before:renderSetting', this.beforeRenderSetting );
             this.listenTo( nfRadio.channel( 'drawer' ), 'before:close', this.beforeDrawerClose );
