@@ -24,10 +24,14 @@ final class NF_MergeTags_Calcs extends NF_Abstracts_MergeTags
     public function set_merge_tags( $key, $value, $round = 2 )
     {
         global $wp_locale;
+        $dec = $wp_locale->number_format['decimal_point'];
+        $sep = $wp_locale->number_format['thousands_sep'];
         $callback = ( is_numeric( $key ) ) ? 'calc_' . $key : $key;
 
         try {
-            $calculated_value = Ninja_Forms()->eos()->solve($value);
+            $value = str_replace($sep, '', $value);
+            $value = str_replace($dec, '.', $value);
+            $calculated_value = Ninja_Forms()->eos()->solve( $value );
         } catch( Exception $e ){
             $calculated_value = FALSE;
         }
@@ -37,7 +41,7 @@ final class NF_MergeTags_Calcs extends NF_Abstracts_MergeTags
             'tag' => "{calc:$key}",
 //            'label' => __( '', 'ninja_forms' ),
             'callback' => $callback,
-            'calc_value' => number_format( $calculated_value, $round, $wp_locale->number_format['decimal_point'], $wp_locale->number_format['thousands_sep'] )
+            'calc_value' => number_format( $calculated_value, $round, $dec, $sep )
         );
 
         $callback .= '2';
@@ -47,7 +51,7 @@ final class NF_MergeTags_Calcs extends NF_Abstracts_MergeTags
             'tag' => "{calc:$key:2}",
 //            'label' => __( '', 'ninja_forms' ),
             'callback' => $callback,
-            'calc_value' => number_format( $calculated_value, 2, $wp_locale->number_format['decimal_point'], $wp_locale->number_format['thousands_sep'] )
+            'calc_value' => number_format( $calculated_value, 2, $dec, $sep )
         );
     }
     
