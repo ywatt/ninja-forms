@@ -62,9 +62,11 @@ define( [
                 jQuery( selector ).on( 'keyup', function( event ){
                     that.keyupCallback( event, selector, 'option-repeater' );
                 });
+                jQuery( selector ).siblings( '.nf-list-options .merge-tags' ).off( 'click' );
                 jQuery( selector ).siblings( '.nf-list-options .merge-tags' ).on( 'click', this.mergeTagsButtonClick );
             } );
             this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
+                jQuery( '.nf-list-options .merge-tags' ).off( 'click' );
                 jQuery( '.nf-list-options .merge-tags' ).on( 'click', this.mergeTagsButtonClick );
             } );
 
@@ -74,6 +76,7 @@ define( [
             //     view.$el.find( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
             // } );
             this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
+                jQuery( '.nf-list-options.calculations .merge-tags' ).off( 'click' );
                 jQuery( '.nf-list-options.calculations .merge-tags' ).on( 'click', this.mergeTagsButtonClick );
             } );
 
@@ -88,6 +91,7 @@ define( [
                 that.keyupCallback( e, selector, 'rte' );
             } );
             this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
+                jQuery( '.note-editor .merge-tags' ).off( 'click' );
                 jQuery( '.note-editor .merge-tags' ).on( 'click', this.mergeTagsButtonClick );
             } );
 
@@ -325,6 +329,7 @@ define( [
             jQuery( '#merge-tags-box' ).css( 'display', 'block' );
             nfRadio.channel( 'drawer' ).request( 'prevent:close' );
 
+            jQuery( '.merge-tag-focus-overlay' ).off( 'click' );
             jQuery( '.merge-tag-focus-overlay' ).on( 'click', function( e ) {
                 if ( jQuery( e.target ).hasClass( 'note-editor' ) ) {
                     nfRadio.channel( 'mergeTags' ).request( 'insert:tag', '' );
@@ -473,6 +478,7 @@ define( [
                     $overlayElement.addClass('merge-tag-focus-overlay');
                 }
 
+                $overlayElement.off( 'click' );
                 $overlayElement.on( 'click', function( event ){
                     var elementClasses = jQuery( event.target ).attr( 'class' ) || [];
                     if( -1 !== elementClasses.indexOf( 'merge-tag-focus-overlay' ) ){
