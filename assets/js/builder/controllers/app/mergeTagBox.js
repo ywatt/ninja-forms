@@ -73,6 +73,9 @@ define( [
             // this.listenTo( nfRadio.channel( 'setting-calculations-option' ), 'render:setting', function( settingModel, dataModel, view ){
             //     view.$el.find( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
             // } );
+            this.listenTo( nfRadio.channel( 'drawer' ), 'opened', function(){
+                jQuery( '.nf-list-options.calculations .merge-tags' ).on( 'click', this.mergeTagsButtonClick );
+            } );
 
             /* SUMMERNOTE */
             this.listenTo( nfRadio.channel( 'summernote' ), 'focus', function( e, selector ) {
@@ -144,6 +147,7 @@ define( [
 
         renderSetting: function( settingModel, dataModel, view ){
 
+            view.$el.find( '.merge-tags' ).off( 'click' );
             view.$el.find( '.merge-tags' ).on( 'click', this.mergeTagsButtonClick );
 
             if( 0 == jQuery( '#merge-tags-box' ).length ) this.afterAppStart();
@@ -195,21 +199,13 @@ define( [
 
         insertTag: function( tag ) {
 
-            console.log( 'INSERT ' + tag );
-
             var $input = jQuery( '.merge-tag-focus' );
-
-            console.log( $input );
 
             if( 0 != $input.closest( '.nf-setting' ).first().find( '.note-editable' ).length ){
                 $input = $input.closest( '.nf-setting' ).first().find( '.note-editable' );
             }
 
-            console.log( $input );
-
             if( 1 < $input.length ){ $input = $input.first(); }
-
-            console.log( $input );
 
             if( $input.hasClass( 'note-editable' ) ){
                 var str = $input.closest( '.nf-setting' ).find( '.setting' ).summernote( 'code' );
