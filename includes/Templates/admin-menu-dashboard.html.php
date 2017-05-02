@@ -154,7 +154,7 @@
 
     <div class="widget widget-plan-notice">
         <p class="widget-title"><?php _e( 'That sounds amazing! What else comes with Ninja Forms?', 'ninja-forms' ); ?></p>
-        <a target="_blank" href="https://ninjaforms.com/features/?utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Features" target="_blank" class="nf-button primary feature-list-link"><?php _e( 'We\'re glad you asked! Checkout our full list of features!', 'ninja-forms' ); ?> <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+        <a href="https://ninjaforms.com/features/?utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Features" target="_blank" class="nf-button primary feature-list-link"><?php _e( 'We\'re glad you asked! Checkout our full list of features!', 'ninja-forms' ); ?> <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
         <div><em><?php _e( 'All plans include 50% discount on automatic renewals, and a 14 day money back guarantee.', 'ninja-forms' ); ?></em></div>
         <div><?php _e( 'Requires a current active license and subject to our', 'ninja-forms' ); ?> <a target="_blank" href="https://ninjaforms.com/terms-conditions/?utm_medium=plugin&utm_source=plugin-dashboard&utm_campaign=Ninja+Forms+Memberships&utm_content=Terms+Conditions"><?php _e( 'Terms & Conditions', 'ninja-forms' ); ?></a>.</div>
     </div>
@@ -230,7 +230,7 @@
 <!-- Widget: Forms - New Forms Templates -->
 <script id="tmpl-nf-widget-forms-template" type="text/template">
     <div class="template">
-        <a target="_blank" href="admin.php?page=ninja-forms&form_id={{{ data.id }}}">
+        <a href="admin.php?page=ninja-forms&form_id={{{ data.id }}}">
             <strong class="title">{{{ data.title }}}</strong>
             <div class="desc">{{{ data.desc }}}</div>
         </a>
