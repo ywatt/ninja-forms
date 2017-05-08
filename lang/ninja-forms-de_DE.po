@@ -6147,7 +6147,7 @@ msgstr "Trennung"
 
 #: includes/Fields/ListSelect.php:26
 msgid "Select"
-msgstr "AuswÃ¤hlen"
+msgstr "Auswählen"
 
 #: includes/Fields/ListState.php:26
 msgid "State"
