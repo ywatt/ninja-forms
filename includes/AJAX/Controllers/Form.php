@@ -26,7 +26,7 @@ class NF_AJAX_Controllers_Form extends NF_Abstracts_Controller
             $this->_respond();
         }
 
-        $form_data = json_decode( stripslashes( $_POST['form'] ), ARRAY_A );
+        $form_data = json_decode( urldecode( base64_decode( $_POST['form'] ) ), ARRAY_A );
 
         if( is_string( $form_data[ 'id' ] ) ) {
             $tmp_id = $form_data[ 'id' ];

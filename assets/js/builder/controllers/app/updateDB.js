@@ -206,6 +206,8 @@ define( [], function() {
 				}
 			}
 
+			data = window.btoa( encodeURIComponent( data ) );
+
 			// Update
 			jQuery.post( ajaxurl, { action: jsAction, form: data, security: nfAdmin.ajaxNonce }, function( response ) {
 				try {

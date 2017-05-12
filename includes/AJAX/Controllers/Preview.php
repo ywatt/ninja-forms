@@ -15,7 +15,7 @@ class NF_AJAX_Controllers_Preview extends NF_Abstracts_Controller
     {
         check_ajax_referer( 'ninja_forms_builder_nonce', 'security' );
 
-        $form = json_decode( stripslashes( $_POST['form'] ), ARRAY_A );
+        $form = json_decode( urldecode( base64_decode( $_POST['form'] ) ), ARRAY_A );
 
         $form_id = $form[ 'id' ];
 
