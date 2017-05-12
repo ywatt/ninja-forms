@@ -149,6 +149,11 @@ define( [], function() {
 			// Set our deleted_fields object so that we can know which fields were removed.
 			data.deleted_fields = removedIDs;
 
+			/*
+			 * We'll use this to track how many fields we have later, after we convert our data to a binary for transport.
+			 */
+			var fieldsLength = data.fields.length;
+
 			/**
 			 * Prepare actions for submission.
 			 */
@@ -204,6 +209,27 @@ define( [], function() {
 				if ( nfRadio.channel( 'app' ).request( 'is:mobile' ) ) {
 					nfRadio.channel( 'notices' ).request( 'add', 'publishing', 'Your Changes Are Being Published', { autoClose: false } );
 				}
+			}
+
+			if ( data.length > nfAdmin.post_max_size && 0 != fieldsLength ) {
+				var noticeOptions = {
+					autoClose: false,
+					position: {
+						x: 'center',
+						y: 'top'
+					},
+					color: 'red',
+					offset: {
+						y: 130
+					},
+					stack: false
+				};
+				nfRadio.channel( 'app' ).request( 'update:setting', 'loading', false );
+				nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );
+				nfRadio.channel( 'notices' ).request( 'add', 'postMaxSizeError', 'This form is too large to save with your current server settings. Please ask your host to increase the size of your post_max_size PHP ini setting. <a href="#">More Info</a>', noticeOptions );
+				return false;
+			} else {
+				nfRadio.channel( 'notices' ).request( 'close', 'postMaxSizeError' );
 			}
 
 			// Update

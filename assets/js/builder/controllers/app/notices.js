@@ -19,8 +19,7 @@ define( [], function() {
 			var appDefaults = {
 				content: msg,
 				color: 'green',
-				zIndex:12000,
-				constructOnInit: true,
+				zIndex:1200000000,
 				stack: true,
 				animation: {
 					open: 'flip',
@@ -45,7 +44,7 @@ define( [], function() {
 			};
 
 			var desktopDefaults = {
-				attributes: {
+				position: {
 					x: 'left',
 					y: 'bottom'
 				},
@@ -60,6 +59,9 @@ define( [], function() {
 			defaults = jQuery.extend( defaults, appDefaults );
 
 			var options = jQuery.extend( defaults, options );
+
+			console.log( options );
+
 			// console.log( options );
 			this.notices[ key ] = new jBox( 'Notice', options );
 		},
