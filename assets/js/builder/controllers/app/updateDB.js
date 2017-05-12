@@ -211,6 +211,8 @@ define( [], function() {
 				}
 			}
 
+			data = window.btoa( encodeURIComponent( data ) );
+			
 			if ( data.length > nfAdmin.post_max_size && 0 != fieldsLength ) {
 				var noticeOptions = {
 					autoClose: false,
