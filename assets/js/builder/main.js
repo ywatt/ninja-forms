@@ -54,5 +54,6 @@ jQuery( document ).ready( function( $ ) {
 	
 		var ninjaForms = new NinjaForms();
 		ninjaForms.start();
+        
 	} );
 } );

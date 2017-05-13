@@ -212,23 +212,27 @@ define( [], function() {
 			}
 
 			data = window.btoa( encodeURIComponent( data ) );
+            console.log(data.length);
+            console.log(nfAdmin.post_max_size);
 			
-			if ( data.length > nfAdmin.post_max_size && 0 != fieldsLength ) {
+			if ( data.length > nfAdmin.post_max_size ) {
 				var noticeOptions = {
 					autoClose: false,
+                    closeOnClick: false,
 					position: {
 						x: 'center',
 						y: 'top'
 					},
 					color: 'red',
 					offset: {
-						y: 130
+						y: 150
 					},
-					stack: false
+					stack: false,
+                    addClass: 'builder-error'
 				};
 				nfRadio.channel( 'app' ).request( 'update:setting', 'loading', false );
 				nfRadio.channel( 'app' ).request( 'update:setting', 'clean', true );
-				nfRadio.channel( 'notices' ).request( 'add', 'postMaxSizeError', 'This form is too large to save with your current server settings. Please ask your host to increase the size of your post_max_size PHP ini setting. <a href="#">More Info</a>', noticeOptions );
+				nfRadio.channel( 'notices' ).request( 'add', 'postMaxSizeError', nfAdmin.post_size_error_msg, noticeOptions );
 				return false;
 			} else {
 				nfRadio.channel( 'notices' ).request( 'close', 'postMaxSizeError' );

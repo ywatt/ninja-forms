@@ -1002,12 +1002,10 @@ All styles used within the drawer
     text-indent: -99999px; }
 
 .nf-action-items.available .nf-item.nf-has-img {
-  -webkit-filter: grayscale(100%);
-          filter: grayscale(100%);
+  filter: grayscale(100%);
   opacity: 0.6; }
   .nf-action-items.available .nf-item.nf-has-img:hover {
-    -webkit-filter: grayscale(0);
-            filter: grayscale(0);
+    filter: grayscale(0);
     opacity: 1.0; }
 
 .nf-field-type-button {
@@ -2390,6 +2388,19 @@ WP Color Picker (Iris) Styles
     #nf-app-admin-header .nf-cta-bubble:hover {
       background: #fff;
       color: #1EA9EA; }
+
+.builder-error {
+  width: 80%;
+  left: 10% !important; }
+
+.builder-error .jBox-container {
+  background-color: #ef4748 !important; }
+
+.builder-error .jBox-container a {
+  color: #fff; }
+
+.builder-error .jBox-container a:hover {
+  text-decoration: none; }
 
 .scrollWrap {
   overflow: hidden;

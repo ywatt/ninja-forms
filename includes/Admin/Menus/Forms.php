@@ -235,6 +235,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
             'dateFormat'        => Ninja_Forms()->get_setting( 'date_format' ),
             'formID'            => isset( $_GET[ 'form_id' ] ) ? absint( $_GET[ 'form_id' ] ) : 0,
             'post_max_size'     => $post_max_size,
+            'post_size_error_msg' => sprintf( __( 'This form is too large to save with your current server settings. Please ask your host to increase the size of your post_max_size PHP ini setting. %sMore Info%s', 'ninja-forms' ), '<a href="#">', '</a>' ),
         ));
 
         do_action( 'nf_admin_enqueue_scripts' );

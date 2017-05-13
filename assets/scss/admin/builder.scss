@@ -119,6 +119,23 @@ All styles used for displaying table content
     }
 }
 
+.builder-error {
+    width: 80%;
+    left: 10% !important;
+}
+
+.builder-error .jBox-container{
+    background-color: #ef4748 !important;
+}
+
+.builder-error .jBox-container a{
+    color: #fff;
+}
+
+.builder-error .jBox-container a:hover{
+    text-decoration: none;
+}
+
 .scrollWrap{
     overflow : hidden;
     height   : 100%;
