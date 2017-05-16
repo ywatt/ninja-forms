@@ -8,9 +8,7 @@
 define( ['models/formModel'], function( FormModel ) {
 	var collection = Backbone.Collection.extend( {
 		model: FormModel,
-		comparator: function( model ){
-            return parseInt( model.get( 'id' ) );
-        },
+		comparator: 'title',
 		tmpNum: 1,
         url: function() {
             return ajaxurl + "?action=nf_forms";
