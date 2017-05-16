@@ -224,6 +224,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 self::$instance->controllers[ 'REST' ][ 'forms' ] = new NF_AJAX_REST_Forms();
                 self::$instance->controllers[ 'REST' ][ 'new-form-templates' ] = new NF_AJAX_REST_NewFormTemplates();
+                self::$instance->controllers[ 'REST' ][ 'oauth' ] = new NF_AJAX_REST_OAuth();
 
                 /*
                  * Async Requests
