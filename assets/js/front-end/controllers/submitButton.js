@@ -1,10 +1,16 @@
 define(['controllers/submitButton'], function( submitButton ) {
 	var controller = Marionette.Object.extend( {
+		bound: {},
+
 		initialize: function() {
 			this.listenTo( nfRadio.channel( 'submit' ), 'init:model', this.registerHandlers );
 		},
 
 		registerHandlers: function( fieldModel ) {
+			if ( 'undefined' != typeof this.bound[ fieldModel.get( 'id' ) ] ) {
+				return false;
+			}
+
 			this.listenTo( nfRadio.channel( 'field-' + fieldModel.get( 'id' ) ), 'click:field', this.click, this );
 			/*
 			 * Register an interest in the 'before:submit' event of our form.
@@ -18,6 +24,8 @@ define(['controllers/submitButton'], function( submitButton ) {
 
 			fieldModel.listenTo( nfRadio.channel( 'fields' ), 'add:error', this.maybeDisable, fieldModel );
 			fieldModel.listenTo( nfRadio.channel( 'fields' ), 'remove:error', this.maybeEnable, fieldModel );
+			
+			this.bound[ fieldModel.get( 'id') ] = true;
 		},
 
 		click: function( e, fieldModel ) {
