@@ -2,7 +2,11 @@ var nfRadio = Backbone.Radio;
 var nfDebug = false;
 
 jQuery( document ).ready( function( $ ) {
-    require( [ 'controllers/formsController', 'views/dashboardView' ], function( FormsController, DashboardView ) {
+    require( [
+        'controllers/formsController',
+        'views/dashboardView',
+        'models/oauth'
+    ], function( FormsController, DashboardView, OAuthModel ) {
 
         var NinjaFormsDashboard = Marionette.Application.extend( {
 
@@ -29,6 +33,14 @@ jQuery( document ).ready( function( $ ) {
 
                 // Show the root view for the application.
                 this.showView( new DashboardView() );
+
+                this.oauth = new OAuthModel();
+                this.oauth.fetch({
+                    success: function( model ){
+                        console.log( model );
+                        nfRadio.channel( 'dashboard' ).trigger( 'show:notice', 'auth', { model: model } );
+                    }
+                });
 
                 this.controllers.forms = new FormsController();
 

@@ -6,14 +6,20 @@
  * @copyright (c) 2017 WP Ninjas
  * @since 3.2
  */
-define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections/memberships.js' ], function( WidgetView, AppsView, MembershipsView ) {
+define( [
+    'views/notices/auth.js',
+    'views/sections/widgets.js',
+    'views/sections/apps.js',
+    'views/sections/memberships.js'
+], function( AuthView, WidgetView, AppsView, MembershipsView ) {
     var view = Marionette.View.extend( {
         template: "#tmpl-nf-dashboard",
         
         currentView: 'widgets',
 
         regions: {
-            content: '.content'
+            content: '.content',
+            notices: '.notices'
         },
 
         events: {
@@ -81,6 +87,17 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
                     var childView = new WidgetView();
             }
             this.showChildView('content', childView );
+
+            this.listenTo( nfRadio.channel( 'dashboard' ), 'show:notice', function( notice, options ) {
+                switch( notice ){
+                    case 'auth':
+                        var childView = new AuthView( options );
+                        break;
+                }
+                console.log( options );
+                console.log( childView );
+                this.showChildView( 'notices', childView );
+            });
         },
         
         templateContext: function() {
