@@ -79,6 +79,8 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			var eq = calcModel.get( 'eq' );
 			// We want to keep our original eq intact, so we use a different var for string replacment.
 			var eqValues = eq;
+            // Store the name for debugging later.
+            var calcName = calcModel.get( 'name' );
 
 			/* TODO:
 			 * It might be possible to refactor these two if statements.
@@ -138,12 +140,18 @@ define(['models/calcCollection'], function( CalcCollection ) {
 
 			}
 
+            // Scrub line breaks.
+            eqValues = eqValues.replace( /\r?\n|\r/g, '' );
 			// Evaluate the equation and update the value of this model.
 			try {
 				calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
 			} catch( e ) {
+                //console.log( calcName );
 				console.log( e );
 			}
+            
+            // If for whatever reason, we got NaN, reset that to 0.
+            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', 0 );
 
 			// Debugging console statement.
 			// console.log( eqValues + ' = ' + calcModel.get( 'value' ) );
