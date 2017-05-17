@@ -37,8 +37,9 @@ jQuery( document ).ready( function( $ ) {
                 this.oauth = new OAuthModel();
                 this.oauth.fetch({
                     success: function( model ){
-                        console.log( model );
-                        nfRadio.channel( 'dashboard' ).trigger( 'show:notice', 'auth', { model: model } );
+                        if( ! model.get( 'client_id' ) ) {
+                            nfRadio.channel( 'dashboard' ).trigger( 'show:notice', 'auth', { model: model } );
+                        }
                     }
                 });
 
