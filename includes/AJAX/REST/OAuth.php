@@ -17,6 +17,8 @@ class NF_AJAX_REST_OAuth extends NF_AJAX_REST_Controller
             if ( isset( $_GET[ 'client_id' ] ) ) {
                 // TODO: Move functionality outside of the REST Controller.
                 update_site_option( 'ninja_forms_client_id', sanitize_text_field( $_GET[ 'client_id' ] ) );
+                wp_redirect( add_query_arg( 'page', 'ninja-forms', admin_url() ) );
+                exit();
             }
         }
     }
