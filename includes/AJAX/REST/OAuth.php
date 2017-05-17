@@ -36,10 +36,27 @@ class NF_AJAX_REST_OAuth extends NF_AJAX_REST_Controller
             update_site_option( 'ninja_forms_client_secret', $client_secret );
         }
 
+        if( $client_id && $client_secret ){
+            $token_response = wp_safe_remote_post( 'https://2a29b687.ngrok.io/oauth/token', array(
+                'body' => array(
+                    'grant_type' => 'client_credentials',
+                    'client_id' => $client_id,
+                    'client_secret' => $client_secret
+                ),
+                'blocking' => true
+            ));
+
+            if( ! is_wp_error( $token_response ) ){
+                $client_token = wp_remote_retrieve_body( $token_response );
+            }
+        }
+
         $this->_respond( array(
             'client_id' => $client_id,
             'client_secret' => $client_secret,
-            'client_redirect' => urlencode( add_query_arg( 'page', 'ninja-forms', admin_url() ) )
+            'client_redirect' => urlencode( add_query_arg( 'page', 'ninja-forms', admin_url() ) ),
+            'client_token' => ( isset( $client_token ) ) ? $client_token : false,
+            'client_token_response' => ( isset( $token_response ) ) ? $token_response : false
         ) );
     }
 
