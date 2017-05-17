@@ -4,6 +4,23 @@ class NF_AJAX_REST_OAuth extends NF_AJAX_REST_Controller
 {
     protected $action = 'nf_oauth';
 
+    public function __construct()
+    {
+        parent::__construct();
+        add_action( 'init', array( $this, 'maybe_update_client_id' ) );
+    }
+
+    public function maybe_update_client_id()
+    {
+        if( isset( $_GET[ 'page' ] ) && 'ninja-forms' == $_GET[ 'page' ] ) {
+            // TODO: Register the client_id query var.
+            if ( isset( $_GET[ 'client_id' ] ) ) {
+                // TODO: Move functionality outside of the REST Controller.
+                update_site_option( 'ninja_forms_client_id', sanitize_text_field( $_GET[ 'client_id' ] ) );
+            }
+        }
+    }
+
     /**
      * @return array [ client_id, client_secret, client_redirect ]
      */
