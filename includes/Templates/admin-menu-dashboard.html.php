@@ -22,7 +22,9 @@
 <!-- Auth Notice -->
 <script id="tmpl-nf-auth-notice" type="text/template">
     <div id="auth-notice">
-        <a href="https://ninjaforms.dev/oauth/register?client_secret={{{ data.client_secret }}}&client_redirect={{{data.client_redirect}}}" class="button">Connect to NinjaForms.com</a>
+        <p>
+            <a href="https://ninjaforms.dev/oauth/register?client_secret={{{ data.client_secret }}}&client_redirect={{{data.client_redirect}}}" class="button">Connect to NinjaForms.com</a>
+        </p>
     </div>
 </script>
 
