@@ -15,26 +15,46 @@ define( [], function() {
         },
 
         initialize: function() {
-            var flag = true;
+            var flag_expired_local = true;
+            var flag_expired_server = true;
             this.on( 'change:client_id', this.maybeRequestAccessToken, this );
             this.on( 'change:client_token', function( model, client_token, options ){
 
                 if( 'undefined' == typeof client_token ) return;
 
-                if( flag || client_token.is_expired() ){
-                    flag = false;
+                if( flag_expired_local || client_token.is_expired() ){
+                    flag_expired_local = false;
                     model.unset( 'client_token' );
                     this.maybeRequestAccessToken();
                     return;
                 }
 
-                jQuery.ajax( {
-                    url: 'https://ninjaforms.dev/wp-json/ninja-forms-auth/v1/example-subscriber',
-                    type: 'GET',
-                    beforeSend : function( xhr ) {
-                        xhr.setRequestHeader( 'Authorization', 'BEARER ' + client_token.access_token );
-                    }
-                } );
+                if( ! flag_expired_server ) return;
+
+                var that = this;
+                setTimeout(function(){
+                    jQuery.ajax( {
+                        url: 'https://ninjaforms.dev/wp-json/ninja-forms-auth/v1/example-subscriber',
+                        type: 'GET',
+                        beforeSend : function( xhr ) {
+                            xhr.setRequestHeader( 'Authorization', 'BEARER ' + client_token.access_token );
+                        },
+                        error: function(){
+                            flag_expired_server = false;
+                            model.unset( 'client_token' );
+                            that.on( 'change:client_token', function( model, client_token, options ){
+                                jQuery.ajax( {
+                                    url: 'https://ninjaforms.dev/wp-json/ninja-forms-auth/v1/example-subscriber',
+                                    type: 'GET',
+                                    beforeSend : function( xhr ) {
+                                        xhr.setRequestHeader( 'Authorization', 'BEARER ' + client_token.access_token );
+                                    }
+                                } );
+                            });
+                            that.maybeRequestAccessToken();
+                        }
+                    } );
+                }, 1000);
 
                 jQuery.ajax( {
                     url: 'https://ninjaforms.dev/wp-json/ninja-forms-auth/v1/example-admin',
