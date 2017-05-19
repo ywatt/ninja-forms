@@ -40,6 +40,7 @@ class NF_AJAX_REST_OAuth extends NF_AJAX_REST_Controller
             'client_id' => $client_id,
             'client_secret' => $client_secret,
             'client_redirect' => urlencode( add_query_arg( 'page', 'ninja-forms', admin_url() ) ),
+            'client_site_url' => site_url()
         ) );
     }
 
