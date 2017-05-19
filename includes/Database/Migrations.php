@@ -40,6 +40,9 @@ class NF_Database_Migrations
             $wpdb->query( "DROP TABLE $migration->table_name" );
 
         }
+
+        delete_site_option( 'ninja_forms_client_id' );
+        delete_site_option( 'ninja_forms_client_secret' );
     }
 
 }
