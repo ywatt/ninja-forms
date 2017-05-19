@@ -227,6 +227,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 self::$instance->controllers[ 'REST' ][ 'oauth' ] = new NF_AJAX_REST_OAuth();
 
                 /*
+                 * Webhooks
+                 */
+                self::$instance->webhooks[ 'example' ] = new NF_Webhooks_Example();
+                self::$instance->webhooks[ 'example' ]->init();
+
+                /*
                  * Async Requests
                  */
                 require_once Ninja_Forms::$dir . 'includes/Libraries/BackgroundProcessing/classes/wp-async-request.php';
