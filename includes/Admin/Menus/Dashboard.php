@@ -13,6 +13,16 @@ final class NF_Admin_Menus_Dashboard extends NF_Abstracts_Submenu
     public function __construct()
     {
         parent::__construct();
+
+        add_filter( 'ninja_forms_plugin_settings_advanced', array( $this, 'plugin_settings' ) );
+    }
+
+    public function plugin_settings( $advanced_settings )
+    {
+        if( ! get_site_option( 'ninja_forms_client_id' ) || ! get_site_option( 'ninja_forms_client_secret' ) ){
+            unset( $advanced_settings[ 'oauth_disconnect' ] );
+        }
+        return $advanced_settings;
     }
 
     public function get_page_title()

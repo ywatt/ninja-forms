@@ -43,6 +43,28 @@ class NF_AJAX_REST_OAuth extends NF_AJAX_REST_Controller
         ) );
     }
 
+    public function delete()
+    {
+        delete_site_option( 'ninja_forms_client_id' );
+        delete_site_option( 'ninja_forms_client_secret' );
+        $this->_respond();
+    }
+
+    protected function get_request_data()
+    {
+        $data = array();
+
+        if( 'DELETE' == $_SERVER['REQUEST_METHOD'] ){
+            parse_str( file_get_contents( 'php://input' ), $request_data );
+            if ( ! wp_verify_nonce( $request_data[ 'nonce' ], 'nf_oauth' ) ) {
+                $this->_errors[ 'nonce' ] = 'The nonce does not match';
+                $this->_respond();
+            }
+        }
+
+        return $data;
+    }
+
     /**
      * Ported from WP OAuth Server Pro
      * TODO: Move functionality outside of the REST Controller.

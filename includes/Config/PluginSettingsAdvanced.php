@@ -85,4 +85,22 @@ return apply_filters( 'ninja_forms_plugin_settings_advanced', array(
         'desc'  => __( 'Rollback to the most recent 2.9.x release.', 'ninja-forms' ) . '<br /><div style="color: red">' . __( 'IMPORTANT: All 3.0 data will be removed.', 'ninja-forms' ) . '<br />' . __( 'Please export any forms or submissions you do not want to be lost during this process.', 'ninja-forms' ) . '</div>',
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | OAuth Disconnect
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+     * @todo Add description text.
+     */
+    'oauth_disconnect' => array(
+        'id'    => 'oauth_disconnect',
+        'type'  => 'html',
+        'html' => '<button class="button button-secondary js-oauth-disconnect" type="button">'
+            . __( 'Disconnect', 'ninja-forms' ) . '</button>',
+        'label' => __( 'Connection to NinjaForms.com', 'ninja-forms' ),
+        'desc'  => '',
+    ),
+
 ));
