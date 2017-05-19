@@ -15,8 +15,18 @@ define( [], function() {
         },
 
         initialize: function() {
+            var flag = true;
             this.on( 'change:client_id', this.maybeRequestAccessToken, this );
             this.on( 'change:client_token', function( model, client_token, options ){
+
+                if( 'undefined' == typeof client_token ) return;
+
+                if( flag || client_token.is_expired() ){
+                    flag = false;
+                    model.unset( 'client_token' );
+                    this.maybeRequestAccessToken();
+                    return;
+                }
 
                 jQuery.ajax( {
                     url: 'https://ninjaforms.dev/wp-json/ninja-forms-auth/v1/example-subscriber',
