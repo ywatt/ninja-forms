@@ -6,14 +6,14 @@ abstract class NF_Webhooks_Webhook
 
     public function init()
     {
-        if( ! isset( $_GET[ 'nf_webhook' ] ) ) return;
-        if( $this->action != $_GET[ 'nf_webhook' ] ) return;
+        if( ! isset( $_REQUEST[ 'nf_webhook' ] ) ) return;
+        if( $this->action != $_REQUEST[ 'nf_webhook' ] ) return;
 
         $allowed_origin = ( is_ssl() ) ? 'https://ninjaforms.dev' : 'http://ninjaforms.dev';
         header( 'Access-Control-Allow-Origin: ' . $allowed_origin );
 
-        $hash = $_GET[ 'nf_webhook_hash' ];
-        $payload = $_GET[ 'nf_webhook_payload' ];
+        $hash = $_REQUEST[ 'nf_webhook_hash' ];
+        $payload = $_REQUEST[ 'nf_webhook_payload' ];
 
         $client_id = get_site_option( 'ninja_forms_client_id' );
         $client_secret = get_site_option( 'ninja_forms_client_secret' );
