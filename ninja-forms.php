@@ -230,7 +230,10 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  * Webhooks
                  */
                 self::$instance->webhooks[ 'example' ] = new NF_Webhooks_Example();
-                self::$instance->webhooks[ 'example' ]->init();
+                self::$instance->webhooks[ 'install' ] = new NF_Webhooks_PluginInstall();
+                foreach( self::$instance->webhooks as $webhook ){
+                    $webhook->init();
+                }
 
                 /*
                  * Async Requests
