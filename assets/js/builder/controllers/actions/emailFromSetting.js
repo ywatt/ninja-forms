@@ -13,12 +13,17 @@ define( [], function( ) {
         updateFromAddress: function( dataModel, settingModel ) {
             if( 'undefined' == typeof settingModel ) return;
 
-            var value = dataModel.get( 'from_address' );
-            var error = false;
-            if( value && ! this.isValidEmail( value ) ){
-                error = nfi18n.errorInvalidEmailFromAddress;
+            var value = dataModel.get( 'from_address' ).trim();
+
+            if( '{wp:admin_email}' == value ) {
+                return settingModel.set( 'warning', false );
             }
-            settingModel.set( 'error', error );
+
+            if( value && ( ! this.isValidEmail( value ) ) || nfAdmin.home_url_host != value.replace(/.*@/, "") ){
+                return settingModel.set( 'warning', nfi18n.errorInvalidEmailFromAddress );
+            }
+
+            return settingModel.set( 'warning', false );
         },
 
         isValidEmail: function(email) {

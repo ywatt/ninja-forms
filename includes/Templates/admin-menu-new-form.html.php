@@ -443,7 +443,7 @@ Label Three, value-three, 3
 </script>
 
 <script id="tmpl-nf-edit-setting-error" type="text/template">
-    <div>{{{ data.error }}}</div>
+    <div>{{{ data.error || data.warning }}}</div>
 </script>
 
 <script id="tmpl-nf-edit-setting-textbox" type="text/template">
