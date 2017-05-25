@@ -16,14 +16,14 @@ define( [], function( ) {
             var value = dataModel.get( 'from_address' ).trim();
 
             if( '{wp:admin_email}' == value ) {
-                return settingModel.set( 'error', false );
+                return settingModel.set( 'warning', false );
             }
 
             if( value && ( ! this.isValidEmail( value ) ) || nfAdmin.home_url_host != value.replace(/.*@/, "") ){
-                return settingModel.set( 'error', nfi18n.errorInvalidEmailFromAddress );
+                return settingModel.set( 'warning', nfi18n.errorInvalidEmailFromAddress );
             }
 
-            return settingModel.set( 'error', false );
+            return settingModel.set( 'warning', false );
         },
 
         isValidEmail: function(email) {
