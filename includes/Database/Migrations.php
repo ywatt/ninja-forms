@@ -103,7 +103,7 @@ class NF_Database_Migrations
         global $wpdb;
 
         if( ! function_exists( 'is_multisite' ) || ! is_multisite() ){
-            $this->_nuke_deprecated();
+            return $this->_nuke_deprecated();
         }
 
         $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
