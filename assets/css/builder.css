@@ -1034,6 +1034,12 @@ table.nf-changes tr:hover td {
   width: 18px;
   margin-right: 5px; }
 
+.nf-setting-error {
+  color: red;
+  padding: 5px 10px; }
+  .nf-setting-error a {
+    color: red; }
+
 /*
 Various custom field styles
 --------------------------------- */

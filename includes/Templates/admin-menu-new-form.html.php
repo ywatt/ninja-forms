@@ -413,7 +413,7 @@
 <script id="tmpl-nf-edit-setting-wrap" type="text/template">
     <div class="{{{ data.renderClasses() }}}" {{{ data.renderVisible() }}}>
         {{{ data.renderSetting() }}}
-        <span class="nf-setting-error"></span>
+        <div class="nf-setting-error"></div>
     </div>
 </script>
 
