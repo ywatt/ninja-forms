@@ -93,6 +93,10 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 				new: true,
 				options: {}
 			};
+            var limit = collection.settingModel.get( 'max_options' );
+            if( 0 !== limit && collection.models.length >= limit ) {
+                return;
+            }
 			_.each( collection.settingModel.get( 'columns' ), function( col, key ) {
 				modelData[ key ] = col.default;
 
@@ -114,6 +118,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 			nfRadio.channel( 'changes' ).request( 'register:change', 'addListOption', model, null, label );
 			nfRadio.channel( 'option-repeater-' + collection.settingModel.get( 'name' ) ).trigger( 'add:option', model );
 			nfRadio.channel( 'option-repeater' ).trigger( 'add:option', model );
+			nfRadio.channel( 'option-repeater' ).trigger( 'added:option', collection );
 			this.triggerDataModel( model, dataModel );
 		},
 
@@ -160,6 +165,7 @@ define( ['models/app/optionRepeaterModel', 'models/app/optionRepeaterCollection'
 
 			collection.remove( model );
 			nfRadio.channel( 'option-repeater' ).trigger( 'remove:option', model );
+			nfRadio.channel( 'option-repeater' ).trigger( 'removed:option', collection );
 			nfRadio.channel( 'option-repeater-' + collection.settingModel.get( 'name' ) ).trigger( 'remove:option', model );
 			this.triggerDataModel( model, dataModel );
 		},
