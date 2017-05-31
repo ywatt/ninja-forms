@@ -165,6 +165,10 @@ final class NF_Admin_Menus_Settings extends NF_Abstracts_Submenu
             $data[ 'oauth_client_secret' ] = get_site_option( 'ninja_forms_client_secret' );
         }
 
+        if( isset( $client_id ) && isset( $client_secret ) ) {
+            unset( $tabs[ 'licenses' ] );
+        }
+
         if( $saved_fields ){
             $data[ 'nonce' ] = wp_create_nonce( "ninja_forms_settings_nonce" );
         }

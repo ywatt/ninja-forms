@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
         $button.text( 'Disconnecting...' );
 
         $.ajax({
-            url: 'https://ninjaforms.dev/oauth/disconnect',
+            url: 'https://my.ninjaforms.com/oauth/disconnect',
             type: 'DELETE',
             data: {
                 client_id: nf_settings.oauth_client_id,
