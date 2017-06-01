@@ -222,17 +222,20 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 /*
                  * REST Controllers
                  */
-                self::$instance->controllers[ 'REST' ][ 'forms' ] = new NF_AJAX_REST_Forms();
+                self::$instance->controllers[ 'REST' ]
+                [ 'forms' ] = new NF_AJAX_REST_Forms();
                 self::$instance->controllers[ 'REST' ][ 'new-form-templates' ] = new NF_AJAX_REST_NewFormTemplates();
                 self::$instance->controllers[ 'REST' ][ 'oauth' ] = new NF_AJAX_REST_OAuth();
 
                 /*
-                 * Webhooks
+                 * Webhooks Router
                  */
-                self::$instance->webhooks[ 'example' ] = new NF_Webhooks_Example();
-                self::$instance->webhooks[ 'install' ] = new NF_Webhooks_PluginInstall();
-                foreach( self::$instance->webhooks as $webhook ){
-                    $webhook->init();
+                if( isset( $_REQUEST[ 'nf_webhook' ] ) ) {
+                    $webhook = new NF_Webhooks_Router( $_REQUEST[ 'nf_webhook' ], array(
+                        'example' => 'NF_Webhooks_Example',
+                        'install' => 'NF_Webhooks_PluginInstall'
+                    ));
+                    $webhook->init( $_REQUEST[ 'nf_webhook_payload' ], $_REQUEST[ 'nf_webhook_hash' ], get_option('ninja_forms_client_id'), get_option('ninja_forms_client_secret') );
                 }
 
                 /*
