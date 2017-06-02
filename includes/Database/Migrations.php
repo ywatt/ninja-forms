@@ -33,6 +33,7 @@ class NF_Database_Migrations
 
         if( ! function_exists( 'is_multisite' ) || ! is_multisite() ){
             $this->_nuke();
+            return;
         }
 
         $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
@@ -67,6 +68,7 @@ class NF_Database_Migrations
 
         if( ! function_exists( 'is_multisite' ) || ! is_multisite() ){
             $this->_nuke_settings();
+            return;
         }
 
         $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
@@ -103,7 +105,8 @@ class NF_Database_Migrations
         global $wpdb;
 
         if( ! function_exists( 'is_multisite' ) || ! is_multisite() ){
-            return $this->_nuke_deprecated();
+            $this->_nuke_deprecated();
+            return;
         }
 
         $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
