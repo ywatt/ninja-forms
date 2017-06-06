@@ -203,7 +203,6 @@ define( [
             jQuery( '#merge-tags-box' ).css( 'display', 'none' );
             nfRadio.channel( 'drawer' ).request( 'enable:close' );
             // jQuery( 'body' ).append( jQuery( '#merge-tags-box' ) );
-            nfRadio.channel( 'mergeTags' ).trigger( 'open' );
         },
 
         insertTag: function( tag ) {
