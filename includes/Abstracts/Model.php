@@ -476,7 +476,7 @@ class NF_Abstracts_Model
         // If the ID is not set, assign an ID
         if( ! $this->_id ){
 
-            $data = array( 'created_at' => time() );
+            $data = array( 'created_at' => current_time('mysql') );
 
             if( $this->_parent_id ){
                 $data['parent_id'] = $this->_parent_id;
@@ -509,7 +509,7 @@ class NF_Abstracts_Model
 
     public function _insert_row( $data = array() )
     {
-        $data[ 'created_at' ] = time();
+        $data[ 'created_at' ] = current_time('mysql');
 
         if( $this->_parent_id ){
             $data['parent_id'] = $this->_parent_id;
