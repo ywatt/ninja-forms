@@ -38,6 +38,7 @@ final class NF_Display_Render
     public static function localize( $form_id )
     {
         global $wp_locale;
+        $form_id = absint( $form_id );
 
         $capability = apply_filters( 'ninja_forms_display_test_values_capabilities', 'read' );
         if( isset( $_GET[ 'ninja_forms_test_values' ] ) && current_user_can( $capability ) ){
