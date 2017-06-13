@@ -727,10 +727,12 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 
     function ninja_forms_uninstall(){
 
-        if( Ninja_Forms()->get_setting( 'delete_on_uninstall ') ) {
+        if( Ninja_Forms()->get_setting( 'delete_on_uninstall' ) ) {
             require_once plugin_dir_path(__FILE__) . '/includes/Database/Migrations.php';
             $migrations = new NF_Database_Migrations();
             $migrations->nuke(TRUE, TRUE);
+            $migrations->nuke_settings(TRUE, TRUE);
+            $migrations->nuke_deprecated(TRUE, TRUE);
         }
     }
 
