@@ -119,6 +119,9 @@ define( [
             this.listenTo( Backbone.Radio.channel( 'fields' ), 'add:field',    this.afterAppStart );
             this.listenTo( Backbone.Radio.channel( 'fields' ), 'delete:field', this.afterAppStart );
             this.listenTo( Backbone.Radio.channel( 'fieldSetting-key' ), 'update:setting', this.afterAppStart );
+
+            /** ... and Calc updates. */
+            this.listenTo( Backbone.Radio.channel( 'calcs' ), 'update:calc', this.afterAppStart );
         },
 
         afterAppStart: function() {
