@@ -364,7 +364,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         }
 
         if( 'email' == $action[ 'type' ] ){
-            $action[ 'to' ] = str_replace( '`', ',', $action[ 'to' ] );
+            $action[ 'to' ]            = str_replace( '`', ',', $action[ 'to' ] );
+            $action[ 'email_subject' ] = str_replace( '`', ',', $action[ 'email_subject' ] );
         }
 
         // Convert `name` to `label`
