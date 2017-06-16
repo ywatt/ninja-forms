@@ -24,6 +24,8 @@ final class NF_MergeTags_Other extends NF_Abstracts_MergeTags
             preg_match_all("/{querystring:(.*?)}/", $subject, $matches );
         }
 
+        if ( ! isset( $matches ) || ! is_array( $matches ) ) return $subject;
+
         /**
          * $matches[0][$i]  merge tag match     {post_meta:foo}
          * $matches[1][$i]  captured meta key   foo
