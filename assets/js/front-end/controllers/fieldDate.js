@@ -13,11 +13,13 @@ define([], function() {
                 outputFormat: view.model.get( 'date_format' ),
                 classes: jQuery( el ).attr( "class" ),
                 pikadayOptions: {
-                    yearRange:  this.getYearRange( view.model )
+                    yearRange:  this.getYearRange( view.model ),
+                    minDate: this.getMinDate( view.model ),
+                    maxDate: this.getMaxDate( view.model )
                 }
             } );
             if ( 1 == view.model.get( 'date_default' ) ) {
-               dateObject.setDate( moment() ); 
+               dateObject.setDate( moment() );
             }
 
             nfRadio.channel( 'pikaday' ).trigger( 'init', dateObject, view.model );
@@ -39,6 +41,28 @@ define([], function() {
             }
 
             return yearRange;
+        },
+
+        getMinDate: function( fieldModel ) {
+            var minDate = null;
+            var yearRangeStart = fieldModel.get( 'year_range_start' );
+
+            if( yearRangeStart ) {
+                return new Date( yearRangeStart, 0, 1 );
+            }
+
+            return minDate;
+        },
+
+        getMaxDate: function( fieldModel ) {
+            var maxDate = null;
+            var yearRangeEnd   = fieldModel.get( 'year_range_end' );
+
+            if( yearRangeEnd ) {
+                return new Date( yearRangeEnd, 11, 31 );
+            }
+
+            return maxDate;
         }
     });
 
