@@ -14,11 +14,11 @@ final class NF_Webhooks_Router
     {
         $response = new NF_Webhooks_Response();
 
-//        if( $hash != sha1( $payload . $client_id . $client_secret  ) ) {
-//            $response->respond( array(
-//                'error' => 'Forbidden'
-//            ), 403 );
-//        }
+        if( $hash != sha1( $payload . $client_id . $client_secret  ) ) {
+            $response->respond( array(
+                'error' => 'Forbidden'
+            ), 403 );
+        }
         $payload = json_decode( $payload, true );
 
         $this->controller->process( $payload, $response );
