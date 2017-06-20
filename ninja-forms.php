@@ -232,8 +232,8 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 if( isset( $_REQUEST[ 'nf_webhook' ] ) ) {
                     $webhook = new NF_Webhooks_Router( $_REQUEST[ 'nf_webhook' ], array(
-                        'example' => 'NF_Webhooks_Example',
-                        'install' => 'NF_Webhooks_PluginInstall'
+                        'example' => 'NF_Webhooks_WebhookExample',
+                        'install' => 'NF_Webhooks_WebhookInstall'
                     ));
                     $webhook->init( $_REQUEST[ 'nf_webhook_payload' ], $_REQUEST[ 'nf_webhook_hash' ], get_option('ninja_forms_client_id'), get_option('ninja_forms_client_secret') );
                 }

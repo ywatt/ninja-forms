@@ -11,12 +11,15 @@ class NF_Webhooks_Response
         $this->status_code = $status_code;
     }
 
-    public function respond( $data = false, $status_code = false )
+    public function respond( $data = array(), $status_code = false )
     {
         if( $status_code ) $this->status_code = $status_code;
         status_header( $this->status_code );
 
-        if( $data ) $this->data = array_merge( $this->data, $data );
+        if( $data ){
+            if( ! is_array($data) ) $data = array( $data );
+            $this->data = array_merge( $this->data, $data );
+        }
         echo json_encode( $this->data );
 
         exit();
