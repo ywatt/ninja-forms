@@ -49,6 +49,10 @@ final class NF_Webhooks_WebhookInstall implements NF_Webhooks_Webhook
             break;
         }
 
+        Ninja_Forms()->update_setting( $this->payload[ 'slug' ] . '_license', $this->payload[ 'license' ] );
+        Ninja_Forms()->update_setting( $this->payload[ 'slug' ] . '_license_error', '' );
+        Ninja_Forms()->update_setting( $this->payload[ 'slug' ] . '_license_status', 'valid' ); // Assumed valid.
+
         // @todo Check for errors.
         $this->response->respond( 'success' );
     }
