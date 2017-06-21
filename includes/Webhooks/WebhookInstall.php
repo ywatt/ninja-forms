@@ -24,8 +24,33 @@ final class NF_Webhooks_WebhookInstall implements NF_Webhooks_Webhook
 
         $result = $this->_install_plugin( $this->payload[ 'download' ], $this->payload[ 'license' ], 'https://my.ninjaforms.com' );
 
+        if( ! isset( $result[ 'destination_name' ] ) ){
+            $this->response->respond(array(
+                'error' => 'Plugin destination not found.'
+            ), '404' ); // @todo Update error code.
+        }
+
+        if ( ! function_exists( 'get_plugins' ) ) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        foreach( get_plugins() as $file_path => $plugin ){
+            $path = explode( '/', $file_path );
+            if( $result[ 'destination_name' ] !== $path[0] ) continue;
+
+            // Activate plugin
+            $activated = activate_plugin( $file_path );
+            if ( is_wp_error( $activated ) ) {
+                // Process Error
+                $this->response->respond(array(
+                    'error' => 'Plugin did not activate.'
+                ), '404' ); // @todo Update error code.
+            }
+            break;
+        }
+
         // @todo Check for errors.
-        $this->response->respond( $result );
+        $this->response->respond( 'success' );
     }
 
     /**
