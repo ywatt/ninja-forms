@@ -22,8 +22,9 @@ jQuery(document).ready(function($) {
         $button = jQuery( this );
         $button.text( 'Disconnecting...' );
 
+        // @todo Add error handler.
         $.ajax({
-            url: 'https://ninjaforms.dev/oauth/disconnect',
+            url: 'https://s23156.p100.sites.pressdns.com/oauth/disconnect',
             type: 'DELETE',
             data: {
                 client_id: nf_settings.oauth_client_id,
