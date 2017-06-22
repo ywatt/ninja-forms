@@ -88,7 +88,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 		},
 
 		maybeAddOption: function( e ) {
-			if ( 13 == e.keyCode ) {
+			if ( 13 == e.keyCode && 'calculations' != this.settingModel.get( 'name' ) ) {
 				nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel, this );
 				jQuery( this.parentView.children.findByIndex(this.parentView.children.length - 1).el ).find( '[data-id="label"]' ).focus();
 			}
