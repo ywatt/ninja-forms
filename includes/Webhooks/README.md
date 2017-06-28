@@ -1,6 +1,6 @@
 # WebHooks
 
-WebHooks are the main method of communication between NinjaForms.com as a service.
+WebHooks are the main method of communication between NinjaForms.com, as a service, and the distributed Ninja Forms plugin.
 
 Every request should be signed using the OAuth client registered by the end user's WordPress installation with NinjaForms.com.
 

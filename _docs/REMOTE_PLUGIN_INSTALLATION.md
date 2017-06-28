@@ -4,9 +4,9 @@ The **Remote Plugin Installation** feature introduces an authentication based pr
 
 ## Terminology
 
-**Site Manager** - Site Manager (JS) Application - Hosted
-
 **Service** - My.NinjaForms.com Service
+
+**Site Manager** - Site Manager (JS) Application - Hosted on the **Service**
 
 **Plugin** - Ninja Forms plugin (installed on a user's WordPress installation)
 
@@ -14,10 +14,10 @@ The **Remote Plugin Installation** feature introduces an authentication based pr
 
 The Remote Plugin Installation feature requires that the following are installed on the **Service** site.
 
-- WP OAuth Server
-- Easy Digital Downloads
-  - EDD Software Licensing
-  - EDD Remote Plugin Installer
+- WP OAuth Server - https://wp-oauth.com/
+- Easy Digital Downloads - https://easydigitaldownloads.com/
+  - EDD Software Licensing - https://easydigitaldownloads.com/downloads/software-licensing/
+  - EDD Remote Plugin Installer - https://github.com/aristath/edd-remote-installer
 
 ## Security
 
@@ -31,7 +31,7 @@ NOTE: The exception to this is the actual download of the plugin zip, which requ
 
 ## Request Flow
 
-From the **Plugin** dashboard, a user "connects" to NinjaForms.com. After authentication, the site's URL is registered as an oauth client.
+From the **Plugin** dashboard, a user "connects" to the **Service**. After authentication, the site's URL is registered as an oauth client.
 See: `_docs/OAUTH`.
 
 From the **Site Manager**, the user chooses to activate a specific add-on for a registered WordPress install.
