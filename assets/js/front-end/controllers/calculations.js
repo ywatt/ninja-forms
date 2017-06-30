@@ -102,6 +102,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 
 					// Get our field model
 					fieldModel = nfRadio.channel( 'form-' + calcModel.get( 'formID' ) ).request( 'get:fieldByKey', key );
+                    fieldModel.set( 'clean', false );
 
 					if( 'undefined' == typeof fieldModel ) return;
 					// Register a listener in our field model for value changes.
