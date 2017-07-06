@@ -83,10 +83,13 @@ final class NF_Actions_Email extends NF_Abstracts_Action
             $errors[ 'email_sent' ] = $e->getMessage();
         }
 
-        $data[ 'actions' ][ 'email' ][ 'to' ] = $action_settings['to'];
+        if( is_user_logged_in() && current_user_can( 'activate_plugins' ) ) {
+            $data[ 'actions' ][ 'email' ][ 'to' ] = $action_settings[ 'to' ];
+            $data[ 'actions' ][ 'email' ][ 'headers' ] = $headers;
+            $data[ 'actions' ][ 'email' ][ 'attachments' ] = $attachments;
+        }
+
         $data[ 'actions' ][ 'email' ][ 'sent' ] = $sent;
-        $data[ 'actions' ][ 'email' ][ 'headers' ] = $headers;
-        $data[ 'actions' ][ 'email' ][ 'attachments' ] = $attachments;
 
         if( $errors ){
             $data[ 'errors' ][ 'form' ] = $errors;
