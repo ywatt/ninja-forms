@@ -59,9 +59,7 @@ define( ['models/formModel'], function( FormModel ) {
         confirmDelete: function( view ) {
             console.log('Deleting ' + view.model.get('id') + '...');
             jQuery( view.el ).addClass( 'deleting' );
-            view.model.destroy({
-                wait: true
-            });
+            view.model.destroy();
             this.modalClose();
         },
         
