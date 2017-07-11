@@ -37,7 +37,7 @@ abstract class NF_AJAX_REST_Controller extends NF_Abstracts_Controller
          * For example, some servers do not support the DELETE request method.
          */
         if( 'post' == $method and isset( $_REQUEST[ 'method_override' ] ) ){
-            $method = sanatize_text_field( $_REQUEST[ 'method_override' ] );
+            $method = sanitize_text_field( $_REQUEST[ 'method_override' ] );
         }
 
         if( ! method_exists( $this, $method ) ){
