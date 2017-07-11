@@ -88,7 +88,8 @@ final class NF_Actions_Email extends NF_Abstracts_Action
         $data[ 'actions' ][ 'email' ][ 'headers' ] = $headers;
         $data[ 'actions' ][ 'email' ][ 'attachments' ] = $attachments;
 
-        if( $errors ){
+        // Only show errors to Administrators.
+        if( $errors && current_user_can( 'manage_options' ) ){
             $data[ 'errors' ][ 'form' ] = $errors;
         }
         
