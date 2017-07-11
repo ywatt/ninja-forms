@@ -21,4 +21,5 @@ return apply_filters( 'ninja_forms_i18n_front_end', array(
     'fieldsMarkedRequired'                  => sprintf( __( 'Fields marked with an %s*%s are required', 'ninja-forms' ), '<span class="ninja-forms-req-symbol">', '</span>' ),
     'thousands_sep'                         => $wp_locale->number_format[ 'thousands_sep' ],
     'decimal_point'                         => $wp_locale->number_format[ 'decimal_point' ],
+    'startOfWeek'                           => get_option( 'start_of_week' )
 ));

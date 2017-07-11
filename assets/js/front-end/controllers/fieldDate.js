@@ -13,7 +13,8 @@ define([], function() {
                 outputFormat: view.model.get( 'date_format' ),
                 classes: jQuery( el ).attr( "class" ),
                 pikadayOptions: {
-                    yearRange:  this.getYearRange( view.model )
+                    yearRange:  this.getYearRange( view.model ),
+                    firstDay: parseInt( nfi18n.startOfWeek )
                 }
             } );
             if ( 1 == view.model.get( 'date_default' ) ) {
