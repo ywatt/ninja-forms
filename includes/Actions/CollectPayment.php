@@ -60,7 +60,13 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
 
         $payment_gateway_class = $this->payment_gateways[ $payment_gateway ];
 
-        return $payment_gateway_class->process( $action_settings, $form_id, $data );
+        /*
+         * Get our payment total.
+         */
+        
+
+
+        return $payment_gateway_class->process( $action_settings, $form_id, $data, $payment_total );
     }
 
     public function register_payment_gateways()
