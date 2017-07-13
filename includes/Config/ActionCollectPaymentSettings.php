@@ -25,24 +25,67 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
 
     /*
     |--------------------------------------------------------------------------
-    | Payment Total
+    | Payment Type
     |--------------------------------------------------------------------------
     */
 
-    'payment_total' => array(
-        'name' => 'payment_total',
-        'type' => 'textbox',
-        'label' => __( 'Payment Total', 'ninja-forms' ),
-        'width' => 'full',
+    //building the payment type selector box
+    'payment_type' =>  array(
+        'name' => 'payment_type',
+        'type' => 'select',
+        'label' => __( 'Select Payment Type', 'ninja-forms' ),
+        'width' => 'one-third',
         'group' => 'primary',
-        'use_merge_tags' => array(
-            'include' => array( 'calcs' ),
-            'exclude' => array(
-                'user',
-                'post',
-                'system'
-            )
+        'options' => array(
+            array( 'label' =>  '--', 'value' => '--' ),
+            array( 'label' => __( 'Calculation', 'ninja-forms' ), 'value' => 'calculation' ),
+            array( 'label' => __( 'Field', 'ninja-forms' ), 'value' => 'field' ),
+            array( 'label' => __( 'Custom', 'ninja-forms' ), 'value' => 'custom' ),
+        ),
+    ),
+
+    //building the calc selector.
+    'payment_calc' => array(
+        'name' => 'payment_calc',
+        'type' => 'select',
+        'label' => __( 'Select A Calculation Variable', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'deps' => array(
+            'payment_type' => 'calculation',
+        ),
+        'options' => array(
+            'label' => '--',
+            'value' => '',
         )
     ),
 
+    //building the field selector.
+    'payment_field' => array(
+        'name' => 'payment_field',
+        'type' => 'select',
+        'label' => __( 'Select A Field', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'deps' => array(
+            'payment_type' => 'field',
+        ),
+        'options' => array(
+            'label' => '--',
+            'value' => '',
+        )
+    ),
+
+    //building the field selector.
+    'payment_custom' => array(
+        'name' => 'payment_custom',
+        'type' => 'textbox',
+        'label' => __( 'Custom Payment Amount', 'ninja-forms' ),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'deps' => array(
+            'payment_type' => 'custom',
+        ),
+        'use_merge_tags' => false
+    ),
 ));
