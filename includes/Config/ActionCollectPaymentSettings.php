@@ -33,14 +33,14 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
     'payment_total_type' =>  array(
         'name' => 'payment_total_type',
         'type' => 'select',
-        'label' => __( 'Select Payment Type', 'ninja-forms' ),
-        'width' => 'one-third',
+        'label' => __( 'Get Total From', 'ninja-forms' ),
+        'width' => 'one-half',
         'group' => 'primary',
         'options' => array(
             array( 'label' =>  '--', 'value' => '--' ),
             array( 'label' => __( 'Calculation', 'ninja-forms' ), 'value' => 'calculation' ),
             array( 'label' => __( 'Field', 'ninja-forms' ), 'value' => 'field' ),
-            array( 'label' => __( 'Custom', 'ninja-forms' ), 'value' => 'custom' ),
+            array( 'label' => __( 'Static Amount', 'ninja-forms' ), 'value' => 'custom' ),
         ),
     ),
 
@@ -48,7 +48,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
     'payment_total_calc' => array(
         'name' => 'payment_total_calc',
         'type' => 'select',
-        'label' => __( 'Select A Calculation Variable', 'ninja-forms' ),
+        'label' => __( 'Select Calculation', 'ninja-forms' ),
         'width' => 'one-half',
         'group' => 'primary',
         'deps' => array(
@@ -64,7 +64,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
     'payment_total_field' => array(
         'name' => 'payment_total_field',
         'type' => 'select',
-        'label' => __( 'Select A Field', 'ninja-forms' ),
+        'label' => __( 'Select Field', 'ninja-forms' ),
         'width' => 'one-half',
         'group' => 'primary',
         'deps' => array(
@@ -80,7 +80,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
     'payment_total_custom' => array(
         'name' => 'payment_total_custom',
         'type' => 'textbox',
-        'label' => __( 'Custom Payment Amount', 'ninja-forms' ),
+        'label' => __( 'Enter Amount', 'ninja-forms' ),
         'width' => 'one-half',
         'group' => 'primary',
         'deps' => array(
