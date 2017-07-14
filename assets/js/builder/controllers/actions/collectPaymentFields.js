@@ -16,14 +16,15 @@ define( [], function() {
 		},
 
 		beforeRenderSetting: function( settingModel, dataModel, view ) {
-			if ( 'payment_total_field' == settingModel.get( 'name' ) ) {
+			if ( 'field' == settingModel.get( 'payment_type' ) ) {
 				var fields = this.getFields( settingModel );
 				settingModel.set( 'options', fields );
 			}
 		},
 
 		getFields: function( settingModel ) {
-			var returnFields = [];
+			var returnFields = [ settingModel.get( 'default_options' ) ];
+			console.log( returnFields );
 			// Update our dataModel with all of our product fields.
 			var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			_.each( fields.models, function( field ) {
