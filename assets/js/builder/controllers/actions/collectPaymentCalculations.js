@@ -16,16 +16,16 @@ define( [], function() {
         },
 
         beforeRenderSetting: function( settingModel, dataModel, view ) {
-            if ( 'payment_total_calc' == settingModel.get( 'name' ) ) {
+            if ( 'calc' == settingModel.get( 'total_type' ) ) {
                 var calcModels = nfRadio.channel( 'app' ).request( 'get:formModel' );
-                var calcs = this.getCalcs( calcModels );
+                var calcs = this.getCalcs( calcModels, settingModel );
 
                 settingModel.set( 'options', calcs );
             }
         },
 
-        getCalcs: function( calcModels ) {
-            var returnCalcs = [];
+        getCalcs: function( calcModels, settingModel ) {
+            var returnCalcs = [ settingModel.get( 'default_options' ) ];
 
             // Update our dataModel with all of our product fields.
             var calcs = calcModels.get( 'settings' ).get( 'calculations' );
