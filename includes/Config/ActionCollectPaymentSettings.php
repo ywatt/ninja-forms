@@ -58,7 +58,8 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
         'default_options' => array(
             'label' => __( '- Select One', 'ninja-forms' ),
             'value' => '',
-        )
+        ),
+        'use_merge_tags' => TRUE,
     ),
 
     //building the field selector.
@@ -75,7 +76,8 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
         'default_options' => array(
             'label' => __( '- Select One', 'ninja-forms' ),
             'value' => '',
-        )
+        ),
+        'use_merge_tags' => TRUE,
     ),
 
     //building the field selector.
@@ -89,6 +91,5 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
         'deps' => array(
             'payment_total_type' => 'custom',
         ),
-        'use_merge_tags' => false
     ),
 ));

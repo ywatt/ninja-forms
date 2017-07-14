@@ -31,8 +31,7 @@ define( [], function() {
             var calcs = calcModels.get( 'settings' ).get( 'calculations' );
 
             _.each( calcs.models, function( calc ) {
-                console.log( calc );
-                    returnCalcs.push( { label: calc.get( 'name' ), value: '{calc:' + calc.get( 'name' ) + '}' } );
+                returnCalcs.push( { label: calc.get( 'name' ), value: '{calc:' + calc.get( 'name' ) + '}' } );
             } );
             return returnCalcs;
         }
