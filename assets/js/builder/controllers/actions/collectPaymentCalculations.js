@@ -32,7 +32,7 @@ define( [], function() {
 
             _.each( calcs.models, function( calc ) {
                 console.log( calc );
-                    returnCalcs.push( { label: calc.get( 'name' ), value: calc.get( 'name' ) } );
+                    returnCalcs.push( { label: calc.get( 'name' ), value: '{calc:' + calc.get( 'name' ) + '}' } );
             } );
             return returnCalcs;
         }
