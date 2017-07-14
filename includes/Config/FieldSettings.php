@@ -381,7 +381,7 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'options'       => array(
             array(
                 'label' => __( 'Default', 'ninja-forms' ),
-                'value' => Ninja_Forms()->get_setting( 'date_format' ),
+                'value' => 'default',
             ),
             array(
                 'label' => __( 'DD/MM/YYYY', 'ninja-forms' ),
