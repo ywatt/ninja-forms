@@ -1,7 +1,7 @@
 /**
  * Listens to our app channel for settings views being rendered.
  *
- * If we're rendering a collect payment setting, add our products to the data model.
+ * If we're rendering a collect payment setting, add our number fields and total fields to the data model.
  * 
  * @package Ninja Forms builder
  * @subpackage Main App
