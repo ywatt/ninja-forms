@@ -94,6 +94,7 @@ define(
 		'controllers/actions/filterTypes',
 		'controllers/actions/newsletterList',
 		'controllers/actions/collectPaymentFields',
+		'controllers/actions/collectPaymentCalculations',
 
 		/*
 		 * TODO: Settings domain controllers
@@ -191,6 +192,7 @@ define(
 		ActionFilterTypes,
 		ActionNewsletterList,
 		ActionCollectPaymentFields,
+		ActionCollectPaymentCalculations,
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -287,6 +289,8 @@ define(
 				new ActionDroppable();
 				new ActionFilterTypes();
 				new ActionCollectPaymentFields();
+				new ActionCollectPaymentCalculations();
+
 				/*
 				 * TODO: Settings domain controllers
 				 */
