@@ -16,7 +16,7 @@ define( [], function() {
 		},
 
 		beforeRenderSetting: function( settingModel, dataModel, view ) {
-			if ( 'field' == settingModel.get( 'payment_type' ) ) {
+			if ( 'field' == settingModel.get( 'total_type' ) ) {
 				var fields = this.getFields( settingModel );
 				settingModel.set( 'options', fields );
 			}
@@ -24,7 +24,6 @@ define( [], function() {
 
 		getFields: function( settingModel ) {
 			var returnFields = [ settingModel.get( 'default_options' ) ];
-			console.log( returnFields );
 			// Update our dataModel with all of our product fields.
 			var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			_.each( fields.models, function( field ) {

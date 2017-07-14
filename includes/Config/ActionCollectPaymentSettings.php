@@ -47,7 +47,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
     //building the calc selector.
     'payment_total_calc' => array(
         'name' => 'payment_total',
-        'payment_type'  => 'calc',
+        'total_type'  => 'calc',
         'type' => 'select',
         'label' => __( 'Select Calculation', 'ninja-forms' ),
         'width' => 'one-half',
@@ -64,7 +64,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
     //building the field selector.
     'payment_total_field' => array(
         'name' => 'payment_total',
-        'payment_type' => 'field',
+        'total_type' => 'field',
         'type' => 'select',
         'label' => __( 'Select Field', 'ninja-forms' ),
         'width' => 'one-half',
@@ -79,9 +79,9 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
     ),
 
     //building the field selector.
-    'payment_total_custom' => array(
+    'payment_total_static' => array(
         'name' => 'payment_total',
-        'payment_type' => 'custom',
+        'total_type' => 'static',
         'type' => 'textbox',
         'label' => __( 'Enter Amount', 'ninja-forms' ),
         'width' => 'one-half',
