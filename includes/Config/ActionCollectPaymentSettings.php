@@ -40,7 +40,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
             array( 'label' => __( '- Select One', 'ninja-forms' ), 'value' => '' ),
             array( 'label' => __( 'Calculation', 'ninja-forms' ), 'value' => 'calc' ),
             array( 'label' => __( 'Field', 'ninja-forms' ), 'value' => 'field' ),
-            array( 'label' => __( 'Specified Amount', 'ninja-forms' ), 'value' => 'fixed' ),
+            array( 'label' => __( 'Fixed Amount', 'ninja-forms' ), 'value' => 'fixed' ),
         ),
     ),
 
