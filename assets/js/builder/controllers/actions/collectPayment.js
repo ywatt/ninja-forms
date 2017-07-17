@@ -13,6 +13,11 @@ define( [], function( settingCollection ) {
 			 * When we init a collect payment action model, register a listener for calc changes.
 			 */
 			this.listenTo( nfRadio.channel( 'actions-collectpayment' ), 'init:actionModel', this.initCollectPayment );
+			
+			/*
+			 * Before we render our total field, we may want to update its value.
+			 */
+			this.listenTo( nfRadio.channel( 'app' ), 'before:renderSetting', this.maybeClearTotal );
 		},
 
 		/**
@@ -38,6 +43,17 @@ define( [], function( settingCollection ) {
 			 */
 			var newVal = this.get( 'payment_total' ).replace( '{calc:' + oldName + '}', '{calc:' + optionModel.get( 'name' ) + '}' );
 			this.set( 'payment_total', newVal );
+		},
+
+		maybeClearTotal: function( settingModel, dataModel, view ) {
+            /*
+             * If our payment_total is a merge tag, clear it when we select the "fixed" option.
+             */
+            if ( 'fixed' == dataModel.get( 'payment_total_type' ) ) {
+                if ( -1 != dataModel.get( 'payment_total' ).indexOf( '{field' ) || -1 != dataModel.get( 'payment_total' ).indexOf( '{calc' ) ) {
+                    dataModel.set( 'payment_total', '' );
+                }
+            }
 		}
 
 	});
