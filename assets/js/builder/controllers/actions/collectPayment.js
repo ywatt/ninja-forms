@@ -22,7 +22,6 @@ define( [], function( settingCollection ) {
 		 * @return {void}
 		 */
 		initCollectPayment: function( actionModel )  {
-			// actionModel.listenTo( nfRadio.channel( 'app' ), 'update:setting', this.maybeUpdateTotal );
 			actionModel.listenTo( nfRadio.channel( 'calcs' ), 'update:calcName', this.maybeUpdateTotal );
 		},
 

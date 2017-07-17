@@ -40,7 +40,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
             array( 'label' => __( '- Select One', 'ninja-forms' ), 'value' => '' ),
             array( 'label' => __( 'Calculation', 'ninja-forms' ), 'value' => 'calculation' ),
             array( 'label' => __( 'Field', 'ninja-forms' ), 'value' => 'field' ),
-            array( 'label' => __( 'Specified Amount', 'ninja-forms' ), 'value' => 'custom' ),
+            array( 'label' => __( 'Specified Amount', 'ninja-forms' ), 'value' => 'fixed' ),
         ),
     ),
 
@@ -81,15 +81,15 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
     ),
 
     //building the field selector.
-    'payment_total_static' => array(
+    'payment_total_fixed' => array(
         'name' => 'payment_total',
-        'total_type' => 'static',
+        'total_type' => 'fixed',
         'type' => 'textbox',
         'label' => __( 'Enter Amount', 'ninja-forms' ),
         'width' => 'one-half',
         'group' => 'primary',
         'deps' => array(
-            'payment_total_type' => 'custom',
+            'payment_total_type' => 'fixed',
         ),
     ),
 ));
