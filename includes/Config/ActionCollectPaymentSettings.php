@@ -38,7 +38,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
         'group' => 'primary',
         'options' => array(
             array( 'label' => __( '- Select One', 'ninja-forms' ), 'value' => '' ),
-            array( 'label' => __( 'Calculation', 'ninja-forms' ), 'value' => 'calculation' ),
+            array( 'label' => __( 'Calculation', 'ninja-forms' ), 'value' => 'calc' ),
             array( 'label' => __( 'Field', 'ninja-forms' ), 'value' => 'field' ),
             array( 'label' => __( 'Specified Amount', 'ninja-forms' ), 'value' => 'fixed' ),
         ),
@@ -53,7 +53,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
         'width' => 'one-half',
         'group' => 'primary',
         'deps' => array(
-            'payment_total_type' => 'calculation',
+            'payment_total_type' => 'calc',
         ),
         'default_options' => array(
             'label' => __( '- Select One', 'ninja-forms' ),

@@ -16,10 +16,23 @@ define( [], function() {
         },
 
         beforeRenderSetting: function( settingModel, dataModel, view ) {
-            if ( 'payment_total' != settingModel.get( 'name' ) ) return false;
+            if ( 'payment_total_type' != settingModel.get( 'name' ) ) return false;
 
-            if ( 'undefined' == dataModel.get( 'payment_total_type') && 'undefined' != dataModel.get( 'payment_total' ) ) {
-                dataModel.set( 'payment_total_type', 'fixed' );
+            /*
+             * If we don't have a payment total type and we have a payment total, set our total type to the appropriate total type.
+             */
+            if ( ( 'undefined' == dataModel.get( 'payment_total_type' ) || _.isEmpty( dataModel.get( 'payment_total_type' ) ) ) && ! _.isEmpty( dataModel.get( 'payment_total' ) ) ) {
+                /*
+                 * If payment_total is a field merge tag, set payment_total_type to "field"
+                 */
+                if ( -1 != dataModel.get( 'payment_total' ).indexOf( 'field' ) ) {
+                    dataModel.set( 'payment_total_type', 'field' );
+                } else if ( -1 != dataModel.get( 'payment_total' ).indexOf( 'calc' ) ) {
+                    dataModel.set( 'payment_total_type', 'calc' );
+                } else {
+                    dataModel.set( 'payment_total_type', 'fixed' );
+                }
+                
             }
         },
 
