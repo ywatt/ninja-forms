@@ -17,8 +17,6 @@ class NF_Fields_CreditCardExpiration extends NF_Abstracts_Input
     protected $_test_value = '01/2025';
 
     protected $_settings_exclude = array( 'input_limit_set', 'disable_input' );
-    
-    //protected $_settings = array( 'mask' );
 
 
     public function __construct()
@@ -34,10 +32,6 @@ class NF_Fields_CreditCardExpiration extends NF_Abstracts_Input
             'value' => '99/9999',
         );
         
-//        echo('<pre>');
-//        var_dump($this->_settings);
-//        echo('</pre>');
-//        die();
     }
 
     function hide_field_type( $field_types )
