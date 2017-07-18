@@ -83,10 +83,13 @@ final class NF_Actions_Email extends NF_Abstracts_Action
             $errors[ 'email_not_sent' ] = $e->getMessage();
         }
 
-        $data[ 'actions' ][ 'email' ][ 'to' ] = $action_settings['to'];
+        if( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
+            $data[ 'actions' ][ 'email' ][ 'to' ] = $action_settings[ 'to' ];
+            $data[ 'actions' ][ 'email' ][ 'headers' ] = $headers;
+            $data[ 'actions' ][ 'email' ][ 'attachments' ] = $attachments;
+        }
+
         $data[ 'actions' ][ 'email' ][ 'sent' ] = $sent;
-        $data[ 'actions' ][ 'email' ][ 'headers' ] = $headers;
-        $data[ 'actions' ][ 'email' ][ 'attachments' ] = $attachments;
 
         // Only show errors to Administrators.
         if( $errors && current_user_can( 'manage_options' ) ){
