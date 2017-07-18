@@ -22,7 +22,7 @@ define([], function() {
                 pikadayOptions: {
                     yearRange:  this.getYearRange( view.model ),
                     minDate: this.getMinDate( view.model ),
-                    maxDate: this.getMaxDate( view.model )
+                    maxDate: this.getMaxDate( view.model ),
                     firstDay: parseInt( nfi18n.startOfWeek )
                 }
             } );
@@ -71,7 +71,8 @@ define([], function() {
             }
 
             return maxDate;
-
+        },
+        
         convertDateFormat: function( dateFormat ) {
             // http://php.net/manual/en/function.date.php
             // https://github.com/dbushell/Pikaday/blob/master/README.md#formatting
