@@ -34,7 +34,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
         $this->_settings[ 'product_price' ][ 'width' ] = 'full';
 
         add_filter( 'ninja_forms_merge_tag_value_product', array( $this, 'merge_tag_value' ), 10, 2 );
-
+        add_filter( 'ninja_forms_custom_columns', array( $this, 'custom_columns' ), 10, 2 );
         add_filter( 'ninja_forms_localize_field_' . $this->_name, array( $this, 'filter_required_setting' ) );
         add_filter( 'ninja_forms_localize_field_' . $this->_name . '_preview', array( $this, 'filter_required_setting' ) );
     }
@@ -57,6 +57,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
             $related[ $type ] = &$data[ 'fields' ][ $key ]; // Assign by reference
         }
 
+        //TODO: Does not work in non-English locales
         $total = str_replace( array( ',', '$' ), '', $product[ 'product_price' ] );
         $total = floatval( $total );
 
@@ -115,5 +116,71 @@ class NF_Fields_Product extends NF_Abstracts_Input
         $product_quantity = ( isset( $field[ 'product_use_quantity' ] ) && 1 == $field[ 'product_use_quantity' ] ) ? $value : 1;
 
         return number_format( $product_price * $product_quantity, 2 );
+    }
+
+    public function custom_columns( $value, $field )
+    {
+        if ( ! $field->get_setting( 'product_use_quantity' ) ) return $value;
+        if ( 0 == absint( $_REQUEST[ 'form_id' ] ) ) return $value;
+
+        $form_id = absint( $_REQUEST[ 'form_id' ] );
+
+        /*
+         * Get our currency marker setting. First, we check the form, then plugin settings.
+         */
+        $currency = Ninja_Forms()->form( $form_id )->get()->get_setting( 'currency' );
+        
+        if ( empty( $currency ) ) {
+            /*
+             * Check our plugin currency.
+             */
+            $currency = Ninja_Forms()->get_setting( 'currency' );
+        }
+
+        $currency_symbols = Ninja_Forms::config( 'CurrencySymbol' );
+        $currency_symbol = html_entity_decode( $currency_symbols[ $currency ] );
+
+        global $wp_locale;
+        $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $field->get_setting( 'product_price' ) );
+        $price = floatval( $price );
+        $value = intval( $value );
+
+        $total = number_format_i18n( $price * $value, 2 );
+
+        $output = $currency_symbol . $total . ' ( ' . $value . ' ) ';
+        return $output;
+    }
+
+    public function admin_form_element( $id, $value )
+    {
+        $form_id = get_post_meta( absint( $_GET[ 'post' ] ), '_form_id', true );
+
+        $field = Ninja_Forms()->form( $form_id )->get_field( $id );
+        $price = $field->get_setting( 'product_price' );
+
+        /*
+         * Get our currency marker setting. First, we check the form, then plugin settings.
+         */
+        $currency = Ninja_Forms()->form( $form_id )->get()->get_setting( 'currency' );
+        
+        if ( empty( $currency ) ) {
+            /*
+             * Check our plugin currency.
+             */
+            $currency = Ninja_Forms()->get_setting( 'currency' );
+        }
+
+        $currency_symbols = Ninja_Forms::config( 'CurrencySymbol' );
+        $currency_symbol = html_entity_decode( $currency_symbols[ $currency ] );
+
+        global $wp_locale;
+        $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $field->get_setting( 'product_price' ) );
+        $price = floatval( $price );
+        $value = intval( $value );
+
+        $total = number_format_i18n( $price * $value, 2 );
+        $price = number_format_i18n( $price, 2 );
+
+        return "Price: <strong>" . $currency_symbol . $price . "</strong> X Quantity: <input name='fields[$id]' type='number' value='" . $value . "'> = " . $currency_symbol . $total;
     }
 }
