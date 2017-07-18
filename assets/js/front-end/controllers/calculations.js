@@ -143,6 +143,11 @@ define(['models/calcCollection'], function( CalcCollection ) {
 
 			}
 
+            // Scrub unmerged field tags (ie deleted fields).
+            console.log( eqValues );
+            eqValues = eqValues.replace( /{field:([a-zA-Z0-9]|:|_|-)*}/g, 0 );
+            console.log( eqValues );
+
             // Scrub line breaks.
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
 			// Evaluate the equation and update the value of this model.
@@ -278,6 +283,12 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			var value = this.getCalcValue( fieldModel );
 			this.updateCalcFields( calcModel, key, value );
 			var eqValues = this.replaceAllKeys( calcModel );
+
+            // Scrub unmerged field tags (ie deleted fields).
+            console.log( eqValues );
+            eqValues = eqValues.replace( /{field:([a-zA-Z0-9]|:|_|-)*}/g, '0' );
+            console.log( eqValues );
+
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
             try {
 			     calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
