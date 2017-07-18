@@ -31,6 +31,9 @@ define( [], function() {
 					returnFields.push( { label: field.get( 'label' ), value: '{field:' + field.get( 'key' ) + '}' } );
 				}
 			} );
+
+			returnFields = _.sortBy( returnFields, function( field ) { return field.label } );
+
 			return returnFields;
 		}
 

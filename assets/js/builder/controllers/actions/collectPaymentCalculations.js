@@ -33,6 +33,9 @@ define( [], function() {
             _.each( calcs.models, function( calc ) {
                 returnCalcs.push( { label: calc.get( 'name' ), value: '{calc:' + calc.get( 'name' ) + '}' } );
             } );
+
+            returnCalcs = _.sortBy( returnCalcs, function( calc ) { return calc.label } );
+
             return returnCalcs;
         }
 
