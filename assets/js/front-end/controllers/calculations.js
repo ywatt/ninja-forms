@@ -146,8 +146,8 @@ define(['models/calcCollection'], function( CalcCollection ) {
 
 			}
 
-            // Scrub unmerged field tags (ie deleted fields).
-            eqValues = eqValues.replace( /{field:([a-zA-Z0-9]|:|_|-)*}/g, 0 );
+            // Scrub unmerged tags (ie deleted/nox-existent fields/calcs, etc).
+            eqValues = eqValues.replace( /{([a-zA-Z0-9]|:|_|-)*}/g, 0 );
 
             // Scrub line breaks.
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
@@ -285,8 +285,8 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			this.updateCalcFields( calcModel, key, value );
 			var eqValues = this.replaceAllKeys( calcModel );
 
-            // Scrub unmerged field tags (ie deleted fields).
-            eqValues = eqValues.replace( /{field:([a-zA-Z0-9]|:|_|-)*}/g, '0' );
+            // Scrub unmerged tags (ie deleted/nox-existent fields/calcs, etc).
+            eqValues = eqValues.replace( /{([a-zA-Z0-9]|:|_|-)*}/g, '0' );
 
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
             try {
