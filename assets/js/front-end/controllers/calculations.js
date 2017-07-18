@@ -144,9 +144,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			}
 
             // Scrub unmerged field tags (ie deleted fields).
-            console.log( eqValues );
             eqValues = eqValues.replace( /{field:([a-zA-Z0-9]|:|_|-)*}/g, 0 );
-            console.log( eqValues );
 
             // Scrub line breaks.
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
@@ -285,9 +283,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			var eqValues = this.replaceAllKeys( calcModel );
 
             // Scrub unmerged field tags (ie deleted fields).
-            console.log( eqValues );
             eqValues = eqValues.replace( /{field:([a-zA-Z0-9]|:|_|-)*}/g, '0' );
-            console.log( eqValues );
 
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
             try {
