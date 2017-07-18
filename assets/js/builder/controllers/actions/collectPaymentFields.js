@@ -27,7 +27,7 @@ define( [], function() {
 			// Update our dataModel with all of our product fields.
 			var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
 			_.each( fields.models, function( field ) {
-				if ( 'number' == field.get( 'type' ) || 'total' == field.get( 'type' ) ) {
+				if ( 'number' == field.get( 'type' ) || 'total' == field.get( 'type' ) || 'checkbox' == field.get( 'type' ) ) {
 					returnFields.push( { label: field.get( 'label' ), value: '{field:' + field.get( 'key' ) + '}' } );
 				}
 			} );
