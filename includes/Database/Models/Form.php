@@ -120,8 +120,19 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
                 'settings' => $settings
             ));
         }
+        
+        global $wpdb;
+        $sql = "SELECT CHARACTER_SET_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='" . $wpdb->prefix . "options' AND COLUMN_NAME='option_value' AND TABLE_SCHEMA = '" . $wpdb->dbname . "'";
+        $result = $wpdb->get_results( $sql, 'ARRAY_A' );
+        // If we were able to get the charset, record it.
+        if( ! is_null( $result ) && ! empty( $result ) ) $char_set = $result[ 0 ][ 'CHARACTER_SET_NAME' ];
+        else $char_set = 'unknown';
+        // Only utf8 encode proper charsets.
+        if( false !== strpos( $char_set, 'utf8' ) ) {
+            $form_cache = WPN_Helper::utf8_encode( $form_cache );
+        }
 
-        update_option( 'nf_form_' . $form_id, WPN_Helper::utf8_encode( $form_cache ) );
+        update_option( 'nf_form_' . $form_id, $form_cache );
 
         add_action( 'admin_notices', array( 'NF_Database_Models_Form', 'import_admin_notice' ) );
 
