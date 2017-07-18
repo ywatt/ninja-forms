@@ -50,7 +50,7 @@ class NF_Fields_Recaptcha extends NF_Abstracts_Field
 
     public function validate( $field, $data ) {
         if ( empty( $field['value'] ) ) {
-            return array( __( 'Please complete the recaptcha', 'ninja-forms' ) );
+            return __( 'Please complete the recaptcha', 'ninja-forms' );
         }
 
         $secret_key = Ninja_Forms()->get_setting( 'recaptcha_secret_key' );
