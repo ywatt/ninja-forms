@@ -27,12 +27,30 @@ define( [], function() {
             }
 
             // Strip HTML tags from the form title.
-            this.set( 'title', this.get( 'title' ).replace(/<\/?[^>]+(>|$)/g, "") );
+            if ( this.get( 'title' ) ) {
+               this.set( 'title', this.get( 'title' ).replace(/<\/?[^>]+(>|$)/g, "") ); 
+            }
         },
         
         initShortcode: function( id ) {
             var shortcode = '[ninja_form id=' + id + ']';
             this.set( 'shortcode', shortcode);
+        },
+        
+        /* Overwrite the standard backbone delete method
+         * allowing us to send a POST request insead of DELETE
+         */
+        destroy: function() {
+            console.log( this.collection );
+            var that = this;
+            jQuery.ajax({
+                type: "POST",
+                url: ajaxurl + '?action=nf_forms&method_override=delete&form_id=' + this.get( 'id' ),
+                success: function( response ){
+                    var response = JSON.parse( response );
+                    that.collection.remove( that );
+                }
+            });
         }
         
 	} );
