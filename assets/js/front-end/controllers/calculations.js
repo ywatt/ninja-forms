@@ -133,6 +133,9 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					var name = calc.replace( '}', '' ).replace( '{calc:', '' );
 					// Get our calc model
 					var targetCalcModel = calcModel.collection.findWhere( { name: name } );
+
+					if( 'undefined' == typeof targetCalcModel ) return;
+
 					// Listen for changes on our calcluation, since we need to update our calc when it changes.
 					targetCalcModel.on( 'change:value', calcModel.changeCalc, calcModel );
 					// // Get our calc value from our calc model.
