@@ -93,6 +93,7 @@ define(
 		'controllers/actions/droppable',
 		'controllers/actions/filterTypes',
 		'controllers/actions/newsletterList',
+		'controllers/actions/deleteFieldListener',
 
 		/*
 		 * TODO: Settings domain controllers
@@ -189,6 +190,7 @@ define(
 		ActionDroppable,
 		ActionFilterTypes,
 		ActionNewsletterList,
+		ActionDeleteFieldListener,
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -276,6 +278,7 @@ define(
 				 * TODO: Actions domain controllers
 				 */
 				new ActionNewsletterList();
+				new ActionDeleteFieldListener();
 				new ActionTypes();
 				new ActionData();
 				new ActionSettings();
