@@ -263,6 +263,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					// calc will be {calc:key}
 					var name = calc.replace( '}', '' ).replace( '{calc:', '' );
 					var targetCalcModel = calcModel.collection.findWhere( { name: name } );
+                    if( 'undefined' == typeof targetCalcModel ) return;
 					var re = new RegExp( calc, 'g' );
 					eq = eq.replace( re, targetCalcModel.get( 'value' ) );
 				} );
