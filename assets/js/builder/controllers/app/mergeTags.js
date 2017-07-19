@@ -80,6 +80,9 @@ define( [
 			nfRadio.channel( 'mergeTags' ).reply( 'get:collection', this.getCollection, this );
 			nfRadio.channel( 'mergeTags' ).reply( 'get:mergeTag', this.getSectionModel, this );
 
+			// When a field's ID is changed (ie from a tmpID), update the merge tag.
+            this.listenTo( nfRadio.channel( 'fieldSetting-id' ), 'update:setting', this.updateID );
+
 			// When we edit a key, check for places that key might be used.
 			this.listenTo( nfRadio.channel( 'fieldSetting-key' ), 'update:setting', this.updateKey );
 
@@ -304,6 +307,24 @@ define( [
 			_.each( this.tagSectionCollection.get( 'fields' ).models, function( model ) {
 				model.set( 'active', false );
 			} );
+		},
+
+		// When a field is published, update the merge tag with the newly assigned ID (as opposed to the tmpID).
+        updateID: function( fieldModel ) {
+
+			// Get the formatted merge tag for comparison.
+			var targetTag = this.getFieldKeyFormat( fieldModel.get( 'key' ) );
+
+			// Search the field tags for the matching merge tag to be updated.
+			var oldTag = this.tagSectionCollection.get( 'fields' ).get( 'tags' ).find( function( fieldMergeTag ){
+                return targetTag == fieldMergeTag.get( 'tag' );
+            });
+
+			// If no matching tag is found, return early.
+			if( 'undefined' == typeof oldTag ) return;
+
+			// Update the merge tag with the "published" field ID.
+			oldTag.set( 'id', fieldModel.get( 'id' ) );
 		},
 
 		updateKey: function( fieldModel ) {
