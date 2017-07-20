@@ -31,6 +31,8 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 				    }
 				}
 			}
+            this.listenTo( nfRadio.channel( 'option-repeater' ), 'added:option', this.maybeHideNew );
+            this.listenTo( nfRadio.channel( 'option-repeater' ), 'removed:option', this.maybeHideNew );
 		},
 
 		onBeforeDestroy: function() {
@@ -74,6 +76,8 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 					nfRadio.channel( 'option-repeater' ).request( 'update:optionSortable', ui, this, that );
 				}
 			} );
+            
+            that.maybeHideNew( that.collection );
 
 			/*
 			 * Send out a radio message.
@@ -180,6 +184,15 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 			'click .nf-add-new': 'clickAddOption',
 			'click .extra': 'clickExtra'
 		},
+        
+        maybeHideNew: function( collection ) {
+            var limit = collection.settingModel.get( 'max_options' );
+            if( 0 !== limit && collection.models.length >= ( limit ) ) {
+                jQuery(this.el).find('.nf-add-new').addClass('disabled');
+            } else {
+                jQuery(this.el).find('.nf-add-new').removeClass('disabled');
+            }
+        },
 
 		clickAddOption: function( e ) {
 			nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel );

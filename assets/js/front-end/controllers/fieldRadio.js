@@ -111,20 +111,21 @@ define([], function() {
 		},
 
 		getCalcValue: function( fieldModel ) {
-			var calc_value = 0;
+			
+            /*
+             * Default to 0, in case we have no selection.
+             */
+            var calc_value = 0;
+            
 			if ( 0 != fieldModel.get( 'options' ).length ) {
 				/*
 				 * Check to see if we have a selected value.
 				 */
 				var selected = _.find( fieldModel.get( 'options' ), function( opt ) { return fieldModel.get( 'value' ) == opt.value } );
-				/*
-				 * We don't have a selected value, so use our first option.
-				 */
-				if ( 'undefined' == typeof selected ) {
-					selected = fieldModel.get( 'options' )[0];
+				if ( 'undefined' !== typeof selected ) {
+                    calc_value = selected.calc;
 				}
 
-				var calc_value = selected.calc;
 			}
 			return calc_value;
 		},

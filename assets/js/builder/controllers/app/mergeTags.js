@@ -63,7 +63,8 @@ define( [
 			this.settingModel = {};
 			this.open = false;
 
-			nfRadio.channel( 'mergeTags' ).reply( 'init', this.initMergeTags, this );
+			// Unhook jBox Merge Tag stuff.
+			// nfRadio.channel( 'mergeTags' ).reply( 'init', this.initMergeTags, this );
 
 			this.listenTo( nfRadio.channel( 'mergeTags' ), 'click:mergeTag', this.clickMergeTag );
 			this.listenTo( nfRadio.channel( 'fields' ), 'add:field', this.addFieldTags );
@@ -78,6 +79,9 @@ define( [
 			// Listen for requests for our mergeTag collection.
 			nfRadio.channel( 'mergeTags' ).reply( 'get:collection', this.getCollection, this );
 			nfRadio.channel( 'mergeTags' ).reply( 'get:mergeTag', this.getSectionModel, this );
+
+			// When a field's ID is changed (ie from a tmpID), update the merge tag.
+            this.listenTo( nfRadio.channel( 'fieldSetting-id' ), 'update:setting', this.updateID );
 
 			// When we edit a key, check for places that key might be used.
 			this.listenTo( nfRadio.channel( 'fieldSetting-key' ), 'update:setting', this.updateKey );
@@ -305,6 +309,24 @@ define( [
 			} );
 		},
 
+		// When a field is published, update the merge tag with the newly assigned ID (as opposed to the tmpID).
+        updateID: function( fieldModel ) {
+
+			// Get the formatted merge tag for comparison.
+			var targetTag = this.getFieldKeyFormat( fieldModel.get( 'key' ) );
+
+			// Search the field tags for the matching merge tag to be updated.
+			var oldTag = this.tagSectionCollection.get( 'fields' ).get( 'tags' ).find( function( fieldMergeTag ){
+                return targetTag == fieldMergeTag.get( 'tag' );
+            });
+
+			// If no matching tag is found, return early.
+			if( 'undefined' == typeof oldTag ) return;
+
+			// Update the merge tag with the "published" field ID.
+			oldTag.set( 'id', fieldModel.get( 'id' ) );
+		},
+
 		updateKey: function( fieldModel ) {
 			var newKey = fieldModel.get( 'key' );
 			var oldTag = this.tagSectionCollection.get( 'fields' ).get( 'tags' ).get( fieldModel.get( 'id' ) );
@@ -323,10 +345,28 @@ define( [
 		},
 
 		replaceFieldKey: function( dataModel, keyModel, settingModel ) {
-			var oldKey = this.getFieldKeyFormat( keyModel._previousAttributes[ 'key' ] );
+            var oldKey = this.getFieldKeyFormat( keyModel._previousAttributes[ 'key' ] );
 			var newKey = this.getFieldKeyFormat( keyModel.get( 'key' ) );
 			var settingName = settingModel.get( 'name' );
 			var oldVal = dataModel.get( settingName );
+            if(settingName == 'calculations' && 'undefined' != typeof(dataModel.get('calculations'))) {
+                var calcModel = dataModel.get( 'calculations' );
+                calcModel.each( function( model ) {
+                    var oldCalcKey = oldKey.slice( 0, (oldKey.length - 1) ) + ':calc}';
+                    var newCalcKey = newKey.slice( 0, (newKey.length - 1 ) ) + ':calc}';
+                    oldVal = model.get( 'eq' );
+                    if ( 'string' == typeof( oldVal ) ) {
+                        var re = new RegExp( oldCalcKey, 'g' );
+                        var newVal = oldVal.replace( re, newCalcKey );
+                        re = new RegExp( oldKey, 'g' );
+                        // TODO: We won't need this second replace when we no longer
+                        // have to append :calc to merge tags.
+                        newVal = newVal.replace( re, newKey );
+                        model.set( 'eq', newVal );
+                    }
+                } );
+                return false;
+            }
 			if ( 'string' == typeof oldVal ) {
 				var re = new RegExp( oldKey, 'g' );
 				newVal = oldVal.replace( re, newKey );

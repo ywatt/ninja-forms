@@ -79,6 +79,8 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			var eq = calcModel.get( 'eq' );
 			// We want to keep our original eq intact, so we use a different var for string replacment.
 			var eqValues = eq;
+            // Store the name for debugging later.
+            var calcName = calcModel.get( 'name' );
 
 			/* TODO:
 			 * It might be possible to refactor these two if statements.
@@ -101,7 +103,10 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					// Get our field model
 					fieldModel = nfRadio.channel( 'form-' + calcModel.get( 'formID' ) ).request( 'get:fieldByKey', key );
 
-					if( 'undefined' == typeof fieldModel ) return;
+                    if( 'undefined' == typeof fieldModel ) return;
+
+                    fieldModel.set( 'clean', false );
+
 					// Register a listener in our field model for value changes.
 					fieldModel.on( 'change:value', calcModel.changeField, calcModel );
 					// Get our calc value from our field model.
@@ -128,6 +133,9 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					var name = calc.replace( '}', '' ).replace( '{calc:', '' );
 					// Get our calc model
 					var targetCalcModel = calcModel.collection.findWhere( { name: name } );
+
+					if( 'undefined' == typeof targetCalcModel ) return;
+
 					// Listen for changes on our calcluation, since we need to update our calc when it changes.
 					targetCalcModel.on( 'change:value', calcModel.changeCalc, calcModel );
 					// // Get our calc value from our calc model.
@@ -138,12 +146,21 @@ define(['models/calcCollection'], function( CalcCollection ) {
 
 			}
 
+            // Scrub unmerged tags (ie deleted/nox-existent fields/calcs, etc).
+            eqValues = eqValues.replace( /{([a-zA-Z0-9]|:|_|-)*}/g, 0 );
+
+            // Scrub line breaks.
+            eqValues = eqValues.replace( /\r?\n|\r/g, '' );
 			// Evaluate the equation and update the value of this model.
 			try {
-				calcModel.set('value', math.eval(eqValues));
+				calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
 			} catch( e ) {
+                //console.log( calcName );
 				console.log( e );
 			}
+            
+            // If for whatever reason, we got NaN, reset that to 0.
+            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', 0 );
 
 			// Debugging console statement.
 			// console.log( eqValues + ' = ' + calcModel.get( 'value' ) );
@@ -246,6 +263,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					// calc will be {calc:key}
 					var name = calc.replace( '}', '' ).replace( '{calc:', '' );
 					var targetCalcModel = calcModel.collection.findWhere( { name: name } );
+                    if( 'undefined' == typeof targetCalcModel ) return;
 					var re = new RegExp( calc, 'g' );
 					eq = eq.replace( re, targetCalcModel.get( 'value' ) );
 				} );
@@ -267,7 +285,17 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			var value = this.getCalcValue( fieldModel );
 			this.updateCalcFields( calcModel, key, value );
 			var eqValues = this.replaceAllKeys( calcModel );
-			calcModel.set( 'value', math.eval( eqValues ) );
+
+            // Scrub unmerged tags (ie deleted/nox-existent fields/calcs, etc).
+            eqValues = eqValues.replace( /{([a-zA-Z0-9]|:|_|-)*}/g, '0' );
+
+            eqValues = eqValues.replace( /\r?\n|\r/g, '' );
+            try {
+			     calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
+            } catch( e ) {
+                console.log( e );
+            }
+            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', 0 );
 
 			// Debugging console statement.
 			// console.log( eqValues + ' = ' + calcModel.get( 'value' ) );		
@@ -294,26 +322,29 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					var value = fieldModel.get( 'default' );
 					var calcs = value.match( new RegExp( /{calc:(.*?)}/g ) );
 					_.each( calcs, function( calc ) {
-						var rounding = false;
+//						var rounding = false;
 						// calc will be {calc:key} or {calc:key:2}
-						var name = calc.replace( '}', '' ).replace( '{calc:', '' );
+						var name = calc.replace( '}', '' ).replace( '{calc:', '' ).replace( ':2', '' );
 
 						/*
 						 * TODO: Bandaid for rounding calculations to two decimal places when displaying the merge tag.
 						 * Checks to see if we have a :2. If we do, remove it and set our rounding variable to true.
 						 */
-						if ( -1 != name.indexOf( ':2' ) ) {
-							rounding = true;
-							name = name.replace( ':2', '' );
-						}
+//						if ( -1 != name.indexOf( ':2' ) ) {
+//							rounding = true;
+//							name = name.replace( ':2', '' );
+//						}
 
 						var calcModel = that.calcs[ fieldModel.get( 'formID' ) ].findWhere( { name: name } );
 						var re = new RegExp( calc, 'g' );
 						var calcValue = calcModel.get( 'value' ) ;
-						if ( rounding ) {
-							calcValue = calcValue.toFixed( 2 );
-							rounding = false;
-						}
+//						if ( rounding ) {
+//							calcValue = calcValue.toFixed( 2 );
+//							rounding = false;
+//						}
+                        if( 'undefined' != typeof( calcValue ) ) {
+                            calcValue = that.applyLocaleFormatting( calcValue );
+                        }
 						value = value.replace( re, calcValue );
 					} );
 					fieldModel.set( 'value', value );
@@ -333,8 +364,39 @@ define(['models/calcCollection'], function( CalcCollection ) {
 		changeCalc: function( calcModel, targetCalcModel ) {
 			var eqValues = this.replaceAllKeys( calcModel );
 			eqValues = eqValues.replace( '[', '' ).replace( ']', '' );
-			calcModel.set( 'value', math.eval( eqValues ) );
-		}
+            eqValues = eqValues.replace( /\r?\n|\r/g, '' );
+            try {
+			     calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
+            } catch( e ) {
+                console.log( e );
+            }
+            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', 0 );
+		},
+        
+        /**
+         * Function to apply Locale Formatting to Calculations
+         * @since Version 3.1
+         * @param Str number
+         * 
+         * @return Str
+         */
+        applyLocaleFormatting: function( number ) {
+            
+            // Split our string on the decimal to preserve context.
+            var splitNumber = number.split('.');
+            // If we have more than one element (if we had a decimal point)...
+            if ( splitNumber.length > 1 ) {
+                // Update the thousands and remerge the array.
+                splitNumber[ 0 ] = splitNumber[ 0 ].replace( /\B(?=(\d{3})+(?!\d))/g, nfi18n.thousands_sep );
+                var formattedNumber = splitNumber.join( nfi18n.decimal_point );
+            }
+            // Otherwise (we had no decimal point)...
+            else {
+                // Update the thousands.
+                var formattedNumber = number.replace( /\B(?=(\d{3})+(?!\d))/g, nfi18n.thousands_sep );
+            }
+            return formattedNumber;
+        }
 	});
 
 	return controller;

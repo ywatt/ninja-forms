@@ -17,7 +17,7 @@ class NF_Fields_Recaptcha extends NF_Abstracts_Field
 
     protected $_test_value = '';
 
-    protected $_settings = array( 'label' );
+    protected $_settings = array( 'label', 'classes' );
 
     public function __construct()
     {
@@ -45,18 +45,6 @@ class NF_Fields_Recaptcha extends NF_Abstracts_Field
             'help' => __( 'Select whether to display a "I\'m not a robot" field or to detect if the user is a robot in the background.', 'ninja-forms' ),
         );
 
-        $this->_settings[ 'wrapper_class '] = array(
-            'name' => 'wrapper_class',
-            'type' => 'textbox',
-            'placeholder' => '',
-            'label' => __( 'Wrapper Class', 'ninja-forms' ),
-            'width' => 'full',
-            'value' => '',
-            'group' => 'primary',
-            'use_merge_tags' => FALSE,
-            'help' => __( 'Adds an extra class to your field wrapper.', 'ninja-forms' ),
-        );
-
         add_filter( 'nf_sub_hidden_field_types', array( $this, 'hide_field_type' ) );
     }
 
@@ -70,7 +58,7 @@ class NF_Fields_Recaptcha extends NF_Abstracts_Field
 
     public function validate( $field, $data ) {
         if ( empty( $field['value'] ) ) {
-            return array( __( 'Please complete the recaptcha', 'ninja-forms' ) );
+            return __( 'Please complete the recaptcha', 'ninja-forms' );
         }
 
         $secret_key = Ninja_Forms()->get_setting( 'recaptcha_secret_key' );

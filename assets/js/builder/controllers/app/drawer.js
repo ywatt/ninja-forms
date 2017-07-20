@@ -96,6 +96,10 @@ define( [], function() {
 	        		clearInterval( that.checkCloseDrawerPos );
 		    		nfRadio.channel( 'app' ).request( 'update:currentDrawer', false );
 		    		nfRadio.channel( 'drawer' ).trigger( 'closed' );
+		    		/*
+		    		 * Reset the add new button z-index to 98.
+		    		 */
+		    		jQuery( '.nf-master-control' ).css( 'z-index', 98 );
 		    		// jQuery( drawerEl ).scrollTop( 0 );
 	        	}
 			}, 150 );
@@ -166,6 +170,11 @@ define( [], function() {
 			 * trigger a drawer opened message
 			 */
 			this.hasFocus = false;
+
+			/*
+			 * Set our add new button z-index to 0;
+			 */
+			jQuery( '.nf-master-control' ).css( 'z-index', 0 );
 
 			this.checkOpenDrawerPos = setInterval( function() {
 	        	if ( '0px' == jQuery( drawerEl ).css( 'right' ) ) {
@@ -263,7 +272,7 @@ define( [], function() {
         	 /*
         	 * When we remove all of our disables preventing closing the drawer, remove the disable class.
         	 */
-        	if ( ! this.maybePreventClose() ) {
+        	if ( ! this.maybePreventClose() && 'undefined' != typeof this.dataModel ) {
 	        	// Get our current drawer.
 				this.dataModel.set( 'drawerDisabled', false );        		
         	}

@@ -30,10 +30,12 @@ final class NF_Database_Models_Submission
 
         if( $this->_id ){
             $sub = get_post( $this->_id );
-            $this->_status = $sub->post_status;
-            $this->_user_id = $sub->post_author;
-            $this->_sub_date = $sub->post_date;
-            $this->_mod_date = $sub->post_modified;
+            if ($sub) {
+                $this->_status = $sub->post_status;
+                $this->_user_id = $sub->post_author;
+                $this->_sub_date = $sub->post_date;
+                $this->_mod_date = $sub->post_modified;
+            }
         }
 
         if( $this->_id && ! $this->_form_id ){
@@ -358,6 +360,9 @@ final class NF_Database_Models_Submission
 
         $csv_array[ 0 ][] = $field_labels;
         $csv_array[ 1 ][] = $value_array;
+        
+        // Get any extra data from our other plugins...
+        $csv_array = apply_filters( 'nf_subs_csv_extra_values', $csv_array, $subs, $form_id );
 
         $today = date( $date_format, current_time( 'timestamp' ) );
         $filename = apply_filters( 'nf_subs_csv_filename', 'nf_subs_' . $today );

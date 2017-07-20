@@ -18,7 +18,9 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 			this.columns = data.columns;
 			this.parentView = data.parentView;
 			this.model.on( 'change:errors', this.renderErrors, this );
-			this.model.on( 'change', this.render, this );
+
+			// Removed because the re-render was breaking tag insertion for merge tags.
+			// this.model.on( 'change', this.render, this );
 
 			if ( 'undefined' != typeof this.settingModel.get( 'tmpl_row' ) ) {
 				this.template = '#' + this.settingModel.get( 'tmpl_row' );
@@ -86,7 +88,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 		},
 
 		maybeAddOption: function( e ) {
-			if ( 13 == e.keyCode ) {
+			if ( 13 == e.keyCode && 'calculations' != this.settingModel.get( 'name' ) ) {
 				nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel, this );
 				jQuery( this.parentView.children.findByIndex(this.parentView.children.length - 1).el ).find( '[data-id="label"]' ).focus();
 			}
@@ -102,9 +104,11 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 			 * We don't want to redraw the entire row, which would remove focus from the eq textarea,
 			 * so we add and remove error classes manually.
 			 */
-			if ( 0 == Object.keys( this.model.get( 'errors' ) ) && this.hasErrors ) {
-				this.error.empty();
-				jQuery( this.el ).removeClass( 'nf-error' );
+			if ( 0 == Object.keys( this.model.get( 'errors' ) ) ) {
+                if ( this.hasErrors ) {
+				    this.error.empty();
+				    jQuery( this.el ).removeClass( 'nf-error' );
+                }
 			} else {
 				this.hasErrors = true;
 				this.error.show( new ErrorView( { model: this.model } ) );
@@ -117,6 +121,17 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 			return {
 				getColumns: function() {
 					return that.columns;
+				},
+				renderFieldSelect: function( dataID, value ){
+					var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
+					var _return = '<label class="nf-select"><select class="setting" data-id="' + dataID + '">';
+                    _return += '<option value="" >--</option>';
+					fields.each( function( field ){
+						var selected = ( value == field.get( 'key' ) ) ? ' selected' : '';
+						_return += '<option value="' + field.get( 'key' ) + '"' + selected + '>' + field.get( 'label' ) + '</option>';
+					});
+					_return += '</select><div></div></label>';
+					return _return;
 				},
 				renderOptions: function( column, value ) {
 

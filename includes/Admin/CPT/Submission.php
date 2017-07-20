@@ -49,25 +49,25 @@ class NF_Admin_CPT_Submission
     function custom_post_type() {
 
         $labels = array(
-            'name'                => _x( 'Submissions', 'Post Type General Name', 'ninja_forms' ),
-            'singular_name'       => _x( 'Submission', 'Post Type Singular Name', 'ninja_forms' ),
-            'menu_name'           => __( 'Submissions', 'ninja_forms' ),
-            'name_admin_bar'      => __( 'Submissions', 'ninja_forms' ),
-            'parent_item_colon'   => __( 'Parent Item:', 'ninja_forms' ),
-            'all_items'           => __( 'All Items', 'ninja_forms' ),
-            'add_new_item'        => __( 'Add New Item', 'ninja_forms' ),
-            'add_new'             => __( 'Add New', 'ninja_forms' ),
-            'new_item'            => __( 'New Item', 'ninja_forms' ),
-            'edit_item'           => __( 'Edit Item', 'ninja_forms' ),
-            'update_item'         => __( 'Update Item', 'ninja_forms' ),
-            'view_item'           => __( 'View Item', 'ninja_forms' ),
-            'search_items'        => __( 'Search Item', 'ninja_forms' ),
+            'name'                => _x( 'Submissions', 'Post Type General Name', 'ninja-forms' ),
+            'singular_name'       => _x( 'Submission', 'Post Type Singular Name', 'ninja-forms' ),
+            'menu_name'           => __( 'Submissions', 'ninja-forms' ),
+            'name_admin_bar'      => __( 'Submissions', 'ninja-forms' ),
+            'parent_item_colon'   => __( 'Parent Item:', 'ninja-forms' ),
+            'all_items'           => __( 'All Items', 'ninja-forms' ),
+            'add_new_item'        => __( 'Add New Item', 'ninja-forms' ),
+            'add_new'             => __( 'Add New', 'ninja-forms' ),
+            'new_item'            => __( 'New Item', 'ninja-forms' ),
+            'edit_item'           => __( 'Edit Item', 'ninja-forms' ),
+            'update_item'         => __( 'Update Item', 'ninja-forms' ),
+            'view_item'           => __( 'View Item', 'ninja-forms' ),
+            'search_items'        => __( 'Search Item', 'ninja-forms' ),
             'not_found'           => $this->not_found_message(),
-            'not_found_in_trash'  => __( 'Not found in Trash', 'ninja_forms' ),
+            'not_found_in_trash'  => __( 'Not found in Trash', 'ninja-forms' ),
         );
         $args = array(
-            'label'               => __( 'Submission', 'ninja_forms' ),
-            'description'         => __( 'Form Submissions', 'ninja_forms' ),
+            'label'               => __( 'Submission', 'ninja-forms' ),
+            'description'         => __( 'Form Submissions', 'ninja-forms' ),
             'labels'              => $labels,
             'supports'            => false,
             'hierarchical'        => false,
@@ -134,7 +134,7 @@ class NF_Admin_CPT_Submission
         static $columns;
 
         if( $columns ) return $columns;
-        
+
         $columns = array(
             'cb'    => '<input type="checkbox" />',
             'id' => __( '#', 'ninja-forms' ),
@@ -291,7 +291,11 @@ class NF_Admin_CPT_Submission
 
         $status = ucwords( $sub->get_status() );
 
-        $user = apply_filters( 'nf_edit_sub_username', $sub->get_user()->data->user_nicename, $post->post_author );
+        if ($sub->get_user()) {
+            $user = apply_filters('nf_edit_sub_username', $sub->get_user()->data->user_nicename, $post->post_author);
+        } else {
+            $user = __( 'Anonymous', 'ninja-forms' );
+        }
 
         $form_title = $sub->get_form_title();
 
