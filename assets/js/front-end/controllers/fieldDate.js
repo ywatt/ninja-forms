@@ -8,13 +8,11 @@ define([], function() {
         initDatepicker: function ( view ) {
 
             var dateFormat = view.model.get( 'date_format' );
-            console.log( dateFormat );
 
             // For "default" date format, convert PHP format to JS compatible format.
             if( 'default' == dateFormat ){
                 dateFormat = this.convertDateFormat( nfi18n.dateFormat );
             }
-            console.log( dateFormat );
 
             var el = jQuery( view.el ).find( '.nf-element' )[0];
             var dateObject = pikadayResponsive( el, {
@@ -23,11 +21,13 @@ define([], function() {
                 classes: jQuery( el ).attr( "class" ),
                 pikadayOptions: {
                     yearRange:  this.getYearRange( view.model ),
+                    minDate: this.getMinDate( view.model ),
+                    maxDate: this.getMaxDate( view.model ),
                     firstDay: parseInt( nfi18n.startOfWeek )
                 }
             } );
             if ( 1 == view.model.get( 'date_default' ) ) {
-               dateObject.setDate( moment() ); 
+               dateObject.setDate( moment() );
             }
 
             nfRadio.channel( 'pikaday' ).trigger( 'init', dateObject, view.model );
@@ -51,6 +51,28 @@ define([], function() {
             return yearRange;
         },
 
+        getMinDate: function( fieldModel ) {
+            var minDate = null;
+            var yearRangeStart = fieldModel.get( 'year_range_start' );
+
+            if( yearRangeStart ) {
+                return new Date( yearRangeStart, 0, 1 );
+            }
+
+            return minDate;
+        },
+
+        getMaxDate: function( fieldModel ) {
+            var maxDate = null;
+            var yearRangeEnd   = fieldModel.get( 'year_range_end' );
+
+            if( yearRangeEnd ) {
+                return new Date( yearRangeEnd, 11, 31 );
+            }
+
+            return maxDate;
+        },
+        
         convertDateFormat: function( dateFormat ) {
             // http://php.net/manual/en/function.date.php
             // https://github.com/dbushell/Pikaday/blob/master/README.md#formatting
