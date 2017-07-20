@@ -6,7 +6,7 @@ Tested up to: 4.8
 Stable tag: 3.1.6
 License: GPLv2 or later
 
-Drag and drop fields in an intuitive UI to create create contact forms, email subscription forms, order forms, payment forms, send emails and more!
+Drag and drop fields in an intuitive UI to create contact forms, email subscription forms, order forms, payment forms, send emails and more!
 
 == Description ==
 Ninja Forms is the ultimate FREE form creation tool for WordPress. Build forms within minutes using a simple yet powerful drag-and-drop form creator. For beginners, quickly and easily design complex forms with absolutely no code. For developers, utilize built-in hooks, filters, and even custom field templates to do whatever you need at any step in the form building or submission using Ninja Forms as a framework.
@@ -173,7 +173,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 *Bugs:*
 
 * Fixed several possible PHP notices.
-* Fixed a possible conflict with the BBpress plugin.
+* Fixed a possible conflict with the bbPress plugin.
 * Editing submissions with Checkbox List fields should work properly.
 * Product fields with costs over 1000 should now work properly.
 * Fixed a bug that caused duplicate submissions if a form wasn't hidden after submission.
@@ -335,7 +335,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Submission exports should now always order properly.
 * Fixed a bug with submissions exporting non-Ninja Forms data.
 * Importing forms with non-UTF8 characters should now import properly.
-* Fixed a bug with converting froms from 2.9.x to 3.0.
+* Fixed a bug with converting forms from 2.9.x to 3.0.
 
 = 3.0.24 (15 January 2017) =
 
@@ -353,7 +353,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Bugs:*
 
-* Fixed a bug that caused installations to crash on older, unsecure versions of PHP.
+* Fixed a bug that caused installations to crash on older, insecure versions of PHP.
 
 = 3.0.21 (11 January 2017) =
 
@@ -532,7 +532,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Bugs:*
 
-* Fixed a bug with loading the form builder form cache.
+* Fixed a bug with loading the form builder from cache.
 
 = 3.0.8 (11 October 2016) =
 
