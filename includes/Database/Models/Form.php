@@ -151,6 +151,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $new_form->update_setting( 'title', $new_form_title );
 
         $new_form->update_setting( 'lock', 0 );
+		
+        $new_form->update_setting( 'created_at', current_time( 'mysql' ) );
 
         $new_form->save();
 
@@ -163,6 +165,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $field_settings = $field->get_settings();
 
             $field_settings[ 'parent_id' ] = $new_form_id;
+            $field_settings[ 'created_at' ] = current_time( 'mysql' );
 
             $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
             $new_field->update_settings( $field_settings )->save();
@@ -173,6 +176,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         foreach( $actions as $action ){
 
             $action_settings = $action->get_settings();
+			
+            $action_settings[ 'created_at' ] = current_time( 'mysql' );
 
             $new_action = Ninja_Forms()->form( $new_form_id )->action()->get();
             $new_action->update_settings( $action_settings )->save();
