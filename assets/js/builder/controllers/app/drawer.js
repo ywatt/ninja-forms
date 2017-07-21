@@ -50,11 +50,12 @@ define( [], function() {
 		 * @return void
 		 */
 		closeDrawer: function() {
+			nfRadio.channel( 'drawer' ).trigger( 'preclose' );
 			// Get our current domain.
 			var currentDrawer = nfRadio.channel( 'app' ).request( 'get:currentDrawer' );
-			if ( ! currentDrawer || this.maybePreventClose() ) {
-				return false;
-			}
+            if ( ! currentDrawer || this.maybePreventClose() ) {
+                return false;
+            }
 
 			// Triggers the before close drawer action on our current domain's drawer channel.
 			nfRadio.channel( 'drawer-' + currentDrawer.get( 'id' ) ).trigger( 'before:closeDrawer' );
@@ -64,7 +65,8 @@ define( [], function() {
 			 */
 			nfRadio.channel( 'drawer' ).trigger( 'before:closeDrawer' );
 			nfRadio.channel( 'drawer' ).trigger( 'before:close' );
-			
+
+
 			// Send a message to our drawer to empty its contents.
 			nfRadio.channel( 'drawer' ).request( 'empty:drawerContent' );
 

@@ -26,6 +26,7 @@ define( [], function() {
 			nfRadio.channel( this.get( 'type' ) ).trigger( 'init:settingModel', this );
 			nfRadio.channel( 'setting-name-' + this.get( 'name' ) ).trigger( 'init:settingModel', this );
 			this.on( 'change:error', this.maybePreventUI, this );
+			nfRadio.channel( 'setting-name-' + this.get( 'name' ) ).reply( 'get:settingModel', this.getSettingModel, this );
 
 			/*
 			 * If we have an objectType set on our collection, then we're creating a model for the generic settings collection.
@@ -37,6 +38,10 @@ define( [], function() {
 			if ( this.get( 'use_merge_tags' ) && 'undefined' != typeof this.collection.options.objectType ) {
 				this.listenTo( nfRadio.channel( 'app' ), 'update:fieldKey', this.updateKey );
 			}
+		},
+
+		getSettingModel: function() {
+			return this;
 		},
 
 		/**

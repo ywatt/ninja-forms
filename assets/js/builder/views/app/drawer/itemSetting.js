@@ -185,6 +185,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 		},
 
 		renderError: function() {
+			console.log( this.model.get( 'error' ) );
 			if ( this.model.get( 'error' ) ) {
 				jQuery( this.el ).find( '.nf-setting' ).addClass( 'nf-error' );
 				this.error.show( new settingErrorView( { model: this.model } ) );
