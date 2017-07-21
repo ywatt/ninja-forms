@@ -20,16 +20,26 @@ define( [], function() {
 		},
 
 		maybeUpdateSettings: function( fieldModel ) {
+
 			_.each( this.attributes, function( attr, key ) {
 				var fieldMergeTag = '{field:' + fieldModel.get( 'key' ) + '}';
+
 				if ( _.isString( attr ) ) {
 					this.set( key, attr.replace( fieldMergeTag, '' ) );
-				} else if ( _.isArray( attr ) ) {
-					var index = attr.indexOf( fieldMergeTag );
-					if ( -1 != index ) {
-						attr.splice( index, 1 );
-						this.set( key, attr );
-					}
+				} else if ( _.isObject( attr ) ) {
+					if ( 'custom_meta' == key ) {
+						_.each( attr, function( obj, index ) {
+							obj = _.mapObject( obj, function( val, k ) {
+								if ( _.isString( val ) ) {
+									if ( -1 != val.indexOf( fieldMergeTag ) ) {
+										delete attr[ index ];
+									}
+								};
+								return val;
+							} );
+						}, this );
+						this.set( 'custom_meta', attr );
+					}					
 				}
 			}, this );
 		}
