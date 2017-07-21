@@ -121,7 +121,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             ));
         }
 
-        update_option( 'nf_form_' . $form_id, WPN_Helper::utf8_encode( $form_cache ) );
+        update_option( 'nf_form_' . $form_id, $form_cache );
 
         add_action( 'admin_notices', array( 'NF_Database_Models_Form', 'import_admin_notice' ) );
 
@@ -192,6 +192,10 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $date_format = 'm/d/Y';
 
         $form = Ninja_Forms()->form( $form_id )->get();
+        
+        $form_title = $form->get_setting( 'title' );
+        $form_title = preg_replace( "/[^A-Za-z0-9 ]/", '', $form_title );
+        $form_title = str_replace( ' ', '_', $form_title );
 
         $export = array(
             'settings' => $form->get_settings(),
@@ -216,7 +220,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         } else {
 
             $today = date( $date_format, current_time( 'timestamp' ) );
-            $filename = apply_filters( 'ninja_forms_form_export_filename', 'nf_form_' . $today );
+            $filename = apply_filters( 'ninja_forms_form_export_filename', 'nf_form_' . $today . '_' . $form_title );
             $filename = $filename . ".nff";
 
             header( 'Content-type: application/json');
