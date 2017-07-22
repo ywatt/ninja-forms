@@ -81,7 +81,7 @@ define( ['models/formModel'], function( FormModel ) {
                     clone.set({
                         id: newID,
                         title: clone.get( 'title' ) + ' - copy',
-						created_at: new Date(),
+                        created_at: new Date(),
                     });
                     clone.initShortcode( newID );
                     view.model.collection.add( clone );
