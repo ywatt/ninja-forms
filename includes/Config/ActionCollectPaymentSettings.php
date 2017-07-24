@@ -57,7 +57,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
         ),
         'default_options' => array(
             'label' => __( '- Select One', 'ninja-forms' ),
-            'value' => '',
+            'value' => '0',
         ),
         'use_merge_tags' => TRUE,
     ),
@@ -75,7 +75,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
         ),
         'default_options' => array(
             'label' => __( '- Select One', 'ninja-forms' ),
-            'value' => '',
+            'value' => '0',
         ),
         'use_merge_tags' => TRUE,
     ),
@@ -88,6 +88,7 @@ return apply_filters( 'ninja_forms_action_collect_payment_settings', array(
         'label' => __( 'Enter Amount', 'ninja-forms' ),
         'width' => 'one-half',
         'group' => 'primary',
+        'value' => '0',
         'deps' => array(
             'payment_total_type' => 'fixed',
         ),

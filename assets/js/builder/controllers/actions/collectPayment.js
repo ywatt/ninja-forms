@@ -28,34 +28,11 @@ define( [], function( settingCollection ) {
 		 */
 		initCollectPayment: function( actionModel )  {
 			actionModel.listenTo( nfRadio.channel( 'calcs' ), 'update:calcName', this.maybeUpdateTotal );
-            actionModel.listenTo( nfRadio.channel( 'drawer' ), 'preclose', this.maybeError );
+            // actionModel.listenTo( nfRadio.channel( 'drawer' ), 'preclose', this.maybeError );
         },
 
-		maybeError: function() {
-            /*
- 			 * Check to make sure that we have required settings.
- 			 */
-            nfRadio.channel( 'drawer' ).request( 'prevent:close', 'test' );
-
-			if( ! _.isEmpty( this.get( 'payment_total_type' ) ) && ! _.isEmpty( this.get( 'payment_total') ) ) return false;
-			/*
-			 * Add error to required setting.
-			 */
-            var paymentTotalTypeSetting = nfRadio.channel( 'actions' ).request( 'get:settingModel', 'payment_total_type' );
-            var paymentTotalSetting = nfRadio.channel( 'actions' ).request( 'get:settingModel', 'payment_total' );
-
-            //TODO: Add to translation file and come up with better text for this error.
-			console.log( paymentTotalTypeSetting );
-            var error = 'This is a required field.';
-			if( '' == this.get( 'payment_total_type' ) ) {
-				paymentTotalTypeSetting.set( 'error', error );
-				paymentTotalTypeSetting.trigger( 'change:error' );
-			} else if( '' == this.get( 'payment_total' ) ) {
-				paymentTotalSetting.set( 'error', error );
-				paymentTotalSetting.trigger( 'change:error' );
-			}
-
-		},
+		//TODO: Add in an error that will not allow drawer to close until total type and total value is selected.
+		maybeError: function(){},
 
 		maybeUpdateTotal: function( optionModel, oldName ) {
 			/*
