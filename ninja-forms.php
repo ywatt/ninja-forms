@@ -54,6 +54,8 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
          */
         const VERSION = '3.1.6';
 
+        const WP_MIN_VERSION = '4.6';
+
         /**
          * @var Ninja_Forms
          * @since 2.7
@@ -291,8 +293,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                  */
                 self::$instance->_eos[ 'parser' ] = require_once 'includes/Libraries/EOS/Parser.php';
 
-                self::$instance->session = new NF_Session();
-
                 /*
                  * Plugin Settings
                  */
@@ -484,6 +484,10 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 
         public function session()
         {
+            if( ! $this->session ){
+                $this->session = new NF_Session();
+                $this->session->init();
+            }
             return $this->session;
         }
 
