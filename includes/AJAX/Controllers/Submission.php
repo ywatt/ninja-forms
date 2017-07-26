@@ -250,6 +250,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         // Initialize the process actions log.
         if( ! isset( $this->_data[ 'processed_actions' ] ) ) $this->_data[ 'processed_actions' ] = array();
 
+        /*
+         * Merging extra data that may have been added by fields during processing so that the values aren't lost when we enter the action loop.
+         */
+        $this->_data[ 'extra' ] = array_merge( $this->_data[ 'extra' ], $this->_form_data[ 'extra' ] );
+
         /**
          * The Action Processing Loop
          */

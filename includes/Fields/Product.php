@@ -72,6 +72,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
         }
 
         $data[ 'product_totals' ][] = number_format( $total, 2 );
+        $data[ 'extra' ][ 'product_fields' ][ $product[ 'id' ] ][ 'product_price' ] = $product[ 'settings' ][ 'product_price' ];
 
         return $data;
     }
@@ -156,7 +157,19 @@ class NF_Fields_Product extends NF_Abstracts_Input
         $form_id = get_post_meta( absint( $_GET[ 'post' ] ), '_form_id', true );
 
         $field = Ninja_Forms()->form( $form_id )->get_field( $id );
-        $price = $field->get_setting( 'product_price' );
+
+        /*
+         * Check to see if we have a stored "price" setting for this field.
+         * This lets us track what the value was when the user submitted so that total isn't incorrect if the user changes the price after a submission.
+         */
+        $sub = Ninja_Forms()->form()->get_sub( absint( $_REQUEST[ 'post' ] ) );
+        $product_fields = $sub->get_extra_value( 'product_fields' );
+
+        if( is_array( $product_fields ) && isset ( $product_fields[ $id ] ) ) {
+            $price = $product_fields[ $id ][ 'product_price' ];
+        } else {
+            $price = $field->get_setting( 'product_price' ); 
+        }
 
         /*
          * Get our currency marker setting. First, we check the form, then plugin settings.
@@ -174,7 +187,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
         $currency_symbol = html_entity_decode( $currency_symbols[ $currency ] );
 
         global $wp_locale;
-        $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $field->get_setting( 'product_price' ) );
+        $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $price );
         $price = floatval( $price );
         $value = intval( $value );
 
