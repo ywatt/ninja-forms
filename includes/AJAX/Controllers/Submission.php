@@ -101,7 +101,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         |--------------------------------------------------------------------------
         */
 
-        $form_fields = Ninja_Forms()->form( $this->_form_id )->get_fields();
+        if( $this->is_preview() ){
+            $form_fields = $this->_form_cache[ 'fields' ];
+        } else {
+            $form_fields = Ninja_Forms()->form($this->_form_id)->get_fields();
+        }
 
         /**
          * The Field Processing Loop.
