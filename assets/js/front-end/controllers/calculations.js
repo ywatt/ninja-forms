@@ -160,7 +160,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			}
             
             // If for whatever reason, we got NaN, reset that to 0.
-            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', 0 );
+            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', '0' );
 
 			// Debugging console statement.
 			// console.log( eqValues + ' = ' + calcModel.get( 'value' ) );
@@ -295,7 +295,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
             } catch( e ) {
                 console.log( e );
             }
-            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', 0 );
+            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', '0' );
 
 			// Debugging console statement.
 			// console.log( eqValues + ' = ' + calcModel.get( 'value' ) );		
@@ -370,7 +370,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
             } catch( e ) {
                 console.log( e );
             }
-            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', 0 );
+            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', '0' );
 		},
         
         /**

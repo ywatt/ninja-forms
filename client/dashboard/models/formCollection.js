@@ -25,51 +25,50 @@ define( ['models/formModel'], function( FormModel ) {
                 closeOnClick: 'body'
             } );
 		},
-        
+
         parse: function( response, options ){
 		    return response.data;
         },
-        
+
         modalConfirm: function( view ){
             var message = '<div class="message"><p>Once deleted, a Form cannot be recovered.<br />Are you sure you want to delete <em>' + view.model.get( 'title' ) + '</em>?</p></div>';
             message +=  '<div class="buttons"><div class="confirm nf-button primary">Delete</div> <div style="float:right;" class="cancel nf-button secondary">Cancel</div></div>';
-            
+
             this.modal.setContent( message );
             this.modal.setTitle( 'Confirm Delete' );
-            
+
             this.modal.open();
-            
+
             var that = this;
-            
+
             var btnCancel = this.modal.container[0].getElementsByClassName('cancel')[0];
             btnCancel.addEventListener('click', function() {
                 that.modalClose();
             } );
-            
+
             var btnConfirm = this.modal.container[0].getElementsByClassName('confirm')[0];
             btnConfirm.addEventListener('click', function() {
                 that.confirmDelete( view );
             } );
         },
-        
+
         modalClose: function() {
             this.modal.close();
         },
-        
+
         confirmDelete: function( view ) {
-            console.log('Deleting ' + view.model.get('id') + '...');
             jQuery( view.el ).addClass( 'deleting' );
             view.model.destroy();
             this.modalClose();
         },
-        
+
         duplicate: function( view ) {
             var message = '<div class="message">Duplicating <em>' + view.model.get( 'title' ) +
                           '</em>...' + '<div class="nf-loading-spinner"></div></div>';
             this.modal.setContent( message );
             this.modal.setTitle( 'Please Wait' );
             this.modal.open();
-            
+
             var that = this;
             jQuery.ajax({
                 type: "POST",
@@ -90,6 +89,6 @@ define( ['models/formModel'], function( FormModel ) {
             });
         }
 	} );
-    
+
 	return collection;
 } );
