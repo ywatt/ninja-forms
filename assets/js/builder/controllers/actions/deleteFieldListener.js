@@ -23,23 +23,20 @@ define( [], function() {
 
 			_.each( this.attributes, function( attr, key ) {
 				var fieldMergeTag = '{field:' + fieldModel.get( 'key' ) + '}';
-
 				if ( _.isString( attr ) ) {
 					this.set( key, attr.replace( fieldMergeTag, '' ) );
-				} else if ( _.isObject( attr ) ) {
-					if ( 'custom_meta' == key ) {
-						_.each( attr, function( obj, index ) {
-							obj = _.mapObject( obj, function( val, k ) {
-								if ( _.isString( val ) ) {
-									if ( -1 != val.indexOf( fieldMergeTag ) ) {
-										delete attr[ index ];
-									}
-								};
-								return val;
-							} );
+				} else if ( _.isArray( attr ) ) {
+					_.each( attr, function( obj, index ) {
+						obj = _.mapObject( obj, function( val, k ) {
+							if ( _.isString( val ) ) {
+								if ( -1 != val.indexOf( fieldMergeTag ) ) {
+									attr.splice( index, 1 );
+									this.set( key, attr );
+								}
+							};
+							return val;
 						}, this );
-						this.set( 'custom_meta', attr );
-					}					
+					}, this );
 				}
 			}, this );
 		}
