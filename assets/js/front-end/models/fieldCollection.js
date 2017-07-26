@@ -5,6 +5,9 @@ define( ['models/fieldModel'], function( fieldModel ) {
 
 		initialize: function( models, options ) {
 			this.options = options;
+            this.on( 'reset', function( fieldCollection ){
+                nfRadio.channel( 'fields' ).trigger( 'reset:collection', fieldCollection );
+            }, this );
 		},
 
 		validateFields: function() {
@@ -15,10 +18,16 @@ define( ['models/fieldModel'], function( fieldModel ) {
 
 		showFields: function() {
 			this.invoke( 'set', { visible: true } );
+            this.invoke( function() {
+                this.trigger( 'change:value', this );
+            });
 		},
 
 		hideFields: function() {
 			this.invoke( 'set', { visible: false } );
+            this.invoke( function() {
+                this.trigger( 'change:value', this );
+            });
 		}
 	} );
 	return collection;

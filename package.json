@@ -9,6 +9,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
+    "cssnano": "^3.10.0",
+    "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-gettext": "^0.3.0",

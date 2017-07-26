@@ -103,7 +103,10 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					// Get our field model
 					fieldModel = nfRadio.channel( 'form-' + calcModel.get( 'formID' ) ).request( 'get:fieldByKey', key );
 
-					if( 'undefined' == typeof fieldModel ) return;
+                    if( 'undefined' == typeof fieldModel ) return;
+
+                    fieldModel.set( 'clean', false );
+
 					// Register a listener in our field model for value changes.
 					fieldModel.on( 'change:value', calcModel.changeField, calcModel );
 					// Get our calc value from our field model.
@@ -130,6 +133,9 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					var name = calc.replace( '}', '' ).replace( '{calc:', '' );
 					// Get our calc model
 					var targetCalcModel = calcModel.collection.findWhere( { name: name } );
+
+					if( 'undefined' == typeof targetCalcModel ) return;
+
 					// Listen for changes on our calcluation, since we need to update our calc when it changes.
 					targetCalcModel.on( 'change:value', calcModel.changeCalc, calcModel );
 					// // Get our calc value from our calc model.
@@ -139,6 +145,9 @@ define(['models/calcCollection'], function( CalcCollection ) {
 				} );
 
 			}
+
+            // Scrub unmerged tags (ie deleted/nox-existent fields/calcs, etc).
+            eqValues = eqValues.replace( /{([a-zA-Z0-9]|:|_|-)*}/g, 0 );
 
             // Scrub line breaks.
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
@@ -151,7 +160,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			}
             
             // If for whatever reason, we got NaN, reset that to 0.
-            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', 0 );
+            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', '0' );
 
 			// Debugging console statement.
 			// console.log( eqValues + ' = ' + calcModel.get( 'value' ) );
@@ -254,6 +263,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 					// calc will be {calc:key}
 					var name = calc.replace( '}', '' ).replace( '{calc:', '' );
 					var targetCalcModel = calcModel.collection.findWhere( { name: name } );
+                    if( 'undefined' == typeof targetCalcModel ) return;
 					var re = new RegExp( calc, 'g' );
 					eq = eq.replace( re, targetCalcModel.get( 'value' ) );
 				} );
@@ -275,7 +285,17 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			var value = this.getCalcValue( fieldModel );
 			this.updateCalcFields( calcModel, key, value );
 			var eqValues = this.replaceAllKeys( calcModel );
-			calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
+
+            // Scrub unmerged tags (ie deleted/nox-existent fields/calcs, etc).
+            eqValues = eqValues.replace( /{([a-zA-Z0-9]|:|_|-)*}/g, '0' );
+
+            eqValues = eqValues.replace( /\r?\n|\r/g, '' );
+            try {
+			     calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
+            } catch( e ) {
+                console.log( e );
+            }
+            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', '0' );
 
 			// Debugging console statement.
 			// console.log( eqValues + ' = ' + calcModel.get( 'value' ) );		
@@ -344,7 +364,13 @@ define(['models/calcCollection'], function( CalcCollection ) {
 		changeCalc: function( calcModel, targetCalcModel ) {
 			var eqValues = this.replaceAllKeys( calcModel );
 			eqValues = eqValues.replace( '[', '' ).replace( ']', '' );
-			calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
+            eqValues = eqValues.replace( /\r?\n|\r/g, '' );
+            try {
+			     calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
+            } catch( e ) {
+                console.log( e );
+            }
+            if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', '0' );
 		},
         
         /**

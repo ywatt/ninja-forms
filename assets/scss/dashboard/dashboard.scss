@@ -220,12 +220,21 @@ jBox
     }
 
     .buttons {
+<<<<<<< HEAD
       &::after {
         clear: none;
         content: "";
         display: block;
       }
     }
+=======
+       &::after {
+         clear: none;
+         content: "";
+         display: block;
+       }
+     }
+>>>>>>> develop
 }
 
 /*

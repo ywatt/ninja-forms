@@ -20,7 +20,6 @@ define( ['models/formModel'], function( FormModel ) {
             this.listenTo( nfRadio.channel( 'dashboard' ), 'forms:duplicate', this.duplicate );
             this.modal = new jBox( 'Modal', {
                 width: 300,
-                //height: 120,
                 addClass: 'dashboard-modal',
                 overlay: true,
                 closeOnClick: 'body'
@@ -58,11 +57,8 @@ define( ['models/formModel'], function( FormModel ) {
         },
 
         confirmDelete: function( view ) {
-            console.log('Deleting ' + view.model.get('id') + '...');
             jQuery( view.el ).addClass( 'deleting' );
-            view.model.destroy({
-                wait: true
-            });
+            view.model.destroy();
             this.modalClose();
         },
 

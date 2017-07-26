@@ -1,12 +1,12 @@
 === Ninja Forms - The Easy and Powerful Forms Builder ===
 Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, krmoorhouse, jmcelhaney, wpnzach
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
-Requires at least: 4.5
-Tested up to: 4.7
-Stable tag: 3.1.2
+Requires at least: 4.6
+Tested up to: 4.8
+Stable tag: 3.1.6
 License: GPLv2 or later
 
-Drag and drop fields in an intuitive UI to create create contact forms, email subscription forms, order forms, payment forms, send emails and more!
+Drag and drop fields in an intuitive UI to create contact forms, email subscription forms, order forms, payment forms, send emails and more!
 
 == Description ==
 Ninja Forms is the ultimate FREE form creation tool for WordPress. Build forms within minutes using a simple yet powerful drag-and-drop form creator. For beginners, quickly and easily design complex forms with absolutely no code. For developers, utilize built-in hooks, filters, and even custom field templates to do whatever you need at any step in the form building or submission using Ninja Forms as a framework.
@@ -114,28 +114,66 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.1.2 (16 May 2017) =
+= 3.1.6 (26 June 2017) =
 
 *Bugs:*
 
-* Fixed several possible PHP notices.
-* Fixed a possible conflict with the BBpress plugin.
-* Editing submissions with Checkbox List fields should work properly.
-* Product fields with costs over 1000 should now work properly.
-* Fixed a bug that caused duplicate submissions if a form wasn't hidden after submission.
-
-*Changes:*
-
-* Forms should be sorted by title in the dashboard and the submissions page.
+* Fixed a bug that could cause Recurly and Stripe add-ons to fail.
+* Fixed a bug with bad form titles that could cause the form dashboard to crash.
+* Calculations with whitespaces should be better handled on the front-end.
+* Checkbox label positioning should be correct in all setups.
+* Form deletion confirmation modal should now be styled correctly.
 
 == Changelog ==
 
+= 3.1.6 (26 June 2017) =
+
+*Bugs:*
+
+* Fixed a bug that could cause Recurly and Stripe add-ons to fail.
+* Fixed a bug with bad form titles that could cause the form dashboard to crash.
+* Calculations with whitespaces should be better handled on the front-end.
+* Checkbox label positioning should be correct in all setups.
+* Form deletion confirmation modal should now be styled correctly.
+
+= 3.1.5 (21 June 2017) =
+
+*Bugs:*
+
+* Empty Calculation rounding settings should now default to 2.
+* Using post meta merge tags should now work with other post merge tags.
+* Star Rating fields now have admin key settings.
+* Form cache should now be properly removed when a field is deleted.
+* The "New Form" button should now show when creating a new post or page.
+* HTML fields should now show properly in merge tags.
+* Fixed a bug with the LogLevel class.
+* Querystring merge tags should now be empty rather than showing {querystring:foo} when no querystring is present.
+* Date Created should now be more accurate in all contexts.
+* Fixed a bug that could cause forms to fail to render on the front-end when themes passed content through wpautop.
+
+= 3.1.4 (06 June 2017) =
+
+*Bugs:*
+
+* Fixed a possible memory leak that could cause the builder to crash if the settings drawer was opened multiple times.
+
+= 3.1.3 (31 May 2017) =
+
+*Bugs:*
+
+* Users should be able to re-submit forms that fail initial anti-spam checks.
+* Fixed some bugs related to calculations and submission.
+
+*Changes:*
+
+* Added sortable icons to the forms dashboard.
+
 = 3.1.2 (16 May 2017) =
 
 *Bugs:*
 
 * Fixed several possible PHP notices.
-* Fixed a possible conflict with the BBpress plugin.
+* Fixed a possible conflict with the bbPress plugin.
 * Editing submissions with Checkbox List fields should work properly.
 * Product fields with costs over 1000 should now work properly.
 * Fixed a bug that caused duplicate submissions if a form wasn't hidden after submission.
@@ -297,7 +335,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Submission exports should now always order properly.
 * Fixed a bug with submissions exporting non-Ninja Forms data.
 * Importing forms with non-UTF8 characters should now import properly.
-* Fixed a bug with converting froms from 2.9.x to 3.0.
+* Fixed a bug with converting forms from 2.9.x to 3.0.
 
 = 3.0.24 (15 January 2017) =
 
@@ -315,7 +353,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Bugs:*
 
-* Fixed a bug that caused installations to crash on older, unsecure versions of PHP.
+* Fixed a bug that caused installations to crash on older, insecure versions of PHP.
 
 = 3.0.21 (11 January 2017) =
 
@@ -494,7 +532,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Bugs:*
 
-* Fixed a bug with loading the form builder form cache.
+* Fixed a bug with loading the form builder from cache.
 
 = 3.0.8 (11 October 2016) =
 
