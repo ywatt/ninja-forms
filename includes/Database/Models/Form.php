@@ -75,6 +75,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         */
         $form = Ninja_Forms()->form( $id )->get();
         $form->update_settings( $import[ 'settings' ] );
+        $form->update_setting( 'created_at', current_time( 'mysql' ) );
         $form->save();
         $form_id = $form->get_id();
 
@@ -86,6 +87,9 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         );
         $update_process = Ninja_Forms()->background_process( 'update-fields' );
         foreach( $import[ 'fields' ] as $settings ){
+			
+            $settings[ 'created_at' ] = current_time( 'mysql' );
+			
             if( $is_conversion ) {
                 $field_id = $settings[ 'id' ];
                 $field = Ninja_Forms()->form($form_id)->field( $field_id )->get();
@@ -112,6 +116,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         foreach( $import[ 'actions' ] as $settings ){
 
             $action = Ninja_Forms()->form($form_id)->action()->get();
+
+            $settings[ 'created_at' ] = current_time( 'mysql' );
 
             $action->update_settings( $settings )->save();
 
