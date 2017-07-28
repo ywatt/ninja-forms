@@ -342,6 +342,12 @@ class NF_Admin_CPT_Submission
         $form_id = absint( $_REQUEST['form_id'] );
         // Get the columns that should be hidden for this form ID.
         $hidden_columns = get_user_option( 'manageedit-nf_subcolumnshidden-form-' . $form_id );
+
+        // Checks to see if hidden columns are in the format expected for 2.9.x and converts formatting.
+        if( strpos( $hidden_columns[ 0 ], 'form_'  ) !== false ) {
+            $hidden_columns = $this->convert_hidden_columns( $form_id, $hidden_columns );
+        }
+
         if ( $hidden_columns === false ) {
             // If we don't have custom hidden columns set up for this form, then only show the first five columns.
             // Get our column headers
@@ -358,6 +364,24 @@ class NF_Admin_CPT_Submission
         }
         update_user_option( $user->ID, 'manageedit-nf_subcolumnshidden', $hidden_columns, true );
     }
+
+    /**
+     * Convert Hidden Columns
+     * Looks for 2.9.x hidden columns formatting and converts it to the formatting 3.0 expects.
+     * @param $form_id
+     * @param $hidden_columns
+     * @return mixed
+     */
+    private function convert_hidden_columns( $form_id, $hidden_columns )
+    {
+        $id = 'form_' . $form_id . '_field_';
+        if( 'sub_date' !== $hidden_columns ) {
+            $hidden_columns = str_replace( $id, '', $hidden_columns );
+        }
+        return $hidden_columns;
+    }
+
+
     /**
      * Save our hidden columns per form id.
      *
