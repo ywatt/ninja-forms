@@ -34,7 +34,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
         $this->_settings[ 'product_price' ][ 'width' ] = 'full';
 
         add_filter( 'ninja_forms_merge_tag_value_product', array( $this, 'merge_tag_value' ), 10, 2 );
-        add_filter( 'ninja_forms_custom_columns', array( $this, 'custom_columns' ), 10, 2 );
+        add_filter( 'ninja_forms_custom_columns', array( $this, 'custom_columns' ), 10, 3 );
         add_filter( 'ninja_forms_localize_field_' . $this->_name, array( $this, 'filter_required_setting' ) );
         add_filter( 'ninja_forms_localize_field_' . $this->_name . '_preview', array( $this, 'filter_required_setting' ) );
     }
@@ -119,12 +119,25 @@ class NF_Fields_Product extends NF_Abstracts_Input
         return number_format( $product_price * $product_quantity, 2 );
     }
 
-    public function custom_columns( $value, $field )
+    public function custom_columns( $value, $field, $sub_id )
     {
         if ( ! $field->get_setting( 'product_use_quantity' ) ) return $value;
         if ( 0 == absint( $_REQUEST[ 'form_id' ] ) ) return $value;
 
         $form_id = absint( $_REQUEST[ 'form_id' ] );
+
+        /*
+         * Check to see if we have a stored "price" setting for this field.
+         * This lets us track what the value was when the user submitted so that total isn't incorrect if the user changes the price after a submission.
+         */
+        $sub = Ninja_Forms()->form()->get_sub( $sub_id );
+        $product_fields = $sub->get_extra_value( 'product_fields' );
+
+        if( is_array( $product_fields ) && isset ( $product_fields[ $field->get_id() ] ) ) {
+            $price = $product_fields[ $field->get_id() ][ 'product_price' ];
+        } else {
+            $price = $field->get_setting( 'product_price' ); 
+        }
 
         /*
          * Get our currency marker setting. First, we check the form, then plugin settings.
