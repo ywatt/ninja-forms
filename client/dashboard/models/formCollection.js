@@ -57,7 +57,13 @@ define( ['models/formModel'], function( FormModel ) {
         },
 
         confirmDelete: function( view ) {
+            jQuery( view.el ).removeClass( 'show-actions' );
             jQuery( view.el ).addClass( 'deleting' );
+            jQuery( view.el ).animate({
+                'opacity': 0,
+                'line-height': 0,
+                'display': 'none'
+            }, 500 );
             view.model.destroy();
             this.modalClose();
         },
