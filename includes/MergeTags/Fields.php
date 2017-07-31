@@ -136,6 +136,7 @@ final class NF_MergeTags_Fields extends NF_Abstracts_MergeTags
 
         if( in_array( $field[ 'type' ], $hidden_field_types )
             && 'html' != $field[ 'type' ] // Specifically allow the HTML field in merge tags.
+            && 'password' != $field[ 'type' ] // Specifically allow the Password field in merge tags for actions, ie User Management
         ) return;
 
         $field_id  = $field[ 'id' ];
