@@ -122,7 +122,7 @@ define([], function() {
 				   		var response = jQuery.parseJSON( data );
 				        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR, formModel.get( 'id' ) );
 				    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR );
-				    	jQuery( document ).trigger( 'formSubmit', { response: response, id: formModel.get( 'id' ) } );
+				    	jQuery( document ).trigger( 'nfFormSubmitResponse', { response: response, id: formModel.get( 'id' ) } );
 			   		} catch( e ) {
 			   			console.log( e );
 			   			console.log( 'Parse Error' );
