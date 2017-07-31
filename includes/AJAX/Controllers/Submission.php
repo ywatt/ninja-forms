@@ -114,7 +114,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
          * For performance reasons, this should be the only time that the fields array is traversed.
          * Anything needing to loop through fields should integrate here.
          */
-         $validate_fields = apply_filters( 'ninja_forms_validate_fields', true, $this->_data );
+        $validate_fields = apply_filters( 'ninja_forms_validate_fields', true, $this->_data );
         foreach( $form_fields as $key => $field ){
 
             if( is_object( $field ) ) {
@@ -180,6 +180,38 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $field_merge_tags->add_field( $field );
 
             $this->_data[ 'fields' ][ $field_id ] = $field;
+            $this->_data[ 'fields_by_key' ][ $field[ 'key' ] ] = $field;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Check for unique field settings.
+        |--------------------------------------------------------------------------
+        */
+        if ( isset ( $this->_data[ 'settings' ][ 'unique_field' ] ) && ! empty( $this->_data[ 'settings' ][ 'unique_field' ] ) ) {
+            /*
+             * Get our unique field
+             */
+            $unique_field_key = $this->_data[ 'settings' ][ 'unique_field' ];
+            $unique_field_error = $this->_data[ 'settings' ][ 'unique_field_error' ];
+            $unique_field_id = $this->_data[ 'fields_by_key' ][ $unique_field_key ][ 'id' ];
+            $unique_field_value = $this->_data[ 'fields_by_key' ][ $unique_field_key ][ 'value' ];
+
+            /*
+             * Check our db for the value submitted.
+             * 
+             * TODO: Change this to a SQL command for faster processing.
+             */
+            $subs = Ninja_Forms()->form( $this->_form_id )->get_subs();
+
+            foreach ( $subs as $sub ) {
+                $field_value = $sub->get_field_value( $unique_field_key );
+                if ( $unique_field_value == $field_value ) {
+                    $this->_errors['fields'][ $unique_field_id ] = $unique_field_error;
+                    $this->_respond();
+                    break;
+                }
+            }
         }
 
         /*

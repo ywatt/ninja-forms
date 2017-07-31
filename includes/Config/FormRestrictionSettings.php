@@ -2,6 +2,42 @@
 
 return apply_filters( 'ninja_forms_from_restriction_settings', array(
 
+    /*
+     * SET A UNIQUE FIELD
+     */
+    'unique_field' => array(
+        'name' => 'unique_field',
+        'type' => 'field-select',
+        'label' => __( 'Unique Field', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'primary',
+        'field_value_format' => 'key',
+        /* Optional */
+        'field_types' => array(
+            'firstname',
+            'lastname',
+            'email',
+            'textbox',
+            'listselect',
+            'listradio',
+            'listmultiselect',
+            'date'
+        ),
+    ),
+    
+    /*
+     * UNIQUE FIELD ERROR
+     */
+    'unique_field_error'    => array(
+        'name'              => 'unique_field_error',
+        'type'              => 'textbox',
+        'label'             => __( 'Unique Field Error Message', 'ninja-forms' ),
+        'width'             => 'full',
+        'group'             => 'primary',
+        'value'             => __( 'A form with this value has already been submitted.', 'ninja-forms' ),
+    ),
+
+
     'logged-in-set' => array(
         'name'    => 'logged-in-set',
         'type'    => 'fieldset',
@@ -82,5 +118,4 @@ return apply_filters( 'ninja_forms_from_restriction_settings', array(
             ),
         )
     ),
-
 ));
