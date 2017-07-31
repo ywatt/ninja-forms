@@ -1,7 +1,10 @@
 <?php
 
 /*
- * CHANGES: Removed `\` for php5.2 support (does not support namespaces).
+ * MODIFICATIONS
+ * - Removed `\` for php5.2 support (does not support namespaces).
+ * - Renamed with prefix to avoid naming collisions.
+ * - Updated references to the EOS Stack class to reflect name changes.
  */
 
 /**
@@ -60,7 +63,7 @@ require_once 'Stack.php';
  * @subpackage EOS
  * @version 2.2.1
  */
-class Parser {
+class NF_EOS_Parser {
 
     /**
      * No matching Open/Close pair
@@ -178,7 +181,7 @@ class Parser {
         //check to make sure 'valid' equation
         $this->checkInfix($infix);
         $pf = array();
-        $ops = new Stack();
+        $ops = new NF_EOS_Stack();
         //$vars = new Stack();
 
         // remove all white-space
