@@ -38,10 +38,9 @@ define( [], function() {
         },
         
         /* Overwrite the standard backbone delete method
-         * allowing us to send a POST request insead of DELETE
+         * allowing us to send a POST request instead of DELETE
          */
         destroy: function() {
-            console.log( this.collection );
             var that = this;
             jQuery.ajax({
                 type: "POST",

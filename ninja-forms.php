@@ -479,7 +479,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 
         public function eos()
         {
-            return new Parser();
+            return new NF_EOS_Parser();
         }
 
         public function session()
