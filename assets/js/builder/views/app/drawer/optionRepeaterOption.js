@@ -88,7 +88,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 		},
 
 		maybeAddOption: function( e ) {
-			if ( 13 == e.keyCode ) {
+			if ( 13 == e.keyCode && 'calculations' != this.settingModel.get( 'name' ) ) {
 				nfRadio.channel( 'option-repeater' ).trigger( 'click:addOption', this.collection, this.dataModel, this );
 				jQuery( this.parentView.children.findByIndex(this.parentView.children.length - 1).el ).find( '[data-id="label"]' ).focus();
 			}
@@ -125,6 +125,7 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 				renderFieldSelect: function( dataID, value ){
 					var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
 					var _return = '<label class="nf-select"><select class="setting" data-id="' + dataID + '">';
+                    _return += '<option value="" >--</option>';
 					fields.each( function( field ){
 						var selected = ( value == field.get( 'key' ) ) ? ' selected' : '';
 						_return += '<option value="' + field.get( 'key' ) + '"' + selected + '>' + field.get( 'label' ) + '</option>';

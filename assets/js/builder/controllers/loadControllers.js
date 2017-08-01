@@ -88,6 +88,7 @@ define(
 		'controllers/actions/data',
 		'controllers/actions/actionSettings',
 		'controllers/actions/editActive',
+		'controllers/actions/emailFromSetting',
 		'controllers/actions/addActionTypes',
 		'controllers/actions/typeDrag',
 		'controllers/actions/droppable',
@@ -188,6 +189,7 @@ define(
 		ActionData,
 		ActionSettings,
 		ActionEditActive,
+		ActionEmailFromSetting,
 		ActionAddTypes,
 		ActionTypeDrag,
 		ActionDroppable,
@@ -290,6 +292,7 @@ define(
 				new ActionData();
 				new ActionSettings();
 				new ActionEditActive();
+				new ActionEmailFromSetting();
 				new ActionAddTypes();
 				new ActionTypeDrag();
 				new ActionDroppable();

@@ -122,13 +122,22 @@ define( [
 
             /** ... and Calc updates. */
             this.listenTo( Backbone.Radio.channel( 'calcs' ), 'update:calc', this.afterAppStart );
+
+            this.listenTo( Backbone.Radio.channel( 'app' ), 'change:currentDomain', this.afterAppStart );
         },
 
         afterAppStart: function() {
+
+            var currentDomain = Backbone.Radio.channel( 'app' ).request( 'get:currentDomain' );
+
             var mergeTagCollection = nfRadio.channel( 'mergeTags' ).request( 'get:collection' );
             var mergeTags = [];
             mergeTagCollection.each( function( section ){
+
                 section.get( 'tags' ).each( function( tag ){
+
+                    if( 'fields' == currentDomain.get( 'id' ) && '{submission:sequence}' == tag.get( 'tag' ) ) return;
+
                     mergeTags.push({
                         label: tag.get( 'label' ),
                         tag:   tag.get( 'tag' ),
@@ -229,7 +238,7 @@ define( [
             var replace = tag;
             var caretPos = nfRadio.channel( 'mergeTags' ).request( 'get:caret' );
 
-            var patt = /{([a-z0-9]|:|_||-})*/g;
+            var patt = /{([a-zA-Z0-9]|:|_||-})*/g;
 
             // Loop through matches to find insert/replace index range.
             // Reference: http://codepen.io/kjohnson/pen/36c3a782644dfff40fe3c1f05f8739d9?editors=0012
@@ -452,9 +461,9 @@ define( [
 
             // Find merge tags.
             if( 'rte' == type ) {
-                var mergetags = $this.summernote( 'code' ).match(new RegExp(/{([a-z0-9]|:|_|-|})*/g));
+                var mergetags = $this.summernote( 'code' ).match(new RegExp(/{([a-zA-Z0-9]|:|_|-|})*/g));
             } else {
-                var mergetags = $this.val().match(new RegExp(/{([a-z0-9]|:|_|-|})*/g));
+                var mergetags = $this.val().match(new RegExp(/{([a-zA-Z0-9]|:|_|-|})*/g));
             }
 
             // Filter out closed merge tags.

@@ -40,6 +40,10 @@ th {
 
   .form-row-actions a {
     cursor: pointer;
+
+    &.delete {
+      color: #FF4136;
+    }
   }
 
   > div > main.content {
@@ -55,10 +59,10 @@ th {
     background-color: #EBEDEE;
   }
   .deleting {
-    color: white;
-    background-color: red!important;
+    color: #FF4136;
+    background-color: #ECEDEE;
     a {
-      color: white;
+      color: #FF4136;
     }
     footer {
       display: none;

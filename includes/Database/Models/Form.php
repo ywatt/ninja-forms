@@ -121,7 +121,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             ));
         }
 
-        update_option( 'nf_form_' . $form_id, WPN_Helper::utf8_encode( $form_cache ) );
+        update_option( 'nf_form_' . $form_id, $form_cache );
 
         add_action( 'admin_notices', array( 'NF_Database_Models_Form', 'import_admin_notice' ) );
 
@@ -151,6 +151,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $new_form->update_setting( 'title', $new_form_title );
 
         $new_form->update_setting( 'lock', 0 );
+		
+        $new_form->update_setting( 'created_at', current_time( 'mysql' ) );
 
         $new_form->save();
 
@@ -163,6 +165,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $field_settings = $field->get_settings();
 
             $field_settings[ 'parent_id' ] = $new_form_id;
+            $field_settings[ 'created_at' ] = current_time( 'mysql' );
 
             $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
             $new_field->update_settings( $field_settings )->save();
@@ -173,6 +176,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         foreach( $actions as $action ){
 
             $action_settings = $action->get_settings();
+			
+            $action_settings[ 'created_at' ] = current_time( 'mysql' );
 
             $new_action = Ninja_Forms()->form( $new_form_id )->action()->get();
             $new_action->update_settings( $action_settings )->save();
@@ -187,6 +192,10 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $date_format = 'm/d/Y';
 
         $form = Ninja_Forms()->form( $form_id )->get();
+        
+        $form_title = $form->get_setting( 'title' );
+        $form_title = preg_replace( "/[^A-Za-z0-9 ]/", '', $form_title );
+        $form_title = str_replace( ' ', '_', $form_title );
 
         $export = array(
             'settings' => $form->get_settings(),
@@ -211,7 +220,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         } else {
 
             $today = date( $date_format, current_time( 'timestamp' ) );
-            $filename = apply_filters( 'ninja_forms_form_export_filename', 'nf_form_' . $today );
+            $filename = apply_filters( 'ninja_forms_form_export_filename', 'nf_form_' . $today . '_' . $form_title );
             $filename = $filename . ".nff";
 
             header( 'Content-type: application/json');
