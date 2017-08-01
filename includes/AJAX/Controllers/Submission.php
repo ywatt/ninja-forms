@@ -114,7 +114,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
          * For performance reasons, this should be the only time that the fields array is traversed.
          * Anything needing to loop through fields should integrate here.
          */
-         $validate_fields = apply_filters( 'ninja_forms_validate_fields', true, $this->_data );
+        $validate_fields = apply_filters( 'ninja_forms_validate_fields', true, $this->_data );
         foreach( $form_fields as $key => $field ){
 
             if( is_object( $field ) ) {
@@ -180,6 +180,37 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             $field_merge_tags->add_field( $field );
 
             $this->_data[ 'fields' ][ $field_id ] = $field;
+            $this->_data[ 'fields_by_key' ][ $field[ 'key' ] ] = $field;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Check for unique field settings.
+        |--------------------------------------------------------------------------
+        */
+        if ( isset ( $this->_data[ 'settings' ][ 'unique_field' ] ) && ! empty( $this->_data[ 'settings' ][ 'unique_field' ] ) ) {
+            /*
+             * Get our unique field
+             */
+            $unique_field_key = $this->_data[ 'settings' ][ 'unique_field' ];
+            $unique_field_error = $this->_data[ 'settings' ][ 'unique_field_error' ];
+            $unique_field_id = $this->_data[ 'fields_by_key' ][ $unique_field_key ][ 'id' ];
+            $unique_field_value = $this->_data[ 'fields_by_key' ][ $unique_field_key ][ 'value' ];
+            if ( is_array( $unique_field_value ) ) {
+                $unique_field_value = serialize( $unique_field_value );
+            }
+
+            /*
+             * Check our db for the value submitted.
+             */
+            
+            global $wpdb;
+            $sql = $wpdb->prepare( "SELECT COUNT(meta_id) FROM `" . $wpdb->prefix . "postmeta` WHERE meta_key = '_field_%d' AND meta_value = '%s'", $unique_field_id, $unique_field_value );
+            $result = $wpdb->get_results( $sql, 'ARRAY_N' );
+            if ( intval( $result[ 0 ][ 0 ] ) > 0 ) {
+                $this->_errors['fields'][ $unique_field_id ] = array( 'slug' => 'unique_field', 'message' => $unique_field_error );
+                $this->_respond();
+            }
         }
 
         /*
