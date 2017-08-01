@@ -359,9 +359,17 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
                     // Convert Shortcodes
                     $shortcode = "[ninja_forms_field id=$field_id]";
                     if( ! is_array( $value ) ) {
-                        if (FALSE !== strpos($value, $shortcode)) {
-                            $value = str_replace($shortcode, '{field:' . $field_key . '}', $value);
+                        if ( FALSE !== strpos( $value, $shortcode ) ) {
+                            $value = str_replace( $shortcode, '{field:' . $field_key . '}', $value );
                         }
+                    }
+                }
+
+                //Checks for the nf_sub_seq_num short code and replaces it with the submission sequence merge tag
+                $sub_seq = '[nf_sub_seq_num]';
+                if( ! is_array( $value ) ) {
+                    if( FALSE !== strpos( $value, $sub_seq ) ){
+                        $value = str_replace( $sub_seq, '{submission:sequence}', $value );
                     }
                 }
 
