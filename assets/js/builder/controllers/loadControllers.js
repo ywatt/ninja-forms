@@ -94,6 +94,10 @@ define(
 		'controllers/actions/droppable',
 		'controllers/actions/filterTypes',
 		'controllers/actions/newsletterList',
+		'controllers/actions/collectPaymentFields',
+		'controllers/actions/collectPaymentCalculations',
+		'controllers/actions/collectPaymentFixed',
+		'controllers/actions/collectPayment',
 
 		/*
 		 * TODO: Settings domain controllers
@@ -191,6 +195,10 @@ define(
 		ActionDroppable,
 		ActionFilterTypes,
 		ActionNewsletterList,
+		ActionCollectPaymentFields,
+		ActionCollectPaymentCalculations,
+		ActionCollectPaymentFixed,
+		ActionCollectPayment,
 		/*
 		 * TODO: Settings domain controllers
 		 */
@@ -278,6 +286,8 @@ define(
 				 * TODO: Actions domain controllers
 				 */
 				new ActionNewsletterList();
+				new ActionCollectPaymentCalculations();
+				new ActionCollectPayment();				
 				new ActionTypes();
 				new ActionData();
 				new ActionSettings();
@@ -287,6 +297,9 @@ define(
 				new ActionTypeDrag();
 				new ActionDroppable();
 				new ActionFilterTypes();
+				new ActionCollectPaymentFields();
+				new ActionCollectPaymentFixed();
+
 				/*
 				 * TODO: Settings domain controllers
 				 */
