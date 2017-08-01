@@ -16,6 +16,7 @@ define( [], function() {
         },
 
         beforeRenderSetting: function( settingModel, dataModel, view ) {
+
             if ( 'payment_total_type' != settingModel.get( 'name' ) || _.isEmpty( dataModel.get( 'payment_total' ) ) ) return false;
 
             /*
@@ -25,6 +26,7 @@ define( [], function() {
                 /*
                  * If payment_total is a field merge tag, set payment_total_type to "field"
                  */
+
                 if ( -1 != dataModel.get( 'payment_total' ).indexOf( '{field' ) ) {
                     dataModel.set( 'payment_total_type', 'field' );
                 } else if ( -1 != dataModel.get( 'payment_total' ).indexOf( '{calc' ) ) {
