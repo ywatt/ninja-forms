@@ -205,10 +205,10 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
              */
             
             global $wpdb;
-            $sql = "SELECT COUNT(meta_id) FROM `" . $wpdb->prefix . "postmeta` WHERE meta_key = '_field_" . intval( $unique_field_id ) . "' AND meta_value = '" . $unique_field_value . "'";
+            $sql = $wpdb->prepare( "SELECT COUNT(meta_id) FROM `" . $wpdb->prefix . "postmeta` WHERE meta_key = '_field_%d' AND meta_value = '%s'", $unique_field_id, $unique_field_value );
             $result = $wpdb->get_results( $sql, 'ARRAY_N' );
             if ( intval( $result[ 0 ][ 0 ] ) > 0 ) {
-                $this->_errors['fields'][ $unique_field_id ] = $unique_field_error;
+                $this->_errors['fields'][ $unique_field_id ] = array( 'slug' => 'unique_field', 'message' => $unique_field_error );
                 $this->_respond();
             }
         }
