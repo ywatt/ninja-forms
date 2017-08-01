@@ -20,12 +20,5 @@ tests/
 vendor/
 composer.lock
 
-# Minified Assets
-assets/css/dashboard.min.css
-assets/css/dashboard.min.css.map
-assets/js/min/dashboard.min.js
-assets/js/min/dashboard.min.js.map
-assets/js/lib/backbone.marionette3.min.js
-
 *.sass-cache
 *.scssc
