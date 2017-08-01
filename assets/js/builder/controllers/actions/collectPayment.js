@@ -28,7 +28,6 @@ define( [], function( settingCollection ) {
 		 */
 		initCollectPayment: function( actionModel )  {
 			actionModel.listenTo( nfRadio.channel( 'calcs' ), 'update:calcName', this.maybeUpdateTotal );
-            // actionModel.listenTo( nfRadio.channel( 'drawer' ), 'preclose', this.maybeError );
         },
 
 		//TODO: Add in an error that will not allow drawer to close until total type and total value is selected.

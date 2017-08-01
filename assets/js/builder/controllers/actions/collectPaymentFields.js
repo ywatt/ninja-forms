@@ -16,10 +16,32 @@ define( [], function() {
 		},
 
 		beforeRenderSetting: function( settingModel, dataModel, view ) {
-			if ( 'field' == settingModel.get( 'total_type' ) ) {
-				var fields = this.getFields( settingModel );
-				settingModel.set( 'options', fields );
+			if ( 'field' != settingModel.get( 'total_type' ) ) return false;
+
+			var fields = this.getFields( settingModel );
+
+			/*
+			 * If the field in the payment total isn't in our field list, add it.
+			 *
+			 * Remove the merge tag stuff to get the field key.
+			 */
+			
+			var field_key = dataModel.get( 'payment_total' );
+			field_key = field_key.replace( '{field:', '' );
+			field_key = field_key.replace( '}', '' );
+			var fieldModel = nfRadio.channel( 'fields' ).request( 'get:field', field_key );
+
+			if ( 'undefined' != typeof fieldModel ) {
+				if ( 'undefined' == typeof _.findWhere( fields, { value: dataModel.get( 'payment_total' ) } ) ) {
+					fields.push( { label: fieldModel.get( 'label' ), value: '{field:' + fieldModel.get( 'key' ) + '}' } );
+				}
 			}
+			
+			/*
+			 * Update our fields options.
+			 */
+			settingModel.set( 'options', fields );
+			
 		},
 
 		getFields: function( settingModel ) {
