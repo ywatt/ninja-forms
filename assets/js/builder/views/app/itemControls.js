@@ -34,7 +34,7 @@ define( [], function() {
 			'mouseover .nf-item-control': 'mouseoverItemControl',
 			'click .nf-edit-settings': 'clickEdit',
 			'singletap .nf-edit-settings': 'singleTapEdit',
-			'click .nf-delete': 'clickDelete',
+			'click .nf-item-delete': 'clickDelete',
 			'click .nf-duplicate': 'clickDuplicateField'
 		},
 
