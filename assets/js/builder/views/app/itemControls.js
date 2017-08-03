@@ -33,9 +33,9 @@ define( [], function() {
 		events: {
 			'mouseover .nf-item-control': 'mouseoverItemControl',
 			'click .nf-edit-settings': 'clickEdit',
-			'singletap .nf-edit-settings': 'singleTapEdit',
+			'singletap .nf-item-control': 'singleTapEdit',
 			'click .nf-item-delete': 'clickDelete',
-			'click .nf-duplicate': 'clickDuplicateField'
+			'click .nf-item-duplicate': 'clickDuplicateField'
 		},
 
 		clickEdit: function( e ) {
