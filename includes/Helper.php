@@ -278,6 +278,28 @@ final class WPN_Helper
             return false;
         }
     }
+    
+    /**
+     * Function to format a string to match locale output.
+     * 
+     * Since 3.1
+     * 
+     * @param $value String
+     * @param $round Int
+     * @param $dec String
+     * @param $sep String
+     * @param $currency String/False
+     * 
+     * @return String
+     */
+    public static function apply_locale_mask( $value, $round = 2, $dec = '.', $sep = ',', $currency = FALSE )
+    {
+        $return = number_format( $value, $round, $dec, $sep );
+        if( FALSE !== $currency ) {
+            $return = $currency . ' ' . $return;
+        }
+        return $return;
+    }
 
     private static function parse_utf8_serialized( $matches )
     {
