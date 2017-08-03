@@ -222,17 +222,48 @@ return apply_filters( 'ninja_forms_form_display_settings', array(
     ),
 
     /*
-     * CURRENCY
+     * LOCALE
      */
 
-    'currency' => array(
-        'name'      => 'currency',
-        'type'    => 'select',
-        'options' => array_merge( array( array( 'label' => __( 'Plugin Default', 'ninja-forms' ), 'value' => '' ) ), Ninja_Forms::config( 'Currency' ) ),
-        'label'   => __( 'Currency', 'ninja-forms' ),
+    'locale' => array(
+        'name'      => 'locale',
+        'type'    => 'fieldset',
+        'label'   => __( 'Locale', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'advanced',
-        'value'   => ''
+        'settings' => array(
+            array(
+                'name' => 'thousandSep',
+                'type' => 'textbox',
+                'label' => __( 'Thousand Separator', 'ninja-forms' ),
+                'width' => 'one-half'
+            ),
+            array(
+                'name' => 'decimalPoint',
+                'type' => 'textbox',
+                'label' => __( 'Decimal Point', 'ninja-forms' ),
+                'width' => 'one-half'
+            ),
+            array(
+                'name'      => 'currency',
+                'type'    => 'select',
+                'options' => array_merge( array( array( 'label' => __( 'Plugin Default', 'ninja-forms' ), 'value' => '' ) ), Ninja_Forms::config( 'Currency' ) ),
+                'label'   => __( 'Currency', 'ninja-forms' ),
+                'width' => 'one-half',
+                'value' => ''
+            ),
+            array(
+                'name'      => 'symbolAlignment',
+                'type'    => 'select',
+                'options' => array(
+                    array( 'label' => __( 'Left', 'ninja-forms' ), 'value' => 'left' ),
+                    array( 'label' => __( 'Right', 'ninja-forms' ), 'value' => 'right' )
+                ),
+                'label'   => __( 'Symbol Alignment', 'ninja-forms' ),
+                'width' => 'one-half',
+                'value' => 'left'
+            ),
+        ),
     ),
 
 ));
