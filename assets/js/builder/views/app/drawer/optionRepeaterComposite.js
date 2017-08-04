@@ -76,7 +76,6 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 					nfRadio.channel( 'option-repeater' ).request( 'update:optionSortable', ui, this, that );
 				}
 			} );
-            
             that.maybeHideNew( that.collection );
 
 			/*
@@ -186,6 +185,7 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 		},
         
         maybeHideNew: function( collection ) {
+			if( 'undefined' == typeof collection.settingModel ) return false;
             var limit = collection.settingModel.get( 'max_options' );
             if( 0 !== limit && collection.models.length >= ( limit ) ) {
                 jQuery(this.el).find('.nf-add-new').addClass('disabled');
