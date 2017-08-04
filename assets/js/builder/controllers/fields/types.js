@@ -23,7 +23,6 @@ define( [
 		initialize: function() {
 			// Config for our settings sections
 			this.sections = new SectionCollection( fieldTypeSections );
-
 			this.listenTo( nfRadio.channel( 'fields' ), 'init:typeModel', this.registerSection );
 
 			// Create our field type collection
@@ -84,8 +83,11 @@ define( [
 
         	var fieldModel = nfRadio.channel( 'fields' ).request( 'add', {
 				type: type,
+
 				label: nfRadio.channel( 'fields' ).request( 'get:type', type ).get( 'nicename' )
 			});
+
+			console.log( fieldModel );
 
 			var label = {
 				object: 'Field',
