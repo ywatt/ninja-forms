@@ -19,6 +19,7 @@ install:
   - chmod +x ./setup/apache-setup.sh
   - sudo bash ./setup/apache-setup.sh -d="/var/www/html" -h="127.0.0.1" -u="http://localhost"
   - sudo cp -R /tmp/wp/* /var/www/html/.
+  - sudo rm /var/www/html/index.html
   - composer update
 
 script:
