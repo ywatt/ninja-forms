@@ -17,7 +17,7 @@ install:
   - sudo bash ./bin/install-apache.sh
   - chmod +x ./bin/install-wp.sh
   - bash ./bin/install-wp.sh --dir="/tmp/wp" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
-  - cp -R /tmp/wp/* /var/www/html/.
+  - sudo cp -R /tmp/wp/* /var/www/html/
   - composer update
 
 script:
