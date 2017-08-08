@@ -8,7 +8,7 @@ actor_suffix: Tester
 modules:
     config:
         WPWebDriver:
-            url: 'http://localhost'
+            url: 'http://ninjaforms.test'
             browser: phantomjs
             port: 4444
             window_size: 1960x1080
@@ -16,7 +16,7 @@ modules:
             adminPassword: 'admin'
             adminPath: '/wp-admin'
             port: 4444
-            restart: true
+            restart: false
             wait: 2
 extensions:
     enabled:
