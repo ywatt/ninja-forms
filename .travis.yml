@@ -1,0 +1,24 @@
+language: php
+
+jdk:
+  - oraclejdk8
+
+php:
+  - 7.0
+
+before_script:
+  - git clone https://github.com/lucatume/travis-apache-setup.git setup
+  - sh ./setup/wp-install --dir=/tmp/wordpress \
+        --dbname="wp" --dbuser="root" \
+        --dbpass="" --dbprefix=wp_ --domain="wp.localhost" \
+        --title="Test" --admin_user=admin --admin_password=admin \
+        --admin_email=admin@wordpress.dev --theme=twentysixteen --empty
+  - "sh -e /etc/init.d/xvfb start"
+  - "export DISPLAY=:99.0"
+  - "wget -P /tmp http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar"
+  - "java -jar /tmp/selenium-server-standalone-3.4.0.jar > /dev/null &"
+  - sleep 5
+  - composer update
+
+script:
+  - vendor/bin/codecept run

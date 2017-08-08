@@ -16,9 +16,10 @@ node_modules
 # Project Stuff
 deploy.sh
 deploy-old.sh
-tests/
+bin/*
 vendor/
 composer.lock
+tests/_output/*
 
 *.sass-cache
 *.scssc
