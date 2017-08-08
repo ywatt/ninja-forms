@@ -28,4 +28,4 @@ before_script:
   - composer update
 
 script:
-  - curl wp.localhost
+  - bin/codecept run acceptance
