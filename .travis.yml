@@ -17,7 +17,7 @@ install:
   - chmod +x ./setup/apache-setup.sh
   - sudo bash ./setup/apache-setup.sh -d="/var/www/" -h="127.0.0.1" -u="http://localhost"
   - chmod +x ./setup/wp-install.sh
-  - bash ./setup/wp-install.sh --dir="/var/www/" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
+  - sudo bash ./setup/wp-install.sh --dir="/var/www/" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
   - composer update
