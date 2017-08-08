@@ -15,9 +15,10 @@ install:
   - sudo mv wp-cli.phar /usr/local/bin/wp
   - git clone https://github.com/lucatume/travis-apache-setup.git setup
   - chmod +x ./setup/wp-install.sh
-  - bash ./setup/wp-install.sh --dir="/srv" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
+  - bash ./setup/wp-install.sh --dir="/tmp/wp" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
   - chmod +x ./setup/apache-setup.sh
-  - sudo bash ./setup/apache-setup.sh -d="/srv" -h="127.0.0.1" -u="http://localhost"
+  - sudo bash ./setup/apache-setup.sh -d="/var/www/html" -h="127.0.0.1" -u="http://localhost"
+  - sudo cp -R /tmp/wp/* /var/www/html/.
   - composer update
 
 script:
