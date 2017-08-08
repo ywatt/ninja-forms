@@ -26,5 +26,4 @@ install:
   - composer update
 
 script:
-  - curl http://ninjaforms.test/wp-login.php
-  - curl http://ninjaforms.test/wp-admin
+  - bin/codecept run acceptance

@@ -1,6 +1,6 @@
 <?php
 $I = new AcceptanceTester( $scenario );
-$I->resizeWindow(1980, 1080);
+
 $I->wantTo( 'check for PHP errors and notices' );
 
 // Login to wp-admin
