@@ -10,7 +10,7 @@
   "homepage": "https://ninjaforms.com",
   "license": "GPL",
   "require": {
-    "lucatume/wp-browser": "~1.21",
+    "lucatume/wp-browser": "~1.21"
   },
   "config": {
     "bin-dir": "bin"
