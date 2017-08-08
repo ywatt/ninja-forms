@@ -18,10 +18,7 @@ sudo a2enmod rewrite
 sudo cp tests/_data/servername.tpl /etc/apache2/conf-available/servername.conf
 # Add testing of Apache Bad Bot Blocker
 sudo mkdir /etc/apache2/custom.d
-cd /etc/apache2/custom.d
-sudo wget https://raw.githubusercontent.com/mitchellkrogza/apache-ultimate-bad-bot-blocker/master/custom.d/globalblacklist.conf
-sudo wget https://raw.githubusercontent.com/mitchellkrogza/apache-ultimate-bad-bot-blocker/master/custom.d/whitelist-ips.conf
-sudo wget https://raw.githubusercontent.com/mitchellkrogza/apache-ultimate-bad-bot-blocker/master/custom.d/whitelist-domains.conf
+
 sudo a2enconf servername
 # Restart apache
 sudo service apache2 restart
