@@ -10,7 +10,9 @@ $I->waitForText( 'Advanced' );
 $I->click( 'Advanced' );
 
 $I->waitForText( 'Restrictions' );
-$I->click( '.nf-setting-wrap.restrictions' );
+$I->click( 'div.restrictions' );
+
+$I->wait( 5 );
 
 $I->waitForElement( '#sub_limit_number' );
 $I->fillField( '#sub_limit_number', '1' );

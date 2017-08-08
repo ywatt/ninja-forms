@@ -8,5 +8,5 @@ $I->loginAsAdmin();
 
 $I->amOnPage( '/wp-admin/admin.php?page=ninja-forms&form_id=new' );
 $I->waitForText( 'Single Checkbox' );
-$I->click( '[data-id="checkbox"]' );
-$I->waitForElement('.nf-field-wrap', 30); 
+$I->click( '.nf-item[data-id="date"]' );
+$I->waitForElement('.nf-field-wrap', 30);
