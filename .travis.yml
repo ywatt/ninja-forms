@@ -22,4 +22,4 @@ install:
   - composer update
 
 script:
-  - curl http://ninjaforms.test
+  - bin/codecept run acceptance
