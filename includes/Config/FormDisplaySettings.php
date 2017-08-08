@@ -1,5 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
+global $wp_locale;
+
 return apply_filters( 'ninja_forms_form_display_settings', array(
 
     /*
@@ -236,13 +238,15 @@ return apply_filters( 'ninja_forms_form_display_settings', array(
                 'name' => 'thousandSep',
                 'type' => 'textbox',
                 'label' => __( 'Thousand Separator', 'ninja-forms' ),
-                'width' => 'one-half'
+                'width' => 'one-half',
+                'value' => $wp_locale->number_format[ 'thousands_sep' ]
             ),
             array(
                 'name' => 'decimalPoint',
                 'type' => 'textbox',
                 'label' => __( 'Decimal Point', 'ninja-forms' ),
-                'width' => 'one-half'
+                'width' => 'one-half',
+                'value' => $wp_locale->number_format[ 'decimal_point' ]
             ),
             array(
                 'name'      => 'currency',
@@ -253,7 +257,7 @@ return apply_filters( 'ninja_forms_form_display_settings', array(
                 'value' => ''
             ),
             array(
-                'name'      => 'symbolAlignment',
+                'name'      => 'currencyAlignment',
                 'type'    => 'select',
                 'options' => array(
                     array( 'label' => __( 'Left', 'ninja-forms' ), 'value' => 'left' ),
