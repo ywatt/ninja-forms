@@ -17,6 +17,7 @@ node_modules
 deploy.sh
 deploy-old.sh
 bin/*
+!bin/*.sh
 vendor/
 composer.lock
 tests/_output/*
