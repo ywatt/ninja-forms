@@ -3,14 +3,11 @@ language: php
 jdk:
   - oraclejdk8
 
-addons:
-  hosts:
-    - wp.localhost
-
 php:
   - 7.0
 
 before_script:
+  - echo "127.0.0.1  wp.localhost" >> /etc/hosts
   - mysql -e 'CREATE DATABASE wp;'
   - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
   - chmod +x wp-cli.phar
@@ -28,4 +25,5 @@ before_script:
   - composer update
 
 script:
-  - ping wp.localhost
+  - ifconfig
+  - bin/codecept run acceptance
