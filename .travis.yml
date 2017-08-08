@@ -5,6 +5,7 @@ dist: trusty
 addons:
   hosts:
     - ninjaforms.test
+  chrome: stable
 
 jdk:
   - oraclejdk8
@@ -25,6 +26,11 @@ install:
   - sudo rm /var/www/html/index.html
   - composer update
   - sudo cp -R ../ninja-forms /var/www/html/wp-content/mu-plugins/
+
+before_script:
+  - "wget -P /tmp http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar"
+  - "java -jar /tmp/selenium-server-standalone-3.4.0.jar > /dev/null &"
+  - sleep 5
 
 script:
   - bin/codecept run acceptance

@@ -9,24 +9,22 @@ modules:
     config:
         WPWebDriver:
             url: 'http://ninjaforms.test'
-            browser: phantomjs
+            browser: chrome
             port: 4444
-            window_size: 1960x1080
+            window_size: false
             adminUsername: 'admin'
             adminPassword: 'admin'
             adminPath: '/wp-admin'
             port: 4444
             restart: true
             wait: 2
+            capabilities:
+              chromeOptions:
+                args: ["--headless", "--disable-gpu"]
+                binary: "/usr/bin/google-chrome"
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
-        - Codeception\Extension\Phantoman
-    config:
-     Codeception\Extension\Phantoman:
-            path: 'bin/phantomjs'
-            port: 4444
-            debug: false
     commands:
         - Codeception\Command\GenerateWPUnit
         - Codeception\Command\GenerateWPRestApi
