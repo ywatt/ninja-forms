@@ -9,13 +9,11 @@ sudo apt-get install -y --force-yes apache2
 sudo add-apt-repository -y ppa:ondrej/php
 # Install PHP 7.0
 sudo apt-get update
-sudo apt-get install -y php7.0 libapache2-mod-php php7.0-fpm php7 php7.0-mysql
+sudo apt-get install -y php7.0 libapache2-mod-php7.0 php7.0-fpm php7.0-mysql
 # Copy our virtual host template to sites-enabled overwriting the default site conf
 sudo cp tests/_data/defaultsite.tpl /etc/apache2/sites-available/000-default.conf
 # Enable mod rewrite module
 sudo a2enmod rewrite
-# Enable PHP
-sudo a2enmod php7.0
 # Set ServerName Globally
 sudo cp tests/_data/servername.tpl /etc/apache2/conf-available/servername.conf
 # Add testing of Apache Bad Bot Blocker
