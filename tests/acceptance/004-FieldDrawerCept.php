@@ -7,6 +7,6 @@ $I->wantTo( 'check that the builder drawer opens and fields are added' );
 $I->loginAsAdmin();
 
 $I->amOnPage( '/wp-admin/admin.php?page=ninja-forms&form_id=new' );
-$I->waitForText( 'Single Checkbox' );
-$I->click( '[data-id="checkbox"]' );
+$I->waitForText( 'Common Fields' );
+$I->click( '.nf-field-type-button:first' );
 $I->waitForElement('.nf-field-wrap', 30); 
