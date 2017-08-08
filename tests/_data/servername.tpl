@@ -1,1 +1,1 @@
-ServerName wp.localhost
+ServerName ninjaforms.test

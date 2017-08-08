@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-	ServerName wp.localhost
+	ServerName ninjaforms.test
 	DocumentRoot /var/www/html
 	ErrorLog /tmp/error.log
 	<Directory "/var/www/html">
