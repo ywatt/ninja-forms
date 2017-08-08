@@ -3,6 +3,10 @@ language: php
 jdk:
   - oraclejdk8
 
+addons:
+  hosts:
+    - wp.localhost
+
 php:
   - 7.0
 
