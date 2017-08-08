@@ -23,4 +23,4 @@ before_script:
   - composer update
 
 script:
-  - bin/codecept run acceptance
+  - curl http://localhost
