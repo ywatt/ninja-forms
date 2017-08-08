@@ -24,4 +24,4 @@ before_script:
   - composer update
 
 script:
-  - bin/codecept run
+  - curl ninjaforms.test
