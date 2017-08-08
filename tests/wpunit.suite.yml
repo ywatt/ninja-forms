@@ -15,8 +15,8 @@ modules:
             dbUser: "root"
             dbPassword: ""
             tablePrefix: "wp_"
-            domain: "wp.localhost"
-            adminEmail: "admin@wp.localhost"
+            domain: "ninjaforms.test"
+            adminEmail: "admin@ninjaforms.test"
             title: "Test"        
             plugins: ['ninja-forms/ninja-forms.php']
             activatePlugins: ['ninja-forms/ninja-forms.php']

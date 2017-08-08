@@ -24,6 +24,7 @@ install:
   - sudo cp -R /tmp/wp/* /var/www/html/
   - sudo rm /var/www/html/index.html
   - composer update
+  - sudo cp -R ../ninja-forms /var/www/html/wp-content/mu-plugins/
 
 script:
   - bin/codecept run acceptance
