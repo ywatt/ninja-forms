@@ -17,16 +17,10 @@ modules:
             adminPath: '/wp-admin'
             port: 4444
             restart: true
-            wait: 10
+            wait: 2
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
-        - Codeception\Extension\Phantoman
-    config:
-     Codeception\Extension\Phantoman:
-            path: 'bin/phantomjs'
-            port: 4444
-            debug: true
     commands:
         - Codeception\Command\GenerateWPUnit
         - Codeception\Command\GenerateWPRestApi
