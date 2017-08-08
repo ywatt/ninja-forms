@@ -13,9 +13,9 @@ install:
   - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
   - chmod +x wp-cli.phar
   - sudo mv wp-cli.phar /usr/local/bin/wp
-  - chmod +x ./setup/apache-setup.sh
+  - chmod +x ./bin/apache-setup.sh
   - sudo bash ./bin/install-apache.sh
-  - chmod +x ./setup/wp-install.sh
+  - chmod +x ./bin/wp-install.sh
   - bash ./bin/wp-install.sh --dir="/tmp/wp" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
   - cp -R /tmp/wp/* /var/www/html/.
   - composer update
