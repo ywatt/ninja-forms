@@ -18,6 +18,7 @@ install:
   - chmod +x ./bin/install-wp.sh
   - bash ./bin/install-wp.sh --dir="/tmp/wp" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="ninjaforms.test" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
   - sudo cp -R /tmp/wp/* /var/www/html/
+  - sudo rm /var/www/html/index.html
   - composer update
 
 script:
