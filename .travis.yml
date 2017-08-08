@@ -8,8 +8,8 @@ php:
 
 before_script:
   - git clone https://github.com/lucatume/travis-apache-setup.git setup
-  - chmod +x setup/wp-install
-  - bash setup/wp-install --dir="/var/www/wp" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="wp.localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
+  - chmod +x ./setup/wp-install.sh
+  - bash ./setup/wp-install.sh --dir="/var/www/wp" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="wp.localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
   - sudo sh ./setup/apache-setup -h="127.0.0.1" -u="http://wp.local" -f="/var/www/wp"
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
