@@ -15,6 +15,9 @@ modules:
             adminUsername: 'admin'
             adminPassword: 'admin'
             adminPath: '/wp-admin'
+            port: 4444
+            restart: true
+            wait: 2
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
