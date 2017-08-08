@@ -24,9 +24,6 @@ before_script:
   - sudo bash ./setup/apache-setup.sh -h="127.0.0.1" -u="http://wp.localhost"
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
-  - wget -P /tmp http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar
-  - java -jar /tmp/selenium-server-standalone-3.4.0.jar > /dev/null &
-  - sleep 5
   - composer update
 
 script:
