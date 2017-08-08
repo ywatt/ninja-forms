@@ -9,7 +9,7 @@ modules:
     config:
         WPWebDriver:
             url: 'http://ninjaforms.test'
-            browser: phantomjs
+            browser: firefox
             port: 4444
             window_size: 1960x1080
             adminUsername: 'admin'
