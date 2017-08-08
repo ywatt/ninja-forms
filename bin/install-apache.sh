@@ -14,6 +14,8 @@ sudo apt-get install -y php7.0 libapache2-mod-php7.0 php7.0-fpm php7.0-mysql
 sudo cp tests/_data/defaultsite.tpl /etc/apache2/sites-available/000-default.conf
 # Enable mod rewrite module
 sudo a2enmod rewrite
+sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php7.0-fpm
 # Set ServerName Globally
 sudo cp tests/_data/servername.tpl /etc/apache2/conf-available/servername.conf
 # Add testing of Apache Bad Bot Blocker
