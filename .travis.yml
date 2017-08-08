@@ -2,6 +2,10 @@ language: php
 sudo: true
 dist: trusty
 
+addons:
+  hosts:
+    - ninjaforms.test
+
 jdk:
   - oraclejdk8
 
