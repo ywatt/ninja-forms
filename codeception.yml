@@ -18,6 +18,12 @@ modules:
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+        - Codeception\Extension\Phantoman
+    config:
+     Codeception\Extension\Phantoman:
+            path: 'bin/phantomjs'
+            port: 4444
+            debug: true
     commands:
         - Codeception\Command\GenerateWPUnit
         - Codeception\Command\GenerateWPRestApi
