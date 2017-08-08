@@ -9,7 +9,7 @@ modules:
     config:
         WPWebDriver:
             url: 'http://ninjaforms.test'
-            browser: firefox
+            browser: phantomjs
             port: 4444
             window_size: 1960x1080
             adminUsername: 'admin'
@@ -21,6 +21,12 @@ modules:
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+        - Codeception\Extension\Phantoman
+    config:
+     Codeception\Extension\Phantoman:
+            path: 'bin/phantomjs'
+            port: 4444
+            debug: false
     commands:
         - Codeception\Command\GenerateWPUnit
         - Codeception\Command\GenerateWPRestApi
