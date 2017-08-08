@@ -22,4 +22,4 @@ install:
   - composer update
 
 script:
-  - curl http://localhost
+  - curl http://ninjaforms.test
