@@ -9,7 +9,7 @@ modules:
         - \Helper\Wpunit
     config:
         WPLoader:
-            wpRootFolder: "/var/www/wp"
+            wpRootFolder: "/tmp/wp"
             dbName: "wpTests"
             dbHost: "localhost"
             dbUser: "root"

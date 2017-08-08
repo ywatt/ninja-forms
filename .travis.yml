@@ -7,10 +7,13 @@ php:
   - 7.0
 
 before_script:
+  - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+  - chmod +x wp-cli.phar
+  - sudo mv wp-cli.phar /usr/local/bin/wp
   - git clone https://github.com/lucatume/travis-apache-setup.git setup
   - chmod +x ./setup/wp-install.sh
-  - bash ./setup/wp-install.sh --dir="/var/www/wp" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="wp.localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
-  - sudo sh ./setup/apache-setup -h="127.0.0.1" -u="http://wp.local" -f="/var/www/wp"
+  - bash ./setup/wp-install.sh --dir="/tmp/wp" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="wp.localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
+  - sudo sh ./setup/apache-setup -h="127.0.0.1" -u="http://wp.local" -f="/tmp/wp"
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
   - wget -P /tmp http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar
