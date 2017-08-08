@@ -28,7 +28,7 @@ install:
   - sudo cp -R ../ninja-forms /var/www/html/wp-content/mu-plugins/
 
 before_script:
-  - "wget -P https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip"
+  - "wget https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip"
   - unzip chromedriver_linux64.zip
   - chmod +x chromedriver
   - sudo mv chromedriver /usr/local/bin/chromedriver
