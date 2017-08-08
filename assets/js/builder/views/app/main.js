@@ -40,6 +40,14 @@ define( [], function() {
 			this.listenTo( nfRadio.channel( 'drawer' ), 'opened', this.setBothGuttersFixed );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'before:close', this.setBothGuttersAbsolute );
 			this.listenTo( nfRadio.channel( 'drawer' ), 'closed', this.setBothGuttersFixed );
+			// ... or Domain Change.
+            this.listenTo( nfRadio.channel( 'app' ), 'change:currentDomain', function(){
+                // @todo Using a timeout feels like a hack, but there may be a timing issue here.
+            	setTimeout(function(){
+                    nfRadio.channel( 'app' ).request( 'update:gutters' );
+				}, 300, this );
+			}, this );
+
 
 			/*
 			 * Reply to messages requesting that we resize our gutters.
