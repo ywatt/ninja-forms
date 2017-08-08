@@ -14,7 +14,7 @@ before_script:
   - chmod +x ./setup/wp-install.sh
   - bash ./setup/wp-install.sh --dir="/tmp/wp" --dbname="wp" --dbuser="root" --dbpass="" --dbprefix="wp_" --domain="wp.localhost" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@wordpress.dev" --theme="twentysixteen" --empty
   - chmod +x ./setup/apache-setup.sh
-  - sudo sh ./setup/apache-setup.sh -h="127.0.0.1" -u="http://wp.local" -f="/tmp/wp"
+  - sudo sh ./setup/apache-setup -h="127.0.0.1" -u="http://wp.local" -f="/var/www/wp"
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
   - wget -P /tmp http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar
