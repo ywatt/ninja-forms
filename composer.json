@@ -11,16 +11,6 @@
   "license": "GPL",
   "require": {
     "lucatume/wp-browser": "~1.21",
-    "site5/phantoman": "^1.1",
-    "jakoch/phantomjs-installer": "^2.1"
-  },
-  "scripts": {
-    "post-install-cmd": [
-      "PhantomInstaller\\Installer::installPhantomJS"
-    ],
-    "post-update-cmd": [
-      "PhantomInstaller\\Installer::installPhantomJS"
-    ]
   },
   "config": {
     "bin-dir": "bin"

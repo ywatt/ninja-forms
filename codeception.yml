@@ -21,7 +21,7 @@ modules:
             capabilities:
               chromeOptions:
                 args: ["--headless", "--disable-gpu"]
-                binary: "/usr/bin/google-chrome"
+                binary: "/usr/bin/google-chrome-stable"
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
