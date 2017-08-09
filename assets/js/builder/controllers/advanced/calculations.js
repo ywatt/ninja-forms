@@ -50,7 +50,7 @@ define( [], function() {
 			this.checkEQ( optionModel.get( 'eq' ), optionModel );
 			this.checkDec( optionModel.get( 'dec' ), optionModel );
 
-			Backbone.Radio.channel( 'calcs' ).trigger( 'update:calc' );
+			Backbone.Radio.channel( 'calcs' ).trigger( 'update:calc', optionModel );
 		},
 
 		sortCalc: function( optionModel, setting ) {
@@ -81,7 +81,9 @@ define( [], function() {
 			if ( 0 != found.length ) {
 				errors.nameExists = 'Calculation names must be unique. Please enter another name.';
 			} else {
+				var oldName = optionModel.get( 'name' );
 				optionModel.set( 'name', name, { silent: silent } );
+				nfRadio.channel( 'calcs' ).trigger( 'update:calcName', optionModel, oldName );
 				delete errors.nameExists;
 			}
 

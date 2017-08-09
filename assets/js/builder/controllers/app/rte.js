@@ -307,7 +307,10 @@ define( [], function() {
 			if ( 'image' == media.type ) {
 				this.currentContext.invoke( 'editor.insertImage', media.url );
 			} else {
-				this.currentContext.invoke( 'editor.createLink', { text: media.filename, url: media.url } );
+				this.currentContext.invoke( 'editor.createLink', {
+					text: media.title || media.filename,
+					url: media.url
+				} );
 			}
 
 		}

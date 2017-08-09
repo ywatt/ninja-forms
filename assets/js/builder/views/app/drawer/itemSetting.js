@@ -21,6 +21,7 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 			}
 
 			this.model.on( 'change:error', this.renderError, this );
+			this.model.on( 'change:warning', this.renderWarning, this );
 
 			var deps = this.model.get( 'deps' );
 			if ( deps ) {
@@ -193,6 +194,16 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				this.error.empty();
 			}
 		},
+
+        renderWarning: function() {
+            if ( this.model.get( 'warning' ) ) {
+                jQuery( this.el ).find( '.nf-setting' ).addClass( 'nf-warning' );
+                this.error.show( new settingErrorView( { model: this.model } ) );
+            } else {
+                jQuery( this.el ).find( '.nf-setting' ).removeClass( 'nf-warning' );
+                this.error.empty();
+            }
+        },
 
 		templateHelpers: function () {
 			var that = this;

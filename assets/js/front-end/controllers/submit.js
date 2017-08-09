@@ -60,11 +60,21 @@ define([], function() {
 			}
 
 			if( false !== validate ){
+
+				// Ignore non-blocking errors.
+				var blockingFormErrors = _.filter( formModel.get( 'errors' ).models, function( error ){
+
+					// Ignore email action related errors.
+					if( 'invalid_email' == error.get( 'id' ) || 'email_not_sent' == error.get( 'id' ) ) return false;
+
+					return true; // Error is blocking.
+				});
+
 				/*
 				 * Make sure we don't have any form errors before we submit.
 				 * Return false if we do.
 				 */
-				if ( 0 != _.size( formModel.get( 'errors' ) ) ) {
+				if ( 0 != _.size( blockingFormErrors ) ) {
 					nfRadio.channel( 'forms' ).trigger( 'submit:failed', formModel );
 					nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:failed', formModel );
 					return false;
@@ -112,6 +122,7 @@ define([], function() {
 				   		var response = jQuery.parseJSON( data );
 				        nfRadio.channel( 'forms' ).trigger( 'submit:response', response, textStatus, jqXHR, formModel.get( 'id' ) );
 				    	nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:response', response, textStatus, jqXHR );
+				    	jQuery( document ).trigger( 'nfFormSubmitResponse', { response: response, id: formModel.get( 'id' ) } );
 			   		} catch( e ) {
 			   			console.log( e );
 			   			console.log( 'Parse Error' );
