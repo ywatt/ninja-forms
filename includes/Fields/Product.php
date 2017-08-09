@@ -155,7 +155,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
         $currency_symbol = html_entity_decode( $currency_symbols[ $currency ] );
 
         global $wp_locale;
-        $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $field->get_setting( 'product_price' ) );
+        $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $price );
         $price = floatval( $price );
         $value = intval( $value );
 
