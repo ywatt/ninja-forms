@@ -35,7 +35,8 @@ define(
 		'controllers/formErrors',
 		'controllers/submit',
 		'controllers/defaultFilters',
-		'controllers/uniqueFieldError'
+		'controllers/uniqueFieldError',
+        'controllers/localeFormat'
 	],
 	function(
 		FormData,
@@ -73,7 +74,8 @@ define(
 		FormErrors,
 		Submit,
 		DefaultFilters,
-		UniqueFieldError
+		UniqueFieldError,
+        LocaleFormat
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -125,6 +127,7 @@ define(
 				new Calculations();
 
 				new DefaultFilters();
+                new LocaleFormat();
 
 				/**
 				 * Data controllers
