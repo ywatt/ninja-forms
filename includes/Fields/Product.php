@@ -203,6 +203,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
         $currency_symbols = Ninja_Forms::config( 'CurrencySymbol' );
         $currency_symbol = html_entity_decode( $currency_symbols[ $currency ] );
 
+        // @todo Update to use the locale of the form.
         global $wp_locale;
         $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $price );
         $price = floatval( $price );
