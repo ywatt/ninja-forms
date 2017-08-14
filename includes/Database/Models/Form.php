@@ -148,50 +148,91 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
 
     public static function duplicate( $form_id )
     {
-        $form = Ninja_Forms()->form( $form_id )->get();
+        global $wpdb;
 
-        $settings = $form->get_settings();
+        // Duplicate the Form Object.
+        $wpdb->query( $wpdb->prepare(
+            "
+                INSERT INTO {$wpdb->prefix}nf3_forms ( `title` )
+                SELECT CONCAT( `title`, ' - ', %s )
+                FROM {$wpdb->prefix}nf3_forms 
+                WHERE  id = %d;
+            ", __( 'copy', 'ninja-forms' ), $form_id
+        ) );
+        $new_form_id = $wpdb->insert_id;
 
-        $new_form = Ninja_Forms()->form()->get();
-        $new_form->update_settings( $settings );
+        // Duplicate the Form Meta.
+        $wpdb->query( $wpdb->prepare(
+           "
+           INSERT INTO {$wpdb->prefix}nf3_form_meta ( `parent_id`, `key`, `value` )
+                SELECT %d, `key`, CASE WHEN `key` = '_seq_num' THEN 0 ELSE `value` END
+                FROM   {$wpdb->prefix}nf3_form_meta
+                WHERE  parent_id = %d;
+           ", $new_form_id, $form_id
+        ));
 
-        $form_title = $form->get_setting( 'title' );
+        // Get the fields to duplicate
+        $old_fields = $wpdb->get_results( $wpdb->prepare(
+            "
+            SELECT `id`
+            FROM {$wpdb->prefix}nf3_fields
+            WHERE parent_id = %d
+            ", $form_id
+        ));
 
-        $new_form_title = $form_title . " - " . __( 'copy', 'ninja-forms' );
-
-        $new_form->update_setting( 'title', $new_form_title );
-
-        $new_form->update_setting( 'lock', 0 );
-		
-        $new_form->update_setting( 'created_at', current_time( 'mysql' ) );
-
-        $new_form->save();
-
-        $new_form_id = $new_form->get_id();
-
-        $fields = Ninja_Forms()->form( $form_id )->get_fields();
-
-        foreach( $fields as $field ){
-
-            $field_settings = $field->get_settings();
-
-            $field_settings[ 'parent_id' ] = $new_form_id;
-            $field_settings[ 'created_at' ] = current_time( 'mysql' );
-
-            $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
-            $new_field->update_settings( $field_settings )->save();
+        foreach( $old_fields as $old_field ){
+            // Duplicate the Field Object.
+            $wpdb->query( $wpdb->prepare(
+               "
+               INSERT INTO {$wpdb->prefix}nf3_fields ( `label`, `key`, `type`, `parent_id` )
+               SELECT `label`, `key`, `type`, %d
+               FROM {$wpdb->prefix}nf3_fields
+               WHERE id = %d
+               ", $new_form_id, $old_field->id
+            ));
+            $new_field_id = $wpdb->insert_id;
+            // Duplicate the Field Meta.
+            $wpdb->query( $wpdb->prepare(
+                "
+                INSERT INTO {$wpdb->prefix}nf3_field_meta ( `parent_id`, `key`, `value` )
+                SELECT %d, `key`, `value`
+                FROM   {$wpdb->prefix}nf3_field_meta
+                WHERE  parent_id = %d;
+                ", $new_field_id, $old_field->id
+            ));
         }
 
-        $actions = Ninja_Forms()->form( $form_id )->get_actions();
+        // Duplicate the Actions.
 
-        foreach( $actions as $action ){
+        // Get the actions to duplicate
+        $old_actions = $wpdb->get_results( $wpdb->prepare(
+            "
+            SELECT `id`
+            FROM {$wpdb->prefix}nf3_actions
+            WHERE parent_id = %d
+            ", $form_id
+        ));
 
-            $action_settings = $action->get_settings();
-			
-            $action_settings[ 'created_at' ] = current_time( 'mysql' );
-
-            $new_action = Ninja_Forms()->form( $new_form_id )->action()->get();
-            $new_action->update_settings( $action_settings )->save();
+        foreach( $old_actions as $old_action ){
+            // Duplicate the Action Object.
+            $wpdb->query( $wpdb->prepare(
+                "
+               INSERT INTO {$wpdb->prefix}nf3_actions ( `title`, `key`, `type`, `active`, `parent_id` )
+               SELECT `title`, `key`, `type`, `active`, %d
+               FROM {$wpdb->prefix}nf3_actions
+               WHERE id = %d
+               ", $new_form_id, $old_action->id
+            ));
+            $new_action_id = $wpdb->insert_id;
+            // Duplicate the Action Meta.
+            $wpdb->query( $wpdb->prepare(
+                "
+                INSERT INTO {$wpdb->prefix}nf3_action_meta ( `parent_id`, `key`, `value` )
+                SELECT %d, `key`, `value`
+                FROM   {$wpdb->prefix}nf3_action_meta
+                WHERE  parent_id = %d;
+                ", $new_action_id, $old_action->id
+            ));
         }
 
         return $new_form_id;
