@@ -45,6 +45,12 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			var calcCollection = new CalcCollection( formModel.get( 'settings' ).calculations, { formModel: formModel } );
 			this.calcs[ formModel.get( 'id' ) ] = calcCollection;
 			var that = this;
+            
+            if ( 'undefined' != typeof( formModel.get( 'numberFormat' ) ) ) {
+                this.numberFormat = formModel.get( 'numberFormat' );
+            } else {
+                this.numberFormat = formModel.get( 'thousands_sep' ) + formModel.get( 'decimal_point' );
+            }
 
 			_.each( calcCollection.models, function( calcModel ) {
 				/*
@@ -153,6 +159,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
 			// Evaluate the equation and update the value of this model.
 			try {
+                eqValues = nfRadio.channel( 'locale' ).request( 'decode:string', eqValues, this.numberFormat );
 				calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
 			} catch( e ) {
                 //console.log( calcName );
@@ -200,18 +207,17 @@ define(['models/calcCollection'], function( CalcCollection ) {
 
 			// If value is 'undefined', then we got no response. Set value to field model value.
 			if ( 'undefined' == typeof value ) {
-				if ( jQuery.isNumeric( fieldModel.get( 'value' ) ) ) {
-					value = fieldModel.get( 'value' );
-				} else {
-					value = 0;
-				}
+                value = fieldModel.get('value');
 			}
 
 			if ( ! fieldModel.get( 'visible' ) ) {
 				value = 0;
 			}
+            if ( !jQuery.isNumeric( nfRadio.channel( 'locale' ).request( 'decode:string', value.toString(), this.numberFormat ) ) ) {
+                value = 0;
+            }
 
-			return ( jQuery.isNumeric( value ) ) ? value : 0;
+            return value;
 		},
 
 		/**
@@ -291,6 +297,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
             try {
+                 eqValues = nfRadio.channel( 'locale' ).request( 'decode:string', eqValues, this.numberFormat );
 			     calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
             } catch( e ) {
                 console.log( e );
@@ -366,6 +373,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			eqValues = eqValues.replace( '[', '' ).replace( ']', '' );
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
             try {
+                 eqValues = nfRadio.channel( 'locale' ).request( 'decode:string', eqValues, this.numberFormat );
 			     calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
             } catch( e ) {
                 console.log( e );
