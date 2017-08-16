@@ -9,11 +9,40 @@
 define( [], function() {
 	var controller = Marionette.Object.extend( {
 		initialize: function() {
+			// When our form initialises, grab our locale settings.
+			this.listenTo( nfRadio.channel( 'form' ), 'loaded', this.registerSettings );
 			// Respond to requests to encode locale.
 			nfRadio.channel( 'locale' ).reply( 'encode:string', this.localeEncode, this );
 			// Respond to requests to decode locale.
 			nfRadio.channel( 'locale' ).reply( 'decode:string', this.localeDecode, this );
+			// Respond to requests to add the currency symbol.
+			nfRadio.channel( 'locale' ).reply( 'add:currency', this.addCurrency, this );
+			// Respond to requests to remove the currency symbol.
+			nfRadio.channel( 'locale' ).reply( 'remove:currency', this.removeCurrency, this );
 		},
+        
+        registerSettings: function( formModel ) {
+            // If we have a number format setting...
+            if ( 'undefined' != typeof( formModel.get( 'numberFormat' ) ) ) {
+                var numberFormat = formModel.get( 'numberFormat' );
+                this.thosuands_sep = numberFormat.substr( 0, numberFormat.length -1 );
+                this.decimal_point = numberFormat.substr( -1 );
+            }
+            // Fall back to older settings.
+            else {
+                this.thosuands_sep = formModel.get( 'thousands_sep' );
+                this.decimal_point = formModel.get( 'decimal_point' );
+            }
+            this.currency_symbol = formModel.get( 'currencySymbol' );
+            // If an alignment has been defined...
+            if ( 'undefined' != typeof( formModel.get( 'currencyAlignment' ) ) ) {
+                this.currency_alignment = formModel.get( 'currencyAlignment' );
+            }
+            // Fall back to default of left.
+            else {
+                this.currency_alignment = 'left';
+            }
+        },
         
         /**
          * Function to encode locale settings of a calculation for display.
@@ -23,9 +52,7 @@ define( [], function() {
          * @param String format The locale number format setting
          * @return String
          */
-        localeEncode: function( value, format ) {
-            var t = format.substr( 0, format.length -1 );
-            var d = format.substr( -1 );
+        localeEncode: function( value ) {
             // Split our value on the decimal point, if one exists.
             value = value.split( '.' );
             var encoded = '';
@@ -34,12 +61,12 @@ define( [], function() {
                 // Insert them where necessary.
                 var i = value[0].length % 3;
                 if ( i ) {
-                    encoded += value[0].substr( 0, i ) + t;
+                    encoded += value[0].substr( 0, i ) + this.thosuands_sep;
                 }
                 for ( i; i < value[0].length; i += 3 ) {
-                    encoded += value[0].substr( i, 3 ) + t;
+                    encoded += value[0].substr( i, 3 ) + this.thosuands_sep;
                 }
-                encoded = encoded.substr( 0, encoded.length - t.length);
+                encoded = encoded.substr( 0, encoded.length - this.thosuands_sep.length);
             } else {
                 encoded = value[0];
             }
@@ -47,7 +74,7 @@ define( [], function() {
             // If we had a decimal point...
             if( 1 < value.length ) {
                 // Add it to the string.
-                encoded += d + value[1]; 
+                encoded += this.decimal_point + value[1]; 
             }
             return encoded;
         },
@@ -60,12 +87,23 @@ define( [], function() {
          * @param String format The locale number format setting
          * @return String
          */
-        localeDecode: function( eq, format ) {
-            var t = format.substr( 0, format.length -1 );
-            var d = format.substr( -1 );
-            var decoded = eq.split( t ).join( '' );
-            decoded = decoded.split( d ).join( '.' );
+        localeDecode: function( eq ) {
+            var decoded = eq.split( this.thosuands_sep ).join( '' );
+            decoded = decoded.split( this.decimal_point ).join( '.' );
             return decoded;
+        },
+        
+        addCurrency: function( value ) {
+            if( 'left' == this.currency_alignment ) {
+                return this.currency_symbol + ' ' + value;
+            } else {
+                return value + ' ' + this.currency_symbol;
+            }
+        },
+        
+        removeCurrency: function( value ) {
+            value = value.replace( this.currency_symbol, '' );
+            return value.trim();
         },
         
 	});

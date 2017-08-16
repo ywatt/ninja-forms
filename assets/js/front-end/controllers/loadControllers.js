@@ -23,6 +23,7 @@ define(
 		'controllers/fieldProduct',
 		'controllers/fieldTotal',
 		'controllers/fieldQuantity',
+        'controllers/localeFormat',
 		'controllers/calculations',
 		'controllers/fieldDate',
 		'controllers/fieldRecaptcha',
@@ -35,8 +36,7 @@ define(
 		'controllers/formErrors',
 		'controllers/submit',
 		'controllers/defaultFilters',
-		'controllers/uniqueFieldError',
-        'controllers/localeFormat'
+		'controllers/uniqueFieldError'
 	],
 	function(
 		FormData,
@@ -62,6 +62,7 @@ define(
 		FieldProduct,
 		FieldTotal,
 		FieldQuantity,
+        LocaleFormat,
 		Calculations,
 		FieldDate,
 		FieldRecaptcha,
@@ -74,8 +75,7 @@ define(
 		FormErrors,
 		Submit,
 		DefaultFilters,
-		UniqueFieldError,
-        LocaleFormat
+		UniqueFieldError
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -124,10 +124,10 @@ define(
 				new ActionSuccess();
 				
 				new CoreSubmitResponse();
+                new LocaleFormat();
 				new Calculations();
 
 				new DefaultFilters();
-                new LocaleFormat();
 
 				/**
 				 * Data controllers
