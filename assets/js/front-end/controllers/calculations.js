@@ -350,7 +350,7 @@ define(['models/calcCollection'], function( CalcCollection ) {
 //							rounding = false;
 //						}
                         if( 'undefined' != typeof( calcValue ) ) {
-                            calcValue = that.applyLocaleFormatting( calcValue );
+                            calcValue = nfRadio.channel( 'locale' ).request( 'encode:string', calcValue, that.numberFormat );
                         }
 						value = value.replace( re, calcValue );
 					} );
@@ -379,32 +379,8 @@ define(['models/calcCollection'], function( CalcCollection ) {
                 console.log( e );
             }
             if( calcModel.get( 'value' ) === 'NaN' ) calcModel.set( 'value', '0' );
-		},
+		}
         
-        /**
-         * Function to apply Locale Formatting to Calculations
-         * @since Version 3.1
-         * @param Str number
-         * 
-         * @return Str
-         */
-        applyLocaleFormatting: function( number ) {
-            
-            // Split our string on the decimal to preserve context.
-            var splitNumber = number.split('.');
-            // If we have more than one element (if we had a decimal point)...
-            if ( splitNumber.length > 1 ) {
-                // Update the thousands and remerge the array.
-                splitNumber[ 0 ] = splitNumber[ 0 ].replace( /\B(?=(\d{3})+(?!\d))/g, nfi18n.thousands_sep );
-                var formattedNumber = splitNumber.join( nfi18n.decimal_point );
-            }
-            // Otherwise (we had no decimal point)...
-            else {
-                // Update the thousands.
-                var formattedNumber = number.replace( /\B(?=(\d{3})+(?!\d))/g, nfi18n.thousands_sep );
-            }
-            return formattedNumber;
-        }
 	});
 
 	return controller;
