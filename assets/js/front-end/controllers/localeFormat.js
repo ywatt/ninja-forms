@@ -89,6 +89,7 @@ define( [], function() {
          */
         localeDecode: function( eq ) {
             var decoded = eq.split( this.thosuands_sep ).join( '' );
+            decoded = decoded.split( ' ' ).join( '' );
             decoded = decoded.split( this.decimal_point ).join( '.' );
             return decoded;
         },

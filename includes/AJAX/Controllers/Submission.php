@@ -220,6 +220,22 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         */
 
         if( isset( $this->_form_cache[ 'settings' ][ 'calculations' ] ) ) {
+            
+            /**
+             * Define Locale values
+             */
+            $thousands_sep = ',';
+            $decimal_point = '.';
+            if ( isset( $this->_form_data[ 'settings' ][ 'numberFormat' ] ) && !empty( $this->_form_data[ 'settings' ][ 'numberFormat' ] ) ) {
+                $format = $this->_form_data[ 'settings' ][ 'numberFormat' ];
+                $thousands_sep = substr( $format, 0, strlen( $format ) - 1);
+                $decimal_point = substr( $format, -1 );
+            } else {
+                if ( isset( $this->_form_data[ 'settings' ][ 'thousands_sep' ] ) )
+                    $thousands_sep = $this->_form_data[ 'settings' ][ 'thousands_sep' ];
+                if ( isset( $this->_form_data[ 'settings' ][ 'decimal_point' ] ) )
+                    $decimal_point = $this->_form_data[ 'settings' ][ 'decimal_point' ];
+            }
 
             /**
              * The Calculation Processing Loop
@@ -231,11 +247,11 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
                 $eq = preg_replace( '/{([a-zA-Z0-9]|:|_|-)*}/', 0, $eq);
 
                 $dec = ( isset( $calc[ 'dec' ] ) && 0 <= $calc[ 'dec' ] ) ? $calc[ 'dec' ] : 2;
-                $calcs_merge_tags->set_merge_tags( $calc[ 'name' ], $eq, $dec, $this->_form_data['settings']['decimal_point'], $this->_form_data['settings']['thousands_sep'] );
+                $calcs_merge_tags->set_merge_tags( $calc[ 'name' ], $eq, $dec, $decimal_point, $thousands_sep );
                 $this->_data[ 'extra' ][ 'calculations' ][ $calc[ 'name' ] ] = array(
                     'raw' => $calc[ 'eq' ],
                     'parsed' => $eq,
-                    'value' => $calcs_merge_tags->get_formatted_calc_value( $calc[ 'name' ], $dec, $this->_form_data['settings']['decimal_point'], $this->_form_data['settings']['thousands_sep'] ),
+                    'value' => $calcs_merge_tags->get_formatted_calc_value( $calc[ 'name' ], $dec, $decimal_point, $thousands_sep ),
                 );
             }
         }

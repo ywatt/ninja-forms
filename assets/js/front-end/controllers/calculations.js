@@ -154,7 +154,8 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			// Evaluate the equation and update the value of this model.
 			try {
                 eqValues = nfRadio.channel( 'locale' ).request( 'decode:string', eqValues );
-				calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
+                var evaluated = Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) );
+				calcModel.set( 'value', nfRadio.channel( 'locale' ).request( 'encode:string', evaluated ) );
 			} catch( e ) {
                 //console.log( calcName );
 				console.log( e );
@@ -292,7 +293,8 @@ define(['models/calcCollection'], function( CalcCollection ) {
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
             try {
                  eqValues = nfRadio.channel( 'locale' ).request( 'decode:string', eqValues );
-			     calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
+                 var evaluated = Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) );
+                 calcModel.set( 'value', nfRadio.channel( 'locale' ).request( 'encode:string', evaluated ) );
             } catch( e ) {
                 console.log( e );
             }
@@ -343,9 +345,6 @@ define(['models/calcCollection'], function( CalcCollection ) {
 //							calcValue = calcValue.toFixed( 2 );
 //							rounding = false;
 //						}
-                        if( 'undefined' != typeof( calcValue ) ) {
-                            calcValue = nfRadio.channel( 'locale' ).request( 'encode:string', calcValue, that.numberFormat );
-                        }
 						value = value.replace( re, calcValue );
 					} );
 					fieldModel.set( 'value', value );
@@ -368,7 +367,8 @@ define(['models/calcCollection'], function( CalcCollection ) {
             eqValues = eqValues.replace( /\r?\n|\r/g, '' );
             try {
                  eqValues = nfRadio.channel( 'locale' ).request( 'decode:string', eqValues );
-			     calcModel.set( 'value', Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) ) );
+                 var evaluated = Number( mexp.eval( eqValues ) ).toFixed( calcModel.get( 'dec' ) );
+				 calcModel.set( 'value', nfRadio.channel( 'locale' ).request( 'encode:string', evaluated ) );
             } catch( e ) {
                 console.log( e );
             }
