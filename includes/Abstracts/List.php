@@ -47,11 +47,11 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
         if ( is_array( $settings[ 'options' ] ) ) {
             foreach( $settings[ 'options' ] as $option ){
                 $selected = ( $value == $option[ 'value' ] ) ? "selected" : '';
-                $options .= "<option value='{$option[ 'value' ]}' $selected>{$option[ 'label' ]}</option>";
+                $options .= "<option value='" . esc_attr( $option[ 'value' ] ) . "' $selected>" . esc_html( $option[ 'label' ] ) . "</option>";
             }            
         }
 
-        return "<select class='widefat' name='fields[$id]' id=''>$options</select>";
+        return "<select class='widefat' name='" . esc_attr( fields[ $id ] ) . "' id=''>$options</select>";
     }
 
     public function custom_columns( $value, $field )
@@ -65,9 +65,9 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
         if( ! empty( $options ) ) {
             foreach ($options as $option) {
 
-                if (!in_array($option['value'], $value)) continue;
+                if ( ! in_array( $option[ 'value' ], $value ) ) continue;
 
-                $output .= $option['label'] . "<br />";
+                $output .= esc_html( $option[ 'label' ] ) . "<br />";
             }
         }
 
