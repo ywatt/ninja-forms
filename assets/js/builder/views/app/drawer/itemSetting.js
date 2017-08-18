@@ -278,11 +278,28 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				},
 
 				renderTooltip: function() {
-					if ( this.help ) {
-						return '<a class="nf-help" href="#" tabindex="-1"><span class="dashicons dashicons-admin-comments"></span></a><div class="nf-help-text">' + this.help + '</div>';
-					} else {
-						return '';
-					}
+					if ( ! this.help ) return '';
+					var helpText, helpTextContainer, helpIcon, helpIconLink, helpTextWrapper;
+
+					helpText = document.createTextNode( this.help );
+					helpTextContainer = document.createElement( 'div' );
+					helpTextContainer.classList.add( 'nf-help-text' );
+					helpTextContainer.appendChild( helpText );
+
+					helpIcon = document.createElement( 'span' );
+					helpIcon.classList.add( 'dashicons', 'dashicons-admin-comments' );
+                    helpIconLink = document.createElement( 'a' );
+                    helpIconLink.classList.add( 'nf-help' );
+                    helpIconLink.setAttribute( 'href', '#' );
+                    helpIconLink.setAttribute( 'tabindex', '-1' );
+                    helpIconLink.appendChild( helpIcon );
+
+                    helpTextWrapper = document.createElement( 'span' );
+                    helpTextWrapper.appendChild( helpIconLink );
+                    helpTextWrapper.appendChild( helpTextContainer );
+
+                    // The template expects a string value.
+					return helpTextWrapper.innerHTML;
 				},
 
 				renderMergeTags: function() {
