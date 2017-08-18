@@ -34,7 +34,8 @@ define(
 		'controllers/loadViews',
 		'controllers/formErrors',
 		'controllers/submit',
-		'controllers/defaultFilters'
+		'controllers/defaultFilters',
+		'controllers/uniqueFieldError'
 	],
 	function(
 		FormData,
@@ -71,7 +72,8 @@ define(
 		LoadViews,
 		FormErrors,
 		Submit,
-		DefaultFilters
+		DefaultFilters,
+		UniqueFieldError
 	) {
 		var controller = Marionette.Object.extend( {
 			initialize: function() {
@@ -100,6 +102,7 @@ define(
 				new FieldStarRating();
 				new FieldTerms();
 				new FormContentFilters();
+				new UniqueFieldError();
 				/**
 				 * Misc controllers
 				 */

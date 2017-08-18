@@ -21,10 +21,10 @@ define( [], function() {
 			
 			var targetModel = nfRadio.channel( 'form-' + confirmModel.get( 'formID' ) ).request( 'get:fieldByKey', confirmModel.get( 'confirm_field' ) );
 
-			console.log( targetModel );
+			//TODO: Add better handling for password confirm fields on the front end.
+			if( 'undefined' == typeof targetModel ) return;
 
 			targetModel.set( 'confirm_with', confirmModel.get( 'id' ) );
-
 			this.listenTo( nfRadio.channel( 'field-' + targetModel.get( 'id' ) ), 'change:modelValue', this.changeValue );
 			this.listenTo( nfRadio.channel( 'field-' + confirmModel.get( 'id' ) ), 'change:modelValue', this.changeValue );
 		},

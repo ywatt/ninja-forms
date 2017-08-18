@@ -122,13 +122,22 @@ define( [
 
             /** ... and Calc updates. */
             this.listenTo( Backbone.Radio.channel( 'calcs' ), 'update:calc', this.afterAppStart );
+
+            this.listenTo( Backbone.Radio.channel( 'app' ), 'change:currentDomain', this.afterAppStart );
         },
 
         afterAppStart: function() {
+
+            var currentDomain = Backbone.Radio.channel( 'app' ).request( 'get:currentDomain' );
+
             var mergeTagCollection = nfRadio.channel( 'mergeTags' ).request( 'get:collection' );
             var mergeTags = [];
             mergeTagCollection.each( function( section ){
+
                 section.get( 'tags' ).each( function( tag ){
+
+                    if( 'fields' == currentDomain.get( 'id' ) && '{submission:sequence}' == tag.get( 'tag' ) ) return;
+
                     mergeTags.push({
                         label: tag.get( 'label' ),
                         tag:   tag.get( 'tag' ),

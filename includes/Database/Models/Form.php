@@ -75,6 +75,11 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         */
         $form = Ninja_Forms()->form( $id )->get();
         $form->update_settings( $import[ 'settings' ] );
+        
+        if( ! $is_conversion ) {
+            $form->update_setting( 'created_at', current_time( 'mysql' ) );
+        }
+		
         $form->save();
         $form_id = $form->get_id();
 
@@ -86,11 +91,13 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         );
         $update_process = Ninja_Forms()->background_process( 'update-fields' );
         foreach( $import[ 'fields' ] as $settings ){
+			
             if( $is_conversion ) {
                 $field_id = $settings[ 'id' ];
                 $field = Ninja_Forms()->form($form_id)->field( $field_id )->get();
             } else {
                 unset( $settings[ 'id' ] );
+                $settings[ 'created_at' ] = current_time( 'mysql' );
                 $field = Ninja_Forms()->form($form_id)->field()->get();
                 $field->save();
             }
@@ -112,6 +119,10 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         foreach( $import[ 'actions' ] as $settings ){
 
             $action = Ninja_Forms()->form($form_id)->action()->get();
+
+            if( ! $is_conversion ) {
+                $settings[ 'created_at' ] = current_time( 'mysql' );
+            }
 
             $action->update_settings( $settings )->save();
 
@@ -151,6 +162,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         $new_form->update_setting( 'title', $new_form_title );
 
         $new_form->update_setting( 'lock', 0 );
+		
+        $new_form->update_setting( 'created_at', current_time( 'mysql' ) );
 
         $new_form->save();
 
@@ -163,6 +176,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $field_settings = $field->get_settings();
 
             $field_settings[ 'parent_id' ] = $new_form_id;
+            $field_settings[ 'created_at' ] = current_time( 'mysql' );
 
             $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
             $new_field->update_settings( $field_settings )->save();
@@ -173,6 +187,8 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         foreach( $actions as $action ){
 
             $action_settings = $action->get_settings();
+			
+            $action_settings[ 'created_at' ] = current_time( 'mysql' );
 
             $new_action = Ninja_Forms()->form( $new_form_id )->action()->get();
             $new_action->update_settings( $action_settings )->save();
@@ -281,6 +297,11 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
                 continue;
             }
 
+            if( ! $field[ 'type' ] ) {
+                unset( $import[ 'fields'][ $key ] );
+                continue;
+            }
+
             // TODO: Split Credit Card field into multiple fields.
             $field = $this->import_field_backwards_compatibility( $field );
 
@@ -343,9 +364,17 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
                     // Convert Shortcodes
                     $shortcode = "[ninja_forms_field id=$field_id]";
                     if( ! is_array( $value ) ) {
-                        if (FALSE !== strpos($value, $shortcode)) {
-                            $value = str_replace($shortcode, '{field:' . $field_key . '}', $value);
+                        if ( FALSE !== strpos( $value, $shortcode ) ) {
+                            $value = str_replace( $shortcode, '{field:' . $field_key . '}', $value );
                         }
+                    }
+                }
+
+                //Checks for the nf_sub_seq_num short code and replaces it with the submission sequence merge tag
+                $sub_seq = '[nf_sub_seq_num]';
+                if( ! is_array( $value ) ) {
+                    if( FALSE !== strpos( $value, $sub_seq ) ){
+                        $value = str_replace( $sub_seq, '{submission:sequence}', $value );
                     }
                 }
 
@@ -370,8 +399,10 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         }
 
         if( 'email' == $action[ 'type' ] ){
-            $action[ 'to' ]            = str_replace( '`', ',', $action[ 'to' ] );
-            $action[ 'email_subject' ] = str_replace( '`', ',', $action[ 'email_subject' ] );
+            $action[ 'to' ]            	= str_replace( '`', ',', $action[ 'to' ] );
+            $action[ 'email_subject' ] 	= str_replace( '`', ',', $action[ 'email_subject' ] );
+            $action[ 'cc' ] 		= str_replace( '`', ',', $action[ 'cc' ] );
+            $action[ 'bcc' ] 		= str_replace( '`', ',', $action[ 'bcc' ] );
         }
 
         // Convert `name` to `label`
