@@ -32,13 +32,31 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				}
 			}
 
+            /**
+			 * For settings that require a remote refresh
+			 *   add an "update"/refresh icon to the label.
+             */
             var remote = this.model.get( 'remote' );
 			if( remote ) {
-
                 if( 'undefined' != typeof remote.refresh || remote.refresh ) {
-                    // Add 'update' icons
-                    var label = this.model.get('label');
-                    this.model.set('label', label + ' <a class="extra"><span class="dashicons dashicons-update"></span></a>');
+					var labelText, updateIcon, updateLink, labelWrapper;
+
+                    labelText = document.createTextNode( this.model.get('label') );
+
+                    updateIcon = document.createElement( 'span' );
+                    updateIcon.classList.add( 'dashicons', 'dashicons-update' );
+
+                    updateLink = document.createElement( 'a' );
+                    updateLink.classList.add( 'extra' );
+                    updateLink.appendChild( updateIcon );
+
+                    // Wrap the label text and icon/link in a parent element.
+                    labelWrapper = document.createElement( 'span' );
+                    labelWrapper.appendChild( labelText );
+                    labelWrapper.appendChild( updateLink );
+
+                    // The model expects a string value.
+                    this.model.set('label', labelWrapper.innerHTML );
                 }
 
 				nfRadio.channel( 'setting' ).trigger( 'remote', this.model, this.dataModel, this );
