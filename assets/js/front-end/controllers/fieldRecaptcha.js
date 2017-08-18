@@ -7,13 +7,13 @@ define([], function() {
         },
 
        	initRecaptcha: function ( model ) {
-       		this.model = model;
-        	nfRadio.channel( 'recaptcha' ).reply( 'update:response', this.updateResponse, this );
+        	nfRadio.channel( 'recaptcha' ).reply( 'update:response', this.updateResponse, this, model.id );
         },
 
-        updateResponse: function( response ) {
-        	this.model.set( 'value', response );
-            nfRadio.channel( 'fields' ).request( 'remove:error', this.model.get( 'id' ), 'required-error' );
+        updateResponse: function( response, fieldID ) {
+			var model = nfRadio.channel( 'fields' ).request( 'get:field', fieldID );
+			model.set( 'value', response );
+            nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'required-error' );
         },
 
         resetRecaptcha: function() {

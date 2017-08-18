@@ -1,8 +1,16 @@
 var nfRadio = Backbone.Radio;
 
-function nf_recaptcha_response( response ) {
-    nfRadio.channel( 'recaptcha' ).request( 'update:response', response );
-}
+nfRadio.channel( 'form' ).on( 'render:view', function() {		
+	jQuery( '.g-recaptcha' ).each( function() {
+		var callback = jQuery( this ).data( 'callback' );
+		var fieldID = jQuery( this ).data( 'fieldid' );
+		if ( typeof window[ callback ] !== 'function' ){
+			window[ callback ] = function( response ) {
+				nfRadio.channel( 'recaptcha' ).request( 'update:response', response, fieldID );
+			};
+		}
+	} );
+} );
 
 var nfRecaptcha = Marionette.Object.extend( {
 	initialize: function() {
@@ -15,17 +23,17 @@ var nfRecaptcha = Marionette.Object.extend( {
 		/*
 		 * We haven't rendered our form view, so hook into the view render radio message, and then render.
 		 */
-		this.listenTo( nfRadio.channel( 'form' ), 'render:view', this.renderCaptcha );			
+		this.listenTo( nfRadio.channel( 'form' ), 'render:view', this.renderCaptcha );
 	},
 
 	renderCaptcha: function() {
 		jQuery( '.g-recaptcha' ).each( function() {
 			var opts = {
+				fieldid: jQuery( this ).data( 'fieldid' ),
 				theme: jQuery( this ).data( 'theme' ),
 				sitekey: jQuery( this ).data( 'sitekey' ),
-				callback: nf_recaptcha_response
+				callback: jQuery( this ).data( 'callback' )
 			};
-			
 			grecaptcha.render( jQuery( this )[0], opts );
 		} );		
 	}
