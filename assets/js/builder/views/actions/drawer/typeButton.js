@@ -73,7 +73,9 @@ define( [], function() {
 
 				renderStyle: function() {
 					if ( '' != jQuery.trim( this.image ) ) {
-						return "style=\"background-image: url(" + this.image + ");\""
+
+						// This is being used in a template, so carefully consider the order of double/single quotes.
+						return "background-image: url('" + jQuery.trim( this.image ) + "')";
 					} else {
 						return '';
 					}
