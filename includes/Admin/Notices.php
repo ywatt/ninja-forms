@@ -119,7 +119,7 @@ class NF_Admin_Notices
                     echo '<div class="update-nag nf-admin-notice">';
                     echo '<div class="nf-notice-logo"></div>';
                     echo ' <p class="nf-notice-title">';
-                    echo $admin_display_title;
+                    echo esc_html( $admin_display_title );
                     echo ' </p>';
                     echo ' <p class="nf-notice-body">';
                     echo $admin_display_msg;
@@ -127,7 +127,7 @@ class NF_Admin_Notices
                     echo '<ul class="nf-notice-body nf-red">
                           ' . $admin_display_link . '
                         </ul>';
-                    echo '<a href="' . $query_str . '" class="dashicons dashicons-dismiss"></a>';
+                    echo '<a href="' . esc_attr( $query_str ) . '" class="dashicons dashicons-dismiss"></a>';
                     echo '</div>';
 
                     $this->notice_spam += 1;
@@ -160,7 +160,7 @@ class NF_Admin_Notices
             $admin_notices_option[ $_GET[ 'nf_admin_notice_ignore' ] ][ 'dismissed' ] = 1;
             update_option( 'nf_admin_notice', $admin_notices_option );
             $query_str = remove_query_arg( 'nf_admin_notice_ignore' );
-            wp_redirect( $query_str );
+            wp_safe_redirect( $query_str );
             exit;
         }
     }
