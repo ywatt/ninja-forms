@@ -103,7 +103,7 @@
 </script>
 
 <script id="tmpl-nf-app-header-publish-button" type="text/template">
-    <a href="#" {{{ data.publishWidth }}} class="nf-button primary {{{ data.maybeDisabled() }}} publish" title="<?php _e( 'Publish', 'ninja-forms' ); ?>"><?php _e( 'PUBLISH', 'ninja-forms' ); ?></a>
+    <a href="#" style="width:{{{ data.publishWidth }}} !important" class="nf-button primary {{{ data.maybeDisabled() }}} publish" title="<?php _e( 'Publish', 'ninja-forms' ); ?>"><?php _e( 'PUBLISH', 'ninja-forms' ); ?></a>
 </script>
 
 <script id="tmpl-nf-add-header-publish-loading" type="text/template">
