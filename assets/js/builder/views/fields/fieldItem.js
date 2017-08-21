@@ -64,8 +64,14 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 					}
 				},
 				renderIcon: function() {
-					var type = nfRadio.channel( 'fields' ).request( 'get:type', this.type );
-					return '<span class="fa fa-' + type.get( 'icon' ) + '"></span>';
+	    			var type, icon;
+
+					type = nfRadio.channel( 'fields' ).request( 'get:type', this.type );
+
+					icon = document.createElement( 'span' );
+					icon.classList.add( 'fa', 'fa-' + type.get( 'icon' ) );
+
+					return icon.outerHTML;
 				}
 			};
 		},
