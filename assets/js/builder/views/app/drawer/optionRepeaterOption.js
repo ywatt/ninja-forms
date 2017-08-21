@@ -123,15 +123,37 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 					return that.columns;
 				},
 				renderFieldSelect: function( dataID, value ){
+					var initialOption, select, emptyContainer, label;
+
 					var fields = nfRadio.channel( 'fields' ).request( 'get:collection' );
-					var _return = '<label class="nf-select"><select class="setting" data-id="' + dataID + '">';
-                    _return += '<option value="" >--</option>';
+
+                    initialOption = document.createElement( 'option' );
+                    initialOption.value = '';
+                    initialOption.label = '--';
+
+					select = document.createElement( 'select' );
+					select.classList.add( 'setting' );
+					select.setAttribute( 'data-id', dataID );
+                    select.appendChild( initialOption );
+
 					fields.each( function( field ){
-						var selected = ( value == field.get( 'key' ) ) ? ' selected' : '';
-						_return += '<option value="' + field.get( 'key' ) + '"' + selected + '>' + field.get( 'label' ) + '</option>';
+						var option = document.createElement( 'option' );
+						option.selected = ( value == field.get( 'key' ) );
+						option.value = field.get( 'key' );
+						option.label = field.get( 'label' );
+						select.appendChild( option );
 					});
-					_return += '</select><div></div></label>';
-					return _return;
+
+                    label = document.createElement( 'label' );
+                    label.classList.add( 'nf-select' );
+                    label.appendChild( select );
+
+					// Select Lists need an empty '<div></div>' for styling purposes.
+					emptyContainer = document.createElement( 'div' );
+					label.appendChild( emptyContainer );
+
+					// The template requires a string.
+					return label.innerHTML;
 				},
 				renderOptions: function( column, value ) {
 
