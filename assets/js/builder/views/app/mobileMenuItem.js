@@ -56,11 +56,13 @@ define( [], function() {
 				 * @return string
 				 */
 				renderDashicons: function() {
-					if ( this.mobileDashicon ) {
-						return '<span class="dashicons ' + this.mobileDashicon + '"></span>'
-					} else {
-						return '';
-					}
+					if ( ! this.mobileDashicon ) return '';
+
+                    var icon = document.createElement( 'span' );
+                    icon.classList.add( 'dashicons' );
+                    icon.classList.add( this.mobileDashicon );
+
+                    return icon.outerHTML;
 				},
 				/**
 				 * Render classes for our menu item, including active.
