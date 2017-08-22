@@ -182,9 +182,17 @@ define( [], function() {
 					if ( 'undefined' == typeof this.desc_text ) {
 						return '';
 					}
-					var check_text = '<p>' + this.desc_text + '</p>';
-					if ( 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
-						return '<div class="nf-field-description">' + this.desc_text + '</div>';
+					var check, checkText;
+					checkText = document.createTextNode( this.desc_text );
+					check = document.createElement( 'p' );
+					check.appendChild( checkText );
+					if ( 0 != jQuery.trim( jQuery( check ).text() ).length ) {
+						var descriptionText, fieldDescription;
+                        descriptionText  = document.createRange().createContextualFragment( this.desc_text );
+                        fieldDescription  = document.createElement( 'div' );
+						fieldDescription.classList.add( 'nf-field-description' );
+						fieldDescription.appendChild( descriptionText );
+						return fieldDescription.outerHTML;
 					} else {
 						return '';
 					}
