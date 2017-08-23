@@ -1,6 +1,8 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 global $wp_locale;
+$thousands_sep = ( '&nbsp;' == $wp_locale->number_format[ 'thousands_sep' ] ) ? ' ' : $wp_locale->number_format[ 'thousands_sep' ];
+$decimal_point = $wp_locale->number_format[ 'decimal_point' ];
 
 return apply_filters( 'ninja_forms_form_display_settings', array(
 
@@ -254,8 +256,8 @@ return apply_filters( 'ninja_forms_form_display_settings', array(
                 'options' => array(
                     array( 'label' => '1,000,000.00', 'value' => ',.' ),
                     array( 'label' => '1.000.000,00', 'value' => '.,' ),
-                    array( 'label' => '1 000 000,00', 'value' => '&nbsp;,' ),
-                    array( 'label' => '1 000 000.00', 'value' => '&nbsp;.' ),
+                    array( 'label' => '1 000 000,00', 'value' => ' ,' ),
+                    array( 'label' => '1 000 000.00', 'value' => ' .' ),
                 ),
                 'label'   => __( 'Number Format', 'ninja-forms' ),
                 'width' => 'full',

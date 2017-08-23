@@ -33,6 +33,13 @@ define( [], function() {
                 this.thosuands_sep = formModel.get( 'thousands_sep' );
                 this.decimal_point = formModel.get( 'decimal_point' );
             }
+            
+            // If we have a whitespace character for thousands...
+            if ( ' ' == this.thosuands_sep ) {
+                // Set it to be a non-breaking space.
+                this.thosuands_sep = '&nbsp;';
+            }
+            
             this.currency_symbol = formModel.get( 'currencySymbol' );
             // If an alignment has been defined...
             if ( 'undefined' != typeof( formModel.get( 'currencyAlignment' ) ) ) {
