@@ -280,7 +280,34 @@ final class WPN_Helper
     }
     
     /**
-     * Function to format a string to match locale output.
+     * Function to add locale formatting to a string.
+     * 
+     * Since 3.1
+     * 
+     * @param $value String
+     * @param $round Int
+     * @param $dec String
+     * @param $sep String
+     * @param $currency String/False
+     * @param $align String
+     * 
+     * @return String
+     */
+    public static function apply_locale_mask( $value, $round = 2, $dec = '.', $sep = ',', $currency = FALSE, $align = 'left' )
+    {
+        $return = number_format( $value, $round, $dec, $sep );
+        if( FALSE !== $currency ) {
+            if ( 'left' == $align ) {
+                $return = $currency . ' ' . $return;
+            } else {
+                $return .= ' ' . $currency;
+            }
+        }
+        return $return;
+    }
+    
+    /**
+     * Function to remove locale formatting from a string.
      * 
      * Since 3.1
      * 
@@ -292,12 +319,15 @@ final class WPN_Helper
      * 
      * @return String
      */
-    public static function apply_locale_mask( $value, $round = 2, $dec = '.', $sep = ',', $currency = FALSE )
+    public static function remove_locale_mask( $value, $round = 2, $dec = '.', $sep = ',', $currency = FALSE )
     {
-        $return = number_format( $value, $round, $dec, $sep );
-        if( FALSE !== $currency ) {
-            $return = $currency . ' ' . $return;
+        $return = $value;
+        if ( FALSE !== $currency ) {
+            $return = trim( str_replace( $currency, '', $return ) );
         }
+        $return = str_replace( $sep, '', $return );
+        $return = str_replace( $dec, '.', $return );
+        $return = number_format( $return, $round, '.', '' );
         return $return;
     }
 
