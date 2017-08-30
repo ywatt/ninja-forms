@@ -323,7 +323,7 @@ final class WPN_Helper
     {
         $return = $value;
         if ( FALSE !== $currency ) {
-            $return = trim( str_replace( $currency, '', $return ) );
+            $return = trim( str_replace( html_entity_decode( $currency ), '', $return ) );
         }
         $return = str_replace( $sep, '', $return );
         $return = str_replace( $dec, '.', $return );

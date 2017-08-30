@@ -94,6 +94,35 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         $this->_data[ 'settings' ] = $form_settings;
         $this->_data[ 'settings' ][ 'is_preview' ] = $this->is_preview();
         $this->_data[ 'extra' ] = $this->_form_data[ 'extra' ];
+            
+        /**
+         * Define Locale values for Fields and Calculations.
+         */
+        $thousands_sep = ',';
+        $decimal_point = '.';
+        $currency_symbol = '';
+        $currency_align = 'left';
+        if ( isset( $this->_form_data[ 'settings' ][ 'numberFormat' ] ) && ! empty( $this->_form_data[ 'settings' ][ 'numberFormat' ] ) ) {
+            $format = $this->_form_data[ 'settings' ][ 'numberFormat' ];
+            $thousands_sep = substr( $format, 0, strlen( $format ) - 1);
+            $decimal_point = substr( $format, -1 );
+        } else {
+            if ( isset( $this->_form_data[ 'settings' ][ 'thousands_sep' ] ) )
+                $thousands_sep = $this->_form_data[ 'settings' ][ 'thousands_sep' ];
+            if ( isset( $this->_form_data[ 'settings' ][ 'decimal_point' ] ) )
+                $decimal_point = $this->_form_data[ 'settings' ][ 'decimal_point' ];
+        }
+        if ( isset( $this->_form_data[ 'settings' ][ 'currency' ] ) && ! empty( $this->_form_data[ 'settings' ][ 'currency' ] ) ) {
+            $currency = $this->_form_data[ 'settings' ][ 'currency' ];
+            $currency_symbols = Ninja_Forms::config( 'CurrencySymbol' );
+            $currency_symbol = ( isset( $currency_symbols[ $currency ] ) ) ? $currency_symbols[ $currency ] : '';
+        } else {
+            $nf_settings = Ninja_Forms()->get_settings();
+            $currency_symbol = $nf_settings[ 'currency_symbol' ];
+        }
+        if ( isset( $this->_form_data [ 'settings' ][ 'currencyAlignment' ] ) && ! empty( $this->_form_data [ 'settings' ][ 'currencyAlignment' ] ) ) {
+            $currency_align = $this->_form_data [ 'settings' ][ 'currencyAlignment' ];
+        }
 
         /*
         |--------------------------------------------------------------------------
@@ -152,6 +181,15 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
             // Duplicate the Field ID for access as a setting.
             $field[ 'settings' ][ 'id' ] = $field[ 'id' ];
+            
+            // If this is a product field...
+            if ( 'product' == $field[ 'settings' ][ 'type' ] ) {
+                // Hand off our locale settings to it.
+                $field[ 'settings' ][ 'thousands_sep' ] = $thousands_sep;
+                $field[ 'settings' ][ 'decimal_point' ] = $decimal_point;
+                $field[ 'settings' ][ 'currency_symbol' ] = $currency_symbol;
+                $field[ 'settings' ][ 'currency_align' ] = $currency_align;
+            }
 
             // Combine with submitted data.
             $field = array_merge( $field, $this->_form_data[ 'fields' ][ $field_id ] );
@@ -220,22 +258,6 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
         */
 
         if( isset( $this->_form_cache[ 'settings' ][ 'calculations' ] ) ) {
-            
-            /**
-             * Define Locale values
-             */
-            $thousands_sep = ',';
-            $decimal_point = '.';
-            if ( isset( $this->_form_data[ 'settings' ][ 'numberFormat' ] ) && !empty( $this->_form_data[ 'settings' ][ 'numberFormat' ] ) ) {
-                $format = $this->_form_data[ 'settings' ][ 'numberFormat' ];
-                $thousands_sep = substr( $format, 0, strlen( $format ) - 1);
-                $decimal_point = substr( $format, -1 );
-            } else {
-                if ( isset( $this->_form_data[ 'settings' ][ 'thousands_sep' ] ) )
-                    $thousands_sep = $this->_form_data[ 'settings' ][ 'thousands_sep' ];
-                if ( isset( $this->_form_data[ 'settings' ][ 'decimal_point' ] ) )
-                    $decimal_point = $this->_form_data[ 'settings' ][ 'decimal_point' ];
-            }
 
             /**
              * The Calculation Processing Loop

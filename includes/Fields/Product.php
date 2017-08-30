@@ -58,7 +58,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
             $related[ $type ] = &$data[ 'fields' ][ $key ]; // Assign by reference
         }
 
-        $total = str_replace( array( ',', '$' ), '', $product[ 'product_price' ] );
+        $total = WPN_Helper::remove_locale_mask( $product[ 'product_price' ], 2, $product[ 'decimal_point' ], $product[ 'thousands_sep' ], $product[ 'currency_symbol' ] );
         $total = floatval( $total );
 
         if( isset( $related[ 'quantity' ][ 'value' ] ) && $related[ 'quantity' ][ 'value' ] ){
@@ -108,13 +108,10 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
     public function merge_tag_value( $value, $field )
     {
-        // TODO: Replaced this to fix English locales.
-        // Other locales are still broken and will need to be addressed in refactor.
-//        $product_price = preg_replace ('/[^\d,\.]/', '', $field[ 'product_price' ] );
-        $product_price =  str_replace( array( ',', '$' ), '', $field[ 'product_price' ] );
+        $product_price = WPN_Helper::remove_locale_mask( $field[ 'product_price' ], 2, $field[ 'decimal_point' ], $field[ 'thousands_sep' ], $field[ 'currency_symbol' ] );
 
         $product_quantity = ( isset( $field[ 'product_use_quantity' ] ) && 1 == $field[ 'product_use_quantity' ] ) ? $value : 1;
-
-        return number_format( $product_price * $product_quantity, 2 );
+        
+        return WPN_Helper::apply_locale_mask( ( $product_price * $product_quantity ), 2, $field[ 'decimal_point' ], $field[ 'thousands_sep' ], $field[ 'currency_symbol' ], $field[ 'currency_align' ] );
     }
 }
