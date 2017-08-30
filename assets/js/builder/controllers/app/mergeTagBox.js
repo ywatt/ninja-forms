@@ -256,11 +256,25 @@ define( [
                         if( childNode ) return;
                         if( ! node.nodeValue && ! node.innerHTML ) return;
                         if( node.nodeValue ) {
-                            var position = node.nodeValue.indexOf(replace) + find.length;
+                            var value = node.nodeValue;
                         } else if( node.innerHTML ){
-                            var position = node.innerHTML.indexOf(replace) + find.length;
+                            var value = node.innerHTML;
                         }
-                        if( caretPos == position ) childNode = el[0].childNodes[index];
+
+                        if( -1 == value.indexOf(replace) ) return; // Replace not found in this node.
+
+                        value = value.replace( /&nbsp;/g, ' ' );
+                        var position = value.indexOf(replace) + find.length;
+
+                        /*
+                         * If no caretPos, determine based on the node. ie Merge Tag Button context.
+                         * Note: We can't just check for '{', because they could just be inserting the first tag.
+                         */
+                        if( -1 == caretPos ){
+                            caretPos = value.indexOf( replace ) + 1;
+                        }
+
+                        if (caretPos == position) childNode = el[0].childNodes[index];
                     });
                     if( ! childNode ) childNode = el[0].childNodes[0];
                     var offset = caretPos - find.length + replace.length;
@@ -270,6 +284,7 @@ define( [
                         try{
                            range.setStart(childNode.childNodes[0], offset); 
                         } catch( err ) {
+                            console.log( childNode );
                             console.log( 'error' );
                         }
                         
@@ -316,6 +331,8 @@ define( [
             if( 0 !== $this.closest( '.nf-setting, .nf-table-row' ).find( '.note-tools' ).length ){
                 var $inputSetting = $this.closest( '.note-editor' ).siblings( '.setting' ).first();
                 $this.closest( '.nf-setting' ).find( '.setting' ).summernote( 'insertText', '{' );
+                // Since we haven't determined the caretPos, set to -1 as a flag to determine later.
+                nfRadio.channel('mergeTags').request( 'set:caret', -1 );
             } else {
                 var $inputSetting = $this.siblings( '.setting' ).first();
                 var text = $inputSetting.val() || '';
