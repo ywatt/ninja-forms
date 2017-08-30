@@ -197,6 +197,11 @@ final class NF_Display_Render
                     $field[ 'value' ] = $field_class->get_test_value();
                 }
 
+                // Hide the label on invisible reCAPTCHA fields
+                if ( 'recaptcha' === $field[ 'settings' ][ 'type' ] && 'invisible' === $field[ 'settings' ][ 'size' ] ) {
+                    $field[ 'settings' ][ 'label_pos' ] = 'hidden';
+                }
+
                 // Copy field ID into the field settings array for use in localized data.
                 $field[ 'settings' ][ 'id' ] = $field[ 'id' ];
 
