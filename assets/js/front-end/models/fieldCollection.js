@@ -12,8 +12,6 @@ define( ['models/fieldModel'], function( fieldModel ) {
 
 		validateFields: function() {
 			_.each( this.models, function( fieldModel ) {
-				// When validating all fields, set clean to false to force validation.
-				fieldModel.set( 'clean', false );
 				nfRadio.channel( 'submit' ).trigger( 'validate:field', fieldModel );
 			}, this );
 		},

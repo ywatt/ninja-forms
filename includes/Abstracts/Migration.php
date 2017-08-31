@@ -24,7 +24,7 @@ abstract class NF_Abstracts_Migration
     public function charset_collate()
     {
         global $wpdb;
-        return $wpdb->get_charset_collate();
+        $wpdb->get_charset_collate();
     }
 
     public function _run()
