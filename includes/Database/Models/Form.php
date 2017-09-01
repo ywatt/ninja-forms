@@ -297,6 +297,11 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
                 continue;
             }
 
+            if( ! $field[ 'type' ] ) {
+                unset( $import[ 'fields'][ $key ] );
+                continue;
+            }
+
             // TODO: Split Credit Card field into multiple fields.
             $field = $this->import_field_backwards_compatibility( $field );
 
@@ -359,9 +364,17 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
                     // Convert Shortcodes
                     $shortcode = "[ninja_forms_field id=$field_id]";
                     if( ! is_array( $value ) ) {
-                        if (FALSE !== strpos($value, $shortcode)) {
-                            $value = str_replace($shortcode, '{field:' . $field_key . '}', $value);
+                        if ( FALSE !== strpos( $value, $shortcode ) ) {
+                            $value = str_replace( $shortcode, '{field:' . $field_key . '}', $value );
                         }
+                    }
+                }
+
+                //Checks for the nf_sub_seq_num short code and replaces it with the submission sequence merge tag
+                $sub_seq = '[nf_sub_seq_num]';
+                if( ! is_array( $value ) ) {
+                    if( FALSE !== strpos( $value, $sub_seq ) ){
+                        $value = str_replace( $sub_seq, '{submission:sequence}', $value );
                     }
                 }
 
@@ -386,8 +399,10 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         }
 
         if( 'email' == $action[ 'type' ] ){
-            $action[ 'to' ]            = str_replace( '`', ',', $action[ 'to' ] );
-            $action[ 'email_subject' ] = str_replace( '`', ',', $action[ 'email_subject' ] );
+            $action[ 'to' ]            	= str_replace( '`', ',', $action[ 'to' ] );
+            $action[ 'email_subject' ] 	= str_replace( '`', ',', $action[ 'email_subject' ] );
+            $action[ 'cc' ] 		= str_replace( '`', ',', $action[ 'cc' ] );
+            $action[ 'bcc' ] 		= str_replace( '`', ',', $action[ 'bcc' ] );
         }
 
         // Convert `name` to `label`
