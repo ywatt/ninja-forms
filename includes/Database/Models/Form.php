@@ -460,26 +460,26 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
         if( isset( $field[ 'default_value_type' ] ) ){
 
             /* User Data */
-            if( '_user_id' == $field[ 'default_value_type' ] )           $field[ 'default' ] = '{user:id}';
-            if( '_user_email' == $field[ 'default_value_type' ] )        $field[ 'default' ] = '{user:email}';
-            if( '_user_lastname' == $field[ 'default_value_type' ] )     $field[ 'default' ] = '{user:last_name}';
-            if( '_user_firstname' == $field[ 'default_value_type' ] )    $field[ 'default' ] = '{user:first_name}';
-            if( '_user_display_name' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{user:display_name}';
+            if( '_user_id' == $field[ 'default_value_type' ] )           $field[ 'default' ] = '{wp:user_id}';
+            if( '_user_email' == $field[ 'default_value_type' ] )        $field[ 'default' ] = '{wp:user_email}';
+            if( '_user_lastname' == $field[ 'default_value_type' ] )     $field[ 'default' ] = '{wp:user_last_name}';
+            if( '_user_firstname' == $field[ 'default_value_type' ] )    $field[ 'default' ] = '{wp:user_first_name}';
+            if( '_user_display_name' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{wp:user_display_name}';
 
             /* Post Data */
-            if( 'post_id' == $field[ 'default_value_type' ] )    $field[ 'default' ] = '{post:id}';
-            if( 'post_url' == $field[ 'default_value_type' ] )   $field[ 'default' ] = '{post:url}';
-            if( 'post_title' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{post:title}';
+            if( 'post_id' == $field[ 'default_value_type' ] )    $field[ 'default' ] = '{wp:post_id}';
+            if( 'post_url' == $field[ 'default_value_type' ] )   $field[ 'default' ] = '{wp:post_url}';
+            if( 'post_title' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{wp:post_title}';
 
             /* System Data */
-            if( 'today' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{system:date}';
+            if( 'today' == $field[ 'default_value_type' ] ) $field[ 'default' ] = '{other:date}';
 
             /* Miscellaneous */
             if( '_custom' == $field[ 'default_value_type' ] && isset( $field[ 'default_value' ] ) ){
                 $field[ 'default' ] = $field[ 'default_value' ];
             }
             if( 'querystring' == $field[ 'default_value_type' ] && isset( $field[ 'default_value' ] ) ){
-                $field[ 'default' ] = '{' . $field[ 'default_value' ] . '}';
+                $field[ 'default' ] = '{querystring:' . $field[ 'default_value' ] . '}';
             }
 
             unset( $field[ 'default_value' ] );
