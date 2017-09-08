@@ -138,23 +138,30 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 			if( typeof mask != "undefined" ){
 
 				var input = jQuery( this.$el ).find( 'input' );
+                var numberFormat = nfRadio.channel( 'settings' ).request( 'get:setting', 'numberFormat' );
+                var thosuands_sep = numberFormat.substr( 0, numberFormat.length -1 );
+                var decimal_point = numberFormat.substr( -1 );
 
 				switch( mask.type ){
 					case 'numeric':
 						input.autoNumeric({
-							aSep: thousandsSeparator,
-							aDec: decimalPoint
+							aSep: thosuands_sep,
+							aDec: decimal_point,
+                            lZero: 'deny'
 						});
 						break;
 					case 'currency':
+                        
 
 						var currency = nfRadio.channel( 'settings' ).request( 'get:setting', 'currency' );
 						var currencySymbol = nfAdmin.currencySymbols[ currency ] || '';
 
 						input.autoNumeric({
 							aSign:  jQuery('<div />').html(currencySymbol).text(),
-							aSep: thousandsSeparator,
-							aDec: decimalPoint
+							aSep: thosuands_sep,
+							aDec: decimal_point,
+                            pSign: ( nfRadio.channel( 'settings' ).request( 'get:setting', 'currencyAlignment' ) == 'right' ) ? 's' : 'p',
+                            lZero: 'deny'
 						});
 						break;
 					case 'custom':
