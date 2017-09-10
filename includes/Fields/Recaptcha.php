@@ -1,7 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Class NF_Fields_CreditCard
+ * Class NF_Fields_Recaptcha
  */
 class NF_Fields_Recaptcha extends NF_Abstracts_Field
 {
