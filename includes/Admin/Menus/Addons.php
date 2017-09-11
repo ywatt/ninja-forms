@@ -25,18 +25,16 @@ final class NF_Admin_Menus_Addons extends NF_Abstracts_Submenu
 
     public function display()
     {
-        //wp_enqueue_style( 'nf-admin-addons', Ninja_Forms::$url . 'assets/css/admin-addons.css' );
-//        $items = wp_remote_get( 'https://ninjaforms.com/?extend_feed=jlhrbgf89734go7387o4g3h' );
-//        $items = wp_remote_retrieve_body( $items );
-        $items = file_get_contents( Ninja_Forms::$dir . '/deprecated/addons-feed.json' );
-        $items = json_decode( $items, true );
-        //shuffle( $items );
+        $feed = file_get_contents( Ninja_Forms::$dir . '/includes/addons.json' );
+        $feed = json_decode( $feed, true );
+        $items = $feed[ 'addons' ];
 
         $notices = array();
 
-        foreach ($items as $item) {
+        foreach ($items as &$item) {
             $plugin_data = array();
             if( !empty( $item['plugin'] ) && file_exists( WP_PLUGIN_DIR.'/'.$item['plugin'] ) ){
+                $item[ 'installed' ] = true;
                 $plugin_data = get_plugin_data( WP_PLUGIN_DIR.'/'.$item['plugin'], false, true );
             }
 
@@ -52,7 +50,48 @@ final class NF_Admin_Menus_Addons extends NF_Abstracts_Submenu
             }
         }
 
-        Ninja_Forms::template( 'admin-menu-addons.html.php', compact( 'items', 'notices' ) );
+        $groups = $feed[ 'categories' ];
+        foreach( $items as $item ){
+            if( ! isset( $item[ 'category' ] ) ) continue;
+            $group = $item[ 'category' ];
+            if( ! isset( $groups[ $group ][ 'addons'  ] ) ) $groups[ $group ][ 'addons'  ] = array();
+            $groups[ $group ][ 'addons' ][] = $item;
+
+            if( in_array( $group, array( 'crm', 'email' ) )
+                && isset( $item[ 'installed' ] ) && $item[ 'installed' ] ){
+                $groups[ $group ][ 'priority' ] = 0;
+            }
+        }
+
+        foreach( $groups as &$group ){
+            if( ! isset( $group[ 'addons' ] ) ) {
+                unset( $groups[ $group ] );
+                continue;
+            }
+            usort( $group[ 'addons' ], array( $this, 'sort_addons_by_installed' ) );
+        }
+
+        usort( $groups, array( $this, 'sort_groups_by_priority' ) );
+
+
+        Ninja_Forms::template( 'admin-menu-addons.html.php', compact( 'groups', 'notices' ) );
+    }
+
+    public function sort_addons_by_installed( $a, $b )
+    {
+        if( isset( $a[ 'installed' ] ) && $a[ 'installed' ]
+            && isset( $b[ 'installed' ] ) && $b[ 'installed' ] ){
+            return 0;
+        }
+        if( isset( $a[ 'installed' ] ) && $a[ 'installed' ] ){
+            return 1;
+        }
+        return -1;
+    }
+
+    public function sort_groups_by_priority( $a, $b )
+    {
+        return $b[ 'priority' ] - $a[ 'priority' ];
     }
 
 } // End Class NF_Admin_Addons
