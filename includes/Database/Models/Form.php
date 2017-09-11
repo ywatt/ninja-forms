@@ -403,6 +403,7 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             $action[ 'email_subject' ] 	= str_replace( '`', ',', $action[ 'email_subject' ] );
             $action[ 'cc' ] 		= str_replace( '`', ',', $action[ 'cc' ] );
             $action[ 'bcc' ] 		= str_replace( '`', ',', $action[ 'bcc' ] );
+            $action[ 'email_message' ] = nl2br( $action[ 'email_message' ] );
         }
 
         // Convert `name` to `label`
@@ -634,6 +635,14 @@ final class NF_Database_Models_Form extends NF_Abstracts_Model
             }
             $field[ 'label_pos' ] = 'hidden';
         }
+
+        if( isset( $field[ 'desc_text' ] ) ){
+            $field[ 'desc_text' ] = nl2br( $field[ 'desc_text' ] );
+        }
+        if( isset( $field[ 'help_text' ] ) ){
+            $field[ 'help_text' ] = nl2br( $field[ 'help_text' ] );
+        }
+
 
         return apply_filters( 'ninja_forms_upgrade_field', $field );
     }
