@@ -52,14 +52,29 @@ define( [], function() {
     				var mask = this.model.get( 'mask' );
     			}
 
-
 				/* POLYFILL */ Number.isInteger = Number.isInteger || function(value) { return typeof value === "number" && isFinite(value) && Math.floor(value) === value; };
     			if ( Number.isInteger( mask ) ) {
     				mask = mask.toString();
     			}
 
-    			jQuery( this.el ).find( '.nf-element' ).mask( mask );
-    		}
+				if ( 'currency' == mask ) {
+					/*
+					 * TODO: Currently, these options use the plugin-wide defaults for locale.
+					 * When per-form locales are implemented, these will need to be revisited.
+					 */
+					var autoNumericOptions = {
+					    digitGroupSeparator        : nfi18n.thousands_sep,
+					    decimalCharacter           : nfi18n.decimal_point,
+					    currencySymbol             : nfi18n.currencySymbol
+					};
+
+					// Initialization
+					new AutoNumeric( jQuery( this.el ).find( '.nf-element' )[ 0 ], autoNumericOptions );
+				} else {
+					jQuery( this.el ).find( '.nf-element' ).mask( mask );
+				} 			
+	   		}
+
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'render:view', this );
 			nfRadio.channel( 'fields' ).trigger( 'render:view', this );
 		},
