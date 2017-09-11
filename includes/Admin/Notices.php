@@ -84,8 +84,6 @@ class NF_Admin_Notices
                 }
             }
 
-            
-
             // Check for required fields
             if ( ! $this->required_fields( $admin_notices[ $slug ] ) ) {
 
@@ -146,8 +144,6 @@ class NF_Admin_Notices
                 }
             }
         }
-
-        // die( 'done looping' );
     }
 
     // Spam protection check
