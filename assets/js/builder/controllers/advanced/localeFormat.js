@@ -13,6 +13,9 @@ define( [], function() {
 			nfRadio.channel( 'locale' ).reply( 'format:number', this.localeEncode, this );
 			// Respond to requests to unformat numbers.
 			nfRadio.channel( 'locale' ).reply( 'unformat:number', this.localeDecode, this );
+            
+            
+			this.listenTo( nfRadio.channel( 'setting' ), 'update:numberFormat', this.updateProducts );
 		},
         
         localeEncode: function( value, format ) {
@@ -36,6 +39,11 @@ define( [], function() {
             }
             return realValue;
         },
+        
+        updateProducts: function( settingModel ) {
+            console.log(settingModel.changed.numberFormat);
+            console.log(settingModel.previousAttributes().numberFormat);
+        }
         
 	});
 

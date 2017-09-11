@@ -36,8 +36,11 @@ define( [], function() {
 		 * @since  3.0
 		 * @return void
 		 */
-		changeSetting: function( model, options) {
+		changeSetting: function( model, options ) {
 			nfRadio.channel( 'app' ).trigger( 'update:setting', this, options.settingModel );
+            if ( 'undefined' !== typeof( options.settingModel ) ) {
+                nfRadio.channel( 'setting' ).trigger( 'update:' + options.settingModel.get( 'name' ), model );
+            }
 		},
 
 		updateFieldKey: function( keyModel, settingModel ) {
