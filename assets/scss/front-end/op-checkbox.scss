@@ -124,7 +124,9 @@
         }
         label {
             &::after {
-                top: 2px !important;
+                // Commenting this line out to deal with checkbox list issues.
+                // Leaving it in place because it may need to be re-visited in the future.
+                //top: 2px !important;
             }
         }
     }
