@@ -31,10 +31,10 @@ final class NF_Admin_Menus_Addons extends NF_Abstracts_Submenu
 
         $notices = array();
 
-        foreach ($items as &$item) {
+        foreach ($items as $key => $item) {
             $plugin_data = array();
             if( !empty( $item['plugin'] ) && file_exists( WP_PLUGIN_DIR.'/'.$item['plugin'] ) ){
-                $item[ 'installed' ] = true;
+                $items[ $key ][ 'installed' ] = true;
                 $plugin_data = get_plugin_data( WP_PLUGIN_DIR.'/'.$item['plugin'], false, true );
             }
 
@@ -48,19 +48,23 @@ final class NF_Admin_Menus_Addons extends NF_Abstracts_Submenu
                     'new_version' => $item[ 'version' ]
                 );
             }
+            unset( $item ); // Unset to avoid conflict with variable name in later loop.
         }
 
         $groups = $feed[ 'categories' ];
         foreach( $items as $item ){
             if( ! isset( $item[ 'category' ] ) ) continue;
-            $group = $item[ 'category' ];
-            if( ! isset( $groups[ $group ][ 'addons'  ] ) ) $groups[ $group ][ 'addons'  ] = array();
-            $groups[ $group ][ 'addons' ][] = $item;
 
-            if( in_array( $group, array( 'crm', 'email' ) )
-                && isset( $item[ 'installed' ] ) && $item[ 'installed' ] ){
-                $groups[ $group ][ 'priority' ] = 0;
+            foreach( (array) $item[ 'category' ] as $group ) {
+                if( ! isset( $groups[ $group ][ 'addons' ] ) ) $groups[ $group ][ 'addons' ] = array();
+                $groups[ $group ][ 'addons' ][] = $item;
+
+                if( in_array( $group, array( 'crm', 'email' ) )
+                    && isset( $item[ 'installed' ] ) && $item[ 'installed' ] ){
+                    $groups[ $group ][ 'priority' ] = 0;
+                }
             }
+
         }
 
         foreach( $groups as &$group ){
