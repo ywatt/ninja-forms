@@ -100,28 +100,6 @@
     },
 
     {
-      "title": "Webhooks",
-      "image": "assets/img/add-ons/webhooks.png",
-      "content": "Send user-submitted data to any external URL using a GET or POST request.",
-      "link": "https://ninjaforms.com/extensions/webhooks/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Webhooks",
-      "plugin": "",
-      "docs": "https://ninjaforms.com/docs/webhooks/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Webhooks+Docs",
-      "version": "3.0.3",
-      "category": "services"
-    },
-
-    {
-      "title": "Zapier",
-      "image": "assets/img/add-ons/zapier.png",
-      "content": "Easily integrate Ninja Forms with Zapier.",
-      "link": "https://ninjaforms.com/extensions/zapier/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Zapier",
-      "plugin": "ninja-forms-zapier/ninja-forms-zapier.php",
-      "docs": "https://ninjaforms.com/docs/zapier/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Zapier+Docs",
-      "version": "3.0.4",
-      "category": "services"
-    },
-
-    {
       "title": "SalesForce CRM",
       "image": "assets/img/add-ons/salesforce.png",
       "content": "Connect your forms to your Salesforce CRM account",
@@ -328,6 +306,36 @@
       "docs": "https://ninjaforms.com/docs/clicksend-sms/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=ClickSend+Docs",
       "version": "3.0.1",
       "category": "services"
+    },
+
+    {
+      "title": "Webhooks",
+      "image": "assets/img/add-ons/webhooks.png",
+      "content": "Send user-submitted data to any external URL using a GET or POST request.",
+      "link": "https://ninjaforms.com/extensions/webhooks/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Webhooks",
+      "plugin": "",
+      "docs": "https://ninjaforms.com/docs/webhooks/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Webhooks+Docs",
+      "version": "3.0.3",
+      "category": [
+        "services",
+        "crm",
+        "email"
+      ]
+    },
+
+    {
+      "title": "Zapier",
+      "image": "assets/img/add-ons/zapier.png",
+      "content": "Easily integrate Ninja Forms with Zapier.",
+      "link": "https://ninjaforms.com/extensions/zapier/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Zapier",
+      "plugin": "ninja-forms-zapier/ninja-forms-zapier.php",
+      "docs": "https://ninjaforms.com/docs/zapier/?utm_medium=plugin&utm_source=plugin-addons-page&utm_campaign=Ninja+Forms+Addons+Page&utm_content=Zapier+Docs",
+      "version": "3.0.4",
+      "category": [
+        "services",
+        "crm",
+        "email"
+      ]
     }
   ],
   "categories": {
