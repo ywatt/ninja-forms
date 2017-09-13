@@ -31,6 +31,9 @@ final class NF_Tracking
         }
 
         add_filter( 'nf_admin_notices', array( $this, 'admin_notice' ) );
+
+        add_filter( 'ninja_forms_check_setting_allow_tracking',  array( $this, 'check_setting' ) );
+        add_filter( 'ninja_forms_update_setting_allow_tracking', array( $this, 'update_setting' ) );
     }
 
     /**
@@ -131,6 +134,7 @@ final class NF_Tracking
     public function opt_in()
     {
         update_option( 'ninja_forms_allow_tracking', true );
+        update_option( 'ninja_forms_do_not_allow_tracking', false );
     }
 
     /**
@@ -174,6 +178,7 @@ final class NF_Tracking
      */
     private function opt_out()
     {
+        update_option( 'ninja_forms_allow_tracking', false );
         update_option( 'ninja_forms_do_not_allow_tracking', true );
     }
 
@@ -187,6 +192,26 @@ final class NF_Tracking
     private function get_opt_out_url( $url )
     {
         return add_query_arg( 'ninja_forms_opt_in', self::OPT_OUT, $url );
+    }
+
+    public function check_setting( $setting )
+    {
+        if( $this->is_opted_in() && ! $this->is_opted_out() ) {
+            $setting[ 'value' ] = "1";
+        } else {
+            $setting[ 'value' ] = "0";
+        }
+        return $setting;
+    }
+
+    public function update_setting( $value )
+    {
+        if( "1" == $value ){ // Allow Tracking
+            $this->opt_in();
+        } else {
+            $this->opt_out();
+        }
+        return $value;
     }
 
 } // END CLASS NF_Tracking
