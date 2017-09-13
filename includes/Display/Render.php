@@ -30,6 +30,7 @@ final class NF_Display_Render
     protected static $form_uses_recaptcha      = array();
     protected static $form_uses_datepicker     = array();
     protected static $form_uses_inputmask      = array();
+    protected static $form_uses_currencymask   = array();
     protected static $form_uses_rte            = array();
     protected static $form_uses_textarea_media = array();
     protected static $form_uses_helptext       = array();
@@ -304,6 +305,9 @@ final class NF_Display_Render
                 if( isset( $field[ 'settings' ][ 'mask' ] ) && $field[ 'settings' ][ 'mask' ] ){
                     array_push( self::$form_uses_inputmask, $form_id );
                 }
+                if( isset( $field[ 'settings' ][ 'mask' ] ) && 'currency' == $field[ 'settings' ][ 'mask' ] ){
+                    array_push( self::$form_uses_currencymask, $form_id );
+                }
                 if( isset( $field[ 'settings' ][ 'textarea_rte' ] ) && $field[ 'settings' ][ 'textarea_rte' ] ){
                     array_push( self::$form_uses_rte, $form_id );
                 }
@@ -527,6 +531,10 @@ final class NF_Display_Render
 
         if( $is_preview || in_array( $form_id, self::$form_uses_inputmask ) ) {
             wp_enqueue_script('nf-front-end--inputmask', $js_dir . 'front-end--inputmask.min.js', array( 'jquery' ), $ver );
+        }
+
+        if( $is_preview || in_array( $form_id, self::$form_uses_currencymask ) ) {
+            wp_enqueue_script('nf-front-end--currencymask', $js_dir . 'front-end--autonumeric.min.js', array( 'jquery' ), $ver );
         }
 
          if( $is_preview || in_array( $form_id, self::$form_uses_rte ) ) {
