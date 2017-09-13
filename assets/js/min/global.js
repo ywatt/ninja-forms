@@ -1,8 +1,16 @@
 var nfRadio = Backbone.Radio;
 
-function nf_recaptcha_response( response ) {
-    nfRadio.channel( 'recaptcha' ).request( 'update:response', response );
-}
+nfRadio.channel( 'form' ).on( 'render:view', function() {		
+	jQuery( '.g-recaptcha' ).each( function() {
+		var callback = jQuery( this ).data( 'callback' );
+		var fieldID = jQuery( this ).data( 'fieldid' );
+		if ( typeof window[ callback ] !== 'function' ){
+			window[ callback ] = function( response ) {
+				nfRadio.channel( 'recaptcha' ).request( 'update:response', response, fieldID );
+			};
+		}
+	} );
+} );
 
 var nfRecaptcha = Marionette.Object.extend( {
 	initialize: function() {
@@ -21,13 +29,22 @@ var nfRecaptcha = Marionette.Object.extend( {
 	renderCaptcha: function() {
 		jQuery( '.g-recaptcha' ).each( function() {
 			var opts = {
+				fieldid: jQuery( this ).data( 'fieldid' ),
 				size: jQuery( this ).data( 'size' ),
 				theme: jQuery( this ).data( 'theme' ),
 				sitekey: jQuery( this ).data( 'sitekey' ),
-				callback: nf_recaptcha_response
+				callback: jQuery( this ).data( 'callback' )
 			};
 
-			grecaptcha.render( jQuery( this )[0], opts );
+			var grecaptchaID = grecaptcha.render( jQuery( this )[0], opts );
+
+            if ( opts.size === 'invisible' ) {
+                try {
+                    grecaptcha.execute( grecaptchaID );
+                } catch( e ){
+                    console.log( 'Notice: Error trying to execute grecaptcha.' );
+                }
+            }
 		} );
 	}
 
@@ -35,10 +52,4 @@ var nfRecaptcha = Marionette.Object.extend( {
 
 var nfRenderRecaptcha = function() {
 	new nfRecaptcha();
-
-	try {
-		grecaptcha.execute();
-	} catch( e ){
-		console.log( 'Notice: Error trying to execute grecaptcha.' );
-	}
 }

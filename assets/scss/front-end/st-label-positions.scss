@@ -3,6 +3,7 @@ STANDARDIZE ALL FIELDS
 ----------------------------------*/
 .field-wrap {
     display: flex;
+    flex-wrap:wrap;
     > label {
         display: block;
     }

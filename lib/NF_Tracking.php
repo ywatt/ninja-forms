@@ -31,8 +31,6 @@ final class NF_Tracking
         }
 
         add_filter( 'nf_admin_notices', array( $this, 'admin_notice' ) );
-
-        add_action( 'ninja_forms_upgrade', array( $this, 'opt_in' ) );
     }
 
     /**

@@ -95,6 +95,7 @@ jQuery(document).ready(function($) {
         },
 
         start: function () {
+
             _.each( nfThreeUpgrade.forms, function( formID ) {
                 this.forms.push({
                     id: formID,
@@ -119,6 +120,11 @@ jQuery(document).ready(function($) {
             console.log( 'HERE' );
             console.log( app );
             app.step = 'converting';
+
+            // Add a notice if the user tries to navigate away during conversion.
+            jQuery( window ).bind( 'beforeunload', function(){
+                return 'You have unsaved changes.';
+            } );
 
             $.post( ajaxurl, { nf2to3: 1, action: 'ninja_forms_ajax_migrate_database' }, function( response ) {
 
