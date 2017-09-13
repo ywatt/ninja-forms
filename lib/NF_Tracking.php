@@ -77,19 +77,39 @@ final class NF_Tracking
 
         $notices[ 'allow_tracking' ] = array(
             'title' => __( 'Please help us improve Ninja Forms!', 'ninja-forms' ),
-            'msg' => implode( '<br />', array(
-                __( 'If you opt-in, some data about your installation of Ninja Forms will be sent to NinjaForms.com (this does NOT include your submissions).', 'ninja-forms' ),
-                __( 'If you skip this, that\'s okay! Ninja Forms will still work just fine.', 'ninja-forms' ),
-            )),
+            'msg' => '
+                    If you agree, we will collect some server data and information about how you use Ninja Forms. 
+                    <em>No submission data will be collected.</em>
+                    This data will help us troubleshoot errors and improve your Ninja Forms experience.
+                
+                <p>    
+                    <input id="nf-optin-send-email" type="checkbox" checked="checked"> You can also occasionally send me an email about using Ninja Forms.
+                </p>',
             'link' => implode( ' ', array(
-                sprintf( __( '%sAllow%s', 'ninja-forms' ), '<a href="' . $this->get_opt_in_url( admin_url( 'admin.php?page=ninja-forms' ) ) . '" class="button-primary" id="ninja-forms-allow-tracking">', '</a>' ),
-                sprintf( __( '%sDo not allow%s', 'ninja-forms' ), '<a href="' . $this->get_opt_out_url( admin_url( 'admin.php?page=ninja-forms' ) ) . '" class="button-secondary" id="ninja-forms-do-not-allow-tracking">', '</a>' ),
+                sprintf( __( '%sYes, I want to make Ninja Forms better!%s', 'ninja-forms' ), '<a href="' . $this->get_opt_in_url( admin_url( 'admin.php?page=ninja-forms' ) ) . '" class="button-primary" id="ninja-forms-improve">', '</a>' ),
+                sprintf( __( '%sNo, please don\'t collect errors or other data.%s', 'ninja-forms' ), '<a href="' . $this->get_opt_out_url( admin_url( 'admin.php?page=ninja-forms' ) ) . '" class="button-secondary" id="ninja-forms-do-not-improve">', '</a>' ),
             )),
             'int' => 0, // No delay
             'blacklist' => array(
                 'ninja-forms-three'
             )
         );
+
+        echo "<script type='text/javascript'>
+            jQuery( document ).ready( function( $ ) {
+                jQuery( '#ninja-forms-improve' ).click( function( e ) {
+                    e.preventDefault();
+                    var send_email, url;
+                    if ( jQuery( '#nf-optin-send-email' ).attr( 'checked' ) ) {
+                        send_email = 1;
+                    } else {
+                        send_email = 0;
+                    }
+                    url = jQuery( e.target ).attr( 'href' );
+                    window.location.href = url + '&send_email=' + send_email;
+                } );
+            } );
+        </script>";
 
         return $notices;
     }
@@ -133,8 +153,27 @@ final class NF_Tracking
      */
     public function opt_in()
     {
+        /**
+         * Update our tracking options.
+         */
         update_option( 'ninja_forms_allow_tracking', true );
         update_option( 'ninja_forms_do_not_allow_tracking', false );
+
+        /**
+         * Send updated environment variables.
+         */
+        Ninja_Forms()->dispatcher()->update_environment_vars();
+
+        /**
+         * Send our optin event
+         */
+        if ( isset ( $_REQUEST[ 'send_email' ] ) ) {
+            $send_email = absint( $_REQUEST[ 'send_email' ] );
+        } else {
+            $send_email = 1;
+        }
+
+        Ninja_Forms()->dispatcher()->send( 'optin', array( 'send_email' => $send_email ) );
     }
 
     /**

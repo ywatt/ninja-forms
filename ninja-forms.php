@@ -142,6 +142,13 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         protected $_logger = '';
 
         /**
+         * Dispatcher
+         *
+         * @var string
+         */
+        protected $_dispatcher = '';
+
+        /**
          * @var NF_Session
          */
         protected $session = '';
@@ -276,6 +283,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
                 self::$instance->_logger = new NF_Database_Logger();
 
                 /*
+                 * Dispatcher
+                 */
+                self::$instance->_dispatcher = new NF_Dispatcher();
+
+                /*
                  * Merge Tags
                  */
                 self::$instance->merge_tags[ 'wp' ] = new NF_MergeTags_WP();
@@ -357,6 +369,9 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         public function admin_init()
         {
             do_action( 'nf_admin_init', self::$instance );
+            if ( isset ( $_GET[ 'nf-upgrade' ] ) && 'complete' == $_GET[ 'nf-upgrade' ] ) {
+                Ninja_Forms()->dispatcher()->send( 'upgrade' );
+            }
         }
 
         public function scrub_available_actions( $actions )
@@ -477,6 +492,11 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
         public function logger()
         {
             return $this->_logger;
+        }
+
+        public function dispatcher()
+        {
+            return $this->_dispatcher;
         }
 
         public function eos()
@@ -743,49 +763,19 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
     }
 
     // Scheduled Action Hook
-    function nf_optin_send_admin_email( ) {
-        /*
-         * If we aren't opted in, or we've specifically opted out, then return false.
+    function nf_optin_update_environment_vars() {
+        /**
+         * Send updated environment variables.
          */
-        if ( ! Ninja_Forms()->tracking->is_opted_in() || Ninja_Forms()->tracking->is_opted_out() ) {
-            return false;
-        }
-
-        /*
-         * If we haven't already submitted our email to api.ninjaforms.com, submit it and set an option saying we have.
-         */
-
-        if ( get_option ( 'ninja_forms_optin_admin_email', false ) ) {
-            return false;
-        }
-
-        /*
-         * Ping api.ninjaforms.com
-         */
-
-        $admin_email = get_option('admin_email');
-        $url = home_url();
-        $response = wp_remote_post(
-            'http://api.ninjaforms.com',
-            array(
-                'body' => array( 'admin_email' => $admin_email, 'url' => $url ),
-            )
-        );
-
-        if( is_array($response) ) {
-            $header = $response['headers']; // array of http header lines
-            $body = $response['body']; // use the content
-        }
-
-        update_option( 'ninja_forms_optin_admin_email', true );
+        Ninja_Forms()->dispatcher()->update_environment_vars();
     }
 
-    add_action( 'nf_optin_cron', 'nf_optin_send_admin_email' );
+    add_action( 'nf_optin_cron', 'nf_optin_update_environment_vars' );
 
     // Custom Cron Recurrences
     function nf_custom_cron_job_recurrence( $schedules ) {
-        $schedules['nf-monthly'] = array(
-            'display' => __( 'Once per month', 'textdomain' ),
+        $schedules[ 'nf-monthly' ] = array(
+            'display' => __( 'Once per month', 'ninja-forms' ),
             'interval' => 2678400,
         );
         return $schedules;
