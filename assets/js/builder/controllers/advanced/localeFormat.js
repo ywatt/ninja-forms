@@ -14,8 +14,7 @@ define( [], function() {
 			// Respond to requests to unformat numbers.
 			nfRadio.channel( 'locale' ).reply( 'unformat:number', this.localeDecode, this );
             
-            
-			this.listenTo( nfRadio.channel( 'setting' ), 'update:numberFormat', this.updateProducts );
+			this.listenTo( nfRadio.channel( 'setting' ), 'update:numberFormat', this.updateNumberFormat );
 		},
         
         localeEncode: function( value, format ) {
@@ -40,9 +39,19 @@ define( [], function() {
             return realValue;
         },
         
-        updateProducts: function( settingModel ) {
-            console.log(settingModel.changed.numberFormat);
-            console.log(settingModel.previousAttributes().numberFormat);
+        updateNumberFormat: function( settingModel ) {
+            var updated = settingModel.changed.numberFormat;
+            var outdated = settingModel.previousAttributes().numberFormat;
+            console.log(updated);
+            console.log(outdated);
+            _.each( nfRadio.channel( 'app' ).request( 'get:formModel' ).get( 'fields' ).models, function( fieldModel ) {
+                if ( 'product' != fieldModel.get( 'type' ) ) return;
+                var value = fieldModel.get('product_price');
+                var newT = updated.substr( 0, updated.length -1 );
+                var newD = updated.substr( -1 );
+                var oldT = outdated.substr( 0, outdated.length -1 );
+                var oldD = outdated.substr( -1 );
+            });
         }
         
 	});
