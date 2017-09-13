@@ -437,6 +437,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
             }
 
             $this->_errors[ 'last' ] = $error;
+            Ninja_Forms()->logger()->emergency( $error[ 'message' ] );
             $this->_respond();
         }
     }
