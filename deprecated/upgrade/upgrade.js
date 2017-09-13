@@ -58,7 +58,10 @@ jQuery(document).ready(function($) {
                     if ( ! form.converted ) redirectToThree = 0;
                     if ( form.failed ) data.showSupportLink = 1;
                 }, this);
-                if( redirectToThree ) window.location.href = nfThreeUpgrade.redirectURL;
+                if( redirectToThree ) {
+                    jQuery( window ).unbind( 'beforeunload' );
+                    window.location.href = nfThreeUpgrade.redirectURL;
+                }
             }
 
             jQuery( this.container ).html( this.tmpl.table( data ) );
