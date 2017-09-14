@@ -114,7 +114,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.2 (13 September 2017) =
+= 3.2 (14 September 2017) =
 
 *Bugs:*
 
@@ -136,7 +136,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Changelog ==
 
-= 3.2 (13 September 2017) =
+= 3.2 (14 September 2017) =
 
 *Bugs:*
 
