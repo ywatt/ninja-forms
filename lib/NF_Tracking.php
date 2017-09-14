@@ -243,8 +243,13 @@ final class NF_Tracking
     private function opt_out()
     {
         if( $this->is_opted_out() ) return;
+
+        // Disable tracking.
         update_option( 'ninja_forms_allow_tracking', false );
         update_option( 'ninja_forms_do_not_allow_tracking', true );
+
+        // Clear dispatch debounce flag.
+        update_option( 'ninja_forms_optin_reported', 0 );
     }
 
     /**
