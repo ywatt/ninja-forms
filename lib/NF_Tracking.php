@@ -30,8 +30,8 @@ final class NF_Tracking
             add_action( 'admin_init', array( $this, 'maybe_opt_in' ) );
         }
 
-        // Report previously opted-in users that were not already reported.
-        add_action( 'nf_optin_cron', array( $this, 'report_optin' ) );
+        // Temporary: Report previously opted-in users that were not already reported. @todo Remove after a couple of versions.
+        add_action( 'admin_init', array( $this, 'report_optin' ) );
 
         add_filter( 'nf_admin_notices', array( $this, 'admin_notice' ) );
 
