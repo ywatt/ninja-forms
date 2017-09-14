@@ -769,7 +769,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
          */
         Ninja_Forms()->dispatcher()->update_environment_vars();
     }
-
     add_action( 'nf_optin_cron', 'nf_optin_update_environment_vars' );
 
     // Custom Cron Recurrences

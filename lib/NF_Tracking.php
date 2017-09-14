@@ -30,6 +30,9 @@ final class NF_Tracking
             add_action( 'admin_init', array( $this, 'maybe_opt_in' ) );
         }
 
+        // Report previously opted-in users that were not already reported.
+        add_action( 'nf_optin_cron', array( $this, 'report_optin' ) );
+
         add_filter( 'nf_admin_notices', array( $this, 'admin_notice' ) );
 
         add_filter( 'ninja_forms_check_setting_allow_tracking',  array( $this, 'check_setting' ) );
@@ -48,15 +51,37 @@ final class NF_Tracking
 
             $opt_in_action = htmlspecialchars( $_GET[ self::FLAG ] );
 
-            if( self::OPT_IN == $opt_in_action && ! $this->is_opted_in() ){
+            if( self::OPT_IN == $opt_in_action ){
                 $this->opt_in();
             }
 
-            if( self::OPT_OUT == $opt_in_action && ! $this->is_opted_out() ){
+            if( self::OPT_OUT == $opt_in_action ){
                 $this->opt_out();
             }
         }
         header( 'Location: ' . admin_url( 'admin.php?page=ninja-forms' ) );
+    }
+
+    /**
+     * Report that a user has opted-in.
+     *
+     * @param array $data Dispatch event data.
+     */
+    function report_optin($data = array() )
+    {
+        if( ! $this->is_opted_in() || $this->is_opted_out() ) return;
+
+        // Only send initial opt-in.
+        if( get_option( 'ninja_forms_optin_reported', 0 ) ) return;
+
+        $data = wp_parse_args( $data, array(
+            'send_email' => 1 // "Send Email" by default, if not specified (legacy).
+        ) );
+
+        Ninja_Forms()->dispatcher()->send( 'optin', $data );
+
+        // Debounce opt-in dispatch.
+        update_option( 'ninja_forms_optin_reported', 1 );
     }
 
     /**
@@ -153,6 +178,8 @@ final class NF_Tracking
      */
     public function opt_in()
     {
+        if( $this->is_opted_in() ) return;
+
         /**
          * Update our tracking options.
          */
@@ -173,7 +200,7 @@ final class NF_Tracking
             $send_email = 1;
         }
 
-        Ninja_Forms()->dispatcher()->send( 'optin', array( 'send_email' => $send_email ) );
+        $this->report_optin( array( 'send_email' => $send_email ) );
     }
 
     /**
@@ -217,6 +244,7 @@ final class NF_Tracking
      */
     private function opt_out()
     {
+        if( $this->is_opted_out() ) return;
         update_option( 'ninja_forms_allow_tracking', false );
         update_option( 'ninja_forms_do_not_allow_tracking', true );
     }
