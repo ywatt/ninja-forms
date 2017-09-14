@@ -48,11 +48,11 @@ final class NF_Tracking
 
             $opt_in_action = htmlspecialchars( $_GET[ self::FLAG ] );
 
-            if( self::OPT_IN == $opt_in_action ){
+            if( self::OPT_IN == $opt_in_action && ! $this->is_opted_in() ){
                 $this->opt_in();
             }
 
-            if( self::OPT_OUT == $opt_in_action ){
+            if( self::OPT_OUT == $opt_in_action && ! $this->is_opted_out() ){
                 $this->opt_out();
             }
         }
