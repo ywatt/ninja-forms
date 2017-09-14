@@ -69,8 +69,6 @@ final class NF_Tracking
      */
     function report_optin($data = array() )
     {
-        if( ! $this->is_opted_in() || $this->is_opted_out() ) return;
-
         // Only send initial opt-in.
         if( get_option( 'ninja_forms_optin_reported', 0 ) ) return;
 
