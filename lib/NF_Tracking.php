@@ -77,6 +77,7 @@ final class NF_Tracking
         ) );
 
         Ninja_Forms()->dispatcher()->send( 'optin', $data );
+        Ninja_Forms()->dispatcher()->update_environment_vars();
 
         // Debounce opt-in dispatch.
         update_option( 'ninja_forms_optin_reported', 1 );
