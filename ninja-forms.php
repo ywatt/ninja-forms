@@ -785,7 +785,6 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
     // Schedule Cron Job Event
     function nf_optin_send_admin_email_cron_job() {
         if ( ! wp_next_scheduled( 'nf_optin_cron' ) ) {
-            nf_optin_send_admin_email();
             wp_schedule_event( current_time( 'timestamp' ), 'nf-monthly', 'nf_optin_cron' );
         }
     }
