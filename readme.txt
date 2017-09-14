@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, krmoorho
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.6
 Tested up to: 4.8
-Stable tag: 3.2
+Stable tag: 3.2.1
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -114,10 +114,11 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.2 (14 September 2017) =
+= 3.2.1 (14 September 2017) =
 
 *Bugs:*
 
+* Fixed a bug that caused opt-ins to show incorrectly.
 * Multiple Google reCaptchas on the same page should function properly.
 * Fixed the layout of description text for checkbox lists.
 * New lines in rich text areas should convert properly from version 2.9.x.
@@ -135,6 +136,27 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * License activation errors will now show more detail.
 
 == Changelog ==
+
+= 3.2.1 (14 September 2017) =
+
+*Bugs:*
+
+* Fixed a bug that caused opt-ins to show incorrectly.
+* Multiple Google reCaptchas on the same page should function properly.
+* Fixed the layout of description text for checkbox lists.
+* New lines in rich text areas should convert properly from version 2.9.x.
+* Merge Tag insertion should maintain the proper cursor position in all cases.
+* Form duplication should happen much more quickly.
+* Unknown field types will be removed upon upgrade to prevent forms from breaking in 3.0.
+* Fixed serveral issues with converting merge tags from version 2.9.x to 3.0.
+
+*Changes:*
+
+* A portion of users will begin to see upgrade notices for Ninja Forms 3.0. The number of users who see this notice will increase in future releases.
+* "Currency" has been added to the list of input mask options.
+* Basic error logging has been added to Ninja Forms; the "Get Help" page will now show the most recently recorded errors.
+* Added a setting for changing stat opt-in tracking.
+* License activation errors will now show more detail.
 
 = 3.2 (14 September 2017) =
 
