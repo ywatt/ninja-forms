@@ -768,6 +768,15 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
          * Send updated environment variables.
          */
         Ninja_Forms()->dispatcher()->update_environment_vars();
+
+        /**
+         * Make sure that we've reported our opt-in.
+         */
+        if( get_option( 'ninja_forms_optin_reported', 0 ) ) return;
+        
+        Ninja_Forms()->dispatcher()->send( 'optin', array( 'send_email' => 1 ) );
+        // Debounce opt-in dispatch.
+        update_option( 'ninja_forms_optin_reported', 1 );
     }
     add_action( 'nf_optin_cron', 'nf_optin_update_environment_vars' );
 
