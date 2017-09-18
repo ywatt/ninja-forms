@@ -306,6 +306,21 @@ return apply_filters( 'ninja_forms_field_settings', array(
     */
 
     /*
+     * INPUT NAME
+     */
+
+    'input_name' => array(
+        'name' => 'input_name',
+        'type' => 'textbox',
+        'label' => __( 'Input Name', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'value' => '',
+        'help' => __( 'Enter name attribute for the field.', 'ninja-forms' ),
+        'use_merge_tags' => FALSE,
+    ),
+
+    /*
      * INPUT PLACEHOLDER
      */
 

@@ -95,7 +95,6 @@ define( [], function() {
 		templateHelpers: function () {
 			var that = this;
 	    	return {
-
 				renderElement: function(){
 					var tmpl = _.find( this.element_templates, function( tmpl ) {
 						if ( 0 < jQuery( '#tmpl-nf-field-' + tmpl ).length ) {
@@ -118,6 +117,10 @@ define( [], function() {
 					}
 					return classes;
 				},
+
+                renderInputName: function(){
+					return this.input_name || this.field_key;
+                },
 
 				renderPlaceholder: function() {
 					var placeholder = this.placeholder;

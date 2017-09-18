@@ -12,7 +12,7 @@
 
 <script id="tmpl-nf-product-dropdown" type="text/template">
     <span for="nf-field-{{{ data.id }}}">
-    <select id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element">
+    <select id="nf-field-{{{ data.id }}}" name="{{{ data.renderInputName() }}}" class="{{{ data.renderClasses() }}} nf-element">
         {{{ data.renderOptions() }}}
         {{{ data.renderProductQuantity() }}}
     </select>
