@@ -8,6 +8,7 @@ final class NF_Display_Shortcodes
         add_shortcode( 'ninja_form',  array( $this, 'display_form_front_end' ) );
         add_shortcode( 'ninja_forms', array( $this, 'display_form_front_end' ) );
         add_shortcode( 'ninja_forms_display_form', array( $this, 'display_form_front_end' ) );
+        add_shortcode( 'ninja_forms_submission_count', array( $this, 'submission_count' ) );
     }
 
     public function display_form_preview( $atts = array() )
@@ -44,5 +45,13 @@ final class NF_Display_Shortcodes
         trigger_error( __( 'Ninja Forms shortcode used without specifying a form.', 'ninja-forms' ) );
 
         return "<div style='border: 3px solid red; padding: 1em; margin: 1em auto;'>$output</div>";
+    }
+
+    public function submission_count( $atts = array() )
+    {
+        if( ! isset( $atts[ 'form_id' ] ) ){
+            return '';
+        }
+        return count( Ninja_Forms()->form( $atts[ 'form_id' ] )->get_subs() );
     }
 }
