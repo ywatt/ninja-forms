@@ -49,6 +49,7 @@ define([], function() {
 		},
 
 		validateModelData: function( model ) {
+			console.log( model );
 			if ( 1 != model.get( 'required' ) || ! model.get( 'visible' ) || model.get( 'clean' ) ) {
 				return false;
 			}
