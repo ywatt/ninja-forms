@@ -91,7 +91,7 @@ final class NF_MergeTags_Other extends NF_Abstracts_MergeTags
 
     protected function system_time()
     {
-        return date_i18n( get_option( 'time_format' ), time() );
+        return date_i18n( get_option( 'time_format' ), current_time( 'timestamp' ) );
     }
 
     protected function user_ip()
