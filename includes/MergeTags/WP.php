@@ -55,18 +55,18 @@ final class NF_MergeTags_WP extends NF_Abstracts_MergeTags
          * Replace Custom Post Meta
          * {post_meta:foo} --> meta key is 'foo'
          */
-        preg_match_all("/{post_meta:(.*?)}/", $subject, $post_meta_matches );
+        preg_match_all( "/{post_meta:(.*?)}/", $subject, $post_meta_matches );
         if( ! empty( $post_meta_matches[0] ) ) {
             /**
              * $matches[0][$i]  merge tag match     {post_meta:foo}
              * $matches[1][$i]  captured meta key   foo
              */
-            foreach ($post_meta_matches[0] as $i => $search) {
+            foreach( $post_meta_matches[0] as $i => $search ) {
                 $meta_key = $post_meta_matches[1][$i];
                 if ( isset( $this->post_meta[ $meta_key ] ) ) {
-                    $subject = str_replace($search, $this->post_meta[$meta_key], $subject);
+                    $subject = str_replace( $search, $this->post_meta[$meta_key], $subject );
                 } else {
-                    $subject = str_replace($search, '', $subject);
+                    $subject = str_replace( $search, '', $subject );
                 }
             }
         }
@@ -75,16 +75,16 @@ final class NF_MergeTags_WP extends NF_Abstracts_MergeTags
          * Replace Custom User Meta
          * {user_meta:foo} --> meta key is 'foo'
          */
-        preg_match_all("/{user_meta:(.*?)}/", $subject, $user_meta_matches );
+        preg_match_all( "/{user_meta:(.*?)}/", $subject, $user_meta_matches );
         if( ! empty( $user_meta_matches[0] ) && $user_id = get_current_user_id() ) {
             /**
              * $matches[0][$i]  merge tag match     {user_meta:foo}
              * $matches[1][$i]  captured meta key   foo
              */
-            foreach ($user_meta_matches[0] as $i => $search) {
+            foreach( $user_meta_matches[0] as $i => $search ) {
                 $meta_key = $user_meta_matches[1][$i];
                 $meta_value = get_user_meta( $user_id, $meta_key, /* $single */ true );
-                $subject = str_replace($search, $meta_value, $subject);
+                $subject = str_replace( $search, $meta_value, $subject );
             }
         }
 
