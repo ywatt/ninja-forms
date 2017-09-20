@@ -141,8 +141,9 @@ final class NF_Actions_Email extends NF_Abstracts_Action
 
             // Loop over our email addresses.
             foreach( $email_addresses as $email ) {
-                // Removes empty values that are passed in.
-                if( empty( $email ) ) continue;
+
+				// Updated to trim values in case there is a value with spaces/tabs/etc to remove whitespace
+                if( empty( trim( $email ) ) ) continue;
 
                 // Build our array of the email addresses.
                 $sanitized_array[] = $email;
