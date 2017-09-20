@@ -85,7 +85,6 @@ final class NF_Actions_Email extends NF_Abstracts_Action
             $errors[ 'email_not_sent' ] = $e->getMessage();
         }
 
-
         if( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
             $data[ 'actions' ][ 'email' ][ 'to' ] = $action_settings[ 'to' ];
             $data[ 'actions' ][ 'email' ][ 'headers' ] = $headers;
