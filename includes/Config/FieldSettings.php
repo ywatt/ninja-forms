@@ -312,11 +312,11 @@ return apply_filters( 'ninja_forms_field_settings', array(
     'input_name' => array(
         'name' => 'input_name',
         'type' => 'textbox',
-        'label' => __( 'Input Name', 'ninja-forms' ),
+        'label' => __( 'Name Attribute', 'ninja-forms' ),
         'width' => 'full',
         'group' => 'advanced',
         'value' => '',
-        'help' => __( 'Enter name attribute for the field.', 'ninja-forms' ),
+        'help' => __( 'Enter name attribute for the field\'s element, which is used for Browser Autocomplete.', 'ninja-forms' ),
         'use_merge_tags' => FALSE,
     ),
 
