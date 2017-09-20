@@ -119,7 +119,13 @@ define( [], function() {
 				},
 
                 renderInputName: function(){
-					return this.input_name || this.field_key;
+					if( this.input_name ) {
+						return this.input_name;
+                    }
+					if( [ 'firstname', 'lastname', 'email', 'address', 'zip' ].includes( this.type ) ){
+						return this.type;
+					}
+					return this.label.toLowerCase().replace( ' ', '-' );
                 },
 
 				renderPlaceholder: function() {
