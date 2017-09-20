@@ -178,10 +178,6 @@ class NF_Admin_CPT_Submission
             echo apply_filters( 'nf_sub_table_seq_num', $sub->get_seq_num(), $sub_id, $column );
         }
 
-        if( 'sub_date' == $column ) {
-            echo $sub->get_sub_date( 'm/d/Y h:i A' );
-        }
-
         $form_id = absint( $_GET[ 'form_id' ] );
 
         if( is_numeric( $column ) ){

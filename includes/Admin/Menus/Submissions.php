@@ -377,7 +377,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
      */
     private function custom_columns_sub_date( $sub )
     {
-        return $sub->get_sub_date();
+        return $sub->get_sub_date( 'm/d/Y h:i A' );
     }
 
     /**
