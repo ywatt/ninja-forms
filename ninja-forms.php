@@ -550,7 +550,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 	     */
         public function get_setting( $key = '', $default = false )
         {
-            if( empty( $key ) || ! isset( $this->settings[ $key ] ) ) return $default;
+            if( empty( $key ) || ! isset( $this->settings[ $key ] ) || empty( $this->settings[ $key ] ) ) return $default;
 
             return $this->settings[ $key ];
         }
