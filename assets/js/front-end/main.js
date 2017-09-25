@@ -38,6 +38,15 @@
 jQuery( document ).ready( function( $ ) {
 	require( [ 'models/formCollection', 'models/formModel', 'models/fieldCollection', 'controllers/loadControllers', 'views/mainLayout'], function( formCollection, FormModel, FieldCollection, LoadControllers, mainLayout ) {
 
+		if( 'undefined' == typeof nfForms ) {
+			/*
+			 * nfForms is not defined. This means that something went wrong loading the form data.
+			 * Bail form setup and empty the form containers to remove any loading animations.
+			 */
+			jQuery( '.nf-form-cont' ).empty();
+			return;
+		}
+
 		var NinjaForms = Marionette.Application.extend({
 			forms: {},
 			initialize: function( options ) {
