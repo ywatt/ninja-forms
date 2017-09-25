@@ -27,6 +27,7 @@ define(
 		'controllers/calculations',
 		'controllers/fieldDate',
 		'controllers/fieldRecaptcha',
+		'controllers/fieldHTML',
 		'controllers/helpText',
 		'controllers/fieldTextareaRTE',
 		'controllers/fieldStarRating',
@@ -66,6 +67,7 @@ define(
 		Calculations,
 		FieldDate,
 		FieldRecaptcha,
+		FieldHTML,
 		HelpText,
 		FieldTextareaRTE,
 		FieldStarRating,
@@ -99,6 +101,7 @@ define(
 				new FieldTotal();
 				new FieldQuantity();
 				new FieldRecaptcha();
+				new FieldHTML();
 				new HelpText();
 				new FieldTextareaRTE();
 				new FieldStarRating();

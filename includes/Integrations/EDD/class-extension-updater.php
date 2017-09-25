@@ -94,6 +94,9 @@ class NF_Extension_Updater
                 add_filter( 'nf_admin_notices', array( $this, 'show_license_error_notice' ) );
                 $this->_last_error = var_export( $license_data, true );
             }
+          
+            Ninja_Forms()->logger()->emergency( var_export( $license_data, true ) );
+
         } else {
             $error = '';
         }

@@ -215,6 +215,10 @@ return apply_filters( 'ninja_forms_field_settings', array(
                 'value' => '99/99/9999',
             ),
             array(
+                'label' => __( 'Currency', 'ninja-forms' ),
+                'value' => 'currency',
+            ),
+            array(
                 'label' => __( 'Custom', 'ninja-forms' ),
                 'value' => 'custom',
             ),
@@ -605,6 +609,22 @@ return apply_filters( 'ninja_forms_field_settings', array(
         'group' => 'administration',
         'value' => '',
         'help' => __( 'This column in the submissions table will sort by number.', 'ninja-forms' ),
+    ),
+
+    /*
+     |--------------------------------------------------------------------------
+     | Display Settings
+     |--------------------------------------------------------------------------
+     */
+
+    // Multi-Select List Only
+    'multi_size' => array(
+        'name' => 'multi_size',
+        'type' => 'number',
+        'label' => __( 'Multi-Select Box Size', 'ninja-forms'),
+        'width' => 'one-half',
+        'group' => 'primary',
+        'value' => 5,
     ),
 
     /*

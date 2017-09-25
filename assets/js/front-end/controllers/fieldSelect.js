@@ -93,6 +93,9 @@ define([], function() {
 
 			if( 'listmultiselect' == this.type ){
 				otherAttributes = otherAttributes + ' multiple';
+
+				var multiSize = this.multi_size || 5;
+				otherAttributes = otherAttributes + ' size="' + multiSize + '"';
 			}
 
 			return otherAttributes;
