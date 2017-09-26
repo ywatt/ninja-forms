@@ -306,6 +306,21 @@ return apply_filters( 'ninja_forms_field_settings', array(
     */
 
     /*
+     * Custom Name Attribute
+     */
+
+    'custom_name_attribute' => array(
+        'name' => 'custom_name_attribute',
+        'type' => 'textbox',
+        'label' => __( 'Custom Name Attribute', 'ninja-forms' ),
+        'width' => 'full',
+        'group' => 'advanced',
+        'value' => '',
+        'help' => __( 'This value will be used as the HTML input "name" attribute.', 'ninja-forms' ),
+        'use_merge_tags' => FALSE,
+    ),
+
+    /*
      * INPUT PLACEHOLDER
      */
 
