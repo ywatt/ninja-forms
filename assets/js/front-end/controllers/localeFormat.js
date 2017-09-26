@@ -103,9 +103,9 @@ define( [], function() {
         
         addCurrency: function( value ) {
             if( 'left' == this.currency_alignment ) {
-                return this.currency_symbol + ' ' + value;
+                return this.currency_symbol + value;
             } else {
-                return value + ' ' + this.currency_symbol;
+                return value + this.currency_symbol;
             }
         },
         

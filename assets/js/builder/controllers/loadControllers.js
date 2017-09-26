@@ -79,6 +79,7 @@ define(
 		'controllers/fields/mobile',
 		'controllers/fields/savedFields',
 		'controllers/fields/fieldDatepicker',
+		'controllers/fields/fieldProduct',
 		'controllers/fields/fieldDisplayCalc',
 
 		/*
@@ -108,8 +109,7 @@ define(
 		'controllers/advanced/formSettings',
 		'controllers/advanced/editActive',
 		'controllers/advanced/clickEdit',
-		'controllers/advanced/calculations',
-        'controllers/advanced/localeFormat'
+		'controllers/advanced/calculations'
 	],
 	function(
 		/*
@@ -183,6 +183,7 @@ define(
 		FieldsMobile,
 		SavedFields,
 		FieldDatepicker,
+        FieldProduct,
 		FieldDisplayCalc,
 		/*
 		 * TODO: Actions domain controllers
@@ -211,8 +212,7 @@ define(
 		FormSettings,
 		SettingsEditActive,
 		SettingsClickEdit,
-		AdvancedCalculations,
-        LocaleFormat
+		AdvancedCalculations
 		
 	) {
 		var controller = Marionette.Object.extend( {
@@ -286,6 +286,7 @@ define(
 				new FieldsMobile();
 				new SavedFields();
 				new FieldDatepicker();
+                new FieldProduct();
 				new FieldDisplayCalc();
 				/*
 				 * TODO: Actions domain controllers
@@ -315,7 +316,6 @@ define(
 				new SettingData();
 				new SettingsEditActive();
 				new SettingsClickEdit();
-                new LocaleFormat();
 				
 				/*
 				 * Data controllers need to be set after every other controller has been setup, even if they aren't domain-specific.

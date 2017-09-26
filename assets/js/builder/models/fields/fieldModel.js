@@ -49,7 +49,9 @@ define( [], function() {
 			 * This lets specific field types modify model attributes before anything uses them.
 			 */ 
 			nfRadio.channel( 'fields' ).trigger( 'init:fieldModel', this );
-			nfRadio.channel( 'fields-' + parentType ).trigger( 'init:fieldModel', this );
+            if ( this.get( 'type' ) != parentType ) {
+                nfRadio.channel( 'fields-' + parentType ).trigger( 'init:fieldModel', this );
+            }
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:fieldModel', this );
 
 			this.listenTo( nfRadio.channel( 'app' ), 'fire:updateFieldKey', this.updateFieldKey );
