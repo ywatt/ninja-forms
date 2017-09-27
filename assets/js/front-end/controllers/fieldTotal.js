@@ -25,6 +25,9 @@ define([], function() {
         },
 
         onFormLoaded: function( formModel ){
+            
+            this.shippingCost = nfRadio.channel( 'locale' ).request( 'remove:currency', this.shippingCost );
+            this.shippingCost = nfRadio.channel( 'locale' ).request( 'decode:string', this.shippingCost );
 
             var fieldModels = formModel.get( 'fields' ).models;
 
@@ -49,7 +52,8 @@ define([], function() {
 
                 var product = productFields[ productID ];
 
-                var productPrice = Number( product.get( 'product_price' ) );
+                var productPrice = nfRadio.channel( 'locale' ).request( 'remove:currency', product.get( 'product_price' ) );
+                productPrice = Number( nfRadio.channel( 'locale' ).request( 'decode:string', productPrice ) );
 
                 if( quantityFields[ productID ] ){
 
@@ -69,7 +73,8 @@ define([], function() {
 
         onChangeProduct: function( model ){
             var productID = model.get( 'id' );
-            var productPrice = Number( model.get( 'product_price' ) );
+            var productPrice = nfRadio.channel( 'locale' ).request( 'remove:currency', model.get( 'product_price' ) );
+            productPrice = Number( nfRadio.channel( 'locale' ).request( 'decode:string', productPrice ) );
             var productQuantity = Number( model.get( 'value' ) );
             var newTotal = productQuantity * productPrice;
             this.productTotals[ productID ] = newTotal;
@@ -80,7 +85,8 @@ define([], function() {
         onChangeQuantity: function( model ){
             var productID = model.get( 'product_assignment' );
             var productField = nfRadio.channel( 'fields' ).request( 'get:field', productID );
-            var productPrice = Number( productField.get( 'product_price' ) );
+            var productPrice = nfRadio.channel( 'locale' ).request( 'remove:currency', productField.get( 'product_price' ) );
+            productPrice = Number( nfRadio.channel( 'locale' ).request( 'decode:string', productPrice ) );
 
             var quantity = Number( model.get( 'value' ) );
 
@@ -101,10 +107,13 @@ define([], function() {
 
             if( newTotal && this.shippingCost ) {
                 // Only add shipping if there is a cost.
-                newTotal += Number(this.shippingCost);
+                newTotal += Number( this.shippingCost );
             }
+            newTotal = newTotal.toFixed( 2 )
+            newTotal = nfRadio.channel( 'locale' ).request( 'encode:string', newTotal );
+            newTotal = nfRadio.channel( 'locale' ).request( 'add:currency', newTotal );
 
-            this.totalModel.set( 'value', newTotal.toFixed( 2 ) );
+            this.totalModel.set( 'value', newTotal );
             this.totalModel.trigger( 'reRender' );
         }
     });

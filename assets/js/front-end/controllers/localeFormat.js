@@ -40,7 +40,9 @@ define( [], function() {
                 this.thosuands_sep = '&nbsp;';
             }
             
-            this.currency_symbol = formModel.get( 'currencySymbol' );
+            var node = jQuery( '<div />' );
+            this.currency_symbol = node.html( formModel.get( 'currencySymbol' ) ).text();
+            delete node;
             // If an alignment has been defined...
             if ( 'undefined' != typeof( formModel.get( 'currencyAlignment' ) ) ) {
                 this.currency_alignment = formModel.get( 'currencyAlignment' );
@@ -55,7 +57,7 @@ define( [], function() {
          * Function to encode locale settings of a calculation for display.
          * 
          * @since 3.1
-         * @param String eq The value
+         * @param String value The equation
          * @param String format The locale number format setting
          * @return String
          */
@@ -90,12 +92,13 @@ define( [], function() {
          * Function to decode locale settings of a calculation equation.
          * 
          * @since 3.1
-         * @param String eq The equation
+         * @param String value The equation
          * @param String format The locale number format setting
          * @return String
          */
-        localeDecode: function( eq ) {
-            var decoded = eq.split( this.thosuands_sep ).join( '' );
+        localeDecode: function( value ) {
+            var decoded = value.toString();
+            decoded = decoded.split( this.thosuands_sep ).join( '' );
             decoded = decoded.split( ' ' ).join( '' );
             decoded = decoded.split( this.decimal_point ).join( '.' );
             return decoded;

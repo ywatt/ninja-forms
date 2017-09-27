@@ -34,7 +34,7 @@ define( ['models/fieldErrorCollection'], function( fieldErrorCollection ) {
 			nfRadio.channel( this.get( 'type' ) ).trigger( 'init:model', this );
 			nfRadio.channel( 'fields-' + this.get( 'type' ) ).trigger( 'init:model', this );
 
-			if( 'undefined' != this.get( 'parentType' ) ){
+			if( 'undefined' != this.get( 'parentType' ) && this.get( 'type' ) != this.get( 'parentType' ) ){
 				nfRadio.channel( this.get( 'parentType' ) ).trigger( 'init:model', this );
 			}
 
