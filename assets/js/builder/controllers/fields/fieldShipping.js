@@ -1,7 +1,7 @@
 /**
- * Listens to our app channel for settings views being rendered.
+ * Listens to our fields channel for shipping fields being initialized.
  *
- * If we're rendering a product_assignment setting, add our products to the data model.
+ * If we're initializing a shipping field, add a controller to update the shipping_cost mask.
  * 
  * @package Ninja Forms builder
  * @subpackage Main App
@@ -14,6 +14,10 @@ define( [], function() {
             this.listenTo( nfRadio.channel( 'fields-shipping' ), 'init:fieldModel', this.initMasking );
 		},
         
+        /*
+         * Listens for change to the locale display settings.
+         * @param fieldModel Backbone.Model
+         */
         initMasking: function( fieldModel ) {
             fieldModel.listenTo( nfRadio.channel( 'setting' ), 'update:numberFormat', this.updateNumberFormat );
             fieldModel.listenTo( nfRadio.channel( 'setting' ), 'update:currency', this.updateCurrency );

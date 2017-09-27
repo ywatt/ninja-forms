@@ -220,22 +220,6 @@ define( [], function() {
 					} else {
 						return '';
 					}
-				},
-
-				renderCurrencyFormatting: function( number ) {
-					/*
-					 * Our number will have a . as a decimal point. We want to replace that with our locale decimal, nfi18n.decimal_point.
-					 */
-					var replacedDecimal = number.toString().replace( '.', '||' );
-					/*
-					 * Add thousands separator. Our original number var won't have thousands separators.
-					 */
-					var replacedThousands = replacedDecimal.replace( /\B(?=(\d{3})+(?!\d))/g, nfi18n.thousands_sep );
-					var formattedNumber = replacedThousands.replace( '||', nfi18n.decimal_point );
-
-					var form = nfRadio.channel( 'app' ).request( 'get:form', that.model.get( 'formID' ) );
-					var currency_symbol = form.get( 'settings' ).currency_symbol;
-					return currency_symbol + formattedNumber;
 				}
 			};
 		},

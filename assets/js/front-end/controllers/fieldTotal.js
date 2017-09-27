@@ -109,7 +109,7 @@ define([], function() {
                 // Only add shipping if there is a cost.
                 newTotal += Number( this.shippingCost );
             }
-            newTotal = newTotal.toFixed( 2 )
+            newTotal = newTotal.toFixed( 2 );
             newTotal = nfRadio.channel( 'locale' ).request( 'encode:string', newTotal );
             newTotal = nfRadio.channel( 'locale' ).request( 'add:currency', newTotal );
 

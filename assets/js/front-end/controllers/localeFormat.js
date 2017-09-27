@@ -39,9 +39,9 @@ define( [], function() {
                 // Set it to be a non-breaking space.
                 this.thosuands_sep = '&nbsp;';
             }
-            
+            var currency = ( '' != formModel.get( 'currency_symbol' ) ) ? formModel.get( 'currency_symbol' ) : formModel.get( 'currencySymbol' );
             var node = jQuery( '<div />' );
-            this.currency_symbol = node.html( formModel.get( 'currencySymbol' ) ).text();
+            this.currency_symbol = node.html( currency ).text();
             delete node;
             // If an alignment has been defined...
             if ( 'undefined' != typeof( formModel.get( 'currencyAlignment' ) ) ) {
