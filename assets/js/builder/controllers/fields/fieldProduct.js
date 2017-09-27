@@ -60,7 +60,6 @@ define( [], function() {
          * @param settingModel Backbone.Model
          */
         updateCurrencyAlignment: function( settingModel ) {
-            console.log(settingModel.changed.currencyAlignment);
             var node = jQuery( '<div />' );
             var currency = node.html( nfAdmin.currencySymbols[ settingModel.get( 'currency' ) ] ).text();
             delete node;
