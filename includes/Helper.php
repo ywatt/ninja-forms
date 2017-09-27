@@ -299,9 +299,9 @@ final class WPN_Helper
         $return = number_format( $value, $round, $dec, $sep );
         if( FALSE !== $currency ) {
             if ( 'left' == $align ) {
-                $return = $currency . ' ' . $return;
+                $return = $currency . $return;
             } else {
-                $return .= ' ' . $currency;
+                $return .= $currency;
             }
         }
         return $return;

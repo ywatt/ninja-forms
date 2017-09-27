@@ -153,15 +153,26 @@ class NF_Fields_Product extends NF_Abstracts_Input
         $currency_symbols = Ninja_Forms::config( 'CurrencySymbol' );
         $currency_symbol = html_entity_decode( $currency_symbols[ $currency ] );
 
-        // @todo Update to use the locale of the form.
-        global $wp_locale;
-        $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $price );
-        $price = floatval( $price );
-        $value = intval( $value );
+        $number_format = Ninja_Forms()->form( $form_id )->get()->get_setting( 'numberFormat' );
 
-        $total = number_format_i18n( $price * $value, 2 );
-
-        $output = $currency_symbol . $total . ' ( ' . $value . ' ) ';
+        // If the Form does not have a number_format setting (legacy support)...
+        if ( ! isset( $number_format ) || empty( $number_format ) ) {
+            // Try to use the site locale settings.
+            global $wp_locale;
+            $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $price );
+            $total = number_format_i18n( $price * $value, 2 );
+            $output = $currency_symbol . $total . ' ( ' . $value . ' ) ';
+        } else {
+            // Otherwise, use our Form locale settings.
+            $decimal_point = substr( $number_format, -1 );
+            $thousands_sep = str_replace( $decimal_point, '', $number_format );
+            $price = WPN_Helper::remove_locale_mask( $price, 2, $decimal_point, $thousands_sep, $currency_symbol );
+            $price = floatval( $price );
+            $value = intval( $value );
+            $total = $price * $value;
+            $output = WPN_Helper::apply_locale_mask( $total, 2, $decimal_point, $thousands_sep, $currency_symbol );
+            $output .= ' ( ' . $value . ' ) ';
+        }
         return $output;
     }
 
@@ -198,16 +209,31 @@ class NF_Fields_Product extends NF_Abstracts_Input
 
         $currency_symbols = Ninja_Forms::config( 'CurrencySymbol' );
         $currency_symbol = html_entity_decode( $currency_symbols[ $currency ] );
+        
+        $number_format = Ninja_Forms()->form( $form_id )->get()->get_setting( 'numberFormat' );
+        
+        // If the Form does not have a number_format setting (legacy support)...
+        if ( ! isset( $number_format ) || empty( $number_format ) ) {
+            global $wp_locale;
+            $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $price );
+            $price = floatval( $price );
+            $value = intval( $value );
 
-        // @todo Update to use the locale of the form.
-        global $wp_locale;
-        $price = str_replace( array( $wp_locale->number_format[ 'thousands_sep' ], $currency_symbol ), '', $price );
-        $price = floatval( $price );
-        $value = intval( $value );
+            $total = number_format_i18n( $price * $value, 2 );
+            $price = number_format_i18n( $price, 2 );
 
-        $total = number_format_i18n( $price * $value, 2 );
-        $price = number_format_i18n( $price, 2 );
-
-        return "Price: <strong>" . $currency_symbol . $price . "</strong> X Quantity: <input name='fields[$id]' type='number' value='" . $value . "'> = " . $currency_symbol . $total;
+            $output = "Price: <strong>" . $currency_symbol . $price . "</strong> X Quantity: <input name='fields[$id]' type='number' value='" . $value . "'> = " . $currency_symbol . $total;
+        } else {
+            // Otherwise, use our Form locale settings.
+            $product_price = $price;
+            $decimal_point = substr( $number_format, -1 );
+            $thousands_sep = str_replace( $decimal_point, '', $number_format );
+            $price = WPN_Helper::remove_locale_mask( $price, 2, $decimal_point, $thousands_sep, $currency_symbol );
+            $price = floatval( $price );
+            $value = intval( $value );
+            $total = $price * $value;
+            $output = "Price: <strong>" . $product_price . "</strong> X Quantity: <input name='fields[$id]' type='number' value='" . $value . "'> = " . WPN_Helper::apply_locale_mask( $total, 2, $decimal_point, $thousands_sep, $currency_symbol );
+        }
+        return $output;
     }
 }
