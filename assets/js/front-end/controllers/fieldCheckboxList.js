@@ -107,10 +107,11 @@ define([], function() {
             if ( 0 != options.length ) {
                 _.each( fieldModel.get( 'value' ), function( val ) {
                     var tmp_opt = _.find( options, function( opt ) { return opt.value == val } );
-                    calc_value = Number( calc_value ) + Number( tmp_opt.calc );
+                    var tmp_value = nfRadio.channel( 'locale' ).request( 'decode:string', tmp_opt.calc );
+                    calc_value = Number( calc_value ) + Number( tmp_value );
                 } );
             }
-            return calc_value;
+            return nfRadio.channel( 'locale' ).request( 'encode:string', calc_value );
         },
 
         beforeUpdateField: function( el, model ) {

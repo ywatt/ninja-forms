@@ -61,7 +61,7 @@ define( [], function() {
          */
         localeEncode: function( value ) {
             // Split our value on the decimal point, if one exists.
-            value = value.split( '.' );
+            value = value.toString().split( '.' );
             var encoded = '';
             // If we have enough numbers to need a thousand separator...
             if ( 3 < value[0].length ) {
