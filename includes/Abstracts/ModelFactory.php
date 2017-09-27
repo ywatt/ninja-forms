@@ -127,6 +127,14 @@ class NF_Abstracts_ModelFactory
      */
     public function import_form( $import, $id = FALSE, $is_conversion = FALSE )
     {
+        
+        /*
+         * Remove any unwated (corrupted?) characters from either side of our object.
+         */
+        $l_trim = strpos( $import, '{' );
+        $r_trim = strrpos( $import, '}' ) - $l_trim + 1;
+        $import = substr( $import, $l_trim, $r_trim );
+        
         if( ! is_array( $import ) ){
 
             $data = WPN_Helper::utf8_decode( json_decode( html_entity_decode( $import ), true ) );
