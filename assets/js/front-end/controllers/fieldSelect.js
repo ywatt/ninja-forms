@@ -114,8 +114,10 @@ define([], function() {
 					 */
 					_.each( fieldModel.get( 'value' ), function( val ) {
 						var tmp_opt = _.find( options, function( opt ) { return opt.value == val } );
-						calc_value += tmp_opt.calc;
+                        var tmp_value = nfRadio.channel( 'locale' ).request( 'decode:string', tmp_opt.calc );
+                        calc_value = Number( calc_value ) + Number( tmp_value );
 					} );
+                    calc_value = nfRadio.channel( 'locale' ).request( 'encode:string', calc_value );
 				} else {
 					/*
 					 * We are using a single select, so our selected option is in the 'value' attribute.
