@@ -26,7 +26,10 @@ final class NF_Display_Preview
 
     public function pre_get_posts( $query )
     {
-        $query->set( 'posts_per_page', 1 );
+    	// This if statement was added to allow total # of submissions to be shown correctly on form preview pages.
+		if ( array_key_exists( 'post_type', $query->query ) && 'nf_sub' !== $query->query[ 'post_type' ] )  {
+			$query->set( 'posts_per_page', 1 );
+		}
     }
 
     /**
