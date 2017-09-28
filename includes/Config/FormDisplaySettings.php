@@ -236,20 +236,6 @@ return apply_filters( 'ninja_forms_form_display_settings', array(
         'width' => 'full',
         'group' => 'advanced',
         'settings' => array(
-//            array(
-//                'name' => 'thousandSep',
-//                'type' => 'textbox',
-//                'label' => __( 'Thousand Separator', 'ninja-forms' ),
-//                'width' => 'one-half',
-//                'value' => $wp_locale->number_format[ 'thousands_sep' ]
-//            ),
-//            array(
-//                'name' => 'decimalPoint',
-//                'type' => 'textbox',
-//                'label' => __( 'Decimal Point', 'ninja-forms' ),
-//                'width' => 'one-half',
-//                'value' => $wp_locale->number_format[ 'decimal_point' ]
-//            ),
             array(
                 'name' => 'numberFormat',
                 'type'  => 'select',

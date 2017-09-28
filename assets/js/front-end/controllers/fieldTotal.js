@@ -4,6 +4,11 @@ define([], function() {
         totalModel: {},
 
         productTotals: {},
+        
+        /* 
+         * Make sure this is a predefined string to avoid process breakdown later.
+         */
+        shippingCost: '0',
 
         initialize: function() {
             this.listenTo( nfRadio.channel( 'total' ), 'init:model', this.register );
