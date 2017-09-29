@@ -73,7 +73,7 @@ class NF_Fields_Product extends NF_Abstracts_Input
             //TODO: Handle multiple modifiers.
         }
 
-        $data[ 'product_totals' ][] = number_format( $total, 2 );
+        $data[ 'product_totals' ][] = number_format( $total, 2, '.', '' );
         $data[ 'extra' ][ 'product_fields' ][ $product[ 'id' ] ][ 'product_price' ] = $product[ 'settings' ][ 'product_price' ];
 
         return $data;

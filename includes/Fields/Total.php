@@ -47,6 +47,7 @@ class NF_Fields_Total extends NF_Abstracts_Input
             }
         }
 
+        // TODO: Are we using this anywhere?
         $data[ 'new_total' ] = number_format( $subtotal, 2 );
 
         return $data;
