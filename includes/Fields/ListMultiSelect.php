@@ -51,6 +51,8 @@ class NF_Fields_ListMultiselect extends NF_Abstracts_List
                 if ( ! empty( $value ) ) $value .= '+';
                 $value .= $option[ 'calc' ];
             }
+            // Ensure that these values get added together first.
+            if ( ! empty( $value ) ) $value = '(' . $value . ')';
         }
         return $value;
     }
