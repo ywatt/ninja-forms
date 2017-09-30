@@ -47,11 +47,12 @@ class NF_Fields_ListCheckbox extends NF_Abstracts_List
     public function get_calc_value( $value, $field )
     {
         $selected = explode( ',', $value );
-        $value = 0;
+        $value = '';
         if( isset( $field[ 'options' ] ) ) {
             foreach ($field['options'] as $option ) {
                 if( ! isset( $option[ 'value' ] ) || ! in_array( $option[ 'value' ], $selected )  || ! isset( $option[ 'calc' ] ) ) continue;
-                $value +=  $option[ 'calc' ];
+                if ( ! empty( $value ) ) $value .= '+';
+                $value .= $option[ 'calc' ];
             }
         }
         return $value;

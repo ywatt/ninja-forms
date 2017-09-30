@@ -86,6 +86,11 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
                 break;
         }
 
+        /*
+         * TODO: This only accepts 3 arguments, but we're providing 4.
+         * $payment_total doesn't appear to contain anything.
+         * Is it being used?
+         */
         return $payment_gateway_class->process( $action_settings, $form_id, $data, $payment_total );
     }
 
