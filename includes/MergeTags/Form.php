@@ -59,11 +59,14 @@ final class NF_MergeTags_Form extends NF_Abstracts_MergeTags
      */
     public function get_sub_count()
     {
-        // Pass in the form ID to get the submissions attached to the form.
-        $subs = Ninja_Forms()->form( $this->form_id )->get_subs();
+		global $wpdb;
 
-        // Count the subs, then return.
-        $subs = count( $subs );
-        return $subs;
+		// Query the database for the total amount of submissions for a form.
+    	$query = "SELECT count(wpp.id) AS sub_count from wp_posts wpp JOIN wp_postmeta wpm ON wpp.id = wpm.post_id
+ 			WHERE wpm.meta_key = '_form_id' AND wpm.meta_value = %s";
+
+    	$count = $wpdb->get_results( $wpdb->prepare( $query, $this->form_id ) );
+
+        return $count[ 0 ]->sub_count;
     }
 } // END CLASS NF_MergeTags_Form
