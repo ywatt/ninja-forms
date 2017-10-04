@@ -372,6 +372,20 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
             if ( isset ( $_GET[ 'nf-upgrade' ] ) && 'complete' == $_GET[ 'nf-upgrade' ] ) {
                 Ninja_Forms()->dispatcher()->send( 'upgrade' );
             }
+
+            add_filter( 'ninja_forms_dashboard_menu_items', array( $this, 'maybe_hide_dashboard_items' ) );
+        }
+        
+        public function maybe_hide_dashboard_items( $items )
+        {
+            $disable_marketing = false;
+            if ( apply_filters( 'ninja_forms_disable_marketing', $disable_marketing ) ) {
+                unset(
+                    $items[ 'apps' ],
+                    $items[ 'memberships' ]
+                );
+            }
+            return $items;
         }
 
         public function scrub_available_actions( $actions )
@@ -536,7 +550,7 @@ if( get_option( 'ninja_forms_load_deprecated', FALSE ) && ! ( isset( $_POST[ 'nf
 	     */
         public function get_setting( $key = '', $default = false )
         {
-            if( empty( $key ) || ! isset( $this->settings[ $key ] ) ) return $default;
+            if( empty( $key ) || ! isset( $this->settings[ $key ] ) || empty( $this->settings[ $key ] ) ) return $default;
 
             return $this->settings[ $key ];
         }

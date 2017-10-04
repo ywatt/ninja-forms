@@ -19,6 +19,7 @@ define([], function() {
                 format: dateFormat,
                 outputFormat: dateFormat,
                 classes: jQuery( el ).attr( "class" ),
+                placeholder: view.model.get( 'placeholder' ),
                 pikadayOptions: {
                     yearRange:  this.getYearRange( view.model ),
                     minDate: this.getMinDate( view.model ),
