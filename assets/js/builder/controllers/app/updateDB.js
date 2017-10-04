@@ -222,10 +222,14 @@ define( [], function() {
 				}
 				
 			} ).fail( function( xhr, status, error ) {
-                console.log( xhr.status );
-                console.log( error );
+				console.log( action );
+				// For previews, only log to the console.
+                if( 'preview' == action ) {
+                    console.log( error );
+                    return;
+                }
                 // @todo Convert alert to jBox Modal.
-                alert( xhr.status + ' ' + error + '\r\n' + 'An error on the server caused your form not to publish.\r\nPlease contact Ninja Forms Support with your PHP Error Logs.\r\nhttps://ninjaforms.com/contact' );
+				alert(xhr.status + ' ' + error + '\r\n' + 'An error on the server caused your form not to publish.\r\nPlease contact Ninja Forms Support with your PHP Error Logs.\r\nhttps://ninjaforms.com/contact');
 			});
 		},
 
