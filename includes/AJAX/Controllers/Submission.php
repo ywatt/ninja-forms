@@ -355,6 +355,12 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
 
             // If an action has already run (ie resume submission), do not re-process.
             if( in_array( $action[ 'id' ], $this->_data[ 'processed_actions' ] ) ) continue;
+            
+            //TODO: Catch calcs here and reformat to match other values.
+//            if($action['settings']['type'] == 'collectpayment') {
+//                var_dump($action['settings']);
+//                die();
+//            }
 
             $action[ 'settings' ] = apply_filters( 'ninja_forms_run_action_settings', $action[ 'settings' ], $this->_form_id, $action[ 'id' ], $this->_form_data['settings'] );
             if( $this->is_preview() ){
