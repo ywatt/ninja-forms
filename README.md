@@ -52,7 +52,7 @@ If you're a developer and would like to talk about creating some premium extensi
 ## Contributing
 
 If you're a developer and want to help make Ninja Forms better, we would love to work together! We know contributing to a project can be intimidating; sometimes it’s hard to tell how to get involved. We believe Ninja Forms is a great community to get involved in. In our experience, everyone involved with the project has been amazing and helpful. :)
-Here are some [friendly guidelines](https://github.com/wpninjas/ninja-forms/blob/master/CONTRIBUTING.md).  [You can also join our development community here.](http://developer.ninjaforms.com/)
+Here are some [friendly guidelines](https://github.com/wpninjas/ninja-forms/blob/master/.github/CONTRIBUTING.md).  [You can also join our development community here.](http://developer.ninjaforms.com/)
 
 __Please Note:__ GitHub is for bug reports and contributions only - if you have a support question or a request for a customization, please contact [Ninja Forms Support](http://ninjaforms.com/contact/) instead.
 
