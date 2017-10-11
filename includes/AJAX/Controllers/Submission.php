@@ -205,7 +205,7 @@ class NF_AJAX_Controllers_Submission extends NF_Abstracts_Controller
              */
             
             global $wpdb;
-            $sql = $wpdb->prepare( "SELECT COUNT(meta_id) FROM `" . $wpdb->prefix . "postmeta` WHERE meta_key = '_field_%d' AND meta_value = '%s'", $unique_field_id, $unique_field_value );
+            $sql = $wpdb->prepare( "SELECT COUNT(m.meta_id) FROM `" . $wpdb->prefix . "postmeta` AS m LEFT JOIN `" . $wpdb->prefix . "posts` AS p ON p.id = m.post_id WHERE m.meta_key = '_field_%d' AND m.meta_value = '%s' AND p.post_status = 'publish'", $unique_field_id, $unique_field_value );
             $result = $wpdb->get_results( $sql, 'ARRAY_N' );
             if ( intval( $result[ 0 ][ 0 ] ) > 0 ) {
                 $this->_errors['fields'][ $unique_field_id ] = array( 'slug' => 'unique_field', 'message' => $unique_field_error );
