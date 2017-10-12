@@ -183,7 +183,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Merge Tag insertion should maintain the proper cursor position in all cases.
 * Form duplication should happen much more quickly.
 * Unknown field types will be removed upon upgrade to prevent forms from breaking in 3.0.
-* Fixed serveral issues with converting merge tags from version 2.9.x to 3.0.
+* Fixed several issues with converting merge tags from version 2.9.x to 3.0.
 
 *Changes:*
 
@@ -203,7 +203,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Merge Tag insertion should maintain the proper cursor position in all cases.
 * Form duplication should happen much more quickly.
 * Unknown field types will be removed upon upgrade to prevent forms from breaking in 3.0.
-* Fixed serveral issues with converting merge tags from version 2.9.x to 3.0.
+* Fixed several issues with converting merge tags from version 2.9.x to 3.0.
 
 *Changes:*
 
