@@ -55,7 +55,6 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
 
     public function process( $action_settings, $form_id, $data )
     {
-        
         $payment_gateway = $action_settings[ 'payment_gateways' ];
 
         $payment_gateway_class = $this->payment_gateways[ $payment_gateway ];
@@ -72,7 +71,7 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
         $total_type = isset( $action_settings[ 'payment_total_type' ] ) ? $action_settings[ 'payment_total_type' ] : 'payment_total_custom';
 
         switch ( $total_type ) {
-            case 'calculation':
+            case 'calc':
                 $payment_total = $action_settings[ 'payment_total_calc' ];
                 break;
             case 'field':
@@ -84,6 +83,16 @@ final class NF_Actions_CollectPayment extends NF_Abstracts_Action
             default:
                 $payment_total = $action_settings[ 'payment_total_custom' ];
                 break;
+        }
+        
+        /*
+         * If this isn't a calculation...
+         * AND our Helper method exists...
+         * Remove any locale masking we've applied to the total.
+         */
+        if ( 'calc' != $total_type && method_exists( 'WPN_Helper', 'remove_locale_mask' ) ) {
+            $new_total = WPN_Helper::remove_locale_mask( $action_settings[ 'payment_total' ], 2, $action_settings[ 'decimal_point' ], $action_settings[ 'thousands_sep' ], $action_settings[ 'currency_symbol' ] );
+            $action_settings[ 'payment_total' ] = $new_total;
         }
 
         /*
