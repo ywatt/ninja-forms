@@ -51,6 +51,42 @@ define( [], function() {
             else {
                 this.currency_alignment = 'left';
             }
+			// Respond to requests for the decimal_point.
+			nfRadio.channel( 'locale' ).reply( 'get:decimal', this.getDecimal, this );
+			// Respond to requests for the thousands_sep.
+			nfRadio.channel( 'locale' ).reply( 'get:thousands', this.getThousands, this );
+			// Respond to requests for the thousands_sep.
+			nfRadio.channel( 'locale' ).reply( 'get:currency', this.getCurrency, this );
+        },
+        
+        /**
+         * Function to pass on our decimal point via radio calls.
+         * 
+         * @since 3.2
+         * @return String
+         */
+        getDecimal: function () {
+            return this.decimal_point;
+        },
+        
+        /**
+         * Function to pass on our thousand separator via radio calls.
+         * 
+         * @since 3.2
+         * @return String
+         */
+        getThousands: function () {
+            return this.thosuands_sep;
+        },
+        
+        /**
+         * Function to pass on our thousand separator via radio calls.
+         * 
+         * @since 3.2
+         * @return String
+         */
+        getCurrency: function () {
+            return this.currency_symbol;
         },
         
         /**

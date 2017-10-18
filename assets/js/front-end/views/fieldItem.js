@@ -60,16 +60,16 @@ define( [], function() {
 				if ( 'currency' == mask ) {
 					var form = nfRadio.channel( 'app' ).request( 'get:form', this.model.get( 'formID' ) );
 					
-					var thousands_sep = form.get( 'thousands_sep' );
+					var thousands_sep = nfRadio.channel( 'locale' ).request( 'get:thousands' );
+                    var decimal_point = nfRadio.channel( 'locale' ).request( 'get:decimal' );
+                    var currencySymbol = nfRadio.channel( 'locale' ).request( 'get:currency' );
+                    
 					/*
 					 * TODO: if we have a &nbsp; , replace it with a string with a space.
 					 */
 					if ( '&nbsp;' == thousands_sep ) {
 						thousands_sep = ' ';
 					}
-					var currencySymbol = jQuery( '<div/>' ).html( form.get( 'currencySymbol' ) ).text();
-					thousands_sep = jQuery( '<div/>' ).html( thousands_sep ).text();
-					var decimal_point = jQuery( '<div/>' ).html( form.get( 'decimal_point' ) ).text();
 					
 					/*
 					 * TODO: Currently, these options use the plugin-wide defaults for locale.
