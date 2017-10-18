@@ -18,8 +18,10 @@ final class NF_MergeTags_Form extends NF_Abstracts_MergeTags
 
         $this->merge_tags = Ninja_Forms()->config( 'MergeTagsForm' );
 
+		add_action( 'ninja_forms_save_sub', array( $this, 'setSubSeq' ) );
+
         // Gets the form ID.
-        add_action( 'nf_get_form_id', array( $this, 'set_form_id' ), 99999, 1 );
+        add_action( 'nf_get_form_id', array( $this, 'set_form_id' ), 15, 1 );
     }
 
     /**
@@ -62,8 +64,10 @@ final class NF_MergeTags_Form extends NF_Abstracts_MergeTags
 		global $wpdb;
 
 		// Query the database for the total amount of submissions for a form.
-    	$query = "SELECT count(wpp.id) AS sub_count from wp_posts wpp JOIN wp_postmeta wpm ON wpp.id = wpm.post_id
- 			WHERE wpm.meta_key = '_form_id' AND wpm.meta_value = %s";
+    	$query = "SELECT COUNT(wpp.id) AS sub_count FROM `" .
+			$wpdb->prefix . "posts` wpp JOIN `" . $wpdb->prefix . "postmeta` 
+			wpm ON	wpp.id = wpm.post_id
+			WHERE wpm.meta_key = '_form_id' AND wpm.meta_value = %s";
 
     	$count = $wpdb->get_results( $wpdb->prepare( $query, $this->form_id ) );
 
