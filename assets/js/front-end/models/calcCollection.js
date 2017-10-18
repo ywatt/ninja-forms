@@ -7,7 +7,7 @@ define( ['models/calcModel'], function( CalcModel ) {
 			this.options = options;
             _.each( models, function( model ) {
             	if( 'undefined' == typeof model.dec ) return;
-                if ( '' === model.dec.trim() ) model.dec = 2;
+                if ( '' === model.dec.toString().trim() ) model.dec = 2;
                 model.dec = parseInt( model.dec );
             } );
 			/*
