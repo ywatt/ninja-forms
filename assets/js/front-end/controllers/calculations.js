@@ -8,6 +8,9 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			this.displayFields = {};
 			// When our form initialises, check to see if there are any calculations that need to be tracked.
 			this.listenTo( nfRadio.channel( 'form' ), 'loaded', this.registerCalcs );
+            
+            // When our collection gets reset, reset calculation tracking as well.
+            this.listenTo( nfRadio.channel( 'fields' ), 'reset:collection', this.resetCalcs );
 
 			// When a calc model is initialised, run a setup function.
 			// this.listenTo( nfRadio.channel( 'calc' ), 'init:model', this.setupCalc );
@@ -33,6 +36,19 @@ define(['models/calcCollection'], function( CalcCollection ) {
 			// Set an init variable so that we only call reRender on the display field on change, not on init.
 			this.init = {};
 		},
+        
+        /**
+         * Passthrough function to reset tracking of calculations when the fieldCollection is reset.
+         * 
+         * @since 3.2
+         * @param backbone.collection fieldCollection
+         * @return void
+         */
+        resetCalcs: function( fieldCollection ) {
+            if( 'undefined' != typeof( fieldCollection.options.formModel ) ) {
+                this.registerCalcs( fieldCollection.options.formModel );  
+            }
+        },
 
 		/**
 		 * When our form loads, create a collection out of any calculations.
