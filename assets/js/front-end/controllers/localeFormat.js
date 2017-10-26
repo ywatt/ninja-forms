@@ -149,6 +149,7 @@ define( [], function() {
         },
         
         removeCurrency: function( value ) {
+            value = value.toString();
             value = value.replace( this.currency_symbol, '' );
             return value.trim();
         },
