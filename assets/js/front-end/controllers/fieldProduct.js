@@ -9,6 +9,14 @@ define([], function() {
             model.set( 'renderProductQuantity', this.renderProductQuantity );
             model.set( 'renderProduct', this.renderProduct );
             model.set( 'renderOptions', this.renderOptions );
+            // The following lines are to overwrite legacy mask settings.
+            var price = model.get( 'product_price' ).replace( /[^0-9.,]/g, '' );
+            model.set( 'product_price', price );
+            model.listenTo( nfRadio.channel( 'form' ), 'loaded', this.addCurrency );
+        },
+        
+        addCurrency: function() {
+            this.set( 'product_price', nfRadio.channel( 'locale' ).request( 'add:currency', this.get( 'product_price' ) ) );
         },
 
         renderProduct: function(){
