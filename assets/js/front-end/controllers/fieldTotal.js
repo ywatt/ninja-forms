@@ -26,7 +26,17 @@ define([], function() {
         },
 
         registerShipping: function( shippingModel ){
+            // TODO: Move this legacy correction to its own controller during the product rework.
+            shippingModel.listenTo( nfRadio.channel( 'form' ), 'loaded', this.removeLegacyMask );
+            
             this.shippingCost = shippingModel.get( 'shipping_cost' );
+        },
+        
+        removeLegacyMask: function() {
+            var price = this.get( 'shipping_cost' );
+            price = nfRadio.channel( 'locale' ).request( 'remove:currency', price );
+            price = nfRadio.channel( 'locale' ).request( 'add:currency', price );
+            this.set( 'shipping_cost', price );  
         },
 
         onFormLoaded: function( formModel ){
