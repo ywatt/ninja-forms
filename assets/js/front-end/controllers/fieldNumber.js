@@ -36,8 +36,8 @@ define([], function() {
                 nfRadio.channel( 'fields' ).request( 'remove:error', model.get( 'id' ), 'number-max' );
             }
 
-            var testValue = parseInt( value * 1000000000 );
-            var testStep = parseInt( step * 1000000000  );
+            var testValue = Math.round( parseFloat( value ) * 1000000000 );
+            var testStep = Math.round( parseFloat( step ) * 1000000000  );
 
             if( value && 0 !== testValue % testStep ){
                 var fieldModel = nfRadio.channel( 'fields' ).request( 'get:field', model.get( 'id' ) );
