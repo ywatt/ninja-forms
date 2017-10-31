@@ -26,9 +26,6 @@ Here are just a few of the things you will find in Ninja Forms:
 * Form submission via AJAX, allowing a seamless user experience without page refreshes
 * Please note that if you are using a version of PHP lower than 5.3, you may experience some problems using AJAX Submissions. These can be minimized by using simple success/error messages without any quotes or special characters.
 
-## Demo Site
-Please feel free to visit our [demo site](http://demo.ninjaforms.com/) where you can test the features of Ninja Forms and all of our extensions.
-
 ## Extensions
 
 [We have more integrations](https://ninjaforms.com/extensions/) than any other WordPress form builder, with more added regularly!
