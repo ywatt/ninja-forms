@@ -305,9 +305,13 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
                 $settings[ 'id' ] =  $field_id;
 
 
-//                foreach ($settings as $key => $setting) {
-//                    if (is_numeric($setting)) $settings[$key] = floatval($setting);
-//                }
+                foreach ($settings as $key => $setting) {
+                    if ( '' === $setting || null === $setting ) {
+                        unset( $settings[ $key ] );
+                        continue;
+                    }
+//                if (is_numeric($setting)) $settings[$key] = floatval($setting);
+                }
 
                 $fields_settings[] = $settings;
             }
@@ -625,7 +629,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         foreach( $settings as $setting ){
 
             $name = ( isset( $setting[ 'name' ] ) ) ? $setting[ 'name' ] : '';
-            $default = ( isset( $setting[ 'value' ] ) ) ? $setting[ 'value' ] : '';
+            $default = ( isset( $setting[ 'value' ] ) ) ? $setting[ 'value' ] : null;
             $setting_defaults[ $name ] = $default;
         }
 

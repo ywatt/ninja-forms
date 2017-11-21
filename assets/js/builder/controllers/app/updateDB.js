@@ -128,8 +128,11 @@ define( [], function() {
 				// Loop through all the attributes of our fields
 				for (var prop in field) {
 				    if ( field.hasOwnProperty( prop ) ) {
-				    	// Set our settings.prop value.
-				        settings[ prop ] = field[ prop ];
+				    	// If our field property isn't null, then...
+						if ( null !== field[ prop ] ) {
+                            // Set our settings.prop value.
+                            settings[prop] = field[prop];
+                        }
 				        // Delete the property from the field.
 				        delete field[ prop ];
 				    }
