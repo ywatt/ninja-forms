@@ -180,8 +180,11 @@ define( [], function() {
 				// Loop through all the attributes of our actions
 				for (var prop in action) {
 				    if ( action.hasOwnProperty( prop ) ) {
-				    	// Set our settings.prop value.
-				        settings[ prop ] = action[ prop ];
+				    	//Removing null values
+					    if( null !== action[ prop ] ) {
+						    // Set our settings.prop value.
+						    settings[ prop ] = action[ prop ];
+					    }
 				        // Delete the property from the action.
 				        delete action[ prop ];
 				    }
