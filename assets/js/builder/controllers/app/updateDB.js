@@ -194,20 +194,11 @@ define( [], function() {
 				action.id = id;
 			} );
 
-			_.each( data, function( form ) {
-				if( 'Form Setting' == form.objectType ){
-                    var formSettings = {};
-					for (var settings in form ) {
-						if( null !== form[ settings ] ) {
-							formSettings[ settings ] = form[ settings ];
-						} else {
-                            delete form[ settings ];
-                        }
-					}
-					form = formSettings;
-                }
-                return form;
-            })
+			for ( var setting in data.settings ) {
+				if ( null === data.settings[ setting ] ) {
+					delete data.settings[ setting ];
+				}
+			}
 
 			// Set our deleted_actions object so that we can know which actions were removed.
 			data.deleted_actions = removedIDs;
