@@ -129,13 +129,14 @@ define( [], function() {
 				for (var prop in field) {
 				    if ( field.hasOwnProperty( prop ) ) {
 				    	// If our field property isn't null, then...
-						if ( null !== field[ prop ] ) {
+                        if ( null === field[ prop ] || '' === field[ prop ] ) {
+                            // Delete the property from the field.
+                            delete field[ prop ];
+                        } else {
                             // Set our settings.prop value.
                             settings[prop] = field[prop];
                         }
-				        // Delete the property from the field.
-				        delete field[ prop ];
-				    }
+                    }
 				}
 
 				for( var setting in settings ){
@@ -193,6 +194,21 @@ define( [], function() {
 				action.settings = settings;
 				action.id = id;
 			} );
+
+			_.each( data, function( form ) {
+				if( 'Form Setting' == form.objectType ){
+                    var formSettings = {};
+					for (var settings in form ) {
+						if( null !== form[ settings ] ) {
+							formSettings[ settings ] = form[ settings ];
+						} else {
+                            delete form[ settings ];
+                        }
+					}
+					form = formSettings;
+                }
+                return form;
+            })
 
 			// Set our deleted_actions object so that we can know which actions were removed.
 			data.deleted_actions = removedIDs;
