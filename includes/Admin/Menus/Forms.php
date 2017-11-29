@@ -362,7 +362,7 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
     private function null_data_check( $settings )
     {
         foreach ($settings as $key => $setting) {
-            if ( '' === $setting || null === $setting ) {
+            if ( null === $setting ) {
                 unset( $settings[ $key ] );
                 continue;
             }
