@@ -359,10 +359,20 @@ final class NF_Admin_Menus_Forms extends NF_Abstracts_Menu
         <?php
     }
 
+    /**
+     * Null Data Check
+     * Accepts array of settings and removes null data the array.
+     *
+     * @param $settings - a key/value pair of settings.
+     * @return array
+     */
     private function null_data_check( $settings )
     {
+        // Loop over the settings we receive.
         foreach ($settings as $key => $setting) {
+            // Check for null values in the settings array.
             if ( null === $setting ) {
+                // Remove null settings from the array.
                 unset( $settings[ $key ] );
                 continue;
             }
