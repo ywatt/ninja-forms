@@ -377,7 +377,12 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
      */
     private function custom_columns_sub_date( $sub )
     {
-        return $sub->get_sub_date( 'm/d/Y h:i A' );
+        // Grab the date and time format options
+        $date_format = get_option( 'date_format' );
+        $time_format = get_option( 'time_format' );
+
+        // Get the sub dates using the date and time formats.
+        return $sub->get_sub_date( $date_format . ' ' . $time_format );
     }
 
     /**
