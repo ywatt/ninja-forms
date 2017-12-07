@@ -1,4 +1,5 @@
-//window.onerror = function(message, url, lineNumber) {  
+// TODO: Fix error collecting.
+//window.onerror = function(message, url, lineNumber) {
 //  var data;
 //
 //  data = {
