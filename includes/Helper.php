@@ -42,7 +42,7 @@ final class WPN_Helper
     public static function utf8_decode( $input ){
         if ( is_array( $input ) )    {
             return array_map( array( 'self', 'utf8_decode' ), $input );
-        } elseif ( function_exists( 'utf8_decode' ) ){
+        } elseif ( function_exists( 'utf8_decode' ) ) {
             return utf8_decode( $input );
         } else {
             return $input;
