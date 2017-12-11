@@ -64,8 +64,9 @@ final class NF_MergeTags_Form extends NF_Abstracts_MergeTags
 		global $wpdb;
 
 		// Query the database for the total amount of submissions for a form.
-    	$query = "SELECT COUNT(wpp.id) AS sub_count FROM `" .
-			$wpdb->prefix . "posts` wpp JOIN `" . $wpdb->prefix . "postmeta` 
+    	$query = "SELECT DISTINCT( COUNT( wpp.id ) ) AS sub_count FROM `" .
+			$wpdb->prefix . "posts` wpp JOIN 
+`" . $wpdb->prefix . "postmeta` 
 			wpm ON	wpp.id = wpm.post_id
 			WHERE wpm.meta_key = '_form_id' AND wpm.meta_value = %s";
 
