@@ -16,13 +16,22 @@
                         </select>
                     </td>
                 </tr>
-                <tr id="row_nf_export_form_submit">
+                <tr id="row_nf_export_form_encoding">
                     <th scope="row">
-                        <label for="nf_export_form_submit"><?php _e( 'Export Form', 'ninja-forms' ); ?></label>
+                        <label for="nf_export_form_turn_off_encoding"><?php _e( 'Turn Off UTF-8 Encoding', 'ninja-forms' ); ?></label>
                     </th>
                     <td>
-                        <input type="submit" id="nf_export_form_submit" class="button-secondary" value="<?php echo __( 'Export Form', 'ninja-forms' ) ;?>">
+                        <input type="checkbox" name="nf_export_form_turn_off_encoding"
+                               id="nf_export_form_turn_off_encoding">
                     </td>
+                </tr>
+                <tr id="row_nf_export_form_submit">
+	                <th scope="row">
+		                <label for="nf_export_form_submit"><?php _e( 'Export Form', 'ninja-forms' ); ?></label>
+	                </th>
+	                <td>
+		                <input type="submit" id="nf_export_form_submit" class="button-secondary" value="<?php echo __( 'Export Form', 'ninja-forms' ) ;?>">
+	                </td>
                 </tr>
             </tbody>
         </table>
