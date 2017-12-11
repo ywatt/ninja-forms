@@ -21,7 +21,6 @@ define([], function() {
             if ( 0 != model.get( 'options' ).length ) {
                 var selected = _.filter( model.get( 'options' ), function( opt ) { return 1 == opt.selected } );
                 selected = _.map( selected, function( opt ) { return opt.value } );
-                // model.set( 'value', selected );
             }
 
             /*
