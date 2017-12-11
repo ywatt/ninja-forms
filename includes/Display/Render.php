@@ -617,7 +617,7 @@ final class NF_Display_Render
     {
         // Build File Path Hierarchy
         $file_paths = apply_filters( 'ninja_forms_field_template_file_paths', array(
-            get_template_directory() . '/ninja-forms/templates/',
+            get_stylesheet_directory() . '/ninja-forms/templates/',
         ));
 
         $file_paths[] = Ninja_Forms::$dir . 'includes/Templates/';
