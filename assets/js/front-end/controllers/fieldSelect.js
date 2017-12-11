@@ -18,6 +18,9 @@ define([], function() {
 			 * This is the list equivalent of a 'default value'.
 			 */ 
 			if ( 0 != model.get( 'options' ).length ) {
+				//Check to see if there is a value set for the field
+				var savedVal = model.get( 'value' );
+
 				/*
 				 * Check to see if this is a multi-select list.
 				 */
@@ -40,14 +43,22 @@ define([], function() {
 						selected = _.first( model.get( 'options' ) );
 					}
 
-					if ( 'undefined' != typeof selected && 'undefined' != typeof selected.value ) {
+					if ( 'undefined' != typeof selected
+						&& 'undefined' != typeof selected.value ) {
 						var value = selected.value;
 					} else if ( 'undefined' != typeof selected ) {
 						var value = selected.label;
 					}	
 				}
 
-				if ( 'undefined' != typeof selected ) {
+				/*
+	            * This part is re-worked to take into account custom user-meta
+	            * values for fields.
+	             */
+				if( 'undefined' !== savedVal && '' !== savedVal
+					&& Array.isArray( savedVal ) ) {
+					model.set( 'value', savedVal );
+				} else if ( 'undefined' != typeof selected ) {
 					model.set( 'value', value );
 				}
 			}
@@ -55,14 +66,23 @@ define([], function() {
 
 		renderOptions: function() {
 			var html = '';
-			_.each( this.options, function( option ) {
-				
 
-				if ( ( 1 == option.selected && this.clean ) ) {
-					var selected = true;
-				} else if ( _.isArray( this.value ) && -1 != _.indexOf( this.value, option.value ) ) {
-					var selected = true;
+			_.each( this.options, function( option ) {
+				/*
+				* This part has been re-worked to account for values passed in
+				* via custom user-meta ( a la User Mgmt add-on)
+				 */
+				if ( _.isArray( this.value ) ) {
+					if( 'listmultiselect' === this.type &&
+						-1 != _.indexOf( this.value[ 0 ].split( ',' ), option.value ) ) {
+						var selected = true;
+					} else if( -1 != _.indexOf( this.value, option.value ) ) {
+						var selected = true;
+					}
 				} else if ( ! _.isArray( this.value ) && option.value == this.value ) {
+					var selected = true;
+				} else if ( ( 1 == option.selected && this.clean )
+					&& 'undefined' === typeof this.value ) {
 					var selected = true;
 				} else {
 					var selected = false;

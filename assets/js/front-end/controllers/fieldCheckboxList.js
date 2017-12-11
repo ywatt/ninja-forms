@@ -21,21 +21,41 @@ define([], function() {
             if ( 0 != model.get( 'options' ).length ) {
                 var selected = _.filter( model.get( 'options' ), function( opt ) { return 1 == opt.selected } );
                 selected = _.map( selected, function( opt ) { return opt.value } );
-                model.set( 'value', selected );
+                // model.set( 'value', selected );
             }
 
+            /*
+            * This part is re-worked to take into account custom user-meta
+            * values for fields.
+             */
+	        var savedVal = model.get( 'value' );
+	        if( 'undefined' !== typeof savedVal && Array.isArray(savedVal)) {
+		        model.set( 'value', savedVal );
+	        } else if ( 'undefined' != typeof selected ) {
+		        model.set( 'value', selected );
+	        }
         },
 
         renderOptions: function() {
             var html = '';
 
-            if ( '' == this.value ) {
+            if ( '' == this.value || ( Array.isArray(this.value) && 0 < this.value.length )
+                || 0 < this.value.length ) {
                 var valueFound = true;
             } else {
                 var valueFound = false;
             }
 
             _.each( this.options, function( option, index ) {
+                if(Array.isArray( this.value ) ) {
+                	if( Array.isArray( this.value[ 0 ] ) && -1 !== _.indexOf(this.value[0], option.value) ) {
+                		valueFound = true;
+	                }
+                    else if( _.indexOf(this.value, option.value ) ) {
+                        valueFound = true;
+	                }
+                }
+
                 if ( option.value == this.value ) {
                     valueFound = true;
                 }
@@ -52,16 +72,34 @@ define([], function() {
                 option.classes = this.classes;
                 option.index = index;
 
-                if( ( option.selected && "0" != option.selected ) && this.clean ){
-                    option.isSelected = true;
-                } else {
-                    var testValues = _.map( this.value, function( value ) {
-                        return value.toString();
-                    } );               
-                    
-                    option.isSelected = ( -1 != testValues.indexOf( option.value.toString() ) );
-                }
+                var selected = false;
+				/*
+				* This part has been re-worked to account for values passed in
+				* via custom user-meta ( a la User Mgmt add-on)
+				 */
+	            if(Array.isArray( this.value ) && 0 < this.value.length ) {
+	            	if ( -1 !== _.indexOf( this.value[ 0 ].split( ',' ), option.value )
+		                || -1 !== _.indexOf(this.value, option.value ) ) {
+			            selected = true;
+	            	}
+	            } else if ( ! _.isArray( this.value ) && option.value == this.value ) {
+		            selected = true;
+	            } else if ( ( 1 == option.selected && this.clean ) && 'undefined' === typeof this.value) {
+		            selected = true;
+	            }
 
+
+                // else if( ( option.selected && "0" != option.selected ) && this.clean ){
+	            //     isSelected = true;
+	            // } else {
+	            //     var testValues = _.map( this.value, function( value ) {
+	            //         return value.toString();
+	            //     } );
+	            //
+	            //     option.isSelected = ( -1 != testValues.indexOf( option.value.toString() ) );
+	            // }
+	            option.selected = selected;
+	            option.isSelected = selected;
                 var template = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-field-listcheckbox-option' );
                 html += template( option );
             }, this );
@@ -129,6 +167,13 @@ define([], function() {
                 var i = selected.indexOf( value );
                 if( -1 != i ){
                     selected.splice( i, 1 );
+                } else if ( Array.isArray( selected ) ) {
+                	var optionArray = selected[0].split(',');
+                	var valueIndex = optionArray.indexOf( value );
+                	if( -1 !== valueIndex) {
+                		optionArray.splice(valueIndex, 1);
+	                }
+                	selected = optionArray.join(',');
                 }
             }
 
