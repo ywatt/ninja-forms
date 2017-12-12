@@ -55,7 +55,7 @@ define([], function() {
 	            * This part is re-worked to take into account custom user-meta
 	            * values for fields.
 	             */
-				if( 'undefined' !== savedVal && '' !== savedVal
+				if( 'undefined' !== typeof savedVal && '' !== savedVal
 					&& Array.isArray( savedVal ) ) {
 					model.set( 'value', savedVal );
 				} else if ( 'undefined' != typeof selected ) {
