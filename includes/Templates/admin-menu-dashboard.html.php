@@ -17,6 +17,18 @@
         </ul>
     </nav>
     <main class="content"></main>
+    <aside class="ads">
+        <div class="nf-box-inside">
+            <img src="https://ninjaforms.dev/wp-content/plugins/ninja-forms/assets/img/add-ons/layout-styles.png">
+            <h2>Layout and Styles</h2>
+            <div class="nf-extend-content">
+                <p>Easily create multi-column form layouts and beautifully styled form elements without mastering CSS.</p>
+                <div class="nf-extend-buttons">
+                    <a href="#" class="nf-button primary ad-learn-more" data-video-uri="-l_ayreK0GI" data-addon-url="https://ninjaforms.com/extensions/layout-styles/">Watch A Video</a>
+                </div>
+            </div> <!-- .nf-box-inside -->
+        </div> <!-- .nf-box-inside -->
+    </aside> <!-- .ads -->
 </script>
 
 <!-- Auth Notice -->

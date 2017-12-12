@@ -35,6 +35,17 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
                 e.target.classList.add( 'active' );
                 this.currentView = 'memberships';
             },
+            'click .ad-learn-more': function( e ) {
+                e.preventDefault();
+                var videoUri =  jQuery( e.target ).data( 'video-uri' );
+                var addonUrl = jQuery( e.target ).data( 'addon-url' );
+                var modal = new jBox( 'modal', {
+                    content: '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoUri + '?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe><div><a href="' + addonUrl + '" target="_blank" class="nf-button primary">Learn More</a></div>',
+                    closeButton: 'box',
+                    overlay: true
+                } );
+                modal.open();
+            }
         },
 
         initialize: function() {
