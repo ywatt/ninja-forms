@@ -28,7 +28,7 @@ define([], function() {
             * values for fields.
              */
 	        var savedVal = model.get( 'value' );
-	        if( 'undefined' !== typeof savedVal && Array.isArray(savedVal)) {
+	        if( 'undefined' !== typeof savedVal && Array.isArray( savedVal ) ) {
 		        model.set( 'value', savedVal );
 	        } else if ( 'undefined' != typeof selected ) {
 		        model.set( 'value', selected );
@@ -38,7 +38,7 @@ define([], function() {
         renderOptions: function() {
             var html = '';
 
-            if ( '' == this.value || ( Array.isArray(this.value) && 0 < this.value.length )
+            if ( '' == this.value || ( Array.isArray( this.value ) && 0 < this.value.length )
                 || 0 < this.value.length ) {
                 var valueFound = true;
             } else {
@@ -46,11 +46,11 @@ define([], function() {
             }
 
             _.each( this.options, function( option, index ) {
-                if(Array.isArray( this.value ) ) {
-                	if( Array.isArray( this.value[ 0 ] ) && -1 !== _.indexOf(this.value[0], option.value) ) {
+                if( Array.isArray( this.value ) ) {
+                	if( Array.isArray( this.value[ 0 ] ) && -1 !== _.indexOf( this.value[ 0 ], option.value ) ) {
                 		valueFound = true;
 	                }
-                    else if( _.indexOf(this.value, option.value ) ) {
+                    else if( _.indexOf( this.value, option.value ) ) {
                         valueFound = true;
 	                }
                 }
@@ -76,14 +76,14 @@ define([], function() {
 				* This part has been re-worked to account for values passed in
 				* via custom user-meta ( a la User Mgmt add-on)
 				 */
-	            if(Array.isArray( this.value ) && 0 < this.value.length ) {
+	            if( Array.isArray( this.value ) && 0 < this.value.length ) {
 	            	if ( -1 !== _.indexOf( this.value[ 0 ].split( ',' ), option.value )
-		                || -1 !== _.indexOf(this.value, option.value ) ) {
+		                || -1 !== _.indexOf( this.value, option.value ) ) {
 			            selected = true;
 	            	}
 	            } else if ( ! _.isArray( this.value ) && option.value == this.value ) {
 		            selected = true;
-	            } else if ( ( 1 == option.selected && this.clean ) && 'undefined' === typeof this.value) {
+	            } else if ( ( 1 == option.selected && this.clean ) && 'undefined' === typeof this.value ) {
 		            selected = true;
 	            }
 
@@ -167,12 +167,12 @@ define([], function() {
                 if( -1 != i ){
                     selected.splice( i, 1 );
                 } else if ( Array.isArray( selected ) ) {
-                	var optionArray = selected[0].split(',');
+                	var optionArray = selected[0].split( ',' );
                 	var valueIndex = optionArray.indexOf( value );
                 	if( -1 !== valueIndex) {
-                		optionArray.splice(valueIndex, 1);
+                		optionArray.splice( valueIndex, 1 );
 	                }
-                	selected = optionArray.join(',');
+                	selected = optionArray.join( ',' );
                 }
             }
 
