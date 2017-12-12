@@ -46,12 +46,13 @@ define( ['models/fields/typeSectionCollection'], function( fieldTypeSectionColle
                 
                 // Declare array of fields to hide.
                 // TODO: We should offload this to somewhere configurable later.
-                var hiddenFields = [ 'creditcard',
-                                     'creditcardcvc',
-                                     'creditcardexpiration',
-                                     'creditcardfullname',
-                                     'creditcardnumber',
-                                     'creditcardzip' ];
+//                var hiddenFields = [ 'creditcard',
+//                                     'creditcardcvc',
+//                                     'creditcardexpiration',
+//                                     'creditcardfullname',
+//                                     'creditcardnumber',
+//                                     'creditcardzip' ];
+                var hiddenFields = [];
                 
                 // Seach our results of hidden fields.
                 for ( var i = filteredSectionCollection.models[ 0 ].get( 'fieldTypes' ).length; i >= 0; i-- ) {
