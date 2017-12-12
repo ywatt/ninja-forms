@@ -9,7 +9,7 @@
 define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections/memberships.js' ], function( WidgetView, AppsView, MembershipsView ) {
     var view = Marionette.View.extend( {
         template: "#tmpl-nf-dashboard",
-        
+
         currentView: 'widgets',
 
         regions: {
@@ -40,7 +40,7 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
                 var videoUri =  jQuery( e.target ).data( 'video-uri' );
                 var addonUrl = jQuery( e.target ).data( 'addon-url' );
                 var modal = new jBox( 'modal', {
-                    content: '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoUri + '?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe><div><a href="' + addonUrl + '" target="_blank" class="nf-button primary">Learn More</a></div>',
+                    content: '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoUri + '?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe><div><a style="float: right;" href="' + addonUrl + '" target="_blank" class="nf-button primary">Learn More</a></div>',
                     closeButton: 'box',
                     overlay: true
                 } );
@@ -93,7 +93,7 @@ define( [ 'views/sections/widgets.js', 'views/sections/apps.js', 'views/sections
             }
             this.showChildView('content', childView );
         },
-        
+
         templateContext: function() {
             var that = this;
             return {

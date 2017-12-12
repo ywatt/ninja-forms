@@ -319,3 +319,40 @@ Loading Spinner
 
 }
 
+aside.ads {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  width: 260px;
+  img {
+    width: 100%;
+  }
+  .primary.ad-learn-more {
+    width: 100%;
+    padding: 10px 0;
+  }
+}
+
+@media only screen and (max-width: 1570px) {
+  #ninja-forms-dashboard header .app-title {
+    max-width: 100%;
+  }
+  #ninja-forms-dashboard > div > nav,
+  #ninja-forms-dashboard > div > main {
+    margin: auto auto 40px 20px;
+  }
+}
+@media only screen and (max-width: 1275px) {
+  #ninja-forms-dashboard header .app-title {
+    max-width: 100%;
+  }
+  #ninja-forms-dashboard > div > nav,
+  #ninja-forms-dashboard > div > main {
+    max-width: 40rem;
+  }
+}
+@media only screen and (max-width: 1110px) {
+  aside.ads {
+    display: none;
+  }
+}

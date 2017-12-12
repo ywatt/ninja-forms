@@ -19,7 +19,7 @@
     <main class="content"></main>
     <aside class="ads">
         <div class="nf-box-inside">
-            <img src="https://ninjaforms.dev/wp-content/plugins/ninja-forms/assets/img/add-ons/layout-styles.png">
+            <img src="/wp-content/plugins/ninja-forms/assets/img/add-ons/layout-styles.png">
             <h2>Layout and Styles</h2>
             <div class="nf-extend-content">
                 <p>Easily create multi-column form layouts and beautifully styled form elements without mastering CSS.</p>
