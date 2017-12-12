@@ -107,7 +107,7 @@ class NF_Widget extends WP_Widget {
 } // class Foo_Widget
 
 /**
- * Regiser NF widget
+ * Register NF widget
  *
  * @see 'widgets_init'
  */
