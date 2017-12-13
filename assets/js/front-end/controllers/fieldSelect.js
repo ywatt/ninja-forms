@@ -73,7 +73,9 @@ define([], function() {
 				* via custom user-meta ( a la User Mgmt add-on)
 				 */
 				if ( _.isArray( this.value ) ) {
-					if( 'listmultiselect' === this.type &&
+                    // If we have a multiselect list...
+                    // AND it has selected values...
+					if( 'listmultiselect' === this.type && 0 < this.value.length &&
 						-1 != _.indexOf( this.value[ 0 ].split( ',' ), option.value ) ) {
 						var selected = true;
 					} else if( -1 != _.indexOf( this.value, option.value ) ) {
