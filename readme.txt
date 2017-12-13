@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, krmoorho
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 3.2.5
+Stable tag: 3.2.6
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -111,7 +111,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.2.5 (13 December 2017) =
+= 3.2.6 (13 December 2017) =
 
 *Bugs:*
 
@@ -123,6 +123,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Fixed a bug that sometimes caused too many database calls on pages where multiple JavaScript errors were present.
 * Fixed a bug that sometimes caused a Request Entity Too Large error on form publish.
 * Fixed an issue that caused the Add Form button to sometimes display improperly on smaller screens.
+* Fixed an issue that was breaking form display when multi-select fields had no pre-selected values.
 
 *Changes:*
 
@@ -131,6 +132,12 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Updated the custom field template file path so that it should now properly pull from child themes when active.
 
 == Changelog ==
+
+= 3.2.6 (13 December 2017) =
+
+*Bugs:*
+
+* Fixed an issue that was breaking form display when multi-select fields had no pre-selected values.
 
 = 3.2.5 (13 December 2017) =
 
