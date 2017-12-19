@@ -35,9 +35,20 @@ define([], function() {
 				maskPlaceholder = maskPlaceholder.replace( /\*/g, '_' );
 			}
 
-			if ( ! jQuery.trim( currentValue ) || currentValue == maskPlaceholder ) {
-				defaultReqValidation = false;
-			}
+            // If the field has a mask...
+            // AND that mask is equal to the current value...            
+            if ( maskPlaceholder && currentValue === maskPlaceholder ) {
+                // If we have a pre-existing error...
+                if ( 0 < model.get( 'errors' ).length ) {
+                    // Persist that error.
+                    defaultReqValidation = false;
+                }
+            }
+            // If our value is an empty string...
+            if ( ! jQuery.trim( currentValue ) ) {
+                // Throw an error.
+                defaultReqValidation = false;
+            }
 
 			if ( 'undefined' !== typeof customReqValidation ) {
 				var valid = customReqValidation;
