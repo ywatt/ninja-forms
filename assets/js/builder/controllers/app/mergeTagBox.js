@@ -187,7 +187,20 @@ define( [
                     var posY = jQuery('.merge-tag-focus').offset().top - jQuery(window).scrollTop();
                     var height = jQuery('.merge-tag-focus').outerHeight();
                 }
-                jQuery( '#merge-tags-box' ).css( 'top', posY + height );
+
+	            // Find out if merge tag box will go below bottom of the page.
+	            var tagBoxY = posY + height;
+	            var windowHeight = window.innerHeight;
+	            var tagBoxHeight = jQuery( '#merge-tags-box' ).outerHeight();
+
+	            // If merge tag box will render below the bottom of the page,
+	            // change it to render above the field
+
+	            if ( ( tagBoxY + tagBoxHeight ) > windowHeight ) {
+		            tagBoxY = posY - tagBoxHeight;
+	            }
+
+                jQuery( '#merge-tags-box' ).css( 'top', tagBoxY );
 
                 var boxHeight = jQuery( '#merge-tags-box' ).outerHeight();
                 jQuery( '#nf-drawer' ).css( 'padding-bottom', boxHeight + 'px' );
@@ -397,7 +410,20 @@ define( [
                 var posY = $this.offset().top - jQuery(window).scrollTop();
                 var height = $this.outerHeight();
             }
-            jQuery( '#merge-tags-box' ).css( 'top', posY + height );
+
+            // Find out if merge tag box will go below bottom of the page.
+	        var tagBoxY = posY + height;
+	        var windowHeight = window.innerHeight;
+	        var tagBoxHeight = jQuery( '#merge-tags-box' ).outerHeight();
+
+	        // If merge tag box will render below the bottom of the page,
+            // change it to render above the field
+
+	        if ( ( tagBoxY + tagBoxHeight ) > windowHeight ) {
+		        tagBoxY = posY - tagBoxHeight;
+	        }
+
+            jQuery( '#merge-tags-box' ).css( 'top', tagBoxY );
 
             var repeaterRow = $this.closest( '.nf-list-options-tbody' );
             if( 0 != repeaterRow.length ) {
