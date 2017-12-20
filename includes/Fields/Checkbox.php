@@ -39,7 +39,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
         add_filter( 'ninja_forms_merge_tag_value_' . $this->_name, array( $this, 'filter_merge_tag_value' ), 10, 2 );
         add_filter( 'ninja_forms_merge_tag_calc_value_' . $this->_name, array( $this, 'filter_merge_tag_value_calc' ), 10, 2 );
-        add_filter( 'ninja_forms_subs_export_field_value_' . $this->_type, array( $this, 'export_value' ), 10 );
+        add_filter( 'ninja_forms_subs_export_field_value_' . $this->_type, array( $this, 'export_value' ), 10, 2 );
     }
 
     /**
@@ -86,11 +86,11 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
 
             // If the field value is set to 1....
             if( 1 == $value ) {
-                // Set the value to checked.
-                $value = __( 'checked', 'ninja-forms' );
+                // Set the value to the checked value setting.
+                $value = $field->get_setting( 'checked_value' );
             } else {
-                // Else set the value to unchecked.
-                $value = __( 'unchecked', 'ninja-forms' );
+                // Else set the value to the unchecked value setting.
+                $value = $field->get_setting( 'unchecked_value' );
             }
         }
         return $value;
@@ -107,9 +107,9 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
      */
     public function filter_merge_tag_value( $value, $field )
     {
-        // If value is true, returned checked value.
+        // If value is true, return checked value setting.
         if( $value ) return __( 'checked', 'ninja-forms' );
-        // Else return unchecked.
+        // Else return unchecked value setting.
         return __( 'unchecked', 'ninja-forms' );
     }
 
@@ -120,7 +120,7 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
      *
      * @param $value checkbox value
      * @param $field field model
-     * @return mixed
+     * @return $field
      */
     public function filter_merge_tag_value_calc( $value, $field )
     {
@@ -140,9 +140,10 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
      * @since 3.0
      *
      * @param $value checkbox field value
+     * @param $field checkbox field model
      * @return string|void
      */
-    public function export_value( $value )
+    public function export_value( $value, $field )
     {
         // If value is equal to checked or unchecked return the value
         if ( __( 'checked', 'ninja-forms' ) == $value ||
@@ -150,10 +151,10 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
         // If the value is a boolean...
         if ( $value ) {
             // ...if true return checked
-            return __( 'checked', 'ninja-forms' );
+            return $field->get_setting( 'checked_value' );
         } else {
             // ...else return unchecked.
-            return __( 'unchecked', 'ninja-forms' );
+            return $field->get_setting( 'unchecked_value' );
         }
     }
 }
