@@ -59,7 +59,7 @@ define( [], function() {
 
 				if ( 'currency' == mask ) {
 					var form = nfRadio.channel( 'app' ).request( 'get:form', this.model.get( 'formID' ) );
-					
+
 					var thousands_sep = form.get( 'thousands_sep' );
 					/*
 					 * TODO: if we have a &nbsp; , replace it with a string with a space.
@@ -82,7 +82,14 @@ define( [], function() {
 					};
 
 					// Initialization
+					var autoN_el = jQuery(jQuery( this.el ).find( '.nf-element' )[ 0 ]);
 					new AutoNumeric( jQuery( this.el ).find( '.nf-element' )[ 0 ], autoNumericOptions );
+					// update the value for the model so it gets saved to
+					// the database properly
+					var context = this;
+					autoN_el.on( 'change', function( e ) {
+						context.model.set( 'value', e.target.value );
+					})
 				} else {
 					jQuery( this.el ).find( '.nf-element' ).mask( mask );
 				} 			
