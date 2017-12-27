@@ -80,9 +80,12 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
     {
         // If the field type is equal to checkbox...
         if( 'checkbox' == $field->get_setting( 'type' ) ) {
-            // if the checkbox value is check or uncheck return the value.
-            if ( __( 'checked', 'ninja-forms' ) == $value ||
-                __( 'unchecked', 'ninja-forms' ) == $value ) return $value;
+            // Backwards compatibility check for the new checked value setting.
+            if( null == $field->get_setting( 'checked_value' ) && 1 == $value ) {
+                return __( 'Checked', 'ninja-forms' );
+            } elseif( null == $field->get_setting( 'unchecked_value' ) && 0 == $value ) {
+                return __( 'Unchecked', 'ninja-forms');
+            }
 
             // If the field value is set to 1....
             if( 1 == $value ) {
