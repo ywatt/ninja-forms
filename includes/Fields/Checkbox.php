@@ -108,9 +108,9 @@ class NF_Fields_Checkbox extends NF_Abstracts_Input
     public function filter_merge_tag_value( $value, $field )
     {
         // If value is true, return checked value setting.
-        if( $value ) return __( 'checked', 'ninja-forms' );
+        if( $value ) return $field[ 'settings' ][ 'checked_value' ];
         // Else return unchecked value setting.
-        return __( 'unchecked', 'ninja-forms' );
+        return $field[ 'settings' ][ 'unchecked_value' ];;
     }
 
     /**
