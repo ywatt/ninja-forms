@@ -3,7 +3,7 @@ STANDARDIZE ALL FIELDS
 ----------------------------------*/
 .field-wrap {
     display: flex;
-    flex-wrap:wrap;
+    //flex-wrap:wrap;
     > label {
         display: block;
     }
@@ -13,7 +13,7 @@ STANDARDIZE ALL FIELDS
     .pikaday__container,
     .pikaday__display,
     .listselect-wrap > div {
-        width: 100%;
+        //width: 100%;
     }
     input[type="submit"],
     input[type="button"],
