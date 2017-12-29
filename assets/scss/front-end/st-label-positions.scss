@@ -11,9 +11,11 @@ STANDARDIZE ALL FIELDS
     textarea,
     select,
     .pikaday__container,
-    .pikaday__display,
-    .listselect-wrap > div {
-        //width: 100%;
+    .pikaday__display {
+        width: 100%;
+    }
+    > div input[type="checkbox"] {
+        width: auto;
     }
     input[type="submit"],
     input[type="button"],
