@@ -237,7 +237,9 @@ final class NF_Display_Render
 
                 $settings = $field[ 'settings' ];
                 foreach ($settings as $key => $setting) {
-                    if (is_numeric($setting)) $settings[$key] = floatval($setting);
+                    if (is_numeric($setting) && 'custom_mask' != $key )
+                    	$settings[$key] =
+	                    floatval($setting);
                 }
 
                 if( ! isset( $settings[ 'label_pos' ] ) || 'default' == $settings[ 'label_pos' ] ){
@@ -649,7 +651,7 @@ final class NF_Display_Render
         <?php
 
         // Action to Output Custom Templates
-        do_action( 'ninja_forms_output_templates' );
+        do_action( 'f' );
     }
 
     /*
