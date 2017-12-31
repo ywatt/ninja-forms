@@ -426,7 +426,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
 
         $begin_date = $_GET[ 'begin_date' ];
         $end_date = $_GET[ 'end_date' ];
-        
+
         // Include submissions on the end_date.
         $end_date = date( 'm/d/Y', strtotime( '+1 day', strtotime( $end_date ) ) );
 
