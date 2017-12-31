@@ -425,7 +425,7 @@ final class NF_Admin_Menus_Submissions extends NF_Abstracts_Submenu
         if( empty( $_GET[ 'begin_date' ] ) || empty( $_GET[ 'end_date' ] ) ) return $vars;
 
         $begin_date = $_GET[ 'begin_date' ];
-        $end_date = $_GET[ 'end_date' ];
+        $end_date = date( 'r', strtotime( 'tomororw', strtotime( $_GET[ 'end_date' ] ) ) );
 
         if ( ! isset ( $vars['date_query'] ) ) {
 
