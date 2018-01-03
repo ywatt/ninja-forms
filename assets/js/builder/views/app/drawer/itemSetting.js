@@ -32,13 +32,31 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				}
 			}
 
+            /**
+			 * For settings that require a remote refresh
+			 *   add an "update"/refresh icon to the label.
+             */
             var remote = this.model.get( 'remote' );
 			if( remote ) {
-
                 if( 'undefined' != typeof remote.refresh || remote.refresh ) {
-                    // Add 'update' icons
-                    var label = this.model.get('label');
-                    this.model.set('label', label + ' <a class="extra"><span class="dashicons dashicons-update"></span></a>');
+					var labelText, updateIcon, updateLink, labelWrapper;
+
+                    labelText = document.createTextNode( this.model.get('label') );
+
+                    updateIcon = document.createElement( 'span' );
+                    updateIcon.classList.add( 'dashicons', 'dashicons-update' );
+
+                    updateLink = document.createElement( 'a' );
+                    updateLink.classList.add( 'extra' );
+                    updateLink.appendChild( updateIcon );
+
+                    // Wrap the label text and icon/link in a parent element.
+                    labelWrapper = document.createElement( 'span' );
+                    labelWrapper.appendChild( labelText );
+                    labelWrapper.appendChild( updateLink );
+
+                    // The model expects a string value.
+                    this.model.set('label', labelWrapper.innerHTML );
                 }
 
 				nfRadio.channel( 'setting' ).trigger( 'remote', this.model, this.dataModel, this );
@@ -260,24 +278,33 @@ define( ['views/app/drawer/mergeTagsContent', 'views/app/drawer/settingError'], 
 				},
 
 				renderTooltip: function() {
-					if ( this.help ) {
-						return '<a class="nf-help" href="#" tabindex="-1"><span class="dashicons dashicons-admin-comments"></span></a><div class="nf-help-text">' + this.help + '</div>';
-					} else {
-						return '';
-					}
+					if ( ! this.help ) return '';
+					var helpText, helpTextContainer, helpIcon, helpIconLink, helpTextWrapper;
+
+					helpText = document.createTextNode( this.help );
+					helpTextContainer = document.createElement( 'div' );
+					helpTextContainer.classList.add( 'nf-help-text' );
+					helpTextContainer.appendChild( helpText );
+
+					helpIcon = document.createElement( 'span' );
+					helpIcon.classList.add( 'dashicons', 'dashicons-admin-comments' );
+                    helpIconLink = document.createElement( 'a' );
+                    helpIconLink.classList.add( 'nf-help' );
+                    helpIconLink.setAttribute( 'href', '#' );
+                    helpIconLink.setAttribute( 'tabindex', '-1' );
+                    helpIconLink.appendChild( helpIcon );
+
+                    helpTextWrapper = document.createElement( 'span' );
+                    helpTextWrapper.appendChild( helpIconLink );
+                    helpTextWrapper.appendChild( helpTextContainer );
+
+                    // The template expects a string value.
+					return helpTextWrapper.innerHTML;
 				},
 
 				renderMergeTags: function() {
 					if ( this.use_merge_tags && ! this.hide_merge_tags ) {
 						return '<span class="dashicons dashicons-list-view merge-tags"></span>';
-					} else {
-						return '';
-					}
-				},
-
-				renderPlaceholder: function() {
-					if ( this.placeholder ) {
-						return 'placeholder="' + this.placeholder + '"';
 					} else {
 						return '';
 					}

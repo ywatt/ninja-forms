@@ -15,13 +15,17 @@ define([], function() {
         },
 
         renderRatings: function() {
-        	var html = '';
+
+        	var html = document.createElement( 'span' );
         	for (var i = 0; i <= this.default - 1; i++) {
-        		var template = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-field-starrating-star' );
+                var template = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-field-starrating-star' );
                 var num = i + 1;
-        		html += template( { id: this.id, classes: this.classes, num: num } );
+                var htmlFragment = template( { id: this.id, classes: this.classes, num: num } );
+                html.appendChild(
+                    document.createRange().createContextualFragment( htmlFragment )
+                );
         	}
-        	return html;
+        	return html.innerHTML;
         }
 
     });

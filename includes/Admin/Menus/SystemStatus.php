@@ -118,7 +118,7 @@ final class NF_Admin_Menus_SystemStatus extends NF_Abstracts_Submenu
                 // link the plugin name to the plugin url if available
                 $plugin_name = $plugin_data['Name'];
                 if ( ! empty( $plugin_data['PluginURI'] ) ) {
-                    $plugin_name = '<a href="' . $plugin_data['PluginURI'] . '" title="' . __( 'Visit plugin homepage' , 'ninja-forms' ) . '">' . $plugin_name . '</a>';
+                    $plugin_name = '<a href="' . esc_attr( $plugin_data[ 'PluginURI' ] ) . '" title="' . __( 'Visit plugin homepage' , 'ninja-forms' ) . '">' . $plugin_name . '</a>';
                 }
 
                 $all_plugins[] = $plugin_name . ' ' . __( 'by', 'ninja-forms' ) . ' ' . $plugin_data['Author'] . ' ' . __( 'version', 'ninja-forms' ) . ' ' . $plugin_data['Version'] . $version_string;

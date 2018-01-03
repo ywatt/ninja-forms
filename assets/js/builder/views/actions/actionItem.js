@@ -91,12 +91,13 @@ define( ['views/app/itemControls'], function( itemControlsView ) {
 					return type.get( 'nicename' );
 				},
 
+                /**
+				 * [Deprecated] Tooltips are not currently implemented in the context of the action list.
+				 *   However, the template uses a nested template which requires the helper method.
+                 * @returns {string}
+                 */
 				renderTooltip: function() {
-					if ( this.help ) {
-						return '<a class="nf-help" href="#" tabindex="-1"><span class="dashicons dashicons-admin-comments"></span></a><div class="nf-help-text">' + this.help + '</div>';
-					} else {
-						return '';
-					}
+					return '';
 				},
 
 				renderMergeTags: function() {

@@ -91,16 +91,18 @@ define( [], function() {
 		templateHelpers: function() {
 			return {
 				renderFieldTypes: function() {
-			        var html = '';
+			        var html = document.createElement( 'span' );
 			        var that = this;
 			        _.each( this.fieldTypes, function( id ) {
 			            var type = nfRadio.channel( 'fields' ).request( 'get:type', id );
 			            var nicename = type.get( 'nicename' );
 			            var icon = type.get( 'icon' );
 			            var renderType = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-drawer-field-type-button' );
-			            html += renderType( { id: id, nicename: nicename, icon: icon, type: type, savedField: that.savedField } );
+			            var templateHTML = renderType( { id: id, nicename: nicename, icon: icon, type: type, savedField: that.savedField } );
+                        var htmlFragments = document.createRange().createContextualFragment( templateHTML );
+                        html.appendChild( htmlFragments );
 			        } );
-			        return html;
+			        return html.innerHTML;
 				},
 
 				savedField: function() {
