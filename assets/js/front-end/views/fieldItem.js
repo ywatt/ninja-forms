@@ -143,6 +143,8 @@ define( [], function() {
 				renderWrapClass: function() {
 					var wrapClass = 'field-wrap ' + this.type + '-wrap';
 
+					// Check if type and parentType are different. If, so
+					// then add appropriate parentType wrap class
 					if ( this.type !== this.parentType ) {
 						wrapClass = wrapClass + ' ' + this.parentType + '-wrap';
 					}
