@@ -54,11 +54,15 @@ abstract class NF_Abstracts_List extends NF_Abstracts_Field
         return "<select class='widefat' name='" . esc_attr( fields[ $id ] ) . "' id=''>$options</select>";
     }
 
+    /*
+     * Appropriate output for a column cell in submissions list.
+     */
     public function custom_columns( $value, $field )
     {
         if( $this->_name != $field->get_setting( 'type' ) ) return $value;
-
-        if( ! is_array( $value ) ) $value = array( $value );
+        
+        //Consider &amp; to be the same as the & values in database in a selectbox saved value:
+        if( ! is_array( $value ) ) $value = array( htmlspecialchars_decode($value) );
 
         $output = '';
         $options = $field->get_setting( 'options' );

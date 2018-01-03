@@ -19,7 +19,7 @@ define( [], function() {
 			var appDefaults = {
 				content: msg,
 				color: 'green',
-				zIndex:12000,
+				zIndex:10000000,
 				constructOnInit: true,
 				stack: true,
 				animation: {

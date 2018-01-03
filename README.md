@@ -2,9 +2,9 @@
 [Contributors](https://github.com/wpninjas/ninja-forms/graphs/contributors)
 
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
-Requires at least: 4.6
-Tested up to: 4.8
-Stable tag: 3.1.9
+Requires at least: 4.7
+Tested up to: 4.9
+Stable tag: 3.2.7
 License: GPLv2 or later
 
 With a simple drag and drop interface you can create contact forms, email subscription forms, order forms, payment forms, and any other type of form for your WordPress site.
@@ -25,9 +25,6 @@ Here are just a few of the things you will find in Ninja Forms:
 * Several anti-spam options including Google reCaptcha, question/response fields, and honeypot fields
 * Form submission via AJAX, allowing a seamless user experience without page refreshes
 * Please note that if you are using a version of PHP lower than 5.3, you may experience some problems using AJAX Submissions. These can be minimized by using simple success/error messages without any quotes or special characters.
-
-## Demo Site
-Please feel free to visit our [demo site](http://demo.ninjaforms.com/) where you can test the features of Ninja Forms and all of our extensions.
 
 ## Extensions
 
@@ -52,7 +49,7 @@ If you're a developer and would like to talk about creating some premium extensi
 ## Contributing
 
 If you're a developer and want to help make Ninja Forms better, we would love to work together! We know contributing to a project can be intimidating; sometimes it’s hard to tell how to get involved. We believe Ninja Forms is a great community to get involved in. In our experience, everyone involved with the project has been amazing and helpful. :)
-Here are some [friendly guidelines](https://github.com/wpninjas/ninja-forms/blob/master/CONTRIBUTING.md).  [You can also join our development community here.](http://developer.ninjaforms.com/)
+Here are some [friendly guidelines](https://github.com/wpninjas/ninja-forms/blob/master/.github/CONTRIBUTING.md).  [You can also join our development community here.](http://developer.ninjaforms.com/)
 
 __Please Note:__ GitHub is for bug reports and contributions only - if you have a support question or a request for a customization, please contact [Ninja Forms Support](http://ninjaforms.com/contact/) instead.
 

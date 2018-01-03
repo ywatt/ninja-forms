@@ -6,6 +6,7 @@ define( [], function() {
     		this.listenTo( this.model, 'reRender', this.render, this );
     		this.listenTo( this.model, 'change:addWrapperClass', this.addWrapperClass, this );
     		this.listenTo( this.model, 'change:removeWrapperClass', this.removeWrapperClass, this );
+    		this.listenTo( this.model, 'change:invalid', this.toggleAriaInvalid, this );
 
     		this.template = '#tmpl-nf-field-' + this.model.get( 'wrap_template' );
 		},
@@ -30,6 +31,11 @@ define( [], function() {
 			}
 		},
 
+		toggleAriaInvalid: function() {
+			var invalid = this.model.get( 'invalid' );
+			jQuery( '[aria-invalid]', this.el ).attr( 'aria-invalid', JSON.stringify( invalid ) );
+		},
+
 		onRender: function() {
 			this.$el = this.$el.children();
 			this.$el.unwrap();
@@ -46,14 +52,49 @@ define( [], function() {
     				var mask = this.model.get( 'mask' );
     			}
 
-
 				/* POLYFILL */ Number.isInteger = Number.isInteger || function(value) { return typeof value === "number" && isFinite(value) && Math.floor(value) === value; };
     			if ( Number.isInteger( mask ) ) {
     				mask = mask.toString();
     			}
 
-    			jQuery( this.el ).find( '.nf-element' ).mask( mask );
-    		}
+				if ( 'currency' == mask ) {
+					var form = nfRadio.channel( 'app' ).request( 'get:form', this.model.get( 'formID' ) );
+
+					var thousands_sep = form.get( 'thousands_sep' );
+					/*
+					 * TODO: if we have a &nbsp; , replace it with a string with a space.
+					 */
+					if ( '&nbsp;' == thousands_sep ) {
+						thousands_sep = ' ';
+					}
+					var currencySymbol = jQuery( '<div/>' ).html( form.get( 'currencySymbol' ) ).text();
+					thousands_sep = jQuery( '<div/>' ).html( thousands_sep ).text();
+					var decimal_point = jQuery( '<div/>' ).html( form.get( 'decimal_point' ) ).text();
+					
+					/*
+					 * TODO: Currently, these options use the plugin-wide defaults for locale.
+					 * When per-form locales are implemented, these will need to be revisited.
+					 */
+					var autoNumericOptions = {
+					    digitGroupSeparator        : thousands_sep,
+					    decimalCharacter           : decimal_point,
+					    currencySymbol             : currencySymbol
+					};
+
+					// Initialization
+					var autoN_el = jQuery(jQuery( this.el ).find( '.nf-element' )[ 0 ]);
+					new AutoNumeric( jQuery( this.el ).find( '.nf-element' )[ 0 ], autoNumericOptions );
+					// update the value for the model so it gets saved to
+					// the database properly
+					var context = this;
+					autoN_el.on( 'change', function( e ) {
+						context.model.set( 'value', e.target.value );
+					})
+				} else {
+					jQuery( this.el ).find( '.nf-element' ).mask( mask );
+				} 			
+	   		}
+
 			nfRadio.channel( this.model.get( 'type' ) ).trigger( 'render:view', this );
 			nfRadio.channel( 'fields' ).trigger( 'render:view', this );
 		},

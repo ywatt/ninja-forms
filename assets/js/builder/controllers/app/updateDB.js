@@ -128,11 +128,14 @@ define( [], function() {
 				// Loop through all the attributes of our fields
 				for (var prop in field) {
 				    if ( field.hasOwnProperty( prop ) ) {
-				    	// Set our settings.prop value.
-				        settings[ prop ] = field[ prop ];
-				        // Delete the property from the field.
-				        delete field[ prop ];
-				    }
+				    	// If our field property isn't null, then...
+                        if ( null !== field[ prop ] ) {
+                            // Set our settings.prop value.
+                            settings[prop] = field[prop];
+                        }
+                        // Delete the property from the field.
+                        delete field[ prop ];
+                    }
 				}
 
 				for( var setting in settings ){
@@ -177,8 +180,11 @@ define( [], function() {
 				// Loop through all the attributes of our actions
 				for (var prop in action) {
 				    if ( action.hasOwnProperty( prop ) ) {
-				    	// Set our settings.prop value.
-				        settings[ prop ] = action[ prop ];
+				    	//Removing null values
+					    if( null !== action[ prop ] ) {
+						    // Set our settings.prop value.
+						    settings[ prop ] = action[ prop ];
+					    }
 				        // Delete the property from the action.
 				        delete action[ prop ];
 				    }
@@ -187,6 +193,12 @@ define( [], function() {
 				action.settings = settings;
 				action.id = id;
 			} );
+
+			for ( var setting in data.settings ) {
+				if ( null === data.settings[ setting ] ) {
+					delete data.settings[ setting ];
+				}
+			}
 
 			// Set our deleted_actions object so that we can know which actions were removed.
 			data.deleted_actions = removedIDs;
@@ -221,7 +233,16 @@ define( [], function() {
 					console.log( exception );
 				}
 				
-			} );
+			} ).fail( function( xhr, status, error ) {
+				console.log( action );
+				// For previews, only log to the console.
+                if( 'preview' == action ) {
+                    console.log( error );
+                    return;
+                }
+                // @todo Convert alert to jBox Modal.
+				alert(xhr.status + ' ' + error + '\r\n' + 'An error on the server caused your form not to publish.\r\nPlease contact Ninja Forms Support with your PHP Error Logs.\r\nhttps://ninjaforms.com/contact');
+			});
 		},
 
 		defaultSaveFilter: function( formContentData ) {

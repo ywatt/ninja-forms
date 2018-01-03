@@ -46,8 +46,14 @@ define([], function() {
 			var validate = nfRadio.channel( 'forms' ).request( 'maybe:validate', formModel );
 		 	if( false !== validate ){
 
+                // When validating all fields, set clean to false to force validation.
+                _.each( formModel.get( 'fields' ).models, function( fieldModel ) {
+                    fieldModel.set( 'clean', false );
+                } );
+
 				/*
-				 * This method is defined in our models/fieldCollection.js file.
+				 * This method is defined in our models/fieldCollection.js file,
+				 * except where overridden by an add-on (ie Layout & Styles).
 				 */
 				formModel.get( 'formContentData' ).validateFields();
 			}
