@@ -42,6 +42,12 @@ define( ['views/fieldItem', 'views/beforeField', 'views/afterField'], function( 
                         containerClass += this.container_class + ' ';
                     }
 
+                    //check if the parent type and type are different. If
+                    // so, add parent type container styling
+                    
+                    if( this.type !== this.parentType ) {
+                        containerClass += ' ' + this.parentType + '-container';
+                    }
                     return containerClass;
                 }
             }

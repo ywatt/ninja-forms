@@ -143,6 +143,11 @@ define( [], function() {
 				renderWrapClass: function() {
 					var wrapClass = 'field-wrap ' + this.type + '-wrap';
 
+					// Check if type and parentType are different. If, so
+					// then add appropriate parentType wrap class
+					if ( this.type !== this.parentType ) {
+						wrapClass = wrapClass + ' ' + this.parentType + '-wrap';
+					}
 					// If we have an old_classname defined, output wrap class for backward compatibility
 					if ( 'undefined' != typeof this.old_classname && 0 < jQuery.trim( this.old_classname ).length ) {
 						wrapClass += ' ' + this.old_classname + '-wrap';
