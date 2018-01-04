@@ -37,10 +37,11 @@ define( [], function() {
 	    		 */
 	    		renderPublish: function() {
 	    			if ( that.publishWidth ) {
-	    				this.publishWidth = 'style="width:' + that.publishWidth + 'px !important"';
+	    				this.publishWidth = that.publishWidth + 'px';
 	    			} else {
-	    				this.publishWidth = '';
+	    				this.publishWidth = 'auto';
 	    			}
+
 	    			if ( nfRadio.channel( 'app' ).request( 'get:setting', 'loading' ) ) {
 	    				var template = nfRadio.channel( 'app' ).request( 'get:template',  '#tmpl-nf-add-header-publish-loading' );
 	    			} else {

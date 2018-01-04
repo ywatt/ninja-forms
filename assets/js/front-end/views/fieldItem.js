@@ -214,9 +214,11 @@ define( [], function() {
 				},
 
 				maybeRenderHelp: function() {
-					var check_text = '<p>' + this.help_text + '</p>';
-					if ( 'undefined' != typeof this.help_text && 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
-						return '<span class="fa fa-info-circle nf-help" data-text="' + this.getHelpText() + '"></span>';
+					if ( 'undefined' != typeof this.help_text && 0 != jQuery.trim( this.help_text ).length ) {
+						var icon = document.createElement( 'span' );
+						icon.classList.add( 'fa', 'fa-info-circle', 'nf-help' );
+						icon.setAttribute( 'data-text', this.getHelpText() );
+						return icon.outerHTML;
 					} else {
 						return '';
 					}
@@ -226,9 +228,17 @@ define( [], function() {
 					if ( 'undefined' == typeof this.desc_text ) {
 						return '';
 					}
-					var check_text = '<p>' + this.desc_text + '</p>';
-					if ( 0 != jQuery.trim( jQuery( check_text ).text() ).length ) {
-						return '<div class="nf-field-description">' + this.desc_text + '</div>';
+					var check, checkText;
+					checkText = document.createTextNode( this.desc_text );
+					check = document.createElement( 'p' );
+					check.appendChild( checkText );
+					if ( 0 != jQuery.trim( jQuery( check ).text() ).length ) {
+						var descriptionText, fieldDescription;
+                        descriptionText  = document.createRange().createContextualFragment( this.desc_text );
+                        fieldDescription  = document.createElement( 'div' );
+						fieldDescription.classList.add( 'nf-field-description' );
+						fieldDescription.appendChild( descriptionText );
+						return fieldDescription.outerHTML;
 					} else {
 						return '';
 					}

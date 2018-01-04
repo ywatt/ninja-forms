@@ -116,12 +116,28 @@ define( ['views/app/drawer/optionRepeaterOption', 'views/app/drawer/optionRepeat
 			var that = this;
 	    	return {
 	    		renderHeaders: function() {
-	    			var columns = '<div>&nbsp;</div>';
+	    			var columns, beforeColumns, afterColumns;
+
+	    			beforeColumns = document.createElement( 'div' );
+
+	    			columns = document.createElement( 'span' );
+	    			columns.appendChild( beforeColumns );
+
 	    			_.each( this.columns, function( col ) {
-	    				columns += '<div>' + col.header + '</div>';
+	    				var headerText, headerContainer;
+
+	    				// Use a fragment to support HTML in the col.header property, ie Dashicons.
+                        headerText = document.createRange().createContextualFragment( col.header );
+	    				headerContainer = document.createElement( 'div' );
+	    				headerContainer.appendChild( headerText );
+
+	    				columns.appendChild( headerContainer );
 	    			} );
-	    			columns += '<div>&nbsp;</div>';
-					return columns;
+
+                    afterColumns = document.createElement( 'div' );
+                    columns.appendChild( afterColumns );
+
+					return columns.innerHTML;
 				},
 
 	    		renderSetting: function() {

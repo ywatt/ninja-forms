@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, kbjohnson90, klhall1987, krmoorho
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 3.2.7
+Stable tag: 3.2.8
 License: GPLv2 or later
 
 Drag and drop fields in an intuitive UI to create contact forms, email subscription forms, order forms, payment forms, send emails and more!
@@ -111,7 +111,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 3.2.7 (3 January 2018) =
+= 3.2.8 (4 January 2018) =
 
 *Bugs:*
 
@@ -123,13 +123,25 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 * Checkbox list and radio list fields with wrapped values should now display properly.
 * Wrapped labels for single checkbox fields should now display properly.
 * Resolved an issue that was causing strictly numeric custom input masks with more than 12 characters to display improperly.
+* Resolved an issue that sometimes caused Forms to not load in the Dashboard.
 
 *Changes:*
 
 * Added custom checked and unchecked value settings to checkbox fields.
 * The calendar in the date field is now translatable.
+* Made some minor tweaks to improve the loading and processing efficiency of certain admin pages.
 
 == Changelog ==
+
+= 3.2.8 (4 January 2018) =
+
+*Bugs:*
+
+* Resolved an issue that sometimes caused Forms to not load in the Dashboard.
+
+*Changes:*
+
+* Made some minor tweaks to improve the loading and processing efficiency of certain admin pages.
 
 = 3.2.7 (3 January 2018) =
 

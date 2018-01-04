@@ -10,11 +10,15 @@ define([], function() {
 
             /* Form Debug Messages */
             if( 'undefined' != typeof response.debug.form ) {
-                var debugMessages = '';
+                var debugMessages = document.createElement( 'span' );
                 _.each(response.debug.form, function (message, index) {
-                    debugMessages += message + '<br />';
+                    var messageText = document.createTextNode( message );
+                    debugMessages.appendChild( messageText );
+                    debugMessages.appendChild(
+                        document.createElement( 'br' )
+                    );
                 });
-                jQuery('.nf-debug-msg').html(debugMessages);
+                jQuery('.nf-debug-msg').html( debugMessages );
             }
 
             /* Console Debug Messages */
