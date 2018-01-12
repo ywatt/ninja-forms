@@ -160,13 +160,14 @@ define( ['views/app/drawer/optionRepeaterError'], function( ErrorView ) {
 					if( 'undefined' == typeof that.options.columns[ column ] ) return;
 
 					var select = document.createElement( 'select' );
-
-					var html = '';
+					
 					_.each( that.options.columns[ column ].options, function( option ){
 						var optionNode = document.createElement( 'option' );
-                        optionNode.selected = ( value == option.value );
-                        optionNode.value = option.value;
-                        optionNode.label = option.label;
+                        if ( value === option.value ) {
+                        	optionNode.setAttribute( 'selected', 'selected' );
+                        }
+                        optionNode.setAttribute( 'value', option.value );
+                        optionNode.setAttribute( 'label', option.label );
                         select.appendChild( optionNode );
 					});
 
